@@ -2,8 +2,19 @@
 const esc = (s = '') => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 const compact = (d) => d.replaceAll('-', '');
 const nextDay = (d) => { const x = new Date(`${d}T12:00:00Z`); x.setUTCDate(x.getUTCDate() + 1); return x.toISOString().slice(0, 10); };
-// Lines over 75 octets must be folded.
-const fold = (line) => line.match(/.{1,73}/gu).join('\r\n ');
+// Lines over 75 octets (bytes, not characters) must be folded. Never split a character.
+const enc = new TextEncoder();
+function fold(line) {
+  const out = [];
+  let cur = '', bytes = 0, limit = 75;
+  for (const ch of line) {
+    const n = enc.encode(ch).length;
+    if (bytes + n > limit) { out.push(cur); cur = ''; bytes = 0; limit = 74; } // continuation lines start with a space
+    cur += ch; bytes += n;
+  }
+  out.push(cur);
+  return out.join('\r\n ');
+}
 
 // US Eastern rules in force since 2007, so timed events land at the right local time.
 const VTIMEZONE = [

@@ -36,7 +36,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
       <>Pulled from the <a href={e.feed.page_url}>{e.feed.name}</a> on {prettyDate(fetchedOn)}.</>
     ) : (
       <>Run by {e.org_name}.
-      {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{shortUrl(s.url)}</a></>))}.</> : <> Source: the details page.</>}
+      {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{shortUrl(s.url)}</a></>))}.</> : <> Source: {shortUrl(e.url)} (the details page).</>}
       {' '}Checked by hand on {prettyDate(ymd(lastChecked))}.</>
     )}
     {e.topics?.length ? <> Topics: {e.topics.join(', ')}.</> : null}

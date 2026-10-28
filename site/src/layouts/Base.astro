@@ -14,7 +14,7 @@ const navItems = [
   { href: `${base}/calendar/`, label: 'Deadlines', icon: 'calendar', tab: true },
   { href: `${base}/stay-tonight/`, label: 'Stay tonight', icon: 'bed', tab: true },
   { href: `${base}/recycling/`, label: 'Recycling', icon: 'recycle' },
-  { href: `${base}/utility-bills/`, label: 'Utility help', tabLabel: 'Bill help', icon: 'bulb', tab: true },
+  { href: `${base}/utility-bills/`, label: 'Bill help', icon: 'bulb', tab: true },
   { href: `${base}/about/`, label: 'About', icon: 'info' },
 ].map((n) => ({ ...n, current: n.href.replace(/\/$/, '') === here.replace(/^\/$/, '') }));
 // On phones, a page that is only under More marks the More tab instead.
