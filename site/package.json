@@ -5,12 +5,13 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "postbuild": "node scripts/check-pages.mjs",
+    "postbuild": "node scripts/check-pages.mjs && node scripts/check-contrast.mjs",
     "check-pages": "node scripts/check-pages.mjs",
     "preview": "astro preview",
     "check-content": "node scripts/check-content.mjs",
     "update-feeds": "node scripts/update-feeds.mjs",
-    "health": "node scripts/health.mjs"
+    "health": "node scripts/health.mjs",
+    "check-contrast": "node scripts/check-contrast.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
