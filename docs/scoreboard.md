@@ -4,14 +4,24 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 
 | Level | Status | Latest |
 |---|---|---|
-| 1. Findability | **Measured** | **76 / 100** on 2026-10-28 (baseline) |
+| 1. Findability | **Measured** | **76 / 100** on 2026-10-28 (same-day recheck; baseline also 76) |
 | 2. Use | Not measured yet | No public tools to count yet |
 | 3. Action | Not measured yet | None |
 | 4. Recognition | Not measured yet | None |
 
 ## Level 1: Findability
 
-### Baseline: 76 out of 100 (2026-10-28)
+### Latest run: 76 out of 100 (2026-10-28, same-day recheck)
+
+A second run a few hours after the baseline, after the first three hub guides went live (recycling, help paying utility bills, where to stay tonight). Results: [`content/findability/2026-10-28b.yaml`](../content/findability/2026-10-28b.yaml).
+
+- **No change overall.** 30 of 32 questions scored the same. Two moved, in opposite directions, and both came from other sites or search ranking, not from our work: starting a business (q09) rose 11 to 13 because the city's steps page now ranks first and fits a phone screen, and county commission agendas (q15) fell 11 to 9 because search no longer reached the county's agenda page. The q15 drop looks like search variation; the official page still loads and is current.
+- **Hub pages are not in search yet.** 6 of 32 questions now have a direct answer page on the hub (q01, q03, q19, q20, q21, q26). None of them showed up in any search, and no official page links to them, so by the method they do not count yet. New pages usually take days to weeks to be indexed, and the site has no search engine accounts yet (#89). The next weekly run (2026-11-01) will check again.
+- **Leading signal:** 6 of 32 questions had a correct local answer in the top 3 search results (5 at baseline, the change is q09).
+
+The topic, dimension and worst-gap tables below show this latest run. The baseline write-up follows them.
+
+### Baseline: 76 out of 100 (2026-10-28, first run)
 
 We asked 32 questions a Mon County resident might have, across 10 topic areas. For each one we searched the web in plain words, followed links like a person on a phone, and scored the best answer we could reach.
 
@@ -20,22 +30,22 @@ We asked 32 questions a Mon County resident might have, across 10 topic areas. F
 
 **What the number means.** 76 does not mean things are mostly fine. It scores the *best* answer a determined person could reach, often after rewording a search or digging through a site. The weakest part is the first step: only 5 of 32 questions had a correct local answer in the top 3 search results. In 6 questions, a plain search did not lead to a usable local answer at all.
 
-**Score by topic** (0 to 100, lowest first):
+**Score by topic** (latest run, 0 to 100, lowest first; at baseline local government was 77 and small business 73):
 
 | Topic | Score | Questions |
 |---|---|---|
 | Recycling and disposal | 60 | 3 |
 | Transportation | 70 | 2 |
-| Small business | 73 | 3 |
+| Local government | 73 | 4 |
 | Community health data | 73 | 3 |
 | Philanthropy and volunteering | 76 | 3 |
-| Local government | 77 | 4 |
 | Help with bills and food | 78 | 4 |
+| Small business | 78 | 3 |
 | Housing | 80 | 3 |
 | Civic participation | 82 | 3 |
 | Medical care | 83 | 4 |
 
-**Score by dimension** (average out of 3): found 2.0, steps 2.5, current 2.2, plain language 2.1, works on a phone 2.7.
+**Score by dimension** (latest run, average out of 3): found 2.0, steps 2.5, current 2.2, plain language 2.0, works on a phone 2.7. At baseline plain language was 2.1.
 
 **Patterns we saw:**
 
@@ -45,17 +55,19 @@ We asked 32 questions a Mon County resident might have, across 10 topic areas. F
 - **No dates.** Many good pages carry no "last updated" date, so a resident cannot tell if they are current.
 - **Phones mostly work.** Most pages fit a phone screen. The misses were PDFs and a few fixed-width or wide pages.
 
-### The 5 worst gaps
+### The 5 worst gaps (latest run)
 
 | Question | Score | What is missing |
 |---|---|---|
 | When is trash and recycling pickup on my street? (q19) | 8 / 15 | No pickup-day map or street list loads, and the city's trash page link is dead. Residents have to call the hauler. |
 | Can I put glass in my recycling bin? (q21) | 8 / 15 | The only clear rule is in a 2019 PDF. No current page confirms it. See #25. |
+| When does the County Commission meet, and where are the agendas? (q15) | 9 / 15 | New this run. Search led only to the County Clerk's draft minutes PDF, not the county's current agenda page. Likely search variation. Related research: #20. |
 | Is crime going up or down in Morgantown? (q23) | 9 / 15 | No official crime trend page. The only trend data found is third-party and ends in 2018. |
 | Which bus gets me to the hospital, and when? (q28) | 9 / 15 | Stop times are only in a PDF marked "Effective August, 2021". |
-| Where can I stay tonight if I have nowhere to go? (q26) | 10 / 15 | Search shows only news stories. No page lists shelter and warming options with hours. |
 
-Also at 10: selling food at a market or event (q11, everything is in PDFs) and donating furniture or clothes (q18, no list of who takes what).
+Also at 10: where to stay tonight (q26, search still shows only news stories; the hub's [stay tonight page](https://david-shortman.github.io/mon-county-community-hub/stay-tonight/) answers it but is not in search yet), selling food at a market or event (q11, everything is in PDFs) and donating furniture or clothes (q18, no list of who takes what).
+
+The hub now has answer pages for q19, q21 and q26 ([recycling](https://david-shortman.github.io/mon-county-community-hub/recycling/), [stay tonight](https://david-shortman.github.io/mon-county-community-hub/stay-tonight/)), but a resident cannot find them by searching yet, so these scores do not change.
 
 ### The 5 best-served areas
 
@@ -121,6 +133,7 @@ Once the hub has pages that answer these questions, a run should also check whet
 | Date | Overall | Questions | Rubric | Notes |
 |---|---|---|---|---|
 | 2026-10-28 | 76 | 32 | v1 | Baseline, before the hub published any guides |
+| 2026-10-28 | 76 | 32 | v1 | Same-day recheck after the first guides shipped (recycling, utility bills, stay tonight). No change overall. Movers, both from other sites or search: q09 business license +2 (city page now ranks first and fits a phone), q15 county agendas -2 (search missed the agenda page). Hub answer pages: 6 of 32 questions; in search results: 0 (not indexed yet). Top-3 correct answers: 6 of 32 (was 5). [Results](../content/findability/2026-10-28b.yaml), [build log](build-log/2026-10-28-0647-findability-same-day-recheck.md) |
 
 ## Level 2: Use (not measured yet)
 
