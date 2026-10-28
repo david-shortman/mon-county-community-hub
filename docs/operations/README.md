@@ -95,6 +95,11 @@ The repo only allows actions created by GitHub (`actions/*`) and `anthropics/cla
 | `ics-entries` WARN | Calendar is running dry | Add dates from #17, or ask the Builder about feeds |
 | `prs-conflicts` lists `docs/build-log.md` many times | Every PR adds to the top of the same file | Rebase right before merging and keep every entry. If it keeps happening, propose a new layout (one file per entry) |
 
-## Continuous monitoring (proposed)
+## Continuous monitoring
 
-A workflow that runs this check every few hours and after each deploy, keeps one pinned "Health" issue up to date, and asks Claude to fix agent-fixable failures is proposed in a separate `for:david` PR. Until David merges it, sessions run the check by hand.
+[`.github/workflows/health.yml`](../../.github/workflows/health.yml) runs the check:
+
+- **Every 4 hours** (at 23 minutes past), **after every Site run on `main`** (success or failure, waiting a minute after a deploy so Pages is fresh), and **on demand** from the Actions tab.
+- **One Health issue.** When any check fails, it opens an issue labeled `health` (and `bug`), pins it, and updates its body on each run. When nothing is failing, it comments and closes it. The report is also in the run summary and saved as an artifact for 14 days.
+- **Claude only for new, fixable failures.** If a failing check is one an agent can fix, and the set of such failures has changed since the last run, it starts Claude (same setup as `claude.yml`) to find the cause and open a fix PR or a `for:code` issue. Green runs, warnings, the same failure again, and failures only David can fix (like `startup_failure`) never start Claude.
+- **Limit:** if GitHub Actions itself is down, this workflow cannot run either. Sessions should still run `npm run health` by hand at the start of a session.
