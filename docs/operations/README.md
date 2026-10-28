@@ -81,7 +81,7 @@ Never work around a permission refusal or a settings problem. Report it and wait
 
 ### Allowed actions
 
-The repo only allows actions created by GitHub (`actions/*`) and `anthropics/claude-code-action`. Any new workflow must use only those, or it will fail at startup. Adding another action needs David to change the setting.
+The repo only allows a short list of actions. The safe set is the one the working workflows already use: `actions/checkout`, `actions/setup-node`, the Pages actions, and `anthropics/claude-code-action`. Other `actions/*` may be blocked: the first Health run, which used `actions/upload-artifact`, `actions/download-artifact`, and `actions/github-script`, failed at startup. (Chronicle and Claude review failed at startup too while using only the safe set, so there may be a second cause. The error on the run page names it.) Any new workflow must stick to that set or it will fail before a step runs. Adding another action needs David to change the setting. For GitHub API work inside a workflow, use plain Node `fetch` with `GITHUB_TOKEN` (see `site/scripts/health-issue.mjs`).
 
 ### Common failures
 
