@@ -1,0 +1,6 @@
+# 2026-10-28: Day-one harvest of follow-ups into the work queue
+
+- **Considered:** about ten sessions wrote playbooks, reviews, architecture records, a findability baseline, runbooks, and a week plan on day one. Many next steps lived only inside those documents. Options: leave them for each lane to find, or read every source once and give every follow-up a home in GitHub issues.
+- **Chose:** a full harvest. Every "How we apply it", lesson, ADR, review finding, gap, warning, promised check, and Claude review comment was matched to an open issue, or got a new one after a duplicate search. Choices only David can make were grouped into a few `for:david` decision issues.
+- **Shipped:** [the harvest report](../plans/2026-10-28-harvest.md). 22 new issues (#93 to #114, 7 for David), link comments on 36 existing issues, pipeline-format `Score:` comments on 49 issues, missing `type:` labels on 8, and two issues added to the Week 1 milestone. No issue was closed: none was a true duplicate or already done. A note for Duet on #81 lists the Notion-only material to harvest.
+- **Scoreboard:** no resident-facing change. Pipeline measure for the Monday retro (2026-11-02): every open issue has an owner and a type (74 of 74 today), and each `for:code` or `idea` issue has a score.
