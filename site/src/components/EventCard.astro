@@ -1,5 +1,5 @@
 ---
-import { prettyRange, prettyDate, ymd } from '../lib/content.mjs';
+import { prettyRange, prettyTimes, prettyDate, ymd } from '../lib/content.mjs';
 const { e } = Astro.props;
 const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
 // Feed entries say which feed and when; hand-written ones say when a person checked.
@@ -7,7 +7,7 @@ const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America
 ---
 <article class="card">
   <h3><a href={e.url}>{e.title}</a></h3>
-  <p class="when">{prettyRange(e.starts, e.ends)}</p>
+  <p class="when">{prettyRange(e.starts, e.ends)}{e.start_time && `, ${prettyTimes(e.start_time, e.end_time)}`}</p>
   <p>{e.who_it_is_for} {e.what_to_do}</p>
   <p class="meta">
     {e.feed ? (

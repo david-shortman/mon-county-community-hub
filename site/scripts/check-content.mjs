@@ -22,6 +22,12 @@ for (const e of loadCalendar()) {
   if (!isDate(e.starts)) errors.push(`${where}: starts must be YYYY-MM-DD`);
   if (!isDate(e.ends)) errors.push(`${where}: ends must be YYYY-MM-DD`);
   if (e.ends < e.starts) errors.push(`${where}: ends is before starts`);
+  const isTime = (t) => /^([01]\d|2[0-3]):[0-5]\d$/.test(t ?? '');
+  if (e.start_time != null && !isTime(e.start_time)) errors.push(`${where}: start_time must be quoted 24-hour HH:MM`);
+  if (e.end_time != null && !isTime(e.end_time)) errors.push(`${where}: end_time must be quoted 24-hour HH:MM`);
+  if (e.end_time && !e.start_time) errors.push(`${where}: end_time needs start_time`);
+  if (e.start_time && e.ends !== e.starts) errors.push(`${where}: times are only for single-day entries`);
+  if (e.start_time && e.end_time && e.end_time <= e.start_time) errors.push(`${where}: end_time must be after start_time`);
   if (e.url && !isUrl(e.url)) errors.push(`${where}: url is not a web link`);
   if (!e.sources?.length) errors.push(`${where}: needs at least one source`);
   for (const s of e.sources ?? []) {
