@@ -6,7 +6,7 @@ This project has three contributors: David (the human in charge), **Claude Duet*
 
 | | Best at | Typical work |
 |---|---|---|
-| **David** | Judgment, relationships, decisions, local knowledge | Sets direction, merges PRs, talks to real organizations, approves anything public-facing |
+| **David** | Judgment, relationships, decisions, local knowledge | Sets direction, talks to real organizations, reviews only the PRs flagged `for:david` |
 | **Claude Duet** | Persistence and background work | Scheduled sweeps of local sources, research threads, landscape map upkeep, keeping Notion current, morning brief, small content PRs |
 | **Claude Code** | Speed and direct power on the machine | Building the site, data pipelines, bulk content work, tooling, CI, anything that needs a long focused session |
 
@@ -45,13 +45,25 @@ The repo is public. Before anything is committed, ask: would we be comfortable w
 ## Rules of the road
 
 1. **Claim before you start.** Add `in-progress` and comment who has it (`Duet`, `Claude Code`, or `David`). Do not work on an issue someone else has claimed.
-2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. David merges.
+2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. The author merges its own PR (squash merge) once the PR checklist passes, unless it falls under "When a PR waits for David" below.
 3. **Link everything.** PRs say `Closes #N`. Activity log rows link to the PR or issue.
 4. **Log at the end of every session.** One row in the Notion Activity log: What, Type, Who, Date, Link. Who is `David`, `Duet`, or `Claude Code`.
 5. **Decisions get written down.** Small ones: an Activity log row with Type `Decision`. Ones that shape the repo: also a line in [`docs/decisions.md`](decisions.md).
 6. **Cite sources and dates.** Every resource entry has a source URL and a last-verified date.
 7. **Neutral and common-good.** No advocacy for candidates, parties, or businesses. Describe, do not promote.
 8. **No em dashes** in any writing.
+
+## When a PR waits for David
+
+We are incubating, so the default is to ship and fix forward. Bad merges get reverted, not prevented. A PR waits for David only if it:
+
+- Changes these rules, `CLAUDE.md`, or repo settings
+- Adds or changes anything to do with secrets, money, paid services, or outside accounts
+- Deletes published content or a whole section of the site
+- Speaks for the project to a specific outside person or organization (outreach, press, partnership language)
+- Touches anything the author is unsure is public-safe
+
+In those cases, add the `for:david` label to the PR and say what you need in the description. Everything else, merge it.
 
 ## How David hears from us
 
