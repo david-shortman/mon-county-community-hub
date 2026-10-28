@@ -68,7 +68,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         body { padding-bottom: var(--tabbar); }
         header.site .wrap { padding-block: 12px 10px; }
         header.site .header-ridge { display: none; }
-        nav.main { position: fixed; z-index: 10; inset: auto 0 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+        nav.main { position: fixed; z-index: 10; inset: auto 0 0 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0;
           background: var(--card); padding: 4px max(4px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(4px, env(safe-area-inset-left)); }
         nav.main .ridge { display: block; position: absolute; left: 0; right: 0; bottom: 100%; height: 14px; }
         nav.main a { flex-direction: column; justify-content: center; gap: 2px; min-height: 56px; font-size: 0.8rem; font-weight: 600; text-decoration: none; color: var(--muted); }

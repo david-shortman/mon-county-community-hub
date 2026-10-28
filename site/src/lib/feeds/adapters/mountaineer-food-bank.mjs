@@ -27,6 +27,7 @@ export default {
       const v = Array.isArray(ev.venue) ? null : ev.venue;
       const place = v?.venue ? plain([v.venue, v.city].filter(Boolean).join(', ')) : '';
       // A full place for the Directions button, only when the feed gives a city.
+      // The food bank's own feed is the source for this address.
       const mapPlace = v?.venue && v?.city ? plain([v.venue, v.address, v.city, v.state || 'WV'].filter(Boolean).join(', ')) : '';
       out.push({
         title: 'Mountaineer Food Bank mobile pantry in Monongalia County',

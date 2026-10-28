@@ -94,7 +94,7 @@ We keep the system font stack (`system-ui` and friends). It loads instantly on o
 - **What:** One thin line of rolling hills, drawn by us as an SVG path. On wide screens it sits on the header's bottom border, so the hills rise out of the line. On phones it is the top edge of the bottom tab bar, filled underneath so the bar's top looks like a hillside.
 - **Where:** Once per screen. Header on wide screens, tab bar on phones (the CSS hides the other one). Not in cards, not as a background, not repeated down the page.
 - **How:** Use the [`RidgeLine`](../../site/src/components/RidgeLine.astro) component. It has `aria-hidden="true"` and `focusable="false"`, so screen readers skip it. It crops instead of stretching (`preserveAspectRatio="xMidYMax slice"`), so the hills keep their shape from 320px to wide screens. The stroke stays 1.5px at any size.
-- **Never:** animate it, fill it with color, put text on it, or use it as a logo.
+- **Never:** animate it, color it in (the only fill allowed is the tab bar's own background under the line), put text on it, or use it as a logo.
 
 ## Voice notes
 
