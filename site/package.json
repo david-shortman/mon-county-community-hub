@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "postbuild": "node scripts/check-pages.mjs",
+    "check-pages": "node scripts/check-pages.mjs",
     "preview": "astro preview",
     "check-content": "node scripts/check-content.mjs",
     "update-feeds": "node scripts/update-feeds.mjs",
     "health": "node scripts/health.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
     "astro": "^5.18.2",
     "yaml": "^2.9.1"
   }
