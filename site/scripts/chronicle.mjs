@@ -162,7 +162,10 @@ function stats() {
     }
   }
 
-  const ref = existsSync(join(ROOT, '.git')) ? (git('rev-parse', '--verify', '-q', 'origin/main') ? 'origin/main' : 'HEAD') : null;
+  let ref = null;
+  if (existsSync(join(ROOT, '.git'))) {
+    try { git('rev-parse', '--verify', '-q', 'origin/main'); ref = 'origin/main'; } catch { ref = 'HEAD'; }
+  }
   let commits = null;
   let calendarEntries = null;
   if (ref) {

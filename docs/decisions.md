@@ -4,6 +4,7 @@ Decisions that shape this repo. Newest first. Small or private decisions live in
 
 | Date | Decision | Why | Decided by |
 |---|---|---|---|
+| 2026-10-28 | Chronicle: daily snapshots run in GitHub Actions; screenshots and video go to monthly release assets, `snapshot.json` and dispatches go to `main` through weekly PRs | Keeps a visual record without growing every clone by about 500 MB a year | David (proposed by Claude Code) |
 | 2026-10-28 | Added "Finding real problems" to the charter: a sourced, ranked needs register built from public data, service demand, public voices, and our own tests drives what gets built | Start from real problems, not what is easy to build; also matches how funders like Cities Deliver frame impact | David |
 | 2026-10-28 | Run Claude Code in GitHub Actions too: `@claude` mentions and the `up-next` label start a run right away, alongside the daily scheduled run | Instant handoffs from Duet, no gateway limits, and runs are visible in the Actions tab | David |
 | 2026-10-28 | First build: the community deadlines calendar (page plus subscribable iCal feed) | Time-sensitive help is the easiest to miss, Duet is already researching it, and it is useful to nearly everyone | Claude Code (under the charter) |
