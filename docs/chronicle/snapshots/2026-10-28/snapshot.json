@@ -1,0 +1,243 @@
+{
+  "date": "2026-10-28",
+  "capturedAt": "2026-10-28T04:24:42.100Z",
+  "site": "https://david-shortman.github.io/mon-county-community-hub/",
+  "repo": "https://github.com/david-shortman/mon-county-community-hub",
+  "note": "Days are UTC. Screenshots show the live site at capturedAt. Open-by-label counts use current labels.",
+  "screenshots": [
+    {
+      "page": "home",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/",
+      "width": 390,
+      "theme": "light",
+      "file": "home-390-light.webp"
+    },
+    {
+      "page": "home",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/",
+      "width": 390,
+      "theme": "dark",
+      "file": "home-390-dark.webp"
+    },
+    {
+      "page": "home",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/",
+      "width": 1280,
+      "theme": "light",
+      "file": "home-1280-light.webp"
+    },
+    {
+      "page": "home",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/",
+      "width": 1280,
+      "theme": "dark",
+      "file": "home-1280-dark.webp"
+    },
+    {
+      "page": "calendar",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/calendar/",
+      "width": 390,
+      "theme": "light",
+      "file": "calendar-390-light.webp"
+    },
+    {
+      "page": "calendar",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/calendar/",
+      "width": 390,
+      "theme": "dark",
+      "file": "calendar-390-dark.webp"
+    },
+    {
+      "page": "calendar",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/calendar/",
+      "width": 1280,
+      "theme": "light",
+      "file": "calendar-1280-light.webp"
+    },
+    {
+      "page": "calendar",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/calendar/",
+      "width": 1280,
+      "theme": "dark",
+      "file": "calendar-1280-dark.webp"
+    },
+    {
+      "page": "about",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/about/",
+      "width": 390,
+      "theme": "light",
+      "file": "about-390-light.webp"
+    },
+    {
+      "page": "about",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/about/",
+      "width": 390,
+      "theme": "dark",
+      "file": "about-390-dark.webp"
+    },
+    {
+      "page": "about",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/about/",
+      "width": 1280,
+      "theme": "light",
+      "file": "about-1280-light.webp"
+    },
+    {
+      "page": "about",
+      "url": "https://david-shortman.github.io/mon-county-community-hub/about/",
+      "width": 1280,
+      "theme": "dark",
+      "file": "about-1280-dark.webp"
+    }
+  ],
+  "video": "walkthrough.mp4",
+  "stats": {
+    "day": {
+      "issuesOpened": 41,
+      "issuesClosed": 8,
+      "prsOpened": 12,
+      "prsMerged": [
+        {
+          "number": 43,
+          "title": "Add project playbook of proven civic, nonprofit, and evaluation practices",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/43"
+        },
+        {
+          "number": 32,
+          "title": "Run Claude Code in GitHub Actions",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/32"
+        },
+        {
+          "number": 30,
+          "title": "Add the site and the community deadlines calendar",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/30"
+        },
+        {
+          "number": 27,
+          "title": "Add the project charter",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/27"
+        },
+        {
+          "number": 11,
+          "title": "Document the PR merge command",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/11"
+        },
+        {
+          "number": 10,
+          "title": "Let agents merge their own PRs",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/10"
+        },
+        {
+          "number": 9,
+          "title": "Log decision: coordinate through GitHub and Notion only",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/9"
+        }
+      ],
+      "prsClosedUnmerged": 0,
+      "commitsToMain": 9
+    },
+    "totals": {
+      "issues": 41,
+      "issuesOpen": 33,
+      "prs": 12,
+      "prsMerged": 7,
+      "prsOpen": 5,
+      "commitsToMain": 9,
+      "calendarEntries": 7
+    },
+    "openByLabel": {
+      "for:code": 17,
+      "for:duet": 11,
+      "type:research": 11,
+      "type:build": 10,
+      "for:david": 8,
+      "type:design": 6,
+      "type:decision": 4,
+      "(none)": 2,
+      "documentation": 2,
+      "type:content": 2,
+      "in-progress": 1,
+      "up-next": 1
+    },
+    "waitingOnDavid": [
+      {
+        "number": 45,
+        "title": "Charter: find the real problems (needs register)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/45"
+      },
+      {
+        "number": 42,
+        "title": "Decide: pursue the Cities Deliver AI grant (closes Nov 29)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/42"
+      },
+      {
+        "number": 34,
+        "title": "Propose a work pipeline and a Claude review gate",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/34"
+      },
+      {
+        "number": 29,
+        "title": "Write Duet's role into COORDINATION.md",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/29"
+      },
+      {
+        "number": 26,
+        "title": "Decide: ask Mountain Line and the city about transit and 311 data",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/26"
+      },
+      {
+        "number": 25,
+        "title": "Confirm whether glass is accepted in curbside recycling",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/25"
+      },
+      {
+        "number": 24,
+        "title": "Decide: ask WV 211 about a data-sharing agreement",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/24"
+      },
+      {
+        "number": 23,
+        "title": "Decide: ask the United Way Family Resource Network about sharing listing data",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/23"
+      }
+    ]
+  },
+  "sessions": [
+    {
+      "role": "Claude Duet",
+      "kind": "background partner",
+      "lane": "research, content, Notion upkeep"
+    },
+    {
+      "role": "Builder",
+      "kind": "Claude Code session",
+      "lane": "live calendar feeds (#31): site/src/lib/feeds/, content/calendar/"
+    },
+    {
+      "role": "Design reviewer",
+      "kind": "Claude Code session",
+      "lane": "docs/rubrics/, docs/reviews/"
+    },
+    {
+      "role": "Researcher",
+      "kind": "Claude Code session",
+      "lane": "docs/playbook/"
+    },
+    {
+      "role": "Process designer",
+      "kind": "Claude Code session",
+      "lane": "docs/process/"
+    },
+    {
+      "role": "Findability scout",
+      "kind": "Claude Code session",
+      "lane": "docs/scoreboard.md, content/findability/"
+    },
+    {
+      "role": "Chronicler",
+      "kind": "Claude Code session",
+      "lane": "docs/chronicle/, site/scripts/chronicle*"
+    }
+  ],
+  "sizeKB": 1283
+}
