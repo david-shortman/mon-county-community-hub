@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api -X PUT repos/david-shortman/mon-county-community-hub/pulls/*/merge*)"
+    ]
+  },
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Merging a pull request in david-shortman/mon-county-community-hub without a human review is allowed. The repo owner decided agents merge their own PRs (see docs/COORDINATION.md), except PRs labeled for:david, which must be left for the owner."
+    ]
+  }
+}
