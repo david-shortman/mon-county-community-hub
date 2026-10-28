@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { loadDir, ymd, prettyDate } from '../lib/content.mjs';
+
+// Order matters: shelter first, then the domestic violence hotline, then the 211 fallback.
+const slugs = ['grace-shelter', 'rdvic-hotline', 'wv-211'];
+const hours = {
+  'grace-shelter': 'Open 24/7',
+  'rdvic-hotline': 'Hotline answers 24 hours a day',
+  'wv-211': 'Call, text or chat any time',
+};
+const all = loadDir('resources');
+const cards = slugs.map((s) => all.find((r) => r.slug === s)).filter(Boolean).map((r) => {
+  const dates = r.sources.map((s) => ymd(s.checked)).sort();
+  return { ...r, checked: dates[0] };
+});
+const digits = (p) => p.replace(/\D/g, '');
+---
+<Base title="Where to stay tonight" description="Emergency shelter, a 24-hour hotline, and 211 for people in Morgantown and Monongalia County who need a place to stay tonight.">
+  <h1>Where to stay tonight</h1>
+  <p class="lede">If you need a bed or a safe place right now, call one of these. All three are free.</p>
+
+  {cards.map((r) => (
+    <section class="card stay">
+      <h2>{r.title}</h2>
+      <p><a class="callbtn" href={`tel:${digits(r.contact.phone)}`}>Call {r.contact.phone}</a></p>
+      <p class="when">{hours[r.slug]}</p>
+      <p><strong>Who it serves:</strong> {r.who_it_is_for}</p>
+      <p><strong>How to get in:</strong> {r.what_to_do}</p>
+      <p class="meta">Last checked {prettyDate(r.checked)}. {r.sources.map((s, i) => <>{i ? ', ' : ''}<a href={s.url}>Source</a></>)}{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) ? <>, <a href={r.contact.url}>Official site</a></> : null}</p>
+    </section>
+  ))}
+
+  <div class="note">
+    <p><strong>In danger right now?</strong> Call <a href="tel:911">911</a>.</p>
+    <p><strong>Winter warming shelter:</strong> no opening date, hours or bed count has been published for this winter yet, so we do not list one. We will add it when its source does. Call 211 for the latest.</p>
+  </div>
+
+  <p class="meta">Hours and bed counts can change. Call before you go. We describe these services and do not decide who can stay. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
+
+<style>
+  .stay h2 { margin: 0 0 8px; font-size: 1.2rem; }
+  .callbtn { display: block; text-align: center; background: var(--accent); color: var(--bg); font-weight: 700; font-size: 1.3rem; text-decoration: none; border-radius: 10px; padding: 14px 16px; }
+  @media (min-width: 40rem) { .callbtn { display: inline-block; } }
+</style>
