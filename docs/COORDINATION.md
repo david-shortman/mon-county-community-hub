@@ -7,10 +7,24 @@ This project has three contributors: David (the human in charge), **Claude Duet*
 | | Best at | Typical work |
 |---|---|---|
 | **David** | Judgment, relationships, decisions, local knowledge | Sets direction, talks to real organizations, reviews only the PRs flagged `for:david` |
-| **Claude Duet** | Persistence and background work | Scheduled sweeps of local sources, research threads, landscape map upkeep, keeping Notion current, morning brief, small content PRs |
-| **Claude Code** | Speed and direct power on the machine | Building the site, data pipelines, bulk content work, tooling, CI, anything that needs a long focused session |
+| **Claude Duet** | Persistence and background work | Look and think in the daily loop, review, the morning brief, routing feedback, ambassador support for David, small content PRs (details below) |
+| **Claude Code** | Speed and direct power on the machine | Build and measure in the daily loop: the site, data pipelines, bulk content work, tooling, CI, the scoreboard, anything that needs a long focused session |
 
 Rule of thumb: if it needs to happen **while David is away**, it is Duet's. If it needs **a lot of code or files at once**, it is Claude Code's. If it **changes direction or goes public in a new way**, it is David's call.
+
+## Claude Duet's role
+
+The charter's daily loop is split between the two Claudes. Duet does **look and think**. Claude Code does **build and measure**. Both write the log.
+
+On top of that, Duet does five jobs:
+
+1. **Look and think.** Watch local sources for changes, research open questions, keep the landscape map current, and rank ideas using the charter's scoring. The best ideas become issues labeled `up-next`.
+2. **Review.** Be a second set of eyes before things spread. Check new or changed content for accuracy (a source and a checked date for every fact), neutrality, plain language, and privacy. Problems become comments on the PR or new issues.
+3. **Digest.** Turn the public build log and the Activity log into a short morning brief for David: what changed, open `for:david` items, and what is next.
+4. **Feedback.** Catch community feedback and corrections as they come in and turn each one into an issue, so nothing gets lost.
+5. **Ambassador support.** Help David with the people side of the project. Duet drafts outreach for him, preps him before partner conversations, and keeps track of where each relationship stands.
+
+**Duet never contacts anyone outside the project.** Every draft waits for David's yes, and David is the one who sends it. Notes about relationships, contacts, and outreach plans stay in the private Notion home, never in this repo.
 
 ## The three shared surfaces
 
@@ -39,6 +53,7 @@ The repo is public. Before anything is committed, ask: would we be comfortable w
 | `type:content` | Add or update resource entries |
 | `type:build` | Site, tooling, data pipeline |
 | `type:decision` | A choice to make; close it with the decision recorded |
+| `up-next` | Ranked and ready to build. Duet adds it after look and think; Claude Code picks from the top |
 | `in-progress` | Someone has claimed it (see the claiming rule) |
 | `blocked` | Waiting on something; say what in a comment |
 
@@ -76,7 +91,9 @@ In those cases, add the `for:david` label to the PR and say what you need in the
 
 They cannot message each other directly, so they hand off through issues:
 
-- Duet finds something that needs real build work: opens an issue with `for:code`, includes what it found and links.
+- Duet finds something that needs real build work: opens an issue with `for:code` and `up-next`, includes what it found, why it ranks high, and links.
+- A Claude Code session looking for work starts with open `up-next` issues, then other `for:code` issues.
+- Claude Code opens a PR with new or changed content: Duet reviews it when it next runs. Review never blocks a merge; problems found after a merge get fixed forward.
 - A Claude Code session finishes something Duet should keep current (a new data section, a new source to watch): opens a `for:duet` issue describing the recurring job.
 - Either one starting a session first checks open issues with its label and the last few Activity log rows.
 
