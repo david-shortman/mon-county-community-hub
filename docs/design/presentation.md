@@ -11,7 +11,7 @@ Last checked: October 28, 2026. The work to build it out is tracked in the epic 
 
 ## Who we design for
 
-These facts set the floor. Each one is sourced; see [Sources](#sources).
+These facts set the floor. Each one is sourced; see [Sources](#sources). The full set of county numbers, with years and gaps, is in [audience facts](../playbook/audience-facts.md).
 
 - **Almost everyone has a phone, and many have only a phone.** 91% of U.S. adults own a smartphone, and 16% use a smartphone with no home broadband (Pew, 2026). For many people the hub is a phone page or nothing.
 - **Phones and data are often cheap and slow.** A typical phone today is about as fast as a $350 phone from 2020, on about 7 Mbps. A content site should load in 3 seconds on that phone, which means about 1.4 MB at most, with no more than 75 KB of script (Russell, 2024). Free or prepaid phones are slower than that, and data runs out.
