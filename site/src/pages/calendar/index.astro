@@ -10,7 +10,7 @@ const later = items.filter((e) => e.starts > today);
 const icsHttp = new URL(`${base}/calendar.ics`, Astro.site).href;
 const icsWebcal = icsHttp.replace(/^https?:/, 'webcal:');
 ---
-<Base title="Deadlines and dates" description="Application windows, deadlines, and community dates in Mon County for this month and next.">
+<Base title="Deadlines and dates in Mon County, WV" description="Application windows, deadlines, and community dates in Mon County for this month and next.">
   <h1>Deadlines and dates in Mon County</h1>
   <p class="lede">Application windows, deadlines, and community dates for this month and next. Updated {prettyDate(today)}.</p>
   <p class="note">Add these to your phone's calendar: <a href={icsWebcal}>subscribe</a> (or copy this link: <a href={icsHttp}>{icsHttp}</a>). Dates can change, so check the source before you go.</p>
