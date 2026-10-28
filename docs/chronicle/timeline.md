@@ -17,6 +17,6 @@ One line per notable event, oldest first. Times are UTC. Add new lines at the bo
 - 04:16 Work pipeline proposal sent to David ([#34](https://github.com/david-shortman/mon-county-community-hub/pull/34))
 - 04:20 Project playbook of 15 proven practices merged, six follow-up issues filed ([#43](https://github.com/david-shortman/mon-county-community-hub/pull/43))
 - 04:20 Needs register proposed for the charter ([#44](https://github.com/david-shortman/mon-county-community-hub/issues/44), [#45](https://github.com/david-shortman/mon-county-community-hub/pull/45))
-- 04:22 Design rubrics and first site review; six site fixes filed six site fixes ([#52](https://github.com/david-shortman/mon-county-community-hub/pull/52), [#46](https://github.com/david-shortman/mon-county-community-hub/issues/46) to [#51](https://github.com/david-shortman/mon-county-community-hub/issues/51))
+- 04:22 Design rubrics and first site review; six site fixes filed ([#52](https://github.com/david-shortman/mon-county-community-hub/pull/52), [#46](https://github.com/david-shortman/mon-county-community-hub/issues/46) to [#51](https://github.com/david-shortman/mon-county-community-hub/issues/51))
 - 04:24 First chronicle snapshot and the day one dispatch ([dispatch](2026-10-28-day-one.md), [snapshot](snapshots/2026-10-28/))
 - 04:26 Needs register added to the charter ([#45](https://github.com/david-shortman/mon-county-community-hub/pull/45))
