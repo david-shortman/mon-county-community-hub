@@ -6,6 +6,9 @@ import path from 'node:path';
 const dist = new URL('../dist/', import.meta.url).pathname;
 const errors = [];
 const seenTitles = new Map();
+// Residents search with the place name ("shelter Morgantown WV"), so guide titles carry it (#143).
+const placeName = /Morgantown|Mon County|Monongalia/;
+const noPlaceNeeded = new Set(['404.html', 'about/index.html']);
 
 function htmlFiles(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => {
@@ -25,6 +28,9 @@ for (const file of pages) {
   if (!title) errors.push(`${where}: missing <title>`);
   else if (seenTitles.has(title)) errors.push(`${where}: same <title> as ${seenTitles.get(title)}`);
   else seenTitles.set(title, where);
+  if (title && !noPlaceNeeded.has(where) && !placeName.test(title.split(' | ')[0])) {
+    errors.push(`${where}: <title> should name Morgantown or Mon County, the way residents search`);
+  }
   if (!desc) errors.push(`${where}: missing meta description`);
   if (!/<html[^>]*\slang="/.test(html)) errors.push(`${where}: missing lang on <html>`);
   if (!/<link rel="canonical" href="https?:\/\//.test(html)) errors.push(`${where}: missing canonical link`);
