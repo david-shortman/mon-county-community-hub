@@ -40,7 +40,7 @@ Needs Node 22, Playwright (`require('playwright')` must work), and `gh` signed i
 
 ## Writing a dispatch
 
-- Use the public record as the source: [decisions](../decisions.md), the [build log](../build-log.md), merged PRs, issues, and the snapshots. Link to each one.
+- Use the public record as the source: [decisions](../decisions/), the [build log](../build-log/), merged PRs, issues, and the snapshots. Link to each one.
 - Plain language, about an 8th grade reading level. No em dashes. No hype.
 - Say what did not happen too. "No resident has used this yet" is part of the story.
 - Embed a few screenshots from the snapshot folder with relative paths and a `width` so phone shots stay small.
