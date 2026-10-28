@@ -17,11 +17,24 @@ Mon County Community Hub uses AI to amplify the people already working to make M
 
 Claude runs this loop on its own, every day, without waiting for David.
 
-1. **Look.** Try to answer real questions a resident might have about life here. Check how findable, current, plain, and mobile-friendly the answers are. Watch local sources for changes.
-2. **Think.** Write down ideas for closing the biggest gaps. Score each idea on how many people it could help, how much it amplifies existing work, how fast it can ship, and how safe it is.
+1. **Look.** Gather signals of real problems in the community (see "Finding real problems" below). Try to answer real questions a resident might have about life here, and check how findable, current, plain, and mobile-friendly the answers are. Watch local sources for changes.
+2. **Think.** Write down ideas for the most pressing problems and the biggest gaps. Score each idea on how serious the problem is, how many people it could help, how much it amplifies existing work, how fast it can ship, and how safe it is.
 3. **Build.** Pick the best idea that fits the autonomy rules below and ship it, small and real, through a PR that Claude merges itself.
 4. **Measure.** Record what changed on the scoreboard.
 5. **Learn and log.** Write a short public log entry: what was considered, what was chosen and why, what happened. Add an Activity log row in Notion.
+
+## Finding real problems
+
+Good tools start from real problems, not from what is easy to build. We keep a **needs register**: a ranked, sourced list of the problems people in Mon County face, built from signals like these:
+
+- **Public data:** health rankings, community health needs assessments, food insecurity estimates, ALICE (households that work but struggle to afford basics), census and CDC data, school and housing data.
+- **Service demand:** 211 call trends, food pantry and shelter demand, waitlists, and what local groups report publicly.
+- **Public voices:** public comment at local meetings, local news, community surveys, and suggestions people send us.
+- **Our own tests:** the findability checks, and later, what people search for on the site (counted in aggregate only).
+
+Each need records the evidence and its sources, how many people it affects, how severe it is, whether it is getting better or worse, who is already working on it, and where the gaps are. The top needs set the direction for what we build. Where we can, we measure whether a need actually moves, not just whether information about it got easier to find.
+
+We describe problems; we do not take sides on policy. Signals are aggregate and public. We never profile or quote private individuals.
 
 ## What we build
 
@@ -39,7 +52,7 @@ We track four levels, from what Claude can move by itself to what only the commu
 
 | Level | What we measure | Examples |
 |---|---|---|
-| 1. Findability | How easy it is to find and act on information, by area of life | An accessibility score from Claude's regular question tests: found or not, how many steps, current or stale, plain language, works on a phone |
+| 1. Findability and need | How easy it is to find and act on information, by area of life, and how the top problems in the needs register are trending | An accessibility score from Claude's regular question tests: found or not, how many steps, current or stale, plain language, works on a phone |
 | 2. Use | Whether people use what we build | Visits, tool uses, searches, API and MCP calls, returning visitors |
 | 3. Action | Whether it led people to do something | Volunteer sign-ups, voter registrations, event turnout, program applications, donations to local groups, counted through tracked links and partner-reported numbers |
 | 4. Recognition | Whether the community says it helped | Feedback from residents, a local group using, linking, or thanking us, corrections and suggestions submitted, news coverage |
