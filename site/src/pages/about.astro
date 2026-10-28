@@ -1,25 +1,56 @@
 ---
 import Base from '../layouts/Base.astro';
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const doc = (p) => `${repo}/blob/main/${p}`;
+const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
 ---
-<Base title="About" description="How Mon County Community Hub works and who makes it.">
+<Base title="About" description="Who runs Mon County Community Hub, how the AI behind it works, and how you can check our work.">
   <h1>About this project</h1>
-  <p class="lede">Mon County Community Hub uses AI to amplify the people already working to make Morgantown and Monongalia County better.</p>
-  <p>A lot of good work already happens here: nonprofits, volunteers, faith groups, neighborhood groups, local government, small businesses, and neighbors. Much of it is hard to find or hard to join. This project tries to make it easier.</p>
+  <p class="lede">Mon County Community Hub helps you find help, services, and dates that matter in Morgantown and Monongalia County. AI does most of the research and writing. A real person is responsible for it.</p>
 
-  <h2>How it works</h2>
-  <p>Every day, an AI assistant (Claude, made by Anthropic) checks how easy it is to find answers about life here, picks a gap to fill, and builds something to fill it. A local resident sets the direction and checks the work.</p>
+  <h2>Who's behind this</h2>
+  <p>I'm David McCoy. I moved to West Virginia in 2022, and I married my wild and wonderful wife in 2024, which keeps me here. I'm a software developer, and I've built software for nonprofits and businesses.</p>
+  <p>This is a volunteer project. It has no funding and makes no money. There are no ads, and it doesn't ask for donations. I'm not looking for attention. My name is here only so you know a real person is behind it.</p>
+  <p>Here's why I'm doing it. Some groups are using technology to leave people behind. AI tools can now work around the clock: looking things up, checking facts, and keeping a lot of work moving. Scammers and shady outfits are already using that. I think it should be working for us instead, and for the people and groups already doing good work here.</p>
+  <p>So this site is a test of how far that can go for one community. I want to see people's lives get better, and see people own more of their own time. I'd love for local leaders to say they could help more people, and for more things to become simple, easy, even boring. If it works, I hope local leaders or other towns take the idea and run with it.</p>
+
+  <h2>How you can check us</h2>
   <ul>
-    <li><strong>Every fact has a source</strong> and the date we last checked it.</li>
-    <li><strong>We point to real people and groups</strong>, not replace them.</li>
-    <li><strong>Neutral.</strong> We don't take sides on candidates, parties, or businesses.</li>
-    <li><strong>Private.</strong> We don't track you or collect personal information. Directions buttons open Google Maps, and nothing goes to Google unless you tap one.</li>
-    <li><strong>Open.</strong> The code, the data, and the reasons behind every decision are public on <a href={repo}>GitHub</a>.</li>
+    <li><strong>Every listing shows where it came from.</strong> It links to its source, usually the group's own page, and shows the date we last checked it.</li>
+    <li><strong>You deal with the group, not us.</strong> When you sign up, call, or give, you do it with them. This site has no sign-up forms, takes no payments, and does not ask for your name or contact details.</li>
+    <li><strong>Any group can ask us to fix or remove its listing.</strong> For now, you do that with the "Tell us" link at the bottom of each page. It opens a public page on GitHub and needs a free GitHub account. We're working on a way to reach us without an account, and an email address is coming once the site has its own web address.</li>
+    <li><strong>The work is public.</strong> The code, the data, the rules the AI follows, and a log of what it built and why are all on <a href={repo}>GitHub</a>. Planning notes and notes about specific people are kept private.</li>
   </ul>
+
+  <h2>How it runs</h2>
+  <p>Every day, AI agents (Claude, made by Anthropic) work through the same steps. They look for places where information about life here is hard to find or out of date. They pick the most useful fix and build it. Then they check whether it helped and write down what they did and why.</p>
+  <p>The AI can build and publish most pages on its own. Every change is a public "pull request" on GitHub, with a note on what changed and why. When something is wrong, it gets fixed in the open, and the fix shows up in the public log.</p>
+  <p>The AI follows these rules every time:</p>
+  <ul>
+    <li><strong>Every fact needs a public source</strong> and the date it was checked. If the AI can't find a source, the fact stays off the site.</li>
+    <li><strong>Describe, don't take sides.</strong> No candidates, parties, or favorite businesses. Voting information points to the West Virginia Secretary of State.</li>
+    <li><strong>No personal information</strong> about private people, ever. We don't track you. Directions buttons open Google Maps, and nothing goes to Google unless you tap one.</li>
+  </ul>
+  <p>Some things the AI is never allowed to do on its own. They always wait for my yes:</p>
+  <ul>
+    <li>Contacting any person or group, or speaking for the project</li>
+    <li>Sending messages or alerts to the public</li>
+    <li>Spending money, or signing up for paid services or outside accounts</li>
+    <li>Handling passwords or other secrets</li>
+    <li>Collecting personal information beyond what a feature needs</li>
+    <li>Anything partisan</li>
+    <li>Changing the project's own rules</li>
+  </ul>
+  <p>My part: I guide the project at the top. I review the content and how it's presented, and I review how we measure whether the site is accurate and helpful.</p>
+  <p class="note">AI can still get things wrong. Please check details with the group before you act, and <a href={tellUs}>tell us</a> if something is off.</p>
 
   <h2>Read more</h2>
   <ul>
-    <li><a href={`${repo}/blob/main/docs/CHARTER.md`}>The project charter</a>: the mission, goals, and rules.</li>
-    <li><a href={`${repo}/blob/main/docs/decisions.md`}>Decision log</a>.</li>
+    <li><a href={doc('docs/CHARTER.md')}>The project charter</a>: the mission, goals, and the limits on what the AI may do.</li>
+    <li><a href={doc('docs/COORDINATION.md')}>How we work</a>: who does what, and when a change waits for a person.</li>
+    <li><a href={doc('CLAUDE.md')}>The AI's standing instructions</a> for this project.</li>
+    <li><a href={doc('docs/playbook/trust-and-ai.md')}>Trust and AI</a>: the practices we follow and where they come from.</li>
+    <li><a href={`${repo}/tree/main/docs/build-log`}>Build log</a>: what was built, and why.</li>
+    <li><a href={doc('docs/decisions.md')}>Decision log</a>.</li>
   </ul>
 </Base>
