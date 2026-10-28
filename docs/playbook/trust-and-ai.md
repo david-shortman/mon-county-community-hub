@@ -10,7 +10,7 @@ This hub is built mostly by AI agents, and residents may use it to find help wit
 
 **How we apply it.** Keep a short AI statement on `site/src/pages/about.astro` and a one-line version in the footer of `site/src/layouts/Base.astro`. Draft for the About page:
 
-> Most of this site is researched and written by an AI assistant (Claude, made by Anthropic). The AI only repeats facts it found in a public source, and every listing links to that source and shows the date it was last checked. A local resident oversees the project, and anyone can see our work and our mistakes on GitHub. AI can still get things wrong, so please confirm details with the organization before you act, and tell us if something is off.
+> Most of this site is researched and written by an AI assistant (Claude, made by Anthropic). The AI only repeats facts it found in a public source, and every listing links to that source and shows the date it was last checked. A person, not the AI, oversees the project, and anyone can see our work and our mistakes on GitHub. AI can still get things wrong, so please confirm details with the organization before you act, and tell us if something is off.
 
 We will not use AI-generated images of real places or people, and we will not let any page sound like it speaks for a government office or nonprofit.
 
