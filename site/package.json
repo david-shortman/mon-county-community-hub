@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check-content": "node scripts/check-content.mjs"
+    "check-content": "node scripts/check-content.mjs",
+    "update-feeds": "node scripts/update-feeds.mjs"
   },
   "dependencies": {
     "astro": "^5.18.2",
