@@ -144,7 +144,7 @@ docs/
 
 **npm workspaces** tie it together: one `npm ci` at the root, packages imported by name. No extra build tool until we feel the pain.
 
-**One deploy.** GitHub Pages serves one site per repo, so the deploy workflow builds the main site at `/` and each app into its own subpath (`/apps/<name>/`), then publishes them together. If an app ever needs its own domain or a server, that is a hosting decision for David.
+**One deploy, apps on subpaths (decided by David, 2026-10-28).** GitHub Pages serves one site per repo and costs nothing, so the deploy workflow builds the main site at `/` and each app into its own subpath (`/apps/<name>/`), then publishes them together. If an app ever needs its own domain or a server, the code still stays in this repo: either push its built files to a deploy-only Pages repo, or point a monorepo-aware host (Vercel, Netlify, Cloudflare Pages) at its folder. Both need David. See [ADR 0004](adr/0004-monorepo-layout.md#hosting-more-than-one-site-from-one-repo).
 
 **Shared design system.** `packages/ui` holds colors, type, spacing, and the base components (cards, source lines, "report a problem"). The design rubrics review it once instead of per app.
 
