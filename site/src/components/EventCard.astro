@@ -1,0 +1,16 @@
+---
+import { prettyRange, prettyDate } from '../lib/content.mjs';
+const { e } = Astro.props;
+const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
+---
+<article class="card">
+  <h3><a href={e.url}>{e.title}</a></h3>
+  <p class="when">{prettyRange(e.starts, e.ends)}</p>
+  <p>{e.who_it_is_for} {e.what_to_do}</p>
+  <p class="meta">
+    Run by {e.org_name}.
+    Source: {e.sources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{new URL(s.url).hostname}</a></>))}.
+    Last checked {prettyDate(lastChecked)}.
+  </p>
+  <p>{(e.topics || []).map((t) => <span class="tag">{t}</span>)}</p>
+</article>

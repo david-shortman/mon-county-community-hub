@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import EventCard from '../../components/EventCard.astro';
+import { loadCalendar, upcoming, todayYmd, prettyDate } from '../../lib/content.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const items = upcoming(loadCalendar(), today, 62);
+const now = items.filter((e) => e.starts <= today);
+const later = items.filter((e) => e.starts > today);
+const icsHttp = new URL(`${base}/calendar.ics`, Astro.site).href;
+const icsWebcal = icsHttp.replace(/^https?:/, 'webcal:');
+---
+<Base title="Deadlines and dates" description="Application windows, deadlines, and community dates in Mon County for this month and next.">
+  <h1>Deadlines and dates in Mon County</h1>
+  <p class="lede">Application windows, deadlines, and community dates for this month and next. Updated {prettyDate(today)}.</p>
+  <p class="note">Add these to your phone's calendar: <a href={icsWebcal}>subscribe</a> (or copy this link: <a href={icsHttp}>{icsHttp}</a>). Dates can change, so check the source before you go.</p>
+
+  <h2>Open now</h2>
+  {now.length ? now.map((e) => <EventCard e={e} />) : <p>Nothing open right now.</p>}
+
+  <h2>Coming up</h2>
+  {later.length ? later.map((e) => <EventCard e={e} />) : <p>Nothing else in the next two months yet.</p>}
+
+  <p class="meta">Know a date that should be here? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Suggest it</a>.</p>
+</Base>

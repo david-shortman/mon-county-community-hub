@@ -37,6 +37,29 @@ sources:
     checked: 2026-10-27
 ```
 
+## `calendar/<slug>.yaml`: dates and deadlines
+
+Shown on the site's Deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).
+
+```yaml
+title: Heating bill help (LIEAP) applications open
+slug: lieap-2026-27           # unique; include the season or year
+starts: 2026-11-02            # YYYY-MM-DD
+ends: 2026-11-20              # YYYY-MM-DD; leave out for a single day
+org_name: WV Department of Human Services
+who_it_is_for: Households that need help paying winter heating bills.
+what_to_do: Apply at your local DoHS office or online before the window closes.
+url: https://example.wv.gov/lieap   # where a person should go to act
+topics: [money, housing]      # money, food, housing, health, family, government, voting, recycling, taxes, community
+sources:
+  - url: https://example.wv.gov/lieap
+    checked: 2026-10-28
+```
+
+To roll a yearly item forward, copy the file, change the slug, dates, and sources, and re-check the source. Never guess a date: if the new date is not published yet, leave the item out and note it in an issue.
+
+Run `npm run check-content` in `site/` to validate entries.
+
 ## Rules
 
 - Only public organizational contact details. Never a private person's info.
