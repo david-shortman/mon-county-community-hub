@@ -1,0 +1,23 @@
+name: Suggest a resource or correction
+description: Tell us about a local resource, or something we got wrong
+labels: ["type:content", "for:duet"]
+body:
+  - type: markdown
+    attributes:
+      value: Please do not include private personal information. Public organizational contacts only.
+  - type: input
+    id: name
+    attributes:
+      label: Organization or resource name
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Website or source link
+  - type: textarea
+    id: details
+    attributes:
+      label: What should we add or fix?
+    validations:
+      required: true

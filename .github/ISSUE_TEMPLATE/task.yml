@@ -1,0 +1,22 @@
+name: Task
+description: A piece of work for David, Duet, or a Claude Code session
+labels: []
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What needs doing
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters
+  - type: textarea
+    id: done
+    attributes:
+      label: Done looks like
+  - type: textarea
+    id: links
+    attributes:
+      label: Links and context
