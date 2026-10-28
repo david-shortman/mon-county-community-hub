@@ -36,7 +36,7 @@ Every session should skim this page before picking work in the [daily loop](../C
 14. **Disclose AI, and never state a fact a source does not support.** Say plainly that AI writes the site. Every fact traces to a source the agent opened. [Detail](trust-and-ai.md#disclose-ai-involvement-in-plain-words), [sourcing rule](trust-and-ai.md#treat-ai-output-as-unchecked-until-sourced)
 15. **Fix errors in the open.** Publish a corrections policy and put a "report a problem" link on every listing. [Detail](trust-and-ai.md#publish-a-corrections-policy-and-follow-it)
 
-## The five areas
+## The areas
 
 | File | Covers |
 |---|---|
@@ -45,6 +45,7 @@ Every session should skim this page before picking work in the [daily loop](../C
 | [community-practice.md](community-practice.md) | Theory of change, logic models, Results-Based Accountability, collective impact, asset-based community development, community-centered design, the directory problem |
 | [measurement.md](measurement.md) | Contribution analysis, tracked links, partner numbers, baselines, measurement plans, ethical tests, privacy-respecting analytics, honest reporting |
 | [trust-and-ai.md](trust-and-ai.md) | AI disclosure, sourcing rules, review of high-stakes information, corrections, reporting problems, transparency |
+| [landscape.md](landscape.md) | Living map of peer projects putting AI to work for communities, including failures and shut-downs, with what we can adopt and how we could amplify each |
 
 ## Keeping this current
 
