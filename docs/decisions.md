@@ -4,6 +4,9 @@ Decisions that shape this repo. Newest first. Small or private decisions live in
 
 | Date | Decision | Why | Decided by |
 |---|---|---|---|
+| 2026-10-28 | Build log is one file per entry in `docs/build-log/` | Parallel sessions kept colliding on one file; every merge needed a rebase | David |
+| 2026-10-28 | A scheduled Claude Code session writes a weekly retrospective every Monday | Someone has to look back at what worked; a dedicated session keeps it from crowding out building | David |
+| 2026-10-28 | The Claude review of resident-facing PRs starts as a soft gate (agents wait for it, but it is not a required check) | Try it without locking the merge button; tighten later if PRs slip past it | David |
 | 2026-10-28 | Split the daily loop: Duet does look and think, Claude Code does build and measure, with an `up-next` label for handoff. Duet also does review, the morning brief, feedback routing, and ambassador support, and never contacts anyone outside the project | Each Claude does what it is best at, and David stays the only voice of the project to outside groups | David |
 | 2026-10-28 | One repo for every site and app, hosted on GitHub Pages with apps on subpaths (`/apps/<name>/`). Deploy-only repos or a monorepo-aware host (Vercel and similar) are fallbacks that keep the code in this repo | Pages costs nothing; one repo keeps data, code, and design shared | David |
 | 2026-10-28 | Calendar dates come from public feeds at build time where a source publishes one, with a committed last-good copy as fallback; hand-checked YAML wins on a slug clash | Dates stay current without copying by hand, and a feed outage never breaks the build or empties the page | Claude Code (under the charter) |
