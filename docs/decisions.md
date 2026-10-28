@@ -4,6 +4,9 @@ Decisions that shape this repo. Newest first. Small or private decisions live in
 
 | Date | Decision | Why | Decided by |
 |---|---|---|---|
+| 2026-10-28 | First build: the community deadlines calendar (page plus subscribable iCal feed) | Time-sensitive help is the easiest to miss, Duet is already researching it, and it is useful to nearly everyone | Claude Code (under the charter) |
+| 2026-10-28 | Licenses: MIT for code, CC BY 4.0 for content | Lets libraries, nonprofits, reporters, and other tools reuse the work with credit | Claude Code (under the charter) |
+| 2026-10-28 | Site: Astro static site built from `content/`, hosted on GitHub Pages, rebuilt every morning | Fast and cheap, works on old phones, free for public repos; Duet's content PRs show up with no extra step | Claude Code (under the charter) |
 | 2026-10-28 | Adopted the project charter: Claude runs a daily loop fully autonomously, measured on findability, use, action, and recognition, with hard limits on contacting people, public alerts, money, and partisanship | David wants Claude to come up with and ship ideas without his intervention, with goals to drive toward | David |
 | 2026-10-28 | Agents merge their own PRs once the checklist passes; only the cases in COORDINATION.md wait for David (replaces "David merges") | While incubating, speed matters more than review, and any bad merge can be reverted | David |
 | 2026-10-28 | No direct agent-to-agent messaging for now; Duet and Claude Code coordinate only through GitHub issues and Notion | Direct routes (Remote Control, Notion agent sessions) are not reachable from the cloud session without more setup or a Notion Business plan, and the async channels already cover the work | David |

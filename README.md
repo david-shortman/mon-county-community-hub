@@ -23,6 +23,10 @@ This project is an open experiment. A local resident sets the direction, and AI 
 
 See [`docs/COORDINATION.md`](docs/COORDINATION.md) for how the work is organized.
 
+## License
+
+Code is under the [MIT License](LICENSE). Content in `content/` is under [CC BY 4.0](content/LICENSE.md): reuse it for anything, with credit.
+
 ## Found something wrong or missing?
 
 Open an issue using the "Suggest a resource or correction" form.
