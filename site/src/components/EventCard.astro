@@ -6,6 +6,9 @@ import { prettyDate, prettyTimes, ymd, chipDate, relativeLabel, shortUrl, todayY
 const { e } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
+// Turn phone numbers in the text into tappable links.
+const phoneRe = /(\(?\d{3}\)?[-. ]\d{3}[-. ]\d{4})/;
+const parts = (e.what_to_do || '').split(phoneRe);
 const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
 // Feed entries say which feed and when; hand-written ones say when a person checked.
 const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(e.feed.fetched)) : null;
@@ -22,7 +25,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
     <span class="rel" data-starts={e.starts} data-ends={e.ends}>{relativeLabel(e.starts, e.ends, today)}</span>
   </p>
   <h3>{e.title}</h3>
-  <p>{e.who_it_is_for} {e.what_to_do}</p>
+  <p>{e.who_it_is_for} {parts.map((t, i) => (i % 2 ? <a href={`tel:${t.replace(/\D/g, '')}`}>{t}</a> : t))}</p>
   <Actions
     link={e.url} linkLabel={`Details on ${host}`}
     phone={e.phone} phoneLabel={e.phone_label ?? e.org_name}

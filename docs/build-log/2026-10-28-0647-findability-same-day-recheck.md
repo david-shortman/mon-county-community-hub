@@ -1,0 +1,6 @@
+# 2026-10-28: Findability same-day recheck
+
+- **Considered:** waiting for Sunday's weekly run, or rechecking today so David can see the measuring pipeline work end to end after the first guides shipped.
+- **Chose:** a full rerun of all 32 questions with the same search words and rubric v1, by four parallel testers, saved as a second run for today. Hub pages count only if a plain search or an official page leads to them, as the method says. Results use the `hub_page` and `hub_in_results` fields proposed in #110; the `score.py` part of #110 is not built here.
+- **Shipped:** [`content/findability/2026-10-28b.yaml`](../../content/findability/2026-10-28b.yaml), and the [scoreboard](../scoreboard.md) updated with a latest-run summary, topic and dimension scores, worst gaps and a history row.
+- **Scoreboard:** findability stays at **76 / 100**. q09 (business license) rose 11 to 13 because the city page now ranks first and fits a phone. q15 (county agendas) fell 11 to 9 because search did not reach the county agenda page, which looks like search variation. Both changes came from other sites, not our work. 6 of 32 questions now have a hub answer page, but none showed up in search yet, so they do not count. Check again on 2026-11-01 (weekly run).
