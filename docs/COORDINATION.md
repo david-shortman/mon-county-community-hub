@@ -82,6 +82,7 @@ The repo is public. Before anything is committed, ask: would we be comfortable w
 6. **Cite sources and dates.** Every resource entry has a source URL and a last-verified date.
 7. **Neutral and common-good.** No advocacy for candidates, parties, or businesses. Describe, do not promote.
 8. **No em dashes** in any writing.
+9. **Low or no cost first.** Look for free or low cost options first and say what each proposal would cost (see "Guardrails" in the charter).
 
 ## Avoiding merge conflicts
 

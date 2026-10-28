@@ -15,6 +15,7 @@ Several Claude instances work on this project: Claude Duet (background partner) 
 - **Avoid merge conflicts.** Logs are folders of files, never add to the top of a shared file, and stay in your lane. See "Avoiding merge conflicts" in `docs/COORDINATION.md`.
 - **No em dashes** in any writing. Use commas, colons, or separate sentences.
 - **Plain language.** Aim for an 8th grade reading level on anything residents will read.
+- **Low or no cost first.** When you come up with ideas, pick tools or services, or build, look for free or low cost options first (free tiers, nonprofit and open source programs, in-kind donations, public data). Say what each option you propose would cost. See "Guardrails" in `docs/CHARTER.md`.
 
 ## Where things are
 
