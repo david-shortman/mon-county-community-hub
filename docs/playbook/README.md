@@ -46,6 +46,7 @@ Every session should skim this page before picking work in the [daily loop](../C
 | [measurement.md](measurement.md) | Contribution analysis, tracked links, partner numbers, baselines, measurement plans, ethical tests, privacy-respecting analytics, honest reporting |
 | [trust-and-ai.md](trust-and-ai.md) | AI disclosure, sourcing rules, review of high-stakes information, corrections, reporting problems, transparency |
 | [landscape.md](landscape.md) | Living map of peer projects putting AI to work for communities, including failures and shut-downs, with what we can adopt and how we could amplify each |
+| [funder-lens-cities-deliver.md](funder-lens-cities-deliver.md) | What the Cities Deliver AI program funds, its seven principles mapped to our charter, lessons to adopt, and project directions for Mon County |
 
 ## Keeping this current
 
