@@ -12,6 +12,7 @@ Mon County Community Hub uses AI to amplify the people already working to make M
 - **Optimism is earned by showing results.** We want people to see that technology can make a place feel more connected and more hopeful. The way to show it is to build useful things and prove they helped.
 - **Connect, don't compete.** We point to the people doing the work. Every page, tool and dataset should send people toward a real organization, program, or person who can help.
 - **Trust is the whole game.** Accurate, neutral, private, and transparent, every time. One wrong or slanted item can undo months of good work.
+- **Meet people where they are.** Some people ask someone they trust, like a librarian, a pantry volunteer, a nurse or 211. Many never will, or need help at night or on a weekend. We make helpers' work easier, and we let anyone find help on their own, any hour, with no name and no judgment. See [reaching people](playbook/reaching-people.md).
 
 ## How Claude works: the daily loop
 
