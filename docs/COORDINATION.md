@@ -33,6 +33,21 @@ Nothing important lives only inside one chat. Every contributor can read and wri
 1. **GitHub issues: the work queue.** Every piece of work bigger than a few minutes is an issue. Labels say who it is for.
 2. **GitHub repo: the public output.** Site code, structured resource data, and public docs. Everything here is world-readable.
 3. **Notion home: the private thinking and the journal.** Mission drafts, brainstorm, landscape notes, open questions, and the Activity log. [Notion home](https://app.notion.com/p/40717805570781abbde2e8c1975f5f94)
+4. **Agent HQ in Notion: the agents' own space.** Each agent role has a notebook (its page in the Agent Directory) for working memory and notes to its next run, there is a shared **Forum** for proposals, questions, heads-ups, handoffs, decision requests, and standups, and a shared **Learnings** list of lessons with evidence. [Agent HQ](https://app.notion.com/p/4071780557078180b8c2ef64006413af)
+
+### Which channel to use
+
+| Need | Channel |
+|---|---|
+| Something to build, research, or decide | A GitHub issue with the right label |
+| The public record of what shipped and why | The PR and its build log entry |
+| A discussion that is not work yet, or a question for another agent | A Forum post in Agent HQ, linked to any related issue |
+| Your own memory between runs | Your notebook in the Agent Directory |
+| A lesson others should know | A Learnings entry with evidence |
+| Something time-sensitive between Claude Code sessions running right now | A direct message (`send_message`), then record the outcome on the issue or in the Forum |
+| Anything that needs David | A `for:david` issue, plus a Forum post of Type "Decision request" |
+
+Scheduled Claude Code runs and GitHub Actions cannot reach Notion. They write to GitHub, and Duet copies what matters into the Forum, notebooks, and Activity log on every sweep.
 
 ### Public vs private
 
@@ -63,10 +78,23 @@ The repo is public. Before anything is committed, ask: would we be comfortable w
 2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. The author merges its own PR (squash merge) once the PR checklist passes, unless it falls under "When a PR waits for David" below. To merge from the command line: `gh api -X PUT repos/david-shortman/mon-county-community-hub/pulls/<number>/merge -f merge_method=squash` (`gh pr merge` does not work in cloud sessions).
 3. **Link everything.** PRs say `Closes #N`. Activity log rows link to the PR or issue.
 4. **Log at the end of every session.** One row in the Notion Activity log: What, Type, Who, Date, Link. Who is `David`, `Duet`, or `Claude Code`.
-5. **Decisions get written down.** Small ones: an Activity log row with Type `Decision`. Ones that shape the repo: also a line in [`docs/decisions.md`](decisions.md).
+5. **Decisions get written down.** Small ones: an Activity log row with Type `Decision`. Ones that shape the repo: also a new file in [`docs/decisions/`](decisions/) (format in [`docs/decisions.md`](decisions.md)).
 6. **Cite sources and dates.** Every resource entry has a source URL and a last-verified date.
 7. **Neutral and common-good.** No advocacy for candidates, parties, or businesses. Describe, do not promote.
 8. **No em dashes** in any writing.
+
+## Avoiding merge conflicts
+
+Many agents work at once, so files that everyone edits cause conflicts on almost every merge. Design shared files so that two PRs rarely touch the same lines:
+
+1. **Logs are folders, one file per entry.** The build log is [`docs/build-log/`](build-log/) and decisions are [`docs/decisions/`](decisions/). Name files `YYYY-MM-DD-HHMM-<short-name>.md` (UTC). Never add entries to the old single files; they are pointers now.
+2. **Indexes link to folders instead of listing every file by hand.** A README can describe what a folder holds and point to it. If a list is truly needed, generate it with a script in CI rather than editing it in each PR.
+3. **New items go in a fixed, sorted place, not at the top.** In tables and lists that many PRs touch (labels, playbook files, rubrics), add rows in alphabetical order or at the end of the right section.
+4. **Every shared file has an owning lane.** Rules files (`CLAUDE.md`, this file, the charter) belong to David. Lane files belong to their lane (see the Agent Directory in Agent HQ). To change another lane's file, open an issue or Forum post for its owner instead of editing it.
+5. **Small PRs, merged fast.** Rebase on `main` right before merging. If a conflict is only two PRs adding entries, keep both.
+6. **One change per shared file per PR.** Do not bundle unrelated edits to the same shared file.
+
+When a new file starts collecting edits from many PRs, treat it as a bug: open an issue to split it into a folder.
 
 ## When a PR waits for David
 
@@ -89,7 +117,7 @@ In those cases, add the `for:david` label to the PR and say what you need in the
 
 ## How Duet and Claude Code hand work to each other
 
-They cannot message each other directly, so they hand off through issues:
+Duet cannot be messaged directly by Claude Code, so most handoffs go through issues (and the Forum for discussion):
 
 - Duet finds something that needs real build work: opens an issue with `for:code` and `up-next`, includes what it found, why it ranks high, and links.
 - A Claude Code session looking for work starts with open `up-next` issues, then other `for:code` issues.

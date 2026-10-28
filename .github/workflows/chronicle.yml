@@ -110,7 +110,7 @@ jobs:
 
             1. Read CLAUDE.md, docs/CHARTER.md, docs/COORDINATION.md, docs/chronicle/README.md, the last dispatch in docs/chronicle/, and docs/chronicle/timeline.md first. They override this prompt.
             2. The week is the 7 UTC days ending yesterday. For each day, download its numbers from the monthly release: `gh release download chronicle-YYYY-MM -p "<date>-snapshot.json" -O docs/chronicle/snapshots/<date>/snapshot.json`. Skip days that are missing and say so in the dispatch.
-            3. Gather what happened from the public record: merged PRs and closed issues for the week (`gh api`), new entries in docs/build-log.md and docs/decisions.md, and open `for:david` items.
+            3. Gather what happened from the public record: merged PRs and closed issues for the week (`gh api`), new files in docs/build-log/ and docs/decisions/, and open `for:david` items.
             4. Branch `code/chronicle-week-<end date>`. Write `docs/chronicle/<end date>-week.md`: a short story of the week for a curious resident or reporter. What shipped, what changed in the numbers (compare snapshot.json across days), what is waiting on David, and what comes next. Link every claim to its PR, issue, or file. Embed two or three screenshots using their release asset URLs: https://github.com/${{ github.repository }}/releases/download/chronicle-YYYY-MM/<date>-<page>-<width>-<theme>.webp
             5. Add a line per notable event to the bottom of docs/chronicle/timeline.md, plus one for the dispatch. Add the dispatch to the list in docs/chronicle/README.md. Add an entry at the top of docs/build-log.md.
             6. Open a PR using the repo template and merge it yourself (squash). It only adds docs, so it does not wait for David.
