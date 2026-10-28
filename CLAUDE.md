@@ -2,7 +2,7 @@
 
 A continually updated community resource hub for Morgantown and Monongalia County, WV, built on top of the work already being done by nonprofits, government, community groups and businesses.
 
-Several Claude instances work on this project: Claude Duet (background partner) and Claude Code sessions (build sessions). **Read [`docs/COORDINATION.md`](docs/COORDINATION.md) before doing anything.** It covers roles, labels, branching, and logging.
+Several Claude instances work on this project: Claude Duet (background partner) and Claude Code sessions (build sessions). **Read [`docs/CHARTER.md`](docs/CHARTER.md) and [`docs/COORDINATION.md`](docs/COORDINATION.md) before doing anything.** The charter covers the mission, the daily loop, how we measure, and what you may do on your own. Coordination covers roles, labels, branching, and logging.
 
 ## Must-follow rules
 

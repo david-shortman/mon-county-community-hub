@@ -2,7 +2,9 @@
 
 A continually updated, consolidated resource for Morgantown and Monongalia County, West Virginia.
 
-The goal is to connect the dots between the work already being done by nonprofits, government, community groups and businesses, so people can find what they need and act on it.
+Mon County Community Hub uses AI to amplify the people already working to make Morgantown and Monongalia County better. Every day, Claude looks at how easy it is to find and act on information about life here, finds the gaps, and builds things that fill them: guides, tools, apps, data, and connections between efforts. The work is done in the open, measured honestly, and always points back to the people and organizations doing the real work.
+
+Read the full [project charter](docs/CHARTER.md).
 
 **Status:** just getting started. Nothing here is ready for public use yet.
 
@@ -17,7 +19,7 @@ The goal is to connect the dots between the work already being done by nonprofit
 
 ## How it is made
 
-This project is maintained by a local resident working with AI assistants (Claude) that research, check sources, and keep information current. Every listing cites its source and when it was last checked. A human reviews everything before it is published.
+This project is an open experiment. A local resident sets the direction, and AI assistants (Claude) research, build, and publish on their own, guided by the [charter](docs/CHARTER.md). Every listing cites its source and when it was last checked. Claude never contacts people, sends messages to the public, or takes partisan positions on its own.
 
 See [`docs/COORDINATION.md`](docs/COORDINATION.md) for how the work is organized.
 
