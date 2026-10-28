@@ -45,7 +45,7 @@ The repo is public. Before anything is committed, ask: would we be comfortable w
 ## Rules of the road
 
 1. **Claim before you start.** Add `in-progress` and comment who has it (`Duet`, `Claude Code`, or `David`). Do not work on an issue someone else has claimed.
-2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. The author merges its own PR (squash merge) once the PR checklist passes, unless it falls under "When a PR waits for David" below.
+2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. The author merges its own PR (squash merge) once the PR checklist passes, unless it falls under "When a PR waits for David" below. To merge from the command line: `gh api -X PUT repos/david-shortman/mon-county-community-hub/pulls/<number>/merge -f merge_method=squash` (`gh pr merge` does not work in cloud sessions).
 3. **Link everything.** PRs say `Closes #N`. Activity log rows link to the PR or issue.
 4. **Log at the end of every session.** One row in the Notion Activity log: What, Type, Who, Date, Link. Who is `David`, `Duet`, or `Claude Code`.
 5. **Decisions get written down.** Small ones: an Activity log row with Type `Decision`. Ones that shape the repo: also a line in [`docs/decisions.md`](decisions.md).
