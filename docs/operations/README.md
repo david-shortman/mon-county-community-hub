@@ -89,7 +89,7 @@ Never work around a permission refusal or a settings problem. Report it and wait
 | `deploy-fresh` FAIL but Actions green | Pages deploy step skipped or Pages settings changed | Check the deploy job; if settings, `for:david` |
 | `links` FAIL | A source moved its page | Find the new page, re-check the fact, update the entry and its `checked` date |
 | `ics-entries` WARN | Calendar is running dry | Add dates from #17, or ask the Builder about feeds |
-| `prs-conflicts` lists `docs/build-log.md` many times | Every PR adds to the top of the same file | Rebase right before merging and keep every entry. If it keeps happening, propose a new layout (one file per entry) |
+| `prs-conflicts` lists `docs/build-log.md` many times | Every PR adds to the top of the same file | Should be rare now that build log entries are one file each in `docs/build-log/`. Rebase right before merging and keep every entry |
 
 ## Continuous monitoring (proposed)
 

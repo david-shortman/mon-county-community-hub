@@ -84,7 +84,7 @@ We will not use AI-generated images of real places or people, and we will not le
 3. **What we do first:** for high-stakes items (health, benefits, legal, deadlines), hide the item until it is re-checked.
 4. **How we fix it:** re-check the source, fix the entry, and update the `checked` date.
 5. **How we show it:** a dated "Corrected" note on the item for major errors; typos fixed without a note.
-6. **Public record:** every correction is a public GitHub issue and PR, and is listed in `docs/build-log.md`.
+6. **Public record:** every correction is a public GitHub issue and PR, and is listed in the build log (`docs/build-log/`).
 7. **What we may not act on:** opinions about which groups to list, requests without a source, or anything that would add private personal information.
 
 **Sources:**

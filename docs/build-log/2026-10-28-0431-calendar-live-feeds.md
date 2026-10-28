@@ -1,0 +1,6 @@
+# 2026-10-28: Calendar dates pulled live from public feeds
+
+- **Considered:** issue #31, making the calendar read dates from the sources themselves instead of copying them by hand. Tried feeds from the City of Morgantown, Mountaineer Food Bank, Monongalia County, WVU, and the Morgantown Public Library.
+- **Chose:** wire in every feed we could fetch and check. Three worked: the city's main calendar (iCal), the food bank's pantry calendar (JSON, Monongalia County only), and the county's calendar (JSON, recreation events and election days). The city's AgendaCenter RSS works but only gives the date an agenda was posted, not the meeting date, so it was left out. WVU's calendar refused our requests and the library's site could not be reached from the build environment, so neither is wired in.
+- **Shipped:** `site/src/lib/feeds/`, one adapter per source. Feed items merge with the hand-checked YAML (hand-checked wins on a clash), and each card now says where it came from: "Pulled from <feed> on <date>" or "Checked by hand on <date>." If a feed is down, the build logs a warning and uses the last good copy saved in the repo. `content/README.md` explains the three tiers and how to add a feed.
+- **Scoreboard:** the Deadlines page went from 7 hand-checked dates to 7 plus 38 from live feeds (about 28 in the next two months), with no hand copying.

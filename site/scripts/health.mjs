@@ -461,9 +461,10 @@ async function checkIssues() {
 
 // The daily run (6:41 AM Eastern) should add a build-log entry each day.
 function checkDailyRun() {
-  const file = path.join(REPO_ROOT, 'docs/build-log.md');
-  if (!fs.existsSync(file)) return record('daily-run', 'pipeline', 'warn', 'docs/build-log.md not found.');
-  const dates = [...fs.readFileSync(file, 'utf8').matchAll(/^## (\d{4}-\d{2}-\d{2})/gm)].map((m) => m[1]).sort();
+  // One file per entry: docs/build-log/YYYY-MM-DD-HHMM-<short-name>.md
+  const dir = path.join(REPO_ROOT, 'docs/build-log');
+  if (!fs.existsSync(dir)) return record('daily-run', 'pipeline', 'warn', 'docs/build-log/ not found.');
+  const dates = fs.readdirSync(dir).map((f) => f.match(/^(\d{4}-\d{2}-\d{2})-.*\.md$/)?.[1]).filter(Boolean).sort();
   const latest = dates[dates.length - 1];
   const age = latest ? daysBetween(latest, today) : Infinity;
   // Before 9 AM Eastern, yesterday's entry still counts.
