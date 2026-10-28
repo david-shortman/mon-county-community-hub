@@ -73,7 +73,7 @@ Five rules hold the picture together:
 
 ## 2. Feeds and ingestion, with provenance
 
-Three tiers already exist on paper (PR #53): live feed, watched page, hand-checked. The target keeps them and makes provenance the same across all three. See [ADR 0002](adr/0002-provenance-on-every-record.md).
+Three tiers exist since PR #53: live feed, watched page, hand-checked. The target keeps them and makes provenance the same across all three. See [ADR 0002](adr/0002-provenance-on-every-record.md).
 
 **Provenance fields on every record:**
 
@@ -88,7 +88,7 @@ sources:
 
 Hand entries keep writing just `url` and `checked`; `method: hand` is the default. Feed records get the rest filled in by the loader.
 
-**Where ingestion code lives.** Adapters move from `site/src/lib/feeds/` to `packages/ingest/` once PR #53 is merged and stable, so the API and MCP server can use the same records the site does. One adapter per file, found by folder listing rather than a shared array, so adding a feed never edits a shared line. This is a proposal for the Builder's lane, filed as an issue, not a refactor done today.
+**Where ingestion code lives.** Adapters move from `site/src/lib/feeds/` to `packages/ingest/` once PR #53 has run for a while and is stable, so the API and MCP server can use the same records the site does. One adapter per file, found by folder listing rather than a shared array, so adding a feed never edits a shared line. This is a proposal for the Builder's lane, filed as an issue, not a refactor done today.
 
 **Fetch at build time, or commit snapshots?** Today feeds are fetched during each build, with committed snapshots as a fallback. That is fine for one page. As more surfaces read feed data, a better split is: a scheduled job fetches feeds and commits normalized snapshots through a PR, and the build reads only from the repo. Tradeoff: one more PR a day, but every build is repeatable, every change to feed data shows up in a diff, and a feed that goes quiet becomes visible. Decide once there are five or more feeds.
 

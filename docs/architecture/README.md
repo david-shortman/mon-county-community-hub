@@ -12,7 +12,7 @@ This is a plain map of the system as it stands on 2026-10-28. It is for anyone j
 | **Content** | Resource data as YAML, one file per entry: `calendar/` (dates and deadlines), `orgs/` and `resources/` (empty so far). Licensed CC BY 4.0. Draft schema "v0" | `content/`, schema in [content/README.md](../../content/README.md) |
 | **Content checker** | A Node script that blocks entries with missing fields, bad dates, no source, or em dashes. Warns on sources older than 6 months | `site/scripts/check-content.mjs` |
 | **Site** | An Astro static site: home, Deadlines page, About, and a `calendar.ics` feed. Reads `content/` at build time. MIT licensed | `site/` |
-| **Live feeds** (in review, PR #53) | Adapters that fetch public calendars (City of Morgantown, Mountaineer Food Bank, Monongalia County) at build time, with a committed "last good copy" for when a feed is down | `site/src/lib/feeds/` |
+| **Live feeds** (PR #53, merged 2026-10-28) | Adapters that fetch public calendars (City of Morgantown, Mountaineer Food Bank, Monongalia County) at build time, with a committed "last good copy" for when a feed is down | `site/src/lib/feeds/` |
 | **Hosting** | GitHub Pages at `david-shortman.github.io/mon-county-community-hub`. No custom domain yet | Repo settings |
 | **Site workflow** | Builds and deploys on every push to `main`, checks every PR, and rebuilds every morning at 10:17 UTC so past dates drop off | `.github/workflows/site.yml` |
 | **Claude workflow** | Runs Claude Code in GitHub Actions when someone with repo access mentions `@claude`, or when a `for:code` issue gets the `up-next` label | `.github/workflows/claude.yml` |
@@ -31,7 +31,7 @@ This is a plain map of the system as it stands on 2026-10-28. It is for anyone j
   Agency web pages  --Duet/Code-->  content/*.yaml  --+
   (hand-checked)      PR + review                     |
                                                       +--> check-content --> astro build --> GitHub Pages --> web pages
-  Public feeds (iCal, JSON) -----------(fetched at build time, PR #53)-+                                  --> calendar.ics
+  Public feeds (iCal, JSON) -----------(fetched at build time)-------+                                  --> calendar.ics
                                        fallback: committed snapshots                                         (phones, Google,
                                                                                                              Outlook)
 ```
