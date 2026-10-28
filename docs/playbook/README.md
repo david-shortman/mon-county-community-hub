@@ -4,7 +4,7 @@ Proven practices from civic tech, open data, nonprofit work, evaluation, and fac
 
 Every session should skim this page before picking work in the [daily loop](../CHARTER.md#how-claude-works-the-daily-loop). If a practice here conflicts with the [charter](../CHARTER.md) or [COORDINATION.md](../COORDINATION.md), those win.
 
-## The 18 practices we adopt
+## The 19 practices we adopt
 
 **Build for residents**
 
@@ -36,11 +36,12 @@ Every session should skim this page before picking work in the [daily loop](../C
 14. **Disclose AI, and never state a fact a source does not support.** Say plainly that AI writes the site. Every fact traces to a source the agent opened. [Detail](trust-and-ai.md#disclose-ai-involvement-in-plain-words), [sourcing rule](trust-and-ai.md#treat-ai-output-as-unchecked-until-sourced)
 15. **Fix errors in the open.** Publish a corrections policy and put a "report a problem" link on every listing. [Detail](trust-and-ai.md#publish-a-corrections-policy-and-follow-it)
 
-**Reach people through those they trust**
+**Reach people through those they trust, and directly**
 
-16. **Helpers are the front door.** Make librarians, pantry staff, health workers, and 211 faster at their jobs instead of competing for attention. [Detail](reaching-people.md#principles)
+16. **Two front doors.** Make librarians, pantry staff, health workers, and 211 faster at their jobs, and let anyone find help on their own. Stay open to new ways of sharing information. [Detail](reaching-people.md#principles)
 17. **Fresh, checked, and easy to pass on.** Show the checked date and let anyone print, text, or share a listing in one tap. [Detail](reaching-people.md#1-make-it-easy-to-pass-on)
-18. **Self-serve first, a person always on offer, never shame.** Say what happens next on every listing, and make asking for help feel normal. [Detail](reaching-people.md#6-say-what-happens-next)
+18. **Say what happens next.** Every listing says what to bring, what the first call is like, and who can help, offered as a normal choice. [Detail](reaching-people.md#6-say-what-happens-next)
+19. **Open any hour, no name needed, no judgment.** Everything works on a phone at 2 a.m. without an account, and the words make asking feel normal. [Detail](reaching-people.md#9-a-what-help-might-i-get-path-open-any-hour)
 
 ## The areas
 
@@ -53,7 +54,7 @@ Every session should skim this page before picking work in the [daily loop](../C
 | [trust-and-ai.md](trust-and-ai.md) | AI disclosure, sourcing rules, review of high-stakes information, corrections, reporting problems, transparency |
 | [landscape.md](landscape.md) | Living map of peer projects putting AI to work for communities, including failures and shut-downs, with what we can adopt and how we could amplify each |
 | [funder-lens-cities-deliver.md](funder-lens-cities-deliver.md) | What the Cities Deliver AI program funds, its seven principles mapped to our charter, lessons to adopt, and project directions for Mon County |
-| [reaching-people.md](reaching-people.md) | How the hub reaches residents through trusted helpers, warm handoffs, print and text, and what needs David's yes |
+| [reaching-people.md](reaching-people.md) | How the hub reaches residents through trusted helpers and directly at any hour: warm handoffs, print and text, no-name and after-hours help, and what needs David's yes |
 
 ## Keeping this current
 
