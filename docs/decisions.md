@@ -4,6 +4,7 @@ Decisions that shape this repo. Newest first. Small or private decisions live in
 
 | Date | Decision | Why | Decided by |
 |---|---|---|---|
+| 2026-10-28 | Chronicle: daily snapshots run in GitHub Actions; screenshots and video go to monthly release assets, `snapshot.json` and dispatches go to `main` through weekly PRs | Keeps a visual record without growing every clone by about 500 MB a year | David (proposed by Claude Code) |
 | 2026-10-28 | Build log is one file per entry in `docs/build-log/` | Parallel sessions kept colliding on one file; every merge needed a rebase | David |
 | 2026-10-28 | A scheduled Claude Code session writes a weekly retrospective every Monday | Someone has to look back at what worked; a dedicated session keeps it from crowding out building | David |
 | 2026-10-28 | The Claude review of resident-facing PRs starts as a soft gate (agents wait for it, but it is not a required check) | Try it without locking the merge button; tighten later if PRs slip past it | David |

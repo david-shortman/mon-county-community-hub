@@ -58,4 +58,14 @@ Treat the chronicle as project memory:
 
 ## Storage
 
-Each day adds about 1.3 MB. That is fine for a while, but it adds up to roughly 500 MB a year on `main`, which would make every clone slow. See the automation proposal for the plan to move daily images to a separate `chronicle` branch, keeping only dispatch images and `snapshot.json` on `main`.
+A day of screenshots and video is about 1.3 MB. In git that adds up to roughly 500 MB a year, and every clone would carry all of it forever, even after the files are deleted.
+
+So from day two on:
+
+- **Images and video live in monthly GitHub releases**, named `chronicle-YYYY-MM`, as assets like `2026-11-02-home-390-light.webp`. They are not in git, so clones stay small. Dispatches embed them by URL: `https://github.com/david-shortman/mon-county-community-hub/releases/download/chronicle-2026-11/2026-11-02-home-390-light.webp`.
+- **`snapshot.json` files come into `main`** with each weekly dispatch, under `snapshots/<date>/`. They are small (under 10 KB a day) and are what agents read as memory.
+- **Day one stays in `main`** as it is, since it is the first record and only 1.3 MB.
+
+The [Chronicle workflow](../../.github/workflows/chronicle.yml) does this: a daily job after the morning site rebuild, and a weekly job where Claude writes the dispatch.
+
+We considered a separate `chronicle` branch instead. It is simpler, but a normal `git clone` downloads every branch, so it would still grow every clone. Release assets avoid that.
