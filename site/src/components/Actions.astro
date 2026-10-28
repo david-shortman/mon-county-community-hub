@@ -11,7 +11,7 @@ const ctx = about ? `: ${about}` : '';
 ---
 <div class="actions">
   {link && <a class="btn btn-primary" href={link}><Icon name="open" /><span>{linkLabel}<span class="sr-only">{ctx}</span></span></a>}
-  {phone && <a class="btn btn-wide" href={telHref(phone)}><Icon name="phone" /><span>Call{phoneLabel && <span class="sr-only"> {phoneLabel} at</span>} <span class="nowrap">{phone}</span></span></a>}
+  {phone && <a class="btn btn-wide" href={telHref(phone)}><Icon name="phone" /><span>Call <span class="nowrap">{phone}</span>{phoneLabel && <span class="sr-only">, {phoneLabel}</span>}</span></a>}
   {place && <a class="btn" href={mapsUrl(place)}><Icon name="pin" /><span>Directions<span class="sr-only"> to {place} (opens a map)</span></span></a>}
   {ics && <a class="btn" href={ics}><Icon name="calendar-add" /><span>Add to calendar<span class="sr-only">{ctx}</span></span></a>}
   {shareUrl && <button class="btn share" type="button" hidden data-url={shareUrl} data-title={shareTitle}><Icon name="share" /><span><span class="label">Share</span><span class="sr-only">{ctx}</span></span></button>}
