@@ -60,6 +60,9 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       nav.main a { display: inline-flex; align-items: center; min-height: 24px; }
       nav.main a[aria-current="page"] { color: var(--fg); font-weight: 700; text-decoration-thickness: 3px; }
       nav.main .icon, nav.main .ridge { display: none; }
+      .skip { position: absolute; left: 8px; top: -100px; z-index: 20; padding: 10px 14px; background: var(--card); border: 2px solid var(--accent); border-radius: 8px; }
+      .skip:focus { top: 8px; }
+      main:focus { outline: none; }
       .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
       /* Phones: the menu is a tab bar at the bottom, in reach of a thumb. */
       @media (max-width: 40rem) {
@@ -71,7 +74,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         nav.main { position: fixed; z-index: 10; inset: auto 0 0 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0;
           background: var(--card); padding: 4px max(4px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(4px, env(safe-area-inset-left)); }
         nav.main .ridge { display: block; position: absolute; left: 0; right: 0; bottom: 100%; height: 14px; }
-        nav.main a { flex-direction: column; justify-content: center; gap: 2px; min-height: 56px; font-size: 0.8rem; font-weight: 600; text-decoration: none; color: var(--muted); }
+        nav.main a { flex-direction: column; justify-content: center; gap: 2px; min-height: 56px; font-size: 0.875rem; font-weight: 600; text-decoration: none; color: var(--muted); }
         nav.main .icon { display: block; width: 26px; height: 26px; padding: 2px 10px; box-sizing: content-box; border-radius: 999px; }
         nav.main a[aria-current="page"] { color: var(--accent); font-weight: 700; }
         nav.main a[aria-current="page"] .icon { background: var(--accent-bg); }
@@ -104,6 +107,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     </style>
   </head>
   <body>
+    <a class="skip" href="#main">Skip to main content</a>
     <header class="site">
       <div class="wrap">
         <a class="brand" href={`${base}/`}>Mon County Community Hub</a>
@@ -116,7 +120,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       </div>
       <RidgeLine class="header-ridge" />
     </header>
-    <main class="wrap"><slot /></main>
+    <main class="wrap" id="main" tabindex="-1"><slot /></main>
     <footer class="site">
       <div class="wrap">
         <p>An open experiment for Morgantown and Monongalia County, WV. Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>

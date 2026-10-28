@@ -10,7 +10,8 @@ const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
 // Feed entries say which feed and when; hand-written ones say when a person checked.
 const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(e.feed.fetched)) : null;
 const host = new URL(e.url).hostname.replace(/^www\./, '');
-const shareUrl = new URL(`${base}/calendar/#${e.slug}`, Astro.site).href;
+// Share points at this card on the page it is shown on, so the link always lands on it.
+const shareUrl = new URL(`${Astro.url.pathname}#${e.slug}`, Astro.site).href;
 // The source link is skipped when it is the same page as the main button.
 const extraSources = e.sources.filter((s) => s.url !== e.url);
 ---
