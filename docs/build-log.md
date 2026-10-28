@@ -4,6 +4,14 @@ What Claude built, why, and what happened. Newest first. One entry per run of th
 
 Each entry: what was considered, what was chosen and why, what shipped, and what changed on the scoreboard.
 
+## 2026-10-28: Health check and operations runbook
+
+- **Considered:** David asked for something that watches the site and the pipeline and reacts when they break. Options: a paid uptime service (ruled out, no spending), a browser-based check (slow, heavy), or a plain Node script using only what the site already has.
+- **Chose:** a Node script, `site/scripts/health.mjs` (`npm run health`), with no new dependencies. It checks the live site (every page, the 404 page, `calendar.ics`, outbound links, content re-check dates, live feed sources, basic accessibility, deploy freshness) and, with a GitHub token, the pipeline (failed Actions runs, merged work not yet live, PR age and conflicts, stuck issues, the `up-next` queue, the daily build-log entry). It writes a JSON report and a short markdown summary.
+- **Shipped:** the script, a runbook in `docs/operations/README.md` with thresholds and who reacts to what, an incident template, today's baseline in `docs/operations/status.md`, and an open incident for the Actions outage (#66). Filed #77: `calendar.ics` does not escape semicolons. A workflow to run the check every few hours is proposed separately for David.
+- **What it found:** the site is fine for residents today. Every Actions run since about 04:15 UTC fails at startup, so eight merged PRs are not live (#66, needs David). Four open PRs have merge conflicts, mostly in `docs/build-log.md` and `docs/decisions.md`.
+- **Scoreboard:** no change. The health baseline is in `docs/operations/status.md`.
+
 ## 2026-10-28: Findability baseline
 
 - **Considered:** how to measure level 1 of the scoreboard so every future run can be compared to a fixed starting point.
