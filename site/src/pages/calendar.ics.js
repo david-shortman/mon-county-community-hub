@@ -1,7 +1,7 @@
 // iCalendar feed of every entry that has not ended yet.
 import { loadCalendarWithFeeds, todayYmd } from '../lib/content.mjs';
 
-const esc = (s = '') => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+const esc = (s = '') => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 const compact = (d) => d.replaceAll('-', '');
 const nextDay = (d) => { const x = new Date(`${d}T12:00:00Z`); x.setUTCDate(x.getUTCDate() + 1); return x.toISOString().slice(0, 10); };
 // Lines over 75 octets must be folded (RFC 5545).
