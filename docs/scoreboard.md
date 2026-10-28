@@ -1,0 +1,135 @@
+# Scoreboard
+
+How we know whether the project is helping. The [charter](CHARTER.md#how-we-measure) sets four levels, from what Claude can move by itself to what only the community can give us. Every run of the daily loop tries to move these numbers.
+
+| Level | Status | Latest |
+|---|---|---|
+| 1. Findability | **Measured** | **76 / 100** on 2026-10-28 (baseline) |
+| 2. Use | Not measured yet | No public tools to count yet |
+| 3. Action | Not measured yet | None |
+| 4. Recognition | Not measured yet | None |
+
+## Level 1: Findability
+
+### Baseline: 76 out of 100 (2026-10-28)
+
+We asked 32 questions a Mon County resident might have, across 10 topic areas. For each one we searched the web in plain words, followed links like a person on a phone, and scored the best answer we could reach.
+
+- Questions: [`content/findability/questions.yaml`](../content/findability/questions.yaml)
+- Results, with the best URL and a note for every question: [`content/findability/2026-10-28.yaml`](../content/findability/2026-10-28.yaml)
+
+**What the number means.** 76 does not mean things are mostly fine. It scores the *best* answer a determined person could reach, often after rewording a search or digging through a site. The weakest part is the first step: only 5 of 32 questions had a correct local answer in the top 3 search results. In 6 questions, a plain search did not lead to a usable local answer at all.
+
+**Score by topic** (0 to 100, lowest first):
+
+| Topic | Score | Questions |
+|---|---|---|
+| Recycling and disposal | 60 | 3 |
+| Transportation | 70 | 2 |
+| Small business | 73 | 3 |
+| Community health data | 73 | 3 |
+| Philanthropy and volunteering | 76 | 3 |
+| Local government | 77 | 4 |
+| Help with bills and food | 78 | 4 |
+| Housing | 80 | 3 |
+| Civic participation | 82 | 3 |
+| Medical care | 83 | 4 |
+
+**Score by dimension** (average out of 3): found 2.0, steps 2.5, current 2.2, plain language 2.1, works on a phone 2.7.
+
+**Patterns we saw:**
+
+- **Search sends people the wrong way.** Top results were often paid directories, out-of-state places with similar names (Mono County CA, Morganton NC, Mountain Line in Montana), old news stories, or AI meeting summaries, ahead of the local office or nonprofit that actually helps.
+- **Dead links on official sites.** 7 questions hit a page that no longer exists (404 or 410), including the city's recycling guide and waste page, the city's open board seats page, and a utility hazardous waste page.
+- **Answers locked in PDFs.** 11 questions had their key detail (forms, fees, bus times, sample ballots, glass rules) only in a PDF.
+- **No dates.** Many good pages carry no "last updated" date, so a resident cannot tell if they are current.
+- **Phones mostly work.** Most pages fit a phone screen. The misses were PDFs and a few fixed-width or wide pages.
+
+### The 5 worst gaps
+
+| Question | Score | What is missing |
+|---|---|---|
+| When is trash and recycling pickup on my street? (q19) | 8 / 15 | No pickup-day map or street list loads, and the city's trash page link is dead. Residents have to call the hauler. |
+| Can I put glass in my recycling bin? (q21) | 8 / 15 | The only clear rule is in a 2019 PDF. No current page confirms it. See #25. |
+| Is crime going up or down in Morgantown? (q23) | 9 / 15 | No official crime trend page. The only trend data found is third-party and ends in 2018. |
+| Which bus gets me to the hospital, and when? (q28) | 9 / 15 | Stop times are only in a PDF marked "Effective August, 2021". |
+| Where can I stay tonight if I have nowhere to go? (q26) | 10 / 15 | Search shows only news stories. No page lists shelter and warming options with hours. |
+
+Also at 10: selling food at a market or event (q11, everything is in PDFs) and donating furniture or clothes (q18, no list of who takes what).
+
+### The 5 best-served areas
+
+| Question | Score | Why it works |
+|---|---|---|
+| I'm being evicted. Where can I get free legal help? (q25) | 13 / 15 | Legal Aid of West Virginia has a plain page with forms, videos and a helpline. |
+| How do I register to vote, and where is my polling place? (q30) | 13 / 15 | The city's voter page is the top result and links to state registration and polling places. |
+| How do I report a pothole or broken streetlight? (q14) | 13 / 15 | The city's service request page clearly points to Morgantown 311. |
+| I have no insurance. Where can I see a doctor? (q05) | 13 / 15 | Every top result points to Milan Puskar Health Right, whose site says who qualifies and how to come in. |
+| I need a dentist but have no dental insurance. (q08) | 13 / 15 | The Health Department's dental clinic page says plainly it takes Medicaid and what it costs without insurance. |
+
+Eleven questions tied at 13. These five were picked to show a spread of topics. Medical care is the best-served topic overall.
+
+### Ideas filed from this baseline
+
+Each worst gap became a scored idea issue (people helped, amplifies existing work, effort, risk; max 12). Duet ranks the queue.
+
+| Issue | Idea | Score | For |
+|---|---|---|---|
+| #58 | Trash, recycling and drop-off guide | 11 | code |
+| #64 | One page for help paying utility bills | 11 | code |
+| #60 | Food pantry finder with days and hours | 10 | duet |
+| #63 | Where to donate what | 10 | duet |
+| #59 | Where to stay tonight | 9 | duet |
+| #61 | Phone-friendly bus times to key places | 9 | code |
+| #62 | "How are we doing" pages for crime, health, schools | 8 | code |
+
+### Method (rubric v1)
+
+**Testing a question.**
+
+1. Search the web using the exact `search` words in `questions.yaml`. Note the domains of the top 3 results.
+2. Follow results the way a person on a phone would. If the first search fails, try one reworded search. Find the best correct, local, actionable answer.
+3. Load the best answer at 390px wide (an iPhone-sized screen) with `node content/findability/mobile-check.js <url>`. It reports whether the page is set up for phones, whether it scrolls sideways, and the latest year mentioned. Some sites block automated browsers. Then check by hand and say so in the note.
+4. Score it, and record the best URL, the date checked, and a one-line note.
+
+**Scoring.** Five dimensions, 0 to 3 each, 15 points per question.
+
+| Points | Found | Steps | Current | Plain language | Works on a phone |
+|---|---|---|---|---|---|
+| 3 | Correct local answer in the top 3 results of the first search | Answer is on the page the result opens (0 to 1 taps) | Dated this year, shows this season's info, or clearly maintained | Short plain sentences and a clear next step | Fits the screen, readable, answer is a web page |
+| 2 | Found, but lower in results or after one reworded search | 2 to 3 taps | Dated last year, or undated with no sign of staleness | Mostly plain, some jargon, next step findable | Small problems: some sideways scroll, crowded menus, popups |
+| 1 | Only partial, generic (state or national), or conflicting | 4 or more taps, or you must call to learn the answer | Two or more years old, or some broken links or old details | Dense, bureaucratic, or buried in a PDF | Desktop-only layout, or the answer is a PDF or image |
+| 0 | Not found, or wrong (then every other dimension is 0) | Could not reach it | Clearly out of date or dead | Hard to understand, no next step | Does not load or cannot be used |
+
+A topic score and the overall score are the points earned divided by the points possible, on a 0 to 100 scale. Each question counts equally.
+
+**Limits of this baseline.** Search results change by day and by person, and our search tool is not the same as Google on a resident's phone. One run was done by four Claude testers working in parallel with the same rubric, so some scoring judgment varies. Treat a change of a few points as noise. A change in a topic score, or a question moving from "not found" to "found", is a real signal.
+
+### How to rerun
+
+1. Copy the latest results file to `content/findability/<today>.yaml` and update `date`.
+2. For each question, repeat the four testing steps above with the same `search` words, and overwrite the scores, URL, note and `checked` date.
+3. Run `python3 content/findability/score.py content/findability/<today>.yaml` to get the overall, topic and dimension scores.
+4. Add a row to the history table below and a short line in the build log on what moved and why.
+
+Rules for keeping runs comparable: keep question ids and `search` words fixed. Add new questions with new ids rather than rewording old ones. Retire a question by adding `retired: <date>`, not by deleting it. If the rubric changes, bump `rubric_version` and note it in the history table, because scores across versions are not directly comparable.
+
+Once the hub has pages that answer these questions, a run should also check whether a hub page shows up for each search. That is how the project's own work shows up in this score.
+
+### History
+
+| Date | Overall | Questions | Rubric | Notes |
+|---|---|---|---|---|
+| 2026-10-28 | 76 | 32 | v1 | Baseline, before the hub published any guides |
+
+## Level 2: Use (not measured yet)
+
+Whether people use what we build. To be measured as aggregate counts only, with no tracking of individuals: page views per guide, calendar feed subscriptions, tool uses, searches on the site, and API or MCP calls. This needs a privacy-respecting analytics choice first, which is a `for:david` decision because it may involve an outside service. Until then: none.
+
+## Level 3: Action (not measured yet)
+
+Whether it led people to do something: volunteer sign-ups, voter registrations, program applications, event turnout, donations to local groups. To be measured through tagged outbound links (counted in aggregate) and numbers partner organizations choose to report. Asking partners is David's job. Until then: none.
+
+## Level 4: Recognition (not measured yet)
+
+Whether the community says it helped: resident feedback, corrections and suggestions submitted, a local group linking to or using the work, news coverage. To be measured by logging each instance here with a date and a public link where one exists (never private individuals' names). Until then: none.

@@ -60,6 +60,46 @@ To roll a yearly item forward, copy the file, change the slug, dates, and source
 
 Run `npm run check-content` in `site/` to validate entries.
 
+### Where calendar dates come from: three tiers
+
+Best first. Use the highest tier a source supports.
+
+1. **Live feed.** The source publishes an iCal, RSS, or JSON feed. The site fetches it every time it builds (every morning) and turns each item into a calendar entry. The card says "Pulled from <feed> on <date>." Code: `site/src/lib/feeds/`.
+2. **Watched page.** The source has a web page with dates but no feed. A scheduled agent run reads the page and opens a PR with YAML entries when the dates change. Each entry lists that page as its source. (Not built yet.)
+3. **Hand-checked.** A YAML file in `calendar/`, for dates published once (state law, one-off notices). The card says "Checked by hand on <date>." Re-check when it goes stale.
+
+If a hand-checked entry and a feed entry have the same `slug`, the hand-checked one wins. Use this to correct or add detail to a feed item.
+
+Live feeds wired in now:
+
+| Feed | What we keep | Feed URL |
+|---|---|---|
+| City of Morgantown calendar | Everything on the Main Calendar (mostly public meetings, plus city events like Trick-or-Treat) | `https://www.morgantownwv.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar` |
+| Mountaineer Food Bank pantry calendar | Mobile pantries the food bank files under Monongalia County | `https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county` |
+| Monongalia County calendar | Parks and recreation events and election days. Repeating events (like the weekly Commission meeting) are left out because we do not expand repeat rules, and we never guess a date | The JSON behind `https://www.monongaliacounty.gov/calendar.php` |
+
+Feed entries only say what the feed says. When a feed does not say who an item is for or what to do, the entry says where it was listed and "See the event page for details."
+
+### If a feed is down
+
+The build never fails because of a feed. It logs a warning and uses the last good copy saved in `site/src/lib/feeds/snapshots/<id>.json`. If there is no saved copy, that feed is skipped. Refresh the saved copies with `npm run update-feeds` in `site/` and commit the changed files. `npm run check-content` also checks the saved copies.
+
+### Adding a feed adapter
+
+1. Find the feed and fetch it yourself first. Do not add a feed you could not fetch.
+2. Add `site/src/lib/feeds/adapters/<id>.mjs`. Export an object with:
+   - `id`: short name, also the snapshot file name
+   - `name`: shown on cards, like "City of Morgantown calendar"
+   - `org_name`: who publishes the feed
+   - `page_url`: the human page people can check
+   - `feed_url` (or `feedUrl(today)` if the URL needs the date)
+   - `format`: `'text'` (iCal, RSS) or `'json'`
+   - `parse(raw)`: returns entries with `title`, `slug`, `starts`, `ends`, `org_name`, `who_it_is_for`, `what_to_do`, `url`, `topics`. The loader adds `sources` and the fetched time.
+3. For iCal, use `parseIcs` and `readIcsDate` from `site/src/lib/feeds/ical.mjs`. Clean text with `plain()` from `util.mjs` (it strips HTML and em dashes).
+4. Start each slug with a prefix for the source and end it with the date, so slugs stay unique and stable.
+5. Add the adapter to `ADAPTERS` in `site/src/lib/feeds/index.mjs`, run `npm run update-feeds`, `npm run check-content`, and `npm run build`, and commit the new snapshot.
+6. Add a row to the table above.
+
 ## Rules
 
 - Only public organizational contact details. Never a private person's info.

@@ -9,6 +9,40 @@ Each entry: what was considered, what was chosen and why, what shipped, and what
 - **Considered:** committing daily screenshots to `main`, a separate `chronicle` branch, or GitHub release assets.
 - **Chose:** release assets, one release per month, so clones stay small. Only the small `snapshot.json` files and the dispatches go into `main`.
 - **Shipped:** a proposed `.github/workflows/chronicle.yml` (daily snapshot after the morning rebuild, weekly dispatch written by Claude). It adds a workflow and uses the Claude token secret, so it waits for David.
+## 2026-10-28: Health check and operations runbook
+
+- **Considered:** David asked for something that watches the site and the pipeline and reacts when they break. Options: a paid uptime service (ruled out, no spending), a browser-based check (slow, heavy), or a plain Node script using only what the site already has.
+- **Chose:** a Node script, `site/scripts/health.mjs` (`npm run health`), with no new dependencies. It checks the live site (every page, the 404 page, `calendar.ics`, outbound links, content re-check dates, live feed sources, basic accessibility, deploy freshness) and, with a GitHub token, the pipeline (failed Actions runs, merged work not yet live, PR age and conflicts, stuck issues, the `up-next` queue, the daily build-log entry). It writes a JSON report and a short markdown summary.
+- **Shipped:** the script, a runbook in `docs/operations/README.md` with thresholds and who reacts to what, an incident template, today's baseline in `docs/operations/status.md`, and an open incident for the Actions outage (#66). Filed #77: `calendar.ics` does not escape semicolons. A workflow to run the check every few hours is proposed separately for David.
+- **What it found:** the site is fine for residents today. Every Actions run since about 04:15 UTC fails at startup, so eight merged PRs are not live (#66, needs David). Four open PRs have merge conflicts, mostly in `docs/build-log.md` and `docs/decisions.md`.
+- **Scoreboard:** no change. The health baseline is in `docs/operations/status.md`.
+
+## 2026-10-28: Findability baseline
+
+- **Considered:** how to measure level 1 of the scoreboard so every future run can be compared to a fixed starting point.
+- **Chose:** a fixed set of 32 resident questions across 10 topic areas, each tested with a plain web search and a phone-sized browser, and scored 0 to 3 on five things: found, steps, current, plain language, works on a phone.
+- **Shipped:** the question set, the first run's results with a best URL and note for every question, a scoring script, a phone-width page checker, and the [scoreboard](scoreboard.md). Filed seven scored ideas for the worst gaps (#58 to #64).
+- **Scoreboard:** findability baseline is **76 / 100**. Recycling and disposal is lowest (60), medical care highest (83). Only 5 of 32 questions had a correct local answer in the top 3 search results. Worst single questions: trash pickup day and glass recycling (8 / 15 each).
+
+## 2026-10-28: Architecture map, target, and decision records
+
+- **Considered:** letting each new site, app, and feed grow its own data and code, versus one plan that every surface follows. With several sessions building at once and the charter calling for APIs and MCP servers, the plan had to come first.
+- **Chose:** a static-first design: `content/` stays the one source of truth, checked by JSON Schemas; every record carries the same provenance fields; the build publishes a versioned JSON API on GitHub Pages (which already allows cross-site reads); a read-only MCP server reads that API; shared code goes in `packages/`, extra surfaces in `apps/`, and new tools start as pages in the main site.
+- **Shipped:** [`docs/architecture/`](architecture/README.md): a map of what exists today and its risks, the [target for the next 6 to 12 months](architecture/target.md), and six proposed decision records (data model, provenance, API and MCP, repo layout, agent ownership, hosting and cost). Filed eight roadmap issues in order, #69 to #76.
+- **Scoreboard:** no change. This is groundwork so later builds can be counted and reused.
+
+## 2026-10-28: Calendar dates pulled live from public feeds
+
+- **Considered:** issue #31, making the calendar read dates from the sources themselves instead of copying them by hand. Tried feeds from the City of Morgantown, Mountaineer Food Bank, Monongalia County, WVU, and the Morgantown Public Library.
+- **Chose:** wire in every feed we could fetch and check. Three worked: the city's main calendar (iCal), the food bank's pantry calendar (JSON, Monongalia County only), and the county's calendar (JSON, recreation events and election days). The city's AgendaCenter RSS works but only gives the date an agenda was posted, not the meeting date, so it was left out. WVU's calendar refused our requests and the library's site could not be reached from the build environment, so neither is wired in.
+- **Shipped:** `site/src/lib/feeds/`, one adapter per source. Feed items merge with the hand-checked YAML (hand-checked wins on a clash), and each card now says where it came from: "Pulled from <feed> on <date>" or "Checked by hand on <date>." If a feed is down, the build logs a warning and uses the last good copy saved in the repo. `content/README.md` explains the three tiers and how to add a feed.
+- **Scoreboard:** the Deadlines page went from 7 hand-checked dates to 7 plus 38 from live feeds (about 28 in the next two months), with no hand copying.
+
+## 2026-10-28: Funder lens on Cities Deliver
+
+- **Considered:** applying to Cities Deliver (#42). The program requires a city of 50,000 or more; Morgantown had 30,347 in 2020, so we are probably not eligible.
+- **Chose:** to learn from the program anyway, since it lays out clearly what a major AI-for-cities funder thinks good work looks like.
+- **Shipped:** [docs/playbook/funder-lens-cities-deliver.md](playbook/funder-lens-cities-deliver.md): focus areas, the example projects in Cali, Cape Town, and Rio, their seven principles mapped against our charter with gaps, seven lessons to adopt now, and project directions for the needs register to test.
 - **Scoreboard:** no change.
 
 ## 2026-10-28: The chronicle, starting with day one
@@ -17,6 +51,7 @@ Each entry: what was considered, what was chosen and why, what shipped, and what
 - **Chose:** a chronicle in `docs/chronicle/`: daily snapshots of the live site and project numbers, a running timeline, and short dispatches.
 - **Shipped:** the [day one dispatch](chronicle/2026-10-28-day-one.md), the first snapshot (12 screenshots at phone and laptop width in light and dark mode, a 14 second walkthrough video, and `snapshot.json` with issue, PR, commit and calendar counts, about 1.3 MB), a seeded [timeline](chronicle/timeline.md), and `site/scripts/chronicle.mjs` to repeat it for any date. A separate PR for David proposes running it daily in GitHub Actions.
 - **Scoreboard:** no change. This records state; it does not measure findability.
+
 ## 2026-10-28: Landscape of peer AI civic projects
 
 - **Considered:** a lead list of 16 projects putting AI to work for communities, from the coordinating session at David's request, plus a search for West Virginia and Appalachian efforts.
