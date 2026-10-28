@@ -29,6 +29,7 @@ const pairs = [
   ['fg', 'bg', 'text'], ['fg', 'card', 'text'], ['fg', 'accent-bg', 'text'],
   ['muted', 'bg', 'text'], ['muted', 'card', 'text'], ['muted', 'accent-bg', 'text'],
   ['accent', 'bg', 'text'], ['accent', 'card', 'text'], ['accent', 'accent-bg', 'text'],
+  ['card', 'accent', 'text'],
   ['brick', 'bg', 'non-text'], ['brick', 'accent-bg', 'non-text'],
   ['ridge', 'bg', 'decorative'], ['line', 'bg', 'decorative'], ['line', 'card', 'decorative'],
 ];

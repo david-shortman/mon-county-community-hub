@@ -24,6 +24,10 @@ for (const e of loadCalendar()) {
   if (e.ends < e.starts) errors.push(`${where}: ends is before starts`);
   if (e.url && !isUrl(e.url)) errors.push(`${where}: url is not a web link`);
   if (!e.sources?.length) errors.push(`${where}: needs at least one source`);
+  // Optional action fields. Only use a phone or place the source itself publishes.
+  if (e.phone && !/^\d{3}-\d{3}-\d{4}$/.test(String(e.phone))) errors.push(`${where}: phone must look like 304-555-0100`);
+  if (e.phone_label && !e.phone) errors.push(`${where}: phone_label without phone`);
+  if (e.place && (typeof e.place !== 'string' || !/,/.test(e.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);
   for (const s of e.sources ?? []) {
     if (!isUrl(s.url)) errors.push(`${where}: source url is not a web link`);
     if (!isDate(s.checked)) errors.push(`${where}: source needs a checked date (YYYY-MM-DD)`);

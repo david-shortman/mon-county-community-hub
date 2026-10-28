@@ -7,5 +7,7 @@ export default defineConfig({
   site: 'https://david-shortman.github.io',
   base: '/mon-county-community-hub',
   trailingSlash: 'ignore',
+  // Inline the CSS so a phone on a slow connection paints in one request.
+  build: { inlineStylesheets: 'always' },
   integrations: [sitemap()],
 });

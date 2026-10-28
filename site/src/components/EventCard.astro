@@ -1,22 +1,42 @@
 ---
-import { prettyRange, prettyDate, ymd } from '../lib/content.mjs';
+// One date on the calendar, phone first: when it is, what it is, then big
+// buttons to act on it. Sources and topics sit in the small print below.
+import Actions from './Actions.astro';
+import { prettyDate, ymd, chipDate, relativeLabel, shortUrl, todayYmd } from '../lib/content.mjs';
 const { e } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
 const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
 // Feed entries say which feed and when; hand-written ones say when a person checked.
 const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(e.feed.fetched)) : null;
+const host = new URL(e.url).hostname.replace(/^www\./, '');
+const shareUrl = new URL(`${base}/calendar/#${e.slug}`, Astro.site).href;
+// The source link is skipped when it is the same page as the main button.
+const extraSources = e.sources.filter((s) => s.url !== e.url);
 ---
-<article class="card">
-  <h3><a href={e.url}>{e.title}</a></h3>
-  <p class="when">{prettyRange(e.starts, e.ends)}</p>
+<article class="card event" id={e.slug}>
+  <p class="date-chip">
+    <span><time datetime={e.starts}>{chipDate(e.starts, today)}</time>{e.ends !== e.starts && <> to <time datetime={e.ends}>{chipDate(e.ends, today)}</time></>}</span>
+    <span class="rel" data-starts={e.starts} data-ends={e.ends}>{relativeLabel(e.starts, e.ends, today)}</span>
+  </p>
+  <h3>{e.title}</h3>
   <p>{e.who_it_is_for} {e.what_to_do}</p>
+  <Actions
+    link={e.url} linkLabel={`Details on ${host}`}
+    phone={e.phone} phoneLabel={e.phone_label ?? e.org_name}
+    place={e.place}
+    ics={`${base}/calendar/${e.slug}.ics`}
+    shareUrl={shareUrl} shareTitle={e.title}
+    about={`${e.title}, ${prettyDate(e.starts)}`}
+  />
   <p class="meta">
     {e.feed ? (
       <>Pulled from the <a href={e.feed.page_url}>{e.feed.name}</a> on {prettyDate(fetchedOn)}.</>
     ) : (
       <>Run by {e.org_name}.
-      Source: {e.sources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{new URL(s.url).hostname}</a></>))}.
-      Checked by hand on {prettyDate(ymd(lastChecked))}.</>
+      {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{shortUrl(s.url)}</a></>))}.</> : <> Source: the details page.</>}
+      {' '}Checked by hand on {prettyDate(ymd(lastChecked))}.</>
     )}
+    {e.topics?.length ? <> Topics: {e.topics.join(', ')}.</> : null}
   </p>
-  <p>{(e.topics || []).map((t) => <span class="tag">{t}</span>)}</p>
 </article>

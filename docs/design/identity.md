@@ -24,7 +24,7 @@ We use three cues. That is the whole list. Adding a fourth needs a note in this 
 
 | Cue | Where it comes from | How we use it | Why this one |
 |---|---|---|---|
-| **Ridgeline** | The wooded hills you see from almost anywhere in town | One thin, hand-drawn line of rolling hills along the bottom of the site header ([`RidgeLine.astro`](../../site/src/components/RidgeLine.astro)) | Everyone here sees these hills every day. It is about the land, not any group. It is quiet enough to ignore. |
+| **Ridgeline** | The wooded hills you see from almost anywhere in town | One thin, hand-drawn line of rolling hills: under the site header on wide screens, and as the top edge of the tab bar on phones ([`RidgeLine.astro`](../../site/src/components/RidgeLine.astro)) | Everyone here sees these hills every day. It is about the land, not any group. It is quiet enough to ignore. |
 | **Hill green** | The same wooded hills | The accent color for links, dates, and focus (`--accent`, kept from before) | Already readable and trusted. Green from the hills, not from a team or agency. |
 | **Brick** | Downtown and the old glass factories | A thin edge on "who to ask" boxes (`.note`) and the line above the footer (`--brick`) | Brick is what the old town is built from. It ties the site to downtown without copying any building or sign. |
 
@@ -91,8 +91,8 @@ We keep the system font stack (`system-ui` and friends). It loads instantly on o
 
 ## The motif: the ridgeline
 
-- **What:** One thin line of rolling hills, drawn by us as an SVG path. It sits on the header's bottom border, so the hills rise out of the line.
-- **Where:** Only in the site header. Not in cards, not as a background, not repeated down the page.
+- **What:** One thin line of rolling hills, drawn by us as an SVG path. On wide screens it sits on the header's bottom border, so the hills rise out of the line. On phones it is the top edge of the bottom tab bar, filled underneath so the bar's top looks like a hillside.
+- **Where:** Once per screen. Header on wide screens, tab bar on phones (the CSS hides the other one). Not in cards, not as a background, not repeated down the page.
 - **How:** Use the [`RidgeLine`](../../site/src/components/RidgeLine.astro) component. It has `aria-hidden="true"` and `focusable="false"`, so screen readers skip it. It crops instead of stretching (`preserveAspectRatio="xMidYMax slice"`), so the hills keep their shape from 320px to wide screens. The stroke stays 1.5px at any size.
 - **Never:** animate it, fill it with color, put text on it, or use it as a logo.
 
@@ -106,10 +106,22 @@ Use the names residents use, when it makes directions clearer. Always give the f
 - **Landmarks for directions:** "the rail-trail," "Hazel Ruby McQuain Riverfront Park," "the Seneca Center on Beechurst Avenue," "the PRT." Landmarks help people find a place, but always give a street address too.
 - **Don't** use slang, dialect spelling, or sports chants. Plain, warm, and neutral.
 
+## Mobile first
+
+Nearly everyone reaches the hub on a phone. Design for a 390px screen first, then let it grow. These rules come from the first mobile pass (#126).
+
+- **Act first.** Every card leads with when it is (a big date and "in 3 days"), then what it is, then big buttons to act: Details, Call, Directions, Add to calendar, Share. Use the [`Actions`](../../site/src/components/Actions.astro) component. Each button shows only when we have a sourced link, phone, or place.
+- **Thumb reach.** The main menu is a tab bar at the bottom of the screen on phones, with icons and words, at least 48px tall, and the current page marked by bold text and a tinted pill (not color alone).
+- **Big targets.** Buttons and tabs are at least 48px tall. Nothing a person needs to tap is smaller than 44px.
+- **Name things in context.** Screen readers hear which event a button is for ("Add to calendar: Free tire drop-off, November 14, 2026"), so no two links on a page sound the same.
+- **Local and plain.** Directions buttons use the place the source published. The card text around them uses names residents know (see the voice notes).
+- **Light pages.** CSS is inlined so a page paints in one request. The only script is small and optional; the page works without it.
+- **Check it.** Before shipping, test at 320px and 390px: no sideways scrolling, nothing hidden under the tab bar when you Tab through the page, and axe clean in light and dark.
+
 ## Applying it to new pages and apps
 
 1. Use the `Base` layout, or copy its `:root` tokens exactly. Don't invent new colors. If you truly need one, add it here with its contrast ratio first.
-2. Use the `RidgeLine` component once, in the header. Nowhere else.
+2. Use the `Base` layout's header and tab bar, which already place the ridgeline. Don't add another one.
 3. Use `--brick` only for thin edges and rules, never for text people need to read or click.
 4. Keep the layout, sizes, and type scale from the rubrics. Local identity never changes where things are.
 5. Use local place names from the voice notes when they make an answer clearer.
