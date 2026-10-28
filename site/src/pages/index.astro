@@ -12,6 +12,7 @@ const soon = upcoming(loadCalendar(), undefined, 31).slice(0, 3);
   <h2>Coming up soon</h2>
   {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing on the calendar in the next month yet.</p>}
   <p><a href={`${base}/calendar/`}>See all deadlines and dates</a></p>
+  <p><a href={`${base}/stay-tonight/`}>Where to stay tonight</a></p>
   <p><a href={`${base}/recycling/`}>Trash, recycling and drop-off guide</a></p>
   <p><a href={`${base}/utility-bills/`}>Help paying a utility bill</a></p>
 

@@ -10,6 +10,7 @@ export function GET({ site }) {
 - [Home](${u('/')}): what the project is and what is coming up soon
 - [Deadlines and dates](${u('/calendar/')}): application windows, deadlines, and community dates
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
+- [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
 - [About](${u('/about/')}): how the project works and its rules
 
 ## Notes for AI tools

@@ -1,0 +1,6 @@
+# 2026-10-28: "Where to stay tonight" page
+
+- **Considered:** issue #131, a short phone-first page built from the three entries merged in #130 (Grace Shelter, the RDVIC hotline, WV 211).
+- **Chose:** one page with a large tap-to-call button first on each card, then hours, who it serves, how to get in, and the oldest last-checked date with source links. Cards read from `content/resources/` so they stay in step with the data. The winter warming shelter is left out until its source publishes dates, hours and a bed count, and the page says so. Project Rainbow and the WV Coalition to End Homelessness are left out until their own pages confirm services. A 911 line is included for danger right now.
+- **Shipped:** `/stay-tonight/`, linked from the main nav, the home page and `llms.txt`. High-stakes second check (#97 practice): the RDVIC phone number and the 211 text number and 24/7 claim were re-confirmed against their sources. The Grace Shelter page could not be fetched from the build environment, so its details are as entered in #130 and still need an independent re-check.
+- **Scoreboard:** Findability for "where can I stay tonight" should move from news stories only to a direct answer; re-test the question on 2026-11-04.
