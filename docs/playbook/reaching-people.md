@@ -41,12 +41,12 @@ This page is the source for the [reach epic (#155)](https://github.com/david-sho
 ## Principles
 
 1. **Two front doors.** Reach people through the helpers they trust, and directly, on their own terms. Neither replaces the other.
-2. **Make helpers faster, not busier.** The hub's job with helpers is to save them time, not to replace them or compete for attention.
-3. **Fresh, checked, and easy to pass on.** Anyone should see when a listing was last checked, and be able to print it, text it, or share it in one tap.
-4. **Open any hour, no name needed, no judgment.** Everything works at 2 a.m. on a Sunday without an account. We never ask who someone is. Words make asking feel normal, and say plainly who qualifies, so people do not rule themselves out.
-5. **Every listing says what happens next.** What to bring, what the first call is like, and who can help you through it, offered as a normal choice, not a last resort.
-6. **A person hands it over.** Printed cards and QR codes work when someone hands them over and explains them, not when they sit on a wall.
-7. **Try what is not happening yet.** Stay open to new ways of sharing information and helping people talk to each other that no one here offers today, within the charter's limits.
+2. **Try what is not happening yet.** Stay open to new ways of sharing information and helping people talk to each other that no one here offers today, within the charter's limits.
+3. **Make helpers faster, not busier.** The hub's job with helpers is to save them time, not to replace them or compete for attention.
+4. **Fresh, checked, and easy to pass on.** Anyone should see when a listing was last checked, and be able to print it, text it, or share it in one tap.
+5. **Open any hour, no name needed, no judgment.** Everything works at 2 a.m. on a Sunday without an account. We never ask who someone is. Words make asking feel normal, and say plainly who qualifies, so people do not rule themselves out.
+6. **Every listing says what happens next.** What to bring, what the first call is like, and who can help you through it, offered as a normal choice, not a last resort.
+7. **A person hands it over.** Printed cards and QR codes work when someone hands them over and explains them, not when they sit on a wall.
 8. **Build on what exists.** 211, the family resource network, the city's resource efforts, and local directories already do this work. Share data openly in their formats instead of building another silo.
 9. **Works on any phone, at low or no cost.** Low-end phones, weak signal, small data plans, older eyes, and low reading levels are the normal case. Choose free or low cost tools first and name the cost of every option.
 
@@ -138,7 +138,7 @@ When the phone's clock shows most places are closed, show what is open now, what
 
 ### Wording for help pages
 
-Principle 4 becomes a tone note for the plain language rubric and a review of the help pages. Issue #162.
+Principle 5 becomes a tone note for the plain language rubric and a review of the help pages. Issue #162.
 
 ## What needs David's yes
 
