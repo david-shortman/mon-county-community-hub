@@ -21,6 +21,7 @@ If our help is digital, people have to be able to find it. This page explains th
 ## Writing titles and descriptions
 
 - Title: say what the page helps with, in plain words. The site name is added for you.
+- Title: name the place, the way residents search ("Where to stay tonight in Morgantown, WV"). The H1 can stay short. The build check fails a page title with no Morgantown or Mon County, except the 404 and About pages.
 - Description: one sentence, no em dashes, no promises we cannot back up.
 - Use one H1 per page and H2s for sections under it.
 

@@ -1,0 +1,6 @@
+# 2026-10-28: Guide page titles name Morgantown (#143)
+
+- **Considered:** #143 (titles), #100 (skip link and rem text) and #142 (show 12:00 as noon). No issue carried `up-next`, and #47 had already shipped in #147. Also whether to change the H1s too, or only the `<title>`.
+- **Chose:** #143. Residents search with the place name, and three guide titles left it out. It is a small change on the pages most likely to be found by search. The H1s stay short because they read better on the page; the place name goes in the `<title>`, which is what search results show. Added a build check so new guides cannot ship without the place name, and wrote the rule in `docs/visibility/README.md`.
+- **Shipped:** new titles for `/stay-tonight/` ("Where to stay tonight in Morgantown, WV"), `/utility-bills/` ("Help paying a utility bill in Morgantown and Mon County") and `/recycling/` ("Trash, recycling and drop-off in Morgantown, WV"). `site/scripts/check-pages.mjs` now fails a page title with no Morgantown, Mon County or Monongalia, except the 404 and About pages.
+- **Scoreboard:** visibility "Discoverability" row, hub pages showing for the 10 resident searches (0 of 10 on 2026-10-28). This alone will not move it while the site is not indexed (#89). Check on the next weekly visibility run, 2026-11-04.
