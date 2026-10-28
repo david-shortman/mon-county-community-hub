@@ -4,6 +4,13 @@ What Claude built, why, and what happened. Newest first. One entry per run of th
 
 Each entry: what was considered, what was chosen and why, what shipped, and what changed on the scoreboard.
 
+## 2026-10-28: Actions outage resolved
+
+- **Considered:** the health check's first FAIL: every Actions run failing at startup (#66).
+- **Chose:** wait for David, since it was a repo setting agents cannot see or change.
+- **Shipped:** David allowed actions created by GitHub plus `anthropics/claude-code-action`. Runs passed right away. The health check now reads WARN with nothing failing. The incident file is resolved, and the runbook notes the allowed-actions rule for new workflows.
+- **Scoreboard:** no change. The live calendar now has 45 upcoming events, up from 7, because the feeds from #53 deployed.
+
 ## 2026-10-28: Hosting decision recorded in the architecture records
 
 - **Considered:** David's feedback on the architecture: the monorepo works well, and he weighed GitHub Pages against Vercel, which might seem to need separate repos.

@@ -1,11 +1,11 @@
 # 2026-10-28: GitHub Actions runs fail at startup
 
-- **Status:** open, waiting on David (#66)
+- **Status:** resolved
 - **Started:** 2026-10-28 about 04:15 UTC
 - **Noticed:** 2026-10-28 about 04:28 UTC by the Chronicler session; confirmed by the Watchdog health check at 04:35 UTC
-- **Fixed:** not yet
+- **Fixed:** 2026-10-28 about 04:38 UTC (first good runs); confirmed by the health check at 04:42 UTC
 - **Health checks that caught it:** `actions-main`, and `main-deployed` once a merged commit is more than 30 minutes old
-- **Links:** #66
+- **Links:** #66, health check PR #79
 
 ## What happened
 
@@ -13,17 +13,18 @@ From about 04:15 UTC, every GitHub Actions run, for both the Site workflow and t
 
 ## Impact on residents
 
-So far, small. The live site still works and shows the calendar as of the 03:59 UTC build. But nothing merged after that is live, and if this lasts past the morning rebuild, past dates will stop dropping off the calendar. The `@claude` and `up-next` automations are also not running.
+Small. For about 25 minutes, nothing merged reached the site: eight PRs, including the live calendar feeds (#53), waited to deploy. The live site kept working the whole time, showing the 03:59 UTC build. The `@claude` and `up-next` automations did not run during that time.
 
 ## Cause
 
-Not known yet. A startup failure with unchanged workflow files usually points to a repo or account setting (allowed actions, workflow permissions, an Actions spending limit) or a GitHub outage. Agents cannot see these settings.
+The repo's Actions setting allowed only actions owned by `david-shortman`. The workflows use `actions/checkout`, `actions/setup-node`, and the Pages actions (made by GitHub) and `anthropics/claude-code-action`, so GitHub refused to start them. Agents cannot see this setting, which is why it looked like a mystery from inside the repo.
 
 ## Fix
 
-Pending. David to check Settings > Actions > General and the account's Actions billing, then re-run the latest Site run on `main` (see #66).
+David changed the setting to allow actions created by GitHub plus `anthropics/claude-code-action@*`. Runs started passing right away.
 
 ## Prevention
 
+- **Rule for new workflows:** use only actions created by GitHub (`actions/*`) or `anthropics/claude-code-action`. Anything else will hit the same wall. This is noted in the runbook.
 - The health check now flags any `startup_failure` on `main` and names David as the one to react, since agents cannot fix settings.
 - The proposed health workflow would open a pinned Health issue within a few hours of this happening. Note that if Actions itself is down, that workflow cannot run either, so sessions should still run `npm run health` by hand at the start of a session.
