@@ -1,0 +1,12 @@
+name: Monongalia County Health Department
+slug: monongalia-county-health-department
+kind: government
+website: https://www.monchd.org/
+summary: The county's public health office. Its clinic gives shots, health screenings, and other care, and takes most insurance and WV Medicaid.
+topics: [health]
+area: monongalia-county
+sources:
+  - url: https://health.wv.gov/offices/monongalia-county-health-department
+    checked: 2026-10-28
+  - url: https://www.monchd.org/departments-programs/clinical-services
+    checked: 2026-10-28

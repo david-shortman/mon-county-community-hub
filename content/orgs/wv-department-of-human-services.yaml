@@ -1,0 +1,12 @@
+name: West Virginia Department of Human Services (DoHS)
+slug: wv-department-of-human-services
+kind: government
+website: https://dohs.wv.gov
+summary: The state agency that decides who can get SNAP food help, Medicaid, WVCHIP, and other help programs. People apply online through WV PATH.
+topics: [food, money, health]
+area: statewide
+sources:
+  - url: https://www.wvpath.wv.gov/
+    checked: 2026-10-28
+  - url: https://bfa.wv.gov/frequently-asked-questions-faq
+    checked: 2026-10-28
