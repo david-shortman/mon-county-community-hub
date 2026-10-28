@@ -28,6 +28,9 @@ for (const file of pages) {
   if (!desc) errors.push(`${where}: missing meta description`);
   if (!/<html[^>]*\slang="/.test(html)) errors.push(`${where}: missing lang on <html>`);
   if (!/<link rel="canonical" href="https?:\/\//.test(html)) errors.push(`${where}: missing canonical link`);
+  const canonical = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1];
+  // A canonical URL that redirects (folder without its trailing slash) wastes the crawl.
+  if (canonical && !/(\/|\.\w+)$/.test(canonical)) errors.push(`${where}: canonical ${canonical} should end with /`);
   if (!/<meta property="og:image" content="https?:\/\//.test(html)) errors.push(`${where}: missing og:image`);
   const h1s = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1s !== 1) errors.push(`${where}: needs exactly one <h1>, found ${h1s}`);
@@ -38,6 +41,16 @@ for (const f of ['robots.txt', 'llms.txt']) {
   if (!fs.existsSync(path.join(dist, f))) errors.push(`${f}: missing from dist/`);
 }
 if (!fs.existsSync(path.join(dist, 'sitemap-index.xml'))) errors.push('sitemap-index.xml: missing from dist/');
+
+// llms.txt should list every page in the sitemap, so AI tools see new guides too.
+const sitemapFile = path.join(dist, 'sitemap-0.xml');
+const llmsFile = path.join(dist, 'llms.txt');
+if (fs.existsSync(sitemapFile) && fs.existsSync(llmsFile)) {
+  const llms = fs.readFileSync(llmsFile, 'utf8');
+  for (const [, loc] of fs.readFileSync(sitemapFile, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    if (!llms.includes(`(${loc})`)) errors.push(`llms.txt: does not list ${loc}`);
+  }
+}
 
 if (errors.length) {
   console.error(`Page checks failed:\n- ${errors.join('\n- ')}`);
