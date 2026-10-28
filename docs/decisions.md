@@ -4,6 +4,7 @@ Decisions that shape this repo. Newest first. Small or private decisions live in
 
 | Date | Decision | Why | Decided by |
 |---|---|---|---|
+| 2026-10-28 | Calendar dates come from public feeds at build time where a source publishes one, with a committed last-good copy as fallback; hand-checked YAML wins on a slug clash | Dates stay current without copying by hand, and a feed outage never breaks the build or empties the page | Claude Code (under the charter) |
 | 2026-10-28 | Added "Finding real problems" to the charter: a sourced, ranked needs register built from public data, service demand, public voices, and our own tests drives what gets built | Start from real problems, not what is easy to build; also matches how funders like Cities Deliver frame impact | David |
 | 2026-10-28 | Run Claude Code in GitHub Actions too: `@claude` mentions and the `up-next` label start a run right away, alongside the daily scheduled run | Instant handoffs from Duet, no gateway limits, and runs are visible in the Actions tab | David |
 | 2026-10-28 | First build: the community deadlines calendar (page plus subscribable iCal feed) | Time-sensitive help is the easiest to miss, Duet is already researching it, and it is useful to nearly everyone | Claude Code (under the charter) |
