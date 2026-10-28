@@ -80,3 +80,36 @@ export function prettyDate(d) {
 export function prettyRange(starts, ends) {
   return starts === ends ? prettyDate(starts) : `${prettyDate(starts)} to ${prettyDate(ends)}`;
 }
+
+// Short date for the big date chip: "Fri, Oct 31". Adds the year when it is
+// not this year, so "Jan 15, 2027" never reads as the coming January by mistake.
+export function chipDate(d, today = todayYmd()) {
+  const sameYear = d.slice(0, 4) === today.slice(0, 4);
+  const opts = { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC', ...(sameYear ? {} : { year: 'numeric' }) };
+  return new Intl.DateTimeFormat('en-US', opts).format(new Date(`${d}T12:00:00Z`));
+}
+
+const daysBetween = (a, b) => Math.round((Date.parse(`${b}T12:00:00Z`) - Date.parse(`${a}T12:00:00Z`)) / 86400000);
+const inDays = (n) => (n === 1 ? 'tomorrow' : `in ${n} days`);
+
+// "in 3 days", "today", "open now, ends in 5 days". The page also runs the
+// same rule in the browser (see Base.astro) so it stays right between builds.
+export function relativeLabel(starts, ends, today = todayYmd()) {
+  if (starts > today) return inDays(daysBetween(today, starts));
+  if (starts === ends) return 'today';
+  if (ends === today) return 'last day is today';
+  return `open now, ends ${inDays(daysBetween(today, ends))}`;
+}
+
+// A map search link that opens the phone's maps app. We only pass a place
+// the source itself published.
+export const mapsUrl = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
+export const telHref = (phone) => `tel:${String(phone).replace(/[^\d+]/g, '')}`;
+
+// "mountaineerfoodbank.org/food-pantries" style link text, so two links to
+// the same site never share a name.
+export function shortUrl(u) {
+  const url = new URL(u);
+  const first = url.pathname.split('/').filter(Boolean)[0];
+  return url.hostname.replace(/^www\./, '') + (first ? `/${first}` : '');
+}

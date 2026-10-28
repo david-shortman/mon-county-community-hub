@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { loadDir, ymd, prettyDate } from '../lib/content.mjs';
+import { loadDir, ymd, prettyDate, shortUrl } from '../lib/content.mjs';
 
 // Order matters: shelter first, then the domestic violence hotline, then the 211 fallback.
 const slugs = ['grace-shelter', 'rdvic-hotline', 'wv-211'];
@@ -27,7 +27,7 @@ const digits = (p) => p.replace(/\D/g, '');
       <p class="when">{hours[r.slug]}</p>
       <p><strong>Who it serves:</strong> {r.who_it_is_for}</p>
       <p><strong>How to get in:</strong> {r.what_to_do}</p>
-      <p class="meta">Last checked {prettyDate(r.checked)}. {r.sources.map((s, i) => <>{i ? ', ' : ''}<a href={s.url}>Source</a></>)}{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) ? <>, <a href={r.contact.url}>Official site</a></> : null}</p>
+      <p class="meta">Last checked {prettyDate(r.checked)}. {r.sources.map((s, i) => <>{i ? ', ' : ''}<a href={s.url}>Source: {shortUrl(s.url)}</a></>)}{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) ? <>, <a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a></> : null}</p>
     </section>
   ))}
 

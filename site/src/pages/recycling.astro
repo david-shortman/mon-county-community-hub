@@ -1,9 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import EventCard from '../components/EventCard.astro';
+import Actions from '../components/Actions.astro';
 import { loadCalendarWithFeeds, upcoming } from '../lib/content.mjs';
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics || []).includes('recycling'));
 const swa = 'https://www.monongaliacountyswa.com';
+const swaPhone = '304-292-3801';
 ---
 <Base title="Trash, recycling and drop-off" description="Pickup days, what goes in the curbside bin, and where to take electronics, paint, tires and other hard items in Morgantown and Monongalia County.">
   <h1>Trash, recycling and drop-off</h1>
@@ -18,11 +20,15 @@ const swa = 'https://www.monongaliacountyswa.com';
 
   <h2>Recycling drop-off sites</h2>
   <ul>
-    <li><strong>Single-stream recycling drop-off center</strong> (county, free): 34 Olin St., Industrial Park. Monday to Friday, 7:00 a.m. to 3:30 p.m. It moved here in August 2025, so check <a href="https://moncountyrecycling.com">moncountyrecycling.com</a> for current hours.</li>
-    <li><strong>Western Mon County Recycling Site</strong> (free, sorted by material): Arnettsville Community Association, 4120 Fairmont Rd., Morgantown. The county lists it as open 24 hours a day, 7 days a week.</li>
-    <li><strong>Mountaineer Transfer Station</strong> (run by Republic Services, fee for recycling): call <a href="tel:3043687735">304-368-7735</a>. The county lists hours as Monday to Friday 5:30 a.m. to 3:00 p.m. and Saturday 7:00 to 11:00 a.m. It does not take tires.</li>
+    <li><strong>Single-stream recycling drop-off center</strong> (county, free): 34 Olin St., Industrial Park. Monday to Friday, 7:00 a.m. to 3:30 p.m. It moved here in August 2025, so check <a href="https://moncountyrecycling.com">moncountyrecycling.com</a> for current hours.
+      <Actions place="34 Olin St, Industrial Park, Monongalia County, WV" /></li>
+    <li><strong>Western Mon County Recycling Site</strong> (free, sorted by material): Arnettsville Community Association, 4120 Fairmont Rd., Morgantown. The county lists it as open 24 hours a day, 7 days a week.
+      <Actions place="Arnettsville Community Association, 4120 Fairmont Rd, Morgantown, WV" /></li>
+    <li><strong>Mountaineer Transfer Station</strong> (run by Republic Services, fee for recycling): call <a href="tel:3043687735">304-368-7735</a>. The county lists hours as Monday to Friday 5:30 a.m. to 3:00 p.m. and Saturday 7:00 to 11:00 a.m. It does not take tires.
+      <Actions phone="304-368-7735" phoneLabel="Mountaineer Transfer Station" /></li>
     <li><strong>City residents:</strong> the county lists a Republic Services recycling event every second Saturday. Confirm the place and time with the hauler.</li>
-    <li><strong>Paper shredding:</strong> PACE Enterprises at Mylan Park, <a href="tel:3043760036">304-376-0036</a>.</li>
+    <li><strong>Paper shredding:</strong> PACE Enterprises at Mylan Park, <a href="tel:3043760036">304-376-0036</a>.
+      <Actions phone="304-376-0036" phoneLabel="PACE Enterprises" /></li>
   </ul>
 
   <h2>Hard items</h2>
@@ -39,6 +45,7 @@ const swa = 'https://www.monongaliacountyswa.com';
 
   <div class="note">
     <p><strong>Who to ask:</strong> Monongalia County Solid Waste Authority, 113 Mathieson Street, Suite 100, Morgantown. Phone <a href="tel:3042923801">304-292-3801</a>, email moncountyswa@gmail.com.</p>
+    <Actions phone={swaPhone} phoneLabel="the Solid Waste Authority" place="113 Mathieson Street, Suite 100, Morgantown, WV" />
   </div>
   <p class="meta">Sources: <a href={swa}>monongaliacountyswa.com</a> (recycling, disposal, tires and latex paint pages), checked October 28, 2026, and the 2019 Republic Services guide linked above. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>

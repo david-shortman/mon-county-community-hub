@@ -53,6 +53,9 @@ who_it_is_for: Households that need help paying winter heating bills.
 what_to_do: Apply at your local DoHS office or online before the window closes.
 url: https://example.wv.gov/lieap   # where a person should go to act
 topics: [money, housing]      # money, food, housing, health, family, government, voting, recycling, taxes, community
+place: 200 M-Tec Dr, Morgantown, WV   # optional; adds a Directions button. Only a place the source publishes
+phone: 304-555-0100           # optional; adds a Call button. Only a public office or program number the source publishes
+phone_label: the City Clerk   # optional; who answers, read by screen readers. Defaults to org_name
 sources:
   - url: https://example.wv.gov/lieap
     checked: 2026-10-28
