@@ -5,7 +5,7 @@
 - **Shipped:**
   - Cards lead with a big date and "in 3 days", then large buttons: Details, Call, Directions, Add to calendar, Share. Buttons only show when the source gave us a link, phone, or place.
   - One calendar file per entry for "Add to calendar" (46 files built today). Share opens the phone's share sheet, or copies the link where there is none.
-  - On phones the menu is a tab bar at the bottom, in thumb reach. The ridgeline is its top edge. The current page is marked on phones and desktop.
+  - On phones the menu is a tab bar at the bottom, in thumb reach: Home, Deadlines, Stay tonight, Bill help, and More (a native popup listing every page). The ridgeline is its top edge. The current page is marked on phones and desktop. The footer now lists all pages, and there is a "Skip to main content" link.
   - Recycling drop-off sites and the Solid Waste Authority got Call and Directions buttons, using only the addresses and numbers already on the page.
   - New optional content fields `place`, `phone`, and `phone_label`, checked by `npm run check-content`.
   - CSS is now inlined, so pages paint in one request on slow connections.

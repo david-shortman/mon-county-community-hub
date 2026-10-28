@@ -63,6 +63,16 @@ export function upcoming(entries, today = todayYmd(), days = 62) {
     .sort((a, b) => (a.starts < b.starts ? -1 : a.starts > b.starts ? 1 : a.title.localeCompare(b.title)));
 }
 
+// "13:05" -> "1:05 p.m."; "08:00" -> "8 a.m."
+function prettyTime(t) {
+  const [h, m] = t.split(':').map(Number);
+  return `${h % 12 || 12}${m ? `:${String(m).padStart(2, '0')}` : ''} ${h < 12 ? 'a.m.' : 'p.m.'}`;
+}
+export function prettyTimes(start, end) {
+  if (!start) return '';
+  return end ? `${prettyTime(start)} to ${prettyTime(end)}` : `from ${prettyTime(start)}`;
+}
+
 const fmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 export function prettyDate(d) {
   return fmt.format(new Date(`${d}T12:00:00Z`));

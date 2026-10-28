@@ -46,6 +46,8 @@ title: Heating bill help (LIEAP) applications open
 slug: lieap-2026-27           # unique; include the season or year
 starts: 2026-11-02            # YYYY-MM-DD
 ends: 2026-11-20              # YYYY-MM-DD; leave out for a single day
+start_time: "08:00"           # optional, 24-hour HH:MM Eastern, quoted. Only when the source states it.
+end_time: "12:00"             # optional, needs start_time and a single-day entry
 org_name: WV Department of Human Services
 who_it_is_for: Households that need help paying winter heating bills.
 what_to_do: Apply at your local DoHS office or online before the window closes.

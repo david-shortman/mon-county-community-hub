@@ -9,11 +9,31 @@ const now = items.filter((e) => e.starts <= today);
 const later = items.filter((e) => e.starts > today);
 const icsHttp = new URL(`${base}/calendar.ics`, Astro.site).href;
 const icsWebcal = icsHttp.replace(/^https?:/, 'webcal:');
+const icsGoogle = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(icsWebcal)}`;
+const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(icsHttp)}&name=${encodeURIComponent('Mon County deadlines and dates')}`;
 ---
 <Base title="Deadlines and dates in Mon County, WV" description="Application windows, deadlines, and community dates in Mon County for this month and next.">
   <h1>Deadlines and dates in Mon County</h1>
   <p class="lede">Application windows, deadlines, and community dates for this month and next. Updated {prettyDate(today)}.</p>
-  <p class="note">Add these to your phone's calendar: <a href={icsWebcal}>subscribe</a> (or copy this link: <a href={icsHttp}>{icsHttp}</a>). Dates can change, so check the source before you go.</p>
+  <section class="add-cal" aria-labelledby="add-cal-h">
+    <h2 id="add-cal-h">Add to your calendar</h2>
+    <p>Pick the app you use. New dates show up on their own. Dates can change, so check the source before you go.</p>
+    <p class="actions">
+      <a class="btn" href={icsWebcal}>iPhone or Mac calendar</a>
+      <a class="btn" href={icsGoogle} rel="noopener">Google Calendar</a>
+      <a class="btn" href={icsOutlook} rel="noopener">Outlook</a>
+      <a class="btn" href={icsHttp} download="mon-county-dates.ics">Download the file</a>
+    </p>
+    <details>
+      <summary>Copy the link</summary>
+      <p>Paste it where your calendar app asks to add a calendar "from URL" or "from the web".</p>
+      <p><input type="text" readonly value={icsHttp} aria-label="Calendar link" onfocus="this.select()" /></p>
+    </details>
+    <details>
+      <summary>How to stop getting these dates</summary>
+      <p>Remove the calendar in the same app you added it to. On iPhone: Settings, Calendar, Accounts, Subscribed Calendars, then delete it. On Google Calendar: open Settings, pick this calendar under "Settings for other calendars" and choose Unsubscribe. In Outlook: right-click the calendar and choose Remove. A downloaded file adds single events, so delete those events yourself.</p>
+    </details>
+  </section>
 
   <h2>Open now</h2>
   {now.length ? now.map((e) => <EventCard e={e} />) : <p>Nothing open right now.</p>}

@@ -6,14 +6,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const shareImage = new URL(`${base}/share.png`, Astro.site).href;
 // Main menu. On phones it becomes a tab bar at the bottom of the screen,
-// where a thumb can reach it. `aria-current` marks the page you are on.
+// where a thumb can reach it: the `tab` pages (the most urgent needs first)
+// plus More, which lists every page. `aria-current` marks the page you are on.
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 const navItems = [
-  { href: `${base}/`, label: 'Home', icon: 'home' },
-  { href: `${base}/calendar/`, label: 'Deadlines', icon: 'calendar' },
+  { href: `${base}/`, label: 'Home', icon: 'home', tab: true, wide: false },
+  { href: `${base}/calendar/`, label: 'Deadlines', icon: 'calendar', tab: true },
+  { href: `${base}/stay-tonight/`, label: 'Stay tonight', icon: 'bed', tab: true },
   { href: `${base}/recycling/`, label: 'Recycling', icon: 'recycle' },
+  { href: `${base}/utility-bills/`, label: 'Utility help', tabLabel: 'Bill help', icon: 'bulb', tab: true },
   { href: `${base}/about/`, label: 'About', icon: 'info' },
 ].map((n) => ({ ...n, current: n.href.replace(/\/$/, '') === here.replace(/^\/$/, '') }));
+// On phones, a page that is only under More marks the More tab instead.
+const moreCurrent = navItems.find((n) => n.current && !n.tab);
 const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Community Hub';
 ---
 <!doctype html>
@@ -57,9 +62,19 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .ridge .ridge-fill { fill: var(--card); }
       header.site .header-ridge { margin-top: -6px; }
       nav.main { display: flex; gap: 16px; position: relative; }
-      nav.main a { display: inline-flex; align-items: center; min-height: 24px; }
-      nav.main a[aria-current="page"] { color: var(--fg); font-weight: 700; text-decoration-thickness: 3px; }
-      nav.main .icon, nav.main .ridge { display: none; }
+      nav.main > a { display: inline-flex; align-items: center; min-height: 24px; }
+      nav.main > a[aria-current="page"] { color: var(--fg); font-weight: 700; text-decoration-thickness: 3px; }
+      nav.main .short { display: none; }
+      nav.main .icon, nav.main .ridge, nav.main .narrow-only, nav.main .more, nav.main .more-link { display: none; }
+      nav.main .tab span, nav.main .extra span { white-space: nowrap; }
+      .more-menu { inset: auto max(8px, env(safe-area-inset-right)) calc(var(--tabbar, 0px) + 12px) auto; margin: 0; min-width: 14rem;
+        padding: 8px; background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 6px 24px rgb(0 0 0 / 0.18); }
+      .more-menu .more-title { margin: 4px 12px; font-size: 0.875rem; font-weight: 700; color: var(--muted); }
+      .more-menu ul, .all-pages ul { list-style: none; margin: 0; padding: 0; }
+      .more-menu a { display: flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 8px; font-weight: 600; }
+      .more-menu a[aria-current="page"] { background: var(--accent-bg); }
+      .all-pages ul { display: flex; flex-wrap: wrap; gap: 4px 18px; }
+      .all-pages a { display: inline-flex; align-items: center; min-height: 44px; }
       .skip { position: absolute; left: 8px; top: -100px; z-index: 20; padding: 10px 14px; background: var(--card); border: 2px solid var(--accent); border-radius: 8px; }
       .skip:focus { top: 8px; }
       main:focus { outline: none; }
@@ -74,11 +89,22 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         nav.main { position: fixed; z-index: 10; inset: auto 0 0 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0;
           background: var(--card); padding: 4px max(4px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(4px, env(safe-area-inset-left)); }
         nav.main .ridge { display: block; position: absolute; left: 0; right: 0; bottom: 100%; height: 14px; }
-        nav.main a { flex-direction: column; justify-content: center; gap: 2px; min-height: 56px; font-size: 0.875rem; font-weight: 600; text-decoration: none; color: var(--muted); }
+        nav.main .extra { display: none; }
+        nav.main .narrow-only, nav.main .more { display: flex; }
+        nav.main .more { border: 0; background: none; font: inherit; cursor: pointer; }
+        nav.main > a, nav.main .more { flex-direction: column; justify-content: center; gap: 2px; min-height: 56px; padding: 0 2px; font-size: 0.875rem; font-weight: 600; line-height: 1.15; text-align: center; text-decoration: none; color: var(--muted); }
+        nav.main .tab span { white-space: normal; }
         nav.main .icon { display: block; width: 26px; height: 26px; padding: 2px 10px; box-sizing: content-box; border-radius: 999px; }
-        nav.main a[aria-current="page"] { color: var(--accent); font-weight: 700; }
-        nav.main a[aria-current="page"] .icon { background: var(--accent-bg); }
-        nav.main a:focus-visible { outline-offset: -3px; border-radius: 10px; }
+        nav.main > a[aria-current="page"] { color: var(--accent); font-weight: 700; }
+        nav.main .tab .long.has-short { display: none; }
+        nav.main .short { display: inline; }
+        nav.main > a[aria-current="page"] .icon, nav.main .more.has-current .icon { background: var(--accent-bg); }
+        nav.main .more.has-current { color: var(--accent); font-weight: 700; }
+        nav.main > a:focus-visible, nav.main .more:focus-visible { outline-offset: -3px; border-radius: 10px; }
+        @supports not selector(:popover-open) {
+          nav.main .more, .more-menu { display: none; }
+          nav.main .more-link { display: flex; }
+        }
       }
       .icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
       main { padding-block: 24px 48px; }
@@ -91,6 +117,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .meta { font-size: 0.85rem; color: var(--muted); }
       .event h3 { margin-top: 2px; }
       .date-chip { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 6px; font-size: 1.25rem; font-weight: 700; line-height: 1.3; color: var(--accent); }
+      .date-chip .time { font-size: 1.05rem; }
       .date-chip .rel { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
       .actions { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 8px; margin: 14px 0; }
       .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 12px; border: 1.5px solid var(--accent); border-radius: 10px;
@@ -103,6 +130,10 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .nowrap { white-space: nowrap; }
       .actions .icon { width: 20px; height: 20px; }
       .note { background: var(--accent-bg); border-left: 4px solid var(--brick); border-radius: 4px 10px 10px 4px; padding: 12px 16px; }
+      .add-cal { background: var(--accent-bg); border-left: 4px solid var(--brick); border-radius: 4px 10px 10px 4px; padding: 4px 16px 12px; margin: 16px 0; }
+      .add-cal h2 { margin-top: 0.6em; }
+      .add-cal summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+      .add-cal input { width: 100%; min-height: 44px; font: inherit; font-size: 0.9rem; padding: 6px 10px; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
       footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; }
     </style>
   </head>
@@ -114,8 +145,14 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         <nav class="main" aria-label="Main">
           <RidgeLine filled />
           {navItems.map((n) => (
-            <a href={n.href} aria-current={n.current ? 'page' : undefined}><Icon name={n.icon} /><span>{n.label}</span></a>
+            <a class:list={[n.tab ? 'tab' : 'extra', n.wide === false && 'narrow-only']} href={n.href} aria-current={n.current ? 'page' : undefined}><Icon name={n.icon} /><span class:list={['long', n.tabLabel && 'has-short']}>{n.label}</span>{n.tabLabel && <span class="short">{n.tabLabel}</span>}</a>
           ))}
+          <button class:list={['tab more', moreCurrent && 'has-current']} type="button" popovertarget="more-menu"><Icon name="more" /><span>More{moreCurrent && <span class="sr-only">, you are on {moreCurrent.label}</span>}</span></button>
+          <a class="tab more-link" href="#all-pages"><Icon name="more" /><span>More</span></a>
+          <div id="more-menu" class="more-menu" popover>
+            <p class="more-title">All pages</p>
+            <ul>{navItems.map((n) => <li><a href={n.href} aria-current={n.current ? 'page' : undefined}>{n.label}</a></li>)}</ul>
+          </div>
         </nav>
       </div>
       <RidgeLine class="header-ridge" />
@@ -123,6 +160,9 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     <main class="wrap" id="main" tabindex="-1"><slot /></main>
     <footer class="site">
       <div class="wrap">
+        <nav id="all-pages" class="all-pages" aria-label="All pages">
+          <ul>{navItems.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+        </nav>
         <p>An open experiment for Morgantown and Monongalia County, WV. Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
       </div>
     </footer>

@@ -1,0 +1,10 @@
+name: WVU Student Engagement and Leadership
+slug: wvu-student-engagement-and-leadership
+kind: school
+website: https://studentengagement.wvu.edu
+summary: The West Virginia University office that runs The Rack, a free food pantry for enrolled WVU students.
+topics: [food]
+area: morgantown
+sources:
+  - url: https://studentengagement.wvu.edu/the-rack-student-food-pantry
+    checked: 2026-10-28
