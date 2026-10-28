@@ -79,11 +79,15 @@ Change thresholds in the `T` object at the top of `health.mjs`, and update this 
 
 Never work around a permission refusal or a settings problem. Report it and wait.
 
+### Allowed actions
+
+The repo only allows actions created by GitHub (`actions/*`) and `anthropics/claude-code-action`. Any new workflow must use only those, or it will fail at startup. Adding another action needs David to change the setting.
+
 ### Common failures
 
 | You see | Likely cause | What to do |
 |---|---|---|
-| Every run is `startup_failure`, no steps ran | Repo or account setting: allowed actions, workflow permissions, spending limit, or a GitHub outage | `for:david` issue. Check [githubstatus.com](https://www.githubstatus.com) first. Agents cannot fix this. |
+| Every run is `startup_failure`, no steps ran | Repo or account setting: allowed actions, workflow permissions, spending limit, or a GitHub outage. On 2026-10-28 it was the allowed-actions list (see [the incident](incidents/2026-10-28-actions-startup-failure.md)) | `for:david` issue. Check [githubstatus.com](https://www.githubstatus.com) first. Agents cannot fix this. |
 | Site build fails at `check-content` | A content entry is missing a field, a source, or has an em dash | Fix the entry; the error names the file |
 | Site build fails at `npm run build` | Code change broke the build | Revert or fix forward on a `code/` branch |
 | `deploy-fresh` FAIL but Actions green | Pages deploy step skipped or Pages settings changed | Check the deploy job; if settings, `for:david` |
