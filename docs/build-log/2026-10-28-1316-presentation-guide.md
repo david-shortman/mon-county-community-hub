@@ -1,0 +1,6 @@
+# 2026-10-28: Presentation guide and stay tonight mockup
+
+- **Considered:** David asked to build the presentation research into the hub's design and information architecture, then mock up the stay tonight page. The repo already had the look and mobile first rules (`docs/design/identity.md`) and the scoring rubrics, but nothing that said which layout fits which kind of information, what every listing needs, or how the site is organized by need.
+- **Chose:** a new lane file, `docs/design/presentation.md`, that sits between identity.md and the rubrics: who we design for (sourced), twelve rules, a weight budget (urgent pages under 100 KB, others under 300 KB, matching rubric A8), a table of building blocks with their no-script versions, the listing fields people need, the home screen need picker, a site map by need, and patterns for eight areas. It reuses the helper-focused issues from #155 (#157, #159, #160) instead of filing new ones for print, text, and what to bring.
+- **Shipped:** the guide, a static mockup at `docs/design/mockups/stay-tonight.html` (made-up places only, about 5 KB compressed, works with no script), epic #172, and child issues #173 to #181.
+- **Scoreboard:** no direct change. The weight budget check (#180) and the stay tonight rebuild (#175) should move rubric A8 and II1 scores in the next design review (#104).
