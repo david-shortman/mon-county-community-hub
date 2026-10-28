@@ -7,7 +7,7 @@ Several Claude instances work on this project: Claude Duet (background partner) 
 ## Must-follow rules
 
 - **This repo is public.** Never commit secrets, private individuals' personal info, unverified claims, or private planning. That goes in Notion.
-- **Never push to `main`.** Branch (`code/<name>` or `duet/<name>`), open a PR, David merges.
+- **Never push to `main`.** Branch (`code/<name>` or `duet/<name>`), open a PR, then merge it yourself once the PR checklist passes. Leave it open for David only in the cases listed under "When a PR waits for David" in `docs/COORDINATION.md`.
 - **Claim the issue** (`in-progress` label + comment) before working on it.
 - **Log every session** as one row in the Notion Activity log (data source `collection://2f1e6d31-c6ef-44f4-9374-551f5b56b210`): What, Type (Milestone, Research, Build, Decision, Note), Who, Date, Link.
 - **Cite a source URL and a last-verified date** for every resource.
