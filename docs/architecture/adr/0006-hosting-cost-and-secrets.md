@@ -1,6 +1,6 @@
 # 0006: Static hosting on GitHub Pages, $0 by default, no secrets in any build
 
-Status: proposed, 2026-10-28
+Status: accepted by David, 2026-10-28 (GitHub Pages for cost, apps on subpaths). Proposed 2026-10-28.
 
 ## Context
 
@@ -8,11 +8,12 @@ The project is a small community effort with no budget. The charter says spendin
 
 ## Decision
 
-1. **Host on GitHub Pages** for the site, apps, API files, and calendar feeds. Build and deploy with GitHub Actions.
+1. **Host on GitHub Pages** for the site, apps, API files, and calendar feeds, all as one site with apps on subpaths (see ADR 0004). Build and deploy with GitHub Actions. David chose Pages on 2026-10-28 because it costs nothing.
 2. **No secrets in the data, site, API, or MCP builds.** A source that needs a key is not used until David decides. The only secret is the Claude token, and only the Claude workflow uses it.
 3. **$0 is the default.** Anything that costs money or needs an account goes to David as a `for:david` issue: a custom domain, analytics, hosted MCP or API, package registry publishing, paid data.
 4. **Triggers to revisit hosting:** a need that only a server can meet (form submissions, counting API use, alerts), the site nearing 1 GB, or traffic nearing the Pages soft limit of 100 GB a month.
-5. **Make outages visible.** The site shows when it was last built, so a stalled pipeline is obvious to residents and to the Watchdog lane.
+5. **If Pages stops being enough,** the fallbacks in ADR 0004 apply in this order: deploy-only repos on Pages (still $0, needs a deploy token), then a monorepo-aware host such as Vercel, Netlify, or Cloudflare Pages (free tier, needs an account). Both keep all code in this one repo. Both need David.
+6. **Make outages visible.** The site shows when it was last built, so a stalled pipeline is obvious to residents and to the Watchdog lane.
 
 ## Consequences
 
