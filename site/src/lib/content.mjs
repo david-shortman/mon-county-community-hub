@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
+import { loadFeedEntries } from './feeds/index.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const CONTENT_DIR = path.resolve(here, '../../../content');
@@ -36,6 +37,20 @@ export function loadCalendar() {
     ends: ymd(e.ends) || ymd(e.starts),
     sources: (e.sources || []).map((s) => ({ ...s, checked: ymd(s.checked) })),
   }));
+}
+
+// Hand-written entries plus entries pulled from live feeds (see ./feeds).
+// A hand-written entry wins when both have the same slug.
+// Cached so the page and the .ics feed share one fetch per build.
+let merged;
+export function loadCalendarWithFeeds() {
+  merged ??= (async () => {
+    const hand = loadCalendar();
+    const taken = new Set(hand.map((e) => e.slug));
+    const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug));
+    return [...hand, ...fromFeeds];
+  })();
+  return merged;
 }
 
 // Entries still worth showing: not over yet, and starting within `days`.

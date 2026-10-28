@@ -1,10 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import EventCard from '../../components/EventCard.astro';
-import { loadCalendar, upcoming, todayYmd, prettyDate } from '../../lib/content.mjs';
+import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate } from '../../lib/content.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
-const items = upcoming(loadCalendar(), today, 62);
+const items = upcoming(await loadCalendarWithFeeds(), today, 62);
 const now = items.filter((e) => e.starts <= today);
 const later = items.filter((e) => e.starts > today);
 const icsHttp = new URL(`${base}/calendar.ics`, Astro.site).href;

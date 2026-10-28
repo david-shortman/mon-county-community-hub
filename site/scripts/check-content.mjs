@@ -1,5 +1,8 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
+import fs from 'node:fs';
+import path from 'node:path';
 import { loadCalendar } from '../src/lib/content.mjs';
+import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 
 const errors = [];
 const warnings = [];
@@ -29,7 +32,22 @@ for (const e of loadCalendar()) {
   if (JSON.stringify(e).includes('\u2014')) errors.push(`${where}: contains an em dash`);
 }
 
+// Saved feed snapshots are committed too, so check them the same way.
+let feedCount = 0;
+for (const a of ADAPTERS) {
+  const file = path.join(SNAPSHOT_DIR, `${a.id}.json`);
+  if (!fs.existsSync(file)) { warnings.push(`feeds/${a.id}: no saved snapshot yet (run npm run update-feeds)`); continue; }
+  let snap;
+  try { snap = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { errors.push(`feeds/${a.id}: snapshot is not valid JSON`); continue; }
+  if (!snap.fetched || Number.isNaN(Date.parse(snap.fetched))) errors.push(`feeds/${a.id}: snapshot needs a fetched time`);
+  for (const e of snap.entries ?? []) {
+    feedCount++;
+    for (const p of entryProblems(e)) errors.push(`feeds/${a.id}: ${e.slug ?? e.title}: ${p}`);
+    if (e.url && !isUrl(e.url)) errors.push(`feeds/${a.id}: ${e.slug}: url is not a web link`);
+  }
+}
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
-console.log(`Checked ${slugs.size} calendar entries: ${errors.length} errors, ${warnings.length} warnings.`);
+console.log(`Checked ${slugs.size} calendar entries and ${feedCount} saved feed entries: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);

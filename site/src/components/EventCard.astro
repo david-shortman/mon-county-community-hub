@@ -1,16 +1,22 @@
 ---
-import { prettyRange, prettyDate } from '../lib/content.mjs';
+import { prettyRange, prettyDate, ymd } from '../lib/content.mjs';
 const { e } = Astro.props;
 const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
+// Feed entries say which feed and when; hand-written ones say when a person checked.
+const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(e.feed.fetched)) : null;
 ---
 <article class="card">
   <h3><a href={e.url}>{e.title}</a></h3>
   <p class="when">{prettyRange(e.starts, e.ends)}</p>
   <p>{e.who_it_is_for} {e.what_to_do}</p>
   <p class="meta">
-    Run by {e.org_name}.
-    Source: {e.sources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{new URL(s.url).hostname}</a></>))}.
-    Last checked {prettyDate(lastChecked)}.
+    {e.feed ? (
+      <>Pulled from the <a href={e.feed.page_url}>{e.feed.name}</a> on {prettyDate(fetchedOn)}.</>
+    ) : (
+      <>Run by {e.org_name}.
+      Source: {e.sources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{new URL(s.url).hostname}</a></>))}.
+      Checked by hand on {prettyDate(ymd(lastChecked))}.</>
+    )}
   </p>
   <p>{(e.topics || []).map((t) => <span class="tag">{t}</span>)}</p>
 </article>

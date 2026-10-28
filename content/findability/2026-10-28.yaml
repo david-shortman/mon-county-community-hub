@@ -1,0 +1,281 @@
+# Findability run results
+#
+# One run of the question set in questions.yaml, scored with the rubric in
+# docs/scoreboard.md. Each result is the best answer a resident could reach
+# with a plain web search and a phone. Scores are 0 to 3 on each dimension.
+# Compute totals with: python3 content/findability/score.py <this file>
+#
+# search_top_results: domains of the first three search results.
+# orgs: the organizations whose work answers the question.
+# gap: what is missing, for questions scoring 9 or less (and some others).
+
+date: 2026-10-28
+rubric_version: 1
+questions_version: 1
+tester: Claude Code (findability scout), four parallel testers using one rubric
+search_tool: Claude WebSearch (standard), then WebFetch and a 390px Playwright check
+results:
+  - id: q01
+    best_url: https://wrc.wvu.edu/resources/basic-needs/utility-bill-help
+    search_top_results: [api.thegrantmap.com, wrc.wvu.edu, needhelppayingbills.com]
+    scores: {found: 3, steps: 3, current: 2, plain: 2, mobile: 3}
+    total: 13
+    orgs: [WV Department of Human Services (LIEAP), Christian Help, The Salvation Army of Morgantown, WVU Women's Resource Center]
+    note: The second result, a WVU Women's Resource Center page updated March 2026, lists LIEAP, Christian Help and the Salvation Army with phone numbers. It still uses the old agency name DHHR and gives no LIEAP season dates or eligibility. The top result is dead (HTTP 410), and many other results are news stories from 2013 to 2021.
+    checked: 2026-10-28
+  - id: q02
+    best_url: https://graduateeducation.wvu.edu/resources/community-resources
+    search_top_results: [graduateeducation.wvu.edu, wvpresbytery.org, cfmconline.org]
+    scores: {found: 2, steps: 3, current: 1, plain: 2, mobile: 3}
+    total: 11
+    orgs: [Christian Help, St. Ursula Food Pantry, Canyon Presbyterian Church, Covenant Evangelical Methodist Church, Scott's Run Settlement House, Starting Points Family Resource Center, The Salvation Army of Morgantown, Community Kitchen Inc., Mountaineer Food Bank, Pantry Plus More]
+    note: The top result is a WVU page with a good list of pantries, days and phone numbers, but it was last updated August 1, 2024, and nothing confirms which pantries are open this week. The other top results are a church food drive PDF with no pantry hours and a pandemic-era story.
+    checked: 2026-10-28
+    gap: No current, dated list of pantries with this week's hours; the best list is a 2024 university page aimed at students.
+  - id: q03
+    best_url: https://wrc.wvu.edu/resources/basic-needs/utility-bill-help
+    search_top_results: [digital-release.wboy.com, digital-release.wboy.com, yahoo.com]
+    scores: {found: 1, steps: 3, current: 2, plain: 2, mobile: 3}
+    total: 11
+    orgs: [Morgantown Utility Board, Christian Help, The Salvation Army of Morgantown, Dollar Energy Fund]
+    note: The top results are about a 2025 MUB payment deferral for federal workers and old COVID-era pages, and one MUB result now returns 404. The MUB home page is a placeholder with only phone, pay and account links. Christian Help's water and sewer vouchers turned up only after a second search using the name Christian Help, which a resident would have to know already.
+    checked: 2026-10-28
+    gap: Nothing ties water shutoff help together; the utility's site does not point to assistance and the help that exists is only found by name.
+  - id: q04
+    best_url: https://www.wvpath.wv.gov
+    search_top_results: [map.thefoodtrust.org, dhhr.wv.gov, fred.stlouisfed.org]
+    scores: {found: 2, steps: 2, current: 3, plain: 2, mobile: 3}
+    total: 12
+    orgs: [WV Department of Human Services, WV PATH]
+    note: None of the top 3 results answers the question (an out-of-county listing, a dead state notice, a statistics table). WV PATH, the real place to apply, shows up only through third-party guides lower down. The portal is kept up and works on a phone, though its text is small and it uses terms like Integrated Eligibility. The results never give the Monongalia County office address or hours.
+    checked: 2026-10-28
+  - id: q05
+    best_url: https://www.mphealthright.org
+    search_top_results: [en.wikipedia.org, idealist.org, idealist.org]
+    scores: {found: 3, steps: 2, current: 2, plain: 3, mobile: 3}
+    total: 13
+    orgs: [Milan Puskar Health Right, Monongalia County Health Department]
+    note: All of the top results point to Milan Puskar Health Right. Its own site says plainly who qualifies and gives the phone, hours and address, but carries no date, and it takes a tap or two from Wikipedia to reach it. Wikipedia still shows an older income limit.
+    checked: 2026-10-28
+  - id: q06
+    best_url: https://wrc.wvu.edu/health-care/mental-health/general-mental-wellbeing
+    search_top_results: [wvumedicine.org, carruth.wvu.edu, campuslife.wvu.edu]
+    scores: {found: 2, steps: 3, current: 3, plain: 2, mobile: 3}
+    total: 13
+    orgs: [988 Suicide and Crisis Lifeline, HELP4WV, Chestnut Ridge Center (WVU Medicine), Valley HealthCare System, WVU Carruth Center]
+    note: The top result is a 2022 WVU Medicine article about Clarksburg that gives 988 and HELP4WV but says an adult crisis team is coming soon. The next two are for WVU students only. The best local list is the fifth result, a WVU Women's Resource Center page updated March 2026, which starts with student services and never mentions 988 or 911.
+    checked: 2026-10-28
+  - id: q07
+    best_url: https://www.monchd.org/services/influenza
+    search_top_results: [digital-release.wboy.com, dominionpost.com, digital-release.wboy.com]
+    scores: {found: 2, steps: 2, current: 2, plain: 2, mobile: 3}
+    total: 11
+    orgs: [Monongalia County Health Department, Vaccines for Children Program]
+    note: The top results are old news stories. The Health Department's flu page says to call for an appointment and that children's vaccines are free through Vaccines for Children, but never says whether flu or COVID shots are free for adults or people on Medicare, and lists no 2026-27 clinic dates.
+    checked: 2026-10-28
+  - id: q08
+    best_url: https://www.monchd.org/departments-programs/mchd-dentistry
+    search_top_results: [tbiwprogram.wv.gov, realdentalcosts.com, aspendental.com]
+    scores: {found: 2, steps: 3, current: 2, plain: 3, mobile: 3}
+    total: 13
+    orgs: [MCHD Dentistry (Monongalia County Health Department), Milan Puskar Health Right]
+    note: The top results are a 2019 state PDF, a cost-estimate site and a chain dentist that does not take Medicaid. MCHD Dentistry is a much better answer but had to be found on the Health Department's site. Its page clearly says it takes WV Medicaid and lists its price for uninsured new adult patients, but its newest news item is from November 2024.
+    checked: 2026-10-28
+  - id: q09
+    best_url: https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business
+    search_top_results: [howtostartanllc.com, avalara.com, commenda.io]
+    scores: {found: 2, steps: 3, current: 2, plain: 2, mobile: 2}
+    total: 11
+    orgs: [City of Morgantown Finance Department, City of Morgantown Planning Division, WV State Tax Department, WV One Stop Business Portal]
+    note: The first three results are paid filing sites. The city's own steps page is the fourth result and clearly lists zoning, state registration, the city license and the $65 Certificate of Occupancy fee. It is undated, still mentions a COVID grant, never covers a home bakery or food permits, puts the application in a PDF, and scrolls sideways on a phone (509px wide at 390px).
+    checked: 2026-10-28
+  - id: q10
+    best_url: https://wvsbdc.com/
+    search_top_results: [digital-release.wboy.com, morgantownwv.gov, digital-release.wboy.com]
+    scores: {found: 2, steps: 2, current: 3, plain: 2, mobile: 3}
+    total: 12
+    orgs: [West Virginia Small Business Development Center, City of Morgantown, WV Capital Access Program, WVU Encova Center for Entrepreneurship]
+    note: The top results are a 2020 COVID-era news release and the city's old ARPA grant page. The city's SBDC page ranks much lower and links to WV SBDC, which offers free coaching on business plans and funding through a Become a Client signup or 888-982-7232. The SBDC site does not show a Morgantown office or advisor on its main page, and the city page does not say whether its seminars are free.
+    checked: 2026-10-28
+  - id: q11
+    best_url: https://www.monchd.org/departments-programs/environmental-health
+    search_top_results: [monocounty.ca.gov, montgomeryparks.org, monocounty.ca.gov]
+    scores: {found: 2, steps: 2, current: 3, plain: 1, mobile: 2}
+    total: 10
+    orgs: [Monongalia County Health Department Environmental Health, City of Morgantown licensing clerk, Main Street Morgantown]
+    note: The plain search mostly returns Mono County, California and Montgomery County pages. A reworded search finds the health department's temporary food permit PDF, which is hosted on a WVU site. The health department's own Environmental Health page is current (it has a FY 2026-27 fee schedule) and links forms for temporary events, mobile units and farmers markets, but every form, fee and rule is in a PDF or Google Drive file. Only the phone number (304-598-5131) is plain HTML. The Downtown Morgantown street vending page from the results now redirects to a page with no vending information.
+    checked: 2026-10-28
+  - id: q12
+    best_url: https://www.morgantownwv.gov/285/Procedures-for-Meeting
+    search_top_results: [tn.gov, commaonline.org, oh-whitehall.civicplus.com]
+    scores: {found: 1, steps: 3, current: 2, plain: 2, mobile: 3}
+    total: 11
+    orgs: [City of Morgantown City Council, Office of the City Clerk]
+    note: The plain search and one reworded search showed only other cities, including Morganton NC. The city's rules page turned up only when the search was limited to morgantownwv.gov. That page says anyone may speak in the public portion for 4 minutes after giving their name and address, and that a sign-up list may be required. It does not say how to sign up now, where public comment falls in the meeting, or whether written comments are accepted, and much of the page is dense procedural text.
+    checked: 2026-10-28
+  - id: q13
+    best_url: https://www.morgantownwv.gov/154/City-Council
+    search_top_results: [dominionpost.com, en.wikipedia.org, dominionpost.com]
+    scores: {found: 2, steps: 2, current: 2, plain: 2, mobile: 3}
+    total: 11
+    orgs: [City of Morgantown City Council, City of Morgantown GIS, Ward Boundary Commission]
+    note: The top results are news stories. One of them mentions the city's ward map but does not link to it. A reworded search finds the council page, which lists one member per ward and links a Find My Council Member map. Getting an email such as ward3@morgantownwv.gov takes one more tap per name. The page shows no term dates, and the newest year on it is 2023, so I could not confirm the roster is current. I did not test the ArcGIS ward map on a phone.
+    checked: 2026-10-28
+  - id: q14
+    best_url: https://www.morgantownwv.gov/428/Service-Request
+    search_top_results: [yahoo.com, digital-release.wboy.com, dominionpost.com]
+    scores: {found: 2, steps: 3, current: 2, plain: 3, mobile: 3}
+    total: 13
+    orgs: [City of Morgantown Engineering and Public Works, Morgantown 311 (SeeClickFix), WV Division of Highways]
+    note: The plain search shows only pothole news, including a February 2025 story with no reporting steps. A reworded search finds the city's service request page, which clearly says to use the Morgantown 311 app or seeclickfix.com/morgantown and pick Street Maintenance and Potholes or Street Light Requests. The page does not say what to do on state roads, which the WV Division of Highways handles.
+    checked: 2026-10-28
+  - id: q15
+    best_url: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
+    search_top_results: [app.govly.com, app.govly.com, app.govly.com]
+    scores: {found: 2, steps: 2, current: 3, plain: 2, mobile: 2}
+    total: 11
+    orgs: [Monongalia County Commission, Monongalia County Administrator]
+    note: All of the top results are third-party AI summaries of meetings on Govly, some with mismatched dates. The official county page needed a reworded search. It is current, with agendas posted through 10/28/26, and says the commission meets Wednesdays at 10 a.m. at the Courthouse. Each agenda is a PDF, and the page is a very long list (about 3,000 words).
+    checked: 2026-10-28
+  - id: q16
+    best_url: https://iserve.wvu.edu/calendar/2026/10
+    search_top_results: [iserve.wvu.edu, iserve.wvu.edu, iserve.wvu.edu]
+    scores: {found: 2, steps: 2, current: 3, plain: 2, mobile: 3}
+    total: 12
+    orgs: [WVU Center for Community Engagement (iServe), United Way of Monongalia and Preston Counties, Arts Council of Greater Morgantown, Amedisys Hospice of Morgantown]
+    note: All top results are the right site, WVU iServe, but they open old months (December 2025, September 2022, August 2017), so a resident has to go to the current month. The October 2026 calendar does list current needs, including the October 31 Betty Puskar Breast Cancer Walk. Signing up needs a login, and the site uses student-oriented terms. United Way's VolunteerMPC.org did not load (502 from the headless browser and the connection dropped on curl), so I could not check it.
+    checked: 2026-10-28
+  - id: q17
+    best_url: https://ycfwv.org/grant-opportunities/
+    search_top_results: [grantexec.com, platform.grantexec.com, platform.grantexec.com]
+    scores: {found: 2, steps: 2, current: 3, plain: 2, mobile: 3}
+    total: 12
+    orgs: [Your Community Foundation of North Central West Virginia, City of Morgantown, Monongalia County Commission, United Way of Monongalia and Preston Counties, West Virginia First Foundation]
+    note: The top results are grant aggregator listings, not the local funder. Your Community Foundation's site clearly lists its 2026-27 programs, which closed September 21, 2026, and says to check back in August 2027. No single page lists local funders, their deadlines, and who can apply.
+    checked: 2026-10-28
+  - id: q18
+    best_url: https://wrc.wvu.edu/resources/basic-needs/clothing
+    search_top_results: [yahoo.com, enews.wvu.edu, students.wvu.edu]
+    scores: {found: 1, steps: 3, current: 2, plain: 1, mobile: 3}
+    total: 10
+    orgs: [WVU Blue and Gold Mine Sale, United Way of Monongalia and Preston Counties, Homestart Closet, Goodwill, Salvation Army Thrift Store, Christian Help, M-SNAP ReTails, The Ranch Community Store]
+    note: Most results are about the WVU Blue and Gold Mine Sale, which only takes donations in May. The WVU Women's Resource Center list names local thrift stores and nonprofits, but it is written for shoppers and does not say who accepts donations or what they take.
+    checked: 2026-10-28
+    gap: No list of who accepts which donations (furniture, clothes, household goods), with pickup or drop-off details.
+  - id: q19
+    best_url: https://www.republicservices.com/municipality/morgantown-wv
+    search_top_results: [republicservices.com, republicservices.com, morgantownwv.gov]
+    scores: {found: 1, steps: 1, current: 2, plain: 2, mobile: 2}
+    total: 8
+    orgs: [Republic Services, City of Morgantown]
+    note: The top result is the hauler's Morgantown page, which showed only a cookie banner in the phone test. A 2023 checklist PDF says trash and recycling go out the same day by 6 a.m., but no street-by-street day is visible, so the resident is left to call the hauler. The city's Waste and Sustainability page in the results returns a 404.
+    checked: 2026-10-28
+    gap: There is no public pickup-day map or street list that loads, and the city's own trash page link is dead, so residents have to call the hauler.
+  - id: q20
+    best_url: https://monongaliacountyswa.com/e-cycle-event
+    search_top_results: [morgantownwv.gov, dominionpost.com, mub.org]
+    scores: {found: 2, steps: 2, current: 3, plain: 2, mobile: 2}
+    total: 11
+    orgs: [Monongalia County Solid Waste Authority, Morgantown Utility Board, Friends of Deckers Creek, Republic Services, City of Morgantown, Habitat for Humanity ReStore]
+    note: Two of the top three results are dead (the city's Recycling Guide and MUB's hazardous waste page both return 404). A reworded search finds the county Solid Waste Authority, which lists an e-cycle event on October 31, 2026 and a latex paint event planned for 2027. Batteries are not covered anywhere. The SWA site uses a fixed narrow layout with small text.
+    checked: 2026-10-28
+  - id: q21
+    best_url: https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-WV-service-guide-2019.pdf
+    search_top_results: [recyclenation.com, recyclenation.com, ebsco.com]
+    scores: {found: 2, steps: 3, current: 1, plain: 1, mobile: 1}
+    total: 8
+    orgs: [Republic Services, City of Morgantown]
+    note: The top results are a 2013 article and a research paper. The clearest answer is Republic's 2019 service guide PDF, which says yes to glass food and beverage containers and no to drinking glasses, ceramics and Pyrex. A 2023 flyer also lists glass for the monthly drop-off. Nothing current in HTML confirms the rule still applies (see issue 25).
+    checked: 2026-10-28
+    gap: The only clear glass rule is in a 2019 PDF, and there is no current web page from the city or hauler that confirms it.
+  - id: q22
+    best_url: https://www.wdtv.com/2026/08/12/new-data-shows-enrollment-proficiency-gap-north-central-west-virginia-schools/
+    search_top_results: [boe.mono.k12.wv.us, educationrecoveryscorecard.org, niche.com]
+    scores: {found: 2, steps: 3, current: 3, plain: 2, mobile: 3}
+    total: 13
+    orgs: [Monongalia County Schools, West Virginia Department of Education]
+    note: The top result, the district's 2025 results article, returns a 404, and the others are third-party ranking sites whose numbers disagree. A reworded search finds an August 2026 WDTV story using state data. The state's ZoomWV dashboard, the official source, never shows up.
+    checked: 2026-10-28
+  - id: q23
+    best_url: https://www.macrotrends.net/cities/us/wv/morgantown/burglary-rate-statistics
+    search_top_results: [dominionpost.com, macrotrends.net, spotcrime.com]
+    scores: {found: 1, steps: 3, current: 1, plain: 2, mobile: 2}
+    total: 9
+    orgs: [Morgantown Police Department, West Virginia State Police UCR Program, FBI Uniform Crime Reporting]
+    note: The best trend data a resident finds is a third-party page that stops in 2018. The news result now opens an unrelated page. Neither the police department site nor the city police page links to crime statistics.
+    checked: 2026-10-28
+    gap: There is no current official crime trend page for Morgantown, and the only trend data a resident finds is third-party and ends in 2018.
+  - id: q24
+    best_url: https://digital-release.wboy.com/news/monongalia/monongalia-co-named-healthiest-county-in-state-has-high-rate-of-stis/amp/
+    search_top_results: [en.wikipedia.org, dominionpost.com, digital-release.wboy.com]
+    scores: {found: 2, steps: 3, current: 1, plain: 2, mobile: 3}
+    total: 11
+    orgs: [County Health Rankings and Roadmaps (University of Wisconsin Population Health Institute), Mon Health Medical Center, Monongalia County Health Department]
+    note: The results are mostly 2023 news stories saying Monongalia ranked healthiest of WV's 55 counties. The official County Health Rankings site does not show up in the results. The 2025 Mon Health community health needs assessment is only a PDF. There is no clear next step to current data.
+    checked: 2026-10-28
+  - id: q25
+    best_url: https://legalaidwv.org/renters-rights-west-virginia/eviction-in-west-virginia/
+    search_top_results: [lawinfo.com, lawinfo.com, lawinfo.com]
+    scores: {found: 2, steps: 3, current: 2, plain: 3, mobile: 3}
+    total: 13
+    orgs: [Legal Aid of West Virginia]
+    note: The first three results are paid attorney directory listings. Legal Aid WV shows up around result 7, and its eviction page has plain videos, answer and appeal forms, an Apply for Help link and the helpline 866-255-4370. The page is undated, and nothing marks it as a Morgantown office.
+    checked: 2026-10-28
+  - id: q26
+    best_url: https://www.ccwva.org/programs/grace-shelter/
+    search_top_results: [wvmetronews.com, digital-release.wboy.com, thedaonline.com]
+    scores: {found: 1, steps: 1, current: 3, plain: 2, mobile: 3}
+    total: 10
+    orgs: [Catholic Charities West Virginia (Grace Shelter), West Virginia Coalition to End Homelessness, City of Morgantown, Monongalia County Commission]
+    note: The search returns only news stories about shelter changes, and some of them conflict. The Grace Shelter page (19 beds, open 24/7, first come first served, adults 18 and over, phone 681-867-1002) never appeared, even after two reworded searches. It was only reachable through the Catholic Charities site menu. Nothing online says whether a bed is open tonight.
+    checked: 2026-10-28
+    gap: No current, single answer for where to sleep tonight; search shows only news stories, and no page lists all shelter and warming options with hours.
+  - id: q27
+    best_url: https://fmhousing.com/
+    search_top_results: [lms.affordablehousingonline.com, affordablehousingonline.com, lms.affordablehousingonline.com]
+    scores: {found: 2, steps: 3, current: 3, plain: 2, mobile: 3}
+    total: 13
+    orgs: [Fairmont-Morgantown Housing Authority, City of Morgantown]
+    note: Third-party listing sites fill the top results, and one says the Section 8 list closed in July 2026. The housing authority's own homepage, around result 11, says the Section 8 list opened May 18, 2026 and that waiting lists are open. You apply on a PDF or paper form, returned by mail, fax, drop box or in person at 430 Spruce St. There is no online application.
+    checked: 2026-10-28
+  - id: q28
+    best_url: https://www.busride.org/9-purple-line
+    search_top_results: [en.wikipedia.org, en.wikipedia.org, busride.org]
+    scores: {found: 2, steps: 2, current: 1, plain: 2, mobile: 2}
+    total: 9
+    orgs: [Mountain Line Transit Authority]
+    note: Two of the top results are about a different Mountain Line in Montana. The Morgantown route list shows that the Purple Line (Rt 9) stops at Ruby, with first and last run times on its page. Stop-by-stop times are only in a PDF marked "Effective August, 2021", and the page tells phone users to download the PDF.
+    checked: 2026-10-28
+    gap: No HTML timetable for the hospital stop, and the only timetable is a 2021 PDF, so a rider cannot easily confirm today's times on a phone.
+  - id: q29
+    best_url: https://www.busride.org/newfit
+    search_top_results: [wrc.wvu.edu, eldercare.ufhealth.org, brevy.com]
+    scores: {found: 3, steps: 2, current: 2, plain: 2, mobile: 3}
+    total: 12
+    orgs: [Mountain Line Transit Authority (NewFIT), WVU (resource list), Senior Monongalians, ModivCare and WV Department of Human Services (Medicaid rides)]
+    note: The top result is a WVU resource list that points to NewFIT and ModivCare (the page blocked our tools, so it was checked through search summaries only). The NewFIT page explains the steps clearly ($10 one way, weekdays, Monongalia County only, book by Wednesday of the week before). It has no date and warns the program has no steady funding. Senior Monongalians rides did not show up clearly.
+    checked: 2026-10-28
+  - id: q30
+    best_url: https://www.morgantownwv.gov/590/Voter-Information
+    search_top_results: [morgantownwv.gov, morgantownmag.com, morgantownmag.com]
+    scores: {found: 3, steps: 3, current: 2, plain: 2, mobile: 3}
+    total: 13
+    orgs: [Monongalia County Clerk, City of Morgantown City Clerk, West Virginia Secretary of State]
+    note: The top result is the city page, with the online registration link, a check-your-registration link, a polling place list and clerk phone numbers. It gives no 2026 deadline and still has COVID-era absentee wording. The 2026 deadline is only on the County Clerk's 2026 election page, which did not appear in these results.
+    checked: 2026-10-28
+  - id: q31
+    best_url: https://www.morgantownwv.gov/169/Commissions
+    search_top_results: [morgantownwv.gov, morgantownwv.gov, morgantownwv.gov]
+    scores: {found: 3, steps: 3, current: 1, plain: 3, mobile: 3}
+    total: 13
+    orgs: [City of Morgantown City Clerk's Office]
+    note: The first result, the city's Volunteer Opportunities page with open seats, now returns a 404. The Commissions page works, links an online application form and gives the City Clerk's number, but a resident can no longer see which seats are open.
+    checked: 2026-10-28
+  - id: q32
+    best_url: https://monongaliacountyclerk.com/index.php/elections/17-current-election/124-2026-general-election-information
+    search_top_results: [digital-release.wboy.com, monongaliacountyclerk.com, www.monongaliacountyclerk.com]
+    scores: {found: 2, steps: 2, current: 3, plain: 2, mobile: 2}
+    total: 11
+    orgs: [Monongalia County Clerk, West Virginia Secretary of State]
+    note: The search surfaces the clerk's old 2022 pages. The 2026 page is one menu tap away and is complete (Election Day Nov 3, early voting Oct 21 to 31, a Precinct 30 polling place change, sample ballots by precinct). The ballots are PDFs, you need to know your precinct number, and the page scrolls sideways on a phone.
+    checked: 2026-10-28
