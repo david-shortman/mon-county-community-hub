@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import HelpNow from '../components/HelpNow.astro';
 import EventCard from '../components/EventCard.astro';
 import { loadCalendar, upcoming } from '../lib/content.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -9,8 +10,10 @@ const soon = upcoming(loadCalendar(), undefined, 31).slice(0, 3);
   <h1>Help for life in Mon County, in plain language</h1>
   <p class="lede">A growing set of guides and tools for Morgantown and Monongalia County, WV. We point you to the people and groups already doing the work, and we tell you where every fact came from.</p>
 
+  <HelpNow />
+
   <h2>Coming up soon</h2>
-  {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing on the calendar in the next month yet.</p>}
+  {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing is on our calendar for the next month. That does not mean no help is available. See the box above, or the <a href={`${base}/stay-tonight/`}>help pages</a>.</p>}
   <p><a href={`${base}/calendar/`}>See all deadlines and dates</a></p>
   <p><a href={`${base}/stay-tonight/`}>Where to stay tonight</a></p>
   <p><a href={`${base}/recycling/`}>Trash, recycling and drop-off guide</a></p>
