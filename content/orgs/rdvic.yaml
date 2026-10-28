@@ -1,0 +1,10 @@
+name: Rape and Domestic Violence Information Center (RDVIC)
+slug: rdvic
+kind: nonprofit
+website: https://fris.org/centers/rdvic/
+summary: Helps people affected by domestic or sexual violence in Monongalia, Preston, and Taylor counties. Services include a 24-hour hotline, counseling, advocacy, and emergency shelter.
+topics: [housing, health, family]
+area: monongalia-county
+sources:
+  - url: https://fris.org/centers/rdvic/
+    checked: 2026-10-28

@@ -1,0 +1,10 @@
+name: West Virginia 211
+slug: west-virginia-211
+kind: government
+website: https://www.wv211.org
+summary: A free help line that connects you with local services like shelter, food, health care, and bill help. Open 24 hours a day.
+topics: [housing, food, health, money]
+area: statewide
+sources:
+  - url: https://bfa.wv.gov/page/west-virginia-211
+    checked: 2026-10-28
