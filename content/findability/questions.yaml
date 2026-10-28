@@ -1,0 +1,227 @@
+# Findability question set
+#
+# Realistic questions a Monongalia County resident might have. Each findability
+# run tries to answer every question the way a resident would (plain web search,
+# then following links on a phone) and scores the best answer it finds.
+# Method and scoring: docs/scoreboard.md. Results: content/findability/<date>.yaml.
+#
+# Keep ids stable so runs can be compared over time. To retire a question, mark
+# it `retired: <date>` instead of deleting it. New questions get new ids.
+#
+# kind: urgent (a need right now), everyday (a routine task), civic (taking part)
+# search: the plain words used for the first web search. Keep these fixed across
+# runs so scores stay comparable.
+
+version: 1
+questions:
+  # Help with bills and food (topic: bills-food)
+  - id: q01
+    topic: bills-food
+    kind: urgent
+    question: I can't pay my heating bill this winter. Where can I get help?
+    who: A renter in Morgantown on a fixed income
+    search: help paying heating bill Morgantown WV
+  - id: q02
+    topic: bills-food
+    kind: urgent
+    question: Where is a food pantry open near me this week?
+    who: A parent in Westover who just lost hours at work
+    search: food pantry open this week Morgantown WV
+  - id: q03
+    topic: bills-food
+    kind: urgent
+    question: My water is about to be shut off. Who can help me pay the bill?
+    who: A homeowner in Star City behind on bills
+    search: help paying water bill shutoff Morgantown WV
+  - id: q04
+    topic: bills-food
+    kind: everyday
+    question: How do I apply for SNAP (food stamps) in Monongalia County?
+    who: A recently laid off worker
+    search: apply for SNAP food stamps Monongalia County WV
+
+  # Medical care (topic: medical)
+  - id: q05
+    topic: medical
+    kind: urgent
+    question: I have no insurance. Where can I see a doctor for cheap or free?
+    who: A part-time worker with no health insurance
+    search: free or low cost clinic no insurance Morgantown WV
+  - id: q06
+    topic: medical
+    kind: urgent
+    question: Where can I get mental health or addiction help today?
+    who: Someone in crisis, or a family member helping them
+    search: mental health crisis help Morgantown WV today
+  - id: q07
+    topic: medical
+    kind: everyday
+    question: Where can I get a flu shot or COVID vaccine for free?
+    who: An older adult on Medicare, or a parent with kids
+    search: free flu shot Monongalia County health department
+  - id: q08
+    topic: medical
+    kind: urgent
+    question: I need a dentist but have no dental insurance. Where can I go?
+    who: An adult with a toothache and Medicaid or no coverage
+    search: low cost dentist no insurance Morgantown WV
+
+  # Small business (topic: small-business)
+  - id: q09
+    topic: small-business
+    kind: everyday
+    question: What license do I need to open a small business in Morgantown?
+    who: Someone starting a home bakery or a shop downtown
+    search: business license Morgantown WV how to get
+  - id: q10
+    topic: small-business
+    kind: everyday
+    question: Where can I get free help writing a business plan or finding a loan?
+    who: A first-time business owner
+    search: free small business help Morgantown WV business plan loan
+  - id: q11
+    topic: small-business
+    kind: everyday
+    question: How do I get a permit to sell food at a farmers market or event?
+    who: A home cook or food truck owner
+    search: food vendor permit Monongalia County health department
+
+  # Local government (topic: government)
+  - id: q12
+    topic: government
+    kind: civic
+    question: How do I speak at a Morgantown City Council meeting?
+    who: A resident who wants to raise a concern about their street
+    search: how to speak at Morgantown city council meeting public comment
+  - id: q13
+    topic: government
+    kind: civic
+    question: Who is my city council member, and how do I contact them?
+    who: A new resident of Morgantown
+    search: who is my Morgantown city council member ward map
+  - id: q14
+    topic: government
+    kind: everyday
+    question: How do I report a pothole or broken streetlight?
+    who: A driver or neighbor
+    search: report pothole Morgantown WV
+  - id: q15
+    topic: government
+    kind: civic
+    question: When does the Monongalia County Commission meet, and where are the agendas?
+    who: A resident following a county decision
+    search: Monongalia County Commission meeting agenda
+
+  # Philanthropy and volunteering (topic: giving-volunteering)
+  - id: q16
+    topic: giving-volunteering
+    kind: civic
+    question: Where can I volunteer in Morgantown this weekend?
+    who: A WVU student or a retiree with free time
+    search: volunteer opportunities Morgantown WV this weekend
+  - id: q17
+    topic: giving-volunteering
+    kind: everyday
+    question: What local grants can my small nonprofit apply for?
+    who: A volunteer running a small community group
+    search: grants for nonprofits Monongalia County WV foundation
+  - id: q18
+    topic: giving-volunteering
+    kind: everyday
+    question: Where can I donate furniture or clothes so they help someone here?
+    who: A family moving or cleaning out a house
+    search: donate furniture clothes Morgantown WV charity
+
+  # Recycling and disposal (topic: recycling)
+  - id: q19
+    topic: recycling
+    kind: everyday
+    question: When is trash and recycling pickup on my street?
+    who: A Morgantown renter who just moved in
+    search: Morgantown trash recycling pickup schedule
+  - id: q20
+    topic: recycling
+    kind: everyday
+    question: Where can I drop off old paint, batteries, or electronics?
+    who: A homeowner cleaning out a garage
+    search: where to dispose old paint electronics Monongalia County WV
+  - id: q21
+    topic: recycling
+    kind: everyday
+    question: Can I put glass in my recycling bin?
+    who: Any Morgantown household
+    search: is glass recycled Morgantown WV curbside
+
+  # Community health data (topic: health-data)
+  - id: q22
+    topic: health-data
+    kind: civic
+    question: How do Monongalia County schools score on state tests?
+    who: A parent choosing where to live
+    search: Monongalia County schools test scores WV
+  - id: q23
+    topic: health-data
+    kind: civic
+    question: Is crime going up or down in Morgantown?
+    who: A resident or someone thinking of moving here
+    search: Morgantown WV crime statistics trend
+  - id: q24
+    topic: health-data
+    kind: civic
+    question: How healthy is Monongalia County compared to the rest of West Virginia?
+    who: A community group writing a grant or a curious resident
+    search: Monongalia County health rankings data
+
+  # Housing (topic: housing)
+  - id: q25
+    topic: housing
+    kind: urgent
+    question: I'm being evicted. Where can I get free legal help?
+    who: A tenant who got an eviction notice
+    search: eviction help free legal aid Morgantown WV
+  - id: q26
+    topic: housing
+    kind: urgent
+    question: Where can I stay tonight if I have nowhere to go?
+    who: Someone who just lost housing
+    search: homeless shelter Morgantown WV tonight
+  - id: q27
+    topic: housing
+    kind: everyday
+    question: How do I apply for a housing voucher or affordable housing?
+    who: A low-income family on a waitlist search
+    search: apply section 8 housing voucher Morgantown WV
+
+  # Transportation (topic: transportation)
+  - id: q28
+    topic: transportation
+    kind: everyday
+    question: Which bus gets me to the hospital, and when does it run?
+    who: Someone without a car who has a doctor's visit
+    search: Mountain Line bus schedule to Ruby Memorial Hospital
+  - id: q29
+    topic: transportation
+    kind: everyday
+    question: Is there a free or cheap ride to medical appointments for seniors?
+    who: An older adult who no longer drives
+    search: senior rides to medical appointments Monongalia County WV
+
+  # Civic participation (topic: civic)
+  - id: q30
+    topic: civic
+    kind: civic
+    question: How do I register to vote, and where is my polling place?
+    who: A new resident or a first-time voter
+    search: register to vote Monongalia County WV polling place
+  - id: q31
+    topic: civic
+    kind: civic
+    question: How can I serve on a city board or commission?
+    who: A resident who wants to get involved
+    search: apply city board commission Morgantown WV
+  - id: q32
+    topic: civic
+    kind: civic
+    question: When is the next election and what is on my ballot?
+    who: Any registered voter
+    search: next election Monongalia County WV sample ballot

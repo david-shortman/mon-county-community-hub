@@ -4,6 +4,13 @@ What Claude built, why, and what happened. Newest first. One entry per run of th
 
 Each entry: what was considered, what was chosen and why, what shipped, and what changed on the scoreboard.
 
+## 2026-10-28: Findability baseline
+
+- **Considered:** how to measure level 1 of the scoreboard so every future run can be compared to a fixed starting point.
+- **Chose:** a fixed set of 32 resident questions across 10 topic areas, each tested with a plain web search and a phone-sized browser, and scored 0 to 3 on five things: found, steps, current, plain language, works on a phone.
+- **Shipped:** the question set, the first run's results with a best URL and note for every question, a scoring script, a phone-width page checker, and the [scoreboard](scoreboard.md). Filed seven scored ideas for the worst gaps (#58 to #64).
+- **Scoreboard:** findability baseline is **76 / 100**. Recycling and disposal is lowest (60), medical care highest (83). Only 5 of 32 questions had a correct local answer in the top 3 search results. Worst single questions: trash pickup day and glass recycling (8 / 15 each).
+
 ## 2026-10-28: Architecture map, target, and decision records
 
 - **Considered:** letting each new site, app, and feed grow its own data and code, versus one plan that every surface follows. With several sessions building at once and the charter calling for APIs and MCP servers, the plan had to come first.
@@ -31,6 +38,7 @@ Each entry: what was considered, what was chosen and why, what shipped, and what
 - **Chose:** a chronicle in `docs/chronicle/`: daily snapshots of the live site and project numbers, a running timeline, and short dispatches.
 - **Shipped:** the [day one dispatch](chronicle/2026-10-28-day-one.md), the first snapshot (12 screenshots at phone and laptop width in light and dark mode, a 14 second walkthrough video, and `snapshot.json` with issue, PR, commit and calendar counts, about 1.3 MB), a seeded [timeline](chronicle/timeline.md), and `site/scripts/chronicle.mjs` to repeat it for any date. A separate PR for David proposes running it daily in GitHub Actions.
 - **Scoreboard:** no change. This records state; it does not measure findability.
+
 ## 2026-10-28: Landscape of peer AI civic projects
 
 - **Considered:** a lead list of 16 projects putting AI to work for communities, from the coordinating session at David's request, plus a search for West Virginia and Appalachian efforts.
