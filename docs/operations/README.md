@@ -79,18 +79,27 @@ Change thresholds in the `T` object at the top of `health.mjs`, and update this 
 
 Never work around a permission refusal or a settings problem. Report it and wait.
 
+### Allowed actions
+
+The repo only allows actions created by GitHub (`actions/*`) and `anthropics/claude-code-action`. Any new workflow must use only those, or it will fail at startup. Adding another action needs David to change the setting.
+
 ### Common failures
 
 | You see | Likely cause | What to do |
 |---|---|---|
-| Every run is `startup_failure`, no steps ran | Repo or account setting: allowed actions, workflow permissions, spending limit, or a GitHub outage | `for:david` issue. Check [githubstatus.com](https://www.githubstatus.com) first. Agents cannot fix this. |
+| Every run is `startup_failure`, no steps ran | Repo or account setting: allowed actions, workflow permissions, spending limit, or a GitHub outage. On 2026-10-28 it was the allowed-actions list (see [the incident](incidents/2026-10-28-actions-startup-failure.md)) | `for:david` issue. Check [githubstatus.com](https://www.githubstatus.com) first. Agents cannot fix this. |
 | Site build fails at `check-content` | A content entry is missing a field, a source, or has an em dash | Fix the entry; the error names the file |
 | Site build fails at `npm run build` | Code change broke the build | Revert or fix forward on a `code/` branch |
 | `deploy-fresh` FAIL but Actions green | Pages deploy step skipped or Pages settings changed | Check the deploy job; if settings, `for:david` |
 | `links` FAIL | A source moved its page | Find the new page, re-check the fact, update the entry and its `checked` date |
 | `ics-entries` WARN | Calendar is running dry | Add dates from #17, or ask the Builder about feeds |
-| `prs-conflicts` lists `docs/build-log.md` many times | Every PR adds to the top of the same file | Rebase right before merging and keep every entry. If it keeps happening, propose a new layout (one file per entry) |
+| `prs-conflicts` lists `docs/build-log.md` many times | Every PR adds to the top of the same file | Should be rare now that build log entries are one file each in `docs/build-log/`. Rebase right before merging and keep every entry |
 
-## Continuous monitoring (proposed)
+## Continuous monitoring
 
-A workflow that runs this check every few hours and after each deploy, keeps one pinned "Health" issue up to date, and asks Claude to fix agent-fixable failures is proposed in a separate `for:david` PR. Until David merges it, sessions run the check by hand.
+[`.github/workflows/health.yml`](../../.github/workflows/health.yml) runs the check:
+
+- **Every 4 hours** (at 23 minutes past), **after every Site run on `main`** (success or failure, waiting a minute after a deploy so Pages is fresh), and **on demand** from the Actions tab.
+- **One Health issue.** When any check fails, it opens an issue labeled `health` (and `bug`), pins it, and updates its body on each run. When nothing is failing, it comments and closes it. The report is also in the run summary and saved as an artifact for 14 days.
+- **Claude only for new, fixable failures.** If a failing check is one an agent can fix, and the set of such failures has changed since the last run, it starts Claude (same setup as `claude.yml`) to find the cause and open a fix PR or a `for:code` issue. Green runs, warnings, the same failure again, and failures only David can fix (like `startup_failure`) never start Claude.
+- **Limit:** if GitHub Actions itself is down, this workflow cannot run either. Sessions should still run `npm run health` by hand at the start of a session.

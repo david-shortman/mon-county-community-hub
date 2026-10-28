@@ -2,6 +2,53 @@
 
 Latest health check run by hand. The newest run is at the top. For what each check means and who reacts, see [the runbook](README.md).
 
+## 2026-10-28 04:42 UTC: Actions fixed
+
+**Overall: WARN.** Nothing is failing.
+
+- **Actions are running again.** The cause of #66 was the repo's Actions setting, which allowed only actions from `david-shortman`. David changed it to allow actions created by GitHub plus `anthropics/claude-code-action`. The Site workflow on `main` passed at 04:40 UTC and everything merged is now live. #66 is closed and the [incident](incidents/2026-10-28-actions-startup-failure.md) is resolved.
+- **Live feeds are on the site.** `calendar.ics` now has 45 upcoming events (up from 7), and all 3 feed sources respond.
+- **Merge conflicts cleared:** no open PRs have conflicts.
+- **Warnings:** the `up-next` queue is empty. One City of Morgantown link reset the connection. This is the second reset from `morgantownwv.gov` today, on different pages, so the city site may be dropping some automated requests. Watch it; it is not broken for people.
+
+<details>
+<summary>Full report</summary>
+
+### Health: WARN
+
+Checked 2026-10-28T04:42:00.921Z against https://david-shortman.github.io/mon-county-community-hub/ and david-shortman/mon-county-community-hub.
+
+| Status | Check | Area | Summary | Who reacts |
+|---|---|---|---|---|
+| WARN | links | product | 0 broken and 1 unverified of 41 outbound links. | Claude Code (fix the link), Duet (find the new page) |
+| WARN | up-next-queue | pipeline | The up-next queue is empty (29 unclaimed for:code issues could be queued). | Duet or the daily run (pick and label the next issue) |
+| OK | site-up | product | Home page returns 200. |  |
+| OK | pages-200 | product | All 3 site pages return 200. |  |
+| OK | not-found | product | Missing pages return 404. |  |
+| OK | deploy-fresh | product | Live site was built 2026-10-28. |  |
+| OK | ics-parses | product | calendar.ics parses with 45 events. |  |
+| OK | ics-entries | product | 45 upcoming events in the feed, 36 start after 2026-11-11. |  |
+| OK | content-recheck | product | No entries past their re-check date (0 due within 30 days). |  |
+| OK | content-upcoming | product | 5 hand-checked entries are in the next 62 days on main. |  |
+| OK | feeds | product | All 3 live feeds respond. |  |
+| OK | a11y-basic | product | No basic accessibility problems (lang, title, one h1, alt text, link text, heading order). |  |
+| OK | actions-main | pipeline | Latest run on main passed for every workflow (100 runs in the last 24 hours). |  |
+| OK | deploy-age | pipeline | Last successful Site deploy was 0.0 hours ago. |  |
+| OK | main-deployed | pipeline | Everything merged to main is live. |  |
+| OK | prs-old | pipeline | 4 open PRs, none older than 3 days. |  |
+| OK | prs-conflicts | pipeline | No open PRs have merge conflicts. |  |
+| OK | issues-stuck | pipeline | No in-progress issues have gone quiet. |  |
+| OK | for-david | pipeline | 5 open issues wait for David. |  |
+| OK | daily-run | pipeline | Newest build-log entry is from 2026-10-28. |  |
+
+#### Details
+
+**links**
+
+- unverified: https://www.morgantownwv.gov/Calendar.aspx?EID=6292 (ECONNRESET) on /calendar/
+
+</details>
+
 ## 2026-10-28 baseline
 
 **Overall: FAIL.** The site itself is fine for residents today. The pipeline is down: no GitHub Actions run has started since about 04:15 UTC, so nothing merged after that is reaching the site.

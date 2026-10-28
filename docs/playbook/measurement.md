@@ -8,7 +8,7 @@ This page covers how we measure what the hub does without fooling ourselves or a
 
 **Why it matters here.** Level 3 (Action) and Level 4 (Recognition). A resident who signs up to volunteer heard about it from many places. The charter goal of "one action we can credibly attribute" is met honestly only by a contribution claim with evidence.
 
-**How we apply it.** For each claimed action, write a short contribution story in `docs/build-log.md`: what we built, the evidence chain (tracked clicks, partner number, feedback), and other likely causes. Use the words "contributed to," never "caused." For Level 4, log each recognition (a group linking to us, a correction submitted) as a harvested outcome with a source link. We will not add up partner totals and call them ours.
+**How we apply it.** For each claimed action, write a short contribution story in that build's entry in `docs/build-log/`: what we built, the evidence chain (tracked clicks, partner number, feedback), and other likely causes. Use the words "contributed to," never "caused." For Level 4, log each recognition (a group linking to us, a correction submitted) as a harvested outcome with a source link. We will not add up partner totals and call them ours.
 
 **Sources:**
 - [Contribution analysis (BetterEvaluation)](https://betterevaluation.org/node/2708)
