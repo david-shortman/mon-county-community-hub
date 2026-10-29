@@ -29,7 +29,13 @@ const r = (slug) => all.find((e) => e.slug === slug);
   {r('monchd-dentistry') && <ResourceCard r={r('monchd-dentistry')} showCost />}
 
   <h2>Every week: move more</h2>
-  <p>Federal guidelines say adults need at least 150 to 300 minutes a week of activity like brisk walking, plus some muscle work, like push-ups, at least 2 days a week. Children 6 to 17 need at least 60 minutes a day. The first step is to move more and sit less (<a href="https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know">health.gov</a>).</p>
+  <p>Federal guidelines (<a href="https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know">health.gov</a>) say:</p>
+  <ul>
+    <li>Adults: at least 150 to 300 minutes a week of activity like brisk walking.</li>
+    <li>Adults: muscle work, like push-ups, at least 2 days a week.</li>
+    <li>Children 6 to 17: at least 60 minutes a day.</li>
+    <li>The first step for anyone: move more and sit less.</li>
+  </ul>
   {r('mon-river-rail-trails') && <ResourceCard r={r('mon-river-rail-trails')} showCost />}
 
   <h2>If you use tobacco: free help to quit</h2>
