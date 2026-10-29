@@ -1,0 +1,6 @@
+# 2026-10-29: Answer pages for applying for SNAP and getting a flu or COVID shot (#195)
+
+- **Considered:** #195 (two answer pages from entries Duet already checked), #100 (skip link), #142 (noon on cards), and #220 (dental page, which still needs research). No `for:code` issue carried `up-next`.
+- **Chose:** #195. Findability questions q04 and q07 had no good official answer in search, SNAP and flu shots reach a lot of people this time of year, and both pages send people straight to the agency that does the work. A new `AnswerFacts` component reads each page's facts from its `content/resources` entry, so the page shows only what the entry says, with sources and the checked date. Re-checked every fact on its source page today and moved the checked dates to 2026-10-29. Added one fact the source states: Vaccines for Children also covers American Indian and Alaska Native children.
+- **Shipped:** `/snap/` and `/flu-shots/`, linked from the home page, the More menu and `llms.txt`. Left out, as #195 asks: the local DoHS office address and what adult shots cost without insurance. The flu page says no adult price is published and tells people to ask when they call.
+- **Scoreboard:** findability questions q04 and q07. Re-run them on the next findability check, by 2026-11-05.

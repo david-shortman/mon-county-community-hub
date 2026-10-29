@@ -1,0 +1,20 @@
+---
+// The facts block on an answer page, read from one content/resources entry,
+// so the page shows only what the entry says, with its sources and dates.
+import Actions from './Actions.astro';
+import { loadDir, ymd, prettyDate, shortUrl } from '../lib/content.mjs';
+
+const { slug, linkLabel = 'Go to the official site' } = Astro.props;
+const r = loadDir('resources').find((e) => e.slug === slug);
+if (!r) throw new Error(`AnswerFacts: no resource with slug ${slug}`);
+const org = loadDir('orgs').find((o) => o.slug === r.org);
+const checked = r.sources.map((s) => ymd(s.checked)).sort()[0];
+---
+<section class="card" aria-labelledby={`${slug}-h`}>
+  <h2 id={`${slug}-h`}>{r.title}</h2>
+  <Actions link={r.contact?.url} linkLabel={linkLabel} phone={r.contact?.phone} phoneLabel={org?.name} about={r.title} />
+  <p><strong>Who can get it:</strong> {r.who_it_is_for}</p>
+  <p><strong>What to do:</strong> {r.what_to_do}</p>
+  <p><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>
+  <p class="meta">{org && <>Run by {org.name}. </>}Last checked {prettyDate(checked)}. {r.sources.map((s, i) => <>{i ? ', ' : ''}<a href={s.url}>Source: {shortUrl(s.url)}</a></>)}</p>
+</section>

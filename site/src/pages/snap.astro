@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import AnswerFacts from '../components/AnswerFacts.astro';
+import HelpNow from '../components/HelpNow.astro';
+---
+<Base title="How to apply for SNAP (food stamps) in Monongalia County, WV" description="Apply for SNAP food help online at WV PATH, the state's free site, or call DoHS customer service. Steps, phone number and sources for Morgantown and Mon County.">
+  <h1>How do I apply for SNAP (food stamps) in Mon County?</h1>
+  <p class="lede">Apply online at WV PATH, the state's own site. It is free. If you have questions, call DoHS customer service at <a href="tel:18777161212">1-877-716-1212</a>, Monday to Friday, 8 a.m. to 5 p.m.</p>
+
+  <AnswerFacts slug="apply-for-snap-wv-path" linkLabel="Apply at WV PATH" />
+
+  <h2>Good to know</h2>
+  <ul>
+    <li>You can save your application and finish it later.</li>
+    <li>Questions with a star must be answered before you can submit.</li>
+    <li>After you submit, the state sends updates to My Messages in your WV PATH account. Check it often.</li>
+    <li>You can also report changes, like a new job or a new person in your home, on WV PATH or by calling the same number.</li>
+  </ul>
+  <p>Applying is always free. Anyone who asks for a fee to help you get SNAP is not the state.</p>
+
+  <HelpNow />
+
+  <p class="meta">We describe how to apply. The state decides who gets SNAP. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
