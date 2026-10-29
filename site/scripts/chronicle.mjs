@@ -81,7 +81,7 @@ async function capture() {
           let file = `${stem}.png`;
           if (hasFfmpeg) {
             file = `${stem}.webp`;
-            ffmpeg(png, join(outDir, file), ['-c:v', 'libwebp', '-quality', '70', '-compression_level', '6']);
+            ffmpeg(png, join(outDir, file), ['-vf', 'crop=iw:min(ih\\,16000):0:0', '-c:v', 'libwebp', '-quality', '70', '-compression_level', '6']);
           } else {
             file = `${stem}.jpg`;
             await tab.screenshot({ path: join(outDir, file), fullPage: true, type: 'jpeg', quality: 70 });
