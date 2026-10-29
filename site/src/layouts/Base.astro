@@ -22,6 +22,11 @@ const navItems = [
 ].map((n) => ({ ...n, current: n.href.replace(/\/$/, '') === here.replace(/^\/$/, '') }));
 // On phones, a page that is only under More marks the More tab instead.
 const moreCurrent = navItems.find((n) => n.current && !n.tab);
+// Heading face: Atkinson Hyperlegible Next (SIL Open Font License, see
+// public/fonts/OFL.txt), self-hosted, one weight, Latin only, about 11 KB.
+// font-display: optional means text never waits for it and never shifts.
+const headingFont = `${base}/fonts/atkinson-hyperlegible-next-800.woff2`;
+const fontFace = `@font-face { font-family: "Atkinson Hyperlegible Next"; font-weight: 800; font-style: normal; font-display: optional; src: url("${headingFont}") format("woff2"); }`;
 const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Community Hub';
 ---
 <!doctype html>
@@ -41,16 +46,19 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     <meta property="og:image:alt" content="Mon County Community Hub" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
+    <style set:html={fontFace}></style>
     <style is:global>
       /* Local identity tokens. Source of truth and contrast ratios: docs/design/identity.md */
       :root {
-        --bg: #f9f7f2; --fg: #1d1d1b; --muted: #5b5a55; --line: #ddd6ca;
-        --accent: #1f5c4a; --accent-bg: #e6f0ec; --card: #ffffff;
+        --bg: #f9f7f2; --fg: #1d1d1b; --muted: #4f4e4a; --line: #ddd6ca;
+        --accent: #1e5847; --accent-bg: #e6f0ec; --card: #ffffff;
+        --display: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         --brick: #9b4a34; --ridge: #a9bcb1;
         color-scheme: light dark;
       }
       @media (prefers-color-scheme: dark) {
-        :root { --bg: #161714; --fg: #ecebe6; --muted: #a9a79f; --line: #363830; --accent: #8fd1b5; --accent-bg: #1f2c26; --card: #1d1f1b; --brick: #d98c72; --ridge: #3f5449; }
+        :root { --bg: #161714; --fg: #ecebe6; --muted: #b7b5ae; --line: #363830; --accent: #8fd1b5; --accent-bg: #1f2c26; --card: #1d1f1b; --brick: #d98c72; --ridge: #3f5449; }
       }
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--bg); color: var(--fg); font: 18px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
@@ -59,12 +67,12 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .wrap { max-width: 46rem; margin: 0 auto; padding: 0 16px; }
       header.site { border-bottom: 1px solid var(--line); }
       header.site .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; padding-block: 14px; }
-      header.site .brand { font-weight: 700; color: var(--fg); text-decoration: none; margin-right: auto; }
+      header.site .brand { color: var(--fg); text-decoration: none; margin-right: auto; }
       .ridge { display: block; width: 100%; height: 16px; }
       .ridge .ridge-line { fill: none; stroke: var(--ridge); stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
       .ridge .ridge-fill { fill: var(--card); }
       header.site .header-ridge { margin-top: -6px; }
-      nav.main { display: flex; gap: 16px; position: relative; }
+      nav.main { display: flex; flex-wrap: wrap; gap: 4px 16px; position: relative; }
       nav.main > a { display: inline-flex; align-items: center; min-height: 24px; }
       nav.main > a[aria-current="page"] { color: var(--fg); font-weight: 700; text-decoration-thickness: 3px; }
       nav.main .short { display: none; }
@@ -111,6 +119,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       }
       .icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
       main { padding-block: 24px 48px; }
+      h1, h2, h3, header.site .brand { font-family: var(--display); font-weight: 800; text-wrap: balance; }
       h1 { font-size: 1.9rem; line-height: 1.2; margin: 0.4em 0; }
       h2 { font-size: 1.35rem; margin-top: 2em; }
       .lede { font-size: 1.15rem; color: var(--muted); }
