@@ -15,7 +15,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <noscript><p>Search needs JavaScript, which is off on this browser. Pick what you need below, use the list of all pages at the bottom, or call or text 211.</p></noscript>
   <h2 id="browse">Or pick what you need</h2>
   <NeedTiles headingLevel={3} />
-  <p class="meta">The search runs on your phone. Your words go after the “#” in the web address, which is not sent to the site’s host, and we never collect or store what you search for.</p>
+  <p class="meta">The search runs on your phone. Your words are never sent to us or to the site’s host, and we never store them. Like any visit, the host can see which files your phone loads, including the search files for the pages that match.</p>
   <script is:inline define:vars={{ base }}>
     (function () {
       var input = document.getElementById('search-q');

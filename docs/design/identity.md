@@ -76,7 +76,7 @@ Each direction gets its own issue and PR. Until those ship, the rules below stil
 - **Order on a phone:** the question as the page title, the "Need help right now?" box (211 call and text, 988, 911), the need buttons, then search. The first screen shows the 211 buttons and the first need buttons.
 - **Need buttons** ([`NeedTiles.astro`](../../site/src/components/NeedTiles.astro)) only point to a page that shows a phone number, a place, a date, or a question near its top. Add a button only when a sourced page exists; 211 covers everything else. Test: from home, two taps to help.
 - **Question flows** ([`Question.astro`](../../site/src/components/Question.astro)) use one page per answer, so the answers live in the web address, work without scripts, can be shared, and store nothing. Results say "you may qualify" and end at the official next step. The first flow is food (`/help/food/`).
-- **Search** uses Pagefind, built with the site, and runs on the phone. The words go after "#" in the address, which is never sent to the host. The search box only appears when JavaScript runs, so words are never sent for a search that cannot run. Never promise more privacy than that. Pages are indexed from `<main>`; pass `searchable={false}` to `Base` to leave a page out.
+- **Search** uses Pagefind, built with the site, and runs on the phone. The words go after "#" in the address, which is never sent to the host, though the host can see which search files load, as with any visit. The search box only appears when JavaScript runs, so words are never sent for a search that cannot run. Never promise more privacy than that. Pages are indexed from `<main>`; pass `searchable={false}` to `Base` to leave a page out.
 
 ## The cues we use
 

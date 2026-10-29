@@ -1,6 +1,7 @@
 ---
 // A visible search box. The words go after "#" in the web address, which
-// browsers never send to the host, so they stay on the phone. Search needs
+// browsers never send to the host. (The host can still see which search files
+// load, as with any visit; see the note on the search page.) Search needs
 // scripts to run, so the box stays hidden without them (the need buttons and
 // the footer's page list cover every page); words are never sent for nothing.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
