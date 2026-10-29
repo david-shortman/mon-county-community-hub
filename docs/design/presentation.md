@@ -123,6 +123,7 @@ The bottom tab bar stays as identity.md describes. The tab bar and the need pick
 | Food | `/food/` | Day list, place cards, tags, printout | Planned in #60 |
 | Deadlines | `/calendar/` | Days left chip, add to calendar, checklist | Live |
 | Help with a bill | `/utility-bills/` | Step path, place cards | Live |
+| Money, by situation | `/money/` | Situation list, place cards, scam note | Live; paths from #178 and #179 to follow |
 | Health care | `/health/` | Question path, place cards with cost tags | Needs research (#21) |
 | Housing help | `/housing/` | Step paths, timeline, labeled picture | Not started |
 | Jobs | `/jobs/` | Short cards with tags, links to local job help | Not started |
