@@ -1,0 +1,6 @@
+# 2026-10-29: Who should get a flu or COVID shot, and when (#234)
+
+- **Considered:** David asked what the shots page says about who should get one, when and why, and who it is for. Options: leave advice out entirely, follow only the CDC, follow only doctors' groups, or say what a careful non-expert would conclude from all of them.
+- **Chose:** the last one, written down as a decision record (`docs/decisions/2026-10-29-1300-when-sources-differ.md`). Flu: the CDC, AAFP and AAP agree, so the page says it plainly. COVID: doctors' groups and the CDC differ this season, so the page names who says what and points to a doctor or pharmacist. Every claim checked on the group's own page today. The AAP's COVID ages for children could only be read in news summaries, so the page leaves them out and says to ask your child's doctor.
+- **Shipped:** "Who should get a flu shot?", "What about a COVID shot?" and "Will it cost me?" sections on `/flu-shots/`, including what Medicare pays. Plain-language fixes from #232. A planning issue for a "staying well" layer that ties health pages together by why people come (#235).
+- **Scoreboard:** findability question q07 ("free flu shot"). Re-run by 2026-11-05. The PR waits for David's review because it covers health advice.
