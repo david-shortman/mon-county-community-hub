@@ -89,6 +89,7 @@ Claude still never does these on its own. They become `for:david` issues instead
 - **Privacy:** no personal information about private individuals, ever.
 - **Plain language:** about an 8th grade reading level for anything residents read. No em dashes.
 - **Open by default:** the code, the data, the log of decisions, and the scoreboard are public. Private planning and notes about specific people stay in Notion.
+- **Low or no cost first:** when coming up with ideas, choosing tools or services, or building, look for free or low cost options first: free tiers, nonprofit and open source programs, donated (in-kind) help, and public data. Every option we propose says what it would cost, even when the answer is nothing. Many free or discounted programs are only open to nonprofits, so say when an option would need one. Spending money is still David's call.
 
 ## David's role
 
