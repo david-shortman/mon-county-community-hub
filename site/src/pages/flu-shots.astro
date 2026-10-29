@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import AnswerFacts from '../components/AnswerFacts.astro';
 const AAFP = 'https://www.aafp.org/assets/image/upload/v1788277985/pdf_2026_through_2027_influenza_rsv_sars_covid_2_guidance.pdf';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const ACOG = 'https://www.acog.org/news/news-releases/2026/09/acog-releases-2026-27-respiratory-virus-season-immunization-recommendations';
 ---
 <Base title="Flu and COVID shots in Monongalia County: who, when and cost" description="Who should get a flu or COVID shot, when, and what it costs. Book at the Monongalia County Health Department in Morgantown. Medicare pays in full, and children who qualify get shots free.">
@@ -31,6 +32,8 @@ const ACOG = 'https://www.acog.org/news/news-releases/2026/09/acog-releases-2026
     <li><strong>No insurance:</strong> the health department's pages do not list a price for adults. They say prices are lower for people with less income. When you call to book, ask what your shot will cost.</li>
   </ul>
   <p>The health department's <a href="https://www.monchd.org/services/immunizations">shots page</a> also links to its events calendar, where it lists shot clinics it holds around the community.</p>
+
+  <p>A flu shot is one of a few simple things that help most people stay well. See the others: <a href={`${base}/staying-well/`}>Staying well: a simple list</a>.</p>
 
   <p class="meta">Who-should-get-one and cost sources checked October 29, 2026. We describe what health groups say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
