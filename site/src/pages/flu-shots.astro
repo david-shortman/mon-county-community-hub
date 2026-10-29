@@ -1,16 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
 import AnswerFacts from '../components/AnswerFacts.astro';
+const AAFP = 'https://www.aafp.org/assets/image/upload/v1788277985/pdf_2026_through_2027_influenza_rsv_sars_covid_2_guidance.pdf';
+const ACOG = 'https://www.acog.org/news/news-releases/2026/09/acog-releases-2026-27-respiratory-virus-season-immunization-recommendations';
 ---
-<Base title="Flu and COVID shots in Monongalia County: who gets them free" description="Book a flu or COVID shot at the Monongalia County Health Department in Morgantown. Free for children who qualify. Most insurance and WV Medicaid accepted, with sliding-fee prices.">
+<Base title="Flu and COVID shots in Monongalia County: who gets them free" description="Who should get a flu or COVID shot, when, and what it costs. Book at the Monongalia County Health Department in Morgantown. Medicare pays in full, and children who qualify get shots free.">
   <h1>Where can I get a flu or COVID shot in Mon County?</h1>
   <p class="lede">The Monongalia County Health Department gives flu and COVID shots to anyone 6 months and older. Call <a href="tel:3045985119">304-598-5119</a> to book. Shots are free for children who qualify, and the clinic has lower prices based on income.</p>
 
   <AnswerFacts slug="monchd-flu-and-covid-shots" linkLabel="Health department shots page" />
 
-  <h2>Is it free for adults?</h2>
-  <p>The health department's pages do not list a price for adults. They say most insurance and WV Medicaid are accepted, and that prices slide with income. When you call to book, ask what your shot will cost.</p>
-  <p>The health department's <a href="https://www.monchd.org/services/immunizations">shots page</a> also points to its events calendar for outreach events.</p>
+  <h2>Who should get a flu shot?</h2>
+  <p>Almost everyone 6 months and older, every fall. Federal health officials (<a href="https://www.cdc.gov/flu/vaccines/vaccinations.html">CDC</a>), family doctors (<a href={AAFP}>AAFP</a>) and children's doctors (<a href="https://www.healthychildren.org/English/news/Pages/aap-(influenza)-flu-prevention-recommendations-for-2026-27.aspx">AAP</a>) all agree on this. The CDC says September and October are good times to get one.</p>
+  <p>A flu shot matters most if you are 65 or older, pregnant or just had a baby, have a child under 5, or have a health problem like asthma, diabetes or heart disease. These people are more likely to get very sick from the flu (<a href="https://www.cdc.gov/flu/highrisk/chronic-conditions/">CDC</a>).</p>
+  <p>If you are 65 or older, the CDC and family doctors say a stronger flu shot (high-dose, adjuvanted or recombinant) is a better choice. Family doctors say that if the place you go does not have one, get the regular shot rather than wait.</p>
 
-  <p class="meta">We describe where to get shots. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <h2>What about a COVID shot?</h2>
+  <p>Here the groups do not all say the same thing, so we tell you who says what.</p>
+  <ul>
+    <li><strong>Family doctors (<a href={AAFP}>AAFP</a>)</strong> recommend a COVID shot this season for all adults, and two doses, six months apart, for people 65 and older.</li>
+    <li><strong>Doctors who care for pregnant women (<a href={ACOG}>ACOG</a>)</strong> recommend one if you are pregnant, just had a baby, or are thinking about getting pregnant.</li>
+    <li><strong>Federal health officials (CDC)</strong> have not posted new COVID shot advice for this season. Their <a href="https://www.cdc.gov/covid/vaccines/index.html">COVID shot page</a> was last updated in July 2025.</li>
+  </ul>
+  <p>For a child, or if you have a health problem or a weak immune system, ask your doctor or a pharmacist what is right for you.</p>
+
+  <h2>Will it cost me?</h2>
+  <ul>
+    <li><strong>Medicare:</strong> Part B pays for a <a href="https://www.medicare.gov/coverage/flu-shots">flu shot</a> and a <a href="https://www.medicare.gov/coverage/coronavirus-disease-2019-covid-19-vaccine">COVID shot</a>. You pay nothing if the provider accepts Medicare.</li>
+    <li><strong>Children:</strong> free through Vaccines for Children if they qualify (see above).</li>
+    <li><strong>No insurance:</strong> the health department's pages do not list a price for adults. They say prices are lower for people with less income. When you call to book, ask what your shot will cost.</li>
+  </ul>
+  <p>The health department's <a href="https://www.monchd.org/services/immunizations">shots page</a> also links to its events calendar, where it lists shot clinics it holds around the community.</p>
+
+  <p class="meta">Who-should-get-one and cost sources checked October 29, 2026. We describe what health groups say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
