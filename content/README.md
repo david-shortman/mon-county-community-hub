@@ -11,6 +11,7 @@ name: Example Organization
 slug: example-organization
 kind: nonprofit        # nonprofit | government | community-group | business | school | faith
 website: https://example.org
+phone: "304-555-0100"   # optional; public main number only, as the source gives it
 summary: One or two plain-language sentences on what they do.
 topics: [poverty, food]
 area: monongalia-county # or morgantown, statewide, national (a national line or program)
@@ -30,6 +31,7 @@ who_it_is_for: Households earning under a set amount.
 what_to_do: Call to book an appointment, January through April.
 contact:
   phone: "304-555-0100"     # public organizational contact only
+  text: "898-211"           # optional; a public text line, if the source gives one
   url: https://example.org/tax
 cost: free
 sources:

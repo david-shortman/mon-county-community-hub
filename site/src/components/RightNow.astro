@@ -2,9 +2,10 @@
 // The pinned "help right now" box for the Front Door: 211 by call or text,
 // 988 for a mental health crisis, 911 for danger. Facts come from
 // content/resources/wv-211.yaml and content/resources/988-lifeline.yaml.
+// 911 is the standard U.S. emergency number, so it has no record.
 import Actions from './Actions.astro';
 import Icon from './Icon.astro';
-import { resource, prettyDate, ymd } from '../lib/content.mjs';
+import { resource, prettyDate, ymd, telHref } from '../lib/content.mjs';
 const r211 = resource('wv-211');
 const r988 = resource('988-lifeline');
 const checked = (r) => prettyDate(r.sources.map((s) => ymd(s.checked)).sort().at(-1));
@@ -12,12 +13,12 @@ const checked = (r) => prettyDate(r.sources.map((s) => ymd(s.checked)).sort().at
 <section class="right-now" aria-labelledby="right-now-h">
   <h2 id="right-now-h">Need help right now?</h2>
   <p>Call 211, or text your ZIP code to 898-211. Free, any hour. They point you to local help.</p>
-  <div class="pair"><Actions callFirst phone="211" phoneLabel="West Virginia 211" sms="898-211" smsLabel="West Virginia 211, send your ZIP code" /></div>
+  <div class="pair"><Actions callFirst phone={r211.contact.phone} phoneLabel="West Virginia 211" sms={r211.contact.text} smsLabel="West Virginia 211, send your ZIP code" /></div>
   <p class="crisis">Mental health crisis, or in danger right now:</p>
   <div class="crisis-btns">
-    <a class="btn" href="tel:988"><Icon name="phone" /><span>Call 988</span></a>
-    <a class="btn" href="sms:988"><Icon name="text" /><span>Text 988</span></a>
+    <a class="btn" href={telHref(r988.contact.phone)}><Icon name="phone" /><span>Call {r988.contact.phone}</span></a>
+    <a class="btn" href={`sms:${r988.contact.phone}`}><Icon name="text" /><span>Text {r988.contact.phone}</span></a>
     <a class="btn" href="tel:911"><Icon name="phone" /><span>Call 911<span class="sr-only">, emergency</span></span></a>
   </div>
-  <p class="meta">Sources: <a href={r211.sources[0].url}>West Virginia 211</a>, checked {checked(r211)}; <a href={r988.sources[0].url}>988 Lifeline</a>, checked {checked(r988)}.</p>
+  <p class="meta">Sources: <a href={r211.sources[0].url}>West Virginia 211</a>, checked {checked(r211)}; <a href={r988.sources[0].url}>988 Lifeline</a>, checked {checked(r988)}. 911 is the standard emergency number.</p>
 </section>

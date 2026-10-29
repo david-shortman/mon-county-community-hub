@@ -14,12 +14,12 @@ const srshChecked = prettyDate(srsh.sources.map((s) => ymd(s.checked)).sort().at
 <h2>Where to start</h2>
 <ol class="results">
   {student && <li><ResourceCard r={resource('the-rack-wvu-student-food-pantry')} lead="Start here: free for WVU students." /></li>}
-  <li><ResourceCard r={resource('wv-211')} sms="898-211" smsLabel="send your ZIP code" lead={student ? 'If The Rack is closed, or you need more:' : 'Start here: call or text, any hour.'} /></li>
+  <li><ResourceCard r={resource('wv-211')} sms={resource('wv-211').contact.text} smsLabel="send your ZIP code" lead={student ? 'If The Rack is closed, or you need more:' : 'Start here: call or text, any hour.'} /></li>
   <li>
     <article class="card">
       <h3>{srsh.name}</h3>
       <p>{srsh.summary}</p>
-      <Actions callFirst phone="304-435-5098" phoneLabel={srsh.name} sms="304-435-5098" smsLabel={srsh.name} link={srsh.website} linkLabel="Open srsh.org" about={srsh.name} />
+      <Actions callFirst phone={srsh.phone} phoneLabel={srsh.name} sms={srsh.phone} smsLabel={srsh.name} link={srsh.website} linkLabel="Open srsh.org" about={srsh.name} />
       <p class="meta">Source: <a href={srsh.sources[0].url}>srsh.org</a>. Checked by hand on {srshChecked}.</p>
     </article>
   </li>
