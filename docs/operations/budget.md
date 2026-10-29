@@ -8,7 +8,7 @@ Agents cannot see the plan's weekly usage meter, so we pace by schedule and by r
 
 | Lever | Normal pace | Lean pace (when over) | Push pace (when well under) |
 |---|---|---|---|
-| Scheduled build runs | 1 a day | 1 every other day | 2 a day |
+| Scheduled build runs | 3 a day: 5:41 AM, 12:41 PM and 6:41 PM Eastern (David, 2026-10-29) | 1 every other day | 3 a day (more only if David says so) |
 | Instant builds (`up-next`) | At most 1 labeled at a time, so about 2 a day | Paused (Duet adds no labels) | 1 or 2 labeled at a time |
 | Duet sweeps | 2 a day, lean | 1 a day | 2 a day |
 | Weekly jobs (findability, visibility, retro, chronicle) | Weekly | Visibility skipped that week | Weekly |
