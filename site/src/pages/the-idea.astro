@@ -1,0 +1,121 @@
+---
+// The project story, in layers: one line on top, four parts under it, and for
+// each part a before, an after, and links so anyone can check it themselves.
+// Shapes how the project presents itself, so changes wait for David (for:david).
+import Base from '../layouts/Base.astro';
+import { loadCalendarWithFeeds } from '../lib/content.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const doc = (p) => `${repo}/blob/main/${p}`;
+const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+// Count the offices and groups behind the deadlines page, so the number stays true as it grows.
+const calendarOrgs = new Set((await loadCalendarWithFeeds()).map((e) => e.org_name).filter(Boolean)).size;
+---
+<Base title="The idea behind this site for Morgantown and Mon County" description="What this site is trying to do for Morgantown and Monongalia County, why it can work, and how you can check each part for yourself.">
+  <h1>The idea behind this site</h1>
+  <p class="lede">Morgantown and Mon County already have a lot of good help and good information. Too much of it is hard to find and hard to use. This site puts AI to work, day and night, to pull it together and make it easy to act on.</p>
+
+  <div class="big-idea">
+    <p class="kicker">The idea in one line</p>
+    <p class="line">Put AI to work for our community: tie together the help that is already here, bring in what has worked in other places, and shape it all around the questions people really have.</p>
+  </div>
+
+  <p>The idea has four parts. Each one shows what things looked like before and what this site does instead. Each has links so you can check it yourself. We would rather show you than ask you to trust us.</p>
+
+  <ol class="parts">
+    <li><a href="#work">Make good information work for real needs</a></li>
+    <li><a href="#connect">Connect what is already here</a></li>
+    <li><a href="#learn">Learn from what works elsewhere</a></li>
+    <li><a href="#prove">Prove it in the open</a></li>
+  </ol>
+
+  <h2 id="work">1. Make good information work for real needs</h2>
+  <p>A lot of good information already exists. It is often set up the way an office is organized, not around the question you came with. So you dig through menus, open a PDF, or get a list of phone numbers. We reshape it. We start with your situation, put the answer first, and give the next step. We build pages to work on a cheap phone, at any hour, without asking your name.</p>
+  <div class="ba">
+    <section class="card">
+      <h3>Before</h3>
+      <p>On October 28, 2026, we tested 32 everyday questions about life here. For 11 of them, the key detail was only inside a PDF. For 7, we hit a page that no longer exists, often on an official site. A search for a place to stay tonight showed only old news stories about past winter shelters. The shelter that is open 24 hours did not show up.</p>
+    </section>
+    <section class="card">
+      <h3>After</h3>
+      <p>Our <a href={`${base}/stay-tonight/`}>Where to stay tonight</a> page puts three free options on one screen. Each has a call button, its hours, who it serves, how to get in, and the date we last checked it.</p>
+    </section>
+  </div>
+  <p class="check"><strong>Check it yourself:</strong> <a href={doc('content/findability/2026-10-28b.yaml')}>the test results, question by question</a> (a data file on GitHub), and the <a href={`${base}/stay-tonight/`}>stay tonight page</a>.</p>
+
+  <h2 id="connect">2. Connect what is already here</h2>
+  <p>Help in Mon County comes from many places. There are county and city offices, and state and federal programs. There are nonprofits, churches, the university, businesses, and neighbors. We bring their services and dates together in one place. Every item points back to the group that runs it. You deal with them, not us. You can see on every listing whose work it is.</p>
+  <div class="ba">
+    <section class="card">
+      <h3>Before</h3>
+      <p>Dates that matter are spread across many websites. Property tax dates are on <a href="https://www.assessor.org/2205/Real-Estate">the county's sites</a>. Health insurance sign-up is on <a href="https://www.healthcare.gov/quick-guide/dates-and-deadlines/">HealthCare.gov</a>. Free e-waste, tire, and food pantry days are each on a different group's page.</p>
+    </section>
+    <section class="card">
+      <h3>After</h3>
+      <p>Our <a href={`${base}/calendar/`}>Deadlines and dates</a> page lists dates from {calendarOrgs} different offices and groups in one place. You can add them all to your phone's calendar, and new dates show up on their own.</p>
+    </section>
+  </div>
+  <p class="check"><strong>Check it yourself:</strong> every date on the <a href={`${base}/calendar/`}>deadlines page</a> links to the group that set it.</p>
+
+  <h2 id="learn">3. Learn from what works elsewhere</h2>
+  <p>We don't guess at how to do this. We learn from research and from what other cities, states, and countries have tried. We write down where each idea came from. Then we fit it to the people who live here.</p>
+  <div class="ba">
+    <section class="card">
+      <h3>Before</h3>
+      <p>In our test, the answers people can find today scored lowest on two things: being easy to find, and being easy to read.</p>
+    </section>
+    <section class="card">
+      <h3>After</h3>
+      <p>Our page rules start from facts about Mon County. About 1 in 6 adults here reads at the lowest level, by a national adult skills survey. About 1 in 7 households gets internet only through a phone's data plan, by Census numbers from 2024.</p>
+      <p>So pages put the answer first, use short words, and stay small enough to load fast on a cheap phone. <a href={doc('docs/playbook/audience-facts.md')}>See these facts with their sources and dates</a> on GitHub.</p>
+    </section>
+  </div>
+  <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/design/presentation.md')}>our page rules and their sources</a>, <a href={doc('docs/playbook/trust-and-ai.md')}>where our trust rules come from</a>, and <a href={doc('docs/playbook/landscape.md')}>what others are doing</a>, all on GitHub.</p>
+
+  <h2 id="prove">4. Prove it in the open</h2>
+  <p>Big promises about AI are easy to make. So we measure, and we publish the results, good or bad. The code, the data, the rules the AI follows, and a log of what it built and why are all public. When we get something wrong, the fix is public too.</p>
+  <div class="ba">
+    <section class="card">
+      <h3>Where we started</h3>
+      <p>Our first test, on October 28, 2026, scored 76 out of 100 for how well a determined person could find answers. But only 5 of the 32 questions had a correct local answer in the top 3 search results. So for most questions, a search alone did not lead to a good local answer.</p>
+    </section>
+    <section class="card">
+      <h3>Where we are now</h3>
+      <p>The site is new. Its pages don't show up in search yet, so the score has not moved. A recheck the same day found 6 of 32, because of changes on other sites, not ours. We say that plainly. We test again every week. Later we will also count whether people use the site and whether it helped them act.</p>
+    </section>
+  </div>
+  <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/scoreboard.md')}>the scoreboard</a> and <a href={`${repo}/tree/main/docs/build-log`}>the build log</a>, both on GitHub.</p>
+
+  <h2>A person is responsible</h2>
+  <p>AI does most of the research, writing, and checking. A local resident, David McCoy, sets the direction and reviews the work. On its own, the AI may never contact anyone, spend money, take sides, or collect personal information it does not need. <a href={`${base}/about/`}>Read who is behind this and how it runs</a>.</p>
+
+  <h2>What this is not</h2>
+  <ul>
+    <li>It is not a government website, and it does not speak for any office or group.</li>
+    <li>It does not replace anyone. It sends you to the people doing the work.</li>
+    <li>It does not sell anything, show ads, ask for donations, or track you.</li>
+  </ul>
+
+  <h2>Where this could go</h2>
+  <p>These are goals, not results yet. If this works, it should get easier for everyone doing good work here. A pantry volunteer could send someone one clear link. A new neighbor could find their way around in a day instead of a month. Things that are hard today could become simple, even boring. The code and content are free to reuse. Local leaders or other towns can take the idea and run with it.</p>
+
+  <div class="note">
+    <p><strong>Help us get it right.</strong> Try it on a real question. If something is wrong, missing, or confusing, <a href={tellUs}>tell us</a>. If you run a program, check how we describe it and tell us what to fix.</p>
+  </div>
+
+  <style>
+    .big-idea { margin: 20px 0; padding: 16px 18px; border-left: 4px solid var(--accent); background: var(--accent-bg); border-radius: 4px 10px 10px 4px; }
+    .big-idea .kicker { margin: 0; font-size: 0.85rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .big-idea .line { margin: 4px 0 0; font-family: var(--display); font-weight: 800; font-size: 1.25rem; line-height: 1.35; }
+    .parts a { display: inline-flex; align-items: center; min-height: 44px; }
+    .ba { display: grid; gap: 0 14px; }
+    .ba .card { margin: 10px 0 0; }
+    .ba h3 { font-size: 1rem; color: var(--muted); }
+    .ba .card:last-child { border-color: var(--accent); }
+    .ba .card:last-child h3 { color: var(--accent); }
+    .ba .card p { margin: 0; }
+    .ba .card p + p { margin-top: 8px; }
+    .check { font-size: 0.95rem; }
+    @media (min-width: 40rem) { .ba { grid-template-columns: 1fr 1fr; } }
+  </style>
+</Base>
