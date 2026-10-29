@@ -1,0 +1,10 @@
+name: WV Division of Tobacco Prevention
+slug: wv-division-of-tobacco-prevention
+kind: government
+website: https://dhhr.wv.gov/wvdtp/quitline/Pages/default.aspx
+summary: The state office that runs the West Virginia Tobacco Quitline, which offers free coaching and nicotine replacement to help people quit.
+topics: [health]
+area: statewide
+sources:
+  - url: https://dhhr.wv.gov/wvdtp/quitline/Pages/default.aspx
+    checked: 2026-10-29

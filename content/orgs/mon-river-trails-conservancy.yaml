@@ -1,0 +1,10 @@
+name: Mon River Trails Conservancy
+slug: mon-river-trails-conservancy
+kind: nonprofit
+website: https://montrails.org/
+summary: The group that builds and cares for the Mon River, Caperton and Deckers Creek rail-trails in Monongalia, Marion and Preston counties.
+topics: [community, health]
+area: monongalia-county
+sources:
+  - url: https://montrails.org/rail-trail-info/
+    checked: 2026-10-29

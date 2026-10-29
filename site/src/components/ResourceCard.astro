@@ -3,7 +3,7 @@
 // is for, what to do, then big buttons. Source and checked date in small print.
 import Actions from './Actions.astro';
 import { prettyDate, ymd, shortUrl } from '../lib/content.mjs';
-const { r, sms, smsLabel, lead } = Astro.props;
+const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
 const checked = r.sources.map((s) => ymd(s.checked)).sort().at(-1);
 const host = r.contact?.url ? new URL(r.contact.url).hostname.replace(/^www\./, '') : null;
 ---
@@ -11,6 +11,7 @@ const host = r.contact?.url ? new URL(r.contact.url).hostname.replace(/^www\./, 
   <h3>{r.title}</h3>
   {lead && <p><strong>{lead}</strong></p>}
   <p>{r.who_it_is_for} {r.what_to_do}</p>
+  {showCost && r.cost && r.cost !== 'free' && <p><strong>Cost:</strong> {r.cost}</p>}
   <Actions callFirst
     phone={r.contact?.phone} phoneLabel={r.title}
     sms={sms} smsLabel={smsLabel}

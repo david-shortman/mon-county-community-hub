@@ -1,0 +1,15 @@
+title: West Virginia Tobacco Quitline
+slug: wv-tobacco-quitline
+org: wv-division-of-tobacco-prevention
+topics: [health]
+who_it_is_for: West Virginians who want to quit smoking or other tobacco. There are special programs for people who are pregnant and for people who use chew or dip.
+what_to_do: Call 1-800-QUIT-NOW, or text 304-583-4010 to sign up. A trained coach helps you make a plan by phone. WV Medicaid members can call the same number.
+contact:
+  phone: "1-800-784-8669"
+  url: https://dhhr.wv.gov/wvdtp/quitline/Pages/default.aspx
+cost: Free nicotine replacement, like patches or gum, along with phone coaching.
+sources:
+  - url: https://dhhr.wv.gov/wvdtp/quitline/Pages/default.aspx
+    checked: 2026-10-29
+  - url: https://bms.wv.gov/smoking-tobacco-cessation-quit-line-update
+    checked: 2026-10-29
