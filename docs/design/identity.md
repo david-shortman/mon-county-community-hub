@@ -2,9 +2,11 @@
 
 This guide says how the things we build can feel like they come from Morgantown and Monongalia County, without getting harder to read or use. It is the source of truth for colors, the one motif, and local wording. Every site, app, and tool we build should follow it.
 
+**Version 2 (October 29, 2026).** David chose a bolder, more distinct direction after the [Hub Identity Workshop](https://claude.ai/artifact/MR7VsryBth6f47tK2gnKmN) brainstorm. The decision is in [`docs/decisions/2026-10-29-1306-identity-v2.md`](../decisions/2026-10-29-1306-identity-v2.md). The new sections are "Personality," "Design principles," "Voice: this, not that," and "Three directions." The type and contrast rules changed.
+
 **Rule one: readability first.** Local feel is seasoning, not the meal. Every change still has to pass all six [design rubrics](../rubrics/README.md). If a local touch ever gets in the way of reading or acting, the touch goes.
 
-Last checked: October 28, 2026. Refreshed monthly (see "Keeping this current" below).
+Last checked: October 29, 2026. Refreshed monthly (see "Keeping this current" below).
 
 ## What makes this place look like itself
 
@@ -17,6 +19,57 @@ These are the things a long-time resident, a newcomer, and a student would all r
 - **Glassmaking.** From the 1890s, more than 20 glass makers worked here. Seneca Glass (1896 to 1983) built a brick factory on the river in what is now Sunnyside. It is now the Seneca Center and is on the National Register (1985). The glass trade drew European immigrants who settled in Sunnyside. ([nomination form, WV Culture](https://wvculture.org/wp-content/uploads/2021/03/Seneca-glass-company-building.pdf), [Clio: Seneca Center](https://www.theclio.com/entry/28417))
 - **The PRT.** Small automated cars on a concrete guideway, running since 1975 between downtown, the campuses, and the medical center. ([e-WV: Personal Rapid Transit](https://wvencyclopedia.org/entries/1779))
 - **Rhododendron.** The great rhododendron (*Rhododendron maximum*) grows wild in the hills and has been the state flower since 1903. ([WV State Museum: state symbols](https://wvstatemuseumed.wv.gov/site/state-symbols.html))
+
+## Personality
+
+Set by David on the workshop sliders, October 29, 2026. Every design and writing choice should fit this line:
+
+**A bold, serious-leaning hub that sounds casual and matter-of-fact, lightly seasonal, deeply rooted in Mon County, with the answer first and details after.**
+
+| Spectrum | Where we sit | What it means in practice |
+|---|---|---|
+| Serious to playful | Serious-leaning (1 of 4) | Drawings only as quiet markers. Never jokes about hardship. |
+| Formal to casual | Casual (3 of 4) | Talk like a helpful neighbor: "you," short words, contractions are fine. |
+| Matter-of-fact to enthusiastic | Matter-of-fact (1 of 4) | State what to do. No exclamation points, no hype. |
+| Quiet to bold | Bold (3 of 4) | Heavy display type for headings, big dates, strong blocks of color where they help action. |
+| Timeless to seasonal | Lightly seasonal (2 of 4) | Type and layout never change. One tint or ridge may change by topic or season. |
+| Rooted to placeless | Deeply rooted (0 of 4) | Real local views, place names residents use, local materials in the palette. |
+| Read it all to answer first | Answer first (4 of 4) | The answer or the action sits at the top of every page. Explanation comes after. |
+
+## Design principles
+
+Use these to settle arguments. Each one can be tested.
+
+1. **Answer first, then explain.** The first screen of every page tells a person what to do or who to call.
+2. **Two taps to help.** From the home page, a worried person reaches a phone number, a place, or a date in two taps or fewer.
+3. **Point to people.** Every answer ends at a real organization: call, text, directions, or a date, with the date we checked.
+4. **Bold, not loud.** Strength comes from type, size, and shape. Never from motion, noise, or more colors than needed.
+5. **From here.** Local forms and words, never borrowed seals, mascots, or stereotypes.
+6. **Light on any phone.** Every page works on an old Android with weak signal and with scripts off.
+7. **Everyone, every time.** 7:1 text contrast, big targets, screen reader and voice control friendly, plain words.
+
+## Voice: this, not that
+
+- **Plain,** not childish
+- **Warm,** not cheerful about hardship
+- **Neutral,** not official
+- **Local,** not folksy
+- **Bold,** not loud
+- **Fast,** not rushed
+- **Confident,** never certain about someone's eligibility ("you may qualify," then the official next step)
+- **Modern,** not trendy
+
+## Three directions, used together
+
+David chose a mix of all three workshop directions:
+
+| Direction | Where it applies | What it means |
+|---|---|---|
+| **B. Front Door** | The home page | One question, "What do you need help with?", a visible search box, plain need buttons, and "Call or text 211" pinned on top. Short question flows end at real organizations. Answers live in the web address, so nothing is stored. |
+| **A. Trailhead** | Every guide | Each need is a route with steps (mileposts), collapsed until needed, each step ending in an action. Based on the GOV.UK step-by-step pattern. |
+| **C. Living Ridgeline** | The identity layer | A small library of real ridge profiles from views residents know, one per topic, with one tint each. Type and layout stay fixed so it always reads as one hub. Still one ridge per screen. |
+
+Each direction gets its own issue and PR. Until those ship, the rules below still apply as written.
 
 ## The cues we use
 
@@ -53,32 +106,33 @@ All colors are CSS variables in [`site/src/layouts/Base.astro`](../../site/src/l
 | `--bg` | Page background (sandstone paper) | `#f9f7f2` | `#161714` |
 | `--card` | Card background | `#ffffff` | `#1d1f1b` |
 | `--fg` | Main text | `#1d1d1b` | `#ecebe6` |
-| `--muted` | Secondary text, fine print | `#5b5a55` | `#a9a79f` |
+| `--muted` | Secondary text, fine print | `#4f4e4a` | `#b7b5ae` |
 | `--line` | Card and section borders (mortar) | `#ddd6ca` | `#363830` |
-| `--accent` | Links, dates, focus ring (hill green) | `#1f5c4a` | `#8fd1b5` |
+| `--accent` | Links, dates, focus ring (hill green) | `#1e5847` | `#8fd1b5` |
 | `--accent-bg` | Callout and tag background | `#e6f0ec` | `#1f2c26` |
 | `--brick` | Brick edge on callouts, footer line | `#9b4a34` | `#d98c72` |
 | `--ridge` | Ridgeline motif stroke | `#a9bcb1` | `#3f5449` |
 
 **Color roles stay single.** Green means "you can act on this" (links, dates, focus). Brick is decoration only and never carries meaning, so it never conflicts with status colors later. Brick does pass 4.5:1 on the page background in both modes, so it could hold text if we ever need it, but don't use it for links.
 
-### Measured contrast (WCAG 2.2 AA)
+### Measured contrast (WCAG AAA for text)
 
 Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base.astro` and fails the build if any required pair drops below the minimum. It also runs after every `npm run build`.
 
-Text needs 4.5:1. Non-text parts that help people see an edge need 3:1. Decorative lines have no minimum and are kept faint on purpose.
+**Text needs 7:1** (WCAG 2.2 AAA, criterion 1.4.6), our rule since October 29, 2026. Only about 31% of phone sites pass even the lower AA bar. Non-text parts that help people see an edge need 3:1. Decorative lines have no minimum and are kept faint on purpose.
 
 | Pair | Kind | Light | Dark |
 |---|---|---|---|
 | `--fg` on `--bg` | text | 15.77:1 pass | 15.08:1 pass |
 | `--fg` on `--card` | text | 16.88:1 pass | 13.92:1 pass |
 | `--fg` on `--accent-bg` | text | 14.50:1 pass | 12.16:1 pass |
-| `--muted` on `--bg` | text | 6.46:1 pass | 7.47:1 pass |
-| `--muted` on `--card` | text | 6.91:1 pass | 6.89:1 pass |
-| `--muted` on `--accent-bg` | text | 5.94:1 pass | 6.02:1 pass |
-| `--accent` on `--bg` | text | 7.30:1 pass | 10.25:1 pass |
-| `--accent` on `--card` | text | 7.81:1 pass | 9.46:1 pass |
-| `--accent` on `--accent-bg` | text | 6.71:1 pass | 8.26:1 pass |
+| `--muted` on `--bg` | text | 7.78:1 pass | 8.77:1 pass |
+| `--muted` on `--card` | text | 8.33:1 pass | 8.10:1 pass |
+| `--muted` on `--accent-bg` | text | 7.16:1 pass | 7.08:1 pass |
+| `--accent` on `--bg` | text | 7.72:1 pass | 10.25:1 pass |
+| `--accent` on `--card` | text | 8.26:1 pass | 9.46:1 pass |
+| `--accent` on `--accent-bg` | text | 7.10:1 pass | 8.26:1 pass |
+| `--card` on `--accent` | text | 8.26:1 pass | 9.46:1 pass |
 | `--brick` on `--bg` | non-text | 5.73:1 pass | 6.81:1 pass |
 | `--brick` on `--accent-bg` | non-text | 5.27:1 pass | 5.49:1 pass |
 | `--ridge` on `--bg` | decorative | 1.87:1 | 2.21:1 |
@@ -87,7 +141,10 @@ Text needs 4.5:1. Non-text parts that help people see an edge need 3:1. Decorati
 
 ## Type
 
-We keep the system font stack (`system-ui` and friends). It loads instantly on old phones and slow connections, reads well, and needs no outside font service. A self-hosted font would add weight for little gain, and a hosted font service would mean a third party sees our visitors, which would be a `for:david` decision. Local feel comes from color, the ridgeline, and words, not from a typeface.
+- **Headings:** Atkinson Hyperlegible Next, weight 800, for `h1` to `h3` and the site name. It was made by the Braille Institute so letters that look alike (l, I, 1, O, 0) are easy to tell apart. It is free under the SIL Open Font License ([`site/public/fonts/OFL.txt`](../../site/public/fonts/OFL.txt)).
+- **How it loads:** self-hosted, never from a font service, so no third party sees our visitors. One weight, Latin characters only, about 11 KB. It uses `font-display: optional`: if it is not ready in a moment, the page uses the system font for that visit and never waits or jumps. Next visit it comes from the cache.
+- **Body text:** the system font stack. Research finds no single font is fastest for everyone, and serif versus sans does not change legibility, so body text stays on what each phone does best, at no cost.
+- **Don't** add more weights or families without updating this section and checking page weight. Don't use Public Sans: it reads as a federal government site.
 
 ## The motif: the ridgeline
 

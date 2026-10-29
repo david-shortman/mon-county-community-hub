@@ -1,6 +1,7 @@
 // Checks WCAG 2.2 contrast for every text and background pair in the site's
 // color tokens (site/src/layouts/Base.astro), in light and dark mode.
-// Text pairs need 4.5:1. Non-text pairs (borders, the brick accent) need 3:1.
+// Text pairs need 7:1 (WCAG AAA 1.4.6, our rule since 2026-10-29). Non-text pairs
+// (borders, the brick accent) need 3:1.
 // Decorative pairs (the ridge line, card lines) are printed but not required.
 // Run: npm run check-contrast. Results go in docs/design/identity.md.
 import { readFileSync } from 'node:fs';
@@ -33,7 +34,7 @@ const pairs = [
   ['brick', 'bg', 'non-text'], ['brick', 'accent-bg', 'non-text'],
   ['ridge', 'bg', 'decorative'], ['line', 'bg', 'decorative'], ['line', 'card', 'decorative'],
 ];
-const need = { text: 4.5, 'non-text': 3, decorative: 0 };
+const need = { text: 7, 'non-text': 3, decorative: 0 };
 
 let failed = 0;
 console.log('| Pair | Kind | Light | Dark |\n|---|---|---|---|');
@@ -47,7 +48,7 @@ for (const [f, b, kind] of pairs) {
   console.log(`| \`--${f}\` on \`--${b}\` | ${kind} | ${cells[0]} | ${cells[1]} |`);
 }
 if (failed) {
-  console.error(`\n${failed} pair(s) below the WCAG 2.2 AA minimum.`);
+  console.error(`\n${failed} pair(s) below our minimum (7:1 text, WCAG AAA; 3:1 non-text).`);
   process.exit(1);
 }
-console.log('\nAll required pairs pass WCAG 2.2 AA.');
+console.log('\nAll required pairs pass: text at 7:1 or more (WCAG AAA), non-text at 3:1 or more.');
