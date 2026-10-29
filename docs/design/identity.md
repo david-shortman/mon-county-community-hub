@@ -71,6 +71,13 @@ David chose a mix of all three workshop directions:
 
 Each direction gets its own issue and PR. Until those ship, the rules below still apply as written.
 
+**Front Door, shipped (#239).** How the home page works, so new pages fit it:
+
+- **Order on a phone:** the question as the page title, the "Need help right now?" box (211 call and text, 988, 911), the need buttons, then search. The first screen shows the 211 buttons and the first need buttons.
+- **Need buttons** ([`NeedTiles.astro`](../../site/src/components/NeedTiles.astro)) only point to a page that shows a phone number, a place, a date, or a question near its top. Add a button only when a sourced page exists; 211 covers everything else. Test: from home, two taps to help.
+- **Question flows** ([`Question.astro`](../../site/src/components/Question.astro)) use one page per answer, so the answers live in the web address, work without scripts, can be shared, and store nothing. Results say "you may qualify" and end at the official next step. The first flow is food (`/help/food/`).
+- **Search** uses Pagefind, built with the site. It runs on the phone; nothing typed is sent anywhere. Pages are indexed from `<main>`; pass `searchable={false}` to `Base` to leave a page out.
+
 ## The cues we use
 
 We use three cues. That is the whole list. Adding a fourth needs a note in this file and a fresh "is it too much?" check.

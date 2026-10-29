@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "postbuild": "node scripts/check-pages.mjs && node scripts/check-contrast.mjs",
+    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs",
     "check-pages": "node scripts/check-pages.mjs",
     "preview": "astro preview",
     "check-content": "node scripts/check-content.mjs",
@@ -17,5 +17,8 @@
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^5.18.2",
     "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "pagefind": "1.5.2"
   }
 }

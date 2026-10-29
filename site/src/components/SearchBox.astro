@@ -1,0 +1,13 @@
+---
+// A visible search box. It is a plain form, so it works without scripts:
+// it opens the search page, which runs the search on this phone (Pagefind).
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { value = '', id = 'q' } = Astro.props;
+---
+<form class="search" role="search" action={`${base}/search/`} method="get">
+  <label for={id}>Search the hub</label>
+  <div class="search-row">
+    <input id={id} name="q" type="search" value={value} placeholder="For example: food today" autocomplete="off" enterkeyhint="search" />
+    <button class="btn btn-search" type="submit">Search</button>
+  </div>
+</form>

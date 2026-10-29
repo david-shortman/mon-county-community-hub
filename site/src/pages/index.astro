@@ -1,27 +1,28 @@
 ---
+// The Front Door (identity v2, direction B): one question, help right now,
+// search, and need buttons. Help is two taps away from here.
 import Base from '../layouts/Base.astro';
-import HelpNow from '../components/HelpNow.astro';
+import RightNow from '../components/RightNow.astro';
+import NeedTiles from '../components/NeedTiles.astro';
+import SearchBox from '../components/SearchBox.astro';
 import EventCard from '../components/EventCard.astro';
 import { loadCalendar, upcoming } from '../lib/content.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const soon = upcoming(loadCalendar(), undefined, 31).slice(0, 3);
 ---
-<Base title="Help in Morgantown and Monongalia County, WV" description="Find plain-language help, deadlines, and local groups in Morgantown and Monongalia County, WV. Every fact links to its source.">
-  <h1>Help for life in Mon County, in plain language</h1>
-  <p class="lede">A growing set of guides and tools for Morgantown and Monongalia County, WV. We point you to the people and groups already doing the work, and we tell you where every fact came from.</p>
+<Base title="Help in Morgantown and Monongalia County, WV" description="What do you need help with? Shelter tonight, food, bills, rent, shots, deadlines and recycling in Morgantown and Monongalia County, WV. Call or text 211 any time.">
+  <h1 class="front-q">What do you need help with?</h1>
 
-  <HelpNow />
+  <RightNow />
+
+  <NeedTiles />
+
+  <SearchBox />
 
   <h2>Coming up soon</h2>
-  {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing is on our calendar for the next month. That does not mean no help is available. See the box above, or the <a href={`${base}/stay-tonight/`}>help pages</a>.</p>}
+  {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing is on our calendar for the next month. That does not mean no help is available. Call or text 211.</p>}
   <p><a href={`${base}/calendar/`}>See all deadlines and dates</a></p>
-  <p><a href={`${base}/stay-tonight/`}>Where to stay tonight</a></p>
-  <p><a href={`${base}/recycling/`}>Trash, recycling and drop-off guide</a></p>
-  <p><a href={`${base}/utility-bills/`}>Help paying a utility bill</a></p>
-  <p><a href={`${base}/money/`}>Money help: can't pay a bill, rent, payday loans, free tax help</a></p>
-  <p><a href={`${base}/snap/`}>How to apply for SNAP (food stamps)</a></p>
-  <p><a href={`${base}/flu-shots/`}>Where to get a flu or COVID shot</a></p>
 
   <h2>What this is</h2>
-  <p>This site is an open experiment. A local resident sets the direction, and an AI assistant (Claude) researches, builds, and checks sources every day. <a href={`${base}/about/`}>Read how it works</a>.</p>
+  <p>Plain-language help for Morgantown and Monongalia County, WV. We point you to the people and groups already doing the work, and we tell you where every fact came from. A local resident sets the direction, and an AI assistant (Claude) researches, builds, and checks sources every day. <a href={`${base}/about/`}>Read how it works</a>.</p>
 </Base>

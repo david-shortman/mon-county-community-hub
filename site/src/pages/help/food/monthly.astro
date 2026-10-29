@@ -1,0 +1,17 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ResourceCard from '../../../components/ResourceCard.astro';
+import { resource } from '../../../lib/content.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Help buying groceries in Mon County: SNAP" description="You may qualify for SNAP (food stamps) in West Virginia. Apply online on WV PATH or call DoHS. Only the state decides who qualifies.">
+  <h1>Help buying groceries every month</h1>
+  <p class="lede">You may qualify for SNAP (food stamps). It puts money for groceries on a card each month. Only the state decides who qualifies, so apply even if you are not sure. <a href={`${base}/help/food/`}>Change answers</a>.</p>
+  <h2>Where to start</h2>
+  <ol class="results">
+    <li><ResourceCard r={resource('apply-for-snap-wv-path')} lead="Apply online, or call with questions." /></li>
+  </ol>
+  <p><a href={`${base}/snap/`}>Step-by-step: how to apply for SNAP</a></p>
+  <h2>Need food before SNAP starts?</h2>
+  <p>Call 211 or text your ZIP code to 898-211, any hour. Or see <a href={`${base}/help/food/today/`}>food today or this week</a>.</p>
+</Base>
