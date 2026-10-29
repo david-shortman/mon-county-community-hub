@@ -12,6 +12,6 @@ const checked = (r) => prettyDate(r.sources.map((s) => ymd(s.checked)).sort().at
   <h2 id="right-now-h">Need help right now?</h2>
   <p>Call 211, or text your ZIP code to 898-211. Free, any hour. They point you to local help.</p>
   <div class="pair"><Actions callFirst phone="211" phoneLabel="West Virginia 211" sms="898-211" smsLabel="West Virginia 211, send your ZIP code" /></div>
-  <p class="crisis">Mental health crisis: call or text <a href="tel:988">988</a>. In danger: call <a href="tel:911">911</a>.</p>
+  <p class="crisis">Mental health crisis: <a href="tel:988">call 988</a> or <a href="sms:988">text 988</a>. In danger: call <a href="tel:911">911</a>.</p>
   <p class="meta">Sources: <a href={r211.sources[0].url}>West Virginia 211</a>, checked {checked(r211)}; <a href={r988.sources[0].url}>988 Lifeline</a>, checked {checked(r988)}.</p>
 </section>

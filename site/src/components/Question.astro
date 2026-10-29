@@ -6,7 +6,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const { step, of, back, choices } = Astro.props;
 ---
 <div class="question">
-  <p class="q-step">Question {step} of {of}</p>
+  <p class="q-step">Question {step}{of && ` of ${of}`}</p>
   <ul class="choices">
     {choices.map((c) => <li><a class="choice" href={`${base}${c.href}`}><span class="choice-label">{c.label}</span>{c.hint && <span class="choice-hint">{c.hint}</span>}</a></li>)}
   </ul>

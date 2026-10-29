@@ -13,7 +13,7 @@ kind: nonprofit        # nonprofit | government | community-group | business | s
 website: https://example.org
 summary: One or two plain-language sentences on what they do.
 topics: [poverty, food]
-area: monongalia-county # or morgantown, statewide, etc.
+area: monongalia-county # or morgantown, statewide, national (a national line or program)
 sources:
   - url: https://example.org/about
     checked: 2026-10-27

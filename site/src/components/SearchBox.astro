@@ -1,13 +1,27 @@
 ---
-// A visible search box. It is a plain form, so it works without scripts:
-// it opens the search page, which runs the search on this phone (Pagefind).
+// A visible search box. With scripts on, the words go after "#" in the web
+// address, which browsers never send to the host, so they stay on the phone.
+// Without scripts it is a plain form (the words go in the address as ?q=,
+// which the host can see), so search still works everywhere.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const { value = '', id = 'q' } = Astro.props;
 ---
-<form class="search" role="search" action={`${base}/search/`} method="get">
+<form class="search" role="search" data-hash-search action={`${base}/search/`} method="get">
   <label for={id}>Search the hub</label>
   <div class="search-row">
     <input id={id} name="q" type="search" value={value} placeholder="For example: food today" autocomplete="off" enterkeyhint="search" />
     <button class="btn btn-search" type="submit">Search</button>
   </div>
 </form>
+<script is:inline>
+  document.querySelectorAll('form[data-hash-search]').forEach(function (f) {
+    if (f.dataset.ready) return; f.dataset.ready = '1';
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var q = f.querySelector('input[name="q"]').value.trim();
+      var url = f.getAttribute('action') + (q ? '#q=' + encodeURIComponent(q) : '');
+      if (location.pathname === f.getAttribute('action')) { location.hash = q ? 'q=' + encodeURIComponent(q) : ''; }
+      else { location.href = url; }
+    });
+  });
+</script>
