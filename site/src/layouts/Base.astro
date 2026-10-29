@@ -154,7 +154,11 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .right-now .pair .actions { grid-template-columns: 1fr 1fr; }
       .right-now .pair .btn-primary { grid-column: auto; }
       .right-now p { margin: 6px 0; }
-      .right-now .crisis { font-weight: 600; }
+      .right-now .crisis { font-weight: 600; margin-top: 10px; }
+      .crisis-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 6px 0 10px; }
+      .crisis-btns .btn { padding: 8px 6px; gap: 6px; }
+      .crisis-btns .icon { display: none; }
+      .crisis-btns span { white-space: nowrap; }
       .search { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin: 24px 0 8px; }
       .search label { font-family: var(--display); font-weight: 800; font-size: 1.15rem; }
       .search-row { display: flex; gap: 8px; }
