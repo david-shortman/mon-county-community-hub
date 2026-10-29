@@ -38,7 +38,7 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
 
   <HelpNow />
 
-  <h2>Open now</h2>
+  <h2 id="dates">Open now</h2>
   {now.length ? now.map((e) => <EventCard e={e} />) : <p>Nothing is open right now on our list. If you need help this week, call <a href="tel:211">211</a> and tell them what you need.</p>}
 
   <h2>Coming up</h2>

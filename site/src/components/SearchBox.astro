@@ -1,0 +1,28 @@
+---
+// A visible search box. The words go after "#" in the web address, which
+// browsers never send to the host. (The host can still see which search files
+// load, as with any visit; see the note on the search page.) Search needs
+// scripts to run, so the box stays hidden without them (the need buttons and
+// the footer's page list cover every page); words are never sent for nothing.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { value = '', id = 'q' } = Astro.props;
+---
+<form class="search" role="search" data-hash-search hidden action={`${base}/search/`} method="get">
+  <label for={id}>Search the hub</label>
+  <div class="search-row">
+    <input id={id} name="q" type="search" value={value} placeholder="For example: food today" autocomplete="off" enterkeyhint="search" />
+    <button class="btn btn-search" type="submit">Search</button>
+  </div>
+</form>
+<script is:inline>
+  document.querySelectorAll('form[data-hash-search]').forEach(function (f) {
+    if (f.dataset.ready) return; f.dataset.ready = '1'; f.hidden = false;
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var q = f.querySelector('input[name="q"]').value.trim();
+      var url = f.getAttribute('action') + (q ? '#q=' + encodeURIComponent(q) : '');
+      if (location.pathname === f.getAttribute('action')) { location.hash = q ? 'q=' + encodeURIComponent(q) : ''; }
+      else { location.href = url; }
+    });
+  });
+</script>

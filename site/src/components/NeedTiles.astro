@@ -1,0 +1,27 @@
+---
+// The Front Door's need buttons. Each one leads to a page that shows a phone
+// number, a place, or a date near the top, so help is two taps from home.
+// Add a need only when we have a sourced page for it; 211 covers the rest.
+import Icon from './Icon.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { headingLevel = 2 } = Astro.props;
+const needs = [
+  { label: 'A place to stay tonight', hint: 'Shelter, a 24-hour hotline, and 211', href: '/stay-tonight/', icon: 'bed' },
+  { label: 'Food', hint: 'Today, or help buying groceries', href: '/help/food/', icon: 'food' },
+  { label: 'A bill I can’t pay', hint: 'Payment plans and who to call', href: '/money/', icon: 'receipt' },
+  { label: 'Heat, water or power', hint: 'Before a shutoff, or after one', href: '/utility-bills/', icon: 'bulb' },
+  { label: 'Rent or eviction', hint: 'Behind on rent, or a notice', href: '/money/#rent', icon: 'key' },
+  { label: 'Flu or COVID shot', hint: 'Where, when, and what it costs', href: '/flu-shots/', icon: 'health' },
+  { label: 'Dates and deadlines', hint: 'Applications, events, due dates', href: '/calendar/#dates', icon: 'calendar' },
+  { label: 'Trash and recycling', hint: 'Drop-off sites and hard items', href: '/recycling/', icon: 'recycle' },
+];
+const H = `h${headingLevel}`;
+---
+<nav class="needs" aria-labelledby="needs-h">
+  <H id="needs-h" class="sr-only">Pick what you need help with</H>
+  <ul>
+    {needs.map((n) => (
+      <li><a class="need" href={`${base}${n.href}`}><Icon name={n.icon} /><span class="need-label">{n.label}</span><span class="need-hint">{n.hint}</span></a></li>
+    ))}
+  </ul>
+</nav>

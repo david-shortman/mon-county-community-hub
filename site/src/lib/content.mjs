@@ -113,3 +113,16 @@ export function shortUrl(u) {
   const first = url.pathname.split('/').filter(Boolean)[0];
   return url.hostname.replace(/^www\./, '') + (first ? `/${first}` : '');
 }
+
+// One record from content/resources or content/orgs by slug. Throws when it is
+// missing, so a page never ships pointing at a record that is not there.
+export function resource(slug) {
+  const r = loadDir('resources').find((x) => x.slug === slug);
+  if (!r) throw new Error(`content/resources: no entry with slug ${slug}`);
+  return r;
+}
+export function org(slug) {
+  const o = loadDir('orgs').find((x) => x.slug === slug);
+  if (!o) throw new Error(`content/orgs: no entry with slug ${slug}`);
+  return o;
+}

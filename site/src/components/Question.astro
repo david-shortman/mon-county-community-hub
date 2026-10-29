@@ -1,0 +1,15 @@
+---
+// One step of a short question flow (GOV.UK "smart answer" style). Each choice
+// is a plain link to the next page, so answers live in the web address:
+// they can be shared, they work without scripts, and nothing is stored.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { step, of, back, choices } = Astro.props;
+---
+<div class="question">
+  <p class="q-step">Question {step}{of && ` of ${of}`}</p>
+  <ul class="choices">
+    {choices.map((c) => <li><a class="choice" href={`${base}${c.href}`}><span class="choice-label">{c.label}</span>{c.hint && <span class="choice-hint">{c.hint}</span>}</a></li>)}
+  </ul>
+  {back && <p><a href={`${base}${back}`}>Back</a></p>}
+  <p class="meta">Not sure? Call 211 or text your ZIP code to 898-211, any hour.</p>
+</div>

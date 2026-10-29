@@ -1,0 +1,64 @@
+---
+// Search runs on the phone with Pagefind: the index is built with the site.
+// The search box puts the words after "#" (never sent to the host). An old
+// ?q= link still works. Without scripts, the page lists every need instead.
+import Base from '../layouts/Base.astro';
+import SearchBox from '../components/SearchBox.astro';
+import NeedTiles from '../components/NeedTiles.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base searchable={false} title="Search Mon County help" description="Search plain-language help pages for Morgantown and Monongalia County, WV. The search runs on your phone, and we never collect what you search for.">
+  <h1>Search</h1>
+  <SearchBox id="search-q" />
+  <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
+  <ol id="search-results" class="search-results" hidden></ol>
+  <noscript><p>Search needs JavaScript, which is off on this browser. Pick what you need below, use the list of all pages at the bottom, or call or text 211.</p></noscript>
+  <h2 id="browse">Or pick what you need</h2>
+  <NeedTiles headingLevel={3} />
+  <p class="meta">The search runs on your phone. Your words are never sent to us or to the site’s host, and we never store them. Like any visit, the host can see which files your phone loads, including the search files for the pages that match.</p>
+  <script is:inline define:vars={{ base }}>
+    (function () {
+      var input = document.getElementById('search-q');
+      var status = document.getElementById('search-status');
+      var list = document.getElementById('search-results');
+      var pagefind;
+      function current() {
+        var h = location.hash.match(/^#q=(.*)$/);
+        if (h) { try { return decodeURIComponent(h[1].replace(/\+/g, ' ')); } catch (e) { return ''; } }
+        return new URLSearchParams(location.search).get('q') || '';
+      }
+      function load() {
+        pagefind = pagefind || import(base + '/pagefind/pagefind.js').then(function (pf) { pf.options({ baseUrl: base + '/' }); return pf; });
+        return pagefind;
+      }
+      function run(q) {
+        input.value = q;
+        list.hidden = true; list.innerHTML = '';
+        if (!q.trim()) { status.textContent = ''; return; }
+        status.textContent = 'Searching…';
+        load().then(function (pf) {
+          return pf.search(q).then(function (res) { return Promise.all(res.results.slice(0, 10).map(function (r) { return r.data(); })); });
+        }).then(function (items) {
+          if (!items.length) {
+            status.textContent = 'No pages match "' + q + '". Try fewer words, pick from the list below, or call or text 211.';
+            return;
+          }
+          items.forEach(function (d) {
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = d.url; a.textContent = (d.meta && d.meta.title) || d.url;
+            var p = document.createElement('p');
+            p.innerHTML = d.excerpt; // Pagefind escapes page text and marks matches with <mark>.
+            li.append(a, p); list.append(li);
+          });
+          list.hidden = false;
+          status.textContent = items.length + (items.length === 1 ? ' page matches "' : ' pages match "') + q + '".';
+        }).catch(function () {
+          status.textContent = 'Search could not load. Pick from the list below, or call or text 211.';
+        });
+      }
+      window.addEventListener('hashchange', function () { run(current()); });
+      run(current());
+    })();
+  </script>
+</Base>

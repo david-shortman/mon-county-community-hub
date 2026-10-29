@@ -1,0 +1,11 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Question from '../../../components/Question.astro';
+---
+<Base title="Food help in Mon County: when do you need it?" description="Two quick questions to find food help in Morgantown and Mon County: food today or this week, or help buying groceries every month.">
+  <h1>When do you need food?</h1>
+  <Question step={1} back="/" choices={[
+    { label: 'Today or this week', hint: 'Free food dates, local help, and someone to call now', href: '/help/food/today/' },
+    { label: 'Help buying groceries every month', hint: 'SNAP (food stamps), and how to apply', href: '/help/food/monthly/' },
+  ]} />
+</Base>

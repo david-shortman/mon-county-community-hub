@@ -1,0 +1,12 @@
+---
+import Base from '../../../../layouts/Base.astro';
+import Question from '../../../../components/Question.astro';
+---
+<Base title="Food today in Mon County: are you a WVU student?" description="One more question: WVU students have their own free food pantry. Everyone else gets local options and 211.">
+  <h1>Are you a student at WVU?</h1>
+  <p>WVU has a free food pantry just for its students, so this changes where we point you first.</p>
+  <Question step={2} of={2} back="/help/food/" choices={[
+    { label: 'Yes, I am a WVU student', href: '/help/food/today/student/' },
+    { label: 'No', href: '/help/food/today/other/' },
+  ]} />
+</Base>

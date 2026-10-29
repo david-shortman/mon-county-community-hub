@@ -1,0 +1,12 @@
+name: 988 Suicide and Crisis Lifeline
+slug: 988-suicide-and-crisis-lifeline
+kind: nonprofit
+website: https://988lifeline.org
+summary: A free, private help line for anyone in emotional distress or a mental health crisis. You can also call about alcohol or drug use, or about someone else. It is open 24 hours a day, every day. It is a national network of over 200 local crisis centers, run by Vibrant Emotional Health.
+topics: [health]
+area: national
+sources:
+  - url: https://988lifeline.org/
+    checked: 2026-10-29
+  - url: https://988lifeline.org/about/
+    checked: 2026-10-29
