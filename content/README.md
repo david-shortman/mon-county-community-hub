@@ -161,3 +161,17 @@ From these tags the build makes the Topics page (`/topics/`), each door's list o
 - Only public organizational contact details. Never a private person's info.
 - Every entry has at least one source with a `checked` date.
 - Entries older than 6 months since `checked` get flagged for re-verification.
+
+### What `npm run check-content` checks in orgs and resources
+
+The build fails on any of these, because pages make call, text and map links straight from these files (#259):
+
+- **Required fields.** Orgs: `name`, `slug`, `kind`, `summary`, `topics`, `area`, `sources`. Resources: `title`, `slug`, `org`, `topics`, `who_it_is_for`, `what_to_do`, `contact` with a `url`, `sources`.
+- **Slugs** are lowercase letters, numbers and dashes, match the file name, and are not used twice. A resource's `org` must have a file in `orgs/`.
+- **`kind`** is one of `nonprofit`, `government`, `community-group`, `business`, `school`, `faith`.
+- **`area`** is one of `morgantown`, `monongalia-county`, `statewide`, `national`.
+- **Phones and text lines** (org `phone`, `contact.phone`, `contact.text`) are a short code (`211`, `988`), a text code (`898-211`), or a full number (`304-555-0100`, `1-877-716-1212`). Quote them so YAML keeps them as text.
+- **`hours`** and **`cost`** are text. **`contact.place`** is an address with a comma, like `"200 M-Tec Dr, Morgantown, WV"`. **`contact.email`** looks like an email address.
+- **Sources** have a web link and a `checked` date that is not in the future. No em dashes anywhere.
+
+It warns (but does not fail) on fields it does not know, which usually means a typo, and on sources last checked over 6 months ago. The Health check (`docs/operations/README.md`) lists the same past-due entries every 4 hours, so Duet can re-check them.
