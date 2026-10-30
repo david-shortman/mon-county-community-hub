@@ -203,6 +203,7 @@ const TIME_RULES = [
   [/\b(0\d|1[3-9]|2[0-3]):[0-5]\d\b/, 'use 12-hour times ("1 p.m.", not "13:00")'],
 ];
 const BY_DATE = new RegExp(`\\bby ${MONTH} \\d{1,2}\\b`, 'i');
+const DEADLINE_VERB = /\b(apply|applies|file|pay|register|enroll|sign up|submit|send|mail|return|renew|turn in|drop off|request|order|change|choose|vote|respond|reply|call)\b/i;
 const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics']);
 function eachText(value, key, visit) {
   if (SKIP_KEYS.has(key)) return;
@@ -213,7 +214,10 @@ function eachText(value, key, visit) {
 for (const e of [...orgs, ...resources, ...loadCalendar()]) {
   eachText(e, '', (key, t) => {
     for (const [re, msg] of TIME_RULES) if (re.test(t)) warnings.push(`${e._file}: ${key}: ${msg}: "${t.match(re)[0]}"`);
-    if (key === 'what_to_do' && BY_DATE.test(t)) warnings.push(`${e._file}: what_to_do: for a deadline, write "The last day is Tuesday, December 15." instead of "${t.match(BY_DATE)[0]}"`);
+    // Only sentences that ask the reader to act by a date ("Apply by May 1"), not ones like "families heard by July 1".
+    if (key === 'what_to_do') for (const sentence of t.split(/(?<=[.!?])\s+/)) {
+      if (BY_DATE.test(sentence) && DEADLINE_VERB.test(sentence)) warnings.push(`${e._file}: what_to_do: for a deadline, write "The last day is Tuesday, December 15." instead of "${sentence.match(BY_DATE)[0]}"`);
+    }
   });
 }
 
