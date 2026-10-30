@@ -8,7 +8,7 @@
 // Town-by-town sheets (Westover, Star City, Cheat Lake) need town-level data
 // on each record first.
 import Base from '../../layouts/Base.astro';
-import { loadDoors, resource, oldestChecked, prettyDate, todayYmd, shortUrl } from '../../lib/content.mjs';
+import { loadDoors, resource, oldestChecked, isStale, prettyDate, todayYmd, shortUrl } from '../../lib/content.mjs';
 import { loadPages } from '../../lib/pages.mjs';
 import { qrSvg, shortAddress, addressParts } from '../../lib/qr.mjs';
 import { printSheets } from '../../lib/printouts.mjs';
@@ -35,7 +35,7 @@ const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href)
   <div class="sheet-head">
     <div>
       <h1>{name}: help in Mon County</h1>
-      <p class="sheet-asof"><strong>Accurate as of {prettyDate(today)}.</strong> Things change, so call first. Not sure where to start? Call {r211.contact.phone} or text your ZIP code to {r211.contact.text}. {r211.hours}.</p>
+      <p class="sheet-asof"><strong>Made from our listings on {prettyDate(today)}.</strong> Each place says when we last checked it. Things change, so call first. Not sure where to start? Call {r211.contact.phone} or text your ZIP code to {r211.contact.text}. {r211.hours}.</p>
     </div>
     <figure class="sheet-qr"><Fragment set:html={qr} /><figcaption>More online:<br /><strong>{addressParts(targetUrl)[0]}<wbr />{addressParts(targetUrl)[1]}</strong></figcaption></figure>
   </div>
@@ -53,7 +53,7 @@ const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href)
         {r.contact?.place && <p>{r.contact.place}</p>}
         {r.hours && <p>{r.hours}</p>}
         <p>{r.who_it_is_for}{r.cost === 'free' && ' Free.'}</p>
-        <p class="sh-src">Source: {shortUrl(r.sources[0].url)}. Checked {prettyDate(oldestChecked(r.sources))}.</p>
+        <p class="sh-src">{r.sources.length > 1 ? 'Sources' : 'Source'}: {r.sources.map((s) => shortUrl(s.url)).join(', ')}. Checked {prettyDate(oldestChecked(r.sources))}.{isStale(oldestChecked(r.sources), today) && <strong> Not checked in over 6 months: call to confirm.</strong>}</p>
       </li>
     ))}
   </ul>

@@ -60,7 +60,7 @@ const cards = await Promise.all(ROUTES.filter((r) => pages.has(r)).map(async (ro
     .pcard p { margin: 0; }
     .pcard :global(svg.qr) { display: block; }
     .wallets { display: flex; flex-wrap: wrap; gap: 12px; }
-    .wallet { width: 3.5in; max-width: 100%; height: 2in; box-sizing: border-box; padding: 0.12in; display: flex; gap: 0.1in; align-items: center; margin: 0; }
+    .wallet { width: 3.5in; max-width: 100%; min-height: 2in; box-sizing: border-box; padding: 0.12in; display: flex; gap: 0.1in; align-items: center; margin: 0; }
     .wallet .pc-text { flex: 1 1 auto; min-width: 0; }
     .wallet :global(svg.qr) { width: 1.15in; height: 1.15in; flex: 0 0 auto; }
     .wallet .pc-title { font-weight: 800; font-size: 13pt; line-height: 1.15; }
