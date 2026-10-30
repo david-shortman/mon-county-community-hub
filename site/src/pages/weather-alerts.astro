@@ -59,7 +59,7 @@ const plan = [{ url: 'https://www.mecca911.org/Documents/Emergency_Management/20
   <p>WVU sends emergency updates for the Morgantown campus by text and email through its safety notification system, and by push notice in the LiveSafe app. Its emergency site links to the WVU Alert sign-up. Check there for who can sign up.</p>
   <SourceLine sources={wvu} about="WVU Alert" />
   <div class="actions">
-    <a class="btn" href="https://alert.wvu.edu"><Icon name="open" /><span>WVU Alert sign-up</span></a>
+    <a class="btn" href="https://emergency.wvu.edu/"><Icon name="open" /><span>WVU emergency site and sign-up</span></a>
   </div>
 
   <h2 id="roads">Roads and closures</h2>
@@ -72,10 +72,16 @@ const plan = [{ url: 'https://www.mecca911.org/Documents/Emergency_Management/20
   <h2 id="schools">School closings and delays</h2>
   <p>The West Virginia Department of Education has a statewide School Closings and Delays page. County board offices post their own announcements there. Your child's school or the county school system may also send notices, so ask them how they reach families.</p>
   <SourceLine sources={schools} about="school closings" />
+  <div class="actions">
+    <a class="btn" href="https://wveis.k12.wv.us/closings/"><Icon name="open" /><span>School closings and delays</span></a>
+  </div>
 
   <h2 id="power">Power outage texts</h2>
   <p>FirstEnergy, the company Mon Power is part of, sends outage text alerts. Text REG to 544487 (LIGHTS) to sign up. Have your account number and ZIP code ready. Message and data rates may apply.</p>
   <SourceLine sources={power} about="outage text alerts" />
+  <div class="actions">
+    <a class="btn" href="sms:544487?&body=REG"><Icon name="text" /><span>Text REG to 544487</span></a>
+  </div>
 
   <p>Want to know your flood risk before a storm? See <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
   <p class="meta">Sources checked October 30, 2026. We point to official alert services and do not run any of them. Know an official alert service we missed? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
