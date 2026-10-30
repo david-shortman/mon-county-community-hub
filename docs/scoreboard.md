@@ -147,7 +147,7 @@ Whether people use what we build. To be measured as aggregate counts only, with 
 
 ## Level 3: Action (not measured yet)
 
-Whether it led people to do something: volunteer sign-ups, voter registrations, program applications, event turnout, donations to local groups. To be measured through tagged outbound links (counted in aggregate) and numbers partner organizations choose to report. Asking partners is David's job. Until then: none.
+Whether it led people to do something: volunteer sign-ups, voter registrations, program applications, event turnout, donations to local groups. To be measured through tagged outbound links (counted in aggregate) and numbers partner organizations choose to report. Asking partners is David's job. Until then: none. Link tags and the small-count rule are in [`docs/measurement-plans/`](measurement-plans/README.md#shared-counting-rules).
 
 ## Level 4: Recognition (not measured yet)
 
