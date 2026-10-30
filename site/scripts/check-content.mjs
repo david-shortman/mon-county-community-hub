@@ -1,7 +1,7 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 import { checkPlaces } from './check-places.mjs';
 
@@ -109,6 +109,28 @@ for (const r of resources) {
   if (c.email != null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(c.email))) errors.push(`${where}: contact email does not look like an email address`);
 }
 
+// Secondhand shops, free programs and online groups (content/secondhand, #423).
+const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources'];
+const secondhand = loadDir('secondhand');
+const secondhandSlugs = new Set();
+for (const s of secondhand) {
+  const where = s._file;
+  checkRecord(s, ['name', 'slug', 'kind', 'area', 'run_by', 'sells', 'url', 'status'], SECONDHAND_FIELDS);
+  if (secondhandSlugs.has(s.slug)) errors.push(`${where}: duplicate slug ${s.slug}`);
+  secondhandSlugs.add(s.slug);
+  if (s.kind && !SECONDHAND_KINDS[s.kind]) errors.push(`${where}: kind must be one of ${Object.keys(SECONDHAND_KINDS).join(', ')}`);
+  if (s.area && !SECONDHAND_AREAS[s.area]) errors.push(`${where}: area must be one of ${Object.keys(SECONDHAND_AREAS).join(', ')}`);
+  if (s.status && !SECONDHAND_STATUS.includes(s.status)) errors.push(`${where}: status must be one of ${SECONDHAND_STATUS.join(', ')}`);
+  if (s.goods != null && (!Array.isArray(s.goods) || s.goods.some((g) => !SECONDHAND_GOODS[g]))) errors.push(`${where}: goods must be a list from ${Object.keys(SECONDHAND_GOODS).join(', ')}`);
+  if (s.buys_from_you != null && typeof s.buys_from_you !== 'boolean') errors.push(`${where}: buys_from_you must be true or false`);
+  if (s.url && !isUrl(s.url)) errors.push(`${where}: url is not a web link`);
+  if (s.org && !orgSlugs.has(s.org)) errors.push(`${where}: org ${s.org} has no file in content/orgs/`);
+  if (s.address != null && (typeof s.address !== 'string' || !/,/.test(s.address))) errors.push(`${where}: address must be text like "200 Spruce St, Morgantown, WV"`);
+  for (const f of ['hours', 'sells', 'takes', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'note', 'run_by']) {
+    if (s[f] != null && typeof s[f] !== 'string') errors.push(`${where}: ${f} must be text`);
+  }
+}
+
 // Saved feed snapshots are committed too, so check them the same way.
 let feedCount = 0;
 for (const a of ADAPTERS) {
@@ -147,6 +169,11 @@ if (doors) {
       if (topicHome.has(t)) errors.push(`doors.yaml: topic ${t} is in both ${topicHome.get(t)} and ${d.slug}`);
       topicHome.set(t, d.slug);
       if (!label) errors.push(`doors.yaml: topic ${t} in ${d.slug} needs a label`);
+    }
+    for (const e of d.examples ?? []) {
+      for (const k of ['from', 'until']) {
+        if (e[k] !== undefined && !/^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(String(e[k]))) errors.push(`doors.yaml: example "${e.text}" in ${d.slug} needs ${k} as a quoted "MM-DD", like "09-01"`);
+      }
     }
   }
   if (JSON.stringify(doors).includes('\u2014')) errors.push('doors.yaml: contains an em dash');
@@ -212,7 +239,7 @@ function eachText(value, key, visit) {
   else if (Array.isArray(value)) value.forEach((v) => eachText(v, key, visit));
   else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) eachText(v, k, visit);
 }
-for (const e of [...orgs, ...resources, ...loadCalendar()]) {
+for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
   eachText(e, '', (key, t) => {
     for (const [re, msg] of TIME_RULES) if (re.test(t)) warnings.push(`${e._file}: ${key}: ${msg}: "${t.match(re)[0]}"`);
     // Only sentences that ask the reader to act by a date ("Apply by May 1"), not ones like "families heard by July 1".
@@ -229,5 +256,5 @@ warnings.push(...placeCheck.warnings);
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
-console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${placeCheck.count} places, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
+console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${secondhand.length} secondhand entries, ${placeCheck.count} places, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);

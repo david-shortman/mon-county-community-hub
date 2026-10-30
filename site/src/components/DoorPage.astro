@@ -147,6 +147,10 @@ const r211 = resource('wv-211');
     // Text the link to these steps (the picks are in it), or print them.
     document.getElementById('text-steps').href = 'sms:?&body=' + encodeURIComponent(location.href);
     document.getElementById('print-steps').addEventListener('click', function () { window.print(); });
-    document.getElementById('door-plan-h').focus();
+    // Land with "Your steps" at the top of the screen (#449). A plain focus()
+    // scrolls only far enough to show the heading, often at the bottom.
+    var h = document.getElementById('door-plan-h');
+    h.focus({ preventScroll: true });
+    h.scrollIntoView({ block: 'start' });
   })();
 </script>

@@ -57,7 +57,7 @@ org_name: WV Department of Human Services
 who_it_is_for: Households that need help paying winter heating bills.
 what_to_do: Apply at your local DoHS office or online before the window closes.
 url: https://example.wv.gov/lieap   # where a person should go to act
-topics: [money, housing]      # money, food, housing, health, family, government, voting, recycling, taxes, community
+topics: [money, housing]      # money, food, housing, health, family, government, voting, recycling, taxes, community, secondhand, market
 place: 200 M-Tec Dr, Morgantown, WV   # optional; adds a Directions button. Only a place the source publishes
 phone: 304-555-0100           # optional; adds a Call button. Only a public office or program number the source publishes
 phone_label: the City Clerk   # optional; who answers, read by screen readers. Defaults to org_name
@@ -181,6 +181,52 @@ phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
 - **Stale rule.** A place marked `active` whose `last_activity_seen` is over 6 months old shows "No recent activity seen, call first" (#39). A place found only in county lists is `no-recent-activity` from the start.
 - **Dated events** go in `calendar/` with `venue: <place slug>`, so they show on the place's page. Weekly regulars stay in `regular`.
 
+## `secondhand/<slug>.yaml`: shops, free programs and online groups (#423)
+
+Secondhand shops, free and lending programs, and online trading groups. The thrift, markets and swaps pages (#422) build from these. Dated sales and markets go in `calendar/` instead, with the topic `secondhand` or `market`.
+
+```yaml
+name: Example Thrift Shop
+slug: example-thrift-shop
+kind: charity-thrift      # see kinds below
+area: westover            # see areas below
+run_by: Example Animal Rescue  # who runs it, as the source names it
+org: example-org          # optional; slug from orgs/ when the group has a record
+address: "100 Example St, Westover, WV"   # optional; only a street address the source publishes
+hours: Tuesday to Saturday, 10 a.m. to 7 p.m.   # optional; in words, as the source gives them
+sells: Housewares, books, toys and furniture. No clothing.   # what it sells, lends or gives, in words
+takes: Donations of housewares, books, toys and furniture.   # optional; what it accepts from you, in words
+goods: [home, books]      # filter tags, see below
+buys_from_you: false      # true when it pays cash or store credit for your things
+funds_local_cause: Care for rescued animals.   # optional; what the money supports, as the source says
+who_can_use: City of Morgantown residents 18 and up.   # optional; for free and lending programs
+what_to_bring: A photo ID.   # optional
+url: https://example.org   # the main button: the shop's or program's own page
+url_label: Shop website    # optional; short button label. Default "Website"
+status: confirmed          # confirmed | likely | unclear | closed
+note: Moved from Morgantown Mall in 2024.   # optional; one short plain line
+sources:
+  - url: https://example.org/about
+    checked: 2026-10-30
+```
+
+**Kinds:** `charity-thrift` (a thrift store whose sales fund a cause), `resale` (buys and sells used goods), `consignment` (sells your things and pays you a share), `vintage-antique`, `used-media` (books, records, games), `free-program` (gives things away), `lending` (lends things), `repair`, `online-group`.
+
+**Areas:** `westover` (Westover, Mall Rd and Fairmont Rd), `downtown` (downtown and High St), `mileground` (Mileground and Mountaineer Mall), `university-ave` (University Ave and Sunnyside), `cheat-lake`, `elsewhere` (elsewhere in the county), `outside-county` (just over the county line), `online`.
+
+**Goods tags** (for the quick filters): `clothes`, `kids`, `home` (furniture and home goods), `books` (books, records and games), `vintage` (antiques and vintage), `tools`, `electronics`, `building`.
+
+**Status:**
+
+- `confirmed`: a source dated 2025 or 2026, or the place's own current page, backs the details.
+- `likely`: the place's own live page lists it, but nothing is dated. Cards say to check before you go.
+- `unclear`: sources disagree or are old. **Never shown on a page.** Open a `needs-verification` issue for it.
+- `closed`: closed or replaced. Never shown as open; a page may say it closed.
+
+Every fact comes from a source page read in the same session, the same as other entries. Online groups are listed only when we could open the group's own page; we never quote members. No individual home yard sales, ratings, ads or paid placement.
+
+Cards show "Not checked lately" once the oldest `checked` date is over 4 months old (#430).
+
 ## `doors.yaml`: the five doors
 
 The site is organized into five doors named for what is going on in a person's life, plus three lanes that are not doors: Help now, Dates, and About this site (#248). `doors.yaml` lists them and maps every `topics` tag used in this folder to one door, with the label people see:
@@ -196,6 +242,17 @@ doors:
 ```
 
 Each door also has an `icon` and `examples`: a few problems in residents' words, each with the page it links to. They become the door cards on the home page, and an example shows only once its page exists.
+
+An example can be seasonal with optional `from` and `until` dates, written as quoted `"MM-DD"` and counted in Morgantown time, both days included:
+
+```yaml
+      - text: Flu or COVID shot
+        href: /flu-shots/
+        from: "09-01"   # optional; shows from this day
+        until: "12-31"  # optional; shows through this day
+```
+
+With only `from`, it shows through December 31. With only `until`, it shows from January 1. A `from` later than `until` wraps the new year (`"11-01"` to `"03-31"` is November through March). Leave both out to show it all year. The site rebuilds every morning (`.github/workflows/site.yml`), so an example appears or goes away on the first build of its first or last day, with no extra schedule needed (#488). `npm run check-content` fails on a date that is not `"MM-DD"`.
 
 A new topic tag needs a home in exactly one door, or `npm run check-content` fails. Adding, renaming or removing a door changes the site's shape, so that is David's call. A topic that fits no door waits for that call.
 
