@@ -2,13 +2,14 @@
 import Icon from '../components/Icon.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
+import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
 import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
 import nameFont from '../fonts/fraunces-name-800.woff2?inline';
 import tileSvg from '../../public/favicon.svg?raw';
-const { crisis = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
+const { crisis = false, help = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(/\.\w+$/.test(Astro.url.pathname) ? Astro.url.pathname : Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
 const shareImage = new URL(`${base}/share.png`, Astro.site).href;
@@ -296,6 +297,8 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .crisis-strip p a { font-weight: 800; padding: 6px 2px; }
       .quick-exit { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
       .quick-exit:hover { text-decoration: underline; }
+      .crisis-line { margin: 0 0 12px; padding: 6px 12px; border-left: 4px solid var(--brick); background: var(--accent-bg); font-weight: 600; }
+      .crisis-line a { font-weight: 800; padding: 6px 2px; }
       html:has(.crisis-strip) { scroll-padding-top: 8rem; }
       footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; }
     </style>
@@ -315,6 +318,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
     </header>
     <main class="wrap" id="main" tabindex="-1" data-pagefind-body={searchable ? '' : undefined}>
       <Breadcrumb route={route} />
+      {help && !crisis && <CrisisLine />}
       {searchable && tagDoor && <p hidden data-pagefind-filter="door">{tagDoor.name}</p>}
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       {(crisis || tags?.door === 'help-now') && <p class="disclaimer meta">{disclaimer}</p>}
@@ -326,7 +330,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
           <ul>{footerLinks.map((n) => <li><a href={`${base}${n.href}`}>{n.label}</a></li>)}</ul>
         </nav>
         <p class="disclaimer">{disclaimer}</p>
-        <p>An open experiment for Morgantown and Monongalia County, WV. Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>. Reports go to GitHub, which needs a free account, and are public, so leave out private details.</p>
+        <p>An open experiment for Morgantown and Monongalia County, WV. Most of it is researched and written by AI (Claude), and a person oversees it (<a href={`${base}/about/`}>how we use AI</a>). Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>. Reports go to GitHub, which needs a free account, and are public, so leave out private details.</p>
       </div>
     </footer>
     <div class="sr-only" role="status" id="announce"></div>

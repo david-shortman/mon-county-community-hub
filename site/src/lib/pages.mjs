@@ -121,12 +121,20 @@ export async function breadcrumb(route) {
 // The home page door buttons: each door with the example problems whose
 // pages exist, so no example leads to an empty page. A door with no live
 // page at all stays off the home page until its first page ships (#252).
-export async function doorCards() {
+export async function doorCards(now = new Date()) {
   const pages = await loadPages();
   const live = new Set([...pages.values()].map((p) => p.door));
   return loadDoors().doors.filter((d) => live.has(d.slug)).map((d) => ({
     ...d,
     href: doorHref(d),
-    examples: (d.examples ?? []).filter((e) => pages.has(e.href.split(/[?#]/)[0])),
+    examples: (d.examples ?? []).filter((e) => pages.has(e.href.split(/[?#]/)[0]) && inSeason(e, now)),
   }));
+}
+
+// An example may carry `from` and `until` as "MM-DD" (inclusive). Without
+// them it shows all year. Checked at build time.
+function inSeason(e, now = new Date()) {
+  if (!e.from || !e.until) return true;
+  const md = `${String(now.getUTCMonth() + 1).padStart(2, '0')}-${String(now.getUTCDate()).padStart(2, '0')}`;
+  return md >= e.from && md <= e.until;
 }

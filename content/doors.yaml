@@ -41,11 +41,20 @@ doors:
   - slug: care
     name: Get care
     page: /care/
-    hint: Where to go, can't afford it, mental health today, dentist or medicine
+    hint: Mental health, care you can afford, a dentist, Medicaid
     icon: health
     examples:
+      # Ranked by local need (#475). Each shows once its page exists.
+      - text: Need mental health help
+        href: /mental-health/
+      - text: Can't afford a doctor or medicine
+        href: /no-insurance/
+      - text: Keep my Medicaid in 2027
+        href: /medicaid-2027/
       - text: Flu or COVID shot
         href: /flu-shots/
+        from: "09-01"
+        until: "12-31"
       - text: Turning 65 or on Medicare
         href: /turning-65/
       - text: Staying healthy each year
