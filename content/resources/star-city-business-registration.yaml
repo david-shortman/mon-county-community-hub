@@ -1,0 +1,22 @@
+title: Star City business registration
+slug: star-city-business-registration
+org: town-of-star-city
+topics: [work]
+who_it_is_for: People doing business in Star City.
+hours: Monday to Friday, 8 a.m. to 4:30 p.m.
+what_to_do: Download the business registration application from the town website, fill it out, and return it in person or by mail to 370 Broadway Ave. You can pay online, but then you must email the form to info@starcitywv.com. The town also posts a B&O tax form, building permit forms (allow 72 hours) and a zoning map. Questions, call the Business Office.
+contact:
+  phone: "304-599-3550"
+  email: info@starcitywv.com
+  url: https://www.starcitywv.com/business-registrations/
+  url_label: Business registration form
+  place: "370 Broadway Ave, Star City, WV 26505"
+sources:
+  - url: https://www.starcitywv.com/business-registrations/
+    checked: 2026-10-30
+  - url: https://www.starcitywv.com/bo-tax-forms/
+    checked: 2026-10-30
+  - url: https://www.starcitywv.com/building-permits/
+    checked: 2026-10-30
+  - url: https://www.starcitywv.com/zoning-map/
+    checked: 2026-10-30
