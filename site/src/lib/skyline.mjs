@@ -3,11 +3,12 @@
 // traced from photos, maps or art. Each place is sourced in
 // docs/design/identity.md ("What makes this place look like itself").
 //
-// The box is 2400 by 16 units, drawn at 1 unit per pixel on wide screens. It
-// crops from the middle instead of stretching, so a phone sees the middle
-// cluster and wide screens see more of the line. Shapes are at most 13 units
-// tall.
-const W = 2400;
+// The box is 3840 by 16 units, drawn at 1 unit per pixel on screens up to
+// 3840px wide, so shapes never grow or get cut off. It crops from the middle
+// instead of stretching, so a phone sees the middle cluster and wide screens
+// see more of the line. Shapes are at most 13 units tall.
+const W = 3840;
+const X0 = 720; // shifts the layout below to the middle of the box
 const B = 15.25; // the line, 1.5 thick, so its bottom edge is the box bottom
 const n = (v) => +v.toFixed(2);
 
@@ -43,7 +44,8 @@ const bridge = (x) => `M${x} ${B - 5}H${x + 36}M${x + 3} ${B - 5}L${x + 6} ${B -
   + `M${x + 6} ${B - 5}L${x + 10} ${B - 10}L${x + 14} ${B - 5}L${x + 18} ${B - 10}L${x + 22} ${B - 5}L${x + 26} ${B - 10}L${x + 30} ${B - 5}`
   + `M${x + 3} ${B}V${B - 5}M${x + 33} ${B}V${B - 5}`;
 
-// Where each group sits. The middle (about 980 to 1420) is what a phone sees.
+// Where each group sits, before the X0 shift. The middle (about 980 to 1420)
+// is what a phone sees.
 const layout = [
   ['trees', 590], ['hillside', 700], ['trees', 860], ['wharf', 930],
   ['knob', 1040], ['trees', 1130], ['downtown', 1188], ['glassworks', 1270], ['bridge', 1350], ['trees', 1410],
@@ -52,6 +54,10 @@ const layout = [
 
 const fill = [];
 const lines = [`M0 ${B}H${W}`];
-for (const [kind, x] of layout) (kind === 'bridge' ? lines.push(bridge(x)) : fill.push(...places[kind](x)));
+for (const [kind, x0] of layout) {
+  const x = x0 + X0;
+  if (kind === 'bridge') lines.push(bridge(x));
+  else fill.push(...places[kind](x));
+}
 
 export const SKYLINE = { width: W, height: 16, fill: fill.join(''), line: lines.join('') };
