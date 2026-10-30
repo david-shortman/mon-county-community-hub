@@ -17,8 +17,8 @@ Agents cannot see the plan's weekly usage meter, so we pace by schedule and by r
 
 ## Rules for every agent
 
-- **One useful thing per run.** Stop when it is done; do not go looking for extra work.
-- **Prefer small issues.** Large refactors wait for a week with room.
+- **One digestible chunk per run.** Each scheduled build takes the next real piece of bigger work (a page, a flow, a feed, a tool), finishes it, and stops. Do not go looking for extra work. (David, 2026-10-30: "I don't just want you dealing with small stuff in these scheduled runs, but just taking on digestible chunks each time.")
+- **Size to the run, not to the issue.** If an issue is bigger than one run, ship its first complete slice and leave the next step on the issue. Small fixes are for things that are wrong or unsafe on the live site.
 - **Read only what you need.** Skim indexes and the newest few log files, not whole folders.
 - **No retries in a loop.** If something fails twice, comment and stop.
 
