@@ -17,7 +17,7 @@ steps:
   hard-items:
     when: opens
     resource: mon-swa-ask-about-trash
-    text: Tires and electronics go to collection days. See the dates below, or call the Solid Waste Authority to ask about the next one.
+    text: Tires and electronics go to collection days. Check "Dates for this" on this page, or call the Solid Waste Authority to ask about the next one.
 situations:
   - id: pickup
     label: When is my trash pickup day?
