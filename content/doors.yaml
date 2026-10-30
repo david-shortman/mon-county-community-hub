@@ -75,6 +75,8 @@ doors:
       moving: Moving here
       recycling: Trash and recycling
       voting: Voting
+      secondhand: Thrift and secondhand
+      market: Markets and sales
   - slug: family
     name: Family and life changes
     page: /family/
