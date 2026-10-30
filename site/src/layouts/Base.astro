@@ -130,7 +130,6 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       /* Modern CSS polish (#153): even line breaks, and cards that adapt to their own width */
       p, li, dd, figcaption { text-wrap: pretty; }
       .card, .mp-body { container-type: inline-size; }
-      @container (max-width: 17rem) { .actions { grid-template-columns: minmax(0, 1fr); } }
       h2 { font-size: 1.35rem; margin-top: 2em; }
       .lede { font-size: 1.15rem; color: var(--muted); }
       .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
@@ -143,6 +142,8 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .date-chip .rel { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
       .actions { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(9.5rem, 100%), 1fr)); gap: 8px; margin: 14px 0; }
       .actions > * { min-width: 0; }
+      /* After the base rule, so it wins inside a narrow card (#153) */
+      @container (max-width: 17rem) { .actions { grid-template-columns: minmax(0, 1fr); } }
       .btn .nowrap { white-space: normal; }
       main { overflow-wrap: anywhere; }
       .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 12px; border: 1.5px solid var(--accent); border-radius: 10px;
