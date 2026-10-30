@@ -1,0 +1,19 @@
+name: Curated Closet
+slug: curated-closet
+kind: resale
+area: mileground
+run_by: Curated Closet
+address: "1756 Mileground Rd, Suite D, Morgantown, WV"
+hours: Every day, noon to 7 p.m.
+sells: Vintage clothing, shoes and WVU gear.
+takes: Buys and trades clothing and shoes.
+goods: [clothes, vintage]
+buys_from_you: true
+url: https://curatedclosetmorgantown.com/
+url_label: Shop website
+status: confirmed
+sources:
+  - url: https://curatedclosetmorgantown.com/
+    checked: 2026-10-30
+  - url: https://www.thedaonline.com/news/from-thrift-to-tailgate-where-to-find-vintage-wvu-gear-this-season/article_a8c447bc-9188-4dd4-b097-cc9d2b555084.html
+    checked: 2026-10-30

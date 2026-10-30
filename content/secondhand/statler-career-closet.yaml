@@ -1,0 +1,18 @@
+name: Statler College Career Closet
+slug: statler-career-closet
+kind: free-program
+area: elsewhere
+run_by: WVU Statler College of Engineering and Mineral Resources
+hours: Fall 2026, Monday and Wednesday, 11 a.m. to 6 p.m. Tuesday and Thursday, 2:30 p.m. to 7 p.m. Also by appointment.
+sells: Free new or gently used business clothes in all sizes, like suit jackets, shirts and pants, plus some personal care items. Students may take up to four items or one suit per semester, depending on what is in stock.
+takes: Lightly used business clothes and accessories, such as suits, jackets, button-down shirts, pants, shoes, belts, ties and briefcases.
+goods: [clothes]
+buys_from_you: false
+who_can_use: Statler College students.
+url: https://www.statler.wvu.edu/students/resources/statler-career-closet
+url_label: Career Closet
+note: In the Mineral Resources Building, Room 280.
+status: confirmed
+sources:
+  - url: https://www.statler.wvu.edu/students/resources/statler-career-closet
+    checked: 2026-10-30

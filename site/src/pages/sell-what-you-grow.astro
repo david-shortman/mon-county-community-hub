@@ -1,0 +1,34 @@
+---
+// Sell what you grow (#440, epic #432). Rules are linked, never restated or
+// applied to a person's case. Not here yet: current farmers market days and
+// which markets take SNAP (no current official page found, see #443 and
+// #426), and eggs.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, telHref } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "growing", label: "Sell what you grow", summary: "Who to ask before you sell produce, canned foods or plants at a farmers market" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const nursery = [{ url: 'https://agriculture.wv.gov/divisions/plant-industries/nursery-and-nursery-dealer/', checked: '2026-10-30' }];
+---
+<Base title="Sell what you grow at a farmers market in Mon County, WV" description="Who to ask before you sell produce, canned foods or plants at a farmers market in Morgantown or Monongalia County: the county health department and the West Virginia Department of Agriculture, with links to their rules.">
+  <h1>Sell what you grow</h1>
+  <p class="lede">Two offices set the rules for selling food at a farmers market here: the county health department and the state Department of Agriculture. What you need depends on what you sell. Read their rules, and ask them if you are not sure. We link the rules and do not decide what applies to you.</p>
+
+  <h2>Fresh fruits, vegetables and foods that need no cooling</h2>
+  <ResourceCard r={resource('monchd-farmers-market-permit')} />
+
+  <h2>Canned foods like salsa, pickles and sauces</h2>
+  <ResourceCard r={resource('wvda-farmers-market-vendor-permit')} showCost />
+
+  <h2>Plants and seedlings</h2>
+  <p>The state Department of Agriculture registers nurseries and nursery dealers. Read its nursery page, or call <a href={telHref('304-558-3550')}>304-558-3550</a> to ask whether you need to register.</p>
+  <p><a class="btn" href="https://agriculture.wv.gov/divisions/plant-industries/nursery-and-nursery-dealer/"><span>Nursery rules</span></a></p>
+  <SourceLine sources={nursery} org="wv-department-of-agriculture" about="Nursery and nursery dealer rules" />
+
+  <h2>Where to sell</h2>
+  <p>We have not yet found current market days on an official page, so they are not listed here. The state keeps a <a href="https://agriculture.wv.gov/farmers-market-search/">farmers market search</a>.</p>
+
+  <p>More growing help: <a href={`${base}/grow/`}>Grow food and flowers</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Rules and fees can change, so check the office's page before you sell.</p>
+</Base>
