@@ -1,19 +1,24 @@
 ---
 // The small print under a card: who published each source, linked, and the
 // date we last checked it. One component, so every card says it the same way.
-//   sources: the record's sources ({url, checked})
+//   sources: the record's sources ({url, checked}, optional name). A page can
+//     pass its own list for facts that are not in a record yet.
 //   org: the record's org slug, used to name the publisher (#327)
 //   about: what the card is about, read by screen readers so no two source
 //     links on a page sound the same (#140)
+//   slug: the record's slug. When set, adds a "Report a problem" link that
+//     fills in which item it is (#39)
 //   skip: source URLs already linked elsewhere on the card
 // Reads like "Source: Mon River Trails Conservancy: montrails.org/rail-trail-info.
 // Checked October 29, 2026." The checked date is the oldest across all
-// sources (#39). Text before the source goes in the "before" slot; anything
-// after goes in the default slot.
-import { prettyDate, oldestChecked, sourceGroups } from '../lib/content.mjs';
-const { sources, org, about, skip = [] } = Astro.props;
+// sources (#39); past 6 months the line says the item may be out of date.
+// Text before the source goes in the "before" slot; anything after goes in
+// the default slot.
+import { prettyDate, oldestChecked, sourceGroups, isStale, reportUrl } from '../lib/content.mjs';
+const { sources, org, about, slug, skip = [] } = Astro.props;
 const groups = sourceGroups(sources.filter((s) => !skip.includes(s.url)), org);
 const count = groups.reduce((n, g) => n + g.links.length, 0);
 const checked = oldestChecked(sources);
+const stale = isStale(checked);
 ---
-<p class="meta"><slot name="before" />{count > 0 && <>{count > 1 ? 'Sources' : 'Source'}: {groups.map((g, gi) => <>{gi > 0 && '; '}{g.name && `${g.name}: `}{g.links.map((l, i) => <>{i > 0 && ', '}<a href={l.url}>{l.text}{about && <span class="sr-only">, source for {about}</span>}</a></>)}</>)}. </>}Checked {prettyDate(checked)}.<slot /></p>
+<p class="meta"><slot name="before" />{count > 0 && <>{count > 1 ? 'Sources' : 'Source'}: {groups.map((g, gi) => <>{gi > 0 && '; '}{g.name && `${g.name}: `}{g.links.map((l, i) => <>{i > 0 && ', '}<a href={l.url}>{l.text}{about && <span class="sr-only">, source for {about}</span>}</a></>)}</>)}. </>}Checked {prettyDate(checked)}.{stale && <strong> This may be out of date, so check with them before you go.</strong>}<slot />{slug && <> <a href={reportUrl({ title: about, slug, url: sources[0]?.url })}>Report a problem<span class="sr-only"> with {about} (opens GitHub)</span></a>.</>}</p>

@@ -18,5 +18,5 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
     link={r.contact?.url} linkLabel={websiteLabel(r)}
     about={r.title}
   />
-  <SourceLine sources={r.sources} org={r.org} about={r.title}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
 </article>
