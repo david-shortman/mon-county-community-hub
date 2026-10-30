@@ -1,0 +1,17 @@
+name: Morgantown Seed Preservation Library
+slug: morgantown-seed-preservation-library
+kind: free-program
+area: downtown
+run_by: Founded by a WVU geography professor with the Morgantown Public Library, WVU Libraries and the WVU Food Justice Lab
+sells: Seed sharing and community seed swaps.
+goods: []
+buys_from_you: false
+url: https://seedkeepers.faculty.wvu.edu/news
+url_label: Project page
+status: unclear
+note: Opened in 2019 at the Morgantown Public Library. The latest swap found was in September 2021. No current page found.
+sources:
+  - url: https://seedkeepers.faculty.wvu.edu/news
+    checked: 2026-10-30
+  - url: https://www.dominionpost.com/2021/09/02/community-seed-swap/
+    checked: 2026-10-30

@@ -1,0 +1,11 @@
+name: Monongalia Arts Center (MAC)
+slug: monongalia-arts-center
+kind: nonprofit
+website: https://monartscenter.com/
+phone: "304-292-3325"
+summary: A nonprofit arts center at 107 High Street, Morgantown, started in 1976. It offers visual, performing and literary arts through classes and community programs.
+topics: [community]
+area: morgantown
+sources:
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
+    checked: 2026-10-30

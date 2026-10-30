@@ -47,6 +47,24 @@ sources:
     checked: 2026-10-27
 ```
 
+### Listing facts for a place to go (#177)
+
+A resource with a `contact.place` is a place a person goes. People need these facts to decide whether to go ([`docs/design/presentation.md`](../docs/design/presentation.md), "What every listing needs"). All are optional, and each one comes only from the record's own sources. If the source does not say, leave it out.
+
+```yaml
+hours: Monday to Friday, 7 a.m. to 3:30 p.m.  # in words, always shown
+opening_hours:          # the same hours, so a card can say "Open now" (#176)
+  - days: [mon, tue, wed, thu, fri]   # mon tue wed thu fri sat sun
+    opens: "07:00"      # quoted, 24-hour, Eastern time
+    closes: "15:30"     # "24:00" for midnight; earlier than opens means it closes the next morning
+# opening_hours: always   # open 24 hours, every day
+get_in: walk-in         # walk-in | appointment | call-first
+languages: [Spanish]    # languages the source says staff speak or interpret
+access: Step-free entrance on the Main Street side.  # only what the source says
+```
+
+`opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+
 ## `calendar/<slug>.yaml`: dates and deadlines
 
 Shown on the site's Deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
 
 const errors = [];
@@ -113,6 +114,8 @@ for (const o of orgs) {
   if (o.phone != null && !isPhone(o.phone)) errors.push(`${where}: phone must look like 211, 898-211, 304-555-0100 or 1-877-716-1212`);
 }
 
+// Listing fields (#177): hours the site can read, how to get in, languages, access.
+RESOURCE_FIELDS.push(...LISTING_FIELDS);
 const resources = loadDir('resources');
 const resourceSlugs = new Set();
 for (const r of resources) {
@@ -127,6 +130,7 @@ for (const r of resources) {
   if (r.what_to_bring != null && (!Array.isArray(r.what_to_bring) || !r.what_to_bring.length || r.what_to_bring.some((x) => typeof x !== 'string' || !x.trim()))) errors.push(`${where}: what_to_bring must be a list of short text items`);
   for (const f of ['what_happens', 'best_time']) if (r[f] != null && (typeof r[f] !== 'string' || !r[f].trim())) errors.push(`${where}: ${f} must be text`);
   if (r.if_you_want_help != null && (!Array.isArray(r.if_you_want_help) || r.if_you_want_help.some((x) => typeof x !== 'string'))) errors.push(`${where}: if_you_want_help must be a list of resource slugs`);
+  { const l = checkListing(r); errors.push(...l.errors); warnings.push(...l.warnings); }
   const c = r.contact;
   if (c == null) continue;
   if (typeof c !== 'object') { errors.push(`${where}: contact must have phone, text, url, place or email under it`); continue; }

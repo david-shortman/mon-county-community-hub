@@ -1,0 +1,11 @@
+name: The Metropolitan Theatre
+slug: metropolitan-theatre
+kind: government
+website: https://morgantownmet.com/
+phone: "304-291-4884"
+summary: A historic theatre at 373 High Street in downtown Morgantown that hosts touring shows and local productions. It has no box office; tickets are sold by each show's organizer, mostly online.
+topics: [community]
+area: morgantown
+sources:
+  - url: https://morgantownmet.com/
+    checked: 2026-10-30
