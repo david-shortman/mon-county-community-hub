@@ -62,7 +62,11 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
     <li><strong>The Salvation Army of Morgantown</strong>, 1264 University Ave.: <a href="tel:3042963525">304-296-3525</a></li>
   </ul>
   <SourceLine sources={charitySources} about="local charities" />
-  <Actions link="https://www.wvpath.wv.gov" linkLabel="Apply for LIEAP at wvpath.wv.gov" phone={lieap.contact.phone} phoneLabel="LIEAP, WV Department of Human Services" about="LIEAP" />
+  <div class="actions">
+    <a class="btn" href={lieap.contact.url}><Icon name="open" /><span>LIEAP: apply when it opens</span></a>
+    <a class="btn" href={telHref(emergency.contact.phone)}><Icon name="phone" /><span>Emergency Assistance: call</span></a>
+    <a class="btn" href={def.contact.url}><Icon name="open" /><span>Dollar Energy Fund: find an agency</span></a>
+  </div>
   </Milepost>
 
   <Milepost n={3} title="Not sure where to start? Call 211" id="call-211">
