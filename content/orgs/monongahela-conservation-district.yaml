@@ -1,0 +1,12 @@
+name: Monongahela Conservation District
+slug: monongahela-conservation-district
+kind: government
+summary: The local conservation district for Monongalia County, run by a board of supervisors elected by voters. Conservation districts help landowners and farmers protect soil and water.
+topics: [growing]
+area: monongalia-county
+phone: "304-296-0081"
+sources:
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
+    checked: 2026-10-30
+  - url: https://www.wvca.us/suDirectory.cfm
+    checked: 2026-10-30

@@ -87,15 +87,15 @@ const when = (ms) => {
   return f({ hour: 'numeric', minute: '2-digit' }).replace('AM', 'a.m.').replace('PM', 'p.m.') + ' on ' + f({ month: 'long', day: 'numeric', year: 'numeric' });
 };
 
-// Put a plain note at the top of a saved page. Inline styles use the page's
-// own color tokens, so it matches light and dark.
+// Put a plain note at the top of a saved page. Its look is the .saved-copy
+// rule in Base.astro, so it matches the site's notes in light and dark (#354).
 async function withNote(res, missing) {
   const html = await res.text();
   const date = when(savedAt(res) || Date.now());
   const text = missing
     ? 'That page could not open because the connection is slow or missing, and it is not saved on this phone yet. Here is the Help now page, saved at ' + date + '. Phone numbers and hours may have changed since then.'
     : 'Saved copy from ' + date + ', shown because the connection is slow or missing. Dates, hours and phone numbers may have changed since then.';
-  const note = '<div class="saved-copy" role="note" style="background:var(--accent-bg);color:var(--fg);border-bottom:2px solid var(--accent);padding:.75rem 1rem;font-weight:600"><p style="margin:0 auto;max-width:44rem">' + text + '</p></div>';
+  const note = '<div class="saved-copy" role="note"><p>' + text + '</p></div>';
   // Just before the main content, so the skip link and crisis strip stay first.
   const out = /<main[\\s>]/.test(html) ? html.replace(/<main[\\s>]/, (m) => note + m) : html.replace(/<body[^>]*>/, (m) => m + note);
   const headers = new Headers(res.headers);

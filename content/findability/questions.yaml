@@ -225,3 +225,35 @@ questions:
     question: When is the next election and what is on my ballot?
     who: Any registered voter
     search: next election Monongalia County WV sample ballot
+
+  # Growing food and flowers (topic: growing, #433)
+  - id: q33
+    topic: growing
+    kind: everyday
+    question: How do I get my garden soil tested?
+    who: A first-time gardener
+    search: soil test Morgantown WV
+  - id: q34
+    topic: growing
+    kind: everyday
+    question: Who can tell me what's wrong with my plants?
+    who: A home gardener
+    search: plant disease help Monongalia County
+  - id: q35
+    topic: growing
+    kind: everyday
+    question: Where can I get a community garden plot in Morgantown?
+    who: A renter with no yard
+    search: community garden plot Morgantown WV
+  - id: q36
+    topic: growing
+    kind: everyday
+    question: Where can I get free seeds near Morgantown?
+    who: Someone on a tight budget
+    search: free seeds Morgantown WV seed library
+  - id: q37
+    topic: growing
+    kind: everyday
+    question: What help is there for starting a small farm in Mon County?
+    who: A new farmer
+    search: beginning farmer help Monongalia County WV

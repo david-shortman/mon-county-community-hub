@@ -1,0 +1,93 @@
+---
+// Pass it on (#157): text this listing to yourself or someone, print just this
+// one listing, or share it. A small row under a card, so helpers can hand a
+// listing on in one tap.
+//   title: the listing's name
+//   slug: the card's id, so the link lands on this card
+//   phone, place, hours: copied into the text message when the record has them
+//   checked: the oldest checked date, shown in the text and on the printout
+//   share: false when the card already has its own Share button (event cards)
+// The text link is a plain sms: link with the message filled in, so the
+// person's own phone sends it: no texting service, no account, nothing stored.
+// Print and Share need scripts and stay hidden without them; the browser's own
+// print still prints the whole page.
+// Not shown on domestic or sexual violence listings: a text or a share leaves a
+// trace on the phone that someone else might see. Those pages have a quick
+// exit instead. A listing counts when its org is a domestic or sexual violence
+// service (SAFETY_ORGS) or its title says so.
+//   org: the record's org slug
+import { prettyDate } from '../lib/content.mjs';
+const { title, slug, org, phone, place, hours, checked, share = true } = Astro.props;
+const SAFETY_ORGS = ['rdvic'];
+const sensitive = SAFETY_ORGS.includes(org) || /domestic|sexual (assault|violence)|abuse/i.test(title);
+const url = new URL(`${Astro.url.pathname}${slug ? `#${slug}` : ''}`, Astro.site).href;
+const shortLink = url.replace(/^https?:\/\/(www\.)?/, '');
+const checkedLine = checked ? `Checked ${prettyDate(checked)}.` : '';
+const message = [title, phone && `Call ${phone}`, place, hours, url, checkedLine].filter(Boolean).join('\n');
+// "sms:?&body=" is the form both iPhone and Android read.
+const smsHref = `sms:?&body=${encodeURIComponent(message)}`;
+---
+{!sensitive && <>
+<div class="pass-it-on">
+  <span class="pi-label">Pass it on:</span>
+  <a class="pi-btn pi-sms" href={smsHref}>Text this<span class="sr-only">: {title}</span></a>
+  <button class="pi-btn pi-print" type="button" hidden>Print this<span class="sr-only">: {title}</span></button>
+  {share && <button class="pi-btn pi-share" type="button" hidden data-url={url} data-title={title} data-text={[title, checkedLine].filter(Boolean).join('. ')}><span class="pi-share-label">Share</span><span class="sr-only">: {title}</span></button>}
+</div>
+<p class="pi-url">Online: {shortLink}</p>
+</>}
+
+<style>
+  .pass-it-on { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin: 4px 0 8px; font-size: 0.95rem; }
+  .pi-label { color: var(--muted); margin-right: 2px; }
+  .pi-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: var(--fg); font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; }
+  .pi-btn:hover { background: var(--accent-bg); }
+  .pi-btn[hidden] { display: none; }
+  .pi-url { display: none; }
+  /* Text needs a phone: on a computer with a mouse it often does nothing, so
+     only Print and Share show there. */
+  @media (hover: hover) and (pointer: fine) { .pi-sms { display: none; } }
+  @media print {
+    .pass-it-on { display: none !important; }
+    .pi-url { display: block; font-size: 0.95rem; }
+  }
+  @media print {
+    :global(.pi-hide) { display: none !important; }
+  }
+</style>
+
+<script>
+  // Print this one listing: hide everything else on the page while printing.
+  const hidden: Element[] = [];
+  const unhide = () => { hidden.splice(0).forEach((el) => el.classList.remove('pi-hide')); };
+  window.addEventListener('afterprint', unhide);
+  document.querySelectorAll<HTMLButtonElement>('.pi-print').forEach((b) => {
+    b.hidden = false;
+    b.addEventListener('click', () => {
+      unhide();
+      const card = b.closest('article, li, section') ?? b.parentElement!;
+      let el: Element | null = card;
+      while (el && el !== document.body) {
+        const parent: Element | null = el.parentElement;
+        if (parent) for (const sib of Array.from(parent.children)) {
+          if (sib !== el && !sib.classList.contains('pi-hide')) { sib.classList.add('pi-hide'); hidden.push(sib); }
+        }
+        el = parent;
+      }
+      window.print();
+    });
+  });
+  // Share: the phone's share sheet when there is one, otherwise copy the link.
+  const say = (t: string) => { const a = document.getElementById('announce'); if (!a) return; a.textContent = ''; setTimeout(() => { a.textContent = t; }, 50); };
+  document.querySelectorAll<HTMLButtonElement>('.pi-share').forEach((b) => {
+    const canCopy = !!(navigator.clipboard && window.isSecureContext);
+    if (!navigator.share && !canCopy) return;
+    if (!navigator.share) b.querySelector('.pi-share-label')!.textContent = 'Copy link';
+    b.hidden = false;
+    b.addEventListener('click', () => {
+      const { url = '', title = '', text = '' } = b.dataset;
+      if (navigator.share) { navigator.share({ title, text, url }).catch(() => {}); return; }
+      navigator.clipboard.writeText(url).then(() => say('Link copied'));
+    });
+  });
+</script>
