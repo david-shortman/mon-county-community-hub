@@ -53,7 +53,7 @@ We will not use AI-generated images of real places or people, and we will not le
 
 **Why it matters here.** The hub is not a federal agency, but the same logic fits. Wrong details about health, benefits eligibility, legal rights, or deadlines can cause real harm.
 
-**How we apply it.** Treat entries with topics `health`, `money`, `housing`, `family`, `taxes`, or `voting`, and every `calendar/` entry, as high stakes. These get a second, independent check against the source before merge: a different session (or Duet) re-opens each source and confirms each field, and notes it in the PR. We will not give advice on someone's own case ("you qualify"). We describe the program and point to the office that decides. Whether David should also review some categories is his call, so propose it as a `for:david` issue rather than changing `docs/COORDINATION.md`.
+**How we apply it.** Treat entries with topics `health`, `money`, `housing`, `family`, `taxes`, or `voting`, and every `calendar/` entry, as high stakes. These get a second, independent check against the source before merge: a different session (or Duet) re-opens each source and confirms each field, and notes it in the PR. We will not give advice on someone's own case ("you qualify"). We describe the program and point to the office that decides. On top of that, David checks changes about shelter, crisis help, food and benefits before they go live (his decision, October 30, 2026, #493). The exact list is in "When a PR waits for David" in `docs/COORDINATION.md`.
 
 **Sources:**
 - [OMB M-25-21, Accelerating Federal Use of AI (PDF)](https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf)

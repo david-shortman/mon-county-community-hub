@@ -1,0 +1,46 @@
+name: High stakes
+
+# Labels a PR `for:david` when it changes what residents see about shelter,
+# crisis help, food or benefits. David checks those before they go live
+# (docs/COORDINATION.md, "When a PR waits for David").
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - name: Find high-stakes changes
+        id: find
+        run: |
+          node scripts/high-stakes.mjs "origin/${{ github.base_ref }}" | tee ../high-stakes.txt
+          if [ -s ../high-stakes.txt ]; then echo "hit=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Label for David
+        if: steps.find.outputs.hit == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr edit "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}" --add-label for:david
+          {
+            echo "### This PR waits for David"
+            echo "It changes what residents see about shelter, crisis help, food or benefits:"
+            echo
+            sed 's/^/- /' ../high-stakes.txt
+          } >> "$GITHUB_STEP_SUMMARY"
