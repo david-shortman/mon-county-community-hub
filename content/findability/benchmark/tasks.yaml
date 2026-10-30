@@ -1,0 +1,170 @@
+# Source benchmark tasks (#183, #184)
+#
+# For a few common needs, how fast and how completely does each source answer
+# a resident once they have it open? Method, measures and the "better" bar:
+# the "Source benchmark" section of docs/scoreboard.md.
+#
+# One entry per need. `id` is the findability question id (questions.yaml), so
+# results line up with the findability runs.
+#
+# Each source:
+#   name:         short label, the same every run
+#   kind:         ours (a page on this site), guide (a printed or PDF guide),
+#                 city (the city's resource page), official (the best official
+#                 answer from the latest findability run, its best_url)
+#   url:          the page or PDF that holds the answer
+#   start:        where a resident starts, if the answer is a few taps in
+#   answer_text:  exact text that marks where the answer starts. measure.js
+#                 finds it to count words before the answer and screens down.
+#                 Copy it from the page; update it if the page's words change.
+#   covered:      false when the source does not address the need at all.
+#                 That is an honest result, not a zero for effort.
+#   blocked:      true when the site refuses automated browsers. Then score it
+#                 by hand and say "blocked, checked by hand" in the run file.
+#
+# Keep `ours` in step with the latest findability run's `hub_page`
+# (benchmark/score.py warns when they differ). Keep ids and names fixed so runs
+# can be compared. Never store the PDF itself in the repo.
+
+version: 1
+sources:
+  guide: &guide
+    name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    about: United Way Family Resource Network, 2025 Monongalia County Resource Guide (PDF, cover says "Updated February 2025")
+  city: &city
+    name: city-pathways
+    kind: city
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    about: City of Morgantown Community Resources page, then its "PATHWAYS to Help" link (1 tap)
+    blocked: true
+
+needs:
+  - id: q01
+    need: Help paying a heating bill
+    sources:
+      - name: ours
+        kind: ours
+        url: https://everythingmorgantown.org/utility-bills/
+        answer_text: Call your utility first
+      - <<: *guide
+        answer_text: "Christian Help: 304-296-0221"
+      - <<: *city
+        covered: false
+      - name: official
+        kind: official
+        url: https://wrc.wvu.edu/resources/basic-needs/utility-bill-help
+        answer_text: null
+
+  - id: q02
+    need: A food pantry open this week
+    sources:
+      - name: ours
+        kind: ours
+        start: https://everythingmorgantown.org/help/food/
+        url: https://everythingmorgantown.org/help/food/today/other/
+        answer_text: Where to start
+      - <<: *guide
+        answer_text: Canyon Presbyterian Church Pantry
+      - <<: *city
+      - name: official
+        kind: official
+        url: https://graduateeducation.wvu.edu/resources/community-resources
+        answer_text: null
+
+  - id: q03
+    need: Help with a water shutoff
+    sources:
+      - name: ours
+        kind: ours
+        url: https://everythingmorgantown.org/utility-bills/
+        answer_text: Morgantown Utility Board (water and sewer)
+      - <<: *guide
+        answer_text: "Christian Help: 304-296-0221"
+      - <<: *city
+        covered: false
+      - name: official
+        kind: official
+        url: https://wrc.wvu.edu/resources/basic-needs/utility-bill-help
+        answer_text: null
+
+  - id: q04
+    need: Apply for SNAP
+    sources:
+      - name: ours
+        kind: ours
+        url: https://everythingmorgantown.org/snap/
+        answer_text: Apply online at WV PATH
+      - <<: *guide
+        answer_text: WVDHHR- Monongalia County
+      - <<: *city
+        covered: false
+      - name: official
+        kind: official
+        url: https://www.wvpath.wv.gov
+        answer_text: null
+
+  - id: q05
+    need: A doctor without insurance
+    sources:
+      - name: ours
+        kind: ours
+        url: https://everythingmorgantown.org/dental-and-prescriptions/
+        answer_text: With low income and no insurance
+      - <<: *guide
+        answer_text: Milan Puskar Health Right 304-292-8234
+      - <<: *city
+      - name: official
+        kind: official
+        url: https://www.mphealthright.org
+        answer_text: null
+
+  - id: q08
+    need: A dentist without dental insurance
+    sources:
+      - name: ours
+        kind: ours
+        url: https://everythingmorgantown.org/dental-and-prescriptions/
+        answer_text: With low income and no insurance
+      - <<: *guide
+        covered: false
+      - <<: *city
+        covered: false
+      - name: official
+        kind: official
+        url: https://www.monchd.org/departments-programs/mchd-dentistry
+        answer_text: null
+
+  - id: q25
+    need: Free legal help for an eviction
+    sources:
+      - name: ours
+        kind: ours
+        start: https://everythingmorgantown.org/money/
+        url: https://everythingmorgantown.org/money/#rent
+        answer_text: facing eviction
+      - <<: *guide
+        answer_text: Legal Aid of West Virginia
+      - <<: *city
+        covered: false
+      - name: official
+        kind: official
+        url: https://legalaidwv.org/renters-rights-west-virginia/eviction-in-west-virginia/
+        answer_text: null
+
+  - id: q26
+    need: A place to stay tonight
+    sources:
+      - name: ours
+        kind: ours
+        url: https://everythingmorgantown.org/stay-tonight/
+        answer_text: Grace Shelter, emergency beds for adults
+      - <<: *guide
+        answer_text: Catholic Charities Grace Shelter
+      - <<: *city
+      - name: official
+        kind: official
+        url: https://www.ccwva.org/programs/grace-shelter/
+        answer_text: null
