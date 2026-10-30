@@ -35,6 +35,9 @@ const SOURCES = {
   },
 };
 
+// The needs register's shape comes straight from its JSON Schema (#74).
+const NEED = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/need.schema.json'), 'utf8'));
+
 export const TYPES = {
   orgs: {
     description: 'Organizations: nonprofits, government offices, schools, community groups and others.',
@@ -112,6 +115,12 @@ export const TYPES = {
         },
       },
     },
+  },
+  needs: {
+    description: 'The needs register: ranked problems people in Mon County face, each with public, aggregate evidence and its sources. Describes problems; takes no policy side.',
+    id: 'slug',
+    required: NEED.required,
+    properties: NEED.properties,
   },
   corrections: {
     description: 'Every fix we made to a fact, link or out-of-date detail.',
