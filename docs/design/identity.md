@@ -80,7 +80,7 @@ Each direction gets its own issue and PR. Until those ship, the rules below stil
 
 **Trailhead, first route (#240).** How to turn a guide into a route, so new guides fit it:
 
-- Wrap the steps in `<Route>` and make each one a `<Milepost n title when>`. Each step is a native `details`, so it opens and closes with no script, find-in-page opens a closed step that holds a match, and printing opens every step.
+- Wrap the steps in `<Route>` and make each one a `<Milepost n title when>`. Each step is a native `details`, so it opens and closes with no script, find-in-page opens a closed step that holds a match, and printing opens every step (with scripts off, only the open steps print).
 - Open only step 1 (`open`), so the first thing to do is on the first screen. Keep a step's title a plain action ("Call your utility first").
 - `when` is a short time like "Today" or "Later". Only say how long something takes when a source says so.
 - End every step with an action: call, apply, text or go, using `Actions` or `.btn` links named for who you reach ("Call Mon Power"). Source lines stay under each fact inside the step.
