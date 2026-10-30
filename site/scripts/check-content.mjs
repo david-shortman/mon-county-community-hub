@@ -298,6 +298,21 @@ const placeCheck = checkPlaces();
 errors.push(...placeCheck.errors);
 warnings.push(...placeCheck.warnings);
 
+// Wrong place (#494). AI tools and directories mix up places with the same
+// name. Warn when an address leaves out West Virginia, or any text names
+// Morgantown in another state. Warnings only: some groups serve a wider area.
+const OTHER_MORGANTOWN = /\bMorgantown,?\s+(KY|Ky\.|Kentucky|IN|Ind\.|Indiana|NC|North Carolina|GA|Georgia|MS|Mississippi|TN|Tennessee|PA|Pennsylvania)\b/;
+const IN_WV = /\b(WV|W\. ?Va\.|West Virginia)\b/;
+for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
+  for (const [key, value] of [['contact.place', e.contact?.place], ['place', e.place], ['address', e.address]]) {
+    if (typeof value === 'string' && !IN_WV.test(value)) warnings.push(`${e._file}: ${key} "${value}" does not say WV; check it is the Morgantown, WV place`);
+  }
+  eachText(e, '', (key, t) => {
+    const m = t.match(OTHER_MORGANTOWN);
+    if (m) warnings.push(`${e._file}: ${key} names "${m[0]}"; this site is for Morgantown, WV`);
+  });
+}
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
 console.log(`Checked ${placeCheck.count} gathering places (content/places).`);
