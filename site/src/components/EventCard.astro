@@ -2,7 +2,7 @@
 // One date on the calendar, phone first: when it is, what it is, then big
 // buttons to act on it. Sources and topics sit in the small print below.
 import Actions from './Actions.astro';
-import { prettyDate, prettyTimes, chipDate, relativeLabel, sourceLabel, isGovSite, todayYmd, oldestChecked, isStale, reportUrl } from '../lib/content.mjs';
+import { prettyDate, prettyTimes, chipDate, relativeLabel, sourceLabel, isGovSite, todayYmd, oldestChecked, isStale, reportUrl, loadDoors } from '../lib/content.mjs';
 const { e } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
@@ -20,6 +20,9 @@ const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America
 const shareUrl = new URL(`${Astro.url.pathname}#${e.slug}`, Astro.site).href;
 // The source link is skipped when it is the same page as the main button.
 const extraSources = e.sources.filter((s) => s.url !== e.url);
+// Topics in the words people see on the doors ("Bills and money"), not the tags (#146).
+const doors = loadDoors();
+const topicLabel = (t) => doors.bySlug[doors.topicDoor[t]]?.topics[t] ?? t;
 ---
 <article class="card event" id={e.slug}>
   <p class="date-chip">
@@ -46,7 +49,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
       {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{sourceLabel(s.url)}</a>{isGovSite(s.url) && ' (government site)'}</>))}.</> : <> Source: {sourceLabel(e.url)}{isGovSite(e.url) ? ' (the details page, a government site)' : ' (the details page)'}.</>}
       {' '}Checked against the source on {prettyDate(checked)}.{isStale(checked, today) && <strong> This may be out of date, so check the details page before you go.</strong>}</>
     )}
-    {e.topics?.length ? <> Topics: {e.topics.join(', ')}.</> : null}
+    {e.topics?.length ? <> Topics: {e.topics.map(topicLabel).join(', ')}.</> : null}
     {' '}<a href={reportUrl({ title: e.title, slug: e.slug, url: e.sources?.[0]?.url ?? e.url })}>Report a problem<span class="sr-only"> with {e.title} (opens GitHub)</span></a>.
   </p>
 </article>
