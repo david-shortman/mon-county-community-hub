@@ -16,7 +16,7 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 A second run a few hours after the baseline, after the first three hub guides went live (recycling, help paying utility bills, where to stay tonight). Results: [`content/findability/2026-10-28b.yaml`](../content/findability/2026-10-28b.yaml).
 
 - **No change overall.** 30 of 32 questions scored the same. Two moved, in opposite directions, and both came from other sites or search ranking, not from our work: starting a business (q09) rose 11 to 13 because the city's steps page now ranks first and fits a phone screen, and county commission agendas (q15) fell 11 to 9 because search no longer reached the county's agenda page. The q15 drop looks like search variation; the official page still loads and is current.
-- **Hub pages are not in search yet.** 6 of 32 questions now have a direct answer page on the hub (q01, q03, q19, q20, q21, q26). None of them showed up in any search, and no official page links to them, so by the method they do not count yet. New pages usually take days to weeks to be indexed, and the site has no search engine accounts yet (#89). The next weekly run (2026-11-01) will check again.
+- **Our pages are not in search yet.** 6 of 32 questions now have a direct answer page on the site (q01, q03, q19, q20, q21, q26). None of them showed up in any search, and no official page links to them, so by the method they do not count yet. New pages usually take days to weeks to be indexed, and the site has no search engine accounts yet (#89). The next weekly run (2026-11-01) will check again.
 - **Leading signal:** 6 of 32 questions had a correct local answer in the top 3 search results (5 at baseline, the change is q09).
 
 The topic, dimension and worst-gap tables below show this latest run. The baseline write-up follows them.
@@ -126,7 +126,7 @@ A topic score and the overall score are the points earned divided by the points 
 
 Rules for keeping runs comparable: keep question ids and `search` words fixed. Add new questions with new ids rather than rewording old ones. Retire a question by adding `retired: <date>`, not by deleting it. If the rubric changes, bump `rubric_version` and note it in the history table, because scores across versions are not directly comparable.
 
-Once the hub has pages that answer these questions, a run should also check whether a hub page shows up for each search. That is how the project's own work shows up in this score.
+Once the site has pages that answer these questions, a run should also check whether one of our pages shows up for each search. That is how the project's own work shows up in this score.
 
 ### History
 

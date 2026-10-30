@@ -5,7 +5,7 @@
 // scripts to run, so the box stays hidden without them (the need buttons and
 // the footer's page list cover every page); words are never sent for nothing.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { value = '', id = 'q', label = 'Search the hub' } = Astro.props;
+const { value = '', id = 'q', label = 'Search the site' } = Astro.props;
 ---
 <form class="search" role="search" data-hash-search hidden action={`${base}/search/`} method="get">
   <label for={id}>{label}</label>
