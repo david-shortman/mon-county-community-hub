@@ -1,0 +1,10 @@
+name: LiveAbility
+slug: liveability
+kind: nonprofit
+website: https://liveabilitywv.org/
+summary: A center for independent living run by and for people with disabilities, with an office in Morgantown. Its core services are free.
+topics: [disability]
+area: monongalia-county
+sources:
+  - url: https://liveabilitywv.org/locations/
+    checked: 2026-10-30

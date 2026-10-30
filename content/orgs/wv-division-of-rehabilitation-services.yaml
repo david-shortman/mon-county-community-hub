@@ -1,0 +1,12 @@
+name: West Virginia Division of Rehabilitation Services (DRS)
+slug: wv-division-of-rehabilitation-services
+kind: government
+website: https://wvdrs.org/
+summary: The state agency that helps youth and adults with disabilities, ages 14 and up, prepare for, find and keep a job. It has a branch office in Morgantown.
+topics: [disability, work]
+area: statewide
+sources:
+  - url: https://wvdrs.org/
+    checked: 2026-10-30
+  - url: https://wvdrs.org/contact-us/
+    checked: 2026-10-30

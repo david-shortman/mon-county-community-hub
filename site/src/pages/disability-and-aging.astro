@@ -1,0 +1,27 @@
+---
+// Disability and aging (#227, part of #210). First slice: who serves Mon
+// County, from each group's own site. The Medicaid waiver guide comes next.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "family", topic: "disability", label: "Disability and aging", summary: "Independent living help, job help for people with disabilities, and Medicare help" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+---
+<Base title="Disability and aging help in Morgantown and Mon County" description="Free independent living help from LiveAbility in Morgantown, job help for people with disabilities from DRS, and free Medicare help from WV SHIP.">
+  <h1>Help with a disability, or as you get older</h1>
+  <p class="lede">For help living on your own terms with a disability, call LiveAbility in Morgantown. For help getting or keeping a job, call DRS. For Medicare questions, call WV SHIP.</p>
+
+  <h2>Living on your own terms</h2>
+  {r('liveability-morgantown') && <ResourceCard r={r('liveability-morgantown')} />}
+
+  <h2>Getting or keeping a job</h2>
+  {r('drs-morgantown-office') && <ResourceCard r={r('drs-morgantown-office')} showCost />}
+
+  <h2>Medicare and getting older</h2>
+  {r('wv-ship-medicare-counseling') && <ResourceCard r={r('wv-ship-medicare-counseling')} />}
+  <p>See also <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a> and <a href={`${base}/staying-well/`}>Staying well</a>. Veterans: see <a href={`${base}/veterans/`}>help for veterans</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. An older web address for a local disability center now belongs to an unrelated site, so we link only to each group's current site. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
