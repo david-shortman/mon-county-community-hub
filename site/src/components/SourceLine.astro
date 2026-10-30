@@ -1,7 +1,8 @@
 ---
 // The small print under a card: who published each source, linked, and the
 // date we last checked it. One component, so every card says it the same way.
-//   sources: the record's sources ({url, checked})
+//   sources: the record's sources ({url, checked}, optional name). A page can
+//     pass its own list for facts that are not in a record yet.
 //   org: the record's org slug, used to name the publisher (#327)
 //   about: what the card is about, read by screen readers so no two source
 //     links on a page sound the same (#140)

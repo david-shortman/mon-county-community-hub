@@ -4,11 +4,28 @@
 // Rule: docs/decisions/2026-10-29-1300-when-sources-differ.md
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
 export const page = { door: "care", topic: "health", label: "Staying well", summary: "A checkup, shots, dental visits and everyday habits, each year" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
+// Guidance facts that are not resource records: each section shows its own
+// sources and the date we checked them (#285).
+const fluSources = [
+  { url: 'https://www.cdc.gov/flu/vaccines/vaccinations.html', checked: '2026-10-29', name: 'CDC' },
+  { url: 'https://www.medicare.gov/coverage/flu-shots', checked: '2026-10-29', name: 'Medicare' },
+  ...(r('monchd-flu-and-covid-shots')?.sources ?? []),
+];
+const checkupSources = [
+  { url: 'https://www.medicare.gov/coverage/yearly-wellness-visits', checked: '2026-10-29', name: 'Medicare' },
+  { url: 'https://www.healthcare.gov/coverage/preventive-care-benefits/', checked: '2026-10-29', name: 'HealthCare.gov' },
+  { url: 'https://www.healthcare.gov/community-health-centers/', checked: '2026-10-29', name: 'HealthCare.gov' },
+  { url: 'https://www.monchd.org/departments-programs/clinical-services', checked: '2026-10-29' },
+];
+const activitySources = [
+  { url: 'https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know', checked: '2026-10-29', name: 'U.S. Department of Health and Human Services' },
+];
 ---
 <Base title="Staying well in Morgantown and Mon County: what to do each year" description="Simple things most people can do to stay healthy: a flu shot each fall, a yearly checkup, dental visits, moving more, help to quit tobacco. How often, what it costs, and where to go in Mon County.">
   <h1>Staying well: a simple list</h1>
@@ -16,27 +33,30 @@ const r = (slug) => all.find((e) => e.slug === slug);
 
   <h2>Every fall: a flu shot</h2>
   <p>Health officials and doctors' groups agree that almost everyone 6 months and older should get one each fall. Medicare pays the full cost, and children who qualify get it free. <a href={`${base}/flu-shots/`}>Who, when and where to get a flu shot</a>.</p>
+  <SourceLine sources={fluSources} about="flu shots" />
 
   <h2>Every year: a checkup</h2>
   <p>A checkup is a visit to find problems early, before you feel sick.</p>
   <ul>
-    <li><strong>On Medicare:</strong> a yearly wellness visit, once every 12 months. You pay nothing if your provider accepts Medicare. Other tests during the visit may cost extra (<a href="https://www.medicare.gov/coverage/yearly-wellness-visits">Medicare</a>). New to Medicare? See <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</li>
-    <li><strong>With health insurance:</strong> most plans must cover a set of preventive services, like screening tests, at no cost when you see a doctor in your plan's network (<a href="https://www.healthcare.gov/coverage/preventive-care-benefits/">HealthCare.gov</a>).</li>
-    <li><strong>No insurance:</strong> community health centers charge based on your income (<a href="https://www.healthcare.gov/community-health-centers/">HealthCare.gov</a>). The Monongalia County Health Department clinic offers some care free or at low cost, with lower prices for people with less income. Call <a href="tel:3045985119">304-598-5119</a> (<a href="https://www.monchd.org/departments-programs/clinical-services">source</a>).</li>
+    <li><strong>On Medicare:</strong> a yearly wellness visit, once every 12 months. You pay nothing if your provider accepts Medicare. Other tests during the visit may cost extra. New to Medicare? See <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</li>
+    <li><strong>With health insurance:</strong> most plans must cover a set of preventive services, like screening tests, at no cost when you see a doctor in your plan's network.</li>
+    <li><strong>No insurance:</strong> community health centers charge based on your income. The Monongalia County Health Department clinic offers some care free or at low cost, with lower prices for people with less income. Call <a href="tel:3045985119">304-598-5119</a>.</li>
   </ul>
+  <SourceLine sources={checkupSources} about="yearly checkups" />
 
   <h2>Regular dental checkups</h2>
   <p>Ask the dentist how often you or your child should come back.</p>
   {r('monchd-dentistry') && <ResourceCard r={r('monchd-dentistry')} showCost />}
 
   <h2>Every week: move more</h2>
-  <p>Federal guidelines (<a href="https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know">health.gov</a>) say:</p>
+  <p>Federal guidelines say:</p>
   <ul>
     <li>Adults: at least 150 to 300 minutes a week of activity like brisk walking.</li>
     <li>Adults: muscle work, like push-ups, at least 2 days a week.</li>
     <li>Children 6 to 17: at least 60 minutes a day.</li>
     <li>The first step for anyone: move more and sit less.</li>
   </ul>
+  <SourceLine sources={activitySources} about="activity guidelines" />
   {r('mon-river-rail-trails') && <ResourceCard r={r('mon-river-rail-trails')} showCost />}
 
   <h2>If you use tobacco: help to quit</h2>
@@ -45,5 +65,5 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2>When stress, mood, drinking or drugs get hard</h2>
   {r('988-lifeline') && <ResourceCard r={r('988-lifeline')} sms="988" smsLabel="988 Lifeline" />}
 
-  <p class="meta">Guidance and cost sources checked October 29, 2026. We describe what health groups say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We describe what health groups say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
