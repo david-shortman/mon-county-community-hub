@@ -12,10 +12,10 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h1>Help for veterans in Mon County</h1>
   <p class="lede">Two VA offices are on Commerce Drive, off US 19: a health clinic and a Vet Center for counseling. In a crisis, dial 988 and press 1, any time.</p>
 
-  {r('veterans-crisis-line') && <ResourceCard r={r('veterans-crisis-line')} sms="838255" smsLabel="Veterans Crisis Line" lead="In crisis or worried about a veteran? Dial 988, then press 1." />}
+  {r('veterans-crisis-line') && <ResourceCard r={r('veterans-crisis-line')} sms="838255" smsLabel="Veterans Crisis Line" />}
 
   <h2>Health care: the VA clinic</h2>
-  <p>For care this clinic does not offer, VA Clarksburg's main medical center is in Clarksburg (address and phone below). The VA works with Disabled American Veterans and county veterans affairs directors on van rides to scheduled medical appointments. Ask the clinic about rides.</p>
+  <p>For care this clinic does not offer, VA Clarksburg's main medical center is in Clarksburg (address and phone below). The VA works with Disabled American Veterans and county veterans affairs directors on van rides to scheduled medical appointments. Ask the clinic about rides (<a href="https://www.va.gov/clarksburg-health-care/locations/monongalia-county-va-clinic/">source</a>).</p>
   {r('monongalia-county-va-clinic') && <ResourceCard r={r('monongalia-county-va-clinic')} showCost />}
 
   <h2>Counseling: the Vet Center</h2>
