@@ -44,6 +44,10 @@ export function GET({ site }) {
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
 - [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
 - [Serve on a city board](${u('/make-it-better/boards/')}): city boards that shape how Morgantown looks and feels (Urban Landscape Commission, Tree Board, Cultural Arts, Historic Landmarks, Planning, and more), what each does, when it meets, open seats from the city's vacancy list, and how to apply
+- [Older adults and retirees](${u('/for/older-adults/')}): a starting page that links to Medicare, care at home, food and bill help, veterans help, and ways to stay involved
+- [Parents of babies and toddlers](${u('/for/parents-young-kids/')}): a starting page that links to child development help, Pre-K and Head Start, playgroups, checkups and food help
+- [New to Mon County](${u('/for/new-to-mon-county/')}): a starting page that links to starting utilities, trash day, care, kids, work and English lessons, and this month's events
+- [People with disabilities and caregivers](${u('/for/disability-and-caregivers/')}): a starting page that links to independent living, care at home through Medicaid, job help and health costs
 
 ## Data
 
