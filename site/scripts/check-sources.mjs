@@ -170,6 +170,7 @@ export function buildRegistry({ rules = loadRules(), distDir = DIST } = {}) {
       host: s.host,
       group: rule?.group || 'monitored',
       why: rule?.why || '',
+      ignore_changes: !!rule?.ignore_changes,
       help_now: usedBy.some((w) => help.has(w)),
       used_by: usedBy,
     };
@@ -405,7 +406,7 @@ export function buildReport(registry, results, prevState, { now = new Date() } =
     const prev = prevState?.[url];
     if (r.fingerprint) {
       state[url] = { f: r.fingerprint, since: prev?.f === r.fingerprint ? prev.since : at.slice(0, 10) };
-      if (prev?.f && prev.f !== r.fingerprint) changed.push(byUrl.get(url));
+      if (prev?.f && prev.f !== r.fingerprint && !byUrl.get(url)?.ignore_changes) changed.push(byUrl.get(url));
     } else if (prev) state[url] = prev; // keep the last good fingerprint
   }
   for (const [url, v] of Object.entries(prevState || {})) if (!state[url] && byUrl.has(url)) state[url] = v;
