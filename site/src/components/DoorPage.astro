@@ -86,7 +86,7 @@ const r211 = resource('wv-211');
             return (
               <li class="step" data-sits={stepSits(st.id).map((s) => s.id).join(' ')}>
                 <p>{st.text}</p>
-                <Actions callFirst phone={r.contact?.phone} phoneLabel={r.title} link={r.contact?.url} linkLabel={st.action ?? `Open ${host(r.contact.url)}`} about={r.title} />
+                <Actions callFirst phone={r.contact?.phone} phoneLabel={r.title} link={r.contact?.url} linkLabel={st.action ?? `Open ${host(r.contact.url)}`} place={r.contact?.place} about={r.title} />
                 {r.cost && <p class="step-cost"><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>}
                 <p class="meta">More on this: <a href={`${base}${first.page}`}>{first.label}</a>. Source: <a href={r.sources[0].url}>{sourceName(r)}</a>, checked {checked(r)}.</p>
               </li>

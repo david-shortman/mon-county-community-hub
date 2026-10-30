@@ -1,0 +1,57 @@
+# The Family and life changes door page, /family/ (#252). Shape and rules:
+# see doors/care.yaml and site/src/components/DoorPage.astro. More
+# situations come as their pages ship: families and kids (#225), disability
+# and aging (#227), and language help (#229).
+door: family
+lede: Work, learning, and life as a veteran in Mon County. Pick what is going on, and we put the steps in order.
+steps:
+  crisis-line:
+    when: today
+    resource: veterans-crisis-line
+    text: Veteran in crisis, or worried about one? Call the Veterans Crisis Line, then press 1.
+  homeless-line:
+    when: today
+    resource: va-homeless-veterans-line
+    text: Call the VA's line for veterans who are homeless or may lose their housing.
+  va-clinic:
+    when: week
+    resource: monongalia-county-va-clinic
+    text: Call the Monongalia County VA Clinic about health care.
+  vet-center:
+    when: week
+    resource: morgantown-vet-center
+    text: Call the Morgantown Vet Center to set up confidential counseling.
+  workforce:
+    when: week
+    resource: workforce-wv-morgantown-office
+    text: Call or visit WorkForce West Virginia for job leads and job training.
+  literacy:
+    when: week
+    resource: lvmpc-adult-literacy
+    text: Call or text Literacy Volunteers to start free reading, writing or English lessons.
+situations:
+  - id: job
+    label: I need a job or job training
+    page: /work-and-learning/
+    steps: [workforce]
+  - id: read
+    label: I want to read, write or speak English better
+    page: /work-and-learning/
+    steps: [literacy]
+  - id: vet-health
+    label: I'm a veteran and need health care
+    page: /veterans/
+    steps: [va-clinic]
+  - id: vet-talk
+    label: I'm a veteran and need someone to talk to
+    page: /veterans/
+    steps: [crisis-line, vet-center]
+  - id: vet-housing
+    label: I'm a veteran and could lose my housing
+    page: /veterans/
+    steps: [homeless-line]
+also:
+  - text: Short on money this month
+    href: /money/
+  - text: Health care and shots
+    href: /care/

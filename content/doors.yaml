@@ -54,9 +54,12 @@ doors:
       health: Health and care
   - slug: living-here
     name: Living here
+    page: /living-here/
     hint: New here, who serves my address, trash and recycling, buses
     icon: pin
     examples:
+      - text: Trash pickup day
+        href: /living-here/?pick=pickup
       - text: Trash and recycling
         href: /recycling/
     topics:
@@ -64,8 +67,16 @@ doors:
       voting: Voting
   - slug: family
     name: Family and life changes
+    page: /family/
     hint: Kids and school, work and training, disability and aging, veterans, language help
     icon: people
+    examples:
+      - text: Find a job or training
+        href: /family/?pick=job
+      - text: Reading or English lessons
+        href: /family/?pick=read
+      - text: Veterans
+        href: /veterans/
     topics:
       family: Kids and family
       veterans: Veterans

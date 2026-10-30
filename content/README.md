@@ -33,6 +33,7 @@ contact:
   phone: "304-555-0100"     # public organizational contact only
   text: "898-211"           # optional; a public text line, if the source gives one
   url: https://example.org/tax
+  place: 200 Main St, Morgantown, WV  # optional; adds a Directions button on door steps. Only a place the source publishes
 cost: free
 sources:
   - url: https://example.org/tax

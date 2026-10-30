@@ -119,11 +119,12 @@ export async function breadcrumb(route) {
 }
 
 // The home page door buttons: each door with the example problems whose
-// pages exist, so no example leads to an empty page. A door with none yet
-// shows its hint and leads to its section of the Topics page.
+// pages exist, so no example leads to an empty page. A door with no live
+// page at all stays off the home page until its first page ships (#252).
 export async function doorCards() {
   const pages = await loadPages();
-  return loadDoors().doors.map((d) => ({
+  const live = new Set([...pages.values()].map((p) => p.door));
+  return loadDoors().doors.filter((d) => live.has(d.slug)).map((d) => ({
     ...d,
     href: doorHref(d),
     examples: (d.examples ?? []).filter((e) => pages.has(e.href.split(/[?#]/)[0])),
