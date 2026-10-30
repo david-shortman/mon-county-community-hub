@@ -20,9 +20,14 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
   <ul>
     <li><strong>Every listing shows where it came from.</strong> It links to its source, usually the group's own page, and shows the date we last checked it.</li>
     <li><strong>You deal with the group, not us.</strong> When you sign up, call, or give, you do it with them. This site has no sign-up forms, takes no payments, and does not ask for your name or contact details.</li>
-    <li><strong>Any group can ask us to fix or remove its listing.</strong> For now, you do that with the "Tell us" link at the bottom of each page. It opens a public page on GitHub and needs a free GitHub account. We're working on a way to reach us without an account, and an email address is coming once the site has its own web address.</li>
+    <li><strong>Any group can ask us to fix or remove its listing.</strong> Use the "Report a problem" link on the listing, or the "Tell us" link at the bottom of each page. Both open a public page on GitHub and need a free GitHub account. We're working on a way to reach us without an account.</li>
+    <li><strong>Every listing shows its oldest checked date.</strong> If any of its sources was last checked more than 6 months ago, the listing says it may be out of date.</li>
     <li><strong>The work is public.</strong> The code, the data, the rules the AI follows, and a log of what it built and why are all on <a href={repo}>GitHub</a>. Planning notes and notes about specific people are kept private.</li>
   </ul>
+
+  <h2>How we use AI</h2>
+  <p>Most of this site is researched and written by an AI assistant (Claude, made by Anthropic). The AI only repeats facts it found in a public source, and every listing links to that source and shows the date it was last checked. A person, not the AI, oversees the project, and anyone can see our work and our mistakes on GitHub. AI can still get things wrong, so please confirm details with the group before you act, and tell us if something is off.</p>
+  <p>We don't use AI-made pictures of real places or people. No page speaks for a government office or nonprofit: we describe what they offer and link to them.</p>
 
   <h2>How it runs</h2>
   <p>Every day, AI agents (Claude, made by Anthropic) work through the same steps. They look for places where information about life here is hard to find or out of date. They pick the most useful fix and build it. Then they check whether it helped and write down what they did and why.</p>
@@ -43,8 +48,26 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
     <li>Anything partisan</li>
     <li>Changing the project's own rules</li>
   </ul>
+  <h3>How items are chosen and checked</h3>
+  <ul>
+    <li><strong>Chosen:</strong> the AI tries to answer real questions people here ask, like "where can I get food today?", and fixes the places where the answer is hard to find, out of date, or hard to read on a phone.</li>
+    <li><strong>Checked:</strong> every phone number, hour, rule and date must be on a public page the AI opened and read that same day. It never fills a gap from memory. If the source doesn't say it, it stays off the site.</li>
+    <li><strong>Kept close to the source:</strong> who a program is for, dates and costs are written as close to the source's own words as plain language allows. We never tell you that you qualify. The program decides.</li>
+    <li><strong>When sources disagree:</strong> we say who says what, and point you to your doctor or the office that decides.</li>
+  </ul>
+  <p>The full rules are in <a href={doc('content/README.md')}>our content guide</a>.</p>
   <p>My part: I guide the project at the top. I review the content and how it's presented, and I review how we measure whether the site is accurate and helpful.</p>
   <p class="note">AI can still get things wrong. Please check details with the group before you act, and <a href={tellUs}>tell us</a> if something is off.</p>
+
+  <h2 id="corrections">How we fix mistakes</h2>
+  <ul>
+    <li><strong>What counts:</strong> a wrong fact, a broken or wrong link, a detail that is out of date, or wording that takes a side.</li>
+    <li><strong>How to tell us:</strong> the "Report a problem" link on the listing, or "Tell us" at the bottom of any page. If you work at the place or help people find services, say so on the form, and we read your report first. No names needed.</li>
+    <li><strong>If it could hurt someone</strong> (a wrong crisis line, shelter, deadline or benefit rule), we take the item down until it is re-checked.</li>
+    <li><strong>How we fix it:</strong> we re-read the source, fix the listing, and update its checked date.</li>
+    <li><strong>How we show it:</strong> every fix to a fact, link or date is listed on our <a href={`${base}/corrections/`}>Corrections page</a>, with the date. Typos are fixed without a note. Every change is also public on GitHub.</li>
+    <li><strong>What we can't act on:</strong> opinions about which groups to list, changes without a source we can check, or anything that would add private personal information.</li>
+  </ul>
 
   <h2>Read more</h2>
   <ul>
@@ -54,6 +77,7 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
     <li><a href={doc('docs/COORDINATION.md')}>How we work</a>: who does what, and when a change waits for a person.</li>
     <li><a href={doc('CLAUDE.md')}>The AI's standing instructions</a> for this project.</li>
     <li><a href={doc('docs/playbook/trust-and-ai.md')}>Trust and AI</a>: the practices we follow and where they come from.</li>
+    <li><a href={`${base}/corrections/`}>Corrections</a>: what we got wrong and fixed.</li>
     <li><a href={`${repo}/tree/main/docs/build-log`}>Build log</a>: what was built, and why.</li>
     <li><a href={doc('docs/decisions.md')}>Decision log</a>.</li>
   </ul>
