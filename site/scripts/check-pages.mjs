@@ -41,6 +41,11 @@ for (const file of pages) {
   const h1s = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1s !== 1) errors.push(`${where}: needs exactly one <h1>, found ${h1s}`);
   if (/—/.test(`${title} ${desc}`)) errors.push(`${where}: title or description has an em dash`);
+  // A missing field (for example a hidden record a page reads directly, #519)
+  // must never ship as "undefined" or an empty call link.
+  const body = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
+  if (/\b(undefined|Invalid Date|NaN)\b/.test(body)) errors.push(`${where}: page text says "${body.match(/\b(undefined|Invalid Date|NaN)\b/)[0]}"; a field is missing`);
+  if (/href="tel:"/.test(html)) errors.push(`${where}: a call link has no number`);
 }
 
 for (const f of ['robots.txt', 'llms.txt']) {

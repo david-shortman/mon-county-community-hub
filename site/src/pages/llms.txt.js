@@ -37,6 +37,7 @@ export function GET({ site }) {
 - [Living here](${u('/living-here/')}): pick what is going on (moving here, trash pickup day, recycling drop-off, tires or electronics) and get local steps with phone numbers and sources
 - [Family and life changes](${u('/family/')}): pick what is going on (a baby or young child, a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
 - [Moving here: start power, water, gas and trash](${u('/moving-here/')}): how to start service with Mon Power, the Morgantown Utility Board and Hope Gas, town trash pickup in Star City and Granville, deposits and fees, and who to ask
+- [Is my home in a flood zone or a slide area?](${u('/flood-zone/')}): check an address on the WV Flood Tool, the FEMA flood map and the WV Landslide Tool, flood insurance basics (most home and renters insurance does not cover floods, 30 day wait), and the county floodplain permit
 - [Trash, recycling and drop-off](${u('/recycling/')}): pickup days, what goes in the curbside bin, and where to take hard items
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
@@ -45,6 +46,13 @@ export function GET({ site }) {
 - [Printouts](${u('/print/')}): printable sheets of places and phone numbers, made from the listings every morning. Sheets: ${printSheets().map((s) => `[${s.name}](${u(`/print/${s.slug}/`)})`).join(', ')}
 - [Cards and posters to print](${u('/print/cards/')}): wallet cards and half-page posters with a QR code and a short web address
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
+
+## Data
+
+- [Open data](${u('/data/')}): how to reuse the listings, the license (CC BY 4.0) and how to cite
+- [API catalog](${u('/api/v1/index.json')}): JSON index of every data file, with counts, license and build time
+- [OpenAPI description](${u('/api/v1/openapi.yaml')}): every field in the JSON files
+- [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
 
 ## Notes for AI tools
 

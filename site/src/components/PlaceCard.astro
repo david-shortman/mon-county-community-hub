@@ -12,6 +12,12 @@ const { r, headingLevel = 3 } = Astro.props;
 const H = `h${headingLevel}`;
 const textLine = r.contact.text;
 ---
+{r.hidden ? (
+<article class="card place" id={r.slug}>
+  <H>{r.title}</H>
+  <SourceLine sources={[]} about={r.title} slug={r.slug} />
+</article>
+) : (
 <article class="card place" id={r.slug}>
   <H>{r.title}</H>
   {r.hours && <p class="when">{r.hours}. <strong>Call to confirm.</strong></p>}
@@ -22,3 +28,4 @@ const textLine = r.contact.text;
   <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) && <> <a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a>.</>}</SourceLine>
   <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact.phone} place={r.contact.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
+)}
