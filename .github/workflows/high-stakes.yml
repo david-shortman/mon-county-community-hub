@@ -29,15 +29,19 @@ jobs:
       - run: npm ci
       - name: Find high-stakes changes
         id: find
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
-          node scripts/high-stakes.mjs "origin/${{ github.base_ref }}" | tee ../high-stakes.txt
+          node scripts/high-stakes.mjs "origin/$BASE_REF" | tee ../high-stakes.txt
           if [ -s ../high-stakes.txt ]; then echo "hit=true" >> "$GITHUB_OUTPUT"; fi
       - name: Label for David
         if: steps.find.outputs.hit == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
         run: |
-          gh pr edit "${{ github.event.pull_request.number }}" --repo "${{ github.repository }}" --add-label for:david
+          gh pr edit "$PR" --repo "$REPO" --add-label for:david
           {
             echo "### This PR waits for David"
             echo "It changes what residents see about shelter, crisis help, food or benefits:"

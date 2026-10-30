@@ -6,16 +6,15 @@
 import { execFileSync } from 'node:child_process';
 import YAML from 'yaml';
 
-// Pages and parts that show shelter, crisis help, food or benefits.
+// Pages and parts that show shelter, crisis help, food or benefits. Any page
+// file also counts if it is in the Help now or Get through this month door, has
+// one of TOPICS, or names a crisis line (see pageHit below).
 const PAGES = [
-  'site/src/pages/stay-tonight.astro',
   'site/src/pages/help/food/',
-  'site/src/pages/snap.astro',
-  'site/src/pages/money.astro',
-  'site/src/pages/medicaid-waivers.astro',
-  'site/src/pages/utility-bills.astro',
   'site/src/components/CrisisStrip.astro',
+  'site/src/components/CrisisLine.astro',
 ];
+const DOORS = ['help-now', 'this-month'];
 // Entries with these topics feed those pages.
 const TOPICS = ['housing', 'money', 'food'];
 // Crisis lines, matched in an entry's text.
@@ -37,6 +36,15 @@ const read = (file) => {
 for (const file of changed) {
   const page = PAGES.find((p) => (p.endsWith('/') ? file.startsWith(p) : file === p));
   if (page) { console.log(`${file}: a shelter, crisis, food or benefits page`); continue; }
+  if (/^site\/src\/pages\/.+\.astro$/.test(file)) {
+    const text = read(file);
+    const door = text.match(/door:\s*["']([a-z-]+)["']/)?.[1];
+    const topic = text.match(/topic:\s*["']([a-z-]+)["']/)?.[1];
+    if (DOORS.includes(door)) console.log(`${file}: in the ${door} door`);
+    else if (TOPICS.includes(topic)) console.log(`${file}: page topic ${topic}`);
+    else if (CRISIS.test(text)) console.log(`${file}: names a crisis line`);
+    continue;
+  }
   if (!CONTENT.test(file)) continue;
   const text = read(file);
   let topics = [];
