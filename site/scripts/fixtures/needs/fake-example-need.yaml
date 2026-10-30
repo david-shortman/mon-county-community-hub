@@ -1,0 +1,28 @@
+# TEST FIXTURE ONLY. Fake data, not a real need. Lives outside content/ on
+# purpose so it never reaches the site or the API (#74).
+title: Example need for tests
+slug: fake-example-need
+summary: This is a made-up need that exists only so the checker has something valid to test against.
+evidence:
+  - url: https://example.org/fake-report
+    checked: 2026-10-30
+    shows: A made-up figure for testing.
+    figure: "12% of households"
+    data_date: "2024"
+    publisher: Example Org
+affected:
+  estimate: "about 1 in 8 households"
+  description: Households in the made-up example.
+  url: https://example.org/fake-report
+  checked: 2026-10-30
+severity: medium
+trend: unknown
+working_on:
+  - org: west-virginia-211
+  - name: Example Group
+    url: https://example.org
+gaps:
+  - Nothing real; this is a fixture.
+topics: [money]
+rank: 1
+questions: [q01]
