@@ -15,7 +15,7 @@
 // Thresholds and who reacts to what are in docs/operations/README.md.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
 
 // ---------- settings ----------
 const args = process.argv.slice(2);
@@ -42,6 +42,7 @@ export const T = {
   deployMaxAgeHours: 30, // the site rebuilds daily; older than this means deploys are stuck
   recheckMonths: 6, // source checked dates older than this are past due
   recheckSoonDays: 30, // ...and within this many days of that are due soon
+  recheckWeeklyDays: 7, // crisis, shelter and food-today details (#494)
   feedSnapshotMaxDays: 14,
   prOpenWarnDays: 3,
   inProgressStaleDays: 3,
@@ -217,6 +218,31 @@ async function checkIcs() {
 }
 
 // ---------- product: content in the repo ----------
+// High-stakes details get a weekly re-check (#494): every record named on the
+// crisis, shelter and food-today pages, the orgs behind them, and any record
+// that names a crisis line. Read from the page files, so a new record on those
+// pages joins the list by itself.
+const WEEKLY_PAGES = ['src/pages/stay-tonight.astro', 'src/pages/help', 'src/components/FoodToday.astro', 'src/components/CrisisStrip.astro', 'src/components/CrisisLine.astro', 'src/components/HelpNow.astro', 'src/components/HelpNowBar.astro', 'src/components/HelpNowSources.astro'];
+export function weeklyRecords(siteDir = path.join(REPO_ROOT, 'site')) {
+  const files = [];
+  const walk = (p) => {
+    if (!fs.existsSync(p)) return;
+    if (fs.statSync(p).isDirectory()) for (const f of fs.readdirSync(p)) walk(path.join(p, f));
+    else if (/\.(astro|mjs|js)$/.test(p)) files.push(p);
+  };
+  for (const rel of WEEKLY_PAGES) walk(path.join(siteDir, rel));
+  const named = { resources: new Set(), orgs: new Set() };
+  for (const f of files) {
+    for (const [, kind, slug] of fs.readFileSync(f, 'utf8').matchAll(/\b(resource|org)\('([a-z0-9-]+)'\)/g)) named[kind === 'org' ? 'orgs' : 'resources'].add(slug);
+  }
+  const all = { withHidden: true };
+  const resources = loadDir('resources', all);
+  const orgs = loadDir('orgs', all);
+  const crisis = (e) => /\b988\b|\bcrisis\b/i.test(JSON.stringify({ ...e, sources: undefined }));
+  const picked = resources.filter((r) => named.resources.has(r.slug) || crisis(r));
+  for (const r of picked) if (r.org) named.orgs.add(r.org);
+  return [...picked, ...orgs.filter((o) => named.orgs.has(o.slug) || crisis(o))];
+}
 function checkContent() {
   let entries;
   try { entries = loadCalendar(); } catch (err) {
@@ -233,8 +259,10 @@ function checkContent() {
     if (!oldest || oldest < dueYmd) past.push(`${e._file}: last checked ${oldest ?? 'never'}`);
     else if (oldest < soonYmd) soon.push(`${e._file}: last checked ${oldest}`);
   }
-  // Orgs and resources never end, so every one of them gets re-checked.
-  for (const e of [...loadDir('orgs'), ...loadDir('resources')]) {
+  // Orgs and resources never end, so every one of them gets re-checked,
+  // hidden ones too (#519), so they can come back.
+  const all = { withHidden: true };
+  for (const e of [...loadDir('orgs', all), ...loadDir('resources', all)]) {
     const oldest = (e.sources || []).map((s) => ymd(s.checked)).filter(Boolean).sort()[0];
     if (!oldest || oldest < dueYmd) past.push(`${e._file}: last checked ${oldest ?? 'never'}`);
     else if (oldest < soonYmd) soon.push(`${e._file}: last checked ${oldest}`);
@@ -242,6 +270,21 @@ function checkContent() {
   record('content-recheck', 'product', past.length ? 'warn' : 'ok',
     past.length ? `${past.length} entries are past their re-check date.` : `No entries past their re-check date (${soon.length} due within ${T.recheckSoonDays} days).`,
     { details: [...past, ...soon.map((s) => `due soon: ${s}`)], owner: 'Duet', fixable: true });
+
+  const weekly = weeklyRecords().filter((e) => !isHidden(e));
+  const weeklyDue = addDays(today, -T.recheckWeeklyDays);
+  const weeklyPast = weekly.map((e) => ({ e, oldest: (e.sources || []).map((x) => ymd(x.checked)).filter(Boolean).sort()[0] }))
+    .filter(({ oldest }) => !oldest || oldest < weeklyDue);
+  record('content-recheck-weekly', 'product', weeklyPast.length ? 'warn' : 'ok',
+    weeklyPast.length ? `${weeklyPast.length} of ${weekly.length} crisis, shelter and food-today entries were last checked over ${T.recheckWeeklyDays} days ago. Re-check each phone number and hours on the group's own page.`
+      : `All ${weekly.length} crisis, shelter and food-today entries were checked in the last ${T.recheckWeeklyDays} days.`,
+    { details: weeklyPast.map(({ e, oldest }) => `${e._file}: last checked ${oldest ?? 'never'}`), owner: 'Duet', fixable: true });
+
+  // Hidden items (#519): off the site until someone re-checks them.
+  const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);
+  record('content-hidden', 'product', hidden.length ? 'warn' : 'ok',
+    hidden.length ? `${hidden.length} items are hidden while we re-check them.` : 'No items are hidden.',
+    { details: hidden.map((e) => `${e._file}: ${e.hidden.reason ?? '?'} since ${ymd(e.hidden.since) ?? '?'}`), owner: 'Duet', fixable: true });
 
   const ended = entries.filter((e) => e.ends < addDays(today, -30));
   if (ended.length) {

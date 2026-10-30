@@ -71,10 +71,16 @@ doors:
         href: /living-here/?pick=pickup
       - text: Trash and recycling
         href: /recycling/
+      - text: Grow food and flowers
+        href: /grow/
     topics:
       moving: Moving here
       recycling: Trash and recycling
       voting: Voting
+      secondhand: Thrift and secondhand
+      market: Markets and sales
+      growing: Growing food and flowers
+      weather: Storms and floods
   - slug: family
     name: Family and life changes
     page: /family/
@@ -94,11 +100,18 @@ doors:
       disability: Disability and aging
   - slug: community
     name: Your community
+    page: /community/
     hint: City or county, meetings, how we're doing, give or start something
     icon: hall
+    examples:
+      - text: Find a community center
+        href: /community-centers/
+      - text: Rent a hall
+        href: /community-centers/halls/
     topics:
       community: Community life
       government: City and county government
+      better: Make it better
 
 # Lanes are not doors. Help now is the urgent lane on every screen. Dates is
 # the one calendar. About holds pages about the project itself. A page tagged

@@ -1,9 +1,11 @@
 ---
 import Icon from '../components/Icon.astro';
+import AlsoCheck from '../components/AlsoCheck.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
 import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
+import UpkeepNotice from '../components/UpkeepNotice.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
 import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
@@ -189,6 +191,9 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .note { background: var(--accent-bg); border-left: 4px solid var(--brick); border-radius: 4px 10px 10px 4px; padding: 12px 16px; }
       /* No empty band above the first heading in a card or box (#247). */
       .card > :first-child, .note > :first-child { margin-top: 0; }
+      /* Saved copy note the offline helper adds to a page (#354). */
+      .saved-copy { background: var(--accent-bg); color: var(--fg); border-bottom: 2px solid var(--accent); padding: 12px 16px; font-weight: 600; }
+      .saved-copy p { margin: 0 auto; max-width: 44rem; }
       .add-cal { background: var(--accent-bg); border-left: 4px solid var(--brick); border-radius: 4px 10px 10px 4px; padding: 4px 16px 12px; margin: 16px 0; }
       .add-cal h2 { margin-top: 0.6em; }
       .add-cal summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
@@ -288,6 +293,9 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
         header.site, nav.main, footer.site, .skip, .crisis-strip, .crumbs, .door-pick, .sit-links, .keep-steps, .cant-wait .crisis-btns { display: none !important; }
         body { padding: 0; background: #fff; color: #000; }
         .step, .milepost { break-inside: avoid; }
+        /* Closed route steps print too, even with scripts off (#368). */
+        .milepost details::details-content { content-visibility: visible; display: block; }
+        .milepost summary::after { display: none; }
       }
       /* Crisis strip and quick exit (#174), on safety pages only */
       .crisis-strip { position: sticky; top: 0; z-index: 15; background: var(--accent-bg); border-bottom: 2px solid var(--brick); }
@@ -316,11 +324,13 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       </div>
     </header>
     <main class="wrap" id="main" tabindex="-1" data-pagefind-body={searchable ? '' : undefined}>
+      <UpkeepNotice />
       <Breadcrumb route={route} />
       {help && !crisis && <CrisisLine />}
       {searchable && tagDoor && <p hidden data-pagefind-filter="door">{tagDoor.name}</p>}
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       <slot />
+      <AlsoCheck route={route} />
     </main>
     <footer class="site">
       <div class="wrap">

@@ -8,14 +8,36 @@ import { loadFeedEntries } from './feeds/index.mjs';
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const CONTENT_DIR = path.resolve(here, '../../../content');
 
-export function loadDir(name) {
+// Hidden records (#519) stay in content/ with their history but are left out
+// of every page, the search index, calendar.ics and the counts. Checks and
+// the Health report pass { withHidden: true } so hidden items still get
+// re-checked and can come back by removing the `hidden` block.
+export const HIDDEN_REASONS = ['group-request', 'unconfirmed-risky', 'overdue', 'other'];
+export const isHidden = (e) => e?.hidden != null && e.hidden !== false;
+
+export function loadDir(name, { withHidden = false } = {}) {
   const dir = path.join(CONTENT_DIR, name);
   if (!fs.existsSync(dir)) return [];
-  return fs
+  const all = fs
     .readdirSync(dir)
     .filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'))
     .sort()
     .map((f) => ({ ...YAML.parse(fs.readFileSync(path.join(dir, f), 'utf8')), _file: `${name}/${f}` }));
+  return withHidden ? all : all.filter((e) => !isHidden(e));
+}
+
+// What a page shows in place of a hidden record it names on purpose (a
+// crisis page that always shows one shelter, say). It keeps the name so the
+// page still reads, and drops every fact: no phone, link, hours or sources.
+// Cards (ResourceCard, PlaceCard, AnswerFacts, SourceLine) see `hidden` and
+// say plainly that the item is being re-checked.
+export const RECHECK_TEXT = 'We are re-checking this listing, so its details are off the site for now.';
+function standIn(r) {
+  return {
+    slug: r.slug, title: r.title, name: r.name, org: r.org, kind: r.kind, area: r.area, topics: r.topics ?? [],
+    hidden: true, who_it_is_for: '', what_to_do: RECHECK_TEXT, summary: RECHECK_TEXT, hours: '', cost: '',
+    contact: {}, sources: [], _file: r._file,
+  };
 }
 
 // Dates in YAML parse as Date objects or strings; normalize to YYYY-MM-DD.
@@ -30,8 +52,8 @@ export function todayYmd(now = new Date()) {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(now);
 }
 
-export function loadCalendar() {
-  return loadDir('calendar').map((e) => ({
+export function loadCalendar({ withHidden = false } = {}) {
+  return loadDir('calendar', { withHidden }).map((e) => ({
     ...e,
     starts: ymd(e.starts),
     ends: ymd(e.ends) || ymd(e.starts),
@@ -45,8 +67,9 @@ export function loadCalendar() {
 let merged;
 export function loadCalendarWithFeeds() {
   merged ??= (async () => {
+    // A hidden hand-written entry also hides the feed item with its slug (#519).
     const hand = loadCalendar();
-    const taken = new Set(hand.map((e) => e.slug));
+    const taken = new Set(loadCalendar({ withHidden: true }).map((e) => e.slug));
     const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug));
     return [...hand, ...fromFeeds];
   })();
@@ -106,7 +129,8 @@ export function relativeLabel(starts, ends, today = todayYmd()) {
 // A map search link that opens the phone's maps app. We only pass a place
 // the source itself published.
 export const mapsUrl = (place) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
-export const telHref = (phone) => `tel:${String(phone).replace(/[^\d+]/g, '')}`;
+// No number (a hidden record's stand-in) gives no link, never "tel:".
+export const telHref = (phone) => (phone ? `tel:${String(phone).replace(/[^\d+]/g, '')}` : undefined);
 
 // "mountaineerfoodbank.org/food-pantries" style link text, so two links to
 // the same site never share a name.
@@ -183,7 +207,7 @@ export function reportUrl({ title, slug, url }) {
 
 // The oldest checked date across a record's sources, so a card never says an
 // item is fresher than its stalest source (#39).
-export function oldestChecked(sources) {
+export function oldestChecked(sources = []) {
   return sources.map((s) => ymd(s.checked)).sort()[0];
 }
 
@@ -198,15 +222,16 @@ export function websiteLabel(r) {
 
 // One record from content/resources or content/orgs by slug. Throws when it is
 // missing, so a page never ships pointing at a record that is not there.
+// A hidden record comes back as a stand-in with no facts (#519).
 export function resource(slug) {
-  const r = loadDir('resources').find((x) => x.slug === slug);
+  const r = loadDir('resources', { withHidden: true }).find((x) => x.slug === slug);
   if (!r) throw new Error(`content/resources: no entry with slug ${slug}`);
-  return r;
+  return isHidden(r) ? standIn(r) : r;
 }
 export function org(slug) {
-  const o = loadDir('orgs').find((x) => x.slug === slug);
+  const o = loadDir('orgs', { withHidden: true }).find((x) => x.slug === slug);
   if (!o) throw new Error(`content/orgs: no entry with slug ${slug}`);
-  return o;
+  return isHidden(o) ? standIn(o) : o;
 }
 
 // The five doors and the lanes around them, from content/doors.yaml (#248).
@@ -223,10 +248,58 @@ export function loadDoors() {
 
 // A door's own page data, from content/doors/<slug>.yaml (#235). Each step
 // gets its resource record, which carries the phone, link and sources.
-export function loadDoorPage(slug) {
-  const file = path.join(CONTENT_DIR, 'doors', `${slug}.yaml`);
+// A topic guide (content/guides/<slug>.yaml, like /grow/) has the same shape.
+export function loadDoorPage(slug, dir = 'doors') {
+  const file = path.join(CONTENT_DIR, dir, `${slug}.yaml`);
   if (!fs.existsSync(file)) return null;
   const raw = YAML.parse(fs.readFileSync(file, 'utf8'));
   const steps = Object.fromEntries(Object.entries(raw.steps ?? {}).map(([id, s]) => [id, { id, ...s, record: resource(s.resource) }]));
-  return { ...raw, steps, situations: raw.situations ?? [], also: raw.also ?? [], _file: `doors/${slug}.yaml` };
+  return { ...raw, steps, situations: raw.situations ?? [], also: raw.also ?? [], _file: `${dir}/${slug}.yaml` };
+}
+
+// Secondhand shops, free and lending programs, and online groups (#423).
+// Only confirmed and likely entries reach a page; unclear and closed ones
+// stay in the data so a person can re-check them.
+export const SECONDHAND_KINDS = {
+  'charity-thrift': 'Charity thrift store',
+  resale: 'Buys and sells used goods',
+  consignment: 'Consignment',
+  'vintage-antique': 'Vintage and antiques',
+  'used-media': 'Used books, records and games',
+  'free-program': 'Free program',
+  lending: 'Lending library',
+  repair: 'Repair help',
+  'online-group': 'Online group',
+};
+export const SECONDHAND_AREAS = {
+  westover: 'Westover, Mall Rd and Fairmont Rd',
+  downtown: 'Downtown and High St',
+  mileground: 'Mileground and Mountaineer Mall',
+  'university-ave': 'University Ave',
+  'cheat-lake': 'Cheat Lake',
+  elsewhere: 'Elsewhere in the county',
+  'outside-county': 'Just outside the county',
+  online: 'Online',
+};
+export const SECONDHAND_GOODS = {
+  clothes: 'Clothes',
+  kids: 'Kids',
+  home: 'Furniture and home',
+  books: 'Books, records and games',
+  vintage: 'Antiques and vintage',
+  tools: 'Tools',
+  electronics: 'Electronics',
+  building: 'Building materials',
+};
+export const SECONDHAND_STATUS = ['confirmed', 'likely', 'unclear', 'closed'];
+export function loadSecondhand({ all = false } = {}) {
+  const list = loadDir('secondhand').map((e) => ({ ...e, sources: (e.sources || []).map((s) => ({ ...s, checked: ymd(s.checked) })) }));
+  return all ? list : list.filter((e) => e.status === 'confirmed' || e.status === 'likely');
+}
+// Secondhand cards say "Not checked lately" after 4 months (#430), sooner
+// than the 6 month rule, since shops open, move and close often.
+export const FRESH_DAYS = 122;
+export function notCheckedLately(sources, today = todayYmd()) {
+  const c = oldestChecked(sources);
+  return !!c && (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${c}T12:00:00Z`)) / 86400000 > FRESH_DAYS;
 }

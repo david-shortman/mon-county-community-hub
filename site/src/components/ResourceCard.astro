@@ -2,11 +2,19 @@
 // One sourced resource from content/resources, phone first: what it is, who it
 // is for, what to do, then big buttons. Source and checked date in small print,
 // naming who published the source (#327).
+import WhatHappensNext from './WhatHappensNext.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
-import { websiteLabel } from '../lib/content.mjs';
+import PassItOn from './PassItOn.astro';
+import { websiteLabel, oldestChecked } from '../lib/content.mjs';
 const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
 ---
+{r.hidden ? (
+<article class="card resource" id={r.slug}>
+  <h3>{r.title}</h3>
+  <SourceLine sources={[]} about={r.title} slug={r.slug} />
+</article>
+) : (
 <article class="card resource" id={r.slug}>
   <h3>{r.title}</h3>
   {lead && <p><strong>{lead}</strong></p>}
@@ -18,5 +26,8 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
     link={r.contact?.url} linkLabel={websiteLabel(r)}
     about={r.title}
   />
+  <WhatHappensNext r={r} />
   <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
+)}

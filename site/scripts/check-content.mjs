@@ -1,8 +1,10 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
+import { checkPlaces } from './check-places.mjs';
 
 const errors = [];
 const warnings = [];
@@ -11,9 +13,34 @@ const isUrl = (u) => { try { return ['https:', 'http:'].includes(new URL(u).prot
 const sixMonthsAgo = new Date(); sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 const stale = sixMonthsAgo.toISOString().slice(0, 10);
 
+// Hidden records (#519) are checked like any other, so taking the `hidden`
+// block off puts back a record that is still valid.
+const loadDir = (name) => loadDirShown(name, { withHidden: true });
+const loadCalendar = () => loadCalendarShown({ withHidden: true });
+const HIDDEN_FIELDS = ['reason', 'since', 'note'];
+// 211 and 988 show on every page, so the site cannot build without them. If
+// one looks wrong, fix it from the line's own page the same day instead.
+const NEVER_HIDE = ['resources/wv-211.yaml', 'resources/988-lifeline.yaml'];
+let hiddenCount = 0;
+function checkHidden(e) {
+  if (e.hidden == null) return;
+  const where = e._file;
+  const h = e.hidden;
+  hiddenCount++;
+  if (NEVER_HIDE.includes(where)) errors.push(`${where}: this line shows on every page and cannot be hidden; fix it from its own page instead`);
+  if (typeof h !== 'object' || Array.isArray(h)) { errors.push(`${where}: hidden needs reason and since under it (see content/README.md)`); return; }
+  if (!HIDDEN_REASONS.includes(h.reason)) errors.push(`${where}: hidden.reason must be one of ${HIDDEN_REASONS.join(', ')}`);
+  const since = ymd(h.since);
+  if (!isDate(since)) errors.push(`${where}: hidden.since must be a date (YYYY-MM-DD)`);
+  else if (since > todayYmd()) errors.push(`${where}: hidden.since ${since} is in the future`);
+  if (h.note != null && typeof h.note !== 'string') errors.push(`${where}: hidden.note must be text`);
+  for (const k of Object.keys(h)) if (!HIDDEN_FIELDS.includes(k)) warnings.push(`${where}: unknown hidden field ${k}`);
+}
+
 const slugs = new Set();
 for (const e of loadCalendar()) {
   const where = e._file;
+  checkHidden(e);
   for (const f of ['title', 'slug', 'starts', 'org_name', 'who_it_is_for', 'what_to_do', 'url']) {
     if (!e[f]) errors.push(`${where}: missing ${f}`);
   }
@@ -50,13 +77,14 @@ for (const e of loadCalendar()) {
 const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(String(p));
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
-const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources'];
+const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
 function checkRecord(e, required, known) {
   const where = e._file;
+  checkHidden(e);
   for (const f of required) if (e[f] == null || e[f] === '') errors.push(`${where}: missing ${f}`);
   for (const k of Object.keys(e)) if (k !== '_file' && !known.includes(k)) warnings.push(`${where}: unknown field ${k} (see content/README.md)`);
   if (e.slug && !isSlug(e.slug)) errors.push(`${where}: slug must be lowercase letters, numbers and dashes`);
@@ -86,6 +114,8 @@ for (const o of orgs) {
   if (o.phone != null && !isPhone(o.phone)) errors.push(`${where}: phone must look like 211, 898-211, 304-555-0100 or 1-877-716-1212`);
 }
 
+// Listing fields (#177): hours the site can read, how to get in, languages, access.
+RESOURCE_FIELDS.push(...LISTING_FIELDS);
 const resources = loadDir('resources');
 const resourceSlugs = new Set();
 for (const r of resources) {
@@ -96,6 +126,11 @@ for (const r of resources) {
   if (r.org && !orgSlugs.has(r.org)) errors.push(`${where}: org ${r.org} has no file in content/orgs/`);
   if (r.hours != null && (typeof r.hours !== 'string' || !r.hours.trim())) errors.push(`${where}: hours must be text, like "Monday to Friday, 9 a.m. to 5 p.m."`);
   if (r.cost != null && typeof r.cost !== 'string') errors.push(`${where}: cost must be text`);
+  // What happens next (#159): optional, each from the record's own sources.
+  if (r.what_to_bring != null && (!Array.isArray(r.what_to_bring) || !r.what_to_bring.length || r.what_to_bring.some((x) => typeof x !== 'string' || !x.trim()))) errors.push(`${where}: what_to_bring must be a list of short text items`);
+  for (const f of ['what_happens', 'best_time']) if (r[f] != null && (typeof r[f] !== 'string' || !r[f].trim())) errors.push(`${where}: ${f} must be text`);
+  if (r.if_you_want_help != null && (!Array.isArray(r.if_you_want_help) || r.if_you_want_help.some((x) => typeof x !== 'string'))) errors.push(`${where}: if_you_want_help must be a list of resource slugs`);
+  { const l = checkListing(r); errors.push(...l.errors); warnings.push(...l.warnings); }
   const c = r.contact;
   if (c == null) continue;
   if (typeof c !== 'object') { errors.push(`${where}: contact must have phone, text, url, place or email under it`); continue; }
@@ -106,6 +141,42 @@ for (const r of resources) {
   if (c.text != null && !isPhone(c.text)) errors.push(`${where}: contact text must look like 898-211 or 304-555-0100 (quote it)`);
   if (c.place != null && (typeof c.place !== 'string' || !/,/.test(c.place))) errors.push(`${where}: contact place must be text like "200 M-Tec Dr, Morgantown, WV"`);
   if (c.email != null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(c.email))) errors.push(`${where}: contact email does not look like an email address`);
+}
+
+for (const r of resources) for (const h of r.if_you_want_help ?? []) if (!resourceSlugs.has(h)) errors.push(`${r._file}: if_you_want_help names ${h}, which has no file in content/resources/`);
+
+// Secondhand shops, free programs and online groups (content/secondhand, #423).
+const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources', 'hidden'];
+const secondhand = loadDir('secondhand');
+const secondhandSlugs = new Set();
+for (const s of secondhand) {
+  const where = s._file;
+  checkRecord(s, ['name', 'slug', 'kind', 'area', 'run_by', 'sells', 'url', 'status'], SECONDHAND_FIELDS);
+  if (secondhandSlugs.has(s.slug)) errors.push(`${where}: duplicate slug ${s.slug}`);
+  secondhandSlugs.add(s.slug);
+  if (s.kind && !SECONDHAND_KINDS[s.kind]) errors.push(`${where}: kind must be one of ${Object.keys(SECONDHAND_KINDS).join(', ')}`);
+  if (s.area && !SECONDHAND_AREAS[s.area]) errors.push(`${where}: area must be one of ${Object.keys(SECONDHAND_AREAS).join(', ')}`);
+  if (s.status && !SECONDHAND_STATUS.includes(s.status)) errors.push(`${where}: status must be one of ${SECONDHAND_STATUS.join(', ')}`);
+  if (s.goods != null && (!Array.isArray(s.goods) || s.goods.some((g) => !SECONDHAND_GOODS[g]))) errors.push(`${where}: goods must be a list from ${Object.keys(SECONDHAND_GOODS).join(', ')}`);
+  if (s.buys_from_you != null && typeof s.buys_from_you !== 'boolean') errors.push(`${where}: buys_from_you must be true or false`);
+  if (s.url && !isUrl(s.url)) errors.push(`${where}: url is not a web link`);
+  if (s.org && !orgSlugs.has(s.org)) errors.push(`${where}: org ${s.org} has no file in content/orgs/`);
+  if (s.address != null && (typeof s.address !== 'string' || !/,/.test(s.address))) errors.push(`${where}: address must be text like "200 Spruce St, Morgantown, WV"`);
+  for (const f of ['hours', 'sells', 'takes', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'note', 'run_by']) {
+    if (s[f] != null && typeof s[f] !== 'string') errors.push(`${where}: ${f} must be text`);
+  }
+}
+
+// Boards (content/boards/<slug>.yaml): city boards and commissions for the
+// Serve on a board page (#290). Open seats come from the city's vacancy list.
+const BOARD_FIELDS = ['name', 'slug', 'org', 'decides', 'meets', 'who_can_serve', 'open_seats', 'page_vacant', 'url', 'topics', 'sources'];
+const boards = loadDir('boards');
+for (const b of boards) {
+  const where = b._file;
+  checkRecord(b, ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'], BOARD_FIELDS);
+  if (b.org && !orgSlugs.has(b.org)) errors.push(`${where}: org ${b.org} has no file in content/orgs/`);
+  if (b.url != null && !isUrl(b.url)) errors.push(`${where}: url is not a web link`);
+  for (const k of ['open_seats', 'page_vacant']) if (b[k] != null && !(Number.isInteger(b[k]) && b[k] >= 0)) errors.push(`${where}: ${k} must be a whole number`);
 }
 
 // Saved feed snapshots are committed too, so check them the same way.
@@ -163,26 +234,36 @@ if (doors) {
 
 // Door pages (content/doors/<slug>.yaml): each step points to a real
 // resource, each situation names real steps and a page link.
-const doorDir = path.join(CONTENT_DIR, 'doors');
-for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x.endsWith('.yaml')) : []) {
+// Topic guides (content/guides/<slug>.yaml, like /grow/) have the same shape,
+// plus the door, topic and page they belong to.
+const yamlIn = (dir) => (fs.existsSync(path.join(CONTENT_DIR, dir)) ? fs.readdirSync(path.join(CONTENT_DIR, dir)).filter((x) => x.endsWith('.yaml')).map((f) => [dir, f]) : []);
+for (const [dir, f] of [...yamlIn('doors'), ...yamlIn('guides')]) {
   const slug = f.replace(/\.yaml$/, '');
-  const where = `doors/${f}`;
+  const where = `${dir}/${f}`;
   let dp;
-  try { dp = loadDoorPage(slug); } catch (err) { errors.push(`${where}: ${err.message}`); continue; }
-  const d = doors?.bySlug[slug];
-  if (!d?.topics) errors.push(`${where}: ${slug} is not a door in doors.yaml`);
-  else if (!d.page) errors.push(`${where}: give the ${slug} door a page in doors.yaml`);
-  if (dp.door !== slug) errors.push(`${where}: door should be ${slug}`);
+  try { dp = loadDoorPage(slug, dir); } catch (err) { errors.push(`${where}: ${err.message}`); continue; }
+  if (dir === 'guides') {
+    const d = doors?.bySlug[dp.door];
+    if (!d?.topics?.[dp.topic]) errors.push(`${where}: needs a door from doors.yaml and one of its topics`);
+    if (!/^\/[^\s]*\/$/.test(dp.page ?? '')) errors.push(`${where}: needs a page like /grow/`);
+  } else {
+    const d = doors?.bySlug[slug];
+    if (!d?.topics) errors.push(`${where}: ${slug} is not a door in doors.yaml`);
+    else if (!d.page) errors.push(`${where}: give the ${slug} door a page in doors.yaml`);
+    if (dp.door !== slug) errors.push(`${where}: door should be ${slug}`);
+  }
   if (!dp.lede) errors.push(`${where}: needs a lede`);
   for (const [id, st] of Object.entries(dp.steps)) {
-    if (!['today', 'week', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week or opens`);
+    if (!['today', 'week', 'season', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week, season or opens`);
     if (!st.text) errors.push(`${where}: step ${id} needs text`);
+    if (st.record.hidden) { warnings.push(`${where}: step ${id}'s resource ${st.resource} is hidden, so the step says it is being re-checked`); continue; }
     if (!st.record.contact?.url) errors.push(`${where}: step ${id}'s resource needs a contact url`);
   }
   if (dp.cant_wait) {
     try { resource(dp.cant_wait.resource); } catch { errors.push(`${where}: cant_wait resource ${dp.cant_wait.resource} not found`); }
   }
   for (const [id, st] of Object.entries(dp.steps)) {
+    if (st.record.hidden) continue;
     if (!st.record.sources?.length || st.record.sources.some((x) => !isDate(ymd(x.checked)))) errors.push(`${where}: step ${id}'s resource needs sources with checked dates`);
     if (!dp.situations.some((x) => (x.steps ?? []).includes(id))) warnings.push(`${where}: step ${id} is not used by any situation, so it never shows`);
   }
@@ -216,7 +297,7 @@ function eachText(value, key, visit) {
   else if (Array.isArray(value)) value.forEach((v) => eachText(v, key, visit));
   else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) eachText(v, k, visit);
 }
-for (const e of [...orgs, ...resources, ...loadCalendar()]) {
+for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
   eachText(e, '', (key, t) => {
     for (const [re, msg] of TIME_RULES) if (re.test(t)) warnings.push(`${e._file}: ${key}: ${msg}: "${t.match(re)[0]}"`);
     // Only sentences that ask the reader to act by a date ("Apply by May 1"), not ones like "families heard by July 1".
@@ -226,7 +307,28 @@ for (const e of [...orgs, ...resources, ...loadCalendar()]) {
   });
 }
 
+// Gathering places (content/places, #455), checked against content/schemas/place.schema.json.
+const placeCheck = checkPlaces();
+errors.push(...placeCheck.errors);
+warnings.push(...placeCheck.warnings);
+
+// Wrong place (#494). AI tools and directories mix up places with the same
+// name. Warn when an address leaves out West Virginia, or any text names
+// Morgantown in another state. Warnings only: some groups serve a wider area.
+const OTHER_MORGANTOWN = /\bMorgantown,?\s+(KY|Ky\.|Kentucky|IN|Ind\.|Indiana|NC|North Carolina|GA|Georgia|MS|Mississippi|TN|Tennessee|PA|Pennsylvania)\b/;
+const IN_WV = /\b(WV|W\. ?Va\.|West Virginia)\b/;
+for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
+  for (const [key, value] of [['contact.place', e.contact?.place], ['place', e.place], ['address', e.address]]) {
+    if (typeof value === 'string' && !IN_WV.test(value)) warnings.push(`${e._file}: ${key} "${value}" does not say WV; check it is the Morgantown, WV place`);
+  }
+  eachText(e, '', (key, t) => {
+    const m = t.match(OTHER_MORGANTOWN);
+    if (m) warnings.push(`${e._file}: ${key} names "${m[0]}"; this site is for Morgantown, WV`);
+  });
+}
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
-console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
+console.log(`Checked ${placeCheck.count} gathering places (content/places).`);
+console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${secondhand.length} secondhand entries (${hiddenCount} hidden in all), ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);
