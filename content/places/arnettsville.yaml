@@ -1,0 +1,33 @@
+name: Arnettsville Community Center
+slug: arnettsville
+kind: community-center
+area: south
+community: Arnettsville
+run_by:
+  kind: volunteer-association
+  text: The Arnettsville Community Association, an all-volunteer nonprofit, with the Morgantown Public Library, which runs a branch in the building
+story: The former Arnettsville Elementary School, about eight miles south of Morgantown on Route 19, now a community center and library branch.
+facilities:
+  gym: true
+  other: [library branch, rummage room]
+regular:
+  - Community dinners, senior gatherings and craft bazaars through the year
+  - Farmers market from June to September
+  - Library branch open Monday and Wednesday 11:30 a.m. to 6:30 p.m., and Friday 11:30 a.m. to 3:30 p.m.
+rentals:
+  - space: Gym and rooms, for basketball, parties and reunions
+    book: Price not published. Message the center's Facebook page to ask.
+    source: https://iserve.wvu.edu/agency/detail/?agency_id=50519
+contact:
+  facebook: https://www.facebook.com/ArnettsvilleCommunity
+  place: 4120 Fairmont Road, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-27
+tags: [family-friendly]
+notes:
+  - The center has no website we could find. Its events run in the Dominion Post's community listings, and it is on the MountainLine Crown Route.
+sources:
+  - url: https://iserve.wvu.edu/agency/detail/?agency_id=50519
+    checked: 2026-10-30
+  - url: https://www.dominionpost.com/2026/10/27/events-opportunities-24
+    checked: 2026-10-30

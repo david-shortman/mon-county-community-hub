@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://everythingmorgantown.org/schemas/place.schema.json",
+  "title": "Gathering place",
+  "description": "A building people gather in: a community center, senior center, neighborhood house, public rec building or a fire hall that rents a hall (#455). Shared with the groups and third spaces directory (#263). Plain-language guide: content/README.md. Version 1.",
+  "version": 1,
+  "type": "object",
+  "required": ["name", "slug", "kind", "area", "community", "run_by", "story", "status", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "other_names": { "type": "array", "items": { "type": "string" }, "description": "Other names sources use. List both when sources disagree." },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "kind": { "enum": ["community-center", "senior-center", "neighborhood-house", "rec-center", "park-building", "fire-hall"] },
+    "area": { "enum": ["south", "west", "north", "east", "morgantown"], "description": "Part of the county, for grouping. morgantown means Morgantown and close in." },
+    "community": { "type": "string", "description": "The community or town name people would type." },
+    "run_by": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["volunteer-association", "county", "city", "nonprofit", "fire-department", "parks-board", "park-foundation", "library"] },
+        "org": { "type": "string", "description": "Slug of a content/orgs entry, if there is one." },
+        "text": { "type": "string", "description": "Who runs it, in words, as the source says." }
+      }
+    },
+    "story": { "type": "string", "description": "One plain line." },
+    "facilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "rooms": { "type": "array", "items": { "type": "object", "required": ["name"], "additionalProperties": false, "properties": { "name": { "type": "string" }, "seats": { "type": "integer", "minimum": 1 } } } },
+        "kitchen": { "type": "boolean" },
+        "gym": { "type": "boolean" },
+        "outdoor": { "type": "array", "items": { "type": "string" }, "description": "Pavilion, playground, ballfield and the like, in words." },
+        "other": { "type": "array", "items": { "type": "string" } },
+        "step_free": { "type": "boolean", "description": "Only when the source says so." }
+      }
+    },
+    "regular": { "type": "array", "items": { "type": "string" }, "description": "Weekly or monthly happenings in words. Dated events go in content/calendar/ with venue: <slug>." },
+    "membership": {
+      "type": "object",
+      "required": ["dues"],
+      "additionalProperties": false,
+      "properties": { "dues": { "type": "string" }, "covers": { "type": "string" } }
+    },
+    "rentals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["space", "book"],
+        "additionalProperties": false,
+        "properties": {
+          "space": { "type": "string" },
+          "seats": { "type": "integer", "minimum": 1 },
+          "kitchen": { "type": "boolean" },
+          "outdoor": { "type": "boolean" },
+          "price": { "type": "string", "description": "As the source gives it, in words. Leave out when not published." },
+          "deposit": { "type": "string" },
+          "book": { "type": "string", "description": "How to book, in words. Public contact only." },
+          "source": { "type": "string", "format": "uri", "description": "The page with the price, if not the first source." }
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "phone": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "url_label": { "type": "string" },
+        "facebook": { "type": "string", "format": "uri" },
+        "email": { "type": "string" },
+        "place": { "type": "string", "description": "Only an address the place itself (or its owner) publishes. Leave out when sources conflict." }
+      }
+    },
+    "status": { "enum": ["active", "no-recent-activity", "closed", "renovating"] },
+    "last_activity_seen": { "type": "string", "format": "date", "description": "Date of the newest sign of activity we read. Over 6 months old shows 'No recent activity seen, call first'." },
+    "tags": { "type": "array", "items": { "enum": ["family-friendly", "free", "come-alone", "beginners", "step-free"] } },
+    "notes": { "type": "array", "items": { "type": "string" }, "description": "Gaps and conflicts residents should know, like 'Sources give two addresses, so call first.'" },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "object", "required": ["url", "checked"], "properties": { "url": { "type": "string", "format": "uri" }, "checked": { "type": "string", "format": "date" }, "name": { "type": "string" } } }
+    },
+    "phone_confirmed": { "type": "string", "format": "date", "description": "When a person confirmed the details by phone (#164)." }
+  }
+}
