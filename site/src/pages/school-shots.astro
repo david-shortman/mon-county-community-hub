@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import AnswerFacts from '../components/AnswerFacts.astro';
+export const page = { door: "family", topic: "family", label: "Shots and physicals for school and sports", summary: "Which shots and forms each grade needs, and the sports physical" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const MCS = 'https://www.boe.mono.k12.wv.us/o/mcs/page/health-forms';
+const MCS712 = 'https://www.boe.mono.k12.wv.us/o/mcs/page/7th-12th-grade-immunizations';
+const NEW = 'https://5il.co/2ng37';
+const PREK = 'https://5il.co/2ng3a';
+const WVSSAC = 'https://www.wvssac.org/new-physical-forms-for-2026-27-available/';
+const GOV = 'https://governor.wv.gov/article/governor-morrisey-applauds-major-legal-win-vaccine-exemption-case';
+---
+<Base title="School shots and sports physicals in Mon County: what your child needs" description="Which shots and health forms Monongalia County Schools ask for in Pre-K, kindergarten, 2nd, 7th and 12th grade, the sports physical rule, and where to get shots free for children who qualify.">
+  <h1>What shots and forms does my child need for school in Mon County?</h1>
+  <p class="lede">It depends on the grade. The big ones are 7th and 12th grade shots, which the school needs proof of before the first day. Children who qualify can get school shots free at the Monongalia County Health Department: call <a href="tel:3045985119">304-598-5119</a>.</p>
+
+  <h2>Entering 7th grade</h2>
+  <p>Proof of 1 Tdap shot (tetanus, diphtheria and whooping cough) and 1 meningococcal shot (meningitis), before school starts in August (<a href={MCS712}>Monongalia County Schools</a>).</p>
+
+  <h2>Entering 12th grade</h2>
+  <p>Proof of 1 Tdap shot and 2 meningococcal shots before school starts. If your child got the first meningococcal shot after turning 16, only 1 is needed (<a href={MCS712}>Monongalia County Schools</a>).</p>
+  <p>The schools say a 7th or 12th grader without proof on the first day is sent home until the school gets it. Those days count as unexcused absences.</p>
+
+  <h2>New to school in West Virginia</h2>
+  <p>A child starting school in West Virginia for the first time, in any grade, needs proof of shots for diphtheria, tetanus, whooping cough, polio, measles, mumps, rubella, chickenpox and hepatitis B. The state's chart says how many doses of each (<a href={NEW}>state chart, PDF</a>). Pre-K has its own, shorter list (<a href={PREK}>Pre-K chart, PDF</a>). Both charts are posted on the county schools' <a href={MCS}>health forms page</a>.</p>
+
+  <h2>Health check and dental forms</h2>
+  <p>Each year, students in <strong>Pre-K, kindergarten, 2nd, 7th and 12th grade</strong> need a current health check form and a dental form, turned in at or before the start of the school year (<a href={MCS}>Monongalia County Schools</a>).</p>
+  <ul>
+    <li><strong>Health check form:</strong> get it at your child's doctor's office.</li>
+    <li><strong>Dental form:</strong> on the schools' <a href={MCS}>health forms page</a>, under "Back to School Forms." For a dentist, see <a href={`${base}/staying-well/`}>Staying well</a>.</li>
+  </ul>
+
+  <h2>Sports physicals</h2>
+  <p>For school sports, the county schools post an athletic physical form on their <a href={MCS}>health forms page</a>, under "Athletic Physical Form." The WVSSAC, the group that runs school sports in West Virginia, says a physical must be done on or after May 1 to count for the next school year (<a href={WVSSAC}>WVSSAC</a>).</p>
+
+  <h2>Where to get school shots</h2>
+  <AnswerFacts slug="monchd-school-shots" linkLabel="Health department shots page" />
+  <p>Your child's doctor can also give school shots.</p>
+
+  <h2>What about exemptions?</h2>
+  <p>A doctor who has treated or examined your child can ask the state for a medical exemption (<a href={NEW}>state chart, PDF</a>). Rules on exemptions for religious reasons have been fought over in court since 2025 (<a href={GOV}>Governor's office, November 2025</a>). We could not find a current official page that says what applies now, so we do not list the rule here. Ask your child's school or the health department.</p>
+
+  <h2>Questions?</h2>
+  <AnswerFacts slug="mcs-school-shots-and-health-forms" linkLabel="County schools health forms page" />
+
+  <p class="meta">Sources checked October 30, 2026. We describe what the schools and health offices say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for your child. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

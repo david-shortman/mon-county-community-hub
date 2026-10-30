@@ -25,6 +25,7 @@ export function GET({ site }) {
 - [Flu and COVID shots](${u('/flu-shots/')}): book at the Monongalia County Health Department; who gets them free
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
 - [Turning 65 or on Medicare](${u('/turning-65/')}): when to sign up, visits and shots Medicare pays for, free help from WV SHIP, help paying Medicare costs
+- [School shots and sports physicals](${u('/school-shots/')}): 7th and 12th grade shots, health check and dental forms by grade, the sports physical May 1 rule, and free shots for children who qualify
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
