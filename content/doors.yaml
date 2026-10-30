@@ -75,6 +75,7 @@ doors:
       moving: Moving here
       recycling: Trash and recycling
       voting: Voting
+      weather: Storms and floods
   - slug: family
     name: Family and life changes
     page: /family/
