@@ -57,7 +57,7 @@ org_name: WV Department of Human Services
 who_it_is_for: Households that need help paying winter heating bills.
 what_to_do: Apply at your local DoHS office or online before the window closes.
 url: https://example.wv.gov/lieap   # where a person should go to act
-topics: [money, housing]      # money, food, housing, health, family, government, voting, recycling, taxes, community
+topics: [money, housing]      # money, food, housing, health, family, government, voting, recycling, taxes, community, secondhand, market
 place: 200 M-Tec Dr, Morgantown, WV   # optional; adds a Directions button. Only a place the source publishes
 phone: 304-555-0100           # optional; adds a Call button. Only a public office or program number the source publishes
 phone_label: the City Clerk   # optional; who answers, read by screen readers. Defaults to org_name
@@ -125,6 +125,90 @@ link: https://github.com/david-shortman/mon-county-community-hub/pull/355
 ```
 
 `found_by` comes from the report form's optional question. Never name the person or group who reported it, unless the group asks for credit, and that goes to David first.
+
+## `needs/<slug>.yaml`: the needs register
+
+The ranked, sourced list of problems people in Mon County face (charter, "Finding real problems"; research in #44, format in #74). One file per need. The full shape, with every field explained, is the JSON Schema in [`schemas/need.schema.json`](schemas/need.schema.json).
+
+```yaml
+title: Paying winter heating bills      # the need in a few plain words
+slug: paying-winter-heating-bills       # matches the file name
+summary: One to three plain sentences on the problem. Describe it; take no policy side.
+evidence:                               # at least one; every item has a source
+  - url: https://example.org/report
+    checked: 2026-10-30                 # Morgantown date you read it
+    shows: What the source shows, in plain words.
+    figure: "17% of households"         # optional; the number as the source states it
+    data_date: "2023"                   # optional; the year or period it covers
+    publisher: Example Org              # optional
+affected:                               # aggregate only: a count or an estimate, with its source
+  estimate: "about 1 in 6 households"   # or count: 1200 (a whole number the source states)
+  description: Who is counted.
+  url: https://example.org/report
+  checked: 2026-10-30
+severity: high                          # low | medium | high
+severity_why: Why, in one line.         # optional
+trend: unknown                          # better | worse | flat | unknown. Unknown unless a source shows change over time
+trend_why: Which evidence shows it.     # expected when trend is not unknown
+working_on:                             # groups only, never a private person
+  - org: west-virginia-211              # a slug from orgs/
+  - name: A group not in orgs/ yet
+    url: https://example.org
+gaps: [What is missing or hard to find]
+topics: [money, housing]                # tags from doors.yaml
+rank: 1                                 # 1 is the most pressing; unique
+rank_why: The score behind the rank.    # optional
+questions: [q01]                        # optional; findability question ids
+issues: [123]                           # optional; idea issues for this need
+```
+
+`npm run check-content` also runs `scripts/check-needs.mjs`, which fails on: a field the schema does not name, evidence without a source url or checked date, a count that is not a whole number, a person instead of a group in `working_on`, an unknown topic or org, a repeated rank, and anything that looks personal (an email address, a phone number, or a quoted passage of six or more words). Signals are public and aggregate; never profile or quote a private person. Test data lives in `site/scripts/fixtures/needs/`, never in this folder.
+
+## `secondhand/<slug>.yaml`: shops, free programs and online groups (#423)
+
+Secondhand shops, free and lending programs, and online trading groups. The thrift, markets and swaps pages (#422) build from these. Dated sales and markets go in `calendar/` instead, with the topic `secondhand` or `market`.
+
+```yaml
+name: Example Thrift Shop
+slug: example-thrift-shop
+kind: charity-thrift      # see kinds below
+area: westover            # see areas below
+run_by: Example Animal Rescue  # who runs it, as the source names it
+org: example-org          # optional; slug from orgs/ when the group has a record
+address: "100 Example St, Westover, WV"   # optional; only a street address the source publishes
+hours: Tuesday to Saturday, 10 a.m. to 7 p.m.   # optional; in words, as the source gives them
+sells: Housewares, books, toys and furniture. No clothing.   # what it sells, lends or gives, in words
+takes: Donations of housewares, books, toys and furniture.   # optional; what it accepts from you, in words
+goods: [home, books]      # filter tags, see below
+buys_from_you: false      # true when it pays cash or store credit for your things
+funds_local_cause: Care for rescued animals.   # optional; what the money supports, as the source says
+who_can_use: City of Morgantown residents 18 and up.   # optional; for free and lending programs
+what_to_bring: A photo ID.   # optional
+url: https://example.org   # the main button: the shop's or program's own page
+url_label: Shop website    # optional; short button label. Default "Website"
+status: confirmed          # confirmed | likely | unclear | closed
+note: Moved from Morgantown Mall in 2024.   # optional; one short plain line
+sources:
+  - url: https://example.org/about
+    checked: 2026-10-30
+```
+
+**Kinds:** `charity-thrift` (a thrift store whose sales fund a cause), `resale` (buys and sells used goods), `consignment` (sells your things and pays you a share), `vintage-antique`, `used-media` (books, records, games), `free-program` (gives things away), `lending` (lends things), `repair`, `online-group`.
+
+**Areas:** `westover` (Westover, Mall Rd and Fairmont Rd), `downtown` (downtown and High St), `mileground` (Mileground and Mountaineer Mall), `university-ave` (University Ave and Sunnyside), `cheat-lake`, `elsewhere` (elsewhere in the county), `outside-county` (just over the county line), `online`.
+
+**Goods tags** (for the quick filters): `clothes`, `kids`, `home` (furniture and home goods), `books` (books, records and games), `vintage` (antiques and vintage), `tools`, `electronics`, `building`.
+
+**Status:**
+
+- `confirmed`: a source dated 2025 or 2026, or the place's own current page, backs the details.
+- `likely`: the place's own live page lists it, but nothing is dated. Cards say to check before you go.
+- `unclear`: sources disagree or are old. **Never shown on a page.** Open a `needs-verification` issue for it.
+- `closed`: closed or replaced. Never shown as open; a page may say it closed.
+
+Every fact comes from a source page read in the same session, the same as other entries. Online groups are listed only when we could open the group's own page; we never quote members. No individual home yard sales, ratings, ads or paid placement.
+
+Cards show "Not checked lately" once the oldest `checked` date is over 4 months old (#430).
 
 ## `doors.yaml`: the five doors
 
@@ -219,3 +303,22 @@ The build fails on any of these, because pages make call, text and map links str
 It also warns on time and deadline wording in hand-written text: times read "8 a.m.", "8:30 p.m." or "noon" (not "8 AM", "8:00 a.m." or "13:00"), and a deadline in `what_to_do` reads "The last day is Tuesday, December 15." rather than "by December 15" (#413).
 
 It warns (but does not fail) on fields it does not know, which usually means a typo, and on sources last checked over 6 months ago. The Health check (`docs/operations/README.md`) lists the same past-due entries every 4 hours, so Duet can re-check them.
+
+## Hiding an item
+
+Any record in `orgs/`, `resources/`, `calendar/` or `secondhand/` can be taken off the site without deleting it (#519). Add a `hidden` block:
+
+```yaml
+hidden:
+  reason: group-request   # group-request | unconfirmed-risky | overdue | other
+  since: 2026-10-30       # Morgantown date it was hidden
+  note: Hours changed; re-checking with the group's own page.  # optional; never a name or other personal detail
+```
+
+- **What it does.** The build leaves the record out of every page, the search index, `calendar.ics` and the counts. A page that names the record on purpose (a crisis page that always shows one shelter) keeps the name and says "We are re-checking this listing, so its details are off the site for now." in place of its phone, link, hours and sources, with a "Report a problem" link. A door step that points to it says the same.
+- **What it does not do.** Hiding removes the record's facts. If a page also writes a fact about the item in its own words, that sentence stays, so open the page after you hide and fix the sentence if it is the part that is wrong.
+- **Putting it back.** Delete the `hidden` block. Nothing else changes. Re-check the source first and update `checked`.
+- **Hiding a feed item.** Copy the feed entry into a `calendar/` file with the same `slug` and add `hidden`. The hand-written entry wins, so the feed item stays off.
+- **Checks.** `npm run check-content` still checks hidden records in full, so one can come back at any time, and fails if `hidden.reason` is missing or not one of the four, or `since` is not a date. The Health check lists every hidden item until it comes back.
+- **211 and 988 cannot be hidden.** They show on every page. If one looks wrong, fix it from the line's own page the same day.
+- **Who can merge.** A PR that only adds or changes `hidden` blocks does not wait for David, and the High stakes check does not flag it (`docs/COORDINATION.md`: "taking down or hiding a wrong item does not wait"). A PR that removes a `hidden` block is checked like any other content change.

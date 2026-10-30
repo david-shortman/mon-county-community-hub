@@ -1,10 +1,13 @@
 name: Monongalia County Commission
 slug: monongalia-county-commission
 kind: government
-website: https://www.monongaliacounty.gov
-summary: The county government for Monongalia County. Its offices include the Litter Control Office and the Abandoned and Dilapidated Property Enforcement Agency.
+website: https://www.monongaliacounty.gov/
+phone: "304-291-7257"
+summary: The county government. It runs the Mon County Center at Mylan Park, county parks, and other county offices.
 topics: [government]
 area: monongalia-county
 sources:
-  - url: https://www.monongaliacounty.gov/departments/abandoned_dilapidated_property_enforcement_agency.php
+  - url: https://www.monongaliacounty.gov/departments/mon_county_center/community_seed_library.php
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
     checked: 2026-10-30
