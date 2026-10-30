@@ -1,4 +1,4 @@
-<!-- Mon County Community Hub icon: Westover and Morgantown on two hills, joined by a bridge over the Monongahela (#150). icons/icon-full.svg is the same drawing without rounded corners. -->
+<!-- Everything Morgantown icon (also the logo tile in the header): Westover and Morgantown on two hills, joined by a bridge over the Monongahela (#150). icons/icon-full.svg is the same drawing without rounded corners. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><clipPath id="r"><rect width="64" height="64" rx="14"/></clipPath></defs><g clip-path="url(#r)">
 <rect width="64" height="64" fill="#1f5c4a"/>
 <path d="M0 25 L13 16 L24 22 L37 12 L50 20 L64 14 V64 H0Z" fill="#2f7a63" stroke="#2f7a63" stroke-width="1.6" stroke-linejoin="round"/>

@@ -157,6 +157,7 @@ Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base
 - **Headings:** Atkinson Hyperlegible Next, weight 800, for `h1` to `h3` and the site name. It was made by the Braille Institute so letters that look alike (l, I, 1, O, 0) are easy to tell apart. It is free under the SIL Open Font License ([`site/public/fonts/OFL.txt`](../../site/public/fonts/OFL.txt)).
 - **How it loads:** self-hosted, never from a font service, so no third party sees our visitors. One weight, Latin characters only, about 11 KB. It uses `font-display: optional`: if it is not ready in a moment, the page uses the system font for that visit and never waits or jumps. Next visit it comes from the cache.
 - **Body text:** the system font stack. Research finds no single font is fastest for everyone, and serif versus sans does not change legibility, so body text stays on what each phone does best, at no cost.
+- **Site name (the logo):** Fraunces, soft (weight 800, softness 100, no wonky letters, optical size 48), for the name in the header and the link preview only. See "The logo" below.
 - **Don't** add more weights or families without updating this section and checking page weight. Don't use Public Sans: it reads as a federal government site.
 
 ## The icon
@@ -171,7 +172,18 @@ David picked the icon on October 30, 2026 (#390, #389): Westover and Morgantown 
   - Rounded roofs and corners.
   - The bridge sits behind the hills.
   - The waterline is flat.
-- **Where:** the browser tab, the home screen and link previews. It is not a drawing to repeat on pages (see "No drawn motif").
+- **Where:** the browser tab, the home screen, link previews and the logo in the header. It is not a drawing to repeat on pages (see "No drawn motif").
+
+## The logo
+
+David picked it on October 30, 2026 ([decision](../decisions/2026-10-30-1500-header-logo.md), #421): the icon as a small rounded tile, then the name "Everything Morgantown" on one line in Fraunces, soft. He chose the tile over a one-color line drawing and a name-only version, and Fraunces over Nunito and Bitter, because it adds warmth and a nod to the old downtown while staying bold and easy to read.
+
+- **Where:** the site header (`site/src/layouts/Base.astro`) and the link preview image (`site/public/share.png`, made by `scripts/make-share-image.mjs`). Headings and everything else keep Atkinson Hyperlegible Next.
+- **Tile:** the same drawing as `public/favicon.svg`, read in at build time, so the two never drift. 40px on wide screens, 34px on phones, with a thin `--line` ring in dark mode so the green edge does not sink into the page.
+- **Name:** real text, so screen readers read it and it grows with the reader's text size. The tile is hidden from screen readers. Text color is `--fg`, the same 7:1 pair as body text.
+- **How the font loads:** `site/src/fonts/fraunces-name-800.woff2` holds only the letters in "Everything Morgantown" (E, M, a, e, g, h, i, n, o, r, t, v, w, y and a space), about 2.5 KB. It is built into each page's CSS, so the name never waits for a download and never changes font as it loads (`font-display: block` is safe here because there is nothing to wait for). It adds about 3.5 KB gzipped to each page, tile included. License: SIL Open Font License, in `site/src/fonts/OFL-Fraunces.txt`.
+- **If the name changes:** cut a new file, or new letters will show in Georgia. Made with fontTools from Fraunces in the Google Fonts repo: instance `wght=800, SOFT=100, WONK=0, opsz=48`, then `pyftsubset` with `--text="Everything Morgantown" --flavor=woff2 --layout-features=kern,liga --no-hinting`.
+- **Don't** use Fraunces for headings or body text, stretch or recolor the tile, or put the name in hill green (green means "you can act on this").
 
 ## No drawn motif
 

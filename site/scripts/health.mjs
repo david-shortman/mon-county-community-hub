@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Health check for Mon County Community Hub.
+// Health check for Everything Morgantown (everythingmorgantown.org).
 //
 // Checks the live site (pages, calendar feed, links, basic accessibility,
 // content freshness, live feed sources) and, when GITHUB_TOKEN is set, the

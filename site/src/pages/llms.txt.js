@@ -1,7 +1,7 @@
 export function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const u = (p) => new URL(`${base}${p}`, site).href;
-  const body = `# Mon County Community Hub
+  const body = `# Everything Morgantown
 
 > Plain-language help for life in Morgantown and Monongalia County, WV. An open project that points to the nonprofits, government offices, and community groups already doing the work. Every fact links to its source and says when it was last checked. Dates and details can change, so confirm with the source before you act.
 

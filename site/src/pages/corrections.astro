@@ -20,7 +20,7 @@ const count = (n) => (n < 10 ? 'fewer than 10' : String(n));
 const monthName = new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: 'UTC' }).format(new Date(`${month}-15T12:00:00Z`));
 const report = 'https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml';
 ---
-<Base title="Corrections to the Mon County Community Hub" description="Every fix we have made to a fact, link or out-of-date detail on Mon County Community Hub, newest first.">
+<Base title="Corrections to Everything Morgantown" description="Every fix we have made to a fact, link or out-of-date detail on Everything Morgantown, newest first.">
   <h1>Corrections</h1>
   <p class="lede">When we get something wrong, we fix it and list it here, newest first. Typos are fixed without a note.</p>
   <p><strong>{monthName}:</strong> {thisMonth.length ? `${count(thisMonth.length)} fixes` : 'no fixes yet'}{fromHelpers.length > 0 && `, ${count(fromHelpers.length)} of them from people who work at these places or help others find services`}.</p>
