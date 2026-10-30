@@ -15,7 +15,7 @@
     "check-a11y": "node scripts/check-a11y.mjs",
     "check-contrast": "node scripts/check-contrast.mjs",
     "check-weight": "node scripts/check-weight.mjs",
-    "check-api": "node scripts/check-api.mjs",
+    "check-api": "node scripts/check-api.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
