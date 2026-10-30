@@ -1,0 +1,18 @@
+---
+// One step on a Trailhead route (#240). `n` is the step number, `title` what
+// to do, `when` an optional short time ("Today", "This week"). `open` shows
+// the step at first; use it on the first step so the answer is on screen.
+// A <summary> may hold one heading and nothing else, so `when` sits inside it.
+// End the step with an action: <Actions> buttons to call, apply or go.
+const { n, title, when, open = false, id } = Astro.props;
+---
+<li class="milepost" id={id}>
+  <details open={open}>
+    <summary>
+      <h2><span class="mp-num" aria-hidden="true">{n}</span><span class="mp-title"><span class="sr-only">Step {n}: </span>{title}{when && <span class="mp-when"><span class="sr-only">, </span>{when}</span>}</span></h2>
+    </summary>
+    <div class="mp-body">
+      <slot />
+    </div>
+  </details>
+</li>

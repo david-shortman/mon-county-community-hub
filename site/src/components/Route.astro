@@ -1,0 +1,11 @@
+---
+// Trailhead (#240): a guide as a short route of numbered steps (mileposts),
+// based on the GOV.UK step-by-step pattern. Each step is a native <details>,
+// so it opens and closes with no script, and find-in-page opens a closed step
+// that holds a match. Put <Milepost> steps inside. Rules:
+// docs/design/presentation.md ("Step path").
+const { label = 'Steps' } = Astro.props;
+---
+<ol class="route" aria-label={label}>
+  <slot />
+</ol>
