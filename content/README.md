@@ -181,6 +181,44 @@ phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
 - **Stale rule.** A place marked `active` whose `last_activity_seen` is over 6 months old shows "No recent activity seen, call first" (#39). A place found only in county lists is `no-recent-activity` from the start.
 - **Dated events** go in `calendar/` with `venue: <place slug>`, so they show on the place's page. Weekly regulars stay in `regular`.
 
+## `needs/<slug>.yaml`: the needs register
+
+The ranked, sourced list of problems people in Mon County face (charter, "Finding real problems"; research in #44, format in #74). One file per need. The full shape, with every field explained, is the JSON Schema in [`schemas/need.schema.json`](schemas/need.schema.json).
+
+```yaml
+title: Paying winter heating bills      # the need in a few plain words
+slug: paying-winter-heating-bills       # matches the file name
+summary: One to three plain sentences on the problem. Describe it; take no policy side.
+evidence:                               # at least one; every item has a source
+  - url: https://example.org/report
+    checked: 2026-10-30                 # Morgantown date you read it
+    shows: What the source shows, in plain words.
+    figure: "17% of households"         # optional; the number as the source states it
+    data_date: "2023"                   # optional; the year or period it covers
+    publisher: Example Org              # optional
+affected:                               # aggregate only: a count or an estimate, with its source
+  estimate: "about 1 in 6 households"   # or count: 1200 (a whole number the source states)
+  description: Who is counted.
+  url: https://example.org/report
+  checked: 2026-10-30
+severity: high                          # low | medium | high
+severity_why: Why, in one line.         # optional
+trend: unknown                          # better | worse | flat | unknown. Unknown unless a source shows change over time
+trend_why: Which evidence shows it.     # expected when trend is not unknown
+working_on:                             # groups only, never a private person
+  - org: west-virginia-211              # a slug from orgs/
+  - name: A group not in orgs/ yet
+    url: https://example.org
+gaps: [What is missing or hard to find]
+topics: [money, housing]                # tags from doors.yaml
+rank: 1                                 # 1 is the most pressing; unique
+rank_why: The score behind the rank.    # optional
+questions: [q01]                        # optional; findability question ids
+issues: [123]                           # optional; idea issues for this need
+```
+
+`npm run check-content` also runs `scripts/check-needs.mjs`, which fails on: a field the schema does not name, evidence without a source url or checked date, a count that is not a whole number, a person instead of a group in `working_on`, an unknown topic or org, a repeated rank, and anything that looks personal (an email address, a phone number, or a quoted passage of six or more words). Signals are public and aggregate; never profile or quote a private person. Test data lives in `site/scripts/fixtures/needs/`, never in this folder.
+
 ## `secondhand/<slug>.yaml`: shops, free programs and online groups (#423)
 
 Secondhand shops, free and lending programs, and online trading groups. The thrift, markets and swaps pages (#422) build from these. Dated sales and markets go in `calendar/` instead, with the topic `secondhand` or `market`.

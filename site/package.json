@@ -8,7 +8,7 @@
     "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs && node scripts/check-weight.mjs && node scripts/check-api.mjs",
     "check-pages": "node scripts/check-pages.mjs",
     "preview": "astro preview",
-    "check-content": "node scripts/check-content.mjs",
+    "check-content": "node scripts/check-content.mjs && node scripts/check-needs.mjs",
     "check-sources": "node scripts/check-sources.mjs",
     "update-feeds": "node scripts/update-feeds.mjs",
     "health": "node scripts/health.mjs",
