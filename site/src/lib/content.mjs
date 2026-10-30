@@ -63,10 +63,11 @@ export function upcoming(entries, today = todayYmd(), days = 62) {
     .sort((a, b) => (a.starts < b.starts ? -1 : a.starts > b.starts ? 1 : a.title.localeCompare(b.title)));
 }
 
-// "13:05" -> "1:05 p.m."; "08:00" -> "8 a.m."
+// Times read one way everywhere (#51): "8 a.m.", "11:30 a.m.", "noon".
 function prettyTime(t) {
   const [h, m] = t.split(':').map(Number);
   if (h === 12 && !m) return 'noon';
+  if (h === 0 && !m) return 'midnight';
   return `${h % 12 || 12}${m ? `:${String(m).padStart(2, '0')}` : ''} ${h < 12 ? 'a.m.' : 'p.m.'}`;
 }
 export function prettyTimes(start, end) {
@@ -153,6 +154,25 @@ export function sourceGroups(sources, orgSlug) {
     else groups.push({ name, links: [{ url: s.url, text }] });
   }
   return groups;
+}
+
+// Checked dates are Morgantown dates (America/New_York). After 6 months a
+// card says it may be out of date (the rule in content/README.md, #39).
+export const STALE_DAYS = 183;
+export function isStale(checked, today = todayYmd()) {
+  if (!checked) return false;
+  return (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${checked}T12:00:00Z`)) / 86400000 > STALE_DAYS;
+}
+
+// A "Report a problem" link that opens our GitHub issue form with the item
+// already filled in: its name, its slug and its source (#39, #48). It asks
+// for nothing personal. GitHub needs a free account and reports are public;
+// the site footer says so.
+export const REPORT_FORM = 'https://github.com/david-shortman/mon-county-community-hub/issues/new';
+export function reportUrl({ title, slug, url }) {
+  const q = new URLSearchParams({ template: 'suggest-resource.yml', title: `Problem with: ${title}`, name: slug ? `${title} (${slug})` : title });
+  if (url) q.set('url', url);
+  return `${REPORT_FORM}?${q}`;
 }
 
 // The oldest checked date across a record's sources, so a card never says an
