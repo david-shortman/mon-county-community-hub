@@ -2,7 +2,8 @@
 // One date on the calendar, phone first: when it is, what it is, then big
 // buttons to act on it. Sources and topics sit in the small print below.
 import Actions from './Actions.astro';
-import { prettyDate, prettyTimes, chipDate, relativeLabel, sourceLabel, isGovSite, todayYmd, oldestChecked, isStale, reportUrl } from '../lib/content.mjs';
+import PassItOn from './PassItOn.astro';
+import { prettyDate, prettyRange, prettyTimes, chipDate, relativeLabel, sourceLabel, isGovSite, todayYmd, oldestChecked, isStale, reportUrl } from '../lib/content.mjs';
 const { e } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
@@ -49,4 +50,5 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
     {e.topics?.length ? <> Topics: {e.topics.join(', ')}.</> : null}
     {' '}<a href={reportUrl({ title: e.title, slug: e.slug, url: e.sources?.[0]?.url ?? e.url })}>Report a problem<span class="sr-only"> with {e.title} (opens GitHub)</span></a>.
   </p>
+  <PassItOn title={`${e.title}, ${prettyRange(e.starts, e.ends)}`} slug={e.slug} phone={e.phone} place={e.place} checked={checked} share={false} />
 </article>

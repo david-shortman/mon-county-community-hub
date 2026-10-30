@@ -230,3 +230,50 @@ export function loadDoorPage(slug) {
   const steps = Object.fromEntries(Object.entries(raw.steps ?? {}).map(([id, s]) => [id, { id, ...s, record: resource(s.resource) }]));
   return { ...raw, steps, situations: raw.situations ?? [], also: raw.also ?? [], _file: `doors/${slug}.yaml` };
 }
+
+// Secondhand shops, free and lending programs, and online groups (#423).
+// Only confirmed and likely entries reach a page; unclear and closed ones
+// stay in the data so a person can re-check them.
+export const SECONDHAND_KINDS = {
+  'charity-thrift': 'Charity thrift store',
+  resale: 'Buys and sells used goods',
+  consignment: 'Consignment',
+  'vintage-antique': 'Vintage and antiques',
+  'used-media': 'Used books, records and games',
+  'free-program': 'Free program',
+  lending: 'Lending library',
+  repair: 'Repair help',
+  'online-group': 'Online group',
+};
+export const SECONDHAND_AREAS = {
+  westover: 'Westover, Mall Rd and Fairmont Rd',
+  downtown: 'Downtown and High St',
+  mileground: 'Mileground and Mountaineer Mall',
+  'university-ave': 'University Ave',
+  'cheat-lake': 'Cheat Lake',
+  elsewhere: 'Elsewhere in the county',
+  'outside-county': 'Just outside the county',
+  online: 'Online',
+};
+export const SECONDHAND_GOODS = {
+  clothes: 'Clothes',
+  kids: 'Kids',
+  home: 'Furniture and home',
+  books: 'Books, records and games',
+  vintage: 'Antiques and vintage',
+  tools: 'Tools',
+  electronics: 'Electronics',
+  building: 'Building materials',
+};
+export const SECONDHAND_STATUS = ['confirmed', 'likely', 'unclear', 'closed'];
+export function loadSecondhand({ all = false } = {}) {
+  const list = loadDir('secondhand').map((e) => ({ ...e, sources: (e.sources || []).map((s) => ({ ...s, checked: ymd(s.checked) })) }));
+  return all ? list : list.filter((e) => e.status === 'confirmed' || e.status === 'likely');
+}
+// Secondhand cards say "Not checked lately" after 4 months (#430), sooner
+// than the 6 month rule, since shops open, move and close often.
+export const FRESH_DAYS = 122;
+export function notCheckedLately(sources, today = todayYmd()) {
+  const c = oldestChecked(sources);
+  return !!c && (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${c}T12:00:00Z`)) / 86400000 > FRESH_DAYS;
+}
