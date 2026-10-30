@@ -1,0 +1,7 @@
+date: 2026-10-30
+item: County recycling drop-off center
+page: /recycling/
+kind: outdated        # fact | link | outdated | wording
+found_by: our-check   # our-check | works-there | helper | used-it | other
+what: We listed closing time as 3:30 p.m. from the county's page. The center's own site lists 3:25 p.m. We now show both and name who says what.
+link: https://github.com/david-shortman/mon-county-community-hub/pull/355

@@ -15,6 +15,16 @@ body:
     id: url
     attributes:
       label: Website or source link
+  - type: dropdown
+    id: who
+    attributes:
+      label: How do you know about this? (optional)
+      description: No names needed. Reports from people who work at a place or help others find services are read first.
+      options:
+        - I work or volunteer at this place
+        - I help people find services
+        - I used this
+        - Other or prefer not to say
   - type: textarea
     id: details
     attributes:
