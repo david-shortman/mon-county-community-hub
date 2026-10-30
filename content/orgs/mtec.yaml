@@ -1,0 +1,10 @@
+name: Monongalia County Technical Education Center (MTEC)
+slug: mtec
+kind: government
+website: https://mtec.mono.k12.wv.us/
+summary: Monongalia County Schools' career and technical center. It runs adult education and English classes, and evening classes for adults.
+topics: [work]
+area: monongalia-county
+sources:
+  - url: https://mtec.mono.k12.wv.us/
+    checked: 2026-10-30

@@ -5,17 +5,23 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-export const page = { door: "family", topic: "work", label: "Work and learning", summary: "Job help, job training, and free reading and English lessons for adults" };
+export const page = { door: "family", topic: "work", label: "Work and learning", summary: "Job help, high school equivalency, evening classes, and free reading and English lessons" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 ---
-<Base title="Jobs and learning in Morgantown and Mon County: job help and free adult lessons" description="Find job help and training at WorkForce West Virginia in Westover, and free reading, writing and English lessons for adults from Literacy Volunteers.">
+<Base title="Jobs and learning in Morgantown and Mon County: job help, high school equivalency, adult classes" description="Job help at WorkForce West Virginia, high school equivalency and English classes and evening classes at MTEC, and free reading and English lessons from Literacy Volunteers.">
   <h1>Work and learning</h1>
-  <p class="lede">Looking for a job or training? Start with WorkForce West Virginia on Commerce Drive. Want to read, write or speak English better? Literacy Volunteers teaches adults for free.</p>
+  <p class="lede">Looking for a job or training? Start with WorkForce West Virginia on Commerce Drive. To finish high school or learn English, call MTEC adult education. Literacy Volunteers teaches adults to read and write for free.</p>
 
   <h2>Find a job or job training</h2>
   {r('workforce-wv-morgantown-office') && <ResourceCard r={r('workforce-wv-morgantown-office')} />}
+
+  <h2>Finish high school, or learn English</h2>
+  {r('mtec-adult-education-esl') && <ResourceCard r={r('mtec-adult-education-esl')} showCost />}
+
+  <h2>Evening classes for job skills</h2>
+  {r('mtec-adult-evening-classes') && <ResourceCard r={r('mtec-adult-evening-classes')} showCost />}
 
   <h2>Reading, writing and English for adults</h2>
   {r('lvmpc-adult-literacy') && <ResourceCard r={r('lvmpc-adult-literacy')} sms="724-491-2007" smsLabel="Literacy Volunteers" />}
