@@ -1,0 +1,42 @@
+---
+// New to Mon County, part 2 (#204): start power, water, gas and trash.
+// Only companies and towns confirmed on official pages are listed. Not yet
+// here: other water, gas and trash providers (#524), and Morgantown and
+// Westover trash sign-up (#525).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Moving here: start power, water, gas and trash", summary: "How to start service with the companies and towns that serve homes here, and what it costs" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Moving to Morgantown or Mon County: start power, water, gas and trash" description="How to start electric, water, sewer, gas and trash service when you move to Morgantown or Monongalia County: Mon Power, the Morgantown Utility Board, Hope Gas, and town trash pickup, with phone numbers, what to bring and deposits.">
+  <h1>Moving to Mon County: start your power, water, gas and trash</h1>
+  <p class="lede">Which companies serve a home depends on where it is. Ask your landlord or the seller which ones serve the address, then call each one. Set up service a few days before you move in.</p>
+
+  <h2>Electric</h2>
+  {r('mon-power-start-service') && <ResourceCard r={r('mon-power-start-service')} showCost />}
+
+  <h2>Water and sewer</h2>
+  <p>The Morgantown Utility Board (MUB) serves Morgantown, and Star City and Granville send residents to MUB too. If MUB does not serve the address, ask your landlord or the seller who does.</p>
+  {r('mub-start-service') && <ResourceCard r={r('mub-start-service')} showCost />}
+
+  <h2>Gas</h2>
+  {r('hope-gas-start-service') && <ResourceCard r={r('hope-gas-start-service')} showCost />}
+
+  <h2>Trash</h2>
+  <p>Who picks up trash depends on your town. Some towns do it themselves. Outside town limits, the Solid Waste Authority can tell you who serves your address.</p>
+  {r('star-city-trash') && <ResourceCard r={r('star-city-trash')} />}
+  {r('granville-trash') && <ResourceCard r={r('granville-trash')} />}
+  {r('mon-swa-ask-about-trash') && <ResourceCard r={r('mon-swa-ask-about-trash')} />}
+  <p>Recycling drop-off, tires and electronics: <a href={`${base}/recycling/`}>Trash, recycling and drop-off</a>.</p>
+
+  <h2>Not sure who serves your address?</h2>
+  <p>Ask your landlord, the seller or a neighbor first. The state agency that oversees utility companies can also answer questions.</p>
+  {r('wv-psc-utility-questions') && <ResourceCard r={r('wv-psc-utility-questions')} />}
+
+  <p>Trouble paying a power or water bill later? See <a href={`${base}/utility-bills/`}>Help paying a utility bill</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Deposits and fees can change, so ask when you call. We list the companies and towns that official pages name for this area. Know another provider we should add? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

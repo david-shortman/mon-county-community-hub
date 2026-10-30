@@ -1,0 +1,10 @@
+name: Town of Star City
+slug: town-of-star-city
+kind: government
+website: https://www.starcitywv.com/
+summary: A town in Mon County, next to Morgantown. Its business office handles questions about town services like garbage pickup.
+topics: [moving]
+area: monongalia-county
+sources:
+  - url: https://www.starcitywv.com/garbage-recycling/
+    checked: 2026-10-30

@@ -72,6 +72,7 @@ doors:
       - text: Trash and recycling
         href: /recycling/
     topics:
+      moving: Moving here
       recycling: Trash and recycling
       voting: Voting
   - slug: family

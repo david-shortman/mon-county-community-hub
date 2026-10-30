@@ -3,8 +3,12 @@
 # come as their pages ship: new here and who serves my address (#204),
 # getting around (#61), and registering to vote.
 door: living-here
-lede: Trash, recycling and the everyday things of living in Mon County. Pick what is going on, and we put the steps in order.
+lede: Moving in, trash, recycling and the everyday things of living in Mon County. Pick what is going on, and we put the steps in order.
 steps:
+  power-water-gas:
+    when: week
+    resource: mub-start-service
+    text: Ask your landlord or the seller which companies serve the home, then start water, power and gas service a few days before you move.
   swa:
     when: today
     resource: mon-swa-ask-about-trash
@@ -19,6 +23,10 @@ steps:
     resource: mon-swa-ask-about-trash
     text: Tires and electronics go to collection days. Check "Dates for this" on this page, or call the Solid Waste Authority to ask about the next one.
 situations:
+  - id: moving
+    label: I'm moving here and need to start power, water, gas or trash
+    page: /moving-here/
+    steps: [power-water-gas, swa]
   - id: pickup
     label: When is my trash pickup day?
     page: /recycling/#pickup

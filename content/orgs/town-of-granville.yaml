@@ -1,0 +1,10 @@
+name: Town of Granville
+slug: town-of-granville
+kind: government
+website: https://townofgranvillewv.gov/
+summary: A town in Mon County, west of Morgantown. The town provides trash pickup, billed through the Morgantown Utility Board.
+topics: [moving]
+area: monongalia-county
+sources:
+  - url: https://townofgranvillewv.gov/community/
+    checked: 2026-10-30
