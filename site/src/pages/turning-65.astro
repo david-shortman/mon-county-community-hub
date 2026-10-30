@@ -1,0 +1,39 @@
+---
+// Staying well entry point (#235, #246): turning 65 or on Medicare.
+// Facts from medicare.gov, checked 2026-10-30; WV SHIP from content/.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ship = loadDir('resources').find((e) => e.slug === 'wv-ship-medicare-counseling');
+const MG = 'https://www.medicare.gov';
+---
+<Base title="Turning 65 or on Medicare in Mon County: sign up, free visits, help with costs" description="When to sign up for Medicare, the free visits and shots Medicare pays for, free help choosing a plan from WV SHIP, and programs that help pay Medicare costs in West Virginia.">
+  <h1>Turning 65 or on Medicare?</h1>
+  <p class="lede">For free help with any Medicare question, call WV SHIP at <a href="tel:18779874463">1-877-987-4463</a>. Below: when to sign up, what Medicare pays for in full, and help with costs.</p>
+
+  <h2>When to sign up</h2>
+  <p>Your first chance to sign up lasts 7 months. It starts 3 months before the month you turn 65 and ends 3 months after it. If you miss it, you may have to pay a penalty (<a href={`${MG}/basics/get-started-with-medicare/sign-up/when-does-medicare-coverage-start`}>Medicare</a>).</p>
+  <p>You sign up for Medicare Part A and Part B through Social Security (<a href={`${MG}/talk-to-someone`}>Medicare</a>).</p>
+
+  <h2>Visits and shots Medicare pays for in full</h2>
+  <p>You pay nothing for these if your doctor or provider accepts Medicare. Other tests during the visit may cost extra.</p>
+  <ul>
+    <li><strong>"Welcome to Medicare" visit:</strong> once, within your first 12 months on Part B (<a href={`${MG}/coverage/welcome-to-medicare-preventive-visit`}>Medicare</a>).</li>
+    <li><strong>Yearly wellness visit:</strong> once every 12 months after that (<a href={`${MG}/coverage/yearly-wellness-visits`}>Medicare</a>).</li>
+    <li><strong>Flu and COVID shots:</strong> see <a href={`${base}/flu-shots/`}>who, when and where to get a flu shot</a>.</li>
+  </ul>
+
+  <h2>Free help choosing a plan</h2>
+  {ship && <ResourceCard r={ship} />}
+
+  <h2>Help paying Medicare costs</h2>
+  <ul>
+    <li><strong>Premiums and copays:</strong> Medicare Savings Programs, run by the state, can help pay your Part A and Part B premiums, and sometimes deductibles and copays. Medicare says to apply even if you don't think you qualify (<a href={`${MG}/basics/costs/help/medicare-savings-programs`}>Medicare</a>). In West Virginia, apply for Medicare Premium Assistance at <a href="https://www.wvpath.wv.gov/">WV PATH</a> (<a href="https://learning-public.wvpath.wv.gov/SubmitanApplication.html">source</a>).</li>
+    <li><strong>Prescriptions:</strong> Extra Help lowers drug plan costs for people with limited income. Some people get it on their own, for example if they have full Medicaid. Others apply through Social Security, and WV SHIP can help you apply for free (<a href={`${MG}/basics/costs/help/drug-costs`}>Medicare</a>).</li>
+  </ul>
+
+  <p>Staying healthy after 65: see <a href={`${base}/staying-well/`}>Staying well: a simple list</a>.</p>
+
+  <p class="meta">Medicare sources checked October 30, 2026. We describe Medicare's rules and where to get help. We do not sell plans or recommend one. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
