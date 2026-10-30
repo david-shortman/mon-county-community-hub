@@ -75,6 +75,7 @@ doors:
       moving: Moving here
       recycling: Trash and recycling
       voting: Voting
+      growing: Growing food and flowers
   - slug: family
     name: Family and life changes
     page: /family/
