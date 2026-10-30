@@ -1,0 +1,10 @@
+name: Monongalia County Sheriff's Office
+slug: monongalia-county-sheriff
+kind: government
+website: https://monongaliasheriff.gov/
+summary: The county's law enforcement office, at 116 Walnut Street in Morgantown.
+topics: [moving, government]
+area: monongalia-county
+sources:
+  - url: https://monongaliasheriff.gov/
+    checked: 2026-10-30
