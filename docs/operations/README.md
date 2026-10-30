@@ -103,3 +103,14 @@ The repo only allows a short list of actions. The safe set is the one the workin
 - **One Health issue.** When any check fails, it opens an issue labeled `health` (and `bug`), pins it, and updates its body on each run. When nothing is failing, it comments and closes it. The report is also in the run summary and saved as an artifact for 14 days.
 - **Claude only for new, fixable failures.** If a failing check is one an agent can fix, and the set of such failures has changed since the last run, it starts Claude (same setup as `claude.yml`) to find the cause and open a fix PR or a `for:code` issue. Green runs, warnings, the same failure again, and failures only David can fix (like `startup_failure`) never start Claude.
 - **Limit:** if GitHub Actions itself is down, this workflow cannot run either. Sessions should still run `npm run health` by hand at the start of a session.
+
+## Source check (daily)
+
+[`.github/workflows/sources.yml`](../../.github/workflows/sources.yml) runs [`site/scripts/check-sources.mjs`](../../site/scripts/check-sources.mjs) once a day (#16). The Health check above asks "does the link answer?" The source check goes deeper, on every outside source we rely on.
+
+- **The registry builds itself.** Each run gathers every outside link from `content/` and from the built pages. [`content/source-rules.yaml`](../../content/source-rules.yaml) holds only the exceptions and puts each source in one group: `monitored` (fetched), `manual` (a person checks it, like Facebook) or `reference` (our own site, code, tools). Help now pages are listed there and go first.
+- **What it flags.** Broken (404, 410, a dead domain, a bad certificate). Moved to another domain (never followed silently, since a lapsed domain can be bought by someone else). A phone number in an entry that is not on any of its source pages. As hints only: pages whose text changed since the last run, same-site address changes, and pages robots.txt asks us not to fetch. Blocks, timeouts and resets are "could not check", not broken.
+- **Polite.** One request at a time per site, 1.5 seconds apart, robots.txt honored, no Facebook (#166).
+- **One standing issue.** It updates a single issue labeled `source-check`. The title says how many sources need a re-check, and it carries `for:duet` only while something does. The issue body also stores each page's fingerprint from the last run, so the workflow needs no write access to the repo.
+- **Run it by hand:** `npm run build`, then `npm run check-sources` in `site/` (about 90 seconds). `--help-now-only` checks just the Help now sources.
+- **Cost:** $0. No Claude calls, a few minutes of a free runner.

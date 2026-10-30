@@ -1,0 +1,50 @@
+name: Source check
+
+# Checks every outside source the hub relies on, once a day (#16):
+# dead links, moves to another domain, phone numbers that are no longer on the
+# source page, and pages whose text changed. Help now pages go first (#453).
+# Updates one standing "Source check" issue for Duet. No Claude calls; a run
+# takes a few minutes of a free runner. See site/scripts/check-sources.mjs.
+#
+# Uses only actions/checkout and actions/setup-node, to stay inside the allow list.
+
+on:
+  schedule:
+    - cron: '41 11 * * *' # daily, after the morning Site build
+  workflow_dispatch:
+
+concurrency:
+  group: sources
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      # The built pages hold links that are not in content/, so build first.
+      - run: npm run build
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/source-issue.mjs get-state state.json
+      - run: |
+          npm run check-sources -- --state-in state.json --json sources.json --md sources.md
+          cat sources.md >> "$GITHUB_STEP_SUMMARY"
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/source-issue.mjs update sources.json sources.md
