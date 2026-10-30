@@ -1,0 +1,10 @@
+name: WVU School of Dentistry
+slug: wvu-school-of-dentistry
+kind: school
+website: https://dentistry.hsc.wvu.edu/
+summary: West Virginia University's dental school in Morgantown. Patients are treated through WVU Dental clinics.
+topics: [health]
+area: monongalia-county
+sources:
+  - url: https://dentistry.hsc.wvu.edu/about/contact-us/
+    checked: 2026-10-30
