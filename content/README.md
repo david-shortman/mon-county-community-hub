@@ -438,3 +438,19 @@ hidden:
 - **Checks.** `npm run check-content` still checks hidden records in full, so one can come back at any time, and fails if `hidden.reason` is missing or not one of the four, or `since` is not a date. The Health check lists every hidden item until it comes back.
 - **211 and 988 cannot be hidden.** They show on every page. If one looks wrong, fix it from the line's own page the same day.
 - **Who can merge.** A PR that only adds or changes `hidden` blocks does not wait for David, and the High stakes check does not flag it (`docs/COORDINATION.md`: "taking down or hiding a wrong item does not wait"). A PR that removes a `hidden` block is checked like any other content change.
+
+## Confirmed by phone and the call queue
+
+Some groups have no website, or only a page robots cannot read, so a phone call is the only way to check them (#164). After a person confirms a listing by phone, add to its file in `orgs/`, `resources/` or `places/`:
+
+```yaml
+phone_confirmed: 2026-11-02   # Morgantown date of the call
+phone_confirmed_by: DS        # optional; the caller's initials (orgs and resources)
+```
+
+- **Never** write down the name of the person who answered, or anything they said about themselves.
+- Call only the public number on the listing. What the call confirms still has to match the record: if something changed, fix the record, and if the change is on the group's own page, re-check that source too.
+- The card shows "Confirmed by phone on <date>." after the checked date, and the out-of-date note once that date is over 6 months old.
+- `npm run check-content` fails if `phone_confirmed` is not a date or is in the future, or `phone_confirmed_by` is not two or three capital letters.
+
+**The call queue.** `npm run call-queue` in `site/` prints the list of calls to make, oldest first, with the number, why each one is there and what to ask (`--md FILE` writes it to a file). A listing is in it when it has a public phone number and either no source a robot can read (every source is `manual` in `source-rules.yaml`), no recent activity seen (places), or a past phone check. Making the calls waits on David's decision about who calls and from what number (#156).
