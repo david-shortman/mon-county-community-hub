@@ -55,6 +55,7 @@ ${centers}
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
+- [Make a list for someone](${u('/make-a-list/')}): a helper picks up to 6 places and adds a note, then prints or texts a one-page list; picks live only in the web address
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
 - [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
 - [Serve on a city board](${u('/make-it-better/boards/')}): city boards that shape how Morgantown looks and feels (Urban Landscape Commission, Tree Board, Cultural Arts, Historic Landmarks, Planning, and more), what each does, when it meets, open seats from the city's vacancy list, and how to apply
@@ -71,7 +72,7 @@ ${centers}
 - [Open data](${u('/data/')}): how to reuse the listings, the license (CC BY 4.0) and how to cite
 - [API catalog](${u('/api/v1/index.json')}): JSON index of every data file, with counts, license and build time
 - [OpenAPI description](${u('/api/v1/openapi.yaml')}): every field in the JSON files
-- [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
+- [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [needs register](${u('/api/v1/needs.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
 
 ## Notes for AI tools
 

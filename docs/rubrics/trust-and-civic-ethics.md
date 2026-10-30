@@ -95,3 +95,13 @@ Residents can see who runs it, why choices were made, and how to correct it.
 - **2:** About page explains who, why, and how decisions are made, and offers a no-account way to report mistakes.
 - **3:** All of 2, and corrections are logged publicly with what changed.
 - **How to check:** Read the About page and footer; try to report a mistake while logged out of everything.
+
+### TR9. How we write about this place and this project
+
+We credit local news instead of rewriting it, talk about help and neighbors instead of problems, never pitch the site as "efficiency", and never claim what we can't show. ([Writing rules](../playbook/writing-rules.md), #501)
+
+- **0:** A news story retold as our own writing, or a claim about the project with nothing to back it.
+- **1:** Pity or deficit words ("struggling", "left behind"), "efficiency" or "do more with less" pitches, or a news fact with no outlet named.
+- **2:** News used only for the one fact needed, with the outlet named and linked. Local groups are the ones doing the work. Claims about the project link to a page, log or file.
+- **3:** All of 2, and any change to who runs or funds the project updates the About and Hard questions pages in the same PR.
+- **How to check:** Read the changed text with the five rules in [writing-rules.md](../playbook/writing-rules.md). Search it for "efficient", "streamline", "struggling" and "left behind".
