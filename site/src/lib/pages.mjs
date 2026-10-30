@@ -59,6 +59,11 @@ export function loadPages() {
     );
     const routes = new Set(entries.filter(([r, m]) => m && !UNTAGGED.has(r)).map(([r]) => r));
     const errors = entries.flatMap(([r, m]) => problems(r, m, routes, doors).map((p) => `${r}: ${p}`));
+    // A door or lane that names its own page must point at a real one.
+    const allRoutes = new Set(entries.map(([r]) => r));
+    for (const d of [...doors.doors, ...doors.lanes]) {
+      if (d.page && !allRoutes.has(d.page)) errors.push(`content/doors.yaml: ${d.slug} page ${d.page} is not a page on the site`);
+    }
     if (errors.length) throw new Error(`Page tags need fixing (see site/src/lib/pages.mjs):\n- ${errors.join('\n- ')}`);
     const byRoute = new Map(entries.filter(([, m]) => m).map(([route, m]) => [route, { route, ...m }]));
     // Steps take their door and topic from the top of their parent chain.
