@@ -1,0 +1,24 @@
+---
+// Site-wide notice when upkeep has stopped (#497). Shown at build time when the
+// newest re-check is older than UPKEEP_NOTICE_DAYS, and turned on in the
+// browser too, so it still appears if the daily rebuild has stopped.
+import { lastUpkeep, upkeepLapsed, UPKEEP_NOTICE_DAYS } from '../lib/upkeep.mjs';
+import { prettyDate } from '../lib/content.mjs';
+const last = lastUpkeep();
+const on = upkeepLapsed();
+---
+{UPKEEP_NOTICE_DAYS > 0 && last && (
+  <>
+    <section class="note upkeep" role="note" data-pagefind-ignore aria-label="This site is not being kept up" data-upkeep-last={last} data-upkeep-days={UPKEEP_NOTICE_DAYS} hidden={!on}>
+      <p><strong>This site is not being kept up right now.</strong> Nobody has re-checked a listing since {prettyDate(last)}, so phone numbers, hours and dates may be out of date. Check with the group directly before you go, or call <a href="tel:211">211</a> for help.</p>
+    </section>
+    <script is:inline>
+      (function () {
+        var el = document.querySelector('[data-upkeep-last]');
+        if (!el) return;
+        var days = (Date.now() - Date.parse(el.dataset.upkeepLast + 'T12:00:00Z')) / 86400000;
+        if (days > Number(el.dataset.upkeepDays)) el.hidden = false;
+      })();
+    </script>
+  </>
+)}
