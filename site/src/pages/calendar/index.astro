@@ -2,13 +2,16 @@
 import Base from '../../layouts/Base.astro';
 import HelpNow from '../../components/HelpNow.astro';
 import EventCard from '../../components/EventCard.astro';
-import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate } from '../../lib/content.mjs';
+import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate, ymd } from '../../lib/content.mjs';
 export const page = { door: "dates", label: "Deadlines and dates", summary: "Application windows, deadlines and community dates" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
 const items = upcoming(await loadCalendarWithFeeds(), today, 62);
 const now = items.filter((e) => e.starts <= today);
 const later = items.filter((e) => e.starts > today);
+// The page date is never older than an item's checked date (#51): the build
+// can run late in the evening, Morgantown time, after a check was logged.
+const updated = [today, ...items.flatMap((e) => (e.sources ?? []).map((s) => ymd(s.checked)))].filter(Boolean).sort().at(-1);
 const icsHttp = new URL(`${base}/calendar.ics`, Astro.site).href;
 const icsWebcal = icsHttp.replace(/^https?:/, 'webcal:');
 const icsGoogle = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(icsWebcal)}`;
@@ -16,7 +19,7 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
 ---
 <Base title="Deadlines and dates in Mon County, WV" description="Application windows, deadlines, and community dates in Mon County for this month and next.">
   <h1>Deadlines and dates in Mon County</h1>
-  <p class="lede">Application windows, deadlines, and community dates for this month and next. Updated {prettyDate(today)}.</p>
+  <p class="lede">Application windows, deadlines, and community dates for this month and next. Updated {prettyDate(updated)}.</p>
   <section class="add-cal" aria-labelledby="add-cal-h">
     <h2 id="add-cal-h">Add to your calendar</h2>
     <p>Pick the app you use. New dates show up on their own. Dates can change, so check the source before you go.</p>

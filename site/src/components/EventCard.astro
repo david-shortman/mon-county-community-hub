@@ -2,7 +2,7 @@
 // One date on the calendar, phone first: when it is, what it is, then big
 // buttons to act on it. Sources and topics sit in the small print below.
 import Actions from './Actions.astro';
-import { prettyDate, prettyTimes, ymd, chipDate, relativeLabel, sourceLabel, todayYmd } from '../lib/content.mjs';
+import { prettyDate, prettyTimes, chipDate, relativeLabel, sourceLabel, todayYmd, oldestChecked, isStale, reportUrl } from '../lib/content.mjs';
 const { e } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
@@ -11,7 +11,8 @@ const today = todayYmd();
 const phoneRe = /((?:1[-. ])?\(?\d{3}\)?[-. ]\d{3}[-. ]\d{4}(?:,? (?:ext\.?|x) ?\d+)?)/i;
 const phoneHref = (t) => { const [main, ext] = t.split(/,? (?:ext\.?|x) ?/i); return `tel:${main.replace(/\D/g, '')}${ext ? `,${ext}` : ''}`; };
 const parts = (e.what_to_do || '').split(phoneRe);
-const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
+// The oldest source date, so a card never looks fresher than it is (#39).
+const checked = oldestChecked(e.sources);
 // Feed entries say which feed and when; hand-written ones say when a person checked.
 const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(e.feed.fetched)) : null;
 
@@ -42,8 +43,9 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
     ) : (
       <>Run by {e.org_name}.
       {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{sourceLabel(s.url)}</a></>))}.</> : <> Source: {sourceLabel(e.url)} (the details page).</>}
-      {' '}Checked by hand on {prettyDate(ymd(lastChecked))}.</>
+      {' '}Checked by hand on {prettyDate(checked)}.{isStale(checked, today) && <strong> This may be out of date, so check the details page before you go.</strong>}</>
     )}
     {e.topics?.length ? <> Topics: {e.topics.join(', ')}.</> : null}
+    {' '}<a href={reportUrl({ title: e.title, slug: e.slug, url: e.sources?.[0]?.url ?? e.url })}>Report a problem<span class="sr-only"> with {e.title} (opens GitHub)</span></a>.
   </p>
 </article>

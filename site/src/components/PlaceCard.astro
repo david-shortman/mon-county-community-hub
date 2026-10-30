@@ -17,5 +17,5 @@ const textLine = r.contact.text;
   <p><strong>How to get in:</strong> {r.what_to_do}</p>
   {r.cost && <p><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>}
   <Actions callFirst phone={r.contact.phone} phoneLabel={r.title} sms={textLine} smsLabel={`${r.title}, send your ZIP code`} place={r.contact.place} about={r.title} />
-  <SourceLine sources={r.sources} org={r.org} about={r.title}>{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) && <> <a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a>.</>}</SourceLine>
+  <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) && <> <a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a>.</>}</SourceLine>
 </article>

@@ -1,15 +1,15 @@
 ---
 // "Need help now?" pointer to WV 211. Facts come from content/resources/wv-211.yaml
 // and content/orgs/west-virginia-211.yaml, so a re-check there updates this box (#149).
-import { resource, org, telHref, prettyDate } from '../lib/content.mjs';
+import SourceLine from './SourceLine.astro';
+import { resource, org, telHref } from '../lib/content.mjs';
 const { heading = true } = Astro.props;
 const r = resource('wv-211');
 const o = org(r.org);
-const src = r.sources.toSorted((a, b) => (a.checked < b.checked ? 1 : -1))[0];
 const site = new URL(r.contact.url).hostname.replace(/^www\./, '');
 ---
 <section class="note" aria-labelledby={heading ? 'help-now-h' : undefined}>
   {heading && <h2 id="help-now-h">Need help now?</h2>}
   <p>If you need food, a place to stay, or help with a bill, call <a href={telHref(r.contact.phone)}>{r.contact.phone}</a>. It is free and open 24 hours a day, every day. You can also text your ZIP code to {r.contact.text} or chat at <a href={r.contact.url}>{site}</a>. Tell them what you need and they will point you to local help.</p>
-  <p class="meta">Run by {o.name}. Source: <a href={src.url}>{new URL(src.url).hostname.replace(/^www\./, '')}</a>. Checked by hand on {prettyDate(src.checked)}.</p>
+  <SourceLine sources={r.sources} org={r.org} about="211"><Fragment slot="before">Run by {o.name}. </Fragment></SourceLine>
 </section>
