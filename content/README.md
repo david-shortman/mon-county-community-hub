@@ -163,6 +163,18 @@ From these tags the build makes the Topics page (`/topics/`), each door's list o
 - Every entry has at least one source with a `checked` date.
 - Entries older than 6 months since `checked` get flagged for re-verification.
 
+### Rules for every entry
+
+These come from the [trust and AI playbook](../docs/playbook/trust-and-ai.md) and the [open data playbook](../docs/playbook/open-data.md). Follow them in every content PR (#114).
+
+- **Every fact is on a source page you read in the same session.** Each phone number, hour, address, limit and date must appear on a page listed in the entry's `sources`, opened and read while you write or re-check the entry. Never fill a gap from memory or "common knowledge." If the source does not say it, leave the field out. Never list a URL you did not open. The PR says which source supports which field. ([Treat AI output as unchecked until sourced](../docs/playbook/trust-and-ai.md#treat-ai-output-as-unchecked-until-sourced))
+- **Quote eligibility, dates and costs closely.** For `who_it_is_for`, dates and `cost`, keep the source's words and numbers as closely as plain language allows. If a simpler version would change the meaning, keep the source's words and add "See the full rules at the link." Never compute a limit the source does not state (for example, a percent of the poverty line turned into dollars), and never guess a date. ([Quote eligibility, dates, and costs from the source](../docs/playbook/trust-and-ai.md#quote-eligibility-dates-and-costs-from-the-source))
+- **Describe, never decide.** Say who a program is for in the source's terms. Never tell a reader they qualify or do not qualify; the program decides.
+- **When sources differ, say who says what.** Name each source and what it says, with no verdict between them. ([decision](../docs/decisions/2026-10-29-1300-when-sources-differ.md))
+- **Use our own topic labels.** Use the `topics` tags in `doors.yaml`. Never copy 211 taxonomy codes, terms or definitions; they are copyrighted. ([Use open topic labels](../docs/playbook/open-data.md#use-open-topic-labels-not-the-211-taxonomy))
+- **`checked` is a Morgantown date.** Write `checked` as the date in Morgantown (America/New_York) when you read the source, not the UTC date. Only change `checked` after you actually re-read the source; moving facts between files or rewording them does not count.
+- **Name the source as it is.** A source page is credited to an organization on the site only when it is on that organization's own website. A news article or a directory is shown by its address, and a page that names it says what it is (for example "a Morgantown Magazine article from January 14, 2026").
+
 ### What `npm run check-content` checks in orgs and resources
 
 The build fails on any of these, because pages make call, text and map links straight from these files (#259):
