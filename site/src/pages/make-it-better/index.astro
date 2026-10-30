@@ -8,17 +8,17 @@ export const page = { door: "community", topic: "better", label: "Make it better
 const pages = await loadPages();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const steps = [
-  { route: '/make-it-better/report/', text: 'Something is broken or dumped? Find the office that fixes it.' },
+  { route: '/make-it-better/report/', text: 'Pothole, broken light or dumped trash? Find the office that fixes it.' },
   { route: '/make-it-better/cleanups/', text: 'Join a cleanup with neighbors.' },
-  { route: '/make-it-better/adopt/', text: 'Adopt a street, a spot, a stream or a trail, and keep it clean.' },
+  { route: '/make-it-better/adopt/', text: 'Look after one place over time, not just for one cleanup day.' },
   { route: '/make-it-better/grants/', text: 'Get a small grant or loan for a project.' },
-  { route: '/make-it-better/boards/', text: 'Serve on a city board that helps set how Morgantown looks.' },
+  { route: '/make-it-better/boards/', text: 'Help shape the city\'s trees, parks, public art and historic buildings, on boards like the Tree Board.' },
   { route: '/make-it-better/when-it-gets-decided/', text: 'Know when plans and budgets get decided, and how to comment.' },
 ].filter((s) => pages.has(s.route)).map((s) => ({ ...s, label: pages.get(s.route).label }));
 ---
 <Base title="Make it better: ways to improve Morgantown and Mon County" description="Ways to make Morgantown and Monongalia County better: report a problem to the right office, adopt a place, find money for a project, or serve on a city board.">
   <h1>Make it better</h1>
-  <p class="lede">Small steps add up. Start with one, then take the next. Each step points to the office, program or group that does the work.</p>
+  <p class="lede">Ways to make your street, neighborhood and town nicer: fix problems, keep places clean and green, fund small projects, and have a say in city plans. Each step points to the office, program or group that does the work.</p>
   <ol class="ladder">
     {steps.map((s) => <li><a href={`${base}${s.route}`}><strong>{s.label}</strong></a>: {s.text}</li>)}
   </ol>

@@ -9,7 +9,7 @@ import Actions from '../../components/Actions.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import NextRung from '../../components/NextRung.astro';
 import { loadDir } from '../../lib/content.mjs';
-export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City boards that shape how Morgantown looks, which have open seats, and how to apply" };
+export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City boards for trees, parks, public art, planning and more: which have open seats, and how to apply" };
 const boards = loadDir('boards');
 const open = boards.filter((b) => b.open_seats > 0);
 const full = boards.filter((b) => !(b.open_seats > 0));
@@ -37,7 +37,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
 ---
 <Base title="Serve on a Morgantown city board: open seats and how to apply" description="City boards that help shape how Morgantown looks and feels, like the Urban Landscape Commission and Tree Board: what each one does, when it meets, which have open seats, and how to apply.">
   <h1>Serve on a city board</h1>
-  <p class="lede">Help decide how Morgantown looks. City Council appoints residents to these boards. Some have open seats now.</p>
+  <p class="lede">Help shape the city's trees, parks, public art, historic buildings and walkable streets. City Council appoints residents to these boards. Some have open seats now.</p>
 
   <div class="note">
     <p><strong>How to apply:</strong> fill out the city's application <a href={applyOnline}>online</a>, or print the <a href={applyPdf}>paper application (PDF)</a> and return it to the City Clerk's office. Seats stay open until they are filled.</p>
@@ -73,7 +73,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
   ))}
 
   <h2>Other city boards with open seats</h2>
-  <p>These boards are not mainly about how the city looks, but they also have open seats on the city's list.</p>
+  <p>These boards cover other parts of city life, and they also have open seats on the city's list.</p>
   <ul>
     {others.map(([name, n, who]) => <li><strong>{name}:</strong> {n}. {who}.</li>)}
   </ul>
