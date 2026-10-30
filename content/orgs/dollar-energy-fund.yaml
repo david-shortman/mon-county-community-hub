@@ -1,0 +1,10 @@
+name: Dollar Energy Fund
+slug: dollar-energy-fund
+kind: nonprofit
+website: https://www.dollarenergy.org
+summary: A nonprofit hardship fund that helps utility customers pay their bills, through local agencies.
+topics: [money]
+area: statewide
+sources:
+  - url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
+    checked: 2026-10-28

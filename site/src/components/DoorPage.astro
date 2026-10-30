@@ -8,8 +8,8 @@
 //      person can text or bookmark their steps.
 //   3. Your steps: one list for everything picked, grouped Today, This week,
 //      When it opens, each step ending in an action (Trailhead, #237).
-//   4. Often goes with this, dates for this door, every page in the door,
-//      and a person to talk to.
+//   4. Often goes with this, dates for this door, the door's own sections
+//      (the slot), every page in the door, and a person to talk to.
 // A situation shows only once its page exists. Steps carry no facts of their
 // own: phone, link, cost and source come from the step's resource record.
 import Actions from './Actions.astro';
@@ -21,7 +21,7 @@ const { slug } = Astro.props;
 const door = loadDoors().bySlug[slug];
 const data = loadDoorPage(slug);
 const pages = await loadPages();
-const live = (href) => pages.has(href.split('#')[0]);
+const live = (href) => pages.has(href.split(/[?#]/)[0]);
 const situations = data.situations.filter((s) => live(s.page));
 const groups = [['today', 'Today'], ['week', 'This week'], ['opens', 'When it opens']];
 // Each step once, with every live situation that uses it.
@@ -37,6 +37,8 @@ const topics = Object.keys(door.topics);
 const dates = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics ?? []).some((t) => topics.includes(t))).slice(0, 4);
 const inDoor = await doorTopics(slug);
 const cw = data.cant_wait && resource(data.cant_wait.resource);
+// The text line: set in the door file (988 texts at its own number), or the record's text line (211 texts at 898-211).
+const cwSms = cw && (data.cant_wait.sms ?? cw.contact.text);
 const r211 = resource('wv-211');
 ---
 <p class="lede">{data.lede}</p>
@@ -46,10 +48,10 @@ const r211 = resource('wv-211');
     <p>{data.cant_wait.text}</p>
     <div class="crisis-btns">
       <a class="btn" href={telHref(cw.contact.phone)}><span>Call {cw.contact.phone}<span class="sr-only">, {cw.title}</span></span></a>
-      <a class="btn" href={`sms:${cw.contact.phone}`}><span>Text {cw.contact.phone}<span class="sr-only">, {cw.title}</span></span></a>
-      <a class="btn" href="tel:911"><span>Call 911<span class="sr-only">, emergency</span></span></a>
+      {cwSms && <a class="btn" href={`sms:${cwSms.replace(/[^\d]/g, '')}`}><span>Text {cwSms}<span class="sr-only">, {cw.title}{cw.contact.text ? ', send your ZIP code' : ''}</span></span></a>}
+      {data.cant_wait.emergency && <a class="btn" href="tel:911"><span>Call 911<span class="sr-only">, emergency</span></span></a>}
     </div>
-    <p class="meta">Source: <a href={cw.sources[0].url}>{sourceName(cw)}</a>, checked {checked(cw)}. 911 is the standard emergency number.</p>
+    <p class="meta">Source: <a href={cw.sources[0].url}>{sourceName(cw)}</a>, checked {checked(cw)}.{data.cant_wait.emergency && ' 911 is the standard emergency number.'}</p>
   </section>
 )}
 
@@ -94,6 +96,10 @@ const r211 = resource('wv-211');
       </div>
     );
   })}
+  <div class="actions keep-steps">
+    <a class="btn" id="text-steps" href="sms:"><span>Text these steps to myself</span></a>
+    <button class="btn" type="button" id="print-steps"><span>Print</span></button>
+  </div>
   <p><a href={`${base}${door.page}`}>Start over</a>. Your picks are only in this page's web address. Nothing is saved.</p>
 </section>
 
@@ -106,6 +112,8 @@ const r211 = resource('wv-211');
 
 <h2>Dates for this</h2>
 {dates.length ? dates.map((e) => <EventCard e={e} />) : <p>No dates for this on our calendar right now. <a href={`${base}/calendar/`}>See all dates</a>.</p>}
+
+<slot />
 
 <h2>Every {door.name} page</h2>
 {inDoor.map((t) => (
@@ -140,6 +148,9 @@ const r211 = resource('wv-211');
     plan.querySelectorAll('.step-group').forEach(function (g) { g.hidden = !g.querySelector('.step:not([hidden])'); });
     if (!shown) { links.hidden = false; form.hidden = true; document.getElementById('door-nomatch').hidden = false; return; }
     plan.hidden = false;
+    // Text the link to these steps (the picks are in it), or print them.
+    document.getElementById('text-steps').href = 'sms:?&body=' + encodeURIComponent(location.href);
+    document.getElementById('print-steps').addEventListener('click', function () { window.print(); });
     document.getElementById('door-plan-h').focus();
   })();
 </script>

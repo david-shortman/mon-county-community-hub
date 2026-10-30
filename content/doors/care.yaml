@@ -12,6 +12,8 @@ lede: Shots, a dentist, Medicare, quitting tobacco and staying healthy in Mon Co
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
+  sms: "988"
+  emergency: true
 steps:
   trails:
     when: today

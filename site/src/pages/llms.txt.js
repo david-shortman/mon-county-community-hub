@@ -14,7 +14,7 @@ export function GET({ site }) {
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
 - [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
-- [Money help](${u('/money/')}): situations first: cannot pay a bill, behind on rent, payday loans, free tax help, scam warning
+- [Get through this month](${u('/money/')}): pick what is going on (a utility or other bill, short on food, behind on rent, cash fast or a payday loan, free tax help) and get local steps in order, with phone numbers and sources; also the scam warning
 - [Food help](${u('/help/food/')}): two questions (when you need food, and whether you are a WVU student) leading to sourced options
 - [Food today or this week](${u('/help/food/today/other/')}): 211, Scott's Run Settlement House, and upcoming free food dates
 - [Food today for WVU students](${u('/help/food/today/student/')}): The Rack student food pantry first, then 211 and other options

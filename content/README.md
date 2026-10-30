@@ -130,12 +130,12 @@ A new topic tag needs a home in exactly one door, or `npm run check-content` fai
 Once a door has its own page (set `page:` on the door in `doors.yaml`), its guided page is built from `doors/<slug>.yaml`. The first one is `doors/care.yaml` (Get care, `/care/`). It has:
 
 - `lede`: one line under the title.
-- `cant_wait`: the one thing that can't wait for this door's people, with the resource it calls.
+- `cant_wait`: the one thing that can't wait for this door's people, with the resource it calls. The Text button uses `sms` if set (988 texts at its own number), or the record's text line (211 texts at 898-211). `emergency: true` adds a Call 911 button.
 - `steps`: each with `when` (`today`, `week` or `opens`), the `resource` it points to, and our short `text`. A step states no facts of its own: its phone, link, cost, source and checked date come from that resource.
 - `situations`: what people pick, in their words (`label`), the `page` with more, and the `steps` it adds. A situation shows only once its page exists. Steps used by several picks show once.
 - `also`: "Often goes with this" links to other doors.
 
-The page puts picks in the web address (`/care/?pick=shots&pick=dentist`), so nothing is stored and steps can be texted or bookmarked. Without scripts it is a list of plain links. The layout is `site/src/components/DoorPage.astro`, shared by every door.
+Within each group, steps show in the order they are listed. The page puts picks in the web address (`/care/?pick=shots&pick=dentist`), and a link can pre-pick one, as the home page does with `/money/?pick=rent`, so nothing is stored and steps can be texted or bookmarked. With steps showing, a person can text the link to themselves or print. Without scripts it is a list of plain links. A door page can add its own sections between the dates and the page list (the Get through this month door keeps the old Money help sections there). The layout is `site/src/components/DoorPage.astro`, shared by every door.
 
 ### Tagging a site page
 
