@@ -41,7 +41,7 @@ Every page follows these. The rubric criteria they come from are in brackets.
 
 ## Weight budget
 
-Measured as everything the page loads, compressed, on first visit. Tracked in CI by #180.
+Measured as everything the page loads, compressed, on first visit. Checked on every build by `site/scripts/check-weight.mjs` (#180); the list of urgent pages lives at the top of that script.
 
 | Page kind | Examples | Budget | Script |
 |---|---|---|---|
