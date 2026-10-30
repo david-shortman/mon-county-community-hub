@@ -1,0 +1,41 @@
+name: Group request (project team)
+description: For the project team. Log a group's fix, removal or add request so the one-week clock runs.
+labels: ["group-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. Write only what we need to act: the item, the kind, what to change and the date it came in. **No sender name, email, phone or message text.** Who sent it stays in the private Notion home (#522).
+        The clock in the Health workflow adds a "Due:" line at the top, then raises this on day 3 and day 5, and hides the item on day 7 if it is still open (#521). Close the issue when the request is done.
+  - type: input
+    id: item
+    attributes:
+      label: Item
+      description: The content file (like content/resources/grace-shelter.yaml) and, if you know it, the page it shows on. The clock can only hide an item when the file is named.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - fix
+        - removal
+        - add
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What to change
+      description: In our words, one or two lines. Not the sender's message.
+    validations:
+      required: true
+  - type: input
+    id: received
+    attributes:
+      label: Received date
+      description: Morgantown date the request came in, YYYY-MM-DD.
+      placeholder: "2026-10-30"
+    validations:
+      required: true

@@ -73,6 +73,69 @@ jobs:
           SITE_RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
         run: node scripts/health-issue.mjs health.json health.md
 
+  # The group request clock (#521): adds the Due line, raises open requests on
+  # day 3 (priority) and day 5 (for:david), and on day 7 opens and merges a PR
+  # that hides the item with `reason: overdue` (#519; hiding does not wait for
+  # David, docs/COORDINATION.md). The days come from REQUEST_DAYS in
+  # site/src/lib/group-requests.mjs. It only edits this repo: no messages to
+  # anyone. If GitHub will not let it open or merge the PR, it labels the issue
+  # for:code and says so, and a session hides the item by hand.
+  # Runbook: docs/operations/group-requests.md.
+  requests:
+    if: github.event_name != 'workflow_run'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      actions: write
+    defaults:
+      run:
+        working-directory: site
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - name: Run the clock
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/group-requests.mjs --plan hides.json
+      - name: Hide items still open on the last day
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -uo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          merged=0
+          while read -r n file; do
+            [ -n "$n" ] || continue
+            branch="code/overdue-hide-$n"
+            git checkout -q -f -B "$branch" "$GITHUB_SHA"
+            if ! node scripts/group-requests.mjs --hide "../$file" "$n" || ! npm run -s check-content > /dev/null; then
+              node scripts/group-requests.mjs --report "$n" fail "the hide did not pass check-content"; continue
+            fi
+            git commit -qam "Hide $file: group request #$n is past its deadline (#521)"
+            body="Group request #$n was still open on its last day, so this hides the item with \`reason: overdue\` (#519). Hiding does not wait for David (docs/COORDINATION.md). Opened and merged by the group request clock in the Health workflow."
+            if git push -q -f origin "$branch" \
+              && url=$(gh pr create --base main --head "$branch" --title "Hide $file (group request #$n past due)" --body "$body") \
+              && gh pr merge "$url" --squash --delete-branch; then
+              node scripts/group-requests.mjs --report "$n" ok "$url"; merged=1
+            else
+              node scripts/group-requests.mjs --report "$n" fail "GitHub did not let the workflow open or merge the PR"
+            fi
+          done < <(node -e "for (const h of require('./hides.json')) console.log(h.number, h.file)")
+          # A merge made with the workflow's token does not start the Site
+          # build by itself, so start it here.
+          if [ "$merged" = 1 ]; then gh workflow run site.yml --ref main; fi
+
   investigate:
     needs: check
     if: needs.check.outputs.investigate == 'true'
