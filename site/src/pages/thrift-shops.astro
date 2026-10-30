@@ -1,0 +1,51 @@
+---
+// Thrift and resale shops by area (#427, part of #422). Built only from
+// content/secondhand: shops are grouped by area, A to Z within each. The quick
+// filters are plain links to each shop's card, so they work with no script.
+// No ratings, no "best of", no paid placement.
+import Base from '../layouts/Base.astro';
+import ShopCard from '../components/ShopCard.astro';
+import { loadSecondhand, SECONDHAND_AREAS, SECONDHAND_GOODS } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "secondhand", label: "Thrift and resale shops", summary: "Secondhand shops by area: what each sells, which ones buy from you, and which fund a local cause" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const SHOP_KINDS = ['charity-thrift', 'resale', 'consignment', 'vintage-antique', 'used-media'];
+const shops = loadSecondhand().filter((s) => SHOP_KINDS.includes(s.kind)).sort((a, b) => a.name.localeCompare(b.name));
+const areas = Object.entries(SECONDHAND_AREAS).map(([slug, name]) => ({ slug, name, shops: shops.filter((s) => s.area === slug) })).filter((a) => a.shops.length);
+const FILTERS = ['clothes', 'kids', 'home', 'books', 'vintage'];
+const filters = FILTERS.map((g) => ({ g, name: SECONDHAND_GOODS[g], shops: shops.filter((s) => (s.goods ?? []).includes(g)) })).filter((f) => f.shops.length);
+const buyers = shops.filter((s) => s.buys_from_you);
+const causes = shops.filter((s) => s.funds_local_cause);
+---
+<Base title="Thrift and resale shops in Morgantown and Mon County, WV" description="Secondhand, thrift, consignment, vintage and used book and game shops in Morgantown and Monongalia County, grouped by area, with hours, what each sells, and which buy from you.">
+  <h1>Thrift and resale shops</h1>
+  <p class="lede">Secondhand shops in Mon County, grouped by part of town and listed A to Z. Most cluster in two places: the Westover strip along Mall Rd and Fairmont Rd, and downtown on and near High St. We list every shop the same way, with no ratings and no paid spots.</p>
+
+  <nav aria-labelledby="filters-h">
+    <h2 id="filters-h">Looking for something?</h2>
+    <ul class="filters">
+      {filters.map((f) => <li><strong>{f.name}:</strong> {f.shops.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>)}
+      {buyers.length > 0 && <li><strong>Buys from you</strong> (cash or store credit): {buyers.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>}
+      {causes.length > 0 && <li><strong>Funds a local cause:</strong> {causes.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>}
+    </ul>
+    <p>By area: {areas.map((a, i) => <>{i > 0 && ' · '}<a href={`#area-${a.slug}`}>{a.name}</a></>)}</p>
+  </nav>
+
+  {areas.map((a) => (
+    <section aria-labelledby={`area-${a.slug}`}>
+      <h2 id={`area-${a.slug}`}>{a.name}</h2>
+      {a.shops.map((s) => <ShopCard s={s} />)}
+    </section>
+  ))}
+
+  <h2>More ways to buy, sell and share</h2>
+  <ul>
+    <li><a href={`${base}/sell-or-donate/`}>Sell, donate or give away your stuff</a></li>
+    <li><a href={`${base}/borrow-or-get-free/`}>Borrow it or get it free</a></li>
+    <li><a href={`${base}/markets/`}>Markets and sales coming up</a></li>
+  </ul>
+
+  <p class="meta">Shops open, move and close often. Each card says when we last checked it. A shop we could not confirm is left off until we can. Something wrong or changed? Use the Report a problem link on that card, or <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">tell us about a shop we missed</a>.</p>
+</Base>
+<style>
+  .filters li { margin: 6px 0; }
+</style>

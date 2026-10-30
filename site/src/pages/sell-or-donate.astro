@@ -1,0 +1,79 @@
+---
+// Sell, donate or give away your stuff (#428, #63, part of #422). One
+// question, "What do you have?", and for each kind of thing up to four ways
+// in order: sell, donate, give away free, recycle. Every option is a link to
+// a sourced card on another page of this section, or to the recycling page,
+// so no facts are copied here. Works with no script: it is a plain list.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { loadSecondhand } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "secondhand", label: "Sell, donate or give away your stuff", summary: "Clothes, kids' gear, furniture, books, electronics, tools, paint and building materials: where each can go" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadSecondhand();
+const SHOP_KINDS = ['charity-thrift', 'resale', 'consignment', 'vintage-antique', 'used-media'];
+const pageFor = (s) => (SHOP_KINDS.includes(s.kind) ? '/thrift-shops/' : '/borrow-or-get-free/');
+const link = (s) => ({ href: `${base}${pageFor(s)}#${s.slug}`, name: s.name });
+const has = (s, g) => (s.goods ?? []).includes(g);
+const byName = (a, b) => a.name.localeCompare(b.name);
+const sellers = (g) => all.filter((s) => (s.buys_from_you || s.kind === 'consignment') && has(s, g)).sort(byName).map(link);
+const donors = (g) => all.filter((s) => s.takes && ['charity-thrift', 'free-program'].includes(s.kind) && has(s, g)).sort(byName).map(link);
+const givers = all.filter((s) => s.kind === 'free-program' && s.area === 'online').sort(byName).map(link);
+const online = all.filter((s) => s.kind === 'online-group').sort(byName).map((s) => ({ href: `${base}/markets/#${s.slug}`, name: s.name }));
+const recycling = `${base}/recycling/`;
+const restore = all.find((s) => s.slug === 'mon-valley-habitat-restore');
+const ITEMS = [
+  { id: 'clothes', label: 'Clothes and shoes', g: 'clothes' },
+  { id: 'kids', label: "Kids' clothes, gear and toys", g: 'kids' },
+  { id: 'furniture', label: 'Furniture and home goods', g: 'home', note: 'Most stores only take furniture that fits through the door and is in good shape. Some offer free pickup of large pieces; see each card.' },
+  { id: 'books', label: 'Books, records, movies and games', g: 'books' },
+  { id: 'electronics', label: 'Electronics', g: 'electronics', recycle: { href: `${recycling}#hard-items`, text: 'Free county electronics recycling days (see the recycling page for the next date)' } },
+  { id: 'tools', label: 'Tools', g: 'tools' },
+  { id: 'paint', label: 'Paint', g: null, recycle: { href: `${recycling}#hard-items`, text: 'Latex paint: the county plans a collection in 2027. Oil-based paint goes to a household hazardous waste day. Details on the recycling page.' } },
+  { id: 'building', label: 'Building materials', g: 'building', none: 'There is no building materials reuse store in Mon County now. The Mon Valley Habitat for Humanity ReStore closed in October 2023, and we found nothing that replaced it.' },
+].map((it) => ({ ...it, sell: it.g ? sellers(it.g) : [], online: it.g && it.g !== 'building' ? online : [], donate: it.g ? donors(it.g) : [], free: it.g ? givers : [] }));
+---
+<Base title="Sell, donate or give away your stuff in Morgantown, WV" description="Where to sell, donate, give away or recycle clothes, kids' gear, furniture, books, electronics, tools, paint and building materials in Morgantown and Monongalia County.">
+  <h1>Sell, donate or give away your stuff</h1>
+  <p class="lede">What do you have? Pick it below. For each, we list ways to sell it, donate it, give it away free, or recycle it, in that order. Each name links to a card with hours, what that place takes, and where we checked it.</p>
+
+  <nav aria-labelledby="what-h">
+    <h2 id="what-h">What do you have?</h2>
+    <ul class="picks">{ITEMS.map((it) => <li><a href={`#${it.id}`}>{it.label}</a></li>)}</ul>
+  </nav>
+
+  {ITEMS.map((it) => (
+    <section aria-labelledby={it.id}>
+      <h2 id={it.id}>{it.label}</h2>
+      {it.note && <p>{it.note}</p>}
+      <ul class="ways">
+        {it.sell.length > 0 && <li><strong>Sell it:</strong> {it.sell.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.online.length > 0 && <li><strong>Sell it online:</strong> {it.online.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.donate.length > 0 && <li><strong>Donate it:</strong> {it.donate.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.free.length > 0 && <li><strong>Give it away free:</strong> {it.free.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.recycle && <li><strong>Recycle it:</strong> <a href={it.recycle.href}>{it.recycle.text}</a></li>}
+        {it.none && <li><strong>No local option:</strong> {it.none}</li>}
+      </ul>
+      {it.none && restore && <SourceLine sources={restore.sources} about="the ReStore closing" />}
+    </section>
+  ))}
+
+  <section aria-labelledby="safe-h">
+    <h2 id="safe-h">Selling online safely</h2>
+    <p>The Federal Trade Commission (FTC) gives these tips for selling online:</p>
+    <ul>
+      <li>Many sites suggest selling to a local buyer you meet in person, and taking cash only.</li>
+      <li>Never deposit a check for more than the price. If a buyer "overpays" and asks you to send the extra back, it is a scam. A bank saying a check cleared does not mean the check was good.</li>
+      <li>Don't take a payment app transfer from someone you don't know.</li>
+      <li>Never share a verification code (like a Google Voice code) with someone you don't know.</li>
+      <li>If someone tries to cheat you, report it at <a href="https://reportfraud.ftc.gov/">ReportFraud.ftc.gov</a>.</li>
+    </ul>
+    <SourceLine sources={[{ url: 'https://consumer.ftc.gov/consumer-alerts/2022/07/selling-stuff-online-heres-how-avoid-scam', checked: '2026-10-30', name: 'Federal Trade Commission' }]} about="selling online safely" />
+  </section>
+
+  <p>More in this section: <a href={`${base}/thrift-shops/`}>Thrift and resale shops</a> · <a href={`${base}/borrow-or-get-free/`}>Borrow it or get it free</a> · <a href={`${base}/markets/`}>Markets and sales coming up</a></p>
+  <p class="meta">Each store decides what it can take, and that changes. Check the store's own page before you load the car. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
+<style>
+  .picks { columns: 2; padding-left: 1.2em; }
+  .ways li { margin: 6px 0; }
+</style>
