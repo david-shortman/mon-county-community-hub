@@ -1,0 +1,23 @@
+---
+// "This season" card on the home page (#250, the "Winter here" story).
+// Shows from November through March. The site rebuilds every morning, so it
+// appears and goes away on its own. It only links to pages that carry their
+// own sources and dates, so it never states a date itself.
+import { todayYmd } from '../lib/content.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { today = todayYmd() } = Astro.props;
+const month = Number(today.slice(5, 7));
+const winter = month >= 11 || month <= 3;
+---
+{winter && (
+  <section class="card season" aria-labelledby="season-h">
+    <p class="eyebrow">This season</p>
+    <h2 id="season-h">Winter in Mon County</h2>
+    <p>Cold weather help and this year's dates are on these pages:</p>
+    <ul>
+      <li><a href={`${base}/utility-bills/`}>Help with heat, water or power bills</a></li>
+      <li><a href={`${base}/stay-tonight/`}>A warm place to stay tonight</a></li>
+      <li><a href={`${base}/calendar/`}>Sign-up windows and deadlines</a></li>
+    </ul>
+  </section>
+)}

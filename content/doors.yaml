@@ -4,6 +4,10 @@
 # site's shape, so it is David's call. A topic that fits no door waits for
 # that call instead of becoming a new menu item.
 #
+# `icon` names an icon in site/src/components/Icon.astro. `examples` are the
+# problems shown on the home page door buttons, in residents' words, each
+# linking straight to its page. An example shows only once its page exists.
+#
 # `topics` maps each topic tag used in content/ entries and on pages to the
 # door it belongs to, with the label people see. Every topic belongs to
 # exactly one door. `npm run check-content` checks this.
@@ -11,6 +15,16 @@ doors:
   - slug: this-month
     name: Get through this month
     hint: Can't pay a bill, behind on rent, short on food, need cash fast
+    icon: receipt
+    examples:
+      - text: Can't pay a bill
+        href: /money/
+      - text: Heat, water or power bill
+        href: /utility-bills/
+      - text: Behind on rent
+        href: /money/#rent
+      - text: Short on food
+        href: /help/food/
     topics:
       money: Bills and money
       food: Food
@@ -21,22 +35,36 @@ doors:
   - slug: care
     name: Get care
     hint: Where to go, can't afford it, mental health today, dentist or medicine
+    icon: health
+    examples:
+      - text: Flu or COVID shot
+        href: /flu-shots/
+      - text: Turning 65 or on Medicare
+        href: /turning-65/
+      - text: Staying healthy each year
+        href: /staying-well/
     topics:
       health: Health and care
   - slug: living-here
     name: Living here
     hint: New here, who serves my address, trash and recycling, buses
+    icon: pin
+    examples:
+      - text: Trash and recycling
+        href: /recycling/
     topics:
       recycling: Trash and recycling
       voting: Voting
   - slug: family
     name: Family and life changes
     hint: Kids and school, work and training, disability and aging, veterans, language help
+    icon: people
     topics:
       family: Kids and family
   - slug: community
     name: Your community
     hint: City or county, meetings, how we're doing, give or start something
+    icon: hall
     topics:
       community: Community life
       government: City and county government

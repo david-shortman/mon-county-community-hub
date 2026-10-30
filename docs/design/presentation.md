@@ -102,18 +102,7 @@ The site is organized by what people need, not by who provides it. Labels use re
 
 ### Home screen
 
-The home page opens with the need picker: up to eight buttons with an icon and a word, then the help now box, then what is coming up. A button appears only when its page exists, so nobody lands on an empty section. Proposed buttons, in order of urgency:
-
-1. A bed tonight (live: `/stay-tonight/`)
-2. Food
-3. Help with a bill (live: `/utility-bills/`)
-4. Health care
-5. Housing help
-6. Deadlines (live: `/calendar/`)
-7. City and county: how do I
-8. All pages
-
-The bottom tab bar stays as identity.md describes. The tab bar and the need picker should use the same words for the same page (rubric II8).
+The site is organized into five doors named for what is going on in a person's life, plus Help now, Dates and All topics (#248). The home page opens with the Help now bar (a place to stay tonight, 211, 911 and 988), then a title and one line, then "What do you need help with?" with the five door cards. Each card lists a few problems in residents' words that link straight to their page, and a problem appears only when its page exists, so nobody lands on an empty section. Then search, the "This season" card, the next three dates, and "Rather talk to a person?". The tab bar has four tabs: Home, Help now, Dates and Topics. Details: identity.md, "Front Door".
 
 ### Site map by need
 

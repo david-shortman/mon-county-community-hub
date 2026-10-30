@@ -1,28 +1,43 @@
 ---
-// The Front Door (identity v2, direction B): one question, help right now,
-// search, and need buttons. Help is two taps away from here.
+// The Front Door (#250, identity v2 direction B): Help now on top, what the
+// site is, the five doors, search, the season, what is coming up, and a
+// person to talk to. Help is one tap away through a door's examples, and
+// every live door is two taps from a phone number, a place or a date.
 import Base from '../layouts/Base.astro';
-import RightNow from '../components/RightNow.astro';
-import NeedTiles from '../components/NeedTiles.astro';
+import HelpNowBar from '../components/HelpNowBar.astro';
+import HelpNowSources from '../components/HelpNowSources.astro';
+import DoorCards from '../components/DoorCards.astro';
 import SearchBox from '../components/SearchBox.astro';
+import SeasonCard from '../components/SeasonCard.astro';
 import EventCard from '../components/EventCard.astro';
-import { loadCalendar, upcoming } from '../lib/content.mjs';
+import { loadCalendar, upcoming, resource, telHref } from '../lib/content.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const soon = upcoming(loadCalendar(), undefined, 31).slice(0, 3);
+const r211 = resource('wv-211');
 ---
-<Base title="Help in Morgantown and Monongalia County, WV" description="What do you need help with? Shelter tonight, food, bills, rent, shots, deadlines and recycling in Morgantown and Monongalia County, WV. Call or text 211 any time.">
-  <h1 class="front-q">What do you need help with?</h1>
+<Base title="Help in Morgantown and Monongalia County, WV" description="Find local help with bills, food, a place to stay, health care and more in Morgantown and Monongalia County, WV. Every answer shows its source. Call or text 211 any time.">
+  <HelpNowBar />
 
-  <RightNow />
+  <h1 class="front-h">Find help in Mon County</h1>
+  <p class="lede">We point you to local help in Morgantown and Monongalia County, and show where every fact came from.</p>
 
-  <NeedTiles />
+  <DoorCards />
 
-  <SearchBox />
+  <SearchBox label="Or type what's going on" />
+  <noscript><p><a href={`${base}/topics/`}>See all topics, A to Z</a></p></noscript>
 
-  <h2>Coming up soon</h2>
+  <SeasonCard />
+
+  <h2>Coming up</h2>
   {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing is on our calendar for the next month. That does not mean no help is available. Call or text 211.</p>}
-  <p><a href={`${base}/calendar/`}>See all deadlines and dates</a></p>
+  <p><a href={`${base}/calendar/`}>All dates and deadlines</a></p>
 
-  <h2>What this is</h2>
-  <p>Plain-language help for Morgantown and Monongalia County, WV. We point you to the people and groups already doing the work, and we tell you where every fact came from. A local resident sets the direction, and an AI assistant (Claude) researches, builds, and checks sources every day. <a href={`${base}/about/`}>Read how it works</a>.</p>
+  <section class="note" aria-labelledby="person-h">
+    <h2 id="person-h">Rather talk to a person?</h2>
+    <p>Call <a href={telHref(r211.contact.phone)}>{r211.contact.phone}</a>. It is a free West Virginia help line, open any hour. Tell them what is going on and they will point you to local help. You can also text your ZIP code to <a href={`sms:${r211.contact.text.replace(/[^\d]/g, '')}`}>{r211.contact.text}</a>.</p>
+  </section>
+
+  <p>A local resident runs this site, and an AI assistant (Claude) does the research and building every day. <a href={`${base}/about/`}>How it works</a>.</p>
+
+  <HelpNowSources />
 </Base>

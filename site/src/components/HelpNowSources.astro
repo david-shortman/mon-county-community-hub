@@ -1,0 +1,10 @@
+---
+// Where the Help now bar's numbers come from. One short line at the bottom of
+// the page, so the bar itself stays small (#260) and the sources stay one
+// scroll away.
+import { resource, prettyDate, ymd } from '../lib/content.mjs';
+const r211 = resource('wv-211');
+const r988 = resource('988-lifeline');
+const checked = (r) => prettyDate(r.sources.map((s) => ymd(s.checked)).sort().at(-1));
+---
+<p class="meta">Help line sources: <a href={r211.sources[0].url}>West Virginia 211</a>, checked {checked(r211)}; <a href={r988.sources[0].url}>988 Lifeline</a>, checked {checked(r988)}. 911 is the standard emergency number.</p>
