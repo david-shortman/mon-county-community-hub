@@ -1,0 +1,10 @@
+name: Public Service Commission of West Virginia
+slug: wv-public-service-commission
+kind: government
+website: https://www.wv.gov/agencies/public-service-commission
+summary: The state agency that regulates utilities in West Virginia, such as power, gas and water companies.
+topics: [moving]
+area: statewide
+sources:
+  - url: https://www.wv.gov/agencies/public-service-commission
+    checked: 2026-10-30
