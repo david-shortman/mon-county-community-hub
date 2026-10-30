@@ -1,0 +1,12 @@
+name: Starting Points, Monongalia County Family Support Center
+slug: starting-points-family-support-center
+kind: nonprofit
+website: https://moncountyfamilysupportcenter.org/
+summary: A family support center in Pursglove, run through The Shack Neighborhood House, with free programs for parents and young children.
+topics: [family]
+area: monongalia-county
+sources:
+  - url: https://moncountyfamilysupportcenter.org/
+    checked: 2026-10-30
+  - url: https://the-shack.org/
+    checked: 2026-10-30

@@ -1,0 +1,42 @@
+---
+// Families and kids (#225, part of #210): one front door for young children.
+// Birth to Three, Pre-K and Head Start, Starting Points, library story times.
+// Not yet here until confirmed: 4-H (#416), Early Head Start (#417),
+// next year's Pre-K dates and summer meals (#418).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "family", topic: "family", label: "Families and kids", summary: "Babies, toddlers and preschool: Birth to Three, Pre-K, Head Start, playgroups and story times" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Families and kids in Morgantown and Mon County: Birth to Three, Pre-K, playgroups" description="Help for families with babies, toddlers and preschoolers in Mon County: WV Birth to Three, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times.">
+  <h1>Help for families with young kids in Mon County</h1>
+  <p class="lede">Worried about how your baby or toddler is growing? Call WV Birth to Three at <a href="tel:18663214728">1-866-321-4728</a>. Parents can call on their own, and there is no charge for the services in your child's plan.</p>
+
+  <h2>Under 3: worried about how your child is growing</h2>
+  <p>Birth to Three helps children under 3 who have a delay in how they move, talk, learn or get along, or who may be at risk of one. You do not need a doctor to send you.</p>
+  {r('wv-birth-to-three-referral') && <ResourceCard r={r('wv-birth-to-three-referral')} showCost />}
+
+  <h2>Ages 3 and 4: Pre-K and Head Start</h2>
+  <p>The county schools run both, with one application. The dates for the 2027-28 school year are not posted yet. For 2026-27, applications sent from February 4 to April 16 all had an equal chance at a spot.</p>
+  {r('mcs-prek-and-head-start') && <ResourceCard r={r('mcs-prek-and-head-start')} showCost />}
+
+  <h2>Playgroups, a baby pantry and more</h2>
+  <p>Starting Points in Pursglove has free programs for parents and young children, including a playgroup for children under 3 and their parents.</p>
+  {r('starting-points-family-programs') && <ResourceCard r={r('starting-points-family-programs')} />}
+
+  <h2>Story times at the library</h2>
+  {r('mympls-story-times') && <ResourceCard r={r('mympls-story-times')} />}
+
+  <h2>Also for families</h2>
+  <ul>
+    <li>Short on food this month: <a href={`${base}/help/food/`}>Food help</a>.</li>
+    <li>Help buying groceries each month: <a href={`${base}/snap/`}>Apply for SNAP</a>.</li>
+    <li>Checkups, shots and dental visits: <a href={`${base}/staying-well/`}>Staying well</a>.</li>
+    <li>Anything else: <a href="tel:211">call 211</a>, any hour.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30, 2026. Call before you go, since hours and dates can change. Something out of date or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

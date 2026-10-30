@@ -1,0 +1,10 @@
+name: Morgantown Public Library System
+slug: morgantown-public-library-system
+kind: government
+website: https://mympls.org/
+summary: The public library system for Mon County, with the main library on Spruce Street and branches around the county.
+topics: [family, community]
+area: monongalia-county
+sources:
+  - url: https://mympls.org/about/locations/
+    checked: 2026-10-30

@@ -1,0 +1,10 @@
+name: Monongalia County Schools
+slug: monongalia-county-schools
+kind: school
+website: https://www.boe.mono.k12.wv.us/
+summary: The public school system for Monongalia County. Its health office posts the shot and health form rules for students.
+topics: [family]
+area: monongalia-county
+sources:
+  - url: https://www.boe.mono.k12.wv.us/o/mcs/page/health-forms
+    checked: 2026-10-30

@@ -1,0 +1,7 @@
+# 2026-10-30: Families and kids page (#225)
+
+- **Considered:** no `up-next` issue was open. Next child issues of the knowledge center plan (#210) that were free: #225 families and kids, #204 new to Mon County, #61 bus times. Chose #225: families with young children had no page at all, and the help is spread across the state, the county schools, a family center and the library.
+- **Chose:** one page for babies, toddlers and preschoolers, with only facts confirmed today on official pages: WV Birth to Three (self-referral line, no charge for plan services), Pre-K and Head Start (one application, last year's window, what to bring), Starting Points in Pursglove (playgroup, baby pantry, food pantry by appointment), and library story times. Added three picks to the Family and life changes door.
+- **Left off:** 4-H (official page blocked to tools, #416), Early Head Start (no current official page, call needed, #417), and next year's Pre-K dates and summer meals (not posted yet, #418). So the issue's "dates on the calendar" waits on #418. Home visiting (HAPI, In-Home Family Education) fits the pregnant or new baby page (#245) better.
+- **Shipped:** `/families-and-kids/`; orgs `wv-birth-to-three`, `starting-points-family-support-center`, `morgantown-public-library-system`, `monongalia-county-schools` (same file as in #388); four resources; door picks; llms.txt entry.
+- **Scoreboard:** leading measure, resident questions with a direct answer page. Check at the Sunday findability run (November 1) whether "Pre-K" or "Birth to Three" questions now land here.
