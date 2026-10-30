@@ -29,13 +29,16 @@ export function easternYmd(date) {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(date);
 }
 
-// "7:00 p.m." from hours and minutes on a 24 hour clock.
+// "7 p.m.", "7:30 p.m." or "noon" from hours and minutes on a 24 hour
+// clock, the same way as times elsewhere on the site (#51).
 export function prettyTime(h, m) {
   const hour = Number(h);
+  const min = Number(m);
   const suffix = hour < 12 ? 'a.m.' : 'p.m.';
   const h12 = hour % 12 === 0 ? 12 : hour % 12;
-  if (hour === 12 && Number(m) === 0) return 'noon';
-  return `${h12}:${String(m).padStart(2, '0')} ${suffix}`;
+  if (hour === 12 && min === 0) return 'noon';
+  if (hour === 0 && min === 0) return 'midnight';
+  return `${h12}${min ? `:${String(min).padStart(2, '0')}` : ''} ${suffix}`;
 }
 
 export function addDays(ymd, n) {
