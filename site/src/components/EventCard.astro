@@ -44,7 +44,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
     ) : (
       <>Run by {e.org_name}.
       {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{sourceLabel(s.url)}</a></>))}.</> : <> Source: {sourceLabel(e.url)} (the details page).</>}
-      {' '}Checked by hand on {prettyDate(checked)}.{isStale(checked, today) && <strong> This may be out of date, so check the details page before you go.</strong>}</>
+      {' '}Checked against the source on {prettyDate(checked)}.{isStale(checked, today) && <strong> This may be out of date, so check the details page before you go.</strong>}</>
     )}
     {e.topics?.length ? <> Topics: {e.topics.join(', ')}.</> : null}
     {' '}<a href={reportUrl({ title: e.title, slug: e.slug, url: e.sources?.[0]?.url ?? e.url })}>Report a problem<span class="sr-only"> with {e.title} (opens GitHub)</span></a>.
