@@ -212,7 +212,7 @@ Use the names residents use, when it makes directions clearer. Always give the f
 
 ## Mobile first
 
-Nearly everyone reaches the hub on a phone. Design for a 390px screen first, then let it grow. These rules come from the first mobile pass (#126).
+Nearly everyone reaches the site on a phone. Design for a 390px screen first, then let it grow. These rules come from the first mobile pass (#126).
 
 - **Act first.** Every card leads with when it is (a big date and "in 3 days"), then what it is, then big buttons to act: Details, Call, Directions, Add to calendar, Share. Use the [`Actions`](../../site/src/components/Actions.astro) component. Each button shows only when we have a sourced link, phone, or place.
 - **Thumb reach.** The main menu is a tab bar at the bottom of the screen on phones, with icons and words, at least 48px tall, and the current page marked by bold text and a tinted pill (not color alone). It has four tabs: Home, Help now, Dates and Topics. The Topics tab is marked on any page inside a door. On wide screens the header shows Help now, the five doors, Dates and All topics. The footer lists the doors, All topics, About and For groups and helpers. All of it comes from `content/doors.yaml` (#250), so a new page never changes the menu: tag it with its door and topic (see `content/README.md`, "Tagging a site page") and it shows on the Topics page and its door.

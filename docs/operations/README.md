@@ -1,4 +1,4 @@
-# Operations: keeping the hub healthy
+# Operations: keeping the site healthy
 
 This is the runbook for noticing problems with the site and the pipeline, and for reacting to them. The Watchdog session owns this folder.
 

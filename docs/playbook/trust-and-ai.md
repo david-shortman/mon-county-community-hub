@@ -51,7 +51,7 @@ We will not use AI-generated images of real places or people, and we will not le
 
 **What it is.** OMB memo M-25-21 (April 2025, which replaced M-24-10) requires federal agencies to provide "human oversight, intervention, and accountability" for high-impact AI, and a timely human review and chance to appeal. We found no newer memo replacing it. NIST AI 600-1 notes confabulation risk is highest in areas like health care and consequential decisions.
 
-**Why it matters here.** The hub is not a federal agency, but the same logic fits. Wrong details about health, benefits eligibility, legal rights, or deadlines can cause real harm.
+**Why it matters here.** The site is not a federal agency, but the same logic fits. Wrong details about health, benefits eligibility, legal rights, or deadlines can cause real harm.
 
 **How we apply it.** Treat entries with topics `health`, `money`, `housing`, `family`, `taxes`, or `voting`, and every `calendar/` entry, as high stakes. These get a second, independent check against the source before merge: a different session (or Duet) re-opens each source and confirms each field, and notes it in the PR. We will not give advice on someone's own case ("you qualify"). We describe the program and point to the office that decides. On top of that, David checks changes about shelter, crisis help, food and benefits before they go live (his decision, October 30, 2026, #493). The exact list is in "When a PR waits for David" in `docs/COORDINATION.md`.
 

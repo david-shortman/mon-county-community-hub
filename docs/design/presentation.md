@@ -1,6 +1,6 @@
 # Presentation guide: showing information so it helps
 
-This guide says what shape each kind of information takes on the hub, so a person can understand it fast and act on it, on any phone. It sits next to two other guides:
+This guide says what shape each kind of information takes on the site, so a person can understand it fast and act on it, on any phone. It sits next to two other guides:
 
 - [`identity.md`](identity.md) covers how things look: colors, type, local words, and the mobile first rules (action buttons, tab bar, tap sizes).
 - The [design rubrics](../rubrics/README.md) cover how we score what we ship.
@@ -13,7 +13,7 @@ Last checked: October 30, 2026. The work to build it out is tracked in the epics
 
 These facts set the floor. Each one is sourced; see [Sources](#sources). The full set of county numbers, with years and gaps, is in [audience facts](../playbook/audience-facts.md).
 
-- **Almost everyone has a phone, and many have only a phone.** 91% of U.S. adults own a smartphone, and 16% use a smartphone with no home broadband (Pew, 2026). For many people the hub is a phone page or nothing.
+- **Almost everyone has a phone, and many have only a phone.** 91% of U.S. adults own a smartphone, and 16% use a smartphone with no home broadband (Pew, 2026). For many people the site is a phone page or nothing.
 - **Phones and data are often cheap and slow.** A typical phone today is about as fast as a $350 phone from 2020, on about 7 Mbps. A content site should load in 3 seconds on that phone, which means about 1.4 MB at most, with no more than 75 KB of script (Russell, 2024). Free or prepaid phones are slower than that, and data runs out.
 - **About 1 in 6 adults here reads at the lowest level, and about 1 in 4 struggles with numbers.** PIAAC estimates for Mon County are 16% for literacy and 26% for numeracy, against 21% and 33% for West Virginia (PIAAC Skills Map). People with limited literacy often spend 15 seconds or less on a page, skip dense text, reread words, rarely go back to the menu, and click only one or two search results (Health Literacy Online).
 - **People find help through other people.** Parents looking for services started with word of mouth, local Facebook groups, and professionals, not directories. Old info and broken links were what lost their trust (UK Department for Education research). So helpers who send a page to someone are a main audience too. The reaching people epic (#155) covers how we reach them; this guide covers what they see when they arrive.
@@ -216,6 +216,6 @@ Read on October 28, 2026.
 - UK Department for Education, [How parents find family services and information](https://design-histories.education.gov.uk/connect-families-to-support/single-directory-understanding-how-parents-find-family-services-and-information)
 - Digital Government Hub, [Basics of texting safety net clients](https://digitalgovernmenthub.org/wp-content/uploads/2022/11/Basics-of-Texting-Safety-Net-Clients-2022.pdf), 2022
 - West Virginia Bureau for Family Assistance, [West Virginia 211](https://bfa.wv.gov/page/west-virginia-211)
-- U.S. Census Bureau, American Community Survey for Monongalia County: [county profile on Census Reporter](https://censusreporter.org/profiles/05000US54061-monongalia-county-wv/) and tables S2801, S1810, B25044, and C16001 on data.census.gov. Compiled for the hub's audience research on October 28, 2026; data.census.gov could not be reached from the session that wrote this guide, so re-check before quoting on a resident page.
+- U.S. Census Bureau, American Community Survey for Monongalia County: [county profile on Census Reporter](https://censusreporter.org/profiles/05000US54061-monongalia-county-wv/) and tables S2801, S1810, B25044, and C16001 on data.census.gov. Compiled for the site's audience research on October 28, 2026; data.census.gov could not be reached from the session that wrote this guide, so re-check before quoting on a resident page.
 - City Population, [Monongalia County population by place](https://www.citypopulation.de/en/usa/westvirginia/54061__monongalia/) (share outside Morgantown city limits)
 - NCES, [PIAAC Skills Map, West Virginia](https://nces.ed.gov/surveys/piaac/skillsmap/src/PDF/WEST_VIRGINIA.pdf) (data 2012 to 2017)
