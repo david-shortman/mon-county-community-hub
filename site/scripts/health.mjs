@@ -15,7 +15,7 @@
 // Thresholds and who reacts to what are in docs/operations/README.md.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
 
 // ---------- settings ----------
 const args = process.argv.slice(2);
@@ -233,8 +233,10 @@ function checkContent() {
     if (!oldest || oldest < dueYmd) past.push(`${e._file}: last checked ${oldest ?? 'never'}`);
     else if (oldest < soonYmd) soon.push(`${e._file}: last checked ${oldest}`);
   }
-  // Orgs and resources never end, so every one of them gets re-checked.
-  for (const e of [...loadDir('orgs'), ...loadDir('resources')]) {
+  // Orgs and resources never end, so every one of them gets re-checked,
+  // hidden ones too (#519), so they can come back.
+  const all = { withHidden: true };
+  for (const e of [...loadDir('orgs', all), ...loadDir('resources', all)]) {
     const oldest = (e.sources || []).map((s) => ymd(s.checked)).filter(Boolean).sort()[0];
     if (!oldest || oldest < dueYmd) past.push(`${e._file}: last checked ${oldest ?? 'never'}`);
     else if (oldest < soonYmd) soon.push(`${e._file}: last checked ${oldest}`);
@@ -242,6 +244,12 @@ function checkContent() {
   record('content-recheck', 'product', past.length ? 'warn' : 'ok',
     past.length ? `${past.length} entries are past their re-check date.` : `No entries past their re-check date (${soon.length} due within ${T.recheckSoonDays} days).`,
     { details: [...past, ...soon.map((s) => `due soon: ${s}`)], owner: 'Duet', fixable: true });
+
+  // Hidden items (#519): off the site until someone re-checks them.
+  const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);
+  record('content-hidden', 'product', hidden.length ? 'warn' : 'ok',
+    hidden.length ? `${hidden.length} items are hidden while we re-check them.` : 'No items are hidden.',
+    { details: hidden.map((e) => `${e._file}: ${e.hidden.reason ?? '?'} since ${ymd(e.hidden.since) ?? '?'}`), owner: 'Duet', fixable: true });
 
   const ended = entries.filter((e) => e.ends < addDays(today, -30));
   if (ended.length) {
