@@ -1,0 +1,86 @@
+---
+// Printable cards and posters (#160): a wallet card and a half-page poster
+// for the pages people most need to find from paper. Each has a QR code, the
+// short web address beside it (easy to say out loud), how to reach 211, and
+// the date it was made. Words come from each page's own label and summary, so
+// a card never says more than the page does. Printing, paying for printing
+// and placing cards anywhere is David's call (#163); this only builds them.
+import Base from '../../layouts/Base.astro';
+import { resource, prettyDate, todayYmd } from '../../lib/content.mjs';
+import { loadPages } from '../../lib/pages.mjs';
+import { qrSvg, addressParts } from '../../lib/qr.mjs';
+export const page = { door: "about", label: "Cards and posters to print", summary: "Wallet cards and half-page posters with a QR code and a short web address" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ROUTES = ['/stay-tonight/', '/help/food/', '/utility-bills/'];
+const pages = await loadPages();
+const today = todayYmd();
+const r211 = resource('wv-211');
+const cards = await Promise.all(ROUTES.filter((r) => pages.has(r)).map(async (route) => {
+  const p = pages.get(route);
+  const url = new URL(`${base}${route}`, Astro.site).href;
+  return { route, label: p.label, summary: p.summary, short: addressParts(url), qr: await qrSvg(url) };
+}));
+---
+<Base title="Cards and posters to print for Mon County help" description="Printable wallet cards and half-page posters for Morgantown and Mon County help pages, each with a QR code, a short web address and 211.">
+  <div class="no-print">
+    <h1>Cards and posters to print</h1>
+    <p class="lede">A wallet card and a half-page poster for each page below. Each has a QR code, the short web address to type or say out loud, and how to reach 211. Print in black and white.</p>
+    <p>Cards work best when a person hands them over and says what they are for. Cut along the dashed lines. Made {prettyDate(today)}. <button class="btn" type="button" id="print-cards" hidden><span>Print cards and posters</span></button></p>
+    <p>Want a full list of places with phone numbers instead? See <a href={`${base}/print/`}>printable sheets</a>.</p>
+  </div>
+
+  <h2 class="no-print">Wallet cards</h2>
+  <div class="wallets">
+    {cards.map((c) => (
+      <section class="pcard wallet" aria-label={`Wallet card: ${c.label}`}>
+        <div class="pc-text">
+          <p class="pc-title">{c.label}</p>
+          <p class="pc-url">{c.short[0]}<wbr />{c.short[1]}</p>
+          <p class="pc-211">Or call {r211.contact.phone}, or text your ZIP to {r211.contact.text}</p>
+        </div>
+        <Fragment set:html={c.qr} />
+      </section>
+    ))}
+  </div>
+
+  <h2 class="no-print">Half-page posters</h2>
+  {cards.map((c) => (
+    <section class="pcard half" aria-label={`Poster: ${c.label}`}>
+      <p class="pc-title">{c.label}</p>
+      <p class="pc-sum">{c.summary}</p>
+      <Fragment set:html={c.qr} />
+      <p class="pc-url">{c.short[0]}<wbr />{c.short[1]}</p>
+      <p class="pc-211">Or call <strong>{r211.contact.phone}</strong> or text your ZIP code to <strong>{r211.contact.text}</strong>. {r211.hours}.</p>
+      <p class="pc-made">Everything Morgantown, an independent community guide. Made {prettyDate(today)}.</p>
+    </section>
+  ))}
+
+  <style>
+    .pcard { background: #fff; color: #000; border: 2px dashed #555; margin: 12px 0; break-inside: avoid; }
+    .pcard p { margin: 0; }
+    .pcard :global(svg.qr) { display: block; }
+    .wallets { display: flex; flex-wrap: wrap; gap: 12px; }
+    .wallet { width: 3.5in; max-width: 100%; height: 2in; box-sizing: border-box; padding: 0.12in; display: flex; gap: 0.1in; align-items: center; margin: 0; }
+    .wallet .pc-text { flex: 1 1 auto; min-width: 0; }
+    .wallet :global(svg.qr) { width: 1.15in; height: 1.15in; flex: 0 0 auto; }
+    .wallet .pc-title { font-weight: 800; font-size: 13pt; line-height: 1.15; }
+    .wallet .pc-url { font-weight: 700; font-size: 9.5pt; margin-top: 6px; overflow-wrap: anywhere; }
+    .wallet .pc-211 { font-size: 9pt; margin-top: 6px; }
+    .half { width: 5.5in; max-width: 100%; min-height: 8in; box-sizing: border-box; padding: 0.4in; text-align: center; }
+    .half .pc-title { font-weight: 800; font-size: 28pt; line-height: 1.1; }
+    .half .pc-sum { font-size: 15pt; margin-top: 12px; }
+    .half :global(svg.qr) { width: 2.6in; height: 2.6in; margin: 20px auto 8px; }
+    .half .pc-url { font-weight: 800; font-size: 16pt; overflow-wrap: anywhere; }
+    .half .pc-211 { font-size: 13pt; margin-top: 18px; }
+    .half .pc-made { font-size: 9pt; margin-top: 18px; }
+    @media (max-width: 30rem) { .wallet { height: auto; } .half { min-height: 0; } }
+    @media print {
+      .no-print { display: none; }
+      .wallets { gap: 0.15in; }
+      .half { break-before: page; margin: 0 auto; }
+    }
+  </style>
+  <script is:inline>
+    (function () { var b = document.getElementById('print-cards'); if (!b) return; b.hidden = false; b.addEventListener('click', function () { window.print(); }); })();
+  </script>
+</Base>
