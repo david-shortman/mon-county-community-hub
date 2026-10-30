@@ -17,6 +17,8 @@ Use the **Group request (project team)** issue form. It asks for only what we ne
 
 **Never** put the sender's name, email, phone, or their message text in the issue. The repo is public. Who sent what stays in the private Notion home.
 
+Only the project team (people with write access to the repo) opens these issues. The clock ignores a `group-request` issue opened by anyone else, so no one outside the team can start a clock that takes a listing down. If an outside report is a real group request, a team member files a new issue for it. The received date can be earlier than the day the issue was opened, never later.
+
 The clock adds `Due: <received date + 7 days>` to the top of the issue on its next run. You can add it yourself.
 
 ## 2. Act on it

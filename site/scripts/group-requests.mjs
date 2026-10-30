@@ -62,6 +62,7 @@ async function plan(outFile, dryRun, today) {
   const hides = [];
   for (const issue of issues) {
     const req = parseRequest(issue);
+    if (!req.fromTeam) { console.log(`#${req.number}: not opened by the project team, so the clock leaves it alone`); continue; }
     const { age, steps } = clockSteps(req, today);
     console.log(`#${req.number}: received ${req.received}, day ${age}, due ${req.due}, ${req.kind ?? 'kind?'}, ${req.file ?? 'no file'}: ${steps.join(', ') || 'nothing to do'}`);
     if (dryRun) { if (steps.includes('hide')) hides.push({ number: req.number, file: req.file }); continue; }

@@ -37,15 +37,22 @@ function field(body, name) {
 // What the clock needs from one group-request issue. Received falls back to
 // the day the issue was opened (Morgantown date), so the clock never waits on
 // a missing field.
-export function parseRequest({ body = '', created_at, closed_at = null, number, labels = [] }) {
+// Only issues opened by the project team count (TEAM), so no one outside it
+// can start a clock that takes a listing down. The received date can be
+// earlier than the day the issue was opened, never later, so an edit cannot
+// push a deadline back.
+export const TEAM = ['OWNER', 'MEMBER', 'COLLABORATOR'];
+export function parseRequest({ body = '', created_at, closed_at = null, number, labels = [], author_association = 'OWNER' }) {
   const text = body ?? '';
   const rawReceived = field(text, 'Received(?: date)?');
-  const received = isYmd(rawReceived?.slice(0, 10)) ? rawReceived.slice(0, 10) : easternYmd(created_at);
+  const opened = easternYmd(created_at);
+  const given = isYmd(rawReceived?.slice(0, 10)) ? rawReceived.slice(0, 10) : opened;
+  const received = given < opened ? given : opened;
   const kind = (field(text, 'Kind') ?? '').toLowerCase().match(/fix|removal|remove|add/)?.[0]?.replace('remove', 'removal') ?? null;
   const file = text.match(/\bcontent\/(orgs|resources|calendar)\/[a-z0-9-]+\.ya?ml\b/)?.[0] ?? null;
   const names = labels.map((l) => (typeof l === 'string' ? l : l.name));
   return {
-    number, received, kind, file,
+    number, received, kind, file, fromTeam: TEAM.includes(author_association),
     due: addDays(received, REQUEST_DAYS),
     closed: closed_at ? easternYmd(closed_at) : null,
     hasDueLine: /^\s*Due:\s*\d{4}-\d{2}-\d{2}/.test(text),
