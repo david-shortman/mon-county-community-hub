@@ -1,0 +1,10 @@
+name: U.S. Department of Veterans Affairs (VA)
+slug: us-department-of-veterans-affairs
+kind: government
+website: https://www.va.gov/clarksburg-health-care/
+summary: The federal agency for veterans' health care and benefits. Mon County veterans are served by VA Clarksburg health care, with a clinic and a Vet Center on Commerce Drive.
+topics: [veterans, health]
+area: statewide
+sources:
+  - url: https://www.va.gov/clarksburg-health-care/locations/
+    checked: 2026-10-30
