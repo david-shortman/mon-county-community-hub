@@ -97,7 +97,7 @@ People need these facts to decide whether to go, and they give up when the facts
 9. **Languages and access**, such as an interpreter or a step-free entrance, only when the source says. Never guess.
 10. **Last checked date and source**, always (already required).
 
-Resources now carry hours in words (`hours`) and an address (`contact.place`), from #139. How to get in, languages and access are still to come in #177, and what to bring and what happens next in #159. Both update `content/README.md` and the content check.
+Resources carry hours in words (`hours`) and an address (`contact.place`), from #139. Since #177 they can also carry hours the site can read (`opening_hours`), how to get in (`get_in`), and languages and access (`languages`, `access`); see "Listing facts for a place to go" in `content/README.md`. What to bring and what happens next are in #159.
 
 ## How the site is organized
 
