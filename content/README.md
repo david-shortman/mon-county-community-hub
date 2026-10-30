@@ -65,6 +65,17 @@ access: Step-free entrance on the Main Street side.  # only what the source says
 
 `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
 
+### Town and neighborhood (#395)
+
+Dates (`calendar/`) and resources can name their town, and a neighborhood inside it, so a card can say "Westover" or "Sunnyside, Morgantown" and Dates can group by town.
+
+```yaml
+town: Morgantown         # one name from TOWNS in site/src/lib/towns.mjs
+neighborhood: Sunnyside  # optional; needs a town
+```
+
+Set them only when the record's own source names the place. Never work a town out from a mailing address: many places with a "Morgantown, WV" address are outside the city, and Westover, Star City, Granville, Cheat Lake and Blacksville are their own places. A name not in the list fails `npm run check-content`; add it to the list when a source needs it.
+
 ## `calendar/<slug>.yaml`: dates and deadlines
 
 Shown on the site's Deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).
@@ -84,6 +95,7 @@ topics: [money, housing]      # money, food, housing, health, family, government
 place: 200 M-Tec Dr, Morgantown, WV   # optional; adds a Directions button. Only a place the source publishes
 phone: 304-555-0100           # optional; adds a Call button. Only a public office or program number the source publishes
 phone_label: the City Clerk   # optional; who answers, read by screen readers. Defaults to org_name
+town: Westover               # optional; see "Town and neighborhood" below (#395)
 venue: smithtown              # optional; slug from places/, so the event shows on that place's page (#455)
 sources:
   - url: https://example.wv.gov/lieap
