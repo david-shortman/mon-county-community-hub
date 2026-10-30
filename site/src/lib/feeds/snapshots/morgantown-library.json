@@ -1,0 +1,657 @@
+{
+  "id": "morgantown-library",
+  "feed_url": "https://events.mympls.org/ical_subscribe.php?src=p&cid=17544",
+  "fetched": "2026-10-30T23:52:03.700Z",
+  "entries": [
+    {
+      "title": "Movie Night at the Arnettsville Public Library",
+      "slug": "mpls-movie-night-at-the-arnettsville-public-library-17276983-2026-10-30",
+      "starts": "2026-10-30",
+      "ends": "2026-10-30",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6:30 p.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17276983",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Drop-In Digital Navigator Hours (Clay Battelle)",
+      "slug": "mpls-drop-in-digital-navigator-hours-clay-battelle-17756391-2026-11-02",
+      "starts": "2026-11-02",
+      "ends": "2026-11-02",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 10 a.m. at Clay Battelle Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17756391",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Makerspace Open Hours",
+      "slug": "mpls-makerspace-open-hours-17364567-2026-11-02",
+      "starts": "2026-11-02",
+      "ends": "2026-11-02",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17364567",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Virtual Author Talk: Asha Frost",
+      "slug": "mpls-virtual-author-talk-asha-frost-17846594-2026-11-03",
+      "starts": "2026-11-03",
+      "ends": "2026-11-03",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 2 p.m. Online. See the event page for details.",
+      "url": "https://events.mympls.org/event/17846594",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Tween Time: Emoji Painting",
+      "slug": "mpls-tween-time-emoji-painting-17364593-2026-11-04",
+      "starts": "2026-11-04",
+      "ends": "2026-11-04",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17364593",
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "title": "Arnettsville Senior Lunch & Learn",
+      "slug": "mpls-arnettsville-senior-lunch-and-learn-17537549-2026-11-06",
+      "starts": "2026-11-06",
+      "ends": "2026-11-06",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at noon at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17537549",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Winnie the Pooh 100th Anniversary",
+      "slug": "mpls-winnie-the-pooh-100th-anniversary-17365693-2026-11-07",
+      "starts": "2026-11-07",
+      "ends": "2026-11-13",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 9 a.m. at all library branches. See the event page for details.",
+      "url": "https://events.mympls.org/event/17365693",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Drop-In Digital Navigator Hours (Clinton)",
+      "slug": "mpls-drop-in-digital-navigator-hours-clinton-17756399-2026-11-09",
+      "starts": "2026-11-09",
+      "ends": "2026-11-09",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 10 a.m. at Clinton District Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17756399",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Virtual Author Talk: Kelly and Zach Weinersmith",
+      "slug": "mpls-virtual-author-talk-kelly-and-zach-weinersmith-17846653-2026-11-10",
+      "starts": "2026-11-10",
+      "ends": "2026-11-10",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 2 p.m. Online. See the event page for details.",
+      "url": "https://events.mympls.org/event/17846653",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "STEAM Explorers",
+      "slug": "mpls-steam-explorers-17364870-2026-11-10",
+      "starts": "2026-11-10",
+      "ends": "2026-11-10",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17364870",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Virtual Author Talk: Paul Vigna",
+      "slug": "mpls-virtual-author-talk-paul-vigna-17846742-2026-11-11",
+      "starts": "2026-11-11",
+      "ends": "2026-11-11",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 2 p.m. Online. See the event page for details.",
+      "url": "https://events.mympls.org/event/17846742",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Adult Craft Night: Fall Wreaths",
+      "slug": "mpls-adult-craft-night-fall-wreaths-17664933-2026-11-12",
+      "starts": "2026-11-12",
+      "ends": "2026-11-12",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17664933",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Drop-In Digital Navigator Hours (Arnettsville)",
+      "slug": "mpls-drop-in-digital-navigator-hours-arnettsville-17756474-2026-11-16",
+      "starts": "2026-11-16",
+      "ends": "2026-11-16",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 11:30 a.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17756474",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Lego Night",
+      "slug": "mpls-lego-night-17365052-2026-11-16",
+      "starts": "2026-11-16",
+      "ends": "2026-11-16",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17365052",
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "title": "Adult Craft Class at Arnettsville Public Library",
+      "slug": "mpls-adult-craft-class-at-arnettsville-public-library-17537554-2026-11-18",
+      "starts": "2026-11-18",
+      "ends": "2026-11-18",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17537554",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Minecraft Hour",
+      "slug": "mpls-minecraft-hour-17365082-2026-11-18",
+      "starts": "2026-11-18",
+      "ends": "2026-11-18",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17365082",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "\"Too Far West\": Virginia Colonists & Native Americans on the Monongahela Frontier",
+      "slug": "mpls-too-far-west-virginia-colonists-and-native-americans-on-the-17227709-2026-11-18",
+      "starts": "2026-11-18",
+      "ends": "2026-11-18",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6:30 p.m. at Aull Center. See the event page for details.",
+      "url": "https://events.mympls.org/event/17227709",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Read To Rover",
+      "slug": "mpls-read-to-rover-15893245-2026-11-19",
+      "starts": "2026-11-19",
+      "ends": "2026-11-19",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6:30 p.m. at MPL Children's Area, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/15893245",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Virtual Author Talk: Rebecca Roanhorse",
+      "slug": "mpls-virtual-author-talk-rebecca-roanhorse-17846878-2026-11-19",
+      "starts": "2026-11-19",
+      "ends": "2026-11-19",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 7 p.m. Online. See the event page for details.",
+      "url": "https://events.mympls.org/event/17846878",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Movie Night at Arnettsville",
+      "slug": "mpls-movie-night-at-arnettsville-17537584-2026-11-20",
+      "starts": "2026-11-20",
+      "ends": "2026-11-20",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17537584",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Local Author Fair",
+      "slug": "mpls-local-author-fair-17548747-2026-11-21",
+      "starts": "2026-11-21",
+      "ends": "2026-11-21",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at noon at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17548747",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Drop-In Digital Navigator Hours (Cheat)",
+      "slug": "mpls-drop-in-digital-navigator-hours-cheat-17756500-2026-11-23",
+      "starts": "2026-11-23",
+      "ends": "2026-11-23",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 10 a.m. at Cheat Area Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17756500",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Teen Craft Night: Chaos Embroidery",
+      "slug": "mpls-teen-craft-night-chaos-embroidery-17365327-2026-11-23",
+      "starts": "2026-11-23",
+      "ends": "2026-11-23",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17365327",
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "title": "Library closed: all library branches",
+      "slug": "mpls-library-closed-16028720-2026-11-26",
+      "starts": "2026-11-26",
+      "ends": "2026-11-26",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "See the event page for details.",
+      "url": "https://events.mympls.org/event/16028720",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Library closed: all library branches",
+      "slug": "mpls-library-closed-16028721-2026-11-27",
+      "starts": "2026-11-27",
+      "ends": "2026-11-27",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "See the event page for details.",
+      "url": "https://events.mympls.org/event/16028721",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "How-To Hour: Facebook Marketplace 101",
+      "slug": "mpls-how-to-hour-facebook-marketplace-101-17794674-2026-12-02",
+      "starts": "2026-12-02",
+      "ends": "2026-12-02",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 3 p.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17794674",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Tween Time: Winter Party",
+      "slug": "mpls-tween-time-winter-party-17585248-2026-12-02",
+      "starts": "2026-12-02",
+      "ends": "2026-12-02",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17585248",
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "title": "Senior Lunch & Learn at the Arnettsville Public Library",
+      "slug": "mpls-senior-lunch-and-learn-at-the-arnettsville-public-library-17576870-2026-12-04",
+      "starts": "2026-12-04",
+      "ends": "2026-12-04",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at noon at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17576870",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Teen Winter Paint & Sip",
+      "slug": "mpls-teen-winter-paint-and-sip-17605084-2026-12-07",
+      "starts": "2026-12-07",
+      "ends": "2026-12-07",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17605084",
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "title": "Adult Craft Night: Cross Stitch Ornaments",
+      "slug": "mpls-adult-craft-night-cross-stitch-ornaments-17808868-2026-12-10",
+      "starts": "2026-12-10",
+      "ends": "2026-12-10",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17808868",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Adult Craft Class at Arnettsville Public Library",
+      "slug": "mpls-adult-craft-class-at-arnettsville-public-library-17577649-2026-12-16",
+      "starts": "2026-12-16",
+      "ends": "2026-12-16",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at APL Meeting Room. See the event page for details.",
+      "url": "https://events.mympls.org/event/17577649",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Come Hygge",
+      "slug": "mpls-come-hygge-17808901-2026-12-17",
+      "starts": "2026-12-17",
+      "ends": "2026-12-17",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17808901",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Movie Night at Arnettsville Public Library",
+      "slug": "mpls-movie-night-at-arnettsville-public-library-17577678-2026-12-18",
+      "starts": "2026-12-18",
+      "ends": "2026-12-18",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17577678",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Library closed: all library branches",
+      "slug": "mpls-library-closed-16028722-2026-12-24",
+      "starts": "2026-12-24",
+      "ends": "2026-12-24",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "See the event page for details.",
+      "url": "https://events.mympls.org/event/16028722",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Library closed: all library branches",
+      "slug": "mpls-library-closed-16028723-2026-12-25",
+      "starts": "2026-12-25",
+      "ends": "2026-12-25",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "See the event page for details.",
+      "url": "https://events.mympls.org/event/16028723",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Library closed: all library branches",
+      "slug": "mpls-library-closed-16028724-2026-12-31",
+      "starts": "2026-12-31",
+      "ends": "2026-12-31",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "See the event page for details.",
+      "url": "https://events.mympls.org/event/16028724",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Library closed: all library branches",
+      "slug": "mpls-library-closed-16028725-2027-01-01",
+      "starts": "2027-01-01",
+      "ends": "2027-01-01",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "See the event page for details.",
+      "url": "https://events.mympls.org/event/16028725",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Makerspace Open Hours",
+      "slug": "mpls-makerspace-open-hours-17873056-2027-01-04",
+      "starts": "2027-01-04",
+      "ends": "2027-01-04",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17873056",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Tween Time: Gaming Night",
+      "slug": "mpls-tween-time-gaming-night-17770798-2027-01-06",
+      "starts": "2027-01-06",
+      "ends": "2027-01-06",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17770798",
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "title": "Creating Vision Boards with Canva",
+      "slug": "mpls-creating-vision-boards-with-canva-17794715-2027-01-07",
+      "starts": "2027-01-07",
+      "ends": "2027-01-07",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at Meeting Room B, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17794715",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Arnettsville Public Library Senior Lunch & Learn",
+      "slug": "mpls-arnettsville-public-library-senior-lunch-and-learn-17835056-2027-01-08",
+      "starts": "2027-01-08",
+      "ends": "2027-01-08",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at noon at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17835056",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "STEAM Explorers",
+      "slug": "mpls-steam-explorers-17770845-2027-01-12",
+      "starts": "2027-01-12",
+      "ends": "2027-01-12",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room B, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17770845",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Info Session: Northstar Digital Literacy",
+      "slug": "mpls-info-session-northstar-digital-literacy-17913324-2027-01-19",
+      "starts": "2027-01-19",
+      "ends": "2027-01-19",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17913324",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Craft Night at the Arnettsville Public Library",
+      "slug": "mpls-craft-night-at-the-arnettsville-public-library-17835078-2027-01-20",
+      "starts": "2027-01-20",
+      "ends": "2027-01-20",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17835078",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Beyond the Book: Wings of Fire",
+      "slug": "mpls-beyond-the-book-wings-of-fire-17770878-2027-01-20",
+      "starts": "2027-01-20",
+      "ends": "2027-01-20",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17770878",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Winter Puzzle-Palooza: Puzzle Swap & Team Puzzle Race",
+      "slug": "mpls-winter-puzzle-palooza-puzzle-swap-and-team-puzzle-race-17835054-2027-01-23",
+      "starts": "2027-01-23",
+      "ends": "2027-01-23",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at noon at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17835054",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Teen Hangout: Dogs & Doodles",
+      "slug": "mpls-teen-hangout-dogs-and-doodles-17877228-2027-01-26",
+      "starts": "2027-01-26",
+      "ends": "2027-01-26",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17877228",
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "title": "NASA's AstroCamp",
+      "slug": "mpls-nasa-s-astrocamp-17770927-2027-01-27",
+      "starts": "2027-01-27",
+      "ends": "2027-01-27",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 6 p.m. at Meeting Room A, Morgantown Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17770927",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Arnettsville Public Library Movie Night",
+      "slug": "mpls-arnettsville-public-library-movie-night-17835063-2027-01-29",
+      "starts": "2027-01-29",
+      "ends": "2027-01-29",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at 5:30 p.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
+      "url": "https://events.mympls.org/event/17835063",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Test Event",
+      "slug": "mpls-test-event-11913616-2027-02-24",
+      "starts": "2027-02-24",
+      "ends": "2027-02-24",
+      "org_name": "Morgantown Public Library System",
+      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
+      "what_to_do": "Starts at midnight. See the event page for details.",
+      "url": "https://events.mympls.org/event/11913616",
+      "topics": [
+        "community"
+      ]
+    }
+  ]
+}
