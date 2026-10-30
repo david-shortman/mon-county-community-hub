@@ -121,12 +121,18 @@ A topic score and the overall score are the points earned divided by the points 
 
 1. Copy the latest results file to `content/findability/<today>.yaml` and update `date`.
 2. For each question, repeat the four testing steps above with the same `search` words, and overwrite the scores, URL, note and `checked` date.
-3. Run `python3 content/findability/score.py content/findability/<today>.yaml` to get the overall, topic and dimension scores.
-4. Add a row to the history table below and a short line in the build log on what moved and why.
+3. Run `python3 content/findability/score.py content/findability/<today>.yaml` to get the overall, topic and dimension scores and the leading measure.
+4. Add a row to the history table below and a short line in the build log on what moved and why. Include the leading measure from step 3.
+5. If a build log file promised a check for this date, add a "Checked YYYY-MM-DD:" line to that file with what you found.
 
 Rules for keeping runs comparable: keep question ids and `search` words fixed. Add new questions with new ids rather than rewording old ones. Retire a question by adding `retired: <date>`, not by deleting it. If the rubric changes, bump `rubric_version` and note it in the history table, because scores across versions are not directly comparable.
 
-Once the hub has pages that answer these questions, a run should also check whether a hub page shows up for each search. That is how the project's own work shows up in this score.
+**Hub pages and the leading measure (#110).** Every result also records two fields:
+
+- `hub_page`: the hub page that directly answers the question (its URL), or `null` if there is none. "Directly answers" means a resident who lands on it gets the answer or the next step for that exact question, not just a link list. To fill it, check the site's pages (`site/src/pages/`) and the menu, and carry forward last run's value if the page still answers it.
+- `hub_in_results`: `true` if a hub page showed up in the plain or the reworded search, else `false`. A hub page counts toward the score only when this is `true`, or when an official page links to it.
+
+`score.py` prints the **leading measure**: how many of the questions have a hub answer page, and how many of those pages showed up in search. It warns when a `hub_page` has no matching page in `site/src/pages/` (a renamed or removed page). Report both numbers in the history table and the build log line.
 
 ### History
 
