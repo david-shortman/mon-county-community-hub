@@ -1,0 +1,37 @@
+---
+// Starting page for older adults and retirees (#267, epic #261). Links only;
+// research and gaps: docs/groups/older-adults.md.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "disability", label: "Older adults and retirees", summary: "Medicare, help at home, food and bill help, and ways to stay involved, in one place" };
+const sections = [
+  { title: 'Medicare and health costs', links: [
+    { href: '/turning-65/', text: 'when to sign up, free visits and shots, and help with costs' },
+    { href: '/dental-and-prescriptions/', text: 'a dentist without dental insurance, and help paying for medicine' },
+    { href: '/flu-shots/', text: 'who should get one, when, and what it costs' },
+    { href: '/staying-well/', text: 'checkups and shots to get each year' },
+  ] },
+  { title: 'Help at home, and a break for caregivers', links: [
+    { href: '/medicaid-waivers/', text: 'care at home instead of a nursing home, through Medicaid' },
+    { href: '/disability-and-aging/', text: 'independent living help and free Medicare counseling' },
+  ] },
+  { title: 'Food and bills', links: [
+    { href: '/help/food/', text: 'food today or this week, or help buying groceries every month' },
+    { href: '/utility-bills/', text: 'help with a heat, water or electric bill' },
+    { href: '/money/#taxes', label: 'Free tax help', text: 'free help filing your taxes' },
+  ] },
+  { title: 'If you served', links: [
+    { href: '/veterans/', text: 'the VA clinic and Vet Center in Morgantown' },
+  ] },
+  { title: 'Learn something, or get involved', links: [
+    { href: '/work-and-learning/', text: 'adult classes and free reading and English lessons' },
+    { href: '/calendar/month/', text: 'what is happening in Mon County this month' },
+    { href: '/make-it-better/', text: 'help improve your town, or serve on a city board' },
+  ] },
+];
+---
+<Base title="Older adults and retirees in Morgantown and Mon County: where to start" description="A starting page for older adults and retirees in Monongalia County: Medicare and health costs, care at home, food and bill help, veterans help, and ways to learn and get involved.">
+  <h1>For older adults and retirees</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
