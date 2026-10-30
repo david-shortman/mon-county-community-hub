@@ -129,6 +129,11 @@ export function sourceOrg(url, orgSlug) {
   if (own && sameSite(h, hostOf(own.website))) return own;
   return orgs.find((o) => hostOf(o.website) === h) ?? null;
 }
+// A source on a .gov address is marked "(government site)". Only US
+// government bodies can register .gov, so the mark is never a guess. Other
+// official sites (a county health department on .org) are named by their
+// org instead.
+export const isGovSite = (u) => /\.gov$/.test(hostOf(u));
 export function sourceLabel(url, orgSlug) {
   const o = sourceOrg(url, orgSlug);
   return o ? `${o.name} (${shortUrl(url)})` : shortUrl(url);
@@ -150,8 +155,9 @@ export function sourceGroups(sources, orgSlug) {
     seen.set(text, true);
     const name = s.name ?? sourceOrg(s.url, orgSlug)?.name ?? null;
     const g = groups.find((x) => x.name === name);
-    if (g) g.links.push({ url: s.url, text });
-    else groups.push({ name, links: [{ url: s.url, text }] });
+    const link = { url: s.url, text, gov: isGovSite(s.url) };
+    if (g) g.links.push(link);
+    else groups.push({ name, links: [link] });
   }
   return groups;
 }
