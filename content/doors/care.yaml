@@ -1,0 +1,64 @@
+# The Get care door page, /care/ (#235, the pilot door for #248).
+# Every door page has the same shape (site/src/components/DoorPage.astro):
+# a can't wait strip, "What's going on? Pick all that fit", one set of steps
+# for everything picked (Today, This week, When it opens), what often goes
+# with it, dates for this door, and a person to talk to.
+#
+# Steps state no facts of their own, only the action: each one points to a record in
+# content/resources/ for its phone number, link, source and checked date.
+# A situation shows only once its page exists. `when` is today, week or opens.
+door: care
+lede: Shots, a dentist, Medicare, quitting tobacco and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+cant_wait:
+  text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
+  resource: 988-lifeline
+steps:
+  trails:
+    when: today
+    resource: mon-river-rail-trails
+    text: Walk, run or bike the rail-trails.
+    action: Trail maps
+  quitline:
+    when: today
+    resource: wv-tobacco-quitline
+    text: Call the West Virginia Tobacco Quitline. A coach helps you make a plan to quit.
+  shot:
+    when: week
+    resource: monchd-flu-and-covid-shots
+    text: Call the Monongalia County Health Department to book a flu or COVID shot.
+  dentist:
+    when: week
+    resource: monchd-dentistry
+    text: Call the health department's dental clinic for a checkup.
+  ship:
+    when: week
+    resource: wv-ship-medicare-counseling
+    text: Call the West Virginia State Health Insurance Assistance Program (WV SHIP) for help choosing a Medicare plan or checking your costs.
+situations:
+  - id: shots
+    label: I need a flu or COVID shot
+    page: /flu-shots/
+    steps: [shot]
+  - id: dentist
+    label: I need a dentist
+    page: /staying-well/#monchd-dentistry
+    steps: [dentist]
+  - id: medicare
+    label: I'm turning 65 or on Medicare
+    page: /turning-65/
+    steps: [ship, shot]
+  - id: quit
+    label: I want to quit smoking or tobacco
+    page: /staying-well/#wv-tobacco-quitline
+    steps: [quitline]
+  - id: healthy
+    label: I want to stay healthy this year
+    page: /staying-well/
+    steps: [trails, shot, dentist]
+also:
+  - text: Short on food
+    href: /help/food/
+  - text: Can't pay a bill
+    href: /money/
+  - text: A place to stay tonight
+    href: /stay-tonight/

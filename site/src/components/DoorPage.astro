@@ -1,0 +1,145 @@
+---
+// One door's guided page (#248, piloted as Get care in #235). Same shape for
+// every door, from content/doors/<slug>.yaml:
+//   1. Title and one line, then the "can't wait" strip.
+//   2. "What's going on? Pick all that fit." Without scripts, plain links to
+//      each situation's page. With scripts, checkboxes in a form whose picks
+//      ride in the web address (?pick=a&pick=b), so nothing is stored and a
+//      person can text or bookmark their steps.
+//   3. Your steps: one list for everything picked, grouped Today, This week,
+//      When it opens, each step ending in an action (Trailhead, #237).
+//   4. Often goes with this, dates for this door, every page in the door,
+//      and a person to talk to.
+// A situation shows only once its page exists. Steps carry no facts of their
+// own: phone, link, cost and source come from the step's resource record.
+import Actions from './Actions.astro';
+import EventCard from './EventCard.astro';
+import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, prettyDate, ymd, telHref, resource, loadDir } from '../lib/content.mjs';
+import { loadPages, doorTopics } from '../lib/pages.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { slug } = Astro.props;
+const door = loadDoors().bySlug[slug];
+const data = loadDoorPage(slug);
+const pages = await loadPages();
+const live = (href) => pages.has(href.split('#')[0]);
+const situations = data.situations.filter((s) => live(s.page));
+const groups = [['today', 'Today'], ['week', 'This week'], ['opens', 'When it opens']];
+// Each step once, with every live situation that uses it.
+const stepSits = (id) => situations.filter((s) => s.steps.includes(id));
+const steps = Object.values(data.steps).filter((st) => stepSits(st.id).length);
+const host = (u) => new URL(u).hostname.replace(/^www\./, '');
+// Name a step's source by its organization, with the site it is on.
+const orgs = Object.fromEntries(loadDir('orgs').map((o) => [o.slug, o.name]));
+const sourceName = (r) => (orgs[r.org] ? `${orgs[r.org]} (${host(r.sources[0].url)})` : host(r.sources[0].url));
+const checked = (r) => prettyDate(r.sources.map((x) => ymd(x.checked)).sort().at(-1));
+const also = data.also.filter((a) => live(a.href));
+const topics = Object.keys(door.topics);
+const dates = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics ?? []).some((t) => topics.includes(t))).slice(0, 4);
+const inDoor = await doorTopics(slug);
+const cw = data.cant_wait && resource(data.cant_wait.resource);
+const r211 = resource('wv-211');
+---
+<p class="lede">{data.lede}</p>
+
+{cw && (
+  <section class="right-now cant-wait" aria-label="Can't wait">
+    <p>{data.cant_wait.text}</p>
+    <div class="crisis-btns">
+      <a class="btn" href={telHref(cw.contact.phone)}><span>Call {cw.contact.phone}<span class="sr-only">, {cw.title}</span></span></a>
+      <a class="btn" href={`sms:${cw.contact.phone}`}><span>Text {cw.contact.phone}<span class="sr-only">, {cw.title}</span></span></a>
+      <a class="btn" href="tel:911"><span>Call 911<span class="sr-only">, emergency</span></span></a>
+    </div>
+    <p class="meta">Source: <a href={cw.sources[0].url}>{sourceName(cw)}</a>, checked {checked(cw)}. 911 is the standard emergency number.</p>
+  </section>
+)}
+
+<h2 id="pick-h">What's going on? Pick all that fit.</h2>
+<ul class="topic-list sit-links" id="door-links">
+  {situations.map((s) => <li><a href={`${base}${s.page}`}>{s.label}</a></li>)}
+</ul>
+<form class="door-pick" id="door-pick" method="get" action={`${base}${door.page}`} hidden aria-labelledby="pick-h">
+  <fieldset>
+    <legend class="sr-only">What's going on? Pick all that fit.</legend>
+    <ul class="pick">
+      {situations.map((s) => (
+        <li><label><input type="checkbox" name="pick" value={s.id} /><span>{s.label}</span></label></li>
+      ))}
+    </ul>
+  </fieldset>
+  <button class="btn btn-primary" type="submit">Show my steps</button>
+</form>
+<p class="note" id="door-nomatch" hidden>We could not find steps for that link. Pick what is going on above, or call or text 211.</p>
+
+<section class="door-plan" id="door-plan" hidden aria-labelledby="door-plan-h">
+  <h2 id="door-plan-h" tabindex="-1">Your steps</h2>
+  {groups.map(([when, label]) => {
+    const list = steps.filter((st) => st.when === when);
+    return list.length > 0 && (
+      <div class="step-group">
+        <h3>{label}</h3>
+        <ol class="steps">
+          {list.map((st) => {
+            const r = st.record;
+            const first = stepSits(st.id)[0];
+            return (
+              <li class="step" data-sits={stepSits(st.id).map((s) => s.id).join(' ')}>
+                <p>{st.text}</p>
+                <Actions callFirst phone={r.contact?.phone} phoneLabel={r.title} link={r.contact?.url} linkLabel={st.action ?? `Open ${host(r.contact.url)}`} about={r.title} />
+                {r.cost && <p class="step-cost"><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>}
+                <p class="meta">More on this: <a href={`${base}${first.page}`}>{first.label}</a>. Source: <a href={r.sources[0].url}>{sourceName(r)}</a>, checked {checked(r)}.</p>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    );
+  })}
+  <p><a href={`${base}${door.page}`}>Start over</a>. Your picks are only in this page's web address. Nothing is saved.</p>
+</section>
+
+{also.length > 0 && (
+  <>
+    <h2>Often goes with this</h2>
+    <ul class="topic-list">{also.map((a) => <li><a href={`${base}${a.href}`}>{a.text}</a></li>)}</ul>
+  </>
+)}
+
+<h2>Dates for this</h2>
+{dates.length ? dates.map((e) => <EventCard e={e} />) : <p>No dates for this on our calendar right now. <a href={`${base}/calendar/`}>See all dates</a>.</p>}
+
+<h2>Every {door.name} page</h2>
+{inDoor.map((t) => (
+  <>
+    <h3>{t.label}</h3>
+    <ul class="topic-list">{t.pages.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}</ul>
+  </>
+))}
+
+<section class="note" aria-labelledby="person-h">
+  <h2 id="person-h">Rather talk to a person?</h2>
+  <p>Call <a href={telHref(r211.contact.phone)}>{r211.contact.phone}</a>. It is a free West Virginia help line, open any hour. Tell them what is going on and they will point you to local help.</p>
+</section>
+
+<script is:inline>
+  // Optional: the page works without it. Turns the links into checkboxes and
+  // shows the steps for the picks in the web address.
+  (function () {
+    var form = document.getElementById('door-pick');
+    var links = document.getElementById('door-links');
+    var plan = document.getElementById('door-plan');
+    if (!form || !plan) return;
+    form.hidden = false; links.hidden = true;
+    var picks = new URLSearchParams(location.search).getAll('pick');
+    form.querySelectorAll('input[name="pick"]').forEach(function (i) { i.checked = picks.indexOf(i.value) > -1; });
+    if (!picks.length) return;
+    var shown = 0;
+    plan.querySelectorAll('.step').forEach(function (s) {
+      var on = s.dataset.sits.split(' ').some(function (x) { return picks.indexOf(x) > -1; });
+      s.hidden = !on; if (on) shown++;
+    });
+    plan.querySelectorAll('.step-group').forEach(function (g) { g.hidden = !g.querySelector('.step:not([hidden])'); });
+    if (!shown) { links.hidden = false; form.hidden = true; document.getElementById('door-nomatch').hidden = false; return; }
+    plan.hidden = false;
+    document.getElementById('door-plan-h').focus();
+  })();
+</script>
