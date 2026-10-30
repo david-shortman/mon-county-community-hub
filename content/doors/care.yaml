@@ -10,13 +10,21 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: A dentist, help paying for medicine, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Mental health help, a dentist, help paying for medicine, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
   sms: "988"
   emergency: true
 steps:
+  talk:
+    when: today
+    resource: valley-crisis-services
+    text: Need to talk to someone today? Call Valley HealthCare's 24/7 crisis line, or walk in to its Scott Avenue office on a weekday.
+  counseling:
+    when: week
+    resource: valley-counseling
+    text: Call Valley HealthCare to set up counseling. Ask about the sliding fee if money is tight.
   trails:
     when: today
     resource: mon-river-rail-trails
@@ -43,6 +51,10 @@ steps:
     resource: wv-ship-medicare-counseling
     text: Call the West Virginia State Health Insurance Assistance Program (WV SHIP) for help choosing a Medicare plan or checking your costs.
 situations:
+  - id: mental
+    label: I need mental health help
+    page: /mental-health/
+    steps: [talk, counseling]
   - id: dentist
     label: I need a dentist, or help paying for medicine
     page: /dental-and-prescriptions/
