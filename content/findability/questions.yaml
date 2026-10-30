@@ -288,3 +288,22 @@ questions:
     question: Where can I sell my kids' outgrown clothes?
     who: A parent of two young kids
     search: sell kids clothes Morgantown WV
+  # Community centers and halls (topic: community-centers, #460)
+  - id: q43
+    topic: community-centers
+    kind: everyday
+    question: Is there a community center near me in Mon County?
+    who: A retiree who just moved to the west end of the county
+    search: community center near me Monongalia County WV
+  - id: q44
+    topic: community-centers
+    kind: everyday
+    question: Where can I rent a hall for a birthday party in Mon County, and what does it cost?
+    who: A parent planning a party on a budget
+    search: rent a hall for a party Monongalia County WV
+  - id: q45
+    topic: community-centers
+    kind: everyday
+    question: Is there a community dinner I can go to this weekend near Morgantown?
+    who: Someone who lives alone and wants to meet neighbors
+    search: community dinner this weekend Morgantown WV

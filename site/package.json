@@ -16,7 +16,8 @@
     "check-contrast": "node scripts/check-contrast.mjs",
     "check-weight": "node scripts/check-weight.mjs",
     "check-api": "node scripts/check-api.mjs && node scripts/test-ics.mjs && node ../apps/mcp/test/smoke.mjs dist/api/v1",
-    "call-queue": "node scripts/call-queue.mjs"
+    "call-queue": "node scripts/call-queue.mjs",
+    "secondhand-due": "node scripts/secondhand-due.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
