@@ -110,6 +110,22 @@ The build never fails because of a feed. It logs a warning and uses the last goo
 5. Add the adapter to `ADAPTERS` in `site/src/lib/feeds/index.mjs`, run `npm run update-feeds`, `npm run check-content`, and `npm run build`, and commit the new snapshot.
 6. Add a row to the table above.
 
+## `corrections/<date>-<short-name>.yaml`: fixes we made
+
+Every fix to a fact, link or out-of-date detail gets one file, shown on the public Corrections page (`/corrections/`, #158). Typos are fixed without one.
+
+```yaml
+date: 2026-10-30            # Morgantown date the fix went live
+item: County recycling drop-off center
+page: /recycling/           # optional; where the item shows
+kind: outdated              # fact | link | outdated | wording
+found_by: our-check         # our-check | works-there | helper | used-it | other
+what: What was wrong and what it says now, in one or two plain sentences.
+link: https://github.com/david-shortman/mon-county-community-hub/pull/355
+```
+
+`found_by` comes from the report form's optional question. Never name the person or group who reported it, unless the group asks for credit, and that goes to David first.
+
 ## `doors.yaml`: the five doors
 
 The site is organized into five doors named for what is going on in a person's life, plus three lanes that are not doors: Help now, Dates, and About this site (#248). `doors.yaml` lists them and maps every `topics` tag used in this folder to one door, with the label people see:
