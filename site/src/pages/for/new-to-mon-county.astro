@@ -1,0 +1,35 @@
+---
+// Starting page for people new to Mon County (#270, epic #261). Links only;
+// research and gaps: docs/groups/new-residents.md. The step-by-step setup
+// lives on /moving-here/ (#204); this page does not repeat it.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "living-here", topic: "moving", label: "New to Mon County", summary: "Start your utilities, learn your trash day, find care, and meet people, in one place" };
+const sections = [
+  { title: 'Set up your home', links: [
+    { href: '/moving-here/', label: 'Start power, water, gas and trash', text: 'who serves homes here and how to start service' },
+    { href: '/living-here/?pick=pickup', label: 'Your trash pickup day', text: 'find your day' },
+    { href: '/recycling/', text: 'the curbside bin, and where to take hard items' },
+    { href: '/flood-zone/', text: 'check a home before you buy or rent' },
+  ] },
+  { title: 'Find care', links: [
+    { href: '/care/', text: 'a dentist, Medicare, shots and staying healthy' },
+    { href: '/staying-well/', text: 'checkups and shots to get each year' },
+  ] },
+  { title: 'Kids and school', links: [
+    { href: '/families-and-kids/', text: 'Birth to Three, Pre-K, playgroups and story times' },
+  ] },
+  { title: 'Work and English lessons', links: [
+    { href: '/work-and-learning/', text: 'job help, adult classes, and free reading and English lessons' },
+  ] },
+  { title: 'Get to know the place', links: [
+    { href: '/calendar/month/', text: 'what is happening in Mon County this month' },
+    { href: '/make-it-better/', text: 'help improve your town, or serve on a city board' },
+  ] },
+];
+---
+<Base title="New to Morgantown and Mon County: where to start" description="A starting page for people who just moved to Monongalia County: start utilities and trash, find care, kids and school, work and English lessons, and what is happening this month.">
+  <h1>New to Mon County</h1>
+  <p class="lede">Welcome. Pick what you need first. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
