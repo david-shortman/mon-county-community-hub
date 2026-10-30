@@ -1,0 +1,10 @@
+name: West Virginia Department of Environmental Protection
+slug: wv-department-of-environmental-protection
+kind: government
+website: https://dep.wv.gov
+summary: The state agency for the environment. Its REAP program takes reports of illegal dumps and waste tire piles and runs litter cleanup programs.
+topics: [government]
+area: statewide
+sources:
+  - url: https://apps.dep.wv.gov/reap/PPODDumpReporter.cfm
+    checked: 2026-10-30
