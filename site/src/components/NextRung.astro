@@ -1,0 +1,28 @@
+---
+// The next rung (#295): one link up the Make it better ladder at the end of
+// each Make it better page. The page names its rung with `next`; the link
+// shows only once that page exists, and falls back to the Make it better
+// hub. Plain links, so it works with no script.
+//   Ladder: report it, clean it, adopt it, fund it, shape the rule (a board
+//   seat), shape the money (plan and budget windows).
+import { loadPages } from '../lib/pages.mjs';
+const LADDER = {
+  report: { route: '/make-it-better/report/', text: 'Report a problem to the right office' },
+  clean: { route: '/make-it-better/cleanups/', text: 'Join a cleanup' },
+  adopt: { route: '/make-it-better/adopt/', text: 'Adopt a street, spot, stream or trail' },
+  fund: { route: '/make-it-better/grants/', text: 'Get money for a project' },
+  board: { route: '/make-it-better/boards/', text: 'Serve on a city board' },
+  budget: { route: '/make-it-better/when-it-gets-decided/', text: 'See when plans and budgets get decided' },
+};
+const { next } = Astro.props;
+const pages = await loadPages();
+const rung = LADDER[next];
+const hub = '/make-it-better/';
+const target = rung && pages.has(rung.route) ? rung : pages.has(hub) ? { route: hub, text: 'More ways to make it better' } : null;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+{target && (
+  <aside class="note next-rung" aria-label="Next step">
+    <p><strong>Ready for the next step?</strong> <a href={`${base}${target.route}`}>{target.text}</a></p>
+  </aside>
+)}

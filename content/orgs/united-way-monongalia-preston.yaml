@@ -1,0 +1,15 @@
+name: United Way of Monongalia and Preston Counties
+slug: united-way-monongalia-preston
+kind: nonprofit
+website: https://www.unitedwaympc.org/
+phone: "304-296-7525"
+summary: A local United Way that raises money each year and funds nonprofit programs in Mon and Preston counties. It also runs the Family Resource Network, which publishes guides to local help.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: https://www.unitedwaympc.org/about-us
+    checked: 2026-10-30
+  - url: https://www.unitedwaympc.org/contact-us
+    checked: 2026-10-30
+  - url: https://www.unitedwaympc.org/frn
+    checked: 2026-10-30

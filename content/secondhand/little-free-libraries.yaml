@@ -1,0 +1,18 @@
+name: Little Free Libraries
+slug: little-free-libraries
+kind: free-program
+area: elsewhere
+run_by: Local volunteers who register their book boxes with the Little Free Library nonprofit
+sells: Free book-sharing boxes. Anyone may take a book or share a book. You do not need to leave a book to take one.
+takes: Books you want to share.
+goods: [books]
+buys_from_you: false
+url: https://littlefreelibrary.org/map/
+url_label: Find one on the map
+status: likely
+note: Boxes are spread around town. Search the official map by city or ZIP code.
+sources:
+  - url: https://littlefreelibrary.org/map/
+    checked: 2026-10-30
+  - url: https://uniontown.macaronikid.com/guides/67bfa73f4404b067e53dc0ed/little-libraries-in-uniontown-morgantown-and-more
+    checked: 2026-10-30

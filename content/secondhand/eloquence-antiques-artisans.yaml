@@ -1,0 +1,16 @@
+name: Eloquence Antiques and Artisans
+slug: eloquence-antiques-artisans
+kind: vintage-antique
+area: mileground
+run_by: Eloquence Antiques and Artisans
+address: "5000 Green Bag Rd, Morgantown, WV"
+sells: Antiques, restored furniture, handmade woodwork, vintage pottery, stained glass and salvage from about 100 vendors.
+goods: [vintage, home]
+buys_from_you: false
+url: https://morgantownmag.com/calling-all-shoppers/
+url_label: Source
+status: unclear
+note: Newest source we could open is from 2020.
+sources:
+  - url: https://morgantownmag.com/calling-all-shoppers/
+    checked: 2026-10-30

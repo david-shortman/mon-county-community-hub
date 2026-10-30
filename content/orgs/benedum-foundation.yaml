@@ -1,0 +1,13 @@
+name: Claude Worthington Benedum Foundation
+slug: benedum-foundation
+kind: nonprofit
+website: https://benedum.org/
+phone: "412-288-0360"
+summary: A private foundation in Pittsburgh that gives grants in West Virginia for economic development, education, community development and health. It funds 501(c)(3) groups and government units, not individuals, and takes applications all year.
+topics: [community]
+area: statewide
+sources:
+  - url: https://benedum.org/online-apply-report/application-guidelines/
+    checked: 2026-10-30
+  - url: https://benedum.org/about-us/f-a-q/
+    checked: 2026-10-30

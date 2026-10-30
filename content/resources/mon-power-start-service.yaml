@@ -3,7 +3,12 @@ slug: mon-power-start-service
 org: mon-power
 topics: [moving]
 who_it_is_for: People moving into a home served by Mon Power, part of FirstEnergy. The Town of Granville lists Mon Power as the area's electric company.
-what_to_do: Fill out FirstEnergy's start service form online, or call 1-800-686-0022, Monday to Friday, 8 a.m. to 6 p.m. Have your new address or meter number, your Social Security number or taxpayer ID, and your start date. The online form can take at least two business days, so call if you need it sooner.
+what_to_do: Fill out FirstEnergy's start service form online, or call 1-800-686-0022, Monday to Friday, 8 a.m. to 6 p.m. The online form can take at least two business days, so call if you need it sooner.
+what_to_bring:
+  - "Your new address or meter number"
+  - "Your Social Security number or taxpayer ID"
+  - "The date you want service to start"
+what_happens: If you use the online form, FirstEnergy emails you to confirm it can start service on your date. In most cases you do not need to be home. If the power is off, leave a clear path to the meter.
 contact:
   phone: "1-800-686-0022"
   url: https://www.firstenergycorp.com/service_requests/Start_Service/what-to-expect.html
