@@ -8,6 +8,7 @@ Structured data the site is built from. One file per entry, YAML, so humans and 
 
 ```yaml
 name: Example Organization
+short_name: Example Org  # optional; for long names. Used on buttons: "Open Example Org website" (#335)
 slug: example-organization
 kind: nonprofit        # nonprofit | government | community-group | business | school | faith
 website: https://example.org

@@ -4,12 +4,12 @@
 import ResourceCard from './ResourceCard.astro';
 import EventCard from './EventCard.astro';
 import Actions from './Actions.astro';
-import { resource, org, loadCalendarWithFeeds, upcoming, prettyDate, ymd } from '../lib/content.mjs';
+import SourceLine from './SourceLine.astro';
+import { resource, org, loadCalendarWithFeeds, upcoming, websiteLabel } from '../lib/content.mjs';
 const { student = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const pantries = upcoming(await loadCalendarWithFeeds(), undefined, 31).filter((e) => (e.topics || []).includes('food')).slice(0, 4);
 const srsh = org('scotts-run-settlement-house');
-const srshChecked = prettyDate(srsh.sources.map((s) => ymd(s.checked)).sort().at(-1));
 ---
 <h2>Where to start</h2>
 <ol class="results">
@@ -19,8 +19,8 @@ const srshChecked = prettyDate(srsh.sources.map((s) => ymd(s.checked)).sort().at
     <article class="card">
       <h3>{srsh.name}</h3>
       <p>{srsh.summary}</p>
-      <Actions callFirst phone={srsh.phone} phoneLabel={srsh.name} sms={srsh.phone} smsLabel={srsh.name} link={srsh.website} linkLabel="Open srsh.org" about={srsh.name} />
-      <p class="meta">Source: <a href={srsh.sources[0].url}>srsh.org</a>. Checked by hand on {srshChecked}.</p>
+      <Actions callFirst phone={srsh.phone} phoneLabel={srsh.name} sms={srsh.phone} smsLabel={srsh.name} link={srsh.website} linkLabel={websiteLabel(srsh.website, srsh.slug)} about={srsh.name} />
+      <SourceLine sources={srsh.sources} org={srsh.slug} about={srsh.name} />
     </article>
   </li>
 </ol>

@@ -8,13 +8,14 @@ import { mapsUrl, telHref } from '../lib/content.mjs';
 // "Add to calendar" buttons on one page never sound the same.
 // `sms` adds a Text button (for example 211's text line, 898-211).
 // `callFirst` makes Call the big filled button and the link a plain one (for
-// help lines, where calling matters more than the website).
+// help lines, where calling matters more than the website). The website
+// button is always full width, so its name never squeezes into a half (#335).
 const { callFirst = false, link, linkLabel, phone, phoneLabel, sms, smsLabel, place, ics, shareUrl, shareTitle, about } = Astro.props;
 const ctx = about ? `: ${about}` : '';
 ---
 <div class="actions">
   {callFirst && phone && <a class="btn btn-primary" href={telHref(phone)}><Icon name="phone" /><span>Call <span class="nowrap">{phone}</span>{phoneLabel && <span class="sr-only">, {phoneLabel}</span>}</span></a>}
-  {link && <a class:list={['btn', !callFirst && 'btn-primary']} href={link}><Icon name="open" /><span>{linkLabel}<span class="sr-only">{ctx}</span></span></a>}
+  {link && <a class:list={['btn', 'btn-wide', !callFirst && 'btn-primary']} href={link}><Icon name="open" /><span>{linkLabel}<span class="sr-only">{ctx}</span></span></a>}
   {!callFirst && phone && <a class="btn btn-wide" href={telHref(phone)}><Icon name="phone" /><span>Call <span class="nowrap">{phone}</span>{phoneLabel && <span class="sr-only">, {phoneLabel}</span>}</span></a>}
   {sms && <a class="btn" href={`sms:${String(sms).replace(/[^\d+]/g, '')}`}><Icon name="text" /><span>Text <span class="nowrap">{sms}</span>{smsLabel && <span class="sr-only">, {smsLabel}</span>}</span></a>}
   {place && <a class="btn" href={mapsUrl(place)}><Icon name="pin" /><span>Directions<span class="sr-only"> to {place} (opens a map)</span></span></a>}

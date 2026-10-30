@@ -14,7 +14,8 @@
 // own: phone, link, cost and source come from the step's resource record.
 import Actions from './Actions.astro';
 import EventCard from './EventCard.astro';
-import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, prettyDate, ymd, telHref, resource, loadDir } from '../lib/content.mjs';
+import SourceLine from './SourceLine.astro';
+import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, telHref, resource, websiteLabel } from '../lib/content.mjs';
 import { loadPages, doorTopics } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const { slug } = Astro.props;
@@ -27,11 +28,6 @@ const groups = [['today', 'Today'], ['week', 'This week'], ['opens', 'When it op
 // Each step once, with every live situation that uses it.
 const stepSits = (id) => situations.filter((s) => s.steps.includes(id));
 const steps = Object.values(data.steps).filter((st) => stepSits(st.id).length);
-const host = (u) => new URL(u).hostname.replace(/^www\./, '');
-// Name a step's source by its organization, with the site it is on.
-const orgs = Object.fromEntries(loadDir('orgs').map((o) => [o.slug, o.name]));
-const sourceName = (r) => (orgs[r.org] ? `${orgs[r.org]} (${host(r.sources[0].url)})` : host(r.sources[0].url));
-const checked = (r) => prettyDate(r.sources.map((x) => ymd(x.checked)).sort().at(-1));
 const also = data.also.filter((a) => live(a.href));
 const topics = Object.keys(door.topics);
 const dates = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics ?? []).some((t) => topics.includes(t))).slice(0, 4);
@@ -51,7 +47,7 @@ const r211 = resource('wv-211');
       {cwSms && <a class="btn" href={`sms:${cwSms.replace(/[^\d]/g, '')}`}><span>Text {cwSms}<span class="sr-only">, {cw.title}{cw.contact.text ? ', send your ZIP code' : ''}</span></span></a>}
       {data.cant_wait.emergency && <a class="btn" href="tel:911"><span>Call 911<span class="sr-only">, emergency</span></span></a>}
     </div>
-    <p class="meta">Source: <a href={cw.sources[0].url}>{sourceName(cw)}</a>, checked {checked(cw)}.{data.cant_wait.emergency && ' 911 is the standard emergency number.'}</p>
+    <SourceLine sources={cw.sources} org={cw.org} about={cw.title}>{data.cant_wait.emergency && ' 911 is the standard emergency number.'}</SourceLine>
   </section>
 )}
 
@@ -86,9 +82,9 @@ const r211 = resource('wv-211');
             return (
               <li class="step" data-sits={stepSits(st.id).map((s) => s.id).join(' ')}>
                 <p>{st.text}</p>
-                <Actions callFirst phone={r.contact?.phone} phoneLabel={r.title} link={r.contact?.url} linkLabel={st.action ?? `Open ${host(r.contact.url)}`} place={r.contact?.place} about={r.title} />
+                <Actions callFirst phone={r.contact?.phone} phoneLabel={r.title} link={r.contact?.url} linkLabel={st.action ?? websiteLabel(r.contact?.url, r.org)} place={r.contact?.place} about={r.title} />
                 {r.cost && <p class="step-cost"><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>}
-                <p class="meta">More on this: <a href={`${base}${first.page}`}>{first.label}</a>. Source: <a href={r.sources[0].url}>{sourceName(r)}</a>, checked {checked(r)}.</p>
+                <SourceLine sources={r.sources} org={r.org} about={r.title}><Fragment slot="before">More on this: <a href={`${base}${first.page}`}>{first.label}</a>{/[?!.]$/.test(first.label) ? ' ' : '. '}</Fragment></SourceLine>
               </li>
             );
           })}
