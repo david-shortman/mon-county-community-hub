@@ -142,6 +142,17 @@ doors:
 
 Each door also has an `icon` and `examples`: a few problems in residents' words, each with the page it links to. They become the door cards on the home page, and an example shows only once its page exists.
 
+An example can be seasonal with optional `from` and `until` dates, written as quoted `"MM-DD"` and counted in Morgantown time, both days included:
+
+```yaml
+      - text: Flu or COVID shot
+        href: /flu-shots/
+        from: "09-01"   # optional; shows from this day
+        until: "12-31"  # optional; shows through this day
+```
+
+With only `from`, it shows through December 31. With only `until`, it shows from January 1. A `from` later than `until` wraps the new year (`"11-01"` to `"03-31"` is November through March). Leave both out to show it all year. The site rebuilds every morning (`.github/workflows/site.yml`), so an example appears or goes away on the first build of its first or last day, with no extra schedule needed (#488). `npm run check-content` fails on a date that is not `"MM-DD"`.
+
 A new topic tag needs a home in exactly one door, or `npm run check-content` fails. Adding, renaming or removing a door changes the site's shape, so that is David's call. A topic that fits no door waits for that call.
 
 ### `doors/<slug>.yaml`: a door's own page

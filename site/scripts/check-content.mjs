@@ -173,6 +173,11 @@ if (doors) {
       topicHome.set(t, d.slug);
       if (!label) errors.push(`doors.yaml: topic ${t} in ${d.slug} needs a label`);
     }
+    for (const e of d.examples ?? []) {
+      for (const k of ['from', 'until']) {
+        if (e[k] !== undefined && !/^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(String(e[k]))) errors.push(`doors.yaml: example "${e.text}" in ${d.slug} needs ${k} as a quoted "MM-DD", like "09-01"`);
+      }
+    }
   }
   if (JSON.stringify(doors).includes('\u2014')) errors.push('doors.yaml: contains an em dash');
   for (const e of [...loadDir('orgs'), ...loadDir('resources'), ...loadCalendar()]) {
