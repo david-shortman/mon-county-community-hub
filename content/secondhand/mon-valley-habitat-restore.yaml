@@ -1,0 +1,21 @@
+name: Mon Valley Habitat for Humanity ReStore
+slug: mon-valley-habitat-restore
+kind: charity-thrift
+area: elsewhere
+run_by: Mon Valley Habitat for Humanity
+sells: New and gently used items for home repair and decor (when it was open).
+goods: [home, building]
+buys_from_you: false
+url: https://monvalleyhfh.org/
+url_label: Mon Valley Habitat
+status: closed
+note: Closed October 25, 2023. Mon Valley Habitat's 2026 website lists no ReStore.
+sources:
+  - url: https://www.wdtv.com/2023/10/26/without-warning-morgantowns-restore-shuts-down-good/
+    checked: 2026-10-30
+  - url: https://digital-release.wboy.com/news/monongalia/morgantown-restore-closes-its-doors-plans-to-hold-sale-of-inventory/amp/
+    checked: 2026-10-30
+  - url: https://monvalleyhfh.org/
+    checked: 2026-10-30
+  - url: https://monvalleyhfh.org/donate/
+    checked: 2026-10-30

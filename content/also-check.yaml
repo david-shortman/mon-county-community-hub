@@ -1,0 +1,20 @@
+# "If this, also check" (#224): short links at the end of a topic page to
+# other pages that often go with it, because people rarely have one problem.
+# Each key is a page's web path; each value lists 2 to 4 other pages. The link
+# text is the other page's own label and summary (from its page tag), so this
+# file holds no facts. A link shows only once its page exists.
+# Health pages link by life moment (school, new baby, turning 65, work), as
+# David asked on #224. Door pages have their own "Often goes with this" list in
+# content/doors/<slug>.yaml, so they are not here.
+# Keep keys in alphabetical order.
+/dental-and-prescriptions/: [/staying-well/, /turning-65/, /flu-shots/]
+/disability-and-aging/: [/medicaid-waivers/, /turning-65/, /work-and-learning/]
+/families-and-kids/: [/flu-shots/, /staying-well/, /work-and-learning/]
+/flu-shots/: [/staying-well/, /turning-65/, /families-and-kids/]
+/medicaid-waivers/: [/disability-and-aging/, /turning-65/]
+/moving-here/: [/recycling/, /calendar/month/]
+/recycling/: [/moving-here/, /calendar/month/]
+/staying-well/: [/flu-shots/, /dental-and-prescriptions/, /turning-65/]
+/turning-65/: [/disability-and-aging/, /medicaid-waivers/, /flu-shots/, /dental-and-prescriptions/]
+/veterans/: [/work-and-learning/, /turning-65/, /disability-and-aging/]
+/work-and-learning/: [/families-and-kids/, /veterans/, /disability-and-aging/]

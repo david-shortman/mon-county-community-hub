@@ -1,0 +1,17 @@
+name: That's So Cute!
+slug: thats-so-cute
+kind: vintage-antique
+area: downtown
+run_by: That's So Cute!
+address: "440 Spruce St, Morgantown, WV"
+hours: Monday to Thursday, noon to 7 p.m.; Friday to Sunday, 11 a.m. to 8 p.m.
+sells: Secondhand Y2K-style and current women's clothing.
+goods: [clothes, vintage]
+buys_from_you: false
+url: https://www.thedaonline.com/news/morgantown/that-s-so-cute-brings-y2k-style-affordable-fashion-to-morgantown/article_0f3a8374-816e-446e-8777-6a50911a6a69.html
+url_label: News story
+status: confirmed
+note: Opened in late August 2025.
+sources:
+  - url: https://www.thedaonline.com/news/morgantown/that-s-so-cute-brings-y2k-style-affordable-fashion-to-morgantown/article_0f3a8374-816e-446e-8777-6a50911a6a69.html
+    checked: 2026-10-30

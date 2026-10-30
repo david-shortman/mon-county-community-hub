@@ -15,11 +15,13 @@
 // sources (#39); past 6 months the line says the item may be out of date.
 // Text before the source goes in the "before" slot; anything after goes in
 // the default slot.
-import { prettyDate, oldestChecked, sourceGroups, isStale, reportUrl } from '../lib/content.mjs';
-const { sources, org, about, slug, skip = [] } = Astro.props;
+// With no sources (a hidden record's stand-in, #519) it says the item is
+// being re-checked instead of giving a date.
+import { prettyDate, oldestChecked, sourceGroups, isStale, reportUrl, RECHECK_TEXT } from '../lib/content.mjs';
+const { sources = [], org, about, slug, skip = [] } = Astro.props;
 const groups = sourceGroups(sources.filter((s) => !skip.includes(s.url)), org);
 const count = groups.reduce((n, g) => n + g.links.length, 0);
 const checked = oldestChecked(sources);
 const stale = isStale(checked);
 ---
-<p class="meta"><slot name="before" />{count > 0 && <>{count > 1 ? 'Sources' : 'Source'}: {groups.map((g, gi) => <>{gi > 0 && '; '}{g.name && `${g.name}: `}{g.links.map((l, i) => <>{i > 0 && ', '}<a href={l.url}>{l.text}{about && <span class="sr-only">, source for {about}</span>}</a>{l.gov && !g.links.every((x) => x.gov) && ' (government site)'}</>)}{g.links.every((x) => x.gov) && (g.links.length > 1 ? ' (all government sites)' : ' (government site)')}</>)}. </>}Checked {prettyDate(checked)}.{stale && <strong> This may be out of date, so check with them before you go.</strong>}<slot />{slug && <> <a href={reportUrl({ title: about, slug, url: sources[0]?.url })}>Report a problem<span class="sr-only"> with {about} (opens GitHub)</span></a>.</>}</p>
+{!checked ? <p class="meta"><slot name="before" /><strong>{RECHECK_TEXT}</strong>{slug && <>{' '}<a href={reportUrl({ title: about, slug })}>Report a problem<span class="sr-only"> with {about} (opens GitHub)</span></a>.</>}</p> : <p class="meta"><slot name="before" />{count > 0 && <>{count > 1 ? 'Sources' : 'Source'}: {groups.map((g, gi) => <>{gi > 0 && '; '}{g.name && `${g.name}: `}{g.links.map((l, i) => <>{i > 0 && ', '}<a href={l.url}>{l.text}{about && <span class="sr-only">, source for {about}</span>}</a>{l.gov && !g.links.every((x) => x.gov) && ' (government site)'}</>)}{g.links.every((x) => x.gov) && (g.links.length > 1 ? ' (all government sites)' : ' (government site)')}</>)}. </>}Checked {prettyDate(checked)}.{stale && <strong> This may be out of date, so check with them before you go.</strong>}<slot />{slug && <>{' '}<a href={reportUrl({ title: about, slug, url: sources[0]?.url })}>Report a problem<span class="sr-only"> with {about} (opens GitHub)</span></a>.</>}</p>}

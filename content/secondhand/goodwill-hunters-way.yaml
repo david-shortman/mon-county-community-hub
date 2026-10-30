@@ -1,0 +1,24 @@
+name: Goodwill, Morgantown (Hunters Way)
+slug: goodwill-hunters-way
+kind: charity-thrift
+area: elsewhere
+run_by: Goodwill of North Central West Virginia
+address: "1954 Hunter's Way, Morgantown, WV 26505"
+hours: Monday to Thursday, 10 a.m. to 7 p.m.; Friday to Sunday, 10 a.m. to 8 p.m.
+sells: Donated clothing and household items.
+takes: Clothing, shoes, linens, kitchenware, decor, books, records, CDs, DVDs, small furniture and rugs that fit in the store donation bins, small appliances, tools, computers and flat screen TVs. It does not take mattresses, large furniture or appliances, tube TVs, building materials, hazardous materials, or guns and knives. Donation drop-off hours are Monday to Thursday, 9 a.m. to 7 p.m.; Friday to Sunday, 9 a.m. to 8 p.m. Free home pickup in parts of the Morgantown area.
+goods: [clothes, home, books, electronics]
+buys_from_you: false
+funds_local_cause: Job training, education and other community programs.
+url: https://www.goodwillncwv.org/shop/store-locations/
+url_label: Store finder
+status: likely
+sources:
+  - url: https://www.goodwillncwv.org/shop/store-locations/
+    checked: 2026-10-30
+  - url: https://www.goodwillncwv.org/donate/goods/acceptable-donated-goods/
+    checked: 2026-10-30
+  - url: https://www.goodwillncwv.org/donate/homepickup/
+    checked: 2026-10-30
+  - url: https://www.goodwillncwv.org/shop/retail-that-gives-back/
+    checked: 2026-10-30
