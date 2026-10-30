@@ -37,5 +37,7 @@ const r211 = resource('wv-211');
     <p>Call <a href={telHref(r211.contact.phone)}>{r211.contact.phone}</a>. It is a free West Virginia help line, open any hour. Tell them what is going on and they will point you to local help. You can also text your ZIP code to <a href={`sms:${r211.contact.text.replace(/[^\d]/g, '')}`}>{r211.contact.text}</a>.</p>
   </section>
 
+  <p>A local resident runs this site, and an AI assistant (Claude) does the research and building every day. <a href={`${base}/about/`}>How it works</a>.</p>
+
   <HelpNowSources />
 </Base>

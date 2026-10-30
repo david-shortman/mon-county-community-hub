@@ -5,6 +5,7 @@
 // content/resources/wv-211.yaml and content/resources/988-lifeline.yaml; the
 // sources line sits at the bottom of the page (HelpNowSources).
 // 911 is the standard U.S. emergency number, so it has no record.
+// Its title is not a heading, so the page's h1 stays the first heading.
 import Icon from './Icon.astro';
 import { resource, telHref } from '../lib/content.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -14,7 +15,7 @@ const sms = (n) => `sms:${String(n).replace(/[^\d+]/g, '')}`;
 ---
 <section class="right-now" aria-labelledby="right-now-h">
   <div class="rn-top">
-    <h2 id="right-now-h">Need help tonight?</h2>
+    <p class="rn-h" id="right-now-h">Need help tonight?</p>
     <a class="tonight" href={`${base}/stay-tonight/`}><Icon name="bed" /><span>A place to stay</span></a>
   </div>
   <p><strong>211</strong> is a free help line for food, housing, bills and more, any hour. Call, or text your ZIP code.</p>
