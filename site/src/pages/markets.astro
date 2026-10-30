@@ -1,0 +1,100 @@
+---
+// Markets and sales coming up (#426, part of #422). Coming up is built from
+// the calendar (topics secondhand and market, next 30 days). The weekly,
+// yearly and nearby lists below name their own sources. Yard sales lists only
+// online groups whose own page we could open; no individual home sales.
+import Base from '../layouts/Base.astro';
+import EventCard from '../components/EventCard.astro';
+import ShopCard from '../components/ShopCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Actions from '../components/Actions.astro';
+import { loadCalendarWithFeeds, upcoming, loadSecondhand } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "market", label: "Markets and sales coming up", summary: "Craft markets, card shows, the farmers market, yearly sales and the nearest flea markets" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tagged = (e) => (e.topics || []).some((t) => t === 'secondhand' || t === 'market');
+const soon = upcoming(await loadCalendarWithFeeds(), undefined, 30).filter(tagged);
+const all = loadSecondhand();
+const bookSale = all.find((s) => s.slug === 'friends-mpl-book-sale');
+const online = all.filter((s) => s.kind === 'online-group').sort((a, b) => a.name.localeCompare(b.name));
+const checked = '2026-10-30';
+const src = {
+  farmers: [{ url: 'https://morgantownfarmersmarket.org/markets.html', checked, name: 'Morgantown Farmers Market' }],
+  goldMine: [{ url: 'https://enews.wvu.edu/articles/2026/05/14/blue-and-gold-mine-sale-set-for-saturday', checked, name: 'WVU Today' }],
+  mrtc: [{ url: 'https://montrails.org/mrtc-handmade-market', checked, name: 'Mon River Trails Conservancy' }],
+  moonlight: [{ url: 'https://www.wvmoonlightmarket.com/apply', checked, name: 'Moonlight Market' }],
+  braddock: [{ url: 'https://pabucketlist.com/?p=26335', checked }],
+  greene: [{ url: 'https://greenecountypa.gov/fairgrounds', checked, name: 'Greene County, PA' }],
+  mweek: [{ url: 'https://mountaineerweek.wvu.edu/events/acf-2026', checked, name: 'WVU Mountaineer Week' }],
+};
+---
+<Base title="Markets, sales and flea markets near Morgantown, WV" description="Craft markets, card shows, the farmers market, yearly sales like the WVU Blue and Gold Mine Sale, and the nearest flea markets to Morgantown and Monongalia County.">
+  <h1>Markets and sales coming up</h1>
+  <p class="lede">Mon County has no regular flea market. What it has is a calendar of craft markets, card shows, a weekly farmers market and a few big yearly sales. The nearest weekly flea markets are in Pennsylvania. Each listing links to the group that runs it.</p>
+  <p>Jump to: <a href="#soon">Coming up</a> · <a href="#weekly">Every week</a> · <a href="#yearly">Once a year</a> · <a href="#drive">Worth the drive</a> · <a href="#yard">Yard sales</a> · <a href="#sell">Selling at a market</a></p>
+
+  <section aria-labelledby="soon">
+    <h2 id="soon">Coming up in the next 30 days</h2>
+    {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing on our calendar in the next 30 days.</p>}
+    <p class="more"><a href={`${base}/calendar/`}>All dates</a></p>
+  </section>
+
+  <section aria-labelledby="weekly">
+    <h2 id="weekly">Every week</h2>
+    <article class="card">
+      <h3>Morgantown Farmers Market</h3>
+      <p>Run by the Morgantown Farmers Market Growers Association.</p>
+      <ul>
+        <li><strong>Saturday downtown market:</strong> Saturdays, 8:30 a.m. to noon, through November 14, 2026, at the Morgantown Market Place Pavilion, 400 Spruce Street.</li>
+        <li><strong>Winter market:</strong> every other Saturday, 10 a.m. to noon, from November 21 to April, indoors at the Monongalia County Center, 270 Mylan Park Ln.</li>
+      </ul>
+      <Actions link={src.farmers[0].url} linkLabel="Market dates" place="270 Mylan Park Ln, Morgantown, WV 26501" about="Morgantown Farmers Market" />
+      <SourceLine sources={src.farmers} about="the farmers market" />
+    </article>
+    {bookSale && <ShopCard s={bookSale} />}
+  </section>
+
+  <section aria-labelledby="yearly">
+    <h2 id="yearly">Once a year</h2>
+    <p>These come back each year. We add each one to the calendar once its organizer posts the date.</p>
+    <ul>
+      <li><strong>WVU Blue and Gold Mine Sale</strong> (May): WVU's yearly sale on a Saturday in May, in the Milan Puskar Stadium East Concourse. In 2026 it was Saturday, May 16: $5 to get in from 7 to 9 a.m., then free from 9 a.m. to noon.
+        <SourceLine sources={src.goldMine} about="the Blue and Gold Mine Sale" /></li>
+      <li><strong>Mon River Trails Conservancy Handmade Market</strong> (April): on the fourth Saturday of April, on the rail-trail. In 2026 it was April 25.
+        <SourceLine sources={src.mrtc} about="the Handmade Market" /></li>
+      <li><strong>Moonlight Market</strong> (May to November): a handmade night market a few Saturdays a year at the pavilion at 400 Spruce Street.
+        <SourceLine sources={src.moonlight} about="the Moonlight Market" /></li>
+      <li><strong>Mountaineer Week Arts and Craft Fair</strong> (November): in mid November at the Mountainlair, during Mountaineer Week. In 2026 it is November 13 to 15.
+        <SourceLine sources={src.mweek} about="the Mountaineer Week fair" /></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="drive">
+    <h2 id="drive">Worth the drive</h2>
+    <ul>
+      <li><strong>Braddock's Flea Market</strong>, Farmington, PA, on Route 40 (use 3261 National Pike for directions): one of the largest flea markets in western Pennsylvania, one weekend a month, May through October. Bring cash. The 2026 season is over.
+        <SourceLine sources={src.braddock} about="Braddock's Flea Market" /></li>
+      <li><strong>Greene County Fairgrounds flea market</strong>, 107 Fairgrounds Road, Waynesburg, PA: every Tuesday and Saturday, free to get in on Saturday. Check with the county before you go.
+        <SourceLine sources={src.greene} about="the Greene County flea market" /></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="yard">
+    <h2 id="yard">Yard sales</h2>
+    <p>Most yard and garage sales here are posted online. We do not list single home sales. Large local yard sale groups on Facebook need an account to see, so we only list places we could open.</p>
+    {online.map((s) => <ShopCard s={s} />)}
+  </section>
+
+  <section aria-labelledby="sell">
+    <h2 id="sell">Selling at a market</h2>
+    <ul>
+      <li><strong>Moonlight Market:</strong> handmade items only. Makers apply online and pay a $25 application fee that is not refunded. The market lists permit and tax certificate rules on its apply page. <a href={src.moonlight[0].url}>How to apply</a>.</li>
+      <li><strong>Greene County Fairgrounds flea market:</strong> sellers pay $6 to set up on Tuesdays. <a href={src.greene[0].url}>County page</a>.</li>
+      <li><strong>Morgantown Farmers Market:</strong> see the <a href="https://morgantownfarmersmarket.org/vendors.html">vendors page</a>, or the market's own contact page.</li>
+      <li><strong>Craft shows:</strong> each calendar card above links to the show's own page, which says how vendors sign up.</li>
+    </ul>
+    <SourceLine sources={[...src.moonlight, ...src.greene]} about="selling at a market" />
+  </section>
+
+  <p>More in this section: <a href={`${base}/thrift-shops/`}>Thrift and resale shops</a> · <a href={`${base}/sell-or-donate/`}>Sell, donate or give away your stuff</a></p>
+  <p class="meta">Dates change. Each card says when we checked it. Something wrong or changed? Use the Report a problem link on that card, or <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">tell us about a sale we missed</a>.</p>
+</Base>
