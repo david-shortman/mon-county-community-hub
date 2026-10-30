@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs && node scripts/check-weight.mjs && node scripts/check-api.mjs && node scripts/test-ics.mjs",
+    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs && node scripts/check-weight.mjs && node scripts/check-api.mjs && node scripts/test-ics.mjs && node scripts/check-hsds.mjs",
     "check-pages": "node scripts/check-pages.mjs",
     "preview": "astro preview",
     "check-content": "node scripts/check-content.mjs && node scripts/check-needs.mjs",
@@ -15,7 +15,7 @@
     "check-a11y": "node scripts/check-a11y.mjs",
     "check-contrast": "node scripts/check-contrast.mjs",
     "check-weight": "node scripts/check-weight.mjs",
-    "check-api": "node scripts/check-api.mjs && node scripts/test-ics.mjs"
+    "check-api": "node scripts/check-api.mjs && node scripts/test-ics.mjs && node scripts/check-hsds.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
