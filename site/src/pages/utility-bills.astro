@@ -29,8 +29,6 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
     <li><strong>Morgantown Utility Board (water and sewer):</strong> <a href={telHref(mub.contact.phone)}>{mub.contact.phone}</a>, Monday to Friday, 8 a.m. to 4:30 p.m. (staffed around the clock for emergencies). Call to confirm. Email customer-service@mub.org, or visit 278 Greenbag Road. MUB's website does not currently describe payment plans or shutoff rules, so ask on the phone. If water is shut off, you have to call to get it turned back on. <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" /></li>
     <li><strong>Gas or bulk fuel (propane, oil):</strong> call your supplier. We did not research gas utilities for this page.</li>
   </ul>
-  <SourceLine sources={monPower.sources} org={monPower.org} about="Mon Power" />
-  <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" />
   <div class="actions">
     <a class="btn" href={telHref(monPower.contact.phone)}><Icon name="phone" /><span>Call Mon Power</span></a>
     <a class="btn" href={telHref(mub.contact.phone)}><Icon name="phone" /><span>Call MUB (water)</span></a>
