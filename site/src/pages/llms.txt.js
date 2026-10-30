@@ -25,6 +25,7 @@ export function GET({ site }) {
 - [Trash, recycling and drop-off](${u('/recycling/')}): pickup days, what goes in the curbside bin, and where to take hard items
 - [About](${u('/about/')}): how the project works and its rules
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
+- [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
 
 ## Notes for AI tools
 

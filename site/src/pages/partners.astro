@@ -1,0 +1,112 @@
+---
+// For groups and helpers: how to fix a listing, how to reuse the data, and
+// what the project will and won't do. A group that hears about the site will
+// look for this page, so it speaks for the project and waits for David (for:david).
+// Say only what the site does today. Planned work names its issue.
+import Base from '../layouts/Base.astro';
+import { loadDir } from '../lib/content.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const doc = (p) => `${repo}/blob/main/${p}`;
+const tree = (p) => `${repo}/tree/main/${p}`;
+const issue = (n) => `${repo}/issues/${n}`;
+const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+const calendarFeed = `${base}/calendar.ics`;
+// Counts come from the data files, so they stay true as listings are added.
+const orgCount = loadDir('orgs').length;
+const listingCount = loadDir('resources').length;
+---
+<Base title="For groups and helpers in Morgantown and Mon County" description="How to fix or update what this site says about your program, how to reuse its listings for free, and what the project will and won't do.">
+  <h1>For groups and helpers</h1>
+  <p class="lede">This page is for people who run a program, work at an office, or help others find services in Mon County. It covers how to fix what we say about you, how to reuse what we've gathered, and what we will and won't do.</p>
+
+  <ul class="jump">
+    <li><a href="#fix">Fix or update a listing</a></li>
+    <li><a href="#reuse">Reuse the information</a></li>
+    <li><a href="#promises">What we do and don't do</a></li>
+    <li><a href="#help">Ways to help, if you want to</a></li>
+    <li><a href="#who">Who is behind this</a></li>
+  </ul>
+
+  <h2 id="fix">Fix or update a listing</h2>
+  <p>You can ask us to fix anything we say about your group, add a program we missed, or take your listing down. Hours, phone numbers, who a program serves, and dates all count.</p>
+  <h3>How to tell us today</h3>
+  <p>Use the <a href={tellUs}>Tell us</a> link at the bottom of any page. It opens a short form with three boxes: the name of the program, a link, and what to fix.</p>
+  <div class="note">
+    <p><strong>Good to know before you use it:</strong> the form is on GitHub, a site where the project's work is stored. You need a free GitHub account to send it. What you write is public, and so is your GitHub user name. Please don't include anyone's private details.</p>
+  </div>
+  <p>We know most people don't have a GitHub account. Right now there is no other way to reach us, and no email address yet. These are planned, but not built:</p>
+  <ul>
+    <li>A way to report a problem with no account (<a href={issue(48)}>planned, issue 48</a>)</li>
+    <li>One inbox for reports from residents and groups, by form, email, or text (<a href={issue(197)}>planned, issue 197</a>)</li>
+    <li>A quick way for staff and helpers to report a change, put at the front of the line, with fixes shown on a public page (<a href={issue(158)}>planned, issue 158</a>)</li>
+  </ul>
+  <h3>What happens after you tell us</h3>
+  <ul>
+    <li><strong>We look for it on a public page.</strong> We only post a fact we can find on a public page, like your own website, and we link to that page. If the change isn't posted anywhere yet, tell us where it will be.</li>
+    <li><strong>The fix is public.</strong> Every change to the site is a public record on GitHub that says what changed and why. You can see <a href={`${repo}/pulls?q=is%3Apr`}>every change made so far</a>.</li>
+    <li><strong>Each listing shows its date.</strong> Every listing shows the date we last checked it, so you and the people you serve can see how fresh it is.</li>
+  </ul>
+
+  <h2 id="reuse">Reuse the information</h2>
+  <p>Everything we gather is free to reuse. You don't need to ask, sign up, or pay. Today that is {orgCount} groups, {listingCount} listings, and a calendar of local deadlines and dates, each with its source and the date we checked it.</p>
+  <h3>What you can use now</h3>
+  <ul>
+    <li><strong>The deadlines calendar as a feed.</strong> <a href={calendarFeed}>calendar.ics</a> works in Google Calendar, Apple Calendar, Outlook, and most other calendar apps. New dates show up on their own.</li>
+    <li><strong>Every listing as a text file.</strong> Each group, program, and date is its own small file in the <a href={tree('content')}>content folder</a> on GitHub. You can read them in a browser or download them all at once. The <a href={doc('content/README.md')}>guide to the files</a> explains each field.</li>
+    <li><strong>The code that runs the site.</strong> All of it is on <a href={repo}>GitHub</a>, so another town or group can copy the whole thing.</li>
+  </ul>
+  <h3>Coming later</h3>
+  <ul>
+    <li>The same data in a common data format (JSON) that apps can read from the web (<a href={issue(72)}>planned, issue 72</a>)</li>
+    <li>Listings in the Open Referral format, a shared standard that 211 systems and referral tools can read (<a href={issue(36)}>planned, issue 36</a> and <a href={issue(73)}>issue 73</a>)</li>
+  </ul>
+  <h3>The license</h3>
+  <ul>
+    <li><strong>Listings and other content:</strong> <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> (CC BY 4.0). Use it for anything, even in a paid product. Just credit "Mon County Community Hub" and link to the project. <a href={doc('content/LICENSE.md')}>Read the content license</a>.</li>
+    <li><strong>Code:</strong> the <a href={doc('LICENSE')}>MIT License</a>. Copy it, change it, and use it as you like.</li>
+  </ul>
+  <p>Each listing links to the group that runs the program. When you reuse a listing, please link to that group too, so people get the newest details from the source.</p>
+
+  <h2 id="promises">What we do and don't do</h2>
+  <p>These are the rules the project runs on. Each one links to where you can check it.</p>
+  <h3>About your group</h3>
+  <ul>
+    <li><strong>We only post what you've already made public.</strong> That means your public phone number, address, hours, and what your own pages say. We never post staff names or personal contacts. Check it on <a href={tree('content/orgs')}>any group's file</a>.</li>
+    <li><strong>We don't speak for you.</strong> A listing does not mean you work with us or approve of the site, and we will not say you do.</li>
+    <li><strong>We send people to you.</strong> Every listing links to your own page, so people deal with you, not us. See the <a href={`${base}/stay-tonight/`}>stay tonight page</a> for an example.</li>
+    <li><strong>The AI never contacts you on its own.</strong> It does not email, call, or message any person or group. Reaching out always waits for David, the person responsible for the project. It is written into <a href={doc('docs/CHARTER.md')}>the project's rules</a>.</li>
+  </ul>
+  <h3>About the people you serve</h3>
+  <ul>
+    <li><strong>No names, no sign-ups.</strong> The site has no forms that ask residents for their name or contact details, and takes no payments. So we can't refer anyone to you, and we can't tell you who looked at your listing.</li>
+    <li><strong>No tracking, no ads.</strong> The site does not sell anything, show ads, or ask for donations. The <a href={`${base}/about/`}>About page</a> says how it is run.</li>
+    <li><strong>We describe, we don't decide.</strong> We say who a program is for, as close to your own words as we can. We never tell someone they qualify. We point them to the office that decides.</li>
+  </ul>
+  <h3>In general</h3>
+  <ul>
+    <li><strong>We don't take sides.</strong> No candidates, parties, or favorite businesses. Voting information points to the West Virginia Secretary of State.</li>
+    <li><strong>We work in the open.</strong> The code, the data, the rules the AI follows, and a <a href={tree('docs/build-log')}>log of what was built and why</a> are all public. Planning notes and notes about specific people are kept private.</li>
+  </ul>
+
+  <h2 id="help">Ways to help, if you want to</h2>
+  <p>None of this is needed. The site works either way.</p>
+  <ul>
+    <li><strong>Check how we describe your program.</strong> Search for your group's name on the <a href={`${base}/search/`}>search page</a>, and <a href={tellUs}>tell us</a> if anything is off.</li>
+    <li><strong>Post your dates where we can read them.</strong> If your group shares dates as a calendar feed (often called iCal), we can pull them in every morning. Then they stay current on their own. Three local calendars already work this way, from the City of Morgantown, Monongalia County, and the Mountaineer Food Bank.</li>
+    <li><strong>Tell us what people ask you most.</strong> If there's a question you answer every day, or a list that's always out of date, that helps us choose what to build next.</li>
+  </ul>
+
+  <h2 id="who">Who is behind this</h2>
+  <p>AI does most of the research and writing. David McCoy, a local resident, guides it and reviews the work. It is a volunteer project with no funding.</p>
+  <ul>
+    <li><a href={`${base}/about/`}>About this project</a>: who runs it, how the AI works, and what it may never do on its own.</li>
+    <li><a href={`${base}/the-idea/`}>The idea behind this site</a>: what we're trying to do, with before and after examples you can check.</li>
+  </ul>
+
+  <style>
+    .jump { list-style: none; padding: 0; margin: 16px 0; }
+    .jump a { display: inline-flex; align-items: center; min-height: 44px; }
+    h3 { font-size: 1.1rem; margin: 1.4em 0 0.4em; }
+  </style>
+</Base>
