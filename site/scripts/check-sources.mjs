@@ -367,6 +367,8 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
               out.host = s.host;
               out.fingerprint = fingerprint(html);
               out.phones = [...phonesOnPage(html)];
+              const elsewhere = otherPlace(html);
+              if (elsewhere) out.elsewhere = elsewhere;
             }
           }
         }
@@ -393,6 +395,16 @@ export function missingPhones(phoneChecks, results) {
     if (!read.some((r) => r.phones.includes(p.key))) out.push(p);
   }
   return out;
+}
+
+// A source about the wrong place (#494): the page names Morgantown in another
+// state (Kentucky, Indiana and others have one) and never says West Virginia.
+// A warning to look at, not proof.
+const OTHER_MORGANTOWN = /\bMorgantown,?\s+(KY|Ky\.|Kentucky|IN|Ind\.|Indiana|NC|North Carolina|GA|Georgia|MS|Mississippi|TN|Tennessee|PA|Pennsylvania)\b/;
+export function otherPlace(html) {
+  const text = html.replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+  if (/\b(WV|W\. ?Va\.|West Virginia)\b/.test(text)) return null;
+  return text.match(OTHER_MORGANTOWN)?.[0] ?? null;
 }
 
 // ---------- report ----------
@@ -428,6 +440,7 @@ export function buildReport(registry, results, prevState, { now = new Date() } =
     broken: broken.map((s) => ({ ...s, ...results.get(s.url) })),
     moved: moved.map((s) => ({ ...s, ...results.get(s.url) })),
     phones_missing: phones,
+    other_place: registry.sources.filter((s) => results.get(s.url)?.elsewhere).map((s) => ({ ...s, ...results.get(s.url) })),
     unverified: rows('unverified').map((s) => ({ ...s, ...results.get(s.url) })),
     redirected: rows('redirected').map((s) => ({ ...s, ...results.get(s.url) })),
     robots: rows('robots'),
@@ -459,6 +472,7 @@ export function reportMd(rep, { cap = 40 } = {}) {
   section('Broken', rep.broken, (r) => `${r.url} (${why(r)}) on ${where(r)}`);
   section('Moved to another domain', rep.moved, (r) => `${r.url} now goes to ${r.final}. Check who owns it now. On ${where(r)}`);
   section('Phone number not found on its source', rep.phones_missing, (p) => `${p.name}: ${p.phone} (${p.file}). Not on ${p.urls.join(', ')}`);
+  section('May be about another place (check it is Morgantown, WV)', rep.other_place ?? [], (r) => `${r.url} says "${r.elsewhere}" and never says West Virginia. On ${where(r)}`);
   section('Could not check (often bot blocking or a blip)', rep.unverified, (r) => `${r.url} (${why(r)}) on ${where(r)}`);
   section('Changed since the last run (worth a re-check)', rep.changed, (r) => `${r.url} on ${where(r)}`);
   section('Same site, new address (update the link)', rep.redirected, (r) => `${r.url} now ${r.final}`);

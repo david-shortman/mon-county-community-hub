@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs && node scripts/check-weight.mjs && node scripts/check-api.mjs && node scripts/test-ics.mjs && node scripts/check-jsonld.mjs",
+    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs && node scripts/check-weight.mjs && node scripts/check-api.mjs && node scripts/test-ics.mjs && node scripts/check-jsonld.mjs && node ../apps/mcp/test/smoke.mjs dist/api/v1",
     "check-pages": "node scripts/check-pages.mjs",
     "preview": "astro preview",
     "check-content": "node scripts/check-content.mjs && node scripts/check-needs.mjs",
