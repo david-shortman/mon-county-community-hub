@@ -1,0 +1,63 @@
+---
+// What's missing, and how to start one (#431, part of #422). What the county
+// lacks in secondhand and sharing, what each would take, and free guides.
+// We suggest; we never organize, and we contact no one. Each gap says how we
+// looked, since "we found none" is not proof there is none.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+export const page = { door: "community", topic: "community", label: "Start a swap, market or reuse store", summary: "What Mon County is missing for secondhand and sharing, what each would take, and free how-to guides" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-30';
+const src = {
+  restore: [{ url: 'https://www.wdtv.com/2023/10/26/without-warning-morgantowns-restore-shuts-down-good/', checked }, { url: 'https://www.habitat.org/restores', checked, name: 'Habitat for Humanity' }, { url: 'https://www.habitat.org/local/restore?zip=26505', checked, name: 'Habitat for Humanity' }],
+  buyNothing: [{ url: 'https://buynothingproject.org/start-a-group', checked, name: 'Buy Nothing Project' }],
+  flea: [{ url: 'https://pabucketlist.com/?p=26335', checked }, { url: 'https://greenecountypa.gov/fairgrounds', checked, name: 'Greene County, PA' }],
+  moonlight: [{ url: 'https://www.wvmoonlightmarket.com/apply', checked, name: 'Moonlight Market' }],
+  repair: [{ url: 'https://www.repaircafe.org/en/join/start-your-own/', checked, name: 'Repair Café International' }, { url: 'https://morgantownmag.com/mend-and-munch/', checked }],
+  seeds: [{ url: 'https://www.monongaliacounty.gov/departments/mon_county_center/community_seed_library.php', checked, name: 'Monongalia County' }],
+};
+---
+<Base title="Start a swap, market or reuse store in Mon County, WV" description="What Morgantown and Monongalia County are missing for secondhand shopping and sharing: a flea market, a building materials reuse store, a Buy Nothing group, clothing swaps. What each would take, and free how-to guides.">
+  <h1>Start a swap, market or reuse store</h1>
+  <p class="lede">Mon County has many thrift shops, sales and free programs. A few things that other places have are missing here. If you or your group want to start one, here is what we found, what it would take, and free guides. We share ideas; we do not organize them.</p>
+  <p>Already here: <a href={`${base}/thrift-shops/`}>thrift and resale shops</a>, <a href={`${base}/markets/`}>markets and sales</a> and <a href={`${base}/sell-or-donate/`}>places that take donations</a>.</p>
+
+  <section aria-labelledby="flea">
+    <h2 id="flea">A regular flea market or swap meet</h2>
+    <p><strong>What we found:</strong> no weekly or monthly flea market in the county. The nearest are Braddock's Flea Market in Farmington, PA (one weekend a month, May to October) and the Greene County Fairgrounds flea market in Waynesburg, PA (Tuesdays and Saturdays).</p>
+    <p><strong>What it would take:</strong> a big open space with parking, a group to run it, and a way for sellers to sign up and pay. The Greene County market charges sellers $6 to set up on Tuesdays. Local markets that already run outdoor events, like the Moonlight Market at the pavilion at 400 Spruce Street, show how a city space can host vendors. A <a href={`${base}/community-centers/`}>community center or hall</a> could host a smaller indoor swap.</p>
+    <SourceLine sources={[...src.flea, ...src.moonlight]} about="flea markets" />
+  </section>
+
+  <section aria-labelledby="reuse">
+    <h2 id="reuse">A building materials reuse store</h2>
+    <p><strong>What we found:</strong> the Mon Valley Habitat for Humanity ReStore closed in October 2023, and nothing has replaced it. We found no other place in the county that takes used building materials.</p>
+    <p><strong>What it would take:</strong> Habitat ReStores are run by local Habitat for Humanity groups. They take donated furniture, appliances and building materials, sell them to the public at lower prices, and use the money to build and repair homes. Habitat's own store finder lists no ReStore in Mon County.</p>
+    <SourceLine sources={src.restore} about="the ReStore" />
+  </section>
+
+  <section aria-labelledby="buy-nothing">
+    <h2 id="buy-nothing">A Buy Nothing group</h2>
+    <p><strong>What we found:</strong> no Buy Nothing group for Morgantown or Mon County. Its group list needs a sign-in, so we can't be sure. Morgantown Freecycle is a free giving group that already exists (see <a href={`${base}/sell-or-donate/`}>Sell, donate or give away</a>).</p>
+    <p><strong>What it would take:</strong> the Buy Nothing Project says a group takes at least a few hours a week to run. Each group must register with the project, and the license fee is $10, not refunded. Groups can be started in the project's own app or on Facebook. It also says about half of Facebook groups that start end up closed for lack of activity.</p>
+    <SourceLine sources={src.buyNothing} about="Buy Nothing groups" />
+  </section>
+
+  <section aria-labelledby="swaps">
+    <h2 id="swaps">Clothing, toy and kids' gear swaps</h2>
+    <p><strong>What we found:</strong> no current clothing, toy or kids' gear swap that happens on a schedule.</p>
+    <p><strong>What it would take:</strong> a room for a few hours, tables, volunteers to sort, and a plan for what is left over (for example, giving it to a store on the <a href={`${base}/sell-or-donate/#clothes`}>donate list</a>). Many <a href={`${base}/community-centers/`}>community centers and halls</a> rent rooms.</p>
+  </section>
+
+  <section aria-labelledby="models">
+    <h2 id="models">Models already working here</h2>
+    <ul>
+      <li><strong>Repair Cafe:</strong> the Scotts Run Resonance Project has held free repair events about every three months since 2024. Repair Café International offers a digital starter kit, with a manual, logo and poster templates, for a voluntary one-time fee of 49 euros. A Repair Café must be run by volunteers, not for profit, and use the name Repair Café.
+        <SourceLine sources={src.repair} about="repair cafes" /></li>
+      <li><strong>Seed sharing:</strong> the county lists a Community Seed Library at the Mon County Center.
+        <SourceLine sources={src.seeds} about="the seed library" /></li>
+    </ul>
+  </section>
+
+  <p class="meta">Know of one of these that already exists? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a> and we will list it.</p>
+</Base>
