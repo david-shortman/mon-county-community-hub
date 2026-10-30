@@ -4,6 +4,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+export const page = { door: "care", topic: "health", label: "Turning 65 or on Medicare", summary: "When to sign up, what Medicare pays for in full, and free help with costs" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const ship = loadDir('resources').find((e) => e.slug === 'wv-ship-medicare-counseling');
 const MG = 'https://www.medicare.gov';
