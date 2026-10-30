@@ -37,6 +37,8 @@ export function GET({ site }) {
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
+- [Terms](${u('/terms/')}): what the site is, that information can change, and how to ask for a fix or removal
+- [Privacy](${u('/privacy/')}): what the site collects (no analytics), and how the public Tell us form works
 
 ## Notes for AI tools
 
