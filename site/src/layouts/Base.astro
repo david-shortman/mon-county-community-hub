@@ -299,10 +299,13 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       }
       /* Crisis strip and quick exit (#174), on safety pages only */
       .crisis-strip { position: sticky; top: 0; z-index: 15; background: var(--accent-bg); border-bottom: 2px solid var(--brick); }
-      .crisis-strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-block: 6px; }
-      .crisis-strip p { flex: 1 1 7rem; min-width: 0; margin: 0; font-size: 1rem; line-height: 1.5; font-weight: 600; }
+      /* Compact (#420): one short row on a phone, numbers left, Quick exit right. */
+      .crisis-strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding-block: 2px; }
+      .crisis-strip p { flex: 1 1 9rem; min-width: 0; margin: 0; font-size: 0.95rem; line-height: 1.35; font-weight: 600; }
       .crisis-strip p a { font-weight: 800; padding: 6px 2px; }
-      .quick-exit { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
+      .qe-group { display: inline-flex; align-items: center; gap: 2px 8px; flex-wrap: wrap; justify-content: flex-end; }
+      .qe-what { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.85rem; }
+      .quick-exit { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
       .quick-exit:hover { text-decoration: underline; }
       .crisis-line { margin: 0 0 12px; padding: 6px 12px; border-left: 4px solid var(--brick); background: var(--accent-bg); font-weight: 600; }
       .crisis-line a { font-weight: 800; padding: 6px 2px; }
