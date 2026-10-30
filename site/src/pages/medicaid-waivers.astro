@@ -1,0 +1,67 @@
+---
+// Plain guide to West Virginia's Medicaid home care waivers (#227, part of #210).
+// Every fact is from the Bureau for Medical Services and each waiver's own
+// site, checked 2026-10-30. High-stakes topic: reviewed by David (#97).
+import Base from '../layouts/Base.astro';
+export const page = { door: "family", topic: "disability", label: "Medicaid waivers", summary: "Getting care at home instead of a nursing home or facility, through Medicaid" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const BMS = 'https://bms.wv.gov/photo-call-out/home-and-community-based-services-hcbswaivers';
+const waivers = [
+  {
+    name: 'Aged and Disabled Waiver (ADW)',
+    url: 'https://adwprogram.wv.gov',
+    who: 'Adults 18 and older who need the level of care a nursing home gives, based on an assessment by a nurse. It pays for care and help at home instead.',
+    start: ['Ask your doctor, physician assistant or nurse to fill out a Medical Necessity Evaluation Request (MNER) form.', 'They send it to Acentra Health, the company that reviews waiver requests for the state.', 'You must also qualify financially. Your county Department of Human Services office or Social Security decides this.'],
+    callWho: 'Questions about applying: West Virginia Bureau of Senior Services', phone: '1-866-767-1575',
+    tel: '18667671575',
+    wait: 'If no spot is open, you go on a wait list. The program says the whole process takes 56 days on average, and last year the average wait on the list was 44 days.',
+  },
+  {
+    name: 'Intellectual and/or Developmental Disabilities Waiver (IDDW)',
+    url: 'https://iddwprogram.wv.gov',
+    who: 'Children and adults, age 3 and up, with an intellectual disability or a similar condition that became severe before age 22. They must have trouble in at least three of six areas: self-care, language, learning, moving around, making decisions, and living alone.',
+    start: ['Fill out the application form on the program site.', 'Send it to Acentra Health by mail, fax or email (WVIDDWaiver@acentra.com).', 'Acentra sends you a list of psychologists. Pick one and send back your choice within 14 days, or the application is closed.', 'You must also qualify financially through your county office.'],
+    callWho: 'Acentra Health', phone: '1-866-385-8920',
+    tel: '18663858920',
+    wait: 'If no spot is open, you go on a wait list, which can add time before services start.',
+  },
+  {
+    name: 'Traumatic Brain Injury Waiver (TBIW)',
+    url: 'https://tbiwprogram.wv.gov',
+    who: 'People age 3 and up with a traumatic brain injury who want support to live at home instead of a nursing facility.',
+    start: ['Get a Medical Necessity Evaluation Request (MNER) form from Acentra Health.', 'Your doctor, physician assistant, neuropsychologist or nurse practitioner fills it out and sends it in.', 'Acentra sends you a letter. Then you visit your county Department of Human Services office to see if you qualify financially.'],
+    callWho: 'Acentra Health', phone: '1-866-385-8920',
+    tel: '18663858920',
+    wait: 'If no spot is open, you go on a wait list, which can add time before services start.',
+  },
+  {
+    name: 'Children with Serious Emotional Disorder Waiver (CSEDW)',
+    url: 'https://csedwprogram.wv.gov',
+    who: 'Children and young people ages 3 to 21 with serious mental, behavioral or emotional health needs, so they can get help while living at home instead of in a facility or group home.',
+    start: ['Call the 24-hour West Virginia children\'s crisis and referral line, 844-HELP4WV (844-435-7498).', 'Then send the application form to Acentra Health by mail, fax or email.'],
+    callWho: 'Children\'s crisis and referral line, any hour', phone: '844-HELP4WV (844-435-7498)',
+    tel: '18444357498',
+    wait: 'If no funded spot is open, the child goes on a wait list. While waiting, families can still use the 24-hour HELP4WV line.',
+  },
+];
+---
+<Base title="Medicaid waivers for Mon County, WV: care at home instead of a nursing home" description="A plain guide to West Virginia's four Medicaid home care waivers: who each is for, how to start, who to call, and what to expect about wait lists. From the state's own pages.">
+  <h1>Getting care at home through Medicaid</h1>
+  <p class="lede">A Medicaid waiver lets Medicaid pay for care and help at home for people who would otherwise need a nursing home, hospital or other facility. West Virginia has four of them. Each has its own rules, and you must qualify both medically and financially.</p>
+
+  <p>Not sure where to start? LiveAbility in Morgantown gives free help finding information and resources for people with disabilities; see <a href={`${base}/disability-and-aging/`}>the disability and aging page</a> for how to reach them. You can only be on one waiver at a time, but you can apply for one while waiting on another (this rule is from the <a href="https://iddwprogram.wv.gov">IDDW program site</a>).</p>
+
+  {waivers.map((w) => (
+    <section class="card">
+      <h2>{w.name}</h2>
+      <p><strong>Who it is for:</strong> {w.who}</p>
+      <p><strong>How to start:</strong></p>
+      <ol>{w.start.map((step) => <li>{step}</li>)}</ol>
+      <p><strong>Who to call:</strong> {w.callWho}, <a href={`tel:${w.tel}`}>{w.phone}</a>.</p>
+      <p><strong>Waiting:</strong> {w.wait}</p>
+      <p class="meta">Source: <a href={w.url}>{w.name.replace(/ \(.*/, '')} program site</a>, checked October 30, 2026.</p>
+    </section>
+  ))}
+
+  <p class="meta">What a waiver is: <a href={BMS}>West Virginia Bureau for Medical Services</a>, checked October 30, 2026. We describe these programs; the state decides who qualifies. Rules can change, so check the program site or call before you apply. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

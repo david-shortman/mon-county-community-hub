@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs",
+    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs && node scripts/check-weight.mjs",
     "check-pages": "node scripts/check-pages.mjs",
     "preview": "astro preview",
     "check-content": "node scripts/check-content.mjs",
     "update-feeds": "node scripts/update-feeds.mjs",
     "health": "node scripts/health.mjs",
-    "check-contrast": "node scripts/check-contrast.mjs"
+    "check-contrast": "node scripts/check-contrast.mjs",
+    "check-weight": "node scripts/check-weight.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
