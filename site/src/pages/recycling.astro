@@ -2,11 +2,26 @@
 import Base from '../layouts/Base.astro';
 import EventCard from '../components/EventCard.astro';
 import Actions from '../components/Actions.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { loadCalendarWithFeeds, upcoming } from '../lib/content.mjs';
 export const page = { door: "living-here", topic: "recycling", label: "Trash, recycling and drop-off", summary: "Pickup days, the curbside bin, and where to take hard items" };
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics || []).includes('recycling'));
 const swa = 'https://www.monongaliacountyswa.com';
 const swaPhone = '304-292-3801';
+// Each item names its own source and checked date (#118). The county pages
+// and the checklist were re-read on October 30, 2026; the 2019 guide was last
+// read on October 28.
+const today = '2026-10-30';
+const src = {
+  recycling: [{ url: `${swa}/recycling`, checked: today }],
+  center: [{ url: 'https://moncountyrecycling.com', checked: today, name: 'Monongalia County Recycling Center' }, { url: `${swa}/recycling`, checked: today }],
+  disposal: [{ url: `${swa}/disposal`, checked: today }],
+  tires: [{ url: `${swa}/tires`, checked: today }],
+  paint: [{ url: `${swa}/latex-paint`, checked: today }],
+  events: [{ url: `${swa}/events-1`, checked: today }],
+  checklist: [{ url: 'https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-Trash-Day-Checklist.pdf', checked: today, name: 'Republic Services' }],
+  guide2019: [{ url: 'https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-WV-service-guide-2019.pdf', checked: '2026-10-28', name: 'Republic Services' }],
+};
 ---
 <Base title="Trash, recycling and drop-off in Morgantown, WV" description="Pickup days, what goes in the curbside bin, and where to take electronics, paint, tires and other hard items in Morgantown and Monongalia County.">
   <h1>Trash, recycling and drop-off</h1>
@@ -14,29 +29,40 @@ const swaPhone = '304-292-3801';
 
   <h2 id="pickup">Find your pickup day</h2>
   <p>We could not find a public map or street list of pickup days. Inside Morgantown city limits, Republic Services is the hauler. Call the Monongalia County Solid Waste Authority at <a href="tel:3042923801">304-292-3801</a> and ask who serves your address and which day they come.</p>
-  <p>A 2023 city checklist says to put trash and recycling out the same day, by 6 a.m. Check that with the hauler, since it may have changed.</p>
+  <SourceLine sources={src.recycling} about="pickup days" />
+  <p>Republic Services' <a href={src.checklist[0].url}>Trash Day Checklist for Morgantown</a> says to put carts out by 6 a.m. on pickup day, with trash and recycling out the same day, and to bring carts back within 24 hours. Republic's number on the checklist is <a href="tel:3043668900">304-366-8900</a>.</p>
+  <SourceLine sources={src.checklist} about="the trash day checklist" />
 
   <h2>What goes in the curbside bin</h2>
   <p>We could not find a current list from the city or hauler. The most recent clear guide we found is a <a href="https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-WV-service-guide-2019.pdf">2019 Republic Services guide for Morgantown</a>. It says glass food and beverage containers are accepted, and drinking glasses, ceramics and Pyrex are not. That guide is old, so confirm glass with the Solid Waste Authority at <a href="tel:3042923801">304-292-3801</a> before you rely on it.</p>
+  <SourceLine sources={src.guide2019} about="the curbside bin" />
 
   <h2 id="drop-off">Recycling drop-off sites</h2>
   <ul>
-    <li><strong>Single-stream recycling drop-off center</strong> (county, free): 34 Olin St., Industrial Park. Monday to Friday, 7:00 a.m. to 3:30 p.m. It moved here in August 2025, so check <a href="https://moncountyrecycling.com">moncountyrecycling.com</a> for current hours.
-      <Actions place="34 Olin St, Industrial Park, Monongalia County, WV" /></li>
-    <li><strong>Western Mon County Recycling Site</strong> (free, sorted by material): Arnettsville Community Association, 4120 Fairmont Rd., Morgantown. The county lists it as open 24 hours a day, 7 days a week.
-      <Actions place="Arnettsville Community Association, 4120 Fairmont Rd, Morgantown, WV" /></li>
-    <li><strong>Mountaineer Transfer Station</strong> (run by Republic Services, fee for recycling): call <a href="tel:3043687735">304-368-7735</a>. The county lists hours as Monday to Friday 5:30 a.m. to 3:00 p.m. and Saturday 7:00 to 11:00 a.m. It does not take tires.
-      <Actions phone="304-368-7735" phoneLabel="Mountaineer Transfer Station" /></li>
-    <li><strong>City residents:</strong> the county lists a Republic Services recycling event every second Saturday. Confirm the place and time with the hauler.</li>
+    <li><strong>Single-stream recycling drop-off center</strong> (county, free): 34 Olin St., Industrial Park. It moved here in August 2025. The center's own site lists Monday to Friday, 7 a.m. to 3:25 p.m., closed weekends (the county's page says 3:30 p.m.). It posts closings at <a href="https://moncountyrecycling.com">moncountyrecycling.com</a>. Plastic bags are no longer accepted, so bring recyclables in a box or a reusable container.
+      <Actions place="34 Olin St, Industrial Park, Monongalia County, WV" />
+      <SourceLine sources={src.center} about="the drop-off center" /></li>
+    <li><strong>Western Mon County Recycling Site</strong> (free, sorted by material): Arnettsville Community Association, 4120 Fairmont Rd., Morgantown. Run by the Marion County Solid Waste Authority. The county lists it as open 24 hours a day, 7 days a week.
+      <Actions place="Arnettsville Community Association, 4120 Fairmont Rd, Morgantown, WV" />
+      <SourceLine sources={src.recycling} about="the Western Mon County site" /></li>
+    <li><strong>Mountaineer Transfer Station</strong> (run by Republic Services, fee for recycling): 2130 Rail Street, Industrial Park, Westover. Call <a href="tel:3043687735">304-368-7735</a>. The county lists hours as Monday to Friday 5:30 a.m. to 3 p.m. and Saturday 7 a.m. to 11 a.m., closed on major holidays. It does not take tires. On the first Thursday of each month it takes bagged household trash for free (only what fits in your trash bag at home).
+      <Actions phone="304-368-7735" phoneLabel="Mountaineer Transfer Station" place="2130 Rail Street, Westover, WV" />
+      <SourceLine sources={src.disposal} about="the Mountaineer Transfer Station" /></li>
+    <li><strong>City residents:</strong> the county lists a Republic Services recycling event every second Saturday. Confirm the place and time with the hauler.
+      <SourceLine sources={src.recycling} about="the city recycling event" /></li>
     <li><strong>Paper shredding:</strong> PACE Enterprises at Mylan Park, <a href="tel:3043760036">304-376-0036</a>.
-      <Actions phone="304-376-0036" phoneLabel="PACE Enterprises" /></li>
+      <Actions phone="304-376-0036" phoneLabel="PACE Enterprises" />
+      <SourceLine sources={src.recycling} about="paper shredding" /></li>
   </ul>
 
   <h2 id="hard-items">Hard items</h2>
   <ul>
-    <li><strong>Electronics:</strong> the county holds a free e-cycle event for county residents, with another planned for spring 2027. West Virginia also has a free take-back list for certain devices, linked from the <a href={`${swa}/recycling`}>county recycling page</a>.</li>
-    <li><strong>Tires:</strong> a state tire collection runs monthly in Morgantown, except December, January and February. The county's <a href={`${swa}/tires`}>tire page</a> has the yearly schedule.</li>
-    <li><strong>Latex paint:</strong> the county plans a collection in 2027 but has no date yet. For oil-based paint and other household chemicals, the county points to the Morgantown Utility Board's yearly household hazardous waste day.</li>
+    <li><strong>Electronics:</strong> the county holds free electronics recycling events in the spring and fall (see Coming up below). West Virginia also has a free take-back list for certain devices, linked from the <a href={`${swa}/recycling`}>county recycling page</a>.
+      <SourceLine sources={[...src.events, ...src.recycling]} about="electronics" /></li>
+    <li><strong>Tires:</strong> a state tire collection runs monthly in Morgantown, except December, January and February. The county's <a href={`${swa}/tires`}>tire page</a> has the yearly schedule.
+      <SourceLine sources={src.tires} about="tires" /></li>
+    <li><strong>Latex paint:</strong> the county plans a collection in 2027 but has no date yet. For oil-based paint and other household chemicals, the county points to the Morgantown Utility Board's yearly household hazardous waste day.
+      <SourceLine sources={src.paint} about="paint" /></li>
     <li><strong>Batteries:</strong> we could not find a local drop-off program for batteries. Ask the Solid Waste Authority at <a href="tel:3042923801">304-292-3801</a>.</li>
   </ul>
 
@@ -48,5 +74,6 @@ const swaPhone = '304-292-3801';
     <p><strong>Who to ask:</strong> Monongalia County Solid Waste Authority, 113 Mathieson Street, Suite 100, Morgantown. Phone <a href="tel:3042923801">304-292-3801</a>, email moncountyswa@gmail.com.</p>
     <Actions phone={swaPhone} phoneLabel="the Solid Waste Authority" place="113 Mathieson Street, Suite 100, Morgantown, WV" />
   </div>
-  <p class="meta">Sources: <a href={swa}>monongaliacountyswa.com</a> (recycling, disposal, tires and latex paint pages), checked October 28, 2026, and the 2019 Republic Services guide linked above. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <SourceLine sources={src.disposal} about="the Solid Waste Authority's contact details" />
+  <p class="meta">Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
