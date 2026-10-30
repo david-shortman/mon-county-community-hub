@@ -1,0 +1,13 @@
+name: West Virginia Small Business Development Center (WV SBDC)
+slug: wv-small-business-development-center
+kind: government
+website: https://wvsbdc.com/
+phone: "888-982-7232"
+summary: A state program, funded in part by the U.S. Small Business Administration, that gives free one-on-one business coaching and training to people starting or growing a business in West Virginia.
+topics: [work]
+area: statewide
+sources:
+  - url: https://wvsbdc.com/
+    checked: 2026-10-30
+  - url: https://wvsbdc.com/contact-us/
+    checked: 2026-10-30

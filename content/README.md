@@ -37,6 +37,11 @@ contact:
   url_label: Book online  # optional; a short button label that says what the link is for (#335). Default "Website"
   place: 200 Main St, Morgantown, WV  # optional; adds a Directions button on door steps. Only a place the source publishes
 cost: free
+what_to_bring:          # optional (#159); what to have ready, close to the source's words
+  - Photo ID
+what_happens: What the first call or visit is like, in one or two sentences from the source.  # optional
+best_time: Mornings are less busy.  # optional; only when the source says so
+if_you_want_help: [wv-211]  # optional; resource slugs of people who can help you through it, each with its own source
 sources:
   - url: https://example.org/tax
     checked: 2026-10-27
@@ -382,6 +387,10 @@ These come from the [trust and AI playbook](../docs/playbook/trust-and-ai.md) an
 - **Use our own topic labels.** Use the `topics` tags in `doors.yaml`. Never copy 211 taxonomy codes, terms or definitions; they are copyrighted. ([Use open topic labels](../docs/playbook/open-data.md#use-open-topic-labels-not-the-211-taxonomy))
 - **`checked` is a Morgantown date.** Write `checked` as the date in Morgantown (America/New_York) when you read the source, not the UTC date. Only change `checked` after you actually re-read the source; moving facts between files or rewording them does not count.
 - **Name the source as it is.** A source page is credited to an organization on the site only when it is on that organization's own website. A news article or a directory is shown by its address, and a page that names it says what it is (for example "a Morgantown Magazine article from January 14, 2026").
+- **Phone numbers come from the group or the government (#494).** A phone or text number must be on the group's own website or an official government page. Never take one from a directory, a news story, a search result or an AI answer: scammers plant fake support numbers there. If only a directory has the number, leave it out.
+- **Check it is the right Morgantown (#494).** Make sure each source is about Morgantown or Monongalia County, West Virginia, not Morgantown, Kentucky or Indiana, and not a neighboring county. `npm run check-content` warns when an address leaves out WV or any text names Morgantown in another state, and the daily source check warns when a source page does.
+- **Crisis, shelter and food-today details are re-checked every week (#494).** Every record named on the Where to stay tonight page, the food pages, the crisis strip and the Help now parts, the orgs behind them, and any record that names 988 or a crisis line. The Health check lists the ones last checked over 7 days ago (`content-recheck-weekly`). Re-check each phone number and hours on the group's own page.
+- **Keep "Call to confirm" on anything that changes fast.** Hours, open status and bed or food availability always say to call first. The place cards do this on their own; keep it in any sentence you write about hours.
 
 ### What `npm run check-content` checks in orgs and resources
 

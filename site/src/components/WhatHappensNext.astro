@@ -1,0 +1,33 @@
+---
+// What happens next (#159): what to bring, what the first call or visit is
+// like, the best time to reach them, and who can help you through it. Shows
+// only the fields a record has; every field comes from the record's own
+// sources, and a helper named in if_you_want_help brings its own record.
+import { resource, telHref } from '../lib/content.mjs';
+const { r } = Astro.props;
+const helpers = (r.if_you_want_help ?? []).map((s) => resource(s)).filter((h) => !h.hidden);
+const has = r.what_to_bring?.length || r.what_happens || r.best_time || helpers.length;
+---
+{has && (
+  <div class="next-box">
+    <p class="next-h"><strong>What happens next</strong></p>
+    {r.what_to_bring?.length > 0 && (
+      <>
+        <p>What to have ready:</p>
+        <ul>{r.what_to_bring.map((b) => <li>{b}</li>)}</ul>
+      </>
+    )}
+    {r.what_happens && <p>{r.what_happens}</p>}
+    {r.best_time && <p><strong>Best time:</strong> {r.best_time}</p>}
+    {helpers.length > 0 && (
+      <p>Want help with this? {helpers.map((h, i) => <>{i > 0 && ' Or '}{h.title}{h.contact?.phone && <>: <a href={telHref(h.contact.phone)}>{h.contact.phone}</a></>}.</>)}</p>
+    )}
+  </div>
+)}
+
+<style>
+  .next-box { margin: 10px 0; padding: 8px 12px; border-left: 4px solid var(--ridge); background: var(--bg); border-radius: 4px; }
+  .next-box p { margin: 6px 0; }
+  .next-box ul { margin: 4px 0 6px; padding-left: 1.2rem; }
+  @media print { .next-box { break-inside: avoid; } }
+</style>
