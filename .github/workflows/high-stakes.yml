@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
+        # bash with pipefail, so a crash in the script fails this check
+        # instead of passing with no label.
+        shell: bash
         working-directory: site
     steps:
       - uses: actions/checkout@v4
