@@ -1,0 +1,81 @@
+# The Get through this month door page, /money/ (#251). It took over the
+# old Money help page, whose sections now sit below the steps with the same
+# anchors (#bills, #rent, #payday, #taxes), so old links keep working.
+# Shape and rules: see doors/care.yaml and site/src/components/DoorPage.astro.
+# Within each group, steps show in the order listed here.
+door: this-month
+lede: Money is tight? Pick what's going on, and we put the steps in order. Real help never charges a fee to apply.
+cant_wait:
+  text: Shutoff notice, or no heat right now? Call the number on your bill today and ask for a payment plan. Then call 211.
+  resource: wv-211
+steps:
+  mon-power:
+    when: today
+    resource: mon-power-payment-help
+    text: Electric bill from Mon Power? Call and ask for a payment arrangement. Keep any shutoff notice.
+  mub:
+    when: today
+    resource: mub-customer-service
+    text: Water or sewer bill from MUB? Call and ask what they can do.
+  legal-aid:
+    when: today
+    resource: legal-aid-wv-eviction-help
+    text: Got an eviction notice or a court date? Call Legal Aid of West Virginia.
+  check-lender:
+    when: today
+    resource: wv-dfi-check-a-lender
+    text: Before you borrow from anyone, call the West Virginia Division of Financial Institutions and ask if the lender is allowed to lend here.
+  call-211:
+    when: today
+    resource: wv-211
+    text: Call 211 and say what is going on. They can point you to local help.
+  emergency-assistance:
+    when: week
+    resource: wv-emergency-assistance-utility
+    text: Have a shutoff notice? Ask the state about Emergency Assistance.
+  dollar-energy:
+    when: week
+    resource: dollar-energy-fund-mon-power
+    text: Mon Power customers can ask about the Dollar Energy Fund.
+  snap:
+    when: week
+    resource: apply-for-snap-wv-path
+    text: Apply for SNAP (food stamps) on WV PATH to help buy groceries each month.
+  lieap:
+    when: opens
+    resource: lieap-heating-help
+    text: Apply for LIEAP heating help from the state when this season's applications open.
+  taxes:
+    when: opens
+    resource: christian-help-free-tax-prep
+    text: Call Christian Help to book free tax preparation, and ask for this season's dates.
+situations:
+  - id: utility
+    label: I can't pay a heat, water or power bill
+    page: /utility-bills/
+    steps: [mon-power, mub, call-211, emergency-assistance, dollar-energy, lieap]
+  - id: bill
+    label: I can't pay a different bill
+    page: /money/#bills
+    steps: [call-211]
+  - id: food
+    label: I'm short on food
+    page: /help/food/
+    steps: [call-211, snap]
+  - id: rent
+    label: I'm behind on rent or got an eviction notice
+    page: /money/#rent
+    steps: [legal-aid, call-211]
+  - id: cash
+    label: I need cash fast, or I'm thinking about a payday loan
+    page: /money/#payday
+    steps: [check-lender, call-211]
+  - id: taxes
+    label: I want free help filing taxes
+    page: /money/#taxes
+    steps: [taxes]
+also:
+  - text: A place to stay tonight
+    href: /stay-tonight/
+  - text: Shots, a dentist or Medicare
+    href: /care/

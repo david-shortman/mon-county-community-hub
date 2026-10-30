@@ -1,0 +1,10 @@
+name: Mon Power
+slug: mon-power
+kind: business
+website: https://www.firstenergycorp.com/mon_power.html
+summary: An electric company, part of FirstEnergy. Its assistance page lists payment arrangements and bill help programs for customers.
+topics: [money]
+area: monongalia-county
+sources:
+  - url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
+    checked: 2026-10-28

@@ -1,0 +1,11 @@
+name: Christian Help
+slug: christian-help
+kind: nonprofit
+summary: A nonprofit in downtown Morgantown, at 219 Walnut Street, that has offered free tax preparation and help with bills.
+topics: [money, taxes]
+area: morgantown
+sources:
+  - url: https://morgantownmag.com/get-free-help-filing-your-taxes/
+    checked: 2026-10-29
+  - url: https://www.needhelppayingbills.com/html/monongalia_county_assistance_p.html
+    checked: 2026-10-28

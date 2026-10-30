@@ -1,0 +1,10 @@
+name: West Virginia Division of Financial Institutions
+slug: wv-division-of-financial-institutions
+kind: government
+website: https://dfi.wv.gov
+summary: The state office that licenses and oversees lenders in West Virginia. People can ask it whether a lender is allowed to lend here.
+topics: [money]
+area: statewide
+sources:
+  - url: https://dfi.wv.gov/consumers
+    checked: 2026-10-29

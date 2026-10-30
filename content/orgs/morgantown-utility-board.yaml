@@ -1,0 +1,10 @@
+name: Morgantown Utility Board
+slug: morgantown-utility-board
+kind: government
+website: https://mub.org
+summary: The water and sewer utility for Morgantown and nearby areas, known as MUB.
+topics: [money]
+area: morgantown
+sources:
+  - url: https://mub.org
+    checked: 2026-10-28

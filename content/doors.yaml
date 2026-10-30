@@ -10,7 +10,8 @@
 #
 # `icon` names an icon in site/src/components/Icon.astro. `examples` are the
 # problems shown on the home page door buttons, in residents' words, each
-# linking straight to its page. An example shows only once its page exists.
+# linking straight to its page (a door page link can pre-pick a situation,
+# like /money/?pick=rent). An example shows only once its page exists.
 #
 # `topics` maps each topic tag used in content/ entries and on pages to the
 # door it belongs to, with the label people see. Every topic belongs to
@@ -18,15 +19,16 @@
 doors:
   - slug: this-month
     name: Get through this month
+    page: /money/
     hint: Can't pay a bill, behind on rent, short on food, need cash fast
     icon: receipt
     examples:
       - text: Can't pay a bill
-        href: /money/
+        href: /money/?pick=bill
       - text: Heat, water or power bill
         href: /utility-bills/
       - text: Behind on rent
-        href: /money/#rent
+        href: /money/?pick=rent
       - text: Short on food
         href: /help/food/
     topics:

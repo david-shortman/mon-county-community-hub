@@ -126,6 +126,6 @@ export async function doorCards() {
   return loadDoors().doors.map((d) => ({
     ...d,
     href: doorHref(d),
-    examples: (d.examples ?? []).filter((e) => pages.has(e.href.split('#')[0])),
+    examples: (d.examples ?? []).filter((e) => pages.has(e.href.split(/[?#]/)[0])),
   }));
 }
