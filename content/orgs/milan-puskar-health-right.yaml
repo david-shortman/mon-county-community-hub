@@ -1,0 +1,10 @@
+name: Milan Puskar Health Right
+slug: milan-puskar-health-right
+kind: nonprofit
+website: https://mphealthright.org/
+summary: A free health care clinic in Morgantown for West Virginians with low income and no insurance or not enough insurance. It also helps with prescriptions and arranges dental and other referrals.
+topics: [health]
+area: monongalia-county
+sources:
+  - url: https://mphealthright.org/
+    checked: 2026-10-30

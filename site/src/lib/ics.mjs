@@ -46,7 +46,7 @@ function vevent(e, stamp) {
 export function icsDocument(events, name = 'Mon County deadlines and dates') {
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
   const lines = [
-    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Mon County Community Hub//Deadlines//EN',
+    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Everything Morgantown//Deadlines//EN',
     'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', `X-WR-CALNAME:${esc(name)}`, 'X-WR-TIMEZONE:America/New_York',
     ...VTIMEZONE,
     ...events.flatMap((e) => vevent(e, stamp)),

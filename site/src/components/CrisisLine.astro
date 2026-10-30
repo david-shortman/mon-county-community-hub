@@ -1,0 +1,10 @@
+---
+// A short 911 and 988 line near the top of Help now pages that are not crisis
+// pages (#453). It is plain text with two phone links, no quick exit, and sits
+// in the page, not stuck to the screen, so it stays small. Pages that may be
+// read by a person in danger use the full CrisisStrip instead (Base `crisis`).
+// 988 facts: content/resources/988-lifeline.yaml.
+import { resource, telHref } from '../lib/content.mjs';
+const r988 = resource('988-lifeline');
+---
+<p class="crisis-line">Danger? Call <a href="tel:911">911</a>. Crisis? Call or text <a href={telHref(r988.contact.phone)}>{r988.contact.phone}</a>.</p>

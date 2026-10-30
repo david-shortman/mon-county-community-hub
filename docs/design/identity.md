@@ -157,13 +157,47 @@ Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base
 - **Headings:** Atkinson Hyperlegible Next, weight 800, for `h1` to `h3` and the site name. It was made by the Braille Institute so letters that look alike (l, I, 1, O, 0) are easy to tell apart. It is free under the SIL Open Font License ([`site/public/fonts/OFL.txt`](../../site/public/fonts/OFL.txt)).
 - **How it loads:** self-hosted, never from a font service, so no third party sees our visitors. One weight, Latin characters only, about 11 KB. It uses `font-display: optional`: if it is not ready in a moment, the page uses the system font for that visit and never waits or jumps. Next visit it comes from the cache.
 - **Body text:** the system font stack. Research finds no single font is fastest for everyone, and serif versus sans does not change legibility, so body text stays on what each phone does best, at no cost.
+- **Site name (the logo):** Fraunces, soft (weight 800, softness 100, no wonky letters, optical size 48), for the name in the header and the link preview only. See "The logo" below.
 - **Don't** add more weights or families without updating this section and checking page weight. Don't use Public Sans: it reads as a federal government site.
+
+## The icon
+
+David picked the icon on October 30, 2026 (#390, #389): Westover and Morgantown on two sage hills facing each other across the Monongahela River, joined by an open arch bridge, with ridges behind. Two towns, one river, joined: it says "connect, don't compete" without naming or favoring any institution.
+
+- **Files:** [`site/public/favicon.svg`](../../site/public/favicon.svg) (rounded corners) and [`site/public/icons/icon-full.svg`](../../site/public/icons/icon-full.svg) (square, for home screens that round icons themselves). The PNG icons are made from these. The link preview image, [`site/public/share.png`](../../site/public/share.png), shows the icon beside the site name; redraw it with `node scripts/make-share-image.mjs` in `site/`.
+- **Colors:** existing tokens only: hill green (`#1f5c4a`, `#2f7a63`), `--accent-bg` for the pale houses and bridge, sage for the hills, and the dark mode accent for the river.
+- **Rules David set during review:**
+  - Pale houses on sage hills, so they do not blend.
+  - A few uneven houses on flat hilltops. Evenly spaced roofs looked like gear teeth from far away.
+  - Rounded roofs and corners.
+  - The bridge sits behind the hills.
+  - The waterline is flat.
+- **Where:** the browser tab, the home screen, link previews and the logo in the header. It is not a drawing to repeat on pages (see "No drawn motif").
+
+## The logo
+
+David picked it on October 30, 2026 ([decision](../decisions/2026-10-30-1500-header-logo.md), #421): the icon as a small rounded tile, then the name "Everything Morgantown" on one line in Fraunces, soft. He chose the tile over a one-color line drawing and a name-only version, and Fraunces over Nunito and Bitter, because it adds warmth and a nod to the old downtown while staying bold and easy to read.
+
+- **Where:** the site header (`site/src/layouts/Base.astro`) and the link preview image (`site/public/share.png`, made by `scripts/make-share-image.mjs`). Headings and everything else keep Atkinson Hyperlegible Next.
+- **Tile:** the same drawing as `public/favicon.svg`, read in at build time, so the two never drift. 40px on wide screens, 34px on phones, with a thin `--line` ring in dark mode so the green edge does not sink into the page.
+- **Name:** real text, so screen readers read it and it grows with the reader's text size. The tile is hidden from screen readers. Text color is `--fg`, the same 7:1 pair as body text.
+- **How the font loads:** `site/src/fonts/fraunces-name-800.woff2` holds only the letters in "Everything Morgantown" (E, M, a, e, g, h, i, n, o, r, t, v, w, y and a space), about 2.5 KB. It is built into each page's CSS, so the name never waits for a download and never changes font as it loads (`font-display: block` is safe here because there is nothing to wait for). It adds about 3.5 KB gzipped to each page, tile included. License: SIL Open Font License, in `site/src/fonts/OFL-Fraunces.txt`.
+- **If the name changes:** cut a new file, or new letters will show in Georgia. Made with fontTools from Fraunces in the Google Fonts repo: instance `wght=800, SOFT=100, WONK=0, opsz=48`, then `pyftsubset` with `--text="Everything Morgantown" --flavor=woff2 --layout-features=kern,liga --no-hinting`.
+- **Don't** use Fraunces for headings or body text, stretch or recolor the tile, or put the name in hill green (green means "you can act on this").
 
 ## No drawn motif
 
 The site has no drawn motif right now. On October 30, 2026 we tried three (a wavy ridge of hills under the menu, a named landmark drawing for each door, and a tiny skyline of local shapes on the menu line). David found each one distracting, so all three were removed ([decision](../decisions/2026-10-30-1000-no-drawn-motif.md)). The menu border is a plain 1px `--line` rule, under the header on wide screens and on top of the tab bar on phones.
 
 Before adding any drawn shape again, show David screenshots first and run the "Is it too much?" check below.
+
+## Quiet local touches
+
+Ways to root the site in Mon County through useful words and facts instead of decoration. David picked these on October 30, 2026.
+
+- **Dateline** (shipped): under the site name, "Morgantown · Friday, October 30 · High 66°, mostly sunny", with one small weather symbol, in `--muted` text. Phones use the short date ("Fri, Oct 30"). The forecast comes from the National Weather Service (api.weather.gov, public domain, free) at build time, so visitors' browsers never contact a weather service. The site rebuilds every morning and on every merge; the page script keeps the date current and hides a forecast from an earlier day. If the service is down, the dateline shows the date only. The forecast links to the NWS page as its source. Code: [`site/src/lib/weather.mjs`](../../site/src/lib/weather.mjs).
+- **Town names on places** (next): each place card names its town or neighborhood and a landmark people use for directions.
+- **Town filter on Dates** (next): choose a town to see only its dates.
 
 ## Voice notes
 
@@ -173,6 +207,7 @@ Use the names residents use, when it makes directions clearer. Always give the f
 - **"The Mon"** is the Monongahela River (as in the Mon River Trail). Write "the Monongahela River" first.
 - **Neighborhoods and towns:** Sunnyside, Wiles Hill, South Park, Evansdale, Suncrest, the Wharf District, downtown. Westover, Star City, Granville, Cheat Lake, and Blacksville are their own places; don't fold them into "Morgantown."
 - **Landmarks for directions:** "the rail-trail," "Hazel Ruby McQuain Riverfront Park," "the Seneca Center on Beechurst Avenue," "the PRT." Landmarks help people find a place, but always give a street address too.
+- **Deadlines (#51):** say plainly that the last day counts, with the weekday: "The last day is Tuesday, December 15." Not "by December 15" or "on or before," which people read differently. Give a time only when the source sets one ("until 7 p.m. on Saturday, November 7"). Times read "8 a.m.", "8:30 a.m.", "noon".
 - **Don't** use slang, dialect spelling, or sports chants. Plain, warm, and neutral.
 
 ## Mobile first
@@ -181,10 +216,12 @@ Nearly everyone reaches the hub on a phone. Design for a 390px screen first, the
 
 - **Act first.** Every card leads with when it is (a big date and "in 3 days"), then what it is, then big buttons to act: Details, Call, Directions, Add to calendar, Share. Use the [`Actions`](../../site/src/components/Actions.astro) component. Each button shows only when we have a sourced link, phone, or place.
 - **Thumb reach.** The main menu is a tab bar at the bottom of the screen on phones, with icons and words, at least 48px tall, and the current page marked by bold text and a tinted pill (not color alone). It has four tabs: Home, Help now, Dates and Topics. The Topics tab is marked on any page inside a door. On wide screens the header shows Help now, the five doors, Dates and All topics. The footer lists the doors, All topics, About and For groups and helpers. All of it comes from `content/doors.yaml` (#250), so a new page never changes the menu: tag it with its door and topic (see `content/README.md`, "Tagging a site page") and it shows on the Topics page and its door.
+- **Compact buttons (#335).** In a row of actions, secondary buttons are sized to their label and wrap as a group. Only the main action (`.btn-primary`, like Call or More details, and a Call button in a `.btn-wide` slot) spans the full width. The Help now pair on the home page keeps two equal columns.
 - **Big targets.** Buttons and tabs are at least 48px tall. Nothing a person needs to tap is smaller than 44px.
 - **Crisis pages.** A page a person in danger may read passes `crisis` to `Base`, which adds the crisis strip and the Leave this page button ([`CrisisStrip.astro`](../../site/src/components/CrisisStrip.astro), #174) and sends no referrer. The strip uses `--accent-bg` with a brick edge, and the button is `--fg` on `--bg`, so no new colors. It shows only on those pages, never across the site.
 - **Name things in context.** Screen readers hear which event a button is for ("Add to calendar: Free tire drop-off, November 14, 2026"), so no two links on a page sound the same.
 - **Local and plain.** Directions buttons use the place the source published. The card text around them uses names residents know (see the voice notes).
+- **Modern CSS (#153).** Headings use `text-wrap: balance` and text uses `pretty`, so lines break evenly. The `h1` eases from 1.9rem down to 1.7rem on the smallest phones. The browser bar matches the page through `theme-color` meta tags; if `--bg` changes, change them too.
 - **Light pages.** CSS is inlined so a page paints in one request. The only script is small and optional; the page works without it.
 - **Check it.** Before shipping, test at 320px and 390px: no sideways scrolling, nothing hidden under the tab bar when you Tab through the page, and axe clean in light and dark.
 

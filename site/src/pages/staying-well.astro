@@ -27,7 +27,7 @@ const activitySources = [
   { url: 'https://odphp.health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines/current-guidelines/top-10-things-know', checked: '2026-10-29', name: 'U.S. Department of Health and Human Services' },
 ];
 ---
-<Base title="Staying well in Morgantown and Mon County: what to do each year" description="Simple things most people can do to stay healthy: a flu shot each fall, a yearly checkup, dental visits, moving more, help to quit tobacco. How often, what it costs, and where to go in Mon County.">
+<Base help title="Staying well in Morgantown and Mon County: what to do each year" description="Simple things most people can do to stay healthy: a flu shot each fall, a yearly checkup, dental visits, moving more, help to quit tobacco. How often, what it costs, and where to go in Mon County.">
   <h1>Staying well: a simple list</h1>
   <p class="lede">Simple things many people do to stay well, from a flu shot to a walk on the rail-trail. For each one: how often, what it costs here, and where to go in Mon County.</p>
 
@@ -47,6 +47,7 @@ const activitySources = [
 
   <h2>Regular dental checkups</h2>
   <p>Ask the dentist how often you or your child should come back.</p>
+  <p>No dental insurance? See <a href={`${base}/dental-and-prescriptions/`}>dentist and prescription help</a>.</p>
   {r('monchd-dentistry') && <ResourceCard r={r('monchd-dentistry')} showCost />}
 
   <h2>Every week: move more</h2>

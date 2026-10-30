@@ -3,8 +3,24 @@
 # situations come as their pages ship: families and kids (#225), disability
 # and aging (#227), and language help (#229).
 door: family
-lede: Work, learning, and life as a veteran in Mon County. Pick what is going on, and we put the steps in order.
+lede: Young kids, work, learning, and life as a veteran in Mon County. Pick what is going on, and we put the steps in order.
 steps:
+  birth-to-three:
+    when: week
+    resource: wv-birth-to-three-referral
+    text: Call WV Birth to Three if you are worried about how your baby or toddler is growing.
+  starting-points:
+    when: week
+    resource: starting-points-family-programs
+    text: Call Starting Points about playgroups, the baby pantry and other free family programs.
+  story-time:
+    when: week
+    resource: mympls-story-times
+    text: Find a library story time near you.
+  prek:
+    when: opens
+    resource: mcs-prek-and-head-start
+    text: Apply for Pre-K or Head Start on the county schools' application site when applications open.
   crisis-line:
     when: today
     resource: veterans-crisis-line
@@ -30,6 +46,18 @@ steps:
     resource: lvmpc-adult-literacy
     text: Call or text Literacy Volunteers to start free reading, writing or English lessons.
 situations:
+  - id: baby-growth
+    label: I'm worried about how my baby or toddler is growing
+    page: /families-and-kids/
+    steps: [birth-to-three]
+  - id: prek
+    label: My child will be 3 or 4 and could start Pre-K or Head Start
+    page: /families-and-kids/
+    steps: [prek]
+  - id: little-kids
+    label: I want things to do with my young child
+    page: /families-and-kids/
+    steps: [starting-points, story-time]
   - id: job
     label: I need a job or job training
     page: /work-and-learning/

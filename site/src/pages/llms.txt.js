@@ -1,7 +1,7 @@
 export function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const u = (p) => new URL(`${base}${p}`, site).href;
-  const body = `# Mon County Community Hub
+  const body = `# Everything Morgantown
 
 > Plain-language help for life in Morgantown and Monongalia County, WV. An open project that points to the nonprofits, government offices, and community groups already doing the work. Every fact links to its source and says when it was last checked. Dates and details can change, so confirm with the source before you act.
 
@@ -24,14 +24,16 @@ export function GET({ site }) {
 - [Get care](${u('/care/')}): pick what is going on (a flu or COVID shot, a dentist, turning 65, quitting tobacco, staying healthy) and get local steps in order, with phone numbers, costs and sources
 - [Flu and COVID shots](${u('/flu-shots/')}): book at the Monongalia County Health Department; who gets them free
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
+- [Dentist or prescriptions](${u('/dental-and-prescriptions/')}): a dentist with no dental insurance (health department dental clinic, WVU Dental) and help paying for medicine (Milan Puskar Health Right free clinic)
 - [Turning 65 or on Medicare](${u('/turning-65/')}): when to sign up, visits and shots Medicare pays for, free help from WV SHIP, help paying Medicare costs
 - [School shots and sports physicals](${u('/school-shots/')}): 7th and 12th grade shots, health check and dental forms by grade, the sports physical May 1 rule, and free shots for children who qualify
+- [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
 - [Medicaid waivers](${u('/medicaid-waivers/')}): a plain guide to West Virginia's four Medicaid home care waivers (ADW, IDDW, TBIW, CSEDW): who each is for, how to start, who to call
 - [Living here](${u('/living-here/')}): pick what is going on (trash pickup day, recycling drop-off, tires or electronics) and get local steps with phone numbers and sources
-- [Family and life changes](${u('/family/')}): pick what is going on (a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
+- [Family and life changes](${u('/family/')}): pick what is going on (a baby or young child, a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
 - [Trash, recycling and drop-off](${u('/recycling/')}): pickup days, what goes in the curbside bin, and where to take hard items
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
