@@ -8,7 +8,9 @@
 # content/resources/ for its phone number, link, source and checked date.
 # A situation shows only once its page exists. Situations run in the ranked order from #475. `when` is today, week or opens.
 door: care
-lede: Mental health help, care you can afford, a dentist, Medicaid and more in Mon County. Pick what is going on, and we put the steps in order.
+# The lede and the hint in doors.yaml name only topics whose pages exist (#487).
+# When a new care page ships, add it to both in the same PR.
+lede: A dentist, help paying for medicine, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
@@ -32,15 +34,19 @@ steps:
     when: week
     resource: monchd-dentistry
     text: Call the health department's dental clinic for a checkup.
+  healthright:
+    when: week
+    resource: health-right-clinic
+    text: No insurance and low income? Call Milan Puskar Health Right for a phone screening to become a patient at the free clinic.
   ship:
     when: week
     resource: wv-ship-medicare-counseling
     text: Call the West Virginia State Health Insurance Assistance Program (WV SHIP) for help choosing a Medicare plan or checking your costs.
 situations:
   - id: dentist
-    label: I need a dentist
-    page: /staying-well/#monchd-dentistry
-    steps: [dentist]
+    label: I need a dentist, or help paying for medicine
+    page: /dental-and-prescriptions/
+    steps: [dentist, healthright]
   - id: medicare
     label: I'm turning 65 or on Medicare
     page: /turning-65/
