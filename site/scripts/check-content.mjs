@@ -192,6 +192,31 @@ for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x
   if (ownText.some((t) => (t ?? '').includes('\u2014'))) errors.push(`${where}: contains an em dash`);
 }
 
+// Time and deadline wording (#413). Warnings only. Times read "8 a.m.",
+// "8:30 a.m.", "noon"; deadlines read "The last day is Tuesday, December 15."
+// See "Voice notes" in docs/design/identity.md. Feed snapshots are left out:
+// they say what the feed says.
+const MONTH = '(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|June?|July?|Aug(ust)?|Sep(t(ember)?)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\\.?';
+const TIME_RULES = [
+  [/\b\d{1,2}(:\d{2})?\s?(am|pm|AM|PM|A\.M\.|P\.M\.)(?![\w.])/, 'write times as "8 a.m." or "8:30 p.m." (lowercase, with periods)'],
+  [/\b\d{1,2}:00\b/, 'drop ":00" from whole hours ("8 a.m.", not "8:00 a.m.")'],
+  [/\b(0\d|1[3-9]|2[0-3]):[0-5]\d\b/, 'use 12-hour times ("1 p.m.", not "13:00")'],
+];
+const BY_DATE = new RegExp(`\\bby ${MONTH} \\d{1,2}\\b`, 'i');
+const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics']);
+function eachText(value, key, visit) {
+  if (SKIP_KEYS.has(key)) return;
+  if (typeof value === 'string') visit(key, value);
+  else if (Array.isArray(value)) value.forEach((v) => eachText(v, key, visit));
+  else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) eachText(v, k, visit);
+}
+for (const e of [...orgs, ...resources, ...loadCalendar()]) {
+  eachText(e, '', (key, t) => {
+    for (const [re, msg] of TIME_RULES) if (re.test(t)) warnings.push(`${e._file}: ${key}: ${msg}: "${t.match(re)[0]}"`);
+    if (key === 'what_to_do' && BY_DATE.test(t)) warnings.push(`${e._file}: what_to_do: for a deadline, write "The last day is Tuesday, December 15." instead of "${t.match(BY_DATE)[0]}"`);
+  });
+}
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
 console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
