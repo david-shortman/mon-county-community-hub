@@ -1,0 +1,11 @@
+name: Westside Senior Center
+slug: westside-senior-center
+kind: community-group
+website: https://www.westoverwv.org/westside-senior-center
+phone: "304-296-6583"
+summary: A volunteer-run senior center behind Westover City Hall for members 50 and older, open Monday to Friday, 9 a.m. to noon. Membership is $10 a year and includes a fitness room, games and trips.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: https://www.westoverwv.org/westside-senior-center
+    checked: 2026-10-30
