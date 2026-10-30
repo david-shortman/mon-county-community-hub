@@ -10,9 +10,10 @@ import DoorCards from '../components/DoorCards.astro';
 import SearchBox from '../components/SearchBox.astro';
 import SeasonCard from '../components/SeasonCard.astro';
 import EventCard from '../components/EventCard.astro';
-import { loadCalendar, upcoming } from '../lib/content.mjs';
+import { loadCalendar, upcoming, resource, telHref } from '../lib/content.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const soon = upcoming(loadCalendar(), undefined, 31).slice(0, 3);
+const r211 = resource('wv-211');
 ---
 <Base title="Help in Morgantown and Monongalia County, WV" description="Find local help with bills, food, a place to stay, health care and more in Morgantown and Monongalia County, WV. Every answer shows its source. Call or text 211 any time.">
   <HelpNowBar />
@@ -33,7 +34,7 @@ const soon = upcoming(loadCalendar(), undefined, 31).slice(0, 3);
 
   <section class="note" aria-labelledby="person-h">
     <h2 id="person-h">Rather talk to a person?</h2>
-    <p>Call <a href="tel:211">211</a>. It is a free West Virginia help line, open any hour. Tell them what is going on and they will point you to local help. You can also text your ZIP code to <a href="sms:898211">898-211</a>.</p>
+    <p>Call <a href={telHref(r211.contact.phone)}>{r211.contact.phone}</a>. It is a free West Virginia help line, open any hour. Tell them what is going on and they will point you to local help. You can also text your ZIP code to <a href={`sms:${r211.contact.text.replace(/[^\d]/g, '')}`}>{r211.contact.text}</a>.</p>
   </section>
 
   <HelpNowSources />
