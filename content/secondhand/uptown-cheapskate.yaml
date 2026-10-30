@@ -1,0 +1,18 @@
+name: Uptown Cheapskate
+slug: uptown-cheapskate
+kind: resale
+area: elsewhere
+run_by: Uptown Cheapskate Morgantown
+address: "5001 Mid Atlantic Dr, Morgantown, WV"
+hours: Monday to Saturday, 10 a.m. to 8 p.m.; Sunday, noon to 6 p.m.
+sells: Current-style used clothing, shoes, accessories and handbags for women and men.
+takes: "Clean, current-style clothing, shoes and accessories. No appointment needed. Buying hours: Monday to Saturday, 10 a.m. to 7 p.m.; Sunday, noon to 5 p.m."
+goods: [clothes]
+buys_from_you: true
+url: https://www.uptowncheapskate.com/location/morgantown/
+url_label: Shop website
+status: confirmed
+note: In the Pierpont Landing shopping plaza. Pays cash, or 25% more in store credit.
+sources:
+  - url: https://www.uptowncheapskate.com/location/morgantown/
+    checked: 2026-10-30
