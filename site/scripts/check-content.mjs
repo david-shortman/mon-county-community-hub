@@ -1,7 +1,7 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
+import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
@@ -276,6 +276,19 @@ for (const [dir, f] of [...yamlIn('doors'), ...yamlIn('guides')]) {
   }
   const ownText = [dp.lede, dp.cant_wait?.text, ...dp.situations.map((x) => x.label), ...Object.values(dp.steps).map((x) => [x.text, x.action]).flat(), ...dp.also.map((x) => x.text)];
   if (ownText.some((t) => (t ?? '').includes('\u2014'))) errors.push(`${where}: contains an em dash`);
+}
+
+// Gaps (content/gaps/<topic>.yaml, #444): each needs what, why and a checked
+// date, and its topic must have a door.
+const gapDir = path.join(CONTENT_DIR, 'gaps');
+for (const f of fs.existsSync(gapDir) ? fs.readdirSync(gapDir).filter((x) => x.endsWith('.yaml')) : []) {
+  const g = loadGaps(f.replace(/\.yaml$/, ''));
+  if (g.topic !== f.replace(/\.yaml$/, '')) errors.push(`gaps/${f}: topic should match the file name`);
+  if (!doors?.topicDoor[g.topic]) errors.push(`gaps/${f}: topic "${g.topic}" has no door in content/doors.yaml`);
+  for (const [i, x] of (g.gaps ?? []).entries()) {
+    if (!x.what || !x.why || !isDate(ymd(x.checked))) errors.push(`gaps/${f}: gap ${i + 1} needs what, why and a checked date`);
+  }
+  if (JSON.stringify(g).includes('\u2014')) errors.push(`gaps/${f}: contains an em dash`);
 }
 
 // Time and deadline wording (#413). Warnings only. Times read "8 a.m.",
