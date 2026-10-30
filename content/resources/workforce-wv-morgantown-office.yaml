@@ -7,6 +7,7 @@ what_to_do: The office is at 40 Commerce Drive, Suite 200, Westover. Call 1-800-
 contact:
   phone: "1-800-252-5627"
   url: https://workforcewv.org/about-workforce-wv/local-office-locations/
+  url_label: Office locations
 cost: free
 sources:
   - url: https://workforcewv.org/about-workforce-wv/local-office-locations/

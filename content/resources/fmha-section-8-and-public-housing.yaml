@@ -7,6 +7,7 @@ what_to_do: Get the Section 8 or public housing application from fmhousing.com o
 contact:
   phone: "304-363-0860"
   url: https://fmhousing.com/visitors/faq_-_section_8.php
+  url_label: Section 8 questions
 cost: free to apply
 sources:
   - url: https://fmhousing.com/visitors/faq_-_section_8.php
