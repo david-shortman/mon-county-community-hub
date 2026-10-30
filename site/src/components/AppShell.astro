@@ -4,6 +4,12 @@
 // script asks the browser to keep saved copies of pages (src/pages/sw.js.js).
 // Without it, or in a browser that does not support it, pages work the same.
 // No accounts, no tracking, no push messages.
+// Instant pages (#151). Browsers that do not know these ignore them.
+// Speculation rules: when someone starts to tap or hovers a link to one of our
+// own pages, the browser starts loading it so it opens at once. Only our
+// pages, never search, the calendar file, or nofollow and download links.
+// Chrome skips this with Data Saver or low battery on.
+// View transitions: a short, calm fade, and none for people who ask for less motion.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <link rel="manifest" href={`${base}/manifest.webmanifest`} />
@@ -13,3 +19,17 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <script is:inline define:vars={{ sw: `${base}/sw.js` }}>
   if ('serviceWorker' in navigator) addEventListener('load', function () { navigator.serviceWorker.register(sw).catch(function () {}); });
 </script>
+<script type="speculationrules" is:inline>
+{"prerender": [{"where": {"and": [
+  {"href_matches": "/*"},
+  {"not": {"href_matches": ["/*.ics", "/*.xml", "/*.txt", "/search/*", "/pagefind/*"]}},
+  {"not": {"selector_matches": "[rel~=nofollow], [download]"}}
+]}, "eagerness": "moderate"}]}
+</script>
+<style is:global>
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 150ms; }
+  @media (prefers-reduced-motion: reduce) {
+    @view-transition { navigation: none; }
+  }
+</style>
