@@ -1,0 +1,12 @@
+name: BOPARC (Morgantown Board of Parks and Recreation Commissioners)
+slug: boparc
+kind: government
+website: https://www.boparc.org
+summary: The parks and recreation agency for Morgantown. It runs city parks, trails, pools and recreation centers.
+topics: [community]
+area: morgantown
+sources:
+  - url: https://www.morgantownwv.gov/521/BOPARC
+    checked: 2026-10-30
+  - url: https://www.boparc.org/trail-clean-ups-and-events.html
+    checked: 2026-10-30
