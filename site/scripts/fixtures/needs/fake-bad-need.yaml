@@ -1,0 +1,19 @@
+# TEST FIXTURE ONLY. Fake and broken on purpose: the checker must reject it.
+title: Bad example
+slug: wrong-slug
+summary: Too short
+evidence:
+  - url: not-a-link
+    shows: 'Jane Doe said "I could not pay my bills this month at all"'
+affected:
+  count: 12.5
+  description: People
+  url: https://example.org
+  checked: 2099-01-01
+severity: extreme
+trend: down
+working_on:
+  - name: Jane Doe
+topics: [not-a-topic]
+rank: 0
+contact_email: jane@example.org
