@@ -3,7 +3,7 @@
 // so the page shows only what the entry says, with its sources and dates.
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
-import { resource, org as orgOf, RECHECK_TEXT } from '../lib/content.mjs';
+import { resource, org as orgOf } from '../lib/content.mjs';
 
 const { slug, linkLabel = 'Go to the official site' } = Astro.props;
 // Throws when the slug is missing; a hidden record comes back with no facts (#519).
@@ -13,7 +13,7 @@ const org = r.org ? orgOf(r.org) : null;
 {r.hidden ? (
 <section class="card" aria-labelledby={`${slug}-h`}>
   <h2 id={`${slug}-h`}>{r.title}</h2>
-  <p class="meta"><strong>{RECHECK_TEXT}</strong></p>
+  <SourceLine sources={[]} about={r.title} slug={r.slug} />
 </section>
 ) : (
 <section class="card" aria-labelledby={`${slug}-h`}>

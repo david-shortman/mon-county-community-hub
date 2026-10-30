@@ -6,7 +6,6 @@
 // and gives each link a unique name for screen readers (#140, #327).
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
-import { RECHECK_TEXT } from '../lib/content.mjs';
 const { r, headingLevel = 3 } = Astro.props;
 const H = `h${headingLevel}`;
 const textLine = r.contact.text;
@@ -14,7 +13,7 @@ const textLine = r.contact.text;
 {r.hidden ? (
 <article class="card place" id={r.slug}>
   <H>{r.title}</H>
-  <p class="meta"><strong>{RECHECK_TEXT}</strong></p>
+  <SourceLine sources={[]} about={r.title} slug={r.slug} />
 </article>
 ) : (
 <article class="card place" id={r.slug}>

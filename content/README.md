@@ -208,3 +208,22 @@ The build fails on any of these, because pages make call, text and map links str
 It also warns on time and deadline wording in hand-written text: times read "8 a.m.", "8:30 p.m." or "noon" (not "8 AM", "8:00 a.m." or "13:00"), and a deadline in `what_to_do` reads "The last day is Tuesday, December 15." rather than "by December 15" (#413).
 
 It warns (but does not fail) on fields it does not know, which usually means a typo, and on sources last checked over 6 months ago. The Health check (`docs/operations/README.md`) lists the same past-due entries every 4 hours, so Duet can re-check them.
+
+## Hiding an item
+
+Any record in `orgs/`, `resources/` or `calendar/` can be taken off the site without deleting it (#519). Add a `hidden` block:
+
+```yaml
+hidden:
+  reason: group-request   # group-request | unconfirmed-risky | overdue | other
+  since: 2026-10-30       # Morgantown date it was hidden
+  note: Hours changed; re-checking with the group's own page.  # optional; never a name or other personal detail
+```
+
+- **What it does.** The build leaves the record out of every page, the search index, `calendar.ics` and the counts. A page that names the record on purpose (a crisis page that always shows one shelter) keeps the name and says "We are re-checking this listing, so its details are off the site for now." in place of its phone, link, hours and sources, with a "Report a problem" link. A door step that points to it says the same.
+- **What it does not do.** Hiding removes the record's facts. If a page also writes a fact about the item in its own words, that sentence stays, so open the page after you hide and fix the sentence if it is the part that is wrong.
+- **Putting it back.** Delete the `hidden` block. Nothing else changes. Re-check the source first and update `checked`.
+- **Hiding a feed item.** Copy the feed entry into a `calendar/` file with the same `slug` and add `hidden`. The hand-written entry wins, so the feed item stays off.
+- **Checks.** `npm run check-content` still checks hidden records in full, so one can come back at any time, and fails if `hidden.reason` is missing or not one of the four, or `since` is not a date. The Health check lists every hidden item until it comes back.
+- **211 and 988 cannot be hidden.** They show on every page. If one looks wrong, fix it from the line's own page the same day.
+- **Who can merge.** A PR that only adds or changes `hidden` blocks does not wait for David, and the High stakes check does not flag it (`docs/COORDINATION.md`: "taking down or hiding a wrong item does not wait"). A PR that removes a `hidden` block is checked like any other content change.
