@@ -1,0 +1,36 @@
+# The Living here door page, /living-here/ (#252). Shape and rules: see
+# doors/care.yaml and site/src/components/DoorPage.astro. More situations
+# come as their pages ship: new here and who serves my address (#204),
+# getting around (#61), and registering to vote.
+door: living-here
+lede: Trash, recycling and the everyday things of living in Mon County. Pick what is going on, and we put the steps in order.
+steps:
+  swa:
+    when: today
+    resource: mon-swa-ask-about-trash
+    text: Call the Monongalia County Solid Waste Authority and ask who picks up trash at your address and which day.
+  drop-off:
+    when: today
+    resource: mon-county-recycling-drop-off
+    text: Take recycling to the county drop-off center on Olin Street.
+    action: Check hours
+  hard-items:
+    when: opens
+    resource: mon-swa-ask-about-trash
+    text: Tires and electronics go to collection days. See the dates below, or call the Solid Waste Authority to ask about the next one.
+situations:
+  - id: pickup
+    label: When is my trash pickup day?
+    page: /recycling/#pickup
+    steps: [swa]
+  - id: recycle
+    label: Where can I drop off recycling?
+    page: /recycling/#drop-off
+    steps: [drop-off]
+  - id: hard
+    label: I have tires or electronics to get rid of
+    page: /recycling/#hard-items
+    steps: [hard-items]
+also:
+  - text: Can't pay a water or power bill
+    href: /utility-bills/

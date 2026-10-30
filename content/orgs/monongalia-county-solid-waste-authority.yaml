@@ -1,0 +1,10 @@
+name: Monongalia County Solid Waste Authority
+slug: monongalia-county-solid-waste-authority
+kind: government
+website: https://www.monongaliacountyswa.com
+summary: The county office for trash and recycling. It runs the county recycling drop-off center and can tell you who picks up trash at your address.
+topics: [recycling]
+area: monongalia-county
+sources:
+  - url: https://www.monongaliacountyswa.com
+    checked: 2026-10-28
