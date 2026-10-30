@@ -18,13 +18,17 @@ import SourceLine from './SourceLine.astro';
 import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, telHref, resource, websiteLabel } from '../lib/content.mjs';
 import { loadPages, doorTopics } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { slug } = Astro.props;
-const door = loadDoors().bySlug[slug];
-const data = loadDoorPage(slug);
+// A topic guide (like /grow/, #437) uses the same layout from
+// content/guides/<guide>.yaml: it names its door, topic and page.
+const { slug, guide } = Astro.props;
+const data = guide ? loadDoorPage(guide, 'guides') : loadDoorPage(slug);
+const door = loadDoors().bySlug[guide ? data.door : slug];
+const home = guide ? data.page : door.page;
+const ask = data.ask ?? "What's going on? Pick all that fit.";
 const pages = await loadPages();
 const live = (href) => pages.has(href.split(/[?#]/)[0]);
 const situations = data.situations.filter((s) => live(s.page));
-const groups = [['today', 'Today'], ['week', 'This week'], ['opens', 'When it opens']];
+const groups = [['today', 'Today'], ['week', 'This week'], ['season', 'This season'], ['opens', 'When it opens']];
 // Each step once, with every live situation that uses it.
 const stepSits = (id) => situations.filter((s) => (s.steps ?? []).includes(id));
 // A situation with no steps (a whole section, like Community centers) shows as a
@@ -32,9 +36,9 @@ const stepSits = (id) => situations.filter((s) => (s.steps ?? []).includes(id));
 const pageOnly = situations.filter((s) => !(s.steps ?? []).length);
 const steps = Object.values(data.steps).filter((st) => stepSits(st.id).length);
 const also = data.also.filter((a) => live(a.href));
-const topics = Object.keys(door.topics);
+const topics = guide ? [data.topic] : Object.keys(door.topics);
 const dates = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics ?? []).some((t) => topics.includes(t))).slice(0, 4);
-const inDoor = await doorTopics(slug);
+const inDoor = (await doorTopics(door.slug)).filter((t) => !guide || t.topic === data.topic).map((t) => ({ ...t, pages: t.pages.filter((p) => p.route !== home) })).filter((t) => t.pages.length);
 const cw = data.cant_wait && resource(data.cant_wait.resource);
 // The text line: set in the door file (988 texts at its own number), or the record's text line (211 texts at 898-211).
 const cwSms = cw && (data.cant_wait.sms ?? cw.contact.text);
@@ -54,13 +58,13 @@ const r211 = resource('wv-211');
   </section>
 )}
 
-<h2 id="pick-h">What's going on? Pick all that fit.</h2>
+<h2 id="pick-h">{ask}</h2>
 <ul class="topic-list sit-links" id="door-links">
   {situations.map((s) => <li><a href={`${base}${s.page}`}>{s.label}</a></li>)}
 </ul>
-<form class="door-pick" id="door-pick" method="get" action={`${base}${door.page}`} hidden aria-labelledby="pick-h">
+<form class="door-pick" id="door-pick" method="get" action={`${base}${home}`} hidden aria-labelledby="pick-h">
   <fieldset>
-    <legend class="sr-only">What's going on? Pick all that fit.</legend>
+    <legend class="sr-only">{ask}</legend>
     <ul class="pick">
       {situations.map((s) => (
         <li><label><input type="checkbox" name="pick" value={s.id} /><span>{s.label}</span></label></li>
@@ -107,7 +111,7 @@ const r211 = resource('wv-211');
     <a class="btn" id="text-steps" href="sms:"><span>Text these steps to myself</span></a>
     <button class="btn" type="button" id="print-steps"><span>Print</span></button>
   </div>
-  <p><a href={`${base}${door.page}`}>Start over</a>. Your picks are only in this page's web address. Nothing is saved.</p>
+  <p><a href={`${base}${home}`}>Start over</a>. Your picks are only in this page's web address. Nothing is saved.</p>
 </section>
 
 {also.length > 0 && (
@@ -122,7 +126,7 @@ const r211 = resource('wv-211');
 
 <slot />
 
-<h2>Every {door.name} page</h2>
+{inDoor.length > 0 && <h2>{guide ? `Every ${door.topics[data.topic]} page` : `Every ${door.name} page`}</h2>}
 {inDoor.map((t) => (
   <>
     <h3>{t.label}</h3>

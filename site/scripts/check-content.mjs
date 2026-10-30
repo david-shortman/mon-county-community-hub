@@ -228,19 +228,27 @@ if (doors) {
 
 // Door pages (content/doors/<slug>.yaml): each step points to a real
 // resource, each situation names real steps and a page link.
-const doorDir = path.join(CONTENT_DIR, 'doors');
-for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x.endsWith('.yaml')) : []) {
+// Topic guides (content/guides/<slug>.yaml, like /grow/) have the same shape,
+// plus the door, topic and page they belong to.
+const yamlIn = (dir) => (fs.existsSync(path.join(CONTENT_DIR, dir)) ? fs.readdirSync(path.join(CONTENT_DIR, dir)).filter((x) => x.endsWith('.yaml')).map((f) => [dir, f]) : []);
+for (const [dir, f] of [...yamlIn('doors'), ...yamlIn('guides')]) {
   const slug = f.replace(/\.yaml$/, '');
-  const where = `doors/${f}`;
+  const where = `${dir}/${f}`;
   let dp;
-  try { dp = loadDoorPage(slug); } catch (err) { errors.push(`${where}: ${err.message}`); continue; }
-  const d = doors?.bySlug[slug];
-  if (!d?.topics) errors.push(`${where}: ${slug} is not a door in doors.yaml`);
-  else if (!d.page) errors.push(`${where}: give the ${slug} door a page in doors.yaml`);
-  if (dp.door !== slug) errors.push(`${where}: door should be ${slug}`);
+  try { dp = loadDoorPage(slug, dir); } catch (err) { errors.push(`${where}: ${err.message}`); continue; }
+  if (dir === 'guides') {
+    const d = doors?.bySlug[dp.door];
+    if (!d?.topics?.[dp.topic]) errors.push(`${where}: needs a door from doors.yaml and one of its topics`);
+    if (!/^\/[^\s]*\/$/.test(dp.page ?? '')) errors.push(`${where}: needs a page like /grow/`);
+  } else {
+    const d = doors?.bySlug[slug];
+    if (!d?.topics) errors.push(`${where}: ${slug} is not a door in doors.yaml`);
+    else if (!d.page) errors.push(`${where}: give the ${slug} door a page in doors.yaml`);
+    if (dp.door !== slug) errors.push(`${where}: door should be ${slug}`);
+  }
   if (!dp.lede) errors.push(`${where}: needs a lede`);
   for (const [id, st] of Object.entries(dp.steps)) {
-    if (!['today', 'week', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week or opens`);
+    if (!['today', 'week', 'season', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week, season or opens`);
     if (!st.text) errors.push(`${where}: step ${id} needs text`);
     if (st.record.hidden) { warnings.push(`${where}: step ${id}'s resource ${st.resource} is hidden, so the step says it is being re-checked`); continue; }
     if (!st.record.contact?.url) errors.push(`${where}: step ${id}'s resource needs a contact url`);
