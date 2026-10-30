@@ -1,7 +1,7 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, loadDoors, loadDoorPage, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, loadDoors, loadDoorPage, resource, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 
 const errors = [];
@@ -107,6 +107,13 @@ for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x
     if (!['today', 'week', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week or opens`);
     if (!st.text) errors.push(`${where}: step ${id} needs text`);
     if (!st.record.contact?.url) errors.push(`${where}: step ${id}'s resource needs a contact url`);
+  }
+  if (dp.cant_wait) {
+    try { resource(dp.cant_wait.resource); } catch { errors.push(`${where}: cant_wait resource ${dp.cant_wait.resource} not found`); }
+  }
+  for (const [id, st] of Object.entries(dp.steps)) {
+    if (!st.record.sources?.length || st.record.sources.some((x) => !isDate(ymd(x.checked)))) errors.push(`${where}: step ${id}'s resource needs sources with checked dates`);
+    if (!dp.situations.some((x) => (x.steps ?? []).includes(id))) warnings.push(`${where}: step ${id} is not used by any situation, so it never shows`);
   }
   const ids = new Set();
   for (const s of dp.situations) {

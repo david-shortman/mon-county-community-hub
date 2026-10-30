@@ -49,6 +49,7 @@ const r211 = resource('wv-211');
       <a class="btn" href={`sms:${cw.contact.phone}`}><span>Text {cw.contact.phone}<span class="sr-only">, {cw.title}</span></span></a>
       <a class="btn" href="tel:911"><span>Call 911<span class="sr-only">, emergency</span></span></a>
     </div>
+    <p class="meta">Source: <a href={cw.sources[0].url}>{sourceName(cw)}</a>, checked {checked(cw)}. 911 is the standard emergency number.</p>
   </section>
 )}
 
@@ -57,11 +58,14 @@ const r211 = resource('wv-211');
   {situations.map((s) => <li><a href={`${base}${s.page}`}>{s.label}</a></li>)}
 </ul>
 <form class="door-pick" id="door-pick" method="get" action={`${base}${door.page}`} hidden aria-labelledby="pick-h">
-  <ul class="pick">
-    {situations.map((s) => (
-      <li><label><input type="checkbox" name="pick" value={s.id} /><span>{s.label}</span></label></li>
-    ))}
-  </ul>
+  <fieldset>
+    <legend class="sr-only">What's going on? Pick all that fit.</legend>
+    <ul class="pick">
+      {situations.map((s) => (
+        <li><label><input type="checkbox" name="pick" value={s.id} /><span>{s.label}</span></label></li>
+      ))}
+    </ul>
+  </fieldset>
   <button class="btn btn-primary" type="submit">Show my steps</button>
 </form>
 <p class="note" id="door-nomatch" hidden>We could not find steps for that link. Pick what is going on above, or call or text 211.</p>
