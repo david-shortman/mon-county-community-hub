@@ -8,6 +8,7 @@ export const page = { door: "about", label: "Open data", summary: "Every listing
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const cat = await catalog();
+const built = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'America/New_York' }).format(new Date(cat.generated));
 const api = (p) => `${base}/api/v1/${p}`;
 const LABELS = { orgs: 'Groups and offices', resources: 'Programs and services', calendar: 'Deadlines and dates', corrections: 'Corrections' };
 ---
@@ -16,15 +17,16 @@ const LABELS = { orgs: 'Groups and offices', resources: 'Programs and services',
   <p class="lede">Every listing on this site is also published as plain data files that apps, websites and AI tools can read. They are free to use. No key, no sign-up.</p>
 
   <h2>What is published</h2>
-  <p>The files are rebuilt every morning from the same records as the site, so they always match what the site shows.</p>
+  <p>The files are in JSON, a plain text format that apps and AI tools can read. They are made from the same records as the site, so they always match what the site shows. They were last built on {built}, and the site rebuilds every morning.</p>
   <ul>
     {cat.types.map((t) => (
-      <li><strong>{LABELS[t.name] ?? t.name}</strong> ({t.count}): <a href={api(`${t.name}.json`)}>{t.name}.json</a>. {t.description} One record at a time: <code>/api/v1/{t.name}/&#123;{t.record_url_template.match(/\{(\w+)\}/)[1]}&#125;.json</code>.</li>
+      <li><a href={api(`${t.name}.json`)}>{LABELS[t.name] ?? t.name}</a>: {t.count} records.</li>
     ))}
-    <li><strong>The catalog</strong>: <a href={api('index.json')}>index.json</a> lists every file, how many records each has, the license, and when the files were built.</li>
-    <li><strong>A description for developers</strong>: <a href={api('openapi.yaml')}>openapi.yaml</a> (OpenAPI 3.1) names every field.</li>
-    <li><strong>The calendar for calendar apps</strong>: <a href={`${base}/calendar.ics`}>calendar.ics</a>.</li>
+    <li><a href={api('index.json')}>The catalog</a>: every file, how many records each has, the license, and the build time.</li>
+    <li><a href={api('openapi.yaml')}>The field list for developers</a> (OpenAPI 3.1): every field and what it means.</li>
+    <li><a href={`${base}/calendar.ics`}>The calendar for calendar apps</a> (calendar.ics).</li>
   </ul>
+  <p>Developers can also get one record at a time, like <code>/api/v1/orgs/&#123;slug&#125;.json</code>. The catalog lists the address for each kind.</p>
 
   <h2>Every record shows its sources</h2>
   <p>Each record has a <code>sources</code> list. Every source has a web address and the date it was last checked. Please show both when you reuse a record, and send people to the source. Details change, so people should check the source before they act. A record whose oldest check is more than {cat.stale_after_days} days old may be out of date.</p>
