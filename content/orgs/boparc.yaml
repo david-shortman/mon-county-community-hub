@@ -1,0 +1,11 @@
+name: BOPARC (City Parks of Morgantown)
+slug: boparc
+kind: government
+website: https://www.boparc.org/
+phone: "304-296-8356"
+summary: The Board of Parks and Recreation Commissioners runs Morgantown's city parks, pools, trails, the ice arena and community centers. Its customer service office is at 705 East Brockway Ave in Marilla Park.
+topics: [community, family]
+area: morgantown
+sources:
+  - url: https://www.boparc.org/
+    checked: 2026-10-30

@@ -1,0 +1,13 @@
+name: Morgantown Area Partnership
+slug: morgantown-area-partnership
+kind: business
+website: https://morgantownpartnership.com/
+phone: "304-292-3311"
+summary: The area's chamber of commerce and economic development group. It offers business resources, networking and a job board, and its website also covers Main Street Morgantown.
+topics: [work]
+area: monongalia-county
+sources:
+  - url: https://morgantownpartnership.com/
+    checked: 2026-10-30
+  - url: https://morgantownpartnership.com/contact/
+    checked: 2026-10-30

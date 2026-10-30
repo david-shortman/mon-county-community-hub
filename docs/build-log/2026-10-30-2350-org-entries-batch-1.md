@@ -1,0 +1,6 @@
+# 2026-10-30: Org entries from the landscape map, batch 1 (#5, #22)
+
+- **Considered:** the landscape map (Oct 28) names many local groups that have no entry in `content/orgs/`. Pages and the API can only point to groups that have one.
+- **Chose:** 18 organizations with no shelter, crisis, food or benefits topic, so they can ship now: local government and planning (County Clerk, Region VI, the transportation planning group, Mountain Line, BOPARC), arts (Arts Council, Monongalia Arts Center, the Met), health (Mon Medical Center, Ruby Memorial, the WVU disability center, SteppingStones), seniors (Senior Monongalians, Westside Senior Center), youth (The Shack), and funders and business (United Way, Your Community Foundation, Morgantown Area Partnership).
+- **Checked:** every phone number, address, hour and fee was matched to the listed source page on October 30. Where an org's own page could not be loaded, the summary says only what the county's agency directory says (Monongalia Arts Center).
+- **Left for later:** groups whose entries name food, housing, money or a crisis line go in a separate PR that waits for David. Westover, Blacksville and the 911 center are already in open PR #675.
