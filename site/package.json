@@ -11,6 +11,7 @@
     "check-content": "node scripts/check-content.mjs",
     "update-feeds": "node scripts/update-feeds.mjs",
     "health": "node scripts/health.mjs",
+    "check-a11y": "node scripts/check-a11y.mjs",
     "check-contrast": "node scripts/check-contrast.mjs",
     "check-weight": "node scripts/check-weight.mjs"
   },
@@ -20,6 +21,8 @@
     "yaml": "^2.9.1"
   },
   "devDependencies": {
-    "pagefind": "1.5.2"
+    "axe-core": "4.10.2",
+    "pagefind": "1.5.2",
+    "playwright": "1.63.0"
   }
 }
