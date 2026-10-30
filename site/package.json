@@ -15,11 +15,13 @@
     "check-a11y": "node scripts/check-a11y.mjs",
     "check-contrast": "node scripts/check-contrast.mjs",
     "check-weight": "node scripts/check-weight.mjs",
-    "check-api": "node scripts/check-api.mjs && node scripts/test-ics.mjs && node ../apps/mcp/test/smoke.mjs dist/api/v1"
+    "check-api": "node scripts/check-api.mjs && node scripts/test-ics.mjs && node ../apps/mcp/test/smoke.mjs dist/api/v1",
+    "secondhand-due": "node scripts/secondhand-due.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^5.18.2",
+    "qrcode-generator": "^2.0.4",
     "yaml": "^2.9.1"
   },
   "devDependencies": {

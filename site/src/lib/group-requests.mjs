@@ -56,6 +56,7 @@ export function parseRequest({ body = '', created_at, closed_at = null, number, 
     due: addDays(received, REQUEST_DAYS),
     closed: closed_at ? easternYmd(closed_at) : null,
     hasDueLine: /^\s*Due:\s*\d{4}-\d{2}-\d{2}/.test(text),
+    lateReason: field(text, 'Late because'),
     labels: names,
     overdueHidden: names.includes(OVERDUE_LABEL),
   };
@@ -91,4 +92,32 @@ export function promiseStats(requests, today, { since = null } = {}) {
   const hiddenOnTime = decided.filter((r) => r.overdueHidden);
   const late = decided.filter((r) => !fixedOnTime.includes(r) && !hiddenOnTime.includes(r));
   return { total: inRange.length, decided: decided.length, fixedOnTime: fixedOnTime.length, hiddenOnTime: hiddenOnTime.length, late };
+}
+
+// All group-request issues opened by the team, read once per build for the
+// public numbers (#523). Uses GITHUB_TOKEN when the build has one. Never
+// throws: on any problem it returns null and the pages say the numbers could
+// not be loaded, so a GitHub hiccup never stops the site from building.
+export const REQUESTS_URL = 'https://github.com/david-shortman/mon-county-community-hub/issues?q=label%3Agroup-request';
+let loaded;
+export function loadGroupRequests() {
+  loaded ??= (async () => {
+    try {
+      const token = process.env.GITHUB_TOKEN;
+      const headers = { Accept: 'application/vnd.github+json', 'User-Agent': 'everything-morgantown-build', ...(token ? { Authorization: `Bearer ${token}` } : {}) };
+      const out = [];
+      for (let page = 1; page < 20; page++) {
+        const res = await fetch(`https://api.github.com/repos/david-shortman/mon-county-community-hub/issues?state=all&labels=${LABEL}&per_page=100&page=${page}`, { headers, signal: AbortSignal.timeout(15000) });
+        if (!res.ok) throw new Error(`GitHub said ${res.status}`);
+        const batch = await res.json();
+        out.push(...batch.filter((i) => !i.pull_request && i.state_reason !== 'not_planned').map(parseRequest).filter((r) => r.fromTeam));
+        if (batch.length < 100) break;
+      }
+      return out;
+    } catch (err) {
+      console.warn(`group requests: could not load (${err.message}); pages will say so`);
+      return null;
+    }
+  })();
+  return loaded;
 }

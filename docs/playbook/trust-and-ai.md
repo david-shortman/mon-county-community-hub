@@ -1,6 +1,6 @@
 # Trust and AI
 
-This hub is built mostly by AI agents, and residents may use it to find help with food, bills, health care, and deadlines. That means trust depends on two things: being honest that AI is involved, and making sure AI never adds a fact that a real source does not support. This page collects practices from government AI guidance, newsroom standards, and fact-checking codes, and turns them into concrete rules for this repo.
+This site is built mostly by AI agents, and residents may use it to find help with food, bills, health care, and deadlines. That means trust depends on two things: being honest that AI is involved, and making sure AI never adds a fact that a real source does not support. This page collects practices from government AI guidance, newsroom standards, and fact-checking codes, and turns them into concrete rules for this repo.
 
 ## Disclose AI involvement in plain words
 

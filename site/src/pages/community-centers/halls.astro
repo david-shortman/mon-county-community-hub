@@ -34,7 +34,7 @@ const sourceFor = (r) => r.source ?? r.place.sources[0].url;
             <td>{r.seats ?? 'Not listed'}</td>
             <td>{yesNo(r.kitchen)}</td>
             <td>{yesNo(r.outdoor)}</td>
-            <td>{r.price ?? 'Ask'}</td>
+            <td>{r.price ?? 'Not published'}</td>
             <td>{r.deposit ?? 'Not listed'}</td>
             <td>{r.book}{r.place.contact?.phone && <> <a href={`tel:${r.place.contact.phone.replace(/\D/g, '')}`} class="nowrap">{r.place.contact.phone}<span class="sr-only">, {r.place.name}</span></a></>}</td>
             <td><a href={sourceFor(r)}>{prettyDate(checkedFor(r))}<span class="sr-only">, source for {r.place.name} {r.space}</span></a></td>
