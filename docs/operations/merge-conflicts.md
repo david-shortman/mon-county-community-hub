@@ -12,6 +12,8 @@ Several sessions open PRs at the same time, so a branch often falls behind `main
    ```
    Resolve each conflicted file, then run the same checks as before (`npm ci && npm run check-content && npm run build` in `site/` if the site changed), commit the merge, and push. Then run `scripts/pr-wait.sh` again. The review runs on the new commit.
 3. **Never force-push or rebase a branch someone else is using.** A merge commit is fine; the PR is squash-merged anyway.
+4. **After you merge, check `main`.** Run `scripts/pr-wait.sh main`. Two PRs can each pass on their own and still break `main` when they land minutes apart. This happened on 2026-10-30: a new page (#313) and a rule that every page needs tags (#314) merged together, and the site stopped deploying.
+5. **If `main` is red, fix it forward right away, but look first.** Check open PRs and the last few commits: another session may already be fixing it. On 2026-10-30 two sessions sent the same fix (#318, #319), which broke the build a second time until #320 removed the duplicate.
 
 ## Resolving the usual conflicts
 
