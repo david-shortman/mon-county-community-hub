@@ -1,0 +1,22 @@
+name: ReTails by M-SNAP
+slug: retails-m-snap
+kind: charity-thrift
+area: westover
+run_by: Mountaineer Spay Neuter Assistance Program (M-SNAP)
+address: "28 Commerce Drive, Westover, WV"
+sells: Donated items in like-new shape, such as china, dishes, cookware, artwork, purses, books, jewelry, small kitchen appliances, toys and furniture. No clothing.
+takes: New and gently used items in excellent condition during store hours. It does not take clothing, shoes, particle board furniture, large TV cabinets, building supplies, bedding, magazines, strollers, car seats, baby beds, or anything that uses fuel.
+goods: [home, books, kids]
+buys_from_you: false
+funds_local_cause: After store costs, the profit pays for M-SNAP vouchers that help Monongalia County residents get their dogs and cats spayed or neutered.
+url: https://www.m-snap.org/fix-your-pet/
+url_label: M-SNAP website
+status: confirmed
+note: In WesMon Plaza off the Westover I-79 exit. Closed Sunday and Monday. M-SNAP says to check its Facebook page for current hours.
+sources:
+  - url: https://www.m-snap.org/fix-your-pet/
+    checked: 2026-10-30
+  - url: https://www.m-snap.org/donate/
+    checked: 2026-10-30
+  - url: https://www.dominionpost.com/2024/08/30/retails-moves-to-wesmon-plaza-after-14-years-at-morgantown-mall/
+    checked: 2026-10-30

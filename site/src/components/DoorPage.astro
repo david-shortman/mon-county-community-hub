@@ -30,7 +30,10 @@ const live = (href) => pages.has(href.split(/[?#]/)[0]);
 const situations = data.situations.filter((s) => live(s.page));
 const groups = [['today', 'Today'], ['week', 'This week'], ['season', 'This season'], ['opens', 'When it opens']];
 // Each step once, with every live situation that uses it.
-const stepSits = (id) => situations.filter((s) => s.steps.includes(id));
+const stepSits = (id) => situations.filter((s) => (s.steps ?? []).includes(id));
+// A situation with no steps (a whole section, like Community centers) shows as a
+// "Start here" link to its page instead.
+const pageOnly = situations.filter((s) => !(s.steps ?? []).length);
 const steps = Object.values(data.steps).filter((st) => stepSits(st.id).length);
 const also = data.also.filter((a) => live(a.href));
 const topics = guide ? [data.topic] : Object.keys(door.topics);
@@ -74,6 +77,14 @@ const r211 = resource('wv-211');
 
 <section class="door-plan" id="door-plan" hidden aria-labelledby="door-plan-h">
   <h2 id="door-plan-h" tabindex="-1">Your steps</h2>
+  {pageOnly.length > 0 && (
+    <div class="step-group">
+      <h3>Start here</h3>
+      <ol class="steps">
+        {pageOnly.map((s) => <li class="step" data-sits={s.id}><p><a href={`${base}${s.page}`}>{s.label}</a>{s.text && ` ${s.text}`}</p></li>)}
+      </ol>
+    </div>
+  )}
   {groups.map(([when, label]) => {
     const list = steps.filter((st) => st.when === when);
     return list.length > 0 && (

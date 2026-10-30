@@ -1,0 +1,16 @@
+name: Antiques and Old Books
+slug: antiques-and-old-books
+kind: vintage-antique
+area: cheat-lake
+run_by: Antiques and Old Books
+hours: Thursday to Saturday, 11 a.m. to 5 p.m.
+sells: Old and signed books, West Virginia history books and books by West Virginia authors, plus antique furniture, stoneware and fine art.
+goods: [books, vintage, home]
+buys_from_you: false
+url: https://morgantownmag.com/cheat-lake-curation/
+url_label: Source
+status: unclear
+note: Newest source is from 2022. No website found.
+sources:
+  - url: https://morgantownmag.com/cheat-lake-curation/
+    checked: 2026-10-30

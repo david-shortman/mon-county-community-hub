@@ -100,8 +100,14 @@ doors:
       disability: Disability and aging
   - slug: community
     name: Your community
+    page: /community/
     hint: City or county, meetings, how we're doing, give or start something
     icon: hall
+    examples:
+      - text: Find a community center
+        href: /community-centers/
+      - text: Rent a hall
+        href: /community-centers/halls/
     topics:
       community: Community life
       government: City and county government
