@@ -67,7 +67,7 @@ David chose a mix of all three workshop directions:
 |---|---|---|
 | **B. Front Door** | The home page | One question, "What do you need help with?", a visible search box, plain need buttons, and "Call or text 211" pinned on top. Short question flows end at real organizations. Answers live in the web address, so nothing is stored. |
 | **A. Trailhead** | Every guide | Each need is a route with steps (mileposts), collapsed until needed, each step ending in an action. Based on the GOV.UK step-by-step pattern. |
-| **C. Living Ridgeline** | The identity layer | A small library of real ridge profiles from views residents know, one per topic, with one tint each. Type and layout stay fixed so it always reads as one hub. Still one ridge per screen. |
+| **C. Living Ridgeline** | The identity layer | A straight line under the menu with very small silhouettes of places here sitting on it (#241). Type and layout stay fixed so it always reads as one hub. Still one line per screen, and nothing on pages, sections or titles. |
 
 Each direction gets its own issue and PR. Until those ship, the rules below still apply as written.
 
@@ -84,7 +84,7 @@ We use three cues. That is the whole list. Adding a fourth needs a note in this 
 
 | Cue | Where it comes from | How we use it | Why this one |
 |---|---|---|---|
-| **Ridgeline** | The wooded hills you see from almost anywhere in town | One thin, hand-drawn line of rolling hills: under the site header on wide screens, and as the top edge of the tab bar on phones ([`RidgeLine.astro`](../../site/src/components/RidgeLine.astro)) | Everyone here sees these hills every day. It is about the land, not any group. It is quiet enough to ignore. |
+| **Ridgeline** | The wooded hills, brick downtown and river towns you see from almost anywhere here | One straight line with very small silhouettes of local places on it: the bottom border of the header on wide screens, and the top edge of the tab bar on phones ([`RidgeLine.astro`](../../site/src/components/RidgeLine.astro)) | Everyone here knows these shapes. They are about the place, not any group. They are quiet enough to ignore. |
 | **Hill green** | The same wooded hills | The accent color for links, dates, and focus (`--accent`, kept from before) | Already readable and trusted. Green from the hills, not from a team or agency. |
 | **Brick** | Downtown and the old glass factories | A thin edge on "who to ask" boxes (`.note`) and the line above the footer (`--brick`) | Brick is what the old town is built from. It ties the site to downtown without copying any building or sign. |
 
@@ -155,11 +155,24 @@ Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base
 
 ## The motif: the ridgeline
 
-- **What:** One thin line of rolling hills, drawn by us as an SVG path. On wide screens it sits on the header's bottom border, so the hills rise out of the line. On phones it is the top edge of the bottom tab bar, filled underneath so the bar's top looks like a hillside.
-- **Where:** Once per screen. Header on wide screens, tab bar on phones (the CSS hides the other one). Not in cards, not as a background, not repeated down the page.
-- **How:** Use the [`RidgeLine`](../../site/src/components/RidgeLine.astro) component. It has `aria-hidden="true"` and `focusable="false"`, so screen readers skip it. It crops instead of stretching (`preserveAspectRatio="xMidYMax slice"`), so the hills keep their shape from 320px to wide screens. The stroke stays 1.5px at any size.
-- **Never:** animate it, color it in (the only fill allowed is the tab bar's own background under the line), put text on it, or use it as a logo.
-- **Doors:** each door may carry its own ridge profile and one tint from the Living Ridgeline library (#241), so a person can tell the doors apart at a glance. Type, layout and the color roles stay the same on every door. Until #241 builds the library, every door uses this one ridge and the base tokens.
+- **What:** One straight line with very small, plain silhouettes of places here sitting on it, like a far-off skyline (#241, chosen by David on October 30, 2026; [decision](../decisions/2026-10-30-0800-skyline-ridgeline.md)). It replaced the first wavy line of hills. The shapes are at most 13px tall, solid, in the faint `--ridge` color, with long stretches of plain line between groups.
+- **The shapes and where they come from.** Each group is our own simple drawing of a kind of place sourced in "What makes this place look like itself" above. Nothing is traced from a photo, map, sign or logo. Shapes and layout live in [`site/src/lib/skyline.mjs`](../../site/src/lib/skyline.mjs).
+
+  | Group | What it shows |
+  |---|---|
+  | Trees | The wooded hills around town |
+  | A knob with trees | Dorsey's Knob and the hills like it |
+  | Houses on a hillside | Neighborhoods that climb the hills, like Sunnyside and Wiles Hill |
+  | Three brick blocks | Downtown storefronts |
+  | Two warehouses | The Wharf District |
+  | A long low building and a tall stack | The Seneca glass factory, now the Seneca Center |
+  | A truss bridge | The rail-trails on old rail lines |
+
+- **Left out on purpose:** the courthouse and other government buildings (would look official), WVU buildings and the PRT (would look like WVU), churches (would favor one group), and any business.
+- **Where:** Once per screen. The bottom border of the header on wide screens, the top edge of the tab bar on phones (the CSS hides the other one). Not on pages, sections, titles or cards, and not repeated down the page. On phones the shapes have a thin halo in the page color so text scrolling behind the bar stays apart from them.
+- **How:** Use the [`RidgeLine`](../../site/src/components/RidgeLine.astro) component. It has `aria-hidden="true"` and `focusable="false"`, so screen readers skip it. It crops from the middle instead of stretching (`preserveAspectRatio="xMidYMax slice"`), so a phone shows the middle groups (the knob, trees, downtown, the glass stack, the bridge) and wide screens show more.
+- **Never:** animate it, add color beyond `--ridge`, put text on it, make the shapes bigger, or use it as a logo.
+- **Doors:** every door uses the same line. Doors do not get their own shapes or tints.
 
 ## Voice notes
 
