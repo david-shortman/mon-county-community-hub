@@ -1,0 +1,58 @@
+name: Smithtown Community and Senior Center
+slug: smithtown
+kind: community-center
+area: south
+community: Smithtown
+run_by:
+  kind: volunteer-association
+  text: The Smithtown Community Association, a volunteer group. The county lists the building as county property
+story: The 1939 Smithtown Grade School building, a community and senior center since 1983.
+facilities:
+  rooms:
+    - name: Main classroom (9 long tables with 8 chairs each)
+      seats: 72
+    - name: Second classroom (4 round tables with 7 chairs each)
+      seats: 28
+  kitchen: true
+  outdoor: [picnic pavilion, "playground with swings, slides and a fenced play ship and fort", basketball court, baseball field]
+regular:
+  - Seniors dinner on the fourth Monday of each month
+  - Community meeting on the first Monday of each month
+membership:
+  dues: $3 a person or $5 a family each year
+  covers: Collected at the yearly Fall Quilt and Craft Show
+rentals:
+  - space: Building (two classrooms and kitchen)
+    seats: 72
+    kitchen: true
+    outdoor: false
+    price: $150 (a credit card costs extra)
+    deposit: $50, kept if you cancel within two weeks of the date
+    book: Email smithtowncommunity@gmail.com or use the contacts on the center's rentals page.
+    source: http://www.smithtowncommunity.com/facility-use.html
+  - space: Picnic pavilion
+    outdoor: true
+    price: $35 ($40 by credit card)
+    book: Email smithtowncommunity@gmail.com or use the contacts on the center's rentals page.
+    source: http://www.smithtowncommunity.com/facility-use.html
+contact:
+  url: http://www.smithtowncommunity.com/
+  email: smithtowncommunity@gmail.com
+  facebook: https://www.facebook.com/Smithtowncommunity
+  place: 56 Smithtown School Rd, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-10
+tags: [family-friendly]
+notes:
+  - The playground is open to the public when no private event is going on. The building is tobacco, alcohol and drug free.
+sources:
+  - url: http://www.smithtowncommunity.com/
+    checked: 2026-10-30
+  - url: http://www.smithtowncommunity.com/about.html
+    checked: 2026-10-30
+  - url: http://www.smithtowncommunity.com/facility-use.html
+    checked: 2026-10-30
+  - url: http://www.smithtowncommunity.com/contact.html
+    checked: 2026-10-30
+  - url: http://www.smithtowncommunity.com/calendar.html
+    checked: 2026-10-30

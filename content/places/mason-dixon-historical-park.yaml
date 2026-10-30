@@ -1,0 +1,60 @@
+name: Mason-Dixon Historical Park
+slug: mason-dixon-historical-park
+kind: park-building
+area: west
+community: Core
+run_by:
+  kind: county
+  text: Monongalia County Parks and Recreation
+story: A county park near Core with a Red Barn and Annex to rent, pavilions, a cabin and trails.
+facilities:
+  rooms:
+    - name: Red Barn
+      seats: 65
+    - name: Annex
+      seats: 65
+  kitchen: true
+  outdoor: [pavilions, playground, trails, cabin]
+rentals:
+  - space: Red Barn (10 a.m. to 9 p.m.)
+    seats: 65
+    kitchen: true
+    outdoor: false
+    price: $125 a day, plus a $25 litter fee
+    deposit: None listed. Full payment when you book. Refunds only with more than 30 days' notice
+    book: Book online through the park's page, or call 304-879-4101.
+    source: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/red_barn.php
+  - space: Annex (10 a.m. to 9 p.m.)
+    seats: 65
+    outdoor: false
+    price: $100 a day, plus a $25 litter fee
+    deposit: None listed. Full payment when you book. Refunds only with more than 30 days' notice
+    book: Book online through the park's page, or call 304-879-4101.
+    source: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/annex.php
+  - space: Mason or Dunkard Pavilion (10 a.m. to dark)
+    seats: 100
+    outdoor: true
+    price: $100 a day
+    book: Book online through the park's page, or call 304-879-4101.
+    source: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/pavilions.php
+contact:
+  phone: "304-879-4101"
+  email: mdpark@monongaliacounty.gov
+  url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/
+  place: 79 Buckeye Road, Core, WV
+status: active
+last_activity_seen: 2026-10-30
+tags: [family-friendly]
+notes:
+  - No alcohol. Park hours are 8 a.m. to dusk.
+sources:
+  - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/red_barn.php
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/annex.php
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/pavilions.php
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/faq.php
+    checked: 2026-10-30
