@@ -65,6 +65,8 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f9f7f2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161714" media="(prefers-color-scheme: dark)" />
     {crisis && <meta name="referrer" content="no-referrer" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
@@ -138,7 +140,10 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
       main { padding-block: 24px 48px; }
       h1, h2, h3, header.site .brand { font-family: var(--display); font-weight: 800; text-wrap: balance; }
-      h1 { font-size: 1.9rem; line-height: 1.2; margin: 0.4em 0; }
+      h1 { font-size: clamp(1.7rem, 1.35rem + 1.75vw, 1.9rem); line-height: 1.2; margin: 0.4em 0; }
+      /* Modern CSS polish (#153): even line breaks, and cards that adapt to their own width */
+      p, li, dd, figcaption { text-wrap: pretty; }
+      .card, .mp-body { container-type: inline-size; }
       h2 { font-size: 1.35rem; margin-top: 2em; }
       .lede { font-size: 1.15rem; color: var(--muted); }
       .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
@@ -151,6 +156,8 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .date-chip .rel { font-size: 0.9rem; font-weight: 600; color: var(--muted); }
       .actions { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(9.5rem, 100%), 1fr)); gap: 8px; margin: 14px 0; }
       .actions > * { min-width: 0; }
+      /* After the base rule, so it wins inside a narrow card (#153) */
+      @container (max-width: 17rem) { .actions { grid-template-columns: minmax(0, 1fr); } }
       .btn .nowrap { white-space: normal; }
       main { overflow-wrap: anywhere; }
       .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 12px; border: 1.5px solid var(--accent); border-radius: 10px;
