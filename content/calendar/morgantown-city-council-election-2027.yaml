@@ -4,10 +4,10 @@ starts: 2027-04-27
 org_name: City of Morgantown
 who_it_is_for: Registered voters who live in Morgantown's odd-numbered wards, which elect council members this year.
 what_to_do: Vote on April 27 between 6:30 a.m. and 7:30 p.m. Questions go to the City Clerk at 304-284-7434.
-url: https://morgantownwv.gov/313/Election-Information
+url: https://morgantownwv.gov/157/Election-Information
 phone: 304-284-7434
 phone_label: the Morgantown City Clerk
 topics: [voting, government]
 sources:
-  - url: https://morgantownwv.gov/313/Election-Information
+  - url: https://morgantownwv.gov/157/Election-Information
     checked: 2026-10-28

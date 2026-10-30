@@ -8,7 +8,7 @@ hours: Open 24 hours a day, 7 days a week
 contact:
   phone: "211"
   text: "898-211"   # text your ZIP code
-  url: https://www.wv211.org
+  url: https://wv211.org/
 cost: free
 sources:
   - url: https://bfa.wv.gov/page/west-virginia-211
