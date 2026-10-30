@@ -15,7 +15,7 @@
 // Thresholds and who reacts to what are in docs/operations/README.md.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, todayYmd, upcoming, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
 
 // ---------- settings ----------
 const args = process.argv.slice(2);
@@ -230,6 +230,12 @@ function checkContent() {
   for (const e of entries) {
     if (e.ends < today) continue; // finished entries do not show, so skip them
     const oldest = (e.sources || []).map((s) => s.checked).filter(Boolean).sort()[0];
+    if (!oldest || oldest < dueYmd) past.push(`${e._file}: last checked ${oldest ?? 'never'}`);
+    else if (oldest < soonYmd) soon.push(`${e._file}: last checked ${oldest}`);
+  }
+  // Orgs and resources never end, so every one of them gets re-checked.
+  for (const e of [...loadDir('orgs'), ...loadDir('resources')]) {
+    const oldest = (e.sources || []).map((s) => ymd(s.checked)).filter(Boolean).sort()[0];
     if (!oldest || oldest < dueYmd) past.push(`${e._file}: last checked ${oldest ?? 'never'}`);
     else if (oldest < soonYmd) soon.push(`${e._file}: last checked ${oldest}`);
   }

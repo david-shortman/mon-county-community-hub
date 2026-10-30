@@ -1,7 +1,7 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, loadDoors, loadDoorPage, resource, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 
 const errors = [];
@@ -40,6 +40,72 @@ for (const e of loadCalendar()) {
     else if (s.checked < stale) warnings.push(`${where}: source last checked ${s.checked}, re-verify`);
   }
   if (JSON.stringify(e).includes('\u2014')) errors.push(`${where}: contains an em dash`);
+}
+
+// Orgs and resources (content/orgs, content/resources). Pages build call,
+// text and map links straight from these records, so a typo here would
+// ship a wrong link without failing the build (#259, #8).
+// A phone is a short code (211, 988), a text code (898-211), or a full
+// number, with an optional leading 1- (304-555-0100, 1-877-716-1212).
+const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(String(p));
+const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
+const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
+const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources'];
+const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email'];
+const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
+
+function checkRecord(e, required, known) {
+  const where = e._file;
+  for (const f of required) if (e[f] == null || e[f] === '') errors.push(`${where}: missing ${f}`);
+  for (const k of Object.keys(e)) if (k !== '_file' && !known.includes(k)) warnings.push(`${where}: unknown field ${k} (see content/README.md)`);
+  if (e.slug && !isSlug(e.slug)) errors.push(`${where}: slug must be lowercase letters, numbers and dashes`);
+  if (e.slug && path.basename(where).replace(/\.ya?ml$/, '') !== e.slug) errors.push(`${where}: file name should match slug ${e.slug}`);
+  if (e.topics != null && (!Array.isArray(e.topics) || !e.topics.length)) errors.push(`${where}: topics must be a list with at least one topic`);
+  if (!e.sources?.length) errors.push(`${where}: needs at least one source`);
+  for (const s of e.sources ?? []) {
+    const checked = ymd(s.checked);
+    if (!isUrl(s.url)) errors.push(`${where}: source url is not a web link`);
+    if (!isDate(checked)) errors.push(`${where}: source needs a checked date (YYYY-MM-DD)`);
+    else if (checked > todayYmd()) errors.push(`${where}: source checked date ${checked} is in the future`);
+    else if (checked < stale) warnings.push(`${where}: source last checked ${checked}, re-verify`);
+  }
+  if (JSON.stringify(e).includes('—')) errors.push(`${where}: contains an em dash`);
+}
+
+const orgs = loadDir('orgs');
+const orgSlugs = new Set();
+for (const o of orgs) {
+  const where = o._file;
+  checkRecord(o, ['name', 'slug', 'kind', 'summary', 'topics', 'area'], ORG_FIELDS);
+  if (orgSlugs.has(o.slug)) errors.push(`${where}: duplicate slug ${o.slug}`);
+  orgSlugs.add(o.slug);
+  if (o.kind && !KINDS.includes(o.kind)) errors.push(`${where}: kind must be one of ${KINDS.join(', ')}`);
+  if (o.area && !AREAS.includes(o.area)) errors.push(`${where}: area must be one of ${AREAS.join(', ')}`);
+  if (o.website != null && !isUrl(o.website)) errors.push(`${where}: website is not a web link`);
+  if (o.phone != null && !isPhone(o.phone)) errors.push(`${where}: phone must look like 211, 898-211, 304-555-0100 or 1-877-716-1212`);
+}
+
+const resources = loadDir('resources');
+const resourceSlugs = new Set();
+for (const r of resources) {
+  const where = r._file;
+  checkRecord(r, ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'what_to_do', 'contact'], RESOURCE_FIELDS);
+  if (resourceSlugs.has(r.slug)) errors.push(`${where}: duplicate slug ${r.slug}`);
+  resourceSlugs.add(r.slug);
+  if (r.org && !orgSlugs.has(r.org)) errors.push(`${where}: org ${r.org} has no file in content/orgs/`);
+  if (r.hours != null && (typeof r.hours !== 'string' || !r.hours.trim())) errors.push(`${where}: hours must be text, like "Monday to Friday, 9 a.m. to 5 p.m."`);
+  if (r.cost != null && typeof r.cost !== 'string') errors.push(`${where}: cost must be text`);
+  const c = r.contact;
+  if (c == null) continue;
+  if (typeof c !== 'object') { errors.push(`${where}: contact must have phone, text, url, place or email under it`); continue; }
+  for (const k of Object.keys(c)) if (!CONTACT_FIELDS.includes(k)) warnings.push(`${where}: unknown contact field ${k}`);
+  if (!c.url) errors.push(`${where}: contact needs a url`);
+  else if (!isUrl(c.url)) errors.push(`${where}: contact url is not a web link`);
+  if (c.phone != null && !isPhone(c.phone)) errors.push(`${where}: contact phone must look like 211, 304-555-0100 or 1-877-716-1212 (quote it)`);
+  if (c.text != null && !isPhone(c.text)) errors.push(`${where}: contact text must look like 898-211 or 304-555-0100 (quote it)`);
+  if (c.place != null && (typeof c.place !== 'string' || !/,/.test(c.place))) errors.push(`${where}: contact place must be text like "200 M-Tec Dr, Morgantown, WV"`);
+  if (c.email != null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(c.email))) errors.push(`${where}: contact email does not look like an email address`);
 }
 
 // Saved feed snapshots are committed too, so check them the same way.
@@ -128,5 +194,5 @@ for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
-console.log(`Checked ${slugs.size} calendar entries, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
+console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);
