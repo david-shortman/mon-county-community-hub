@@ -4,7 +4,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
 import AppShell from '../components/AppShell.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
-import { loadDoors } from '../lib/content.mjs';
+import { loadDoors, todayYmd } from '../lib/content.mjs';
+import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
 const { crisis = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(/\.\w+$/.test(Astro.url.pathname) ? Astro.url.pathname : Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
@@ -49,6 +50,12 @@ const footerLinks = [
   { href: '/about/', label: 'About this site' },
   { href: '/partners/', label: 'For groups and helpers' },
 ];
+// Dateline: the place, today's date and the forecast, in Eastern time. The
+// page script keeps the date current between rebuilds.
+const today = todayYmd();
+const dayFmt = (style) => new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: style, month: style, day: 'numeric' }).format(new Date(`${today}T12:00:00Z`));
+const [longToday, shortToday] = [dayFmt('long'), dayFmt('short')];
+const forecast = await todaysForecast();
 const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Community Hub';
 ---
 <!doctype html>
@@ -95,6 +102,10 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       header.site { border-bottom: 1px solid var(--line); }
       header.site .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; padding-block: 14px; }
       header.site .brand { color: var(--fg); text-decoration: none; margin-right: auto; }
+      .dateline { margin: 0; font-size: 0.9rem; color: var(--muted); }
+      .dateline .dl-short { display: none; }
+      .dateline a { color: var(--muted); }
+      .dateline .icon { width: 1.15em; height: 1.15em; vertical-align: -0.2em; margin-right: 3px; }
       nav.main { display: flex; flex-wrap: wrap; flex-basis: 100%; gap: 0 18px; position: relative; }
       nav.main .tab { display: none; }
       nav.main .wide { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
@@ -111,7 +122,10 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         :root { --tab-fs: min(0.875rem, 6vw); --tabbar: calc(44px + 2.3 * var(--tab-fs) + env(safe-area-inset-bottom)); }
         html { scroll-padding-bottom: calc(var(--tabbar) + 16px); }
         body { padding-bottom: var(--tabbar); }
-        header.site .wrap { padding-block: 12px 10px; }
+        header.site .wrap { padding-block: 12px 10px; row-gap: 2px; }
+        .dateline { font-size: 0.85rem; }
+        .dateline .dl-long { display: none; }
+        .dateline .dl-short { display: inline; }
         nav.main { position: fixed; z-index: 10; inset: auto 0 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0;
           background: var(--card); border-top: 1px solid var(--line); padding: 4px max(4px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(4px, env(safe-area-inset-left)); }
         nav.main .wide { display: none; }
@@ -268,6 +282,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     <header class="site">
       <div class="wrap">
         <a class="brand" href={`${base}/`}>Mon County Community Hub</a>
+        <p class="dateline">Morgantown <span aria-hidden="true">·</span> <span class="dl-long" data-fmt="long">{longToday}</span><span class="dl-short" data-fmt="short">{shortToday}</span>{forecast && <span id="dl-wx" data-day={forecast.day}> <span aria-hidden="true">·</span> <a href={FORECAST_PAGE}><Icon name={forecast.icon} />{forecast.text}<span class="sr-only"> (National Weather Service forecast)</span></a></span>}</p>
         <nav class="main" aria-label="Main">
           {tabs.map((t) => <a class="tab" href={`${base}${t.href}`} aria-current={t.current}><Icon name={t.icon} /><span>{t.label}</span></a>)}
           {wide.map((w) => <a class="wide" href={`${base}${w.href}`} aria-current={w.current}>{w.label}</a>)}
@@ -304,6 +319,13 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         window.addEventListener('beforeprint', function () {
           document.querySelectorAll('.milepost details').forEach(function (d) { d.open = true; });
         });
+        // Dateline: today's date, and hide a forecast from an earlier day.
+        document.querySelectorAll('.dateline [data-fmt]').forEach(function (el) {
+          var f = el.dataset.fmt;
+          el.textContent = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: f, month: f, day: 'numeric' }).format(new Date());
+        });
+        var wx = document.getElementById('dl-wx');
+        if (wx && wx.dataset.day !== today) wx.hidden = true;
         // 2. Share: the phone's share sheet when there is one, otherwise copy the link.
         var say = function (t) { var a = document.getElementById('announce'); a.textContent = ''; setTimeout(function () { a.textContent = t; }, 50); };
         document.querySelectorAll('button.share').forEach(function (b) {

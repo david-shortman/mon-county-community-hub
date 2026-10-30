@@ -165,6 +165,14 @@ The site has no drawn motif right now. On October 30, 2026 we tried three (a wav
 
 Before adding any drawn shape again, show David screenshots first and run the "Is it too much?" check below.
 
+## Quiet local touches
+
+Ways to root the site in Mon County through useful words and facts instead of decoration. David picked these on October 30, 2026.
+
+- **Dateline** (shipped): under the site name, "Morgantown · Friday, October 30 · High 66°, mostly sunny", with one small weather symbol, in `--muted` text. Phones use the short date ("Fri, Oct 30"). The forecast comes from the National Weather Service (api.weather.gov, public domain, free) at build time, so visitors' browsers never contact a weather service. The site rebuilds every morning and on every merge; the page script keeps the date current and hides a forecast from an earlier day. If the service is down, the dateline shows the date only. The forecast links to the NWS page as its source. Code: [`site/src/lib/weather.mjs`](../../site/src/lib/weather.mjs).
+- **Town names on places** (next): each place card names its town or neighborhood and a landmark people use for directions.
+- **Town filter on Dates** (next): choose a town to see only its dates.
+
 ## Voice notes
 
 Use the names residents use, when it makes directions clearer. Always give the full or official name once on a page, then the short name.
