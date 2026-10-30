@@ -44,7 +44,7 @@ sources:
 
 ## `calendar/<slug>.yaml`: dates and deadlines
 
-Shown on the site's Deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).
+Shown on the site's Dates and deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).
 
 ```yaml
 title: Heating bill help (LIEAP) applications open
