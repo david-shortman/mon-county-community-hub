@@ -60,7 +60,7 @@ Ranked by how strongly the evidence says it matters here.
 | 6 | Moving here and newcomers | "relocating", "which areas", "is $1,500 enough", "who picks up trash at my address" | Neighborhoods in plain terms, real rent ranges, who serves my address (city, county, Cheat Lake), how to set up utilities | Local forum posts (most common topic after recommendations) |
 | 7 | Transportation and child care | "bus to the hospital", "average daycare prices" | Routes and times; real local price ranges | CHNA: 21% named transportation; ALICE and health department survey list both as barriers |
 
-What we left out on purpose: the most common forum question was "who's good for X?" (a mechanic, a groomer, a lawn service). Recommending businesses goes against our neutral, common good rule, so the hub should not try to answer it.
+What we left out on purpose: the most common forum question was "who's good for X?" (a mechanic, a groomer, a lawn service). Recommending businesses goes against our neutral, common good rule, so the site should not try to answer it.
 
 ## How spikes happen
 

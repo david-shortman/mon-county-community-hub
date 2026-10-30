@@ -2,7 +2,7 @@
 
 People find help in two ways. Many ask someone they trust: a librarian, a pantry volunteer, a nurse, a school coordinator, a pastor, a neighbor, or 211. Many others never will. They may feel ashamed to ask, may not want anyone to know, may not live near a helper, or may realize they need help at 11 at night or on a Sunday, when every office is closed.
 
-The hub serves both. It makes trusted helpers' work easier, and it lets anyone find help on their own, at any hour, with no name and no judgment. We also stay open to new ways of sharing information that are not happening anywhere today.
+The site serves both. It makes trusted helpers' work easier, and it lets anyone find help on their own, at any hour, with no name and no judgment. We also stay open to new ways of sharing information that are not happening anywhere today.
 
 This page is the source for the [reach epic (#155)](https://github.com/david-shortman/mon-county-community-hub/issues/155). The charter's limits apply to everything here: agents never contact anyone, and anything that talks to an outside group, spends money, prints, or sends texts waits for David. Every idea looks for a low or no cost way first and says what it would cost.
 
@@ -42,7 +42,7 @@ This page is the source for the [reach epic (#155)](https://github.com/david-sho
 
 1. **Two front doors.** Reach people through the helpers they trust, and directly, on their own terms. Neither replaces the other.
 2. **Try what is not happening yet.** Stay open to new ways of sharing information and helping people talk to each other that no one here offers today, within the charter's limits.
-3. **Make helpers faster, not busier.** The hub's job with helpers is to save them time, not to replace them or compete for attention.
+3. **Make helpers faster, not busier.** The site's job with helpers is to save them time, not to replace them or compete for attention.
 4. **Fresh, checked, and easy to pass on.** Anyone should see when a listing was last checked, and be able to print it, text it, or share it in one tap.
 5. **Open any hour, no name needed, no judgment.** Everything works at 2 a.m. on a Sunday without an account. We never ask who someone is. Words make asking feel normal, and say plainly who qualifies, so people do not rule themselves out.
 6. **Every listing says what happens next.** What to bring, what the first call is like, and who can help you through it, offered as a normal choice, not a last resort.
@@ -58,7 +58,7 @@ Each idea lists the issue that carries it, what it costs, and what needs David's
 
 #### 1. Make it easy to pass on
 
-Print, "text this to myself," and share on every listing, with the checked date showing. The text option is a plain phone link, so the person's own phone sends it and the hub runs no texting service. Issue #157, building on #39.
+Print, "text this to myself," and share on every listing, with the checked date showing. The text option is a plain phone link, so the person's own phone sends it and the site runs no texting service. Issue #157, building on #39.
 
 **Cost:** free. **Needs David's yes:** nothing.
 
@@ -76,13 +76,13 @@ Publish listings in the Open Referral format so 211, the family resource network
 
 #### 4. Show up where helpers already meet
 
-The county's family resource network holds regular coordinating meetings with local agencies. A 5-minute demo and a one-page handout, prepped by Duet, would let David show helpers what the hub does for them. Prep is #161. The decision is #163.
+The county's family resource network holds regular coordinating meetings with local agencies. A 5-minute demo and a one-page handout, prepped by Duet, would let David show helpers what the site does for them. Prep is #161. The decision is #163.
 
 **Cost:** free. **Needs David's yes:** attending, presenting, or sharing the handout.
 
 #### 5. Make the library a front door
 
-Library and agency computers should get a clean print view and the same pass-on tools as phones. Whether to ask the library to use the hub or keep cards at the desk is David's call. Build is part of #157. The decision is #163.
+Library and agency computers should get a clean print view and the same pass-on tools as phones. Whether to ask the library to use the site or keep cards at the desk is David's call. Build is part of #157. The decision is #163.
 
 **Cost:** free. **Needs David's yes:** any conversation with the library.
 
@@ -157,7 +157,7 @@ These map to the charter's scoreboard levels.
 - **Findability:** helper questions and after-hours questions added to the findability test, such as "A family needs food tonight. What do I hand them?" and "It is Sunday night and my power is being shut off. What can I do?"
 - **Use:** aggregate counts of print, text, and share clicks, question paths finished, and visits outside business hours, once analytics are decided (#41).
 - **Action:** partner-reported numbers only through David, per the measurement playbook.
-- **Recognition:** corrections from helpers, questions asked, and local groups linking to or sharing the hub.
+- **Recognition:** corrections from helpers, questions asked, and local groups linking to or sharing the site.
 
 The reach check (#112) and [audience facts](audience-facts.md) size which residents we reach and miss, using public, aggregate data only.
 
