@@ -1,0 +1,33 @@
+---
+// Crisis strip and quick exit (#174), only on pages a person in danger may
+// read (pass `crisis` to Base). It comes right after the skip link, before
+// the header and menu, so screen readers hear it first. Works with no script: the numbers are plain links and
+// "Leave this page" is a plain link to a neutral site. The small script below
+// adds the GOV.UK "Exit a page quickly" behavior: the page is swapped out
+// rather than added to the back button, and pressing Shift three times
+// leaves too. Leaving does not erase history; the note at the end of the
+// page says so. 988 facts: content/resources/988-lifeline.yaml.
+import { resource, telHref } from '../lib/content.mjs';
+const r988 = resource('988-lifeline');
+const exitUrl = 'https://www.weather.gov/';
+---
+<div class="crisis-strip" role="region" aria-label="Danger or crisis">
+  <div class="wrap">
+    <p>Danger? Call <a href="tel:911">911</a>. Crisis? Call or text <a href={telHref(r988.contact.phone)}>{r988.contact.phone}</a>.</p>
+    <a class="quick-exit" id="quick-exit" href={exitUrl} rel="noreferrer">Leave this page</a>
+  </div>
+</div>
+<script is:inline define:vars={{ exitUrl }}>
+  (function () {
+    var leave = function () { try { document.body.style.display = 'none'; } catch (e) {} location.replace(exitUrl); };
+    var link = document.getElementById('quick-exit');
+    if (link) link.addEventListener('click', function (ev) { ev.preventDefault(); leave(); });
+    var count = 0, timer;
+    document.addEventListener('keyup', function (ev) {
+      if (ev.key !== 'Shift') return;
+      count++; clearTimeout(timer);
+      timer = setTimeout(function () { count = 0; }, 1000);
+      if (count >= 3) leave();
+    });
+  })();
+</script>

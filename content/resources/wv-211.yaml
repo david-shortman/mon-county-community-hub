@@ -4,6 +4,7 @@ org: west-virginia-211
 topics: [housing, food, health, money]
 who_it_is_for: Anyone in West Virginia who needs help and is not sure where to start.
 what_to_do: Dial 211, text your ZIP code to 898-211, or chat online at wv211.org. Open 24 hours a day, 7 days a week. Tell them what you need and they will point you to local help.
+hours: Open 24 hours a day, 7 days a week
 contact:
   phone: "211"
   text: "898-211"   # text your ZIP code

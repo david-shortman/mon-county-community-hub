@@ -28,6 +28,7 @@ slug: free-tax-prep-example
 org: example-organization  # slug from orgs/
 topics: [poverty, money]
 who_it_is_for: Households earning under a set amount.
+hours: Monday to Friday, 9 a.m. to 5 p.m.  # optional; hours in words, as the source gives them (#139)
 what_to_do: Call to book an appointment, January through April.
 contact:
   phone: "304-555-0100"     # public organizational contact only
