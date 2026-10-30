@@ -1,0 +1,13 @@
+title: Veterans Crisis Line
+slug: veterans-crisis-line
+org: us-department-of-veterans-affairs
+topics: [veterans, health]
+who_it_is_for: Veterans, service members, National Guard and Reserve members, and the people who support them. You do not have to be in VA health care.
+what_to_do: Dial 988, then press 1. Or text 838255, or chat online. It is free, confidential, and open 24 hours a day. If someone is in danger right now, call 911.
+contact:
+  phone: "988"
+  url: https://www.veteranscrisisline.net/
+cost: free
+sources:
+  - url: https://www.veteranscrisisline.net/
+    checked: 2026-10-30
