@@ -3,12 +3,9 @@
 // Answers only from what the site and repo show today. "Not yet" marks a gap,
 // never a promise. Speaks for the project, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
-import { loadDir } from '../lib/content.mjs';
 export const page = { door: "about", label: "Hard questions", summary: "Who runs it, why AI, how facts get checked, and where we fall short" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const tellUs = 'https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml';
-const fixes = loadDir('corrections');
-const ourFinds = fixes.filter((c) => c.found_by === 'our-check').length;
 const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-reported-45-billion-ai-agreement-morrisey-says/';
 ---
 <Base title="Hard questions about Everything Morgantown" description="Straight answers about who runs Everything Morgantown, why it uses AI, how facts get checked, and where it falls short today.">
@@ -18,11 +15,12 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
   <h2>Who runs this site?</h2>
   <p>David McCoy. He is a software developer who has lived in West Virginia since 2022. This is a volunteer project. He is the person responsible for it. AI does most of the research and writing.</p>
 
-  <h2>Is he from here?</h2>
-  <p>No. David moved here in 2022. That is one reason the site points you to local groups and does not speak for them.</p>
+  <h2>Is David from West Virginia?</h2>
+  <p>Not originally. David moved to West Virginia in 2022 and lives in Mon County. A newcomer can miss things that people who grew up here know. So the site sends you to the local groups doing the work and does not speak for them.</p>
+  <p class="gap"><strong>Not yet:</strong> no one who grew up in Mon County reviews the pages yet.</p>
 
   <h2>Why use AI at all?</h2>
-  <p>There is a lot of good help here, but the details are spread across many sites, PDFs and phone lines, and they change often. One volunteer can't keep up with all of it. AI can reread sources every day. This site is a test of whether that can help people here.</p>
+  <p>There is a lot of good help in Morgantown and Monongalia County, but the details are spread across many sites, PDFs and phone lines, and they change often. One volunteer can't keep up with all of it. AI can reread sources every day. This site is a test of whether that can help people in Mon County.</p>
 
   <h2>Which AI? Who makes it?</h2>
   <p>Claude, made by a company called Anthropic.</p>
@@ -34,7 +32,6 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
   <h2>Does a person check every page before it goes up?</h2>
   <p>No, not today. The AI publishes most changes on its own. Before each change goes live, another AI run checks it against our rules for sources, plain words, fairness and privacy. Some changes always wait for David: changes to the rules, anything about money or outside accounts, and anything that speaks for the project. David looks over other pages when he can, after they are up.</p>
   <p class="gap"><strong>Not yet:</strong> pages about shelter, crisis help and benefits do not get a person's check before they go up.</p>
-  <p class="gap"><strong>Not yet:</strong> some date cards say "Checked by hand." That check was done by AI, not by a person. That wording is wrong.</p>
 
   <h2>How do you check facts?</h2>
   <ul>
@@ -46,7 +43,7 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
   </ul>
 
   <h2>What happens when something is wrong?</h2>
-  <p>We fix it in the open and list the fix on our <a href={`${base}/corrections/`}>Corrections</a> page. So far there {fixes.length === 1 ? 'is 1 fix' : `are ${fixes.length} fixes`}. {ourFinds === fixes.length ? `All of them were found by our own checks.` : `${ourFinds} of them were found by our own checks.`}</p>
+  <p>We fix it in the open and list the fix on our <a href={`${base}/corrections/`}>Corrections</a> page.</p>
   <p>AI can still get things wrong. Please check details with the group before you go, especially hours.</p>
 
   <h2>How do I tell you something is wrong?</h2>
