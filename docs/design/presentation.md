@@ -7,7 +7,7 @@ This guide says what shape each kind of information takes on the hub, so a perso
 
 This guide covers the part in between: **which building blocks to use for which information, and how the site is organized around people's needs.** When this guide and a rubric seem to disagree, the rubric wins and this guide gets fixed.
 
-Last checked: October 28, 2026. The work to build it out is tracked in the epic #172.
+Last checked: October 30, 2026. The work to build it out is tracked in the epics #172 and #248.
 
 ## Who we design for
 
@@ -62,22 +62,25 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 
 | Block | What it is | No-script version | Status |
 |---|---|---|---|
-| **Crisis strip** | A line at the top of safety pages: "In danger? Call 911. In crisis? Call or text 988." | Two plain `tel:` and `sms:` links | #174 |
-| **Quick exit** | A button that leaves the page fast, with a note that it does not erase history | A plain link to a neutral site; script adds the triple Shift shortcut | #174 |
-| **Need picker** | Big buttons with an icon and a word: "A bed tonight", "Food", "Help with a bill" | Links to pages or to sections on the same page | #173 |
-| **Place card** | Name, who it is for, hours in words, open now badge, tags, action buttons, last checked | Everything but the badge | #176 |
+| **Crisis strip** | A line at the top of safety pages: "Danger? Call 911. Crisis? Call or text 988." Stays on screen while scrolling | Plain `tel:` links | Exists (`CrisisStrip.astro`; pass `crisis` to `Base`) |
+| **Quick exit** | A button that leaves the page fast, with a note that it does not erase history. Crisis pages send no referrer | A plain link to a neutral site; script swaps the page out of Back and adds the triple Shift shortcut | Exists (`CrisisStrip.astro`) |
+| **Door cards** | The doors as big cards, each listing a few problems in residents' words that link straight to their page (or open the door with that problem picked) | Plain links | Exists (`DoorCards.astro`, home and search) |
+| **Pick what fits** | On a door page: "What's going on? Pick all that fit", then one set of steps grouped Today, This week and When it opens, each step ending in an action, with its cost and source. Picks live in the web address | A list of plain links to each situation's page | Exists (`DoorPage.astro`) |
+| **Four big choices** | Big buttons that jump to sections on a crisis page: "A bed tonight", "Food tonight" | Anchor links | Exists (`/stay-tonight/`) |
+| **Place card** | Name, hours in words, who it is for, how to get in, cost, action buttons, and a source link named for the place | Everything | Exists (`PlaceCard.astro`); the open now badge and tags are #176 |
 | **Tags** | Small icon plus word labels: walk in, appointment, no ID needed, free, hot meal, groceries, kid friendly, on a bus line | Plain text | #176 |
 | **Day list** | "Open today" first, then each day of the week, with jump links | Anchor links | Use in #60 |
 | **Days left chip** | "in 3 days", "closes Friday" next to the date | Worked out at build time; the site rebuilds every morning | Exists (calendar) |
-| **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list | #179 |
+| **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list | Door steps exist (`DoorPage.astro`); topic step paths are #179 |
 | **Question path** | One question per small page that leads to an answer: "Where should I go for care?" | Each answer is a link to the next page | #178 |
 | **Checklist** | "What to bring" with tick boxes | Boxes work but do not save; script saves them on the phone only | #179 |
 | **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | #179 |
 | **Labeled picture** | A drawing of a letter or notice with numbered callouts that match a list below it | The list carries all the meaning; the picture only helps | #179 |
-| **Printout** | A one page version that a pantry, library, or clinic can post | Print stylesheet | #157 and #160 |
-| **Send by text** | A link that opens a text message with the page link filled in | An `sms:` link | #157 |
+| **Printout** | A one page version that a pantry, library, or clinic can post | Print stylesheet | Door steps print cleanly; listing printouts and posters are #157 and #160 |
+| **Send by text** | A link that opens a text message with the page link filled in | An `sms:` link | Exists on door steps ("Text these steps to myself"); listings are #157 |
 | **Map on tap** | A Directions button that opens the phone's own map app | A link to the map app | Exists (`Actions`) |
-| **211 fallback** | The help now box | Plain links | Exists (`HelpNow`) |
+| **211 fallback** | The help now box | Plain links | Exists (`HelpNow`, and `HelpNowBar` on the home page) |
+| **Breadcrumb** | "Home › Get through this month" above the heading, from the page's tags | Plain links | Exists (`Breadcrumb.astro`) |
 
 ## What every listing needs
 
@@ -94,42 +97,63 @@ People need these facts to decide whether to go, and they give up when the facts
 9. **Languages and access**, such as an interpreter or a step-free entrance, only when the source says. Never guess.
 10. **Last checked date and source**, always (already required).
 
-Items 4, 6, 8, and 9 are not in the content schema yet. #177 adds hours, how to get in, and languages and access; #159 adds what to bring and what happens next. Both update `content/README.md` and the content check. #139 already moves the stay tonight hours into the data.
+Resources now carry hours in words (`hours`) and an address (`contact.place`), from #139. How to get in, languages and access are still to come in #177, and what to bring and what happens next in #159. Both update `content/README.md` and the content check.
 
 ## How the site is organized
 
-The site is organized by what people need, not by who provides it. Labels use residents' own words (rubric IA3).
+The site is organized by what is going on in a person's life, not by who provides help (#248, decision record [`2026-10-30-0600-door-structure`](../decisions/2026-10-30-0600-door-structure.md)). Labels use residents' own words (rubric IA3).
+
+### Four levels
+
+| Level | What it is | How many | Example | Who adds one |
+|---|---|---|---|---|
+| **Help now** | The urgent lane, one tap from every screen | 1 | `/stay-tonight/` | Fixed |
+| **Door** | A situation in someone's life, as a guided page: pick what fits, get steps in order | 5 | `/money/`, Get through this month | David decides |
+| **Topic** | One problem, with its places and steps | About 20 | `/utility-bills/` | Agents, inside a door |
+| **Answer page** | One question, answered | No limit | `/snap/` | Agents, inside a topic |
+
+Two layers cut across all of them: **Dates** (one calendar, shown on each door filtered to its topics) and **All topics** (`/topics/`, every page by door and A to Z).
+
+### Doors and pages
+
+| Door | Its page | Live inside it | Still to come |
+|---|---|---|---|
+| Help now (not a door) | `/stay-tonight/` | Grace Shelter, the domestic violence hotline, 211, 988 | A daytime warm place and food tonight, once sourced (#219, #60) |
+| Get through this month | `/money/` | Utility bills, food help and SNAP, rent, payday loans, free tax help | Housing (#202), food finder (#60), medical bills (#220) |
+| Get care | `/care/` | Flu and COVID shots, staying well, turning 65 | Where to go (#21), mental health (#203), dental and prescriptions (#220), Medicaid 2027 (#221), school and sports shots (#244), pregnant or new baby (#245) |
+| Living here | `/living-here/` | Trash and recycling | New here (#204), buses (#61), voting (points to the WV Secretary of State) |
+| Family and life changes | `/family/` | Work and learning, veterans | Kids and families (#225), disability and aging (#227), language help (#229) |
+| Your community | None yet | None yet | City or county (#20, #86), meetings (#12), how we are doing (#15, #62), small business (#19), giving (#63) |
+
+### How new content slots in
+
+- **Every page names its door and topic** in its frontmatter (`export const page = { door, topic, label, summary }`). The build makes the Topics page, breadcrumbs, door lists and search filters from these tags, so adding a page never means editing the menu. See `content/README.md`, "Tagging a site page".
+- **A door page is a data file**, `content/doors/<slug>.yaml`, read by the shared `DoorPage.astro`. Its steps point to resource records, so the door page states no facts of its own. A situation shows only once its page exists.
+- **Links stay short and flat** (`/utility-bills/`, not `/this-month/utility-bills/`), so renaming a door breaks nothing.
+- **A door with no live page stays off the home page** until its first page ships.
+- **Seasonal things come in through Dates and the season card**, never as new menu items.
+- **Doors change only with David's yes.** A topic that fits no door waits for that call instead of becoming a new menu item.
 
 ### Home screen
 
-The site is organized into five doors named for what is going on in a person's life, plus Help now, Dates and All topics (#248). The home page opens with the Help now bar (a place to stay tonight, 211, 911 and 988), then a title and one line, then "What do you need help with?" with the five door cards. Each card lists a few problems in residents' words that link straight to their page, and a problem appears only when its page exists, so nobody lands on an empty section. Then search, the "This season" card, the next three dates, and "Rather talk to a person?". The tab bar has four tabs: Home, Help now, Dates and Topics. Details: identity.md, "Front Door".
-
-### Site map by need
-
-| Need | Page | Main blocks | Status |
-|---|---|---|---|
-| Crisis and a place to stay tonight | `/stay-tonight/` | Crisis strip, quick exit, need picker, place cards | Live; redesign in #175 |
-| Food | `/food/` | Day list, place cards, tags, printout | Planned in #60 |
-| Deadlines | `/calendar/` | Days left chip, add to calendar, checklist | Live |
-| Help with a bill | `/utility-bills/` | Step path, place cards | Live |
-| Money, by situation | `/money/` | Situation list, place cards, scam note | Live; paths from #178 and #179 to follow |
-| Health care | `/health/` | Question path, place cards with cost tags | Needs research (#21) |
-| Housing help | `/housing/` | Step paths, timeline, labeled picture | Not started |
-| Jobs | `/jobs/` | Short cards with tags, links to local job help | Not started |
-| Events | inside `/calendar/` for now | Day list, tags, add to calendar, printout | Live as part of the calendar |
-| City and county services | `/how-do-i/` | Step paths, "City or county?" question path | Research in #20 and #86 |
-| Recycling | `/recycling/` | Place cards, days left chip | Live |
+The home page opens with the Help now bar (a place to stay tonight, 211, 911 and 988), then a title and one line, then "What do you need help with?" with a card for each door that has a live page. Each card lists a few problems in residents' words that link straight to their page or open the door with that problem picked. Then search, the "This season" card (November to March), the next three dates, and "Rather talk to a person?". The tab bar has four tabs: Home, Help now, Dates and Topics. Details: identity.md, "Front Door".
 
 ## Patterns by area
 
 What each kind of information should look like, and how it holds up on a cheap phone.
+
+### Door pages
+
+- **Shape:** title and one line, a "can't wait" strip for the one thing that cannot wait for this door's people, "What's going on? Pick all that fit", then one set of steps for everything picked, grouped Today, This week and When it opens. Each step ends in a Call, Open or Directions button and shows its cost and source. Then "Often goes with this", dates for this door, every page in the door, and a person to talk to.
+- **Why:** people rarely have one problem, and a short plan in order beats a list of pages.
+- **On a cheap phone:** under 300 KB (the live doors are 36 to 50 KB). With no script, the situations are plain links to their pages. Picks live in the web address, so steps can be texted, bookmarked or printed, and nothing is stored.
 
 ### Crisis and a place to stay tonight
 
 - **Shape:** crisis strip at the very top, then four big choices (a bed tonight, a warm place right now, food tonight, safe from someone), each jumping to its place cards. Place cards lead with a big Call button, hours in words, who it is for, and how to get in. Safety content has a quick exit.
 - **Why:** people here may be scared, cold, or out of battery. One clear action beats everything else on the page.
 - **On a cheap phone:** under 100 KB, no script needed, saved for offline once visited (#150), readable at 320px wide.
-- **Mockup:** [`mockups/stay-tonight.html`](mockups/stay-tonight.html). It uses made-up places only.
+- **Live:** `/stay-tonight/` (#175), the Help now page. Where we have no sourced place yet (a daytime warm place, a meal tonight), the section says so and points to 211 rather than listing anything unconfirmed. The original sketch is [`mockups/stay-tonight.html`](mockups/stay-tonight.html), with made-up places only.
 
 ### Food
 
@@ -170,7 +194,7 @@ What each kind of information should look like, and how it holds up on a cheap p
 
 ## Using this guide
 
-1. Start a new page by finding its need in the site map, then use the blocks listed for it.
+1. Start a new page by finding its door and topic in "How the site is organized", then use the blocks listed for it. Tag the page with its door and topic.
 2. Fill every listing field you can source. Leave out what you cannot source.
 3. Check the weight budget and the rubrics at 320px and 390px, light and dark, as identity.md says.
 4. If no block fits, propose a new one by PR to this file, with the evidence that called for it.

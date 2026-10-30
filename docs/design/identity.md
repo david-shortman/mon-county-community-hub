@@ -159,6 +159,7 @@ Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base
 - **Where:** Once per screen. Header on wide screens, tab bar on phones (the CSS hides the other one). Not in cards, not as a background, not repeated down the page.
 - **How:** Use the [`RidgeLine`](../../site/src/components/RidgeLine.astro) component. It has `aria-hidden="true"` and `focusable="false"`, so screen readers skip it. It crops instead of stretching (`preserveAspectRatio="xMidYMax slice"`), so the hills keep their shape from 320px to wide screens. The stroke stays 1.5px at any size.
 - **Never:** animate it, color it in (the only fill allowed is the tab bar's own background under the line), put text on it, or use it as a logo.
+- **Doors:** each door may carry its own ridge profile and one tint from the Living Ridgeline library (#241), so a person can tell the doors apart at a glance. Type, layout and the color roles stay the same on every door. Until #241 builds the library, every door uses this one ridge and the base tokens.
 
 ## Voice notes
 
@@ -177,6 +178,7 @@ Nearly everyone reaches the hub on a phone. Design for a 390px screen first, the
 - **Act first.** Every card leads with when it is (a big date and "in 3 days"), then what it is, then big buttons to act: Details, Call, Directions, Add to calendar, Share. Use the [`Actions`](../../site/src/components/Actions.astro) component. Each button shows only when we have a sourced link, phone, or place.
 - **Thumb reach.** The main menu is a tab bar at the bottom of the screen on phones, with icons and words, at least 48px tall, and the current page marked by bold text and a tinted pill (not color alone). It has four tabs: Home, Help now, Dates and Topics. The Topics tab is marked on any page inside a door. On wide screens the header shows Help now, the five doors, Dates and All topics. The footer lists the doors, All topics, About and For groups and helpers. All of it comes from `content/doors.yaml` (#250), so a new page never changes the menu: tag it with its door and topic (see `content/README.md`, "Tagging a site page") and it shows on the Topics page and its door.
 - **Big targets.** Buttons and tabs are at least 48px tall. Nothing a person needs to tap is smaller than 44px.
+- **Crisis pages.** A page a person in danger may read passes `crisis` to `Base`, which adds the crisis strip and the Leave this page button ([`CrisisStrip.astro`](../../site/src/components/CrisisStrip.astro), #174) and sends no referrer. The strip uses `--accent-bg` with a brick edge, and the button is `--fg` on `--bg`, so no new colors. It shows only on those pages, never across the site.
 - **Name things in context.** Screen readers hear which event a button is for ("Add to calendar: Free tire drop-off, November 14, 2026"), so no two links on a page sound the same.
 - **Local and plain.** Directions buttons use the place the source published. The card text around them uses names residents know (see the voice notes).
 - **Light pages.** CSS is inlined so a page paints in one request. The only script is small and optional; the page works without it.
