@@ -10,6 +10,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { CONTENT_DIR, loadCalendarWithFeeds, loadDir, todayYmd, ymd } from './content.mjs';
+import { loadMeetings } from './meetings/index.mjs';
 
 export const API_VERSION = 'v1';
 export const SITE_URL = 'https://everythingmorgantown.org';
@@ -113,6 +114,23 @@ export const TYPES = {
       },
     },
   },
+  meetings: {
+    description: 'Public meetings of City of Morgantown boards and the bodies on its AgendaCenter, from the last 120 days and ahead: meeting date, agenda link, and minutes link once posted. Read from the city\'s AgendaCenter page each day.',
+    id: 'slug',
+    required: ['slug', 'body', 'date', 'title', 'agenda_url', 'publisher', 'sources', 'first_seen', 'last_changed'],
+    properties: {
+      slug: str('Stable id, used in the record URL'),
+      body: str('The board, commission or council, as the city names it'),
+      date: date('Meeting date (YYYY-MM-DD), as the AgendaCenter lists it'),
+      title: str('Agenda title, as posted'),
+      agenda_url: str('The posted agenda (usually a PDF)', { format: 'uri' }),
+      minutes_url: str('The posted minutes; left out until they are posted', { format: 'uri' }),
+      publisher: str('Who posts the agenda'),
+      sources: SOURCES,
+      first_seen: date('Date we first saw this agenda'),
+      last_changed: date('Date we last saw the agenda or minutes change'),
+    },
+  },
   corrections: {
     description: 'Every fix we made to a fact, link or out-of-date detail.',
     id: 'id',
@@ -165,6 +183,8 @@ export async function records(type) {
   if (type === 'calendar') {
     const today = todayYmd();
     raw = (await loadCalendarWithFeeds()).filter((e) => e.ends >= today);
+  } else if (type === 'meetings') {
+    raw = await loadMeetings();
   } else if (type === 'corrections') {
     raw = loadDir('corrections').map((c) => ({ ...c, id: path.basename(c._file).replace(/\.ya?ml$/, '') }));
   } else {

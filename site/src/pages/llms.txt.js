@@ -47,6 +47,7 @@ export function GET({ site }) {
 - [Community centers and halls](${u('/community-centers/')}): community centers, senior centers and halls across Mon County, grouped by part of the county, with dinners and events, halls to rent, and how to join
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
 ${centers}
+- [City meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council and city board meetings, and minutes from the last 60 days, read daily from the city's AgendaCenter
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
