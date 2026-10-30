@@ -1,0 +1,10 @@
+name: Literacy Volunteers of Monongalia and Preston Counties
+slug: literacy-volunteers-monongalia-preston
+kind: nonprofit
+website: https://lvmpc.org/
+summary: A local nonprofit that gives free, confidential reading, writing and English lessons to adults, and runs family literacy programs.
+topics: [work, family]
+area: monongalia-county
+sources:
+  - url: https://lvmpc.org/
+    checked: 2026-10-30
