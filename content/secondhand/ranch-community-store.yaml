@@ -1,0 +1,24 @@
+name: The Ranch Community Store
+slug: ranch-community-store
+kind: charity-thrift
+area: elsewhere
+run_by: The Ranch Community Store, supporting Chestnut Mountain Ranch
+address: "255 Don Knotts Blvd, Morgantown, WV 26501"
+hours: Tuesday to Friday, 10 a.m. to 7 p.m.; Saturday, 10 a.m. to 3 p.m.
+sells: Gently used clothing, accessories, furniture, toys, games, books, home decor, housewares, sports gear, appliances, lawn items and tools.
+takes: Clothing, shoes, accessories, furniture, jewelry, DVDs, CDs, vinyl records, antiques, tools, toys, pet items, games, puzzles, housewares, linens, home decor, electronics, appliances and children's books. It does not take items with missing or broken parts, heavily soiled items, tube TVs, VHS or cassette tapes, pianos, building materials, cribs, hospital beds or adult books. Drop off at the store during open hours (items left at the door while closed can't be used). Clothing and shoes can go in the yellow bins in the parking lot at any time. Free pickup for at least one large piece of furniture; ask about two weeks ahead.
+goods: [clothes, kids, home, books, tools, electronics]
+buys_from_you: false
+funds_local_cause: Chestnut Mountain Ranch, a home and school for boys in crisis.
+url: https://ranchstore.org/
+url_label: Store website
+status: confirmed
+sources:
+  - url: https://ranchstore.org/
+    checked: 2026-10-30
+  - url: https://ranchstore.org/contact/
+    checked: 2026-10-30
+  - url: https://ranchstore.org/donations/
+    checked: 2026-10-30
+  - url: https://ranchstore.org/pickup/
+    checked: 2026-10-30

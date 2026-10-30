@@ -1,0 +1,19 @@
+name: Old School
+slug: old-school
+kind: vintage-antique
+area: downtown
+run_by: Old School
+address: "360 High St, Morgantown, WV"
+hours: Monday to Saturday, noon to 8 p.m.; Sunday, noon to 6 p.m.
+sells: Vintage clothing and WVU gear, graphic tees, crewnecks, work wear, jeans, sneakers, hats and records.
+goods: [clothes, vintage, books]
+buys_from_you: false
+url: https://www.thedaonline.com/news/from-thrift-to-tailgate-where-to-find-vintage-wvu-gear-this-season/article_a8c447bc-9188-4dd4-b097-cc9d2b555084.html
+url_label: News story
+status: confirmed
+note: Opened on High Street in May 2025.
+sources:
+  - url: https://www.thedaonline.com/news/from-thrift-to-tailgate-where-to-find-vintage-wvu-gear-this-season/article_a8c447bc-9188-4dd4-b097-cc9d2b555084.html
+    checked: 2026-10-30
+  - url: https://morgantownmag.com/old-school/
+    checked: 2026-10-30

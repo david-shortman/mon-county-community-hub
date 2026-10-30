@@ -1,0 +1,16 @@
+name: Nonna's Antiques
+slug: nonnas-antiques
+kind: vintage-antique
+area: elsewhere
+run_by: Nonna's Antiques
+hours: Tuesday to Friday, 11 a.m. to 6 p.m.; Saturday, 9 a.m. to 4 p.m.; Sunday, 11 a.m. to 5 p.m.
+sells: Antiques from about 20 vendors, including toys, tools, signs, ceramics, jewelry, glassware and holiday decor.
+goods: [vintage, home, tools]
+buys_from_you: false
+url: https://morgantownmag.com/an-antiques-oasis/
+url_label: News story
+status: confirmed
+note: Off Route 7 just past Interstate 68, next to HomeGrown Pizza.
+sources:
+  - url: https://morgantownmag.com/an-antiques-oasis/
+    checked: 2026-10-30

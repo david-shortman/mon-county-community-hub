@@ -1,0 +1,17 @@
+name: Morgantown Freecycle
+slug: freecycle-morgantown
+kind: free-program
+area: online
+run_by: The Freecycle Network
+sells: A free online group where people in town give away and ask for things they no longer need. Every item is free.
+takes: Things you want to give away. Post an offer in the group.
+goods: [home]
+buys_from_you: false
+who_can_use: Anyone who signs up. Membership is free.
+url: https://www.freecycle.org/town/MorgantownWV
+url_label: Freecycle group
+status: likely
+note: The group page listed 2,731 members on October 30, 2026.
+sources:
+  - url: https://www.freecycle.org/town/MorgantownWV
+    checked: 2026-10-30
