@@ -130,6 +130,18 @@ for (const s of secondhand) {
   }
 }
 
+// Boards (content/boards/<slug>.yaml): city boards and commissions for the
+// Serve on a board page (#290). Open seats come from the city's vacancy list.
+const BOARD_FIELDS = ['name', 'slug', 'org', 'decides', 'meets', 'who_can_serve', 'open_seats', 'page_vacant', 'url', 'topics', 'sources'];
+const boards = loadDir('boards');
+for (const b of boards) {
+  const where = b._file;
+  checkRecord(b, ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'], BOARD_FIELDS);
+  if (b.org && !orgSlugs.has(b.org)) errors.push(`${where}: org ${b.org} has no file in content/orgs/`);
+  if (b.url != null && !isUrl(b.url)) errors.push(`${where}: url is not a web link`);
+  for (const k of ['open_seats', 'page_vacant']) if (b[k] != null && !(Number.isInteger(b[k]) && b[k] >= 0)) errors.push(`${where}: ${k} must be a whole number`);
+}
+
 // Saved feed snapshots are committed too, so check them the same way.
 let feedCount = 0;
 for (const a of ADAPTERS) {

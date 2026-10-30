@@ -172,6 +172,28 @@ Every fact comes from a source page read in the same session, the same as other 
 
 Cards show "Not checked lately" once the oldest `checked` date is over 4 months old (#430).
 
+## `boards/<slug>.yaml`: city boards and commissions
+
+Shown on the Serve on a city board page (`/make-it-better/boards/`, #290). Never list members' names.
+
+```yaml
+name: Tree Board
+slug: tree-board
+org: city-of-morgantown        # slug from orgs/
+decides: What the board does, in one or two plain sentences, from its own page.
+meets: 4th Monday of every month, 3 p.m., Council Chambers
+who_can_serve: City residents.   # optional; only what the source says
+open_seats: 0                    # from the city's vacancy list
+page_vacant: 1                   # optional; vacant seats the board's own page shows, when it differs from the list
+url: https://www.morgantownwv.gov/264/Tree-Board
+topics: [better]
+sources:
+  - url: https://www.morgantownwv.gov/264/Tree-Board
+    checked: 2026-10-30
+  - url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+    checked: 2026-10-30
+```
+
 ## `doors.yaml`: the five doors
 
 The site is organized into five doors named for what is going on in a person's life, plus three lanes that are not doors: Help now, Dates, and About this site (#248). `doors.yaml` lists them and maps every `topics` tag used in this folder to one door, with the label people see:
