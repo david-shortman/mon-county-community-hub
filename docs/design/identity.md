@@ -32,7 +32,7 @@ Set by David on the workshop sliders, October 29, 2026. Every design and writing
 | Formal to casual | Casual (3 of 4) | Talk like a helpful neighbor: "you," short words, contractions are fine. |
 | Matter-of-fact to enthusiastic | Matter-of-fact (1 of 4) | State what to do. No exclamation points, no hype. |
 | Quiet to bold | Bold (3 of 4) | Heavy display type for headings, big dates, strong blocks of color where they help action. |
-| Timeless to seasonal | Lightly seasonal (2 of 4) | Type and layout never change. One tint or ridge may change by topic or season. |
+| Timeless to seasonal | Lightly seasonal (2 of 4) | Type and layout never change. Any seasonal touch stays small and quiet. |
 | Rooted to placeless | Deeply rooted (0 of 4) | Real local views, place names residents use, local materials in the palette. |
 | Read it all to answer first | Answer first (4 of 4) | The answer or the action sits at the top of every page. Explanation comes after. |
 
@@ -67,7 +67,7 @@ David chose a mix of all three workshop directions:
 |---|---|---|
 | **B. Front Door** | The home page | One question, "What do you need help with?", a visible search box, plain need buttons, and "Call or text 211" pinned on top. Short question flows end at real organizations. Answers live in the web address, so nothing is stored. |
 | **A. Trailhead** | Every guide | Each need is a route with steps (mileposts), collapsed until needed, each step ending in an action. Based on the GOV.UK step-by-step pattern. Built as [`Route`](../../site/src/components/Route.astro) and [`Milepost`](../../site/src/components/Milepost.astro) (#240), first on `/utility-bills/`. |
-| **C. Living Ridgeline** | The identity layer | A straight line under the menu with very small silhouettes of places here sitting on it (#241). Type and layout stay fixed so it always reads as one hub. Still one line per screen, and nothing on pages, sections or titles. |
+| **C. Living Ridgeline** | The identity layer | Tried and removed on October 30, 2026 (#241): every drawn motif (wavy hills, per-door landmarks, a tiny skyline) read as noise. The menu border is now a plain line. Quieter ideas are being weighed instead. |
 
 Each direction gets its own issue and PR. Until those ship, the rules below still apply as written.
 
@@ -87,11 +87,10 @@ Each direction gets its own issue and PR. Until those ship, the rules below stil
 
 ## The cues we use
 
-We use three cues. That is the whole list. Adding a fourth needs a note in this file and a fresh "is it too much?" check.
+We use two cues. That is the whole list. Adding a fourth needs a note in this file and a fresh "is it too much?" check.
 
 | Cue | Where it comes from | How we use it | Why this one |
 |---|---|---|---|
-| **Ridgeline** | The wooded hills, brick downtown and river towns you see from almost anywhere here | One straight line with very small silhouettes of local places on it: the bottom border of the header on wide screens, and the top edge of the tab bar on phones ([`RidgeLine.astro`](../../site/src/components/RidgeLine.astro)) | Everyone here knows these shapes. They are about the place, not any group. They are quiet enough to ignore. |
 | **Hill green** | The same wooded hills | The accent color for links, dates, and focus (`--accent`, kept from before) | Already readable and trusted. Green from the hills, not from a team or agency. |
 | **Brick** | Downtown and the old glass factories | A thin edge on "who to ask" boxes (`.note`) and the line above the footer (`--brick`) | Brick is what the old town is built from. It ties the site to downtown without copying any building or sign. |
 
@@ -125,7 +124,7 @@ All colors are CSS variables in [`site/src/layouts/Base.astro`](../../site/src/l
 | `--accent` | Links, dates, focus ring (hill green) | `#1e5847` | `#8fd1b5` |
 | `--accent-bg` | Callout and tag background | `#e6f0ec` | `#1f2c26` |
 | `--brick` | Brick edge on callouts, footer line | `#9b4a34` | `#d98c72` |
-| `--ridge` | Ridgeline motif stroke | `#a9bcb1` | `#3f5449` |
+| `--ridge` | Soft rail beside step lists | `#a9bcb1` | `#3f5449` |
 
 **Color roles stay single.** Green means "you can act on this" (links, dates, focus). Brick is decoration only and never carries meaning, so it never conflicts with status colors later. Brick does pass 4.5:1 on the page background in both modes, so it could hold text if we ever need it, but don't use it for links.
 
@@ -160,26 +159,11 @@ Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base
 - **Body text:** the system font stack. Research finds no single font is fastest for everyone, and serif versus sans does not change legibility, so body text stays on what each phone does best, at no cost.
 - **Don't** add more weights or families without updating this section and checking page weight. Don't use Public Sans: it reads as a federal government site.
 
-## The motif: the ridgeline
+## No drawn motif
 
-- **What:** One straight line with very small, plain silhouettes of places here sitting on it, like a far-off skyline (#241, chosen by David on October 30, 2026; [decision](../decisions/2026-10-30-0800-skyline-ridgeline.md)). It replaced the first wavy line of hills. The shapes are at most 13px tall, solid, in the faint `--ridge` color, with long stretches of plain line between groups.
-- **The shapes and where they come from.** Each group is our own simple drawing of a kind of place sourced in "What makes this place look like itself" above. Nothing is traced from a photo, map, sign or logo. Shapes and layout live in [`site/src/lib/skyline.mjs`](../../site/src/lib/skyline.mjs).
+The site has no drawn motif right now. On October 30, 2026 we tried three (a wavy ridge of hills under the menu, a named landmark drawing for each door, and a tiny skyline of local shapes on the menu line). David found each one distracting, so all three were removed ([decision](../decisions/2026-10-30-1000-no-drawn-motif.md)). The menu border is a plain 1px `--line` rule, under the header on wide screens and on top of the tab bar on phones.
 
-  | Group | What it shows |
-  |---|---|
-  | Trees | The wooded hills around town |
-  | A knob with trees | Dorsey's Knob and the hills like it |
-  | Houses on a hillside | Neighborhoods that climb the hills, like Sunnyside and Wiles Hill |
-  | Three brick blocks | Downtown storefronts |
-  | Two warehouses | The Wharf District |
-  | A long low building and a tall stack | The Seneca glass factory, now the Seneca Center |
-  | A truss bridge | The rail-trails on old rail lines |
-
-- **Left out on purpose:** the courthouse and other government buildings (would look official), WVU buildings and the PRT (would look like WVU), churches (would favor one group), and any business.
-- **Where:** Once per screen. The bottom border of the header on wide screens, the top edge of the tab bar on phones (the CSS hides the other one). Not on pages, sections, titles or cards, and not repeated down the page. On phones the shapes have a thin halo in the page color so text scrolling behind the bar stays apart from them.
-- **How:** Use the [`RidgeLine`](../../site/src/components/RidgeLine.astro) component. It has `aria-hidden="true"` and `focusable="false"`, so screen readers skip it. It crops from the middle instead of stretching (`preserveAspectRatio="xMidYMax slice"`), so a phone shows the middle groups (the knob, trees, downtown, the glass stack, the bridge) and wide screens show more.
-- **Never:** animate it, add color beyond `--ridge`, put text on it, make the shapes bigger, or use it as a logo.
-- **Doors:** every door uses the same line. Doors do not get their own shapes or tints.
+Before adding any drawn shape again, show David screenshots first and run the "Is it too much?" check below.
 
 ## Voice notes
 
@@ -207,7 +191,7 @@ Nearly everyone reaches the hub on a phone. Design for a 390px screen first, the
 ## Applying it to new pages and apps
 
 1. Use the `Base` layout, or copy its `:root` tokens exactly. Don't invent new colors. If you truly need one, add it here with its contrast ratio first.
-2. Use the `Base` layout's header and tab bar, which already place the ridgeline. Don't add another one.
+2. Use the `Base` layout's header and tab bar. Don't add drawn shapes or motifs to pages.
 3. Use `--brick` only for thin edges and rules, never for text people need to read or click.
 4. Keep the layout, sizes, and type scale from the rubrics. Local identity never changes where things are.
 5. Use local place names from the voice notes when they make an answer clearer.
@@ -218,7 +202,7 @@ Nearly everyone reaches the hub on a phone. Design for a 390px screen first, the
 Answer each one by looking at a 390px screenshot. Any "yes" means pull back.
 
 - Do you notice the local touch before you notice the page title?
-- Is there more than one ridgeline, or more than a few thin brick edges, on the screen?
+- Is there any drawn decoration, or more than a few thin brick edges, on the screen?
 - Would someone think this site belongs to the city, the county, WVU, or a business?
 - Does any local touch carry meaning (status, warning, "click here")?
 - Would a long-time resident, a newcomer, and a student each feel it is not about them?

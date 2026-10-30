@@ -2,7 +2,7 @@
 
 This guide says what shape each kind of information takes on the hub, so a person can understand it fast and act on it, on any phone. It sits next to two other guides:
 
-- [`identity.md`](identity.md) covers how things look: colors, the ridgeline, local words, and the mobile first rules (action buttons, tab bar, tap sizes).
+- [`identity.md`](identity.md) covers how things look: colors, type, local words, and the mobile first rules (action buttons, tab bar, tap sizes).
 - The [design rubrics](../rubrics/README.md) cover how we score what we ship.
 
 This guide covers the part in between: **which building blocks to use for which information, and how the site is organized around people's needs.** When this guide and a rubric seem to disagree, the rubric wins and this guide gets fixed.

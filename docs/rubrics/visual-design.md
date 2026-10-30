@@ -9,7 +9,7 @@ Does the look help people read and act? Good visual design here is calm and plai
 - [WCAG 2.2 contrast](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum)
 - Dark mode: [Apple Human Interface Guidelines: Dark Mode](https://developer.apple.com/design/human-interface-guidelines/dark-mode), [Material Design: Dark theme](https://m2.material.io/design/color/dark-theme.html)
 - [Nielsen: aesthetic and minimalist design](https://www.nngroup.com/articles/aesthetic-minimalist-design/)
-- Our [local identity guide](../design/identity.md) (palette, the ridgeline motif, cues to use and avoid)
+- Our [local identity guide](../design/identity.md) (palette, type, cues to use and avoid)
 
 **Pass bar:** no criterion at 0, and average at least 2.0.
 
@@ -91,6 +91,6 @@ It feels like it comes from Morgantown and Mon County, through the few cues in t
 
 - **0:** Generic or borrowed branding (a city, county, WVU, or business logo, seal, mascot, or color system), or a stereotype.
 - **1:** A local cue is present but clashes, or it hurts readability, contrast, or predictability.
-- **2:** Follows `docs/design/identity.md` (its tokens, the ridgeline used once in the header, brick only as thin edges) and passes every other rubric.
+- **2:** Follows `docs/design/identity.md` (its tokens, no drawn decoration, brick only as thin edges) and passes every other rubric.
 - **3:** All of 2, and a resident would recognize it as from here while it stays calm and clear.
 - **How to check:** Compare the CSS tokens with the palette table in the guide and run `npm run check-contrast` in `site/`. Run the guide's "Is it too much?" check on a 390px screenshot in light and dark mode. Ask: would a long-time resident, a newcomer, and a student all feel it is theirs, and would anyone mistake it for an official site?
