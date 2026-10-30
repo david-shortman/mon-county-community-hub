@@ -2,7 +2,7 @@
 // One date on the calendar, phone first: when it is, what it is, then big
 // buttons to act on it. Sources and topics sit in the small print below.
 import Actions from './Actions.astro';
-import { prettyDate, prettyTimes, ymd, chipDate, relativeLabel, shortUrl, todayYmd } from '../lib/content.mjs';
+import { prettyDate, prettyTimes, ymd, chipDate, relativeLabel, sourceLabel, todayYmd } from '../lib/content.mjs';
 const { e } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
@@ -14,7 +14,7 @@ const parts = (e.what_to_do || '').split(phoneRe);
 const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
 // Feed entries say which feed and when; hand-written ones say when a person checked.
 const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(e.feed.fetched)) : null;
-const host = new URL(e.url).hostname.replace(/^www\./, '');
+
 // Share points at this card on the page it is shown on, so the link always lands on it.
 const shareUrl = new URL(`${Astro.url.pathname}#${e.slug}`, Astro.site).href;
 // The source link is skipped when it is the same page as the main button.
@@ -29,7 +29,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
   <h3>{e.title}</h3>
   <p>{e.who_it_is_for} {parts.map((t, i) => (i % 2 ? <a href={phoneHref(t)}>{t}</a> : t))}</p>
   <Actions
-    link={e.url} linkLabel={`Details on ${host}`}
+    link={e.url} linkLabel="More details"
     phone={e.phone} phoneLabel={e.phone_label ?? e.org_name}
     place={e.place}
     ics={`${base}/calendar/${e.slug}.ics`}
@@ -41,7 +41,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
       <>Pulled from the <a href={e.feed.page_url}>{e.feed.name}</a> on {prettyDate(fetchedOn)}.</>
     ) : (
       <>Run by {e.org_name}.
-      {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{shortUrl(s.url)}</a></>))}.</> : <> Source: {shortUrl(e.url)} (the details page).</>}
+      {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{sourceLabel(s.url)}</a></>))}.</> : <> Source: {sourceLabel(e.url)} (the details page).</>}
       {' '}Checked by hand on {prettyDate(ymd(lastChecked))}.</>
     )}
     {e.topics?.length ? <> Topics: {e.topics.join(', ')}.</> : null}

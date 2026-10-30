@@ -7,6 +7,7 @@ what_to_do: Go to wvpath.wv.gov and make a free account, then sign in and choose
 contact:
   phone: "1-877-716-1212"
   url: https://www.wvpath.wv.gov/
+  url_label: Apply online
 cost: free
 sources:
   - url: https://www.wvpath.wv.gov/

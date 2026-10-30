@@ -1,0 +1,19 @@
+---
+// The small print under a card: who published each source, linked, and the
+// date we last checked it. One component, so every card says it the same way.
+//   sources: the record's sources ({url, checked})
+//   org: the record's org slug, used to name the publisher (#327)
+//   about: what the card is about, read by screen readers so no two source
+//     links on a page sound the same (#140)
+//   skip: source URLs already linked elsewhere on the card
+// Reads like "Source: Mon River Trails Conservancy: montrails.org/rail-trail-info.
+// Checked October 29, 2026." The checked date is the oldest across all
+// sources (#39). Text before the source goes in the "before" slot; anything
+// after goes in the default slot.
+import { prettyDate, oldestChecked, sourceGroups } from '../lib/content.mjs';
+const { sources, org, about, skip = [] } = Astro.props;
+const groups = sourceGroups(sources.filter((s) => !skip.includes(s.url)), org);
+const count = groups.reduce((n, g) => n + g.links.length, 0);
+const checked = oldestChecked(sources);
+---
+<p class="meta"><slot name="before" />{count > 0 && <>{count > 1 ? 'Sources' : 'Source'}: {groups.map((g, gi) => <>{gi > 0 && '; '}{g.name && `${g.name}: `}{g.links.map((l, i) => <>{i > 0 && ', '}<a href={l.url}>{l.text}{about && <span class="sr-only">, source for {about}</span>}</a></>)}</>)}. </>}Checked {prettyDate(checked)}.<slot /></p>

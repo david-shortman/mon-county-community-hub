@@ -7,6 +7,7 @@ what_to_do: The Morgantown office is at 601-603 East Brockway Avenue, Suite A. O
 contact:
   phone: "304-296-6091"
   url: https://liveabilitywv.org/locations/
+  url_label: Locations
 cost: free
 sources:
   - url: https://liveabilitywv.org/locations/
