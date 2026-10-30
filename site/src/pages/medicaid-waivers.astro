@@ -11,17 +11,17 @@ const waivers = [
     name: 'Aged and Disabled Waiver (ADW)',
     url: 'https://adwprogram.wv.gov',
     who: 'Adults 18 and older who need the level of care a nursing home gives, based on an assessment by a nurse. It pays for care and help at home instead.',
-    start: 'Your doctor, physician assistant or nurse fills out a form called a Medical Necessity Evaluation Request (MNER) and sends it to Acentra Health, the company that reviews waiver requests for the state. You must also qualify financially, through your county Department of Human Services office or Social Security.',
-    call: 'Questions about applying: West Virginia Bureau of Senior Services, 1-866-767-1575.',
+    start: ['Ask your doctor, physician assistant or nurse to fill out a Medical Necessity Evaluation Request (MNER) form.', 'They send it to Acentra Health, the company that reviews waiver requests for the state.', 'You must also qualify financially. Your county Department of Human Services office or Social Security decides this.'],
+    callWho: 'Questions about applying: West Virginia Bureau of Senior Services', phone: '1-866-767-1575',
     tel: '18667671575',
     wait: 'If no spot is open, you go on a wait list. The program says the whole process takes 56 days on average, and last year the average wait on the list was 44 days.',
   },
   {
     name: 'Intellectual and/or Developmental Disabilities Waiver (IDDW)',
     url: 'https://iddwprogram.wv.gov',
-    who: 'Children and adults, age 3 and up, with an intellectual disability or a similar condition that became severe before age 22, and who have trouble in at least three of six areas: self-care, language, learning, moving around, making decisions, and living alone.',
-    start: 'Fill out the application form on the program site and send it to Acentra Health by mail, fax or email (WVIDDWaiver@acentra.com). Acentra sends a list of psychologists. You must pick one and send back your choice within 14 days, or the application is closed. You must also qualify financially through your county office.',
-    call: 'Acentra Health: 1-866-385-8920.',
+    who: 'Children and adults, age 3 and up, with an intellectual disability or a similar condition that became severe before age 22. They must have trouble in at least three of six areas: self-care, language, learning, moving around, making decisions, and living alone.',
+    start: ['Fill out the application form on the program site.', 'Send it to Acentra Health by mail, fax or email (WVIDDWaiver@acentra.com).', 'Acentra sends you a list of psychologists. Pick one and send back your choice within 14 days, or the application is closed.', 'You must also qualify financially through your county office.'],
+    callWho: 'Acentra Health', phone: '1-866-385-8920',
     tel: '18663858920',
     wait: 'If no spot is open, you go on a wait list, which can add time before services start.',
   },
@@ -29,8 +29,8 @@ const waivers = [
     name: 'Traumatic Brain Injury Waiver (TBIW)',
     url: 'https://tbiwprogram.wv.gov',
     who: 'People age 3 and up with a traumatic brain injury who want support to live at home instead of a nursing facility.',
-    start: 'Get a Medical Necessity Evaluation Request (MNER) form from Acentra Health. Your doctor, physician assistant, neuropsychologist or nurse practitioner fills it out and sends it in. Acentra then sends a letter telling you to visit your county Department of Human Services office to check if you qualify financially.',
-    call: 'Acentra Health: 1-866-385-8920.',
+    start: ['Get a Medical Necessity Evaluation Request (MNER) form from Acentra Health.', 'Your doctor, physician assistant, neuropsychologist or nurse practitioner fills it out and sends it in.', 'Acentra sends you a letter. Then you visit your county Department of Human Services office to see if you qualify financially.'],
+    callWho: 'Acentra Health', phone: '1-866-385-8920',
     tel: '18663858920',
     wait: 'If no spot is open, you go on a wait list, which can add time before services start.',
   },
@@ -38,8 +38,8 @@ const waivers = [
     name: 'Children with Serious Emotional Disorder Waiver (CSEDW)',
     url: 'https://csedwprogram.wv.gov',
     who: 'Children and young people ages 3 to 21 with serious mental, behavioral or emotional health needs, so they can get help while living at home instead of in a facility or group home.',
-    start: 'Start by calling the 24-hour West Virginia children\'s crisis and referral line, 844-HELP4WV (844-435-7498). Then send the application form to Acentra Health by mail, fax or email.',
-    call: 'Children\'s crisis and referral line: 844-HELP4WV, any hour.',
+    start: ['Call the 24-hour West Virginia children\'s crisis and referral line, 844-HELP4WV (844-435-7498).', 'Then send the application form to Acentra Health by mail, fax or email.'],
+    callWho: 'Children\'s crisis and referral line, any hour', phone: '844-HELP4WV (844-435-7498)',
     tel: '18444357498',
     wait: 'If no funded spot is open, the child goes on a wait list. While waiting, families can still use the 24-hour HELP4WV line.',
   },
@@ -55,8 +55,9 @@ const waivers = [
     <section class="card">
       <h2>{w.name}</h2>
       <p><strong>Who it is for:</strong> {w.who}</p>
-      <p><strong>How to start:</strong> {w.start}</p>
-      <p><strong>Who to call:</strong> <a href={`tel:${w.tel}`}>{w.call}</a></p>
+      <p><strong>How to start:</strong></p>
+      <ol>{w.start.map((step) => <li>{step}</li>)}</ol>
+      <p><strong>Who to call:</strong> {w.callWho}, <a href={`tel:${w.tel}`}>{w.phone}</a>.</p>
       <p><strong>Waiting:</strong> {w.wait}</p>
       <p class="meta">Source: <a href={w.url}>{w.name.replace(/ \(.*/, '')} program site</a>, checked October 30, 2026.</p>
     </section>
