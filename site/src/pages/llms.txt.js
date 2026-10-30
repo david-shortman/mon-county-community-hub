@@ -40,6 +40,8 @@ export function GET({ site }) {
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
+- [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
+- [Fix what you see: who to tell](${u('/make-it-better/report/')}): the office that handles graffiti, illegal dumping, litter, potholes (city street or state road), broken sidewalks, trees and run-down buildings, inside or outside city limits
 
 ## Notes for AI tools
 
