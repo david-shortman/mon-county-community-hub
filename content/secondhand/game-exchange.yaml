@@ -1,0 +1,16 @@
+name: Game Exchange
+slug: game-exchange
+kind: used-media
+area: elsewhere
+run_by: Game Exchange
+address: "1429 Earl L Core Rd, Morgantown, WV"
+sells: Video games.
+goods: [books, electronics]
+buys_from_you: false
+url: https://www.youtube.com/@GameExchangeWV/about
+url_label: Source
+status: unclear
+note: Listings give several different addresses. Only the shop's undated video channel lists this one.
+sources:
+  - url: https://www.youtube.com/@GameExchangeWV/about
+    checked: 2026-10-30
