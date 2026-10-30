@@ -3,6 +3,7 @@ import RidgeLine from '../components/RidgeLine.astro';
 import Icon from '../components/Icon.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
+import AppShell from '../components/AppShell.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
 import { loadDoors } from '../lib/content.mjs';
 const { crisis = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
@@ -69,6 +70,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     <meta property="og:image:alt" content="Mon County Community Hub" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <AppShell />
     <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
     <style set:html={fontFace}></style>
     <style is:global>
