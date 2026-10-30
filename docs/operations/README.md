@@ -42,7 +42,7 @@ Statuses: **OK** is fine. **WARN** needs a look soon but residents are not hurt 
 | `deploy-fresh` | The "Updated" date on the calendar page is more than 1 day old | | Claude Code; David if Actions or Pages settings |
 | `ics-parses` | `calendar.ics` is missing, does not parse, lacks required fields, has lines over 75 octets, has unescaped `;` or `,` in text, or is not served as `text/calendar` | | Claude Code |
 | `ics-entries` | The feed has no upcoming events | Fewer than 3 upcoming, or nothing starts more than 14 days out | Duet adds dates (#17); Claude Code for feeds (#31) |
-| `content-recheck` | | An upcoming entry's oldest source was checked more than 6 months ago (also lists those due within 30 days) | Duet |
+| `content-recheck` | | An upcoming calendar entry, an org, or a resource has an oldest source checked more than 6 months ago (also lists those due within 30 days) | Duet |
 | `content-ended` | | A calendar file ended more than 30 days ago | Duet |
 | `content-upcoming` | | No hand-checked entries in the next 62 days | Duet |
 | `feeds` | A saved feed copy is not valid JSON | A live feed source does not respond, is empty, or its saved copy is more than 14 days old | Claude Code (Builder, #31) |

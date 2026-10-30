@@ -30,7 +30,7 @@ const r211 = resource('wv-211');
 
   <h2>Coming up</h2>
   {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing is on our calendar for the next month. That does not mean no help is available. Call or text 211.</p>}
-  <p><a href={`${base}/calendar/`}>All dates and deadlines</a></p>
+  <p class="more"><a href={`${base}/calendar/`}>All dates and deadlines</a></p>
 
   <section class="note" aria-labelledby="person-h">
     <h2 id="person-h">Rather talk to a person?</h2>

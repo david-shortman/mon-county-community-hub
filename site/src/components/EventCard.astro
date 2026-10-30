@@ -6,8 +6,10 @@ import { prettyDate, prettyTimes, ymd, chipDate, relativeLabel, sourceLabel, tod
 const { e } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
-// Turn phone numbers in the text into tappable links.
-const phoneRe = /(\(?\d{3}\)?[-. ]\d{3}[-. ]\d{4})/;
+// Turn phone numbers in the text into tappable links: 304-555-1234,
+// (304) 555-1234, 1-800-555-1234, and an extension like "ext. 12" (#149).
+const phoneRe = /((?:1[-. ])?\(?\d{3}\)?[-. ]\d{3}[-. ]\d{4}(?:,? (?:ext\.?|x) ?\d+)?)/i;
+const phoneHref = (t) => { const [main, ext] = t.split(/,? (?:ext\.?|x) ?/i); return `tel:${main.replace(/\D/g, '')}${ext ? `,${ext}` : ''}`; };
 const parts = (e.what_to_do || '').split(phoneRe);
 const lastChecked = e.sources.map((s) => s.checked).sort().at(-1);
 // Feed entries say which feed and when; hand-written ones say when a person checked.
@@ -25,7 +27,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
     <span class="rel" data-starts={e.starts} data-ends={e.ends}>{relativeLabel(e.starts, e.ends, today)}</span>
   </p>
   <h3>{e.title}</h3>
-  <p>{e.who_it_is_for} {parts.map((t, i) => (i % 2 ? <a href={`tel:${t.replace(/\D/g, '')}`}>{t}</a> : t))}</p>
+  <p>{e.who_it_is_for} {parts.map((t, i) => (i % 2 ? <a href={phoneHref(t)}>{t}</a> : t))}</p>
   <Actions
     link={e.url} linkLabel="More details"
     phone={e.phone} phoneLabel={e.phone_label ?? e.org_name}

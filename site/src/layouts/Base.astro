@@ -88,6 +88,8 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       body { margin: 0; background: var(--bg); color: var(--fg); font: 1.125rem/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
       a { color: var(--accent); text-underline-offset: 3px; }
       a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      /* A link on its own line ("See all ...") gets a 44px tap area (#50). */
+      .more a { display: inline-flex; align-items: center; min-height: 44px; }
       .wrap { max-width: 46rem; margin: 0 auto; padding: 0 16px; }
       header.site { border-bottom: 1px solid var(--line); }
       header.site .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; padding-block: 14px; }
