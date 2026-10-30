@@ -14,6 +14,11 @@ steps:
     when: week
     resource: mon-county-seed-library
     text: Call the Mon County Center and ask how its Community Seed Library works and when you can visit.
+  snap-seeds:
+    when: week
+    resource: snap-seeds-and-plants
+    text: Get SNAP? Your EBT card can buy seeds and plants that grow food.
+    action: Read the state flyer
   health-permit:
     when: week
     resource: monchd-farmers-market-permit
@@ -31,7 +36,7 @@ situations:
   - id: budget
     label: Grow food on a budget
     page: /grow/#budget
-    steps: [seed-library]
+    steps: [snap-seeds, seed-library]
   - id: sell
     label: Sell what I grow
     page: /sell-what-you-grow/
