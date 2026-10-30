@@ -16,6 +16,9 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2>Living on your own terms</h2>
   {r('liveability-morgantown') && <ResourceCard r={r('liveability-morgantown')} />}
 
+  <h2>Care at home instead of a nursing home</h2>
+  <p>West Virginia Medicaid has four programs that pay for care at home for people who would otherwise need a nursing home or other facility. See <a href={`${base}/medicaid-waivers/`}>Getting care at home through Medicaid</a>: who each is for, how to start, and who to call.</p>
+
   <h2>Getting or keeping a job</h2>
   {r('drs-morgantown-office') && <ResourceCard r={r('drs-morgantown-office')} showCost />}
 
