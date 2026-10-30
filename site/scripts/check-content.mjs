@@ -1,7 +1,7 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, loadDoors } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, loadDoors, loadDoorPage, CONTENT_DIR } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 
 const errors = [];
@@ -88,6 +88,34 @@ if (doors) {
       if (!topicHome.has(t)) errors.push(`${e._file}: topic "${t}" has no door; add it to a door in content/doors.yaml`);
     }
   }
+}
+
+// Door pages (content/doors/<slug>.yaml): each step points to a real
+// resource, each situation names real steps and a page link.
+const doorDir = path.join(CONTENT_DIR, 'doors');
+for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x.endsWith('.yaml')) : []) {
+  const slug = f.replace(/\.yaml$/, '');
+  const where = `doors/${f}`;
+  let dp;
+  try { dp = loadDoorPage(slug); } catch (err) { errors.push(`${where}: ${err.message}`); continue; }
+  const d = doors?.bySlug[slug];
+  if (!d?.topics) errors.push(`${where}: ${slug} is not a door in doors.yaml`);
+  else if (!d.page) errors.push(`${where}: give the ${slug} door a page in doors.yaml`);
+  if (dp.door !== slug) errors.push(`${where}: door should be ${slug}`);
+  if (!dp.lede) errors.push(`${where}: needs a lede`);
+  for (const [id, st] of Object.entries(dp.steps)) {
+    if (!['today', 'week', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week or opens`);
+    if (!st.text) errors.push(`${where}: step ${id} needs text`);
+    if (!st.record.contact?.url) errors.push(`${where}: step ${id}'s resource needs a contact url`);
+  }
+  const ids = new Set();
+  for (const s of dp.situations) {
+    if (ids.has(s.id)) errors.push(`${where}: duplicate situation ${s.id}`);
+    ids.add(s.id);
+    if (!s.label || !/^\/[^\s]*$/.test(s.page ?? '')) errors.push(`${where}: situation ${s.id} needs a label and a page like /flu-shots/`);
+    for (const st of s.steps ?? []) if (!dp.steps[st]) errors.push(`${where}: situation ${s.id} names a missing step ${st}`);
+  }
+  if (JSON.stringify(dp.situations).includes('\u2014') || JSON.stringify(Object.values(dp.steps).map((x) => x.text)).includes('\u2014') || (dp.lede ?? '').includes('\u2014')) errors.push(`${where}: contains an em dash`);
 }
 
 for (const w of warnings) console.warn(`warning: ${w}`);

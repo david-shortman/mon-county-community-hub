@@ -41,7 +41,9 @@ function problems(route, meta, routes, doors) {
   if (!meta.summary) out.push('page.summary is missing');
   const d = doors.bySlug[meta.door];
   if (!d) out.push(`page.door "${meta.door}" is not in content/doors.yaml`);
-  else if (d.topics && !(meta.topic in d.topics)) {
+  else if (d.topics && d.page === route) {
+    if (meta.topic) out.push('a door\'s own page needs no page.topic');
+  } else if (d.topics && !(meta.topic in d.topics)) {
     out.push(`page.topic "${meta.topic}" is not a topic of the ${d.name} door (see content/doors.yaml)`);
   } else if (!d.topics && meta.topic) out.push(`${d.name} is a lane, so page.topic is not needed`);
   return out;
@@ -70,7 +72,9 @@ export function loadPages() {
     const root = (p, seen = new Set()) => (p.parent && !seen.has(p.route) ? root(byRoute.get(p.parent), seen.add(p.route)) : p);
     for (const p of byRoute.values()) {
       const top = root(p);
-      Object.assign(p, { door: top.door, topic: top.topic, listed: !p.parent });
+      // A door's own page heads its section instead of sitting in a list.
+      const isDoorPage = Boolean(doors.bySlug[top.door]?.topics) && doors.bySlug[top.door].page === p.route;
+      Object.assign(p, { door: top.door, topic: top.topic, listed: !p.parent && !isDoorPage });
     }
     return byRoute;
   })();

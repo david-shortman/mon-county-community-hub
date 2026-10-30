@@ -138,3 +138,13 @@ export function loadDoors() {
   const bySlug = Object.fromEntries([...doors, ...lanes].map((d) => [d.slug, d]));
   return { doors, lanes, bySlug, topicDoor };
 }
+
+// A door's own page data, from content/doors/<slug>.yaml (#235). Each step
+// gets its resource record, which carries the phone, link and sources.
+export function loadDoorPage(slug) {
+  const file = path.join(CONTENT_DIR, 'doors', `${slug}.yaml`);
+  if (!fs.existsSync(file)) return null;
+  const raw = YAML.parse(fs.readFileSync(file, 'utf8'));
+  const steps = Object.fromEntries(Object.entries(raw.steps ?? {}).map(([id, s]) => [id, { id, ...s, record: resource(s.resource) }]));
+  return { ...raw, steps, situations: raw.situations ?? [], also: raw.also ?? [], _file: `doors/${slug}.yaml` };
+}

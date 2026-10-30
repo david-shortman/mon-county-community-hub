@@ -1,0 +1,11 @@
+---
+// The Get care door (#235), the first door page (#248). Content lives in
+// content/doors/care.yaml; the layout is shared with every door.
+import Base from '../layouts/Base.astro';
+import DoorPage from '../components/DoorPage.astro';
+export const page = { door: "care", label: "Get care", summary: "Shots, a dentist, Medicare, quitting tobacco and staying healthy" };
+---
+<Base title="Get care in Morgantown and Mon County: shots, dentist, Medicare" description="Pick what is going on: a flu or COVID shot, a dentist, turning 65, quitting tobacco, or staying healthy. Get local steps in order, with phone numbers, costs and sources, in Morgantown and Monongalia County.">
+  <h1>Get care</h1>
+  <DoorPage slug="care" />
+</Base>
