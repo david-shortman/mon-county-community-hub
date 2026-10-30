@@ -77,7 +77,7 @@ const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(Strin
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
 const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
@@ -123,6 +123,10 @@ for (const r of resources) {
   if (r.org && !orgSlugs.has(r.org)) errors.push(`${where}: org ${r.org} has no file in content/orgs/`);
   if (r.hours != null && (typeof r.hours !== 'string' || !r.hours.trim())) errors.push(`${where}: hours must be text, like "Monday to Friday, 9 a.m. to 5 p.m."`);
   if (r.cost != null && typeof r.cost !== 'string') errors.push(`${where}: cost must be text`);
+  // What happens next (#159): optional, each from the record's own sources.
+  if (r.what_to_bring != null && (!Array.isArray(r.what_to_bring) || !r.what_to_bring.length || r.what_to_bring.some((x) => typeof x !== 'string' || !x.trim()))) errors.push(`${where}: what_to_bring must be a list of short text items`);
+  for (const f of ['what_happens', 'best_time']) if (r[f] != null && (typeof r[f] !== 'string' || !r[f].trim())) errors.push(`${where}: ${f} must be text`);
+  if (r.if_you_want_help != null && (!Array.isArray(r.if_you_want_help) || r.if_you_want_help.some((x) => typeof x !== 'string'))) errors.push(`${where}: if_you_want_help must be a list of resource slugs`);
   const c = r.contact;
   if (c == null) continue;
   if (typeof c !== 'object') { errors.push(`${where}: contact must have phone, text, url, place or email under it`); continue; }
@@ -134,6 +138,8 @@ for (const r of resources) {
   if (c.place != null && (typeof c.place !== 'string' || !/,/.test(c.place))) errors.push(`${where}: contact place must be text like "200 M-Tec Dr, Morgantown, WV"`);
   if (c.email != null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(c.email))) errors.push(`${where}: contact email does not look like an email address`);
 }
+
+for (const r of resources) for (const h of r.if_you_want_help ?? []) if (!resourceSlugs.has(h)) errors.push(`${r._file}: if_you_want_help names ${h}, which has no file in content/resources/`);
 
 // Secondhand shops, free programs and online groups (content/secondhand, #423).
 const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources', 'hidden'];
