@@ -4,7 +4,8 @@
 // naming who published the source (#327).
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
-import { websiteLabel } from '../lib/content.mjs';
+import PassItOn from './PassItOn.astro';
+import { websiteLabel, oldestChecked } from '../lib/content.mjs';
 const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
 ---
 <article class="card resource" id={r.slug}>
@@ -19,4 +20,5 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
     about={r.title}
   />
   <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
