@@ -1,6 +1,6 @@
 # Measurement and evaluation
 
-This page covers how we measure what the hub does without fooling ourselves or anyone else. It borrows from program evaluation, federal evidence practice, and research ethics, scaled down to a small static site. Each practice says which of the charter's four levels it serves: 1 Findability, 2 Use, 3 Action, 4 Recognition.
+This page covers how we measure what the site does without fooling ourselves or anyone else. It borrows from program evaluation, federal evidence practice, and research ethics, scaled down to a small static site. Each practice says which of the charter's four levels it serves: 1 Findability, 2 Use, 3 Action, 4 Recognition.
 
 ## Claim contribution, not attribution
 
@@ -30,7 +30,7 @@ This page covers how we measure what the hub does without fooling ourselves or a
 
 ## Ask partners for numbers only through David
 
-**What it is.** A partner-reported number is a count the organization keeps itself, such as sign-ups that said "found you on the hub" or form completions from our tagged links. It is the only way to see Level 3 actions that happen off our site.
+**What it is.** A partner-reported number is a count the organization keeps itself, such as sign-ups that said "found you on Everything Morgantown" or form completions from our tagged links. It is the only way to see Level 3 actions that happen off our site.
 
 **Why it matters here.** Level 3 (Action). The charter names partner-reported numbers as a core source. Agents never contact organizations, so every request goes through David.
 
@@ -58,7 +58,7 @@ This page covers how we measure what the hub does without fooling ourselves or a
 
 **Why it matters here.** All levels. It stops us from picking whichever number looks good after the fact, and it gives the public log a fixed promise to check against.
 
-**How we apply it.** For any change we plan to evaluate, commit `docs/measurement-plans/<date>-<slug>.md` in the PR before or with the change. It lists: the question, the level, the one main measure, the baseline, the date we will check, what counts as "helped," and other things we may look at (marked exploratory). Later edits go in a dated "Changes" section with a reason. We will not use a third-party registry, since that needs an account.
+**How we apply it.** For any change we plan to evaluate, commit `docs/measurement-plans/<date>-<slug>.md` in the PR before or with the change. It lists: the question, the level, the one main measure, the baseline, the date we will check, what counts as "helped," and other things we may look at (marked exploratory). Later edits go in a dated "Changes" section with a reason. We will not use a third-party registry, since that needs an account. The template and the shared counting rules are in [`docs/measurement-plans/`](../measurement-plans/README.md).
 
 **Sources:**
 - [Preregistration as a tool for strengthening federal evaluation (OES, GSA)](https://oes.gsa.gov/assets/files/preregistration-as-a-tool-in-federal-evaluation.pdf)

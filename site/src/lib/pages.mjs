@@ -14,7 +14,7 @@
 // The build makes door lists, the Topics page and breadcrumbs from these
 // tags, so adding a page never means editing the menu (#249). A bad tag
 // stops the build with a message that says what to fix.
-import { loadDoors } from './content.mjs';
+import { loadDoors, todayYmd } from './content.mjs';
 
 // Pages that sit above the doors, so they carry no tags.
 const UNTAGGED = new Set(['/', '/404/', '/search/', '/topics/']);
@@ -131,10 +131,16 @@ export async function doorCards(now = new Date()) {
   }));
 }
 
-// An example may carry `from` and `until` as "MM-DD" (inclusive). Without
-// them it shows all year. Checked at build time.
-function inSeason(e, now = new Date()) {
-  if (!e.from || !e.until) return true;
-  const md = `${String(now.getUTCMonth() + 1).padStart(2, '0')}-${String(now.getUTCDate()).padStart(2, '0')}`;
-  return md >= e.from && md <= e.until;
+// An example may carry `from` and `until` as "MM-DD" (inclusive), in
+// Morgantown time. Without either it shows all year. With only `from` it
+// shows from that day to December 31; with only `until`, from January 1 to
+// that day. A `from` later than `until` wraps the new year (11-01 to 03-31
+// is November through March). Checked at build time; the site rebuilds every
+// morning, so an example switches on the first build of its first day (#488).
+export function inSeason(e, now = new Date()) {
+  if (!e.from && !e.until) return true;
+  const md = todayYmd(now).slice(5);
+  const from = e.from ?? '01-01';
+  const until = e.until ?? '12-31';
+  return from <= until ? md >= from && md <= until : md >= from || md <= until;
 }
