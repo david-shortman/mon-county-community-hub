@@ -1,0 +1,15 @@
+---
+// Add to home screen and offline (#150). Goes in Base's <head>.
+// The manifest and theme colors let a phone add the hub like an app. The
+// script asks the browser to keep saved copies of pages (src/pages/sw.js.js).
+// Without it, or in a browser that does not support it, pages work the same.
+// No accounts, no tracking, no push messages.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<link rel="manifest" href={`${base}/manifest.webmanifest`} />
+<link rel="apple-touch-icon" href={`${base}/icons/apple-touch-icon.png`} />
+<meta name="theme-color" content="#1e5847" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1f2c26" media="(prefers-color-scheme: dark)" />
+<script is:inline define:vars={{ sw: `${base}/sw.js` }}>
+  if ('serviceWorker' in navigator) addEventListener('load', function () { navigator.serviceWorker.register(sw).catch(function () {}); });
+</script>
