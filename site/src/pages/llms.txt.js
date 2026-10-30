@@ -26,6 +26,7 @@ export function GET({ site }) {
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
 - [Dentist or prescriptions](${u('/dental-and-prescriptions/')}): a dentist with no dental insurance (health department dental clinic, WVU Dental) and help paying for medicine (Milan Puskar Health Right free clinic)
 - [Turning 65 or on Medicare](${u('/turning-65/')}): when to sign up, visits and shots Medicare pays for, free help from WV SHIP, help paying Medicare costs
+- [Keep my Medicaid in 2027](${u('/medicaid-2027/')}): West Virginia's new Medicaid work and community rules from January 1, 2027, quoted from the state: who they apply to, who is excluded, what counts toward 80 hours, what to do now, appeals and free help
 - [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults

@@ -1,0 +1,98 @@
+---
+// Keep my Medicaid in 2027 (#221, #214, part of #475). Plain guide to the new
+// community engagement rules, quoted from the WV Department of Human Services
+// (wvmedicaidhelp.org) and the Bureau for Medical Services, read 2026-10-30.
+// We quote and link the state's rules; we never work out who qualifies.
+// High-stakes benefits topic: the PR waits for David (#97).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "care", topic: "health", label: "Keep my Medicaid in 2027", summary: "The new 80 hour work and community rules, who is excluded, what to do now" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const HELP = 'https://wvmedicaidhelp.org/';
+const FAQ = 'https://wvmedicaidhelp.org/faqs/';
+const BMS = 'https://bms.wv.gov/new-medicaid-rules-are-coming';
+const stateSources = [
+  { url: BMS, checked: '2026-10-30' },
+  { url: HELP, checked: '2026-10-30' },
+];
+const faqSources = [{ url: FAQ, checked: '2026-10-30' }];
+const outreachSources = [{ url: 'https://bms.wv.gov/members/new-medicaid-rules-are-coming/communications', checked: '2026-10-30' }];
+---
+<Base help title="Keep your Medicaid in 2027 in Mon County: the new West Virginia work and community rules" description="Starting January 1, 2027, some West Virginia Medicaid members ages 19 to 64 must show 80 hours a month of work or other approved activities unless they are excluded. What the state says, who is excluded, what to do now, and free help in Mon County.">
+  <h1>Keep your Medicaid in 2027</h1>
+  <p class="lede">Starting January 1, 2027, some West Virginia Medicaid members ages 19 to 64 must show 80 hours a month of work or other approved activities, unless they are excluded. Below is what the state says, in its words, and what you can do now. Questions? Call DoHS at <a href="tel:18777161212">1-877-716-1212</a>.</p>
+
+  <h2>What you can do now</h2>
+  <ol>
+    <li><strong>Update your address, phone and email.</strong> The state says: "If you've moved or changed your phone number or email address, update your information" in <a href="https://www.wvpath.wv.gov/">WV PATH</a>, "or call 1-877-716-1212."</li>
+    <li><strong>Read your mail and your WV PATH messages.</strong> If DoHS needs more information, "you will get a request in writing by U.S. Mail, or online in your PATH account" if you chose paperless.</li>
+    <li><strong>Answer within 30 days.</strong> "If DoHS asks for information, you must respond within 30 days, or you may lose your Medicaid coverage." You can send it online, in person or by mail.</li>
+    <li><strong>If no one contacts you,</strong> the state says: "If you are not contacted, you do not need to send anything."</li>
+  </ol>
+  <SourceLine sources={stateSources} about="what to do now" />
+
+  <h2>When it starts</h2>
+  <ul>
+    <li><strong>January 1, 2027:</strong> the start date. "Beginning January 1, 2027, some Medicaid members (age 19-64) must meet Community Engagement requirements, unless exempt."</li>
+    <li><strong>New applicants:</strong> "applicants for January 2027 may have to meet requirements in December 2026."</li>
+    <li><strong>Current members:</strong> "The new requirements will not apply to current Medicaid members until their regularly scheduled renewal in 2027, beginning with those due in March 2027."</li>
+    <li><strong>Renewals more often:</strong> starting in January 2027, the state says renewals for some members will be "scheduled more often": every six months instead of every 12 months.</li>
+  </ul>
+  <SourceLine sources={stateSources} about="when the rules start" />
+
+  <h2>Who it applies to</h2>
+  <p>The state says the rules "apply only to those in the Medicaid members under the Adult Expansion Group. These are adults between the ages of 19 and 64 who have a low income and get health insurance through West Virginia Medicaid." The state's site has a <a href="https://wvmedicaidhelp.org/will-this-apply-to-you/">short screener</a>. The state says it "is not an application or renewal."</p>
+  <p>"DoHS will automatically check your status to see if you qualify for an exclusion or exception and ask you for more information if needed."</p>
+
+  <h3>Who does not have to meet the rules</h3>
+  <p>The state lists these exclusions. They "may apply to members who":</p>
+  <ul>
+    <li>"Are pregnant now or were pregnant within the last 12 months"</li>
+    <li>"Are a parent, guardian, family caregiver, or caretaker relative of a child under the age of 14 or someone of any age who is disabled"</li>
+    <li>"Are 19 to 25 and have aged out of foster care"</li>
+    <li>"Are in a drug or alcohol treatment program from certain types of healthcare providers"</li>
+    <li>"Are an American Indian or Alaska Native"</li>
+    <li>"Are a veteran with a total, or 100%, disability rating as determined from the VA"</li>
+    <li>"Are a member of a household that gets SNAP (food assistance) and are subject to SNAP work requirement rules"</li>
+    <li>"Get TANF/WVWORKS (cash assistance) and already meet their work requirement rules"</li>
+    <li>"Are in jail or prison when it's time to renew"</li>
+    <li>"Have a medically frail condition or health needs that prevent the person from working or participating in the other community engagement activities." The state's examples include blindness or disability, serious or complex health conditions that need regular care, disabling mental health conditions, and substance use disorder with less than five years in recovery.</li>
+  </ul>
+  <p>There are also exceptions, for example for people who qualify for Medicare Part A or are enrolled in Medicare Part B. See the full list of exclusions and exceptions at <a href={`${HELP}#exclusions`}>wvmedicaidhelp.org</a>.</p>
+  <SourceLine sources={[{ url: HELP, checked: '2026-10-30' }]} about="who is excluded" />
+
+  <h2>What counts toward 80 hours</h2>
+  <p>The state says you can meet the rules by "completing 80 hours per month of any of the below activities or a combination of them":</p>
+  <ul>
+    <li>"Working (paid, unpaid or in-kind) or have an income of at least $580 per month"</li>
+    <li>"Participating in an approved work training program"</li>
+    <li>"Attending school, college, high school equivalency program (GED), trade program, at least half-time"</li>
+    <li>"Volunteering doing community service"</li>
+  </ul>
+  <p>"You can mix and match activities to reach 80 hours per month." The state's questions page says going to community or school events, joining a club, or volunteering for a political candidate do not count. It also covers seasonal work, self-employment and gig work.</p>
+  <SourceLine sources={[{ url: HELP, checked: '2026-10-30' }, ...faqSources]} about="what counts toward 80 hours" />
+
+  <h2>If you lose coverage</h2>
+  <ul>
+    <li><strong>You can appeal.</strong> The state says "you have the right to appeal any Medicaid eligibility decision." You can ask for a Fair Hearing or Pre-Hearing Conference "within 90 days of the effective date of the action." To keep your coverage while you wait, ask "before the date of proposed closure or reduction." The form is on your notice, or you can ask by phone or in person.</li>
+    <li><strong>Free legal help:</strong> the state says Legal Aid of West Virginia (<a href="tel:18662554370">1-866-255-4370</a>) "represents income-eligible residents in DoHS fair hearings."</li>
+    <li><strong>You can reapply.</strong> "If you lose Medicaid solely because you did not meet the community engagement requirements, you can reapply."</li>
+  </ul>
+  <SourceLine sources={faqSources} about="appeals and reapplying" />
+
+  <h2>Watch for scams</h2>
+  <p>The state says DoHS began reaching out to members who may be affected in May 2026, "by mail, phone call, and email. You will not be asked to provide any personal information." If you are not sure a message is real, call DoHS at the number on this page.</p>
+  <SourceLine sources={outreachSources} about="state outreach messages" />
+
+  <h2>Free help</h2>
+  {r('wv-medicaid-2027-help-line') && <ResourceCard r={r('wv-medicaid-2027-help-line')} />}
+  {r('monongalia-county-dohs-office') && <ResourceCard r={r('monongalia-county-dohs-office')} />}
+
+  <p>Need care now? See <a href={`${base}/care/`}>Get care</a>.</p>
+
+  <p class="meta">Every rule on this page is quoted from the West Virginia Department of Human Services, checked October 30, 2026. The state says its site "is current as of October 2026" and may change with more federal guidance. We describe the rules; we do not decide who qualifies. DoHS decides. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
