@@ -14,7 +14,7 @@
 // own: phone, link, cost and source come from the step's resource record.
 import Actions from './Actions.astro';
 import EventCard from './EventCard.astro';
-import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, prettyDate, ymd, telHref, resource } from '../lib/content.mjs';
+import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, prettyDate, ymd, telHref, resource, loadDir } from '../lib/content.mjs';
 import { loadPages, doorTopics } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const { slug } = Astro.props;
@@ -28,6 +28,9 @@ const groups = [['today', 'Today'], ['week', 'This week'], ['opens', 'When it op
 const stepSits = (id) => situations.filter((s) => s.steps.includes(id));
 const steps = Object.values(data.steps).filter((st) => stepSits(st.id).length);
 const host = (u) => new URL(u).hostname.replace(/^www\./, '');
+// Name a step's source by its organization, with the site it is on.
+const orgs = Object.fromEntries(loadDir('orgs').map((o) => [o.slug, o.name]));
+const sourceName = (r) => (orgs[r.org] ? `${orgs[r.org]} (${host(r.sources[0].url)})` : host(r.sources[0].url));
 const checked = (r) => prettyDate(r.sources.map((x) => ymd(x.checked)).sort().at(-1));
 const also = data.also.filter((a) => live(a.href));
 const topics = Object.keys(door.topics);
@@ -61,6 +64,7 @@ const r211 = resource('wv-211');
   </ul>
   <button class="btn btn-primary" type="submit">Show my steps</button>
 </form>
+<p class="note" id="door-nomatch" hidden>We could not find steps for that link. Pick what is going on above, or call or text 211.</p>
 
 <section class="door-plan" id="door-plan" hidden aria-labelledby="door-plan-h">
   <h2 id="door-plan-h" tabindex="-1">Your steps</h2>
@@ -78,7 +82,7 @@ const r211 = resource('wv-211');
                 <p>{st.text}</p>
                 <Actions callFirst phone={r.contact?.phone} phoneLabel={r.title} link={r.contact?.url} linkLabel={st.action ?? `Open ${host(r.contact.url)}`} about={r.title} />
                 {r.cost && <p class="step-cost"><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>}
-                <p class="meta">More on this: <a href={`${base}${first.page}`}>{first.label}</a>. Source: <a href={r.sources[0].url}>{host(r.sources[0].url)}</a>, checked {checked(r)}.</p>
+                <p class="meta">More on this: <a href={`${base}${first.page}`}>{first.label}</a>. Source: <a href={r.sources[0].url}>{sourceName(r)}</a>, checked {checked(r)}.</p>
               </li>
             );
           })}
@@ -130,7 +134,7 @@ const r211 = resource('wv-211');
       s.hidden = !on; if (on) shown++;
     });
     plan.querySelectorAll('.step-group').forEach(function (g) { g.hidden = !g.querySelector('.step:not([hidden])'); });
-    if (!shown) return;
+    if (!shown) { links.hidden = false; form.hidden = true; document.getElementById('door-nomatch').hidden = false; return; }
     plan.hidden = false;
     document.getElementById('door-plan-h').focus();
   })();

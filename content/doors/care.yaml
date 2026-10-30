@@ -4,7 +4,7 @@
 # for everything picked (Today, This week, When it opens), what often goes
 # with it, dates for this door, and a person to talk to.
 #
-# Steps state no facts of their own: each one points to a record in
+# Steps state no facts of their own, only the action: each one points to a record in
 # content/resources/ for its phone number, link, source and checked date.
 # A situation shows only once its page exists. `when` is today, week or opens.
 door: care
@@ -16,7 +16,7 @@ steps:
   trails:
     when: today
     resource: mon-river-rail-trails
-    text: Walk, run or bike the rail-trails, with 48 miles of smooth trail.
+    text: Walk, run or bike the rail-trails.
     action: Trail maps
   quitline:
     when: today
@@ -29,11 +29,11 @@ steps:
   dentist:
     when: week
     resource: monchd-dentistry
-    text: Call the health department's dental clinic for a checkup. It is taking new patients.
+    text: Call the health department's dental clinic for a checkup.
   ship:
     when: week
     resource: wv-ship-medicare-counseling
-    text: Call WV SHIP for free help choosing a Medicare plan or checking your costs.
+    text: Call the West Virginia State Health Insurance Assistance Program (WV SHIP) for help choosing a Medicare plan or checking your costs.
 situations:
   - id: shots
     label: I need a flu or COVID shot

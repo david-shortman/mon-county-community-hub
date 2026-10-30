@@ -115,7 +115,8 @@ for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x
     if (!s.label || !/^\/[^\s]*$/.test(s.page ?? '')) errors.push(`${where}: situation ${s.id} needs a label and a page like /flu-shots/`);
     for (const st of s.steps ?? []) if (!dp.steps[st]) errors.push(`${where}: situation ${s.id} names a missing step ${st}`);
   }
-  if (JSON.stringify(dp.situations).includes('\u2014') || JSON.stringify(Object.values(dp.steps).map((x) => x.text)).includes('\u2014') || (dp.lede ?? '').includes('\u2014')) errors.push(`${where}: contains an em dash`);
+  const ownText = [dp.lede, dp.cant_wait?.text, ...dp.situations.map((x) => x.label), ...Object.values(dp.steps).map((x) => [x.text, x.action]).flat(), ...dp.also.map((x) => x.text)];
+  if (ownText.some((t) => (t ?? '').includes('\u2014'))) errors.push(`${where}: contains an em dash`);
 }
 
 for (const w of warnings) console.warn(`warning: ${w}`);
