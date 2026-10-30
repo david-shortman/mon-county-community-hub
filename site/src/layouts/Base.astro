@@ -93,13 +93,13 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       /* A link on its own line ("See all ...") gets a 44px tap area (#50). */
       .more a { display: inline-flex; align-items: center; min-height: 44px; }
       .wrap { max-width: 46rem; margin: 0 auto; padding: 0 16px; }
-      header.site { border-bottom: 1px solid var(--line); }
+      header.site { position: relative; }
       header.site .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; padding-block: 14px; }
       header.site .brand { color: var(--fg); text-decoration: none; margin-right: auto; }
-      .ridge { display: block; width: 100%; height: 16px; }
-      .ridge .ridge-line { fill: none; stroke: var(--ridge); stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-      .ridge .ridge-fill { fill: var(--card); }
-      header.site .header-ridge { margin-top: -6px; }
+      .ridge { display: block; width: 100%; height: 16px; pointer-events: none; }
+      .ridge .ridge-line { fill: none; stroke: var(--ridge); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: square; }
+      .ridge .ridge-shapes { fill: var(--ridge); }
+      header.site .header-ridge { margin-top: -10px; }
       nav.main { display: flex; flex-wrap: wrap; flex-basis: 100%; gap: 0 18px; position: relative; }
       nav.main .tab, nav.main .ridge { display: none; }
       nav.main .wide { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
@@ -117,10 +117,12 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         html { scroll-padding-bottom: calc(var(--tabbar) + 16px); }
         body { padding-bottom: var(--tabbar); }
         header.site .wrap { padding-block: 12px 10px; }
+        header.site { border-bottom: 1px solid var(--line); }
         header.site .header-ridge { display: none; }
         nav.main { position: fixed; z-index: 10; inset: auto 0 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0;
           background: var(--card); padding: 4px max(4px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(4px, env(safe-area-inset-left)); }
         nav.main .ridge { display: block; position: absolute; left: 0; right: 0; bottom: 100%; height: 14px; }
+        nav.main .ridge .ridge-shapes { stroke: var(--bg); stroke-width: 2; paint-order: stroke; }
         nav.main .wide { display: none; }
         nav.main .tab { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 2px; min-height: 56px; padding: 4px 2px 0; font-size: var(--tab-fs); min-width: 0; overflow-wrap: anywhere; font-weight: 600; line-height: 1.15; text-align: center; text-decoration: none; color: var(--muted); }
         nav.main .icon { display: block; width: 26px; height: 26px; padding: 2px 10px; box-sizing: content-box; border-radius: 999px; }
@@ -261,7 +263,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       <div class="wrap">
         <a class="brand" href={`${base}/`}>Mon County Community Hub</a>
         <nav class="main" aria-label="Main">
-          <RidgeLine filled />
+          <RidgeLine />
           {tabs.map((t) => <a class="tab" href={`${base}${t.href}`} aria-current={t.current}><Icon name={t.icon} /><span>{t.label}</span></a>)}
           {wide.map((w) => <a class="wide" href={`${base}${w.href}`} aria-current={w.current}>{w.label}</a>)}
         </nav>

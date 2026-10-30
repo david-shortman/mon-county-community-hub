@@ -1,12 +1,15 @@
 ---
-// The hub's one local motif: the line of wooded hills that rings Morgantown,
-// drawn as a single thin stroke. Decorative only, hidden from screen readers.
-// `filled` paints the area under the hills (used on the phone tab bar, so the
-// hills read as the bar's top edge). Rules: docs/design/identity.md.
-const { filled = false, class: cls = '' } = Astro.props;
-const d = "M0 12l24-1l24 2l24 3l24 1l24-1l24-1l24 0l24 1l24-1l24-1l24 1l24 3l24 5l24 1l24 0l24 0l24 0l24 0l24-3l24-3l24-3l24 1l24 2l24 0l24-1l24-1l24 0l24 0l24-2l24-3l24-2l24 2l24 4l24 2l24 2l24 2l24 3l24 0l24 0l24-3l24-2l24 1l24 1l24 0l24-1l24 0l24 1l24 1l24-3l24-4l24-3l24-1l24 0l24 0l24 0l24 2l24 4l24 3l24 1l24-2l24-1l24 1l24 1l24 0l24-1l24 2l24 3l24 0l24 0l24-1l24-3l24-2l24-2l24-3l24-2l24 0l24 2l24 3l24 0l24 0l24-1l24 1l24 1l24-2l24-1l24 2l24 3l24 4l24 1l24 0l24 0l24 0l24 0l24-3l24-4l24-2l24 1l24 1l24 0l24-1l24 0l24 1l24-1l24-2l24-3l24-1l24 2l24 3l24 2l24 1l24 3l24 3l24 0l24 0l24-3l24-1l24 0l24 1l24-1l24-1l24 1l24 1l24 0l24-3l24-4";
+// The hub's one local motif: a straight line with very small silhouettes of
+// places here sitting on it (trees, the knob, brick downtown, hillside
+// houses, the glass factory stack, the rail-trail bridge, the Wharf
+// warehouses). It is the bottom border of the header on wide screens and the
+// top edge of the tab bar on phones. Decorative only, hidden from screen
+// readers. Shapes and sources: src/lib/skyline.mjs. Rules:
+// docs/design/identity.md.
+import { SKYLINE } from '../lib/skyline.mjs';
+const { class: cls = '' } = Astro.props;
 ---
-<svg class={`ridge ${cls}`} aria-hidden="true" focusable="false" viewBox="0 0 3000 24" preserveAspectRatio="xMidYMax slice">
-  {filled && <path class="ridge-fill" d={`${d} L3000 24 L0 24 Z`} />}
-  <path class="ridge-line" d={d} />
+<svg class={`ridge ${cls}`} aria-hidden="true" focusable="false" viewBox={`0 0 ${SKYLINE.width} ${SKYLINE.height}`} preserveAspectRatio="xMidYMax slice">
+  <path class="ridge-shapes" d={SKYLINE.fill} />
+  <path class="ridge-line" d={SKYLINE.line} />
 </svg>
