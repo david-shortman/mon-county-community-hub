@@ -10,13 +10,21 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: A dentist, help paying for medicine, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Help with drugs or alcohol, a dentist, help paying for medicine, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
   sms: "988"
   emergency: true
 steps:
+  naloxone:
+    when: today
+    resource: monchd-free-naloxone
+    text: Get free naloxone (Narcan) from the health department, or any hour from the vending machine at Wise Path in Westover.
+  treatment:
+    when: week
+    resource: valley-substance-use-treatment
+    text: Call Valley HealthCare to talk about treatment options.
   trails:
     when: today
     resource: mon-river-rail-trails
@@ -43,6 +51,10 @@ steps:
     resource: wv-ship-medicare-counseling
     text: Call the West Virginia State Health Insurance Assistance Program (WV SHIP) for help choosing a Medicare plan or checking your costs.
 situations:
+  - id: drugs
+    label: I need help with drugs or alcohol, or free Narcan
+    page: /drugs-and-alcohol/
+    steps: [naloxone, treatment]
   - id: dentist
     label: I need a dentist, or help paying for medicine
     page: /dental-and-prescriptions/

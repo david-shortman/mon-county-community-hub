@@ -1,0 +1,12 @@
+name: WVU Medicine
+slug: wvu-medicine
+kind: nonprofit
+website: https://wvumedicine.org/
+summary: West Virginia University's health system, which runs J.W. Ruby Memorial Hospital and the Healthy Minds behavioral health clinics, including the Chestnut Ridge Center, in Morgantown.
+topics: [health]
+area: monongalia-county
+sources:
+  - url: https://wvumedicine.org/our-care/institutes/rni/departments/bmed/treatment-centers-and-clinics/
+    checked: 2026-10-30
+  - url: https://projects.propublica.org/nonprofits/organizations/550643304
+    checked: 2026-10-30
