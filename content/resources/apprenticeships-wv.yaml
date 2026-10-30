@@ -6,6 +6,7 @@ who_it_is_for: People who want to learn a trade or job while getting paid. You w
 what_to_do: Search for openings near Morgantown with the U.S. Department of Labor's Apprenticeship Job Finder at apprenticeship.gov, or ask the WorkForce West Virginia office on Commerce Drive.
 contact:
   url: https://www.apprenticeship.gov/apprenticeship-job-finder
+  url_label: Find apprenticeships
 cost: You are paid while you learn.
 sources:
   - url: https://workforcewv.org/job-seeker/find-a-job/apprenticeships/

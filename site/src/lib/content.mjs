@@ -159,13 +159,13 @@ export function oldestChecked(sources) {
   return sources.map((s) => ymd(s.checked)).sort()[0];
 }
 
-// A website button's label names the site, never shows a raw web address
-// (#335): "Open Solid Waste Authority website". Uses the org's short_name when
-// it has one. When the link is not on the org's own site, "Open website".
-export function websiteLabel(url, orgSlug) {
-  if (!url) return null;
-  const o = sourceOrg(url, orgSlug);
-  return o ? `Open ${o.short_name ?? o.name} website` : 'Open website';
+// A website button gets a short label that says what the person gets, never
+// a raw web address (#335): the record's own `contact.url_label` ("Apply
+// online"), or "Website". Buttons stay compact and sit side by side; the
+// domain shows once, in the source line. Screen readers also hear what the
+// card is about (Actions adds it).
+export function websiteLabel(r) {
+  return r?.contact?.url ? (r.contact.url_label ?? 'Website') : null;
 }
 
 // One record from content/resources or content/orgs by slug. Throws when it is

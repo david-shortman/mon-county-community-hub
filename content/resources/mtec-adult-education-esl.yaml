@@ -7,6 +7,7 @@ what_to_do: MTEC is at 1000 Mississippi Street, Morgantown. Call 304-291-9226, o
 contact:
   phone: "304-291-9226"
   url: https://wvde.us/academics/adult-education/wvadulted-class-locations
+  url_label: Class locations
 cost: Ask about cost when you call.
 sources:
   - url: https://wvde.us/academics/adult-education/wvadulted-class-locations

@@ -15,7 +15,7 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
   <Actions callFirst
     phone={r.contact?.phone} phoneLabel={r.title}
     sms={sms} smsLabel={smsLabel}
-    link={r.contact?.url} linkLabel={websiteLabel(r.contact?.url, r.org)}
+    link={r.contact?.url} linkLabel={websiteLabel(r)}
     about={r.title}
   />
   <SourceLine sources={r.sources} org={r.org} about={r.title}>{r.cost === 'free' && ' Free.'}</SourceLine>

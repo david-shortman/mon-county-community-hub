@@ -5,7 +5,7 @@ import ResourceCard from './ResourceCard.astro';
 import EventCard from './EventCard.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
-import { resource, org, loadCalendarWithFeeds, upcoming, websiteLabel } from '../lib/content.mjs';
+import { resource, org, loadCalendarWithFeeds, upcoming } from '../lib/content.mjs';
 const { student = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const pantries = upcoming(await loadCalendarWithFeeds(), undefined, 31).filter((e) => (e.topics || []).includes('food')).slice(0, 4);
@@ -19,7 +19,7 @@ const srsh = org('scotts-run-settlement-house');
     <article class="card">
       <h3>{srsh.name}</h3>
       <p>{srsh.summary}</p>
-      <Actions callFirst phone={srsh.phone} phoneLabel={srsh.name} sms={srsh.phone} smsLabel={srsh.name} link={srsh.website} linkLabel={websiteLabel(srsh.website, srsh.slug)} about={srsh.name} />
+      <Actions callFirst phone={srsh.phone} phoneLabel={srsh.name} sms={srsh.phone} smsLabel={srsh.name} link={srsh.website} linkLabel="Website" about={srsh.name} />
       <SourceLine sources={srsh.sources} org={srsh.slug} about={srsh.name} />
     </article>
   </li>
