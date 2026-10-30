@@ -2,7 +2,7 @@
 // One date on the calendar, phone first: when it is, what it is, then big
 // buttons to act on it. Sources and topics sit in the small print below.
 import Actions from './Actions.astro';
-import { prettyDate, prettyTimes, chipDate, relativeLabel, sourceLabel, todayYmd, oldestChecked, isStale, reportUrl } from '../lib/content.mjs';
+import { prettyDate, prettyTimes, chipDate, relativeLabel, sourceLabel, isGovSite, todayYmd, oldestChecked, isStale, reportUrl } from '../lib/content.mjs';
 const { e } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
@@ -43,7 +43,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
       <>Pulled from the <a href={e.feed.page_url}>{e.feed.name}</a> on {prettyDate(fetchedOn)}.</>
     ) : (
       <>Run by {e.org_name}.
-      {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{sourceLabel(s.url)}</a></>))}.</> : <> Source: {sourceLabel(e.url)} (the details page).</>}
+      {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{sourceLabel(s.url)}</a>{isGovSite(s.url) && ' (government site)'}</>))}.</> : <> Source: {sourceLabel(e.url)}{isGovSite(e.url) ? ' (the details page, a government site)' : ' (the details page)'}.</>}
       {' '}Checked against the source on {prettyDate(checked)}.{isStale(checked, today) && <strong> This may be out of date, so check the details page before you go.</strong>}</>
     )}
     {e.topics?.length ? <> Topics: {e.topics.join(', ')}.</> : null}
