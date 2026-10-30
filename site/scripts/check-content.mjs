@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar, loadDir, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { checkPlaces } from './check-places.mjs';
 
 const errors = [];
 const warnings = [];
@@ -221,7 +222,12 @@ for (const e of [...orgs, ...resources, ...loadCalendar()]) {
   });
 }
 
+// Gathering places (content/places, #455), checked against content/schemas/place.schema.json.
+const placeCheck = checkPlaces();
+errors.push(...placeCheck.errors);
+warnings.push(...placeCheck.warnings);
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
-console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
+console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${placeCheck.count} places, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);

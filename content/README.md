@@ -61,6 +61,7 @@ topics: [money, housing]      # money, food, housing, health, family, government
 place: 200 M-Tec Dr, Morgantown, WV   # optional; adds a Directions button. Only a place the source publishes
 phone: 304-555-0100           # optional; adds a Call button. Only a public office or program number the source publishes
 phone_label: the City Clerk   # optional; who answers, read by screen readers. Defaults to org_name
+venue: smithtown              # optional; slug from places/, so the event shows on that place's page (#455)
 sources:
   - url: https://example.wv.gov/lieap
     checked: 2026-10-28
@@ -125,6 +126,60 @@ link: https://github.com/david-shortman/mon-county-community-hub/pull/355
 ```
 
 `found_by` comes from the report form's optional question. Never name the person or group who reported it, unless the group asks for credit, and that goes to David first.
+
+## `places/<slug>.yaml`: gathering places
+
+Buildings people gather in: community centers, senior centers, neighborhood houses, public rec buildings, and fire halls that publish a hall to rent (#455). They make the Community centers and halls section (#450), and the groups and third spaces directory (#263) uses the same record. The schema is `schemas/place.schema.json`; `npm run check-content` checks every file against it.
+
+```yaml
+name: Example Community Center
+other_names: [Example Community Building]  # optional; list both when sources disagree
+slug: example
+kind: community-center      # community-center | senior-center | neighborhood-house | rec-center | park-building | fire-hall
+area: south                 # south | west | north | east | morgantown (Morgantown and close in)
+community: Example          # the community name people would type
+run_by:
+  kind: volunteer-association  # volunteer-association | county | city | nonprofit | fire-department | parks-board | park-foundation | library
+  org: example-org          # optional; slug from orgs/
+  text: A volunteer association. The county owns the building.
+story: A 1939 school, run as a community center since 1983.  # one plain line
+facilities:                 # only what the source says
+  rooms:
+    - name: Main hall
+      seats: 72
+  kitchen: true
+  outdoor: [pavilion, playground]
+  step_free: true           # only when published
+regular:                    # weekly or monthly happenings, in words
+  - Lunch Monday, Wednesday and Friday
+membership:
+  dues: $5 a family a year
+rentals:
+  - space: Main hall
+    seats: 72
+    kitchen: true
+    price: $150             # as the source gives it; leave out if not published
+    deposit: $50
+    book: Call the center.  # public contact only, never a volunteer's own number
+contact:
+  phone: "304-555-0100"
+  url: https://example.org
+  facebook: https://www.facebook.com/example  # shown as a link; never read by robots
+  place: 100 Main St, Example, WV  # only an address the place publishes; leave out if sources conflict
+status: active              # active | no-recent-activity | closed | renovating
+last_activity_seen: 2026-10-16  # newest sign of activity we read
+tags: [family-friendly]     # family-friendly | free | come-alone | beginners | step-free
+notes:                      # gaps residents should know
+  - Sources give two addresses, so call first.
+sources:
+  - url: https://example.org/rentals
+    checked: 2026-10-30
+phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
+```
+
+- **No private people.** Leave out volunteers' names and personal numbers, even when a center lists one as the rental contact. Say "Call the center" or point to its page instead.
+- **Stale rule.** A place marked `active` whose `last_activity_seen` is over 6 months old shows "No recent activity seen, call first" (#39). A place found only in county lists is `no-recent-activity` from the start.
+- **Dated events** go in `calendar/` with `venue: <place slug>`, so they show on the place's page. Weekly regulars stay in `regular`.
 
 ## `doors.yaml`: the five doors
 

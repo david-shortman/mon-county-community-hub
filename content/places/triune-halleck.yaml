@@ -1,0 +1,18 @@
+name: Triune Halleck Community Building
+slug: triune-halleck
+kind: community-center
+area: west
+community: Triune (Halleck Road)
+run_by:
+  kind: county
+  text: The county lists the building as county property. Who runs it day to day is not published
+story: A county-owned community building on Halleck Road.
+status: no-recent-activity
+notes:
+  - We found it only on the county's property list, with no phone, website or recent news. Ask the Monongalia County Commission or neighbors before you go.
+  - The county directory also lists a Triune Seniors and Community Building on Halleck Road. We could not confirm whether it is the same place.
+sources:
+  - url: https://www.monongaliacounty.gov/county_parks_and_property/index.php
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/
+    checked: 2026-10-30
