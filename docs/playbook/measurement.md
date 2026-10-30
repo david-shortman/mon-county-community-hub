@@ -58,7 +58,7 @@ This page covers how we measure what the hub does without fooling ourselves or a
 
 **Why it matters here.** All levels. It stops us from picking whichever number looks good after the fact, and it gives the public log a fixed promise to check against.
 
-**How we apply it.** For any change we plan to evaluate, commit `docs/measurement-plans/<date>-<slug>.md` in the PR before or with the change. It lists: the question, the level, the one main measure, the baseline, the date we will check, what counts as "helped," and other things we may look at (marked exploratory). Later edits go in a dated "Changes" section with a reason. We will not use a third-party registry, since that needs an account.
+**How we apply it.** For any change we plan to evaluate, commit `docs/measurement-plans/<date>-<slug>.md` in the PR before or with the change. It lists: the question, the level, the one main measure, the baseline, the date we will check, what counts as "helped," and other things we may look at (marked exploratory). Later edits go in a dated "Changes" section with a reason. We will not use a third-party registry, since that needs an account. The template and the shared counting rules are in [`docs/measurement-plans/`](../measurement-plans/README.md).
 
 **Sources:**
 - [Preregistration as a tool for strengthening federal evaluation (OES, GSA)](https://oes.gsa.gov/assets/files/preregistration-as-a-tool-in-federal-evaluation.pdf)
