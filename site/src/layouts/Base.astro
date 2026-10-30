@@ -2,33 +2,13 @@
 import RidgeLine from '../components/RidgeLine.astro';
 import Icon from '../components/Icon.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
-import { loadPages } from '../lib/pages.mjs';
+import { loadPages, doorHref } from '../lib/pages.mjs';
 import { loadDoors } from '../lib/content.mjs';
-const { searchable = true, title, description = 'Plain-language help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
+const { searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(/\.\w+$/.test(Astro.url.pathname) ? Astro.url.pathname : Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
 const shareImage = new URL(`${base}/share.png`, Astro.site).href;
-// Main menu. On phones it becomes a tab bar at the bottom of the screen,
-// where a thumb can reach it: the `tab` pages (the most urgent needs first)
-// plus More, which lists every page. `aria-current` marks the page you are on.
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
-const navItems = [
-  { href: `${base}/`, label: 'Home', icon: 'home', tab: true, wide: false },
-  { href: `${base}/calendar/`, label: 'Deadlines', icon: 'calendar', tab: true },
-  { href: `${base}/stay-tonight/`, label: 'Stay tonight', icon: 'bed', tab: true },
-  { href: `${base}/recycling/`, label: 'Recycling', icon: 'recycle' },
-  { href: `${base}/utility-bills/`, label: 'Bill help', icon: 'bulb', tab: true },
-  { href: `${base}/money/`, label: 'Money help', icon: 'bulb' },
-  { href: `${base}/snap/`, label: 'Apply for SNAP', icon: 'info' },
-  { href: `${base}/flu-shots/`, label: 'Flu and COVID shots', icon: 'info' },
-  { href: `${base}/staying-well/`, label: 'Staying well', icon: 'health' },
-  { href: `${base}/turning-65/`, label: 'Turning 65 or on Medicare', icon: 'info' },
-  { href: `${base}/the-idea/`, label: 'The idea behind this site', icon: 'info' },
-  { href: `${base}/about/`, label: 'About', icon: 'info' },
-  { href: `${base}/topics/`, label: 'All topics', icon: 'more' },
-].map((n) => ({ ...n, current: n.href.replace(/\/$/, '') === here.replace(/^\/$/, '') }));
-// On phones, a page that is only under More marks the More tab instead.
-const moreCurrent = navItems.find((n) => n.current && !n.tab);
 // Heading face: Atkinson Hyperlegible Next (SIL Open Font License, see
 // public/fonts/OFL.txt), self-hosted, one weight, Latin only, about 11 KB.
 // font-display: optional means text never waits for it and never shifts.
@@ -40,6 +20,34 @@ const tags = (await loadPages()).get(route);
 const doors = loadDoors();
 const tagDoor = tags && doors.bySlug[tags.door];
 const tagTopic = tagDoor?.topics?.[tags.topic];
+// Main menu (#250), built from content/doors.yaml, so adding a page never
+// changes it. Phones: a tab bar of four at the bottom, in thumb reach. Wide
+// screens: Help now, the five doors, Dates and All topics in the header.
+// `aria-current` is "page" on the page itself and "true" on its section.
+const lane = (slug) => doors.bySlug[slug];
+const isDoor = doors.doors.some((d) => d.slug === tags?.door);
+const mark = (href, slug) => (href === route ? 'page' : slug && slug === tags?.door ? 'true' : undefined);
+const helpNow = { href: lane('help-now').page, label: 'Help now', current: mark(lane('help-now').page, 'help-now') };
+const dates = { href: lane('dates').page, label: 'Dates', current: mark(lane('dates').page, 'dates') };
+const topicsCurrent = route === '/topics/' ? 'page' : isDoor ? 'true' : undefined;
+const tabs = [
+  { href: '/', label: 'Home', icon: 'home', current: route === '/' ? 'page' : undefined },
+  { ...helpNow, icon: 'bed' },
+  { ...dates, icon: 'calendar' },
+  { href: '/topics/', label: 'Topics', icon: 'list', current: topicsCurrent },
+];
+const wide = [
+  helpNow,
+  ...doors.doors.map((d) => ({ href: doorHref(d), label: d.name, current: mark(doorHref(d), d.slug) })),
+  dates,
+  { href: '/topics/', label: 'All topics', current: route === '/topics/' ? 'page' : undefined },
+];
+const footerLinks = [
+  ...doors.doors.map((d) => ({ href: doorHref(d), label: d.name })),
+  { href: '/topics/', label: 'All topics' },
+  { href: '/about/', label: 'About this site' },
+  { href: '/partners/', label: 'For groups and helpers' },
+];
 const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Community Hub';
 ---
 <!doctype html>
@@ -85,20 +93,12 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .ridge .ridge-line { fill: none; stroke: var(--ridge); stroke-width: 1.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
       .ridge .ridge-fill { fill: var(--card); }
       header.site .header-ridge { margin-top: -6px; }
-      nav.main { display: flex; flex-wrap: wrap; gap: 4px 16px; position: relative; }
-      nav.main > a { display: inline-flex; align-items: center; min-height: 24px; }
-      nav.main > a[aria-current="page"] { color: var(--fg); font-weight: 700; text-decoration-thickness: 3px; }
-      nav.main .short { display: none; }
-      nav.main .icon, nav.main .ridge, nav.main .narrow-only, nav.main .more, nav.main .more-link { display: none; }
-      nav.main .tab span, nav.main .extra span { white-space: nowrap; }
-      .more-menu { inset: auto max(8px, env(safe-area-inset-right)) calc(var(--tabbar, 0px) + 12px) auto; margin: 0; min-width: 14rem;
-        padding: 8px; background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 6px 24px rgb(0 0 0 / 0.18); }
-      .more-menu .more-title { margin: 4px 12px; font-size: 0.875rem; font-weight: 700; color: var(--muted); }
-      .more-menu ul, .all-pages ul { list-style: none; margin: 0; padding: 0; }
-      .more-menu a { display: flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 8px; font-weight: 600; }
-      .more-menu a[aria-current="page"] { background: var(--accent-bg); }
-      .all-pages ul { display: flex; flex-wrap: wrap; gap: 4px 18px; }
-      .all-pages a { display: inline-flex; align-items: center; min-height: 44px; }
+      nav.main { display: flex; flex-wrap: wrap; flex-basis: 100%; gap: 0 18px; position: relative; }
+      nav.main .tab, nav.main .ridge { display: none; }
+      nav.main .wide { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+      nav.main .wide[aria-current] { color: var(--fg); font-weight: 700; text-decoration-thickness: 3px; }
+      .foot-links ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 18px; }
+      .foot-links a { display: inline-flex; align-items: center; min-height: 44px; }
       .skip { position: absolute; left: 8px; top: -100px; z-index: 20; padding: 10px 14px; background: var(--card); border: 2px solid var(--accent); border-radius: 8px; }
       .skip:focus { top: 8px; }
       main:focus { outline: none; }
@@ -110,25 +110,15 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         body { padding-bottom: var(--tabbar); }
         header.site .wrap { padding-block: 12px 10px; }
         header.site .header-ridge { display: none; }
-        nav.main { position: fixed; z-index: 10; inset: auto 0 0 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 0;
+        nav.main { position: fixed; z-index: 10; inset: auto 0 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0;
           background: var(--card); padding: 4px max(4px, env(safe-area-inset-right)) env(safe-area-inset-bottom) max(4px, env(safe-area-inset-left)); }
         nav.main .ridge { display: block; position: absolute; left: 0; right: 0; bottom: 100%; height: 14px; }
-        nav.main .extra { display: none; }
-        nav.main .narrow-only, nav.main .more { display: flex; }
-        nav.main .more { border: 0; background: none; font: inherit; cursor: pointer; -webkit-appearance: none; appearance: none; margin: 0; width: 100%; }
-        nav.main > a, nav.main .more { flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; padding: 0 2px; font-size: min(0.875rem, 14px); min-width: 0; overflow-wrap: anywhere; font-weight: 600; line-height: 1.15; text-align: center; text-decoration: none; color: var(--muted); }
-        nav.main .tab span { white-space: normal; }
+        nav.main .wide { display: none; }
+        nav.main .tab { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; padding: 0 2px; font-size: min(0.875rem, 14px); min-width: 0; overflow-wrap: anywhere; font-weight: 600; line-height: 1.15; text-align: center; text-decoration: none; color: var(--muted); }
         nav.main .icon { display: block; width: 26px; height: 26px; padding: 2px 10px; box-sizing: content-box; border-radius: 999px; }
-        nav.main > a[aria-current="page"] { color: var(--accent); font-weight: 700; }
-        nav.main .tab .long.has-short { display: none; }
-        nav.main .short { display: inline; }
-        nav.main > a[aria-current="page"] .icon, nav.main .more.has-current .icon { background: var(--accent-bg); }
-        nav.main .more.has-current { color: var(--accent); font-weight: 700; }
-        nav.main > a:focus-visible, nav.main .more:focus-visible { outline-offset: -3px; border-radius: 10px; }
-        @supports not selector(:popover-open) {
-          nav.main .more, .more-menu { display: none; }
-          nav.main .more-link { display: flex; }
-        }
+        nav.main .tab[aria-current] { color: var(--accent); font-weight: 700; }
+        nav.main .tab[aria-current] .icon { background: var(--accent-bg); }
+        nav.main .tab:focus-visible { outline-offset: -3px; border-radius: 10px; }
       }
       .icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
       main { padding-block: 24px 48px; }
@@ -162,19 +152,36 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .add-cal h2 { margin-top: 0.6em; }
       .add-cal summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; }
       .add-cal input { width: 100%; min-height: 44px; font: inherit; font-size: 0.9rem; padding: 6px 10px; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
-      /* Front Door (identity v2, direction B) */
-      h1.front-q { font-size: clamp(1.9rem, 1.5rem + 2vw, 2.8rem); line-height: 1.1; margin: 0.15em 0 0.4em; }
-      .right-now { background: var(--accent-bg); border-left: 4px solid var(--brick); border-radius: 4px 12px 12px 4px; padding: 4px 16px 12px; }
-      .right-now h2 { margin: 0.5em 0 0; font-size: 1.2rem; }
-      .right-now .actions { margin: 10px 0 8px; }
-      .right-now .pair .actions { grid-template-columns: 1fr 1fr; }
-      .right-now .pair .btn-primary { grid-column: auto; }
+      /* Front Door (#250): Help now bar, doors, season card */
+      .front-h { font-size: clamp(1.9rem, 1.5rem + 2vw, 2.6rem); line-height: 1.12; margin: 0.7em 0 0.2em; }
+      .right-now { background: var(--accent-bg); border-left: 4px solid var(--brick); border-radius: 4px 12px 12px 4px; padding: 2px 14px 10px; margin-top: 8px; }
+      .right-now h2 { margin: 0; font-size: 1.2rem; }
       .right-now p { margin: 6px 0; }
-      .right-now .crisis { font-weight: 600; margin-top: 10px; }
-      .crisis-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 6px 0 10px; }
+      .right-now .actions { margin: 6px 0; }
+      .right-now .pair .actions, .right-now .actions.pair { grid-template-columns: 1fr 1fr; }
+      .right-now .pair .btn-primary, .right-now .actions.pair .btn-primary { grid-column: auto; }
+      .right-now .rn-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 12px; }
+      .right-now .tonight { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; }
+      .right-now .tonight .icon { width: 22px; height: 22px; }
+      .right-now .crisis { font-weight: 600; margin: 8px 0 0; font-size: 0.95rem; }
+      .crisis-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 6px 0 4px; }
       .crisis-btns .btn { padding: 8px 6px; gap: 6px; }
-      .crisis-btns .icon { display: none; }
       .crisis-btns span { white-space: nowrap; }
+      .doors h2 { margin-top: 1.1em; }
+      .door-list { list-style: none; margin: 12px 0 8px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: 10px; }
+      .door { background: var(--card); border: 2px solid var(--line); border-radius: 12px; padding: 4px 14px 10px; }
+      .door:has(.door-name:hover) { border-color: var(--accent); }
+      .door-name { display: flex; align-items: center; gap: 10px; min-height: 52px; font-family: var(--display); font-weight: 800; font-size: 1.2rem; line-height: 1.2; text-decoration: none; }
+      .door-name:hover span { text-decoration: underline; }
+      .door-name .icon { width: 28px; height: 28px; padding: 6px; box-sizing: content-box; border-radius: 999px; background: var(--accent-bg); }
+      .door-ex { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 18px; }
+      .door-ex a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+      .door-hint { margin: 0 0 6px; color: var(--muted); font-size: 0.95rem; line-height: 1.4; }
+      .season { border-left: 4px solid var(--brick); margin-top: 24px; }
+      .season h2 { margin: 0.1em 0 0.3em; font-size: 1.25rem; }
+      .season ul { margin: 6px 0 0; padding-left: 1.2rem; }
+      .season li a { display: inline-flex; align-items: center; min-height: 44px; }
+      .eyebrow { margin: 4px 0 0; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
       .search { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin: 24px 0 8px; }
       .search label { font-family: var(--display); font-weight: 800; font-size: 1.15rem; }
       .search[hidden] { display: none; }
@@ -183,12 +190,6 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .search input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
       .btn-search { flex: none; min-height: 52px; background: var(--accent); color: var(--card); border-radius: 12px; padding: 8px 18px; }
       .btn-search:hover { background: var(--accent); text-decoration: underline; }
-      .needs ul { list-style: none; margin: 16px 0 8px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); gap: 10px; }
-      .need { display: grid; grid-template-rows: auto auto 1fr; gap: 4px; min-height: 120px; height: 100%; padding: 14px; border-radius: 12px; background: var(--card); border: 2px solid var(--line); color: var(--fg); text-decoration: none; }
-      .need:hover { border-color: var(--accent); }
-      .need .icon { width: 28px; height: 28px; color: var(--accent); }
-      .need-label { font-family: var(--display); font-weight: 800; font-size: 1.1rem; line-height: 1.2; }
-      .need-hint { font-size: 0.9rem; line-height: 1.35; color: var(--muted); }
       .question .q-step { font-weight: 600; color: var(--muted); margin-bottom: 4px; }
       .choices { list-style: none; margin: 8px 0 16px; padding: 0; display: grid; gap: 10px; }
       .choice { display: grid; gap: 2px; min-height: 64px; padding: 14px 16px; border: 2px solid var(--accent); border-radius: 12px; background: var(--card); color: var(--fg); text-decoration: none; }
@@ -219,15 +220,8 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         <a class="brand" href={`${base}/`}>Mon County Community Hub</a>
         <nav class="main" aria-label="Main">
           <RidgeLine filled />
-          {navItems.map((n) => (
-            <a class:list={[n.tab ? 'tab' : 'extra', n.wide === false && 'narrow-only']} href={n.href} aria-current={n.current ? 'page' : undefined}><Icon name={n.icon} /><span class:list={['long', n.tabLabel && 'has-short']}>{n.label}</span>{n.tabLabel && <span class="short">{n.tabLabel}</span>}</a>
-          ))}
-          <button class:list={['tab more', moreCurrent && 'has-current']} type="button" popovertarget="more-menu"><Icon name="more" /><span>More{moreCurrent && <span class="sr-only">, you are on {moreCurrent.label}</span>}</span></button>
-          <a class="tab more-link" href="#all-pages"><Icon name="more" /><span>More</span></a>
-          <div id="more-menu" class="more-menu" popover>
-            <p class="more-title">All pages</p>
-            <ul>{navItems.map((n) => <li><a href={n.href} aria-current={n.current ? 'page' : undefined}>{n.label}</a></li>)}</ul>
-          </div>
+          {tabs.map((t) => <a class="tab" href={`${base}${t.href}`} aria-current={t.current}><Icon name={t.icon} /><span>{t.label}</span></a>)}
+          {wide.map((w) => <a class="wide" href={`${base}${w.href}`} aria-current={w.current}>{w.label}</a>)}
         </nav>
       </div>
       <RidgeLine class="header-ridge" />
@@ -240,8 +234,8 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     </main>
     <footer class="site">
       <div class="wrap">
-        <nav id="all-pages" class="all-pages" aria-label="All pages">
-          <ul>{navItems.map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+        <nav class="foot-links" aria-label="Doors and site">
+          <ul>{footerLinks.map((n) => <li><a href={`${base}${n.href}`}>{n.label}</a></li>)}</ul>
         </nav>
         <p>An open experiment for Morgantown and Monongalia County, WV. Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
       </div>

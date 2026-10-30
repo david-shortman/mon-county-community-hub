@@ -1,0 +1,27 @@
+---
+// The five doors as big buttons (#250, from the #173 need picker). Each door
+// lists a few problems in residents' words that link straight to their page,
+// so help is one tap from home, and the door name is two taps from any page
+// in it. An example shows only once its page exists. A door with no pages
+// yet shows its hint and leads to its section of the Topics page.
+// Doors and examples live in content/doors.yaml.
+import Icon from './Icon.astro';
+import { doorCards } from '../lib/pages.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { headingLevel = 2, heading = 'What do you need help with?', id = 'doors-h' } = Astro.props;
+const doors = await doorCards();
+const H = `h${headingLevel}`;
+---
+<nav class="doors" aria-labelledby={id}>
+  <H id={id}>{heading}</H>
+  <ul class="door-list">
+    {doors.map((d) => (
+      <li class="door">
+        <a class="door-name" href={`${base}${d.href}`}><Icon name={d.icon} /><span>{d.name}</span></a>
+        {d.examples.length
+          ? <ul class="door-ex" aria-label={`In ${d.name}`}>{d.examples.map((e) => <li><a href={`${base}${e.href}`}>{e.text}</a></li>)}</ul>
+          : <p class="door-hint">{d.hint}</p>}
+      </li>
+    ))}
+  </ul>
+</nav>

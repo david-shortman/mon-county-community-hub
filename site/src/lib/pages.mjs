@@ -113,3 +113,15 @@ export async function breadcrumb(route) {
   if (d) trail.unshift({ label: d.name, href: doorHref(d) });
   return [{ label: 'Home', href: '/' }, ...trail].filter((c) => c.href !== route);
 }
+
+// The home page door buttons: each door with the example problems whose
+// pages exist, so no example leads to an empty page. A door with none yet
+// shows its hint and leads to its section of the Topics page.
+export async function doorCards() {
+  const pages = await loadPages();
+  return loadDoors().doors.map((d) => ({
+    ...d,
+    href: doorHref(d),
+    examples: (d.examples ?? []).filter((e) => pages.has(e.href.split('#')[0])),
+  }));
+}

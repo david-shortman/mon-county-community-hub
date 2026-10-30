@@ -4,7 +4,7 @@
 // ?q= link still works. Without scripts, the page lists every need instead.
 import Base from '../layouts/Base.astro';
 import SearchBox from '../components/SearchBox.astro';
-import NeedTiles from '../components/NeedTiles.astro';
+import DoorCards from '../components/DoorCards.astro';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <Base searchable={false} title="Search Mon County help" description="Search plain-language help pages for Morgantown and Monongalia County, WV. The search runs on your phone, and we never collect what you search for.">
@@ -12,9 +12,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <SearchBox id="search-q" />
   <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
   <ol id="search-results" class="search-results" hidden></ol>
-  <noscript><p>Search needs JavaScript, which is off on this browser. Pick what you need below, use the list of all pages at the bottom, or call or text 211.</p></noscript>
-  <h2 id="browse">Or pick what you need</h2>
-  <NeedTiles headingLevel={3} />
+  <noscript><p>Search needs JavaScript, which is off on this browser. Pick what is going on below, see <a href={`${base}/topics/`}>all topics</a>, or call or text 211.</p></noscript>
+  <DoorCards heading="Or pick what is going on" id="browse" />
   <p class="meta">The search runs on your phone. Your words are never sent to us or to the site’s host, and we never store them. Like any visit, the host can see which files your phone loads, including the search files for the pages that match.</p>
   <script is:inline define:vars={{ base }}>
     (function () {

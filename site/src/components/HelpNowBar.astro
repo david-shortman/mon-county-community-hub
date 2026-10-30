@@ -1,0 +1,31 @@
+---
+// The Help now bar on top of the home page (#250, #260): a place to stay
+// tonight, 211 with a plain label, and 988 and 911 in one row. Kept short so
+// the door buttons start on the first screen. Facts come from
+// content/resources/wv-211.yaml and content/resources/988-lifeline.yaml; the
+// sources line sits at the bottom of the page (HelpNowSources).
+// 911 is the standard U.S. emergency number, so it has no record.
+import Icon from './Icon.astro';
+import { resource, telHref } from '../lib/content.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const r211 = resource('wv-211');
+const r988 = resource('988-lifeline');
+const sms = (n) => `sms:${String(n).replace(/[^\d+]/g, '')}`;
+---
+<section class="right-now" aria-labelledby="right-now-h">
+  <div class="rn-top">
+    <h2 id="right-now-h">Need help tonight?</h2>
+    <a class="tonight" href={`${base}/stay-tonight/`}><Icon name="bed" /><span>A place to stay</span></a>
+  </div>
+  <p><strong>211</strong> is a free help line for food, housing, bills and more, any hour. Call, or text your ZIP code.</p>
+  <div class="actions pair">
+    <a class="btn btn-primary" href={telHref(r211.contact.phone)}><Icon name="phone" /><span>Call 211<span class="sr-only">, West Virginia 211</span></span></a>
+    <a class="btn" href={sms(r211.contact.text)}><Icon name="text" /><span>Text <span class="nowrap">{r211.contact.text}</span><span class="sr-only">, send your ZIP code</span></span></a>
+  </div>
+  <p class="crisis">In danger, or a mental health crisis:</p>
+  <div class="crisis-btns">
+    <a class="btn" href="tel:911"><span>Call 911<span class="sr-only">, emergency</span></span></a>
+    <a class="btn" href={telHref(r988.contact.phone)}><span>Call {r988.contact.phone}<span class="sr-only">, Suicide and Crisis Lifeline</span></span></a>
+    <a class="btn" href={sms(r988.contact.phone)}><span>Text {r988.contact.phone}<span class="sr-only">, Suicide and Crisis Lifeline</span></span></a>
+  </div>
+</section>
