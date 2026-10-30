@@ -1,0 +1,15 @@
+name: Blacksville Community Building
+slug: blacksville
+kind: community-center
+area: west
+community: Blacksville
+run_by:
+  kind: county
+  text: The county lists the building as county property. Who runs it day to day is not published
+story: A county-owned community building in the former Blacksville Elementary School, on Rt. 7.
+status: no-recent-activity
+notes:
+  - We found it only on the county's property list, with no phone, website or recent news. Ask the Monongalia County Commission or neighbors before you go.
+sources:
+  - url: https://www.monongaliacounty.gov/county_parks_and_property/index.php
+    checked: 2026-10-30
