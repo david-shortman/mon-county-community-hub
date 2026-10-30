@@ -25,7 +25,14 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   <Milepost n={1} title="Call your utility first" when="Today" open id="call-utility">
   <p>Tell them you cannot pay in full. Ask for a payment plan and ask what help they know about. Keep your shutoff notice, because some programs ask for it.</p>
   <ul>
-    <li><strong>Mon Power (electric):</strong> <a href={telHref(monPower.contact.phone)}>{monPower.contact.phone}</a>. Mon Power lists payment arrangements (installments added to your monthly bill), a later due date for customers who are 60 or older and get Social Security, a pension or disability benefits, and a way to have a friend, relative, clergy member or agency told before a disconnection. If someone at home uses electric medical equipment, ask about its Critical Care program. <SourceLine sources={monPower.sources} org={monPower.org} about="Mon Power" /></li>
+    <li><strong>Mon Power (electric):</strong> <a href={telHref(monPower.contact.phone)}>{monPower.contact.phone}</a>. Mon Power lists these kinds of help:
+      <ul>
+        <li><strong>Payment arrangement:</strong> smaller payments added to your monthly bill.</li>
+        <li><strong>A later due date</strong> for customers who are 60 or older and get Social Security, a pension or disability benefits.</li>
+        <li><strong>Someone to warn:</strong> a friend, relative, clergy member or agency can be told before your power is shut off.</li>
+        <li><strong>Critical Care program:</strong> for homes where someone uses electric medical equipment to stay alive. Mon Power says it helps these customers get ready for power outages.</li>
+      </ul>
+      <SourceLine sources={monPower.sources} org={monPower.org} about="Mon Power" /></li>
     <li><strong>Morgantown Utility Board (water and sewer):</strong> <a href={telHref(mub.contact.phone)}>{mub.contact.phone}</a>, Monday to Friday, 8 a.m. to 4:30 p.m. (staffed around the clock for emergencies). Call to confirm. Email customer-service@mub.org, or visit 278 Greenbag Road. MUB's website does not currently describe payment plans or shutoff rules, so ask on the phone. If water is shut off, you have to call to get it turned back on. <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" /></li>
     <li><strong>Gas or bulk fuel (propane, oil):</strong> call your supplier. We did not research gas utilities for this page.</li>
   </ul>
@@ -42,10 +49,10 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   <h3>LIEAP: heating help from the state</h3>
   <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Eligibility depends on household income, household size and whether you pay for your own heat. The maximum benefit last season was $2,000 per household.</p>
   <ul>
-    <li><strong>Last season (2026):</strong> applications were mailed starting January 5 to households that got LIEAP the season before, older adults and people with disabilities, with a last day of Friday, January 30, or sooner if money ran out. Everyone else could apply starting February 2.</li>
+    <li><strong>Last season (2026):</strong> applications were mailed starting January 5 to households that got LIEAP the season before, older adults and people with disabilities. For them, the last day was Friday, January 30, or sooner if money ran out. Everyone else could apply starting February 2.</li>
     <li><strong>This season:</strong> we could not find 2026-27 dates yet. Season dates are not guessed here, so check the DoHS site or call <a href={telHref(lieap.contact.phone)}>{lieap.contact.phone}</a>.</li>
-    <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel. Do not mail the form to your utility.</li>
-    <li><strong>Emergency help:</strong> Mon Power's page says LIEAP includes one emergency payment per heating season to stop a shutoff or restore service, for customers who got a termination notice after qualifying for LIEAP.</li>
+    <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel (like propane or oil). Do not mail the form to your utility.</li>
+    <li><strong>Emergency help:</strong> Mon Power's page says LIEAP includes one emergency payment per heating season. It can stop a shutoff or turn service back on. It is for customers who got a termination notice (a notice that service will be shut off) after they qualified for LIEAP.</li>
   </ul>
   <SourceLine sources={lieap.sources} org={lieap.org} about="LIEAP" />
 
@@ -78,7 +85,7 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   </Milepost>
 
   <Milepost n={4} title="Lower the bill for next time" when="Later" id="next-time">
-  <p>Mon Power's page lists free home weatherization and a repair-or-replace program for broken heating systems, both through your local Community Action Agency. Ask 211 which agency serves you.</p>
+  <p>Mon Power's page lists free home weatherization: energy-saving upgrades to your home that lower energy costs. It also lists a program that repairs or replaces broken heating systems. Both go through your local Community Action Agency, the local group that hands out this help. Ask 211 which agency serves you.</p>
   <SourceLine sources={monPower.sources} org={monPower.org} about="lowering the bill" />
   <div class="actions"><a class="btn" href={telHref(wv211.contact.phone)}><Icon name="phone" /><span>Call 211 to find your agency</span></a></div>
   </Milepost>
