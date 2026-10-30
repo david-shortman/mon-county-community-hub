@@ -1,0 +1,14 @@
+name: Nextdoor Morgantown
+slug: nextdoor-morgantown
+kind: online-group
+area: online
+run_by: Nextdoor
+sells: A neighborhood social network with a "For sale and free items nearby" section, where neighbors post things to sell or give away.
+goods: [home]
+buys_from_you: false
+url: https://nextdoor.com/city/morgantown--wv/
+url_label: Nextdoor Morgantown
+status: likely
+sources:
+  - url: https://nextdoor.com/city/morgantown--wv/
+    checked: 2026-10-30

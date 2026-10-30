@@ -1,6 +1,10 @@
+import { loadPlaces } from '../lib/places.mjs';
+
 export function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const u = (p) => new URL(`${base}${p}`, site).href;
+  // One line per community center page (#463), built from content/places.
+  const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
 
 > Plain-language help for life in Morgantown and Monongalia County, WV. An open project that points to the nonprofits, government offices, and community groups already doing the work. Every fact links to its source and says when it was last checked. Dates and details can change, so confirm with the source before you act.
@@ -37,6 +41,10 @@ export function GET({ site }) {
 - [Moving here: start power, water, gas and trash](${u('/moving-here/')}): how to start service with Mon Power, the Morgantown Utility Board and Hope Gas, town trash pickup in Star City and Granville, deposits and fees, and who to ask
 - [Is my home in a flood zone or a slide area?](${u('/flood-zone/')}): check an address on the WV Flood Tool, the FEMA flood map and the WV Landslide Tool, flood insurance basics (most home and renters insurance does not cover floods, 30 day wait), and the county floodplain permit
 - [Trash, recycling and drop-off](${u('/recycling/')}): pickup days, what goes in the curbside bin, and where to take hard items
+- [Your community](${u('/community/')}): pick what fits (a community center near you, a community dinner, a hall to rent, joining a center, making your neighborhood better) and go straight to the page
+- [Community centers and halls](${u('/community-centers/')}): community centers, senior centers and halls across Mon County, grouped by part of the county, with dinners and events, halls to rent, and how to join
+- [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
+${centers}
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it

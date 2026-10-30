@@ -1,0 +1,28 @@
+name: Christian Help Free Store and Career Closet
+slug: christian-help-free-store
+kind: free-program
+area: downtown
+run_by: Christian Help
+org: christian-help
+address: "219 Walnut Street, Morgantown, WV 26505"
+hours: Monday, Tuesday and Thursday, 9 a.m. to 4 p.m.; Friday, 9 a.m. to 2 p.m. Career Closet, Tuesday and Thursday, 9 a.m. to 3:30 p.m.
+sells: Free clothing and shoes for men, women, children and babies, plus kitchenware, housewares, linens, toiletries, baby gear and home packs for people starting over. The Career Closet gives free work and interview clothes.
+takes: Clean, working items that are fit to give to someone else (it is not a recycling center). Drop off on Wednesdays, 9 a.m. to 3 p.m. Its Current Needs page lists the items it needs most right now.
+goods: [clothes, kids, home]
+buys_from_you: false
+funds_local_cause: Money gifts support all of Christian Help's free programs, including the free store, food pantry and emergency financial help.
+who_can_use: Open to everyone, with no income limits. Free Store visits once every 7 days. Career Closet visits once a month.
+what_to_bring: For the Career Closet, your most recent pay stub or proof of an interview or new job.
+url: https://motownchristianhelp.com/programs/
+url_label: Program details
+status: confirmed
+note: Christian Help says hours can change with operations and events.
+sources:
+  - url: https://motownchristianhelp.com/programs/
+    checked: 2026-10-30
+  - url: https://motownchristianhelp.com/contact/
+    checked: 2026-10-30
+  - url: https://motownchristianhelp.com/donors/
+    checked: 2026-10-30
+  - url: https://motownchristianhelp.com/current-needs/
+    checked: 2026-10-30
