@@ -66,7 +66,7 @@ David chose a mix of all three workshop directions:
 | Direction | Where it applies | What it means |
 |---|---|---|
 | **B. Front Door** | The home page | One question, "What do you need help with?", a visible search box, plain need buttons, and "Call or text 211" pinned on top. Short question flows end at real organizations. Answers live in the web address, so nothing is stored. |
-| **A. Trailhead** | Every guide | Each need is a route with steps (mileposts), collapsed until needed, each step ending in an action. Based on the GOV.UK step-by-step pattern. |
+| **A. Trailhead** | Every guide | Each need is a route with steps (mileposts), collapsed until needed, each step ending in an action. Based on the GOV.UK step-by-step pattern. Built as [`Route`](../../site/src/components/Route.astro) and [`Milepost`](../../site/src/components/Milepost.astro) (#240), first on `/utility-bills/`. |
 | **C. Living Ridgeline** | The identity layer | A straight line under the menu with very small silhouettes of places here sitting on it (#241). Type and layout stay fixed so it always reads as one hub. Still one line per screen, and nothing on pages, sections or titles. |
 
 Each direction gets its own issue and PR. Until those ship, the rules below still apply as written.
@@ -77,6 +77,13 @@ Each direction gets its own issue and PR. Until those ship, the rules below stil
 - **Door cards** ([`DoorCards.astro`](../../site/src/components/DoorCards.astro)) come from `content/doors.yaml`. Each shows a few problems in residents' words that link straight to their page, so help is one tap from home. An example shows only once its page exists. A door with no pages yet shows its hint and leads to its section of the Topics page, which points to 211. Test: from home, two taps to a phone number, a place or a date for every live door.
 - **Question flows** ([`Question.astro`](../../site/src/components/Question.astro)) use one page per answer, so the answers live in the web address, work without scripts, can be shared, and store nothing. Results say "you may qualify" and end at the official next step. The first flow is food (`/help/food/`).
 - **Search** uses Pagefind, built with the site, and runs on the phone. The words go after "#" in the address, which is never sent to the host, though the host can see which search files load, as with any visit. The search box only appears when JavaScript runs, so words are never sent for a search that cannot run; without it, the home page links to All topics. Never promise more privacy than that. Pages are indexed from `<main>`; pass `searchable={false}` to `Base` to leave a page out.
+
+**Trailhead, first route (#240).** How to turn a guide into a route, so new guides fit it:
+
+- Wrap the steps in `<Route>` and make each one a `<Milepost n title when>`. Each step is a native `details`, so it opens and closes with no script, find-in-page opens a closed step that holds a match, and printing opens every step.
+- Open only step 1 (`open`), so the first thing to do is on the first screen. Keep a step's title a plain action ("Call your utility first").
+- `when` is a short time like "Today" or "Later". Only say how long something takes when a source says so.
+- End every step with an action: call, apply, text or go, using `Actions` or `.btn` links named for who you reach ("Call Mon Power"). Source lines stay under each fact inside the step.
 
 ## The cues we use
 
