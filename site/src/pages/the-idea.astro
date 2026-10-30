@@ -4,6 +4,7 @@
 // Shapes how the project presents itself, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
 import { loadCalendarWithFeeds } from '../lib/content.mjs';
+export const page = { door: "about", label: "The idea behind this site", summary: "What the project is trying to do, and how to check it" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const doc = (p) => `${repo}/blob/main/${p}`;

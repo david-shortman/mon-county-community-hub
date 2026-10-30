@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { loadDir, ymd, prettyDate, shortUrl } from '../lib/content.mjs';
+export const page = { door: "help-now", label: "Where to stay tonight", summary: "Emergency shelter, a 24-hour hotline, and 211" };
 
 // Order matters: shelter first, then the domestic violence hotline, then the 211 fallback.
 const slugs = ['grace-shelter', 'rdvic-hotline', 'wv-211'];

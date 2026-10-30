@@ -1,0 +1,46 @@
+---
+// Every door with its topics, then every page A to Z. Built from the page
+// tags (see src/lib/pages.mjs), so a new page shows here with no edits (#249).
+import Base from '../layouts/Base.astro';
+import { loadDoors } from '../lib/content.mjs';
+import { doorTopics, allListed } from '../lib/pages.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { doors, bySlug } = loadDoors();
+const helpNow = bySlug['help-now'];
+const helpNowTopics = await doorTopics('help-now');
+const sections = await Promise.all(doors.map(async (d) => ({ ...d, list: await doorTopics(d.slug) })));
+const az = await allListed();
+---
+<Base searchable={false} title="All topics: help in Morgantown and Mon County" description="Every help page on this site for Morgantown and Monongalia County, WV, sorted by what is going on in your life, and A to Z.">
+  <h1>All topics</h1>
+  <p class="lede">Pick what is going on. Need help right now? Call or text <a href="tel:211">211</a>, any time.</p>
+
+  {helpNowTopics.length > 0 && (
+    <section class="topic-door" id={helpNow.slug} aria-labelledby={`${helpNow.slug}-h`}>
+      <h2 id={`${helpNow.slug}-h`}>{helpNow.name}</h2>
+      <ul class="topic-list">
+        {helpNowTopics.flatMap((t) => t.pages).map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}
+      </ul>
+    </section>
+  )}
+
+  {sections.map((d) => (
+    <section class="topic-door" id={d.slug} aria-labelledby={`${d.slug}-h`}>
+      <h2 id={`${d.slug}-h`}>{d.name}</h2>
+      <p>{d.hint}</p>
+      {d.list.length ? d.list.map((t) => (
+        <>
+          <h3>{t.label}</h3>
+          <ul class="topic-list">
+            {t.pages.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}
+          </ul>
+        </>
+      )) : <p>We have no pages here yet. For now, call or text <a href="tel:211">211</a> and they can point you to local help.</p>}
+    </section>
+  ))}
+
+  <h2 id="a-to-z">A to Z</h2>
+  <ul class="topic-list">
+    {az.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a></li>)}
+  </ul>
+</Base>

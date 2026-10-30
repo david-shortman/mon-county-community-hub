@@ -107,6 +107,39 @@ The build never fails because of a feed. It logs a warning and uses the last goo
 5. Add the adapter to `ADAPTERS` in `site/src/lib/feeds/index.mjs`, run `npm run update-feeds`, `npm run check-content`, and `npm run build`, and commit the new snapshot.
 6. Add a row to the table above.
 
+## `doors.yaml`: the five doors
+
+The site is organized into five doors named for what is going on in a person's life, plus three lanes that are not doors: Help now, Dates, and About this site (#248). `doors.yaml` lists them and maps every `topics` tag used in this folder to one door, with the label people see:
+
+```yaml
+doors:
+  - slug: this-month
+    name: Get through this month
+    hint: Can't pay a bill, behind on rent, short on food, need cash fast
+    topics:
+      money: Bills and money
+      food: Food
+```
+
+A new topic tag needs a home in exactly one door, or `npm run check-content` fails. Adding, renaming or removing a door changes the site's shape, so that is David's call. A topic that fits no door waits for that call.
+
+### Tagging a site page
+
+Every page in `site/src/pages/` says where it lives in its frontmatter:
+
+```js
+export const page = {
+  door: 'this-month',   // a door or lane slug from doors.yaml
+  topic: 'money',       // one of that door's topics (lanes need none)
+  label: 'Money help',  // short name for lists
+  summary: "Can't pay a bill, behind on rent, cash fast, free tax help",
+};
+```
+
+A step inside another page's flow (like the food questions) uses `parent: '/help/food/'` and a `label` instead, and takes its door from the parent.
+
+From these tags the build makes the Topics page (`/topics/`), each door's list of pages, the breadcrumb above each heading, and the door and topic filters in search. A new page shows up in all of them with no menu edit. A topic shows on a door only once a page for it exists. A missing or wrong tag stops the build with a message that says what to fix. The code is in `site/src/lib/pages.mjs`.
+
 ## Rules
 
 - Only public organizational contact details. Never a private person's info.
