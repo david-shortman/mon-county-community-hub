@@ -159,6 +159,20 @@ Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base
 - **Body text:** the system font stack. Research finds no single font is fastest for everyone, and serif versus sans does not change legibility, so body text stays on what each phone does best, at no cost.
 - **Don't** add more weights or families without updating this section and checking page weight. Don't use Public Sans: it reads as a federal government site.
 
+## The icon
+
+David picked the icon on October 30, 2026 (#390, #389): Westover and Morgantown on two sage hills facing each other across the Monongahela River, joined by an open arch bridge, with ridges behind. Two towns, one river, joined: it says "connect, don't compete" without naming or favoring any institution.
+
+- **Files:** [`site/public/favicon.svg`](../../site/public/favicon.svg) (rounded corners) and [`site/public/icons/icon-full.svg`](../../site/public/icons/icon-full.svg) (square, for home screens that round icons themselves). The PNG icons are made from these. The link preview image, [`site/public/share.png`](../../site/public/share.png), shows the icon beside the site name; redraw it with `node scripts/make-share-image.mjs` in `site/`.
+- **Colors:** existing tokens only: hill green (`#1f5c4a`, `#2f7a63`), `--accent-bg` for the pale houses and bridge, sage for the hills, and the dark mode accent for the river.
+- **Rules David set during review:**
+  - Pale houses on sage hills, so they do not blend.
+  - A few uneven houses on flat hilltops. Evenly spaced roofs looked like gear teeth from far away.
+  - Rounded roofs and corners.
+  - The bridge sits behind the hills.
+  - The waterline is flat.
+- **Where:** the browser tab, the home screen and link previews. It is not a drawing to repeat on pages (see "No drawn motif").
+
 ## No drawn motif
 
 The site has no drawn motif right now. On October 30, 2026 we tried three (a wavy ridge of hills under the menu, a named landmark drawing for each door, and a tiny skyline of local shapes on the menu line). David found each one distracting, so all three were removed ([decision](../decisions/2026-10-30-1000-no-drawn-motif.md)). The menu border is a plain 1px `--line` rule, under the header on wide screens and on top of the tab bar on phones.
