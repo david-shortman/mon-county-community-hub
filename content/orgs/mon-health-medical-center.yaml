@@ -1,0 +1,12 @@
+name: Mon Health Medical Center
+slug: mon-health-medical-center
+kind: nonprofit
+website: https://www.monhealth.com/
+summary: A hospital in Morgantown, part of Mon Health. It has financial counselors and a charity care program for patients who cannot pay.
+topics: [health]
+area: monongalia-county
+sources:
+  - url: https://www.monhealth.com/main/financial-assistance
+    checked: 2026-10-30
+  - url: https://projects.propublica.org/nonprofits/organizations/237441353
+    checked: 2026-10-30
