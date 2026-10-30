@@ -35,7 +35,7 @@ const opt = (name, fallback) => {
 const today = new Date().toISOString().slice(0, 10);
 const date = opt('date', today);
 if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error(`Bad --date: ${date}`);
-const base = opt('base', `https://david-shortman.github.io/${REPO.split('/')[1]}`).replace(/\/$/, '');
+const base = opt('base', 'https://everythingmorgantown.org').replace(/\/$/, '');
 const outDir = join(ROOT, 'docs', 'chronicle', 'snapshots', date);
 mkdirSync(outDir, { recursive: true });
 

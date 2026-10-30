@@ -25,7 +25,7 @@ const opt = (name, fallback) => {
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
 
-const SITE = opt('site', process.env.HEALTH_SITE_URL || 'https://david-shortman.github.io/mon-county-community-hub/').replace(/\/?$/, '/');
+const SITE = opt('site', process.env.HEALTH_SITE_URL || 'https://everythingmorgantown.org/').replace(/\/?$/, '/');
 const REPO = opt('repo', process.env.GITHUB_REPOSITORY || 'david-shortman/mon-county-community-hub');
 const TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || '';
 const REPO_ROOT = path.resolve(CONTENT_DIR, '..');
