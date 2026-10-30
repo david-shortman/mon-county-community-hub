@@ -6,6 +6,7 @@
 // 211. No script needed. The /stay-tonight/ link stays the same.
 import Base from '../layouts/Base.astro';
 import PlaceCard from '../components/PlaceCard.astro';
+import HelpNowSources from '../components/HelpNowSources.astro';
 import Icon from '../components/Icon.astro';
 import Actions from '../components/Actions.astro';
 import { resource, telHref } from '../lib/content.mjs';
@@ -25,6 +26,7 @@ const choices = [
 <Base crisis title="Where to stay tonight in Morgantown, WV" description="A bed tonight, a warm place, food tonight, or safety from someone, in Morgantown and Monongalia County: emergency shelter, a 24-hour hotline, and 211.">
   <h1>Where to stay tonight</h1>
   <p class="lede">All of these are free. Tap what you need.</p>
+  <p class="meta">"Leave this page" opens a weather site. It does not erase your history. <a href="#leave-note">More about staying safe online</a>.</p>
 
   <nav aria-label="What do you need?">
     <ul class="choices4">
@@ -63,7 +65,9 @@ const choices = [
     <p>Call <a href={telHref(r211.contact.phone)}>211</a>, text your ZIP code to <a href={`sms:${r211.contact.text.replace(/\D/g, '')}`}>{r211.contact.text}</a>, or chat at <a href={r211.contact.url}>wv211.org</a>. It is free and open {r211.hours.toLowerCase().replace(/^open /, '')}.</p>
   </section>
 
-  <p class="meta"><strong>About "Leave this page":</strong> it opens a weather site. It does not erase your history. If someone may check your phone, use a private window or clear this page from your history. The National Domestic Violence Hotline has <a href="https://www.thehotline.org/plan-for-safety/internet-safety/">internet safety tips</a>.</p>
+  <HelpNowSources />
+
+  <p class="meta" id="leave-note"><strong>About "Leave this page":</strong> it opens a weather site, and on a keyboard you can also press Shift three times. It does not erase your history. If someone may check your phone, use a private window or clear this page from your history. The National Domestic Violence Hotline has <a href="https://www.thehotline.org/plan-for-safety/internet-safety/">internet safety tips</a>.</p>
   <p class="meta">Hours and bed counts can change. Call before you go. We describe these services and do not decide who can stay. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
 
