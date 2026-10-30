@@ -44,6 +44,7 @@ export function GET({ site }) {
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
 - [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
 - [Fix what you see: who to tell](${u('/make-it-better/report/')}): the office that handles graffiti, illegal dumping, litter, potholes (city street or state road), broken sidewalks, trees and run-down buildings, inside or outside city limits
+- [Serve on a city board](${u('/make-it-better/boards/')}): city boards that shape how Morgantown looks and feels (Urban Landscape Commission, Tree Board, Cultural Arts, Historic Landmarks, Planning, and more), what each does, when it meets, open seats from the city's vacancy list, and how to apply
 
 ## Data
 
