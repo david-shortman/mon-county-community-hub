@@ -114,6 +114,60 @@ export function shortUrl(u) {
   return url.hostname.replace(/^www\./, '') + (first ? `/${first}` : '');
 }
 
+// Who published a source (#327). A source is named by an organization only
+// when its web address is on that organization's own site: first the record's
+// own org, then any org whose website matches. Otherwise it shows the address
+// alone, so we never credit a page to the wrong group.
+export const hostOf = (u) => new URL(u).hostname.replace(/^www\./, '');
+const sameSite = (a, b) => a === b || a.endsWith(`.${b}`) || b.endsWith(`.${a}`);
+export function sourceOrg(url, orgSlug) {
+  const h = hostOf(url);
+  const orgs = loadDir('orgs').filter((o) => o.website);
+  const own = orgs.find((o) => o.slug === orgSlug);
+  if (own && sameSite(h, hostOf(own.website))) return own;
+  return orgs.find((o) => hostOf(o.website) === h) ?? null;
+}
+export function sourceLabel(url, orgSlug) {
+  const o = sourceOrg(url, orgSlug);
+  return o ? `${o.name} (${shortUrl(url)})` : shortUrl(url);
+}
+// A card's sources grouped by publisher, in order: [{ name, links: [{url, text}] }].
+// name is null for sources on no known org's site. Link text is the short web
+// address, made longer when two links on one card would read the same.
+export function sourceGroups(sources, orgSlug) {
+  const seen = new Map();
+  const groups = [];
+  for (const s of sources) {
+    let text = shortUrl(s.url);
+    if (seen.has(text)) {
+      const u = new URL(s.url);
+      text = (hostOf(s.url) + u.pathname).replace(/\/$/, '') + u.hash;
+      if (seen.has(text)) continue; // the same page twice: link it once
+    }
+    seen.set(text, true);
+    const name = sourceOrg(s.url, orgSlug)?.name ?? null;
+    const g = groups.find((x) => x.name === name);
+    if (g) g.links.push({ url: s.url, text });
+    else groups.push({ name, links: [{ url: s.url, text }] });
+  }
+  return groups;
+}
+
+// The oldest checked date across a record's sources, so a card never says an
+// item is fresher than its stalest source (#39).
+export function oldestChecked(sources) {
+  return sources.map((s) => ymd(s.checked)).sort()[0];
+}
+
+// A website button gets a short label that says what the person gets, never
+// a raw web address (#335): the record's own `contact.url_label` ("Apply
+// online"), or "Website". Buttons stay compact and sit side by side; the
+// domain shows once, in the source line. Screen readers also hear what the
+// card is about (Actions adds it).
+export function websiteLabel(r) {
+  return r?.contact?.url ? (r.contact.url_label ?? 'Website') : null;
+}
+
 // One record from content/resources or content/orgs by slug. Throws when it is
 // missing, so a page never ships pointing at a record that is not there.
 export function resource(slug) {
