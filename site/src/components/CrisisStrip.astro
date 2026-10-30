@@ -5,7 +5,8 @@
 // "Leave this page" is a plain link to a neutral site. The small script below
 // adds the GOV.UK "Exit a page quickly" behavior: the page is swapped out
 // rather than added to the back button, and pressing Shift three times
-// leaves too. Leaving does not erase history; the note at the end of the
+// leaves too. Base sets no-referrer on these pages, so weather.gov is never
+// told which page a person left from. Leaving does not erase history; the note at the end of the
 // page says so. 988 facts: content/resources/988-lifeline.yaml.
 import { resource, telHref } from '../lib/content.mjs';
 const r988 = resource('988-lifeline');

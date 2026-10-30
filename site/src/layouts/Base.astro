@@ -58,6 +58,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {crisis && <meta name="referrer" content="no-referrer" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Mon County Community Hub" />
@@ -242,7 +243,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .crisis-strip p a { font-weight: 800; padding: 6px 2px; }
       .quick-exit { flex: none; display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
       .quick-exit:hover { text-decoration: underline; }
-      html:has(.crisis-strip) { scroll-padding-top: 72px; }
+      html:has(.crisis-strip) { scroll-padding-top: 8rem; }
       footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; }
     </style>
   </head>
