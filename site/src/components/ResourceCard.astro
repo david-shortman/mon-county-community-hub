@@ -8,6 +8,12 @@ import PassItOn from './PassItOn.astro';
 import { websiteLabel, oldestChecked } from '../lib/content.mjs';
 const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
 ---
+{r.hidden ? (
+<article class="card resource" id={r.slug}>
+  <h3>{r.title}</h3>
+  <SourceLine sources={[]} about={r.title} slug={r.slug} />
+</article>
+) : (
 <article class="card resource" id={r.slug}>
   <h3>{r.title}</h3>
   {lead && <p><strong>{lead}</strong></p>}
@@ -22,3 +28,4 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
   <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
   <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
+)}
