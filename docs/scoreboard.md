@@ -16,7 +16,7 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 A second run a few hours after the baseline, after the first three hub guides went live (recycling, help paying utility bills, where to stay tonight). Results: [`content/findability/2026-10-28b.yaml`](../content/findability/2026-10-28b.yaml).
 
 - **No change overall.** 30 of 32 questions scored the same. Two moved, in opposite directions, and both came from other sites or search ranking, not from our work: starting a business (q09) rose 11 to 13 because the city's steps page now ranks first and fits a phone screen, and county commission agendas (q15) fell 11 to 9 because search no longer reached the county's agenda page. The q15 drop looks like search variation; the official page still loads and is current.
-- **Hub pages are not in search yet.** 6 of 32 questions now have a direct answer page on the hub (q01, q03, q19, q20, q21, q26). None of them showed up in any search, and no official page links to them, so by the method they do not count yet. New pages usually take days to weeks to be indexed, and the site has no search engine accounts yet (#89). The next weekly run (2026-11-01) will check again.
+- **Our pages are not in search yet.** 6 of 32 questions now have a direct answer page on the site (q01, q03, q19, q20, q21, q26). None of them showed up in any search, and no official page links to them, so by the method they do not count yet. New pages usually take days to weeks to be indexed, and the site has no search engine accounts yet (#89). The next weekly run (2026-11-01) will check again.
 - **Leading signal:** 6 of 32 questions had a correct local answer in the top 3 search results (5 at baseline, the change is q09).
 
 The topic, dimension and worst-gap tables below show this latest run. The baseline write-up follows them.
@@ -127,12 +127,12 @@ A topic score and the overall score are the points earned divided by the points 
 
 Rules for keeping runs comparable: keep question ids and `search` words fixed. Add new questions with new ids rather than rewording old ones. Retire a question by adding `retired: <date>`, not by deleting it. If the rubric changes, bump `rubric_version` and note it in the history table, because scores across versions are not directly comparable.
 
-**Hub pages and the leading measure (#110).** Every result also records two fields:
+**Our own pages and the leading measure (#110).** Every result also records two fields. They keep the name `hub_page` from before the site was renamed, so old and new runs line up.
 
-- `hub_page`: the hub page that directly answers the question (its URL), or `null` if there is none. "Directly answers" means a resident who lands on it gets the answer or the next step for that exact question, not just a link list. To fill it, check the site's pages (`site/src/pages/`) and the menu, and carry forward last run's value if the page still answers it.
-- `hub_in_results`: `true` if a hub page showed up in the plain or the reworded search, else `false`. A hub page counts toward the score only when this is `true`, or when an official page links to it.
+- `hub_page`: the page on our site that directly answers the question (its URL, on https://everythingmorgantown.org), or `null` if there is none. "Directly answers" means a resident who lands on it gets the answer or the next step for that exact question, not just a link list. To fill it, check the site's pages (`site/src/pages/`) and the menu, and carry forward last run's value if the page still answers it.
+- `hub_in_results`: `true` if one of our pages showed up in the plain or the reworded search, else `false`. Our page counts toward the score only when this is `true`, or when an official page links to it.
 
-`score.py` prints the **leading measure**: how many of the questions have a hub answer page, and how many of those pages showed up in search. It warns when a `hub_page` has no matching page in `site/src/pages/` (a renamed or removed page). Report both numbers in the history table and the build log line.
+`score.py` prints the **leading measure**: how many of the questions have an answer page on our site, and how many of those pages showed up in search. It warns when a `hub_page` has no matching page in `site/src/pages/` (a renamed or removed page). Report both numbers in the history table and the build log line.
 
 ### History
 

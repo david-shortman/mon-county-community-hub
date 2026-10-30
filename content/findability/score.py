@@ -5,7 +5,7 @@ Usage:
     python3 content/findability/score.py content/findability/2026-10-28.yaml
 
 Prints the overall score, the score by topic, each dimension's average, the
-leading measure (how many questions have a hub answer page, and how many of
+leading measure (how many questions have an answer page on our site, and how many of
 those pages showed up in search), and the lowest and highest scoring
 questions. Scores are 0 to 100: the sum of each question's points divided by
 the most points possible (15 per question).
@@ -25,28 +25,30 @@ def pct(points, count):
     return round(100 * points / (MAX_PER_QUESTION * count)) if count else 0
 
 
-HUB_PREFIX = "https://david-shortman.github.io/mon-county-community-hub/"
+# The site's address now, and the one older runs recorded.
+HUB_PREFIXES = ("https://everythingmorgantown.org/", "https://david-shortman.github.io/mon-county-community-hub/")
 
 
 def hub_page_exists(url, pages_dir):
     """True if a hub URL maps to a page in site/src/pages (static routes only)."""
-    if not url.startswith(HUB_PREFIX):
-        return True  # custom domain or other form: do not guess
-    path = url[len(HUB_PREFIX):].split("#")[0].strip("/")
+    prefix = next((p for p in HUB_PREFIXES if url.startswith(p)), None)
+    if prefix is None:
+        return True  # some other form: do not guess
+    path = url[len(prefix):].split("#")[0].strip("/")
     if not path:
         return (pages_dir / "index.astro").exists()
     return (pages_dir / f"{path}.astro").exists() or (pages_dir / path / "index.astro").exists()
 
 
 def print_leading_measure(results, n, pages_dir):
-    """Leading measure from issue #110: questions with a direct hub answer page."""
+    """Leading measure from issue #110: questions with a direct answer page on our site."""
     if not any("hub_page" in r for r in results):
         print("\nLeading measure: not recorded in this run (no hub_page fields)")
         return
     with_page = [r for r in results if r.get("hub_page")]
     in_search = [r for r in with_page if r.get("hub_in_results")]
-    print(f"\nLeading measure: {len(with_page)} of {n} questions have a hub answer page")
-    print(f"  Hub page showed up in search: {len(in_search)} of {len(with_page)}")
+    print(f"\nLeading measure: {len(with_page)} of {n} questions have an answer page on our site")
+    print(f"  Our page showed up in search: {len(in_search)} of {len(with_page)}")
     if with_page:
         print("  " + ", ".join(f"{r['id']}{'*' if r.get('hub_in_results') else ''}" for r in with_page)
               + ("   (* = in search results)" if in_search else ""))
