@@ -132,6 +132,8 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .skip { position: absolute; left: 8px; top: -20em; z-index: 20; padding: 10px 14px; background: var(--card); border: 2px solid var(--accent); border-radius: 8px; }
       .skip:focus { top: 8px; }
       main:focus { outline: none; }
+      /* A jump to a spot on the page leaves a little room above it (#449). */
+      [id] { scroll-margin-top: 16px; }
       .sr-only { position: absolute; left: 0; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
       /* Phones: the menu is a tab bar at the bottom, in reach of a thumb. */
       @media (max-width: 40rem) {
