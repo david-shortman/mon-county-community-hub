@@ -25,7 +25,7 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
     link={r.contact?.url} linkLabel={websiteLabel(r)}
     about={r.title}
   />
-  <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <SourceLine sources={r.sources} phone={r.phone_confirmed} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
   <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
 )}
