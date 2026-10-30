@@ -125,6 +125,18 @@ Each door also has an `icon` and `examples`: a few problems in residents' words,
 
 A new topic tag needs a home in exactly one door, or `npm run check-content` fails. Adding, renaming or removing a door changes the site's shape, so that is David's call. A topic that fits no door waits for that call.
 
+### `doors/<slug>.yaml`: a door's own page
+
+Once a door has its own page (set `page:` on the door in `doors.yaml`), its guided page is built from `doors/<slug>.yaml`. The first one is `doors/care.yaml` (Get care, `/care/`). It has:
+
+- `lede`: one line under the title.
+- `cant_wait`: the one thing that can't wait for this door's people, with the resource it calls.
+- `steps`: each with `when` (`today`, `week` or `opens`), the `resource` it points to, and our short `text`. A step states no facts of its own: its phone, link, cost, source and checked date come from that resource.
+- `situations`: what people pick, in their words (`label`), the `page` with more, and the `steps` it adds. A situation shows only once its page exists. Steps used by several picks show once.
+- `also`: "Often goes with this" links to other doors.
+
+The page puts picks in the web address (`/care/?pick=shots&pick=dentist`), so nothing is stored and steps can be texted or bookmarked. Without scripts it is a list of plain links. The layout is `site/src/components/DoorPage.astro`, shared by every door.
+
 ### Tagging a site page
 
 Every page in `site/src/pages/` says where it lives in its frontmatter:

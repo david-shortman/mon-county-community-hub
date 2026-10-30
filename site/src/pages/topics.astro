@@ -26,7 +26,7 @@ const az = await allListed();
 
   {sections.map((d) => (
     <section class="topic-door" id={d.slug} aria-labelledby={`${d.slug}-h`}>
-      <h2 id={`${d.slug}-h`}>{d.name}</h2>
+      <h2 id={`${d.slug}-h`}>{d.page ? <a href={`${base}${d.page}`}>{d.name}</a> : d.name}</h2>
       <p>{d.hint}</p>
       {d.list.length ? d.list.map((t) => (
         <>

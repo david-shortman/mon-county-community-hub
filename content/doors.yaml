@@ -4,6 +4,10 @@
 # site's shape, so it is David's call. A topic that fits no door waits for
 # that call instead of becoming a new menu item.
 #
+# `page` is the door's own page, once it has one; its steps and situations
+# live in content/doors/<slug>.yaml. Until then the door links to its section
+# of the Topics page.
+#
 # `icon` names an icon in site/src/components/Icon.astro. `examples` are the
 # problems shown on the home page door buttons, in residents' words, each
 # linking straight to its page. An example shows only once its page exists.
@@ -34,6 +38,7 @@ doors:
       poverty: Getting by
   - slug: care
     name: Get care
+    page: /care/
     hint: Where to go, can't afford it, mental health today, dentist or medicine
     icon: health
     examples:
