@@ -6,9 +6,9 @@
 #
 # Steps state no facts of their own, only the action: each one points to a record in
 # content/resources/ for its phone number, link, source and checked date.
-# A situation shows only once its page exists. `when` is today, week or opens.
+# A situation shows only once its page exists. Situations run in the ranked order from #475. `when` is today, week or opens.
 door: care
-lede: Shots, a dentist, Medicare, quitting tobacco and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Mental health help, care you can afford, a dentist, Medicaid and more in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
@@ -37,10 +37,6 @@ steps:
     resource: wv-ship-medicare-counseling
     text: Call the West Virginia State Health Insurance Assistance Program (WV SHIP) for help choosing a Medicare plan or checking your costs.
 situations:
-  - id: shots
-    label: I need a flu or COVID shot
-    page: /flu-shots/
-    steps: [shot]
   - id: dentist
     label: I need a dentist
     page: /staying-well/#monchd-dentistry
@@ -49,14 +45,14 @@ situations:
     label: I'm turning 65 or on Medicare
     page: /turning-65/
     steps: [ship, shot]
-  - id: quit
-    label: I want to quit smoking or tobacco
-    page: /staying-well/#wv-tobacco-quitline
-    steps: [quitline]
+  - id: shots
+    label: I need a flu or COVID shot
+    page: /flu-shots/
+    steps: [shot]
   - id: healthy
-    label: I want to stay healthy this year
+    label: I want to stay healthy this year, or quit tobacco
     page: /staying-well/
-    steps: [trails, shot, dentist]
+    steps: [quitline, trails, shot, dentist]
 also:
   - text: Short on food
     href: /help/food/
