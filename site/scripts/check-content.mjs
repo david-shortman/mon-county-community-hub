@@ -3,6 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
+import { checkPlaces } from './check-places.mjs';
 
 const errors = [];
 const warnings = [];
@@ -112,6 +114,8 @@ for (const o of orgs) {
   if (o.phone != null && !isPhone(o.phone)) errors.push(`${where}: phone must look like 211, 898-211, 304-555-0100 or 1-877-716-1212`);
 }
 
+// Listing fields (#177): hours the site can read, how to get in, languages, access.
+RESOURCE_FIELDS.push(...LISTING_FIELDS);
 const resources = loadDir('resources');
 const resourceSlugs = new Set();
 for (const r of resources) {
@@ -122,6 +126,7 @@ for (const r of resources) {
   if (r.org && !orgSlugs.has(r.org)) errors.push(`${where}: org ${r.org} has no file in content/orgs/`);
   if (r.hours != null && (typeof r.hours !== 'string' || !r.hours.trim())) errors.push(`${where}: hours must be text, like "Monday to Friday, 9 a.m. to 5 p.m."`);
   if (r.cost != null && typeof r.cost !== 'string') errors.push(`${where}: cost must be text`);
+  { const l = checkListing(r); errors.push(...l.errors); warnings.push(...l.warnings); }
   const c = r.contact;
   if (c == null) continue;
   if (typeof c !== 'object') { errors.push(`${where}: contact must have phone, text, url, place or email under it`); continue; }
@@ -288,7 +293,13 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
   });
 }
 
+// Gathering places (content/places, #455), checked against content/schemas/place.schema.json.
+const placeCheck = checkPlaces();
+errors.push(...placeCheck.errors);
+warnings.push(...placeCheck.warnings);
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
+console.log(`Checked ${placeCheck.count} gathering places (content/places).`);
 console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${secondhand.length} secondhand entries (${hiddenCount} hidden in all), ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);
