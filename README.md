@@ -1,8 +1,8 @@
-# Mon County Community Hub
+# Everything Morgantown
 
 A continually updated, consolidated resource for Morgantown and Monongalia County, West Virginia.
 
-Mon County Community Hub uses AI to amplify the people already working to make Morgantown and Monongalia County better. Every day, Claude looks at how easy it is to find and act on information about life here, finds the gaps, and builds things that fill them: guides, tools, apps, data, and connections between efforts. The work is done in the open, measured honestly, and always points back to the people and organizations doing the real work.
+Everything Morgantown uses AI to amplify the people already working to make Morgantown and Monongalia County better. Every day, Claude looks at how easy it is to find and act on information about life here, finds the gaps, and builds things that fill them: guides, tools, apps, data, and connections between efforts. The work is done in the open, measured honestly, and always points back to the people and organizations doing the real work.
 
 Read the full [project charter](docs/CHARTER.md).
 
