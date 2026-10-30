@@ -12,6 +12,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h1>Help for veterans in Mon County</h1>
   <p class="lede">Two VA offices are on Commerce Drive, off US 19: a health clinic and a Vet Center for counseling. In a crisis, dial 988 and press 1, any time.</p>
 
+  {r('veterans-crisis-line') && <h2>In a crisis</h2>}
   {r('veterans-crisis-line') && <ResourceCard r={r('veterans-crisis-line')} sms="838255" smsLabel="Veterans Crisis Line" />}
 
   <h2>Health care: the VA clinic</h2>
