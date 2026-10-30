@@ -2,6 +2,9 @@
 import Base from '../layouts/Base.astro';
 import AnswerFacts from '../components/AnswerFacts.astro';
 import HelpNow from '../components/HelpNow.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+const office = loadDir('resources').find((e) => e.slug === 'monongalia-county-dohs-office');
 export const page = { door: "this-month", topic: "food", label: "Apply for SNAP (food stamps)", summary: "Apply online at WV PATH, or call DoHS" };
 ---
 <Base title="How to apply for SNAP (food stamps) in Monongalia County, WV" description="Apply for SNAP food help online at WV PATH, the state's free site, or call DoHS customer service. Steps, phone number and sources for Morgantown and Mon County.">
@@ -9,6 +12,9 @@ export const page = { door: "this-month", topic: "food", label: "Apply for SNAP 
   <p class="lede">Apply online at WV PATH, the state's own site. It is free. The steps are below, with the number to call the state Department of Human Services (DoHS) if you have questions.</p>
 
   <AnswerFacts slug="apply-for-snap-wv-path" linkLabel="Apply at WV PATH" />
+
+  <h2>Rather apply in person?</h2>
+  {office && <ResourceCard r={office} />}
 
   <HelpNow />
 
