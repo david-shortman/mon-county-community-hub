@@ -1,0 +1,10 @@
+name: Jobs & Hope West Virginia
+slug: jobs-and-hope-wv
+kind: government
+website: https://jobsandhope.wv.gov/
+summary: A state program set up by the West Virginia Legislature that helps people in recovery, and others with a barrier to work, get job training and a job.
+topics: [work, health]
+area: statewide
+sources:
+  - url: https://jobsandhope.wv.gov/
+    checked: 2026-10-30
