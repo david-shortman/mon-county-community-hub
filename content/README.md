@@ -37,6 +37,11 @@ contact:
   url_label: Book online  # optional; a short button label that says what the link is for (#335). Default "Website"
   place: 200 Main St, Morgantown, WV  # optional; adds a Directions button on door steps. Only a place the source publishes
 cost: free
+what_to_bring:          # optional (#159); what to have ready, close to the source's words
+  - Photo ID
+what_happens: What the first call or visit is like, in one or two sentences from the source.  # optional
+best_time: Mornings are less busy.  # optional; only when the source says so
+if_you_want_help: [wv-211]  # optional; resource slugs of people who can help you through it, each with its own source
 sources:
   - url: https://example.org/tax
     checked: 2026-10-27
