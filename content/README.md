@@ -65,6 +65,8 @@ access: Step-free entrance on the Main Street side.  # only what the source says
 
 `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
 
+Set `private_trace: true` on a domestic or sexual violence listing, or any listing where a text or share left on someone's phone could put them at risk (#555). The card then leaves off the "Pass it on" row (Text, Print, Share). Calendar entries take the same flag. The page's quick exit is still the way out.
+
 ## `calendar/<slug>.yaml`: dates and deadlines
 
 Shown on the site's Deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).

@@ -53,5 +53,5 @@ const topicLabel = (t) => doors.bySlug[doors.topicDoor[t]]?.topics[t] ?? t;
     {e.topics?.length ? <> Topics: {e.topics.map(topicLabel).join(', ')}.</> : null}
     {' '}<a href={reportUrl({ title: e.title, slug: e.slug, url: e.sources?.[0]?.url ?? e.url })}>Report a problem<span class="sr-only"> with {e.title} (opens GitHub)</span></a>.
   </p>
-  <PassItOn title={`${e.title}, ${prettyRange(e.starts, e.ends)}`} slug={e.slug} phone={e.phone} place={e.place} checked={checked} share={false} />
+  <PassItOn title={`${e.title}, ${prettyRange(e.starts, e.ends)}`} slug={e.slug} privateTrace={e.private_trace} phone={e.phone} place={e.place} checked={checked} share={false} />
 </article>
