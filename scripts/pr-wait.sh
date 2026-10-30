@@ -30,9 +30,15 @@ if [ "$PR" = "main" ]; then
 fi
 
 while :; do
-  info=$(gh api "$REPO/pulls/$PR" --jq '"\(.state)|\(.mergeable)|\(.mergeable_state)|\(.head.sha)"' 2>/dev/null) || { echo "PR #$PR not found"; exit 4; }
-  IFS='|' read -r state mergeable mstate sha <<< "$info"
+  info=$(gh api "$REPO/pulls/$PR" --jq '"\(.state)|\(.mergeable)|\(.mergeable_state)|\(.head.sha)|\(.head.ref)"' 2>/dev/null) || { echo "PR #$PR not found"; exit 4; }
+  IFS='|' read -r state mergeable mstate sha ref <<< "$info"
   [ "$state" = "open" ] || { echo "PR #$PR is $state"; exit 4; }
+  # Right after a push, GitHub can still show the old commit. If this is the
+  # PR for the branch checked out here, wait until it shows our latest commit.
+  if [ "$ref" = "$(git rev-parse --abbrev-ref HEAD 2>/dev/null)" ] && [ "$sha" != "$(git rev-parse HEAD 2>/dev/null)" ]; then
+    [ "$(date +%s)" -ge "$deadline" ] && { echo "TIMEOUT: PR #$PR never showed the local commit. Did the push work?"; exit 3; }
+    sleep 10; continue
+  fi
   if [ "$mstate" = "dirty" ] || [ "$mergeable" = "false" ]; then
     echo "CONFLICT: PR #$PR conflicts with main, so its checks will not run."
     echo "Fix: git fetch origin main && git merge origin/main, resolve, rebuild, commit, push."
