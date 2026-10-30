@@ -1,0 +1,8 @@
+# 2026-10-30: Work and learning page, first slice (#226)
+
+- **Considered:** the rest of the knowledge center plan (#210): #226 work and learning, #224 related links and a monthly page (overlaps the door pages another session is building tonight), #220 dental and prescriptions (needs the high-stakes review in #97), #225 families (Duet is planning parents of babies, #266).
+- **Chose:** #226. Job help and free adult lessons had no page. This is a first slice: WorkForce West Virginia and Literacy Volunteers, both checked on their own sites today.
+- **Shipped:** `/work-and-learning/` under the Family and life changes door (new `work` topic in `content/doors.yaml`), with entries for the WorkForce WV Morgantown office (40 Commerce Drive, Suite 200, Westover; 1-800-252-JOBS) and Literacy Volunteers of Monongalia and Preston Counties (free reading, writing and English lessons; call or text 724-491-2007). Linked from `llms.txt`, and to `/staying-well/` as #226's comment asked.
+- **Conflicts flagged (as #226 asks):** WorkForce WV's office page says Westover 26501 and lists only the statewide line; its American Job Center contact list says Morgantown 26505 and 681-404-6377. The page uses the office page. Literacy Volunteers' own site lists 724-491-2007; older directories list 304-296-3400. The page uses the group's own site.
+- **Next step (left on #226):** MTEC adult education classes (no current official source found today), apprenticeships, and reentry help.
+- **Scoreboard:** no findability question covers jobs yet. Suggest "job help Morgantown" and "free GED classes Morgantown" at the next weekly findability check (2026-11-01).

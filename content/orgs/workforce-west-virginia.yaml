@@ -1,0 +1,10 @@
+name: WorkForce West Virginia
+slug: workforce-west-virginia
+kind: government
+website: https://workforcewv.org/
+summary: The state agency for job seekers and employers. Its offices help people find work and job training. The Mon County office is on Commerce Drive.
+topics: [work]
+area: statewide
+sources:
+  - url: https://workforcewv.org/about-workforce-wv/local-office-locations/
+    checked: 2026-10-30

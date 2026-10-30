@@ -67,6 +67,7 @@ doors:
     topics:
       family: Kids and family
       veterans: Veterans
+      work: Work and learning
   - slug: community
     name: Your community
     hint: City or county, meetings, how we're doing, give or start something
