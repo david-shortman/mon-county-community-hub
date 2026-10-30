@@ -42,6 +42,9 @@ export function GET({ site }) {
 - [Moving here: start power, water, gas and trash](${u('/moving-here/')}): how to start service with Mon Power, the Morgantown Utility Board and Hope Gas, town trash pickup in Star City and Granville, deposits and fees, and who to ask
 - [Is my home in a flood zone or a slide area?](${u('/flood-zone/')}): check an address on the WV Flood Tool, the FEMA flood map and the WV Landslide Tool, flood insurance basics (most home and renters insurance does not cover floods, 30 day wait), and the county floodplain permit
 - [Trash, recycling and drop-off](${u('/recycling/')}): pickup days, what goes in the curbside bin, and where to take hard items
+- [Thrift and resale shops](${u('/thrift-shops/')}): secondhand shops by area, what each sells, which buy from you, and which fund a local cause
+- [Sell, donate or give away your stuff](${u('/sell-or-donate/')}): for clothes, kids' gear, furniture, books, electronics, tools, paint and building materials, where each can be sold, donated, given away or recycled
+- [Markets and sales coming up](${u('/markets/')}): craft markets and card shows in the next 30 days, the farmers market, yearly sales, the nearest flea markets, and how to sell at a market
 - [Grow food and flowers](${u('/grow/')}): pick what you hope to do (grow food on a budget, sell what you grow, a small farm) and get local steps with phone numbers and sources
 - [Sell what you grow](${u('/sell-what-you-grow/')}): who sets the rules for selling produce, canned foods and plants at a Mon County farmers market, with links to the county health department and WV Department of Agriculture rules
 - [Your community](${u('/community/')}): pick what fits (a community center near you, a community dinner, a hall to rent, joining a center, making your neighborhood better) and go straight to the page
