@@ -71,7 +71,7 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Tags** | Small icon plus word labels: walk in, appointment, no ID needed, free, hot meal, groceries, kid friendly, on a bus line | Plain text | #176 |
 | **Day list** | "Open today" first, then each day of the week, with jump links | Anchor links | Use in #60 |
 | **Days left chip** | "in 3 days", "closes Friday" next to the date | Worked out at build time; the site rebuilds every morning | Exists (calendar) |
-| **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list | Door steps exist (`DoorPage.astro`); topic step paths are #179 |
+| **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list; each step is a native `details`, so it opens with no script | Door steps exist (`DoorPage.astro`). Topic routes exist: `Route` and `Milepost` (#240), first on `/utility-bills/`. Checklist, timeline and labeled picture are #179 |
 | **Question path** | One question per small page that leads to an answer: "Where should I go for care?" | Each answer is a link to the next page | #178 |
 | **Checklist** | "What to bring" with tick boxes | Boxes work but do not save; script saves them on the phone only | #179 |
 | **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | #179 |
