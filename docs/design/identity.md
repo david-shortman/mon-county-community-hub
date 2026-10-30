@@ -195,6 +195,7 @@ Use the names residents use, when it makes directions clearer. Always give the f
 - **"The Mon"** is the Monongahela River (as in the Mon River Trail). Write "the Monongahela River" first.
 - **Neighborhoods and towns:** Sunnyside, Wiles Hill, South Park, Evansdale, Suncrest, the Wharf District, downtown. Westover, Star City, Granville, Cheat Lake, and Blacksville are their own places; don't fold them into "Morgantown."
 - **Landmarks for directions:** "the rail-trail," "Hazel Ruby McQuain Riverfront Park," "the Seneca Center on Beechurst Avenue," "the PRT." Landmarks help people find a place, but always give a street address too.
+- **Deadlines (#51):** say plainly that the last day counts, with the weekday: "The last day is Tuesday, December 15." Not "by December 15" or "on or before," which people read differently. Give a time only when the source sets one ("until 7 p.m. on Saturday, November 7"). Times read "8 a.m.", "8:30 a.m.", "noon".
 - **Don't** use slang, dialect spelling, or sports chants. Plain, warm, and neutral.
 
 ## Mobile first
