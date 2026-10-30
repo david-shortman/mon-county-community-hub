@@ -4,7 +4,7 @@ import FoodToday from '../../../../components/FoodToday.astro';
 export const page = { parent: "/help/food/today/", label: "Food today or this week" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<Base title="Food today or this week in Mon County" description="Where to get food today or this week in Morgantown and Mon County: call or text 211, local help, and upcoming free food dates.">
+<Base help title="Food today or this week in Mon County" description="Where to get food today or this week in Morgantown and Mon County: call or text 211, local help, and upcoming free food dates.">
   <h1>Food today or this week</h1>
   <p class="lede">Your answers: you need food today or this week. <a href={`${base}/help/food/`}>Change answers</a>.</p>
   <FoodToday />
