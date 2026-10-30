@@ -23,8 +23,14 @@ help_now_pages:
   - /calendar/
 
 # Matched against the host (and its subdomains) or, with `prefix`, the start of
-# the URL. The first rule that matches wins.
+# the URL. The first rule that matches wins. `ignore_changes: true` keeps
+# checking that the page works but does not report text changes, for pages that
+# change all the time on purpose.
 rules:
+  - host: weather.gov
+    group: monitored
+    ignore_changes: true
+    why: Forecasts change every hour.
   - host: facebook.com
     group: manual
     why: Meta's terms allow automated collection only through its API (#166).
