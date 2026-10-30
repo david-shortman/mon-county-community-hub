@@ -4,7 +4,7 @@ labels: ["type:content", "for:duet"]
 body:
   - type: markdown
     attributes:
-      value: Please do not include private personal information. Public organizational contacts only.
+      value: This is public. Please don't include your name, phone, address or personal story. Public organization contacts are fine.
   - type: input
     id: name
     attributes:

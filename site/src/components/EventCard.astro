@@ -29,6 +29,7 @@ const extraSources = e.sources.filter((s) => s.url !== e.url);
   </p>
   <h3>{e.title}</h3>
   <p>{e.who_it_is_for} {parts.map((t, i) => (i % 2 ? <a href={phoneHref(t)}>{t}</a> : t))}</p>
+  {e.start_time && <p class="meta"><strong>{e.phone ? 'Call to confirm the time.' : 'Check the details page to confirm the time.'}</strong></p>}
   <Actions
     link={e.url} linkLabel="More details"
     phone={e.phone} phoneLabel={e.phone_label ?? e.org_name}

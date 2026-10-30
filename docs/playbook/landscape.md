@@ -27,6 +27,17 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 | AI Village charity experiment | Autonomous AI agents raising money | Active, cautionary results |
 | New York City MyCity chatbot | City business advice | Shut down |
 | NEDA Tessa chatbot | Health support chatbot | Shut down |
+| Crescent City Intel | City code, meetings and hazard alerts (California) | Active, open source |
+| Nano Media | AI-written local news (Massachusetts, Maine) | Active, Maine site slower |
+| Civic Sunlight | AI meeting summaries by email (Maine and New England) | Active as of 2025 |
+| LocalLens and Hearst Meeting Monitor | AI watching public meetings for newsrooms | Active |
+| Local Resilience | City code answers and AI-drafted news (Minnesota) | Unknown, demos broken |
+| Civic Strata | Shared research hub for one issue | Pilot |
+| Maricopa County Mari | County website assistant (Arizona) | Active, launched 2026 |
+| LinkLocally | Resource directory with a needs matcher (Wisconsin) | Active, commercial |
+| myCityCoPilot | City assistant app (Pensacola, Florida) | Active, commercial |
+| LocalWiki | Community-written local wikis | Stalled |
+| Colorado regional sustainability hub (Bili) | Local data with an AI assistant | Early research |
 
 ## Local government and civic records
 
@@ -173,6 +184,25 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 - [Code for America: Anthropic partnership page](https://codeforamerica.org/partner-with-us/anthropic/)
 - [Code for America: 2026 Government AI Landscape Assessment release](https://codeforamerica.org/news/code-for-america-unveils-second-annual-government-ai-landscape-assessment/)
 
+### Maricopa County Mari (Arizona)
+
+**What it is.** An AI assistant on every Maricopa County website that answers questions across county departments.
+
+**Who runs it.** Maricopa County, built on IBM watsonx.
+
+**Approach.** Pulls answers from across departments, links to the official source, and sends people to their city government when the county is not the right office.
+
+**Status:** active (checked 2026-10-30). Launched around July 2026.
+
+**What we can adopt or integrate.** The "which office handles this" problem is the same one our local government guide (#20) tackles. Its rule of always linking the official source matches ours.
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** Government can solve the cross-department problem inside its own sites. An independent hub adds value by also covering nonprofits and by spanning city, county and state.
+
+**Sources:**
+- [Smart Cities Dive, Sep 3, 2026](https://www.smartcitiesdive.com/news/local-government-is-fragmented-heres-how-ai-is-helping-residents-navigate/829540/)
+
 ## Human services and referrals
 
 ### Humanitas Labs
@@ -282,6 +312,45 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 - [Civic MCP server directory](https://github.com/npstorey/civic-ai-tools/blob/main/docs/mcp-servers.md)
 - [Civic Tech Field Guide listing](https://civictech.guide/projects/civic-ai-tools)
 
+### LinkLocally (Northeast Wisconsin)
+
+**What it is.** A searchable directory of about 6,100 organizations in 18 counties. A "say what you need" box ranks matches and explains why each one fits.
+
+**Who runs it.** Build With You AI, a brand of Execentra LLC (commercial), published with Insight on Philanthropy.
+
+**Approach.** Built from public sources plus corrections. Its stated rule: AI organizes and flags changes, people decide what gets published. The matcher says it does not save questions, and the site says it is not for emergency, clinical, legal or benefits decisions.
+
+**Status:** active (checked 2026-10-30). Also has a newcomer guide and a career tool. A workforce app is in testing.
+
+**What we can adopt or integrate.** A needs matcher that explains its reasoning. The plain "AI flags, a person publishes" rule. A clear note on what the tool is not for.
+
+**How we could amplify it.** Not applicable (different region).
+
+**Lessons.** Paid "Enhanced and Featured" profiles show first, with labels. Paid placement works against neutral ordering, so we should keep plain relevance or alphabetical order.
+
+**Sources:**
+- [LinkLocally](https://linklocally.org)
+
+### myCityCoPilot (Pensacola, Florida)
+
+**What it is.** An AI chat assistant for living in Pensacola: events, restaurants, doctors, ER wait times, beaches and weather.
+
+**Who runs it.** A commercial company. Neither site names the owner.
+
+**Approach.** The company site says it draws on city records, tourism boards, chambers of commerce, news and calendars, with citations. The Pensacola site itself says only "local sources." It sits inside a consumer app with dining deals, home listings and paid partner listings.
+
+**Status:** active (checked 2026-10-30). Its roadmap lists New Orleans as in progress and Tampa as planned.
+
+**What we can adopt or integrate.** Little. It shows that a single-city assistant can be packaged and repeated in other cities.
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** It shows ER wait times and storm routes with no note on how current they are. Time-sensitive answers need a source and a date beside them.
+
+**Sources:**
+- [myCityCoPilot](https://mycitycopilot.com)
+- [PensacolaCoPilot](https://www.pensacolacopilot.com)
+
 ## West Virginia and Appalachia
 
 ### West Virginia 211
@@ -380,6 +449,192 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 - [Archived repo](https://github.com/AIObjectives/talk-to-the-city-reports)
 - [Current repo](https://github.com/AIObjectives/tttc-light-js)
 
+## Local news and meeting records
+
+### Crescent City Intel (Crescent City, California)
+
+**What it is.** An open-source "civic intelligence" system for one small city: its municipal code, public meetings, local news and hazard alerts.
+
+**Who runs it.** A single developer (GitHub user docxology). Content is licensed CC BY-SA 4.0.
+
+**Approach.** Scrapes the city code (2,206 sections in its latest check) and fingerprints every page with a SHA-256 hash, so changes and errors show up. Offers keyword search and a local AI chat (Ollama) that cites code sections. Tracks news feeds, meeting agendas and transcripts, and 20 hazard and civic feeds. Weekly GitHub Actions publish a static snapshot to GitHub Pages. A source registry (`src/source_registry.ts`) marks every source as `monitored`, `discovery-only` or `reference-only`, with a provenance note and the URL it was found from. In its own words, this "prevents a Pages snapshot from implying that an unimplemented source was checked." Each source also reports its health (ok, empty, unavailable or stale) apart from whether the pipeline ran.
+
+**Status:** active (checked 2026-10-30). 369 commits, last one 2026-10-29.
+
+**What we can adopt or integrate.** The three-way source registry and per-source health, for our freshness work (#122, #16, #166). Showing a gap as "unavailable" rather than staying silent.
+
+**How we could amplify it.** Link it as a reference design. Possible peer contact later, tracked in #98.
+
+**Lessons.** The closest match in method we found. Its focus is knowing what is happening in the city, not filling residents' information gaps, so it does not pick and build new guides or tools.
+
+**Sources:**
+- [crescent-city-intel on GitHub](https://github.com/docxology/crescent-city-intel)
+
+### Nano Media (Arlington, Massachusetts and Bucksport, Maine)
+
+**What it is.** AI-written local news sites that cover town meetings, public records and local websites.
+
+**Who runs it.** Nano Media Inc., a Massachusetts nonprofit started by two Arlington residents.
+
+**Approach.** AI transcribes, summarizes and fact-checks source material, and articles are published with what it calls "minimal human intervention."
+
+**Status:** active (checked 2026-10-30). Inside Arlington's newest story is from Aug 13, 2026. Bucksport's newest is from Mar 21, 2026, and its headline names a meeting two days after that date, which suggests a date error.
+
+**What we can adopt or integrate.** Short plain-language summaries of recorded city council and county commission meetings (#12, #13).
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** A local media critic argued that AI digests do not replace reporting and that Arlington was not a "news desert." The Bucksport date slip shows how errors pass with little human review.
+
+**Sources:**
+- [Nano Media](https://nanomedia.org)
+- [CBS Boston on Inside Arlington](https://www.cbsnews.com/boston/news/inside-arlington-massachusetts-local-news-nano-media-artificial-intelligence-winston-chen-david-trilling)
+- [Dan Kennedy, Sep 26, 2023](https://dankennedy.net/2023/09/26/no-arlington-is-not-a-news-desert-and-the-globe-should-have-done-some-checking/)
+
+### Civic Sunlight (Maine and New England)
+
+**What it is.** A startup whose AI turns city council meeting video into free email summaries, with time-stamped links back to the video.
+
+**Who runs it.** A small Maine company. It partners with the Midcoast Villager, whose reporters use the summaries as leads.
+
+**Approach.** AI summaries of about 20 towns' meetings, sent to over 1,000 subscribers (2025 figures).
+
+**Status:** active as of May 2025 (checked 2026-10-30). We did not find later news.
+
+**What we can adopt or integrate.** Time-stamped links from each summary point to the exact moment in the meeting video.
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** An early summary falsely reported that Concord, New Hampshire approved funding. Meeting summaries need a human check and a link to the source.
+
+**Sources:**
+- [Columbia Journalism Review, May 15, 2025](https://www.cjr.org/analysis/ai-local-news-civic-sunlight-maine.php)
+
+### LocalLens and Hearst Meeting Monitor
+
+**What it is.** Two tools that transcribe and summarize local government meetings, with search and alerts, mostly for newsrooms.
+
+**Who runs it.** LocalLens was bought by American Public Media in November 2025. Meeting Monitor is the public version of Hearst's in-house tool, launched for Houston Chronicle readers.
+
+**Approach.** Chalkbeat used LocalLens to watch about 80 school districts in 30 states. Meeting Monitor is a searchable database of meeting transcripts and summaries.
+
+**Status:** both active (checked 2026-10-30). Accuracy claims are the companies' own.
+
+**What we can adopt or integrate.** Keyword alerts on agendas, for topics residents care about.
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** Meeting monitoring has become a product category, so a hub can link to such tools where they exist rather than rebuild them.
+
+**Sources:**
+- [Nieman Lab, Mar 13, 2025](https://www.niemanlab.org/2025/03/local-newsrooms-are-using-ai-to-listen-in-on-public-meetings) (loaded through search results only)
+
+### Local Resilience (Owatonna, Minnesota)
+
+**What it is.** A small research group with five projects: Civic Scout (plain-English answers about city ordinances, with citations), Observer (AI-drafted local news), The Hub (software for neighborhood groups), Arcstone (an offline knowledge box) and Charter (legal text turned into machine-readable rules).
+
+**Who runs it.** Not stated. The site lists only an email address.
+
+**Approach.** Observer says every AI draft is reviewed by a person before it is published.
+
+**Status:** unknown (checked 2026-10-30). The site lists the projects as "Production," but the Civic Scout demo has an expired security certificate and the Observer demo returns 404.
+
+**What we can adopt or integrate.** Ordinance search with citations would fit Morgantown and county codes. The "a person reviews every AI draft" rule.
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** Small projects go stale quietly. Check our own links, certificates and uptime on a schedule.
+
+**Sources:**
+- [Local Resilience](https://localresilience.org)
+- [Civic Scout project page](https://localresilience.org/projects/civicscout)
+
+### Civic Strata
+
+**What it is.** A shared research hub on one issue for journalists, nonprofits and organizers. It pools documents, public records results, laws, reporting and expert sources.
+
+**Who runs it.** Mariann Martin, as a Reynolds Journalism Institute fellow.
+
+**Approach.** AI tags incoming material and a human editor approves it. Every item has a name, a date, a summary and a source link. Membership is free under a collaboration agreement, and some material is for members only.
+
+**Status:** pilot (checked 2026-10-30). The first issue is data centers.
+
+**What we can adopt or integrate.** Its item format (name, date, summary, source, human approved) is close to our sourcing rule and is a useful comparison.
+
+**How we could amplify it.** Possible peer contact later, tracked in #98.
+
+**Lessons.** Groups in one place often collect the same records separately. A shared, sourced store saves everyone work.
+
+**Sources:**
+- [RJI, Aug 17, 2026](https://rjionline.org/news/building-a-civic-information-hub/)
+- [Civic Strata](https://civicstrata.info/)
+
+## Open community knowledge
+
+### LocalWiki
+
+**What it is.** Community wikis that anyone can edit, about 149,000 pages across 3,138 regions.
+
+**Who runs it.** LocalWiki, a 501(c)(3) nonprofit. Knight Foundation was a past funder.
+
+**Approach.** Open editing by residents. Content is CC BY 4.0 and the code is open source (GPL-2.0).
+
+**Status:** stalled (checked 2026-10-30). The site is up, but the newest blog post is from July 2015 and the last code change from January 2018. Code for Philly lists the Philadelphia wiki as "Hibernating."
+
+**What we can adopt or integrate.** We already use CC BY 4.0 for content, the same choice.
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** Open editing alone did not keep pages fresh. Without paid or automated upkeep, content went stale. That is the gap an AI-maintained hub is meant to fill, and the risk it must avoid.
+
+**Sources:**
+- [LocalWiki](https://localwiki.org)
+- [LocalWiki on Wikipedia](https://en.wikipedia.org/wiki/LocalWiki)
+
+### Colorado regional sustainability hub (Bili)
+
+**What it is.** An early research platform that links Colorado policymakers, researchers and residents through shared sustainability and well-being data.
+
+**Who runs it.** Researchers at Colorado State University.
+
+**Approach.** An AI chat assistant called Bili, a framework for testing AI models called BiliCore, open-source tools and community asset mapping, built with community input and beta testing.
+
+**Status:** early research (checked 2026-10-30). Paper dated July 21, 2025.
+
+**What we can adopt or integrate.** BiliCore's approach to testing AI answers may help if we ever add a Q&A feature.
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** A university-led version of an open, local, AI-assisted hub. It focuses on one topic and on helping policymakers decide.
+
+**Sources:**
+- [Co-creating a regional sustainability hub (Mountain Scholar)](https://mountainscholar.org/items/81c0a0f7-f7ca-4700-a646-1aa9028c5f12)
+
+## Research on local information
+
+- **LocalBench (AAAI 2026).** A benchmark of 14,782 questions about 526 U.S. counties, built from Census data, local Reddit posts and local news. The best AI model got 56.8% of narrative questions right, with web search. On numbers, every model scored at or below about 15%. The paper's text and its table disagree on a few figures, so cite the table. **For our findability method:** it picks counties across rural, suburban and urban groups, tags each question by kind of local knowledge (being current, place, culture, community and so on), and scores "gave any answer" apart from "gave the right answer." We could tag our 32 questions the same way to check the mix, and add a few questions with one checkable number, such as a fee or a bus fare. Its automatic AI grading does not fit our human-style scoring. ([arXiv 2511.10459](https://arxiv.org/abs/2511.10459), [data](https://github.com/MadCollab/LocalBench))
+- **Civic Information Needs Census.** A national survey (Wave 2, February 2026) by Civic News Company with Embold Research. 44% of adults find it hard to get information about their neighborhood and 42% about their city or town, against 26% for national news. The largest gaps between how important a topic is and how satisfied people are: politics (46 points), environment (40), economic opportunity (39), health (38), risks and emergencies (37), education (35). Emergencies rank as the most important topic overall, at 95%. One summary list on the home page shows emergencies at 38, so cite the gaps page. ([Information gaps](https://infocensus.org/share/information-gaps))
+- **Brookings, "Could AI help communities navigate complex challenges like the US data center boom?" (Sep 30, 2026).** Ten authors, led by Jacob Taylor and Scott E. Page. It proposes a four-step cycle (Surface, Align, Implement, Learn) and tested it in a simulation of a fictional Michigan county. It lists eight design principles, including AI in a supporting role, keeping outlier views visible and community control of data. Real-world results are untested. ([Brookings](https://www.brookings.edu/articles/ai-community-problem-solving-data-centers/))
+- **News Futures, "An Invitation to Build the Civic Information Economy" (Mar 24, 2026).** A working group paper arguing that civic information is its own sector and should be funded by public outcomes, with feedback loops with residents. No dollar figures. ([News Futures](https://www.newsfutures.org/library/civic-information-endowment))
+- **NSF Open Knowledge Network (launched Sep 25, 2026).** A free national network linking 43 public knowledge graphs on health, environment, justice and more. A possible data source for community health metrics, once we check county coverage. ([NSF](https://www.nsf.gov/tip/updates/nsf-launches-open-knowledge-network-national-open-data))
+
+## Open-source tools and patterns
+
+Checked 2026-10-30. These are building blocks, not community services. Listed for patterns worth borrowing.
+
+- **Civic Newsroom.** Nine editorial prompts for an AI local newsroom, with a four-step check that looks for counter-evidence before anything is published. Tested on Longmont, Colorado data. MIT. A prompt kit, no updates since June 2026. The same author's civic-scanner is newer. ([GitHub](https://github.com/scottconverse/civic-newsroom))
+- **Civic SLM.** A small open AI model being tuned for local government documents, with model and data cards and four test sets (facts, refusals, extraction). Weights not released yet. MIT. ([GitHub](https://github.com/itsmeduncan/civic-slm))
+- **Townlight Records (formerly CivicSunshine).** Staff software for public records requests that runs on city hardware. Every flag needs a person to confirm it. AGPL-3.0, public beta. ([GitHub](https://github.com/townlight/sunshine))
+- **CivicDigest.** Plain-English summaries of council minutes, plus paid AI voice and video. A solo demo. MIT. ([GitHub](https://github.com/Brandi-Kinard/civicdigest))
+- **Indore Civic Services Q&A Agent.** A hackathon chatbot for five city services in English and Hindi. It answers only from its sources, shows only the sources it used, and gives a helpline when unsure. No license, so the code is not reusable, but the rules are worth copying. ([GitHub](https://github.com/R123456-123/civic-services-qa-agent))
+- **SAG.** A self-hosted knowledge base that traces every answer back to the original text. MIT, company-run. More than a static site needs today. ([GitHub](https://github.com/Zleap-AI/SAG))
+- **LLM Wiki.** A pattern, "human curates, AI maintains," with several open-source apps. This repo already works roughly this way. ([nashsu/llm_wiki](https://github.com/nashsu/llm_wiki))
+- **Busabase.** A shared database where AI edits arrive as reviewable change requests. GitHub pull requests already give us this. MIT. ([GitHub](https://github.com/busabase/busabase))
+- **GPT Researcher.** An agent that splits a question, searches many sources and writes a cited report. Apache-2.0. Could help with first-pass research, with every claim still checked at the source. ([GitHub](https://github.com/assafelovic/gpt-researcher))
+- **Argus.** A runtime for long agent jobs where a read-only reviewer must approve the work and the builder cannot mark its own work done. A pattern relevant to our multi-agent setup. MIT. ([microsoft/ArgusAgent](https://github.com/microsoft/ArgusAgent))
+- **The World Avatar (Cambridge).** A research "digital twin" built on a knowledge graph that software agents keep current. Too heavy for our needs. ([Cambridge](https://como.ceb.cam.ac.uk/research/twa/))
+- **Also checked, little to adopt:** Civic Hub (San Francisco open data projects, no dates on its data, probably stalled; [civichub.us](https://civichub.us)) and CityByApp (a commercial directory with paid listings, clustered in a few towns, many expired items; [citybyapp.com](https://citybyapp.com)).
+
 ## Cautionary cases
 
 ### AI Village (charity fundraising goals)
@@ -449,6 +704,9 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 
 - **CommunityLLM.** No project by this name was found. The closest match is MIT's CommunityLM, a 2022 research project on language models and partisan views, not a community resources tool. ([CommunityLM on Hugging Face](https://huggingface.co/CommunityLM))
 - **Ruston, Louisiana.** The Tech Reformers proof of concept is for Ruston, Washington. See its entry above.
+- **FixIt (two AI agents, 2026 hackathon).** No repo matched. Several hackathon projects use the name, but none has two agents. Checked 2026-10-30.
+- **Nieman Lab, "Local news starts becoming local infrastructure" (Ulrike Langer, Dec 16, 2025).** The essay exists, but the page would not load, so we could not confirm which tools it names. A newsletter says Village Media licenses its AI tools to about 120 publishers. ([Nieman Lab](https://www.niemanlab.org/2025/12/local-news-starts-becoming-local-infrastructure/))
+- **Village Media and OpenAI "Open Door."** Reported by Axios (Sep 15, 2026) as a community health and care navigation platform. Not yet checked.
 
 ## Lessons across the map
 
@@ -458,6 +716,10 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 - **Results must connect to decisions.** vTaiwan stalled when its outcomes were not binding. Our tools should point to the real office or group that acts.
 - **Directories go stale, domains lapse.** Chalmers' old domain now shows unrelated content. Re-check links on a schedule and never link a domain we have not just checked.
 - **Data terms matter.** WV 211's data comes from a proprietary national platform, so we link to it rather than copy it. See [open-data.md](open-data.md#use-open-topic-labels-not-the-211-taxonomy).
+- **Show gaps as gaps.** Crescent City Intel marks sources it does not yet watch as visible gaps, never as quiet successes. Our pages should say plainly when something has not been checked.
+- **AI flags, a person publishes.** LinkLocally, Civic Strata, Local Resilience's Observer and Townlight all keep a human approval step. The projects that published with little review (Nano Media's Bucksport site, early Civic Sunlight) are where errors showed up.
+- **Open editing alone goes stale.** LocalWiki had thousands of pages and little upkeep after 2018. Freshness needs a scheduled, owned process.
+- **Keep ordering neutral.** Paid placement (LinkLocally, CityByApp) puts money into what residents see first.
 
 ## How to keep this current
 
@@ -471,4 +733,4 @@ Duet runs a monthly sweep:
 
 ## Checked
 
-Sources checked 2026-10-28.
+Sources checked 2026-10-28. Entries added from the October 30 peer research checked 2026-10-30 (#473).

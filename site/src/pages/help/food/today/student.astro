@@ -4,7 +4,7 @@ import FoodToday from '../../../../components/FoodToday.astro';
 export const page = { parent: "/help/food/today/", label: "Food today for WVU students" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<Base title="Food today for WVU students in Morgantown" description="Free food for WVU students at The Rack, plus 211 and upcoming free food dates in Mon County.">
+<Base help title="Food today for WVU students in Morgantown" description="Free food for WVU students at The Rack, plus 211 and upcoming free food dates in Mon County.">
   <h1>Food today, for WVU students</h1>
   <p class="lede">Your answers: you need food today or this week, and you are a WVU student. <a href={`${base}/help/food/`}>Change answers</a>.</p>
   <FoodToday student />

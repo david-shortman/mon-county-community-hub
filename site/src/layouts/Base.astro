@@ -2,11 +2,14 @@
 import Icon from '../components/Icon.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
+import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
 import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
-const { crisis = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
+import nameFont from '../fonts/fraunces-name-800.woff2?inline';
+import tileSvg from '../../public/favicon.svg?raw';
+const { crisis = false, help = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(/\.\w+$/.test(Astro.url.pathname) ? Astro.url.pathname : Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
 const shareImage = new URL(`${base}/share.png`, Astro.site).href;
@@ -15,7 +18,15 @@ const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 // public/fonts/OFL.txt), self-hosted, one weight, Latin only, about 11 KB.
 // font-display: optional means text never waits for it and never shifts.
 const headingFont = `${base}/fonts/atkinson-hyperlegible-next-800.woff2`;
-const fontFace = `@font-face { font-family: "Atkinson Hyperlegible Next"; font-weight: 800; font-style: normal; font-display: optional; src: url("${headingFont}") format("woff2"); }`;
+// Site name face (the logo, docs/design/identity.md "The logo"): Fraunces, soft
+// (SIL Open Font License, src/fonts/OFL-Fraunces.txt), cut down to only the
+// letters in "Everything Morgantown" (about 2.5 KB) and built into the page,
+// so the name never waits for a download and never changes font as it loads.
+const nameFontFace = `@font-face { font-family: "Fraunces Name"; font-weight: 800; font-style: normal; font-display: block; src: url("${nameFont}") format("woff2"); }`;
+const fontFace = `@font-face { font-family: "Atkinson Hyperlegible Next"; font-weight: 800; font-style: normal; font-display: optional; src: url("${headingFont}") format("woff2"); }${nameFontFace}`;
+// The logo's tile is the site icon (public/favicon.svg, #390), drawn inline.
+const brandMark = tileSvg.replace(/<!--[\s\S]*?-->\s*/, '').replace(/id="r"/, 'id="brand-clip"').replace('url(#r)', 'url(#brand-clip)')
+  .replace('<svg ', '<svg class="brand-mark" aria-hidden="true" focusable="false" ');
 // This page's door and topic tags (#249): a breadcrumb, and search filters.
 const route = `${here.slice(base.length)}/`.replace(/^\/*/, '/');
 const tags = (await loadPages()).get(route);
@@ -56,7 +67,7 @@ const today = todayYmd();
 const dayFmt = (style) => new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: style, month: style, day: 'numeric' }).format(new Date(`${today}T12:00:00Z`));
 const [longToday, shortToday] = [dayFmt('long'), dayFmt('short')];
 const forecast = await todaysForecast();
-const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Community Hub';
+const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morgantown';
 ---
 <!doctype html>
 <html lang="en">
@@ -70,12 +81,12 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     {crisis && <meta name="referrer" content="no-referrer" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Mon County Community Hub" />
+    <meta property="og:site_name" content="Everything Morgantown" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={shareImage} />
-    <meta property="og:image:alt" content="Mon County Community Hub" />
+    <meta property="og:image:alt" content="Everything Morgantown: the site icon, two hills joined by a bridge over the river" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
     <AppShell />
@@ -103,7 +114,11 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .wrap { max-width: 46rem; margin: 0 auto; padding: 0 16px; }
       header.site { border-bottom: 1px solid var(--line); }
       header.site .wrap { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; padding-block: 14px; }
-      header.site .brand { color: var(--fg); text-decoration: none; margin-right: auto; }
+      /* The logo (#421): the site icon as a tile, and the name in Fraunces, soft. */
+      header.site .brand { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: var(--fg); text-decoration: none; margin-right: auto;
+        font-family: "Fraunces Name", Georgia, serif; font-weight: 800; font-size: 1.35rem; line-height: 1.1; }
+      .brand-mark { flex: none; width: 40px; height: 40px; border-radius: 9px; }
+      @media (prefers-color-scheme: dark) { .brand-mark { box-shadow: 0 0 0 1px var(--line); } }
       .dateline { margin: 0; font-size: 0.9rem; color: var(--muted); }
       .dateline .dl-short { display: none; }
       .dateline a { color: var(--muted); }
@@ -125,6 +140,8 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         html { scroll-padding-bottom: calc(var(--tabbar) + 16px); }
         body { padding-bottom: var(--tabbar); }
         header.site .wrap { padding-block: 12px 10px; row-gap: 2px; }
+        header.site .brand { gap: 10px; font-size: 1.2rem; }
+        .brand-mark { width: 34px; height: 34px; border-radius: 8px; }
         .dateline { font-size: 0.85rem; }
         .dateline .dl-long { display: none; }
         .dateline .dl-short { display: inline; }
@@ -139,7 +156,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       }
       .icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
       main { padding-block: 24px 48px; }
-      h1, h2, h3, header.site .brand { font-family: var(--display); font-weight: 800; text-wrap: balance; }
+      h1, h2, h3 { font-family: var(--display); font-weight: 800; text-wrap: balance; }
       h1 { font-size: clamp(1.7rem, 1.35rem + 1.75vw, 1.9rem); line-height: 1.2; margin: 0.4em 0; }
       /* Modern CSS polish (#153): even line breaks, and cards that adapt to their own width */
       p, li, dd, figcaption { text-wrap: pretty; }
@@ -277,6 +294,8 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .crisis-strip p a { font-weight: 800; padding: 6px 2px; }
       .quick-exit { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
       .quick-exit:hover { text-decoration: underline; }
+      .crisis-line { margin: 0 0 12px; padding: 6px 12px; border-left: 4px solid var(--brick); background: var(--accent-bg); font-weight: 600; }
+      .crisis-line a { font-weight: 800; padding: 6px 2px; }
       html:has(.crisis-strip) { scroll-padding-top: 8rem; }
       footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; }
     </style>
@@ -286,7 +305,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     {crisis && <CrisisStrip />}
     <header class="site">
       <div class="wrap">
-        <a class="brand" href={`${base}/`}>Mon County Community Hub</a>
+        <a class="brand" href={`${base}/`}><Fragment set:html={brandMark} /><span>Everything Morgantown</span></a>
         <p class="dateline">Morgantown <span aria-hidden="true">·</span> <span class="dl-long" data-fmt="long">{longToday}</span><span class="dl-short" data-fmt="short">{shortToday}</span>{forecast && <span id="dl-wx" data-day={forecast.day}> <span aria-hidden="true">·</span> <a href={FORECAST_PAGE}><Icon name={forecast.icon} />{forecast.text}<span class="sr-only"> (National Weather Service forecast)</span></a></span>}</p>
         <nav class="main" aria-label="Main">
           {tabs.map((t) => <a class="tab" href={`${base}${t.href}`} aria-current={t.current}><Icon name={t.icon} /><span>{t.label}</span></a>)}
@@ -296,6 +315,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     </header>
     <main class="wrap" id="main" tabindex="-1" data-pagefind-body={searchable ? '' : undefined}>
       <Breadcrumb route={route} />
+      {help && !crisis && <CrisisLine />}
       {searchable && tagDoor && <p hidden data-pagefind-filter="door">{tagDoor.name}</p>}
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       <slot />
@@ -305,7 +325,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
         <nav class="foot-links" aria-label="Doors and site">
           <ul>{footerLinks.map((n) => <li><a href={`${base}${n.href}`}>{n.label}</a></li>)}</ul>
         </nav>
-        <p>An open experiment for Morgantown and Monongalia County, WV. Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>. Reports go to GitHub, which needs a free account, and are public, so leave out private details.</p>
+        <p>An open experiment for Morgantown and Monongalia County, WV. Most of it is researched and written by AI (Claude), and a person oversees it (<a href={`${base}/about/`}>how we use AI</a>). Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>. Reports go to GitHub, which needs a free account, and are public, so leave out private details.</p>
       </div>
     </footer>
     <div class="sr-only" role="status" id="announce"></div>
