@@ -1,5 +1,6 @@
 ---
 import Icon from '../components/Icon.astro';
+import AlsoCheck from '../components/AlsoCheck.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
 import CrisisLine from '../components/CrisisLine.astro';
@@ -327,6 +328,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       {searchable && tagDoor && <p hidden data-pagefind-filter="door">{tagDoor.name}</p>}
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       <slot />
+      <AlsoCheck route={route} />
     </main>
     <footer class="site">
       <div class="wrap">
