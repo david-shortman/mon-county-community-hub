@@ -1,0 +1,10 @@
+name: Arts Council of Greater Morgantown
+slug: arts-council-of-greater-morgantown
+kind: nonprofit
+website: https://artsgm.org/
+summary: A group that supports local artists and arts events. It runs First Friday for the Arts, a public art passport, an artist directory and a list of local gallery spaces.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: https://artsgm.org/
+    checked: 2026-10-30
