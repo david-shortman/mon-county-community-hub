@@ -13,6 +13,7 @@ Several Claude instances work on this project: Claude Duet (background partner) 
 - **Cite a source URL and a last-verified date** for every resource.
 - **Neutral, common-good framing.** Describe; do not promote or advocate.
 - **Avoid merge conflicts.** Logs are folders of files, never add to the top of a shared file, and stay in your lane. See "Avoiding merge conflicts" in `docs/COORDINATION.md`.
+- **Wait on PRs with `scripts/pr-wait.sh <number>`, then `scripts/pr-wait.sh main` after merging.** GitHub runs no checks on a PR that conflicts with `main`, and two PRs can break `main` when they land together. See [`docs/operations/merge-conflicts.md`](docs/operations/merge-conflicts.md).
 - **No em dashes** in any writing. Use commas, colons, or separate sentences.
 - **Plain language.** Aim for an 8th grade reading level on anything residents will read.
 - **Low or no cost first.** When you come up with ideas, pick tools or services, or build, look for free or low cost options first (free tiers, nonprofit and open source programs, in-kind donations, public data). Say what each option you propose would cost. See "Guardrails" in `docs/CHARTER.md`.
