@@ -185,6 +185,7 @@ Nearly everyone reaches the hub on a phone. Design for a 390px screen first, the
 - **Crisis pages.** A page a person in danger may read passes `crisis` to `Base`, which adds the crisis strip and the Leave this page button ([`CrisisStrip.astro`](../../site/src/components/CrisisStrip.astro), #174) and sends no referrer. The strip uses `--accent-bg` with a brick edge, and the button is `--fg` on `--bg`, so no new colors. It shows only on those pages, never across the site.
 - **Name things in context.** Screen readers hear which event a button is for ("Add to calendar: Free tire drop-off, November 14, 2026"), so no two links on a page sound the same.
 - **Local and plain.** Directions buttons use the place the source published. The card text around them uses names residents know (see the voice notes).
+- **Modern CSS (#153).** Headings use `text-wrap: balance` and text uses `pretty`, so lines break evenly. Cards and route steps are size containers: when a card itself is narrow, its action buttons stack in one column. The `h1` eases from 1.9rem down to 1.7rem on the smallest phones. The browser bar matches the page through `theme-color` meta tags; if `--bg` changes, change them too.
 - **Light pages.** CSS is inlined so a page paints in one request. The only script is small and optional; the page works without it.
 - **Check it.** Before shipping, test at 320px and 390px: no sideways scrolling, nothing hidden under the tab bar when you Tab through the page, and axe clean in light and dark.
 
