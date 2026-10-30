@@ -3,13 +3,19 @@
 // so the page shows only what the entry says, with its sources and dates.
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
-import { loadDir } from '../lib/content.mjs';
+import { resource, org as orgOf, RECHECK_TEXT } from '../lib/content.mjs';
 
 const { slug, linkLabel = 'Go to the official site' } = Astro.props;
-const r = loadDir('resources').find((e) => e.slug === slug);
-if (!r) throw new Error(`AnswerFacts: no resource with slug ${slug}`);
-const org = loadDir('orgs').find((o) => o.slug === r.org);
+// Throws when the slug is missing; a hidden record comes back with no facts (#519).
+const r = resource(slug);
+const org = r.org ? orgOf(r.org) : null;
 ---
+{r.hidden ? (
+<section class="card" aria-labelledby={`${slug}-h`}>
+  <h2 id={`${slug}-h`}>{r.title}</h2>
+  <p class="meta"><strong>{RECHECK_TEXT}</strong></p>
+</section>
+) : (
 <section class="card" aria-labelledby={`${slug}-h`}>
   <h2 id={`${slug}-h`}>{r.title}</h2>
   <Actions link={r.contact?.url} linkLabel={linkLabel} phone={r.contact?.phone} phoneLabel={org?.name} about={r.title} />
@@ -18,3 +24,4 @@ const org = loadDir('orgs').find((o) => o.slug === r.org);
   <p><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>
   <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{org && <Fragment slot="before">Run by {org.name}. </Fragment>}</SourceLine>
 </section>
+)}

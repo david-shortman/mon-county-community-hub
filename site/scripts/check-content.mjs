@@ -1,7 +1,7 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 
 const errors = [];
@@ -11,9 +11,34 @@ const isUrl = (u) => { try { return ['https:', 'http:'].includes(new URL(u).prot
 const sixMonthsAgo = new Date(); sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 const stale = sixMonthsAgo.toISOString().slice(0, 10);
 
+// Hidden records (#519) are checked like any other, so taking the `hidden`
+// block off puts back a record that is still valid.
+const loadDir = (name) => loadDirShown(name, { withHidden: true });
+const loadCalendar = () => loadCalendarShown({ withHidden: true });
+const HIDDEN_FIELDS = ['reason', 'since', 'note'];
+// 211 and 988 show on every page, so the site cannot build without them. If
+// one looks wrong, fix it from the line's own page the same day instead.
+const NEVER_HIDE = ['resources/wv-211.yaml', 'resources/988-lifeline.yaml'];
+let hiddenCount = 0;
+function checkHidden(e) {
+  if (e.hidden == null) return;
+  const where = e._file;
+  const h = e.hidden;
+  hiddenCount++;
+  if (NEVER_HIDE.includes(where)) errors.push(`${where}: this line shows on every page and cannot be hidden; fix it from its own page instead`);
+  if (typeof h !== 'object' || Array.isArray(h)) { errors.push(`${where}: hidden needs reason and since under it (see content/README.md)`); return; }
+  if (!HIDDEN_REASONS.includes(h.reason)) errors.push(`${where}: hidden.reason must be one of ${HIDDEN_REASONS.join(', ')}`);
+  const since = ymd(h.since);
+  if (!isDate(since)) errors.push(`${where}: hidden.since must be a date (YYYY-MM-DD)`);
+  else if (since > todayYmd()) errors.push(`${where}: hidden.since ${since} is in the future`);
+  if (h.note != null && typeof h.note !== 'string') errors.push(`${where}: hidden.note must be text`);
+  for (const k of Object.keys(h)) if (!HIDDEN_FIELDS.includes(k)) warnings.push(`${where}: unknown hidden field ${k}`);
+}
+
 const slugs = new Set();
 for (const e of loadCalendar()) {
   const where = e._file;
+  checkHidden(e);
   for (const f of ['title', 'slug', 'starts', 'org_name', 'who_it_is_for', 'what_to_do', 'url']) {
     if (!e[f]) errors.push(`${where}: missing ${f}`);
   }
@@ -50,13 +75,14 @@ for (const e of loadCalendar()) {
 const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(String(p));
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
-const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources'];
+const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
 function checkRecord(e, required, known) {
   const where = e._file;
+  checkHidden(e);
   for (const f of required) if (e[f] == null || e[f] === '') errors.push(`${where}: missing ${f}`);
   for (const k of Object.keys(e)) if (k !== '_file' && !known.includes(k)) warnings.push(`${where}: unknown field ${k} (see content/README.md)`);
   if (e.slug && !isSlug(e.slug)) errors.push(`${where}: slug must be lowercase letters, numbers and dashes`);
@@ -172,12 +198,14 @@ for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x
   for (const [id, st] of Object.entries(dp.steps)) {
     if (!['today', 'week', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week or opens`);
     if (!st.text) errors.push(`${where}: step ${id} needs text`);
+    if (st.record.hidden) { warnings.push(`${where}: step ${id}'s resource ${st.resource} is hidden, so the step says it is being re-checked`); continue; }
     if (!st.record.contact?.url) errors.push(`${where}: step ${id}'s resource needs a contact url`);
   }
   if (dp.cant_wait) {
     try { resource(dp.cant_wait.resource); } catch { errors.push(`${where}: cant_wait resource ${dp.cant_wait.resource} not found`); }
   }
   for (const [id, st] of Object.entries(dp.steps)) {
+    if (st.record.hidden) continue;
     if (!st.record.sources?.length || st.record.sources.some((x) => !isDate(ymd(x.checked)))) errors.push(`${where}: step ${id}'s resource needs sources with checked dates`);
     if (!dp.situations.some((x) => (x.steps ?? []).includes(id))) warnings.push(`${where}: step ${id} is not used by any situation, so it never shows`);
   }
@@ -223,5 +251,5 @@ for (const e of [...orgs, ...resources, ...loadCalendar()]) {
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
-console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
+console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources (${hiddenCount} hidden), ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);
