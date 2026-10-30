@@ -12,6 +12,7 @@ export function GET({ site }) {
 - [Search](${u('/search/')}): search every page; runs in the browser, nothing is sent to the site
 - [Deadlines and dates](${u('/calendar/')}): application windows, deadlines, and community dates
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
+- [This month in Mon County](${u('/calendar/month/')}): the next 30 days from the calendar on one page you can print
 - [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
 - [Get through this month](${u('/money/')}): pick what is going on (a utility or other bill, short on food, behind on rent, cash fast or a payday loan, free tax help) and get local steps in order, with phone numbers and sources; also the scam warning
