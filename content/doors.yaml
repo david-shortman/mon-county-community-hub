@@ -1,0 +1,56 @@
+# The five doors and the lanes around them (#248). The build reads this file
+# to make door lists, the Topics page and breadcrumbs. Names are a first
+# guess, tested in #254. Adding, renaming or removing a door changes the
+# site's shape, so it is David's call. A topic that fits no door waits for
+# that call instead of becoming a new menu item.
+#
+# `topics` maps each topic tag used in content/ entries and on pages to the
+# door it belongs to, with the label people see. Every topic belongs to
+# exactly one door. `npm run check-content` checks this.
+doors:
+  - slug: this-month
+    name: Get through this month
+    hint: Can't pay a bill, behind on rent, short on food, need cash fast
+    topics:
+      money: Bills and money
+      food: Food
+      housing: Rent and housing
+      legal: Legal help
+      taxes: Taxes
+      poverty: Getting by
+  - slug: care
+    name: Get care
+    hint: Where to go, can't afford it, mental health today, dentist or medicine
+    topics:
+      health: Health and care
+  - slug: living-here
+    name: Living here
+    hint: New here, who serves my address, trash and recycling, buses
+    topics:
+      recycling: Trash and recycling
+      voting: Voting
+  - slug: family
+    name: Family and life changes
+    hint: Kids and school, work and training, disability and aging, veterans, language help
+    topics:
+      family: Kids and family
+  - slug: community
+    name: Your community
+    hint: City or county, meetings, how we're doing, give or start something
+    topics:
+      community: Community life
+      government: City and county government
+
+# Lanes are not doors. Help now is the urgent lane on every screen. Dates is
+# the one calendar. About holds pages about the project itself. A page tagged
+# with a lane needs no topic.
+lanes:
+  - slug: help-now
+    name: Help now
+    page: /stay-tonight/
+  - slug: dates
+    name: Dates
+    page: /calendar/
+  - slug: about
+    name: About this site
+    page: /about/

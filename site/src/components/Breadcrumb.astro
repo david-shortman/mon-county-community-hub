@@ -1,0 +1,15 @@
+---
+// "Home › Get through this month", above the heading, so a person who lands
+// from a search knows where they are. Built from the page's tags (#249).
+// A trail of only "Home" is left off: the site name in the header already
+// goes home, and urgent pages like Stay tonight keep their first screen.
+import { breadcrumb } from '../lib/pages.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { route } = Astro.props;
+const trail = await breadcrumb(route);
+---
+{trail.length > 1 && (
+  <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
+    <ol>{trail.map((c) => <li><a href={`${base}${c.href}`}>{c.label}</a></li>)}</ol>
+  </nav>
+)}

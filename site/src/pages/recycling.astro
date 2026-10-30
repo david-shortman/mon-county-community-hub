@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import EventCard from '../components/EventCard.astro';
 import Actions from '../components/Actions.astro';
 import { loadCalendarWithFeeds, upcoming } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "recycling", label: "Trash, recycling and drop-off", summary: "Pickup days, the curbside bin, and where to take hard items" };
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics || []).includes('recycling'));
 const swa = 'https://www.monongaliacountyswa.com';
 const swaPhone = '304-292-3801';

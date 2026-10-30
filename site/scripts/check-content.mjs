@@ -1,7 +1,7 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, loadDoors } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 
 const errors = [];
@@ -57,7 +57,40 @@ for (const a of ADAPTERS) {
   }
 }
 
+// Doors (content/doors.yaml): every topic belongs to exactly one door, and
+// every topic used in content/ has a door, so it can show on a door page.
+// Page tags are checked when the site builds (src/lib/pages.mjs).
+let doors;
+try { doors = loadDoors(); } catch (err) { errors.push(`doors.yaml: ${err.message}`); }
+if (doors) {
+  if (doors.doors.length !== 5) warnings.push(`doors.yaml: has ${doors.doors.length} doors; the site plan (#248) has five`);
+  const seenSlugs = new Set();
+  const topicHome = new Map();
+  for (const d of [...doors.doors, ...doors.lanes]) {
+    if (!/^[a-z0-9-]+$/.test(d.slug ?? '')) errors.push(`doors.yaml: "${d.name}" needs a slug of lowercase letters, numbers and dashes`);
+    if (seenSlugs.has(d.slug)) errors.push(`doors.yaml: duplicate slug ${d.slug}`);
+    seenSlugs.add(d.slug);
+    if (!d.name) errors.push(`doors.yaml: ${d.slug} needs a name`);
+    if (d.page && !/^\/([a-z0-9-]+\/)*$/.test(d.page)) errors.push(`doors.yaml: ${d.slug} page must look like /calendar/`);
+  }
+  for (const d of doors.doors) {
+    if (!d.hint) errors.push(`doors.yaml: ${d.slug} needs a hint (example problems in residents' words)`);
+    if (!Object.keys(d.topics).length) errors.push(`doors.yaml: ${d.slug} needs at least one topic`);
+    for (const [t, label] of Object.entries(d.topics)) {
+      if (topicHome.has(t)) errors.push(`doors.yaml: topic ${t} is in both ${topicHome.get(t)} and ${d.slug}`);
+      topicHome.set(t, d.slug);
+      if (!label) errors.push(`doors.yaml: topic ${t} in ${d.slug} needs a label`);
+    }
+  }
+  if (JSON.stringify(doors).includes('\u2014')) errors.push('doors.yaml: contains an em dash');
+  for (const e of [...loadDir('orgs'), ...loadDir('resources'), ...loadCalendar()]) {
+    for (const t of e.topics ?? []) {
+      if (!topicHome.has(t)) errors.push(`${e._file}: topic "${t}" has no door; add it to a door in content/doors.yaml`);
+    }
+  }
+}
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
-console.log(`Checked ${slugs.size} calendar entries and ${feedCount} saved feed entries: ${errors.length} errors, ${warnings.length} warnings.`);
+console.log(`Checked ${slugs.size} calendar entries, ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);

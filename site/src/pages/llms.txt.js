@@ -8,6 +8,7 @@ export function GET({ site }) {
 ## Pages
 
 - [Home](${u('/')}): "What do you need help with?": 211 and 988 for help right now, search, and need buttons for shelter, food, bills, rent, shots, dates and recycling
+- [All topics](${u('/topics/')}): every page, sorted into five doors named for what is going on in a person's life (Get through this month, Get care, Living here, Family and life changes, Your community), plus A to Z
 - [Search](${u('/search/')}): search every page; runs in the browser, nothing is sent to the site
 - [Deadlines and dates](${u('/calendar/')}): application windows, deadlines, and community dates
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps

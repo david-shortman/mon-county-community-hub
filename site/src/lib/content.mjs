@@ -126,3 +126,15 @@ export function org(slug) {
   if (!o) throw new Error(`content/orgs: no entry with slug ${slug}`);
   return o;
 }
+
+// The five doors and the lanes around them, from content/doors.yaml (#248).
+// `topicDoor` maps each topic tag to its door slug.
+export function loadDoors() {
+  const raw = YAML.parse(fs.readFileSync(path.join(CONTENT_DIR, 'doors.yaml'), 'utf8'));
+  const doors = (raw.doors ?? []).map((d) => ({ ...d, topics: d.topics ?? {} }));
+  const lanes = raw.lanes ?? [];
+  const topicDoor = {};
+  for (const d of doors) for (const t of Object.keys(d.topics)) topicDoor[t] ??= d.slug;
+  const bySlug = Object.fromEntries([...doors, ...lanes].map((d) => [d.slug, d]));
+  return { doors, lanes, bySlug, topicDoor };
+}

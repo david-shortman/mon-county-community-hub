@@ -5,6 +5,7 @@
 // Say only what the site does today. Planned work names its issue.
 import Base from '../layouts/Base.astro';
 import { loadDir } from '../lib/content.mjs';
+export const page = { door: "about", label: "For groups and helpers", summary: "Fix your listing, reuse the data, and what we will and will not do" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const doc = (p) => `${repo}/blob/main/${p}`;
