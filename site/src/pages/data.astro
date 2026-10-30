@@ -1,0 +1,40 @@
+---
+// Open data (#72): what the API publishes, the license, and how to cite it.
+// Counts and links come from the same code that writes /api/v1/, so this page
+// never promises a file the build did not make.
+import Base from '../layouts/Base.astro';
+import { catalog } from '../lib/api.mjs';
+export const page = { door: "about", label: "Open data", summary: "Every listing as free JSON files for apps and AI tools, with license and how to cite" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const cat = await catalog();
+const api = (p) => `${base}/api/v1/${p}`;
+const LABELS = { orgs: 'Groups and offices', resources: 'Programs and services', calendar: 'Deadlines and dates', corrections: 'Corrections' };
+---
+<Base title="Open data for Morgantown and Mon County" description="Everything Morgantown's listings, dates and corrections as free JSON files that apps and AI tools can read, with the license and how to cite them.">
+  <h1>Open data</h1>
+  <p class="lede">Every listing on this site is also published as plain data files that apps, websites and AI tools can read. They are free to use. No key, no sign-up.</p>
+
+  <h2>What is published</h2>
+  <p>The files are rebuilt every morning from the same records as the site, so they always match what the site shows.</p>
+  <ul>
+    {cat.types.map((t) => (
+      <li><strong>{LABELS[t.name] ?? t.name}</strong> ({t.count}): <a href={api(`${t.name}.json`)}>{t.name}.json</a>. {t.description} One record at a time: <code>/api/v1/{t.name}/&#123;{t.record_url_template.match(/\{(\w+)\}/)[1]}&#125;.json</code>.</li>
+    ))}
+    <li><strong>The catalog</strong>: <a href={api('index.json')}>index.json</a> lists every file, how many records each has, the license, and when the files were built.</li>
+    <li><strong>A description for developers</strong>: <a href={api('openapi.yaml')}>openapi.yaml</a> (OpenAPI 3.1) names every field.</li>
+    <li><strong>The calendar for calendar apps</strong>: <a href={`${base}/calendar.ics`}>calendar.ics</a>.</li>
+  </ul>
+
+  <h2>Every record shows its sources</h2>
+  <p>Each record has a <code>sources</code> list. Every source has a web address and the date it was last checked. Please show both when you reuse a record, and send people to the source. Details change, so people should check the source before they act. A record whose oldest check is more than {cat.stale_after_days} days old may be out of date.</p>
+
+  <h2>License and how to cite</h2>
+  <p>The data is under <a href={cat.license.url}>Creative Commons Attribution 4.0</a> (CC BY 4.0). You can use it for anything, even in a paid product. Credit "{cat.license.credit}" and link to <a href={cat.license.credit_url}>{cat.license.credit_url.replace(/^https:\/\//, '')}</a>. For example:</p>
+  <blockquote><p>Listing from {cat.license.credit} ({cat.license.credit_url.replace(/^https:\/\//, '')}), CC BY 4.0. Source: the group's own page, checked on the date shown.</p></blockquote>
+  <p>The code that builds the site is under the MIT License, on <a href={repo}>GitHub</a>.</p>
+
+  <h2>Will the files change?</h2>
+  <p>We only add fields to version 1. We never remove or rename one. If we ever need to, we will publish a new version at <code>/api/v2/</code> and keep version 1 up for at least 6 months. A check runs on every change to make sure of this.</p>
+  <p>The files work from other websites too: GitHub Pages lets any site read them.</p>
+</Base>

@@ -41,6 +41,13 @@ export function GET({ site }) {
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
 
+## Data
+
+- [Open data](${u('/data/')}): how to reuse the listings, the license (CC BY 4.0) and how to cite
+- [API catalog](${u('/api/v1/index.json')}): JSON index of every data file, with counts, license and build time
+- [OpenAPI description](${u('/api/v1/openapi.yaml')}): every field in the JSON files
+- [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
+
 ## Notes for AI tools
 
 - Please link to the source listed on each item, not only to this site.
