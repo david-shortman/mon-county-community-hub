@@ -26,7 +26,7 @@
 
 ## What counts as "helped"
 
-<The result that would mean the change helped, written before you look. For example: "the hub page shows up in the plain search for q01". Also say what would count as "no change".>
+<The result that would mean the change helped, written before you look. For example: "our page shows up in the plain search for q01". Also say what would count as "no change".>
 
 ## Quality of the answer and use of it
 

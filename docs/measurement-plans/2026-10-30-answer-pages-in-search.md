@@ -1,4 +1,4 @@
-# Measurement plan: hub answer pages show up in search
+# Measurement plan: our answer pages show up in search
 
 - **Written:** 2026-10-30, before the end-of-sprint findability recheck
 - **Change:** the answer pages shipped in the October 30 to November 1 backlog sprint (#529), and the leading measure added to `score.py` (#110)
@@ -6,7 +6,7 @@
 
 ## Question
 
-When a resident searches one of our 32 findability questions in plain words, does a hub page that answers it show up?
+When a resident searches one of our 32 findability questions in plain words, does a page on our site that answers it show up?
 
 ## Level
 
@@ -14,11 +14,11 @@ When a resident searches one of our 32 findability questions in plain words, doe
 
 ## Main measure
 
-The number of findability questions where `hub_in_results` is `true`: a hub page showed up in the plain or the reworded search. Counted by `python3 content/findability/score.py <run file>` ("Hub page showed up in search").
+The number of findability questions where `hub_in_results` is `true`: one of our pages showed up in the plain or the reworded search. Counted by `python3 content/findability/score.py <run file>` ("Our page showed up in search").
 
 ## Baseline
 
-0 questions, on 2026-10-28 (same-day recheck, [`content/findability/2026-10-28b.yaml`](../../content/findability/2026-10-28b.yaml)). At that time 6 of 32 questions had a hub answer page, and none showed up in search.
+0 questions, on 2026-10-28 (same-day recheck, [`content/findability/2026-10-28b.yaml`](../../content/findability/2026-10-28b.yaml)). At that time 6 of 32 questions had an answer page on our site, and none showed up in search.
 
 ## Check date
 
@@ -26,13 +26,13 @@ The number of findability questions where `hub_in_results` is `true`: a hub page
 
 ## What counts as "helped"
 
-- **Helped:** a hub page shows up in search for at least 3 questions on the check date.
+- **Helped:** one of our pages shows up in search for at least 3 questions on the check date.
 - **Some sign:** 1 or 2 questions.
 - **No change:** 0 questions. That would most likely mean the pages are not indexed yet, not that they are bad answers. The next step would then be the search engine accounts and domain decision (#89).
 
 ## Quality of the answer and use of it
 
-- **Answer quality:** every hub page counted here must have a source and a checked date on each fact (the build checks enforce this), and its findability note must say the page answers the exact question.
+- **Answer quality:** every page counted here must have a source and a checked date on each fact (the build checks enforce this), and its findability note must say the page answers the exact question.
 - **Use:** not measurable yet. The site has no analytics, which is David's decision (#41).
 
 ## What else could explain a change
@@ -43,9 +43,9 @@ The number of findability questions where `hub_in_results` is `true`: a hub page
 
 ## Exploratory measures
 
-- The leading measure: how many questions have a hub answer page at all.
-- Whether any official page links to a hub page.
-- The overall findability score. It should move only after hub pages show up in search.
+- The leading measure: how many questions have an answer page on our site at all.
+- Whether any official page links to one of our pages.
+- The overall findability score. It should move only after our pages show up in search.
 
 ## Counting rules
 
