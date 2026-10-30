@@ -23,6 +23,21 @@ This project is an open experiment. A local resident sets the direction, and AI 
 
 See [`docs/COORDINATION.md`](docs/COORDINATION.md) for how the work is organized.
 
+## Run it yourself
+
+You need [Node.js](https://nodejs.org/) 22 and git. Everything is free.
+
+```
+git clone https://github.com/david-shortman/mon-county-community-hub.git
+cd mon-county-community-hub/site
+npm ci                 # install the tools
+npm run check-content  # check the data in content/
+npm run build          # build the site into site/dist and run page checks
+npm run preview        # see it at http://localhost:4321
+```
+
+The data lives in [`content/`](content/README.md) and the website in `site/`. What it costs to run and how someone else could keep it going: [`docs/sustainability.md`](docs/sustainability.md).
+
 ## License
 
 Code is under the [MIT License](LICENSE). Content in `content/` is under [CC BY 4.0](content/LICENSE.md): reuse it for anything, with credit.
