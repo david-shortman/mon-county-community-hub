@@ -1,6 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, telHref } from '../lib/content.mjs';
 export const page = { door: "this-month", topic: "money", label: "Help paying a utility bill", summary: "Heat, water or electric, before or after a shutoff" };
+// Each program reads its phone and sources from its resource record, so its
+// source and checked date sit right under it (#135).
+const monPower = resource('mon-power-payment-help');
+const mub = resource('mub-customer-service');
+const lieap = resource('lieap-heating-help');
+const emergency = resource('wv-emergency-assistance-utility');
+const def = resource('dollar-energy-fund-mon-power');
+const wv211 = resource('wv-211');
+const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/monongalia_county_assistance_p.html', checked: '2026-10-28', name: 'Need Help Paying Bills (a national directory)' }];
 ---
 <Base title="Help paying a utility bill in Morgantown and Mon County" description="What to do if you cannot pay a heat, water or electric bill in Morgantown and Monongalia County: who to call first, and the programs that can help.">
   <h1>Help paying a utility bill</h1>
@@ -9,8 +20,8 @@ export const page = { door: "this-month", topic: "money", label: "Help paying a 
   <h2>Step 1: Call your utility first</h2>
   <p>Tell them you cannot pay in full. Ask for a payment plan and ask what help they know about. Keep your shutoff notice, because some programs ask for it.</p>
   <ul>
-    <li><strong>Mon Power (electric):</strong> <a href="tel:8006860022">800-686-0022</a>. Mon Power lists payment arrangements (installments added to your monthly bill), a later due date for customers who are 60 or older and get Social Security, a pension or disability benefits, and a way to have a friend, relative, clergy member or agency told before a disconnection. If someone at home uses electric medical equipment, ask about its Critical Care program.</li>
-    <li><strong>Morgantown Utility Board (water and sewer):</strong> <a href="tel:3042928443">304-292-8443</a>, Monday to Friday, 8 a.m. to 4:30 p.m. (staffed around the clock for emergencies). Email customer-service@mub.org, or visit 278 Greenbag Road. MUB's website does not currently describe payment plans or shutoff rules, so ask on the phone. If water is shut off, you have to call to get it turned back on.</li>
+    <li><strong>Mon Power (electric):</strong> <a href={telHref(monPower.contact.phone)}>{monPower.contact.phone}</a>. Mon Power lists payment arrangements (installments added to your monthly bill), a later due date for customers who are 60 or older and get Social Security, a pension or disability benefits, and a way to have a friend, relative, clergy member or agency told before a disconnection. If someone at home uses electric medical equipment, ask about its Critical Care program. <SourceLine sources={monPower.sources} org={monPower.org} about="Mon Power" /></li>
+    <li><strong>Morgantown Utility Board (water and sewer):</strong> <a href={telHref(mub.contact.phone)}>{mub.contact.phone}</a>, Monday to Friday, 8 a.m. to 4:30 p.m. (staffed around the clock for emergencies). Email customer-service@mub.org, or visit 278 Greenbag Road. MUB's website does not currently describe payment plans or shutoff rules, so ask on the phone. If water is shut off, you have to call to get it turned back on. <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" /></li>
     <li><strong>Gas or bulk fuel (propane, oil):</strong> call your supplier. We did not research gas utilities for this page.</li>
   </ul>
 
@@ -20,16 +31,19 @@ export const page = { door: "this-month", topic: "money", label: "Help paying a 
   <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Eligibility depends on household income, household size and whether you pay for your own heat. The maximum benefit last season was $2,000 per household.</p>
   <ul>
     <li><strong>Last season (2026):</strong> applications were mailed starting January 5 to households that got LIEAP the season before, older adults and people with disabilities, due January 30 or until money ran out. Everyone else could apply starting February 2.</li>
-    <li><strong>This season:</strong> we could not find 2026-27 dates yet. Season dates are not guessed here, so check the DoHS site or call <a href="tel:8006428589">800-642-8589</a>.</li>
+    <li><strong>This season:</strong> we could not find 2026-27 dates yet. Season dates are not guessed here, so check the DoHS site or call <a href={telHref(lieap.contact.phone)}>{lieap.contact.phone}</a>.</li>
     <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel. Do not mail the form to your utility.</li>
     <li><strong>Emergency help:</strong> Mon Power's page says LIEAP includes one emergency payment per heating season to stop a shutoff or restore service, for customers who got a termination notice after qualifying for LIEAP.</li>
   </ul>
+  <SourceLine sources={lieap.sources} org={lieap.org} about="LIEAP" />
 
   <h3>Emergency Assistance (state)</h3>
-  <p>Mon Power's page lists a one-time payment, open year-round, for customers at risk of shutoff. Bring your disconnect notice to your county DoHS office, or call <a href="tel:3045580684">304-558-0684</a>.</p>
+  <p>Mon Power's page lists a one-time payment, open year-round, for customers at risk of shutoff. Bring your disconnect notice to your county DoHS office, or call <a href={telHref(emergency.contact.phone)}>{emergency.contact.phone}</a>.</p>
+  <SourceLine sources={emergency.sources} org={emergency.org} about="Emergency Assistance" />
 
   <h3>Dollar Energy Fund (electric)</h3>
-  <p>A hardship fund for Mon Power customers with a recent financial hardship. Mon Power says it opens October 1 and stays open until the money runs out. Apply through a local agency (call <a href="tel:8006837036">800-683-7036</a> or use the <a href="https://www.dollarenergy.org">Dollar Energy Fund agency finder</a>). Its water program rules say grants cannot cover deposits or reconnection fees.</p>
+  <p>A hardship fund for Mon Power customers with a recent financial hardship. Mon Power says it opens October 1 and stays open until the money runs out. Apply through a local agency (call <a href={telHref(def.contact.phone)}>{def.contact.phone}</a> or use the <a href={def.contact.url}>Dollar Energy Fund agency finder</a>).</p>
+  <SourceLine sources={def.sources} org={def.org} about="Dollar Energy Fund" />
 
   <h3>Local charities</h3>
   <p>These groups have helped Morgantown residents with utility bills, but their money is limited and we could not confirm current rules or hours. Call before you go and ask what to bring.</p>
@@ -37,15 +51,18 @@ export const page = { door: "this-month", topic: "money", label: "Help paying a 
     <li><strong>Christian Help</strong>, 219 Walnut Street: <a href="tel:3042960221">304-296-0221</a></li>
     <li><strong>The Salvation Army of Morgantown</strong>, 1264 University Ave.: <a href="tel:3042963525">304-296-3525</a></li>
   </ul>
+  <SourceLine sources={charitySources} about="local charities" />
 
   <h3>Not sure where to start?</h3>
   <p>Call <strong>211</strong>, text your ZIP code to 898211, or visit <a href="https://wv211.org">wv211.org</a>. They can point you to programs near you.</p>
+  <SourceLine sources={wv211.sources} org={wv211.org} about="211" />
 
   <h2>Lower the bill for next time</h2>
   <p>Mon Power's page lists free home weatherization and a repair-or-replace program for broken heating systems, both through your local Community Action Agency. Ask 211 which agency serves you.</p>
+  <SourceLine sources={monPower.sources} org={monPower.org} about="lowering the bill" />
 
   <div class="note">
     <p><strong>Do this today:</strong> call your utility, ask for a payment plan, then call 211.</p>
   </div>
-  <p class="meta">Sources, checked October 28, 2026: <a href="https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html">Mon Power assistance programs</a>, <a href="https://dohs.wv.gov/article/west-virginia-department-human-services-announces-automatic-lieap-application-mailing-low">WV DoHS LIEAP announcement (December 18, 2025)</a>, <a href="https://mub.org">mub.org</a>, and local directory listings for Christian Help and the Salvation Army (<a href="https://www.needhelppayingbills.com/html/monongalia_county_assistance_p.html">needhelppayingbills.com</a>). Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
