@@ -41,7 +41,7 @@ doors:
   - slug: care
     name: Get care
     page: /care/
-    hint: Mental health, care you can afford, a dentist, Medicaid
+    hint: A dentist, help paying for medicine, shots, turning 65
     icon: health
     examples:
       # Ranked by local need (#475). Each shows once its page exists.
