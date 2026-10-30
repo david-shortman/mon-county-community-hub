@@ -5,6 +5,7 @@ export const page = { door: "family", topic: "family", label: "Shots and physica
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const MCS = 'https://www.boe.mono.k12.wv.us/o/mcs/page/health-forms';
 const MCS712 = 'https://www.boe.mono.k12.wv.us/o/mcs/page/7th-12th-grade-immunizations';
+// The county schools' site links these state charts through 5il.co short links; no direct state URL was live on 2026-10-30.
 const NEW = 'https://5il.co/2ng37';
 const PREK = 'https://5il.co/2ng3a';
 const WVSSAC = 'https://www.wvssac.org/new-physical-forms-for-2026-27-available/';
@@ -22,7 +23,7 @@ const GOV = 'https://governor.wv.gov/article/governor-morrisey-applauds-major-le
   <p>The schools say a 7th or 12th grader without proof on the first day is sent home until the school gets it. Those days count as unexcused absences.</p>
 
   <h2>New to school in West Virginia</h2>
-  <p>A child starting school in West Virginia for the first time, in any grade, needs proof of shots for diphtheria, tetanus, whooping cough, polio, measles, mumps, rubella, chickenpox and hepatitis B. The state's chart says how many doses of each (<a href={NEW}>state chart, PDF</a>). Pre-K has its own, shorter list (<a href={PREK}>Pre-K chart, PDF</a>). Both charts are posted on the county schools' <a href={MCS}>health forms page</a>.</p>
+  <p>A child starting school in West Virginia for the first time, in any grade, needs proof of shots for diphtheria, tetanus, whooping cough, polio, measles, mumps, rubella, chickenpox and hepatitis B. The state's chart says how many doses of each (<a href={NEW}>state chart, PDF posted by the county schools</a>). Pre-K has its own, shorter list (<a href={PREK}>Pre-K chart, PDF posted by the county schools</a>). You can also find both on the county schools' <a href={MCS}>health forms page</a>.</p>
 
   <h2>Health check and dental forms</h2>
   <p>Each year, students in <strong>Pre-K, kindergarten, 2nd, 7th and 12th grade</strong> need a current health check form and a dental form, turned in at or before the start of the school year (<a href={MCS}>Monongalia County Schools</a>).</p>
@@ -39,7 +40,7 @@ const GOV = 'https://governor.wv.gov/article/governor-morrisey-applauds-major-le
   <p>Your child's doctor can also give school shots.</p>
 
   <h2>What about exemptions?</h2>
-  <p>A doctor who has treated or examined your child can ask the state for a medical exemption (<a href={NEW}>state chart, PDF</a>). Rules on exemptions for religious reasons have been fought over in court since 2025 (<a href={GOV}>Governor's office, November 2025</a>). We could not find a current official page that says what applies now, so we do not list the rule here. Ask your child's school or the health department.</p>
+  <p>A doctor who has treated or examined your child can ask the state for a medical exemption (<a href={NEW}>state chart, PDF posted by the county schools</a>). Rules on exemptions for religious reasons have been fought over in court since 2025 (<a href={GOV}>Governor's office, November 2025</a>). We could not find a current official page that says what applies now, so we do not list the rule here. Ask your child's school or the health department.</p>
 
   <h2>Questions?</h2>
   <AnswerFacts slug="mcs-school-shots-and-health-forms" linkLabel="County schools health forms page" />
