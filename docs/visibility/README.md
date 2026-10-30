@@ -29,4 +29,4 @@ If our help is digital, people have to be able to find it. This page explains th
 
 While the site lives at `david-shortman.github.io/mon-county-community-hub`, `robots.txt` and `llms.txt` sit under that folder, not at the root of the host. Crawlers look for `robots.txt` at the host root, so they will not see ours yet. The sitemap still works when submitted directly. A custom domain (#89) fixes this; when it arrives, update `site` and `base` in `astro.config.mjs`.
 
-The share image is a plain green banner. A designed one can replace `site/public/share.png` (1200 by 630).
+The share image (`site/public/share.png`, 1200 by 630) shows the icon beside the site name. Redraw it with `node scripts/make-share-image.mjs` in `site/` (see the icon section of `docs/design/identity.md`).
