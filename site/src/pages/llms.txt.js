@@ -12,6 +12,7 @@ export function GET({ site }) {
 - [Search](${u('/search/')}): search every page; runs in the browser, nothing is sent to the site
 - [Deadlines and dates](${u('/calendar/')}): application windows, deadlines, and community dates
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
+- [This month in Mon County](${u('/calendar/month/')}): the next 30 days from the calendar on one page you can print
 - [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
 - [Get through this month](${u('/money/')}): pick what is going on (a utility or other bill, short on food, behind on rent, cash fast or a payday loan, free tax help) and get local steps in order, with phone numbers and sources; also the scam warning
@@ -34,12 +35,22 @@ export function GET({ site }) {
 - [Living here](${u('/living-here/')}): pick what is going on (moving here, trash pickup day, recycling drop-off, tires or electronics) and get local steps with phone numbers and sources
 - [Family and life changes](${u('/family/')}): pick what is going on (a baby or young child, a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
 - [Moving here: start power, water, gas and trash](${u('/moving-here/')}): how to start service with Mon Power, the Morgantown Utility Board and Hope Gas, town trash pickup in Star City and Granville, deposits and fees, and who to ask
+- [Is my home in a flood zone or a slide area?](${u('/flood-zone/')}): check an address on the WV Flood Tool, the FEMA flood map and the WV Landslide Tool, flood insurance basics (most home and renters insurance does not cover floods, 30 day wait), and the county floodplain permit
 - [Trash, recycling and drop-off](${u('/recycling/')}): pickup days, what goes in the curbside bin, and where to take hard items
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
+- [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
+- [Serve on a city board](${u('/make-it-better/boards/')}): city boards that shape how Morgantown looks and feels (Urban Landscape Commission, Tree Board, Cultural Arts, Historic Landmarks, Planning, and more), what each does, when it meets, open seats from the city's vacancy list, and how to apply
+
+## Data
+
+- [Open data](${u('/data/')}): how to reuse the listings, the license (CC BY 4.0) and how to cite
+- [API catalog](${u('/api/v1/index.json')}): JSON index of every data file, with counts, license and build time
+- [OpenAPI description](${u('/api/v1/openapi.yaml')}): every field in the JSON files
+- [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
 
 ## Notes for AI tools
 

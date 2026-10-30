@@ -33,6 +33,20 @@ const read = (file) => {
   return '';
 };
 
+// Hiding an item is not deleting it (#519, #520): a content file whose only
+// change is adding or editing its `hidden` block does not wait for David.
+// Un-hiding does, since the facts come back on the site.
+const forkPoint = (() => { try { return git('merge-base', base, 'HEAD').trim(); } catch { return base; } })();
+const showAt = (ref, file) => { try { return git('show', `${ref}:${file}`); } catch { return null; } };
+const withoutHidden = ({ hidden, ...rest }) => JSON.stringify(rest);
+function onlyHides(file) {
+  try {
+    const before = YAML.parse(showAt(forkPoint, file) ?? '');
+    const after = YAML.parse(showAt('HEAD', file) ?? '');
+    return Boolean(before && after?.hidden) && withoutHidden(before) === withoutHidden(after);
+  } catch { return false; }
+}
+
 for (const file of changed) {
   const page = PAGES.find((p) => (p.endsWith('/') ? file.startsWith(p) : file === p));
   if (page) { console.log(`${file}: a shelter, crisis, food or benefits page`); continue; }
@@ -46,6 +60,7 @@ for (const file of changed) {
     continue;
   }
   if (!CONTENT.test(file)) continue;
+  if (onlyHides(file)) continue;
   const text = read(file);
   let topics = [];
   try { topics = [].concat(YAML.parse(text)?.topics ?? []); } catch { /* bad YAML is check-content's job */ }

@@ -75,6 +75,10 @@ doors:
       moving: Moving here
       recycling: Trash and recycling
       voting: Voting
+      secondhand: Thrift and secondhand
+      market: Markets and sales
+      growing: Growing food and flowers
+      weather: Storms and floods
   - slug: family
     name: Family and life changes
     page: /family/
@@ -99,6 +103,7 @@ doors:
     topics:
       community: Community life
       government: City and county government
+      better: Make it better
 
 # Lanes are not doors. Help now is the urgent lane on every screen. Dates is
 # the one calendar. About holds pages about the project itself. A page tagged
