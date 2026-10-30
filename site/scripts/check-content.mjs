@@ -70,7 +70,7 @@ function checkRecord(e, required, known) {
     else if (checked > todayYmd()) errors.push(`${where}: source checked date ${checked} is in the future`);
     else if (checked < stale) warnings.push(`${where}: source last checked ${checked}, re-verify`);
   }
-  if (JSON.stringify(e).includes('—')) errors.push(`${where}: contains an em dash`);
+  if (JSON.stringify(e).includes('\u2014')) errors.push(`${where}: contains an em dash`);
 }
 
 const orgs = loadDir('orgs');
