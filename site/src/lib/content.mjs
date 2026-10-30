@@ -66,6 +66,7 @@ export function upcoming(entries, today = todayYmd(), days = 62) {
 // "13:05" -> "1:05 p.m."; "08:00" -> "8 a.m."
 function prettyTime(t) {
   const [h, m] = t.split(':').map(Number);
+  if (h === 12 && !m) return 'noon';
   return `${h % 12 || 12}${m ? `:${String(m).padStart(2, '0')}` : ''} ${h < 12 ? 'a.m.' : 'p.m.'}`;
 }
 export function prettyTimes(start, end) {
