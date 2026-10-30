@@ -1,0 +1,22 @@
+---
+// One place on a crisis page (#175): name, hours in words, who it is for,
+// how to get in, then big buttons (Call, Directions, Text) and the source.
+// Everything comes from the resource record: hours from `hours` (#139), the
+// address from `contact.place`. The source link names the place, so no two
+// links on the page sound the same (#140).
+import Actions from './Actions.astro';
+import { prettyDate, ymd, shortUrl } from '../lib/content.mjs';
+const { r, headingLevel = 3 } = Astro.props;
+const H = `h${headingLevel}`;
+const checked = r.sources.map((s) => ymd(s.checked)).sort()[0];
+const textLine = r.contact.text;
+---
+<article class="card place" id={r.slug}>
+  <H>{r.title}</H>
+  {r.hours && <p class="when">{r.hours}</p>}
+  <p><strong>Who it is for:</strong> {r.who_it_is_for}</p>
+  <p><strong>How to get in:</strong> {r.what_to_do}</p>
+  {r.cost && <p><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>}
+  <Actions callFirst phone={r.contact.phone} phoneLabel={r.title} sms={textLine} smsLabel={`${r.title}, send your ZIP code`} place={r.contact.place} about={r.title} />
+  <p class="meta">Last checked {prettyDate(checked)}. {r.sources.map((s, i) => <>{i ? ', ' : ''}<a href={s.url}>Source<span class="sr-only"> for {r.title}</span>: {shortUrl(s.url)}</a></>)}{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) && <>, <a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a></>}.</p>
+</article>

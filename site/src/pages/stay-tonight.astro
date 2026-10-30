@@ -1,47 +1,82 @@
 ---
+// Help now (#175, the urgent lane in #248), on the crisis pattern from
+// docs/design/presentation.md: the crisis strip and quick exit (#174) on top,
+// four big choices, then places. Only real, sourced places from
+// content/resources/; where we have none, the section says so and points to
+// 211. No script needed. The /stay-tonight/ link stays the same.
 import Base from '../layouts/Base.astro';
-import { loadDir, ymd, prettyDate, shortUrl } from '../lib/content.mjs';
-export const page = { door: "help-now", label: "Where to stay tonight", summary: "Emergency shelter, a 24-hour hotline, and 211" };
-
-// Order matters: shelter first, then the domestic violence hotline, then the 211 fallback.
-const slugs = ['grace-shelter', 'rdvic-hotline', 'wv-211'];
-const hours = {
-  'grace-shelter': 'Open 24/7',
-  'rdvic-hotline': 'Hotline answers 24 hours a day',
-  'wv-211': 'Call, text or chat any time',
-};
-const all = loadDir('resources');
-const cards = slugs.map((s) => all.find((r) => r.slug === s)).filter(Boolean).map((r) => {
-  const dates = r.sources.map((s) => ymd(s.checked)).sort();
-  return { ...r, checked: dates[0] };
-});
-const digits = (p) => p.replace(/\D/g, '');
+import PlaceCard from '../components/PlaceCard.astro';
+import HelpNowSources from '../components/HelpNowSources.astro';
+import Icon from '../components/Icon.astro';
+import Actions from '../components/Actions.astro';
+import { resource, telHref } from '../lib/content.mjs';
+export const page = { door: "help-now", label: "Where to stay tonight", summary: "A bed tonight, a warm place, food tonight, or safe from someone" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const grace = resource('grace-shelter');
+const rdvic = resource('rdvic-hotline');
+const r211 = resource('wv-211');
+const r988 = resource('988-lifeline');
+const choices = [
+  { href: '#bed', label: 'A bed tonight', icon: 'bed' },
+  { href: '#warm', label: 'A warm place right now', icon: 'home' },
+  { href: '#food', label: 'Food tonight', icon: 'food' },
+  { href: '#safe', label: 'Safe from someone', icon: 'people' },
+];
 ---
-<Base title="Where to stay tonight in Morgantown, WV" description="Emergency shelter, a 24-hour hotline, and 211 for people in Morgantown and Monongalia County who need a place to stay tonight.">
+<Base crisis title="Where to stay tonight in Morgantown, WV" description="A bed tonight, a warm place, food tonight, or safety from someone, in Morgantown and Monongalia County: emergency shelter, a 24-hour hotline, and 211.">
   <h1>Where to stay tonight</h1>
-  <p class="lede">If you need a bed or a safe place right now, call one of these. All three are free.</p>
+  <p class="lede">All of these are free. Tap what you need.</p>
+  <p class="meta">"Leave this page" opens a weather site. It does not erase your history. <a href="#leave-note">More about staying safe online</a>.</p>
 
-  {cards.map((r) => (
-    <section class="card stay">
-      <h2>{r.title}</h2>
-      <p><a class="callbtn" href={`tel:${digits(r.contact.phone)}`}>Call {r.contact.phone}</a></p>
-      <p class="when">{hours[r.slug]}</p>
-      <p><strong>Who it serves:</strong> {r.who_it_is_for}</p>
-      <p><strong>How to get in:</strong> {r.what_to_do}</p>
-      <p class="meta">Last checked {prettyDate(r.checked)}. {r.sources.map((s, i) => <>{i ? ', ' : ''}<a href={s.url}>Source: {shortUrl(s.url)}</a></>)}{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) ? <>, <a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a></> : null}</p>
-    </section>
-  ))}
+  <nav aria-label="What do you need?">
+    <ul class="choices4">
+      {choices.map((c) => <li><a href={c.href}><Icon name={c.icon} /><span>{c.label}</span></a></li>)}
+    </ul>
+  </nav>
 
-  <div class="note">
-    <p><strong>In danger right now?</strong> Call <a href="tel:911">911</a>.</p>
-    <p><strong>Winter warming shelter:</strong> no opening date or hours have been announced for this winter yet. In August, local news reported that Catholic Charities West Virginia plans to run it on the first floor of Hazel's House of Hope on Scott Avenue in Morgantown, with money from the city and a funding request to the county. Call 211 for the latest. <span class="meta">Last checked October 29, 2026. <a href="https://wajr.com/2026/08/24/catholic-charities-west-virginia-makes-request-to-mon-county-commission-for-warming-shelter-funding/">Source: wajr.com</a></span></p>
-  </div>
+  <section class="need" id="bed" aria-labelledby="bed-h">
+    <h2 id="bed-h">A bed tonight</h2>
+    <PlaceCard r={grace} />
+    <p>Full, or not for you? Call <a href={telHref(r211.contact.phone)}>211</a>. They know who has room.</p>
+  </section>
 
+  <section class="need" id="warm" aria-labelledby="warm-h">
+    <h2 id="warm-h">A warm place right now</h2>
+    <p>We have not found a sourced daytime warming place to list yet. <a href="#bed">Grace Shelter</a> is for adults. {grace.hours}. For other places to get warm, call <a href={telHref(r211.contact.phone)}>211</a>.</p>
+    <div class="note">
+      <p><strong>Winter warming shelter:</strong> no opening date or hours have been announced for this winter yet. In August, local news reported that Catholic Charities West Virginia plans to run it on the first floor of Hazel's House of Hope on Scott Avenue in Morgantown, with money from the city and a funding request to the county. Call 211 for the latest. <span class="meta">Last checked October 29, 2026. <a href="https://wajr.com/2026/08/24/catholic-charities-west-virginia-makes-request-to-mon-county-commission-for-warming-shelter-funding/">Source: wajr.com</a></span></p>
+    </div>
+  </section>
+
+  <section class="need" id="food" aria-labelledby="food-h">
+    <h2 id="food-h">Food tonight</h2>
+    <p>We have not found a sourced place for a free meal tonight yet. Call or text <a href={telHref(r211.contact.phone)}>211</a> and ask what is open now. For food today or this week, see <a href={`${base}/help/food/today/other/`}>food today or this week</a>.</p>
+  </section>
+
+  <section class="need" id="safe" aria-labelledby="safe-h">
+    <h2 id="safe-h">Safe from someone</h2>
+    <PlaceCard r={rdvic} />
+    <p>In danger right now? Call <a href="tel:911">911</a>. Thinking about suicide, or in a mental health crisis? Call or text 988, any hour.</p>
+    <Actions callFirst phone={r988.contact.phone} phoneLabel={r988.title} sms={r988.contact.phone} smsLabel={r988.title} />
+  </section>
+
+  <section class="note" aria-labelledby="unsure-h">
+    <h2 id="unsure-h">Not sure where to go?</h2>
+    <p>Call <a href={telHref(r211.contact.phone)}>211</a>, text your ZIP code to <a href={`sms:${r211.contact.text.replace(/\D/g, '')}`}>{r211.contact.text}</a>, or chat at <a href={r211.contact.url}>wv211.org</a>. It is free and open {r211.hours.toLowerCase().replace(/^open /, '')}.</p>
+  </section>
+
+  <HelpNowSources />
+
+  <p class="meta" id="leave-note"><strong>About "Leave this page":</strong> it opens a weather site, and on a keyboard you can also press Shift three times. It does not erase your history. If someone may check your phone, use a private window or clear this page from your history. The National Domestic Violence Hotline has <a href="https://www.thehotline.org/plan-for-safety/internet-safety/">internet safety tips</a>.</p>
   <p class="meta">Hours and bed counts can change. Call before you go. We describe these services and do not decide who can stay. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
 
 <style>
-  .stay h2 { margin: 0 0 8px; font-size: 1.2rem; }
-  .callbtn { display: block; text-align: center; background: var(--accent); color: var(--bg); font-weight: 700; font-size: 1.3rem; text-decoration: none; border-radius: 10px; padding: 14px 16px; }
-  @media (min-width: 40rem) { .callbtn { display: inline-block; } }
+  .choices4 { list-style: none; margin: 12px 0 8px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .choices4 a { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 96px; padding: 12px; border-radius: 12px; background: var(--accent-bg); border: 2px solid var(--accent); color: var(--fg); text-decoration: none; font-weight: 700; line-height: 1.2; }
+  .choices4 a:hover span { text-decoration: underline; }
+  .choices4 .icon { color: var(--accent); width: 30px; height: 30px; }
+  .need h2 { margin-top: 1.6em; }
+  .place h3 { margin: 0 0 4px; font-size: 1.2rem; }
+  .place .when { font-size: 1.05rem; }
 </style>

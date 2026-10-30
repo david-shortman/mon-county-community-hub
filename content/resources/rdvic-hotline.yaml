@@ -4,10 +4,11 @@ org: rdvic
 topics: [housing, health, family]
 who_it_is_for: Anyone affected by domestic or sexual violence in Monongalia, Preston, or Taylor County.
 what_to_do: Call the hotline any time, day or night. Emergency shelter is one of the services they offer.
+hours: Hotline answers 24 hours a day
 contact:
   phone: "304-292-5100"
   url: https://fris.org/centers/rdvic/
 cost: free
 sources:
   - url: https://fris.org/centers/rdvic/
-    checked: 2026-10-28
+    checked: 2026-10-30

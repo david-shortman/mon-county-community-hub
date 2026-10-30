@@ -2,9 +2,10 @@
 import RidgeLine from '../components/RidgeLine.astro';
 import Icon from '../components/Icon.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import CrisisStrip from '../components/CrisisStrip.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
 import { loadDoors } from '../lib/content.mjs';
-const { searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
+const { crisis = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(/\.\w+$/.test(Astro.url.pathname) ? Astro.url.pathname : Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
 const shareImage = new URL(`${base}/share.png`, Astro.site).href;
@@ -57,6 +58,7 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {crisis && <meta name="referrer" content="no-referrer" />}
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Mon County Community Hub" />
@@ -230,15 +232,24 @@ const fullTitle = title ? `${title} | Mon County Community Hub` : 'Mon County Co
       .step-cost { margin: 4px 0; font-size: 0.95rem; }
       .keep-steps { margin-top: 18px; }
       @media print {
-        header.site, nav.main, footer.site, .skip, .crumbs, .door-pick, .sit-links, .keep-steps, .cant-wait .crisis-btns { display: none !important; }
+        header.site, nav.main, footer.site, .skip, .crisis-strip, .crumbs, .door-pick, .sit-links, .keep-steps, .cant-wait .crisis-btns { display: none !important; }
         body { padding: 0; background: #fff; color: #000; }
         .step { break-inside: avoid; }
       }
+      /* Crisis strip and quick exit (#174), on safety pages only */
+      .crisis-strip { position: sticky; top: 0; z-index: 15; background: var(--accent-bg); border-bottom: 2px solid var(--brick); }
+      .crisis-strip .wrap { display: flex; align-items: center; gap: 12px; padding-block: 6px; }
+      .crisis-strip p { flex: 1; min-width: 0; margin: 0; font-size: 1rem; line-height: 1.5; font-weight: 600; }
+      .crisis-strip p a { font-weight: 800; padding: 6px 2px; }
+      .quick-exit { flex: none; display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
+      .quick-exit:hover { text-decoration: underline; }
+      html:has(.crisis-strip) { scroll-padding-top: 8rem; }
       footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; }
     </style>
   </head>
   <body>
     <a class="skip" href="#main">Skip to main content</a>
+    {crisis && <CrisisStrip />}
     <header class="site">
       <div class="wrap">
         <a class="brand" href={`${base}/`}>Mon County Community Hub</a>
