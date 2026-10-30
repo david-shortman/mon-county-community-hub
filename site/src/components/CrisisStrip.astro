@@ -24,6 +24,9 @@ const exitUrl = 'https://www.weather.gov/';
     var link = document.getElementById('quick-exit');
     if (link) link.addEventListener('click', function (ev) { ev.preventDefault(); leave(); });
     var count = 0, timer;
+    // Only three Shift presses in a row, within a second, leave. Any other key
+    // (typing a capital letter, sticky keys) starts the count over.
+    document.addEventListener('keydown', function (ev) { if (ev.key !== 'Shift') { count = 0; } });
     document.addEventListener('keyup', function (ev) {
       if (ev.key !== 'Shift') return;
       count++; clearTimeout(timer);
