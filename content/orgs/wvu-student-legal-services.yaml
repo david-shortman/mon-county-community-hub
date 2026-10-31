@@ -2,9 +2,12 @@ name: WVU Student Legal Services
 slug: wvu-student-legal-services
 kind: school
 website: https://studentlegalservices.wvu.edu/
-summary: A West Virginia University office that gives enrolled WVU students legal help with things like landlord and tenant problems, consumer problems and contracts.
+phone: "304-293-4897"
+summary: Free legal advice, help and mediation for WVU students, from WVU attorneys. Its office is in Elizabeth Moore Hall, Room G-5.
 topics: [legal]
 area: morgantown
 sources:
+  - url: https://studentlegalservices.wvu.edu/
+    checked: 2026-10-30
   - url: https://studentlegalservices.wvu.edu/slsfaq
     checked: 2026-10-30
