@@ -202,6 +202,35 @@ The findability check asks whether a resident can find an answer by searching. T
 - **What to bring** is missing on almost every source, ours included. Listing cards started showing it on 2026-10-30 (#159).
 - **Plain language:** the dentist and medicine page opens at about grade 12.
 
+### In-person listings by area
+
+Most residents live outside Morgantown city limits (`docs/playbook/audience-facts.md`), so we count where our own in-person listings are (#834). These are counts of listings, not of people. "Town" is the mailing town in the address, so Morgantown also covers addresses outside city limits. Rerun with each findability run: `node scripts/count-by-area.mjs` in `site/`.
+
+Counted on 2026-10-30:
+
+Resources: 134 listings, 39 with a street address.
+
+| Town in the address | Resources |
+|---|---|
+| Morgantown | 32 |
+| Bruceton Mills | 1 |
+| Clarksburg | 1 |
+| Core | 1 |
+| Fairmont | 1 |
+| Monongalia County | 1 |
+| Star City | 1 |
+| Westover | 1 |
+
+Gathering places: 19.
+
+| Area | Places |
+|---|---|
+| morgantown | 8 |
+| west | 7 |
+| south | 2 |
+| east | 1 |
+| north | 1 |
+
 ## Level 2: Use (not measured yet)
 
 Whether people use what we build. To be measured as aggregate counts only, with no tracking of individuals: page views per guide, calendar feed subscriptions, tool uses, searches on the site, and API or MCP calls. This needs a privacy-respecting analytics choice first, which is a `for:david` decision because it may involve an outside service. Until then: none.
