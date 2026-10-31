@@ -2,11 +2,16 @@
 import Base from '../../layouts/Base.astro';
 import HelpNow from '../../components/HelpNow.astro';
 import EventCard from '../../components/EventCard.astro';
-import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate, ymd } from '../../lib/content.mjs';
+import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate, ymd, chipDate, relativeLabel } from '../../lib/content.mjs';
 export const page = { door: "dates", label: "Deadlines and dates", summary: "Application windows, deadlines and community dates" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
 const items = upcoming(await loadCalendarWithFeeds(), today, 62);
+// "This week" lead block (#199): what starts, ends or is happening in the
+// next 7 days, as short lines that jump to each full card below.
+const weekEnd = new Date(`${today}T12:00:00Z`); weekEnd.setUTCDate(weekEnd.getUTCDate() + 7);
+const weekEndYmd = weekEnd.toISOString().slice(0, 10);
+const thisWeek = items.filter((e) => e.starts <= weekEndYmd).filter((e) => e.starts >= today || e.ends <= weekEndYmd).slice(0, 8);
 const now = items.filter((e) => e.starts <= today);
 const later = items.filter((e) => e.starts > today);
 // The page date is never older than an item's checked date (#51): the build
@@ -20,6 +25,17 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
 <Base help title="Deadlines and dates in Mon County, WV" description="Application windows, deadlines, and community dates in Mon County for this month and next.">
   <h1>Deadlines and dates in Mon County</h1>
   <p class="lede">Application windows, deadlines, and community dates for this month and next. Updated {prettyDate(updated)}.</p>
+  {thisWeek.length > 0 && (
+    <section class="week" aria-labelledby="week-h">
+      <h2 id="week-h">This week</h2>
+      <ul>
+        {thisWeek.map((e) => (
+          <li><a href={`#${e.slug}`}><span class="day">{e.starts >= today ? chipDate(e.starts, today) : `Ends ${chipDate(e.ends, today)}`}</span> <span class="what">{e.title}</span></a> <span class="rel" data-starts={e.starts} data-ends={e.ends}>{relativeLabel(e.starts, e.ends, today)}</span></li>
+        ))}
+      </ul>
+      <p class="meta"><a href="#dates">All dates</a> · <a href={`${base}/calendar/month/`}>This month on one page</a></p>
+    </section>
+  )}
   <section class="add-cal" aria-labelledby="add-cal-h">
     <h2 id="add-cal-h">Add to your calendar</h2>
     <p>Pick the app you use. New dates show up on their own. Dates can change, so check the source before you go.</p>
@@ -50,3 +66,12 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
 
   <p class="meta">Know a date that should be here? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Suggest it</a>.</p>
 </Base>
+<style>
+  .week ul { list-style: none; padding: 0; margin: 0; }
+  .week li { border-top: 1px solid var(--line); padding: 8px 0; }
+  .week li:last-child { border-bottom: 1px solid var(--line); }
+  .week a { display: inline-block; padding: 2px 0; text-decoration: none; }
+  .week .day { font-weight: 700; color: var(--accent); margin-right: 6px; }
+  .week .what { text-decoration: underline; }
+  .week .rel { color: var(--muted); font-size: 0.95rem; }
+</style>
