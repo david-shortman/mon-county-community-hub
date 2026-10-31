@@ -106,6 +106,7 @@ We are incubating, so the default is to ship and fix forward. Bad merges get rev
 - Deletes published content or a whole section of the site
 - Speaks for the project to a specific outside person or organization (outreach, press, partnership language)
 - Touches anything the author is unsure is public-safe
+- Changes what residents see about shelter, crisis help, food or benefits: any page in the Help now or Get through this month door, any page with topic `housing`, `money` or `food` or that names a crisis line (988, 211, 911), the Food help pages, the crisis strip and crisis line parts, and any `resources/`, `orgs/` or `calendar/` entry with topic `housing`, `money` or `food` or that names a crisis line. The High stakes check labels these `for:david` on its own (`site/scripts/high-stakes.mjs`). One exception: taking down or hiding a wrong item does not wait. Merge that, say so in the PR, and David checks it after.
 
 In those cases, add the `for:david` label to the PR and say what you need in the description. Everything else, merge it.
 

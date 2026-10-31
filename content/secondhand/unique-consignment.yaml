@@ -1,0 +1,21 @@
+name: Unique Consignment
+slug: unique-consignment
+kind: consignment
+area: university-ave
+run_by: Unique Consignment LLC
+address: "3438 University Ave, Morgantown, WV"
+sells: Used furniture, home decor, lighting, rugs, artwork and collectibles.
+takes: Furniture and home decor on consignment. Stop by, fill out a consignor form or call.
+goods: [home, vintage]
+buys_from_you: false
+url: http://www.uniquewv.com/
+url_label: Shop website
+status: likely
+note: Hours differ between sources. Check the shop website before you go.
+sources:
+  - url: http://www.uniquewv.com/
+    checked: 2026-10-30
+  - url: https://wrc.wvu.edu/resources/basic-needs/clothing
+    checked: 2026-10-30
+  - url: https://localvintagestores.com/west-virginia/morgantown/store/unique-consignment/
+    checked: 2026-10-30

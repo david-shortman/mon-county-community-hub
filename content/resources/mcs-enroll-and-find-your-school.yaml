@@ -1,0 +1,15 @@
+title: Sign up for school and find your school
+slug: mcs-enroll-and-find-your-school
+org: monongalia-county-schools
+topics: [family]
+who_it_is_for: Families with a child starting or moving to a Monongalia County public school, grades K to 12.
+what_to_do: First, find which schools serve your address on the district's Attendance Area Map. The district says the map is not guaranteed and should not be used to decide where to live, so call 304-291-9210 with questions. Then contact your child's school before you fill out the enrollment forms on the district's Enroll page. For kindergarten, the district posts each year's registration on the same page; the dates for 2027-28 are not posted yet.
+contact:
+  phone: "304-291-9210"
+  url: https://www.boe.mono.k12.wv.us/page/enroll-your-child
+  url_label: Enroll page
+sources:
+  - url: https://www.boe.mono.k12.wv.us/page/enroll-your-child
+    checked: 2026-10-30
+  - url: https://www.boe.mono.k12.wv.us/o/mcs/page/attendance-area-map
+    checked: 2026-10-30

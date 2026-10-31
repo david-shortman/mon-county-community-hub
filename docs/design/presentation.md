@@ -1,6 +1,6 @@
 # Presentation guide: showing information so it helps
 
-This guide says what shape each kind of information takes on the hub, so a person can understand it fast and act on it, on any phone. It sits next to two other guides:
+This guide says what shape each kind of information takes on the site, so a person can understand it fast and act on it, on any phone. It sits next to two other guides:
 
 - [`identity.md`](identity.md) covers how things look: colors, type, local words, and the mobile first rules (action buttons, tab bar, tap sizes).
 - The [design rubrics](../rubrics/README.md) cover how we score what we ship.
@@ -13,7 +13,7 @@ Last checked: October 30, 2026. The work to build it out is tracked in the epics
 
 These facts set the floor. Each one is sourced; see [Sources](#sources). The full set of county numbers, with years and gaps, is in [audience facts](../playbook/audience-facts.md).
 
-- **Almost everyone has a phone, and many have only a phone.** 91% of U.S. adults own a smartphone, and 16% use a smartphone with no home broadband (Pew, 2026). For many people the hub is a phone page or nothing.
+- **Almost everyone has a phone, and many have only a phone.** 91% of U.S. adults own a smartphone, and 16% use a smartphone with no home broadband (Pew, 2026). For many people the site is a phone page or nothing.
 - **Phones and data are often cheap and slow.** A typical phone today is about as fast as a $350 phone from 2020, on about 7 Mbps. A content site should load in 3 seconds on that phone, which means about 1.4 MB at most, with no more than 75 KB of script (Russell, 2024). Free or prepaid phones are slower than that, and data runs out.
 - **About 1 in 6 adults here reads at the lowest level, and about 1 in 4 struggles with numbers.** PIAAC estimates for Mon County are 16% for literacy and 26% for numeracy, against 21% and 33% for West Virginia (PIAAC Skills Map). People with limited literacy often spend 15 seconds or less on a page, skip dense text, reread words, rarely go back to the menu, and click only one or two search results (Health Literacy Online).
 - **People find help through other people.** Parents looking for services started with word of mouth, local Facebook groups, and professionals, not directories. Old info and broken links were what lost their trust (UK Department for Education research). So helpers who send a page to someone are a main audience too. The reaching people epic (#155) covers how we reach them; this guide covers what they see when they arrive.
@@ -67,20 +67,22 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Door cards** | The doors as big cards, each listing a few problems in residents' words that link straight to their page (or open the door with that problem picked) | Plain links | Exists (`DoorCards.astro`, home and search) |
 | **Pick what fits** | On a door page: "What's going on? Pick all that fit", then one set of steps grouped Today, This week and When it opens, each step ending in an action, with its cost and source. Picks live in the web address | A list of plain links to each situation's page | Exists (`DoorPage.astro`) |
 | **Four big choices** | Big buttons that jump to sections on a crisis page: "A bed tonight", "Food tonight" | Anchor links | Exists (`/stay-tonight/`) |
-| **Place card** | Name, hours in words, who it is for, how to get in, cost, action buttons, and a source link named for the place | Everything | Exists (`PlaceCard.astro`); the open now badge and tags are #176 |
-| **Tags** | Small icon plus word labels: walk in, appointment, no ID needed, free, hot meal, groceries, kid friendly, on a bus line | Plain text | #176 |
+| **Place card** | Name, hours in words, who it is for, how to get in, cost, action buttons, and a source link named for the place | Everything | Exists (`PlaceCard.astro`), with the town, an open now badge from `opening_hours` and word tags (#176, #395) |
+| **Tags** | Small icon plus word labels: walk in, appointment, no ID needed, free, hot meal, groceries, kid friendly, on a bus line | Plain text | Exists in `PlaceCard.astro` for how to get in and languages (#176) |
 | **Day list** | "Open today" first, then each day of the week, with jump links | Anchor links | Use in #60 |
 | **Days left chip** | "in 3 days", "closes Friday" next to the date | Worked out at build time; the site rebuilds every morning | Exists (calendar) |
-| **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list; each step is a native `details`, so it opens with no script | Door steps exist (`DoorPage.astro`). Topic routes exist: `Route` and `Milepost` (#240), first on `/utility-bills/`. Checklist, timeline and labeled picture are #179 |
+| **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list; each step is a native `details`, so it opens with no script | Door steps exist (`DoorPage.astro`). Topic routes exist: `Route` and `Milepost` (#240), first on `/utility-bills/`. They print every step, even with scripts off (#368) |
 | **Question path** | One question per small page that leads to an answer: "Where should I go for care?" | Each answer is a link to the next page | #178 |
-| **Checklist** | "What to bring" with tick boxes | Boxes work but do not save; script saves them on the phone only | #179 |
-| **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | #179 |
-| **Labeled picture** | A drawing of a letter or notice with numbered callouts that match a list below it | The list carries all the meaning; the picture only helps | #179 |
+| **Checklist** | "What to bring" with tick boxes | Boxes work but do not save; script saves them on the phone only | Exists (`Checklist.astro`), used for "What to have ready" in `WhatHappensNext` |
+| **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | Exists (`Timeline.astro`); no page uses it yet |
+| **Labeled picture** | A drawing of a letter or notice with numbered callouts that match a list below it | The list carries all the meaning; the picture only helps | Exists (`LabeledPicture.astro`): put our own small SVG in the slot, with numbered circles that match `items`. No page uses it yet; the first drawing is chosen with Duet |
 | **Printout** | A one page version that a pantry, library, or clinic can post | Print stylesheet | Door steps print cleanly; listing printouts and posters are #157 and #160 |
 | **Send by text** | A link that opens a text message with the page link filled in | An `sms:` link | Exists on door steps ("Text these steps to myself"); listings are #157 |
 | **Map on tap** | A Directions button that opens the phone's own map app | A link to the map app | Exists (`Actions`) |
 | **211 fallback** | The help now box | Plain links | Exists (`HelpNow`, and `HelpNowBar` on the home page) |
 | **Breadcrumb** | "Home › Get through this month" above the heading, from the page's tags | Plain links | Exists (`Breadcrumb.astro`) |
+| **Item lookup** | "What do you want to get rid of?": an A to Z list of things, each saying in one line where it goes and linking to its sourced details on the page | A plain list of anchor links | Exists (`/recycling/`, #199) |
+| **Area picker** | "Your area": a person picks a part of the county and that area's places move to the top. Saved on the phone only (localStorage), no location, no cookies | Hidden; the page lists every area in its usual order | Exists (`AreaPicker.astro`, first on `/thrift-shops/`, #152) |
 
 ## What every listing needs
 
@@ -97,7 +99,7 @@ People need these facts to decide whether to go, and they give up when the facts
 9. **Languages and access**, such as an interpreter or a step-free entrance, only when the source says. Never guess.
 10. **Last checked date and source**, always (already required).
 
-Resources now carry hours in words (`hours`) and an address (`contact.place`), from #139. How to get in, languages and access are still to come in #177, and what to bring and what happens next in #159. Both update `content/README.md` and the content check.
+Resources carry hours in words (`hours`) and an address (`contact.place`), from #139. Since #177 they can also carry hours the site can read (`opening_hours`), how to get in (`get_in`), and languages and access (`languages`, `access`); see "Listing facts for a place to go" in `content/README.md`. What to bring and what happens next are in #159.
 
 ## How the site is organized
 
@@ -116,14 +118,23 @@ Two layers cut across all of them: **Dates** (one calendar, shown on each door f
 
 ### Doors and pages
 
-| Door | Its page | Live inside it | Still to come |
-|---|---|---|---|
-| Help now (not a door) | `/stay-tonight/` | Grace Shelter, the domestic violence hotline, 211, 988 | A daytime warm place and food tonight, once sourced (#219, #60) |
-| Get through this month | `/money/` | Utility bills, food help and SNAP, rent, payday loans, free tax help | Housing (#202), food finder (#60), medical bills (#220) |
-| Get care | `/care/` | Flu and COVID shots, staying well, turning 65 | Where to go (#21), mental health (#203), dental and prescriptions (#220), Medicaid 2027 (#221), school and sports shots (#244), pregnant or new baby (#245) |
-| Living here | `/living-here/` | Trash and recycling | New here (#204), buses (#61), voting (points to the WV Secretary of State) |
-| Family and life changes | `/family/` | Work and learning, veterans | Kids and families (#225), disability and aging (#227), language help (#229) |
-| Your community | None yet | None yet | City or county (#20, #86), meetings (#12), how we are doing (#15, #62), small business (#19), giving (#63) |
+The live list of every page, by door and A to Z, is the Topics page (`/topics/`). The build makes it from each page's tags, so it is always current; this guide does not copy it.
+
+Each door and lane page has one job, and its first phone screen leads with the block that does it (#199):
+
+| Page | Its job, in a resident's words | Leads with |
+|---|---|---|
+| Help now, `/stay-tonight/` | "I need a bed, a warm place, food or safety now" | Crisis strip, then four big choices |
+| Get through this month, `/money/` | "I can't pay a bill or I'm short this month" | Pick what fits, then my steps |
+| Get care, `/care/` | "I need care and don't know where to start" | Pick what fits, then my steps |
+| Living here, `/living-here/` | "How do things work here?" | Pick what fits, then my steps |
+| Family and life changes, `/family/` | "Something changed for my family" | Pick what fits, then my steps |
+| Your community, `/community/` | "How can I take part?" | Pick what fits, then my steps |
+| Dates, `/calendar/` | "What is coming that I might miss?" | Open now and coming up; dates by town (#395) |
+| Utility bills, `/utility-bills/` | "My power, water or gas may be cut off" | A step route, call your utility first |
+| Recycling, `/recycling/` | "What do I do with this thing?" | Item lookup (#199) |
+| Flood zone, `/flood-zone/` | "Is my home at risk of flood or slide?" | A step route, look up the address first |
+| About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
 
 ### How new content slots in
 
@@ -216,6 +227,6 @@ Read on October 28, 2026.
 - UK Department for Education, [How parents find family services and information](https://design-histories.education.gov.uk/connect-families-to-support/single-directory-understanding-how-parents-find-family-services-and-information)
 - Digital Government Hub, [Basics of texting safety net clients](https://digitalgovernmenthub.org/wp-content/uploads/2022/11/Basics-of-Texting-Safety-Net-Clients-2022.pdf), 2022
 - West Virginia Bureau for Family Assistance, [West Virginia 211](https://bfa.wv.gov/page/west-virginia-211)
-- U.S. Census Bureau, American Community Survey for Monongalia County: [county profile on Census Reporter](https://censusreporter.org/profiles/05000US54061-monongalia-county-wv/) and tables S2801, S1810, B25044, and C16001 on data.census.gov. Compiled for the hub's audience research on October 28, 2026; data.census.gov could not be reached from the session that wrote this guide, so re-check before quoting on a resident page.
+- U.S. Census Bureau, American Community Survey for Monongalia County: [county profile on Census Reporter](https://censusreporter.org/profiles/05000US54061-monongalia-county-wv/) and tables S2801, S1810, B25044, and C16001 on data.census.gov. Compiled for the site's audience research on October 28, 2026; data.census.gov could not be reached from the session that wrote this guide, so re-check before quoting on a resident page.
 - City Population, [Monongalia County population by place](https://www.citypopulation.de/en/usa/westvirginia/54061__monongalia/) (share outside Morgantown city limits)
 - NCES, [PIAAC Skills Map, West Virginia](https://nces.ed.gov/surveys/piaac/skillsmap/src/PDF/WEST_VIRGINIA.pdf) (data 2012 to 2017)

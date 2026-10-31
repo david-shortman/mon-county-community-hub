@@ -4,6 +4,7 @@
 // look for this page, so it speaks for the project and waits for David (for:david).
 // Say only what the site does today. Planned work names its issue.
 import Base from '../layouts/Base.astro';
+import PromiseNumbers from '../components/PromiseNumbers.astro';
 import { loadDir } from '../lib/content.mjs';
 export const page = { door: "about", label: "For groups and helpers", summary: "Fix your listing, reuse the data, and what we will and will not do" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -49,6 +50,8 @@ const listingCount = loadDir('resources').length;
     <li><strong>Each listing shows its date.</strong> Every listing shows the date we last checked it, so you and the people you serve can see how fresh it is.</li>
   </ul>
 
+  <PromiseNumbers headingLevel={3} />
+
   <h2 id="reuse">Reuse the information</h2>
   <p>Everything we gather is free to reuse. You don't need to ask, sign up, or pay. Today that is {orgCount} groups, {listingCount} listings, and a calendar of local deadlines and dates, each with its source and the date we checked it.</p>
   <h3>What you can use now</h3>
@@ -64,7 +67,7 @@ const listingCount = loadDir('resources').length;
   </ul>
   <h3>The license</h3>
   <ul>
-    <li><strong>Listings and other content:</strong> <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> (CC BY 4.0). Use it for anything, even in a paid product. Just credit "Mon County Community Hub" and link to the project. <a href={doc('content/LICENSE.md')}>Read the content license</a>.</li>
+    <li><strong>Listings and other content:</strong> <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> (CC BY 4.0). Use it for anything, even in a paid product. Just credit "Everything Morgantown" and link to <a href="https://everythingmorgantown.org">everythingmorgantown.org</a>. <a href={doc('content/LICENSE.md')}>Read the content license</a>.</li>
     <li><strong>Code:</strong> the <a href={doc('LICENSE')}>MIT License</a>. Copy it, change it, and use it as you like.</li>
   </ul>
   <p>Each listing links to the group that runs the program. When you reuse a listing, please link to that group too, so people get the newest details from the source.</p>

@@ -1,0 +1,12 @@
+---
+// The Your community door (#252). Content lives in content/doors/community.yaml;
+// the layout is shared with every door. Its first section is Community
+// centers and halls (#450, #462).
+import Base from '../layouts/Base.astro';
+import DoorPage from '../components/DoorPage.astro';
+export const page = { door: "community", label: "Your community", summary: "Community centers and halls, dinners and events, and ways to make your neighborhood better" };
+---
+<Base title="Your community in Morgantown and Mon County: centers, halls and more" description="Find a community center or senior center near you, go to a community dinner, rent a hall, or help make your neighborhood better, in Morgantown and Monongalia County, WV.">
+  <h1>Your community</h1>
+  <DoorPage slug="community" />
+</Base>

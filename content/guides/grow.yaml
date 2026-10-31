@@ -1,0 +1,45 @@
+# The growing guide, /grow/ (#437, epic #432). Same shape as a door page
+# (see content/doors/care.yaml and site/src/components/DoorPage.astro), but
+# it lives inside the Living here door under the `growing` topic.
+# More picks come as their pages ship: start a garden, no yard (#438), and
+# something's wrong with my plants (#436). Those wait on WVU Extension facts
+# that a person still has to check (#552).
+door: living-here
+topic: growing
+page: /grow/
+ask: What are you hoping to do? Pick all that fit.
+lede: Grow food and flowers in Mon County. Pick what you're hoping to do and we put the steps in order.
+steps:
+  seed-library:
+    when: week
+    resource: mon-county-seed-library
+    text: Call the Mon County Center and ask how its Community Seed Library works and when you can visit.
+  health-permit:
+    when: week
+    resource: monchd-farmers-market-permit
+    text: Read the county health department's farmers market rules to see whether the foods you want to sell need its permit.
+  wvda-permit:
+    when: season
+    resource: wvda-farmers-market-vendor-permit
+    text: Want to sell canned foods like salsa or pickles? Read the state's farmers market vendor rules. Applications are due March 1 each year.
+    action: Read the rules
+  agep:
+    when: season
+    resource: mcd-agep-conservation-help
+    text: Ask the Monongahela Conservation District what farm conservation work it can help pay for this year, and how to sign up.
+situations:
+  - id: budget
+    label: Grow food on a budget
+    page: /grow/#budget
+    steps: [seed-library]
+  - id: sell
+    label: Sell what I grow
+    page: /sell-what-you-grow/
+    steps: [health-permit, wvda-permit]
+  - id: farm
+    label: Thinking about a small farm
+    page: /grow/#farm
+    steps: [agep]
+also:
+  - text: Short on food this week
+    href: /help/food/

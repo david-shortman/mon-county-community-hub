@@ -1,0 +1,19 @@
+name: WVU International Homestart Closet
+slug: wvu-homestart-closet
+kind: free-program
+area: university-ave
+run_by: Homestart Closet, a volunteer-led nonprofit working with WVU Campus and Community Life
+hours: By request. The closet holds open hours from time to time, and students can make an appointment.
+sells: Free donated household basics for international students, such as sheets, towels, blankets, pillows, dishes, pots, pans, kettles, microwaves and rice cookers. Items may be new or gently used. No clothing right now. Large furniture is only sometimes available.
+takes: Donations of household items. Contact the closet first through its page.
+goods: [home]
+buys_from_you: false
+who_can_use: WVU international students living on or off campus.
+what_to_bring: Fill out the online request form first. The team confirms items and sets up pickup or delivery.
+url: https://homestart.wvu.edu/
+url_label: Homestart Closet
+status: confirmed
+note: Located in Stalnaker Hall. Started in the 1990s by Women Across Cultures.
+sources:
+  - url: https://homestart.wvu.edu/
+    checked: 2026-10-30

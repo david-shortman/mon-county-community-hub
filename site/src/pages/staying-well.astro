@@ -14,7 +14,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
 // sources and the date we checked them (#285).
 const fluSources = [
   { url: 'https://www.cdc.gov/flu/vaccines/vaccinations.html', checked: '2026-10-29', name: 'CDC' },
-  { url: 'https://www.medicare.gov/coverage/flu-shots', checked: '2026-10-29', name: 'Medicare' },
+  { url: 'https://www.medicare.gov/coverage/flu-vaccines', checked: '2026-10-29', name: 'Medicare' },
   ...(r('monchd-flu-and-covid-shots')?.sources ?? []),
 ];
 const checkupSources = [

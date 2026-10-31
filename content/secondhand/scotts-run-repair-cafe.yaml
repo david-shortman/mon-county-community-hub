@@ -1,0 +1,20 @@
+name: Repair Cafe by Scotts Run Resonance Project
+slug: scotts-run-repair-cafe
+kind: repair
+area: elsewhere
+run_by: Scotts Run Resonance Project
+hours: Held about every three months. The February 21, 2026 event ran 10 a.m. to 2 p.m.
+sells: Free repairs by 10 to 15 volunteers, plus free food, lessons and live music. Past tables covered sewing and clothing, lamps, jewelry, photos, computers, bikes, shoes, knife sharpening and cast iron.
+goods: [home, clothes, electronics]
+buys_from_you: false
+who_can_use: Anyone.
+what_to_bring: The item you want fixed.
+url: https://morgantownmag.com/mend-and-munch/
+url_label: News story
+status: likely
+note: Earlier events were at the Shack Neighborhood House off Blue Horizon Drive. No date after February 2026 was found.
+sources:
+  - url: https://morgantownmag.com/mend-and-munch/
+    checked: 2026-10-30
+  - url: https://morgantownmag.com/a-day-of-fixes-and-fun/
+    checked: 2026-10-30
