@@ -24,8 +24,8 @@ const firstWard = (nbhd?.meetings ?? []).find((m) => m.name.startsWith('First Wa
   <Route label="Steps in the example">
   {card && (
     <Milepost n={1} title="Get a free library card" when="Week 1" id="card" open>
-      <p>{card.who_it_is_for} They bring proof of who they are and proof of their West Virginia address. The library's examples include a driver's license or government ID, and a utility bill or a lease.</p>
-      <p>Just moved and no bill yet? The library also lists a current postmarked letter with your name and address.</p>
+      <p>{card.who_it_is_for}</p>
+      {card.what_to_bring?.length > 0 && <p><strong>What to bring:</strong> {card.what_to_bring.join(' ')}.</p>}
       <div class="actions"><a class="btn" href={card.contact.url}><span>Library card page</span></a></div>
       <SourceLine sources={card.sources} org={card.org} about={card.title} slug={card.slug} />
     </Milepost>
@@ -41,7 +41,8 @@ const firstWard = (nbhd?.meetings ?? []).find((m) => m.name.startsWith('First Wa
 
   {programs && (
     <Milepost n={3} title="Pick one free program and go" when="Week 2" id="program">
-      <p>The library offers free programs for adults. {programs.what_to_do.split('. ').slice(0, 2).join('. ')}.</p>
+      <p>{programs.who_it_is_for}</p>
+      <p>{programs.what_to_do}</p>
       <div class="actions"><a class="btn" href={programs.contact.url}><span>Library calendar</span></a></div>
       <SourceLine sources={programs.sources} org={programs.org} about={programs.title} slug={programs.slug} />
     </Milepost>

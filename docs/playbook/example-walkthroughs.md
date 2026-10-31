@@ -20,7 +20,7 @@ The first one is [Example: new in town, working from home, and wanting to meet p
 
 ### Every step is real and sourced
 
-5. **Each step uses a record in `content/`** (a resource, org, place or calendar entry) and shows its `SourceLine`. Pull the facts from the record in code, so the walkthrough changes when the record does and never says something the record does not.
+5. **Each step uses a record in `content/`** (the one exception: a last "what comes next" step that only links to other guides and states no facts of its own) (a resource, org, place or calendar entry) and shows its `SourceLine`. Pull the facts from the record in code, so the walkthrough changes when the record does and never says something the record does not.
 6. **Wrap each step in its record.** If a record is hidden or removed, its step disappears instead of showing an old fact.
 7. **"Could," not "did."** The example person could do each step. We never say what happened to them, how they felt, or that it worked.
 8. **No promises.** No "they got approved" or "they made friends." Programs decide who qualifies; people decide what helps.
