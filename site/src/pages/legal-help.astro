@@ -1,0 +1,50 @@
+---
+// Courts and everyday legal help that is not eviction (#222 coverage map,
+// rank 1 missing area). Facts come from the records, each read on a court,
+// state or group page on 2026-10-31. Left off until a person confirms them:
+// the Magistrate Court filing fee, the name change fee and form, expungement
+// fees and waiting periods, and the WVU Law clinics (see the build log).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+export const page = { door: "community", topic: "government", label: "Courts and legal help", summary: "Free legal help, small claims up to $20,000, clearing a record, changing your name, jury duty, court forms and finding a notary" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Courts and legal help in Morgantown and Mon County, WV" description="Everyday legal help in Monongalia County, WV: free civil legal help, filing a civil case up to $20,000 in Magistrate Court, expungement forms, changing your name, jury duty, free court forms and case search, and finding a notary.">
+  <h1>Courts and legal help</h1>
+  <p class="lede">Free court forms and a free online question service are open to anyone, any time. For a person to talk to, Legal Aid of West Virginia and a Tuesday night lawyer phone line are free. This page says where to go. It is not legal advice.</p>
+
+  <p>Facing eviction or a rent problem? See <a href={`${base}/money/?pick=rent`}>behind on rent</a>.</p>
+
+  <h2 id="free-help">Free or low cost legal help</h2>
+  <ResourceCard r={resource('legal-aid-wv-civil-legal-help')} showCost />
+  <ResourceCard r={resource('wv-free-legal-answers')} showCost />
+  <ResourceCard r={resource('wv-tuesday-legal-connect')} showCost />
+  <ResourceCard r={resource('wv-lawyer-referral-service')} showCost />
+  <ResourceCard r={resource('msj-consumer-debt-legal-help')} showCost />
+  <p>WVU students can also use WVU Student Legal Services.</p>
+  <ResourceCard r={resource('wvu-student-legal-services')} showCost />
+
+  <h2 id="small-claims">Ask the court for $20,000 or less</h2>
+  <p>Magistrate Court hears civil cases worth $20,000 or less. You can file on your own.</p>
+  <ResourceCard r={resource('mon-magistrate-court-civil-claims')} showCost />
+  <ResourceCard r={resource('court-fee-waiver-wv')} showCost />
+
+  <h2 id="record">Clear a criminal record (expungement)</h2>
+  <ResourceCard r={resource('wv-expungement-petition')} showCost />
+
+  <h2 id="name">Change your name</h2>
+  <ResourceCard r={resource('mon-name-change-petition')} showCost />
+
+  <h2 id="jury">You got a jury summons</h2>
+  <ResourceCard r={resource('mon-circuit-clerk-jury-duty')} showCost />
+
+  <h2 id="forms">Court forms and looking up a case</h2>
+  <ResourceCard r={resource('wv-court-forms-and-records')} showCost />
+  <ResourceCard r={resource('wv-court-interpreters')} showCost />
+
+  <h2 id="notary">Get something notarized</h2>
+  <ResourceCard r={resource('wv-notary-search')} showCost />
+
+  <p class="meta">Sources checked October 31, 2026. Court fees and rules change, so check with the clerk before you file. We could not confirm the Magistrate Court filing fee, or the cost of a name change, on an official page, so ask the clerk. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
