@@ -18,6 +18,8 @@ const legalAidName = org(legalAid.org).name;
 const wv211 = resource('wv-211');
 const dfi = resource('wv-dfi-check-a-lender');
 const taxPrep = resource('christian-help-free-tax-prep');
+const rack = resource('the-rack-wvu-student-food-pantry');
+const studentLegal = resource('wvu-student-legal-services');
 // The Lifeline link shows once its record is in (#668, #735).
 const lifeline = loadDir('resources').some((e) => e.slug === 'lifeline-phone-internet-discount');
 const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/government-program-pays-your-bills', checked: '2026-10-29', name: 'Federal Trade Commission' }];
@@ -61,6 +63,12 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
       If you file together, both spouses come.</li>
   </ul>
   <SourceLine sources={taxPrep.sources} org={taxPrep.org} about="free tax help"> The source is a Morgantown Magazine article from January 14, 2026.</SourceLine>
+
+  <h3 id="students">Are you a WVU student?</h3>
+  <p>WVU has its own free help for students. Start with these, then see the rest of this page.</p>
+  {/* Add the WVU emergency funds card here once its record is on main (#888, #602). */}
+  <ResourceCard r={rack} headingLevel={4} lead="Short on food: The Rack is free for WVU students." />
+  <ResourceCard r={studentLegal} headingLevel={4} showCost lead="Trouble with a lease or a landlord: Student Legal Services can help." />
 
   <h3>What things cost here</h3>
   <p>We have not found a trusted, sourced list of local rent, child care or pay figures yet, so we do not show numbers. We would rather show nothing than a guess. Know a public source? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
