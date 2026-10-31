@@ -6,7 +6,7 @@ community: Mylan Park, west of Morgantown
 run_by:
   kind: park-foundation
   text: The Mylan Park Foundation
-story: A large park. It has the Ruby Community Center for events and sports, an aquatic center and an ice pavilion.
+story: A large park. It has the Ruby Community Center for events and sports, whose event complex Mylan Park calls a 100,000-square-foot venue, plus an aquatic center and an ice pavilion.
 facilities:
   rooms:
     - name: Multipurpose Room
@@ -46,6 +46,8 @@ contact:
 status: active
 last_activity_seen: 2026-10-30
 sources:
+  - url: https://mylanpark.org/event-complex/
+    checked: 2026-10-31
   - url: https://mylanpark.org/contact-us/
     checked: 2026-10-30
   - url: https://mylanpark.org/memberships/
