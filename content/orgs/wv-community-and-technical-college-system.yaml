@@ -1,0 +1,10 @@
+name: West Virginia Community and Technical College System
+slug: wv-community-and-technical-college-system
+kind: government
+website: https://www.wvctcs.org/
+summary: The state system for West Virginia's public community and technical colleges. It runs the WV Invests Grant.
+topics: [work]
+area: statewide
+sources:
+  - url: https://www.cfwv.com/financial-aid/wv-invests-grant/
+    checked: 2026-10-30

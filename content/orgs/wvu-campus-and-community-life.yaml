@@ -1,0 +1,10 @@
+name: WVU Campus and Community Life
+slug: wvu-campus-and-community-life
+kind: school
+website: https://campuslife.wvu.edu/
+summary: A West Virginia University office for student life outside the classroom. Its Off-Campus Housing office helps students find housing and learn about renting in Morgantown.
+topics: [housing]
+area: morgantown
+sources:
+  - url: https://campuslife.wvu.edu/living-off-campus/off-campus-housing
+    checked: 2026-10-30

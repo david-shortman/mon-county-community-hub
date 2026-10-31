@@ -1,0 +1,27 @@
+title: Low-cost spay and neuter clinic (SNIP WV)
+slug: snip-wv-spay-neuter
+org: snip-wv
+topics: [pets]
+who_it_is_for: Dog and cat owners. SNIP WV says it has no income or location limits, and its prices are for anyone who can make an appointment and come to its clinic in Morgantown. The pet must be healthy and weigh at least 3 pounds. Breeders pay an extra fee for wellness visits.
+hours: Hours change from week to week. SNIP WV posts which days it is open on its social media each week.
+get_in: appointment
+what_to_do: Make an appointment online. For dogs, email dogs@snipwv.org.
+steps:
+  - "Cats: use the Make an Appointment page and choose Spay/Neuter Appointment. You pay a deposit equal to the cost when you book."
+  - "Dogs: email dogs@snipwv.org to ask about an appointment. People with vouchers or rescue contracts get priority."
+  - If you have a voucher, such as one from M-SNAP, write it in the Notes box instead of paying a deposit.
+  - "Stray or feral cats: email TNR@snipwv.org about the Feral Free program."
+  - SNIP WV says the best way to reach it is email (info@snipwv.org) or a Facebook message, because staff are in surgery most of the day.
+contact:
+  phone: "304-943-7460"
+  url: https://www.snipwv.org/make-an-appointment
+  url_label: Make an appointment
+  place: 1470 Earl L Core Road, Morgantown, WV 26505
+cost: "Cat neuter $57, cat spay $75. Dog neuter $87 to $137 and dog spay $110 to $144, by weight. Prices include 3 days of pain medicine to take home. You lose the deposit if you miss the appointment or cancel with less than 48 hours' notice."
+sources:
+  - url: https://www.snipwv.org/
+    checked: 2026-10-31
+  - url: https://www.snipwv.org/services
+    checked: 2026-10-31
+  - url: https://www.snipwv.org/make-an-appointment
+    checked: 2026-10-31

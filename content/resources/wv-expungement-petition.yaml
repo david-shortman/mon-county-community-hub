@@ -1,0 +1,23 @@
+title: Ask a court to expunge (seal) a criminal record
+slug: wv-expungement-petition
+org: wv-supreme-court-of-appeals
+topics: [legal, work]
+who_it_is_for: People who want to ask a West Virginia court to remove a charge or conviction from public view. Legal Aid of West Virginia says the rules are different for dismissed charges and for convictions, some offenses can never be expunged, and you must wait a set time before you file. A judge decides each case. Legal Aid says the law is complicated and suggests talking to a lawyer.
+what_to_do: The West Virginia courts post free expungement forms and instructions on the Court Forms page (choose the topic "Expungement"). There are separate forms for dismissed charges or acquittals, for misdemeanors and traffic citations, and for felonies. Legal Aid says you file in the Circuit Clerk's office in the county where the criminal case was filed. Legal Aid also says it takes expungement cases for people who qualify, and its website has a plain-language guide.
+steps:
+  - Find out exactly what is on your record. Legal Aid says you can ask the Circuit Clerk (felonies) or Magistrate Clerk (misdemeanors) in the county where you were charged for copies of your court papers.
+  - Read the court's instructions and pick the right form for your case.
+  - File the form with the Circuit Clerk in the county where your case was filed.
+  - Serve copies on everyone the form lists. Legal Aid says this includes the State Police and the county prosecutor.
+contact:
+  url: https://www.courtswv.gov/public-resources/court-forms
+  url_label: Court forms (topic Expungement)
+cost: Costs depend on the kind of case. Ask the Circuit Clerk. You can ask to have court fees waived if you cannot afford them.
+if_you_want_help: [legal-aid-wv-civil-legal-help, court-fee-waiver-wv]
+sources:
+  - url: https://www.courtswv.gov/public-resources/court-forms
+    checked: 2026-10-31
+  - url: https://legalaidwv.org/legal-information/expungement-of-criminal-records/
+    checked: 2026-10-31
+  - url: https://legalaidwv.org/get-help/eligibility/
+    checked: 2026-10-31

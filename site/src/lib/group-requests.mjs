@@ -6,6 +6,11 @@
 // REQUEST_DAYS is the one number to change if David picks a different promise
 // (#502). The two warning steps move with it.
 export const REQUEST_DAYS = 7;
+
+// The no-account way in (#522): a private Tally form in David's account.
+// Answers go to David, never to GitHub. A team member files the issue, only on
+// David's yes, with no sender details or message text.
+export const FIX_FORM = 'https://tally.so/r/rD5adv';
 export const PRIORITY_DAY = Math.max(1, REQUEST_DAYS - 4); // 3 when the promise is 7 days
 export const DAVID_DAY = Math.max(1, REQUEST_DAYS - 2); // 5 when the promise is 7 days
 
