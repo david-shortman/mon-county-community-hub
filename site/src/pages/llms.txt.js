@@ -52,6 +52,7 @@ export function GET({ site }) {
 - [Your community](${u('/community/')}): pick what fits (a community center near you, a community dinner, a hall to rent, joining a center, making your neighborhood better) and go straight to the page
 - [Community centers and halls](${u('/community-centers/')}): community centers, senior centers and halls across Mon County, grouped by part of the county, with dinners and events, halls to rent, and how to join
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
+- [Make art, learn a craft, show your work](${u('/arts-and-making/')}): Monongalia Arts Center classes, Community Maker Space, studios and gallery applications; library craft nights, knitting group and ArtistWorks lessons; folk arts apprenticeships and jams; state grants for individual artists
 ${centers}
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
