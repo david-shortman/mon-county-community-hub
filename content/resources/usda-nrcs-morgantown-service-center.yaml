@@ -1,0 +1,19 @@
+title: USDA conservation help (NRCS) at the Morgantown Service Center
+slug: usda-nrcs-morgantown-service-center
+org: usda-natural-resources-conservation-service
+topics: [growing]
+who_it_is_for: Farmers and landowners in Monongalia County. USDA's locator lists this NRCS field office for Monongalia County. The WV Department of Agriculture says a popular USDA program is cost-share for high tunnels, plastic-covered structures that stretch the growing season.
+what_to_do: Call the office to ask about conservation programs and cost-share for your land.
+contact:
+  phone: "304-291-4377"
+  url: https://www.farmers.gov/working-with-us/service-center-locator
+  url_label: USDA office locator
+  place: "201 Scott Ave, Suite B, Morgantown, WV 26508"
+get_in: call-first
+sources:
+  - url: https://www.farmers.gov/sites/default/files/json/scl.json
+    checked: 2026-10-31
+  - url: https://www.farmers.gov/working-with-us/service-center-locator
+    checked: 2026-10-31
+  - url: https://agriculture.wv.gov/ag-business/usda-and-other-funding/
+    checked: 2026-10-31

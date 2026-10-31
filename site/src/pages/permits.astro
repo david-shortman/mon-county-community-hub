@@ -9,6 +9,7 @@ import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
 import { loadDir, telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Do I need a building permit?", summary: "City or county: who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Mon County" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -76,7 +77,7 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
     <li><strong>Floodplain.</strong> If any part of the property is in the floodplain, contact the county Floodplain Administrator. See <a href={`${base}/flood-zone/#permit`}>Is my home in a flood zone?</a></li>
     <li><strong>A new driveway onto a state road</strong> needs a Division of Highways encroachment permit.</li>
     <li><strong>Commercial buildings and apartments.</strong> The State Fire Marshal handles industrial, commercial and multi-family inspections.</li>
-    <li><strong>Septic systems and wells.</strong> A new, changed or failing septic system starts with a certified installer, and a new well starts with a certified well driller. Each one sends an application to the Monongalia County Health Department, which issues a construction permit. Call <a href={telHref(phones.health)}>{phones.health}</a>.</li>
+    <li><strong>Septic systems and wells.</strong> A new, changed or failing septic system starts with a certified installer, and a new well starts with a certified well driller. Each one sends an application to the Monongalia County Health Department, which issues a construction permit. Call <a href={telHref(phones.health)}>{phones.health}</a>, or see <a href={`${base}/septic-and-wells/`}>Septic systems and well water</a>.</li>
   </ul>
   <SourceLine sources={[...county, ...countyFaq, ...septic]} about="permits outside town limits" />
   <div class="actions">
@@ -85,8 +86,16 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
   {r('mon-county-planning-permits') && <ResourceCard r={r('mon-county-planning-permits')} />}
 
   <h2 id="assessor">5. Anywhere in the county: tell the Assessor</h2>
-  <p>The Monongalia County Assessor says anyone who builds, adds on or remodels so that the property's value goes up by more than $1,000 must tell the Assessor on <strong>Form 12:75</strong> within 60 days of when the work started. If you got a permit from a town, the Assessor says that counts as notice. Forms are at the Assessor's office.</p>
+  <p>The Monongalia County Assessor says:</p>
+  <ul>
+    <li>If you build, add on or remodel and the property's value goes up by more than $1,000, you must tell the Assessor on <strong>Form 12:75</strong>.</li>
+    <li>Do it within 60 days of when the work started.</li>
+    <li>If you got a permit from a town, that counts as telling the Assessor.</li>
+    <li>Forms are at the Assessor's office.</li>
+  </ul>
   <SourceLine sources={assessor} about="telling the Assessor about improvements" />
 
-  <p class="meta">Sources checked October 30, 2026. Rules and fees change, so ask the office before you start work. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p>Hiring someone to do the work? See <a href={`${base}/contractor-license/`}>contractor licenses and how to check one</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Rules and fees change, so ask the office before you start work. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

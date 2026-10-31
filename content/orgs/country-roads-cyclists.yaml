@@ -1,0 +1,10 @@
+name: Country Roads Cyclists
+slug: country-roads-cyclists
+kind: community-group
+website: https://www.crcyclists.org/
+summary: "A bicycling club active in north central West Virginia since 1979. It holds group rides, social events and a yearly 100 mile Century Ride."
+topics: [outdoors]
+area: monongalia-county
+sources:
+  - url: https://www.crcyclists.org
+    checked: 2026-10-30

@@ -1,0 +1,43 @@
+---
+// Help in your language (#181): where people in Mon County can get help in a
+// language other than English, from each group's own page. Built from the
+// research note docs/research/language-help.md. We list only groups whose own
+// pages say they offer language help, and say plainly where we could not
+// find it. We do not machine-translate the site (see that note).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "family", label: "Help in your language", summary: "Free interpreters at the hospital, the Health Department, state offices and courts, and English classes" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const dohsPlan = [{ url: 'https://dohs.wv.gov/nondiscrimination-policies-and-plans', checked: '2026-10-30', name: 'WV Department of Human Services' }];
+---
+<Base title="Help in your language in Morgantown and Mon County" description="Where to get free interpreters and help in languages other than English in Morgantown and Monongalia County, WV: hospitals, the Health Department, state benefit offices, courts, legal help and English classes.">
+  <h1>Help in your language</h1>
+  <p class="lede">Many offices here will get you an interpreter for free. Say "I need an interpreter" and the name of your language. You can also ask a friend to call with you, but in court a family member or friend cannot interpret for you.</p>
+
+  <h2>At the doctor, hospital or clinic</h2>
+  {r('wvu-medicine-language-services') && <ResourceCard r={r('wvu-medicine-language-services')} />}
+  {r('monchd-language-help') && <ResourceCard r={r('monchd-language-help')} />}
+
+  <h2>Food, health coverage and other state help</h2>
+  <p>The state Department of Human Services handles SNAP, Medicaid and other state help. The state's language access plan from June 2023 (written when the department was part of WVDHHR) says bilingual staff can help in Spanish, outside interpreters are used when needed, and offices are to get cards in several languages so you can point to yours. Ask for an interpreter at the office or when you call.</p>
+  <SourceLine sources={dohsPlan} about="the state's language access plan" />
+  {r('monongalia-county-dohs-office') && <ResourceCard r={r('monongalia-county-dohs-office')} />}
+
+  <h2>Court and legal help</h2>
+  {r('wv-court-interpreters') && <ResourceCard r={r('wv-court-interpreters')} />}
+  {r('msj-immigration-legal-help') && <ResourceCard r={r('msj-immigration-legal-help')} />}
+  {r('ccwva-immigration-services') && <ResourceCard r={r('ccwva-immigration-services')} />}
+
+  <h2>Learn English</h2>
+  {r('mtec-adult-education-esl') && <ResourceCard r={r('mtec-adult-education-esl')} />}
+
+  <h2>Not on this list yet</h2>
+  <p>We checked the websites of Milan Puskar Health Right, Monongalia County Schools and the Morgantown Public Library on October 30, 2026, and none said whether they offer interpreters. Ask when you call. If you work at one of these places and can point us to a page that says so, <a href={fixFormUrl({ page: Astro.url.pathname })}>tell us</a>.</p>
+  <p>This site is in English only for now. We do not use machine translation, because a wrong phone number, date or rule could send someone to the wrong place.</p>
+  <p>More for families: <a href={`${base}/family/`}>Family and life changes</a>.</p>
+</Base>

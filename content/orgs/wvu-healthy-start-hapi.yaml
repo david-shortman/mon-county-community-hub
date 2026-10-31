@@ -1,0 +1,10 @@
+name: West Virginia Healthy Start/HAPI Project
+slug: wvu-healthy-start-hapi
+kind: school
+website: https://medicine.hsc.wvu.edu/obgyn/west-virginia-healthy-starthapi-project/
+summary: A WVU School of Medicine program, funded by the federal Health Resources and Services Administration, that supports pregnant women, new parents and young families in 11 West Virginia counties, including Monongalia.
+topics: [family, health]
+area: monongalia-county
+sources:
+  - url: https://medicine.hsc.wvu.edu/obgyn/west-virginia-healthy-starthapi-project/
+    checked: 2026-10-30

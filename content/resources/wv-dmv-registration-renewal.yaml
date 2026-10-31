@@ -1,0 +1,28 @@
+title: Renew your vehicle registration
+slug: wv-dmv-registration-renewal
+org: wv-dmv
+topics: [moving]
+who_it_is_for: Owners of a car, truck, motorcycle, trailer or RV registered in West Virginia. The DMV mails a reminder about 30 days before your registration runs out, but it says knowing when your plates expire is your job, and the reminder may not reach you if your address is out of date.
+what_to_do: Renew online on the DMV's self service site with a credit card, by mail, at a DMV regional office, or at a DMV Now kiosk. Online renewals can also get a free digital registration card for your phone wallet.
+what_to_bring:
+  - Your insurance information
+  - Your personal property tax receipt (the County Sheriff collects this tax)
+  - Your renewal reminder or your current registration card
+  - Payment
+steps:
+  - "Online: use the DMV self service portal. You need your insurance and personal property tax information and a credit card."
+  - "By mail: send your renewal notice or registration card, the fee, insurance information and personal property tax receipt to West Virginia DMV, P.O. Box 17110, Charleston, WV 25317."
+  - "In person: any DMV regional office, including the one in Morgantown."
+  - Some county sheriff's offices renew passenger car and motorcycle registrations. The DMV says to check the Sheriffs' Association contact list for yours.
+  - No reminder? Bring or mail a copy of your old registration card, proof of insurance, your personal property tax receipt and the fee.
+cost: The fee depends on the vehicle. The DMV lists every fee in its Motor Vehicle Registration Fees brochure.
+contact:
+  phone: "304-558-3900"
+  url: https://dmv.wv.gov/vehicle-services/vehicles/registrations
+  url_label: Registration renewal
+if_you_want_help: [wv-dmv-morgantown-office]
+sources:
+  - url: https://dmv.wv.gov/vehicle-services/vehicles/registrations
+    checked: 2026-10-31
+  - url: https://dmv.wv.gov/offices/morgantown
+    checked: 2026-10-31

@@ -1,0 +1,16 @@
+title: Monongalia County Beekeepers Association meetings
+slug: mon-county-beekeepers-meetings
+org: monongalia-county-beekeepers-association
+topics: [growing, community]
+who_it_is_for: Beekeepers from beginner to expert, in Mon County and nearby counties in West Virginia, Maryland and Pennsylvania.
+what_to_do: Go to a monthly meeting at the Mon County Center, or see the group's site to join or find beginner classes.
+contact:
+  url: https://www.moncountybeekeepers.org/
+  url_label: Group website
+  place: "270 Mylan Park Lane, Morgantown, WV 26501"
+meetings:
+  - name: Monthly meeting
+    when: First Tuesday of each month, 6 p.m. to 8 p.m.
+sources:
+  - url: https://www.moncountybeekeepers.org/
+    checked: 2026-10-31

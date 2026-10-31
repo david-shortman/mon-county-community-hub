@@ -1,0 +1,11 @@
+name: Volunteer West Virginia
+slug: volunteer-west-virginia
+kind: government
+website: https://volunteer.wv.gov/
+phone: "304-558-0111"
+summary: The state's volunteer office. Its website has a search for volunteer openings by focus area, zip code and distance, including virtual ones, and links to AmeriCorps and AmeriCorps Seniors in West Virginia.
+topics: [community]
+area: statewide
+sources:
+  - url: https://volunteer.wv.gov/
+    checked: 2026-10-30
