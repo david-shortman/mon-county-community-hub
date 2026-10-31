@@ -40,7 +40,7 @@ One line per notable event, oldest first. Times are UTC. Add new lines at the bo
 - 15:25 About page: how we use AI, how items are checked, how we fix mistakes ([#385](https://github.com/david-shortman/mon-county-community-hub/pull/385))
 - 15:43 Daily source check with a self-building list of sources ([#505](https://github.com/david-shortman/mon-county-community-hub/pull/505))
 - 16:02 Changes to shelter, crisis, food and benefits pages wait for David ([#515](https://github.com/david-shortman/mon-county-community-hub/pull/515))
-- 16:45 First daily snapshot after day one lands in the monthly release: 13 screenshots, a walkthrough video and the day's numbers, plus the numbers for October 29 ([release](https://github.com/david-shortman/mon-county-community-hub/releases/tag/chronicle-2026-10))
+- 16:45 First daily snapshot after day one lands in the monthly release: 12 screenshots, a walkthrough video and the day's numbers, plus the numbers for October 29 ([release](https://github.com/david-shortman/mon-county-community-hub/releases/tag/chronicle-2026-10))
 - 19:30 Backlog sprint starts: 14 Claude Code sessions, one lane each ([#529](https://github.com/david-shortman/mon-county-community-hub/issues/529))
 - 19:41 Findability runs now count how many questions have an answer page on the site ([#534](https://github.com/david-shortman/mon-county-community-hub/pull/534))
 
