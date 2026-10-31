@@ -9,7 +9,19 @@ contact:
   url: https://www.monchd.org/services/food-and-retail-establishment-permits
   url_label: Plan review and permits
   place: "453 Van Voorhis Road, Morgantown, WV 26505"
+cost: "There are two fees: one for plan review and one for the permit. Both depend on the number of seats. From the health department's 2026-2027 fee form:"
+options:
+  - "0 to 20 seats: plan review $250, permit $150"
+  - "21 to 50 seats: plan review $300, permit $300"
+  - "51 to 79 seats: plan review $350, permit $450"
+  - "80 or more seats: plan review $400, permit $600"
+  - "Mobile food unit: plan review $150, permit $150"
+  - "Retail food store: plan review $250, permit $72 for each checkout"
+notes:
+  - Places with an ABCC (alcohol) license add $150.
 sources:
+  - url: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
+    checked: 2026-10-31
   - url: https://www.monchd.org/services/food-and-retail-establishment-permits
     checked: 2026-10-30
   - url: https://www.monchd.org/services/mobile-food-units

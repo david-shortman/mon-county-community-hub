@@ -1,0 +1,36 @@
+---
+// Start a nonprofit or community group in West Virginia (#610, part of #280).
+// Official steps only, each from a Secretary of State page or form. Not here
+// yet: Form CD-1NP and the nonprofit annual report date and fee (not on a
+// current official page we could open; see the needs-verification issue).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "community", label: "Start a nonprofit or community group", summary: "State steps to make a group a nonprofit corporation, register before asking for donations, and where federal tax-exempt status starts" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const r = (slug) => resource(slug);
+const irs = [{ url: 'https://sos.wv.gov/business/charities/charitable-organizations', checked: '2026-10-30' }];
+---
+<Base title="Start a nonprofit or community group in Morgantown and Mon County, WV: the state steps" description="The official West Virginia steps for a group in Morgantown or Monongalia County: file Articles of Incorporation for a nonprofit corporation, register with the Secretary of State before asking the public for donations, and where IRS tax-exempt status starts.">
+  <h1>Start a nonprofit or community group</h1>
+  <p class="lede">Want to start a group with your neighbors? The state steps below are for a group that wants to become a nonprofit corporation, or that will ask the public for money. Each step links to the state's own page. We do not give legal or tax advice, so ask the office if you are not sure what applies to your group.</p>
+
+  <h2>1. Become a nonprofit corporation (if you choose to)</h2>
+  {r('wv-sos-nonprofit-incorporation') && <ResourceCard r={r('wv-sos-nonprofit-incorporation')} showCost />}
+
+  <h2>2. Register before you ask the public for donations</h2>
+  {r('wv-sos-charity-registration') && <ResourceCard r={r('wv-sos-charity-registration')} showCost />}
+
+  <h2>3. Federal tax-exempt status is a separate step</h2>
+  <p>Tax-exempt status, such as 501(c)(3), comes from the IRS, not the state. The Secretary of State points to the IRS for it: see the IRS <a href="https://www.irs.gov/charities-non-profits">Charities and Nonprofits</a> pages and <a href="https://www.irs.gov/publications/p557">Publication 557, Tax-Exempt Status for Your Organization</a>.</p>
+  <SourceLine sources={irs} org="wv-secretary-of-state" about="Federal tax-exempt status" />
+
+  <h2>Not on this page yet</h2>
+  <p>We could not yet confirm, on a current state page, the nonprofit annual report due date and fee, or the separate nonprofit articles form with an IRS attachment. We will add them once we can.</p>
+
+  <p>Looking for a group to join instead? See <a href={`${base}/community-centers/`}>Community centers and halls</a> and <a href={`${base}/make-it-better/`}>Make it better</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Rules and fees can change, so check the state's page before you file. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

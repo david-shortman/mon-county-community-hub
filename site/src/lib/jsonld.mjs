@@ -23,7 +23,7 @@ function serviceNode(r, org) {
   return clean({
     '@type': org?.kind === 'government' ? 'GovernmentService' : 'Service',
     name: r.title,
-    description: [r.who_it_is_for, r.what_to_do].filter(Boolean).join(' '),
+    description: [r.who_it_is_for, r.what_to_do, r.options?.join('; '), ...(r.notes ?? [])].filter(Boolean).join(' '),
     url: c.url,
     provider: org ? orgNode(org) : undefined,
     availableChannel: clean({

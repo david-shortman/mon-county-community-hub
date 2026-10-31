@@ -1,0 +1,27 @@
+title: What ID to bring to vote in West Virginia
+slug: wv-voter-id
+org: wv-secretary-of-state
+topics: [voting]
+who_it_is_for: Anyone voting in person, during early voting or on Election Day. The photo ID rule does not apply to voting absentee by mail, but if it is your first time voting and you did not show ID when you registered, you must send a copy of an ID with your ballot.
+what_to_do: "Bring one valid, unexpired ID:"
+options:
+  - A West Virginia driver's license or state ID
+  - A driver's license from another state
+  - A U.S. passport or passport card
+  - A government employee ID with a photo
+  - A photo student ID from a West Virginia college or high school
+  - A U.S. military ID with a photo
+  - A photo voter registration card from a county clerk or the Secretary of State
+notes:
+  - If you are 65 or older, an expired ID still counts if it had not expired on your 65th birthday.
+  - "No ID? An adult who has known you for at least 6 months can sign a sworn statement and show their own photo ID, or a poll worker who has known you that long can vouch for you. If none of these work for you, you can still vote a provisional ballot."
+  - You can get a free voter ID card at the County Clerk's office.
+  - "First time voting in West Virginia or in your county, and did not show ID when you registered? You must show one of these, or a utility bill, bank statement, paycheck, government check or other government document with your current name and address. If you do not, your ballot will be provisional."
+contact:
+  url: https://sos.wv.gov/be-registered-and-ready
+  url_label: State voter ID page
+sources:
+  - url: https://sos.wv.gov/be-registered-and-ready
+    checked: 2026-10-31
+  - url: https://monongaliacountyclerk.com/index.php/elections/17-current-election/124-2026-general-election-information
+    checked: 2026-10-31

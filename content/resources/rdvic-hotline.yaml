@@ -12,3 +12,4 @@ cost: free
 sources:
   - url: https://fris.org/centers/rdvic/
     checked: 2026-10-30
+private_trace: true  # no Text, Print or Share row: a text or share leaves a trace on the phone (#555)

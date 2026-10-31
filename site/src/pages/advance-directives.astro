@@ -1,0 +1,43 @@
+---
+// Plan your medical care ahead (#222, a missing life area under "managing
+// medical care"): living will, medical power of attorney, POST and DNR, and
+// the WV e-Directive Registry. Facts come from the WV Center for End-of-Life
+// Care's own pages and its 2022 combined form PDF, read 2026-10-31. The
+// Center is on the WVU Health Sciences campus in Morgantown.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "care", topic: "health", label: "Living will and medical power of attorney", summary: "Free West Virginia forms to say what care you want and who decides if you can't, how to sign them, the POST form, and the e-Directive Registry" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Living will and medical power of attorney in Morgantown and Mon County, WV" description="Free West Virginia advance directive forms (living will, medical power of attorney, combined form), how to sign them with witnesses and a notary, the POST form and DNR card, and the WV e-Directive Registry run from Morgantown.">
+  <h1>Living will and medical power of attorney</h1>
+  <p class="lede">You can download free West Virginia forms tonight that say what medical care you want, and who speaks for you if you are too sick to speak for yourself. You do not need a lawyer. The state's Center for End-of-Life Care, in Morgantown, gives out the forms and answers questions.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      <li><a href="#forms">The forms and how to sign them</a></li>
+      <li><a href="#registry">Put them on file for hospitals and EMS</a></li>
+      <li><a href="#post">Seriously ill: the POST form and DNR card</a></li>
+      <li><a href="#notary">Find a notary</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="forms">The forms and how to sign them</h2>
+  <p>A <strong>living will</strong> tells your doctor what treatment you want if you are terminally ill and cannot decide. A <strong>medical power of attorney</strong> names a person to make health care decisions for you if you are too sick to make them. You can fill out one, or both on one combined form.</p>
+  <ResourceCard r={resource('wv-advance-directive-forms')} showCost />
+
+  <h2 id="registry">Put them on file for hospitals and EMS</h2>
+  <ResourceCard r={resource('wv-e-directive-registry')} showCost />
+
+  <h2 id="post">Seriously ill: the POST form and DNR card</h2>
+  <ResourceCard r={resource('wv-post-form')} showCost />
+
+  <h2 id="notary">Find a notary</h2>
+  <ResourceCard r={resource('wv-notary-search')} showCost />
+
+  <p>Caring for someone? See <a href={`${base}/caregivers/`}>caring for a family member</a>. Free legal help: see <a href={`${base}/legal-help/`}>legal help</a>. After a death: see <a href={`${base}/when-someone-dies/`}>when someone dies</a>.</p>
+
+  <p class="meta">Sources checked October 31, 2026. The Center says its pages are "for general informational purposes only" and not legal advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

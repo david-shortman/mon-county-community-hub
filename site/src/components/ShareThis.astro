@@ -1,0 +1,56 @@
+---
+// Share this (#947): a small box at the bottom of a guide with a two-sentence
+// summary, a short link and the share image, so anyone can pass the whole
+// guide on in their own page, newsletter or group. Built only from the page's
+// own label and summary. No tracking codes, no account, nothing stored.
+// Rules: docs/playbook/where-people-are-online.md ("The share kit").
+// Base.astro shows it on listed guides, but not in the Help now or Get through
+// this month doors, on housing, money or food topics (those wait for David),
+// or on pages about domestic or sexual violence (a share can leave a trace).
+const { label, summary, route } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const url = new URL(`${base}${route}`, Astro.site).href;
+const shortLink = url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+const place = /Morgantown|Mon County|Monongalia/.test(label) ? '' : ' in Morgantown and Mon County';
+const text = `${label}${place}${summary ? `: ${summary.replace(/\.$/, '')}` : ''}. Free, from Everything Morgantown, with the source and checked date on every listing.`;
+const image = `${base}/share.png`;
+---
+<aside class="share-this" aria-labelledby="share-this-h" data-pagefind-ignore>
+  <h2 id="share-this-h">Share this</h2>
+  <p>Want to pass this guide on? Copy this into your own page, newsletter or group:</p>
+  <p class="share-text"><span data-share-text>{text}</span> <a href={url}>{shortLink}</a></p>
+  <div class="actions">
+    <button type="button" class="btn" data-share-copy={`${text} ${shortLink}`} hidden>Copy text</button>
+    <button type="button" class="btn" data-share-native={url} data-share-title={label} data-share-body={text} hidden>Share</button>
+    <a class="btn" href={image} download="everything-morgantown.png">Download image</a>
+  </div>
+  <p class="meta" data-share-status aria-live="polite"></p>
+</aside>
+
+<script>
+  for (const box of document.querySelectorAll('.share-this')) {
+    const status = box.querySelector('[data-share-status]');
+    const copy = box.querySelector<HTMLButtonElement>('[data-share-copy]');
+    if (copy && navigator.clipboard) {
+      copy.hidden = false;
+      copy.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(copy.dataset.shareCopy || ''); if (status) status.textContent = 'Copied.'; }
+        catch { if (status) status.textContent = 'Could not copy. Select the text above and copy it.'; }
+      });
+    }
+    const share = box.querySelector<HTMLButtonElement>('[data-share-native]');
+    if (share && navigator.share) {
+      share.hidden = false;
+      share.addEventListener('click', () => {
+        navigator.share({ title: share.dataset.shareTitle, text: share.dataset.shareBody, url: share.dataset.shareNative }).catch(() => {});
+      });
+    }
+  }
+</script>
+
+<style>
+  .share-this { margin-top: 2rem; padding: 1rem; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+  .share-this h2 { margin-top: 0; }
+  .share-text { font-size: 1.05rem; }
+  @media print { .share-this { display: none; } }
+</style>

@@ -4,6 +4,7 @@
 // shape the plans and budgets, and shows each step once its page exists.
 import Base from '../../layouts/Base.astro';
 import { loadPages } from '../../lib/pages.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "better", label: "Make it better", summary: "Report a problem, adopt a street, find money for a project, or serve on a city board" };
 const pages = await loadPages();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -19,8 +20,8 @@ const steps = [
 <Base title="Make it better: ways to improve Morgantown and Mon County" description="Ways to make Morgantown and Monongalia County better: report a problem to the right office, adopt a place, find money for a project, or serve on a city board.">
   <h1>Make it better</h1>
   <p class="lede">Small steps add up. Start with one, then take the next. Each step points to the office, program or group that does the work.</p>
-  <ol class="ladder">
+  <ol>
     {steps.map((s) => <li><a href={`${base}${s.route}`}><strong>{s.label}</strong></a>: {s.text}</li>)}
   </ol>
-  <p class="meta">We describe how things work and who to contact. We do not take sides on what the city or county should do. Know a program we should add? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We describe how things work and who to contact. We do not take sides on what the city or county should do. Know a program we should add? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

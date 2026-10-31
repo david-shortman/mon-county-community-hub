@@ -1,0 +1,46 @@
+---
+// Who decides what (#20): which public body decides what in Mon County, how
+// its members are chosen, when it meets and where its records are. Roles and
+// process only, from each body's own page or state law. No names of officials,
+// and nothing about how anyone votes or should vote.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+import { bodies } from '../lib/who-decides.mjs';
+export const page = { door: "community", topic: "government", label: "Who decides what", summary: "City Council, the County Commission, the school board, MUB, the MPO, Mountain Line and more: what each decides and how members are chosen" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Who decides what in Morgantown and Mon County" description="What Morgantown City Council, the Monongalia County Commission, the Board of Education, MUB, the MPO, Mountain Line, the Board of Health and other public bodies decide, how their members are chosen, when they meet, and where their records are.">
+  <h1>Who decides what</h1>
+  <p class="lede">Different public bodies make decisions about life here. Here is what each one does, how its members are chosen, and when it meets, from its own pages.</p>
+
+  <ul class="choices">
+    {bodies.map((b) => <li><a class="choice" href={`#${b.id}`}><span class="choice-label">{b.name}</span></a></li>)}
+  </ul>
+
+  <div class="note">
+    <p><strong>City or county?</strong> If you live inside Morgantown city limits, City Council makes city decisions for you. The County Commission covers the whole county. Use <a href="https://morgantownwv.maps.arcgis.com/apps/instant/lookup/index.html?appid=d647fae667fb43d1af49040701b682c9">Find my council member</a> to check your ward.</p>
+  </div>
+
+  {bodies.map((b) => (
+    <article class="card" id={b.id}>
+      <h2>{b.name}</h2>
+      <p><strong>What it does:</strong> {b.does}</p>
+      <p><strong>How members are chosen:</strong> {b.chosen}</p>
+      <p><strong>When it meets:</strong> {b.meets}</p>
+      {b.comment && <p><strong>Public comment:</strong> {b.comment}</p>}
+      <p class="more">{b.records.map(([t, u], i) => <>{i > 0 && ' · '}<a href={u}>{t}<span class="sr-only">: {b.name}</span></a></>)}</p>
+      <SourceLine sources={b.sources} about={b.name} />
+    </article>
+  ))}
+
+  <h2>More</h2>
+  <ul>
+    <li><a href={`${base}/have-your-say/`}>Have your say at a public meeting</a>: how comment works at City Council, the County Commission, the school board, BOPARC and the Planning Commission.</li>
+    <li><a href={`${base}/meetings/`}>City and county meetings</a>: posted agendas and minutes, and where towns post theirs.</li>
+    <li><a href={`${base}/make-it-better/boards/`}>Serve on a city or county board</a>.</li>
+    <li>For voting and elections, go to the <a href="https://sos.wv.gov/elections/Pages/default.aspx">West Virginia Secretary of State</a>.</li>
+  </ul>
+
+  <p class="meta">We describe roles and process from official pages. We do not name or describe officials, and we take no side on any decision or election. This is not the official record. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

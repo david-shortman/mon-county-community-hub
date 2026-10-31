@@ -1,0 +1,16 @@
+title: Need a car towed, or yours was towed
+slug: mpa-towed-or-blocked
+org: morgantown-parking-authority
+topics: [moving]
+town: Morgantown
+who_it_is_for: People in Morgantown with a car blocking them, or whose car may have been towed.
+what_to_do: "A car that needs to be towed from a city street: call MECCA's non-emergency line at 304-599-6382. A car that needs to be towed from a city parking lot: call the Parking Authority at 304-284-7435 from 8 a.m. to 5 p.m., or 304-376-5252 after 5. If your car was towed, the Parking Authority says to contact it."
+contact:
+  phone: "304-284-7435"
+  url: https://www.parkmpa.com/public-alerts/
+  url_label: Towing
+sources:
+  - url: https://www.parkmpa.com/public-alerts/
+    checked: 2026-10-31
+  - url: https://www.parkmpa.com/parking-info/
+    checked: 2026-10-31

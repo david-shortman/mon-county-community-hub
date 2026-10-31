@@ -1,0 +1,32 @@
+---
+// "What help might I get?" (#188): the places that may help. Links only, to
+// pages that already exist, each with its own sources. We never say a person
+// qualifies; the programs decide. A person to talk to is always offered.
+import Base from '../../../../layouts/Base.astro';
+import { NEEDS, WHO, routeOf } from '../../../../lib/what-help.mjs';
+import { loadPages } from '../../../../lib/pages.mjs';
+import { resource, telHref } from '../../../../lib/content.mjs';
+export function getStaticPaths() {
+  return NEEDS.flatMap((n) => WHO.map((w) => ({ params: { need: n.id, who: w.id }, props: { need: n, who: w } })));
+}
+const { need, who } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pages = await loadPages();
+// A door link with a pick lands on the steps for that pick, so it is named for the pick.
+const pick = (x) => { const p = x?.href && pages.get(routeOf(x.href)); return p ? { href: x.href, label: x.href.includes('?pick=') ? `Your steps: ${x.label}` : p.label, summary: x.href.includes('?pick=') ? 'What to do today and this week, with who to call' : p.summary } : null; };
+const links = [pick(need), pick(who)].filter(Boolean);
+const r211 = resource('wv-211');
+---
+<Base help title={`Help in Mon County: ${need.label}${who.href ? `, with ${who.label.toLowerCase()} at home` : ''}`} description="Places in Morgantown and Monongalia County that may help, from two quick questions. Each page lists who each program is for and how to apply.">
+  <h1>Places that may help</h1>
+  <p class="lede">You picked: {need.label}{who.href && <>, and {who.label.toLowerCase()} at home</>}.</p>
+  <p>Start here. Each page says who each program is for, in the program's own words, and how to apply. You may qualify for more than one. Only the program can say for sure, so it is worth asking.</p>
+  <ol class="topic-list wh-list">
+    {links.map((l) => <li><a href={`${base}${l.href}`}>{l.label}</a>{l.summary && <span class="hint">{l.summary}</span>}</li>)}
+  </ol>
+  <section class="note" aria-labelledby="wh-person">
+    <h2 id="wh-person">Want help with this?</h2>
+    <p>Call <a href={telHref(r211.contact.phone)}>{r211.contact.phone}</a> or text your ZIP code to <a href={`sms:${r211.contact.text.replace(/\D/g, '')}`}>{r211.contact.text}</a>. {r211.hours}. Tell them what is going on and they will point you to local help.</p>
+  </section>
+  <p><a href={`${base}/help/what-help/`}>Start over</a>. Your answers are only in this page's web address. Nothing is saved.</p>
+</Base>

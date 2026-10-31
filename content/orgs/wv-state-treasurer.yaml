@@ -1,0 +1,10 @@
+name: West Virginia State Treasurer's Office
+slug: wv-state-treasurer
+kind: government
+website: https://wvtreasury.com/
+summary: The state treasurer's office. It runs the Jumpstart Savings Program for people in the skilled trades.
+topics: [work]
+area: statewide
+sources:
+  - url: https://wvjumpstart.gov/what-is-jumpstart/overview
+    checked: 2026-10-30

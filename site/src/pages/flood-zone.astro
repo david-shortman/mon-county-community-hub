@@ -9,6 +9,7 @@ import Icon from '../components/Icon.astro';
 import Route from '../components/Route.astro';
 import Milepost from '../components/Milepost.astro';
 import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "weather", label: "Is my home in a flood zone or a slide area?", summary: "Check an address on the state flood and landslide maps, flood insurance basics, and when you need a floodplain permit" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const checked = '2026-10-30';
@@ -18,7 +19,8 @@ const fema = [{ url: 'https://msc.fema.gov/portal/home', checked }];
 const nfip = [{ url: 'https://www.floodsmart.gov/get-insured/buy-a-policy', checked }];
 const ordinance = [
   { url: 'https://www.monongaliacounty.gov/departments/floodplain/index.php', checked },
-  { url: 'https://www.monongaliacounty.gov/document_center/Ordinances/Monongalia%20County%20Floodplain%20Ordinance.pdf', checked, name: 'Monongalia County Flood Plain Ordinance (2009-01)' },
+  { url: 'https://www.monongaliacounty.gov/departments/floodplain/history.php', checked: '2026-10-31' },
+  { url: 'https://www.monongaliacounty.gov/document_center/Ordinances/Monongalia%20County%20Floodplain%20Ordinance.pdf', checked, name: 'Monongalia County Floodplain Ordinance (updated March 2019)' },
 ];
 const cityForm = [{ url: 'https://morgantownwv.gov/DocumentCenter/View/210/Floodplain-Permits-PDF', checked }];
 const landslide = [{ url: 'https://www.mapwv.gov/landslide/', checked }];
@@ -65,6 +67,7 @@ const countyPhone = '304-599-6332';
   </div>
   <p>Inside Morgantown city limits, the city has its own application to develop in a floodplain area. Its form says no work may begin until a permit is issued. We could not confirm which city office takes it, so ask the city when you call.</p>
   <SourceLine sources={cityForm} about="the Morgantown floodplain permit form" />
+  <p>Other permits may apply too. See <a href={`${base}/permits/`}>Do I need a building permit?</a></p>
 
   </Milepost>
 
@@ -78,6 +81,7 @@ const countyPhone = '304-599-6332';
   </Milepost>
   </Route>
 
+  <p>Water already coming in? See <a href={`${base}/after-a-storm/`}>Storm damage, flooding or power out?</a></p>
   <p>Storm on the way? See <a href={`${base}/weather-alerts/`}>how to get official weather alerts</a>. New here? See <a href={`${base}/moving-here/`}>start power, water, gas and trash</a>.</p>
-  <p class="meta">Sources checked October 30, 2026. Maps change when FEMA updates them, so check again before you sign. We describe these maps and rules and do not decide whether a property is safe. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Maps change when FEMA updates them, so check again before you sign. We describe these maps and rules and do not decide whether a property is safe. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

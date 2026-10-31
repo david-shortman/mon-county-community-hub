@@ -4,13 +4,18 @@ org: town-of-star-city
 topics: [work]
 who_it_is_for: People doing business in Star City.
 hours: Monday to Friday, 8 a.m. to 4:30 p.m.
-what_to_do: Download the business registration application from the town website, fill it out, and return it in person or by mail to 370 Broadway Ave. You can pay online, but then you must email the form to info@starcitywv.com. The town also posts a B&O tax form, building permit forms (allow 72 hours) and a zoning map. Questions, call the Business Office.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:00"
+    closes: "16:30"
+what_to_do: Download the business registration application from the town website, fill it out, and return it in person or by mail to 370 Broadway Ave. You can pay online, but then you must email the form to info@starcitywv.com. The town must receive the completed application and full payment before it processes the license. The town also posts a B&O tax form that you print, fill out and return to the office, building permit forms (allow 72 hours) and a zoning map. Questions, call the Business Office.
 contact:
   phone: "304-599-3550"
   email: info@starcitywv.com
   url: https://www.starcitywv.com/business-registrations/
   url_label: Business registration form
   place: "370 Broadway Ave, Star City, WV 26505"
+cost: "The town's application lists $25 for most business types, including stores and \"Other Business Not Listed.\" Handyman contractor and mobile vendor: $50. Non-profit: $0. Beer, wine and liquor licenses cost $100 to $2,500, and private clubs $500 or $1,250. Registrations run for the fiscal year, July 1 to June 30. See the full list on the application."
 sources:
   - url: https://www.starcitywv.com/business-registrations/
     checked: 2026-10-30
@@ -19,4 +24,6 @@ sources:
   - url: https://www.starcitywv.com/building-permits/
     checked: 2026-10-30
   - url: https://www.starcitywv.com/zoning-map/
+    checked: 2026-10-30
+  - url: https://www.starcitywv.com/wp-content/uploads/2026/07/BUSINESS-LICENSE-APPLICATION-v.2025.pdf
     checked: 2026-10-30

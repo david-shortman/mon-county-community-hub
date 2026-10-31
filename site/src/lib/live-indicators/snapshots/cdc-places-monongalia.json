@@ -1,0 +1,81 @@
+{
+  "id": "cdc-places-monongalia",
+  "feed_url": "https://data.cdc.gov/resource/swc5-untb.json?locationid=54061&datavaluetypeid=CrdPrv&$limit=200",
+  "fetched": "2026-10-31T00:09:30.290Z",
+  "data": {
+    "measures": [
+      {
+        "id": "FOODINSECU",
+        "measure": "Food insecurity in the past 12 months among adults",
+        "year": "2023",
+        "value": 12.9,
+        "low": 9.8,
+        "high": 16.9,
+        "unit": "%"
+      },
+      {
+        "id": "HOUSINSECU",
+        "measure": "Housing insecurity in the past 12 months among adults",
+        "year": "2023",
+        "value": 10.7,
+        "low": 8.4,
+        "high": 13.2,
+        "unit": "%"
+      },
+      {
+        "id": "SHUTUTILITY",
+        "measure": "Utility services shut-off threat in the past 12 months among adults",
+        "year": "2023",
+        "value": 9.5,
+        "low": 7.8,
+        "high": 11.5,
+        "unit": "%"
+      },
+      {
+        "id": "LACKTRPT",
+        "measure": "Lack of reliable transportation in the past 12 months among adults",
+        "year": "2023",
+        "value": 8.3,
+        "low": 6.7,
+        "high": 10.3,
+        "unit": "%"
+      },
+      {
+        "id": "ACCESS2",
+        "measure": "Current lack of health insurance among adults aged 18-64 years",
+        "year": "2023",
+        "value": 7.1,
+        "low": 5.2,
+        "high": 9.8,
+        "unit": "%"
+      },
+      {
+        "id": "CHECKUP",
+        "measure": "Visits to doctor for routine checkup within the past year among adults",
+        "year": "2023",
+        "value": 77.1,
+        "low": 73.2,
+        "high": 80.8,
+        "unit": "%"
+      },
+      {
+        "id": "MHLTH",
+        "measure": "Frequent mental distress among adults",
+        "year": "2023",
+        "value": 20.9,
+        "low": 17.9,
+        "high": 24,
+        "unit": "%"
+      },
+      {
+        "id": "CSMOKING",
+        "measure": "Current cigarette smoking among adults",
+        "year": "2023",
+        "value": 13.9,
+        "low": 11,
+        "high": 17.1,
+        "unit": "%"
+      }
+    ]
+  }
+}

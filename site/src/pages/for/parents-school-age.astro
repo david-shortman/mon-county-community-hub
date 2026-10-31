@@ -1,0 +1,43 @@
+---
+// Starting page for parents of school-age kids (#272, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/parents-school-age.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "family", label: "Parents of school-age kids", summary: "Signing up for school, buses, after school, tutoring, meals and things to do, in one place" };
+const sections = [
+  { title: "Starting school or moving schools", links: [
+    { href: "/school-age/#enroll", label: "Sign up for school", text: "find your school by address and enroll" },
+    { href: "/school-age/#bus", label: "Buses", text: "bus times and delay alerts" },
+  ] },
+  { title: "After school and homework", links: [
+    { href: "/school-age/#after-school", label: "After-school programs", text: "programs at middle and high schools" },
+    { href: "/school-age/#tutoring", label: "Free tutoring", text: "free tutoring and homework help" },
+  ] },
+  { title: "Days off and dates", links: [
+    { href: "/calendar/", text: "school days off and other dates" },
+    { href: "/snow-and-ice/", text: "school closings and late buses" },
+  ] },
+  { title: "Things to do", links: [
+    { href: "/school-age/#things-to-do", label: "Things to do", text: "library teen programs, park programs, pools and the ice arena" },
+    { href: "/parks/", text: "parks, pools and ice skating" },
+  ] },
+  { title: "Food and bills", links: [
+    { href: "/help/food/", text: "food today or this week, or help buying groceries every month" },
+    { href: "/money/", text: "help with a bill this month" },
+  ] },
+  { title: "Health", links: [
+    { href: "/staying-well/", text: "checkups and shots to get each year" },
+    { href: "/dental-and-prescriptions/", text: "a dentist without dental insurance" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/parents-young-kids/", text: null },
+    { href: "/for/teens/", text: null },
+    { href: "/for/new-to-mon-county/", text: null },
+  ] },
+];
+---
+<Base title="Parents of school-age kids in Morgantown and Mon County: where to start" description="A starting page for parents of school-age kids in Monongalia County: signing up for school, buses and days off, after-school programs, free tutoring, food help, and things to do.">
+  <h1>For parents of school-age kids</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

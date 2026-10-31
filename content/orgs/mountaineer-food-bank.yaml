@@ -1,0 +1,11 @@
+name: Mountaineer Food Bank
+slug: mountaineer-food-bank
+kind: nonprofit
+website: https://mountaineerfoodbank.org/
+phone: "304-364-5518"
+summary: A food bank in Gassaway that supplies food to pantries and runs mobile pantries in 48 of West Virginia's 55 counties.
+topics: [food]
+area: statewide
+sources:
+  - url: https://mountaineerfoodbank.org/
+    checked: 2026-10-30

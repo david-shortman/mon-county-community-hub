@@ -1,0 +1,10 @@
+name: WVU College of Law Clinical Law Program
+slug: wvu-college-of-law-clinical-law-program
+kind: school
+phone: "304-293-7249"
+summary: Law students at WVU, supervised by faculty, give free legal help to people with low income who qualify, mostly in north central West Virginia.
+topics: [legal]
+area: morgantown
+sources:
+  - url: https://legalaidwv.org/other-resources-legal-services/
+    checked: 2026-10-31

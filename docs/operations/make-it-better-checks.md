@@ -9,7 +9,7 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 ## How to record a check
 
 - Re-read the page. Change only what the page now says, and set `checked` to today's Morgantown date only for the sources you actually re-read.
-- Seat counts live in `content/boards/<slug>.yaml` (`open_seats` from the city's vacancy list, `page_vacant` when the board's own page shows a different number). The other boards with open seats are listed in `site/src/pages/make-it-better/boards.astro` until #676 moves them into `content/boards/`.
+- Seat counts live in `content/boards/<slug>.yaml` (`open_seats` from the city's vacancy list, `page_vacant` when the board's own page shows a different number). The other boards with open seats are `content/boards/` entries with `section: other`.
 - Programs, grants and report routes live in `content/resources/` (topic `better` or `government`).
 - When two official pages disagree, keep both and say who says what. Never pick one.
 - A date that is not posted yet stays "next date not announced". Never guess.
@@ -18,7 +18,7 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 
 | Source | What to look for | Updates |
 |---|---|---|
-| [City vacancy list](https://www.morgantownwv.gov/210/Volunteer-Opportunities) | Open seats per board, who can serve, the apply links | `open_seats` in `content/boards/`, the other-boards list |
+| [City vacancy list](https://www.morgantownwv.gov/210/Volunteer-Opportunities) | Open seats per board, who can serve, the apply links | `open_seats` in `content/boards/` |
 | [City Council agendas](https://www.morgantownwv.gov/AgendaCenter/City-Council-3) | Items on trees, murals, landscape plans, the downtown plan, budget lines, board appointments | When it gets decided, Have your say |
 | Agenda Center for the Urban Landscape Commission, Tree Board, Cultural Arts Commission and Historic Landmarks Commission (linked from each board's page) | The same kinds of items, and meeting changes | Board entries |
 
@@ -45,6 +45,11 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 - **March and April:** budget season. State law has local levying bodies meet between March 7 and March 28 (WV Code 11-8-9). Read City Council and County Commission agendas weekly for budget items.
 - **March and April:** REAP litter grants and Make It Shine cleanups. Check the REAP pages weekly.
 - **April 2027:** the Organizational Arts Grants round should reopen.
+
+## Automated since 2026-10-31
+
+- **Weekly checklist issue:** the weekly, monthly and seasonal lists above are posted as one standing issue, refreshed each Monday by the daily Source check (`content/checklists/make-it-better.yaml`, see `docs/operations/recurring-checks.md`). It also lists entries that will say "may be out of date" within 30 days.
+- **Daily watch:** the city vacancy list and the three grant pages whose rounds open and close (Organizational Arts Grants, WV Public Art, Community Tree Grants) are on `content/watch/make-it-better.yaml`. A change opens one issue for a person. The saved "not currently open" and "check back in April 2027" lines alert when they go away.
 
 ## Known gaps
 
