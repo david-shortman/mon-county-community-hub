@@ -1,0 +1,51 @@
+---
+// How fast we act on group requests (#523): this month and all time, from the
+// `group-request` issues (#521). Counts under 10 show as "fewer than 10",
+// like the Corrections page. Never names who asked; a late request shows only
+// the item and its reason.
+import { loadGroupRequests, promiseStats, REQUEST_DAYS, REQUESTS_URL } from '../lib/group-requests.mjs';
+import { loadDir, todayYmd } from '../lib/content.mjs';
+const { headingLevel = 2 } = Astro.props;
+const H = `h${headingLevel}`;
+const requests = await loadGroupRequests();
+const today = todayYmd();
+const month = `${today.slice(0, 7)}-01`;
+const monthName = new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: 'UTC' }).format(new Date(`${month}T12:00:00Z`));
+const count = (n) => (n < 10 ? 'fewer than 10' : String(n));
+const records = ['orgs', 'resources', 'calendar', 'secondhand'].flatMap((d) => loadDir(d, { withHidden: true }));
+const itemName = (file) => {
+  const r = file && records.find((x) => `content/${x._file}` === file);
+  return r ? (r.title ?? r.name) : 'A listing';
+};
+const scopes = requests ? [[`${monthName} so far`, promiseStats(requests, today, { since: month })], ['Since we started', promiseStats(requests, today)]] : [];
+const late = requests ? promiseStats(requests, today).late : [];
+const line = (s) => {
+  if (!s.total) return 'No requests.';
+  if (s.total < 10) return 'Fewer than 10 requests.';
+  const parts = [`${s.total} requests came in.`];
+  if (s.decided >= 10) parts.push(`${Math.round(((s.fixedOnTime + s.hiddenOnTime) / s.decided) * 100)}% were acted on within ${REQUEST_DAYS} days.`);
+  parts.push(`${count(s.fixedOnTime)} were done within ${REQUEST_DAYS} days.`);
+  if (s.hiddenOnTime) parts.push(`For ${count(s.hiddenOnTime)}, the fix was not done in time, so we took the item down until it is.`);
+  return parts.join(' ');
+};
+---
+<section aria-labelledby="promise-numbers-h" id="promise-numbers">
+  <H id="promise-numbers-h">How fast we act on group requests</H>
+  <p>When a group asks us to fix, remove or add one of its listings, we log it and count how long it takes. A request is on time when we finish it within {REQUEST_DAYS} days, or take the item down by then.</p>
+  {requests === null ? (
+    <p>We could not load these numbers when this page was last built. You can see <a href={REQUESTS_URL}>every request on GitHub</a>.</p>
+  ) : requests.length === 0 ? (
+    <p><strong>No requests yet.</strong></p>
+  ) : (
+    <>
+      <ul>{scopes.map(([label, s]) => <li><strong>{label}:</strong> {line(s)}</li>)}</ul>
+      {late.length > 0 && (
+        <>
+          <p>These took longer than {REQUEST_DAYS} days:</p>
+          <ul>{late.map((r) => <li>{itemName(r.file)}: {r.lateReason ?? 'no reason written down yet'}.</li>)}</ul>
+        </>
+      )}
+      <p class="meta">From the <a href={REQUESTS_URL}>request log on GitHub</a>. Updated each time the site is built.</p>
+    </>
+  )}
+</section>
