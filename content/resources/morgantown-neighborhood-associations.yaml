@@ -1,0 +1,31 @@
+title: Morgantown neighborhood associations
+slug: morgantown-neighborhood-associations
+org: city-of-morgantown
+topics: [community]
+who_it_is_for: People who live in Morgantown city neighborhoods. The city's page lists when nine neighborhood associations meet.
+what_to_do: Find your neighborhood on the city's page and go to a meeting. The city says its calendar has the most up-to-date meeting times and places. The Neighborhood Coordinating Council, where associations meet with city staff and police, meets quarterly on the second Monday of the month at 7 p.m., on Teams and at City Hall.
+meetings:  # in the city's words and order (#902)
+  - name: Evansdale Neighborhood Association
+    when: "First Wednesday of the month at 6:30 p.m. in Percival Hall."
+  - name: First Ward Neighborhood Association
+    when: "Fourth Monday of each month at 6 p.m. at the pavilion at Jack Roberts Park."
+  - name: Greenmont Neighborhood Association
+    when: "Last Monday of the month at 7 p.m. at Gene's on Wilson Avenue."
+  - name: Jerome Park Neighborhood Association
+    when: "Quarterly (February, May, July, November) on the first Monday of the month at 7 p.m. Meetings alternate between Sabra UMC and Mount Hermon Baptist Church."
+  - name: South Hills Neighborhood Association
+    when: "Meets as needed."
+  - name: South Park Association of Neighbors
+    when: "Last Wednesday of the month at 7 p.m. at Eaton Park (weather permitting) or First Christian Church."
+  - name: Suncrest Neighborhood Association
+    when: "Last Thursday of the month at 7 p.m. on Zoom."
+  - name: Wiles Hill-Highland Park Neighborhood Association
+    when: "Third Wednesday of the month at the Wiles Hill community center: 6:30 p.m. social, 7 p.m. business."
+  - name: Woodburn Association of Neighbors
+    when: "Quarterly (January, April, June, October) on the third Wednesday of the month at 7 p.m. at the Woodburn Community Complex."
+contact:
+  url: https://www.morgantownwv.gov/319/Neighborhood-Associations
+  url_label: City neighborhood page
+sources:
+  - url: https://www.morgantownwv.gov/319/Neighborhood-Associations
+    checked: 2026-10-30

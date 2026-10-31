@@ -1,0 +1,39 @@
+name: Morgantown Public Library
+slug: mpls-morgantown
+kind: library
+area: morgantown
+community: Morgantown
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: The main library downtown, open since 1926, with books, programs, public computers and meeting rooms.
+regular:
+  - Monday 9 a.m. to 8 p.m.
+  - Tuesday 9 a.m. to 8 p.m.
+  - Wednesday 9 a.m. to 8 p.m.
+  - Thursday 9 a.m. to 8 p.m.
+  - Friday 9 a.m. to 4 p.m.
+  - Saturday 9 a.m. to 4 p.m.
+  - "Sunday: Closed"
+interests: [books, learning, games]
+tags: [free]
+contact:
+  url: https://mympls.org/about/locations/morgantown/
+  phone: "304-291-7425"
+  place: 373 Spruce Street, Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Free Wi-Fi and public computers. Computers can be used for up to 60 minutes.
+  - Board games for kids and adults can be borrowed with a library card. They are on the first floor, as part of the Library of Things. Library of Things items go out for 21 days, one item per card, with no renewals or holds.
+  - All branches are closed November 26 and 27, December 24 and 25, and December 31 and January 1.
+sources:
+  - url: https://mympls.org/about/locations/morgantown/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/faqs/
+    checked: 2026-10-30
+  - url: https://mympls.org/books-music-more/library-of-things/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/16028720
+    checked: 2026-10-30

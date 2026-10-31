@@ -1,0 +1,36 @@
+# Weekly checklist for the community centers and halls section (#752).
+# The pages with a fixed address are watched daily (content/watch/centers.yaml).
+# This list is for what a robot cannot read. How it works: site/scripts/checklists.mjs
+id: centers
+title: Community centers and halls
+issue_title: Weekly checklist, community centers
+tracking: 752
+intro: >-
+  Read each source below and add any dated public event at a place in
+  content/places/ as content/calendar/<place>-<event>-<date>.yaml with venue
+  and topic community. Event facts only, with a link, never copied text. No
+  event without a confirmed year. No volunteers' names or numbers. Update a
+  place file when hours, dues, prices or status change. One PR for the week,
+  or a "no change" comment on #752 with the date. Plan:
+  docs/plans/2026-10-30-centers-watch.md
+items:
+  - text: >-
+      Dominion Post, this week's "Events and opportunities" listing (a new
+      address each week, find it from the Community section): dinners, bingo,
+      bazaars and festivals at a listed place.
+    url: https://www.dominionpost.com/
+  - text: >-
+      Dominion Post, this week's "Senior news" column: Westside, Clay-Battelle
+      and Senior Monongalians dated events, hours, dues or lunch days.
+    url: https://www.dominionpost.com/
+  - text: >-
+      Smithtown Community and Senior Center calendar, read in a browser (Google
+      Calendar asks robots to stay out). Leave times off: some are wrong.
+    url: http://www.smithtowncommunity.com/calendar.html
+  - text: >-
+      Cheat Lake VFD events calendar, read in a browser. Public events only;
+      skip rentals and anything marked private.
+    url: https://www.cheatlakefire.org/events
+  - text: >-
+      If a "Community center or park event page changed" issue is open (label
+      source-changed), work through it too.

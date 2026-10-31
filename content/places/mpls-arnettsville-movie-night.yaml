@@ -1,0 +1,28 @@
+name: Movie Night at the Arnettsville Public Library
+slug: mpls-arnettsville-movie-night
+kind: group
+area: south
+community: Arnettsville
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: A monthly Friday movie night at the Arnettsville library.
+regular:
+  - One Friday evening a month. See the library calendar for dates.
+venue: arnettsville
+interests: [social]
+contact:
+  url: https://events.mympls.org/calendar
+  phone: "304-278-2021"
+  place: Arnettsville Public Library, 4120 Fairmont Road, Morgantown, WV 26501
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Listed dates are Friday, October 30 (6:30 p.m.), November 20 (5:30 p.m.), December 18 (5:30 p.m.) and January 29, 2027 (5:30 p.m.).
+  - Listed in the calendar for adults.
+sources:
+  - url: https://events.mympls.org/event/17276983
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/17537584
+    checked: 2026-10-30

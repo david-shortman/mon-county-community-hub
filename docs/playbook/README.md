@@ -47,15 +47,21 @@ Every session should skim this page before picking work in the [daily loop](../C
 
 | File | Covers |
 |---|---|
+| [checking-corrections.md](checking-corrections.md) | How a reported correction is checked before it changes a listing: confirm on a source, a separate source for new phone numbers and addresses, "still correct" stamps a date, hide risky items while checking |
 | [civic-tech.md](civic-tech.md) | GOV.UK Service Standard, U.S. Digital Services Playbook, 18F methods, Code for America, Digital Public Goods Standard, accessibility |
 | [open-data.md](open-data.md) | Open Referral HSDS, the 211 taxonomy, Open311, iCalendar, schema.org, West Virginia and county data portals, licensing |
 | [community-practice.md](community-practice.md) | Theory of change, logic models, Results-Based Accountability, collective impact, asset-based community development, community-centered design, the directory problem |
 | [measurement.md](measurement.md) | Contribution analysis, tracked links, partner numbers, baselines, measurement plans, ethical tests, privacy-respecting analytics, honest reporting |
 | [trust-and-ai.md](trust-and-ai.md) | AI disclosure, sourcing rules, review of high-stakes information, corrections, reporting problems, transparency |
 | [landscape.md](landscape.md) | Living map of peer projects putting AI to work for communities, including failures and shut-downs, with what we can adopt and how we could amplify each |
+| [example-walkthroughs.md](example-walkthroughs.md) | Step-by-step walkthroughs about a clearly labeled made-up person, using real sourced programs: the rules and a checklist |
 | [funder-lens-cities-deliver.md](funder-lens-cities-deliver.md) | What the Cities Deliver AI program funds, its seven principles mapped to our charter, lessons to adopt, and project directions for Mon County |
+| [help-tone.md](help-tone.md) | Tone for help pages: self-serve first, offering a person as a normal choice, saying who qualifies, and no shame words, with before and after examples from our pages |
+| [public-data-first.md](public-data-first.md) | Use public government pages and data first; West Virginia FOIA requests only as a rare backup that David decides, with where to look in Mon County |
 | [reaching-people.md](reaching-people.md) | How the site reaches residents through trusted helpers and directly at any hour: warm handoffs, print and text, no-name and after-hours help, and what needs David's yes |
 | [what-people-search-for.md](what-people-search-for.md) | What residents ask for help with, the words they search in, and what they need next, by topic, to shape landing pages |
+| [where-people-are-online.md](where-people-are-online.md) | Showing up in search, AI assistants and local groups' own pages: what is already built (llms.txt, JSON-LD, the API, the MCP server, Pass it on, flyers) and the draft share kit for each guide |
+| [writing-rules.md](writing-rules.md) | How we write about this place and the project: credit local news, no deficit or efficiency framing, no claims we can't show, keep who runs and funds it current |
 
 ## Keeping this current
 

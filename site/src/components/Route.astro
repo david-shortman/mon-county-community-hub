@@ -9,3 +9,17 @@ const { label = 'Steps' } = Astro.props;
 <ol class="route" aria-label={label}>
   <slot />
 </ol>
+
+<script>
+  // A link to a step (/flood-zone/#permit) opens that step, so the reader
+  // lands on its words, not on a closed box. With no script the step is
+  // still there to tap.
+  const openTarget = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const step = id && document.getElementById(id);
+    const d = step?.closest('.milepost')?.querySelector('details');
+    if (d && !d.open) { d.open = true; step!.scrollIntoView({ block: 'start' }); }
+  };
+  openTarget();
+  window.addEventListener('hashchange', openTarget);
+</script>
