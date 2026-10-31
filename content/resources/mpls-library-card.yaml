@@ -1,0 +1,18 @@
+title: Get a library card
+slug: mpls-library-card
+org: morgantown-public-library-system
+topics: [community]
+who_it_is_for: "The Morgantown Public Library System gives a full library card to West Virginia residents for free. Out-of-state residents can get one for $20 a year, in person at any of its Monongalia County locations. A digital-only card (e-books, audiobooks, movies, music, language lessons and tutoring) is for Monongalia County residents."
+what_to_do: For a full card, bring proof of identity and proof of West Virginia residence to the library. You can download the application first and bring it with you. Children under 16 need an adult with them. For a digital-only card, email the application from the library's page; the card and a welcome packet come in the mail. The library is fine-free, with fees only for lost or damaged items.
+contact:
+  phone: "304-291-7425"
+  url: https://mympls.org/books-music-more/get-a-library-card/
+  url_label: Library card page
+cost: Free for West Virginia residents. $20 a year for out-of-state residents.
+what_to_bring:
+  - "Proof of identity and proof of West Virginia residence. The library's examples: a driver's license or government-issued ID, a utility bill, a car registration, an apartment lease, or a current postmarked letter with your name and address"
+sources:
+  - url: https://mympls.org/books-music-more/get-a-library-card/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/locations/morgantown/
+    checked: 2026-10-30

@@ -73,6 +73,7 @@ ${centers}
 - [People with disabilities and caregivers](${u('/for/disability-and-caregivers/')}): a starting page that links to independent living, care at home through Medicaid, job help and health costs
 - [Free car seat checks](${u('/car-seat-checks/')}): the two child car seat fitting stations the WV DMV lists for Mon County (Sheriff's Department, WVU Medicine Children's), free, by appointment
 - [Driver's license and plates for new residents](${u('/drivers-license/')}): the WV DMV rules for switching an out-of-state license, title and registration (vehicles within 30 days), fees, what to bring, and the Morgantown Regional Office address, phone, hours and appointments
+- [Meet people and get a library card](${u('/meet-people/')}): a Morgantown Public Library System card (free for WV residents, $20 a year out of state, digital-only for county residents), free library programs for adults, and when each of Morgantown's nine neighborhood associations meets
 
 ## Data
 
