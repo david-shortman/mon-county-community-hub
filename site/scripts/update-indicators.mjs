@@ -1,6 +1,6 @@
 // Refreshes the saved copy of each community-numbers source (#15).
-// Commit the changed files in src/lib/indicators/snapshots/.
-import { SOURCES, loadIndicator } from '../src/lib/indicators/index.mjs';
+// Commit the changed files in src/lib/live-indicators/snapshots/.
+import { SOURCES, loadIndicator } from '../src/lib/live-indicators/index.mjs';
 
 for (const src of SOURCES) {
   const r = await loadIndicator(src, { save: true });

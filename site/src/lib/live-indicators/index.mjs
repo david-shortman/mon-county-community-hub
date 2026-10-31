@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const SNAPSHOT_DIR = fs.existsSync(path.join(here, 'snapshots'))
   ? path.join(here, 'snapshots')
-  : path.resolve(process.cwd(), 'src/lib/indicators/snapshots');
+  : path.resolve(process.cwd(), 'src/lib/live-indicators/snapshots');
 const UA = 'MonCountyCommunityHub/1.0 (+https://github.com/david-shortman/mon-county-community-hub)';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
