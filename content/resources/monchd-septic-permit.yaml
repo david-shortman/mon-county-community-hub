@@ -1,0 +1,16 @@
+title: Septic system permit (new, repair or change)
+slug: monchd-septic-permit
+org: monongalia-county-health-department
+topics: [health, government]
+who_it_is_for: Homes and properties in Mon County without public sewer that need a new septic system, a change to one, or a repair to a failing one.
+what_to_do: Start with a certified septic installer. The installer does a percolation (perc) test, checks the site and recommends a system or repair. You or the installer then send the health department an application. A sanitarian visits the site, and once it is approved the health department issues a construction permit. Before the system is covered up, the installer must call the health department for a final inspection.
+contact:
+  phone: "304-598-5131"
+  url: https://www.monchd.org/services/septic-and-wells
+  url_label: Steps and application
+cost: "The health department's fiscal year 2026-2027 fee schedule lists $222 for a conventional sewage system permit, $450 for an alternative system, and $150 for a renewal or system change."
+sources:
+  - url: https://www.monchd.org/services/septic-and-wells
+    checked: 2026-10-30
+  - url: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
+    checked: 2026-10-30

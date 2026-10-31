@@ -1,0 +1,33 @@
+---
+// Septic and well water, for homes outside public sewer and water (#662,
+// part of #271). Facts come from the records shown, all from the
+// Monongalia County Health Department's Septic and Wells page.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "community", topic: "government", label: "Septic systems and well water", summary: "Permits for a new or failing septic system or a well, testing well water, and the septic and well check when a home is sold" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Septic systems and well water in Mon County, WV" description="For Monongalia County homes without public sewer or water: how to get a permit for a new or failing septic system or a water well, how to test well water, and the health department check when a home is sold.">
+  <h1>Septic systems and well water</h1>
+  <p class="lede">Homes without public sewer use a septic system, and homes without public water use a well. The Monongalia County Health Department handles the permits and can test well water. Most of the work starts with a certified installer or well driller.</p>
+
+  <h2 id="septic">A new, changed or failing septic system</h2>
+  {r('monchd-septic-permit') && <ResourceCard r={r('monchd-septic-permit')} showCost />}
+  {r('mon-county-wastewater-loan-fund') && <ResourceCard r={r('mon-county-wastewater-loan-fund')} />}
+
+  <h2 id="well">A new well, or closing one</h2>
+  {r('monchd-well-permit') && <ResourceCard r={r('monchd-well-permit')} showCost />}
+
+  <h2 id="test">Is my well water safe?</h2>
+  {r('monchd-well-water-test') && <ResourceCard r={r('monchd-well-water-test')} showCost />}
+
+  <h2 id="selling">Buying or selling a home with a septic system or well</h2>
+  {r('monchd-home-loan-evaluation') && <ResourceCard r={r('monchd-home-loan-evaluation')} showCost />}
+
+  <p>Building or adding on outside town limits? See <a href={`${base}/permits/`}>Do I need a building permit?</a> for the other permits and forms that can apply.</p>
+
+  <p class="meta">Fees are from the health department's fiscal year 2026-2027 fee schedule. Ask when you call, since they can change.</p>
+</Base>
