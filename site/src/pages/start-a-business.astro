@@ -15,6 +15,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const city = [{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked: '2026-10-30' }];
 const portal = [{ url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-10-30' }];
 const tax = [{ url: 'https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx', checked: '2026-10-30' }];
+const eh = [{ url: 'https://www.monchd.org/departments-programs/environmental-health', checked: '2026-10-30' }];
 const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns', checked: '2026-10-30' }];
 ---
 <Base title="Start a business in Morgantown, WV, step by step" description="The City of Morgantown's steps to open a business inside city limits, in order: check zoning, register with the state, get a city business license, get a Certificate of Occupancy ($65), schedule inspections, and file city B&O tax. Each step links to the official page.">
@@ -27,7 +28,15 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
 
   <h2>2. Register with the state</h2>
   {resource('wv-one-stop-business-registration') && <ResourceCard r={resource('wv-one-stop-business-registration')} showCost />}
-  <p>The State Tax Division says anyone doing business in West Virginia must register with it before starting. The fee for a Business Registration Certificate is $30. Some groups must register but do not pay the fee, such as qualifying 501(c) nonprofits and farming businesses; see the full list on the Tax Division page. Very small businesses may not need a certificate at all: the page lists three conditions that must all be true, including business gross income of $4,000 or less in the last tax year. The certificate does not expire, but it ends if the business name, location or ownership changes. You must post it where you do business. Tax help: <a href={telHref('304-558-3333')}>304-558-3333</a> or <a href={telHref('800-982-8297')}>800-982-8297</a>.</p>
+  <p>The State Tax Division says anyone doing business in West Virginia must register with it before starting. It gives you a Business Registration Certificate.</p>
+  <ul>
+    <li><strong>Fee:</strong> $30.</li>
+    <li><strong>Some groups pay no fee</strong> but still register, such as qualifying 501(c) nonprofits and farming businesses. See the full list on the Tax Division page.</li>
+    <li><strong>Some very small businesses need no certificate.</strong> The page lists three conditions that must all be true. One is business gross income of $4,000 or less in the last tax year.</li>
+    <li><strong>How long it lasts:</strong> it does not expire. It ends if the business name, location or owner changes.</li>
+    <li><strong>Post it</strong> where you do business.</li>
+  </ul>
+  <p>Tax help: <a href={telHref('304-558-3333')}>304-558-3333</a> or <a href={telHref('800-982-8297')}>800-982-8297</a>.</p>
   <p><a class="btn" href="https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx"><span>Tax Division questions and answers</span></a></p>
   <SourceLine sources={tax} about="Step 2, state Business Registration Certificate" />
 
@@ -57,12 +66,14 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
   <SourceLine sources={bo} about="Step 6, city B&O tax" />
 
   <h2>Selling food?</h2>
-  <p>Food businesses, food trucks and event stands also need permits from the Monongalia County Health Department. Call Environmental Health at <a href={telHref('304-598-5131')}>304-598-5131</a> or see <a href="https://www.monchd.org/departments-programs/environmental-health">its applications</a>.</p>
+  <p>The Monongalia County Health Department posts food permit applications for food businesses, mobile food units and temporary events. Call Environmental Health at <a href={telHref('304-598-5131')}>304-598-5131</a> or see the <a href="https://www.monchd.org/departments-programs/environmental-health">Environmental Health permit applications</a>.</p>
+  <SourceLine sources={eh} org="monongalia-county-health-department" about="Food permits" />
 
   <h2>All the city's steps in one card</h2>
   {resource('morgantown-business-license') && <ResourceCard r={resource('morgantown-business-license')} />}
 
   <p>City Hall: 389 Spruce Street, Morgantown. Monday through Thursday, 7 a.m. to 5:30 p.m. <a href={telHref('304-284-7405')}>304-284-7405</a>. The city suggests checking with each department that you have everything before you open.</p>
+  <SourceLine sources={city} about="City Hall contact" />
 
   <p class="meta">Sources checked October 30, 2026. Fees and rules can change, so check the official page before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
