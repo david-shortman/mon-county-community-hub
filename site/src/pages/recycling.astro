@@ -43,7 +43,7 @@ const lookup = [
   { item: 'Latex paint', say: 'The county plans a collection in 2027. No date yet.', href: '#hard-items' },
   { item: 'Paper to shred', say: 'PACE Enterprises at Mylan Park.', href: '#drop-off' },
   { item: 'Plastic bags', say: 'Not at the county drop-off center. Bring recyclables in a box or bin.', href: '#drop-off' },
-  { item: 'Tires', say: 'A state tire collection runs monthly, except December to February. Not at the transfer station.', href: '#hard-items' },
+  { item: 'Tires', say: 'A state tire collection runs monthly, except December to February. The transfer station does not take them.', href: '#hard-items' },
 ];
 ---
 <Base title="Trash, recycling and drop-off in Morgantown, WV" description="Pickup days, what goes in the curbside bin, and where to take electronics, paint, tires and other hard items in Morgantown and Monongalia County.">
@@ -55,7 +55,7 @@ const lookup = [
     <ul>
       {lookup.map((l) => <li><a href={l.href}><strong>{l.item}</strong></a><span>{l.say}</span></li>)}
     </ul>
-    <SourceLine sources={src.centerRules} about="cardboard, pizza boxes and plastic bags">{' '}The other answers are sourced in their sections below.</SourceLine>
+    <SourceLine sources={src.centerRules} about="cardboard, pizza boxes and plastic bags">{' '}The other answers are sourced in their sections below; that the transfer station takes no tires is on its card.</SourceLine>
   </section>
 
   <h2 id="pickup">Find your pickup day</h2>
@@ -114,6 +114,6 @@ const lookup = [
   .lookup h2 { margin-top: 0.8em; }
   .lookup ul { list-style: none; margin: 8px 0; padding: 0; border-top: 1px solid var(--line); }
   .lookup li { display: grid; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--line); }
-  .lookup a { display: inline-flex; align-items: center; min-height: 32px; }
+  .lookup a { display: inline-flex; align-items: center; min-height: 44px; }
   .lookup span { color: var(--fg); line-height: 1.45; }
 </style>
