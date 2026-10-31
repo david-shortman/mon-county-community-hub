@@ -3,7 +3,7 @@ slug: coopers-rock-state-forest
 org: wv-state-parks
 topics: [outdoors]
 who_it_is_for: "A state forest less than 15 miles from Morgantown, with canyon overlooks, historic sites, about 50 miles of trails, sandstone cliffs for climbing and bouldering, and cross-country ski terrain."
-hours: "9 a.m. to 5 p.m."
+hours: "The forest page lists 9 a.m. to 5 p.m. and does not say which days."
 what_to_do: "Get the free trail map from the forest's page. Cabins and two campgrounds are open April to November, weather permitting. To fish at Messinger Lake you need a West Virginia fishing license. Licensed hunters may hunt in season in set areas, not near the recreation areas."
 contact:
   phone: "304-594-1561"
@@ -14,4 +14,6 @@ sources:
   - url: https://wvstateparks.com/park/coopers-rock-state-forest/
     checked: 2026-10-30
   - url: https://wvstateparks.com/parks/coopers-rock-state-forest/activities-at-coopers-rock-state-forest/
+    checked: 2026-10-30
+  - url: https://wvstateparks.com/wp-content/uploads/2017/03/CoopersRockStateForestMap.pdf
     checked: 2026-10-30
