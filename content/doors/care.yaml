@@ -10,7 +10,7 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: Mental health help, care with no insurance, a dentist, help paying for medicine, keeping your Medicaid in 2027, a new baby, birth control, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Mental health help, help with drugs or alcohol, care with no insurance, a dentist, help paying for medicine, keeping your Medicaid in 2027, a new baby, birth control, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
@@ -45,6 +45,14 @@ steps:
     when: week
     resource: monchd-reproductive-health
     text: Call the health department to book a pregnancy test, birth control or STI testing.
+  naloxone:
+    when: today
+    resource: monchd-free-naloxone
+    text: Get free naloxone (Narcan) from the health department, or any hour from the vending machine at Wise Path in Westover.
+  treatment:
+    when: week
+    resource: valley-substance-use-treatment
+    text: Call Valley HealthCare to talk about treatment options.
   ride:
     when: week
     resource: wv-medicaid-rides
@@ -100,6 +108,10 @@ situations:
     label: I have no insurance or can't afford a doctor
     page: /no-insurance/
     steps: [freeclinic, applycoverage]
+  - id: drugs
+    label: I need help with drugs or alcohol, or free Narcan
+    page: /drugs-and-alcohol/
+    steps: [naloxone, treatment]
   - id: dentist
     label: I need a dentist, or help paying for medicine
     page: /dental-and-prescriptions/

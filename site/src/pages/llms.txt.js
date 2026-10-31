@@ -39,6 +39,7 @@ export function GET({ site }) {
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
 - [Dentist or prescriptions](${u('/dental-and-prescriptions/')}): a dentist with no dental insurance (health department dental clinic, WVU Dental) and help paying for medicine (Milan Puskar Health Right free clinic)
 - [Turning 65 or on Medicare](${u('/turning-65/')}): when to sign up, visits and shots Medicare pays for, free help from WV SHIP, help paying Medicare costs
+- [Drugs or alcohol help](${u('/drugs-and-alcohol/')}): what to do in an overdose, West Virginia's overdose 911 law, free naloxone (Narcan) from the Mon County health department, HELP4WV and SAMHSA help lines, and treatment at Valley HealthCare and WVU Medicine
 - [Pregnant or new baby](${u('/pregnant-or-new-baby/')}): Medicaid and WVCHIP for pregnancy and 12 months after, pregnancy tests at the health department, WIC, and free programs for families with babies
 - [Birth control and testing](${u('/birth-control-and-testing/')}): free or low cost, confidential birth control, pregnancy tests and STI testing at the Monongalia County Health Department, including for teens
 - [No insurance or can't afford a doctor](${u('/no-insurance/')}): the free Milan Puskar Health Right clinic, sliding fee care at Clay-Battelle Community Health Center and the health department, applying for Medicaid, free sign-up help from WV Navigator, and help paying WVU Medicine and Mon Health hospital bills
