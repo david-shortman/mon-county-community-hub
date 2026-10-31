@@ -1,0 +1,34 @@
+---
+// Starting page for parents of babies and toddlers (#266, epic #261). Links
+// only; research and gaps: docs/groups/parents-young-kids.md.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "family", label: "Parents of babies and toddlers", summary: "How your child is growing, Pre-K, playgroups, checkups, and food help, in one place" };
+const sections = [
+  { title: 'How your child is growing', links: [
+    { href: '/family/?pick=baby-growth', label: 'Worried about how your baby or toddler is growing', text: 'who to call, and you do not need a doctor to send you' },
+    { href: '/staying-well/', text: 'checkups and shots to keep up with' },
+    { href: '/car-seat-checks/', text: 'two places in Morgantown that check a car seat for free' },
+  ] },
+  { title: 'Preschool', links: [
+    { href: '/family/?pick=prek', label: 'Pre-K and Head Start', text: 'for children who will be 3 or 4' },
+  ] },
+  { title: 'Things to do and other parents to meet', links: [
+    { href: '/family/?pick=little-kids', label: 'Playgroups and story times', text: 'free playgroups, a baby pantry and library story times' },
+    { href: '/families-and-kids/', text: 'everything for young kids on one page' },
+  ] },
+  { title: 'Food and bills', links: [
+    { href: '/help/food/', text: 'food today or this week, or help buying groceries every month' },
+    { href: '/snap/', text: 'how to apply online or by phone' },
+    { href: '/utility-bills/', text: 'help with a heat, water or electric bill' },
+  ] },
+  { title: 'Work and school for you', links: [
+    { href: '/work-and-learning/', text: 'job help, adult classes and free English lessons' },
+  ] },
+];
+---
+<Base title="Parents of babies and toddlers in Morgantown and Mon County: where to start" description="A starting page for parents of babies and toddlers in Monongalia County: child development help, Pre-K and Head Start, playgroups and story times, checkups, and food help.">
+  <h1>For parents of babies and toddlers</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

@@ -1,0 +1,136 @@
+---
+// Make a list for someone (#404): a helper (a librarian, a pantry or church
+// volunteer, a nurse, a neighbor) picks 3 to 6 places and can add a short
+// note, and the page turns it into a one-page list to print, text or share.
+// The picks and the note ride in the web address (?pick=a&pick=b&note=...),
+// so nothing is saved or sent anywhere. Every line comes from a resource
+// record, with its source and checked date. Without scripts the page is a
+// plain list of every place, which prints as it is.
+import Base from '../layouts/Base.astro';
+import { loadDir, loadDoors, oldestChecked, prettyDate, todayYmd, shortUrl, isStale } from '../lib/content.mjs';
+export const page = { door: "about", label: "Make a list for someone", summary: "Pick a few places, add a note, and print or text the list" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const all = loadDir('resources').filter((r) => r.slug).sort((a, b) => a.title.localeCompare(b.title));
+const { doors } = loadDoors();
+// Group the choices by door, each place once, under the first door it fits.
+const seen = new Set();
+const groups = doors.map((d) => {
+  const topics = Object.keys(d.topics);
+  const list = all.filter((r) => !seen.has(r.slug) && r.topics.some((t) => topics.includes(t)));
+  list.forEach((r) => seen.add(r.slug));
+  return { name: d.name, list };
+}).filter((g) => g.list.length);
+const MAX = 6;
+const NOTE_MAX = 200;
+---
+<Base title="Make a list of help for someone in Mon County" description="Pick a few places in Morgantown and Monongalia County, add a short note, and print or text a one-page list. Nothing is saved.">
+  <div class="mal-pick-area">
+    <h1>Make a list for someone</h1>
+    <p class="lede">Pick up to {MAX} places, add a short note if you like, and print or text the list to the person you are helping.</p>
+    <p class="note"><strong>Keep it private:</strong> do not type names, addresses, health details or anything personal in the note. The note is only in the web address of the list. Nothing is saved or sent to us.</p>
+
+    <form id="mal-form" method="get" action={`${base}/make-a-list/`} hidden>
+      {groups.map((g) => (
+        <fieldset class="mal-group">
+          <legend>{g.name}</legend>
+          <ul class="pick">
+            {g.list.map((r) => <li><label><input type="checkbox" name="pick" value={r.slug} /><span>{r.title}</span></label></li>)}
+          </ul>
+        </fieldset>
+      ))}
+      <p><label for="mal-note">A short note for them (optional, up to {NOTE_MAX} letters)</label><br />
+        <textarea id="mal-note" name="note" maxlength={NOTE_MAX} rows="3" cols="40" placeholder="Example: Call the first one in the morning."></textarea></p>
+      <p class="mal-count" id="mal-count" aria-live="polite"></p>
+      <button class="btn btn-primary" type="submit">Make the list</button>
+    </form>
+    <p id="mal-noscript">Your browser is not running scripts, so here is every place. Print this page, or circle the ones you want.</p>
+  </div>
+
+  <section id="mal-list" aria-labelledby="mal-list-h">
+    <h2 id="mal-list-h" tabindex="-1">Places that can help</h2>
+    <p id="mal-note-out" class="mal-note" hidden></p>
+    <ul class="sheet-list">
+      {all.map((r) => (
+        <li data-slug={r.slug}>
+          <p class="sh-title">{r.title}</p>
+          <p class="sh-reach">
+            {r.contact?.phone && <span>Call <strong>{r.contact.phone}</strong></span>}
+            {r.contact?.text && <span>Text <strong>{r.contact.text}</strong></span>}
+            {!r.contact?.phone && r.contact?.url && <span>Online: <strong>{shortUrl(r.contact.url)}</strong></span>}
+          </p>
+          {r.contact?.place && <p>{r.contact.place}</p>}
+          {r.hours && <p>{r.hours}</p>}
+          <p>{r.who_it_is_for}{r.cost === 'free' && ' Free.'}</p>
+          <p class="sh-src">Source: {r.sources.map((s) => shortUrl(s.url)).join(', ')}. Checked {prettyDate(oldestChecked(r.sources))}.{isStale(oldestChecked(r.sources), today) && <strong> Not checked in over 6 months: call to confirm.</strong>}</p>
+        </li>
+      ))}
+    </ul>
+    <p class="meta">From Everything Morgantown (everythingmorgantown.org), an independent community guide, on {prettyDate(today)}. Things change, so call first.</p>
+    <div class="actions mal-keep" id="mal-actions" hidden>
+      <button class="btn btn-primary" type="button" id="mal-print"><span>Print the list</span></button>
+      <a class="btn" id="mal-text" href="sms:"><span>Text the list</span></a>
+      <button class="btn" type="button" id="mal-copy" hidden><span class="lbl">Share the list</span></button>
+      <a class="btn" href={`${base}/make-a-list/`}><span>Start over</span></a>
+    </div>
+  </section>
+
+  <style>
+    .mal-group { border: 1px solid var(--line); border-radius: 10px; margin: 12px 0; padding: 4px 12px 8px; }
+    .mal-group legend { font-weight: 700; padding: 0 4px; }
+    #mal-note { width: 100%; max-width: 32rem; font: inherit; padding: 8px; border: 1.5px solid var(--muted); border-radius: 8px; background: var(--card); color: var(--fg); box-sizing: border-box; }
+    .mal-note { font-size: 1.1rem; border-left: 4px solid var(--brick); padding: 6px 12px; background: var(--accent-bg); }
+    .sheet-list { list-style: none; padding: 0; margin: 12px 0; }
+    .sheet-list li { break-inside: avoid; border-top: 1px solid var(--line); padding: 6px 0 8px; }
+    .sheet-list p { margin: 2px 0; }
+    .sh-title { font-weight: 800; }
+    .sh-reach { display: flex; flex-wrap: wrap; gap: 0 14px; font-size: 1.1rem; }
+    .sh-src { font-size: 0.9rem; color: var(--muted); overflow-wrap: anywhere; }
+    @media print {
+      .mal-pick-area, .mal-keep { display: none !important; }
+      .sh-src { color: #000; }
+    }
+  </style>
+  <script is:inline define:vars={{ MAX, NOTE_MAX }}>
+    (function () {
+      var form = document.getElementById('mal-form');
+      var list = document.getElementById('mal-list');
+      document.getElementById('mal-noscript').hidden = true;
+      form.hidden = false;
+      var q = new URLSearchParams(location.search);
+      var picks = q.getAll('pick').slice(0, MAX);
+      var note = (q.get('note') || '').slice(0, NOTE_MAX);
+      var boxes = form.querySelectorAll('input[name="pick"]');
+      var count = document.getElementById('mal-count');
+      function update() {
+        var n = form.querySelectorAll('input[name="pick"]:checked').length;
+        count.textContent = n + ' of ' + MAX + ' picked.';
+        boxes.forEach(function (b) { b.disabled = !b.checked && n >= MAX; });
+      }
+      boxes.forEach(function (b) { b.checked = picks.indexOf(b.value) > -1; b.addEventListener('change', update); });
+      document.getElementById('mal-note').value = note;
+      update();
+      var items = list.querySelectorAll('li[data-slug]');
+      var shown = 0;
+      items.forEach(function (li) { var on = picks.indexOf(li.dataset.slug) > -1; li.hidden = !on; if (on) shown++; });
+      if (!shown) { list.hidden = true; return; }
+      // A list is showing: put it first and the picker after it.
+      document.querySelector('.mal-pick-area').before(list);
+      document.getElementById('mal-list-h').textContent = 'Places that can help you';
+      if (note) { var o = document.getElementById('mal-note-out'); o.textContent = 'Note: ' + note; o.hidden = false; }
+      var acts = document.getElementById('mal-actions'); acts.hidden = false;
+      document.getElementById('mal-print').addEventListener('click', function () { window.print(); });
+      document.getElementById('mal-text').href = 'sms:?&body=' + encodeURIComponent('A list of places that can help: ' + location.href);
+      var share = document.getElementById('mal-copy');
+      if (navigator.share || (navigator.clipboard && window.isSecureContext)) {
+        if (!navigator.share) share.querySelector('.lbl').textContent = 'Copy the link';
+        share.hidden = false;
+        share.addEventListener('click', function () {
+          if (navigator.share) { navigator.share({ title: 'Places that can help', url: location.href }).catch(function () {}); return; }
+          navigator.clipboard.writeText(location.href).then(function () { var a = document.getElementById('announce'); if (a) a.textContent = 'Link copied'; });
+        });
+      }
+      document.getElementById('mal-list-h').focus();
+    })();
+  </script>
+</Base>

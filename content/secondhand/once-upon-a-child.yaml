@@ -1,0 +1,19 @@
+name: Once Upon a Child
+slug: once-upon-a-child
+kind: resale
+area: westover
+run_by: Once Upon a Child Morgantown
+address: "7100 Willie G Ave, #104, Morgantown, WV"
+sells: Used kids' clothing, shoes, toys and baby gear.
+takes: Kids' clothing, shoes, toys and baby gear in good shape. No appointment needed.
+goods: [kids, clothes]
+buys_from_you: true
+url: https://onceuponachild.com/locations/morgantown-wv/
+url_label: Shop website
+status: likely
+note: Check the shop website for hours.
+sources:
+  - url: https://onceuponachild.com/locations/morgantown-wv/
+    checked: 2026-10-30
+  - url: https://wrc.wvu.edu/resources/basic-needs/clothing
+    checked: 2026-10-30

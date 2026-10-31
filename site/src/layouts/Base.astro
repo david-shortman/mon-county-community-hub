@@ -1,9 +1,11 @@
 ---
 import Icon from '../components/Icon.astro';
+import AlsoCheck from '../components/AlsoCheck.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
 import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
+import UpkeepNotice from '../components/UpkeepNotice.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
 import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
@@ -322,11 +324,13 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       </div>
     </header>
     <main class="wrap" id="main" tabindex="-1" data-pagefind-body={searchable ? '' : undefined}>
+      <UpkeepNotice />
       <Breadcrumb route={route} />
       {help && !crisis && <CrisisLine />}
       {searchable && tagDoor && <p hidden data-pagefind-filter="door">{tagDoor.name}</p>}
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       <slot />
+      <AlsoCheck route={route} />
     </main>
     <footer class="site">
       <div class="wrap">
