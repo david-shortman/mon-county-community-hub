@@ -21,7 +21,10 @@ const wv211 = resource('wv-211');
 // The Lifeline link shows once its record is in (#668, #735).
 const lifeline = loadDir('resources').some((e) => e.slug === 'lifeline-phone-internet-discount');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/monongalia_county_assistance_p.html', checked: '2026-10-28', name: 'Need Help Paying Bills (a national directory)' }];
+const charitySources = [
+  { url: 'https://www.needhelppayingbills.com/html/monongalia_county_assistance_p.html', checked: '2026-10-28', name: 'Need Help Paying Bills (a national directory)' },
+  { url: 'https://www.needhelppayingbills.com/html/morgantown_salvation_army_assi.html', checked: '2026-10-31', name: 'Need Help Paying Bills, Salvation Army page' },
+];
 ---
 <Base help title="Help paying a utility bill in Morgantown and Mon County" description="What to do if you cannot pay a heat, water or electric bill in Morgantown and Monongalia County: who to call first, and the programs that can help.">
   <h1>Help paying a utility bill</h1>
@@ -36,6 +39,7 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
         <li><strong>Payment arrangement:</strong> smaller payments added to your monthly bill.</li>
         <li><strong>A later due date</strong> for customers who are 60 or older and get Social Security, a pension or disability benefits.</li>
         <li><strong>Someone to warn:</strong> a friend, relative, clergy member or agency can be told before your power is shut off.</li>
+        <li><strong>Payment agreement and shutoffs:</strong> Mon Power says that under state Public Service Commission rules, a payment agreement for your past due amount delays a shutoff, and paying it as agreed prevents one. A doctor's note about a health problem does not stop a shutoff by itself.</li>
         <li><strong>Critical Care program:</strong> for homes where someone uses electric medical equipment to stay alive. Mon Power says it helps these customers get ready for power outages.</li>
       </ul>
       <SourceLine sources={monPower.sources} org={monPower.org} about="Mon Power" /></li>
@@ -51,11 +55,10 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   <Milepost n={2} title="Apply for help paying" id="programs">
 
   <h3>LIEAP: heating help from the state</h3>
-  <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Eligibility depends on household income, household size and whether you pay for your own heat. The maximum benefit last season was $2,000 per household.</p>
+  <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Eligibility depends on household income, household size and whether you pay for your own heat. The maximum benefit is $2,000 per household.</p>
   <ul>
-    <li><strong>Last season (2026):</strong> applications were mailed starting January 5 to households that got LIEAP the season before, older adults and people with disabilities. For them, the last day was Friday, January 30, or sooner if money ran out. Everyone else could apply starting February 2.</li>
     <li><strong>This season:</strong> {lieap.what_to_do}</li>
-    <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel (like propane or oil). Do not mail the form to your utility.</li>
+    <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel (like propane or oil).</li>
     <li><strong>Emergency help:</strong> Mon Power's page says LIEAP includes one emergency payment per heating season. It can stop a shutoff or turn service back on. It is for customers who got a termination notice (a notice that service will be shut off) after they qualified for LIEAP.</li>
   </ul>
   <SourceLine sources={lieap.sources} org={lieap.org} about="LIEAP" />
