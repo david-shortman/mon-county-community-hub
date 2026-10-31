@@ -1,0 +1,11 @@
+name: WVU Medicine J.W. Ruby Memorial Hospital
+slug: wvu-medicine-ruby-memorial
+kind: nonprofit
+website: https://wvumedicine.org/locations/ruby-memorial-hospital/
+phone: "304-598-4000"
+summary: WVU Medicine's main hospital, at 1 Medical Center Drive in Morgantown. It is open 24 hours and has an emergency room.
+topics: [health]
+area: monongalia-county
+sources:
+  - url: https://wvumedicine.org/locations/ruby-memorial-hospital/
+    checked: 2026-10-30

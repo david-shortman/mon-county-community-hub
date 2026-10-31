@@ -1,0 +1,19 @@
+name: Salvation Army Thrift Store, Morgantown
+slug: salvation-army-thrift-morgantown
+kind: charity-thrift
+area: university-ave
+run_by: The Salvation Army Morgantown Corps
+sells: Home goods, electronics, children's clothing, vacuum cleaners and other donated items.
+takes: Clothes, appliances and gently used items.
+goods: [clothes, kids, home, electronics]
+buys_from_you: false
+funds_local_cause: Salvation Army programs and services in Monongalia, Marion, Preston and Taylor counties.
+url: https://southernusa.salvationarmy.org/morgantown/thrift-store
+url_label: Salvation Army page
+status: unclear
+note: The Salvation Army's own thrift page lists only its Fairmont store. A Morgantown store address on University Ave is not confirmed.
+sources:
+  - url: https://southernusa.salvationarmy.org/morgantown/thrift-store
+    checked: 2026-10-30
+  - url: https://www.salvationarmyusa.org/usa-southern-territory/potomac/thrift-stores/
+    checked: 2026-10-30

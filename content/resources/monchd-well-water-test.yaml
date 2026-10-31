@@ -1,0 +1,16 @@
+title: Test your well water for bacteria
+slug: monchd-well-water-test
+org: monongalia-county-health-department
+topics: [health]
+who_it_is_for: Anyone in Mon County with a private well who is worried their water may not be safe.
+what_to_do: The health department can test well water for bacteria, the germs that can make people sick. Fill out the water well sample request form on its Septic and Wells page. Testing for chemicals has to be done by a certified water quality laboratory. The page links the state's list of certified labs.
+contact:
+  phone: "304-598-5131"
+  url: https://www.monchd.org/services/septic-and-wells
+  url_label: Forms and lab list
+cost: "The health department's fiscal year 2026-2027 fee schedule lists $45 for a water well sample."
+sources:
+  - url: https://www.monchd.org/services/septic-and-wells
+    checked: 2026-10-30
+  - url: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
+    checked: 2026-10-30

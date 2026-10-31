@@ -1,0 +1,35 @@
+---
+// One group or free place to sit in the Find your people directory (#263).
+// Everything comes from its content/places record (kind group or library).
+// The data-* attributes feed the finder script; without it the card is
+// just part of a plain list.
+import Actions from './Actions.astro';
+import SourceLine from './SourceLine.astro';
+import { placeStatus, SECTION } from '../lib/places.mjs';
+import { TAG_LABELS, rhythm, BUCKETS, inBucket } from '../lib/people.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { p, venue, headingLevel = 3, anchor = true } = Astro.props;
+const H = `h${headingLevel}`;
+const st = placeStatus(p);
+const tags = (p.tags ?? []).filter((t) => TAG_LABELS[t]).map((t) => TAG_LABELS[t]);
+const buckets = BUCKETS.filter((b) => inBucket([p], b).length).map((b) => b.key);
+const venueHref = venue && !['library', 'group'].includes(venue.kind) ? `${base}${SECTION.route}${venue.slug}/` : null;
+---
+<article class="card group" id={anchor ? p.slug : undefined} data-slug={p.slug}
+  data-buckets={buckets.join(' ')} data-rhythm={rhythm(p)} data-tags={(p.tags ?? []).join(' ')} data-status={st.status} data-area={p.area}>
+  <H>{p.name}</H>
+  <p class="group-where">{p.community}{p.run_by?.text && <>, run by {p.run_by.text}</>}</p>
+  {st.label && <p class="group-status"><strong>{st.label}.</strong></p>}
+  <p>{p.story}</p>
+  {p.regular?.length > 0 && <p><strong>{p.kind === 'library' ? 'Open' : 'When'}:</strong> {p.regular.map((r) => r.replace(/\.\s*$/, '')).join('; ')}.</p>}
+  {p.cost && <p><strong>Cost:</strong> {p.cost}</p>}
+  {venue && <p><strong>Where:</strong> {venueHref ? <a href={venueHref}>{venue.name}</a> : venue.name}</p>}
+  {tags.length > 0 && <p class="group-tags">{tags.join(' · ')}</p>}
+  {p.notes?.map((n) => <p class="group-note">{n}</p>)}
+  <Actions callFirst phone={p.contact?.phone} phoneLabel={p.name} link={p.contact?.url} linkLabel={p.contact?.url_label ?? 'Website'} place={p.contact?.place} about={p.name} />
+  <SourceLine sources={p.sources} about={p.name}>{p.contact?.facebook && <> <a href={p.contact.facebook}>Facebook page<span class="sr-only"> of {p.name}</span></a> (we cannot check it, so it may have newer news).</>}</SourceLine>
+</article>
+
+<style>
+  .group-where, .group-tags { margin: 0 0 6px; color: var(--muted); font-size: 0.95rem; }
+</style>

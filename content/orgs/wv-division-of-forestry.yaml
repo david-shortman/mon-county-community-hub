@@ -1,0 +1,11 @@
+name: West Virginia Division of Forestry
+slug: wv-division-of-forestry
+kind: government
+website: https://wvforestry.com
+phone: "304-558-2788"
+summary: The state agency for forests. Its Urban and Community Forestry program gives Community Tree Grants for trees on public property.
+topics: [community]
+area: statewide
+sources:
+  - url: https://wvforestry.com/urban-forestry
+    checked: 2026-10-30

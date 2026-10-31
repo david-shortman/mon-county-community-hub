@@ -1,0 +1,21 @@
+name: Friends of the Morgantown Public Library Book Sale
+slug: friends-mpl-book-sale
+kind: used-media
+area: downtown
+run_by: Friends of the Morgantown Public Library
+address: "373 Spruce St, Morgantown, WV"
+hours: Tuesdays, 11 a.m. to 2 p.m. First and third Saturdays, 9:30 a.m. to 12:30 p.m.
+sells: Donated used books of many kinds, including novels, children's and teen books, cookbooks and travel books, plus audiobooks and DVDs. Prices are usually 90% or more off the original price. Everything is half off again on the first Saturday of each month.
+takes: Gently used books, dropped off during library open hours. No encyclopedias, textbooks or magazines.
+goods: [books]
+buys_from_you: false
+funds_local_cause: All proceeds go to the Morgantown Public Library.
+url: https://mympls.org/about/friends-of-the-library/
+url_label: Friends of the Library
+status: likely
+note: The sale is in the library basement. Friends members get 10% off.
+sources:
+  - url: https://mympls.org/about/friends-of-the-library/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/faqs/
+    checked: 2026-10-30

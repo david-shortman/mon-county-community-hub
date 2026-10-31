@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  issues: read # the group request numbers on Corrections (#523)
   pages: write
   id-token: write
 
@@ -34,6 +35,9 @@ jobs:
       - run: npm ci
       - run: npm run check-content
       - run: npm run build
+        env:
+          # Read-only, to count group requests (#523). The build still works without it.
+          GITHUB_TOKEN: ${{ github.token }}
       # Accessibility scan (#105): axe-core on every page, light and dark, plus 320px reflow.
       # Fails only on serious or critical problems. Free: Chromium comes from npm's Playwright.
       # Pull requests only, so the daily rebuild and deploys never wait on a browser download.

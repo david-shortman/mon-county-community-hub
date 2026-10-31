@@ -1,7 +1,7 @@
 {
   "id": "monongalia-county",
   "feed_url": "https://www.monongaliacounty.gov/_assets_/plugins/revizeCalendar/calendar_data_handler.php?webspace=monongoliacountywv&relative_revize_url=//cms2.revize.com&protocol=https:",
-  "fetched": "2026-10-28T04:22:50.632Z",
+  "fetched": "2026-10-30T23:57:12.228Z",
   "entries": [
     {
       "title": "2026 General Election Day",
@@ -9,8 +9,8 @@
       "starts": "2026-11-03",
       "ends": "2026-11-03",
       "org_name": "Monongalia County",
-      "who_it_is_for": "Listed on the Monongalia County calendar.",
-      "what_to_do": "See the event page for details.",
+      "who_it_is_for": "Monongalia County Offices will be closed today.",
+      "what_to_do": "The county's event page has the details.",
       "url": "https://www.monongaliacounty.gov/calendar.php",
       "topics": [
         "voting"
@@ -22,8 +22,10 @@
       "starts": "2026-10-30",
       "ends": "2026-10-30",
       "org_name": "Monongalia County",
-      "who_it_is_for": "Listed on the Monongalia County calendar.",
-      "what_to_do": "Location: 346 Chestnut Ridge Camp Rd. See the event page for details.",
+      "who_it_is_for": "Listed on the county's parks and recreation calendar.",
+      "what_to_do": "At 346 Chestnut Ridge Camp Rd.",
+      "start_time": "17:00",
+      "end_time": "20:00",
       "url": "https://www.monongaliacounty.gov/business_detail_T51_R19.php",
       "topics": [
         "community"
@@ -35,8 +37,10 @@
       "starts": "2026-12-12",
       "ends": "2026-12-12",
       "org_name": "Monongalia County",
-      "who_it_is_for": "Listed on the Monongalia County calendar.",
-      "what_to_do": "Location: 79 Buckeye Rd, Core, WV 26541. See the event page for details.",
+      "who_it_is_for": "Listed on the county's parks and recreation calendar.",
+      "what_to_do": "At 79 Buckeye Rd, Core, WV 26541.",
+      "start_time": "17:00",
+      "end_time": "19:00",
       "url": "https://www.monongaliacounty.gov/business_detail_T51_R26.php",
       "topics": [
         "community"
@@ -48,8 +52,10 @@
       "starts": "2026-12-19",
       "ends": "2026-12-19",
       "org_name": "Monongalia County",
-      "who_it_is_for": "Listed on the Monongalia County calendar.",
-      "what_to_do": "Location: 79 Buckeye Road, Core, WV 26541. See the event page for details.",
+      "who_it_is_for": "Listed on the county's parks and recreation calendar.",
+      "what_to_do": "At 79 Buckeye Road, Core, WV 26541.",
+      "start_time": "17:00",
+      "end_time": "19:00",
       "url": "https://www.monongaliacounty.gov/business_detail_T51_R47.php",
       "topics": [
         "community"

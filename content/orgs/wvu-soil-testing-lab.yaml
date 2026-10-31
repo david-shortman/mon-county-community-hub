@@ -1,0 +1,11 @@
+name: WVU Soil Testing Laboratory
+slug: wvu-soil-testing-lab
+kind: school
+website: https://soiltesting.wvu.edu/
+phone: "304-293-5375"
+summary: West Virginia University's soil lab in Morgantown, part of the Davis College. It works with WVU Extension to test soil for West Virginia residents and send back lime and fertilizer advice.
+topics: [growing]
+area: statewide
+sources:
+  - url: https://soiltesting.wvu.edu/
+    checked: 2026-10-31
