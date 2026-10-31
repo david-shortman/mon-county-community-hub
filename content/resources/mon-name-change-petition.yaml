@@ -3,7 +3,13 @@ slug: mon-name-change-petition
 org: monongalia-county-circuit-clerk
 topics: [legal, family]
 who_it_is_for: People who want to change their own legal name, or their child's, through a court. State law says you ask the circuit court or family court of the county where you live. It also lists things you must swear to in the petition, such as how long you have lived in the county and that the change is not to avoid debts or the law.
-what_to_do: State law says you file a sworn petition, then publish a notice of the hearing in a local newspaper as a legal ad at least 10 days before the hearing. In Monongalia County, the Circuit Clerk keeps the records for both Circuit Court and Family Court. Call the Circuit Clerk at 304-291-7240 to ask how to file and what it costs. The office is at the Monongalia County Justice Center, 75 High Street, Suite 12.
+what_to_do: The Monongalia County Circuit Clerk has name change packets for adults and for children on its Packets page. Fill them out by hand in print, have them notarized, and file them at the Circuit Clerk's office at the Monongalia County Justice Center, 75 High Street, Suite 12. Questions go to the Circuit Clerk at 304-291-7240.
+steps:
+  - Fill out the packet by printing clearly. All papers must be notarized before you file.
+  - File them with the Circuit Clerk and pay the filing fee. Bring a self-addressed, stamped envelope.
+  - A Circuit Judge sets a hearing at least 30 days out. You get an order with the date and a notice for the newspaper.
+  - Take the notice to the newspaper. It must run as a legal ad at least 10 days before the hearing. Bring the newspaper's certificate to the hearing.
+  - After the hearing, take a copy of the final order to the Monongalia County Clerk's office to record it.
 hours: Monday to Friday, 8:30 a.m. to noon and 1 p.m. to 5 p.m.
 opening_hours:
   - days: [mon, tue, wed, thu, fri]
@@ -15,12 +21,16 @@ opening_hours:
 get_in: call-first
 contact:
   phone: "304-291-7240"
-  url: https://code.wvlegislature.gov/48-25-101/
-  url_label: The state law on name changes
+  url: http://www.monongaliacircuitclerk.com/packets.html
+  url_label: Name change packets (Circuit Clerk)
   place: 75 High Street, Suite 12, Morgantown, WV 26505
-cost: There are court and newspaper costs. Ask the Circuit Clerk. You can ask to have court fees waived if you cannot afford them.
+cost: "$200 filing fee to the Circuit Clerk (cash, money order or cashier's check only), plus the newspaper's charge for the legal ad. You can ask to have court fees waived if you cannot afford them."
 if_you_want_help: [legal-aid-wv-civil-legal-help, wv-lawyer-referral-service]
 sources:
+  - url: http://www.monongaliacircuitclerk.com/packets.html
+    checked: 2026-10-31
+  - url: http://www.monongaliacircuitclerk.com/pdf/nca.pdf
+    checked: 2026-10-31
   - url: https://code.wvlegislature.gov/48-25-101/
     checked: 2026-10-31
   - url: https://www.courtswv.gov/info-for/public
