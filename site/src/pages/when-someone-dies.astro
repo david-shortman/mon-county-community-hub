@@ -2,8 +2,9 @@
 // When someone dies (#222 coverage map, a missing area). Facts come from the
 // records, each read on the Monongalia County Clerk, state Vital Registration,
 // USAGov or VA pages on 2026-10-31. Left off until a person confirms them:
-// how many death certificates to order, who orders them, the FTC Funeral
-// Rule page (404 to our reader) and Social Security pages (403).
+// how many death certificates to order and Social Security's own pages (403).
+// Who orders certificates, the $255 payment and the FTC Funeral Rule came from
+// the state's funeral home FAQ and eCFR in verification sweep 2 (#1025).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
@@ -22,6 +23,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2 id="tell">Tell Social Security and other offices</h2>
   <ResourceCard r={resource('ssa-report-a-death')} />
   <ResourceCard r={resource('usagov-who-to-notify-after-death')} />
+
+  <h2 id="funeral">Planning the funeral</h2>
+  <ResourceCard r={resource('ftc-funeral-rule-your-rights')} />
 
   <h2 id="estate">The will and the estate (probate)</h2>
   <ResourceCard r={resource('mon-county-clerk-probate')} showCost />
