@@ -22,6 +22,14 @@ steps:
     when: opens
     resource: mon-swa-ask-about-trash
     text: Tires and electronics go to collection days. Check "Dates for this" on this page, or call the Solid Waste Authority to ask about the next one.
+  vote-register:
+    when: today
+    resource: wv-online-voter-registration
+    text: Register to vote or update your address online with the Secretary of State, or in person at the County Clerk's office.
+  vote-check:
+    when: today
+    resource: wv-find-polling-place
+    text: Check that you are registered and find your polling place.
 situations:
   - id: moving
     label: I'm moving here and need to start power, water, gas or trash
@@ -39,6 +47,10 @@ situations:
     label: I have tires or electronics to get rid of
     page: /recycling/#hard-items
     steps: [hard-items]
+  - id: vote
+    label: I want to register to vote or find where I vote
+    page: /vote/
+    steps: [vote-register, vote-check]
 also:
   - text: Can't pay a water or power bill
     href: /utility-bills/
