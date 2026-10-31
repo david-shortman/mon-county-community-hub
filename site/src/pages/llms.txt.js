@@ -39,6 +39,7 @@ export function GET({ site }) {
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
 - [Dentist or prescriptions](${u('/dental-and-prescriptions/')}): a dentist with no dental insurance (health department dental clinic, WVU Dental) and help paying for medicine (Milan Puskar Health Right free clinic)
 - [Turning 65 or on Medicare](${u('/turning-65/')}): when to sign up, visits and shots Medicare pays for, free help from WV SHIP, help paying Medicare costs
+- [Mental health help](${u('/mental-health/')}): someone to talk to today (988, Valley HealthCare's 24/7 crisis line and walk-in crisis clinic, HELP4WV, the children's crisis line) and counseling with a sliding fee or free at Health Right
 - [Keep my Medicaid in 2027](${u('/medicaid-2027/')}): West Virginia's new Medicaid work and community rules from January 1, 2027, quoted from the state: who they apply to, who is excluded, what counts toward 80 hours, what to do now, appeals and free help
 - [Diabetes, blood pressure or weight](${u('/diabetes-and-weight/')}): health department dietitians with a sliding fee, and free diabetes and heart clinics for Health Right patients
 - [Ride to a medical visit](${u('/medical-rides/')}): Medicaid and WVCHIP rides through Modivcare (book 5 business days ahead), and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares
