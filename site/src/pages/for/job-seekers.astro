@@ -1,0 +1,45 @@
+---
+// Starting page for job seekers and career changers (#275, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/job-seekers.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "work", label: "Job seekers and career changers", summary: "Finding a job, resume help, paying for training, going back to school, and help while you look, in one place" };
+const sections = [
+  { title: "Find a job", links: [
+    { href: "/find-a-job/#boards", label: "Where jobs are posted", text: "city, county, state and hospital job boards" },
+    { href: "/work-and-learning/", text: "WorkForce West Virginia and apprenticeships" },
+  ] },
+  { title: "Free help getting hired", links: [
+    { href: "/find-a-job/#help", label: "Resume and computer help", text: "free resume, interview and computer help" },
+    { href: "/find-a-job/#train", label: "Short trainings", text: "short trainings near here" },
+  ] },
+  { title: "Get training or school paid for", links: [
+    { href: "/pay-for-training/", text: "training scholarships, state grants and Jumpstart Savings" },
+    { href: "/calendar/", text: "application dates and deadlines" },
+  ] },
+  { title: "Brush up reading, math or English", links: [
+    { href: "/work-and-learning/", text: "adult classes and free reading and English lessons" },
+    { href: "/help-in-your-language/", text: "free interpreters and English classes" },
+  ] },
+  { title: "A record, a disability, or you served", links: [
+    { href: "/legal-help/#record", label: "Clearing a record", text: "expungement forms and free legal help" },
+    { href: "/disability-and-aging/", text: "job help for people with a disability" },
+    { href: "/veterans/", text: "jobs and other help for veterans" },
+  ] },
+  { title: "While you look", links: [
+    { href: "/money/", text: "help with a bill, rent or food this month" },
+    { href: "/snap/", text: "how to apply for SNAP" },
+    { href: "/medicaid-2027/", text: "the 2027 Medicaid work rules and what to do now" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/tradespeople/", text: null },
+    { href: "/for/small-business/", text: null },
+    { href: "/for/teens/", text: null },
+  ] },
+];
+---
+<Base title="Looking for work in Morgantown and Mon County: where to start" description="A starting page for job seekers and career changers in Monongalia County: where jobs are posted, free resume and computer help, training scholarships and grants, adult classes, and help with bills while you look.">
+  <h1>For job seekers and career changers</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

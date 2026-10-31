@@ -1,0 +1,43 @@
+---
+// Starting page for teens and their parents (#273, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/teens.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "family", label: "Teens and their parents", summary: "First jobs, driving, things to do, volunteering, and someone to talk to, in one place" };
+const sections = [
+  { title: "Get a job", links: [
+    { href: "/teens/#first-job", label: "Your first job", text: "age certificates and work hours" },
+    { href: "/teens/#ages-16-to-24", label: "Ages 16 to 24", text: "job and training help" },
+    { href: "/find-a-job/", text: "where local employers post jobs" },
+  ] },
+  { title: "Learn to drive", links: [
+    { href: "/teen-drivers/", text: "permit to full license: ages, hours and fees" },
+  ] },
+  { title: "Things to do and people to meet", links: [
+    { href: "/teens/#things-to-do", label: "Things to do", text: "library programs and more" },
+    { href: "/find-your-people/", text: "groups, clubs and game nights" },
+    { href: "/parks/", text: "parks, trails, pools and ice skating" },
+  ] },
+  { title: "Volunteer", links: [
+    { href: "/teens/#volunteer", label: "Volunteer as a teen", text: "earn service hours as a junior volunteer" },
+    { href: "/volunteer/", text: "where to find a volunteer shift soon" },
+  ] },
+  { title: "Health and someone to talk to", links: [
+    { href: "/mental-health/", text: "someone to talk to today, and counseling you can afford" },
+    { href: "/birth-control-and-testing/", text: "free or low cost birth control and testing" },
+  ] },
+  { title: "Teens with a disability", links: [
+    { href: "/disability-and-aging/", text: "school to work help, special education and your rights" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/parents-school-age/", text: null },
+    { href: "/for/job-seekers/", text: null },
+    { href: "/for/college-students/", text: null },
+  ] },
+];
+---
+<Base title="Teens in Morgantown and Mon County: where to start" description="A starting page for teens and their parents in Monongalia County: first jobs and work hours, learning to drive, job help for ages 16 to 24, things to do, volunteering, and someone to talk to.">
+  <h1>For teens and their parents</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
