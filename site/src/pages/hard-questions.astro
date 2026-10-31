@@ -8,6 +8,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const tellUs = 'https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml';
 const googleEnergy = 'https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference';
 const epoch = 'https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use';
+const eia = 'https://www.eia.gov/tools/faqs/faq.php?id=97&t=3';
 const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-reported-45-billion-ai-agreement-morrisey-says/';
 ---
 <Base title="Hard questions about Everything Morgantown" description="Straight answers about who runs Everything Morgantown, why it uses AI, how facts get checked, and where it falls short today.">
@@ -32,7 +33,7 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
 
   <h2>How much energy does the AI behind this site use?</h2>
   <p>We don't know, and we can't measure it yet. Anthropic has not published how much energy, water or carbon its AI uses, for one question or in total. We looked in its filings, model reports and transparency pages on October 31, 2026.</p>
-  <p>Other companies have published numbers for one chat question about their own AI. <a href={googleEnergy}>Google says</a> a typical text question to its Gemini app uses 0.24 watt-hours, and says outside groups have not checked that. <a href={epoch}>Epoch AI</a>, an independent research group, estimates about 0.3 watt-hours for a typical ChatGPT question on its GPT-4o model. These are not numbers for Claude.</p>
+  <p>Other companies have published numbers for one chat question about their own AI. <a href={googleEnergy}>Google says</a> a typical text question to its Gemini app uses 0.24 watt-hours, and says outside groups have not checked that. <a href={epoch}>Epoch AI</a>, an independent research group, estimates about 0.3 watt-hours for a typical ChatGPT question on its GPT-4o model. These are not numbers for Claude. For scale, the average U.S. home uses about 899,000 watt-hours of electricity a month (<a href={eia}>U.S. Energy Information Administration</a>, 2022 data).</p>
   <p>The work behind this site is bigger than one question. An AI that reads sources and writes pages runs for many minutes at a time, and outside estimates for that kind of work differ by more than ten times. We will not call this site green or low impact. What we know, what we don't, and ways to use less are in <a href="https://github.com/david-shortman/mon-county-community-hub/blob/main/docs/research/ai-energy-use.md">our research note</a>.</p>
   <p class="gap"><strong>Not yet:</strong> a count of how much AI work this site uses, or any energy figure for it.</p>
 
