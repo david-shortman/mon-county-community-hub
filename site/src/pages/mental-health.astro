@@ -1,0 +1,43 @@
+---
+// I need mental health help (#203, rank 1 in #475). Someone to talk to today,
+// then ongoing care and what it costs. Every fact is in a resource record in
+// content/resources/, read 2026-10-30. Drugs and alcohol get their own page
+// (#477). High-stakes topic (names 988 and 911): the PR waits for David (#97).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "care", topic: "health", label: "Mental health help", summary: "Someone to talk to today, a crisis line, and counseling you can afford" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+---
+<Base crisis title="Mental health help in Morgantown and Mon County: someone to talk to today" description="Mental health help in Morgantown and Monongalia County: call or text 988 any hour, Valley HealthCare's 24/7 crisis line and walk-in crisis clinic, HELP4WV, and counseling that takes Medicaid or has a sliding fee.">
+  <h1>Need mental health help?</h1>
+  <p class="lede">Someone can talk with you today, any hour, for free: call or text <a href="tel:988">988</a>. In Mon County, Valley HealthCare also has a 24/7 crisis line and a walk-in crisis clinic on Scott Avenue. Below: help today, then counseling and what it costs.</p>
+
+  <h2>Is someone in danger right now?</h2>
+  <p>Call <a href="tel:911">911</a>.</p>
+
+  <h2>Someone to talk to today</h2>
+  {r('988-lifeline') && <ResourceCard r={r('988-lifeline')} sms="988" smsLabel="Text 988" />}
+  {r('valley-crisis-services') && <ResourceCard r={r('valley-crisis-services')} />}
+  {r('help4wv') && <ResourceCard r={r('help4wv')} sms={r('help4wv').contact.text} smsLabel="Text HELP4WV" />}
+
+  <h2>For a child or teen</h2>
+  {r('wv-childrens-crisis-line') && <ResourceCard r={r('wv-childrens-crisis-line')} sms={r('wv-childrens-crisis-line').contact.text} smsLabel="Text the children's line" />}
+
+  <h2>Counseling and ongoing care</h2>
+  <p>No insurance, or not much money? Valley HealthCare has a sliding fee that can bring the cost to zero. Health Right's counseling is free for its patients.</p>
+  {r('valley-counseling') && <ResourceCard r={r('valley-counseling')} showCost />}
+  {r('health-right-counseling') && <ResourceCard r={r('health-right-counseling')} />}
+  {r('wvu-healthy-minds') && <ResourceCard r={r('wvu-healthy-minds')} />}
+  <p>Have Medicaid or other insurance? Ask each place, or your plan, whether they take it before your first visit.</p>
+
+  <h2>Also check</h2>
+  <ul>
+    <li>No insurance or can't afford a doctor: <a href={`${base}/dental-and-prescriptions/`}>dentist and prescription help</a>, including the free Health Right clinic.</li>
+    <li>Veterans: the <a href={`${base}/veterans/`}>Veterans page</a> has the Veterans Crisis Line (dial 988, then press 1) and the Morgantown Vet Center.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not give medical advice. Call first, since hours change. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

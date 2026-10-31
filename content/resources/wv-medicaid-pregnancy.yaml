@@ -1,0 +1,16 @@
+title: Medicaid or WVCHIP for pregnancy and the year after
+slug: wv-medicaid-pregnancy
+org: wv-department-of-human-services
+topics: [health, family]
+who_it_is_for: Pregnant West Virginians who need health coverage. The state decides who qualifies. Since 2022, West Virginia Medicaid and WVCHIP cover mothers for 12 months after pregnancy, up from 60 days.
+what_to_do: Apply online at WV PATH, the state's recommended way to apply for most health coverage, or call the DoHS hotline at 1-877-716-1212. You can also apply at your local DoHS office.
+contact:
+  phone: "1-877-716-1212"
+  url: https://www.wvpath.wv.gov/
+  url_label: Apply online
+cost: free
+sources:
+  - url: https://dohs.wv.gov/article/west-virginia-medicaid-and-wvchip-extend-postpartum-health-care-coverage
+    checked: 2026-10-30
+  - url: https://bms.wv.gov/bms-members/apply-for-healthcare
+    checked: 2026-10-30

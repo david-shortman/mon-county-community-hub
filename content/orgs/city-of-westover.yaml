@@ -1,0 +1,12 @@
+name: City of Westover
+slug: city-of-westover
+kind: government
+website: https://www.westoverwv.org/
+summary: A city in Mon County. City Hall is at 500 Dupont Road.
+topics: [moving, government]
+area: monongalia-county
+sources:
+  - url: https://www.westoverwv.org/utilities
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
+    checked: 2026-10-30
