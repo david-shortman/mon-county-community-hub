@@ -75,7 +75,7 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Question path** | One question per small page that leads to an answer: "Where should I go for care?" | Each answer is a link to the next page | #178 |
 | **Checklist** | "What to bring" with tick boxes | Boxes work but do not save; script saves them on the phone only | Exists (`Checklist.astro`), used for "What to have ready" in `WhatHappensNext` |
 | **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | Exists (`Timeline.astro`); no page uses it yet |
-| **Labeled picture** | A drawing of a letter or notice with numbered callouts that match a list below it | The list carries all the meaning; the picture only helps | #179 |
+| **Labeled picture** | A drawing of a letter or notice with numbered callouts that match a list below it | The list carries all the meaning; the picture only helps | Exists (`LabeledPicture.astro`): put our own small SVG in the slot, with numbered circles that match `items`. No page uses it yet; the first drawing is chosen with Duet |
 | **Printout** | A one page version that a pantry, library, or clinic can post | Print stylesheet | Door steps print cleanly; listing printouts and posters are #157 and #160 |
 | **Send by text** | A link that opens a text message with the page link filled in | An `sms:` link | Exists on door steps ("Text these steps to myself"); listings are #157 |
 | **Map on tap** | A Directions button that opens the phone's own map app | A link to the map app | Exists (`Actions`) |

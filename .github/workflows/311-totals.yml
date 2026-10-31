@@ -1,0 +1,57 @@
+name: 311 totals
+
+# Morgantown 311 big-picture totals (#881, part of #86). Runs on its own
+# every Monday, and once whenever this file or its script changes on main
+# (David, 2026-10-31: every run is automatic, nothing manual). It reads the public SeeClickFix API
+# on a GitHub runner (the API refuses our cloud sandbox) and prints a few
+# totals: requests opened and closed in the last 12 months and the median
+# days to close, overall and for street maintenance and potholes. It never
+# saves or posts single requests. It opens or updates one issue for Duet with
+# the totals, and Duet or a build session copies them into content/ through
+# a PR after checking them. Free: no key, no account, no Claude. Rules: David's decision
+# on #300 (a few totals, credited "Data from SeeClickFix, Morgantown 311.").
+
+on:
+  schedule:
+    - cron: '23 13 * * 1' # Mondays, off the hour
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/311-totals.yml
+      - site/scripts/check-311.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  totals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: site
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Read the totals
+        id: read
+        run: |
+          if node scripts/check-311.mjs > ../totals.json 2> ../totals.err; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+          { echo '```'; cat ../totals.json ../totals.err; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Open or update the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          OK: ${{ steps.read.outputs.ok }}
+        run: |
+          title="Morgantown 311 totals from the latest run"
+          if [ "$OK" = "true" ]; then what="The 311 totals run worked."; else what="The 311 totals run failed; the error is below."; fi
+          body=$(printf '%s Run: %s\n\n```\n%s\n%s\n```\n\nBefore these go on the site: check the place and the window, keep only these totals, credit "Data from SeeClickFix, Morgantown 311.", and do not say closed means fixed unless the source says so (#881, #300).\n\n---\n_Opened by the 311 totals workflow (#881)._' "$what" "$RUN_URL" "$(cat ../totals.json)" "$(cat ../totals.err)")
+          n=$(gh api "repos/$REPO/issues?state=open&labels=for:duet&per_page=100" --jq ".[] | select(.title == \"$title\") | .number" | head -1)
+          if [ -n "$n" ]; then gh api -X PATCH "repos/$REPO/issues/$n" -f body="$body" > /dev/null; else gh api "repos/$REPO/issues" -f title="$title" -f body="$body" -f "labels[]=for:duet" > /dev/null; fi

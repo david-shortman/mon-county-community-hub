@@ -14,7 +14,10 @@
       "sources",
       "sources[].url",
       "sources[].checked",
-      "sources[].name"
+      "sources[].name",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed"
     ],
     "resources": [
       "title",
@@ -24,6 +27,9 @@
       "who_it_is_for",
       "hours",
       "what_to_do",
+      "steps",
+      "options",
+      "notes",
       "contact",
       "contact.phone",
       "contact.text",
@@ -35,7 +41,10 @@
       "sources",
       "sources[].url",
       "sources[].checked",
-      "sources[].name"
+      "sources[].name",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed"
     ],
     "calendar": [
       "title",
@@ -61,7 +70,10 @@
       "feed.name",
       "feed.url",
       "feed.page_url",
-      "feed.fetched"
+      "feed.fetched",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed"
     ],
     "corrections": [
       "id",
@@ -118,7 +130,12 @@
       "sources[].checked",
       "sources[].name",
       "first_seen",
-      "last_changed"
+      "last_changed",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed",
+      "agenda_first_seen",
+      "minutes_first_seen"
     ],
     "places": [
       "name",
@@ -199,6 +216,11 @@
     "types[].description",
     "types[].count",
     "types[].list_url",
-    "types[].record_url_template"
+    "types[].record_url_template",
+    "feed_health_url",
+    "exports",
+    "exports[].name",
+    "exports[].description",
+    "exports[].url"
   ]
 }

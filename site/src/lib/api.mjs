@@ -32,9 +32,15 @@ const SOURCES = {
       url: str('A public page a person can open to check the facts', { format: 'uri' }),
       checked: date('Date (YYYY-MM-DD, Morgantown time) the facts were last checked against this page'),
       name: str('Who published the page, when it is not clear from the address'),
+      method: str('How the facts were read: hand (a person or agent read the page), feed (from the publisher\'s own feed) or watched-page (read from the page by a program)', { enum: ['hand', 'feed', 'watched-page'] }),
+      fetched: str('When a program read the feed (UTC); only for feed records', { format: 'date-time' }),
+      feed: str('Which feed, by id; only for feed records'),
     },
   },
 };
+// Records written by hand carry no method; the API says so (ADR 0002, #70).
+const DEFAULT_METHOD = { meetings: 'watched-page' };
+const withMethod = (type, r) => (Array.isArray(r.sources) ? { ...r, sources: r.sources.map((x) => ({ method: DEFAULT_METHOD[type] ?? 'hand', ...x })) } : r);
 
 // The needs register's shape comes straight from its JSON Schema (#74).
 const NEED = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/need.schema.json'), 'utf8'));
@@ -70,6 +76,9 @@ export const TYPES = {
       who_it_is_for: str('Who it is for, in the source\'s terms. It does not decide who qualifies.'),
       hours: str('Hours in words, as the source gives them'),
       what_to_do: str('How to use it'),
+      steps: list('Optional. What to do, in order, as short sentences'),
+      options: list('Optional. Choices where order does not matter, like the kinds of ID that count'),
+      notes: list('Optional. Exceptions and special cases, as short paragraphs'),
       contact: {
         type: 'object',
         description: 'Public contact details for the program. Never a private person.',
@@ -140,6 +149,8 @@ export const TYPES = {
       sources: SOURCES,
       first_seen: date('Date we first saw this agenda'),
       last_changed: date('Date we last saw the agenda or minutes change'),
+      agenda_first_seen: date('Date we first saw the posted agenda at this link'),
+      minutes_first_seen: date('Date we first saw the posted minutes at this link; left out until they are posted'),
     },
   },
   places: {
@@ -208,7 +219,8 @@ export async function records(type) {
     raw = loadDir(type);
   }
   const id = TYPES[type].id;
-  return raw.map((r) => shape(type, r)).sort((a, b) => (a[id] < b[id] ? -1 : a[id] > b[id] ? 1 : 0));
+  const usesSources = TYPES[type].properties.sources === SOURCES;
+  return raw.map((r) => shape(type, usesSources ? withMethod(type, r) : r)).sort((a, b) => (a[id] < b[id] ? -1 : a[id] > b[id] ? 1 : 0));
 }
 
 // The credit line, read from content/LICENSE.md so the API says exactly what
@@ -246,11 +258,16 @@ export async function catalog() {
     site_url: SITE_URL,
     openapi_url: `${API_BASE}openapi.yaml`,
     docs_url: `${SITE_URL}/data/`,
+    feed_health_url: `${API_BASE}feed-health.json`,
     source_code: REPO_URL,
     license: license(),
     versioning: 'Within v1, fields are only added, never removed or renamed. A breaking change would get a new /api/v2/, and v1 would stay up for at least 6 months.',
     stale_after_days: 183,
     types,
+    exports: [
+      { name: 'hsds', description: 'Organizations and services in Open Referral HSDS 3.1 JSON, the format 211 and referral tools read', url: `${API_BASE}hsds/services.json` },
+      { name: 'hsds-tabular', description: 'The same in CSV tables, with a Tabular Data Package description', url: `${API_BASE}hsds/datapackage.json` },
+    ],
   };
 }
 

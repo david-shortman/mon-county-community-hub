@@ -1,0 +1,19 @@
+title: Questions about the 2027 Medicaid work and community rules
+slug: wv-medicaid-2027-help-line
+org: wv-department-of-human-services
+topics: [health]
+who_it_is_for: West Virginia Medicaid members and applicants with questions about the new community engagement rules that start January 1, 2027. The state says they apply only to some adults ages 19 to 64 in the Adult Expansion Group.
+what_to_do: Call the DoHS Customer Service Reporting Center at 1-877-716-1212, or email osacsrc@wv.gov. To update your address, phone or email, sign in to WV PATH or call the same number. The state's site wvmedicaidhelp.org has the full rules, a short screener that is not an application, and answers to common questions.
+contact:
+  phone: "1-877-716-1212"
+  email: osacsrc@wv.gov
+  url: https://wvmedicaidhelp.org/
+  url_label: The state's Medicaid help site
+cost: free
+sources:
+  - url: https://wvmedicaidhelp.org/
+    checked: 2026-10-30
+  - url: https://wvmedicaidhelp.org/contact/
+    checked: 2026-10-30
+  - url: https://bms.wv.gov/new-medicaid-rules-are-coming
+    checked: 2026-10-30

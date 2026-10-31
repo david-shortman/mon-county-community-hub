@@ -1,7 +1,7 @@
 {
   "id": "mountaineer-food-bank",
-  "feed_url": "https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county&per_page=50&start_date=2026-10-28",
-  "fetched": "2026-10-28T04:22:51.842Z",
+  "feed_url": "https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county&per_page=50&start_date=2026-10-30",
+  "fetched": "2026-10-31T00:08:07.879Z",
   "entries": [
     {
       "title": "Mountaineer Food Bank mobile pantry in Monongalia County",
@@ -10,7 +10,9 @@
       "ends": "2026-12-12",
       "org_name": "Mountaineer Food Bank",
       "who_it_is_for": "Listed by the food bank for Monongalia County.",
-      "what_to_do": "See the event page for the time and place.",
+      "what_to_do": "The food bank's event page has the place.",
+      "start_time": "10:00",
+      "end_time": "11:30",
       "url": "https://mountaineerfoodbank.org/food-pantry/december-12-2026/",
       "topics": [
         "food"

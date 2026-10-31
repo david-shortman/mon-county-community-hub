@@ -26,7 +26,22 @@ const CRISIS = /\b(988|211|911)\b|crisis/i;
 // and the VA line for homeless veterans.
 const CRISIS_MORE = /\b(898-211|838255|304-292-5100|877-424-3838)\b|\b(988-lifeline|veterans-crisis-line|wv-211|rdvic-hotline|va-homeless-veterans-line)\b/;
 export const mentionsCrisis = (text) => CRISIS.test(text) || CRISIS_MORE.test(text);
-const CONTENT = /^content\/(resources|orgs|calendar)\/[^/]+\.ya?ml$/;
+// Records that feed listings. Places (content/places, schema v2) say what
+// they are about in `interests` (for example a free meal has `food`), so both
+// `topics` and `interests` are read.
+const CONTENT = /^content\/(resources|orgs|calendar|places)\/[^/]+\.ya?ml$/;
+
+// Why a record file is high stakes, or null: a topic or interest in TOPICS,
+// or a crisis line in its text.
+export function contentHit(text) {
+  let data = null;
+  try { data = YAML.parse(text); } catch { /* bad YAML is check-content's job */ }
+  const tags = [].concat(data?.topics ?? [], data?.interests ?? []);
+  const hit = tags.find((t) => TOPICS.includes(t));
+  if (hit) return `topic ${hit}`;
+  if (mentionsCrisis(text)) return 'mentions a crisis line';
+  return null;
+}
 // Other files residents see through the site: code under site/src (lib,
 // components, layouts, data) and other content folders (doors, places...).
 // For these only the changed lines are read, so a small edit to a shared
@@ -54,6 +69,11 @@ if (process.argv[2] === '--self-test') {
   expect(lines.length === 2, 'changedLines should keep only added and removed lines');
   expect(mentionsCrisis(lines.join('\n')), 'an added 911 line should count');
   expect(!mentionsCrisis(changedLines(diff.replace("'Call 911'", "'hi'")).join('\n')), 'an unchanged crisis line should not count');
+  expect(contentHit('name: Free lunch\nkind: group\ninterests: [food, social]\n') === 'topic food', 'a place with the food interest should count');
+  expect(contentHit('title: Rent help\ntopics: [housing]\n') === 'topic housing', 'a record with the housing topic should count');
+  expect(contentHit('name: Hall\nkind: fire-hall\nnotes:\n  - In an emergency, call 911.\n') === 'mentions a crisis line', 'a place that names 911 should count');
+  expect(contentHit('name: Book club\nkind: group\ninterests: [books, social]\n') === null, 'a book club should not count');
+  expect(CONTENT.test('content/places/smithtown.yaml'), 'content/places files should be read as records');
   if (fails.length) { console.error(`high-stakes self-test failed:\n- ${fails.join('\n- ')}`); process.exit(1); }
   console.log('high-stakes self-test passed.');
   process.exit(0);
@@ -102,10 +122,6 @@ for (const file of changed) {
     continue;
   }
   if (onlyHides(file)) continue;
-  const text = read(file);
-  let topics = [];
-  try { topics = [].concat(YAML.parse(text)?.topics ?? []); } catch { /* bad YAML is check-content's job */ }
-  const hit = topics.find((t) => TOPICS.includes(t));
-  if (hit) console.log(`${file}: topic ${hit}`);
-  else if (mentionsCrisis(text)) console.log(`${file}: mentions a crisis line`);
+  const why = contentHit(read(file));
+  if (why) console.log(`${file}: ${why}`);
 }

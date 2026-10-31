@@ -7,6 +7,7 @@ import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import UpkeepNotice from '../components/UpkeepNotice.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
+import { FIX_FORM, FIX_EMAIL } from '../lib/group-requests.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
 import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
 import nameFont from '../fonts/fraunces-name-800.woff2?inline';
@@ -62,7 +63,10 @@ const footerLinks = [
   { href: '/topics/', label: 'All topics' },
   { href: '/about/', label: 'About this site' },
   { href: '/partners/', label: 'For groups and helpers' },
+  { href: '/terms/', label: 'Terms' },
+  { href: '/privacy/', label: 'Privacy' },
 ];
+const disclaimer = 'We check every listing and show when we last checked it, but hours, rules and deadlines change. Call or check the source before you go. This site shares general information. It is not legal, medical or money advice. In an emergency, call 911. In a crisis, call or text 988.';
 // Dateline: the place, today's date and the forecast, in Eastern time. The
 // page script keeps the date current between rebuilds.
 const today = todayYmd();
@@ -181,6 +185,17 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .actions > * { min-width: 0; max-width: 100%; flex: 0 1 auto; }
       .btn .nowrap { white-space: normal; }
       main { overflow-wrap: anywhere; }
+      /* Table cells never break inside a word, or narrow columns stack one letter per line (#917) */
+      main :is(th, td, caption) { overflow-wrap: break-word; }
+      /* Wide tables scroll sideways in their own box. Shadows at the edges show there is more (#917) */
+      .table-scroll { overflow-x: auto; margin: 16px 0; border: 1px solid var(--line); border-radius: 10px;
+        background: linear-gradient(to right, var(--card) 40%, transparent) left / 32px 100% no-repeat local,
+          linear-gradient(to left, var(--card) 40%, transparent) right / 32px 100% no-repeat local,
+          linear-gradient(to right, rgb(0 0 0 / 0.18), transparent) left / 12px 100% no-repeat scroll,
+          linear-gradient(to left, rgb(0 0 0 / 0.18), transparent) right / 12px 100% no-repeat scroll, var(--card); }
+      .table-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .table-scroll > table { background: transparent; }
+      @media print { .table-scroll { overflow: visible; border: 0; background: none; } }
       .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 12px; border: 1.5px solid var(--accent); border-radius: 10px;
         background: var(--card); color: var(--accent); font: inherit; font-size: 1rem; font-weight: 600; line-height: 1.25; text-align: center; text-decoration: none; cursor: pointer; }
       .btn:hover { background: var(--accent-bg); }
@@ -302,15 +317,19 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       }
       /* Crisis strip and quick exit (#174), on safety pages only */
       .crisis-strip { position: sticky; top: 0; z-index: 15; background: var(--accent-bg); border-bottom: 2px solid var(--brick); }
-      .crisis-strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-block: 6px; }
-      .crisis-strip p { flex: 1 1 7rem; min-width: 0; margin: 0; font-size: 1rem; line-height: 1.5; font-weight: 600; }
+      /* Compact (#420): one short row on a phone, numbers left, Quick exit right. */
+      .crisis-strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding-block: 2px; }
+      .crisis-strip p { flex: 1 1 9rem; min-width: 0; margin: 0; font-size: 0.95rem; line-height: 1.35; font-weight: 600; }
       .crisis-strip p a { font-weight: 800; padding: 6px 2px; }
-      .quick-exit { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
+      .qe-group { display: inline-flex; align-items: center; gap: 2px 8px; flex-wrap: wrap; justify-content: flex-end; }
+      .qe-what { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.85rem; }
+      .quick-exit { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
       .quick-exit:hover { text-decoration: underline; }
       .crisis-line { margin: 0 0 12px; padding: 6px 12px; border-left: 4px solid var(--brick); background: var(--accent-bg); font-weight: 600; }
       .crisis-line a { font-weight: 800; padding: 6px 2px; }
       html:has(.crisis-strip) { scroll-padding-top: 8rem; }
-      footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; }
+      /* overflow-wrap: the long fix@ email address wraps at 320px */
+      footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; overflow-wrap: anywhere; }
     </style>
   </head>
   <body>
@@ -332,6 +351,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       {help && !crisis && <CrisisLine />}
       {searchable && tagDoor && <p hidden data-pagefind-filter="door">{tagDoor.name}</p>}
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
+      {(crisis || tags?.door === 'help-now') && <p class="disclaimer meta">{disclaimer}</p>}
       <slot />
       <AlsoCheck route={route} />
     </main>
@@ -340,8 +360,9 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
         <nav class="foot-links" aria-label="Doors and site">
           <ul>{footerLinks.map((n) => <li><a href={`${base}${n.href}`}>{n.label}</a></li>)}</ul>
         </nav>
+        <p class="disclaimer">{disclaimer}</p>
         <p class="not-official"><strong>An independent community guide, not a government site.</strong> It is not run by the City of Morgantown, Monongalia County or the State of West Virginia, or by the groups it lists. For official business, use the links to each office's own site. Sources marked "government site" are on a .gov address.</p>
-        <p>An open experiment for Morgantown and Monongalia County, WV. Most of it is researched and written by AI (Claude), and a person oversees it (<a href={`${base}/about/`}>how we use AI</a>). Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>. Reports go to GitHub, which needs a free account, and are public, so leave out private details.</p>
+        <p>An open experiment for Morgantown and Monongalia County, WV. Most of it is researched and written by AI (Claude), and a person oversees it (<a href={`${base}/about/`}>how we use AI</a>). Every item links to its source and says when we last checked it. Something wrong or missing? Use our <a href={FIX_FORM}>fix or removal form</a> or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account, and what you send stays private. Or <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">tell us on GitHub</a>, which needs a free account. Reports there are public, so leave out private details.</p>
       </div>
     </footer>
     <div class="sr-only" role="status" id="announce"></div>

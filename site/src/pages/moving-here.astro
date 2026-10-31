@@ -33,7 +33,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>Recycling drop-off, tires and electronics: <a href={`${base}/recycling/`}>Trash, recycling and drop-off</a>.</p>
 
   <h2>Not sure who serves your address?</h2>
-  <p>Ask your landlord, the seller or a neighbor first. The state agency that oversees utility companies can also answer questions.</p>
+  <p>Pick your town on <a href={`${base}/who-serves-me/`}>Who serves my address?</a> Or ask your landlord, the seller or a neighbor. The state agency that oversees utility companies can also answer questions.</p>
   {r('wv-psc-utility-questions') && <ResourceCard r={r('wv-psc-utility-questions')} />}
 
   <p>Renting or buying? Check whether the home is in a flood zone or a slide area first: <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>

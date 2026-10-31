@@ -7,7 +7,7 @@ import BusLink from './BusLink.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
 import PassItOn from './PassItOn.astro';
-import { websiteLabel, oldestChecked } from '../lib/content.mjs';
+import { websiteLabel, oldestChecked, staleDaysFor } from '../lib/content.mjs';
 // headingLevel: 3 by default; use 2 when cards sit right under the page's h1.
 const { r, sms, smsLabel, lead, showCost = false, headingLevel = 3 } = Astro.props;
 const H = `h${headingLevel}`;
@@ -23,6 +23,8 @@ const H = `h${headingLevel}`;
   {lead && <p><strong>{lead}</strong></p>}
   <p>{r.who_it_is_for}{' '}{r.what_to_do}</p>
   {r.steps?.length > 0 && <ol class="card-steps">{r.steps.map((t) => <li>{t}</li>)}</ol>}
+  {r.options?.length > 0 && <ul class="card-steps">{r.options.map((t) => <li>{t}</li>)}</ul>}
+  {r.notes?.map((t) => <p>{t}</p>)}
   {showCost && r.cost && r.cost !== 'free' && <p><strong>Cost:</strong> {r.cost}</p>}
   <Actions callFirst
     phone={r.contact?.phone} phoneLabel={r.title}
@@ -32,7 +34,7 @@ const H = `h${headingLevel}`;
   />
   <BusLink place={r.contact?.place} about={r.title} />
   <WhatHappensNext r={r} />
-  <SourceLine sources={r.sources} phone={r.phone_confirmed} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
-  <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
+  <SourceLine sources={r.sources} phone={r.phone_confirmed} staleDays={staleDaysFor(r)} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <PassItOn title={r.title} slug={r.slug} org={r.org} privateTrace={r.private_trace} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
 )}

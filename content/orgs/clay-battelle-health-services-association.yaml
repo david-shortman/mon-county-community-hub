@@ -1,0 +1,13 @@
+name: Clay-Battelle Health Services Association
+slug: clay-battelle-health-services-association
+kind: nonprofit
+website: https://cbhealthwv.org/
+phone: "304-432-8211"
+summary: A community health center in Blacksville, in western Mon County, with medical, dental and behavioral health care and a retail pharmacy. It has a sliding fee based on income and household size.
+topics: [health]
+area: monongalia-county
+sources:
+  - url: https://cbhealthwv.org/
+    checked: 2026-10-30
+  - url: https://projects.propublica.org/nonprofits/organizations/550541649
+    checked: 2026-10-30

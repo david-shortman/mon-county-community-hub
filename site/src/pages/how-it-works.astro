@@ -1,0 +1,288 @@
+---
+// How this site works: the whole system on one page, for curious residents.
+// Shows how the parts connect (people, AI, automatic checks, the public files)
+// and links to About, How we check and Hard questions for the details, so it
+// doesn't repeat them. Layered the way public explainers do it: a short
+// summary and who to contact first, one labeled picture of the flow, then the
+// parts and their limits. Every claim points to a file in the repo.
+// Speaks for the project, so changes wait for David (for:david).
+import Base from '../layouts/Base.astro';
+import { FIX_FORM, REQUEST_DAYS } from '../lib/group-requests.mjs';
+export const page = { door: "about", label: "How this site works", summary: "The people, AI and automatic checks behind each page, and how they fit together" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const doc = (p) => `${repo}/blob/main/${p}`;
+const tree = (p) => `${repo}/tree/main/${p}`;
+const wfFile = (f) => doc(`.github/workflows/${f}`);
+const example = doc('content/resources/mon-county-recycling-drop-off.yaml');
+// Real snippets, shortened. Copied from the files they name, so update them if those change.
+const recordSnippet = `title: County recycling drop-off center
+slug: mon-county-recycling-drop-off
+org: monongalia-county-commission
+topics: [recycling]
+hours: Monday to Friday, 7 a.m. to 3:25 p.m. per the center's site
+  (the county Solid Waste Authority's page says 3:30 p.m.). Closed weekends.
+cost: free
+sources:
+  - url: https://www.moncountyrecycling.com/
+    checked: 2026-10-30
+  - url: https://www.monongaliacountyswa.com/recycling
+    checked: 2026-10-30`;
+const pageSnippet = `export const page = {
+  door: "about",
+  label: "How this site works",
+  summary: "The people, AI and automatic checks behind each page",
+};`;
+const doorSnippet = `- slug: this-month
+  name: Get through this month
+  topics:
+    money: Bills and money
+    food: Food
+    housing: Rent and housing`;
+---
+<Base title="How Everything Morgantown works" description="How Everything Morgantown finds, checks, sorts and publishes information about Morgantown and Mon County: the people, the AI, the automatic checks, and where it all lives.">
+  <h1>How this site works</h1>
+  <p class="lede">AI reads public pages from local groups and offices and turns what they say into short listings. Automatic checks and a second AI look at every change, and a person checks the most serious ones. Everything it does is saved in public files you can read.</p>
+
+  <div class="short">
+    <p class="kicker">The short version</p>
+    <ul>
+      <li><strong>Where facts come from:</strong> a public web page, read the same day. Nothing is filled in from memory.</li>
+      <li><strong>Who does the work:</strong> AI (Claude, made by Anthropic) does the research, writing and building.</li>
+      <li><strong>Who is responsible:</strong> David McCoy, a local resident. He sets the rules and checks pages about shelter, crisis help, food and benefits before changes go live.</li>
+      <li><strong>If something is wrong:</strong> use the <a href={FIX_FORM}>fix or removal form</a>. No account needed, and what you send stays private. Wrong items that could hurt someone come down first and get re-checked after.</li>
+    </ul>
+  </div>
+
+  <nav aria-labelledby="on-this-page" class="toc">
+    <h2 id="on-this-page">On this page</h2>
+    <ol>
+      <li><a href="#flow">How a listing gets here</a></li>
+      <li><a href="#who">Who does what</a></li>
+      <li><a href="#sorted">How it's sorted</a></li>
+      <li><a href="#stored">Where it's kept</a></li>
+      <li><a href="#checks">Checks that run on their own</a></li>
+      <li><a href="#wrong">When something is wrong</a></li>
+      <li><a href="#goal">What it's all for</a></li>
+      <li><a href="#limits">What it can't do yet</a></li>
+      <li><a href="#under-the-hood">Under the hood</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="flow">How a listing gets here</h2>
+  <p>Every listing on this site takes the same path. Each step says who does it.</p>
+
+  <ol class="flow" aria-label="The path a listing takes, from a public page to this site and back">
+    <li>
+      <p class="who"><span class="tag src">Public page</span></p>
+      <h3>1. It starts on someone else's page</h3>
+      <p>A local group's own website, or a city, county, state or federal page. That group does the real work. We point back to it.</p>
+    </li>
+    <li>
+      <p class="who"><span class="tag ai">AI</span></p>
+      <h3>2. The AI reads it and writes a listing</h3>
+      <p>It copies the facts that matter (hours, cost, who it's for, what to do) as close to the page's own words as it can. It saves the web address and the date it read the page.</p>
+    </li>
+    <li>
+      <p class="who"><span class="tag file">Public file</span></p>
+      <h3>3. The listing is saved as a small public file</h3>
+      <p>One file per listing, in a public folder on GitHub. Anyone can read it, and every change to it is kept.</p>
+    </li>
+    <li>
+      <p class="who"><span class="tag auto">Automatic</span></p>
+      <h3>4. Programs check the change</h3>
+      <p>Does every listing have a source and a date? Does every page build, stay small enough for a phone, and pass basic checks? If a check fails, the change can't go live.</p>
+    </li>
+    <li>
+      <p class="who"><span class="tag ai">AI</span> <span class="tag person">Person</span></p>
+      <h3>5. A second look</h3>
+      <p>Another AI run reviews the change against our written guides for sources, fairness, privacy, ease of use and clear words. Changes about shelter, crisis help, food and benefits also wait for David.</p>
+    </li>
+    <li>
+      <p class="who"><span class="tag file">Published</span></p>
+      <h3>6. It goes live</h3>
+      <p>The site is rebuilt from the files. The same listings also go out as a calendar feed and as <a href={`${base}/data/`}>free data files</a> other apps and AI tools can read.</p>
+    </li>
+    <li class="loop">
+      <p class="who"><span class="tag auto">Automatic</span></p>
+      <h3>7. It keeps getting rechecked</h3>
+      <p>Every day a program visits the outside pages we rely on and flags ones that broke, moved or changed. A flagged listing goes back to step 2. So does any problem you report.</p>
+      <p class="back" aria-hidden="true">Back to step 2</p>
+    </li>
+  </ol>
+
+  <p class="check"><strong>See a real one:</strong> the <a href={example}>file for the county recycling drop-off center</a>. It lists two sources, each with the date it was read. The two sources give different closing times, so the listing says which says what. You can see the same listing on the <a href={`${base}/recycling/`}>recycling page</a>.</p>
+
+  <h2 id="who">Who does what</h2>
+  <p>A small team of one person, two kinds of AI helper, and some automatic programs. Each has a set job.</p>
+  <div class="roles">
+    <section class="card">
+      <h3>David, the person in charge</h3>
+      <p>Sets the direction and the rules. Checks changes about shelter, crisis help, food and benefits before they go live. He is the only one who talks to outside groups for the project, and the only one who can spend money or open accounts.</p>
+    </section>
+    <section class="card">
+      <h3>Claude Code, the builder</h3>
+      <p>Writes listings, pages and tools. It runs on a schedule a few times a day, and also starts when a task is marked ready for it. It works on a copy, opens a public change for review, and writes a short note on what it built and why.</p>
+    </section>
+    <section class="card">
+      <h3>Claude Duet, the partner in the background</h3>
+      <p>Looks for gaps and new problems, ranks ideas, and reviews what was built. It turns feedback into tasks so nothing gets lost, and sums up each day for David. It drafts any outreach for David, and never contacts anyone itself.</p>
+    </section>
+    <section class="card">
+      <h3>Automatic programs</h3>
+      <p>Small programs on GitHub that check every change, rebuild the site every morning, recheck sources every day and watch the site's health every 4 hours. Most use no AI at all.</p>
+    </section>
+  </div>
+  <p>Both AI helpers are Claude, made by Anthropic. On their own, they may never contact anyone, send alerts to the public, spend money, handle passwords, collect personal information a feature doesn't need, take sides in politics, or change the project's own rules. <a href={`${base}/about/`}>About this site</a> lists exactly what waits for David.</p>
+  <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/COORDINATION.md')}>who does what, in full</a> and <a href={doc('docs/CHARTER.md')}>the limits on the AI</a>, both on GitHub.</p>
+
+  <h2 id="sorted">How it's sorted</h2>
+  <p>People come with a problem, not an office name. So the site is sorted by what you're trying to do.</p>
+  <ul>
+    <li><strong>Five doors.</strong> Get through this month, Get care, Living here, Family and life changes, and Your community. Help now sits on top of all of them for when you need help tonight.</li>
+    <li><strong>Every topic has one home.</strong> Each listing is tagged with topics, like food or recycling, and each topic belongs to exactly one door. A program checks this on every change, so nothing gets lost between doors.</li>
+    <li><strong>Lists build themselves.</strong> A new page says which door it belongs to, and the menus and the <a href={`${base}/topics/`}>Topics page</a> update on their own.</li>
+    <li><strong>Dates go on one calendar.</strong> Deadlines and events from many groups end up on the <a href={`${base}/calendar/`}>Dates</a> page, which your phone's calendar can follow.</li>
+  </ul>
+  <p class="check"><strong>Check it yourself:</strong> <a href={doc('content/doors.yaml')}>the file that sets the doors and topics</a>, on GitHub.</p>
+
+  <h2 id="stored">Where it's kept</h2>
+  <ul>
+    <li><strong>The listings:</strong> one small text file each, for groups, programs, dates and places, in a <a href={tree('content')}>public folder</a>. <a href={doc('content/README.md')}>Our content guide</a> says what every field means.</li>
+    <li><strong>The site's code:</strong> in the same public place. Anyone can copy and reuse the code for free. The listings are free to reuse too, as long as you say where they came from. <a href={`${base}/data/`}>Open data</a> names the licenses.</li>
+    <li><strong>The record of work:</strong> every change is posted on GitHub as a proposed change with a note on what changed and why, before it goes live. There is a <a href={tree('docs/build-log')}>build log</a> of what was built and why, and a <a href={tree('docs/decisions')}>decision log</a>.</li>
+    <li><strong>For other apps:</strong> the <a href={`${base}/data/`}>open data files</a> and the calendar feed are made from the same files, so they always match the site.</li>
+    <li><strong>Kept private:</strong> planning notes and notes about specific people. Never kept anywhere: passwords or private people's personal information.</li>
+  </ul>
+
+  <h2 id="checks">Checks that run on their own</h2>
+  <table>
+    <thead><tr><th scope="col">When</th><th scope="col">What gets checked</th></tr></thead>
+    <tbody>
+      <tr><td>Every change</td><td>Every listing has a source and a date. No broken pages, colors are easy to read, and pages stay small for phones.</td></tr>
+      <tr><td>Every change to what you see</td><td>A second AI run scores it with the guides that fit: works for everyone, easy to use, clear look, easy to find, clear words, and honest and fair. A program flags shelter, crisis, food and benefits changes for David.</td></tr>
+      <tr><td>Every morning</td><td>The site is rebuilt, so past dates drop off.</td></tr>
+      <tr><td>Every day</td><td>Every outside page we use is visited, Help now pages first. Broken pages, moved pages and phone numbers no longer on the source get flagged.</td></tr>
+      <tr><td>Every 4 hours</td><td>A health check: is the site up, are dates current, did the last update go live? A listing not rechecked in 6 months is flagged, and the listing itself says it may be out of date.</td></tr>
+    </tbody>
+  </table>
+  <p class="check"><strong>Check it yourself:</strong> <a href={tree('.github/workflows')}>the programs themselves</a>, <a href={doc('docs/operations/README.md')}>what each check does</a> and <a href={tree('docs/rubrics')}>the six review guides</a>, all on GitHub. <a href={`${base}/how-we-check/`}>How we check</a> says how this compares with 211.</p>
+
+  <h2 id="wrong">When something is wrong</h2>
+  <ul>
+    <li><strong>Tell us</strong> with the <a href={FIX_FORM}>fix or removal form</a>. Only David sees what you send. Or use "Report a problem" on any listing, which opens a public page on GitHub.</li>
+    <li><strong>Harmful mistakes come down first.</strong> A wrong shelter, deadline or benefit rule comes off the site without waiting for anyone, and goes back only after it's re-checked. The 211 and 988 lines stay up on every page, so if one looks wrong it gets fixed the same day.</li>
+    <li><strong>Groups get an answer.</strong> When a group asks us to fix, remove or add its listing, we aim to act within {REQUEST_DAYS} days, and we count how we're doing.</li>
+    <li><strong>Fixes are public.</strong> Every fix to a fact, link or date is on the <a href={`${base}/corrections/`}>Corrections page</a>.</li>
+  </ul>
+
+  <h2 id="goal">What it's all for</h2>
+  <p>The goal is simple: make it easy to find and use the help that's already here, and send people to the groups doing the work. We judge that at four levels, from what the AI can change by itself to what only people here can tell us:</p>
+  <ol>
+    <li><strong>Can you find it?</strong> We test real questions people ask, like "where can I get food today?", and score how easy the answer is to find.</li>
+    <li><strong>Do people use it?</strong> Counted in total only. We never track a person.</li>
+    <li><strong>Did it help someone act?</strong> Like signing up to volunteer or applying for a program.</li>
+    <li><strong>Do people here say it helped?</strong> Feedback, and local groups using the work.</li>
+  </ol>
+  <p>On October 31, 2026, only the first level had numbers, and our own pages did not show up in search yet. The latest results, good or bad, are on <a href={doc('docs/scoreboard.md')}>the scoreboard</a>.</p>
+
+  <h2 id="limits">What it can't do yet</h2>
+  <ul class="limits">
+    <li><strong>Nobody calls or visits groups.</strong> We read their public pages. If a group's own page is wrong or old, our listing can be too.</li>
+    <li><strong>Most changes go live without a person looking first.</strong> Only the most serious ones wait for David. He looks over the rest when he can, after they're up.</li>
+    <li><strong>The AI review is a rule, not a lock.</strong> The AI helpers are told to wait for it, but GitHub doesn't force them to.</li>
+    <li><strong>AI can get things wrong.</strong> Please check details with the group before you act.</li>
+  </ul>
+  <p>Straight answers to tougher questions, like who pays for this and what happens if David stops, are on <a href={`${base}/hard-questions/`}>Hard questions</a>.</p>
+
+  <h2 id="under-the-hood">Under the hood</h2>
+  <p>This part is for people who want the technical details. You don't need it to use the site.</p>
+
+  <h3>Listings are small text files</h3>
+  <p>Each group, program, date or place is one file in <a href={tree('content')}>the content folder</a>, written in YAML, a simple "name: value" text format that people and AI can both edit. Groups are in <code>orgs/</code>, things you can use or do are in <code>resources/</code>, and dates are in <code>calendar/</code>. The file name matches the listing's short name (its "slug"). Here is part of the recycling center's file, shortened a little:</p>
+  <pre tabindex="0" aria-label="Part of a listing file"><code>{recordSnippet}</code></pre>
+  <p>A few things to notice. The <code>org</code> line points to the group's own file, so the group is written down once and every program links back to it. <code>topics</code> says where the listing shows up. Every listing needs a <code>sources</code> list, and every source needs a web address and the date it was read. The words stay close to the source, so when two sources disagree, the listing says so. <a href={doc('content/README.md')}>The content guide</a> lists every field and what it's for.</p>
+
+  <h3>Topics and doors are set in one file</h3>
+  <p><a href={doc('content/doors.yaml')}>One file</a> names the five doors and maps every topic to exactly one of them:</p>
+  <pre tabindex="0" aria-label="Part of the doors file"><code>{doorSnippet}</code></pre>
+  <p>Pages are written in Astro, a tool that turns templates into plain web pages, in <a href={tree('site/src/pages')}>one folder</a>. Each page starts with a short tag that says which door it belongs to. This page's tag is:</p>
+  <pre tabindex="0" aria-label="This page's tag"><code>{pageSnippet}</code></pre>
+  <p>The menus, door pages and Topics page are built from these tags (<a href={doc('site/src/lib/pages.mjs')}>the code that reads them</a>), so adding a page never means editing a menu by hand.</p>
+
+  <h3>A program checks the files before every build</h3>
+  <p><a href={doc('site/scripts/check-content.mjs')}>The content check</a> stops the build if a listing has no source, a source has no date or a date in the future, a field is missing, a program points to a group with no file, a topic has no door, or any text has an em dash. It warns about sources more than 6 months old.</p>
+
+  <h3>How the site is built and published</h3>
+  <p>On every change, <a href={wfFile('site.yml')}>the Site workflow</a> on GitHub runs the content check, then builds the whole site into plain web pages. More checks run after the build: page titles and other basics search engines need, color contrast, page weight, the data files, the calendar feed and reading grade. On proposed changes, it also runs an accessibility scan in a real browser, at phone width, in light and dark. When a change is merged, the same workflow publishes the site on GitHub Pages. It also rebuilds every morning.</p>
+  <p>The same build writes the <a href={`${base}/data/`}>open data files</a>, including a copy in Open Referral, a shared format help lines and referral tools read. There is also a small <a href={tree('apps/mcp')}>tool that lets AI apps read the data</a> and cite its sources.</p>
+
+  <h3>How the AI changes things</h3>
+  <ul>
+    <li><strong>Never straight to the live site.</strong> Each AI helper works on its own branch, a separate copy of the files named like <code>code/&lt;name&gt;</code> or <code>duet/&lt;name&gt;</code>, and opens a proposed change on GitHub.</li>
+    <li><strong>Checks run on the proposed change:</strong> the build and its checks, <a href={wfFile('claude-review.yml')}>the AI review</a>, and <a href={wfFile('high-stakes.yml')}>a program</a> that labels shelter, crisis, food and benefits changes for David.</li>
+    <li><strong>Most changes are merged by the helper that wrote them</strong> once checks pass. The ones on <a href={`${doc('docs/COORDINATION.md')}#when-a-pr-waits-for-david`}>this list</a> wait for David.</li>
+    <li><strong>Every change leaves a note.</strong> One file per entry in <a href={tree('docs/build-log')}>the build log</a> (what was considered, chosen and shipped), and one file per entry in <a href={tree('docs/decisions')}>the decision log</a> for choices that shape the project.</li>
+    <li><strong>Taking something down is one small edit.</strong> Adding a <code>hidden</code> block to a listing's file takes it off the site without deleting it. Removing the block puts it back.</li>
+  </ul>
+
+  <h2>Read more</h2>
+  <ul>
+    <li><a href={`${base}/about/`}>About this site</a>: who's behind it, and exactly what waits for a person.</li>
+    <li><a href={`${base}/the-idea/`}>The idea behind this site</a>: what we're trying to do, with before and after.</li>
+    <li><a href={`${base}/how-we-check/`}>How we check</a>: what counts as a source, and how often we recheck.</li>
+    <li><a href={`${base}/partners/`}>For groups and helpers</a>: how to fix a listing and reuse the data.</li>
+  </ul>
+
+  <style>
+    .short { margin: 20px 0; padding: 14px 18px; border-left: 4px solid var(--accent); background: var(--accent-bg); border-radius: 4px 10px 10px 4px; }
+    .short .kicker { margin: 0; font-size: 0.9rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .short ul { margin: 6px 0 0; padding-left: 1.2em; }
+    .short li + li { margin-top: 6px; }
+    .toc h2 { font-size: 1rem; margin-bottom: 4px; }
+    .toc ol { margin: 0; }
+    .toc a { display: inline-flex; align-items: center; min-height: 44px; }
+
+    /* The flow: one card per step, joined by a line, top to bottom so it reads
+       the same on any phone and with any text size. */
+    .flow { list-style: none; margin: 16px 0; padding: 0; }
+    .flow li { position: relative; margin: 0 0 22px; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+    .flow li:not(:last-child)::after { content: ""; position: absolute; left: 28px; bottom: -23px; width: 3px; height: 22px; background: var(--ridge); }
+    .flow h3 { margin: 4px 0 4px; font-size: 1.05rem; }
+    .flow p { margin: 0; }
+    .flow .who { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .flow .loop { border: 2px dashed var(--accent); }
+    .flow .back { margin-top: 8px; font-weight: 700; color: var(--accent); }
+    .flow .back::before { content: "\21BA  "; }
+    .tag { display: inline-block; padding: 1px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; border: 1px solid currentColor; }
+    .tag.src { color: var(--muted); }
+    .tag.ai { color: var(--accent); background: var(--accent-bg); }
+    .tag.auto { color: var(--fg); }
+    .tag.file { color: var(--muted); border-style: dashed; }
+    .tag.person { color: var(--brick); }
+
+    .roles { display: grid; gap: 0 14px; }
+    .roles .card { margin: 10px 0 0; }
+    .roles h3 { font-size: 1.05rem; margin-top: 0; }
+    .roles p { margin: 0; }
+    @media (min-width: 40rem) { .roles { grid-template-columns: 1fr 1fr; } }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+    th { font-size: 0.95rem; color: var(--muted); }
+    td:first-child { font-weight: 700; white-space: nowrap; }
+    @media (max-width: 30rem) { td:first-child { white-space: normal; } }
+    /* On narrow screens and at big text sizes, each row stacks: "When" on top, then what gets checked (#971) */
+    @media (max-width: 30rem) {
+      table, tbody, tr, td { display: block; }
+      thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+      tr { padding: 8px 0; border-bottom: 1px solid var(--line); }
+      td { padding: 2px 0; border: 0; }
+    }
+
+    pre { overflow-x: auto; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; font-size: 0.9rem; line-height: 1.5; }
+    code { font-size: 0.95em; }
+    .check { font-size: 0.95rem; }
+    .limits li + li { margin-top: 6px; }
+  </style>
+</Base>
