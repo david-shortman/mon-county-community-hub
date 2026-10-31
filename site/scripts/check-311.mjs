@@ -35,7 +35,9 @@ async function findPlace() {
 // status and category in memory.
 async function requestsSince(placeUrl, after) {
   const out = [];
-  for (let page = 1; page <= 60; page++) {
+  const MAX_PAGES = 60;
+  for (let page = 1; ; page++) {
+    if (page > MAX_PAGES) throw new Error(`more than ${MAX_PAGES * 100} requests in the window; raise MAX_PAGES so the totals are not too low`);
     // The API returns only open and acknowledged requests unless asked for every status.
     const data = await get('issues', { place_url: placeUrl, after: after.toISOString(), status: 'open,acknowledged,closed,archived', per_page: 100, page, sort: 'created_at' });
     for (const i of data.issues ?? []) out.push({ created: i.created_at, closed: i.closed_at ?? null, status: i.status, type: i.request_type?.title ?? '' });
@@ -54,7 +56,10 @@ const median = (xs) => {
 function totals(list) {
   const closed = list.filter((r) => r.closed && /closed/i.test(r.status ?? ''));
   const days = closed.map((r) => (Date.parse(r.closed) - Date.parse(r.created)) / DAY).filter((d) => d >= 0);
-  return { opened: list.length, closed: closed.length, median_days_to_close: days.length ? Math.round(median(days) * 10) / 10 : null };
+  // Archived requests are counted on their own, not as closed: the API's
+  // "archived" may not mean the problem was dealt with.
+  const archived = list.filter((r) => /archived/i.test(r.status ?? '')).length;
+  return { opened: list.length, closed: closed.length, archived, median_days_to_close: days.length ? Math.round(median(days) * 10) / 10 : null };
 }
 
 try {
@@ -70,7 +75,7 @@ try {
     window: { from: after.toISOString().slice(0, 10), to: now.toISOString().slice(0, 10) },
     all_requests: totals(list),
     street_maintenance_and_potholes: totals(potholes),
-    note: 'Requests opened in the window; "closed" counts requests opened in the window that are now closed. Closed does not always mean fixed; check the source wording before saying more.',
+    note: 'Requests opened in the window. "closed" counts those now closed (median days uses only these); "archived" is counted on its own. Closed does not always mean fixed; check the source wording before saying more.',
   }, null, 2));
 } catch (e) {
   console.error(`check-311: ${e.message}`);
