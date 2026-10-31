@@ -156,7 +156,7 @@ The build never fails because of a feed. It logs a warning and uses the last goo
    - `parse(raw)`: returns entries with `title`, `slug`, `starts`, `ends`, `org_name`, `who_it_is_for`, `what_to_do`, `url`, `topics`. The loader adds `sources` and the fetched time.
 3. For iCal, use `parseIcs` and `readIcsDate` from `site/src/lib/feeds/ical.mjs`. Clean text with `plain()` from `util.mjs` (it strips HTML and em dashes).
 4. Start each slug with a prefix for the source and end it with the date, so slugs stay unique and stable.
-5. Add the adapter to `ADAPTERS` in `site/src/lib/feeds/index.mjs`, run `npm run update-feeds`, `npm run check-content`, and `npm run build`, and commit the new snapshot.
+5. The site finds every file in `adapters/` on its own (#71), so there is no list to edit. Run `npm run update-feeds`, `npm run check-content`, and `npm run build`, and commit the new snapshot.
 6. Add a row to the table above.
 
 ## `corrections/<date>-<short-name>.yaml`: fixes we made
