@@ -8,6 +8,7 @@ import ResourceCard from '../components/ResourceCard.astro';
 import EventCard from '../components/EventCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, loadCalendarWithFeeds, upcoming, telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "Holiday season help", summary: "Toys, warm clothes, heat bills, holiday office closings, and ways to give in November and December" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const holidayWords = /thanksgiving|christmas|holiday|new year|veterans day|toy|angel tree|coat/i;
@@ -107,5 +108,5 @@ const src = {
     <p>More places that need help this season: <a href={`${base}/volunteer/`}>Where can I volunteer this weekend?</a></p>
   </section>
 
-  <p class="meta">We list programs from every kind of group the same way. Know a holiday program with 2026 dates? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We list programs from every kind of group the same way. Know a holiday program with 2026 dates? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

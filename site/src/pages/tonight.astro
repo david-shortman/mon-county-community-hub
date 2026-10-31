@@ -10,6 +10,7 @@ import SourceLine from '../components/SourceLine.astro';
 import Actions from '../components/Actions.astro';
 import { resource, telHref, prettyDate } from '../lib/content.mjs';
 import { loadTonight } from '../lib/tonight.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "help-now", label: "Tonight: is the warming shelter open?", summary: "Winter warming shelter status for tonight, checked each day: where, hours, rules and the bus" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const t = loadTonight();
@@ -67,7 +68,7 @@ const ruleRows = [
   <Actions callFirst phone={r211.contact.phone} phoneLabel="West Virginia 211" sms={r211.contact.text} smsLabel="211, send your ZIP code" />
 
   <p>Need a bed, food tonight, or to be safe from someone? See <a href={`${base}/stay-tonight/`}>Where to stay tonight</a>.</p>
-  <p class="meta">We never show a bed count. Rules and hours can change, so call before you go. Something wrong? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We never show a bed count. Rules and hours can change, so call before you go. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 
   <script is:inline>
     (function () {
