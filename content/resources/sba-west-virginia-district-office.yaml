@@ -1,0 +1,19 @@
+title: SBA West Virginia District Office
+slug: sba-west-virginia-district-office
+org: sba-west-virginia-district-office
+topics: [work]
+who_it_is_for: Small businesses anywhere in West Virginia. The office serves the whole state from Clarksburg.
+hours: Monday through Friday, 8 a.m. to 4:30 p.m. Closed on federal holidays.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:00"
+    closes: "16:30"
+what_to_do: Call the district office to ask about SBA funding programs, counseling, federal contracting certifications or disaster recovery. The office can also point you to partner groups, lenders and community groups.
+contact:
+  phone: "304-623-5631"
+  url: https://legacy.sba.gov/district/west-virginia
+  url_label: District office page
+  place: "320 W. Pike St., Suite 330, Clarksburg, WV 26301"
+sources:
+  - url: https://legacy.sba.gov/district/west-virginia
+    checked: 2026-10-30

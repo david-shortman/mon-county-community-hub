@@ -1,0 +1,12 @@
+name: Hope Gas
+slug: hope-gas
+kind: business
+website: https://hopegas.com/
+summary: A natural gas company in West Virginia. The Town of Granville lists it as a gas provider for the area.
+topics: [moving]
+area: statewide
+sources:
+  - url: https://hopegas.com/my-account-information/start-stop-or-transfer-service
+    checked: 2026-10-30
+  - url: https://townofgranvillewv.gov/community/
+    checked: 2026-10-30

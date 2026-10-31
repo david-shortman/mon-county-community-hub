@@ -1,0 +1,10 @@
+name: Pierpont Community and Technical College
+slug: pierpont-community-and-technical-college
+kind: school
+website: https://www.pierpont.edu/
+summary: A public community and technical college based in Fairmont. Its Career and Corporate Training office runs short job trainings.
+topics: [work]
+area: statewide
+sources:
+  - url: https://www.pierpont.edu/career-corporate-training/
+    checked: 2026-10-30

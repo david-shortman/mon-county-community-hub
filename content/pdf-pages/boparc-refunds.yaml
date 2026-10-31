@@ -1,0 +1,69 @@
+# BOPARC's refund, cancellation and transfer policy (#953, part of #393).
+# BOPARC posts two PDFs of this policy and they differ on one number: the
+# one on the Forms and Reports page says 10%, the one on the Programs page
+# says 25% (both read 2026-10-31; neither prints a date, so the file save
+# dates are given). The page says who says what; see the needs-verification
+# issue. Rules are quoted, not reworded.
+slug: boparc-refunds
+title: BOPARC Policy on Refunds, Cancellations and Transfers
+publisher: Morgantown Board of Parks and Recreation Commissioners (BOPARC)
+intro: BOPARC posts this policy as two PDFs, and they differ on one number. Both are linked below with what each says.
+recheck_days: 90
+sources:
+  - url: https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_policy_on_refundscancellationstransfers___1_.pdf
+    name: BOPARC
+    checked: 2026-10-31
+  - url: https://www.boparc.org/programs.html
+    checked: 2026-10-31
+  - url: https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_refund_policies.pdf
+    checked: 2026-10-31
+  - url: https://www.boparc.org/forms--reports.html
+    checked: 2026-10-31
+  - url: https://www.boparc.org/
+    checked: 2026-10-31
+sections:
+  - heading: Ask BOPARC first
+    id: ask
+    items:
+      - "BOPARC's phone number, from its home page, is 304-296-8356. Call before you cancel to check which fee applies."
+  - heading: Camps, programs and activities
+    id: programs
+    items:
+      - "\"Registration is non-refundable unless a waitlist is in force and a paid substitution is made.\""
+      - "An administrative fee \"may apply\". The PDF on the Programs page says 25%. The PDF on the Forms and Reports page says 10%."
+      - "If BOPARC cancels for weather or another reason, \"an alternate date will be offered if available. If no alternate date is available, a refund will be processed.\""
+      - "\"Partial attendance to camp or activity will not be pro-rated.\""
+      - "Transfers within the current season are allowed only when all of these apply: \"The request must be made at least five business days prior to the activity start date, a waitlist for the original activity is in force, providing for a paid substitution of the space and an opening exists in the desired program.\""
+      - "\"All payments made as part of a SUMMER CAMP PAYMENT PLAN are non-refundable.\""
+      - "Signing up online: BOPARC's Programs page says \"Activenet does charge user fees to register online. These are NOT BOPARC fees and cannot be refunded by BOPARC FOR ANY REASON!\""
+  - heading: "Renting a pavilion, Marilla Center, Wiles Hill Gym, a private pool or an ice arena party room"
+    id: rentals
+    items:
+      - name: "Cancel 30 or more days before"
+        lines: ["You get a refund less a fee. The PDF on the Programs page says \"a refund less 25%\". The PDF on the Forms and Reports page says \"a refund less 10%\"."]
+      - name: "Cancel 15 to 29 days before"
+        lines: ["\"Cancellations made between 29 and 15 days of rental date will receive a 50% refund.\""]
+      - name: "Cancel 14 days or less before"
+        lines: ["\"There will be no refunds on cancellations made with 14 days or less notice.\""]
+      - "\"Refunds will be processed via check unless otherwise stated by BOPARC. Please allow 2-4 weeks to receive your refund.\""
+  - heading: "Dorsey's Knob Lodge"
+    id: lodge
+    note: Both PDFs say the same thing for the lodge.
+    items:
+      - "\"Dorsey's Knob Lodge requires a 10% non-refundable deposit.\""
+      - "The rest of the cost \"is charged 30days prior to check-in date.\""
+      - "\"Cancellation must be received 31 days prior to check-in or renter will be charged full balance due.\""
+      - "\"A ONE-TIME transfer of dates is allowed (outside of 30 days) without penalty. Future transfers will require an additional 10% non-refundable deposit.\""
+  - heading: The two PDFs
+    id: pdfs
+    items:
+      - name: "On BOPARC's Programs page"
+        links:
+          - label: "Policy on refunds, cancellations and transfers (PDF)"
+            url: https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_policy_on_refundscancellationstransfers___1_.pdf
+            saved: "September 22, 2026"
+      - name: "On BOPARC's Forms and Reports page"
+        links:
+          - label: "Refund policies (PDF)"
+            url: https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_refund_policies.pdf
+            saved: "February 16, 2025"

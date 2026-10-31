@@ -1,6 +1,6 @@
 # Who lives here: audience facts for Monongalia County
 
-This page collects the numbers that tell us who the hub has to work for: what phones and internet people have, how well adults read and do math, and the groups most likely to need help. Use it when you design a page, write content, or pick what to build next. The [presentation guide](../design/presentation.md#who-we-design-for) turns these facts into rules for pages.
+This page collects the numbers that tell us who the site has to work for: what phones and internet people have, how well adults read and do math, and the groups most likely to need help. Use it when you design a page, write content, or pick what to build next. The [presentation guide](../design/presentation.md#who-we-design-for) turns these facts into rules for pages.
 
 Last checked: October 28, 2026.
 
@@ -99,7 +99,7 @@ About 38% of people 65 and older have a disability (32% at 65 to 74, 48% at 75 a
 - Overdose deaths: 77 in 2023 (West Virginia Office of Drug Control Policy).
 - In Mon Health's 2025 community survey, the top health concern was mental health (64%), and the top quality of life concerns were health care costs (50%), poverty (37%), and homelessness (25%).
 
-## What this means for the hub
+## What this means for the site
 
 1. **Build for a cheap Android on slow data.** Text first, very little script, and no maps or video loaded unless asked for. Stay inside the weight budget in the presentation guide.
 2. **Write simply and do the math.** About 1 in 6 adults reads at the lowest level and 1 in 4 struggles with numbers. One step at a time, plain dates and costs, and big Call, Text, and Directions buttons.

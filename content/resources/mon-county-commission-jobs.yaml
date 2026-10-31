@@ -1,0 +1,20 @@
+title: Monongalia County Commission job postings
+slug: mon-county-commission-jobs
+org: monongalia-county-commission
+topics: [work]
+who_it_is_for: Anyone looking for a job with Monongalia County government.
+what_to_do: Check the county's job postings page. Each opening lists a job description, the date it was posted and the closing date. The county's employment application is a form on the same page.
+hours: Monday to Friday, 8:30 a.m. to 4 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:30"
+    closes: "16:00"
+contact:
+  phone: "304-291-7257"
+  url: https://www.monongaliacounty.gov/government/job_postings.php
+  url_label: See county jobs
+  place: 243 High St, Room 202, Morgantown, WV 26505
+cost: free
+sources:
+  - url: https://www.monongaliacounty.gov/government/job_postings.php
+    checked: 2026-10-30

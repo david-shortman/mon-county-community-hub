@@ -1,0 +1,68 @@
+# Rules for the source check (site/scripts/check-sources.mjs, issue #16).
+#
+# The source registry is built on every run from content/ and from the links on
+# the built site, so nobody keeps a list by hand. This file holds only the
+# exceptions: sources a robot should not fetch and which pages count as Help now
+# pages. Resets, timeouts and blocks (the city site sometimes drops automated
+# requests) always count as "could not check", never as broken.
+#
+# Every source ends up in one of three groups (the Crescent City Intel pattern,
+# see docs/playbook/landscape.md):
+#   monitored: the daily check fetches it.
+#   manual:    a person checks it on the sweep. Listed so the gap stays visible.
+#   reference: not a resident-facing fact (our own site, code, tools). Not checked.
+
+# Pages whose sources are checked first, and whose problems count most (#453).
+help_now_pages:
+  - /stay-tonight/
+  - /utility-bills/
+  - /money/
+  - /snap/
+  - /flu-shots/
+  - /staying-well/
+  - /calendar/
+
+# Matched against the host (and its subdomains) or, with `prefix`, the start of
+# the URL. The first rule that matches wins. `ignore_changes: true` keeps
+# checking that the page works but does not report text changes, for pages that
+# change all the time on purpose.
+rules:
+  - host: weather.gov
+    group: monitored
+    ignore_changes: true
+    why: Forecasts change every hour.
+  - host: facebook.com
+    group: manual
+    why: Meta's terms allow automated collection only through its API (#166).
+  - host: instagram.com
+    group: manual
+    why: Meta's terms allow automated collection only through its API (#166).
+  - prefix: https://github.com/david-shortman/mon-county-community-hub
+    group: reference
+    why: Our own repo and report forms.
+  - host: everythingmorgantown.org
+    group: reference
+    why: Our own site. The Health check covers it.
+  - host: david-shortman.github.io
+    group: reference
+    why: Our own site's old address.
+  - host: github.com
+    group: reference
+    why: Code and font projects, not resident-facing facts.
+  - host: google.com
+    group: reference
+    why: Map and calendar helper links built from our own data.
+  - host: outlook.live.com
+    group: reference
+    why: Calendar helper link built from our own data.
+  - host: example.org
+    group: reference
+    why: Placeholder in examples.
+  - host: example.wv.gov
+    group: reference
+    why: Placeholder in examples.
+
+# Redirects to another domain count as "moved" (a domain can lapse and be
+# bought by someone else). These pairs are the same owner, so a redirect between
+# them is fine. Add a pair only after a person has confirmed it.
+same_owner: []

@@ -3,8 +3,12 @@
 # come as their pages ship: new here and who serves my address (#204),
 # getting around (#61), and registering to vote.
 door: living-here
-lede: Trash, recycling and the everyday things of living in Mon County. Pick what is going on, and we put the steps in order.
+lede: Moving in, trash, recycling and the everyday things of living in Mon County. Pick what is going on, and we put the steps in order.
 steps:
+  power-water-gas:
+    when: week
+    resource: mub-start-service
+    text: Ask your landlord or the seller which companies serve the home, then start water, power and gas service a few days before you move.
   swa:
     when: today
     resource: mon-swa-ask-about-trash
@@ -18,7 +22,28 @@ steps:
     when: opens
     resource: mon-swa-ask-about-trash
     text: Tires and electronics go to collection days. Check "Dates for this" on this page, or call the Solid Waste Authority to ask about the next one.
+  dmv-office:
+    when: week
+    resource: wv-dmv-morgantown-office
+    text: Read the DMV's rules for new residents, then walk in or make an appointment at the Morgantown DMV office.
+  vote-register:
+    when: today
+    resource: wv-online-voter-registration
+    text: Register to vote or update your address online with the Secretary of State, or in person at the County Clerk's office.
+  vote-check:
+    when: today
+    resource: wv-find-polling-place
+    text: Check that you are registered and find your polling place.
+  bus:
+    when: today
+    resource: mountain-line-fares
+    text: Look up your route and times on Mountain Line's trip planner. Have your fare ready, or swipe your WVU ID.
+    action: Check fares
 situations:
+  - id: moving
+    label: I'm moving here and need to start power, water, gas or trash
+    page: /moving-here/
+    steps: [power-water-gas, swa]
   - id: pickup
     label: When is my trash pickup day?
     page: /recycling/#pickup
@@ -31,6 +56,18 @@ situations:
     label: I have tires or electronics to get rid of
     page: /recycling/#hard-items
     steps: [hard-items]
+  - id: license
+    label: I need a West Virginia driver's license or plates
+    page: /drivers-license/
+    steps: [dmv-office]
+  - id: vote
+    label: I want to register to vote or find where I vote
+    page: /vote/
+    steps: [vote-register, vote-check]
+  - id: bus
+    label: I need to get around without a car
+    page: /getting-around/
+    steps: [bus]
 also:
   - text: Can't pay a water or power bill
     href: /utility-bills/

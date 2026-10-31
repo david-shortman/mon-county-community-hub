@@ -1,0 +1,43 @@
+---
+// One shop, free program or online group from content/secondhand (#423).
+// Name, who runs it, where and when, what it sells or takes, the "Buys from
+// you" and "Funds a local cause" tags, then the place's own link as the main
+// button, Directions, and the source line with a "Report a problem" link.
+// Unclear and closed entries never reach here (loadSecondhand filters them).
+// Past 4 months since the oldest check, the card says "Not checked lately"
+// (#430).
+import Actions from './Actions.astro';
+import SourceLine from './SourceLine.astro';
+import { SECONDHAND_KINDS, notCheckedLately } from '../lib/content.mjs';
+const { s, headingLevel = 3 } = Astro.props;
+const H = `h${headingLevel}`;
+const old = notCheckedLately(s.sources);
+---
+<article class="card shop" id={s.slug}>
+  <H>{s.name}</H>
+  <p class="meta">{SECONDHAND_KINDS[s.kind]}. Run by {s.run_by}.</p>
+  {(s.buys_from_you || s.funds_local_cause) && (
+    <p class="tags">
+      {s.buys_from_you && <span class="tag">Buys from you</span>}
+      {s.funds_local_cause && <span class="tag">Funds a local cause</span>}
+    </p>
+  )}
+  {s.address && <p><strong>Where:</strong> {s.address}</p>}
+  {s.hours && <p><strong>Hours:</strong> {s.hours}{s.status === 'likely' && <> <strong>Check before you go.</strong></>}</p>}
+  {!s.hours && s.status === 'likely' && <p><strong>Check hours before you go.</strong></p>}
+  <p><strong>{s.kind === 'lending' ? 'What you can borrow' : s.kind === 'free-program' ? 'What it gives' : s.kind === 'online-group' ? 'What it is' : 'What it sells'}:</strong> {s.sells}</p>
+  {s.takes && <p><strong>What it takes:</strong> {s.takes}</p>}
+  {s.does_not_take && <p><strong>Does not take:</strong> {s.does_not_take}</p>}
+  {s.drop_off && <p><strong>Drop-off and pickup:</strong> {s.drop_off}</p>}
+  {s.funds_local_cause && <p><strong>Money goes to:</strong> {s.funds_local_cause}</p>}
+  {s.who_can_use && <p><strong>Who can use it:</strong> {s.who_can_use}</p>}
+  {s.what_to_bring && <p><strong>What to bring:</strong> {s.what_to_bring}</p>}
+  {s.note && <p>{s.note}</p>}
+  <Actions link={s.url} linkLabel={s.url_label ?? 'Website'} place={s.address} about={s.name} />
+  {old && <p class="meta"><strong>Not checked lately.</strong> Check with them before you go.</p>}
+  <SourceLine sources={s.sources} org={s.org} about={s.name} slug={s.slug} />
+</article>
+<style>
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+  .tag { background: var(--accent-bg); color: var(--accent); border-radius: 999px; padding: 2px 10px; font-size: 0.95rem; font-weight: 600; }
+</style>
