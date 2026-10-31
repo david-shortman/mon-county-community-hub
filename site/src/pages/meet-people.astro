@@ -16,22 +16,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const pages = await loadPages();
 const live = (href) => pages.has(href);
 const nbhd = r('morgantown-neighborhood-associations');
-// Meeting times in the city's words, in the city's order (alphabetical).
-const associations = [
-  ['Evansdale Neighborhood Association', 'First Wednesday of the month at 6:30 p.m. in Percival Hall.'],
-  ['First Ward Neighborhood Association', 'Fourth Monday of each month at 6 p.m. at the pavilion at Jack Roberts Park.'],
-  ['Greenmont Neighborhood Association', "Last Monday of the month at 7 p.m. at Gene's on Wilson Avenue."],
-  ['Jerome Park Neighborhood Association', 'Quarterly (February, May, July, November) on the first Monday of the month at 7 p.m. Meetings alternate between Sabra UMC and Mount Hermon Baptist Church.'],
-  ['South Hills Neighborhood Association', 'Meets as needed.'],
-  ['South Park Association of Neighbors', 'Last Wednesday of the month at 7 p.m. at Eaton Park (weather permitting) or First Christian Church.'],
-  ['Suncrest Neighborhood Association', 'Last Thursday of the month at 7 p.m. on Zoom.'],
-  ['Wiles Hill-Highland Park Neighborhood Association', 'Third Wednesday of the month at the Wiles Hill community center: 6:30 p.m. social, 7 p.m. business.'],
-  ['Woodburn Association of Neighbors', 'Quarterly (January, April, June, October) on the third Wednesday of the month at 7 p.m. at the Woodburn Community Complex.'],
-];
 ---
 <Base title="Meet people in Morgantown and Mon County: library card, programs, neighborhood groups" description="Ways for new residents and people who work from home to meet people in Morgantown and Monongalia County, WV: a free library card, free library programs for adults, and when each Morgantown neighborhood association meets.">
   <h1>Meet people and get a library card</h1>
   <p class="lede">New here, or working from home and want to get out? The library and your neighborhood association are free places to start.</p>
+  <p>See how it could go: <a href={`${base}/meet-people/example/`}>an example first month for someone new in town</a> (a made-up person, real places).</p>
 
   <h2 id="library-card">Get a library card</h2>
   {r('mpls-library-card') && <ResourceCard r={r('mpls-library-card')} showCost />}
@@ -44,7 +33,7 @@ const associations = [
     <>
       <p>{nbhd.who_it_is_for} {nbhd.what_to_do}</p>
       <ul>
-        {associations.map(([name, when]) => <li><strong>{name}:</strong> {when}</li>)}
+        {(nbhd.meetings ?? []).map((m) => <li><strong>{m.name}:</strong> {m.when}</li>)}
       </ul>
       <p>Meeting times and places can change, so check the city's calendar before you go.</p>
       <div class="actions"><a class="btn" href={nbhd.contact.url}><span>City neighborhood page</span></a></div>

@@ -78,7 +78,7 @@ export function loadCalendarWithFeeds() {
     const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug) && !covered(e));
     // Two feeds can list the same event (#852). Same rule across feeds: same
     // first three title words and the same start date. The feed listed first
-    // in ADAPTERS wins, so the result never depends on fetch timing.
+    // in file-name order (see feeds/index.mjs) wins, so the result never depends on fetch timing.
     const firstFeed = new Map();
     const deduped = fromFeeds.filter((e) => {
       const key = `${e.starts}|${words(e.title)}`;
@@ -162,12 +162,21 @@ export function shortUrl(u) {
 // alone, so we never credit a page to the wrong group.
 export const hostOf = (u) => new URL(u).hostname.replace(/^www\./, '');
 const sameSite = (a, b) => a === b || a.endsWith(`.${b}`) || b.endsWith(`.${a}`);
+// When an org's website is one page on someone else's site (the Westside
+// Senior Center's page on the City of Westover's site), a source from another
+// record is credited to it only when it is under that page. A record's own org
+// still gets credit for any page on the same site.
+const pathOf = (u) => new URL(u).pathname.replace(/\/+$/, '');
+function owns(o, url) {
+  const p = pathOf(o.website);
+  return !p || pathOf(url) === p || pathOf(url).startsWith(`${p}/`);
+}
 export function sourceOrg(url, orgSlug) {
   const h = hostOf(url);
   const orgs = loadDir('orgs').filter((o) => o.website);
   const own = orgs.find((o) => o.slug === orgSlug);
   if (own && sameSite(h, hostOf(own.website))) return own;
-  return orgs.find((o) => hostOf(o.website) === h) ?? null;
+  return orgs.find((o) => hostOf(o.website) === h && owns(o, url)) ?? null;
 }
 // A source on a .gov address is marked "(government site)". Only US
 // government bodies can register .gov, so the mark is never a guess. Other
@@ -205,10 +214,16 @@ export function sourceGroups(sources, orgSlug) {
 // Checked dates are Morgantown dates (America/New_York). After 6 months a
 // card says it may be out of date (the rule in content/README.md, #39).
 export const STALE_DAYS = 183;
-export function isStale(checked, today = todayYmd()) {
+export function isStale(checked, today = todayYmd(), days = STALE_DAYS) {
   if (!checked) return false;
-  return (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${checked}T12:00:00Z`)) / 86400000 > STALE_DAYS;
+  return (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${checked}T12:00:00Z`)) / 86400000 > days;
 }
+
+// Make it better entries (topic `better`, and board records in
+// content/boards/) change faster: seat counts and grant rounds. They say
+// "may be out of date" after 90 days instead of 6 months (#791, #291).
+export const FAST_STALE_DAYS = 90;
+export const staleDaysFor = (r) => ((r?.topics ?? []).includes('better') || String(r?._file ?? '').startsWith('boards/') ? FAST_STALE_DAYS : STALE_DAYS);
 
 // A "Report a problem" link that opens our GitHub issue form with the item
 // already filled in: its name, its slug and its source (#39, #48). It asks

@@ -168,6 +168,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .lede { font-size: 1.15rem; color: var(--muted); }
       .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
       .card h3 { margin: 0 0 4px; font-size: 1.1rem; }
+      .card.resource > h2, .card.place > h2 { margin: 0 0 4px; font-size: 1.1rem; } /* same look when a card title is an h2 */
       .card-steps { margin: 6px 0 10px; padding-left: 1.4rem; display: grid; gap: 4px; } /* a card's `steps` list (#822) */
       .when { font-weight: 600; color: var(--accent); }
       .meta { font-size: 0.95rem; color: var(--muted); overflow-wrap: anywhere; } /* sources and checked dates: at least 15px (#50) */
@@ -180,6 +181,17 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .actions > * { min-width: 0; max-width: 100%; flex: 0 1 auto; }
       .btn .nowrap { white-space: normal; }
       main { overflow-wrap: anywhere; }
+      /* Table cells never break inside a word, or narrow columns stack one letter per line (#917) */
+      main :is(th, td, caption) { overflow-wrap: break-word; }
+      /* Wide tables scroll sideways in their own box. Shadows at the edges show there is more (#917) */
+      .table-scroll { overflow-x: auto; margin: 16px 0; border: 1px solid var(--line); border-radius: 10px;
+        background: linear-gradient(to right, var(--card) 40%, transparent) left / 32px 100% no-repeat local,
+          linear-gradient(to left, var(--card) 40%, transparent) right / 32px 100% no-repeat local,
+          linear-gradient(to right, rgb(0 0 0 / 0.18), transparent) left / 12px 100% no-repeat scroll,
+          linear-gradient(to left, rgb(0 0 0 / 0.18), transparent) right / 12px 100% no-repeat scroll, var(--card); }
+      .table-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .table-scroll > table { background: transparent; }
+      @media print { .table-scroll { overflow: visible; border: 0; background: none; } }
       .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 12px; border: 1.5px solid var(--accent); border-radius: 10px;
         background: var(--card); color: var(--accent); font: inherit; font-size: 1rem; font-weight: 600; line-height: 1.25; text-align: center; text-decoration: none; cursor: pointer; }
       .btn:hover { background: var(--accent-bg); }
@@ -228,7 +240,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .season h2 { margin: 0.1em 0 0.3em; font-size: 1.25rem; }
       .season ul { margin: 6px 0 0; padding-left: 1.2rem; }
       .season li a { display: inline-flex; align-items: center; min-height: 44px; }
-      .eyebrow { margin: 4px 0 0; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+      .eyebrow { margin: 4px 0 0; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
       .search { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin: 24px 0 8px; }
       .search label { font-family: var(--display); font-weight: 800; font-size: 1.15rem; }
       .search[hidden] { display: none; }
@@ -257,6 +269,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .topic-door > p { margin: 0 0 8px; color: var(--muted); }
       .topic-list { margin: 4px 0 16px; padding-left: 1.2rem; display: grid; gap: 6px; }
       .topic-list .hint { display: block; font-size: 0.95rem; color: var(--muted); }
+      .topic-list > li > a { display: inline-block; padding-block: 6px; } /* taller tap area for list links (QA) */
       /* Door pages (#235): pick what fits, then steps as mileposts */
       .cant-wait { margin: 12px 0 8px; padding-top: 6px; }
       .cant-wait > p:first-child { font-weight: 600; }
