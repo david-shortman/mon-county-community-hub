@@ -5,6 +5,7 @@ import HelpNow from '../components/HelpNow.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 const office = loadDir('resources').find((e) => e.slug === 'monongalia-county-dohs-office');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const page = { door: "this-month", topic: "food", label: "Apply for SNAP (food stamps)", summary: "Apply online at WV PATH, or call DoHS" };
 ---
 <Base help title="How to apply for SNAP (food stamps) in Monongalia County, WV" description="Apply for SNAP food help online at WV PATH, the state's free site, or call DoHS customer service. Steps, phone number and sources for Morgantown and Mon County.">
@@ -15,6 +16,8 @@ export const page = { door: "this-month", topic: "food", label: "Apply for SNAP 
 
   <h2>Rather apply in person?</h2>
   {office && <ResourceCard r={office} />}
+
+  <p>SNAP can also buy seeds and plants that grow food. See <a href={`${base}/grow/#budget`}>Grow food on a budget</a>.</p>
 
   <HelpNow />
 
