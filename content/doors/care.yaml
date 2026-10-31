@@ -10,7 +10,7 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: Mental health help, a dentist, help paying for medicine, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Mental health help, a dentist, help paying for medicine, keeping your Medicaid in 2027, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
@@ -59,6 +59,10 @@ steps:
     when: week
     resource: health-right-clinic
     text: No insurance and low income? Call Milan Puskar Health Right for a phone screening to become a patient at the free clinic.
+  medicaid2027:
+    when: today
+    resource: wv-medicaid-2027-help-line
+    text: On Medicaid? Update your address, phone and email in WV PATH or by phone, and answer any letter from DoHS within 30 days.
   ship:
     when: week
     resource: wv-ship-medicare-counseling
@@ -68,6 +72,10 @@ situations:
     label: I need mental health help
     page: /mental-health/
     steps: [talk, counseling]
+  - id: medicaid2027
+    label: I want to keep my Medicaid in 2027
+    page: /medicaid-2027/
+    steps: [medicaid2027]
   - id: dentist
     label: I need a dentist, or help paying for medicine
     page: /dental-and-prescriptions/
