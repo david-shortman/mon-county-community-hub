@@ -11,7 +11,9 @@ import NextRung from '../../components/NextRung.astro';
 import { loadDir } from '../../lib/content.mjs';
 export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City boards that shape how Morgantown looks, which have open seats, and how to apply" };
 const all = loadDir('boards');
-const boards = all.filter((b) => b.section !== 'other');
+const boards = all.filter((b) => !b.section);
+const county = all.filter((b) => b.section === 'county');
+const countyList = 'https://www.monongaliacounty.gov/authorities,_boards_and_commissions/index.php';
 // Other boards with open seats, listed by name from the city's vacancy list (#676).
 const others = all.filter((b) => b.section === 'other' && b.open_seats > 0);
 const open = boards.filter((b) => b.open_seats > 0);
@@ -66,6 +68,19 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
   </ul>
   <p class="more"><a href={vacancyList}>The city's full vacancy list</a></p>
   <SourceLine sources={listSrc} about="the other open seats" />
+
+  <h2 id="county">County boards</h2>
+  <p>The Monongalia County Commission appoints residents to its own boards. It takes a letter of interest or an application from anyone willing to go to meetings. Send letters to the Monongalia County Commission, 2nd Floor, Courthouse, 243 High Street, Morgantown, WV 26505. The county's page does not list open seats, so ask the Commission office.</p>
+  <Actions link={countyList} linkLabel="All county boards" phone="304-291-7257" phoneLabel="the County Commission office" about="county boards" />
+  {county.map((b) => (
+    <article class="card" id={b.slug}>
+      <h3>{b.name}</h3>
+      <p>{b.created}</p>
+      <p><strong>Who serves:</strong> {b.who_can_serve}</p>
+      <p><strong>Meets:</strong> {b.meets}</p>
+      <SourceLine sources={b.sources} org={b.org} about={b.name} />
+    </article>
+  ))}
 
   <NextRung next="budget" />
   <p class="meta">We list open seats as the city posts them. We do not say who should apply or take positions on what any board decides. Seat counts change, so check the city's list before you apply. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>

@@ -228,7 +228,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .season h2 { margin: 0.1em 0 0.3em; font-size: 1.25rem; }
       .season ul { margin: 6px 0 0; padding-left: 1.2rem; }
       .season li a { display: inline-flex; align-items: center; min-height: 44px; }
-      .eyebrow { margin: 4px 0 0; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+      .eyebrow { margin: 4px 0 0; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
       .search { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin: 24px 0 8px; }
       .search label { font-family: var(--display); font-weight: 800; font-size: 1.15rem; }
       .search[hidden] { display: none; }
@@ -257,6 +257,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .topic-door > p { margin: 0 0 8px; color: var(--muted); }
       .topic-list { margin: 4px 0 16px; padding-left: 1.2rem; display: grid; gap: 6px; }
       .topic-list .hint { display: block; font-size: 0.95rem; color: var(--muted); }
+      .topic-list > li > a { display: inline-block; padding-block: 6px; } /* taller tap area for list links (QA) */
       /* Door pages (#235): pick what fits, then steps as mileposts */
       .cant-wait { margin: 12px 0 8px; padding-top: 6px; }
       .cant-wait > p:first-child { font-weight: 600; }

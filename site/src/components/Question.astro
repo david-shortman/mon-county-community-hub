@@ -10,6 +10,6 @@ const { step, of, back, choices } = Astro.props;
   <ul class="choices">
     {choices.map((c) => <li><a class="choice" href={`${base}${c.href}`}><span class="choice-label">{c.label}</span>{c.hint && <span class="choice-hint">{c.hint}</span>}</a></li>)}
   </ul>
-  {back && <p><a href={`${base}${back}`}>Back</a></p>}
+  {back && <p class="more"><a href={`${base}${back}`}>Back</a></p>}
   <p class="meta">Not sure? Call 211 or text your ZIP code to 898-211, any hour.</p>
 </div>
