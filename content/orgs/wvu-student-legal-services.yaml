@@ -1,0 +1,10 @@
+name: WVU Student Legal Services
+slug: wvu-student-legal-services
+kind: school
+website: https://studentlegalservices.wvu.edu/
+summary: A West Virginia University office that gives enrolled WVU students legal help with things like landlord and tenant problems, consumer problems and contracts.
+topics: [legal]
+area: morgantown
+sources:
+  - url: https://studentlegalservices.wvu.edu/slsfaq
+    checked: 2026-10-30
