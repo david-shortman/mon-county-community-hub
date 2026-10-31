@@ -1,0 +1,24 @@
+name: Country Roads Toastmasters Club
+slug: country-roads-toastmasters-club
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: volunteer-association
+  text: Country Roads Toastmasters Club (a Toastmasters International club)
+story: A club where members practice public speaking and leadership at regular meetings.
+regular:
+  - First and third Friday of each month, 5:30 p.m.
+cost: Free to visit as a guest
+interests: [learning, social]
+tags: [come-alone]
+contact:
+  url: https://www.toastmasters.org/Find-a-Club/28678972-country-roads-toastmasters-club
+  place: Panera Bread, 357 Patteson Drive, Morgantown, WV 26505
+status: active
+notes:
+  - The club is open to all interested parties, and you can also attend online, the Toastmasters page says.
+  - Membership dues are not listed on the club page.
+sources:
+  - url: https://www.toastmasters.org/Find-a-Club/28678972-country-roads-toastmasters-club
+    checked: 2026-10-30

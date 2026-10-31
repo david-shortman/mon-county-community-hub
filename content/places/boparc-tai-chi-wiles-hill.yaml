@@ -1,0 +1,32 @@
+name: Tai Chi at Wiles Hill Community Center
+slug: boparc-tai-chi-wiles-hill
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: parks-board
+  text: Morgantown Board of Parks and Recreation (BOPARC)
+story: Drop-in tai chi classes for adults, with a beginner class and an intermediate class. Classes are planned for adults 55 and over but open to adults of all ages.
+regular:
+  - Beginner, Mondays, 9 a.m. to 10 a.m. and 3:45 p.m. to 4:45 p.m.
+  - Intermediate, Mondays, 10 a.m. to 11 a.m.
+cost: $5.35 per class
+venue: wiles-hill-community-center
+interests: [sports, learning]
+tags: [come-alone, beginners, weekly]
+contact:
+  url: https://www.boparc.org/wellness-classes.html
+  phone: "304-296-8356"
+  place: 287 Eureka Dr., Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - No sign-up needed. All wellness classes are drop-in.
+  - The class page prints the price as "$5:35"; we read this as $5.35. Call BOPARC to confirm.
+  - The center page says the center closes at 4 p.m. starting November 16, 2026. Call to check whether the 3:45 p.m. class still meets.
+  - The class page has no dates. The center page was current (it posts a November 2026 hours change).
+sources:
+  - url: https://www.boparc.org/wellness-classes.html
+    checked: 2026-10-30
+  - url: https://www.boparc.org/wiles-hill-community-center.html
+    checked: 2026-10-30

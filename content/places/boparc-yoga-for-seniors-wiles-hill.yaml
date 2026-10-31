@@ -1,0 +1,29 @@
+name: Yoga for Seniors at Wiles Hill Community Center
+slug: boparc-yoga-for-seniors-wiles-hill
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: parks-board
+  text: Morgantown Board of Parks and Recreation (BOPARC)
+story: A weekly drop-in yoga class planned for adults 55 and over. Adults of all ages may come.
+regular:
+  - Fridays, 9 a.m. to 10 a.m.
+cost: $5.35 per class
+venue: wiles-hill-community-center
+interests: [sports]
+tags: [come-alone, weekly]
+contact:
+  url: https://www.boparc.org/wellness-classes.html
+  phone: "304-296-8356"
+  place: 287 Eureka Dr., Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - No sign-up needed. All wellness classes are drop-in.
+  - The class page has no dates. The center page was current (it posts a November 2026 hours change).
+sources:
+  - url: https://www.boparc.org/wellness-classes.html
+    checked: 2026-10-30
+  - url: https://www.boparc.org/wiles-hill-community-center.html
+    checked: 2026-10-30

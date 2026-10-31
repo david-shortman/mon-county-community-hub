@@ -1,0 +1,13 @@
+name: Mountain State Justice
+slug: mountain-state-justice
+kind: nonprofit
+website: https://mountainstatejustice.org/
+phone: "304-344-3144"
+summary: A legal services group that gives free legal help to West Virginians with low income, including help with immigration cases. It has an office in Morgantown.
+topics: [legal]
+area: statewide
+sources:
+  - url: https://mountainstatejustice.org/get-help/
+    checked: 2026-10-30
+  - url: https://mountainstatejustice.org/our-work/immigration/
+    checked: 2026-10-30
