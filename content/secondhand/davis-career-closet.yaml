@@ -1,0 +1,20 @@
+name: Davis College Career Closet and Interview Room
+slug: davis-career-closet
+kind: free-program
+area: elsewhere
+run_by: WVU Davis College of Agriculture and Natural Resources
+sells: Free professional clothes that students choose and keep. Private rooms are also available for virtual job interviews.
+takes: Professional clothing, left at the Davis College Success Center. The biggest needs are mid-range sizes and men's shoes. The center is open Monday to Thursday, 8 a.m. to 9 p.m., and Friday, 8 a.m. to 5 p.m.
+goods: [clothes]
+buys_from_you: false
+who_can_use: WVU students on all Morgantown campuses.
+what_to_bring: Book a 15-minute clothing visit or a 1-hour interview room through WVU's Navigate app.
+url: https://www.davis.wvu.edu/news/2025/07/31/wvu-davis-college-career-closet-suits-up-for-launch-with-alumni-clothing-drive
+url_label: Davis College news
+status: confirmed
+note: In the Davis College Success Center, Room G216, on the ground floor of the Agricultural Sciences Building. Opened in fall 2025.
+sources:
+  - url: https://www.davis.wvu.edu/news/2025/07/31/wvu-davis-college-career-closet-suits-up-for-launch-with-alumni-clothing-drive
+    checked: 2026-10-30
+  - url: https://morgantownmag.com/dress-for-success/
+    checked: 2026-10-30

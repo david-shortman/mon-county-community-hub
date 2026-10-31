@@ -1,0 +1,48 @@
+# Findability starting score for the community centers questions (#460)
+#
+# A partial run: only q43 to q45, the questions added for the Community
+# centers and halls section (#450). Run the day the section went live, before
+# search engines had indexed it, so it is the "before" for that section.
+# Same rubric and fields as the full runs (docs/scoreboard.md). Compute with:
+# python3 content/findability/score.py content/findability/2026-10-30-centers.yaml
+
+date: 2026-10-30
+run: centers-baseline
+rubric_version: 1
+questions_version: 1
+tester: Claude Code (sprint lane 5, community centers)
+search_tool: Claude WebSearch (standard), then curl and a 390px Playwright check (mobile-check.js)
+results:
+  - id: q43
+    best_url: https://iserve.wvu.edu/agency/detail/?agency_id=50519
+    search_top_results: [en.wikipedia.org, iserve.wvu.edu, theclio.com]
+    scores: {found: 1, steps: 3, current: 3, plain: 2, mobile: 3}
+    total: 12
+    orgs: [Arnettsville Community Association, Senior Monongalians, BOPARC]
+    note: Search found one center (Arnettsville, on WVU's volunteer site) and a 2018 newspaper list with Senior Monongalians and a BOPARC senior center. No page lists the county's centers together or groups them by area. The Arnettsville page fits a phone (390px, no sideways scroll).
+    gap: No single list of community and senior centers by part of the county. Most rural centers have no web page at all.
+    hub_page: https://everythingmorgantown.org/community-centers/
+    hub_in_results: false
+    checked: 2026-10-30
+  - id: q44
+    best_url: null
+    search_top_results: [onview.lib.wvu.edu, staging5.lib.wvu.edu, onview.lib.wvu.edu]
+    scores: {found: 0, steps: 0, current: 0, plain: 0, mobile: 0}
+    total: 0
+    orgs: [BOPARC, Monongalia County Parks and Recreation, Smithtown Community Association, Westside Senior Center]
+    note: The search returned old photos, rent prices for apartments and Airbnb listings. No hall, price or booking page came up, though BOPARC, the county parks and several centers publish prices on their own sites.
+    gap: Hall prices exist on about ten separate sites, but nothing ranks for a plain search and nothing compares them.
+    hub_page: https://everythingmorgantown.org/community-centers/halls/
+    hub_in_results: false
+    checked: 2026-10-30
+  - id: q45
+    best_url: null
+    search_top_results: [digital-release.wboy.com, dominionpost.com, digital-release.wboy.com]
+    scores: {found: 0, steps: 0, current: 0, plain: 0, mobile: 0}
+    total: 0
+    orgs: [Dominion Post community listings, Westside Senior Center, Arnettsville Community Center, Smithtown Community Association]
+    note: Results were old news stories about past dinners. The Dominion Post's current weekly listings do carry center dinners and bingo, but the search did not surface them.
+    gap: Center dinners are listed in the paper and on Facebook, not on any page that ranks for "this weekend."
+    hub_page: https://everythingmorgantown.org/community-centers/
+    hub_in_results: false
+    checked: 2026-10-30

@@ -17,11 +17,18 @@
 // the default slot.
 // With no sources (a hidden record's stand-in, #519) it says the item is
 // being re-checked instead of giving a date.
-import { prettyDate, oldestChecked, sourceGroups, isStale, reportUrl, RECHECK_TEXT } from '../lib/content.mjs';
-const { sources = [], org, about, slug, skip = [] } = Astro.props;
+import { prettyDate, oldestChecked, sourceGroups, isStale, reportUrl, ymd, RECHECK_TEXT } from '../lib/content.mjs';
+//   phone: the record's phone_confirmed date, if a person confirmed it by
+//     phone (#164). Adds "Confirmed by phone on <date>."; past 6 months it
+//     gets the same out-of-date note.
+//   stale: true or false to override the 6-month rule, for facts with their
+//     own re-check window (#122)
+// staleDays: after how many days unchecked the line says "may be out of date" (default 6 months; #791).
+const { sources = [], org, about, slug, skip = [], phone, stale: staleOverride, staleDays } = Astro.props;
 const groups = sourceGroups(sources.filter((s) => !skip.includes(s.url)), org);
 const count = groups.reduce((n, g) => n + g.links.length, 0);
 const checked = oldestChecked(sources);
-const stale = isStale(checked);
+const phoneDate = ymd(phone);
+const stale = staleOverride ?? (isStale(checked, undefined, staleDays) || (phoneDate && isStale(phoneDate, undefined, staleDays)));
 ---
-{!checked ? <p class="meta"><slot name="before" /><strong>{RECHECK_TEXT}</strong>{slug && <> <a href={reportUrl({ title: about, slug })}>Report a problem<span class="sr-only"> with {about} (opens GitHub)</span></a>.</>}</p> : <p class="meta"><slot name="before" />{count > 0 && <>{count > 1 ? 'Sources' : 'Source'}: {groups.map((g, gi) => <>{gi > 0 && '; '}{g.name && `${g.name}: `}{g.links.map((l, i) => <>{i > 0 && ', '}<a href={l.url}>{l.text}{about && <span class="sr-only">, source for {about}</span>}</a>{l.gov && !g.links.every((x) => x.gov) && ' (government site)'}</>)}{g.links.every((x) => x.gov) && (g.links.length > 1 ? ' (all government sites)' : ' (government site)')}</>)}. </>}Checked {prettyDate(checked)}.{stale && <strong> This may be out of date, so check with them before you go.</strong>}<slot />{slug && <> <a href={reportUrl({ title: about, slug, url: sources[0]?.url })}>Report a problem<span class="sr-only"> with {about} (opens GitHub)</span></a>.</>}</p>}
+{!checked ? <p class="meta"><slot name="before" /><strong>{RECHECK_TEXT}</strong>{slug && <>{' '}<a href={reportUrl({ title: about, slug })}>Report a problem<span class="sr-only"> with {about} (opens GitHub)</span></a>.</>}</p> : <p class="meta"><slot name="before" />{count > 0 && <>{count > 1 ? 'Sources' : 'Source'}: {groups.map((g, gi) => <>{gi > 0 && '; '}{g.name && `${g.name}: `}{g.links.map((l, i) => <>{i > 0 && ', '}<a href={l.url}>{l.text}{about && <span class="sr-only">, source for {about}</span>}</a>{l.gov && !g.links.every((x) => x.gov) && ' (government site)'}</>)}{g.links.every((x) => x.gov) && (g.links.length > 1 ? ' (all government sites)' : ' (government site)')}</>)}. </>}Checked {prettyDate(checked)}.{phoneDate && ` Confirmed by phone on ${prettyDate(phoneDate)}.`}{stale && <strong> This may be out of date, so check with them before you go.</strong>}<slot />{slug && <>{' '}<a href={reportUrl({ title: about, slug, url: sources[0]?.url })}>Report a problem<span class="sr-only"> with {about} (opens GitHub)</span></a>.</>}</p>}

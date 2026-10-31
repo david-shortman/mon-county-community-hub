@@ -1,8 +1,13 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
+import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { factTopics, loadFacts } from '../src/lib/facts.mjs';
+import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
+import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
+import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
+import { checkPlaces } from './check-places.mjs';
 
 const errors = [];
 const warnings = [];
@@ -59,6 +64,7 @@ for (const e of loadCalendar()) {
   if (e.phone && !/^\d{3}-\d{3}-\d{4}$/.test(String(e.phone))) errors.push(`${where}: phone must look like 304-555-0100`);
   if (e.phone_label && !e.phone) errors.push(`${where}: phone_label without phone`);
   if (e.place && (typeof e.place !== 'string' || !/,/.test(e.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);
+  errors.push(...checkTown(e));
   for (const s of e.sources ?? []) {
     if (!isUrl(s.url)) errors.push(`${where}: source url is not a web link`);
     if (!isDate(s.checked)) errors.push(`${where}: source needs a checked date (YYYY-MM-DD)`);
@@ -75,14 +81,23 @@ for (const e of loadCalendar()) {
 const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(String(p));
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
-const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden'];
+const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden', 'phone_confirmed', 'phone_confirmed_by'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
 function checkRecord(e, required, known) {
   const where = e._file;
   checkHidden(e);
+  // Confirmed by phone (#164): a date, and optionally the caller's initials.
+  // Never the name of the person who answered.
+  if (e.phone_confirmed != null) {
+    const d = ymd(e.phone_confirmed);
+    if (!isDate(d)) errors.push(`${where}: phone_confirmed must be a date (YYYY-MM-DD)`);
+    else if (d > todayYmd()) errors.push(`${where}: phone_confirmed ${d} is in the future`);
+  }
+  if (e.phone_confirmed_by != null && !/^[A-Z]{2,3}$/.test(String(e.phone_confirmed_by))) errors.push(`${where}: phone_confirmed_by is the caller's initials, like DS`);
+  if (e.phone_confirmed_by != null && e.phone_confirmed == null) errors.push(`${where}: phone_confirmed_by without phone_confirmed`);
   for (const f of required) if (e[f] == null || e[f] === '') errors.push(`${where}: missing ${f}`);
   for (const k of Object.keys(e)) if (k !== '_file' && !known.includes(k)) warnings.push(`${where}: unknown field ${k} (see content/README.md)`);
   if (e.slug && !isSlug(e.slug)) errors.push(`${where}: slug must be lowercase letters, numbers and dashes`);
@@ -112,6 +127,10 @@ for (const o of orgs) {
   if (o.phone != null && !isPhone(o.phone)) errors.push(`${where}: phone must look like 211, 898-211, 304-555-0100 or 1-877-716-1212`);
 }
 
+// Listing fields (#177): hours the site can read, how to get in, languages, access.
+RESOURCE_FIELDS.push(...LISTING_FIELDS);
+// Town and neighborhood (#395).
+RESOURCE_FIELDS.push(...TOWN_FIELDS);
 const resources = loadDir('resources');
 const resourceSlugs = new Set();
 for (const r of resources) {
@@ -122,6 +141,12 @@ for (const r of resources) {
   if (r.org && !orgSlugs.has(r.org)) errors.push(`${where}: org ${r.org} has no file in content/orgs/`);
   if (r.hours != null && (typeof r.hours !== 'string' || !r.hours.trim())) errors.push(`${where}: hours must be text, like "Monday to Friday, 9 a.m. to 5 p.m."`);
   if (r.cost != null && typeof r.cost !== 'string') errors.push(`${where}: cost must be text`);
+  errors.push(...checkTown(r));
+  // What happens next (#159): optional, each from the record's own sources.
+  if (r.what_to_bring != null && (!Array.isArray(r.what_to_bring) || !r.what_to_bring.length || r.what_to_bring.some((x) => typeof x !== 'string' || !x.trim()))) errors.push(`${where}: what_to_bring must be a list of short text items`);
+  for (const f of ['what_happens', 'best_time']) if (r[f] != null && (typeof r[f] !== 'string' || !r[f].trim())) errors.push(`${where}: ${f} must be text`);
+  if (r.if_you_want_help != null && (!Array.isArray(r.if_you_want_help) || r.if_you_want_help.some((x) => typeof x !== 'string'))) errors.push(`${where}: if_you_want_help must be a list of resource slugs`);
+  { const l = checkListing(r); errors.push(...l.errors); warnings.push(...l.warnings); }
   const c = r.contact;
   if (c == null) continue;
   if (typeof c !== 'object') { errors.push(`${where}: contact must have phone, text, url, place or email under it`); continue; }
@@ -134,8 +159,10 @@ for (const r of resources) {
   if (c.email != null && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(c.email))) errors.push(`${where}: contact email does not look like an email address`);
 }
 
+for (const r of resources) for (const h of r.if_you_want_help ?? []) if (!resourceSlugs.has(h)) errors.push(`${r._file}: if_you_want_help names ${h}, which has no file in content/resources/`);
+
 // Secondhand shops, free programs and online groups (content/secondhand, #423).
-const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources', 'hidden'];
+const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'does_not_take', 'drop_off', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources', 'hidden'];
 const secondhand = loadDir('secondhand');
 const secondhandSlugs = new Set();
 for (const s of secondhand) {
@@ -151,9 +178,34 @@ for (const s of secondhand) {
   if (s.url && !isUrl(s.url)) errors.push(`${where}: url is not a web link`);
   if (s.org && !orgSlugs.has(s.org)) errors.push(`${where}: org ${s.org} has no file in content/orgs/`);
   if (s.address != null && (typeof s.address !== 'string' || !/,/.test(s.address))) errors.push(`${where}: address must be text like "200 Spruce St, Morgantown, WV"`);
-  for (const f of ['hours', 'sells', 'takes', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'note', 'run_by']) {
+  for (const f of ['hours', 'sells', 'takes', 'does_not_take', 'drop_off', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'note', 'run_by']) {
     if (s[f] != null && typeof s[f] !== 'string') errors.push(`${where}: ${f} must be text`);
   }
+}
+
+// Boards (content/boards/<slug>.yaml): city boards and commissions for the
+// Serve on a board page (#290). Open seats come from the city's vacancy list.
+const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'created', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'url', 'topics', 'sources'];
+const boards = loadDir('boards');
+for (const b of boards) {
+  const where = b._file;
+  // `section: other` boards are listed by name only, from the vacancy list.
+  // `section: county` boards come from the county's list, which gives no seat counts.
+  const required = {
+    other: ['name', 'slug', 'org', 'open_seats', 'open_note', 'url', 'topics'],
+    county: ['name', 'slug', 'org', 'created', 'meets', 'url', 'topics'],
+  }[b.section] ?? ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'];
+  checkRecord(b, required, BOARD_FIELDS);
+  // The note's numbers ("1 seat and 2 alternate seats") add up to open_seats (#856).
+  if (b.open_note != null) {
+    const sum = (String(b.open_note).match(/\d+/g) ?? []).reduce((n, d) => n + Number(d), 0);
+    if (sum !== b.open_seats) errors.push(`${where}: open_note adds up to ${sum} seats but open_seats is ${b.open_seats}`);
+  }
+  if (b.who_can_serve != null && !/\.$/.test(String(b.who_can_serve).trim())) errors.push(`${where}: who_can_serve should end with a period`);
+  if (b.section != null && !['other', 'county'].includes(b.section)) errors.push(`${where}: section must be other or county, or left out`);
+  if (b.org && !orgSlugs.has(b.org)) errors.push(`${where}: org ${b.org} has no file in content/orgs/`);
+  if (b.url != null && !isUrl(b.url)) errors.push(`${where}: url is not a web link`);
+  for (const k of ['open_seats', 'page_vacant']) if (b[k] != null && !(Number.isInteger(b[k]) && b[k] >= 0)) errors.push(`${where}: ${k} must be a whole number`);
 }
 
 // Saved feed snapshots are committed too, so check them the same way.
@@ -211,19 +263,27 @@ if (doors) {
 
 // Door pages (content/doors/<slug>.yaml): each step points to a real
 // resource, each situation names real steps and a page link.
-const doorDir = path.join(CONTENT_DIR, 'doors');
-for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x.endsWith('.yaml')) : []) {
+// Topic guides (content/guides/<slug>.yaml, like /grow/) have the same shape,
+// plus the door, topic and page they belong to.
+const yamlIn = (dir) => (fs.existsSync(path.join(CONTENT_DIR, dir)) ? fs.readdirSync(path.join(CONTENT_DIR, dir)).filter((x) => x.endsWith('.yaml')).map((f) => [dir, f]) : []);
+for (const [dir, f] of [...yamlIn('doors'), ...yamlIn('guides')]) {
   const slug = f.replace(/\.yaml$/, '');
-  const where = `doors/${f}`;
+  const where = `${dir}/${f}`;
   let dp;
-  try { dp = loadDoorPage(slug); } catch (err) { errors.push(`${where}: ${err.message}`); continue; }
-  const d = doors?.bySlug[slug];
-  if (!d?.topics) errors.push(`${where}: ${slug} is not a door in doors.yaml`);
-  else if (!d.page) errors.push(`${where}: give the ${slug} door a page in doors.yaml`);
-  if (dp.door !== slug) errors.push(`${where}: door should be ${slug}`);
+  try { dp = loadDoorPage(slug, dir); } catch (err) { errors.push(`${where}: ${err.message}`); continue; }
+  if (dir === 'guides') {
+    const d = doors?.bySlug[dp.door];
+    if (!d?.topics?.[dp.topic]) errors.push(`${where}: needs a door from doors.yaml and one of its topics`);
+    if (!/^\/[^\s]*\/$/.test(dp.page ?? '')) errors.push(`${where}: needs a page like /grow/`);
+  } else {
+    const d = doors?.bySlug[slug];
+    if (!d?.topics) errors.push(`${where}: ${slug} is not a door in doors.yaml`);
+    else if (!d.page) errors.push(`${where}: give the ${slug} door a page in doors.yaml`);
+    if (dp.door !== slug) errors.push(`${where}: door should be ${slug}`);
+  }
   if (!dp.lede) errors.push(`${where}: needs a lede`);
   for (const [id, st] of Object.entries(dp.steps)) {
-    if (!['today', 'week', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week or opens`);
+    if (!['today', 'week', 'season', 'opens'].includes(st.when)) errors.push(`${where}: step ${id} when must be today, week, season or opens`);
     if (!st.text) errors.push(`${where}: step ${id} needs text`);
     if (st.record.hidden) { warnings.push(`${where}: step ${id}'s resource ${st.resource} is hidden, so the step says it is being re-checked`); continue; }
     if (!st.record.contact?.url) errors.push(`${where}: step ${id}'s resource needs a contact url`);
@@ -247,6 +307,19 @@ for (const f of fs.existsSync(doorDir) ? fs.readdirSync(doorDir).filter((x) => x
   if (ownText.some((t) => (t ?? '').includes('\u2014'))) errors.push(`${where}: contains an em dash`);
 }
 
+// Gaps (content/gaps/<topic>.yaml, #444): each needs what, why and a checked
+// date, and its topic must have a door.
+const gapDir = path.join(CONTENT_DIR, 'gaps');
+for (const f of fs.existsSync(gapDir) ? fs.readdirSync(gapDir).filter((x) => x.endsWith('.yaml')) : []) {
+  const g = loadGaps(f.replace(/\.yaml$/, ''));
+  if (g.topic !== f.replace(/\.yaml$/, '')) errors.push(`gaps/${f}: topic should match the file name`);
+  if (!doors?.topicDoor[g.topic]) errors.push(`gaps/${f}: topic "${g.topic}" has no door in content/doors.yaml`);
+  for (const [i, x] of (g.gaps ?? []).entries()) {
+    if (!x.what || !x.why || !isDate(ymd(x.checked))) errors.push(`gaps/${f}: gap ${i + 1} needs what, why and a checked date`);
+  }
+  if (JSON.stringify(g).includes('\u2014')) errors.push(`gaps/${f}: contains an em dash`);
+}
+
 // Time and deadline wording (#413). Warnings only. Times read "8 a.m.",
 // "8:30 a.m.", "noon"; deadlines read "The last day is Tuesday, December 15."
 // See "Voice notes" in docs/design/identity.md. Feed snapshots are left out:
@@ -259,7 +332,8 @@ const TIME_RULES = [
 ];
 const BY_DATE = new RegExp(`\\bby ${MONTH} \\d{1,2}\\b`, 'i');
 const DEADLINE_VERB = /\b(apply|applies|file|pay|register|enroll|sign up|submit|send|mail|return|renew|turn in|drop off|request|order|change|choose|vote|respond|reply|call)\b/i;
-const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics']);
+// opens and closes are structured 24-hour times (opening_hours, #177), not words people read.
+const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics', 'opens', 'closes']);
 function eachText(value, key, visit) {
   if (SKIP_KEYS.has(key)) return;
   if (typeof value === 'string') visit(key, value);
@@ -276,7 +350,80 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
   });
 }
 
+// Gathering places (content/places, #455), checked against content/schemas/place.schema.json.
+const placeCheck = checkPlaces();
+errors.push(...placeCheck.errors);
+warnings.push(...placeCheck.warnings);
+
+// Wrong place (#494). AI tools and directories mix up places with the same
+// name. Warn when an address leaves out West Virginia, or any text names
+// Morgantown in another state. Warnings only: some groups serve a wider area.
+const OTHER_MORGANTOWN = /\bMorgantown,?\s+(KY|Ky\.|Kentucky|IN|Ind\.|Indiana|NC|North Carolina|GA|Georgia|MS|Mississippi|TN|Tennessee|PA|Pennsylvania)\b/;
+const IN_WV = /\b(WV|W\. ?Va\.|West Virginia)\b/;
+for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
+  for (const [key, value] of [['contact.place', e.contact?.place], ['place', e.place], ['address', e.address]]) {
+    if (typeof value === 'string' && !IN_WV.test(value)) warnings.push(`${e._file}: ${key} "${value}" does not say WV; check it is the Morgantown, WV place`);
+  }
+  eachText(e, '', (key, t) => {
+    const m = t.match(OTHER_MORGANTOWN);
+    if (m) warnings.push(`${e._file}: ${key} names "${m[0]}"; this site is for Morgantown, WV`);
+  });
+}
+
+// County indicators (content/indicators, #62): an official number, its own
+// definition, the data year, and sources with checked dates.
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
+for (const i of loadDir('indicators')) {
+  checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
+  if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
+  if (!['percent', 'number', 'years'].includes(i.unit)) errors.push(`${i._file}: unit must be percent, number or years`);
+  if (!/^\d{4}(-\d{4})?$/.test(String(i.data_year ?? ''))) errors.push(`${i._file}: data_year must look like "2023" or "2020-2022" (quote it)`);
+  if (typeof i.values?.monongalia !== 'number') errors.push(`${i._file}: values.monongalia must be a number`);
+  for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
+  if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
+  if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+  // history (#15): years in order, each with a number, as the source gives it.
+  for (const [k, pts] of Object.entries(i.history ?? {})) {
+    if (!Array.isArray(pts)) { errors.push(`${i._file}: history.${k} must be a list`); continue; }
+    const yrs = pts.map((p) => String(p.year));
+    if (pts.some((p) => !/^\d{4}(-\d{4})?$/.test(String(p.year)) || typeof p.value !== 'number')) errors.push(`${i._file}: history.${k} needs year and value on each point`);
+    if (yrs.join() !== [...yrs].sort().join()) errors.push(`${i._file}: history.${k} years must be in order`);
+  }
+}
+
+// Fact records (content/facts/<topic>/, #122, tier 2 of ADR 0007): text,
+// the source's exact words, and sources with checked dates. recheck_days is
+// optional. A page cannot render a fact without them.
+const FACT_FIELDS = ['slug', 'text', 'quote', 'sources', 'recheck_days', 'phone', 'phone_label', 'place'];
+let factCount = 0;
+for (const topic of factTopics()) {
+  for (const f of Object.values(loadFacts(topic))) {
+    factCount++;
+    const where = f._file;
+    for (const k of ['slug', 'text', 'quote']) if (f[k] == null || f[k] === '') errors.push(`${where}: missing ${k}`);
+    for (const k of Object.keys(f)) if (!['_file', 'checked'].includes(k) && !FACT_FIELDS.includes(k)) warnings.push(`${where}: unknown field ${k}`);
+    if (f.slug && path.basename(where).replace(/\.ya?ml$/, '') !== f.slug) errors.push(`${where}: file name should match slug ${f.slug}`);
+    if (!f.sources?.length) errors.push(`${where}: needs at least one source`);
+    for (const s of f.sources ?? []) {
+      if (!isUrl(s.url)) errors.push(`${where}: source url is not a web link`);
+      if (!isDate(s.checked)) errors.push(`${where}: source needs a checked date (YYYY-MM-DD)`);
+      else if (s.checked > todayYmd()) errors.push(`${where}: source checked date ${s.checked} is in the future`);
+    }
+    if (f.recheck_days != null && (!Number.isInteger(f.recheck_days) || f.recheck_days < 1)) errors.push(`${where}: recheck_days must be a whole number of days, like 90`);
+    if (/[<>]/.test(f.text ?? '')) errors.push(`${where}: text allows only **bold** and [label](link), no HTML`);
+    if (f.phone != null && !isPhone(f.phone)) errors.push(`${where}: phone must look like 304-555-0100 (quote it)`);
+    if (f.place != null && !/,/.test(String(f.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);
+    if (JSON.stringify(f).includes('\u2014')) errors.push(`${where}: contains an em dash`);
+  }
+}
+
+// PDF pages (content/pdf-pages/, #393): a PDF's useful part as short lists.
+// Each needs a title, publisher, sections and sources with checked dates, and
+// a PDF link needs the date printed on that PDF.
+for (const d of loadPdfPages()) for (const p of pdfPageProblems(d)) errors.push(`${d._file}: ${p}`);
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
+console.log(`Checked ${placeCheck.count} gathering places (content/places).`);
 console.log(`Checked ${slugs.size} calendar entries, ${orgs.length} orgs, ${resources.length} resources, ${secondhand.length} secondhand entries (${hiddenCount} hidden in all), ${feedCount} saved feed entries and the doors: ${errors.length} errors, ${warnings.length} warnings.`);
 process.exit(errors.length ? 1 : 0);

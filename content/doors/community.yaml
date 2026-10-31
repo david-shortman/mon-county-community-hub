@@ -1,0 +1,36 @@
+# The Your community door page, /community/ (#252, #462). Shape and rules:
+# see doors/care.yaml and site/src/components/DoorPage.astro. A situation
+# with no steps shows as a "Start here" link to its page. More situations
+# come as their pages ship: city or county (#20, #86), who decides (#12),
+# how we're doing (#15), small business (#19), giving and grants (#63).
+door: community
+lede: Places to gather, things to do with neighbors, and ways to make Mon County better. Pick what fits.
+steps: {}
+situations:
+  - id: center
+    label: Find a community center or senior center near me
+    page: /community-centers/#find
+    steps: []
+  - id: dinner
+    label: Go to a community dinner, bingo or bazaar
+    page: /community-centers/#eat
+    steps: []
+  - id: hall
+    label: Rent a hall for a party, shower or reunion
+    page: /community-centers/halls/
+    steps: []
+  - id: join
+    label: Join or help out at a community center
+    page: /community-centers/#join
+    steps: []
+  - id: better
+    label: Fix something in my neighborhood or help make it better
+    page: /make-it-better/
+    steps: []
+  - id: meet
+    label: Meet people, get a library card or find my neighborhood association
+    page: /meet-people/
+    steps: []
+also:
+  - text: Dates and deadlines
+    href: /calendar/

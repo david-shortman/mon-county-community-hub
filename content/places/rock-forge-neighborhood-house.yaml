@@ -1,0 +1,18 @@
+name: Rock Forge Neighborhood House
+slug: rock-forge-neighborhood-house
+kind: neighborhood-house
+area: morgantown
+community: Sabraton
+run_by:
+  kind: nonprofit
+  text: A nonprofit started in 1984, with programs for all ages
+story: A neighborhood group run as a nonprofit. The county lists it at the Sabraton Community Center.
+contact:
+  phone: "304-292-3286"
+  place: 1837 Listravia Avenue, Morgantown, WV
+status: no-recent-activity
+notes:
+  - We found it only in the county's directory, with no recent news. Call before you go.
+sources:
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/
+    checked: 2026-10-30

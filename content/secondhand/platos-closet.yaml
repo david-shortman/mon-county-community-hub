@@ -1,0 +1,19 @@
+name: Plato's Closet
+slug: platos-closet
+kind: resale
+area: westover
+run_by: Plato's Closet Morgantown
+address: "6504 Mall Rd, Morgantown, WV"
+sells: Used clothing, shoes and accessories for teens and young adults, including WVU gear.
+takes: Clean, current-style clothing, shoes and accessories, brought in a basket or bin.
+goods: [clothes]
+buys_from_you: true
+url: https://platoscloset.com/locations/morgantown-wv/
+url_label: Shop website
+status: likely
+note: Pays cash on the spot. Check the shop website for hours.
+sources:
+  - url: https://platoscloset.com/locations/morgantown-wv/
+    checked: 2026-10-30
+  - url: https://wrc.wvu.edu/resources/basic-needs/clothing
+    checked: 2026-10-30

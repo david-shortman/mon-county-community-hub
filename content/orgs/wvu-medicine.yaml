@@ -1,0 +1,12 @@
+name: WVU Medicine
+slug: wvu-medicine
+kind: nonprofit
+website: https://wvumedicine.org/
+summary: The West Virginia University Health System. It runs J.W. Ruby Memorial Hospital and WVU Medicine Golisano Children's in Morgantown, plus other hospitals and centers around the region.
+topics: [health]
+area: statewide
+sources:
+  - url: https://wvumedicine.org/patient-resources/language-services/
+    checked: 2026-10-30
+  - url: https://wvumedicine.org/patient-resources/rights-and-privacy/non-discrimination/
+    checked: 2026-10-30

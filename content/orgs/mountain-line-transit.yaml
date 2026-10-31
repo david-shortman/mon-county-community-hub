@@ -1,0 +1,13 @@
+name: Mountain Line Transit Authority
+slug: mountain-line-transit
+kind: government
+website: https://www.busride.org/
+phone: "304-291-7433"
+summary: The public bus system for Morgantown and Mon County. Its website has route maps and schedules, fares, and pages on accessible service.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: https://www.busride.org/
+    checked: 2026-10-30
+  - url: https://www.busride.org/contacts-and-comments
+    checked: 2026-10-30
