@@ -61,6 +61,7 @@ const label = Object.fromEntries(SITUATIONS);
 <Base help title="File today: start a SNAP, Medicaid, LIEAP or WV WORKS application in Mon County" description="How to start a SNAP, Medicaid, LIEAP or WV WORKS application today in Monongalia County, WV, and a printable list of what to bring, from the state's own forms. Nothing you pick is saved.">
   <h1>File today: SNAP, Medicaid, heating help and WV WORKS</h1>
   <p class="lede">You do not need every paper to start. Here is how to start each application today, and a list of what the state may ask you to bring.</p>
+  <p>All four programs are run by the West Virginia Department of Human Services (DoHS). WV PATH is the state's free website for applying. WVCHIP is the state's health coverage for children.</p>
   <p class="note">This page quotes the state's own forms and rules. DoHS decides who qualifies, and the office may ask for more than this list. It is information, not legal advice.</p>
   <ul class="topic-list">
     <li><a href="#snap">SNAP (food stamps)</a></li>
@@ -71,8 +72,14 @@ const label = Object.fromEntries(SITUATIONS);
   </ul>
 
   <h2 id="snap">SNAP: you can start today with three things</h2>
-  <p>The state's SNAP application says you have the right to file the same day you contact your county DoHS office. To file, you only need to fill in your <strong>name, address and signature</strong> and turn the form in to the DoHS office in the county where you live. A DoHS worker then interviews you. If you are found eligible, your benefits count from the date DoHS got your signed application.</p>
-  <p><strong>Within 7 days for some households.</strong> The application says you may get SNAP within seven calendar days if your household has less than $150 in monthly gross income and $100 or less in cash, checking or savings; or your rent or mortgage and utilities are more than your household's monthly income and cash together; or someone in your household is a migrant or seasonal farm worker. The state's manual says only proof of who you are is needed before this fast approval. Other SNAP applications are decided within 30 days.</p>
+  <p>The state's SNAP application says you can file the same day you contact your county DoHS office. You only need to fill in your <strong>name, address and signature</strong>. Then turn the form in to the DoHS office in your county. A DoHS worker then interviews you. If you are found eligible, your benefits count from the date DoHS got your signed application.</p>
+  <p><strong>Within 7 days for some households.</strong> The application says you may get SNAP within seven calendar days if one of these is true:</p>
+  <ul>
+    <li>Your household has less than $150 in monthly income before taxes, and $100 or less in cash, checking or savings.</li>
+    <li>Your rent or mortgage plus utilities cost more than your household's monthly income and cash together.</li>
+    <li>Someone in your household is a migrant or seasonal farm worker.</li>
+  </ul>
+  <p>The state's manual says only proof of who you are is needed before this fast approval. Other SNAP applications are decided within 30 days.</p>
   <SourceLine sources={[src.snapForm, src.imm]} org={ORG} about="filing for SNAP today" />
   <ResourceCard r={office} />
   <ResourceCard r={path} />
