@@ -51,3 +51,28 @@ export function addDays(ymd, n) {
 export function inWindow(entry, today, days = 365) {
   return entry.ends >= today && entry.starts <= addDays(today, days);
 }
+
+// "17:05" from hours and minutes, for an entry's start_time or end_time.
+export const hhmm = (h, m) => `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+
+// The first sentences of a feed's own description, up to about `max` words,
+// with web links taken out (the card has a Details button). Used for the short
+// summary on event cards (#230). Returns '' when there is nothing to say.
+// A feed's time looks real only on a quarter hour from 6 a.m. on; the county
+// feed has some times like 1:00 or 11:18 that are not event times.
+export const realTime = (t) => /^(0[6-9]|1\d|2[0-2]):(00|15|30|45)$/.test(t ?? '');
+// A summary that only repeats the title says nothing new.
+export const adds = (about, title) => about && !title.toLowerCase().includes(about.toLowerCase().replace(/[.!?]+$/, ''));
+export function firstSentences(text = '', max = 40) {
+  const clean = plain(text).replace(/https?:\/\/\S+/g, '').replace(/\s+/g, ' ').trim();
+  const out = [];
+  let words = 0;
+  for (const s of clean.split(/(?<=[.!?]["')\]]*)\s+/)) {
+    if (!s) continue;
+    const n = s.trim().split(/\s+/).length;
+    if (out.length && words + n > max) break;
+    out.push(s.trim());
+    words += n;
+  }
+  return out.join(' ');
+}

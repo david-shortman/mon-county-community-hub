@@ -1,0 +1,13 @@
+name: WVU Extension, Monongalia County office
+slug: wvu-extension-monongalia-county
+kind: school
+website: https://extension.wvu.edu/monongalia
+phone: "304-291-7201"
+summary: West Virginia University's county Extension office. It runs Monongalia County 4-H clubs and camps for young people, plus agriculture and family programs.
+topics: [family]
+area: monongalia-county
+sources:
+  - url: https://extension.wvu.edu/monongalia/4h
+    checked: 2026-10-30
+  - url: https://extension.wvu.edu/monongalia
+    checked: 2026-10-30

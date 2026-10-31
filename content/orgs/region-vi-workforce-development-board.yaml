@@ -1,0 +1,13 @@
+name: Region VI Workforce Development Board
+slug: region-vi-workforce-development-board
+kind: government
+website: https://regionviwv.org/
+phone: "681-404-6377"
+summary: Runs federally funded job seeker and training programs for 13 north central West Virginia counties, including Mon County, through the American Job Center on Commerce Drive.
+topics: [work]
+area: monongalia-county
+sources:
+  - url: https://regionviwv.org/job-seekers/job-seeker-assistance/
+    checked: 2026-10-30
+  - url: https://regionviwv.org/american-job-centers/locations-and-contacts/
+    checked: 2026-10-30
