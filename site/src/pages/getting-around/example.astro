@@ -33,6 +33,7 @@ const ok = (r) => r && !r.hidden;
     <Milepost n={2} title="Check whether they ride free or for half fare" when="Day 1" id="free">
       <p>{fares.who_it_is_for}</p>
       <p>Not sure? They can call Mountain Line at <a href={telHref(fares.contact.phone)}>{fares.contact.phone}</a>.</p>
+      <div class="actions"><a class="btn" href={fares.contact.url}><span>Ride free and half fare rules</span></a></div>
       <SourceLine sources={fares.sources} org={fares.org} about={fares.title} slug={fares.slug} />
     </Milepost>
   )}
@@ -61,7 +62,7 @@ const ok = (r) => r && !r.hidden;
 
   <p>Rather start on your own? Everything above is on <a href={`${base}/getting-around/`}>Getting around without a car</a>.</p>
 
-  <p class="meta">This example is made up. It is not a real person or a real case. Bus times and fares change, so check Mountain Line before you go. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">This example is made up. It is not a real person or a real case. Sources checked October 30, 2026. Bus times and fares change, so check Mountain Line before you go. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
 
 <style>
