@@ -38,8 +38,8 @@ const tagDoor = tags && doors.bySlug[tags.door];
 const tagTopic = tagDoor?.topics?.[tags.topic];
 // Share this (#947): on listed guides only. High-stakes doors and topics wait
 // for David, and safety pages never get it (a share leaves a trace).
-const shareable = tags?.listed && !crisis && !['help-now', 'this-month', 'about'].includes(tags.door)
-  && !['housing', 'money', 'food'].includes(tags.topic) && !/domestic|sexual|abuse|stay-tonight/i.test(route);
+const shareable = tags?.listed && !['help-now', 'this-month', 'about'].includes(tags.door)
+  && !['housing', 'money', 'food'].includes(tags.topic) && !/domestic|sexual|abuse|stay-tonight|veterans/i.test(route);
 // Main menu (#250), built from content/doors.yaml, so adding a page never
 // changes it. Phones: a tab bar of four at the bottom, in thumb reach. Wide
 // screens: Help now, the five doors, Dates and All topics in the header.
