@@ -1,0 +1,68 @@
+---
+// Start a business in Morgantown, step by step (#639, part of #277). Each step
+// says only what its official page says, and links to it. Fees and taxes:
+// this page waits for David. Lane 16 owns license and permit pages (#605,
+// #661); this page links the city's own pages and reuses the existing
+// license record instead of writing a competing one.
+// Not here: the city license fee, B&O rates and due dates (not on a current
+// city page, see #638).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, telHref } from '../lib/content.mjs';
+export const page = { door: "family", topic: "work", label: "Start a business in Morgantown, step by step", summary: "Zoning, state registration, the city license, the Certificate of Occupancy, inspections and city B&O tax, in order" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const city = [{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked: '2026-10-30' }];
+const portal = [{ url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-10-30' }];
+const tax = [{ url: 'https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx', checked: '2026-10-30' }];
+const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns', checked: '2026-10-30' }];
+---
+<Base title="Start a business in Morgantown, WV, step by step" description="The City of Morgantown's steps to open a business inside city limits, in order: check zoning, register with the state, get a city business license, get a Certificate of Occupancy ($65), schedule inspections, and file city B&O tax. Each step links to the official page.">
+  <h1>Start a business in Morgantown, step by step</h1>
+  <p class="lede">These are the steps the City of Morgantown lists for a business inside city limits, in order. Each step links to the official page. If your business is in Star City, Granville, Westover or outside any town, the local steps are different, so ask that town or the county. Free help with planning is on <a href={`${base}/business/`}>Start or grow a business</a>.</p>
+
+  <h2>1. Check the zoning</h2>
+  <p>Call the city Planning Division at <a href={telHref('304-284-7431')}>304-284-7431</a> to check that your location is zoned for your business. Have the property's parcel and tax map numbers ready. If you do not have them, call the Monongalia County Assessor's Office at <a href={telHref('304-291-7222')}>304-291-7222</a> or look them up on the WV Property Viewer.</p>
+  <SourceLine sources={city} about="Step 1, zoning" />
+
+  <h2>2. Register with the state</h2>
+  {resource('wv-one-stop-business-registration') && <ResourceCard r={resource('wv-one-stop-business-registration')} showCost />}
+  <p>The State Tax Division says anyone doing business in West Virginia must register with it before starting. The fee for a Business Registration Certificate is $30. Some groups must register but do not pay the fee, such as qualifying 501(c) nonprofits and farming businesses; see the full list on the Tax Division page. Very small businesses may not need a certificate at all: the page lists three conditions that must all be true, including business gross income of $4,000 or less in the last tax year. The certificate does not expire, but it ends if the business name, location or ownership changes. You must post it where you do business. Tax help: <a href={telHref('304-558-3333')}>304-558-3333</a> or <a href={telHref('800-982-8297')}>800-982-8297</a>.</p>
+  <p><a class="btn" href="https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx"><span>Tax Division questions and answers</span></a></p>
+  <SourceLine sources={tax} about="Step 2, state Business Registration Certificate" />
+
+  <h2>3. Apply for a city business license</h2>
+  <p>Apply after you have your state Business Registration Certificate. Create an account and apply through the Morgantown Access Portal. The portal's web address changed, so old bookmarks may not work. If your business has a place inside city limits, you need a Certificate of Occupancy (step 4) before the city issues the license. License questions: Finance Department, <a href={telHref('304-284-7408')}>304-284-7408</a>.</p>
+  <p><a class="btn" href="https://www.morgantownwv.gov/747/Permitting-Licensing-Registration"><span>City permitting and licensing page</span></a></p>
+  <SourceLine sources={[...city, ...portal]} about="Step 3, city business license" />
+
+  <h2>4. Apply for a Certificate of Occupancy</h2>
+  <p>The city says new and existing businesses inside city limits need one, and so do businesses that change name, owner or location. You cannot legally use the building or open until you have it. Bring:</p>
+  <ul>
+    <li>A completed Municipal Business License application</li>
+    <li>A scaled floor plan with measurements, on 8.5 by 11 inch paper, showing the total square feet and how you will use the space</li>
+    <li>The $65 application fee (cash, check or credit)</li>
+    <li>Signatures from the Planning Division and the Engineering Department</li>
+  </ul>
+  <p>You get a card with contacts for the Fire Marshal and Code Enforcement. If you are not changing the space, contact Code Enforcement within 10 days of applying to set up an inspection. If you are changing the space, ask Code Enforcement about permits first.</p>
+  <SourceLine sources={city} about="Step 4, Certificate of Occupancy" />
+
+  <h2>5. Get inspected before you open</h2>
+  <p>Contact Code Enforcement and the Fire Marshal early enough to be inspected no less than one week before opening day. Restaurants, bars and nightclubs have stricter Fire Code rules, so contact the Fire Marshal's Office. The city mails the Certificate of Occupancy after all departments approve.</p>
+  <SourceLine sources={city} about="Step 5, inspections" />
+
+  <h2>6. File city B&O tax</h2>
+  <p>Morgantown charges a business and occupation (B&O) tax on business done inside city limits. The city posts an annual return, a "by the job" return and a quarterly return, plus a worksheet for your records. The page does not say which return fits your business or when it is due, so call the Finance Department at <a href={telHref('304-284-7401')}>304-284-7401</a>.</p>
+  <p><a class="btn" href="https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns"><span>City B&O tax forms</span></a></p>
+  <SourceLine sources={bo} about="Step 6, city B&O tax" />
+
+  <h2>Selling food?</h2>
+  <p>Food businesses, food trucks and event stands also need permits from the Monongalia County Health Department. Call Environmental Health at <a href={telHref('304-598-5131')}>304-598-5131</a> or see <a href="https://www.monchd.org/departments-programs/environmental-health">its applications</a>.</p>
+
+  <h2>All the city's steps in one card</h2>
+  {resource('morgantown-business-license') && <ResourceCard r={resource('morgantown-business-license')} />}
+
+  <p>City Hall: 389 Spruce Street, Morgantown. Monday through Thursday, 7 a.m. to 5:30 p.m. <a href={telHref('304-284-7405')}>304-284-7405</a>. The city suggests checking with each department that you have everything before you open.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Fees and rules can change, so check the official page before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
