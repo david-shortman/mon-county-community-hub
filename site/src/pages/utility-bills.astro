@@ -5,7 +5,7 @@ import Route from '../components/Route.astro';
 import Milepost from '../components/Milepost.astro';
 import Icon from '../components/Icon.astro';
 import Actions from '../components/Actions.astro';
-import { resource, telHref } from '../lib/content.mjs';
+import { resource, telHref, loadDir } from '../lib/content.mjs';
 export const page = { door: "this-month", topic: "money", label: "Help paying a utility bill", summary: "Heat, water or electric, before or after a shutoff" };
 // Each program reads its phone and sources from its resource record, so its
 // source and checked date sit right under it (#135).
@@ -15,6 +15,9 @@ const lieap = resource('lieap-heating-help');
 const emergency = resource('wv-emergency-assistance-utility');
 const def = resource('dollar-energy-fund-mon-power');
 const wv211 = resource('wv-211');
+// The Lifeline link shows once its record is in (#668, #735).
+const lifeline = loadDir('resources').some((e) => e.slug === 'lifeline-phone-internet-discount');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/monongalia_county_assistance_p.html', checked: '2026-10-28', name: 'Need Help Paying Bills (a national directory)' }];
 ---
 <Base help title="Help paying a utility bill in Morgantown and Mon County" description="What to do if you cannot pay a heat, water or electric bill in Morgantown and Monongalia County: who to call first, and the programs that can help.">
@@ -87,5 +90,6 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   <div class="note">
     <p><strong>Do this today:</strong> call your utility, ask for a payment plan, then call 211.</p>
   </div>
+  {lifeline && <p>Phone or internet bill? See <a href={`${base}/internet/#lifeline`}>Help paying for phone or internet</a>.</p>}
   <p class="meta">Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
