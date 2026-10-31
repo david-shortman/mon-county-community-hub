@@ -20,7 +20,8 @@ const st = placeStatus(p);
 const there = whatsThere(p);
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => e.venue === p.slug);
 const f = p.facilities ?? {};
-const where = `${p.community}, ${areaLabel(p.area).replace(/^./, (c) => c.toLowerCase())}`;
+// Lowercase "South county" mid-sentence, but keep the name Morgantown capitalized.
+const where = `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|East)\b/, (c) => c.toLowerCase())}`;
 ---
 <Base title={`${p.name} in ${p.community}, Mon County WV`} description={`${p.name} in ${p.community}, Monongalia County, WV: ${there ? `${there.toLowerCase()}. ` : ''}${p.membership ? 'How to join, ' : ''}${p.rentals?.length ? 'renting a hall, ' : ''}upcoming events and how to reach it, with sources.`}>
   <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
