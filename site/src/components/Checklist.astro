@@ -4,7 +4,9 @@
 // script, ticks are saved on this phone only (localStorage, under `key`), are
 // never sent anywhere, and can be cleared. Each item is plain text.
 //   items: list of strings
-//   key: a short id for saving, unique on the site, like "bring-christian-help-tax-prep"
+//   key: a short id for saving, unique on the site, like "bring-christian-help-tax-prep".
+//     Two lists with the same key share their ticks after a reload, so only
+//     reuse a key for the same list of items
 //   label: what the list is, for screen readers
 const { items = [], key, label = 'Checklist' } = Astro.props;
 ---
@@ -42,6 +44,12 @@ const { items = [], key, label = 'Checklist' } = Astro.props;
     boxes.forEach((b) => b.addEventListener('change', save));
     const note = box.querySelector<HTMLElement>('.checklist-note');
     if (note) note.hidden = false;
-    box.querySelector('.checklist-clear')?.addEventListener('click', () => { boxes.forEach((b) => { b.checked = false; }); save(); });
+    box.querySelector('.checklist-clear')?.addEventListener('click', () => {
+      boxes.forEach((b) => { b.checked = false; });
+      save();
+      // Say so to screen readers, through Base's status line.
+      const status = document.getElementById('announce');
+      if (status) { status.textContent = ''; setTimeout(() => { status.textContent = 'Ticks cleared'; }, 50); }
+    });
   });
 </script>
