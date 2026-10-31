@@ -173,6 +173,17 @@ Who keeps the listing: Mountain Line (to confirm), County Commission office.
 
 Not a conflict between sources, but worth a look: the [Westover home page](https://www.westoverwv.org/) says "2026 Holiday Schedule The 2025 holiday schedule is out." The heading and text name different years.
 
+## 15. Tire collection day, November 14, 2026: tire limit
+
+| Source | What it says |
+| --- | --- |
+| [WV DEP tire collection events](https://dep.wv.gov/environmental-advocate/reap/tires/Pages/TireCollectionEvents.aspx?lv=true) | "A ten tire limit per person will be strictly enforced." Monongalia: November 14, 2026, 8:00 am to 12:00 pm, 200 M-Tec Dr |
+| [Monongalia County SWA events](https://www.monongaliacountyswa.com/events-1) | "Only 12 tires off the rim will be accepted." Same date, time and place |
+
+What differs: the tire limit (10 vs 12). Our calendar entry now names both.
+
+Who keeps the listing: Monongalia County Solid Waste Authority; WV DEP REAP.
+
 ## Not checked today
 
 - WV 211 and findhelp listings for these groups. findhelp blocks automated reading; a person should compare them by hand.
