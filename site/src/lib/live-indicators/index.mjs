@@ -11,12 +11,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { fetchWithRetry } from '../ingest.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const SNAPSHOT_DIR = fs.existsSync(path.join(here, 'snapshots'))
   ? path.join(here, 'snapshots')
   : path.resolve(process.cwd(), 'src/lib/live-indicators/snapshots');
-const UA = 'MonCountyCommunityHub/1.0 (+https://github.com/david-shortman/mon-county-community-hub)';
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 // CDC PLACES measures we show, by CDC's measure id.
@@ -71,20 +71,7 @@ export const SOURCES = [
 const file = (src) => path.join(SNAPSHOT_DIR, `${src.id}.json`);
 const readSnap = (src) => { try { return JSON.parse(fs.readFileSync(file(src), 'utf8')); } catch { return null; } };
 
-async function fetchJson(url) {
-  let last;
-  for (let i = 0; i < 3; i++) {
-    try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(30_000), headers: { 'User-Agent': UA } });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.json();
-    } catch (err) {
-      last = err;
-      if (i < 2) await new Promise((r) => setTimeout(r, 1000 * 2 ** i));
-    }
-  }
-  throw last;
-}
+const fetchJson = (url) => fetchWithRetry(url, { format: 'json', timeoutMs: 30_000 });
 
 // { ...source, data, fetched, status } for one source. Never throws.
 export async function loadIndicator(src, { live = true, save = false, log = console } = {}) {
