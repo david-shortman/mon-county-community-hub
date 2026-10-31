@@ -37,6 +37,7 @@ export function GET({ site }) {
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults
 - [Contractor and trade licenses](${u('/contractor-license/')}): where WV contractors, plumbers, HVAC technicians and electricians get licensed, the Morgantown business license and permit portal for work in city limits, and how to look up a contractor's license or file a complaint with the WV Contractor Licensing Board
+- [Teens](${u('/teens/')}): the age certificate and work hours for 14 and 15 year olds, West Virginia's three driver's license levels, Career Connections job help for ages 16 to 24, summer volunteering at The Shack, and library teen programs and free tutoring
 - [Find a job](${u('/find-a-job/')}): where the City of Morgantown, Monongalia County, the State of West Virginia, WVU Medicine and Mon Health post jobs, free resume, interview and computer help at the American Job Center and the library, and short trainings at Pierpont
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
 - [Medicaid waivers](${u('/medicaid-waivers/')}): a plain guide to West Virginia's four Medicaid home care waivers (ADW, IDDW, TBIW, CSEDW): who each is for, how to start, who to call
