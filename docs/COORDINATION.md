@@ -134,3 +134,11 @@ Duet cannot be messaged directly by Claude Code, so most handoffs go through iss
 3. Pick or get pointed at an issue with `for:code`, claim it.
 4. Work on a `code/...` branch, open a PR.
 5. Log a row in the Activity log.
+
+### Using `gh` in a cloud session
+
+`gh` works in cloud sessions, with three catches:
+
+- **Ignore `gh auth status`.** It says the token is invalid even when `gh` works. The session's proxy adds the real credential to each request. Test with a real call instead, like `gh api repos/david-shortman/mon-county-community-hub --jq .full_name`.
+- **Use `gh api` REST calls, not `gh pr ...` or `gh issue ...`.** Those commands use GraphQL, which cloud sessions block with an HTTP 403. `scripts/pr-wait.sh` and `scripts/safe-merge.sh` use REST only, so they work. The 403 message lists REST routes for auto-merge, review threads and draft status.
+- **Start child sessions with the repo attached.** The proxy only adds credentials for repos attached to the session, so a child session started without this repo as its source gets refused.

@@ -1,0 +1,17 @@
+title: Gun Bash at Cheat Lake Volunteer Fire Department
+slug: cheat-lake-vfd-gun-bash-2027-05-01
+starts: 2027-05-01
+org_name: Cheat Lake Volunteer Fire Department
+who_it_is_for: The fire department's yearly fundraiser, with prize drawings and cash games. Food and drinks are free. To win a gun, you must pass a federal background check. The calendar does not give a time or ticket price.
+what_to_do: Check the fire department's events page for tickets and the time before you go.
+url: https://www.cheatlakefire.org/events
+topics: [community]
+place: 409 Fairchance Road, Morgantown, WV
+town: Cheat Lake
+venue: cheat-lake-vfd-hall
+sources:
+  - url: https://www.cheatlakefire.org/events
+    checked: 2026-10-31
+  - url: https://calendar.google.com/calendar/ical/contact%40cheatlakevfd.org/public/basic.ics
+    checked: 2026-10-31
+    name: Cheat Lake VFD's public calendar feed (shown on its events page)

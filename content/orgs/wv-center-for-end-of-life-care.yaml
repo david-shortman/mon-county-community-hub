@@ -1,0 +1,13 @@
+name: West Virginia Center for End-of-Life Care
+slug: wv-center-for-end-of-life-care
+kind: government
+website: https://wvendoflife.org/
+phone: "304-293-0695"
+summary: A state center on the WVU Health Sciences campus in Morgantown. It offers free West Virginia advance directive forms (living will, medical power of attorney, and others), explains medical orders like the POST form and DNR card, and runs the WV e-Directive Registry, which makes people's forms available to their health care providers at any hour.
+topics: [health]
+area: statewide
+sources:
+  - url: https://wvendoflife.org/contact/
+    checked: 2026-10-31
+  - url: https://wvendoflife.org/individuals/
+    checked: 2026-10-31

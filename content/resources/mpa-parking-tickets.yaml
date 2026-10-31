@@ -1,0 +1,31 @@
+title: Pay or contest a parking ticket in Morgantown
+slug: mpa-parking-tickets
+org: morgantown-parking-authority
+topics: [moving]
+town: Morgantown
+who_it_is_for: Anyone who got a parking ticket in Morgantown. First check who wrote it. The Parking Authority says its tickets come in an orange or yellow envelope. A yellow and white ticket taped to a side window or mirror is from the Morgantown Police Department; call Municipal Court at 304-284-7497. A white and blue ticket under the wiper is from WVU; call WVU parking at 304-293-5502.
+what_to_do: Pay a Parking Authority ticket online, by phone, by mail, in person, or in a courtesy box by the pay stations in its lots. To contest it, call within 10 days of the date on the ticket to schedule a court hearing.
+steps:
+  - "Online: use the Parking Authority's payment site, any time. Card payments have a convenience fee."
+  - "By phone: call 304-284-7435, Monday to Friday, 8 a.m. to 5 p.m."
+  - "By mail: send a check or money order to Morgantown Parking Authority, 300 Spruce Street, Morgantown, WV 26505. Write the ticket number and license plate on it. Do not mail cash."
+  - "In person: 300 Spruce Street, in the Public Safety Building, Monday to Friday, 8 a.m. to 5 p.m."
+  - "Broken meter? Report it at 304-284-7435 (leave a message after hours). The Parking Authority says a meter ticket is not dismissed unless the broken meter was reported within 24 hours of the ticket."
+  - "Two or more unpaid tickets can lead to a boot or a tow. To remove a boot, you pay the fines plus a $45 fee. Follow the notice on your car instead of paying online."
+cost: The fine is on the ticket. Online card payments have a convenience fee. A boot adds a $45 fee.
+contact:
+  phone: "304-284-7435"
+  url: https://www.parkmpa.com/faq/
+  url_label: Ticket questions
+  place: 300 Spruce Street, Morgantown, WV 26505
+hours: Monday to Friday, 8 a.m. to 5 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:00"
+    closes: "17:00"
+get_in: walk-in
+sources:
+  - url: https://www.parkmpa.com/faq/
+    checked: 2026-10-31
+  - url: https://www.parkmpa.com/parking-info/
+    checked: 2026-10-31

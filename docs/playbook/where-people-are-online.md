@@ -18,7 +18,7 @@ Not everyone who needs a guide will start at our home page. Some will start at a
 
 ## What is missing
 
-1. **A share kit for whole guides.** Pass it on works for one listing. Nothing yet gives a group a ready-to-paste blurb for a whole guide (for example "Trash, recycling and drop-off"). That is the share kit below, and its build is a follow-up issue.
+1. **A share kit for whole guides.** Built in #947 (`site/src/components/ShareThis.astro`, shown by `Base.astro`). Not yet on high-stakes guides, which wait for David.
 2. **A check that the answers hold up.** The [findability test](../../content/findability/questions.yaml) asks real resident questions. Only a few are after-hours questions (a shelter tonight, a dinner this weekend, volunteering this weekend). The reach playbook suggests more, like "It is Sunday night and my power is being shut off. What can I do?" Adding them is part of the follow-up.
 
 ## The share kit

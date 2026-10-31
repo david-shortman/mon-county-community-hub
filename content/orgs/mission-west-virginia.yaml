@@ -1,0 +1,13 @@
+name: Mission West Virginia
+slug: mission-west-virginia
+kind: nonprofit
+website: https://missionwv.org/
+phone: "304-562-0723"
+summary: A nonprofit based in Hurricane, WV, that serves all of West Virginia, including Morgantown. It works on foster care, adoption and kinship care, and runs a Kinship Navigator program for relatives raising a family member's child.
+topics: [family]
+area: statewide
+sources:
+  - url: https://missionwv.org/kinship/
+    checked: 2026-10-31
+  - url: https://missionwv.org/kinship-navigators/
+    checked: 2026-10-31

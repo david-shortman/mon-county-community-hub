@@ -1,0 +1,47 @@
+---
+// Starting page for people who want to help (#280, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/helpers.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "community", topic: "better", label: "People who want to help", summary: "Volunteer, give goods or money safely, help after a storm, start a group, and point people to help, in one place" };
+const sections = [
+  { title: "Give your time", links: [
+    { href: "/volunteer/", text: "where to find a volunteer shift soon, and groups that always need help" },
+    { href: "/make-it-better/adopt/", text: "what you take on, for how long, and what you get" },
+  ] },
+  { title: "Give goods", links: [
+    { href: "/sell-or-donate/", text: "where clothes, furniture, books and tools can go" },
+    { href: "/holidays/#give", label: "Give this season", text: "ways to give in November and December" },
+  ] },
+  { title: "Give money safely", links: [
+    { href: "/check-a-charity/", text: "look up a group's charity registration before you give" },
+  ] },
+  { title: "Make your town better", links: [
+    { href: "/make-it-better/", text: "report a problem, find money for a project, or serve on a city board" },
+    { href: "/have-your-say/", text: "when meetings are, and how public comment works at each" },
+  ] },
+  { title: "Start something", links: [
+    { href: "/start-a-group/", text: "state steps to make a group a nonprofit, and registering before you ask for donations" },
+    { href: "/start-something/", text: "what Mon County is missing for secondhand and sharing, and free how-to guides" },
+  ] },
+  { title: "Help someone you know find help", links: [
+    { href: "/for/helpers/", text: "what to do when someone tells you about a problem" },
+    { href: "/make-a-list/", text: "pick a few places and print or text the list" },
+    { href: "/help/what-help/", text: "two quick questions, then places that may help" },
+  ] },
+  { title: "Help this site", links: [
+    { href: "/partners/", text: "fix a listing or reuse the data" },
+    { href: "/corrections/", text: "what we got wrong and fixed" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/artists-and-makers/", text: null },
+    { href: "/for/outdoor-and-active/", text: null },
+    { href: "/for/older-adults/", text: null },
+  ] },
+];
+---
+<Base title="Ways to help in Morgantown and Mon County: where to start" description="A starting page for people who want to help in Monongalia County: volunteer shifts, giving goods, checking a charity before you give money, helping your neighborhood, starting a group, and pointing someone to help.">
+  <h1>For people who want to help</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
