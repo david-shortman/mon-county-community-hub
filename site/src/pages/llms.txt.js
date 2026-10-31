@@ -82,7 +82,7 @@ ${centers}
 - [Have your say at a public meeting](${u('/have-your-say/')}): when Morgantown City Council, the Monongalia County Commission, the Board of Education, BOPARC and the Planning Commission meet, how public comment works at each (from official pages), and where agendas are
 - [Older adults and retirees](${u('/for/older-adults/')}): a starting page that links to Medicare, care at home, food and bill help, veterans help, and ways to stay involved
 - [Parents of babies and toddlers](${u('/for/parents-young-kids/')}): a starting page that links to child development help, Pre-K and Head Start, playgroups, checkups and food help
-- [New to Mon County](${u('/for/new-to-mon-county/')}): a starting page that links to starting utilities, trash day, care, kids, work and English lessons, and this month's events
+- [New to Mon County](${u('/for/new-to-mon-county/')}): a starting page with a first 30 days list (utilities, who serves my address, license and plates, voting, a library card, care, meeting people), then links to trash day, care, kids, work and English lessons, and this month's events
 - [People with disabilities and caregivers](${u('/for/disability-and-caregivers/')}): a starting page that links to independent living, care at home through Medicaid, job help and health costs
 - [Free car seat checks](${u('/car-seat-checks/')}): the two child car seat fitting stations the WV DMV lists for Mon County (Sheriff's Department, WVU Medicine Children's), free, by appointment
 - [Driver's license and plates for new residents](${u('/drivers-license/')}): the WV DMV rules for switching an out-of-state license, title and registration (vehicles within 30 days), fees, what to bring, and the Morgantown Regional Office address, phone, hours and appointments
