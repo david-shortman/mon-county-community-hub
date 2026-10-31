@@ -5,3 +5,4 @@ node_modules/
 dist/
 .vercel/
 .astro/
+e2e-shots/
