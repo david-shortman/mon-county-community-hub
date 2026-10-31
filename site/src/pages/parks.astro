@@ -1,0 +1,47 @@
+---
+// Parks, trails and outdoors (#631, part of #281). Built from resource
+// records: city parks (BOPARC) and county parks first. Trails, swim and skate,
+// Coopers Rock, licenses and groups come next (#632 to #637). Facts still
+// waiting on a person to confirm are in #630 and stay off this page.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "outdoors", label: "Parks, trails and outdoors", summary: "City and county parks, what each has, and how to book a pavilion, cabin or campsite" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const CITY = ['boparc-dorseys-knob-park', 'boparc-jack-roberts-park', 'boparc-krepps-park', 'boparc-marilla-park', 'boparc-white-park', 'boparc-wiles-hill-park', 'boparc-dog-parks'];
+const COUNTY = ['camp-muffly-park', 'chestnut-ridge-park', 'mason-dixon-park'];
+---
+<Base title="Parks, trails and outdoors in Morgantown and Mon County, WV" description="Morgantown city parks run by BOPARC and Monongalia County parks (Camp Muffly, Chestnut Ridge, Mason-Dixon): what each park has, address and phone, and how to book a pavilion, cabin or campsite.">
+  <h1>Parks, trails and outdoors in Mon County</h1>
+  <p class="lede">Two public groups run most parks here. BOPARC runs the City of Morgantown's parks. Monongalia County Parks and Recreation runs three larger county parks. Each card says what the park has and how to reach it.</p>
+
+  <nav aria-labelledby="jump-h">
+    <h2 id="jump-h">On this page</h2>
+    <ul>
+      <li><a href="#city-parks">City parks in Morgantown</a></li>
+      <li><a href="#county-parks">County parks</a></li>
+      <li><a href="#book">Book a pavilion, cabin or campsite</a></li>
+      <li><a href="#rail-trail">Walk, run or bike the rail-trails</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="city-parks">City parks in Morgantown</h2>
+  <p>BOPARC (the Morgantown Board of Parks and Recreation Commissioners) runs these parks. Call 304-296-8356 with questions. Its office is at Marilla Park on Monday, Wednesday and Friday, and at the Wiles Hill Community Center on Tuesday and Thursday. Flegal Reservoir is another city park, still being built, with work planned to finish in December 2026 (<a href="https://www.boparc.org/flegal-reservoir.html">BOPARC page</a>).</p>
+  {CITY.map((s) => r(s) && <ResourceCard r={r(s)} />)}
+
+  <h2 id="county-parks">County parks</h2>
+  <p>Monongalia County Parks and Recreation runs these three parks. Its office is at 270 Mylan Park Lane, Suite 150. Call 304-291-7013 or email <a href="mailto:parks@monongaliacounty.gov">parks@monongaliacounty.gov</a>.</p>
+  {COUNTY.map((s) => r(s) && <ResourceCard r={r(s)} showCost />)}
+
+  <h2 id="book">Book a pavilion, cabin or campsite</h2>
+  <p>City pavilions: call BOPARC at 304-296-8356. You pay and get a permit before you use the pavilion, and BOPARC does not rent pavilions the same day. Some small pavilions, like the ones at Jack Roberts Park, are first come, first served.</p>
+  {r('mon-county-parks-booking') && <ResourceCard r={r('mon-county-parks-booking')} />}
+  <p>To compare halls and pavilions side by side, with prices and seats, see <a href={`${base}/community-centers/halls/`}>Compare halls</a>. Mason-Dixon Historical Park's barn, annex and pavilions are listed on <a href={`${base}/community-centers/mason-dixon-historical-park/`}>its own page</a>.</p>
+
+  <h2 id="rail-trail">Walk, run or bike the rail-trails</h2>
+  <p>The Mon River, Caperton and Deckers Creek rail-trails run through town and out into the county. See the rail-trail card on <a href={`${base}/staying-well/#mon-river-rail-trails`}>Staying well</a>, or the <a href="https://montrails.org/rail-trail-maps/">trail maps</a> from the Mon River Trails Conservancy.</p>
+
+  <p class="meta">Sources checked October 30, 2026. We describe these parks; we do not run them. Hours and rental rules change, so call the park or check its page before you go. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
