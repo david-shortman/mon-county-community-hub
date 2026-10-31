@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://everythingmorgantown.org/schemas/place.schema.json",
   "title": "Gathering place",
-  "description": "A building people gather in: a community center, senior center, neighborhood house, public rec building or a fire hall that rents a hall (#455). Shared with the groups and third spaces directory (#263). Plain-language guide: content/README.md. Version 1.",
-  "version": 1,
+  "description": "A building people gather in: a community center, senior center, neighborhood house, public rec building or a fire hall that rents a hall (#455). Shared with the groups and third spaces directory (#263), which adds library branches as free places to sit and recurring groups. Plain-language guide: content/README.md. Version 2 adds the library and group kinds and the cost, venue and interests fields.",
+  "version": 2,
   "type": "object",
   "required": ["name", "slug", "kind", "area", "community", "run_by", "story", "status", "sources"],
   "additionalProperties": false,
@@ -11,7 +11,7 @@
     "name": { "type": "string", "minLength": 1 },
     "other_names": { "type": "array", "items": { "type": "string" }, "description": "Other names sources use. List both when sources disagree." },
     "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-    "kind": { "enum": ["community-center", "senior-center", "neighborhood-house", "rec-center", "park-building", "fire-hall"] },
+    "kind": { "enum": ["community-center", "senior-center", "neighborhood-house", "rec-center", "park-building", "fire-hall", "library", "group"] },
     "area": { "enum": ["south", "west", "north", "east", "morgantown"], "description": "Part of the county, for grouping. morgantown means Morgantown and close in." },
     "community": { "type": "string", "description": "The community or town name people would type." },
     "run_by": {
@@ -19,7 +19,7 @@
       "required": ["kind"],
       "additionalProperties": false,
       "properties": {
-        "kind": { "enum": ["volunteer-association", "county", "city", "nonprofit", "fire-department", "parks-board", "park-foundation", "library"] },
+        "kind": { "enum": ["volunteer-association", "county", "city", "nonprofit", "fire-department", "parks-board", "park-foundation", "library", "business", "university", "community-group"] },
         "org": { "type": "string", "description": "Slug of a content/orgs entry, if there is one." },
         "text": { "type": "string", "description": "Who runs it, in words, as the source says." }
       }
@@ -76,7 +76,10 @@
     },
     "status": { "enum": ["active", "no-recent-activity", "closed", "renovating"] },
     "last_activity_seen": { "type": "string", "format": "date", "description": "Date of the newest sign of activity we read. Over 6 months old shows 'No recent activity seen, call first'." },
-    "tags": { "type": "array", "items": { "enum": ["family-friendly", "free", "come-alone", "beginners", "step-free"] } },
+    "tags": { "type": "array", "items": { "enum": ["family-friendly", "free", "come-alone", "beginners", "step-free", "weekly", "growing"] } },
+    "cost": { "type": "string", "description": "What it costs to take part, as the source says. Mostly for groups." },
+    "venue": { "type": "string", "description": "Groups only: slug of the place in content/places where it meets." },
+    "interests": { "type": "array", "items": { "enum": ["games", "books", "crafts", "arts", "music", "dance", "theater", "outdoors", "running", "cycling", "sports", "food", "languages", "learning", "growing", "social", "service", "families", "lgbtq", "newcomers"] }, "description": "Groups: what it is about, for the Find your people finder (#263)." },
     "notes": { "type": "array", "items": { "type": "string" }, "description": "Gaps and conflicts residents should know, like 'Sources give two addresses, so call first.'" },
     "sources": {
       "type": "array",

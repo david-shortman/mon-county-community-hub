@@ -1,0 +1,4 @@
+# 2026-10-31: Two small fixes: source credit and opening-hours warnings
+
+- **Source credit.** A source was credited to any org whose website was on the same site. The Westside Senior Center's website is one page on the City of Westover's site, so every westoverwv.org page (like the city's meeting minutes) was credited to the senior center. The same rule credited every county page to Parks and Recreation. Now, when an org's website is one page on a bigger site, another record's source is credited to it only when it is under that page; otherwise the source shows its address, which is never wrong. A record's own org still gets credit anywhere on its site.
+- **Warnings.** The time-wording check warned on the 24-hour `opens` and `closes` fields in `opening_hours` (#177), which are data, not words people read. They are now skipped: 69 warnings down to 46.
