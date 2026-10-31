@@ -25,11 +25,16 @@
 //   node scripts/check-sources.mjs [--json FILE] [--md FILE]
 //       [--state-in FILE] [--state-out FILE] [--help-now-only] [--limit N]
 //       [--registry FILE]
+//
+// Pages listed in content/watch/*.yaml (pantry hours, #166) get a closer look
+// from watch.mjs: only their hours part is compared, digits included. Changes
+// there go to one grouped issue per list (see source-issue.mjs).
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import YAML from 'yaml';
 import { CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadWatch, watchedUrls, evaluateWatch, watchMd } from './watch.mjs';
 
 const UA = 'MonCountyCommunityHub-sourcecheck/1.0 (+https://github.com/david-shortman/mon-county-community-hub)';
 const UA_TOKEN = 'moncountycommunityhub';
@@ -323,7 +328,7 @@ export function classify(src, r, sameOwnerPairs = []) {
   return 'unverified';
 }
 
-async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameOwnerPairs = [] } = {}) {
+async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameOwnerPairs = [], keepText = new Set() } = {}) {
   let todo = registry.sources.filter((s) => s.group === 'monitored' && (!helpNowOnly || s.help_now));
   todo = todo.slice(0, limit);
   const byHost = new Map();
@@ -366,6 +371,7 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
               out.kind = 'html';
               out.host = s.host;
               out.fingerprint = fingerprint(html);
+              if (keepText.has(s.url)) out.text = pageText(html);
               out.phones = [...phonesOnPage(html)];
               const elsewhere = otherPlace(html);
               if (elsewhere) out.elsewhere = elsewhere;
@@ -490,13 +496,19 @@ async function main() {
   const registry = buildRegistry({ rules });
   if (opt('registry')) fs.writeFileSync(opt('registry'), JSON.stringify(registry.sources, null, 2));
   const prev = opt('state-in') && fs.existsSync(opt('state-in')) ? JSON.parse(fs.readFileSync(opt('state-in'), 'utf8')) : {};
+  const watchGroups = loadWatch();
   const results = await checkAll(registry, {
     helpNowOnly: args.includes('--help-now-only'),
     limit: opt('limit') ? Number(opt('limit')) : Infinity,
     sameOwnerPairs: rules.sameOwner,
+    keepText: watchedUrls(watchGroups),
   });
+  const watch = evaluateWatch(watchGroups, results, prev['~watch'] || {});
+  for (const r of results.values()) delete r.text; // keep the JSON report small
   const rep = buildReport(registry, results, prev);
-  const md = reportMd(rep);
+  rep.watch = watch.groups;
+  rep.state['~watch'] = watch.state;
+  const md = `${reportMd(rep)}\n\n${watchMd(watch)}`;
   if (opt('json')) fs.writeFileSync(opt('json'), JSON.stringify(rep, null, 2));
   if (opt('state-out')) fs.writeFileSync(opt('state-out'), JSON.stringify(rep.state));
   if (opt('md')) fs.writeFileSync(opt('md'), md);

@@ -11,11 +11,18 @@
 //   node scripts/source-issue.mjs get-state STATE.json
 //   node scripts/source-issue.mjs update REPORT.json REPORT.md
 // Env: GITHUB_TOKEN, GITHUB_REPOSITORY, RUN_URL.
+//
+// Watched pages (content/watch/*.yaml, #166): when any of them changed, it also
+// opens one grouped issue per watch list with the `source-changed` label, or
+// adds a comment to that list's issue if one is still open. A person closes it
+// after re-checking. It never edits content.
 // Plain fetch on purpose: the repo allows only a short list of actions.
 import fs from 'node:fs';
+import { alertMd } from './watch.mjs';
 
 const LABEL = 'source-check';
 const TODO_LABEL = 'for:duet';
+const CHANGED_LABEL = 'source-changed';
 const API = 'https://api.github.com';
 const MAX_BODY = 60_000; // GitHub's limit is 65,536 characters
 
@@ -48,6 +55,21 @@ export function issueBody(report, md, runUrl) {
   const room = MAX_BODY - head.length - state.length - 200;
   if (text.length > room) text = `${text.slice(0, room)}\n\n(Cut short. The full list is in the run summary.)`;
   return head + text + state;
+}
+
+export const groupMarker = (group) => `<!-- watch-group: ${group} -->`;
+
+export function watchIssue(g, { runUrl = '', today = '' } = {}) {
+  return {
+    title: `${g.issue_title}: re-check before changing the site`,
+    body: [
+      `The daily Source check watches the pages in \`${g.file}\` closely and opens this issue when one of them changes. New changes are added as comments while it is open. Close it once every page below has been re-checked.`,
+      '',
+      alertMd(g, { runUrl, today }),
+      '',
+      groupMarker(g.group),
+    ].join('\n'),
+  };
 }
 
 async function main() {
@@ -85,6 +107,24 @@ async function main() {
   } else {
     await gh('PATCH', `/repos/${repo}/issues/${issue.number}`, { title: title(report), body, labels, state: 'open' });
     console.log(`Updated #${issue.number}.`);
+  }
+
+  // One grouped issue per watch list that had changes this run.
+  const changed = (report.watch || []).filter((g) => g.alerts.length);
+  if (!changed.length) return;
+  try { await gh('POST', `/repos/${repo}/labels`, { name: CHANGED_LABEL, color: 'fbca04', description: 'A watched source page changed; a person re-checks it (#166)' }); }
+  catch (e) { if (!/422/.test(e.message)) throw e; }
+  const open = (await gh('GET', `/repos/${repo}/issues?state=open&labels=${CHANGED_LABEL}&per_page=50`)).filter((i) => !i.pull_request);
+  const opts = { runUrl: process.env.RUN_URL || '', today: report.checked_at.slice(0, 10) };
+  for (const g of changed) {
+    const mine = open.find((i) => i.body?.includes(groupMarker(g.group)));
+    if (mine) {
+      await gh('POST', `/repos/${repo}/issues/${mine.number}/comments`, { body: alertMd(g, opts) });
+      console.log(`Added ${g.alerts.length} changed pages to #${mine.number}.`);
+    } else {
+      const created = await gh('POST', `/repos/${repo}/issues`, { ...watchIssue(g, opts), labels: [CHANGED_LABEL, TODO_LABEL] });
+      console.log(`Opened #${created.number} for ${g.alerts.length} changed pages.`);
+    }
   }
 }
 
