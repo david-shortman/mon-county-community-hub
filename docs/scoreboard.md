@@ -4,14 +4,28 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 
 | Level | Status | Latest |
 |---|---|---|
-| 1. Findability | **Measured** | **76 / 100** on 2026-10-28 (same-day recheck; baseline also 76) |
+| 1. Findability | **Measured** | **76 / 100** on the original 32 questions, 2026-10-31 (end-of-sprint recheck; baseline also 76). All 45 questions: 71. |
 | 2. Use | Not measured yet | No public tools to count yet |
 | 3. Action | Not measured yet | None |
 | 4. Recognition | Not measured yet | None |
 
 ## Level 1: Findability
 
-### Latest run: 76 out of 100 (2026-10-28, same-day recheck)
+### Latest run: 76 out of 100 on the original 32 questions (2026-10-31, end of sprint)
+
+A recheck after the October 30 to 31 backlog sprint (#529), when the site had grown from about 30 pages to about 118. Results: [`content/findability/2026-10-31.yaml`](../content/findability/2026-10-31.yaml), [build log](build-log/2026-10-31-0300-findability-end-of-sprint.md).
+
+- **The score did not move: 76, the same as the baseline.** 27 of the original 32 questions scored the same. Five moved by a point or two, and none because of our site: q01 heating help (+1) and q03 water shutoff help (+2) because testers found a "last updated" date and a better reworded search, q13 council member (+1) because the city's ward pages now agree, q09 business license (-1) and q12 speaking at council (-1) from search ranking and a city page that now scrolls sideways on a phone. Treat moves this size as noise.
+- **Leading measure: 24 of 32 questions now have an answer page on our site, up from 6.** With the 13 questions added during the sprint, it is 33 of 45.
+- **Our pages are still not in search: 0 of 33.** The method only counts our page once it shows up in a resident's search (or an official page links to it), so the sprint's pages cannot raise the score until search engines index the new domain. The site has no search engine accounts yet; that is David's decision (#89). This is the main thing holding the score back.
+- **Top 3 results with a correct local answer:** 5 of 32 (was 6; q09 slipped to fourth).
+- **The 13 newer questions** (growing, secondhand, community centers) score 57 out of 100 together. Renting a hall (q44) and a community dinner this weekend (q45) still score 0: search shows nothing usable, while our community centers pages answer both. Garden plots (q35), free seeds (q36), thrift stores (q38) and flea markets (q39) score 8. Two of those scores (q38, q39) came from search snippets because the best pages refused every tool; the notes say so.
+
+**Score by topic, all 45 questions** (0 to 100, lowest first): community centers 27, recycling 60, growing 65, secondhand 67, transportation 70, local government 73, community health data 73, small business 76, philanthropy and volunteering 76, housing 80, civic participation 82, help with bills and food 83, medical care 83. Dimensions on the original 32 (average out of 3): found 2.0, steps 2.5, current 2.3, plain 2.0, works on a phone 2.7.
+
+**Questions with no page of ours yet:** mental health help today (q06), a business license (q09), potholes (q14), volunteering this weekend (q16), school test scores (q22), crime trends (q23), housing vouchers (q27), the next election and ballot (q32), soil tests (q33), plant problems (q34), garden plots (q35), and borrowing a tool (q41; the MOTO tool library is in our data but not on the sell or donate page).
+
+### Same-day recheck: 76 out of 100 (2026-10-28)
 
 A second run a few hours after the baseline, after the first three hub guides went live (recycling, help paying utility bills, where to stay tonight). Results: [`content/findability/2026-10-28b.yaml`](../content/findability/2026-10-28b.yaml).
 
@@ -19,7 +33,7 @@ A second run a few hours after the baseline, after the first three hub guides we
 - **Our pages are not in search yet.** 6 of 32 questions now have a direct answer page on the site (q01, q03, q19, q20, q21, q26). None of them showed up in any search, and no official page links to them, so by the method they do not count yet. New pages usually take days to weeks to be indexed, and the site has no search engine accounts yet (#89). The next weekly run (2026-11-01) will check again.
 - **Leading signal:** 6 of 32 questions had a correct local answer in the top 3 search results (5 at baseline, the change is q09).
 
-The topic, dimension and worst-gap tables below show this latest run. The baseline write-up follows them.
+The topic, dimension and worst-gap tables below are from this 2026-10-28 recheck. The baseline write-up follows them.
 
 ### Baseline: 76 out of 100 (2026-10-28, first run)
 
@@ -141,6 +155,7 @@ Rules for keeping runs comparable: keep question ids and `search` words fixed. A
 | 2026-10-28 | 76 | 32 | v1 | Baseline, before the hub published any guides |
 | 2026-10-28 | 76 | 32 | v1 | Same-day recheck after the first guides shipped (recycling, utility bills, stay tonight). No change overall. Movers, both from other sites or search: q09 business license +2 (city page now ranks first and fits a phone), q15 county agendas -2 (search missed the agenda page). Hub answer pages: 6 of 32 questions; in search results: 0 (not indexed yet). Top-3 correct answers: 6 of 32 (was 5). [Results](../content/findability/2026-10-28b.yaml), [build log](build-log/2026-10-28-0647-findability-same-day-recheck.md) |
 | 2026-10-30 | 27 (3 new questions only) | 3 | v1 | Starting score for the community centers questions q43 to q45 (#460), taken the day the section went live and before search engines indexed it. Not comparable to the full-set overall. Found a center: partial (one center on WVU's volunteer site). Rent a hall and a dinner this weekend: not found. Our answer pages: 3 of 3; in search results: 0. [Results](../content/findability/2026-10-30-centers.yaml) |
+| 2026-10-31 | 76 (32 questions); 71 (all 45) | 45 | v1 | End-of-sprint recheck after the site grew to about 118 pages. No change on the original 32: five questions moved a point or two, all from other sites, search ranking or tester judgment. Our answer pages: 24 of 32 (was 6), 33 of 45; in search results: 0 (not indexed yet, #89). Top-3 correct answers: 5 of 32. First scores for q33 to q42. [Results](../content/findability/2026-10-31.yaml), [build log](build-log/2026-10-31-0300-findability-end-of-sprint.md) |
 
 ### Source benchmark
 
