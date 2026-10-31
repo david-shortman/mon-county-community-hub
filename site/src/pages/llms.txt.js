@@ -38,6 +38,7 @@ export function GET({ site }) {
 - [Food today: WVU student question](${u('/help/food/today/')}): the second food question
 - [Help buying groceries every month](${u('/help/food/monthly/')}): SNAP: you may qualify; apply on WV PATH or call DoHS
 - [Apply for SNAP (food stamps)](${u('/snap/')}): apply online at WV PATH, the state's free site, and the DoHS phone number
+- [After you apply for SNAP](${u('/after-you-apply/snap/')}): the phone interview, the 10 day deadline for papers, the 30 day decision, the letters DoHS sends, what to report by the 10th, renewals, and how to ask for a fair hearing within 90 days, quoted from the state's manual
 - [Free help filing your taxes](${u('/free-tax-help/')}): free tax prep near Morgantown (Christian Help, IRS VITA and TCE, AARP Tax-Aide), IRS Free File and West Virginia's Free File list, the Earned Income Tax Credit and the WV Family Tax Credit, with no guessed 2027 dates
 - [File today: SNAP, Medicaid, LIEAP, WV WORKS](${u('/file-today/')}): how to start each application today (SNAP can start with name, address and signature), and a list of what the state may ask you to bring, quoted from its forms; picks live only in the web address
 - [Get care](${u('/care/')}): pick what is going on (a flu or COVID shot, a dentist, turning 65, quitting tobacco, staying healthy) and get local steps in order, with phone numbers, costs and sources
