@@ -68,6 +68,7 @@ export function pdfPageProblems(d) {
       if (it?.lines != null && !Array.isArray(it.lines)) out.push(`${where}: lines must be a list`);
       for (const l of it?.links ?? []) {
         if (!l?.label || !isUrl(l?.url)) out.push(`${where}: each link needs a label and a web url`);
+        for (const k of Object.keys(l ?? {})) if (!['label', 'url', 'date', 'lang'].includes(k)) out.push(`${where}: unknown link field ${k}`);
         if (/\.pdf(\?|$)/i.test(l?.url ?? '') && !l?.date) out.push(`${where}: a PDF link needs the date printed on that PDF (date)`);
       }
     }

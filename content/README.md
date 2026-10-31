@@ -567,6 +567,7 @@ sections:
           - label: Full schedule (PDF)
             url: https://example.org/route.pdf
             date: "Effective August, 2018"                   # needed on a PDF link
+            lang: es                                         # optional; the link's language if not English
       - A plain line of text is also an item.
 ```
 

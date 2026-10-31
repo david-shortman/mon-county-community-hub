@@ -116,14 +116,14 @@ sections:
     id: body-art
     items:
       - name: Body Art
-        lines: ["The form has boxes for \"Tattoo\", \"Body Piercing\" and \"Temporary $100 Per Artist\", and lists a fee of $200."]
+        lines: ["The form has boxes for \"Tattoo\", \"Body Piercing\" and \"Temporary $100 Per Artist\", and lists a fee of $200.", "The form does not say which fee goes with which box. Call Environmental Health at 304-598-5131 to ask."]
       - name: Tanning
         lines: ["1 - 5 Devices: $240", "6 - 10 Devices: $360", "11+ Devices: $480"]
   - heading: Dividing land into lots
     id: subdivision
     items:
       - name: Subdivision
-        lines: ["1 - 10 Lots: \"$140 Minimum\"", "Or $14 for each lot (the form says \"Lots * $14\")", "30 Lots: $420"]
+        lines: ["1 - 10 Lots: \"$140 Minimum\"", "Or $14 for each lot (the form says \"Lots * $14\")", "30 Lots: $420", "The form does not say which fee fits which number of lots. Call Environmental Health at 304-598-5131 to ask."]
   - heading: Fees the form leaves blank
     id: blank
     note: The form has these lines with no amount filled in. Call the health department to ask what they cost.
