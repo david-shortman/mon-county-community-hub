@@ -14,9 +14,9 @@ export const ROLES = [
       {
         hears: 'A student says there is no food at home',
         steps: [
-          { page: '/help/food/', text: 'Show the family where to get food today or this week, and help buying groceries every month.' },
+          { page: '/help/food/', text: 'Where to get food today or this week. It also covers help buying groceries every month.' },
           { resource: 'starting-points-family-programs', text: 'Families with young children can call Starting Points about its baby pantry and free family programs.' },
-          { resource: 'wv-211', text: 'Anyone can call or text 211, any hour, and get pointed to local help.' },
+          { resource: 'wv-211', text: 'Anyone can call 211, or text their ZIP code to 898-211, any hour, and get pointed to local help.' },
         ],
       },
       {
@@ -30,7 +30,7 @@ export const ROLES = [
         hears: 'A family says their heat or power is about to be shut off',
         steps: [
           { page: '/utility-bills/', text: 'Who to call first, and programs that help with heat, water and electric bills.' },
-          { resource: 'wv-211', text: 'Call or text 211, any hour, and get pointed to local help.' },
+          { resource: 'wv-211', text: 'Call 211, or text your ZIP code to 898-211, any hour, and get pointed to local help.' },
         ],
       },
     ],
@@ -44,7 +44,7 @@ export const ROLES = [
         hears: 'Someone has nowhere to sleep tonight',
         steps: [
           { page: '/stay-tonight/', text: 'Emergency shelter in Morgantown, with phone numbers and what to expect.' },
-          { resource: 'wv-211', text: 'Call or text 211, any hour, and ask about a place to stay tonight.' },
+          { resource: 'wv-211', text: 'Call 211, or text your ZIP code to 898-211, any hour, and ask about a place to stay tonight.' },
         ],
       },
       {
@@ -128,7 +128,7 @@ export const ROLES = [
         hears: 'A tenant says they cannot pay this month\'s rent',
         steps: [
           { page: '/money/?pick=rent', text: 'Steps in order for someone behind on rent.' },
-          { resource: 'wv-211', text: 'The tenant can call or text 211, any hour, and get pointed to local help.' },
+          { resource: 'wv-211', text: 'The tenant can call 211, or text their ZIP code to 898-211, any hour, and get pointed to local help.' },
         ],
       },
       {
@@ -155,7 +155,7 @@ export const ROLES = [
         hears: 'A rider has nowhere to sleep tonight',
         steps: [
           { page: '/stay-tonight/', text: 'Emergency shelter in Morgantown, with phone numbers.' },
-          { resource: 'wv-211', text: 'Call or text 211, any hour, and ask about a place to stay tonight.' },
+          { resource: 'wv-211', text: 'Call 211, or text your ZIP code to 898-211, any hour, and ask about a place to stay tonight.' },
         ],
       },
       {
