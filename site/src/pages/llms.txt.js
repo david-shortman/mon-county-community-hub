@@ -107,6 +107,7 @@ export function GET({ site }) {
 ${centers}
 - [Start a swap, market or reuse store](${u('/start-something/')}): what Mon County is missing for secondhand and sharing (a regular flea market, a building materials reuse store, a Buy Nothing group, kids' gear swaps), what each would take, and free or low cost guides
 - [City and county meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council, city board and County Commission meetings, minutes from the last 60 days, and where the school board and towns post theirs
+- [Ask for public records](${u('/public-records/')}): West Virginia's Freedom of Information Act quoted (who can ask, asking the office that keeps the record, the five business day answer, copy fees and no search fees, going to circuit court after a denial), the Secretary of State's database of past requests, and City of Morgantown Clerk records
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it

@@ -1,0 +1,39 @@
+---
+// Ask for public records (#222, a missing life area under "local government"):
+// West Virginia's Freedom of Information Act, the state FOIA database, and the
+// City Clerk's records. The law is quoted from code.wvlegislature.gov (29B-1-2
+// to 29B-1-5), read 2026-10-31. Neither the city nor the county posts a FOIA
+// page or form we could find, so the page says to ask the office that keeps
+// the record, as the law does.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "government", label: "Ask for public records", summary: "Your right under West Virginia's Freedom of Information Act, how to ask, the five-day answer rule, fees, and past requests" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Public records requests (FOIA) in Morgantown and Mon County, WV" description="How to ask a West Virginia city, county, school board or state agency for public records under the state Freedom of Information Act: who can ask, how to word it, the five business day answer rule, copy fees, and the state's database of past requests.">
+  <h1>Ask for public records</h1>
+  <p class="lede">Anyone can ask a West Virginia city, county, school board or state office for its public records. Many are already online, so search first. Then send a short written request to the office that keeps the record. State law says it must answer within five business days.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      <li><a href="#how">How to ask</a></li>
+      <li><a href="#past">See past requests</a></li>
+      <li><a href="#city">City of Morgantown records</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="how">How to ask</h2>
+  <ResourceCard r={resource('wv-foia-request')} showCost />
+
+  <h2 id="past">See past requests</h2>
+  <ResourceCard r={resource('wv-foia-database')} showCost />
+
+  <h2 id="city">City of Morgantown records</h2>
+  <ResourceCard r={resource('morgantown-city-clerk-records')} showCost />
+
+  <p>Looking for your own records? Birth, death and marriage records: see <a href={`${base}/ids-and-records/`}>IDs and records</a>. Meeting agendas and minutes: see <a href={`${base}/meetings/`}>public meetings</a>. City spending: the city posts a <a href="https://www.morgantownwv.gov/537/Transparency-Center">Transparency Center</a> with its finances.</p>
+
+  <p class="meta">Sources checked October 31, 2026. This page describes the law; it is not legal advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
