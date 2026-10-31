@@ -16,6 +16,8 @@ const pages = await loadPages();
 const dir = loadDirectory();
 const sections = BUCKETS.map((b) => ({ ...b, groups: inBucket(dir.groups, b) })).filter((s) => s.groups.length);
 const missingAreas = areasWithout(dir);
+const firstIn = new Map();
+for (const s of sections) for (const p of s.groups) if (!firstIn.has(p.slug)) firstIn.set(p.slug, s.key);
 const also = [
   { route: '/meet-people/', text: 'library cards, free library programs and neighborhood associations' },
   { route: SECTION.route, text: 'community centers, senior centers and fire halls, with their dinners and events' },
@@ -64,7 +66,7 @@ const also = [
   {sections.map((s) => (
     <section id={s.key}>
       <h2>{s.label}</h2>
-      {s.groups.map((p) => <GroupCard p={p} venue={p.venueRecord} />)}
+      {s.groups.map((p) => <GroupCard p={p} venue={p.venueRecord} anchor={firstIn.get(p.slug) === s.key} />)}
     </section>
   ))}
 
@@ -125,7 +127,7 @@ const also = [
   function show(into, time, withWho) {
     var cards = Array.prototype.slice.call(document.querySelectorAll('section[id] > article.group'));
     var seen = {}, ranked = cards.map(function (c, i) { return { c: c, s: score(c, into, time, withWho), i: i }; })
-      .filter(function (x) { if (x.s < 0 || seen[x.c.id]) return false; seen[x.c.id] = 1; return true; })
+      .filter(function (x) { if (x.s < 0 || seen[x.c.dataset.slug]) return false; seen[x.c.dataset.slug] = 1; return true; })
       .sort(function (a, b) { return b.s - a.s || a.i - b.i; }).slice(0, 3);
     list.innerHTML = '';
     if (!ranked.length) { list.innerHTML = '<p>No match yet. Try another answer, or browse the lists below.</p>'; }

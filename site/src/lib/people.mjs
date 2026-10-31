@@ -8,7 +8,7 @@ export const BUCKETS = [
   { key: 'games-books', label: 'Games, books and writing', interests: ['games', 'books'] },
   { key: 'arts', label: 'Art, music, dance, crafts and theater', interests: ['arts', 'music', 'dance', 'crafts', 'theater'] },
   { key: 'active', label: 'Getting outside and moving', interests: ['outdoors', 'running', 'cycling', 'sports'] },
-  { key: 'social', label: 'Meeting people and eating together', interests: ['social', 'food', 'newcomers', 'lgbtq'] },
+  { key: 'social', label: 'Meeting people and eating together', interests: ['food', 'newcomers', 'lgbtq'], fallback: ['social'] },
   { key: 'learning', label: 'Learning and languages', interests: ['learning', 'languages'] },
   { key: 'growing', label: 'Growing things', interests: ['growing'] },
   { key: 'service', label: 'Helping out', interests: ['service'] },
@@ -55,7 +55,13 @@ export function loadDirectory() {
 // Groups in a bucket, active ones first, then A to Z.
 export function inBucket(groups, bucket) {
   const rank = (p) => (placeStatus(p).status === 'active' ? 0 : 1);
-  return groups.filter((p) => (p.interests ?? []).some((i) => bucket.interests.includes(i))).sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name));
+  const other = BUCKETS.filter((b) => b !== bucket).flatMap((b) => b.interests);
+  const fits = (p) => {
+    const i = p.interests ?? [];
+    // `social` alone puts a group here only when it fits no other section.
+    return i.some((x) => bucket.interests.includes(x)) || (bucket.fallback && i.some((x) => bucket.fallback.includes(x)) && !i.some((x) => other.includes(x)));
+  };
+  return groups.filter(fits).sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name));
 }
 
 // Parts of the county where we have found no free place to sit and no group
