@@ -1,0 +1,6 @@
+# 2026-10-31: Devices, special education, rights, recreation and caregiver help on Disability and aging (#579, #581, #582, #583, #584)
+
+- **Considered:** the Disability and aging page had independent living, job help and Medicare help, but nothing for trying a device, school, rights, recreation or caregivers. The research in `docs/groups/disability-caregivers.md` found each of these on the group's own site.
+- **Chose:** one record per program, each re-read on its own page today, added as sections on `/disability-and-aging/` and linked from the disability starting page.
+- **Shipped:** WVATS device demos, 30-day loans and free reuse; the Monongalia County Schools Special Education Department; Disability Rights of WV intake (what it takes and what it does not); SteppingStones at Mylan Park (how new families register); how to join Special Olympics; Alzheimer's Association caregiver groups and the 24/7 Helpline. New orgs: Disability Rights of WV, Special Olympics WV, Alzheimer's Association WV Chapter.
+- **Left off:** a Mon County Special Olympics contact (the county directors PDF link returns 404), and any named Morgantown caregiver group (the chapter's August 2025 list shows none in Monongalia County). Both stay with #577. No evaluation steps for special education: the department page does not list them.

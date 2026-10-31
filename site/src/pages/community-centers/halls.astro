@@ -1,0 +1,59 @@
+---
+// Hall finder (#464): every hall, room and pavilion with a published way to
+// rent it, side by side, sorted by part of the county. Built from the
+// `rentals` in content/places. We never take bookings.
+import Base from '../../layouts/Base.astro';
+import { prettyDate } from '../../lib/content.mjs';
+import { rentalRows, areaLabel, SECTION } from '../../lib/places.mjs';
+export const page = { parent: '/community-centers/', label: 'Compare halls' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const rows = rentalRows();
+const yesNo = (v) => (v === true ? 'Yes' : v === false ? 'No' : 'Not listed');
+const checkedFor = (r) => {
+  const s = r.source ? r.place.sources.find((x) => x.url === r.source) : null;
+  return s?.checked ?? r.place.checked;
+};
+const sourceFor = (r) => r.source ?? r.place.sources[0].url;
+---
+<Base title="Rent a hall in Mon County and Morgantown: compare halls and prices" description="Community center halls, park buildings and pavilions you can rent in Monongalia County, WV, side by side: seats, kitchen, outdoor space, price, deposit and how to book, with the date we checked each price.">
+  <h1>Compare halls</h1>
+  <p class="lede">Halls, rooms and pavilions you can rent across Mon County, from rural community centers to town park buildings.</p>
+  <p class="note">Prices are what each source showed on the date in the last column. They can change, so confirm when you book. We do not take bookings: you book with the center or office directly. Places that rent space but do not publish how are left out.</p>
+
+  <div class="table-scroll" role="region" aria-labelledby="halls-cap" tabindex="0">
+    <table class="halls">
+      <caption id="halls-cap">{rows.length} spaces to rent, by part of the county</caption>
+      <thead>
+        <tr><th scope="col">Place and space</th><th scope="col">Area</th><th scope="col">Seats</th><th scope="col">Kitchen</th><th scope="col">Outdoor</th><th scope="col">Price</th><th scope="col">Deposit</th><th scope="col">How to book</th><th scope="col">Checked</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <th scope="row"><a href={`${base}${SECTION.route}${r.place.slug}/`}>{r.place.name}</a><br /><span class="space">{r.space}</span></th>
+            <td>{areaLabel(r.place.area)}<br /><span class="space">{r.place.community}</span></td>
+            <td>{r.seats ?? 'Not listed'}</td>
+            <td>{yesNo(r.kitchen)}</td>
+            <td>{yesNo(r.outdoor)}</td>
+            <td>{r.price ?? 'Not published'}</td>
+            <td>{r.deposit ?? 'Not listed'}</td>
+            <td>{r.book}{r.place.contact?.phone && <> <a href={`tel:${r.place.contact.phone.replace(/\D/g, '')}`} class="nowrap">{r.place.contact.phone}<span class="sr-only">, {r.place.name}</span></a></>}</td>
+            <td><a href={sourceFor(r)}>{prettyDate(checkedFor(r))}<span class="sr-only">, source for {r.place.name} {r.space}</span></a></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="meta">"Not listed" means the source does not say. Each date links to the page we read.</p>
+  <p><a href={`${base}${SECTION.route}`}>Back to {SECTION.name.toLowerCase()}</a></p>
+</Base>
+
+<style>
+  .table-scroll { overflow-x: auto; margin: 16px 0; border: 1px solid var(--line); border-radius: 10px; }
+  .table-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  table.halls { border-collapse: collapse; width: 100%; min-width: 52rem; background: var(--card); font-size: 0.98rem; }
+  table.halls caption { text-align: left; padding: 10px 12px; font-weight: 700; }
+  table.halls th, table.halls td { padding: 8px 10px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+  table.halls thead th { background: var(--accent-bg); }
+  table.halls .space { color: var(--muted); font-weight: 400; }
+  @media print { .table-scroll { overflow: visible; border: 0; } table.halls { min-width: 0; font-size: 0.85rem; } }
+</style>

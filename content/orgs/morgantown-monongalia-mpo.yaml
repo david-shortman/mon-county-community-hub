@@ -1,0 +1,11 @@
+name: Morgantown Monongalia Metropolitan Planning Organization
+slug: morgantown-monongalia-mpo
+kind: government
+website: https://www.plantogether.org/
+phone: "304-291-9571"
+summary: The group that plans road, transit and walking and biking projects for the Morgantown area. It writes the long-range transportation plan and the list of projects that use federal money, and it streams its board meetings on YouTube.
+topics: [government]
+area: monongalia-county
+sources:
+  - url: https://www.plantogether.org/
+    checked: 2026-10-30

@@ -1,0 +1,15 @@
+name: Craigslist Morgantown
+slug: craigslist-morgantown
+kind: online-group
+area: online
+run_by: craigslist
+sells: Online classified ads for the Morgantown area. The for sale area includes furniture, household, tools, electronics, books, clothes and baby and kid items. There are also barter, garage sale and free sections.
+goods: [home, tools, electronics, books, clothes, kids]
+buys_from_you: false
+url: https://morgantown.craigslist.org/
+url_label: Craigslist Morgantown
+status: likely
+note: The site posts its own safety and scam tips.
+sources:
+  - url: https://www.craigslist.org/area/morgantown
+    checked: 2026-10-30

@@ -1,0 +1,33 @@
+name: Wiles Hill Community Center
+slug: wiles-hill-community-center
+kind: rec-center
+area: morgantown
+community: Wiles Hill, Morgantown
+run_by:
+  kind: parks-board
+  text: BOPARC, the Morgantown Board of Parks and Recreation
+story: A BOPARC community center with a gym and fitness room on Eureka Drive.
+facilities:
+  gym: true
+  other: [fitness room]
+regular:
+  - Open Monday to Friday, 8 a.m. to 5 p.m. Starting November 16, 2026, it closes at 4 p.m.
+membership:
+  dues: Fitness room $15 a year for one person 50 or older, $50 a year for ages 18 to 49 (2024 prices)
+rentals:
+  - space: Gym (weekends, 9 a.m. to 9 p.m.)
+    outdoor: false
+    price: $35 an hour, 3-hour minimum, plus sales tax
+    book: Call BOPARC at 304-296-8356 and choose the customer service option. Fees are due when you book.
+    source: https://www.boparc.org/wiles-hill-community-center.html
+contact:
+  phone: "304-296-8356"
+  url: https://www.boparc.org/wiles-hill-community-center.html
+  place: 287 Eureka Dr, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-30
+sources:
+  - url: https://www.boparc.org/wiles-hill-community-center.html
+    checked: 2026-10-30
+  - url: https://www.boparc.org/know-before-you-go.html
+    checked: 2026-10-30

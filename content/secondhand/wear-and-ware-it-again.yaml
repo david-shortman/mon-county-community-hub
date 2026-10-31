@@ -1,0 +1,19 @@
+name: Wear and Ware It Again
+slug: wear-and-ware-it-again
+kind: consignment
+area: westover
+run_by: Wear and Ware It Again
+address: "759 Fairmont Rd, Westover, WV"
+sells: Used clothing, shoes, jewelry and handbags for women, men and children upstairs; furniture and home decor downstairs.
+takes: Items on consignment.
+goods: [clothes, home]
+buys_from_you: false
+url: https://wrc.wvu.edu/resources/basic-needs/clothing
+url_label: Source
+status: unclear
+note: Newest news story is from 2023 and the shop has no website we could find.
+sources:
+  - url: https://wrc.wvu.edu/resources/basic-needs/clothing
+    checked: 2026-10-30
+  - url: https://www.dominionpost.com/2023/08/23/wear-and-ware-it-again-is-truly-a-thrifters-paradise/
+    checked: 2026-10-30
