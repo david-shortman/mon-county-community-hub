@@ -1,16 +1,24 @@
 name: 311 totals
 
-# Morgantown 311 big-picture totals (#881, part of #86). Runs only when
-# someone starts it from the Actions tab. It reads the public SeeClickFix API
+# Morgantown 311 big-picture totals (#881, part of #86). Runs on its own
+# every Monday, and once whenever this file or its script changes on main
+# (David, 2026-10-31: every run is automatic, nothing manual). It reads the public SeeClickFix API
 # on a GitHub runner (the API refuses our cloud sandbox) and prints a few
 # totals: requests opened and closed in the last 12 months and the median
 # days to close, overall and for street maintenance and potholes. It never
 # saves or posts single requests. It opens or updates one issue for Duet with
-# the totals, and a person copies them into content/ through a PR after
-# checking them. Free: no key, no account, no Claude. Rules: David's decision
+# the totals, and Duet or a build session copies them into content/ through
+# a PR after checking them. Free: no key, no account, no Claude. Rules: David's decision
 # on #300 (a few totals, credited "Data from SeeClickFix, Morgantown 311.").
 
 on:
+  schedule:
+    - cron: '23 13 * * 1' # Mondays, off the hour
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/311-totals.yml
+      - site/scripts/check-311.mjs
   workflow_dispatch:
 
 permissions:

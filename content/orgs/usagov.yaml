@@ -1,0 +1,10 @@
+name: USAGov
+slug: usagov
+kind: government
+website: https://www.usa.gov/
+summary: The official guide to U.S. government information and services, run by the U.S. General Services Administration.
+topics: [government]
+area: national
+sources:
+  - url: https://www.usa.gov/report-a-death
+    checked: 2026-10-31

@@ -1,0 +1,19 @@
+title: Free legal questions by phone on Tuesday nights
+slug: wv-tuesday-legal-connect
+org: west-virginia-state-bar
+topics: [legal]
+who_it_is_for: Anyone in West Virginia with a legal question. Volunteer lawyers help callers figure out whether they have a legal problem, whether there are simple steps they can take on their own, and whether they need a lawyer. The State Bar says the volunteers give general legal information, not direct legal advice about your case.
+hours: Tuesdays, 6 p.m. to 8 p.m.
+opening_hours:
+  - days: [tue]
+    opens: "18:00"
+    closes: "20:00"
+what_to_do: Call 1-800-642-3617 on a Tuesday between 6 and 8 p.m. The call is toll free.
+contact:
+  phone: "1-800-642-3617"
+  url: https://wvlawyerreferral.org/pages/resources-hotline
+  url_label: About Tuesday Legal Connect
+cost: free
+sources:
+  - url: https://wvlawyerreferral.org/pages/resources-hotline
+    checked: 2026-10-31

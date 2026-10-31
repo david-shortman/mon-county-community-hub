@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+export const page = { door: "about", label: "Terms", summary: "What this site is, and what to know before you rely on it" };
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+---
+<Base title="Terms of use for Everything Morgantown" description="What Everything Morgantown is, what it can and can't do, and how to ask for a fix or removal.">
+  <h1>Terms</h1>
+  <p class="meta">Last updated October 30, 2026.</p>
+  <p class="lede">Everything Morgantown is a free guide to local help, run by a volunteer. By using it, you agree to the points below.</p>
+
+  <h2>What this site is</h2>
+  <p>A free, volunteer-run guide to help in Morgantown and Monongalia County, WV. It has no funding and no paid staff.</p>
+
+  <h2>Information can change</h2>
+  <p>We check every listing and show when we last checked it. Hours, rules, prices and deadlines still change. Call or check the source before you go.</p>
+  <p>This site shares general information. It is not legal, medical or money advice, and it does not take the place of a professional. In an emergency, call 911. In a crisis, call or text 988.</p>
+
+  <h2>Other sites</h2>
+  <p>Our links go to other groups' sites and phone numbers. We don't control them and can't promise what you find there. Any deal you make is with that group, not with us.</p>
+
+  <h2>Who owns what</h2>
+  <p>Our own writing and listing data are shared under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> (CC BY 4.0). Other groups' names, logos, PDFs and photos stay theirs.</p>
+
+  <h2>Fixes and removals</h2>
+  <p>If something is wrong, or a group wants its listing changed or removed, <a href={tellUs}>tell us</a>. Reports go to GitHub, which needs a free account, and are public. We act quickly, and each fix is listed on the <a href="../corrections/">Corrections</a> page.</p>
+
+  <h2>Changes to these terms</h2>
+  <p>We may change these terms. The date at the top shows when they were last updated.</p>
+</Base>

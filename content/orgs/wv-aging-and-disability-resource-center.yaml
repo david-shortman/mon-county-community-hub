@@ -1,0 +1,15 @@
+name: West Virginia Aging and Disability Resource Center (ADRC)
+slug: wv-aging-and-disability-resource-center
+kind: government
+website: https://www.wvadrc.com/
+phone: "866-981-2372"
+summary: A free statewide office with four regional offices. Its staff help older adults, people with disabilities and their caregivers find and apply for long-term services and supports. The Region I office in White Hall serves Monongalia County.
+topics: [disability, health]
+area: statewide
+sources:
+  - url: https://www.wvadrc.com/contact.html
+    checked: 2026-10-31
+  - url: https://br-wv.org/ask-the-experts/
+    checked: 2026-10-31
+  - url: http://www.wvseniorservices.gov/GettingAnswers/OverviewofAgingProgramsInWestVirginia/AgingampDisabilityResourceCenter/tabid/98/Default.aspx
+    checked: 2026-10-31

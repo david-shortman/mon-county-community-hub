@@ -1,0 +1,29 @@
+title: Change your name through the court
+slug: mon-name-change-petition
+org: monongalia-county-circuit-clerk
+topics: [legal, family]
+who_it_is_for: People who want to change their own legal name, or their child's, through a court. State law says you ask the circuit court or family court of the county where you live. It also lists things you must swear to in the petition, such as how long you have lived in the county and that the change is not to avoid debts or the law.
+what_to_do: State law says you file a sworn petition, then publish a notice of the hearing in a local newspaper as a legal ad at least 10 days before the hearing. In Monongalia County, the Circuit Clerk keeps the records for both Circuit Court and Family Court. Call the Circuit Clerk at 304-291-7240 to ask how to file and what it costs. The office is at the Monongalia County Justice Center, 75 High Street, Suite 12.
+hours: Monday to Friday, 8:30 a.m. to noon and 1 p.m. to 5 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:30"
+    closes: "12:00"
+  - days: [mon, tue, wed, thu, fri]
+    opens: "13:00"
+    closes: "17:00"
+get_in: call-first
+contact:
+  phone: "304-291-7240"
+  url: https://code.wvlegislature.gov/48-25-101/
+  url_label: The state law on name changes
+  place: 75 High Street, Suite 12, Morgantown, WV 26505
+cost: There are court and newspaper costs. Ask the Circuit Clerk. You can ask to have court fees waived if you cannot afford them.
+if_you_want_help: [legal-aid-wv-civil-legal-help, wv-lawyer-referral-service]
+sources:
+  - url: https://code.wvlegislature.gov/48-25-101/
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/info-for/public
+    checked: 2026-10-31
+  - url: http://www.monongaliacircuitclerk.com/
+    checked: 2026-10-31
