@@ -67,8 +67,9 @@ export function pickForRun(list, perRun, { keep = new Set(), day = Math.floor(Da
 }
 
 // Content folders that hold facts residents rely on. Findability results and
-// corrections hold search results and reports, not our sources.
-const SKIP_CONTENT = new Set(['findability', 'corrections']);
+// corrections hold search results and reports, and checklists hold to-do
+// links for people (#752), not our sources.
+const SKIP_CONTENT = new Set(['findability', 'corrections', 'checklists']);
 
 // ---------- rules ----------
 export function loadRules(file = path.join(CONTENT_DIR, 'source-rules.yaml')) {

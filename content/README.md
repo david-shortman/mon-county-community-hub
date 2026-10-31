@@ -574,3 +574,10 @@ sections:
 ```
 
 Rules: copy labels, fees, days and times exactly as printed; put the PDF's own words in quotes where you add a word around them. Never reword rules or eligibility. If the PDF is a scan, read it off the page image and say so in a comment at the top of the file. If the PDF disagrees with a newer official page, say who says what, or leave the item off and open a `needs-verification` issue. `npm run check-content` checks the fields, the dates and that every PDF link has its date.
+
+## `watch/<group>.yaml` and `checklists/<id>.yaml`: recurring checks (not listings)
+
+Neither folder shows on the site. Both feed issues for a person, from the daily Source check. See [`docs/operations/recurring-checks.md`](../docs/operations/recurring-checks.md).
+
+- `watch/`: pages a robot reads every day, comparing only the part between `start` and `end` (#166). Optional list fields: `season` (`"11-01 to 03-31"`), `words`, `todo`, `plan`. A change opens or comments on one issue per list. Field notes are at the top of `watch/food.yaml` and `watch/shelter.yaml`.
+- `checklists/`: what a robot cannot read (#752, #718, #793). One standing issue per file, refreshed each week. Item fields: `text`, `url`, `when` (`month` or `quarter`: only in the first week of one), `months` (only in those months), `from` (not before that date), `run` (a computed list: `secondhand-due`, `past-sale-dates`, `better-stale-soon`). Preview with `npm run checklists` in `site/`.
