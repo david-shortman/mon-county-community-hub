@@ -162,12 +162,21 @@ export function shortUrl(u) {
 // alone, so we never credit a page to the wrong group.
 export const hostOf = (u) => new URL(u).hostname.replace(/^www\./, '');
 const sameSite = (a, b) => a === b || a.endsWith(`.${b}`) || b.endsWith(`.${a}`);
+// When an org's website is one page on someone else's site (the Westside
+// Senior Center's page on the City of Westover's site), a source from another
+// record is credited to it only when it is under that page. A record's own org
+// still gets credit for any page on the same site.
+const pathOf = (u) => new URL(u).pathname.replace(/\/+$/, '');
+function owns(o, url) {
+  const p = pathOf(o.website);
+  return !p || pathOf(url) === p || pathOf(url).startsWith(`${p}/`);
+}
 export function sourceOrg(url, orgSlug) {
   const h = hostOf(url);
   const orgs = loadDir('orgs').filter((o) => o.website);
   const own = orgs.find((o) => o.slug === orgSlug);
   if (own && sameSite(h, hostOf(own.website))) return own;
-  return orgs.find((o) => hostOf(o.website) === h) ?? null;
+  return orgs.find((o) => hostOf(o.website) === h && owns(o, url)) ?? null;
 }
 // A source on a .gov address is marked "(government site)". Only US
 // government bodies can register .gov, so the mark is never a guess. Other
