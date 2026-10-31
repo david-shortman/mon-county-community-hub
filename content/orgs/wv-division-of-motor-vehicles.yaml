@@ -1,0 +1,11 @@
+name: West Virginia Division of Motor Vehicles
+slug: wv-division-of-motor-vehicles
+kind: government
+website: https://dmv.wv.gov/
+phone: "304-558-3900"
+summary: The state office for driver's licenses, learner's permits, and vehicle titles and plates. It has a regional office in Morgantown.
+topics: [moving]
+area: statewide
+sources:
+  - url: https://dmv.wv.gov/node/118
+    checked: 2026-10-30
