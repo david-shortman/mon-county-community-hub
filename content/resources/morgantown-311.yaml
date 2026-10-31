@@ -1,0 +1,15 @@
+title: Morgantown 311 service requests
+slug: morgantown-311
+org: city-of-morgantown
+topics: [government]
+who_it_is_for: Anyone reporting a problem to the City of Morgantown, such as graffiti, a pothole, a broken sidewalk or street sign, a tree that needs trimming, or a property that is not kept up.
+hours: Phone line Monday to Thursday, 7 a.m. to 5:30 p.m.
+what_to_do: Use the Morgantown 311 app or the website. Pick the category that fits, mark the spot, and add a photo if you can. Or call during office hours. Requests are public, but your email is not shown, and you can send one without your name.
+contact:
+  phone: "304-284-7405"
+  url: https://seeclickfix.com/morgantown
+  url_label: Report online
+cost: free
+sources:
+  - url: https://www.morgantownwv.gov/428/Service-Request
+    checked: 2026-10-30
