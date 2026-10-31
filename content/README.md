@@ -325,6 +325,7 @@ who_can_serve: City residents.   # optional; only what the source says
 open_seats: 0                    # from the city's vacancy list
 page_vacant: 1                   # optional; vacant seats the board's own page shows, when it differs from the list
 section: other                   # optional; a board listed by name only under "Other city boards with open seats". Needs open_note (like "1 alternate seat") instead of decides and meets
+# section: county                 # a County Commission board from the county's list: needs created and meets, no seat counts
 url: https://www.morgantownwv.gov/264/Tree-Board
 topics: [better]
 sources:
