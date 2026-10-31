@@ -328,7 +328,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .crisis-line { margin: 0 0 12px; padding: 6px 12px; border-left: 4px solid var(--brick); background: var(--accent-bg); font-weight: 600; }
       .crisis-line a { font-weight: 800; padding: 6px 2px; }
       html:has(.crisis-strip) { scroll-padding-top: 8rem; }
-      footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; }
+      footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; overflow-wrap: anywhere; } /* long email address wraps at 320px */
     </style>
   </head>
   <body>
