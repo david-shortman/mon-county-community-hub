@@ -31,6 +31,7 @@ export function GET({ site }) {
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
 - [Dentist or prescriptions](${u('/dental-and-prescriptions/')}): a dentist with no dental insurance (health department dental clinic, WVU Dental) and help paying for medicine (Milan Puskar Health Right free clinic)
 - [Turning 65 or on Medicare](${u('/turning-65/')}): when to sign up, visits and shots Medicare pays for, free help from WV SHIP, help paying Medicare costs
+- [Diabetes, blood pressure or weight](${u('/diabetes-and-weight/')}): health department dietitians with a sliding fee, and free diabetes and heart clinics for Health Right patients
 - [Ride to a medical visit](${u('/medical-rides/')}): Medicaid and WVCHIP rides through Modivcare (book 5 business days ahead), and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares
 - [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
@@ -62,10 +63,12 @@ ${centers}
 - [Serve on a city board](${u('/make-it-better/boards/')}): city boards that shape how Morgantown looks and feels (Urban Landscape Commission, Tree Board, Cultural Arts, Historic Landmarks, Planning, and more), what each does, when it meets, open seats from the city's vacancy list, and how to apply
 - [Get money for a project](${u('/make-it-better/grants/')}): Morgantown Mosaic neighborhood grants, state Community Tree Grants, Organizational Arts Grants and state arts grants: who can apply, how much, match, and the next date (or that it is not announced)
 - [Adopt a street, spot, stream or trail](${u('/make-it-better/adopt/')}): Morgantown's Adopt-A-Street, the state's Adopt-A-Highway, Adopt-A-Spot and Adopt-A-Stream, and BOPARC trail cleanups compared: what you adopt, how long, how often you clean, what you get, and how to start
+- [Have your say at a public meeting](${u('/have-your-say/')}): when Morgantown City Council, the Monongalia County Commission, the Board of Education, BOPARC and the Planning Commission meet, how public comment works at each (from official pages), and where agendas are
 - [Older adults and retirees](${u('/for/older-adults/')}): a starting page that links to Medicare, care at home, food and bill help, veterans help, and ways to stay involved
 - [Parents of babies and toddlers](${u('/for/parents-young-kids/')}): a starting page that links to child development help, Pre-K and Head Start, playgroups, checkups and food help
 - [New to Mon County](${u('/for/new-to-mon-county/')}): a starting page that links to starting utilities, trash day, care, kids, work and English lessons, and this month's events
 - [People with disabilities and caregivers](${u('/for/disability-and-caregivers/')}): a starting page that links to independent living, care at home through Medicaid, job help and health costs
+- [Free car seat checks](${u('/car-seat-checks/')}): the two child car seat fitting stations the WV DMV lists for Mon County (Sheriff's Department, WVU Medicine Children's), free, by appointment
 
 ## Data
 
