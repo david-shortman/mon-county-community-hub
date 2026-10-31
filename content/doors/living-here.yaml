@@ -39,7 +39,15 @@ steps:
     resource: mountain-line-fares
     text: Look up your route and times on Mountain Line's trip planner. Have your fare ready, or swipe your WVU ID.
     action: Check fares
+  power-out:
+    when: today
+    resource: mon-power-report-outage
+    text: Report the outage to Mon Power by phone or text. If a power line is down, call 911 and stay at least 30 feet away.
 situations:
+  - id: who-serves
+    label: Who handles police, trash, water and roads where I live?
+    page: /who-serves-me/
+    steps: [swa]
   - id: moving
     label: I'm moving here and need to start power, water, gas or trash
     page: /moving-here/
@@ -68,6 +76,14 @@ situations:
     label: I need to get around without a car
     page: /getting-around/
     steps: [bus]
+  - id: storm
+    label: Storm damage, flooding or power out
+    page: /after-a-storm/
+    steps: [power-out]
 also:
   - text: Can't pay a water or power bill
     href: /utility-bills/
+  - text: "Homeowners: where to start"
+    href: /for/homeowners/
+  - text: "New to Mon County: where to start"
+    href: /for/new-to-mon-county/

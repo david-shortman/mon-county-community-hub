@@ -1,0 +1,13 @@
+title: Is my bus running late? Mountain Line's ticker
+slug: mountain-line-ticker
+org: mountain-line-transit-authority
+topics: [weather]
+who_it_is_for: People who ride Mountain Line buses.
+what_to_do: Mountain Line's ticker page tells you when your bus is running behind. It is also on X (Twitter) at @MLticker, and is updated during service hours, 7 a.m. to 8 p.m. daily. Questions, call 304-291-7433 (304-291-RIDE).
+contact:
+  phone: "304-291-7433"
+  url: https://www.busride.org/pda-ticker
+  url_label: Bus ticker
+sources:
+  - url: https://www.busride.org/pda-ticker
+    checked: 2026-10-31

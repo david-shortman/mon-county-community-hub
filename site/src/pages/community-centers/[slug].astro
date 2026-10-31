@@ -90,7 +90,7 @@ const where = `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|E
 
   <h2>Sources</h2>
   <SourceLine sources={p.sources} about={p.name}>{p.phone_confirmed && ` Confirmed by phone ${prettyDate(p.phone_confirmed)}.`}</SourceLine>
-  <p class="meta">Something wrong here? <a href={reportUrl({ title: p.name, slug: p.slug, url: p.sources[0]?.url })}>Report a problem<span class="sr-only"> with {p.name} (opens GitHub)</span></a>. Fixes we make are listed on the <a href={`${base}/corrections/`}>Corrections page</a>. Work at this center? You can ask us to fix or remove this listing: see <a href={`${base}/partners/`}>For groups and helpers</a>.</p>
+  <p class="meta">Something wrong here? <a href={reportUrl({ slug: p.slug, page: Astro.url.pathname })}>Report a problem<span class="sr-only"> with {p.name} (opens our fix form)</span></a>. Fixes we make are listed on the <a href={`${base}/corrections/`}>Corrections page</a>. Work at this center? You can ask us to fix or remove this listing: see <a href={`${base}/partners/`}>For groups and helpers</a>.</p>
   <p><a href={`${base}${SECTION.route}${p.slug}/flyer/`}>Print a flyer for {p.name}</a>: one page with a QR code, to post on a bulletin board.</p>
   <p class="more"><a href={`${base}${SECTION.route}`}>All {SECTION.name.toLowerCase()}</a></p>
 </Base>

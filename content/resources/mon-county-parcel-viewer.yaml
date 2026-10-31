@@ -1,0 +1,15 @@
+title: Check if an address is inside a town (county map)
+slug: mon-county-parcel-viewer
+org: monongalia-county-commission
+topics: [moving]
+who_it_is_for: Anyone who wants to see whether a property is inside Morgantown, Westover, Star City, Granville or Blacksville.
+what_to_do: Open the county's free GIS Parcel Viewer and find the address. Turn on the map layer named IncorporatedPlace to see town lines. The county says the map is not a legal record, so check with the town if it matters.
+contact:
+  url: https://experience.arcgis.com/experience/ebaf60bd87bd475ea7b4710a575eb3eb
+  url_label: Open the county map
+cost: free
+sources:
+  - url: https://experience.arcgis.com/experience/ebaf60bd87bd475ea7b4710a575eb3eb
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
+    checked: 2026-10-30

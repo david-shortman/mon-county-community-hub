@@ -6,53 +6,17 @@
 // Prints one line per file with the reason. Exit code is always 0.
 import { execFileSync } from 'node:child_process';
 import YAML from 'yaml';
+// The rules themselves live in scripts/high-stakes-rules.mjs, so the
+// translation check can use them too (#1083).
+import { PAGES, CONTENT, contentHit, mentionsCrisis, changedLines, pageHit, translationHit, englishPageFiles, withoutLocale, I18N_FILE, flipsLanguage } from './high-stakes-rules.mjs';
+import { parseTranslationPath } from '../src/lib/i18n.mjs';
 
-// Pages and parts that show shelter, crisis help, food or benefits. Any page
-// file also counts if it is in the Help now or Get through this month door, has
-// one of TOPICS, or names a crisis line (see pageHit below).
-const PAGES = [
-  'site/src/pages/help/food/',
-  'site/src/components/CrisisStrip.astro',
-  'site/src/components/CrisisLine.astro',
-];
-const DOORS = ['help-now', 'this-month'];
-// Entries with these topics feed those pages.
-const TOPICS = ['housing', 'money', 'food'];
-// Crisis lines, matched in an entry's text.
-const CRISIS = /\b(988|211|911)\b|crisis/i;
-// Other crisis numbers the site uses, and the slugs of the records that hold
-// crisis lines, so code that pulls one in by slug counts too (#776): 211's
-// text line, the Veterans Crisis Line's text line, the RDVIC 24-hour hotline,
-// and the VA line for homeless veterans.
-const CRISIS_MORE = /\b(898-211|838255|304-292-5100|877-424-3838)\b|\b(988-lifeline|veterans-crisis-line|wv-211|rdvic-hotline|va-homeless-veterans-line)\b/;
-export const mentionsCrisis = (text) => CRISIS.test(text) || CRISIS_MORE.test(text);
-// Records that feed listings. Places (content/places, schema v2) say what
-// they are about in `interests` (for example a free meal has `food`), so both
-// `topics` and `interests` are read.
-const CONTENT = /^content\/(resources|orgs|calendar|places)\/[^/]+\.ya?ml$/;
-
-// Why a record file is high stakes, or null: a topic or interest in TOPICS,
-// or a crisis line in its text.
-export function contentHit(text) {
-  let data = null;
-  try { data = YAML.parse(text); } catch { /* bad YAML is check-content's job */ }
-  const tags = [].concat(data?.topics ?? [], data?.interests ?? []);
-  const hit = tags.find((t) => TOPICS.includes(t));
-  if (hit) return `topic ${hit}`;
-  if (mentionsCrisis(text)) return 'mentions a crisis line';
-  return null;
-}
 // Other files residents see through the site: code under site/src (lib,
 // components, layouts, data) and other content folders (doors, places...).
 // For these only the changed lines are read, so a small edit to a shared
 // component that already shows 911 does not wait for David, but adding or
 // changing a crisis line anywhere does.
 const OTHER = /^(site\/src\/|content\/)/;
-
-// The lines a diff adds or removes, without the file headers.
-export function changedLines(diff) {
-  return diff.split('\n').filter((l) => /^[+-]/.test(l) && !/^(\+\+\+|---) /.test(l)).map((l) => l.slice(1));
-}
 
 // node scripts/high-stakes.mjs --self-test: checks the rules above on samples.
 if (process.argv[2] === '--self-test') {
@@ -74,6 +38,32 @@ if (process.argv[2] === '--self-test') {
   expect(contentHit('name: Hall\nkind: fire-hall\nnotes:\n  - In an emergency, call 911.\n') === 'mentions a crisis line', 'a place that names 911 should count');
   expect(contentHit('name: Book club\nkind: group\ninterests: [books, social]\n') === null, 'a book club should not count');
   expect(CONTENT.test('content/places/smithtown.yaml'), 'content/places files should be read as records');
+  // Translations (#1083): a translation counts when its English source does.
+  const files = {
+    'content/resources/rent-help.yaml': 'title: Rent help\ntopics: [housing]\n',
+    'content/resources/book-club.yaml': 'title: Book club\ntopics: [arts]\n',
+    'site/src/pages/help-in-your-language.astro': "export const page = { door: 'new-here', label: 'Help in your language' };\n<p>Ask for an interpreter.</p>",
+    'site/src/pages/help/food/index.astro': '<p>Food</p>',
+    'site/src/components/CrisisStrip.astro': '<p>Call or text 988</p>',
+  };
+  const readFake = (f) => files[f] ?? '';
+  expect(translationHit('content/translations/es/resources/rent-help.yaml', 'fields: {}', readFake)?.includes('topic housing'), 'a translation of a housing record should count');
+  expect(translationHit('content/translations/es/resources/book-club.yaml', 'fields:\n  title: Club de lectura\n', readFake) === null, 'a translation of a book club should not count');
+  expect(translationHit('content/translations/es/resources/book-club.yaml', 'fields:\n  title: Llame al 988\n', readFake)?.includes('crisis'), 'a translation that adds 988 should count');
+  expect(translationHit('content/translations/es/parts/CrisisStrip.yaml', 'strings: {}', readFake)?.includes('parts/CrisisStrip'), 'a translation of the crisis strip should count');
+  expect(translationHit('content/translations/es/pages/help/food.yaml', 'strings: {}', readFake)?.includes('pages/help/food'), 'a translation of a food page should count');
+  expect(translationHit('content/translations/es/pages/help-in-your-language.yaml', 'strings: {}', readFake) === null, 'a translation of a low-stakes page should not count');
+  expect(translationHit('content/resources/rent-help.yaml', '', readFake) === null, 'an English record is not a translation');
+  expect(pageHit('site/src/pages/es/help/food/index.astro', '<p>Comida</p>'), 'a Spanish food page should count like the English one');
+  expect(withoutLocale('site/src/pages/es/money.astro') === 'site/src/pages/money.astro', 'withoutLocale should drop the language folder');
+  expect(withoutLocale('site/src/pages/events/x.astro') === 'site/src/pages/events/x.astro', 'withoutLocale should leave other folders alone');
+  expect(englishPageFiles('site/src/pages/es/money.astro').includes('site/src/pages/money.astro'), 'a Spanish page should map to its English page');
+  expect(englishPageFiles('site/src/pages/es/help/food/index.astro').includes('site/src/pages/help/food/index.astro'), 'a Spanish index page should map to its English page');
+  expect(flipsLanguage("-export const PUBLISHED = [];\n+export const PUBLISHED = ['es'];"), 'turning a language on should count');
+  expect(flipsLanguage("-export const PUBLISHED = ['es'];\n+export const PUBLISHED = [];"), 'turning a language off should count');
+  expect(flipsLanguage('-export const ALLOW_MACHINE_DRAFTS = false;\n+export const ALLOW_MACHINE_DRAFTS = true;'), 'allowing machine drafts should count');
+  expect(!flipsLanguage('+export const PUBLISHED = [];\n+export const ALLOW_MACHINE_DRAFTS = false;'), 'a new i18n.mjs with the defaults should not count');
+  expect(!flipsLanguage('-// old comment\n+// a comment about languages'), 'other edits to i18n.mjs should not count');
   if (fails.length) { console.error(`high-stakes self-test failed:\n- ${fails.join('\n- ')}`); process.exit(1); }
   console.log('high-stakes self-test passed.');
   process.exit(0);
@@ -105,20 +95,30 @@ function onlyHides(file) {
   } catch { return false; }
 }
 
+const diffLines = (file) => changedLines(git('diff', '-U0', `${base}...HEAD`, '--', file));
+
 for (const file of changed) {
-  const page = PAGES.find((p) => (p.endsWith('/') ? file.startsWith(p) : file === p));
-  if (page) { console.log(`${file}: a shelter, crisis, food or benefits page`); continue; }
+  // Turning a language on, or allowing machine drafts, changes what
+  // residents see (#1067), so it waits for David.
+  if (file === I18N_FILE && flipsLanguage(git('diff', '-U0', `${base}...HEAD`, '--', file))) { console.log(`${file}: turns a language or machine drafts on or off`); continue; }
+  // A translation file counts when its English source does (#1083).
+  if (parseTranslationPath(file)) {
+    const why = translationHit(file, read(file), read);
+    if (why) console.log(`${file}: ${why}`);
+    continue;
+  }
+  // Listed pages and parts (the food pages, the crisis strip), in any language.
+  const plain = withoutLocale(file);
+  if (PAGES.some((p) => (p.endsWith('/') ? plain.startsWith(p) : plain === p))) { console.log(`${file}: a shelter, crisis, food or benefits page`); continue; }
   if (/^site\/src\/pages\/.+\.astro$/.test(file)) {
-    const text = read(file);
-    const door = text.match(/door:\s*["']([a-z-]+)["']/)?.[1];
-    const topic = text.match(/topic:\s*["']([a-z-]+)["']/)?.[1];
-    if (DOORS.includes(door)) console.log(`${file}: in the ${door} door`);
-    else if (TOPICS.includes(topic)) console.log(`${file}: page topic ${topic}`);
-    else if (mentionsCrisis(text)) console.log(`${file}: names a crisis line`);
+    // A page in a language folder also follows the rules of its English page.
+    const english = plain !== file ? englishPageFiles(file).map((f) => [f, read(f)]).find(([, t]) => t) : null;
+    const why = pageHit(file, read(file)) ?? (english ? pageHit(english[0], english[1]) : null);
+    if (why) console.log(`${file}: ${why}`);
     continue;
   }
   if (!CONTENT.test(file)) {
-    if (OTHER.test(file) && mentionsCrisis(changedLines(git('diff', '-U0', `${base}...HEAD`, '--', file)).join('\n'))) console.log(`${file}: changes a line that names a crisis line`);
+    if (OTHER.test(file) && mentionsCrisis(diffLines(file).join('\n'))) console.log(`${file}: changes a line that names a crisis line`);
     continue;
   }
   if (onlyHides(file)) continue;

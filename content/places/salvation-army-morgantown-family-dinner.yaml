@@ -1,0 +1,25 @@
+name: Salvation Army Sunday Family Dinner
+slug: salvation-army-morgantown-family-dinner
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: nonprofit
+  text: The Salvation Army Morgantown Corps
+story: A Sunday evening family dinner at Hope Café.
+regular:
+  - Sundays, 6 p.m.
+interests: [food, social]
+tags: [weekly]
+contact:
+  url: https://morgantown.salvationarmypotomac.org/
+  phone: "304-296-3525"
+  place: Hope Café, 20 Scott Avenue, Morgantown, WV
+status: active
+notes:
+  - Call the corps office (Monday to Friday, 9 a.m. to 4 p.m.) to confirm before going.
+sources:
+  - url: https://morgantown.salvationarmypotomac.org/
+    checked: 2026-10-30
+  - url: https://southernusa.salvationarmy.org/morgantown/
+    checked: 2026-10-30

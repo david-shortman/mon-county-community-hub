@@ -1,0 +1,24 @@
+title: Replace a lost or stolen West Virginia driver's license or ID
+slug: wv-dmv-replace-lost-id
+org: wv-dmv
+topics: [records]
+who_it_is_for: People whose West Virginia driver's license or ID card was lost, stolen or destroyed.
+what_to_do: Apply for a duplicate at a DMV regional office. You get a temporary card, and the new card comes in the mail. What you bring depends on which kind of card you want.
+contact:
+  phone: "1-800-642-9066"
+  url: https://dmv.wv.gov/not-federal-identification-card-requirements
+  url_label: Duplicate card rules
+cost: A duplicate driver's license is $7.50. A REAL ID costs $10 more.
+what_to_bring:
+  - "For a regular card (\"Not for Federal Identification\"): one proof of identity and one proof of WV residency. If you moved since your last card, bring two proofs of residency. If your legal name changed, bring proof of the change."
+  - "For a REAL ID: one proof of identity, one proof of Social Security number, two proofs of WV residency with your name and street address, and proof of any legal name change."
+if_you_want_help: [wv-dmv-morgantown-office]
+sources:
+  - url: https://dmv.wv.gov/not-federal-identification-card-requirements
+    checked: 2026-10-31
+  - url: https://dmv.wv.gov/federal-identification-real-id-card-requirements
+    checked: 2026-10-31
+  - url: https://dmv.wv.gov/license-and-renewal-fees
+    checked: 2026-10-31
+  - url: https://dmv.wv.gov/driver-services/drivers/drivers-licenses-and-id-cards
+    checked: 2026-10-31

@@ -1,0 +1,9 @@
+name: Federal Trade Commission
+slug: us-federal-trade-commission
+kind: government
+summary: The federal agency that protects consumers. Its Funeral Rule sets what funeral homes must tell you about prices.
+topics: [records]
+area: national
+sources:
+  - url: https://www.ecfr.gov/current/title-16/part-453
+    checked: 2026-10-31

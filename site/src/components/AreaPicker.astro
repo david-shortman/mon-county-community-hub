@@ -8,15 +8,18 @@
 // Usage: <AreaPicker areas={[{ slug, name }]} /> once on the page, and
 // data-area={slug} on each area's section. The sections must sit next to each
 // other under one parent; the picked area moves to the front of that group.
+// An area can also name its town page ({ slug, name, town: { name, href } }),
+// and the picker then links to it when that area is picked (#1120).
 const { areas = [] } = Astro.props;
 ---
 <form class="area-picker" hidden aria-label="Put your area first">
   <label for="area-pick">Your area</label>
   <select id="area-pick">
     <option value="">Show all in the usual order</option>
-    {areas.map((a) => <option value={a.slug}>{a.name}</option>)}
+    {areas.map((a) => <option value={a.slug} data-town-name={a.town?.name} data-town-href={a.town?.href}>{a.name}</option>)}
   </select>
   <p class="meta" aria-live="polite"><span class="area-status"></span> Saved on this phone only. We never see it.</p>
+  <p class="area-town" hidden><a href="#"></a></p>
 </form>
 <script is:inline>
   // Runs after the page loads, since the area sections come after the picker.
@@ -36,6 +39,14 @@ const { areas = [] } = Astro.props;
       order.forEach(function (el) { parent.insertBefore(el, groupEnd); });
       var name = slug && select.selectedOptions[0] ? select.selectedOptions[0].text : '';
       status.textContent = name ? name + ' is shown first.' : '';
+      var opt = slug ? select.selectedOptions[0] : null;
+      var town = form.querySelector('.area-town');
+      var href = opt && opt.getAttribute('data-town-href');
+      if (town && href) {
+        town.firstChild.href = href;
+        town.firstChild.textContent = 'More for ' + opt.getAttribute('data-town-name') + ': who to call, meetings, dates and buses';
+        town.hidden = false;
+      } else if (town) town.hidden = true;
     }
     var saved = '';
     try { saved = localStorage.getItem('em-area') || ''; } catch (e) { /* storage blocked */ }
@@ -53,4 +64,5 @@ const { areas = [] } = Astro.props;
   .area-picker label { display: block; font-weight: 700; margin-bottom: 4px; }
   .area-picker select { font: inherit; padding: 10px; min-height: 44px; max-width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--fg); }
   .area-picker .meta { margin: 6px 0 0; }
+  .area-picker .area-town { margin: 6px 0 0; }
 </style>

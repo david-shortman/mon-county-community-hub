@@ -1,0 +1,42 @@
+title: Getting where you need to go
+slug: transportation
+summary: About 1 in 12 adults in Mon County lacked reliable transportation in the past year. Transportation shows up in every local needs survey, as a quality of life problem and as a reason care is hard to get.
+evidence:
+  - url: https://data.cdc.gov/d/swc5-untb
+    checked: 2026-10-31
+    shows: CDC estimates the share of adults who lacked reliable transportation in the past year. It is a model-based estimate, not a count.
+    figure: "8.3% of adults (likely between 6.7% and 10.3%)"
+    data_date: "2023"
+    publisher: CDC PLACES (2025 release)
+  - url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    checked: 2026-10-31
+    shows: Access to transportation was named a top quality of life problem in the 2025 community survey (page 23).
+    figure: "21% of respondents"
+    data_date: "2025"
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: North Central West Virginia Community Action's 2022 assessment ranked transportation third for Monongalia County, naming bus schedules and where buses go. The health department's 2025 survey named transportation as one thing that makes care hard to get (pages 54 and 56 of the PDF).
+    data_date: 2022 and 2025
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+affected:
+  estimate: "8.3% of adults"
+  description: Adults in Monongalia County who lacked reliable transportation in the past year, as estimated by CDC.
+  url: https://data.cdc.gov/d/swc5-untb
+  checked: 2026-10-31
+severity: medium
+severity_why: Without a ride, people miss work, appointments and food shopping.
+trend: unknown
+working_on:
+  - org: mountain-line-transit-authority
+  - org: modivcare
+  - org: morgantown-monongalia-mpo
+  - org: senior-monongalians
+gaps:
+  - Whether a bus can get you to a place and back the same day is not shown on most listings (issue 407).
+  - Rides for older adults and for medical visits come from several programs (issue 562).
+topics: [moving, health]
+rank: 11
+rank_why: "Score 9 of 12: severity 2, reach 2, agreement 3, room to help 2."
+questions: [q28, q29]
+issues: [407, 562, 580]

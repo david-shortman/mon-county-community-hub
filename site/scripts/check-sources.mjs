@@ -48,11 +48,28 @@ export const T = {
   maxRedirects: 6,
   maxBytes: 4_000_000,
   maxCrawlDelayMs: 15_000, // honor a site's Crawl-delay up to this
+  hostBudgetMs: 8 * 60_000, // time one site may take per run (the job stops at 30 minutes)
 };
 
+// Which of a site's sources to fetch this run. A slow site (a long Crawl-delay
+// and many sources) cannot all fit in one run, so watched and Help now pages
+// always go, and the rest take turns, a different slice each day. Sources not
+// fetched keep their last saved fingerprint.
+export function pickForRun(list, perRun, { keep = new Set(), day = Math.floor(Date.now() / 86_400_000) } = {}) {
+  if (list.length <= perRun) return list;
+  const first = list.filter((s) => keep.has(s.url) || s.help_now);
+  const rest = list.filter((s) => !keep.has(s.url) && !s.help_now);
+  const room = Math.max(0, perRun - first.length);
+  if (!room || !rest.length) return first;
+  const start = (day * room) % rest.length;
+  const turn = [...rest.slice(start), ...rest.slice(0, start)].slice(0, room);
+  return [...first, ...turn];
+}
+
 // Content folders that hold facts residents rely on. Findability results and
-// corrections hold search results and reports, not our sources.
-const SKIP_CONTENT = new Set(['findability', 'corrections']);
+// corrections hold search results and reports, and checklists hold to-do
+// links for people (#752), not our sources.
+const SKIP_CONTENT = new Set(['findability', 'corrections', 'checklists']);
 
 // ---------- rules ----------
 export function loadRules(file = path.join(CONTENT_DIR, 'source-rules.yaml')) {
@@ -361,6 +378,7 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
   // Hosts with Help now sources go first.
   const hosts = [...byHost.keys()].sort((a, b) => (byHost.get(b).some((s) => s.help_now) - byHost.get(a).some((s) => s.help_now)) || a.localeCompare(b));
   const results = new Map();
+  const deferred = [];
   let next = 0;
   await Promise.all(Array.from({ length: T.hostConcurrency }, async () => {
     while (next < hosts.length) {
@@ -378,7 +396,10 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
         }
         await sleep(T.pauseMs);
       } catch { /* no robots.txt: allowed */ }
-      for (const s of list) {
+      const perRun = Math.max(1, Math.floor(T.hostBudgetMs / (pause + 1_000)));
+      const picked = pickForRun(list, perRun, { keep: keepText });
+      if (picked.length < list.length) deferred.push({ host, checked: picked.length, total: list.length, delay: pause / 1000 });
+      for (const s of picked) {
         const u = new URL(s.url);
         if (!robotsAllows(robots, u.pathname + u.search)) { results.set(s.url, { state: 'robots', status: null }); continue; }
         const r = await fetchSource(s.url);
@@ -410,6 +431,7 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
       }
     }
   }));
+  results.deferred = deferred;
   return results;
 }
 
@@ -511,6 +533,7 @@ export function reportMd(rep, { cap = 40 } = {}) {
   section('Same site, new address (update the link)', rep.redirected, (r) => `${r.url} now ${r.final}`);
   section('Robots.txt asks us not to fetch (check by hand)', rep.robots, (r) => `${r.url} on ${where(r)}`);
   section('Checked by hand on the sweep, never fetched', rep.manual, (r) => `${r.url} (${r.why}) on ${where(r)}`);
+  if (rep.deferred?.length) L.push(`Slow sites take turns (their robots.txt asks for a pause between requests): ${rep.deferred.map((d) => `${d.host} ${d.checked} of ${d.total}`).join(', ')} checked this run. The rest keep their last result.`, '');
   if (rep.status === 'ok' && !rep.changed.length) L.push('Nothing to do.');
   return L.join('\n');
 }
@@ -568,6 +591,7 @@ async function main() {
   for (const r of results.values()) delete r.text; // keep the JSON report small
   const rep = buildReport(registry, results, prev);
   rep.watch = watch.groups;
+  rep.deferred = results.deferred;
   rep.state['~watch'] = watch.state;
   const md = `${reportMd(rep)}\n\n${watchMd(watch)}`;
   if (opt('json')) fs.writeFileSync(opt('json'), JSON.stringify(rep, null, 2));

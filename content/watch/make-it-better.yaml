@@ -1,0 +1,44 @@
+# Make it better pages the daily Source check watches closely (#793): the
+# places where a grant round opens or a board seat count changes. A change
+# opens one issue; the weekly checklist (content/checklists/make-it-better.yaml)
+# covers the rest. Fields: see content/watch/food.yaml and shelter.yaml.
+group: make-it-better
+title: Make it better grant and seat pages
+issue_title: Make it better grant or seat page changed
+plan: docs/operations/make-it-better-checks.md
+todo: >-
+  What to do: open each page and read it. If a grant round opened, a deadline
+  was posted, or seat counts changed, update the entry (or content/boards/)
+  and its checked date in a PR, and add a calendar entry for a posted
+  deadline. Never guess a date. If nothing that we list changed, update
+  start, end or quote here so the alarm stops, then close this issue.
+entries:
+  - name: City vacancy list (open board seats)
+    kind: page
+    url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+    checked: 2026-10-31
+    note: The whole page is compared. The city site sometimes refuses robots (403); then it is listed as not read, not as changed.
+
+  - name: Organizational Arts Grants (Your Community Foundation)
+    kind: page
+    url: https://ycfwv.org/arts-fund-grants/
+    start: Grant Schedule
+    end: The Organizational Arts Grant Committ
+    quote: Check back in April 2027 for the 2027-28 grant opportunity
+    checked: 2026-10-31
+
+  - name: WV Public Art grants
+    kind: page
+    url: https://wvculture.org/agencies/arts/grants/
+    start: Public Art Application Deadline
+    end: Download Public Art Guidelines
+    quote: Not currently open
+    checked: 2026-10-31
+
+  - name: WV Community Tree Grants
+    kind: page
+    url: https://wvforestry.com/urban-forestry
+    start: Community Tree Grants The Division
+    end: Community Tree Grant Forms
+    quote: The application submission deadline is continuous and ongoing, subject to funding availability
+    checked: 2026-10-31

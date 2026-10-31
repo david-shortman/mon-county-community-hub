@@ -3,33 +3,57 @@
 // Answers only from what the site and repo show today. "Not yet" marks a gap,
 // never a promise. Speaks for the project, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
+import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "Hard questions", summary: "Who runs it, why AI, how facts get checked, and where we fall short" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const tellUs = 'https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml';
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
 const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-reported-45-billion-ai-agreement-morrisey-says/';
 ---
 <Base title="Hard questions about Everything Morgantown" description="Straight answers about who runs Everything Morgantown, why it uses AI, how facts get checked, and where it falls short today.">
   <h1>Hard questions about this site</h1>
   <p class="lede">People should ask hard questions about any site that tells them where to get help. Here are straight answers. Where we fall short today, we say so.</p>
 
-  <h2>Who runs this site?</h2>
+  <nav aria-label="Questions on this page">
+    <ul class="jump">
+      <li><a href="#who-runs-this-site">Who runs this site?</a></li>
+      <li><a href="#is-david-from-west-virginia">Is David from West Virginia?</a></li>
+      <li><a href="#why-use-ai-at-all">Why use AI at all?</a></li>
+      <li><a href="#which-ai-who-makes-it">Which AI? Who makes it?</a></li>
+      <li><a href="#isnt-anthropic-tied-to-the-data-center-in-mason-county">Isn't Anthropic tied to the data center in Mason County?</a></li>
+      <li><a href="#does-a-person-check-every-page-before-it-goes-up">Does a person check every page before it goes up?</a></li>
+      <li><a href="#how-do-you-check-facts">How do you check facts?</a></li>
+      <li><a href="#what-happens-when-something-is-wrong">What happens when something is wrong?</a></li>
+      <li><a href="#how-do-i-tell-you-something-is-wrong">How do I tell you something is wrong?</a></li>
+      <li><a href="#does-this-replace-211-or-local-groups">Does this replace 211 or local groups?</a></li>
+      <li><a href="#does-it-take-anyones-job">Does it take anyone's job?</a></li>
+      <li><a href="#can-my-group-fix-or-remove-its-listing">Can my group fix or remove its listing?</a></li>
+      <li><a href="#who-pays-for-it">Who pays for it?</a></li>
+      <li><a href="#what-happens-if-david-stops">What happens if David stops?</a></li>
+      <li><a href="#what-do-you-know-about-me">What do you know about me?</a></li>
+      <li><a href="#is-this-political">Is this political?</a></li>
+      <li><a href="#is-this-a-government-site">Is this a government site?</a></li>
+      <li><a href="#who-wrote-this-page">Who wrote this page?</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="who-runs-this-site">Who runs this site?</h2>
   <p>David McCoy. He is a software developer who has lived in West Virginia since 2022. This is a volunteer project. He is the person responsible for it. AI does most of the research and writing.</p>
 
-  <h2>Is David from West Virginia?</h2>
+  <h2 id="is-david-from-west-virginia">Is David from West Virginia?</h2>
   <p>Not originally. David moved to West Virginia in 2022 and lives in Mon County. A newcomer can miss things that people who grew up here know. So the site sends you to the local groups doing the work and does not speak for them.</p>
   <p class="gap"><strong>Not yet:</strong> no one who grew up in Mon County reviews the pages yet.</p>
 
-  <h2>Why use AI at all?</h2>
+  <h2 id="why-use-ai-at-all">Why use AI at all?</h2>
   <p>There is a lot of good help in Morgantown and Monongalia County, but the details are spread across many sites, PDFs and phone lines, and they change often. One volunteer can't keep up with all of it. AI can reread sources every day. This site is a test of whether that can help people in Mon County.</p>
 
-  <h2>Which AI? Who makes it?</h2>
+  <h2 id="which-ai-who-makes-it">Which AI? Who makes it?</h2>
   <p>Claude, made by a company called Anthropic.</p>
 
-  <h2>Isn't Anthropic tied to the data center in Mason County?</h2>
+  <h2 id="isnt-anthropic-tied-to-the-data-center-in-mason-county">Isn't Anthropic tied to the data center in Mason County?</h2>
   <p>Yes, by news reports. In August 2026, <a href={wdtv}>WDTV reported</a> (we last checked the story on October 30, 2026), citing Bloomberg, that Anthropic agreed to buy computing at a data center campus in Mason County. Many people in West Virginia have real concerns about data centers: power, water, noise, and who gets a say. We think those concerns are fair. We are telling you up front so you can decide for yourself.</p>
   <p class="gap"><strong>Not yet:</strong> we do not know how much energy this site's AI work uses.</p>
 
-  <h2>Does a person check every page before it goes up?</h2>
+  <h2 id="does-a-person-check-every-page-before-it-goes-up">Does a person check every page before it goes up?</h2>
   <p>No, not today. The AI publishes most changes on its own. Before each change goes live, another AI run checks it against our rules for sources, plain words, fairness and privacy. Some changes always wait for David to check them first:</p>
   <ul>
     <li>pages and listings about shelter, crisis help, food and benefits</li>
@@ -40,7 +64,7 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
   <p>David looks over other pages when he can, after they are up.</p>
   <p class="gap"><strong>Not yet:</strong> David has not yet checked the shelter, crisis, food and benefits pages that were already up before October 30, 2026.</p>
 
-  <h2>How do you check facts?</h2>
+  <h2 id="how-do-you-check-facts">How do you check facts?</h2>
   <ul>
     <li>Every fact must be on a public page that the AI opened and read that same day. Most are the group's own page or a government page.</li>
     <li>Every listing links to that page and shows the date we last checked it.</li>
@@ -49,51 +73,53 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
     <li>A listing that has not been rechecked in 6 months gets flagged.</li>
   </ul>
 
-  <h2>What happens when something is wrong?</h2>
+  <h2 id="what-happens-when-something-is-wrong">What happens when something is wrong?</h2>
   <p>We fix it in the open and list the fix on our <a href={`${base}/corrections/`}>Corrections</a> page.</p>
   <p>AI can still get things wrong. Please check details with the group before you go, especially hours.</p>
 
-  <h2>How do I tell you something is wrong?</h2>
-  <p>Use the <a href={tellUs}>"Tell us"</a> or "Report a problem" link on any page. It opens a form on GitHub, a site where our work is stored. You need a free GitHub account, and what you write is public.</p>
-  <p class="gap"><strong>Not yet:</strong> there is no email address and no way to reach us without a GitHub account.</p>
+  <h2 id="how-do-i-tell-you-something-is-wrong">How do I tell you something is wrong?</h2>
+  <p>Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>, or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account, and what you send is not posted.</p>
+  <p>The <a href={tellUs}>"Tell us"</a> and "Report a problem" links on our pages open the same form.</p>
 
-  <h2>Does this replace 211 or local groups?</h2>
+  <h2 id="does-this-replace-211-or-local-groups">Does this replace 211 or local groups?</h2>
   <p>No. We send you to them. Our home page lists 211 first. You never sign up, apply or pay through us. You deal with the group directly. We don't ask any group to keep another list up to date for us.</p>
   <p class="gap"><strong>Not yet:</strong> we have not asked local groups or the people they serve what they think of the site. We plan to wait until the site is further along.</p>
 
-  <h2>Does it take anyone's job?</h2>
+  <h2 id="does-it-take-anyones-job">Does it take anyone's job?</h2>
   <p>It is not meant to. It does not do what 211 staff, librarians or pantry volunteers do. It sends people to them.</p>
 
-  <h2>Can my group fix or remove its listing?</h2>
-  <p>Yes. Use the "Tell us" link. We only post what your group has already made public, like your own website. A listing does not mean you work with us or approve of the site.</p>
-  <p class="gap"><strong>Not yet:</strong> this also needs a GitHub account for now.</p>
+  <h2 id="can-my-group-fix-or-remove-its-listing">Can my group fix or remove its listing?</h2>
+  <p>Yes. Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>, or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account. We only post what your group has already made public, like your own website. A listing does not mean you work with us or approve of the site.</p>
 
-  <h2>Who pays for it?</h2>
+  <h2 id="who-pays-for-it">Who pays for it?</h2>
   <p>David does. The web address costs about $10 to $20 a year. The AI runs on David's own Claude plan, which he already pays for. Hosting and the code tools are free. There are no ads, no donations and no funding.</p>
 
-  <h2>What happens if David stops?</h2>
+  <h2 id="what-happens-if-david-stops">What happens if David stops?</h2>
   <p>The site stays up, and the calendar feeds keep updating. New pages and rechecks stop. After about 6 months, listings start showing as past due for a recheck. All the data and code are free for anyone to reuse.</p>
   <p class="gap"><strong>Not yet:</strong> no one else has agreed to take it over.</p>
 
-  <h2>What do you know about me?</h2>
+  <h2 id="what-do-you-know-about-me">What do you know about me?</h2>
   <ul>
-    <li>No forms, no names, no accounts, no ads.</li>
+    <li>No sign-ups, no accounts, no ads.</li>
+    <li>We have one form, for asking us to fix or remove something. A company called Tally runs it and stores what you send. We never post it. Your email is optional.</li>
+    <li>If you email {FIX_EMAIL}, our domain company, Porkbun, passes your message on to a private inbox. We never post it.</li>
     <li>We don't count or track visitors.</li>
     <li>Map buttons open Google Maps. Nothing goes to Google unless you tap one.</li>
-    <li>If you report a problem on GitHub, your report and GitHub user name are public.</li>
   </ul>
   <p class="gap"><strong>Not yet:</strong> the site is hosted by GitHub. We have not checked what basic server records GitHub keeps.</p>
 
-  <h2>Is this political?</h2>
+  <h2 id="is-this-political">Is this political?</h2>
   <p>No. No candidates, no parties, no favorite businesses. Voting information points to the West Virginia Secretary of State. We describe problems and point to help. We don't take sides on policy.</p>
 
-  <h2>Is this a government site?</h2>
+  <h2 id="is-this-a-government-site">Is this a government site?</h2>
   <p>No. It does not speak for any office or group.</p>
 
-  <h2>Who wrote this page?</h2>
+  <h2 id="who-wrote-this-page">Who wrote this page?</h2>
   <p>AI drafted it. David reviewed it before it went up.</p>
 
   <style>
+    .jump { list-style: none; padding: 0; margin: 16px 0; }
+    .jump a { display: inline-flex; align-items: center; min-height: 44px; }
     .gap { padding: 10px 14px; border-left: 4px solid var(--accent); background: var(--accent-bg); border-radius: 4px 10px 10px 4px; }
   </style>
 </Base>

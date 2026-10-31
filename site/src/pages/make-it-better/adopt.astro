@@ -6,6 +6,7 @@ import Base from '../../layouts/Base.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import NextRung from '../../components/NextRung.astro';
 import { loadDir } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "better", label: "Adopt a street, spot, stream or trail", summary: "Compare the adopt programs: what you take on, for how long, and what you get" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -41,7 +42,7 @@ const programs = [
   {r('wv-make-it-shine') && <ResourceCard r={r('wv-make-it-shine')} />}
 
   <NextRung next="fund" />
-  <p class="meta">We describe these programs; we do not run them. Rules can change, so read the program's page before you sign up. Know another adopt program here? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We describe these programs; we do not run them. Rules can change, so read the program's page before you sign up. Know another adopt program here? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
 
 <style>
