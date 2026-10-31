@@ -27,6 +27,10 @@ situations:
     label: Fix something in my neighborhood or help make it better
     page: /make-it-better/
     steps: []
+  - id: meet
+    label: Meet people, get a library card or find my neighborhood association
+    page: /meet-people/
+    steps: []
 also:
   - text: Dates and deadlines
     href: /calendar/

@@ -15,12 +15,12 @@ const label = about ?? f.slug.replace(/-/g, ' ');
   <li class="fact" id={`fact-${f.slug}`}>
     <Fragment set:html={factHtml(f.text)} /><slot />
     {(f.phone || f.place) && <Actions phone={f.phone} phoneLabel={f.phone_label} place={f.place} about={label} />}
-    <SourceLine sources={[{ ...f.source, checked: f.checked }]} about={label} stale={isDue(f)} />
+    <SourceLine sources={f.sources} about={label} stale={isDue(f)} />
   </li>
 ) : (
   <div class="fact" id={`fact-${f.slug}`}>
     <p><Fragment set:html={factHtml(f.text)} /><slot /></p>
     {(f.phone || f.place) && <Actions phone={f.phone} phoneLabel={f.phone_label} place={f.place} about={label} />}
-    <SourceLine sources={[{ ...f.source, checked: f.checked }]} about={label} stale={isDue(f)} />
+    <SourceLine sources={f.sources} about={label} stale={isDue(f)} />
   </div>
 )}

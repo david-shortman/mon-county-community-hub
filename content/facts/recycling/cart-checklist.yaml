@@ -1,8 +1,8 @@
 slug: cart-checklist
 text: "Republic Services' [Trash Day Checklist for Morgantown](https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-Trash-Day-Checklist.pdf) says to put carts out by 6 a.m. on pickup day, with trash and recycling out the same day, and to bring carts back within 24 hours. Republic's number on the checklist is [304-366-8900](tel:3043668900)."
 quote: "Make sure carts are out no later than 6 a.m.* the day of collection ... Recycling and trash both go out the same day ... Bring carts back from curb within 24 hours of service ... Call 304.366.8900 for more information."
-source:
-  name: Republic Services
-  url: https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-Trash-Day-Checklist.pdf
-checked: 2026-10-30
+sources:
+  - url: https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-Trash-Day-Checklist.pdf
+    name: Republic Services
+    checked: 2026-10-30
 recheck_days: 180   # a phone number and set-out rules

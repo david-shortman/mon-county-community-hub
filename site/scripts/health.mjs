@@ -288,7 +288,7 @@ function checkContent() {
   record('facts-due', 'product', dueFacts.length ? 'warn' : 'ok',
     dueFacts.length ? `${dueFacts.length} of ${facts.length} facts are past their re-check window. Re-read each source: confirm (update checked) or correct it.`
       : `All ${facts.length} facts are within their re-check window.`,
-    { details: dueFacts.map((f) => `${f._file}: checked ${f.checked}, re-check every ${f.recheck_days} days, source ${f.source?.url}`), owner: 'Duet', fixable: true });
+    { details: dueFacts.map((f) => `${f._file}: checked ${f.checked}, re-check every ${f.recheck_days ?? 'about 183'} days, sources ${(f.sources ?? []).map((x) => x.url).join(', ')}`), owner: 'Duet', fixable: true });
 
   // Hidden items (#519): off the site until someone re-checks them.
   const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);

@@ -1,14 +1,13 @@
-// The fact store (#122, ADR 0007). A fact is one sentence a page shows, with
-// the source it came from, the exact words it is based on (`quote`), the date
-// someone read that source (`checked`), and how often to read it again
-// (`recheck_days`, by how fast the fact changes). Pages render facts instead
-// of typing them into the template, so every sentence carries its own date
-// and turns "may be out of date" by itself when it is due.
-// Files: content/facts/<topic>/<slug>.yaml.
+// Fact records (#122): tier 2 of ADR 0007, for sentences a page needs that
+// are not a listing. Each is a record in content/facts/<topic>/<slug>.yaml
+// with the usual `sources` (url, checked), plus the source's exact words
+// (`quote`) and an optional `recheck_days` (ADR 0007, "still open"): how
+// often to re-read it, by how fast it changes. Without it, the 6-month rule
+// applies. Pages render facts instead of typing them into templates.
 import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
-import { CONTENT_DIR, ymd, todayYmd } from './content.mjs';
+import { CONTENT_DIR, ymd, todayYmd, oldestChecked, STALE_DAYS } from './content.mjs';
 
 export const FACTS_DIR = path.join(CONTENT_DIR, 'facts');
 
@@ -18,7 +17,7 @@ export function factTopics() {
 
 export function isDue(f, today = todayYmd()) {
   const due = new Date(`${f.checked}T12:00:00Z`);
-  due.setUTCDate(due.getUTCDate() + Number(f.recheck_days));
+  due.setUTCDate(due.getUTCDate() + Number(f.recheck_days ?? STALE_DAYS));
   return due.toISOString().slice(0, 10) < today;
 }
 
@@ -29,7 +28,8 @@ export function loadFacts(topic) {
   for (const file of fs.readdirSync(dir).filter((x) => /\.ya?ml$/.test(x)).sort()) {
     const f = YAML.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
     if (out[f.slug]) throw new Error(`content/facts/${topic}: two files use slug ${f.slug}`);
-    out[f.slug] = { ...f, checked: ymd(f.checked), _file: `facts/${topic}/${file}` };
+    const sources = (f.sources ?? []).map((s) => ({ ...s, checked: ymd(s.checked) }));
+    out[f.slug] = { ...f, sources, checked: oldestChecked(sources), _file: `facts/${topic}/${file}` };
   }
   return out;
 }

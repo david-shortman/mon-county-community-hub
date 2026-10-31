@@ -184,11 +184,13 @@ for (const s of secondhand) {
 
 // Boards (content/boards/<slug>.yaml): city boards and commissions for the
 // Serve on a board page (#290). Open seats come from the city's vacancy list.
-const BOARD_FIELDS = ['name', 'slug', 'org', 'decides', 'meets', 'who_can_serve', 'open_seats', 'page_vacant', 'url', 'topics', 'sources'];
+const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'url', 'topics', 'sources'];
 const boards = loadDir('boards');
 for (const b of boards) {
   const where = b._file;
-  checkRecord(b, ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'], BOARD_FIELDS);
+  // `section: other` boards are listed by name only, from the vacancy list.
+  checkRecord(b, b.section === 'other' ? ['name', 'slug', 'org', 'open_seats', 'open_note', 'url', 'topics'] : ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'], BOARD_FIELDS);
+  if (b.section != null && b.section !== 'other') errors.push(`${where}: section must be other, or left out`);
   if (b.org && !orgSlugs.has(b.org)) errors.push(`${where}: org ${b.org} has no file in content/orgs/`);
   if (b.url != null && !isUrl(b.url)) errors.push(`${where}: url is not a web link`);
   for (const k of ['open_seats', 'page_vacant']) if (b[k] != null && !(Number.isInteger(b[k]) && b[k] >= 0)) errors.push(`${where}: ${k} must be a whole number`);
@@ -357,7 +359,7 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
 
 // County indicators (content/indicators, #62): an official number, its own
 // definition, the data year, and sources with checked dates.
-const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more'];
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
 for (const i of loadDir('indicators')) {
   checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
   if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
@@ -367,24 +369,34 @@ for (const i of loadDir('indicators')) {
   for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
   if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
   if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+  // history (#15): years in order, each with a number, as the source gives it.
+  for (const [k, pts] of Object.entries(i.history ?? {})) {
+    if (!Array.isArray(pts)) { errors.push(`${i._file}: history.${k} must be a list`); continue; }
+    const yrs = pts.map((p) => String(p.year));
+    if (pts.some((p) => !/^\d{4}(-\d{4})?$/.test(String(p.year)) || typeof p.value !== 'number')) errors.push(`${i._file}: history.${k} needs year and value on each point`);
+    if (yrs.join() !== [...yrs].sort().join()) errors.push(`${i._file}: history.${k} years must be in order`);
+  }
 }
 
-// The fact store (content/facts/<topic>/, #122): every fact has its text,
-// the exact words it is based on, a source, a checked date and a re-check
-// window. A page cannot render a fact without them.
-const FACT_FIELDS = ['slug', 'text', 'quote', 'source', 'checked', 'recheck_days', 'phone', 'phone_label', 'place'];
+// Fact records (content/facts/<topic>/, #122, tier 2 of ADR 0007): text,
+// the source's exact words, and sources with checked dates. recheck_days is
+// optional. A page cannot render a fact without them.
+const FACT_FIELDS = ['slug', 'text', 'quote', 'sources', 'recheck_days', 'phone', 'phone_label', 'place'];
 let factCount = 0;
 for (const topic of factTopics()) {
   for (const f of Object.values(loadFacts(topic))) {
     factCount++;
     const where = f._file;
-    for (const k of ['slug', 'text', 'quote', 'checked', 'recheck_days']) if (f[k] == null || f[k] === '') errors.push(`${where}: missing ${k}`);
-    for (const k of Object.keys(f)) if (k !== '_file' && !FACT_FIELDS.includes(k)) warnings.push(`${where}: unknown field ${k}`);
+    for (const k of ['slug', 'text', 'quote']) if (f[k] == null || f[k] === '') errors.push(`${where}: missing ${k}`);
+    for (const k of Object.keys(f)) if (!['_file', 'checked'].includes(k) && !FACT_FIELDS.includes(k)) warnings.push(`${where}: unknown field ${k}`);
     if (f.slug && path.basename(where).replace(/\.ya?ml$/, '') !== f.slug) errors.push(`${where}: file name should match slug ${f.slug}`);
-    if (!isUrl(f.source?.url)) errors.push(`${where}: source needs a url`);
-    if (!isDate(f.checked)) errors.push(`${where}: checked must be a date (YYYY-MM-DD)`);
-    else if (f.checked > todayYmd()) errors.push(`${where}: checked ${f.checked} is in the future`);
-    if (!Number.isInteger(f.recheck_days) || f.recheck_days < 1) errors.push(`${where}: recheck_days must be a whole number of days, like 90`);
+    if (!f.sources?.length) errors.push(`${where}: needs at least one source`);
+    for (const s of f.sources ?? []) {
+      if (!isUrl(s.url)) errors.push(`${where}: source url is not a web link`);
+      if (!isDate(s.checked)) errors.push(`${where}: source needs a checked date (YYYY-MM-DD)`);
+      else if (s.checked > todayYmd()) errors.push(`${where}: source checked date ${s.checked} is in the future`);
+    }
+    if (f.recheck_days != null && (!Number.isInteger(f.recheck_days) || f.recheck_days < 1)) errors.push(`${where}: recheck_days must be a whole number of days, like 90`);
     if (/[<>]/.test(f.text ?? '')) errors.push(`${where}: text allows only **bold** and [label](link), no HTML`);
     if (f.phone != null && !isPhone(f.phone)) errors.push(`${where}: phone must look like 304-555-0100 (quote it)`);
     if (f.place != null && !/,/.test(String(f.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);

@@ -45,6 +45,14 @@ steps:
     when: week
     resource: lvmpc-adult-literacy
     text: Call or text Literacy Volunteers to start free reading, writing or English lessons.
+  age-certificate:
+    when: week
+    resource: wv-teen-age-certificate
+    text: If you are 14 or 15, get an age certificate from the state before you start a job.
+  career-connections:
+    when: week
+    resource: region-vi-career-connections
+    text: Ages 16 to 24 and out of school? Call Career Connections about job and training help.
 situations:
   - id: baby-growth
     label: I'm worried about how my baby or toddler is growing
@@ -66,6 +74,10 @@ situations:
     label: I want to read, write or speak English better
     page: /work-and-learning/
     steps: [literacy]
+  - id: teen
+    label: I'm a teen, or the parent of one, and want a first job
+    page: /teens/
+    steps: [age-certificate, career-connections]
   - id: vet-health
     label: I'm a veteran and need health care
     page: /veterans/
