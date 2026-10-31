@@ -19,6 +19,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
 
   <h2>Get paid while you learn a trade</h2>
   {r('apprenticeships-wv') && <ResourceCard r={r('apprenticeships-wv')} showCost />}
+  <p>Already work in a trade? See <a href={`${base}/contractor-license/`}>contractor and trade licenses</a>.</p>
 
   <h2>A record, recovery, or no ID making it hard to get hired</h2>
   {r('federal-bonding-wv') && <ResourceCard r={r('federal-bonding-wv')} />}
