@@ -26,7 +26,7 @@ const SERVICES = {
     ['Police', 'morgantown-police-non-emergency', 'Then press 0.'],
     ['City streets', 'morgantown-streets'],
     ['Water and sewer', 'mub-start-service'],
-    ['Trash', 'mon-swa-ask-about-trash', 'We could not confirm how to start city trash pickup yet (#525). The Solid Waste Authority can tell you who serves your address.'],
+    ['Trash', 'mon-swa-ask-about-trash', 'We could not confirm how to start city trash pickup yet. The Solid Waste Authority can tell you who serves your address.'],
   ],
   westover: [
     ['Police', 'westover-police-non-emergency'],
@@ -44,14 +44,14 @@ const SERVICES = {
     ['Water and sewer', 'mub-start-service'],
   ],
   blacksville: [
-    ['Water and police', 'blacksville-town-office', 'We could not confirm who provides water or police here (#674). Ask the town office.'],
+    ['Water and police', 'blacksville-town-office', 'We could not confirm who provides water or police here. Ask the town office.'],
     ['Trash', 'mon-swa-ask-about-trash'],
   ],
   county: [
     ['Sheriff', 'mon-county-sheriff-office'],
     ['Police non-emergency, any hour', 'mecca-non-emergency'],
-    ['Trash', 'mon-swa-ask-about-trash', 'We could not find a public list of who picks up trash outside town limits (#524). The Solid Waste Authority can tell you who serves your address.'],
-    ['Water', 'wv-psc-utility-questions', 'We could not confirm which water company serves each area outside the towns (#524). Ask your landlord or the seller, or ask the state utility agency.'],
+    ['Trash', 'mon-swa-ask-about-trash', 'We could not find a public list of who picks up trash outside town limits. The Solid Waste Authority can tell you who serves your address.'],
+    ['Water', 'wv-psc-utility-questions', 'We could not confirm which water company serves each area outside the towns. Ask your landlord or the seller, or ask the state utility agency.'],
   ],
 };
 
@@ -118,7 +118,7 @@ export const HUBS = [
   { slug: 'pentress', name: 'Pentress', kind: 'cdp', services: 'county', town: 'Pentress', communities: ['Pentress'], stops: ['Pentress', 'Pintress'] },
 ];
 export const hub = (slug) => HUBS.find((h) => h.slug === slug);
-export const KIND_WORDS = { city: 'City', town: 'Town', cdp: 'Census place, no town government' };
+export const KIND_WORDS = { city: 'A city in Monongalia County', town: 'A town in Monongalia County', cdp: 'A named area in Monongalia County, with no town government' };
 
 const fmt = (d) => String(d).slice(0, 10);
 const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
