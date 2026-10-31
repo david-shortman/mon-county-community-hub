@@ -59,10 +59,10 @@ const listingCount = loadDir('resources').length;
     <li><strong>The deadlines calendar as a feed.</strong> <a href={calendarFeed}>calendar.ics</a> works in Google Calendar, Apple Calendar, Outlook, and most other calendar apps. New dates show up on their own.</li>
     <li><strong>Every listing as a text file.</strong> Each group, program, and date is its own small file in the <a href={tree('content')}>content folder</a> on GitHub. You can read them in a browser or download them all at once. The <a href={doc('content/README.md')}>guide to the files</a> explains each field.</li>
     <li><strong>The code that runs the site.</strong> All of it is on <a href={repo}>GitHub</a>, so another town or group can copy the whole thing.</li>
+    <li><strong>The same data for apps and AI tools.</strong> Every listing, date, meeting and correction is also published as JSON, a plain data format apps can read from the web. The <a href={`${base}/data/`}>open data page</a> lists the files and how to cite them.</li>
   </ul>
   <h3>Coming later</h3>
   <ul>
-    <li>The same data in a common data format (JSON) that apps can read from the web (<a href={issue(72)}>planned, issue 72</a>)</li>
     <li>Listings in the Open Referral format, a shared standard that 211 systems and referral tools can read (<a href={issue(36)}>planned, issue 36</a> and <a href={issue(73)}>issue 73</a>)</li>
   </ul>
   <h3>The license</h3>
