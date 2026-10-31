@@ -38,6 +38,22 @@ const urls = [];
   }
 })(dist);
 urls.sort();
+// Families of pages made from one template with different data (the embeds,
+// docs/operations/embeds.md): scan the first SAMPLE of each, not every one.
+// Add a family here only when its pages differ in data, not in markup.
+const FAMILIES = [/^\/embed\/dates\/topic\//, /^\/embed\/dates\/town\//];
+const SAMPLE = 3;
+{
+  const seen = new Map();
+  const keep = urls.filter((u) => {
+    const f = FAMILIES.find((re) => re.test(u));
+    if (!f) return true;
+    seen.set(f, (seen.get(f) ?? 0) + 1);
+    return seen.get(f) <= SAMPLE;
+  });
+  urls.length = 0;
+  urls.push(...keep);
+}
 if (!urls.length) { console.error('check-a11y: no pages in dist/ (run npm run build first)'); process.exit(1); }
 
 // Cloud sessions have a matching Chromium preinstalled at /opt/pw-browsers; CI installs its own.

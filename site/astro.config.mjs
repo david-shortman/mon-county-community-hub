@@ -13,9 +13,10 @@ export default defineConfig({
   // src/lib/i18n.mjs. Until then this is English only and nothing changes.
   i18n: astroI18n(),
   // Printable center flyers (#465) are print copies of a center's page, so
-  // they stay out of the sitemap. So are pages in a language that is off.
+  // they stay out of the sitemap. So are embeds (/embed/<widget>/, small pages
+  // other sites show in a frame) and pages in a language that is off.
   integrations: [sitemap({
-    filter: (page) => !page.endsWith('/flyer/') && !inUnpublishedLocale(page),
+    filter: (page) => !page.endsWith('/flyer/') && !/\/embed\/.+/.test(page) && !inUnpublishedLocale(page),
     ...(sitemapI18n() ? { i18n: sitemapI18n() } : {}),
   })],
 });

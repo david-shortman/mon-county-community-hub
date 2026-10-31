@@ -1,0 +1,46 @@
+---
+// "Upcoming dates" embed (docs/operations/embeds.md): the next EMBED_DAYS of
+// the calendar, for all of Mon County, one topic, or one town. Paths:
+//   /embed/dates/              every date
+//   /embed/dates/topic/<slug>/ one topic from content/doors.yaml
+//   /embed/dates/town/<slug>/  one town from src/lib/towns.mjs
+// The town list uses the record's own `town` field only (see towns.mjs).
+import Embed from '../../../layouts/Embed.astro';
+import { loadCalendarWithFeeds, prettyRange, prettyTimes, prettyDate, oldestChecked, hostOf } from '../../../lib/content.mjs';
+import { embedDates, embedTopics, embedTowns, EMBED_DAYS } from '../../../lib/embeds.mjs';
+
+export function getStaticPaths() {
+  return [
+    { params: { filter: undefined }, props: {} },
+    ...embedTopics().map((t) => ({ params: { filter: `topic/${t.slug}` }, props: { topic: t } })),
+    ...embedTowns().map((t) => ({ params: { filter: `town/${t.slug}` }, props: { town: t } })),
+  ];
+}
+const { topic, town } = Astro.props;
+const { items, total } = embedDates(await loadCalendarWithFeeds(), { topic: topic?.slug, town: town?.name });
+const where = town ? town.name : 'Morgantown and Mon County';
+const heading = topic ? `Upcoming dates: ${topic.label}` : town ? `Upcoming dates in ${town.name}` : 'Upcoming dates in Mon County';
+const title = topic ? `${topic.label} dates in Mon County (embed)` : town ? `Dates in ${town.name}, Mon County (embed)` : 'Upcoming dates in Morgantown and Mon County (embed)';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const cal = (slug) => new URL(`${base}/calendar/#${slug}`, Astro.site).href;
+---
+<Embed title={title} description={`A small list of the next ${EMBED_DAYS} days of dates and deadlines in ${where}, for other websites to show. Each date shows its source and the date it was checked.`} heading={heading} more="/calendar/" moreLabel={`See all dates on Everything Morgantown${total > items.length ? ` (${total} in the next ${EMBED_DAYS} days)` : ''}`}>
+  {items.length === 0 ? (
+    <p>No dates in the next {EMBED_DAYS} days{topic ? ` for ${topic.label.toLowerCase()}` : ''}{town ? ` that name ${town.name}` : ''}. New dates show up here when we add them.</p>
+  ) : (
+    <ul class="items">
+      {items.map((e) => {
+        const src = e.sources?.[0]?.url ?? e.url;
+        const checked = oldestChecked(e.sources);
+        return (
+          <li class="card">
+            <p class="when">{prettyRange(e.starts, e.ends)}{e.start_time && `, ${prettyTimes(e.start_time, e.end_time)}`}</p>
+            <h2><a href={cal(e.slug)}>{e.title}</a></h2>
+            <p class="meta">{e.org_name}{e.town && `, ${e.town}`}</p>
+            <p class="meta">Source: <a href={src}>{hostOf(src)}<span class="sr-only">, source for {e.title}</span></a>.{checked && ` Checked ${prettyDate(checked)}.`}</p>
+          </li>
+        );
+      })}
+    </ul>
+  )}
+</Embed>

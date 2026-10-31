@@ -1,0 +1,66 @@
+---
+// Embeds gallery (docs/operations/embeds.md): what a group can put on its own
+// website, with copy-paste code. Lists only widgets that exist today.
+import Base from '../../layouts/Base.astro';
+import { embedTopics, embedTowns, iframeCode, EMBED_DAYS, EMBED_MAX } from '../../lib/embeds.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: "about", label: "Add our dates to your website", summary: "Free, copy-paste widgets with local dates for your group's own site, with no tracking" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const abs = (p) => new URL(`${base}${p}`, Astro.site).href;
+const topics = embedTopics();
+const towns = embedTowns();
+const allDates = abs('/embed/dates/');
+const allCode = iframeCode(allDates, 'Upcoming dates in Mon County, from Everything Morgantown');
+const townCode = iframeCode(abs(`/embed/dates/town/${towns.find((t) => t.name === 'Westover')?.slug ?? towns[0].slug}/`), 'Upcoming dates in Westover, from Everything Morgantown');
+const linkCode = `<a href="${abs('/calendar/')}">Local dates and deadlines from Everything Morgantown</a>`;
+---
+<Base title="Add Mon County dates to your website: free embeds" description="Free copy-paste code to show upcoming Morgantown and Mon County dates on your group's or library's website, by topic or town. No account, no tracking.">
+  <h1>Add our dates to your website</h1>
+  <p class="lede">Libraries, offices and local groups can show our list of upcoming dates on their own websites. It is free. You don't need an account or a key, and you don't need to ask us.</p>
+
+  <h2>What you get</h2>
+  <ul>
+    <li><strong>A small list that stays current.</strong> It shows up to {EMBED_MAX} dates from the next {EMBED_DAYS} days. We rebuild it every morning, so old dates drop off on their own.</li>
+    <li><strong>Sources on every item.</strong> Each date shows where it came from and the day we checked it, and links to the full listing on our site.</li>
+    <li><strong>No tracking.</strong> The list is a plain page. It has no scripts, no cookies, no ads, and loads nothing from other companies. It is hosted on GitHub Pages, like the rest of our site (see our <a href={`${base}/privacy/`}>privacy page</a>).</li>
+    <li><strong>Works for everyone.</strong> Big tap targets, plain words, and it follows the reader's light or dark setting. Links open in a new tab.</li>
+  </ul>
+
+  <h2 id="dates">Upcoming dates for all of Mon County</h2>
+  <p>Copy this code and paste it into your website. Most website builders have a block called "Embed", "Code" or "HTML" for this.</p>
+  <pre class="code"><code>{allCode}</code></pre>
+  <p>Here is how it looks:</p>
+  <iframe src={allDates} title="Preview: upcoming dates in Mon County" width="100%" height="480" loading="lazy" class="preview"></iframe>
+
+  <h2 id="by-town">Dates for one town</h2>
+  <p>Only dates whose source names the town are listed. Use the address for your town in the code. For example, Westover:</p>
+  <pre class="code"><code>{townCode}</code></pre>
+  <ul class="addr">
+    {towns.map((t) => <li><a href={`${base}/embed/dates/town/${t.slug}/`}>{t.name}</a>: <code>{abs(`/embed/dates/town/${t.slug}/`)}</code></li>)}
+  </ul>
+
+  <h2 id="by-topic">Dates for one topic</h2>
+  <p>Put one of these addresses in the code instead.</p>
+  <ul class="addr">
+    {topics.map((t) => <li><a href={`${base}/embed/dates/topic/${t.slug}/`}>{t.label}</a>: <code>{abs(`/embed/dates/topic/${t.slug}/`)}</code></li>)}
+  </ul>
+  <p>Some topics have no dates most months. The list says so, and fills in when we add one.</p>
+
+  <h2>Rather link than embed?</h2>
+  <p>A plain link works too:</p>
+  <pre class="code"><code>{linkCode}</code></pre>
+  <p>Calendar apps can also follow our dates: see the <a href={`${base}/calendar/`}>dates page</a> for the calendar feed. Apps and AI tools can read the same data as files on the <a href={`${base}/data/`}>open data page</a>.</p>
+
+  <h2>Rules for using them</h2>
+  <ul>
+    <li>Keep the source lines and the "From Everything Morgantown" line. They tell readers where the facts came from. The data is under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a>.</li>
+    <li>Showing our list does not mean you work with us or approve of our site, and we will not say you do.</li>
+    <li>If a date is wrong, use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix form</a>. The fix shows up in every embed the next morning.</li>
+  </ul>
+</Base>
+<style>
+  pre.code { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.875rem; }
+  .preview { border: 1px solid var(--line); border-radius: 8px; max-width: 640px; display: block; }
+  .addr code { overflow-wrap: anywhere; font-size: 0.875rem; }
+  .addr li { margin: 4px 0; }
+</style>
