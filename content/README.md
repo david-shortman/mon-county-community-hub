@@ -62,6 +62,9 @@ closed_on: [thanksgiving, christmas]  # optional (#726); holidays the source nam
 get_in: walk-in         # walk-in | appointment | call-first
 languages: [Spanish]    # languages the source says staff speak or interpret
 access: Step-free entrance on the Main Street side.  # only what the source says
+meetings:               # optional (#902); regular meetings in the source's words
+  - name: Evansdale Neighborhood Association
+    when: First Wednesday of the month at 6:30 p.m. in Percival Hall.
 steps:                  # optional (#822); what to do as a short numbered list
   - Make a free account on the site.
   - Upload your resume.
