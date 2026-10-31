@@ -7,7 +7,7 @@ slug: monchd-bake-sale
 title: Bake Sale Requirements
 publisher: Monongalia County Health Department
 found_on: https://www.monchd.org/departments-programs/environmental-health
-intro: The Monongalia County Health Department lists five requirements for a bake sale. Here they are in its own words.
+intro: The Monongalia County Health Department lists five requirements for a bake sale. The parts in quotes are its own words.
 recheck_days: 180
 sources:
   - url: https://cdn.sanity.io/files/95aan9ec/production/76c3da15762d66202a5744101dba30a08392c2aa.pdf
@@ -25,8 +25,8 @@ sections:
   - heading: What you can sell
     id: foods
     items:
-      - name: "Allowed"
-        lines: ["\"cakes, cookies, fruit pies, candies, plan [plain] pepperoni rolls, yeast, nut, or fruit breads, muffins, or rolls\""]
+      - name: "Only these foods"
+        lines: ["The form says the menu \"must be limited to cakes, cookies, fruit pies, candies, plan [plain] pepperoni rolls, yeast, nut, or fruit breads, muffins, or rolls\"."]
       - name: "Not allowed"
         lines: ["Foods that must be kept hot or cold to be safe. The form calls them \"Time/Temperature Control for Food Safety foods (TCS)\" and says they \"include pepperoni rolls with cheese, sauce, or other toppings, cream, custard, or meringue pies, and cream filled products.\""]
       - "Other foods: \"Additional non-Time/Temperature Control for Food Safety foods may be allowed with the approval of the local Health Department Sanitarian.\""
