@@ -1,0 +1,92 @@
+---
+// Do I need a permit? City vs county (#661, part of #271). Who issues
+// building permits depends on where the property is, so the page starts with
+// "are you in a town?" and then gives each town's own office. Only facts on
+// official pages read 2026-10-30. Left off until a person confirms (#660):
+// where to appeal an assessment, and the contractor dollar limit (#603).
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import Icon from '../components/Icon.astro';
+import { loadDir, telHref } from '../lib/content.mjs';
+export const page = { door: "community", topic: "government", label: "Do I need a building permit?", summary: "City or county: who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Mon County" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const exists = (p) => Object.keys(import.meta.glob('./**/*.astro')).some((k) => k === `./${p}.astro` || k === `./${p}/index.astro`);
+const checked = '2026-10-30';
+const city = [{ url: 'https://www.morgantownwv.gov/704/Permitting-Licensing-Registration', checked }];
+const cityCode = [{ url: 'https://www.morgantownwv.gov/167/Code-Enforcement', checked }];
+const starCity = [{ url: 'http://www.starcitywv.com/building-permits/', checked }];
+const westover = [{ url: 'https://www.westoverwv.org/code-enforcement', checked }];
+const granville = [{ url: 'https://townofgranvillewv.gov/', checked }];
+const county = [{ url: 'https://www.monongaliacounty.gov/moncpc/about/building_enforcement.php', checked }];
+const countyFaq = [{ url: 'https://www.monongaliacounty.gov/moncpc/frequently_asked_questions.php', checked }];
+const septic = [{ url: 'https://www.monchd.org/services/septic-and-wells', checked }];
+const assessor = [{ url: 'https://assessor.org/DocumentCenter/View/16109/Important-Information-for-Monongalia-Taxpayers-TY-2026-PDF', checked, name: 'Monongalia County Assessor, Important Information for Monongalia Taxpayers, TY 2026 (PDF)' }];
+const zoningViewer = 'https://morgantownwv.maps.arcgis.com/apps/instant/sidebar/index.html?appid=7e73a491ac63495b846f4ada7358f24f';
+const countyGis = 'https://experience.arcgis.com/experience/ebaf60bd87bd475ea7b4710a575eb3eb/page/Page/';
+const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '304-296-6860', granville: '304-599-5080', health: '304-598-5131' };
+---
+<Base title="Do I need a building permit? Morgantown and Mon County, WV" description="Who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Monongalia County, how to apply in each, and the county land use, floodplain, driveway, septic and Assessor forms that can apply outside town limits.">
+  <h1>Do I need a building permit?</h1>
+  <p class="lede">It depends on where the property is. Each town has its own rules and office. Outside town limits, the county has no local building code office, but other permits and forms can still apply. Start by finding out which one you are in.</p>
+
+  <h2 id="where">1. Are you inside a town?</h2>
+  <p>Your mailing address can say "Morgantown" even when the home is outside city limits. To check, the City of Morgantown says to look up the address on its <strong>City Zoning Viewer</strong> map.</p>
+  <SourceLine sources={city} about="checking Morgantown city limits" />
+  <div class="actions">
+    <a class="btn" href={zoningViewer}><Icon name="open" /><span>Open the City Zoning Viewer</span></a>
+  </div>
+  {exists('who-serves-me') && <p>Not sure which town you are in? <a href={`${base}/who-serves-me/`}>Who serves my address?</a></p>}
+
+  <h2 id="morgantown">2. Inside Morgantown city limits</h2>
+  <ul>
+    <li><strong>Apply online.</strong> All building permit applications go through the <strong>Morgantown Access Portal</strong>. You make an account, apply, pay fees and track it there. The city does not take paper permit applications.</li>
+    <li><strong>One application for each kind of work.</strong> Electrical work and plumbing work, for example, each need their own permit application.</li>
+    <li><strong>Fees.</strong> The city posts its permit fee schedule on the same page. B&amp;O taxes are separate from permit fees.</li>
+    <li><strong>Help.</strong> The city has user guides and video tutorials for the portal.</li>
+  </ul>
+  <SourceLine sources={city} about="Morgantown building permits" />
+  <p>Questions: <strong>Code Enforcement</strong>, which issues building permits, at 389 Spruce Street, <a href={telHref(phones.cityCode)}>{phones.cityCode}</a>.</p>
+  <SourceLine sources={cityCode} about="Morgantown Code Enforcement" />
+  <div class="actions">
+    <a class="btn" href="https://www.morgantownwv.gov/704/Permitting-Licensing-Registration"><Icon name="open" /><span>Morgantown permits and portal</span></a>
+    <a class="btn" href={telHref(phones.cityCode)}><Icon name="phone" /><span>Call Code Enforcement</span></a>
+  </div>
+
+  <h2 id="towns">3. Star City, Westover, Granville or Blacksville</h2>
+  <h3>Star City</h3>
+  <p>Download the application from the town's Building Permits page, print it, fill it out and return it to the town office at 370 Broadway Ave. Fees must be paid in full before the permit is issued. Allow 72 hours. Do not start work until you have the approved permit. The town calls you when it is ready to pick up. Questions go to the Code Enforcement Officer at <a href={telHref(phones.starCity)}>{phones.starCity}</a>, Monday to Friday, 8 a.m. to 4:30 p.m.</p>
+  <SourceLine sources={starCity} about="Star City building permits" />
+  <h3>Westover</h3>
+  <p>Westover's Code Enforcement page has packets for its code requirements. Each packet lists what you need, then the forms to turn in. City of Westover, 500 Dupont Road, <a href={telHref(phones.westover)}>{phones.westover}</a>.</p>
+  <SourceLine sources={westover} about="Westover code enforcement" />
+  <h3>Granville</h3>
+  <p>We did not find a permit page on Granville's website. Call the Town of Granville, 1245 Main Street, at <a href={telHref(phones.granville)}>{phones.granville}</a> and ask.</p>
+  <SourceLine sources={granville} about="the Town of Granville" />
+  <h3>Blacksville</h3>
+  <p>The county says Blacksville does not have a website. Ask the town office.</p>
+  <SourceLine sources={county} about="Blacksville" />
+
+  <h2 id="county">4. Outside town limits</h2>
+  <p>The county says there is no local enforcement of the state building code outside the towns. These can still apply:</p>
+  <ul>
+    <li><strong>Zoning, only in the West Run district.</strong> Only the West Run Planning District, north of Morgantown, is zoned. There, building or adding on to a home, a new or replaced deck, a shed or garage, a patio, a paved driveway or an in-ground pool needs a <strong>Land Use Permit</strong>. The county says a fence, landscaping, a retaining wall, a new roof or siding, new windows or doors, and work inside the home do not. Check the County GIS map to see if the property is zoned.</li>
+    <li><strong>Floodplain.</strong> If any part of the property is in the floodplain, contact the county Floodplain Administrator. See <a href={`${base}/flood-zone/#permit`}>Is my home in a flood zone?</a></li>
+    <li><strong>A new driveway onto a state road</strong> needs a Division of Highways encroachment permit.</li>
+    <li><strong>Commercial buildings and apartments.</strong> The State Fire Marshal handles industrial, commercial and multi-family inspections.</li>
+    <li><strong>Septic systems and wells.</strong> A new, changed or failing septic system starts with a certified installer, and a new well starts with a certified well driller. Each one sends an application to the Monongalia County Health Department, which issues a construction permit. Call <a href={telHref(phones.health)}>{phones.health}</a>.</li>
+  </ul>
+  <SourceLine sources={[...county, ...countyFaq, ...septic]} about="permits outside town limits" />
+  <div class="actions">
+    <a class="btn" href={countyGis}><Icon name="open" /><span>Open the County GIS map</span></a>
+  </div>
+  {r('mon-county-planning-permits') && <ResourceCard r={r('mon-county-planning-permits')} />}
+
+  <h2 id="assessor">5. Anywhere in the county: tell the Assessor</h2>
+  <p>The Monongalia County Assessor says anyone who builds, adds on or remodels so that the property's value goes up by more than $1,000 must tell the Assessor on <strong>Form 12:75</strong> within 60 days of when the work started. If you got a permit from a town, the Assessor says that counts as notice. Forms are at the Assessor's office.</p>
+  <SourceLine sources={assessor} about="telling the Assessor about improvements" />
+
+  <p class="meta">Sources checked October 30, 2026. Rules and fees change, so ask the office before you start work. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

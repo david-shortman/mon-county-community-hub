@@ -1,0 +1,24 @@
+title: Mountaineer Transfer Station
+slug: mountaineer-transfer-station
+org: republic-services
+topics: [recycling]
+who_it_is_for: Anyone with trash or recycling to drop off. It does not take tires.
+hours: Monday to Friday, 5:30 a.m. to 3 p.m. Saturday, 7 a.m. to 11 a.m. Closed on New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day and Christmas Day
+town: Westover
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "05:30"
+    closes: "15:00"
+  - days: [sat]
+    opens: "07:00"
+    closes: "11:00"
+what_to_do: Go to 2130 Rail Street, Industrial Park, Westover. Call for fees.
+contact:
+  phone: "304-368-7735"
+  url: https://www.monongaliacountyswa.com/disposal
+  url_label: County page
+  place: 2130 Rail Street, Westover, WV
+cost: A fee for recycling. On the first Thursday of each month, bagged household trash is free (bags only, no trailers).
+sources:
+  - url: https://www.monongaliacountyswa.com/disposal
+    checked: 2026-10-30

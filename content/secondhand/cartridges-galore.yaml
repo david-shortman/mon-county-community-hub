@@ -1,0 +1,19 @@
+name: Cartridges Galore Video Games
+slug: cartridges-galore
+kind: used-media
+area: downtown
+run_by: Cartridges Galore
+address: "40 High St, Morgantown, WV"
+sells: Video games, game systems and accessories.
+takes: Used video games, game systems, accessories and memorabilia. Bring them in for an offer, or send photos online for a quote.
+goods: [books, electronics]
+buys_from_you: true
+url: https://www.cartridgesgaloregames.com/
+url_label: Shop website
+status: confirmed
+note: Pays cash or store credit. Check the shop website for hours.
+sources:
+  - url: https://www.cartridgesgaloregames.com/locations/
+    checked: 2026-10-30
+  - url: https://www.cartridgesgaloregames.com/sell-your-games/
+    checked: 2026-10-30

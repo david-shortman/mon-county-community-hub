@@ -1,0 +1,19 @@
+name: Animal Friends Thrift Shoppe
+slug: animal-friends-thrift-shoppe
+kind: charity-thrift
+area: mileground
+run_by: Animal Friends of North Central West Virginia (AFNCWV)
+address: "Mountaineer Mall, 5000 Greenbag Road, Suite 10, Morgantown, WV 26501"
+hours: Tuesday, 11 a.m. to 5 p.m.; Thursday and Friday, 11 a.m. to 3 p.m.; Saturday, 10 a.m. to 3 p.m.
+sells: New, antique and gently used donated items.
+takes: Donations during shop hours at the back door (look for the Animal Friends sign and doorbell). Help unloading at the curb on Tuesdays, 11 a.m. to 2 p.m. Pickup can be arranged; see the shop page.
+goods: [home, vintage]
+buys_from_you: false
+funds_local_cause: The Animal Friends Sanctuary, a no-kill shelter for animals waiting to be adopted.
+url: https://www.animalfriendswv.org/thrift-shoppe/
+url_label: Shop page
+status: likely
+note: Inside the Mountaineer Mall, across from Senior Monongalians.
+sources:
+  - url: https://www.animalfriendswv.org/thrift-shoppe/
+    checked: 2026-10-30

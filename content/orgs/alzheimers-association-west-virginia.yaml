@@ -1,0 +1,11 @@
+name: Alzheimer's Association, West Virginia Chapter
+slug: alzheimers-association-west-virginia
+kind: nonprofit
+website: https://www.alz.org/wv
+phone: "800-272-3900"
+summary: The state chapter of the national Alzheimer's Association. It runs free support groups for people living with dementia and their unpaid caregivers, and a free Helpline open any time.
+topics: [disability, health]
+area: statewide
+sources:
+  - url: https://www.alz.org/wv/support
+    checked: 2026-10-30
