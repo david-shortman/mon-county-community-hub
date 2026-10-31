@@ -10,13 +10,41 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: A dentist, help paying for medicine, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Mental health help, care with no insurance, a dentist, help paying for medicine, keeping your Medicaid in 2027, a new baby, birth control, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
   sms: "988"
   emergency: true
 steps:
+  talk:
+    when: today
+    resource: valley-crisis-services
+    text: Need to talk to someone today? Call Valley HealthCare's 24/7 crisis line, or walk in to its Scott Avenue office on a weekday.
+  counseling:
+    when: week
+    resource: valley-counseling
+    text: Call Valley HealthCare to set up counseling. Ask about the sliding fee if money is tight.
+  freeclinic:
+    when: week
+    resource: health-right-clinic
+    text: Low income and no insurance? Call Milan Puskar Health Right to become a patient at the free clinic.
+  applycoverage:
+    when: week
+    resource: apply-for-medicaid-wv
+    text: Apply for Medicaid or WVCHIP on WV PATH, or call DoHS.
+  pregcoverage:
+    when: week
+    resource: wv-medicaid-pregnancy
+    text: Pregnant and need coverage? Apply for Medicaid or WVCHIP on WV PATH, or call DoHS.
+  wic:
+    when: week
+    resource: monchd-wic
+    text: Call WIC to ask about healthy food and breastfeeding help.
+  repro:
+    when: week
+    resource: monchd-reproductive-health
+    text: Call the health department to book a pregnancy test, birth control or STI testing.
   ride:
     when: week
     resource: wv-medicaid-rides
@@ -51,15 +79,39 @@ steps:
     when: week
     resource: health-right-clinic
     text: No insurance and low income? Call Milan Puskar Health Right for a phone screening to become a patient at the free clinic.
+  medicaid2027:
+    when: today
+    resource: wv-medicaid-2027-help-line
+    text: On Medicaid? Update your address, phone and email in WV PATH or by phone, and answer any letter from DoHS within 30 days.
   ship:
     when: week
     resource: wv-ship-medicare-counseling
     text: Call the West Virginia State Health Insurance Assistance Program (WV SHIP) for help choosing a Medicare plan or checking your costs.
 situations:
+  - id: mental
+    label: I need mental health help
+    page: /mental-health/
+    steps: [talk, counseling]
+  - id: medicaid2027
+    label: I want to keep my Medicaid in 2027
+    page: /medicaid-2027/
+    steps: [medicaid2027]
+  - id: noinsurance
+    label: I have no insurance or can't afford a doctor
+    page: /no-insurance/
+    steps: [freeclinic, applycoverage]
   - id: dentist
     label: I need a dentist, or help paying for medicine
     page: /dental-and-prescriptions/
     steps: [dentist, healthright]
+  - id: baby
+    label: I'm pregnant or have a new baby
+    page: /pregnant-or-new-baby/
+    steps: [pregcoverage, repro, wic]
+  - id: birthcontrol
+    label: I need birth control, a pregnancy test or STI testing
+    page: /birth-control-and-testing/
+    steps: [repro]
   - id: ride
     label: I need a ride to a medical visit
     page: /medical-rides/

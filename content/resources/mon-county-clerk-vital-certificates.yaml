@@ -1,0 +1,31 @@
+title: Get a birth, death or marriage certificate from the Monongalia County Clerk
+slug: mon-county-clerk-vital-certificates
+org: monongalia-county-clerk
+topics: [records, family]
+who_it_is_for: "People who need a certified copy of a birth, death or marriage recorded in Monongalia County. The county keeps birth and death records from 1853 and marriage records from 1795. By the county's forms: a birth certificate is for the person, an immediate family member or a legal representative. A death certificate is for an immediate family member, the executor, or the estate's attorney. A marriage certificate is for the couple, their children or grandchildren, or a legal representative."
+hours: Monday to Friday, 8:30 a.m. to 4:30 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:30"
+    closes: "16:30"
+what_to_do: The County Clerk's page gives mail-in applications for each certificate. Print the form, fill it out (you must give a reason for the request), sign it by hand, and include a copy of your ID. The office is in Room 123 of the Courthouse, 243 High St. Call to ask about getting one in person.
+contact:
+  phone: "304-291-7230"
+  url: https://www.monongaliacountyclerk.com/index.php/birth-certificates
+  url_label: Application forms
+  place: 243 High St, Morgantown, WV
+cost: "$5 per certificate. Cash, credit or debit card, or money order. No checks. Cards have a 2.4% fee, at least $1. To pay by card on a mailed form, mark it and give a phone number, and staff will call you."
+what_to_bring:
+  - The application form for the certificate you need
+  - A copy of your ID
+sources:
+  - url: https://www.monongaliacountyclerk.com/index.php/birth-certificates
+    checked: 2026-10-31
+  - url: https://www.monongaliacountyclerk.com/myfiles/forms/Application_Birth_Certificate.pdf
+    checked: 2026-10-31
+  - url: https://www.monongaliacountyclerk.com/myfiles/forms/Application_Death_Certificate.pdf
+    checked: 2026-10-31
+  - url: https://www.monongaliacountyclerk.com/myfiles/forms/Application_Marriage_Certificate.pdf
+    checked: 2026-10-31
+  - url: https://www.monongaliacountyclerk.com/
+    checked: 2026-10-31

@@ -1,0 +1,86 @@
+---
+// Winter "Tonight" status (#401): is the warming shelter open tonight, where,
+// hours, rules, the bus, and a number to confirm. Built on the dated line from
+// #219. Data: content/tonight/warming-shelter.yaml. Guardrails: every change
+// is timestamped, "open" shows only with a same-day check (tested at build
+// and again on the phone), rules come before anything else, and there is no
+// bed count.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Actions from '../components/Actions.astro';
+import { resource, telHref, prettyDate } from '../lib/content.mjs';
+import { loadTonight } from '../lib/tonight.mjs';
+export const page = { door: "help-now", label: "Tonight: is the warming shelter open?", summary: "Winter warming shelter status for tonight, checked each day: where, hours, rules and the bus" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const t = loadTonight();
+const r211 = resource('wv-211');
+const time = String(t.checked).slice(11);
+const [h, m] = time.split(':').map(Number);
+const clock = h === 12 && m === 0 ? 'noon' : `${((h + 11) % 12) + 1}${m ? `:${String(m).padStart(2, '0')}` : ''} ${h < 12 ? 'a.m.' : 'p.m.'}`;
+const when = `${prettyDate(t.checkedDay)} at ${clock}`;
+// End a sentence once, even when it ends in "a.m." or "p.m.".
+const end = (x) => (String(x).endsWith('.') ? x : `${x}.`);
+const showOpen = t.status === 'open' && t.fresh;
+const daily = ['open', 'closed-tonight'].includes(t.status);
+const rules = t.rules ?? {};
+const ruleRows = [
+  ['Who can stay', rules.who],
+  ['Pets', rules.pets],
+  ['Sobriety', rules.sobriety],
+  ['ID', rules.id],
+].filter(([, v]) => v);
+---
+<Base crisis title="Tonight: is the Morgantown warming shelter open?" description="Is the winter warming shelter in Morgantown open tonight? Where, hours, rules and the bus, with the time we last checked. Call 211 to confirm before you go.">
+  <h1>Tonight: is the warming shelter open?</h1>
+  <p class="lede">We check this each day in winter and show the time we checked. Always call to confirm before you go.</p>
+
+  <div id="tonight" class="note" data-checked={t.checkedDay} data-status={t.status}>
+    {t.status === 'open' && (
+      <div data-when="fresh" hidden={!showOpen}>
+        <p><strong>Open tonight</strong>, as of {end(when)}</p>
+        <p><strong>Where:</strong> {t.where}</p>
+        <p><strong>Hours:</strong> {t.hours}</p>
+        {ruleRows.length > 0 && (
+          <>
+            <h2>Rules</h2>
+            <ul>{ruleRows.map(([k, v]) => <li><strong>{k}:</strong> {v}</li>)}</ul>
+          </>
+        )}
+        {t.bus && <p><strong>Bus:</strong> {t.bus}{t.last_bus && <> Last bus: {end(t.last_bus)}</>}</p>}
+        <p><strong>Call to confirm:</strong> <a href={telHref(t.confirm_phone)}>{t.confirm_phone}</a>{t.confirm_label && <> ({t.confirm_label})</>}</p>
+      </div>
+    )}
+    {t.status === 'open' && (
+      <p data-when="stale" hidden={showOpen}><strong>Not confirmed for today.</strong> The last check, on {when}, said it was open. Call 211 before you go to find out about tonight.</p>
+    )}
+    {t.status === 'closed-tonight' && <p data-when="fresh" hidden={!t.fresh}><strong>Not open tonight</strong>, as of {end(when)} Call 211 for other places to get warm.</p>}
+    {t.status === 'closed-tonight' && <p data-when="stale" hidden={t.fresh}><strong>Not confirmed for today.</strong> The last check, on {when}, said it was not open that night. Call 211 to find out about tonight.</p>}
+    {t.status === 'season-over' && <p><strong>The warming shelter is closed for the season</strong>, as of {end(when)} Call 211 for other places to get warm.</p>}
+    {t.status === 'not-announced' && <p><strong>Not announced yet.</strong> {t.note} <span class="meta">Last checked {end(when)}</span></p>}
+    {t.status !== 'not-announced' && t.note && <p>{t.note}</p>}
+    <SourceLine sources={t.sources} about="the warming shelter status" />
+    {daily && <noscript><p><strong>Check the date above.</strong> If it is not today, this may be out of date. Call 211 to confirm before you go.</p></noscript>}
+  </div>
+
+  <h2>Call 211 to confirm</h2>
+  <p>211 is free and open {r211.hours.toLowerCase().replace(/^open /, '')}. Ask what is open tonight and how to get there.</p>
+  <Actions callFirst phone={r211.contact.phone} phoneLabel="West Virginia 211" sms={r211.contact.text} smsLabel="211, send your ZIP code" />
+
+  <p>Need a bed, food tonight, or to be safe from someone? See <a href={`${base}/stay-tonight/`}>Where to stay tonight</a>.</p>
+  <p class="meta">We never show a bed count. Rules and hours can change, so call before you go. Something wrong? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+
+  <script is:inline>
+    (function () {
+      // The page may be from an earlier day (saved offline or not rebuilt).
+      // Show tonight's status only if the check is from today on this phone, in Morgantown.
+      var box = document.getElementById('tonight');
+      if (!box || ['open', 'closed-tonight'].indexOf(box.dataset.status) < 0) return;
+      var today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date());
+      var fresh = box.dataset.checked === today;
+      var f = box.querySelector('[data-when="fresh"]');
+      var s = box.querySelector('[data-when="stale"]');
+      if (f) f.hidden = !fresh;
+      if (s) s.hidden = fresh;
+    })();
+  </script>
+</Base>

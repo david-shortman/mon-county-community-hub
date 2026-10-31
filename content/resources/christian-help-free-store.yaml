@@ -1,0 +1,26 @@
+title: Christian Help Free Store, free clothing and shoes
+slug: christian-help-free-store
+org: christian-help
+topics: [family]
+who_it_is_for: Everyone. Christian Help says there are "no income restrictions, demographic criteria, or affiliation requirements."
+what_to_do: Stop by during service hours. The Free Store has clothing for men, women, children and babies, and "footwear for all seasons," plus kitchen and household items. You can shop once every seven days.
+hours: Monday, Tuesday and Thursday, 9 a.m. to 4 p.m. Friday, 9 a.m. to 2 p.m. Wednesday is for dropping off donations only. Hours can change around events.
+opening_hours:
+  - days: [mon, tue, thu]
+    opens: "09:00"
+    closes: "16:00"
+  - days: [fri]
+    opens: "09:00"
+    closes: "14:00"
+get_in: walk-in
+cost: free
+contact:
+  phone: "304-296-0221"
+  url: https://motownchristianhelp.com/programs/
+  place: 219 Walnut Street, Morgantown, WV 26505
+town: Morgantown
+sources:
+  - url: https://motownchristianhelp.com/programs/
+    checked: 2026-10-31
+  - url: https://motownchristianhelp.com/contact/
+    checked: 2026-10-31
