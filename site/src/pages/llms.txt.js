@@ -92,6 +92,7 @@ export function GET({ site }) {
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
 - [Make art, learn a craft, show your work](${u('/arts-and-making/')}): Monongalia Arts Center classes, Community Maker Space, studios and gallery applications; library craft nights, knitting group and ArtistWorks lessons; folk arts apprenticeships and jams; state grants for individual artists
 - [Start a nonprofit or community group](${u('/start-a-group/')}): the West Virginia steps: Articles of Incorporation for a nonprofit corporation ($25, Form CD-1), registering with the Secretary of State before asking the public for donations, and links to the IRS for tax-exempt status
+- [Check a charity before you give](${u('/check-a-charity/')}): how to look up a group's registration with the West Virginia Secretary of State, and what registration does and does not tell you
 ${centers}
 - [City and county meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council, city board and County Commission meetings, minutes from the last 60 days, and where the school board and towns post theirs
 - [About](${u('/about/')}): how the project works and its rules
