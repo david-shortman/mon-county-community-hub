@@ -4,6 +4,10 @@ org: city-of-morgantown
 topics: [work]
 who_it_is_for: People opening a business inside Morgantown city limits.
 hours: Monday through Thursday, 7 a.m. to 5:30 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu]
+    opens: "07:00"
+    closes: "17:30"
 what_to_do: "The city lists four steps. 1. Call the Planning Division at 304-284-7431 to check that your location is zoned for your business. 2. Register with the state through the One Stop Business Portal. 3. Apply for a city business license through the Morgantown Access Portal. 4. If your business has a physical location in the city, apply for a Certificate of Occupancy and schedule inspections with Code Enforcement and the Fire Marshal at least one week before opening. The city also charges a B&O tax on gross income and a municipal service fee. Licenses run for a fiscal year and expire June 30. B&O tax questions: BandO@morgantownwv.gov or the Finance Department at 304-284-7408."
 contact:
   phone: "304-284-7408"
