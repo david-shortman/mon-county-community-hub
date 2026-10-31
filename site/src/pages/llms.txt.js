@@ -56,6 +56,7 @@ export function GET({ site }) {
 - [Your community](${u('/community/')}): pick what fits (a community center near you, a community dinner, a hall to rent, joining a center, making your neighborhood better) and go straight to the page
 - [Community centers and halls](${u('/community-centers/')}): community centers, senior centers and halls across Mon County, grouped by part of the county, with dinners and events, halls to rent, and how to join
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
+- [Start a nonprofit or community group](${u('/start-a-group/')}): the West Virginia steps: Articles of Incorporation for a nonprofit corporation ($25, Form CD-1), registering with the Secretary of State before asking the public for donations, and links to the IRS for tax-exempt status
 ${centers}
 - [City meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council and city board meetings, and minutes from the last 60 days, read daily from the city's AgendaCenter
 - [About](${u('/about/')}): how the project works and its rules
