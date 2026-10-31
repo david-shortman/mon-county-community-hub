@@ -1,0 +1,71 @@
+---
+// A labeled example walkthrough (#190): how someone new to Morgantown who
+// works from home could meet people in their first month. The person is made
+// up; every step uses a real, sourced record from content/resources/.
+// Pattern and rules: docs/playbook/example-walkthroughs.md.
+import Base from '../../layouts/Base.astro';
+import Route from '../../components/Route.astro';
+import Milepost from '../../components/Milepost.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource, telHref } from '../../lib/content.mjs';
+export const page = { parent: '/meet-people/', label: 'Example: new in town and working from home' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const card = resource('mpls-library-card');
+const wifi = resource('mympls-wifi-computers-and-rooms');
+const programs = resource('mpls-adult-programs');
+const nbhd = resource('morgantown-neighborhood-associations');
+const firstWard = (nbhd?.meetings ?? []).find((m) => m.name.startsWith('First Ward'));
+---
+<Base title="Example: meeting people in your first month in Morgantown" description="A made-up example of how someone new to Morgantown who works from home could meet people in their first month: a free library card, working from the library, a free adult program, and a neighborhood association meeting.">
+  <p class="example-tag"><strong>Example.</strong> This is a made-up person, not a real story. The places and programs are real, and each step shows its source.</p>
+  <h1>Example: new in town, working from home, and wanting to meet people</h1>
+  <p class="lede">Someone just moved to Morgantown's First Ward for a remote job. They know almost no one here. Here is what they could do in their first month, all free. Tap a step to open it.</p>
+
+  <Route label="Steps in the example">
+  {card && (
+    <Milepost n={1} title="Get a free library card" when="Week 1" id="card" open>
+      <p>{card.who_it_is_for} They bring proof of who they are and proof of their West Virginia address. The library's examples include a driver's license or government ID, and a utility bill or a lease.</p>
+      <p>Just moved and no bill yet? The library also lists a current postmarked letter with your name and address.</p>
+      <div class="actions"><a class="btn" href={card.contact.url}><span>Library card page</span></a></div>
+      <SourceLine sources={card.sources} org={card.org} about={card.title} slug={card.slug} />
+    </Milepost>
+  )}
+
+  {wifi && (
+    <Milepost n={2} title="Work from the library one afternoon" when="Week 1 or 2" id="work">
+      <p>The library has free Wi-Fi and quiet tables at all its locations. The main library is at 373 Spruce Street. {wifi.hours}</p>
+      <p>While there, they look at the library's calendar to see what is coming up (step 3).</p>
+      <SourceLine sources={wifi.sources} org={wifi.org} about={wifi.title} slug={wifi.slug} />
+    </Milepost>
+  )}
+
+  {programs && (
+    <Milepost n={3} title="Pick one free program and go" when="Week 2" id="program">
+      <p>The library's calendar can be filtered to show adult events. Its adult page lists groups like a sci-fi and fantasy book group, Adult Craft Night, Dungeons and Dragons for adults, and LEGO Night.</p>
+      <div class="actions"><a class="btn" href={programs.contact.url}><span>Library calendar</span></a></div>
+      <SourceLine sources={programs.sources} org={programs.org} about={programs.title} slug={programs.slug} />
+    </Milepost>
+  )}
+
+  {nbhd && !nbhd.hidden && firstWard && (
+    <Milepost n={4} title="Go to a neighborhood association meeting" when="Week 3 or 4" id="neighborhood">
+      <p>Morgantown has nine neighborhood associations. In the city's words, the First Ward association meets on the "{firstWard.when.replace(/\.$/, '')}." The city says its calendar has the most up-to-date times and places, so they check it before going.</p>
+      <p>Live somewhere else in the city? <a href={`${base}/meet-people/#neighborhoods`}>See when each association meets</a>.</p>
+      <div class="actions"><a class="btn" href={nbhd.contact.url}><span>City neighborhood page</span></a></div>
+      <SourceLine sources={nbhd.sources} org={nbhd.org} about={nbhd.title} slug={nbhd.slug} />
+    </Milepost>
+  )}
+
+  <Milepost n={5} title="Look for what comes next" when="Next month" id="next">
+    <p>After a few weeks, they could try a dinner or event at a <a href={`${base}/community-centers/`}>community center or hall</a>, help with a cleanup or a city board through <a href={`${base}/make-it-better/`}>Make it better</a>, or check what is coming up on <a href={`${base}/calendar/`}>Dates</a>.</p>
+  </Milepost>
+  </Route>
+
+  <p>Rather start on your own? Everything above is on <a href={`${base}/meet-people/`}>Meet people and get a library card</a>. Questions about the library? Call {card && <a href={telHref(card.contact.phone)}>{card.contact.phone}</a>}.</p>
+
+  <p class="meta">This example is made up. It is not a real person or a real case. Sources checked October 30, 2026. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
+
+<style>
+  .example-tag { border-left: 4px solid var(--accent); padding: 0.5rem 0.75rem; background: var(--accent-bg); color: var(--fg); }
+</style>
