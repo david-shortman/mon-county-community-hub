@@ -2,8 +2,9 @@
 // Courts and everyday legal help that is not eviction (#222 coverage map,
 // rank 1 missing area). Facts come from the records, each read on a court,
 // state or group page on 2026-10-31. Left off until a person confirms them:
-// the Magistrate Court filing fee, the name change fee and form, expungement
-// fees and waiting periods, and the WVU Law clinics (see the build log).
+// the Magistrate Court filing fee and the clerk's hours (see #1023). Expungement
+// and name change fees, the WVU law clinic and Senior Legal Aid were confirmed
+// in verification sweep 2 (#1023).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
@@ -23,6 +24,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <ResourceCard r={resource('wv-tuesday-legal-connect')} showCost />
   <ResourceCard r={resource('wv-lawyer-referral-service')} showCost />
   <ResourceCard r={resource('msj-consumer-debt-legal-help')} showCost />
+  <ResourceCard r={resource('wvu-clinical-law-program')} showCost />
+  <ResourceCard r={resource('wv-senior-legal-aid')} showCost />
   <p>WVU students can also use WVU Student Legal Services.</p>
   <ResourceCard r={resource('wvu-student-legal-services')} showCost />
 
@@ -47,5 +50,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2 id="notary">Get something notarized</h2>
   <ResourceCard r={resource('wv-notary-search')} showCost />
 
-  <p class="meta">Sources checked October 31, 2026. Court fees and rules change, so check with the clerk before you file. We could not confirm the Magistrate Court filing fee, or the cost of a name change, on an official page, so ask the clerk. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 31, 2026. Court fees and rules change, so check with the clerk before you file. We could not confirm the Magistrate Court filing fee on an official page, so ask the clerk. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
