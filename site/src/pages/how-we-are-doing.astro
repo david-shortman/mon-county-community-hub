@@ -80,10 +80,12 @@ const measures = places.data?.measures ?? [];
       </figure>
       <details>
         <summary>Show the numbers as a table</summary>
-        <table>
-          <thead><tr><th scope="col">Month</th><th scope="col">Unemployment rate</th></tr></thead>
-          <tbody>{[...pts].reverse().map((p) => <tr><td>{p.label}</td><td>{p.value}%{p.preliminary ? ' (preliminary)' : ''}</td></tr>)}</tbody>
-        </table>
+        <div class="table-scroll" role="region" aria-label="Unemployment rate by month" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Month</th><th scope="col">Unemployment rate</th></tr></thead>
+            <tbody>{[...pts].reverse().map((p) => <tr><td>{p.label}</td><td>{p.value}%{p.preliminary ? ' (preliminary)' : ''}</td></tr>)}</tbody>
+          </table>
+        </div>
       </details>
     </>
   ) : <p>This number could not be loaded today. See it at the source below.</p>}
@@ -147,7 +149,7 @@ const measures = places.data?.measures ?? [];
   .chart .hit { fill: transparent; }
   .chart .hit:hover { fill: var(--accent); fill-opacity: 0.25; }
   .chart figcaption { color: var(--muted); font-size: 0.9rem; }
-  .tiles { list-style: none; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  .tiles { list-style: none; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); }
   .tile { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
   .tile .num { font-size: 1.6rem; font-weight: 700; }
   .tile .range { color: var(--muted); font-size: 0.9rem; }
