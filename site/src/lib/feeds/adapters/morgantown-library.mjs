@@ -41,6 +41,7 @@ export default {
       const raw = plain(ev.SUMMARY?.value);
       const start = readIcsDate(ev.DTSTART);
       if (!raw || !start) continue;
+      if (/^test\b/i.test(raw)) continue; // staff test entries
       const closed = /\bclosed\b/i.test(raw);
       if (!closed && count.get(raw.toLowerCase()) >= REPEATS) continue;
 
@@ -54,7 +55,9 @@ export default {
       const title = closed && where && !raw.toLowerCase().includes(where.toLowerCase()) ? `${raw.replace(/^Library Closed$/i, 'Library closed')}: ${where}` : raw;
       const id = (ev.UID?.value ?? '').match(/(\d+)\s*$/)?.[1];
       const url = /^https:\/\/events\.mympls\.org\/event\/\d+$/.test(ev.URL?.value?.trim() ?? '') ? ev.URL.value.trim() : `${SITE}/calendar/events`;
-      const time = start.allDay ? '' : `Starts at ${prettyTime(start.hour, start.minute)}`;
+      // A 00:00 start is a placeholder in this feed, not a real time.
+      const timed = !start.allDay && (start.hour || start.minute);
+      const time = timed ? `Starts at ${prettyTime(start.hour, start.minute)}` : '';
       const whereText = online ? 'Online' : where && `at ${where}`;
       const lead = closed ? '' : [time, whereText].filter(Boolean).join(' ');
 

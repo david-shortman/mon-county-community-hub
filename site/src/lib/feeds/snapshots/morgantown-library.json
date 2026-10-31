@@ -1,7 +1,7 @@
 {
   "id": "morgantown-library",
   "feed_url": "https://events.mympls.org/ical_subscribe.php?src=p&cid=17544",
-  "fetched": "2026-10-30T23:52:03.700Z",
+  "fetched": "2026-10-31T00:04:08.495Z",
   "entries": [
     {
       "title": "Movie Night at the Arnettsville Public Library",
@@ -636,19 +636,6 @@
       "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
       "what_to_do": "Starts at 5:30 p.m. at APL Meeting Room, Arnettsville Public Library. See the event page for details.",
       "url": "https://events.mympls.org/event/17835063",
-      "topics": [
-        "community"
-      ]
-    },
-    {
-      "title": "Test Event",
-      "slug": "mpls-test-event-11913616-2027-02-24",
-      "starts": "2027-02-24",
-      "ends": "2027-02-24",
-      "org_name": "Morgantown Public Library System",
-      "who_it_is_for": "Listed on the Morgantown Public Library System calendar.",
-      "what_to_do": "Starts at midnight. See the event page for details.",
-      "url": "https://events.mympls.org/event/11913616",
       "topics": [
         "community"
       ]
