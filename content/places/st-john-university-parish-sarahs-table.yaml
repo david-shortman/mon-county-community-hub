@@ -1,0 +1,24 @@
+name: Sarah's Table Sunday Lunch
+slug: st-john-university-parish-sarahs-table
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: community-group
+  text: St. John University Parish (Catholic) volunteer teams
+story: A free midday meal on Sundays for people in need. All are welcome.
+regular:
+  - Sundays, 11:30 a.m. to 12:30 p.m.
+cost: Free
+interests: [food, social]
+tags: [free, come-alone, weekly]
+contact:
+  url: https://mountaineercatholic.com/our-parish/parish-ministries/
+  phone: "304-296-8231"
+  place: St. John University Parish, 1481 University Ave., Morgantown, WV 26505
+status: active
+notes:
+  - Served in the Parish Center, the parish page says. Older bulletins name a different room, so call the parish if you cannot find it.
+sources:
+  - url: https://mountaineercatholic.com/our-parish/parish-ministries/
+    checked: 2026-10-30

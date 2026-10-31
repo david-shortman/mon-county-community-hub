@@ -1,0 +1,26 @@
+name: Community Kitchen Free Weekday Lunch
+slug: morgantown-community-kitchen-weekday-lunch
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: nonprofit
+  text: Morgantown Community Kitchen, served at Trinity Episcopal Church
+story: A free lunch served on weekdays to anyone who needs a meal.
+regular:
+  - Monday to Friday, starting at 11 a.m.
+cost: Free
+interests: [food, social]
+tags: [free, come-alone, weekly]
+contact:
+  url: https://www.morgantowncommunitykitchen.com/
+  place: Trinity Episcopal Church, corner of Willey and Spruce Streets, Morgantown, WV
+status: active
+notes:
+  - Closed during bad winter weather and on days when another group serves lunch instead.
+  - The two pages give different end times (12:15 p.m. and noon), so only the start time is listed. Come close to 11 a.m.
+sources:
+  - url: https://www.morgantowncommunitykitchen.com/
+    checked: 2026-10-30
+  - url: https://trinitymorgantown.org/mck/
+    checked: 2026-10-30
