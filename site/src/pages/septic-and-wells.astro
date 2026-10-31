@@ -4,7 +4,7 @@
 // Monongalia County Health Department's Septic and Wells page.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
-import { loadDir } from '../lib/content.mjs';
+import { loadDir, telHref } from '../lib/content.mjs';
 export const page = { door: "community", topic: "government", label: "Septic systems and well water", summary: "Permits for a new or failing septic system or a well, testing well water, and the septic and well check when a home is sold" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -12,7 +12,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <Base title="Septic systems and well water in Mon County, WV" description="For Monongalia County homes without public sewer or water: how to get a permit for a new or failing septic system or a water well, how to test well water, and the health department check when a home is sold.">
   <h1>Septic systems and well water</h1>
-  <p class="lede">Homes without public sewer use a septic system, and homes without public water use a well. The Monongalia County Health Department handles the permits and can test well water. Most of the work starts with a certified installer or well driller.</p>
+  <p class="lede">Homes without public sewer use a septic system, and homes without public water use a well. The Monongalia County Health Department handles the permits and can test well water. Most of the work starts with a certified installer or well driller. Questions: call the Health Department at <a href={telHref('304-598-5131')}>304-598-5131</a>.</p>
 
   <h2 id="septic">A new, changed or failing septic system</h2>
   {r('monchd-septic-permit') && <ResourceCard r={r('monchd-septic-permit')} showCost />}
