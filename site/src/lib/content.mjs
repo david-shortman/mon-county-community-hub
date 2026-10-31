@@ -78,7 +78,7 @@ export function loadCalendarWithFeeds() {
     const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug) && !covered(e));
     // Two feeds can list the same event (#852). Same rule across feeds: same
     // first three title words and the same start date. The feed listed first
-    // in ADAPTERS wins, so the result never depends on fetch timing.
+    // in file-name order (see feeds/index.mjs) wins, so the result never depends on fetch timing.
     const firstFeed = new Map();
     const deduped = fromFeeds.filter((e) => {
       const key = `${e.starts}|${words(e.title)}`;
