@@ -1,0 +1,28 @@
+---
+// Bake sale rules (#954, part of #393): the health department's Bake Sale
+// Application PDF as short lists. Every rule is quoted in
+// content/pdf-pages/monchd-bake-sale.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Holding a bake sale", summary: "The county health department's bake sale rules: register each sale, what you can sell, wrapping, who bakes, and the sign" };
+const d = pdfPage('monchd-bake-sale');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-598-5131';
+---
+<Base title="Bake sale rules in Mon County, WV: what the health department requires" description="The Monongalia County Health Department's bake sale requirements: register each sale, which baked goods you can sell, pre-wrapping, food worker training, and the sign to post, quoted from its Bake Sale Application.">
+  <h1>Holding a bake sale</h1>
+  <p class="lede">Planning a bake sale for a school, church or group in Mon County? The health department requires you to register each one. It lists five rules in all. They are in a PDF form, so here they are as a short list. Questions: call <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p class="meta">This page is a reading aid. The health department's form is the official version. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

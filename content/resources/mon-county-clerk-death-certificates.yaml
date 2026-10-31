@@ -1,0 +1,28 @@
+title: Get a death certificate from the Monongalia County Clerk
+slug: mon-county-clerk-death-certificates
+org: monongalia-county-clerk
+topics: [records]
+who_it_is_for: People who need a certified death certificate for a death recorded in Monongalia County. The county has records from 1853 to the present. If you are not the person on the record, you must be an immediate family member, the executor, or the attorney for the estate.
+hours: Monday to Friday, 8:30 a.m. to 4:30 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:30"
+    closes: "16:30"
+what_to_do: Fill out the county's Application for Death Certificate and send it in by mail, or bring it to the County Clerk in Room 123 of the Courthouse, 243 High St. The form asks for a reason for the request and a copy of your ID. Questions go to vitals@monongaliacountyclerk.com.
+what_to_bring:
+  - A copy of your ID
+  - The filled-out application, with your signature (electronic signatures are not accepted)
+contact:
+  phone: "304-291-7230"
+  email: vitals@monongaliacountyclerk.com
+  url: https://www.monongaliacountyclerk.com/index.php/death-certificates
+  url_label: Death certificates
+  place: 243 High St, Courthouse Room 123, Morgantown, WV 26505
+cost: "$5 per certificate. Cash, credit or debit card, or money order. No checks. Cards have a fee of 2.4%, at least $1."
+sources:
+  - url: https://www.monongaliacountyclerk.com/index.php/death-certificates
+    checked: 2026-10-31
+  - url: https://www.monongaliacountyclerk.com/myfiles/forms/Application_Death_Certificate.pdf
+    checked: 2026-10-31
+  - url: https://www.monongaliacountyclerk.com/index.php/fiduciary-probate
+    checked: 2026-10-31

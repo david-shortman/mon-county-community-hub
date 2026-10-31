@@ -9,6 +9,7 @@ contact:
   url: https://www.wvpath.wv.gov/
   url_label: Apply online
 cost: free
+what_happens: A worker from the state Department of Human Services (DoHS) interviews you. If you qualify, your SNAP counts from the day DoHS got your signed application. The application lists three cases where SNAP can come within seven days.
 sources:
   - url: https://www.wvpath.wv.gov/
     checked: 2026-10-29
@@ -16,3 +17,5 @@ sources:
     checked: 2026-10-29
   - url: https://bfa.wv.gov/frequently-asked-questions-faq
     checked: 2026-10-29
+  - url: https://bfa.wv.gov/media/40007/download?inline
+    checked: 2026-10-31

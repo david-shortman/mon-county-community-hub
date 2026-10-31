@@ -2,8 +2,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
+import { loadTonight, tonightProblems } from '../src/lib/tonight.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 import { factTopics, loadFacts } from '../src/lib/facts.mjs';
+import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
 import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
@@ -43,6 +45,7 @@ const slugs = new Set();
 for (const e of loadCalendar()) {
   const where = e._file;
   checkHidden(e);
+  if (e.private_trace != null && e.private_trace !== true) errors.push(`${where}: private_trace is true or left out (#555)`);
   for (const f of ['title', 'slug', 'starts', 'org_name', 'who_it_is_for', 'what_to_do', 'url']) {
     if (!e[f]) errors.push(`${where}: missing ${f}`);
   }
@@ -81,13 +84,14 @@ const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(Strin
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
 const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden', 'phone_confirmed', 'phone_confirmed_by'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by', 'private_trace'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
 function checkRecord(e, required, known) {
   const where = e._file;
   checkHidden(e);
+  if (e.private_trace != null && e.private_trace !== true) errors.push(`${where}: private_trace is true or left out (#555)`);
   // Confirmed by phone (#164): a date, and optionally the caller's initials.
   // Never the name of the person who answered.
   if (e.phone_confirmed != null) {
@@ -415,6 +419,13 @@ for (const topic of factTopics()) {
     if (JSON.stringify(f).includes('\u2014')) errors.push(`${where}: contains an em dash`);
   }
 }
+
+// PDF pages (content/pdf-pages/, #393): a PDF's useful part as short lists.
+// Each needs a title, publisher, sections and sources with checked dates, and
+// a PDF link needs the date printed on that PDF.
+for (const d of loadPdfPages()) for (const p of pdfPageProblems(d)) errors.push(`${d._file}: ${p}`);
+// Tonight's warming shelter status (content/tonight, #401).
+for (const p of tonightProblems(loadTonight())) errors.push(`tonight/warming-shelter.yaml: ${p}`);
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

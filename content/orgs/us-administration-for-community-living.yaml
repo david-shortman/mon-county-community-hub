@@ -1,0 +1,10 @@
+name: U.S. Administration for Community Living (ACL)
+slug: us-administration-for-community-living
+kind: government
+website: https://acl.gov/
+summary: A federal agency in the U.S. Department of Health and Human Services. It runs the Eldercare Locator, a free public service that connects older adults and their families to local services.
+topics: [disability]
+area: national
+sources:
+  - url: https://eldercare.acl.gov/
+    checked: 2026-10-31

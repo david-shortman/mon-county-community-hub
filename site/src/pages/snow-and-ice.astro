@@ -1,0 +1,37 @@
+---
+// Snow and ice in Mon County (#1005): who clears which roads, the city's
+// sidewalk rule, school closings and late buses. Alerts, road conditions and
+// power outage texts are on /weather-alerts/. Not here yet: rules for
+// Westover, Star City and Granville, and a snow-specific way to report a
+// state road (none found on an official page).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "weather", label: "Snow and ice: who plows, sidewalks, schools and buses", summary: "Which roads get cleared first, the 24-hour sidewalk rule in Morgantown, school closings and late buses" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Snow and ice in Morgantown and Mon County: plowing, sidewalks, schools" description="Who clears snow from city streets and state roads in Morgantown and Monongalia County, which roads go first, the 24-hour sidewalk rule, where school closings are posted, and how to see if your bus is late.">
+  <h1>Snow and ice in Mon County</h1>
+  <p class="lede">Who clears a road depends on who owns it. In Morgantown, the city clears city streets. The state clears state roads. Both start with the busiest roads, so side streets come last.</p>
+
+  <h2 id="city">City of Morgantown streets and sidewalks</h2>
+  {r('morgantown-snow-plan') && <ResourceCard r={r('morgantown-snow-plan')} />}
+
+  <h2 id="state">State roads</h2>
+  {r('wvdoh-snow-priorities') && <ResourceCard r={r('wvdoh-snow-priorities')} />}
+  <p>Not sure if a road is a state road? Use the state's <a href="https://experience.arcgis.com/experience/2917da07ad1d4900bb4e372ca6527126/page/Page">road search by address</a> map.</p>
+
+  <h2 id="schools">School delays and closings</h2>
+  {r('mcs-school-closings') && <ResourceCard r={r('mcs-school-closings')} />}
+
+  <h2 id="buses">Buses</h2>
+  {r('mountain-line-ticker') && <ResourceCard r={r('mountain-line-ticker')} />}
+
+  <h2 id="alerts">Alerts, road conditions and power outages</h2>
+  <p>Weather warnings, WV 511 road conditions and Mon Power outage texts are on <a href={`${base}/weather-alerts/`}>Get weather and emergency alerts</a>.</p>
+
+  <p class="meta">Sources checked October 31, 2026. Westover, Star City and Granville do not post snow rules on their websites; call your town hall to ask. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
