@@ -1,0 +1,11 @@
+name: Region VI Planning and Development Council
+slug: region-vi-planning-and-development-council
+kind: government
+website: https://regionvi.com/
+phone: "304-366-5693"
+summary: A regional council for six counties, including Mon County. It mostly helps local governments plan and pay for water and sewer projects, especially towns too small to have their own grant writers.
+topics: [government]
+area: monongalia-county
+sources:
+  - url: https://regionvi.com/about
+    checked: 2026-10-30

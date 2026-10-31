@@ -7,5 +7,7 @@ export default defineConfig({
   trailingSlash: 'ignore',
   // Inline the CSS so a phone on a slow connection paints in one request.
   build: { inlineStylesheets: 'always' },
-  integrations: [sitemap()],
+  // Printable center flyers (#465) are print copies of a center's page, so
+  // they stay out of the sitemap.
+  integrations: [sitemap({ filter: (page) => !page.endsWith('/flyer/') })],
 });

@@ -1,0 +1,82 @@
+---
+// This month in Mon County (#224): the next 30 days from the calendar on one
+// short page, day by day, that prints on a sheet or two for a fridge or a
+// bulletin board. Built from the same entries as /calendar/ (hand-checked and
+// live feeds), so it needs no hand edits and rebuilds every morning. Each line
+// links to its full card on /calendar/, which has the buttons and sources.
+import Base from '../../layouts/Base.astro';
+import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate, prettyTimes, ymd } from '../../lib/content.mjs';
+export const page = { door: "dates", label: "This month in Mon County", summary: "The next 30 days on one page you can print" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const DAYS = 30;
+const today = todayYmd();
+const items = upcoming(await loadCalendarWithFeeds(), today, DAYS);
+const addDays = (d, n) => { const x = new Date(`${d}T12:00:00Z`); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); };
+const last = addDays(today, DAYS);
+// Windows that are already open or span several days go in their own list,
+// so the day-by-day list stays short.
+const windows = items.filter((e) => e.ends !== e.starts);
+const single = items.filter((e) => e.ends === e.starts);
+const dayName = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const fmtDay = (d) => dayName.format(new Date(`${d}T12:00:00Z`));
+const days = [...new Set(single.map((e) => e.starts))].sort().map((d) => ({ d, list: single.filter((e) => e.starts === d) }));
+const updated = [today, ...items.flatMap((e) => (e.sources ?? []).map((s) => ymd(s.checked)))].filter(Boolean).sort().at(-1);
+const who = (e) => (e.feed ? e.feed.name : e.org_name);
+---
+<Base title="This month in Mon County, WV: the next 30 days" description="Deadlines, application windows, public meetings and community dates in Morgantown and Monongalia County for the next 30 days, on one page you can print.">
+  <h1>This month in Mon County</h1>
+  <p class="lede">Here are the dates to know from {prettyDate(today)} to {prettyDate(last)}, on one page. That means deadlines, times to apply, public meetings and community dates. Updated {prettyDate(updated)}.</p>
+  <p>Each item links to its full listing on <a href={`${base}/calendar/`}>Deadlines and dates</a>, with buttons to call, get directions or add it to your calendar, and the source we checked. Dates can change, so check the source before you go.</p>
+  <div class="actions month-keep"><button class="btn" type="button" id="print-month" hidden><span>Print this page</span></button></div>
+
+  {windows.length > 0 && (
+    <>
+      <h2>Open for more than one day</h2>
+      <ul class="month-list">
+        {windows.map((e) => (
+          <li>
+            <a href={`${base}/calendar/#${e.slug}`}>{e.title}</a>
+            <span class="hint">{today >= e.starts ? `Open now. The last day is ${fmtDay(e.ends)}.` : `${fmtDay(e.starts)} to ${fmtDay(e.ends)}.`} {who(e)}.</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  )}
+
+  <h2>Day by day</h2>
+  {days.length ? days.map(({ d, list }) => (
+    <section class="month-day" aria-labelledby={`d-${d}`}>
+      <h3 id={`d-${d}`}>{fmtDay(d)}{d === today && ' (today)'}</h3>
+      <ul class="month-list">
+        {list.map((e) => (
+          <li>
+            <a href={`${base}/calendar/#${e.slug}`}>{e.title}</a>
+            <span class="hint">{e.start_time && `${prettyTimes(e.start_time, e.end_time)}. `}{who(e)}.</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )) : <p>No single-day dates on our calendar in the next 30 days. Dates are added as we check them, so look again soon.</p>}
+
+  <p class="meta">Built from our calendar: dates we checked against each source, and dates pulled each morning from the City of Morgantown, Monongalia County and Mountaineer Food Bank calendars. Online at everythingmorgantown.org/calendar/month/. Know a date that should be here? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Suggest it</a>.</p>
+
+  <style>
+    .month-list { padding-left: 1.2rem; }
+    .month-list li { margin: 6px 0; }
+    .month-list .hint { display: block; color: var(--muted); font-size: 0.95rem; }
+    .month-day h3 { margin-bottom: 4px; }
+    @media print {
+      .month-keep { display: none; }
+      .month-day { break-inside: avoid; }
+      .month-list a { color: #000; text-decoration: none; font-weight: 700; }
+    }
+  </style>
+  <script is:inline>
+    (function () {
+      var b = document.getElementById('print-month');
+      if (!b) return;
+      b.hidden = false;
+      b.addEventListener('click', function () { window.print(); });
+    })();
+  </script>
+</Base>

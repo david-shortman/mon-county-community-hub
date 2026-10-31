@@ -1,0 +1,46 @@
+name: Westside Senior Center
+other_names: [West Side Senior Center]
+slug: westside-senior-center
+kind: senior-center
+area: morgantown
+community: Westover
+run_by:
+  kind: volunteer-association
+  text: A volunteer board, behind Westover City Hall
+story: A center for people 50 and older, run entirely by volunteers since 2001.
+facilities:
+  rooms:
+    - name: Large dining area
+    - name: TV room
+    - name: Exercise room with cardio machines, weights and a pool table
+  kitchen: true
+  outdoor: [picnic area and pavilion with a stage, gazebo, cornhole area]
+regular:
+  - Open 9 a.m. to noon, Monday to Friday, and 6 to 8 p.m. Tuesday, Wednesday and Thursday
+  - Bingo every Wednesday. Doors open at 4 p.m., first game at 6 p.m., $5 a book
+  - Cards Tuesday and Thursday mornings, dulcimers Tuesday mornings, line dancing Wednesday at 10:15 a.m., mahjong Thursday at 9 a.m.
+  - Movie night the second Friday and music bingo the third Friday, both at 6 p.m.
+membership:
+  dues: $10 a year for people 50 and older ($20 for you and a spouse), running through June 30
+  covers: Includes the fitness room
+rentals:
+  - space: Pavilion
+    outdoor: true
+    price: Weekends $75 for members, $125 for others. Monday to Friday $40 for members, $75 for others. Class reunions $125 weekends, $75 weekdays
+    book: Call 304-296-6583 or email wssc26501@gmail.com. The center holds a date for 7 days.
+    source: https://www.westoverwv.org/westside-senior-center
+contact:
+  phone: "304-296-6583"
+  email: wssc26501@gmail.com
+  url: https://www.westoverwv.org/westside-senior-center
+  place: 500 Dupont Road, Westover, WV
+status: active
+last_activity_seen: 2026-10-16
+tags: [come-alone]
+sources:
+  - url: https://www.westoverwv.org/westside-senior-center
+    checked: 2026-10-30
+  - url: https://www.dominionpost.com/2026/10/16/senior-news-11
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/
+    checked: 2026-10-30
