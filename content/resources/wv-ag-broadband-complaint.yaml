@@ -1,0 +1,16 @@
+title: Complain about internet service to the Attorney General
+slug: wv-ag-broadband-complaint
+org: wv-attorney-general
+topics: [moving]
+who_it_is_for: Anyone with a problem with an internet company in West Virginia. The form lists problems like slow speed, outages, data caps, billing, rate changes, modems and being denied service.
+what_to_do: File online on the Attorney General's website. Or fill out the Broadband Consumer Complaint form and email it to consumer.complaint@wvago.gov with the subject line "Consumer Complaint," or mail it to the Consumer Protection Division, P.O. Box 1789, Charleston, WV 25325. Include copies of your papers, like your contract and bills. Questions, call the Consumer Protection Hotline at 1-800-368-8808.
+what_happens: The office reviews your complaint, then contacts the company for its response. The form says your information is shared with the West Virginia Office of Broadband.
+contact:
+  phone: "1-800-368-8808"
+  url: https://ago.wv.gov/consumer-protection/file-complaint-consumer-protection-division
+  url_label: File a complaint
+sources:
+  - url: https://ago.wv.gov/consumer-protection/file-complaint-consumer-protection-division
+    checked: 2026-10-30
+  - url: https://broadband.wv.gov/wp-content/uploads/2026/01/WVAG-Broadband-Complaint-Form-Fillable.pdf
+    checked: 2026-10-30
