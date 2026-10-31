@@ -1,0 +1,36 @@
+name: Arnettsville Public Library
+slug: mpls-arnettsville
+kind: library
+area: south
+community: Arnettsville
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: A branch library in the Arnettsville Community Center, with books, DVDs, programs for children, adults and seniors, public computers, printing, copying and fax.
+regular:
+  - Mondays 11:30 a.m. to 6:30 p.m.
+  - Tuesdays Closed
+  - Wednesdays 11:30 a.m. to 6:30 p.m.
+  - Thursdays Closed
+  - Fridays 11:30 a.m. to 3:30 p.m.
+  - Saturdays Closed
+  - Sundays Closed
+interests: [books, learning]
+tags: [free]
+contact:
+  url: https://mympls.org/about/locations/arnettsville/
+  phone: "304-278-2021"
+  place: 4120 Fairmont Road, Morgantown, WV 26501
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Free Wi-Fi and public computers. Computers can be used for up to 60 minutes.
+  - All branches are closed November 26 and 27, December 24 and 25, and December 31 and January 1.
+sources:
+  - url: https://mympls.org/about/locations/arnettsville/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/faqs/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/16028720
+    checked: 2026-10-30
