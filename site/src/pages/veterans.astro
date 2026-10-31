@@ -1,14 +1,17 @@
 ---
 // Veterans contact sheet (#228, part of #210): the VA clinic and Vet Center on
-// Commerce Drive, what needs a trip to Clarksburg, and 24/7 lines.
+// Commerce Drive, what needs a trip to Clarksburg, and 24/7 lines. Claims help,
+// jobs, posts and burial added in #586, #588, #589, #590 and #591 (research:
+// docs/groups/veterans.md). Facts read 2026-10-30.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-export const page = { door: "family", topic: "veterans", label: "Veterans", summary: "The VA clinic and Vet Center on Commerce Drive, and 24/7 help lines" };
+export const page = { door: "family", topic: "veterans", label: "Veterans", summary: "The VA clinic and Vet Center, free help with a VA claim, jobs, posts, burial benefits, and 24/7 help lines" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 ---
-<Base title="Veterans in Morgantown and Mon County: VA clinic, Vet Center and help lines" description="The Monongalia County VA Clinic and the Morgantown Vet Center on Commerce Drive, when you need to go to Clarksburg, and 24/7 lines for crisis and housing help.">
+<Base title="Veterans in Morgantown and Mon County: VA clinic, Vet Center and help lines" description="The Monongalia County VA Clinic and the Morgantown Vet Center on Commerce Drive, free help filing a VA claim, veteran job help, Legion and VFW posts in Morgantown, burial benefits and veterans cemeteries, and 24/7 lines for crisis and housing help.">
   <h1>Help for veterans in Mon County</h1>
   <p class="lede">Two VA offices are on Commerce Drive, off US 19: a health clinic and a Vet Center for counseling. In a crisis, dial 988 and press 1, any time.</p>
 
@@ -23,10 +26,41 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <p>Free and confidential, and not a medical office.</p>
   {r('morgantown-vet-center') && <ResourceCard r={r('morgantown-vet-center')} />}
 
+  <h2>Filing a VA claim: free help</h2>
+  <p>You do not have to pay anyone to file a VA claim. VA says help from an accredited representative of a Veterans Service Organization is always free. Accredited attorneys and claims agents can charge a fee only after VA decides your first claim, and only with a fee agreement you signed. Before you get help, make sure the person is accredited with VA (<a href="https://www.va.gov/resources/va-accredited-representative-faqs/">VA</a>).</p>
+  {r('wvdva-clarksburg-benefit-office') && <ResourceCard r={r('wvdva-clarksburg-benefit-office')} />}
+  {r('huntington-va-regional-benefit-office') && <ResourceCard r={r('huntington-va-regional-benefit-office')} />}
+  <p>To find any accredited representative near you, use VA's <a href="https://www.va.gov/get-help-from-accredited-representative/find-rep/">find a representative</a> tool.</p>
+
+  <h2>Finding a job</h2>
+  <p>WorkForce West Virginia gives veterans priority of service: veterans and eligible spouses who qualify get early access to job listings, plus help with resumes, interviews and training. When you register, fill out the military history section (<a href="https://workforcewv.org/job-seeker/specialized-services/veterans/">WorkForce WV</a>).</p>
+  {r('workforce-wv-morgantown-office') && <ResourceCard r={r('workforce-wv-morgantown-office')} />}
+  {r('owh-veteran-job-help') && <ResourceCard r={r('owh-veteran-job-help')} />}
+  <p>The Morgantown Vet Center can also help with Veteran Readiness and Employment (VR&amp;E), the VA program for job training and work help (<a href="https://www.va.gov/morgantown-vet-center/">VA</a>).</p>
+
+  <h2>Meet other veterans</h2>
+  <p>Posts in Morgantown, from each group's own post finder. Times can change, so call or check the finder first.</p>
+  <ul>
+    <li><strong>American Legion Mountaineer Post 174</strong>, 3472 Earl Core Road. <a href="tel:13042914676">304-291-4676</a>.</li>
+    <li><strong>American Legion Monongalia Post 2</strong>, Old Cheat Road. No phone listed.</li>
+    <li><strong>VFW Post 548, Gen. Daniel Morgan Post</strong>. Meets at 494 Spruce Street, 8 p.m. on the 1st and 3rd Thursday. <a href="tel:13042923927">304-292-3927</a>.</li>
+    <li><strong>VFW Post 9916, John L. Frazier Post</strong>, 340 Holland Avenue. Meets 7 p.m. on the 1st Thursday. <a href="tel:13042965981">304-296-5981</a>.</li>
+  </ul>
+  <p class="meta">Sources: the <a href="https://www.wvlegion.org/locator/">American Legion Department of West Virginia post locator</a> and the <a href="https://www.vfw.org/find-a-post">VFW post finder</a>, checked October 30, 2026. The state's <a href="https://veterans.wv.gov/basic-block/veteran-service-organizations">list of veterans groups</a> has more.</p>
+
   <h2>Losing your housing, or already homeless</h2>
   {r('va-homeless-veterans-line') && <ResourceCard r={r('va-homeless-veterans-line')} />}
 
-  <p>Other help near home, for anyone: <a href="tel:211">call 211</a> for food, bills and housing help, or see <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/turning-65/`}>Turning 65 or on Medicare</a>.</p>
+  <h2>When a veteran dies</h2>
+  <ul>
+    <li><strong>Burial costs:</strong> VA pays up to $2,000 toward burial for a death connected to service (after September 11, 2001). For a death not connected to service on or after October 1, 2026, VA pays up to $1,032 toward burial and up to $1,032 for a plot. Amounts are lower for earlier deaths. See the full rules and how to apply at <a href="https://www.va.gov/burials-memorials/veterans-burial-allowance/">VA</a>. The state's burial page lists older amounts, so go by VA's page.</li>
+    <li><strong>Headstone or marker:</strong> VA gives a government headstone or marker for an eligible veteran's grave at no charge (<a href="https://veterans.wv.gov/benefits-assistance/benefits/burial-benefits">WVDVA</a>).</li>
+    <li><strong>Help paying to set the marker:</strong> the state's Jack Bennett Fund gives up to $380 toward installing it, based on the family's need. Family members, funeral directors and cemeteries can apply (<a href="https://veterans.wv.gov/benefits-assistance/benefits/burial-benefits">WVDVA</a>).</li>
+  </ul>
+  {r('wv-national-cemetery') && <ResourceCard r={r('wv-national-cemetery')} />}
+  {r('kinnard-state-veterans-cemetery') && <ResourceCard r={r('kinnard-state-veterans-cemetery')} showCost />}
 
-  <p class="meta">VA sources checked October 30, 2026. Call before you go, since hours can change. We describe these services; we do not handle VA claims or speak for the VA. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p>Other help near home, for anyone: <a href="tel:211">call 211</a> for food, bills and housing help, or see <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</p>
+
+  <p class="meta">VA sources checked October 30, 2026. Call before you go, since hours can change. We describe these services; we do not handle VA claims or speak for the VA or any veterans group. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>

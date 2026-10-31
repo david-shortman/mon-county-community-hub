@@ -3,8 +3,10 @@
 # page on busride.org (read 2026-10-31). "First run" and "last run" are when
 # the route starts its first and last trip, as Mountain Line uses them. The
 # dates on the PDF links are the "Effective" or "Vigente" dates printed on
-# each PDF. Timetables are left off: the PDFs are dated 2016 to 2025 and two
-# disagree with their route page (said on the page), see #393 and #407.
+# each PDF. Timetables are left off: the PDFs are dated 2016 to 2025, two
+# disagree with their route page on hours (said on the page), and five more
+# (Blue, Brookhaven, Crown, Eastern Circulator, Pink) give a different run
+# time (checked 2026-10-31), see #393 and #407.
 slug: mountain-line-routes
 title: Mountain Line route schedules
 publisher: Mountain Line Transit Authority
@@ -388,7 +390,7 @@ sections:
     items:
       - name: "RideMon"
         lines:
-          - "Vans you request with an app, for people along the Mountain Heights (Rt. 14) and Grafton Road (Rt. 15) routes. Mountain Line says another person with the app, like a friend or family member, can request a ride for you."
+          - "Vans you request with an app, for people along the Mountain Heights (Rt. 14) and Grafton Road (Rt. 15) routes. If you do not have a smartphone or computer to use the app, Mountain Line says a friend or family member with the app can request rides for you."
           - "The vans go within the service area, or to one of three places to connect with a bus: Hornbeck Road Walmart, Mountaineer Mall and Sabraton Goodwill."
           - "Questions: call 304-291-RIDE (7433)."
         links:

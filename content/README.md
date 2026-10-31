@@ -68,9 +68,15 @@ meetings:               # optional (#902); regular meetings in the source's word
 steps:                  # optional (#822); what to do as a short numbered list
   - Make a free account on the site.
   - Upload your resume.
+options:                # optional (#973); a short bulleted list of choices, like the IDs that count
+  - A U.S. passport
+notes:                  # optional (#973); short paragraphs after the lists, for exceptions
+  - If you are 65 or older, an expired ID may still count.
 ```
 
-`steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+`steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `options` works the same way for a list of choices where order does not matter (a bulleted list), and `notes` holds exceptions as separate short paragraphs after the lists. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+
+Set `private_trace: true` on a domestic or sexual violence listing, or any listing where a text or share left on someone's phone could put them at risk (#555). The card then leaves off the "Pass it on" row (Text, Print, Share). Calendar entries take the same flag. The page's quick exit is still the way out.
 
 ### Town and neighborhood (#395)
 
@@ -85,7 +91,7 @@ Set them only when the record's own source names the place. Never work a town ou
 
 ## `calendar/<slug>.yaml`: dates and deadlines
 
-Shown on the site's Deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).
+Shown on the site's Dates and deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).
 
 ```yaml
 title: Heating bill help (LIEAP) applications open
@@ -360,6 +366,32 @@ sources:
     checked: 2026-10-30
 ```
 
+## `tonight/warming-shelter.yaml`: tonight's warming shelter status
+
+One file, shown on `/tonight/` (#401). Update it each day in winter, after reading a same-day source.
+
+```yaml
+status: open              # not-announced | open | closed-tonight | season-over
+checked: "2026-12-05 15:30"   # Morgantown date and time you read the source, quoted
+where: 123 Example St, Morgantown   # needed when open
+hours: 7 p.m. to 7 a.m.             # needed when open
+rules:                    # optional; shown before anything else, in the source's words
+  who: Adults 18 and older
+  pets: No pets
+  sobriety: ...
+  id: ...
+bus: ...                  # optional; how to get there
+last_bus: ...             # optional
+confirm_phone: "211"      # needed when open; a public number to confirm
+confirm_label: ...        # optional; who answers
+note: ...                 # optional; one plain sentence, like "No opening date has been announced yet."
+sources:
+  - url: https://example.org/warming-shelter
+    checked: 2026-12-05
+```
+
+The page says "open" only when `checked` is today in Morgantown, both when the site builds and again on the phone, so a page saved from an earlier day reads "Not confirmed for today." There is never a bed count. `npm run check-content` checks the status, the `checked` format, and that an open shelter has `where`, `hours` and `confirm_phone`.
+
 ## `doors.yaml`: the five doors
 
 The site is organized into five doors named for what is going on in a person's life, plus three lanes that are not doors: Help now, Dates, and About this site (#248). `doors.yaml` lists them and maps every `topics` tag used in this folder to one door, with the label people see:
@@ -574,3 +606,10 @@ sections:
 ```
 
 Rules: copy labels, fees, days and times exactly as printed; put the PDF's own words in quotes where you add a word around them. Never reword rules or eligibility. If the PDF is a scan, read it off the page image and say so in a comment at the top of the file. If the PDF disagrees with a newer official page, say who says what, or leave the item off and open a `needs-verification` issue. `npm run check-content` checks the fields, the dates and that every PDF link has its date.
+
+## `watch/<group>.yaml` and `checklists/<id>.yaml`: recurring checks (not listings)
+
+Neither folder shows on the site. Both feed issues for a person, from the daily Source check. See [`docs/operations/recurring-checks.md`](../docs/operations/recurring-checks.md).
+
+- `watch/`: pages a robot reads every day, comparing only the part between `start` and `end` (#166). Optional list fields: `season` (`"11-01 to 03-31"`), `words`, `todo`, `plan`. A change opens or comments on one issue per list. Field notes are at the top of `watch/food.yaml` and `watch/shelter.yaml`.
+- `checklists/`: what a robot cannot read (#752, #718, #793). One standing issue per file, refreshed each week. Item fields: `text`, `url`, `when` (`month` or `quarter`: only in the first week of one), `months` (only in those months), `from` (not before that date), `run` (a computed list: `secondhand-due`, `past-sale-dates`, `better-stale-soon`). Preview with `npm run checklists` in `site/`.

@@ -44,6 +44,10 @@ steps:
     resource: mon-power-report-outage
     text: Report the outage to Mon Power by phone or text. If a power line is down, call 911 and stay at least 30 feet away.
 situations:
+  - id: who-serves
+    label: Who handles police, trash, water and roads where I live?
+    page: /who-serves-me/
+    steps: [swa]
   - id: moving
     label: I'm moving here and need to start power, water, gas or trash
     page: /moving-here/

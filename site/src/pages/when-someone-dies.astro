@@ -1,0 +1,35 @@
+---
+// When someone dies (#222 coverage map, a missing area). Facts come from the
+// records, each read on the Monongalia County Clerk, state Vital Registration,
+// USAGov or VA pages on 2026-10-31. Left off until a person confirms them:
+// how many death certificates to order, who orders them, the FTC Funeral
+// Rule page (404 to our reader) and Social Security pages (403).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "records", label: "When someone dies", summary: "Death certificates, telling Social Security and other offices, recording a will and settling an estate, and burial benefits for veterans" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="When someone dies: death certificates and probate in Mon County, WV" description="What to do after a death in Monongalia County, WV: certified death certificates from the County Clerk or the state, telling Social Security and other offices, recording a will and settling an estate at the County Clerk's Probate Office, and VA burial benefits.">
+  <h1>When someone dies</h1>
+  <p class="lede">The County Clerk's Probate Office page walks you through the next steps, with one path if the person left a will and one if they did not. Below are the offices you will likely need, in the order many families need them.</p>
+
+  <h2 id="certificates">Death certificates</h2>
+  <p>Many offices ask for a certified copy, so you may need more than one.</p>
+  <ResourceCard r={resource('mon-county-clerk-death-certificates')} showCost />
+  <ResourceCard r={resource('wv-vital-records-death-certificates')} showCost />
+
+  <h2 id="tell">Tell Social Security and other offices</h2>
+  <ResourceCard r={resource('ssa-report-a-death')} />
+  <ResourceCard r={resource('usagov-who-to-notify-after-death')} />
+
+  <h2 id="estate">The will and the estate (probate)</h2>
+  <ResourceCard r={resource('mon-county-clerk-probate')} showCost />
+  <p>Questions about the law? See <a href={`${base}/legal-help/`}>courts and legal help</a> for free and low cost legal help.</p>
+
+  <h2 id="veterans">For a veteran's family</h2>
+  <ResourceCard r={resource('va-burial-benefits')} />
+  <ResourceCard r={resource('mon-county-clerk-dd214')} />
+
+  <p class="meta">Sources checked October 31, 2026. This page says where to go. It is not legal advice. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

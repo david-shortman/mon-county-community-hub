@@ -1,0 +1,157 @@
+---
+// "File today" (#402, part of #398): how to start a SNAP, Medicaid, LIEAP or
+// WV WORKS application today, and a "what to bring" builder. Every line is
+// from a West Virginia DoHS form, fact sheet or policy manual read on
+// 2026-10-31, named under each part. The builder's picks ride in the web
+// address (?have=job&have=rent), so nothing is stored or sent. Without
+// scripts the page shows the whole list, grouped by "If you...".
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource } from '../lib/content.mjs';
+export const page = { door: "this-month", topic: "money", label: "File today: SNAP, Medicaid, LIEAP, WV WORKS", summary: "How to start an application today, and a list of what to bring" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const ORG = 'wv-department-of-human-services';
+const src = {
+  snapForm: { url: 'https://bfa.wv.gov/media/40007/download?inline', checked, name: 'WV DoHS SNAP application, form DFA-SNAP-1, Rev. 7/26' },
+  snapPage: { url: 'https://bfa.wv.gov/bfa-programs/snap', checked },
+  dfa2: { url: 'https://bfa.wv.gov/media/1736/download?inline', checked, name: 'WV DoHS application for benefits, form DFA-2, Rev. 9/23' },
+  imm: { url: 'https://bfa.wv.gov/media/40005/download?inline', checked, name: 'WV DoHS Income Maintenance Manual (staff policy), effective October 5, 2026' },
+  bms: { url: 'https://bms.wv.gov/members/applying-healthcare', checked },
+  sla1: { url: 'https://bfa.wv.gov/media/2196/download?inline', checked, name: 'WV DoHS health coverage application, form DFA-SLA-1, Rev. 10/24' },
+  medFacts: { url: 'https://bfa.wv.gov/media/2416/download?inline', checked, name: 'WV DoHS Medicaid eligibility fact sheet, updated April 2025' },
+  lieapFacts: { url: 'https://bfa.wv.gov/media/39943/download?inline', checked, name: 'WV DoHS LIEAP fact sheet, FY 2027' },
+  works: { url: 'https://bfa.wv.gov/bfa-programs/wv-works', checked },
+  lieapOpened: { url: 'https://bfa.wv.gov/article/west-virginia-department-human-services-announces-energy-assistance-program-low-income', checked },
+  lieapClosed: { url: 'https://bfa.wv.gov/article/west-virginia-department-human-services-announces-closure-lieap-application-period', checked },
+};
+const office = resource('monongalia-county-dohs-office');
+const path = resource('apply-for-snap-wv-path');
+const lieap = resource('lieap-heating-help');
+const r211 = resource('wv-211');
+
+// The "what to bring" list. `when` is the situation that adds it ("all" is
+// everyone). `for` names the programs whose sources list it.
+const SITUATIONS = [
+  ['job', 'Someone in my home has a job'],
+  ['self', 'Someone in my home is self-employed'],
+  ['other-income', 'Someone gets Social Security, SSI, child support or other income'],
+  ['no-income', 'No one in my home has any income'],
+  ['rent', 'I pay rent'],
+  ['utility-heat', 'I heat with gas or electric from a utility company'],
+  ['bulk-heat', 'I heat with propane, oil, coal or wood I buy'],
+  ['health', 'I am applying for Medicaid or WVCHIP'],
+];
+const ITEMS = [
+  { when: 'all', for: 'SNAP, WV WORKS, LIEAP', text: 'Name, birth date and Social Security number for each person in your home. For Medicaid, legal immigrants who need coverage give their document numbers.', src: [src.lieapFacts, src.sla1, src.imm] },
+  { when: 'all', for: 'SNAP, WV WORKS', text: 'Proof of who you are. The state lists many kinds, for example a driver\'s license or state ID, a school ID, a passport, a military ID, voter registration card, employment ID or records, or a Social Security card.', src: [src.imm] },
+  { when: 'job', for: 'SNAP, WV WORKS, Medicaid, LIEAP', text: 'Pay stubs, or a written statement from the employer. For Medicaid, paystubs, W-2 forms, or wage and tax statements.', src: [src.imm, src.sla1, src.lieapFacts] },
+  { when: 'self', for: 'SNAP, WV WORKS', text: 'Self-employment records.', src: [src.imm] },
+  { when: 'other-income', for: 'SNAP, WV WORKS, LIEAP', text: 'An award letter, or a written statement from whoever pays it.', src: [src.imm, src.lieapFacts] },
+  { when: 'no-income', for: 'LIEAP', text: 'LIEAP asks for a zero-income statement if no one in the home has income.', src: [src.lieapFacts] },
+  { when: 'rent', for: 'SNAP', text: 'Proof of rent that shows the landlord\'s name and phone number, how much rent you owe, and how much you paid. A current lease, a letter from the landlord, or rent receipts or money order stubs. If you cannot get any of these, the worker can give you a form to fill out instead.', src: [src.imm] },
+  { when: 'utility-heat', for: 'LIEAP', text: 'A recent heating bill that shows the account number. Bring your electric bill too if electric is not your main heat.', src: [src.lieapFacts] },
+  { when: 'bulk-heat', for: 'LIEAP', text: 'A recent bulk fuel receipt. If you do not have one, last winter\'s receipts or a note from your landlord or fuel company.', src: [src.lieapFacts] },
+  { when: 'health', for: 'Medicaid, WVCHIP', text: 'Policy numbers for any health insurance you have now, and information about any health insurance offered through a job.', src: [src.sla1] },
+  { when: 'all', for: 'LIEAP', text: 'A phone number where DoHS can reach you.', src: [src.lieapFacts] },
+];
+const label = Object.fromEntries(SITUATIONS);
+---
+<Base help title="File today: start a SNAP, Medicaid, LIEAP or WV WORKS application in Mon County" description="How to start a SNAP, Medicaid, LIEAP or WV WORKS application today in Monongalia County, WV, and a printable list of what to bring, from the state's own forms. Nothing you pick is saved.">
+  <h1>File today: SNAP, Medicaid, heating help and WV WORKS</h1>
+  <p class="lede">You do not need every paper to start. Here is how to start each application today, and a list of what the state may ask you to bring.</p>
+  <p>All four programs are run by the West Virginia Department of Human Services (DoHS). WV PATH is the state's free website for applying. WVCHIP is the state's health coverage for children.</p>
+  <p class="note">This page quotes the state's own forms and rules. DoHS decides who qualifies, and the office may ask for more than this list. It is information, not legal advice.</p>
+  <ul class="topic-list">
+    <li><a href="#snap">SNAP (food stamps)</a></li>
+    <li><a href="#medicaid">Medicaid and WVCHIP</a></li>
+    <li><a href="#lieap">LIEAP (help with heating bills)</a></li>
+    <li><a href="#works">WV WORKS (cash help for families)</a></li>
+    <li><a href="#bring">Make a list of what to bring</a></li>
+  </ul>
+
+  <h2 id="snap">SNAP: you can start today with three things</h2>
+  <p>The state's SNAP application says you can file the same day you contact your county DoHS office. You only need to fill in your <strong>name, address and signature</strong>. Then turn the form in to the DoHS office in your county. A DoHS worker then interviews you. If you are found eligible, your benefits count from the date DoHS got your signed application.</p>
+  <p><strong>Within 7 days for some households.</strong> The application says you may get SNAP within seven calendar days if one of these is true:</p>
+  <ul>
+    <li>Your household has less than $150 in monthly income before taxes, and $100 or less in cash, checking or savings.</li>
+    <li>Your rent or mortgage plus utilities cost more than your household's monthly income and cash together.</li>
+    <li>Someone in your household is a migrant or seasonal farm worker.</li>
+  </ul>
+  <p>The state's manual says only proof of who you are is needed before this fast approval. Other SNAP applications are decided within 30 days.</p>
+  <SourceLine sources={[src.snapForm, src.imm]} org={ORG} about="filing for SNAP today" />
+  <ResourceCard r={office} />
+  <ResourceCard r={path} />
+
+  <h2 id="medicaid">Medicaid and WVCHIP</h2>
+  <p>The state's health coverage site says WV PATH is the recommended way to apply for most types of coverage. You can also apply through your county DoHS office, by mail, or for some types by calling 1-877-716-1212. If you cannot travel, call 1-800-642-8589 to ask about a home visit.</p>
+  <p>The health coverage application says: if you do not have all the information it asks for, sign and send the application anyway, and DoHS will follow up with you within 1 to 2 weeks. The state's manual says Medicaid and WVCHIP applicants should not be asked for proof unless the state cannot check the information electronically.</p>
+  <SourceLine sources={[src.bms, src.sla1, src.imm]} org={ORG} about="applying for Medicaid" />
+
+  <h2 id="lieap">LIEAP: help with heating bills</h2>
+  <p>LIEAP has set application windows, and funding can run out early: last season's regular window was set to run February 2 to 20, 2026, and DoHS closed it on February 9 when the money ran out. Check the dates on the card below before you go.</p>
+  <SourceLine sources={[src.lieapOpened, src.lieapClosed]} org={ORG} about="last season's LIEAP window" />
+  <ResourceCard r={lieap} />
+
+  <h2 id="works">WV WORKS: cash help for families</h2>
+  <p>To apply, use WV PATH or contact your local DoHS office. Unlike SNAP, the state's application says WV WORKS cash help counts from the date you meet all the program's requirements, which include signing a Personal Responsibility Contract and a Self-Sufficiency Plan and going to an orientation.</p>
+  <SourceLine sources={[src.works, src.dfa2]} org={ORG} about="WV WORKS" />
+
+  <h2 id="bring">What to bring</h2>
+  <p>Pick what fits your home, and we list what the state's forms and rules say you may be asked for. The state's manual says the worker must accept any reasonable proof and cannot insist on one kind. You can turn in proof in person, by mail, by fax or online. Nothing you pick is saved: your picks are only in this page's web address.</p>
+  <form id="ftb-form" class="door-pick" method="get" action={`${base}/file-today/#bring`} hidden>
+    <fieldset>
+      <legend>Which of these fit your home? Pick all that fit.</legend>
+      <ul class="pick">
+        {SITUATIONS.map(([id, text]) => <li><label><input type="checkbox" name="have" value={id} /><span>{text}</span></label></li>)}
+      </ul>
+    </fieldset>
+    <button class="btn btn-primary" type="submit">Show my list</button>
+  </form>
+  <section id="ftb-list" aria-labelledby="ftb-list-h">
+    <h3 id="ftb-list-h" tabindex="-1">What to bring</h3>
+    <ul class="ftb-items">
+      {ITEMS.map((it) => (
+        <li data-when={it.when}>
+          <p>{it.when !== 'all' && <strong class="ftb-if">If: {label[it.when].replace(/^./, (c) => c.toLowerCase())}. </strong>}{it.text} <span class="ftb-for">(Listed for {it.for}.)</span></p>
+          <SourceLine sources={it.src} org={ORG} about={`what to bring: ${it.text.slice(0, 40)}`} />
+        </li>
+      ))}
+    </ul>
+    <p>If you do not have something on this list, file anyway. For SNAP, the application says you can start with your name, address and signature. Tell the worker what is missing.</p>
+    <div class="actions keep-steps">
+      <button class="btn" type="button" id="ftb-print" hidden><span>Print this list</span></button>
+    </div>
+  </section>
+
+  <h2>Want help from a person?</h2>
+  <ResourceCard r={r211} />
+  <p class="meta">We describe how to apply. The state decides who gets help. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
+
+<style>
+  .ftb-items { padding-left: 1.2rem; display: grid; gap: 6px; }
+  .ftb-items p { margin: 4px 0 0; }
+  .ftb-for { color: var(--muted); font-size: 0.95rem; }
+  @media print { .ftb-items :global(.meta) { font-size: 8pt; } }
+</style>
+
+<script is:inline>
+  // Optional: shows only the items for the picks in the web address.
+  (function () {
+    var form = document.getElementById('ftb-form');
+    if (!form) return;
+    form.hidden = false;
+    var printBtn = document.getElementById('ftb-print');
+    printBtn.hidden = false;
+    printBtn.addEventListener('click', function () { window.print(); });
+    var picks = new URLSearchParams(location.search).getAll('have');
+    form.querySelectorAll('input[name="have"]').forEach(function (i) { i.checked = picks.indexOf(i.value) > -1; });
+    if (!picks.length) return;
+    document.querySelectorAll('.ftb-items li').forEach(function (li) {
+      var w = li.dataset.when;
+      li.hidden = !(w === 'all' || picks.indexOf(w) > -1);
+    });
+  })();
+</script>
