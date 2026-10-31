@@ -1,0 +1,11 @@
+name: West Virginia Office of Broadband
+slug: wv-office-of-broadband
+kind: government
+website: https://broadband.wv.gov/
+phone: "304-558-2234"
+summary: The state office for high-speed internet, part of the West Virginia Division of Economic Development. It runs the state's internet speed test and survey and publishes broadband maps.
+topics: [moving]
+area: statewide
+sources:
+  - url: https://broadband.wv.gov/
+    checked: 2026-10-30
