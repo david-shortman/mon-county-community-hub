@@ -1,0 +1,11 @@
+name: Monongalia County Assessor
+slug: monongalia-county-assessor
+kind: government
+website: https://www.assessor.org/
+phone: "304-291-7222"
+summary: The county office that assesses property for taxes. It takes personal property returns (including vehicles) and farm applications, and its field staff review parcels. It is in Room 335, 243 High Street, Morgantown, open Monday to Friday, 8:30 a.m. to 4:30 p.m. To pay property taxes, contact the Sheriff's Tax Department instead.
+topics: [government, taxes]
+area: monongalia-county
+sources:
+  - url: https://www.assessor.org/
+    checked: 2026-10-30
