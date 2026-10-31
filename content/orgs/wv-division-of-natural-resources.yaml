@@ -1,0 +1,11 @@
+name: West Virginia Division of Natural Resources (DNR)
+slug: wv-division-of-natural-resources
+kind: government
+website: https://wvdnr.gov/
+phone: "304-558-6200"
+summary: "The state agency that sells hunting and fishing licenses, online through WVhunt.com."
+topics: [outdoors]
+area: statewide
+sources:
+  - url: https://wvdnr.gov/buy-a-license
+    checked: 2026-10-30

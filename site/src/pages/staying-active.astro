@@ -1,0 +1,35 @@
+---
+// Staying active after 55 (#563, part of #267). Classes, the senior center and
+// walking trails, from each group's own page. Senior centers as places live in
+// the community centers section (#450); this page links there.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "family", topic: "disability", label: "Staying active after 55", summary: "Exercise classes, the senior center, and places to walk" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+---
+<Base title="Staying active after 55 in Morgantown and Mon County: classes, the senior center, trails" description="Yoga, tai chi, ballet and line dancing for adults 55 and over at the Wiles Hill Community Center, activities at the Senior Monongalians senior center, and rail-trails for walking in Morgantown and Mon County.">
+  <h1>Staying active after 55</h1>
+  <p class="lede">Retired, or just want to move more and meet people? Here are low-cost classes, the county's senior center, and smooth trails for walking.</p>
+
+  <h2>Exercise classes</h2>
+  {r('boparc-wellness-classes-55') && <ResourceCard r={r('boparc-wellness-classes-55')} showCost />}
+
+  <h2>The senior center</h2>
+  {r('senior-monongalians-activities') && <ResourceCard r={r('senior-monongalians-activities')} />}
+  <p>Other senior centers and community centers around the county: see <a href={`${base}/community-centers/`}>Community centers and halls</a>.</p>
+
+  <h2>Walking and biking</h2>
+  {r('mon-river-rail-trails') && <ResourceCard r={r('mon-river-rail-trails')} />}
+
+  <h2>Also check</h2>
+  <ul>
+    <li>Checkups and shots to get each year: <a href={`${base}/staying-well/`}>Staying well</a>.</li>
+    <li>Medicare questions: <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</li>
+    <li>What is happening this month: <a href={`${base}/calendar/month/`}>this month in Mon County</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30, 2026. Class times and prices change, so call before you go. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
