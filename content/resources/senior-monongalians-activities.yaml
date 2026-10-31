@@ -1,0 +1,21 @@
+title: Activities at the Senior Monongalians senior center
+slug: senior-monongalians-activities
+org: senior-monongalians
+topics: [disability, community]
+who_it_is_for: Older adults in Monongalia County. The center has a fitness room, billiards, corn hole, a library and lunch every weekday. Some events come up from time to time, like guest speakers, health screenings, flu shot clinics and free AARP tax help.
+what_to_do: Stop by the senior center at the Mountaineer Mall, Monday to Friday, 8 a.m. to 4 p.m. The main entrance is on the back side of the mall, under a maroon awning. Its website has a calendar of events.
+contact:
+  url: https://www.seniormons.org/blank-4
+  url_label: Events and activities
+  place: 5000 Greenbag Road, Suite A5, Morgantown, WV
+hours: Monday to Friday, 8 a.m. to 4 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:00"
+    closes: "16:00"
+get_in: walk-in
+sources:
+  - url: https://www.seniormons.org/blank-4
+    checked: 2026-10-30
+  - url: https://www.seniormons.org/
+    checked: 2026-10-30
