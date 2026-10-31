@@ -14,20 +14,26 @@ intro: >-
 items:
   - text: Dominion Post events column, for rummage sales, church sales and craft fairs.
     url: https://www.dominionpost.com/
-  - text: Visit Mountaineer Country events, for craft shows, markets and vintage events (blocks robots; read in a browser).
+    how: Same "Events and opportunities" listing as the centers checklist (see its How line). Read it once for both.
+  - text: Visit Mountaineer Country events, for craft shows, markets and vintage events.
     url: https://www.visitmountaineercountry.com/events/
-  - text: Gallery 304 and WV Vintage Fest page (blocks robots; read in a browser).
+    person: true
+  - text: Gallery 304 and WV Vintage Fest page.
     url: https://www.visitmountaineercountry.com/?p=334848
+    person: true
   - text: WVU calendar, for the Blue and Gold Mine Sale (May) and campus markets.
     url: https://cal.wvu.edu/
+    person: true
   - text: Treasure Hunter card shows, Morgantown Mall and Mylan Park only.
     url: https://www.treasurehunter.show/shows/west-virginia
+    how: The list hides each show's place. Open a show's own page for its address and hours. One show can appear on several days; the existing entry may already cover it.
   - text: FestivalNet, for Mylan Park craft shows.
     url: https://festivalnet.com/fairs-festivals/West-Virginia/Morgantown-WV
-  - text: Friends of the Morgantown Public Library, book sale room hours and special sales (sends robots an empty page).
-    url: https://www.mympls.org/get-involved/friends/
-  - text: Mountaineer Week, Arts and Craft Fair dates (blocks robots).
+  - text: Friends of the Morgantown Public Library, book sale room hours and special sales.
+    url: https://mympls.org/about/friends-of-the-library/
+  - text: Mountaineer Week, Arts and Craft Fair dates.
     url: https://mountaineerweek.wvu.edu/
+    person: true
     months: [9, 10, 11]
   - text: Sale and market dates that passed in the last 4 months. The site already hides them; look for each one's next date.
     run: past-sale-dates
