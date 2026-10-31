@@ -1,21 +1,21 @@
 ---
-// Parks, trails and outdoors (#631, part of #281). Built from resource
-// records: city parks (BOPARC) and county parks first. Trails, swim and skate,
-// Coopers Rock, licenses and groups come next (#632 to #637). Facts still
-// waiting on a person to confirm are in #630 and stay off this page.
+// Parks, trails and outdoors (#631 to #637, part of #281). Built from
+// resource records: city and county parks, trails, swim and skate, Coopers
+// Rock, hunting and fishing licenses, and groups. Facts still waiting on a
+// person to confirm are in #630 and stay off this page.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-export const page = { door: "living-here", topic: "outdoors", label: "Parks, trails and outdoors", summary: "City and county parks, what each has, and how to book a pavilion, cabin or campsite" };
+export const page = { door: "living-here", topic: "outdoors", label: "Parks, trails and outdoors", summary: "City and county parks, trails, pools and ice skating, Coopers Rock, fishing and hunting licenses, and groups to ride or run with" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const CITY = ['boparc-dorseys-knob-park', 'boparc-jack-roberts-park', 'boparc-krepps-park', 'boparc-marilla-park', 'boparc-white-park', 'boparc-wiles-hill-park', 'boparc-dog-parks'];
 const COUNTY = ['camp-muffly-park', 'chestnut-ridge-park', 'mason-dixon-park'];
 ---
-<Base title="Parks, trails and outdoors in Morgantown and Mon County, WV" description="Morgantown city parks run by BOPARC and Monongalia County parks (Camp Muffly, Chestnut Ridge, Mason-Dixon): what each park has, address and phone, and how to book a pavilion, cabin or campsite.">
+<Base title="Parks, trails and outdoors in Morgantown and Mon County, WV" description="Morgantown city parks (BOPARC) and Monongalia County parks, trails, indoor and outdoor pools, public ice skating, Coopers Rock State Forest, WV fishing and hunting licenses, and groups to ride or run with.">
   <h1>Parks, trails and outdoors in Mon County</h1>
-  <p class="lede">Two public groups run most parks here. BOPARC runs the City of Morgantown's parks. Monongalia County Parks and Recreation runs three larger county parks. Each card says what the park has and how to reach it.</p>
+  <p class="lede">Two public groups run most parks here. BOPARC runs the City of Morgantown's parks. Monongalia County Parks and Recreation runs three larger county parks. Each card says what the park has and how to reach it. Below the parks: trails, swimming and skating, Coopers Rock, licenses, and groups.</p>
 
   <nav aria-labelledby="jump-h">
     <h2 id="jump-h">On this page</h2>
@@ -24,15 +24,20 @@ const COUNTY = ['camp-muffly-park', 'chestnut-ridge-park', 'mason-dixon-park'];
       <li><a href="#county-parks">County parks</a></li>
       <li><a href="#book">Book a pavilion, cabin or campsite</a></li>
       <li><a href="#rail-trail">Walk, run or bike the rail-trails</a></li>
+      <li><a href="#trails">More trails: hiking and mountain biking</a></li>
+      <li><a href="#swim-skate">Swim and ice skate</a></li>
+      <li><a href="#coopers-rock">Coopers Rock State Forest</a></li>
+      <li><a href="#fish-hunt">Fishing and hunting licenses</a></li>
+      <li><a href="#groups">Groups to ride or run with</a></li>
     </ul>
   </nav>
 
   <h2 id="city-parks">City parks in Morgantown</h2>
-  <p>BOPARC (the Morgantown Board of Parks and Recreation Commissioners) runs these parks. Call 304-296-8356 with questions. Its office is at Marilla Park on Monday, Wednesday and Friday, and at the Wiles Hill Community Center on Tuesday and Thursday. Flegal Reservoir is another city park, still being built, with work planned to finish in December 2026 (<a href="https://www.boparc.org/flegal-reservoir.html">BOPARC page</a>).</p>
+  <p>BOPARC (the Morgantown Board of Parks and Recreation Commissioners) runs these parks. Call 304-296-8356 with questions. Its office is at Marilla Park on Monday, Wednesday and Friday, and at the Wiles Hill Community Center on Tuesday and Thursday (<a href="https://www.boparc.org/">BOPARC hours</a>). Flegal Reservoir is another city park, still being built, with work planned to finish in December 2026 (<a href="https://www.boparc.org/flegal-reservoir.html">BOPARC page</a>).</p>
   {CITY.map((s) => r(s) && <ResourceCard r={r(s)} />)}
 
   <h2 id="county-parks">County parks</h2>
-  <p>Monongalia County Parks and Recreation runs these three parks. Its office is at 270 Mylan Park Lane, Suite 150. Call 304-291-7013 or email <a href="mailto:parks@monongaliacounty.gov">parks@monongaliacounty.gov</a>.</p>
+  <p>Monongalia County Parks and Recreation runs these three parks. Its office is at 270 Mylan Park Lane, Suite 150. Call 304-291-7013 or email <a href="mailto:parks@monongaliacounty.gov">parks@monongaliacounty.gov</a> (<a href="https://www.monongaliacounty.gov/departments/parks_and_recreation/">county parks page</a>).</p>
   {COUNTY.map((s) => r(s) && <ResourceCard r={r(s)} showCost />)}
 
   <h2 id="book">Book a pavilion, cabin or campsite</h2>
@@ -43,5 +48,30 @@ const COUNTY = ['camp-muffly-park', 'chestnut-ridge-park', 'mason-dixon-park'];
   <h2 id="rail-trail">Walk, run or bike the rail-trails</h2>
   <p>The Mon River, Caperton and Deckers Creek rail-trails run through town and out into the county. See the rail-trail card on <a href={`${base}/staying-well/#mon-river-rail-trails`}>Staying well</a>, or the <a href="https://montrails.org/rail-trail-maps/">trail maps</a> from the Mon River Trails Conservancy.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these parks; we do not run them. Hours and rental rules change, so call the park or check its page before you go. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <h2 id="trails">More trails: hiking and mountain biking</h2>
+  {r('boparc-trails') && <ResourceCard r={r('boparc-trails')} />}
+  <p>Mason-Dixon Historical Park has more than six miles of trails (see its card above). Coopers Rock State Forest has about 50 miles (see below).</p>
+
+  <h2 id="swim-skate">Swim and ice skate</h2>
+  <p>Skating times and prices below are as each page shows them today. Times change, so check the page before you go.</p>
+  {r('peak-health-aquatic-center') && <ResourceCard r={r('peak-health-aquatic-center')} />}
+  {r('boparc-pools') && <ResourceCard r={r('boparc-pools')} />}
+  {r('boparc-ice-arena') && <ResourceCard r={r('boparc-ice-arena')} showCost />}
+  {r('hope-gas-ice-pavilion') && <ResourceCard r={r('hope-gas-ice-pavilion')} showCost />}
+
+  <h2 id="coopers-rock">Coopers Rock State Forest</h2>
+  {r('coopers-rock-state-forest') && <ResourceCard r={r('coopers-rock-state-forest')} />}
+  <p><a href="https://wvstateparks.com/wp-content/uploads/2017/03/CoopersRockStateForestMap.pdf">Coopers Rock trail map (PDF)</a> from WV State Parks.</p>
+
+  <h2 id="fish-hunt">Fishing and hunting licenses</h2>
+  {r('wv-hunting-fishing-license') && <ResourceCard r={r('wv-hunting-fishing-license')} />}
+  <p>No license is needed to fish the two ponds at Chestnut Ridge Park, which are catch and release only (see its card above). You do need one at Coopers Rock's Messinger Lake.</p>
+  <p>Free Fishing Days: in 2026 they were June 13 to 14, when anyone could fish public waters in West Virginia with no license. The DNR has not posted next year's dates yet. Check the <a href="https://wvdnr.gov/free-fishing-days/">Free Fishing Days page</a>.</p>
+
+  <h2 id="groups">Groups to ride or run with</h2>
+  {r('country-roads-cyclists-rides') && <ResourceCard r={r('country-roads-cyclists-rides')} />}
+  {r('girls-on-the-run-ncwv-programs') && <ResourceCard r={r('girls-on-the-run-ncwv-programs')} />}
+  <p>The Mon River Trails Conservancy keeps a list of local groups for running, paddling, hiking with young kids and birding on its <a href="https://montrails.org/rail-trail-info/">trail info page</a>. We have not found a running club with its own current website yet.</p>
+
+  <p class="meta">Sources checked October 30, 2026. We describe these places and groups; we do not run them. Hours, prices and rental rules change, so call or check the page before you go. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
 </Base>
