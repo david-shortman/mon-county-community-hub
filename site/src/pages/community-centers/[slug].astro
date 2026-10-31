@@ -1,0 +1,90 @@
+---
+// One page per gathering place (#463): its story, what's there, regular
+// happenings, upcoming events, how to join and rent, how to reach it, its
+// status, and every source with the date we checked it. For most centers
+// this is the first web page they have had. Built from content/places.
+import Base from '../../layouts/Base.astro';
+import Actions from '../../components/Actions.astro';
+import EventCard from '../../components/EventCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { loadCalendarWithFeeds, upcoming, reportUrl, prettyDate, loadDoors } from '../../lib/content.mjs';
+import { loadPlaces, placeStatus, whatsThere, areaLabel, KIND_LABELS, SECTION } from '../../lib/places.mjs';
+
+export function getStaticPaths() {
+  return loadPlaces().map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const door = loadDoors().bySlug.community;
+const st = placeStatus(p);
+const there = whatsThere(p);
+const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => e.venue === p.slug);
+const f = p.facilities ?? {};
+const where = `${p.community}, ${areaLabel(p.area).replace(/^./, (c) => c.toLowerCase())}`;
+---
+<Base title={`${p.name} in ${p.community}, Mon County WV`} description={`${p.name} in ${p.community}, Monongalia County, WV: ${there ? `${there.toLowerCase()}. ` : ''}${p.membership ? 'How to join, ' : ''}${p.rentals?.length ? 'renting a hall, ' : ''}upcoming events and how to reach it, with sources.`}>
+  <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
+    <ol>
+      <li><a href={`${base}/`}>Home</a></li>
+      <li><a href={`${base}${door.page ?? `/topics/#${door.slug}`}`}>{door.name}</a></li>
+      <li><a href={`${base}${SECTION.route}`}>{SECTION.name}</a></li>
+    </ol>
+  </nav>
+  <h1>{p.name}</h1>
+  <p class="lede">{KIND_LABELS[p.kind]} in {where}. {p.story}</p>
+  {p.other_names?.length > 0 && <p>Also listed as {p.other_names.join(' or ')}.</p>}
+  {st.label && <p class="note"><strong>{st.label}.</strong>{p.last_activity_seen && ` The newest sign of activity we found was from ${prettyDate(p.last_activity_seen)}.`}</p>}
+
+  <Actions callFirst phone={p.contact?.phone} phoneLabel={p.name} link={p.contact?.url} linkLabel={p.contact?.url_label ?? 'Website'} place={p.contact?.place} about={p.name} />
+  {p.contact?.place && <p><strong>Address:</strong> {p.contact.place}</p>}
+  {p.contact?.email && <p><strong>Email:</strong> <a href={`mailto:${p.contact.email}`}>{p.contact.email}</a></p>}
+  {p.contact?.facebook && <p><a href={p.contact.facebook}>{p.name} on Facebook</a>. We cannot check Facebook, so it may have newer news than this page.</p>}
+  {p.notes?.map((n) => <p class="note">{n}</p>)}
+
+  <h2>What's there</h2>
+  {there ? (
+    <ul>
+      {(f.rooms ?? []).map((r) => <li>{r.name}{r.seats && `, seats ${r.seats}`}</li>)}
+      {f.kitchen && <li>Kitchen</li>}
+      {f.gym && <li>Gym</li>}
+      {[...(f.outdoor ?? []), ...(f.other ?? [])].map((x) => <li>{x.replace(/^./, (c) => c.toUpperCase())}</li>)}
+      {f.step_free && <li>Step-free entrance</li>}
+    </ul>
+  ) : <p>The center does not publish this. Call or visit to ask.</p>}
+  <p>Run by: {p.run_by.text ?? p.run_by.kind.replace(/-/g, ' ')}.</p>
+
+  {p.regular?.length > 0 && (
+    <>
+      <h2>Regular happenings</h2>
+      <ul>{p.regular.map((r) => <li>{r}</li>)}</ul>
+    </>
+  )}
+
+  <h2 id="events">Coming up</h2>
+  {events.length ? events.map((e) => <EventCard e={e} />) : <p>No dated events on our list right now.{p.contact?.facebook ? ' Check its Facebook page or call.' : p.contact?.phone ? ' Call to ask.' : ''}</p>}
+
+  {p.membership && (
+    <>
+      <h2 id="join">Join</h2>
+      <p>{p.membership.dues}.{p.membership.covers && ` ${p.membership.covers}.`}</p>
+    </>
+  )}
+
+  {p.rentals?.length > 0 && (
+    <>
+      <h2 id="rent">Rent a space</h2>
+      <ul>
+        {p.rentals.map((r) => (
+          <li><strong>{r.space}</strong>{r.seats && `, seats ${r.seats}`}{r.kitchen && ', kitchen'}{r.price ? `: ${r.price}` : ': price not published'}{r.deposit && `, deposit ${r.deposit}`}. {r.book}</li>
+        ))}
+      </ul>
+      <p>Prices are what the source showed on the date we checked. Confirm when you book. We do not take bookings. <a href={`${base}${SECTION.route}halls/`}>Compare halls across the county</a>.</p>
+    </>
+  )}
+
+  <h2>Sources</h2>
+  <SourceLine sources={p.sources} about={p.name}>{p.phone_confirmed && ` Confirmed by phone ${prettyDate(p.phone_confirmed)}.`}</SourceLine>
+  <p class="meta">Something wrong here? <a href={reportUrl({ title: p.name, slug: p.slug, url: p.sources[0]?.url })}>Report a problem<span class="sr-only"> with {p.name} (opens GitHub)</span></a>. Fixes we make are listed on the <a href={`${base}/corrections/`}>Corrections page</a>. Work at this center? You can ask us to fix or remove this listing: see <a href={`${base}/partners/`}>For groups and helpers</a>.</p>
+  <p><a href={`${base}${SECTION.route}${p.slug}/flyer/`}>Print a flyer for {p.name}</a>: one page with a QR code, to post on a bulletin board.</p>
+  <p><a href={`${base}${SECTION.route}`}>All {SECTION.name.toLowerCase()}</a></p>
+</Base>
