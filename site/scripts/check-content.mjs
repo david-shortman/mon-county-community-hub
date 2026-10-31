@@ -194,6 +194,12 @@ for (const b of boards) {
     county: ['name', 'slug', 'org', 'created', 'meets', 'url', 'topics'],
   }[b.section] ?? ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'];
   checkRecord(b, required, BOARD_FIELDS);
+  // The note's numbers ("1 seat and 2 alternate seats") add up to open_seats (#856).
+  if (b.open_note != null) {
+    const sum = (String(b.open_note).match(/\d+/g) ?? []).reduce((n, d) => n + Number(d), 0);
+    if (sum !== b.open_seats) errors.push(`${where}: open_note adds up to ${sum} seats but open_seats is ${b.open_seats}`);
+  }
+  if (b.who_can_serve != null && !/\.$/.test(String(b.who_can_serve).trim())) errors.push(`${where}: who_can_serve should end with a period`);
   if (b.section != null && !['other', 'county'].includes(b.section)) errors.push(`${where}: section must be other or county, or left out`);
   if (b.org && !orgSlugs.has(b.org)) errors.push(`${where}: org ${b.org} has no file in content/orgs/`);
   if (b.url != null && !isUrl(b.url)) errors.push(`${where}: url is not a web link`);
