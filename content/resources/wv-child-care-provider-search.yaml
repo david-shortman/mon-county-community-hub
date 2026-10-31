@@ -1,0 +1,14 @@
+title: Search for licensed and registered child care
+slug: wv-child-care-provider-search
+org: wv-department-of-human-services
+topics: [family]
+who_it_is_for: Families looking for child care in West Virginia. The state's search lists child care centers, family child care facilities, Head Start, out-of-school-time child care centers, registered family child care, and relative child care.
+what_to_do: Open the state's provider search. Under County, pick Monongalia, and pick a provider type if you want one. The search page also links to the checklists the state uses when it inspects each type of care. Ask each provider about openings, hours and cost.
+contact:
+  url: https://bfa.wv.gov/find-childcare-provider
+  url_label: State child care search
+sources:
+  - url: https://bfa.wv.gov/find-childcare-provider
+    checked: 2026-10-31
+  - url: https://www.wvdhhr.org/bfa/ece-locator/
+    checked: 2026-10-31
