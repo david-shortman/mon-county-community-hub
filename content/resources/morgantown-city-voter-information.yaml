@@ -1,0 +1,13 @@
+title: Voting in Morgantown city elections
+slug: morgantown-city-voter-information
+org: city-of-morgantown
+topics: [voting]
+who_it_is_for: People who live inside Morgantown city limits. The city says you use the same County Clerk registration for city elections as for state and federal elections. The next City Council election is in 2027.
+what_to_do: "Your polling place depends on your precinct, not your ward. Your precinct is on your voter registration card. For help finding your precinct, or questions about city elections, call the City Clerk at 304-284-7434. The city says: \"Voter registration closes on the twenty-first day before the election or on the first day thereafter which is not a Saturday, Sunday or legal holiday.\""
+contact:
+  phone: "304-284-7434"
+  url: https://www.morgantownwv.gov/590/Voter-Information
+  url_label: City voter page
+sources:
+  - url: https://www.morgantownwv.gov/590/Voter-Information
+    checked: 2026-10-30

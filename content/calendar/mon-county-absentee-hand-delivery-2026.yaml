@@ -1,0 +1,17 @@
+title: Last day to hand deliver an absentee ballot
+slug: mon-county-absentee-hand-delivery-2026
+starts: 2026-11-02
+start_time: "08:30"
+end_time: "16:30"
+org_name: Monongalia County Clerk
+who_it_is_for: Voters in Monongalia County who have an absentee ballot and want to bring it in instead of mailing it.
+what_to_do: Bring it to the County Clerk's office, 243 High Street, Room 123, Morgantown. The last day is Monday, November 2. Mailed ballots must be postmarked by Election Day, Tuesday, November 3. One person may not deliver more than two voters' ballots.
+url: https://sos.wv.gov/absentee-voting-information
+topics: [voting]
+phone: 304-291-7230
+phone_label: the Monongalia County Clerk
+sources:
+  - url: https://sos.wv.gov/absentee-voting-information
+    checked: 2026-10-31
+  - url: https://monongaliacountyclerk.com/index.php/elections/17-current-election/124-2026-general-election-information
+    checked: 2026-10-31

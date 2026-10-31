@@ -1,0 +1,7 @@
+date: 2026-10-30
+item: Marilla Park
+page: /parks/
+kind: fact
+found_by: our-check
+what: We said Marilla Pool has two water slides. BOPARC's park page says two and its pool page says three, so we now say the pool has water slides, without a number.
+link: https://github.com/david-shortman/mon-county-community-hub/pull/899
