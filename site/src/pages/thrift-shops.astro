@@ -5,6 +5,7 @@
 // No ratings, no "best of", no paid placement.
 import Base from '../layouts/Base.astro';
 import ShopCard from '../components/ShopCard.astro';
+import AreaPicker from '../components/AreaPicker.astro';
 import { loadSecondhand, SECONDHAND_AREAS, SECONDHAND_GOODS } from '../lib/content.mjs';
 export const page = { door: "living-here", topic: "secondhand", label: "Thrift and resale shops", summary: "Secondhand shops by area: what each sells, which ones buy from you, and which fund a local cause" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -31,12 +32,16 @@ const causes = shops.filter((s) => s.funds_local_cause);
     <p>By area: {areas.map((a, i) => <>{i > 0 && ' · '}<a href={`#area-${a.slug}`}>{a.name}</a></>)}</p>
   </nav>
 
+  <AreaPicker areas={areas.map((a) => ({ slug: a.slug, name: a.name }))} />
+
+  <div class="area-group">
   {areas.map((a) => (
-    <section aria-labelledby={`area-${a.slug}`}>
+    <section data-area={a.slug} aria-labelledby={`area-${a.slug}`}>
       <h2 id={`area-${a.slug}`}>{a.name}</h2>
       {a.shops.map((s) => <ShopCard s={s} />)}
     </section>
   ))}
+  </div>
 
   <h2>More ways to buy, sell and share</h2>
   <ul>

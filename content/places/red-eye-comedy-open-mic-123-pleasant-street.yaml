@@ -1,0 +1,26 @@
+name: Comedy Open Mic at 123 Pleasant Street
+slug: red-eye-comedy-open-mic-123-pleasant-street
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: business
+  text: Red Eye Comedy, at the 123 Pleasant Street music venue
+story: A comedy open mic night where people can sign up to perform or come to watch. For ages 18 and up.
+regular:
+  - Some Wednesdays, 8 p.m. Check the venue calendar for dates.
+cost: Free
+interests: [theater, arts]
+contact:
+  url: https://www.123pleasantstreet.com/
+  place: 123 Pleasant Street, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Ages 18 and up.
+  - The venue calendar listed Wednesday, October 7, 2026 and Wednesday, November 4, 2026.
+sources:
+  - url: https://www.123pleasantstreet.com/
+    checked: 2026-10-30
+  - url: https://www.123pleasantstreet.com/calendar
+    checked: 2026-10-30

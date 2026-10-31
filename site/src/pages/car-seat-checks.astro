@@ -13,8 +13,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h1>Free car seat checks</h1>
   <p class="lede">A trained technician can check that your child's car seat is put in right. The state lists two places in Mon County. Call ahead to set up a time.</p>
 
-  {r('car-seat-check-sheriff') && <ResourceCard r={r('car-seat-check-sheriff')} showCost />}
-  {r('car-seat-check-wvu-medicine-childrens') && <ResourceCard r={r('car-seat-check-wvu-medicine-childrens')} showCost />}
+  {r('car-seat-check-sheriff') && <ResourceCard r={r('car-seat-check-sheriff')} headingLevel={2} showCost />}
+  {r('car-seat-check-wvu-medicine-childrens') && <ResourceCard r={r('car-seat-check-wvu-medicine-childrens')} headingLevel={2} showCost />}
 
   <p>More for families with young kids: <a href={`${base}/for/parents-young-kids/`}>For parents of babies and toddlers</a>.</p>
 

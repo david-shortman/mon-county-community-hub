@@ -1,0 +1,413 @@
+{
+  "id": "monongalia-arts-center",
+  "feed_url": "https://calendar.google.com/calendar/ical/56d22ade1ef4e02b8eddb9fe26435b043cfa785f0123a23adc4abf5c85ec826a%40group.calendar.google.com/public/basic.ics",
+  "fetched": "2026-10-31T00:18:03.244Z",
+  "entries": [
+    {
+      "title": "Standup Comedy Workshop",
+      "slug": "mac-standup-comedy-workshop-2026-11-13",
+      "starts": "2026-11-13",
+      "ends": "2026-11-13",
+      "start_time": "18:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Holiday Card and Ornament Market",
+      "slug": "mac-holiday-card-and-ornament-market-2026-12-05",
+      "starts": "2026-12-05",
+      "ends": "2026-12-05",
+      "start_time": "10:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "market"
+      ]
+    },
+    {
+      "title": "Literary Night ft Madhuri Bapat",
+      "slug": "mac-literary-night-ft-madhuri-bapat-2026-11-12",
+      "starts": "2026-11-12",
+      "ends": "2026-11-12",
+      "start_time": "18:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Watercolor Painting Workshop",
+      "slug": "mac-watercolor-painting-workshop-2026-11-30",
+      "starts": "2026-11-30",
+      "ends": "2026-11-30",
+      "start_time": "17:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Sabor LatinoH Concert and Social Dance",
+      "slug": "mac-sabor-latinoh-concert-and-social-dance-2026-11-21",
+      "starts": "2026-11-21",
+      "ends": "2026-11-21",
+      "start_time": "15:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Collage Club",
+      "slug": "mac-collage-club-2026-11-10",
+      "starts": "2026-11-10",
+      "ends": "2026-11-10",
+      "start_time": "19:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Art Salon",
+      "slug": "mac-art-salon-2026-12-03",
+      "starts": "2026-12-03",
+      "ends": "2026-12-03",
+      "start_time": "17:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Figure Drawing Class",
+      "slug": "mac-figure-drawing-class-2026-11-18",
+      "starts": "2026-11-18",
+      "ends": "2026-11-18",
+      "start_time": "18:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Folk, last class",
+      "slug": "mac-folk-last-class-2026-11-18",
+      "starts": "2026-11-18",
+      "ends": "2026-11-18",
+      "start_time": "16:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Folk showcase",
+      "slug": "mac-folk-showcase-2026-11-20",
+      "starts": "2026-11-20",
+      "ends": "2026-11-20",
+      "start_time": "18:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Acrylic Painting Workshop",
+      "slug": "mac-acrylic-painting-workshop-2026-11-09",
+      "starts": "2026-11-09",
+      "ends": "2026-11-09",
+      "start_time": "17:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Soundstreams",
+      "slug": "mac-soundstreams-2027-04-05",
+      "starts": "2027-04-05",
+      "ends": "2027-04-05",
+      "start_time": "19:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Soundstreams",
+      "slug": "mac-soundstreams-2027-02-15",
+      "starts": "2027-02-15",
+      "ends": "2027-02-15",
+      "start_time": "19:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Folk semester starts!",
+      "slug": "mac-folk-semester-starts-2027-01-13",
+      "starts": "2027-01-13",
+      "ends": "2027-01-13",
+      "start_time": "16:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Screen Printing course starts",
+      "slug": "mac-screen-printing-course-starts-2026-11-07",
+      "starts": "2026-11-07",
+      "ends": "2026-11-07",
+      "start_time": "12:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Brown Bag Concert ft WVU Horn Quartet",
+      "slug": "mac-brown-bag-concert-ft-wvu-horn-quartet-2026-12-02",
+      "starts": "2026-12-02",
+      "ends": "2026-12-02",
+      "start_time": "12:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Ikebana Workshop",
+      "slug": "mac-ikebana-workshop-2026-11-21",
+      "starts": "2026-11-21",
+      "ends": "2026-11-21",
+      "start_time": "11:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Kids Art Class - Drawing Fall Leaves",
+      "slug": "mac-kids-art-class-drawing-fall-leaves-2026-11-17",
+      "starts": "2026-11-17",
+      "ends": "2026-11-17",
+      "start_time": "18:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "family"
+      ]
+    },
+    {
+      "title": "Upcycling Clothing Club",
+      "slug": "mac-upcycling-clothing-club-2026-11-19",
+      "starts": "2026-11-19",
+      "ends": "2026-11-19",
+      "start_time": "18:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Soundstreams",
+      "slug": "mac-soundstreams-2026-11-16",
+      "starts": "2026-11-16",
+      "ends": "2026-11-16",
+      "start_time": "19:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Featuring Joshua Cook, drones.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Intro to Hand Building Ceramics",
+      "slug": "mac-intro-to-hand-building-ceramics-2026-11-10",
+      "starts": "2026-11-10",
+      "ends": "2026-11-10",
+      "start_time": "18:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Soundstreams",
+      "slug": "mac-soundstreams-2027-01-18",
+      "starts": "2027-01-18",
+      "ends": "2027-01-18",
+      "start_time": "19:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Shortform Improv Workshop",
+      "slug": "mac-shortform-improv-workshop-2026-11-12",
+      "starts": "2026-11-12",
+      "ends": "2026-11-12",
+      "start_time": "18:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Soundstreams",
+      "slug": "mac-soundstreams-2027-05-17",
+      "starts": "2027-05-17",
+      "ends": "2027-05-17",
+      "start_time": "19:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "High Street Horns Concert",
+      "slug": "mac-high-street-horns-concert-2026-11-13",
+      "starts": "2026-11-13",
+      "ends": "2026-11-13",
+      "start_time": "18:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Brown Bag Concert ft Jason Keeling",
+      "slug": "mac-brown-bag-concert-ft-jason-keeling-2026-11-18",
+      "starts": "2026-11-18",
+      "ends": "2026-11-18",
+      "start_time": "12:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Soundstreams",
+      "slug": "mac-soundstreams-2027-03-15",
+      "starts": "2027-03-15",
+      "ends": "2027-03-15",
+      "start_time": "19:00",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Handmade Ceramic Gifts Workshop",
+      "slug": "mac-handmade-ceramic-gifts-workshop-2026-11-21",
+      "starts": "2026-11-21",
+      "ends": "2026-11-21",
+      "start_time": "10:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Ceramic Flower Frogs Workshop",
+      "slug": "mac-ceramic-flower-frogs-workshop-2026-11-14",
+      "starts": "2026-11-14",
+      "ends": "2026-11-14",
+      "start_time": "10:30",
+      "org_name": "Monongalia Arts Center",
+      "who_it_is_for": "Listed on the Monongalia Arts Center calendar.",
+      "what_to_do": "Some events cost money. See the center's site for details and cost.",
+      "url": "https://www.monartscenter.com/",
+      "topics": [
+        "community"
+      ]
+    }
+  ]
+}
