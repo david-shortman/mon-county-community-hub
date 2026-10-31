@@ -568,6 +568,7 @@ sections:
             url: https://example.org/route.pdf
             date: "Effective August, 2018"                   # needed on a PDF link
             lang: es                                         # optional; the link's language if not English
+            # saved: "February 16, 2025"                    # instead of date, only when no date is printed: the file's save date
       - A plain line of text is also an item.
 ```
 
