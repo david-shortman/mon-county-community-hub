@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
 import SourceLine from '../components/SourceLine.astro';
+import ResourceCard from '../components/ResourceCard.astro';
 import { resource, org, telHref } from '../lib/content.mjs';
 export const page = { door: "this-month", label: "Get through this month", summary: "Can't pay a bill, behind on rent, short on food, cash fast, free tax help" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -16,6 +17,8 @@ const legalAidName = org(legalAid.org).name;
 const wv211 = resource('wv-211');
 const dfi = resource('wv-dfi-check-a-lender');
 const taxPrep = resource('christian-help-free-tax-prep');
+const rack = resource('the-rack-wvu-student-food-pantry');
+const studentLegal = resource('wvu-student-legal-services');
 const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/government-program-pays-your-bills', checked: '2026-10-29', name: 'Federal Trade Commission' }];
 ---
 <Base help title="Get through this month: bills, rent and food help in Morgantown and Mon County" description="Can't pay a bill, behind on rent, short on food, need cash fast, or want free tax help? Pick what is going on and get local steps in order, with phone numbers and sources, in Morgantown and Monongalia County.">
@@ -45,6 +48,12 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
     <li><strong>Bring:</strong> a photo ID for each person who earned money, Social Security numbers and birth dates for everyone on the return, last year's returns if you have them, W-2 and 1099 forms, and bank details if you want direct deposit. If you file together, both spouses come.</li>
   </ul>
   <SourceLine sources={taxPrep.sources} org={taxPrep.org} about="free tax help"> The source is a Morgantown Magazine article from January 14, 2026.</SourceLine>
+
+  <h3 id="students">Are you a WVU student?</h3>
+  <p>WVU has its own free help for students. Start with these, then see the rest of this page.</p>
+  {/* Add the WVU emergency funds card here once its record is on main (#888, #602). */}
+  <ResourceCard r={rack} headingLevel={4} lead="Short on food: The Rack is free for WVU students." />
+  <ResourceCard r={studentLegal} headingLevel={4} showCost lead="Trouble with a lease or a landlord: Student Legal Services can help." />
 
   <h3>What things cost here</h3>
   <p>We have not found a trusted, sourced list of local rent, child care or pay figures yet, so we do not show numbers. We would rather show nothing than a guess. Know a public source? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
