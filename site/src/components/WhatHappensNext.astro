@@ -4,6 +4,7 @@
 // only the fields a record has; every field comes from the record's own
 // sources, and a helper named in if_you_want_help brings its own record.
 import { resource, telHref } from '../lib/content.mjs';
+import Checklist from './Checklist.astro';
 const { r } = Astro.props;
 const helpers = (r.if_you_want_help ?? []).map((s) => resource(s)).filter((h) => !h.hidden);
 const has = Boolean(r.what_to_bring?.length || r.what_happens || r.best_time || helpers.length);
@@ -14,7 +15,7 @@ const has = Boolean(r.what_to_bring?.length || r.what_happens || r.best_time || 
     {r.what_to_bring?.length > 0 && (
       <>
         <p>What to have ready:</p>
-        <ul>{r.what_to_bring.map((b) => <li>{b}</li>)}</ul>
+        <Checklist items={r.what_to_bring} key={`bring-${r.slug}`} label={`What to have ready: ${r.title}`} />
       </>
     )}
     {r.what_happens && <p>{r.what_happens}</p>}
