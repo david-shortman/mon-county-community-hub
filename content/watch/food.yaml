@@ -1,0 +1,235 @@
+# Food pantry and meal pages the daily Source check watches closely (#166).
+# How it works and what to do when one changes: docs/plans/2026-10-31-pantry-watch.md
+#
+# This is a watch list, not a listing. Nothing here shows on the site.
+# Fields:
+#   name     the group or program
+#   org      its record in content/orgs, if there is one
+#   kind     page, pdf, facebook (a person checks it), none (no web source:
+#            goes to the call queue, #156) or blocked (sends robots away; a
+#            person checks it in a browser)
+#   url      the most specific page that gives the hours
+#   start, end  short text just before and just after the hours on the page.
+#            Only the text between them is compared, digits included.
+#   quote    the hours exactly as the page says them, on the checked date
+#   checked  when a person or agent last read the page against this entry
+#   note     conflicts and anything a re-checker should know
+# A quote here is proof of what the page said, not a confirmed fact for the
+# site. Hours go on the site only through a record and a PR (food PRs wait for
+# David).
+group: food
+title: Food pantry and meal pages
+issue_title: Food pantry or meal page changed
+entries:
+  # ---------- Each group's own page ----------
+  - name: Christian Help (service and donation hours)
+    org: christian-help
+    kind: page
+    url: https://motownchristianhelp.com/contact-us/
+    start: Service & Donation Hours
+    end: Contact Us
+    quote: "Monday, Tuesday & Thursday: 9am - 4pm"
+    checked: 2026-10-31
+    note: Directories say Monday to Thursday. The group's own page says Wednesday is donations only.
+
+  - name: Christian Help (food orders)
+    org: christian-help
+    kind: page
+    url: https://motownchristianhelp.com/programs/
+    start: Food orders are available every
+    end: Christian Help also aims
+    quote: Monday, Tuesday, Thursday from 9 am-4 pm, and Fridays 9 am-2 pm
+    checked: 2026-10-31
+
+  - name: Scott's Run Settlement House (site hours, used by our record)
+    org: scotts-run-settlement-house
+    kind: page
+    url: https://www.srsh.org/
+    start: Operational Hours
+    end: Privacy Policy
+    quote: "Fairchance Road: Mon - Wed 8:30 am - 4:30 pm Lady Bug Drive: Thu- Fri 8:30 am - 4:30 pm"
+    checked: 2026-10-31
+    note: The footer hours differ from page to page on this site, and the FAQ gives 8:30 to 2:30. Pantry hours are in #932.
+
+  - name: Scott's Run Settlement House (FAQ, pantry times)
+    org: scotts-run-settlement-house
+    kind: page
+    url: https://www.srsh.org/faq
+    start: What times are you open?
+    end: How many people do you impact
+    quote: Monday-Wednesday 8:30-2:30 at the Fairchance Road location. Thursdays-Friday 8:30-2:30 at the Lady Bug Lane location.
+    checked: 2026-10-31
+
+  - name: Scott's Run Settlement House (free market)
+    org: scotts-run-settlement-house
+    kind: page
+    url: https://www.srsh.org/free-market
+    start: Mon, Tues, Wed at our Cheat Lake office
+    end: Our market is located outside
+    checked: 2026-10-31
+
+  - name: St. Ursula Food Pantry and Outreach
+    kind: page
+    url: https://www.stmarystarcity.com/st--ursula
+    start: FOOD PANTRY
+    end: St. Ursula Food Pantry is a member of
+    quote: The Food pantry is the first 3 Wednesdays of the month by appointment 1:00pm -4:30pm
+    checked: 2026-10-31
+    note: Catholic Charities says 1:30 to 4:00. The city page gives office hours.
+
+  - name: Salvation Army Morgantown (office and Sally's Kitchen)
+    kind: page
+    url: https://morgantown.salvationarmypotomac.org/morgantown/how-we-help
+    start: Hours of Operation
+    end: Get Directions
+    quote: "Sally's Kitchen: 3:00 PM - 5:15 PM, Monday - Friday"
+    checked: 2026-10-31
+    note: No pantry hours on its own page. The United Way list gives pantry and meal hours that differ.
+
+  - name: Community Kitchen (weekday lunch)
+    kind: page
+    url: https://www.morgantowncommunitykitchen.com/
+    start: Our board
+    end: Announcements
+    quote: "Normal Operating Hours: M-F 11:00 - 12:15"
+    checked: 2026-10-31
+    note: The page says it closes in bad winter weather and when other groups serve lunch.
+
+  - name: Senior Monongalians (congregate meals)
+    org: senior-monongalians
+    kind: page
+    url: https://www.seniormons.org/blank
+    start: "Benefits of Congregate Meals:"
+    end: Congregate meals are open to individuals aged 60
+    checked: 2026-10-31
+
+  - name: Morgantown Area Meals on Wheels
+    kind: page
+    url: https://morgantownwvmow.org/
+    start: "Kitchen / Office hours:"
+    end: "Phone:"
+    checked: 2026-10-31
+    note: Home delivery, not a walk-in site. The United Way list gives different hours.
+
+  - name: Starting Points food pantry
+    org: starting-points-family-support-center
+    kind: page
+    url: https://moncountyfamilysupportcenter.org/food-pantry/
+    start: Team Food Pantry
+    end: Monongalia County Family Support Center 537
+    quote: By Appointment Only
+    checked: 2026-10-31
+    note: The United Way list gives walk-in hours at another address. See #932.
+
+  - name: First Presbyterian Church (Sunday breakfast)
+    kind: page
+    url: https://www.firstpresmorgantown.org/community-missions
+    start: PANCAKE BREAKFAST
+    end: We typically serve between
+    checked: 2026-10-31
+    note: The page gives the end time as 9:00p, likely a typo. See #932.
+
+  - name: Pantry Plus More (mobile giveaways)
+    kind: page
+    url: https://www.pantryplusmore.org/mobile-food-giveaways/
+    start: "DATE:"
+    end: Pantry Plus More partners with
+    checked: 2026-10-31
+    note: The last date shown was April 2026. The United Way list says its pantries are in schools.
+
+  - name: Mountaineer Food Bank mobile pantry (Monongalia County)
+    kind: page
+    url: https://mountaineerfoodbank.org/food-pantries/
+    start: Monongalia County
+    end: Monroe County
+    checked: 2026-10-31
+    note: Changes after every pantry date, as expected. The dates are also read from the food bank's feed every build.
+
+  # ---------- Lists that cover many groups ----------
+  - name: United Way FRN food list (page with the current PDF)
+    kind: page
+    url: https://www.unitedwaympc.org/food-hunger
+    start: contact Food for Preston.
+    end: Blessing Boxes in Monongalia
+    checked: 2026-10-31
+    note: A new list usually means a new PDF link here. Many small pantries appear only on this list.
+
+  - name: United Way FRN food list (PDF of 1.26.26)
+    kind: pdf
+    url: https://www.unitedwaympc.org/sites/unitedwaympc/files/Monongalia%20County%20Food%20Assistance%20Hours%201.26.26%20(1).pdf
+    checked: 2026-10-31
+
+  - name: City of Morgantown, PATHWAYS to Help (Food Resources)
+    kind: page
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: Food Resources
+    end: Local Shelter & Housing Resources
+    checked: 2026-10-31
+    note: A cross-check. It repeats some older hours, so the group's own page wins.
+
+  # ---------- Read by a person ----------
+  - name: The Rack and Rack II (WVU student pantry)
+    kind: blocked
+    url: https://studentengagement.wvu.edu/the-rack-student-food-pantry
+    checked: 2026-10-31
+    note: WVU sends automated sessions away. Check in a browser.
+
+  - name: Catholic Charities WV food assistance
+    org: catholic-charities-west-virginia
+    kind: blocked
+    url: https://www.ccwva.org/programs/food-assistance/
+    checked: 2026-10-31
+    note: Answers robots with an error code. The page lists no Morgantown pantry hours, only St. Ursula for the area.
+
+  # ---------- No web source found (call queue, #156) ----------
+  - name: Catholic Charities Morgantown pantry
+    kind: none
+    checked: 2026-10-31
+    note: Its own site lists a Monongalia County pantry phone but no hours. Directories give hours we could not confirm.
+  - name: Covenant Evangelical Methodist food pantry (Greenbag Road)
+    kind: none
+    checked: 2026-10-31
+    note: No website found. The United Way list and directories give different hours.
+  - name: Canyon Presbyterian food pantry
+    kind: none
+    checked: 2026-10-31
+    note: On the United Way list only.
+  - name: Rock Forge Presbyterian food pantry
+    kind: none
+    checked: 2026-10-31
+  - name: Wadestown food pantry
+    kind: none
+    checked: 2026-10-31
+    note: On the United Way list only.
+  - name: Clay-Battelle Senior Citizens Center
+    kind: none
+    checked: 2026-10-31
+    note: On the United Way list only.
+  - name: Circle of Friends
+    kind: none
+    checked: 2026-10-31
+    note: On the United Way list only.
+  - name: Sarah's Table
+    kind: none
+    checked: 2026-10-31
+    note: On the United Way list only.
+  - name: Food Not Bombs Morgantown
+    kind: none
+    checked: 2026-10-31
+    note: On the United Way list only.
+  - name: Morgantown Mutual Aid Fair
+    kind: none
+    checked: 2026-10-31
+    note: On the United Way list only.
+  - name: Caritas House
+    kind: none
+    checked: 2026-10-31
+    note: The old web address is parked. Directories still list it.
+  - name: Community Action (High Street)
+    kind: none
+    checked: 2026-10-31
+    note: The agency's site lists no Monongalia County pantry. Directories still list one.
+  - name: Hope Farm food pantry
+    kind: none
+    checked: 2026-10-31
+    note: The old web address now belongs to an unrelated business. Directories still list it.
