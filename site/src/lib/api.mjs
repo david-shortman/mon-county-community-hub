@@ -122,6 +122,7 @@ export const TYPES = {
     id: 'slug',
     required: NEED.required,
     properties: NEED.properties,
+  },
   meetings: {
     description: 'Public meetings of City of Morgantown boards and the bodies on its AgendaCenter, from the last 120 days and ahead: meeting date, agenda link, and minutes link once posted. Read from the city\'s AgendaCenter page each day.',
     id: 'slug',

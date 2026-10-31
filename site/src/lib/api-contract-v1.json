@@ -104,6 +104,21 @@
       "rank_why",
       "questions",
       "issues"
+    ],
+    "meetings": [
+      "slug",
+      "body",
+      "date",
+      "title",
+      "agenda_url",
+      "minutes_url",
+      "publisher",
+      "sources",
+      "sources[].url",
+      "sources[].checked",
+      "sources[].name",
+      "first_seen",
+      "last_changed"
     ]
   },
   "index": [
