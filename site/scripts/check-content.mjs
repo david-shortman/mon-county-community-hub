@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { factTopics, loadFacts } from '../src/lib/facts.mjs';
 import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
@@ -330,7 +331,8 @@ const TIME_RULES = [
 ];
 const BY_DATE = new RegExp(`\\bby ${MONTH} \\d{1,2}\\b`, 'i');
 const DEADLINE_VERB = /\b(apply|applies|file|pay|register|enroll|sign up|submit|send|mail|return|renew|turn in|drop off|request|order|change|choose|vote|respond|reply|call)\b/i;
-const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics']);
+// opens and closes are structured 24-hour times (opening_hours, #177), not words people read.
+const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics', 'opens', 'closes']);
 function eachText(value, key, visit) {
   if (SKIP_KEYS.has(key)) return;
   if (typeof value === 'string') visit(key, value);
@@ -369,7 +371,7 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
 
 // County indicators (content/indicators, #62): an official number, its own
 // definition, the data year, and sources with checked dates.
-const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more'];
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
 for (const i of loadDir('indicators')) {
   checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
   if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
@@ -379,6 +381,39 @@ for (const i of loadDir('indicators')) {
   for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
   if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
   if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+  // history (#15): years in order, each with a number, as the source gives it.
+  for (const [k, pts] of Object.entries(i.history ?? {})) {
+    if (!Array.isArray(pts)) { errors.push(`${i._file}: history.${k} must be a list`); continue; }
+    const yrs = pts.map((p) => String(p.year));
+    if (pts.some((p) => !/^\d{4}(-\d{4})?$/.test(String(p.year)) || typeof p.value !== 'number')) errors.push(`${i._file}: history.${k} needs year and value on each point`);
+    if (yrs.join() !== [...yrs].sort().join()) errors.push(`${i._file}: history.${k} years must be in order`);
+  }
+}
+
+// Fact records (content/facts/<topic>/, #122, tier 2 of ADR 0007): text,
+// the source's exact words, and sources with checked dates. recheck_days is
+// optional. A page cannot render a fact without them.
+const FACT_FIELDS = ['slug', 'text', 'quote', 'sources', 'recheck_days', 'phone', 'phone_label', 'place'];
+let factCount = 0;
+for (const topic of factTopics()) {
+  for (const f of Object.values(loadFacts(topic))) {
+    factCount++;
+    const where = f._file;
+    for (const k of ['slug', 'text', 'quote']) if (f[k] == null || f[k] === '') errors.push(`${where}: missing ${k}`);
+    for (const k of Object.keys(f)) if (!['_file', 'checked'].includes(k) && !FACT_FIELDS.includes(k)) warnings.push(`${where}: unknown field ${k}`);
+    if (f.slug && path.basename(where).replace(/\.ya?ml$/, '') !== f.slug) errors.push(`${where}: file name should match slug ${f.slug}`);
+    if (!f.sources?.length) errors.push(`${where}: needs at least one source`);
+    for (const s of f.sources ?? []) {
+      if (!isUrl(s.url)) errors.push(`${where}: source url is not a web link`);
+      if (!isDate(s.checked)) errors.push(`${where}: source needs a checked date (YYYY-MM-DD)`);
+      else if (s.checked > todayYmd()) errors.push(`${where}: source checked date ${s.checked} is in the future`);
+    }
+    if (f.recheck_days != null && (!Number.isInteger(f.recheck_days) || f.recheck_days < 1)) errors.push(`${where}: recheck_days must be a whole number of days, like 90`);
+    if (/[<>]/.test(f.text ?? '')) errors.push(`${where}: text allows only **bold** and [label](link), no HTML`);
+    if (f.phone != null && !isPhone(f.phone)) errors.push(`${where}: phone must look like 304-555-0100 (quote it)`);
+    if (f.place != null && !/,/.test(String(f.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);
+    if (JSON.stringify(f).includes('\u2014')) errors.push(`${where}: contains an em dash`);
+  }
 }
 
 for (const w of warnings) console.warn(`warning: ${w}`);

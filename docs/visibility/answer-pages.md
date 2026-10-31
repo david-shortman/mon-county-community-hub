@@ -16,7 +16,7 @@ Check before writing a page: does 211 or a local directory already cover this we
 
 ## How to check a page
 
-After `npm run build` in `site/`, run `node ../content/findability/answer-audit.mjs`. For each built page it prints whether the H1 is a question, how many words the first two sentences use, whether a checked date shows, and which structured data it carries. It changes nothing. The source benchmark (`docs/scoreboard.md`, "Source benchmark") measures the rest: words before the answer, taps, and the reading grade of the answer.
+After `npm run build` in `site/`, run `node ../content/findability/answer-audit.mjs`. For each built page it prints whether the H1 is a question, how many words the first two sentences use, whether a checked date shows, and which structured data it carries. It changes nothing. Every build also runs `site/scripts/check-reading.mjs`, which warns when a page's first two sentences read above about grade 9 (#833). The source benchmark (`docs/scoreboard.md`, "Source benchmark") measures the rest: words before the answer, taps, and the reading grade of the answer.
 
 ## Pages that follow it
 
