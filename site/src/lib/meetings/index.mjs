@@ -11,6 +11,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseAgendaCenter } from './agendacenter.mjs';
 import { parseRevizeAgendas } from './revize.mjs';
+import { fetchWithRetry } from '../ingest.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const SNAPSHOT_DIR = fs.existsSync(path.join(here, 'snapshots'))
@@ -60,7 +61,7 @@ export function toRecords(src, rows, { checked, previous = [] }) {
       agenda_url: r.agenda_url,
       minutes_url: r.minutes_url,
       publisher: src.publisher,
-      sources: [{ url: src.page_url, checked }],
+      sources: [{ url: src.page_url, checked, method: 'watched-page' }],
       first_seen: old?.first_seen ?? checked,
       last_changed: changed ? checked : (old.last_changed ?? old.first_seen ?? checked),
     };
@@ -70,23 +71,7 @@ export function toRecords(src, rows, { checked, previous = [] }) {
     .sort((a, b) => a.date.localeCompare(b.date) || a.body.localeCompare(b.body) || a.slug.localeCompare(b.slug));
 }
 
-async function fetchPage(url) {
-  let last;
-  for (let i = 0; i < 3; i++) {
-    try {
-      const res = await fetch(url, {
-        signal: AbortSignal.timeout(30_000),
-        headers: { 'User-Agent': 'MonCountyCommunityHub/1.0 (+https://github.com/david-shortman/mon-county-community-hub)' },
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.text();
-    } catch (err) {
-      last = err;
-      if (i < 2) await new Promise((r) => setTimeout(r, 1000 * 2 ** i));
-    }
-  }
-  throw last;
-}
+const fetchPage = (url) => fetchWithRetry(url, { timeoutMs: 30_000 });
 
 // { meetings, status } for one source. Never throws.
 export async function loadSource(src, { live = true, save = false, today = todayYmd(), log = console } = {}) {

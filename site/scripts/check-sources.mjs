@@ -25,11 +25,16 @@
 //   node scripts/check-sources.mjs [--json FILE] [--md FILE]
 //       [--state-in FILE] [--state-out FILE] [--help-now-only] [--limit N]
 //       [--registry FILE]
+//
+// Pages listed in content/watch/*.yaml (pantry hours, #166) get a closer look
+// from watch.mjs: only their hours part is compared, digits included. Changes
+// there go to one grouped issue per list (see source-issue.mjs).
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import YAML from 'yaml';
 import { CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadWatch, watchedUrls, evaluateWatch, watchMd, withPdfLinks } from './watch.mjs';
 
 const UA = 'MonCountyCommunityHub-sourcecheck/1.0 (+https://github.com/david-shortman/mon-county-community-hub)';
 const UA_TOKEN = 'moncountycommunityhub';
@@ -42,6 +47,7 @@ export const T = {
   hostConcurrency: 6, // different sites checked at the same time
   maxRedirects: 6,
   maxBytes: 4_000_000,
+  maxCrawlDelayMs: 15_000, // honor a site's Crawl-delay up to this
 };
 
 // Content folders that hold facts residents rely on. Findability results and
@@ -224,6 +230,27 @@ export function robotsRules(txt) {
   return pick.flatMap((g) => g.rules).filter((r) => r.path);
 }
 
+// Crawl-delay in seconds for our name, else for "*" (#166). 0 if none.
+export function robotsDelay(txt) {
+  let agents = [];
+  let lastWasAgent = false;
+  let mine = null;
+  let star = null;
+  for (const raw of txt.split(/\r?\n/)) {
+    const m = raw.replace(/#.*$/, '').trim().match(/^([a-z-]+)\s*:\s*(.*)$/i);
+    if (!m) continue;
+    const key = m[1].toLowerCase();
+    if (key === 'user-agent') { agents = lastWasAgent ? [...agents, m[2].trim().toLowerCase()] : [m[2].trim().toLowerCase()]; lastWasAgent = true; continue; }
+    lastWasAgent = false;
+    if (key !== 'crawl-delay') continue;
+    const n = Number(m[2]);
+    if (!Number.isFinite(n)) continue;
+    if (agents.some((a) => a !== '*' && UA_TOKEN.includes(a))) mine = n;
+    else if (agents.includes('*')) star = n;
+  }
+  return mine ?? star ?? 0;
+}
+
 export function robotsAllows(rules, pathAndQuery) {
   let best = null;
   for (const r of rules) {
@@ -323,7 +350,7 @@ export function classify(src, r, sameOwnerPairs = []) {
   return 'unverified';
 }
 
-async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameOwnerPairs = [] } = {}) {
+async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameOwnerPairs = [], keepText = new Set() } = {}) {
   let todo = registry.sources.filter((s) => s.group === 'monitored' && (!helpNowOnly || s.help_now));
   todo = todo.slice(0, limit);
   const byHost = new Map();
@@ -340,10 +367,15 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
       const host = hosts[next++];
       const list = byHost.get(host);
       let robots = [];
+      let pause = T.pauseMs;
       try {
         const origin = new URL(list[0].url).origin;
         const rr = await fetch(`${origin}/robots.txt`, { signal: AbortSignal.timeout(T.timeoutMs), headers: { 'User-Agent': UA } });
-        if (rr.ok && /text\/plain/.test(rr.headers.get('content-type') || 'text/plain')) robots = robotsRules(await rr.text());
+        if (rr.ok && /text\/plain/.test(rr.headers.get('content-type') || 'text/plain')) {
+          const txt = await rr.text();
+          robots = robotsRules(txt);
+          pause = Math.min(Math.max(pause, robotsDelay(txt) * 1000), T.maxCrawlDelayMs);
+        }
         await sleep(T.pauseMs);
       } catch { /* no robots.txt: allowed */ }
       for (const s of list) {
@@ -366,6 +398,7 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
               out.kind = 'html';
               out.host = s.host;
               out.fingerprint = fingerprint(html);
+              if (keepText.has(s.url)) out.text = pageText(withPdfLinks(html));
               out.phones = [...phonesOnPage(html)];
               const elsewhere = otherPlace(html);
               if (elsewhere) out.elsewhere = elsewhere;
@@ -373,7 +406,7 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
           }
         }
         results.set(s.url, out);
-        await sleep(T.pauseMs);
+        await sleep(pause);
       }
     }
   }));
@@ -482,6 +515,39 @@ export function reportMd(rep, { cap = 40 } = {}) {
   return L.join('\n');
 }
 
+// ---------- saved state ----------
+// The state rides in a hidden comment in the Source check issue, whose body
+// GitHub caps at 65,536 characters. With 600+ sources, url keys alone fill it,
+// so it is stored packed: a short hash of each url and only the fingerprint
+// ({ v: 2, s: { key: f }, w: { key: 'h' or 'h|miss' } }). Reading needs the
+// urls, which the registry and the watch list give.
+export const stateKey = (url) => crypto.createHash('sha256').update(url).digest('hex').slice(0, 10);
+
+export function packState(state) {
+  const out = { v: 2, s: {}, w: {} };
+  for (const [url, v] of Object.entries(state || {})) {
+    if (url === '~watch') continue;
+    if (v?.f) out.s[stateKey(url)] = v.f;
+  }
+  for (const [url, v] of Object.entries(state?.['~watch'] || {})) if (v?.h) out.w[stateKey(url)] = v.miss ? `${v.h}|${v.miss}` : v.h;
+  return out;
+}
+
+// Back to { url: { f }, '~watch': { url: { h, miss } } }. Old unpacked state
+// (url keys) passes through unchanged.
+export function unpackState(raw, urls = [], watchUrls = []) {
+  if (raw?.v !== 2) return raw || {};
+  const out = { '~watch': {} };
+  for (const u of urls) { const f = raw.s?.[stateKey(u)]; if (f) out[u] = { f }; }
+  for (const u of watchUrls) {
+    const v = raw.w?.[stateKey(u)];
+    if (!v) continue;
+    const [h, miss] = v.split('|');
+    out['~watch'][u] = miss ? { h, miss } : { h };
+  }
+  return out;
+}
+
 // ---------- main ----------
 async function main() {
   const args = process.argv.slice(2);
@@ -489,16 +555,23 @@ async function main() {
   const rules = loadRules();
   const registry = buildRegistry({ rules });
   if (opt('registry')) fs.writeFileSync(opt('registry'), JSON.stringify(registry.sources, null, 2));
-  const prev = opt('state-in') && fs.existsSync(opt('state-in')) ? JSON.parse(fs.readFileSync(opt('state-in'), 'utf8')) : {};
+  const watchGroups = loadWatch();
+  const rawPrev = opt('state-in') && fs.existsSync(opt('state-in')) ? JSON.parse(fs.readFileSync(opt('state-in'), 'utf8')) : {};
+  const prev = unpackState(rawPrev, registry.sources.map((s) => s.url), [...watchedUrls(watchGroups)]);
   const results = await checkAll(registry, {
     helpNowOnly: args.includes('--help-now-only'),
     limit: opt('limit') ? Number(opt('limit')) : Infinity,
     sameOwnerPairs: rules.sameOwner,
+    keepText: watchedUrls(watchGroups),
   });
+  const watch = evaluateWatch(watchGroups, results, prev['~watch'] || {});
+  for (const r of results.values()) delete r.text; // keep the JSON report small
   const rep = buildReport(registry, results, prev);
-  const md = reportMd(rep);
+  rep.watch = watch.groups;
+  rep.state['~watch'] = watch.state;
+  const md = `${reportMd(rep)}\n\n${watchMd(watch)}`;
   if (opt('json')) fs.writeFileSync(opt('json'), JSON.stringify(rep, null, 2));
-  if (opt('state-out')) fs.writeFileSync(opt('state-out'), JSON.stringify(rep.state));
+  if (opt('state-out')) fs.writeFileSync(opt('state-out'), JSON.stringify(packState(rep.state)));
   if (opt('md')) fs.writeFileSync(opt('md'), md);
   else console.log(md);
 }
