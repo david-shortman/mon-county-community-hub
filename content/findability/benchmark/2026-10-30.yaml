@@ -1,0 +1,827 @@
+# Source benchmark run (#183, #184)
+#
+# First full run. Automatic numbers (auto:) come from
+# content/findability/benchmark/measure.js; everything else was scored by
+# reading each source, as the "Source benchmark" section of docs/scoreboard.md
+# describes. Score with:
+#   python3 content/findability/benchmark/score.py content/findability/benchmark/2026-10-30.yaml
+#
+# frn-guide: the 2025 resource guide PDF, 11 pages, 331,504 bytes,
+# Last-Modified Wed, 19 Feb 2025 20:13:54 GMT,
+# sha256 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a.
+# The PDF is not stored in the repo.
+#
+# facts: confirmed true = matches the provider's page at that URL today;
+# false = does not match (why says how); null = could not check this run.
+# scored: false = the source refused our tools, so it is left out of the
+# comparison instead of guessed.
+
+date: '2026-10-30'
+tasks_version: 1
+tester: 'Claude Code (sprint lane 12, #529)'
+network: 390px, slow 4G profile (150 ms, 1.6 Mbps down), cache off
+needs:
+- id: q01
+  need: Help paying a heating bill
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/utility-bills/
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 29
+      words_on_page: 520
+      words_before_answer: 88
+      seconds_to_answer: 0.792
+      screens_down: 0
+      reading_grade: 9.3
+      horizontal_scroll: false
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: true
+      what_to_bring: true
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: Apply for LIEAP online at wvpath.wv.gov, at a local DoHS office, or by mail
+      url: https://dohs.wv.gov/
+      confirmed: null
+    - fact: 'Mon Power: 800-686-0022'
+      url: https://www.firstenergycorp.com/help.html
+      confirmed: null
+    note: Steps in order, starting with calling the utility, then LIEAP with what to bring. This season's
+      LIEAP dates are not out yet, and the page says so instead of guessing.
+    checked: '2026-10-30'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: partial
+    must_call: false
+    auto:
+      kb: 323.7
+      words_on_page: 1981
+      words_before_answer: 378
+      horizontal_scroll: true
+      answer_page: 3
+      pages: 11
+      last_modified: Wed, 19 Feb 2025 20:13:54 GMT
+      sha256: 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    note: A 'Financial Assistance' list on page 3 names groups with a phone and sometimes a website, but
+      does not say which help with heating bills. LIEAP is not mentioned.
+    checked: '2026-10-30'
+  - name: city-pathways
+    kind: city
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    covered: 'no'
+    blocked: true
+    note: Checked by hand. Utilities appear only as outage and emergency numbers. 211 is the general referral.
+    checked: '2026-10-30'
+  - name: official
+    kind: official
+    url: https://wrc.wvu.edu/resources/basic-needs/utility-bill-help
+    covered: 'yes'
+    scored: false
+    blocked: true
+    auto:
+      kb: 3420.6
+      words_on_page: 345
+      horizontal_scroll: false
+    note: Not scored this run. The page loaded for the automatic check, then refused every tool (HTTP
+      403). The 2026-10-28 findability run found LIEAP, Christian Help and the Salvation Army listed with
+      phones, and no LIEAP season dates. Rescore next run.
+    checked: '2026-10-30'
+- id: q02
+  need: A food pantry open this week
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/help/food/today/other/
+    start: https://everythingmorgantown.org/help/food/
+    covered: partial
+    taps: 2
+    must_call: false
+    auto:
+      kb: 28.1
+      words_on_page: 543
+      words_before_answer: 58
+      seconds_to_answer: 0.395
+      screens_down: 0
+      reading_grade: 9.4
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: Scott's Run Settlement House, 750 Fairchance Road, Monday to Friday 8:30 a.m. to 2:30 p.m.
+      url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+      confirmed: true
+    - fact: 211 answers 24 hours a day; text a ZIP code to 898-211
+      url: https://bfa.wv.gov/
+      confirmed: null
+    note: Two taps from the food page (when do you need food, then are you a WVU student). Gives 211 and
+      one local provider with hours, but no list of pantries and no pantry dates this month.
+    checked: '2026-10-30'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: 'yes'
+    must_call: true
+    auto:
+      kb: 323.7
+      words_on_page: 1981
+      words_before_answer: 977
+      horizontal_scroll: true
+      answer_page: 6
+      pages: 11
+      last_modified: Wed, 19 Feb 2025 20:13:54 GMT
+      sha256: 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    note: Page 6 lists 15 pantries and meal programs by name and phone, a few with websites. No days,
+      hours, addresses or eligibility, so you call to learn when one is open.
+    checked: '2026-10-30'
+  - name: city-pathways
+    kind: city
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    covered: 'yes'
+    blocked: true
+    taps: 2
+    must_call: false
+    auto:
+      words_before_answer: 1450
+      by_hand: true
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: false
+      provider_link: true
+    note: Checked by hand. One tap from Community Resources, then the Food Resources tab. Two pantries
+      list days and hours (St. Ursula's pantry days, Scott's Run weekday hours), and one gives a street
+      address. No date on the page. Words before the answer are an estimate.
+    checked: '2026-10-30'
+  - name: official
+    kind: official
+    url: https://graduateeducation.wvu.edu/resources/community-resources
+    covered: 'yes'
+    scored: false
+    blocked: true
+    auto:
+      kb: 2088.3
+      words_on_page: 1373
+      horizontal_scroll: false
+    note: Not scored this run. The page loaded for the automatic check, then refused every tool (HTTP
+      403). The 2026-10-28 findability run found a pantry list marked last updated August 1, 2024. Rescore
+      next run.
+    checked: '2026-10-30'
+- id: q03
+  need: Help with a water shutoff
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/utility-bills/
+    covered: 'yes'
+    taps: 0
+    must_call: true
+    auto:
+      kb: 29
+      words_on_page: 520
+      words_before_answer: 202
+      seconds_to_answer: 0.405
+      screens_down: 1
+      reading_grade: 6.3
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: false
+      what_to_bring: true
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: 'Morgantown Utility Board: 304-292-8443, 278 Greenbag Road'
+      url: https://www.mub.org/
+      confirmed: true
+    - fact: MUB's site does not describe payment plans or shutoff rules
+      url: https://www.mub.org/
+      confirmed: true
+    note: 'Water help is in step 1, about one screen down. The utility''s own site does not describe payment
+      plans, so the page says to ask on the phone: the key fact still needs a call.'
+    checked: '2026-10-30'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: partial
+    must_call: false
+    auto:
+      kb: 323.7
+      words_on_page: 1981
+      words_before_answer: 378
+      horizontal_scroll: true
+      answer_page: 3
+      pages: 11
+      last_modified: Wed, 19 Feb 2025 20:13:54 GMT
+      sha256: 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    note: Same page 3 list as heating help. Water and utility help are not named.
+    checked: '2026-10-30'
+  - name: city-pathways
+    kind: city
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    covered: 'no'
+    blocked: true
+    note: Checked by hand. Lists the Morgantown Utility Board phone, with no help paying.
+    checked: '2026-10-30'
+  - name: official
+    kind: official
+    url: https://wrc.wvu.edu/resources/basic-needs/utility-bill-help
+    covered: partial
+    scored: false
+    blocked: true
+    auto:
+      kb: 3608.1
+      words_on_page: 345
+      horizontal_scroll: false
+    note: Not scored this run, same page as q01 (HTTP 403 after the automatic check). Rescore next run.
+    checked: '2026-10-30'
+- id: q04
+  need: Apply for SNAP
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/snap/
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 28.6
+      words_on_page: 761
+      words_before_answer: 49
+      seconds_to_answer: 0.414
+      screens_down: 0
+      reading_grade: 8.3
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: Apply online at wvpath.wv.gov
+      url: https://www.wvpath.wv.gov
+      confirmed: true
+    - fact: 'Monongalia County DoHS office: 114 South High Street, 304-285-3175, Monday to Friday 8:30
+        a.m. to 5 p.m.'
+      url: https://dohs.wv.gov/field-offices
+      confirmed: null
+      why: The DoHS field office page did not show the county office's details to our tools
+    note: 'The answer is the first sentence: apply online at WV PATH, with the steps and an in-person
+      office with hours. It does not list documents to have ready.'
+    checked: '2026-10-30'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: partial
+    must_call: false
+    auto:
+      kb: 323.7
+      words_on_page: 1981
+      words_before_answer: 172
+      horizontal_scroll: true
+      answer_page: 2
+      pages: 11
+      last_modified: Wed, 19 Feb 2025 20:13:54 GMT
+      sha256: 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: County office phone 304-285-3175
+      url: https://everythingmorgantown.org/snap/
+      confirmed: true
+    - fact: Office listed as 'WVDHHR', website www.dhhr.wv.gov
+      url: https://dohs.wv.gov/
+      confirmed: false
+      why: The state split DHHR in 2024; the office is now the Department of Human Services (DoHS)
+    note: Page 2 gives the county office phone and the old department website. It does not say how to
+      apply for SNAP.
+    checked: '2026-10-30'
+  - name: city-pathways
+    kind: city
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    covered: 'no'
+    blocked: true
+    note: Checked by hand. No SNAP item.
+    checked: '2026-10-30'
+  - name: official
+    kind: official
+    url: https://www.wvpath.wv.gov
+    covered: 'yes'
+    blocked: true
+    taps: 2
+    must_call: false
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: false
+      provider_link: true
+    facts:
+    - fact: WV PATH takes applications for health care and other programs online
+      url: https://www.wvpath.wv.gov
+      confirmed: true
+    note: 'Checked by hand: the state''s own application site. Timed out on the slow 4G profile. Program
+      groups on the home page, then sign in and apply. No office hours, documents list, or date on the
+      page.'
+    checked: '2026-10-30'
+- id: q05
+  need: A doctor without insurance
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/dental-and-prescriptions/
+    covered: partial
+    taps: 0
+    must_call: false
+    auto:
+      kb: 29
+      words_on_page: 924
+      words_before_answer: 36
+      seconds_to_answer: 0.667
+      screens_down: 0
+      reading_grade: 12.2
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: false
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: Milan Puskar Health Right, 10 Scott Avenue, Morgantown
+      url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+      confirmed: true
+    - fact: Patients qualify up to 250% of the federal poverty level
+      url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+      confirmed: true
+    note: The free clinic is the first answer, with who qualifies, address and hours, but the page is
+      titled for dentists and medicine, not a doctor without insurance. Becoming a patient starts with
+      a phone screening. The opening sentences read at about grade 12.
+    checked: '2026-10-30'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: 'yes'
+    must_call: true
+    auto:
+      kb: 323.7
+      words_on_page: 1981
+      words_before_answer: 502
+      horizontal_scroll: true
+      answer_page: 4
+      pages: 11
+      last_modified: Wed, 19 Feb 2025 20:13:54 GMT
+      sha256: 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: false
+      checked_date: true
+      provider_link: false
+    facts:
+    - fact: Milan Puskar Health Right 304-292-8234
+      url: https://www.mphealthright.org
+      confirmed: true
+    note: Page 4 lists the free clinic by name and phone only, among insurers and counseling services.
+    checked: '2026-10-30'
+  - name: city-pathways
+    kind: city
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    covered: 'yes'
+    blocked: true
+    taps: 2
+    must_call: false
+    auto:
+      words_before_answer: 1250
+      by_hand: true
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: false
+      provider_link: true
+    note: Checked by hand. The Healthcare Services tab gives the free clinic's weekday hours, who qualifies,
+      address and website. No date on the page.
+    checked: '2026-10-30'
+  - name: official
+    kind: official
+    url: https://www.mphealthright.org
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 1540.4
+      words_on_page: 446
+      words_before_answer: 70
+      seconds_to_answer: 8.34
+      screens_down: 1
+      reading_grade: 10.6
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: false
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: false
+      provider_link: true
+    facts:
+    - fact: 10 Scott Ave, Morgantown; 304-292-8234
+      url: https://www.mphealthright.org
+      confirmed: true
+    - fact: Patients are eligible up to 250% of the Federal Poverty Level
+      url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+      confirmed: true
+    note: 'The provider''s own home page: who qualifies, address, hours (no days), and a link to check
+      if you qualify. Heavy for a phone (about 1.5 MB).'
+    checked: '2026-10-30'
+- id: q08
+  need: A dentist without dental insurance
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/dental-and-prescriptions/
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 29
+      words_on_page: 924
+      words_before_answer: 36
+      seconds_to_answer: 0.342
+      screens_down: 0
+      reading_grade: 12.2
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: false
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: 'Health department dental clinic: 304-598-5108'
+      url: https://www.monchd.org/departments-programs/mchd-dentistry
+      confirmed: true
+    - fact: Without dental insurance, an adult first visit (exam and X-rays) is $125
+      url: https://www.monchd.org/departments-programs/mchd-dentistry
+      confirmed: true
+    note: Answers in the first two sentences, with prices for people without dental insurance. Appointments
+      are by phone. The opening sentences read at about grade 12.
+    checked: '2026-10-30'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: 'no'
+    note: No dental listing found in the guide.
+    checked: '2026-10-30'
+  - name: city-pathways
+    kind: city
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    covered: 'no'
+    blocked: true
+    note: Checked by hand. No dental provider listed.
+    checked: '2026-10-30'
+  - name: official
+    kind: official
+    url: https://www.monchd.org/departments-programs/mchd-dentistry
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 4972.2
+      words_on_page: 428
+      words_before_answer: 108
+      seconds_to_answer: 11.742
+      screens_down: 1
+      reading_grade: 11.7
+      horizontal_scroll: false
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: false
+      checked_date: false
+      provider_link: true
+    facts:
+    - fact: 'Appointments: 304-598-5108'
+      url: https://www.monchd.org/departments-programs/mchd-dentistry
+      confirmed: true
+    - fact: 'Adult first visit without insurance, exam and X-rays: $125'
+      url: https://www.monchd.org/departments-programs/mchd-dentistry
+      confirmed: true
+    note: The provider's own page gives services and prices without insurance. No hours or address on
+      the page; appointments by phone. About 5 MB to load.
+    checked: '2026-10-30'
+- id: q25
+  need: Free legal help for an eviction
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/money/#rent
+    start: https://everythingmorgantown.org/money/
+    covered: 'yes'
+    taps: 2
+    must_call: false
+    auto:
+      kb: 33.6
+      words_on_page: 1581
+      words_before_answer: 909
+      screens_down: 0
+      reading_grade: 8.5
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: true
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: 'Legal Aid of West Virginia: 866-255-4370; call right away if a hearing is within 10 days'
+      url: https://legalaidwv.org/get-help/apply-for-help/
+      confirmed: true
+    - fact: Legal Aid takes applications online
+      url: https://legalaidwv.org/get-help/apply-for-help/
+      confirmed: true
+    note: 'After two taps, the full Legal Aid card shows phone hours, who qualifies, and how to apply
+      online. A link straight to the page''s #rent section lands on a short paragraph with only phone
+      numbers.'
+    checked: '2026-10-30'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: 'yes'
+    must_call: false
+    auto:
+      kb: 323.7
+      words_on_page: 1981
+      words_before_answer: 947
+      horizontal_scroll: true
+      answer_page: 6
+      pages: 11
+      last_modified: Wed, 19 Feb 2025 20:13:54 GMT
+      sha256: 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: Legal Aid website www.lawv.net
+      url: https://legalaidwv.org/
+      confirmed: null
+    note: Page 6 lists Legal Aid of West Virginia with two phones and a website, among six legal services.
+      Nothing on who qualifies or eviction deadlines.
+    checked: '2026-10-30'
+  - name: city-pathways
+    kind: city
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    covered: 'no'
+    blocked: true
+    note: Checked by hand. The housing authority's housing counseling is listed, but not legal aid.
+    checked: '2026-10-30'
+  - name: official
+    kind: official
+    url: https://legalaidwv.org/renters-rights-west-virginia/eviction-in-west-virginia/
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 2956.7
+      words_on_page: 707
+      words_before_answer: 407
+      seconds_to_answer: 4.316
+      screens_down: 6
+      reading_grade: 15.7
+      horizontal_scroll: false
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: false
+      provider_link: true
+    facts:
+    - fact: Apply by phone at 866-255-4370 or online
+      url: https://legalaidwv.org/get-help/apply-for-help/
+      confirmed: true
+    - fact: Forms to answer an eviction case and to appeal
+      url: https://legalaidwv.org/renters-rights-west-virginia/eviction-in-west-virginia/
+      confirmed: true
+    note: 'The provider''s own page: videos, forms and articles first, then an Apply for Help link about
+      six screens down. Phone hours and who qualifies are one tap away on the apply page.'
+    checked: '2026-10-30'
+- id: q26
+  need: A place to stay tonight
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/stay-tonight/
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 29.7
+      words_on_page: 825
+      words_before_answer: 83
+      seconds_to_answer: 0.434
+      screens_down: 0
+      reading_grade: 5.8
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: Grace Shelter, 20 Scott Ave, Suite 201, open 24/7, first come first served
+      url: https://www.ccwva.org/programs/grace-shelter/
+      confirmed: true
+    - fact: 'Grace Shelter phone: 681-867-1002'
+      url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+      confirmed: true
+    note: 'The first card answers it: open 24 hours, who it is for, how to get in, address and phone.
+      It does not say what to bring.'
+    checked: '2026-10-30'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: 'yes'
+    must_call: true
+    auto:
+      kb: 323.7
+      words_on_page: 1981
+      words_before_answer: 332
+      horizontal_scroll: true
+      answer_page: 3
+      pages: 11
+      last_modified: Wed, 19 Feb 2025 20:13:54 GMT
+      sha256: 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: Catholic Charities Grace Shelter (681) 867-1002
+      url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+      confirmed: true
+    note: Page 3 lists Grace Shelter by phone and website, with no hours, address or who it is for.
+    checked: '2026-10-30'
+  - name: city-pathways
+    kind: city
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    covered: 'yes'
+    blocked: true
+    taps: 1
+    must_call: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: true
+      checked_date: false
+      provider_link: true
+    note: Checked by hand. Housing or Shelter Services is the first section. Project Rainbow's Rainbow
+      House is a 24/7 shelter (mailing address only); Catholic Charities is listed with an address but
+      no hours. No date on the page.
+    checked: '2026-10-30'
+  - name: official
+    kind: official
+    url: https://www.ccwva.org/programs/grace-shelter/
+    covered: 'yes'
+    blocked: true
+    taps: 0
+    must_call: false
+    auto:
+      kb: 1602.8
+      words_on_page: 522
+      words_before_answer: 123
+      seconds_to_answer: 9.05
+      screens_down: 2
+      reading_grade: 17.9
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: false
+      checked_date: false
+      provider_link: true
+    facts:
+    - fact: 20 Scott Ave, Ste 201; 681-867-1002; open 24/7
+      url: https://www.ccwva.org/programs/grace-shelter/
+      confirmed: true
+    - fact: 19 beds, first come first served; no pets or service animals
+      url: https://www.ccwva.org/programs/grace-shelter/
+      confirmed: true
+    note: 'The provider''s own page: 24/7, who it is for, address and phone. It does not say what to bring
+      or whether to walk in. Returned a server error (502) on the second automatic pass; weight is from
+      the first.'
+    checked: '2026-10-30'

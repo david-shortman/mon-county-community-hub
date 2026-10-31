@@ -4,14 +4,32 @@
 // Everything comes from the resource record: hours from `hours` (#139), the
 // address from `contact.place`. SourceLine names who published each source
 // and gives each link a unique name for screen readers (#140, #327).
+// Place card (#176): when the record has listing facts (#177), the card adds
+// word tags (how to get in, languages) and an access line, and, when it has
+// `opening_hours`, an "Open now" or "Closed now" badge worked out from the
+// phone's clock. The hours in words always show; the badge only adds to them
+// and never shows without a script. Records without these fields look the same
+// as before.
 import WhatHappensNext from './WhatHappensNext.astro';
+import BusLink from './BusLink.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
 import PassItOn from './PassItOn.astro';
-import { oldestChecked } from '../lib/content.mjs';
+import Icon from './Icon.astro';
+import { oldestChecked, staleDaysFor } from '../lib/content.mjs';
+import { GET_IN, HOLIDAYS } from '../lib/listing.mjs';
+import { townLine } from '../lib/towns.mjs';
 const { r, headingLevel = 3 } = Astro.props;
 const H = `h${headingLevel}`;
 const textLine = r.contact.text;
+const getInIcon = { 'walk-in': 'people', appointment: 'calendar', 'call-first': 'phone' };
+const tags = [
+  r.get_in && GET_IN[r.get_in] && { icon: getInIcon[r.get_in], text: GET_IN[r.get_in] },
+  r.languages?.length && { icon: 'text', text: `Languages: ${r.languages.join(', ')}` },
+].filter(Boolean);
+const hoursData = r.opening_hours && r.hours ? JSON.stringify(r.opening_hours) : null;
+// Holidays the source says it closes (#726), as { key: name } for the badge.
+const closedData = r.closed_on?.length ? JSON.stringify(Object.fromEntries(r.closed_on.map((h) => [h, HOLIDAYS[h]]))) : null;
 ---
 {r.hidden ? (
 <article class="card place" id={r.slug}>
@@ -21,13 +39,112 @@ const textLine = r.contact.text;
 ) : (
 <article class="card place" id={r.slug}>
   <H>{r.title}</H>
+  {townLine(r) && <p class="town-line"><Icon name="pin" /><span><span class="sr-only">Where: </span>{townLine(r)}</span></p>}
+  {hoursData && <p class="open-badge" data-hours={hoursData} data-closed={closedData} hidden><Icon name="clock" /><span></span></p>}
   {r.hours && <p class="when">{r.hours.replace(/\.\s*$/, '')}.{' '}<strong>Call to confirm.</strong></p>}
+  {tags.length > 0 && <ul class="place-tags">{tags.map((t) => <li><Icon name={t.icon} /><span>{t.text}</span></li>)}</ul>}
   <p><strong>Who it is for:</strong>{' '}{r.who_it_is_for}</p>
   <p><strong>How to get in:</strong>{' '}{r.what_to_do}</p>
+  {r.steps?.length > 0 && <ol class="card-steps">{r.steps.map((t) => <li>{t}</li>)}</ol>}
+  {r.access && <p><strong>Access:</strong>{' '}{r.access}</p>}
   {r.cost && <p><strong>Cost:</strong>{' '}{r.cost === 'free' ? 'Free.' : r.cost}</p>}
   <Actions callFirst phone={r.contact.phone} phoneLabel={r.title} sms={textLine} smsLabel={`${r.title}, send your ZIP code`} place={r.contact.place} about={r.title} />
+  <BusLink place={r.contact.place} about={r.title} />
   <WhatHappensNext r={r} />
-  <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) && <>{' '}<a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a>.</>}</SourceLine>
+  <SourceLine sources={r.sources} phone={r.phone_confirmed} staleDays={staleDaysFor(r)} org={r.org} about={r.title} slug={r.slug}>{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) && <>{' '}<a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a>.</>}</SourceLine>
   <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact.phone} place={r.contact.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
 )}
+
+<style is:global>
+  .open-badge { display: inline-flex; align-items: center; gap: 6px; margin: 4px 0 0; padding: 2px 10px; border-radius: 999px; font-weight: 700; font-size: 1rem; background: var(--accent-bg); color: var(--fg); }
+  .open-badge .icon { width: 18px; height: 18px; }
+  .open-badge[data-state="closed"] { background: transparent; border: 1.5px solid var(--line); }
+  .place-tags { list-style: none; margin: 8px 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  .place-tags li { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+  .place-tags .icon { width: 20px; height: 20px; color: var(--muted); }
+  .place .town-line { display: flex; align-items: center; gap: 6px; margin: 0 0 6px; font-weight: 600; color: var(--muted); }
+  .place .town-line .icon { width: 18px; height: 18px; }
+</style>
+
+<script>
+  // "Open now" from the phone's clock, in Morgantown time. Without this the
+  // badge stays hidden and the hours in words carry the facts.
+  const DAYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+  const NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const mins = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
+  const say = (m: number) => {
+    m %= 1440;
+    if (m === 0) return 'midnight';
+    if (m === 720) return 'noon';
+    const h = Math.floor(m / 60), mm = m % 60;
+    return `${h % 12 || 12}${mm ? `:${String(mm).padStart(2, '0')}` : ''} ${h < 12 ? 'a.m.' : 'p.m.'}`;
+  };
+  const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' })
+    .formatToParts(new Date()).map((p) => [p.type, p.value]));
+  const today = DAYS.indexOf(String(parts.weekday).slice(0, 3).toLowerCase());
+  const now = Number(parts.hour) * 60 + Number(parts.minute);
+  type Period = { days: string[]; opens: string; closes: string };
+  // Today's date in Morgantown, and the holiday rules (#726). A date is
+  // [year, month 1-12, day]; day math is done in UTC so it never shifts.
+  const ymd = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', year: 'numeric', month: 'numeric', day: 'numeric' })
+    .formatToParts(new Date()).map((p) => [p.type, p.value]));
+  const base = Date.UTC(Number(ymd.year), Number(ymd.month) - 1, Number(ymd.day));
+  const dateAt = (offsetDays: number) => new Date(base + offsetDays * 864e5);
+  const nthWeekday = (y: number, m: number, wd: number, n: number) => { const first = new Date(Date.UTC(y, m - 1, 1)).getUTCDay(); return 1 + ((wd - first + 7) % 7) + (n - 1) * 7; };
+  const lastWeekday = (y: number, m: number, wd: number) => { const last = new Date(Date.UTC(y, m, 0)); return last.getUTCDate() - ((last.getUTCDay() - wd + 7) % 7); };
+  const RULES: Record<string, (y: number) => [number, number]> = {
+    'new-years-day': () => [1, 1],
+    'memorial-day': (y) => [5, lastWeekday(y, 5, 1)],
+    'independence-day': () => [7, 4],
+    'labor-day': (y) => [9, nthWeekday(y, 9, 1, 1)],
+    thanksgiving: (y) => [11, nthWeekday(y, 11, 4, 4)],
+    christmas: () => [12, 25],
+  };
+  const FIXED = ['new-years-day', 'independence-day', 'christmas'];
+  const holidayOn = (d: Date, keys: string[]) => keys.find((k) => { const [m, day] = RULES[k](d.getUTCFullYear()); return d.getUTCMonth() + 1 === m && d.getUTCDate() === day; });
+  // A fixed-date holiday on a weekend may be taken on the Friday before or
+  // the Monday after. We don't guess which, so those days say "may differ".
+  const nearWeekendHoliday = (d: Date, keys: string[]) => keys.filter((k) => FIXED.includes(k)).some((k) => {
+    const wd = d.getUTCDay();
+    const probe = wd === 5 ? 1 : wd === 1 ? -1 : 0;
+    if (!probe) return false;
+    const h = dateAt(0); h.setTime(d.getTime() + probe * 864e5);
+    return holidayOn(h, [k]) && [0, 6].includes(h.getUTCDay());
+  });
+  document.querySelectorAll<HTMLElement>('.open-badge[data-hours]').forEach((el) => {
+    let hours: Period[] | 'always';
+    try { hours = JSON.parse(el.dataset.hours!); } catch { return; }
+    const label = el.querySelector('span')!;
+    let closed: Record<string, string> = {};
+    try { closed = el.dataset.closed ? JSON.parse(el.dataset.closed) : {}; } catch { closed = {}; }
+    const keys = Object.keys(closed);
+    const todayHoliday = holidayOn(dateAt(0), keys);
+    if (todayHoliday) { label.textContent = `Closed today for ${closed[todayHoliday]}`; el.dataset.state = 'closed'; el.hidden = false; return; }
+    if (nearWeekendHoliday(dateAt(0), keys)) { label.textContent = 'Holiday hours may differ today'; el.dataset.state = 'closed'; el.hidden = false; return; }
+    if (hours === 'always') { label.textContent = 'Open 24 hours'; el.dataset.state = 'open'; el.hidden = false; return; }
+    // Every opening as [start, end] in minutes from the start of this week (Sunday 0:00).
+    const spans: [number, number][] = [];
+    for (const p of hours) for (const d of p.days) {
+      const start = DAYS.indexOf(d) * 1440 + mins(p.opens);
+      let end = DAYS.indexOf(d) * 1440 + mins(p.closes);
+      if (end <= start) end += 1440;
+      for (const shift of [-10080, 0, 10080]) spans.push([start + shift, end + shift]);
+    }
+    const t = today * 1440 + now;
+    const open = spans.find(([s, e]) => s <= t && t < e);
+    if (open) {
+      label.textContent = `Open now. Closes at ${say(open[1])}`;
+      el.dataset.state = 'open';
+    } else {
+      // The next opening, skipping listed holidays.
+      const next = spans.filter(([s]) => s > t && !holidayOn(dateAt(Math.floor(s / 1440) - today), keys)).sort((a, b) => a[0] - b[0])[0];
+      if (!next) return;
+      const dayDiff = Math.floor(next[0] / 1440) - today;
+      const when = dayDiff === 0 ? 'today' : dayDiff === 1 ? 'tomorrow' : NAMES[((Math.floor(next[0] / 1440) % 7) + 7) % 7];
+      label.textContent = `Closed now. Opens ${when} at ${say(((next[0] % 1440) + 1440) % 1440)}`;
+      el.dataset.state = 'closed';
+    }
+    el.hidden = false;
+  });
+</script>
