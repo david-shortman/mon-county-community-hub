@@ -1,0 +1,30 @@
+name: Chronicles of Yarnia
+slug: mpls-chronicles-of-yarnia
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: A twice-a-month meetup for knitters and crocheters of all experience levels. Bring your own supplies.
+regular:
+  - First and third Wednesday of each month, 6 p.m. to 7:45 p.m.
+cost: Free
+interests: [crafts, social]
+tags: [free, come-alone, beginners]
+contact:
+  url: https://mympls.org/programs/adults/chronicles-of-yarnia/
+  phone: "304-291-7425"
+  place: Morgantown Public Library, Meeting Room B, 373 Spruce Street, Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - The program page says twice monthly. The first and third Wednesday pattern comes from the dates on the library calendar, listed through December 2027.
+sources:
+  - url: https://mympls.org/programs/adults/chronicles-of-yarnia/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/16265508
+    checked: 2026-10-30
+  - url: https://mympls.org/programs/adults/
+    checked: 2026-10-30

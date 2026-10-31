@@ -1,0 +1,28 @@
+name: Teen Anime Club
+slug: mpls-teen-anime-club
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: Teens watch and talk about Japanese animation in a relaxed, book-club style setting, with a showing and a craft or game.
+regular:
+  - Tuesday evenings, 5 p.m. to 7 p.m. See the library calendar for dates.
+interests: [arts, social]
+tags: [come-alone, beginners]
+contact:
+  url: https://mympls.org/programs/teens/teen-anime-club/
+  phone: "304-291-7425"
+  place: Morgantown Public Library, Meeting Room B, 373 Spruce Street, Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Registration is required, so the library can tell you about cancellations.
+  - Next listed dates are Tuesday, November 17, 2026, and Tuesdays, January 19 and February 16, 2027.
+sources:
+  - url: https://mympls.org/programs/teens/teen-anime-club/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/17667604
+    checked: 2026-10-30

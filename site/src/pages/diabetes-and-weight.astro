@@ -13,8 +13,8 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h1>Diabetes, blood pressure or weight: help managing it</h1>
   <p class="lede">The Monongalia County Health Department has dietitians who help with diabetes, weight and heart health, with a sliding fee if you have no insurance. Low income and no insurance? Health Right's free clinic holds diabetes and heart clinics for its patients.</p>
 
-  {r('monchd-nutrition-counseling') && <ResourceCard r={r('monchd-nutrition-counseling')} showCost />}
-  {r('health-right-specialty-clinics') && <ResourceCard r={r('health-right-specialty-clinics')} />}
+  {r('monchd-nutrition-counseling') && <ResourceCard r={r('monchd-nutrition-counseling')} headingLevel={2} showCost />}
+  {r('health-right-specialty-clinics') && <ResourceCard r={r('health-right-specialty-clinics')} headingLevel={2} />}
 
   <h2>Also check</h2>
   <ul>
