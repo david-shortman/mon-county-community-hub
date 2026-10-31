@@ -1,0 +1,13 @@
+title: The state's internet speed test and survey
+slug: wv-broadband-speed-test
+org: wv-office-of-broadband
+topics: [moving]
+who_it_is_for: Anyone in West Virginia. The state says the answers help it find places where internet service is needed.
+what_to_do: Take the speed test at home on your computer or phone, then answer the survey. It is voluntary and takes about 10 minutes. Close other apps and turn off any VPN first. If you have no internet at home, or it is too slow for the test, the state asks you to call 304-741-9850 and leave your name, phone number, full address and internet company, if you have one. The state says your call may not be returned.
+contact:
+  phone: "304-741-9850"
+  url: https://broadband.wv.gov/survey/
+  url_label: Take the speed test
+sources:
+  - url: https://broadband.wv.gov/survey/
+    checked: 2026-10-30

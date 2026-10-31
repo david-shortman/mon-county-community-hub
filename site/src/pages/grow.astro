@@ -1,0 +1,34 @@
+---
+// Grow food and flowers (#437, epic #432). A topic guide inside the Living
+// here door: picks and steps from content/guides/grow.yaml, laid out by the
+// shared DoorPage. Only facts from official pages we could read are here.
+// The soil test and plant help have their own pages (#435, #436). Master
+// Gardeners and USDA farm help still wait on a person checking them (#552).
+import Base from '../layouts/Base.astro';
+import DoorPage from '../components/DoorPage.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import HelpWanted from '../components/HelpWanted.astro';
+import { resource } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "growing", label: "Grow food and flowers", summary: "Free seeds, selling what you grow, and help for a small farm" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Grow food and flowers in Morgantown and Mon County" description="Pick what you are hoping to do: grow food on a budget, sell what you grow, or start a small farm. Local steps in order for Morgantown and Monongalia County, WV, with phone numbers and sources.">
+  <h1>Grow food and flowers</h1>
+  <DoorPage guide="grow">
+    <h2 id="budget">Grow food on a budget</h2>
+    <p>The county lists a seed library at the Mon County Center.</p>
+    <ResourceCard r={resource('mon-county-seed-library')} />
+
+    <h2 id="farm">Thinking about a small farm</h2>
+    <p>Your local conservation district can tell you what help is open to farms in the county.</p>
+    <ResourceCard r={resource('mcd-agep-conservation-help')} showCost />
+    <p>Selling at a market? See <a href={`${base}/sell-what-you-grow/`}>Sell what you grow</a>.</p>
+
+    <HelpWanted topic="growing" />
+
+    <h2 id="soil-and-plants">Soil tests and sick plants</h2>
+    <p>WVU tests garden soil for free for West Virginia residents: <a href={`${base}/soil-test/`}>How do I get my garden soil tested?</a> For spots, bugs or plants that will not grow, start with WVU Extension's county office: <a href={`${base}/plant-problems/`}>Who can tell me what's wrong with my plants?</a></p>
+
+    <p class="meta">We are still checking Master Gardener classes in the county and USDA farm programs. They will show here once we confirm them on their own pages.</p>
+  </DoorPage>
+</Base>

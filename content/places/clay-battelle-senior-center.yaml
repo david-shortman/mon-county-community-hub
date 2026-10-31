@@ -1,0 +1,30 @@
+name: Clay-Battelle Senior Center
+other_names: [Clay Battelle Area Senior Citizens]
+slug: clay-battelle-senior-center
+kind: senior-center
+area: west
+community: Blacksville
+run_by:
+  kind: nonprofit
+  text: Clay Battelle Area Senior Citizens, a nonprofit started in 1988
+story: It is on the Mason-Dixon Highway in Blacksville, and new members are welcome.
+regular:
+  - Open 8 a.m. to 2 p.m. Monday, Tuesday, Wednesday and Friday. Closed most holidays and when schools close for weather
+  - Lunch at 11:30 a.m. Monday, Wednesday and Friday. Call 8:30 to 10 a.m. to reserve a carry-out
+  - Covered-dish dinner the third Tuesday of each month at 6 p.m. Bring a dish and a friend. Everyone welcome
+  - Bingo the first and third Wednesday at 10 a.m. Sewing group Wednesdays at 10 a.m.
+membership:
+  dues: $2 a year, or $20 for life
+contact:
+  phone: "304-432-8177"
+  place: 5977 Mason-Dixon Highway, Blacksville, WV
+status: active
+last_activity_seen: 2026-10-22
+tags: [come-alone]
+notes:
+  - The center has no website we could find. Its news runs in the Dominion Post's weekly senior news column.
+sources:
+  - url: https://www.dominionpost.com/2026/10/16/senior-news-11
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/
+    checked: 2026-10-30

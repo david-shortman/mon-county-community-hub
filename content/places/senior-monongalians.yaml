@@ -1,0 +1,30 @@
+name: Senior Monongalians
+slug: senior-monongalians
+kind: senior-center
+area: morgantown
+community: Morgantown (Mountaineer Mall)
+run_by:
+  kind: nonprofit
+  text: Senior Monongalians, a nonprofit
+story: The county's large senior center, in the former Mountaineer Mall on Greenbag Road.
+facilities:
+  other: [pool tables, computer lab, exercise room]
+regular:
+  - Lunch for people 60 and older, Monday to Friday, 11:30 a.m. to 12:30 p.m.
+  - Computer lab Monday to Friday, 8 a.m. to 3:45 p.m.
+  - Group exercise Tuesday and Thursday at 10 a.m. Bingo Fridays at 10 a.m. Mahjong Monday and Wednesday
+contact:
+  phone: "304-296-9812"
+  email: info@seniormons.org
+  url: https://www.seniormons.org/
+  place: 5000 Greenbag Road, Suite A5, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-16
+tags: [come-alone]
+notes:
+  - For rides and home-delivered meals, call Senior Monongalians. Its pages list more than one phone number, so ask which line you need.
+sources:
+  - url: https://www.seniormons.org/blank
+    checked: 2026-10-30
+  - url: https://www.dominionpost.com/2026/10/16/senior-news-11
+    checked: 2026-10-30

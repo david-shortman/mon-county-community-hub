@@ -1,0 +1,15 @@
+name: Morgantown Area Partnership
+slug: morgantown-area-partnership
+kind: business
+website: https://morgantownpartnership.com/
+phone: "304-292-3311"
+summary: Describes itself as "a public/private alliance for the betterment of economic, business and community development in the area." It includes four groups, the Morgantown Area Chamber of Commerce, the Monongalia County Development Authority, the Morgantown Area Economic Partnership and the Campus Neighborhoods Revitalization Corporation (Sunnyside Up). Its website also has a page for Main Street Morgantown.
+topics: [work]
+area: monongalia-county
+sources:
+  - url: https://morgantownpartnership.com/
+    checked: 2026-10-30
+  - url: https://morgantownpartnership.com/morgantown-area-partnership/who-we-are/
+    checked: 2026-10-30
+  - url: https://morgantownpartnership.com/contact/
+    checked: 2026-10-30

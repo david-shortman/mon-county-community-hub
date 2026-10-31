@@ -1,0 +1,37 @@
+name: Mon County Center
+slug: mon-county-center
+kind: rec-center
+area: morgantown
+community: Mylan Park, west of Morgantown
+run_by:
+  kind: county
+  text: Monongalia County
+story: A county event building at Mylan Park with an indoor showroom, a covered show ring and a shared kitchen.
+facilities:
+  rooms:
+    - name: Indoor showroom (200 folding chairs, 40 long tables, 25 round tables)
+  kitchen: true
+  outdoor: [covered outdoor show ring with power]
+rentals:
+  - space: Indoor showroom
+    seats: 200
+    kitchen: true
+    outdoor: false
+    book: Price not published. Call the events coordinator at 304-291-7010 or send the online reservation request.
+    source: https://www.monongaliacounty.gov/departments/mon_county_center/facility_rentals.php
+  - space: Covered outdoor show ring
+    outdoor: true
+    book: Price not published. Call the events coordinator at 304-291-7010.
+    source: https://www.monongaliacounty.gov/departments/mon_county_center/facility_rentals.php
+contact:
+  phone: "304-291-7010"
+  url: https://www.monongaliacounty.gov/departments/mon_county_center/facility_rentals.php
+  url_label: Rentals page
+  place: 270 Mylan Park Ln, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - The shared kitchen can be added to a showroom rental. Rates vary by use.
+sources:
+  - url: https://www.monongaliacounty.gov/departments/mon_county_center/facility_rentals.php
+    checked: 2026-10-30

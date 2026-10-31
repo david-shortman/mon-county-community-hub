@@ -1,0 +1,79 @@
+---
+// Hall finder (#464): every hall, room and pavilion with a published way to
+// rent it, side by side, sorted by part of the county. Built from the
+// `rentals` in content/places. We never take bookings.
+import Base from '../../layouts/Base.astro';
+import { prettyDate } from '../../lib/content.mjs';
+import { rentalRows, areaLabel, SECTION } from '../../lib/places.mjs';
+export const page = { parent: '/community-centers/', label: 'Compare halls' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const rows = rentalRows();
+const yesNo = (v) => (v === true ? 'Yes' : v === false ? 'No' : 'Not listed');
+const checkedFor = (r) => {
+  const s = r.source ? r.place.sources.find((x) => x.url === r.source) : null;
+  return s?.checked ?? r.place.checked;
+};
+const sourceFor = (r) => r.source ?? r.place.sources[0].url;
+const COLS = ['Place and space', 'Area', 'Seats', 'Kitchen', 'Outdoor', 'Price', 'Deposit', 'How to book', 'Checked'];
+---
+<Base title="Rent a hall in Mon County and Morgantown: compare halls and prices" description="Community center halls, park buildings and pavilions you can rent in Monongalia County, WV, side by side: seats, kitchen, outdoor space, price, deposit and how to book, with the date we checked each price.">
+  <h1>Compare halls</h1>
+  <p class="lede">Find a hall, room or pavilion to rent in Mon County. Some are community centers out in the county, and some are park buildings in town.</p>
+  <p class="note">Prices are what each source showed on the date in the last column. They can change, so confirm when you book. We do not take bookings: you book with the center or office directly. Places that rent space but do not publish how are left out.</p>
+
+  <p class="scroll-hint" aria-hidden="true">Scroll the table sideways to see every column.</p>
+  <div class="table-scroll" role="region" aria-labelledby="halls-cap" tabindex="0">
+    {/* On phones each row shows as a card (#917). Display changes can drop table
+        meaning for screen readers, so the roles are set by hand. */}
+    <table class="halls" role="table">
+      <caption id="halls-cap">{rows.length} spaces to rent, by part of the county</caption>
+      <thead role="rowgroup">
+        <tr role="row">{COLS.map((c) => <th scope="col" role="columnheader">{c}</th>)}</tr>
+      </thead>
+      <tbody role="rowgroup">
+        {rows.map((r) => (
+          <tr role="row">
+            <th scope="row" role="rowheader"><a href={`${base}${SECTION.route}${r.place.slug}/`}>{r.place.name}</a><br /><span class="space">{r.space}</span></th>
+            <td role="cell" data-label="Area">{areaLabel(r.place.area)}<br /><span class="space">{r.place.community}</span></td>
+            <td role="cell" data-label="Seats">{r.seats ?? 'Not listed'}</td>
+            <td role="cell" data-label="Kitchen">{yesNo(r.kitchen)}</td>
+            <td role="cell" data-label="Outdoor">{yesNo(r.outdoor)}</td>
+            <td role="cell" data-label="Price">{r.price ?? 'Not published'}</td>
+            <td role="cell" data-label="Deposit">{r.deposit ?? 'Not listed'}</td>
+            <td role="cell" data-label="How to book">{r.book}{r.place.contact?.phone && <> <a href={`tel:${r.place.contact.phone.replace(/\D/g, '')}`} class="nowrap">{r.place.contact.phone}<span class="sr-only">, {r.place.name}</span></a></>}</td>
+            <td role="cell" data-label="Checked"><a href={sourceFor(r)}>{prettyDate(checkedFor(r))}<span class="sr-only">, source for {r.place.name} {r.space}</span></a></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="meta">"Not listed" means the source does not say. Each date links to the page we read.</p>
+  <p class="more"><a href={`${base}${SECTION.route}`}>Back to {SECTION.name.toLowerCase()}</a></p>
+</Base>
+
+<style>
+  table.halls { border-collapse: collapse; width: 100%; min-width: 52rem; font-size: 0.98rem; }
+  table.halls caption { text-align: left; padding: 10px 12px; font-weight: 700; }
+  table.halls th, table.halls td { padding: 8px 10px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+  table.halls thead th { background: var(--accent-bg); }
+  table.halls .space { color: var(--muted); font-weight: 400; }
+  .scroll-hint { display: none; }
+  /* Medium screens: keep the grid and scroll it sideways, with a hint. */
+  @media (min-width: 40.01rem) and (max-width: 56rem) { .scroll-hint { display: block; font-size: 0.95rem; color: var(--muted); margin: 12px 0 -8px; } }
+  /* Phones: each row is a small card with labeled lines (#917). */
+  @media (max-width: 40rem) {
+    .table-scroll { overflow: visible; border: 0; background: none; }
+    table.halls { min-width: 0; }
+    table.halls caption { padding: 0 0 4px; }
+    table.halls thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    table.halls tbody, table.halls tr, table.halls th, table.halls td { display: block; }
+    table.halls tbody tr { margin: 12px 0; border: 1px solid var(--line); border-radius: 10px; background: var(--card); overflow: hidden; }
+    table.halls tbody th { border-top: 0; background: var(--accent-bg); font-size: 1.05rem; }
+    table.halls tbody td { border-top: 0; padding: 4px 12px; }
+    table.halls tbody td:last-child { padding-bottom: 10px; }
+    table.halls tbody td::before { content: attr(data-label) ": "; font-weight: 700; }
+    table.halls tbody td br { display: none; }
+    table.halls tbody td .space::before { content: ", "; }
+  }
+  @media print { table.halls { min-width: 0; font-size: 0.85rem; } }
+</style>

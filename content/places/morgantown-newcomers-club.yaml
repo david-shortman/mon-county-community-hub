@@ -1,0 +1,30 @@
+name: Morgantown Newcomers Club
+slug: morgantown-newcomers-club
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: volunteer-association
+  text: Community Newcomers Club, Inc.
+story: A social club where new and longtime residents meet, make friends, and join interest groups.
+regular:
+  - Coffee on the first Wednesday of each month, September to May
+  - Luncheon on the third Wednesday of each month, September to May
+cost: $35 a year for membership
+interests: [social, newcomers, books, games, outdoors, food]
+tags: [come-alone]
+contact:
+  url: https://www.morgantownnewcomers.org
+status: active
+notes:
+  - Interest groups listed on the club's site include a book group, bridge, walking, and wine tasting.
+  - Longtime residents, singles, and couples are welcome, the club says.
+  - The site does not list where coffees and luncheons meet. Use the contact form on the club's site to ask.
+  - No dated event was seen on the club's site.
+sources:
+  - url: https://www.morgantownnewcomers.org
+    checked: 2026-10-30
+  - url: https://morgantownnewcomers.org/contact/
+    checked: 2026-10-30
+  - url: https://morgantownnewcomers.org/join/
+    checked: 2026-10-30

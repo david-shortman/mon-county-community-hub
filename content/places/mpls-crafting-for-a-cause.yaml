@@ -1,0 +1,25 @@
+name: Crafting for a Cause (teens)
+slug: mpls-crafting-for-a-cause
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: Teens ages 13 to 18 make handmade items for local groups and people in need. Teens who stay for the whole program get two community service hours (at MHS).
+regular:
+  - Wednesday evenings, 5:30 p.m. to 7:30 p.m. See the library calendar for dates.
+interests: [crafts, service]
+contact:
+  url: https://events.mympls.org/event/17364950
+  phone: "304-291-7425"
+  place: Morgantown Public Library, Meeting Room A, 373 Spruce Street, Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Registration is asked for.
+  - Next listed dates are Wednesday, November 11, 2026 and Wednesday, January 13, 2027.
+sources:
+  - url: https://events.mympls.org/event/17364950
+    checked: 2026-10-30
