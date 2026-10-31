@@ -1,0 +1,71 @@
+---
+// Property tax: key dates, paying, the homestead exemption, and asking for a
+// review of your assessment (#663, part of #271). Facts from the Assessor,
+// the Sheriff's Tax Office, the County Commission and WV Code §11-3-24, read
+// 2026-10-30. Where the county page and state law differ, the page says who
+// says what (#660). No 2027 appeal dates until the county posts them.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import { telHref } from '../lib/content.mjs';
+export const page = { door: "this-month", topic: "taxes", label: "Property tax: pay, homestead and appeals", summary: "Property tax due dates and discounts, where to pay, the homestead exemption, and how to ask for a review of your assessment" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-30';
+const pdf = [{ url: 'https://assessor.org/DocumentCenter/View/16109/Important-Information-for-Monongalia-Taxpayers-TY-2026-PDF', checked, name: 'Monongalia County Assessor, Important Information for Monongalia Taxpayers, TY 2026 (PDF)' }];
+const sheriff = [{ url: 'https://monongaliasheriff.gov/tax/index.php', checked }];
+const assessor = [{ url: 'https://www.assessor.org/2205/Real-Estate', checked }];
+const board = [{ url: 'https://www.monongaliacounty.gov/commission/board_of_assessment_appeals/index.php', checked }];
+const law = [{ url: 'https://code.wvlegislature.gov/11-3-24/', checked, name: 'West Virginia Code §11-3-24' }];
+const phones = { tax: '304-291-7244', assessor: '304-291-7222', commission: '304-291-7257' };
+---
+<Base title="Property tax in Mon County, WV: due dates, paying, homestead and appeals" description="Monongalia County property tax: when tax bills come and when halves are due for the 2.5% discount, where to pay at the Sheriff's Tax Office, the $20,000 homestead exemption, and how to ask for a review of your assessed value.">
+  <h1>Property tax: pay, homestead and appeals</h1>
+  <p class="lede">The County Assessor sets your property's value. The Sheriff's Tax Office sends the bill and collects the tax. If you think the value is wrong, there are deadlines to ask for a review.</p>
+
+  <h2 id="dates">Key dates</h2>
+  <p>From the Assessor's information sheet for tax year 2026:</p>
+  <ul>
+    <li><strong>July 1:</strong> taxes are assessed to whoever owns the property on this date.</li>
+    <li><strong>September 1:</strong> first half of taxes due to get a 2.5% discount.</li>
+    <li><strong>December 1:</strong> homestead exemption applications are due.</li>
+    <li><strong>January 1:</strong> "Appeals to Assessor on value must be completed."</li>
+    <li><strong>February 1:</strong> the Board of Equalization and Review meets to hear appeals of value. Appointments are required.</li>
+    <li><strong>March 1:</strong> second half of taxes due to get a 2.5% discount.</li>
+    <li><strong>April 30:</strong> last day to pay taxes without a penalty.</li>
+  </ul>
+  <SourceLine sources={pdf} about="property tax dates" />
+
+  <h2 id="pay">Paying your tax</h2>
+  <p>The <strong>Monongalia County Sheriff's Tax Office</strong> mails tax statements in July and collects real estate and personal property taxes. You can look up and pay your tax online, or pay at the office: 243 High Street, Room 300, Morgantown, <a href={telHref(phones.tax)}>{phones.tax}</a>, Monday to Friday, 8:30 a.m. to 4:30 p.m. The office sells unpaid (delinquent) real estate taxes in November.</p>
+  <SourceLine sources={sheriff} about="paying property tax" />
+  <div class="actions">
+    <a class="btn" href="https://monongalia.softwaresystems.com/INDEXp.html"><Icon name="open" /><span>Pay online</span></a>
+    <a class="btn" href="https://monongalia.softwaresystems.com/index.html"><Icon name="open" /><span>Look up your tax</span></a>
+    <a class="btn" href={telHref(phones.tax)}><Icon name="phone" /><span>Call the Tax Office</span></a>
+  </div>
+
+  <h2 id="how">How the tax is figured</h2>
+  <p>The Assessor's sheet gives this formula: market value times 60% is the <strong>assessed value</strong>. The assessed value times the levy rate is the tax. If you have the homestead exemption, subtract $20,000 from the assessed value first. The sheet lists each area's levy rate.</p>
+  <SourceLine sources={pdf} about="how property tax is figured" />
+
+  <h2 id="homestead">Homestead exemption (65 and older, or disabled)</h2>
+  <p>The Assessor says that if you are 65 or older on or before June 30 following the July 1 assessment date, or permanently and totally disabled, you may file for the homestead exemption. New applicants file between July 1 and December 1 each year. People who qualify only need to apply once. You can file online or at the Assessor's office, Room 335, 243 High Street, <a href={telHref(phones.assessor)}>{phones.assessor}</a>, Monday to Friday, 8:30 a.m. to 4:30 p.m. See the full rules at the link.</p>
+  <SourceLine sources={assessor} about="the homestead exemption" />
+  <div class="actions">
+    <a class="btn" href="https://www.assessor.org/2205/Real-Estate"><Icon name="open" /><span>Assessor: homestead and real estate</span></a>
+  </div>
+  <p>This year's last day is on <a href={`${base}/calendar/`}>Deadlines and dates</a>.</p>
+
+  <h2 id="appeal">Think your value is wrong?</h2>
+  <p>The County Commission's page describes these steps:</p>
+  <ol>
+    <li><strong>Ask the Assessor for a review first.</strong> The county page says to tell the Assessor "within 8 business days after receiving your notice." The Assessor's sheet lists January 1 as the date appeals to the Assessor "must be completed." If you and the Assessor agree, you are done.</li>
+    <li><strong>Then the County Commission.</strong> If you do not agree, you can appeal to the County Commission sitting as the Board of Equalization and Review, which meets in February. The county page says that if you do not ask for an appeal before February 20, "you waive your right to ask for a correction of your assessment in the current year." Call the County Commission office at <a href={telHref(phones.commission)}>{phones.commission}</a>. The county page says anyone in the Assessor's office will help you fill out the appeal form.</li>
+    <li><strong>Bring evidence.</strong> The county page says the Assessor's value is presumed correct, and you must prove it is wrong "by clear and convincing evidence," such as an appraisal by a licensed appraiser within the past three years, or the values of similar properties near yours.</li>
+  </ol>
+  <SourceLine sources={[...board, ...pdf]} about="asking for a review of your assessment" />
+  <p><strong>After the County Commission decides,</strong> sources differ on the next step. The county page says the decision "can be appealed within 30 days to the Circuit Court in your county." State law (§11-3-24) says a taxpayer who has a hearing before the Board of Equalization and Review "may appeal the board's order to the Office of Tax Appeals." Ask the County Commission office which applies to you.</p>
+  <SourceLine sources={[...board, ...law]} about="appeals after the County Commission" />
+
+  <p class="meta">Sources checked October 30, 2026. Dates and rates change each year, so check the Assessor's and Sheriff's pages. Something wrong? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

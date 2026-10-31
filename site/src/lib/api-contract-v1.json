@@ -27,6 +27,9 @@
       "who_it_is_for",
       "hours",
       "what_to_do",
+      "steps",
+      "options",
+      "notes",
       "contact",
       "contact.phone",
       "contact.text",
@@ -214,6 +217,10 @@
     "types[].count",
     "types[].list_url",
     "types[].record_url_template",
-    "feed_health_url"
+    "feed_health_url",
+    "exports",
+    "exports[].name",
+    "exports[].description",
+    "exports[].url"
   ]
 }

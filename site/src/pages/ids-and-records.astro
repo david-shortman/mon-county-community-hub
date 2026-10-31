@@ -1,0 +1,48 @@
+---
+// Birth certificates, IDs and other papers (#222 coverage map, a missing
+// area). Facts come from the records, each read on the state Vital
+// Registration, WV DMV or Monongalia County Clerk pages on 2026-10-31. Left
+// off until a person confirms them: the adult ID card fee, mailed card wait
+// times (DMV pages differ), Social Security cards (ssa.gov blocked us) and
+// passport places (the locators would not load).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "records", label: "Birth certificates, IDs and records", summary: "A copy of a birth, death or marriage certificate, a marriage license, a WV ID or REAL ID, organ donor sign-up, a lost ID, fixing a certificate, and discharge papers" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Birth certificate, ID and marriage license in Morgantown, WV" description="Get papers in Monongalia County, WV: a copy of a birth, death or marriage certificate from the County Clerk or the state, a marriage license, a West Virginia ID card or REAL ID, replacing a lost ID, fixing a certificate, and a veteran's DD-214.">
+  <h1>Birth certificates, IDs and records</h1>
+  <p class="lede">Born in Monongalia County? The County Clerk in Morgantown sells a certified birth certificate for $5, with a form you can print and mail. Born anywhere else in West Virginia? The state sells copies for $12, online, by mail or in person.</p>
+
+  <h2 id="certificates">A copy of a birth, death or marriage certificate</h2>
+  <ResourceCard r={resource('mon-county-clerk-vital-certificates')} showCost />
+  <ResourceCard r={resource('wv-vital-records-certificate-copy')} showCost />
+
+  <h2 id="marriage">Getting married</h2>
+  <ResourceCard r={resource('mon-county-marriage-license')} showCost />
+
+  <h2 id="id">A West Virginia ID card or REAL ID</h2>
+  <ResourceCard r={resource('wv-dmv-state-id-card')} showCost />
+  <ResourceCard r={resource('wv-dmv-youth-id-card')} showCost />
+  <ResourceCard r={resource('wv-dmv-morgantown-office')} />
+  <p>Need an ID to vote? See <a href={`${base}/vote/`}>register to vote</a>. Just moved here? See <a href={`${base}/drivers-license/`}>driver's license and plates for new residents</a>.</p>
+
+  <h2 id="donor">Sign up as an organ donor</h2>
+  <p>The DMV offers everyone who applies for a license or ID card the chance to sign up as an organ donor. You can also decide later, online. It is your choice either way.</p>
+  <ResourceCard r={resource('wv-organ-donor-registry')} />
+
+  <h2 id="lost">Lost or stolen license or ID</h2>
+  <ResourceCard r={resource('wv-dmv-replace-lost-id')} showCost />
+
+  <h2 id="fix">Fix a mistake on a certificate</h2>
+  <ResourceCard r={resource('wv-vital-records-correct-certificate')} showCost />
+
+  <h2 id="dd214">A veteran's discharge papers (DD-214)</h2>
+  <ResourceCard r={resource('mon-county-clerk-dd214')} />
+
+  <p>Someone in your family died? See <a href={`${base}/when-someone-dies/`}>when someone dies</a>.</p>
+
+  <p class="meta">Sources checked October 31, 2026. Fees and the documents you need can change, so check the office's page before you go. We have not yet confirmed where to replace a Social Security card or apply for a passport in Morgantown. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
