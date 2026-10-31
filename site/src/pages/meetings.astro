@@ -23,6 +23,8 @@ const others = [
   { name: 'Star City Town Council', url: 'https://www.starcitywv.com/minutes/', link: 'Signed council minutes, by year', note: 'We found no agendas posted.' },
   { name: 'Granville Town Council', url: 'https://townofgranvillewv.gov/meeting-minutes-agendas', link: 'Council agendas and minutes', note: 'Posted as Word files.' },
   { name: 'Westover City Council, Planning Commission and Sewer Board', url: 'https://www.westoverwv.org/', link: 'Minutes, in shared folders linked from the city home page', note: 'We found no agendas posted.' },
+  { name: 'Monongalia County Board of Health', url: 'https://www.monchd.org/about', link: 'Meeting agenda, and minutes for 2025 and 2026', note: 'The health department says the board meets the last Thursday in January, March, May, July, September and November at 9 a.m. in its Training Center, with dates subject to change.' },
+  { name: 'Morgantown Monongalia MPO Policy Board', url: 'https://www.plantogether.org/agendas', link: 'Policy Board agendas and minutes', note: 'Back to 2018, with its committees on the same page.' },
 ];
 const ahead = meetings.filter((m) => m.date >= today);
 const since = (() => { const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.getUTCDate() - 60); return d.toISOString().slice(0, 10); })();
@@ -63,12 +65,12 @@ const id = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, 
     </section>
   )) : <p>No meetings were listed in the last 60 days.</p>}
 
-  <h2 id="others">Schools and towns</h2>
+  <h2 id="others">Schools, towns and other boards</h2>
   <p>These bodies post their records in other places. We link to them but do not list each meeting yet.</p>
   <ul>
     {others.map((o) => <li><strong>{o.name}:</strong> <a href={o.url}>{o.link}</a>. {o.note}</li>)}
   </ul>
-  <SourceLine sources={others.map((o) => ({ url: o.url, checked: OTHER_CHECKED }))} about="schools and towns" />
+  <SourceLine sources={others.map((o) => ({ url: o.url, checked: OTHER_CHECKED }))} about="schools, towns and other boards" />
 
   <h2 id="about">Where this comes from</h2>
   <p>Every day, this site reads the City of Morgantown's <a href={agendaCenter}>AgendaCenter</a>, which also holds agendas for some regional bodies like the Morgantown Utility Board and the Library Board, and the County Commission's <a href={countyPage}>meeting schedule and agendas</a> page. That page says the Commission meets at 10 a.m. on Wednesdays, with a work session after. We link to the official files and do not summarize them. Minutes show up here once they are posted. The same list is in the <a href={`${base}/data/`}>open data</a> as meetings.json.</p>
