@@ -1,0 +1,15 @@
+title: Report a power outage to Mon Power
+slug: mon-power-report-outage
+org: mon-power
+topics: [weather]
+who_it_is_for: Mon Power customers whose power is out.
+what_to_do: Call 1-888-544-4877 (1-888-LIGHTSS) or text OUT to 544487 to report the outage. To use text, first text REG to 544487 to sign up. The outage map shows outages near you and updates about every 15 minutes. If you see a downed power line, call 911 right away and stay at least 30 feet away.
+contact:
+  phone: "1-888-544-4877"
+  url: https://www.firstenergycorp.com/outages_help/Report_Power_Outages.html
+  url_label: Report online
+sources:
+  - url: https://www.firstenergycorp.com/outages_help/Report_Power_Outages.html
+    checked: 2026-10-30
+  - url: https://www.firstenergycorp.com/outages_help/outages-map.html
+    checked: 2026-10-30

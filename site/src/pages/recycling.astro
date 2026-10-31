@@ -7,6 +7,7 @@ import PlaceCard from '../components/PlaceCard.astro';
 import Fact from '../components/Fact.astro';
 import { factsFor } from '../lib/facts.mjs';
 import { loadCalendarWithFeeds, upcoming, resource, telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "recycling", label: "Trash, recycling and drop-off", summary: "Pickup days, the curbside bin, and where to take hard items" };
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics || []).includes('recycling'));
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -98,7 +99,7 @@ const lookup = [
     <Actions callFirst phone={swaPhone} phoneLabel="the Solid Waste Authority" place="113 Mathieson Street, Suite 100, Morgantown, WV" />
   </div>
   <SourceLine sources={[...ask.sources, ...src.disposal]} org={ask.org} about="the Solid Waste Authority's contact details" />
-  <p class="meta">Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
 
 <style>

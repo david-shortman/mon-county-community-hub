@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "about", label: "Privacy", summary: "What we collect, and what we don't" };
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
+---
+<Base title="Privacy at Everything Morgantown" description="What Everything Morgantown collects, what we don't, and how to ask us to remove something.">
+  <h1>Privacy</h1>
+  <p class="meta">Last updated October 30, 2026.</p>
+  <p class="lede">We don't ask for your name or contact details, and we don't track you. Here is the full list of what happens to your information.</p>
+
+  <h2>What we collect</h2>
+  <ul>
+    <li><strong>No analytics.</strong> We don't use tracking tools, ads or cookies.</li>
+    <li><strong>Server logs.</strong> The site is hosted on GitHub Pages. GitHub may keep basic technical records of visits, such as your IP address. We don't see them. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">Read GitHub's privacy statement</a>.</li>
+    <li><strong>Your device.</strong> Search and the offline copy of pages run on your own device. Directions buttons open Google Maps, and nothing goes to Google unless you tap one.</li>
+  </ul>
+
+  <h2>The "Tell us" form</h2>
+  <p>"Tell us" and "Report a problem" open our fix form. A company called Tally runs it and stores what you send. You don't need an account, we never post what you send, and your email is optional. Please don't put anyone's phone number, address or personal story in it.</p>
+
+  <h2>What we do with data</h2>
+  <p>We don't sell or share data about you. We don't have any to sell.</p>
+
+  <h2>Asking us to remove something</h2>
+  <p>If something about you should come down, or a listing should change, <a href={tellUs}>tell us</a> and say which item. We act quickly.</p>
+</Base>

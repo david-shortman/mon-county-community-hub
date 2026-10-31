@@ -1,0 +1,11 @@
+name: Monongalia County Emergency Management
+slug: monongalia-county-emergency-management
+kind: government
+website: https://www.mecca911.org/emergency_management/index.php
+phone: "304-599-6332"
+summary: The county's emergency management office. Its page is on the MECCA 911 website, which lists 911 Responders Dr, Morgantown. The page posts the county's Emergency Operations Plan (updated 2026) and links to ReadyWV. The administration line is listed with hours of Monday through Friday, 7 a.m. to 3 p.m.
+topics: [government]
+area: monongalia-county
+sources:
+  - url: https://www.mecca911.org/emergency_management/index.php
+    checked: 2026-10-30

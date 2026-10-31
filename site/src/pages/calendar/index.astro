@@ -4,7 +4,8 @@ import HelpNow from '../../components/HelpNow.astro';
 import EventCard from '../../components/EventCard.astro';
 import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate, ymd } from '../../lib/content.mjs';
 import { slugify } from '../../lib/feeds/util.mjs';
-export const page = { door: "dates", label: "Deadlines and dates", summary: "Application windows, deadlines and community dates" };
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: "dates", label: "Dates and deadlines", summary: "Application windows, deadlines and community dates" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
 const items = upcoming(await loadCalendarWithFeeds(), today, 62);
@@ -15,33 +16,41 @@ const later = items.filter((e) => e.starts > today);
 const updated = [today, ...items.flatMap((e) => (e.sources ?? []).map((s) => ymd(s.checked)))].filter(Boolean).sort().at(-1);
 // Dates by town (#395): only entries whose record names a town. Works with no
 // script: each town is a link to its own short list further down the page.
-const towns = [...new Set(items.map((e) => e.town).filter(Boolean))].sort()
+// Towns outside Monongalia County still show in the full list, just not by town (Fairmont is in Marion County).
+const OUTSIDE_COUNTY = new Set(['Fairmont']);
+const towns = [...new Set(items.map((e) => e.town).filter((t) => t && !OUTSIDE_COUNTY.has(t)))].sort()
   .map((t) => ({ name: t, id: `town-${slugify(t)}`, items: items.filter((e) => e.town === t) }));
 const icsHttp = new URL(`${base}/calendar.ics`, Astro.site).href;
 const icsWebcal = icsHttp.replace(/^https?:/, 'webcal:');
 const icsGoogle = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(icsWebcal)}`;
 const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeURIComponent(icsHttp)}&name=${encodeURIComponent('Mon County deadlines and dates')}`;
 ---
-<Base help title="Deadlines and dates in Mon County, WV" description="Application windows, deadlines, and community dates in Mon County for this month and next.">
-  <h1>Deadlines and dates in Mon County</h1>
-  <p class="lede">Application windows, deadlines, and community dates for this month and next. Updated {prettyDate(updated)}.</p>
+<Base help title="Dates and deadlines in Mon County, WV" description="Community dates, application windows and deadlines in Mon County for this month and next.">
+  <h1>Dates and deadlines in Mon County</h1>
+  <p class="lede">Community events, application windows and deadlines for this month and next. Updated {prettyDate(updated)}.</p>
   <section class="add-cal" aria-labelledby="add-cal-h">
     <h2 id="add-cal-h">Add to your calendar</h2>
-    <p>Pick the app you use. New dates show up on their own. Dates can change, so check the source before you go.</p>
+    <p>Pick the app you use. New dates show up on their own. Dates can change, so check the source before you go. The Google and Outlook.com buttons open their own websites.</p>
     <p class="actions">
       <a class="btn" href={icsWebcal}>iPhone or Mac calendar</a>
       <a class="btn" href={icsGoogle} rel="noopener">Google Calendar</a>
-      <a class="btn" href={icsOutlook} rel="noopener">Outlook</a>
+      <a class="btn" href={icsOutlook} rel="noopener">Outlook.com</a>
       <a class="btn" href={icsHttp} download="mon-county-dates.ics">Download the file</a>
     </p>
     <details>
       <summary>Copy the link</summary>
-      <p>Paste it where your calendar app asks to add a calendar "from URL" or "from the web".</p>
+      <p>Paste it where your calendar app asks to add a calendar "from URL" or "from the web". For a work or school Outlook account, open Outlook on the web, go to Calendar, choose Add calendar, then Subscribe from web, and paste the link (<a href="https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-or-outlook-on-the-web-cff1429c-5af6-41ec-a5b4-74f2c278e98c">Microsoft's steps</a>).</p>
       <p><input type="text" readonly value={icsHttp} aria-label="Calendar link" onfocus="this.select()" /></p>
     </details>
     <details>
       <summary>How to stop getting these dates</summary>
-      <p>Remove the calendar in the same app you added it to. On iPhone: Settings, Calendar, Accounts, Subscribed Calendars, then delete it. On Google Calendar: open Settings, pick this calendar under "Settings for other calendars" and choose Unsubscribe. In Outlook: right-click the calendar and choose Remove. A downloaded file adds single events, so delete those events yourself.</p>
+      <p>Remove the calendar in the same app you added it to.</p>
+      <ul>
+        <li><strong>iPhone:</strong> Settings, Calendar, Accounts, Subscribed Calendars, then delete it.</li>
+        <li><strong>Google Calendar:</strong> open Settings, pick this calendar under "Settings for other calendars" and choose Unsubscribe.</li>
+        <li><strong>Outlook:</strong> right-click the calendar and choose Remove.</li>
+        <li><strong>Downloaded file:</strong> it adds single events, so delete those events yourself.</li>
+      </ul>
     </details>
   </section>
 
@@ -73,7 +82,7 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
     </section>
   )}
 
-  <p class="meta">Know a date that should be here? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Suggest it</a>.</p>
+  <p class="meta">Know a date that should be here? <a href={fixFormUrl({ page: Astro.url.pathname })}>Suggest it</a>.</p>
 </Base>
 
 <style>
