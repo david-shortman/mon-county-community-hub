@@ -7,6 +7,7 @@ import BusLink from './BusLink.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
 import PassItOn from './PassItOn.astro';
+import RelayLine from './RelayLine.astro';
 import { websiteLabel, oldestChecked } from '../lib/content.mjs';
 const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
 ---
@@ -28,6 +29,7 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
     link={r.contact?.url} linkLabel={websiteLabel(r)}
     about={r.title}
   />
+  <RelayLine phone={r.contact?.phone} sms={sms} text={r.contact?.text} />
   <BusLink place={r.contact?.place} about={r.title} />
   <WhatHappensNext r={r} />
   <SourceLine sources={r.sources} phone={r.phone_confirmed} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
