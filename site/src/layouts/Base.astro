@@ -6,6 +6,7 @@ import CrisisStrip from '../components/CrisisStrip.astro';
 import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import UpkeepNotice from '../components/UpkeepNotice.astro';
+import ShareThis from '../components/ShareThis.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
 import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
@@ -36,6 +37,10 @@ const tags = (await loadPages()).get(route);
 const doors = loadDoors();
 const tagDoor = tags && doors.bySlug[tags.door];
 const tagTopic = tagDoor?.topics?.[tags.topic];
+// Share this (#947): on listed guides only. High-stakes doors and topics wait
+// for David, and safety pages never get it (a share leaves a trace).
+const shareable = tags?.listed && !['help-now', 'this-month', 'about'].includes(tags.door)
+  && !['housing', 'money', 'food'].includes(tags.topic) && !/domestic|sexual|abuse|stay-tonight|veterans/i.test(route);
 // Main menu (#250), built from content/doors.yaml, so adding a page never
 // changes it. Phones: a tab bar of four at the bottom, in thumb reach. Wide
 // screens: Help now, the five doors, Dates and All topics in the header.
@@ -227,7 +232,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .right-now .tonight { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; }
       .right-now .tonight .icon { width: 22px; height: 22px; }
       .right-now .crisis { font-weight: 600; margin: 8px 0 0; font-size: 0.95rem; }
-      .crisis-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 6px 0 4px; }
+      .crisis-btns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 5rem), 1fr)); gap: 8px; margin: 6px 0 4px; } /* 3 across, one per row with big text (#971) */
       .crisis-btns .btn { padding: 8px 6px; gap: 6px; }
       .crisis-btns span { white-space: nowrap; }
       .doors h2 { margin-top: 1.1em; }
@@ -353,6 +358,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       {(crisis || tags?.door === 'help-now') && <p class="disclaimer meta">{disclaimer}</p>}
       <slot />
+      {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
       <AlsoCheck route={route} />
     </main>
     <footer class="site">
