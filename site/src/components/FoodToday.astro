@@ -1,14 +1,19 @@
 ---
 // Results for "food today or this week". Only sourced records: 211, The Rack
-// (WVU students), mobile pantry dates from the calendar, Scott's Run, and SNAP.
+// (WVU students), free meals from content/places, Scott's Run, food dates from
+// the calendar (next 62 days; seniors-only dates left off the student view),
+// and SNAP. Food dates and free meals added in the #516 review (Oct 31, 2026).
 import ResourceCard from './ResourceCard.astro';
 import EventCard from './EventCard.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
-import { resource, org, loadCalendarWithFeeds, upcoming } from '../lib/content.mjs';
+import { resource, org, loadCalendarWithFeeds, upcoming, loadDir } from '../lib/content.mjs';
 const { student = false } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const pantries = upcoming(await loadCalendarWithFeeds(), undefined, 31).filter((e) => (e.topics || []).includes('food')).slice(0, 4);
+const forSeniorsOnly = (e) => /\bseniors?\b/i.test(e.title || '');
+const pantries = upcoming(await loadCalendarWithFeeds(), undefined, 62).filter((e) => (e.topics || []).includes('food')).filter((e) => !(student && forSeniorsOnly(e))).slice(0, 6);
+const MEALS = ['morgantown-community-kitchen-weekday-lunch', 'salvation-army-morgantown-family-dinner'];
+const meals = loadDir('places').filter((p) => MEALS.includes(p.slug));
 const srsh = org('scotts-run-settlement-house');
 ---
 <h2>Where to start</h2>
@@ -24,7 +29,19 @@ const srsh = org('scotts-run-settlement-house');
     </article>
   </li>
 </ol>
+{meals.length > 0 && <h2>Meals you can walk in for</h2>}
+{meals.map((m) => (
+  <article class="card">
+    <h3>{m.name}</h3>
+    <p><strong>When:</strong> {m.regular.join('; ')}</p>
+    <p><strong>Where:</strong> {m.contact.place}</p>
+    {m.cost && <p><strong>Cost:</strong> {m.cost}</p>}
+    {(m.notes || []).map((n) => <p>{n}</p>)}
+    <Actions callFirst phone={m.contact.phone} phoneLabel={m.name} link={m.contact.url} linkLabel="Website" about={m.name} />
+    <SourceLine sources={m.sources} about={m.name} />
+  </article>
+))}
 <h2>Free food dates coming up</h2>
-{pantries.length ? pantries.map((e) => <EventCard e={e} />) : <p>No pantry dates are on our calendar for the next month. Call or text 211 to ask what is open near you.</p>}
+{pantries.length ? pantries.map((e) => <EventCard e={e} />) : <p>No pantry dates are on our calendar for the next two months. Call or text 211 to ask what is open near you.</p>}
 <h2>Help every month</h2>
 <p>You may qualify for SNAP (food stamps), which puts money for groceries on a card each month. Only the state decides who qualifies. <a href={`${base}/help/food/monthly/`}>How to apply</a>.</p>
