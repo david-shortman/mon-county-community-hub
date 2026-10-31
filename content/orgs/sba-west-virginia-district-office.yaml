@@ -1,0 +1,11 @@
+name: U.S. Small Business Administration, West Virginia District Office
+slug: sba-west-virginia-district-office
+kind: government
+website: https://legacy.sba.gov/district/west-virginia
+phone: "304-623-5631"
+summary: The federal Small Business Administration's office for all of West Virginia. It helps with SBA funding programs, counseling, federal contracting certifications and disaster recovery, and connects businesses to partners and lenders.
+topics: [work]
+area: statewide
+sources:
+  - url: https://legacy.sba.gov/district/west-virginia
+    checked: 2026-10-30

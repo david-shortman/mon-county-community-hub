@@ -1,0 +1,6 @@
+# 2026-10-31: Feeds found by folder, and a health file for each build
+
+- **Considered:** #71 asks to find feed adapters by listing their folder instead of a shared `ADAPTERS` array, so adding a feed never edits a shared line, and to record each feed's health on every fetch. Its last step, moving the feeds to `packages/ingest`, needs npm workspaces, and a root workspace breaks `npm ci` inside `site/` (tried 2026-10-31), which CI and every session use. So the move waits; these two steps work in place.
+- **Chose:** `site/src/lib/feeds/index.mjs` now loads every file in `adapters/`. In the site build, Vite's `import.meta.glob` lists them; in plain Node scripts (`update-feeds`, `check-content`) the folder is read directly. Adapters run in file-name order, which also decides which feed wins when two feeds list the same event (#852). Checked with saved copies: the calendar holds the same 182 entries before and after.
+- **Shipped:** the folder discovery; a health line per feed from every load (status `live`, `snapshot` when the live fetch failed and the saved copy was used, or `skipped`; entry count; fetch time; error); and `/api/v1/feed-health.json` with those lines, linked from `index.json` as `feed_health_url` (added to the v1 contract). `content/README.md` step 5 no longer says to edit a list.
+- **Cost:** $0.

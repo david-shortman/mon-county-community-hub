@@ -1,0 +1,23 @@
+name: First Friday for the Arts
+slug: arts-council-of-greater-morgantown-first-friday
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: nonprofit
+  text: Arts Council of Greater Morgantown, with Main Street Morgantown
+story: A free monthly gallery walk in downtown Morgantown, with art shows, music and hands-on activities at shops and galleries.
+regular:
+  - First Friday of each month, 6 p.m. to 9 p.m.
+cost: Free
+interests: [arts, music, social]
+tags: [free, come-alone]
+contact:
+  url: https://artsgm.org/first-friday-for-the-arts/
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - The list of stops changes each month. Check the Arts Council page for this month's list.
+sources:
+  - url: https://artsgm.org/first-friday-for-the-arts/
+    checked: 2026-10-30
