@@ -22,7 +22,10 @@ import { CONTENT_DIR, todayYmd, ymd, loadDir, loadSecondhand, oldestChecked, isS
 
 export const CHECKLIST_DIR = path.join(CONTENT_DIR, 'checklists');
 const FILE_FIELDS = ['id', 'title', 'issue_title', 'tracking', 'intro', 'items'];
-const ITEM_FIELDS = ['text', 'url', 'when', 'months', 'from', 'run'];
+// person: true marks a page that blocks automated reads, so an agent run
+// skips it and leaves it for a person. how: one line on how to find or read it.
+const ITEM_FIELDS = ['text', 'url', 'how', 'person', 'when', 'months', 'from', 'run'];
+export const PERSON_NOTE = '**A person reads this** (it blocks automated reads):';
 const WHEN = ['week', 'month', 'quarter'];
 const LABEL = 'checklist';
 const TODO_LABEL = 'for:duet';
@@ -117,6 +120,8 @@ export function validateChecklists(lists) {
       if (it?.when && !WHEN.includes(it.when)) errors.push(`${w}: when must be one of ${WHEN.join(', ')}`);
       if (it?.months && (!Array.isArray(it.months) || it.months.some((m) => !Number.isInteger(m) || m < 1 || m > 12))) errors.push(`${w}: months must be numbers 1 to 12`);
       if (it?.from && !/^\d{4}-\d{2}-\d{2}$/.test(ymd(it.from))) errors.push(`${w}: from must be a date`);
+      if (it?.person !== undefined && typeof it.person !== 'boolean') errors.push(`${w}: person must be true or false`);
+      if (it?.how !== undefined && (typeof it.how !== 'string' || !it.how.trim())) errors.push(`${w}: how must be a line of text`);
       if (it?.run && !RUNS[it.run]) errors.push(`${w}: run must be one of ${Object.keys(RUNS).join(', ')}`);
     });
     if (/[\u2014]/.test(JSON.stringify(c))) errors.push(`${at}: no em dashes`);
@@ -150,7 +155,8 @@ export function buildIssue(c, today, { runUrl = '', runs = RUNS } = {}) {
     if (!items.length) continue;
     L.push(`### ${HEADS[h]}`, '');
     for (const it of items) {
-      L.push(`- [ ] ${it.text}${it.url ? ` ${it.url}` : ''}`);
+      L.push(`- [ ] ${it.person ? `${PERSON_NOTE} ` : ''}${it.text}${it.url ? ` ${it.url}` : ''}`);
+      if (it.how) L.push(`  - How: ${String(it.how).trim()}`);
       if (it.run) {
         let lines;
         try { lines = runs[it.run](today); } catch (e) { lines = [`(Could not build this list: ${e.message})`]; }
@@ -161,7 +167,7 @@ export function buildIssue(c, today, { runUrl = '', runs = RUNS } = {}) {
     }
     L.push('');
   }
-  L.push('Rules for every item: change a fact only after reading its source, set `checked` only for sources you re-read, never guess a date, and anything that needs asking a person becomes a `for:david` issue. Shelter, food and money changes wait for David.');
+  L.push('Rules for every item: change a fact only after reading its source, set `checked` only for sources you re-read, never guess a date, and anything that needs asking a person becomes a `for:david` issue. Shelter, food and money changes wait for David. When you tick an item, add a one-line note in a comment: what changed, "no change", or "not read" and why.');
   if (runUrl) L.push('', `Latest run: ${runUrl}`);
   L.push('', marker(c.id), periodMarker(key));
   return { title: `${c.issue_title} (week of ${prettyMon(weekMonday(today))})`, body: L.join('\n'), key, count: due.length };
@@ -250,6 +256,9 @@ function selfTest() {
   expect(spring.body.includes('### This season') && spring.body.includes('Budget agendas'), 'seasonal items show in their months');
   expect(buildIssue({ ...sample, items: [{ text: 'x', months: [4] }] }, '2026-11-11') === null, 'nothing due means no issue');
   expect(!/\u2014/.test(q.body), 'no em dashes in issue text');
+  const hp = buildIssue({ ...sample, items: [{ text: 'Blocked page', url: 'https://example.org/b', person: true, how: 'Open it in a browser.' }] }, '2026-11-11');
+  expect(hp.body.includes(`- [ ] ${PERSON_NOTE} Blocked page https://example.org/b`) && hp.body.includes('  - How: Open it in a browser.'), 'person and how show on the item');
+  expect(validateChecklists([{ ...sample, items: [{ text: 'x', person: 'yes' }] }]).length === 1, 'person must be true or false');
 
   // The computed lists run against the real content without errors.
   for (const [name, fn] of Object.entries(RUNS)) {

@@ -1,0 +1,13 @@
+name: Animal Friends of North Central West Virginia
+slug: animal-friends-of-north-central-wv
+kind: nonprofit
+website: https://www.animalfriendswv.org/
+phone: "304-290-4738"
+summary: A no-kill animal sanctuary on Brewer Road that runs an adoption and foster program for dogs and cats. It also has a spay and neuter help program and runs the Animal Friends Thrift Shoppe.
+topics: [pets]
+area: monongalia-county
+sources:
+  - url: https://www.animalfriendswv.org/
+    checked: 2026-10-31
+  - url: https://www.animalfriendswv.org/contact/
+    checked: 2026-10-31

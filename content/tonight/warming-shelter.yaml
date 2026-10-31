@@ -1,0 +1,12 @@
+# Tonight's warming shelter status (#401), shown on /tonight/. Update it each
+# day in winter after reading a same-day source. The page shows "open" only
+# when `checked` is today in Morgantown; an older check reads as "not
+# confirmed today", on the build and again on the phone. Rules come before
+# any count, and there is no bed count. Schema: content/README.md.
+status: not-announced   # not-announced | open | closed-tonight | season-over
+checked: "2026-10-29 12:00"   # Morgantown date and time the source was read
+note: No opening date or hours have been announced for this winter yet. In August, local news reported that Catholic Charities West Virginia plans to run it on the first floor of Hazel's House of Hope on Scott Avenue in Morgantown, with money from the city and a funding request to the county.
+sources:
+  - url: https://wajr.com/2026/08/24/catholic-charities-west-virginia-makes-request-to-mon-county-commission-for-warming-shelter-funding/
+    checked: 2026-10-29
+    name: a WAJR news report from August 24, 2026

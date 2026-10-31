@@ -1,0 +1,17 @@
+title: HELP4WV, 24/7 help line for mental health and addiction
+slug: help4wv
+org: first-choice-services
+topics: [health]
+who_it_is_for: Any West Virginian struggling with an addiction or mental health issue, and people worried about someone else.
+what_to_do: Call or text 1-844-HELP4WV (1-844-435-7498), or chat at help4wv.com. It is open 24 hours a day, every day. Staff give confidential support and help you find treatment and other resources.
+hours: 24 hours a day, every day
+contact:
+  phone: "1-844-435-7498"
+  text: "1-844-435-7498"
+  url: https://www.help4wv.com/
+  url_label: Chat online
+sources:
+  - url: https://www.help4wv.com/
+    checked: 2026-10-30
+  - url: https://helpandhopewv.org/get-help/
+    checked: 2026-10-30

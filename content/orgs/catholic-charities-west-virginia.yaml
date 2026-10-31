@@ -2,9 +2,11 @@ name: Catholic Charities West Virginia
 slug: catholic-charities-west-virginia
 kind: nonprofit
 website: https://www.ccwva.org
-summary: A statewide nonprofit that runs Grace Shelter, an emergency shelter for adults in Morgantown.
+summary: A statewide nonprofit. In Monongalia County it runs Grace Shelter, an emergency shelter for adults in Morgantown, and offers refugee resettlement and immigration services.
 topics: [housing]
 area: statewide
 sources:
   - url: https://www.ccwva.org/programs/grace-shelter/
     checked: 2026-10-28
+  - url: https://www.ccwva.org/locations/
+    checked: 2026-10-30

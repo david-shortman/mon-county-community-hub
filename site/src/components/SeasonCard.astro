@@ -1,5 +1,6 @@
 ---
 // "This season" cards on the home page (#250 winter, #511 storm season,
+// holiday season help in November and December,
 // #299 fall). Each season has `from` and `until` as "MM-DD" in Morgantown
 // time, checked the same way as door examples (inSeason in lib/pages.mjs).
 // The site rebuilds every morning, so cards appear and go away on their own,
@@ -33,6 +34,18 @@ const SEASONS = [
       { href: '/moving-here/', text: 'Moving in: start power, water, gas and trash' },
       { href: '/recycling/', text: 'Moving out: trash, recycling and drop-off' },
       { href: '/make-it-better/adopt/', text: 'Adopt a street before winter' },
+    ],
+  },
+  {
+    id: 'holidays',
+    from: '11-01',
+    until: '12-31',
+    title: 'Holiday season help',
+    intro: 'Sign-ups for toys and holiday help often close early. Dates and sources are on these pages:',
+    links: [
+      { href: '/holidays/', text: 'Toys, coats, meals and holiday hours' },
+      { href: '/calendar/', text: 'Sign-up windows and deadlines' },
+      { href: '/volunteer/', text: 'Give or volunteer this season' },
     ],
   },
   {
