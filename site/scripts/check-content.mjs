@@ -44,6 +44,7 @@ const slugs = new Set();
 for (const e of loadCalendar()) {
   const where = e._file;
   checkHidden(e);
+  if (e.private_trace != null && e.private_trace !== true) errors.push(`${where}: private_trace is true or left out (#555)`);
   for (const f of ['title', 'slug', 'starts', 'org_name', 'who_it_is_for', 'what_to_do', 'url']) {
     if (!e[f]) errors.push(`${where}: missing ${f}`);
   }
@@ -82,13 +83,14 @@ const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(Strin
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
 const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden', 'phone_confirmed', 'phone_confirmed_by'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by', 'private_trace'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
 function checkRecord(e, required, known) {
   const where = e._file;
   checkHidden(e);
+  if (e.private_trace != null && e.private_trace !== true) errors.push(`${where}: private_trace is true or left out (#555)`);
   // Confirmed by phone (#164): a date, and optionally the caller's initials.
   // Never the name of the person who answered.
   if (e.phone_confirmed != null) {

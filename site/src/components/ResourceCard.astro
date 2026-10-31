@@ -35,6 +35,6 @@ const H = `h${headingLevel}`;
   <BusLink place={r.contact?.place} about={r.title} />
   <WhatHappensNext r={r} />
   <SourceLine sources={r.sources} phone={r.phone_confirmed} staleDays={staleDaysFor(r)} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
-  <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
+  <PassItOn title={r.title} slug={r.slug} org={r.org} privateTrace={r.private_trace} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
 )}

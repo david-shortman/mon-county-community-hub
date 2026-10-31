@@ -76,6 +76,8 @@ notes:                  # optional (#973); short paragraphs after the lists, for
 
 `steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `options` works the same way for a list of choices where order does not matter (a bulleted list), and `notes` holds exceptions as separate short paragraphs after the lists. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
 
+Set `private_trace: true` on a domestic or sexual violence listing, or any listing where a text or share left on someone's phone could put them at risk (#555). The card then leaves off the "Pass it on" row (Text, Print, Share). Calendar entries take the same flag. The page's quick exit is still the way out.
+
 ### Town and neighborhood (#395)
 
 Dates (`calendar/`) and resources can name their town, and a neighborhood inside it, so a card can say "Westover" or "Sunnyside, Morgantown" and Dates can group by town.
