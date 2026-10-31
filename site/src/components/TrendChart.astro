@@ -64,10 +64,10 @@ const desc = series.map((s) => `${s.label} went from ${whole(s.points[0].value)}
     <figcaption>
       <details>
         <summary>See every number</summary>
-        <table>
+        <div class="table-scroll" role="region" aria-label={`Every number: ${i.title}`} tabindex="0"><table>
           <thead><tr><th scope="col">Year</th>{series.map((s) => <th scope="col">{s.label}</th>)}</tr></thead>
           <tbody>{years.map((yr) => <tr><th scope="row">{yr}</th>{series.map((s) => { const p = s.points.find((q) => q.year === yr); return <td>{p ? whole(p.value) : '-'}</td>; })}</tr>)}</tbody>
-        </table>
+        </table></div>
       </details>
       The chart uses whole percents, so it can differ a little from the number above. Years before the source changed how it counts are left out.
     </figcaption>
