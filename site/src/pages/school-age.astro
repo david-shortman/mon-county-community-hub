@@ -17,6 +17,7 @@ const careSources = [
   { url: 'https://www.boe.mono.k12.wv.us/page/before-after-school-care', checked: '2026-10-30', name: 'Monongalia County Schools, Before and After School Care' },
 ];
 const ccrcSources = [
+  { url: 'https://bfa.wv.gov/bfa-programs/child-care-assistance', checked: '2026-10-30', name: 'WV Bureau for Family Assistance, Child Care Assistance' },
   { url: 'https://the-shack.org/child-care/', checked: '2026-10-30', name: 'The Shack Neighborhood House, child care page' },
 ];
 ---
@@ -53,7 +54,7 @@ const ccrcSources = [
   {r('shack-out-of-school-days') && <ResourceCard r={r('shack-out-of-school-days')} showCost />}
 
   <h3>Help paying for child care</h3>
-  <p>The Child Care Resource Center (CCRC) helps eligible families pay for child care. You must be working, going to school or looking for a job, and meet the income rules. Call CCRC at <a href="tel:13042927357">304-292-7357</a>. The SOURCE says it accepts CCRC payments.</p>
+  <p>The state's child care assistance program helps pay for care for working parents, and in some cases parents in school, who meet its income rules. Local Child Care Resource and Referral agencies run it. For families here, The Shack's child care page says to call the Child Care Resource Center (CCRC) at <a href="tel:13042927357">304-292-7357</a>, and that you must be working, going to school or looking for a job. The SOURCE says it accepts CCRC payments.</p>
   <SourceLine sources={ccrcSources} about="CCRC child care help" />
 
   <h2 id="after-school">After school at middle and high schools</h2>
