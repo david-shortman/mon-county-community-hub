@@ -18,6 +18,7 @@ export function GET({ site }) {
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
 - [This month in Mon County](${u('/calendar/month/')}): the next 30 days from the calendar on one page you can print
 - [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
+- [Tonight: is the warming shelter open?](${u('/tonight/')}): winter warming shelter status, checked each day with the time shown: where, hours, rules and the bus, never a bed count; "open" only with a same-day check
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
 - [Get through this month](${u('/money/')}): pick what is going on (a utility or other bill, short on food, behind on rent, cash fast or a payday loan, free tax help) and get local steps in order, with phone numbers and sources; also the scam warning
 - [Food help](${u('/help/food/')}): two questions (when you need food, and whether you are a WVU student) leading to sourced options

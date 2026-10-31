@@ -330,6 +330,32 @@ sources:
     checked: 2026-10-30
 ```
 
+## `tonight/warming-shelter.yaml`: tonight's warming shelter status
+
+One file, shown on `/tonight/` (#401). Update it each day in winter, after reading a same-day source.
+
+```yaml
+status: open              # not-announced | open | closed-tonight | season-over
+checked: "2026-12-05 15:30"   # Morgantown date and time you read the source, quoted
+where: 123 Example St, Morgantown   # needed when open
+hours: 7 p.m. to 7 a.m.             # needed when open
+rules:                    # optional; shown before anything else, in the source's words
+  who: Adults 18 and older
+  pets: No pets
+  sobriety: ...
+  id: ...
+bus: ...                  # optional; how to get there
+last_bus: ...             # optional
+confirm_phone: "211"      # needed when open; a public number to confirm
+confirm_label: ...        # optional; who answers
+note: ...                 # optional; one plain sentence, like "No opening date has been announced yet."
+sources:
+  - url: https://example.org/warming-shelter
+    checked: 2026-12-05
+```
+
+The page says "open" only when `checked` is today in Morgantown, both when the site builds and again on the phone, so a page saved from an earlier day reads "Not confirmed for today." There is never a bed count. `npm run check-content` checks the status, the `checked` format, and that an open shelter has `where`, `hours` and `confirm_phone`.
+
 ## `doors.yaml`: the five doors
 
 The site is organized into five doors named for what is going on in a person's life, plus three lanes that are not doors: Help now, Dates, and About this site (#248). `doors.yaml` lists them and maps every `topics` tag used in this folder to one door, with the label people see:
