@@ -1,0 +1,14 @@
+title: Apply for Medicaid or WVCHIP
+slug: apply-for-medicaid-wv
+org: wv-department-of-human-services
+topics: [health]
+who_it_is_for: West Virginians who need health coverage. The state decides who qualifies.
+what_to_do: Apply online at WV PATH, the state's recommended way to apply for most health coverage. Or call the DoHS hotline at 1-877-716-1212 for questions and to apply for some types of Medicaid and WVCHIP. You can also apply at HealthCare.gov. The state says most local hospitals and primary care clinics have staff who can help you apply. If a disability keeps you from going to the office, call your local DoHS office or 1-800-642-8589 to ask for a home visit.
+contact:
+  phone: "1-877-716-1212"
+  url: https://www.wvpath.wv.gov/
+  url_label: Apply online
+cost: free
+sources:
+  - url: https://bms.wv.gov/bms-members/apply-for-healthcare
+    checked: 2026-10-30

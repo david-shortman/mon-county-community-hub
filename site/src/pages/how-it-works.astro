@@ -156,13 +156,16 @@ const doorSnippet = `- slug: this-month
   </ul>
 
   <h2 id="checks">Checks that run on their own</h2>
-  <ul class="checks">
-    <li><strong>Every change:</strong> Every listing has a source and a date. No broken pages, colors are easy to read, and pages stay small for phones.</li>
-    <li><strong>Every change to what you see:</strong> A second AI run scores it with the guides that fit: works for everyone, easy to use, clear look, easy to find, clear words, and honest and fair. A program flags shelter, crisis, food and benefits changes for the owner.</li>
-    <li><strong>Every morning:</strong> The site is rebuilt, so past dates drop off.</li>
-    <li><strong>Every day:</strong> Every outside page we use is visited, Help now pages first. Broken pages, moved pages and phone numbers no longer on the source get flagged.</li>
-    <li><strong>Every 4 hours:</strong> A health check: is the site up, are dates current, did the last update go live? A listing not rechecked in 6 months is flagged, and the listing itself says it may be out of date.</li>
-  </ul>
+  <table>
+    <thead><tr><th scope="col">When</th><th scope="col">What gets checked</th></tr></thead>
+    <tbody>
+      <tr><td>Every change</td><td>Every listing has a source and a date. No broken pages, colors are easy to read, and pages stay small for phones.</td></tr>
+      <tr><td>Every change to what you see</td><td>A second AI run scores it with the guides that fit: works for everyone, easy to use, clear look, easy to find, clear words, and honest and fair. A program flags shelter, crisis, food and benefits changes for the owner.</td></tr>
+      <tr><td>Every morning</td><td>The site is rebuilt, so past dates drop off.</td></tr>
+      <tr><td>Every day</td><td>Every outside page we use is visited, Help now pages first. Broken pages, moved pages and phone numbers no longer on the source get flagged.</td></tr>
+      <tr><td>Every 4 hours</td><td>A health check: is the site up, are dates current, did the last update go live? A listing not rechecked in 6 months is flagged, and the listing itself says it may be out of date.</td></tr>
+    </tbody>
+  </table>
   <p class="check"><strong>Check it yourself:</strong> <a href={tree('.github/workflows')}>the programs themselves</a>, <a href={doc('docs/operations/README.md')}>what each check does</a> and <a href={tree('docs/rubrics')}>the six review guides</a>, all on GitHub. <a href={`${base}/how-we-check/`}>How we check</a> says how this compares with 211.</p>
 
   <h2 id="wrong">When something is wrong</h2>
@@ -264,8 +267,18 @@ const doorSnippet = `- slug: this-month
     .roles p { margin: 0; }
     @media (min-width: 40rem) { .roles { grid-template-columns: 1fr 1fr; } }
 
-    /* A list, not a table, so it wraps at 320px with text at 200%. */
-    .checks li + li { margin-top: 6px; }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+    th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+    th { font-size: 0.95rem; color: var(--muted); }
+    td:first-child { font-weight: 700; white-space: nowrap; }
+    @media (max-width: 30rem) { td:first-child { white-space: normal; } }
+    /* On narrow screens and at big text sizes, each row stacks: "When" on top, then what gets checked (#971) */
+    @media (max-width: 30rem) {
+      table, tbody, tr, td { display: block; }
+      thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+      tr { padding: 8px 0; border-bottom: 1px solid var(--line); }
+      td { padding: 2px 0; border: 0; }
+    }
 
     pre { overflow-x: auto; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; font-size: 0.9rem; line-height: 1.5; }
     code { font-size: 0.95em; }
