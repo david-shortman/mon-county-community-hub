@@ -12,3 +12,5 @@
 - Mon Health's dollar amounts. Its page links the 2020 poverty guidelines, which are out of date.
 
 **Sources:** all read 2026-10-31 (links in the two records).
+
+**Note on the earlier log:** `2026-10-30-2346-no-insurance.md` says Mon Health's 200% figure was left off. This change adds it back as a quote, with the policy date, next to the page's "case by case".
