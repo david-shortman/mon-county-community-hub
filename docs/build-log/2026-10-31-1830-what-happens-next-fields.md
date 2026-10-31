@@ -14,4 +14,4 @@
 
 **Skipped:** `lieap-heating-help` (open in #755), `rdvic-hotline` (open in #748), `the-rack-wvu-student-food-pantry` (#935), `monongalia-county-dohs-office` (#535), `starting-points-family-programs` (#866). `mub-customer-service`: MUB's site says nothing about what to bring or what happens.
 
-**Found a conflict:** Mon Power's page gives 800-683-7036 for Dollar Energy Fund, and dollarenergy.org gives 1-888-282-6816 for utility help. The record keeps the existing number; a needs-verification issue tracks it.
+**Found a conflict:** Mon Power's page gives 800-683-7036 for Dollar Energy Fund, and dollarenergy.org gives 1-888-282-6816 for utility help. The record keeps the existing number; #1010 tracks it.
