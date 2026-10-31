@@ -151,7 +151,7 @@ for (const r of resources) {
 for (const r of resources) for (const h of r.if_you_want_help ?? []) if (!resourceSlugs.has(h)) errors.push(`${r._file}: if_you_want_help names ${h}, which has no file in content/resources/`);
 
 // Secondhand shops, free programs and online groups (content/secondhand, #423).
-const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources', 'hidden'];
+const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'does_not_take', 'drop_off', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources', 'hidden'];
 const secondhand = loadDir('secondhand');
 const secondhandSlugs = new Set();
 for (const s of secondhand) {
@@ -167,7 +167,7 @@ for (const s of secondhand) {
   if (s.url && !isUrl(s.url)) errors.push(`${where}: url is not a web link`);
   if (s.org && !orgSlugs.has(s.org)) errors.push(`${where}: org ${s.org} has no file in content/orgs/`);
   if (s.address != null && (typeof s.address !== 'string' || !/,/.test(s.address))) errors.push(`${where}: address must be text like "200 Spruce St, Morgantown, WV"`);
-  for (const f of ['hours', 'sells', 'takes', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'note', 'run_by']) {
+  for (const f of ['hours', 'sells', 'takes', 'does_not_take', 'drop_off', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'note', 'run_by']) {
     if (s[f] != null && typeof s[f] !== 'string') errors.push(`${where}: ${f} must be text`);
   }
 }
