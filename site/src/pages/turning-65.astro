@@ -5,6 +5,7 @@ export const page = { door: "care", topic: "health", label: "Turning 65 or on Me
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const ship = loadDir('resources').find((e) => e.slug === 'wv-ship-medicare-counseling');
 const MG = 'https://www.medicare.gov';
@@ -35,9 +36,9 @@ const MG = 'https://www.medicare.gov';
   </ul>
 
   <h2>Own your home? A property tax break</h2>
-  <p>Homeowners who are 65 or older, or permanently and totally disabled, can file for the homestead exemption with the Monongalia County Assessor. New applicants file between July 1 and December 1 each year, and only need to apply once. This year, the last day is Tuesday, December 1. See the full rules at the <a href="https://www.assessor.org/2205/Real-Estate">Monongalia County Assessor</a> (checked October 30, 2026), or the date on <a href={`${base}/calendar/`}>Deadlines and dates</a>.</p>
+  <p>Homeowners who are 65 or older, or permanently and totally disabled, can file for the homestead exemption with the Monongalia County Assessor. New applicants file between July 1 and December 1 each year, and only need to apply once. This year, the last day is Tuesday, December 1. See the full rules at the <a href="https://www.assessor.org/2205/Real-Estate">Monongalia County Assessor</a> (checked October 30, 2026), or the date on <a href={`${base}/calendar/`}>Dates and deadlines</a>.</p>
 
   <p>Staying healthy after 65: see <a href={`${base}/staying-well/`}>Staying well: a simple list</a>.</p>
 
-  <p class="meta">Medicare sources checked October 30, 2026. We describe Medicare's rules and where to get help. We do not sell plans or recommend one. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Medicare sources checked October 30, 2026. We describe Medicare's rules and where to get help. We do not sell plans or recommend one. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

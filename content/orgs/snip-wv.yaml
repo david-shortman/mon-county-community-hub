@@ -1,0 +1,11 @@
+name: SNIP WV (Spay Neuter Incentive Program of West Virginia)
+slug: snip-wv
+kind: nonprofit
+website: https://www.snipwv.org/
+phone: "304-943-7460"
+summary: A nonprofit, low-cost spay and neuter clinic in Morgantown. It also offers vaccines, microchips and parasite treatments, and runs a program for stray and feral cats.
+topics: [pets]
+area: monongalia-county
+sources:
+  - url: https://www.snipwv.org/
+    checked: 2026-10-31

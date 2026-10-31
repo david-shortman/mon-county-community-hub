@@ -1,0 +1,40 @@
+---
+// Starting page for small business owners (#277, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/small-business.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "work", label: "Small business owners", summary: "Starting a business, the city license and taxes, free coaching, selling food, and local business groups, in one place" };
+const sections = [
+  { title: "Start a business", links: [
+    { href: "/start-a-business/", text: "zoning, state registration, the city license and B&O tax, in order" },
+    { href: "/permits/", text: "who issues building permits where you are" },
+  ] },
+  { title: "Coaching, classes and money", links: [
+    { href: "/business/", text: "free business coaching and classes, and help with a business plan" },
+    { href: "/pay-for-training/", text: "training scholarships and Jumpstart Savings" },
+  ] },
+  { title: "Selling food or at markets", links: [
+    { href: "/health-department-fees/", text: "county health department permit fees" },
+    { href: "/sell-what-you-grow/", text: "who to ask before you sell produce or canned foods" },
+    { href: "/markets/", text: "craft markets, the farmers market and yearly sales" },
+  ] },
+  { title: "Meet other business owners", links: [
+    { href: "/business/#morgantown-area-partnership", label: "Local business groups", text: "business groups in Morgantown" },
+    { href: "/find-your-people/", text: "groups and clubs" },
+  ] },
+  { title: "Hiring and taxes", links: [
+    { href: "/find-a-job/", text: "where local employers post jobs" },
+    { href: "/free-tax-help/", text: "free help filing your taxes" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/tradespeople/", text: null },
+    { href: "/for/artists-and-makers/", text: null },
+    { href: "/for/remote-workers/", text: null },
+  ] },
+];
+---
+<Base title="Small business owners in Morgantown and Mon County: where to start" description="A starting page for people starting or running a small business in Monongalia County: steps to start in Morgantown, free coaching and classes, selling food or at markets, building permits, and local business groups.">
+  <h1>For small business owners</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

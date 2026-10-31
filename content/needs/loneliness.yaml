@@ -1,0 +1,42 @@
+title: Loneliness and having someone to count on
+slug: loneliness
+summary: About 1 in 3 adults in Mon County feel lonely, and about 1 in 5 lack the social and emotional support they need. Loneliness was one of the top three hardships for every adult age group in the health department's 2025 survey.
+evidence:
+  - url: https://data.cdc.gov/d/swc5-untb
+    checked: 2026-10-31
+    shows: CDC estimates the share of adults who feel lonely, and the share who lack social and emotional support. These are model-based estimates, not counts.
+    figure: "35.2% loneliness; 20.9% lack support"
+    data_date: "2023"
+    publisher: CDC PLACES (2025 release)
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: Anxiety, depression and loneliness were the top three hardships across all gender groups and all age groups over 18 in the health department's 2025 survey (page 55 of the PDF).
+    data_date: "2025"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-31
+    shows: The share of adults who report feeling lonely.
+    figure: "31.6% (West Virginia 31.1%, US 33%)"
+    publisher: County Health Rankings (2025 release)
+affected:
+  estimate: "35.2% of adults"
+  description: Adults in Monongalia County who feel lonely, as estimated by CDC.
+  url: https://data.cdc.gov/d/swc5-untb
+  checked: 2026-10-31
+severity: medium
+severity_why: Loneliness is linked to poorer physical and mental health, and it often goes with other hardships.
+trend: unknown
+working_on:
+  - org: senior-monongalians
+  - org: westside-senior-center
+  - org: morgantown-public-library-system
+  - org: olli-at-wvu
+  - org: volunteer-west-virginia
+  - org: boparc
+gaps:
+  - Groups, clubs and free places to spend time are listed in many places, often only on social media.
+  - Newcomers, including many students each year, have no one starting point.
+topics: [community]
+rank: 8
+rank_why: "Score 10 of 12: severity 2, reach 3, agreement 2, room to help 3 (many free groups exist; finding them is the hard part)."
+questions: [q16, q43, q45]

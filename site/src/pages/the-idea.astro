@@ -4,21 +4,22 @@
 // Shapes how the project presents itself, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
 import { loadCalendarWithFeeds } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "The idea behind this site", summary: "What the project is trying to do, and how to check it" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const doc = (p) => `${repo}/blob/main/${p}`;
-const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
 // Count the offices and groups behind the deadlines page, so the number stays true as it grows.
 const calendarOrgs = new Set((await loadCalendarWithFeeds()).map((e) => e.org_name).filter(Boolean)).size;
 ---
 <Base title="The idea behind this site for Morgantown and Mon County" description="What this site is trying to do for Morgantown and Monongalia County, why it can work, and how you can check each part for yourself.">
   <h1>The idea behind this site</h1>
-  <p class="lede">Morgantown and Mon County already have a lot of good help and good information. Too much of it is hard to find and hard to use. This site puts AI to work, day and night, to pull it together and make it easy to act on.</p>
+  <p class="lede">Morgantown and Mon County already have a lot of good help and good information. Too much of it is hard to find and hard to use. This site pulls it together, sends you to the local groups doing the work, and makes it easy to act on. AI does most of the research and writing. Every item links to its source and shows when we last checked it.</p>
 
   <div class="big-idea">
     <p class="kicker">The idea in one line</p>
-    <p class="line">Put AI to work for our community: tie together the help that is already here, bring in what has worked in other places, and shape it all around the questions people really have.</p>
+    <p class="line">Tie together the help that is already here, bring in what has worked in other places, and shape it all around the questions people really have. AI does the legwork, and every item shows where it came from.</p>
   </div>
 
   <p>The idea has four parts. Each one shows what things looked like before and what this site does instead. Each has links so you can check it yourself. We would rather show you than ask you to trust us.</p>
@@ -53,10 +54,10 @@ const calendarOrgs = new Set((await loadCalendarWithFeeds()).map((e) => e.org_na
     </section>
     <section class="card">
       <h3>After</h3>
-      <p>Our <a href={`${base}/calendar/`}>Deadlines and dates</a> page lists dates from {calendarOrgs} different offices and groups in one place. You can add them all to your phone's calendar, and new dates show up on their own.</p>
+      <p>Our <a href={`${base}/calendar/`}>Dates and deadlines</a> page lists dates from {calendarOrgs} different offices and groups in one place. You can add them all to your phone's calendar, and new dates show up on their own.</p>
     </section>
   </div>
-  <p class="check"><strong>Check it yourself:</strong> every date on the <a href={`${base}/calendar/`}>deadlines page</a> links to the group that set it.</p>
+  <p class="check"><strong>Check it yourself:</strong> every date on the <a href={`${base}/calendar/`}>Dates and deadlines page</a> links to the group that set it.</p>
 
   <h2 id="learn">3. Learn from what works elsewhere</h2>
   <p>We don't guess at how to do this. We learn from research and from what other cities, states, and countries have tried. We write down where each idea came from. Then we fit it to the people who live here.</p>
@@ -88,7 +89,7 @@ const calendarOrgs = new Set((await loadCalendarWithFeeds()).map((e) => e.org_na
   <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/scoreboard.md')}>the scoreboard</a> and <a href={`${repo}/tree/main/docs/build-log`}>the build log</a>, both on GitHub.</p>
 
   <h2>A person is responsible</h2>
-  <p>AI does most of the research, writing, and checking. A local resident, David McCoy, sets the direction and reviews the work. On its own, the AI may never contact anyone, spend money, take sides, or collect personal information it does not need. <a href={`${base}/about/`}>Read who is behind this and how it runs</a>.</p>
+  <p>AI does most of the research, writing, and checking. A local resident, David McCoy, sets the direction. He checks pages about shelter, crisis help, food and benefits before changes go live, and looks over other pages when he can, after they are up. On its own, the AI may never contact anyone, spend money, take sides, or collect personal information it does not need. <a href={`${base}/about/`}>Read who is behind this and how it runs</a>.</p>
 
   <h2>What this is not</h2>
   <ul>

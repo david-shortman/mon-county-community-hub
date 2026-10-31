@@ -1,0 +1,50 @@
+---
+// Selling food: markets, events and food trucks (#642, part of #277).
+// Answers findability q11. Health department applications by type, the fee
+// schedule, and the City of Morgantown rule for vending trucks and carts.
+// Only the temporary event fee is stated: the rest of the FY 2026-2027 fee
+// schedule is a scanned form that is hard to read. Waits for David (fees).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, telHref } from '../lib/content.mjs';
+export const page = { door: "family", topic: "work", label: "Selling food at markets, events and food trucks", summary: "Which health department permit fits a fair, a farmers market, a bake sale or a food truck, and the city rule for trucks and carts" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const eh = [{ url: 'https://www.monchd.org/departments-programs/environmental-health', checked: '2026-10-30' }];
+const temp = [{ url: 'https://www.monchd.org/services/temporary-food-worker-cards', checked: '2026-10-30' }];
+const vending = [{ url: 'https://www.morgantownwv.gov/256/Vending-Downtown', checked: '2026-10-30' }];
+const r = (slug) => resource(slug);
+---
+<Base title="Selling food in Morgantown and Mon County: markets, events, bake sales and food trucks" description="Which Monongalia County Health Department permit fits selling food at a fair or festival, a farmers market, a bake sale, or from a food truck or cart, the fee schedule, and the City of Morgantown business license rule for vending trucks and carts.">
+  <h1>Selling food at markets, events and food trucks</h1>
+  <p class="lede">The Monongalia County Health Department handles food permits in Mon County. Which permit you need depends on where and how you sell. If you sell from a truck or cart in Morgantown, the city also needs you to have a business license. Read each office's rules, and call them if you are not sure. We link the rules and do not decide what applies to you.</p>
+
+  <h2>A fair, festival or one-time event</h2>
+  {r('monchd-temporary-food-permit') && <ResourceCard r={r('monchd-temporary-food-permit')} showCost />}
+
+  <h2>A farmers market</h2>
+  {r('monchd-farmers-market-vendor-permit') && <ResourceCard r={r('monchd-farmers-market-vendor-permit')} />}
+  <p>Selling produce, canned foods or plants you grew? See <a href={`${base}/sell-what-you-grow/`}>Sell what you grow</a>.</p>
+
+  <h2>A bake sale, or a nonprofit selling food</h2>
+  <p>The health department's Environmental Health page posts a Bake Sale Application and an Exemption Application. Its event page says to call with questions about bake sales or nonprofit status: <a href={telHref('304-598-5131')}>304-598-5131</a>.</p>
+  <p><a class="btn" href="https://www.monchd.org/departments-programs/environmental-health"><span>Health department applications</span></a></p>
+  <SourceLine sources={[...eh, ...temp]} org="monongalia-county-health-department" about="Bake sale and nonprofit food applications" />
+
+  <h2>A food truck, cart, restaurant or shop</h2>
+  {r('monchd-food-business-plan-review') && <ResourceCard r={r('monchd-food-business-plan-review')} />}
+
+  <h2>Selling from a truck or cart in Morgantown</h2>
+  <p>The City of Morgantown says vending trucks and vending carts both need a City of Morgantown Business License, even if the business is based outside city limits. The city says a permit is not needed if you sell on private property with the landowner's permission. The city's page has maps of the downtown spaces used for vending permits. Questions about applying, or about selling from a truck or cart between 11 p.m. and 6 a.m.: Finance Department, <a href={telHref('304-284-7423')}>304-284-7423</a>.</p>
+  <p><a class="btn" href="https://www.morgantownwv.gov/256/Vending-Downtown"><span>City vending rules</span></a></p>
+  <SourceLine sources={vending} about="Morgantown vending trucks and carts" />
+
+  <h2>Fees</h2>
+  <p>The health department posts its fee list, "Permit Fees and Fees for Service, Fiscal Year 2026-2027." It lists $72 for a temporary food establishment. For other food permits, read the list or call Environmental Health before you pay. You can pay the health department online.</p>
+  <p><a class="btn" href="https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf"><span>Fee list (PDF)</span></a></p>
+  <SourceLine sources={[{ url: 'https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf', checked: '2026-10-30' }, ...eh]} org="monongalia-county-health-department" about="Health department fees" />
+
+  <p>Starting a food business? See <a href={`${base}/business/`}>Start or grow a business</a> for free coaching and classes.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Rules and fees can change, so check the office's page before you sell or pay. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

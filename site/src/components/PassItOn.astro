@@ -13,14 +13,16 @@
 // print still prints the whole page.
 // Not shown on domestic or sexual violence listings: a text or a share leaves a
 // trace on the phone that someone else might see. Those pages have a quick
-// exit instead. A listing counts when its org is a domestic or sexual violence
-// service (SAFETY_ORGS) or its title says so.
+// exit instead. A listing counts when its record says `private_trace: true`
+// (#555). As a backup, its org is a known safety service (SAFETY_ORGS) or its
+// title says so, so a record missing the flag still stays safe.
 //   org: the record's org slug
 //   whole: true for a whole guide page (no slug): Print prints the whole page
+//   privateTrace: the record's private_trace flag
 import { prettyDate } from '../lib/content.mjs';
-const { title, slug, org, phone, place, hours, checked, share = true, whole = false } = Astro.props;
+const { title, slug, org, phone, place, hours, checked, share = true, whole = false, privateTrace = false } = Astro.props;
 const SAFETY_ORGS = ['rdvic'];
-const sensitive = SAFETY_ORGS.includes(org) || /domestic|sexual (assault|violence)|abuse/i.test(title);
+const sensitive = privateTrace === true || SAFETY_ORGS.includes(org) || /domestic|sexual (assault|violence)|abuse/i.test(title);
 const url = new URL(`${Astro.url.pathname}${slug ? `#${slug}` : ''}`, Astro.site).href;
 const shortLink = url.replace(/^https?:\/\/(www\.)?/, '');
 const checkedLine = checked ? `Checked ${prettyDate(checked)}.` : '';

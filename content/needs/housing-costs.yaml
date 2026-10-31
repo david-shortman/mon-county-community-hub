@@ -1,0 +1,58 @@
+title: Affording a place to live
+slug: housing-costs
+summary: More than 1 in 4 households in Mon County spend 30% or more of their income on housing, and about 1 in 7 spend half or more. Housing and shelter is the biggest reason people here call West Virginia 211.
+evidence:
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-31
+    shows: The share of households that spend half or more of their income on housing.
+    figure: "15.7% of households, 6,702 of 42,652 (West Virginia 10.2%, US 14.7%)"
+    publisher: County Health Rankings (2025 release)
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: The share of households whose housing costs are 30% or more of their income, from Census survey data (page 31 of the PDF). Mon County's share is the highest of the six counties in the report.
+    figure: "27.33% of households, 12,124 of 44,361 (West Virginia 19.76%)"
+    data_date: 2019 to 2023
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: West Virginia 211 logged 2,103 housing and shelter requests from Monongalia County in one year, almost half of all 4,428 requests from the county (page 62 of the PDF).
+    figure: "2,103 of 4,428 requests"
+    data_date: August 2024 to August 2025
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: North Central West Virginia Community Action's 2022 needs assessment ranked housing first for Monongalia County, naming a lack of affordable and safe housing (page 56 of the PDF).
+    data_date: "2022"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://data.cdc.gov/d/swc5-untb
+    checked: 2026-10-31
+    shows: CDC estimates the share of adults with housing insecurity in the past year. It is a model-based estimate, not a count.
+    figure: "10.7% of adults (likely between 8.4% and 13.2%)"
+    data_date: "2023"
+    publisher: CDC PLACES (2025 release)
+affected:
+  count: 6702
+  description: Households in Monongalia County that spend half or more of their income on housing. Many college students rent here, which raises this number.
+  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+  checked: 2026-10-31
+severity: high
+severity_why: Paying half of income for housing leaves little for food, medicine and bills, and can lead to eviction.
+trend: unknown
+working_on:
+  - org: fairmont-morgantown-housing-authority
+  - org: legal-aid-of-west-virginia
+  - org: catholic-charities-west-virginia
+  - org: united-way-monongalia-preston
+  - org: west-virginia-211
+  - org: city-of-morgantown
+  - name: North Central West Virginia Community Action
+    url: https://ncwvcaa.org/
+gaps:
+  - Housing voucher and subsidized housing wait lists are not posted in one plain place.
+  - Renters have few plain guides to repairs, leases and eviction steps (issues 565 and 566).
+  - Local Fair Market Rent figures still need checking on HUD's own page (issue 740).
+topics: [housing]
+rank: 3
+rank_why: "Score 11 of 12: severity 3, reach 3 (6,702 households), agreement 3 (five sources), room to help 2 (help exists, but the main problem is cost and supply). Highest 211 demand among the needs that scored 11."
+questions: [q25, q27]
+issues: [202, 565, 566, 740]

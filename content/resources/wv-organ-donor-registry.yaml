@@ -1,0 +1,14 @@
+title: Sign up as an organ, eye and tissue donor
+slug: wv-organ-donor-registry
+org: wv-dmv
+topics: [records]
+who_it_is_for: Anyone getting or renewing a West Virginia driver's license or ID card. The DMV offers every applicant the chance to sign up. You can also sign up or change your choice online at any time.
+what_to_do: Say yes on your license or ID card application at the DMV. Or sign up, change or remove your choice online through Donate Life, the site the DMV links to. The national registry form says signing up is a legal gift, and you can remove it or add details at any time.
+contact:
+  url: https://registerme.org/
+  url_label: Donate Life sign-up form
+sources:
+  - url: https://dmv.wv.gov/driver-services/drivers/organ-donor-registry
+    checked: 2026-10-31
+  - url: https://registerme.org/
+    checked: 2026-10-31

@@ -5,93 +5,10 @@
 // and nothing about how anyone votes or should vote.
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+import { bodies } from '../lib/who-decides.mjs';
 export const page = { door: "community", topic: "government", label: "Who decides what", summary: "City Council, the County Commission, the school board, MUB, the MPO, Mountain Line and more: what each decides and how members are chosen" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const day = '2026-10-30';
-const countyBoards = 'https://www.monongaliacounty.gov/authorities,_boards_and_commissions/index.php';
-const bodies = [
-  {
-    id: 'city-council', name: 'Morgantown City Council',
-    does: 'Sets city policy and passes city laws. Council hires the City Manager, who runs the city day to day. Council also appoints residents to many city boards.',
-    chosen: 'Seven members, one for each city ward. The Mayor and Council are elected with no party labels on the ballot, and serve part-time.',
-    meets: '1st and 3rd Tuesday of the month, 7 p.m., Council Chambers, City Hall.',
-    records: [['Agendas and minutes', 'https://www.morgantownwv.gov/AgendaCenter/City-Council-3'], ['Find my council member', 'https://morgantownwv.maps.arcgis.com/apps/instant/lookup/index.html?appid=d647fae667fb43d1af49040701b682c9']],
-    sources: [{ url: 'https://www.morgantownwv.gov/154/City-Council', checked: day }, { url: 'https://www.morgantownwv.gov/155/Mayor', checked: day }],
-  },
-  {
-    id: 'county-commission', name: 'Monongalia County Commission',
-    does: 'The governing body of the county. Its administrator carries out its decisions, and it appoints residents to county boards and authorities.',
-    chosen: 'Three commissioners. One must live in each of the county\'s three districts (Eastern, Central and Western), but all county voters elect each one. Terms are six years, and one commissioner is elected every two years. Each January they pick one of themselves as President.',
-    meets: 'Every Wednesday, 10 a.m., 2nd floor of the County Courthouse, 243 High Street.',
-    records: [['Commission page', 'https://www.monongaliacounty.gov/commission/index.php']],
-    sources: [{ url: 'https://www.monongaliacounty.gov/commission/commissioner___staff/index.php', checked: day }, { url: 'https://www.monongaliacounty.gov/commission/index.php', checked: day }, { url: countyBoards, checked: day }],
-  },
-  {
-    id: 'school-board', name: 'Monongalia County Board of Education',
-    does: 'The board for Monongalia County Schools. It posts new school policies for public comment before it adopts them.',
-    chosen: 'Five members, elected by county voters with no party labels on the ballot. No more than two can come from the same one of the county\'s three districts (state law).',
-    meets: '2nd and 4th Tuesday of each month, 5 p.m., unless the calendar says otherwise.',
-    records: [['Agendas and minutes on BoardDocs', 'https://go.boarddocs.com/wv/mono/Board.nsf/Public']],
-    sources: [{ url: 'https://www.boe.mono.k12.wv.us/o/mcs/page/board-of-education', checked: day }, { url: 'https://code.wvlegislature.gov/18-5-1/', checked: day }],
-  },
-  {
-    id: 'mub', name: 'Morgantown Utility Board (MUB)',
-    does: 'Runs water and wastewater service and manages stormwater.',
-    chosen: 'Open seats are filled through the City of Morgantown\'s board application. Members must be residential customers of the Utility Board, with some limits on city and county residence.',
-    meets: 'Board of Directors, 2nd Tuesday of each month, 5:30 p.m. Its last posted meeting was at 278 Greenbag Road, and meetings stream live on MUB\'s site.',
-    records: [['MUB board meeting page', 'https://mub.org/newsroom/mub-board-of-directors-meeting']],
-    sources: [{ url: 'https://www.mub.org/', checked: day }, { url: 'https://www.morgantownwv.gov/263/Morgantown-Utility-Board-MUB', checked: day }, { url: 'https://www.morgantownwv.gov/210/Volunteer-Opportunities', checked: day }],
-  },
-  {
-    id: 'mpo', name: 'Morgantown Monongalia MPO Policy Board',
-    does: 'The decision-making body of the Metropolitan Planning Organization. It approves the long-range transportation plan and the list of transportation projects that set priorities for federal transportation money in the area.',
-    chosen: 'Elected and appointed officials from member local governments, agencies and organizations. Its members include people from Morgantown City Council, the County Commission, Star City, Westover, Granville, the Board of Education, WVU, the state Division of Highways, Mountain Line and the House of Delegates.',
-    meets: 'At City Hall Chambers, 389 Spruce Street. Meetings air on Channel 14 and the MPO\'s YouTube channel, and you can join by phone or online. Call 304-291-9571 for dates.',
-    records: [['Agendas and minutes', 'https://www.plantogether.org/agendas']],
-    sources: [{ url: 'https://www.plantogether.org/policy-board-1', checked: day }],
-  },
-  {
-    id: 'mountain-line', name: 'Mountain Line Transit Authority',
-    does: 'Runs Mountain Line, the bus system.',
-    chosen: 'Seven board members: three appointed by the County Commission, three by the City of Morgantown, and one both agree on.',
-    meets: 'Sources differ. The city\'s page says the 3rd Wednesday of each month at noon at the Mountain Line depot in Westover. The county\'s page says the 2nd Wednesday of each month at 6 p.m. at the transit station in Westover. Check with Mountain Line before you go.',
-    comment: 'Each monthly meeting has up to 30 minutes for public comment, up to 5 minutes per person, on transit topics. Give your name, address and topic first. You can bring written comments to hand to the board.',
-    records: [['Public comment rules', 'https://busride.org/board-meeting-public-comment-procedures']],
-    sources: [{ url: 'https://www.morgantownwv.gov/692/Transit-Authority-Board-of-Directors', checked: day }, { url: countyBoards, checked: day }, { url: 'https://busride.org/board-meeting-public-comment-procedures', checked: day }],
-  },
-  {
-    id: 'board-of-health', name: 'Monongalia County Board of Health',
-    does: 'The board over the Monongalia County Health Department.',
-    chosen: 'Five members appointed by the County Commission for five-year terms. No more than three can belong to the same political party, and no more than two can live in the same one of the county\'s three districts.',
-    meets: 'Usually the last Thursday of January, March, May, July, September and November, 9 a.m., at the Health Department.',
-    records: [['Health department board page', 'https://www.monchd.org/about']],
-    sources: [{ url: countyBoards, checked: day }],
-  },
-  {
-    id: 'solid-waste', name: 'Monongalia County Solid Waste Authority',
-    does: 'Runs county recycling and solid waste programs.',
-    chosen: 'Five members for four-year terms. The County Commission appoints two; the state DNR director, the Public Service Commission and the soil conservation district board appoint one each.',
-    meets: 'Last Tuesday of each month, 5:30 p.m., WVU Extension Service office, 270 Mylan Park Lane, Suite 250.',
-    records: [['County boards list', countyBoards]],
-    sources: [{ url: countyBoards, checked: day }],
-  },
-  {
-    id: 'development-authority', name: 'Monongalia County Development Authority',
-    does: 'The county\'s development authority, set up in 1975 under state law.',
-    chosen: '12 to 21 members appointed by the County Commission for three-year terms. They include one person for the Commission, one for each town in the county (usually its mayor or a council member), and people from business, industry and labor.',
-    meets: 'The county\'s page does not list its meetings.',
-    records: [['County boards list', countyBoards]],
-    sources: [{ url: countyBoards, checked: day }],
-  },
-  {
-    id: 'region-vi', name: 'Region VI Planning and Development Council',
-    does: 'Plans for economic development across north central West Virginia, and helps local governments with projects. It was set up under the 1971 state planning and development law.',
-    chosen: 'Directed by elected officials and appointees. It has 68 board members, representing six counties (Doddridge, Harrison, Marion, Monongalia, Preston and Taylor) and 39 towns and cities.',
-    meets: 'Its site does not list meetings. Its office is at 34 Mountain Park Drive, White Hall.',
-    records: [['Region VI site', 'https://regionvi.com/']],
-    sources: [{ url: 'https://regionvi.com/', checked: day }],
-  },
-];
 ---
 <Base title="Who decides what in Morgantown and Mon County" description="What Morgantown City Council, the Monongalia County Commission, the Board of Education, MUB, the MPO, Mountain Line, the Board of Health and other public bodies decide, how their members are chosen, when they meet, and where their records are.">
   <h1>Who decides what</h1>
@@ -125,5 +42,5 @@ const bodies = [
     <li>For voting and elections, go to the <a href="https://sos.wv.gov/elections/Pages/default.aspx">West Virginia Secretary of State</a>.</li>
   </ul>
 
-  <p class="meta">We describe roles and process from official pages. We do not name or describe officials, and we take no side on any decision or election. This is not the official record. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We describe roles and process from official pages. We do not name or describe officials, and we take no side on any decision or election. This is not the official record. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
