@@ -183,11 +183,13 @@ for (const s of secondhand) {
 
 // Boards (content/boards/<slug>.yaml): city boards and commissions for the
 // Serve on a board page (#290). Open seats come from the city's vacancy list.
-const BOARD_FIELDS = ['name', 'slug', 'org', 'decides', 'meets', 'who_can_serve', 'open_seats', 'page_vacant', 'url', 'topics', 'sources'];
+const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'url', 'topics', 'sources'];
 const boards = loadDir('boards');
 for (const b of boards) {
   const where = b._file;
-  checkRecord(b, ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'], BOARD_FIELDS);
+  // `section: other` boards are listed by name only, from the vacancy list.
+  checkRecord(b, b.section === 'other' ? ['name', 'slug', 'org', 'open_seats', 'open_note', 'url', 'topics'] : ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'], BOARD_FIELDS);
+  if (b.section != null && b.section !== 'other') errors.push(`${where}: section must be other, or left out`);
   if (b.org && !orgSlugs.has(b.org)) errors.push(`${where}: org ${b.org} has no file in content/orgs/`);
   if (b.url != null && !isUrl(b.url)) errors.push(`${where}: url is not a web link`);
   for (const k of ['open_seats', 'page_vacant']) if (b[k] != null && !(Number.isInteger(b[k]) && b[k] >= 0)) errors.push(`${where}: ${k} must be a whole number`);
@@ -352,6 +354,27 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
     const m = t.match(OTHER_MORGANTOWN);
     if (m) warnings.push(`${e._file}: ${key} names "${m[0]}"; this site is for Morgantown, WV`);
   });
+}
+
+// County indicators (content/indicators, #62): an official number, its own
+// definition, the data year, and sources with checked dates.
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
+for (const i of loadDir('indicators')) {
+  checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
+  if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
+  if (!['percent', 'number', 'years'].includes(i.unit)) errors.push(`${i._file}: unit must be percent, number or years`);
+  if (!/^\d{4}(-\d{4})?$/.test(String(i.data_year ?? ''))) errors.push(`${i._file}: data_year must look like "2023" or "2020-2022" (quote it)`);
+  if (typeof i.values?.monongalia !== 'number') errors.push(`${i._file}: values.monongalia must be a number`);
+  for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
+  if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
+  if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+  // history (#15): years in order, each with a number, as the source gives it.
+  for (const [k, pts] of Object.entries(i.history ?? {})) {
+    if (!Array.isArray(pts)) { errors.push(`${i._file}: history.${k} must be a list`); continue; }
+    const yrs = pts.map((p) => String(p.year));
+    if (pts.some((p) => !/^\d{4}(-\d{4})?$/.test(String(p.year)) || typeof p.value !== 'number')) errors.push(`${i._file}: history.${k} needs year and value on each point`);
+    if (yrs.join() !== [...yrs].sort().join()) errors.push(`${i._file}: history.${k} years must be in order`);
+  }
 }
 
 for (const w of warnings) console.warn(`warning: ${w}`);

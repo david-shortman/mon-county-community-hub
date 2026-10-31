@@ -13,9 +13,13 @@ import { fileURLToPath } from 'node:url';
 import morgantownCity from './adapters/morgantown-city.mjs';
 import mountaineerFoodBank from './adapters/mountaineer-food-bank.mjs';
 import monongaliaCounty from './adapters/monongalia-county.mjs';
+import morgantownLibrary from './adapters/morgantown-library.mjs';
+import monongaliaArtsCenter from './adapters/monongalia-arts-center.mjs';
+import morgantownFarmersMarket from './adapters/morgantown-farmers-market.mjs';
+import mylanPark from './adapters/mylan-park.mjs';
 import { inWindow } from './util.mjs';
 
-export const ADAPTERS = [morgantownCity, mountaineerFoodBank, monongaliaCounty];
+export const ADAPTERS = [morgantownCity, mountaineerFoodBank, monongaliaCounty, morgantownLibrary, monongaliaArtsCenter, morgantownFarmersMarket, mylanPark];
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 // Astro bundles this file during the build, so find snapshots from the repo root.
