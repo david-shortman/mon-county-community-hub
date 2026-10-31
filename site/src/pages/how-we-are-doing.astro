@@ -1,0 +1,107 @@
+---
+// How we're doing: community numbers from free public data (#15).
+// Numbers come straight from the sources' own data files at each build
+// (src/lib/indicators), with their labels, periods and links. We describe;
+// we never say a number is good or bad, and never claim credit for a change.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { loadIndicators } from '../lib/indicators/index.mjs';
+import { todayYmd } from '../lib/content.mjs';
+export const page = { door: "community", topic: "community", label: "How we're doing: community numbers", summary: "Unemployment by month and CDC health and daily-needs estimates for Mon County, with sources" };
+
+const ind = await loadIndicators();
+const day = (iso) => (iso ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(iso)) : todayYmd());
+
+// Unemployment: the last 24 months as a line.
+const bls = ind['bls-laus-monongalia'];
+const pts = (bls.data?.points ?? []).slice(-24);
+const latest = pts.at(-1);
+const yearAgo = latest && pts.find((p) => p.month === `${Number(latest.month.slice(0, 4)) - 1}${latest.month.slice(4)}`);
+const W = 420, H = 200, L = 40, R = 10, T = 12, B = 30;
+const top = Math.max(1, Math.ceil(Math.max(...pts.map((p) => p.value), 0)));
+const x = (i) => L + (pts.length > 1 ? (i * (W - L - R)) / (pts.length - 1) : 0);
+const y = (v) => T + (H - T - B) * (1 - v / top);
+const line = pts.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join(' ');
+const step = top <= 6 ? 1 : 2;
+const ticks = Array.from({ length: Math.floor(top / step) + 1 }, (_, i) => i * step);
+
+const places = ind['cdc-places-monongalia'];
+const measures = places.data?.measures ?? [];
+---
+<Base title="How Morgantown and Mon County are doing: community numbers" description="Monongalia County's unemployment rate by month from the Bureau of Labor Statistics, and CDC estimates on food, housing, utility bills, transportation and health, each with its source.">
+  <h1>How we're doing: community numbers</h1>
+  <p class="lede">A few numbers about life in Monongalia County, straight from public sources. Each one says where it comes from and what period it covers. They describe the whole county, not any one person.</p>
+
+  <h2 id="jobs">Unemployment rate</h2>
+  {latest ? (
+    <>
+      <p>In <strong>{latest.label}</strong>, the unemployment rate in Monongalia County was <strong>{latest.value}%</strong>{latest.preliminary && ' (a preliminary number, which can change)'}.{yearAgo && ` In ${yearAgo.label} it was ${yearAgo.value}%.`}</p>
+      <figure class="chart">
+        <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby="ue-title">
+          <title id="ue-title">Monongalia County unemployment rate by month, {pts[0].label} to {latest.label}. The table below has every value.</title>
+          {ticks.map((t) => (
+            <g>
+              <line x1={L} x2={W - R} y1={y(t)} y2={y(t)} class="grid" />
+              <text x={L - 6} y={y(t) + 5} text-anchor="end" class="axis">{t}%</text>
+            </g>
+          ))}
+          <path d={line} class="series" />
+          {pts.map((p, i) => (
+            <g>
+              {(i % 8 === 0 || i === pts.length - 1) && <text x={x(i)} y={H - 6} text-anchor={i === 0 ? 'start' : i === pts.length - 1 ? 'end' : 'middle'} class="axis">{p.label.replace(/^(\w{3})\w*/, '$1')}</text>}
+              <circle cx={x(i)} cy={y(p.value)} r="9" class="hit"><title>{p.label}: {p.value}%{p.preliminary ? ' (preliminary)' : ''}</title></circle>
+            </g>
+          ))}
+          <circle cx={x(pts.length - 1)} cy={y(latest.value)} r="4" class="dot" />
+        </svg>
+        <figcaption>Not seasonally adjusted, so it rises and falls with the time of year. To see change over a year, compare a month with the same month a year before. Months with no published estimate are left out.</figcaption>
+      </figure>
+      <details>
+        <summary>Show the numbers as a table</summary>
+        <table>
+          <thead><tr><th scope="col">Month</th><th scope="col">Unemployment rate</th></tr></thead>
+          <tbody>{[...pts].reverse().map((p) => <tr><td>{p.label}</td><td>{p.value}%{p.preliminary ? ' (preliminary)' : ''}</td></tr>)}</tbody>
+        </table>
+      </details>
+    </>
+  ) : <p>This number could not be loaded today. See it at the source below.</p>}
+  <SourceLine sources={[{ url: bls.page_url, checked: day(bls.fetched), name: 'U.S. Bureau of Labor Statistics' }]} about="unemployment rate" />
+
+  <h2 id="needs">Daily needs and health, CDC estimates</h2>
+  {measures.length ? (
+    <>
+      <p>Share of adults in Monongalia County, {measures[0].year}. These are CDC estimates made with a statistical model from a national health survey, not a count of local people. The range in small print is where CDC says the real number likely falls.</p>
+      <ul class="tiles">
+        {measures.map((m) => (
+          <li class="tile">
+            <span class="num">{m.value}{m.unit}</span>
+            <span class="what">{m.measure}</span>
+            <span class="range">Likely between {m.low}{m.unit} and {m.high}{m.unit}</span>
+          </li>
+        ))}
+      </ul>
+    </>
+  ) : <p>These numbers could not be loaded today. See them at the source below.</p>}
+  <SourceLine sources={[{ url: places.page_url, checked: day(places.fetched), name: 'Centers for Disease Control and Prevention (PLACES, 2025 release)' }]} about="CDC estimates" />
+
+  <h2 id="about">About these numbers</h2>
+  <p>This page reads each source's public data every day and keeps a dated copy. Numbers for the whole county go up and down for many reasons, so they show where things stand, not why. Groups writing grants can cite the sources directly. More numbers, like crime and school results, are planned.</p>
+</Base>
+
+<style>
+  .chart { margin: 1rem 0; }
+  .chart svg { width: 100%; height: auto; display: block; }
+  .chart .grid { stroke: var(--line); stroke-width: 1; }
+  .chart .axis { fill: var(--muted); font-size: 14px; }
+  .chart .series { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .chart .dot { fill: var(--accent); stroke: var(--card); stroke-width: 2; }
+  .chart .hit { fill: transparent; }
+  .chart .hit:hover { fill: var(--accent); fill-opacity: 0.25; }
+  .chart figcaption { color: var(--muted); font-size: 0.9rem; }
+  .tiles { list-style: none; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+  .tile { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
+  .tile .num { font-size: 1.6rem; font-weight: 700; }
+  .tile .range { color: var(--muted); font-size: 0.85rem; }
+  table { border-collapse: collapse; }
+  th, td { text-align: left; padding: 0.25rem 1rem 0.25rem 0; border-bottom: 1px solid var(--line); }
+</style>

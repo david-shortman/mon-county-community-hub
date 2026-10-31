@@ -55,6 +55,7 @@ export function GET({ site }) {
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
 ${centers}
 - [City meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council and city board meetings, and minutes from the last 60 days, read daily from the city's AgendaCenter
+- [How we're doing: community numbers](${u('/how-we-are-doing/')}): Monongalia County unemployment rate by month (BLS) and CDC PLACES estimates on food, housing, utility bills, transportation and health, each with its source and period
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
