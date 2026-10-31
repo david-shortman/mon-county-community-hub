@@ -2,7 +2,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
+import { loadTonight, tonightProblems } from '../src/lib/tonight.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { factTopics, loadFacts } from '../src/lib/facts.mjs';
+import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
 import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
@@ -42,6 +45,7 @@ const slugs = new Set();
 for (const e of loadCalendar()) {
   const where = e._file;
   checkHidden(e);
+  if (e.private_trace != null && e.private_trace !== true) errors.push(`${where}: private_trace is true or left out (#555)`);
   for (const f of ['title', 'slug', 'starts', 'org_name', 'who_it_is_for', 'what_to_do', 'url']) {
     if (!e[f]) errors.push(`${where}: missing ${f}`);
   }
@@ -80,13 +84,14 @@ const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(Strin
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
 const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden', 'phone_confirmed', 'phone_confirmed_by'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by', 'private_trace'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
 function checkRecord(e, required, known) {
   const where = e._file;
   checkHidden(e);
+  if (e.private_trace != null && e.private_trace !== true) errors.push(`${where}: private_trace is true or left out (#555)`);
   // Confirmed by phone (#164): a date, and optionally the caller's initials.
   // Never the name of the person who answered.
   if (e.phone_confirmed != null) {
@@ -183,13 +188,24 @@ for (const s of secondhand) {
 
 // Boards (content/boards/<slug>.yaml): city boards and commissions for the
 // Serve on a board page (#290). Open seats come from the city's vacancy list.
-const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'url', 'topics', 'sources'];
+const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'created', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'url', 'topics', 'sources'];
 const boards = loadDir('boards');
 for (const b of boards) {
   const where = b._file;
   // `section: other` boards are listed by name only, from the vacancy list.
-  checkRecord(b, b.section === 'other' ? ['name', 'slug', 'org', 'open_seats', 'open_note', 'url', 'topics'] : ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'], BOARD_FIELDS);
-  if (b.section != null && b.section !== 'other') errors.push(`${where}: section must be other, or left out`);
+  // `section: county` boards come from the county's list, which gives no seat counts.
+  const required = {
+    other: ['name', 'slug', 'org', 'open_seats', 'open_note', 'url', 'topics'],
+    county: ['name', 'slug', 'org', 'created', 'meets', 'url', 'topics'],
+  }[b.section] ?? ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'];
+  checkRecord(b, required, BOARD_FIELDS);
+  // The note's numbers ("1 seat and 2 alternate seats") add up to open_seats (#856).
+  if (b.open_note != null) {
+    const sum = (String(b.open_note).match(/\d+/g) ?? []).reduce((n, d) => n + Number(d), 0);
+    if (sum !== b.open_seats) errors.push(`${where}: open_note adds up to ${sum} seats but open_seats is ${b.open_seats}`);
+  }
+  if (b.who_can_serve != null && !/\.$/.test(String(b.who_can_serve).trim())) errors.push(`${where}: who_can_serve should end with a period`);
+  if (b.section != null && !['other', 'county'].includes(b.section)) errors.push(`${where}: section must be other or county, or left out`);
   if (b.org && !orgSlugs.has(b.org)) errors.push(`${where}: org ${b.org} has no file in content/orgs/`);
   if (b.url != null && !isUrl(b.url)) errors.push(`${where}: url is not a web link`);
   for (const k of ['open_seats', 'page_vacant']) if (b[k] != null && !(Number.isInteger(b[k]) && b[k] >= 0)) errors.push(`${where}: ${k} must be a whole number`);
@@ -319,7 +335,8 @@ const TIME_RULES = [
 ];
 const BY_DATE = new RegExp(`\\bby ${MONTH} \\d{1,2}\\b`, 'i');
 const DEADLINE_VERB = /\b(apply|applies|file|pay|register|enroll|sign up|submit|send|mail|return|renew|turn in|drop off|request|order|change|choose|vote|respond|reply|call)\b/i;
-const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics']);
+// opens and closes are structured 24-hour times (opening_hours, #177), not words people read.
+const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics', 'opens', 'closes']);
 function eachText(value, key, visit) {
   if (SKIP_KEYS.has(key)) return;
   if (typeof value === 'string') visit(key, value);
@@ -358,7 +375,7 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
 
 // County indicators (content/indicators, #62): an official number, its own
 // definition, the data year, and sources with checked dates.
-const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more'];
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
 for (const i of loadDir('indicators')) {
   checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
   if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
@@ -368,7 +385,47 @@ for (const i of loadDir('indicators')) {
   for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
   if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
   if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+  // history (#15): years in order, each with a number, as the source gives it.
+  for (const [k, pts] of Object.entries(i.history ?? {})) {
+    if (!Array.isArray(pts)) { errors.push(`${i._file}: history.${k} must be a list`); continue; }
+    const yrs = pts.map((p) => String(p.year));
+    if (pts.some((p) => !/^\d{4}(-\d{4})?$/.test(String(p.year)) || typeof p.value !== 'number')) errors.push(`${i._file}: history.${k} needs year and value on each point`);
+    if (yrs.join() !== [...yrs].sort().join()) errors.push(`${i._file}: history.${k} years must be in order`);
+  }
 }
+
+// Fact records (content/facts/<topic>/, #122, tier 2 of ADR 0007): text,
+// the source's exact words, and sources with checked dates. recheck_days is
+// optional. A page cannot render a fact without them.
+const FACT_FIELDS = ['slug', 'text', 'quote', 'sources', 'recheck_days', 'phone', 'phone_label', 'place'];
+let factCount = 0;
+for (const topic of factTopics()) {
+  for (const f of Object.values(loadFacts(topic))) {
+    factCount++;
+    const where = f._file;
+    for (const k of ['slug', 'text', 'quote']) if (f[k] == null || f[k] === '') errors.push(`${where}: missing ${k}`);
+    for (const k of Object.keys(f)) if (!['_file', 'checked'].includes(k) && !FACT_FIELDS.includes(k)) warnings.push(`${where}: unknown field ${k}`);
+    if (f.slug && path.basename(where).replace(/\.ya?ml$/, '') !== f.slug) errors.push(`${where}: file name should match slug ${f.slug}`);
+    if (!f.sources?.length) errors.push(`${where}: needs at least one source`);
+    for (const s of f.sources ?? []) {
+      if (!isUrl(s.url)) errors.push(`${where}: source url is not a web link`);
+      if (!isDate(s.checked)) errors.push(`${where}: source needs a checked date (YYYY-MM-DD)`);
+      else if (s.checked > todayYmd()) errors.push(`${where}: source checked date ${s.checked} is in the future`);
+    }
+    if (f.recheck_days != null && (!Number.isInteger(f.recheck_days) || f.recheck_days < 1)) errors.push(`${where}: recheck_days must be a whole number of days, like 90`);
+    if (/[<>]/.test(f.text ?? '')) errors.push(`${where}: text allows only **bold** and [label](link), no HTML`);
+    if (f.phone != null && !isPhone(f.phone)) errors.push(`${where}: phone must look like 304-555-0100 (quote it)`);
+    if (f.place != null && !/,/.test(String(f.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);
+    if (JSON.stringify(f).includes('\u2014')) errors.push(`${where}: contains an em dash`);
+  }
+}
+
+// PDF pages (content/pdf-pages/, #393): a PDF's useful part as short lists.
+// Each needs a title, publisher, sections and sources with checked dates, and
+// a PDF link needs the date printed on that PDF.
+for (const d of loadPdfPages()) for (const p of pdfPageProblems(d)) errors.push(`${d._file}: ${p}`);
+// Tonight's warming shelter status (content/tonight, #401).
+for (const p of tonightProblems(loadTonight())) errors.push(`tonight/warming-shelter.yaml: ${p}`);
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

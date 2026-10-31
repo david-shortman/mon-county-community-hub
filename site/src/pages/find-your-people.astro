@@ -1,0 +1,157 @@
+---
+// Find your people (#263): recurring groups and free places to sit in Mon
+// County, from content/places (kind group or library). A three-question
+// finder picks three; with scripts off the page is plain lists by interest.
+// Facebook-only groups show their name and a link, never facts from
+// Facebook (same rule as #459). Gaps: content/gaps/community.yaml.
+import Base from '../layouts/Base.astro';
+import GroupCard from '../components/GroupCard.astro';
+import HelpWanted from '../components/HelpWanted.astro';
+import { BUCKETS, loadDirectory, inBucket, areasWithout } from '../lib/people.mjs';
+import { SECTION } from '../lib/places.mjs';
+import { loadPages } from '../lib/pages.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "community", label: "Find your people", summary: "Groups, clubs, game nights, runs, dances and free places to sit, with a three-question finder" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pages = await loadPages();
+const dir = loadDirectory();
+const sections = BUCKETS.map((b) => ({ ...b, groups: inBucket(dir.groups, b) })).filter((s) => s.groups.length);
+const missingAreas = areasWithout(dir);
+const firstIn = new Map();
+for (const s of sections) for (const p of s.groups) if (!firstIn.has(p.slug)) firstIn.set(p.slug, s.key);
+const also = [
+  { route: '/meet-people/', text: 'library cards, free library programs and neighborhood associations' },
+  { route: SECTION.route, text: 'community centers, senior centers and fire halls, with their dinners and events' },
+  { route: '/make-it-better/', text: 'cleanups, adopting a spot and serving on a city board' },
+  { route: '/calendar/month/', text: 'what is happening in Mon County this month' },
+].filter((a) => pages.has(a.route)).map((a) => ({ ...a, label: pages.get(a.route).label }));
+---
+<Base title="Find your people in Morgantown and Mon County: groups, clubs and free places to sit" description="Recurring groups in Morgantown and Monongalia County, from game nights and craft circles to runs, rides and dances, plus free places to sit. Answer three questions for three picks, or browse the lists.">
+  <h1>Find your people</h1>
+  <p class="lede">Groups that meet again and again, and places you can sit without buying anything. Answer three questions for three picks, or scroll the lists.</p>
+
+  <form id="finder" class="card" hidden>
+    <fieldset>
+      <legend>1. What are you into?</legend>
+      {sections.map((s, i) => <label><input type="radio" name="into" value={s.key} required={i === 0} /> {s.label}</label>)}
+    </fieldset>
+    <fieldset>
+      <legend>2. How much time do you have?</legend>
+      <label><input type="radio" name="time" value="drop-in" /> I want to drop in when I can</label>
+      <label><input type="radio" name="time" value="weekly" /> Something every week</label>
+      <label><input type="radio" name="time" value="monthly" /> Once a month or less</label>
+    </fieldset>
+    <fieldset>
+      <legend>3. Alone or with others?</legend>
+      <label><input type="radio" name="with" value="alone" /> On my own</label>
+      <label><input type="radio" name="with" value="kids" /> With my kids</label>
+      <label><input type="radio" name="with" value="friend" /> With a friend</label>
+    </fieldset>
+    <button type="submit">Show three picks</button>
+  </form>
+  <section id="picks" aria-live="polite" hidden>
+    <h2 id="picks-h" tabindex="-1">Three picks for you</h2>
+    <div id="picks-list"></div>
+    <p class="meta">Picked from the lists below by what you chose. Not a ranking: every group here is listed the same way.</p>
+  </section>
+
+  <nav aria-label="On this page">
+    <ul>
+      {sections.map((s) => <li><a href={`#${s.key}`}>{s.label}</a> ({s.groups.length})</li>)}
+      {dir.libraries.length > 0 && <li><a href="#places-to-sit">Free places to sit</a> ({dir.libraries.length})</li>}
+      {dir.meals.length > 0 && <li><a href="#eat-together">Eat with others</a></li>}
+      <li><a href="#missing">What's missing</a></li>
+    </ul>
+  </nav>
+
+  {sections.map((s) => (
+    <section id={s.key}>
+      <h2>{s.label}</h2>
+      {s.groups.map((p) => <GroupCard p={p} venue={p.venueRecord} anchor={firstIn.get(p.slug) === s.key} />)}
+    </section>
+  ))}
+
+  {dir.libraries.length > 0 && (
+    <section id="places-to-sit">
+      <h2>Free places to sit</h2>
+      <p>Public library branches are open to everyone, with nothing to buy.</p>
+      {dir.libraries.map((p) => <GroupCard p={p} />)}
+    </section>
+  )}
+
+  {dir.meals.length > 0 && (
+    <section id="eat-together">
+      <h2>Eat with others</h2>
+      <p>These community buildings list a regular meal. See each one's page for the day, cost and who can come.</p>
+      <ul>
+        {dir.meals.map((p) => <li><a href={`${base}${SECTION.route}${p.slug}/`}>{p.name}</a>, {p.community}: {p.regular.find((r) => /\b(lunch|dinner|supper|breakfast|potluck|meal)/i.test(r))}</li>)}
+      </ul>
+    </section>
+  )}
+
+  <section id="missing">
+    <h2>What's missing</h2>
+    {missingAreas.length > 0 && <p>We have not found a group or a free place to sit listed for: {missingAreas.join(', ')}. Community centers there may still have regular events; see <a href={`${base}${SECTION.route}`}>{SECTION.name}</a>.</p>}
+    <HelpWanted topic="community" />
+  </section>
+
+  {also.length > 0 && (
+    <section>
+      <h2>Also see</h2>
+      <ul>{also.map((a) => <li><a href={`${base}${a.route}`}>{a.label}</a>: {a.text}</li>)}</ul>
+    </section>
+  )}
+
+  <p class="meta">Every listing comes from a public page, named under it with the date we checked. Groups that post only on Facebook show a link, since we cannot check Facebook. We list groups; we do not run or vouch for them. Know a group we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<script is:inline>
+(function () {
+  var form = document.getElementById('finder');
+  if (!form) return;
+  form.hidden = false;
+  var picks = document.getElementById('picks');
+  var list = document.getElementById('picks-list');
+  function val(name) { var el = form.querySelector('input[name="' + name + '"]:checked'); return el ? el.value : ''; }
+  function score(c, into, time, withWho) {
+    var b = (c.dataset.buckets || '').split(' '), t = (c.dataset.tags || '').split(' ');
+    if (into && b.indexOf(into) < 0) return -1;
+    var s = 0;
+    if (time && c.dataset.rhythm === time) s += 2;
+    if (withWho === 'alone' && t.indexOf('come-alone') >= 0) s += 2;
+    if (withWho === 'kids' && t.indexOf('family-friendly') >= 0) s += 3;
+    if (withWho === 'kids' && t.indexOf('family-friendly') < 0) s -= 1;
+    if (t.indexOf('beginners') >= 0) s += 1;
+    if (c.dataset.status === 'active') s += 1;
+    return s;
+  }
+  function show(into, time, withWho) {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('section[id] > article.group'));
+    var seen = {}, ranked = cards.map(function (c, i) { return { c: c, s: score(c, into, time, withWho), i: i }; })
+      .filter(function (x) { if (x.s < 0 || seen[x.c.dataset.slug]) return false; seen[x.c.dataset.slug] = 1; return true; })
+      .sort(function (a, b) { return b.s - a.s || a.i - b.i; }).slice(0, 3);
+    list.innerHTML = '';
+    if (!ranked.length) { list.innerHTML = '<p>No match yet. Try another answer, or browse the lists below.</p>'; }
+    ranked.forEach(function (x) { var n = x.c.cloneNode(true); n.removeAttribute('id'); list.appendChild(n); });
+    picks.hidden = false;
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var into = val('into'), time = val('time'), withWho = val('with');
+    try { history.replaceState(null, '', '?into=' + into + '&time=' + time + '&with=' + withWho + '#picks'); } catch (err) {}
+    show(into, time, withWho);
+    var h = document.getElementById('picks-h'); if (h) h.focus(); else picks.scrollIntoView();
+  });
+  var q = new URLSearchParams(location.search);
+  if (q.get('into')) {
+    ['into', 'time', 'with'].forEach(function (k) { var el = form.querySelector('input[name="' + k + '"][value="' + q.get(k) + '"]'); if (el) el.checked = true; });
+    show(q.get('into'), q.get('time'), q.get('with'));
+  }
+})();
+</script>
+
+<style>
+  #finder fieldset { border: 0; padding: 0; margin: 0 0 12px; }
+  #finder legend { font-weight: 700; margin-bottom: 4px; }
+  #finder label { display: block; padding: 6px 0; }
+</style>

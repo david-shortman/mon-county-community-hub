@@ -1,0 +1,30 @@
+name: Morgantown Swing Tuesday Dance Night
+slug: morgantown-swing-tuesdays
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: community-group
+  text: Morgantown Swing
+story: A weekly swing dance night with a lesson for all levels, then open dancing with a DJ. No partner or experience needed.
+regular:
+  - Tuesdays, 7 p.m. to 9 p.m. (all levels lesson 7 p.m., open dance 8 p.m., next levels lesson 8:40 p.m.)
+cost: Donation at the door, $1 and up (sliding scale)
+interests: [dance, music, social]
+tags: [weekly, come-alone, beginners]
+contact:
+  url: https://www.morgantownswing.com/where-to-dance/tuesdays
+  place: Monongalia Arts Center, 107 High Street, Morgantown, WV
+status: active
+notes:
+  - No sign-up needed. Drop in any Tuesday.
+  - The group also lists a free intro lesson on select Wednesdays, 7 p.m. to 8 p.m., at the WVU Agricultural Sciences Building (third floor, Evansdale campus). Check the website for which Wednesdays.
+  - A separate Thursday lesson series is paid.
+  - The website lists a January Jamboree 2027 event, but no dated Tuesday nights.
+sources:
+  - url: https://www.morgantownswing.com/where-to-dance/tuesdays
+    checked: 2026-10-30
+  - url: https://www.morgantownswing.com/
+    checked: 2026-10-30
+  - url: https://monartscenter.com/classes-and-events
+    checked: 2026-10-30

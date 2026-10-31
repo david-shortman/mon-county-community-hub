@@ -11,4 +11,7 @@ town: Cheat Lake
 venue: cheat-lake-vfd-hall
 sources:
   - url: https://www.cheatlakefire.org/events
-    checked: 2026-10-30
+    checked: 2026-10-31
+  - url: https://calendar.google.com/calendar/ical/contact%40cheatlakevfd.org/public/basic.ics
+    checked: 2026-10-31
+    name: Cheat Lake VFD's public calendar feed (shown on its events page)

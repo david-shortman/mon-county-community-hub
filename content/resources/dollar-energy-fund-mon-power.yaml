@@ -3,10 +3,16 @@ slug: dollar-energy-fund-mon-power
 org: dollar-energy-fund
 topics: [money]
 who_it_is_for: Mon Power customers with a recent financial hardship. Mon Power says the fund opens October 1 and stays open until the money runs out.
-what_to_do: Apply through a local agency. Call 800-683-7036 or use the agency finder on the Dollar Energy Fund site.
+what_to_do: Apply through a local agency. Call 800-683-7036 or use the agency finder on the Dollar Energy Fund site. Dollar Energy Fund's own site says you can also apply online through MyApp Connect.
 contact:
   phone: "800-683-7036"
   url: https://www.dollarenergy.org
+what_to_bring:
+  - A copy of your utility bill
+  - Proof of income for everyone in your household
+what_happens: Dollar Energy Fund says its team "reviews your application and documentation to verify your eligibility." If you qualify, it works with your utility to put the grant on your account.
 sources:
   - url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
-    checked: 2026-10-28
+    checked: 2026-10-31
+  - url: https://www.dollarenergy.org/
+    checked: 2026-10-31

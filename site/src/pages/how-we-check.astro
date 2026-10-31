@@ -1,0 +1,61 @@
+---
+// How we check (#496): our verification standard, said plainly, and an honest
+// comparison with 211. Only what the repo and its scripts do today. Speaks for
+// the project, so changes wait for David (for:david).
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "about", label: "How we check", summary: "What counts as a source, how often listings are rechecked, and how that compares with 211" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const doc = (p) => `${repo}/blob/main/${p}`;
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
+const wv211 = resource('wv-211');
+const informUsa = 'https://assets-002.noviams.com/novi-file-uploads/airs/Inform_USA_Standards_for_Professional_Information_and_Referral_-_Version_10_0.pdf';
+const wvpb = 'https://wvpublic.org/story/government/wv-211-connects-people-with-needed-help/';
+const compareSources = [
+  { url: informUsa, checked: '2026-10-30', name: 'Inform USA Standards, Version 10.0 (standard 10.2)' },
+  { url: wvpb, checked: '2026-10-30', name: 'West Virginia Public Broadcasting, October 30, 2025' },
+];
+---
+<Base title="How we check facts on this Morgantown and Mon County site" description="What counts as a source on Everything Morgantown, how often listings are rechecked, who does the checking, and how that compares with 211.">
+  <h1>How we check what's on this site</h1>
+  <p class="lede">Every listing points to a public page and says when we last checked it. Here is how the checking works, what it does not do, and how it compares with 211.</p>
+
+  <h2 id="source">What counts as a source</h2>
+  <ul>
+    <li>A public web page, most often the group's own site or a government site. When a news story is the only source, we name the outlet.</li>
+    <li>The page has to be opened and read the same day the listing is written or rechecked. Nothing is filled in from memory. If the page does not say it, it stays off the site.</li>
+    <li>Each listing shows its source link and the date we last read it.</li>
+    <li>Rules about who can get help are copied as closely as we can. We never tell you that you qualify. The office that runs the program decides.</li>
+  </ul>
+
+  <h2 id="recheck">How often we recheck</h2>
+  <ul>
+    <li><strong>Every day</strong>, a program visits every outside link we use, Help now pages first. It flags pages that are gone, pages that moved to a different web address, and phone numbers we list that are no longer on the source page. It also notes pages whose words changed.</li>
+    <li>Flagged listings go on a public to-do list to be rechecked.</li>
+    <li><strong>Every 4 hours</strong>, a health check lists any listing that has not been rechecked in 6 months.</li>
+    <li>After 6 months without a recheck, the listing itself says it may be out of date.</li>
+  </ul>
+  <p>How these checks work is public: <a href={doc('docs/operations/README.md')}>our operations guide</a> on GitHub.</p>
+
+  <h2 id="who">Who does the checking</h2>
+  <p>Today, AI does the checks by reading public web pages. Before a change goes live, another AI run checks it against our rules for sources, plain words, fairness and privacy. David checks changes about shelter, crisis help, food and benefits before they go live.</p>
+  <p class="gap"><strong>Not yet:</strong> nobody calls the groups or visits them in person. If a group's own page is wrong or old, our listing can be wrong too.</p>
+
+  <h2 id="211">How this compares with 211</h2>
+  <p>211 services that follow the national Inform USA standards verify each listing once a year. Staff review each update before it is published. When a group does not answer, they try other ways, like calling staff, checking the website, or visiting.</p>
+  <p>West Virginia 211 covers all 55 counties. It says it works closely with food banks, pantries, community action agencies and faith-based groups to keep its information accurate.</p>
+  <p>The difference, plainly: we check links more often, every day, but less deeply. We read a group's public page. A 211 that follows these standards asks the group itself.</p>
+  <SourceLine sources={compareSources} about="211 standards" />
+  <p>This site does not replace 211. For help finding services, you can also call <a href={telHref(wv211.contact.phone)}>{wv211.contact.phone}</a>.</p>
+
+  <h2 id="wrong">When we get it wrong</h2>
+  <p>Every fix to a fact, link or out-of-date detail is listed on our <a href={`${base}/corrections/`}>Corrections</a> page. If you see something wrong, <a href={tellUs}>tell us</a> with our fix form. You don't need an account, and what you send is not posted.</p>
+  <p>The full rules are in <a href={doc('content/README.md')}>our content guide</a>.</p>
+
+  <style>
+    .gap { padding: 10px 14px; border-left: 4px solid var(--accent); background: var(--accent-bg); border-radius: 4px 10px 10px 4px; }
+  </style>
+</Base>

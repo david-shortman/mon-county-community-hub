@@ -1,0 +1,14 @@
+title: Be a poll worker on Election Day
+slug: wv-poll-worker
+org: wv-secretary-of-state
+topics: [voting, community]
+who_it_is_for: People registered to vote in their county, or high school juniors and seniors who meet the state's student rules. You must be able to read and write English, go to training, and work all of Election Day. You can't serve if you are a candidate in that election, or a candidate's parent, child, brother or sister, or spouse.
+what_to_do: Fill out the Secretary of State's poll worker form. Your county clerk contacts you if your county needs more poll workers. Not every county needs more for every election.
+contact:
+  url: https://apps.sos.wv.gov/elections/PollWorkers/Register
+  url_label: Poll worker sign-up
+sources:
+  - url: https://apps.sos.wv.gov/elections/PollWorkers/Register
+    checked: 2026-10-31
+  - url: https://sos.wv.gov/govotewv
+    checked: 2026-10-31

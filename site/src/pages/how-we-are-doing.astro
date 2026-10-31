@@ -5,11 +5,13 @@
 // number means for policy, and never claim credit for a change.
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
+import TrendChart from '../components/TrendChart.astro';
 import { loadIndicators, showValue, PLACES } from '../lib/indicators.mjs';
 import { loadIndicators as loadLive } from '../lib/live-indicators/index.mjs';
 import { todayYmd } from '../lib/content.mjs';
 export const page = { door: 'community', topic: 'data', label: "How we're doing", summary: 'Official numbers on health, money, jobs and daily needs in Mon County, with sources' };
 const health = loadIndicators('health');
+const schools = loadIndicators('schools');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 // Live numbers read from the sources' own data at each build (#15).
 const ind = await loadLive();
@@ -31,9 +33,9 @@ const ticks = Array.from({ length: Math.floor(top / step) + 1 }, (_, i) => i * s
 const places = ind['cdc-places-monongalia'];
 const measures = places.data?.measures ?? [];
 ---
-<Base title="How is Mon County doing? Official numbers for Monongalia County, WV" description="Official numbers on child poverty, health insurance and jobs in Monongalia County, WV, next to West Virginia and the US, plus the monthly unemployment rate and CDC estimates on food, housing and other daily needs, each with its source and year.">
+<Base title="How is Mon County doing? Official numbers for Monongalia County, WV" description="Official numbers on child poverty, health insurance and jobs in Monongalia County, WV, next to West Virginia and the US, state test scores for Monongalia County Schools (math, reading and science), the monthly unemployment rate and CDC estimates on food, housing and other daily needs, each with its source and year.">
   <h1>How is Mon County doing?</h1>
-  <p class="lede">Official numbers about Monongalia County, next to West Virginia and the whole country. Each one links to where it comes from and says what year it covers.</p>
+  <p class="lede">Official numbers about Monongalia County, next to West Virginia and the whole country. Each one links to where it comes from and says what year it covers, and the charts show up to ten years.</p>
 
   <h2 id="health">Health and money</h2>
   <p>These come from <a href="https://www.countyhealthrankings.org/health-data/west-virginia/monongalia">County Health Rankings</a>, a program that gathers the same public numbers for every county in the US. We use its 2025 data file. The definitions come from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx">2025 data dictionary</a>, and the years from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv">2025 trends file</a>.</p>
@@ -46,6 +48,7 @@ const measures = places.data?.measures ?? [];
           <li>{k === 'monongalia' ? <strong>{label}: {showValue(i, i.values[k])}</strong> : <>{label}: {showValue(i, i.values[k])}</>}</li>
         ))}
       </ul>
+      <TrendChart i={i} />
       <SourceLine sources={i.sources.slice(0, 1)} about={i.title} slug={i.slug} />
     </article>
   ))}
@@ -111,8 +114,25 @@ const measures = places.data?.measures ?? [];
     <li><strong>This site did not change them.</strong> Many people and groups shape these numbers. We only point to them.</li>
   </ul>
 
-  <h2 id="coming">Schools and crime</h2>
-  <p>We have not added official school test scores or crime numbers yet, because we could not check them on the official sources this time. That work is tracked in <a href={`${repo}/issues/772`}>issue 772</a>.</p>
+  <h2 id="schools">School test scores</h2>
+  <p>How Monongalia County Schools students did on West Virginia's yearly state tests, next to the whole state. Each number is the share of students tested who scored proficient. These come from <a href="https://zoomwv.k12.wv.us/Dashboard/dashboard/7301">ZoomWV</a>, the West Virginia Department of Education's data site. It needs JavaScript. To see Mon County there, open Filter Data, then District/County, and pick (056) - Monongalia. Students in grades 3 to 8 and 11 take these tests. There were no state tests in 2019-2020.</p>
+  {schools.map((i) => (
+    <article class="card" id={i.slug}>
+      <h3>{i.title} ({i.data_year} school year)</h3>
+      <p>{i.definition}</p>
+      <ul>
+        {PLACES.filter(([k]) => i.values[k] != null).map(([k, label]) => (
+          <li>{k === 'monongalia' ? <strong>{label}: {showValue(i, i.values[k])}</strong> : <>{label}: {showValue(i, i.values[k])}</>}</li>
+        ))}
+      </ul>
+      <TrendChart i={i} />
+      <SourceLine sources={i.sources.slice(0, 1)} about={i.title} slug={i.slug} />
+    </article>
+  ))}
+  <p>Test scores are one measure. They do not show everything a school does, and they do not compare schools within the county.</p>
+
+  <h2 id="coming">Crime</h2>
+  <p>We have not added official crime numbers yet, because we could not check them on the official source this time. That work is tracked in <a href={`${repo}/issues/772`}>issue 772</a>.</p>
 </Base>
 
 <style>
@@ -128,7 +148,7 @@ const measures = places.data?.measures ?? [];
   .tiles { list-style: none; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
   .tile { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
   .tile .num { font-size: 1.6rem; font-weight: 700; }
-  .tile .range { color: var(--muted); font-size: 0.85rem; }
+  .tile .range { color: var(--muted); font-size: 0.9rem; }
   table { border-collapse: collapse; }
   th, td { text-align: left; padding: 0.25rem 1rem 0.25rem 0; border-bottom: 1px solid var(--line); }
 </style>

@@ -23,6 +23,8 @@ export const KIND_LABELS = {
   'rec-center': 'Public rec building',
   'park-building': 'Park building',
   'fire-hall': 'Fire hall',
+  library: 'Library',
+  group: 'Group',
 };
 
 const STATUS_LABELS = {
@@ -42,8 +44,17 @@ export function placeStatus(p, today = todayYmd()) {
   return { status, label: STATUS_LABELS[status] ?? null };
 }
 
+// Library branches and groups share the record (#263) but are not
+// community centers or halls, so the section's pages leave them out.
+export const DIRECTORY_KINDS = ['library', 'group'];
+
 let cache;
 export function loadPlaces() {
+  return loadAllPlaces().filter((p) => !DIRECTORY_KINDS.includes(p.kind));
+}
+
+// Every record in content/places, including library branches and groups.
+export function loadAllPlaces() {
   cache ??= loadDir('places').map((p) => ({
     ...p,
     last_activity_seen: ymd(p.last_activity_seen),
@@ -55,7 +66,7 @@ export function loadPlaces() {
 }
 
 export function place(slug) {
-  const p = loadPlaces().find((x) => x.slug === slug);
+  const p = loadAllPlaces().find((x) => x.slug === slug);
   if (!p) throw new Error(`content/places: no entry with slug ${slug}`);
   return p;
 }

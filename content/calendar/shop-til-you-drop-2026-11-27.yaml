@@ -4,10 +4,12 @@ starts: 2026-11-27
 ends: 2026-11-28
 org_name: Vincent's Promotions LLC
 who_it_is_for: Open to everyone. Admission is $5.
-what_to_do: A holiday shopping show with about 180 to 200 vendors selling crafts, gifts, holiday decor and some antiques and collectibles. Hours are 2 p.m. to 7 p.m. Friday and 8 a.m. to 4 p.m. Saturday. Details come from the FestivalNet listing.
+what_to_do: A holiday shopping show with about 180 to 200 vendors selling crafts, gifts and holiday decor. Hours are 2 p.m. to 7 p.m. Friday and 8 a.m. to 4 p.m. Saturday. The dates and hours are on Mylan Park's event page; the rest comes from the FestivalNet listing.
 url: https://festivalnet.com/92545/Morgantown-West-Virginia/Craft-Shows/Shop-Til-You-Drop
 place: Hazel Ruby Center, Mylan Park, 500 Mylan Park Lane, Morgantown, WV 26501
 topics: [market]
 sources:
+  - url: https://mylanpark.org/event/shop-til-you-drop-craft-show/
+    checked: 2026-10-31
   - url: https://festivalnet.com/92545/Morgantown-West-Virginia/Craft-Shows/Shop-Til-You-Drop
     checked: 2026-10-30

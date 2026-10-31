@@ -1,0 +1,10 @@
+name: WVU Center for Community Engagement
+slug: wvu-center-for-community-engagement
+kind: school
+website: https://service.wvu.edu/
+summary: West Virginia University's service office. It runs iServe, a website where WVU and local groups post volunteer needs, both ongoing roles and dated shifts.
+topics: [community]
+area: morgantown
+sources:
+  - url: https://iserve.wvu.edu/
+    checked: 2026-10-31

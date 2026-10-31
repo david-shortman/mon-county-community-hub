@@ -46,6 +46,11 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 - **March and April:** REAP litter grants and Make It Shine cleanups. Check the REAP pages weekly.
 - **April 2027:** the Organizational Arts Grants round should reopen.
 
+## Automated since 2026-10-31
+
+- **Weekly checklist issue:** the weekly, monthly and seasonal lists above are posted as one standing issue, refreshed each Monday by the daily Source check (`content/checklists/make-it-better.yaml`, see `docs/operations/recurring-checks.md`). It also lists entries that will say "may be out of date" within 30 days.
+- **Daily watch:** the city vacancy list and the three grant pages whose rounds open and close (Organizational Arts Grants, WV Public Art, Community Tree Grants) are on `content/watch/make-it-better.yaml`. A change opens one issue for a person. The saved "not currently open" and "check back in April 2027" lines alert when they go away.
+
 ## Known gaps
 
 - The site marks an entry "may be out of date" after 6 months for every topic. #291 asks for 90 days on Make it better entries. That needs a change to `isStale` in `site/src/lib/content.mjs` for one topic, which is a site-wide rule, so it is a separate issue (#791).

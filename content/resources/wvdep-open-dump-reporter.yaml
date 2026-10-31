@@ -1,0 +1,13 @@
+title: Report an illegal dump to the state
+slug: wvdep-open-dump-reporter
+org: wv-department-of-environmental-protection
+topics: [government, recycling]
+who_it_is_for: Anyone who sees an illegal dump or a pile of old tires anywhere in West Virginia. The form is for dumps and tire piles only.
+what_to_do: Fill out the state's Open Dump Reporter form. Pick the county, describe what you saw, and give directions to the spot with landmarks. Your name is optional, and you can ask to stay anonymous.
+contact:
+  url: https://apps.dep.wv.gov/reap/PPODDumpReporter.cfm
+  url_label: Report a dump
+cost: free
+sources:
+  - url: https://apps.dep.wv.gov/reap/PPODDumpReporter.cfm
+    checked: 2026-10-30
