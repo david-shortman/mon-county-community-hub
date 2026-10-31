@@ -81,6 +81,19 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Map on tap** | A Directions button that opens the phone's own map app | A link to the map app | Exists (`Actions`) |
 | **211 fallback** | The help now box | Plain links | Exists (`HelpNow`, and `HelpNowBar` on the home page) |
 | **Breadcrumb** | "Home › Get through this month" above the heading, from the page's tags | Plain links | Exists (`Breadcrumb.astro`) |
+| **Item lookup** | "What do you have?": tap targets for each item, then an A to Z list saying where each one goes and whether it can go in the curbside bin, each linking to its sourced details | Anchor links and a plain list | Exists (`/recycling/`, #199) |
+
+### Lead blocks: one job per page (#199)
+
+Each guide page keeps the same frame and leads with the one block that does its job, on the first phone screen.
+
+| Page | Its job | Lead block |
+|---|---|---|
+| `/recycling/` | "What do I do with this thing?" | Item lookup |
+| `/utility-bills/` | "My power, water or gas is about to be cut off" | Step path (`Route`) |
+| `/calendar/` | "What is coming that I might miss?" | Days left chips, this week first |
+| `/stay-tonight/` | "I need a bed or a warm place now" | Crisis strip and four big choices |
+| `/` | "Where do I start?" | Door cards |
 
 ## What every listing needs
 
