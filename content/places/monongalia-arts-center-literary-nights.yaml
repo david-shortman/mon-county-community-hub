@@ -1,0 +1,24 @@
+name: MAC Literary Nights
+slug: monongalia-arts-center-literary-nights
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: nonprofit
+  text: Monongalia Arts Center
+story: A monthly night with a guest author reading, then an open mic where anyone can share essays, poetry or other writing.
+regular:
+  - Second Thursday of each month, 6 p.m.
+interests: [books, arts, learning]
+tags: [come-alone]
+contact:
+  url: https://monartscenter.com/classes-and-events
+  place: 107 High Street, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - There is no Literary Night in May or July.
+  - Cost is not listed.
+sources:
+  - url: https://monartscenter.com/classes-and-events
+    checked: 2026-10-30
