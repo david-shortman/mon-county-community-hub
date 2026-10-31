@@ -1,0 +1,123 @@
+---
+// Contractor and trade licenses in West Virginia, working inside Morgantown
+// city limits, and checking a contractor before you hire (#604, #605, #608,
+// part of #276). Every fact is from the board's, the state's or the city's
+// own page. Held back until a person confirms them (#603): the state dollar
+// amount that makes a job need a contractor license, board and city license
+// fees, electrician license classes, and union locals. The page links the
+// law instead of restating it. Permits for property owners are a separate
+// page (#661).
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import Icon from '../components/Icon.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "family", topic: "work", label: "Contractor and trade licenses", summary: "State contractor license, plumber, HVAC and electrician licenses, working in Morgantown city limits, and how to check a contractor before you hire" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const checked = '2026-10-30';
+const board = [
+  { url: 'https://www.wvclboard.wv.gov/account/guide.asp', checked },
+  { url: 'https://www.wvclboard.wv.gov/', checked },
+];
+const law = [
+  { url: 'https://code.wvlegislature.gov/30-42-3/', checked },
+  { url: 'https://code.wvlegislature.gov/30-42-6/', checked },
+];
+const plumb = [{ url: 'https://labor.wv.gov/licensing/plumber-certification', checked }];
+const hvac = [{ url: 'https://labor.wv.gov/licensing/hvac-technician-certification', checked }];
+const sfm = [{ url: 'https://firemarshal.wv.gov/regulatory-and-licensing-division', checked }];
+const city = [
+  { url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked },
+  { url: 'https://www.morgantownwv.gov/742/Licensing', checked },
+  { url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked },
+];
+const lookup = [
+  { url: 'https://www.wvclboard.wv.gov/verify/', checked },
+  { url: 'https://labor.wv.gov/database-search', checked },
+  { url: 'https://sfm-permit-public.wvoasis.gov/publicdata/LicenseeSearch', checked },
+];
+const complaint = [{ url: 'https://www.wvclboard.wv.gov/complaint/', checked }];
+---
+<Base title="Contractor and trade licenses in West Virginia, and checking a contractor in Morgantown" description="Where West Virginia contractors, plumbers, HVAC technicians and electricians get licensed, what Morgantown asks of contractors working in city limits, and how to look up a contractor's license or file a complaint with the WV Contractor Licensing Board.">
+  <h1>Contractor and trade licenses</h1>
+  <p class="lede">West Virginia has separate licenses for contractors, plumbers, HVAC technicians and electricians. Each one comes from a different state office. Working inside Morgantown city limits also takes a city business license. Hiring someone? See <a href="#check">check a contractor before you hire</a>.</p>
+
+  <h2 id="contractor">State contractor license</h2>
+  <p>The <strong>West Virginia Contractor Licensing Board</strong> issues state contractor licenses. State law says which jobs need one. It depends on the kind of work and the total cost of the job. Read the definition of "contractor" in <a href="https://code.wvlegislature.gov/30-42-3/">WV Code §30-42-3</a>, or ask the board.</p>
+  <p>The law lists jobs that do not need a contractor license in <a href="https://code.wvlegislature.gov/30-42-6/">WV Code §30-42-6</a>. One of them is "work personally performed on a structure by the owner or occupant thereof." See the full list at the link.</p>
+  <p>The same section says a licensed contractor "shall keep the license or a copy thereof posted in a conspicuous position at every construction site," and that the license number "shall be included in all contracting advertisements and all fully executed and binding contracts."</p>
+  <SourceLine sources={law} about="West Virginia contractor law" />
+
+  <h3>How to apply</h3>
+  <p>The board's step by step guide says to finish steps 1 to 6 before you send your application:</p>
+  <ol>
+    <li>Email the board your scope of work at <a href="mailto:CLBoard@wv.gov">CLBoard@wv.gov</a>. The board tells you which license classification and exams you need.</li>
+    <li>Take the exam through PROV, Inc. The person taking it must be an officer, member, owner, or full-time employee. A full-time employee needs payroll records as proof.</li>
+    <li>Get a Business Registration Tax Number from the West Virginia State Tax Department.</li>
+    <li>Register with the West Virginia Secretary of State, if your business is required to. You can register online through the WV One Stop Business Center.</li>
+    <li>Show proof of workers' compensation and unemployment compensation for all employees working in West Virginia. The guide also lists general liability insurance.</li>
+    <li>Send a wage bond status affidavit with your application.</li>
+    <li>Apply online, or download a PDF to fill in and mail.</li>
+  </ol>
+  <p>The guide lists a phone number for each office in these steps. The board is open Monday to Friday, 8 a.m. to 5 p.m. Call to confirm.</p>
+  <SourceLine sources={board} about="the Contractor Licensing Board" />
+  <div class="actions">
+    <a class="btn" href="tel:+13045587890"><Icon name="phone" /><span>Call the board: (304) 558-7890</span></a>
+    <a class="btn" href="https://www.wvclboard.wv.gov/account/guide.asp"><Icon name="open" /><span>Board's step by step guide</span></a>
+  </div>
+
+  <h2 id="plumber">Plumbers</h2>
+  <p>The <strong>West Virginia Division of Labor</strong> licenses plumbers. Its page says that since January 1, 2009, "no plumber may perform or offer to perform plumbing work in West Virginia without a plumber license." The law lists some exceptions. The classes are Master plumber, Journeyman plumber and Plumber in Training. Master and Journeyman applicants must certify their experience and take a written exam.</p>
+  <SourceLine sources={plumb} about="plumber licenses" />
+  <div class="actions">
+    <a class="btn" href="https://labor.wv.gov/licensing/plumber-certification"><Icon name="open" /><span>Plumber license page</span></a>
+  </div>
+
+  <h2 id="hvac">Heating and cooling (HVAC)</h2>
+  <p>The <strong>Division of Labor</strong> also certifies HVAC technicians. Its page says that since January 1, 2016, no person may do or offer heating, ventilating and cooling work in West Virginia without its certification. The law lists some exceptions. The classes are HVAC Technician (at least 2,000 hours of HVAC work, training and experience), HVAC Residential Technician, and Technician in Training, who works only under the direct supervision of an HVAC Technician.</p>
+  <SourceLine sources={hvac} about="HVAC certification" />
+  <div class="actions">
+    <a class="btn" href="https://labor.wv.gov/licensing/hvac-technician-certification"><Icon name="open" /><span>HVAC certification page</span></a>
+  </div>
+
+  <h2 id="electrician">Electricians</h2>
+  <p>The <strong>West Virginia State Fire Marshal's Office</strong>, Regulatory and Licensing Division, licenses electricians. It also licenses electrical inspectors, home inspectors, fire protection workers and more. Apply or renew through its online license portal. Exam dates and places for 2026 and 2027 are on its page. The office is open Monday to Friday, 8 a.m. to 4 p.m. Email <a href="mailto:sfmlicensing@wv.gov">sfmlicensing@wv.gov</a>.</p>
+  <SourceLine sources={sfm} about="electrician licenses" />
+  <div class="actions">
+    <a class="btn" href="tel:+13045582191"><Icon name="phone" /><span>Call the Fire Marshal: 304-558-2191</span></a>
+    <a class="btn" href="https://firemarshal.wv.gov/regulatory-and-licensing-division"><Icon name="open" /><span>Electrician licenses and exam dates</span></a>
+  </div>
+
+  <h2 id="morgantown">Working inside Morgantown city limits</h2>
+  <p>The City of Morgantown asks for a state business registration first, then a <strong>Municipal Business License</strong>. Apply through the Morgantown Access Portal. The city's steps page lists a separate contractor application for the business license. City licenses run for a fiscal year and expire June 30 each year. The city also charges a business and occupation (B&amp;O) tax on gross income, and a municipal service fee on people working in city limits.</p>
+  <p>Building permits in the city also go through the Morgantown Access Portal. The city does not take paper permit applications. Each kind of work, like electrical or plumbing, needs its own permit application. If your contractor's license does not show in the portal, call the Finance Department at <a href="tel:+13042847408">304-284-7408</a>. B&amp;O taxes are not part of permit fees: call Finance at <a href="tel:+13042847401">304-284-7401</a>.</p>
+  <p>Not sure an address is in city limits? The city says to check its <a href="https://morgantownwv.maps.arcgis.com/apps/instant/sidebar/index.html?appid=7e73a491ac63495b846f4ada7358f24f">Zoning Viewer</a>.</p>
+  <SourceLine sources={city} org="city-of-morgantown" about="working in Morgantown city limits" />
+  <div class="actions">
+    <a class="btn" href="https://www.morgantownwv.gov/747/Permitting-Licensing-Registration"><Icon name="open" /><span>Morgantown Access Portal</span></a>
+    <a class="btn" href="tel:+13042847405"><Icon name="phone" /><span>Call the city: 304-284-7405</span></a>
+  </div>
+  {r('morgantown-business-license') && <ResourceCard r={r('morgantown-business-license')} showCost />}
+
+  <h2 id="check">Check a contractor before you hire</h2>
+  <p>You can look up a West Virginia contractor's license for free on the <strong>Contractor Licensing Board</strong> site. Search by license number (it starts with "WV"), or by classification, company name, city or county. The board says the search is updated in real time.</p>
+  <p>For plumbers and HVAC technicians, use the Division of Labor's database search. For electricians, use the Fire Marshal's licensee search.</p>
+  <SourceLine sources={lookup} about="license searches" />
+  <div class="actions">
+    <a class="btn" href="https://www.wvclboard.wv.gov/verify/"><Icon name="search" /><span>Contractor license search</span></a>
+    <a class="btn" href="https://labor.wv.gov/database-search"><Icon name="search" /><span>Plumber and HVAC search</span></a>
+    <a class="btn" href="https://sfm-permit-public.wvoasis.gov/publicdata/LicenseeSearch"><Icon name="search" /><span>Electrician search</span></a>
+  </div>
+
+  <h3>File a complaint with the board</h3>
+  <p>The board takes complaints about contractors who are not licensed, and licensed contractors working outside their classification, on jobs above a set total cost. The amounts are on the board's complaint page. Anyone can file. The board does not take anonymous complaints.</p>
+  <p>Include the contractor's name, address and phone number, where the job is, and copies of canceled checks, contracts or invoices. Do not send photos.</p>
+  <p>The board says it cannot help with building code violations, contract disagreements, misused money or the quality of the work.</p>
+  <SourceLine sources={complaint} about="board complaints" />
+  <div class="actions">
+    <a class="btn" href="https://www.wvclboard.wv.gov/complaint/"><Icon name="open" /><span>Board complaint page</span></a>
+  </div>
+
+  <p class="meta">Sources checked October 30, 2026. We describe these rules and link the official pages; we do not decide whether a job needs a license. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
