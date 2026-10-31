@@ -1,0 +1,72 @@
+# Weekly, monthly and seasonal checklist for the Make it better pages (#793).
+# How it works: site/scripts/checklists.mjs
+id: make-it-better
+title: Make it better pages
+issue_title: Weekly checklist, Make it better
+tracking: 793
+intro: >-
+  Re-read each page and change only what it now says. Set `checked` to today's
+  Morgantown date only for the sources you actually re-read. When two official
+  pages disagree, keep both and say who says what. A date that is not posted
+  yet stays "next date not announced". Anything that needs asking a person
+  becomes a for:david issue. Where each fact lives and what to update:
+  docs/operations/make-it-better-checks.md
+items:
+  - text: City vacancy list. Open seats per board, who can serve, the apply links (`open_seats` in content/boards/).
+    url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+  - text: City Council agendas. Trees, murals, landscape plans, the downtown plan, budget lines, board appointments.
+    url: https://www.morgantownwv.gov/AgendaCenter/City-Council-3
+  - text: Agenda Center for the Urban Landscape Commission, Tree Board, Cultural Arts Commission and Historic Landmarks Commission (links on each board's page).
+    url: https://www.morgantownwv.gov/AgendaCenter
+  - text: Each board's own page (links in content/boards/). Meeting day, time and place; vacant seats shown on the page.
+    when: month
+  - text: Morgantown Mosaic. 2027 scoring dates, amounts, match.
+    url: https://morgantownwv.gov/724/Morgantown-Mosaic-Neighborhood-Engagemen
+    when: month
+  - text: City Finance page. A new budget or capital plan.
+    url: https://www.morgantownwv.gov/202/Finance
+    when: month
+  - text: Morgantown 311. Categories, phone, hours.
+    url: https://www.morgantownwv.gov/428/Service-Request
+    when: month
+  - text: County A&D agency and county Litter Control. Form links, phone, area.
+    url: https://www.monongaliacounty.gov/departments/abandoned_dilapidated_property_enforcement_agency.php
+    when: month
+  - text: County Litter Control.
+    url: https://www.moncountyrecycling.com/litter-control.html
+    when: month
+  - text: County Commission. Meeting time, comment rules.
+    url: https://www.monongaliacounty.gov/commission/index.php
+    when: month
+  - text: WV DEP REAP and Adopt-A-Stream. Program rules, contacts.
+    url: https://dep.wv.gov/environmental-advocate/reap/aah/Pages/default.aspx
+    when: month
+  - text: WV Forestry urban forestry. Whether Community Tree Grants are still open.
+    url: https://wvforestry.com/urban-forestry
+    when: month
+  - text: WV arts grants. Whether Public Art grants open, and the deadline.
+    url: https://wvculture.org/agencies/arts/grants/
+    when: month
+  - text: Organizational Arts Grants. The 2027-28 round.
+    url: https://ycfwv.org/arts-fund-grants/
+    when: month
+  - text: BOPARC trail cleanups. How to host, insurance rule.
+    url: https://www.boparc.org/trail-clean-ups-and-events.html
+    when: month
+  - text: WVDOT District 4. Phone, hours, the road repair form.
+    url: https://transportation.wv.gov/agencies/highways/districts/district-four
+    when: month
+  - text: Main Street Morgantown, Friends of Deckers Creek, Mon River Trails Conservancy, Solid Waste Authority. New programs or cleanups with dates.
+    when: month
+  - text: Make it better entries that will say "may be out of date" within 30 days (90-day rule). Re-read these first.
+    when: month
+    run: better-stale-soon
+  - text: Budget season. Read City Council and County Commission agendas for budget items (levying bodies meet March 7 to 28, WV Code 11-8-9).
+    months: [3, 4]
+  - text: REAP litter grants and Make It Shine cleanups. Check the REAP pages this week.
+    url: https://dep.wv.gov/environmental-advocate/reap/aah/Pages/default.aspx
+    months: [3, 4]
+  - text: The Organizational Arts Grants round should reopen this month. Add a calendar entry once a deadline is posted.
+    url: https://ycfwv.org/arts-fund-grants/
+    months: [4]
+    from: 2027-04-01
