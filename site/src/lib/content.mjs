@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
 import { loadFeedEntries } from './feeds/index.mjs';
+import { FIX_FORM } from './group-requests.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const CONTENT_DIR = path.resolve(here, '../../../content');
@@ -225,15 +226,13 @@ export function isStale(checked, today = todayYmd(), days = STALE_DAYS) {
 export const FAST_STALE_DAYS = 90;
 export const staleDaysFor = (r) => ((r?.topics ?? []).includes('better') || String(r?._file ?? '').startsWith('boards/') ? FAST_STALE_DAYS : STALE_DAYS);
 
-// A "Report a problem" link that opens our GitHub issue form with the item
-// already filled in: its name, its slug and its source (#39, #48). It asks
-// for nothing personal. GitHub needs a free account and reports are public;
-// the site footer says so.
-export const REPORT_FORM = 'https://github.com/david-shortman/mon-county-community-hub/issues/new';
-export function reportUrl({ title, slug, url }) {
-  const q = new URLSearchParams({ template: 'suggest-resource.yml', title: `Problem with: ${title}`, name: slug ? `${title} (${slug})` : title });
-  if (url) q.set('url', url);
-  return `${REPORT_FORM}?${q}`;
+// A "Report a problem" link. It opens our private fix form (FIX_FORM, #522),
+// because David keeps GitHub issues for the people who work on the project.
+// The form asks which page or listing, so the arguments are kept for callers
+// but nothing is added to the address: no item details travel in the link.
+export const REPORT_FORM = FIX_FORM;
+export function reportUrl() {
+  return REPORT_FORM;
 }
 
 // The oldest checked date across a record's sources, so a card never says an

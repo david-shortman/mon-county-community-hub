@@ -5,11 +5,12 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, telHref } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "How we check", summary: "What counts as a source, how often listings are rechecked, and how that compares with 211" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const doc = (p) => `${repo}/blob/main/${p}`;
-const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+const tellUs = FIX_FORM;
 const wv211 = resource('wv-211');
 const informUsa = 'https://assets-002.noviams.com/novi-file-uploads/airs/Inform_USA_Standards_for_Professional_Information_and_Referral_-_Version_10_0.pdf';
 const wvpb = 'https://wvpublic.org/story/government/wv-211-connects-people-with-needed-help/';
@@ -51,7 +52,7 @@ const compareSources = [
   <p>This site does not replace 211. For help finding services, you can also call <a href={telHref(wv211.contact.phone)}>{wv211.contact.phone}</a>.</p>
 
   <h2 id="wrong">When we get it wrong</h2>
-  <p>Every fix to a fact, link or out-of-date detail is listed on our <a href={`${base}/corrections/`}>Corrections</a> page. If you see something wrong, <a href={tellUs}>tell us</a>. It opens a form on GitHub, which needs a free account, and what you write is public.</p>
+  <p>Every fix to a fact, link or out-of-date detail is listed on our <a href={`${base}/corrections/`}>Corrections</a> page. If you see something wrong, <a href={tellUs}>tell us</a> with our fix form. You don't need an account, and what you send is not posted.</p>
   <p>The full rules are in <a href={doc('content/README.md')}>our content guide</a>.</p>
 
   <style>

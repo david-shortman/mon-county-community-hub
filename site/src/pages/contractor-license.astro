@@ -12,6 +12,7 @@ import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
 import { loadDir } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Contractor and trade licenses", summary: "State contractor license, plumber, HVAC and electrician licenses, working in Morgantown city limits, and how to check a contractor before you hire" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -122,5 +123,5 @@ const complaint = [{ url: 'https://www.wvclboard.wv.gov/complaint/', checked }];
     <a class="btn" href="https://www.wvclboard.wv.gov/complaint/"><Icon name="open" /><span>Board complaint page</span></a>
   </div>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these rules and link the official pages; we do not decide whether a job needs a license. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these rules and link the official pages; we do not decide whether a job needs a license. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>

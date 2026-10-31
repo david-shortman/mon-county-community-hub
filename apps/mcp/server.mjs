@@ -19,7 +19,8 @@ const SERVER = { name: 'everything-morgantown', version: '1.0.0' };
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 const STALE_DAYS = 183;
 const SITE = 'https://everythingmorgantown.org';
-const REPORT_FORM = 'https://github.com/david-shortman/mon-county-community-hub/issues/new';
+// Our private fix form (site/src/lib/group-requests.mjs FIX_FORM, #522).
+const REPORT_FORM = 'https://tally.so/r/rD5adv';
 const NOTE = 'Data from public sources, gathered by Everything Morgantown (CC BY 4.0). Details change: check the source before acting, and send people to the group itself. This tool describes programs; it never decides who qualifies.';
 
 // ---------- data ----------
@@ -175,12 +176,10 @@ const TOOLS = [
     description: 'How to tell Everything Morgantown that a listing is wrong, out of date or missing, and where fixes are published. Optionally for one listing id.',
     inputSchema: { type: 'object', properties: { id: { type: 'string', description: 'Optional listing id (slug) the problem is about' } } },
     async run({ id }) {
-      const q = new URLSearchParams({ template: 'suggest-resource.yml', title: id ? `Problem with: ${id}` : 'Problem with a listing' });
-      if (id) q.set('name', id);
       return {
         note: NOTE,
-        report_form: `${REPORT_FORM}?${q}`,
-        how: 'Open the form, say what is wrong and link a public page that shows the right information. The form is on GitHub: it needs a free GitHub account, and what is written there is public. Do not include anyone\'s private details.',
+        report_form: REPORT_FORM,
+        how: `Open the form, name the page or listing${id ? ` (${id})` : ''}, say what is wrong and link a public page that shows the right information. It needs no account, and what is sent is not posted. Do not include anyone's private details.`,
         corrections_page: `${SITE}/corrections/`,
         groups_page: `${SITE}/partners/`,
         urgent: 'For help right now, call or text 211. In a mental health crisis, call or text 988. In an emergency, call 911.',

@@ -8,6 +8,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "voting", label: "Register to vote and find your polling place", summary: "Register or update online or at the County Clerk, check your registration, find your polling place, and city elections" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -45,5 +46,5 @@ const earlyVotingOpen = today <= '2026-10-31';
 
   <p>Election days and deadlines we have confirmed are on <a href={`${base}/calendar/`}>Dates</a>.</p>
 
-  <p class="meta">Sources checked October 30 and 31, 2026. We list only official election offices. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30 and 31, 2026. We list only official election offices. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>

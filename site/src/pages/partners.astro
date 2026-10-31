@@ -13,7 +13,7 @@ const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const doc = (p) => `${repo}/blob/main/${p}`;
 const tree = (p) => `${repo}/tree/main/${p}`;
 const issue = (n) => `${repo}/issues/${n}`;
-const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+const tellUs = FIX_FORM;
 const calendarFeed = `${base}/calendar.ics`;
 // Counts come from the data files, so they stay true as listings are added.
 const orgCount = loadDir('orgs').length;
@@ -35,13 +35,9 @@ const listingCount = loadDir('resources').length;
   <p>You can ask us to fix anything we say about your group, add a program we missed, or take your listing down. Hours, phone numbers, who a program serves, and dates all count.</p>
   <h3>How to tell us today</h3>
   <p>Use our <a href={FIX_FORM}>fix or removal form</a>. You don't need an account, and what you send is not posted. It asks what you need, which page or listing, and what should change. Your email is optional, if you want a reply.</p>
-  <p>You can also use the <a href={tellUs}>Tell us</a> link on GitHub, a site where the project's work is stored.</p>
-  <div class="note">
-    <p><strong>Good to know before you use GitHub:</strong> you need a free GitHub account. What you write there is public, and so is your GitHub user name. Please don't include anyone's private details.</p>
-  </div>
+  <p>The <a href={tellUs}>Tell us</a> and "Report a problem" links on our pages open the same form.</p>
   <p>There is no email address yet. These are planned, but not built:</p>
   <ul>
-    <li>A "Report a problem" link on each listing that works with no account (<a href={issue(48)}>planned, issue 48</a>)</li>
     <li>One inbox for reports from residents and groups, by form, email, or text (<a href={issue(197)}>planned, issue 197</a>)</li>
     <li>A quick way for staff and helpers to report a change, put at the front of the line, with fixes shown on a public page (<a href={issue(158)}>planned, issue 158</a>)</li>
   </ul>

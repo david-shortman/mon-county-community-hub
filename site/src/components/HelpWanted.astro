@@ -3,9 +3,10 @@
 // words, with a way to tell us. It names gaps and never promises to fill
 // them. No names or contact details of people who reply are ever shown.
 import { loadGaps, prettyDate, ymd } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 const { topic } = Astro.props;
 const data = loadGaps(topic);
-const tellUs = 'https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml';
+const tellUs = FIX_FORM;
 const checked = data?.gaps.map((g) => ymd(g.checked)).sort()[0];
 ---
 {data?.gaps.length > 0 && (
@@ -17,6 +18,6 @@ const checked = data?.gaps.map((g) => ymd(g.checked)).sort()[0];
         <li><strong>{g.what}.</strong>{' '}{g.why}{g.guide && <> <a href={g.guide.url}>{g.guide.text}</a></>}</li>
       ))}
     </ul>
-    <p class="meta">We last looked on {prettyDate(checked)}. Telling us opens a public page on GitHub, which needs a free account, so leave out private details.</p>
+    <p class="meta">We last looked on {prettyDate(checked)}. Telling us opens our fix form. You don't need an account, and what you send is not posted.</p>
   </section>
 )}

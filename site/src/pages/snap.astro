@@ -4,6 +4,7 @@ import AnswerFacts from '../components/AnswerFacts.astro';
 import HelpNow from '../components/HelpNow.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 const office = loadDir('resources').find((e) => e.slug === 'monongalia-county-dohs-office');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const page = { door: "this-month", topic: "food", label: "Apply for SNAP (food stamps)", summary: "Apply online at WV PATH, or call DoHS" };
@@ -21,5 +22,5 @@ export const page = { door: "this-month", topic: "food", label: "Apply for SNAP 
 
   <HelpNow />
 
-  <p class="meta">We describe how to apply. The state decides who gets SNAP. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We describe how to apply. The state decides who gets SNAP. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>

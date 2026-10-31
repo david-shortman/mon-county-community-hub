@@ -8,6 +8,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "care", topic: "health", label: "Keep my Medicaid in 2027", summary: "The new 80 hour work and community rules, who is excluded, what to do now" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -94,5 +95,5 @@ const outreachSources = [{ url: 'https://bms.wv.gov/members/new-medicaid-rules-a
 
   <p>Need care now? See <a href={`${base}/care/`}>Get care</a>.</p>
 
-  <p class="meta">Every rule on this page is quoted from the West Virginia Department of Human Services, checked October 30, 2026. The state says its site "is current as of October 2026" and may change with more federal guidance. We describe the rules; we do not decide who qualifies. DoHS decides. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Every rule on this page is quoted from the West Virginia Department of Human Services, checked October 30, 2026. The state says its site "is current as of October 2026" and may change with more federal guidance. We describe the rules; we do not decide who qualifies. DoHS decides. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>

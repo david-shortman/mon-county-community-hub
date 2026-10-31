@@ -10,6 +10,7 @@ import Actions from '../../components/Actions.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import NextRung from '../../components/NextRung.astro';
 import { loadDir } from '../../lib/content.mjs';
+import { FIX_FORM } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "better", label: "Fix what you see: who to tell", summary: "Graffiti, dumping, potholes, broken sidewalks, empty buildings: the office that handles each one" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -89,5 +90,5 @@ const problems = [
   <p>Morgantown 311 requests are public and show on the 311 website. The state's dump form says that more complete details give a dump a better chance of being cleaned up.</p>
 
   <NextRung next="adopt" />
-  <p class="meta">We point to the office that handles each problem. We do not take reports ourselves, and we do not see what you send them. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We point to the office that handles each problem. We do not take reports ourselves, and we do not see what you send them. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>

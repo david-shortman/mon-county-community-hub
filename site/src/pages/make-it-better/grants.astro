@@ -7,6 +7,7 @@ import Base from '../../layouts/Base.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import NextRung from '../../components/NextRung.astro';
 import { loadDir } from '../../lib/content.mjs';
+import { FIX_FORM } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "better", label: "Get money for a project", summary: "Small grants for neighborhood, art and tree projects: who can apply, how much, and the next date" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -42,7 +43,7 @@ const grants = [
   <p>We have not listed a downtown facade program, because we could not confirm one is open on a current official page. State litter control grants go to county and town governments and solid waste authorities, not to residents.</p>
 
   <NextRung next="board" />
-  <p class="meta">We describe these grants; we do not run them or help pick winners. Amounts and dates change, so read the grant's page before you apply. Know a grant we should add? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We describe these grants; we do not run them or help pick winners. Amounts and dates change, so read the grant's page before you apply. Know a grant we should add? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>
 
 <style>

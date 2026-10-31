@@ -1,8 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "Terms", summary: "What this site is, and what to know before you rely on it" };
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
-const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+const tellUs = FIX_FORM;
 ---
 <Base title="Terms of use for Everything Morgantown" description="What Everything Morgantown is, what it can and can't do, and how to ask for a fix or removal.">
   <h1>Terms</h1>
@@ -23,7 +24,7 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
   <p>Our own writing and listing data are shared under <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> (CC BY 4.0). Other groups' names, logos, PDFs and photos stay theirs.</p>
 
   <h2>Fixes and removals</h2>
-  <p>If something is wrong, or a group wants its listing changed or removed, <a href={tellUs}>tell us</a>. Reports go to GitHub, which needs a free account, and are public. We act quickly, and each fix is listed on the <a href="../corrections/">Corrections</a> page.</p>
+  <p>If something is wrong, or a group wants its listing changed or removed, <a href={tellUs}>tell us</a> with our fix form. You don't need an account, and what you send is not posted. We act quickly, and each fix is listed on the <a href="../corrections/">Corrections</a> page.</p>
 
   <h2>Changes to these terms</h2>
   <p>We may change these terms. The date at the top shows when they were last updated.</p>

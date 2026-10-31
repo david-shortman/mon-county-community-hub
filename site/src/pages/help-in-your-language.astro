@@ -8,6 +8,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "Help in your language", summary: "Free interpreters at the hospital, the Health Department, state offices and courts, and English classes" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -36,7 +37,7 @@ const dohsPlan = [{ url: 'https://dohs.wv.gov/nondiscrimination-policies-and-pla
   {r('mtec-adult-education-esl') && <ResourceCard r={r('mtec-adult-education-esl')} />}
 
   <h2>Not on this list yet</h2>
-  <p>We checked the websites of Milan Puskar Health Right, Monongalia County Schools and the Morgantown Public Library on October 30, 2026, and none said whether they offer interpreters. Ask when you call. If you work at one of these places and can point us to a page that says so, <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">tell us</a>.</p>
+  <p>We checked the websites of Milan Puskar Health Right, Monongalia County Schools and the Morgantown Public Library on October 30, 2026, and none said whether they offer interpreters. Ask when you call. If you work at one of these places and can point us to a page that says so, <a href={FIX_FORM}>tell us</a>.</p>
   <p>This site is in English only for now. We do not use machine translation, because a wrong phone number, date or rule could send someone to the wrong place.</p>
   <p>More for families: <a href={`${base}/family/`}>Family and life changes</a>.</p>
 </Base>

@@ -5,6 +5,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Work and learning", summary: "Job help, apprenticeships, help with a record or recovery, adult classes, and free English lessons" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -36,5 +37,5 @@ const r = (slug) => all.find((e) => e.slug === slug);
 
   <p>Staying healthy: see <a href={`${base}/staying-well/`}>Staying well: a simple list</a>. Need help with food or bills while you look for work? <a href="tel:211">Call 211</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not place people in jobs or classes. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not place people in jobs or classes. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>

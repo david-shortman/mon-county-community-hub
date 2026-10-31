@@ -9,6 +9,7 @@ import Actions from '../../components/Actions.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import NextRung from '../../components/NextRung.astro';
 import { loadDir, FAST_STALE_DAYS } from '../../lib/content.mjs';
+import { FIX_FORM } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City boards that shape how Morgantown looks, which have open seats, and how to apply" };
 const all = loadDir('boards');
 const boards = all.filter((b) => !b.section);
@@ -83,5 +84,5 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
   ))}
 
   <NextRung next="budget" />
-  <p class="meta">We list open seats as the city posts them. We do not say who should apply or take positions on what any board decides. Seat counts change, so check the city's list before you apply. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We list open seats as the city posts them. We do not say who should apply or take positions on what any board decides. Seat counts change, so check the city's list before you apply. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>

@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "veterans", label: "Veterans", summary: "The VA clinic and Vet Center, free help with a VA claim, jobs, posts, burial benefits, and 24/7 help lines" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -62,5 +63,5 @@ const r = (slug) => all.find((e) => e.slug === slug);
 
   <p>Other help near home, for anyone: <a href="tel:211">call 211</a> for food, bills and housing help, or see <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</p>
 
-  <p class="meta">VA sources checked October 30, 2026. Call before you go, since hours can change. We describe these services; we do not handle VA claims or speak for the VA or any veterans group. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">VA sources checked October 30, 2026. Call before you go, since hours can change. We describe these services; we do not handle VA claims or speak for the VA or any veterans group. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>

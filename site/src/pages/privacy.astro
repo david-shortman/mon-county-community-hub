@@ -1,8 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "Privacy", summary: "What we collect, and what we don't" };
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
-const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+const tellUs = FIX_FORM;
 ---
 <Base title="Privacy at Everything Morgantown" description="What Everything Morgantown collects, what we don't, and how to ask us to remove something.">
   <h1>Privacy</h1>
@@ -17,11 +18,11 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
   </ul>
 
   <h2>The "Tell us" form</h2>
-  <p>"Tell us" opens a page on GitHub. What you post there is public, and it needs a free GitHub account. Please don't put your name, phone number, address or personal story in it.</p>
+  <p>"Tell us" and "Report a problem" open our fix form. A company called Tally runs it and stores what you send. You don't need an account, we never post what you send, and your email is optional. Please don't put anyone's phone number, address or personal story in it.</p>
 
   <h2>What we do with data</h2>
   <p>We don't sell or share data about you. We don't have any to sell.</p>
 
   <h2>Asking us to remove something</h2>
-  <p>If something you posted in a report should come down, or a listing should change, <a href={tellUs}>tell us</a> and say which item. We act quickly.</p>
+  <p>If something about you should come down, or a listing should change, <a href={tellUs}>tell us</a> and say which item. We act quickly.</p>
 </Base>

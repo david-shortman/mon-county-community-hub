@@ -7,6 +7,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Find a job", summary: "Where the city, county, state and hospitals post jobs, free resume and computer help, and short trainings" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -44,5 +45,5 @@ const r = (slug) => all.find((e) => e.slug === slug);
   {r('apprenticeships-wv') && <ResourceCard r={r('apprenticeships-wv')} showCost />}
   <p>More classes, help finishing high school, English lessons, and help if a record or recovery makes it hard to get hired: see <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We list where employers post their own jobs. We do not list single job openings, and we do not place people in jobs. Not here yet: job boards for Monongalia County Schools and WVU, until we can read their pages. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We list where employers post their own jobs. We do not list single job openings, and we do not place people in jobs. Not here yet: job boards for Monongalia County Schools and WVU, until we can read their pages. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
 </Base>
