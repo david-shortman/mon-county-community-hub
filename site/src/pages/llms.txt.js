@@ -1,3 +1,4 @@
+import { printSheets } from '../lib/printouts.mjs';
 import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
 import { ROLES } from '../lib/helper-roles.mjs';
@@ -62,10 +63,13 @@ export function GET({ site }) {
 - [Holiday season help](${u('/holidays/')}): the 2026 holiday toy sign-up and pickup in Mon County, the December 10 holiday food distribution and senior holiday meal sign-ups, the Christian Help Free Store for free clothing, county, state and federal office closings for November and December 2026, and ways to give toys or volunteer
 - [Caring for a family member](${u('/caregivers/')}): free help finding caregiver services from the Region I Aging and Disability Resource Center, the Eldercare Locator, caregiver support at Senior Monongalians, in-home help, dementia caregiver groups, and help for grandparents and relatives raising a child (Healthy Grandfamilies, Kinship Navigators, Legal Aid's kinship hotline)
 - [Living will and medical power of attorney](${u('/advance-directives/')}): free West Virginia advance directive forms from the WV Center for End-of-Life Care (living will, medical power of attorney, combined, mental health), signing with two witnesses and a notary, the WV e-Directive Registry, and the POST form and DNR card for people who are seriously ill
+- [Accessible parking placard](${u('/accessible-parking-placard/')}): the WV DMV's DMV-41-TR form as short lists: the six conditions a medical provider can certify, permanent and temporary placards, how to fill out and mail the form, using the placard, the $5.00 replacement, and when to give it back
 - [Holiday season help](${u('/holidays/')}): the 2026 holiday toy sign-up and pickup in Mon County, the Christian Help Free Store for free clothing, county, state and federal office closings for November and December 2026, and ways to give toys or volunteer
 - [Medicaid waivers](${u('/medicaid-waivers/')}): a plain guide to West Virginia's four Medicaid home care waivers (ADW, IDDW, TBIW, CSEDW): who each is for, how to start, who to call
+- [Help at home as you get older](${u('/help-at-home/')}): Morgantown Area Meals on Wheels and Senior Monongalians meals, WV Medicaid Personal Care, Lighthouse for people 60 and older not on Medicaid, FAIR respite for dementia caregivers, and private pay care
 - [Staying active after 55](${u('/staying-active/')}): BOPARC yoga, tai chi, ballet and line dancing for adults 55 and over at Wiles Hill, activities at the Senior Monongalians senior center, and rail-trails for walking
 - [Start or grow a business](${u('/business/')}): free one-on-one coaching and Business Fundamentals classes from the WV SBDC, the SBA West Virginia District Office, a state list of business plan help, and the Morgantown Area Partnership, Chamber of Commerce and Main Street Morgantown in their own words
+- [Start a business in Star City, Granville or Westover](${u('/business-by-town/')}): which town decides the local business license and B&O tax form: Star City, Granville and Westover forms and offices, and the County Planning Office outside any town
 - [Start a business in Morgantown, step by step](${u('/start-a-business/')}): the city's steps in order: check zoning, register with the state (One Stop portal, $30 Tax Division certificate), apply for a city business license in the Morgantown Access Portal, get a Certificate of Occupancy ($65), get inspected at least a week before opening, and file city B&O tax
 - [Living here](${u('/living-here/')}): pick what is going on (moving here, trash pickup day, recycling drop-off, tires or electronics) and get local steps with phone numbers and sources
 - [Family and life changes](${u('/family/')}): pick what is going on (a baby or young child, a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
@@ -112,6 +116,8 @@ ${centers}
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
+- [Printouts](${u('/print/')}): printable sheets of places and phone numbers, made from the listings every morning. Sheets: ${printSheets().map((s) => `[${s.name}](${u(`/print/${s.slug}/`)})`).join(', ')}
+- [Cards and posters to print](${u('/print/cards/')}): wallet cards and half-page posters with a QR code and a short web address
 - [Terms](${u('/terms/')}): what the site is, that information can change, and how to ask for a fix or removal
 - [Privacy](${u('/privacy/')}): what the site collects (no analytics), and how the public Tell us form works
 - [Make a list for someone](${u('/make-a-list/')}): a helper picks up to 6 places and adds a note, then prints or texts a one-page list; picks live only in the web address
