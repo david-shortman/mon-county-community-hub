@@ -17,6 +17,10 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2>Find a job or job training</h2>
   {r('workforce-wv-morgantown-office') && <ResourceCard r={r('workforce-wv-morgantown-office')} />}
 
+  <h2>Ages 16 to 24 and out of school</h2>
+  {r('region-vi-career-connections') && <ResourceCard r={r('region-vi-career-connections')} />}
+  <p>Still in high school, or 14 or 15 and looking for a first job? See <a href={`${base}/teens/`}>Teens: first jobs, driving and things to do</a>.</p>
+
   <h2>Get paid while you learn a trade</h2>
   {r('apprenticeships-wv') && <ResourceCard r={r('apprenticeships-wv')} showCost />}
   <p>Already work in a trade? See <a href={`${base}/contractor-license/`}>contractor and trade licenses</a>.</p>
