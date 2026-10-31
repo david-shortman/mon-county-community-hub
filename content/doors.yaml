@@ -81,6 +81,7 @@ doors:
       market: Markets and sales
       growing: Growing food and flowers
       weather: Storms and floods
+      outdoors: Parks and outdoors
   - slug: family
     name: Family and life changes
     page: /family/
