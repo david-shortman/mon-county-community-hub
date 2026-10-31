@@ -1,0 +1,23 @@
+name: MAC Collage Club
+slug: monongalia-arts-center-collage-club
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: nonprofit
+  text: Monongalia Arts Center
+story: A monthly evening to make collages from the arts center's collage cart, with a new theme each month.
+regular:
+  - Monthly on a Tuesday, 7 p.m.
+cost: $5 suggested donation
+interests: [crafts, arts, social]
+contact:
+  url: https://monartscenter.com/classes-and-events
+  place: 107 High Street, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-13
+notes:
+  - Check the arts center page for the next date.
+sources:
+  - url: https://monartscenter.com/classes-and-events
+    checked: 2026-10-30

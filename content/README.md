@@ -226,6 +226,26 @@ phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
 - **Stale rule.** A place marked `active` whose `last_activity_seen` is over 6 months old shows "No recent activity seen, call first" (#39). A place found only in county lists is `no-recent-activity` from the start.
 - **Dated events** go in `calendar/` with `venue: <place slug>`, so they show on the place's page. Weekly regulars stay in `regular`.
 
+### Groups and free places to sit (#263)
+
+The Find your people page (`/find-your-people/`) uses the same record with two more kinds. The community centers pages leave both out.
+
+- `kind: library`: a library branch, listed as a free place to sit. `regular` holds its open hours in words.
+- `kind: group`: something people can join more than once, like a game night, a run club or a dance. It has no building of its own. Extra fields:
+
+```yaml
+regular: [Second Tuesday of each month, 6 p.m.]  # when it meets, as the source says
+cost: Free                  # as the source says; leave out if not stated
+venue: wiles-hill-community-center  # optional; the place it meets, if it is in places/
+interests: [games, books]   # games | books | crafts | arts | music | dance | theater | outdoors | running | cycling | sports | food | languages | learning | growing | social | service | families | lgbtq | newcomers
+tags: [come-alone, beginners, free, weekly]  # also weekly and growing
+run_by:
+  kind: community-group     # also business, university, community-group
+```
+
+- **Facebook-only groups:** name, the Facebook link and `status: no-recent-activity`, with no times or facts from Facebook (same rule as #459). Never quote members.
+- Tags only when the source supports them: `come-alone` when it says newcomers are welcome or it is a drop-in program, `beginners` when it says no experience needed.
+
 ## `needs/<slug>.yaml`: the needs register
 
 The ranked, sourced list of problems people in Mon County face (charter, "Finding real problems"; research in #44, format in #74). One file per need. The full shape, with every field explained, is the JSON Schema in [`schemas/need.schema.json`](schemas/need.schema.json).
