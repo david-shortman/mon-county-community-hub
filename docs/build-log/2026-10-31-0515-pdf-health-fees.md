@@ -1,0 +1,7 @@
+# 2026-10-31: Health department fees, the first PDF to phone page
+
+- **Considered:** the PDFs ranked on #393: Mountain Line route schedules first, the health department's fee form second, then the 2019 recycling guide, the trash day checklist, the school calendar and others (ranking and reasons in the #393 comment).
+- **Found:** the Monongalia County Health Department's "Permit Fees and Fees for Service, Fiscal Year 2026-2027" is a one-page scanned form, linked from its Environmental Health page. Its text layer is garbled ("Pennit", "Temporruy", boxes read as letters), so it cannot be searched or read aloud. The site already used five of its fees on the septic and wells page.
+- **Chose:** a reusable "PDF to page" pattern: a record per PDF in `content/pdf-pages/`, checked by `npm run check-content`, and a `FromPdf` component that shows short stacked lists (no wide tables, so the phone table bug in #917 does not apply). The first record is the fee form, read off the page image at 300 dpi, every label and fee copied as printed, and blank fees listed as blank. New page `/health-department-fees/`, linked from the septic and wells page.
+- **Left out:** any reading of the form beyond what it prints. Where a row is unclear (the body art boxes), the page says what the form shows instead of guessing which fee goes with which box.
+- **Cost:** $0. pdftotext and pdftoppm (poppler, open source).

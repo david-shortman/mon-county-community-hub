@@ -1,0 +1,10 @@
+name: Special Olympics West Virginia
+slug: special-olympics-west-virginia
+kind: nonprofit
+website: https://sowv.org/
+summary: Year-round sports training and competition for children and adults with intellectual disabilities, run through county programs across the state.
+topics: [disability, community]
+area: statewide
+sources:
+  - url: https://sowv.org/become-an-athlete/
+    checked: 2026-10-30

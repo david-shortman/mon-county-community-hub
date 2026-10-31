@@ -1,0 +1,49 @@
+---
+// When it gets decided (#297): the windows when plans and budgets that shape
+// how Morgantown looks are set, and how comment works. Process only, never a
+// position. Each fact cites the official page or document it came from.
+import Base from '../../layouts/Base.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import NextRung from '../../components/NextRung.astro';
+export const page = { door: "community", topic: "better", label: "When plans and budgets get decided", summary: "The yearly budget, the 5-year capital plan, the comprehensive plan and the downtown plan: when each is decided and how to comment" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const day = '2026-10-30';
+const src = {
+  law: [{ url: 'https://code.wvlegislature.gov/11-8-9/', checked: day }, { url: 'https://code.wvlegislature.gov/11-8-14/', checked: day }],
+  finance: [{ url: 'https://www.morgantownwv.gov/202/Finance', checked: day }, { url: 'https://www.morgantownwv.gov/DocumentCenter/View/6521/FY27-Budget-Book', checked: day }],
+  cip: [{ url: 'https://www.morgantownwv.gov/DocumentCenter/View/6522/FY27-5-Year-Capital-Improvement-Plan', checked: day }, { url: 'https://www.morgantownwv.gov/202/Finance', checked: day }],
+  comp: [{ url: 'https://www.morgantownwv.gov/652/Morgantown-2033', checked: day }],
+};
+---
+<Base title="When plans and budgets get decided in Morgantown" description="When Morgantown's yearly budget, 5-year capital plan, comprehensive plan and downtown master plan get decided, who decides, and how the public can comment.">
+  <h1>When plans and budgets get decided</h1>
+  <p class="lede">Many choices about how Morgantown looks are made in a plan or a budget, often months before work starts. Here is when each one happens and how to take part.</p>
+
+  <h2>The yearly budget</h2>
+  <p>The city's budget year runs from July 1 to June 30. State law says each local body that sets a tax levy, like City Council and the County Commission, holds its levy estimate meetings between March 7 and March 28. For cities, that session then meets again on the third Tuesday in April.</p>
+  <SourceLine sources={src.law} about="budget timing in state law" />
+  <p>The city posts its budget on the Finance page. The current one is the <a href={src.finance[1].url}>2026-2027 budget (PDF, large file)</a>.</p>
+  <SourceLine sources={src.finance} about="the city budget" />
+
+  <h2>The 5-year capital plan</h2>
+  <p>The capital improvement plan lists the city's planned projects for the next five years, by department. City Council approves it. The <a href={src.cip[0].url}>2027-2031 plan (PDF, large file)</a> includes these lines that shape how the city looks:</p>
+  <ul>
+    <li>Mosaic neighborhood grants and projects: $6,000 in 2026-27, rising to $15,000 a year by 2028-29.</li>
+    <li>A downtown master plan, for the downtown and waterfront: $45,000 in 2027-28.</li>
+    <li>Wayfinding and gateway signs: $150,000 a year from 2027-28 through 2029-30.</li>
+    <li>Work toward the next comprehensive plan update, each year.</li>
+  </ul>
+  <p>The plan says it lists only funded projects, not all projects.</p>
+  <SourceLine sources={src.cip} about="the capital plan" />
+
+  <h2>The comprehensive plan</h2>
+  <p>The comprehensive plan is the city's long-range guide for land use, housing, transportation, recreation, and community design and character. The Planning Commission endorses it and City Council adopts it. State law requires an update every ten years. The latest update is called Morgantown 2033, and the Planning Commission held a public hearing on it in September 2023.</p>
+  <SourceLine sources={src.comp} about="the comprehensive plan" />
+
+  <h2>How to comment</h2>
+  <p>Budgets and plans come before City Council and the Planning Commission at public meetings. See <a href={`${base}/have-your-say/`}>Have your say at a public meeting</a> for when they meet and how comment works. Check agendas in March and April for budget items.</p>
+  <p>Some decisions, like a levy, go to voters. For voting questions, go to the <a href="https://sos.wv.gov/elections/Pages/default.aspx">West Virginia Secretary of State</a>.</p>
+
+  <NextRung next="report" />
+  <p class="meta">We describe when and how decisions are made. We do not take a side on any plan, budget or levy. Dates and amounts can change, so check the city's documents. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
