@@ -43,6 +43,7 @@ const hoursData = r.opening_hours && r.hours ? JSON.stringify(r.opening_hours) :
   {tags.length > 0 && <ul class="place-tags">{tags.map((t) => <li><Icon name={t.icon} /><span>{t.text}</span></li>)}</ul>}
   <p><strong>Who it is for:</strong>{' '}{r.who_it_is_for}</p>
   <p><strong>How to get in:</strong>{' '}{r.what_to_do}</p>
+  {r.steps?.length > 0 && <ol class="card-steps">{r.steps.map((t) => <li>{t}</li>)}</ol>}
   {r.access && <p><strong>Access:</strong>{' '}{r.access}</p>}
   {r.cost && <p><strong>Cost:</strong>{' '}{r.cost === 'free' ? 'Free.' : r.cost}</p>}
   <Actions callFirst phone={r.contact.phone} phoneLabel={r.title} sms={textLine} smsLabel={`${r.title}, send your ZIP code`} place={r.contact.place} about={r.title} />
