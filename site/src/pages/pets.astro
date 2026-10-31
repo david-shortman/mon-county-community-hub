@@ -4,12 +4,11 @@
 // code or group page on 2026-10-31. Left off until a person confirms them:
 // shelter adoption fees and hours (county and shelter pages differ), how to
 // buy a dog tag, the Humane Society (its site blocked us), city pet rules.
-// What to do after a bite is in a separate PR for David (emergency steps).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "living-here", topic: "pets", label: "Pets and animals", summary: "Found or lost a pet, adopt, low cost spay, neuter and shots, dog tags, the leash law, and if you can't keep your pet" };
+export const page = { door: "living-here", topic: "pets", label: "Pets and animals", summary: "Found or lost a pet, adopt, low cost spay, neuter and shots, dog tags, the leash law, if you can't keep your pet, and fostering or volunteering" };
 ---
 <Base title="Pets and animals in Morgantown and Mon County, WV" description="Pets in Monongalia County, WV: report a stray or found dog, find a lost pet at the county shelter, adopt a dog or cat, low cost spay, neuter and rabies shots, county dog tags and the leash law, and options if you can't keep your pet.">
   <h1>Pets and animals</h1>
@@ -20,6 +19,9 @@ export const page = { door: "living-here", topic: "pets", label: "Pets and anima
 
   <h2 id="lost">Lost your pet</h2>
   <ResourceCard r={resource('mccac-lost-pet')} showCost />
+
+  <h2 id="bite">Bitten or scratched by an animal</h2>
+  <ResourceCard r={resource('animal-bite-rabies')} />
 
   <h2 id="adopt">Adopt a dog or cat</h2>
   <ResourceCard r={resource('mccac-adopt-a-dog-or-cat')} showCost />
@@ -39,6 +41,10 @@ export const page = { door: "living-here", topic: "pets", label: "Pets and anima
 
   <h2 id="rehome">If you can't keep your pet</h2>
   <ResourceCard r={resource('mccac-rehoming-your-pet')} />
+
+  <h2 id="help-animals">Help animals: foster or volunteer</h2>
+  <p>Can't adopt? You can foster a pet for a while or give a few hours.</p>
+  <ResourceCard r={resource('animal-friends-volunteer')} />
 
   <p class="meta">Sources checked October 31, 2026. The county's page and the shelter's own site list different adoption fees and hours, so call the shelter to ask. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

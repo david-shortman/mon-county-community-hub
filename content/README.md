@@ -613,3 +613,11 @@ Neither folder shows on the site. Both feed issues for a person, from the daily 
 
 - `watch/`: pages a robot reads every day, comparing only the part between `start` and `end` (#166). Optional list fields: `season` (`"11-01 to 03-31"`), `words`, `todo`, `plan`. A change opens or comments on one issue per list. Field notes are at the top of `watch/food.yaml` and `watch/shelter.yaml`.
 - `checklists/`: what a robot cannot read (#752, #718, #793). One standing issue per file, refreshed each week. Item fields: `text`, `url`, `when` (`month` or `quarter`: only in the first week of one), `months` (only in those months), `from` (not before that date), `run` (a computed list: `secondhand-due`, `past-sale-dates`, `better-stale-soon`). Preview with `npm run checklists` in `site/`.
+
+## `translations/<lang>/<kind>/<name>.yaml`: other languages (not on the site yet)
+
+Sidecar files with reviewed translations of a record, page or part. They hold only words, never facts: numbers, hours, addresses and links always come from the English record. No language is turned on yet (#1067). Schema, the staleness hash and how to add one: [`docs/process/translations.md`](../docs/process/translations.md).
+
+## `agendas/<body>-<date>.yaml`: plain-language agenda guides (#529)
+
+One file per coming City Council, County Commission or Board of Education meeting with a posted agenda, shown on `/meetings/agendas/` until the meeting day passes. Every agenda item keeps its exact title, plus a `kind` and one neutral `line`. Neutrality rules: [`docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md`](../docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md). Fields, kinds and the weekly steps: [`docs/process/agenda-guides.md`](../docs/process/agenda-guides.md). `npm run check-content` checks the fields and fails a line with a judging word or an em dash (`site/src/lib/agendas.mjs`).

@@ -2,17 +2,29 @@
 import Base from '../../layouts/Base.astro';
 import HelpNow from '../../components/HelpNow.astro';
 import EventCard from '../../components/EventCard.astro';
-import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate, ymd } from '../../lib/content.mjs';
+import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate, ymd, chipDate, relativeLabel } from '../../lib/content.mjs';
+import { slugify } from '../../lib/feeds/util.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: "dates", label: "Dates and deadlines", summary: "Application windows, deadlines and community dates" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
 const items = upcoming(await loadCalendarWithFeeds(), today, 62);
+// "This week" lead block (#199): what starts, ends or is happening in the
+// next 7 days, as short lines that jump to each full card below.
+const weekEnd = new Date(`${today}T12:00:00Z`); weekEnd.setUTCDate(weekEnd.getUTCDate() + 7);
+const weekEndYmd = weekEnd.toISOString().slice(0, 10);
+const thisWeek = items.filter((e) => e.starts <= weekEndYmd).filter((e) => e.starts >= today || e.ends <= weekEndYmd).slice(0, 8);
 const now = items.filter((e) => e.starts <= today);
 const later = items.filter((e) => e.starts > today);
 // The page date is never older than an item's checked date (#51): the build
 // can run late in the evening, Morgantown time, after a check was logged.
 const updated = [today, ...items.flatMap((e) => (e.sources ?? []).map((s) => ymd(s.checked)))].filter(Boolean).sort().at(-1);
+// Dates by town (#395): only entries whose record names a town. Works with no
+// script: each town is a link to its own short list further down the page.
+// Towns outside Monongalia County still show in the full list, just not by town (Fairmont is in Marion County).
+const OUTSIDE_COUNTY = new Set(['Fairmont']);
+const towns = [...new Set(items.map((e) => e.town).filter((t) => t && !OUTSIDE_COUNTY.has(t)))].sort()
+  .map((t) => ({ name: t, id: `town-${slugify(t)}`, items: items.filter((e) => e.town === t) }));
 const icsHttp = new URL(`${base}/calendar.ics`, Astro.site).href;
 const icsWebcal = icsHttp.replace(/^https?:/, 'webcal:');
 const icsGoogle = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(icsWebcal)}`;
@@ -21,6 +33,17 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
 <Base help title="Dates and deadlines in Mon County, WV" description="Community dates, application windows and deadlines in Mon County for this month and next.">
   <h1>Dates and deadlines in Mon County</h1>
   <p class="lede">Community events, application windows and deadlines for this month and next. Updated {prettyDate(updated)}.</p>
+  {thisWeek.length > 0 && (
+    <section class="week" aria-labelledby="week-h">
+      <h2 id="week-h">This week</h2>
+      <ul>
+        {thisWeek.map((e) => (
+          <li><a href={`#${e.slug}`}><span class="day">{e.starts >= today ? chipDate(e.starts, today) : `Ends ${chipDate(e.ends, today)}`}</span> <span class="what">{e.title}</span></a> <span class="rel" data-starts={e.starts} data-ends={e.ends}>{relativeLabel(e.starts, e.ends, today)}</span></li>
+        ))}
+      </ul>
+      <p class="meta"><a href="#dates">All dates</a> · <a href={`${base}/calendar/month/`}>This month on one page</a></p>
+    </section>
+  )}
   <section class="add-cal" aria-labelledby="add-cal-h">
     <h2 id="add-cal-h">Add to your calendar</h2>
     <p>Pick the app you use. New dates show up on their own. Dates can change, so check the source before you go. The Google and Outlook.com buttons open their own websites.</p>
@@ -49,11 +72,45 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
 
   <HelpNow />
 
+  {towns.length > 0 && (
+    <nav class="town-pick" aria-labelledby="town-pick-h">
+      <h2 id="town-pick-h">Dates by town</h2>
+      <ul>{towns.map((t) => <li><a href={`#${t.id}`}>{t.name} <span class="count">({t.items.length})</span></a></li>)}</ul>
+      <p class="meta">Only dates whose source names the town are listed by town. The full list is below.</p>
+    </nav>
+  )}
+
   <h2 id="dates">Open now</h2>
   {now.length ? now.map((e) => <EventCard e={e} />) : <p>Nothing is open right now on our list. If you need help this week, call <a href="tel:211">211</a> and tell them what you need.</p>}
 
   <h2>Coming up</h2>
   {later.length ? later.map((e) => <EventCard e={e} />) : <p>We have no more dates in the next two months. Dates are added as we check them, so look again soon. For help now, call <a href="tel:211">211</a>.</p>}
 
+  {towns.length > 0 && (
+    <section aria-labelledby="by-town-h">
+      <h2 id="by-town-h">Dates by town</h2>
+      {towns.map((t) => (
+        <>
+          <h3 id={t.id}>{t.name}</h3>
+          <ul class="topic-list">{t.items.map((e) => <li><a href={`#${e.slug}`}>{e.title}</a><span class="hint">{prettyDate(e.starts)}{e.ends !== e.starts && ` to ${prettyDate(e.ends)}`}</span></li>)}</ul>
+        </>
+      ))}
+    </section>
+  )}
+
   <p class="meta">Know a date that should be here? <a href={fixFormUrl({ page: Astro.url.pathname })}>Suggest it</a>.</p>
 </Base>
+
+<style>
+  .town-pick ul { list-style: none; margin: 8px 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .town-pick a { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 14px; border: 1.5px solid var(--accent); border-radius: 999px; font-weight: 600; text-decoration: none; background: var(--card); }
+  .town-pick a:hover { background: var(--accent-bg); }
+  .town-pick .count { color: var(--muted); font-weight: 400; }
+  .week ul { list-style: none; padding: 0; margin: 0; }
+  .week li { border-top: 1px solid var(--line); padding: 8px 0; }
+  .week li:last-child { border-bottom: 1px solid var(--line); }
+  .week a { display: inline-block; padding: 2px 0; text-decoration: none; }
+  .week .day { font-weight: 700; color: var(--accent); margin-right: 6px; }
+  .week .what { text-decoration: underline; }
+  .week .rel { color: var(--muted); font-size: 0.95rem; }
+</style>

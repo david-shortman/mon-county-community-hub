@@ -1,0 +1,10 @@
+name: Internal Revenue Service (IRS)
+slug: internal-revenue-service
+kind: government
+website: https://www.irs.gov/
+summary: The federal tax agency. It runs the free VITA and TCE tax help programs with local partners, the IRS Free File program, and the Earned Income Tax Credit.
+topics: [taxes, money]
+area: national
+sources:
+  - url: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers
+    checked: 2026-10-31
