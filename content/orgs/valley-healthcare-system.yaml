@@ -1,0 +1,15 @@
+name: Valley HealthCare System
+slug: valley-healthcare-system
+kind: nonprofit
+website: https://www.valleyhealthcare.org/
+phone: "304-296-1731"
+summary: A behavioral health provider for Marion, Monongalia, Preston and Taylor counties, with its main office on Scott Avenue in Morgantown. It offers a 24/7 crisis line, a walk-in crisis clinic, counseling, psychiatry and substance use treatment.
+topics: [health]
+area: monongalia-county
+sources:
+  - url: https://www.valleyhealthcare.org/
+    checked: 2026-10-30
+  - url: https://www.valleyhealthcare.org/crisis-services-1
+    checked: 2026-10-30
+  - url: https://projects.propublica.org/nonprofits/organizations/550483988
+    checked: 2026-10-30
