@@ -53,6 +53,14 @@ steps:
     when: week
     resource: region-vi-career-connections
     text: Ages 16 to 24 and out of school? Call Career Connections about job and training help.
+  school-enroll:
+    when: week
+    resource: mcs-enroll-and-find-your-school
+    text: Look up your address on the district's map to find your school, then contact that school to enroll.
+  school-bus:
+    when: week
+    resource: mcs-school-buses
+    text: Find your child's bus times, and fill out the bus form to get delay alerts.
 situations:
   - id: baby-growth
     label: I'm worried about how my baby or toddler is growing
@@ -66,6 +74,10 @@ situations:
     label: I want things to do with my young child
     page: /families-and-kids/
     steps: [starting-points, story-time]
+  - id: school-age
+    label: My child is starting school, or needs a bus or after-school program
+    page: /school-age/
+    steps: [school-enroll, school-bus]
   - id: job
     label: I need a job or job training
     page: /work-and-learning/
