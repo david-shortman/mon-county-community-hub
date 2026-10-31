@@ -1,0 +1,6 @@
+# 2026-10-31: Internet at home page and library Wi-Fi (#667, #666, part of #668)
+
+- **Considered:** people who work from home, or have slow or no internet, asked which service reaches them, where to report bad service and where to get online for free (research in `docs/groups/remote-workers.md`, #278).
+- **Chose:** a new `/internet/` page in the Living here door with the state's broadband map, the state speed test and survey, the Attorney General's broadband complaint, the state's BEAD summary quoted in its own words, and the library's free Wi-Fi, computers and meeting rooms. New records: orgs `wv-office-of-broadband` and `wv-attorney-general`, resources `wv-broadband-speed-test`, `wv-ag-broadband-complaint` and `mympls-wifi-computers-and-rooms`. The Lifeline section shows only once its record from #735 is merged, so this page adds no benefit facts of its own.
+- **Left off:** the FCC National Broadband Map, county broadband projects, Mon County's numbers in the state summary, the end of the ACP and internet companies' low-cost plans, until a person confirms them (#665).
+- **Next:** links to `/internet/#lifeline` from `/utility-bills/` and `/money/`, in a separate PR that waits for David.

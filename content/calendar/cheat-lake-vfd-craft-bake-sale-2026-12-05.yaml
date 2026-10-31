@@ -7,7 +7,11 @@ what_to_do: Check the fire department's events page for the time before you go.
 url: https://www.cheatlakefire.org/events
 topics: [community]
 place: 409 Fairchance Road, Morgantown, WV
+town: Cheat Lake
 venue: cheat-lake-vfd-hall
 sources:
   - url: https://www.cheatlakefire.org/events
     checked: 2026-10-30
+  - url: https://calendar.google.com/calendar/ical/contact%40cheatlakevfd.org/public/basic.ics
+    checked: 2026-10-30
+    name: Cheat Lake VFD's public calendar feed (shown on its events page)
