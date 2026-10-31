@@ -169,7 +169,10 @@
       "sources[].url",
       "sources[].checked",
       "sources[].name",
-      "phone_confirmed"
+      "phone_confirmed",
+      "cost",
+      "venue",
+      "interests"
     ]
   },
   "index": [
