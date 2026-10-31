@@ -4,6 +4,7 @@ org: republic-services
 topics: [recycling]
 who_it_is_for: Anyone with trash or recycling to drop off. It does not take tires.
 hours: Monday to Friday, 5:30 a.m. to 3 p.m. Saturday, 7 a.m. to 11 a.m. Closed on New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day and Christmas Day
+town: Westover
 opening_hours:
   - days: [mon, tue, wed, thu, fri]
     opens: "05:30"
