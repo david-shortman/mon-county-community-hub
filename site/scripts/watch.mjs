@@ -210,7 +210,7 @@ export function alertMd(g, { runUrl = '', today = '' } = {}) {
 }
 
 // ---------- self-test ----------
-function selfTest() {
+async function selfTest() {
   const fails = [];
   const expect = (cond, msg) => { if (!cond) fails.push(msg); };
   const page = 'Welcome! News: Oct 3 bake sale. Food Pantry Hours Monday to Wednesday, 9:00 a.m. \u2013 12:00 p.m. Thursday 1 to 3 pm Contact us';
@@ -257,6 +257,13 @@ function selfTest() {
   expect(down.state['https://a.example/']?.h === first.state['https://a.example/'].h, 'a failed fetch should keep the last good state');
   expect(alertMd(moved.groups[0], { today: '2026-11-01' }).includes('Never copy hours'), 'the issue should say never to copy hours without reading');
   expect(!/\u2014/.test(alertMd(moved.groups[0]) + watchMd(moved)), 'no em dashes in issue text');
+
+  // The saved state is packed to fit in an issue body (check-sources.mjs).
+  const { packState, unpackState } = await import('./check-sources.mjs');
+  const st = { 'https://x.example/': { f: 'abc', since: '2026-10-31' }, '~watch': { 'https://a.example/': { h: 'h1', miss: 'quote' } } };
+  const back = unpackState(JSON.parse(JSON.stringify(packState(st))), ['https://x.example/'], ['https://a.example/']);
+  expect(back['https://x.example/']?.f === 'abc' && back['~watch']['https://a.example/']?.miss === 'quote', 'packed state should read back');
+  expect(unpackState({ 'https://x.example/': { f: 'abc' } }, [])['https://x.example/'].f === 'abc', 'old state should still read');
 
   // The real watch files.
   const real = loadWatch();

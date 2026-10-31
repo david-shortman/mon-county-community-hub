@@ -19,6 +19,7 @@
 // Plain fetch on purpose: the repo allows only a short list of actions.
 import fs from 'node:fs';
 import { alertMd } from './watch.mjs';
+import { packState } from './check-sources.mjs';
 
 const LABEL = 'source-check';
 const TODO_LABEL = 'for:duet';
@@ -50,7 +51,7 @@ export function issueBody(report, md, runUrl) {
     `Latest run: ${runUrl}`,
     '',
   ].join('\n');
-  const state = `\n<!-- source-state: ${JSON.stringify(report.state)} -->`;
+  const state = `\n<!-- source-state: ${JSON.stringify(packState(report.state))} -->`;
   let text = md;
   const room = MAX_BODY - head.length - state.length - 200;
   if (text.length > room) text = `${text.slice(0, room)}\n\n(Cut short. The full list is in the run summary.)`;

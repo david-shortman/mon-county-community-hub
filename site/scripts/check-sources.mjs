@@ -515,6 +515,39 @@ export function reportMd(rep, { cap = 40 } = {}) {
   return L.join('\n');
 }
 
+// ---------- saved state ----------
+// The state rides in a hidden comment in the Source check issue, whose body
+// GitHub caps at 65,536 characters. With 600+ sources, url keys alone fill it,
+// so it is stored packed: a short hash of each url and only the fingerprint
+// ({ v: 2, s: { key: f }, w: { key: 'h' or 'h|miss' } }). Reading needs the
+// urls, which the registry and the watch list give.
+export const stateKey = (url) => crypto.createHash('sha256').update(url).digest('hex').slice(0, 10);
+
+export function packState(state) {
+  const out = { v: 2, s: {}, w: {} };
+  for (const [url, v] of Object.entries(state || {})) {
+    if (url === '~watch') continue;
+    if (v?.f) out.s[stateKey(url)] = v.f;
+  }
+  for (const [url, v] of Object.entries(state?.['~watch'] || {})) if (v?.h) out.w[stateKey(url)] = v.miss ? `${v.h}|${v.miss}` : v.h;
+  return out;
+}
+
+// Back to { url: { f }, '~watch': { url: { h, miss } } }. Old unpacked state
+// (url keys) passes through unchanged.
+export function unpackState(raw, urls = [], watchUrls = []) {
+  if (raw?.v !== 2) return raw || {};
+  const out = { '~watch': {} };
+  for (const u of urls) { const f = raw.s?.[stateKey(u)]; if (f) out[u] = { f }; }
+  for (const u of watchUrls) {
+    const v = raw.w?.[stateKey(u)];
+    if (!v) continue;
+    const [h, miss] = v.split('|');
+    out['~watch'][u] = miss ? { h, miss } : { h };
+  }
+  return out;
+}
+
 // ---------- main ----------
 async function main() {
   const args = process.argv.slice(2);
@@ -522,8 +555,9 @@ async function main() {
   const rules = loadRules();
   const registry = buildRegistry({ rules });
   if (opt('registry')) fs.writeFileSync(opt('registry'), JSON.stringify(registry.sources, null, 2));
-  const prev = opt('state-in') && fs.existsSync(opt('state-in')) ? JSON.parse(fs.readFileSync(opt('state-in'), 'utf8')) : {};
   const watchGroups = loadWatch();
+  const rawPrev = opt('state-in') && fs.existsSync(opt('state-in')) ? JSON.parse(fs.readFileSync(opt('state-in'), 'utf8')) : {};
+  const prev = unpackState(rawPrev, registry.sources.map((s) => s.url), [...watchedUrls(watchGroups)]);
   const results = await checkAll(registry, {
     helpNowOnly: args.includes('--help-now-only'),
     limit: opt('limit') ? Number(opt('limit')) : Infinity,
@@ -537,7 +571,7 @@ async function main() {
   rep.state['~watch'] = watch.state;
   const md = `${reportMd(rep)}\n\n${watchMd(watch)}`;
   if (opt('json')) fs.writeFileSync(opt('json'), JSON.stringify(rep, null, 2));
-  if (opt('state-out')) fs.writeFileSync(opt('state-out'), JSON.stringify(rep.state));
+  if (opt('state-out')) fs.writeFileSync(opt('state-out'), JSON.stringify(packState(rep.state)));
   if (opt('md')) fs.writeFileSync(opt('md'), md);
   else console.log(md);
 }
