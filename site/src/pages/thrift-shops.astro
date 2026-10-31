@@ -6,6 +6,8 @@
 import Base from '../layouts/Base.astro';
 import ShopCard from '../components/ShopCard.astro';
 import AreaPicker from '../components/AreaPicker.astro';
+// Areas that share a name with a town page (#1120).
+const TOWN_PAGES = { westover: 'Westover', 'cheat-lake': 'Cheat Lake' };
 import { loadSecondhand, SECONDHAND_AREAS, SECONDHAND_GOODS } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "secondhand", label: "Thrift and resale shops", summary: "Secondhand shops by area: what each sells, which ones buy from you, and which fund a local cause" };
@@ -33,7 +35,7 @@ const causes = shops.filter((s) => s.funds_local_cause);
     <p>By area: {areas.map((a, i) => <>{i > 0 && ' · '}<a href={`#area-${a.slug}`}>{a.name}</a></>)}</p>
   </nav>
 
-  <AreaPicker areas={areas.map((a) => ({ slug: a.slug, name: a.name }))} />
+  <AreaPicker areas={areas.map((a) => ({ slug: a.slug, name: a.name, town: TOWN_PAGES[a.slug] && { name: TOWN_PAGES[a.slug], href: `${base}/towns/${a.slug}/` } }))} />
 
   <div class="area-group">
   {areas.map((a) => (
