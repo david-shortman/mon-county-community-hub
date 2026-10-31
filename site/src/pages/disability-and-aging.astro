@@ -1,26 +1,44 @@
 ---
-// Disability and aging (#227, part of #210). First slice: who serves Mon
-// County, from each group's own site. The Medicaid waiver guide comes next.
+// Disability and aging (#227, part of #210). Who serves Mon County, from each
+// group's own site. Devices, school, rights, recreation and caregiver help
+// added in #579, #581, #582, #583 and #584 (research: docs/groups/disability-caregivers.md).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-export const page = { door: "family", topic: "disability", label: "Disability and aging", summary: "Independent living help, job help for people with disabilities, and Medicare help" };
+export const page = { door: "family", topic: "disability", label: "Disability and aging", summary: "Independent living, devices, special education, your rights, recreation, caregiver help and Medicare help" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 ---
-<Base title="Disability and aging help in Morgantown and Mon County" description="Free independent living help from LiveAbility in Morgantown, job help for people with disabilities from DRS, and free Medicare help from WV SHIP.">
+<Base title="Disability and aging help in Morgantown and Mon County" description="Free independent living help from LiveAbility in Morgantown, free device loans from WVATS, special education contacts, Disability Rights of WV, SteppingStones and Special Olympics, dementia caregiver groups, job help from DRS, and free Medicare help from WV SHIP.">
   <h1>Help with a disability, or as you get older</h1>
   <p class="lede">For help living on your own terms with a disability, call LiveAbility in Morgantown. For help getting or keeping a job, call DRS. For Medicare questions, call WV SHIP.</p>
 
   <h2>Living on your own terms</h2>
   {r('liveability-morgantown') && <ResourceCard r={r('liveability-morgantown')} />}
 
+  <h2>Try, borrow or get a free used device</h2>
+  {r('wvats-device-loans') && <ResourceCard r={r('wvats-device-loans')} />}
+
   <h2>Care at home instead of a nursing home</h2>
   <p>West Virginia Medicaid has four programs that pay for care at home for people who would otherwise need a nursing home or other facility. See <a href={`${base}/medicaid-waivers/`}>Getting care at home through Medicaid</a>: who each is for, how to start, and who to call.</p>
 
   <h2>Getting or keeping a job</h2>
   {r('drs-morgantown-office') && <ResourceCard r={r('drs-morgantown-office')} showCost />}
+
+  <h2>Special education at school</h2>
+  {r('mcs-special-education') && <ResourceCard r={r('mcs-special-education')} />}
+  <p>For children under 3, see <a href={`${base}/families-and-kids/`}>Families and kids</a> for WV Birth to Three.</p>
+
+  <h2>Know your rights</h2>
+  {r('drwv-intake') && <ResourceCard r={r('drwv-intake')} />}
+
+  <h2>Sports, swimming and fun</h2>
+  {r('steppingstones-recreation') && <ResourceCard r={r('steppingstones-recreation')} showCost />}
+  {r('sowv-become-an-athlete') && <ResourceCard r={r('sowv-become-an-athlete')} />}
+
+  <h2>If you care for someone with dementia</h2>
+  {r('alz-wv-caregiver-groups') && <ResourceCard r={r('alz-wv-caregiver-groups')} />}
 
   <h2>Medicare and getting older</h2>
   {r('wv-ship-medicare-counseling') && <ResourceCard r={r('wv-ship-medicare-counseling')} />}
