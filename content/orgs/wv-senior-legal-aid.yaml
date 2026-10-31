@@ -1,0 +1,13 @@
+name: West Virginia Senior Legal Aid
+slug: wv-senior-legal-aid
+kind: nonprofit
+website: https://www.seniorlegalaid.org/
+phone: "800-229-5068"
+summary: Free civil legal help for West Virginians age 60 and older. Its office is in Morgantown.
+topics: [legal]
+area: statewide
+sources:
+  - url: https://www.seniorlegalaid.org/
+    checked: 2026-10-31
+  - url: http://www.wvseniorservices.gov/StayingSafe/WestVirginiaSeniorLegalAid/tabid/82/Default.aspx
+    checked: 2026-10-31
