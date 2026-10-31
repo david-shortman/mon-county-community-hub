@@ -2,15 +2,36 @@
 // Starting page for people new to Mon County (#270, epic #261). Links only;
 // research and gaps: docs/groups/new-residents.md. The step-by-step setup
 // lives on /moving-here/ (#204); this page does not repeat it.
+// "Your first 30 days" (#623) is an ordered list at the top, so there is one
+// newcomer page, not two. Each step is one line and a link, and states no
+// fact that is not on the linked page. A step shows only once its page
+// exists (who serves my address waits on #204; a find-a-doctor page waits on
+// the Get care lane).
 import Base from '../../layouts/Base.astro';
 import GroupStart from '../../components/GroupStart.astro';
-export const page = { door: "living-here", topic: "moving", label: "New to Mon County", summary: "Start your utilities, learn your trash day, find care, and meet people, in one place" };
+import { loadPages } from '../../lib/pages.mjs';
+export const page = { door: "living-here", topic: "moving", label: "New to Mon County", summary: "Your first 30 days: utilities, license and plates, voting, a library card, care, and meeting people" };
+const pages = await loadPages();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const first30 = [
+  { href: '/moving-here/', label: 'Start power, water, gas and trash', text: 'ask who serves the home, then call each company a few days before you move in.' },
+  { href: '/who-serves-me/', label: 'Find out who serves your address', text: 'pick your town, or outside any town, to see who to call for police, trash, water and streets.' },
+  { href: '/drivers-license/', label: 'Switch your license and plates', text: 'the DMV says to title and register your vehicle within 30 days of becoming a resident.' },
+  { href: '/vote/', label: 'Register to vote', text: 'online or at the County Clerk, then check where you vote.' },
+  { href: '/meet-people/#library-card', label: 'Get a library card', text: 'bring proof of who you are and of your West Virginia address.' },
+  { href: '/care/', label: 'Find care', text: 'a dentist, help paying for medicine, shots and staying healthy.' },
+  { href: '/meet-people/', label: 'Meet people', text: 'free library programs and your neighborhood association.' },
+].filter((s) => pages.has(s.href.split(/[?#]/)[0]));
 const sections = [
   { title: 'Set up your home', links: [
     { href: '/moving-here/', label: 'Start power, water, gas and trash', text: 'who serves homes here and how to start service' },
     { href: '/living-here/?pick=pickup', label: 'Your trash pickup day', text: 'find your day' },
     { href: '/recycling/', text: 'the curbside bin, and where to take hard items' },
     { href: '/flood-zone/', text: 'check a home before you buy or rent' },
+  ] },
+  { title: 'License, plates and voting', links: [
+    { href: '/drivers-license/', text: 'the DMV rules for new residents, and the Morgantown DMV office' },
+    { href: '/vote/', text: 'register, check your registration and find your polling place' },
   ] },
   { title: 'Find care', links: [
     { href: '/care/', text: 'a dentist, Medicare, shots and staying healthy' },
@@ -23,13 +44,28 @@ const sections = [
     { href: '/work-and-learning/', text: 'job help, adult classes, and free reading and English lessons' },
   ] },
   { title: 'Get to know the place', links: [
+    { href: '/meet-people/', text: 'a library card, free library programs, and neighborhood associations' },
     { href: '/calendar/month/', text: 'what is happening in Mon County this month' },
     { href: '/make-it-better/', text: 'help improve your town, or serve on a city board' },
   ] },
 ];
 ---
-<Base title="New to Morgantown and Mon County: where to start" description="A starting page for people who just moved to Monongalia County: start utilities and trash, find care, kids and school, work and English lessons, and what is happening this month.">
+<Base title="New to Morgantown and Mon County: your first 30 days" description="A starting page for people who just moved to Monongalia County: a first 30 days checklist (utilities, license and plates, voting, a library card, care, meeting people), plus links for trash, kids and school, and work and English lessons.">
   <h1>New to Mon County</h1>
   <p class="lede">Welcome. Pick what you need first. Each link goes to a page with local phone numbers and where we found them.</p>
+  {first30.length > 0 && (
+    <section aria-labelledby="first-30">
+      <h2 id="first-30">Your first 30 days</h2>
+      <p>A rough order to go in. Each step links to a page with the details.</p>
+      <ol class="first-30">
+        {first30.map((s) => <li><a href={`${base}${s.href}`}><strong>{s.label}</strong></a>: {s.text}</li>)}
+      </ol>
+    </section>
+  )}
   <GroupStart sections={sections} />
 </Base>
+
+<style>
+  .first-30 { padding-left: 1.6rem; }
+  .first-30 li { margin-bottom: 0.6rem; }
+</style>
