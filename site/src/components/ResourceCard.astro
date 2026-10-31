@@ -19,7 +19,7 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
 <article class="card resource" id={r.slug}>
   <h3>{r.title}</h3>
   {lead && <p><strong>{lead}</strong></p>}
-  <p>{r.who_it_is_for} {r.what_to_do}</p>
+  <p>{r.who_it_is_for}{' '}{r.what_to_do}</p>
   {showCost && r.cost && r.cost !== 'free' && <p><strong>Cost:</strong> {r.cost}</p>}
   <Actions callFirst
     phone={r.contact?.phone} phoneLabel={r.title}
