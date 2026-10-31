@@ -6,6 +6,7 @@ import path from 'node:path';
 const dist = new URL('../dist/', import.meta.url).pathname;
 const errors = [];
 const seenTitles = new Map();
+const noindexed = new Set();
 // Residents search with the place name ("shelter Morgantown WV"), so guide titles carry it (#143).
 const placeName = /Morgantown|Mon County|Monongalia/;
 const noPlaceNeeded = new Set(['404.html', 'about/index.html']);
@@ -33,7 +34,9 @@ for (const file of pages) {
   }
   if (!desc) errors.push(`${where}: missing meta description`);
   if (!/<html[^>]*\slang="/.test(html)) errors.push(`${where}: missing lang on <html>`);
-  if (!/<link rel="canonical" href="https?:\/\//.test(html)) errors.push(`${where}: missing canonical link`);
+  const noindex = /<meta name="robots" content="[^"]*noindex/.test(html);
+  if (noindex) noindexed.add(where);
+  if (!noindex && !/<link rel="canonical" href="https?:\/\//.test(html)) errors.push(`${where}: missing canonical link`);
   const canonical = html.match(/<link rel="canonical" href="([^"]*)"/)?.[1];
   // A canonical URL that redirects (folder without its trailing slash) wastes the crawl.
   if (canonical && !/(\/|\.\w+)$/.test(canonical)) errors.push(`${where}: canonical ${canonical} should end with /`);
@@ -60,6 +63,19 @@ if (fs.existsSync(sitemapFile) && fs.existsSync(llmsFile)) {
   const llms = fs.readFileSync(llmsFile, 'utf8');
   for (const [, loc] of fs.readFileSync(sitemapFile, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) {
     if (!llms.includes(`(${loc})`)) errors.push(`llms.txt: does not list ${loc}`);
+  }
+}
+
+// Every page is either in the sitemap or marked noindex, never both and never
+// neither, so search engines see exactly the pages we mean them to (#89).
+if (fs.existsSync(sitemapFile)) {
+  const site = 'https://everythingmorgantown.org/';
+  const inMap = new Set([...fs.readFileSync(sitemapFile, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, loc]) => loc));
+  for (const file of pages) {
+    const where = path.relative(dist, file);
+    const url = site + where.replace(/index\.html$/, '');
+    if (noindexed.has(where) && inMap.has(url)) errors.push(`${where}: marked noindex but listed in the sitemap`);
+    if (!noindexed.has(where) && !inMap.has(url)) errors.push(`${where}: not in the sitemap; add it, or pass noindex to Base if it should stay out of search`);
   }
 }
 
