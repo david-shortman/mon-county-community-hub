@@ -265,6 +265,14 @@ async function selfTest() {
   expect(back['https://x.example/']?.f === 'abc' && back['~watch']['https://a.example/']?.miss === 'quote', 'packed state should read back');
   expect(unpackState({ 'https://x.example/': { f: 'abc' } }, [])['https://x.example/'].f === 'abc', 'old state should still read');
 
+  const { pickForRun } = await import('./check-sources.mjs');
+  const many = Array.from({ length: 10 }, (_, i) => ({ url: `u${i}`, help_now: i === 9 }));
+  const d0 = pickForRun(many, 4, { keep: new Set(['u0']), day: 0 });
+  const d1 = pickForRun(many, 4, { keep: new Set(['u0']), day: 1 });
+  expect(d0.length === 4 && d0.some((x) => x.url === 'u0') && d0.some((x) => x.url === 'u9'), 'watched and Help now pages should always be fetched');
+  expect(d0.map((x) => x.url).join() !== d1.map((x) => x.url).join(), 'the rest should take turns by day');
+  expect(pickForRun(many.slice(0, 3), 4).length === 3, 'a small site should be fetched in full');
+
   // The real watch files.
   const real = loadWatch();
   for (const e of validateWatch(real)) fails.push(e);

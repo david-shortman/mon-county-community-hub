@@ -39,7 +39,7 @@ No free, public, current feed of Mon County pantry hours exists. The food bank's
 - **Facebook stays manual.** Meta's terms allow automated collection only through its API. Facebook-only groups are listed as `kind: facebook` and checked by a person on the sweep (#6). The watcher never fetches them.
 - **No page at all.** Listed as `kind: none` and handed to the call queue (#156).
 - **Blocked sites.** Some sites block automated sessions. Listed as `kind: blocked`, checked by a person in a browser.
-- **Politeness.** One run a day. Each site gets one request at a time, 1.5 seconds apart, or longer when its robots.txt sets a Crawl-delay (the city and United Way sites ask for 10 seconds; capped at 15). robots.txt is honored.
+- **Politeness.** One run a day. Each site gets one request at a time, 1.5 seconds apart, or longer when its robots.txt sets a Crawl-delay (the city and United Way sites ask for 10 seconds; capped at 15). robots.txt is honored. A slow site gets at most 8 minutes a run: watched and Help now pages always go, and its other sources take turns, a different slice each day, keeping their last result in between.
 - **Our own words.** Facts go on the site in our own plain words. The quote is kept only as proof in the watch list and the record.
 
 ## How often
