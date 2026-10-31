@@ -13,7 +13,32 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const doc = (p) => `${repo}/blob/main/${p}`;
 const tree = (p) => `${repo}/tree/main/${p}`;
+const wfFile = (f) => doc(`.github/workflows/${f}`);
 const example = doc('content/resources/mon-county-recycling-drop-off.yaml');
+// Real snippets, shortened. Copied from the files they name, so update them if those change.
+const recordSnippet = `title: County recycling drop-off center
+slug: mon-county-recycling-drop-off
+org: monongalia-county-commission
+topics: [recycling]
+hours: Monday to Friday, 7 a.m. to 3:25 p.m. per the center's site
+  (the county Solid Waste Authority's page says 3:30 p.m.). Closed weekends.
+cost: free
+sources:
+  - url: https://www.moncountyrecycling.com/
+    checked: 2026-10-30
+  - url: https://www.monongaliacountyswa.com/recycling
+    checked: 2026-10-30`;
+const pageSnippet = `export const page = {
+  door: "about",
+  label: "How this site works",
+  summary: "The people, AI and automatic checks behind each page",
+};`;
+const doorSnippet = `- slug: this-month
+  name: Get through this month
+  topics:
+    money: Bills and money
+    food: Food
+    housing: Rent and housing`;
 ---
 <Base title="How Everything Morgantown works" description="How Everything Morgantown finds, checks, sorts and publishes information about Morgantown and Mon County: the people, the AI, the automatic checks, and where it all lives.">
   <h1>How this site works</h1>
@@ -40,6 +65,7 @@ const example = doc('content/resources/mon-county-recycling-drop-off.yaml');
       <li><a href="#wrong">When something is wrong</a></li>
       <li><a href="#goal">What it's all for</a></li>
       <li><a href="#limits">What it can't do yet</a></li>
+      <li><a href="#under-the-hood">Under the hood</a></li>
     </ol>
   </nav>
 
@@ -123,8 +149,8 @@ const example = doc('content/resources/mon-county-recycling-drop-off.yaml');
   <h2 id="stored">Where it's kept</h2>
   <ul>
     <li><strong>The listings:</strong> one small text file each, for groups, programs, dates and places, in a <a href={tree('content')}>public folder</a>. <a href={doc('content/README.md')}>Our content guide</a> says what every field means.</li>
-    <li><strong>The site's code:</strong> in the same public place. Anyone can reuse it (MIT license). The listings are free to reuse with credit (CC BY 4.0).</li>
-    <li><strong>The record of work:</strong> every change is a public "pull request" with a note. There is a <a href={tree('docs/build-log')}>build log</a> of what was built and why, and a <a href={tree('docs/decisions')}>decision log</a>.</li>
+    <li><strong>The site's code:</strong> in the same public place. Anyone can copy and reuse the code for free. The listings are free to reuse too, as long as you say where they came from. <a href={`${base}/data/`}>Open data</a> names the licenses.</li>
+    <li><strong>The record of work:</strong> every change is posted on GitHub as a proposed change with a note on what changed and why, before it goes live. There is a <a href={tree('docs/build-log')}>build log</a> of what was built and why, and a <a href={tree('docs/decisions')}>decision log</a>.</li>
     <li><strong>For other apps:</strong> the <a href={`${base}/data/`}>open data files</a> and the calendar feed are made from the same files, so they always match the site.</li>
     <li><strong>Kept private:</strong> planning notes and notes about specific people. Never kept anywhere: passwords or private people's personal information.</li>
   </ul>
@@ -168,6 +194,37 @@ const example = doc('content/resources/mon-county-recycling-drop-off.yaml');
     <li><strong>AI can get things wrong.</strong> Please check details with the group before you act.</li>
   </ul>
   <p>Straight answers to tougher questions, like who pays for this and what happens if David stops, are on <a href={`${base}/hard-questions/`}>Hard questions</a>.</p>
+
+  <h2 id="under-the-hood">Under the hood</h2>
+  <p>This part is for people who want the technical details. You don't need it to use the site.</p>
+
+  <h3>Listings are small text files</h3>
+  <p>Each group, program, date or place is one file in <a href={tree('content')}>the content folder</a>, written in YAML, a simple "name: value" text format that people and AI can both edit. Groups are in <code>orgs/</code>, things you can use or do are in <code>resources/</code>, and dates are in <code>calendar/</code>. The file name matches the listing's short name (its "slug"). Here is part of the recycling center's file, shortened a little:</p>
+  <pre tabindex="0" aria-label="Part of a listing file"><code>{recordSnippet}</code></pre>
+  <p>A few things to notice. The <code>org</code> line points to the group's own file, so the group is written down once and every program links back to it. <code>topics</code> says where the listing shows up. Every listing needs a <code>sources</code> list, and every source needs a web address and the date it was read. The words stay close to the source, so when two sources disagree, the listing says so. <a href={doc('content/README.md')}>The content guide</a> lists every field and what it's for.</p>
+
+  <h3>Topics and doors are set in one file</h3>
+  <p><a href={doc('content/doors.yaml')}>One file</a> names the five doors and maps every topic to exactly one of them:</p>
+  <pre tabindex="0" aria-label="Part of the doors file"><code>{doorSnippet}</code></pre>
+  <p>Pages are written in Astro, a tool that turns templates into plain web pages, in <a href={tree('site/src/pages')}>one folder</a>. Each page starts with a short tag that says which door it belongs to. This page's tag is:</p>
+  <pre tabindex="0" aria-label="This page's tag"><code>{pageSnippet}</code></pre>
+  <p>The menus, door pages and Topics page are built from these tags (<a href={doc('site/src/lib/pages.mjs')}>the code that reads them</a>), so adding a page never means editing a menu by hand.</p>
+
+  <h3>A program checks the files before every build</h3>
+  <p><a href={doc('site/scripts/check-content.mjs')}>The content check</a> stops the build if a listing has no source, a source has no date or a date in the future, a field is missing, a program points to a group with no file, a topic has no door, or any text has an em dash. It warns about sources more than 6 months old.</p>
+
+  <h3>How the site is built and published</h3>
+  <p>On every change, <a href={wfFile('site.yml')}>the Site workflow</a> on GitHub runs the content check, then builds the whole site into plain web pages. More checks run after the build: page titles and other basics search engines need, color contrast, page weight, the data files, the calendar feed and reading grade. On proposed changes, it also runs an accessibility scan in a real browser, at phone width, in light and dark. When a change is merged, the same workflow publishes the site on GitHub Pages. It also rebuilds every morning.</p>
+  <p>The same build writes the <a href={`${base}/data/`}>open data files</a>, including a copy in Open Referral, a shared format help lines and referral tools read. There is also a small <a href={tree('apps/mcp')}>tool that lets AI apps read the data</a> and cite its sources.</p>
+
+  <h3>How the AI changes things</h3>
+  <ul>
+    <li><strong>Never straight to the live site.</strong> Each AI helper works on its own branch, a separate copy of the files named like <code>code/&lt;name&gt;</code> or <code>duet/&lt;name&gt;</code>, and opens a proposed change on GitHub.</li>
+    <li><strong>Checks run on the proposed change:</strong> the build and its checks, <a href={wfFile('claude-review.yml')}>the AI review</a>, and <a href={wfFile('high-stakes.yml')}>a program</a> that labels shelter, crisis, food and benefits changes for David.</li>
+    <li><strong>Most changes are merged by the helper that wrote them</strong> once checks pass. The ones on <a href={`${doc('docs/COORDINATION.md')}#when-a-pr-waits-for-david`}>this list</a> wait for David.</li>
+    <li><strong>Every change leaves a note.</strong> One file per entry in <a href={tree('docs/build-log')}>the build log</a> (what was considered, chosen and shipped), and one file per entry in <a href={tree('docs/decisions')}>the decision log</a> for choices that shape the project.</li>
+    <li><strong>Taking something down is one small edit.</strong> Adding a <code>hidden</code> block to a listing's file takes it off the site without deleting it. Removing the block puts it back.</li>
+  </ul>
 
   <h2>Read more</h2>
   <ul>
@@ -216,6 +273,8 @@ const example = doc('content/resources/mon-county-recycling-drop-off.yaml');
     td:first-child { font-weight: 700; white-space: nowrap; }
     @media (max-width: 30rem) { td:first-child { white-space: normal; } }
 
+    pre { overflow-x: auto; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; font-size: 0.9rem; line-height: 1.5; }
+    code { font-size: 0.95em; }
     .check { font-size: 0.95rem; }
     .limits li + li { margin-top: 6px; }
   </style>
