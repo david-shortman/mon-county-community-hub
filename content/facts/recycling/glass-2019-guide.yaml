@@ -1,0 +1,8 @@
+slug: glass-2019-guide
+text: "We could not find a current list from the city or hauler. The most recent clear guide we found is a [2019 Republic Services guide for Morgantown](https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-WV-service-guide-2019.pdf). It says glass food and beverage containers are accepted, and drinking glasses, ceramics and Pyrex are not. That guide is old, so confirm glass with the Solid Waste Authority before you rely on it."
+quote: "Glass: Only food or beverage containers of any color. ... Ceramics, drinking glasses, Pyrex, lightbulbs of any kind, mirrors, window glass"
+sources:
+  - url: https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-WV-service-guide-2019.pdf
+    name: Republic Services
+    checked: 2026-10-30
+recheck_days: 90    # an old guide; look for a newer one often (#25)

@@ -1,0 +1,398 @@
+# Every Mountain Line route on one phone page (#924, part of #393).
+# Days, first and last runs, run times and stops are copied from each route
+# page on busride.org (read 2026-10-31). "First run" and "last run" are when
+# the route starts its first and last trip, as Mountain Line uses them. The
+# dates on the PDF links are the "Effective" or "Vigente" dates printed on
+# each PDF. Timetables are left off: the PDFs are dated 2016 to 2025, two
+# disagree with their route page on hours (said on the page), and five more
+# (Blue, Brookhaven, Crown, Eastern Circulator, Pink) give a different run
+# time (checked 2026-10-31), see #393 and #407.
+slug: mountain-line-routes
+title: Mountain Line route schedules
+publisher: Mountain Line Transit Authority
+intro: Each route links its full schedule PDF from Mountain Line, with the date printed on that PDF. Some PDFs are several years old, so check the date.
+recheck_days: 60   # routes and times change each WVU semester
+sources:
+  - url: https://www.busride.org/4-orange-line
+    checked: 2026-10-31
+  - url: https://www.busride.org/6-gold-line
+    checked: 2026-10-31
+  - url: https://www.busride.org/7-red-line
+    checked: 2026-10-31
+  - url: https://www.busride.org/8-brookhaven
+    checked: 2026-10-31
+  - url: https://www.busride.org/9-purple-line
+    checked: 2026-10-31
+  - url: https://www.busride.org/11-cassville
+    checked: 2026-10-31
+  - url: https://www.busride.org/12-blue-line
+    checked: 2026-10-31
+  - url: https://www.busride.org/13-crown
+    checked: 2026-10-31
+  - url: https://www.busride.org/16-pink-line
+    checked: 2026-10-31
+  - url: https://www.busride.org/46-eastern-circulator
+    checked: 2026-10-31
+  - url: https://www.busride.org/47-northern-circulator
+    checked: 2026-10-31
+  - url: https://www.busride.org/50-don-knotts
+    checked: 2026-10-31
+  - url: https://www.busride.org/51-westridge-mylan
+    checked: 2026-10-31
+  - url: https://www.busride.org/52-wadestown
+    checked: 2026-10-31
+  - url: https://www.busride.org/2-dt-mall-pm
+    checked: 2026-10-31
+  - url: https://www.busride.org/1-campus-pm
+    checked: 2026-10-31
+  - url: https://www.busride.org/30-west-run
+    checked: 2026-10-31
+  - url: https://www.busride.org/38-blue-gold
+    checked: 2026-10-31
+  - url: https://www.busride.org/39-beechurst-express
+    checked: 2026-10-31
+  - url: https://www.busride.org/44-valley-view
+    checked: 2026-10-31
+  - url: https://www.busride.org/RideMon
+    checked: 2026-10-31
+sections:
+  - heading: "Routes in Morgantown and around the county"
+    id: city
+    items:
+      - name: "Route 4 Orange Line"
+        lines:
+          - "Monday to Saturday: first run 7 a.m., last run 7 p.m."
+          - "Monday to Friday, early buses to the Waterfront area and Dorsey Lane leave Pifer Terminal at 5:40 a.m. and 6:40 a.m."
+          - "One trip around the route: 60 minutes."
+          - "Stops along the way, in order: Pifer Terminal, Downtown, South Park, 1st Ward, Morgantown High School, White Park, MTEC, Dorsey Lane, Mountaineer Mall, Senior Monongalians, Giant Eagle, Public Safety, Unity Manor, Court House."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/4-orange-line
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Orange_2021.pdf
+            date: "Effective January, 2019"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_4.pdf
+            date: "Vigente en enero de 2019"
+      - name: "Route 6 Gold Line"
+        lines:
+          - "Monday to Friday: first run 6 a.m., last run 7 p.m."
+          - "Saturday and Sunday: first run 7 a.m., last run 7 p.m."
+          - "One trip around the route: 53 minutes."
+          - "Stops along the way, in order: Westover Terminal, Walmart/UTC, Target/Old Navy, Star City CVS, Towers, Mountaineer Station, Olive Garden/Red Lobster, Dicks Storefront, Mon County Ballpark, McDonald's Westover."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/6-gold-line
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/6+Gold+Line-4fa65455.pdf
+            date: "Effective July, 2025"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_6.pdf
+            date: "Vigente en agosto de 2021"
+      - name: "Route 7 Red Line"
+        lines:
+          - "Monday to Friday: first run 6:20 a.m., last run 6:30 p.m."
+          - "Saturday: first run 7:30 a.m., last run 6:30 p.m."
+          - "One trip around the route: 45 minutes."
+          - "The route page and the PDF differ: the route page says the first weekday run is 6:20 a.m. The PDF (effective August 2018) lists Monday to Friday service as 6:30 a.m. to 6:30 p.m."
+          - "Stops along the way, in order: Pifer Terminal, Downtown, Mountainlair, Law School, Towers, E. Moore Hall, Met Theatre, Colasante's Shelter."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/7-red-line
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Red%20Line%202022.pdf
+            date: "Effective August, 2018"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_7.pdf
+            date: "Vigente en agosto de 2018"
+      - name: "Route 8 Brookhaven"
+        lines:
+          - "Monday to Friday: first run 6:30 a.m., last run 7:30 p.m."
+          - "Saturday: first run 7:40 a.m., last run 7:30 p.m."
+          - "One trip around the route: 90 or 40 minutes (the route page says \"90/40 minutes\")."
+          - "Stops along the way, in order: Pifer Terminal, Downtown, Marilla Park, DMV, Sabraton Goodwill, Brookhaven, Brookhaven Fire Department, Public Safety Building, Colasante's Shelter."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/8-brookhaven
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/8.%20Brookhaven%202023.pdf
+            date: "Effective February 2023"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_8.pdf
+            date: "Vigente en febrero de 2023"
+      - name: "Route 9 Purple Line"
+        lines:
+          - "Monday to Saturday: first run 6:30 a.m., last run 7:15 p.m."
+          - "Sunday: first run 9:30 a.m., last run 9:30 p.m."
+          - "One trip around the route: 83 minutes."
+          - "Stops along the way, in order: Pifer Terminal, Downtown, Mountainlair, Suncrest Town Centre, Ruby, University Park, Towers, Chestnut Hill, E. Moore Hall, Colasante's Shelter."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/9-purple-line
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Purple_2021.pdf
+            date: "Effective August, 2021"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_9.pdf
+            date: "Vigente en agosto de 2018"
+      - name: "Route 11 Cassville"
+        lines:
+          - "Monday to Friday: first run 6 a.m., last run 7:30 p.m."
+          - "Saturday: first run 8 a.m., last run 7:40 p.m."
+          - "Sunday: first run 11 a.m., last run 6 p.m."
+          - "One trip around the route: 55 minutes."
+          - "Stops along the way, in order: Pifer Terminal, Westover Triangle, Granville VFD, Granville P&R, Bertha Hill, The Shack, Cassville, New Hill, Giant Eagle, Wal-mart/UTC, Old Navy, The Domain, Colasante's Shelter."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/11-cassville
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Cassville_2021.pdf
+            date: "Effective September, 2020"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_11.pdf
+            date: "Vigente septiembre de 2020"
+      - name: "Route 12 Blue Line"
+        lines:
+          - "Monday to Friday: first run 6 a.m., last run 5 p.m."
+          - "Saturday: first run 8 a.m., last run 4 p.m."
+          - "One trip around the route: 60 minutes."
+          - "Stops along the way, in order: Pifer Terminal, Downtown, Public Safety Building, Unity Manor, Woodland Terrace, Airport, Met Theatre, Colasante's Shelter."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/12-blue-line
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Blue_2021.pdf
+            date: "Effective January, 2019"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_12.pdf
+            date: "Vigente en enero de 2019"
+      - name: "Route 13 Crown"
+        lines:
+          - "Monday to Saturday: first run 7 a.m., last run 5:15 p.m."
+          - "One trip around the route: 70 minutes."
+          - "Stops along the way, in order: Pifer Terminal, Laurel Point, Arnettesville Elem., Westover Town Hall, Westwood Middle School, Booth, Opekisika Dam, Crown Turn Around, River Road VFD."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/13-crown
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Crown%20Jan%202024.pdf
+            date: "Effective January, 2024"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_13.pdf
+            date: "Vigente en enero de 2024"
+      - name: "Route 16 Pink Line"
+        lines:
+          - "Monday to Saturday: first run 7:15 a.m., last run 6:05 p.m."
+          - "One trip around the route: 40 minutes."
+          - "Stops along the way, in order: Pifer Terminal, Downtown, Unity Manor, Mileground Honda, Glenmark Center, Fort Pierpont, City Garden Apartments, College Park Apartments, Met Theatre, Colasante's Shelter."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/16-pink-line
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Pink_2021.pdf
+            date: "Effective August, 2021"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_16.pdf
+            date: "Vigente en agosto de 2018"
+      - name: "Route 46 Eastern Circulator"
+        lines:
+          - "Monday to Friday, all year: first run 6:25 a.m., last run 6:45 p.m."
+          - "Saturday: first run 6:45 a.m., last run 5:15 p.m."
+          - "One trip around the route: 60 minutes."
+          - "Stops along the way, in order: Sabraton Sheetz, Summer School Road, Dellslow, Tyrone Road, Snake Hill, Rolling Hill, Fort Pierpont, University High School, Mon-Fayette Industrial Park, Rock Forge Community House."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/46-eastern-circulator
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/EasternCirc_2021.pdf
+            date: "Effective January, 2019"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_46.pdf
+            date: "Vigente en enero de 2019"
+      - name: "Route 47 Northern Circulator"
+        lines:
+          - "Monday to Friday: first run 5:55 a.m., last run 6:55 p.m."
+          - "Saturday: first run 7:26 a.m., last run 6:55 p.m."
+          - "One trip around the route: 60 minutes."
+          - "Stops along the way, in order: Mountaineer Station, Unity House, Riverside Commons, Campus Evolution Villages, Independence Hills MHP, The Villages at West Run, North Hills, Mon General."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/47-northern-circulator
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/NorthernCirc_2021.pdf
+            date: "Effective August, 2018"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_47.pdf
+            date: "Vigente en agosto de 2018"
+      - name: "Route 50 Don Knotts"
+        lines:
+          - "Monday to Sunday: first run 7 a.m., last run 8 p.m."
+          - "One trip around the route: 51 minutes."
+          - "Stops along the way, in order: Pifer Terminal, Downtown, South University Plaza, Morgantown Motel, Valley Health, Hornbeck Wal-Mart, Dorsey's Knob, Waterfront."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/50-don-knotts
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/50%20Don%20Knotts-3af7387e.pdf
+            date: "Effective September, 2022"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_50.pdf
+            date: "Vigente septiembre de 2022"
+      - name: "Route 51 Westridge Mylan"
+        lines:
+          - "Monday to Friday: first run 7 a.m., last run 9 p.m."
+          - "Saturday: first run 8 a.m., last run 9 p.m."
+          - "Sunday: first run 11 a.m., last run 9 p.m."
+          - "One trip around the route: 60 minutes."
+          - "Stops along the way, in order: Pifer Terminal, Morgantown Mall, Westridge/Menards, Gateway Entrance, Mylan Park, PACE, Hope and Healing, Mylan Aquatic Center, Operation Welcome Home, Mylan Community Center."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/51-westridge-mylan
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/WRMylan_Rt51_2022.pdf
+            date: "Effective May, 2022"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_51.pdf
+            date: "Vigente en mayo de 2022"
+      - name: "Route 52 Wadestown"
+        lines:
+          - "Monday to Friday: first run 6:30 a.m., last run 7 p.m."
+          - "One trip around the route: 60 minutes."
+          - "The route page and the PDF differ: the route page says the last run is 7 p.m. The PDF (effective August 2018) lists Monday to Friday service as 6:30 a.m. to 5 p.m."
+          - "Stops along the way, in order: Westover Terminal, I79, University Town Centre, Jere, Cassville, New Hill, Core, Mason Dixon Park, Pintress, Blacksville, Clay Battelle High School, Bula, Wana, Wadestown."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/52-wadestown
+          - label: "Full schedule (PDF)"
+            url: https://irp-cdn.multiscreensite.com/869937e9/files/uploaded/Wadestown2020.pdf
+            date: "Effective August, 2018"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_52.pdf
+            date: "Vigente en agosto de 2018"
+  - heading: "Evening and late-night routes"
+    id: evening
+    items:
+      - name: "Route 2 Downtown Mall PM"
+        lines:
+          - "Monday to Saturday: first run 6 p.m., last run 11 p.m."
+          - "One trip around the route: 60 minutes."
+          - "Stops along the way, in order: Towers, Willowdale/Stadium, Sunnyside, Mountainlair, Boreman Hall, Courthouse, Westover Triangle, Westover Park & Ride, Pifer Terminal, The Commons/Gabes, Morgantown Mall Theater, Public Safety Building."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/2-dt-mall-pm
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/DT%20PM%20Mall_2021.pdf
+            date: "Effective August, 2018"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_2.pdf
+            date: "Vigente en agosto de 2018"
+      - name: "Route 1 Campus PM"
+        lines:
+          - "Thursday to Saturday: first run 6 p.m., last run 3:40 a.m."
+          - "Only during the WVU fall and spring sessions."
+          - "One trip around the route: 30 minutes."
+          - "Stops along the way, in order: Towers, University Park Apartments, Ruby, Valley View, Stewart Street, Sunnyside, Mountainlair, Court House, Spruce Street."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/1-campus-pm
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/1+Campus+PM-a18879c7.pdf
+            date: "Effective August, 2018"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_1-a7f91b3a.pdf
+            date: "Vigente en agosto de 2018"
+  - heading: "WVU campus routes"
+    id: campus
+    note: "Most of these run only during the WVU fall and spring sessions."
+    items:
+      - name: "Route 30 West Run"
+        lines:
+          - "Monday to Friday: first run 7:10 a.m., last run 7:50 p.m."
+          - "Thursday to Saturday nights: first run 9 p.m., last run 2:30 a.m."
+          - "Only during the WVU fall and spring sessions. The route page says there is no longer any summer service."
+          - "Express: it stops only at the stops listed, and you cannot flag it down between them."
+          - "Stops along the way, in order: West Run Complex, Glenmark & Bon Vista, Cedarwood Dr., STC Drive, Stewart Place/Lewis Street, Kingston & Stewart, Stewart & Protzman, Stewart & Willowdale, Stewart & University, Yoke Street, E.Moor Hall, Court House (High St.), Public Safety Bldg., Mountainlair, Shorty Anderson, STC/Chestnut Ridge."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/30-west-run
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/30+West+Run-f26d433f.pdf
+            date: "Effective July, 2025"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_30.pdf
+            date: "Vigente en enero de 2025"
+      - name: "Route 38 Blue & Gold"
+        lines:
+          - "During the WVU fall and spring sessions, including breaks: Monday to Friday, first run 6:40 a.m., last run 8:40 p.m. Saturday and Sunday, first run 3:20 p.m., last run 7:20 p.m."
+          - "During the WVU summer session: Monday to Friday, first run 6:40 a.m., last run 8:40 p.m. No weekend service in summer."
+          - "Express: it stops only at its set stops, and you cannot flag it down between them."
+          - "Stops along the way, in order: Towers, Law School, University, Grant Avenue, Life Sciences, Beechurst, Evansdale Crossing."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/38-blue-gold
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/38+Blue+-+Gold+Express-a248c9a5.pdf
+            date: "Effective July, 2025"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_38.pdf
+            date: "Vigente en agosto de 2021"
+      - name: "Route 39 Beechurst Express"
+        lines:
+          - "Monday to Friday: first run 8:10 a.m., last run 5:50 p.m."
+          - "Only during the WVU fall and spring sessions."
+          - "Express: it runs the opposite way from Route 38 and stops only at the stops listed."
+          - "Stops along the way, in order: Towers, CAC, Beechurst & 8th, Beechurst & 6th, Beechurst & 3rd, Life Sciences, Stewart St., University & Overhill, North Street, Law School, Evansdale McDonalds."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/39-beechurst-express
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Beechurst_2021.pdf
+            date: "Effective August, 2016"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_39.pdf
+            date: "Vigente en agosto de 2016"
+      - name: "Route 44 Valley View"
+        lines:
+          - "Monday to Friday: first run 7:30 a.m., last run 2:15 p.m."
+          - "Only during the WVU fall and spring sessions, including breaks. The route page says there is no longer summer service."
+          - "Stops along the way, in order: Valley View, Chestnut Ridge, Stewartstown Road, Falling Run, Life Sciences, B&E, Willowdale."
+        links:
+          - label: "Route page"
+            url: https://www.busride.org/44-valley-view
+          - label: "Full schedule (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/44+Valley+View.pdf
+            date: "Effective July, 2025"
+          - label: "Horario completo en español (PDF)"
+            lang: es
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_44.pdf
+            date: "Vigente en agosto de 2018"
+  - heading: "RideMon vans: Mountain Heights and Grafton Road"
+    id: ridemon
+    items:
+      - name: "RideMon"
+        lines:
+          - "Vans you request with an app, for people along the Mountain Heights (Rt. 14) and Grafton Road (Rt. 15) routes. If you do not have a smartphone or computer to use the app, Mountain Line says a friend or family member with the app can request rides for you."
+          - "The vans go within the service area, or to one of three places to connect with a bus: Hornbeck Road Walmart, Mountaineer Mall and Sabraton Goodwill."
+          - "Questions: call 304-291-RIDE (7433)."
+        links:
+          - label: "RideMon page"
+            url: https://www.busride.org/RideMon

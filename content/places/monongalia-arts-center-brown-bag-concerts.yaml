@@ -1,0 +1,24 @@
+name: MAC Brown Bag Concert Series
+slug: monongalia-arts-center-brown-bag-concerts
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: nonprofit
+  text: Monongalia Arts Center
+story: Free 45-minute live music concerts at the arts center, with a different performer each time.
+regular:
+  - First and third Wednesday of each month (time not listed)
+cost: Free
+interests: [music, arts]
+tags: [free, come-alone]
+contact:
+  url: https://monartscenter.com/classes-and-events
+  place: 107 High Street, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-21
+notes:
+  - The page does not list a start time. Check with the arts center.
+sources:
+  - url: https://monartscenter.com/classes-and-events
+    checked: 2026-10-30
