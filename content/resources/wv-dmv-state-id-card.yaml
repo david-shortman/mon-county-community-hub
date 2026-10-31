@@ -8,7 +8,7 @@ contact:
   phone: "1-800-642-9066"
   url: https://dmv.wv.gov/driver-services/drivers/drivers-licenses-and-id-cards
   url_label: ID card rules
-cost: A REAL ID costs $10 more than the regular card.
+cost: "State law says an ID card is free if you are 65 or older, legally blind, or need it as ID to vote. A REAL ID costs $10 more than the regular card. For the regular fee, call the DMV."
 what_to_bring:
   - "If this is your first card, or your card has been expired more than 3 years: one proof of identity, one proof of Social Security number, two proofs of WV residency with your name and street address, and proof of any legal name change"
   - "Proof of identity can be a U.S. birth certificate (original or certified copy, not a hospital certificate), a valid U.S. passport or passport card, or certain immigration documents"
@@ -28,4 +28,6 @@ sources:
   - url: https://dmv.wv.gov/license-and-renewal-fees
     checked: 2026-10-31
   - url: https://dmv.wv.gov/faq
+    checked: 2026-10-31
+  - url: https://code.wvlegislature.gov/17B-2-1/
     checked: 2026-10-31

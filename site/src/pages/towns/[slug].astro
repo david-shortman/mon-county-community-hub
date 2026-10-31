@@ -1,0 +1,153 @@
+---
+// One page per town or census place in Mon County (#1120): who to call, who
+// decides and where they meet, places to gather, dates, and bus routes. Built
+// from records we already have (see src/lib/town-hubs.mjs), so each fact
+// shows its own source. When we could not confirm a fact, the page says so
+// and names the official place to ask.
+import Base from '../../layouts/Base.astro';
+import EventCard from '../../components/EventCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { loadCalendarWithFeeds, upcoming, loadDoors, telHref } from '../../lib/content.mjs';
+import { loadAllPlaces, KIND_LABELS, SECTION, DIRECTORY_KINDS } from '../../lib/places.mjs';
+import { HUBS, hubData, CENSUS_LIST, CDP_MEANING, KIND_WORDS } from '../../lib/town-hubs.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+
+export function getStaticPaths() {
+  return HUBS.map((h) => ({ params: { slug: h.slug }, props: { h } }));
+}
+const { h } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const door = loadDoors().bySlug['living-here'];
+const calendar = upcoming(await loadCalendarWithFeeds(), undefined, 120);
+const d = hubData(h, { calendar, places: loadAllPlaces() });
+const cdp = h.kind === 'cdp';
+const shownDates = d.dates.slice(0, 6);
+const others = HUBS.filter((x) => x.slug !== h.slug);
+const placeHref = (p) => (DIRECTORY_KINDS.includes(p.kind) ? p.contact?.url : `${base}${SECTION.route}${p.slug}/`);
+const lede = cdp
+  ? `${h.name} is a named community in Monongalia County with no town government of its own. The county and its agencies serve it. Here is who to call, who decides, and what is nearby, from our sourced lists.`
+  : `The ${h.full} has its own government. Here is who to call, who decides and where they meet, places to gather, dates, and buses, from our sourced lists.`;
+---
+<Base title={`${h.name}, Mon County WV: who to call, meetings, buses`} description={`${h.name} in Monongalia County, WV: who to call for police, trash and water, ${cdp ? 'the county bodies that decide for it' : 'its council and where it meets'}, community places, upcoming dates and Mountain Line bus routes, with sources.`}>
+  <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
+    <ol>
+      <li><a href={`${base}/`}>Home</a></li>
+      <li><a href={`${base}${door.page}`}>{door.name}</a></li>
+      <li><a href={`${base}/towns/`}>Towns and areas</a></li>
+    </ol>
+  </nav>
+  <h1>{h.name}</h1>
+  <p class="town-kind">{KIND_WORDS[h.kind]}</p>
+  <p class="lede">{lede}</p>
+
+  <nav aria-labelledby="jump-h">
+    <h2 id="jump-h">On this page</h2>
+    <ul>
+      <li><a href="#who-to-call">Who to call</a></li>
+      <li><a href="#who-decides">Who decides and where they meet</a></li>
+      <li><a href="#places">Places to gather</a></li>
+      <li><a href="#dates">Coming up</a></li>
+      <li><a href="#buses">Buses</a></li>
+    </ul>
+  </nav>
+
+  {cdp && (
+    <div class="note">
+      <p>The Census Bureau draws a line around {h.name} only to count people. The line is not a town limit. To see whether an address is inside a town, use the county map on <a href={`${base}/who-serves-me/#not-sure`}>Who serves my address?</a></p>
+      <SourceLine sources={[CENSUS_LIST, CDP_MEANING]} about={`what ${h.name} is`} />
+    </div>
+  )}
+
+  <h2 id="who-to-call">Who to call</h2>
+  {!cdp && <p>These are for homes inside the {h.full}. Not sure your address is in town? <a href={`${base}/who-serves-me/#not-sure`}>Check on the county map</a>.</p>}
+  <ul class="serve">
+    {d.office && (
+      <li>
+        <strong>Town office:</strong> {d.office.text} <a href={telHref(d.office.phone)}>{d.office.phone}</a>.
+        <SourceLine sources={[{ url: d.office.url, checked: d.office.checked }]} about={`the ${h.name} office`} />
+      </li>
+    )}
+    {d.services.map((l) => (
+      <li>
+        <strong>{l.what}:</strong> {l.title}{l.phone && <>, <a href={telHref(l.phone)}>{l.phone}</a></>}.
+        {l.note && <> {l.note}</>}
+        <SourceLine sources={l.sources} about={`${l.what} in ${h.name}`} slug={l.slug} />
+      </li>
+    ))}
+    <li><strong>State roads:</strong> <a href={`${base}/who-serves-me/#roads`}>ask the state to fix a road</a>.</li>
+  </ul>
+  {d.org?.website && <p>Town website: <a href={d.org.website}>{d.org.name}</a>.</p>}
+  <p>Starting power, water, gas or trash after a move? See <a href={`${base}/moving-here/`}>Moving here</a>.</p>
+
+  <h2 id="who-decides">Who decides and where they meet</h2>
+  {cdp && <p>{h.name} has no town council. The Monongalia County Commission is the local government for it.</p>}
+  {d.council && (
+    <article class="card">
+      <h3>{d.council.name}</h3>
+      {d.council.about && <p>{d.council.about}</p>}
+      <p><strong>When and where it meets:</strong> {d.council.meets}</p>
+      {d.council.records.length > 0 && <p class="more">{d.council.records.map((x, i) => <>{i > 0 && ' · '}<a href={x.url}>{x.link}<span class="sr-only">: {d.council.name}</span></a></>)}</p>}
+      <SourceLine sources={d.council.sources} about={d.council.name} />
+    </article>
+  )}
+  {d.county.map((b) => (
+    <article class="card">
+      <h3>{b.name}</h3>
+      <p>{b.does}</p>
+      <p><strong>When and where it meets:</strong> {b.meets}</p>
+      <p class="more"><a href={`${base}/who-decides/#${b.id}`}>How members are chosen<span class="sr-only">: {b.name}</span></a></p>
+      <SourceLine sources={b.sources} about={b.name} />
+    </article>
+  ))}
+  <p>Agendas and minutes: <a href={`${base}/meetings/`}>City and county meetings</a>. More bodies, like the Utility Board and Mountain Line: <a href={`${base}/who-decides/`}>Who decides what</a>.</p>
+
+  <h2 id="places">Places to gather</h2>
+  {d.near.length ? (
+    <ul class="near">
+      {d.near.map((p) => (
+        <li>
+          <strong>{placeHref(p) ? <a href={placeHref(p)}>{p.name}</a> : p.name}</strong>, {KIND_LABELS[p.kind]?.toLowerCase()}{p.community !== h.name && ` (${p.community})`}{p.contact?.phone && <>, <a href={telHref(p.contact.phone)}>{p.contact.phone}</a></>}.
+          <SourceLine sources={p.sources} about={p.name} />
+        </li>
+      ))}
+    </ul>
+  ) : <p>None of the community centers, senior centers or libraries on our list name {h.name} as their community yet.</p>}
+  <p>Pantries and free meal dates are county-wide lists: <a href={`${base}/help/food/`}>Food help</a>.</p>
+  <p>Every center, hall and library branch in the county: <a href={`${base}${SECTION.route}`}>Community centers and halls</a> and <a href={`${base}/find-your-people/`}>Find your people</a>. Parks: <a href={`${base}/parks/`}>Parks, trails and outdoors</a>.</p>
+
+  <h2 id="dates">Coming up</h2>
+  {shownDates.length ? (
+    <>
+      {shownDates.map((e) => <EventCard e={e} />)}
+      {d.dates.length > shownDates.length && <p><a href={`${base}/calendar/`}>See all {d.dates.length} dates for {h.name} on the Dates page</a>.</p>}
+    </>
+  ) : <p>No dates on our list name {h.name} in the next four months. See every date on the <a href={`${base}/calendar/`}>Dates page</a>.</p>}
+
+  <h2 id="buses">Buses</h2>
+  {h.slug === 'morgantown' ? (
+    <p>Most Mountain Line routes run in Morgantown. See <a href={`${base}/bus-routes/`}>Every bus route and when it runs</a>.</p>
+  ) : d.routes.length ? (
+    <>
+      <p>These Mountain Line routes have a stop named for {h.name}:</p>
+      <ul>
+        {d.routes.map((rt) => <li><strong>{rt.url ? <a href={rt.url}>{rt.name}</a> : rt.name}</strong>: {rt.stops.join(', ')}</li>)}
+      </ul>
+      <p>Days and first and last runs: <a href={`${base}/bus-routes/`}>Every bus route and when it runs</a>.</p>
+      {d.busChecked && <SourceLine sources={[{ url: 'https://www.busride.org/', checked: d.busChecked }]} about={`buses in ${h.name}`} />}
+    </>
+  ) : (
+    <p>No Mountain Line stop on our list is named for {h.name}. A stop may still be nearby. Use Mountain Line's <a href="https://www.busride.org/google-trip-planner">trip planner</a> or call <a href="tel:3042917433">304-291-7433</a>, or see <a href={`${base}/bus-routes/`}>every route</a>.</p>
+  )}
+
+  <h2>Other towns and areas</h2>
+  <ul class="town-list">{others.map((x) => <li><a href={`${base}/towns/${x.slug}/`}>{x.name}</a></li>)}</ul>
+
+  <p class="meta">Something wrong or missing for {h.name}? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .town-kind { color: var(--muted); margin-top: -8px; }
+  .serve li, .near li { margin-bottom: 12px; }
+  .town-list { display: flex; flex-wrap: wrap; gap: 8px 16px; padding-left: 0; list-style: none; }
+  .town-list a { display: inline-block; min-height: 44px; padding: 10px 0; }
+</style>

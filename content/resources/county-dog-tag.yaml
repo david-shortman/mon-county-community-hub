@@ -4,7 +4,7 @@ org: monongalia-county-assessor
 topics: [pets, government]
 who_it_is_for: Anyone in Monongalia County who owns or keeps a dog 6 months old or older. State law says the county assessor collects a yearly dog tax and gives a tag for each dog. Trained guide and support dogs for people with disabilities do not pay the tax, but must still be registered.
 hours: Monday to Friday, 8:30 a.m. to 4:30 p.m.
-what_to_do: Contact the Monongalia County Assessor's office to register your dog and get a tag. Call to ask how to pay.
+what_to_do: Buy your dog tag from the Monongalia County Assessor, at the office or online at assessor.org. The Assessor says to buy them with your personal property return, which is due October 1.
 steps:
   - State law says to register a new dog, or a dog that turns 6 months old, with the assessor within 10 days.
   - Tags are good until June 30 each year.
@@ -21,4 +21,8 @@ sources:
   - url: https://www.monongaliacounty.gov/document_center/Ordinances/Leash%20law.pdf
     checked: 2026-10-31
   - url: https://www.assessor.org/
+    checked: 2026-10-31
+  - url: https://www.assessor.org/2223/Information-for-New-Residents
+    checked: 2026-10-31
+  - url: https://www.assessor.org/DocumentCenter/View/16006/Mon-County-Assessor-Dear-Taxpayer-Letter--Satellite-Location-Schedule
     checked: 2026-10-31

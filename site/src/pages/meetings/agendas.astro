@@ -1,0 +1,78 @@
+---
+// Plain-language agenda guides (#529): for each coming City Council, County
+// Commission or Board of Education meeting with a posted agenda, the date,
+// place, how to watch and comment, and every agenda item with its exact title
+// plus one neutral line on what kind of item it is. Data: content/agendas/.
+// Rules: docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md.
+import Base from '../../layouts/Base.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+import { prettyDate, todayYmd } from '../../lib/content.mjs';
+import { loadAgendas, upcomingGuides, BODIES, KINDS, MEETING_BODIES, clock } from '../../lib/agendas.mjs';
+import { loadMeetings } from '../../lib/meetings/index.mjs';
+export const page = { door: "community", topic: "government", label: "Coming meetings in plain language", summary: "Every item on posted City Council, County Commission and school board agendas, with its exact title and what kind of item it is" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const guides = upcomingGuides(loadAgendas(), today);
+// Agendas posted for the next 14 days for these bodies that have no guide yet.
+const until = (() => { const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + 14); return d.toISOString().slice(0, 10); })();
+const covered = new Set(guides.map((g) => `${g.body}|${g.date}`));
+const waiting = (await loadMeetings()).filter((m) => MEETING_BODIES[m.body] && m.date >= today && m.date <= until && !covered.has(`${MEETING_BODIES[m.body]}|${m.date}`));
+const boardDocs = 'https://go.boarddocs.com/wv/mono/Board.nsf/Public';
+---
+<Base title="Coming Morgantown and Mon County meetings in plain language" description="Plain-language guides to posted agendas for coming Morgantown City Council, Monongalia County Commission and Board of Education meetings: when, where, how to watch and comment, and each item with its exact title.">
+  <h1>Coming meetings in plain language</h1>
+  <p class="lede">What is on the agenda for coming City Council, County Commission and school board meetings. Each item keeps its title from the official agenda, with one line saying what kind of item it is.</p>
+
+  <div class="note">
+    <p>We describe the agenda. We do not say whether an item is good or bad or how it will turn out. The official agenda is the record, and it can change, so open it before you go. New to agendas? Read <a href={`${base}/meetings/how-to-read-an-agenda/`}>how to read a meeting agenda</a>.</p>
+  </div>
+
+  {guides.length ? guides.map((g) => {
+    const b = BODIES[g.body];
+    return (
+      <article class="card agenda" id={g.slug} aria-labelledby={`${g.slug}-h`}>
+        <h2 id={`${g.slug}-h`}>{b.name}: {g.meeting}, {prettyDate(g.date)}</h2>
+        <ul class="facts">
+          <li><strong>When:</strong> {prettyDate(g.date)}, {clock(g.time)}</li>
+          <li><strong>Where:</strong> {g.place}</li>
+          <li><strong>Watch:</strong> {g.watch}</li>
+          <li><strong>Comment:</strong> see <a href={`${base}${b.comment}`}>how to comment at the {b.name}</a>.</li>
+        </ul>
+        <p><a href={g.agenda_url}>Official agenda<span class="sr-only">, {b.name}, {prettyDate(g.date)}</span></a>{g.packet_url && <> and <a href={g.packet_url}>full packet<span class="sr-only">, {b.name}, {prettyDate(g.date)}</span></a></>} (PDF). We read it on {prettyDate(g.read)}.</p>
+        <h3 id={`${g.slug}-items`}>On the agenda</h3>
+        <ul class="items" aria-labelledby={`${g.slug}-items`}>
+          {g.items.map((it) => (
+            <li>
+              <p class="item-title">{it.number}. {it.title}</p>
+              <p><span class="kind">{KINDS[it.kind]}:</span> {it.line}</p>
+              {it.parts && <ul>{it.parts.map((p) => <li>{p}</li>)}</ul>}
+            </li>
+          ))}
+        </ul>
+        {g.note && <p class="meta">{g.note}</p>}
+        <p class="meta">Titles are copied from the agenda as written. "[name]" marks where we left out a person's name.</p>
+        <SourceLine sources={g.sources} about={`${b.name} agenda, ${prettyDate(g.date)}`} />
+      </article>
+    );
+  }) : <p>No guides are up yet for coming meetings. Posted agendas are on the <a href={`${base}/meetings/`}>meetings page</a>.</p>}
+
+  <h2 id="not-yet">Posted agendas we have not explained yet</h2>
+  {waiting.length ? (
+    <ul>
+      {waiting.map((m) => <li><strong>{prettyDate(m.date)}</strong>, {m.body}: <a href={m.agenda_url}>{m.title}</a> (official agenda)</li>)}
+    </ul>
+  ) : <p>None right now for City Council or the County Commission in the next two weeks.</p>}
+  <p>The Board of Education posts its agendas on <a href={boardDocs}>BoardDocs</a>, which our tools cannot read, so those guides are added by hand when someone reads the agenda there. Meetings with no agenda yet are on the <a href={`${base}/calendar/`}>Dates page</a>.</p>
+
+  <p class="meta">An AI helper (Claude) writes each guide from the posted agenda in a work session, following written neutrality rules, and saves it with the date it read the agenda. Nothing is written by AI when you load the page. See <a href={`${base}/how-it-works/`}>how this site works</a>. Something wrong or slanted? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .facts { list-style: none; padding-left: 0; }
+  .items { list-style: none; padding-left: 0; }
+  .items > li { margin-bottom: 0.9rem; }
+  .items p { margin: 0.2rem 0; }
+  .item-title { font-weight: 600; }
+  .kind { font-weight: 600; }
+</style>
