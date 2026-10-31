@@ -27,6 +27,8 @@ const old = notCheckedLately(s.sources);
   {!s.hours && s.status === 'likely' && <p><strong>Check hours before you go.</strong></p>}
   <p><strong>{s.kind === 'lending' ? 'What you can borrow' : s.kind === 'free-program' ? 'What it gives' : s.kind === 'online-group' ? 'What it is' : 'What it sells'}:</strong> {s.sells}</p>
   {s.takes && <p><strong>What it takes:</strong> {s.takes}</p>}
+  {s.does_not_take && <p><strong>Does not take:</strong> {s.does_not_take}</p>}
+  {s.drop_off && <p><strong>Drop-off and pickup:</strong> {s.drop_off}</p>}
   {s.funds_local_cause && <p><strong>Money goes to:</strong> {s.funds_local_cause}</p>}
   {s.who_can_use && <p><strong>Who can use it:</strong> {s.who_can_use}</p>}
   {s.what_to_bring && <p><strong>What to bring:</strong> {s.what_to_bring}</p>}

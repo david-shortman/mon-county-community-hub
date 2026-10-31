@@ -1,0 +1,23 @@
+name: Library of Things at Morgantown Public Library
+slug: mpl-library-of-things
+kind: lending
+area: downtown
+run_by: Morgantown Public Library System
+address: "373 Spruce St, Morgantown, WV"
+hours: Main library hours are Monday to Thursday, 9 a.m. to 8 p.m., and Friday and Saturday, 9 a.m. to 4 p.m. Closed Sunday.
+sells: Free loans of board games, video games, outdoor games, birding backpacks, science kits, music gear, small electronics and a blood pressure monitor. Loans last 21 days, one item per card. Items cannot be renewed or put on hold.
+goods: [books, electronics, kids]
+buys_from_you: false
+who_can_use: Anyone with a Morgantown Public Library card. Cards are free for West Virginia residents. Out-of-state residents pay $20.
+what_to_bring: Your library card.
+url: https://mympls.org/books-music-more/library-of-things/
+url_label: Library of Things
+status: likely
+note: Board games are at the main library. Video games are at the main library and many branches.
+sources:
+  - url: https://mympls.org/books-music-more/library-of-things/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/locations/morgantown/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/faqs/
+    checked: 2026-10-30

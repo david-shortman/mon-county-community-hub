@@ -1,0 +1,41 @@
+name: The Shack Neighborhood House
+slug: the-shack
+kind: neighborhood-house
+area: north
+community: Scott's Run
+run_by:
+  kind: nonprofit
+  text: The Shack Neighborhood House, a nonprofit
+story: A neighborhood house serving the Scott's Run community since 1928.
+facilities:
+  gym: true
+  kitchen: true
+  outdoor: [pool, pavilion]
+regular:
+  - Child care before and after school, summer camp and youth programs. Programs are free or on a sliding scale by income
+rentals:
+  - space: Gym (weekends only)
+    kitchen: true
+    outdoor: false
+    price: $200 total, plus $100 an hour for extra time and $50 to use the kitchen
+    deposit: $50 of the $200 is a deposit you do not get back
+    book: Call 304-599-5466, Monday to Friday, 9 a.m. to 5 p.m., or use the booking form on its rentals page.
+    source: https://the-shack.org/rentals/
+  - space: Pool and pavilion, with 2 lifeguards
+    outdoor: true
+    price: $250 total, plus $100 an hour for extra time. Parties over 60 people need a third lifeguard
+    deposit: $50 of the $250 is a deposit you do not get back
+    book: Call 304-599-5466, Monday to Friday, 9 a.m. to 5 p.m., or use the booking form on its rentals page.
+    source: https://the-shack.org/rentals/
+contact:
+  phone: "304-599-5466"
+  url: https://the-shack.org/
+  place: 537 Blue Horizon Drive, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-19
+tags: [family-friendly]
+sources:
+  - url: https://the-shack.org/rentals/
+    checked: 2026-10-30
+  - url: https://the-shack.org/about-us/
+    checked: 2026-10-30

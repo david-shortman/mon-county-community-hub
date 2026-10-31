@@ -37,10 +37,44 @@ contact:
   url_label: Book online  # optional; a short button label that says what the link is for (#335). Default "Website"
   place: 200 Main St, Morgantown, WV  # optional; adds a Directions button on door steps. Only a place the source publishes
 cost: free
+what_to_bring:          # optional (#159); what to have ready, close to the source's words
+  - Photo ID
+what_happens: What the first call or visit is like, in one or two sentences from the source.  # optional
+best_time: Mornings are less busy.  # optional; only when the source says so
+if_you_want_help: [wv-211]  # optional; resource slugs of people who can help you through it, each with its own source
 sources:
   - url: https://example.org/tax
     checked: 2026-10-27
 ```
+
+### Listing facts for a place to go (#177)
+
+A resource with a `contact.place` is a place a person goes. People need these facts to decide whether to go ([`docs/design/presentation.md`](../docs/design/presentation.md), "What every listing needs"). All are optional, and each one comes only from the record's own sources. If the source does not say, leave it out.
+
+```yaml
+hours: Monday to Friday, 7 a.m. to 3:30 p.m.  # in words, always shown
+opening_hours:          # the same hours, so a card can say "Open now" (#176)
+  - days: [mon, tue, wed, thu, fri]   # mon tue wed thu fri sat sun
+    opens: "07:00"      # quoted, 24-hour, Eastern time
+    closes: "15:30"     # "24:00" for midnight; earlier than opens means it closes the next morning
+# opening_hours: always   # open 24 hours, every day
+get_in: walk-in         # walk-in | appointment | call-first
+languages: [Spanish]    # languages the source says staff speak or interpret
+access: Step-free entrance on the Main Street side.  # only what the source says
+```
+
+`opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+
+### Town and neighborhood (#395)
+
+Dates (`calendar/`) and resources can name their town, and a neighborhood inside it, so a card can say "Westover" or "Sunnyside, Morgantown" and Dates can group by town.
+
+```yaml
+town: Morgantown         # one name from TOWNS in site/src/lib/towns.mjs
+neighborhood: Sunnyside  # optional; needs a town
+```
+
+Set them only when the record's own source names the place. Never work a town out from a mailing address: many places with a "Morgantown, WV" address are outside the city, and Westover, Star City, Granville, Cheat Lake and Blacksville are their own places. A name not in the list fails `npm run check-content`; add it to the list when a source needs it.
 
 ## `calendar/<slug>.yaml`: dates and deadlines
 
@@ -61,6 +95,8 @@ topics: [money, housing]      # money, food, housing, health, family, government
 place: 200 M-Tec Dr, Morgantown, WV   # optional; adds a Directions button. Only a place the source publishes
 phone: 304-555-0100           # optional; adds a Call button. Only a public office or program number the source publishes
 phone_label: the City Clerk   # optional; who answers, read by screen readers. Defaults to org_name
+town: Westover               # optional; see "Town and neighborhood" below (#395)
+venue: smithtown              # optional; slug from places/, so the event shows on that place's page (#455)
 sources:
   - url: https://example.wv.gov/lieap
     checked: 2026-10-28
@@ -87,8 +123,11 @@ Live feeds wired in now:
 | City of Morgantown calendar | Everything on the Main Calendar (mostly public meetings, plus city events like Trick-or-Treat) | `https://www.morgantownwv.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar` |
 | Mountaineer Food Bank pantry calendar | Mobile pantries the food bank files under Monongalia County | `https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county` |
 | Monongalia County calendar | Parks and recreation events and election days. Repeating events (like the weekly Commission meeting) are left out because we do not expand repeat rules, and we never guess a date | The JSON behind `https://www.monongaliacounty.gov/calendar.php` |
+| Morgantown Public Library System calendar | One-time events and closures at every branch. Programs the feed repeats 3 or more times (weekly storytimes, clubs) are left out so they do not bury the dates page. Staff names in the feed are never read | `https://events.mympls.org/ical_subscribe.php?src=p&cid=17544` |
 
-Feed entries only say what the feed says. When a feed does not say who an item is for or what to do, the entry says where it was listed and "See the event page for details."
+Not wired in: WVU's events calendar (`www.events.wvu.edu`) answers our requests with 403 Forbidden (checked 2026-10-30), so it stays out until WVU publishes a feed we may read. We never work around a block (#107).
+
+Feed entries only say what the feed says. A card's short summary is the first sentences of the feed's own description, when it has one that says more than the title (#230). Otherwise the card says where it was listed. Times come from the feed only when they look like real times; the city's end times are placeholders, so city cards show only the start.
 
 ### If a feed is down
 
@@ -125,6 +164,60 @@ link: https://github.com/david-shortman/mon-county-community-hub/pull/355
 ```
 
 `found_by` comes from the report form's optional question. Never name the person or group who reported it, unless the group asks for credit, and that goes to David first.
+
+## `places/<slug>.yaml`: gathering places
+
+Buildings people gather in: community centers, senior centers, neighborhood houses, public rec buildings, and fire halls that publish a hall to rent (#455). They make the Community centers and halls section (#450), and the groups and third spaces directory (#263) uses the same record. The schema is `schemas/place.schema.json`; `npm run check-content` checks every file against it.
+
+```yaml
+name: Example Community Center
+other_names: [Example Community Building]  # optional; list both when sources disagree
+slug: example
+kind: community-center      # community-center | senior-center | neighborhood-house | rec-center | park-building | fire-hall
+area: south                 # south | west | north | east | morgantown (Morgantown and close in)
+community: Example          # the community name people would type
+run_by:
+  kind: volunteer-association  # volunteer-association | county | city | nonprofit | fire-department | parks-board | park-foundation | library
+  org: example-org          # optional; slug from orgs/
+  text: A volunteer association. The county owns the building.
+story: A 1939 school, run as a community center since 1983.  # one plain line
+facilities:                 # only what the source says
+  rooms:
+    - name: Main hall
+      seats: 72
+  kitchen: true
+  outdoor: [pavilion, playground]
+  step_free: true           # only when published
+regular:                    # weekly or monthly happenings, in words
+  - Lunch Monday, Wednesday and Friday
+membership:
+  dues: $5 a family a year
+rentals:
+  - space: Main hall
+    seats: 72
+    kitchen: true
+    price: $150             # as the source gives it; leave out if not published
+    deposit: $50
+    book: Call the center.  # public contact only, never a volunteer's own number
+contact:
+  phone: "304-555-0100"
+  url: https://example.org
+  facebook: https://www.facebook.com/example  # shown as a link; never read by robots
+  place: 100 Main St, Example, WV  # only an address the place publishes; leave out if sources conflict
+status: active              # active | no-recent-activity | closed | renovating
+last_activity_seen: 2026-10-16  # newest sign of activity we read
+tags: [family-friendly]     # family-friendly | free | come-alone | beginners | step-free
+notes:                      # gaps residents should know
+  - Sources give two addresses, so call first.
+sources:
+  - url: https://example.org/rentals
+    checked: 2026-10-30
+phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
+```
+
+- **No private people.** Leave out volunteers' names and personal numbers, even when a center lists one as the rental contact. Say "Call the center" or point to its page instead.
+- **Stale rule.** A place marked `active` whose `last_activity_seen` is over 6 months old shows "No recent activity seen, call first" (#39). A place found only in county lists is `no-recent-activity` from the start.
+- **Dated events** go in `calendar/` with `venue: <place slug>`, so they show on the place's page. Weekly regulars stay in `regular`.
 
 ## `needs/<slug>.yaml`: the needs register
 
@@ -179,6 +272,8 @@ address: "100 Example St, Westover, WV"   # optional; only a street address the 
 hours: Tuesday to Saturday, 10 a.m. to 7 p.m.   # optional; in words, as the source gives them
 sells: Housewares, books, toys and furniture. No clothing.   # what it sells, lends or gives, in words
 takes: Donations of housewares, books, toys and furniture.   # optional; what it accepts from you, in words
+does_not_take: Clothing or mattresses.   # optional; what it turns away, in the source's words (#690)
+drop_off: Tuesday to Saturday during store hours.   # optional; when and how to drop off, and any pickup
 goods: [home, books]      # filter tags, see below
 buys_from_you: false      # true when it pays cash or store credit for your things
 funds_local_cause: Care for rescued animals.   # optional; what the money supports, as the source says
@@ -193,7 +288,7 @@ sources:
     checked: 2026-10-30
 ```
 
-**Kinds:** `charity-thrift` (a thrift store whose sales fund a cause), `resale` (buys and sells used goods), `consignment` (sells your things and pays you a share), `vintage-antique`, `used-media` (books, records, games), `free-program` (gives things away), `lending` (lends things), `repair`, `online-group`.
+**Kinds:** `charity-thrift` (a thrift store whose sales fund a cause), `resale` (buys and sells used goods), `consignment` (sells your things and pays you a share), `vintage-antique`, `used-media` (books, records, games), `free-program` (gives things away), `lending` (lends things), `repair`, `online-group` (a buy, sell or trade group; a group for giving things away free is a `free-program` with area `online`).
 
 **Areas:** `westover` (Westover, Mall Rd and Fairmont Rd), `downtown` (downtown and High St), `mileground` (Mileground and Mountaineer Mall), `university-ave` (University Ave and Sunnyside), `cheat-lake`, `elsewhere` (elsewhere in the county), `outside-county` (just over the county line), `online`.
 
@@ -209,6 +304,28 @@ sources:
 Every fact comes from a source page read in the same session, the same as other entries. Online groups are listed only when we could open the group's own page; we never quote members. No individual home yard sales, ratings, ads or paid placement.
 
 Cards show "Not checked lately" once the oldest `checked` date is over 4 months old (#430).
+
+## `boards/<slug>.yaml`: city boards and commissions
+
+Shown on the Serve on a city board page (`/make-it-better/boards/`, #290). Never list members' names.
+
+```yaml
+name: Tree Board
+slug: tree-board
+org: city-of-morgantown        # slug from orgs/
+decides: What the board does, in one or two plain sentences, from its own page.
+meets: 4th Monday of every month, 3 p.m., Council Chambers
+who_can_serve: City residents.   # optional; only what the source says
+open_seats: 0                    # from the city's vacancy list
+page_vacant: 1                   # optional; vacant seats the board's own page shows, when it differs from the list
+url: https://www.morgantownwv.gov/264/Tree-Board
+topics: [better]
+sources:
+  - url: https://www.morgantownwv.gov/264/Tree-Board
+    checked: 2026-10-30
+  - url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+    checked: 2026-10-30
+```
 
 ## `doors.yaml`: the five doors
 
@@ -287,6 +404,10 @@ These come from the [trust and AI playbook](../docs/playbook/trust-and-ai.md) an
 - **Use our own topic labels.** Use the `topics` tags in `doors.yaml`. Never copy 211 taxonomy codes, terms or definitions; they are copyrighted. ([Use open topic labels](../docs/playbook/open-data.md#use-open-topic-labels-not-the-211-taxonomy))
 - **`checked` is a Morgantown date.** Write `checked` as the date in Morgantown (America/New_York) when you read the source, not the UTC date. Only change `checked` after you actually re-read the source; moving facts between files or rewording them does not count.
 - **Name the source as it is.** A source page is credited to an organization on the site only when it is on that organization's own website. A news article or a directory is shown by its address, and a page that names it says what it is (for example "a Morgantown Magazine article from January 14, 2026").
+- **Phone numbers come from the group or the government (#494).** A phone or text number must be on the group's own website or an official government page. Never take one from a directory, a news story, a search result or an AI answer: scammers plant fake support numbers there. If only a directory has the number, leave it out.
+- **Check it is the right Morgantown (#494).** Make sure each source is about Morgantown or Monongalia County, West Virginia, not Morgantown, Kentucky or Indiana, and not a neighboring county. `npm run check-content` warns when an address leaves out WV or any text names Morgantown in another state, and the daily source check warns when a source page does.
+- **Crisis, shelter and food-today details are re-checked every week (#494).** Every record named on the Where to stay tonight page, the food pages, the crisis strip and the Help now parts, the orgs behind them, and any record that names 988 or a crisis line. The Health check lists the ones last checked over 7 days ago (`content-recheck-weekly`). Re-check each phone number and hours on the group's own page.
+- **Keep "Call to confirm" on anything that changes fast.** Hours, open status and bed or food availability always say to call first. The place cards do this on their own; keep it in any sentence you write about hours.
 
 ### What `npm run check-content` checks in orgs and resources
 
@@ -322,3 +443,19 @@ hidden:
 - **Checks.** `npm run check-content` still checks hidden records in full, so one can come back at any time, and fails if `hidden.reason` is missing or not one of the four, or `since` is not a date. The Health check lists every hidden item until it comes back.
 - **211 and 988 cannot be hidden.** They show on every page. If one looks wrong, fix it from the line's own page the same day.
 - **Who can merge.** A PR that only adds or changes `hidden` blocks does not wait for David, and the High stakes check does not flag it (`docs/COORDINATION.md`: "taking down or hiding a wrong item does not wait"). A PR that removes a `hidden` block is checked like any other content change.
+
+## Confirmed by phone and the call queue
+
+Some groups have no website, or only a page robots cannot read, so a phone call is the only way to check them (#164). After a person confirms a listing by phone, add to its file in `orgs/`, `resources/` or `places/`:
+
+```yaml
+phone_confirmed: 2026-11-02   # Morgantown date of the call
+phone_confirmed_by: DS        # optional; the caller's initials (orgs and resources)
+```
+
+- **Never** write down the name of the person who answered, or anything they said about themselves.
+- Call only the public number on the listing. What the call confirms still has to match the record: if something changed, fix the record, and if the change is on the group's own page, re-check that source too.
+- The card shows "Confirmed by phone on <date>." after the checked date, and the out-of-date note once that date is over 6 months old.
+- `npm run check-content` fails if `phone_confirmed` is not a date or is in the future, or `phone_confirmed_by` is not two or three capital letters.
+
+**The call queue.** `npm run call-queue` in `site/` prints the list of calls to make, oldest first, with the number, why each one is there and what to ask (`--md FILE` writes it to a file). A listing is in it when it has a public phone number and either no source a robot can read (every source is `manual` in `source-rules.yaml`), no recent activity seen (places), or a past phone check. Making the calls waits on David's decision about who calls and from what number (#156).

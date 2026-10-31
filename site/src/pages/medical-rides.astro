@@ -1,0 +1,31 @@
+---
+// Ride to a medical appointment (#480, rank 9 in #475). Medicaid rides first,
+// then the bus. Every fact is in a resource record in content/resources/,
+// read 2026-10-30. The health department's address is from monchd.org.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "care", topic: "health", label: "Ride to a medical visit", summary: "Medicaid rides, and the bus to Ruby, Mon General and the health department" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+---
+<Base title="Ride to a medical appointment in Morgantown and Mon County" description="How to get to a doctor in Morgantown and Monongalia County without a car: Medicaid rides through Modivcare, and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares for seniors and people with disabilities.">
+  <h1>Need a ride to a medical visit?</h1>
+  <p class="lede">On Medicaid or WVCHIP? You may be able to get a ride to covered care: call <a href="tel:18445498353">1-844-549-8353</a> at least 5 business days ahead. Anyone can take the Mountain Line bus, with half fares for riders 62 and older, Medicare cardholders and people with disabilities.</p>
+
+  <h2>On Medicaid or WVCHIP</h2>
+  {r('wv-medicaid-rides') && <ResourceCard r={r('wv-medicaid-rides')} />}
+
+  <h2>By bus</h2>
+  {r('mountain-line-medical-trips') && <ResourceCard r={r('mountain-line-medical-trips')} showCost />}
+  <p>The Monongalia County Health Department is at 453 Van Voorhis Road (<a href="https://www.monchd.org/">health department</a>, checked October 30, 2026).</p>
+
+  <h2>Also check</h2>
+  <ul>
+    <li>No insurance? See <a href={`${base}/dental-and-prescriptions/`}>dentist and prescription help</a>, including the free Health Right clinic on Scott Avenue.</li>
+    <li>Disability or aging: <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30, 2026. Bus routes and times change, so check the trip planner before you go. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

@@ -1,0 +1,10 @@
+name: Modivcare
+slug: modivcare
+kind: business
+website: https://www.modivcare.com/
+summary: The company West Virginia Medicaid contracts with to schedule non-emergency rides to medical care for Medicaid and WVCHIP members across the state.
+topics: [health]
+area: statewide
+sources:
+  - url: https://bms.wv.gov/non-emergency-medical-transportation-nemt-information-members
+    checked: 2026-10-30

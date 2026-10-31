@@ -1,0 +1,17 @@
+name: The Thrifty Mountaineer
+slug: thrifty-mountaineer
+kind: resale
+area: westover
+run_by: The Thrifty Mountaineer
+address: "7093 Mall Rd, Westover, WV"
+hours: Monday to Thursday, 10 a.m. to 6 p.m.; Friday, 10 a.m. to 8 p.m.; Saturday, 10 a.m. to 6 p.m.; Sunday, noon to 5 p.m.
+sells: Discount brand-name items from liquidation lots, new clothing, vintage and antique items, Bigfoot gifts, and goods made by local artists and authors.
+takes: Sells work by local artists and authors on consignment.
+goods: [clothes, vintage]
+buys_from_you: false
+url: https://thethriftymountaineer.com/
+url_label: Shop website
+status: confirmed
+sources:
+  - url: https://thethriftymountaineer.com/about
+    checked: 2026-10-30

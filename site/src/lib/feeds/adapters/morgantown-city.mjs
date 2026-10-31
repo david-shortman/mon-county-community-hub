@@ -1,7 +1,7 @@
 // City of Morgantown main calendar, from the city's CivicPlus iCalendar feed.
 // Feed list: https://www.morgantownwv.gov/iCalendar.aspx
 import { parseIcs, readIcsDate } from '../ical.mjs';
-import { plain, slugify, prettyTime, addDays } from '../util.mjs';
+import { plain, slugify, addDays, hhmm, firstSentences, realTime, adds } from '../util.mjs';
 
 const SITE = 'https://www.morgantownwv.gov';
 
@@ -29,8 +29,13 @@ export default {
       const url = /^\d+$/.test(uid) ? `${SITE}/Calendar.aspx?EID=${uid}` : `${SITE}/calendar.aspx`;
       // Locations look like "Room - 300 Spruce Street Morgantown WV 26505".
       const where = plain(ev.LOCATION?.value).split(/\s+-\s+|^-\s*/).filter(Boolean).join(', ');
-      const time = start.allDay ? '' : `Starts at ${prettyTime(start.hour, start.minute)}`;
-      const whenWhere = [time, where && `${time ? 'at' : 'Location:'} ${where}`].filter(Boolean).join(' ');
+      // A short summary from the city's own description, when it has one (#230).
+      const about = firstSentences(ev.DESCRIPTION?.value);
+      // Times go in start_time and end_time, so the card shows them by the date.
+      const oneDay = ends === start.ymd;
+      const times = !start.allDay && oneDay && realTime(hhmm(start.hour, start.minute)) ? { start_time: hhmm(start.hour, start.minute) } : {};
+      // Only the start time: the city's end times are placeholders (11:59 p.m.,
+      // or a set length like three hours), not when a meeting ends.
       const isMeeting = /meeting|council|commission|board|authority|committee|agency/i.test(title);
 
       out.push({
@@ -39,8 +44,9 @@ export default {
         starts: start.ymd,
         ends,
         org_name: 'City of Morgantown',
-        who_it_is_for: 'Listed on the City of Morgantown calendar.',
-        what_to_do: `${whenWhere ? `${whenWhere}. ` : ''}See the event page for details.`,
+        who_it_is_for: adds(about, title) ? about : 'Listed on the City of Morgantown calendar.',
+        what_to_do: where ? `At ${where}.` : "The city's event page has the details.",
+        ...times,
         url,
         topics: isMeeting ? ['government'] : ['community'],
       });
