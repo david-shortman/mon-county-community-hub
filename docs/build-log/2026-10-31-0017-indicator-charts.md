@@ -1,0 +1,5 @@
+# 2026-10-31: Charts and a monthly check for the county numbers
+
+- **Considered:** #15 asks for a dashboard of county numbers from free public data, refreshed on a schedule, with a chart, source and date for each. The "How is Mon County doing?" page (#62) already had three official numbers.
+- **Chose:** grow that page instead of building a second one. Each number now has up to ten years of Mon County and West Virginia history from County Health Rankings' trends file, only after its last "trend break" (their rule). A small chart draws it with no scripts, using a color pair that passed the color-blind checks in light and dark, with a legend, end labels and a table. A script refreshes the numbers from the public files with no key, and a monthly workflow opens an issue for Duet when they change.
+- **Left for later:** the other sources #15 lists. Census now redirects keyless API calls to a "missing key" page, and FRED and HUD need keys, so those wait for David. CDC PLACES, BLS and the eviction data are free and can follow.

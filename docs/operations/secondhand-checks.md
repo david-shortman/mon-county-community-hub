@@ -24,6 +24,10 @@ Once a week, read each page below and add any new confirmed date to `content/cal
 
 Eloquence Antiques and Artisans posts its Vintage Market dates mostly on Facebook, which a robot cannot read. Add those dates only when a readable page lists them.
 
+### Watched daily since 2026-10-31
+
+The pages above with a fixed address that robots may read are on a watch list, [`content/watch/secondhand.yaml`](../../content/watch/secondhand.yaml), inside the daily Source check: Moonlight Market, the MRTC Handmade Market (its 2026 date is saved, so a new date alerts) and the Farmers Market dates. When one changes, the workflow opens or comments on **one** "Sale or market date page changed" issue for a person. It never adds a date on its own. The Friends of the Library, Visit Mountaineer Country and Mountaineer Week pages block robots, and the WVU calendar, card show and festival lists and the Dominion Post change every day, so those stay on the weekly read.
+
 ## Every 3 months: re-check each shop and program
 
 Run this in `site/`:
@@ -42,4 +46,4 @@ Cards show "Not checked lately" once a card's oldest check is over 4 months old,
 
 ## Who runs it
 
-Duet runs both checks (see the `for:duet` issue linked from #430). Claude Code sessions can run them too. When the page watcher (#122) is built, add the weekly sources above to it, so a change opens a PR on its own.
+Duet runs both checks (see the `for:duet` issue linked from #430). Claude Code sessions can run them too. The page watcher (#122, #166) now covers the sources it can read; see "Watched daily" above. It opens an issue, not a PR: a person still adds each date.
