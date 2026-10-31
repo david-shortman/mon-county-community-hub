@@ -232,7 +232,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .right-now .tonight { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; }
       .right-now .tonight .icon { width: 22px; height: 22px; }
       .right-now .crisis { font-weight: 600; margin: 8px 0 0; font-size: 0.95rem; }
-      .crisis-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 6px 0 4px; }
+      .crisis-btns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 5rem), 1fr)); gap: 8px; margin: 6px 0 4px; } /* 3 across, one per row with big text (#971) */
       .crisis-btns .btn { padding: 8px 6px; gap: 6px; }
       .crisis-btns span { white-space: nowrap; }
       .doors h2 { margin-top: 1.1em; }
