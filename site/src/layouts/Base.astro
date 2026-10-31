@@ -168,6 +168,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .lede { font-size: 1.15rem; color: var(--muted); }
       .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
       .card h3 { margin: 0 0 4px; font-size: 1.1rem; }
+      .card.resource > h2, .card.place > h2 { margin: 0 0 4px; font-size: 1.1rem; } /* same look when a card title is an h2 */
       .card-steps { margin: 6px 0 10px; padding-left: 1.4rem; display: grid; gap: 4px; } /* a card's `steps` list (#822) */
       .when { font-weight: 600; color: var(--accent); }
       .meta { font-size: 0.95rem; color: var(--muted); overflow-wrap: anywhere; } /* sources and checked dates: at least 15px (#50) */
