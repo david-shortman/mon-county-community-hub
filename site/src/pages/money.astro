@@ -6,7 +6,8 @@
 import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
 import SourceLine from '../components/SourceLine.astro';
-import { resource, org, telHref } from '../lib/content.mjs';
+import { resource, org, telHref, loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "this-month", label: "Get through this month", summary: "Can't pay a bill, behind on rent, short on food, cash fast, free tax help" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // Each section names its own source and checked date (#207), read from the
@@ -16,6 +17,8 @@ const legalAidName = org(legalAid.org).name;
 const wv211 = resource('wv-211');
 const dfi = resource('wv-dfi-check-a-lender');
 const taxPrep = resource('christian-help-free-tax-prep');
+// The Lifeline link shows once its record is in (#668, #735).
+const lifeline = loadDir('resources').some((e) => e.slug === 'lifeline-phone-internet-discount');
 const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/government-program-pays-your-bills', checked: '2026-10-29', name: 'Federal Trade Commission' }];
 ---
 <Base help title="Get through this month: bills, rent and food help in Morgantown and Mon County" description="Can't pay a bill, behind on rent, short on food, need cash fast, or want free tax help? Pick what is going on and get local steps in order, with phone numbers and sources, in Morgantown and Monongalia County.">
@@ -26,6 +29,7 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
   <p>Start with your heat, water or electric bill: <a href={`${base}/utility-bills/`}>Help paying a utility bill</a>. It lists who to call first, with phone numbers and programs.</p>
   <p>For any other bill, call the company and say you cannot pay in full. Ask what payment plans they have. If you are not sure where to turn, call <a href="tel:211">211</a>, text your ZIP code to 898211, or visit <a href="https://wv211.org">wv211.org</a>.</p>
   <SourceLine sources={wv211.sources} org={wv211.org} about="211" />
+  {lifeline && <p>Phone or internet bill? See <a href={`${base}/internet/#lifeline`}>Help paying for phone or internet</a>.</p>}
 
   <h3 id="rent">I'm behind on rent or facing eviction</h3>
   <p>Keep any notice from your landlord or the court, and do not ignore it. If you have a court hearing or another deadline in the next 10 days, call {legalAidName} at <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a> right away. Its help is free, though some court filing fees may still apply. For other help with rent, call <a href="tel:211">211</a> and say you are behind on rent. We are still building our housing page.</p>
@@ -41,19 +45,27 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
   <ul>
     <li><strong>Call to book:</strong> <a href={telHref(taxPrep.contact.phone)}>{taxPrep.contact.phone}</a></li>
     <li><strong>When:</strong> Wednesdays, 9 a.m. to 2 p.m., through April 1 (from the January 2026 article; the 2027 season dates are not published yet). Call to confirm.</li>
-    <li><strong>Who:</strong> last season, households that earned $67,000 or less in 2025 could get help. Ask for this season's limit.</li>
-    <li><strong>Bring:</strong> a photo ID for each person who earned money, Social Security numbers and birth dates for everyone on the return, last year's returns if you have them, W-2 and 1099 forms, and bank details if you want direct deposit. If you file together, both spouses come.</li>
+    <li><strong>Who:</strong> Christian Help sets an income limit each season. Ask for this season's limit when you call.</li>
+    <li><strong>Bring:</strong>
+      <ul>
+        <li>a photo ID for each person who earned money</li>
+        <li>Social Security numbers and birth dates for everyone on the return</li>
+        <li>last year's returns, if you have them</li>
+        <li>W-2 and 1099 forms</li>
+        <li>bank details, if you want direct deposit</li>
+      </ul>
+      If you file together, both spouses come.</li>
   </ul>
   <SourceLine sources={taxPrep.sources} org={taxPrep.org} about="free tax help"> The source is a Morgantown Magazine article from January 14, 2026.</SourceLine>
 
   <h3>What things cost here</h3>
-  <p>We have not found a trusted, sourced list of local rent, child care or pay figures yet, so we do not show numbers. We would rather show nothing than a guess. Know a public source? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p>We have not found a trusted, sourced list of local rent, child care or pay figures yet, so we do not show numbers. We would rather show nothing than a guess. Know a public source? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 
   <div class="note">
     <p><strong>Watch for scams.</strong> No government program pays your bills for a fee. Anyone who asks you to pay to apply, or to pay by gift card, wire or crypto, is a scam. Real help does not ask you to pay it. Report scams at <a href="https://reportfraud.ftc.gov">reportfraud.ftc.gov</a>.</p>
     <SourceLine sources={scamSources} about="scam warning" />
   </div>
 
-  <p class="meta">Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
   </DoorPage>
 </Base>

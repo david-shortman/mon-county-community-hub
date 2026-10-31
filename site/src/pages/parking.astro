@@ -1,0 +1,39 @@
+---
+// Parking in Morgantown (#1030, rank 6 in the #222 coverage map). Facts come
+// from the Morgantown Parking Authority's own site and the city's Parking
+// Authority page, read 2026-10-31. WVU's parking site returned 403, so WVU
+// parking is only a phone number the Parking Authority gives. Left off: snow
+// emergency rules and parking outside city limits.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Parking in Morgantown", summary: "Downtown garages, lots and meters, paying with ParkMobile, blue curb permits, accessible parking, and paying or contesting a ticket" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Parking in Morgantown, WV: garages, meters, permits and tickets" description="Where to park in downtown Morgantown, WV: Parking Authority garages and lots and their rates, street meters and ParkMobile, residential blue curb permits, accessible parking, towing, and how to pay or contest a parking ticket.">
+  <h1>Parking in Morgantown</h1>
+  <p class="lede">Downtown garages are 75 cents an hour in the daytime, and long-term lots are 75 cents an hour. You can pay meters with the ParkMobile app. Got a ticket? Check who wrote it first, then pay or contest it below.</p>
+
+  <h2 id="garages">Garages and lots</h2>
+  <ResourceCard r={resource('mpa-garages-and-lots')} showCost />
+
+  <h2 id="meters">Meters and paying</h2>
+  <ResourceCard r={resource('mpa-meters-and-paying')} showCost />
+
+  <h2 id="tickets">Parking tickets</h2>
+  <ResourceCard r={resource('mpa-parking-tickets')} showCost />
+
+  <h2 id="blue-curb">Living on a blue curb street</h2>
+  <ResourceCard r={resource('mpa-blue-curb-permits')} showCost />
+
+  <h2 id="accessible">Accessible parking</h2>
+  <ResourceCard r={resource('mpa-accessible-parking')} showCost />
+
+  <h2 id="towing">Towing</h2>
+  <ResourceCard r={resource('mpa-towed-or-blocked')} />
+
+  <p>Parking on the WVU campus is run by WVU, not the city. The Parking Authority gives WVU's parking office number as 304-293-5502. No car? See <a href={`${base}/getting-around/`}>getting around without a car</a>.</p>
+
+  <p class="meta">Sources checked October 31, 2026. Rates and rules can change, so read the meter or sign where you park. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

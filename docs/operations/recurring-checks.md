@@ -12,6 +12,7 @@ Everything runs inside `.github/workflows/sources.yml` (daily, 11:41 UTC), one r
 | Food pantry watch (#166) | 17 pantry and meal pages | One "Food pantry or meal page changed" issue | `content/watch/food.yaml` |
 | Community centers watch (#752) | BOPARC closures, events and center pages, county parks events, Westside and Senior Mons | One "Community center or park event page changed" issue | `content/watch/centers.yaml` |
 | Sale and market watch (#718) | Moonlight Market, MRTC Handmade Market, Farmers Market dates | One "Sale or market date page changed" issue | `content/watch/secondhand.yaml` |
+| Make it better watch (#793) | City vacancy list, Organizational Arts Grants, WV Public Art grants, WV Community Tree Grants | One "Make it better grant or seat page changed" issue | `content/watch/make-it-better.yaml` |
 | Warming shelter watch (#863) | Local news shelter stories, city press releases. November 1 to March 31 only | One "Warming shelter source changed" issue | `content/watch/shelter.yaml` (#978, waits for David) |
 | Weekly checklists | Nothing. It writes the week's to-do list for what a robot cannot read | One standing issue per lane, refreshed each week | `content/checklists/*.yaml`, `site/scripts/checklists.mjs` |
 
@@ -24,6 +25,13 @@ Each file in `content/checklists/` is one standing issue labeled `checklist` and
 - **Make it better** (#793): weekly city vacancy list and agendas; in the first week of each month the monthly pages from `docs/operations/make-it-better-checks.md` and a computed list of entries that will say "may be out of date" within 30 days; in March and April the budget season and REAP items; in April 2027 the arts grant round.
 
 Preview this week's lists with `npm run checklists` in `site/`. Add or change an item by editing the YAML; `npm run check-content` validates it.
+
+Each item has `text` and usually `url`. Two optional fields make a run faster (added after the first run, 2026-W44):
+
+- `person: true` marks a page that blocks automated reads (a bot check, a refused connection, or a robots.txt that asks robots to stay out). The item starts with "A person reads this", so an agent run notes "not read" and moves on instead of trying.
+- `how:` one line on how to find or read the source, such as the Dominion Post address pattern or where to see which agendas are new.
+
+When you tick an item, add a one-line note in a comment on the issue: what changed, "no change", or "not read" and why.
 
 ## What still needs a person
 
