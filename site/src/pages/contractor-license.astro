@@ -6,13 +6,14 @@
 // amount that makes a job need a contractor license, board and city license
 // fees, electrician license classes, and union locals. The page links the
 // law instead of restating it. Permits for property owners are a separate
-// page (#661).
+// page, /permits/ (#661), linked from the city section.
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
 import { loadDir } from '../lib/content.mjs';
 export const page = { door: "family", topic: "work", label: "Contractor and trade licenses", summary: "State contractor license, plumber, HVAC and electrician licenses, working in Morgantown city limits, and how to check a contractor before you hire" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const checked = '2026-10-30';
@@ -92,6 +93,7 @@ const complaint = [{ url: 'https://www.wvclboard.wv.gov/complaint/', checked }];
   <h2 id="morgantown">Working inside Morgantown city limits</h2>
   <p>The City of Morgantown asks for a state business registration first, then a <strong>Municipal Business License</strong>. Apply through the Morgantown Access Portal. The city's steps page lists a separate contractor application for the business license. City licenses run for a fiscal year and expire June 30 each year. The city also charges a business and occupation (B&amp;O) tax on gross income, and a municipal service fee on people working in city limits.</p>
   <p>Building permits in the city also go through the Morgantown Access Portal. The city does not take paper permit applications. Each kind of work, like electrical or plumbing, needs its own permit application. If your contractor's license does not show in the portal, call the Finance Department at <a href="tel:+13042847408">304-284-7408</a>. B&amp;O taxes are not part of permit fees: call Finance at <a href="tel:+13042847401">304-284-7401</a>.</p>
+  <p>Outside Morgantown, or a property owner asking who issues permits? See <a href={`${base}/permits/`}>do I need a building permit?</a></p>
   <p>Not sure an address is in city limits? The city says to check its <a href="https://morgantownwv.maps.arcgis.com/apps/instant/sidebar/index.html?appid=7e73a491ac63495b846f4ada7358f24f">Zoning Viewer</a>.</p>
   <SourceLine sources={city} org="city-of-morgantown" about="working in Morgantown city limits" />
   <div class="actions">
@@ -99,6 +101,7 @@ const complaint = [{ url: 'https://www.wvclboard.wv.gov/complaint/', checked }];
     <a class="btn" href="tel:+13042847405"><Icon name="phone" /><span>Call the city: 304-284-7405</span></a>
   </div>
   {r('morgantown-business-license') && <ResourceCard r={r('morgantown-business-license')} showCost />}
+  <p>Starting or growing a business? See <a href={`${base}/business/`}>start or grow a business</a> for free coaching and classes.</p>
 
   <h2 id="check">Check a contractor before you hire</h2>
   <p>You can look up a West Virginia contractor's license for free on the <strong>Contractor Licensing Board</strong> site. Search by license number (it starts with "WV"), or by classification, company name, city or county. The board says the search is updated in real time.</p>
