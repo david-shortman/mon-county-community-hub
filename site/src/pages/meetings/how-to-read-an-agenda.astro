@@ -1,0 +1,109 @@
+---
+// How to read an agenda (#529): the parts of a City Council or County
+// Commission agenda in plain words, from state law and the boards' own
+// agendas. Process only. Never says how any board should act.
+import Base from '../../layouts/Base.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: "community", topic: "government", label: "How to read a meeting agenda", summary: "Consent agenda, first and second reading, public hearing, public comment and executive session, explained from state law and local agendas" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const day = '2026-10-31';
+const law = {
+  open: 'https://code.wvlegislature.gov/6-9A-3/',
+  closed: 'https://code.wvlegislature.gov/6-9A-4/',
+  ordinance: 'https://code.wvlegislature.gov/8-11-4/',
+};
+const cityOct20 = 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_10202026-3912';
+const cityFeb17 = 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_02172026-3659';
+const city2021 = 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_09072021-1736';
+const countyNov4 = 'https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380';
+const cityCouncil = 'https://www.morgantownwv.gov/154/City-Council';
+const parts = [
+  {
+    id: 'agenda', term: 'Agenda and packet',
+    text: [
+      'An agenda is the list of what a board plans to take up at a meeting, in order. State law says each board must make the date, time, place and agenda of its regular meetings public ahead of time. For a special meeting, it must post the purpose.',
+      'The packet is the agenda plus the papers behind each item, like the full text of an ordinance or a contract. Morgantown posts its Council packet the Thursday afternoon before a meeting.',
+    ],
+    sources: [{ url: law.open, checked: day }, { url: cityCouncil, checked: day }],
+  },
+  {
+    id: 'consent', term: 'Consent agenda',
+    text: [
+      'A consent agenda is a group of items the board approves with one vote. Morgantown agendas have explained it this way: "Matters on the Consent Agenda are voted on collectively without any debate. If any member objects, an item is removed and considered under New Business."',
+      'On recent Council agendas, the consent agenda has held second readings of ordinances, resolutions and bid approvals. The County Commission\'s agendas have a "Consent and Approval" item with things like minutes, pay vouchers and budget revisions.',
+    ],
+    sources: [{ url: city2021, checked: day }, { url: cityOct20, checked: day }, { url: cityFeb17, checked: day }, { url: countyNov4, checked: day }],
+  },
+  {
+    id: 'readings', term: 'First, second and third reading',
+    text: [
+      'An ordinance is a city law. State law says a city must read a proposed ordinance by its title at two or more meetings, at least a week apart, before it is passed. It cannot be changed in a big way at the same meeting where it is finally passed.',
+      'On Morgantown agendas, a first reading is usually under New Business, and later readings often sit on the consent agenda. The agenda says when the earlier readings happened, for example "(First Reading October 6, 2026)". Some ordinances get a third reading.',
+    ],
+    sources: [{ url: law.ordinance, checked: day }, { url: cityOct20, checked: day }],
+  },
+  {
+    id: 'hearing', term: 'Public hearing',
+    text: [
+      'A public hearing is a set time on the agenda for people to speak about one item before the board acts on it. On Morgantown agendas, public hearings are listed by the ordinance they are about. For example, the October 20, 2026 agenda held hearings on two ordinances that came up for a final vote later in the same meeting.',
+    ],
+    sources: [{ url: cityOct20, checked: day }],
+  },
+  {
+    id: 'comment', term: 'Public comment',
+    text: [
+      'Public comment is time for anyone to speak to the board, on any topic or on agenda items, depending on the board\'s rules. Council agendas call it the "public portion," which follows rules Council adopts by resolution. The County Commission\'s agenda calls it "Comments from the public."',
+      'State law says a board cannot make you sign up to speak more than 15 minutes before the meeting starts.',
+    ],
+    sources: [{ url: cityOct20, checked: day }, { url: countyNov4, checked: day }, { url: law.open, checked: day }],
+  },
+  {
+    id: 'executive-session', term: 'Executive session',
+    text: [
+      'An executive session is a closed part of a meeting. State law allows it only for certain reasons, such as hiring or discipline of a public employee, a person\'s health or privacy, buying or selling property, or security. Most other meetings must be open.',
+      'Before the board closes the doors, the person running the meeting must say in public which part of the law allows it, and a majority of members present must vote to go in. No decision can be made in executive session. Any final action happens after the public is let back in.',
+      'Agendas name the law, for example "Pursuant to WV State Code Section 6-9A-4(b)(2)(A) to discuss personnel matters."',
+    ],
+    sources: [{ url: law.closed, checked: day }, { url: cityOct20, checked: day }],
+  },
+  {
+    id: 'other', term: 'Other words you will see',
+    list: [
+      ['Unfinished business', 'items held over from an earlier meeting.'],
+      ['New business', 'items coming up for the first time.'],
+      ['Correspondence', 'letters, reports and updates the board has received.'],
+      ['Proclamation', 'a statement by the board recognizing a group, a person or a month.'],
+      ['Work session or Committee of the Whole', 'a meeting where Morgantown City Council talks things through but does not vote.'],
+      ['Minutes', 'the official written record of what happened, posted after the meeting.'],
+    ],
+    sources: [{ url: cityCouncil, checked: day }, { url: cityOct20, checked: day }],
+  },
+];
+---
+<Base title="How to read a Morgantown or Mon County meeting agenda" description="What a consent agenda, first and second reading, public hearing, public comment and executive session mean on Morgantown City Council and Monongalia County Commission agendas, from state law and the boards' own agendas.">
+  <h1>How to read a meeting agenda</h1>
+  <p class="lede">Agendas use a few special words. Here is what they mean on City Council and County Commission agendas, from state law and the boards' own agendas.</p>
+
+  <ul class="choices">
+    {parts.map((p) => <li><a class="choice" href={`#${p.id}`}><span class="choice-label">{p.term}</span></a></li>)}
+  </ul>
+
+  {parts.map((p) => (
+    <section class="card" id={p.id} aria-labelledby={`${p.id}-h`}>
+      <h2 id={`${p.id}-h`}>{p.term}</h2>
+      {p.text?.map((t) => <p>{t}</p>)}
+      {p.list && <ul>{p.list.map(([w, d]) => <li><strong>{w}:</strong> {d}</li>)}</ul>}
+      <SourceLine sources={p.sources} about={p.term} />
+    </section>
+  ))}
+
+  <h2>Next steps</h2>
+  <ul>
+    <li><a href={`${base}/meetings/`}>See posted agendas for coming meetings</a></li>
+    <li><a href={`${base}/have-your-say/`}>How to comment at each board</a></li>
+    <li><a href={`${base}/who-decides/`}>Who decides what</a></li>
+  </ul>
+
+  <p class="meta">This page explains the words. It is not legal advice, and each board's own rules and agendas are the official record. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
