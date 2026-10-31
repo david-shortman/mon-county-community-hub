@@ -34,7 +34,7 @@ export function GET({ site }) {
 - [Diabetes, blood pressure or weight](${u('/diabetes-and-weight/')}): health department dietitians with a sliding fee, and free diabetes and heart clinics for Health Right patients
 - [Ride to a medical visit](${u('/medical-rides/')}): Medicaid and WVCHIP rides through Modivcare (book 5 business days ahead), and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares
 - [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
-- [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
+- [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, VA help for veterans losing housing, free help filing a VA claim (WVDVA Clarksburg office, VA benefits line), veteran job help, Legion and VFW posts in Morgantown, and burial benefits and veterans cemeteries
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
 - [Medicaid waivers](${u('/medicaid-waivers/')}): a plain guide to West Virginia's four Medicaid home care waivers (ADW, IDDW, TBIW, CSEDW): who each is for, how to start, who to call
