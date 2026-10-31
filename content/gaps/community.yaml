@@ -1,0 +1,37 @@
+# Find your people gaps (#263): kinds of groups and places a resident here
+# might look for that we searched for and could not find on a current page.
+# Shown in the "Help wanted" box on /find-your-people/. Describe the gap;
+# never promise to fill it. A gap leaves this list once a checked source is
+# found, and that source becomes a listing in content/places.
+#
+# Each gap: `what`, `why`, optional `guide` (a "start one here" page we have
+# read), and `checked` (the Morgantown date we last looked).
+topic: community
+gaps:
+  - what: A language exchange or conversation table
+    why: Newcomers and people learning a language often meet this way. We found none in Mon County; the library offers Mango Languages online.
+    checked: 2026-10-30
+  - what: An adult hiking club with posted hikes
+    why: Hiking with a group is a common way to start, and safer for beginners. We found no local club page with a schedule.
+    checked: 2026-10-30
+  - what: A climbing gym or climbing group
+    why: The last climbing gym we know of has stayed closed, and we found no public climbing group.
+    checked: 2026-10-30
+  - what: A year-round LGBTQ+ group that meets off campus
+    why: Morgantown Pride lists events through the year, but we found no regular meeting time for a group open to the public.
+    checked: 2026-10-30
+  - what: A community band, orchestra or choir with a current page
+    why: Playing or singing with others is open to all ages. The pages we could read were old or blocked.
+    checked: 2026-10-30
+  - what: Civic and service clubs with current meeting times
+    why: Rotary, Kiwanis and Lions clubs are a common way to meet people and help out. We found no current club page for Mon County with a meeting time.
+    checked: 2026-10-30
+  - what: A men's shed or similar drop-in workshop group
+    why: These give people, often older men, a place to make and fix things together. We found none here.
+    guide:
+      text: A five-step guide to starting one (Men's Sheds).
+      url: https://www.changex.org/us/mensshedsus/guide
+    checked: 2026-10-30
+  - what: Fire hall or church suppers posted on their own pages
+    why: Many suppers are posted only on Facebook, which we cannot check. We list only meals a public page names.
+    checked: 2026-10-30

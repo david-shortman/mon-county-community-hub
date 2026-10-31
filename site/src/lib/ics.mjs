@@ -1,5 +1,5 @@
 // Builds iCalendar (RFC 5545) text for the full feed and for single events.
-const esc = (s = '') => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+export const esc = (s = '') => String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
 const compact = (d) => d.replaceAll('-', '');
 const nextDay = (d) => { const x = new Date(`${d}T12:00:00Z`); x.setUTCDate(x.getUTCDate() + 1); return x.toISOString().slice(0, 10); };
 // Lines over 75 octets (bytes, not characters) must be folded. Never split a character.
@@ -48,6 +48,8 @@ export function icsDocument(events, name = 'Mon County deadlines and dates') {
   const lines = [
     'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Everything Morgantown//Deadlines//EN',
     'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', `X-WR-CALNAME:${esc(name)}`, 'X-WR-TIMEZONE:America/New_York',
+    // RFC 7986 names and refresh hint, for apps that skip the X-WR- lines (#108).
+    `NAME:${esc(name)}`, 'REFRESH-INTERVAL;VALUE=DURATION:P1D', 'X-PUBLISHED-TTL:P1D',
     ...VTIMEZONE,
     ...events.flatMap((e) => vevent(e, stamp)),
     'END:VCALENDAR',

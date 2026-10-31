@@ -1,0 +1,201 @@
+{
+  "id": "bls-laus-monongalia",
+  "feed_url": "https://api.bls.gov/publicAPI/v1/timeseries/data/LAUCN540610000000003",
+  "fetched": "2026-10-31T00:09:29.672Z",
+  "data": {
+    "points": [
+      {
+        "month": "2024-01",
+        "label": "January 2024",
+        "value": 3.6,
+        "preliminary": false
+      },
+      {
+        "month": "2024-02",
+        "label": "February 2024",
+        "value": 3.7,
+        "preliminary": false
+      },
+      {
+        "month": "2024-03",
+        "label": "March 2024",
+        "value": 3.7,
+        "preliminary": false
+      },
+      {
+        "month": "2024-04",
+        "label": "April 2024",
+        "value": 2.8,
+        "preliminary": false
+      },
+      {
+        "month": "2024-05",
+        "label": "May 2024",
+        "value": 3.1,
+        "preliminary": false
+      },
+      {
+        "month": "2024-06",
+        "label": "June 2024",
+        "value": 3.8,
+        "preliminary": false
+      },
+      {
+        "month": "2024-07",
+        "label": "July 2024",
+        "value": 3.6,
+        "preliminary": false
+      },
+      {
+        "month": "2024-08",
+        "label": "August 2024",
+        "value": 3.5,
+        "preliminary": false
+      },
+      {
+        "month": "2024-09",
+        "label": "September 2024",
+        "value": 2.8,
+        "preliminary": false
+      },
+      {
+        "month": "2024-10",
+        "label": "October 2024",
+        "value": 2.7,
+        "preliminary": false
+      },
+      {
+        "month": "2024-11",
+        "label": "November 2024",
+        "value": 2.8,
+        "preliminary": false
+      },
+      {
+        "month": "2024-12",
+        "label": "December 2024",
+        "value": 2.8,
+        "preliminary": false
+      },
+      {
+        "month": "2025-01",
+        "label": "January 2025",
+        "value": 3.3,
+        "preliminary": false
+      },
+      {
+        "month": "2025-02",
+        "label": "February 2025",
+        "value": 3.5,
+        "preliminary": false
+      },
+      {
+        "month": "2025-03",
+        "label": "March 2025",
+        "value": 3.4,
+        "preliminary": false
+      },
+      {
+        "month": "2025-04",
+        "label": "April 2025",
+        "value": 2.8,
+        "preliminary": false
+      },
+      {
+        "month": "2025-05",
+        "label": "May 2025",
+        "value": 3.1,
+        "preliminary": false
+      },
+      {
+        "month": "2025-06",
+        "label": "June 2025",
+        "value": 3.6,
+        "preliminary": false
+      },
+      {
+        "month": "2025-07",
+        "label": "July 2025",
+        "value": 3.4,
+        "preliminary": false
+      },
+      {
+        "month": "2025-08",
+        "label": "August 2025",
+        "value": 3.7,
+        "preliminary": false
+      },
+      {
+        "month": "2025-09",
+        "label": "September 2025",
+        "value": 3.5,
+        "preliminary": false
+      },
+      {
+        "month": "2025-11",
+        "label": "November 2025",
+        "value": 3.8,
+        "preliminary": false
+      },
+      {
+        "month": "2025-12",
+        "label": "December 2025",
+        "value": 3.7,
+        "preliminary": false
+      },
+      {
+        "month": "2026-01",
+        "label": "January 2026",
+        "value": 3.9,
+        "preliminary": false
+      },
+      {
+        "month": "2026-02",
+        "label": "February 2026",
+        "value": 4.3,
+        "preliminary": false
+      },
+      {
+        "month": "2026-03",
+        "label": "March 2026",
+        "value": 3.2,
+        "preliminary": false
+      },
+      {
+        "month": "2026-04",
+        "label": "April 2026",
+        "value": 3.3,
+        "preliminary": false
+      },
+      {
+        "month": "2026-05",
+        "label": "May 2026",
+        "value": 3.1,
+        "preliminary": false
+      },
+      {
+        "month": "2026-06",
+        "label": "June 2026",
+        "value": 3.9,
+        "preliminary": false
+      },
+      {
+        "month": "2026-07",
+        "label": "July 2026",
+        "value": 3.2,
+        "preliminary": false
+      },
+      {
+        "month": "2026-08",
+        "label": "August 2026",
+        "value": 3.2,
+        "preliminary": false
+      },
+      {
+        "month": "2026-09",
+        "label": "September 2026",
+        "value": 2.8,
+        "preliminary": true
+      }
+    ]
+  }
+}

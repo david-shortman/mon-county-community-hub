@@ -1,0 +1,11 @@
+name: West Virginia Department of Agriculture (WVDA)
+slug: wv-department-of-agriculture
+kind: government
+website: https://agriculture.wv.gov/
+phone: "304-558-3550"
+summary: The state agency for farming and food products. It registers farmers markets and gives permits to market vendors who sell some home-canned foods.
+topics: [growing]
+area: statewide
+sources:
+  - url: https://agriculture.wv.gov/divisions/regulatory-and-environmental-affairs/farmers-market/
+    checked: 2026-10-30

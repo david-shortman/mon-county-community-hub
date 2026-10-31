@@ -1,0 +1,26 @@
+name: STUDIO 287 Open Studio
+slug: boparc-studio-287-open-studio
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: parks-board
+  text: Morgantown Board of Parks and Recreation (BOPARC)
+story: An open art studio for adults in the basement of the Wiles Hill Community Center. No experience needed.
+regular:
+  - Tuesdays and Thursdays, 9 a.m. to noon
+cost: $12 per day, or $50 per month (8 sessions). Some projects cost extra.
+venue: wiles-hill-community-center
+interests: [arts, crafts]
+tags: [beginners, come-alone]
+contact:
+  url: https://www.boparc.org/studio-287--community-art--pottery-studio.html
+  phone: "304-296-8356"
+  place: 287 Eureka Dr., Morgantown, WV
+status: active
+notes:
+  - Using the clay studio needs class sign-up and extra fees.
+  - The page lists no dates, so call to check hours.
+sources:
+  - url: https://www.boparc.org/studio-287--community-art--pottery-studio.html
+    checked: 2026-10-30

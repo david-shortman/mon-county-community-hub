@@ -2,15 +2,27 @@
 // One sourced resource from content/resources, phone first: what it is, who it
 // is for, what to do, then big buttons. Source and checked date in small print,
 // naming who published the source (#327).
+import WhatHappensNext from './WhatHappensNext.astro';
+import BusLink from './BusLink.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
-import { websiteLabel } from '../lib/content.mjs';
-const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
+import PassItOn from './PassItOn.astro';
+import { websiteLabel, oldestChecked, staleDaysFor } from '../lib/content.mjs';
+// headingLevel: 3 by default; use 2 when cards sit right under the page's h1.
+const { r, sms, smsLabel, lead, showCost = false, headingLevel = 3 } = Astro.props;
+const H = `h${headingLevel}`;
 ---
+{r.hidden ? (
 <article class="card resource" id={r.slug}>
-  <h3>{r.title}</h3>
+  <H>{r.title}</H>
+  <SourceLine sources={[]} about={r.title} slug={r.slug} />
+</article>
+) : (
+<article class="card resource" id={r.slug}>
+  <H>{r.title}</H>
   {lead && <p><strong>{lead}</strong></p>}
-  <p>{r.who_it_is_for} {r.what_to_do}</p>
+  <p>{r.who_it_is_for}{' '}{r.what_to_do}</p>
+  {r.steps?.length > 0 && <ol class="card-steps">{r.steps.map((t) => <li>{t}</li>)}</ol>}
   {showCost && r.cost && r.cost !== 'free' && <p><strong>Cost:</strong> {r.cost}</p>}
   <Actions callFirst
     phone={r.contact?.phone} phoneLabel={r.title}
@@ -18,5 +30,9 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
     link={r.contact?.url} linkLabel={websiteLabel(r)}
     about={r.title}
   />
-  <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <BusLink place={r.contact?.place} about={r.title} />
+  <WhatHappensNext r={r} />
+  <SourceLine sources={r.sources} phone={r.phone_confirmed} staleDays={staleDaysFor(r)} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
+)}

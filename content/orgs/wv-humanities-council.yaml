@@ -1,0 +1,13 @@
+name: West Virginia Humanities Council
+slug: wv-humanities-council
+kind: nonprofit
+website: https://wvhumanities.org/
+phone: "304-346-8500"
+summary: The state partner of the National Endowment for the Humanities. It gives matching grants to nonprofits for public history, literature and other humanities programs. Its website says grantmaking is limited for now and most grant types are paused.
+topics: [community]
+area: statewide
+sources:
+  - url: https://wvhumanities.org/grants/how-to-apply-guidelines/
+    checked: 2026-10-30
+  - url: https://wvhumanities.org/grants/aboutourgrants/
+    checked: 2026-10-30

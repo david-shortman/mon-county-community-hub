@@ -1,0 +1,6 @@
+# 2026-10-31: Start a business by location, and local grants (#18, #19)
+
+- **Considered:** findability questions on business licenses (q09), free coaching (q10) and food permits (q11) scored low, and no public grant calendar for local nonprofits exists (landscape map).
+- **Chose:** research notes plus entries the site can use now. `docs/research/start-a-business-by-location.md` lists state steps, then local steps for Morgantown, Star City, Granville, Westover and the unincorporated county, food permits, and free coaching. `docs/research/local-grants-and-funders.md` lists grant cycles and profiles of local funders from public tax filings (organizations only).
+- **Shipped:** 7 orgs (state business and arts agencies, SBDC, county planning, Benedum, WV Humanities Council, 100+ People Who Care), 8 resources (state registration, SBDC coaching, three town license pages, county permits, three health department food permits), and one calendar entry (United Way funded partner applications, January 11 to March 5, 2027).
+- **Left off:** the Westover license entry waits for the Westover org in #675. SCORE, LaunchLab and the Women's Business Center were not checked yet. Grant rounds with no published date (YCF in August 2027, arts grants in April 2027) are open questions, not guesses.
