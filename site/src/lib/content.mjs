@@ -70,8 +70,24 @@ export function loadCalendarWithFeeds() {
     // A hidden hand-written entry also hides the feed item with its slug (#519).
     const hand = loadCalendar();
     const taken = new Set(loadCalendar({ withHidden: true }).map((e) => e.slug));
-    const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug));
-    return [...hand, ...fromFeeds];
+    // A feed item that a hand-written entry already covers (same first three
+    // title words, starting within the hand entry's dates) is left out too,
+    // so one event never shows twice under two slugs (#761).
+    const words = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 3).join(' ');
+    const covered = (f) => hand.some((h) => words(h.title) === words(f.title) && f.starts >= h.starts && f.starts <= h.ends);
+    const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug) && !covered(e));
+    // Two feeds can list the same event (#852). Same rule across feeds: same
+    // first three title words and the same start date. The feed listed first
+    // in ADAPTERS wins, so the result never depends on fetch timing.
+    const firstFeed = new Map();
+    const deduped = fromFeeds.filter((e) => {
+      const key = `${e.starts}|${words(e.title)}`;
+      const other = firstFeed.get(key);
+      if (other && other !== e.feed?.id) return false;
+      firstFeed.set(key, e.feed?.id);
+      return true;
+    });
+    return [...hand, ...deduped];
   })();
   return merged;
 }
