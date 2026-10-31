@@ -1,0 +1,26 @@
+name: MOTO Toolbox (Morgantown Tool Outreach)
+slug: moto-toolbox
+kind: lending
+area: downtown
+run_by: City of Morgantown
+hours: Wednesday to Friday, 9 a.m. to 4:30 p.m. Saturday, noon to 4 p.m. Closed Sunday to Tuesday.
+sells: Free loans of hand tools, power tools, lawn care and gardening tools. Safety gear like chaps, safety glasses and ear protection comes with some tools. Loans last 7 days, with one 7-day renewal if no one else has reserved the tool.
+goods: [tools]
+buys_from_you: false
+who_can_use: City of Morgantown residents 18 and up, plus local groups and nonprofits. People who live outside city limits cannot borrow.
+what_to_bring: A photo ID and proof of residency, such as a utility bill, lease or W-2. Sign the liability waiver online before your first checkout.
+url: https://moto.myturn.com/library/
+url_label: Reserve tools
+status: confirmed
+note: Free to join. Late fees are $1 per tool per day. City pages list different addresses, so check the booking site for the pickup spot.
+sources:
+  - url: https://morgantownwv.gov/720/Morgantown-Tool-Outreach-MOTO
+    checked: 2026-10-30
+  - url: https://moto.myturn.com/library/
+    checked: 2026-10-30
+  - url: https://morgantownwv.gov/DocumentCenter/View/6187/MOTO-FAQs
+    checked: 2026-10-30
+  - url: https://morgantownwv.gov/DocumentCenter/View/6223/MOTO-Quick-Guide
+    checked: 2026-10-30
+  - url: https://morgantownwv.gov/CivicSend/ViewMessage/message/272456
+    checked: 2026-10-30

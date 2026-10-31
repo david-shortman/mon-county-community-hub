@@ -1,0 +1,20 @@
+title: Unemployment
+slug: unemployment
+topic: health
+definition: "Percentage of population ages 16 and older unemployed but seeking work."   # County Health Rankings' own definition (v023)
+unit: percent
+data_year: "2023"
+release: County Health Rankings 2025
+values:
+  monongalia: 0.0310493083
+  west_virginia: 0.039021292
+  united_states: 0.036390896
+sources:
+  - name: County Health Rankings 2025 data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-30
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
+    checked: 2026-10-30
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    checked: 2026-10-30
+more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia   # the human page for this county

@@ -248,12 +248,13 @@ export function loadDoors() {
 
 // A door's own page data, from content/doors/<slug>.yaml (#235). Each step
 // gets its resource record, which carries the phone, link and sources.
-export function loadDoorPage(slug) {
-  const file = path.join(CONTENT_DIR, 'doors', `${slug}.yaml`);
+// A topic guide (content/guides/<slug>.yaml, like /grow/) has the same shape.
+export function loadDoorPage(slug, dir = 'doors') {
+  const file = path.join(CONTENT_DIR, dir, `${slug}.yaml`);
   if (!fs.existsSync(file)) return null;
   const raw = YAML.parse(fs.readFileSync(file, 'utf8'));
   const steps = Object.fromEntries(Object.entries(raw.steps ?? {}).map(([id, s]) => [id, { id, ...s, record: resource(s.resource) }]));
-  return { ...raw, steps, situations: raw.situations ?? [], also: raw.also ?? [], _file: `doors/${slug}.yaml` };
+  return { ...raw, steps, situations: raw.situations ?? [], also: raw.also ?? [], _file: `${dir}/${slug}.yaml` };
 }
 
 // Secondhand shops, free and lending programs, and online groups (#423).
@@ -301,4 +302,13 @@ export const FRESH_DAYS = 122;
 export function notCheckedLately(sources, today = todayYmd()) {
   const c = oldestChecked(sources);
   return !!c && (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${c}T12:00:00Z`)) / 86400000 > FRESH_DAYS;
+}
+
+// Gaps for a topic (content/gaps/<topic>.yaml, #444): things we looked for and
+// could not find. Shown in a "Help wanted" box. Null when the file is missing.
+export function loadGaps(topic) {
+  const file = path.join(CONTENT_DIR, 'gaps', `${topic}.yaml`);
+  if (!fs.existsSync(file)) return null;
+  const raw = YAML.parse(fs.readFileSync(file, 'utf8'));
+  return { ...raw, gaps: raw.gaps ?? [], _file: `gaps/${topic}.yaml` };
 }
