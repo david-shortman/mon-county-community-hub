@@ -214,10 +214,16 @@ export function sourceGroups(sources, orgSlug) {
 // Checked dates are Morgantown dates (America/New_York). After 6 months a
 // card says it may be out of date (the rule in content/README.md, #39).
 export const STALE_DAYS = 183;
-export function isStale(checked, today = todayYmd()) {
+export function isStale(checked, today = todayYmd(), days = STALE_DAYS) {
   if (!checked) return false;
-  return (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${checked}T12:00:00Z`)) / 86400000 > STALE_DAYS;
+  return (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${checked}T12:00:00Z`)) / 86400000 > days;
 }
+
+// Make it better entries (topic `better`, and board records in
+// content/boards/) change faster: seat counts and grant rounds. They say
+// "may be out of date" after 90 days instead of 6 months (#791, #291).
+export const FAST_STALE_DAYS = 90;
+export const staleDaysFor = (r) => ((r?.topics ?? []).includes('better') || String(r?._file ?? '').startsWith('boards/') ? FAST_STALE_DAYS : STALE_DAYS);
 
 // A "Report a problem" link that opens our GitHub issue form with the item
 // already filled in: its name, its slug and its source (#39, #48). It asks

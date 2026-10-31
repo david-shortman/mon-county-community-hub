@@ -8,7 +8,7 @@ import Base from '../../layouts/Base.astro';
 import Actions from '../../components/Actions.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import NextRung from '../../components/NextRung.astro';
-import { loadDir } from '../../lib/content.mjs';
+import { loadDir, FAST_STALE_DAYS } from '../../lib/content.mjs';
 export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City boards that shape how Morgantown looks, which have open seats, and how to apply" };
 const all = loadDir('boards');
 const boards = all.filter((b) => !b.section);
@@ -31,7 +31,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
   <div class="note">
     <p><strong>How to apply:</strong> fill out the city's application <a href={applyOnline}>online</a>, or print the <a href={applyPdf}>paper application (PDF)</a> and return it to the City Clerk's office. Seats stay open until they are filled.</p>
   </div>
-  <SourceLine sources={listSrc} about="how to apply" />
+  <SourceLine sources={listSrc} staleDays={FAST_STALE_DAYS} about="how to apply" />
 
   <h2>Boards with open seats</h2>
   {open.map((b) => (
@@ -43,7 +43,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
       <p><strong>Meets:</strong> {b.meets}</p>
       <Actions link={applyOnline} linkLabel="Apply online" about={b.name} />
       <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
-      <SourceLine sources={b.sources} org={b.org} about={b.name} />
+      <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
     </article>
   ))}
 
@@ -57,7 +57,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
       {b.who_can_serve && <p><strong>Who can serve:</strong> {b.who_can_serve}</p>}
       <p><strong>Meets:</strong> {b.meets}</p>
       <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
-      <SourceLine sources={b.sources} org={b.org} about={b.name} />
+      <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
     </article>
   ))}
 
@@ -67,7 +67,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
     {others.map((b) => <li><strong>{b.name}:</strong> {b.open_note}. {b.who_can_serve}</li>)}
   </ul>
   <p class="more"><a href={vacancyList}>The city's full vacancy list</a></p>
-  <SourceLine sources={listSrc} about="the other open seats" />
+  <SourceLine sources={listSrc} staleDays={FAST_STALE_DAYS} about="the other open seats" />
 
   <h2 id="county">County boards</h2>
   <p>The Monongalia County Commission appoints residents to its own boards. It takes a letter of interest or an application from anyone willing to go to meetings. Send letters to the Monongalia County Commission, 2nd Floor, Courthouse, 243 High Street, Morgantown, WV 26505. The county's page does not list open seats, so ask the Commission office.</p>
@@ -78,7 +78,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
       <p>{b.created}</p>
       <p><strong>Who serves:</strong> {b.who_can_serve}</p>
       <p><strong>Meets:</strong> {b.meets}</p>
-      <SourceLine sources={b.sources} org={b.org} about={b.name} />
+      <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
     </article>
   ))}
 
