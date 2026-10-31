@@ -1,0 +1,47 @@
+title: Keeping the heat, power and water on
+slug: utility-bills
+summary: About 1 in 10 adults in Mon County were threatened with a utility shutoff in the past year. Utility bills are the second most common reason people here call West Virginia 211.
+evidence:
+  - url: https://data.cdc.gov/d/swc5-untb
+    checked: 2026-10-31
+    shows: CDC estimates the share of adults whose utility service was threatened with a shutoff in the past year. It is a model-based estimate, not a count.
+    figure: "9.5% of adults (likely between 7.8% and 11.5%)"
+    data_date: "2023"
+    publisher: CDC PLACES (2025 release)
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: West Virginia 211 logged 714 utility requests from Monongalia County in one year, second only to housing and shelter (page 62 of the PDF).
+    figure: "714 of 4,428 requests"
+    data_date: August 2024 to August 2025
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: In the health department's 2025 survey, missed or late rent or utility payments were among the top hardships people named (page 55 of the PDF).
+    data_date: "2025"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+affected:
+  estimate: "9.5% of adults"
+  description: Adults in Monongalia County threatened with a utility shutoff in the past year, as estimated by CDC.
+  url: https://data.cdc.gov/d/swc5-untb
+  checked: 2026-10-31
+severity: high
+severity_why: A winter heat or water shutoff can put health and housing at risk.
+trend: unknown
+working_on:
+  - org: dollar-energy-fund
+  - org: mon-power
+  - org: hope-gas
+  - org: morgantown-utility-board
+  - org: wv-department-of-human-services
+  - org: wv-public-service-commission
+  - org: west-virginia-211
+  - name: North Central West Virginia Community Action
+    url: https://ncwvcaa.org/
+gaps:
+  - Bill help comes from many programs with different windows, like the state heating help (LIEAP) season.
+  - What to do in the days before a shutoff is not easy to find in one place.
+topics: [money]
+rank: 4
+rank_why: "Score 11 of 12: severity 3, reach 2, agreement 3, room to help 3 (several bill programs exist and have deadlines). Second highest 211 demand."
+questions: [q01, q03]
+issues: [134, 135, 664]

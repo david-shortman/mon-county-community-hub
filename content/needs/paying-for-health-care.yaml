@@ -1,0 +1,48 @@
+title: Paying for health care and medicine
+slug: paying-for-health-care
+summary: Cost is the top reason people here say they have trouble getting care. About 1 in 4 people in a 2025 hospital survey could not say they can afford medical care when they need it. New Medicaid rules start in January 2027.
+evidence:
+  - url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    checked: 2026-10-31
+    shows: In the 2025 community survey for Monongalia and Marion counties, cost of health care or medicine was the top quality of life problem (page 23). On page 66, 25% disagreed that they can afford medical care when needed, and 19% disagreed that they can afford medicine.
+    figure: "50% named cost of care or medicine a top problem; 25% cannot afford care; 19% cannot afford medicine"
+    data_date: "2025"
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: In the health department's 2025 survey of 1,457 people, high cost of care was the top thing that makes care hard to get, for every adult age group and every income range (page 54 of the PDF).
+    data_date: "2025"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-31
+    shows: The share of people under 65 with no health insurance.
+    figure: "6.2% (West Virginia 7.4%, US 9.5%)"
+    publisher: County Health Rankings (2025 release)
+  - url: https://bms.wv.gov/new-medicaid-rules-are-coming
+    checked: 2026-10-31
+    shows: West Virginia Medicaid says some members ages 19 to 64 must meet new work or community engagement rules starting January 1, 2027, unless they are exempt.
+    publisher: West Virginia Bureau for Medical Services
+affected:
+  estimate: "about 1 in 4 survey respondents"
+  description: Share of people in the 2025 hospital survey (171 answers) who disagreed that they can afford medical care when needed. The survey leans toward people with higher incomes and more schooling, so the share for the whole county may differ.
+  url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+  checked: 2026-10-31
+severity: high
+severity_why: People who skip care or medicine because of cost can get much sicker, and the Medicaid change has a fixed start date.
+trend: unknown
+working_on:
+  - org: milan-puskar-health-right
+  - org: wvu-medicine
+  - org: mon-health-medical-center
+  - org: monongalia-county-health-department
+  - org: wv-department-of-human-services
+  - org: wvu-school-of-dentistry
+gaps:
+  - Free and low-cost clinics, hospital financial help and prescription programs are spread across many sites.
+  - Plain steps for keeping Medicaid under the 2027 rules are not yet in one place (issues 221 and 214).
+  - Dental care is on the health department's list of the hardest care to get.
+topics: [health]
+rank: 2
+rank_why: "Score 12 of 12: severity 3, reach 3, agreement 3, room to help 3 (programs exist that people miss, and the Medicaid change is time sensitive). Ranked below food because its reach comes from a small survey, not a county-wide estimate."
+questions: [q05, q08]
+issues: [221, 403, 478, 985]
