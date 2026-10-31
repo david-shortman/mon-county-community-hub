@@ -69,7 +69,10 @@ const today = todayYmd();
 const dayFmt = (style) => new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: style, month: style, day: 'numeric' }).format(new Date(`${today}T12:00:00Z`));
 const [longToday, shortToday] = [dayFmt('long'), dayFmt('short')];
 const forecast = await todaysForecast();
-const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morgantown';
+// Search results cut titles at about 60 characters, so the site name is added
+// only when it fits. og:site_name still names the site on shares (#939).
+const SITE_NAME = 'Everything Morgantown';
+const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? `${title} | ${SITE_NAME}` : title;
 ---
 <!doctype html>
 <html lang="en">
