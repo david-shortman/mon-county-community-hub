@@ -10,6 +10,8 @@ Every fix, removal or add request from a group gets one issue with the `group-re
 
 The no-account way in is the [fix or removal form](https://tally.so/r/rD5adv) on Tally (`FIX_FORM` in `site/src/lib/group-requests.mjs`). Answers go to David's Tally account, never to GitHub. Per #522, David is the gate: a request becomes an issue only on his yes to that request, and the form's text never goes into the repo or to a session that can write to it.
 
+The same way in by email is fix@everythingmorgantown.org (`FIX_EMAIL`). It is a free Porkbun forward to David's private Gmail. The same rule holds: David decides, and the email's text, sender and address never go into the repo or to a session that can write to it.
+
 Use the **Group request (project team)** issue form. It asks for only what we need to act:
 
 - **Item:** the content file, like `content/resources/grace-shelter.yaml`, and the page it shows on. The clock can only hide an item when the file is named.

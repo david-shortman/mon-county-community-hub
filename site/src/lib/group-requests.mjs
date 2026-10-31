@@ -11,6 +11,10 @@ export const REQUEST_DAYS = 7;
 // Answers go to David, never to GitHub. A team member files the issue, only on
 // David's yes, with no sender details or message text.
 export const FIX_FORM = 'https://tally.so/r/rD5adv';
+
+// The same way in by email (#522). It forwards to David's private inbox.
+// Same rule as the form: mail never goes into the repo or to GitHub as-is.
+export const FIX_EMAIL = 'fix@everythingmorgantown.org';
 export const PRIORITY_DAY = Math.max(1, REQUEST_DAYS - 4); // 3 when the promise is 7 days
 export const DAVID_DAY = Math.max(1, REQUEST_DAYS - 2); // 5 when the promise is 7 days
 
