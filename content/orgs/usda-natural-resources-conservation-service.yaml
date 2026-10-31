@@ -1,0 +1,12 @@
+name: USDA Natural Resources Conservation Service (NRCS)
+slug: usda-natural-resources-conservation-service
+kind: government
+website: https://www.farmers.gov/working-with-us/service-center-locator
+summary: A federal agency that works with farmers and landowners on conservation. It has staff at USDA Service Centers, including one in Morgantown that serves Monongalia County.
+topics: [growing]
+area: national
+sources:
+  - url: https://www.farmers.gov/working-with-us/service-center-locator
+    checked: 2026-10-31
+  - url: https://www.farmers.gov/sites/default/files/json/scl.json
+    checked: 2026-10-31

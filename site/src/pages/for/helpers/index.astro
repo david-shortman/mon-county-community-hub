@@ -1,0 +1,19 @@
+---
+// Helper role cards (#404): for people residents already go to, like
+// teachers, pastors, librarians, nurses, landlords and bus drivers. Each card
+// says what to do when someone tells you about a problem. Links only to
+// pages and records with sources; nothing is collected.
+import Base from '../../../layouts/Base.astro';
+import { ROLES } from '../../../lib/helper-roles.mjs';
+export const page = { door: "about", label: "Cards for helpers", summary: "If someone tells you about a problem, what to do: cards for teachers, pastors, librarians, nurses, landlords and bus drivers" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Cards for helpers in Morgantown and Mon County: what to do when someone asks" description="One-page cards for teachers, pastors, librarians, nurses, landlords and bus drivers in Monongalia County: if someone tells you about a problem, here are the first steps, with local phone numbers and sources.">
+  <h1>Cards for helpers</h1>
+  <p class="lede">People often tell a teacher, a pastor or a bus driver before they tell anyone else. Each card lists a few things you might hear and two or three steps for each, with local numbers.</p>
+  <ul class="topic-list">
+    {ROLES.map((r) => <li><a href={`${base}/for/helpers/${r.slug}/`}>{r.name}</a><span class="hint">{r.situations.map((s) => s.hears).join('. ')}.</span></li>)}
+  </ul>
+  <p>Want to hand someone a short list of places instead? <a href={`${base}/make-a-list/`}>Make a list for someone</a>.</p>
+  <p class="note">These cards share public information. They are not legal, medical or professional advice. You do not need to solve the problem: pointing someone to the right place is enough.</p>
+</Base>

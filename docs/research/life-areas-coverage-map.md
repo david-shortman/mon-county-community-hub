@@ -39,12 +39,12 @@ Review this table monthly with the #222 table. When a PR merges, move its row.
 | | Owning a home: permits, septic, floods | Covered | `/permits/`, `/septic-and-wells/`, `/flood-zone/` |
 | | Home safety, weatherization | Waiting for David | #876, #813 |
 | | Moving here, utilities, internet | Covered | `/moving-here/`, `/internet/`, `/for/new-to-mon-county/` |
-| | Pets and animals | **Missing** | Being built in this wave, see section 4 |
+| | Pets and animals | Covered, more waiting | `/pets/` (#1007); bite steps in #1021; unknowns in #1024 |
 | Safety | Scams | Covered | `/scams/` |
 | | Weather alerts, storms | Covered, more waiting | `/weather-alerts/`; #811, #871 |
 | | Safe from someone at home | Covered (crisis only) | `/stay-tonight/` |
 | | Everyday safety | In progress (Duet) | #213, `docs/research/everyday-safety.md` |
-| | Legal help that is not eviction | **Missing** | Being built in this wave, see section 4 |
+| | Legal help that is not eviction | Covered | `/legal-help/` (#1002); unknowns in #1023 |
 | Learning and growing up | Babies to Pre-K | Covered, more waiting | `/families-and-kids/`, `/for/parents-young-kids/`; #866, #960 |
 | | School-age kids, teens | Covered, more waiting | `/school-age/`, `/teens/`, `/teen-drivers/`; #870, #867 |
 | | Child care | Waiting for David | #960, #735 |
@@ -52,7 +52,7 @@ Review this table monthly with the #222 table. When a PR merges, move its row.
 | | Library card and what it gets you | Covered | `/meet-people/`, `/internet/` |
 | Relationships and belonging | Groups, clubs, meeting people | Covered | `/find-your-people/`, `/meet-people/`, `/community-centers/` |
 | | Volunteering | Covered | `/volunteer/`, `/make-it-better/` |
-| | Being a family caregiver | **Partly** | `/disability-and-aging/` has dementia groups only; #849 adds help at home. Being built in this wave, see section 4 |
+| | Being a family caregiver | Covered | `/caregivers/` (#1011); #849 adds help at home; unknowns in #1026 |
 | | Refugees and immigrants | Partly, more waiting | `/help-in-your-language/`; #801 |
 | | Veterans | Covered, more waiting | `/veterans/`; #828 |
 | Place and getting around | Bus, rides, licenses | Covered | `/getting-around/`, `/bus-routes/`, `/bus-passes/`, `/drivers-license/` |
@@ -60,15 +60,15 @@ Review this table monthly with the #222 table. When a PR merges, move its row.
 | | Roads, streetlights, reporting a problem | Covered | `/make-it-better/` |
 | | Trash, recycling, drop-off | Covered | `/recycling/`, `/sell-or-donate/` |
 | | Parks and trails | Covered | `/parks/`, `/park-refunds/` |
-| | Growing food | Partly | `/grow/`, `/soil-test/`, `/plant-problems/`, `/sell-what-you-grow/`; community garden plots and small farm help are thin (#438, #441) |
+| | Growing food | Partly, more waiting | `/grow/`, `/soil-test/`, `/plant-problems/`, `/sell-what-you-grow/` (USDA and WVDA farm help added in #1020; market days in #1028). No community garden plots on any official page (#1027); Extension-only facts in #552 |
 | Voice and civic life | Voting | Covered | `/vote/` |
 | | Meetings, who decides, boards | Covered | `/meetings/`, `/have-your-say/`, `/who-decides/`, `/make-it-better/boards/` |
-| | Jury duty | **Missing** | Part of the legal help page being built in this wave |
+| | Jury duty | Covered | `/legal-help/#jury` (#1002) |
 | Purpose, culture and free time | Arts and making | Covered | `/arts-and-making/` |
 | | Events and dates | Covered | `/calendar/`, `/pulse/`, `/markets/` |
 | Community money | Grants for projects and groups | Covered | `/make-it-better/grants/`, `/start-a-group/`; #844 waits |
-| Life events and papers | Birth certificate, ID, marriage license | **Missing** | Being built in this wave, see section 4 |
-| | When someone dies | **Missing** | Being built in this wave, see section 4; veterans burial in #828 |
+| Life events and papers | Birth certificate, ID, marriage license | Covered | `/ids-and-records/` (#1018); Social Security cards and passports in #1025 |
+| | When someone dies | Covered | `/when-someone-dies/` (#1018); veterans burial also in #828 |
 
 ## 2. Charter topic areas
 
@@ -91,9 +91,9 @@ Every group has a research file in [`docs/groups/`](../groups/), and its gaps ha
 | Renters | none | Waiting for David | #832 (#565, #566, #567) |
 | Parents of babies and toddlers | `/for/parents-young-kids/` | Covered, more waiting | #866, #960 |
 | Older adults | `/for/older-adults/` | Covered, more waiting | #849, #841 |
-| People with disabilities and caregivers | `/for/disability-and-caregivers/` | Partly | Caregiver help beyond dementia (this wave); #841 |
+| People with disabilities and caregivers | `/for/disability-and-caregivers/` | Covered, more waiting | `/caregivers/` (#1011); #841 |
 | Veterans | `/veterans/` | Covered, more waiting | #828 |
-| New to Mon County | `/for/new-to-mon-county/` | Covered | Birth certificate and ID page being built this wave; #801 |
+| New to Mon County | `/for/new-to-mon-county/` | Covered | `/ids-and-records/` (#1018); #801 |
 | Homeowners | none | Partly, more waiting | #842, #813, #876 |
 | Parents of school-age kids | `/school-age/` | Covered, more waiting | #870 |
 | Teens | `/teens/` | Covered | Teen mental health waits on #687 |
@@ -127,7 +127,7 @@ Scored the way the needs register in #984 scores needs: severity, reach, and roo
 - **Caregivers:** 63 million Americans are family caregivers (AARP and the National Alliance for Caregiving, Caregiving in the US 2025, https://www.aarp.org/pri/topics/ltss/family-caregiving/caregiving-in-the-us-2025/). National.
 - **Birth certificate and ID, when someone dies, parking:** no public count found. Reach is scored from how widely the need comes up: almost everyone needs a birth certificate for a REAL ID, a passport or some jobs, and every family deals with a death at some point. Parking reach is a judgment, not a number.
 
-**This wave:** ranks 1 to 5 are being built as pages, linked from #222 as their PRs open. Rank 6 (parking) is next. Rank 7 needs David, because any money page waits for him.
+**Built in wave 4 (October 31, 2026):** ranks 1 to 5, as `/legal-help/` (#1002), `/pets/` (#1007), `/ids-and-records/` and `/when-someone-dies/` (#1018) and `/caregivers/` (#1011). Rank 6 (parking) is next. Rank 7 needs David, because any money page waits for him.
 
 ### Questions to add to the findability set
 
