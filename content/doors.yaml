@@ -41,7 +41,7 @@ doors:
   - slug: care
     name: Get care
     page: /care/
-    hint: Mental health, a dentist, help paying for medicine, Medicaid in 2027, shots
+    hint: Mental health, no insurance, a dentist, help paying for medicine, Medicaid in 2027, shots
     icon: health
     examples:
       # Ranked by local need (#475). Each shows once its page exists.

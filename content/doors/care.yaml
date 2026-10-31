@@ -10,7 +10,7 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: Mental health help, a dentist, help paying for medicine, keeping your Medicaid in 2027, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Mental health help, care with no insurance, a dentist, help paying for medicine, keeping your Medicaid in 2027, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
@@ -25,6 +25,14 @@ steps:
     when: week
     resource: valley-counseling
     text: Call Valley HealthCare to set up counseling. Ask about the sliding fee if money is tight.
+  freeclinic:
+    when: week
+    resource: health-right-clinic
+    text: Low income and no insurance? Call Milan Puskar Health Right to become a patient at the free clinic.
+  applycoverage:
+    when: week
+    resource: apply-for-medicaid-wv
+    text: Apply for Medicaid or WVCHIP on WV PATH, or call DoHS.
   ride:
     when: week
     resource: wv-medicaid-rides
@@ -76,6 +84,10 @@ situations:
     label: I want to keep my Medicaid in 2027
     page: /medicaid-2027/
     steps: [medicaid2027]
+  - id: noinsurance
+    label: I have no insurance or can't afford a doctor
+    page: /no-insurance/
+    steps: [freeclinic, applycoverage]
   - id: dentist
     label: I need a dentist, or help paying for medicine
     page: /dental-and-prescriptions/
