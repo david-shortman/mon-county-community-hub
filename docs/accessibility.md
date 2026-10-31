@@ -20,7 +20,7 @@ Machines catch only part of the problems. The "Needs a person" list below is the
 |---|---|---|
 | Automated scan (many) | Pass | 0 axe problems at 390px and 1280px, light and dark |
 | Text contrast (1.4.3, 1.4.6) | Pass | Text pairs are at least 7:1 in both themes |
-| Contrast of chart lines and controls (1.4.11) | Pass, after a fix | The orange trend line was 2.99:1 on the page background. Now 3.17:1 (this PR) |
+| Contrast of chart lines and controls (1.4.11) | Pass, after a fix | The orange trend line was 2.99:1 on the page background. Now 3.17:1 (#1035) |
 | Reflow at 320px (1.4.10) | Pass | No page scrolls sideways at 320px. 400% zoom on a 1280px screen is the same test |
 | Text at 200% (1.4.4) | 116 of 137 pass; 21 fixes waiting | Fixed in #1008. Still waiting: home page crisis buttons (#1016), 19 flyers and How is Mon County doing? (fixes written on #971, those pages are in open PRs #938 and #956) |
 | Text spacing (1.4.12) | Pass | Nothing scrolls sideways or gets cut off |
@@ -41,7 +41,7 @@ Machines catch only part of the problems. The "Needs a person" list below is the
 
 - #1008: no sideways scroll at 200% text on Compare halls and on trend chart number tables; `check-a11y` now checks 200% text.
 - #1022: the Vote page's voter ID card shows the IDs as a list and each exception apart (#973).
-- This PR: the trend chart's orange line meets 3:1, and `scripts/a11y-deep.mjs` lets anyone re-run this audit.
+- #1035: the trend chart's orange line meets 3:1, and `scripts/a11y-deep.mjs` lets anyone re-run this audit.
 
 ## Waiting
 
