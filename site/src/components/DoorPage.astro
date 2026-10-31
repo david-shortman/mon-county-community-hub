@@ -15,6 +15,7 @@
 import Actions from './Actions.astro';
 import EventCard from './EventCard.astro';
 import SourceLine from './SourceLine.astro';
+import AfterHours from './AfterHours.astro';
 import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, telHref, resource, websiteLabel } from '../lib/content.mjs';
 import { loadPages, doorTopics } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -43,6 +44,10 @@ const cw = data.cant_wait && resource(data.cant_wait.resource);
 // The text line: set in the door file (988 texts at its own number), or the record's text line (211 texts at 898-211).
 const cwSms = cw && (data.cant_wait.sms ?? cw.contact.text);
 const r211 = resource('wv-211');
+// The after hours box (#192) shows on the doors people use to get help, with
+// any step that can be started online.
+const helpDoor = !guide && ['this-month', 'care', 'family'].includes(slug);
+const online = steps.map((st) => resource(st.resource)).filter((r, i, a) => r?.contact?.url_label === 'Apply online' && a.indexOf(r) === i);
 ---
 <p class="lede">{data.lede}</p>
 
@@ -57,6 +62,8 @@ const r211 = resource('wv-211');
     <SourceLine sources={cw.sources} org={cw.org} about={cw.title}>{data.cant_wait.emergency && ' 911 is the standard emergency number.'}</SourceLine>
   </section>
 )}
+
+{helpDoor && <AfterHours online={online} />}
 
 <h2 id="pick-h">{ask}</h2>
 <ul class="topic-list sit-links" id="door-links">
