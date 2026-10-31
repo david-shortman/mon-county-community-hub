@@ -127,6 +127,9 @@ Live feeds wired in now:
 | Mountaineer Food Bank pantry calendar | Mobile pantries the food bank files under Monongalia County | `https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county` |
 | Monongalia County calendar | Parks and recreation events and election days. Repeating events (like the weekly Commission meeting) are left out because we do not expand repeat rules, and we never guess a date | The JSON behind `https://www.monongaliacounty.gov/calendar.php` |
 | Morgantown Public Library System calendar | One-time events and closures at every branch. Programs the feed repeats 3 or more times (weekly storytimes, clubs) are left out so they do not bury the dates page. Staff names in the feed are never read | `https://events.mympls.org/ical_subscribe.php?src=p&cid=17544` |
+| Monongalia Arts Center calendar | Classes, workshops, concerts and markets. Cards send people to the center's site for cost. A repeating event shows only the date the feed gives | The public Google Calendar on `https://www.monartscenter.com/` |
+| Morgantown Farmers Market calendar | Market days only, not the market's old social media reminders. A repeating market shows only its first date, with a note to check for later dates | The market's public Google Calendar (`morgantownfarmersmarket@gmail.com`) |
+| Mylan Park events calendar | Every event the park lists, including outside groups' shows, meets and markets. Cards send people to the event page for tickets and cost | `https://mylanpark.org/wp-json/tribe/events/v1/events` |
 
 Not wired in: WVU's events calendar (`www.events.wvu.edu`) answers our requests with 403 Forbidden (checked 2026-10-30), so it stays out until WVU publishes a feed we may read. We never work around a block (#107).
 
