@@ -1,0 +1,10 @@
+name: West Virginia Department of Transportation
+slug: wv-department-of-transportation
+kind: government
+website: https://transportation.wv.gov
+summary: The state agency for roads. Its Division of Highways takes care of state roads. District 4 covers Monongalia County.
+topics: [government]
+area: statewide
+sources:
+  - url: https://transportation.wv.gov/agencies/highways/districts/district-four
+    checked: 2026-10-30

@@ -4,6 +4,7 @@
 // (our measurement rules), and no reporter is ever named.
 import Base from '../layouts/Base.astro';
 import PromiseNumbers from '../components/PromiseNumbers.astro';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 import { loadDir, prettyDate, ymd, todayYmd } from '../lib/content.mjs';
 export const page = { door: "about", label: "Corrections", summary: "What we got wrong, what we fixed, and when" };
 const KINDS = { fact: 'Fact fixed or removed', link: 'Broken or wrong link', outdated: 'Out of date', wording: 'Wording' };
@@ -25,7 +26,7 @@ const report = 'https://github.com/david-shortman/mon-county-community-hub/issue
   <h1>Corrections</h1>
   <p class="lede">When we get something wrong, we fix it and list it here, newest first. Typos are fixed without a note.</p>
   <p><strong>{monthName}:</strong> {thisMonth.length ? `${count(thisMonth.length)} fixes` : 'no fixes yet'}{fromHelpers.length > 0 && `, ${count(fromHelpers.length)} of them from people who work at these places or help others find services`}.</p>
-  <p>See something wrong? Use the "Report a problem" link on the item, or <a href={report}>tell us here</a>. Reports go to GitHub, which needs a free account, and are public.</p>
+  <p>See something wrong? Use our <a href={FIX_FORM}>fix or removal form</a>. You don't need an account, and what you send is not posted. You can also use the "Report a problem" link on the item, or <a href={report}>tell us on GitHub</a>. GitHub needs a free account, and reports there are public.</p>
   <PromiseNumbers />
   <h2>Every fix</h2>
   {all.length ? (

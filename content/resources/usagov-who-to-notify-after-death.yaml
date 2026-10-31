@@ -1,0 +1,20 @@
+title: Checklist of government offices to tell after a death
+slug: usagov-who-to-notify-after-death
+org: usagov
+topics: [records, government]
+who_it_is_for: Anyone handling things after a family member or friend dies.
+what_to_do: Use the USAGov list of agencies to notify. For most, you will need the person's Social Security number and certified copies of the death certificate.
+steps:
+  - Social Security and Medicare, usually through the funeral director.
+  - The state motor vehicles office, to cancel a license or ID and transfer a vehicle title.
+  - The IRS, by filing the person's final income tax return.
+  - The U.S. Department of State, to cancel a passport.
+  - The state social services office, to stop benefits like SNAP or Medicaid.
+  - The local election office, to cancel the voter registration.
+  - The VA, if the person was a veteran, about burial, survivor benefits and life insurance.
+contact:
+  url: https://www.usa.gov/report-a-death
+  url_label: Agencies to notify
+sources:
+  - url: https://www.usa.gov/report-a-death
+    checked: 2026-10-31

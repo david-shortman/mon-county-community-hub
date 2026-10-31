@@ -1,0 +1,17 @@
+title: Free West Virginia court forms and case search
+slug: wv-court-forms-and-records
+org: wv-supreme-court-of-appeals
+topics: [legal, government]
+who_it_is_for: Anyone who needs a form for a West Virginia court case, or wants to look up a magistrate or circuit court case. The forms cover topics like civil complaints, divorce, child support, guardianship, expungement, fee waivers and personal safety orders. Some forms come in Spanish.
+what_to_do: Use the Court Forms page to search by court, topic or form number. The courts say the forms are not a substitute for legal advice, and that changing a form beyond filling it in is not allowed. To look up a case, use the Court Records page, which links to statewide searches for circuit court and magistrate court cases.
+contact:
+  url: https://www.courtswv.gov/public-resources/court-forms
+  url_label: Court forms
+cost: The forms are free. The courts say registered users pay a small fee to download public circuit court documents.
+sources:
+  - url: https://www.courtswv.gov/public-resources/court-forms
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/court-record-access
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/info-for/public
+    checked: 2026-10-31

@@ -19,18 +19,33 @@ items:
       address each week, find it from the Community section): dinners, bingo,
       bazaars and festivals at a listed place.
     url: https://www.dominionpost.com/
+    how: >-
+      The Community section does not list it. Addresses look like
+      dominionpost.com/2026/10/30/events-opportunities-25/ and the number goes
+      up by one each issue (about twice a week). Search content/ for
+      "events-opportunities-" to find the last one read, then try the next.
+      The same listing covers the sale dates checklist.
   - text: >-
       Dominion Post, this week's "Senior news" column: Westside, Clay-Battelle
       and Senior Monongalians dated events, hours, dues or lunch days.
     url: https://www.dominionpost.com/
+    how: >-
+      Runs on Fridays at dominionpost.com/2026/10/30/senior-news-13/, the
+      number going up by one each week. Search content/ for "senior-news-" to
+      find the last one read. The monthly Senior Post is a page image with no
+      text, so skip it.
   - text: >-
-      Smithtown Community and Senior Center calendar, read in a browser (Google
-      Calendar asks robots to stay out). Leave times off: some are wrong.
+      Smithtown Community and Senior Center calendar (a Google Calendar, whose
+      robots.txt asks robots to stay out). Leave times off: some are wrong.
     url: http://www.smithtowncommunity.com/calendar.html
+    person: true
   - text: >-
-      Cheat Lake VFD events calendar, read in a browser. Public events only;
-      skip rentals and anything marked private.
+      Cheat Lake VFD events calendar (a Google Calendar shown on the page).
+      Public events only; skip rentals, "Not Available" and anything marked
+      private. The page's own text around the calendar, with event details,
+      can be read normally.
     url: https://www.cheatlakefire.org/events
+    person: true
   - text: >-
       If a "Community center or park event page changed" issue is open (label
       source-changed), work through it too.

@@ -1,0 +1,16 @@
+title: Report a death to Social Security and Medicare
+slug: ssa-report-a-death
+org: us-social-security-administration
+topics: [records]
+who_it_is_for: Family members after someone who got Social Security or Medicare dies. Social Security handles death reports for both programs.
+what_to_do: Usually you give the person's Social Security number to the funeral director, who reports the death. If the funeral director does not, call Social Security at 1-800-772-1213 (TTY 1-800-325-0778). Social Security takes death reports only by phone or in person, not by email or online.
+what_happens: Social Security benefits stop. Social Security cannot pay for the month of death, so a payment for that month must be returned. If it came by direct deposit, tell the bank and ask it to return the payment. Spouses and minor children may be able to get survivor benefits, and you can ask about them when you call.
+contact:
+  phone: "1-800-772-1213"
+  url: https://www.usa.gov/social-security-report-a-death
+  url_label: How to report a death
+sources:
+  - url: https://www.usa.gov/social-security-report-a-death
+    checked: 2026-10-31
+  - url: https://www.usa.gov/report-a-death
+    checked: 2026-10-31

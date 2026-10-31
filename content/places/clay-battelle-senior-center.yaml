@@ -19,7 +19,7 @@ contact:
   phone: "304-432-8177"
   place: 5977 Mason-Dixon Highway, Blacksville, WV
 status: active
-last_activity_seen: 2026-10-22
+last_activity_seen: 2026-10-30
 tags: [come-alone]
 notes:
   - The center has no website we could find. Its news runs in the Dominion Post's weekly senior news column.
@@ -28,3 +28,5 @@ sources:
     checked: 2026-10-30
   - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/
     checked: 2026-10-30
+  - url: https://www.dominionpost.com/2026/10/30/senior-news-13
+    checked: 2026-10-31

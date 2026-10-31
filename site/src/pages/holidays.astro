@@ -1,0 +1,97 @@
+---
+// Holiday season help for November and December (wave 4 holiday lane, #529).
+// Every date here comes from a current 2026 page. Programs with only last
+// year's dates posted are left off until a 2026 date is posted. "Coming up"
+// is built from the calendar: holiday words in the title, in the next 62 days.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import EventCard from '../components/EventCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, loadCalendarWithFeeds, upcoming, telHref } from '../lib/content.mjs';
+export const page = { door: "family", topic: "family", label: "Holiday season help", summary: "Toys, warm clothes, heat bills, holiday office closings, and ways to give in November and December" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const holidayWords = /thanksgiving|christmas|holiday|new year|veterans day|toy|angel tree|coat/i;
+const soon = upcoming(await loadCalendarWithFeeds()).filter((e) => holidayWords.test(e.title));
+const freeStore = resource('christian-help-free-store');
+const toyGive = resource('toys-for-tots-morgantown-donate');
+const helpVolunteer = resource('christian-help-volunteer');
+const checked = '2026-10-31';
+const src = {
+  toys: [
+    { url: 'https://www.unitedwaympc.org/HFTD', checked, name: 'United Way of Monongalia and Preston Counties' },
+    { url: 'https://morgantown-wv.toysfortots.org/local-coordinator-sites/lco-sites/request-toys.aspx', checked, name: 'Marine Toys for Tots, Morgantown Area' },
+    { url: 'https://morgantown-wv.toysfortots.org/local-coordinator-sites/lco-sites/local-distribution.aspx', checked, name: 'Toys for Tots distribution list' },
+  ],
+  county: [{ url: 'https://www.monongaliacounty.gov/document_center/Holiday%20Schedules/2026_Holiday_Schedule.pdf', checked, name: 'Monongalia County Commission 2026 holiday schedule' }],
+  state: [
+    { url: 'https://www.wvlegislature.gov/legisdocs/publications/info/calendar_2026.pdf', checked, name: 'WV Legislature 2026 calendar' },
+    { url: 'https://code.wvlegislature.gov/2-2-1/', checked, name: 'WV Code 2-2-1' },
+  ],
+  federal: [{ url: 'https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/', checked, name: 'U.S. Office of Personnel Management' }],
+  christianHelp: [{ url: 'https://motownchristianhelp.com/contact/', checked, name: 'Christian Help' }],
+};
+---
+<Base title="Holiday season help in Morgantown and Mon County, WV" description="November and December 2026 in Morgantown and Monongalia County, WV: toy sign-ups, free clothing, help with heat bills, county and state office holiday closings, and ways to give or volunteer.">
+  <h1>Holiday season help</h1>
+  <p class="lede">Many holiday sign-ups close weeks before the holiday. Check the dates below, then call the group to ask about anything not listed. Each item links to the group that runs it.</p>
+  <p>Jump to: <a href="#soon">Coming up</a> · <a href="#toys">Toys for kids</a> · <a href="#warm">Warm clothes and heat</a> · <a href="#closed">Holiday closings</a> · <a href="#give">Give or volunteer</a></p>
+
+  <section aria-labelledby="soon">
+    <h2 id="soon">Coming up</h2>
+    {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing holiday related on our calendar in the next two months yet.</p>}
+    <p class="more"><a href={`${base}/calendar/`}>All dates and deadlines</a></p>
+  </section>
+
+  <section aria-labelledby="toys">
+    <h2 id="toys">Toys for kids</h2>
+    <p>In Monongalia County, families signed up for Christmas toys by phone with Christian Help, Monday to Friday, October 19 to 30, 2026. The United Way's Holiday Toy and Food Distribution and the local Toys for Tots campaign both used that one sign-up. That window has closed.</p>
+    <ul>
+      <li><strong>Signed up already?</strong> Toys are given out on Thursday, December 10, 2026, at the Morgantown Readiness Center (Armory), 90 Army Band Way. Toys for Tots says to go only if the campaign told you your application was approved.</li>
+      <li><strong>Missed it?</strong> Call Christian Help at <a href={telHref('304-296-0221')}>304-296-0221</a> and ask what is still open. Christian Help says its toys are for children ages 0 to 18.</li>
+      <li><strong>Other toy programs:</strong> we have not found 2026 sign-up dates for other programs in the county yet. We add them when a group posts them.</li>
+    </ul>
+    <SourceLine sources={src.toys} about="Toy sign-up" />
+  </section>
+
+  <section aria-labelledby="warm">
+    <h2 id="warm">Warm clothes and heat</h2>
+    <ResourceCard r={freeStore} />
+    <p>Behind on a heat or power bill? See <a href={`${base}/utility-bills/`}>Help paying a utility bill</a> for LIEAP heating help, the Dollar Energy Fund and Mon Power's payment options. Need a warm place to stay tonight? See <a href={`${base}/stay-tonight/`}>A place to stay tonight</a>.</p>
+  </section>
+
+  <section aria-labelledby="closed">
+    <h2 id="closed">Holiday closings</h2>
+    <h3>Monongalia County offices</h3>
+    <p>The County Commission's 2026 schedule lists these days off:</p>
+    <ul>
+      <li>Tuesday, November 3 (General Election Day)</li>
+      <li>Wednesday, November 11 (Veterans Day)</li>
+      <li>Thursday, November 26 and Friday, November 27 (Thanksgiving)</li>
+      <li>Thursday, December 24 (half day) and Friday, December 25 (Christmas)</li>
+      <li>Thursday, December 31 (half day) and Friday, January 1, 2027 (New Year's)</li>
+    </ul>
+    <p>The schedule does not say which half of December 24 and 31 is off, and the Governor can add days. Call first on those days.</p>
+    <SourceLine sources={src.county} about="County office holidays" />
+
+    <h3>State offices</h3>
+    <p>West Virginia's 2026 state holidays in these months are November 3 (General Election Day), November 11 (Veterans Day), November 26 (Thanksgiving), November 27 (Lincoln's Day) and December 25 (Christmas). State law also makes January 1 a holiday. State offices include the Department of Human Services (DoHS); call your local office before you go near a holiday.</p>
+    <SourceLine sources={src.state} about="State holidays" />
+
+    <h3>Federal offices</h3>
+    <p>Federal offices, like Social Security and the post office, close on November 11, November 26, December 25 and January 1, 2027.</p>
+    <SourceLine sources={src.federal} about="Federal holidays" />
+
+    <h3>Not posted yet</h3>
+    <p>The library, the health department, Mountain Line buses and the City of Morgantown had not posted 2026 holiday hours when we checked on October 31. They usually post a notice shortly before each holiday. Library closings show on our <a href={`${base}/calendar/`}>calendar</a> once the library posts them.</p>
+  </section>
+
+  <section aria-labelledby="give">
+    <h2 id="give">Give or volunteer</h2>
+    <ResourceCard r={toyGive} />
+    <ResourceCard r={helpVolunteer} />
+    <p>Christian Help takes donations on Wednesdays, 9 a.m. to 3 p.m., at 219 Walnut Street. <SourceLine sources={src.christianHelp} about="Christian Help donation hours" /></p>
+    <p>More places that need help this season: <a href={`${base}/volunteer/`}>Where can I volunteer this weekend?</a></p>
+  </section>
+
+  <p class="meta">We list programs from every kind of group the same way. Know a holiday program with 2026 dates? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
