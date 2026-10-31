@@ -10,7 +10,7 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: Mental health help, care with no insurance, a dentist, help paying for medicine, keeping your Medicaid in 2027, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Mental health help, care with no insurance, a dentist, help paying for medicine, keeping your Medicaid in 2027, a new baby, birth control, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
@@ -33,6 +33,18 @@ steps:
     when: week
     resource: apply-for-medicaid-wv
     text: Apply for Medicaid or WVCHIP on WV PATH, or call DoHS.
+  pregcoverage:
+    when: week
+    resource: wv-medicaid-pregnancy
+    text: Pregnant and need coverage? Apply for Medicaid or WVCHIP on WV PATH, or call DoHS.
+  wic:
+    when: week
+    resource: monchd-wic
+    text: Call WIC to ask about healthy food and breastfeeding help.
+  repro:
+    when: week
+    resource: monchd-reproductive-health
+    text: Call the health department to book a pregnancy test, birth control or STI testing.
   ride:
     when: week
     resource: wv-medicaid-rides
@@ -92,6 +104,14 @@ situations:
     label: I need a dentist, or help paying for medicine
     page: /dental-and-prescriptions/
     steps: [dentist, healthright]
+  - id: baby
+    label: I'm pregnant or have a new baby
+    page: /pregnant-or-new-baby/
+    steps: [pregcoverage, repro, wic]
+  - id: birthcontrol
+    label: I need birth control, a pregnancy test or STI testing
+    page: /birth-control-and-testing/
+    steps: [repro]
   - id: ride
     label: I need a ride to a medical visit
     page: /medical-rides/
