@@ -34,6 +34,11 @@ steps:
     when: today
     resource: wv-find-polling-place
     text: Check that you are registered and find your polling place.
+  bus:
+    when: today
+    resource: mountain-line-fares
+    text: Look up your route and times on Mountain Line's trip planner. Have your fare ready, or swipe your WVU ID.
+    action: Check fares
 situations:
   - id: moving
     label: I'm moving here and need to start power, water, gas or trash
@@ -59,6 +64,10 @@ situations:
     label: I want to register to vote or find where I vote
     page: /vote/
     steps: [vote-register, vote-check]
+  - id: bus
+    label: I need to get around without a car
+    page: /getting-around/
+    steps: [bus]
 also:
   - text: Can't pay a water or power bill
     href: /utility-bills/

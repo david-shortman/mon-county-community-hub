@@ -1,0 +1,29 @@
+name: Adult Craft Class (Arnettsville)
+slug: mpls-adult-craft-class-arnettsville
+kind: group
+area: south
+community: Arnettsville
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: A monthly craft class for adults at the Arnettsville library, with a new project each month.
+regular:
+  - Third Wednesday of each month, 5:30 p.m. to 7 p.m.
+cost: Free
+venue: arnettsville
+interests: [crafts, social]
+tags: [free]
+contact:
+  url: https://events.mympls.org/event/17537554
+  phone: "304-278-2021"
+  place: Arnettsville Public Library, 4120 Fairmont Road, Morgantown, WV 26501
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Some months ask you to bring sharp scissors. Check that month's listing.
+sources:
+  - url: https://events.mympls.org/event/17537554
+    checked: 2026-10-30
+  - url: https://mympls.org/programs/adults/adult-craft-night/
+    checked: 2026-10-30

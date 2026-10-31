@@ -1,0 +1,97 @@
+# Mountain Line's half-fare and property tax bus pass programs (#955, part
+# of #393), from the three PDF forms and the program pages that link them
+# (all read 2026-10-31). The program pages are quoted first; the forms add
+# what to bring. Where they differ (where to turn in the half-fare forms),
+# the page says who says what. No form prints a date, so file save dates
+# are given.
+slug: mountain-line-passes
+title: Mountain Line half-fare and property tax bus passes
+publisher: Mountain Line Transit Authority
+intro: Mountain Line has three pass programs that each use a form. Here is who each is for, what it costs and how to apply, in Mountain Line's words. Questions? Call 304-291-RIDE (304-291-7433).
+recheck_days: 120
+sources:
+  - url: https://www.busride.org/gold-card-program
+    name: Mountain Line
+    checked: 2026-10-31
+  - url: https://www.busride.org/persons-with-disabilities
+    checked: 2026-10-31
+  - url: https://www.busride.org/Property-Tax-Bus-Pass-Program
+    checked: 2026-10-31
+  - url: https://www.busride.org/Fares-Programs
+    checked: 2026-10-31
+  - url: https://irp-cdn.multiscreensite.com/869937e9/files/uploaded/GoldCardApplication2020.pdf
+    checked: 2026-10-31
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/MedicareDisabledCardApplication2021.pdf
+    checked: 2026-10-31
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Tax%20Pass%20Form.pdf
+    checked: 2026-10-31
+sections:
+  - heading: Gold Card, half fare at age 62 and older
+    id: gold-card
+    items:
+      - name: Who it is for
+        lines: ["\"Applicant must have a photo I.D. verifying a minimum age of 62 to qualify for this program.\""]
+      - name: What it costs
+        lines: ["\"Gold Card cardholder's 75 cent fares will cost 35 cents per trip, one-way\""]
+      - name: How to apply
+        lines:
+          - "Mountain Line's Gold Card page has a form to fill out online, and a printable application \"If you would like to turn in a form personally\"."
+          - "The printable application says to \"submit it in person the Transit Authority Office at 691 Fairmont Road, and produce a photo I.D. verifying a minimum age of 62 to qualify for this program and have their picture taken by Receptionist.\" Call 304-291-RIDE to check where to bring it."
+        links:
+          - label: "Gold Card page"
+            url: https://www.busride.org/gold-card-program
+          - label: "Gold Card application (PDF)"
+            url: https://irp-cdn.multiscreensite.com/869937e9/files/uploaded/GoldCardApplication2020.pdf
+            saved: "November 23, 2020"
+  - heading: Half fare with a Medicare card or a disability
+    id: medicare
+    items:
+      - name: Who it is for
+        lines: ["\"Mountain Line offers a half fare program to Medicare cardholders and people with disabilities.\""]
+      - name: What it costs
+        lines: ["\"$0.35 cents on all regularly priced $0.75 cent fares\"", "The form says cardholders \"will receive a 50% discounted fare on all local routes and deviations.\""]
+      - name: What to bring
+        lines: ["The form says: \"Please bring a valid photo ID and Medicare Card, if applicable.\" Your picture is taken for the card."]
+      - name: Where to send the form
+        lines:
+          - "Mountain Line's page says: \"mail it to our Westover Facility at 420 DuPont Road, Morgantown WV 26501.\""
+          - "The form itself says to \"submit to the Authority Office at 691 Fairmont Road, Morgantown, WV.\" Call 304-291-RIDE to check where to bring it."
+        links:
+          - label: "Medicare and disability page"
+            url: https://www.busride.org/persons-with-disabilities
+          - label: "Half-Fare Program Card application (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/MedicareDisabledCardApplication2021.pdf
+            saved: "December 16, 2021"
+  - heading: Property Tax Bus Pass
+    id: property-tax
+    items:
+      - name: Who it is for
+        lines:
+          - "\"Available to property tax payers in Monongalia County. This program is also available to tenants and employees using their employer or landlord information.\""
+          - "For renters and workers, Mountain Line's page says: \"Rental Property Owners may choose to offer bus passes to their tenants\" and \"Commercial Property Owners may choose to offer bus passes to their tenants, either corporations or employers\"."
+      - name: How many passes
+        lines: ["\"$1 - $1,000 taxes paid = 1 bus pass\"", "\"$1001 - $2000 taxes paid = 2 bus passes\"", "\"$2,001 - $3,000 taxes paid = 3 bus passes\"", "\"$3,001 - …… and so on\""]
+      - name: Who cannot get one
+        lines:
+          - "People who \"Do not pay property tax in Monongalia County\" or who \"Have another form of subsidized Bus Pass\"."
+          - "Mountain Line names \"Children age 5 and under (already ride free), High School Students (already ride free), or West Virginia University students, faculty or staff (prepaid and can use their WVU ID).\""
+      - name: Where it works
+        lines: ["Local routes. Passes from this program \"will not be valid on non-regular, local route services such as the Intercity Grey Line bus service or the New Fit supplemental transit service.\""]
+      - name: What it costs
+        lines: ["\"Initial Bus Pass = Free\"", "\"Replacement Pass with surrender of previous pass = Free\"", "\"Replacement Pass for lost or stolen passes = $20\""]
+      - name: How to apply
+        lines:
+          - "Find your property tax account number on the county's tax site, then fill out the online form. Have a close-up photo of your face ready to attach."
+          - "Or print the form and \"submit it to our customer service area in our Pifer Terminal\"."
+          - "\"On average it can take between 2-4 weeks to process a bus pass application.\""
+          - "\"PASS HOLDER MUST BE PRESENT TO PICK UP BUS PASS\""
+        links:
+          - label: "Property Tax Bus Pass page"
+            url: https://www.busride.org/Property-Tax-Bus-Pass-Program
+          - label: "Online sign up form"
+            url: https://www.busride.org/taxpasssignup
+          - label: "Find your tax account number"
+            url: http://monongalia.softwaresystems.com/index.html
+          - label: "Property Tax Pass form (PDF)"
+            url: https://irp.cdn-website.com/869937e9/files/uploaded/Tax%20Pass%20Form.pdf
+            saved: "May 6, 2020"
