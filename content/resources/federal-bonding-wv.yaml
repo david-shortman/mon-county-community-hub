@@ -7,7 +7,8 @@ what_to_do: Ask the WorkForce West Virginia office on Commerce Drive about feder
 contact:
   phone: "1-800-252-5627"
   url: https://workforcewv.org/job-seeker/specialized-services/federal-bonding/
-cost: free
 sources:
   - url: https://workforcewv.org/job-seeker/specialized-services/federal-bonding/
+    checked: 2026-10-30
+  - url: https://workforcewv.org/about-workforce-wv/local-office-locations/
     checked: 2026-10-30

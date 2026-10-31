@@ -35,7 +35,7 @@ const topicLabel = (t) => doors.bySlug[doors.topicDoor[t]]?.topics[t] ?? t;
   </p>
   <h3>{e.title}</h3>
   {townLine(e) && <p class="town-line"><Icon name="pin" /><span><span class="sr-only">Where: </span>{townLine(e)}</span></p>}
-  <p>{e.who_it_is_for} {parts.map((t, i) => (i % 2 ? <a href={phoneHref(t)}>{t}</a> : t))}</p>
+  <p>{e.who_it_is_for}{' '}{parts.map((t, i) => (i % 2 ? <a href={phoneHref(t)}>{t}</a> : t))}</p>
   {e.start_time && <p class="meta"><strong>{e.phone ? 'Call to confirm the time.' : 'Check the details page to confirm the time.'}</strong></p>}
   <Actions
     link={e.url} linkLabel="More details"

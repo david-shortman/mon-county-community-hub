@@ -82,6 +82,12 @@ export function loadPages() {
 }
 
 const byLabel = (a, b) => a.label.localeCompare(b.label);
+// A to Z, but a section's own page comes before the pages under it
+// (/make-it-better/ before /make-it-better/adopt/).
+const hubFirst = (list) => {
+  const isHub = (p) => list.some((q) => q !== p && q.route.startsWith(p.route));
+  return list.sort((a, b) => (isHub(b) - isHub(a)) || byLabel(a, b));
+};
 
 // A door's topics that have at least one live page, in doors.yaml order.
 // A topic shows only when its page exists, so no one lands on an empty list.
@@ -90,7 +96,7 @@ export async function doorTopics(slug) {
   const pages = [...(await loadPages()).values()].filter((p) => p.listed && p.door === slug);
   if (!door?.topics) return pages.length ? [{ topic: null, label: door?.name, pages: pages.sort(byLabel) }] : [];
   return Object.entries(door.topics)
-    .map(([topic, label]) => ({ topic, label, pages: pages.filter((p) => p.topic === topic).sort(byLabel) }))
+    .map(([topic, label]) => ({ topic, label, pages: hubFirst(pages.filter((p) => p.topic === topic)) }))
     .filter((t) => t.pages.length);
 }
 

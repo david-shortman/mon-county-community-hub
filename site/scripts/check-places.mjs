@@ -88,6 +88,11 @@ export function checkPlaces() {
     for (const s of p.sources ?? []) if (isDate(s.checked) && s.checked < stale) warnings.push(`${where}: source last checked ${s.checked}, re-verify`);
     if (JSON.stringify(p).includes('—')) errors.push(`${where}: contains an em dash`);
   }
+  // A group can name the place it meets at (#263).
+  for (const raw of places) {
+    if (raw.venue != null && !slugs.has(raw.venue)) errors.push(`${raw._file}: venue ${raw.venue} has no file in content/places/`);
+    if (raw.venue != null && raw.kind !== 'group') errors.push(`${raw._file}: only a group can have a venue`);
+  }
   // Calendar entries can name the place they happen at (#455, #457).
   for (const e of loadCalendar()) {
     if (e.venue != null && !slugs.has(e.venue)) errors.push(`${e._file}: venue ${e.venue} has no file in content/places/`);
