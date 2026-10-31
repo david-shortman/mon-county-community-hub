@@ -85,6 +85,7 @@ ${centers}
 - [Driver's license and plates for new residents](${u('/drivers-license/')}): the WV DMV rules for switching an out-of-state license, title and registration (vehicles within 30 days), fees, what to bring, and the Morgantown Regional Office address, phone, hours and appointments
 - [Teen drivers: permit to full license](${u('/teen-drivers/')}): West Virginia's graduated driver licensing in three levels (instruction permit at 15, intermediate license at 16, full license at 17) with hours, passenger and night limits and fees, and the Morgantown DMV office
 - [Register to vote and find your polling place](${u('/vote/')}): official sources only: WV Secretary of State online registration and polling place search, the Monongalia County Clerk's office (address, phone, hours), and Morgantown city election questions
+- [Meet people and get a library card](${u('/meet-people/')}): a Morgantown Public Library System card (free for WV residents, $20 a year out of state, digital-only for county residents), free library programs for adults, and when each of Morgantown's nine neighborhood associations meets
 
 ## Data
 
