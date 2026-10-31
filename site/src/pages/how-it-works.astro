@@ -272,6 +272,13 @@ const doorSnippet = `- slug: this-month
     th { font-size: 0.95rem; color: var(--muted); }
     td:first-child { font-weight: 700; white-space: nowrap; }
     @media (max-width: 30rem) { td:first-child { white-space: normal; } }
+    /* On narrow screens and at big text sizes, each row stacks: "When" on top, then what gets checked (#971) */
+    @media (max-width: 30rem) {
+      table, tbody, tr, td { display: block; }
+      thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+      tr { padding: 8px 0; border-bottom: 1px solid var(--line); }
+      td { padding: 2px 0; border: 0; }
+    }
 
     pre { overflow-x: auto; padding: 12px 14px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; font-size: 0.9rem; line-height: 1.5; }
     code { font-size: 0.95em; }
