@@ -1,0 +1,40 @@
+name: Dorsey's Knob Lodge
+slug: dorseys-knob-lodge
+kind: park-building
+area: morgantown
+community: Dorsey's Knob Park, Morgantown
+run_by:
+  kind: parks-board
+  text: BOPARC, the Morgantown Board of Parks and Recreation
+story: A lodge in Dorsey's Knob Park for events of up to 40 people, or overnight stays.
+facilities:
+  rooms:
+    - name: Lodge main floor and basement, for events
+      seats: 40
+  kitchen: true
+  outdoor: [deck and patio, park pavilion, playground, trails]
+rentals:
+  - space: Lodge, day rental (Monday to Thursday, 8 a.m. to 10 p.m.)
+    seats: 40
+    kitchen: true
+    price: $440 for 8 hours, then $55 an hour, plus taxes (rates updated June 2024)
+    deposit: 10% at booking, not refunded
+    book: Call BOPARC at 304-296-8356.
+    source: https://www.boparc.org/dorseys-knob-lodge.html
+  - space: Dorsey's Knob Park pavilion
+    seats: 100
+    outdoor: true
+    price: $125 a day
+    book: Call BOPARC at 304-296-8356, extension 1, or book online. No same-day rentals.
+    source: https://www.boparc.org/dorseys-knob-park.html
+contact:
+  phone: "304-296-8356"
+  url: https://www.boparc.org/dorseys-knob-lodge.html
+  place: 1 Fawley Lane, Morgantown, WV
+status: active
+last_activity_seen: 2026-10-30
+sources:
+  - url: https://www.boparc.org/dorseys-knob-lodge.html
+    checked: 2026-10-30
+  - url: https://www.boparc.org/dorseys-knob-park.html
+    checked: 2026-10-30

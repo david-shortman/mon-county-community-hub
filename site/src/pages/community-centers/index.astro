@@ -1,0 +1,102 @@
+---
+// Community centers and halls (#450, #462): find a center near you, eat with
+// neighbors, rent a hall, join or pitch in. Built from content/places and
+// calendar entries with `venue`. Works without scripts: the area filter is a
+// list of links, and the name box only narrows the cards when scripts run.
+import Base from '../../layouts/Base.astro';
+import CenterCard from '../../components/CenterCard.astro';
+import EventCard from '../../components/EventCard.astro';
+import { loadCalendarWithFeeds, upcoming } from '../../lib/content.mjs';
+import { loadPlaces, byArea, rentalRows, SECTION } from '../../lib/places.mjs';
+export const page = { door: 'community', topic: 'community', label: 'Community centers and halls', summary: 'Find a center near you, community dinners, halls to rent, and how to join' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const places = loadPlaces();
+const slugs = new Set(places.map((p) => p.slug));
+// Center events in the next 60 days (#457), soonest first.
+const events = upcoming(await loadCalendarWithFeeds(), undefined, 60).filter((e) => slugs.has(e.venue));
+const nextAt = (slug) => events.find((e) => e.venue === slug);
+const centers = places.filter((p) => !['rec-center', 'park-building'].includes(p.kind));
+const publicBuildings = places.filter((p) => ['rec-center', 'park-building'].includes(p.kind));
+const groups = byArea(centers);
+const halls = rentalRows();
+const members = centers.filter((p) => p.membership);
+---
+<Base title="Community centers and halls in Mon County and Morgantown" description="Find a community center, senior center or hall near you in Monongalia County, WV: what's there, community dinners and events, halls to rent and their prices, and how to join. Every listing has a source and the date we checked it.">
+  <h1>{SECTION.name}</h1>
+  <p class="lede">Community centers, senior centers and halls across Mon County, most run by neighbors. Find one near you, go to a dinner, rent a hall, or join.</p>
+  <ul class="topic-list">
+    <li><a href="#find">Find a center near me</a></li>
+    <li><a href="#eat">Eat with neighbors</a></li>
+    <li><a href="#rent">Rent a hall</a></li>
+    <li><a href="#join">Join or pitch in</a></li>
+  </ul>
+  <p class="note">We list what each center publishes and the date we read it. Many centers post news only on Facebook, which we cannot check, so call before you go. We never take bookings or sign-ups: you deal with the center directly.</p>
+
+  <h2 id="find">Find a center near me</h2>
+  <p>Centers are grouped by part of the county. Pick your part:</p>
+  <ul class="topic-list area-links">
+    {groups.map((g) => <li><a href={`#area-${g.key}`}>{g.label}</a> ({g.places.length})</li>)}
+  </ul>
+  <div class="center-filter" id="center-filter" hidden>
+    <label for="center-q">Or type your community's name</label>
+    <input id="center-q" type="search" autocomplete="off" placeholder="Smithtown, Blacksville, Westover..." />
+    <p class="meta" id="center-count" aria-live="polite"></p>
+  </div>
+  {groups.map((g) => (
+    <section class="center-area" aria-labelledby={`area-${g.key}`}>
+      <h3 id={`area-${g.key}`}>{g.label}</h3>
+      {g.places.map((p) => <CenterCard p={p} next={nextAt(p.slug)} headingLevel={4} />)}
+    </section>
+  ))}
+  {publicBuildings.length > 0 && (
+    <section class="center-area" aria-labelledby="also-nearby">
+      <h3 id="also-nearby">Also nearby: public rec buildings and park halls</h3>
+      <p>Run by the parks board, the county or a park foundation. They have staff and set prices.</p>
+      {publicBuildings.map((p) => <CenterCard p={p} next={nextAt(p.slug)} headingLevel={4} />)}
+    </section>
+  )}
+
+  <h2 id="eat">Eat with neighbors</h2>
+  <p>Dinners, bazaars, bingo and festivals at these centers in the next 60 days. Weekly lunches and regular nights are on each center's card above.</p>
+  {events.length ? events.map((e) => <EventCard e={e} />) : <p>No dated center events on our list right now. Centers often post dinners on Facebook first, so check a center's page or call. <a href={`${base}/calendar/`}>See all dates</a>.</p>}
+
+  <h2 id="rent">Rent a hall</h2>
+  <p>{halls.length} halls, rooms and pavilions with a published way to rent them. <a href={`${base}${SECTION.route}halls/`}>Compare halls side by side</a>: seats, kitchen, outdoor space, price, deposit and how to book. Prices are what each source showed on the date we checked. Confirm when you book.</p>
+
+  <h2 id="join">Join or pitch in</h2>
+  <p>Most community centers here are kept open by volunteers and members. Going to a dinner, renting the hall or paying yearly dues all help.</p>
+  <ul>
+    {members.map((p) => <li><a href={`${base}${SECTION.route}${p.slug}/`}>{p.name}</a>: {p.membership.dues}{p.membership.covers ? `. ${p.membership.covers}` : ''}.</li>)}
+  </ul>
+  <p>To volunteer, call the center or ask at a dinner. Centers that list a way to help say so on their page.</p>
+
+  <p class="meta">Know a center we missed, or see something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
+
+<style>
+  .center-kind { margin: 0 0 6px; color: var(--muted); font-size: 0.95rem; }
+  .center-status { color: var(--brick); }
+  .center-filter { margin: 12px 0 16px; }
+  .center-filter label { display: block; font-weight: 700; margin-bottom: 4px; }
+  .center-filter input { width: 100%; max-width: 28rem; min-height: 48px; padding: 8px 12px; font: inherit; border: 2px solid var(--line); border-radius: 10px; background: var(--card); color: var(--fg); }
+</style>
+
+<script is:inline>
+  // Optional: narrows the cards by community name. Without scripts, the
+  // area links above do the same job.
+  (function () {
+    var box = document.getElementById('center-filter');
+    var q = document.getElementById('center-q');
+    var count = document.getElementById('center-count');
+    if (!box || !q) return;
+    box.hidden = false;
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.card.center'));
+    q.addEventListener('input', function () {
+      var v = q.value.trim().toLowerCase();
+      var shown = 0;
+      cards.forEach(function (c) { var on = !v || c.dataset.search.indexOf(v) > -1; c.hidden = !on; if (on) shown++; });
+      document.querySelectorAll('.center-area').forEach(function (s) { s.hidden = !s.querySelector('.card.center:not([hidden])'); });
+      count.textContent = v ? (shown ? shown + ' found.' : 'None found. Try a nearby community, or pick a part of the county above.') : '';
+    });
+  })();
+</script>
