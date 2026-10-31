@@ -167,7 +167,7 @@ export function translationProblems(t, { today, allowMachine = ALLOW_MACHINE_DRA
     if (typeof second !== 'object' || !ROLE_ID.test(second.reviewer ?? '') || !isDate(ymd(second.reviewed))) err('second_review needs reviewer (a role ID) and reviewed (a date)');
     else if (second.reviewer === d.reviewer) err('second_review must be a different reviewer');
   } else if (t.highStakes) {
-    err('is high stakes (shelter, food, benefits or a crisis line), so it needs second_review from a second fluent reader');
+    err('is high stakes (the same rules as the High stakes check), so it needs second_review from a second fluent reader');
   }
   for (const k of Object.keys(d)) if (!KNOWN_FIELDS.includes(k)) warn(`unknown field ${k}`);
   if (t.currentHash && HASH.test(d.english_hash ?? '') && d.english_hash !== t.currentHash) {
