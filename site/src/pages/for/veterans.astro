@@ -1,0 +1,40 @@
+---
+// Starting page for veterans and their families (#269, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/veterans.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "veterans", label: "Veterans and their families", summary: "VA health care, counseling, claims, jobs, money help, and when a veteran dies, in one place" };
+const sections = [
+  { title: "Health care and someone to talk to", links: [
+    { href: "/veterans/", text: "the VA clinic, the Vet Center, free help with a VA claim, and help lines that answer day and night" },
+    { href: "/medical-rides/", text: "rides to a medical visit" },
+  ] },
+  { title: "Work and training", links: [
+    { href: "/find-a-job/", text: "where local employers post jobs, and free resume help" },
+    { href: "/pay-for-training/", text: "training scholarships and grants" },
+    { href: "/work-and-learning/", text: "job help, apprenticeships and adult classes" },
+  ] },
+  { title: "Money and housing", links: [
+    { href: "/money/", text: "help with a bill, rent or food this month" },
+    { href: "/utility-bills/", text: "help with a heat, water or electric bill" },
+    { href: "/free-tax-help/", text: "free help filing your taxes" },
+  ] },
+  { title: "Papers and records", links: [
+    { href: "/ids-and-records/", text: "IDs, certificates, and getting a copy of a DD-214" },
+    { href: "/when-someone-dies/", text: "death certificates, settling an estate, and VA burial benefits" },
+  ] },
+  { title: "Turning 65", links: [
+    { href: "/turning-65/", text: "when to sign up for Medicare and help with costs" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/older-adults/", text: null },
+    { href: "/for/disability-and-caregivers/", text: null },
+    { href: "/for/job-seekers/", text: null },
+  ] },
+];
+---
+<Base title="Veterans in Morgantown and Mon County: where to start" description="A starting page for veterans and their families in Monongalia County: the VA clinic and Vet Center, free help with a VA claim, jobs and training, money and housing help, and burial benefits.">
+  <h1>For veterans and their families</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
