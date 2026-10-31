@@ -6,6 +6,7 @@
 // (PR #675). Fees, rates and due dates are left off: no town page states them.
 // Waits for David (tax).
 import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, telHref } from '../lib/content.mjs';
@@ -43,5 +44,5 @@ const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '
   <h2>Outside any town</h2>
   {resource('mon-county-planning-permits') && <ResourceCard r={resource('mon-county-planning-permits')} />}
 
-  <p class="meta">Sources checked October 30, 2026. None of these town pages list license fees, B&O rates or due dates, so call the town office before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. None of these town pages list license fees, B&O rates or due dates, so call the town office before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

@@ -10,6 +10,14 @@ const noindexed = new Set();
 // Residents search with the place name ("shelter Morgantown WV"), so guide titles carry it (#143).
 const placeName = /Morgantown|Mon County|Monongalia/;
 const noPlaceNeeded = new Set(['404.html', 'about/index.html']);
+// High-stakes pages whose GitHub link is fixed in a PR waiting for David (#1079).
+// Remove each one here when that PR merges; the list should end up empty.
+const githubAskPending = new Set([
+  'drugs-and-alcohol/index.html',
+  'free-tax-help/index.html',
+  'mental-health/index.html',
+  'property-tax/index.html',
+]);
 
 function htmlFiles(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => {
@@ -49,6 +57,12 @@ for (const file of pages) {
   const body = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
   if (/\b(undefined|Invalid Date|NaN)\b/.test(body)) errors.push(`${where}: page text says "${body.match(/\b(undefined|Invalid Date|NaN)\b/)[0]}"; a field is missing`);
   if (/href="tel:"/.test(html)) errors.push(`${where}: a call link has no number`);
+  // Residents report and suggest through the fix form (fixFormUrl), never a
+  // GitHub "new issue" link that needs an account (#1079). Pages listed in
+  // githubAskPending still have one, fixed in a PR that waits for David.
+  if (/href="https:\/\/github\.com\/[^"]*\/issues\/new/.test(html) && !githubAskPending.has(where)) {
+    errors.push(`${where}: links residents to a GitHub new issue form; use fixFormUrl from src/lib/group-requests.mjs`);
+  }
 }
 
 for (const f of ['robots.txt', 'llms.txt']) {
