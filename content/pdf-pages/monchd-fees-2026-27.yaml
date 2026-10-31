@@ -1,0 +1,134 @@
+# The Monongalia County Health Department's environmental health fee form
+# (#926, part of #393). The PDF is a scanned form with a garbled text layer,
+# so every label and fee here was read off the page image at 300 dpi on
+# 2026-10-31 and copied as printed. Labels in quotes are the form's own words.
+# Blank fees on the form (pool water samples, late fees and so on) are listed
+# as blank, not guessed.
+slug: monchd-fees-2026-27
+title: Permit Fees and Fees for Service, Fiscal Year 2026-2027
+publisher: Monongalia County Health Department
+pdf: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
+pdf_date: "Fiscal Year 2026-2027"
+found_on: https://www.monchd.org/departments-programs/environmental-health
+recheck_days: 120   # a yearly fee form; look for the next one in time for July
+sources:
+  - url: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
+    name: Monongalia County Health Department
+    checked: 2026-10-31
+  - url: https://www.monchd.org/departments-programs/environmental-health
+    checked: 2026-10-31
+sections:
+  - heading: Restaurants and other food places
+    id: food
+    note: The form lists two fees for each size, a plan review fee and a permit fee. Next to each size it also says "ABCC Lic. Add $150".
+    items:
+      - name: "0 - 20 Seats"
+        lines: ["Plan review: $250", "Permit: $150"]
+      - name: "21 - 50 Seats"
+        lines: ["Plan review: $300", "Permit: $300"]
+      - name: "51 - 79 Seats"
+        lines: ["Plan review: $350", "Permit: $450"]
+      - name: "80+ Seats"
+        lines: ["Plan review: $400", "Permit: $600"]
+      - name: Mobile Food Unit (a food truck or cart)
+        lines: ["Plan review: $150", "Permit: $150"]
+      - name: Retail
+        lines: ["Plan review: $250", "Permit: $72 for each checkout (the form says \"Checkouts * $72\")"]
+      - name: Vending Machine
+        lines: ["$72 for each machine, \"Max. $432 per site\""]
+      - name: Temporary Food Establishment permit
+        lines: ["$72"]
+  - heading: Plan review for other places
+    id: plan-review
+    items:
+      - name: Non-Food Facility
+        lines: ["$150"]
+      - name: Change of Ownership, all facilities
+        lines: ["$150"]
+      - name: Remodel, all facilities
+        lines: ["$200"]
+  - heading: Septic systems
+    id: septic
+    note: The form lists these under "Land Development".
+    items:
+      - name: Conventional Sewage System Permit
+        lines: ["$222"]
+      - name: Alternative Sewage System Permit
+        lines: ["$450"]
+      - name: Home Aeration Unit Permit
+        lines: ["$450"]
+      - name: Sewage System Permit Renewal or System Modification
+        lines: ["$150"]
+      - name: DEP Sewage System Registration Fee
+        lines: ["$30"]
+      - name: Sewage Tank Cleaning Truck Permit
+        lines: ["$16"]
+  - heading: Wells and well water
+    id: water
+    items:
+      - name: Water Well Permit, or Cathodic Well Permit
+        lines: ["$150"]
+      - name: Geo-Thermal Well Permit
+        lines: ["$150"]
+      - name: Water Well Sample Fee
+        lines: ["$45"]
+  - heading: Buying or selling a home, and radon
+    id: home
+    items:
+      - name: Home Loan Evaluation
+        lines: ["$225"]
+      - name: Radon Testing
+        lines: ["In County: $125", "Out of County: $150", "As part of a Home Loan Evaluation: $100"]
+  - heading: Child care centers
+    id: child-care
+    items:
+      - name: Child Care Center
+        lines: ["7 - 12 Children: $72", "13 - 25 Children: $150", "25+ Children: $222"]
+  - heading: Other buildings and big events
+    id: general
+    note: The form lists these under "General Facilities".
+    items:
+      - name: School Building / Adult Care / Shelter / Group Home
+        lines: ["$72"]
+      - name: Mass Gathering
+        lines: ["$72"]
+  - heading: Hotels, bed and breakfasts, and manufactured home communities
+    id: lodging
+    items:
+      - name: Hotel / Motel
+        lines: ["0 - 20 Rooms: $150", "21 - 50 Rooms: $300", "51 - 79 Rooms: $450", "80+ Rooms: $600"]
+      - name: Bed and Breakfast
+        lines: ["$72"]
+      - name: Manufactured Housing Community
+        lines: ["4 - 10 Lots: $150", "11 - 20 Lots: $180", "21 - 30 Lots: $300", "31+ Lots: $330"]
+  - heading: Pools, camps and campgrounds
+    id: recreation
+    items:
+      - name: Recreational Water Facility
+        lines: ["$150"]
+      - name: Organized Camp
+        lines: ["$108"]
+      - name: Certified Pool Operator Class
+        lines: ["$350"]
+      - name: Campground
+        lines: ["\"$7.20 Per site $72 Minimum\""]
+  - heading: Tattoo, piercing and tanning
+    id: body-art
+    items:
+      - name: Body Art
+        lines: ["The form has boxes for \"Tattoo\", \"Body Piercing\" and \"Temporary $100 Per Artist\", and lists a fee of $200."]
+      - name: Tanning
+        lines: ["1 - 5 Devices: $240", "6 - 10 Devices: $360", "11+ Devices: $480"]
+  - heading: Dividing land into lots
+    id: subdivision
+    items:
+      - name: Subdivision
+        lines: ["1 - 10 Lots: \"$140 Minimum\"", "Or $14 for each lot (the form says \"Lots * $14\")", "30 Lots: $420"]
+  - heading: Fees the form leaves blank
+    id: blank
+    note: The form has these lines with no amount filled in. Call the health department to ask what they cost.
+    items:
+      - Pool Water Sample Fee(s)
+      - Late Fee(s)
+      - Convenience Fee
+      - Fees for Service
