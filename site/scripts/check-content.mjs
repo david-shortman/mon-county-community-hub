@@ -355,6 +355,20 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
   });
 }
 
+// County indicators (content/indicators, #62): an official number, its own
+// definition, the data year, and sources with checked dates.
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more'];
+for (const i of loadDir('indicators')) {
+  checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
+  if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
+  if (!['percent', 'number', 'years'].includes(i.unit)) errors.push(`${i._file}: unit must be percent, number or years`);
+  if (!/^\d{4}(-\d{4})?$/.test(String(i.data_year ?? ''))) errors.push(`${i._file}: data_year must look like "2023" or "2020-2022" (quote it)`);
+  if (typeof i.values?.monongalia !== 'number') errors.push(`${i._file}: values.monongalia must be a number`);
+  for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
+  if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
+  if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+}
+
 // The fact store (content/facts/<topic>/, #122): every fact has its text,
 // the exact words it is based on, a source, a checked date and a re-check
 // window. A page cannot render a fact without them.
