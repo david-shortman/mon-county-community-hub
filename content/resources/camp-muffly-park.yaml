@@ -4,7 +4,8 @@ org: monongalia-county-parks-and-recreation
 topics: [outdoors]
 who_it_is_for: A county park with historic log cabins.
 hours: Open every day, 8 a.m. until dark.
-what_to_do: "It has pavilions to rent, pool access, log cabins, a dining hall and an assembly hall. Book through the county parks office."
+what_to_do: "It has pavilions to rent, pool access, log cabins, a dining hall and an assembly hall. Book through the county parks office. The cabins are not rented outside of scheduled camp programs. For a cabin, the county points you to Chestnut Ridge Park."
+get_in: walk-in
 contact:
   phone: "304-284-8484"
   url: https://www.monongaliacounty.gov/departments/parks_and_recreation/camp_muffly_park/index.php
@@ -13,3 +14,5 @@ contact:
 sources:
   - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/camp_muffly_park/index.php
     checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/camp_muffly_park/faq.php
+    checked: 2026-10-31

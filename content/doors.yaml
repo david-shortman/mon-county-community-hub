@@ -41,12 +41,14 @@ doors:
   - slug: care
     name: Get care
     page: /care/
-    hint: A dentist, help paying for medicine, shots, turning 65
+    hint: Mental health, drugs or alcohol, no insurance, a dentist, medicine, Medicaid in 2027, a new baby, shots
     icon: health
     examples:
       # Ranked by local need (#475). Each shows once its page exists.
       - text: Need mental health help
         href: /mental-health/
+      - text: Help with drugs or alcohol
+        href: /drugs-and-alcohol/
       - text: Can't afford a doctor or medicine
         href: /no-insurance/
       - text: Keep my Medicaid in 2027
@@ -82,6 +84,9 @@ doors:
       growing: Growing food and flowers
       weather: Storms and floods
       outdoors: Parks and outdoors
+      safety: Safety at home
+      pets: Pets and animals
+      records: IDs, records and papers
   - slug: family
     name: Family and life changes
     page: /family/

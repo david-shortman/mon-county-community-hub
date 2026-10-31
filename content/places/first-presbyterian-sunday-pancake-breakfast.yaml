@@ -1,0 +1,25 @@
+name: Sunday Community Pancake Breakfast
+slug: first-presbyterian-sunday-pancake-breakfast
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: community-group
+  text: First Presbyterian Church of Morgantown
+story: A free pancake breakfast on Sundays in the church gym, open to everyone.
+regular:
+  - Sundays, starting at 8 a.m.
+cost: Free
+interests: [food, social]
+tags: [free, come-alone, weekly]
+contact:
+  url: https://www.firstpresmorgantown.org/community-missions
+  place: 456 Spruce St., Morgantown, WV 26505
+status: active
+notes:
+  - The page lists the time as "8:00a - 9:00p", which looks like a typo, so only the start time is given.
+sources:
+  - url: https://www.firstpresmorgantown.org/community-missions
+    checked: 2026-10-30
+  - url: https://www.firstpresmorgantown.org/what-we-do
+    checked: 2026-10-30

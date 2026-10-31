@@ -7,6 +7,7 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadSecondhand } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "secondhand", label: "Sell, donate or give away your stuff", summary: "Clothes, kids' gear, furniture, books, electronics, tools, paint and building materials: where each can go" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadSecondhand();
@@ -20,6 +21,8 @@ const has = (s, g) => (s.goods ?? []).includes(g);
 const byName = (a, b) => a.name.localeCompare(b.name);
 const sellers = (g) => all.filter((s) => (s.buys_from_you || s.kind === 'consignment') && has(s, g)).sort(byName).map(link);
 const donors = (g) => all.filter((s) => s.takes && ['charity-thrift', 'free-program'].includes(s.kind) && has(s, g)).sort(byName).map(link);
+// Lending programs (#907): for someone who needs the thing, borrowing comes first.
+const lenders = (g) => all.filter((s) => s.kind === 'lending' && has(s, g)).sort(byName).map((s) => ({ ...link(s), who: s.who_can_use, sources: s.sources }));
 const givers = all.filter((s) => s.kind === 'free-program' && s.area === 'online').sort(byName).map(link);
 const online = all.filter((s) => s.kind === 'online-group').sort(byName).map((s) => ({ href: `${base}/markets/#${s.slug}`, name: s.name }));
 const recycling = `${base}/recycling/`;
@@ -33,7 +36,7 @@ const ITEMS = [
   { id: 'tools', label: 'Tools', g: 'tools' },
   { id: 'paint', label: 'Paint', g: null, recycle: { href: `${recycling}#hard-items`, text: 'Latex paint: the county plans a collection in 2027. Oil-based paint goes to a household hazardous waste day. Details on the recycling page.' } },
   { id: 'building', label: 'Building materials', g: 'building', none: 'There is no building materials reuse store in Mon County now. The Mon Valley Habitat for Humanity ReStore closed in October 2023, and we found nothing that replaced it.' },
-].map((it) => ({ ...it, sell: it.g ? sellers(it.g) : [], online: it.g && it.g !== 'building' ? online : [], donate: it.g ? donors(it.g) : [], free: it.g ? givers : [] }));
+].map((it) => ({ ...it, sell: it.g ? sellers(it.g) : [], online: it.g && it.g !== 'building' ? online : [], donate: it.g ? donors(it.g) : [], free: it.g ? givers : [], borrow: it.g ? lenders(it.g) : [] }));
 ---
 <Base title="Sell, donate or give away your stuff in Morgantown, WV" description="Where to sell, donate, give away or recycle clothes, kids' gear, furniture, books, electronics, tools, paint and building materials in Morgantown and Monongalia County.">
   <h1>Sell, donate or give away your stuff</h1>
@@ -53,9 +56,11 @@ const ITEMS = [
         {it.online.length > 0 && <li><strong>Sell it online:</strong> {it.online.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
         {it.donate.length > 0 && <li><strong>Donate it:</strong> {it.donate.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
         {it.free.length > 0 && <li><strong>Give it away free:</strong> {it.free.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.borrow.length > 0 && <li><strong>Need one instead? Borrow it:</strong> {it.borrow.map((x, i) => <>{i > 0 && '; '}<a href={x.href}>{x.name}</a>{x.who && <>. {x.who}</>}</>)}</li>}
         {it.recycle && <li><strong>Recycle it:</strong> <a href={it.recycle.href}>{it.recycle.text}</a></li>}
         {it.none && <li><strong>No local option:</strong> {it.none}</li>}
       </ul>
+      {it.borrow.length > 0 && !hasBorrow && it.borrow.map((x) => <SourceLine sources={x.sources} about={x.name} />)}
       {it.none && restore && <SourceLine sources={restore.sources} about="the ReStore closing" />}
     </section>
   ))}
@@ -74,7 +79,7 @@ const ITEMS = [
   </section>
 
   <p>More in this section: <a href={`${base}/thrift-shops/`}>Thrift and resale shops</a> · {hasBorrow && <><a href={`${base}/borrow-or-get-free/`}>Borrow it or get it free</a> · </>}<a href={`${base}/markets/`}>Markets and sales coming up</a></p>
-  <p class="meta">Each store decides what it can take, and that changes. Check the store's own page before you load the car. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Each store decides what it can take, and that changes. Check the store's own page before you load the car. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
 <style>
   .picks { columns: 2; padding-left: 1.2em; }

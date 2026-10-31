@@ -7,7 +7,20 @@
 export const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 // How to get in, with the words people see on the card.
 export const GET_IN = { 'walk-in': 'Walk in', appointment: 'By appointment', 'call-first': 'Call first' };
-export const LISTING_FIELDS = ['opening_hours', 'get_in', 'languages', 'access'];
+// `steps` (#822): what to do as a short numbered list, when one paragraph
+// would be long. Cards show it under `what_to_do`, which stays the summary.
+// `closed_on` (#726): holidays the source says the place closes, by name.
+// The place card works out each one's date by its fixed rule.
+export const HOLIDAYS = {
+  'new-years-day': "New Year's Day",
+  'memorial-day': 'Memorial Day',
+  'independence-day': 'Independence Day',
+  'labor-day': 'Labor Day',
+  thanksgiving: 'Thanksgiving Day',
+  christmas: 'Christmas Day',
+};
+// `meetings` (#902): regular meetings, each { name, when }, in the source's words.
+export const LISTING_FIELDS = ['opening_hours', 'get_in', 'languages', 'access', 'steps', 'closed_on', 'meetings', 'options', 'notes'];
 
 const isTime = (t) => /^([01]\d|2[0-3]):[0-5]\d$|^24:00$/.test(String(t));
 const minutes = (t) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
@@ -40,6 +53,13 @@ export function checkListing(r) {
   if (r.get_in != null && !GET_IN[r.get_in]) errors.push(`${where}: get_in must be one of ${Object.keys(GET_IN).join(', ')}`);
   if (r.languages != null && (!Array.isArray(r.languages) || r.languages.some((l) => typeof l !== 'string' || !l.trim()))) errors.push(`${where}: languages must be a list of language names`);
   if (r.access != null && (typeof r.access !== 'string' || !r.access.trim())) errors.push(`${where}: access must be text`);
+  if (r.closed_on != null && (!Array.isArray(r.closed_on) || r.closed_on.some((h) => !HOLIDAYS[h]))) errors.push(`${where}: closed_on must be a list from ${Object.keys(HOLIDAYS).join(', ')}`);
+  if (r.closed_on != null && !r.opening_hours) errors.push(`${where}: closed_on only matters with opening_hours`);
+  if (r.meetings != null && (!Array.isArray(r.meetings) || !r.meetings.length || r.meetings.some((m) => typeof m?.name !== 'string' || !m.name.trim() || typeof m?.when !== 'string' || !m.when.trim()))) errors.push(`${where}: meetings must be a list of { name, when } in the source's words`);
+  if (r.steps != null && (!Array.isArray(r.steps) || !r.steps.length || r.steps.some((t) => typeof t !== 'string' || !t.trim()))) errors.push(`${where}: steps must be a list of short sentences`);
+  // `options` (#973): a short bulleted list of choices, like the kinds of ID that count.
+  // `notes`: short paragraphs shown after the lists, for exceptions and special cases.
+  for (const f of ['options', 'notes']) if (r[f] != null && (!Array.isArray(r[f]) || !r[f].length || r[f].some((t) => typeof t !== 'string' || !t.trim()))) errors.push(`${where}: ${f} must be a list of short text items`);
   // A place a person goes to needs the first seven listing facts.
   if (r.contact?.place) {
     const missing = [!r.hours && 'hours', !r.cost && 'cost', !r.get_in && 'get_in'].filter(Boolean);

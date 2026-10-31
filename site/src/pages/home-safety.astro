@@ -1,0 +1,64 @@
+---
+// Home safety: free smoke alarms, carbon monoxide, heating and lead (from the
+// #213 research, docs/research/everyday-safety.md). Only official pages.
+// Not here: a state or city free smoke alarm program (none found on an
+// official page).
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "safety", label: "Home safety: free smoke alarms, carbon monoxide, heating and lead", summary: "Ask for free smoke alarms, stay safe from carbon monoxide and space heaters, and test a child for lead" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-30';
+const redCross = [{ url: 'https://www.redcross.org/local/west-virginia/about-us/our-work/home-fire-campaign.html', checked }];
+const smoke = [{ url: 'https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/', checked }];
+const co = [
+  { url: 'https://www.cdc.gov/carbon-monoxide/about/index.html', checked },
+  { url: 'https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center', checked },
+];
+const heat = [{ url: 'https://www.usfa.fema.gov/prevention/home-fires/prevent-fires/heating/', checked }];
+const lead = [{ url: 'https://monchd.org/services/lead-testing/', checked }];
+const leadPhone = '304-598-5181';
+---
+<Base title="Home safety in Morgantown and Mon County: free smoke alarms, carbon monoxide, heating, lead" description="How to get free smoke alarms installed in West Virginia, carbon monoxide warning signs and detectors, space heater safety, and lead testing at the Monongalia County Health Department.">
+  <h1>Home safety: smoke alarms, carbon monoxide, heating and lead</h1>
+  <p class="lede">A few things that keep a home safe, and where to get free help.</p>
+
+  <h2 id="smoke">Free smoke alarms</h2>
+  <p>The <strong>American Red Cross</strong> in West Virginia offers free smoke alarm installation and home fire safety lessons in all 55 counties. Fill out the request form, and someone from its Home Fire Campaign will contact you to set up a visit.</p>
+  <SourceLine sources={redCross} about="free smoke alarms" />
+  <div class="actions">
+    <a class="btn" href="https://americanredcross.jotform.com/261896562727876"><Icon name="open" /><span>Ask for free smoke alarms</span></a>
+  </div>
+  <p>Already have alarms? The U.S. Fire Administration says to test them every month, replace 9-volt batteries at least once a year, and get new smoke alarms every 10 years.</p>
+  <SourceLine sources={smoke} about="smoke alarm care" />
+
+  <h2 id="co">Carbon monoxide</h2>
+  <p>Carbon monoxide (CO) is a gas you cannot see or smell, and it can kill. Signs include headache, dizziness, weakness, upset stomach, vomiting, chest pain and confusion. It can feel like the flu.</p>
+  <ul>
+    <li><strong>If you think someone has CO poisoning,</strong> get outside to fresh air right away, then call <a href="tel:911">911</a>.</li>
+    <li>Put a battery or battery backup CO detector near every place people sleep. Replace it when the maker says, or every 5 years.</li>
+    <li>Have your heating system checked by a qualified technician every year.</li>
+    <li>Never run a generator inside your home or garage, even with doors and windows open.</li>
+  </ul>
+  <SourceLine sources={co} about="carbon monoxide" />
+
+  <h2 id="heat">Space heaters and fireplaces</h2>
+  <ul>
+    <li>Keep anything that can burn at least 3 feet from heaters, fireplaces and wood stoves.</li>
+    <li>Turn space heaters off when you leave the room or go to bed.</li>
+  </ul>
+  <SourceLine sources={heat} about="heating safety" />
+  <p>Trouble paying for heat? See <a href={`${base}/utility-bills/`}>Help paying a utility bill</a>.</p>
+
+  <h2 id="lead">Lead testing</h2>
+  <p>High levels of lead can harm how children grow and learn. The <strong>Monongalia County Health Department</strong> offers a finger stick lead test for anyone 1 or older. If you have insurance, it is billed. If you do not, a grant pays for the test. Call <a href={telHref(leadPhone)}>{leadPhone}</a> to make an appointment.</p>
+  <SourceLine sources={lead} about="lead testing" />
+  <div class="actions">
+    <a class="btn" href={telHref(leadPhone)}><Icon name="phone" /><span>Call for a lead test</span></a>
+  </div>
+
+  <p>Storm on the way? See <a href={`${base}/weather-alerts/`}>Get weather and emergency alerts</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these programs and do not decide who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

@@ -5,6 +5,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Work and learning", summary: "Job help, apprenticeships, help with a record or recovery, adult classes, and free English lessons" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -17,8 +18,13 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2>Find a job or job training</h2>
   {r('workforce-wv-morgantown-office') && <ResourceCard r={r('workforce-wv-morgantown-office')} />}
 
+  <h2>Ages 16 to 24 and out of school</h2>
+  {r('region-vi-career-connections') && <ResourceCard r={r('region-vi-career-connections')} />}
+  <p>Still in high school, or 14 or 15 and looking for a first job? See <a href={`${base}/teens/`}>Teens: first jobs, driving and things to do</a>.</p>
+
   <h2>Get paid while you learn a trade</h2>
   {r('apprenticeships-wv') && <ResourceCard r={r('apprenticeships-wv')} showCost />}
+  <p>Already work in a trade? See <a href={`${base}/contractor-license/`}>contractor and trade licenses</a>.</p>
 
   <h2>A record, recovery, or no ID making it hard to get hired</h2>
   {r('federal-bonding-wv') && <ResourceCard r={r('federal-bonding-wv')} />}
@@ -35,5 +41,5 @@ const r = (slug) => all.find((e) => e.slug === slug);
 
   <p>Staying healthy: see <a href={`${base}/staying-well/`}>Staying well: a simple list</a>. Need help with food or bills while you look for work? <a href="tel:211">Call 211</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not place people in jobs or classes. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not place people in jobs or classes. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

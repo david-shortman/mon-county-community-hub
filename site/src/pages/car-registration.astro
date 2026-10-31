@@ -1,0 +1,33 @@
+---
+// Renew a car registration and get a state inspection (#222 coverage map
+// follow-up). Facts come from the WV DMV registrations page, read 2026-10-31.
+// Left off: whether the Monongalia County Sheriff renews registrations (its
+// site does not say), and the WV State Police inspection station list (its
+// site did not load).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Car registration and inspection", summary: "Renew your registration online or in person, what to bring, the 24-month inspection sticker, and lost plates or decals" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Renew car registration and inspection in Morgantown, WV" description="Renew a West Virginia vehicle registration online, by mail or at the Morgantown DMV, what to bring (insurance and personal property tax receipt), the 24-month state inspection sticker, and replacing a lost plate, decal or registration card.">
+  <h1>Car registration and inspection</h1>
+  <p class="lede">You can renew your registration online any time with a credit card. Have your insurance and personal property tax receipt ready. Your inspection sticker is a separate step, every 24 months, at a licensed inspection station.</p>
+
+  <h2 id="renew">Renew your registration</h2>
+  <ResourceCard r={resource('wv-dmv-registration-renewal')} showCost />
+
+  <h2 id="inspection">Get your inspection sticker</h2>
+  <ResourceCard r={resource('wv-vehicle-inspection')} />
+
+  <h2 id="lost">Lost or stolen plate, decal or card</h2>
+  <ResourceCard r={resource('wv-dmv-lost-plate-or-decal')} showCost />
+
+  <h2 id="office">The DMV office in Morgantown</h2>
+  <ResourceCard r={resource('wv-dmv-morgantown-office')} />
+
+  <p>Just moved here? See <a href={`${base}/drivers-license/`}>driver's license and plates for new residents</a>. Need a state ID? See <a href={`${base}/ids-and-records/`}>birth certificates, IDs and records</a>.</p>
+
+  <p class="meta">Sources checked October 31, 2026. Fees and rules can change, so check the DMV's page before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

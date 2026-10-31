@@ -26,7 +26,28 @@ steps:
     when: week
     resource: wv-dmv-morgantown-office
     text: Read the DMV's rules for new residents, then walk in or make an appointment at the Morgantown DMV office.
+  vote-register:
+    when: today
+    resource: wv-online-voter-registration
+    text: Register to vote or update your address online with the Secretary of State, or in person at the County Clerk's office.
+  vote-check:
+    when: today
+    resource: wv-find-polling-place
+    text: Check that you are registered and find your polling place.
+  bus:
+    when: today
+    resource: mountain-line-fares
+    text: Look up your route and times on Mountain Line's trip planner. Have your fare ready, or swipe your WVU ID.
+    action: Check fares
+  power-out:
+    when: today
+    resource: mon-power-report-outage
+    text: Report the outage to Mon Power by phone or text. If a power line is down, call 911 and stay at least 30 feet away.
 situations:
+  - id: who-serves
+    label: Who handles police, trash, water and roads where I live?
+    page: /who-serves-me/
+    steps: [swa]
   - id: moving
     label: I'm moving here and need to start power, water, gas or trash
     page: /moving-here/
@@ -47,6 +68,18 @@ situations:
     label: I need a West Virginia driver's license or plates
     page: /drivers-license/
     steps: [dmv-office]
+  - id: vote
+    label: I want to register to vote or find where I vote
+    page: /vote/
+    steps: [vote-register, vote-check]
+  - id: bus
+    label: I need to get around without a car
+    page: /getting-around/
+    steps: [bus]
+  - id: storm
+    label: Storm damage, flooding or power out
+    page: /after-a-storm/
+    steps: [power-out]
 also:
   - text: Can't pay a water or power bill
     href: /utility-bills/

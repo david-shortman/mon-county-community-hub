@@ -1,0 +1,14 @@
+name: First Choice Services
+slug: first-choice-services
+kind: nonprofit
+website: https://www.help4wv.com/
+summary: A West Virginia nonprofit in Charleston that answers the state's 988 calls and runs HELP4WV, a 24/7 call, text and chat line for mental health and addiction help.
+topics: [health]
+area: statewide
+sources:
+  - url: https://wv988.org/about
+    checked: 2026-10-30
+  - url: https://www.help4wv.com/
+    checked: 2026-10-30
+  - url: https://projects.propublica.org/nonprofits/organizations/262900507
+    checked: 2026-10-30

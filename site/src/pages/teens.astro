@@ -1,0 +1,86 @@
+---
+// Teens and their parents (#273, part of #261): first jobs, driving, work and
+// training for 16 to 24, volunteering, and the library. Built from #593 to
+// #597. Every fact is on the linked state, board, Shack or library page.
+// Not here until confirmed (#592): MTEC high school programs, driver's ed
+// classes, a summer youth jobs program, library program times.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "family", label: "Teens: first jobs, driving and things to do", summary: "Age certificates and work hours, learner's permits, job help for ages 16 to 24, volunteering and library programs" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const cert = r('wv-teen-age-certificate');
+const gdl = r('wv-graduated-drivers-license');
+---
+<Base title="Teens in Morgantown and Mon County: first jobs, driver's license, things to do" description="For teens and their parents in Mon County: the age certificate and work hours for 14 and 15 year olds, West Virginia's three license levels, free job help for ages 16 to 24, summer volunteering at The Shack, and library programs and tutoring.">
+  <h1>Teens: first jobs, driving and things to do</h1>
+  <p class="lede">For teens in Mon County and their parents. A 14 or 15 year old needs an age certificate from the state before starting a job. Teens can get a learner's permit at 15.</p>
+
+  <h2 id="first-job">Get your first job</h2>
+  <p>Fourteen is the youngest age most teens can work for a business. Babysitting, mowing a neighbor's lawn and running errands are not covered by these rules, and neither is working in a business owned only by your parent.</p>
+  {cert && <ResourceCard r={cert} />}
+
+  <h3>Hours for 14 and 15 year olds</h3>
+  <p><strong>When school is in session:</strong></p>
+  <ul>
+    <li>Only between 7 a.m. and 7 p.m., and never during school hours.</li>
+    <li>Up to 3 hours on a school day, Fridays too.</li>
+    <li>Up to 18 hours in any week school is open at least one day.</li>
+  </ul>
+  <p><strong>Summer break (Memorial Day to Labor Day):</strong></p>
+  <ul>
+    <li>Only between 7 a.m. and 9 p.m.</li>
+    <li>Up to 8 hours a day and 40 hours a week.</li>
+  </ul>
+  <ul>
+    <li><strong>Ages 16 and 17:</strong> may work the same hours as adults.</li>
+    <li><strong>Lifeguards:</strong> 15 year olds may be lifeguards if they are trained and certified, for example by the American Red Cross. Teaching swim lessons needs a swim instructor certificate too. Fourteen year olds may not do either job.</li>
+    <li><strong>Under 18:</strong> no one may work in a bar, or sell or serve alcohol. Some other jobs are off limits too. The Division of Labor's page lists them.</li>
+  </ul>
+  {cert && <SourceLine sources={cert.sources} org={cert.org} about="teen work rules" />}
+
+  <h2 id="ages-16-to-24">Ages 16 to 24 and out of school: job and training help</h2>
+  {r('region-vi-career-connections') && <ResourceCard r={r('region-vi-career-connections')} />}
+  <p>Any age: WorkForce West Virginia on Commerce Drive helps with job leads and training. See <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>
+
+  <h2 id="driving">Learner's permit and driver's license</h2>
+  {gdl && <ResourceCard r={gdl} showCost />}
+  <h3>Level 1: instruction permit, from age 15</h3>
+  <ul>
+    <li><strong>To get it:</strong> pass a knowledge test. A parent or guardian signs if you are under 18.</li>
+    <li><strong>Limits:</strong> a licensed driver 21 or older in the front seat. Drive only from 5 a.m. to 10 p.m. No more than two passengers who are not family, besides the adult. No phone use.</li>
+  </ul>
+  <h3>Level 2: intermediate license, from age 16</h3>
+  <ul>
+    <li><strong>To get it:</strong> six months on Level 1 with no tickets, and pass a road test. Bring a form showing 50 hours of practice driving, 10 of them at night, signed by a parent or guardian, or a Driver Education Card.</li>
+    <li><strong>Passengers:</strong> for the first six months, no passengers under 20 who are not family. For the next six months, only one.</li>
+    <li><strong>Night:</strong> from 10 p.m. to 5 a.m., an adult must ride along, except to or from work, a school activity, a religious activity or an emergency.</li>
+    <li>No phone use.</li>
+  </ul>
+  <h3>Level 3: full license, from age 17</h3>
+  <ul>
+    <li><strong>To get it:</strong> one year on Level 2 with no tickets.</li>
+    <li>Points now count for tickets.</li>
+  </ul>
+  <p>All levels: everyone in the car wears a seat belt, and no alcohol at all. Two violations on Level 2 means losing the license until age 18.</p>
+  {gdl && <SourceLine sources={gdl.sources} org={gdl.org} about="license levels" />}
+
+  <h2 id="volunteer">Volunteer and earn service hours</h2>
+  {r('shack-junior-volunteers') && <ResourceCard r={r('shack-junior-volunteers')} showCost />}
+
+  <h2 id="things-to-do">Things to do, and homework help</h2>
+  {r('mympls-teen-programs') && <ResourceCard r={r('mympls-teen-programs')} />}
+  {r('mympls-online-tutoring') && <ResourceCard r={r('mympls-online-tutoring')} showCost />}
+
+  <h2>Also for teens</h2>
+  <ul>
+    <li>A disability that makes school or work harder: the Division of Rehabilitation Services works with people 14 and up. See <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</li>
+    <li>Checkups and shots: <a href={`${base}/staying-well/`}>Staying well</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30, 2026. Rules can change, so check the state's page before you apply. We describe these programs; the agencies and programs decide who can take part. Something out of date or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

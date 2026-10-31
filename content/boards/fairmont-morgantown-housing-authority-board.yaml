@@ -1,0 +1,12 @@
+name: Fairmont-Morgantown Housing Authority
+slug: fairmont-morgantown-housing-authority-board
+org: city-of-morgantown
+section: other
+open_seats: 1
+open_note: 1 seat
+who_can_serve: A resident of public housing or a voucher user in the City of Fairmont.
+url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+topics: [better]
+sources:
+  - url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+    checked: 2026-10-31

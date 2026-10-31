@@ -1,0 +1,483 @@
+{
+  "id": "monongalia-county-commission",
+  "page_url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+  "fetched": "2026-10-31T00:04:53.000Z",
+  "meetings": [
+    {
+      "slug": "mon-county-county-commission-2026-07-08-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-07-08",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20%20July%208,%202026.pdf?t=202607021252200",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-07-15-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-07-15",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20%20July%2015,%202026.pdf?t=202607101523540",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-07-15-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-07-15",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20July%2015,%202026.pdf?t=202607101524250",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-07-28-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-07-28",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20%20July%2028,%202026.pdf?t=202607241056390",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-08-05-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-08-05",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20%20August%205,%202026.pdf?t=202607311343410",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-08-05-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-08-05",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20August%205,%202026.pdf?t=202607311343590",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-08-12-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-08-12",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20%20August%2012,%202026.pdf?t=202608071436170",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-08-12-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-08-12",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20August%2012,%202026.pdf?t=202608071436320",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-08-19-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-08-19",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20%20August%2019,%202026.pdf?t=202608141549180",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-08-19-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-08-19",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20August%2019,%202026.pdf?t=202608141549380",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-08-26-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-08-26",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20%20August%2026,%202026.pdf?t=202608221820560",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-08-26-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-08-26",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20August%2026,%202026.pdf?t=202608211542460",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-09-02-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-09-02",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20September%202,%202026.pdf?t=202608311606260",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-09-09-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-09-09",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20September%209,%202026.pdf?t=202609041420240",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-09-16-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-09-16",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20September%2016,%202026.pdf?t=202609151018030",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-09-23-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-09-23",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20September%2023,%202026.pdf?t=202609181344010",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-09-23-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-09-23",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20September%2023,%202026.pdf?t=202609181345030",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-09-30-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-09-30",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20September%2030,%202026.pdf?t=202609251411580",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-09-30-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-09-30",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20September%2030,%202026.pdf?t=202609251412210",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-10-07-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-10-07",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20October%207,%202026.pdf?t=202610051029190",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-10-07-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-10-07",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20October%207,%202026.pdf?t=202610021412450",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-10-14-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-10-14",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20October%2014,%202026.pdf?t=202610081606520",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-10-14-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-10-14",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20October%2014,%202026.pdf?t=202610081607110",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-10-21-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-10-21",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20October%2021,%202026.pdf?t=202610161527220",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-10-21-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-10-21",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20October%2021,%202026.pdf?t=202610161527430",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-10-28-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-10-28",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20October%2028,%202026.pdf?t=202610231519520",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-10-28-work-session",
+      "body": "Monongalia County Commission",
+      "date": "2026-10-28",
+      "title": "Work Session Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20October%2028,%202026.pdf?t=202610231504480",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    },
+    {
+      "slug": "mon-county-county-commission-2026-11-04-meeting",
+      "body": "Monongalia County Commission",
+      "date": "2026-11-04",
+      "title": "Meeting Agenda",
+      "agenda_url": "https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380",
+      "minutes_url": null,
+      "publisher": "Monongalia County Commission",
+      "sources": [
+        {
+          "url": "https://www.monongaliacounty.gov/commission/meeting_schedule/index.php",
+          "checked": "2026-10-30"
+        }
+      ],
+      "first_seen": "2026-10-30",
+      "last_changed": "2026-10-30"
+    }
+  ]
+}

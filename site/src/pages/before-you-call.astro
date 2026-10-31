@@ -1,0 +1,104 @@
+---
+// Before you call (#406): make a phone call to an office less scary and
+// quicker. A short checklist, a place to write what they tell you, and call
+// scripts with blanks to fill in. The scripts are questions to ask, never
+// legal or medical advice, and state no facts about any program. "What to
+// have ready" for a named office comes only from its resource record
+// (`what_to_bring`, #159), so it has a source and a checked date.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "this-month", topic: "money", label: "Before you call: what to have ready and what to say", summary: "A checklist, a place to write notes, and short scripts for a utility, a landlord or a medical bill" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ready = loadDir('resources').filter((r) => r.what_to_bring?.length).sort((a, b) => a.title.localeCompare(b.title));
+const scripts = [
+  {
+    id: 'utility',
+    title: 'Calling the power, gas or water company about a bill',
+    lines: [
+      'My name is ____. My account number is ____.',
+      'I got a notice dated ____. I cannot pay the full amount right now.',
+      'Can I set up a payment plan? How much would each payment be?',
+      'What is the last day before service is shut off?',
+      'Is there any help program I should apply for?',
+    ],
+  },
+  {
+    id: 'landlord',
+    title: 'Talking to a landlord about late rent',
+    lines: [
+      'My rent for ____ will be late. I can pay $____ on ____.',
+      'Can we agree on a plan for the rest?',
+      'Can you put what we agree to in writing, by text or email?',
+    ],
+  },
+  {
+    id: 'medical-bill',
+    title: 'Calling a hospital or clinic billing office',
+    lines: [
+      'I have a bill dated ____ for $____. The account number is ____.',
+      'Can you send me an itemized bill that lists each charge?',
+      'Do you have a financial help program? How do I apply?',
+      'Can I set up a payment plan while I apply?',
+    ],
+  },
+];
+---
+<Base title="Before you call an office in Mon County: what to have ready and what to say" description="A short checklist for calling a utility, a landlord, a benefits office or a billing office in Morgantown and Monongalia County, a place to write notes, and call scripts with blanks to fill in.">
+  <h1>Before you call: what to have ready and what to say</h1>
+  <p class="lede">A phone call to an office goes faster when you have your papers in front of you and know what to ask. Print this page or keep it open while you call.</p>
+
+  <h2>Before any call</h2>
+  <ul class="checklist">
+    <li>The letter, bill or notice, if you got one</li>
+    <li>Your account number or case number, if you have one</li>
+    <li>A pen and paper, or this page printed</li>
+    <li>Time to wait on hold, and a charged phone</li>
+    <li>Your questions, written down (see the scripts below)</li>
+  </ul>
+  <p>The office may ask for more than what is listed here. If they do, write it down and ask how to send it.</p>
+
+  <h2>Write down what they tell you</h2>
+  <div class="call-notes">
+    <p>Date and time of the call: ____________________</p>
+    <p>Who I talked to: ____________________</p>
+    <p>What they said: ______________________________________</p>
+    <p>______________________________________________________</p>
+    <p>Reference or confirmation number: ____________________</p>
+    <p>What I need to do next, and by when: ________________________</p>
+  </div>
+
+  <h2>What to say: short scripts</h2>
+  <p>Fill in the blanks before you call. It is fine to read from the page. These are questions to ask, not legal advice.</p>
+  {scripts.map((s) => (
+    <section class="script" id={s.id} aria-labelledby={`${s.id}-h`}>
+      <h3 id={`${s.id}-h`}>{s.title}</h3>
+      <ul>{s.lines.map((l) => <li>"{l}"</li>)}</ul>
+    </section>
+  ))}
+
+  {ready.length > 0 && (
+    <>
+      <h2>What to have ready for these offices</h2>
+      <p>From each office's own page. Each card shows its source and when we checked it.</p>
+      {ready.map((r) => <ResourceCard r={r} showCost />)}
+    </>
+  )}
+
+  <div class="actions byc-keep"><button class="btn" type="button" id="byc-print" hidden><span>Print this page</span></button></div>
+  <p>Rather have someone help you make the call? See <a href={`${base}/money/`}>Get through this month</a> for people who can help.</p>
+
+  <style>
+    .checklist { padding-left: 1.2rem; }
+    .checklist li { margin: 4px 0; }
+    .call-notes { border: 1.5px dashed var(--muted); border-radius: 10px; padding: 8px 14px; overflow-wrap: anywhere; }
+    .call-notes p { margin: 10px 0; }
+    .script { border-left: 4px solid var(--ridge); padding: 2px 12px; margin: 12px 0; }
+    .script ul { padding-left: 1.1rem; }
+    .script li { margin: 6px 0; }
+    @media print { .byc-keep { display: none; } .script, .call-notes { break-inside: avoid; } }
+  </style>
+  <script is:inline>
+    (function () { var b = document.getElementById('byc-print'); if (!b) return; b.hidden = false; b.addEventListener('click', function () { window.print(); }); })();
+  </script>
+</Base>

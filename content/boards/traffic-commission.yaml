@@ -1,0 +1,12 @@
+name: Traffic Commission
+slug: traffic-commission
+org: city-of-morgantown
+section: other
+open_seats: 3
+open_note: 3 seats
+who_can_serve: City residents of the 2nd, 4th and 7th Wards.
+url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+topics: [better]
+sources:
+  - url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+    checked: 2026-10-31

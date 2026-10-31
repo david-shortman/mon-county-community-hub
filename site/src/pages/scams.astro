@@ -1,0 +1,62 @@
+---
+// Is this a scam? How to check and where to report (from the #213 research,
+// docs/research/everyday-safety.md). Only official pages.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "safety", label: "Is this a scam? How to check and where to report", summary: "The scams West Virginians report most, fake utility shutoff calls, protecting SNAP benefits, and where to report" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-30';
+const ag = [{ url: 'https://ago.wv.gov/file-complaint-consumer-protection-division', checked }];
+const top = [
+  { url: 'https://ago.wv.gov/article/attorney-generals-office-warns-top-scams-2025-medicare-scams-lead-list', checked },
+  { url: 'https://ago.wv.gov/article/top-scams-reported-west-virginia-attorney-generals-office-july-2026', checked },
+];
+const fe = [{ url: 'https://firstenergycorp.com/help/safety/scam-info/known-scams.html', checked }];
+const ebt = [{ url: 'https://bfa.wv.gov/article/dohs-urges-ebt-cardholders-take-steps-now-protect-benefits-skimming', checked }];
+const ftc = [{ url: 'https://consumer.ftc.gov/features/scam-alerts', checked }];
+const agPhone = '1-800-368-8808';
+const ebtPhone = '304-558-4126';
+const dohsPhone = '877-716-1212';
+---
+<Base title="Is this a scam? Check and report scams in Morgantown and Mon County, WV" description="The scams West Virginians report most, how to spot a fake Mon Power shutoff call, how to protect SNAP benefits from card skimming, and where to report a scam: the WV Attorney General and the FTC.">
+  <h1>Is this a scam?</h1>
+  <p class="lede">If a caller pushes you to pay right now, with a prepaid card or a wire transfer, it may be a scam. Hang up, then check with the company or agency yourself.</p>
+
+  <h2 id="common">The scams West Virginians report most</h2>
+  <p>The West Virginia Attorney General's office lists the top scams people reported in 2025. In order: Medicare, robocalls, Social Security or other government imposters, loans, sweepstakes and prizes, debt collection, utility shutoff, computer and phishing, tax relief, and home warranties. In July 2026 alone, the office got 176 scam complaints, with Medicare imposters at the top.</p>
+  <SourceLine sources={top} about="the top scams in West Virginia" />
+
+  <h2 id="utility">A call saying your power will be shut off</h2>
+  <p>FirstEnergy, the company Mon Power is part of, says:</p>
+  <ul>
+    <li>It does not take prepaid debit cards or wire transfers as payment.</li>
+    <li>It will not demand payment over the phone, in person, or at a certain place.</li>
+    <li>If your account is past due, you get a written notice first.</li>
+    <li>It will never make you pay to get your power back on.</li>
+  </ul>
+  <p>If you get a call like this, hang up. Call the number on your bill to check your account.</p>
+  <SourceLine sources={fe} about="utility scams" />
+  <p>Behind on a real bill? See <a href={`${base}/utility-bills/`}>Help paying a utility bill</a>.</p>
+
+  <h2 id="ebt">Protect your SNAP (EBT) card</h2>
+  <p>Skimming devices put on card readers can steal card numbers and PINs. The state says to change your PIN at the start of each month, before your benefits come in. If you think your card was copied, call the Office of EBT at <a href={telHref(ebtPhone)}>{ebtPhone}</a> or DoHS customer service at <a href={telHref(dohsPhone)}>{dohsPhone}</a>.</p>
+  <SourceLine sources={ebt} about="EBT card skimming" />
+
+  <h2 id="report">Report a scam</h2>
+  <ul>
+    <li><strong>West Virginia Attorney General, Consumer Protection:</strong> call <a href={telHref(agPhone)}>{agPhone}</a>, fill out the online complaint form, or email consumer.complaint@wvago.gov.</li>
+    <li><strong>Federal Trade Commission:</strong> report it at ReportFraud.ftc.gov.</li>
+    <li>If you think you are a victim, FirstEnergy also says to tell your local police.</li>
+  </ul>
+  <SourceLine sources={[...ag, ...ftc, ...fe]} about="reporting a scam" />
+  <div class="actions">
+    <a class="btn" href={telHref(agPhone)}><Icon name="phone" /><span>Call the Attorney General</span></a>
+    <a class="btn" href="https://wv.accessgov.com/ago/Forms/Page/consumercomplaint/file/1"><Icon name="open" /><span>File a complaint online</span></a>
+    <a class="btn" href="https://reportfraud.ftc.gov/"><Icon name="open" /><span>Report to the FTC</span></a>
+  </div>
+
+  <p class="meta">Sources checked October 30, 2026. We describe these programs and do not investigate scams. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
