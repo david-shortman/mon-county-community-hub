@@ -1,0 +1,41 @@
+# The City of Morgantown's "How Code Enforcement Handles Complaints from
+# Citizens" (part of #393), a two-page PDF linked as "Code Enforcement
+# Complaint Process" from the city's Code Enforcement page (read 2026-10-31).
+# No date is printed on it; the file says it was made July 28, 2017. The eight
+# steps are quoted. The city's page now sends complaints to SeeClickFix, which
+# the PDF does not mention.
+slug: morgantown-code-complaints
+title: How Code Enforcement Handles Complaints from Citizens
+publisher: City of Morgantown
+found_on: https://www.morgantownwv.gov/167/Code-Enforcement
+intro: "The City of Morgantown posts this sheet on what happens after you report a property problem, like a building that is not kept up. It says a complaint can take \"upwards of 60 to 80+ days\" to move through the legal system. The parts in quotes are the city's own words."
+recheck_days: 180
+sources:
+  - url: https://www.morgantownwv.gov/DocumentCenter/View/1372/Code-Enforcement-Complaint-Process
+    name: City of Morgantown
+    checked: 2026-10-31
+  - url: https://www.morgantownwv.gov/167/Code-Enforcement
+    checked: 2026-10-31
+sections:
+  - heading: What happens after you report a property problem
+    id: complaint-steps
+    note: "The city's eight steps, \"from start to finish\":"
+    items:
+      - "1. \"Code Enforcement Receives a Complaint\""
+      - "2. \"Staff Determines the Nature of the Complaint\": \"Does the complaint deal with property maintenance, commercial property, residential property, or an electrical issue?\""
+      - "3. \"Complaint is Assigned\": \"The appropriate compliance officer, building inspector, housing inspector, or electrical inspector is assigned the complaint to investigate.\""
+      - "4. \"On-site Review Performed\": \"Within 24 hours of the complaint, an officer makes an on-site review.\" If the complaint is found valid, the owner gets an official notice. The time to fix it \"can vary from immediate for an emergency, anything that threatens life, health or property, to 20 days for a non-emergency.\""
+      - "5. \"Citation is Issued\": if the time runs out and the work is not done, the owner gets a citation. \"The court date given for the citation is 21 days from the issuance.\""
+      - "6. \"Request for an Extension/Conflict with Court Date\": on or before the court date, the owner \"may be given up to another 20 days to address and fix the violation.\""
+      - "7. \"Court Date\": \"a judge may grant the requested extension of 20 days.\""
+      - "8. \"Larger Fines Administered\": \"If the owner still has not fixed the violation, a judge will issue more, and often larger, fines.\""
+      - "The sheet ends: \"Many complaints appear as if they are not addressed, but Code Enforcement always uses this process to take the necessary steps and move the violation through the legal system.\""
+  - heading: The sheet
+    id: complaint-sheet
+    items:
+      - name: "Code Enforcement Complaint Process"
+        lines: ["Two pages from the City of Morgantown. It lists Code Enforcement at 389 Spruce Street, 304-284-7401."]
+        links:
+          - label: "Code Enforcement Complaint Process (PDF)"
+            url: https://www.morgantownwv.gov/DocumentCenter/View/1372/Code-Enforcement-Complaint-Process
+            saved: "July 28, 2017"
