@@ -1,0 +1,33 @@
+name: Aull Center for Local History and Genealogy
+slug: mpls-aull-center
+kind: library
+area: morgantown
+community: Morgantown
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: The library's genealogy, local history and West Virginia collections, in the historic Garlow House next door to the Morgantown Public Library.
+regular:
+  - Mondays 9 a.m. to 6 p.m.
+  - Tuesdays 9 a.m. to 6 p.m.
+  - Wednesdays 9 a.m. to 4 p.m.
+  - Thursdays 9 a.m. to 4 p.m.
+  - Fridays 9 a.m. to 4 p.m.
+  - Saturdays 9 a.m. to 1 p.m.
+  - Sundays Closed
+interests: [books, learning]
+tags: [free]
+contact:
+  url: https://mympls.org/about/locations/aull-center/
+  phone: "304-292-0140"
+  place: 351 Spruce Street, Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - All branches are closed November 26 and 27, December 24 and 25, and December 31 and January 1.
+sources:
+  - url: https://mympls.org/about/locations/aull-center/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/16028720
+    checked: 2026-10-30

@@ -10,6 +10,9 @@ contact:
   url_label: State list of fitting stations
   place: "116 Walnut Street, Morgantown, WV 26505"
 cost: free
+get_in: appointment
 sources:
   - url: https://dmv.wv.gov/cps-seat-fitting-stations
+    checked: 2026-10-30
+  - url: https://monongaliasheriff.gov/contact_us/car_seat_installation/index.php
     checked: 2026-10-30

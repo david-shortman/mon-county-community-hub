@@ -1,0 +1,12 @@
+name: Personnel Board
+slug: personnel-board
+org: city-of-morgantown
+section: other
+open_seats: 3
+open_note: 3 seats
+who_can_serve: City residents.
+url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+topics: [better]
+sources:
+  - url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
+    checked: 2026-10-30

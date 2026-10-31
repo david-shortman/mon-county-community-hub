@@ -1,0 +1,29 @@
+---
+// Labeled picture (#179): a small drawing of a letter, notice or form with
+// numbered callouts, and a list below whose numbers match. The list carries
+// all the meaning; the drawing only helps people find each part on their own
+// paper, so screen readers skip it. Draw our own small SVG (no photos of real
+// documents, no AI-made pictures) and put it in the slot, with numbered
+// circles that match `items`. Rules: docs/design/presentation.md.
+//   items: list of { label, text }, in the drawing's number order
+//   caption: what the drawing shows, like "A shutoff notice from Mon Power"
+//   label: what the list is, for screen readers
+const { items = [], caption, label = 'Parts of the picture' } = Astro.props;
+---
+<figure class="labeled-picture">
+  <div class="lp-drawing" aria-hidden="true"><slot /></div>
+  {caption && <figcaption>{caption}</figcaption>}
+  <ol class="lp-keys" aria-label={label}>
+    {items.map((it) => <li><strong>{it.label}:</strong>{' '}{it.text}</li>)}
+  </ol>
+</figure>
+
+<style is:global>
+  .labeled-picture { margin: 16px 0; }
+  .lp-drawing { max-width: 22rem; margin: 0 auto 8px; }
+  .lp-drawing svg { display: block; width: 100%; height: auto; }
+  .labeled-picture figcaption { font-size: 0.95rem; color: var(--muted); text-align: center; margin-bottom: 8px; }
+  .lp-keys { margin: 8px 0; padding-left: 1.6rem; display: grid; gap: 6px; }
+  .lp-keys li::marker { font-weight: 800; color: var(--accent); }
+  @media print { .labeled-picture { break-inside: avoid; } }
+</style>
