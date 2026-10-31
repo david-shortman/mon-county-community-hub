@@ -32,9 +32,15 @@ const SOURCES = {
       url: str('A public page a person can open to check the facts', { format: 'uri' }),
       checked: date('Date (YYYY-MM-DD, Morgantown time) the facts were last checked against this page'),
       name: str('Who published the page, when it is not clear from the address'),
+      method: str('How the facts were read: hand (a person or agent read the page), feed (from the publisher\'s own feed) or watched-page (read from the page by a program)', { enum: ['hand', 'feed', 'watched-page'] }),
+      fetched: str('When a program read the feed (UTC); only for feed records', { format: 'date-time' }),
+      feed: str('Which feed, by id; only for feed records'),
     },
   },
 };
+// Records written by hand carry no method; the API says so (ADR 0002, #70).
+const DEFAULT_METHOD = { meetings: 'watched-page' };
+const withMethod = (type, r) => (Array.isArray(r.sources) ? { ...r, sources: r.sources.map((x) => ({ method: DEFAULT_METHOD[type] ?? 'hand', ...x })) } : r);
 
 // The needs register's shape comes straight from its JSON Schema (#74).
 const NEED = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/need.schema.json'), 'utf8'));
@@ -208,7 +214,8 @@ export async function records(type) {
     raw = loadDir(type);
   }
   const id = TYPES[type].id;
-  return raw.map((r) => shape(type, r)).sort((a, b) => (a[id] < b[id] ? -1 : a[id] > b[id] ? 1 : 0));
+  const usesSources = TYPES[type].properties.sources === SOURCES;
+  return raw.map((r) => shape(type, usesSources ? withMethod(type, r) : r)).sort((a, b) => (a[id] < b[id] ? -1 : a[id] > b[id] ? 1 : 0));
 }
 
 // The credit line, read from content/LICENSE.md so the API says exactly what

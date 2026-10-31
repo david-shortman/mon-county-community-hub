@@ -14,7 +14,10 @@
       "sources",
       "sources[].url",
       "sources[].checked",
-      "sources[].name"
+      "sources[].name",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed"
     ],
     "resources": [
       "title",
@@ -35,7 +38,10 @@
       "sources",
       "sources[].url",
       "sources[].checked",
-      "sources[].name"
+      "sources[].name",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed"
     ],
     "calendar": [
       "title",
@@ -61,7 +67,10 @@
       "feed.name",
       "feed.url",
       "feed.page_url",
-      "feed.fetched"
+      "feed.fetched",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed"
     ],
     "corrections": [
       "id",
@@ -118,7 +127,10 @@
       "sources[].checked",
       "sources[].name",
       "first_seen",
-      "last_changed"
+      "last_changed",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed"
     ],
     "places": [
       "name",
