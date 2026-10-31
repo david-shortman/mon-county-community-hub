@@ -5,6 +5,7 @@
 // Say only what the site does today. Planned work names its issue.
 import Base from '../layouts/Base.astro';
 import PromiseNumbers from '../components/PromiseNumbers.astro';
+import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 import { loadDir } from '../lib/content.mjs';
 export const page = { door: "about", label: "For groups and helpers", summary: "Fix your listing, reuse the data, and what we will and will not do" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -12,7 +13,7 @@ const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const doc = (p) => `${repo}/blob/main/${p}`;
 const tree = (p) => `${repo}/tree/main/${p}`;
 const issue = (n) => `${repo}/issues/${n}`;
-const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
 const calendarFeed = `${base}/calendar.ics`;
 // Counts come from the data files, so they stay true as listings are added.
 const orgCount = loadDir('orgs').length;
@@ -33,13 +34,11 @@ const listingCount = loadDir('resources').length;
   <h2 id="fix">Fix or update a listing</h2>
   <p>You can ask us to fix anything we say about your group, add a program we missed, or take your listing down. Hours, phone numbers, who a program serves, and dates all count.</p>
   <h3>How to tell us today</h3>
-  <p>Use the <a href={tellUs}>Tell us</a> link at the bottom of any page. It opens a short form with three boxes: the name of the program, a link, and what to fix.</p>
-  <div class="note">
-    <p><strong>Good to know before you use it:</strong> the form is on GitHub, a site where the project's work is stored. You need a free GitHub account to send it. What you write is public, and so is your GitHub user name. Please don't include anyone's private details.</p>
-  </div>
-  <p>We know most people don't have a GitHub account. Right now there is no other way to reach us, and no email address yet. These are planned, but not built:</p>
+  <p>Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>. You don't need an account, and what you send is not posted. It asks what you need, which page or listing, and what should change. Your email is optional, if you want a reply.</p>
+  <p>Or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. Tell us your group's name, the page or listing, and what should change. We don't post your message.</p>
+  <p>The <a href={tellUs}>Tell us</a> and "Report a problem" links on our pages open the same form.</p>
+  <p>These are planned, but not built:</p>
   <ul>
-    <li>A way to report a problem with no account (<a href={issue(48)}>planned, issue 48</a>)</li>
     <li>One inbox for reports from residents and groups, by form, email, or text (<a href={issue(197)}>planned, issue 197</a>)</li>
     <li>A quick way for staff and helpers to report a change, put at the front of the line, with fixes shown on a public page (<a href={issue(158)}>planned, issue 158</a>)</li>
   </ul>
@@ -53,16 +52,16 @@ const listingCount = loadDir('resources').length;
   <PromiseNumbers headingLevel={3} />
 
   <h2 id="reuse">Reuse the information</h2>
-  <p>Everything we gather is free to reuse. You don't need to ask, sign up, or pay. Today that is {orgCount} groups, {listingCount} listings, and a calendar of local deadlines and dates, each with its source and the date we checked it.</p>
+  <p>Everything we gather is free to reuse. You don't need to ask, sign up, or pay. Today that is {orgCount} groups, {listingCount} listings, and a calendar of local dates and deadlines, each with its source and the date we checked it.</p>
   <h3>What you can use now</h3>
   <ul>
-    <li><strong>The deadlines calendar as a feed.</strong> <a href={calendarFeed}>calendar.ics</a> works in Google Calendar, Apple Calendar, Outlook, and most other calendar apps. New dates show up on their own.</li>
+    <li><strong>The dates and deadlines calendar as a feed.</strong> <a href={calendarFeed}>calendar.ics</a> works in Google Calendar, Apple Calendar, Outlook, and most other calendar apps. New dates show up on their own.</li>
     <li><strong>Every listing as a text file.</strong> Each group, program, and date is its own small file in the <a href={tree('content')}>content folder</a> on GitHub. You can read them in a browser or download them all at once. The <a href={doc('content/README.md')}>guide to the files</a> explains each field.</li>
     <li><strong>The code that runs the site.</strong> All of it is on <a href={repo}>GitHub</a>, so another town or group can copy the whole thing.</li>
+    <li><strong>The same data for apps and AI tools.</strong> Every listing, date, meeting and correction is also published as JSON, a plain data format apps can read from the web. The <a href={`${base}/data/`}>open data page</a> lists the files and how to cite them.</li>
   </ul>
   <h3>Coming later</h3>
   <ul>
-    <li>The same data in a common data format (JSON) that apps can read from the web (<a href={issue(72)}>planned, issue 72</a>)</li>
     <li>Listings in the Open Referral format, a shared standard that 211 systems and referral tools can read (<a href={issue(36)}>planned, issue 36</a> and <a href={issue(73)}>issue 73</a>)</li>
   </ul>
   <h3>The license</h3>

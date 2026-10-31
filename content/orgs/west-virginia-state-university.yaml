@@ -1,0 +1,10 @@
+name: West Virginia State University (WVSU)
+slug: west-virginia-state-university
+kind: school
+website: https://wvstateu.edu/
+summary: A public university in Institute, WV. Its Department of Social Work and Extension Service run WVSU Healthy Grandfamilies, a free statewide program for grandparents raising grandchildren.
+topics: [family]
+area: statewide
+sources:
+  - url: https://healthygrandfamilies.com/
+    checked: 2026-10-31

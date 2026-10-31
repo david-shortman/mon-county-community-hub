@@ -1,0 +1,22 @@
+name: Bible and a Breakfast
+slug: st-john-university-parish-bible-and-breakfast
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: community-group
+  text: St. John University Parish (Catholic) volunteers
+story: A Saturday morning breakfast with time for the Bible, run by parish volunteers for people in need.
+regular:
+  - Saturdays, 8 a.m. to 9 a.m.
+interests: [food, social]
+tags: [weekly]
+contact:
+  url: https://mountaineercatholic.com/our-parish/parish-ministries/
+  phone: "304-296-8231"
+status: active
+notes:
+  - The parish page does not say where the breakfast is served or state a cost. Call the parish office to ask.
+sources:
+  - url: https://mountaineercatholic.com/our-parish/parish-ministries/
+    checked: 2026-10-30

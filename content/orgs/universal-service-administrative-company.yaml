@@ -1,0 +1,13 @@
+name: Universal Service Administrative Company (USAC)
+slug: universal-service-administrative-company
+kind: nonprofit
+website: https://www.lifelinesupport.org/
+phone: "1-800-234-9473"
+summary: Runs the Lifeline phone and internet discount for the Federal Communications Commission. It checks who qualifies and handles yearly recertification.
+topics: [money]
+area: national
+sources:
+  - url: https://www.lifelinesupport.org/about-lifeline/
+    checked: 2026-10-30
+  - url: https://www.lifelinesupport.org/how-to-apply/
+    checked: 2026-10-30

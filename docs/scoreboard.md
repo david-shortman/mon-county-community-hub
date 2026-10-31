@@ -4,12 +4,21 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 
 | Level | Status | Latest |
 |---|---|---|
-| 1. Findability | **Measured** | **76 / 100** on the original 32 questions, 2026-10-31 (end-of-sprint recheck; baseline also 76). All 45 questions: 71. |
+| 1. Findability | **Measured** | **76 / 100** on the original 32 questions, 2026-10-31 (end-of-sprint recheck; baseline also 76). All 45 questions: 71. Answer pages on our site: 38 of 45 (2026-10-31b), none in search yet. |
 | 2. Use | Not measured yet | No public tools to count yet |
 | 3. Action | Not measured yet | None |
 | 4. Recognition | Not measured yet | None |
 
 ## Level 1: Findability
+
+### Answer-page recheck: 38 of 45 questions answered on our site (2026-10-31b)
+
+Sprint wave 3 (#529) built answer pages for questions the site could not answer yet, then rechecked them. Results: [`content/findability/2026-10-31b.yaml`](../content/findability/2026-10-31b.yaml), [build log](build-log/2026-10-31-1800-findability-answer-recheck.md).
+
+- **On our site: 38 of 45 questions now have an answer page, up from 33.** On the original 32 it is 27, up from 24. New: volunteering this weekend (q16, [/volunteer/](https://everythingmorgantown.org/volunteer/)), school test scores (q22, [/how-we-are-doing/#schools](https://everythingmorgantown.org/how-we-are-doing/#schools)), soil tests (q33, [/soil-test/](https://everythingmorgantown.org/soil-test/)) and plant problems (q34, [/plant-problems/](https://everythingmorgantown.org/plant-problems/)). The next election and ballot (q32) was answered on [/vote/](https://everythingmorgantown.org/vote/) by #970 after the end-of-sprint run.
+- **In search: still 0 of 38.** We ran the plain search again for the five newly answered questions. None of our pages showed up, so the scores do not change: 76 on the original 32 and 71 on all 45. Search indexing waits on David's decision in #89.
+- **Answered in an open PR, waiting for David:** mental health help today (q06, #687), a business license (q09, #817), potholes (q14, #550), housing vouchers (q27, #832) and borrowing a tool (q41, #741).
+- **Still no answer:** crime trends (q23; crime numbers are open on #772) and community garden plots (q35; no official page found, leads on #438).
 
 ### Latest run: 76 out of 100 on the original 32 questions (2026-10-31, end of sprint)
 

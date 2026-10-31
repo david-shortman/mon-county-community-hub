@@ -3,9 +3,10 @@
 // Answers only from what the site and repo show today. "Not yet" marks a gap,
 // never a promise. Speaks for the project, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
+import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "Hard questions", summary: "Who runs it, why AI, how facts get checked, and where we fall short" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const tellUs = 'https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml';
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
 const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-reported-45-billion-ai-agreement-morrisey-says/';
 ---
 <Base title="Hard questions about Everything Morgantown" description="Straight answers about who runs Everything Morgantown, why it uses AI, how facts get checked, and where it falls short today.">
@@ -77,8 +78,8 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
   <p>AI can still get things wrong. Please check details with the group before you go, especially hours.</p>
 
   <h2 id="how-do-i-tell-you-something-is-wrong">How do I tell you something is wrong?</h2>
-  <p>Use the <a href={tellUs}>"Tell us"</a> or "Report a problem" link on any page. It opens a form on GitHub, a site where our work is stored. You need a free GitHub account, and what you write is public.</p>
-  <p class="gap"><strong>Not yet:</strong> there is no email address and no way to reach us without a GitHub account.</p>
+  <p>Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>, or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account, and what you send is not posted.</p>
+  <p>The <a href={tellUs}>"Tell us"</a> and "Report a problem" links on our pages open the same form.</p>
 
   <h2 id="does-this-replace-211-or-local-groups">Does this replace 211 or local groups?</h2>
   <p>No. We send you to them. Our home page lists 211 first. You never sign up, apply or pay through us. You deal with the group directly. We don't ask any group to keep another list up to date for us.</p>
@@ -88,8 +89,7 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
   <p>It is not meant to. It does not do what 211 staff, librarians or pantry volunteers do. It sends people to them.</p>
 
   <h2 id="can-my-group-fix-or-remove-its-listing">Can my group fix or remove its listing?</h2>
-  <p>Yes. Use the "Tell us" link. We only post what your group has already made public, like your own website. A listing does not mean you work with us or approve of the site.</p>
-  <p class="gap"><strong>Not yet:</strong> this also needs a GitHub account for now.</p>
+  <p>Yes. Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>, or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account. We only post what your group has already made public, like your own website. A listing does not mean you work with us or approve of the site.</p>
 
   <h2 id="who-pays-for-it">Who pays for it?</h2>
   <p>David does. The web address costs about $10 to $20 a year. The AI runs on David's own Claude plan, which he already pays for. Hosting and the code tools are free. There are no ads, no donations and no funding.</p>
@@ -100,10 +100,11 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
 
   <h2 id="what-do-you-know-about-me">What do you know about me?</h2>
   <ul>
-    <li>No forms, no names, no accounts, no ads.</li>
+    <li>No sign-ups, no accounts, no ads.</li>
+    <li>We have one form, for asking us to fix or remove something. A company called Tally runs it and stores what you send. We never post it. Your email is optional.</li>
+    <li>If you email {FIX_EMAIL}, our domain company, Porkbun, passes your message on to a private inbox. We never post it.</li>
     <li>We don't count or track visitors.</li>
     <li>Map buttons open Google Maps. Nothing goes to Google unless you tap one.</li>
-    <li>If you report a problem on GitHub, your report and GitHub user name are public.</li>
   </ul>
   <p class="gap"><strong>Not yet:</strong> the site is hosted by GitHub. We have not checked what basic server records GitHub keeps.</p>
 

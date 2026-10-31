@@ -1,0 +1,13 @@
+name: West Virginia Department of Veterans Assistance (WVDVA)
+slug: wv-department-of-veterans-assistance
+kind: government
+website: https://veterans.wv.gov/
+phone: "304-558-3661"
+summary: The state agency for veterans. Its benefit offices have accredited Veterans Service Officers who advise veterans and families on VA benefits. It also runs the state veterans cemetery in Dunbar. The office that serves Monongalia County is in Clarksburg.
+topics: [veterans]
+area: statewide
+sources:
+  - url: https://veterans.wv.gov/benefits-office-locations
+    checked: 2026-10-30
+  - url: https://veterans.wv.gov/offices/clarksburg-wv-benefit-office
+    checked: 2026-10-30
