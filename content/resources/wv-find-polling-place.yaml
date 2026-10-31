@@ -1,0 +1,14 @@
+title: Check your voter registration and find your polling place
+slug: wv-find-polling-place
+org: wv-secretary-of-state
+topics: [voting]
+who_it_is_for: Anyone registered to vote in West Virginia.
+what_to_do: Enter your first name, last name and date of birth on the Secretary of State's search page. It shows your registration status, your districts and your polling place. The page says the information is updated nightly, so changes made today show up the next day. Questions go to your County Clerk.
+contact:
+  url: https://apps.sos.wv.gov/Elections/Voter/FindMyPollingPlace
+  url_label: Search my registration
+sources:
+  - url: https://apps.sos.wv.gov/Elections/Voter/FindMyPollingPlace
+    checked: 2026-10-30
+  - url: https://sos.wv.gov/govotewv
+    checked: 2026-10-30

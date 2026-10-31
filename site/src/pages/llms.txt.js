@@ -35,8 +35,10 @@ export function GET({ site }) {
 - [Ride to a medical visit](${u('/medical-rides/')}): Medicaid and WVCHIP rides through Modivcare (book 5 business days ahead), and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares
 - [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
+- [Help in your language](${u('/help-in-your-language/')}): free interpreters at WVU Medicine, the Health Department, state offices and courts, immigration legal help, and English classes
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults
 - [Contractor and trade licenses](${u('/contractor-license/')}): where WV contractors, plumbers, HVAC technicians and electricians get licensed, the Morgantown business license and permit portal for work in city limits, and how to look up a contractor's license or file a complaint with the WV Contractor Licensing Board
+- [Teens](${u('/teens/')}): the age certificate and work hours for 14 and 15 year olds, West Virginia's three driver's license levels, Career Connections job help for ages 16 to 24, summer volunteering at The Shack, and library teen programs and free tutoring
 - [Find a job](${u('/find-a-job/')}): where the City of Morgantown, Monongalia County, the State of West Virginia, WVU Medicine and Mon Health post jobs, free resume, interview and computer help at the American Job Center and the library, and short trainings at Pierpont
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
 - [Medicaid waivers](${u('/medicaid-waivers/')}): a plain guide to West Virginia's four Medicaid home care waivers (ADW, IDDW, TBIW, CSEDW): who each is for, how to start, who to call
@@ -47,6 +49,7 @@ export function GET({ site }) {
 - [Moving here: start power, water, gas and trash](${u('/moving-here/')}): how to start service with Mon Power, the Morgantown Utility Board and Hope Gas, town trash pickup in Star City and Granville, deposits and fees, and who to ask
 - [Get weather and emergency alerts](${u('/weather-alerts/')}): official sources only: phone Wireless Emergency Alerts, NWS Pittsburgh and NOAA Weather Radio for Mon County, City of Morgantown Notify Me, WVU Alert, WV 511 road alerts, statewide school closings, and FirstEnergy outage texts
 - [Is my home in a flood zone or a slide area?](${u('/flood-zone/')}): check an address on the WV Flood Tool, the FEMA flood map and the WV Landslide Tool, flood insurance basics (most home and renters insurance does not cover floods, 30 day wait), and the county floodplain permit
+- [Internet at home](${u('/internet/')}): the state broadband map, the state speed test and survey for slow or no service, the WV Attorney General's broadband complaint, the state's BEAD build-out in its own words, and free Wi-Fi, computers and meeting rooms at the Morgantown Public Library System
 - [Do I need a building permit?](${u('/permits/')}): city or county first (the Morgantown Zoning Viewer), then who issues permits in Morgantown (online portal only), Star City, Westover and Granville, and what can apply outside town limits: West Run land use permits, floodplain, state road driveways, septic and well permits, and the Assessor's Form 12:75
 - [Trash, recycling and drop-off](${u('/recycling/')}): pickup days, what goes in the curbside bin, and where to take hard items
 - [Thrift and resale shops](${u('/thrift-shops/')}): secondhand shops by area, what each sells, which buy from you, and which fund a local cause
@@ -79,15 +82,16 @@ ${centers}
 - [Free car seat checks](${u('/car-seat-checks/')}): the two child car seat fitting stations the WV DMV lists for Mon County (Sheriff's Department, WVU Medicine Children's), free, by appointment
 - [Driver's license and plates for new residents](${u('/drivers-license/')}): the WV DMV rules for switching an out-of-state license, title and registration (vehicles within 30 days), fees, what to bring, and the Morgantown Regional Office address, phone, hours and appointments
 - [Teen drivers: permit to full license](${u('/teen-drivers/')}): West Virginia's graduated driver licensing in three levels (instruction permit at 15, intermediate license at 16, full license at 17) with hours, passenger and night limits and fees, and the Morgantown DMV office
+- [Register to vote and find your polling place](${u('/vote/')}): official sources only: WV Secretary of State online registration and polling place search, the Monongalia County Clerk's office (address, phone, hours), and Morgantown city election questions
 
 ## Data
 
 - [Open data](${u('/data/')}): how to reuse the listings, the license (CC BY 4.0) and how to cite
 - [API catalog](${u('/api/v1/index.json')}): JSON index of every data file, with counts, license and build time
 - [OpenAPI description](${u('/api/v1/openapi.yaml')}): every field in the JSON files
-- [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [needs register](${u('/api/v1/needs.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
+- [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [needs register](${u('/api/v1/needs.json')}), [gathering places](${u('/api/v1/places.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
 - [When plans and budgets get decided](${u('/make-it-better/when-it-gets-decided/')}): Morgantown's budget year, the March levy window in state law, the 2027-2031 capital plan lines for Mosaic, a downtown master plan and wayfinding, the comprehensive plan, and how to comment
-- [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US, with years and sources
+- [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; with years and sources
 
 ## Notes for AI tools
 

@@ -1,0 +1,21 @@
+title: Register to vote in person at the Monongalia County Clerk
+slug: mon-county-clerk-voter-registration
+org: monongalia-county-clerk
+topics: [voting]
+who_it_is_for: Residents of Monongalia County. The County Clerk keeps the voter registration for everyone in the county, including the City of Morgantown.
+hours: Monday to Friday, 8:30 a.m. to 4:30 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:30"
+    closes: "16:30"
+what_to_do: Go to the County Clerk's office in the Courthouse, 243 High St., Room 123, or call 304-291-7230. The Clerk's page also links to the state's online registration and a search to see if you are registered.
+contact:
+  phone: "304-291-7230"
+  url: https://monongaliacountyclerk.com/index.php/voter-registration
+  url_label: County Clerk voter page
+  place: 243 High St, Room 123, Morgantown, WV
+sources:
+  - url: https://monongaliacountyclerk.com/index.php/voter-registration
+    checked: 2026-10-30
+  - url: https://www.morgantownwv.gov/590/Voter-Information
+    checked: 2026-10-30

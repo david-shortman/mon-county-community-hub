@@ -58,6 +58,7 @@ opening_hours:          # the same hours, so a card can say "Open now" (#176)
     opens: "07:00"      # quoted, 24-hour, Eastern time
     closes: "15:30"     # "24:00" for midnight; earlier than opens means it closes the next morning
 # opening_hours: always   # open 24 hours, every day
+closed_on: [thanksgiving, christmas]  # optional (#726); holidays the source names: new-years-day, memorial-day, independence-day, labor-day, thanksgiving, christmas
 get_in: walk-in         # walk-in | appointment | call-first
 languages: [Spanish]    # languages the source says staff speak or interpret
 access: Step-free entrance on the Main Street side.  # only what the source says
@@ -324,6 +325,7 @@ meets: 4th Monday of every month, 3 p.m., Council Chambers
 who_can_serve: City residents.   # optional; only what the source says
 open_seats: 0                    # from the city's vacancy list
 page_vacant: 1                   # optional; vacant seats the board's own page shows, when it differs from the list
+section: other                   # optional; a board listed by name only under "Other city boards with open seats". Needs open_note (like "1 alternate seat") instead of decides and meets
 url: https://www.morgantownwv.gov/264/Tree-Board
 topics: [better]
 sources:

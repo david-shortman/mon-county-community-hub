@@ -12,6 +12,7 @@ opening_hours:
   - days: [sat]
     opens: "07:00"
     closes: "11:00"
+closed_on: [new-years-day, memorial-day, independence-day, labor-day, thanksgiving, christmas]
 what_to_do: Go to 2130 Rail Street, Industrial Park, Westover. Call for fees.
 contact:
   phone: "304-368-7735"
