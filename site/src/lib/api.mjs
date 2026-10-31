@@ -146,6 +146,8 @@ export const TYPES = {
       sources: SOURCES,
       first_seen: date('Date we first saw this agenda'),
       last_changed: date('Date we last saw the agenda or minutes change'),
+      agenda_first_seen: date('Date we first saw the posted agenda at this link'),
+      minutes_first_seen: date('Date we first saw the posted minutes at this link; left out until they are posted'),
     },
   },
   places: {
