@@ -269,6 +269,8 @@ address: "100 Example St, Westover, WV"   # optional; only a street address the 
 hours: Tuesday to Saturday, 10 a.m. to 7 p.m.   # optional; in words, as the source gives them
 sells: Housewares, books, toys and furniture. No clothing.   # what it sells, lends or gives, in words
 takes: Donations of housewares, books, toys and furniture.   # optional; what it accepts from you, in words
+does_not_take: Clothing or mattresses.   # optional; what it turns away, in the source's words (#690)
+drop_off: Tuesday to Saturday during store hours.   # optional; when and how to drop off, and any pickup
 goods: [home, books]      # filter tags, see below
 buys_from_you: false      # true when it pays cash or store credit for your things
 funds_local_cause: Care for rescued animals.   # optional; what the money supports, as the source says
