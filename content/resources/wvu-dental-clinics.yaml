@@ -4,6 +4,15 @@ org: wvu-school-of-dentistry
 topics: [health]
 who_it_is_for: People looking for a dentist in Morgantown. At the Student Clinic, dental students treat patients under the direct supervision of faculty dentists. It offers exams, fillings, extractions and dentures.
 hours: Student Clinic, Monday through Friday, 9 a.m. to noon and 1 to 5 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "09:00"
+    closes: "12:00"
+  - days: [mon, tue, wed, thu, fri]
+    opens: "13:00"
+    closes: "17:00"
+get_in: appointment
+access: "Free patient parking is in the Health Sciences Center Upper Campus lot and the J.W. Ruby Memorial Hospital and Physician Office Center lots. For the car to curb shuttle in these lots, call 304-598-4444 when you arrive and when you leave. Paid short-term parking is at the Mountaineer Station garage, 1112 Van Voorhis Road, with a covered walkway to the clinics."
 what_to_do: Call 304-293-6208 to make an appointment. The first visit is a full assessment with x-rays and takes about three hours. Arrive 20 minutes early and bring your insurance card or WV Medicaid card, a written list of your medicines, and any recent dental x-rays. Later visits are every two to three weeks, when your assigned student is available.
 contact:
   phone: "304-293-6208"
