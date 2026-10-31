@@ -1,0 +1,27 @@
+name: Teen D&D (ages 13 to 14)
+slug: mpls-teen-dnd
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: Dungeons and Dragons for teens ages 13 to 14, with snacks.
+regular:
+  - Monday evenings, 5 p.m. to 7 p.m. See the library calendar for dates.
+interests: [games, social]
+contact:
+  url: https://mympls.org/programs/teens/dungeons-dragons-teen-dd/
+  phone: "304-291-7425"
+  place: Morgantown Public Library, Meeting Room B, 373 Spruce Street, Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Space is limited. Check the calendar listing for open seats.
+  - Next listed dates are Monday, November 9, 2026, and Mondays, January 11 and January 25, 2027.
+sources:
+  - url: https://mympls.org/programs/teens/dungeons-dragons-teen-dd/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/17364737
+    checked: 2026-10-30

@@ -3,11 +3,19 @@ slug: apprenticeships-wv
 org: workforce-west-virginia
 topics: [work]
 who_it_is_for: People who want to learn a trade or job while getting paid. You work alongside a mentor and take classes. Apprenticeships are in construction, manufacturing, health care, technology and more, and they often lead to a full-time job.
-what_to_do: Search for openings near Morgantown with the U.S. Department of Labor's Apprenticeship Job Finder at apprenticeship.gov, or ask the WorkForce West Virginia office on Commerce Drive.
+what_to_do: "To find openings near Morgantown:"
+steps:
+  - Search the U.S. Department of Labor's Apprenticeship Job Finder at apprenticeship.gov. Its state offices page also lists a West Virginia Apprenticeship Office.
+  - Or ask the WorkForce West Virginia office on Commerce Drive.
+  - For union building trades, like electricians, carpenters and pipe fitters, the West Virginia Building and Construction Trades, a group of trade unions, has a county map of its apprenticeship programs at wvtrades.org.
 contact:
   url: https://www.apprenticeship.gov/apprenticeship-job-finder
   url_label: Find apprenticeships
 cost: You are paid while you learn.
 sources:
   - url: https://workforcewv.org/job-seeker/find-a-job/apprenticeships/
+    checked: 2026-10-30
+  - url: https://www.apprenticeship.gov/about-us/state-office
+    checked: 2026-10-30
+  - url: https://www.wvtrades.org/
     checked: 2026-10-30

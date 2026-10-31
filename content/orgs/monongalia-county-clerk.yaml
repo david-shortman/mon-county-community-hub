@@ -1,0 +1,11 @@
+name: Monongalia County Clerk
+slug: monongalia-county-clerk
+kind: government
+website: https://www.monongaliacountyclerk.com/
+phone: "304-291-7230"
+summary: The county office for elections, voter registration, marriage licenses, birth and death certificates, probate and recording deeds. It is in Room 123 of the Courthouse, 243 High St, open Monday to Friday, 8:30 a.m. to 4:30 p.m.
+topics: [voting, government]
+area: monongalia-county
+sources:
+  - url: https://www.monongaliacountyclerk.com/
+    checked: 2026-10-30

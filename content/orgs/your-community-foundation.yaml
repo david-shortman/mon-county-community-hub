@@ -1,0 +1,13 @@
+name: Your Community Foundation of North Central West Virginia
+slug: your-community-foundation
+kind: nonprofit
+website: https://ycfwv.org/
+phone: "304-296-3433"
+summary: A community foundation in Morgantown that holds charitable funds and gives grants and scholarships in north central West Virginia. Its office at 201 High Street is open by appointment.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: https://ycfwv.org/
+    checked: 2026-10-30
+  - url: https://ycfwv.org/contact-us/
+    checked: 2026-10-30

@@ -1,0 +1,10 @@
+name: Republic Services
+slug: republic-services
+kind: business
+website: https://www.republicservices.com
+summary: A private trash and recycling company. It owns and runs the Mountaineer Transfer Station in Westover, which the county calls "the Dump."
+topics: [recycling]
+area: monongalia-county
+sources:
+  - url: https://www.monongaliacountyswa.com/disposal
+    checked: 2026-10-30

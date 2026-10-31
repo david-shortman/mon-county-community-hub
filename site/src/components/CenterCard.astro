@@ -1,0 +1,30 @@
+---
+// One gathering place on the Community centers and halls page (#462): name,
+// what's there, the next event, the cost to join, a call button, its status
+// and the checked date. Everything comes from its content/places record;
+// the next event comes from a calendar entry with `venue: <slug>`.
+import Actions from './Actions.astro';
+import SourceLine from './SourceLine.astro';
+import { chipDate, todayYmd } from '../lib/content.mjs';
+import { KIND_LABELS, placeStatus, whatsThere, SECTION } from '../lib/places.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { p, next, headingLevel = 3 } = Astro.props;
+const H = `h${headingLevel}`;
+const today = todayYmd();
+const st = placeStatus(p, today);
+const there = whatsThere(p);
+const href = `${base}${SECTION.route}${p.slug}/`;
+const site = p.contact?.url;
+const search = [p.name, ...(p.other_names ?? []), p.community].join(' ').toLowerCase();
+---
+<article class="card center" id={p.slug} data-search={search}>
+  <H><a href={href}>{p.name}</a></H>
+  <p class="center-kind">{KIND_LABELS[p.kind]}, {p.community}</p>
+  {st.label && <p class="center-status"><strong>{st.label}.</strong></p>}
+  {there && <p><strong>What's there:</strong> {there}.</p>}
+  {next && <p><strong>Next event:</strong> <a href={`${href}#events`}>{next.title}</a>, {chipDate(next.starts, today)}.</p>}
+  {p.membership && <p><strong>Join:</strong> {p.membership.dues}.</p>}
+  {p.rentals?.length > 0 && <p><strong>Rent:</strong> {p.rentals.length === 1 ? '1 space' : `${p.rentals.length} spaces`} to rent. <a href={`${href}#rent`}>Prices and how to book<span class="sr-only"> at {p.name}</span></a>.</p>}
+  <Actions callFirst phone={p.contact?.phone} phoneLabel={p.name} link={site} linkLabel={p.contact?.url_label ?? 'Website'} place={p.contact?.place} about={p.name} />
+  <SourceLine sources={p.sources} about={p.name}><Fragment slot="before"><a href={href}>More about {p.name}</a>. </Fragment>{p.contact?.facebook && <> <a href={p.contact.facebook}>Facebook page<span class="sr-only"> of {p.name}</span></a> (we cannot check it, so it may have newer news).</>}</SourceLine>
+</article>

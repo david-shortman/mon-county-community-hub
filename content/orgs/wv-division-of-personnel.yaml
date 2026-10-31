@@ -1,0 +1,11 @@
+name: West Virginia Division of Personnel
+slug: wv-division-of-personnel
+kind: government
+website: https://personnel.wv.gov/
+phone: "304-558-3950"
+summary: The state office that posts State of West Virginia government jobs and takes applications for them.
+topics: [work]
+area: statewide
+sources:
+  - url: https://personnel.wv.gov/empopp
+    checked: 2026-10-30

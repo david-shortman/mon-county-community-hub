@@ -1,0 +1,13 @@
+{
+  "name": "@everything-morgantown/mcp",
+  "private": true,
+  "type": "module",
+  "description": "Read-only MCP server over the Everything Morgantown open data API",
+  "license": "MIT",
+  "bin": { "everything-morgantown-mcp": "server.mjs" },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node test/smoke.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
