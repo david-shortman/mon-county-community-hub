@@ -2,6 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
+import { loadTonight, tonightProblems } from '../src/lib/tonight.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 import { factTopics, loadFacts } from '../src/lib/facts.mjs';
 import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
@@ -423,6 +424,8 @@ for (const topic of factTopics()) {
 // Each needs a title, publisher, sections and sources with checked dates, and
 // a PDF link needs the date printed on that PDF.
 for (const d of loadPdfPages()) for (const p of pdfPageProblems(d)) errors.push(`${d._file}: ${p}`);
+// Tonight's warming shelter status (content/tonight, #401).
+for (const p of tonightProblems(loadTonight())) errors.push(`tonight/warming-shelter.yaml: ${p}`);
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
