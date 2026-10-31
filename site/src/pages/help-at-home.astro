@@ -5,6 +5,7 @@
 // a resource record or cites its source, read 2026-10-30. Describe only:
 // never say who qualifies. Food and benefits: reviewed by David.
 import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 export const page = { door: "family", topic: "disability", label: "Help at home as you get older", summary: "Meals brought to your home, lunch with others, and in-home care" };
@@ -42,5 +43,5 @@ const r = (slug) => all.find((e) => e.slug === slug);
     <li>Medicare questions: <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</li>
   </ul>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these programs; each one decides who it can serve. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these programs; each one decides who it can serve. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

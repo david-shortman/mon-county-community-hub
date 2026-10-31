@@ -2,6 +2,7 @@
 // Printouts (#160, #405): the list of printable sheets and cards. Sheets are
 // made from the listings every morning (print/[slug].astro).
 import Base from '../../layouts/Base.astro';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
 import { printSheets } from '../../lib/printouts.mjs';
 export const page = { door: "about", label: "Printouts", summary: "Printable sheets of places and phone numbers, and cards with a QR code" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -30,5 +31,5 @@ const sheets = all.filter((s) => s.kind === 'door').map((d) => ({ ...d, n: d.lis
   <h2>Any single listing</h2>
   <p>Most listings on the site have a "Print this" button that prints just that one listing.</p>
 
-  <p class="meta">Printouts are free to copy and hand out. Please do not change the phone numbers or hours: if something is wrong, <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">tell us</a> and we will fix it at the source.</p>
+  <p class="meta">Printouts are free to copy and hand out. Please do not change the phone numbers or hours: if something is wrong, <a href={fixFormUrl({ page: Astro.url.pathname })}>tell us</a> and we will fix it at the source.</p>
 </Base>

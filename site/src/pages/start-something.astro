@@ -4,6 +4,7 @@
 // We suggest; we never organize, and we contact no one. Each gap says how we
 // looked, since "we found none" is not proof there is none.
 import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 import SourceLine from '../components/SourceLine.astro';
 export const page = { door: "community", topic: "community", label: "Start a swap, market or reuse store", summary: "What Mon County is missing for secondhand and sharing, what each would take, and free how-to guides" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -59,5 +60,5 @@ const src = {
     </ul>
   </section>
 
-  <p class="meta">Know of one of these that already exists? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a> and we will list it.</p>
+  <p class="meta">Know of one of these that already exists? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a> and we will list it.</p>
 </Base>

@@ -5,6 +5,7 @@
 // Only the temporary event fee is stated: the rest of the FY 2026-2027 fee
 // schedule is a scanned form that is hard to read. Waits for David (fees).
 import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, telHref } from '../lib/content.mjs';
@@ -46,5 +47,5 @@ const r = (slug) => resource(slug);
 
   <p>Starting a food business? See <a href={`${base}/business/`}>Start or grow a business</a> for free coaching and classes.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Rules and fees can change, so check the office's page before you sell or pay. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Rules and fees can change, so check the office's page before you sell or pay. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
