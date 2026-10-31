@@ -2,16 +2,17 @@
 // Disability and aging (#227, part of #210). Who serves Mon County, from each
 // group's own site. Devices, school, rights, recreation and caregiver help
 // added in #579, #581, #582, #583 and #584 (research: docs/groups/disability-caregivers.md).
+// Home changes, leaving a nursing home and getting around: #578, #580, #562.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "family", topic: "disability", label: "Disability and aging", summary: "Independent living, devices, special education, your rights, recreation, caregiver help and Medicare help" };
+export const page = { door: "family", topic: "disability", label: "Disability and aging", summary: "Independent living, home changes, devices, getting around, special education, your rights, recreation, caregiver help and Medicare help" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 ---
-<Base title="Disability and aging help in Morgantown and Mon County" description="Free independent living help from LiveAbility in Morgantown, free device loans from WVATS, special education contacts, Disability Rights of WV, SteppingStones and Special Olympics, dementia caregiver groups, job help from DRS, and free Medicare help from WV SHIP.">
+<Base title="Disability and aging help in Morgantown and Mon County" description="Free independent living help from LiveAbility in Morgantown, help with ramps and home changes, free device loans from WVATS, accessible buses and half fares on Mountain Line, special education contacts, Disability Rights of WV, SteppingStones and Special Olympics, dementia caregiver groups, job help from DRS, and free Medicare help from WV SHIP.">
   <h1>Help with a disability, or as you get older</h1>
   <p class="lede">For help living on your own terms with a disability, call LiveAbility in Morgantown. For help getting or keeping a job, call DRS. For Medicare questions, call WV SHIP.</p>
 
@@ -21,8 +22,19 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2>Try, borrow or get a free used device</h2>
   {r('wvats-device-loans') && <ResourceCard r={r('wvats-device-loans')} />}
 
+  <h2>Change your home or car</h2>
+  {r('liveability-clsp') && <ResourceCard r={r('liveability-clsp')} />}
+
   <h2>Care at home instead of a nursing home</h2>
   <p>West Virginia Medicaid has four programs that pay for care at home for people who would otherwise need a nursing home or other facility. See <a href={`${base}/medicaid-waivers/`}>Getting care at home through Medicaid</a>: who each is for, how to start, and who to call.</p>
+  {r('liveability-transition') && <ResourceCard r={r('liveability-transition')} />}
+
+  <h2>Getting around without a car</h2>
+  {r('mountain-line-access-and-half-fare') && <ResourceCard r={r('mountain-line-access-and-half-fare')} showCost />}
+  {r('mountain-line-gold-card') && <ResourceCard r={r('mountain-line-gold-card')} showCost />}
+  {r('mountain-line-deviations') && <ResourceCard r={r('mountain-line-deviations')} showCost />}
+  {r('senior-monongalians-rides') && <ResourceCard r={r('senior-monongalians-rides')} />}
+  <p>Going to a doctor? See <a href={`${base}/medical-rides/`}>Ride to a medical visit</a> for Medicaid rides and bus routes to the hospitals.</p>
 
   <h2>Getting or keeping a job</h2>
   {r('drs-morgantown-office') && <ResourceCard r={r('drs-morgantown-office')} showCost />}
