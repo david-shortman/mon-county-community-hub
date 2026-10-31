@@ -16,8 +16,9 @@
 // exit instead. A listing counts when its org is a domestic or sexual violence
 // service (SAFETY_ORGS) or its title says so.
 //   org: the record's org slug
+//   whole: true for a whole guide page (no slug): Print prints the whole page
 import { prettyDate } from '../lib/content.mjs';
-const { title, slug, org, phone, place, hours, checked, share = true } = Astro.props;
+const { title, slug, org, phone, place, hours, checked, share = true, whole = false } = Astro.props;
 const SAFETY_ORGS = ['rdvic'];
 const sensitive = SAFETY_ORGS.includes(org) || /domestic|sexual (assault|violence)|abuse/i.test(title);
 const url = new URL(`${Astro.url.pathname}${slug ? `#${slug}` : ''}`, Astro.site).href;
@@ -31,7 +32,7 @@ const smsHref = `sms:?&body=${encodeURIComponent(message)}`;
 <div class="pass-it-on">
   <span class="pi-label">Pass it on:</span>
   <a class="pi-btn pi-sms" href={smsHref}>Text this<span class="sr-only">: {title}</span></a>
-  <button class="pi-btn pi-print" type="button" hidden>Print this<span class="sr-only">: {title}</span></button>
+  <button class="pi-btn pi-print" type="button" hidden data-whole={whole ? '' : undefined}>Print this<span class="sr-only">: {title}</span></button>
   {share && <button class="pi-btn pi-share" type="button" hidden data-url={url} data-title={title} data-text={[title, checkedLine].filter(Boolean).join('. ')}><span class="pi-share-label">Share</span><span class="sr-only">: {title}</span></button>}
 </div>
 <p class="pi-url">Online: {shortLink}</p>
@@ -65,6 +66,7 @@ const smsHref = `sms:?&body=${encodeURIComponent(message)}`;
     b.hidden = false;
     b.addEventListener('click', () => {
       unhide();
+      if (b.dataset.whole !== undefined) { window.print(); return; }
       const card = b.closest('article, li, section') ?? b.parentElement!;
       let el: Element | null = card;
       while (el && el !== document.body) {
