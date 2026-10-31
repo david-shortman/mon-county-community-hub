@@ -264,6 +264,10 @@ export async function catalog() {
     versioning: 'Within v1, fields are only added, never removed or renamed. A breaking change would get a new /api/v2/, and v1 would stay up for at least 6 months.',
     stale_after_days: 183,
     types,
+    exports: [
+      { name: 'hsds', description: 'Organizations and services in Open Referral HSDS 3.1 JSON, the format 211 and referral tools read', url: `${API_BASE}hsds/services.json` },
+      { name: 'hsds-tabular', description: 'The same in CSV tables, with a Tabular Data Package description', url: `${API_BASE}hsds/datapackage.json` },
+    ],
   };
 }
 
