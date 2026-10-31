@@ -1,0 +1,10 @@
+name: West Virginia Division of Motor Vehicles
+slug: wv-division-of-motor-vehicles
+kind: government
+website: https://dmv.wv.gov/
+summary: The state agency for driver's licenses, permits, ID cards and vehicle registration.
+topics: [work, family]
+area: statewide
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-10-30

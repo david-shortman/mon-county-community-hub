@@ -1,0 +1,10 @@
+name: Region VI Workforce Development Board
+slug: region-vi-workforce-development-board
+kind: government
+website: https://regionviwv.org/
+summary: The workforce board for 13 West Virginia counties, including Monongalia. It runs Career Connections, a free job and training program for young people ages 16 to 24 who are out of school.
+topics: [work]
+area: monongalia-county
+sources:
+  - url: https://regionviwv.org/youth/youth-servies-career-connections/
+    checked: 2026-10-30
