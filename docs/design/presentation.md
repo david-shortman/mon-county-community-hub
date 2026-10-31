@@ -82,6 +82,7 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **211 fallback** | The help now box | Plain links | Exists (`HelpNow`, and `HelpNowBar` on the home page) |
 | **Breadcrumb** | "Home › Get through this month" above the heading, from the page's tags | Plain links | Exists (`Breadcrumb.astro`) |
 | **Item lookup** | "What do you want to get rid of?": an A to Z list of things, each saying in one line where it goes and linking to its sourced details on the page | A plain list of anchor links | Exists (`/recycling/`, #199) |
+| **Area picker** | "Your area": a person picks a part of the county and that area's places move to the top. Saved on the phone only (localStorage), no location, no cookies | Hidden; the page lists every area in its usual order | Exists (`AreaPicker.astro`, first on `/thrift-shops/`, #152) |
 
 ## What every listing needs
 

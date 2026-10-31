@@ -346,6 +346,7 @@ who_can_serve: City residents.   # optional; only what the source says
 open_seats: 0                    # from the city's vacancy list
 page_vacant: 1                   # optional; vacant seats the board's own page shows, when it differs from the list
 section: other                   # optional; a board listed by name only under "Other city boards with open seats". Needs open_note (like "1 alternate seat") instead of decides and meets
+# section: county                 # a County Commission board from the county's list: needs created and meets, no seat counts
 url: https://www.morgantownwv.gov/264/Tree-Board
 topics: [better]
 sources:
@@ -515,3 +516,22 @@ sources:
 - **Official sources only**, read in the same session: a government agency or a program that publishes the same data for every county. Never a real estate, "best places" or other commercial site.
 - **Copy the number and its definition exactly.** Never compute a new number (a rank, a change, a per-person rate) the source does not give.
 - **Describe, never judge.** No "good", "bad", "safe" or "failing". The page says what the numbers do and don't tell you.
+
+## `facts/<topic>/<slug>.yaml`: sentences that are not listings
+
+Tier 2 of ADR 0007: a sentence a page needs that is not an org, resource or date (a rule from a county page, a definition, a set-out rule) is a record here, not text typed into the page (#122). Pages show it with the `Fact` component.
+
+```yaml
+slug: tires
+text: "**Tires:** a state tire collection runs monthly in Morgantown, except December, January and February."  # what the page shows; **bold** and [label](link) only
+quote: "The Tire Collection Events are NOT operated in December, January or February."  # the source's exact words
+sources:
+  - url: https://www.monongaliacountyswa.com/tires
+    name: Monongalia County Solid Waste Authority   # optional
+    checked: 2026-10-30   # Morgantown date you read it
+recheck_days: 90         # optional: about 365 for a definition, 180 for a phone, 90 for hours or a schedule, 30 while waiting on a date. Default: 6 months
+phone: "304-376-0036"    # optional; adds a Call button
+place: "4120 Fairmont Rd, Morgantown, WV"  # optional; adds a Directions button
+```
+
+Past `recheck_days` (or 6 months), the page says the fact may be out of date, and the Health check lists it (`facts-due`). Re-read the source: if it still says the same, update `checked`; if not, fix `text` and `quote`.

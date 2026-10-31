@@ -13,9 +13,11 @@ opening_hours:
   - days: [mon, tue, wed, thu, fri]
     opens: "08:00"
     closes: "16:00"
-get_in: walk-in
+cost: "Lunch is for people age 60 and older, Monday through Friday, 11:30 a.m. to 12:30 p.m. There is no required fee, but a voluntary contribution is suggested."
 sources:
   - url: https://www.seniormons.org/blank-4
     checked: 2026-10-30
   - url: https://www.seniormons.org/
+    checked: 2026-10-30
+  - url: https://www.seniormons.org/blank
     checked: 2026-10-30
