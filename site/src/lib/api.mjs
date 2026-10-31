@@ -124,13 +124,13 @@ export const TYPES = {
     properties: NEED.properties,
   },
   meetings: {
-    description: 'Public meetings of City of Morgantown boards and the bodies on its AgendaCenter, from the last 120 days and ahead: meeting date, agenda link, and minutes link once posted. Read from the city\'s AgendaCenter page each day.',
+    description: 'Public meetings of City of Morgantown boards (and the bodies on its AgendaCenter) and the Monongalia County Commission, from the last 120 days and ahead: meeting date, agenda link, and minutes link once posted. Read from the official pages each day.',
     id: 'slug',
     required: ['slug', 'body', 'date', 'title', 'agenda_url', 'publisher', 'sources', 'first_seen', 'last_changed'],
     properties: {
       slug: str('Stable id, used in the record URL'),
-      body: str('The board, commission or council, as the city names it'),
-      date: date('Meeting date (YYYY-MM-DD), as the AgendaCenter lists it'),
+      body: str('The board, commission or council, as the publisher names it'),
+      date: date('Meeting date (YYYY-MM-DD), as the publisher lists it'),
       title: str('Agenda title, as posted'),
       agenda_url: str('The posted agenda (usually a PDF)', { format: 'uri' }),
       minutes_url: str('The posted minutes; left out until they are posted', { format: 'uri' }),
