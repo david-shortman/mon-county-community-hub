@@ -22,7 +22,7 @@ const target = rung && pages.has(rung.route) ? rung : pages.has(hub) ? { route: 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 {target && (
-  <aside class="note next-rung" aria-label="Next step">
+  <aside class="note" aria-label="Next step">
     <p><strong>Ready for the next step?</strong> <a href={`${base}${target.route}`}>{target.text}</a></p>
   </aside>
 )}
