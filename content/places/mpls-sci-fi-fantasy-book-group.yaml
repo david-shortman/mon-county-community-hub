@@ -1,0 +1,28 @@
+name: Sci-Fi and Fantasy Book Discussion Group
+slug: mpls-sci-fi-fantasy-book-group
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: A monthly group for adults who read science fiction and fantasy and want to talk about their current books. Snacks and drinks are provided.
+regular:
+  - Third Thursday of each month, 6:30 p.m. to 7:30 p.m.
+cost: Free
+interests: [books, social]
+tags: [free, come-alone]
+contact:
+  url: https://mympls.org/programs/adults/sci-fi-and-fantasy-book-discussion-group/
+  phone: "304-291-7425"
+  place: Morgantown Public Library, Meeting Room B, 373 Spruce Street, Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+sources:
+  - url: https://mympls.org/programs/adults/sci-fi-and-fantasy-book-discussion-group/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/17865259
+    checked: 2026-10-30
+  - url: https://mympls.org/programs/adults/
+    checked: 2026-10-30

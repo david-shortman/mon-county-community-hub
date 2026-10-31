@@ -1,10 +1,13 @@
-name: Monongalia County Sheriff's Office
+name: Monongalia County Sheriff's Department
 slug: monongalia-county-sheriff
 kind: government
+phone: "304-291-7260"
 website: https://monongaliasheriff.gov/
-summary: The county's law enforcement office, at 116 Walnut Street in Morgantown.
-topics: [moving, government]
+summary: The county sheriff's office in downtown Morgantown. It is one of the state's listed child car seat fitting stations.
+topics: [family, government, moving]
 area: monongalia-county
 sources:
+  - url: https://dmv.wv.gov/cps-seat-fitting-stations
+    checked: 2026-10-30
   - url: https://monongaliasheriff.gov/
     checked: 2026-10-30

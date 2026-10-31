@@ -1,0 +1,28 @@
+name: Library Lattes and Laughs Book Club
+slug: mpls-library-lattes-and-laughs
+kind: group
+area: south
+community: Clinton District
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: A monthly book club at the Clinton District library that reads a different book each month. Coffee, tea or hot chocolate and a treat are provided.
+regular:
+  - Once a month on a Thursday, 11 a.m. to noon. See the library calendar for dates.
+cost: Free
+interests: [books, social]
+tags: [free]
+contact:
+  url: https://mympls.org/programs/adults/library-lattes-and-laughs/
+  phone: "304-291-0703"
+  place: Clinton District Public Library, 2005 Grafton Road, Morgantown, WV 26508
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Next listed dates are Thursday, November 19 and Thursday, December 17, 2026.
+sources:
+  - url: https://mympls.org/programs/adults/library-lattes-and-laughs/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/16402383
+    checked: 2026-10-30

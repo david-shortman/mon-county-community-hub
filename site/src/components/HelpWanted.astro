@@ -1,0 +1,22 @@
+---
+// "Help wanted" box (#444): gaps from content/gaps/<topic>.yaml, in plain
+// words, with a way to tell us. It names gaps and never promises to fill
+// them. No names or contact details of people who reply are ever shown.
+import { loadGaps, prettyDate, ymd } from '../lib/content.mjs';
+const { topic } = Astro.props;
+const data = loadGaps(topic);
+const tellUs = 'https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml';
+const checked = data?.gaps.map((g) => ymd(g.checked)).sort()[0];
+---
+{data?.gaps.length > 0 && (
+  <section class="note" id="help-wanted" aria-labelledby="help-wanted-h">
+    <h2 id="help-wanted-h">Help wanted</h2>
+    <p>We looked and couldn't find these. Know of one, or want to start one? <a href={tellUs}>Tell us</a>.</p>
+    <ul>
+      {data.gaps.map((g) => (
+        <li><strong>{g.what}.</strong>{' '}{g.why}{g.guide && <> <a href={g.guide.url}>{g.guide.text}</a></>}</li>
+      ))}
+    </ul>
+    <p class="meta">We last looked on {prettyDate(checked)}. Telling us opens a public page on GitHub, which needs a free account, so leave out private details.</p>
+  </section>
+)}

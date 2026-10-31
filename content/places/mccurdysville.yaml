@@ -1,0 +1,22 @@
+name: McCurdysville Community Building
+slug: mccurdysville
+kind: community-center
+area: west
+community: McCurdysville (Jakes Run Road)
+run_by:
+  kind: volunteer-association
+  text: A volunteer group. Festival money goes to the building's upkeep
+story: A community building on Jakes Run Road known for its fall Apple Butter Festival.
+regular:
+  - Apple Butter Festival each fall, with breakfast, lunch and crafts, to raise money for the building
+contact:
+  place: 3414 Jakes Run Road, Rivesville, WV
+status: active
+last_activity_seen: 2026-10-23
+notes:
+  - We found no website, phone or Facebook page for the building. The address is the one printed in its festival listing.
+sources:
+  - url: https://www.dominionpost.com/2026/10/23/events-opportunities-23
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/
+    checked: 2026-10-30

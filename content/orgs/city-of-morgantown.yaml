@@ -1,10 +1,12 @@
 name: City of Morgantown
 slug: city-of-morgantown
 kind: government
-website: https://www.morgantownwv.gov/
-summary: A city in Mon County. Its departments include police and engineering and public works, which takes care of city streets.
-topics: [moving, government]
+website: https://www.morgantownwv.gov
+summary: The city government for Morgantown. It runs city services like streets, sidewalks and code enforcement, and takes service requests through Morgantown 311.
+topics: [government, moving]
 area: morgantown
 sources:
+  - url: https://www.morgantownwv.gov/428/Service-Request
+    checked: 2026-10-30
   - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
     checked: 2026-10-30

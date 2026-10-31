@@ -1,0 +1,16 @@
+---
+// "Bus directions" (#407, first step): for a listing with an address the
+// source publishes, a link that opens the phone's map app with transit
+// directions to it. It states no schedule facts of its own, so it needs no
+// bus feed. Stops, routes and the last bus back wait for a current public
+// Mountain Line schedule file (see #407).
+const { place, about } = Astro.props;
+const href = place ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place)}&travelmode=transit` : null;
+---
+{href && <p class="bus-link">Going by bus? <a href={href}>Bus directions<span class="sr-only"> to {about}</span></a> (opens a map).</p>}
+
+<style>
+  .bus-link { margin: 4px 0 8px; font-size: 0.95rem; }
+  .bus-link a { display: inline-block; padding: 10px 2px; margin-block: -10px; font-weight: 600; } /* tall tap area without pushing the next line down */
+  @media print { .bus-link { display: none; } }
+</style>

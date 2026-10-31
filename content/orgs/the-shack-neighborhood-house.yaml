@@ -1,0 +1,13 @@
+name: The Shack Neighborhood House
+slug: the-shack-neighborhood-house
+kind: nonprofit
+website: https://the-shack.org/
+phone: "304-599-5466"
+summary: A community center at 537 Blue Horizon Drive, Morgantown, serving families since 1928. It offers before, after and out of school child care, summer camp and teen volunteering.
+topics: [family]
+area: monongalia-county
+sources:
+  - url: https://the-shack.org/
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
+    checked: 2026-10-30

@@ -1,0 +1,13 @@
+name: SteppingStones
+slug: steppingstones
+kind: nonprofit
+website: https://www.steppingstoneswv.org/
+phone: "304-983-7837"
+summary: Recreation programs for children and adults with disabilities, at Mylan Park in Morgantown. It runs Miracle League baseball and an inclusive Playground For All.
+topics: [disability, community]
+area: monongalia-county
+sources:
+  - url: https://www.steppingstoneswv.org/
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
+    checked: 2026-10-30
