@@ -1,3 +1,4 @@
+import { printSheets } from '../lib/printouts.mjs';
 import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
 import { ROLES } from '../lib/helper-roles.mjs';
@@ -112,6 +113,8 @@ ${centers}
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
+- [Printouts](${u('/print/')}): printable sheets of places and phone numbers, made from the listings every morning. Sheets: ${printSheets().map((s) => `[${s.name}](${u(`/print/${s.slug}/`)})`).join(', ')}
+- [Cards and posters to print](${u('/print/cards/')}): wallet cards and half-page posters with a QR code and a short web address
 - [Terms](${u('/terms/')}): what the site is, that information can change, and how to ask for a fix or removal
 - [Privacy](${u('/privacy/')}): what the site collects (no analytics), and how the public Tell us form works
 - [Make a list for someone](${u('/make-a-list/')}): a helper picks up to 6 places and adds a note, then prints or texts a one-page list; picks live only in the web address
