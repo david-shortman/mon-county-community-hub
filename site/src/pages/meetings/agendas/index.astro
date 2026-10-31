@@ -1,0 +1,76 @@
+---
+// Plain-language agenda guides (#529): for each coming meeting with a posted
+// agenda, the date, place, how to watch and comment, and every agenda item
+// with its exact title plus one neutral line on what kind of item it is.
+// Below that, "what was decided": the actions recorded in posted minutes from
+// the last 30 days. Each body also has its own page, /meetings/agendas/<body>/.
+// Data: content/agendas/, content/minutes/.
+// Rules: docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md and
+// docs/process/agenda-guides.md.
+import Base from '../../../layouts/Base.astro';
+import AgendaGuide from '../../../components/AgendaGuide.astro';
+import { fixFormUrl } from '../../../lib/group-requests.mjs';
+import { prettyDate, todayYmd } from '../../../lib/content.mjs';
+import { loadAgendas, loadDecided, upcomingGuides, recentDecided, BODIES, GROUPS, MEETING_BODIES } from '../../../lib/agendas.mjs';
+import { loadMeetings } from '../../../lib/meetings/index.mjs';
+export const page = { door: "community", topic: "government", label: "Coming meetings in plain language", summary: "Every item on posted agendas for City Council, the County Commission, the school board, city boards, regional boards and towns, plus what recent meetings decided" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const all = loadAgendas();
+const guides = upcomingGuides(all, today);
+const decided = recentDecided(loadDecided(), today);
+// Agendas posted for the next 14 days for these bodies that have no guide yet.
+const until = (() => { const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + 14); return d.toISOString().slice(0, 10); })();
+const covered = new Set(guides.map((g) => `${g.body}|${g.date}`));
+const waiting = (await loadMeetings()).filter((m) => MEETING_BODIES[m.body] && m.date >= today && m.date <= until && !/cancel/i.test(m.title ?? '') && !covered.has(`${MEETING_BODIES[m.body]}|${m.date}`));
+const boardDocs = 'https://go.boarddocs.com/wv/mono/Board.nsf/Public';
+const count = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const groups = Object.entries(GROUPS).map(([id, name]) => ({
+  name,
+  bodies: Object.entries(BODIES).filter(([, b]) => b.group === id).map(([slug, b]) => ({
+    slug, name: b.name,
+    coming: guides.filter((g) => g.body === slug).length,
+    done: decided.filter((r) => r.body === slug).length,
+  })),
+}));
+---
+<Base title="Coming Morgantown and Mon County meetings in plain language" description="Plain-language guides to posted agendas for Morgantown and Mon County public bodies, and the actions recorded in recent minutes, each linked to the official record.">
+  <h1>Coming meetings in plain language</h1>
+  <p class="lede">What is on the agenda for coming meetings of City Council, the County Commission, the school board, city boards, regional boards and towns. Each item keeps its title from the official agenda, with one line saying what kind of item it is.</p>
+
+  <div class="note">
+    <p>We describe the agenda. We do not say whether an item is good or bad or how it will turn out. The official agenda is the record, and it can change, so open it before you go. New to agendas? Read <a href={`${base}/meetings/how-to-read-an-agenda/`}>how to read a meeting agenda</a>.</p>
+  </div>
+
+  <h2 id="by-board">By board</h2>
+  <p>Each board has its own page with its coming guides and what its recent meetings decided.</p>
+  {groups.map((grp) => (
+    <>
+      <h3>{grp.name}</h3>
+      <ul>
+        {grp.bodies.map((x) => <li><a href={`${base}/meetings/agendas/${x.slug}/`}>{x.name}</a>{(x.coming || x.done) ? <>: {[x.coming && count(x.coming, 'coming guide', 'coming guides'), x.done && count(x.done, 'recent meeting decided', 'recent meetings decided')].filter(Boolean).join(', ')}</> : ''}</li>)}
+      </ul>
+    </>
+  ))}
+
+  <h2 id="coming">Coming meetings</h2>
+  {guides.length ? guides.map((g) => <AgendaGuide g={g} level={3} />) : <p>No guides are up yet for coming meetings. Posted agendas are on the <a href={`${base}/meetings/`}>meetings page</a>.</p>}
+
+  <h2 id="decided">What was decided in the last 30 days</h2>
+  <p>For meetings with posted minutes, each board's page lists every motion the minutes record, with the result and the vote count as the minutes write them. We do not cover what people said or why. The minutes are the official record.</p>
+  {decided.length ? (
+    <ul>
+      {decided.map((r) => <li><strong>{prettyDate(r.date)}</strong>, <a href={`${base}/meetings/agendas/${r.body}/#${r.slug}`}>{BODIES[r.body].name}: {r.meeting}</a> ({count(r.actions.length, 'action', 'actions')})</li>)}
+    </ul>
+  ) : <p>None yet. Boards often approve and post minutes at their next meeting, a few weeks later.</p>}
+
+  <h2 id="not-yet">Posted agendas we have not explained yet</h2>
+  {waiting.length ? (
+    <ul>
+      {waiting.map((m) => <li><strong>{prettyDate(m.date)}</strong>, {m.body}: <a href={m.agenda_url}>{m.title}</a> (official agenda)</li>)}
+    </ul>
+  ) : <p>None right now for City Council, the County Commission or the city boards in the next two weeks.</p>}
+  <p>The Board of Education posts its agendas on <a href={boardDocs}>BoardDocs</a>, which our tools cannot read, so those guides are added by hand when someone reads the agenda there. Regional boards and towns are checked by hand on their own sites. Meetings with no agenda yet are on the <a href={`${base}/calendar/`}>Dates page</a>.</p>
+
+  <p class="meta">An AI helper (Claude) writes each guide from the posted agenda, and each list of decisions from the posted minutes, in a work session, following written neutrality rules. It saves each one with the date it read the source. Nothing is written by AI when you load the page. See <a href={`${base}/how-it-works/`}>how this site works</a>. Something wrong or slanted? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
