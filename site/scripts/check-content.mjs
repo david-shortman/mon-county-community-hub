@@ -320,7 +320,8 @@ const TIME_RULES = [
 ];
 const BY_DATE = new RegExp(`\\bby ${MONTH} \\d{1,2}\\b`, 'i');
 const DEADLINE_VERB = /\b(apply|applies|file|pay|register|enroll|sign up|submit|send|mail|return|renew|turn in|drop off|request|order|change|choose|vote|respond|reply|call)\b/i;
-const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics']);
+// opens and closes are structured 24-hour times (opening_hours, #177), not words people read.
+const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics', 'opens', 'closes']);
 function eachText(value, key, visit) {
   if (SKIP_KEYS.has(key)) return;
   if (typeof value === 'string') visit(key, value);
