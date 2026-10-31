@@ -1,0 +1,14 @@
+---
+// "What help might I get?" (#188), question 1 of 2. Plain links, so it works
+// with no scripts, any hour, with no name. See src/lib/what-help.mjs.
+import Base from '../../../layouts/Base.astro';
+import Question from '../../../components/Question.astro';
+import { NEEDS } from '../../../lib/what-help.mjs';
+export const page = { door: "this-month", topic: "poverty", label: "What help might I get?", summary: "Two quick questions, no name needed, then the places that may help" };
+---
+<Base help title="What help might I get in Mon County? Two quick questions" description="Answer two quick questions, with no name and nothing saved, and see the places in Morgantown and Monongalia County that may help with food, bills, rent, a place to stay, care or work.">
+  <h1>What help might I get?</h1>
+  <p class="lede">Two quick questions. No name, no account, nothing saved. Your answers stay in this page's web address.</p>
+  <h2>What do you need help with most right now?</h2>
+  <Question step={1} of={2} back="/" choices={NEEDS.map((n) => ({ label: n.label, hint: n.hint, href: `/help/what-help/${n.id}/` }))} />
+</Base>

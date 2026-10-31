@@ -1,3 +1,4 @@
+import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
 
 export function GET({ site }) {
@@ -18,6 +19,7 @@ export function GET({ site }) {
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
 - [This month in Mon County](${u('/calendar/month/')}): the next 30 days from the calendar on one page you can print
 - [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
+- [What help might I get?](${u('/help/what-help/')}): two quick questions, no name needed, then the pages that may help with food, bills, rent, a place to stay, care or work. Question 2 pages: ${NEEDS.map((n) => `[${n.label}](${u(`/help/what-help/${n.id}/`)})`).join(', ')}. Answer pages, one per pair of answers: ${NEEDS.flatMap((n) => WHO.map((w) => `[${n.label}; ${w.label}](${u(`/help/what-help/${n.id}/${w.id}/`)})`)).join(', ')}
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
 - [Get through this month](${u('/money/')}): pick what is going on (a utility or other bill, short on food, behind on rent, cash fast or a payday loan, free tax help) and get local steps in order, with phone numbers and sources; also the scam warning
 - [Food help](${u('/help/food/')}): two questions (when you need food, and whether you are a WVU student) leading to sourced options
