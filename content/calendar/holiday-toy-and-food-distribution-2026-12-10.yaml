@@ -1,0 +1,22 @@
+title: Holiday Toy and Food Distribution at the Morgantown Armory
+slug: holiday-toy-and-food-distribution-2026-12-10
+starts: 2026-12-10
+start_time: "09:00"
+org_name: United Way of Monongalia and Preston Counties and Christian Help
+who_it_is_for: Food is for anyone, first come, first served, with no sign-up. Toys are only for families who signed up with Christian Help from October 19 to 30.
+what_to_do: Come to the Morgantown Readiness Center (Armory) at 90 Army Band Way. Food comes from Mountaineer Food Bank while it lasts. The United Way lists 9 a.m. to 4 p.m., Christian Help lists pickup from 9 a.m. to 3 p.m., and Toys for Tots lists 9 a.m. to 2 p.m., so come early. Questions? Call Christian Help at 304-296-0221.
+url: https://www.unitedwaympc.org/HFTD
+topics: [food, family]
+place: 90 Army Band Way, Morgantown, WV
+phone: 304-296-0221
+phone_label: Christian Help
+town: Morgantown
+sources:
+  - url: https://www.unitedwaympc.org/HFTD
+    checked: 2026-10-31
+  - url: https://motownchristianhelp.com/our-events/
+    checked: 2026-10-31
+    name: Christian Help events
+  - url: https://morgantown-wv.toysfortots.org/local-coordinator-sites/lco-sites/local-distribution.aspx
+    checked: 2026-10-31
+    name: Toys for Tots distribution list

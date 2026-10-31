@@ -1,0 +1,97 @@
+---
+// Who serves my address? (#204, part 1). Pick a town or "outside any town",
+// then see who to call for police, trash, water and streets. No address lookup
+// and nothing stored: each choice is a link to a section of this page.
+// Not yet here: Morgantown trash sign-up (#525), Blacksville water and police (#674).
+import Base from '../layouts/Base.astro';
+import Question from '../components/Question.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Who serves my address?", summary: "Pick your town, or outside any town, and see who to call for police, trash, water and streets" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tel = (p) => `tel:${p.replace(/[^0-9]/g, '')}`;
+const fmt = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+// One line per contact: what, who, phone, and the source with its checked date.
+const line = (what, slug, note = '') => {
+  const e = r(slug);
+  if (!e) return null;
+  const s = e.sources[0];
+  return { what, title: e.title, phone: e.contact.phone, url: e.contact.url, note, src: s.url, checked: fmt(String(s.checked).slice(0, 10)) };
+};
+const places = [
+  { id: 'morgantown', name: 'City of Morgantown', lines: [
+    line('Police', 'morgantown-police-non-emergency', 'Then press 0.'),
+    line('City streets', 'morgantown-streets'),
+    line('Water and sewer', 'mub-start-service'),
+    line('Trash', 'mon-swa-ask-about-trash', 'We could not confirm how to start city trash pickup yet. The Solid Waste Authority can tell you who serves your address.'),
+  ] },
+  { id: 'westover', name: 'City of Westover', lines: [
+    line('Police', 'westover-police-non-emergency'),
+    line('Trash and recycling', 'westover-trash'),
+    line('Water and sewer', 'mub-start-service'),
+  ] },
+  { id: 'star-city', name: 'Town of Star City', lines: [
+    line('Police', 'mecca-non-emergency', 'Star City has no dispatch center of its own and sends calls to this line.'),
+    line('Trash', 'star-city-trash'),
+    line('Water and sewer', 'mub-start-service'),
+  ] },
+  { id: 'granville', name: 'Town of Granville', lines: [
+    line('Police', 'granville-police'),
+    line('Trash', 'granville-trash'),
+    line('Water and sewer', 'mub-start-service'),
+  ] },
+  { id: 'blacksville', name: 'Town of Blacksville', lines: [
+    line('Town office', 'blacksville-town-office', 'We could not confirm who provides water or police here. Ask the town office.'),
+    line('Trash', 'mon-swa-ask-about-trash'),
+  ] },
+  { id: 'county', name: 'Outside any town', lines: [
+    line('Sheriff', 'mon-county-sheriff-office'),
+    line('Police non-emergency, any hour', 'mecca-non-emergency'),
+    line('Trash', 'mon-swa-ask-about-trash'),
+    line('Water', 'wv-psc-utility-questions', 'Ask your landlord or the seller who provides water. The state utility agency can help if you are not sure.'),
+  ] },
+].map((p) => ({ ...p, lines: p.lines.filter(Boolean) }));
+const roads = r('wvdoh-road-repair');
+const map = r('mon-county-parcel-viewer');
+---
+<Base title="Who serves my address in Mon County? Police, trash, water, streets" description="Pick your town in Monongalia County, or outside any town, and see who to call for police, trash, water and streets: Morgantown, Westover, Star City, Granville, Blacksville or the county.">
+  <h1>Who serves my address?</h1>
+  <p class="lede">It depends on whether you live in a town or outside one. Pick where you live to see who to call. In an emergency, call 911.</p>
+
+  <Question step={1} choices={[
+    ...places.map((p) => ({ label: p.name, href: `/who-serves-me/#${p.id}` })),
+    { label: 'Not sure', hint: 'How to check if an address is in a town', href: '/who-serves-me/#not-sure' },
+  ]} />
+
+  {places.map((p) => (
+    <section id={p.id} class="serve">
+      <h2>{p.name}</h2>
+      <ul>
+        {p.lines.map((l) => (
+          <li>
+            <strong>{l.what}:</strong> {l.title}{l.phone && <>, <a href={tel(l.phone)}>{l.phone}</a></>}.
+            {l.note && <> {l.note}</>}
+            <span class="meta"> <a href={l.src}>Source</a>, checked {l.checked}.</span>
+          </li>
+        ))}
+        <li><strong>State roads:</strong> <a href="#roads">ask the state to fix a road</a>.</li>
+      </ul>
+    </section>
+  ))}
+
+  <section id="roads">
+    <h2>State roads</h2>
+    {roads && <p>{roads.what_to_do} <a href={roads.contact.url}>{roads.contact.url_label}</a>. <span class="meta"><a href={roads.sources[1].url}>Source</a>, checked {fmt(String(roads.sources[1].checked).slice(0, 10))}.</span></p>}
+    <p>Not sure if it is a state road? Use the state's <a href="https://experience.arcgis.com/experience/2917da07ad1d4900bb4e372ca6527126/page/Page">road search by address</a> map.</p>
+  </section>
+
+  <section id="not-sure">
+    <h2>Not sure if you live in a town?</h2>
+    {map && <p>{map.what_to_do} <a href={map.contact.url}>{map.contact.url_label}</a>. <span class="meta"><a href={map.sources[0].url}>Source</a>, checked {fmt(String(map.sources[0].checked).slice(0, 10))}.</span></p>}
+  </section>
+
+  <p>Starting service after a move? See <a href={`${base}/moving-here/`}>Moving here: start power, water, gas and trash</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Something out of date or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
