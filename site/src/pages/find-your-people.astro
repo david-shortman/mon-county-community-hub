@@ -49,7 +49,7 @@ const also = [
     <button type="submit">Show three picks</button>
   </form>
   <section id="picks" aria-live="polite" hidden>
-    <h2>Three picks for you</h2>
+    <h2 id="picks-h" tabindex="-1">Three picks for you</h2>
     <div id="picks-list"></div>
     <p class="meta">Picked from the lists below by what you chose. Not a ranking: every group here is listed the same way.</p>
   </section>
@@ -139,7 +139,7 @@ const also = [
     var into = val('into'), time = val('time'), withWho = val('with');
     try { history.replaceState(null, '', '?into=' + into + '&time=' + time + '&with=' + withWho + '#picks'); } catch (err) {}
     show(into, time, withWho);
-    picks.scrollIntoView();
+    var h = document.getElementById('picks-h'); if (h) h.focus(); else picks.scrollIntoView();
   });
   var q = new URLSearchParams(location.search);
   if (q.get('into')) {
