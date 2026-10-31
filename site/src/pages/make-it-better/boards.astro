@@ -1,0 +1,87 @@
+---
+// Serve on a board (#290): city boards that shape how Morgantown looks and
+// feels, open seats first. Built from content/boards. Open seat counts come
+// from the city's vacancy list; when a board's own page shows a vacant seat
+// the list does not, the card says who says what. No advice on who should
+// apply, and no positions on what any board decides.
+import Base from '../../layouts/Base.astro';
+import Actions from '../../components/Actions.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import NextRung from '../../components/NextRung.astro';
+import { loadDir, FAST_STALE_DAYS } from '../../lib/content.mjs';
+export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City boards that shape how Morgantown looks, which have open seats, and how to apply" };
+const all = loadDir('boards');
+const boards = all.filter((b) => !b.section);
+const county = all.filter((b) => b.section === 'county');
+const countyList = 'https://www.monongaliacounty.gov/authorities,_boards_and_commissions/index.php';
+// Other boards with open seats, listed by name from the city's vacancy list (#676).
+const others = all.filter((b) => b.section === 'other' && b.open_seats > 0);
+const open = boards.filter((b) => b.open_seats > 0);
+const full = boards.filter((b) => !(b.open_seats > 0));
+const applyOnline = 'https://arcg.is/4G8PK';
+const applyPdf = 'https://www.morgantownwv.gov/DocumentCenter/View/5371/Updated-Board-and-Commission-Application';
+const vacancyList = 'https://www.morgantownwv.gov/210/Volunteer-Opportunities';
+const listSrc = [{ url: vacancyList, checked: '2026-10-30' }];
+const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
+---
+<Base title="Serve on a Morgantown city board: open seats and how to apply" description="City boards that help shape how Morgantown looks and feels, like the Urban Landscape Commission and Tree Board: what each one does, when it meets, which have open seats, and how to apply.">
+  <h1>Serve on a city board</h1>
+  <p class="lede">Help decide how Morgantown looks. City Council appoints residents to these boards. Some have open seats now.</p>
+
+  <div class="note">
+    <p><strong>How to apply:</strong> fill out the city's application <a href={applyOnline}>online</a>, or print the <a href={applyPdf}>paper application (PDF)</a> and return it to the City Clerk's office. Seats stay open until they are filled.</p>
+  </div>
+  <SourceLine sources={listSrc} staleDays={FAST_STALE_DAYS} about="how to apply" />
+
+  <h2>Boards with open seats</h2>
+  {open.map((b) => (
+    <article class="card" id={b.slug}>
+      <h3>{b.name}</h3>
+      <p><strong>{seats(b.open_seats)}</strong> on the city's vacancy list.</p>
+      <p>{b.decides}</p>
+      {b.who_can_serve && <p><strong>Who can serve:</strong> {b.who_can_serve}</p>}
+      <p><strong>Meets:</strong> {b.meets}</p>
+      <Actions link={applyOnline} linkLabel="Apply online" about={b.name} />
+      <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
+      <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
+    </article>
+  ))}
+
+  <h2>Boards with no open seats on the list</h2>
+  <p>These boards are not on the city's vacancy list right now. Seats open as terms end, so check back.</p>
+  {full.map((b) => (
+    <article class="card" id={b.slug}>
+      <h3>{b.name}</h3>
+      {b.page_vacant > 0 && <p><strong>Sources differ:</strong> the board's own page shows {b.page_vacant === 1 ? '1 vacant seat' : `${b.page_vacant} vacant seats`}, but the city's vacancy list does not list it. Ask the City Clerk's office.</p>}
+      <p>{b.decides}</p>
+      {b.who_can_serve && <p><strong>Who can serve:</strong> {b.who_can_serve}</p>}
+      <p><strong>Meets:</strong> {b.meets}</p>
+      <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
+      <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
+    </article>
+  ))}
+
+  <h2>Other city boards with open seats</h2>
+  <p>These boards are not mainly about how the city looks, but they also have open seats on the city's list.</p>
+  <ul>
+    {others.map((b) => <li><strong>{b.name}:</strong> {b.open_note}. {b.who_can_serve}</li>)}
+  </ul>
+  <p class="more"><a href={vacancyList}>The city's full vacancy list</a></p>
+  <SourceLine sources={listSrc} staleDays={FAST_STALE_DAYS} about="the other open seats" />
+
+  <h2 id="county">County boards</h2>
+  <p>The Monongalia County Commission appoints residents to its own boards. It takes a letter of interest or an application from anyone willing to go to meetings. Send letters to the Monongalia County Commission, 2nd Floor, Courthouse, 243 High Street, Morgantown, WV 26505. The county's page does not list open seats, so ask the Commission office.</p>
+  <Actions link={countyList} linkLabel="All county boards" phone="304-291-7257" phoneLabel="the County Commission office" about="county boards" />
+  {county.map((b) => (
+    <article class="card" id={b.slug}>
+      <h3>{b.name}</h3>
+      <p>{b.created}</p>
+      <p><strong>Who serves:</strong> {b.who_can_serve}</p>
+      <p><strong>Meets:</strong> {b.meets}</p>
+      <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
+    </article>
+  ))}
+
+  <NextRung next="budget" />
+  <p class="meta">We list open seats as the city posts them. We do not say who should apply or take positions on what any board decides. Seat counts change, so check the city's list before you apply. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

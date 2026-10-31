@@ -1,6 +1,6 @@
 # Trust and AI
 
-This hub is built mostly by AI agents, and residents may use it to find help with food, bills, health care, and deadlines. That means trust depends on two things: being honest that AI is involved, and making sure AI never adds a fact that a real source does not support. This page collects practices from government AI guidance, newsroom standards, and fact-checking codes, and turns them into concrete rules for this repo.
+This site is built mostly by AI agents, and residents may use it to find help with food, bills, health care, and deadlines. That means trust depends on two things: being honest that AI is involved, and making sure AI never adds a fact that a real source does not support. This page collects practices from government AI guidance, newsroom standards, and fact-checking codes, and turns them into concrete rules for this repo.
 
 ## Disclose AI involvement in plain words
 
@@ -51,7 +51,7 @@ We will not use AI-generated images of real places or people, and we will not le
 
 **What it is.** OMB memo M-25-21 (April 2025, which replaced M-24-10) requires federal agencies to provide "human oversight, intervention, and accountability" for high-impact AI, and a timely human review and chance to appeal. We found no newer memo replacing it. NIST AI 600-1 notes confabulation risk is highest in areas like health care and consequential decisions.
 
-**Why it matters here.** The hub is not a federal agency, but the same logic fits. Wrong details about health, benefits eligibility, legal rights, or deadlines can cause real harm.
+**Why it matters here.** The site is not a federal agency, but the same logic fits. Wrong details about health, benefits eligibility, legal rights, or deadlines can cause real harm.
 
 **How we apply it.** Treat entries with topics `health`, `money`, `housing`, `family`, `taxes`, or `voting`, and every `calendar/` entry, as high stakes. These get a second, independent check against the source before merge: a different session (or Duet) re-opens each source and confirms each field, and notes it in the PR. We will not give advice on someone's own case ("you qualify"). We describe the program and point to the office that decides. On top of that, David checks changes about shelter, crisis help, food and benefits before they go live (his decision, October 30, 2026, #493). The exact list is in "When a PR waits for David" in `docs/COORDINATION.md`.
 
@@ -84,7 +84,7 @@ We will not use AI-generated images of real places or people, and we will not le
 3. **What we do first:** for high-stakes items (health, benefits, legal, deadlines), hide the item until it is re-checked.
 4. **How we fix it:** re-check the source, fix the entry, and update the `checked` date.
 5. **How we show it:** a dated "Corrected" note on the item for major errors; typos fixed without a note.
-6. **Public record:** every correction is a public GitHub issue and PR, and is listed in the build log (`docs/build-log/`).
+6. **Public record:** every correction is a public GitHub issue and PR, and gets a file in `content/corrections/`, shown on the public Corrections page. How we check a report before it changes anything: [checking corrections](checking-corrections.md).
 7. **What we may not act on:** opinions about which groups to list, requests without a source, or anything that would add private personal information.
 
 **Sources:**

@@ -14,7 +14,7 @@
 // The build makes door lists, the Topics page and breadcrumbs from these
 // tags, so adding a page never means editing the menu (#249). A bad tag
 // stops the build with a message that says what to fix.
-import { loadDoors } from './content.mjs';
+import { loadDoors, todayYmd } from './content.mjs';
 
 // Pages that sit above the doors, so they carry no tags.
 const UNTAGGED = new Set(['/', '/404/', '/search/', '/topics/']);
@@ -82,6 +82,12 @@ export function loadPages() {
 }
 
 const byLabel = (a, b) => a.label.localeCompare(b.label);
+// A to Z, but a section's own page comes before the pages under it
+// (/make-it-better/ before /make-it-better/adopt/).
+const hubFirst = (list) => {
+  const isHub = (p) => list.some((q) => q !== p && q.route.startsWith(p.route));
+  return list.sort((a, b) => (isHub(b) - isHub(a)) || byLabel(a, b));
+};
 
 // A door's topics that have at least one live page, in doors.yaml order.
 // A topic shows only when its page exists, so no one lands on an empty list.
@@ -90,7 +96,7 @@ export async function doorTopics(slug) {
   const pages = [...(await loadPages()).values()].filter((p) => p.listed && p.door === slug);
   if (!door?.topics) return pages.length ? [{ topic: null, label: door?.name, pages: pages.sort(byLabel) }] : [];
   return Object.entries(door.topics)
-    .map(([topic, label]) => ({ topic, label, pages: pages.filter((p) => p.topic === topic).sort(byLabel) }))
+    .map(([topic, label]) => ({ topic, label, pages: hubFirst(pages.filter((p) => p.topic === topic)) }))
     .filter((t) => t.pages.length);
 }
 
@@ -131,10 +137,16 @@ export async function doorCards(now = new Date()) {
   }));
 }
 
-// An example may carry `from` and `until` as "MM-DD" (inclusive). Without
-// them it shows all year. Checked at build time.
-function inSeason(e, now = new Date()) {
-  if (!e.from || !e.until) return true;
-  const md = `${String(now.getUTCMonth() + 1).padStart(2, '0')}-${String(now.getUTCDate()).padStart(2, '0')}`;
-  return md >= e.from && md <= e.until;
+// An example may carry `from` and `until` as "MM-DD" (inclusive), in
+// Morgantown time. Without either it shows all year. With only `from` it
+// shows from that day to December 31; with only `until`, from January 1 to
+// that day. A `from` later than `until` wraps the new year (11-01 to 03-31
+// is November through March). Checked at build time; the site rebuilds every
+// morning, so an example switches on the first build of its first day (#488).
+export function inSeason(e, now = new Date()) {
+  if (!e.from && !e.until) return true;
+  const md = todayYmd(now).slice(5);
+  const from = e.from ?? '01-01';
+  const until = e.until ?? '12-31';
+  return from <= until ? md >= from && md <= until : md >= from || md <= until;
 }

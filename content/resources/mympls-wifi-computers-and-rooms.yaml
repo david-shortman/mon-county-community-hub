@@ -1,0 +1,26 @@
+title: Free Wi-Fi, computers and meeting rooms at the library
+slug: mympls-wifi-computers-and-rooms
+org: morgantown-public-library-system
+topics: [community, work]
+who_it_is_for: Anyone who needs Wi-Fi, a computer or a quiet table for a few hours. The meeting rooms are for public meetings, community organizations and nonprofit groups.
+what_to_do: The library's FAQ lists free Wi-Fi and computers at Morgantown, Arnettsville, Cheat, Clay-Battelle and Clinton, and its Services page says they are at all its locations. Computers can be used for up to 60 minutes. All locations have tables for quiet studying. The main library on Spruce Street has two meeting rooms, Meeting Room A and Meeting Room B, at no charge. To reserve a room, call 304-291-7425.
+hours: "Main library: Monday to Thursday, 9 a.m. to 8 p.m. Friday and Saturday, 9 a.m. to 4 p.m. Closed Sunday."
+opening_hours:
+  - days: [mon, tue, wed, thu]
+    opens: "09:00"
+    closes: "20:00"
+  - days: [fri, sat]
+    opens: "09:00"
+    closes: "16:00"
+contact:
+  phone: "304-291-7425"
+  url: https://mympls.org/services/
+  place: 373 Spruce Street, Morgantown, WV 26505
+cost: Wi-Fi, computers and meeting rooms are free. Copies and prints are 10 cents a page in black and white and 25 cents in color. Faxes are $1 a page, up to $5.
+sources:
+  - url: https://mympls.org/services/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/faqs/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/locations/morgantown/
+    checked: 2026-10-30
