@@ -1,0 +1,13 @@
+name: WVU Campus and Community Life
+slug: wvu-campus-and-community-life
+kind: school
+website: https://campuslife.wvu.edu/
+phone: "304-293-5611"
+summary: The WVU office that helps students with off-campus living, emergencies and campus resources. It is in Elizabeth Moore Hall, 1507 University Avenue, Morgantown.
+topics: [community]
+area: morgantown
+sources:
+  - url: https://campuslife.wvu.edu/resource-portal/financial-assistance
+    checked: 2026-10-30
+  - url: https://campuslife.wvu.edu/
+    checked: 2026-10-30
