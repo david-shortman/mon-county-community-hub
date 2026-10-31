@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
 import SourceLine from '../components/SourceLine.astro';
+import ResourceCard from '../components/ResourceCard.astro';
 import { resource, org, telHref } from '../lib/content.mjs';
 export const page = { door: "this-month", label: "Get through this month", summary: "Can't pay a bill, behind on rent, short on food, cash fast, free tax help" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -28,8 +29,11 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
   <SourceLine sources={wv211.sources} org={wv211.org} about="211" />
 
   <h3 id="rent">I'm behind on rent or facing eviction</h3>
-  <p>Keep any notice from your landlord or the court, and do not ignore it. If you have a court hearing or another deadline in the next 10 days, call {legalAidName} at <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a> right away. Its help is free, though some court filing fees may still apply. For other help with rent, call <a href="tel:211">211</a> and say you are behind on rent. We are still building our housing page.</p>
-  <SourceLine sources={legalAid.sources} org={legalAid.org} about="eviction help" />
+  <p>Keep any notice from your landlord or the court, and do not ignore it. {legalAidName} gives free legal help to renters with low income who face eviction. The card below says who qualifies. If you have a court hearing or another deadline in the next 10 days, call <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a> right away.</p>
+  {/* The whole Legal Aid card, so a link to /money/#rent lands on hours, who qualifies and how to apply (#803). */}
+  <ResourceCard r={legalAid} headingLevel={4} showCost />
+  <p>For other help with rent, call <a href="tel:211">211</a> and say you are behind on rent. We are still building our housing page.</p>
+  <SourceLine sources={wv211.sources} org={wv211.org} about="211" />
 
   <h3 id="payday">I need cash fast and I'm thinking about a payday loan</h3>
   <p>The West Virginia Division of Financial Institutions says traditional payday lenders are generally prohibited in this state. An online lender that offers one anyway is a warning sign. Before you borrow from anyone, call the Division at <a href={telHref(dfi.contact.phone)}>{dfi.contact.phone}</a> and ask if the lender is allowed to lend here.</p>
