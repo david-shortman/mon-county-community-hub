@@ -1,0 +1,249 @@
+{
+  "id": "mylan-park",
+  "feed_url": "https://mylanpark.org/wp-json/tribe/events/v1/events?per_page=50&start_date=2026-10-30",
+  "fetched": "2026-10-31T00:18:02.984Z",
+  "entries": [
+    {
+      "title": "WV Pickleball Championships",
+      "slug": "mylan-wv-pickleball-championships-2026-11-05",
+      "starts": "2026-11-05",
+      "ends": "2026-11-08",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Sports Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/wv-pickleball-championship/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Epilepsy Foundation Wallk",
+      "slug": "mylan-epilepsy-foundation-wallk-2026-11-07",
+      "starts": "2026-11-07",
+      "ends": "2026-11-07",
+      "start_time": "08:00",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/epilepsy-foundation-wallk-2/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Showmasters Gun Show",
+      "slug": "mylan-showmasters-gun-show-2026-11-07",
+      "starts": "2026-11-07",
+      "ends": "2026-11-08",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/showmasters-gun-show/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Felix Duels Wrestling",
+      "slug": "mylan-felix-duels-wrestling-2026-11-21",
+      "starts": "2026-11-21",
+      "ends": "2026-11-21",
+      "start_time": "09:00",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/felix-duels-wrestling/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Shop Til' You Drop Craft Show",
+      "slug": "mylan-shop-til-you-drop-craft-show-2026-11-27",
+      "starts": "2026-11-27",
+      "ends": "2026-11-27",
+      "start_time": "14:00",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/shop-til-you-drop-craft-show/",
+      "topics": [
+        "market"
+      ]
+    },
+    {
+      "title": "Shop Til' You Drop Craft Show",
+      "slug": "mylan-shop-til-you-drop-craft-show-2026-11-28",
+      "starts": "2026-11-28",
+      "ends": "2026-11-28",
+      "start_time": "08:00",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/shop-til-you-drop-craft-show-nov-28-2026/",
+      "topics": [
+        "market"
+      ]
+    },
+    {
+      "title": "MouserFest: The Mouser Sports Festival",
+      "slug": "mylan-mouserfest-the-mouser-sports-festival-2026-12-05",
+      "starts": "2026-12-05",
+      "ends": "2026-12-05",
+      "start_time": "09:00",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mouserfest-sports-festival/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Club Mountaineer Speed Swimming Invite",
+      "slug": "mylan-club-mountaineer-speed-swimming-invite-2026-12-10",
+      "starts": "2026-12-10",
+      "ends": "2026-12-13",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/club-mountaineer-swimming-invite/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Winter Blues Farmer's Market",
+      "slug": "mylan-winter-blues-farmer-s-market-2026-12-12",
+      "starts": "2026-12-12",
+      "ends": "2026-12-12",
+      "start_time": "12:00",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/winter-blues-farmers-market/",
+      "topics": [
+        "market"
+      ]
+    },
+    {
+      "title": "Showdown in Morgantown - Wrestling",
+      "slug": "mylan-showdown-in-morgantown-wrestling-2027-01-02",
+      "starts": "2027-01-02",
+      "ends": "2027-01-02",
+      "start_time": "09:00",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/showdown-in-morgantown-wrestling/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Showmasters Gun Show",
+      "slug": "mylan-showmasters-gun-show-2027-01-16",
+      "starts": "2027-01-16",
+      "ends": "2027-01-17",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/showmasters-gun-show-2/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Mountaineer RV & Outdoor Show",
+      "slug": "mylan-mountaineer-rv-and-outdoor-show-2027-02-06",
+      "starts": "2027-02-06",
+      "ends": "2027-02-07",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/moutaineer-rv-outdoor-show/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "WV State HS Swimming Championships",
+      "slug": "mylan-wv-state-hs-swimming-championships-2027-02-18",
+      "starts": "2027-02-18",
+      "ends": "2027-02-19",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/wv-state-hs-swimming-championships/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Empty Bowls",
+      "slug": "mylan-empty-bowls-2027-02-27",
+      "starts": "2027-02-27",
+      "ends": "2027-02-27",
+      "start_time": "11:00",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/empty-bowls/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "NCAA Diving Zone Meet",
+      "slug": "mylan-ncaa-diving-zone-meet-2027-03-06",
+      "starts": "2027-03-06",
+      "ends": "2027-03-10",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/ncaa-diving-zone-meet/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "WV Hunting, Fishing, & Outdoors Show",
+      "slug": "mylan-wv-hunting-fishing-and-outdoors-show-2027-03-06",
+      "starts": "2027-03-06",
+      "ends": "2027-03-07",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/wv-hunting-fishing-outdoor-show/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Showmasters Gun Show",
+      "slug": "mylan-showmasters-gun-show-2027-03-13",
+      "starts": "2027-03-13",
+      "ends": "2027-03-14",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/showmasters-gun-show-3/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "NCWV Home Show",
+      "slug": "mylan-ncwv-home-show-2027-03-19",
+      "starts": "2027-03-19",
+      "ends": "2027-03-21",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/ncwv-home-show/",
+      "topics": [
+        "community"
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ community: Cheat Lake
 run_by:
   kind: fire-department
   text: The Cheat Lake Volunteer Fire Department
-story: A volunteer fire hall that rents its hall all year and holds public events like bingo and a free children's Christmas party.
+story: A volunteer fire hall. It rents its hall all year. It holds public events, like bingo and a free Christmas party for children.
 facilities:
   kitchen: true
   other: [large parking lot]
