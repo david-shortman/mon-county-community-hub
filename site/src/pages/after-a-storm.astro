@@ -1,0 +1,128 @@
+---
+// Storm damage, flooding or power out? (#508). A step page for the hours
+// after a storm. Every fact is from an official page read on the checked
+// date. Not here yet, because no current official page says it: MUB's steps
+// for a sewer backup, and a WV Division of Highways district number for Mon.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import Actions from '../components/Actions.astro';
+import { resource, telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "weather", label: "Storm damage, flooding or power out?", summary: "Power out, water in the basement, a tree or slip on the road, help with cleanup, and what to do in a warning" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-30';
+const outage = resource('mon-power-report-outage');
+const mub = resource('mub-customer-service');
+const wv211 = resource('wv-211');
+const food = [{ url: 'https://www.cdc.gov/food-safety/foods/keep-food-safe-after-emergency.html', checked }];
+const medicine = [{ url: 'https://www.fda.gov/drugs/emergency-preparedness-drugs/safe-drug-use-after-natural-disaster', checked }];
+const generator = [{ url: 'https://www.cdc.gov/carbon-monoxide/about/index.html', checked }];
+const floodWater = [{ url: 'https://www.weather.gov/safety/flood-turn-around-dont-drown', checked }];
+const mold = [{ url: 'https://www.cdc.gov/mold-health/about/index.html', checked }];
+const claim = [{ url: 'https://www.floodsmart.gov/how-do-i-start-my-flood-claim', checked }];
+const doh = [{ url: 'https://transportation.wv.gov/frequently-asked-questions-1', checked }];
+const city = [
+  { url: 'https://www.morgantownwv.gov/428/Service-Request', checked },
+  { url: 'https://morgantownwv.gov/219/Engineering-Public-Works', checked },
+];
+const redCross = [{ url: 'https://www.redcross.org/local/west-virginia.html', checked }];
+const voad = [{ url: 'https://www.wvvoad.org/', checked }];
+const declared = [
+  { url: 'https://www.disasterassistance.gov/', checked },
+  { url: 'https://www.sba.gov/funding-programs/disaster-assistance', checked },
+];
+const warnings = [
+  { url: 'https://www.weather.gov/safety/tornado-during', checked },
+  { url: 'https://www.weather.gov/safety/flood-watch-warning', checked },
+];
+const dohPhone = '1-833-987-6237';
+const streetsPhone = '304-291-7465';
+const redCrossPhone = '1-800-733-2767';
+const femaPhone = '1-800-621-3362';
+const choices = [
+  { href: '#power', label: 'Power is out' },
+  { href: '#water', label: 'Water in the basement' },
+  { href: '#road', label: 'Tree or slip on a road' },
+  { href: '#help', label: 'Help with cleanup or a place to stay' },
+  { href: '#warning', label: 'A warning right now' },
+];
+---
+<Base title="Storm damage, flooding or power out? Morgantown and Mon County" description="What to do after a storm in Morgantown and Monongalia County, WV: report a power outage to Mon Power, food and generator safety, water in the basement, a tree or slip on the road, help with cleanup, and what to do in a tornado or flash flood warning.">
+  <h1>Storm damage, flooding or power out?</h1>
+  <div class="note">
+    <p><strong>If water is rising around you, or a power line is down, call <a href="tel:911">911</a> and get away.</strong> Stay at least 30 feet from a downed line. Never walk or drive into flood water.</p>
+  </div>
+  <p class="lede">Pick what is going on.</p>
+  <nav aria-label="What is going on?">
+    <ul>
+      {choices.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <h2 id="power">Power is out</h2>
+  <p><strong>Report it to Mon Power.</strong> Call <a href={telHref(outage.contact.phone)}>{outage.contact.phone}</a> or text OUT to 544487. To use text, first text REG to 544487 to sign up. The outage map updates about every 15 minutes. Check on neighbors who live alone, are older, or use medical equipment.</p>
+  <SourceLine sources={outage.sources} org={outage.org} about="reporting an outage" slug={outage.slug} />
+  <div class="actions">
+    <a class="btn" href={telHref(outage.contact.phone)}><Icon name="phone" /><span>Call Mon Power outages</span></a>
+    <a class="btn" href="sms:544487?&body=OUT"><Icon name="text" /><span>Text OUT to 544487</span></a>
+    <a class="btn" href="https://www.firstenergycorp.com/outages_help/outages-map.html"><Icon name="open" /><span>Outage map</span></a>
+  </div>
+  <h3>Food in the fridge</h3>
+  <p>Keep the doors closed. The CDC says food stays safe about 4 hours in a refrigerator, 48 hours in a full freezer and 24 hours in a half-full freezer. Throw out meat, fish, eggs, milk and other perishable food after 4 hours without power or ice. Throw out food that has thawed or is above 40°F. When in doubt, throw it out.</p>
+  <SourceLine sources={food} about="food safety in an outage" />
+  <h3>Medicine that needs to stay cold</h3>
+  <p>Some medicines, like insulin, need to stay cold. If yours got warm, check its storage instructions or ask a pharmacist, your doctor or the maker if it is still safe. The FDA says if a medicine like insulin is needed to stay alive and you cannot get a new supply right away, you can use it until you get more.</p>
+  <SourceLine sources={medicine} about="medicine in an outage" />
+  <h3>Generators</h3>
+  <p>Generators make carbon monoxide, a gas you cannot see or smell that can kill. Never run one inside your home or garage, even with doors and windows open. Run it outside, more than 20 feet from windows, doors and vents. Use a battery or battery backup carbon monoxide detector near every sleeping area.</p>
+  <SourceLine sources={generator} about="generator safety" />
+
+  <h2 id="water">Water in the basement</h2>
+  <ul>
+    <li><strong>Stay safe first.</strong> Do not walk in flood water. Six inches of fast-moving water can knock over an adult.</li>
+    <li><strong>Sewer or water main problem?</strong> If you have Morgantown Utility Board (MUB) service, call <a href={telHref(mub.contact.phone)}>{mub.contact.phone}</a>. MUB says the number is answered 24/7 for emergencies. Renters: tell your landlord right away.</li>
+    <li><strong>Take photos and videos</strong> of the damage and your belongings before you clean up, and call your insurance company. FloodSmart, the federal flood insurance site, tells people starting a flood claim to do this.</li>
+    <li><strong>Dry it out fast.</strong> The CDC says to clean up and dry out the home fully within 24 to 48 hours to stop mold. Wear rubber boots, rubber gloves and goggles. If you use bleach, mix no more than 1 cup in 1 gallon of water, and never mix bleach with ammonia or other cleaners.</li>
+  </ul>
+  <SourceLine sources={[...floodWater, ...claim, ...mold]} about="water in the basement" />
+  <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" />
+  <div class="actions">
+    <a class="btn" href={telHref(mub.contact.phone)}><Icon name="phone" /><span>Call MUB</span></a>
+  </div>
+
+  <h2 id="road">A tree, wires or a slip on the road</h2>
+  <ul>
+    <li><strong>Blocking the road or touching power lines?</strong> Call <a href="tel:911">911</a>.</li>
+    <li><strong>State roads:</strong> report it to the WV Division of Highways at <a href={telHref(dohPhone)}>1-833-WVROADS ({dohPhone})</a> or email <a href="mailto:wvroads@wv.gov">wvroads@wv.gov</a>.</li>
+    <li><strong>City streets in Morgantown:</strong> report it on the city's Morgantown 311 app or web portal, or call the Streets and ROW Division at <a href={telHref(streetsPhone)}>{streetsPhone}</a>.</li>
+  </ul>
+  <SourceLine sources={[...doh, ...city]} about="road problems" />
+  <div class="actions">
+    <a class="btn" href={telHref(dohPhone)}><Icon name="phone" /><span>Call WV Highways</span></a>
+    <a class="btn" href="https://www.morgantownwv.gov/428/Service-Request"><Icon name="open" /><span>Morgantown 311</span></a>
+  </div>
+
+  <h2 id="help">Help with cleanup or a place to stay</h2>
+  <ul>
+    <li><strong>211:</strong> call 211 or text your ZIP code to 898-211, any hour, to find local help.</li>
+    <li><strong>American Red Cross:</strong> if you have been through a disaster, call <a href={telHref(redCrossPhone)}>1-800-RED-CROSS ({redCrossPhone})</a>.</li>
+    <li><strong>WV VOAD</strong> brings together groups that help with disaster relief and recovery across West Virginia.</li>
+  </ul>
+  <SourceLine sources={wv211.sources} org={wv211.org} about="211" />
+  <SourceLine sources={[...redCross, ...voad]} about="disaster help groups" />
+  <Actions callFirst phone={wv211.contact.phone} phoneLabel="West Virginia 211" sms={wv211.contact.text} smsLabel="211, send your ZIP code" />
+  <h3>Federal disaster help</h3>
+  <p>FEMA and SBA help only after a federal disaster is declared for the county. To check, go to <a href="https://www.disasterassistance.gov/">DisasterAssistance.gov</a> and pick West Virginia to see if Monongalia County is in a declared area. You can apply there, or call the FEMA Helpline at <a href={telHref(femaPhone)}>{femaPhone}</a>, 7 a.m. to 10 p.m., 7 days a week. In a declared area, homeowners and renters can also apply for SBA disaster loans for damage to a home or belongings.</p>
+  <SourceLine sources={declared} about="federal disaster help" />
+
+  <h2 id="warning">A warning right now</h2>
+  <ul>
+    <li><strong>Tornado warning:</strong> go to your basement, a safe room, or an inside room away from windows.</li>
+    <li><strong>Flash flood warning:</strong> if you are in a place that floods, move to high ground now. Turn around, don't drown: 12 inches of rushing water can carry away most cars.</li>
+  </ul>
+  <SourceLine sources={[...warnings, ...floodWater]} about="weather warnings" />
+  <p>Get warnings before the next storm: <a href={`${base}/weather-alerts/`}>Get weather and emergency alerts</a>. Check your risk: <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
+
+  <p class="meta">Sources checked October 30, 2026. Phone numbers and programs can change. We describe these services and do not decide who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

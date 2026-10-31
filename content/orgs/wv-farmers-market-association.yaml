@@ -1,0 +1,13 @@
+name: West Virginia Farmers Market Association (WVFMA)
+slug: wv-farmers-market-association
+kind: nonprofit
+website: https://wvfarmers.org/
+phone: "304-398-5214"
+summary: A statewide network that supports farmers markets with training, toolkits and small grants. Markets, businesses and supporters can join.
+topics: [growing]
+area: statewide
+sources:
+  - url: https://wvfarmers.org/
+    checked: 2026-10-31
+  - url: https://wvfarmers.org/contact-us/
+    checked: 2026-10-31

@@ -76,6 +76,9 @@ export const TYPES = {
       who_it_is_for: str('Who it is for, in the source\'s terms. It does not decide who qualifies.'),
       hours: str('Hours in words, as the source gives them'),
       what_to_do: str('How to use it'),
+      steps: list('Optional. What to do, in order, as short sentences'),
+      options: list('Optional. Choices where order does not matter, like the kinds of ID that count'),
+      notes: list('Optional. Exceptions and special cases, as short paragraphs'),
       contact: {
         type: 'object',
         description: 'Public contact details for the program. Never a private person.',
@@ -261,6 +264,10 @@ export async function catalog() {
     versioning: 'Within v1, fields are only added, never removed or renamed. A breaking change would get a new /api/v2/, and v1 would stay up for at least 6 months.',
     stale_after_days: 183,
     types,
+    exports: [
+      { name: 'hsds', description: 'Organizations and services in Open Referral HSDS 3.1 JSON, the format 211 and referral tools read', url: `${API_BASE}hsds/services.json` },
+      { name: 'hsds-tabular', description: 'The same in CSV tables, with a Tabular Data Package description', url: `${API_BASE}hsds/datapackage.json` },
+    ],
   };
 }
 

@@ -1,0 +1,10 @@
+name: Operation Welcome Home
+slug: operation-welcome-home
+kind: nonprofit
+website: https://welcomehomewv.com/
+summary: A veterans support nonprofit at Mylan Park in Morgantown, run for veterans by veterans. It helps service members, veterans and families in North Central West Virginia with jobs and other needs, and is a place for veterans to meet.
+topics: [veterans, work]
+area: monongalia-county
+sources:
+  - url: https://welcomehomewv.com/
+    checked: 2026-10-30
