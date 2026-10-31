@@ -4,4 +4,4 @@ page: /find-a-job/
 kind: fact
 found_by: our-check
 what: The listing said the job seeker help was free, but neither source page says so. We took "free" off until a source states the cost.
-link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=is%3Apr+177
+link: https://github.com/david-shortman/mon-county-community-hub/pull/873
