@@ -21,9 +21,14 @@ const there = whatsThere(p);
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => e.venue === p.slug);
 const f = p.facilities ?? {};
 // Lowercase "South county" mid-sentence, but keep the name Morgantown capitalized.
+// Search results show about 160 characters of a description, so the list of
+// what is there is left out when it would make it longer (#939).
+const descTail = `${p.membership ? 'How to join, ' : ''}${p.rentals?.length ? 'renting a hall, ' : ''}upcoming events and how to reach it, with sources.`;
+const descLong = `${p.name} in ${p.community}, Monongalia County, WV: ${there ? `${there.toLowerCase()}. ` : ''}${descTail}`;
+const description = descLong.length <= 170 ? descLong : `${p.name} in ${p.community}, Monongalia County, WV: ${descTail}`;
 const where = `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|East)\b/, (c) => c.toLowerCase())}`;
 ---
-<Base title={`${p.name} in ${p.community}, Mon County WV`} description={`${p.name} in ${p.community}, Monongalia County, WV: ${there ? `${there.toLowerCase()}. ` : ''}${p.membership ? 'How to join, ' : ''}${p.rentals?.length ? 'renting a hall, ' : ''}upcoming events and how to reach it, with sources.`}>
+<Base title={`${p.name}, Mon County WV`} description={description}>
   <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
     <ol>
       <li><a href={`${base}/`}>Home</a></li>
