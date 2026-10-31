@@ -1,10 +1,13 @@
 import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
+import { ROLES } from '../lib/helper-roles.mjs';
 
 export function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const u = (p) => new URL(`${base}${p}`, site).href;
   // One line per community center page (#463), built from content/places.
+  // One line per helper role card (#404).
+  const roleCards = ROLES.map((r) => `- [Card for ${r.name.toLowerCase()}](${u(`/for/helpers/${r.slug}/`)}): ${r.situations.map((s) => s.hears.toLowerCase()).join('; ')}, with first steps`).join('\n');
   const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
 
@@ -94,6 +97,8 @@ ${centers}
 - [Terms](${u('/terms/')}): what the site is, that information can change, and how to ask for a fix or removal
 - [Privacy](${u('/privacy/')}): what the site collects (no analytics), and how the public Tell us form works
 - [Make a list for someone](${u('/make-a-list/')}): a helper picks up to 6 places and adds a note, then prints or texts a one-page list; picks live only in the web address
+- [Cards for helpers](${u('/for/helpers/')}): one-page cards for teachers, pastors, librarians, nurses, landlords and bus drivers: if someone tells you about a problem, the first steps with local numbers
+${roleCards}
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
 - [How we check](${u('/how-we-check/')}): what counts as a source, how often listings are rechecked, who does the checking, and how that compares with 211
 - [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
