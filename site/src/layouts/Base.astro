@@ -7,7 +7,7 @@ import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import UpkeepNotice from '../components/UpkeepNotice.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { FIX_FORM, FIX_EMAIL } from '../lib/group-requests.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
 import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
 import nameFont from '../fonts/fraunces-name-800.woff2?inline';
@@ -361,7 +361,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
         </nav>
         <p class="disclaimer">{disclaimer}</p>
         <p class="not-official"><strong>An independent community guide, not a government site.</strong> It is not run by the City of Morgantown, Monongalia County or the State of West Virginia, or by the groups it lists. For official business, use the links to each office's own site. Sources marked "government site" are on a .gov address.</p>
-        <p>An open experiment for Morgantown and Monongalia County, WV. Most of it is researched and written by AI (Claude), and a person oversees it (<a href={`${base}/about/`}>how we use AI</a>). Every item links to its source and says when we last checked it. Something wrong or missing? Use our <a href={FIX_FORM}>fix or removal form</a>. You don't need an account, and your answers stay private. Or <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">tell us on GitHub</a>, which needs a free account. Reports there are public, so leave out private details.</p>
+        <p>An open experiment for Morgantown and Monongalia County, WV. Most of it is researched and written by AI (Claude), and a person oversees it (<a href={`${base}/about/`}>how we use AI</a>). Every item links to its source and says when we last checked it. Something wrong or missing? Use our <a href={FIX_FORM}>fix or removal form</a> or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account, and what you send stays private. Or <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">tell us on GitHub</a>, which needs a free account. Reports there are public, so leave out private details.</p>
       </div>
     </footer>
     <div class="sr-only" role="status" id="announce"></div>
