@@ -108,6 +108,7 @@ ${centers}
 - [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [needs register](${u('/api/v1/needs.json')}), [gathering places](${u('/api/v1/places.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
 - [When plans and budgets get decided](${u('/make-it-better/when-it-gets-decided/')}): Morgantown's budget year, the March levy window in state law, the 2027-2031 capital plan lines for Mosaic, a downtown master plan and wayfinding, the comprehensive plan, and how to comment
 - [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; with years and sources
+- [What other towns did](${u('/make-it-better/what-other-towns-did/')}): options other places used to shape how they look (urban forest plan, percent for art, hotel tax for beautification, business improvement district, funded adopt-a-spot, vacant lot greening), with results and the West Virginia law or tool for each; examples, not recommendations
 
 ## Notes for AI tools
 
