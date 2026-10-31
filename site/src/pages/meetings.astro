@@ -57,7 +57,7 @@ const id = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, 
       <h3 id={id(body)}>{body}</h3>
       <ul>
         {items.map((m) => (
-          <li>{prettyDate(m.date)}: <a href={m.agenda_url}>agenda<span class="sr-only">, {body}, {prettyDate(m.date)}</span></a>{m.minutes_url ? <>, <a href={m.minutes_url}>minutes<span class="sr-only">, {body}, {prettyDate(m.date)}</span></a></> : ', no minutes posted yet'} ({m.title})</li>
+          <li>{prettyDate(m.date)}: <a href={m.agenda_url}>agenda<span class="sr-only">, {body}, {prettyDate(m.date)}</span></a>{m.minutes_url ? <>, <a href={m.minutes_url}>minutes<span class="sr-only">, {body}, {prettyDate(m.date)}</span></a></> : m.publisher === 'Monongalia County Commission' ? ', no minutes on the county page' : ', no minutes posted yet'} ({m.title})</li>
         ))}
       </ul>
     </section>
