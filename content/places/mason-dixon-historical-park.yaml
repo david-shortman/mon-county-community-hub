@@ -20,14 +20,14 @@ rentals:
     seats: 65
     kitchen: true
     outdoor: false
-    price: $125 a day, plus a $25 litter fee
+    price: $125 a day. A $25 cleaning fee is charged if litter is left behind
     deposit: None listed. Full payment when you book. Refunds only with more than 30 days' notice
     book: Book online through the park's page, or call 304-879-4101.
     source: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/red_barn.php
   - space: Annex (10 a.m. to 9 p.m.)
     seats: 65
     outdoor: false
-    price: $100 a day, plus a $25 litter fee
+    price: $100 a day. A $25 cleaning fee is charged if litter is left behind
     deposit: None listed. Full payment when you book. Refunds only with more than 30 days' notice
     book: Book online through the park's page, or call 304-879-4101.
     source: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/annex.php

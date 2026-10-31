@@ -1,0 +1,97 @@
+---
+// A small line chart of one indicator over time (#15): Monongalia County and
+// West Virginia, from the indicator's `history`. Built as plain SVG at build
+// time, so it works with no scripts. Identity never rests on color alone:
+// Mon County is a solid line with dots, West Virginia is dashed, both are
+// labeled at the line end, and a legend and a table of every number come
+// with it. Hover or tap a dot for its value. Colors are the validated
+// blue/orange pair (dataviz palette slots 1 and 2), stepped for dark mode.
+import { showValue } from '../lib/indicators.mjs';
+// The trends file gives whole percents, so the chart shows them that way.
+const whole = (v) => (i.unit === 'percent' ? `${Math.round(v * 100)}%` : showValue(i, v));
+const { i } = Astro.props;
+const series = [
+  { key: 'monongalia', label: 'Mon County', cls: 'mon' },
+  { key: 'west_virginia', label: 'West Virginia', cls: 'wv' },
+].map((s) => ({ ...s, points: i.history?.[s.key] ?? [] })).filter((s) => s.points.length > 1);
+const years = [...new Set(series.flatMap((s) => s.points.map((p) => p.year)))].sort();
+const W = 340, H = 170, L = 40, R = 104, T = 12, B = 26;
+const max = Math.max(...series.flatMap((s) => s.points.map((p) => p.value)));
+// Axis tops that halve cleanly: 10%, 20%, 30%... or 4%, 6%, 8% for small rates.
+const step = max > 0.1 ? 10 : 2;
+const top = i.unit === 'percent' ? (Math.ceil((max * 100) / step) * step) / 100 : max;
+const x = (year) => L + (years.length > 1 ? (years.indexOf(year) / (years.length - 1)) * (W - L - R) : 0);
+const y = (v) => T + (1 - v / top) * (H - T - B);
+const ticks = [0, top / 2, top];
+const tick = (v) => (i.unit === 'percent' ? `${Math.round(v * 100)}%` : String(v));
+// End labels, nudged apart when the two lines end close together.
+const ends = series.map((s) => ({ s, last: s.points.at(-1), ly: y(s.points.at(-1).value) }));
+if (ends.length === 2 && Math.abs(ends[0].ly - ends[1].ly) < 14) {
+  const [a, b] = ends[0].ly <= ends[1].ly ? [ends[0], ends[1]] : [ends[1], ends[0]];
+  const mid = (a.ly + b.ly) / 2; a.ly = mid - 7; b.ly = mid + 7;
+}
+const first = years[0], last = years.at(-1);
+const desc = series.map((s) => `${s.label} went from ${whole(s.points[0].value)} in ${s.points[0].year} to ${whole(s.points.at(-1).value)} in ${s.points.at(-1).year}`).join('. ');
+---
+{series.length > 0 && (
+  <figure class="trend">
+    <ul class="trend-legend">
+      {series.map((s) => <li><svg width="28" height="10" aria-hidden="true"><line class={`ln ${s.cls}`} x1="2" y1="5" x2="26" y2="5" /></svg>{s.label}</li>)}
+    </ul>
+    <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${i.title}, ${first} to ${last}. ${desc}.`}>
+      {ticks.map((t) => (
+        <>
+          <line class="grid" x1={L} x2={W - R} y1={y(t)} y2={y(t)} />
+          <text class="axis" x={L - 6} y={y(t) + 4} text-anchor="end">{tick(t)}</text>
+        </>
+      ))}
+      <text class="axis" x={x(first)} y={H - 6} text-anchor="start">{first}</text>
+      <text class="axis" x={x(last)} y={H - 6} text-anchor="end">{last}</text>
+      {series.map((s) => (
+        <polyline class={`ln ${s.cls}`} points={s.points.map((p) => `${x(p.year)},${y(p.value)}`).join(' ')} />
+      ))}
+      {series.map((s) => s.points.map((p) => (
+        <g class="pt">
+          <circle class="hit" cx={x(p.year)} cy={y(p.value)} r="9" />
+          <circle class={`dot ${s.cls}`} cx={x(p.year)} cy={y(p.value)} r={s.cls === 'mon' ? 4 : 3} />
+          <title>{`${s.label}, ${p.year}: ${whole(p.value)}`}</title>
+        </g>
+      )))}
+      {ends.map(({ s, last: p, ly }) => (
+        <text class="end" x={x(p.year) + 8} y={ly + 4}>{`${s.label} ${whole(p.value)}`}</text>
+      ))}
+    </svg>
+    <figcaption>
+      <details>
+        <summary>See every number</summary>
+        <table>
+          <thead><tr><th scope="col">Year</th>{series.map((s) => <th scope="col">{s.label}</th>)}</tr></thead>
+          <tbody>{years.map((yr) => <tr><th scope="row">{yr}</th>{series.map((s) => { const p = s.points.find((q) => q.year === yr); return <td>{p ? whole(p.value) : '-'}</td>; })}</tr>)}</tbody>
+        </table>
+      </details>
+      The chart uses whole percents, so it can differ a little from the number above. Years before the source changed how it counts are left out.
+    </figcaption>
+  </figure>
+)}
+
+<style>
+  .trend { margin: 12px 0 0; --series-1: #2a78d6; --series-2: #eb6834; }
+  @media (prefers-color-scheme: dark) { .trend { --series-1: #3987e5; --series-2: #d95926; } }
+  .trend svg[role='img'] { width: 100%; max-width: 30rem; height: auto; display: block; overflow: visible; }
+  .trend-legend { list-style: none; margin: 0 0 4px; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 0.9rem; color: var(--fg); }
+  .trend-legend li { display: inline-flex; align-items: center; gap: 6px; }
+  .grid { stroke: var(--line); stroke-width: 1; }
+  .axis { fill: var(--muted); font-size: 11px; }
+  .end { fill: var(--fg); font-size: 11px; font-weight: 600; }
+  .ln { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .ln.mon { stroke: var(--series-1); }
+  .ln.wv { stroke: var(--series-2); stroke-dasharray: 5 4; }
+  .dot { stroke: var(--card); stroke-width: 2; }
+  .dot.mon { fill: var(--series-1); }
+  .dot.wv { fill: var(--series-2); }
+  .hit { fill: transparent; }
+  .pt:hover .dot { r: 6; } /* keyboard and screen reader users get the table below */
+  .trend figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
+  .trend table { border-collapse: collapse; margin: 6px 0; color: var(--fg); }
+  .trend th, .trend td { padding: 2px 10px 2px 0; text-align: left; }
+</style>

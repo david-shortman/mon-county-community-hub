@@ -1,0 +1,13 @@
+name: Disability Rights of West Virginia
+slug: disability-rights-of-west-virginia
+kind: nonprofit
+website: https://www.drofwv.org/
+phone: "800-950-5250"
+summary: A private nonprofit that protects the legal rights of West Virginians with disabilities. It is the state's federally required protection and advocacy agency. Its services are confidential and free. Its office is in Charleston.
+topics: [disability]
+area: statewide
+sources:
+  - url: https://www.drofwv.org/
+    checked: 2026-10-30
+  - url: https://www.drofwv.org/our-services
+    checked: 2026-10-30

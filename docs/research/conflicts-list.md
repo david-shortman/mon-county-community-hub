@@ -48,6 +48,10 @@ Who keeps the listing: County Commission office (304-291-7257), which keeps the 
 
 What differs: two WVU pages appear to still list Bartlett as an active housing provider. A person should open both pages in a browser to confirm before contacting WVU.
 
+Update, October 31, 2026: a person confirmed in a browser that the Women's Resource Center housing page still lists Bartlett Housing Solutions (304-292-0101, 20 Scott Ave) with a "Bartlett House" button. The Graduate Education page is not yet confirmed.
+
+**Do not link either Bartlett domain.** bartletthouse.org now shows a gambling site. bartletthousingsolutions.org serves an old copy of the site (newest post June 2020, newest images May 2023), and its /contact/ page redirects (301) to vantageatburleson.com, an apartment complex in Texas (checked October 31, 2026). This site links neither.
+
 Who keeps the listing: WVU Women's Resource Center; WVU Office of Graduate Education.
 
 ## 4. Monongalia Historical Society: dissolved, but still listed
@@ -172,6 +176,17 @@ Who keeps the listing: Mountain Line (to confirm), County Commission office.
 ## 14. Westover garbage, also noted
 
 Not a conflict between sources, but worth a look: the [Westover home page](https://www.westoverwv.org/) says "2026 Holiday Schedule The 2025 holiday schedule is out." The heading and text name different years.
+
+## 15. Tire collection day, November 14, 2026: tire limit
+
+| Source | What it says |
+| --- | --- |
+| [WV DEP tire collection events](https://dep.wv.gov/environmental-advocate/reap/tires/Pages/TireCollectionEvents.aspx?lv=true) | "A ten tire limit per person will be strictly enforced." Monongalia: November 14, 2026, 8:00 am to 12:00 pm, 200 M-Tec Dr |
+| [Monongalia County SWA events](https://www.monongaliacountyswa.com/events-1) | "Only 12 tires off the rim will be accepted." Same date, time and place |
+
+What differs: the tire limit (10 vs 12). Our calendar entry now names both.
+
+Who keeps the listing: Monongalia County Solid Waste Authority; WV DEP REAP.
 
 ## Not checked today
 

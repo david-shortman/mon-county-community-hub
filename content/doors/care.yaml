@@ -6,7 +6,7 @@
 #
 # Steps state no facts of their own, only the action: each one points to a record in
 # content/resources/ for its phone number, link, source and checked date.
-# A situation shows only once its page exists. Situations run in the ranked order from #475. `when` is today, week or opens.
+# A situation shows only once its page exists. Situations run in the ranked order from #475, with the evidence in docs/playbook/care-needs.md. `when` is today, week or opens.
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
