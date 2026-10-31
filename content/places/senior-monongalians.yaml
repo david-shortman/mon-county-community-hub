@@ -19,7 +19,7 @@ contact:
   url: https://www.seniormons.org/
   place: 5000 Greenbag Road, Suite A5, Morgantown, WV
 status: active
-last_activity_seen: 2026-10-16
+last_activity_seen: 2026-10-30
 tags: [come-alone]
 notes:
   - For rides and home-delivered meals, call Senior Monongalians. Its pages list more than one phone number, so ask which line you need.
@@ -28,3 +28,5 @@ sources:
     checked: 2026-10-30
   - url: https://www.dominionpost.com/2026/10/16/senior-news-11
     checked: 2026-10-30
+  - url: https://www.dominionpost.com/2026/10/30/senior-news-13
+    checked: 2026-10-31

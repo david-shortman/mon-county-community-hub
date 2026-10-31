@@ -1,0 +1,17 @@
+title: USDA farm loans and programs (FSA) for Monongalia County
+slug: usda-fsa-white-hall-service-center
+org: usda-farm-service-agency
+topics: [growing]
+who_it_is_for: Farmers in Monongalia County. USDA's locator lists the Marion County Farm Service Agency, at the White Hall Service Center, as the FSA office for Monongalia County.
+what_to_do: Call the White Hall Service Center to ask about farm loans and farm programs. USDA's locator page also links an FSA office locator for booking an appointment.
+contact:
+  phone: "304-363-8861"
+  url: https://www.farmers.gov/working-with-us/service-center-locator
+  url_label: USDA office locator
+  place: "47 Mountain Park Dr, Fairmont, WV 26554"
+get_in: call-first
+sources:
+  - url: https://www.farmers.gov/sites/default/files/json/scl.json
+    checked: 2026-10-31
+  - url: https://www.farmers.gov/working-with-us/service-center-locator
+    checked: 2026-10-31

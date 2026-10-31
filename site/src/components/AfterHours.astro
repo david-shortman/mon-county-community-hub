@@ -1,0 +1,38 @@
+---
+// "It is after hours" box (#192, idea 13 in docs/playbook/reaching-people.md).
+// Many people look for help at night or on a weekend. When the phone's clock
+// (Morgantown time) is before 8 a.m. or after 5 p.m. on a weekday, or any time
+// on a weekend, this box shows what still works now and what to do first on
+// the next weekday. It is worked out on the phone, with no tracking; without
+// scripts it never shows, and the hours in words on the page stay as they are.
+// It says "most offices", because we do not have every place's hours as data.
+//   online: resource records a person can start online (their url_label is
+//     "Apply online"), so no office needs to be open.
+import { resource, telHref } from '../lib/content.mjs';
+import SourceLine from './SourceLine.astro';
+const { online = [] } = Astro.props;
+const r211 = resource('wv-211');
+const r988 = resource('988-lifeline');
+---
+<section class="note after-hours" id="after-hours" aria-labelledby="after-hours-h" hidden>
+  <h2 id="after-hours-h">It is after hours</h2>
+  <p>Most offices are closed right now. You can still:</p>
+  <ul>
+    <li><strong>Call 211</strong> or text your ZIP code to {r211.contact.text}. {r211.hours}. <a href={telHref(r211.contact.phone)}>Call 211</a></li>
+    <li><strong>Call or text 988</strong> in a mental health or emotional crisis. It is open 24 hours a day, every day. <a href={telHref(r988.contact.phone)}>Call 988</a></li>
+    {online.map((r) => <li><strong>{r.title}.</strong> This is online, so no office needs to be open. <a href={r.contact.url}>{r.contact.url_label ?? 'Website'}</a></li>)}
+  </ul>
+  <p><strong>First thing on the next weekday:</strong> call the offices in your steps below. Write down your questions now so you are ready.</p>
+  <SourceLine sources={[...r211.sources, ...r988.sources, ...online.flatMap((r) => r.sources)]} about="help after hours" />
+</section>
+<script is:inline>
+  (function () {
+    var box = document.getElementById('after-hours');
+    if (!box) return;
+    var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short', hour: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+    var day = '', hour = 12;
+    parts.forEach(function (p) { if (p.type === 'weekday') day = p.value; if (p.type === 'hour') hour = Number(p.value); });
+    var weekend = day === 'Sat' || day === 'Sun';
+    if (weekend || hour < 8 || hour >= 17) box.hidden = false;
+  })();
+</script>

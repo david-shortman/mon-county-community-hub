@@ -1,0 +1,56 @@
+---
+// Arts and making (#654, #655, #656, #657, #658, part of #279). Built from
+// content/resources: classes, shared tools and studio space, places to show
+// work, traditional arts, and grants for artists. Every fact is on a record
+// with its own source. Things we could not confirm are in #653 and stay off.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "community", label: "Make art, learn a craft, show your work", summary: "Art classes, a shared maker space, studios, gallery shows, library craft groups, folk arts and grants for artists" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+---
+<Base title="Make art, learn a craft, show your work in Morgantown and Mon County, WV" description="Art classes and a shared maker space at the Monongalia Arts Center, library craft nights and knitting group, studios to rent, gallery shows, traditional music and folk arts, and state grants for artists.">
+  <h1>Make art, learn a craft, show your work</h1>
+  <p class="lede">Places in and near Morgantown to take a class, use shared tools, rent a studio, show your work, and learn a traditional art. Most of it is at the Monongalia Arts Center on High Street and the Morgantown Public Library.</p>
+
+  <nav aria-labelledby="jump-h">
+    <h2 id="jump-h">On this page</h2>
+    <ul>
+      <li><a href="#classes">Take a class</a></li>
+      <li><a href="#space">Find space and tools</a></li>
+      <li><a href="#show">Show and sell your work</a></li>
+      <li><a href="#traditional">Learn a traditional art</a></li>
+      <li><a href="#grants">Grants for artists and arts groups</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="classes">Take a class</h2>
+  {r('mac-classes-and-workshops') && <ResourceCard r={r('mac-classes-and-workshops')} />}
+  {r('mympls-artistworks') && <ResourceCard r={r('mympls-artistworks')} />}
+  {r('mympls-adult-craft-night') && <ResourceCard r={r('mympls-adult-craft-night')} />}
+  {r('mympls-chronicles-of-yarnia') && <ResourceCard r={r('mympls-chronicles-of-yarnia')} />}
+
+  <h2 id="space">Find space and tools</h2>
+  {r('mac-community-maker-space') && <ResourceCard r={r('mac-community-maker-space')} showCost />}
+  {r('mympls-makerspace-spotlight') && <ResourceCard r={r('mympls-makerspace-spotlight')} />}
+  {r('mac-artist-studios') && <ResourceCard r={r('mac-artist-studios')} />}
+
+  <h2 id="show">Show and sell your work</h2>
+  {r('mac-exhibit-applications') && <ResourceCard r={r('mac-exhibit-applications')} showCost />}
+  <p>The library's yearly Local Author Fair, where local authors, artists and creators sell their work, is on <a href={`${base}/calendar/`}>the Dates page</a>. For craft markets and how to sell at one, see <a href={`${base}/markets/`}>Markets and sales coming up</a>.</p>
+
+  <h2 id="traditional">Learn a traditional art</h2>
+  {r('wv-folklife-apprenticeship') && <ResourceCard r={r('wv-folklife-apprenticeship')} />}
+  <p>The next two are outside Mon County.</p>
+  {r('gabor-folklife-center-jam') && <ResourceCard r={r('gabor-folklife-center-jam')} />}
+  {r('augusta-heritage-center') && <ResourceCard r={r('augusta-heritage-center')} showCost />}
+
+  <h2 id="grants">Grants for artists and arts groups</h2>
+  {r('wv-arts-grants-for-artists') && <ResourceCard r={r('wv-arts-grants-for-artists')} />}
+  <p>Grants for nonprofits, schools and local governments, including state community arts grants and the local Organizational Arts Grants, are on <a href={`${base}/make-it-better/grants/`}>Get money for a project</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Each card says when we last checked it. We list these places and programs the same way, with no ratings. Something wrong, or a group we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

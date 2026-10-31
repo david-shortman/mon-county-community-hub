@@ -1,13 +1,13 @@
 name: Morgantown Area Meals on Wheels
 slug: morgantown-area-meals-on-wheels
 kind: nonprofit
-website: https://www.morgantownwvmow.org/
+website: https://morgantownwvmow.org/
 phone: "304-599-1954"
-summary: An independent, community-based nonprofit that cooks meals and delivers them to people's homes in the Morgantown area, with volunteer drivers. Its kitchen and office are at 3375 University Ave, Morgantown.
+summary: Prepares and delivers "affordable meals to clients in their homes." People can sign up for meals for themselves or a loved one. Volunteers help deliver meals, and the group takes donations. 3375 University Ave, Morgantown. Office hours are 10 a.m. to 2 p.m., Monday through Friday.
 topics: [food, disability]
 area: monongalia-county
 sources:
-  - url: https://www.morgantownwvmow.org/
+  - url: https://morgantownwvmow.org/
     checked: 2026-10-30
   - url: https://www.morgantownwvmow.org/get-meals
     checked: 2026-10-30

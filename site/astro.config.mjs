@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { astroI18n, sitemapI18n, inUnpublishedLocale } from './src/lib/i18n.mjs';
 
 // Served from GitHub Pages at the custom domain everythingmorgantown.org (#89).
 export default defineConfig({
@@ -7,7 +8,14 @@ export default defineConfig({
   trailingSlash: 'ignore',
   // Inline the CSS so a phone on a slow connection paints in one request.
   build: { inlineStylesheets: 'always' },
+  // Other languages (#1067, #1083): English stays at the root and never gets
+  // a prefix. A language gets /<lang>/ pages only once it is in PUBLISHED in
+  // src/lib/i18n.mjs. Until then this is English only and nothing changes.
+  i18n: astroI18n(),
   // Printable center flyers (#465) are print copies of a center's page, so
-  // they stay out of the sitemap.
-  integrations: [sitemap({ filter: (page) => !page.endsWith('/flyer/') })],
+  // they stay out of the sitemap. So are pages in a language that is off.
+  integrations: [sitemap({
+    filter: (page) => !page.endsWith('/flyer/') && !inUnpublishedLocale(page),
+    ...(sitemapI18n() ? { i18n: sitemapI18n() } : {}),
+  })],
 });

@@ -1,0 +1,14 @@
+title: Look up a charity's West Virginia registration
+slug: wv-sos-charity-search
+org: wv-secretary-of-state
+topics: [community]
+who_it_is_for: Anyone who wants to check whether a group that asks for donations is registered with the West Virginia Secretary of State.
+what_to_do: Open the Secretary of State's "Search Charities & Disbursements" tool. Choose "Charitable Organizations" as the type, then search by the group's name, ID, city or county. You can also search for professional fundraisers. Under advanced options, you can also pick a status, such as active, expired or canceled.
+contact:
+  url: https://erls.wvsos.gov/OnlineCharitiesSearch/Search
+  url_label: Search charities
+sources:
+  - url: https://erls.wvsos.gov/OnlineCharitiesSearch/Search
+    checked: 2026-10-30
+  - url: https://sos.wv.gov/charities-frequently-asked-questions
+    checked: 2026-10-30

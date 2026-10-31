@@ -1,0 +1,36 @@
+name: Cheat Area Public Library
+slug: mpls-cheat-area
+kind: library
+area: east
+community: Cheat Area
+run_by:
+  kind: library
+  org: morgantown-public-library-system
+  text: Morgantown Public Library System
+story: A branch library next to Cheat Lake Elementary School, with a sensory area for children, public computers, printing, copying and fax.
+regular:
+  - Mondays 10 a.m. to 7 p.m.
+  - Tuesdays 10 a.m. to 5 p.m.
+  - Wednesdays 10 a.m. to 7 p.m.
+  - Thursdays 10 a.m. to 4 p.m.
+  - Fridays 10 a.m. to 5 p.m.
+  - Saturdays 9 a.m. to 2 p.m.
+  - Sundays Closed
+interests: [books, learning]
+tags: [free]
+contact:
+  url: https://mympls.org/about/locations/cheat-area/
+  phone: "304-594-1020"
+  place: 121 Crosby Road, Morgantown, WV 26508
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - Free Wi-Fi and public computers. Computers can be used for up to 60 minutes.
+  - All branches are closed November 26 and 27, December 24 and 25, and December 31 and January 1.
+sources:
+  - url: https://mympls.org/about/locations/cheat-area/
+    checked: 2026-10-30
+  - url: https://mympls.org/about/faqs/
+    checked: 2026-10-30
+  - url: https://events.mympls.org/event/16028720
+    checked: 2026-10-30
