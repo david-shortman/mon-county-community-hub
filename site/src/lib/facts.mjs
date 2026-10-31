@@ -28,6 +28,7 @@ export function loadFacts(topic) {
   const out = {};
   for (const file of fs.readdirSync(dir).filter((x) => /\.ya?ml$/.test(x)).sort()) {
     const f = YAML.parse(fs.readFileSync(path.join(dir, file), 'utf8'));
+    if (out[f.slug]) throw new Error(`content/facts/${topic}: two files use slug ${f.slug}`);
     out[f.slug] = { ...f, checked: ymd(f.checked), _file: `facts/${topic}/${file}` };
   }
   return out;
