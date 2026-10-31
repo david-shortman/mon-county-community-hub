@@ -76,6 +76,7 @@ ${centers}
 - [API catalog](${u('/api/v1/index.json')}): JSON index of every data file, with counts, license and build time
 - [OpenAPI description](${u('/api/v1/openapi.yaml')}): every field in the JSON files
 - [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [needs register](${u('/api/v1/needs.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
+- [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US, with years and sources
 
 ## Notes for AI tools
 
