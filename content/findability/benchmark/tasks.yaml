@@ -119,7 +119,7 @@ needs:
       - name: official
         kind: official
         url: https://www.mphealthright.org
-        answer_text: null
+        answer_text: "Can I be a patient?"
 
   - id: q08
     need: A dentist without dental insurance
@@ -135,7 +135,7 @@ needs:
       - name: official
         kind: official
         url: https://www.monchd.org/departments-programs/mchd-dentistry
-        answer_text: null
+        answer_text: "MCHD Dentistry proudly provides quality preventive"
 
   - id: q25
     need: Free legal help for an eviction
@@ -152,7 +152,7 @@ needs:
       - name: official
         kind: official
         url: https://legalaidwv.org/renters-rights-west-virginia/eviction-in-west-virginia/
-        answer_text: null
+        answer_text: "Apply for Help from Legal Aid"
 
   - id: q26
     need: A place to stay tonight
@@ -167,4 +167,4 @@ needs:
       - name: official
         kind: official
         url: https://www.ccwva.org/programs/grace-shelter/
-        answer_text: null
+        answer_text: "Grace Shelter is a 24/7 emergency homeless shelter"

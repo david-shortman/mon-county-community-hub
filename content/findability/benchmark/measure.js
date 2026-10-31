@@ -50,6 +50,8 @@ function grade(text) {
   const sentences = Math.max(1, (text.match(/[.!?](\s|$)/g) || []).length);
   const ws = text.match(/[A-Za-z][A-Za-z'-]*/g) || [];
   if (ws.length < 20) return null;
+  // Lists of names and numbers have no sentences; a grade means nothing there.
+  if (ws.length / sentences > 40) return null;
   const syl = ws.reduce((n, w) => n + syllables(w), 0);
   return Math.round((0.39 * (ws.length / sentences) + 11.8 * (syl / ws.length) - 15.59) * 10) / 10;
 }

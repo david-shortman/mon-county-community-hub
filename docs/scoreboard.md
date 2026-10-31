@@ -141,6 +141,66 @@ Rules for keeping runs comparable: keep question ids and `search` words fixed. A
 | 2026-10-28 | 76 | 32 | v1 | Baseline, before the hub published any guides |
 | 2026-10-28 | 76 | 32 | v1 | Same-day recheck after the first guides shipped (recycling, utility bills, stay tonight). No change overall. Movers, both from other sites or search: q09 business license +2 (city page now ranks first and fits a phone), q15 county agendas -2 (search missed the agenda page). Hub answer pages: 6 of 32 questions; in search results: 0 (not indexed yet). Top-3 correct answers: 6 of 32 (was 5). [Results](../content/findability/2026-10-28b.yaml), [build log](build-log/2026-10-28-0647-findability-same-day-recheck.md) |
 
+### Source benchmark
+
+The findability check asks whether a resident can find an answer by searching. The source benchmark asks a second question: **once a resident has a source open, how fast and how completely does it answer them?** It compares our page with the sources residents are handed today, for a few urgent needs (#183, #184). It compares formats, not organizations. These sources are where much of our information comes from.
+
+- Tasks: [`content/findability/benchmark/tasks.yaml`](../content/findability/benchmark/tasks.yaml) (needs, sources, and the text that marks each answer)
+- Runs: `content/findability/benchmark/YYYY-MM-DD.yaml`
+- Tools: `measure.js` (automatic measures) and `score.py` (tables and the summary), in the same folder
+
+**Sources compared for each need.**
+
+| Name | What it is |
+|---|---|
+| `ours` | Our page that answers the need (the same page as `hub_page` in the latest findability run) |
+| `frn-guide` | The United Way Family Resource Network's 2025 Monongalia County Resource Guide, an 11 page PDF (cover: "Updated February 2025") |
+| `city-pathways` | The City of Morgantown's Community Resources page, then its "PATHWAYS to Help" link (1 tap) |
+| `official` | The best official answer from the latest findability run (`best_url`) |
+
+**Needs (findability ids):** q01 heating bill help, q02 food pantry this week, q03 water shutoff help, q04 apply for SNAP, q05 a doctor without insurance, q08 a dentist without dental insurance, q25 free legal help for an eviction, q26 a place to stay tonight.
+
+**Measures.** `measure.js` takes the automatic ones. A person or agent scores the rest by reading the source.
+
+| Measure | How it is scored | Who |
+|---|---|---|
+| Covered | Does the source address this need at all? `yes`, `partial`, or `no`. "Not covered" is an honest result. | Judgment |
+| Taps | Taps from opening the source to the answer. For a PDF, the page number the answer is on. | Judgment, PDF page by script |
+| Words before the answer | Words a reader passes before the answer text starts. A stand-in for clutter. | Script |
+| Weight | Kilobytes downloaded at 390px on a slow 4G profile (150 ms, 1.6 Mbps). Budget for urgent pages: 100 KB (#180). | Script |
+| Works on a phone | Sideways scroll, or a PDF that does not fit the screen | Script |
+| Reading grade | Flesch-Kincaid grade of about 120 words from the answer on. Target: about 8. | Script |
+| Answer card | 1 point each, 8 in all: days and hours; can you tell if it is open today; who qualifies; what to bring; address or how to apply; a next step that is not only a call; a checked or updated date; a link to the provider's own page. | Judgment |
+| Must call to learn | Is a phone call the only way to learn the key fact (hours for a place, how to apply for a program)? | Judgment |
+| Correct today | Two facts per need checked against the provider's own page, with the URL and date. Never guess. | Judgment |
+
+**The "dramatically better" bar, written before the first run (2026-10-30).** For an urgent need, our page meets the bar when: the answer is on the page or one tap in, the page is under 100 KB, the answer card scores 7 of 8 or better, no phone call is needed to learn the key fact, and every checked fact is confirmed. Our page **beats** a source when the source does not cover the need, or when ours has more answer card points, has no fact found wrong where the source has none, and does not need a call that a source fully covering the need does not. A source we could not read this run is marked "not scored" and left out, never guessed. If a source beats us on anything, that becomes an `idea` issue. Do not loosen the bar after a run; if it must change, add a dated line here with the reason.
+
+**How the weekly run does it.** The Sunday findability check runs the source benchmark after the findability questions (David's choice, #185). The Monday retro reports one line from it: how many needs our page answers better than every source, and which needs still need a phone call to learn the key fact.
+
+1. Copy the newest run file to `content/findability/benchmark/<today>.yaml` and set `date`.
+2. **Our pages, every week:** in `site/`, run `node ../content/findability/benchmark/measure.js --hub-only`. Copy each line's numbers into that source's `auto:`. Re-read each of our pages and update its answer card, `must_call`, and `facts` (check two facts against the provider's page). If our page for a need changed, update `tasks.yaml` and the findability `hub_page` together.
+3. **Outside sources, first Sunday of the month only,** or sooner if the PDF's `sha256`, `last_modified` or `kb` changed: run `measure.js` with no options, and re-score the guide, city and official sources the same way. Otherwise carry their scores forward and leave their `checked` dates as they were.
+4. Sites that block automated browsers (the city site, WV PATH) are scored by reading the page with a fetch tool. Write `blocked: true` and say "checked by hand" in the note. Never guess a number.
+5. Run `python3 content/findability/benchmark/score.py content/findability/benchmark/<today>.yaml`. Put its summary line in the results table below and in the build log entry.
+6. Open an `idea` issue for any need where a source beats our page, unless one is already open.
+7. Never commit the PDF itself. Store only its URL, size, date and hash. Compare formats, not organizations: "a PDF list makes you call to learn the hours", never "the guide is bad".
+
+**Results**
+
+| Date | Beats every source | Meets the bar | Must call to learn (ours) | Notes |
+|---|---|---|---|---|
+| 2026-10-30 | 7 of 8 | 1 of 8 (q26 stay tonight) | q03 water shutoff (the utility does not publish payment plans) | First run. [Run file](../content/findability/benchmark/2026-10-30.yaml), [build log](build-log/2026-10-31-0100-source-benchmark.md). Three WVU pages refused our tools after the automatic check, so they were not scored. |
+
+**First run, in plain words (2026-10-30).** Our pages beat every source on 7 of the 8 needs: they are about 30 KB against 300 KB to 5 MB for the other sources, the answer is on the page that opens for 6 of 8 needs, and they score 6 to 8 of 8 on the answer card against 1 to 6 for the others. The printed guide touches 7 of 8 needs (3 only in part) but gives names and phone numbers only, so for pantries, the clinic and the shelter you must call to learn the hours. Only one of our pages (where to stay tonight) clears the full bar. What holds the rest back:
+
+- **Food this week (q02):** two taps in, and one provider instead of a list of pantries with days and hours. The city's PATHWAYS page lists pantry days for St. Ursula's and hours for Scott's Run.
+- **A doctor without insurance (q05):** no page of our own; the free clinic sits on the dentist and medicine page. Ties the city's page, does not beat it. A page is planned in the Get care door (`/no-insurance/`).
+- **Eviction help (q25):** the full Legal Aid card is two taps in on the Get through this month page. A link to its `#rent` section lands on a short paragraph with phone numbers only.
+- **Water shutoff (q03):** the utility's site does not describe payment plans, so the key fact still needs a call.
+- **What to bring** is missing on almost every source, ours included. Listing cards started showing it on 2026-10-30 (#159).
+- **Plain language:** the dentist and medicine page opens at about grade 12.
+
 ## Level 2: Use (not measured yet)
 
 Whether people use what we build. To be measured as aggregate counts only, with no tracking of individuals: page views per guide, calendar feed subscriptions, tool uses, searches on the site, and API or MCP calls. This needs a privacy-respecting analytics choice first, which is a `for:david` decision because it may involve an outside service. Until then: none.
