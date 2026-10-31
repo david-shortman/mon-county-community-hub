@@ -2,6 +2,7 @@ import { printSheets } from '../lib/printouts.mjs';
 import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
 import { ROLES } from '../lib/helper-roles.mjs';
+import { HUBS } from '../lib/town-hubs.mjs';
 
 export function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -9,6 +10,8 @@ export function GET({ site }) {
   // One line per community center page (#463), built from content/places.
   // One line per helper role card (#404).
   const roleCards = ROLES.map((r) => `- [Card for ${r.name.toLowerCase()}](${u(`/for/helpers/${r.slug}/`)}): ${r.situations.map((s) => s.hears.toLowerCase()).join('; ')}, with first steps`).join('\n');
+  // One line per town page (#1120).
+  const towns = HUBS.map((h) => `- [${h.name}](${u(`/towns/${h.slug}/`)}): ${h.kind === 'cdp' ? 'a named area with no town government' : `the ${h.full}`}: who to call, who decides and where they meet, places, dates and bus routes`).join('\n');
   const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
 
@@ -83,6 +86,8 @@ export function GET({ site }) {
 - [Snow and ice: who plows, sidewalks, schools and buses](${u('/snow-and-ice/')}): which roads the city and state clear first, Morgantown's 24-hour sidewalk rule and help for people who can't shovel, school closing notices, and Mountain Line's late bus ticker
 - [Is my home in a flood zone or a slide area?](${u('/flood-zone/')}): check an address on the WV Flood Tool, the FEMA flood map and the WV Landslide Tool, flood insurance basics (most home and renters insurance does not cover floods, 30 day wait), and the county floodplain permit
 - [Who serves my address?](${u('/who-serves-me/')}): pick Morgantown, Westover, Star City, Granville, Blacksville or outside any town, and see who to call for police (non-emergency), trash, water and streets
+- [Towns and areas](${u('/towns/')}): a page for each town and census place in Mon County (Morgantown, Westover, Star City, Granville, Blacksville, Booth, Brookhaven, Cassville, Cheat Lake, Osage, Pentress)
+${towns}
 - [Internet at home](${u('/internet/')}): the state broadband map, the state speed test and survey for slow or no service, the WV Attorney General's broadband complaint, the state's BEAD build-out in its own words, and free Wi-Fi, computers and meeting rooms at the Morgantown Public Library System
 - [Renting a home: before you rent, repairs and your deposit](${u('/renting/')}): check a Morgantown or Star City rental is registered, Legal Aid of WV's lease, repair and deposit guides and letters, what WV Code 37-6-30 and 37-6A say (quoted), and free legal help for renters and WVU students
 - [Do I need a building permit?](${u('/permits/')}): city or county first (the Morgantown Zoning Viewer), then who issues permits in Morgantown (online portal only), Star City, Westover and Granville, and what can apply outside town limits: West Run land use permits, floodplain, state road driveways, septic and well permits, and the Assessor's Form 12:75
