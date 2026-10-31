@@ -1,0 +1,77 @@
+---
+// What other towns did (#298): options other places used to shape how they
+// look, with results and the West Virginia law or tool where one exists.
+// Framing: options other towns used, with results. Never "Morgantown
+// should". David signs off on the framing before this goes live (#298).
+import Base from '../../layouts/Base.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import NextRung from '../../components/NextRung.astro';
+export const page = { door: "community", topic: "better", label: "What other towns did", summary: "Options other places used to shape how they look, with results and the West Virginia law or tool for each" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const day = '2026-10-30';
+const cards = [
+  {
+    name: 'An urban forest plan',
+    what: 'A written plan for a town\'s trees: how many it has, how much of the town they shade, and a goal.',
+    where: 'Elkins, West Virginia. Its Tree Board wrote an Urban Forest Management Plan (2024). It builds on a 2017 West Virginia University study, funded by the WV Division of Forestry, that put Elkins\' tree canopy at just over 30 percent and recommended a goal of 40 percent.',
+    wv: 'The WV Division of Forestry gives Community Tree Grants of up to $50,000 with no local match to towns, public schools and nonprofits. Morgantown has a Tree Board.',
+    sources: [{ url: 'https://cityofelkinswv.gov/wp-content/uploads/2024/11/Elkins-Urban-Forest-Management-Plan-2024-FINAL-for-Council-1-16-2024.pdf', checked: day }, { url: 'https://wvforestry.com/urban-forestry', checked: day }],
+  },
+  {
+    name: 'Percent for art',
+    what: 'A rule that sets aside a share of the cost of public building projects for public art.',
+    where: 'Bloomington, Indiana. A 1994 city ordinance requires at least 1 percent of the construction cost of selected capital projects to go to public art. The city says it has put at least $635,000 into public art this way since 2016.',
+    wv: 'In Bloomington this is a city ordinance. We did not find a West Virginia law that speaks to it either way.',
+    sources: [{ url: 'https://www.bloomington.in.gov/news/2021/04/08/4811', checked: day }],
+  },
+  {
+    name: 'Part of the hotel tax for beautification',
+    what: 'Using some hotel occupancy tax money for parks, the arts, historic sites or beautification.',
+    where: 'This is a state law option, not one town\'s program.',
+    wv: 'West Virginia Code 7-18-14 says at least half of a city\'s or county\'s hotel tax goes to tourism and convention promotion. The rest may go to listed uses, including public parks and recreation, promotion of the arts, historic sites, beautification projects, and demolition of unsafe buildings.',
+    sources: [{ url: 'https://code.wvlegislature.gov/7-18-14/', checked: day }],
+  },
+  {
+    name: 'A business improvement district',
+    what: 'Property owners in a downtown area pay an extra fee that funds services there, like cleaning, safety and beautification.',
+    where: 'Charleston, West Virginia. City Council set up the City Center Business Improvement District in September 2021. Property owners pay a fee based on lot and building size. Its work includes cleanliness and safety, and beautification and public art.',
+    wv: 'The West Virginia Business Improvement District Act (WV Code 8-13A) allows these districts. Its stated purpose is to promote the vitality of business areas in cities.',
+    sources: [{ url: 'https://charlestonareaalliance.org/community-development/city-center-business-improvement-district/', checked: day }, { url: 'https://code.wvlegislature.gov/8-13A-2/', checked: day }],
+  },
+  {
+    name: 'A funded adopt-a-spot program',
+    what: 'Paying for a program that supports volunteers who adopt and care for a spot.',
+    where: 'Cincinnati, Ohio. Its adopt-a-spot program had faded for lack of oversight and resources. In 2024 it relaunched with $60,000 in the city budget plus a private donation, run by Keep Cincinnati Beautiful, which gives volunteers supplies. (Reported by WVXU, August 13, 2024.)',
+    wv: 'Morgantown runs Adopt-A-Street, and the state runs Adopt-A-Highway, Adopt-A-Spot and Adopt-A-Stream.',
+    sources: [{ url: 'https://www.wvxu.org/environment/2024-08-13/adopt-a-spot-program-relaunches-cincinnati', checked: day }],
+    linkText: 'Compare the adopt programs here', link: '/make-it-better/adopt/',
+  },
+  {
+    name: 'Greening vacant lots',
+    what: 'Cleaning up vacant lots, planting grass and keeping them mowed.',
+    where: 'Philadelphia, Pennsylvania. A randomized study of 541 vacant lots, published in 2018, found up to a 29 percent drop in gun violence near greened lots in neighborhoods below the poverty line. (Reported by Columbia University\'s public health school.)',
+    wv: 'The West Virginia Land Reuse Agency Authorization Act (WV Code 31-18E) lets cities set up land reuse agencies. Morgantown has one, the Land Reuse and Preservation Agency.',
+    sources: [{ url: 'https://www.publichealth.columbia.edu/news/how-reduce-crime-gun-violence-stabilize-neighborhoods-randomized-controlled-study', checked: day }, { url: 'https://code.wvlegislature.gov/31-18E/', checked: day }],
+  },
+];
+---
+<Base title="What other towns did on trees, art and clean streets: a guide for Morgantown and Mon County" description="Options other towns have used to shape how they look, like urban forest plans, percent for art, business improvement districts and vacant lot greening, with results and the West Virginia law or tool for each.">
+  <h1>What other towns did</h1>
+  <p class="lede">Options other places have used to shape how they look, what happened, and the West Virginia law or tool that relates to each. These are examples, not recommendations.</p>
+
+  {cards.map((c) => (
+    <article class="card">
+      <h2>{c.name}</h2>
+      <p><strong>What it is:</strong> {c.what}</p>
+      <p><strong>Where and what happened:</strong> {c.where}</p>
+      <p><strong>In West Virginia:</strong> {c.wv}</p>
+      {c.link && <p class="more"><a href={`${base}${c.link}`}>{c.linkText}</a></p>}
+      <SourceLine sources={c.sources} about={c.name} />
+    </article>
+  ))}
+
+  <p>Who decides these things here, and when: see <a href={`${base}/make-it-better/when-it-gets-decided/`}>When plans and budgets get decided</a>.</p>
+
+  <NextRung next="board" />
+  <p class="meta">We describe options and what sources report about them. We do not say what Morgantown or Monongalia County should do. Know a sourced example we should add? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
