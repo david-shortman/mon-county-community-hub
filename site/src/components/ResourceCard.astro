@@ -19,7 +19,7 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
 <article class="card resource" id={r.slug}>
   <h3>{r.title}</h3>
   {lead && <p><strong>{lead}</strong></p>}
-  <p>{r.who_it_is_for} {r.what_to_do}</p>
+  <p>{r.who_it_is_for}{' '}{r.what_to_do}</p>
   {showCost && r.cost && r.cost !== 'free' && <p><strong>Cost:</strong> {r.cost}</p>}
   <Actions callFirst
     phone={r.contact?.phone} phoneLabel={r.title}
@@ -29,7 +29,7 @@ const { r, sms, smsLabel, lead, showCost = false } = Astro.props;
   />
   <BusLink place={r.contact?.place} about={r.title} />
   <WhatHappensNext r={r} />
-  <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <SourceLine sources={r.sources} phone={r.phone_confirmed} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
   <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
 )}

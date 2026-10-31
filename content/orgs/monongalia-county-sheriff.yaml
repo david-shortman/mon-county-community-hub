@@ -1,0 +1,10 @@
+name: Monongalia County Sheriff's Department
+slug: monongalia-county-sheriff
+kind: government
+phone: "304-291-7260"
+summary: The county sheriff's office in downtown Morgantown. It is one of the state's listed child car seat fitting stations.
+topics: [family]
+area: monongalia-county
+sources:
+  - url: https://dmv.wv.gov/cps-seat-fitting-stations
+    checked: 2026-10-30

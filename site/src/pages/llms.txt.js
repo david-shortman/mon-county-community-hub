@@ -31,6 +31,7 @@ export function GET({ site }) {
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
 - [Dentist or prescriptions](${u('/dental-and-prescriptions/')}): a dentist with no dental insurance (health department dental clinic, WVU Dental) and help paying for medicine (Milan Puskar Health Right free clinic)
 - [Turning 65 or on Medicare](${u('/turning-65/')}): when to sign up, visits and shots Medicare pays for, free help from WV SHIP, help paying Medicare costs
+- [Diabetes, blood pressure or weight](${u('/diabetes-and-weight/')}): health department dietitians with a sliding fee, and free diabetes and heart clinics for Health Right patients
 - [Ride to a medical visit](${u('/medical-rides/')}): Medicaid and WVCHIP rides through Modivcare (book 5 business days ahead), and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares
 - [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
@@ -38,6 +39,7 @@ export function GET({ site }) {
 - [Teens](${u('/teens/')}): the age certificate and work hours for 14 and 15 year olds, West Virginia's three driver's license levels, Career Connections job help for ages 16 to 24, summer volunteering at The Shack, and library teen programs and free tutoring
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
 - [Medicaid waivers](${u('/medicaid-waivers/')}): a plain guide to West Virginia's four Medicaid home care waivers (ADW, IDDW, TBIW, CSEDW): who each is for, how to start, who to call
+- [Start or grow a business](${u('/business/')}): free one-on-one coaching and Business Fundamentals classes from the WV SBDC, the SBA West Virginia District Office, a state list of business plan help, and the Morgantown Area Partnership, Chamber of Commerce and Main Street Morgantown in their own words
 - [Living here](${u('/living-here/')}): pick what is going on (moving here, trash pickup day, recycling drop-off, tires or electronics) and get local steps with phone numbers and sources
 - [Family and life changes](${u('/family/')}): pick what is going on (a baby or young child, a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
 - [Moving here: start power, water, gas and trash](${u('/moving-here/')}): how to start service with Mon Power, the Morgantown Utility Board and Hope Gas, town trash pickup in Star City and Granville, deposits and fees, and who to ask
@@ -53,6 +55,7 @@ export function GET({ site }) {
 - [Community centers and halls](${u('/community-centers/')}): community centers, senior centers and halls across Mon County, grouped by part of the county, with dinners and events, halls to rent, and how to join
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
 ${centers}
+- [City meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council and city board meetings, and minutes from the last 60 days, read daily from the city's AgendaCenter
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
@@ -63,10 +66,12 @@ ${centers}
 - [Serve on a city board](${u('/make-it-better/boards/')}): city boards that shape how Morgantown looks and feels (Urban Landscape Commission, Tree Board, Cultural Arts, Historic Landmarks, Planning, and more), what each does, when it meets, open seats from the city's vacancy list, and how to apply
 - [Get money for a project](${u('/make-it-better/grants/')}): Morgantown Mosaic neighborhood grants, state Community Tree Grants, Organizational Arts Grants and state arts grants: who can apply, how much, match, and the next date (or that it is not announced)
 - [Adopt a street, spot, stream or trail](${u('/make-it-better/adopt/')}): Morgantown's Adopt-A-Street, the state's Adopt-A-Highway, Adopt-A-Spot and Adopt-A-Stream, and BOPARC trail cleanups compared: what you adopt, how long, how often you clean, what you get, and how to start
+- [Have your say at a public meeting](${u('/have-your-say/')}): when Morgantown City Council, the Monongalia County Commission, the Board of Education, BOPARC and the Planning Commission meet, how public comment works at each (from official pages), and where agendas are
 - [Older adults and retirees](${u('/for/older-adults/')}): a starting page that links to Medicare, care at home, food and bill help, veterans help, and ways to stay involved
 - [Parents of babies and toddlers](${u('/for/parents-young-kids/')}): a starting page that links to child development help, Pre-K and Head Start, playgroups, checkups and food help
 - [New to Mon County](${u('/for/new-to-mon-county/')}): a starting page that links to starting utilities, trash day, care, kids, work and English lessons, and this month's events
 - [People with disabilities and caregivers](${u('/for/disability-and-caregivers/')}): a starting page that links to independent living, care at home through Medicaid, job help and health costs
+- [Free car seat checks](${u('/car-seat-checks/')}): the two child car seat fitting stations the WV DMV lists for Mon County (Sheriff's Department, WVU Medicine Children's), free, by appointment
 
 ## Data
 
@@ -74,6 +79,7 @@ ${centers}
 - [API catalog](${u('/api/v1/index.json')}): JSON index of every data file, with counts, license and build time
 - [OpenAPI description](${u('/api/v1/openapi.yaml')}): every field in the JSON files
 - [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [needs register](${u('/api/v1/needs.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
+- [When plans and budgets get decided](${u('/make-it-better/when-it-gets-decided/')}): Morgantown's budget year, the March levy window in state law, the 2027-2031 capital plan lines for Mosaic, a downtown master plan and wayfinding, the comprehensive plan, and how to comment
 
 ## Notes for AI tools
 
