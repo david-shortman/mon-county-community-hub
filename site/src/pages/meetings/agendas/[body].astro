@@ -21,9 +21,11 @@ const mine = loadAgendas().filter((g) => g.body === body);
 const coming = upcomingGuides(mine, today);
 const past = pastGuides(mine, today);
 const decided = recentDecided(loadDecided().filter((r) => r.body === body), today);
+// Residents search with the place name, so every title has one (check-pages).
+const named = /Morgantown|Mon(ongalia)? County/i.test(b.name) ? b.name : `${b.name}, Mon County`;
 const host = b.home && new URL(b.home).hostname.replace(/^www\./, '');
 ---
-<Base title={`${b.name}: agendas in plain language`} description={`Coming ${b.name} agendas in plain language, and the actions recorded in its recent minutes, each linked to the official record.`}>
+<Base title={`${named}: agendas in plain language`} description={`Coming ${b.name} agendas in plain language, and the actions recorded in its recent minutes, each linked to the official record.`}>
   <p class="meta"><a href={`${base}/meetings/agendas/`}>Coming meetings in plain language</a></p>
   <h1>{b.name}</h1>
   <p class="lede">Coming agendas in plain language, and what recent meetings decided, from the official minutes.</p>
