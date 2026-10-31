@@ -81,19 +81,7 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Map on tap** | A Directions button that opens the phone's own map app | A link to the map app | Exists (`Actions`) |
 | **211 fallback** | The help now box | Plain links | Exists (`HelpNow`, and `HelpNowBar` on the home page) |
 | **Breadcrumb** | "Home › Get through this month" above the heading, from the page's tags | Plain links | Exists (`Breadcrumb.astro`) |
-| **Item lookup** | "What do you have?": tap targets for each item, then an A to Z list saying where each one goes and whether it can go in the curbside bin, each linking to its sourced details | Anchor links and a plain list | Exists (`/recycling/`, #199) |
-
-### Lead blocks: one job per page (#199)
-
-Each guide page keeps the same frame and leads with the one block that does its job, on the first phone screen.
-
-| Page | Its job | Lead block |
-|---|---|---|
-| `/recycling/` | "What do I do with this thing?" | Item lookup |
-| `/utility-bills/` | "My power, water or gas is about to be cut off" | Step path (`Route`) |
-| `/calendar/` | "What is coming that I might miss?" | Days left chips, this week first |
-| `/stay-tonight/` | "I need a bed or a warm place now" | Crisis strip and four big choices |
-| `/` | "Where do I start?" | Door cards |
+| **Item lookup** | "What do you want to get rid of?": an A to Z list of things, each saying in one line where it goes and linking to its sourced details on the page | A plain list of anchor links | Exists (`/recycling/`, #199) |
 
 ## What every listing needs
 
@@ -129,14 +117,23 @@ Two layers cut across all of them: **Dates** (one calendar, shown on each door f
 
 ### Doors and pages
 
-| Door | Its page | Live inside it | Still to come |
-|---|---|---|---|
-| Help now (not a door) | `/stay-tonight/` | Grace Shelter, the domestic violence hotline, 211, 988 | A daytime warm place and food tonight, once sourced (#219, #60) |
-| Get through this month | `/money/` | Utility bills, food help and SNAP, rent, payday loans, free tax help | Housing (#202), food finder (#60), medical bills (#220) |
-| Get care | `/care/` | Flu and COVID shots, staying well, turning 65 | Where to go (#21), mental health (#203), dental and prescriptions (#220), Medicaid 2027 (#221), school and sports shots (#244), pregnant or new baby (#245) |
-| Living here | `/living-here/` | Trash and recycling | New here (#204), buses (#61), voting (points to the WV Secretary of State) |
-| Family and life changes | `/family/` | Work and learning, veterans | Kids and families (#225), disability and aging (#227), language help (#229) |
-| Your community | None yet | None yet | City or county (#20, #86), meetings (#12), how we are doing (#15, #62), small business (#19), giving (#63) |
+The live list of every page, by door and A to Z, is the Topics page (`/topics/`). The build makes it from each page's tags, so it is always current; this guide does not copy it.
+
+Each door and lane page has one job, and its first phone screen leads with the block that does it (#199):
+
+| Page | Its job, in a resident's words | Leads with |
+|---|---|---|
+| Help now, `/stay-tonight/` | "I need a bed, a warm place, food or safety now" | Crisis strip, then four big choices |
+| Get through this month, `/money/` | "I can't pay a bill or I'm short this month" | Pick what fits, then my steps |
+| Get care, `/care/` | "I need care and don't know where to start" | Pick what fits, then my steps |
+| Living here, `/living-here/` | "How do things work here?" | Pick what fits, then my steps |
+| Family and life changes, `/family/` | "Something changed for my family" | Pick what fits, then my steps |
+| Your community, `/community/` | "How can I take part?" | Pick what fits, then my steps |
+| Dates, `/calendar/` | "What is coming that I might miss?" | Open now and coming up; dates by town (#395) |
+| Utility bills, `/utility-bills/` | "My power, water or gas may be cut off" | A step route, call your utility first |
+| Recycling, `/recycling/` | "What do I do with this thing?" | Item lookup (#199) |
+| Flood zone, `/flood-zone/` | "Is my home at risk of flood or slide?" | A step route, look up the address first |
+| About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
 
 ### How new content slots in
 
