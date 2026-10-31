@@ -38,6 +38,8 @@ const SOURCES = {
 
 // The needs register's shape comes straight from its JSON Schema (#74).
 const NEED = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/need.schema.json'), 'utf8'));
+// Gathering places use their own JSON Schema too (#455, #399).
+const PLACE = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/place.schema.json'), 'utf8'));
 
 export const TYPES = {
   orgs: {
@@ -139,6 +141,12 @@ export const TYPES = {
       first_seen: date('Date we first saw this agenda'),
       last_changed: date('Date we last saw the agenda or minutes change'),
     },
+  },
+  places: {
+    description: 'Gathering places: community centers, senior centers, neighborhood houses, rec buildings and fire halls that rent a hall, with what they have and how to use them.',
+    id: 'slug',
+    required: PLACE.required,
+    properties: PLACE.properties,
   },
   corrections: {
     description: 'Every fix we made to a fact, link or out-of-date detail.',
