@@ -317,7 +317,8 @@ const TIME_RULES = [
 ];
 const BY_DATE = new RegExp(`\\bby ${MONTH} \\d{1,2}\\b`, 'i');
 const DEADLINE_VERB = /\b(apply|applies|file|pay|register|enroll|sign up|submit|send|mail|return|renew|turn in|drop off|request|order|change|choose|vote|respond|reply|call)\b/i;
-const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics']);
+// opening_hours holds 24-hour times on purpose (#177), so it is skipped too.
+const SKIP_KEYS = new Set(['_file', 'slug', 'url', 'sources', 'start_time', 'end_time', 'phone', 'text', 'email', 'starts', 'ends', 'topics', 'opening_hours']);
 function eachText(value, key, visit) {
   if (SKIP_KEYS.has(key)) return;
   if (typeof value === 'string') visit(key, value);
