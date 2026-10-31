@@ -1,0 +1,24 @@
+name: Ruby Summer Concert Series
+slug: city-of-morgantown-ruby-summer-concert-series
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: city
+  text: City of Morgantown and the Hazel Ruby McQuain Charitable Trust
+story: Free outdoor concerts on Friday nights in summer at the Ruby Amphitheater.
+regular:
+  - Fridays during the summer (seasonal)
+cost: Free
+interests: [music, social]
+tags: [free]
+contact:
+  url: https://rubyampwv.com
+  place: Hazel Ruby McQuain Park, 185 Garrett St, Morgantown, WV 26501
+status: active
+notes:
+  - This is a summer series. It is not running in fall or winter.
+  - The site does not list this year's start time or the months of the season. Check the site in spring for the next lineup.
+sources:
+  - url: https://rubyampwv.com
+    checked: 2026-10-30

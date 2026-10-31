@@ -5,6 +5,7 @@
 // number means for policy, and never claim credit for a change.
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
+import TrendChart from '../components/TrendChart.astro';
 import { loadIndicators, showValue, PLACES } from '../lib/indicators.mjs';
 import { loadIndicators as loadLive } from '../lib/live-indicators/index.mjs';
 import { todayYmd } from '../lib/content.mjs';
@@ -33,7 +34,7 @@ const measures = places.data?.measures ?? [];
 ---
 <Base title="How is Mon County doing? Official numbers for Monongalia County, WV" description="Official numbers on child poverty, health insurance and jobs in Monongalia County, WV, next to West Virginia and the US, plus the monthly unemployment rate and CDC estimates on food, housing and other daily needs, each with its source and year.">
   <h1>How is Mon County doing?</h1>
-  <p class="lede">Official numbers about Monongalia County, next to West Virginia and the whole country. Each one links to where it comes from and says what year it covers.</p>
+  <p class="lede">Official numbers about Monongalia County, next to West Virginia and the whole country. Each one links to where it comes from and says what year it covers, and the charts show up to ten years.</p>
 
   <h2 id="health">Health and money</h2>
   <p>These come from <a href="https://www.countyhealthrankings.org/health-data/west-virginia/monongalia">County Health Rankings</a>, a program that gathers the same public numbers for every county in the US. We use its 2025 data file. The definitions come from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx">2025 data dictionary</a>, and the years from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv">2025 trends file</a>.</p>
@@ -46,6 +47,7 @@ const measures = places.data?.measures ?? [];
           <li>{k === 'monongalia' ? <strong>{label}: {showValue(i, i.values[k])}</strong> : <>{label}: {showValue(i, i.values[k])}</>}</li>
         ))}
       </ul>
+      <TrendChart i={i} />
       <SourceLine sources={i.sources.slice(0, 1)} about={i.title} slug={i.slug} />
     </article>
   ))}
@@ -128,7 +130,7 @@ const measures = places.data?.measures ?? [];
   .tiles { list-style: none; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
   .tile { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
   .tile .num { font-size: 1.6rem; font-weight: 700; }
-  .tile .range { color: var(--muted); font-size: 0.85rem; }
+  .tile .range { color: var(--muted); font-size: 0.9rem; }
   table { border-collapse: collapse; }
   th, td { text-align: left; padding: 0.25rem 1rem 0.25rem 0; border-bottom: 1px solid var(--line); }
 </style>
