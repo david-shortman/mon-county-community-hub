@@ -1,0 +1,70 @@
+---
+// A labeled example walkthrough (#946, pattern in docs/playbook/example-walkthroughs.md):
+// getting around Morgantown without a car in the first week. The person is
+// made up; every fact is read from a resource record in content/resources/.
+import Base from '../../layouts/Base.astro';
+import Route from '../../components/Route.astro';
+import Milepost from '../../components/Milepost.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource, telHref } from '../../lib/content.mjs';
+export const page = { parent: '/getting-around/', label: 'Example: a first week without a car' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fares = resource('mountain-line-fares');
+const ruby = resource('bus-to-ruby-memorial');
+const grey = resource('grey-line-pittsburgh');
+const ok = (r) => r && !r.hidden;
+---
+<Base title="Example: a first week in Morgantown without a car" description="A made-up example of how someone new to Morgantown without a car could get around in their first week: paying the Mountain Line bus fare, ride free and half fare programs, the bus to Ruby Memorial, and the Grey Line to Pittsburgh.">
+  <p class="example-tag"><strong>Example.</strong> This is a made-up person, not a real story. The bus routes and programs are real, and each step shows its source.</p>
+  <h1>Example: a first week in Morgantown without a car</h1>
+  <p class="lede">Someone just moved to Morgantown without a car. They need to get to a doctor's visit this week and to the Pittsburgh airport later on. Here is what they could do in their first week. Tap a step to open it.</p>
+
+  <Route label="Steps in the example">
+  {ok(fares) && (
+    <Milepost n={1} title="Learn how to pay the bus" when="Day 1" id="pay" open>
+      <p>{fares.what_to_do}</p>
+      {fares.cost && <p><strong>Cost:</strong> {fares.cost}</p>}
+      <div class="actions"><a class="btn" href={fares.contact.url}><span>Fares and programs</span></a></div>
+      <SourceLine sources={fares.sources} org={fares.org} about={fares.title} slug={fares.slug} />
+    </Milepost>
+  )}
+
+  {ok(fares) && (
+    <Milepost n={2} title="Check whether they ride free or for half fare" when="Day 1" id="free">
+      <p>{fares.who_it_is_for}</p>
+      <p>Not sure? They can call Mountain Line at <a href={telHref(fares.contact.phone)}>{fares.contact.phone}</a>.</p>
+      <div class="actions"><a class="btn" href={fares.contact.url}><span>Ride free and half fare rules</span></a></div>
+      <SourceLine sources={fares.sources} org={fares.org} about={fares.title} slug={fares.slug} />
+    </Milepost>
+  )}
+
+  {ok(ruby) && (
+    <Milepost n={3} title="Take the bus to a doctor's visit" when="Midweek" id="doctor">
+      <p>Their doctor is at Ruby Memorial Hospital. {ruby.what_to_do}</p>
+      {ruby.cost && <p><strong>Cost:</strong> {ruby.cost}</p>}
+      <SourceLine sources={ruby.sources} org={ruby.org} about={ruby.title} slug={ruby.slug} />
+    </Milepost>
+  )}
+
+  {ok(grey) && (
+    <Milepost n={4} title="Book a seat to the Pittsburgh airport" when="End of the week" id="airport">
+      <p>{grey.who_it_is_for} {grey.what_to_do}</p>
+      {grey.cost && <p><strong>Cost:</strong> {grey.cost}</p>}
+      <div class="actions"><a class="btn" href={grey.contact.url}><span>Grey Line page</span></a></div>
+      <SourceLine sources={grey.sources} org={grey.org} about={grey.title} slug={grey.slug} />
+    </Milepost>
+  )}
+
+  <Milepost n={5} title="Look for what comes next" when="Later" id="next">
+    <p>For rides to medical visits by appointment, see <a href={`${base}/medical-rides/`}>Ride to a medical visit</a>. For every route and the WVU Ride Free program, see <a href={`${base}/getting-around/`}>Getting around without a car</a>.</p>
+  </Milepost>
+  </Route>
+
+  <p>Rather start on your own? Everything above is on <a href={`${base}/getting-around/`}>Getting around without a car</a>.</p>
+
+  <p class="meta">This example is made up. It is not a real person or a real case. Sources checked October 30, 2026. Bus times and fares change, so check Mountain Line before you go. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
+
+<style>
+  .example-tag { border-left: 4px solid var(--accent); padding: 0.5rem 0.75rem; background: var(--accent-bg); color: var(--fg); }
+</style>

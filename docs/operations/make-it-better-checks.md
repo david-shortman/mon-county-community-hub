@@ -9,7 +9,7 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 ## How to record a check
 
 - Re-read the page. Change only what the page now says, and set `checked` to today's Morgantown date only for the sources you actually re-read.
-- Seat counts live in `content/boards/<slug>.yaml` (`open_seats` from the city's vacancy list, `page_vacant` when the board's own page shows a different number). The other boards with open seats are listed in `site/src/pages/make-it-better/boards.astro` until #676 moves them into `content/boards/`.
+- Seat counts live in `content/boards/<slug>.yaml` (`open_seats` from the city's vacancy list, `page_vacant` when the board's own page shows a different number). The other boards with open seats are `content/boards/` entries with `section: other`.
 - Programs, grants and report routes live in `content/resources/` (topic `better` or `government`).
 - When two official pages disagree, keep both and say who says what. Never pick one.
 - A date that is not posted yet stays "next date not announced". Never guess.
@@ -18,7 +18,7 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 
 | Source | What to look for | Updates |
 |---|---|---|
-| [City vacancy list](https://www.morgantownwv.gov/210/Volunteer-Opportunities) | Open seats per board, who can serve, the apply links | `open_seats` in `content/boards/`, the other-boards list |
+| [City vacancy list](https://www.morgantownwv.gov/210/Volunteer-Opportunities) | Open seats per board, who can serve, the apply links | `open_seats` in `content/boards/` |
 | [City Council agendas](https://www.morgantownwv.gov/AgendaCenter/City-Council-3) | Items on trees, murals, landscape plans, the downtown plan, budget lines, board appointments | When it gets decided, Have your say |
 | Agenda Center for the Urban Landscape Commission, Tree Board, Cultural Arts Commission and Historic Landmarks Commission (linked from each board's page) | The same kinds of items, and meeting changes | Board entries |
 
