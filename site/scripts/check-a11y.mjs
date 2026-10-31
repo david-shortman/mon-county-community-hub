@@ -1,7 +1,8 @@
 // Accessibility scan (#105). Run after `npm run build`: npm run check-a11y
 // Serves dist/ on localhost, opens every built page in Chromium at 390px wide (a common
 // phone) in light and dark, and runs axe-core with the same rules as the design reviews
-// (docs/rubrics/README.md). Also checks that no page scrolls sideways at 320px.
+// (docs/rubrics/README.md). Also checks that no page scrolls sideways at 320px, with text
+// at 100% and at 200%.
 // Fails on serious or critical axe problems and on sideways scroll; prints the rest.
 // Needs a browser: in CI the Site workflow runs `npx playwright install chromium` first.
 import fs from 'node:fs';
@@ -67,14 +68,27 @@ for (const scheme of ['light', 'dark']) {
 }
 
 // Reflow (WCAG 1.4.10): nothing should scroll sideways on a 320px screen.
+// Pages whose 200% text fix sits on an open for:david PR, so this session left the page alone.
+// They print a note instead of failing. Remove each line once its PR merges (#971).
+const WAITING = [
+  [/^\/community-centers\/[^/]+\/flyer\/$/, '#938'],
+  [/^\/how-we-are-doing\/$/, '#956'],
+];
 const narrow = await browser.newPage({ viewport: { width: 320, height: 640 } });
 for (const u of urls) {
   await narrow.goto(origin + u, { waitUntil: 'load' });
   const w = await narrow.evaluate(() => document.documentElement.scrollWidth);
   if (w > 320) { blocking++; console.log(`FAIL ${u} scrolls sideways at 320px (${w}px wide)`); }
+  // Text resize (WCAG 1.4.4): with text at 200%, the page still fits a 320px screen (#971).
+  await narrow.addStyleTag({ content: 'html{font-size:200% !important}' });
+  const w2 = await narrow.evaluate(() => document.documentElement.scrollWidth);
+  const waits = WAITING.find(([re]) => re.test(u));
+  if (w2 > 320 && waits) { other++; console.log(`note ${u} scrolls sideways at 320px with text at 200% (${w2}px wide). The fix is posted on ${waits[1]}, which waits for David.`); }
+  else if (w2 > 320) { blocking++; console.log(`FAIL ${u} scrolls sideways at 320px with text at 200% (${w2}px wide)`); }
+  else if (waits) console.log(`note ${u} now fits at 200% text: remove it from WAITING in scripts/check-a11y.mjs`);
 }
 
 await browser.close();
 server.close();
-console.log(`\ncheck-a11y: ${urls.length} pages, light and dark at 390px, and 320px reflow. ${blocking} blocking, ${other} other.`);
+console.log(`\ncheck-a11y: ${urls.length} pages, light and dark at 390px, and 320px reflow at 100% and 200% text. ${blocking} blocking, ${other} other.`);
 if (blocking) process.exit(1);
