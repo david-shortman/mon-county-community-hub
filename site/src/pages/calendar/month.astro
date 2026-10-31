@@ -25,7 +25,7 @@ const who = (e) => (e.feed ? e.feed.name : e.org_name);
 ---
 <Base title="This month in Mon County, WV: the next 30 days" description="Deadlines, application windows, public meetings and community dates in Morgantown and Monongalia County for the next 30 days, on one page you can print.">
   <h1>This month in Mon County</h1>
-  <p class="lede">Deadlines, open applications, public meetings and community dates from {prettyDate(today)} to {prettyDate(last)}, on one page. Updated {prettyDate(updated)}.</p>
+  <p class="lede">Here are the dates to know from {prettyDate(today)} to {prettyDate(last)}, on one page. That means deadlines, times to apply, public meetings and community dates. Updated {prettyDate(updated)}.</p>
   <p>Each item links to its full listing on <a href={`${base}/calendar/`}>Deadlines and dates</a>, with buttons to call, get directions or add it to your calendar, and the source we checked. Dates can change, so check the source before you go.</p>
   <div class="actions month-keep"><button class="btn" type="button" id="print-month" hidden><span>Print this page</span></button></div>
 
