@@ -7,7 +7,7 @@
 slug: mountain-line-passes
 title: Mountain Line half-fare and property tax bus passes
 publisher: Mountain Line Transit Authority
-intro: Mountain Line has three pass programs that each use a form. Here is who each is for, what it costs and how to apply, in Mountain Line's words. Questions? Call 304-291-RIDE (304-291-7433).
+intro: Here are three of Mountain Line's pass programs. Each one uses a form. Here is who each is for, what it costs and how to apply, in Mountain Line's words. Questions? Call 304-291-RIDE (304-291-7433).
 recheck_days: 120
 sources:
   - url: https://www.busride.org/gold-card-program
@@ -74,7 +74,7 @@ sections:
       - name: Who cannot get one
         lines:
           - "People who \"Do not pay property tax in Monongalia County\" or who \"Have another form of subsidized Bus Pass\"."
-          - "Mountain Line names \"Children age 5 and under (already ride free), High School Students (already ride free), or West Virginia University students, faculty or staff (prepaid and can use their WVU ID).\""
+          - "Mountain Line says this includes, but is not limited to, \"Children age 5 and under (already ride free), High School Students (already ride free), or West Virginia University students, faculty or staff (prepaid and can use their WVU ID).\""
       - name: Where it works
         lines: ["Local routes. Passes from this program \"will not be valid on non-regular, local route services such as the Intercity Grey Line bus service or the New Fit supplemental transit service.\""]
       - name: What it costs
@@ -94,4 +94,4 @@ sections:
             url: http://monongalia.softwaresystems.com/index.html
           - label: "Property Tax Pass form (PDF)"
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Tax%20Pass%20Form.pdf
-            saved: "May 6, 2020"
+            saved: "May 5, 2020"
