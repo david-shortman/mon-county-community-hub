@@ -1,0 +1,55 @@
+---
+// Checklist (#179): "What to have ready" with tick boxes. The boxes are real
+// checkboxes, so they work with no script but forget their ticks. With a
+// script, ticks are saved on this phone only (localStorage, under `key`), are
+// never sent anywhere, and can be cleared. Each item is plain text.
+//   items: list of strings
+//   key: a short id for saving, unique on the site, like "bring-christian-help-tax-prep".
+//     Two lists with the same key share their ticks after a reload, so only
+//     reuse a key for the same list of items
+//   label: what the list is, for screen readers
+const { items = [], key, label = 'Checklist' } = Astro.props;
+---
+{items.length > 0 && (
+  <div class="checklist" data-key={key}>
+    <ul aria-label={label}>
+      {items.map((t, i) => <li><label><input type="checkbox" data-i={i} /><span>{t}</span></label></li>)}
+    </ul>
+    <p class="checklist-note meta" hidden>Ticks are saved on this phone only. <button type="button" class="link-btn checklist-clear">Clear ticks</button></p>
+  </div>
+)}
+
+<style is:global>
+  .checklist ul { list-style: none; margin: 6px 0; padding: 0; display: grid; gap: 4px; }
+  .checklist label { display: flex; align-items: flex-start; gap: 10px; min-height: 44px; padding: 8px 0; cursor: pointer; line-height: 1.4; }
+  .checklist input { width: 22px; height: 22px; flex: none; margin: 1px 0 0; accent-color: var(--accent); }
+  .checklist input:checked + span { color: var(--muted); text-decoration: line-through; }
+  .checklist .link-btn { font: inherit; color: var(--accent); background: none; border: 0; padding: 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  @media print { .checklist-note { display: none !important; } .checklist input:checked + span { text-decoration: none; color: inherit; } }
+</style>
+
+<script>
+  // Save ticks on this phone only. Storage can be blocked (private windows),
+  // so every read and write is wrapped and the list still works without it.
+  document.querySelectorAll<HTMLElement>('.checklist[data-key]').forEach((box) => {
+    const key = `em-check:${box.dataset.key}`;
+    const boxes = [...box.querySelectorAll<HTMLInputElement>('input[type="checkbox"]')];
+    let saved: number[] = [];
+    try { saved = JSON.parse(localStorage.getItem(key) || '[]'); } catch { return; }
+    boxes.forEach((b, i) => { b.checked = saved.includes(i); });
+    const save = () => {
+      const on = boxes.flatMap((b, i) => (b.checked ? [i] : []));
+      try { if (on.length) localStorage.setItem(key, JSON.stringify(on)); else localStorage.removeItem(key); } catch { /* not saved */ }
+    };
+    boxes.forEach((b) => b.addEventListener('change', save));
+    const note = box.querySelector<HTMLElement>('.checklist-note');
+    if (note) note.hidden = false;
+    box.querySelector('.checklist-clear')?.addEventListener('click', () => {
+      boxes.forEach((b) => { b.checked = false; });
+      save();
+      // Say so to screen readers, through Base's status line.
+      const status = document.getElementById('announce');
+      if (status) { status.textContent = ''; setTimeout(() => { status.textContent = 'Ticks cleared'; }, 50); }
+    });
+  });
+</script>

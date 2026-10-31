@@ -1,15 +1,20 @@
-title: DMV Morgantown regional office
+title: WV DMV Morgantown Regional Office
 slug: wv-dmv-morgantown-office
-org: wv-division-of-motor-vehicles
+org: wv-dmv
 topics: [moving]
-who_it_is_for: Anyone who needs the DMV in person. The office page does not list which services this office offers, so call ahead if you are not sure.
+who_it_is_for: The state DMV office in Morgantown, for driver's licenses, ID cards, titles and plates. Its page does not list which services this office handles, so call to ask before you go.
 hours: Monday to Friday, 8:30 a.m. to 5 p.m.
-what_to_do: Walk in, or call to set up an appointment. The office offers same-day appointments.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:30"
+    closes: "17:00"
+get_in: walk-in
+what_to_do: Walk in, or make an appointment. The office says walk-ins are always welcome, and it also offers appointments, including same-day appointments. Book on the office page, or call 1-800-642-9066 (in West Virginia only) or 304-558-3900. The office is at 1525 Deckers Creek Blvd.
 contact:
   phone: "304-558-3900"
-  url: https://dmv.wv.gov/node/118
-  url_label: Office page
-  place: "1525 Deckers Creek Blvd, Morgantown, WV 26505"
+  url: https://dmv.wv.gov/offices/morgantown
+  url_label: Office page and appointments
+  place: 1525 Deckers Creek Blvd, Morgantown, WV
 sources:
-  - url: https://dmv.wv.gov/node/118
+  - url: https://dmv.wv.gov/offices/morgantown
     checked: 2026-10-30
