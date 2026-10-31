@@ -76,6 +76,7 @@ export function GET({ site }) {
 - [Make art, learn a craft, show your work](${u('/arts-and-making/')}): Monongalia Arts Center classes, Community Maker Space, studios and gallery applications; library craft nights, knitting group and ArtistWorks lessons; folk arts apprenticeships and jams; state grants for individual artists
 - [Start a nonprofit or community group](${u('/start-a-group/')}): the West Virginia steps: Articles of Incorporation for a nonprofit corporation ($25, Form CD-1), registering with the Secretary of State before asking the public for donations, and links to the IRS for tax-exempt status
 ${centers}
+- [Start a swap, market or reuse store](${u('/start-something/')}): what Mon County is missing for secondhand and sharing (a regular flea market, a building materials reuse store, a Buy Nothing group, kids' gear swaps), what each would take, and free or low cost guides
 - [City and county meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council, city board and County Commission meetings, minutes from the last 60 days, and where the school board and towns post theirs
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
