@@ -303,3 +303,12 @@ export function notCheckedLately(sources, today = todayYmd()) {
   const c = oldestChecked(sources);
   return !!c && (Date.parse(`${today}T12:00:00Z`) - Date.parse(`${c}T12:00:00Z`)) / 86400000 > FRESH_DAYS;
 }
+
+// Gaps for a topic (content/gaps/<topic>.yaml, #444): things we looked for and
+// could not find. Shown in a "Help wanted" box. Null when the file is missing.
+export function loadGaps(topic) {
+  const file = path.join(CONTENT_DIR, 'gaps', `${topic}.yaml`);
+  if (!fs.existsSync(file)) return null;
+  const raw = YAML.parse(fs.readFileSync(file, 'utf8'));
+  return { ...raw, gaps: raw.gaps ?? [], _file: `gaps/${topic}.yaml` };
+}
