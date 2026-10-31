@@ -5,7 +5,7 @@ start_time: "06:30"
 end_time: "19:30"
 org_name: WV Secretary of State
 who_it_is_for: Registered voters in West Virginia. The deadline to register for this election has passed.
-what_to_do: Polls are open from 6:30 a.m. to 7:30 p.m. Look up your polling place on the Secretary of State's search page. Questions go to the Monongalia County Clerk at 304-291-7230.
+what_to_do: Polls are open from 6:30 a.m. to 7:30 p.m. Look up your polling place on the Secretary of State's search page. Questions go to the Monongalia County Clerk at 304-291-7230. Mountain Line says rides are free on all local routes on Election Day (not the Grey Line).
 url: https://apps.sos.wv.gov/Elections/Voter/FindMyPollingPlace
 phone: 304-291-7230
 phone_label: the Monongalia County Clerk
@@ -18,4 +18,6 @@ sources:
   - url: https://ovr.sos.wv.gov/
     checked: 2026-10-30
   - url: https://monongaliacountyclerk.com/index.php/voter-registration
+    checked: 2026-10-30
+  - url: https://www.busride.org/free-rides-for-election-day
     checked: 2026-10-30

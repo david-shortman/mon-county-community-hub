@@ -37,7 +37,7 @@ steps:
   bus:
     when: today
     resource: mountain-line-fares
-    text: Look up your route on Mountain Line's trip planner, then wave the bus down along the route. Have your fare ready, or swipe your WVU ID.
+    text: Look up your route and times on Mountain Line's trip planner. Have your fare ready, or swipe your WVU ID.
     action: Check fares
 situations:
   - id: moving

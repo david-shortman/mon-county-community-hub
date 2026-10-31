@@ -1,0 +1,55 @@
+# The health department's bake sale requirements (#954, part of #393), from
+# the "Bake Sale Application" PDF linked on its Environmental Health page
+# (read 2026-10-31). The five requirements are quoted. The PDF names one
+# staff member's email; it is left out, and the department's own address,
+# phone and fax (printed on the form) are used instead.
+slug: monchd-bake-sale
+title: Bake Sale Requirements
+publisher: Monongalia County Health Department
+found_on: https://www.monchd.org/departments-programs/environmental-health
+intro: The Monongalia County Health Department lists five requirements for a bake sale. Here they are in its own words.
+recheck_days: 180
+sources:
+  - url: https://cdn.sanity.io/files/95aan9ec/production/76c3da15762d66202a5744101dba30a08392c2aa.pdf
+    name: Monongalia County Health Department
+    checked: 2026-10-31
+  - url: https://www.monchd.org/departments-programs/environmental-health
+    checked: 2026-10-31
+sections:
+  - heading: Register each bake sale
+    id: register
+    items:
+      - "\"Sponsor of bake sale is required to register with the local Health Department for each event.\""
+      - "The form says to return it to the health department at 453 Van Voorhis Rd, Morgantown, WV 26505, or fax it to 304-598-5122. It also gives an email address for one staff member; see the PDF."
+      - "Questions: the form lists the phone number 304-598-5131."
+  - heading: What you can sell
+    id: foods
+    items:
+      - name: "Allowed"
+        lines: ["\"cakes, cookies, fruit pies, candies, plan [plain] pepperoni rolls, yeast, nut, or fruit breads, muffins, or rolls\""]
+      - name: "Not allowed"
+        lines: ["Foods that must be kept hot or cold to be safe. The form calls them \"Time/Temperature Control for Food Safety foods (TCS)\" and says they \"include pepperoni rolls with cheese, sauce, or other toppings, cream, custard, or meringue pies, and cream filled products.\""]
+      - "Other foods: \"Additional non-Time/Temperature Control for Food Safety foods may be allowed with the approval of the local Health Department Sanitarian.\""
+  - heading: Wrap it before the sale
+    id: wrap
+    items:
+      - "\"Foods are to be pre-wrapped in the portions that will be offered for sale to the public. Portions should be wrapped in see-through wrap or baggies.\""
+      - "\"Slicing, wrapping, or exposing foods at the sale or distribution site is prohibited.\""
+  - heading: Who should bake
+    id: training
+    items:
+      - "\"menu items should be prepared and wrapped by individuals that have attended our Food Worker's Training Course.\""
+  - heading: Put up the sign
+    id: sign
+    items:
+      - "\"A clearly visible placard is required at the sales or service location stating that the food is prepared in a kitchen that is not subject to regulation and inspection by the Monongalia County Health Department or any other regulatory authority.\""
+      - "The form includes a sign you can print. It reads: \"These bake sale products were prepared in a private kitchen that is not regulated and inspected by the Monongalia County Health Department.\""
+  - heading: The form
+    id: form
+    items:
+      - name: "Bake Sale Application"
+        lines: ["Two pages: the requirements and a registration form, then the sign to print."]
+        links:
+          - label: "Bake Sale Application (PDF)"
+            url: https://cdn.sanity.io/files/95aan9ec/production/76c3da15762d66202a5744101dba30a08392c2aa.pdf
+            saved: "October 15, 2025"
