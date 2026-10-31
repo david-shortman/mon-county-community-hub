@@ -1,9 +1,12 @@
 import { loadPlaces } from '../lib/places.mjs';
+import { ROLES } from '../lib/helper-roles.mjs';
 
 export function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const u = (p) => new URL(`${base}${p}`, site).href;
   // One line per community center page (#463), built from content/places.
+  // One line per helper role card (#404).
+  const roleCards = ROLES.map((r) => `- [Card for ${r.name.toLowerCase()}](${u(`/for/helpers/${r.slug}/`)}): ${r.situations.map((s) => s.hears.toLowerCase()).join('; ')}, with first steps`).join('\n');
   const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
 
@@ -58,6 +61,8 @@ ${centers}
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
 - [Make a list for someone](${u('/make-a-list/')}): a helper picks up to 6 places and adds a note, then prints or texts a one-page list; picks live only in the web address
+- [Cards for helpers](${u('/for/helpers/')}): one-page cards for teachers, pastors, librarians, nurses, landlords and bus drivers: if someone tells you about a problem, the first steps with local numbers
+${roleCards}
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
 - [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
 - [Serve on a city board](${u('/make-it-better/boards/')}): city boards that shape how Morgantown looks and feels (Urban Landscape Commission, Tree Board, Cultural Arts, Historic Landmarks, Planning, and more), what each does, when it meets, open seats from the city's vacancy list, and how to apply
