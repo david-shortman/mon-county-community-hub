@@ -11,6 +11,8 @@ export const page = { door: "this-month", topic: "money", label: "Help paying a 
 // source and checked date sit right under it (#135).
 const monPower = resource('mon-power-payment-help');
 const mub = resource('mub-customer-service');
+// The "This season" line shows the record's own what_to_do, so new season
+// dates reach the page when the record changes (#1046).
 const lieap = resource('lieap-heating-help');
 const emergency = resource('wv-emergency-assistance-utility');
 const def = resource('dollar-energy-fund-mon-power');
@@ -51,7 +53,7 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Eligibility depends on household income, household size and whether you pay for your own heat. The maximum benefit last season was $2,000 per household.</p>
   <ul>
     <li><strong>Last season (2026):</strong> applications were mailed starting January 5 to households that got LIEAP the season before, older adults and people with disabilities. For them, the last day was Friday, January 30, or sooner if money ran out. Everyone else could apply starting February 2.</li>
-    <li><strong>This season:</strong> we could not find 2026-27 dates yet. Season dates are not guessed here, so check the DoHS site or call <a href={telHref(lieap.contact.phone)}>{lieap.contact.phone}</a>.</li>
+    <li><strong>This season:</strong> {lieap.what_to_do}</li>
     <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel (like propane or oil). Do not mail the form to your utility.</li>
     <li><strong>Emergency help:</strong> Mon Power's page says LIEAP includes one emergency payment per heating season. It can stop a shutoff or turn service back on. It is for customers who got a termination notice (a notice that service will be shut off) after they qualified for LIEAP.</li>
   </ul>
