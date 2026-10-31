@@ -110,6 +110,7 @@ ${centers}
 - [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [needs register](${u('/api/v1/needs.json')}), [gathering places](${u('/api/v1/places.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
 - [When plans and budgets get decided](${u('/make-it-better/when-it-gets-decided/')}): Morgantown's budget year, the March levy window in state law, the 2027-2031 capital plan lines for Mosaic, a downtown master plan and wayfinding, the comprehensive plan, and how to comment
 - [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; with years and sources
+- [What people here need most](${u('/needs/')}): the needs register, a ranked list of the hardest problems people in Mon County face (food, health care costs, housing, utility bills, mental health and more), each with how many people it affects, its sources, and the local groups working on it
 
 ## Notes for AI tools
 

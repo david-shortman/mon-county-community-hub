@@ -1,0 +1,42 @@
+title: People without a place to sleep
+slug: homelessness
+summary: The most recent count found about 150 people without housing in the Morgantown area. The Grace Shelter has 21 beds. Homelessness was named a top quality of life problem in a 2025 hospital survey.
+evidence:
+  - url: https://wvmetronews.com/2026/07/26/morgantown-warming-shelter-planning-gets-off-to-early-start/
+    checked: 2026-10-31
+    shows: MetroNews reported that the most recent point in time count found about 150 people without housing in the Morgantown area, and that the Grace Shelter, run by Catholic Charities, has 21 beds after dropping from 28 in 2024. The article does not say the year of the count.
+    figure: "about 150 people; 21 beds at the Grace Shelter"
+    data_date: July 2026 report
+    publisher: MetroNews
+  - url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    checked: 2026-10-31
+    shows: Homelessness was the third most named quality of life problem in the 2025 community survey (page 23).
+    figure: "25% of respondents"
+    data_date: "2025"
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: Homelessness and housing was the top concern people wrote in on the health department's 2025 survey (page 55 of the PDF).
+    data_date: "2025"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+affected:
+  count: 150
+  description: People without housing in the Morgantown area in the most recent point in time count, as reported by MetroNews. One-night counts usually miss people staying with others.
+  url: https://wvmetronews.com/2026/07/26/morgantown-warming-shelter-planning-gets-off-to-early-start/
+  checked: 2026-10-31
+severity: high
+severity_why: Sleeping outside in a West Virginia winter can be deadly.
+trend: unknown
+working_on:
+  - org: catholic-charities-west-virginia
+  - org: city-of-morgantown
+  - org: monongalia-county-commission
+  - org: west-virginia-211
+gaps:
+  - Whether the winter warming shelter is open, and where, changes from year to year (issues 219 and 863).
+  - We could not find the official count report itself, so the number and its year rest on a news report.
+topics: [housing]
+rank: 9
+rank_why: "Score 9 of 12: severity 3, reach 1 (about 150 people), agreement 3, room to help 2. First among the 9s because it is the most severe."
+questions: [q26]
+issues: [59, 219, 863, 944]
