@@ -23,6 +23,8 @@ const src = {
   ch10: imm('Chapter 10, section 10.4.2'),
   snapForm: { url: 'https://bfa.wv.gov/media/40007/download?inline', checked, name: 'WV DoHS SNAP application, form DFA-SNAP-1, Rev. 7/26' },
   path: { url: 'https://www.wvpath.wv.gov/', checked: '2026-10-29' },
+  messages: { url: 'https://learning-public.wvpath.wv.gov/SubmitanApplication.html', checked: '2026-10-29', name: 'WV PATH help: Submit an Application' },
+  faq: { url: 'https://bfa.wv.gov/frequently-asked-questions-faq', checked, name: 'WV DoHS Bureau for Family Assistance FAQ' },
 };
 const office = resource('monongalia-county-dohs-office');
 const legal = resource('legal-aid-wv-civil-legal-help');
@@ -100,15 +102,16 @@ const ok = (r) => r && !r.hidden;
 
   <h2 id="status">Check where things stand</h2>
   <p>On WV PATH, sign in and check My Messages. You can also call DoHS customer service at <a href="tel:18777161212">1-877-716-1212</a>, Monday to Friday, 8 a.m. to 5 p.m., or call or visit the Mon County office.</p>
-  <SourceLine sources={[src.path]} org={ORG} about="checking your SNAP status" />
+  <SourceLine sources={[src.messages, src.faq]} org={ORG} about="checking your SNAP status" />
   {ok(office) && <ResourceCard r={office} />}
 
   <h2 id="hearing">If you are denied, cut or cut off</h2>
   <p>You can ask for a <strong>Pre-Hearing Conference</strong> (an informal meeting with your worker and a supervisor), a <strong>Fair Hearing</strong> (before a State Hearings Officer), or both. The state's form says you can ask "either orally or in writing."</p>
   <ul>
     <li><strong>The deadline is 90 days.</strong> The form says "you may ask for a Fair Hearing or Pre-Hearing Conference within 90 days of the effective date of the actions."</li>
-    <li><strong>To keep your SNAP the same while you wait,</strong> ask before the date of the cut or closure on your DFA-NL-C letter. The form says then "your benefits will not be reduced or stopped, pending a final decision." If the state wins, the manual says you may have to pay back the extra. You can check a box on the form to say you do not want benefits to continue.</li>
-    <li><strong>Not continued in some cases.</strong> The form says benefits are not continued "even if you request it" when the cut comes from a SNAP review, a mass change like the yearly Social Security increase, or a form you signed giving up advance notice. A hearing is still held.</li>
+    <li><strong>To keep your SNAP the same while you wait,</strong> ask before the date of the cut or closure on your DFA-NL-C letter. The form says then "your benefits will not be reduced or stopped, pending a final decision."</li>
+    <li><strong>If the state wins,</strong> the manual says you may have to pay back the extra. You can check a box on the form if you do not want benefits to continue.</li>
+    <li><strong>Not continued in some cases.</strong> The form says benefits are not continued "even if you request it" in three cases. These are a cut from a SNAP review, a change for everyone like the yearly Social Security increase, or a form you signed giving up advance notice. A hearing is still held.</li>
     <li><strong>How to ask.</strong> Fill out the DFA-FH-1 that came with your letter and return it to your local DoHS office, or ask out loud. You can ask for the hearing by phone, and for a copy of the manual section your decision used.</li>
     <li><strong>You can bring someone.</strong> The form says a friend, relative, lawyer "or any other person" can help or speak for you. DoHS does not pay for a lawyer, but free legal help is below.</li>
     <li><strong>Getting there.</strong> The form says your case worker will help arrange a ride if you ask, and will help you prepare. Call DoHS Client Services at <a href="tel:18006428589">1-800-642-8589</a>.</li>
@@ -127,7 +130,7 @@ const ok = (r) => r && !r.hidden;
   </ul>
   <p><strong>Report by the 10th.</strong> "These changes must be reported no later than the 10th calendar day of the month following the month in which the change occurs." You do not have to report the yearly cost-of-living raise in Social Security, SSI or VA checks.</p>
   <p>You can still report other changes, like a lower income or a new person in your home. The manual says DoHS must act on any change you report. Report on WV PATH or at 1-877-716-1212.</p>
-  <SourceLine sources={[src.ch10, src.path]} org={ORG} about="what to report" />
+  <SourceLine sources={[src.ch10, src.faq]} org={ORG} about="what to report" />
 
   <h2 id="renew">Renewing</h2>
   <ul>
@@ -135,7 +138,7 @@ const ok = (r) => r && !r.hidden;
     <li><strong>The renewal form comes by mail</strong> "in the month prior to the last month of certification." Return it before the interview date printed on it, or renew on WV PATH.</li>
     <li><strong>A renewal needs an interview,</strong> usually by phone. If your appointment is after the 15th of the month, the manual says you can ask for one on the 15th or earlier.</li>
     <li><strong>On time keeps SNAP coming.</strong> If you turn in the form on time, do the interview and send proof by the due date, the manual says you "must receive uninterrupted benefits."</li>
-    <li><strong>If you miss the end date,</strong> SNAP stops. If you turn in the renewal form during the next month, it counts as a new application, so you do not need a new one, but benefits count only from the day DoHS gets it.</li>
+    <li><strong>If you miss the end date,</strong> SNAP stops. You can still turn in the renewal form during the next month. It then counts as your application, so you do not need a new one. Benefits count only from the day DoHS gets it.</li>
   </ul>
   <SourceLine sources={[src.ch1]} org={ORG} about="renewing SNAP" />
 
