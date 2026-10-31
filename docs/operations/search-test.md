@@ -8,7 +8,7 @@ It costs nothing: it runs in Node on the index the build already makes, with no 
 
 - **The queries:** [`content/findability/search-queries.yaml`](../../content/findability/search-queries.yaml). About 250 searches, each with the page or pages that answer it. They are plain words and slang ("food stamps", "shut off notice", "dentist cheap"), short forms ("EBT", "LIEAP", "DMV"), common misspellings ("medicade", "narcain") and full questions, many from the [findability question set](../../content/findability/questions.yaml).
 - **A hit** is a query whose expected page is in the **top 3** results. The score is hits out of all queries, also broken out by kind (everyday, short, misspelled, question), plus how many queries got no results at all.
-- **The same code as the page.** The test runs each query through [`site/src/lib/search-plan.mjs`](../../site/src/lib/search-plan.mjs), the code the search page is switching to (until that follow-up PR lands, the page searches the raw words, which `--plain` measures): fix common misspellings, drop question words, then search. If no page has every word, it searches each word and puts pages that match the most words first.
+- **The same code as the page.** The test runs each query through [`site/src/lib/search-plan.mjs`](../../site/src/lib/search-plan.mjs), the same code the search page uses: fix common misspellings, drop question words, then search. If no page has every word, it searches each word and puts pages that match the most words first.
 
 The queries are written by us. The site never logs, counts or stores what visitors search for (see the [privacy page](../../site/src/pages/privacy.astro)), and this test does not change that.
 
@@ -40,11 +40,15 @@ Dated results go in [`content/findability/search-runs/`](../../content/findabili
 Work through the misses (`--show-misses`) and pick the fix that also helps someone reading the page:
 
 1. **The page never uses the word people search for.** Add a short entry to [`content/also-called.yaml`](../../content/also-called.yaml). It shows a visible "Also called: ..." line at the end of the page, weighted like a page title in search. Only add words for what the page really covers. Never hide text for search.
-2. **A misspelling or run-together word.** Add it to `SPELLING` in `site/src/lib/search-plan.mjs`. The search page says "Showing results for ..." so the fix is never silent.
-3. **The right page is there but lower.** Usually a page with many repeated listings is crowding it out. Mark repeated parts with `data-pagefind-ignore` (the "Also check" links and the Make a list place list already are). Do not ignore a page's own content.
+2. **A misspelling or run-together word.** Add it to `SPELLING` in `site/src/lib/search-plan.mjs`. The search page says "we fixed the spelling of ..." so the fix is never silent.
+3. **The right page is there but lower.** Usually a page with many repeated listings is crowding it out. Mark repeated parts with `data-pagefind-ignore` (the "Also check" links, the Make a list place list and the lists on printable sheets already are). Do not ignore a page's own content.
 4. **No page answers it.** That is a content gap, not a search problem. Open an issue, or leave the miss in the report as a reminder.
 5. **The expected page was wrong.** Fix the query's `expect` list, and say why in the PR.
 
 Tuning Pagefind's ranking settings (`termFrequency`, `pageLength`, `termSaturation`) was tried on 2026-11-01. No setting moved the score by more than one query, so the defaults stay.
 
 Changes to `content/also-called.yaml` for pages about shelter, crisis help, food or benefits wait for David, like any change to what those pages show ([`docs/COORDINATION.md`](../COORDINATION.md)).
+
+## When nothing matches
+
+The search page shows a short "Try this" box: use one or two plain words, the Help now page, 211 (call, or text your ZIP code to 898-211, from `content/resources/wv-211.yaml`), and all topics, above the door buttons.

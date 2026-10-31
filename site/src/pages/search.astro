@@ -2,24 +2,43 @@
 // Search runs on the phone with Pagefind: the index is built with the site.
 // The search box puts the words after "#" (never sent to the host). An old
 // ?q= link still works. Without scripts, the page lists every need instead.
+// The words go through src/lib/search-plan.mjs first (#529): spelling fixes,
+// question words dropped, and pages with most of the words when none has all.
+// `npm run search-test` scores this same code (docs/operations/search-test.md).
 import Base from '../layouts/Base.astro';
 import SearchBox from '../components/SearchBox.astro';
 import DoorCards from '../components/DoorCards.astro';
+import { resource, loadDoors } from '../lib/content.mjs';
+import { inlineSource } from '../lib/search-plan.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const r211 = resource('wv-211');
+const helpNow = loadDoors().bySlug['help-now'].page;
+const planScript = inlineSource();
 ---
 <Base searchable={false} title="Search Mon County help" description="Search plain-language help pages for Morgantown and Monongalia County, WV. The search runs on your phone, and we never collect what you search for.">
   <h1>Search</h1>
   <SearchBox id="search-q" />
   <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
   <ol id="search-results" class="search-results" hidden></ol>
+  <div id="search-none" class="note" hidden>
+    <p><strong>Try this:</strong></p>
+    <ul>
+      <li>Use one or two plain words, like <em>rent</em>, <em>food</em> or <em>dentist</em>.</li>
+      <li>Need a bed, food or safety tonight? See <a href={`${base}${helpNow}`}>Help now</a>.</li>
+      <li>Call <a href={`tel:${r211.contact.phone}`}>{r211.contact.phone}</a> or text your ZIP code to {r211.contact.text}. A person will point you to local help. {r211.hours}.</li>
+      <li>See <a href={`${base}/topics/`}>all topics</a>, or pick what is going on below.</li>
+    </ul>
+  </div>
   <noscript><p>Search needs JavaScript, which is off on this browser. Pick what is going on below, see <a href={`${base}/topics/`}>all topics</a>, or call or text 211.</p></noscript>
   <DoorCards heading="Or pick what is going on" id="browse" />
   <p class="meta">The search runs on your phone. Your words are never sent to us or to the site’s host, and we never store them. Like any visit, the host can see which files your phone loads, including the search files for the pages that match.</p>
+  <script is:inline set:html={planScript}></script>
   <script is:inline define:vars={{ base }}>
     (function () {
       var input = document.getElementById('search-q');
       var status = document.getElementById('search-status');
       var list = document.getElementById('search-results');
+      var none = document.getElementById('search-none');
       var pagefind;
       function current() {
         var h = location.hash.match(/^#q=(.*)$/);
@@ -32,14 +51,18 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       }
       function run(q) {
         input.value = q;
-        list.hidden = true; list.innerHTML = '';
+        list.hidden = true; list.innerHTML = ''; none.hidden = true;
         if (!q.trim()) { status.textContent = ''; return; }
         status.textContent = 'Searching…';
         load().then(function (pf) {
-          return pf.search(q).then(function (res) { return Promise.all(res.results.slice(0, 10).map(function (r) { return r.data(); })); });
-        }).then(function (items) {
+          return searchPlan(pf, q, SEARCH_SPELLING, SEARCH_STOP, planWords).then(function (res) {
+            return Promise.all(res.results.slice(0, 10).map(function (r) { return r.data(); })).then(function (items) { return { items: items, res: res }; });
+          });
+        }).then(function (out) {
+          var items = out.items, res = out.res;
           if (!items.length) {
-            status.textContent = 'No pages match "' + q + '". Try fewer words, pick from the list below, or call or text 211.';
+            status.textContent = 'No pages match "' + q + '".';
+            none.hidden = false;
             return;
           }
           items.forEach(function (d) {
@@ -51,7 +74,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             li.append(a, p); list.append(li);
           });
           list.hidden = false;
-          status.textContent = items.length + (items.length === 1 ? ' page matches "' : ' pages match "') + q + '".';
+          var said = res.fixed ? '"' + res.searched + '" (we fixed the spelling of "' + q + '")' : '"' + q + '"';
+          status.textContent = res.loose
+            ? 'No page has all of ' + said + '. These pages have some of the words.'
+            : items.length + (items.length === 1 ? ' page matches ' : ' pages match ') + said + '.';
         }).catch(function () {
           status.textContent = 'Search could not load. Pick from the list below, or call or text 211.';
         });
