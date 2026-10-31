@@ -1,0 +1,88 @@
+# The WV DMV's accessible parking placard form (DMV-41-TR, "Parking
+# Application for a Mobility Impaired Person"), as short lists (part of #393).
+# Read 2026-10-31 from the DMV's "Person With a Disability" page. The text
+# layer drops a few words, so the form was also read as an image at 200 dpi.
+# Rules and fees are quoted. Two facts the form does not print (how long a
+# permanent placard lasts, and the ID card) come from the state law the form
+# names, WV Code 17C-13-6.
+slug: wvdmv-accessible-parking
+title: "DMV-41-TR: Parking Application for a Mobility Impaired Person"
+publisher: West Virginia Division of Motor Vehicles
+pdf: https://webapps.transportation.wv.gov/TWS/WVDOTDocumentStorageMigration/PDF/Transportation/dmv/dmvformsearch/dmv-41-tr-wf.pdf
+pdf_date: "Rev. 06/2023"
+found_on: https://dmv.wv.gov/driver-services/person-disability
+intro: The form is two pages. You fill out the top, a medical provider fills out the bottom, and you mail it to the DMV. The parts in quotes are the form's own words.
+recheck_days: 180
+sources:
+  - url: https://webapps.transportation.wv.gov/TWS/WVDOTDocumentStorageMigration/PDF/Transportation/dmv/dmvformsearch/dmv-41-tr-wf.pdf
+    name: West Virginia Division of Motor Vehicles
+    checked: 2026-10-31
+  - url: https://dmv.wv.gov/driver-services/person-disability
+    checked: 2026-10-31
+  - url: https://code.wvlegislature.gov/17C-13-6/
+    name: WV Code 17C-13-6
+    checked: 2026-10-31
+sections:
+  - heading: Who can get one
+    id: who
+    note: "The form says: \"ALL APPLICANTS MUST BE WEST VIRGINIA RESIDENTS\". A medical provider checks the box for at least one of these, in the form's words:"
+    items:
+      - "\"Patient cannot walk 200 feet without stopping to rest.\""
+      - "\"Patient cannot walk without the use of or assistance from a brace, cane, crutch, another person, prosthetic device, wheelchair or other assisted device.\""
+      - "Serious lung disease, shown by a breathing or blood oxygen test. The form says: \"Patient is restricted by lung disease to such an extent the person's forced (respiratory) expiratory volume for one second, when measured by spirometry, is less than one liter, or the arterial oxygen tension is less than 60mm/hg on room air at rest.\""
+      - "\"Patient uses portable oxygen.\""
+      - "A serious heart condition. The form says: \"Patient has a cardiac condition to the extent that their functional limitations are classified in severity as Class III or Class IV according to standards set by The American Heart Association.\""
+      - "\"Patient is severely limited in their ability to walk due to arthritic, neurological, or orthopedic condition.\""
+  - heading: Permanent or temporary
+    id: how-long
+    items:
+      - name: Permanent
+        lines: ["For a condition \"Expected to last the duration of the applicant's life.\" State law says permanent placards \"are valid for the duration of the applicant's life.\""]
+      - name: Temporary
+        lines: ["The form says \"Valid up to Six Months\", for a condition \"Of limited duration and expected to improve during the applicant's life.\""]
+  - heading: How to fill it out
+    id: steps
+    note: "The form's steps, in its words:"
+    items:
+      - "1. \"The mobility impaired person MUST enter their Social Security Number in the light gray box on the upper right corner of the page. DO NOT write in the black box below the SSN field, it is for DMV use only.\""
+      - "2. \"The mobility impaired person completes Section 1 and signs the application.\" A parent or legal guardian may sign if the person cannot."
+      - "3. \"A licensed physician completes Section 2. (Licensed physician includes MD., DO., Chiropractor, Advanced Nurse Practitioner, and Physician's Assistant)\""
+      - "4. \"Applicants requesting a mobility impaired license plate must be listed on the registration of the vehicle listed in Sub-Section C.\" Sub-Section C (vehicle and insurance) is only needed for a plate, not a placard."
+      - "The form warns: \"COMPLETE ALL OF PART II. FAILURE TO DO SO WILL RESULT IN THIS FORM BEING RETURNED TO THE SENDER FOR COMPLETION.\""
+  - heading: Where to send it
+    id: send
+    items:
+      - name: Mail to
+        lines: ["Mobility Impaired Placards & Plates, PO Box 17030, Charleston, WV 25317"]
+      - name: Questions
+        lines: ["1-800-642-9066"]
+      - name: Cost
+        lines: ["The form does not list a fee for a first placard. A license plate needs the vehicle's regular registration fee (WV Code 17C-13-6)."]
+  - heading: Using the placard
+    id: using
+    items:
+      - "\"When parked in a mobility impaired parking space, display the placard by hanging it on the rearview mirror, or, in the absence of a mirror post, on the dashboard.\""
+      - "\"Placard should be hung from the rearview mirror when parked but should be removed from the mirror when driving.\""
+      - "\"The mobility impaired person does not have to own or drive the vehicle to use the placard.\""
+      - "\"It is unlawful to loan this placard to any person for any reason, regardless of whether that person is mobility impaired.\""
+      - "State law says the DMV also gives you an identification card, and you must carry it \"whenever parking in an accessible parking space.\""
+  - heading: Lost, stolen or damaged
+    id: replace
+    items:
+      - "\"a replacement may be requested at any DMV Regional Office or by mail to the DMV in Charleston. The cost of a replacement placard is $5.00 per. The customer must complete a new application but a doctor's recertification is not required.\""
+  - heading: When to give it back
+    id: return
+    note: "The form lists these \"Situations that Warrant Returning Placards & Plates\":"
+    items:
+      - "\"The person to whom the permit has been issued is deceased or has moved out of state.\""
+      - "\"The person has found or has in his/her possession a permit that was not issued to that person.\""
+      - "\"The permit was reported lost or stolen and is later found after a duplicate has been issued.\""
+  - heading: The form
+    id: form
+    items:
+      - name: "Parking Application for a Mobility Impaired Person (DMV-41-TR)"
+        lines: ["Page 1 is the application. Page 2 has the instructions and placard rules."]
+        links:
+          - label: "DMV-41-TR form (PDF)"
+            url: https://webapps.transportation.wv.gov/TWS/WVDOTDocumentStorageMigration/PDF/Transportation/dmv/dmvformsearch/dmv-41-tr-wf.pdf
+            date: "Rev. 06/2023"
