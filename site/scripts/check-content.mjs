@@ -184,13 +184,24 @@ for (const s of secondhand) {
 
 // Boards (content/boards/<slug>.yaml): city boards and commissions for the
 // Serve on a board page (#290). Open seats come from the city's vacancy list.
-const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'url', 'topics', 'sources'];
+const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'created', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'url', 'topics', 'sources'];
 const boards = loadDir('boards');
 for (const b of boards) {
   const where = b._file;
   // `section: other` boards are listed by name only, from the vacancy list.
-  checkRecord(b, b.section === 'other' ? ['name', 'slug', 'org', 'open_seats', 'open_note', 'url', 'topics'] : ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'], BOARD_FIELDS);
-  if (b.section != null && b.section !== 'other') errors.push(`${where}: section must be other, or left out`);
+  // `section: county` boards come from the county's list, which gives no seat counts.
+  const required = {
+    other: ['name', 'slug', 'org', 'open_seats', 'open_note', 'url', 'topics'],
+    county: ['name', 'slug', 'org', 'created', 'meets', 'url', 'topics'],
+  }[b.section] ?? ['name', 'slug', 'org', 'decides', 'meets', 'open_seats', 'url', 'topics'];
+  checkRecord(b, required, BOARD_FIELDS);
+  // The note's numbers ("1 seat and 2 alternate seats") add up to open_seats (#856).
+  if (b.open_note != null) {
+    const sum = (String(b.open_note).match(/\d+/g) ?? []).reduce((n, d) => n + Number(d), 0);
+    if (sum !== b.open_seats) errors.push(`${where}: open_note adds up to ${sum} seats but open_seats is ${b.open_seats}`);
+  }
+  if (b.who_can_serve != null && !/\.$/.test(String(b.who_can_serve).trim())) errors.push(`${where}: who_can_serve should end with a period`);
+  if (b.section != null && !['other', 'county'].includes(b.section)) errors.push(`${where}: section must be other or county, or left out`);
   if (b.org && !orgSlugs.has(b.org)) errors.push(`${where}: org ${b.org} has no file in content/orgs/`);
   if (b.url != null && !isUrl(b.url)) errors.push(`${where}: url is not a web link`);
   for (const k of ['open_seats', 'page_vacant']) if (b[k] != null && !(Number.isInteger(b[k]) && b[k] >= 0)) errors.push(`${where}: ${k} must be a whole number`);
