@@ -58,12 +58,19 @@ opening_hours:          # the same hours, so a card can say "Open now" (#176)
     opens: "07:00"      # quoted, 24-hour, Eastern time
     closes: "15:30"     # "24:00" for midnight; earlier than opens means it closes the next morning
 # opening_hours: always   # open 24 hours, every day
+closed_on: [thanksgiving, christmas]  # optional (#726); holidays the source names: new-years-day, memorial-day, independence-day, labor-day, thanksgiving, christmas
 get_in: walk-in         # walk-in | appointment | call-first
 languages: [Spanish]    # languages the source says staff speak or interpret
 access: Step-free entrance on the Main Street side.  # only what the source says
+meetings:               # optional (#902); regular meetings in the source's words
+  - name: Evansdale Neighborhood Association
+    when: First Wednesday of the month at 6:30 p.m. in Percival Hall.
+steps:                  # optional (#822); what to do as a short numbered list
+  - Make a free account on the site.
+  - Upload your resume.
 ```
 
-`opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+`steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
 
 ### Town and neighborhood (#395)
 
@@ -124,6 +131,10 @@ Live feeds wired in now:
 | Mountaineer Food Bank pantry calendar | Mobile pantries the food bank files under Monongalia County | `https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county` |
 | Monongalia County calendar | Parks and recreation events and election days. Repeating events (like the weekly Commission meeting) are left out because we do not expand repeat rules, and we never guess a date | The JSON behind `https://www.monongaliacounty.gov/calendar.php` |
 | Morgantown Public Library System calendar | One-time events and closures at every branch. Programs the feed repeats 3 or more times (weekly storytimes, clubs) are left out so they do not bury the dates page. Staff names in the feed are never read | `https://events.mympls.org/ical_subscribe.php?src=p&cid=17544` |
+| Monongalia Arts Center calendar | Classes, workshops, concerts and markets. Cards send people to the center's site for cost. A repeating event shows only the date the feed gives | The public Google Calendar on `https://www.monartscenter.com/` |
+| Morgantown Farmers Market calendar | Market days only, not the market's old social media reminders. A repeating market shows only its first date, with a note to check for later dates | The market's public Google Calendar (`morgantownfarmersmarket@gmail.com`) |
+| Mylan Park events calendar | Every event the park lists, including outside groups' shows, meets and markets. Cards send people to the event page for tickets and cost | `https://mylanpark.org/wp-json/tribe/events/v1/events` |
+| Friends of Deckers Creek events | Every event in the feed (mostly creek and trail cleanups, a few a year) | `https://deckerscreek.org/events.ics` |
 
 Not wired in: WVU's events calendar (`www.events.wvu.edu`) answers our requests with 403 Forbidden (checked 2026-10-30), so it stays out until WVU publishes a feed we may read. We never work around a block (#107).
 
@@ -146,7 +157,7 @@ The build never fails because of a feed. It logs a warning and uses the last goo
    - `parse(raw)`: returns entries with `title`, `slug`, `starts`, `ends`, `org_name`, `who_it_is_for`, `what_to_do`, `url`, `topics`. The loader adds `sources` and the fetched time.
 3. For iCal, use `parseIcs` and `readIcsDate` from `site/src/lib/feeds/ical.mjs`. Clean text with `plain()` from `util.mjs` (it strips HTML and em dashes).
 4. Start each slug with a prefix for the source and end it with the date, so slugs stay unique and stable.
-5. Add the adapter to `ADAPTERS` in `site/src/lib/feeds/index.mjs`, run `npm run update-feeds`, `npm run check-content`, and `npm run build`, and commit the new snapshot.
+5. The site finds every file in `adapters/` on its own (#71), so there is no list to edit. Run `npm run update-feeds`, `npm run check-content`, and `npm run build`, and commit the new snapshot.
 6. Add a row to the table above.
 
 ## `corrections/<date>-<short-name>.yaml`: fixes we made
@@ -218,6 +229,26 @@ phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
 - **No private people.** Leave out volunteers' names and personal numbers, even when a center lists one as the rental contact. Say "Call the center" or point to its page instead.
 - **Stale rule.** A place marked `active` whose `last_activity_seen` is over 6 months old shows "No recent activity seen, call first" (#39). A place found only in county lists is `no-recent-activity` from the start.
 - **Dated events** go in `calendar/` with `venue: <place slug>`, so they show on the place's page. Weekly regulars stay in `regular`.
+
+### Groups and free places to sit (#263)
+
+The Find your people page (`/find-your-people/`) uses the same record with two more kinds. The community centers pages leave both out.
+
+- `kind: library`: a library branch, listed as a free place to sit. `regular` holds its open hours in words.
+- `kind: group`: something people can join more than once, like a game night, a run club or a dance. It has no building of its own. Extra fields:
+
+```yaml
+regular: [Second Tuesday of each month, 6 p.m.]  # when it meets, as the source says
+cost: Free                  # as the source says; leave out if not stated
+venue: wiles-hill-community-center  # optional; the place it meets, if it is in places/
+interests: [games, books]   # games | books | crafts | arts | music | dance | theater | outdoors | running | cycling | sports | food | languages | learning | growing | social | service | families | lgbtq | newcomers
+tags: [come-alone, beginners, free, weekly]  # also weekly and growing
+run_by:
+  kind: community-group     # also business, university, community-group
+```
+
+- **Facebook-only groups:** name, the Facebook link and `status: no-recent-activity`, with no times or facts from Facebook (same rule as #459). Never quote members.
+- Tags only when the source supports them: `come-alone` when it says newcomers are welcome or it is a drop-in program, `beginners` when it says no experience needed.
 
 ## `needs/<slug>.yaml`: the needs register
 
@@ -318,6 +349,8 @@ meets: 4th Monday of every month, 3 p.m., Council Chambers
 who_can_serve: City residents.   # optional; only what the source says
 open_seats: 0                    # from the city's vacancy list
 page_vacant: 1                   # optional; vacant seats the board's own page shows, when it differs from the list
+section: other                   # optional; a board listed by name only under "Other city boards with open seats". Needs open_note (like "1 alternate seat") instead of decides and meets
+# section: county                 # a County Commission board from the county's list: needs created and meets, no seat counts
 url: https://www.morgantownwv.gov/264/Tree-Board
 topics: [better]
 sources:
@@ -390,6 +423,7 @@ From these tags the build makes the Topics page (`/topics/`), each door's list o
 - Only public organizational contact details. Never a private person's info.
 - Every entry has at least one source with a `checked` date.
 - Entries older than 6 months since `checked` get flagged for re-verification.
+- On the site, a card says "may be out of date" after 6 months without a check, or after 90 days for Make it better entries (topic `better`, and `boards/`), since seats and grant rounds change faster (#791).
 - Every outside link is checked daily by the source check (`docs/operations/README.md`). If a source should not be fetched by a robot (Facebook, a login page), add a rule to `source-rules.yaml`.
 
 ### Rules for every entry
@@ -459,3 +493,91 @@ phone_confirmed_by: DS        # optional; the caller's initials (orgs and resour
 - `npm run check-content` fails if `phone_confirmed` is not a date or is in the future, or `phone_confirmed_by` is not two or three capital letters.
 
 **The call queue.** `npm run call-queue` in `site/` prints the list of calls to make, oldest first, with the number, why each one is there and what to ask (`--md FILE` writes it to a file). A listing is in it when it has a public phone number and either no source a robot can read (every source is `manual` in `source-rules.yaml`), no recent activity seen (places), or a past phone check. Making the calls waits on David's decision about who calls and from what number (#156).
+
+## `indicators/<slug>.yaml`: how the county is doing
+
+Official numbers for the "How is Mon County doing?" page (`/how-we-are-doing/`, #62), and later the data dashboard (#15). One file per number. Pages render only from these files.
+
+```yaml
+title: Children in poverty
+slug: children-in-poverty
+topic: health              # health | schools | safety
+definition: "Percentage of people under age 18 in poverty."   # the publisher's own definition, word for word
+unit: percent              # percent | number | years. Percents are written as a share: 0.129 for 12.9%
+data_year: "2023"          # the year or span the number covers, as the publisher gives it (quoted)
+release: County Health Rankings 2025
+values:
+  monongalia: 0.129
+  west_virginia: 0.196     # optional comparisons
+  united_states: 0.16
+more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia  # optional; the human page
+sources:
+  - name: County Health Rankings 2025 data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-30
+```
+
+- **Charts and updates (#15).** A file can name its County Health Rankings measure under `chr:` (`measure: v024`, `trend_name: Children in poverty`). `node scripts/update-chr-indicators.mjs --check` in `site/` compares the file with County Health Rankings' public files, and `--write` fills `values`, `data_year` and `history` (Mon County and West Virginia by year, only after the source's last trend break), and sets `checked`. The page draws a chart from `history`. A monthly workflow (`.github/workflows/indicators.yml`) runs the check and opens an issue for Duet when the source changes. No key, no account.
+- **Official sources only**, read in the same session: a government agency or a program that publishes the same data for every county. Never a real estate, "best places" or other commercial site.
+- **Copy the number and its definition exactly.** Never compute a new number (a rank, a change, a per-person rate) the source does not give.
+- **Describe, never judge.** No "good", "bad", "safe" or "failing". The page says what the numbers do and don't tell you.
+
+## `facts/<topic>/<slug>.yaml`: sentences that are not listings
+
+Tier 2 of ADR 0007: a sentence a page needs that is not an org, resource or date (a rule from a county page, a definition, a set-out rule) is a record here, not text typed into the page (#122). Pages show it with the `Fact` component.
+
+```yaml
+slug: tires
+text: "**Tires:** a state tire collection runs monthly in Morgantown, except December, January and February."  # what the page shows; **bold** and [label](link) only
+quote: "The Tire Collection Events are NOT operated in December, January or February."  # the source's exact words
+sources:
+  - url: https://www.monongaliacountyswa.com/tires
+    name: Monongalia County Solid Waste Authority   # optional
+    checked: 2026-10-30   # Morgantown date you read it
+recheck_days: 90         # optional: about 365 for a definition, 180 for a phone, 90 for hours or a schedule, 30 while waiting on a date. Default: 6 months
+phone: "304-376-0036"    # optional; adds a Call button
+place: "4120 Fairmont Rd, Morgantown, WV"  # optional; adds a Directions button
+```
+
+Past `recheck_days` (or 6 months), the page says the fact may be out of date, and the Health check lists it (`facts-due`). Re-read the source: if it still says the same, update `checked`; if not, fix `text` and `quote`.
+
+## `pdf-pages/<slug>.yaml`: a hard-to-read PDF as short lists (#393)
+
+The useful part of a PDF (a fee form, a schedule, a guide) as headings and short lists a phone can show, with the original PDF linked. Pages show a record with the `FromPdf` component. Nothing is a wide table, so nothing squeezes on a phone (#917).
+
+```yaml
+slug: monchd-fees-2026-27
+title: Permit Fees and Fees for Service, Fiscal Year 2026-2027   # the PDF's own title
+publisher: Monongalia County Health Department
+pdf: https://example.org/fees.pdf          # optional when each item links its own PDF
+pdf_date: "Fiscal Year 2026-2027"          # the date printed on the PDF, in its words. Needed with pdf
+found_on: https://example.org/fees         # optional; the official page that links the PDF
+intro: One plain sentence.                 # optional
+recheck_days: 120                          # optional; default 6 months
+sources:
+  - url: https://example.org/fees.pdf
+    checked: 2026-10-31
+sections:
+  - heading: Septic systems                # what residents look for
+    id: septic                             # optional anchor
+    note: The form lists these under "Land Development".   # optional
+    items:
+      - name: Conventional Sewage System Permit             # the PDF's label
+        lines: ["$222"]
+        links:                                              # optional
+          - label: Full schedule (PDF)
+            url: https://example.org/route.pdf
+            date: "Effective August, 2018"                   # needed on a PDF link
+            lang: es                                         # optional; the link's language if not English
+            # saved: "February 16, 2025"                    # instead of date, only when no date is printed: the file's save date
+      - A plain line of text is also an item.
+```
+
+Rules: copy labels, fees, days and times exactly as printed; put the PDF's own words in quotes where you add a word around them. Never reword rules or eligibility. If the PDF is a scan, read it off the page image and say so in a comment at the top of the file. If the PDF disagrees with a newer official page, say who says what, or leave the item off and open a `needs-verification` issue. `npm run check-content` checks the fields, the dates and that every PDF link has its date.
+
+## `watch/<group>.yaml` and `checklists/<id>.yaml`: recurring checks (not listings)
+
+Neither folder shows on the site. Both feed issues for a person, from the daily Source check. See [`docs/operations/recurring-checks.md`](../docs/operations/recurring-checks.md).
+
+- `watch/`: pages a robot reads every day, comparing only the part between `start` and `end` (#166). Optional list fields: `season` (`"11-01 to 03-31"`), `words`, `todo`, `plan`. A change opens or comments on one issue per list. Field notes are at the top of `watch/food.yaml` and `watch/shelter.yaml`.
+- `checklists/`: what a robot cannot read (#752, #718, #793). One standing issue per file, refreshed each week. Item fields: `text`, `url`, `when` (`month` or `quarter`: only in the first week of one), `months` (only in those months), `from` (not before that date), `run` (a computed list: `secondhand-due`, `past-sale-dates`, `better-stale-soon`). Preview with `npm run checklists` in `site/`.

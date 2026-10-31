@@ -1,0 +1,67 @@
+title: People under 65 without health insurance
+slug: uninsured-under-65
+topic: health
+definition: "Percentage of population under age 65 without health insurance." # County Health Rankings' own definition (v085)
+unit: percent
+data_year: "2022"
+release: County Health Rankings 2025
+values:
+  monongalia: 0.0621527087
+  west_virginia: 0.0741239201
+  united_states: 0.0954837794
+sources:
+  - name: County Health Rankings 2025 data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-30
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
+    checked: 2026-10-30
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    checked: 2026-10-30
+more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia # the human page for this county
+chr:
+  # where scripts/update-chr-indicators.mjs reads it
+  measure: v085
+  trend_name: Uninsured
+history:
+  monongalia:
+    - year: "2013"
+      value: 0.16
+    - year: "2014"
+      value: 0.1
+    - year: "2015"
+      value: 0.06
+    - year: "2016"
+      value: 0.07
+    - year: "2017"
+      value: 0.07
+    - year: "2018"
+      value: 0.07
+    - year: "2019"
+      value: 0.07
+    - year: "2020"
+      value: 0.09
+    - year: "2021"
+      value: 0.07
+    - year: "2022"
+      value: 0.06
+  west_virginia:
+    - year: "2013"
+      value: 0.17
+    - year: "2014"
+      value: 0.11
+    - year: "2015"
+      value: 0.07
+    - year: "2016"
+      value: 0.07
+    - year: "2017"
+      value: 0.08
+    - year: "2018"
+      value: 0.08
+    - year: "2019"
+      value: 0.08
+    - year: "2020"
+      value: 0.08
+    - year: "2021"
+      value: 0.08
+    - year: "2022"
+      value: 0.07

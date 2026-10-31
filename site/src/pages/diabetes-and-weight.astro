@@ -11,10 +11,10 @@ const r = (slug) => all.find((e) => e.slug === slug);
 ---
 <Base title="Diabetes, blood pressure or weight help in Morgantown and Mon County" description="Low cost help managing diabetes, blood pressure or weight in Morgantown and Monongalia County: health department dietitians with a sliding fee, and free diabetes and heart clinics for Health Right patients.">
   <h1>Diabetes, blood pressure or weight: help managing it</h1>
-  <p class="lede">The Monongalia County Health Department has dietitians who help with diabetes, weight and heart health, with a sliding fee if you have no insurance. Low income and no insurance? Health Right's free clinic holds diabetes and heart clinics for its patients.</p>
+  <p class="lede">The Monongalia County Health Department has dietitians who help with diabetes, weight and heart health, with a sliding fee if you have no insurance. No insurance, or not enough? Health Right is a free clinic for West Virginians with low income, and it also takes Medicaid. Its patients can join its diabetes and heart clinics.</p>
 
-  {r('monchd-nutrition-counseling') && <ResourceCard r={r('monchd-nutrition-counseling')} showCost />}
-  {r('health-right-specialty-clinics') && <ResourceCard r={r('health-right-specialty-clinics')} />}
+  {r('monchd-nutrition-counseling') && <ResourceCard r={r('monchd-nutrition-counseling')} headingLevel={2} showCost />}
+  {r('health-right-specialty-clinics') && <ResourceCard r={r('health-right-specialty-clinics')} headingLevel={2} />}
 
   <h2>Also check</h2>
   <ul>

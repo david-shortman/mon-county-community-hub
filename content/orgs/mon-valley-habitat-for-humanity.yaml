@@ -1,0 +1,10 @@
+name: Mon Valley Habitat for Humanity
+slug: mon-valley-habitat-for-humanity
+kind: nonprofit
+website: https://monvalleyhfh.org/
+summary: A volunteer-driven group that builds homes with families in Marion, Monongalia and Preston counties. Volunteers help on construction sites and on committees.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: https://monvalleyhfh.org/volunteer/
+    checked: 2026-10-31

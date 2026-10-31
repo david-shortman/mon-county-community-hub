@@ -1,0 +1,10 @@
+name: West Virginia Attorney General's Office
+slug: wv-attorney-general
+kind: government
+website: https://ago.wv.gov/
+summary: The state's legal office. Its Consumer Protection Division takes complaints about businesses, including internet companies.
+topics: [legal]
+area: statewide
+sources:
+  - url: https://ago.wv.gov/consumer-protection/file-complaint-consumer-protection-division
+    checked: 2026-10-30
