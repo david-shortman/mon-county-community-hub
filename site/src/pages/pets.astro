@@ -4,7 +4,6 @@
 // code or group page on 2026-10-31. Left off until a person confirms them:
 // shelter adoption fees and hours (county and shelter pages differ), how to
 // buy a dog tag, the Humane Society (its site blocked us), city pet rules.
-// What to do after a bite is in a separate PR for David (emergency steps).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
@@ -20,6 +19,9 @@ export const page = { door: "living-here", topic: "pets", label: "Pets and anima
 
   <h2 id="lost">Lost your pet</h2>
   <ResourceCard r={resource('mccac-lost-pet')} showCost />
+
+  <h2 id="bite">Bitten or scratched by an animal</h2>
+  <ResourceCard r={resource('animal-bite-rabies')} />
 
   <h2 id="adopt">Adopt a dog or cat</h2>
   <ResourceCard r={resource('mccac-adopt-a-dog-or-cat')} showCost />

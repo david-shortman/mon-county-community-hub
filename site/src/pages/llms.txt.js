@@ -1,3 +1,4 @@
+import { printSheets } from '../lib/printouts.mjs';
 import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
 import { ROLES } from '../lib/helper-roles.mjs';
@@ -27,12 +28,14 @@ export function GET({ site }) {
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
 - [Before you call](${u('/before-you-call/')}): what to have ready, a place to write notes, and short scripts for calling a utility, a landlord or a billing office
 - [Get through this month](${u('/money/')}): pick what is going on (a utility or other bill, short on food, behind on rent, cash fast or a payday loan, free tax help) and get local steps in order, with phone numbers and sources; also the scam warning
+- [Property tax: pay, homestead and appeals](${u('/property-tax/')}): Monongalia County tax dates and 2.5% discounts, paying at the Sheriff's Tax Office or online, how the tax is figured, the $20,000 homestead exemption, and how to ask for a review of your assessed value
 - [Food help](${u('/help/food/')}): two questions (when you need food, and whether you are a WVU student) leading to sourced options
 - [Food today or this week](${u('/help/food/today/other/')}): 211, Scott's Run Settlement House, and upcoming free food dates
 - [Food today for WVU students](${u('/help/food/today/student/')}): The Rack student food pantry first, then 211 and other options
 - [Food today: WVU student question](${u('/help/food/today/')}): the second food question
 - [Help buying groceries every month](${u('/help/food/monthly/')}): SNAP: you may qualify; apply on WV PATH or call DoHS
 - [Apply for SNAP (food stamps)](${u('/snap/')}): apply online at WV PATH, the state's free site, and the DoHS phone number
+- [Free help filing your taxes](${u('/free-tax-help/')}): free tax prep near Morgantown (Christian Help, IRS VITA and TCE, AARP Tax-Aide), IRS Free File and West Virginia's Free File list, the Earned Income Tax Credit and the WV Family Tax Credit, with no guessed 2027 dates
 - [File today: SNAP, Medicaid, LIEAP, WV WORKS](${u('/file-today/')}): how to start each application today (SNAP can start with name, address and signature), and a list of what the state may ask you to bring, quoted from its forms; picks live only in the web address
 - [Get care](${u('/care/')}): pick what is going on (a flu or COVID shot, a dentist, turning 65, quitting tobacco, staying healthy) and get local steps in order, with phone numbers, costs and sources
 - [Flu and COVID shots](${u('/flu-shots/')}): book at the Monongalia County Health Department; who gets them free
@@ -59,10 +62,13 @@ export function GET({ site }) {
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
 - [Holiday season help](${u('/holidays/')}): the 2026 holiday toy sign-up and pickup in Mon County, the December 10 holiday food distribution and senior holiday meal sign-ups, the Christian Help Free Store for free clothing, county, state and federal office closings for November and December 2026, and ways to give toys or volunteer
 - [Caring for a family member](${u('/caregivers/')}): free help finding caregiver services from the Region I Aging and Disability Resource Center, the Eldercare Locator, caregiver support at Senior Monongalians, in-home help, dementia caregiver groups, and help for grandparents and relatives raising a child (Healthy Grandfamilies, Kinship Navigators, Legal Aid's kinship hotline)
+- [Accessible parking placard](${u('/accessible-parking-placard/')}): the WV DMV's DMV-41-TR form as short lists: the six conditions a medical provider can certify, permanent and temporary placards, how to fill out and mail the form, using the placard, the $5.00 replacement, and when to give it back
 - [Holiday season help](${u('/holidays/')}): the 2026 holiday toy sign-up and pickup in Mon County, the Christian Help Free Store for free clothing, county, state and federal office closings for November and December 2026, and ways to give toys or volunteer
 - [Medicaid waivers](${u('/medicaid-waivers/')}): a plain guide to West Virginia's four Medicaid home care waivers (ADW, IDDW, TBIW, CSEDW): who each is for, how to start, who to call
+- [Help at home as you get older](${u('/help-at-home/')}): Morgantown Area Meals on Wheels and Senior Monongalians meals, WV Medicaid Personal Care, Lighthouse for people 60 and older not on Medicaid, FAIR respite for dementia caregivers, and private pay care
 - [Staying active after 55](${u('/staying-active/')}): BOPARC yoga, tai chi, ballet and line dancing for adults 55 and over at Wiles Hill, activities at the Senior Monongalians senior center, and rail-trails for walking
 - [Start or grow a business](${u('/business/')}): free one-on-one coaching and Business Fundamentals classes from the WV SBDC, the SBA West Virginia District Office, a state list of business plan help, and the Morgantown Area Partnership, Chamber of Commerce and Main Street Morgantown in their own words
+- [Start a business in Star City, Granville or Westover](${u('/business-by-town/')}): which town decides the local business license and B&O tax form: Star City, Granville and Westover forms and offices, and the County Planning Office outside any town
 - [Start a business in Morgantown, step by step](${u('/start-a-business/')}): the city's steps in order: check zoning, register with the state (One Stop portal, $30 Tax Division certificate), apply for a city business license in the Morgantown Access Portal, get a Certificate of Occupancy ($65), get inspected at least a week before opening, and file city B&O tax
 - [Living here](${u('/living-here/')}): pick what is going on (moving here, trash pickup day, recycling drop-off, tires or electronics) and get local steps with phone numbers and sources
 - [Family and life changes](${u('/family/')}): pick what is going on (a baby or young child, a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
@@ -103,11 +109,14 @@ export function GET({ site }) {
 - [Start a nonprofit or community group](${u('/start-a-group/')}): the West Virginia steps: Articles of Incorporation for a nonprofit corporation ($25, Form CD-1), registering with the Secretary of State before asking the public for donations, and links to the IRS for tax-exempt status
 - [Check a charity before you give](${u('/check-a-charity/')}): how to look up a group's registration with the West Virginia Secretary of State, and what registration does and does not tell you
 ${centers}
+- [Start a swap, market or reuse store](${u('/start-something/')}): what Mon County is missing for secondhand and sharing (a regular flea market, a building materials reuse store, a Buy Nothing group, kids' gear swaps), what each would take, and free or low cost guides
 - [City and county meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council, city board and County Commission meetings, minutes from the last 60 days, and where the school board and towns post theirs
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
+- [Printouts](${u('/print/')}): printable sheets of places and phone numbers, made from the listings every morning. Sheets: ${printSheets().map((s) => `[${s.name}](${u(`/print/${s.slug}/`)})`).join(', ')}
+- [Cards and posters to print](${u('/print/cards/')}): wallet cards and half-page posters with a QR code and a short web address
 - [Terms](${u('/terms/')}): what the site is, that information can change, and how to ask for a fix or removal
 - [Privacy](${u('/privacy/')}): what the site collects (no analytics), and how the public Tell us form works
 - [Make a list for someone](${u('/make-a-list/')}): a helper picks up to 6 places and adds a note, then prints or texts a one-page list; picks live only in the web address

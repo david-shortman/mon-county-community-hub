@@ -1,0 +1,46 @@
+---
+// Help at home as you get older (#560, #561, part of #267). Meals at home or
+// with others, and in-home care side by side: Medicaid Personal Care, the
+// Medicaid waiver, Lighthouse, FAIR respite and private pay. Every fact is in
+// a resource record or cites its source, read 2026-10-30. Describe only:
+// never say who qualifies. Food and benefits: reviewed by David.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "family", topic: "disability", label: "Help at home as you get older", summary: "Meals brought to your home, lunch with others, and in-home care" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+---
+<Base title="Help at home as you get older in Mon County: meals and in-home care" description="Meals on Wheels and Senior Monongalians meals in Morgantown and Mon County, and in-home care: WV Medicaid Personal Care, the Aged and Disabled Waiver, Lighthouse for people 60 and older, and FAIR respite for dementia caregivers.">
+  <h1>Help at home as you get older</h1>
+  <p class="lede">Meals brought to your door, lunch with other people your age, and help at home with bathing, dressing or a break for a caregiver. Each program decides who it can serve, so call and ask.</p>
+
+  <h2>Meals at home, or lunch with others</h2>
+  {r('mamow-home-delivered-meals') && <ResourceCard r={r('mamow-home-delivered-meals')} showCost />}
+  {r('senior-monongalians-meals') && <ResourceCard r={r('senior-monongalians-meals')} showCost />}
+  <p>More food help for anyone: <a href={`${base}/help/food/`}>Food help</a>.</p>
+
+  <h2>Help at home with bathing, dressing and daily care</h2>
+  <p>Three programs, depending on whether you have Medicaid:</p>
+  <ul>
+    <li><strong>On Medicaid:</strong> Medicaid Personal Care, below. For people who need the care a nursing home gives, the Aged and Disabled Waiver pays for care at home instead. See <a href={`${base}/medicaid-waivers/`}>Getting care at home through Medicaid</a>.</li>
+    <li><strong>60 or older and not on Medicaid:</strong> Lighthouse, below, with a co-pay based on income.</li>
+    <li><strong>Paying on your own:</strong> Senior Monongalians offers personal care and respite at $25 an hour, when workers are available. Call the nurse's office at <a href="tel:13042962503">304-296-2503</a> (<a href="https://www.seniormons.org/blank-1">Senior Monongalians</a>, checked October 30, 2026).</li>
+  </ul>
+  {r('wv-medicaid-personal-care') && <ResourceCard r={r('wv-medicaid-personal-care')} />}
+  {r('senior-monongalians-lighthouse') && <ResourceCard r={r('senior-monongalians-lighthouse')} showCost />}
+
+  <h2>A break for a caregiver</h2>
+  {r('senior-monongalians-fair-respite') && <ResourceCard r={r('senior-monongalians-fair-respite')} showCost />}
+  <p>Support groups and a 24/7 Helpline for dementia caregivers: see <a href={`${base}/disability-and-aging/#alz-wv-caregiver-groups`}>Disability and aging</a>.</p>
+
+  <h2>Also check</h2>
+  <ul>
+    <li>Veterans: Senior Monongalians says it is approved by the VA for in-home services. Ask your VA caseworker (<a href="https://www.seniormons.org/blank-1">Senior Monongalians</a>), or see <a href={`${base}/veterans/`}>help for veterans</a>.</li>
+    <li>Ramps, grab bars and equipment: <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</li>
+    <li>Medicare questions: <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30, 2026. We describe these programs; each one decides who it can serve. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
