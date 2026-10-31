@@ -27,6 +27,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="after-school">After school at middle and high schools</h2>
   {r('mcs-after-school-middle-high') && <ResourceCard r={r('mcs-after-school-middle-high')} />}
+  <ul>
+    <li><strong>Clay-Battelle Middle High</strong> (CB Time): Tuesday and Thursday, 2:35 to 4:35 p.m.</li>
+    <li><strong>Mountaineer Middle</strong> (Mountie Time): Monday to Thursday, 2:35 to 4:05 p.m.</li>
+    <li><strong>South Middle</strong> (Stallion Time): Wednesday and Thursday, 2:35 to 4:05 p.m.</li>
+    <li><strong>Suncrest Middle</strong> (Suncrest Time): Tuesday and Thursday, 2:55 to 4:25 p.m.</li>
+    <li><strong>Westwood Middle</strong> (Prime Time): Monday to Thursday, 2:30 to 4:30 p.m.</li>
+    <li><strong>University High</strong> (UTime): Tuesday to Thursday, 2:30 to 5 p.m.</li>
+  </ul>
 
   <h2 id="tutoring">Free tutoring and homework help</h2>
   {r('mympls-online-tutoring') && <ResourceCard r={r('mympls-online-tutoring')} showCost />}
