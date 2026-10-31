@@ -16,6 +16,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar, loadDir, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
 
 // ---------- settings ----------
 const args = process.argv.slice(2);
@@ -279,6 +280,15 @@ function checkContent() {
     weeklyPast.length ? `${weeklyPast.length} of ${weekly.length} crisis, shelter and food-today entries were last checked over ${T.recheckWeeklyDays} days ago. Re-check each phone number and hours on the group's own page.`
       : `All ${weekly.length} crisis, shelter and food-today entries were checked in the last ${T.recheckWeeklyDays} days.`,
     { details: weeklyPast.map(({ e, oldest }) => `${e._file}: last checked ${oldest ?? 'never'}`), owner: 'Duet', fixable: true });
+
+  // Facts past their own re-check window (#122). The page already says "may be
+  // out of date" for each one; this tells Duet which to re-read, oldest first.
+  const facts = factTopics().flatMap((t) => Object.values(loadFacts(t)));
+  const dueFacts = facts.filter((f) => isDue(f, today)).sort((a, b) => a.checked.localeCompare(b.checked));
+  record('facts-due', 'product', dueFacts.length ? 'warn' : 'ok',
+    dueFacts.length ? `${dueFacts.length} of ${facts.length} facts are past their re-check window. Re-read each source: confirm (update checked) or correct it.`
+      : `All ${facts.length} facts are within their re-check window.`,
+    { details: dueFacts.map((f) => `${f._file}: checked ${f.checked}, re-check every ${f.recheck_days} days, source ${f.source?.url}`), owner: 'Duet', fixable: true });
 
   // Hidden items (#519): off the site until someone re-checks them.
   const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);

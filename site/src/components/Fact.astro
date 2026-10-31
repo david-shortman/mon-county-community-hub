@@ -1,0 +1,16 @@
+---
+// One fact from the fact store (#122): its sentence, any Call or Directions
+// button, and a source line with its own checked date. Past its recheck_days
+// the source line says it may be out of date. `tag` is p (default) or li.
+import Actions from './Actions.astro';
+import SourceLine from './SourceLine.astro';
+import { factHtml, isDue } from '../lib/facts.mjs';
+const { f, tag = 'p', about } = Astro.props;
+const Tag = tag;
+const label = about ?? f.slug.replace(/-/g, ' ');
+---
+<Tag class="fact" id={`fact-${f.slug}`}>
+  <Fragment set:html={factHtml(f.text)} /><slot />
+  {(f.phone || f.place) && <Actions phone={f.phone} phoneLabel={f.phone_label} place={f.place} about={label} />}
+  <SourceLine sources={[{ ...f.source, checked: f.checked }]} about={label} stale={isDue(f)} />
+</Tag>

@@ -459,3 +459,22 @@ phone_confirmed_by: DS        # optional; the caller's initials (orgs and resour
 - `npm run check-content` fails if `phone_confirmed` is not a date or is in the future, or `phone_confirmed_by` is not two or three capital letters.
 
 **The call queue.** `npm run call-queue` in `site/` prints the list of calls to make, oldest first, with the number, why each one is there and what to ask (`--md FILE` writes it to a file). A listing is in it when it has a public phone number and either no source a robot can read (every source is `manual` in `source-rules.yaml`), no recent activity seen (places), or a past phone check. Making the calls waits on David's decision about who calls and from what number (#156).
+
+## `facts/<topic>/<slug>.yaml`: sentences with their own clock
+
+A sentence a page needs that is not a listing (a rule from a county page, a definition, a pickup rule) lives here, not typed into the page (#122, ADR 0007). Pages show it with the `Fact` component.
+
+```yaml
+slug: tires
+text: "**Tires:** a state tire collection runs monthly in Morgantown, except December, January and February."  # what the page shows; **bold** and [label](link) only
+quote: "The Tire Collection Events are NOT operated in December, January or February."  # the source's exact words
+source:
+  url: https://www.monongaliacountyswa.com/tires
+  name: Monongalia County Solid Waste Authority   # optional
+checked: 2026-10-30      # Morgantown date you read the source
+recheck_days: 90         # about 365 for a definition, 180 for a phone, 90 for hours or a schedule, 30 while waiting on a date
+phone: "304-376-0036"    # optional; adds a Call button
+place: "4120 Fairmont Rd, Morgantown, WV"  # optional; adds a Directions button
+```
+
+Past `recheck_days`, the page says the fact may be out of date, and the Health check lists it (`facts-due`). Re-read the source: if it still says the same, update `checked`; if not, fix `text` and `quote`.

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { factTopics, loadFacts } from '../src/lib/facts.mjs';
 import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
@@ -352,6 +353,29 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
     const m = t.match(OTHER_MORGANTOWN);
     if (m) warnings.push(`${e._file}: ${key} names "${m[0]}"; this site is for Morgantown, WV`);
   });
+}
+
+// The fact store (content/facts/<topic>/, #122): every fact has its text,
+// the exact words it is based on, a source, a checked date and a re-check
+// window. A page cannot render a fact without them.
+const FACT_FIELDS = ['slug', 'text', 'quote', 'source', 'checked', 'recheck_days', 'phone', 'phone_label', 'place'];
+let factCount = 0;
+for (const topic of factTopics()) {
+  for (const f of Object.values(loadFacts(topic))) {
+    factCount++;
+    const where = f._file;
+    for (const k of ['slug', 'text', 'quote', 'checked', 'recheck_days']) if (f[k] == null || f[k] === '') errors.push(`${where}: missing ${k}`);
+    for (const k of Object.keys(f)) if (k !== '_file' && !FACT_FIELDS.includes(k)) warnings.push(`${where}: unknown field ${k}`);
+    if (f.slug && path.basename(where).replace(/\.ya?ml$/, '') !== f.slug) errors.push(`${where}: file name should match slug ${f.slug}`);
+    if (!isUrl(f.source?.url)) errors.push(`${where}: source needs a url`);
+    if (!isDate(f.checked)) errors.push(`${where}: checked must be a date (YYYY-MM-DD)`);
+    else if (f.checked > todayYmd()) errors.push(`${where}: checked ${f.checked} is in the future`);
+    if (!Number.isInteger(f.recheck_days) || f.recheck_days < 1) errors.push(`${where}: recheck_days must be a whole number of days, like 90`);
+    if (/[<>]/.test(f.text ?? '')) errors.push(`${where}: text allows only **bold** and [label](link), no HTML`);
+    if (f.phone != null && !isPhone(f.phone)) errors.push(`${where}: phone must look like 304-555-0100 (quote it)`);
+    if (f.place != null && !/,/.test(String(f.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);
+    if (JSON.stringify(f).includes('\u2014')) errors.push(`${where}: contains an em dash`);
+  }
 }
 
 for (const w of warnings) console.warn(`warning: ${w}`);
