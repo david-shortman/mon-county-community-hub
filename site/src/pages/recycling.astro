@@ -4,9 +4,13 @@ import EventCard from '../components/EventCard.astro';
 import Actions from '../components/Actions.astro';
 import SourceLine from '../components/SourceLine.astro';
 import PlaceCard from '../components/PlaceCard.astro';
+import Fact from '../components/Fact.astro';
+import { factsFor } from '../lib/facts.mjs';
 import { loadCalendarWithFeeds, upcoming, resource, telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "recycling", label: "Trash, recycling and drop-off", summary: "Pickup days, the curbside bin, and where to take hard items" };
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics || []).includes('recycling'));
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const swa = 'https://www.monongaliacountyswa.com';
 // Phones, addresses and hours live in content/ with their sources (#146).
 const ask = resource('mon-swa-ask-about-trash');
@@ -14,6 +18,10 @@ const center = resource('mon-county-recycling-drop-off');
 const mts = resource('mountaineer-transfer-station');
 const swaPhone = ask.contact.phone;
 const swaTel = telHref(swaPhone);
+// Sentences with their own source, quote, checked date and re-check window
+// live in content/facts/recycling/ (#122). Each turns "may be out of date"
+// by itself when it is due.
+const fact = factsFor('recycling');
 // Each item names its own source and checked date (#118). The county pages
 // and the checklist were re-read on October 30, 2026; the 2019 guide was last
 // read on October 28.
@@ -22,54 +30,63 @@ const src = {
   recycling: [{ url: `${swa}/recycling`, checked: today }],
   center: [{ url: 'https://www.moncountyrecycling.com/', checked: today, name: 'Monongalia County Recycling Center' }, { url: `${swa}/recycling`, checked: today }],
   disposal: [{ url: `${swa}/disposal`, checked: today }],
-  tires: [{ url: `${swa}/tires`, checked: today }],
-  paint: [{ url: `${swa}/latex-paint`, checked: today }],
-  events: [{ url: `${swa}/events-1`, checked: today }],
-  checklist: [{ url: 'https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-Trash-Day-Checklist.pdf', checked: today, name: 'Republic Services' }],
-  epa: [{ url: 'https://www.epa.gov/sites/default/files/2015-09/documents/smp_definitions.pdf', checked: today, name: 'U.S. Environmental Protection Agency' }],
-  guide2019: [{ url: 'https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-WV-service-guide-2019.pdf', checked: '2026-10-28', name: 'Republic Services' }],
+  // Read October 30, 2026: plastic bags, flatten cardboard, no soiled pizza boxes.
+  centerRules: [{ url: 'https://www.moncountyrecycling.com/', checked: today, name: 'Monongalia County Recycling Center' }],
 };
+// Item lookup (#199): "What do I do with this?" on the first screen. Each
+// answer repeats a fact sourced further down the page and links to it.
+const lookup = [
+  { item: 'Bagged household trash', say: 'Free at the Mountaineer Transfer Station on the first Thursday of each month.', href: '#mountaineer-transfer-station' },
+  { item: 'Batteries', say: 'We could not find a local drop-off. Ask the Solid Waste Authority.', href: '#hard-items' },
+  { item: 'Building materials', say: 'No reuse store in the county right now.', href: `${base}/sell-or-donate/#building` },
+  { item: 'Cardboard', say: 'Flatten boxes for the county drop-off center. No greasy pizza boxes.', href: '#drop-off' },
+  { item: 'Clothes and furniture', say: 'Donate, sell or give them away.', href: `${base}/sell-or-donate/` },
+  { item: 'Electronics and TVs', say: 'Free county collection events in the spring and fall.', href: '#hard-items' },
+  { item: 'Glass bottles and jars', say: 'A 2019 hauler guide says curbside takes them. Confirm first.', href: '#curbside' },
+  { item: 'Household chemicals, oil-based paint', say: "The Morgantown Utility Board's yearly household hazardous waste day.", href: '#hard-items' },
+  { item: 'Latex paint', say: 'The county plans a collection in 2027. No date yet.', href: '#hard-items' },
+  { item: 'Paper to shred', say: 'PACE Enterprises at Mylan Park.', href: '#drop-off' },
+  { item: 'Plastic bags', say: 'Not at the county drop-off center. Bring recyclables in a box or bin.', href: '#drop-off' },
+  { item: 'Tires', say: 'A state tire collection runs monthly, except December to February. The transfer station does not take them.', href: '#hard-items' },
+];
 ---
 <Base title="Trash, recycling and drop-off in Morgantown, WV" description="Pickup days, what goes in the curbside bin, and where to take electronics, paint, tires and other hard items in Morgantown and Monongalia County.">
   <h1>Trash, recycling and drop-off</h1>
-  <p class="lede">Where to take trash, recycling and hard-to-dispose items in Morgantown and Monongalia County. Where we could not confirm a fact, we say so and give a phone number to call.</p>
+  <p class="lede">Find common items in the list below to see where they go. To learn your pickup day, call the Monongalia County Solid Waste Authority at <a href={swaTel}>{swaPhone}</a>. In Morgantown, put carts out by 6 a.m. on pickup day. If we could not confirm a fact, we say so.</p>
+
+  <section class="lookup" aria-labelledby="lookup-h">
+    <h2 id="lookup-h">What do you want to get rid of?</h2>
+    <ul>
+      {lookup.map((l) => <li><a href={l.href}><strong>{l.item}</strong></a><span>{l.say}</span></li>)}
+    </ul>
+    <SourceLine sources={src.centerRules} about="cardboard, pizza boxes and plastic bags">{' '}The other answers are sourced in their sections below; that the transfer station takes no tires is on its card.</SourceLine>
+  </section>
 
   <h2 id="pickup">Find your pickup day</h2>
   <p>We could not find a public map or street list of pickup days. Inside Morgantown city limits, Republic Services is the hauler. Call the Monongalia County Solid Waste Authority at <a href={swaTel}>{swaPhone}</a> and ask who serves your address and which day they come.</p>
   <SourceLine sources={src.recycling} about="pickup days" />
-  <p>Republic Services' <a href={src.checklist[0].url}>Trash Day Checklist for Morgantown</a> says to put carts out by 6 a.m. on pickup day, with trash and recycling out the same day, and to bring carts back within 24 hours. Republic's number on the checklist is <a href="tel:3043668900">304-366-8900</a>.</p>
-  <SourceLine sources={src.checklist} about="the trash day checklist" />
+  <Fact f={fact('cart-checklist')} about="the trash day checklist" />
 
-  <h2>What goes in the curbside bin</h2>
-  <p>We could not find a current list from the city or hauler. The most recent clear guide we found is a <a href="https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-WV-service-guide-2019.pdf">2019 Republic Services guide for Morgantown</a>. It says glass food and beverage containers are accepted, and drinking glasses, ceramics and Pyrex are not. That guide is old, so confirm glass with the Solid Waste Authority at <a href={swaTel}>{swaPhone}</a> before you rely on it.</p>
-  <SourceLine sources={src.guide2019} about="the curbside bin" />
+  <h2 id="curbside">What goes in the curbside bin</h2>
+  <Fact f={fact('glass-2019-guide')} about="the curbside bin"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
 
   <h2 id="drop-off">Recycling drop-off sites</h2>
-  <p><strong>Single-stream</strong> means all your recyclables (paper, cardboard, plastic, cans) go in one bin, with no sorting. A <strong>sorted</strong> site has a separate bin for each kind.</p>
-  <SourceLine sources={src.epa} about="what single-stream means" />
+  <Fact f={fact('single-stream-meaning')} about="what single-stream means" />
   <ul>
     <li><strong>{center.title}</strong> (free, single-stream): {center.what_to_do}
       <Actions phone={center.contact.phone} phoneLabel={center.title} place={center.contact.place} />
       <SourceLine sources={center.sources} org={center.org} about={center.title} /></li>
-    <li><strong>Western Mon County Recycling Site</strong> (free, sorted): Arnettsville Community Association, 4120 Fairmont Rd., Morgantown. Run by the Marion County Solid Waste Authority. The county lists it as open 24 hours a day, 7 days a week.
-      <Actions place="Arnettsville Community Association, 4120 Fairmont Rd, Morgantown, WV" />
-      <SourceLine sources={src.recycling} about="the Western Mon County site" /></li>
+    <Fact tag="li" f={fact('western-site')} about="the Western Mon County site" />
     <li><PlaceCard r={mts} /></li>
-    <li><strong>City residents:</strong> the county lists a Republic Services recycling event every second Saturday. Confirm the place and time with the hauler.
-      <SourceLine sources={src.recycling} about="the city recycling event" /></li>
-    <li><strong>Paper shredding:</strong> PACE Enterprises offers it at its place in Mylan Park.
-      <Actions phone="304-376-0036" phoneLabel="PACE Enterprises" />
-      <SourceLine sources={src.recycling} about="paper shredding" /></li>
+    <Fact tag="li" f={fact('city-recycling-event')} about="the city recycling event" />
+    <Fact tag="li" f={fact('paper-shredding')} about="paper shredding" />
   </ul>
 
   <h2 id="hard-items">Hard items</h2>
   <ul>
-    <li><strong>Electronics:</strong> the county holds free electronics recycling events in the spring and fall (see Coming up below). West Virginia also has a free take-back list for certain devices, linked from the <a href={`${swa}/recycling`}>county recycling page</a>.
-      <SourceLine sources={[...src.events, ...src.recycling]} about="electronics" /></li>
-    <li><strong>Tires:</strong> a state tire collection runs monthly in Morgantown, except December, January and February. The county's <a href={`${swa}/tires`}>tire page</a> has the yearly schedule.
-      <SourceLine sources={src.tires} about="tires" /></li>
-    <li><strong>Latex paint:</strong> the county plans a collection in 2027 but has no date yet. For oil-based paint and other household chemicals, the county points to the Morgantown Utility Board's yearly household hazardous waste day.
-      <SourceLine sources={src.paint} about="paint" /></li>
+    <Fact tag="li" f={fact('electronics')} about="electronics" />
+    <Fact tag="li" f={fact('tires')} about="tires" />
+    <Fact tag="li" f={fact('latex-paint')} about="paint" />
     <li><strong>Batteries:</strong> we could not find a local drop-off program for batteries. Ask the Solid Waste Authority at <a href={swaTel}>{swaPhone}</a>.</li>
   </ul>
 
@@ -82,5 +99,14 @@ const src = {
     <Actions callFirst phone={swaPhone} phoneLabel="the Solid Waste Authority" place="113 Mathieson Street, Suite 100, Morgantown, WV" />
   </div>
   <SourceLine sources={[...ask.sources, ...src.disposal]} org={ask.org} about="the Solid Waste Authority's contact details" />
-  <p class="meta">Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
+
+<style>
+  .lookup { margin-top: 8px; }
+  .lookup h2 { margin-top: 0.8em; }
+  .lookup ul { list-style: none; margin: 8px 0; padding: 0; border-top: 1px solid var(--line); }
+  .lookup li { display: grid; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .lookup a { display: inline-flex; align-items: center; min-height: 44px; }
+  .lookup span { color: var(--fg); line-height: 1.45; }
+</style>

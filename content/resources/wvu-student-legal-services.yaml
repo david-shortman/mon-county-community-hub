@@ -1,0 +1,19 @@
+title: Free legal help for WVU students
+slug: wvu-student-legal-services
+org: wvu-student-legal-services
+topics: [legal, housing]
+who_it_is_for: Students currently enrolled at WVU who have paid the student activity fee. It helps with leases and landlord problems, consumer issues, contracts, insurance claims, family law, wills and powers of attorney, debt collection, expungements, name changes, and criminal matters (advice only). It cannot help with cases against other students, student groups, WVU staff or WVU.
+what_to_do: Fill out the application for services on the Student Legal Services website. Staff will call or email you to set an appointment. Bring every paper about your problem, such as your lease, letters and emails. WVU's Off-Campus Housing office suggests a free lease review with Student Legal Services before you sign a lease. The office is in Elizabeth Moore Hall, Room G-5. Questions, call 304-293-4897 or email sls@mail.wvu.edu.
+contact:
+  phone: "304-293-4897"
+  email: sls@mail.wvu.edu
+  url: https://studentlegalservices.wvu.edu/slsfaq
+  url_label: How it works
+cost: "No fee for the legal help. If your case goes to court, you pay court filing and service fees."
+sources:
+  - url: https://studentlegalservices.wvu.edu/slsfaq
+    checked: 2026-10-30
+  - url: https://studentlegalservices.wvu.edu/
+    checked: 2026-10-30
+  - url: https://campuslife.wvu.edu/living-off-campus/off-campus-housing/faq
+    checked: 2026-10-30

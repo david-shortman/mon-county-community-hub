@@ -1,0 +1,94 @@
+---
+// Fix what you see (#292, #86): pick a problem, see the one office that
+// handles it, inside or outside Morgantown city limits. Plain anchor links,
+// so it works with no script and each problem is two taps away. Every route
+// is a sourced record in content/resources. Category names are the ones the
+// city's 311 page lists.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import Actions from '../../components/Actions.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import NextRung from '../../components/NextRung.astro';
+import { loadDir } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: "community", topic: "better", label: "Fix what you see: who to tell", summary: "Graffiti, dumping, potholes, broken sidewalks, empty buildings: the office that handles each one" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const c311 = r('morgantown-311');
+const litter = r('mon-county-litter-control');
+const dump = r('wvdep-open-dump-reporter');
+const adp = r('mon-county-dilapidated-property-complaint');
+const road = r('wvdoh-road-repair-request');
+const stateRoadMap = 'https://experience.arcgis.com/experience/2917da07ad1d4900bb4e372ca6527126/page/Page';
+const dotSrc = [{ url: 'https://transportation.wv.gov/', checked: '2026-10-30' }];
+const problems = [
+  { id: 'graffiti', label: 'Graffiti' },
+  { id: 'dumping', label: 'Illegal dumping or a tire pile' },
+  { id: 'litter', label: 'Litter or trash left out' },
+  { id: 'pothole', label: 'A pothole or a bad road' },
+  { id: 'sidewalk', label: 'A broken sidewalk, sign or streetlight' },
+  { id: 'tree', label: 'A tree that needs trimming or is dangerous' },
+  { id: 'building', label: 'An empty or falling down building' },
+];
+---
+<Base title="Fix what you see: who to tell about graffiti, dumping, potholes and more in Morgantown" description="Who handles graffiti, illegal dumping, litter, potholes, broken sidewalks, trees and run-down buildings in Morgantown and Monongalia County, and how to reach them.">
+  <h1>Fix what you see: who to tell</h1>
+  <p class="lede">Each problem has an office whose job is to fix it. Pick what you saw to find the right one.</p>
+
+  <h2>What did you see?</h2>
+  <ul class="choices">
+    {problems.map((p) => <li><a class="choice" href={`#${p.id}`}><span class="choice-label">{p.label}</span></a></li>)}
+  </ul>
+
+  <div class="note">
+    <p><strong>Inside or outside city limits?</strong> It matters for some problems. Morgantown 311 is for places inside Morgantown city limits. In another town, like Star City or Westover, contact that town's office. Not sure? Call the city at <a href="tel:3042847405">304-284-7405</a> and ask.</p>
+  </div>
+
+  <h2 id="graffiti">Graffiti</h2>
+  <p><strong>Inside Morgantown:</strong> Morgantown 311. Choose "Report Graffiti."</p>
+  <Actions link={c311.contact.url} linkLabel="Report to 311" phone={c311.contact.phone} phoneLabel="Morgantown 311" about="graffiti" />
+  <p><strong>Outside the city:</strong> we did not find a county office that takes graffiti reports.</p>
+
+  <h2 id="dumping">Illegal dumping or a tire pile</h2>
+  <p><strong>Anywhere in the county:</strong> the county Litter Control Office looks into dumps and can write citations. The state also takes reports of illegal dumps and tire piles.</p>
+  <Actions link={litter.contact.url} linkLabel="Report to the county" phone={litter.contact.phone} phoneLabel="the county Litter Control Office" about="illegal dumping" />
+  <Actions link={dump.contact.url} linkLabel="Report to the state" about="illegal dumping, state form" />
+
+  <h2 id="litter">Litter or trash left out</h2>
+  <p><strong>Littering anywhere in the county:</strong> the county Litter Control Office.</p>
+  <Actions link={litter.contact.url} linkLabel="Report to the county" phone={litter.contact.phone} phoneLabel="the county Litter Control Office" about="litter" />
+  <p><strong>Trash or junk left on a property inside Morgantown:</strong> Morgantown 311. Choose "Property Maintenance Issue." For a missed pickup, the city's 311 list has "Garbage Service Issues."</p>
+  <Actions link={c311.contact.url} linkLabel="Report to 311" phone={c311.contact.phone} phoneLabel="Morgantown 311" about="trash on a property" />
+
+  <h2 id="pothole">A pothole or a bad road</h2>
+  <p>First, find out who takes care of the road. Some roads are state roads and some are city streets. The state's <a href={stateRoadMap}>map of state roads near an address</a> can tell you.</p>
+  <SourceLine sources={dotSrc} about="the state road map" />
+  <p><strong>A city street in Morgantown:</strong> Morgantown 311. Choose "Street Maintenance &amp; Potholes."</p>
+  <Actions link={c311.contact.url} linkLabel="Report to 311" phone={c311.contact.phone} phoneLabel="Morgantown 311" about="a pothole on a city street" />
+  <p><strong>A state road:</strong> the West Virginia Division of Highways, District 4 office.</p>
+  <Actions link={road.contact.url} linkLabel="Request a repair" phone={road.contact.phone} phoneLabel="Division of Highways District 4" about="a pothole on a state road" />
+
+  <h2 id="sidewalk">A broken sidewalk, sign or streetlight</h2>
+  <p><strong>Inside Morgantown:</strong> Morgantown 311. Choose "Sidewalk Repair," "Street Sign Repair/Replacement" or "Street Light Requests." Snow or ice left on a sidewalk has its own category too.</p>
+  <Actions link={c311.contact.url} linkLabel="Report to 311" phone={c311.contact.phone} phoneLabel="Morgantown 311" about="a sidewalk, sign or streetlight" />
+
+  <h2 id="tree">A tree that needs trimming or is dangerous</h2>
+  <p><strong>Inside Morgantown:</strong> Morgantown 311. Choose "Tree/Shrub Trimming."</p>
+  <Actions link={c311.contact.url} linkLabel="Report to 311" phone={c311.contact.phone} phoneLabel="Morgantown 311" about="a tree" />
+
+  <h2 id="building">An empty or falling down building</h2>
+  <p><strong>Inside Morgantown:</strong> Morgantown 311. Choose "Property Maintenance Issue."</p>
+  <Actions link={c311.contact.url} linkLabel="Report to 311" phone={c311.contact.phone} phoneLabel="Morgantown 311" about="a run-down building in the city" />
+  <p><strong>Outside any city or town:</strong> the county's Abandoned and Dilapidated Property Enforcement Agency.</p>
+  <Actions link={adp.contact.url} linkLabel="Complaint form" about="a run-down building outside city limits" />
+
+  <h2>Who these offices are</h2>
+  <p>Hours, details and sources for each office named above.</p>
+  {[c311, litter, dump, road, adp].map((x) => <ResourceCard r={x} />)}
+
+  <h2>What happens after you report</h2>
+  <p>Morgantown 311 requests are public and show on the 311 website. The state's dump form says that more complete details give a dump a better chance of being cleaned up.</p>
+
+  <NextRung next="adopt" />
+  <p class="meta">We point to the office that handles each problem. We do not take reports ourselves, and we do not see what you send them. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

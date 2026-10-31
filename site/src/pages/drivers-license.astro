@@ -1,0 +1,29 @@
+---
+// Driver's license and plates for new residents (#624, part of #270). Facts
+// come from the WV DMV records. Not here yet: which services the Morgantown
+// office handles, and whether out-of-state transfers need an appointment
+// (#622).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import PlaceCard from '../components/PlaceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Driver's license and plates for new residents", summary: "Switch your license, title and plates to West Virginia: the 30 day rule, fees, what to bring, and the Morgantown DMV office" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="New to West Virginia: driver's license and plates in Morgantown" description="How new residents of Morgantown and Monongalia County switch an out-of-state driver's license, title and plates to West Virginia: the WV DMV 30 day rule, fees, what to bring, and the Morgantown Regional Office address, phone and hours.">
+  <h1>Driver's license and plates for new residents</h1>
+  <p class="lede">The West Virginia Division of Motor Vehicles (DMV) handles licenses, titles and plates. Here are its rules for people moving here, and its office in Morgantown.</p>
+
+  <h2 id="rules">What the DMV says new residents need to do</h2>
+  {r('wv-dmv-new-resident') && <ResourceCard r={r('wv-dmv-new-resident')} showCost />}
+
+  <h2 id="office">The DMV office in Morgantown</h2>
+  {r('wv-dmv-morgantown-office') && <PlaceCard r={r('wv-dmv-morgantown-office')} />}
+
+  <p>Just moved here? See <a href={`${base}/moving-here/`}>start power, water, gas and trash</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Fees and rules can change, so check the DMV's page or call before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

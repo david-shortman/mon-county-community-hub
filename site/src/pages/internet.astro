@@ -1,0 +1,67 @@
+---
+// Internet at home (#667): see service in your area, report slow service,
+// complain about an internet company, and where the state is building, in the
+// state's own words. Plus free Wi-Fi at the library (#666) and, once its record
+// is merged (#735, waits for David), the Lifeline card (#668).
+// Not here yet, until a person confirms them (#665): the FCC National Broadband
+// Map, county broadband projects, Mon County's row in the state summary, the
+// end of the ACP, and internet companies' low-cost plans.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Internet at home", summary: "See internet service in your area, take the state speed test, complain about an internet company, and free Wi-Fi at the library" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const state = [{ url: 'https://broadband.wv.gov/', checked: '2026-10-30' }];
+const navigator = [{ url: 'https://events.mympls.org/event/17866389', checked: '2026-10-30' }];
+---
+<Base title="Internet at home in Morgantown and Mon County" description="Internet at home in Morgantown and Monongalia County, WV: the state's broadband maps, the state speed test for slow or no service, how to complain about an internet company to the WV Attorney General, where the state is building new service, and free Wi-Fi and computers at the library.">
+  <h1>Internet at home</h1>
+  <p class="lede">Slow internet, or none at your house? The state has a speed test and maps, and the Attorney General takes complaints about internet companies. The library has free Wi-Fi and computers.</p>
+
+  <h2 id="maps">See internet service in your area</h2>
+  <p>The West Virginia Office of Broadband publishes a map of broadband funding and availability across the state. The state marks it updated July 24, 2026.</p>
+  <div class="actions">
+    <a class="btn" href="https://broadbandwv.org/arcgis/apps/experiencebuilder/experience/?id=2b030b85a8234e89b33fbac8a27e64ce&page=Availability"><Icon name="open" /><span>State broadband map</span></a>
+  </div>
+  <SourceLine sources={state} org="wv-office-of-broadband" about="the state broadband map" />
+
+  <h2 id="speed-test">Slow or no internet? Tell the state</h2>
+  {r('wv-broadband-speed-test') && <ResourceCard r={r('wv-broadband-speed-test')} />}
+
+  <h2 id="complain">A problem with your internet company</h2>
+  <p>The complaint form asks if you contacted the company first, and for any case or ticket number it gave you, so have those ready.</p>
+  {r('wv-ag-broadband-complaint') && <ResourceCard r={r('wv-ag-broadband-complaint')} />}
+
+  <h2 id="building">Where the state is building</h2>
+  <p>The state's plan for new service is called BEAD, the Broadband Equity, Access and Deployment Program. In the state's words: "On November 21, 2025, West Virginia received federal government approval of its broadband deployment plan through the Broadband Equity, Access and Deployment (BEAD) Program. Eight subgrantees are slated to provide high-speed internet service to more than 73,000 locations."</p>
+  <p>In short: eight groups the state chose are set to bring high-speed internet to more than 73,000 places in West Virginia.</p>
+  <p>The state's BEAD Location Story Map shows how it picked the locations. The state also posts summaries by county, dated September 2026.</p>
+  <div class="actions">
+    <a class="btn" href="https://storymaps.arcgis.com/stories/a40af24f225b4d04a2702b113121c502"><Icon name="open" /><span>BEAD Location Story Map</span></a>
+    <a class="btn" href="https://broadband.wv.gov/wp-content/uploads/2026/09/County-availability-Sept2026.pdf"><Icon name="open" /><span>Availability by county (PDF)</span></a>
+    <a class="btn" href="https://broadband.wv.gov/wp-content/uploads/2026/10/County-program-Sept2026Updated.pdf"><Icon name="open" /><span>Programs by county (PDF)</span></a>
+  </div>
+  <p>The state's Broadband Enhancement Council meets online, on the second Thursday of each month at 10 a.m., unless the state says otherwise. The state's website lists the next dates and has the sign-up form.</p>
+  <p><strong>Questions for the Office of Broadband:</strong> call 304-558-2234, Monday to Friday, 8 a.m. to 5 p.m., or email WVBroadbandCouncil@wv.gov.</p>
+  <SourceLine sources={state} org="wv-office-of-broadband" about="BEAD and the Broadband Enhancement Council" />
+
+  <h2 id="library">Free Wi-Fi and computers</h2>
+  {r('mympls-wifi-computers-and-rooms') && <ResourceCard r={r('mympls-wifi-computers-and-rooms')} showCost />}
+  <p>Need help with a phone, email, online forms or scams? The main library holds drop-in tech help hours with its Digital Navigator. See the dates on <a href={`${base}/calendar/`}>Dates and deadlines</a>.</p>
+  <SourceLine sources={navigator} org="morgantown-public-library-system" about="drop-in tech help" />
+
+  {r('lifeline-phone-internet-discount') && (
+    <>
+      <h2 id="lifeline">Help paying for phone or internet</h2>
+      <ResourceCard r={r('lifeline-phone-internet-discount')} showCost />
+    </>
+  )}
+
+  <p>Moving here? Start power, water, gas and trash: <a href={`${base}/moving-here/`}>Moving here</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We do not sell or recommend any internet company. Know a free Wi-Fi spot or help program we should add? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

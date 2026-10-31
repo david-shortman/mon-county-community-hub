@@ -1,9 +1,9 @@
 # The growing guide, /grow/ (#437, epic #432). Same shape as a door page
 # (see content/doors/care.yaml and site/src/components/DoorPage.astro), but
 # it lives inside the Living here door under the `growing` topic.
-# More picks come as their pages ship: start a garden, no yard (#438), and
-# something's wrong with my plants (#436). Those wait on WVU Extension facts
-# that a person still has to check (#552).
+# More picks come as their pages ship: start a garden and no yard (#438).
+# The soil test (#435) and plant problems (#436) picks use WVU facts first
+# confirmed on #552.
 door: living-here
 topic: growing
 page: /grow/
@@ -14,6 +14,11 @@ steps:
     when: week
     resource: mon-county-seed-library
     text: Call the Mon County Center and ask how its Community Seed Library works and when you can visit.
+  snap-seeds:
+    when: week
+    resource: snap-seeds-and-plants
+    text: Get SNAP? Your EBT card can buy seeds and plants that grow food.
+    action: Read the state flyer
   health-permit:
     when: week
     resource: monchd-farmers-market-permit
@@ -27,11 +32,19 @@ steps:
     when: season
     resource: mcd-agep-conservation-help
     text: Ask the Monongahela Conservation District what farm conservation work it can help pay for this year, and how to sign up.
+  soil-test:
+    when: week
+    resource: wvu-free-soil-test
+    text: Mix soil from your garden and send 1 to 2 cups to WVU's lab with its form. The basic test is free for West Virginia residents.
+  plant-help:
+    when: week
+    resource: wvu-extension-monongalia-garden-help
+    text: Call the county Extension office and say what you see. Have photos ready. They can help you send a sample to WVU's plant clinic if needed.
 situations:
   - id: budget
     label: Grow food on a budget
     page: /grow/#budget
-    steps: [seed-library]
+    steps: [snap-seeds, seed-library]
   - id: sell
     label: Sell what I grow
     page: /sell-what-you-grow/
@@ -40,6 +53,14 @@ situations:
     label: Thinking about a small farm
     page: /grow/#farm
     steps: [agep]
+  - id: soil
+    label: Get my soil tested
+    page: /soil-test/
+    steps: [soil-test]
+  - id: plants
+    label: Something's wrong with my plants
+    page: /plant-problems/
+    steps: [plant-help]
 also:
   - text: Short on food this week
     href: /help/food/

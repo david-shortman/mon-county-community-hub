@@ -1,0 +1,25 @@
+name: Morgantown Pride
+slug: morgantown-pride
+kind: group
+area: morgantown
+community: Monongalia County
+run_by:
+  kind: community-group
+  text: Morgantown Pride Inc.
+story: A local LGBTQ+ group that holds events for LGBTQ+ people and allies throughout the year.
+regular:
+  - Events throughout the year. Check the events page for dates.
+interests: [lgbtq, social]
+contact:
+  url: https://morgantownwvpride.org/events/
+  facebook: https://www.facebook.com/MorgantownWVPride/
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - The group does not post a regular weekly or monthly meeting. Dates change from event to event.
+  - Email on the group's site is morgantownwvpride@gmail.com.
+sources:
+  - url: https://morgantownwvpride.org
+    checked: 2026-10-30
+  - url: https://morgantownwvpride.org/events/
+    checked: 2026-10-30
