@@ -45,4 +45,4 @@ topics: [health]
 rank: 2
 rank_why: "Score 12 of 12: severity 3, reach 3, agreement 3, room to help 3 (programs exist that people miss, and the Medicaid change is time sensitive). Ranked below food because its reach comes from a small survey, not a county-wide estimate."
 questions: [q05, q08]
-issues: [221, 403, 478]
+issues: [221, 403, 478, 985]
