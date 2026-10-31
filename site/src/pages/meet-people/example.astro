@@ -33,7 +33,7 @@ const firstWard = (nbhd?.meetings ?? []).find((m) => m.name.startsWith('First Wa
 
   {wifi && (
     <Milepost n={2} title="Work from the library one afternoon" when="Week 1 or 2" id="work">
-      <p>The library's Wi-Fi, computers and quiet tables are free for anyone who needs them for a few hours. The main library is at {wifi.contact.place}. {wifi.hours}</p>
+      <p>The library's Wi-Fi and quiet tables are free. Its computers are free too, for up to 60 minutes at a time. The main library is at {wifi.contact.place}. {wifi.hours}</p>
       <p>While there, they look at the library's calendar to see what is coming up (step 3).</p>
       <SourceLine sources={wifi.sources} org={wifi.org} about={wifi.title} slug={wifi.slug} />
     </Milepost>
@@ -50,7 +50,7 @@ const firstWard = (nbhd?.meetings ?? []).find((m) => m.name.startsWith('First Wa
 
   {nbhd && !nbhd.hidden && firstWard && (
     <Milepost n={4} title="Go to a neighborhood association meeting" when="Week 3 or 4" id="neighborhood">
-      <p>Morgantown has nine neighborhood associations. In the city's words, the First Ward association meets on the "{firstWard.when.replace(/\.$/, '')}." The city says its calendar has the most up-to-date times and places, so they check it before going.</p>
+      <p>The city's page lists when nine of Morgantown's neighborhood associations meet. The city says the First Ward association meets on the {firstWard.when.replace(/\.$/, '').replace(/^Fourth/, 'fourth')}. The city says its calendar has the most up-to-date times and places, so they check it before going.</p>
       <p>Live somewhere else in the city? <a href={`${base}/meet-people/#neighborhoods`}>See when each association meets</a>.</p>
       <div class="actions"><a class="btn" href={nbhd.contact.url}><span>City neighborhood page</span></a></div>
       <SourceLine sources={nbhd.sources} org={nbhd.org} about={nbhd.title} slug={nbhd.slug} />
