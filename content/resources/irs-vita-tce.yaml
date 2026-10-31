@@ -1,0 +1,15 @@
+title: Free tax help from IRS-certified volunteers (VITA and TCE)
+slug: irs-vita-tce
+org: internal-revenue-service
+topics: [taxes, money]
+who_it_is_for: The IRS says many VITA sites help "People who generally make about $70,244 or less," people with disabilities, and people who speak limited English. The IRS does not set one income limit for every site, and each site may set its own. TCE helps "particularly" people 60 and older, with questions about pensions and retirement.
+what_to_do: Find a site near you with the IRS VITA/TCE Locator Tool, or call 800-906-9887. The IRS says the locator "is updated regularly from February through April," so sites for the 2027 season may not show up before then. The IRS page also links a list of what to bring.
+what_happens: The IRS says every volunteer who prepares returns must pass tax law training, and every return gets a quality review before it is filed. Services can vary from site to site.
+contact:
+  phone: "800-906-9887"
+  url: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers
+  url_label: IRS free tax help page
+cost: free
+sources:
+  - url: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers
+    checked: 2026-10-31
