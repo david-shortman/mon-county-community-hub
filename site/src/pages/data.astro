@@ -10,7 +10,7 @@ const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const cat = await catalog();
 const built = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'America/New_York' }).format(new Date(cat.generated));
 const api = (p) => `${base}/api/v1/${p}`;
-const LABELS = { orgs: 'Groups and offices', resources: 'Programs and services', calendar: 'Deadlines and dates', corrections: 'Corrections' };
+const LABELS = { orgs: 'Groups and offices', resources: 'Programs and services', calendar: 'Deadlines and dates', needs: 'Needs register (problems people here face, with evidence)', meetings: 'Public meetings (agendas and minutes)', places: 'Gathering places (community centers and halls)', corrections: 'Corrections' };
 ---
 <Base title="Open data for Morgantown and Mon County" description="Everything Morgantown's listings, dates and corrections as free JSON files that apps and AI tools can read, with the license and how to cite them.">
   <h1>Open data</h1>

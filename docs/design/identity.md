@@ -24,7 +24,7 @@ These are the things a long-time resident, a newcomer, and a student would all r
 
 Set by David on the workshop sliders, October 29, 2026. Every design and writing choice should fit this line:
 
-**A bold, serious-leaning hub that sounds casual and matter-of-fact, lightly seasonal, deeply rooted in Mon County, with the answer first and details after.**
+**A bold, serious-leaning site that sounds casual and matter-of-fact, lightly seasonal, deeply rooted in Mon County, with the answer first and details after.**
 
 | Spectrum | Where we sit | What it means in practice |
 |---|---|---|

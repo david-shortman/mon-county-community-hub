@@ -1,0 +1,15 @@
+name: Osher Lifelong Learning Institute at WVU (OLLI)
+slug: olli-at-wvu
+kind: school
+website: https://olliatwvu.org/
+phone: "304-293-1793"
+summary: A WVU program of classes and activities for adults 50 and older. Its office and classrooms are in the Mountaineer Mall, 5000 Green Bag Road, Morgantown.
+topics: [community]
+area: morgantown
+sources:
+  - url: https://olliatwvu.org/
+    checked: 2026-10-30
+  - url: https://olliatwvu.org/contact-us
+    checked: 2026-10-30
+  - url: https://olliatwvu.org/about-us/morgantown
+    checked: 2026-10-30

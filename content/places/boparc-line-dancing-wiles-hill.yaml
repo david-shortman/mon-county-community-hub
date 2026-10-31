@@ -1,0 +1,29 @@
+name: Line Dancing at Wiles Hill Community Center
+slug: boparc-line-dancing-wiles-hill
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: parks-board
+  text: Morgantown Board of Parks and Recreation (BOPARC)
+story: A weekly drop-in line dancing class. Most dances are for beginners, from very easy to somewhat harder.
+regular:
+  - Thursdays, 10:30 a.m. to noon
+cost: Free with a Wiles Hill fitness membership
+venue: wiles-hill-community-center
+interests: [dance, social]
+tags: [come-alone, beginners, weekly]
+contact:
+  url: https://www.boparc.org/wellness-classes.html
+  phone: "304-296-8356"
+  place: 287 Eureka Dr., Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - No sign-up needed. All wellness classes are drop-in. Planned for adults 55 and over but open to adults of all ages.
+  - The center page lists yearly fitness memberships (2024 prices) from $15 for one person age 50 and up to $50 for one person age 18 to 49.
+sources:
+  - url: https://www.boparc.org/wellness-classes.html
+    checked: 2026-10-30
+  - url: https://www.boparc.org/wiles-hill-community-center.html
+    checked: 2026-10-30
