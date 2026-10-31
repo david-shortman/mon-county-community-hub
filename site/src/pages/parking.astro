@@ -29,6 +29,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="accessible">Accessible parking</h2>
   <ResourceCard r={resource('mpa-accessible-parking')} showCost />
+  <p>Need a placard? See <a href={`${base}/accessible-parking-placard/`}>how to get a West Virginia accessible parking placard</a>.</p>
 
   <h2 id="towing">Towing</h2>
   <ResourceCard r={resource('mpa-towed-or-blocked')} />

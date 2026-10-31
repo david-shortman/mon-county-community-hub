@@ -29,9 +29,9 @@ sections:
     items:
       - "\"Patient cannot walk 200 feet without stopping to rest.\""
       - "\"Patient cannot walk without the use of or assistance from a brace, cane, crutch, another person, prosthetic device, wheelchair or other assisted device.\""
-      - "\"Patient is restricted by lung disease to such an extent the person's forced (respiratory) expiratory volume for one second, when measured by spirometry, is less than one liter, or the arterial oxygen tension is less than 60mm/hg on room air at rest.\""
+      - "Serious lung disease, shown by a breathing or blood oxygen test. The form says: \"Patient is restricted by lung disease to such an extent the person's forced (respiratory) expiratory volume for one second, when measured by spirometry, is less than one liter, or the arterial oxygen tension is less than 60mm/hg on room air at rest.\""
       - "\"Patient uses portable oxygen.\""
-      - "\"Patient has a cardiac condition to the extent that their functional limitations are classified in severity as Class III or Class IV according to standards set by The American Heart Association.\""
+      - "A serious heart condition. The form says: \"Patient has a cardiac condition to the extent that their functional limitations are classified in severity as Class III or Class IV according to standards set by The American Heart Association.\""
       - "\"Patient is severely limited in their ability to walk due to arthritic, neurological, or orthopedic condition.\""
   - heading: Permanent or temporary
     id: how-long
