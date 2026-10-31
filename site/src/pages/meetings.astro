@@ -7,8 +7,8 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadMeetings } from '../lib/meetings/index.mjs';
-import { prettyDate, todayYmd } from '../lib/content.mjs';
-export const page = { door: "community", topic: "government", label: "City meetings: agendas and minutes", summary: "Morgantown City Council and city boards: posted agendas for coming meetings, and minutes from recent ones" };
+import { prettyDate, todayYmd, loadDir } from '../lib/content.mjs';
+export const page = { door: "community", topic: "government", label: "City and county meetings: agendas and minutes", summary: "Morgantown City Council, city boards and the County Commission: posted agendas, recent minutes, and where other local bodies post theirs" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
 const meetings = await loadMeetings();
@@ -20,11 +20,15 @@ const since = (() => { const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.
 const recent = meetings.filter((m) => m.date < today && m.date >= since).reverse();
 // Group recent meetings by board, boards in A to Z order.
 const byBody = [...new Set(recent.map((m) => m.body))].sort((a, b) => a.localeCompare(b)).map((body) => ({ body, items: recent.filter((m) => m.body === body) }));
+// Other public bodies (#13): where their meetings are posted, or that we
+// found nothing online, with the page we read and when.
+const bodies = loadDir('meeting-bodies').sort((a, b) => a.name.localeCompare(b.name));
+const found = (v, what) => (v === 'yes' ? `${what} posted online` : v === 'no' ? `${what} not posted online` : `no ${what} found online`);
 const id = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
-<Base title="Morgantown city meetings: agendas and minutes" description="Posted agendas for coming Morgantown City Council and city board meetings, and minutes from recent ones, from the city's AgendaCenter.">
+<Base title="Morgantown city and Mon County meetings: agendas and minutes" description="Posted agendas for coming Morgantown City Council, city board and Monongalia County Commission meetings, minutes from recent ones, and where other local bodies post theirs.">
   <h1>City meetings: agendas and minutes</h1>
-  <p class="lede">The City of Morgantown posts agendas and minutes for City Council and city boards on its website. This page lists what the city has posted, so you can see what is coming up and what happened.</p>
+  <p class="lede">The City of Morgantown and the Monongalia County Commission post their meeting agendas online. This page lists what they have posted, so you can see what is coming up and what happened, and where other local bodies post theirs.</p>
 
   <div class="note">
     <p>Each agenda says when and where its meeting is. Plans can change, so check the agenda before you go. Dates of meetings that have no agenda yet are on the <a href={`${base}/calendar/`}>Dates page</a>.</p>
@@ -55,6 +59,18 @@ const id = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, 
 
   <h2 id="about">Where this comes from</h2>
   <p>Every day, this site reads the City of Morgantown's <a href={agendaCenter}>AgendaCenter</a>, which also holds agendas for some regional bodies like the Morgantown Utility Board and the Library Board. We link to the city's own files and do not summarize them. Minutes show up here once the city posts them. The same list is in the <a href={`${base}/data/`}>open data</a> as meetings.json.</p>
-  <p>Monongalia County Commission, school board, and town meetings in Star City, Westover and Granville are not here yet.</p>
+  <p>Monongalia County Commission agendas come from the <a href="https://www.monongaliacounty.gov/commission/meeting_schedule/index.php">county's meeting page</a> the same way. The county does not post minutes there.</p>
   <SourceLine sources={sources} about="city meetings" />
+
+  <h2 id="other-bodies">Other public bodies: where to find their meetings</h2>
+  <p>Some bodies post their own agendas and minutes. Where we looked and found nothing online, we say so, with the date we looked.</p>
+  <ul>
+    {bodies.map((b) => (
+      <li id={b.slug}>
+        <strong><a href={b.where}>{b.name}</a></strong>: {found(b.agendas, 'agendas')}, {found(b.minutes, 'minutes')}{b.video === 'yes' ? <>, and <a href={b.video_url}>meeting video</a></> : ''}. {b.note}
+        <SourceLine sources={b.sources} about={b.name} slug={b.slug} />
+      </li>
+    ))}
+  </ul>
+  <p>Not here yet: the Monongalia County Board of Education and the towns of Westover and Granville, whose pages we could not reach this time, and Blacksville, which we have not looked for yet (<a href="https://github.com/david-shortman/mon-county-community-hub/issues/860">issue 860</a>).</p>
 </Base>

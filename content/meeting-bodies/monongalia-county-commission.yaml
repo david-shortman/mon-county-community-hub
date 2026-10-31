@@ -1,0 +1,11 @@
+name: Monongalia County Commission
+slug: monongalia-county-commission
+agendas: yes          # yes | no | not-found
+minutes: not-found
+video: yes
+where: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
+video_url: https://www.youtube.com/@monongaliacountycommission5650
+note: Agendas for regular meetings and work sessions are listed on this page above. We did not find a minutes archive on the county's meeting page.
+sources:
+  - url: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
+    checked: 2026-10-30

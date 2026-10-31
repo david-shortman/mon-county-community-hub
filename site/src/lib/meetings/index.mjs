@@ -9,6 +9,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseAgendaCenter } from './agendacenter.mjs';
+import { parseCountyCommission } from './countycommission.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const SNAPSHOT_DIR = fs.existsSync(path.join(here, 'snapshots'))
@@ -21,6 +22,17 @@ export const SOURCES = [
     publisher: 'City of Morgantown',
     site: 'https://www.morgantownwv.gov',
     page_url: 'https://www.morgantownwv.gov/AgendaCenter',
+    parse: parseAgendaCenter,
+    slug_prefix: 'morgantown',
+  },
+  // #13: the county posts agendas (no minutes) on its own page.
+  {
+    id: 'mon-county-commission',
+    publisher: 'Monongalia County Commission',
+    site: 'https://www.monongaliacounty.gov',
+    page_url: 'https://www.monongaliacounty.gov/commission/meeting_schedule/index.php',
+    parse: parseCountyCommission,
+    slug_prefix: 'mon-county',
   },
 ];
 // Keep meetings from this many days back, plus everything ahead.
@@ -39,7 +51,7 @@ function readSnapshot(src) {
 export function toRecords(src, rows, { checked, previous = [] }) {
   const before = new Map(previous.map((r) => [r.slug, r]));
   const records = rows.map((r) => {
-    const slug = `morgantown-${r.body_slug}-${r.date}-${r.id}`;
+    const slug = `${src.slug_prefix ?? 'morgantown'}-${r.body_slug}-${r.date}-${r.id}`;
     const old = before.get(slug);
     const changed = !old || old.title !== r.title || old.agenda_url !== r.agenda_url || old.minutes_url !== r.minutes_url;
     return {
@@ -84,7 +96,7 @@ export async function loadSource(src, { live = true, save = false, today = today
   const keep = (r) => r.date >= daysAgo(today, KEEP_DAYS);
   if (live) {
     try {
-      const rows = parseAgendaCenter(await fetchPage(src.page_url), src.site);
+      const rows = (src.parse ?? parseAgendaCenter)(await fetchPage(src.page_url), src.site);
       if (!rows.length) throw new Error('no meetings found on the page; its layout may have changed');
       const meetings = toRecords(src, rows, { checked: today, previous: snap?.meetings ?? [] }).filter(keep);
       if (save) {

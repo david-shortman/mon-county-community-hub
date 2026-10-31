@@ -489,3 +489,23 @@ sources:
 - **Official sources only**, read in the same session: a government agency or a program that publishes the same data for every county. Never a real estate, "best places" or other commercial site.
 - **Copy the number and its definition exactly.** Never compute a new number (a rank, a change, a per-person rate) the source does not give.
 - **Describe, never judge.** No "good", "bad", "safe" or "failing". The page says what the numbers do and don't tell you.
+
+## `meeting-bodies/<slug>.yaml`: where a public body posts its meetings
+
+For the "Other public bodies" list on the meetings page (#13). One file per body that is not read automatically (the city AgendaCenter and the County Commission page are read every day by `site/src/lib/meetings/`).
+
+```yaml
+name: Star City Town Council
+slug: star-city-council
+agendas: not-found     # yes | no | not-found (we looked and found nothing online)
+minutes: "yes"
+video: not-found
+where: https://www.starcitywv.com/minutes/   # the page to send people to
+video_url: https://www.youtube.com/@example  # needed when video is yes
+note: The town posts council minutes by year. We did not find meeting agendas on the town's website.
+sources:
+  - url: https://www.starcitywv.com/
+    checked: 2026-10-30
+```
+
+A body with nothing online still gets a file, with `not-found` and the date checked: showing the gap is useful in itself. Link to the body's files; never rehost or summarize them.

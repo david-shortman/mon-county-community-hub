@@ -1,0 +1,10 @@
+name: Star City Town Council
+slug: star-city-council
+agendas: not-found
+minutes: yes
+video: not-found
+where: https://www.starcitywv.com/minutes/
+note: The town posts council minutes by year. We did not find meeting agendas on the town's website.
+sources:
+  - url: https://www.starcitywv.com/
+    checked: 2026-10-30

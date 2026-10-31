@@ -61,6 +61,9 @@ rules:
   - host: example.wv.gov
     group: reference
     why: Placeholder in examples.
+  - prefix: https://www.monongaliacounty.gov/document_center/Agenda/
+    group: reference
+    why: County Commission agenda PDFs on the meetings page (#13). They redirect to the county's file host, so the source check watches the page that lists them (commission/meeting_schedule) instead of each file.
 
 # Redirects to another domain count as "moved" (a domain can lapse and be
 # bought by someone else). These pairs are the same owner, so a redirect between

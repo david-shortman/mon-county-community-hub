@@ -368,6 +368,16 @@ for (const i of loadDir('indicators')) {
   if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
 }
 
+// Public bodies and where their meetings are posted (content/meeting-bodies,
+// #13): what we found online, with the page we read and when.
+const BODY_FIELDS = ['name', 'slug', 'agendas', 'minutes', 'video', 'where', 'video_url', 'note', 'sources'];
+for (const b of loadDir('meeting-bodies')) {
+  checkRecord(b, ['name', 'slug', 'agendas', 'minutes', 'video', 'where'], BODY_FIELDS);
+  for (const k of ['agendas', 'minutes', 'video']) if (b[k] != null && !['yes', 'no', 'not-found'].includes(String(b[k]))) errors.push(`${b._file}: ${k} must be yes, no or not-found (quote yes and no)`);
+  for (const k of ['where', 'video_url']) if (b[k] != null && !isUrl(b[k])) errors.push(`${b._file}: ${k} is not a web link`);
+  if (String(b.video) === 'yes' && !b.video_url) errors.push(`${b._file}: video: yes needs video_url`);
+}
+
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
 console.log(`Checked ${placeCheck.count} gathering places (content/places).`);
