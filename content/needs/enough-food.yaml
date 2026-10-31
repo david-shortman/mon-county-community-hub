@@ -1,0 +1,54 @@
+title: Having enough food
+slug: enough-food
+summary: About 1 in 8 people in Mon County do not always have enough food. Food is also one of the most common reasons people call West Virginia 211 here.
+evidence:
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-31
+    shows: County Health Rankings estimates the share of people who lack steady access to enough food, using Feeding America's Map the Meal Gap numbers.
+    figure: "12.6% of people, about 13,370 people (West Virginia 15%, US 13.5%)"
+    publisher: County Health Rankings (2025 release)
+  - url: https://data.cdc.gov/d/swc5-untb
+    checked: 2026-10-31
+    shows: CDC estimates the share of adults who had trouble getting enough food in the past year. It is a model-based estimate, not a count.
+    figure: "12.9% of adults (likely between 9.8% and 16.9%)"
+    data_date: "2023"
+    publisher: CDC PLACES (2025 release)
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: West Virginia 211 logged 388 requests for food from Monongalia County in one year, out of 4,428 requests in all (page 62 of the PDF).
+    figure: "388 food requests"
+    data_date: August 2024 to August 2025
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://wvpolicy.org/wp-content/uploads/2025/05/WVCBP_2024KidsCountDataBook_updated.pdf
+    checked: 2026-10-31
+    shows: About 3,000 children in the county took part in SNAP (food stamps), from the Monongalia County page of the Kids Count data book (page 63 of the PDF).
+    figure: "3,008 children"
+    data_date: "2023"
+    publisher: West Virginia Center on Budget and Policy, 2024 Kids Count Data Book
+affected:
+  count: 13370
+  description: People in Monongalia County who lack steady access to enough food, as estimated by County Health Rankings.
+  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+  checked: 2026-10-31
+severity: high
+severity_why: Going without enough food harms health, school and work, and hits children and older adults hardest.
+trend: unknown
+working_on:
+  - name: Mountaineer Food Bank
+    url: https://mountaineerfoodbank.org/
+  - org: christian-help
+  - org: scotts-run-settlement-house
+  - org: the-shack-neighborhood-house
+  - org: catholic-charities-west-virginia
+  - org: wv-department-of-human-services
+  - org: monongalia-county-health-department
+  - org: west-virginia-211
+gaps:
+  - Pantry days and hours change often, and sources disagree on several of them (issue 932).
+  - There is no one place to see which pantry is open on a given day in the county.
+  - We have no public count of how many people local pantries serve each month.
+topics: [food]
+rank: 1
+rank_why: "Score 12 of 12: severity 3, reach 3 (about 13,370 people), agreement 3 (four sources), room to help 3 (pantries, SNAP and WIC exist but are hard to line up). Tie broken by a county-wide official estimate."
+questions: [q02, q04, q45]
+issues: [60, 570, 922, 932]

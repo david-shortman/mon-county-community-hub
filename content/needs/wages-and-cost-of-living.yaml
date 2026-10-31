@@ -1,0 +1,43 @@
+title: Wages that cover the basics
+slug: wages-and-cost-of-living
+summary: Many working households here earn more than the poverty line but not enough for a basic budget. United For ALICE counts about half of single adults, two thirds of single mothers, and most householders under 25 in Mon County below that line.
+evidence:
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: United For ALICE figures for Monongalia County give the share of each household type below the ALICE Threshold, the income needed for housing, child care, food, transportation, health care, a phone and taxes (page 16 of the PDF). Many householders under 25 are college students.
+    figure: "49% of single or cohabiting adults without children; 67% of single mothers; 83% of householders under 25; 48% of householders 65 and older"
+    data_date: "2023"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: North Central West Virginia Community Action's 2022 needs assessment ranked employment second for Monongalia County, naming a lack of good paying and full time jobs with benefits (page 56 of the PDF). West Virginia 211 logged 444 employment and income requests from the county in one year (page 62).
+    figure: "444 employment and income requests"
+    data_date: 2022 and August 2024 to August 2025
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-31
+    shows: Income inequality, the income at the 80th percentile divided by the income at the 20th percentile.
+    figure: "6.3 (West Virginia 5.1, US 4.9)"
+    publisher: County Health Rankings (2025 release)
+affected:
+  estimate: "about half of single adults and two thirds of single mothers"
+  description: Households in Monongalia County below the ALICE Threshold, by household type, from United For ALICE as reported by Mon Health.
+  url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+  checked: 2026-10-31
+severity: medium
+severity_why: Households below a basic budget make hard trade-offs between bills, but most are working and housed.
+trend: unknown
+working_on:
+  - org: workforce-west-virginia
+  - org: region-vi-workforce-development-board
+  - org: united-way-monongalia-preston
+  - org: jobs-and-hope-wv
+  - org: west-virginia-women-work
+  - org: wv-department-of-human-services
+gaps:
+  - Working families may not know they qualify for help like SNAP, child care help or tax credits.
+  - The county's basic household budget is not shown in plain numbers anywhere local.
+topics: [money, work]
+rank: 10
+rank_why: "Score 9 of 12: severity 2, reach 3, agreement 2, room to help 2. Above transportation because of higher 211 demand."
+issues: [403]

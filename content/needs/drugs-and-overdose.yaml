@@ -1,0 +1,43 @@
+title: Drug and alcohol use, and overdose deaths
+slug: drugs-and-overdose
+summary: Drug and alcohol use was the third top health problem in a 2025 hospital survey here. Overdose deaths in the county fell from 77 in 2023 to 49 in 2024, but the rate is still above the US rate.
+evidence:
+  - url: https://odcp.wv.gov/media/39878/download?inline
+    checked: 2026-10-31
+    shows: The state's 2025 snapshot for Monongalia County lists overdose deaths by year.
+    figure: "77 deaths in 2023, 49 in 2024"
+    data_date: 2023 and 2024
+    publisher: West Virginia Office of Drug Control Policy, At-A-Glance 2025
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-31
+    shows: Drug overdose deaths for each 100,000 people.
+    figure: "42 per 100,000 (West Virginia 78, US 31)"
+    publisher: County Health Rankings (2025 release)
+  - url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    checked: 2026-10-31
+    shows: Drug or alcohol use was the third most named health problem in the 2025 community survey (page 22).
+    figure: "53% of respondents"
+    data_date: "2025"
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+affected:
+  count: 49
+  description: Overdose deaths in Monongalia County in 2024. Many more people live with addiction or are affected by a loved one's use; no public source counts them for the county.
+  url: https://odcp.wv.gov/media/39878/download?inline
+  checked: 2026-10-31
+severity: high
+severity_why: Overdose can kill, and addiction affects whole families.
+trend: better
+trend_why: The state snapshot shows overdose deaths fell from 77 in 2023 to 49 in 2024. One year is not a long trend.
+working_on:
+  - org: monongalia-county-health-department
+  - org: wvu-medicine
+  - org: mon-health-medical-center
+  - org: milan-puskar-health-right
+gaps:
+  - Where to get free naloxone (Narcan) and how to start treatment today are not in one plain place (issue 477).
+  - No public source lists open treatment or recovery housing beds day to day.
+topics: [health]
+rank: 6
+rank_why: "Score 10 of 12: severity 3, reach 2, agreement 3, room to help 2."
+questions: [q06]
+issues: [477]
