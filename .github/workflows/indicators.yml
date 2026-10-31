@@ -1,0 +1,49 @@
+name: Indicators
+
+# Once a month, checks the county numbers in content/indicators/ against
+# County Health Rankings' public files (#15). Free: no key, no account, no
+# Claude. If anything differs (a new release or a correction), it opens or
+# updates one issue for Duet, who runs `node scripts/update-indicators.mjs
+# --write` in site/, checks the result and opens a PR.
+
+on:
+  schedule:
+    - cron: '41 13 3 * *' # the 3rd of each month
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: site
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - name: Compare with County Health Rankings
+        id: cmp
+        run: |
+          if node scripts/update-indicators.mjs --check > ../indicators.txt 2>&1; then echo "differs=false" >> "$GITHUB_OUTPUT"; else echo "differs=true" >> "$GITHUB_OUTPUT"; fi
+          cat ../indicators.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Open or update the issue
+        if: steps.cmp.outputs.differs == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="County numbers differ from County Health Rankings"
+          body=$(printf 'The monthly check found indicator files that no longer match County Health Rankings (a new release or a correction). Run: %s\n\n```\n%s\n```\n\nTo update: in `site/`, run `node scripts/update-indicators.mjs --write`, check the numbers and years against the source, and open a PR. For a new yearly release, first change the first two source URLs in each file to the new data and trends files.\n\n---\n_Opened by the Indicators workflow (#15)._' "$RUN_URL" "$(cat ../indicators.txt)")
+          n=$(gh api "repos/$REPO/issues?state=open&labels=for:duet&per_page=100" --jq ".[] | select(.title == \"$title\") | .number" | head -1)
+          if [ -n "$n" ]; then gh api -X PATCH "repos/$REPO/issues/$n" -f body="$body" > /dev/null; else gh api "repos/$REPO/issues" -f title="$title" -f body="$body" -f "labels[]=for:duet" > /dev/null; fi

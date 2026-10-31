@@ -356,7 +356,7 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
 
 // County indicators (content/indicators, #62): an official number, its own
 // definition, the data year, and sources with checked dates.
-const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more'];
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
 for (const i of loadDir('indicators')) {
   checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
   if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
@@ -366,6 +366,13 @@ for (const i of loadDir('indicators')) {
   for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
   if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
   if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+  // history (#15): years in order, each with a number, as the source gives it.
+  for (const [k, pts] of Object.entries(i.history ?? {})) {
+    if (!Array.isArray(pts)) { errors.push(`${i._file}: history.${k} must be a list`); continue; }
+    const yrs = pts.map((p) => String(p.year));
+    if (pts.some((p) => !/^\d{4}(-\d{4})?$/.test(String(p.year)) || typeof p.value !== 'number')) errors.push(`${i._file}: history.${k} needs year and value on each point`);
+    if (yrs.join() !== [...yrs].sort().join()) errors.push(`${i._file}: history.${k} years must be in order`);
+  }
 }
 
 for (const w of warnings) console.warn(`warning: ${w}`);

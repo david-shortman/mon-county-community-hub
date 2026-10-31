@@ -5,6 +5,7 @@
 // number means for policy, and never claim credit for a change.
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
+import TrendChart from '../components/TrendChart.astro';
 import { loadIndicators, showValue, PLACES } from '../lib/indicators.mjs';
 export const page = { door: 'community', topic: 'data', label: "How we're doing", summary: 'Official numbers on health and money in Mon County, compared with West Virginia and the US, with sources' };
 const health = loadIndicators('health');
@@ -12,7 +13,7 @@ const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 ---
 <Base title="How is Mon County doing? Official numbers for Monongalia County, WV" description="Official numbers on child poverty, health insurance and jobs in Monongalia County, WV, next to West Virginia and the US, each with its source and year.">
   <h1>How is Mon County doing?</h1>
-  <p class="lede">Official numbers about Monongalia County, next to West Virginia and the whole country. Each one links to where it comes from and says what year it covers.</p>
+  <p class="lede">Official numbers about Monongalia County, next to West Virginia and the whole country. Each one links to where it comes from and says what year it covers, and the charts show up to ten years.</p>
 
   <h2 id="health">Health and money</h2>
   <p>These come from <a href="https://www.countyhealthrankings.org/health-data/west-virginia/monongalia">County Health Rankings</a>, a program that gathers the same public numbers for every county in the US. We use its 2025 data file. The definitions come from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx">2025 data dictionary</a>, and the years from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv">2025 trends file</a>.</p>
@@ -25,6 +26,7 @@ const repo = 'https://github.com/david-shortman/mon-county-community-hub';
           <li>{k === 'monongalia' ? <strong>{label}: {showValue(i, i.values[k])}</strong> : <>{label}: {showValue(i, i.values[k])}</>}</li>
         ))}
       </ul>
+      <TrendChart i={i} />
       <SourceLine sources={i.sources.slice(0, 1)} about={i.title} slug={i.slug} />
     </article>
   ))}
