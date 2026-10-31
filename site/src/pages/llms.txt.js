@@ -40,6 +40,7 @@ export function GET({ site }) {
 - [Apply for SNAP (food stamps)](${u('/snap/')}): apply online at WV PATH, the state's free site, and the DoHS phone number
 - [Free help filing your taxes](${u('/free-tax-help/')}): free tax prep near Morgantown (Christian Help, IRS VITA and TCE, AARP Tax-Aide), IRS Free File and West Virginia's Free File list, the Earned Income Tax Credit and the WV Family Tax Credit, with no guessed 2027 dates
 - [File today: SNAP, Medicaid, LIEAP, WV WORKS](${u('/file-today/')}): how to start each application today (SNAP can start with name, address and signature), and a list of what the state may ask you to bring, quoted from its forms; picks live only in the web address
+- [After you apply for WV WORKS](${u('/after-you-apply/wv-works/')}): the face-to-face interview, orientation and plan within 10 working days, the 30 day decision, reporting changes within 10 days, good cause interviews, the 60 month limit, and fair hearings within 90 days, quoted from the state's manual
 - [Get care](${u('/care/')}): pick what is going on (a flu or COVID shot, a dentist, turning 65, quitting tobacco, staying healthy) and get local steps in order, with phone numbers, costs and sources
 - [Flu and COVID shots](${u('/flu-shots/')}): book at the Monongalia County Health Department; who gets them free
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
