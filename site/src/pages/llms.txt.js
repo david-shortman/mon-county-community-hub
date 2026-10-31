@@ -71,6 +71,7 @@ export function GET({ site }) {
 - [Thrift and resale shops](${u('/thrift-shops/')}): secondhand shops by area, what each sells, which buy from you, and which fund a local cause
 - [Sell, donate or give away your stuff](${u('/sell-or-donate/')}): for clothes, kids' gear, furniture, books, electronics, tools, paint and building materials, where each can be sold, donated, given away or recycled
 - [Markets and sales coming up](${u('/markets/')}): craft markets and card shows in the next 30 days, the farmers market, yearly sales, the nearest flea markets, and how to sell at a market
+- [Borrow it or get it free](${u('/borrow-or-get-free/')}): the city tool library, the public library's Library of Things, free clothes and household goods, free giving groups like Freecycle, and free repair events
 - [Grow food and flowers](${u('/grow/')}): pick what you hope to do (grow food on a budget, sell what you grow, a small farm) and get local steps with phone numbers and sources
 - [Sell what you grow](${u('/sell-what-you-grow/')}): who sets the rules for selling produce, canned foods and plants at a Mon County farmers market, with links to the county health department and WV Department of Agriculture rules
 - [How do I get my garden soil tested?](${u('/soil-test/')}): WVU's free basic soil test for West Virginia residents, how to take a sample, the form, mailing or dropping it off at the WVU Soil Testing Lab in Morgantown, when results come, and help from the Monongalia County Extension office
