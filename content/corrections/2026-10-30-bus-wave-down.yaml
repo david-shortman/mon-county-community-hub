@@ -3,5 +3,5 @@ item: Bus to Ruby Memorial Hospital
 page: /medical-rides/
 kind: fact
 found_by: our-check
-what: The listing said you can wave the Route 9 bus down anywhere along the route. Mountain Line's pages do not say that, so we took it out. It now gives only the route, the first and last runs, and how long a trip around the route takes.
+what: The listing said you can wave the Route 9 bus down anywhere along the route. Route 9's own page does not say that, so we took it out of this listing. It now gives only the route, the first and last runs, and how long a trip around the route takes.
 link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=is%3Apr+audit

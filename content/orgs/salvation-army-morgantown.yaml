@@ -1,0 +1,13 @@
+name: The Salvation Army, Morgantown Corps
+slug: salvation-army-morgantown
+kind: faith
+website: https://www.salvationarmyusa.org/wv/morgantown/
+phone: "304-296-3525"
+summary: The Salvation Army in Morgantown, at 20 Scott Ave in Hazel's House of Hope. The United Way's Hazel's House of Hope page says it serves free meals at its Hope Café and offers social services Monday to Friday, 9 a.m. to 3:30 p.m.
+topics: [food, poverty]
+area: morgantown
+sources:
+  - url: https://www.salvationarmyusa.org/wv/morgantown/
+    checked: 2026-10-30
+  - url: https://www.unitedwaympc.org/hazels-house-hope
+    checked: 2026-10-30

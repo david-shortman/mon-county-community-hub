@@ -1,0 +1,29 @@
+---
+// BOPARC refunds, cancellations and transfers (#953, part of #393): BOPARC's
+// policy PDF as short lists. Every rule is quoted in
+// content/pdf-pages/boparc-refunds.yaml. BOPARC posts two versions that
+// differ on one number, and the page says who says what.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "outdoors", label: "Park and rec refunds and cancellations", summary: "BOPARC's rules for getting money back on camps, programs, pavilion and building rentals, and Dorsey's Knob Lodge" };
+const d = pdfPage('boparc-refunds');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="BOPARC refunds and cancellations in Morgantown: camps, pavilions, Dorsey's Knob Lodge" description="Morgantown BOPARC's refund, cancellation and transfer rules for camps and programs, pavilion and building rentals, private pool and ice arena party rooms, and Dorsey's Knob Lodge, quoted from its policy PDFs.">
+  <h1>Park and rec refunds and cancellations</h1>
+  <p class="lede">BOPARC runs Morgantown's city parks, camps and rentals. Its rules for getting money back are in a PDF. Here they are as short lists, in BOPARC's own words. Ask BOPARC before you cancel, since the two copies of its policy differ on one fee.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>Parks, pools, trails and places to rent are on <a href={`${base}/parks/`}>Parks, trails and outdoors</a>.</p>
+
+  <p class="meta">This page is a reading aid. BOPARC's PDFs are the official policy. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

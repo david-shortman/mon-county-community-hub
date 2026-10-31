@@ -1,0 +1,13 @@
+name: West Virginia Vital Registration Office
+slug: wv-vital-registration
+kind: government
+website: https://dhhr.wv.gov/HSC/VR/CR/Pages/default.aspx
+phone: "304-558-2931"
+summary: The state office that keeps West Virginia birth, death and marriage records and sells certified copies. It is part of the state Health Statistics Center, with a walk-up counter at 350 Capitol Street in Charleston.
+topics: [records, government]
+area: statewide
+sources:
+  - url: https://dhhr.wv.gov/HSC/about/contactinformation/Pages/default.aspx
+    checked: 2026-10-31
+  - url: https://dhhr.wv.gov/HSC/VR/CR/Pages/default.aspx
+    checked: 2026-10-31
