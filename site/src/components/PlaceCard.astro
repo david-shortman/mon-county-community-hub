@@ -46,7 +46,7 @@ const hoursData = r.opening_hours && r.hours ? JSON.stringify(r.opening_hours) :
   <Actions callFirst phone={r.contact.phone} phoneLabel={r.title} sms={textLine} smsLabel={`${r.title}, send your ZIP code`} place={r.contact.place} about={r.title} />
   <BusLink place={r.contact.place} about={r.title} />
   <WhatHappensNext r={r} />
-  <SourceLine sources={r.sources} org={r.org} about={r.title} slug={r.slug}>{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) && <>{' '}<a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a>.</>}</SourceLine>
+  <SourceLine sources={r.sources} phone={r.phone_confirmed} org={r.org} about={r.title} slug={r.slug}>{r.contact.url && !r.sources.some((s) => s.url === r.contact.url) && <>{' '}<a href={r.contact.url}>Official site<span class="sr-only"> of {r.title}</span></a>.</>}</SourceLine>
   <PassItOn title={r.title} slug={r.slug} org={r.org} phone={r.contact.phone} place={r.contact.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
 )}
