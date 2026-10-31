@@ -1,0 +1,44 @@
+---
+// Being a family caregiver (#222 coverage map, a partly covered area). Facts
+// come from the records, each read on its own official page on 2026-10-31.
+// Left off until a person confirms them: the area's Family Caregiver Support
+// Program, a current WV Lifespan Respite program, Mission WV's Relatives as
+// Parents phone, and WVU Medicine and Mon Health support groups (blocked or
+// script-only pages).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+export const page = { door: "family", topic: "disability", label: "Caring for a family member", summary: "Where to start, a break for you (respite), support groups, raising a grandchild or a relative's child, and Medicare questions" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Caring for a family member in Morgantown and Mon County, WV" description="Help for family caregivers in Monongalia County, WV: the Aging and Disability Resource Center, the Eldercare Locator, caregiver support at Senior Monongalians, respite and in-home help, dementia support groups, and help for grandparents and relatives raising a child.">
+  <h1>Caring for a family member</h1>
+  <p class="lede">Caring for a parent, a partner, a child with a disability or a grandchild? You can search the Eldercare Locator online any time. For a person to help you sort out options, the state's Aging and Disability Resource Center is free.</p>
+
+  <h2 id="start">Where to start</h2>
+  <ResourceCard r={resource('wv-adrc-region-1')} showCost />
+  <ResourceCard r={resource('eldercare-locator')} />
+  <ResourceCard r={resource('senior-monongalians-caregiver-support')} />
+
+  <h2 id="respite">A break for you, and help at home</h2>
+  <p>Respite means someone else gives care for a while, so you can rest. Ask the Resource Center or Senior Monongalians what is open now.</p>
+  <ResourceCard r={resource('senior-monongalians-in-home-care')} />
+  <p>Care at home through Medicaid: see <a href={`${base}/medicaid-waivers/`}>Medicaid waivers</a>.</p>
+
+  <h2 id="groups">Support groups</h2>
+  <ResourceCard r={resource('alz-wv-caregiver-groups')} />
+
+  <h2 id="kinship">Raising a grandchild or a relative's child</h2>
+  <ResourceCard r={resource('wvsu-healthy-grandfamilies')} showCost />
+  <ResourceCard r={resource('mission-wv-kinship-navigators')} />
+  <ResourceCard r={resource('legal-aid-wv-kinship-care')} showCost />
+
+  <h2 id="more">More for caregivers</h2>
+  <ul>
+    <li>Medicare questions: <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</li>
+    <li>Devices, rights and services for people with disabilities: <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</li>
+    <li>Free legal help: <a href={`${base}/legal-help/`}>Courts and legal help</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 31, 2026. Programs change, so call to check what is open. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

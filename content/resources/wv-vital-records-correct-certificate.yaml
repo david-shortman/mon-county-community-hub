@@ -1,0 +1,18 @@
+title: Fix a mistake on a West Virginia birth or death certificate
+slug: wv-vital-records-correct-certificate
+org: wv-vital-registration
+topics: [records, legal]
+who_it_is_for: People with a West Virginia birth or death certificate that has a mistake, like a misspelled name, or that needs a change, like adding a father or a legal name change. Births more than 100 years ago and deaths more than 50 years ago cannot be changed.
+what_to_do: Fill out the state affidavit form for your kind of change and send it with your proof. To fix a marriage record, contact the county where you applied for the marriage license.
+steps:
+  - "Pick the form: one for an adult's birth certificate, one for a child's birth certificate, and one for a death certificate. All are on the state page."
+  - "Include at least two original documents that show the right facts, with the full correct name and date of birth or age. They must be made at least five years before you apply, or within seven years of the birth or death. The state gives examples like a marriage license, voter registration, an expired driver's license, a passport issued more than 5 years ago, a school enrollment record, a DD-214, or vaccination records."
+  - "If you cannot get these documents, the state says the change can only be made through a court. You petition a court in the county where you live and send the office a certified copy of the court order."
+contact:
+  phone: "304-558-2931"
+  url: https://dhhr.wv.gov/HSC/VR/Pages/Correct-or-Amend-a-Certificate.aspx
+  url_label: Forms and rules
+cost: "$10 for an amendment, by check or money order to Vital Registration. No fee for amendments in the first year after the birth or death, court-ordered paternity, or paternity affidavits sent in the first year after birth. Each new certified copy is $12."
+sources:
+  - url: https://dhhr.wv.gov/HSC/VR/Pages/Correct-or-Amend-a-Certificate.aspx
+    checked: 2026-10-31

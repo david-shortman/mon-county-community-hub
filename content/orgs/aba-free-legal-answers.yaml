@@ -1,0 +1,10 @@
+name: ABA Free Legal Answers
+slug: aba-free-legal-answers
+kind: nonprofit
+website: https://wv.freelegalanswers.org/
+summary: A free website where people who qualify can type a civil (non-criminal) legal question and get a written answer from a volunteer lawyer. It is a project of the American Bar Association, with a site for West Virginia.
+topics: [legal]
+area: national
+sources:
+  - url: https://wv.freelegalanswers.org/
+    checked: 2026-10-31
