@@ -1,19 +1,28 @@
 ---
 // Parents of school-age kids (#272, part of #261): signing up for school,
 // buses, the school calendar, after-school programs, tutoring and things to
-// do. Built from #615, #618, #620 and #621. Before and after school care
-// (#617) and free school meals (#619) come in a separate PR that waits for
-// David. Not here until confirmed (#613): BOPARC camps, Energy Express, the
-// Boys and Girls Club, the library makerspace hours, school transfers.
+// do (#615, #618, #620, #621), plus before and after school care (#617) and
+// free school meals (#619). Not here until confirmed (#613): BOPARC camps,
+// Energy Express, the Boys and Girls Club, library makerspace hours, school
+// transfers, Kidematics prices and The SOURCE's tuition amounts.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
-export const page = { door: "family", topic: "family", label: "School-age kids: school, buses and after school", summary: "Sign up for school, find your school and bus, days off, after-school programs, free tutoring and things to do" };
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "family", label: "School-age kids: school, buses and after school", summary: "Sign up for school, find your school and bus, days off, free school meals, before and after school care, free tutoring and things to do" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const careSources = [
+  { url: 'https://www.boe.mono.k12.wv.us/page/before-after-school-care', checked: '2026-10-30', name: 'Monongalia County Schools, Before and After School Care' },
+];
+const ccrcSources = [
+  { url: 'https://bfa.wv.gov/bfa-programs/child-care-assistance', checked: '2026-10-30', name: 'WV Bureau for Family Assistance, Child Care Assistance' },
+  { url: 'https://the-shack.org/child-care/', checked: '2026-10-30', name: 'The Shack Neighborhood House, child care page' },
+];
 ---
-<Base title="School-age kids in Morgantown and Mon County: enroll, buses, after school, tutoring" description="For parents of kids in Monongalia County Schools: how to sign up and find your school, bus times and delay alerts, days off and early dismissals, after-school programs at middle and high schools, free online tutoring, and things to do.">
+<Base title="School-age kids in Morgantown and Mon County: enroll, buses, after school, tutoring" description="For parents of kids in Monongalia County Schools: how to sign up and find your school, bus times and delay alerts, days off and early dismissals, free school meals, before and after school care, after-school programs at middle and high schools, free online tutoring, and things to do.">
   <h1>School-age kids: school, buses and after school</h1>
   <p class="lede">For parents of kids in kindergarten through 12th grade in Monongalia County Schools. Not sure which school your child goes to? Look up your address on the district's map, then contact that school.</p>
 
@@ -24,6 +33,30 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2 id="bus">Buses, days off and early dismissals</h2>
   {r('mcs-school-buses') && <ResourceCard r={r('mcs-school-buses')} />}
   <p>The 2026-27 days with no school and the two-hour early dismissals are on <a href={`${base}/calendar/`}>Dates</a>. You can add them to your phone's calendar from there.</p>
+
+  <h2 id="meals">School meals</h2>
+  {r('mcs-free-school-meals') && <ResourceCard r={r('mcs-free-school-meals')} />}
+
+  <h2 id="care">Care before and after school at elementary schools</h2>
+  <p>The county schools work with local groups to offer before and after school care at nine elementary schools. Find your child's school below, then contact that group. The district's list puts Cheat Lake Elementary under two groups, Kidematics and Morning and Afternoon Adventures, so ask both.</p>
+  <ul>
+    <li><strong>Brookhaven, Cheat Lake, Mountainview, North:</strong> Morning and Afternoon Adventures</li>
+    <li><strong>Cheat Lake, Suncrest:</strong> Kidematics</li>
+    <li><strong>Eastwood, Mylan Park, Ridgedale:</strong> The Shack</li>
+    <li><strong>Skyview:</strong> The SOURCE</li>
+  </ul>
+  <SourceLine sources={careSources} about="which group serves each school" />
+  {r('vhs-morning-afternoon-adventures') && <ResourceCard r={r('vhs-morning-afternoon-adventures')} showCost />}
+  {r('kidematics-before-after-school') && <ResourceCard r={r('kidematics-before-after-school')} />}
+  {r('shack-before-after-school') && <ResourceCard r={r('shack-before-after-school')} />}
+  {r('source-before-after-skyview') && <ResourceCard r={r('source-before-after-skyview')} showCost />}
+
+  <h3>Days with no school</h3>
+  {r('shack-out-of-school-days') && <ResourceCard r={r('shack-out-of-school-days')} showCost />}
+
+  <h3>Help paying for child care</h3>
+  <p>The state's child care assistance program helps pay for care for working parents, and in some cases parents in school, who meet its income rules. Local Child Care Resource and Referral agencies run it. For families here, The Shack's child care page says to call the Child Care Resource Center (CCRC) at <a href="tel:13042927357">304-292-7357</a>, and that you must be working, going to school or looking for a job. The SOURCE says it accepts CCRC payments.</p>
+  <SourceLine sources={ccrcSources} about="CCRC child care help" />
 
   <h2 id="after-school">After school at middle and high schools</h2>
   {r('mcs-after-school-middle-high') && <ResourceCard r={r('mcs-after-school-middle-high')} />}
@@ -47,5 +80,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <li>First jobs, driving and volunteering for teens: <a href={`${base}/teens/`}>Teens</a>.</li>
   </ul>
 
-  <p class="meta">Sources checked October 30, 2026. Schools, programs and times can change, so check with the school or program. Something out of date or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Schools, programs and times can change, so check with the school or program. Something out of date or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

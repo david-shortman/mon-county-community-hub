@@ -61,6 +61,7 @@ Use "you", active voice, and a friendly, direct tone. (plainlanguage.gov: "Use p
 - **2:** Mostly "you" and active verbs.
 - **3:** Consistent throughout, and warm without being cute.
 - **How to check:** Count passive constructions ("is/are/was/were/be" plus a past participle) in each item.
+- **Help pages:** on any page that helps someone get help, also follow the [tone for help pages](../playbook/help-tone.md): lead with what the reader can do on their own, offer a person as a normal choice, say who qualifies from the source, describe the situation not the person, and no shame words. A page that misses those rules scores no higher than 1 here.
 
 ### PL6. Numbers, dates and times
 

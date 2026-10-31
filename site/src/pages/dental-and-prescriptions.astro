@@ -4,6 +4,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "care", topic: "health", label: "Dentist or prescriptions", summary: "A dentist with no dental insurance, and help paying for medicine" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -11,7 +12,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
 ---
 <Base title="Low cost dentist and prescription help in Morgantown and Mon County" description="Where to find a dentist with no dental insurance, and help paying for prescriptions, in Morgantown: the health department dental clinic, WVU Dental, and the free Health Right clinic.">
   <h1>Need a dentist, or help paying for medicine?</h1>
-  <p class="lede">With low income and no insurance, start with Milan Puskar Health Right, a free clinic that helps with medicines and arranges dental care. Anyone can call the health department's dental clinic, which takes WV Medicaid and lists its prices for people without dental insurance.</p>
+  <p class="lede">Low income and no insurance? Start with Milan Puskar Health Right. This free clinic helps you get medicine and sets up dental care. Anyone can call the health department's dental clinic. It takes WV Medicaid. It also lists its prices if you have no dental insurance.</p>
 
   <h2>Free clinic: medicines and dental referrals</h2>
   {r('health-right-clinic') && <ResourceCard r={r('health-right-clinic')} />}
@@ -20,10 +21,19 @@ const r = (slug) => all.find((e) => e.slug === slug);
   {r('monchd-dentistry') && <ResourceCard r={r('monchd-dentistry')} showCost />}
   {r('wvu-dental-clinics') && <ResourceCard r={r('wvu-dental-clinics')} showCost />}
 
-  <h2>On Medicare?</h2>
-  <p>Extra Help can lower what you pay for prescriptions if your income is limited, and WV SHIP can help you apply for free. See <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</p>
+  <h2>Help paying for medicine</h2>
+  <ul>
+    <li><strong>Health Right patients:</strong> the free clinic runs a charitable clinic pharmacy for people with low income and no insurance or not enough. It is not a regular drugstore. Its medicines are donated through drug company programs or bought by the clinic (<a href="https://mphealthright.org/primary-care/">Health Right</a>).</li>
+    <li><strong>Ask the company that makes your drug.</strong> Medicare suggests checking whether the company that makes your drug offers help paying for it, and has a search tool for these programs (<a href="https://www.medicare.gov/plan-compare/#/pharmaceutical-assistance-program">Medicare</a>).</li>
+    <li><strong>On Medicare:</strong> Extra Help is a Medicare program that helps people with limited income and resources pay drug plan costs. Some people get it automatically, and others apply. WV SHIP can help you apply for free (<a href="https://www.medicare.gov/basics/costs/help/drug-costs">Medicare</a>). See <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</li>
+    <li><strong>Ask about a cheaper version.</strong> Medicare suggests asking your doctor if you can take a generic drug or a cheaper brand-name drug, and checking whether mail order costs less (<a href="https://www.medicare.gov/basics/costs/help/drug-costs">Medicare</a>).</li>
+  </ul>
+  {r('clay-battelle-pharmacy') && <ResourceCard r={r('clay-battelle-pharmacy')} />}
+
+  <h3>Careful with "discount plans"</h3>
+  <p>Some plans sell discounts on medical care or medicine for a monthly fee. The Federal Trade Commission says medical discount plans "are not insurance and they're not a substitute for health insurance," and some take people's money and give very little back. Report a scam at <a href="https://reportfraud.ftc.gov/">ReportFraud.ftc.gov</a> (<a href="https://consumer.ftc.gov/articles/spot-health-insurance-scams">FTC</a>, checked October 30, 2026).</p>
 
   <p>In an emergency, call 911.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not give medical or dental advice. Call before you go, since hours and prices change. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not give medical or dental advice. Call before you go, since hours and prices change. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

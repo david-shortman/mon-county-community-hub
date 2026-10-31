@@ -1,0 +1,17 @@
+title: Find a notary public
+slug: wv-notary-search
+org: wv-secretary-of-state
+topics: [legal]
+who_it_is_for: Anyone who needs a document notarized. The West Virginia Secretary of State commissions notaries and has a free online search of commissioned notaries.
+what_to_do: Use the Secretary of State's Notary Public Search. Under Advanced Search Options you can pick Monongalia County or a city, choose "Active" status, and choose whether you want an e-notary.
+contact:
+  url: https://erls.wvsos.gov/NotarySearchOnline/NotarySearchExternal
+  url_label: Search for a notary
+cost: State law sets the most a notary may charge at $10 for each signature notarized, and $10 for most other notary acts.
+sources:
+  - url: https://erls.wvsos.gov/NotarySearchOnline/NotarySearchExternal
+    checked: 2026-10-31
+  - url: https://code.wvlegislature.gov/39-4-30/
+    checked: 2026-10-31
+  - url: https://sos.wv.gov/licensing/notary-public/notary-public-forms-and-fees
+    checked: 2026-10-31

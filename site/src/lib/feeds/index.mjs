@@ -11,6 +11,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { inWindow } from './util.mjs';
+import { fetchWithRetry } from '../ingest.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
@@ -37,8 +38,6 @@ export const SNAPSHOT_DIR = fs.existsSync(path.join(here, 'snapshots'))
   ? path.join(here, 'snapshots')
   : path.resolve(process.cwd(), 'src/lib/feeds/snapshots');
 
-const TIMEOUT_MS = 20_000;
-const TRIES = 3;
 const REQUIRED = ['title', 'slug', 'starts', 'ends', 'org_name', 'who_it_is_for', 'what_to_do', 'url'];
 const isDate = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d ?? '');
 
@@ -46,27 +45,6 @@ function feedUrlFor(adapter, today) {
   return adapter.feedUrl ? adapter.feedUrl(today) : adapter.feed_url;
 }
 
-async function fetchOnce(url, format) {
-  const res = await fetch(url, {
-    signal: AbortSignal.timeout(TIMEOUT_MS),
-    headers: { 'User-Agent': 'MonCountyCommunityHub/1.0 (+https://github.com/david-shortman/mon-county-community-hub)' },
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return format === 'json' ? res.json() : res.text();
-}
-
-async function fetchWithRetry(url, format) {
-  let last;
-  for (let i = 0; i < TRIES; i++) {
-    try {
-      return await fetchOnce(url, format);
-    } catch (err) {
-      last = err;
-      if (i < TRIES - 1) await new Promise((r) => setTimeout(r, 1000 * 2 ** i));
-    }
-  }
-  throw last;
-}
 
 // Problems with one entry, as a list of strings. Empty means it is fine.
 export function entryProblems(e) {
@@ -110,7 +88,7 @@ export async function loadFeed(adapter, { today, live = true, save = false, log 
   let error = live ? null : 'live fetch turned off';
   if (live) {
     try {
-      const raw = await fetchWithRetry(feedUrl, adapter.format);
+      const raw = await fetchWithRetry(feedUrl, { format: adapter.format });
       const parsed = adapter.parse(raw);
       const good = [];
       const seen = new Set();

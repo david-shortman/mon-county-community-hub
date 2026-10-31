@@ -1,0 +1,45 @@
+---
+// Where can I volunteer in Morgantown this weekend? (findability q16). Built
+// from the volunteer-ask research (#952, docs/research/volunteer-ask-sources.md):
+// we link the shared lists and never copy their listings, and we show
+// standing roles from each group's own page. Sources re-read 2026-10-31.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "community", label: "Volunteer this weekend", summary: "Where to find a volunteer shift soon: WVU iServe, United Way, the state's search, and groups that always need help" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Where can I volunteer in Morgantown this weekend? Mon County, WV" description="Find a volunteer shift in Morgantown and Monongalia County, WV: WVU iServe's list of dated shifts, United Way of Monongalia and Preston Counties on GivePulse, Volunteer West Virginia's ZIP code search, and local groups that take volunteers year round.">
+  <h1>Where can I volunteer in Morgantown this weekend?</h1>
+  <p class="lede">Check WVU's iServe list first. Local groups post shifts there with dates, plus roles that are always open. Not with WVU? United Way of Monongalia and Preston Counties points community members to its GivePulse page.</p>
+
+  <h2 id="lists">Lists of shifts</h2>
+  <p>These lists change every week, so we link to them instead of copying them.</p>
+  <ResourceCard r={resource('wvu-iserve-volunteer-needs')} />
+  <ResourceCard r={resource('united-way-volunteer-opportunities')} />
+  <ResourceCard r={resource('volunteer-wv-opportunity-search')} />
+
+  <h2 id="groups">Groups that take volunteers year round</h2>
+  <p>These groups take volunteers all year, even when nothing is posted for this weekend. Most ask you to sign up or apply first, so start now.</p>
+  <ResourceCard r={resource('christian-help-volunteer')} />
+  <ResourceCard r={resource('mon-valley-habitat-volunteer')} />
+  <ResourceCard r={resource('deckers-creek-volunteer')} />
+  <ResourceCard r={resource('ruby-memorial-volunteer')} />
+  <ResourceCard r={resource('animal-friends-volunteer')} />
+
+  <h2 id="skills">Use a skill you have</h2>
+  <p>Some kinds of help need training or a skill. The group trains you or tells you what you need.</p>
+  <ResourceCard r={resource('irs-tax-volunteer')} />
+  <ResourceCard r={resource('wv-poll-worker')} />
+
+  <h2 id="more">More ways to help</h2>
+  <ul>
+    <li>Pick up litter or care for a spot near you: <a href={`${base}/make-it-better/adopt/`}>Adopt a street, a spot, a stream or a trail</a>.</li>
+    <li>Lawyers licensed in West Virginia can answer free legal questions online: see <a href={`${base}/legal-help/#free-help`}>courts and legal help</a>.</li>
+    <li>Serve on a city board: <a href={`${base}/make-it-better/boards/`}>Serve on a city board</a>.</li>
+    <li>Find a group to join: <a href={`${base}/find-your-people/`}>Find your people</a>.</li>
+  </ul>
+
+  <p class="meta">Some lists include groups of all kinds. We list places to look, not causes. Know a group that needs volunteers? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

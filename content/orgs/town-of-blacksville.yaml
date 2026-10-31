@@ -1,0 +1,9 @@
+name: Town of Blacksville
+slug: town-of-blacksville
+kind: government
+summary: A town in Mon County. The county lists its town office phone.
+topics: [moving, government]
+area: monongalia-county
+sources:
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
+    checked: 2026-10-30

@@ -1,0 +1,24 @@
+---
+// Every "I'm a ..." starting page in one list (#1116, epic #261). Built from
+// the page tags, so a new page under /for/ shows here with no edits. The
+// helper cards (/for/helpers/) are for people helping someone else, so they
+// sit below the list.
+import Base from '../../layouts/Base.astro';
+import { loadPages } from '../../lib/pages.mjs';
+export const page = { door: "community", topic: "community", label: "Start here: pages by who you are", summary: "Renters, parents, teens, students, veterans, older adults, job seekers, business owners and more: one page each" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pages = await loadPages();
+const groups = [...pages.values()]
+  .filter((p) => /^\/for\/[^/]+\/$/.test(p.route) && p.route !== '/for/helpers/')
+  .sort((a, b) => a.label.localeCompare(b.label));
+const helpers = pages.get('/for/helpers/');
+---
+<Base title="Where to start, by who you are: Morgantown and Mon County" description="Starting pages for renters, homeowners, parents, teens, college students, older adults, veterans, people with disabilities, job seekers, tradespeople, business owners, remote workers, artists, people who want to help, and people new to Monongalia County.">
+  <h1>Start here: pages by who you are</h1>
+  <p class="lede">Pick the one that sounds most like you. Each page lists what people in that spot look for most, with links to our pages that have local phone numbers and sources.</p>
+  <ul class="topic-list">
+    {groups.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}
+  </ul>
+  <p>More than one fits? Open each one. Or see <a href={`${base}/topics/`}>every topic</a>.</p>
+  {helpers && <p>Helping someone else, like a student, a neighbor or a church member? See <a href={`${base}${helpers.route}`}>{helpers.label}</a>.</p>}
+</Base>

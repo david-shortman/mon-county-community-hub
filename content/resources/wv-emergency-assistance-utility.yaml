@@ -7,6 +7,9 @@ what_to_do: Bring your disconnect notice to your county Department of Human Serv
 contact:
   phone: "304-558-0684"
   url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
+what_to_bring:
+  - Your disconnect notice. Mon Power's page says you must show it at the county office.
+what_happens: Mon Power's page says "Emergency Assistance is a one-time payment that is applied to the customer's account."
 sources:
   - url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
-    checked: 2026-10-28
+    checked: 2026-10-31

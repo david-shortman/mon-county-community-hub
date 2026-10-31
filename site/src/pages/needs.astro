@@ -1,0 +1,104 @@
+---
+// The needs register (#44, charter "Finding real problems"). One card per
+// file in content/needs/, in rank order. Every number shows its source and
+// the date we read it. We describe problems; we never take a policy side,
+// and we name the local groups already working on each one.
+import Base from '../layouts/Base.astro';
+import { loadDir, prettyDate, ymd } from '../lib/content.mjs';
+export const page = { door: 'community', topic: 'data', label: 'What people here need most', summary: 'A ranked list of the hardest problems people in Mon County face, with the numbers, their sources, and who is working on each' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const needs = loadDir('needs').sort((a, b) => a.rank - b.rank);
+const orgs = new Map(loadDir('orgs', { withHidden: true }).map((o) => [o.slug, o]));
+const group = (w) => {
+  if (w.org) { const o = orgs.get(w.org); return { name: o?.name ?? w.org, url: o?.website }; }
+  return { name: w.name, url: w.url };
+};
+const SEVERITY = { high: 'High', medium: 'Medium', low: 'Low' };
+const TREND = { better: 'Getting better', worse: 'Getting worse', flat: 'About the same', unknown: 'Not known yet' };
+const score = (n) => n.rank_why?.match(/Score (\d+) of 12/)?.[1];
+const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
+const checkedDates = needs.flatMap((n) => [n.affected?.checked, ...(n.evidence ?? []).map((e) => e.checked)]).filter(Boolean).map(ymd).sort();
+const oldest = checkedDates[0];
+---
+<Base title="What people in Mon County need most: a ranked, sourced list" description="The problems people in Monongalia County, WV face most, ranked from public data and local surveys: food, health care costs, housing, utility bills, mental health and more. Each one shows how many people it affects, its sources, and the local groups working on it.">
+  <h1>What people here need most</h1>
+  <p class="lede">A ranked list of the hardest problems people in Monongalia County face, built from public numbers and local surveys. Each one says how many people it affects, where the numbers come from, and which local groups are already working on it.</p>
+  <p>We use this list to decide what to build next. It describes problems; it does not say what any government or group should do about them.</p>
+
+  <nav aria-label="The list">
+    <ol class="toc">
+      {needs.map((n) => <li><a href={`#${n.slug}`}>{n.title}</a></li>)}
+    </ol>
+  </nav>
+
+  {needs.map((n) => (
+    <article class="card" id={n.slug}>
+      <h2><span class="rank">{n.rank}.</span> {n.title}</h2>
+      <p>{n.summary}</p>
+      <dl class="facts">
+        <div><dt>How many people</dt><dd>{n.affected.count != null ? n.affected.count.toLocaleString('en-US') : n.affected.estimate}. {n.affected.description}</dd></div>
+        <div><dt>How serious</dt><dd>{SEVERITY[n.severity]}{n.severity_why && `. ${n.severity_why}`}</dd></div>
+        <div><dt>Trend</dt><dd>{TREND[n.trend]}{n.trend !== 'unknown' && n.trend_why && `. ${n.trend_why}`}</dd></div>
+      </dl>
+      {n.working_on?.length > 0 && (
+        <>
+          <h3>Who is working on it</h3>
+          <ul class="groups">
+            {n.working_on.map(group).map((g) => <li>{g.url ? <a href={g.url}>{g.name}</a> : g.name}</li>)}
+          </ul>
+        </>
+      )}
+      {n.gaps?.length > 0 && (
+        <>
+          <h3>What is missing or hard to find</h3>
+          <ul>{n.gaps.map((g) => <li>{g}</li>)}</ul>
+        </>
+      )}
+      <details>
+        <summary>The evidence ({n.evidence.length} {n.evidence.length === 1 ? 'source' : 'sources'})</summary>
+        <ul class="evidence">
+          {n.evidence.map((e) => (
+            <li>
+              {e.figure && <strong>{e.figure}. </strong>}{e.shows}{' '}
+              <span class="meta">{e.publisher ?? host(e.url)}{e.data_date && `, data from ${e.data_date}`}. <a href={e.url}>Source<span class="sr-only"> for {n.title}: {e.publisher ?? host(e.url)}</span></a>, checked {prettyDate(ymd(e.checked))}.</span>
+            </li>
+          ))}
+        </ul>
+        {n.rank_why && <p class="meta">Why it ranks here: {n.rank_why}</p>}
+      </details>
+    </article>
+  ))}
+
+  <h2 id="how-we-rank">How we rank them</h2>
+  <p>Each need gets 1 to 3 points on four things, for a score out of 12:</p>
+  <ul>
+    <li><strong>How serious:</strong> how much harm it does to the people it affects.</li>
+    <li><strong>How many people:</strong> 3 for about 1 in 10 people or households or more, 2 for fewer, 1 for a few hundred people or less.</li>
+    <li><strong>How many sources agree:</strong> 3 when three or more separate sources point to it.</li>
+    <li><strong>Room to help:</strong> 3 when help exists but is hard to find or has deadlines, so clearer information could help people act. 1 when the problem is mostly something a website cannot change.</li>
+  </ul>
+  <p>Ties go to the more serious need, then to the one with a county-wide official estimate instead of only a survey, then to the one more people asked West Virginia 211 about.</p>
+
+  <h2 id="limits">What this list does and doesn't tell you</h2>
+  <ul>
+    <li><strong>The surveys lean one way.</strong> In the 2025 hospital and health department surveys, most people who answered were women, and many had high incomes or college degrees. The surveys say so themselves.</li>
+    <li><strong>CDC numbers are estimates.</strong> They come from a statistical model, not a count of local people.</li>
+    <li><strong>About 1 in 5 residents is a college student.</strong> That raises some county numbers, like housing costs and the share of young households below a basic budget.</li>
+    <li><strong>Most trends are not known yet.</strong> We only say a need is getting better or worse when a source shows the change over time.</li>
+    <li><strong>We name groups, not people,</strong> and use only public, county-wide numbers.</li>
+  </ul>
+  <p>The same numbers for the whole county, with charts, are on <a href={`${base}/how-we-are-doing/`}>How is Mon County doing?</a> The list is also open data at <a href={`${base}/api/v1/needs.json`}>/api/v1/needs.json</a>, and each need is a file in <a href={`${repo}/tree/main/content/needs`}>content/needs</a>. See something wrong or missing? <a href={`${repo}/issues/44`}>Tell us on issue 44</a>.</p>
+  {oldest && <p class="meta">Oldest source on this page checked {prettyDate(oldest)}.</p>}
+</Base>
+
+<style>
+  .toc { columns: 2 14rem; padding-left: 1.5rem; }
+  .rank { color: var(--muted); }
+  .facts { display: grid; gap: 0.5rem; margin: 0.75rem 0; }
+  .facts div { display: grid; gap: 0.1rem; }
+  .facts dt { font-weight: 700; }
+  .facts dd { margin: 0; }
+  .groups { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; padding-left: 1.25rem; }
+  .evidence li { margin-bottom: 0.5rem; }
+</style>

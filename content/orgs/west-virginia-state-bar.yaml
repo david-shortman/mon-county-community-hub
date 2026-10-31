@@ -1,0 +1,15 @@
+name: The West Virginia State Bar
+slug: west-virginia-state-bar
+kind: government
+website: https://www.wvbar.org/
+phone: "304-553-7220"
+summary: The state's organization for lawyers. As a public service it runs the West Virginia Lawyer Referral Service and a free Tuesday night phone line with volunteer lawyers.
+topics: [legal]
+area: statewide
+sources:
+  - url: https://wvlawyerreferral.org/
+    checked: 2026-10-31
+  - url: https://wvlawyerreferral.org/pages/resources-hotline
+    checked: 2026-10-31
+  - url: https://www.wvbar.org/about-us/
+    checked: 2026-10-31
