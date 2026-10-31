@@ -4,7 +4,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "care", topic: "health", label: "Dentist or prescriptions", summary: "A dentist with no dental insurance, and help paying for medicine" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -35,5 +35,5 @@ const r = (slug) => all.find((e) => e.slug === slug);
 
   <p>In an emergency, call 911.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not give medical or dental advice. Call before you go, since hours and prices change. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not give medical or dental advice. Call before you go, since hours and prices change. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

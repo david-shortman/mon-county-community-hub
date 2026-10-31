@@ -7,7 +7,7 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadSecondhand } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "secondhand", label: "Sell, donate or give away your stuff", summary: "Clothes, kids' gear, furniture, books, electronics, tools, paint and building materials: where each can go" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadSecondhand();
@@ -79,7 +79,7 @@ const ITEMS = [
   </section>
 
   <p>More in this section: <a href={`${base}/thrift-shops/`}>Thrift and resale shops</a> · {hasBorrow && <><a href={`${base}/borrow-or-get-free/`}>Borrow it or get it free</a> · </>}<a href={`${base}/markets/`}>Markets and sales coming up</a></p>
-  <p class="meta">Each store decides what it can take, and that changes. Check the store's own page before you load the car. Something wrong or missing? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Each store decides what it can take, and that changes. Check the store's own page before you load the car. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
 <style>
   .picks { columns: 2; padding-left: 1.2em; }

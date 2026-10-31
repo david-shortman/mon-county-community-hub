@@ -7,7 +7,7 @@ import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import { telHref } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "safety", label: "Home safety: free smoke alarms, carbon monoxide, heating and lead", summary: "Ask for free smoke alarms, stay safe from carbon monoxide and space heaters, and test a child for lead" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const checked = '2026-10-30';
@@ -60,5 +60,5 @@ const leadPhone = '304-598-5181';
   </div>
 
   <p>Storm on the way? See <a href={`${base}/weather-alerts/`}>Get weather and emergency alerts</a>.</p>
-  <p class="meta">Sources checked October 30, 2026. We describe these programs and do not decide who gets help. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these programs and do not decide who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

@@ -3,10 +3,10 @@
 // words, with a way to tell us. It names gaps and never promises to fill
 // them. No names or contact details of people who reply are ever shown.
 import { loadGaps, prettyDate, ymd } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 const { topic } = Astro.props;
 const data = loadGaps(topic);
-const tellUs = FIX_FORM;
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
 const checked = data?.gaps.map((g) => ymd(g.checked)).sort()[0];
 ---
 {data?.gaps.length > 0 && (

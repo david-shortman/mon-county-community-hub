@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import AnswerFacts from '../components/AnswerFacts.astro';
 import SourceLine from '../components/SourceLine.astro';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "care", topic: "health", label: "Flu and COVID shots", summary: "Who should get one, when, and what it costs" };
 const AAFP = 'https://www.aafp.org/assets/image/upload/v1788277985/pdf_2026_through_2027_influenza_rsv_sars_covid_2_guidance.pdf';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -46,5 +46,5 @@ const adviceSources = [
   <p>A flu shot is one of a few simple things that help most people stay well. See the others: <a href={`${base}/staying-well/`}>Staying well: a simple list</a>.</p>
 
   <SourceLine sources={adviceSources} about="who should get a shot and what it costs" />
-  <p class="meta">We describe what health groups say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">We describe what health groups say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

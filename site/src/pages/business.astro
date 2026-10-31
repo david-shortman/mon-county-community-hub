@@ -9,7 +9,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, org } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Start or grow a business", summary: "Free business coaching and classes, help with a business plan, and local business groups" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const r = (slug) => resource(slug);
@@ -52,5 +52,5 @@ const partnership = org('morgantown-area-partnership');
 
   <p>Looking for a job or training for yourself? See <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these programs and groups; we do not endorse them or any business. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these programs and groups; we do not endorse them or any business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

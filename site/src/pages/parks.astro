@@ -6,7 +6,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "outdoors", label: "Parks, trails and outdoors", summary: "City and county parks, trails, pools and ice skating, Coopers Rock, fishing and hunting licenses, and groups to ride or run with" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -74,5 +74,5 @@ const COUNTY = ['camp-muffly-park', 'chestnut-ridge-park', 'mason-dixon-park'];
   {r('girls-on-the-run-ncwv-programs') && <ResourceCard r={r('girls-on-the-run-ncwv-programs')} />}
   <p>The Mon River Trails Conservancy keeps a list of local groups for running, paddling, hiking with young kids and birding on its <a href="https://montrails.org/rail-trail-info/">trail info page</a>. We have not found a running club with its own current website yet.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these places and groups; we do not run them. Hours, prices and rental rules change, so call or check the page before you go. Canceling a BOPARC rental or camp? See <a href={`${base}/park-refunds/`}>Park and rec refunds and cancellations</a>. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these places and groups; we do not run them. Hours, prices and rental rules change, so call or check the page before you go. Canceling a BOPARC rental or camp? See <a href={`${base}/park-refunds/`}>Park and rec refunds and cancellations</a>. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

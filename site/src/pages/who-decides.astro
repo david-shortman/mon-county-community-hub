@@ -5,7 +5,7 @@
 // and nothing about how anyone votes or should vote.
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Who decides what", summary: "City Council, the County Commission, the school board, MUB, the MPO, Mountain Line and more: what each decides and how members are chosen" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const day = '2026-10-30';
@@ -126,5 +126,5 @@ const bodies = [
     <li>For voting and elections, go to the <a href="https://sos.wv.gov/elections/Pages/default.aspx">West Virginia Secretary of State</a>.</li>
   </ul>
 
-  <p class="meta">We describe roles and process from official pages. We do not name or describe officials, and we take no side on any decision or election. This is not the official record. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">We describe roles and process from official pages. We do not name or describe officials, and we take no side on any decision or election. This is not the official record. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

@@ -6,7 +6,7 @@
 import Base from '../layouts/Base.astro';
 import Actions from '../components/Actions.astro';
 import SourceLine from '../components/SourceLine.astro';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Have your say at a public meeting", summary: "When City Council, the County Commission, the school board, BOPARC and the Planning Commission meet, and how to comment" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const day = '2026-10-30';
@@ -94,5 +94,5 @@ const bodies = [
   <h2>Want to do more than comment?</h2>
   <p>City boards and commissions have seats for residents. See <a href={`${base}/make-it-better/boards/`}>Serve on a city board</a>.</p>
 
-  <p class="meta">We describe how to take part. We do not take sides on any issue or say what anyone should say. This page is not the official record; the boards' own agendas and minutes are. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">We describe how to take part. We do not take sides on any issue or say what anyone should say. This page is not the official record; the boards' own agendas and minutes are. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

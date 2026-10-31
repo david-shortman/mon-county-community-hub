@@ -7,7 +7,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "moving", label: "Driver's license and plates for new residents", summary: "Switch your license, title and plates to West Virginia: the 30 day rule, fees, what to bring, and the Morgantown DMV office" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -25,5 +25,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <p>Just moved here? See <a href={`${base}/moving-here/`}>start power, water, gas and trash</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Fees and rules can change, so check the DMV's page or call before you go. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Fees and rules can change, so check the DMV's page or call before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

@@ -7,7 +7,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "community", label: "Start a nonprofit or community group", summary: "State steps to make a group a nonprofit corporation, register before asking for donations, and where federal tax-exempt status starts" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const r = (slug) => resource(slug);
@@ -32,5 +32,5 @@ const irs = [{ url: 'https://sos.wv.gov/business/charities/charitable-organizati
 
   <p>Looking for a group to join instead? See <a href={`${base}/community-centers/`}>Community centers and halls</a> and <a href={`${base}/make-it-better/`}>Make it better</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Rules and fees can change, so check the state's page before you file. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Rules and fees can change, so check the state's page before you file. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

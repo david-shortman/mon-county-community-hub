@@ -5,7 +5,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 const office = loadDir('resources').find((e) => e.slug === 'monongalia-county-dohs-office');
 export const page = { door: "family", topic: "disability", label: "Medicaid waivers", summary: "Getting care at home instead of a nursing home or facility, through Medicaid" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -71,5 +71,5 @@ const waivers = [
     </section>
   ))}
 
-  <p class="meta">What a waiver is: <a href={BMS}>West Virginia Bureau for Medical Services</a>, checked October 30, 2026. We describe these programs; the state decides who qualifies. Rules can change, so check the program site or call before you apply. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">What a waiver is: <a href={BMS}>West Virginia Bureau for Medical Services</a>, checked October 30, 2026. We describe these programs; the state decides who qualifies. Rules can change, so check the program site or call before you apply. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

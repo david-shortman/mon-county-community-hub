@@ -54,7 +54,7 @@ const topicLabel = (t) => doors.bySlug[doors.topicDoor[t]]?.topics[t] ?? t;
       {' '}Checked against the source on {prettyDate(checked)}.{isStale(checked, today) && <strong> This may be out of date, so check the details page before you go.</strong>}</>
     )}
     {e.topics?.length ? <> Topics: {e.topics.map(topicLabel).join(', ')}.</> : null}
-    {' '}<a href={reportUrl({ title: e.title, slug: e.slug, url: e.sources?.[0]?.url ?? e.url })}>Report a problem<span class="sr-only"> with {e.title} (opens our fix form)</span></a>.
+    {' '}<a href={reportUrl({ slug: e.slug, page: Astro.url.pathname })}>Report a problem<span class="sr-only"> with {e.title} (opens our fix form)</span></a>.
   </p>
   <PassItOn title={`${e.title}, ${prettyRange(e.starts, e.ends)}`} slug={e.slug} privateTrace={e.private_trace} phone={e.phone} place={e.place} checked={checked} share={false} />
 </article>

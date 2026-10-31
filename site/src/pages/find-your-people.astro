@@ -10,7 +10,7 @@ import HelpWanted from '../components/HelpWanted.astro';
 import { BUCKETS, loadDirectory, inBucket, areasWithout } from '../lib/people.mjs';
 import { SECTION } from '../lib/places.mjs';
 import { loadPages } from '../lib/pages.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "community", label: "Find your people", summary: "Groups, clubs, game nights, runs, dances and free places to sit, with a three-question finder" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const pages = await loadPages();
@@ -102,7 +102,7 @@ const also = [
     </section>
   )}
 
-  <p class="meta">Every listing comes from a public page, named under it with the date we checked. Groups that post only on Facebook show a link, since we cannot check Facebook. We list groups; we do not run or vouch for them. Know a group we missed? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Every listing comes from a public page, named under it with the date we checked. Groups that post only on Facebook show a link, since we cannot check Facebook. We list groups; we do not run or vouch for them. Know a group we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
 
 <script is:inline>

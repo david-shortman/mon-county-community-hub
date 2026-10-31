@@ -8,7 +8,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "School-age kids: school, buses and after school", summary: "Sign up for school, find your school and bus, days off, after-school programs, free tutoring and things to do" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -48,5 +48,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <li>First jobs, driving and volunteering for teens: <a href={`${base}/teens/`}>Teens</a>.</li>
   </ul>
 
-  <p class="meta">Sources checked October 30, 2026. Schools, programs and times can change, so check with the school or program. Something out of date or missing? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Schools, programs and times can change, so check with the school or program. Something out of date or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
 import { loadFeedEntries } from './feeds/index.mjs';
-import { FIX_FORM } from './group-requests.mjs';
+import { FIX_FORM, fixFormUrl } from './group-requests.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const CONTENT_DIR = path.resolve(here, '../../../content');
@@ -228,11 +228,10 @@ export const staleDaysFor = (r) => ((r?.topics ?? []).includes('better') || Stri
 
 // A "Report a problem" link. It opens our private fix form (FIX_FORM, #522),
 // because David keeps GitHub issues for the people who work on the project.
-// The form asks which page or listing, so the arguments are kept for callers
-// but nothing is added to the address: no item details travel in the link.
+// The form's hidden fields get the listing's slug and the page it is on.
 export const REPORT_FORM = FIX_FORM;
-export function reportUrl() {
-  return REPORT_FORM;
+export function reportUrl({ slug, page } = {}) {
+  return fixFormUrl({ listing: slug, page });
 }
 
 // The oldest checked date across a record's sources, so a card never says an

@@ -8,7 +8,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "pets", label: "Pets and animals", summary: "Found or lost a pet, adopt, low cost spay, neuter and shots, dog tags, the leash law, and if you can't keep your pet" };
 ---
 <Base title="Pets and animals in Morgantown and Mon County, WV" description="Pets in Monongalia County, WV: report a stray or found dog, find a lost pet at the county shelter, adopt a dog or cat, low cost spay, neuter and rabies shots, county dog tags and the leash law, and options if you can't keep your pet.">
@@ -40,5 +40,5 @@ export const page = { door: "living-here", topic: "pets", label: "Pets and anima
   <h2 id="rehome">If you can't keep your pet</h2>
   <ResourceCard r={resource('mccac-rehoming-your-pet')} />
 
-  <p class="meta">Sources checked October 31, 2026. The county's page and the shelter's own site list different adoption fees and hours, so call the shelter to ask. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 31, 2026. The county's page and the shelter's own site list different adoption fees and hours, so call the shelter to ask. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

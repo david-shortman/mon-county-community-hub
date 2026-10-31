@@ -6,7 +6,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "Teen drivers: permit to full license", summary: "West Virginia's three steps for drivers under 18: ages, hours, passenger and night limits, and fees" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -53,5 +53,5 @@ const gdl = 'https://dmv.wv.gov/graduated-drivers-licensing-gdl';
 
   <p>More for families: <a href={`${base}/family/`}>Family and life changes</a>.</p>
 
-  <p class="meta">Rules from the <a href={gdl}>WV DMV graduated driver licensing page</a>, checked October 30, 2026. Rules and fees can change, so check the DMV page before you go. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Rules from the <a href={gdl}>WV DMV graduated driver licensing page</a>, checked October 30, 2026. Rules and fees can change, so check the DMV page before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

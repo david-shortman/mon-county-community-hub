@@ -8,7 +8,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "community", label: "Check a charity before you give", summary: "Look up a group's West Virginia charity registration, and what registration does and does not tell you" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const faq = [{ url: 'https://sos.wv.gov/charities-frequently-asked-questions', checked: '2026-10-30' }];
@@ -32,5 +32,5 @@ const faq = [{ url: 'https://sos.wv.gov/charities-frequently-asked-questions', c
 
   <p>Starting a group yourself? See <a href={`${base}/start-a-group/`}>Start a nonprofit or community group</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

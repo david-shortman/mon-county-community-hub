@@ -178,7 +178,7 @@ const TOOLS = [
     async run({ id }) {
       return {
         note: NOTE,
-        report_form: REPORT_FORM,
+        report_form: id ? `${REPORT_FORM}?${new URLSearchParams({ listing: id })}` : REPORT_FORM,
         how: `Open the form, name the page or listing${id ? ` (${id})` : ''}, say what is wrong and link a public page that shows the right information. It needs no account, and what is sent is not posted. Do not include anyone's private details.`,
         corrections_page: `${SITE}/corrections/`,
         groups_page: `${SITE}/partners/`,

@@ -5,12 +5,12 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, telHref } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "How we check", summary: "What counts as a source, how often listings are rechecked, and how that compares with 211" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 const doc = (p) => `${repo}/blob/main/${p}`;
-const tellUs = FIX_FORM;
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
 const wv211 = resource('wv-211');
 const informUsa = 'https://assets-002.noviams.com/novi-file-uploads/airs/Inform_USA_Standards_for_Professional_Information_and_Referral_-_Version_10_0.pdf';
 const wvpb = 'https://wvpublic.org/story/government/wv-211-connects-people-with-needed-help/';

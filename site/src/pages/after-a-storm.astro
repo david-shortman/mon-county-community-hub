@@ -8,7 +8,7 @@ import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import Actions from '../components/Actions.astro';
 import { resource, telHref } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "weather", label: "Storm damage, flooding or power out?", summary: "Power out, water in the basement, a tree or slip on the road, help with cleanup, and what to do in a warning" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const checked = '2026-10-30';
@@ -124,5 +124,5 @@ const choices = [
   <SourceLine sources={[...warnings, ...floodWater]} about="weather warnings" />
   <p>Get warnings before the next storm: <a href={`${base}/weather-alerts/`}>Get weather and emergency alerts</a>. Check your risk: <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
 
-  <p class="meta">Sources checked October 30, 2026. Phone numbers and programs can change. We describe these services and do not decide who gets help. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Phone numbers and programs can change. We describe these services and do not decide who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

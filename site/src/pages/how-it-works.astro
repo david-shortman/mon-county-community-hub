@@ -7,7 +7,7 @@
 // parts and their limits. Every claim points to a file in the repo.
 // Speaks for the project, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
-import { FIX_FORM, REQUEST_DAYS } from '../lib/group-requests.mjs';
+import { fixFormUrl, REQUEST_DAYS } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "How this site works", summary: "The people, AI and automatic checks behind each page, and how they fit together" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
@@ -50,7 +50,7 @@ const doorSnippet = `- slug: this-month
       <li><strong>Where facts come from:</strong> a public web page, read the same day. Nothing is filled in from memory.</li>
       <li><strong>Who does the work:</strong> AI (Claude, made by Anthropic) does the research, writing and building.</li>
       <li><strong>Who is responsible:</strong> one local resident, the owner (named on <a href={`${base}/about/`}>About this site</a>). The owner sets the rules and checks pages about shelter, crisis help, food and benefits before changes go live.</li>
-      <li><strong>If something is wrong:</strong> use the <a href={FIX_FORM}>fix or removal form</a>. No account needed, and what you send stays private. Wrong items that could hurt someone come down first and get re-checked after.</li>
+      <li><strong>If something is wrong:</strong> use the <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>. No account needed, and what you send stays private. Wrong items that could hurt someone come down first and get re-checked after.</li>
     </ul>
   </div>
 
@@ -167,7 +167,7 @@ const doorSnippet = `- slug: this-month
 
   <h2 id="wrong">When something is wrong</h2>
   <ul>
-    <li><strong>Tell us</strong> with the <a href={FIX_FORM}>fix or removal form</a>. Only the owner sees what you send. The "Report a problem" link on each listing opens the same form.</li>
+    <li><strong>Tell us</strong> with the <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>. Only the owner sees what you send. The "Report a problem" link on each listing opens the same form.</li>
     <li><strong>Harmful mistakes come down first.</strong> A wrong shelter, deadline or benefit rule comes off the site without waiting for anyone, and goes back only after it's re-checked. The 211 and 988 lines stay up on every page, so if one looks wrong it gets fixed the same day.</li>
     <li><strong>Groups get an answer.</strong> When a group asks us to fix, remove or add its listing, we aim to act within {REQUEST_DAYS} days, and we count how we're doing.</li>
     <li><strong>Fixes are public.</strong> Every fix to a fact, link or date is on the <a href={`${base}/corrections/`}>Corrections page</a>.</li>

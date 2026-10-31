@@ -7,7 +7,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "weather", label: "Snow and ice: who plows, sidewalks, schools and buses", summary: "Which roads get cleared first, the 24-hour sidewalk rule in Morgantown, school closings and late buses" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -33,5 +33,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2 id="alerts">Alerts, road conditions and power outages</h2>
   <p>Weather warnings, WV 511 road conditions and Mon Power outage texts are on <a href={`${base}/weather-alerts/`}>Get weather and emergency alerts</a>.</p>
 
-  <p class="meta">Sources checked October 31, 2026. Westover, Star City and Granville do not post snow rules on their websites; call your town hall to ask. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 31, 2026. Westover, Star City and Granville do not post snow rules on their websites; call your town hall to ask. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

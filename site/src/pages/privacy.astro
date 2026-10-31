@@ -1,9 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "Privacy", summary: "What we collect, and what we don't" };
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
-const tellUs = FIX_FORM;
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
 ---
 <Base title="Privacy at Everything Morgantown" description="What Everything Morgantown collects, what we don't, and how to ask us to remove something.">
   <h1>Privacy</h1>

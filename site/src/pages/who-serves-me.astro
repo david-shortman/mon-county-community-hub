@@ -6,7 +6,7 @@
 import Base from '../layouts/Base.astro';
 import Question from '../components/Question.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "moving", label: "Who serves my address?", summary: "Pick your town, or outside any town, and see who to call for police, trash, water and streets" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -94,5 +94,5 @@ const map = r('mon-county-parcel-viewer');
 
   <p>Starting service after a move? See <a href={`${base}/moving-here/`}>Moving here: start power, water, gas and trash</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Something out of date or missing? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Something out of date or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

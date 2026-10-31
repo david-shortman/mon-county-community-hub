@@ -12,7 +12,7 @@ import { loadMeetings, newSince } from '../lib/meetings/index.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { CONTENT_DIR } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "community", label: "This week in Mon County", summary: "What is coming up, public meetings, ways to help, where help is thin, and what changed on this site" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
@@ -81,7 +81,7 @@ const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${
   {gaps.length ? (
     <ul>{gaps.map((g) => <li><strong>{g.what}.</strong> {g.why} <span class="meta">Last looked {prettyDate(g.checked)}.</span></li>)}</ul>
   ) : <p>Nothing on file yet.</p>}
-  <p>Know a group we missed? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p>Know a group we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 
   <h2 id="changed">What changed on this site</h2>
   {fixes.length ? (

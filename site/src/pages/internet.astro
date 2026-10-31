@@ -11,7 +11,7 @@ import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "moving", label: "Internet at home", summary: "See internet service in your area, take the state speed test, complain about an internet company, and free Wi-Fi at the library" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -63,5 +63,5 @@ const navigator = [{ url: 'https://events.mympls.org/event/17866389', checked: '
   )}
 
   <p>Moving here? Start power, water, gas and trash: <a href={`${base}/moving-here/`}>Moving here</a>.</p>
-  <p class="meta">Sources checked October 30, 2026. We do not sell or recommend any internet company. Know a free Wi-Fi spot or help program we should add? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We do not sell or recommend any internet company. Know a free Wi-Fi spot or help program we should add? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

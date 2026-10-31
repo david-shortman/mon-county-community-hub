@@ -9,7 +9,7 @@ import Icon from '../components/Icon.astro';
 import Route from '../components/Route.astro';
 import Milepost from '../components/Milepost.astro';
 import { telHref } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "weather", label: "Is my home in a flood zone or a slide area?", summary: "Check an address on the state flood and landslide maps, flood insurance basics, and when you need a floodplain permit" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const checked = '2026-10-30';
@@ -82,5 +82,5 @@ const countyPhone = '304-599-6332';
 
   <p>Water already coming in? See <a href={`${base}/after-a-storm/`}>Storm damage, flooding or power out?</a></p>
   <p>Storm on the way? See <a href={`${base}/weather-alerts/`}>how to get official weather alerts</a>. New here? See <a href={`${base}/moving-here/`}>start power, water, gas and trash</a>.</p>
-  <p class="meta">Sources checked October 30, 2026. Maps change when FEMA updates them, so check again before you sign. We describe these maps and rules and do not decide whether a property is safe. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Maps change when FEMA updates them, so check again before you sign. We describe these maps and rules and do not decide whether a property is safe. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

@@ -12,6 +12,17 @@ export const REQUEST_DAYS = 7;
 // David's yes, with no sender details or message text.
 export const FIX_FORM = 'https://tally.so/r/rD5adv';
 
+// The fix form link with its two hidden fields filled in (Tally): `listing`,
+// the listing's slug, and `page`, the path of the page it was opened from.
+// Only the field names travel; nothing about the person.
+export function fixFormUrl({ listing, page } = {}) {
+  const q = new URLSearchParams();
+  if (listing) q.set('listing', listing);
+  if (page) q.set('page', page);
+  const qs = q.toString();
+  return qs ? `${FIX_FORM}?${qs}` : FIX_FORM;
+}
+
 // The same way in by email (#522). It forwards to David's private inbox.
 // Same rule as the form: mail never goes into the repo or to GitHub as-is.
 export const FIX_EMAIL = 'fix@everythingmorgantown.org';

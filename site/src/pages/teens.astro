@@ -8,7 +8,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "Teens: first jobs, driving and things to do", summary: "Age certificates and work hours, learner's permits, job help for ages 16 to 24, volunteering and library programs" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -82,5 +82,5 @@ const gdl = r('wv-graduated-drivers-license');
     <li>Checkups and shots: <a href={`${base}/staying-well/`}>Staying well</a>.</li>
   </ul>
 
-  <p class="meta">Sources checked October 30, 2026. Rules can change, so check the state's page before you apply. We describe these programs; the agencies and programs decide who can take part. Something out of date or missing? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Rules can change, so check the state's page before you apply. We describe these programs; the agencies and programs decide who can take part. Something out of date or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

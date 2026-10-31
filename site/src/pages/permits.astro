@@ -9,7 +9,7 @@ import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
 import { loadDir, telHref } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Do I need a building permit?", summary: "City or county: who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Mon County" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -97,5 +97,5 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
 
   <p>Hiring someone to do the work? See <a href={`${base}/contractor-license/`}>contractor licenses and how to check one</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Rules and fees change, so ask the office before you start work. Something wrong or missing? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Rules and fees change, so ask the office before you start work. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

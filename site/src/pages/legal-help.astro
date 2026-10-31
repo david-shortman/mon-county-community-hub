@@ -7,7 +7,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Courts and legal help", summary: "Free legal help, small claims up to $20,000, clearing a record, changing your name, jury duty, court forms and finding a notary" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
@@ -47,5 +47,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2 id="notary">Get something notarized</h2>
   <ResourceCard r={resource('wv-notary-search')} showCost />
 
-  <p class="meta">Sources checked October 31, 2026. Court fees and rules change, so check with the clerk before you file. We could not confirm the Magistrate Court filing fee, or the cost of a name change, on an official page, so ask the clerk. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 31, 2026. Court fees and rules change, so check with the clerk before you file. We could not confirm the Magistrate Court filing fee, or the cost of a name change, on an official page, so ask the clerk. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

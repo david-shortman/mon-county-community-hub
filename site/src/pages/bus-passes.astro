@@ -6,7 +6,7 @@
 import Base from '../layouts/Base.astro';
 import FromPdf from '../components/FromPdf.astro';
 import { pdfPage } from '../lib/pdf-pages.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "moving", label: "Half-fare and property tax bus passes", summary: "Mountain Line's Gold Card for ages 62 and up, half fare with Medicare or a disability, and the Property Tax Bus Pass: who can get each and how to apply" };
 const d = pdfPage('mountain-line-passes');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -25,5 +25,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <p>Regular fares, free rides with a WVU ID and the Grey Line are on <a href={`${base}/getting-around/`}>Getting around without a car</a>. Every route and its hours are on <a href={`${base}/bus-routes/`}>Every bus route and when it runs</a>.</p>
 
-  <p class="meta">This page is a reading aid. Mountain Line decides who gets a pass. Something wrong? <a href={FIX_FORM}>Tell us what is wrong on this page</a>.</p>
+  <p class="meta">This page is a reading aid. Mountain Line decides who gets a pass. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
 </Base>

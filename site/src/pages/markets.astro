@@ -9,7 +9,7 @@ import ShopCard from '../components/ShopCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Actions from '../components/Actions.astro';
 import { loadCalendarWithFeeds, upcoming, loadSecondhand } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "market", label: "Markets and sales coming up", summary: "Craft markets, card shows, the farmers market, yearly sales and the nearest flea markets" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const tagged = (e) => (e.topics || []).some((t) => t === 'secondhand' || t === 'market');
@@ -97,5 +97,5 @@ const src = {
   </section>
 
   <p>More in this section: <a href={`${base}/thrift-shops/`}>Thrift and resale shops</a> · <a href={`${base}/sell-or-donate/`}>Sell, donate or give away your stuff</a></p>
-  <p class="meta">Dates change. Each card says when we checked it. Something wrong or changed? Use the Report a problem link on that card, or <a href={FIX_FORM}>tell us about a sale we missed</a>.</p>
+  <p class="meta">Dates change. Each card says when we checked it. Something wrong or changed? Use the Report a problem link on that card, or <a href={fixFormUrl({ page: Astro.url.pathname })}>tell us about a sale we missed</a>.</p>
 </Base>

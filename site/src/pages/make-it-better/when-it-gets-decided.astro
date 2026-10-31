@@ -5,7 +5,7 @@
 import Base from '../../layouts/Base.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import NextRung from '../../components/NextRung.astro';
-import { FIX_FORM } from '../../lib/group-requests.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "better", label: "When plans and budgets get decided", summary: "The yearly budget, the 5-year capital plan, the comprehensive plan and the downtown plan: when each is decided and how to comment" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const day = '2026-10-30';
@@ -46,5 +46,5 @@ const src = {
   <p>Some decisions, like a levy, go to voters. For voting questions, go to the <a href="https://sos.wv.gov/elections/Pages/default.aspx">West Virginia Secretary of State</a>.</p>
 
   <NextRung next="report" />
-  <p class="meta">We describe when and how decisions are made. We do not take a side on any plan, budget or levy. Dates and amounts can change, so check the city's documents. Something out of date? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">We describe when and how decisions are made. We do not take a side on any plan, budget or levy. Dates and amounts can change, so check the city's documents. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

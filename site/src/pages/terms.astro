@@ -1,9 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "Terms", summary: "What this site is, and what to know before you rely on it" };
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
-const tellUs = FIX_FORM;
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
 ---
 <Base title="Terms of use for Everything Morgantown" description="What Everything Morgantown is, what it can and can't do, and how to ask for a fix or removal.">
   <h1>Terms</h1>

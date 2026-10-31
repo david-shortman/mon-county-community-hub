@@ -10,7 +10,7 @@ import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import { loadDir } from '../lib/content.mjs';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "this-month", topic: "housing", label: "Renting a home: before you rent, repairs and your deposit", summary: "Check a rental is registered, read the lease, ask for repairs, and what state law says about getting your security deposit back" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -140,5 +140,5 @@ const rentalPage = 'https://www.morgantownwv.gov/435/Rental-Information';
   {r('legal-aid-wv-eviction-help') && <ResourceCard r={r('legal-aid-wv-eviction-help')} showCost />}
   <p>Behind on rent? See <a href={`${base}/money/?pick=rent`}>help with rent</a>. No place to stay tonight? See <a href={`${base}/stay-tonight/`}>Where to stay tonight</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Laws and office details change, so check the linked page. Something wrong or missing? <a href={FIX_FORM}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Laws and office details change, so check the linked page. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
