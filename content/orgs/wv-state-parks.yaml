@@ -1,0 +1,10 @@
+name: West Virginia State Parks
+slug: wv-state-parks
+kind: government
+website: https://wvstateparks.com/
+summary: "Runs West Virginia's state parks and state forests, including Coopers Rock State Forest."
+topics: [outdoors]
+area: statewide
+sources:
+  - url: https://wvstateparks.com/park/coopers-rock-state-forest/
+    checked: 2026-10-30

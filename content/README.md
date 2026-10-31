@@ -61,9 +61,12 @@ opening_hours:          # the same hours, so a card can say "Open now" (#176)
 get_in: walk-in         # walk-in | appointment | call-first
 languages: [Spanish]    # languages the source says staff speak or interpret
 access: Step-free entrance on the Main Street side.  # only what the source says
+steps:                  # optional (#822); what to do as a short numbered list
+  - Make a free account on the site.
+  - Upload your resume.
 ```
 
-`opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+`steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
 
 ### Town and neighborhood (#395)
 
@@ -124,6 +127,9 @@ Live feeds wired in now:
 | Mountaineer Food Bank pantry calendar | Mobile pantries the food bank files under Monongalia County | `https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county` |
 | Monongalia County calendar | Parks and recreation events and election days. Repeating events (like the weekly Commission meeting) are left out because we do not expand repeat rules, and we never guess a date | The JSON behind `https://www.monongaliacounty.gov/calendar.php` |
 | Morgantown Public Library System calendar | One-time events and closures at every branch. Programs the feed repeats 3 or more times (weekly storytimes, clubs) are left out so they do not bury the dates page. Staff names in the feed are never read | `https://events.mympls.org/ical_subscribe.php?src=p&cid=17544` |
+| Monongalia Arts Center calendar | Classes, workshops, concerts and markets. Cards send people to the center's site for cost. A repeating event shows only the date the feed gives | The public Google Calendar on `https://www.monartscenter.com/` |
+| Morgantown Farmers Market calendar | Market days only, not the market's old social media reminders. A repeating market shows only its first date, with a note to check for later dates | The market's public Google Calendar (`morgantownfarmersmarket@gmail.com`) |
+| Mylan Park events calendar | Every event the park lists, including outside groups' shows, meets and markets. Cards send people to the event page for tickets and cost | `https://mylanpark.org/wp-json/tribe/events/v1/events` |
 
 Not wired in: WVU's events calendar (`www.events.wvu.edu`) answers our requests with 403 Forbidden (checked 2026-10-30), so it stays out until WVU publishes a feed we may read. We never work around a block (#107).
 
@@ -318,6 +324,7 @@ meets: 4th Monday of every month, 3 p.m., Council Chambers
 who_can_serve: City residents.   # optional; only what the source says
 open_seats: 0                    # from the city's vacancy list
 page_vacant: 1                   # optional; vacant seats the board's own page shows, when it differs from the list
+section: other                   # optional; a board listed by name only under "Other city boards with open seats". Needs open_note (like "1 alternate seat") instead of decides and meets
 url: https://www.morgantownwv.gov/264/Tree-Board
 topics: [better]
 sources:
@@ -459,3 +466,30 @@ phone_confirmed_by: DS        # optional; the caller's initials (orgs and resour
 - `npm run check-content` fails if `phone_confirmed` is not a date or is in the future, or `phone_confirmed_by` is not two or three capital letters.
 
 **The call queue.** `npm run call-queue` in `site/` prints the list of calls to make, oldest first, with the number, why each one is there and what to ask (`--md FILE` writes it to a file). A listing is in it when it has a public phone number and either no source a robot can read (every source is `manual` in `source-rules.yaml`), no recent activity seen (places), or a past phone check. Making the calls waits on David's decision about who calls and from what number (#156).
+
+## `indicators/<slug>.yaml`: how the county is doing
+
+Official numbers for the "How is Mon County doing?" page (`/how-we-are-doing/`, #62), and later the data dashboard (#15). One file per number. Pages render only from these files.
+
+```yaml
+title: Children in poverty
+slug: children-in-poverty
+topic: health              # health | schools | safety
+definition: "Percentage of people under age 18 in poverty."   # the publisher's own definition, word for word
+unit: percent              # percent | number | years. Percents are written as a share: 0.129 for 12.9%
+data_year: "2023"          # the year or span the number covers, as the publisher gives it (quoted)
+release: County Health Rankings 2025
+values:
+  monongalia: 0.129
+  west_virginia: 0.196     # optional comparisons
+  united_states: 0.16
+more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia  # optional; the human page
+sources:
+  - name: County Health Rankings 2025 data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-30
+```
+
+- **Official sources only**, read in the same session: a government agency or a program that publishes the same data for every county. Never a real estate, "best places" or other commercial site.
+- **Copy the number and its definition exactly.** Never compute a new number (a rank, a change, a per-person rate) the source does not give.
+- **Describe, never judge.** No "good", "bad", "safe" or "failing". The page says what the numbers do and don't tell you.

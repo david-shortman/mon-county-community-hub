@@ -36,8 +36,11 @@ export function GET({ site }) {
 - [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults
+- [Contractor and trade licenses](${u('/contractor-license/')}): where WV contractors, plumbers, HVAC technicians and electricians get licensed, the Morgantown business license and permit portal for work in city limits, and how to look up a contractor's license or file a complaint with the WV Contractor Licensing Board
+- [Find a job](${u('/find-a-job/')}): where the City of Morgantown, Monongalia County, the State of West Virginia, WVU Medicine and Mon Health post jobs, free resume, interview and computer help at the American Job Center and the library, and short trainings at Pierpont
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
 - [Medicaid waivers](${u('/medicaid-waivers/')}): a plain guide to West Virginia's four Medicaid home care waivers (ADW, IDDW, TBIW, CSEDW): who each is for, how to start, who to call
+- [Staying active after 55](${u('/staying-active/')}): BOPARC yoga, tai chi, ballet and line dancing for adults 55 and over at Wiles Hill, activities at the Senior Monongalians senior center, and rail-trails for walking
 - [Start or grow a business](${u('/business/')}): free one-on-one coaching and Business Fundamentals classes from the WV SBDC, the SBA West Virginia District Office, a state list of business plan help, and the Morgantown Area Partnership, Chamber of Commerce and Main Street Morgantown in their own words
 - [Living here](${u('/living-here/')}): pick what is going on (moving here, trash pickup day, recycling drop-off, tires or electronics) and get local steps with phone numbers and sources
 - [Family and life changes](${u('/family/')}): pick what is going on (a baby or young child, a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
@@ -45,18 +48,21 @@ export function GET({ site }) {
 - [Getting around without a car](${u('/getting-around/')}): Mountain Line bus fares and passes, free rides with a WVU ID, late-night campus routes, the Grey Line to Pittsburgh and the airport, which bus goes to Ruby Memorial and Mon General, and NewFIT medical rides
 - [Get weather and emergency alerts](${u('/weather-alerts/')}): official sources only: phone Wireless Emergency Alerts, NWS Pittsburgh and NOAA Weather Radio for Mon County, City of Morgantown Notify Me, WVU Alert, WV 511 road alerts, statewide school closings, and FirstEnergy outage texts
 - [Is my home in a flood zone or a slide area?](${u('/flood-zone/')}): check an address on the WV Flood Tool, the FEMA flood map and the WV Landslide Tool, flood insurance basics (most home and renters insurance does not cover floods, 30 day wait), and the county floodplain permit
+- [Internet at home](${u('/internet/')}): the state broadband map, the state speed test and survey for slow or no service, the WV Attorney General's broadband complaint, the state's BEAD build-out in its own words, and free Wi-Fi, computers and meeting rooms at the Morgantown Public Library System
+- [Do I need a building permit?](${u('/permits/')}): city or county first (the Morgantown Zoning Viewer), then who issues permits in Morgantown (online portal only), Star City, Westover and Granville, and what can apply outside town limits: West Run land use permits, floodplain, state road driveways, septic and well permits, and the Assessor's Form 12:75
 - [Trash, recycling and drop-off](${u('/recycling/')}): pickup days, what goes in the curbside bin, and where to take hard items
 - [Thrift and resale shops](${u('/thrift-shops/')}): secondhand shops by area, what each sells, which buy from you, and which fund a local cause
 - [Sell, donate or give away your stuff](${u('/sell-or-donate/')}): for clothes, kids' gear, furniture, books, electronics, tools, paint and building materials, where each can be sold, donated, given away or recycled
 - [Markets and sales coming up](${u('/markets/')}): craft markets and card shows in the next 30 days, the farmers market, yearly sales, the nearest flea markets, and how to sell at a market
 - [Grow food and flowers](${u('/grow/')}): pick what you hope to do (grow food on a budget, sell what you grow, a small farm) and get local steps with phone numbers and sources
 - [Sell what you grow](${u('/sell-what-you-grow/')}): who sets the rules for selling produce, canned foods and plants at a Mon County farmers market, with links to the county health department and WV Department of Agriculture rules
-- [Parks, trails and outdoors](${u('/parks/')}): Morgantown city parks (BOPARC) and Monongalia County parks (Camp Muffly, Chestnut Ridge, Mason-Dixon), what each has, and how to book a pavilion, cabin or campsite
+- [Parks, trails and outdoors](${u('/parks/')}): Morgantown city parks (BOPARC) and Monongalia County parks (Camp Muffly, Chestnut Ridge, Mason-Dixon), what each has, how to book a pavilion, cabin or campsite, city park trails, indoor and outdoor pools, public ice skating times and prices, Coopers Rock State Forest, how to buy a WV fishing or hunting license, and groups to ride or run with
 - [Your community](${u('/community/')}): pick what fits (a community center near you, a community dinner, a hall to rent, joining a center, making your neighborhood better) and go straight to the page
 - [Community centers and halls](${u('/community-centers/')}): community centers, senior centers and halls across Mon County, grouped by part of the county, with dinners and events, halls to rent, and how to join
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
+- [Start a nonprofit or community group](${u('/start-a-group/')}): the West Virginia steps: Articles of Incorporation for a nonprofit corporation ($25, Form CD-1), registering with the Secretary of State before asking the public for donations, and links to the IRS for tax-exempt status
 ${centers}
-- [City meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council and city board meetings, and minutes from the last 60 days, read daily from the city's AgendaCenter
+- [City and county meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council, city board and County Commission meetings, minutes from the last 60 days, and where the school board and towns post theirs
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
@@ -74,6 +80,8 @@ ${centers}
 - [People with disabilities and caregivers](${u('/for/disability-and-caregivers/')}): a starting page that links to independent living, care at home through Medicaid, job help and health costs
 - [Free car seat checks](${u('/car-seat-checks/')}): the two child car seat fitting stations the WV DMV lists for Mon County (Sheriff's Department, WVU Medicine Children's), free, by appointment
 - [Driver's license and plates for new residents](${u('/drivers-license/')}): the WV DMV rules for switching an out-of-state license, title and registration (vehicles within 30 days), fees, what to bring, and the Morgantown Regional Office address, phone, hours and appointments
+- [Teen drivers: permit to full license](${u('/teen-drivers/')}): West Virginia's graduated driver licensing in three levels (instruction permit at 15, intermediate license at 16, full license at 17) with hours, passenger and night limits and fees, and the Morgantown DMV office
+- [Register to vote and find your polling place](${u('/vote/')}): official sources only: WV Secretary of State online registration and polling place search, the Monongalia County Clerk's office (address, phone, hours), and Morgantown city election questions
 
 ## Data
 
@@ -82,6 +90,7 @@ ${centers}
 - [OpenAPI description](${u('/api/v1/openapi.yaml')}): every field in the JSON files
 - [Groups and offices](${u('/api/v1/orgs.json')}), [programs and services](${u('/api/v1/resources.json')}), [deadlines and dates](${u('/api/v1/calendar.json')}), [needs register](${u('/api/v1/needs.json')}), [corrections](${u('/api/v1/corrections.json')}): each record lists its sources and checked dates
 - [When plans and budgets get decided](${u('/make-it-better/when-it-gets-decided/')}): Morgantown's budget year, the March levy window in state law, the 2027-2031 capital plan lines for Mosaic, a downtown master plan and wayfinding, the comprehensive plan, and how to comment
+- [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; with years and sources
 
 ## Notes for AI tools
 

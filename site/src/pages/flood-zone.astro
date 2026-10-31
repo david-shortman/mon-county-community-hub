@@ -6,6 +6,8 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
 import { telHref } from '../lib/content.mjs';
 export const page = { door: "living-here", topic: "weather", label: "Is my home in a flood zone or a slide area?", summary: "Check an address on the state flood and landslide maps, flood insurance basics, and when you need a floodplain permit" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -24,9 +26,10 @@ const countyPhone = '304-599-6332';
 ---
 <Base title="Is my home in a flood zone or a slide area? Mon County, WV" description="How to check a Morgantown or Monongalia County address on the West Virginia Flood Tool, the FEMA flood map and the WV Landslide Tool, what a flood zone means for insurance, and when you need a county floodplain permit.">
   <h1>Is my home in a flood zone or a slide area?</h1>
-  <p class="lede">Check before you rent, buy or build. It takes a few minutes on a public map. Flooding is not covered by most home or renters insurance.</p>
+  <p class="lede">Check before you rent, buy or build. It takes a few minutes on a public map. Flooding is not covered by most home or renters insurance. Tap a step to open it.</p>
 
-  <h2 id="flood">1. Look up the address on the flood map</h2>
+  <Route label="Steps to check a home for flood and slide risk">
+  <Milepost n={1} title="Look up the address on the flood map" id="flood" open>
   <p>The <strong>West Virginia Flood Tool</strong> is a public state map. Type a street address to zoom to it. It shows the flood zone, and how high and deep the water could get in a big flood. Red or orange means high risk. Yellow means moderate risk. Its flood data comes from FEMA's flood maps.</p>
   <p>Monongalia County sends people to this map. The county says that if the red shaded area crosses any part of your property, the property falls under the County Floodplain Ordinance (see step 3).</p>
   <SourceLine sources={[...floodTool, ...county]} about="the West Virginia Flood Tool" />
@@ -39,7 +42,9 @@ const countyPhone = '304-599-6332';
     <a class="btn" href="https://msc.fema.gov/portal/home"><Icon name="open" /><span>Open the FEMA flood map</span></a>
   </div>
 
-  <h2 id="insurance">2. What a flood zone means for insurance</h2>
+  </Milepost>
+
+  <Milepost n={2} title="What a flood zone means for insurance" id="insurance">
   <ul>
     <li><strong>Regular insurance usually does not cover floods.</strong> FloodSmart, the federal flood insurance program's site, says most homeowners and renters insurance does not cover flood damage. Flood insurance is a separate policy.</li>
     <li><strong>There is usually a 30 day wait.</strong> A new flood policy goes into effect 30 days after you buy it. There are a few exceptions, like buying it while you get or renew a mortgage. Do not wait for a storm to buy it.</li>
@@ -48,7 +53,9 @@ const countyPhone = '304-599-6332';
   <p>A home outside a high risk zone can still flood. Ask an insurance agent what a policy would cost for the address.</p>
   <SourceLine sources={nfip} about="flood insurance" />
 
-  <h2 id="permit">3. Building, adding on or filling in a floodplain needs a permit</h2>
+  </Milepost>
+
+  <Milepost n={3} title="Building, adding on or filling in a floodplain needs a permit" id="permit">
   <p>In Monongalia County, you need a <strong>floodplain permit</strong> before you build, add on, make a big repair, place a manufactured home, or fill, grade or pave land in or right next to the floodplain. The county ordinance says the work cannot start until the Floodplain Administrator issues the permit.</p>
   <p>Questions or an application: the <strong>Monongalia County Floodplain Office</strong>, <a href={telHref(countyPhone)}>{countyPhone}</a> ext. 2, or email <a href="mailto:floodplain@monongaliacounty.gov">floodplain@monongaliacounty.gov</a>. The office is part of the county Emergency Management Office.</p>
   <SourceLine sources={ordinance} about="the county floodplain permit" />
@@ -59,13 +66,17 @@ const countyPhone = '304-599-6332';
   <p>Inside Morgantown city limits, the city has its own application to develop in a floodplain area. Its form says no work may begin until a permit is issued. We could not confirm which city office takes it, so ask the city when you call.</p>
   <SourceLine sources={cityForm} about="the Morgantown floodplain permit form" />
 
-  <h2 id="landslide">4. Check for landslide risk</h2>
+  </Milepost>
+
+  <Milepost n={4} title="Check for landslide risk" id="landslide">
   <p>The <strong>WV Landslide Tool</strong> is a public state map made by state agencies with FEMA. It shows where landslides have happened and which areas are more likely to slide.</p>
   <p>The map's makers say its risk results should not be read at a scale smaller than a county, and are for planning only. For a single property, they say to ask a geotechnical (soil) engineer or a landslide expert.</p>
   <SourceLine sources={landslide} about="the WV Landslide Tool" />
   <div class="actions">
     <a class="btn" href="https://www.mapwv.gov/landslide/"><Icon name="open" /><span>Open the WV Landslide Tool</span></a>
   </div>
+  </Milepost>
+  </Route>
 
   <p>Storm on the way? See <a href={`${base}/weather-alerts/`}>how to get official weather alerts</a>. New here? See <a href={`${base}/moving-here/`}>start power, water, gas and trash</a>.</p>
   <p class="meta">Sources checked October 30, 2026. Maps change when FEMA updates them, so check again before you sign. We describe these maps and rules and do not decide whether a property is safe. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
