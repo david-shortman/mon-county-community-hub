@@ -199,6 +199,7 @@
     "types[].description",
     "types[].count",
     "types[].list_url",
-    "types[].record_url_template"
+    "types[].record_url_template",
+    "feed_health_url"
   ]
 }
