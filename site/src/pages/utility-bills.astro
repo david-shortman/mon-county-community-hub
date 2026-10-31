@@ -6,6 +6,7 @@ import Milepost from '../components/Milepost.astro';
 import Icon from '../components/Icon.astro';
 import Actions from '../components/Actions.astro';
 import { resource, telHref, loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "this-month", topic: "money", label: "Help paying a utility bill", summary: "Heat, water or electric, before or after a shutoff" };
 // Each program reads its phone and sources from its resource record, so its
 // source and checked date sit right under it (#135).
@@ -98,5 +99,5 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
     <p><strong>Do this today:</strong> call your utility, ask for a payment plan, then call 211.</p>
   </div>
   {lifeline && <p>Phone or internet bill? See <a href={`${base}/internet/#lifeline`}>Help paying for phone or internet</a>.</p>}
-  <p class="meta">Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
