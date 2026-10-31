@@ -21,6 +21,7 @@ const when = `${prettyDate(t.checkedDay)} at ${clock}`;
 // End a sentence once, even when it ends in "a.m." or "p.m.".
 const end = (x) => (String(x).endsWith('.') ? x : `${x}.`);
 const showOpen = t.status === 'open' && t.fresh;
+const daily = ['open', 'closed-tonight'].includes(t.status);
 const rules = t.rules ?? {};
 const ruleRows = [
   ['Who can stay', rules.who],
@@ -52,11 +53,13 @@ const ruleRows = [
     {t.status === 'open' && (
       <p data-when="stale" hidden={showOpen}><strong>Not confirmed for today.</strong> The last check, on {when}, said it was open. Call 211 before you go to find out about tonight.</p>
     )}
-    {t.status === 'closed-tonight' && <p><strong>Not open tonight</strong>, as of {end(when)} Call 211 for other places to get warm.</p>}
+    {t.status === 'closed-tonight' && <p data-when="fresh" hidden={!t.fresh}><strong>Not open tonight</strong>, as of {end(when)} Call 211 for other places to get warm.</p>}
+    {t.status === 'closed-tonight' && <p data-when="stale" hidden={t.fresh}><strong>Not confirmed for today.</strong> The last check, on {when}, said it was not open that night. Call 211 to find out about tonight.</p>}
     {t.status === 'season-over' && <p><strong>The warming shelter is closed for the season</strong>, as of {end(when)} Call 211 for other places to get warm.</p>}
     {t.status === 'not-announced' && <p><strong>Not announced yet.</strong> {t.note} <span class="meta">Last checked {end(when)}</span></p>}
     {t.status !== 'not-announced' && t.note && <p>{t.note}</p>}
     <SourceLine sources={t.sources} about="the warming shelter status" />
+    {daily && <noscript><p><strong>Check the date above.</strong> If it is not today, this may be out of date. Call 211 to confirm before you go.</p></noscript>}
   </div>
 
   <h2>Call 211 to confirm</h2>
@@ -69,9 +72,9 @@ const ruleRows = [
   <script is:inline>
     (function () {
       // The page may be from an earlier day (saved offline or not rebuilt).
-      // Show "open" only if the check is from today on this phone, in Morgantown.
+      // Show tonight's status only if the check is from today on this phone, in Morgantown.
       var box = document.getElementById('tonight');
-      if (!box || box.dataset.status !== 'open') return;
+      if (!box || ['open', 'closed-tonight'].indexOf(box.dataset.status) < 0) return;
       var today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date());
       var fresh = box.dataset.checked === today;
       var f = box.querySelector('[data-when="fresh"]');
