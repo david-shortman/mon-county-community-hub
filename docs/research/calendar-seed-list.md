@@ -7,7 +7,7 @@ Each row is a date residents tend to miss, where it now lives on the calendar, o
 
 | Item | Status | Where |
 |---|---|---|
-| LIEAP heating help, 2026-27 | On the calendar (waits for David): pre-LIEAP applications mailed from November 2, last day November 25, 2026 | `content/calendar/lieap-pre-application-2026-27.yaml`, from the [DoHS release](https://dohs.wv.gov/article/west-virginia-department-human-services-announces-lieap-application-mailing-beginning) |
+| LIEAP heating help, 2026-27 | In PR #755, waiting for David: pre-LIEAP applications mailed from November 2, last day November 25, 2026 | `content/calendar/lieap-pre-application-2026-27.yaml`, from the [DoHS release](https://dohs.wv.gov/article/west-virginia-department-human-services-announces-lieap-application-mailing-beginning) |
 | Emergency LIEAP, other DoHS windows | No date published. Watched weekly | `docs/research/benefit-windows-watch.md` |
 | Mountaineer Food Bank mobile pantries in Mon County | Live feed, already on the calendar | Feed adapter (see `content/README.md`) |
 | Tire collection days | On the calendar: November 14, 2026 (state and county pages differ on the tire limit) | `wvdep-tire-collection-mon-2026-11-14.yaml` |

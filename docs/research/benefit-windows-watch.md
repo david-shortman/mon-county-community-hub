@@ -3,7 +3,7 @@
 Last checked: 2026-10-30
 For issue #216.
 
-LIEAP, the winter heating help program, is announced only by press release, and its windows are short. The 2026 window closed early: DoHS posted "Announces closure of LIEAP Application Period" on February 6, 2026. The 2026-27 window was posted on October 30, 2026 and added to the calendar the same day (`lieap-pre-application-2026-27`).
+LIEAP, the winter heating help program, is announced only by press release, and its windows are short. The 2026 window closed early: DoHS posted "Announces closure of LIEAP Application Period" on February 6, 2026. The 2026-27 window was posted on October 30, 2026, and a calendar entry for it (`lieap-pre-application-2026-27`) was opened the same day in PR #755, which waits for David.
 
 ## The weekly check
 
