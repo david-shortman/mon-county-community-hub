@@ -1,0 +1,13 @@
+name: Monongalia County Circuit Clerk
+slug: monongalia-county-circuit-clerk
+kind: government
+website: http://www.monongaliacircuitclerk.com/
+phone: "304-291-7240"
+summary: Keeps the records and collects the fees for Circuit Court and Family Court in Monongalia County. The office also runs jury duty for the county. It is at the Monongalia County Justice Center, 75 High Street, Suite 12.
+topics: [legal, government]
+area: monongalia-county
+sources:
+  - url: http://www.monongaliacircuitclerk.com/
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/public-resources/court-information-county/monongalia_county
+    checked: 2026-10-31
