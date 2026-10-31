@@ -4,11 +4,14 @@
 // read 2026-10-30. The health department's address is from monchd.org.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
 export const page = { door: "care", topic: "health", label: "Ride to a medical visit", summary: "Medicaid rides, and the bus to Ruby, Mon General and the health department" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
+const rideSources = [{ url: 'https://bms.wv.gov/media/41428/download?inline', checked: '2026-10-30', name: 'West Virginia Bureau for Medical Services' }];
+const monchdSources = [{ url: 'https://www.monchd.org/', checked: '2026-10-30' }];
 ---
 <Base title="Ride to a medical appointment in Morgantown and Mon County" description="How to get to a doctor in Morgantown and Monongalia County without a car: Medicaid rides through Modivcare, and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares for seniors and people with disabilities.">
   <h1>Need a ride to a medical visit?</h1>
@@ -16,10 +19,17 @@ const r = (slug) => all.find((e) => e.slug === slug);
 
   <h2>On Medicaid or WVCHIP</h2>
   {r('wv-medicaid-rides') && <ResourceCard r={r('wv-medicaid-rides')} />}
+  <p>Other ways Medicaid can help you get there. Ask at the same number:</p>
+  <ul>
+    <li>Live near a bus line? Ask for bus tickets or passes for you and, if medically needed, one escort.</li>
+    <li>Family or friends who drive you may be able to get mileage paid back.</li>
+  </ul>
+  <SourceLine sources={rideSources} about="other Medicaid ride options" />
 
   <h2>By bus</h2>
   {r('mountain-line-medical-trips') && <ResourceCard r={r('mountain-line-medical-trips')} showCost />}
-  <p>The Monongalia County Health Department is at 453 Van Voorhis Road (<a href="https://www.monchd.org/">health department</a>, checked October 30, 2026).</p>
+  <p>The Monongalia County Health Department is at 453 Van Voorhis Road.</p>
+  <SourceLine sources={monchdSources} org="monongalia-county-health-department" about="the health department's address" />
 
   <h2>Also check</h2>
   <ul>

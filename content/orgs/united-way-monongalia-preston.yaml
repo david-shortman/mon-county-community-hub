@@ -3,7 +3,7 @@ slug: united-way-monongalia-preston
 kind: nonprofit
 website: https://www.unitedwaympc.org/
 phone: "304-296-7525"
-summary: A local United Way that raises money each year and funds nonprofit programs in Mon and Preston counties. It also runs the Family Resource Network, which publishes guides to local help.
+summary: A local United Way that raises money each year and funds nonprofit programs in Mon and Preston counties. It works in four areas, Healthy Community, Youth Opportunity, Financial Security and Community Resiliency, and runs programs such as the Imagination Library, Helpful Harvest and the Family Resource Network. To volunteer, community members use its page on GivePulse, a volunteer sign-up website. WVU staff, faculty and students use WVU iServe, the university's volunteer site.
 topics: [community]
 area: monongalia-county
 sources:
@@ -12,4 +12,8 @@ sources:
   - url: https://www.unitedwaympc.org/contact-us
     checked: 2026-10-30
   - url: https://www.unitedwaympc.org/frn
+    checked: 2026-10-30
+  - url: https://www.unitedwaympc.org/
+    checked: 2026-10-30
+  - url: https://www.unitedwaympc.org/volunteer-opportunities
     checked: 2026-10-30

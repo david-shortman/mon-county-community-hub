@@ -6,7 +6,7 @@
 #
 # Steps state no facts of their own, only the action: each one points to a record in
 # content/resources/ for its phone number, link, source and checked date.
-# A situation shows only once its page exists. Situations run in the ranked order from #475. `when` is today, week or opens.
+# A situation shows only once its page exists. Situations run in the ranked order from #475, with the evidence in docs/playbook/care-needs.md. `when` is today, week or opens.
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
@@ -26,6 +26,10 @@ steps:
     resource: mountain-line-medical-trips
     text: Plan a bus trip to your visit with Mountain Line.
     action: Routes
+  dietitian:
+    when: week
+    resource: monchd-nutrition-counseling
+    text: Ask your doctor for a referral, then call the health department to see a dietitian.
   trails:
     when: today
     resource: mon-river-rail-trails
@@ -60,6 +64,10 @@ situations:
     label: I need a ride to a medical visit
     page: /medical-rides/
     steps: [bus, ride]
+  - id: diabetes
+    label: I want help with diabetes, blood pressure or weight
+    page: /diabetes-and-weight/
+    steps: [dietitian, trails]
   - id: medicare
     label: I'm turning 65 or on Medicare
     page: /turning-65/
