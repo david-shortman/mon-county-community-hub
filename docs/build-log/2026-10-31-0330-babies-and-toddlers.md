@@ -1,0 +1,8 @@
+# 2026-10-31: Families and kids adds home visits, breastfeeding help, baby pantries and parent groups
+
+- **Considered:** parents of babies and toddlers ask about help at home while pregnant, breastfeeding, diapers and formula, and meeting other parents (#266, #572, #574, #575, #576).
+- **Checked on October 30, 2026:** the health department's breastfeeding page (free WIC classes open to anyone: first and third Wednesday at 4 p.m., second Wednesday at 10 a.m.); Scott's Run Settlement House's baby pantry page (diapers, wipes, formula, pickup by appointment, call or text (304) 435-5098); Starting Points' home page (twice-a-week playgroup, Happy School parent group, Friday drop-off 10 a.m. to 1 p.m.); the library's Preschool Storytime and Read Baby Read pages; the WVU Center for Excellence in Disabilities' support groups page (Circle of Parents, Tuesdays at 7 p.m., online); WVU's Healthy Start/HAPI page (eligibility as listed, 1-866-738-HAPI).
+- **Shipped:** new records for WIC breastfeeding help, the Scott's Run baby pantry, Circle of Parents and HAPI (with an org for HAPI), and updated story time and Starting Points records. New sections on `/families-and-kids/`: home visits, feeding your baby, diapers, meet other parents, and a link to car seat checks.
+- **Left off (#569):** Help Me Grow's phone, the WVU Medicine lactation clinic's location, Right From The Start's local agency, Starting Points playgroup days and times, and Scott's Run's pantry hours (its two pages disagree). WIC itself (#570) and child care help (#571) wait for records in other lanes' open PRs (#742, #735, #689).
+- **Waits for David:** baby pantries are food help, HAPI eligibility names Medicaid, and the page names 211.
+- **Cost:** $0.

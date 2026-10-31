@@ -14,11 +14,13 @@ contact:
   url: https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business
   url_label: City steps and forms
   place: "389 Spruce Street, Morgantown, WV 26505"
-cost: "Certificate of Occupancy application fee: $65. Other license fees and B&O tax rates are not listed on the city's web page."
+cost: "City business license fee: $20 (also $20 for a nonprofit). Certificate of Occupancy application fee: $65. Businesses that sell beer, wine or liquor pay extra city license fees, listed on the application. B&O tax rates are not listed on the city's web page."
 sources:
   - url: https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://www.morgantownwv.gov/742/Licensing
     checked: 2026-10-30
   - url: https://www.morgantownwv.gov/202/Finance
     checked: 2026-10-30
+  - url: https://www.morgantownwv.gov/DocumentCenter/View/5595/Fillable-Municipal-Business-License-Application
+    checked: 2026-10-31
