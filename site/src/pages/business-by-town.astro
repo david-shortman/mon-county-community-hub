@@ -17,6 +17,7 @@ const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '
   <h1>Start a business in Star City, Granville or Westover</h1>
   <p class="lede">Businesses in West Virginia register with the state first. After that, the town your business is in decides which local license and B&O (business and occupation) tax form you need. Check which town your business is in. Each part below comes from that town's own website.</p>
   <p>State registration and free help: see <a href={`${base}/business/`}>Start or grow a business</a>. Inside Morgantown city limits: see the city's <a href="https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business">Steps to Starting Your Business</a>.</p>
+  <SourceLine sources={[{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked: '2026-10-30' }]} about="Morgantown steps to starting a business" />
 
   <h2>Star City</h2>
   {resource('star-city-business-registration') && <ResourceCard r={resource('star-city-business-registration')} />}
@@ -27,7 +28,14 @@ const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '
   <h2>Westover</h2>
   <article class="card resource" id="westover-new-businesses">
     <h3>Westover business forms</h3>
-    <p>The City of Westover asks new businesses to call <a href={telHref('304-296-6860')}>(304) 296-6860</a> to get started, and to read its New Business Packet. Its New Businesses page lists a Business Registration Form, a Business License Application, a Business and Occupation (Gross Sales) Tax form, and a "Homeland Security and MECCA 9-1-1 Registration" form. Contractor, building permit and Certificate of Occupancy forms are on the same page. The page does not list fees or rates. City office: 500 Dupont Road, Westover. Paperwork questions: cityofwestover@westoverwv.gov.</p>
+    <p>The City of Westover asks new businesses to call <a href={telHref('304-296-6860')}>(304) 296-6860</a> to get started. It also asks you to read its New Business Packet. Its New Businesses page lists these forms:</p>
+    <ul>
+      <li>Business Registration Form</li>
+      <li>Business License Application</li>
+      <li>Business and Occupation (Gross Sales) Tax</li>
+      <li>Homeland Security and MECCA 9-1-1 Registration</li>
+    </ul>
+    <p>Contractor, building permit and Certificate of Occupancy forms are on the same page. The page does not list fees or rates. City office: 500 Dupont Road, Westover. Paperwork questions: cityofwestover@westoverwv.gov.</p>
     <p><a class="btn" href="https://www.westoverwv.org/new-businesses"><span>Westover business forms</span></a></p>
     <SourceLine sources={westover} about="Westover business forms" />
   </article>
