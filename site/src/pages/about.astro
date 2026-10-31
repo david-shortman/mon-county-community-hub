@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { FIX_FORM } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "About this site", summary: "Who runs it, how the AI works, and how to check our work" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
@@ -19,8 +20,8 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
   <h2>How you can check us</h2>
   <ul>
     <li><strong>Every listing shows where it came from.</strong> It links to its source, usually the group's own page, and shows the date we last checked it.</li>
-    <li><strong>You deal with the group, not us.</strong> When you sign up, call, or give, you do it with them. This site has no sign-up forms, takes no payments, and does not ask for your name or contact details.</li>
-    <li><strong>Any group can ask us to fix or remove its listing.</strong> Use the "Report a problem" link on the listing, or the "Tell us" link at the bottom of each page. Both open a public page on GitHub and need a free GitHub account. We're working on a way to reach us without an account.</li>
+    <li><strong>You deal with the group, not us.</strong> When you sign up, call, or give, you do it with them. This site has no sign-up forms and takes no payments. It never asks for your name. Our one form, for fixes and removals, asks for an email only if you want a reply.</li>
+    <li><strong>Any group can ask us to fix or remove its listing.</strong> Use our <a href={FIX_FORM}>fix or removal form</a>. You don't need an account, and what you send is not posted. The "Report a problem" link on each listing still opens a public page on GitHub, which needs a free GitHub account.</li>
     <li><strong>Every listing shows its oldest checked date.</strong> If any of its sources was last checked more than 6 months ago, the listing says it may be out of date.</li>
     <li><strong>The work is public.</strong> The code, the data, the rules the AI follows, and a log of what it built and why are all on <a href={repo}>GitHub</a>. Planning notes and notes about specific people are kept private.</li>
   </ul>
@@ -31,13 +32,13 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
 
   <h2>How it runs</h2>
   <p>Every day, AI agents (Claude, made by Anthropic) work through the same steps. They look for places where information about life here is hard to find or out of date. They pick the most useful fix and build it. Then they check whether it helped and write down what they did and why.</p>
-  <p>The AI can build and publish most pages on its own. Every change is a public "pull request" on GitHub, with a note on what changed and why. When something is wrong, it gets fixed in the open, and the fix shows up in the public log.</p>
+  <p>The AI publishes most changes on its own, with no person looking first. Every change is a public "pull request" on GitHub, with a note on what changed and why. Before a change goes live, another AI run checks it against our rules for sources, plain words, fairness and privacy. When something is wrong, it gets fixed in the open, and the fix shows up in the public log.</p>
   <p>The AI follows these rules every time:</p>
   <ul>
     <li><strong>Every fact needs a public source</strong> and the date it was checked. If the AI can't find a source, the fact stays off the site.</li>
     <li><strong>Describe, don't take sides.</strong> No candidates, parties, or favorite businesses. Voting information points to the West Virginia Secretary of State.</li>
     <li><strong>No personal information</strong> about private people, ever. We don't track you. Directions buttons open Google Maps, and nothing goes to Google unless you tap one.</li>
-    <li><strong>Saved copies stay on your phone.</strong> So pages can open with no signal, your browser keeps copies of the Help now page, the home page, the main topic pages, Dates and Food today, plus pages you open. Everyone's phone saves the same main pages. The copies stay on your phone and are not sent anywhere. To remove them, clear this site's data in your browser settings.</li>
+    <li><strong>Saved copies stay on your phone.</strong> So pages can open with no signal, your browser keeps copies of the Help now page, the home page, the main topic pages, Dates and Food today, plus pages you open. The copies stay on your phone and are not sent anywhere. To remove them, clear this site's data in your browser settings.</li>
   </ul>
   <p>Some things the AI is never allowed to do on its own. They always wait for my yes:</p>
   <ul>
@@ -57,7 +58,14 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
     <li><strong>When sources disagree:</strong> we say who says what, and point you to your doctor or the office that decides.</li>
   </ul>
   <p>The full rules are in <a href={doc('content/README.md')}>our content guide</a>.</p>
-  <p>My part: I guide the project at the top. I review the content and how it's presented, and I review how we measure whether the site is accurate and helpful.</p>
+  <p>My part: I guide the project at the top. Some changes always wait for me to check them before they go live:</p>
+  <ul>
+    <li>pages and listings about shelter, crisis help, food and benefits</li>
+    <li>changes to the rules</li>
+    <li>anything about money or outside accounts</li>
+    <li>anything that speaks for the project</li>
+  </ul>
+  <p>I look over other pages when I can, after they are up. I have not yet checked the shelter, crisis, food and benefits pages that were already up before October 30, 2026.</p>
   <p class="note">AI can still get things wrong. Please check details with the group before you act, and <a href={tellUs}>tell us</a> if something is off.</p>
 
   <h2 id="corrections">How we fix mistakes</h2>
@@ -72,8 +80,10 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
 
   <h2>Read more</h2>
   <ul>
+    <li><a href={`${base}/how-it-works/`}>How this site works</a>: how a listing gets here, who does what, and the checks that run on their own.</li>
     <li><a href={`${base}/the-idea/`}>The idea behind this site</a>: what we're trying to do, why it can work, and how to check each part.</li>
     <li><a href={`${base}/hard-questions/`}>Hard questions</a>: straight answers about who runs this, why AI, and where we fall short today.</li>
+    <li><a href={`${base}/how-we-check/`}>How we check</a>: what counts as a source, how often we recheck, and how that compares with 211.</li>
     <li><a href={`${base}/partners/`}>For groups and helpers</a>: how to fix a listing, reuse the data, and what we will and won't do.</li>
     <li><a href={doc('docs/CHARTER.md')}>The project charter</a>: the mission, goals, and the limits on what the AI may do.</li>
     <li><a href={doc('docs/COORDINATION.md')}>How we work</a>: who does what, and when a change waits for a person.</li>

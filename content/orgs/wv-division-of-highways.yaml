@@ -1,0 +1,10 @@
+name: West Virginia Division of Highways
+slug: wv-division-of-highways
+kind: government
+website: https://transportation.wv.gov/agencies/highways
+summary: The state agency that takes care of state roads. Its District 4 office in Clarksburg serves Mon County.
+topics: [moving, government]
+area: statewide
+sources:
+  - url: https://transportation.wv.gov/agencies/highways/districts/district-four
+    checked: 2026-10-30

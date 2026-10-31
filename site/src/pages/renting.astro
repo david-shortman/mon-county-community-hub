@@ -1,0 +1,143 @@
+---
+// Renting a home: before you rent (#565), getting repairs made (#566) and
+// getting your deposit back (#567). Part of #265. Legal rules are quoted
+// from the WV Code or credited to Legal Aid of WV by name, never put in our
+// own words as advice. Left off until a person confirms (#564): the second
+// Morgantown number for checking registration, rental rules and complaints in
+// Westover, Granville and outside town limits, and rent increases.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "this-month", topic: "housing", label: "Renting a home: before you rent, repairs and your deposit", summary: "Check a rental is registered, read the lease, ask for repairs, and what state law says about getting your security deposit back" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-30';
+const src = (url, name) => [{ url, checked, ...(name ? { name } : {}) }];
+const lease = src('https://legalaidwv.org/legal-information/renting-a-home-or-apartment-understanding-your-lease/');
+const moveIn = src('https://legalaidwv.org/renters-rights-west-virginia/moving-into-rental-housing/');
+const badArticle = src('https://legalaidwv.org/legal-information/what-to-do-when-housing-conditions-are-bad-a-tenants-guide-to-safe-housing/');
+const badPage = src('https://legalaidwv.org/renters-rights-west-virginia/bad-housing-conditions/');
+const habitable = src('https://code.wvlegislature.gov/37-6-30/', 'West Virginia Code §37-6-30');
+const depArticle = src('https://legalaidwv.org/legal-information/how-to-get-your-security-deposit-back-2/');
+const moveOut = src('https://legalaidwv.org/renters-rights-west-virginia/moving-out-of-rental-housing/');
+const code = (n) => `https://code.wvlegislature.gov/37-6A-${n}/`;
+const depositCode = [1, 2, 3, 4, 5].map((n) => ({ url: code(n), checked, name: `West Virginia Code §37-6A-${n}` }));
+const rentalPage = 'https://www.morgantownwv.gov/435/Rental-Information';
+---
+<Base title="Renting a home in Morgantown and Mon County: before you rent, repairs and your deposit" description="Check that a Morgantown or Star City rental is registered, read a lease, ask a landlord for repairs, and what West Virginia law and Legal Aid of WV say about getting a security deposit back.">
+  <h1>Renting a home: before you rent, repairs and your deposit</h1>
+  <p class="lede">Where to check a rental before you sign, who to tell when something needs fixing, and what state law says about your security deposit. We quote the law and Legal Aid of West Virginia. We do not give legal advice. For your own situation, ask Legal Aid or, if you are a WVU student, Student Legal Services.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      <li><a href="#before">Before you rent</a></li>
+      <li><a href="#repairs">Getting repairs made</a></li>
+      <li><a href="#deposit">Getting your deposit back</a></li>
+      <li><a href="#legal-help">Free legal help</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="before">Before you rent</h2>
+  <h3>Check the rental is registered</h3>
+  <p>Inside Morgantown city limits, every rental must be registered with the city. You can ask the city whether a unit is registered and how many people may live there.</p>
+  {r('morgantown-rental-registration') && <ResourceCard r={r('morgantown-rental-registration')} />}
+  {r('star-city-rental-registration') && <ResourceCard r={r('star-city-rental-registration')} />}
+  <p>Not sure if the home is in a town? See <a href={`${base}/permits/#where`}>how to check city limits</a>. Before you rent, you can also check <a href={`${base}/flood-zone/`}>whether the home is in a flood zone</a>.</p>
+
+  <h3>Read the lease</h3>
+  <p>Legal Aid of West Virginia's lease guide says to:</p>
+  <ul>
+    <li>Read the whole lease, and ask about anything you do not understand.</li>
+    <li>Look at the home for damage before you sign, and write it down or take photos.</li>
+    <li>Get any changes or spoken promises in writing, signed by you and the landlord.</li>
+    <li>Check what fees you may owe besides rent and the deposit, and what happens if you leave early.</li>
+  </ul>
+  <p>Legal Aid says a security deposit is usually equal to one month's rent. Its Moving Into Rental Housing page has a video and a checklist for moving in.</p>
+  <SourceLine sources={[...lease, ...moveIn]} about="Legal Aid's lease guide" />
+  <div class="actions">
+    <a class="btn" href={lease[0].url}><Icon name="open" /><span>Legal Aid: understanding your lease</span></a>
+    <a class="btn" href={moveIn[0].url}><Icon name="open" /><span>Move-in checklist</span></a>
+  </div>
+
+  <h3>WVU students</h3>
+  {r('wvu-student-legal-services') && <ResourceCard r={r('wvu-student-legal-services')} showCost />}
+  {r('wvu-off-campus-housing') && <ResourceCard r={r('wvu-off-campus-housing')} />}
+
+  <h3>Need help paying rent over time?</h3>
+  {r('fmha-section-8-and-public-housing') && <ResourceCard r={r('fmha-section-8-and-public-housing')} />}
+
+  <h2 id="repairs">Getting repairs made</h2>
+  <h3>What the law says a landlord must keep up</h3>
+  <p>West Virginia Code §37-6-30 says a landlord shall, among other things:</p>
+  <ul>
+    <li>"deliver the dwelling unit and surrounding premises in a fit and habitable condition, and shall thereafter maintain the leased property in such condition"</li>
+    <li>"Make all repairs necessary to keep the premises in a fit and habitable condition," unless the repairs were needed mainly because of a lack of reasonable care by the tenant or their guests</li>
+    <li>"Maintain in good and safe working order and condition all electrical, plumbing, sanitary, heating, ventilating, air-conditioning and other facilities and appliances" the landlord supplies</li>
+    <li>"supply running water and reasonable amounts of hot water at all times, and reasonable heat between October 1, and the last day of April," except where the tenant alone controls the heat or hot water</li>
+  </ul>
+  <p>The same section says it does not require the landlord "to make repairs when the tenant is in arrears in payment of rent," which means behind on rent. Read the whole section at the link.</p>
+  <SourceLine sources={habitable} about="the landlord's duty to keep a rental fit to live in" />
+
+  <h3>The steps Legal Aid describes</h3>
+  <p>Legal Aid of West Virginia's guide to bad housing conditions lists these steps:</p>
+  <ol>
+    <li><strong>Write down the problem.</strong> Take photos with the date on them.</li>
+    <li><strong>Tell the landlord.</strong> Keep copies of texts, emails and letters. If the landlord does not answer in time, Legal Aid says you may want to send a letter by certified mail. Its website has a fill-in Letter to Landlord Requesting Repairs.</li>
+    <li><strong>Then tell an inspector.</strong> If the landlord does not act in a reasonable time and the problem affects health or sanitation, Legal Aid says to contact a health department inspector, a code enforcement officer, or the gas, electric or water company.</li>
+  </ol>
+  <p>Legal Aid also warns:</p>
+  <ul>
+    <li>An inspector who finds the home too unsafe could tell you that you cannot stay there. If the problem is that bad, have another place to stay before you call.</li>
+    <li>Many people hold back rent, but Legal Aid says that "often is not your best choice," and that it will almost always lead to an eviction case.</li>
+    <li>Unless your lease says so, Legal Aid says West Virginia law does not let you pay for a repair and take it out of the rent.</li>
+  </ul>
+  <SourceLine sources={[...badArticle, ...badPage]} about="Legal Aid's steps for getting repairs" />
+  <div class="actions">
+    <a class="btn" href={badPage[0].url}><Icon name="open" /><span>Legal Aid: repair letter and video</span></a>
+    <a class="btn" href={badArticle[0].url}><Icon name="open" /><span>Read Legal Aid's full guide</span></a>
+  </div>
+
+  <h3>Who to report to</h3>
+  <ul>
+    <li><strong>Inside Morgantown:</strong> the city says renters can report a concern online through SeeClickFix, linked from its <a href={rentalPage}>Rental Information page</a>, or contact Code Enforcement (see the card above).</li>
+    <li><strong>Star City:</strong> the town's Code Enforcement Officer (see the card above).</li>
+    <li><strong>Westover, Granville and outside town limits:</strong> we have not yet confirmed who takes rental complaints there. Legal Aid can help you work out where to start.</li>
+  </ul>
+
+  <h2 id="deposit">Getting your deposit back</h2>
+  <h3>What West Virginia law says</h3>
+  <ul>
+    <li><strong>What counts.</strong> A security deposit is "any refundable deposit of money" a tenant gives a landlord to secure the lease or as security for damages. It does not include rent, prepaid rent, or a pet fee or application fee that both sides agreed in writing is nonrefundable. (§37-6A-1)</li>
+    <li><strong>The deadline.</strong> The law calls it the "notice period": "within 60 days of the termination of the tenancy; or ... within 45 days of the occupation of the premise by a subsequent tenant, whichever time period is shorter." (§37-6A-1)</li>
+    <li><strong>What comes back.</strong> Within that time, the landlord must return the deposit, minus any deductions, "together with a written itemization" of them. The law lists what may be deducted: rent due and late charges in the lease, damage beyond reasonable wear and tear, unpaid utilities the landlord paid, reasonable costs to remove and store things left behind, and other charges in the lease. (§37-6A-2)</li>
+    <li><strong>Big damage.</strong> If damage costs more than the deposit and needs a contractor, the landlord must tell the tenant in writing within the notice period, and then has 15 more days to send the list of costs. (§37-6A-2)</li>
+    <li><strong>A new owner.</strong> Whoever owns the rental when the tenancy ends must return any deposit owed, even if the deposit was paid to an earlier owner. (§37-6A-2)</li>
+    <li><strong>Records.</strong> The landlord must keep records of deductions for one year, and let the tenant see or get a copy within 72 hours of a written request. (§37-6A-3)</li>
+    <li><strong>The lease cannot take these away.</strong> "A rental agreement may not contain a provision that the tenant agrees to waive or forego rights or remedies under this article." (§37-6A-4)</li>
+    <li><strong>If a landlord does not follow the law.</strong> If the failure "is willful or not in good faith," the law says the tenant is entitled to a judgment for the unreturned deposit plus damages "equal to one and a half times the amount wrongfully withheld." Cases go to magistrate court or circuit court in the county where the rental is. (§37-6A-5)</li>
+  </ul>
+  <SourceLine sources={depositCode} about="West Virginia's security deposit law" />
+
+  <h3>What Legal Aid adds</h3>
+  <ul>
+    <li><strong>Federal rental help.</strong> Legal Aid says that if you get federal rental help (such as HUD, Section 8, a housing authority or low income tax credit housing), federal rules give the landlord 30 days after you move out to return the deposit or explain why not.</li>
+    <li><strong>A shorter deadline in the lease.</strong> Legal Aid says the landlord must meet the shortest of 60 days from the end of the tenancy, 45 days from when a new tenant moves in, or any shorter deadline in the lease.</li>
+    <li><strong>Normal wear and tear.</strong> Legal Aid's examples are a worn carpet, chipped paint, a worn finish on a wood floor, and faded or dingy paint.</li>
+  </ul>
+  <p>Legal Aid's Moving Out of Rental Housing page has a move-out checklist and a fill-in Letter to Request Return of a Security Deposit, which tells the landlord how you left the home and where to send the deposit.</p>
+  <SourceLine sources={[...depArticle, ...moveOut]} about="Legal Aid's deposit guide" />
+  <div class="actions">
+    <a class="btn" href={depArticle[0].url}><Icon name="open" /><span>Legal Aid: get your deposit back</span></a>
+    <a class="btn" href={moveOut[0].url}><Icon name="open" /><span>Deposit letter and checklist</span></a>
+  </div>
+
+  <h2 id="legal-help">Free legal help</h2>
+  <p>Legal Aid of West Virginia gives free help to renters with low income. WVU students can use Student Legal Services (see above).</p>
+  {r('legal-aid-wv-eviction-help') && <ResourceCard r={r('legal-aid-wv-eviction-help')} showCost />}
+  <p>Behind on rent? See <a href={`${base}/money/?pick=rent`}>help with rent</a>. No place to stay tonight? See <a href={`${base}/stay-tonight/`}>Where to stay tonight</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Laws and office details change, so check the linked page. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
