@@ -1,0 +1,56 @@
+---
+// "Your area" picker (#152). Lets a person put one part of the county first
+// on a page that groups places by area. The choice is saved on this phone
+// only (localStorage, key "em-area"): no location, no cookies, nothing sent
+// anywhere. With no script, or with nothing picked, the page shows every
+// area in its normal order, so it always makes sense on its own.
+//
+// Usage: <AreaPicker areas={[{ slug, name }]} /> once on the page, and
+// data-area={slug} on each area's section. The sections must sit next to each
+// other under one parent; the picked area moves to the front of that group.
+const { areas = [] } = Astro.props;
+---
+<form class="area-picker" hidden aria-label="Put your area first">
+  <label for="area-pick">Your area</label>
+  <select id="area-pick">
+    <option value="">Show all in the usual order</option>
+    {areas.map((a) => <option value={a.slug}>{a.name}</option>)}
+  </select>
+  <p class="meta" aria-live="polite"><span class="area-status"></span> Saved on this phone only. We never see it.</p>
+</form>
+<script is:inline>
+  // Runs after the page loads, since the area sections come after the picker.
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('.area-picker');
+    if (!form) return;
+    var select = form.querySelector('select');
+    var status = form.querySelector('.area-status');
+    var sections = Array.prototype.slice.call(document.querySelectorAll('[data-area]'));
+    if (!sections.length) return;
+    // Remember where the group of sections sits: the node right after the last one.
+    var parent = sections[0].parentNode;
+    var groupEnd = sections[sections.length - 1].nextSibling;
+    function apply(slug) {
+      var order = sections.filter(function (el) { return el.getAttribute('data-area') === slug; })
+        .concat(sections.filter(function (el) { return el.getAttribute('data-area') !== slug; }));
+      order.forEach(function (el) { parent.insertBefore(el, groupEnd); });
+      var name = slug && select.selectedOptions[0] ? select.selectedOptions[0].text : '';
+      status.textContent = name ? name + ' is shown first.' : '';
+    }
+    var saved = '';
+    try { saved = localStorage.getItem('em-area') || ''; } catch (e) { /* storage blocked */ }
+    if (saved && select.querySelector('option[value="' + saved + '"]')) select.value = saved; else saved = '';
+    form.hidden = false;
+    apply(saved);
+    select.addEventListener('change', function () {
+      try { if (select.value) localStorage.setItem('em-area', select.value); else localStorage.removeItem('em-area'); } catch (e) { /* not saved */ }
+      apply(select.value);
+    });
+  });
+</script>
+<style>
+  .area-picker { margin: 12px 0 18px; }
+  .area-picker label { display: block; font-weight: 700; margin-bottom: 4px; }
+  .area-picker select { font: inherit; padding: 10px; min-height: 44px; max-width: 100%; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--fg); }
+  .area-picker .meta { margin: 6px 0 0; }
+</style>
