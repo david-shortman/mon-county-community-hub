@@ -83,6 +83,8 @@ doors:
       weather: Storms and floods
       outdoors: Parks and outdoors
       safety: Safety at home
+      pets: Pets and animals
+      records: IDs, records and papers
   - slug: family
     name: Family and life changes
     page: /family/

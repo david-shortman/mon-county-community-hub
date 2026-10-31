@@ -1,0 +1,43 @@
+---
+// Pets and animals (#222 coverage map, a missing area). Facts come from the
+// records, each read on the county shelter, county, health department, state
+// code or group page on 2026-10-31. Left off until a person confirms them:
+// shelter adoption fees and hours (county and shelter pages differ), how to
+// buy a dog tag, the Humane Society (its site blocked us), city pet rules.
+// What to do after a bite is in a separate PR for David, since it names 911.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "pets", label: "Pets and animals", summary: "Found or lost a pet, adopt, low cost spay, neuter and shots, dog tags, the leash law, and if you can't keep your pet" };
+---
+<Base title="Pets and animals in Morgantown and Mon County, WV" description="Pets in Monongalia County, WV: report a stray or found dog, find a lost pet at the county shelter, adopt a dog or cat, low cost spay, neuter and rabies shots, county dog tags and the leash law, and options if you can't keep your pet.">
+  <h1>Pets and animals</h1>
+  <p class="lede">Lost a pet? Check the county shelter's online list of found pets first. Found a dog, or see one loose? Call county animal control at 304-291-7267, option 1. That number covers Morgantown too.</p>
+
+  <h2 id="found">Found a dog, or see a loose dog</h2>
+  <ResourceCard r={resource('mccac-animal-control-stray-dog')} />
+
+  <h2 id="lost">Lost your pet</h2>
+  <ResourceCard r={resource('mccac-lost-pet')} showCost />
+
+  <h2 id="adopt">Adopt a dog or cat</h2>
+  <ResourceCard r={resource('mccac-adopt-a-dog-or-cat')} showCost />
+  <ResourceCard r={resource('animal-friends-adopt')} showCost />
+
+  <h2 id="spay-neuter">Low cost spay, neuter and shots</h2>
+  <p>Two groups help pay for spay and neuter if money is tight. A low cost clinic in Morgantown is open to anyone.</p>
+  <ResourceCard r={resource('m-snap-spay-neuter-voucher')} showCost />
+  <ResourceCard r={resource('animal-friends-spay-neuter-help')} showCost />
+  <ResourceCard r={resource('snip-wv-spay-neuter')} showCost />
+  <ResourceCard r={resource('snip-wv-vaccines')} showCost />
+
+  <h2 id="rules">Rabies shots, dog tags and the leash law</h2>
+  <ResourceCard r={resource('pet-rabies-shots')} />
+  <ResourceCard r={resource('county-dog-tag')} showCost />
+  <ResourceCard r={resource('county-leash-law')} />
+
+  <h2 id="rehome">If you can't keep your pet</h2>
+  <ResourceCard r={resource('mccac-rehoming-your-pet')} />
+
+  <p class="meta">Sources checked October 31, 2026. The county's page and the shelter's own site list different adoption fees and hours, so call the shelter to ask. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

@@ -1,0 +1,13 @@
+name: Monongalia County Canine Adoption Center
+slug: monongalia-county-canine-adoption-center
+kind: government
+website: https://www.monongaliacounty.gov/departments/canine_adoption_center/index.php
+phone: "304-291-7267"
+summary: The county pound and adoption center, run by the Monongalia County Commission. It takes in stray and surrendered dogs, runs county animal control, helps lost pets get home, and adopts out dogs and cats. It is at 106 Lockside Road and is open by appointment only.
+topics: [pets, government]
+area: monongalia-county
+sources:
+  - url: https://www.monongaliacounty.gov/departments/canine_adoption_center/index.php
+    checked: 2026-10-31
+  - url: https://monongaliawv.animalservices.website/shelterpronet/home.spn
+    checked: 2026-10-31
