@@ -24,6 +24,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>The county schools run both, with one application. The dates for the 2027-28 school year are not posted yet. For 2026-27, applications sent from February 4 to April 16 all had an equal chance at a spot.</p>
   {r('mcs-prek-and-head-start') && <ResourceCard r={r('mcs-prek-and-head-start')} showCost />}
 
+  <h2>Finding child care</h2>
+  <p>The state keeps one search for child care it licenses or registers. You can filter it to Monongalia County.</p>
+  {r('wv-child-care-provider-search') && <ResourceCard r={r('wv-child-care-provider-search')} />}
+
   <h2>Playgroups, a baby pantry and more</h2>
   <p>Starting Points in Pursglove has free programs for parents and young children, including a playgroup for children under 3 and their parents.</p>
   {r('starting-points-family-programs') && <ResourceCard r={r('starting-points-family-programs')} />}
