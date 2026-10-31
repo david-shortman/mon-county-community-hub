@@ -1,0 +1,93 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: county-commission-2026-11-04
+body: county-commission
+meeting: Regular meeting
+date: 2026-11-04
+time: "10:00"
+place: 2nd floor, Monongalia County Courthouse, 243 High Street, Morgantown
+watch: We did not find a live stream. The Commission posts video of past meetings under Commission Videos on its website.
+agenda_url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380
+read: 2026-10-31
+items:
+  - number: "1"
+    title: Moment of Silent Meditation and Pledge to the Flag
+    kind: opening
+    line: The meeting opens with a moment of silence and the Pledge of Allegiance.
+  - number: "2"
+    title: Call to Order
+    kind: opening
+    line: The meeting is called to order.
+  - number: "3"
+    title: Consent and Approval – County Administrator
+    kind: consent
+    line: Routine business from the County Administrator for the Commission to approve. The agenda lists these parts.
+    parts:
+      - Erroneous Assessments
+      - Minutes
+      - Pay Vouchers
+      - Miscellaneous Bonds, etc.
+      - Budget Revisions
+      - Vacancies for Boards and Authorities
+      - Fiduciary Orders
+  - number: "4"
+    title: Introduction of new employees/personnel changes
+    kind: personnel
+    line: The Commission is introduced to new staff. The agenda lists four new Sheriff's Office staff, three full-time and one part-time, by name.
+  - number: "5"
+    title: Comments from the public
+    kind: public-comment
+    line: Time for members of the public to speak to the Commission.
+  - number: "6"
+    title: Proclamation – National Hospice and Pallative Care Month
+    kind: proclamation
+    line: A statement by the Commission recognizing National Hospice and Palliative Care Month.
+  - number: "7"
+    title: Receipt of sealed bids and bid opening for the Monongalia County Health Department Renovations
+    kind: bids
+    line: Sealed bids for renovation work for the County Health Department are opened in public. The agenda does not list a vote on these bids.
+  - number: "8"
+    title: "[name] – Grants"
+    kind: presentation
+    line: An item about grants, led by a person the agenda names. The agenda gives no more detail.
+  - number: "9"
+    title: Correspondence
+    kind: correspondence
+    line: Letters and messages the Commission has received.
+  - number: "10"
+    title: Unfinished Business
+    kind: other
+    line: Items held over from earlier meetings. The agenda lists none.
+  - number: "11a"
+    title: Consideration to approve Requisition No. 43 for the University Town Centre Series 2023 A Property Tax District Administrative Expense Fund
+    kind: vote
+    line: A vote on a request to pay money from the administrative expense fund of the University Town Centre property tax district.
+  - number: "11b"
+    title: Consideration to approve Requisition No. 127 for the University Town Centre Excise Tax District Administrative Expense Fund
+    kind: vote
+    line: A vote on a request to pay money from the administrative expense fund of the University Town Centre excise tax district.
+  - number: "11c"
+    title: To consider for approval a request by Main Street Morgantown for $600 to record and televise the Annual Christmas Parade on December 2, 2026
+    kind: vote
+    line: A vote on a $600 request from Main Street Morgantown to record and televise the Christmas Parade on December 2, 2026.
+  - number: "12"
+    title: Reports from Elected Officials
+    kind: report
+    line: Updates from elected officials.
+  - number: "13"
+    title: Reports from County Commissioners
+    kind: report
+    line: Updates from the commissioners.
+  - number: "14"
+    title: Adjournment
+    kind: closing
+    line: The meeting ends.
+note: Under New Business, item 11, the agenda lists three items, shown here as 11a to 11c.
+sources:
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380
+    checked: 2026-10-31
+  - url: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
+    checked: 2026-10-31
+  - url: https://www.monongaliacounty.gov/commission/index.php
+    checked: 2026-10-31
