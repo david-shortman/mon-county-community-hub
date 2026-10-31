@@ -1,0 +1,7 @@
+date: 2026-10-31
+item: RideMon, on Bus routes
+page: /bus-routes/
+kind: wording
+found_by: our-check
+what: The page left out that a friend or family member can request rides for you when you have no smartphone or computer for the app. It now says so, as Mountain Line does.
+link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=head%3Acode%2Fqa3-bus-audit

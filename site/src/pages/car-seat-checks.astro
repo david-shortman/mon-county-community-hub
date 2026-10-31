@@ -1,0 +1,22 @@
+---
+// Free car seat checks (#573, part of #266): the two fitting stations the
+// WV DMV lists for Monongalia County. Facts come from the resource records.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "family", topic: "family", label: "Free car seat checks", summary: "Two places in Morgantown that check a child's car seat for free, by appointment" };
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Free car seat checks in Morgantown and Mon County" description="Two child car seat fitting stations in Morgantown, from the state's list: the Monongalia County Sheriff's Department and WVU Medicine Children's. Free, by appointment.">
+  <h1>Free car seat checks</h1>
+  <p class="lede">A trained technician can check that your child's car seat is put in right. The state lists two places in Mon County. Call ahead to set up a time.</p>
+
+  {r('car-seat-check-sheriff') && <ResourceCard r={r('car-seat-check-sheriff')} headingLevel={2} showCost />}
+  {r('car-seat-check-wvu-medicine-childrens') && <ResourceCard r={r('car-seat-check-wvu-medicine-childrens')} headingLevel={2} showCost />}
+
+  <p>More for families with young kids: <a href={`${base}/for/parents-young-kids/`}>For parents of babies and toddlers</a>.</p>
+
+  <p class="meta">From the WV DMV list of fitting stations, checked October 30, 2026. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
