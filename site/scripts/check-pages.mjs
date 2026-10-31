@@ -16,6 +16,7 @@ const githubAskPending = new Set([
   'drugs-and-alcohol/index.html',
   'free-tax-help/index.html',
   'mental-health/index.html',
+  'needs/index.html',
   'property-tax/index.html',
 ]);
 
