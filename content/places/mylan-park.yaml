@@ -16,7 +16,7 @@ facilities:
     - name: Conference Room
       seats: 20
   gym: true
-  other: ["100,000 square foot event complex", aquatic center, ice pavilion]
+  other: [aquatic center, ice pavilion]
 regular:
   - Sports complex open Monday to Saturday 8 a.m. to 8 p.m., Sunday 10 a.m. to 9 p.m.
 membership:
