@@ -12,6 +12,7 @@ Everything runs inside `.github/workflows/sources.yml` (daily, 11:41 UTC), one r
 | Food pantry watch (#166) | 17 pantry and meal pages | One "Food pantry or meal page changed" issue | `content/watch/food.yaml` |
 | Community centers watch (#752) | BOPARC closures, events and center pages, county parks events, Westside and Senior Mons | One "Community center or park event page changed" issue | `content/watch/centers.yaml` |
 | Sale and market watch (#718) | Moonlight Market, MRTC Handmade Market, Farmers Market dates | One "Sale or market date page changed" issue | `content/watch/secondhand.yaml` |
+| Make it better watch (#793) | City vacancy list, Organizational Arts Grants, WV Public Art grants, WV Community Tree Grants | One "Make it better grant or seat page changed" issue | `content/watch/make-it-better.yaml` |
 | Warming shelter watch (#863) | Local news shelter stories, city press releases. November 1 to March 31 only | One "Warming shelter source changed" issue | `content/watch/shelter.yaml` (#978, waits for David) |
 | Weekly checklists | Nothing. It writes the week's to-do list for what a robot cannot read | One standing issue per lane, refreshed each week | `content/checklists/*.yaml`, `site/scripts/checklists.mjs` |
 
