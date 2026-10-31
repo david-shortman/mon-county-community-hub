@@ -38,6 +38,8 @@ const SOURCES = {
 
 // The needs register's shape comes straight from its JSON Schema (#74).
 const NEED = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/need.schema.json'), 'utf8'));
+// Gathering places use their own JSON Schema too (#455, #399).
+const PLACE = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/place.schema.json'), 'utf8'));
 
 export const TYPES = {
   orgs: {
@@ -124,13 +126,13 @@ export const TYPES = {
     properties: NEED.properties,
   },
   meetings: {
-    description: 'Public meetings of City of Morgantown boards and the bodies on its AgendaCenter, from the last 120 days and ahead: meeting date, agenda link, and minutes link once posted. Read from the city\'s AgendaCenter page each day.',
+    description: 'Public meetings of City of Morgantown boards (and the bodies on its AgendaCenter) and the Monongalia County Commission, from the last 120 days and ahead: meeting date, agenda link, and minutes link once posted. Read from the official pages each day.',
     id: 'slug',
     required: ['slug', 'body', 'date', 'title', 'agenda_url', 'publisher', 'sources', 'first_seen', 'last_changed'],
     properties: {
       slug: str('Stable id, used in the record URL'),
-      body: str('The board, commission or council, as the city names it'),
-      date: date('Meeting date (YYYY-MM-DD), as the AgendaCenter lists it'),
+      body: str('The board, commission or council, as the publisher names it'),
+      date: date('Meeting date (YYYY-MM-DD), as the publisher lists it'),
       title: str('Agenda title, as posted'),
       agenda_url: str('The posted agenda (usually a PDF)', { format: 'uri' }),
       minutes_url: str('The posted minutes; left out until they are posted', { format: 'uri' }),
@@ -139,6 +141,12 @@ export const TYPES = {
       first_seen: date('Date we first saw this agenda'),
       last_changed: date('Date we last saw the agenda or minutes change'),
     },
+  },
+  places: {
+    description: 'Gathering places: community centers, senior centers, neighborhood houses, rec buildings and fire halls that rent a hall, with what they have and how to use them.',
+    id: 'slug',
+    required: PLACE.required,
+    properties: PLACE.properties,
   },
   corrections: {
     description: 'Every fix we made to a fact, link or out-of-date detail.',
