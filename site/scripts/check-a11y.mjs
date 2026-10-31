@@ -68,11 +68,12 @@ for (const scheme of ['light', 'dark']) {
 }
 
 // Reflow (WCAG 1.4.10): nothing should scroll sideways on a 320px screen.
-// Pages whose 200% text fix sits on an open for:david PR, so this session left the page alone.
-// They print a note instead of failing. Remove each line once its PR merges (#971).
+// Pages whose 200% text fix waits on a PR that David must review, so they print a note
+// instead of failing. The fixes are written out on #971. Remove each line once it is fixed.
 const WAITING = [
-  [/^\/community-centers\/[^/]+\/flyer\/$/, '#938'],
-  [/^\/how-we-are-doing\/$/, '#956'],
+  [/^\/$/, '#1016 (crisis buttons)'],
+  [/^\/community-centers\/[^/]+\/flyer\/$/, '#938 (open, edits the flyer page)'],
+  [/^\/how-we-are-doing\/$/, '#956 (open, edits this page)'],
 ];
 const narrow = await browser.newPage({ viewport: { width: 320, height: 640 } });
 for (const u of urls) {
@@ -83,9 +84,9 @@ for (const u of urls) {
   await narrow.addStyleTag({ content: 'html{font-size:200% !important}' });
   const w2 = await narrow.evaluate(() => document.documentElement.scrollWidth);
   const waits = WAITING.find(([re]) => re.test(u));
-  if (w2 > 320 && waits) { other++; console.log(`note ${u} scrolls sideways at 320px with text at 200% (${w2}px wide). The fix is posted on ${waits[1]}, which waits for David.`); }
+  if (w2 > 320 && waits) { other++; console.log(`note ${u} scrolls sideways at 320px with text at 200% (${w2}px wide). Its fix waits for ${waits[1]}, see #971.`); }
   else if (w2 > 320) { blocking++; console.log(`FAIL ${u} scrolls sideways at 320px with text at 200% (${w2}px wide)`); }
-  else if (waits) console.log(`note ${u} now fits at 200% text: remove it from WAITING in scripts/check-a11y.mjs`);
+  else if (waits) console.log(`note ${u} fits at 200% text in this run. If its fix has landed, remove it from WAITING in scripts/check-a11y.mjs`);
 }
 
 await browser.close();
