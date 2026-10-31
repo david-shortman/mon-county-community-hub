@@ -27,7 +27,7 @@ Rules that hold across tiers:
 ## What is still open
 
 - Some pages still hold facts in their templates (for example, a few sentences on the recycling page quote a hauler's checklist with a page-level source list). Moving them into records is page-by-page work, best done by the lane that owns each page.
-- "Source changed" from tier 3 does not yet open or update an issue listing the records that depend on that source. The source check reports it; turning it into an issue (label `source-changed`) is the next step and needs no Claude calls.
+- "Source changed" from tier 3 already lands in one standing "Source check" issue, with the records that use each source (`site/scripts/source-issue.mjs`). It does not yet open one issue per changed source with a `source-changed` label, as #122 first sketched; one standing issue may be enough, and is easier on the issue list.
 - Per-fact `recheck_days` by volatility (hours about 90 days, addresses and phones about 180) is not in the schemas yet. Today one 6-month rule applies, plus the weekly rule for high-stakes details. Adding an optional field is backward compatible.
 - Pages could expose `dateModified` (their oldest fact) in structured data. The JSON-LD from #37 is the place to add it.
 
