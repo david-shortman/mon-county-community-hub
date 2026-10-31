@@ -1,0 +1,10 @@
+name: Substance Abuse and Mental Health Services Administration (SAMHSA)
+slug: samhsa
+kind: government
+website: https://www.samhsa.gov/
+summary: The federal agency for mental health and substance use. It runs the National Helpline, a free 24/7 line that refers people to treatment and support.
+topics: [health]
+area: national
+sources:
+  - url: https://www.samhsa.gov/find-help/helplines/national-helpline
+    checked: 2026-10-30

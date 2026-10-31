@@ -6,7 +6,10 @@
 import Base from '../layouts/Base.astro';
 import ShopCard from '../components/ShopCard.astro';
 import AreaPicker from '../components/AreaPicker.astro';
+// Areas that share a name with a town page (#1120).
+const TOWN_PAGES = { westover: 'Westover', 'cheat-lake': 'Cheat Lake' };
 import { loadSecondhand, SECONDHAND_AREAS, SECONDHAND_GOODS } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "secondhand", label: "Thrift and resale shops", summary: "Secondhand shops by area: what each sells, which ones buy from you, and which fund a local cause" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const hasBorrow = Object.keys(import.meta.glob('./borrow-or-get-free.astro')).length > 0;
@@ -32,7 +35,7 @@ const causes = shops.filter((s) => s.funds_local_cause);
     <p>By area: {areas.map((a, i) => <>{i > 0 && ' · '}<a href={`#area-${a.slug}`}>{a.name}</a></>)}</p>
   </nav>
 
-  <AreaPicker areas={areas.map((a) => ({ slug: a.slug, name: a.name }))} />
+  <AreaPicker areas={areas.map((a) => ({ slug: a.slug, name: a.name, town: TOWN_PAGES[a.slug] && { name: TOWN_PAGES[a.slug], href: `${base}/towns/${a.slug}/` } }))} />
 
   <div class="area-group">
   {areas.map((a) => (
@@ -50,7 +53,7 @@ const causes = shops.filter((s) => s.funds_local_cause);
     <li><a href={`${base}/markets/`}>Markets and sales coming up</a></li>
   </ul>
 
-  <p class="meta">Shops open, move and close often. Each card says when we last checked it. A shop we could not confirm is left off until we can. Something wrong or changed? Use the Report a problem link on that card, or <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">tell us about a shop we missed</a>.</p>
+  <p class="meta">Shops open, move and close often. Each card says when we last checked it. A shop we could not confirm is left off until we can. Something wrong or changed? Use the Report a problem link on that card, or <a href={fixFormUrl({ page: Astro.url.pathname })}>tell us about a shop we missed</a>.</p>
 </Base>
 <style>
   .filters li { margin: 6px 0; line-height: 1.9; }

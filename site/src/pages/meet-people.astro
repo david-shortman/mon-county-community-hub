@@ -9,6 +9,7 @@ import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
 import { loadPages } from '../lib/pages.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "community", label: "Meet people and get a library card", summary: "A free library card, free library programs for adults, and Morgantown neighborhood association meetings" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -20,6 +21,7 @@ const nbhd = r('morgantown-neighborhood-associations');
 <Base title="Meet people in Morgantown and Mon County: library card, programs, neighborhood groups" description="Ways for new residents and people who work from home to meet people in Morgantown and Monongalia County, WV: a free library card, free library programs for adults, and when each Morgantown neighborhood association meets.">
   <h1>Meet people and get a library card</h1>
   <p class="lede">New here, or working from home and want to get out? The library and your neighborhood association are free places to start.</p>
+  <p>See how it could go: <a href={`${base}/meet-people/example/`}>an example first month for someone new in town</a> (a made-up person, real places).</p>
 
   <h2 id="library-card">Get a library card</h2>
   {r('mpls-library-card') && <ResourceCard r={r('mpls-library-card')} showCost />}
@@ -52,5 +54,5 @@ const nbhd = r('morgantown-neighborhood-associations');
     <li><a href={`${base}/calendar/`}>Dates</a>: what is coming up in Mon County</li>
   </ul>
 
-  <p class="meta">Sources checked October 30, 2026. Know a group we should add? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Know a group we should add? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
