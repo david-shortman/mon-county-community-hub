@@ -19,9 +19,10 @@ const shift = (n) => { const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.
 const weekAgo = shift(-7);
 const weekAhead = shift(7);
 const LEFT_OUT = ['housing', 'money', 'food'];
-const events = upcoming(await loadCalendarWithFeeds(), today, 7)
-  .filter((e) => !(e.topics ?? []).some((t) => LEFT_OUT.includes(t)))
-  .slice(0, 25);
+const MAX_EVENTS = 25;
+const allEvents = upcoming(await loadCalendarWithFeeds(), today, 7)
+  .filter((e) => !(e.topics ?? []).some((t) => LEFT_OUT.includes(t)));
+const events = allEvents.slice(0, MAX_EVENTS);
 const meetings = await loadMeetings();
 const meetingsAhead = meetings.filter((m) => m.date >= today && m.date <= weekAhead);
 const NEW_LABEL = { meeting: 'new meeting listed', agenda: 'agenda posted', minutes: 'minutes posted' };
@@ -30,7 +31,7 @@ const NEW_LABEL = { meeting: 'new meeting listed', agenda: 'agenda posted', minu
 const firstCopy = meetings.reduce((min, m) => (m.first_seen < min ? m.first_seen : min), today);
 const newFrom = [weekAgo, (() => { const d = new Date(`${firstCopy}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + 1); return d.toISOString().slice(0, 10); })()].sort().pop();
 const newOnes = newSince(meetings, newFrom).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 15);
-const gapFiles = fs.readdirSync(path.join(CONTENT_DIR, 'gaps')).filter((f) => f.endsWith('.yaml')).map((f) => loadGaps(f.replace(/\.yaml$/, ''))).filter(Boolean);
+const gapFiles = fs.readdirSync(path.join(CONTENT_DIR, 'gaps')).filter((f) => f.endsWith('.yaml')).map((f) => loadGaps(f.replace(/\.yaml$/, ''))).filter((g) => g && !LEFT_OUT.includes(g.topic));
 const gaps = gapFiles.flatMap((g) => g.gaps.map((x) => ({ ...x, checked: ymd(x.checked) })));
 const fixes = loadDir('corrections').map((c) => ({ ...c, date: ymd(c.date) })).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
 const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${prettyDate(e.starts)} to ${prettyDate(e.ends)}`);
@@ -53,6 +54,7 @@ const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${
   {events.length ? (
     <ul>{events.map((e) => <li><strong>{when(e)}:</strong> {e.url ? <a href={e.url}>{e.title}</a> : e.title}{e.org_name && <> ({e.org_name})</>}</li>)}</ul>
   ) : <p>Nothing on our calendar for the next 7 days.</p>}
+  {allEvents.length > events.length && <p>Showing the first {events.length} of {allEvents.length} this week.</p>}
   <p>More dates, and help with food, bills and housing: <a href={`${base}/calendar/`}>Dates and deadlines</a>. Call ahead, since times can change.</p>
 
   <h2 id="meetings">Public meetings</h2>
@@ -86,5 +88,5 @@ const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${
   ) : <p>No fixes logged yet.</p>}
   <p>Every fix: <a href={`${base}/corrections/`}>Corrections</a>. Slower numbers, like jobs and health: <a href={`${base}/how-we-are-doing/`}>How is Mon County doing?</a></p>
 
-  <p class="meta">Rebuilt every day from the city and county calendars and meeting pages, local groups' calendars, and our own records. Each item links to its source. We describe what is listed; we do not rank groups, places or officials.</p>
+  <p class="meta">Rebuilt every day from the city and county calendars and meeting pages, local groups' calendars, and our own records. Events and meetings link to their source, and each gap shows when we last looked. We describe what is listed; we do not rank groups, places or officials.</p>
 </Base>
