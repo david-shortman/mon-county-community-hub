@@ -7,7 +7,7 @@
 // parts and their limits. Every claim points to a file in the repo.
 // Speaks for the project, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
-import { FIX_FORM, REQUEST_DAYS } from '../lib/group-requests.mjs';
+import { fixFormUrl, REQUEST_DAYS } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "How this site works", summary: "The people, AI and automatic checks behind each page, and how they fit together" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
@@ -49,8 +49,8 @@ const doorSnippet = `- slug: this-month
     <ul>
       <li><strong>Where facts come from:</strong> a public web page, read the same day. Nothing is filled in from memory.</li>
       <li><strong>Who does the work:</strong> AI (Claude, made by Anthropic) does the research, writing and building.</li>
-      <li><strong>Who is responsible:</strong> David McCoy, a local resident. He sets the rules and checks pages about shelter, crisis help, food and benefits before changes go live.</li>
-      <li><strong>If something is wrong:</strong> use the <a href={FIX_FORM}>fix or removal form</a>. No account needed, and what you send stays private. Wrong items that could hurt someone come down first and get re-checked after.</li>
+      <li><strong>Who is responsible:</strong> one local resident, the owner (named on <a href={`${base}/about/`}>About this site</a>). The owner sets the rules and checks pages about shelter, crisis help, food and benefits before changes go live.</li>
+      <li><strong>If something is wrong:</strong> use the <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>. No account needed, and what you send stays private. Wrong items that could hurt someone come down first and get re-checked after.</li>
     </ul>
   </div>
 
@@ -96,7 +96,7 @@ const doorSnippet = `- slug: this-month
     <li>
       <p class="who"><span class="tag ai">AI</span> <span class="tag person">Person</span></p>
       <h3>5. A second look</h3>
-      <p>Another AI run reviews the change against our written guides for sources, fairness, privacy, ease of use and clear words. Changes about shelter, crisis help, food and benefits also wait for David.</p>
+      <p>Another AI run reviews the change against our written guides for sources, fairness, privacy, ease of use and clear words. Changes about shelter, crisis help, food and benefits also wait for the owner.</p>
     </li>
     <li>
       <p class="who"><span class="tag file">Published</span></p>
@@ -117,8 +117,8 @@ const doorSnippet = `- slug: this-month
   <p>A small team of one person, two kinds of AI helper, and some automatic programs. Each has a set job.</p>
   <div class="roles">
     <section class="card">
-      <h3>David, the person in charge</h3>
-      <p>Sets the direction and the rules. Checks changes about shelter, crisis help, food and benefits before they go live. He is the only one who talks to outside groups for the project, and the only one who can spend money or open accounts.</p>
+      <h3>The owner, the person in charge</h3>
+      <p>Sets the direction and the rules. Checks changes about shelter, crisis help, food and benefits before they go live. The owner is the only one who talks to outside groups for the project, and the only one who can spend money or open accounts.</p>
     </section>
     <section class="card">
       <h3>Claude Code, the builder</h3>
@@ -126,14 +126,14 @@ const doorSnippet = `- slug: this-month
     </section>
     <section class="card">
       <h3>Claude Duet, the partner in the background</h3>
-      <p>Looks for gaps and new problems, ranks ideas, and reviews what was built. It turns feedback into tasks so nothing gets lost, and sums up each day for David. It drafts any outreach for David, and never contacts anyone itself.</p>
+      <p>Looks for gaps and new problems, ranks ideas, and reviews what was built. It turns feedback into tasks so nothing gets lost, and sums up each day for the owner. It drafts any outreach for the owner, and never contacts anyone itself.</p>
     </section>
     <section class="card">
       <h3>Automatic programs</h3>
       <p>Small programs on GitHub that check every change, rebuild the site every morning, recheck sources every day and watch the site's health every 4 hours. Most use no AI at all.</p>
     </section>
   </div>
-  <p>Both AI helpers are Claude, made by Anthropic. On their own, they may never contact anyone, send alerts to the public, spend money, handle passwords, collect personal information a feature doesn't need, take sides in politics, or change the project's own rules. <a href={`${base}/about/`}>About this site</a> lists exactly what waits for David.</p>
+  <p>Both AI helpers are Claude, made by Anthropic. On their own, they may never contact anyone, send alerts to the public, spend money, handle passwords, collect personal information a feature doesn't need, take sides in politics, or change the project's own rules. <a href={`${base}/about/`}>About this site</a> lists exactly what waits for the owner.</p>
   <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/COORDINATION.md')}>who does what, in full</a> and <a href={doc('docs/CHARTER.md')}>the limits on the AI</a>, both on GitHub.</p>
 
   <h2 id="sorted">How it's sorted</h2>
@@ -160,7 +160,7 @@ const doorSnippet = `- slug: this-month
     <thead><tr><th scope="col">When</th><th scope="col">What gets checked</th></tr></thead>
     <tbody>
       <tr><td>Every change</td><td>Every listing has a source and a date. No broken pages, colors are easy to read, and pages stay small for phones.</td></tr>
-      <tr><td>Every change to what you see</td><td>A second AI run scores it with the guides that fit: works for everyone, easy to use, clear look, easy to find, clear words, and honest and fair. A program flags shelter, crisis, food and benefits changes for David.</td></tr>
+      <tr><td>Every change to what you see</td><td>A second AI run scores it with the guides that fit: works for everyone, easy to use, clear look, easy to find, clear words, and honest and fair. A program flags shelter, crisis, food and benefits changes for the owner.</td></tr>
       <tr><td>Every morning</td><td>The site is rebuilt, so past dates drop off.</td></tr>
       <tr><td>Every day</td><td>Every outside page we use is visited, Help now pages first. Broken pages, moved pages and phone numbers no longer on the source get flagged.</td></tr>
       <tr><td>Every 4 hours</td><td>A health check: is the site up, are dates current, did the last update go live? A listing not rechecked in 6 months is flagged, and the listing itself says it may be out of date.</td></tr>
@@ -170,7 +170,7 @@ const doorSnippet = `- slug: this-month
 
   <h2 id="wrong">When something is wrong</h2>
   <ul>
-    <li><strong>Tell us</strong> with the <a href={FIX_FORM}>fix or removal form</a>. Only David sees what you send. Or use "Report a problem" on any listing, which opens a public page on GitHub.</li>
+    <li><strong>Tell us</strong> with the <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>. Only the owner sees what you send. The "Report a problem" link on each listing opens the same form.</li>
     <li><strong>Harmful mistakes come down first.</strong> A wrong shelter, deadline or benefit rule comes off the site without waiting for anyone, and goes back only after it's re-checked. The 211 and 988 lines stay up on every page, so if one looks wrong it gets fixed the same day.</li>
     <li><strong>Groups get an answer.</strong> When a group asks us to fix, remove or add its listing, we aim to act within {REQUEST_DAYS} days, and we count how we're doing.</li>
     <li><strong>Fixes are public.</strong> Every fix to a fact, link or date is on the <a href={`${base}/corrections/`}>Corrections page</a>.</li>
@@ -189,11 +189,11 @@ const doorSnippet = `- slug: this-month
   <h2 id="limits">What it can't do yet</h2>
   <ul class="limits">
     <li><strong>Nobody calls or visits groups.</strong> We read their public pages. If a group's own page is wrong or old, our listing can be too.</li>
-    <li><strong>Most changes go live without a person looking first.</strong> Only the most serious ones wait for David. He looks over the rest when he can, after they're up.</li>
+    <li><strong>Most changes go live without a person looking first.</strong> Only the most serious ones wait for the owner, who looks over the rest when there is time, after they're up.</li>
     <li><strong>The AI review is a rule, not a lock.</strong> The AI helpers are told to wait for it, but GitHub doesn't force them to.</li>
     <li><strong>AI can get things wrong.</strong> Please check details with the group before you act.</li>
   </ul>
-  <p>Straight answers to tougher questions, like who pays for this and what happens if David stops, are on <a href={`${base}/hard-questions/`}>Hard questions</a>.</p>
+  <p>Straight answers to tougher questions, like who pays for this and what happens if the owner stops, are on <a href={`${base}/hard-questions/`}>Hard questions</a>.</p>
 
   <h2 id="under-the-hood">Under the hood</h2>
   <p>This part is for people who want the technical details. You don't need it to use the site.</p>
@@ -220,8 +220,8 @@ const doorSnippet = `- slug: this-month
   <h3>How the AI changes things</h3>
   <ul>
     <li><strong>Never straight to the live site.</strong> Each AI helper works on its own branch, a separate copy of the files named like <code>code/&lt;name&gt;</code> or <code>duet/&lt;name&gt;</code>, and opens a proposed change on GitHub.</li>
-    <li><strong>Checks run on the proposed change:</strong> the build and its checks, <a href={wfFile('claude-review.yml')}>the AI review</a>, and <a href={wfFile('high-stakes.yml')}>a program</a> that labels shelter, crisis, food and benefits changes for David.</li>
-    <li><strong>Most changes are merged by the helper that wrote them</strong> once checks pass. The ones on <a href={`${doc('docs/COORDINATION.md')}#when-a-pr-waits-for-david`}>this list</a> wait for David.</li>
+    <li><strong>Checks run on the proposed change:</strong> the build and its checks, <a href={wfFile('claude-review.yml')}>the AI review</a>, and <a href={wfFile('high-stakes.yml')}>a program</a> that labels shelter, crisis, food and benefits changes for the owner.</li>
+    <li><strong>Most changes are merged by the helper that wrote them</strong> once checks pass. The ones on <a href={`${doc('docs/COORDINATION.md')}#when-a-pr-waits-for-david`}>this list</a> wait for the owner.</li>
     <li><strong>Every change leaves a note.</strong> One file per entry in <a href={tree('docs/build-log')}>the build log</a> (what was considered, chosen and shipped), and one file per entry in <a href={tree('docs/decisions')}>the decision log</a> for choices that shape the project.</li>
     <li><strong>Taking something down is one small edit.</strong> Adding a <code>hidden</code> block to a listing's file takes it off the site without deleting it. Removing the block puts it back.</li>
   </ul>
