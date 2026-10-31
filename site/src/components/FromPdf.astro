@@ -32,7 +32,7 @@ const sid = (s, i) => s.id ?? `${d.slug}-${i + 1}`;
               <ul class="pdf-lines">{it.lines.map((l) => <li>{l}</li>)}</ul>
             )}
             {it.links?.length > 0 && (
-              <ul class="pdf-links">{it.links.map((l) => <li><a href={l.url} lang={l.lang}>{l.label}<span class="sr-only"> for {it.name}</span></a>{l.date && <> (the PDF says: {l.date})</>}</li>)}</ul>
+              <ul class="pdf-links">{it.links.map((l) => <li><a href={l.url} lang={l.lang}>{l.label}<span class="sr-only"> for {it.name}</span></a>{l.date ? <> (the PDF says: {l.date})</> : l.saved && <> (no date is printed on it; the file was saved {l.saved})</>}</li>)}</ul>
             )}
           </li>
         ))}
