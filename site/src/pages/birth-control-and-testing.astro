@@ -14,7 +14,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h1>Birth control, pregnancy tests and STI testing</h1>
   <p class="lede">The Monongalia County Health Department offers free or low cost, confidential birth control, pregnancy tests and STI testing, including for teens. Call <a href="tel:3045985119">304-598-5119</a> for an appointment.</p>
 
-  {r('monchd-reproductive-health') && <ResourceCard r={r('monchd-reproductive-health')} showCost />}
+  {r('monchd-reproductive-health') && <ResourceCard r={r('monchd-reproductive-health')} showCost headingLevel={2} />}
 
   <h2>Pregnant?</h2>
   <p>See <a href={`${base}/pregnant-or-new-baby/`}>Pregnant or new baby</a> for health coverage, WIC and help after the baby comes.</p>
