@@ -1,0 +1,39 @@
+---
+// Start a business outside Morgantown: Star City, Granville, Westover and
+// places outside any town (#640, part of #277). Which town you are in decides
+// the local license and B&O form. Each town's part comes from its own site.
+// Westover is page text, not a record, until the city-of-westover org lands
+// (PR #675). Fees, rates and due dates are left off: no town page states them.
+// Waits for David (tax).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, telHref } from '../lib/content.mjs';
+export const page = { door: "family", topic: "work", label: "Start a business in Star City, Granville or Westover", summary: "Which town you are in decides the local business license and B&O tax form" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '2026-10-30' }];
+---
+<Base title="Start a business in Star City, Granville or Westover, Mon County, WV" description="Which town your business is in decides the local business license and B&O tax form. The Star City, Granville and Westover forms and offices, and who to ask outside any town in Monongalia County.">
+  <h1>Start a business in Star City, Granville or Westover</h1>
+  <p class="lede">Businesses in West Virginia register with the state first. After that, the town your business is in decides which local license and B&O (business and occupation) tax form you need. Check which town your business is in. Each part below comes from that town's own website.</p>
+  <p>State registration and free help: see <a href={`${base}/business/`}>Start or grow a business</a>. Inside Morgantown city limits: see the city's <a href="https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business">Steps to Starting Your Business</a>.</p>
+
+  <h2>Star City</h2>
+  {resource('star-city-business-registration') && <ResourceCard r={resource('star-city-business-registration')} />}
+
+  <h2>Granville</h2>
+  {resource('granville-business-license') && <ResourceCard r={resource('granville-business-license')} />}
+
+  <h2>Westover</h2>
+  <article class="card resource" id="westover-new-businesses">
+    <h3>Westover business forms</h3>
+    <p>The City of Westover asks new businesses to call <a href={telHref('304-296-6860')}>(304) 296-6860</a> to get started, and to read its New Business Packet. Its New Businesses page lists a Business Registration Form, a Business License Application, a Business and Occupation (Gross Sales) Tax form, and a "Homeland Security and MECCA 9-1-1 Registration" form. Contractor, building permit and Certificate of Occupancy forms are on the same page. The page does not list fees or rates. City office: 500 Dupont Road, Westover. Paperwork questions: cityofwestover@westoverwv.gov.</p>
+    <p><a class="btn" href="https://www.westoverwv.org/new-businesses"><span>Westover business forms</span></a></p>
+    <SourceLine sources={westover} about="Westover business forms" />
+  </article>
+
+  <h2>Outside any town</h2>
+  {resource('mon-county-planning-permits') && <ResourceCard r={resource('mon-county-planning-permits')} />}
+
+  <p class="meta">Sources checked October 30, 2026. None of these town pages list license fees, B&O rates or due dates, so call the town office before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
