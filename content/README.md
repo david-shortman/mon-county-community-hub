@@ -123,6 +123,9 @@ Live feeds wired in now:
 | City of Morgantown calendar | Everything on the Main Calendar (mostly public meetings, plus city events like Trick-or-Treat) | `https://www.morgantownwv.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar` |
 | Mountaineer Food Bank pantry calendar | Mobile pantries the food bank files under Monongalia County | `https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county` |
 | Monongalia County calendar | Parks and recreation events and election days. Repeating events (like the weekly Commission meeting) are left out because we do not expand repeat rules, and we never guess a date | The JSON behind `https://www.monongaliacounty.gov/calendar.php` |
+| Morgantown Public Library System calendar | One-time events and closures at every branch. Programs the feed repeats 3 or more times (weekly storytimes, clubs) are left out so they do not bury the dates page. Staff names in the feed are never read | `https://events.mympls.org/ical_subscribe.php?src=p&cid=17544` |
+
+Not wired in: WVU's events calendar (`www.events.wvu.edu`) answers our requests with 403 Forbidden (checked 2026-10-30), so it stays out until WVU publishes a feed we may read. We never work around a block (#107).
 
 Feed entries only say what the feed says. A card's short summary is the first sentences of the feed's own description, when it has one that says more than the title (#230). Otherwise the card says where it was listed. Times come from the feed only when they look like real times; the city's end times are placeholders, so city cards show only the start.
 
@@ -269,6 +272,8 @@ address: "100 Example St, Westover, WV"   # optional; only a street address the 
 hours: Tuesday to Saturday, 10 a.m. to 7 p.m.   # optional; in words, as the source gives them
 sells: Housewares, books, toys and furniture. No clothing.   # what it sells, lends or gives, in words
 takes: Donations of housewares, books, toys and furniture.   # optional; what it accepts from you, in words
+does_not_take: Clothing or mattresses.   # optional; what it turns away, in the source's words (#690)
+drop_off: Tuesday to Saturday during store hours.   # optional; when and how to drop off, and any pickup
 goods: [home, books]      # filter tags, see below
 buys_from_you: false      # true when it pays cash or store credit for your things
 funds_local_cause: Care for rescued animals.   # optional; what the money supports, as the source says

@@ -5,7 +5,8 @@ area: westover
 run_by: Mountaineer Spay Neuter Assistance Program (M-SNAP)
 address: "28 Commerce Drive, Westover, WV"
 sells: Donated items in like-new shape, such as china, dishes, cookware, artwork, purses, books, jewelry, small kitchen appliances, toys and furniture. No clothing.
-takes: New and gently used items in excellent condition during store hours. It does not take clothing, shoes, particle board furniture, large TV cabinets, building supplies, bedding, magazines, strollers, car seats, baby beds, or anything that uses fuel.
+takes: New and gently used items in excellent condition during store hours.
+does_not_take: Clothing, shoes, particle board furniture, large TV cabinets, building supplies, bedding, magazines, strollers, car seats, baby beds, or anything that uses fuel.
 goods: [home, books, kids]
 buys_from_you: false
 funds_local_cause: After store costs, the profit pays for M-SNAP vouchers that help Monongalia County residents get their dogs and cats spayed or neutered.
