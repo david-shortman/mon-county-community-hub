@@ -8,9 +8,11 @@ contact:
   phone: "304-291-9226"
   url: https://wvde.us/academics/adult-education/wvadulted-class-locations
   url_label: Class locations
-cost: Ask about cost when you call.
+cost: "Free. The state says adult education services are available at no cost to adult learners. Ask whether there is a fee for the GED exam itself."
 sources:
   - url: https://wvde.us/academics/adult-education/wvadulted-class-locations
     checked: 2026-10-30
   - url: https://wvde.us/academics/adult-education
+    checked: 2026-10-30
+  - url: https://wvde.us/academics/adult-education/student-information
     checked: 2026-10-30

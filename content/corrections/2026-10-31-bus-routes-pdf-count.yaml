@@ -1,0 +1,7 @@
+date: 2026-10-31
+item: Mountain Line bus routes, note on schedule PDFs
+page: /bus-routes/
+kind: fact
+found_by: our-check
+what: The page said two schedule PDFs differ from their route page. Seven do, so it now says some differ.
+link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=head%3Acode%2Fqa3-bus-audit

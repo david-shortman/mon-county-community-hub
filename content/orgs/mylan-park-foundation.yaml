@@ -1,0 +1,13 @@
+name: Mylan Park Foundation
+slug: mylan-park-foundation
+kind: nonprofit
+website: https://mylanpark.org/
+phone: "304-973-9733"
+summary: "The nonprofit that runs Mylan Park west of Morgantown: an aquatic center, a track, sports fields, the Hope Gas Ice Pavilion and the Ruby Community Center."
+topics: [outdoors, community]
+area: monongalia-county
+sources:
+  - url: https://mylanpark.org/about/
+    checked: 2026-10-30
+  - url: https://mylanpark.org/facility-hours/
+    checked: 2026-10-30

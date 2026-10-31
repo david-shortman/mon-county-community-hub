@@ -2,11 +2,12 @@
 // Grow food and flowers (#437, epic #432). A topic guide inside the Living
 // here door: picks and steps from content/guides/grow.yaml, laid out by the
 // shared DoorPage. Only facts from official pages we could read are here.
-// WVU Extension, the free soil test, Master Gardeners and USDA farm help
-// wait on a person checking them (#552).
+// The soil test and plant help have their own pages (#435, #436). Master
+// Gardeners and USDA farm help still wait on a person checking them (#552).
 import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import HelpWanted from '../components/HelpWanted.astro';
 import { resource } from '../lib/content.mjs';
 export const page = { door: "living-here", topic: "growing", label: "Grow food and flowers", summary: "Free seeds, selling what you grow, and help for a small farm" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -23,6 +24,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <ResourceCard r={resource('mcd-agep-conservation-help')} showCost />
     <p>Selling at a market? See <a href={`${base}/sell-what-you-grow/`}>Sell what you grow</a>.</p>
 
-    <p class="meta">We are still checking WVU Extension's county office, its free soil test and plant help, and USDA farm programs. They will show here once we confirm them on their own pages. Know a garden, swap or group we should add? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+    <HelpWanted topic="growing" />
+
+    <h2 id="soil-and-plants">Soil tests and sick plants</h2>
+    <p>WVU tests garden soil for free for West Virginia residents: <a href={`${base}/soil-test/`}>How do I get my garden soil tested?</a> For spots, bugs or plants that will not grow, start with WVU Extension's county office: <a href={`${base}/plant-problems/`}>Who can tell me what's wrong with my plants?</a></p>
+
+    <p class="meta">We are still checking Master Gardener classes in the county and USDA farm programs. They will show here once we confirm them on their own pages.</p>
   </DoorPage>
 </Base>

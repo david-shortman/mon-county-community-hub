@@ -1,23 +1,69 @@
 ---
-// "This season" card on the home page (#250, the "Winter here" story).
-// Shows from November through March. The site rebuilds every morning, so it
-// appears and goes away on its own. It only links to pages that carry their
-// own sources and dates, so it never states a date itself.
-import { todayYmd } from '../lib/content.mjs';
+// "This season" cards on the home page (#250 winter, #511 storm season,
+// #299 fall). Each season has `from` and `until` as "MM-DD" in Morgantown
+// time, checked the same way as door examples (inSeason in lib/pages.mjs).
+// The site rebuilds every morning, so cards appear and go away on their own,
+// and two can show at once where seasons overlap (September, November).
+// Cards only link to pages that carry their own sources and dates, so they
+// never state a date themselves. A site link shows only once its page
+// exists; outside links are official sites.
+import { inSeason, loadPages } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const { today = todayYmd() } = Astro.props;
-const month = Number(today.slice(5, 7));
-const winter = month >= 11 || month <= 3;
+const { now = new Date() } = Astro.props;
+const SEASONS = [
+  {
+    id: 'storm',
+    from: '04-01',
+    until: '09-30',
+    title: 'Storm season',
+    intro: 'What to do if you flood or lose power:',
+    links: [
+      { href: '/after-a-storm/', text: 'Storm damage, flooding or power out' },
+      { href: '/weather-alerts/', text: 'Get weather and emergency alerts' },
+      { href: '/flood-zone/', text: 'Is my home in a flood zone or a slide area?' },
+    ],
+  },
+  {
+    id: 'fall',
+    from: '09-01',
+    until: '11-30',
+    title: 'Fall in Mon County',
+    intro: 'Moving in or out, and getting your street ready for winter:',
+    links: [
+      { href: '/moving-here/', text: 'Moving in: start power, water, gas and trash' },
+      { href: '/recycling/', text: 'Moving out: trash, recycling and drop-off' },
+      { href: '/make-it-better/adopt/', text: 'Adopt a street before winter' },
+    ],
+  },
+  {
+    id: 'winter',
+    from: '11-01',
+    until: '03-31',
+    title: 'Winter in Mon County',
+    intro: "Cold weather help and this year's dates are on these pages:",
+    links: [
+      { href: '/utility-bills/', text: 'Help with heat, water or power bills' },
+      { href: '/stay-tonight/', text: 'A warm place to stay tonight' },
+      { href: '/calendar/', text: 'Sign-up windows and deadlines' },
+      { href: '/after-a-storm/', text: 'Power out or a tree down' },
+      { href: 'https://www.wv511.org/', text: 'Roads closed? Check WV 511' },
+    ],
+  },
+];
+const pages = await loadPages();
+const live = (href) => /^https:/.test(href) || pages.has(href.split(/[?#]/)[0]);
+const cards = SEASONS.filter((s) => inSeason(s, now))
+  .map((s) => ({ ...s, links: s.links.filter((l) => live(l.href)) }))
+  .filter((s) => s.links.length);
+const url = (href) => (/^https:/.test(href) ? href : `${base}${href}`);
 ---
-{winter && (
-  <section class="card season" aria-labelledby="season-h">
+{cards.map((s) => (
+  <section class="card season" aria-labelledby={`season-${s.id}-h`}>
     <p class="eyebrow">This season</p>
-    <h2 id="season-h">Winter in Mon County</h2>
-    <p>Cold weather help and this year's dates are on these pages:</p>
+    <h2 id={`season-${s.id}-h`}>{s.title}</h2>
+    <p>{s.intro}</p>
     <ul>
-      <li><a href={`${base}/utility-bills/`}>Help with heat, water or power bills</a></li>
-      <li><a href={`${base}/stay-tonight/`}>A warm place to stay tonight</a></li>
-      <li><a href={`${base}/calendar/`}>Sign-up windows and deadlines</a></li>
+      {s.links.map((l) => <li><a href={url(l.href)}>{l.text}</a></li>)}
     </ul>
   </section>
-)}
+))}

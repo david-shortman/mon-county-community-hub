@@ -1,0 +1,88 @@
+---
+// Get weather and emergency alerts, official sources only (#510). We never
+// send alerts ourselves (charter); this page points to official sign-ups.
+// Not here yet: a county mass notification sign-up (none found on a public
+// page), who can sign up for WVU Alert, and Monongalia County Schools'
+// own closing notices (#727).
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+export const page = { door: "living-here", topic: "weather", label: "Get weather and emergency alerts", summary: "Phone alerts, the National Weather Service, city alerts, WVU Alert, road conditions, school closings and power outage texts" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-30';
+const wea = [{ url: 'https://www.fema.gov/emergency-managers/practitioners/integrated-public-alert-warning-system/public/wireless-emergency-alerts', checked }];
+const nws = [
+  { url: 'https://forecast.weather.gov/MapClick.php?zoneid=WVZ509', checked },
+  { url: 'https://www.weather.gov/pbz/weatherbriefingpage', checked },
+];
+const radio = [{ url: 'https://www.weather.gov/nwr/county_coverage?State=WV', checked }];
+const city = [{ url: 'https://www.morgantownwv.gov/list.aspx', checked }];
+const wvu = [{ url: 'https://emergency.wvu.edu/', checked }];
+const roads = [
+  { url: 'https://www.wv511.org/NetworkCoverage/calling511.aspx', checked },
+  { url: 'https://www.wv511.org/NetworkCoverage/usingAlertingService.aspx', checked },
+  { url: 'https://www.wv511.org/NetworkCoverage/usingApp.aspx', checked },
+];
+const schools = [{ url: 'https://wveis.k12.wv.us/closings/', checked }];
+const power = [{ url: 'https://www.firstenergycorp.com/outages_help/outage_help/outage_notifications.html', checked }];
+const plan = [{ url: 'https://www.mecca911.org/Documents/Emergency_Management/2026%20Update%20Monongalia%20County%20EOP.pdf', checked, name: 'Monongalia County Emergency Operations Plan, 2026 update' }];
+---
+<Base title="Get weather and emergency alerts in Morgantown and Mon County" description="Official ways to get weather warnings and emergency alerts in Morgantown and Monongalia County, WV: phone alerts, the National Weather Service, City of Morgantown alerts, WVU Alert, WV 511 road alerts, school closings and Mon Power outage texts.">
+  <h1>Get weather and emergency alerts</h1>
+  <p class="lede">These are the official places that send warnings for Mon County. Most are free. We do not send alerts ourselves.</p>
+
+  <h2 id="phone">On your phone, with no sign-up</h2>
+  <p><strong>Wireless Emergency Alerts</strong> are the loud alerts that pop up on cell phones for things like extreme weather. FEMA says they are free, do not count against your texting plan, and need no sign-up or personal information. To turn them on or off, look in your phone's notification settings. To find out if your phone can get them, ask your wireless company.</p>
+  <SourceLine sources={wea} about="Wireless Emergency Alerts" />
+
+  <h2 id="weather">Weather warnings</h2>
+  <p>The <strong>National Weather Service office in Pittsburgh</strong> covers Monongalia County. It issues the weather watches and warnings for the county. Check its Mon County forecast page before a storm.</p>
+  <SourceLine sources={nws} about="the National Weather Service" />
+  <div class="actions">
+    <a class="btn" href="https://forecast.weather.gov/MapClick.php?zoneid=WVZ509"><Icon name="open" /><span>Mon County forecast and warnings</span></a>
+  </div>
+  <p><strong>NOAA Weather Radio</strong> plays weather warnings around the clock on a weather radio, with no internet needed. The Morgantown station is KWN35 on 162.475 MHz. Mon County's code for radios that let you pick your county (SAME code) is 054061.</p>
+  <SourceLine sources={radio} about="NOAA Weather Radio" />
+
+  <h2 id="city">City of Morgantown alerts</h2>
+  <p>The city's <strong>Notify Me</strong> page has an Emergency Alerts list. You can sign up for email, or for text messages (standard text rates apply). The same page has lists for city news, meetings and more.</p>
+  <SourceLine sources={city} about="City of Morgantown Notify Me" />
+  <div class="actions">
+    <a class="btn" href="https://www.morgantownwv.gov/list.aspx"><Icon name="open" /><span>Sign up for city alerts</span></a>
+  </div>
+
+  <h2 id="county">Monongalia County alerts</h2>
+  <p>We did not find a public page where residents can sign up for county emergency alerts. The county's 2026 emergency plan says public information may go out through the Emergency Alert System, a mass notification system, social media, local TV and radio, and NOAA Weather Radio, but it does not say how to sign up. The alerts above still reach you.</p>
+  <SourceLine sources={plan} about="the county emergency plan" />
+
+  <h2 id="wvu">WVU students and staff</h2>
+  <p>WVU sends emergency updates for the Morgantown campus by text and email through its safety notification system, and by push notice in the LiveSafe app. Its emergency site links to the WVU Alert sign-up. Check there for who can sign up.</p>
+  <SourceLine sources={wvu} about="WVU Alert" />
+  <div class="actions">
+    <a class="btn" href="https://emergency.wvu.edu/"><Icon name="open" /><span>WVU emergency site and sign-up</span></a>
+  </div>
+
+  <h2 id="roads">Roads and closures</h2>
+  <p><strong>WV 511</strong> has road conditions and closures. Dial 5-1-1 from anywhere in West Virginia, use the WV 511 Drive Safe app, or sign up for Personal Travel Alerts by email or text and pick the region, times and kinds of alerts you want.</p>
+  <SourceLine sources={roads} about="WV 511" />
+  <div class="actions">
+    <a class="btn" href="https://www.wv511.org/personalAlerts/newUser.aspx"><Icon name="open" /><span>Sign up for WV 511 alerts</span></a>
+  </div>
+
+  <h2 id="schools">School closings and delays</h2>
+  <p>The West Virginia Department of Education has a statewide School Closings and Delays page. County board offices post their own announcements there. Your child's school or the county school system may also send notices, so ask them how they reach families.</p>
+  <SourceLine sources={schools} about="school closings" />
+  <div class="actions">
+    <a class="btn" href="https://wveis.k12.wv.us/closings/"><Icon name="open" /><span>School closings and delays</span></a>
+  </div>
+
+  <h2 id="power">Power outage texts</h2>
+  <p>FirstEnergy, the company Mon Power is part of, sends outage text alerts. Text REG to 544487 (LIGHTS) to sign up. Have your account number and ZIP code ready. Message and data rates may apply.</p>
+  <SourceLine sources={power} about="outage text alerts" />
+  <div class="actions">
+    <a class="btn" href="sms:544487?&body=REG"><Icon name="text" /><span>Text REG to 544487</span></a>
+  </div>
+
+  <p>Want to know your flood risk before a storm? See <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
+  <p class="meta">Sources checked October 30, 2026. We point to official alert services and do not run any of them. Know an official alert service we missed? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
