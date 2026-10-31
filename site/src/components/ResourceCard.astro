@@ -10,7 +10,11 @@ import PassItOn from './PassItOn.astro';
 import RelayLine from './RelayLine.astro';
 import { websiteLabel, oldestChecked, staleDaysFor } from '../lib/content.mjs';
 // headingLevel: 3 by default; use 2 when cards sit right under the page's h1.
-const { r, sms, smsLabel, lead, showCost = false, headingLevel = 3 } = Astro.props;
+// checkFirst: false hides the "check with them first" line (#942), for example on lines that are always open.
+const { r, sms, smsLabel, lead, showCost = false, headingLevel = 3, checkFirst = true } = Astro.props;
+// Crisis and emergency lines are always open, so no reminder to check first.
+const ALWAYS_OPEN = ['988-lifeline', 'veterans-crisis-line', 'wv-211', 'rdvic-hotline', 'va-homeless-veterans-line'];
+const remind = checkFirst && !ALWAYS_OPEN.includes(r.slug);
 const H = `h${headingLevel}`;
 ---
 {r.hidden ? (
@@ -36,7 +40,7 @@ const H = `h${headingLevel}`;
   <RelayLine phone={r.contact?.phone} sms={sms} text={r.contact?.text} />
   <BusLink place={r.contact?.place} about={r.title} />
   <WhatHappensNext r={r} />
-  <SourceLine sources={r.sources} phone={r.phone_confirmed} staleDays={staleDaysFor(r)} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
+  <SourceLine sources={r.sources} phone={r.phone_confirmed} staleDays={staleDaysFor(r)} remind={remind} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
   <PassItOn title={r.title} slug={r.slug} org={r.org} privateTrace={r.private_trace} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
 )}

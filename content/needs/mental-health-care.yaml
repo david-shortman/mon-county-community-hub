@@ -1,0 +1,48 @@
+title: Getting mental health care
+slug: mental-health-care
+summary: Mental health was the top health problem in a 2025 hospital survey here, and about 1 in 5 adults have frequent mental distress. The county has more mental health providers per person than the state, yet people report trouble getting care.
+evidence:
+  - url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    checked: 2026-10-31
+    shows: Mental health problems were the top health problem named in the 2025 community survey (page 22). On page 66, 26% disagreed that they can get mental health care when needed.
+    figure: "64% named mental health a top problem; 26% cannot get care when needed"
+    data_date: "2025"
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: In the health department's 2025 survey, mental health was first on the list of care that is hardest to get, and anxiety and depression were the top hardships for every adult age group (pages 54 and 55 of the PDF).
+    data_date: "2025"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://data.cdc.gov/d/swc5-untb
+    checked: 2026-10-31
+    shows: CDC estimates the share of adults with 14 or more days of poor mental health in the past month, and the share ever told they have depression. These are model-based estimates, not counts.
+    figure: "20.9% frequent mental distress; 29.4% depression"
+    data_date: "2023"
+    publisher: CDC PLACES (2025 release)
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-31
+    shows: The number of people for each mental health provider. A lower number means more providers per person.
+    figure: "256 people per provider (West Virginia 506, US 301)"
+    publisher: County Health Rankings (2025 release)
+affected:
+  estimate: "20.9% of adults"
+  description: Adults in Monongalia County with frequent mental distress, as estimated by CDC.
+  url: https://data.cdc.gov/d/swc5-untb
+  checked: 2026-10-31
+severity: high
+severity_why: Untreated mental illness affects health, work, family and safety, and can be a crisis.
+trend: unknown
+working_on:
+  - org: 988-suicide-and-crisis-lifeline
+  - org: monongalia-county-health-department
+  - org: wvu-medicine
+  - org: mon-health-medical-center
+  - org: milan-puskar-health-right
+gaps:
+  - No public list shows which counselors are taking new patients.
+  - Provider counts look high, but people still report waits and cost, so the problem may be appointments and price more than the number of providers.
+topics: [health]
+rank: 5
+rank_why: "Score 11 of 12: severity 3, reach 3, agreement 3, room to help 2 (help exists, but appointments are limited). Lower 211 demand than housing and utilities."
+questions: [q06]
+issues: [203]

@@ -1,0 +1,75 @@
+---
+// Noise and neighbor problems in Morgantown (#222, a missing life area). The
+// quiet hours, party waiver and penalties are quoted from the city's Noise
+// Ordinance page (City Code Article 527), read 2026-10-31. The city's page
+// does not say who to call about noise; that is in needs-verification
+// issue #1113, so the page gives the police non-emergency line only as a general
+// line. The property complaint steps come from the city's Code Enforcement
+// PDF (content/pdf-pages/morgantown-code-complaints.yaml, part of #393).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import FromPdf from '../components/FromPdf.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource } from '../lib/content.mjs';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Noise and neighbor problems", summary: "Morgantown's quiet hours for music, power tools and loudspeakers, getting a waiver for a party, fines, and what happens after you report a property problem" };
+const d = pdfPage('morgantown-code-complaints');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const noiseSources = [{ url: 'https://www.morgantownwv.gov/165/Noise-Ordinance', name: 'City of Morgantown', checked: '2026-10-31' }];
+---
+<Base title="Noise rules and neighbor problems in Morgantown, WV: quiet hours, party waivers, complaints" description="Morgantown's noise ordinance in plain words: quiet hours for music, power tools, loudspeakers and yelling, the $20 party waiver, fines up to $500, and what happens after you report a property problem to Code Enforcement.">
+  <h1>Noise and neighbor problems</h1>
+  <p class="lede">Check the quiet hours below to see what Morgantown's noise rules allow and when. Planning a loud party? You can apply to the city for a waiver. For a run-down or unsafe property, see how to report it and what happens next.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      <li><a href="#quiet-hours">Quiet hours</a></li>
+      <li><a href="#party">Having a party</a></li>
+      <li><a href="#fines">Warnings and fines</a></li>
+      <li><a href="#report-noise">Reporting noise</a></li>
+      <li><a href="#property">Property problems</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="quiet-hours">Quiet hours</h2>
+  <p>These rules are in Morgantown's City Code, Article 527. They apply inside city limits. The parts in quotes are the city's own words. At any hour, the code bans noise that "annoys, disturbs, injures or endangers the comfort, repose, health, peace or safety of others."</p>
+  <ul>
+    <li><strong>Music, TV and speakers:</strong> not "Between the hours of 11:00 p.m. and 7:00 a.m. the following day in such a manner as to create a noise disturbance across a real property boundary or within a noise sensitive zone." Events open to the public with a city permit are an exception.</li>
+    <li><strong>Power tools and lawn equipment:</strong> saws, sanders, drills, mowers, snowblowers and similar tools used outdoors in residential areas, not "between the hours of 9:00 p.m. and 8:00 a.m. the following day so as to cause a noise disturbance across a residential real property boundary."</li>
+    <li><strong>Loudspeakers (not for business):</strong> not "between the hours of 10:00 p.m. and 8:00 a.m. the following day" so that the sound creates a noise disturbance across a residential property line.</li>
+    <li><strong>Yelling and shouting outside:</strong> "Yelling, shouting, whistling, hooting, or generally creating a racket on public right-of-ways or public spaces between the hours of 8:00 p.m. and 10:00 a.m. the following day so as to annoy or disturb" people nearby.</li>
+    <li><strong>Car stereos:</strong> loud enough to be a "noise disturbance at 50 feet" from a vehicle on a public street, at any hour.</li>
+    <li><strong>Animals:</strong> keeping an animal or bird that makes "frequent or long continued noise" that disturbs people nearby.</li>
+  </ul>
+  <SourceLine sources={noiseSources} about="Morgantown's quiet hours" />
+
+  <h2 id="party">Having a party</h2>
+  <p>If you expect a party to be louder than the code allows, you can apply to the City Manager for a special waiver. The code says:</p>
+  <ul>
+    <li>Your written application must say "the specific reason why he or she will not be able to meet the established noise levels."</li>
+    <li>You must include "a written statement that he or she has personally contacted all residents of properties within 400 feet of the property in question and none oppose the special waiver being requested."</li>
+    <li>"A fee of $20.00 shall accompany the application."</li>
+    <li>Renters must also "notify and receive permission from applicant's landlord."</li>
+    <li>A waiver "will expire at 10:00 p.m. on Sunday through Thursday evenings and midnight on Friday and Saturday evenings."</li>
+    <li>"no live bands shall be allowed in single family residence zoning districts."</li>
+  </ul>
+  <SourceLine sources={noiseSources} about="noise waivers for a party" />
+
+  <h2 id="fines">Warnings and fines</h2>
+  <ul>
+    <li>Usually you first get "a verbal order to cease or abate the noise." But "after 8:00 p.m. and until 8:00 a.m." the person enforcing the code "need not issue a verbal order" before charging someone.</li>
+    <li>If the noise does not stop, or starts again "within sixty (60) days," the person can be charged and face "a fine of not more than five hundred dollars ($500.00)."</li>
+  </ul>
+  <SourceLine sources={noiseSources} about="noise fines" />
+
+  <h2 id="report-noise">Reporting noise</h2>
+  <p>The city's noise ordinance page does not say who to call about noise. The Morgantown Police non-emergency line takes general calls:</p>
+  <ResourceCard r={resource('morgantown-police-non-emergency')} />
+
+  <h2 id="property">Property problems</h2>
+  <p>Tall grass, trash, or a building that is falling apart? See <a href={`${base}/make-it-better/report/`}>how to report a problem</a> to the city, or to the county outside city limits. Here is what the city says happens after you report.</p>
+  <FromPdf d={d} />
+
+  <p class="meta">Sources checked October 31, 2026. This page is a reading aid; the City Code is the official version. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
