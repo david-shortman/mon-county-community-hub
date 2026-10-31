@@ -130,7 +130,9 @@
       "last_changed",
       "sources[].method",
       "sources[].fetched",
-      "sources[].feed"
+      "sources[].feed",
+      "agenda_first_seen",
+      "minutes_first_seen"
     ],
     "places": [
       "name",

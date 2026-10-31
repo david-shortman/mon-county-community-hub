@@ -5,7 +5,7 @@
 # dates are given). The page says who says what; see the needs-verification
 # issue. Rules are quoted, not reworded.
 slug: boparc-refunds
-title: BOPARC Policy on Refunds/Cancellations/Transfers
+title: BOPARC Policy on Refunds, Cancellations and Transfers
 publisher: Morgantown Board of Parks and Recreation Commissioners (BOPARC)
 intro: BOPARC posts this policy as two PDFs, and they differ on one number. Both are linked below with what each says.
 recheck_days: 90
@@ -19,7 +19,13 @@ sources:
     checked: 2026-10-31
   - url: https://www.boparc.org/forms--reports.html
     checked: 2026-10-31
+  - url: https://www.boparc.org/
+    checked: 2026-10-31
 sections:
+  - heading: Ask BOPARC first
+    id: ask
+    items:
+      - "BOPARC's phone number, from its home page, is 304-296-8356. Call before you cancel to check which fee applies."
   - heading: Camps, programs and activities
     id: programs
     items:
@@ -53,7 +59,7 @@ sections:
     items:
       - name: "On BOPARC's Programs page"
         links:
-          - label: "Policy on Refunds/Cancellations/Transfers (PDF)"
+          - label: "Policy on refunds, cancellations and transfers (PDF)"
             url: https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_policy_on_refundscancellationstransfers___1_.pdf
             saved: "September 22, 2026"
       - name: "On BOPARC's Forms and Reports page"
