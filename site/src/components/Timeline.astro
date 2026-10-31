@@ -1,0 +1,22 @@
+---
+// Timeline (#179): a dated line of what happens and when, such as a court
+// case or an application season. An ordered list with no script needed.
+//   steps: list of { when, text }, in order. `when` is short: "Day 1",
+//     "Within 5 days", "Friday, January 30". Only dates and times the source
+//     states; legal or court timelines cite a court or legal aid source.
+//   label: what the timeline is, for screen readers
+const { steps = [], label = 'Timeline' } = Astro.props;
+---
+{steps.length > 0 && (
+  <ol class="timeline" aria-label={label}>
+    {steps.map((s) => <li><span class="tl-when">{s.when}</span><span class="tl-text">{s.text}</span></li>)}
+  </ol>
+)}
+
+<style is:global>
+  .timeline { list-style: none; margin: 14px 0 14px 6px; padding: 0 0 0 20px; border-left: 3px solid var(--ridge); display: grid; gap: 14px; }
+  .timeline li { position: relative; display: grid; gap: 2px; }
+  .timeline li::before { content: ""; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 999px; background: var(--accent); border: 3px solid var(--bg); }
+  .tl-when { font-weight: 700; color: var(--accent); }
+  @media print { .timeline li { break-inside: avoid; } }
+</style>
