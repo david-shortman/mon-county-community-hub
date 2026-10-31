@@ -154,6 +154,12 @@ ${roleCards}
 - [Job seekers and career changers](${u('/for/job-seekers/')}): a starting page that links to finding a job, resume help, paying for training, going back to school, and help while you look
 - [Tradespeople and handymen](${u('/for/tradespeople/')}): a starting page that links to licenses, working in city limits, permits, apprenticeships and paying for tools
 - [Small business owners](${u('/for/small-business/')}): a starting page that links to starting a business, the city license and taxes, free coaching, selling food, and local business groups
+- [Homeowners](${u('/for/homeowners/')}): a starting page that links to who serves your address, permits, hiring a contractor, septic and wells, property tax and bills
+- [College students](${u('/for/college-students/')}): a starting page that links to food, renting off campus, getting around, legal help, money, voting and jobs
+- [Remote workers](${u('/for/remote-workers/')}): a starting page that links to a place to work, internet at home, help paying for internet, tech help, and meeting people
+- [Artists, makers and musicians](${u('/for/artists-and-makers/')}): a starting page that links to classes, space and tools, showing and selling your work, folk arts, groups and grants
+- [People who want to help](${u('/for/people-who-want-to-help/')}): a starting page that links to ways to volunteer, give goods or money safely, help after a storm, start a group, and point people to help
+- [Outdoor and active people](${u('/for/outdoor-and-active/')}): a starting page that links to rail-trails, parks, hiking, pools and rinks, fishing and hunting licenses, and groups to join
 - [Free car seat checks](${u('/car-seat-checks/')}): the two child car seat fitting stations the WV DMV lists for Mon County (Sheriff's Department, WVU Medicine Children's), free, by appointment
 - [Car registration and inspection](${u('/car-registration/')}): renewing a West Virginia vehicle registration online, by mail or at a DMV office, what to bring (insurance and personal property tax receipt), the 24-month state inspection sticker and the 10-day rule for new residents, and replacing a lost plate ($10.50), decal or registration card ($10)
 - [Driver's license and plates for new residents](${u('/drivers-license/')}): the WV DMV rules for switching an out-of-state license, title and registration (vehicles within 30 days), fees, what to bring, and the Morgantown Regional Office address, phone, hours and appointments
