@@ -1,0 +1,20 @@
+title: People under 65 without health insurance
+slug: uninsured-under-65
+topic: health
+definition: "Percentage of population under age 65 without health insurance."   # County Health Rankings' own definition (v085)
+unit: percent
+data_year: "2022"
+release: County Health Rankings 2025
+values:
+  monongalia: 0.0621527087
+  west_virginia: 0.0741239201
+  united_states: 0.0954837794
+sources:
+  - name: County Health Rankings 2025 data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-30
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
+    checked: 2026-10-30
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    checked: 2026-10-30
+more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia   # the human page for this county
