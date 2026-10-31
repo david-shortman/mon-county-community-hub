@@ -1,8 +1,9 @@
 // Checks content/ entries before they reach the site. Exits 1 on any error.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
+import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
+import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
 
@@ -61,6 +62,7 @@ for (const e of loadCalendar()) {
   if (e.phone && !/^\d{3}-\d{3}-\d{4}$/.test(String(e.phone))) errors.push(`${where}: phone must look like 304-555-0100`);
   if (e.phone_label && !e.phone) errors.push(`${where}: phone_label without phone`);
   if (e.place && (typeof e.place !== 'string' || !/,/.test(e.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);
+  errors.push(...checkTown(e));
   for (const s of e.sources ?? []) {
     if (!isUrl(s.url)) errors.push(`${where}: source url is not a web link`);
     if (!isDate(s.checked)) errors.push(`${where}: source needs a checked date (YYYY-MM-DD)`);
@@ -77,14 +79,23 @@ for (const e of loadCalendar()) {
 const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(String(p));
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
-const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help'];
+const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden', 'phone_confirmed', 'phone_confirmed_by'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
 function checkRecord(e, required, known) {
   const where = e._file;
   checkHidden(e);
+  // Confirmed by phone (#164): a date, and optionally the caller's initials.
+  // Never the name of the person who answered.
+  if (e.phone_confirmed != null) {
+    const d = ymd(e.phone_confirmed);
+    if (!isDate(d)) errors.push(`${where}: phone_confirmed must be a date (YYYY-MM-DD)`);
+    else if (d > todayYmd()) errors.push(`${where}: phone_confirmed ${d} is in the future`);
+  }
+  if (e.phone_confirmed_by != null && !/^[A-Z]{2,3}$/.test(String(e.phone_confirmed_by))) errors.push(`${where}: phone_confirmed_by is the caller's initials, like DS`);
+  if (e.phone_confirmed_by != null && e.phone_confirmed == null) errors.push(`${where}: phone_confirmed_by without phone_confirmed`);
   for (const f of required) if (e[f] == null || e[f] === '') errors.push(`${where}: missing ${f}`);
   for (const k of Object.keys(e)) if (k !== '_file' && !known.includes(k)) warnings.push(`${where}: unknown field ${k} (see content/README.md)`);
   if (e.slug && !isSlug(e.slug)) errors.push(`${where}: slug must be lowercase letters, numbers and dashes`);
@@ -116,6 +127,8 @@ for (const o of orgs) {
 
 // Listing fields (#177): hours the site can read, how to get in, languages, access.
 RESOURCE_FIELDS.push(...LISTING_FIELDS);
+// Town and neighborhood (#395).
+RESOURCE_FIELDS.push(...TOWN_FIELDS);
 const resources = loadDir('resources');
 const resourceSlugs = new Set();
 for (const r of resources) {
@@ -126,6 +139,7 @@ for (const r of resources) {
   if (r.org && !orgSlugs.has(r.org)) errors.push(`${where}: org ${r.org} has no file in content/orgs/`);
   if (r.hours != null && (typeof r.hours !== 'string' || !r.hours.trim())) errors.push(`${where}: hours must be text, like "Monday to Friday, 9 a.m. to 5 p.m."`);
   if (r.cost != null && typeof r.cost !== 'string') errors.push(`${where}: cost must be text`);
+  errors.push(...checkTown(r));
   // What happens next (#159): optional, each from the record's own sources.
   if (r.what_to_bring != null && (!Array.isArray(r.what_to_bring) || !r.what_to_bring.length || r.what_to_bring.some((x) => typeof x !== 'string' || !x.trim()))) errors.push(`${where}: what_to_bring must be a list of short text items`);
   for (const f of ['what_happens', 'best_time']) if (r[f] != null && (typeof r[f] !== 'string' || !r[f].trim())) errors.push(`${where}: ${f} must be text`);
@@ -146,7 +160,7 @@ for (const r of resources) {
 for (const r of resources) for (const h of r.if_you_want_help ?? []) if (!resourceSlugs.has(h)) errors.push(`${r._file}: if_you_want_help names ${h}, which has no file in content/resources/`);
 
 // Secondhand shops, free programs and online groups (content/secondhand, #423).
-const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources', 'hidden'];
+const SECONDHAND_FIELDS = ['name', 'slug', 'kind', 'area', 'run_by', 'org', 'address', 'hours', 'sells', 'takes', 'does_not_take', 'drop_off', 'goods', 'buys_from_you', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'url', 'url_label', 'status', 'note', 'sources', 'hidden'];
 const secondhand = loadDir('secondhand');
 const secondhandSlugs = new Set();
 for (const s of secondhand) {
@@ -162,7 +176,7 @@ for (const s of secondhand) {
   if (s.url && !isUrl(s.url)) errors.push(`${where}: url is not a web link`);
   if (s.org && !orgSlugs.has(s.org)) errors.push(`${where}: org ${s.org} has no file in content/orgs/`);
   if (s.address != null && (typeof s.address !== 'string' || !/,/.test(s.address))) errors.push(`${where}: address must be text like "200 Spruce St, Morgantown, WV"`);
-  for (const f of ['hours', 'sells', 'takes', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'note', 'run_by']) {
+  for (const f of ['hours', 'sells', 'takes', 'does_not_take', 'drop_off', 'funds_local_cause', 'who_can_use', 'what_to_bring', 'note', 'run_by']) {
     if (s[f] != null && typeof s[f] !== 'string') errors.push(`${where}: ${f} must be text`);
   }
 }
@@ -276,6 +290,19 @@ for (const [dir, f] of [...yamlIn('doors'), ...yamlIn('guides')]) {
   }
   const ownText = [dp.lede, dp.cant_wait?.text, ...dp.situations.map((x) => x.label), ...Object.values(dp.steps).map((x) => [x.text, x.action]).flat(), ...dp.also.map((x) => x.text)];
   if (ownText.some((t) => (t ?? '').includes('\u2014'))) errors.push(`${where}: contains an em dash`);
+}
+
+// Gaps (content/gaps/<topic>.yaml, #444): each needs what, why and a checked
+// date, and its topic must have a door.
+const gapDir = path.join(CONTENT_DIR, 'gaps');
+for (const f of fs.existsSync(gapDir) ? fs.readdirSync(gapDir).filter((x) => x.endsWith('.yaml')) : []) {
+  const g = loadGaps(f.replace(/\.yaml$/, ''));
+  if (g.topic !== f.replace(/\.yaml$/, '')) errors.push(`gaps/${f}: topic should match the file name`);
+  if (!doors?.topicDoor[g.topic]) errors.push(`gaps/${f}: topic "${g.topic}" has no door in content/doors.yaml`);
+  for (const [i, x] of (g.gaps ?? []).entries()) {
+    if (!x.what || !x.why || !isDate(ymd(x.checked))) errors.push(`gaps/${f}: gap ${i + 1} needs what, why and a checked date`);
+  }
+  if (JSON.stringify(g).includes('\u2014')) errors.push(`gaps/${f}: contains an em dash`);
 }
 
 // Time and deadline wording (#413). Warnings only. Times read "8 a.m.",

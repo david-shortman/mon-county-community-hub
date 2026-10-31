@@ -140,6 +140,7 @@ Rules for keeping runs comparable: keep question ids and `search` words fixed. A
 |---|---|---|---|---|
 | 2026-10-28 | 76 | 32 | v1 | Baseline, before the hub published any guides |
 | 2026-10-28 | 76 | 32 | v1 | Same-day recheck after the first guides shipped (recycling, utility bills, stay tonight). No change overall. Movers, both from other sites or search: q09 business license +2 (city page now ranks first and fits a phone), q15 county agendas -2 (search missed the agenda page). Hub answer pages: 6 of 32 questions; in search results: 0 (not indexed yet). Top-3 correct answers: 6 of 32 (was 5). [Results](../content/findability/2026-10-28b.yaml), [build log](build-log/2026-10-28-0647-findability-same-day-recheck.md) |
+| 2026-10-30 | 27 (3 new questions only) | 3 | v1 | Starting score for the community centers questions q43 to q45 (#460), taken the day the section went live and before search engines indexed it. Not comparable to the full-set overall. Found a center: partial (one center on WVU's volunteer site). Rent a hall and a dinner this weekend: not found. Our answer pages: 3 of 3; in search results: 0. [Results](../content/findability/2026-10-30-centers.yaml) |
 
 ### Source benchmark
 

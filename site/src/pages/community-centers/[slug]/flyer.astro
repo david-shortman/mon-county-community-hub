@@ -1,0 +1,91 @@
+---
+// A one-page printable flyer for each gathering place (#465): name, what's
+// there, regulars, the next few events, join and rent, how to reach it, and a
+// QR code to its page. Made for a bulletin board once outreach starts (#191).
+// Agents never post or send it. It is a plain page, so printing works
+// without scripts. Kept out of the sitemap (astro.config.mjs) and site search.
+import qrcode from 'qrcode-generator';
+import Base from '../../../layouts/Base.astro';
+import { loadCalendarWithFeeds, upcoming, prettyDate, prettyTimes, oldestChecked } from '../../../lib/content.mjs';
+import { loadPlaces, placeStatus, whatsThere, KIND_LABELS, SECTION } from '../../../lib/places.mjs';
+
+export function getStaticPaths() {
+  return loadPlaces().map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pageUrl = new URL(`${base}${SECTION.route}${p.slug}/`, Astro.site).href;
+const shortUrl = pageUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const qr = qrcode(0, 'M');
+qr.addData(pageUrl);
+qr.make();
+// Black squares on white, sized by the page, with a text alternative.
+const qrSvg = qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true, alt: `QR code for ${shortUrl}` });
+const st = placeStatus(p);
+const there = whatsThere(p);
+const events = upcoming(await loadCalendarWithFeeds(), undefined, 90).filter((e) => e.venue === p.slug).slice(0, 3);
+const checked = oldestChecked(p.sources);
+---
+<Base title={`Printable flyer: ${p.name}, Mon County`} description={`A one-page flyer for ${p.name} in ${p.community}, Monongalia County, WV, to print and post.`} searchable={false}>
+  <p class="flyer-note no-print">This is a one-page flyer to print and post. Use your browser's Print command. <a href={`${base}${SECTION.route}${p.slug}/`}>Back to {p.name}</a>.</p>
+  <article class="flyer">
+    <p class="flyer-kind">{KIND_LABELS[p.kind]} in {p.community}</p>
+    <h1>{p.name}</h1>
+    <p class="flyer-story">{p.story}</p>
+    {st.label && <p><strong>{st.label}.</strong></p>}
+    {there && <p><strong>What's there:</strong> {there}.</p>}
+    {p.regular?.length > 0 && (
+      <>
+        <h2>Regular happenings</h2>
+        <ul>{p.regular.map((r) => <li>{r}</li>)}</ul>
+      </>
+    )}
+    {events.length > 0 && (
+      <>
+        <h2>Coming up</h2>
+        <ul>{events.map((e) => <li><strong>{prettyDate(e.starts)}</strong>{e.start_time && `, ${prettyTimes(e.start_time, e.end_time)}`}: {e.title}</li>)}</ul>
+      </>
+    )}
+    {p.membership && <p><strong>Join:</strong> {p.membership.dues}.</p>}
+    {p.rentals?.length > 0 && (
+      <>
+        <h2>Rent a space</h2>
+        <ul>{p.rentals.map((r) => <li>{r.space}{r.seats && `, seats ${r.seats}`}{r.price ? `: ${r.price}` : ': price not published'}</li>)}</ul>
+      </>
+    )}
+    <div class="flyer-reach">
+      <div>
+        <h2>How to reach us</h2>
+        {p.contact?.phone && <p>Call {p.contact.phone}</p>}
+        {p.contact?.email && <p>Email {p.contact.email}</p>}
+        {p.contact?.place && <p>{p.contact.place}</p>}
+        <p>More, with sources: <strong>{shortUrl}</strong></p>
+      </div>
+      <div class="flyer-qr" set:html={qrSvg} />
+    </div>
+    <p class="flyer-small">Details as published by {p.name} and its sources, checked {prettyDate(checked)}. They can change, so check before you go. From Everything Morgantown, an independent community guide.</p>
+  </article>
+</Base>
+
+<style>
+  .flyer { max-width: 44rem; margin: 0 auto; padding: 20px; background: #fff; color: #000; border: 1px solid var(--line); border-radius: 10px; }
+  .flyer h1 { font-size: 2.2rem; margin: 4px 0 8px; }
+  .flyer h2 { font-size: 1.2rem; margin: 16px 0 4px; }
+  .flyer-kind { margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.95rem; }
+  .flyer-story { font-size: 1.15rem; }
+  .flyer-reach { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; border-top: 2px solid #000; margin-top: 16px; padding-top: 8px; }
+  .flyer-reach p { margin: 4px 0; overflow-wrap: anywhere; }
+  .flyer-qr { width: 9rem; flex: 0 0 auto; }
+  .flyer-qr :global(svg) { width: 100%; height: auto; display: block; }
+  .flyer-small { font-size: 0.9rem; margin-top: 12px; }
+  @media print {
+    .no-print { display: none; }
+    @page { margin: 0.5in; }
+    .flyer { border: 0; padding: 0; max-width: none; font-size: 11pt; line-height: 1.35; }
+    .flyer h1 { font-size: 24pt; margin: 2px 0 4px; }
+    .flyer h2 { font-size: 13pt; margin: 10px 0 2px; }
+    .flyer p, .flyer ul { margin: 4px 0; }
+    .flyer li { margin: 1px 0; }
+    .flyer-qr { width: 1.3in; }
+  }
+</style>

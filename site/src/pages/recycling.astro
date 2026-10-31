@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import EventCard from '../components/EventCard.astro';
 import Actions from '../components/Actions.astro';
 import SourceLine from '../components/SourceLine.astro';
+import PlaceCard from '../components/PlaceCard.astro';
 import { loadCalendarWithFeeds, upcoming, resource, telHref } from '../lib/content.mjs';
 export const page = { door: "living-here", topic: "recycling", label: "Trash, recycling and drop-off", summary: "Pickup days, the curbside bin, and where to take hard items" };
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => (e.topics || []).includes('recycling'));
@@ -53,9 +54,7 @@ const src = {
     <li><strong>Western Mon County Recycling Site</strong> (free, sorted): Arnettsville Community Association, 4120 Fairmont Rd., Morgantown. Run by the Marion County Solid Waste Authority. The county lists it as open 24 hours a day, 7 days a week.
       <Actions place="Arnettsville Community Association, 4120 Fairmont Rd, Morgantown, WV" />
       <SourceLine sources={src.recycling} about="the Western Mon County site" /></li>
-    <li><strong>{mts.title}</strong> (run by Republic Services): {mts.what_to_do} Hours: {mts.hours}. <strong>Cost:</strong> {mts.cost}
-      <Actions phone={mts.contact.phone} phoneLabel={mts.title} place={mts.contact.place} />
-      <SourceLine sources={mts.sources} org={mts.org} about={mts.title} /></li>
+    <li><PlaceCard r={mts} /></li>
     <li><strong>City residents:</strong> the county lists a Republic Services recycling event every second Saturday. Confirm the place and time with the hauler.
       <SourceLine sources={src.recycling} about="the city recycling event" /></li>
     <li><strong>Paper shredding:</strong> PACE Enterprises offers it at its place in Mylan Park.
