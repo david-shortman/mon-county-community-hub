@@ -33,7 +33,7 @@ const firstWard = (nbhd?.meetings ?? []).find((m) => m.name.startsWith('First Wa
 
   {wifi && (
     <Milepost n={2} title="Work from the library one afternoon" when="Week 1 or 2" id="work">
-      <p>The library has free Wi-Fi and quiet tables at all its locations. The main library is at 373 Spruce Street. {wifi.hours}</p>
+      <p>The library's Wi-Fi, computers and quiet tables are free for anyone who needs them for a few hours. The main library is at {wifi.contact.place}. {wifi.hours}</p>
       <p>While there, they look at the library's calendar to see what is coming up (step 3).</p>
       <SourceLine sources={wifi.sources} org={wifi.org} about={wifi.title} slug={wifi.slug} />
     </Milepost>
@@ -41,7 +41,7 @@ const firstWard = (nbhd?.meetings ?? []).find((m) => m.name.startsWith('First Wa
 
   {programs && (
     <Milepost n={3} title="Pick one free program and go" when="Week 2" id="program">
-      <p>The library's calendar can be filtered to show adult events. Its adult page lists groups like a sci-fi and fantasy book group, Adult Craft Night, Dungeons and Dragons for adults, and LEGO Night.</p>
+      <p>The library offers free programs for adults. {programs.what_to_do.split('. ').slice(0, 2).join('. ')}.</p>
       <div class="actions"><a class="btn" href={programs.contact.url}><span>Library calendar</span></a></div>
       <SourceLine sources={programs.sources} org={programs.org} about={programs.title} slug={programs.slug} />
     </Milepost>
