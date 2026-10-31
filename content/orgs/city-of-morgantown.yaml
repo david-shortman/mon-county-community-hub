@@ -3,8 +3,10 @@ slug: city-of-morgantown
 kind: government
 website: https://www.morgantownwv.gov
 summary: The city government for Morgantown. It runs city services like streets, sidewalks and code enforcement, and takes service requests through Morgantown 311.
-topics: [government]
+topics: [government, moving]
 area: morgantown
 sources:
   - url: https://www.morgantownwv.gov/428/Service-Request
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
     checked: 2026-10-30
