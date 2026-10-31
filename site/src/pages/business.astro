@@ -1,0 +1,55 @@
+---
+// Start or grow a business (#641, #643, part of #277). Free coaching and
+// classes, a state list of business plan help, and local business groups,
+// each in its own words. No business is listed or ranked. The step by step
+// for starting a business (#639), towns (#640) and selling food (#642) come
+// in their own PRs because they state fees and taxes (David reviews).
+// Not here yet: SCORE and WVU LaunchLab (their pages could not be read, see #638).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, org } from '../lib/content.mjs';
+export const page = { door: "family", topic: "work", label: "Start or grow a business", summary: "Free business coaching and classes, help with a business plan, and local business groups" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const r = (slug) => resource(slug);
+const mainStreet = org('main-street-morgantown');
+const partnership = org('morgantown-area-partnership');
+---
+<Base title="Start or grow a business in Morgantown and Mon County: free coaching, classes and business groups" description="Free one-on-one business coaching and Business Fundamentals classes from the WV SBDC, the SBA West Virginia District Office, a state list of business plan help, and the Morgantown Area Partnership, Chamber of Commerce and Main Street Morgantown.">
+  <h1>Start or grow a business</h1>
+  <p class="lede">Thinking about starting a business, or want help with the one you have? Free coaching and classes are open to anyone in West Virginia. Local business groups are listed in their own words. We do not list or rank businesses.</p>
+
+  <h2>Where to start</h2>
+  <p>The City of Morgantown has its own checklist for opening a business inside city limits: <a href="https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business">Steps to Starting Your Business</a>. If your business is in another town or outside any town, the rules are different, so ask that town or the county.</p>
+
+  <h2>Free one-on-one coaching</h2>
+  {r('wv-sbdc-business-coaching') && <ResourceCard r={r('wv-sbdc-business-coaching')} />}
+
+  <h2>A free class for people starting out</h2>
+  {r('wv-sbdc-business-fundamentals') && <ResourceCard r={r('wv-sbdc-business-fundamentals')} />}
+
+  <h2>Federal help: loans, counseling and contracting</h2>
+  {r('sba-west-virginia-district-office') && <ResourceCard r={r('sba-west-virginia-district-office')} />}
+
+  <h2>Help writing a business plan</h2>
+  {r('wv-sos-business-plan-assistance') && <ResourceCard r={r('wv-sos-business-plan-assistance')} />}
+
+  <h2>Business groups</h2>
+  <article class="card resource" id="morgantown-area-partnership">
+    <h3>{partnership.name}</h3>
+    <p>{partnership.summary}</p>
+    <p><a class="btn" href={partnership.website}><span>Partnership website</span></a></p>
+    <SourceLine sources={partnership.sources} org="morgantown-area-partnership" about={partnership.name} slug="morgantown-area-partnership" />
+  </article>
+  {r('morgantown-area-chamber-of-commerce') && <ResourceCard r={r('morgantown-area-chamber-of-commerce')} />}
+  <article class="card resource" id="main-street-morgantown">
+    <h3>{mainStreet.name}</h3>
+    <p>{mainStreet.summary} The page shows downtown events and a self-guided walking tour of downtown.</p>
+    <p><a class="btn" href={mainStreet.website}><span>Main Street Morgantown page</span></a></p>
+    <SourceLine sources={mainStreet.sources} org="main-street-morgantown" about={mainStreet.name} slug="main-street-morgantown" />
+  </article>
+
+  <p>Looking for a job or training for yourself? See <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. We describe these programs and groups; we do not endorse them or any business. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

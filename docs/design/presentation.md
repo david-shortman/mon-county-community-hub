@@ -67,14 +67,14 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Door cards** | The doors as big cards, each listing a few problems in residents' words that link straight to their page (or open the door with that problem picked) | Plain links | Exists (`DoorCards.astro`, home and search) |
 | **Pick what fits** | On a door page: "What's going on? Pick all that fit", then one set of steps grouped Today, This week and When it opens, each step ending in an action, with its cost and source. Picks live in the web address | A list of plain links to each situation's page | Exists (`DoorPage.astro`) |
 | **Four big choices** | Big buttons that jump to sections on a crisis page: "A bed tonight", "Food tonight" | Anchor links | Exists (`/stay-tonight/`) |
-| **Place card** | Name, hours in words, who it is for, how to get in, cost, action buttons, and a source link named for the place | Everything | Exists (`PlaceCard.astro`); the open now badge and tags are #176 |
-| **Tags** | Small icon plus word labels: walk in, appointment, no ID needed, free, hot meal, groceries, kid friendly, on a bus line | Plain text | #176 |
+| **Place card** | Name, hours in words, who it is for, how to get in, cost, action buttons, and a source link named for the place | Everything | Exists (`PlaceCard.astro`), with the town, an open now badge from `opening_hours` and word tags (#176, #395) |
+| **Tags** | Small icon plus word labels: walk in, appointment, no ID needed, free, hot meal, groceries, kid friendly, on a bus line | Plain text | Exists in `PlaceCard.astro` for how to get in and languages (#176) |
 | **Day list** | "Open today" first, then each day of the week, with jump links | Anchor links | Use in #60 |
 | **Days left chip** | "in 3 days", "closes Friday" next to the date | Worked out at build time; the site rebuilds every morning | Exists (calendar) |
-| **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list; each step is a native `details`, so it opens with no script | Door steps exist (`DoorPage.astro`). Topic routes exist: `Route` and `Milepost` (#240), first on `/utility-bills/`. Checklist, timeline and labeled picture are #179 |
+| **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list; each step is a native `details`, so it opens with no script | Door steps exist (`DoorPage.astro`). Topic routes exist: `Route` and `Milepost` (#240), first on `/utility-bills/`. They print every step, even with scripts off (#368) |
 | **Question path** | One question per small page that leads to an answer: "Where should I go for care?" | Each answer is a link to the next page | #178 |
-| **Checklist** | "What to bring" with tick boxes | Boxes work but do not save; script saves them on the phone only | #179 |
-| **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | #179 |
+| **Checklist** | "What to bring" with tick boxes | Boxes work but do not save; script saves them on the phone only | Exists (`Checklist.astro`), used for "What to have ready" in `WhatHappensNext` |
+| **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | Exists (`Timeline.astro`); no page uses it yet |
 | **Labeled picture** | A drawing of a letter or notice with numbered callouts that match a list below it | The list carries all the meaning; the picture only helps | #179 |
 | **Printout** | A one page version that a pantry, library, or clinic can post | Print stylesheet | Door steps print cleanly; listing printouts and posters are #157 and #160 |
 | **Send by text** | A link that opens a text message with the page link filled in | An `sms:` link | Exists on door steps ("Text these steps to myself"); listings are #157 |
