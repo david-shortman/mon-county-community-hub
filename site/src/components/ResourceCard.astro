@@ -23,6 +23,8 @@ const H = `h${headingLevel}`;
   {lead && <p><strong>{lead}</strong></p>}
   <p>{r.who_it_is_for}{' '}{r.what_to_do}</p>
   {r.steps?.length > 0 && <ol class="card-steps">{r.steps.map((t) => <li>{t}</li>)}</ol>}
+  {r.options?.length > 0 && <ul class="card-steps">{r.options.map((t) => <li>{t}</li>)}</ul>}
+  {r.notes?.map((t) => <p>{t}</p>)}
   {showCost && r.cost && r.cost !== 'free' && <p><strong>Cost:</strong> {r.cost}</p>}
   <Actions callFirst
     phone={r.contact?.phone} phoneLabel={r.title}

@@ -87,7 +87,7 @@ const TOOLS = [
       let hits = (resources ?? []).filter((r) => !topic || (r.topics ?? []).includes(topic));
       if (query.trim()) {
         hits = hits
-          .map((r) => ({ r, n: score([r.title, r.who_it_is_for, r.what_to_do, (r.topics ?? []).join(' '), orgBySlug.get(r.org)?.name].join(' '), query) }))
+          .map((r) => ({ r, n: score([r.title, r.who_it_is_for, r.what_to_do, ...(r.options ?? []), ...(r.notes ?? []), (r.topics ?? []).join(' '), orgBySlug.get(r.org)?.name].join(' '), query) }))
           .filter((x) => x.n > 0)
           .sort((a, b) => b.n - a.n || a.r.title.localeCompare(b.r.title))
           .map((x) => x.r);
@@ -99,6 +99,9 @@ const TOOLS = [
         organization_id: r.org,
         who_it_is_for: r.who_it_is_for,
         what_to_do: r.what_to_do,
+        steps: r.steps,
+        options: r.options,
+        notes: r.notes,
         hours: r.hours,
         cost: r.cost,
         contact: r.contact,
