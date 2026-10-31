@@ -82,7 +82,9 @@ function stamp(adapter, entries, fetched, feedUrl) {
   const checked = fetched.slice(0, 10);
   return entries.map((e) => ({
     ...e,
-    sources: [{ url: adapter.page_url, checked }],
+    // One provenance shape for every record (ADR 0002, #70). The `feed` object
+    // stays too: the API publishes it in v1.
+    sources: [{ url: adapter.page_url, checked, method: 'feed', fetched, feed: adapter.id }],
     feed: { id: adapter.id, name: adapter.name, url: feedUrl, page_url: adapter.page_url, fetched },
   }));
 }
