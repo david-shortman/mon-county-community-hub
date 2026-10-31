@@ -19,7 +19,7 @@ sources:
     checked: 2026-10-30
 more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia # the human page for this county
 chr:
-  # where scripts/update-indicators.mjs reads it
+  # where scripts/update-chr-indicators.mjs reads it
   measure: v085
   trend_name: Uninsured
 history:

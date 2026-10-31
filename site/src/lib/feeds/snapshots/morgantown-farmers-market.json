@@ -1,0 +1,22 @@
+{
+  "id": "morgantown-farmers-market",
+  "feed_url": "https://calendar.google.com/calendar/ical/morgantownfarmersmarket%40gmail.com/public/basic.ics",
+  "fetched": "2026-10-31T00:18:02.935Z",
+  "entries": [
+    {
+      "title": "Morgantown Winter Farmers Market @ Mylan Park",
+      "slug": "mfm-morgantown-winter-farmers-market-mylan-park-2026-11-21",
+      "starts": "2026-11-21",
+      "ends": "2026-11-21",
+      "start_time": "10:00",
+      "org_name": "Morgantown Farmers Market",
+      "who_it_is_for": "Listed on the Morgantown Farmers Market calendar.",
+      "what_to_do": "At Monongalia County Center, 270 Mylan Park Ln Suite #150, Morgantown, WV 26501, USA. The market repeats; check its site for later dates.",
+      "url": "https://morgantownfarmersmarket.org/",
+      "topics": [
+        "market"
+      ],
+      "place": "Monongalia County Center, 270 Mylan Park Ln Suite #150, Morgantown, WV 26501, USA"
+    }
+  ]
+}

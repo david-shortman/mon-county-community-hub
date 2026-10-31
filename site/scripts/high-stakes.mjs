@@ -2,6 +2,7 @@
 // shelter, crisis help, food and benefits. A PR that changes any of them waits
 // for David (docs/COORDINATION.md, "When a PR waits for David").
 // Usage: node scripts/high-stakes.mjs <base-ref>   (run from site/)
+//        node scripts/high-stakes.mjs --self-test (also run by npm run check-content)
 // Prints one line per file with the reason. Exit code is always 0.
 import { execFileSync } from 'node:child_process';
 import YAML from 'yaml';
@@ -19,7 +20,44 @@ const DOORS = ['help-now', 'this-month'];
 const TOPICS = ['housing', 'money', 'food'];
 // Crisis lines, matched in an entry's text.
 const CRISIS = /\b(988|211|911)\b|crisis/i;
+// Other crisis numbers the site uses, and the slugs of the records that hold
+// crisis lines, so code that pulls one in by slug counts too (#776): 211's
+// text line, the Veterans Crisis Line's text line, the RDVIC 24-hour hotline,
+// and the VA line for homeless veterans.
+const CRISIS_MORE = /\b(898-211|838255|304-292-5100|877-424-3838)\b|\b(988-lifeline|veterans-crisis-line|wv-211|rdvic-hotline|va-homeless-veterans-line)\b/;
+export const mentionsCrisis = (text) => CRISIS.test(text) || CRISIS_MORE.test(text);
 const CONTENT = /^content\/(resources|orgs|calendar)\/[^/]+\.ya?ml$/;
+// Other files residents see through the site: code under site/src (lib,
+// components, layouts, data) and other content folders (doors, places...).
+// For these only the changed lines are read, so a small edit to a shared
+// component that already shows 911 does not wait for David, but adding or
+// changing a crisis line anywhere does.
+const OTHER = /^(site\/src\/|content\/)/;
+
+// The lines a diff adds or removes, without the file headers.
+export function changedLines(diff) {
+  return diff.split('\n').filter((l) => /^[+-]/.test(l) && !/^(\+\+\+|---) /.test(l)).map((l) => l.slice(1));
+}
+
+// node scripts/high-stakes.mjs --self-test: checks the rules above on samples.
+if (process.argv[2] === '--self-test') {
+  const fails = [];
+  const expect = (cond, msg) => { if (!cond) fails.push(msg); };
+  expect(mentionsCrisis("{ resource: 'wv-211', text: 'Call 211.' }"), 'a 211 step in a lib file should count');
+  expect(mentionsCrisis("{ resource: '988-lifeline' }"), 'a crisis record slug should count');
+  expect(mentionsCrisis('Text 838255'), "the Veterans Crisis Line's text line should count");
+  expect(mentionsCrisis('Call 304-292-5100'), 'the RDVIC hotline should count');
+  expect(!mentionsCrisis('Call 304-296-8356 to book a pavilion.'), 'an ordinary phone number should not count');
+  expect(!mentionsCrisis('Seats 2110 people'), 'a longer number that contains 211 should not count');
+  const diff = ['diff --git a/x b/x', '--- a/site/src/lib/x.mjs', '+++ b/site/src/lib/x.mjs', '@@ -1 +1 @@', '-const a = 1;', "+const b = 'Call 911';", ' unchanged 988 line'].join('\n');
+  const lines = changedLines(diff);
+  expect(lines.length === 2, 'changedLines should keep only added and removed lines');
+  expect(mentionsCrisis(lines.join('\n')), 'an added 911 line should count');
+  expect(!mentionsCrisis(changedLines(diff.replace("'Call 911'", "'hi'")).join('\n')), 'an unchanged crisis line should not count');
+  if (fails.length) { console.error(`high-stakes self-test failed:\n- ${fails.join('\n- ')}`); process.exit(1); }
+  console.log('high-stakes self-test passed.');
+  process.exit(0);
+}
 
 const base = process.argv[2] || 'origin/main';
 const git = (...args) => execFileSync('git', args, { encoding: 'utf8', cwd: '..', stdio: ['ignore', 'pipe', 'ignore'] });
@@ -56,15 +94,18 @@ for (const file of changed) {
     const topic = text.match(/topic:\s*["']([a-z-]+)["']/)?.[1];
     if (DOORS.includes(door)) console.log(`${file}: in the ${door} door`);
     else if (TOPICS.includes(topic)) console.log(`${file}: page topic ${topic}`);
-    else if (CRISIS.test(text)) console.log(`${file}: names a crisis line`);
+    else if (mentionsCrisis(text)) console.log(`${file}: names a crisis line`);
     continue;
   }
-  if (!CONTENT.test(file)) continue;
+  if (!CONTENT.test(file)) {
+    if (OTHER.test(file) && mentionsCrisis(changedLines(git('diff', '-U0', `${base}...HEAD`, '--', file)).join('\n'))) console.log(`${file}: changes a line that names a crisis line`);
+    continue;
+  }
   if (onlyHides(file)) continue;
   const text = read(file);
   let topics = [];
   try { topics = [].concat(YAML.parse(text)?.topics ?? []); } catch { /* bad YAML is check-content's job */ }
   const hit = topics.find((t) => TOPICS.includes(t));
   if (hit) console.log(`${file}: topic ${hit}`);
-  else if (CRISIS.test(text)) console.log(`${file}: mentions a crisis line`);
+  else if (mentionsCrisis(text)) console.log(`${file}: mentions a crisis line`);
 }

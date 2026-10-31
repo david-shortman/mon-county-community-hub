@@ -70,7 +70,12 @@ export function loadCalendarWithFeeds() {
     // A hidden hand-written entry also hides the feed item with its slug (#519).
     const hand = loadCalendar();
     const taken = new Set(loadCalendar({ withHidden: true }).map((e) => e.slug));
-    const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug));
+    // A feed item that a hand-written entry already covers (same first three
+    // title words, starting within the hand entry's dates) is left out too,
+    // so one event never shows twice under two slugs (#761).
+    const words = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 3).join(' ');
+    const covered = (f) => hand.some((h) => words(h.title) === words(f.title) && f.starts >= h.starts && f.starts <= h.ends);
+    const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug) && !covered(e));
     return [...hand, ...fromFeeds];
   })();
   return merged;
