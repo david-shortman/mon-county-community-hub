@@ -3,6 +3,7 @@ import Icon from '../components/Icon.astro';
 import AlsoCheck from '../components/AlsoCheck.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
+import LeaveNote from '../components/LeaveNote.astro';
 import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import UpkeepNotice from '../components/UpkeepNotice.astro';
@@ -367,6 +368,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       {(crisis || tags?.door === 'help-now') && <p class="disclaimer meta">{disclaimer}</p>}
       <slot />
+      {crisis && <LeaveNote />}
       {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
       <AlsoCheck route={route} />
     </main>
