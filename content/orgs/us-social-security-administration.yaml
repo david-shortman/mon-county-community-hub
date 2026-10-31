@@ -1,0 +1,11 @@
+name: U.S. Social Security Administration (SSA)
+slug: us-social-security-administration
+kind: government
+website: https://www.ssa.gov/
+phone: "1-800-772-1213"
+summary: The federal agency that runs Social Security. It also takes reports of death for both Social Security and Medicare.
+topics: [money, records]
+area: national
+sources:
+  - url: https://www.usa.gov/social-security-report-a-death
+    checked: 2026-10-31
