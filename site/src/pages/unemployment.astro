@@ -1,0 +1,64 @@
+---
+// File for unemployment and keep your benefits (#646, part of #275). Steps in
+// order, each quoted from WorkForce West Virginia's own pages. Benefits facts:
+// waits for David. Any change to the 26 week maximum or the work search rule
+// in state law should be checked here first (#644).
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import { telHref } from '../lib/content.mjs';
+export const page = { door: "family", topic: "work", label: "File for unemployment", summary: "How to file in West Virginia, what to have ready, the weekly claim, work search, and how to appeal" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const hasFindAJob = Object.keys(import.meta.glob('./find-a-job.astro')).length > 0;
+const checked = '2026-10-30';
+const howTo = [{ url: 'https://workforcewv.org/job-seeker/unemployment/', checked }, { url: 'https://regionviwv.org/job-seekers/job-seeker-assistance/', checked }];
+const basics = [{ url: 'https://workforcewv.org/unemployment-insurance-benefits/unemployment-resources/unemployment-basics/', checked }];
+const both = [...howTo, ...basics];
+const phone = '1-800-252-5627';
+---
+<Base title="File for unemployment in Morgantown and Mon County, WV: steps and weekly claims" description="How to file for unemployment with WorkForce West Virginia from Morgantown or Monongalia County: apply online, by phone or at the Commerce Drive office, what to have ready, the weekly claim, the waiting week, four work search activities a week, and how to appeal.">
+  <h1>File for unemployment</h1>
+  <p class="lede">Lost your job or had your hours cut? You can file for unemployment with WorkForce West Virginia. These are the steps in order, from the state's own pages.</p>
+
+  <h2 id="file">1. File your claim</h2>
+  <p>The quickest way is online. If you can't file online, call <strong>1-800-252-JOBS (5627)</strong> and staff will walk you through it. You can also go to a local WorkForce office, which has computers and staff to help. The office for Mon County is at 40 Commerce Drive, Suite 200. WV Relay: dial 711.</p>
+  <div class="actions">
+    <a class="btn" href="https://uc.workforcewv.org/Consumer/Default.aspx"><Icon name="open" /><span>File online</span></a>
+    <a class="btn" href={telHref(phone)}><Icon name="phone" /><span>Call 1-800-252-5627</span></a>
+  </div>
+  <SourceLine sources={howTo} about="how to file for unemployment" />
+
+  <h2 id="bring">2. Have this ready</h2>
+  <ul>
+    <li>Your Social Security number</li>
+    <li>A government photo ID</li>
+    <li>Your bank name, account number and routing number, for direct deposit</li>
+    <li>Your employer's name and mailing address</li>
+    <li>Your first and last day of work there</li>
+    <li>Why you left, or why your hours were cut</li>
+    <li>If you file during your last week of work, what you earned that week before taxes</li>
+  </ul>
+  <SourceLine sources={basics} about="what to have ready to file" />
+
+  <h2 id="weekly">3. File a weekly claim every week</h2>
+  <p>Each weekly claim covers the week before, Sunday to Saturday. You can't file until that week ends. The state says to file on Sunday, but you can file until Friday at 5 p.m.</p>
+  <p>The first week you file and qualify is a <strong>waiting week</strong>. You are not paid for it, but you still have to claim it.</p>
+  <SourceLine sources={basics} about="weekly claims and the waiting week" />
+
+  <h2 id="search">4. Look for work, and keep proof</h2>
+  <p>You must do <strong>four work search activities each week</strong>, looking for full-time work. Keep proof of each one for your benefit year plus six months. You can upload it with your weekly claim.</p>
+  {hasFindAJob && <p>For places to look and free resume help, see <a href={`${base}/find-a-job/`}>Find a job</a>.</p>}
+  <SourceLine sources={both} about="the work search rule" />
+
+  <h2 id="how-long">5. How long it lasts</h2>
+  <p>In West Virginia you can get unemployment for up to <strong>26 weeks</strong>. Your Monetary Determination notice says how many weeks you may get.</p>
+  <SourceLine sources={both} about="how long unemployment lasts" />
+
+  <h2 id="appeal">6. If you disagree with a decision</h2>
+  <p>You have the right to appeal. Follow the steps on the notice and send your appeal to the nearest local office by the date on the decision. Not every letter can be appealed. The notice says if it can.</p>
+  <SourceLine sources={both} about="how to appeal" />
+
+  <p>Need help with bills or food while you wait for your first payment? See <a href={`${base}/money/`}>Get through this month</a> and <a href={`${base}/help/food/`}>Food help</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Rules come from WorkForce West Virginia and can change. Your notices from WorkForce WV are what count for your claim. We describe the steps; we can't file for you or tell you if you qualify. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
