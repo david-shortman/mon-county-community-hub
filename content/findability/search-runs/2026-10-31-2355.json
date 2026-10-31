@@ -1,36 +1,36 @@
 {
- "date": "2026-10-31T23:41:43.936Z",
- "mode": "plain",
+ "date": "2026-10-31T23:55:15.322Z",
+ "mode": "plan",
  "top": 3,
  "summary": {
   "all": {
-   "queries": 249,
-   "hits": 181,
-   "top3_percent": 72.7,
+   "queries": 246,
+   "hits": 219,
+   "top3_percent": 89,
    "zero_results": 1
   },
   "everyday": {
-   "queries": 185,
-   "hits": 147,
-   "top3_percent": 79.5,
+   "queries": 184,
+   "hits": 164,
+   "top3_percent": 89.1,
    "zero_results": 1
   },
   "short": {
-   "queries": 16,
+   "queries": 14,
    "hits": 11,
-   "top3_percent": 68.8,
+   "top3_percent": 78.6,
    "zero_results": 0
   },
   "misspelled": {
    "queries": 17,
-   "hits": 2,
-   "top3_percent": 11.8,
+   "hits": 15,
+   "top3_percent": 88.2,
    "zero_results": 0
   },
   "question": {
    "queries": 31,
-   "hits": 21,
-   "top3_percent": 67.7,
+   "hits": 29,
+   "top3_percent": 93.5,
    "zero_results": 0
   }
  },
@@ -44,7 +44,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 20,
+   "count": 19,
    "top3": [
     "/snap/",
     "/help/food/monthly/",
@@ -66,7 +66,8 @@
     "/scams/",
     "/sell-what-you-grow/",
     "/grow/"
-   ]
+   ],
+   "searched": "ebt"
   },
   {
    "q": "SNAP",
@@ -77,12 +78,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 43,
+   "count": 42,
    "top3": [
     "/snap/",
     "/file-today/",
     "/help/food/monthly/"
-   ]
+   ],
+   "searched": "snap"
   },
   {
    "q": "food pantry",
@@ -94,7 +96,7 @@
    ],
    "hit": false,
    "rank": 5,
-   "count": 32,
+   "count": 31,
    "top3": [
     "/help/food/today/student/",
     "/print/food/",
@@ -111,7 +113,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 94,
+   "count": 93,
    "top3": [
     "/help/food/today/student/",
     "/help/food/today/other/",
@@ -128,7 +130,7 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/how-we-check/",
     "/towns/morgantown/",
@@ -161,7 +163,7 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 21,
+   "count": 20,
    "top3": [
     "/sell-what-you-grow/",
     "/community-centers/smithtown/",
@@ -179,7 +181,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 43,
+   "count": 42,
    "top3": [
     "/help-at-home/",
     "/help/food/today/other/",
@@ -196,12 +198,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/pregnant-or-new-baby/",
     "/families-and-kids/",
     "/care/"
-   ]
+   ],
+   "searched": "wic"
   },
   {
    "q": "food stamp application",
@@ -212,7 +215,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/snap/",
     "/help/food/monthly/",
@@ -234,7 +237,8 @@
     "/help/food/monthly/",
     "/help/food/",
     "/help/what-help/food/none/"
-   ]
+   ],
+   "searched": "groceries"
   },
   {
    "q": "food for students",
@@ -245,12 +249,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 31,
+   "count": 30,
    "top3": [
     "/help/food/today/student/",
     "/for/college-students/",
     "/help/food/today/"
-   ]
+   ],
+   "searched": "food students"
   },
   {
    "q": "school lunch",
@@ -261,7 +266,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 15,
+   "count": 14,
    "top3": [
     "/school-age/",
     "/find-your-people/",
@@ -293,11 +298,10 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 3,
+   "count": 2,
    "top3": [
     "/print/living-here/",
-    "/before-you-call/",
-    "/make-a-list/"
+    "/before-you-call/"
    ]
   },
   {
@@ -308,13 +312,14 @@
     "/file-today/"
    ],
    "hit": true,
-   "rank": 3,
-   "count": 119,
+   "rank": 1,
+   "count": 19,
    "top3": [
-    "/selling-food/",
-    "/help/food/today/student/",
-    "/snap/"
-   ]
+    "/snap/",
+    "/help/food/monthly/",
+    "/for/helpers/librarians/"
+   ],
+   "searched": "food stamps"
   },
   {
    "q": "food pantrys",
@@ -326,12 +331,13 @@
    ],
    "hit": false,
    "rank": 5,
-   "count": 32,
+   "count": 31,
    "top3": [
     "/help/food/today/student/",
     "/print/food/",
-    "/money/"
-   ]
+    "/families-and-kids/"
+   ],
+   "searched": "food pantries"
   },
   {
    "q": "wick",
@@ -342,12 +348,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/pregnant-or-new-baby/",
     "/families-and-kids/",
     "/care/"
-   ]
+   ],
+   "searched": "wic"
   },
   {
    "q": "rent help",
@@ -358,13 +365,14 @@
     "/help/what-help/"
    ],
    "hit": true,
-   "rank": 2,
-   "count": 59,
+   "rank": 1,
+   "count": 67,
    "top3": [
-    "/print/housing/",
     "/renting/",
-    "/community-centers/mon-county-center/"
-   ]
+    "/print/housing/",
+    "/park-refunds/"
+   ],
+   "searched": "rent"
   },
   {
    "q": "behind on rent",
@@ -379,8 +387,9 @@
    "top3": [
     "/renting/",
     "/for/helpers/faith-leaders/",
-    "/money/"
-   ]
+    "/community-centers/halls/"
+   ],
+   "searched": "behind rent"
   },
   {
    "q": "shut off notice",
@@ -391,7 +400,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/utility-bills/",
     "/scams/",
@@ -407,7 +416,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/utility-bills/",
     "/money/",
@@ -423,7 +432,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 28,
+   "count": 27,
    "top3": [
     "/utility-bills/",
     "/moving-here/",
@@ -439,7 +448,7 @@
    ],
    "hit": true,
    "rank": 3,
-   "count": 41,
+   "count": 40,
    "top3": [
     "/home-safety/",
     "/file-today/",
@@ -455,7 +464,7 @@
    ],
    "hit": true,
    "rank": 3,
-   "count": 37,
+   "count": 36,
    "top3": [
     "/moving-here/",
     "/for/helpers/landlords/",
@@ -471,12 +480,13 @@
    ],
    "hit": false,
    "rank": 4,
-   "count": 15,
+   "count": 14,
    "top3": [
     "/moving-here/",
     "/for/helpers/landlords/",
     "/before-you-call/"
-   ]
+   ],
+   "searched": "gas bill"
   },
   {
    "q": "LIEAP",
@@ -487,12 +497,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 18,
+   "count": 17,
    "top3": [
     "/file-today/",
     "/utility-bills/",
     "/for/helpers/landlords/"
-   ]
+   ],
+   "searched": "lieap"
   },
   {
    "q": "leap heating",
@@ -501,14 +512,15 @@
     "/utility-bills/",
     "/file-today/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 3,
+   "hit": true,
+   "rank": 1,
+   "count": 17,
    "top3": [
-    "/disability-and-aging/",
-    "/print/care/",
-    "/make-a-list/"
-   ]
+    "/file-today/",
+    "/utility-bills/",
+    "/for/helpers/landlords/"
+   ],
+   "searched": "lieap heating"
   },
   {
    "q": "LIHEAP",
@@ -517,14 +529,15 @@
     "/utility-bills/",
     "/file-today/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 6,
+   "hit": true,
+   "rank": 1,
+   "count": 17,
    "top3": [
-    "/print/pets/",
-    "/veterans/",
-    "/print/living-here/"
-   ]
+    "/file-today/",
+    "/utility-bills/",
+    "/for/helpers/landlords/"
+   ],
+   "searched": "lieap"
   },
   {
    "q": "power company",
@@ -536,11 +549,11 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 23,
+   "count": 22,
    "top3": [
     "/moving-here/",
-    "/after-a-storm/",
-    "/scams/"
+    "/scams/",
+    "/after-a-storm/"
    ]
   },
   {
@@ -553,12 +566,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 52,
+   "count": 38,
    "top3": [
     "/moving-here/",
     "/after-a-storm/",
-    "/advance-directives/"
-   ]
+    "/print/weather/"
+   ],
+   "searched": "mon power"
   },
   {
    "q": "MUB",
@@ -570,12 +584,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 18,
+   "count": 17,
    "top3": [
     "/who-decides/",
     "/moving-here/",
     "/after-a-storm/"
-   ]
+   ],
+   "searched": "mub"
   },
   {
    "q": "eviction",
@@ -587,7 +602,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 17,
+   "count": 16,
    "top3": [
     "/for/helpers/faith-leaders/",
     "/money/",
@@ -604,7 +619,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 17,
+   "count": 16,
    "top3": [
     "/for/helpers/faith-leaders/",
     "/money/",
@@ -619,7 +634,7 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 5,
+   "count": 4,
    "top3": [
     "/print/legal/",
     "/print/this-month/",
@@ -634,7 +649,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/renting/",
     "/moving-here/",
@@ -650,7 +665,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 18,
+   "count": 17,
    "top3": [
     "/renting/",
     "/accessible-parking-placard/",
@@ -666,7 +681,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 14,
+   "count": 13,
    "top3": [
     "/before-you-call/",
     "/money/",
@@ -682,12 +697,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 102,
+   "count": 108,
    "top3": [
     "/file-today/",
     "/print/work/",
-    "/work-and-learning/"
-   ]
+    "/grow/"
+   ],
+   "searched": "wv works"
   },
   {
    "q": "TANF",
@@ -698,12 +714,13 @@
    ],
    "hit": false,
    "rank": 9,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/print/food/",
     "/snap/",
     "/medicaid-2027/"
-   ]
+   ],
+   "searched": "tanf"
   },
   {
    "q": "free tax help",
@@ -713,12 +730,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 53,
+   "count": 59,
    "top3": [
     "/free-tax-help/",
     "/print/taxes/",
-    "/print/money/"
-   ]
+    "/bus-passes/"
+   ],
+   "searched": "free tax"
   },
   {
    "q": "taxes",
@@ -729,7 +747,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 68,
+   "count": 67,
    "top3": [
     "/free-tax-help/",
     "/property-tax/",
@@ -744,12 +762,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/free-tax-help/",
     "/print/taxes/",
     "/print/money/"
-   ]
+   ],
+   "searched": "eitc"
   },
   {
    "q": "property tax",
@@ -759,7 +778,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 38,
+   "count": 37,
    "top3": [
     "/property-tax/",
     "/bus-passes/",
@@ -804,7 +823,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 4,
+   "count": 3,
    "top3": [
     "/holidays/",
     "/calendar/",
@@ -818,10 +837,11 @@
     "/holidays/",
     "/borrow-or-get-free/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 1,
+   "hit": true,
+   "rank": 1,
+   "count": 2,
    "top3": [
+    "/holidays/",
     "/drugs-and-alcohol/"
    ]
   },
@@ -832,12 +852,15 @@
     "/utility-bills/",
     "/money/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 1,
+   "hit": true,
+   "rank": 1,
+   "count": 33,
    "top3": [
-    "/help-in-your-language/"
-   ]
+    "/utility-bills/",
+    "/money/",
+    "/moving-here/"
+   ],
+   "searched": "utility bill"
   },
   {
    "q": "evicition",
@@ -847,12 +870,15 @@
     "/renting/",
     "/money/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 1,
+   "hit": true,
+   "rank": 2,
+   "count": 16,
    "top3": [
-    "/bus-routes/"
-   ]
+    "/for/helpers/faith-leaders/",
+    "/money/",
+    "/renting/"
+   ],
+   "searched": "eviction"
   },
   {
    "q": "warming center",
@@ -895,7 +921,7 @@
    ],
    "hit": true,
    "rank": 3,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/for/helpers/bus-drivers/",
     "/print/housing/",
@@ -911,7 +937,7 @@
    ],
    "hit": false,
    "rank": 7,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/for/helpers/bus-drivers/",
     "/veterans/",
@@ -932,7 +958,8 @@
     "/for/helpers/bus-drivers/",
     "/for/helpers/faith-leaders/",
     "/for/helpers/"
-   ]
+   ],
+   "searched": "place sleep"
   },
   {
    "q": "domestic violence",
@@ -942,7 +969,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/stay-tonight/",
     "/print/housing/",
@@ -957,7 +984,7 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 4,
+   "count": 3,
    "top3": [
     "/drugs-and-alcohol/",
     "/caregivers/",
@@ -972,59 +999,11 @@
    ],
    "hit": false,
    "rank": 4,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/",
     "/staying-well/",
     "/for/helpers/faith-leaders/"
-   ]
-  },
-  {
-   "q": 988,
-   "kind": "short",
-   "expect": [
-    "/mental-health/"
-   ],
-   "hit": true,
-   "rank": 2,
-   "count": 78,
-   "top3": [
-    "/staying-well/",
-    "/mental-health/",
-    "/for/helpers/faith-leaders/"
-   ]
-  },
-  {
-   "q": 211,
-   "kind": "short",
-   "expect": [
-    "/money/",
-    "/help/what-help/",
-    "/how-we-check/"
-   ],
-   "hit": false,
-   "rank": 4,
-   "count": 102,
-   "top3": [
-    "/for/helpers/teachers/",
-    "/tonight/",
-    "/help/food/today/other/"
-   ]
-  },
-  {
-   "q": "crisis line",
-   "kind": "everyday",
-   "expect": [
-    "/mental-health/",
-    "/stay-tonight/"
-   ],
-   "hit": true,
-   "rank": 1,
-   "count": 29,
-   "top3": [
-    "/mental-health/",
-    "/veterans/",
-    "/drugs-and-alcohol/"
    ]
   },
   {
@@ -1035,7 +1014,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 5,
+   "count": 4,
    "top3": [
     "/drugs-and-alcohol/",
     "/care/",
@@ -1050,7 +1029,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 5,
+   "count": 4,
    "top3": [
     "/drugs-and-alcohol/",
     "/care/",
@@ -1065,7 +1044,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 5,
+   "count": 4,
    "top3": [
     "/drugs-and-alcohol/",
     "/needs/",
@@ -1080,7 +1059,7 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 8,
+   "count": 7,
    "top3": [
     "/grow/",
     "/print/growing/",
@@ -1109,12 +1088,13 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 8,
+   "count": 7,
    "top3": [
     "/free-tax-help/",
     "/print/taxes/",
     "/print/money/"
-   ]
+   ],
+   "searched": "aa meetings"
   },
   {
    "q": "therapist",
@@ -1137,7 +1117,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 31,
+   "count": 30,
    "top3": [
     "/mental-health/",
     "/veterans/",
@@ -1152,7 +1132,7 @@
    ],
    "hit": true,
    "rank": 3,
-   "count": 8,
+   "count": 7,
    "top3": [
     "/print/veterans/",
     "/needs/",
@@ -1168,7 +1148,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 10,
+   "count": 9,
    "top3": [
     "/after-a-storm/",
     "/weather-alerts/",
@@ -1198,7 +1178,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 5,
+   "count": 4,
    "top3": [
     "/drugs-and-alcohol/",
     "/care/",
@@ -1227,13 +1207,15 @@
    "expect": [
     "/drugs-and-alcohol/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 2,
+   "hit": true,
+   "rank": 1,
+   "count": 4,
    "top3": [
-    "/help/food/today/student/",
-    "/money/"
-   ]
+    "/drugs-and-alcohol/",
+    "/care/",
+    "/print/care/"
+   ],
+   "searched": "narcan"
   },
   {
    "q": "sheltor",
@@ -1242,12 +1224,15 @@
     "/stay-tonight/",
     "/tonight/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 1,
+   "hit": true,
+   "rank": 1,
+   "count": 31,
    "top3": [
-    "/noise/"
-   ]
+    "/tonight/",
+    "/print/pets/",
+    "/pets/"
+   ],
+   "searched": "shelter"
   },
   {
    "q": "dentist cheap",
@@ -1271,7 +1256,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 25,
+   "count": 24,
    "top3": [
     "/dental-and-prescriptions/",
     "/for/helpers/nurses/",
@@ -1286,7 +1271,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 47,
+   "count": 46,
    "top3": [
     "/dental-and-prescriptions/",
     "/no-insurance/",
@@ -1316,13 +1301,13 @@
     "/dental-and-prescriptions/",
     "/mental-health/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 7,
+   "hit": true,
+   "rank": 1,
+   "count": 8,
    "top3": [
+    "/no-insurance/",
     "/flood-zone/",
-    "/community-centers/the-shack/",
-    "/diabetes-and-weight/"
+    "/community-centers/the-shack/"
    ]
   },
   {
@@ -1334,12 +1319,13 @@
    ],
    "hit": false,
    "rank": 4,
-   "count": 55,
+   "count": 54,
    "top3": [
     "/mental-health/",
     "/care/",
     "/diabetes-and-weight/"
-   ]
+   ],
+   "searched": "health right"
   },
   {
    "q": "medicaid",
@@ -1351,7 +1337,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 43,
+   "count": 42,
    "top3": [
     "/medicaid-2027/",
     "/file-today/",
@@ -1366,14 +1352,15 @@
     "/no-insurance/",
     "/medicaid-2027/"
    ],
-   "hit": false,
-   "rank": 6,
-   "count": 62,
+   "hit": true,
+   "rank": 1,
+   "count": 42,
    "top3": [
-    "/medical-rides/",
-    "/advance-directives/",
-    "/for/helpers/bus-drivers/"
-   ]
+    "/medicaid-2027/",
+    "/file-today/",
+    "/medicaid-waivers/"
+   ],
+   "searched": "medicaid"
   },
   {
    "q": "medicare",
@@ -1383,7 +1370,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 59,
+   "count": 58,
    "top3": [
     "/turning-65/",
     "/for/helpers/nurses/",
@@ -1396,14 +1383,15 @@
    "expect": [
     "/turning-65/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 62,
+   "hit": true,
+   "rank": 1,
+   "count": 58,
    "top3": [
-    "/medical-rides/",
-    "/advance-directives/",
-    "/for/helpers/bus-drivers/"
-   ]
+    "/turning-65/",
+    "/for/helpers/nurses/",
+    "/for/older-adults/"
+   ],
+   "searched": "medicare"
   },
   {
    "q": "prescriptions",
@@ -1413,7 +1401,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 16,
+   "count": 15,
    "top3": [
     "/dental-and-prescriptions/",
     "/for/helpers/nurses/",
@@ -1428,7 +1416,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 19,
+   "count": 18,
    "top3": [
     "/dental-and-prescriptions/",
     "/no-insurance/",
@@ -1443,7 +1431,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 13,
+   "count": 12,
    "top3": [
     "/flu-shots/",
     "/staying-well/",
@@ -1458,7 +1446,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 4,
+   "count": 3,
    "top3": [
     "/flu-shots/",
     "/care/",
@@ -1474,7 +1462,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 7,
+   "count": 6,
    "top3": [
     "/school-shots/",
     "/print/outdoors/",
@@ -1489,7 +1477,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 8,
+   "count": 7,
    "top3": [
     "/school-shots/",
     "/disability-and-aging/",
@@ -1504,7 +1492,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 13,
+   "count": 12,
    "top3": [
     "/birth-control-and-testing/",
     "/pregnant-or-new-baby/",
@@ -1517,14 +1505,13 @@
    "expect": [
     "/birth-control-and-testing/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 7,
+   "hit": true,
+   "rank": 1,
+   "count": 1,
    "top3": [
-    "/print/living-here/",
-    "/print/work/",
-    "/before-you-call/"
-   ]
+    "/birth-control-and-testing/"
+   ],
+   "searched": "std testing"
   },
   {
    "q": "pregnancy test",
@@ -1535,7 +1522,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/birth-control-and-testing/",
     "/pregnant-or-new-baby/",
@@ -1550,7 +1537,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 14,
+   "count": 13,
    "top3": [
     "/pregnant-or-new-baby/",
     "/families-and-kids/",
@@ -1565,7 +1552,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 8,
+   "count": 7,
    "top3": [
     "/diabetes-and-weight/",
     "/care/",
@@ -1578,14 +1565,15 @@
    "expect": [
     "/medical-rides/"
    ],
-   "hit": false,
-   "rank": null,
+   "hit": true,
+   "rank": 1,
    "count": 12,
    "top3": [
+    "/medical-rides/",
     "/getting-around/example/",
-    "/care/",
-    "/print/disability/"
-   ]
+    "/care/"
+   ],
+   "searched": "ride doctor"
   },
   {
    "q": "medical transportation",
@@ -1593,13 +1581,13 @@
    "expect": [
     "/medical-rides/"
    ],
-   "hit": false,
-   "rank": 4,
-   "count": 15,
+   "hit": true,
+   "rank": 1,
+   "count": 14,
    "top3": [
+    "/medical-rides/",
     "/needs/",
-    "/for/helpers/nurses/",
-    "/print/care/"
+    "/for/helpers/nurses/"
    ]
   },
   {
@@ -1610,12 +1598,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 49,
+   "count": 106,
    "top3": [
     "/advance-directives/",
-    "/disability-and-aging/",
-    "/when-someone-dies/"
-   ]
+    "/living-here/",
+    "/print/living-here/"
+   ],
+   "searched": "living"
   },
   {
    "q": "power of attorney",
@@ -1625,12 +1614,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 15,
+   "count": 14,
    "top3": [
     "/advance-directives/",
     "/scams/",
     "/internet/"
-   ]
+   ],
+   "searched": "power attorney"
   },
   {
    "q": "nursing home",
@@ -1641,7 +1631,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 20,
+   "count": 19,
    "top3": [
     "/for/helpers/nurses/",
     "/help-at-home/",
@@ -1656,12 +1646,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 9,
+   "count": 8,
    "top3": [
     "/help-at-home/",
     "/print/disability/",
     "/before-you-call/"
-   ]
+   ],
+   "searched": "meals wheels"
   },
   {
    "q": "home health aide",
@@ -1670,13 +1661,13 @@
     "/help-at-home/",
     "/medicaid-waivers/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 20,
+   "hit": true,
+   "rank": 2,
+   "count": 19,
    "top3": [
     "/caregivers/",
-    "/print/care/",
-    "/print/family/"
+    "/help-at-home/",
+    "/print/care/"
    ]
   },
   {
@@ -1685,13 +1676,13 @@
    "expect": [
     "/caregivers/"
    ],
-   "hit": false,
-   "rank": 4,
-   "count": 10,
+   "hit": true,
+   "rank": 2,
+   "count": 9,
    "top3": [
     "/help-at-home/",
-    "/for/helpers/faith-leaders/",
-    "/for/helpers/nurses/"
+    "/caregivers/",
+    "/for/helpers/faith-leaders/"
    ]
   },
   {
@@ -1702,7 +1693,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 10,
+   "count": 9,
    "top3": [
     "/help-in-your-language/",
     "/legal-help/",
@@ -1717,7 +1708,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/help-in-your-language/",
     "/print/government/",
@@ -1730,12 +1721,15 @@
    "expect": [
     "/dental-and-prescriptions/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 1,
+   "hit": true,
+   "rank": 1,
+   "count": 24,
    "top3": [
-    "/bus-routes/"
-   ]
+    "/dental-and-prescriptions/",
+    "/for/helpers/nurses/",
+    "/no-insurance/"
+   ],
+   "searched": "dentist"
   },
   {
    "q": "perscriptions",
@@ -1743,14 +1737,15 @@
    "expect": [
     "/dental-and-prescriptions/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 31,
+   "hit": true,
+   "rank": 1,
+   "count": 15,
    "top3": [
-    "/health-department-fees/",
-    "/sell-what-you-grow/",
-    "/borrow-or-get-free/"
-   ]
+    "/dental-and-prescriptions/",
+    "/for/helpers/nurses/",
+    "/no-insurance/"
+   ],
+   "searched": "prescriptions"
   },
   {
    "q": "obamacare",
@@ -1771,12 +1766,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 30,
+   "count": 36,
    "top3": [
     "/vote/",
     "/print/voting/",
     "/living-here/"
-   ]
+   ],
+   "searched": "vote"
   },
   {
    "q": "register to vote",
@@ -1786,12 +1782,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 21,
+   "count": 20,
    "top3": [
     "/vote/",
     "/print/voting/",
     "/living-here/"
-   ]
+   ],
+   "searched": "register vote"
   },
   {
    "q": "polling place",
@@ -1801,7 +1798,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/vote/",
     "/volunteer/",
@@ -1816,7 +1813,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 8,
+   "count": 7,
    "top3": [
     "/vote/",
     "/living-here/",
@@ -1833,7 +1830,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 32,
+   "count": 31,
    "top3": [
     "/towns/star-city/",
     "/meetings/",
@@ -1850,7 +1847,7 @@
    ],
    "hit": true,
    "rank": 3,
-   "count": 65,
+   "count": 64,
    "top3": [
     "/make-it-better/boards/",
     "/meetings/agendas/",
@@ -1865,13 +1862,13 @@
     "/who-decides/",
     "/meetings/agendas/"
    ],
-   "hit": false,
-   "rank": 4,
-   "count": 55,
+   "hit": true,
+   "rank": 2,
+   "count": 54,
    "top3": [
     "/meetings/",
-    "/towns/granville/",
-    "/towns/blacksville/"
+    "/have-your-say/",
+    "/towns/granville/"
    ]
   },
   {
@@ -1915,12 +1912,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 4,
+   "count": 3,
    "top3": [
     "/public-records/",
     "/print/government/",
     "/print/community/"
-   ]
+   ],
+   "searched": "foia"
   },
   {
    "q": "public records",
@@ -1930,7 +1928,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 39,
+   "count": 38,
    "top3": [
     "/public-records/",
     "/print/records/",
@@ -1945,7 +1943,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 7,
+   "count": 6,
    "top3": [
     "/make-it-better/report/",
     "/print/government/",
@@ -1960,7 +1958,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 7,
+   "count": 6,
    "top3": [
     "/make-it-better/report/",
     "/print/government/",
@@ -1978,7 +1976,8 @@
    "count": 1,
    "top3": [
     "/make-it-better/report/"
-   ]
+   ],
+   "searched": "streetlight"
   },
   {
    "q": "graffiti",
@@ -1988,7 +1987,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 7,
+   "count": 6,
    "top3": [
     "/make-it-better/report/",
     "/print/better/",
@@ -2003,7 +2002,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/make-it-better/report/",
     "/print/recycling/",
@@ -2018,7 +2017,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 62,
+   "count": 61,
    "top3": [
     "/make-it-better/boards/",
     "/meetings/",
@@ -2033,7 +2032,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 25,
+   "count": 24,
    "top3": [
     "/permits/",
     "/health-department-fees/",
@@ -2062,9 +2061,8 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 2,
+   "count": 1,
    "top3": [
-    "/make-a-list/",
     "/print/family/"
    ]
   },
@@ -2076,7 +2074,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 8,
+   "count": 7,
    "top3": [
     "/legal-help/",
     "/print/government/",
@@ -2089,13 +2087,13 @@
    "expect": [
     "/legal-help/"
    ],
-   "hit": false,
-   "rank": 6,
-   "count": 9,
+   "hit": true,
+   "rank": 1,
+   "count": 8,
    "top3": [
+    "/legal-help/",
     "/for/",
-    "/print/legal/",
-    "/community/"
+    "/print/legal/"
    ]
   },
   {
@@ -2106,7 +2104,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/legal-help/",
     "/print/legal/",
@@ -2121,7 +2119,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/legal-help/",
     "/print/legal/",
@@ -2135,8 +2133,8 @@
     "/legal-help/"
    ],
    "hit": false,
-   "rank": null,
-   "count": 21,
+   "rank": 5,
+   "count": 20,
    "top3": [
     "/advance-directives/",
     "/internet/",
@@ -2151,7 +2149,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 12,
+   "count": 11,
    "top3": [
     "/legal-help/",
     "/print/legal/",
@@ -2166,7 +2164,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 9,
+   "count": 8,
    "top3": [
     "/advance-directives/",
     "/legal-help/",
@@ -2181,7 +2179,7 @@
    ],
    "hit": false,
    "rank": 7,
-   "count": 18,
+   "count": 17,
    "top3": [
     "/noise/",
     "/towns/osage/",
@@ -2211,7 +2209,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 37,
+   "count": 36,
    "top3": [
     "/make-it-better/grants/",
     "/pay-for-training/",
@@ -2224,14 +2222,15 @@
    "expect": [
     "/legal-help/"
    ],
-   "hit": false,
-   "rank": 7,
-   "count": 44,
+   "hit": true,
+   "rank": 1,
+   "count": 10,
    "top3": [
-    "/burning/",
-    "/renting/",
-    "/public-records/"
-   ]
+    "/legal-help/",
+    "/print/legal/",
+    "/print/this-month/"
+   ],
+   "searched": "lawyer"
   },
   {
    "q": "pot holes",
@@ -2241,10 +2240,9 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 2,
+   "count": 1,
    "top3": [
-    "/print/community/",
-    "/make-a-list/"
+    "/print/community/"
    ]
   },
   {
@@ -2257,12 +2255,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 17,
+   "count": 16,
    "top3": [
     "/ids-and-records/",
     "/car-registration/",
     "/drivers-license/"
-   ]
+   ],
+   "searched": "dmv"
   },
   {
    "q": "drivers license",
@@ -2273,7 +2272,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 28,
+   "count": 27,
    "top3": [
     "/drivers-license/",
     "/teen-drivers/",
@@ -2286,13 +2285,13 @@
    "expect": [
     "/teen-drivers/"
    ],
-   "hit": false,
-   "rank": null,
+   "hit": true,
+   "rank": 2,
    "count": 4,
    "top3": [
     "/teens/",
-    "/family/",
-    "/print/family/"
+    "/teen-drivers/",
+    "/family/"
    ]
   },
   {
@@ -2303,7 +2302,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 38,
+   "count": 37,
    "top3": [
     "/car-registration/",
     "/before-you-call/",
@@ -2318,7 +2317,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/car-registration/",
     "/before-you-call/",
@@ -2334,12 +2333,13 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 17,
+   "count": 16,
    "top3": [
     "/the-idea/",
     "/ids-and-records/",
     "/print/records/"
-   ]
+   ],
+   "searched": "real id"
   },
   {
    "q": "birth certificate",
@@ -2349,7 +2349,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 16,
+   "count": 15,
    "top3": [
     "/ids-and-records/",
     "/print/records/",
@@ -2362,13 +2362,13 @@
    "expect": [
     "/accessible-parking-placard/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 3,
+   "hit": true,
+   "rank": 1,
+   "count": 4,
    "top3": [
+    "/accessible-parking-placard/",
     "/parking/",
-    "/family/",
-    "/print/disability/"
+    "/family/"
    ]
   },
   {
@@ -2380,7 +2380,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 30,
+   "count": 29,
    "top3": [
     "/bus-routes/",
     "/getting-around/",
@@ -2396,7 +2396,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 79,
+   "count": 78,
    "top3": [
     "/bus-passes/",
     "/getting-around/example/",
@@ -2412,12 +2412,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 53,
+   "count": 52,
    "top3": [
     "/bus-routes/",
     "/getting-around/example/",
     "/getting-around/"
-   ]
+   ],
+   "searched": "mountain line"
   },
   {
    "q": "bus to hospital",
@@ -2428,12 +2429,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 24,
+   "count": 23,
    "top3": [
     "/getting-around/",
     "/getting-around/example/",
     "/print/care/"
-   ]
+   ],
+   "searched": "bus hospital"
   },
   {
    "q": "parking ticket",
@@ -2443,7 +2445,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 15,
+   "count": 14,
    "top3": [
     "/parking/",
     "/print/moving/",
@@ -2458,7 +2460,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 10,
+   "count": 9,
    "top3": [
     "/parking/",
     "/print/moving/",
@@ -2473,7 +2475,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 22,
+   "count": 21,
    "top3": [
     "/car-seat-checks/",
     "/getting-around/example/",
@@ -2489,7 +2491,7 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 10,
+   "count": 9,
    "top3": [
     "/print/moving/",
     "/teen-drivers/",
@@ -2504,14 +2506,15 @@
     "/contractor-license/",
     "/teen-drivers/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 6,
+   "hit": true,
+   "rank": 1,
+   "count": 61,
    "top3": [
-    "/print/pets/",
-    "/veterans/",
-    "/print/living-here/"
-   ]
+    "/contractor-license/",
+    "/teen-drivers/",
+    "/drivers-license/"
+   ],
+   "searched": "license"
   },
   {
    "q": "trash day",
@@ -2520,12 +2523,12 @@
     "/recycling/"
    ],
    "hit": true,
-   "rank": 3,
-   "count": 29,
+   "rank": 1,
+   "count": 28,
    "top3": [
+    "/recycling/",
     "/print/recycling/",
-    "/moving-here/",
-    "/recycling/"
+    "/moving-here/"
    ]
   },
   {
@@ -2534,13 +2537,13 @@
    "expect": [
     "/recycling/"
    ],
-   "hit": false,
-   "rank": null,
+   "hit": true,
+   "rank": 2,
    "count": 7,
    "top3": [
     "/print/recycling/",
-    "/moving-here/",
-    "/print/moving/"
+    "/recycling/",
+    "/moving-here/"
    ]
   },
   {
@@ -2551,11 +2554,11 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 32,
+   "count": 31,
    "top3": [
     "/recycling/",
     "/print/recycling/",
-    "/corrections/"
+    "/"
    ]
   },
   {
@@ -2580,7 +2583,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/recycling/",
     "/make-it-better/report/",
@@ -2610,10 +2613,9 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 2,
+   "count": 1,
    "top3": [
-    "/recycling/",
-    "/make-a-list/"
+    "/recycling/"
    ]
   },
   {
@@ -2635,12 +2637,15 @@
    "expect": [
     "/burning/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 1,
+   "hit": true,
+   "rank": 1,
+   "count": 14,
    "top3": [
-    "/make-a-list/"
-   ]
+    "/burning/",
+    "/home-safety/",
+    "/living-here/"
+   ],
+   "loose": true
   },
   {
    "q": "leaf pickup",
@@ -2651,10 +2656,9 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 2,
+   "count": 1,
    "top3": [
-    "/print/living-here/",
-    "/make-a-list/"
+    "/print/living-here/"
    ]
   },
   {
@@ -2663,12 +2667,12 @@
    "expect": [
     "/snow-and-ice/"
    ],
-   "hit": false,
-   "rank": null,
+   "hit": true,
+   "rank": 1,
    "count": 2,
    "top3": [
-    "/burning/",
-    "/make-a-list/"
+    "/snow-and-ice/",
+    "/burning/"
    ]
   },
   {
@@ -2680,7 +2684,7 @@
    ],
    "hit": true,
    "rank": 3,
-   "count": 34,
+   "count": 33,
    "top3": [
     "/school-age/",
     "/for/parents-school-age/",
@@ -2708,7 +2712,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/home-safety/",
     "/the-idea/",
@@ -2723,7 +2727,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 15,
+   "count": 14,
    "top3": [
     "/septic-and-wells/",
     "/for/homeowners/",
@@ -2738,7 +2742,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 10,
+   "count": 9,
    "top3": [
     "/septic-and-wells/",
     "/for/homeowners/",
@@ -2753,7 +2757,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 22,
+   "count": 21,
    "top3": [
     "/internet/",
     "/for/remote-workers/",
@@ -2768,7 +2772,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 13,
+   "count": 12,
    "top3": [
     "/internet/",
     "/find-a-job/",
@@ -2798,7 +2802,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 42,
+   "count": 41,
    "top3": [
     "/utility-bills/",
     "/moving-here/",
@@ -2813,7 +2817,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/pets/",
     "/before-you-call/",
@@ -2828,7 +2832,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 7,
+   "count": 6,
    "top3": [
     "/pets/",
     "/print/pets/",
@@ -2843,7 +2847,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 10,
+   "count": 9,
    "top3": [
     "/soil-test/",
     "/grow/",
@@ -2856,14 +2860,15 @@
    "expect": [
     "/recycling/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 10,
+   "hit": true,
+   "rank": 1,
+   "count": 31,
    "top3": [
-    "/park-refunds/",
-    "/community-centers/marilla-recreation-center/",
-    "/community-centers/"
-   ]
+    "/recycling/",
+    "/print/recycling/",
+    "/"
+   ],
+   "searched": "recycling"
   },
   {
    "q": "garbage",
@@ -2871,13 +2876,13 @@
    "expect": [
     "/recycling/"
    ],
-   "hit": false,
-   "rank": null,
+   "hit": true,
+   "rank": 2,
    "count": 7,
    "top3": [
     "/print/recycling/",
-    "/print/moving/",
-    "/moving-here/"
+    "/recycling/",
+    "/print/moving/"
    ]
   },
   {
@@ -2888,7 +2893,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 79,
+   "count": 78,
    "top3": [
     "/find-a-job/",
     "/for/job-seekers/",
@@ -2905,7 +2910,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 34,
+   "count": 33,
    "top3": [
     "/pay-for-training/",
     "/work-and-learning/",
@@ -2920,12 +2925,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 16,
+   "count": 15,
    "top3": [
     "/find-a-job/",
     "/for/veterans/",
     "/for/job-seekers/"
-   ]
+   ],
+   "searched": "resume"
   },
   {
    "q": "GED",
@@ -2939,7 +2945,8 @@
    "top3": [
     "/medicaid-2027/",
     "/work-and-learning/"
-   ]
+   ],
+   "searched": "ged"
   },
   {
    "q": "English classes",
@@ -2950,12 +2957,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 22,
+   "count": 21,
    "top3": [
     "/work-and-learning/",
     "/help-in-your-language/",
     "/for/job-seekers/"
-   ]
+   ],
+   "searched": "english classes"
   },
   {
    "q": "daycare",
@@ -2964,13 +2972,11 @@
     "/families-and-kids/",
     "/school-age/"
    ],
-   "hit": false,
-   "rank": 6,
-   "count": 181,
+   "hit": true,
+   "rank": 1,
+   "count": 1,
    "top3": [
-    "/living-here/",
-    "/holidays/",
-    "/vote/"
+    "/families-and-kids/"
    ]
   },
   {
@@ -2981,7 +2987,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 65,
+   "count": 64,
    "top3": [
     "/families-and-kids/",
     "/pregnant-or-new-baby/",
@@ -2996,7 +3002,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 13,
+   "count": 12,
    "top3": [
     "/families-and-kids/",
     "/family/",
@@ -3012,7 +3018,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/families-and-kids/",
     "/print/food/",
@@ -3027,7 +3033,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 50,
+   "count": 49,
    "top3": [
     "/school-age/",
     "/for/parents-school-age/",
@@ -3042,7 +3048,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 16,
+   "count": 15,
    "top3": [
     "/teens/",
     "/school-age/",
@@ -3057,7 +3063,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 13,
+   "count": 12,
    "top3": [
     "/teen-drivers/",
     "/teens/",
@@ -3072,7 +3078,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 63,
+   "count": 62,
    "top3": [
     "/volunteer/",
     "/community-centers/cheat-lake-vfd-hall/",
@@ -3087,7 +3093,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 41,
+   "count": 40,
    "top3": [
     "/for/helpers/librarians/",
     "/meet-people/",
@@ -3103,12 +3109,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 47,
+   "count": 46,
    "top3": [
     "/start-a-business/",
     "/business/",
     "/business-by-town/"
-   ]
+   ],
+   "searched": "start business"
   },
   {
    "q": "business license",
@@ -3119,7 +3126,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 28,
+   "count": 27,
    "top3": [
     "/contractor-license/",
     "/business-by-town/",
@@ -3134,7 +3141,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 9,
+   "count": 8,
    "top3": [
     "/selling-food/",
     "/health-department-fees/",
@@ -3150,7 +3157,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 28,
+   "count": 27,
    "top3": [
     "/start-a-group/",
     "/selling-food/",
@@ -3165,12 +3172,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 34,
+   "count": 33,
    "top3": [
     "/veterans/",
     "/mental-health/",
     "/print/veterans/"
-   ]
+   ],
+   "searched": "va clinic"
   },
   {
    "q": "veterans",
@@ -3181,7 +3189,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 58,
+   "count": 57,
    "top3": [
     "/print/veterans/",
     "/veterans/",
@@ -3196,7 +3204,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 9,
+   "count": 8,
    "top3": [
     "/when-someone-dies/",
     "/print/records/",
@@ -3212,7 +3220,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 10,
    "top3": [
     "/when-someone-dies/",
     "/ids-and-records/",
@@ -3227,7 +3235,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 7,
+   "count": 6,
    "top3": [
     "/thrift-shops/",
     "/start-something/",
@@ -3273,7 +3281,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/start-something/",
     "/markets/",
@@ -3289,7 +3297,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 18,
+   "count": 17,
    "top3": [
     "/sell-what-you-grow/",
     "/markets/",
@@ -3303,14 +3311,15 @@
     "/community-centers/halls/",
     "/community-centers/"
    ],
-   "hit": false,
-   "rank": 4,
-   "count": 28,
+   "hit": true,
+   "rank": 3,
+   "count": 27,
    "top3": [
     "/renting/",
-    "/community-centers/cheat-lake-vfd-hall/",
-    "/print/housing/"
-   ]
+    "/print/housing/",
+    "/community-centers/"
+   ],
+   "searched": "rent hall"
   },
   {
    "q": "community center",
@@ -3320,7 +3329,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 102,
+   "count": 101,
    "top3": [
     "/community-centers/",
     "/community-centers/arnettsville/",
@@ -3335,7 +3344,7 @@
    ],
    "hit": true,
    "rank": 3,
-   "count": 26,
+   "count": 25,
    "top3": [
     "/health-department-fees/",
     "/park-refunds/",
@@ -3350,7 +3359,7 @@
    ],
    "hit": true,
    "rank": 2,
-   "count": 13,
+   "count": 12,
    "top3": [
     "/for/outdoor-and-active/",
     "/parks/",
@@ -3369,7 +3378,7 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 51,
+   "count": 50,
    "top3": [
     "/community-centers/westside-senior-center/",
     "/community-centers/clay-battelle-senior-center/",
@@ -3383,14 +3392,13 @@
     "/families-and-kids/",
     "/school-age/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 71,
+   "hit": true,
+   "rank": 1,
+   "count": 1,
    "top3": [
-    "/before-you-call/",
-    "/disability-and-aging/",
-    "/legal-help/"
-   ]
+    "/families-and-kids/"
+   ],
+   "searched": "daycare cost"
   },
   {
    "q": "volenteer",
@@ -3398,12 +3406,15 @@
    "expect": [
     "/volunteer/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 1,
+   "hit": true,
+   "rank": 1,
+   "count": 62,
    "top3": [
-    "/veterans/"
-   ]
+    "/volunteer/",
+    "/community-centers/cheat-lake-vfd-hall/",
+    "/towns/cheat-lake/"
+   ],
+   "searched": "volunteer"
   },
   {
    "q": "I can't pay my heating bill",
@@ -3414,12 +3425,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 4,
+   "count": 37,
    "top3": [
-    "/money/",
-    "/living-here/",
-    "/make-a-list/"
-   ]
+    "/utility-bills/",
+    "/home-safety/",
+    "/money/"
+   ],
+   "searched": "pay heating bill"
   },
   {
    "q": "where is a food pantry open this week",
@@ -3431,12 +3443,13 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 11,
+   "count": 12,
    "top3": [
     "/help/food/today/student/",
-    "/print/food/",
-    "/money/"
-   ]
+    "/money/",
+    "/print/food/"
+   ],
+   "searched": "food pantry open week"
   },
   {
    "q": "my water is about to be shut off",
@@ -3447,12 +3460,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 9,
    "top3": [
-    "/money/",
-    "/before-you-call/",
-    "/print/money/"
-   ]
+    "/utility-bills/",
+    "/for/helpers/teachers/",
+    "/for/helpers/"
+   ],
+   "searched": "water shut off"
   },
   {
    "q": "how do I apply for food stamps",
@@ -3463,12 +3477,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 15,
+   "count": 18,
    "top3": [
     "/snap/",
     "/help/food/monthly/",
-    "/file-today/"
-   ]
+    "/for/helpers/librarians/"
+   ],
+   "searched": "apply food stamps"
   },
   {
    "q": "where can I see a doctor with no insurance",
@@ -3476,14 +3491,15 @@
    "expect": [
     "/no-insurance/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 11,
+   "hit": true,
+   "rank": 1,
+   "count": 16,
    "top3": [
+    "/no-insurance/",
     "/flu-shots/",
-    "/school-shots/",
-    "/staying-well/"
-   ]
+    "/school-shots/"
+   ],
+   "searched": "see doctor no insurance"
   },
   {
    "q": "where can I get a free flu shot",
@@ -3493,12 +3509,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 9,
+   "count": 12,
    "top3": [
     "/flu-shots/",
     "/staying-well/",
     "/care/"
-   ]
+   ],
+   "searched": "free flu shot"
   },
   {
    "q": "I need a dentist but have no insurance",
@@ -3508,12 +3525,13 @@
    ],
    "hit": false,
    "rank": null,
-   "count": 4,
+   "count": 3,
    "top3": [
     "/print/care/",
-    "/needs/",
-    "/mental-health/"
-   ]
+    "/mental-health/",
+    "/needs/"
+   ],
+   "searched": "dentist but no insurance"
   },
   {
    "q": "what license do I need to open a business",
@@ -3523,13 +3541,14 @@
     "/business-by-town/"
    ],
    "hit": true,
-   "rank": 1,
-   "count": 20,
+   "rank": 2,
+   "count": 21,
    "top3": [
+    "/contractor-license/",
     "/business-by-town/",
-    "/start-a-business/",
-    "/family/"
-   ]
+    "/start-a-business/"
+   ],
+   "searched": "license open business"
   },
   {
    "q": "how do I speak at city council",
@@ -3539,12 +3558,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 10,
+   "count": 11,
    "top3": [
     "/have-your-say/",
     "/meetings/how-to-read-an-agenda/",
     "/make-it-better/boards/"
-   ]
+   ],
+   "searched": "speak city council"
   },
   {
    "q": "how do I report a pothole",
@@ -3552,14 +3572,15 @@
    "expect": [
     "/make-it-better/report/"
    ],
-   "hit": false,
-   "rank": null,
+   "hit": true,
+   "rank": 1,
    "count": 5,
    "top3": [
+    "/make-it-better/report/",
     "/print/government/",
-    "/community/",
-    "/print/community/"
-   ]
+    "/community/"
+   ],
+   "searched": "report pothole"
   },
   {
    "q": "when is trash pickup",
@@ -3567,14 +3588,15 @@
    "expect": [
     "/recycling/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 20,
+   "hit": true,
+   "rank": 2,
+   "count": 24,
    "top3": [
     "/moving-here/",
-    "/print/recycling/",
-    "/living-here/"
-   ]
+    "/recycling/",
+    "/print/recycling/"
+   ],
+   "searched": "trash pickup"
   },
   {
    "q": "can I put glass in my recycling bin",
@@ -3587,7 +3609,8 @@
    "count": 1,
    "top3": [
     "/recycling/"
-   ]
+   ],
+   "searched": "put glass recycling bin"
   },
   {
    "q": "where can I drop off old paint",
@@ -3597,12 +3620,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 6,
+   "count": 5,
    "top3": [
     "/recycling/",
     "/calendar/",
-    "/pulse/"
-   ]
+    "/living-here/"
+   ],
+   "searched": "drop off old paint"
   },
   {
    "q": "I'm being evicted",
@@ -3613,13 +3637,14 @@
     "/money/"
    ],
    "hit": true,
-   "rank": 1,
-   "count": 5,
+   "rank": 2,
+   "count": 11,
    "top3": [
+    "/for/helpers/faith-leaders/",
     "/money/",
-    "/print/legal/",
-    "/print/this-month/"
-   ]
+    "/renting/"
+   ],
+   "searched": "being evicted"
   },
   {
    "q": "where can I stay tonight",
@@ -3630,12 +3655,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 15,
+   "count": 21,
    "top3": [
     "/stay-tonight/",
     "/tonight/",
     "/help/what-help/stay/older/"
-   ]
+   ],
+   "searched": "stay tonight"
   },
   {
    "q": "which bus goes to the hospital",
@@ -3646,12 +3672,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 7,
+   "count": 10,
    "top3": [
     "/getting-around/",
     "/getting-around/example/",
-    "/living-here/"
-   ]
+    "/family/"
+   ],
+   "searched": "bus goes hospital"
   },
   {
    "q": "how do I register to vote",
@@ -3661,12 +3688,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 17,
+   "count": 20,
    "top3": [
     "/vote/",
-    "/living-here/",
-    "/print/living-here/"
-   ]
+    "/print/voting/",
+    "/living-here/"
+   ],
+   "searched": "register vote"
   },
   {
    "q": "how can I serve on a city board",
@@ -3676,12 +3704,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 38,
+   "count": 52,
    "top3": [
     "/make-it-better/boards/",
-    "/have-your-say/",
-    "/who-decides/"
-   ]
+    "/moving-here/",
+    "/who-serves-me/"
+   ],
+   "searched": "serve city board"
   },
   {
    "q": "how do I get my soil tested",
@@ -3696,7 +3725,8 @@
     "/soil-test/",
     "/grow/",
     "/print/growing/"
-   ]
+   ],
+   "searched": "soil tested"
   },
   {
    "q": "what's wrong with my plants",
@@ -3711,7 +3741,8 @@
     "/plant-problems/",
     "/grow/",
     "/soil-test/"
-   ]
+   ],
+   "searched": "wrong plants"
   },
   {
    "q": "where can I borrow a drill",
@@ -3719,12 +3750,16 @@
    "expect": [
     "/borrow-or-get-free/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 1,
+   "hit": true,
+   "rank": 1,
+   "count": 24,
    "top3": [
-    "/make-a-list/"
-   ]
+    "/borrow-or-get-free/",
+    "/septic-and-wells/",
+    "/sell-or-donate/"
+   ],
+   "searched": "borrow drill",
+   "loose": true
   },
   {
    "q": "where can I sell kids clothes",
@@ -3734,13 +3769,14 @@
     "/thrift-shops/"
    ],
    "hit": true,
-   "rank": 1,
-   "count": 9,
+   "rank": 2,
+   "count": 10,
    "top3": [
+    "/start-something/",
     "/sell-or-donate/",
-    "/thrift-shops/",
-    "/holidays/"
-   ]
+    "/thrift-shops/"
+   ],
+   "searched": "sell kids clothes"
   },
   {
    "q": "is the warming shelter open tonight",
@@ -3755,7 +3791,8 @@
    "top3": [
     "/tonight/",
     "/stay-tonight/"
-   ]
+   ],
+   "searched": "warming shelter open tonight"
   },
   {
    "q": "where do I get narcan",
@@ -3763,14 +3800,15 @@
    "expect": [
     "/drugs-and-alcohol/"
    ],
-   "hit": false,
-   "rank": null,
+   "hit": true,
+   "rank": 1,
    "count": 4,
    "top3": [
+    "/drugs-and-alcohol/",
     "/care/",
-    "/print/care/",
-    "/needs/"
-   ]
+    "/print/care/"
+   ],
+   "searched": "narcan"
   },
   {
    "q": "who do I call about a pothole",
@@ -3778,14 +3816,15 @@
    "expect": [
     "/make-it-better/report/"
    ],
-   "hit": false,
-   "rank": null,
+   "hit": true,
+   "rank": 1,
    "count": 6,
    "top3": [
+    "/make-it-better/report/",
     "/print/government/",
-    "/community/",
-    "/print/moving/"
-   ]
+    "/print/community/"
+   ],
+   "searched": "call pothole"
   },
   {
    "q": "how do I get a birth certificate",
@@ -3795,12 +3834,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 11,
+   "count": 15,
    "top3": [
     "/ids-and-records/",
-    "/before-you-call/",
-    "/print/living-here/"
-   ]
+    "/print/records/",
+    "/before-you-call/"
+   ],
+   "searched": "birth certificate"
   },
   {
    "q": "what day is my trash picked up",
@@ -3808,14 +3848,15 @@
    "expect": [
     "/recycling/"
    ],
-   "hit": false,
-   "rank": 5,
-   "count": 15,
+   "hit": true,
+   "rank": 3,
+   "count": 23,
    "top3": [
-    "/living-here/",
+    "/print/recycling/",
     "/moving-here/",
-    "/towns/morgantown/"
-   ]
+    "/recycling/"
+   ],
+   "searched": "day trash picked"
   },
   {
    "q": "do I need a permit to build a deck",
@@ -3825,12 +3866,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 7,
+   "count": 6,
    "top3": [
     "/permits/",
     "/print/community/",
-    "/print/living-here/"
-   ]
+    "/print/moving/"
+   ],
+   "searched": "permit build deck"
   },
   {
    "q": "where can I volunteer this weekend",
@@ -3840,12 +3882,13 @@
    ],
    "hit": true,
    "rank": 1,
-   "count": 12,
+   "count": 15,
    "top3": [
     "/volunteer/",
-    "/for/teens/",
-    "/for/people-who-want-to-help/"
-   ]
+    "/for/remote-workers/",
+    "/for/teens/"
+   ],
+   "searched": "volunteer weekend"
   },
   {
    "q": "how do I keep my medicaid",
@@ -3853,14 +3896,15 @@
    "expect": [
     "/medicaid-2027/"
    ],
-   "hit": false,
-   "rank": null,
-   "count": 11,
+   "hit": true,
+   "rank": 1,
+   "count": 14,
    "top3": [
+    "/medicaid-2027/",
     "/care/",
-    "/for/job-seekers/",
-    "/make-a-list/"
-   ]
+    "/for/job-seekers/"
+   ],
+   "searched": "keep medicaid"
   }
  ]
 }
