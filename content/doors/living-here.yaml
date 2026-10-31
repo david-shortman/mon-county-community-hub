@@ -22,6 +22,10 @@ steps:
     when: opens
     resource: mon-swa-ask-about-trash
     text: Tires and electronics go to collection days. Check "Dates for this" on this page, or call the Solid Waste Authority to ask about the next one.
+  dmv-office:
+    when: week
+    resource: wv-dmv-morgantown-office
+    text: Read the DMV's rules for new residents, then walk in or make an appointment at the Morgantown DMV office.
   power-out:
     when: today
     resource: mon-power-report-outage
@@ -43,6 +47,10 @@ situations:
     label: I have tires or electronics to get rid of
     page: /recycling/#hard-items
     steps: [hard-items]
+  - id: license
+    label: I need a West Virginia driver's license or plates
+    page: /drivers-license/
+    steps: [dmv-office]
   - id: storm
     label: Storm damage, flooding or power out
     page: /after-a-storm/
