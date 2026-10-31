@@ -9,6 +9,22 @@ const today = todayYmd();
 const items = upcoming(await loadCalendarWithFeeds(), today, 62);
 const now = items.filter((e) => e.starts <= today);
 const later = items.filter((e) => e.starts > today);
+// Coming up, one week at a time (#1033). Each week is a <details>, so a keyboard
+// user moves past a closed week with one Tab, not dozens. The next 7 days start
+// open. It works with no script; the script below only opens a week when a link
+// points into it.
+const addDays = (d, n) => { const x = new Date(`${d}T12:00:00Z`); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); };
+const daysAfter = (a, b) => Math.round((Date.parse(`${b}T12:00:00Z`) - Date.parse(`${a}T12:00:00Z`)) / 864e5);
+const monthDay = (d) => new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' }).format(new Date(`${d}T12:00:00Z`)).split(' ');
+const span = (a, b) => { const [ma, da] = monthDay(a); const [mb, db] = monthDay(b); return ma === mb ? `${ma} ${da} to ${db}` : `${ma} ${da} to ${mb} ${db}`; };
+const weeks = [];
+for (const e of later) {
+  const k = Math.floor((daysAfter(today, e.starts) - 1) / 7);
+  weeks[k] ??= { id: `week-${addDays(today, 7 * k + 1)}`, label: (k === 0 ? 'Next 7 days: ' : '') + span(addDays(today, 7 * k + 1), addDays(today, 7 * k + 7)), list: [] };
+  weeks[k].list.push(e);
+}
+const weekList = weeks.filter(Boolean);
+const nDates = (n) => `${n} ${n === 1 ? 'date' : 'dates'}`;
 // The page date is never older than an item's checked date (#51): the build
 // can run late in the evening, Morgantown time, after a check was logged.
 const updated = [today, ...items.flatMap((e) => (e.sources ?? []).map((s) => ymd(s.checked)))].filter(Boolean).sort().at(-1);
@@ -20,6 +36,13 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
 <Base help title="Dates and deadlines in Mon County, WV" description="Community dates, application windows and deadlines in Mon County for this month and next.">
   <h1>Dates and deadlines in Mon County</h1>
   <p class="lede">Community events, application windows and deadlines for this month and next. Updated {prettyDate(updated)}.</p>
+  <nav class="cal-jump" aria-label="On this page">
+    <ul>
+      <li><a href="#dates">Open now</a> <span class="hint">{nDates(now.length)}</span></li>
+      {weekList.map((w) => <li><a href={`#${w.id}`}>{w.label}</a> <span class="hint">{nDates(w.list.length)}</span></li>)}
+      <li><a href="#after-dates">Skip past the dates</a></li>
+    </ul>
+  </nav>
   <section class="add-cal" aria-labelledby="add-cal-h">
     <h2 id="add-cal-h">Add to your calendar</h2>
     <p>Pick the app you use. New dates show up on their own. Dates can change, so check the source before you go. The Google and Outlook.com buttons open their own websites.</p>
@@ -52,7 +75,42 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
   {now.length ? now.map((e) => <EventCard e={e} />) : <p>Nothing is open right now on our list. If you need help this week, call <a href="tel:211">211</a> and tell them what you need.</p>}
 
   <h2>Coming up</h2>
-  {later.length ? later.map((e) => <EventCard e={e} />) : <p>We have no more dates in the next two months. Dates are added as we check them, so look again soon. For help now, call <a href="tel:211">211</a>.</p>}
+  {later.length ? <p class="meta">One week at a time. Open a week to see its dates.</p> : null}
+  {later.length ? weekList.map((w, i) => (
+    <details class="cal-week" id={w.id} open={i === 0}>
+      <summary><span class="wk-name">{w.label}</span> <span class="wk-count">{nDates(w.list.length)}</span></summary>
+      {w.list.map((e) => <EventCard e={e} />)}
+    </details>
+  )) : <p>We have no more dates in the next two months. Dates are added as we check them, so look again soon. For help now, call <a href="tel:211">211</a>.</p>}
 
-  <p class="meta">Know a date that should be here? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Suggest it</a>.</p>
+  <p class="meta" id="after-dates">Know a date that should be here? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Suggest it</a>.</p>
 </Base>
+
+<script>
+  // A link to a card or a week (/calendar/#slug, shared links, This month)
+  // opens its week, so the reader lands on the date, not on a closed box.
+  const openTarget = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const el = id && document.getElementById(id);
+    const d = el?.closest('details.cal-week') as HTMLDetailsElement | null;
+    if (el && d && !d.open) { d.open = true; el.scrollIntoView({ block: 'start' }); }
+  };
+  openTarget();
+  window.addEventListener('hashchange', openTarget);
+  // Print every week, open or closed.
+  window.addEventListener('beforeprint', () => {
+    document.querySelectorAll<HTMLDetailsElement>('details.cal-week').forEach((d) => { d.open = true; });
+  });
+</script>
+
+<style>
+  .cal-jump ul { margin: 8px 0 16px; }
+  .cal-jump li { margin: 4px 0; }
+  .cal-jump .hint { color: var(--muted); font-size: 0.95rem; }
+  .cal-week { margin: 12px 0; }
+  .cal-week > summary { cursor: pointer; min-height: 44px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); font-weight: 700; font-size: 1.1rem; color: var(--accent); }
+  .cal-week > summary:hover .wk-name { text-decoration: underline; }
+  .cal-week > summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .cal-week[open] > summary { margin-bottom: 12px; }
+  .cal-week .wk-count { font-weight: 400; font-size: 1rem; color: var(--muted); white-space: nowrap; }
+</style>
