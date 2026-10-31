@@ -34,7 +34,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import YAML from 'yaml';
 import { CONTENT_DIR } from '../src/lib/content.mjs';
-import { loadWatch, watchedUrls, evaluateWatch, watchMd } from './watch.mjs';
+import { loadWatch, watchedUrls, evaluateWatch, watchMd, withPdfLinks } from './watch.mjs';
 
 const UA = 'MonCountyCommunityHub-sourcecheck/1.0 (+https://github.com/david-shortman/mon-county-community-hub)';
 const UA_TOKEN = 'moncountycommunityhub';
@@ -47,6 +47,7 @@ export const T = {
   hostConcurrency: 6, // different sites checked at the same time
   maxRedirects: 6,
   maxBytes: 4_000_000,
+  maxCrawlDelayMs: 15_000, // honor a site's Crawl-delay up to this
 };
 
 // Content folders that hold facts residents rely on. Findability results and
@@ -229,6 +230,27 @@ export function robotsRules(txt) {
   return pick.flatMap((g) => g.rules).filter((r) => r.path);
 }
 
+// Crawl-delay in seconds for our name, else for "*" (#166). 0 if none.
+export function robotsDelay(txt) {
+  let agents = [];
+  let lastWasAgent = false;
+  let mine = null;
+  let star = null;
+  for (const raw of txt.split(/\r?\n/)) {
+    const m = raw.replace(/#.*$/, '').trim().match(/^([a-z-]+)\s*:\s*(.*)$/i);
+    if (!m) continue;
+    const key = m[1].toLowerCase();
+    if (key === 'user-agent') { agents = lastWasAgent ? [...agents, m[2].trim().toLowerCase()] : [m[2].trim().toLowerCase()]; lastWasAgent = true; continue; }
+    lastWasAgent = false;
+    if (key !== 'crawl-delay') continue;
+    const n = Number(m[2]);
+    if (!Number.isFinite(n)) continue;
+    if (agents.some((a) => a !== '*' && UA_TOKEN.includes(a))) mine = n;
+    else if (agents.includes('*')) star = n;
+  }
+  return mine ?? star ?? 0;
+}
+
 export function robotsAllows(rules, pathAndQuery) {
   let best = null;
   for (const r of rules) {
@@ -345,10 +367,15 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
       const host = hosts[next++];
       const list = byHost.get(host);
       let robots = [];
+      let pause = T.pauseMs;
       try {
         const origin = new URL(list[0].url).origin;
         const rr = await fetch(`${origin}/robots.txt`, { signal: AbortSignal.timeout(T.timeoutMs), headers: { 'User-Agent': UA } });
-        if (rr.ok && /text\/plain/.test(rr.headers.get('content-type') || 'text/plain')) robots = robotsRules(await rr.text());
+        if (rr.ok && /text\/plain/.test(rr.headers.get('content-type') || 'text/plain')) {
+          const txt = await rr.text();
+          robots = robotsRules(txt);
+          pause = Math.min(Math.max(pause, robotsDelay(txt) * 1000), T.maxCrawlDelayMs);
+        }
         await sleep(T.pauseMs);
       } catch { /* no robots.txt: allowed */ }
       for (const s of list) {
@@ -371,7 +398,7 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
               out.kind = 'html';
               out.host = s.host;
               out.fingerprint = fingerprint(html);
-              if (keepText.has(s.url)) out.text = pageText(html);
+              if (keepText.has(s.url)) out.text = pageText(withPdfLinks(html));
               out.phones = [...phonesOnPage(html)];
               const elsewhere = otherPlace(html);
               if (elsewhere) out.elsewhere = elsewhere;
@@ -379,7 +406,7 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
           }
         }
         results.set(s.url, out);
-        await sleep(T.pauseMs);
+        await sleep(pause);
       }
     }
   }));

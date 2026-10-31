@@ -15,6 +15,7 @@ No free, public, current feed of Mon County pantry hours exists. The food bank's
    - reads only the text between `start` and `end`, so banners, news and dates elsewhere on the page do not raise alarms
    - hashes that text **with digits kept** (the main Source check drops digits so clocks do not count, but for hours the digits are the point)
    - checks that the saved `quote` is still on the page, ignoring dash, case and "a.m."/"am" styles
+   - counts the file name of each PDF link as part of the text, so a new schedule PDF behind the same link text is a change
    - for a PDF, compares the whole file
 3. **What counts as a change** (each one alerts once, not every day):
    - the hours part of the page changed
@@ -38,7 +39,7 @@ No free, public, current feed of Mon County pantry hours exists. The food bank's
 - **Facebook stays manual.** Meta's terms allow automated collection only through its API. Facebook-only groups are listed as `kind: facebook` and checked by a person on the sweep (#6). The watcher never fetches them.
 - **No page at all.** Listed as `kind: none` and handed to the call queue (#156).
 - **Blocked sites.** Some sites block automated sessions. Listed as `kind: blocked`, checked by a person in a browser.
-- **Politeness.** One run a day. Each site gets one request at a time, 1.5 seconds apart. robots.txt is honored.
+- **Politeness.** One run a day. Each site gets one request at a time, 1.5 seconds apart, or longer when its robots.txt sets a Crawl-delay (the city and United Way sites ask for 10 seconds; capped at 15). robots.txt is honored.
 - **Our own words.** Facts go on the site in our own plain words. The quote is kept only as proof in the watch list and the record.
 
 ## How often
@@ -49,7 +50,48 @@ No free, public, current feed of Mon County pantry hours exists. The food bank's
 
 ## The list
 
-SOURCE_TABLE
+Checked 2026-10-31. The live list, with markers and quoted hours, is `content/watch/food.yaml`.
+
+| Group or list | Type | Hours on its own page? | Page |
+|---|---|---|---|
+| Christian Help (service and donation hours) | page | Yes, quoted | https://motownchristianhelp.com/contact/ |
+| Christian Help (food orders) | page | Yes, quoted | https://motownchristianhelp.com/programs/ |
+| Scott's Run Settlement House (site hours, used by our record) | page | Yes, quoted | https://www.srsh.org/ |
+| Scott's Run Settlement House (FAQ, pantry times) | page | Yes, quoted | https://www.srsh.org/faq |
+| Scott's Run Settlement House (free market) | page | Partly or none, page watched for changes | https://www.srsh.org/free-market |
+| St. Ursula Food Pantry and Outreach | page | Yes, quoted | https://www.stmarystarcity.com/st--ursula |
+| Salvation Army Morgantown (office and Sally's Kitchen) | page | Yes, quoted | https://morgantown.salvationarmypotomac.org/morgantown/how-we-help |
+| Community Kitchen (weekday lunch) | page | Yes, quoted | https://www.morgantowncommunitykitchen.com/ |
+| Senior Monongalians (congregate meals) | page | Partly or none, page watched for changes | https://www.seniormons.org/blank |
+| Morgantown Area Meals on Wheels | page | Partly or none, page watched for changes | https://morgantownwvmow.org/ |
+| Starting Points food pantry | page | Yes, quoted | https://moncountyfamilysupportcenter.org/food-pantry/ |
+| First Presbyterian Church (Sunday breakfast) | page | Partly or none, page watched for changes | https://www.firstpresmorgantown.org/community-missions |
+| Pantry Plus More (mobile giveaways) | page | Partly or none, page watched for changes | https://www.pantryplusmore.org/mobile-food-giveaways/ |
+| Mountaineer Food Bank mobile pantry (Monongalia County) | page | Partly or none, page watched for changes | https://mountaineerfoodbank.org/food-pantries/ |
+| United Way FRN food list (page with the current PDF) | page | Partly or none, page watched for changes | https://www.unitedwaympc.org/food-hunger |
+| United Way FRN food list (PDF of 1.26.26) | pdf | In the PDF | https://www.unitedwaympc.org/sites/unitedwaympc/files/Monongalia%20County%20Food%20Assistance%20Hours%201.26.26%20(1).pdf |
+| City of Morgantown, PATHWAYS to Help (Food Resources) | page | Partly or none, page watched for changes | https://www.morgantownwv.gov/708/PATHWAYS-to-Help |
+| The Rack and Rack II (WVU student pantry) | blocked | Not readable by a robot | https://studentengagement.wvu.edu/the-rack-student-food-pantry |
+| Catholic Charities WV food assistance | blocked | Not readable by a robot | https://www.ccwva.org/programs/food-assistance/ |
+| Catholic Charities Morgantown pantry | none | No web source | none found |
+| Covenant Evangelical Methodist food pantry (Greenbag Road) | none | No web source | none found |
+| Canyon Presbyterian food pantry | none | No web source | none found |
+| Rock Forge Presbyterian food pantry | none | No web source | none found |
+| Wadestown food pantry | none | No web source | none found |
+| Clay-Battelle Senior Center meals | none | No web source | none found |
+| Circle of Friends | none | No web source | none found |
+| Sarah's Table | none | No web source | none found |
+| Food Not Bombs Morgantown | none | No web source | none found |
+| Morgantown Mutual Aid Fair | none | No web source | none found |
+| Caritas House | none | No web source | none found |
+| Community Action (High Street) | none | No web source | none found |
+| Hope Farm food pantry | none | No web source | none found |
+
+The best single list is United Way's Family Resource Network (FRN) food page and its PDF. Many small church pantries appear only there. Asking the FRN about sharing that data is #23.
+
+**Hours that sources disagree on** (Scott's Run, Starting Points, St. Ursula, Salvation Army, First Presbyterian, Covenant, Catholic Charities) are in #932. They stay off the site until a person confirms them.
+
+**No watchable source:** the `none` rows above, plus The Rack (WVU blocks robots), go to the call queue (#156).
 
 ## Cost
 

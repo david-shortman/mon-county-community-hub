@@ -29,7 +29,7 @@ import { CONTENT_DIR } from '../src/lib/content.mjs';
 export const WATCH_DIR = path.join(CONTENT_DIR, 'watch');
 export const KINDS = ['page', 'pdf', 'facebook', 'none', 'blocked'];
 const FETCHED = new Set(['page', 'pdf']);
-const ENTRY_FIELDS = ['name', 'org', 'kind', 'url', 'start', 'end', 'quote', 'checked', 'note', 'also_lists'];
+const ENTRY_FIELDS = ['name', 'org', 'kind', 'url', 'start', 'end', 'quote', 'checked', 'note'];
 const FILE_FIELDS = ['group', 'title', 'issue_title', 'entries'];
 
 // ---------- loading ----------
@@ -63,7 +63,7 @@ export function validateWatch(groups) {
       if (e?.end && !e?.start) errors.push(`${w}: end needs a start`);
       if ((e?.start || e?.quote) && e?.kind !== 'page') errors.push(`${w}: start, end and quote work only on a page`);
       if (!/^\d{4}-\d{2}-\d{2}$/.test(ymd(e?.checked))) errors.push(`${w}: needs a checked date (YYYY-MM-DD)`);
-      if (/[—]/.test(JSON.stringify(e))) errors.push(`${w}: no em dashes`);
+      if (/[\u2014]/.test(JSON.stringify(e))) errors.push(`${w}: no em dashes`);
     });
   }
   return errors;
@@ -87,9 +87,10 @@ export function decode(s) {
 export function norm(s) {
   return decode(s)
     .toLowerCase()
-    .replace(/[‐-―−]/g, '-')
-    .replace(/[‘’]/g, "'")
-    .replace(/[“”]/g, '"')
+    .replace(/[\u2010-\u2015\u2212]/g, '-')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201c\u201d]/g, '"')
+    .replace(/[\u200b-\u200d\u2060\ufeff]/g, '') // Wix pages hide these in text
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -110,6 +111,13 @@ export function section(text, start, end) {
   const from = i + norm(start).length;
   const j = end ? t.indexOf(norm(end), from) : -1;
   return { text: t.slice(from, j < 0 ? undefined : j).trim(), found: true, endFound: !end || j >= 0 };
+}
+
+// Writes the address of each PDF link into the page as text, so a new
+// schedule PDF behind the same link text counts as a change. Only the real
+// href is used, not look-alike attributes such as data-cke-saved-href.
+export function withPdfLinks(html) {
+  return String(html ?? '').replace(/<a\b[^>]*?\shref\s*=\s*["']([^"']+\.pdf(?:[?#][^"']*)?)["'][^>]*>/gi, (tag, href) => `${tag} [${decodeURI(href.replace(/&amp;/g, '&')).split('/').pop()}] `);
 }
 
 export const hash = (s) => crypto.createHash('sha256').update(s).digest('hex').slice(0, 16);
@@ -205,14 +213,17 @@ export function alertMd(g, { runUrl = '', today = '' } = {}) {
 function selfTest() {
   const fails = [];
   const expect = (cond, msg) => { if (!cond) fails.push(msg); };
-  const page = 'Welcome! News: Oct 3 bake sale. Food Pantry Hours Monday to Wednesday, 9:00 a.m. – 12:00 p.m. Thursday 1 to 3 pm Contact us';
+  const page = 'Welcome! News: Oct 3 bake sale. Food Pantry Hours Monday to Wednesday, 9:00 a.m. \u2013 12:00 p.m. Thursday 1 to 3 pm Contact us';
   const s = section(page, 'Food Pantry Hours', 'Contact us');
   expect(s.found && s.text.startsWith('monday to wednesday'), 'section should start after the start marker');
   expect(!s.text.includes('contact'), 'section should stop before the end marker');
   expect(!section(page, 'Pantry Schedule').found, 'a missing start marker should be reported');
   expect(quoteFound(s.text, 'Monday to Wednesday, 9:00 am - 12:00 pm'), 'quotes should match across dash and a.m. styles');
   expect(!quoteFound(s.text, 'Monday to Wednesday, 10:00 am - 12:00 pm'), 'a changed hour should not match');
+  expect(quoteFound('Mon\u200bday 9am', 'Monday 9am'), 'zero-width characters should be ignored');
   expect(quoteFound('Fairchance Road: Mon - Wed 8:30 am &ndash; 4:30 pm', 'Fairchance Road: Mon - Wed 8:30 am - 4:30 pm'), 'HTML entities should be decoded');
+  const linked = withPdfLinks('<a data-cke-saved-href="/old.pdf" href="/files/Food%20Hours%201.26.26.pdf">Food list</a>');
+  expect(linked.includes('[Food Hours 1.26.26.pdf]') && !linked.includes('[old.pdf]'), 'PDF link names should be added from the real href only');
   expect(hash(section(page.replace('9:00', '10:00'), 'Food Pantry Hours', 'Contact us').text) !== hash(s.text), 'a changed digit should change the hash');
   expect(hash(section(page.replace('Oct 3 bake sale', 'Nov 9 chili supper'), 'Food Pantry Hours', 'Contact us').text) === hash(s.text), 'news outside the section should not change the hash');
 
@@ -245,7 +256,7 @@ function selfTest() {
   const down = evaluateWatch(groups, new Map(), first.state, { now });
   expect(down.state['https://a.example/']?.h === first.state['https://a.example/'].h, 'a failed fetch should keep the last good state');
   expect(alertMd(moved.groups[0], { today: '2026-11-01' }).includes('Never copy hours'), 'the issue should say never to copy hours without reading');
-  expect(!/—/.test(alertMd(moved.groups[0]) + watchMd(moved)), 'no em dashes in issue text');
+  expect(!/\u2014/.test(alertMd(moved.groups[0]) + watchMd(moved)), 'no em dashes in issue text');
 
   // The real watch files.
   const real = loadWatch();
