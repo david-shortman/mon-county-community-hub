@@ -27,6 +27,9 @@ jobs:
         working-directory: site
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Two commits, so a pull request can see which files it changed (the e2e scope below).
+          fetch-depth: 2
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -43,8 +46,32 @@ jobs:
       # Pull requests only, so the daily rebuild and deploys never wait on a browser download.
       - if: github.event_name == 'pull_request'
         run: npx playwright install --with-deps chromium
+      # End-to-end tests (docs/operations/e2e-tests.md): the full suite when a PR changes the
+      # site, its content or this workflow; a quick smoke subset otherwise.
+      - if: github.event_name == 'pull_request'
+        id: scope
+        run: |
+          if git diff --name-only HEAD^1 HEAD | grep -qE '^(site|content|apps)/|^\.github/workflows/site\.yml$'; then
+            echo "suite=e2e" >> "$GITHUB_OUTPUT"
+          else
+            echo "suite=e2e:smoke" >> "$GITHUB_OUTPUT"
+          fi
       - if: github.event_name == 'pull_request'
         run: npm run check-a11y
+      # !cancelled(): still run when the accessibility scan fails, so both results show.
+      - if: ${{ !cancelled() && steps.scope.outputs.suite != '' }}
+        run: npm run ${{ steps.scope.outputs.suite }}
+      # Phone screenshots of the most-used pages for reviewers. Not committed: open the run's
+      # summary page and download "phone-screenshots".
+      - if: ${{ !cancelled() && steps.scope.outputs.suite == 'e2e' }}
+        run: npm run screenshots
+      - if: ${{ !cancelled() && steps.scope.outputs.suite == 'e2e' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: phone-screenshots
+          path: site/e2e-shots/
+          retention-days: 14
+          if-no-files-found: ignore
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'
         with:
