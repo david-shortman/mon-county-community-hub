@@ -60,7 +60,7 @@ export function toRecords(src, rows, { checked, previous = [] }) {
       agenda_url: r.agenda_url,
       minutes_url: r.minutes_url,
       publisher: src.publisher,
-      sources: [{ url: src.page_url, checked }],
+      sources: [{ url: src.page_url, checked, method: 'watched-page' }],
       first_seen: old?.first_seen ?? checked,
       last_changed: changed ? checked : (old.last_changed ?? old.first_seen ?? checked),
     };
