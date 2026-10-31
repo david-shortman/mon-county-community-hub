@@ -6,6 +6,7 @@ import CrisisStrip from '../components/CrisisStrip.astro';
 import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import UpkeepNotice from '../components/UpkeepNotice.astro';
+import ShareThis from '../components/ShareThis.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
 import { FIX_FORM } from '../lib/group-requests.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
@@ -36,6 +37,10 @@ const tags = (await loadPages()).get(route);
 const doors = loadDoors();
 const tagDoor = tags && doors.bySlug[tags.door];
 const tagTopic = tagDoor?.topics?.[tags.topic];
+// Share this (#947): on listed guides only. High-stakes doors and topics wait
+// for David, and safety pages never get it (a share leaves a trace).
+const shareable = tags?.listed && !['help-now', 'this-month', 'about'].includes(tags.door)
+  && !['housing', 'money', 'food'].includes(tags.topic) && !/domestic|sexual|abuse|stay-tonight|veterans/i.test(route);
 // Main menu (#250), built from content/doors.yaml, so adding a page never
 // changes it. Phones: a tab bar of four at the bottom, in thumb reach. Wide
 // screens: Help now, the five doors, Dates and All topics in the header.
@@ -352,6 +357,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       {(crisis || tags?.door === 'help-now') && <p class="disclaimer meta">{disclaimer}</p>}
       <slot />
+      {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
       <AlsoCheck route={route} />
     </main>
     <footer class="site">
