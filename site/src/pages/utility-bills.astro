@@ -5,7 +5,8 @@ import Route from '../components/Route.astro';
 import Milepost from '../components/Milepost.astro';
 import Icon from '../components/Icon.astro';
 import Actions from '../components/Actions.astro';
-import { resource, telHref } from '../lib/content.mjs';
+import PassItOn from '../components/PassItOn.astro';
+import { resource, telHref, oldestChecked } from '../lib/content.mjs';
 export const page = { door: "this-month", topic: "money", label: "Help paying a utility bill", summary: "Heat, water or electric, before or after a shutoff" };
 // Each program reads its phone and sources from its resource record, so its
 // source and checked date sit right under it (#135).
@@ -84,6 +85,7 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   </Milepost>
   </Route>
 
+  <PassItOn whole title="Help paying a utility bill in Mon County" checked={oldestChecked([monPower, mub, lieap, emergency, def, wv211].flatMap((r) => r.sources))} />
   <div class="note">
     <p><strong>Do this today:</strong> call your utility, ask for a payment plan, then call 211.</p>
   </div>
