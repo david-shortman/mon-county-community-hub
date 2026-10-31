@@ -35,6 +35,7 @@ export function GET({ site }) {
 - [Ride to a medical visit](${u('/medical-rides/')}): Medicaid and WVCHIP rides through Modivcare (book 5 business days ahead), and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares
 - [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
+- [Help in your language](${u('/help-in-your-language/')}): free interpreters at WVU Medicine, the Health Department, state offices and courts, immigration legal help, and English classes
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults
 - [Find a job](${u('/find-a-job/')}): where the City of Morgantown, Monongalia County, the State of West Virginia, WVU Medicine and Mon Health post jobs, free resume, interview and computer help at the American Job Center and the library, and short trainings at Pierpont
 - [Disability and aging](${u('/disability-and-aging/')}): LiveAbility independent living help, DRS job help for people with disabilities, and WV SHIP Medicare help
