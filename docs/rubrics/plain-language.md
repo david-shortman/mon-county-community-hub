@@ -22,7 +22,7 @@ Text that residents read scores at about 8th grade or lower.
 - **1:** Grade 9 to 11.
 - **2:** Grade 8 or lower overall, with no single paragraph above grade 10.
 - **3:** Grade 6 or lower overall, and it still sounds natural.
-- **How to check:** Flesch-Kincaid grade on the page text (not menus or footers). In Python: `0.39 * words/sentences + 11.8 * syllables/words - 15.59`, with a simple vowel-group syllable count if a dictionary is not available. Formulas are rough; also read it aloud.
+- **How to check:** Flesch-Kincaid grade on the page text (not menus or footers). In Python: `0.39 * words/sentences + 11.8 * syllables/words - 15.59`, with a simple vowel-group syllable count if a dictionary is not available. Formulas are rough; also read it aloud. Every build also warns when a page's first two sentences read above grade 9 (`site/scripts/check-reading.mjs`, #833).
 
 ### PL2. Action first
 
