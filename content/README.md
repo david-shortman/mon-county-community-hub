@@ -539,3 +539,35 @@ place: "4120 Fairmont Rd, Morgantown, WV"  # optional; adds a Directions button
 ```
 
 Past `recheck_days` (or 6 months), the page says the fact may be out of date, and the Health check lists it (`facts-due`). Re-read the source: if it still says the same, update `checked`; if not, fix `text` and `quote`.
+
+## `pdf-pages/<slug>.yaml`: a hard-to-read PDF as short lists (#393)
+
+The useful part of a PDF (a fee form, a schedule, a guide) as headings and short lists a phone can show, with the original PDF linked. Pages show a record with the `FromPdf` component. Nothing is a wide table, so nothing squeezes on a phone (#917).
+
+```yaml
+slug: monchd-fees-2026-27
+title: Permit Fees and Fees for Service, Fiscal Year 2026-2027   # the PDF's own title
+publisher: Monongalia County Health Department
+pdf: https://example.org/fees.pdf          # optional when each item links its own PDF
+pdf_date: "Fiscal Year 2026-2027"          # the date printed on the PDF, in its words. Needed with pdf
+found_on: https://example.org/fees         # optional; the official page that links the PDF
+intro: One plain sentence.                 # optional
+recheck_days: 120                          # optional; default 6 months
+sources:
+  - url: https://example.org/fees.pdf
+    checked: 2026-10-31
+sections:
+  - heading: Septic systems                # what residents look for
+    id: septic                             # optional anchor
+    note: The form lists these under "Land Development".   # optional
+    items:
+      - name: Conventional Sewage System Permit             # the PDF's label
+        lines: ["$222"]
+        links:                                              # optional
+          - label: Full schedule (PDF)
+            url: https://example.org/route.pdf
+            date: "Effective August, 2018"                   # needed on a PDF link
+      - A plain line of text is also an item.
+```
+
+Rules: copy labels, fees, days and times exactly as printed; put the PDF's own words in quotes where you add a word around them. Never reword rules or eligibility. If the PDF is a scan, read it off the page image and say so in a comment at the top of the file. If the PDF disagrees with a newer official page, say who says what, or leave the item off and open a `needs-verification` issue. `npm run check-content` checks the fields, the dates and that every PDF link has its date.

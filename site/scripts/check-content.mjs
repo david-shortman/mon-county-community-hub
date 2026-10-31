@@ -4,6 +4,7 @@ import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 import { factTopics, loadFacts } from '../src/lib/facts.mjs';
+import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
 import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
@@ -415,6 +416,11 @@ for (const topic of factTopics()) {
     if (JSON.stringify(f).includes('\u2014')) errors.push(`${where}: contains an em dash`);
   }
 }
+
+// PDF pages (content/pdf-pages/, #393): a PDF's useful part as short lists.
+// Each needs a title, publisher, sections and sources with checked dates, and
+// a PDF link needs the date printed on that PDF.
+for (const d of loadPdfPages()) for (const p of pdfPageProblems(d)) errors.push(`${d._file}: ${p}`);
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);
