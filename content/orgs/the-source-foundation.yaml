@@ -1,0 +1,11 @@
+name: The SOURCE Foundation
+slug: the-source-foundation
+kind: nonprofit
+website: http://www.thesourcewv.org/
+phone: "304-276-8427"
+summary: A Morgantown group that runs before and after school care at Skyview Elementary in Westover. Its office is at 540 Fairmont Road.
+topics: [family]
+area: monongalia-county
+sources:
+  - url: http://www.thesourcewv.org/before-after-school-program
+    checked: 2026-10-30
