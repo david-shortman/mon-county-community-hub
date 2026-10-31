@@ -4,4 +4,4 @@ page: /permits/
 kind: fact
 found_by: our-check
 what: We said the West Run district was mainly where the county is zoned, and that the office handles subdivisions and floodplain questions. The county says only the West Run Planning District is zoned, it has not passed subdivision rules, and floodplain questions go to its Floodplain Administrator. We fixed the wording.
-link: https://github.com/david-shortman/mon-county-community-hub/compare/main...code/audit2-jobs-1
+link: https://github.com/david-shortman/mon-county-community-hub/pull/893
