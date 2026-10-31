@@ -1,0 +1,36 @@
+---
+// Towns and areas (#1120): the index of town pages. The list is the Census
+// Bureau's list of places in Monongalia County: five towns and cities, and six
+// census-designated places with no town government. Each page is built from
+// records we already have (src/lib/town-hubs.mjs).
+import Base from '../../layouts/Base.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { HUBS, CENSUS_LIST, CDP_MEANING } from '../../lib/town-hubs.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Your town or area", summary: "A page for each town and named area in Mon County: who to call, who decides and where they meet, places, dates and buses" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const towns = HUBS.filter((h) => h.kind !== 'cdp');
+const cdps = HUBS.filter((h) => h.kind === 'cdp');
+---
+<Base title="Towns and areas in Monongalia County, WV" description="A page for Morgantown, Westover, Star City, Granville, Blacksville, and the named areas of Booth, Brookhaven, Cassville, Cheat Lake, Osage and Pentress: who to call, who decides, places, dates and buses.">
+  <h1>Towns and areas in Mon County</h1>
+  <p class="lede">Pick your town or area to see who to call, who decides and where they meet, places to gather, dates, and bus routes.</p>
+
+  <h2 id="towns">Towns and cities</h2>
+  <p>Each has its own government, with its own council and some of its own services.</p>
+  <ul class="choices">
+    {towns.map((h) => <li><a class="choice" href={`${base}/towns/${h.slug}/`}><span class="choice-label">{h.name}</span><span class="choice-hint">{h.full}</span></a></li>)}
+  </ul>
+
+  <h2 id="areas">Named areas with no town government</h2>
+  <p>The Census Bureau calls these census-designated places. They have names and neighbors, but no town council. The county serves them.</p>
+  <ul class="choices">
+    {cdps.map((h) => <li><a class="choice" href={`${base}/towns/${h.slug}/`}><span class="choice-label">{h.name}</span></a></li>)}
+  </ul>
+  <SourceLine sources={[CENSUS_LIST, CDP_MEANING]} about="the list of towns and areas" />
+
+  <h2 id="other">Somewhere else?</h2>
+  <p>Many other communities, like Sabraton, Arnettsville, Core or Smithtown, are not on the Census list. If you live outside any town, the county serves you: see <a href={`${base}/who-serves-me/#county`}>Who serves my address? Outside any town</a>. To check whether an address is in a town, use the <a href={`${base}/who-serves-me/#not-sure`}>county map</a>.</p>
+
+  <p class="meta">Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
