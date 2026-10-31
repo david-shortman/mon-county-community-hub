@@ -7,7 +7,9 @@
 export const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 // How to get in, with the words people see on the card.
 export const GET_IN = { 'walk-in': 'Walk in', appointment: 'By appointment', 'call-first': 'Call first' };
-export const LISTING_FIELDS = ['opening_hours', 'get_in', 'languages', 'access'];
+// `steps` (#822): what to do as a short numbered list, when one paragraph
+// would be long. Cards show it under `what_to_do`, which stays the summary.
+export const LISTING_FIELDS = ['opening_hours', 'get_in', 'languages', 'access', 'steps'];
 
 const isTime = (t) => /^([01]\d|2[0-3]):[0-5]\d$|^24:00$/.test(String(t));
 const minutes = (t) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
@@ -40,6 +42,7 @@ export function checkListing(r) {
   if (r.get_in != null && !GET_IN[r.get_in]) errors.push(`${where}: get_in must be one of ${Object.keys(GET_IN).join(', ')}`);
   if (r.languages != null && (!Array.isArray(r.languages) || r.languages.some((l) => typeof l !== 'string' || !l.trim()))) errors.push(`${where}: languages must be a list of language names`);
   if (r.access != null && (typeof r.access !== 'string' || !r.access.trim())) errors.push(`${where}: access must be text`);
+  if (r.steps != null && (!Array.isArray(r.steps) || !r.steps.length || r.steps.some((t) => typeof t !== 'string' || !t.trim()))) errors.push(`${where}: steps must be a list of short sentences`);
   // A place a person goes to needs the first seven listing facts.
   if (r.contact?.place) {
     const missing = [!r.hours && 'hours', !r.cost && 'cost', !r.get_in && 'get_in'].filter(Boolean);
