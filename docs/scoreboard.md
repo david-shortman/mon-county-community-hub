@@ -202,6 +202,16 @@ The findability check asks whether a resident can find an answer by searching. T
 - **What to bring** is missing on almost every source, ours included. Listing cards started showing it on 2026-10-30 (#159).
 - **Plain language:** the dentist and medicine page opens at about grade 12.
 
+### Reach: in-person listings by area
+
+About 72% of residents live outside Morgantown city limits ([who lives here](playbook/audience-facts.md)). This counts where our in-person listings are, so the rural gap shows and can move (#834, from the [reach check](visibility/2026-10-31-reach-check.md)). It counts our listings, not people. Rerun it with each findability run: `python3 content/findability/reach.py`.
+
+| Date | In-person listings | Morgantown | Rest of the county | Outside the county | Resources with an address |
+|---|---|---|---|---|---|
+| 2026-10-31 | 80 | 59 (74%) | 18 (22%) | 3 | 37 of 127, 30 of them in Morgantown |
+
+"Morgantown" here means a Morgantown mailing address, which also covers some close-in places outside city limits, so the share is not directly comparable to the 72%. Most of the rest-of-county listings are community centers and halls (11 of 18).
+
 ## Level 2: Use (not measured yet)
 
 Whether people use what we build. To be measured as aggregate counts only, with no tracking of individuals: page views per guide, calendar feed subscriptions, tool uses, searches on the site, and API or MCP calls. This needs a privacy-respecting analytics choice first, which is a `for:david` decision because it may involve an outside service. Until then: none.
