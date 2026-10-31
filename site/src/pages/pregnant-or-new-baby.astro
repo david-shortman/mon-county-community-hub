@@ -1,0 +1,43 @@
+---
+// Pregnant or new baby (#245, part of #235; rank 8 in #475). Coverage, prenatal
+// care basics, WIC, and help after the baby comes. Every fact is in a resource
+// record in content/resources/, read 2026-10-30. Shots follow the who-says-what
+// rule on /flu-shots/ (docs/decisions/2026-10-29-1300-when-sources-differ.md).
+// Health and food help topic: the PR waits for David (#97).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "care", topic: "health", label: "Pregnant or new baby", summary: "Health coverage, a pregnancy test, WIC, and help after the baby comes" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+---
+<Base help title="Pregnant or have a new baby in Morgantown and Mon County" description="Pregnant or have a new baby in Morgantown and Monongalia County: Medicaid and WVCHIP coverage for pregnancy and the year after, free or low cost pregnancy tests at the health department, WIC, and free programs for families with babies.">
+  <h1>Pregnant, or have a new baby?</h1>
+  <p class="lede">Need health coverage? Apply for Medicaid or WVCHIP on WV PATH or call <a href="tel:18777161212">1-877-716-1212</a>. Medicaid and WVCHIP cover mothers for 12 months after pregnancy. WIC helps with healthy food and breastfeeding: call <a href="tel:3045985181">304-598-5181</a>.</p>
+
+  <h2>Health coverage</h2>
+  {r('wv-medicaid-pregnancy') && <ResourceCard r={r('wv-medicaid-pregnancy')} />}
+
+  <h2>A pregnancy test and early care</h2>
+  {r('monchd-reproductive-health') && <ResourceCard r={r('monchd-reproductive-health')} showCost />}
+  <p>No insurance and low income? Milan Puskar Health Right is a free clinic: see <a href={`${base}/dental-and-prescriptions/`}>dentist and prescription help</a>.</p>
+
+  <h2>Food and breastfeeding help</h2>
+  {r('monchd-wic') && <ResourceCard r={r('monchd-wic')} />}
+
+  <h2>Shots during pregnancy</h2>
+  <p>Health groups do not all say the same thing about every shot. Our <a href={`${base}/flu-shots/`}>flu and COVID shots page</a> says who recommends what, including the doctors' group for pregnancy care (ACOG). Ask your own doctor or midwife.</p>
+
+  <h2>After the baby comes</h2>
+  {r('starting-points-family-programs') && <ResourceCard r={r('starting-points-family-programs')} />}
+  {r('wv-birth-to-three-referral') && <ResourceCard r={r('wv-birth-to-three-referral')} />}
+
+  <h2>Also check</h2>
+  <ul>
+    <li><a href={`${base}/families-and-kids/`}>Families and kids</a>: Pre-K, Head Start, playgroups and story times.</li>
+    <li><a href={`${base}/staying-well/`}>Staying well</a>: a simple yearly list.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30, 2026. We describe these programs; we do not give medical advice. Each program decides who qualifies. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

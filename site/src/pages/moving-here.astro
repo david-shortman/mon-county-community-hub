@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "moving", label: "Moving here: start power, water, gas and trash", summary: "How to start service with the companies and towns that serve homes here, and what it costs" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -33,12 +34,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>Recycling drop-off, tires and electronics: <a href={`${base}/recycling/`}>Trash, recycling and drop-off</a>.</p>
 
   <h2>Not sure who serves your address?</h2>
-  <p>Ask your landlord, the seller or a neighbor first. The state agency that oversees utility companies can also answer questions.</p>
+  <p>Pick your town on <a href={`${base}/who-serves-me/`}>Who serves my address?</a> Or ask your landlord, the seller or a neighbor. The state agency that oversees utility companies can also answer questions.</p>
   {r('wv-psc-utility-questions') && <ResourceCard r={r('wv-psc-utility-questions')} />}
 
   <p>Renting or buying? Check whether the home is in a flood zone or a slide area first: <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
 
   <p>Trouble paying a power or water bill later? See <a href={`${base}/utility-bills/`}>Help paying a utility bill</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Deposits and fees can change, so ask when you call. We list the companies and towns that official pages name for this area. Know another provider we should add? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Deposits and fees can change, so ask when you call. We list the companies and towns that official pages name for this area. Know another provider we should add? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

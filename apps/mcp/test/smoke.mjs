@@ -50,7 +50,7 @@ try {
   const n = await run('list_needs', {});
   expect(Array.isArray(n.results), 'list_needs: no results list');
   const h = await run('how_to_report_a_problem', { id: 'wv-211' });
-  expect(h.report_form?.startsWith('https://github.com/'), 'how_to_report_a_problem: no form link');
+  expect(h.report_form?.startsWith('https://tally.so/'), 'how_to_report_a_problem: no form link');
   const bad = await call('tools/call', { name: 'nope', arguments: {} });
   expect(bad.error, 'unknown tool should return an error');
   console.log(`MCP smoke test: ${names.length} tools; search found ${s.count}, ${d.count} dates in the next year, ${n.count} needs.`);

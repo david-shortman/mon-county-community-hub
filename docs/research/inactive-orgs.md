@@ -18,6 +18,8 @@ For issue #22. These groups still show up in search results and in some director
 
 - The county's [contact directory](https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php) (opened 2026-10-30) still lists the Monongalia Historical Society (with a website, monongaliahistoricalsociety.org) and the Mountaineer Boys and Girls Club (918 Fortney Street, 304-292-7510, mbgclub.org). See the conflicts list.
 - Search results show WVU pages that still list Bartlett Housing Solutions at 304-292-0101 and 20 Scott Ave (a WVU graduate education community resources page and a WVU Women's Resource Center housing page). Both returned "403 Forbidden" to automated reading today, so they need a human look.
+- Update, October 31, 2026: a person opened the WVU Women's Resource Center housing page in a browser. It still lists Bartlett Housing Solutions (304-292-0101, 20 Scott Ave) with a "Bartlett House" button.
+- **Do not link either Bartlett domain.** bartletthouse.org now shows a gambling site (noted in #529). bartletthousingsolutions.org serves an old copy of the site: its newest post is from June 2020 and its newest images were uploaded in May 2023. Its /contact/ page redirects (301) to vantageatburleson.com, an apartment complex in Texas (checked October 31, 2026). This site links neither.
 
 ## Gaps and open questions
 

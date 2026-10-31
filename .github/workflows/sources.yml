@@ -3,7 +3,8 @@ name: Source check
 # Checks every outside source the hub relies on, once a day (#16):
 # dead links, moves to another domain, phone numbers that are no longer on the
 # source page, and pages whose text changed. Help now pages go first (#453).
-# Updates one standing "Source check" issue for Duet. No Claude calls; a run
+# Updates one standing "Source check" issue for Duet, and once a week the
+# checklist issues in content/checklists/ (#752, #718, #793). No Claude calls; a run
 # takes a few minutes of a free runner. See site/scripts/check-sources.mjs.
 #
 # Uses only actions/checkout and actions/setup-node, to stay inside the allow list.
@@ -48,3 +49,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node scripts/source-issue.mjs update sources.json sources.md
+      # Weekly checklists for what a robot cannot read (content/checklists/).
+      # Writes only on the first run of each week. Never fails the job.
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        continue-on-error: true
+        run: node scripts/checklists.mjs run

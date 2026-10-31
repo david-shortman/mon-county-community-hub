@@ -1,0 +1,45 @@
+---
+// No insurance or can't afford a doctor (#478, rank 3 in #475). A free clinic,
+// sliding fee care, applying for coverage, and help with hospital bills. Every
+// fact is in a resource record in content/resources/, read 2026-10-30.
+// Health coverage is a high-stakes topic: the PR waits for David (#97).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { loadDir } from '../lib/content.mjs';
+export const page = { door: "care", topic: "health", label: "No insurance or can't afford a doctor", summary: "A free clinic, sliding fee care, signing up for coverage, help with hospital bills" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const calendar = loadDir('calendar');
+const open = calendar.find((e) => e.slug === 'marketplace-open-enrollment-2027');
+---
+<Base help title="No insurance or can't afford a doctor in Morgantown and Mon County" description="Health care with no insurance in Morgantown and Monongalia County: the free Milan Puskar Health Right clinic, sliding fee care at Clay-Battelle and the health department, applying for Medicaid, free sign-up help, and help paying WVU Medicine and Mon Health hospital bills.">
+  <h1>No insurance, or can't afford a doctor?</h1>
+  <p class="lede">With low income and no insurance, start with Milan Puskar Health Right, a free clinic in Morgantown: call <a href="tel:3042928234">304-292-8234</a>. Below: care with a sliding fee, how to apply for Medicaid or other coverage, and help with a hospital bill.</p>
+
+  <h2>A free clinic</h2>
+  {r('health-right-clinic') && <ResourceCard r={r('health-right-clinic')} />}
+
+  <h2>Care with a sliding fee</h2>
+  <p>A sliding fee means you pay less when your income is lower.</p>
+  {r('clay-battelle-health-center') && <ResourceCard r={r('clay-battelle-health-center')} showCost />}
+  {r('monchd-clinical-services') && <ResourceCard r={r('monchd-clinical-services')} showCost />}
+
+  <h2>Get health coverage</h2>
+  {r('apply-for-medicaid-wv') && <ResourceCard r={r('apply-for-medicaid-wv')} />}
+  {r('wv-navigator') && <ResourceCard r={r('wv-navigator')} />}
+  {open && <p>Marketplace plans for 2027: you can sign up at HealthCare.gov from November 1 to January 15. See <a href={`${base}/calendar/`}>Deadlines and dates</a> for the last day to sign up for coverage that starts January 1.</p>}
+
+  <h2>Got a hospital bill you can't pay?</h2>
+  <p>Both Morgantown hospitals have programs that can lower or cancel a bill for people who qualify.</p>
+  {r('wvu-medicine-financial-assistance') && <ResourceCard r={r('wvu-medicine-financial-assistance')} />}
+  {r('mon-health-charity-care') && <ResourceCard r={r('mon-health-charity-care')} />}
+
+  <h2>Also check</h2>
+  <ul>
+    <li>A dentist, or help paying for medicine: <a href={`${base}/dental-and-prescriptions/`}>dentist and prescription help</a>.</li>
+    <li>On Medicare: <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>, including help paying Medicare costs.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30 and 31, 2026. We describe these programs; each one decides who qualifies. Call first, since hours and rules change. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>

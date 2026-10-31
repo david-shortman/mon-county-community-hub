@@ -1,0 +1,20 @@
+title: Get a Youth ID card for a child
+slug: wv-dmv-youth-id-card
+org: wv-dmv
+topics: [records, family]
+who_it_is_for: Children 2 to 15 years old. A parent or guardian applies.
+what_to_do: A parent or guardian signs the application (form DMV-DS-23P) and brings it to a DMV regional office with the child's documents. The card is good for 2 years.
+contact:
+  phone: "1-800-642-9066"
+  url: https://dmv.wv.gov/youth-identification-cards
+  url_label: Youth ID rules
+cost: $10 for a new or duplicate Youth ID card.
+what_to_bring:
+  - The application, form DMV-DS-23P, signed by a parent or guardian
+  - The child's birth certificate
+  - The child's Social Security card
+  - Two proofs of WV residency
+if_you_want_help: [wv-dmv-morgantown-office]
+sources:
+  - url: https://dmv.wv.gov/youth-identification-cards
+    checked: 2026-10-31

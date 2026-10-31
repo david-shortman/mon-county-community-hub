@@ -1,0 +1,50 @@
+# Weekly and quarterly checklist for the thrift, markets and swaps pages (#718).
+# Pages a robot can read are watched daily (content/watch/secondhand.yaml).
+# How it works: site/scripts/checklists.mjs
+id: secondhand
+title: Thrift shops, markets and sales
+issue_title: Weekly checklist, sale and market dates
+tracking: 718
+intro: >-
+  Add any new confirmed sale or market date to content/calendar/ (topic
+  secondhand or market) within a day of finding it, following the calendar
+  rules in content/README.md. Never guess a date; leave an event out until its
+  organizer or a dated listing gives one clear date. No contact with any shop
+  or organizer. Plan: docs/operations/secondhand-checks.md
+items:
+  - text: Dominion Post events column, for rummage sales, church sales and craft fairs.
+    url: https://www.dominionpost.com/
+    how: Same "Events and opportunities" listing as the centers checklist (see its How line). Read it once for both.
+  - text: Visit Mountaineer Country events, for craft shows, markets and vintage events.
+    url: https://www.visitmountaineercountry.com/events/
+    person: true
+  - text: Gallery 304 and WV Vintage Fest page.
+    url: https://www.visitmountaineercountry.com/?p=334848
+    person: true
+  - text: WVU calendar, for the Blue and Gold Mine Sale (May) and campus markets.
+    url: https://cal.wvu.edu/
+    person: true
+  - text: Treasure Hunter card shows, Morgantown Mall and Mylan Park only.
+    url: https://www.treasurehunter.show/shows/west-virginia
+    how: The list hides each show's place. Open a show's own page for its address and hours. One show can appear on several days; the existing entry may already cover it.
+  - text: FestivalNet, for Mylan Park craft shows.
+    url: https://festivalnet.com/fairs-festivals/West-Virginia/Morgantown-WV
+  - text: Friends of the Morgantown Public Library, book sale room hours and special sales.
+    url: https://mympls.org/about/friends-of-the-library/
+  - text: Mountaineer Week, Arts and Craft Fair dates.
+    url: https://mountaineerweek.wvu.edu/
+    person: true
+    months: [9, 10, 11]
+  - text: Sale and market dates that passed in the last 4 months. The site already hides them; look for each one's next date.
+    run: past-sale-dates
+  - text: If a "Sale or market date page changed" issue is open (label source-changed), work through it too.
+  - text: >-
+      Quarterly re-check of every shop and program due (oldest check over 3
+      months, or unclear). Re-read every source; change `checked` only after
+      reading. Update hours, address and what it takes. Closed: set
+      `status: closed` and add a correction. Sources disagree or a page is
+      gone: set `status: unclear` and open a needs-verification issue. Same
+      list as `npm run secondhand-due` in site/.
+    when: quarter
+    from: 2027-01-01
+    run: secondhand-due

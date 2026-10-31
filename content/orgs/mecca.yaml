@@ -1,0 +1,10 @@
+name: Monongalia Emergency Centralized Communications Agency (MECCA)
+slug: mecca
+kind: government
+website: https://www.mecca911.org/
+summary: The county's dispatch center. It answers emergency calls and runs a non-emergency line for police in several towns, open all day and night.
+topics: [moving, government]
+area: monongalia-county
+sources:
+  - url: https://www.mecca911.org/contact_us/index.php
+    checked: 2026-10-30

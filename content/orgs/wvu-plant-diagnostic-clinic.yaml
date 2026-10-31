@@ -1,0 +1,10 @@
+name: WVU Plant Diagnostic Clinic
+slug: wvu-plant-diagnostic-clinic
+kind: school
+website: https://extension.wvu.edu/lawn-gardening-pests/plant-disease/plant-diagnostic-clinic
+summary: A WVU Extension clinic in Morgantown that diagnoses plant problems for homeowners, gardeners, landscapers, growers and farmers, and suggests ways to treat or prevent them.
+topics: [growing]
+area: statewide
+sources:
+  - url: https://extension.wvu.edu/lawn-gardening-pests/plant-disease/plant-diagnostic-clinic
+    checked: 2026-10-31
