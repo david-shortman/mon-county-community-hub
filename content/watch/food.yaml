@@ -25,7 +25,7 @@ entries:
   - name: Christian Help (service and donation hours)
     org: christian-help
     kind: page
-    url: https://motownchristianhelp.com/contact/
+    url: https://motownchristianhelp.com/contact-us/
     start: Service & Donation Hours
     end: Contact Us
     quote: "Monday, Tuesday & Thursday: 9am - 4pm"
@@ -201,7 +201,7 @@ entries:
     kind: none
     checked: 2026-10-31
     note: On the United Way list only.
-  - name: Clay-Battelle Senior Center meals
+  - name: Clay-Battelle Senior Citizens Center
     kind: none
     checked: 2026-10-31
     note: On the United Way list only.

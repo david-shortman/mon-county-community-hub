@@ -1,0 +1,27 @@
+title: Jury duty in Monongalia County
+slug: mon-circuit-clerk-jury-duty
+org: monongalia-county-circuit-clerk
+topics: [legal, government]
+who_it_is_for: People who got a jury summons in Monongalia County. The state courts say names are picked at random from voter and driver's license lists. To serve you must be a U.S. citizen, at least 18, and live in the county that sent the summons.
+hours: Office hours are Monday to Friday, 8:30 a.m. to noon and 1 p.m. to 5 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:30"
+    closes: "12:00"
+  - days: [mon, tue, wed, thu, fri]
+    opens: "13:00"
+    closes: "17:00"
+get_in: call-first
+what_to_do: Follow the steps on your summons. The Circuit Clerk runs jury duty for the county and has a jury line at 304-291-7276. The state has an online jury portal. The courts say there are no automatic excuses by job. To ask to be excused for a hardship, put your request in writing to the presiding circuit judge. If you are 70 or older, you will be excused if you ask, and there is a place on the questionnaire to say so. If you need a disability accommodation, say so on the questionnaire before you serve.
+contact:
+  phone: "304-291-7276"
+  url: https://www.courtswv.gov/public-resources/jury-information
+  url_label: Jury duty questions and answers
+  place: 75 High Street, Suite 12, Morgantown, WV 26505
+cost: The Circuit Clerk says jurors are paid $40 a day plus mileage. You pay for your own meals and parking.
+what_happens: The courts say you may serve in circuit court or magistrate court. You will not have to report every day, because courts use a phone call-in system to tell jurors when they are not needed. State law says your employer must let you off work for jury duty, but does not have to pay you for those days.
+sources:
+  - url: http://www.monongaliacircuitclerk.com/
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/public-resources/jury-information
+    checked: 2026-10-31

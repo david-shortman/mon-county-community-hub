@@ -1,0 +1,18 @@
+title: Check a rental is registered, or report a problem (City of Morgantown)
+slug: morgantown-rental-registration
+org: city-of-morgantown
+topics: [housing]
+who_it_is_for: People renting, or thinking of renting, a home inside Morgantown city limits. The city says all rental property inside city limits must be registered with the city, and rentals are inspected once every 3 years.
+what_to_do: Before you rent, the city says you can call Code Enforcement to find out if a unit is registered, has a letter of compliance, its type of occupancy, and how many people are allowed to live there. Renters and owners can also report a concern about a rental online through the city's SeeClickFix page, or email rentals@morgantownwv.gov.
+hours: Monday to Thursday, 7 a.m. to 5:30 p.m.
+contact:
+  phone: "304-284-7401"
+  email: rentals@morgantownwv.gov
+  url: https://www.morgantownwv.gov/435/Rental-Information
+  url_label: Rental information and report a concern
+  place: "389 Spruce Street, Morgantown, WV 26505"
+sources:
+  - url: https://www.morgantownwv.gov/435/Rental-Information
+    checked: 2026-10-30
+  - url: https://www.morgantownwv.gov/167/Code-Enforcement
+    checked: 2026-10-30

@@ -1,0 +1,43 @@
+---
+// Starting page for artists, makers and musicians (#279, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/artists-makers.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "community", topic: "community", label: "Artists, makers and musicians", summary: "Classes, space and tools, showing and selling your work, folk arts, groups and grants, in one place" };
+const sections = [
+  { title: "Take a class", links: [
+    { href: "/arts-and-making/#classes", label: "Art classes", text: "art and craft classes" },
+    { href: "/work-and-learning/", text: "adult classes" },
+  ] },
+  { title: "Space and tools", links: [
+    { href: "/arts-and-making/#space", label: "Maker space and studios", text: "a shared maker space and studios" },
+    { href: "/borrow-or-get-free/#borrow", label: "Borrow tools", text: "tool and library lending" },
+  ] },
+  { title: "Show and sell your work", links: [
+    { href: "/arts-and-making/#show", label: "Show your work", text: "gallery shows" },
+    { href: "/markets/", text: "craft markets and yearly sales" },
+  ] },
+  { title: "Traditional arts", links: [
+    { href: "/arts-and-making/#traditional", label: "Folk arts", text: "learning a traditional art" },
+  ] },
+  { title: "Play, make or meet with others", links: [
+    { href: "/find-your-people/", text: "groups, clubs and dances" },
+    { href: "/meet-people/", text: "free library programs for adults" },
+  ] },
+  { title: "Money for your work", links: [
+    { href: "/arts-and-making/#grants", label: "Grants for artists", text: "grants for artists and arts groups" },
+    { href: "/make-it-better/grants/", text: "small grants for art and neighborhood projects" },
+    { href: "/business/", text: "free business coaching if you sell your work" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/small-business/", text: null },
+    { href: "/for/people-who-want-to-help/", text: null },
+    { href: "/for/remote-workers/", text: null },
+  ] },
+];
+---
+<Base title="Artists and makers in Morgantown and Mon County: where to start" description="A starting page for artists, makers and musicians in Monongalia County: classes, a maker space and studios, showing and selling your work, traditional arts, groups to join, and grants.">
+  <h1>For artists, makers and musicians</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

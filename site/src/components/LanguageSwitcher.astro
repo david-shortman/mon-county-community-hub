@@ -1,0 +1,21 @@
+---
+// Language switcher (#1083). Built, but not on any page yet: residents see
+// no switcher until David turns a language on (#1067). When that happens,
+// Base.astro renders it in the header with:
+//   <LanguageSwitcher lang={lang} alternates={alternates} />
+// It links to the same page in each other language, names each language in
+// that language, and never uses flags. With nothing to switch to, it
+// renders nothing, so pages that exist only in English never show it.
+import { switcherLinks } from '../lib/i18n.mjs';
+const { lang = 'en', alternates = [], label = 'Language' } = Astro.props;
+const links = switcherLinks(lang, alternates);
+---
+{links.length > 0 && (
+  <nav class="lang-switch" aria-label={label}>
+    {links.map((l) => <a href={l.href} lang={l.lang} hreflang={l.lang}>{l.label}</a>)}
+  </nav>
+)}
+<style>
+  .lang-switch { display: flex; gap: 0 14px; }
+  .lang-switch a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+</style>
