@@ -9,19 +9,29 @@
 // To refresh the saved copies: `npm run update-feeds` in site/, then commit.
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import morgantownCity from './adapters/morgantown-city.mjs';
-import mountaineerFoodBank from './adapters/mountaineer-food-bank.mjs';
-import monongaliaCounty from './adapters/monongalia-county.mjs';
-import morgantownLibrary from './adapters/morgantown-library.mjs';
-import monongaliaArtsCenter from './adapters/monongalia-arts-center.mjs';
-import morgantownFarmersMarket from './adapters/morgantown-farmers-market.mjs';
-import mylanPark from './adapters/mylan-park.mjs';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { inWindow } from './util.mjs';
 
-export const ADAPTERS = [morgantownCity, mountaineerFoodBank, monongaliaCounty, morgantownLibrary, monongaliaArtsCenter, morgantownFarmersMarket, mylanPark];
-
 const here = path.dirname(fileURLToPath(import.meta.url));
+
+// Every file in ./adapters is a feed (#71), so adding a feed is one new file
+// plus its snapshot, with no shared list to edit. In the site build, Vite
+// replaces import.meta.glob with the files it finds; in plain Node scripts
+// (update-feeds, check-content) it does not exist, so we read the folder.
+// Adapters run in file-name order, which also decides which feed wins when
+// two feeds list the same event (see loadCalendarWithFeeds in ../content.mjs).
+async function findAdapters() {
+  let mods;
+  try {
+    mods = import.meta.glob('./adapters/*.mjs', { eager: true });
+  } catch {
+    const dir = path.join(here, 'adapters');
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith('.mjs'));
+    mods = Object.fromEntries(await Promise.all(files.map(async (f) => [`./adapters/${f}`, await import(pathToFileURL(path.join(dir, f)).href)])));
+  }
+  return Object.keys(mods).sort().map((k) => mods[k].default).filter((a) => a?.id && a?.parse);
+}
+export const ADAPTERS = await findAdapters();
 // Astro bundles this file during the build, so find snapshots from the repo root.
 export const SNAPSHOT_DIR = fs.existsSync(path.join(here, 'snapshots'))
   ? path.join(here, 'snapshots')
@@ -95,6 +105,7 @@ function writeSnapshot(adapter, snap) {
 // Loads one feed. Returns { entries, status } and never throws.
 export async function loadFeed(adapter, { today, live = true, save = false, log = console } = {}) {
   const feedUrl = feedUrlFor(adapter, today);
+  let error = live ? null : 'live fetch turned off';
   if (live) {
     try {
       const raw = await fetchWithRetry(feedUrl, adapter.format);
@@ -111,23 +122,38 @@ export async function loadFeed(adapter, { today, live = true, save = false, log 
       const fetched = new Date().toISOString();
       if (save) writeSnapshot(adapter, { id: adapter.id, feed_url: feedUrl, fetched, entries: good });
       if (!good.length) log.warn(`feeds: ${adapter.id}: feed worked but had no upcoming entries`);
-      return { entries: stamp(adapter, good, fetched, feedUrl), status: 'live' };
+      return { entries: stamp(adapter, good, fetched, feedUrl), status: 'live', fetched };
     } catch (err) {
+      error = err.message;
       log.warn(`feeds: ${adapter.id}: could not load ${feedUrl} (${err.message}). Using the saved copy if there is one.`);
     }
   }
   const snap = readSnapshot(adapter);
   if (!snap) {
     log.warn(`feeds: ${adapter.id}: no saved copy, skipping this feed`);
-    return { entries: [], status: 'skipped' };
+    return { entries: [], status: 'skipped', fetched: null, error };
   }
   const entries = (snap.entries ?? []).filter((e) => !entryProblems(e).length && inWindow(e, today));
-  return { entries: stamp(adapter, entries, snap.fetched, snap.feed_url), status: 'snapshot' };
+  return { entries: stamp(adapter, entries, snap.fetched, snap.feed_url), status: 'snapshot', fetched: snap.fetched, error };
 }
 
 // All feed entries from every adapter.
+let lastHealth = [];
+// Health of each feed from the last loadFeedEntries call in this process.
+export const feedHealth = () => lastHealth;
+
 export async function loadFeedEntries({ today, live = process.env.FEEDS_OFFLINE !== '1', save = false, log = console } = {}) {
   const results = await Promise.all(ADAPTERS.map((a) => loadFeed(a, { today, live, save, log })));
   results.forEach((r, i) => log.log?.(`feeds: ${ADAPTERS[i].id}: ${r.entries.length} entries (${r.status})`));
+  // One health line per feed (#71), so a feed that breaks or goes quiet shows.
+  lastHealth = results.map((r, i) => ({
+    id: ADAPTERS[i].id,
+    name: ADAPTERS[i].name,
+    page_url: ADAPTERS[i].page_url,
+    status: r.status, // live, snapshot (live failed, saved copy used) or skipped
+    entries: r.entries.length,
+    fetched: r.fetched ?? null,
+    error: r.error ?? null,
+  }));
   return results.flatMap((r) => r.entries);
 }

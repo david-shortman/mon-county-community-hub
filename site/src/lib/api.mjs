@@ -246,6 +246,7 @@ export async function catalog() {
     site_url: SITE_URL,
     openapi_url: `${API_BASE}openapi.yaml`,
     docs_url: `${SITE_URL}/data/`,
+    feed_health_url: `${API_BASE}feed-health.json`,
     source_code: REPO_URL,
     license: license(),
     versioning: 'Within v1, fields are only added, never removed or renamed. A breaking change would get a new /api/v2/, and v1 would stay up for at least 6 months.',
