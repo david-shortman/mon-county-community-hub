@@ -28,7 +28,7 @@ The pages that answer findability questions, as of 2026-10-31. "Answer first" me
 | q04 apply for SNAP | /snap/ | Yes, the question | Yes | The model page. |
 | q05, q08 doctor or dentist without insurance | /dental-and-prescriptions/ | Yes, the question | Yes | Opening reads at about grade 12 (#804). A page for q05 is planned (#478). |
 | q07 flu or COVID shot | /flu-shots/ | Yes, the question | Yes | |
-| q19 to q21 trash day, drop-off, glass | /recycling/ | Yes | Yes, since 2026-10-31 | The opening used to describe the page; it now says who to call for your pickup day and when carts go out. |
+| q19 to q21 trash day, drop-off, glass | /recycling/ | Yes | Yes, since 2026-10-31 | The opening used to describe the page; it now says who to call for your pickup day and when carts go out, followed by a "What do you want to get rid of?" lookup. |
 | q29 ride to a medical visit | /medical-rides/ | Yes, the question | Yes | |
 | q31 serve on a city board | /make-it-better/boards/ | Yes | Mostly | |
 | q12 speak at a meeting | /have-your-say/ | Yes | Mostly | |
