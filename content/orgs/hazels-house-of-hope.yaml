@@ -1,0 +1,10 @@
+name: Hazel's House of Hope
+slug: hazels-house-of-hope
+kind: nonprofit
+website: https://www.unitedwaympc.org/hazels-house-hope
+summary: A building at 20 Scott Ave, Morgantown, where several nonprofits share space and offer help with food, shelter, health and money. Tenants include Grace Shelter, the Salvation Army and the Child Care Resource Center. Its information page is on the United Way's website.
+topics: [housing, food, community]
+area: morgantown
+sources:
+  - url: https://www.unitedwaympc.org/hazels-house-hope
+    checked: 2026-10-30

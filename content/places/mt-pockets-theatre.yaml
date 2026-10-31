@@ -1,0 +1,27 @@
+name: M. T. Pockets Theatre
+slug: mt-pockets-theatre
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: nonprofit
+  text: M. T. Pockets Theatre, Inc.
+story: An all-volunteer nonprofit theater. Residents can audition for shows or help with sets, costumes, lights, sound and the box office.
+regular:
+  - Shows run through the year. Audition notices are posted on the theater's Audition page.
+interests: [theater, arts, service]
+contact:
+  url: https://www.mtpocketstheatre.com/work-with-us.html
+  place: 203 Parsons Street, Morgantown, WV 26505
+status: active
+last_activity_seen: 2026-10-30
+notes:
+  - To join the casting pool and get emails about auditions, fill out the Volunteer Form and send a photo and resume.
+  - The theater's site lists no paid staff.
+sources:
+  - url: https://www.mtpocketstheatre.com/work-with-us.html
+    checked: 2026-10-30
+  - url: https://www.mtpocketstheatre.com/
+    checked: 2026-10-30
+  - url: https://www.mtpocketstheatre.com/get-involved1.html
+    checked: 2026-10-30

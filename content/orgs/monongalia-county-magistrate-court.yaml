@@ -1,0 +1,13 @@
+name: Monongalia County Magistrate Court
+slug: monongalia-county-magistrate-court
+kind: government
+website: https://www.courtswv.gov/public-resources/court-information-county/monongalia_county
+phone: "304-291-7296"
+summary: The county court for civil cases of $20,000 or less, misdemeanors and emergency protective orders. The Magistrate Clerk's office is at the Monongalia County Justice Center, 75 High Street, Suite 25.
+topics: [legal, government]
+area: monongalia-county
+sources:
+  - url: https://www.courtswv.gov/public-resources/court-information-county/monongalia_county
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/lower-courts/magistrate-courts
+    checked: 2026-10-31

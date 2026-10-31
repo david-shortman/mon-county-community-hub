@@ -6,9 +6,12 @@ import CrisisStrip from '../components/CrisisStrip.astro';
 import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import UpkeepNotice from '../components/UpkeepNotice.astro';
+import ShareThis from '../components/ShareThis.astro';
 import { loadPages, doorHref } from '../lib/pages.mjs';
+import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
 import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
+import { alternatesFor, dirFor } from '../lib/i18n.mjs';
 import nameFont from '../fonts/fraunces-name-800.woff2?inline';
 import tileSvg from '../../public/favicon.svg?raw';
 const { crisis = false, help = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
@@ -35,6 +38,10 @@ const tags = (await loadPages()).get(route);
 const doors = loadDoors();
 const tagDoor = tags && doors.bySlug[tags.door];
 const tagTopic = tagDoor?.topics?.[tags.topic];
+// Share this (#947): on listed guides only. High-stakes doors and topics wait
+// for David, and safety pages never get it (a share leaves a trace).
+const shareable = tags?.listed && !['help-now', 'this-month', 'about'].includes(tags.door)
+  && !['housing', 'money', 'food'].includes(tags.topic) && !/domestic|sexual|abuse|stay-tonight|veterans/i.test(route);
 // Main menu (#250), built from content/doors.yaml, so adding a page never
 // changes it. Phones: a tab bar of four at the bottom, in thumb reach. Wide
 // screens: Help now, the five doors, Dates and All topics in the header.
@@ -62,17 +69,27 @@ const footerLinks = [
   { href: '/topics/', label: 'All topics' },
   { href: '/about/', label: 'About this site' },
   { href: '/partners/', label: 'For groups and helpers' },
+  { href: '/terms/', label: 'Terms' },
+  { href: '/privacy/', label: 'Privacy' },
 ];
+const disclaimer = 'We check every listing and show when we last checked it, but hours, rules and deadlines change. Call or check the source before you go. This site shares general information. It is not legal, medical or money advice. In an emergency, call 911. In a crisis, call or text 988.';
 // Dateline: the place, today's date and the forecast, in Eastern time. The
 // page script keeps the date current between rebuilds.
 const today = todayYmd();
 const dayFmt = (style) => new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: style, month: style, day: 'numeric' }).format(new Date(`${today}T12:00:00Z`));
 const [longToday, shortToday] = [dayFmt('long'), dayFmt('short')];
 const forecast = await todaysForecast();
+// Other languages (#1083): the page's language (English unless a page in a
+// language folder says otherwise), and hreflang links to the
+// same page in each published language. Both stay empty on English-only
+// pages, which today is every page.
+const alternates = alternatesFor(Astro.url.pathname.slice(base.length) || '/', { site: Astro.site });
+const { lang = 'en' } = Astro.props;
+const dir = dirFor(lang);
 const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morgantown';
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir={dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -82,6 +99,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
     <meta name="theme-color" content="#161714" media="(prefers-color-scheme: dark)" />
     {crisis && <meta name="referrer" content="no-referrer" />}
     <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Everything Morgantown" />
     <meta property="og:title" content={fullTitle} />
@@ -168,6 +186,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .lede { font-size: 1.15rem; color: var(--muted); }
       .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 14px 0; }
       .card h3 { margin: 0 0 4px; font-size: 1.1rem; }
+      .card.resource > h2, .card.place > h2 { margin: 0 0 4px; font-size: 1.1rem; } /* same look when a card title is an h2 */
       .card-steps { margin: 6px 0 10px; padding-left: 1.4rem; display: grid; gap: 4px; } /* a card's `steps` list (#822) */
       .when { font-weight: 600; color: var(--accent); }
       .meta { font-size: 0.95rem; color: var(--muted); overflow-wrap: anywhere; } /* sources and checked dates: at least 15px (#50) */
@@ -180,6 +199,17 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .actions > * { min-width: 0; max-width: 100%; flex: 0 1 auto; }
       .btn .nowrap { white-space: normal; }
       main { overflow-wrap: anywhere; }
+      /* Table cells never break inside a word, or narrow columns stack one letter per line (#917) */
+      main :is(th, td, caption) { overflow-wrap: break-word; }
+      /* Wide tables scroll sideways in their own box. Shadows at the edges show there is more (#917) */
+      .table-scroll { overflow-x: auto; margin: 16px 0; border: 1px solid var(--line); border-radius: 10px;
+        background: linear-gradient(to right, var(--card) 40%, transparent) left / 32px 100% no-repeat local,
+          linear-gradient(to left, var(--card) 40%, transparent) right / 32px 100% no-repeat local,
+          linear-gradient(to right, rgb(0 0 0 / 0.18), transparent) left / 12px 100% no-repeat scroll,
+          linear-gradient(to left, rgb(0 0 0 / 0.18), transparent) right / 12px 100% no-repeat scroll, var(--card); }
+      .table-scroll:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .table-scroll > table { background: transparent; }
+      @media print { .table-scroll { overflow: visible; border: 0; background: none; } }
       .btn { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 8px 12px; border: 1.5px solid var(--accent); border-radius: 10px;
         background: var(--card); color: var(--accent); font: inherit; font-size: 1rem; font-weight: 600; line-height: 1.25; text-align: center; text-decoration: none; cursor: pointer; }
       .btn:hover { background: var(--accent-bg); }
@@ -211,7 +241,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .right-now .tonight { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 700; }
       .right-now .tonight .icon { width: 22px; height: 22px; }
       .right-now .crisis { font-weight: 600; margin: 8px 0 0; font-size: 0.95rem; }
-      .crisis-btns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 6px 0 4px; }
+      .crisis-btns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 5rem), 1fr)); gap: 8px; margin: 6px 0 4px; } /* 3 across, one per row with big text (#971) */
       .crisis-btns .btn { padding: 8px 6px; gap: 6px; }
       .crisis-btns span { white-space: nowrap; }
       .doors h2 { margin-top: 1.1em; }
@@ -228,7 +258,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .season h2 { margin: 0.1em 0 0.3em; font-size: 1.25rem; }
       .season ul { margin: 6px 0 0; padding-left: 1.2rem; }
       .season li a { display: inline-flex; align-items: center; min-height: 44px; }
-      .eyebrow { margin: 4px 0 0; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+      .eyebrow { margin: 4px 0 0; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
       .search { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin: 24px 0 8px; }
       .search label { font-family: var(--display); font-weight: 800; font-size: 1.15rem; }
       .search[hidden] { display: none; }
@@ -257,6 +287,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       .topic-door > p { margin: 0 0 8px; color: var(--muted); }
       .topic-list { margin: 4px 0 16px; padding-left: 1.2rem; display: grid; gap: 6px; }
       .topic-list .hint { display: block; font-size: 0.95rem; color: var(--muted); }
+      .topic-list > li > a { display: inline-block; padding-block: 6px; } /* taller tap area for list links (QA) */
       /* Door pages (#235): pick what fits, then steps as mileposts */
       .cant-wait { margin: 12px 0 8px; padding-top: 6px; }
       .cant-wait > p:first-child { font-weight: 600; }
@@ -300,15 +331,19 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       }
       /* Crisis strip and quick exit (#174), on safety pages only */
       .crisis-strip { position: sticky; top: 0; z-index: 15; background: var(--accent-bg); border-bottom: 2px solid var(--brick); }
-      .crisis-strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-block: 6px; }
-      .crisis-strip p { flex: 1 1 7rem; min-width: 0; margin: 0; font-size: 1rem; line-height: 1.5; font-weight: 600; }
+      /* Compact (#420): one short row on a phone, numbers left, Quick exit right. */
+      .crisis-strip .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding-block: 2px; }
+      .crisis-strip p { flex: 1 1 9rem; min-width: 0; margin: 0; font-size: 0.95rem; line-height: 1.35; font-weight: 600; }
       .crisis-strip p a { font-weight: 800; padding: 6px 2px; }
-      .quick-exit { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
+      .qe-group { display: inline-flex; align-items: center; gap: 2px 8px; flex-wrap: wrap; justify-content: flex-end; }
+      .qe-what { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.85rem; }
+      .quick-exit { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; background: var(--fg); color: var(--bg); font-weight: 700; text-decoration: none; }
       .quick-exit:hover { text-decoration: underline; }
       .crisis-line { margin: 0 0 12px; padding: 6px 12px; border-left: 4px solid var(--brick); background: var(--accent-bg); font-weight: 600; }
       .crisis-line a { font-weight: 800; padding: 6px 2px; }
       html:has(.crisis-strip) { scroll-padding-top: 8rem; }
-      footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; }
+      /* overflow-wrap: the long fix@ email address wraps at 320px */
+      footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; overflow-wrap: anywhere; }
     </style>
   </head>
   <body>
@@ -330,7 +365,9 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       {help && !crisis && <CrisisLine />}
       {searchable && tagDoor && <p hidden data-pagefind-filter="door">{tagDoor.name}</p>}
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
+      {(crisis || tags?.door === 'help-now') && <p class="disclaimer meta">{disclaimer}</p>}
       <slot />
+      {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
       <AlsoCheck route={route} />
     </main>
     <footer class="site">
@@ -338,8 +375,9 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
         <nav class="foot-links" aria-label="Doors and site">
           <ul>{footerLinks.map((n) => <li><a href={`${base}${n.href}`}>{n.label}</a></li>)}</ul>
         </nav>
+        <p class="disclaimer">{disclaimer}</p>
         <p class="not-official"><strong>An independent community guide, not a government site.</strong> It is not run by the City of Morgantown, Monongalia County or the State of West Virginia, or by the groups it lists. For official business, use the links to each office's own site. Sources marked "government site" are on a .gov address.</p>
-        <p>An open experiment for Morgantown and Monongalia County, WV. Most of it is researched and written by AI (Claude), and a person oversees it (<a href={`${base}/about/`}>how we use AI</a>). Every item links to its source and says when we last checked it. Something wrong or missing? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>. Reports go to GitHub, which needs a free account, and are public, so leave out private details.</p>
+        <p>An open experiment for Morgantown and Monongalia County, WV. Most of it is researched and written by AI (Claude), and a person oversees it (<a href={`${base}/about/`}>how we use AI</a>). Every item links to its source and says when we last checked it. Something wrong or missing? Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a> or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account, and what you send stays private.</p>
       </div>
     </footer>
     <div class="sr-only" role="status" id="announce"></div>

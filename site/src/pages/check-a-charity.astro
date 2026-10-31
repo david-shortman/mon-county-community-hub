@@ -1,0 +1,36 @@
+---
+// Check a charity before you give (#611, part of #280). How to look up a
+// group's West Virginia registration, and what registration does and does
+// not tell you, from the Secretary of State's own pages. No charity is
+// named or ranked. The search tool's rating filters are not explained on
+// any page we read, so they are not described. Waits for David (money).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "community", label: "Check a charity before you give", summary: "Look up a group's West Virginia charity registration, and what registration does and does not tell you" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const faq = [{ url: 'https://sos.wv.gov/charities-frequently-asked-questions', checked: '2026-10-30' }];
+---
+<Base title="Check a charity before you give, in Morgantown and Mon County, WV" description="How to look up a charity's registration with the West Virginia Secretary of State before you give in Morgantown or Monongalia County, and what registration does and does not tell you.">
+  <h1>Check a charity before you give</h1>
+  <p class="lede">Before you give money to a group, you can check whether it is registered with the West Virginia Secretary of State. The state's search tool is on its website. We do not rate or recommend charities.</p>
+
+  <h2>Look it up</h2>
+  {resource('wv-sos-charity-search') && <ResourceCard r={resource('wv-sos-charity-search')} />}
+
+  <h2>What registration tells you</h2>
+  <p>The state says groups that ask the public for charitable donations in West Virginia must register with the Secretary of State, unless they are exempt. Registration lasts one year and can be renewed each year. So a group with an active registration has filed with the state for this year.</p>
+  <h2>What it does not tell you</h2>
+  <ul>
+    <li>Some groups are exempt, which means the law does not require them to register. A group that is not listed is not always breaking a rule.</li>
+    <li>The Secretary of State's pages we read do not say that registration is a review of how well a group spends money, or an endorsement.</li>
+  </ul>
+  <p>If you have questions about a group, contact the Secretary of State's Charities Division through its <a href="https://sos.wv.gov/contact-wvsos">contact page</a>.</p>
+  <SourceLine sources={faq} org="wv-secretary-of-state" about="What charity registration means" />
+
+  <p>Starting a group yourself? See <a href={`${base}/start-a-group/`}>Start a nonprofit or community group</a>.</p>
+
+  <p class="meta">Sources checked October 30, 2026. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

@@ -1,0 +1,93 @@
+---
+// This week in Mon County (#949, plan in docs/plans/2026-10-31-community-pulse.md).
+// A picture of what is happening now, rebuilt every day from data the build
+// already reads: the calendar and live feeds, city and county meetings, gaps
+// files, and corrections. Rules: describe, never rank or judge; no names;
+// no single 311 reports; no quotes from public comment; no alerts.
+// Dates about food, bills and housing stay on their own pages (they are
+// high stakes), so this page leaves those topics out and links to them.
+import Base from '../layouts/Base.astro';
+import { loadCalendarWithFeeds, upcoming, prettyDate, todayYmd, loadDir, ymd, loadGaps } from '../lib/content.mjs';
+import { loadMeetings, newSince } from '../lib/meetings/index.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { CONTENT_DIR } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "community", label: "This week in Mon County", summary: "What is coming up, public meetings, ways to help, where help is thin, and what changed on this site" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const shift = (n) => { const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+const weekAgo = shift(-7);
+const weekAhead = shift(7);
+const LEFT_OUT = ['housing', 'money', 'food'];
+const MAX_EVENTS = 25;
+const allEvents = upcoming(await loadCalendarWithFeeds(), today, 7)
+  .filter((e) => !(e.topics ?? []).some((t) => LEFT_OUT.includes(t)));
+const events = allEvents.slice(0, MAX_EVENTS);
+const meetings = await loadMeetings();
+const meetingsAhead = meetings.filter((m) => m.date >= today && m.date <= weekAhead);
+const NEW_LABEL = { meeting: 'new meeting listed', agenda: 'agenda posted', minutes: 'minutes posted' };
+// Everything in the first saved copy has that copy's date as first_seen, so
+// "new" starts the day after it, or a week ago, whichever is later.
+const firstCopy = meetings.reduce((min, m) => (m.first_seen < min ? m.first_seen : min), today);
+const newFrom = [weekAgo, (() => { const d = new Date(`${firstCopy}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + 1); return d.toISOString().slice(0, 10); })()].sort().pop();
+const newOnes = newSince(meetings, newFrom).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 15);
+const gapFiles = fs.readdirSync(path.join(CONTENT_DIR, 'gaps')).filter((f) => f.endsWith('.yaml')).map((f) => loadGaps(f.replace(/\.yaml$/, ''))).filter((g) => g && !LEFT_OUT.includes(g.topic));
+const gaps = gapFiles.flatMap((g) => g.gaps.map((x) => ({ ...x, checked: ymd(x.checked) })));
+const fixes = loadDir('corrections').map((c) => ({ ...c, date: ymd(c.date) })).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
+const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${prettyDate(e.starts)} to ${prettyDate(e.ends)}`);
+---
+<Base title="This week in Mon County: events, meetings and where help is thin" description="A picture of Morgantown and Monongalia County this week, rebuilt every day: what is coming up, city and county meetings, ways to help, gaps we have found, and what changed on this site.">
+  <h1>This week in Mon County</h1>
+  <p class="lede">What is coming up, public meetings, ways to help, and where help is thin. This page is rebuilt every day from the same public sources as the rest of the site. Updated {prettyDate(today)}.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      <li><a href="#coming-up">Coming up this week</a></li>
+      <li><a href="#meetings">Public meetings</a></li>
+      <li><a href="#help">Ways to help</a></li>
+      <li><a href="#thin">Where help is thin</a></li>
+      <li><a href="#changed">What changed on this site</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="coming-up">Coming up this week</h2>
+  {events.length ? (
+    <ul>{events.map((e) => <li><strong>{when(e)}:</strong> {e.url ? <a href={e.url}>{e.title}</a> : e.title}{e.org_name && <> ({e.org_name})</>}</li>)}</ul>
+  ) : <p>Nothing on our calendar for the next 7 days.</p>}
+  {allEvents.length > events.length && <p>Showing the first {events.length} of {allEvents.length} this week.</p>}
+  <p>More dates, and help with food, bills and housing: <a href={`${base}/calendar/`}>Dates and deadlines</a>. Call ahead, since times can change.</p>
+
+  <h2 id="meetings">Public meetings</h2>
+  <h3>This week</h3>
+  {meetingsAhead.length ? (
+    <ul>{meetingsAhead.map((m) => <li><strong>{prettyDate(m.date)}:</strong> {m.body}{m.agenda_url && <>, <a href={m.agenda_url}>agenda<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></>}</li>)}</ul>
+  ) : <p>No city or county meetings listed for the next 7 days yet.</p>}
+  <h3>New since {prettyDate(newFrom)}</h3>
+  {newOnes.length ? (
+    <ul>{newOnes.map((m) => <li><strong>{m.body}, {prettyDate(m.date)}:</strong> {m.what_is_new.map((w) => NEW_LABEL[w]).join(', ')}{(m.minutes_url && m.what_is_new.includes('minutes')) ? <>, <a href={m.minutes_url}>minutes<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></> : m.agenda_url && <>, <a href={m.agenda_url}>agenda<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></>}</li>)}</ul>
+  ) : <p>Nothing new posted since then that we have seen.</p>}
+  <p>All agendas and minutes, and other boards we link: <a href={`${base}/meetings/`}>City and county meetings</a>. We list what the city and county post. We do not summarize decisions.</p>
+
+  <h2 id="help">Ways to help</h2>
+  <ul>
+    <li><a href={`${base}/make-it-better/`}>Make it better</a>: report a problem, adopt a street, find money for a project, or serve on a city board.</li>
+    <li><a href={`${base}/make-it-better/boards/`}>Serve on a city board</a>: which boards have open seats, and how to apply.</li>
+    <li><a href={`${base}/find-your-people/`}>Find your people</a>: groups, clubs, game nights, runs, dances and free places to sit.</li>
+  </ul>
+
+  <h2 id="thin">Where help is thin</h2>
+  <p>Kinds of groups or help a resident might look for that we searched for and could not find on a current page. This is what we found, not a judgment of anyone.</p>
+  {gaps.length ? (
+    <ul>{gaps.map((g) => <li><strong>{g.what}.</strong> {g.why} <span class="meta">Last looked {prettyDate(g.checked)}.</span></li>)}</ul>
+  ) : <p>Nothing on file yet.</p>}
+  <p>Know a group we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+
+  <h2 id="changed">What changed on this site</h2>
+  {fixes.length ? (
+    <ul>{fixes.map((c) => <li><strong>{prettyDate(c.date)}:</strong> {c.item}. {c.what}</li>)}</ul>
+  ) : <p>No fixes logged yet.</p>}
+  <p>Every fix: <a href={`${base}/corrections/`}>Corrections</a>. Slower numbers, like jobs and health: <a href={`${base}/how-we-are-doing/`}>How is Mon County doing?</a></p>
+
+  <p class="meta">Rebuilt every day from the city and county calendars and meeting pages, local groups' calendars, and our own records. Events and meetings link to their source, and each gap shows when we last looked. We describe what is listed; we do not rank groups, places or officials.</p>
+</Base>

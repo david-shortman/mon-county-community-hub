@@ -26,9 +26,23 @@ const nursery = [{ url: 'https://agriculture.wv.gov/divisions/plant-industries/n
   <p><a class="btn" href="https://agriculture.wv.gov/divisions/plant-industries/nursery-and-nursery-dealer/"><span>Nursery rules</span></a></p>
   <SourceLine sources={nursery} org="wv-department-of-agriculture" about="Nursery and nursery dealer rules" />
 
+  <h2>Eggs from your own hens</h2>
+  <ResourceCard r={resource('wvda-small-egg-producer-registration')} showCost />
+
+  <h2>A shared kitchen to make food to sell</h2>
+  <ResourceCard r={resource('mon-county-community-food-innovation-center')} showCost />
+
+  <h2>Become a vendor at the Morgantown Farmers Market</h2>
+  <ResourceCard r={resource('morgantown-farmers-market-become-a-vendor')} showCost />
+
+  <h2>Running a market</h2>
+  <ResourceCard r={resource('wvfma-farmers-market-mini-grants')} showCost />
+
   <h2>Where to sell</h2>
-  <p>We have not yet found current market days on an official page, so they are not listed here. The state keeps a <a href="https://agriculture.wv.gov/farmers-market-search/">farmers market search</a>.</p>
+  <p>The Morgantown Farmers Market posts its days on its own site. We have not yet confirmed other markets in the county, so check the state's <a href="https://agriculture.wv.gov/farmers-market-search/">farmers market search</a> too.</p>
+  <ResourceCard r={resource('morgantown-farmers-market-downtown-saturday')} />
+  <ResourceCard r={resource('morgantown-farmers-market-winter')} />
 
   <p>More growing help: <a href={`${base}/grow/`}>Grow food and flowers</a>.</p>
-  <p class="meta">Sources checked October 30, 2026. Rules and fees can change, so check the office's page before you sell.</p>
+  <p class="meta">Sources checked October 30 and 31, 2026. Rules and fees can change, so check the office's page before you sell.</p>
 </Base>

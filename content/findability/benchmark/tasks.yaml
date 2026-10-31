@@ -112,7 +112,7 @@ needs:
       - name: ours
         kind: ours
         url: https://everythingmorgantown.org/dental-and-prescriptions/
-        answer_text: With low income and no insurance
+        answer_text: Low income and no insurance?
       - <<: *guide
         answer_text: Milan Puskar Health Right 304-292-8234
       - <<: *city
@@ -127,7 +127,7 @@ needs:
       - name: ours
         kind: ours
         url: https://everythingmorgantown.org/dental-and-prescriptions/
-        answer_text: With low income and no insurance
+        answer_text: Low income and no insurance?
       - <<: *guide
         covered: false
       - <<: *city

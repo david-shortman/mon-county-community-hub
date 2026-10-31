@@ -37,6 +37,14 @@ Rules for the weekly read:
 - Each change is a PR that cites the page read and updates `checked`. If nothing changed, log "no change" on the `for:duet` issue with the date.
 - If a center seems closed or moved, do not guess: open a `needs-verification` issue.
 
+## 3a. Daily, automated since 2026-10-31: the close watch (#752)
+
+The pages in section 3 that have a fixed address are now on a watch list, [`content/watch/centers.yaml`](../../content/watch/centers.yaml), inside the daily Source check (same system as the pantry watch, [plan](2026-10-31-pantry-watch.md)): the BOPARC closures, events, Marilla, Wiles Hill and Dorsey's Knob pages, the county parks events page, the Westside Senior Center page and Senior Monongalians' events page. Only the main part of each page is compared, digits included, so a new date or price counts. Marilla's "re-opening date will be determined" line is saved, so its removal alerts.
+
+When one changes, the workflow opens or comments on **one** "Community center or park event page changed" issue for a person, with what to do. Nothing is added to the site on its own.
+
+Still read by a person each week: the Dominion Post columns (a new address each week) and the Smithtown and Cheat Lake calendars (Google Calendar, whose robots.txt asks robots to stay out).
+
 ## 4. Later, waiting on David
 
 - **Facebook gap (#459):** a monthly Facebook pass by a person, phone checks through the call queue (#156, #165), or a "send us your event" form (#197).
