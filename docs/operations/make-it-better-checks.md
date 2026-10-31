@@ -48,6 +48,6 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 
 ## Known gaps
 
-- The site marks an entry "may be out of date" after 6 months for every topic. #291 asks for 90 days on Make it better entries. That needs a change to `isStale` in `site/src/lib/content.mjs` for one topic, which is a site-wide rule, so it is a separate issue.
+- The site marks an entry "may be out of date" after 6 months for every topic. #291 asks for 90 days on Make it better entries. That needs a change to `isStale` in `site/src/lib/content.mjs` for one topic, which is a site-wide rule, so it is a separate issue (#791).
 - City Council's public portion rules, and the County Commission and school board speaking rules, are not on any page we found.
 - Open questions: #700 (downtown facade program), #757 (county Parks and Trails levy), #710 (Adopt-A-Street details).
