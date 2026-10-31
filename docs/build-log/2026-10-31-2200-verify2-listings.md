@@ -1,0 +1,6 @@
+# 2026-10-31: Verification sweep 2, listing facts (#872, #898)
+
+- **Considered:** the listing facts that conflicted with their sources (#872) and the facts the lane 17 audit took off (#898), re-read on each organization's own pages and PDFs.
+- **Chose:** add only what a current official page states today.
+- **Shipped:** the city business license fee ($20, from the city's application PDF); plan review and permit fees on the health department's 2026-2027 fee form; Marilla Park's pavilion is being replaced and the Good Bridge way in is closed until the project ends (early 2027, BOPARC's capital projects page); Camp Muffly cabins are not rented outside camp programs; the Senior Monongalians phone; the ice arena noon specials and the admission rule; Mylan Park's 100,000-square-foot event complex (now on its event complex page, with a correction note); Mylan Park's own event page as a source for Shop Til You Drop. Rechecked and re-dated: library Wi-Fi and rooms, the three Goodwill stores, the Arnettsville Community Center.
+- **Still needs a person:** the American Job Center number (regionviwv.org blocks our reads), Coopers Rock campground closing dates (wvstateparks.com blocks our reads), and Mountaineer Week fair hours (wvu.edu blocks our reads). These are on the call list.
