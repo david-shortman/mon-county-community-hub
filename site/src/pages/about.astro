@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { FIX_FORM } from '../lib/group-requests.mjs';
+import { FIX_FORM, FIX_EMAIL } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "About this site", summary: "Who runs it, how the AI works, and how to check our work" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
@@ -21,7 +21,7 @@ const tellUs = `${repo}/issues/new?template=suggest-resource.yml`;
   <ul>
     <li><strong>Every listing shows where it came from.</strong> It links to its source, usually the group's own page, and shows the date we last checked it.</li>
     <li><strong>You deal with the group, not us.</strong> When you sign up, call, or give, you do it with them. This site has no sign-up forms and takes no payments. It never asks for your name. Our one form, for fixes and removals, asks for an email only if you want a reply.</li>
-    <li><strong>Any group can ask us to fix or remove its listing.</strong> Use our <a href={FIX_FORM}>fix or removal form</a>. You don't need an account, and what you send is not posted. The "Report a problem" link on each listing still opens a public page on GitHub, which needs a free GitHub account.</li>
+    <li><strong>Any group can ask us to fix or remove its listing.</strong> Use our <a href={FIX_FORM}>fix or removal form</a>, or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account, and what you send is not posted. The "Report a problem" link on each listing still opens a public page on GitHub, which needs a free GitHub account.</li>
     <li><strong>Every listing shows its oldest checked date.</strong> If any of its sources was last checked more than 6 months ago, the listing says it may be out of date.</li>
     <li><strong>The work is public.</strong> The code, the data, the rules the AI follows, and a log of what it built and why are all on <a href={repo}>GitHub</a>. Planning notes and notes about specific people are kept private.</li>
   </ul>
