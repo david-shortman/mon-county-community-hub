@@ -28,18 +28,32 @@ const src = {
     { url: 'https://code.wvlegislature.gov/2-2-1/', checked, name: 'WV Code 2-2-1' },
   ],
   federal: [{ url: 'https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/', checked, name: 'U.S. Office of Personnel Management' }],
+  food: [{ url: 'https://www.unitedwaympc.org/HFTD', checked, name: 'United Way of Monongalia and Preston Counties' }],
+  chMeal: [{ url: 'https://motownchristianhelp.com/programs/', checked, name: 'Christian Help programs' }],
+  srsh: [{ url: 'https://www.srsh.org/seasonal-programs', checked, name: "Scott's Run Settlement House seasonal programs" }],
   christianHelp: [{ url: 'https://motownchristianhelp.com/contact/', checked, name: 'Christian Help' }],
 };
 ---
 <Base title="Holiday season help in Morgantown and Mon County, WV" description="November and December 2026 in Morgantown and Monongalia County, WV: toy sign-ups, free clothing, help with heat bills, county and state office holiday closings, and ways to give or volunteer.">
   <h1>Holiday season help</h1>
   <p class="lede">Many holiday sign-ups close weeks before the holiday. Check the dates below, then call the group to ask about anything not listed. Each item links to the group that runs it.</p>
-  <p>Jump to: <a href="#soon">Coming up</a> · <a href="#toys">Toys for kids</a> · <a href="#warm">Warm clothes and heat</a> · <a href="#closed">Holiday closings</a> · <a href="#give">Give or volunteer</a></p>
+  <p>Jump to: <a href="#soon">Coming up</a> · <a href="#food">Holiday meals and food</a> · <a href="#toys">Toys for kids</a> · <a href="#warm">Warm clothes and heat</a> · <a href="#closed">Holiday closings</a> · <a href="#give">Give or volunteer</a></p>
 
   <section aria-labelledby="soon">
     <h2 id="soon">Coming up</h2>
     {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing holiday related on our calendar in the next two months yet.</p>}
     <p class="more"><a href={`${base}/calendar/`}>All dates and deadlines</a></p>
+  </section>
+
+  <section aria-labelledby="food">
+    <h2 id="food">Holiday meals and food</h2>
+    <ul>
+      <li><strong>Holiday food, no sign-up:</strong> on Thursday, December 10, 2026, the United Way and Christian Help give out food from Mountaineer Food Bank at the Morgantown Armory, 90 Army Band Way. It is first come, first served. <SourceLine sources={src.food} about="Holiday food distribution" /></li>
+      <li><strong>Age 65 or older?</strong> The United Way delivers holiday meals to people 65 and older in Monongalia County on the morning of December 9. Sign up with its <a href="https://www.unitedwaympc.org/HFTD">online form</a> or by calling the United Way at <a href={telHref('304-296-7525')}>304-296-7525</a>. The last day is Thursday, November 12. <SourceLine sources={src.food} about="Senior holiday meal delivery" /></li>
+      <li><strong>Christian Help:</strong> its food pantry says to "stop by before Thanksgiving, Christmas, and Easter for a holiday meal while supplies last." Call <a href={telHref('304-296-0221')}>304-296-0221</a> for hours. <SourceLine sources={src.chMeal} about="Christian Help holiday meal" /></li>
+      <li><strong>Scott's Run Settlement House:</strong> has a Thanksgiving sign-up form on its <a href="https://www.srsh.org/seasonal-programs">seasonal programs page</a>. You may get a basket or a gift card. The page gives no deadline or pickup date, so sign up early. <SourceLine sources={src.srsh} about="Scott's Run Thanksgiving sign-up" /></li>
+    </ul>
+    <p>We have not found a free community Thanksgiving or Christmas dinner posted for 2026 yet. For food any week of the year, see <a href={`${base}/help/food/`}>Food help</a>.</p>
   </section>
 
   <section aria-labelledby="toys">
