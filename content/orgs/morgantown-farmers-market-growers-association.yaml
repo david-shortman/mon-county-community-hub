@@ -1,0 +1,12 @@
+name: Morgantown Farmers Market Growers Association
+slug: morgantown-farmers-market-growers-association
+kind: nonprofit
+website: https://www.morgantownfarmersmarket.org/
+summary: A nonprofit that runs producer-only farmers markets in the Morgantown area. Vendors grow or make their products within 50 miles of Morgantown.
+topics: [growing, market]
+area: morgantown
+sources:
+  - url: https://www.morgantownfarmersmarket.org/about-us.html
+    checked: 2026-10-31
+  - url: https://www.morgantownfarmersmarket.org/uploads/1/4/2/9/142935559/26-27_mfmga_market_rules.pdf
+    checked: 2026-10-31

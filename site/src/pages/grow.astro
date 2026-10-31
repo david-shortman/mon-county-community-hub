@@ -22,13 +22,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <h2 id="farm">Thinking about a small farm</h2>
     <p>Your local conservation district can tell you what help is open to farms in the county.</p>
     <ResourceCard r={resource('mcd-agep-conservation-help')} showCost />
+    <p>USDA's offices for Monongalia County: conservation help is in Morgantown, and farm loans and programs are at the White Hall office near Fairmont.</p>
+    <ResourceCard r={resource('usda-nrcs-morgantown-service-center')} />
+    <ResourceCard r={resource('usda-fsa-white-hall-service-center')} />
+    <p>State programs for new and growing farms:</p>
+    <ResourceCard r={resource('wvda-rural-rehabilitation-loan-fund')} showCost />
+    <ResourceCard r={resource('wvda-veterans-and-heroes-to-agriculture')} showCost />
     <p>Selling at a market? See <a href={`${base}/sell-what-you-grow/`}>Sell what you grow</a>.</p>
+
+    <h2 id="groups">Learn with others</h2>
+    <ResourceCard r={resource('mon-county-beekeepers-meetings')} />
 
     <HelpWanted topic="growing" />
 
     <h2 id="soil-and-plants">Soil tests and sick plants</h2>
     <p>WVU tests garden soil for free for West Virginia residents: <a href={`${base}/soil-test/`}>How do I get my garden soil tested?</a> For spots, bugs or plants that will not grow, start with WVU Extension's county office: <a href={`${base}/plant-problems/`}>Who can tell me what's wrong with my plants?</a></p>
 
-    <p class="meta">We are still checking Master Gardener classes in the county and USDA farm programs. They will show here once we confirm them on their own pages.</p>
+    <p class="meta">We are still checking Master Gardener classes in the county and community garden plots. They will show here once we confirm them on their own pages.</p>
   </DoorPage>
 </Base>
