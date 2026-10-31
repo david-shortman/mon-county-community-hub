@@ -1,0 +1,11 @@
+name: West Virginia Division of Motor Vehicles
+slug: wv-dmv
+kind: government
+website: https://dmv.wv.gov/
+phone: "304-558-3900"
+summary: The state office for driver's licenses, ID cards, vehicle titles, registration and license plates. Its Morgantown Regional Office is on Deckers Creek Boulevard.
+topics: [moving, government]
+area: statewide
+sources:
+  - url: https://dmv.wv.gov/offices/morgantown
+    checked: 2026-10-30
