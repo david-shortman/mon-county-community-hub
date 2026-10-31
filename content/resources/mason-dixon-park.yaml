@@ -4,6 +4,10 @@ org: monongalia-county-parks-and-recreation
 topics: [outdoors]
 who_it_is_for: A 295 acre county park near Core, with meadows, woods and a stream valley.
 what_to_do: "Walk more than six miles of trails, including the Fairy Door Trail. See the Mason-Dixon survey marker on Brown's Hill. The park has picnic areas, pavilions and halls to rent, sports fields and an overnight cabin."
+hours: The park and trails are open 8 a.m. to dusk. Gates are locked outside these hours.
+get_in: walk-in
+access: The park says its trails are not wheelchair accessible at this time.
+cost: The Fisher Cabin rents for $65 per night plus $7.80 tax.
 contact:
   phone: "304-879-4101"
   url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/index.php
@@ -11,4 +15,6 @@ contact:
   place: 79 Buckeye Road, Core, WV
 sources:
   - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/index.php
+    checked: 2026-10-30
+  - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/faq.php
     checked: 2026-10-30

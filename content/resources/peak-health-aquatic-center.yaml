@@ -4,6 +4,16 @@ org: mylan-park-foundation
 topics: [outdoors]
 who_it_is_for: "Anyone who wants to swim indoors, all year. It has a community pool, a competition pool, a splash pad and a fitness center. The outdoor track next door is open dawn to dusk."
 hours: "Monday to Friday 6 a.m. to 8:30 p.m., Saturday 8 a.m. to 6 p.m., Sunday 11 a.m. to 6 p.m."
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "06:00"
+    closes: "20:30"
+  - days: [sat]
+    opens: "08:00"
+    closes: "18:00"
+  - days: [sun]
+    opens: "11:00"
+    closes: "18:00"
 what_to_do: "Buy a day pass at the front desk when you check in. The price is not posted online, so call first. Pool schedules are posted as pictures on the hours page. Closed some holidays."
 contact:
   phone: "304-933-2782"

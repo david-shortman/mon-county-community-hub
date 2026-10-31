@@ -34,6 +34,7 @@ export function GET({ site }) {
 - [Diabetes, blood pressure or weight](${u('/diabetes-and-weight/')}): health department dietitians with a sliding fee, and free diabetes and heart clinics for Health Right patients
 - [Ride to a medical visit](${u('/medical-rides/')}): Medicaid and WVCHIP rides through Modivcare (book 5 business days ahead), and Mountain Line bus routes to Ruby Memorial, Mon General and the health department, with half fares
 - [Families and kids](${u('/families-and-kids/')}): WV Birth to Three for children under 3, Pre-K and Head Start applications, free playgroups and a baby pantry at Starting Points, and library story times
+- [School-age kids](${u('/school-age/')}): sign up for Monongalia County Schools and find your school by address, bus times and delay alerts, days off and early dismissals on Dates, after-school programs at six middle and high schools, free online tutoring, and library and BOPARC programs
 - [Veterans](${u('/veterans/')}): the Monongalia County VA Clinic and Morgantown Vet Center on Commerce Drive, the Veterans Crisis Line, and VA help for veterans losing housing
 - [Help in your language](${u('/help-in-your-language/')}): free interpreters at WVU Medicine, the Health Department, state offices and courts, immigration legal help, and English classes
 - [Work and learning](${u('/work-and-learning/')}): WorkForce West Virginia job help in Westover, and free reading, writing and English lessons for adults
@@ -48,6 +49,7 @@ export function GET({ site }) {
 - [Family and life changes](${u('/family/')}): pick what is going on (a baby or young child, a job or training, reading or English lessons, veterans' health care, counseling or housing) and get local steps with phone numbers and sources
 - [Moving here: start power, water, gas and trash](${u('/moving-here/')}): how to start service with Mon Power, the Morgantown Utility Board and Hope Gas, town trash pickup in Star City and Granville, deposits and fees, and who to ask
 - [Getting around without a car](${u('/getting-around/')}): Mountain Line bus fares and passes, free rides with a WVU ID, late-night campus routes, the Grey Line to Pittsburgh and the airport, which bus goes to Ruby Memorial and Mon General, and NewFIT medical rides
+- [Is this a scam?](${u('/scams/')}): the scams West Virginians report most (WV Attorney General), how to spot a fake utility shutoff call (FirstEnergy), protecting a SNAP EBT card from skimming, and where to report: the AG's Consumer Protection hotline and ReportFraud.ftc.gov
 - [Get weather and emergency alerts](${u('/weather-alerts/')}): official sources only: phone Wireless Emergency Alerts, NWS Pittsburgh and NOAA Weather Radio for Mon County, City of Morgantown Notify Me, WVU Alert, WV 511 road alerts, statewide school closings, and FirstEnergy outage texts
 - [Is my home in a flood zone or a slide area?](${u('/flood-zone/')}): check an address on the WV Flood Tool, the FEMA flood map and the WV Landslide Tool, flood insurance basics (most home and renters insurance does not cover floods, 30 day wait), and the county floodplain permit
 - [Internet at home](${u('/internet/')}): the state broadband map, the state speed test and survey for slow or no service, the WV Attorney General's broadband complaint, the state's BEAD build-out in its own words, and free Wi-Fi, computers and meeting rooms at the Morgantown Public Library System
@@ -63,6 +65,7 @@ export function GET({ site }) {
 - [Your community](${u('/community/')}): pick what fits (a community center near you, a community dinner, a hall to rent, joining a center, making your neighborhood better) and go straight to the page
 - [Community centers and halls](${u('/community-centers/')}): community centers, senior centers and halls across Mon County, grouped by part of the county, with dinners and events, halls to rent, and how to join
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
+- [Make art, learn a craft, show your work](${u('/arts-and-making/')}): Monongalia Arts Center classes, Community Maker Space, studios and gallery applications; library craft nights, knitting group and ArtistWorks lessons; folk arts apprenticeships and jams; state grants for individual artists
 - [Start a nonprofit or community group](${u('/start-a-group/')}): the West Virginia steps: Articles of Incorporation for a nonprofit corporation ($25, Form CD-1), registering with the Secretary of State before asking the public for donations, and links to the IRS for tax-exempt status
 ${centers}
 - [City and county meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council, city board and County Commission meetings, minutes from the last 60 days, and where the school board and towns post theirs
@@ -85,6 +88,7 @@ ${centers}
 - [Driver's license and plates for new residents](${u('/drivers-license/')}): the WV DMV rules for switching an out-of-state license, title and registration (vehicles within 30 days), fees, what to bring, and the Morgantown Regional Office address, phone, hours and appointments
 - [Teen drivers: permit to full license](${u('/teen-drivers/')}): West Virginia's graduated driver licensing in three levels (instruction permit at 15, intermediate license at 16, full license at 17) with hours, passenger and night limits and fees, and the Morgantown DMV office
 - [Register to vote and find your polling place](${u('/vote/')}): official sources only: WV Secretary of State online registration and polling place search, the Monongalia County Clerk's office (address, phone, hours), and Morgantown city election questions
+- [Meet people and get a library card](${u('/meet-people/')}): a Morgantown Public Library System card (free for WV residents, $20 a year out of state, digital-only for county residents), free library programs for adults, and when each of Morgantown's nine neighborhood associations meets
 - [Find your people](${u('/find-your-people/')}): recurring groups in Mon County (game nights, book and craft groups, runs, rides, dances, theater, open mics) and library branches as free places to sit, each with when it meets, cost and source, plus a three-question finder and a list of kinds of groups we could not find
 
 ## Data
