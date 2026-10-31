@@ -47,6 +47,7 @@ Every session should skim this page before picking work in the [daily loop](../C
 
 | File | Covers |
 |---|---|
+| [checking-corrections.md](checking-corrections.md) | How a reported correction is checked before it changes a listing: confirm on a source, a separate source for new phone numbers and addresses, "still correct" stamps a date, hide risky items while checking |
 | [civic-tech.md](civic-tech.md) | GOV.UK Service Standard, U.S. Digital Services Playbook, 18F methods, Code for America, Digital Public Goods Standard, accessibility |
 | [open-data.md](open-data.md) | Open Referral HSDS, the 211 taxonomy, Open311, iCalendar, schema.org, West Virginia and county data portals, licensing |
 | [community-practice.md](community-practice.md) | Theory of change, logic models, Results-Based Accountability, collective impact, asset-based community development, community-centered design, the directory problem |
