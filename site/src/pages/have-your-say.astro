@@ -1,0 +1,97 @@
+---
+// Have your say (#409): how to speak or send a comment at each public body's
+// meetings, from official pages only. Process only: when it meets, how
+// comment works, where the agenda is. Where a body does not publish its
+// comment rules, the card says so and names who to ask. Never a position.
+import Base from '../layouts/Base.astro';
+import Actions from '../components/Actions.astro';
+import SourceLine from '../components/SourceLine.astro';
+export const page = { door: "community", topic: "government", label: "Have your say at a public meeting", summary: "When City Council, the County Commission, the school board, BOPARC and the Planning Commission meet, and how to comment" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const day = '2026-10-30';
+const bodies = [
+  {
+    id: 'city-council', name: 'Morgantown City Council',
+    meets: 'Regular meetings on the 1st and 3rd Tuesday of the month at 7 p.m. in Council Chambers at City Hall. A Committee of the Whole meets the last Tuesday at 7 p.m. It is a work session where Council talks but does not vote.',
+    comment: [
+      'Regular meeting agendas have a "public portion," which follows rules Council sets by resolution. We could not find those rules on a city page, so ask the City Clerk how to sign up and how long you can speak.',
+      'A 2025 Council policy says that when a meeting has a public comment time, you may also comment by phone or send a written comment electronically. Written comments do not have to be read aloud.',
+    ],
+    agenda: 'The agenda packet goes online the Thursday afternoon before each meeting. Meetings stream live on the city\'s YouTube channel and Comcast Channel 14.',
+    links: [['Agendas and minutes', 'https://www.morgantownwv.gov/AgendaCenter/City-Council-3'], ['Find my council member', 'https://morgantownwv.maps.arcgis.com/apps/instant/lookup/index.html?appid=d647fae667fb43d1af49040701b682c9']],
+    phone: '304-284-7439', phoneLabel: 'the City Clerk',
+    sources: [{ url: 'https://www.morgantownwv.gov/154/City-Council', checked: day }, { url: 'https://www.morgantownwv.gov/AgendaCenter/City-Council-3', checked: day }, { url: 'https://www.morgantownwv.gov/DocumentCenter/View/6103/City-Council-Policy-Conduct-of-Public-Meetings-by-Electronic-Means', checked: day }, { url: 'https://www.morgantownwv.gov/156/City-Clerk', checked: day }],
+  },
+  {
+    id: 'county-commission', name: 'Monongalia County Commission',
+    meets: 'Every Wednesday at 10 a.m. on the 2nd floor of the County Courthouse, 243 High Street, Morgantown.',
+    comment: ['The Commission\'s page welcomes comments, but we did not find its rules for speaking at a meeting. Call the Commission office to ask.'],
+    agenda: 'Videos of past meetings are on the Commission\'s site.',
+    links: [['Commission page', 'https://www.monongaliacounty.gov/commission/index.php'], ['Meeting videos', 'https://www.monongaliacounty.gov/commission/commission_videos/index.php']],
+    phone: '304-291-7257', phoneLabel: 'the County Commission office',
+    place: '243 High Street, Morgantown, WV',
+    sources: [{ url: 'https://www.monongaliacounty.gov/commission/index.php', checked: day }, { url: 'https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php', checked: day }],
+  },
+  {
+    id: 'school-board', name: 'Monongalia County Board of Education',
+    meets: 'The 2nd and 4th Tuesday of each month at 5 p.m., unless the calendar says otherwise.',
+    comment: [
+      'We did not find the board\'s rules for speaking at a meeting on its site. Call the central office to ask.',
+      'Before the board adopts a policy, it posts "Policies Out On Comment" so the community can weigh in. The site says to call the Director of Communications at 304-291-9210, extension 1557, to comment on a pending policy.',
+    ],
+    agenda: 'Agendas and minutes are on BoardDocs. Meetings stream live, and past meetings are archived.',
+    links: [['Agendas on BoardDocs', 'https://go.boarddocs.com/wv/mono/Board.nsf/Public'], ['Board page', 'https://www.boe.mono.k12.wv.us/o/mcs/page/board-of-education']],
+    phone: '304-291-9210', phoneLabel: 'Monongalia County Schools',
+    sources: [{ url: 'https://www.boe.mono.k12.wv.us/o/mcs/page/board-of-education', checked: day }],
+  },
+  {
+    id: 'boparc', name: 'BOPARC (parks and recreation board)',
+    meets: 'The 2nd Wednesday of the month at 3 p.m. in Council Chambers at City Hall.',
+    comment: ['Each public comment is limited to 3 minutes. If several people want to speak on the same subject, they pick one person to speak for them. The board does not act on public comments unless the subject is already on the agenda.'],
+    agenda: 'BOPARC posts its own agendas and minutes.',
+    links: [['BOPARC board page', 'https://www.morgantownwv.gov/521/BOPARC']],
+    phone: '304-296-8356', phoneLabel: 'BOPARC',
+    sources: [{ url: 'https://www.morgantownwv.gov/521/BOPARC', checked: day }, { url: 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_01142026-3625', checked: day }],
+  },
+  {
+    id: 'planning-commission', name: 'Morgantown Planning Commission',
+    meets: 'The 2nd Thursday of each month at 6:30 p.m. in Council Chambers. Meetings stream live on the city\'s YouTube channel.',
+    comment: [
+      'You can speak during the public hearing on a case, for up to 5 minutes. If many people from a group want to speak, the chair may ask one person to speak for the group.',
+      'You can also send written comments or evidence, like reports or photos, to the Planning Division before the meeting. Send evidence and long comments at least 5 days before.',
+    ],
+    agenda: 'Agendas and minutes are on the Planning Commission page before each meeting.',
+    links: [['Planning Commission page', 'https://www.morgantownwv.gov/269/Planning-Commission']],
+    sources: [{ url: 'https://www.morgantownwv.gov/269/Planning-Commission', checked: day }],
+  },
+];
+---
+<Base title="Have your say: how to comment at public meetings in Morgantown and Mon County" description="When Morgantown City Council, the Monongalia County Commission, the Board of Education, BOPARC and the Planning Commission meet, how public comment works at each, and where to find agendas.">
+  <h1>Have your say at a public meeting</h1>
+  <p class="lede">Most public boards set aside time for people to speak. Here is when each one meets and how comment works, from their own pages.</p>
+
+  <ul class="choices">
+    {bodies.map((b) => <li><a class="choice" href={`#${b.id}`}><span class="choice-label">{b.name}</span></a></li>)}
+  </ul>
+
+  <div class="note">
+    <p><strong>Before you go:</strong> read the agenda. It lists what the board will discuss and when public comment comes up. Rules and times can change, so check the official page.</p>
+  </div>
+
+  {bodies.map((b) => (
+    <article class="card" id={b.id}>
+      <h2>{b.name}</h2>
+      <p><strong>When it meets:</strong> {b.meets}</p>
+      {b.comment.map((c, i) => <p>{i === 0 && <strong>How to comment: </strong>}{c}</p>)}
+      <p>{b.agenda}</p>
+      <Actions link={b.links[0][1]} linkLabel={b.links[0][0]} phone={b.phone} phoneLabel={b.phoneLabel} place={b.place} about={b.name} />
+      {b.links.length > 1 && <p class="more">{b.links.slice(1).map(([t, u]) => <a href={u}>{t}<span class="sr-only">: {b.name}</span></a>)}</p>}
+      <SourceLine sources={b.sources} about={b.name} />
+    </article>
+  ))}
+
+  <h2>Want to do more than comment?</h2>
+  <p>City boards and commissions have seats for residents. See <a href={`${base}/make-it-better/boards/`}>Serve on a city board</a>.</p>
+
+  <p class="meta">We describe how to take part. We do not take sides on any issue or say what anyone should say. This page is not the official record; the boards' own agendas and minutes are. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+</Base>
