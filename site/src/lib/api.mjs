@@ -76,6 +76,9 @@ export const TYPES = {
       who_it_is_for: str('Who it is for, in the source\'s terms. It does not decide who qualifies.'),
       hours: str('Hours in words, as the source gives them'),
       what_to_do: str('How to use it'),
+      steps: list('Optional. What to do, in order, as short sentences'),
+      options: list('Optional. Choices where order does not matter, like the kinds of ID that count'),
+      notes: list('Optional. Exceptions and special cases, as short paragraphs'),
       contact: {
         type: 'object',
         description: 'Public contact details for the program. Never a private person.',
