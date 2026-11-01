@@ -34,7 +34,7 @@ const nbhd = r('morgantown-neighborhood-associations');
     <>
       <p>{nbhd.who_it_is_for} {nbhd.what_to_do}</p>
       <ul>
-        {(nbhd.meetings ?? []).map((m) => <li><strong>{m.name}:</strong> {m.when}</li>)}
+        {(nbhd.meetings ?? []).map((m) => <li><strong>{m.name}:</strong>{' '}{m.when}</li>)}
       </ul>
       <p>Meeting times and places can change, so check the city's calendar before you go.</p>
       <div class="actions"><a class="btn" href={nbhd.contact.url}><span>City neighborhood page</span></a></div>

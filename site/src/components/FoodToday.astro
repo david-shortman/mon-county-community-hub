@@ -33,9 +33,9 @@ const srsh = org('scotts-run-settlement-house');
 {meals.map((m) => (
   <article class="card">
     <h3>{m.name}</h3>
-    <p><strong>When:</strong> {m.regular.join('; ')}</p>
-    <p><strong>Where:</strong> {m.contact.place}</p>
-    {m.cost && <p><strong>Cost:</strong> {m.cost}</p>}
+    <p><strong>When:</strong>{' '}{m.regular.join('; ')}</p>
+    <p><strong>Where:</strong>{' '}{m.contact.place}</p>
+    {m.cost && <p><strong>Cost:</strong>{' '}{m.cost}</p>}
     {(m.notes || []).map((n) => <p>{n}</p>)}
     <Actions callFirst phone={m.contact.phone} phoneLabel={m.name} link={m.contact.url} linkLabel="Website" about={m.name} />
     <SourceLine sources={m.sources} about={m.name} />

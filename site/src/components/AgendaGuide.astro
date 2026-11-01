@@ -14,10 +14,10 @@ const H2 = `h${level + 1}`;
 <article class="card agenda" id={g.slug} aria-labelledby={`${g.slug}-h`}>
   <H id={`${g.slug}-h`}>{b.name}: {g.meeting}, {prettyDate(g.date)}</H>
   <ul class="facts">
-    <li><strong>When:</strong> {prettyDate(g.date)}, {clock(g.time)}</li>
-    <li><strong>Where:</strong> {g.place}</li>
-    <li><strong>Watch:</strong> {g.watch}</li>
-    <li><strong>Comment:</strong> {b.comment
+    <li><strong>When:</strong>{' '}{prettyDate(g.date)}, {clock(g.time)}</li>
+    <li><strong>Where:</strong>{' '}{g.place}</li>
+    <li><strong>Watch:</strong>{' '}{g.watch}</li>
+    <li><strong>Comment:</strong>{' '}{b.comment
       ? <>see <a href={`${base}${b.comment}`}>how to comment at the {b.name}</a>.</>
       : <>the agenda shows if there is time for public comment. {b.home && <>The board's own page: <a href={b.home}>{new URL(b.home).hostname.replace(/^www\./, '')}</a>.</>}</>}</li>
   </ul>

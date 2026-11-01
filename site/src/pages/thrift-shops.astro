@@ -33,9 +33,9 @@ const causes = shops.filter((s) => s.funds_local_cause);
   <nav aria-labelledby="filters-h">
     <h2 id="filters-h">Looking for something?</h2>
     <ul class="filters">
-      {filters.map((f) => <li><strong>{f.name}:</strong> {f.shops.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>)}
+      {filters.map((f) => <li><strong>{f.name}:</strong>{' '}{f.shops.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>)}
       {buyers.length > 0 && <li><strong>Buys from you</strong> (cash or store credit): {buyers.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>}
-      {causes.length > 0 && <li><strong>Funds a local cause:</strong> {causes.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>}
+      {causes.length > 0 && <li><strong>Funds a local cause:</strong>{' '}{causes.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>}
     </ul>
   </nav>
 

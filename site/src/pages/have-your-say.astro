@@ -82,7 +82,7 @@ const bodies = [
   {bodies.map((b) => (
     <article class="card" id={b.id}>
       <h2>{b.name}</h2>
-      <p><strong>When it meets:</strong> {b.meets}</p>
+      <p><strong>When it meets:</strong>{' '}{b.meets}</p>
       {b.comment.map((c, i) => <p>{i === 0 && <strong>How to comment: </strong>}{c}</p>)}
       <p>{b.agenda}</p>
       <Actions link={b.links[0][1]} linkLabel={b.links[0][0]} phone={b.phone} phoneLabel={b.phoneLabel} place={b.place} about={b.name} />

@@ -63,13 +63,13 @@ const lede = cdp
   <ul class="serve">
     {d.office && (
       <li>
-        <strong>Town office:</strong> {d.office.text} <a href={telHref(d.office.phone)}>{d.office.phone}</a>.
+        <strong>Town office:</strong>{' '}{d.office.text} <a href={telHref(d.office.phone)}>{d.office.phone}</a>.
         <SourceLine sources={[{ url: d.office.url, checked: d.office.checked }]} about={`the ${h.name} office`} />
       </li>
     )}
     {d.services.map((l) => (
       <li>
-        <strong>{l.what}:</strong> {l.title}{l.phone && <>, <a href={telHref(l.phone)}>{l.phone}</a></>}.
+        <strong>{l.what}:</strong>{' '}{l.title}{l.phone && <>, <a href={telHref(l.phone)}>{l.phone}</a></>}.
         {l.note && <> {l.note}</>}
         <SourceLine sources={l.sources} about={`${l.what} in ${h.name}`} slug={l.slug} />
       </li>
@@ -85,7 +85,7 @@ const lede = cdp
     <article class="card">
       <h3>{d.council.name}</h3>
       {d.council.about && <p>{d.council.about}</p>}
-      <p><strong>When and where it meets:</strong> {d.council.meets}</p>
+      <p><strong>When and where it meets:</strong>{' '}{d.council.meets}</p>
       {d.council.records.length > 0 && <p class="more">{d.council.records.map((x, i) => <>{i > 0 && ' · '}<a href={x.url}>{x.link}<span class="sr-only">: {d.council.name}</span></a></>)}</p>}
       <SourceLine sources={d.council.sources} about={d.council.name} />
     </article>
@@ -94,7 +94,7 @@ const lede = cdp
     <article class="card">
       <h3>{b.name}</h3>
       <p>{b.does}</p>
-      <p><strong>When and where it meets:</strong> {b.meets}</p>
+      <p><strong>When and where it meets:</strong>{' '}{b.meets}</p>
       <p class="more"><a href={`${base}/who-decides/#${b.id}`}>How members are chosen<span class="sr-only">: {b.name}</span></a></p>
       <SourceLine sources={b.sources} about={b.name} />
     </article>
