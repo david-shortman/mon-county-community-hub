@@ -17,7 +17,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2>Free clinic: medicines and dental referrals</h2>
   {r('health-right-clinic') && <ResourceCard r={r('health-right-clinic')} />}
 
-  <h2>Dental clinics in Morgantown</h2>
+  <h2>Dental clinics in Mon County</h2>
   {r('monchd-dentistry') && <ResourceCard r={r('monchd-dentistry')} showCost />}
   {r('wvu-dental-clinics') && <ResourceCard r={r('wvu-dental-clinics')} showCost />}
   {r('clay-battelle-health-center') && <ResourceCard r={r('clay-battelle-health-center')} showCost lead="Sliding fee dentist in Blacksville, western Mon County." />}
