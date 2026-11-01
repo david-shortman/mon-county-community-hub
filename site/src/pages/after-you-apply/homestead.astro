@@ -6,8 +6,8 @@
 // code.wvlegislature.gov, the Assessor's Real Estate page and SmartFile
 // guide, and the State Tax Division's credit page and 2025 Schedule HEPTC-1,
 // read 2026-11-01. No official page says whether the Assessor sends an
-// approval letter, or the deadline to go from the County Commission to
-// circuit court (§11-3-25, not read), so both are left off. Benefits page:
+// approval letter. §11-6B-6(b) points to §11-3-25 for circuit court review,
+// but §11-3-25 is repealed, so no court deadline is given (#1223). Benefits page:
 // the PR waits for David.
 import Base from '../../layouts/Base.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
@@ -23,6 +23,7 @@ const src = {
   move: code('11-6B-3'),
   decide: code('11-6B-5'),
   appeal: code('11-6B-6'),
+  repealed: code('11-3-25'),
   books: code('11-6B-7'),
   notify: code('11-6B-10'),
   sctcLaw: code('11-21-21'),
@@ -67,10 +68,10 @@ const ok = (r) => r && !r.hidden;
     <li><strong>30 days.</strong> "Any claimant aggrieved by the denial of his or her claim for exemption or the subsequent denial of his or her exemption may appeal to the county commission within thirty days after receipt of written notice explaining why the exemption was denied."</li>
     <li><strong>Use the form that came with the notice.</strong> The law says the Assessor must give you one for the County Commission.</li>
     <li><strong>The County Commission decides by February 28.</strong> The law says it rules "as soon as practicable after receipt of the notice of appeal, but in no event later than the twenty-eighth day of February" of the tax year. It "may hold a hearing on the claim."</li>
-    <li><strong>After that,</strong> you or the Assessor can ask the county's circuit court to review the decision, the same way as other appeals from the County Commission.</li>
+    <li><strong>After that,</strong> the law says you or the Assessor can ask the county's circuit court to review the decision. The section of law it points to for how (§11-3-25) has since been repealed, so we cannot give a deadline for that step. Legal help is listed below.</li>
     <li><strong>If you already had the exemption,</strong> the same steps apply. The law says if the Assessor thinks you no longer qualify, it denies the exemption on the next July 1 and sends written notice by January 1.</li>
   </ul>
-  <SourceLine sources={[src.appeal, src.decide]} org={ASSESSOR} about="homestead appeals" />
+  <SourceLine sources={[src.appeal, src.decide, src.repealed]} org={ASSESSOR} about="homestead appeals" />
 
   <h2 id="bill">On your tax bill</h2>
   <p>The law says the exemption "shall be shown on the property books as a deduction from the total assessed value." If the exemption is more than your home's whole assessed value, "The sheriff shall issue a statement to the owner showing that no taxes are due." For tax due dates and discounts, see <a href={`${base}/property-tax/`}>Property tax</a>.</p>
