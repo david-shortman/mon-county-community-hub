@@ -8,8 +8,11 @@ contact:
   phone: "304-558-6200"
   url: https://wvdnr.gov/buy-a-license
   url_label: How to buy
+cost: "2026 prices from the DNR's fishing rules summary: resident fishing license (Class B) $19, Conservation Stamp $5, trout stamp $10, five-day fishing license $8. Licenses are good for the calendar year, so you buy new ones each January."
 sources:
   - url: https://wvdnr.gov/buy-a-license
     checked: 2026-11-01
   - url: https://wvdnr.gov/free-fishing-days/
+    checked: 2026-11-01
+  - url: https://wvdnr.gov/wp-content/uploads/2026/02/Pub_Regs_Fishing_2026_DNR_WILD_pp.pdf
     checked: 2026-11-01
