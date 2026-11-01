@@ -2,12 +2,13 @@ name: North Central West Virginia Community Action Association (NCWVCAA)
 slug: ncwvcaa
 kind: nonprofit
 website: https://ncwvcaacorp.net/
-phone: "304-363-2170"
-summary: The Community Action agency for Monongalia County and other north central WV counties. It runs home weatherization, free tax preparation, Head Start, case management and affordable housing programs. Its Monongalia County office is in Westover.
-topics: [money, housing]
+summary: The Community Action agency for Monongalia County and other north central WV counties. It runs home weatherization, free tax preparation, Head Start, case management, affordable housing programs and help for veterans. Its Monongalia County office is at 40 Commerce Dr, Suite 200, Westover.
+topics: [money, housing, poverty, taxes]
 area: monongalia-county
 sources:
   - url: https://ncwvcaacorp.net/counties/monongalia-county-office-2/
     checked: 2026-10-31
   - url: https://ncwvcaacorp.net/programs/weatherization/
     checked: 2026-10-31
+  - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
+    checked: 2026-10-30
