@@ -131,6 +131,8 @@ Best first. Use the highest tier a source supports.
 
 If a hand-checked entry and a feed entry have the same `slug`, the hand-checked one wins. Use this to correct or add detail to a feed item.
 
+Every record says how its facts were read in `sources[].method` (ADR 0002, #70): `hand` (a person or agent read the page), `feed` (from the publisher's own feed) or `watched-page` (read from the page by a program). Hand YAML files leave it out, and `hand` is assumed. The feed loader writes `method: feed`, the `fetched` time and the feed's id on `sources[0]`, and the card picks "Pulled from" or "Checked against" from it.
+
 Live feeds wired in now:
 
 | Feed | What we keep | Feed URL |
