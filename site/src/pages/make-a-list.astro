@@ -7,6 +7,7 @@
 // record, with its source and checked date. Without scripts the page is a
 // plain list of every place, which prints as it is.
 import Base from '../layouts/Base.astro';
+import Fold from '../components/Fold.astro';
 import { loadDir, loadDoors, oldestChecked, prettyDate, todayYmd, shortUrl, isStale } from '../lib/content.mjs';
 export const page = { door: "about", label: "Make a list for someone", summary: "Pick a few places, add a note, and print or text the list" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -31,13 +32,16 @@ const NOTE_MAX = 200;
     <p class="note"><strong>Keep it private:</strong> do not type names, addresses, health details or anything personal in the note. The note is only in the web address of the list. Nothing is saved or sent to us.</p>
 
     <form id="mal-form" method="get" action={`${base}/make-a-list/`} hidden>
-      {groups.map((g) => (
-        <fieldset class="mal-group">
-          <legend>{g.name}</legend>
-          <ul class="pick">
-            {g.list.map((r) => <li><label><input type="checkbox" name="pick" value={r.slug} /><span>{r.title}</span></label></li>)}
-          </ul>
-        </fieldset>
+      {/* Each door's places are folded (#1174): open, every checkbox ran about 38 phone screens. */}
+      {groups.map((g, i) => (
+        <Fold id={`mal-g${i}`} title={g.name} hint={`${g.list.length} places. Tap to pick from them.`}>
+          <fieldset class="mal-group">
+            <legend class="sr-only">{g.name}</legend>
+            <ul class="pick">
+              {g.list.map((r) => <li><label><input type="checkbox" name="pick" value={r.slug} /><span>{r.title}</span></label></li>)}
+            </ul>
+          </fieldset>
+        </Fold>
       ))}
       <p><label for="mal-note">A short note for them (optional, up to {NOTE_MAX} letters)</label><br />
         <textarea id="mal-note" name="note" maxlength={NOTE_MAX} rows="3" cols="40" placeholder="Example: Call the first one in the morning."></textarea></p>
@@ -76,8 +80,7 @@ const NOTE_MAX = 200;
   </section>
 
   <style>
-    .mal-group { border: 1px solid var(--line); border-radius: 10px; margin: 12px 0; padding: 4px 12px 8px; }
-    .mal-group legend { font-weight: 700; padding: 0 4px; }
+    .mal-group { border: 0; margin: 8px 0 0; padding: 0; }
     #mal-note { width: 100%; max-width: 32rem; font: inherit; padding: 8px; border: 1.5px solid var(--muted); border-radius: 8px; background: var(--card); color: var(--fg); box-sizing: border-box; }
     .mal-note { font-size: 1.1rem; border-left: 4px solid var(--brick); padding: 6px 12px; background: var(--accent-bg); }
     .sheet-list { list-style: none; padding: 0; margin: 12px 0; }
@@ -107,7 +110,7 @@ const NOTE_MAX = 200;
         count.textContent = n + ' of ' + MAX + ' picked.';
         boxes.forEach(function (b) { b.disabled = !b.checked && n >= MAX; });
       }
-      boxes.forEach(function (b) { b.checked = picks.indexOf(b.value) > -1; b.addEventListener('change', update); });
+      boxes.forEach(function (b) { b.checked = picks.indexOf(b.value) > -1; b.addEventListener('change', update); if (b.checked) b.closest('details').open = true; });
       document.getElementById('mal-note').value = note;
       update();
       var items = list.querySelectorAll('li[data-slug]');
