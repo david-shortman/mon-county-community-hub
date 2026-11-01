@@ -20,7 +20,7 @@ const usaFreeze = [{ url: 'https://www.usa.gov/credit-freeze', name: 'USAGov', c
 const usaReports = [{ url: 'https://www.usa.gov/credit-reports', name: 'USAGov', checked }];
 const ag = [{ url: 'https://ago.wv.gov/consumer-protection/identity-theft-protection-prevention', name: 'WV Attorney General', checked }];
 ---
-<Base title="Identity theft: what to do in West Virginia" description="If someone used your name, Social Security number or cards: report it at IdentityTheft.gov, place a fraud alert or credit freeze with Equifax, Experian and TransUnion, call your bank, get your free credit reports, and call the WV Attorney General's Consumer Protection Division.">
+<Base title="Identity theft in Morgantown and Mon County, WV: what to do" description="If someone used your name, Social Security number or cards: report it at IdentityTheft.gov, place a fraud alert or credit freeze with Equifax, Experian and TransUnion, call your bank, get your free credit reports, and call the WV Attorney General's Consumer Protection Division.">
   <h1>Identity theft: what to do</h1>
   <p class="lede">If someone used your name, Social Security number, or card or account numbers, you can start tonight: report it online at IdentityTheft.gov and get a list of steps to recover. Or call the Federal Trade Commission at <a href={telHref('1-877-438-4338')}>1-877-438-4338</a>. Lost your wallet but see no problems yet? The state says to act anyway. Tap a step to open it.</p>
 
@@ -72,6 +72,8 @@ const ag = [{ url: 'https://ago.wv.gov/consumer-protection/identity-theft-protec
   <Milepost n={4} title="Check your credit reports" when="This week" id="reports">
   <p>You can get a free credit report each year from Equifax, Experian and TransUnion. USA.gov says AnnualCreditReport.com is the only website the federal government authorizes for these free reports. Or call <a href={telHref('1-877-322-8228')}>1-877-322-8228</a> (TTY 1-800-821-7232). Look for accounts you did not open.</p>
   <SourceLine sources={usaReports} about="free credit reports" />
+  <p>The WV Attorney General suggests spacing them out: ask for one company's report every four months.</p>
+  <SourceLine sources={ag} about="spacing out your free reports" />
   <div class="actions">
     <a class="btn" href="https://www.annualcreditreport.com/"><Icon name="open" /><span>AnnualCreditReport.com</span></a>
   </div>
