@@ -24,7 +24,7 @@ const monthName = new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: 'U
 <Base title="Corrections to Everything Morgantown" description="Every fix we have made to a fact, link or out-of-date detail on Everything Morgantown, newest first.">
   <h1>Corrections</h1>
   <p class="lede">When we get something wrong, we fix it and list it here, newest first. Typos are fixed without a note.</p>
-  <p><strong>{monthName}:</strong> {thisMonth.length ? `${count(thisMonth.length)} fixes` : 'no fixes yet'}{fromHelpers.length > 0 && `, ${count(fromHelpers.length)} of them from people who work at these places or help others find services`}.</p>
+  <p><strong>{monthName}:</strong>{' '}{thisMonth.length ? `${count(thisMonth.length)} fixes` : 'no fixes yet'}{fromHelpers.length > 0 && `, ${count(fromHelpers.length)} of them from people who work at these places or help others find services`}.</p>
   <p>See something wrong? Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>, or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account, and what you send is not posted. The "Report a problem" link on each item opens the same form.</p>
   <PromiseNumbers />
   <h2>Every fix</h2>

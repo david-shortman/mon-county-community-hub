@@ -17,8 +17,8 @@ const H = `h${level}`;
     {r.actions.map((a) => (
       <li>
         {a.item && <p class="item">{a.item}</p>}
-        <p><strong>Motion:</strong> {a.motion}</p>
-        <p><strong>Result:</strong> {a.result ?? 'The minutes do not record a result.'}{a.vote && <>, <strong>vote:</strong> {a.vote}</>}</p>
+        <p><strong>Motion:</strong>{' '}{a.motion}</p>
+        <p><strong>Result:</strong>{' '}{a.result ?? 'The minutes do not record a result.'}{a.vote && <>, <strong>vote:</strong>{' '}{a.vote}</>}</p>
       </li>
     ))}
   </ol>

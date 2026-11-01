@@ -1,6 +1,8 @@
 // Page weight check (#180). Runs after `npm run build`. Exits 1 if a page is over budget.
-// Budget (docs/design/presentation.md, "Weight budget"): urgent pages under 100 KB,
-// every other page under 300 KB. Weight is the page plus everything it loads on a first
+// Budget (docs/design/presentation.md, "Weight budget"): urgent pages under 50 KB,
+// every other page under 150 KB. Tightened from 100 and 300 KB in wave 8 (#529), when
+// the heaviest pages weighed about 40 and 100 KB: the budget now catches a page that
+// doubles, not only one that grows tenfold. Weight is the page plus everything it loads on a first
 // visit (fonts, icons, scripts, styles, images), each gzipped the way GitHub Pages sends it.
 // Files a page loads only when asked (the search index on /search/) are not counted.
 import fs from 'node:fs';
@@ -8,10 +10,11 @@ import path from 'node:path';
 import zlib from 'node:zlib';
 
 const KB = 1024;
-const URGENT_KB = 100;
-const EVERYDAY_KB = 300;
+const URGENT_KB = 50;
+const EVERYDAY_KB = 150;
 // Urgent pages: the one list. Any page with the crisis strip counts as urgent too.
-const URGENT = ['index.html', 'stay-tonight/index.html', 'help/food/'];
+// The hard-moment pages the service worker saves for offline use are all here.
+const URGENT = ['index.html', 'stay-tonight/index.html', 'tonight/index.html', 'help/food/', 'utility-bills/index.html', 'after-a-storm/index.html', 'mental-health/index.html', 'drugs-and-alcohol/index.html', 'protective-orders/index.html'];
 
 const dist = new URL('../dist/', import.meta.url).pathname;
 const gz = new Map();
@@ -58,7 +61,7 @@ for (const file of htmlFiles(dist)) {
 
 rows.sort((a, b) => b.bytes - a.bytes);
 const kb = (n) => (n / KB).toFixed(1).padStart(6);
-console.log('\nPage weight, gzipped, page plus what it loads (budget: urgent 100 KB, everyday 300 KB)');
+console.log(`\nPage weight, gzipped, page plus what it loads (budget: urgent ${URGENT_KB} KB, everyday ${EVERYDAY_KB} KB)`);
 for (const r of rows) {
   const flag = r.bytes > r.budget ? '  OVER BUDGET' : '';
   console.log(`${kb(r.bytes)} KB  ${r.urgent ? 'urgent  ' : 'everyday'}  ${r.where} (${r.files} files)${flag}`);

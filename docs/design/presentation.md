@@ -45,16 +45,16 @@ Measured as everything the page loads, compressed, on first visit. Checked on ev
 
 | Page kind | Examples | Budget | Script |
 |---|---|---|---|
-| Urgent | Stay tonight, food today, any crisis page | **Under 100 KB** | None required. Extras under 10 KB. |
-| Everyday | Guides, deadlines, how do I pages | **Under 300 KB** | None required. Extras under 30 KB. |
+| Urgent | Stay tonight, Tonight, food help, utility bills, after a storm, any crisis page | **Under 50 KB** | None required. Extras under 10 KB. |
+| Everyday | Guides, deadlines, how do I pages | **Under 150 KB** | None required. Extras under 30 KB. |
 | Never | Any page | Over 1 MB | Content that needs script to show |
 
-These match rubric A8: under 300 KB scores 2, under 100 KB with no required script scores 3. Ways to stay inside it:
+The build budget is tighter than rubric A8 (under 300 KB scores 2, under 100 KB with no required script scores 3), so a page that doubles in weight fails the build long before it loses rubric points. It was tightened from 100 and 300 KB in wave 8 (#529). To see how long the top pages take to show something on a slow connection, run `npm run slow-3g` in `site/` after a build. Ways to stay inside it:
 
 - System fonts only (identity.md already says this).
 - Our own small SVG drawings, sized in the HTML. No photos unless they explain something, and then compressed and lazy loaded.
 - No embedded widgets: no embedded maps, calendars, videos, social feeds, or job boards. Link out instead, and say where the link goes.
-- CSS inlined, as the `Base` layout already does.
+- CSS inlined, as the `Base` layout already does. The build then drops inlined component CSS a page does not use (`site/src/lib/prune-css.mjs`).
 
 ## Building blocks
 

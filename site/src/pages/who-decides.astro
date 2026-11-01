@@ -25,10 +25,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   {bodies.map((b) => (
     <article class="card" id={b.id}>
       <h2>{b.name}</h2>
-      <p><strong>What it does:</strong> {b.does}</p>
-      <p><strong>How members are chosen:</strong> {b.chosen}</p>
-      <p><strong>When it meets:</strong> {b.meets}</p>
-      {b.comment && <p><strong>Public comment:</strong> {b.comment}</p>}
+      <p><strong>What it does:</strong>{' '}{b.does}</p>
+      <p><strong>How members are chosen:</strong>{' '}{b.chosen}</p>
+      <p><strong>When it meets:</strong>{' '}{b.meets}</p>
+      {b.comment && <p><strong>Public comment:</strong>{' '}{b.comment}</p>}
       <p class="more">{b.records.map(([t, u], i) => <>{i > 0 && ' · '}<a href={u}>{t}<span class="sr-only">: {b.name}</span></a></>)}</p>
       <SourceLine sources={b.sources} about={b.name} />
     </article>

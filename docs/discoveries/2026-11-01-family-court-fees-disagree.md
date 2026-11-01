@@ -6,3 +6,4 @@
 - **Why it matters:** A parent filing without a lawyer needs to bring the right amount in cash or money order, and may not know which version of a form is current.
 - **Who keeps it:** Supreme Court of Appeals of West Virginia; Monongalia County Circuit Clerk; WV Bureau for Child Support Enforcement
 - **Status:** open (#1219)
+- **Update, sweep 3 (#529):** W. Va. Code §59-1-11(b)(2) (https://code.wvlegislature.gov/59-1-11/) sets the copy fee at $1 a page, which matches two packets but not SCA-FC-260. W. Va. Code §59-1-14 (https://code.wvlegislature.gov/59-1-14/) caps the sheriff's service charge at $30 and lets each county commission set the actual amount, so the packets' $30 may be a cap, not the Monongalia amount. Both read 2026-11-01.

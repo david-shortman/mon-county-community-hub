@@ -93,7 +93,7 @@ const parts = [
     <section class="card" id={p.id} aria-labelledby={`${p.id}-h`}>
       <h2 id={`${p.id}-h`}>{p.term}</h2>
       {p.text?.map((t) => <p>{t}</p>)}
-      {p.list && <ul>{p.list.map(([w, d]) => <li><strong>{w}:</strong> {d}</li>)}</ul>}
+      {p.list && <ul>{p.list.map(([w, d]) => <li><strong>{w}:</strong>{' '}{d}</li>)}</ul>}
       <SourceLine sources={p.sources} about={p.term} />
     </section>
   ))}

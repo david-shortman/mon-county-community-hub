@@ -1,0 +1,31 @@
+---
+// Septic and well check when a home is sold (part of #393): the health
+// department's "Request for water and sewage evaluation" PDF as short lists.
+// Every rule and fee is quoted in
+// content/pdf-pages/monchd-home-loan-evaluation.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "government", label: "Septic and well check when a home is sold", summary: "The health department's home loan evaluation: what it checks, the $225 fee, how long it takes, and the well and septic rules a home must meet" };
+const d = pdfPage('monchd-home-loan-evaluation');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-598-5131';
+---
+<Base title="Septic and well check when you buy or sell a home in Mon County, WV" description="The Monongalia County Health Department's home loan evaluation of a well and septic system: what it covers, the $225 fee ($325 with radon), how long it takes, and the rules a system must meet, quoted from the department's PDF.">
+  <h1>Septic and well check when a home is sold</h1>
+  <p class="lede">Buying or selling a home with a well or a septic system? Many lenders want the health department to check both first. The department's rules for that check are in a six-page PDF, so here they are as a short list. Questions: call <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>Permits for a new or failing septic system or well, and testing your well water: see <a href={`${base}/septic-and-wells/`}>septic systems and well water</a>. All the department's fees: <a href={`${base}/health-department-fees/`}>health department permit fees</a>.</p>
+
+  <p class="meta">This page is a reading aid. The health department's PDF is the official version. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

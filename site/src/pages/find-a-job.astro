@@ -25,6 +25,8 @@ const r = (slug) => all.find((e) => e.slug === slug);
     </ul>
   </nav>
 
+  <p>Just lost a job? <a href={`${base}/life-events/lost-my-job/`}>I lost my job</a> lists what to do first, in order.</p>
+
   <h2 id="boards">Where local employers post jobs</h2>
   <p>Government jobs, from the city to the state:</p>
   {r('morgantown-city-jobs') && <ResourceCard r={r('morgantown-city-jobs')} />}

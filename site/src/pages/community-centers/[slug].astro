@@ -42,7 +42,7 @@ const where = `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|E
   {st.label && <p class="note"><strong>{st.label}.</strong>{p.last_activity_seen && ` The newest sign of activity we found was from ${prettyDate(p.last_activity_seen)}.`}</p>}
 
   <Actions callFirst phone={p.contact?.phone} phoneLabel={p.name} link={p.contact?.url} linkLabel={p.contact?.url_label ?? 'Website'} place={p.contact?.place} about={p.name} />
-  {p.contact?.place && <p><strong>Address:</strong> {p.contact.place}</p>}
+  {p.contact?.place && <p><strong>Address:</strong>{' '}{p.contact.place}</p>}
   {p.contact?.email && <p><strong>Email:</strong> <a href={`mailto:${p.contact.email}`}>{p.contact.email}</a></p>}
   {p.contact?.facebook && <p><a href={p.contact.facebook}>{p.name} on Facebook</a>. We cannot check Facebook, so it may have newer news than this page.</p>}
   {p.notes?.map((n) => <p class="note">{n}</p>)}
