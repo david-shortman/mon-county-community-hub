@@ -1,0 +1,154 @@
+---
+// After you apply: SNAP. What happens after a SNAP application, from the WV
+// DoHS Income Maintenance Manual (IMM, effective October 5, 2026) chapters 1,
+// 9 and 10, and the hearing request form DFA-FH-1 printed in chapter 9's
+// Appendix C, read 2026-10-31. Builds on /snap/ and /file-today/ (how to
+// apply) and does not repeat them. We quote the state's time limits; DoHS
+// decides each case. High-stakes benefits page: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'this-month', topic: 'food', label: 'After you apply for SNAP', summary: 'The interview, letters, deadlines, renewals and how to ask for a fair hearing' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const ORG = 'wv-department-of-human-services';
+const IMM = 'https://bfa.wv.gov/media/40005/download?inline';
+const imm = (part) => ({ url: IMM, checked, name: `WV DoHS Income Maintenance Manual, ${part}` });
+const src = {
+  ch1: imm('Chapter 1, sections 1.4.4 to 1.4.19'),
+  ch9: imm('Chapter 9, Client Notification'),
+  fh1: imm('Chapter 9, Appendix C: form DFA-FH-1, Rev. 6/22'),
+  ch10: imm('Chapter 10, section 10.4.2'),
+  snapForm: { url: 'https://bfa.wv.gov/media/40007/download?inline', checked, name: 'WV DoHS SNAP application, form DFA-SNAP-1, Rev. 7/26' },
+  path: { url: 'https://www.wvpath.wv.gov/', checked: '2026-10-29' },
+  messages: { url: 'https://learning-public.wvpath.wv.gov/SubmitanApplication.html', checked: '2026-10-29', name: 'WV PATH help: Submit an Application' },
+  faq: { url: 'https://bfa.wv.gov/frequently-asked-questions-faq', checked, name: 'WV DoHS Bureau for Family Assistance FAQ' },
+};
+const office = resource('monongalia-county-dohs-office');
+const legal = resource('legal-aid-wv-civil-legal-help');
+const r211 = resource('wv-211');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for SNAP in Mon County: interview, letters, deadlines and appeals" description="What happens after you apply for SNAP (food stamps) in Monongalia County, WV: the phone interview, the letters DoHS sends, how long each step takes, renewals, what to report, and how to ask for a fair hearing within 90 days. Quoted from the state's own manual.">
+  <h1>After you apply for SNAP</h1>
+  <p class="lede">Watch your mail and your WV PATH messages, and answer each letter by its date. Here is what comes next, step by step, in the state's own rules.</p>
+  <p>Not applied yet? See <a href={`${base}/snap/`}>how to apply for SNAP</a> or <a href={`${base}/file-today/#snap`}>file today</a>. SNAP is run by the West Virginia Department of Human Services (DoHS).</p>
+  <p class="note">This page quotes the state's staff manual and forms. DoHS decides each case. It is information, not legal advice.</p>
+  <ul class="topic-list">
+    <li><a href="#interview">1. The interview</a></li>
+    <li><a href="#papers">2. If DoHS asks for papers</a></li>
+    <li><a href="#decision">3. The decision and your card</a></li>
+    <li><a href="#letters">Letters you may get</a></li>
+    <li><a href="#status">Check where things stand</a></li>
+    <li><a href="#hearing">If you are denied, cut or cut off</a></li>
+    <li><a href="#report">What to report while you get SNAP</a></li>
+    <li><a href="#renew">Renewing</a></li>
+    <li><a href="#help">Who can help</a></li>
+  </ul>
+
+  <h2 id="interview">1. The interview</h2>
+  <ul>
+    <li><strong>It is usually by phone.</strong> The manual says everyone who applies "are interviewed by phone unless the individual chooses to be interviewed face-to-face."</li>
+    <li><strong>If you applied on WV PATH,</strong> the worker schedules the interview after DoHS gets your application, and you get a letter with the time unless the interview happens the same day.</li>
+    <li><strong>You can bring someone.</strong> "The applicant may bring any person he chooses to the interview." You can also name an adult outside your home, in writing, as your authorized representative to do the interview for you.</li>
+    <li><strong>What the worker covers:</strong> whether you can get SNAP within 7 days, how long the decision takes, when benefits come, how the EBT card works, how long you are approved for, what you must report, and the work rules.</li>
+    <li><strong>If you miss it,</strong> DoHS sends a notice, and "it is his responsibility to reschedule." Call the office. If you do not, the manual says the application is denied on the 30th day after you applied.</li>
+    <li><strong>If you started with only your name, address and signature,</strong> you will be asked to sign again before benefits are issued. DoHS must give you 10 days to do that.</li>
+  </ul>
+  <SourceLine sources={[src.ch1]} org={ORG} about="the SNAP interview" />
+
+  <h2 id="papers">2. If DoHS asks for papers</h2>
+  <p>DoHS asks for proof on a form called the <strong>DFA-6, Notice of Information Needed</strong>, or a verification checklist. The manual says what it asks for "is due 10 calendar days from the date of the DFA-6 or verification checklist." The date is written on the form.</p>
+  <ul>
+    <li>If you cannot get something by then, call your worker before the date. The manual says the application is denied when the papers are late "and the client has not contacted the Worker to explain the delay."</li>
+    <li>If you send the papers late but within 60 days of when you applied, the manual says you do not have to fill out a new application.</li>
+    <li>Missing proof of a cost (like rent) does not always mean a denial. The manual says you can still be approved, without that cost counted.</li>
+  </ul>
+  <SourceLine sources={[src.ch9, src.ch1]} org={ORG} about="papers DoHS asks for" />
+
+  <h2 id="decision">3. The decision and your card</h2>
+  <ul>
+    <li><strong>Within 30 days.</strong> "If eligible, the client's first SNAP benefits must be available for use within 30 days of the date of application, unless Expedited Service applies."</li>
+    <li><strong>Within 7 days for some homes.</strong> The cases are listed on <a href={`${base}/file-today/#snap`}>File today</a>. If you asked for this and do not qualify, you get a letter called the DFA-FS-19.</li>
+    <li><strong>Counted from the day you applied.</strong> If you are approved within the 30 days, benefits are counted from the date DoHS got your application.</li>
+    <li><strong>The card.</strong> SNAP goes on an EBT card. The manual says the card "must be activated prior to use," and first benefits "are usually received or are available within three days" after the worker enters the approval.</li>
+    <li><strong>If DoHS is late,</strong> it must send a letter called the DFA-20, which lists what it still has not received.</li>
+  </ul>
+  <SourceLine sources={[src.ch1, src.ch9]} org={ORG} about="the SNAP decision" />
+
+  <h2 id="letters">Letters you may get</h2>
+  <p>The state names its letters by form number. The number is usually printed on the letter.</p>
+  <dl class="letters">
+    <dt>DFA-6, Notice of Information Needed</dt>
+    <dd>What proof to send, and the date it is due.</dd>
+    <dt>DFA-10, Appointment Letter</dt>
+    <dd>The time and place of an appointment, most often for a renewal.</dd>
+    <dt>DFA-NL-A, Action Taken on Your Application</dt>
+    <dd>The decision. If approved, it shows the amount and how many months you are approved for. If denied, it gives the reason and the manual section. It also lists free legal help.</dd>
+    <dt>DFA-NL-B, Action Taken on the Benefits You Receive</dt>
+    <dd>An increase, a change that does not change your amount, or in some cases a cut with no advance notice.</dd>
+    <dt>DFA-NL-C, Pending Change in the Benefits You Receive</dt>
+    <dd>Your SNAP will go down or stop. It is mailed at least 13 days before the first day of the month the change starts. Act before then to keep your SNAP the same while you appeal (see below).</dd>
+    <dt>DFA-FH-1, Pre-Hearing Conference and/or Fair Hearing Request Form</dt>
+    <dd>Comes with every decision letter. Use it to ask for a hearing.</dd>
+    <dt>DFA-FS-19</dt>
+    <dd>You asked for SNAP within 7 days and do not qualify for that. Your application keeps going on the 30 day track.</dd>
+    <dt>DFA-20, Application Not Acted On</dt>
+    <dd>DoHS ran past its time limit. It lists what it is still missing.</dd>
+  </dl>
+  <SourceLine sources={[src.ch9]} org={ORG} about="SNAP letters" />
+
+  <h2 id="status">Check where things stand</h2>
+  <p>On WV PATH, sign in and check My Messages. You can also call DoHS customer service at <a href="tel:18777161212">1-877-716-1212</a>, Monday to Friday, 8 a.m. to 5 p.m., or call or visit the Mon County office.</p>
+  <SourceLine sources={[src.messages, src.faq]} org={ORG} about="checking your SNAP status" />
+  {ok(office) && <ResourceCard r={office} />}
+
+  <h2 id="hearing">If you are denied, cut or cut off</h2>
+  <p>You can ask for a <strong>Pre-Hearing Conference</strong> (an informal meeting with your worker and a supervisor), a <strong>Fair Hearing</strong> (before a State Hearings Officer), or both. The state's form says you can ask "either orally or in writing."</p>
+  <ul>
+    <li><strong>The deadline is 90 days.</strong> The form says "you may ask for a Fair Hearing or Pre-Hearing Conference within 90 days of the effective date of the actions."</li>
+    <li><strong>To keep your SNAP the same while you wait,</strong> ask before the date of the cut or closure on your DFA-NL-C letter. The form says then "your benefits will not be reduced or stopped, pending a final decision."</li>
+    <li><strong>If the state wins,</strong> the manual says you may have to pay back the extra. You can check a box on the form if you do not want benefits to continue.</li>
+    <li><strong>Not continued in some cases.</strong> The form says benefits are not continued "even if you request it" in three cases. These are a cut from a SNAP review, a change for everyone like the yearly Social Security increase, or a form you signed giving up advance notice. A hearing is still held.</li>
+    <li><strong>How to ask.</strong> Fill out the DFA-FH-1 that came with your letter and return it to your local DoHS office, or ask out loud. You can ask for the hearing by phone, and for a copy of the manual section your decision used.</li>
+    <li><strong>You can bring someone.</strong> The form says a friend, relative, lawyer "or any other person" can help or speak for you. DoHS does not pay for a lawyer, but free legal help is below.</li>
+    <li><strong>Getting there.</strong> The form says your case worker will help arrange a ride if you ask, and will help you prepare. Call DoHS Client Services at <a href="tel:18006428589">1-800-642-8589</a>.</li>
+    <li><strong>Your file.</strong> You can look at your case record during office hours, Monday to Friday, 8:30 a.m. to 5 p.m.</li>
+  </ul>
+  <p>The SNAP application also says you can ask for a Fair Hearing if you feel you were treated unfairly because of race, age, color, national origin, sex, disability, political belief or religion.</p>
+  <SourceLine sources={[src.fh1, src.ch9, src.snapForm]} org={ORG} about="asking for a SNAP fair hearing" />
+  {ok(legal) && <ResourceCard r={legal} />}
+
+  <h2 id="report">What to report while you get SNAP</h2>
+  <p>The manual calls this "limited reporting." Most homes only have to report a few things during the months they are approved:</p>
+  <ul>
+    <li>When your home's total income before taxes goes over the limit named in your approval letter. The manual says this limit is 130% or 200% of the federal poverty level, depending on your income when you were approved.</li>
+    <li>If someone in your home is under the work rule for able-bodied adults without dependents, when they lose an exemption or stop meeting it (working or training 20 hours a week, or 80 hours a month).</li>
+    <li>Large lottery or gambling winnings from one game, at or above the SNAP asset limit for homes with an older or disabled member.</li>
+  </ul>
+  <p><strong>Report by the 10th.</strong> "These changes must be reported no later than the 10th calendar day of the month following the month in which the change occurs." You do not have to report the yearly cost-of-living raise in Social Security, SSI or VA checks.</p>
+  <p>You can still report other changes, like a lower income or a new person in your home. The manual says DoHS must act on any change you report. Report on WV PATH or at 1-877-716-1212.</p>
+  <SourceLine sources={[src.ch10, src.faq]} org={ORG} about="what to report" />
+
+  <h2 id="renew">Renewing</h2>
+  <ul>
+    <li><strong>How long you are approved.</strong> Most homes are approved for 6 months. The manual says homes where every adult is 60 or older or disabled, with no work income, can be approved for 24 months, with a short form called the Interim Contact Report (PRC-2) at 12 months. That form needs no interview.</li>
+    <li><strong>The renewal form comes by mail</strong> "in the month prior to the last month of certification." Return it before the interview date printed on it, or renew on WV PATH.</li>
+    <li><strong>A renewal needs an interview,</strong> usually by phone. If your appointment is after the 15th of the month, the manual says you can ask for one on the 15th or earlier.</li>
+    <li><strong>On time keeps SNAP coming.</strong> If you turn in the form on time, do the interview and send proof by the due date, the manual says you "must receive uninterrupted benefits."</li>
+    <li><strong>If you miss the end date,</strong> SNAP stops. You can still turn in the renewal form during the next month. It then counts as your application, so you do not need a new one. Benefits count only from the day DoHS gets it.</li>
+  </ul>
+  <SourceLine sources={[src.ch1]} org={ORG} about="renewing SNAP" />
+
+  <h2 id="help">Who can help</h2>
+  <p>Many people bring someone to the interview or name a helper. The Mon County DoHS office and Legal Aid are listed above. 211 is free and can point you to local help.</p>
+  {ok(r211) && <ResourceCard r={r211} />}
+  <p class="meta">We describe the state's steps. DoHS decides who gets SNAP. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .letters dt { font-weight: 700; margin-top: 8px; }
+  .letters dd { margin: 2px 0 0 1rem; }
+</style>
