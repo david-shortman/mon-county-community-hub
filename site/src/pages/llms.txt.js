@@ -3,6 +3,7 @@ import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
 import { ROLES } from '../lib/helper-roles.mjs';
 import { HUBS } from '../lib/town-hubs.mjs';
+import { BODIES } from '../lib/agendas.mjs';
 
 export function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -12,6 +13,7 @@ export function GET({ site }) {
   const roleCards = ROLES.map((r) => `- [Card for ${r.name.toLowerCase()}](${u(`/for/helpers/${r.slug}/`)}): ${r.situations.map((s) => s.hears.toLowerCase()).join('; ')}, with first steps`).join('\n');
   // One line per town page (#1120).
   const towns = HUBS.map((h) => `- [${h.name}](${u(`/towns/${h.slug}/`)}): ${h.kind === 'cdp' ? 'a named area with no town government' : `the ${h.full}`}: who to call, who decides and where they meet, places, dates and bus routes`).join('\n');
+  const agendaBodies = Object.entries(BODIES).map(([slug, b]) => `- [${b.name}: agendas in plain language](${u(`/meetings/agendas/${slug}/`)}): coming ${b.name} agenda guides, and the motions recorded in its minutes from the last 30 days, with results and vote counts as written`).join('\n');
   const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
 
@@ -26,7 +28,7 @@ export function GET({ site }) {
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
 - [This month in Mon County](${u('/calendar/month/')}): the next 30 days from the calendar on one page you can print
 - [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
-- [Tonight: is the warming shelter open?](${u('/tonight/')}): winter warming shelter status, checked each day with the time shown: where, hours, rules and the bus, never a bed count; "open" only with a same-day check
+- [Tonight: is the warming shelter open?](${u('/tonight/')}): winter warming shelter status, with the time it was last checked: where, hours, rules and the bus, never a bed count; "open" only with a same-day check
 - [What help might I get?](${u('/help/what-help/')}): two quick questions, no name needed, then the pages that may help with food, bills, rent, a place to stay, care or work. Question 2 pages: ${NEEDS.map((n) => `[${n.label}](${u(`/help/what-help/${n.id}/`)})`).join(', ')}. Answer pages, one per pair of answers: ${NEEDS.flatMap((n) => WHO.map((w) => `[${n.label}; ${w.label}](${u(`/help/what-help/${n.id}/${w.id}/`)})`)).join(', ')}
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
 - [Before you call](${u('/before-you-call/')}): what to have ready, a place to write notes, and short scripts for calling a utility, a landlord or a billing office
@@ -123,7 +125,8 @@ ${centers}
 - [Start a swap, market or reuse store](${u('/start-something/')}): what Mon County is missing for secondhand and sharing (a regular flea market, a building materials reuse store, a Buy Nothing group, kids' gear swaps), what each would take, and free or low cost guides
 - [City and county meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council, city board and County Commission meetings, minutes from the last 60 days, and where the school board and towns post theirs
 - [Ask for public records](${u('/public-records/')}): West Virginia's Freedom of Information Act quoted (who can ask, asking the office that keeps the record, the five business day answer, copy fees and no search fees, going to circuit court after a denial), the Secretary of State's database of past requests, and City of Morgantown Clerk records
-- [Coming meetings in plain language](${u('/meetings/agendas/')}): guides to posted agendas for coming Morgantown City Council, Monongalia County Commission and Board of Education meetings: when, where, how to watch and comment, and every item with its exact agenda title and one neutral line on what kind of item it is
+- [Coming meetings in plain language](${u('/meetings/agendas/')}): guides to posted agendas for coming meetings of Morgantown City Council, the Monongalia County Commission, the Board of Education, city boards, regional boards and town councils: when, where, how to watch and comment, and every item with its exact agenda title and one neutral line on what kind of item it is; plus, from posted minutes, each motion recorded in the last 30 days with its result and vote count as written, on a page for each body
+${agendaBodies}
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it

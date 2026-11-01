@@ -1,0 +1,64 @@
+# What was decided at one meeting, from its official minutes (#529).
+# How to make one: docs/process/agenda-guides.md, "What was decided".
+slug: board-of-zoning-appeals-2026-10-05
+body: board-of-zoning-appeals
+meeting: Meeting
+date: 2026-10-05
+minutes_url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10052026-3895
+minutes_status: Approved
+read: 2026-10-31
+actions:
+  - item: "II.A. Meeting Minutes from August 19"
+    motion: to accept the minutes as written
+    result: The motion passed unanimously
+    vote: "3-0-0"
+  - item: "III.A. CON26-077 / [name] / 350 High St"
+    motion: to accept the findings of fact for CON26-077
+    result: Findings of fact were accepted unanimously
+    vote: "3-0-0"
+  - item: "III.A. CON26-077 / [name] / 350 High St"
+    motion: to approve the request for conditional use for CON26-077 subject to the standard condition
+    result: Approval was granted unanimously
+    vote: "3-0-0"
+  - item: "III.B. VAR26-073, 088 / City Neon USA / 781 Chestnut Ridge Rd"
+    motion: to table both VAR26-073 and VAR26-088 to the November regular meeting, pending additional information
+    result: The vote to table passed unanimously
+    vote: "3-0-0"
+  - item: "III.C. VAR26-078 / [name] / 3109 University Ave"
+    motion: to accept the findings of fact for VAR26-078
+    result: Findings of fact were accepted unanimously
+    vote: "3-0-0"
+  - item: "III.C. VAR26-078 / [name] / 3109 University Ave"
+    motion: to grant the request for variance relief for VAR26-078
+    result: The request for variance relief was granted unanimously
+    vote: "3-0-0"
+  - item: "III.D. VAR26-083 / [name] / 940 Southpoint Cir"
+    motion: to accept the findings of fact for VAR26-083
+    result: Findings of fact were accepted unanimously
+    vote: "3-0-0"
+  - item: "III.D. VAR26-083 / [name] / 940 Southpoint Cir"
+    motion: to grant the request for variance relief for VAR26-083 subject to the standard condition
+    result: The request for variance relief was granted unanimously
+    vote: "3-0-0"
+  - item: "III.E. VAR26-085 / [name] / 229 Cornell Ave"
+    motion: to accept the findings of fact for VAR26-085
+    result: Findings of fact were accepted unanimously
+    vote: "3-0-0"
+  - item: "III.E. VAR26-085 / [name] / 229 Cornell Ave"
+    motion: to grant the request for variance relief for VAR26-085 subject to the standard condition
+    result: The request for variance relief was granted unanimously
+    vote: "3-0-0"
+  - item: "III.F. VAR26-090 / [name] / 562 Aspen St"
+    motion: to accept the findings of fact for VAR26-090
+    result: Findings of fact were accepted unanimously
+    vote: "3-0-0"
+  - item: "III.F. VAR26-090 / [name] / 562 Aspen St"
+    motion: to grant the request for variance relief for VAR26-090 subject to the standard condition
+    result: The request for variance relief was granted unanimously
+    vote: "3-0-0"
+  - item: Meeting Adjourned
+    motion: to adjourn the meeting
+note: The minutes are marked approved and list three members present and two absent.
+sources:
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10052026-3895
+    checked: 2026-10-31

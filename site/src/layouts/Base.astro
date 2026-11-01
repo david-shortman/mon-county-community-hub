@@ -4,6 +4,7 @@ import AlsoCheck from '../components/AlsoCheck.astro';
 import AlsoCalled from '../components/AlsoCalled.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
+import LeaveNote from '../components/LeaveNote.astro';
 import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import UpkeepNotice from '../components/UpkeepNotice.astro';
@@ -373,6 +374,7 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
       {(crisis || tags?.door === 'help-now') && <p class="disclaimer meta">{disclaimer}</p>}
       <slot />
       {searchable && <AlsoCalled route={route} />}
+      {crisis && <LeaveNote />}
       {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
       <AlsoCheck route={route} />
     </main>
