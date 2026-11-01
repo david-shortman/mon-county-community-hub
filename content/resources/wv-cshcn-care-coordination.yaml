@@ -3,7 +3,7 @@ slug: wv-cshcn-care-coordination
 org: wv-department-of-human-services
 topics: [disability, health, family]
 who_it_is_for: "Children and young people under 21 with certain long-lasting conditions who meet the program's money and medical rules."
-what_to_do: "The state's Office of Maternal, Child and Family Health runs this program. It gives special medical care and care coordination. Call 304-558-5388 to ask if your child can join."
+what_to_do: "The state's Office of Maternal, Child and Family Health runs this program. It gives special medical care and care coordination. Call 304-558-5388, or toll-free in West Virginia 1-800-642-8522 or 1-800-642-9704, to ask if your child can join."
 contact:
   phone: "304-558-5388"
   url: https://www.wvdhhr.org/cshcn/
@@ -14,3 +14,7 @@ sources:
     checked: 2026-10-31
   - url: https://www.wvdhhr.org/cshcn/faq.asp
     checked: 2026-10-31
+  - url: https://www.wvdhhr.org/spe/
+    checked: 2026-11-01
+  - url: https://www.wvdhhr.org/ssicontactlist/db-cshcn-statewide.cfm
+    checked: 2026-11-01
