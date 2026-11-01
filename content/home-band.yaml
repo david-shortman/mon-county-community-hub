@@ -1,0 +1,32 @@
+# "There's more to Mon County here" (#1038): six question cards on the home
+# page, below search, so the home page shows more than urgent help.
+# Each card opens a page we already have; a card whose page is missing is left
+# out. Cards state no facts of their own: the pages they open carry the
+# sources and checked dates. Wording can change here without touching code.
+# Fields: q (the question, in residents' words), hint (one short line),
+# href (a page on this site).
+title: There's more to Mon County here
+cards:
+  - q: Just moved here?
+    hint: Start power, water and trash.
+    href: /moving-here/
+  - q: Want to grow food or flowers?
+    hint: Free seeds, and selling what you grow.
+    href: /grow/
+  - q: Where do people meet up?
+    hint: Groups, clubs and community centers.
+    href: /find-your-people/
+  - q: No car?
+    hint: Find the bus that gets you there.
+    href: /bus-routes/
+  - q: Who decides what happens on my street?
+    hint: Who is in charge, and how to have a say.
+    href: /who-decides/
+  - q: Want to make art?
+    hint: Learn a craft and show your work.
+    href: /arts-and-making/
+more:
+  - text: How is Mon County doing?
+    href: /how-we-are-doing/
+  - text: This week in Mon County
+    href: /pulse/

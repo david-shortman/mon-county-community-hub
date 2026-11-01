@@ -44,15 +44,16 @@ export function contentHit(text) {
 
 // A page file's path with any language folder taken out, so
 // 'site/src/pages/es/help/food/index.astro' follows the same rules as
-// 'site/src/pages/help/food/index.astro'.
+// 'site/src/pages/help/food/index.astro'. So does a template for the router,
+// 'site/src/pages/es/_pages/help/food/index.astro' (#1099).
 export function withoutLocale(file) {
-  const m = file.match(/^site\/src\/pages\/([a-z]{2,3})\/(.*)$/);
+  const m = file.match(/^site\/src\/pages\/([a-z]{2,3})\/(?:_pages\/)?(.*)$/);
   return m && OTHER_LOCALES.includes(m[1]) ? `site/src/pages/${m[2]}` : file;
 }
 
 // The English page file for a page in a language folder, as candidates.
 export function englishPageFiles(file) {
-  const route = file.replace(/^site\/src\/pages/, '').replace(/\.astro$/, '').replace(/(^|\/)index$/, '/');
+  const route = withoutLocale(file).replace(/^site\/src\/pages/, '').replace(/\.astro$/, '').replace(/(^|\/)index$/, '/');
   return pageFilesFor(englishRoute(route));
 }
 

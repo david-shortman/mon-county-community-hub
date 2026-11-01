@@ -10,6 +10,7 @@ import path from 'node:path';
 import { PUBLISHED, localeOfPath, englishRoute, localeRoute, alternatesFor, switcherLinks, dirFor, astroI18n, sitemapI18n, inUnpublishedLocale, parseTranslationPath, englishFilesFor } from '../src/lib/i18n.mjs';
 import { englishHash, pageText, numbersIn, readTranslation, translationProblems, translationState, loadTranslation, translatedField } from '../src/lib/translations.mjs';
 import { checkTranslations } from '../scripts/check-translations.mjs';
+import { pageReady, readyPages, pageAlternates, templateRoute, templateFiles, pageTranslationOf } from '../src/lib/locale-pages.mjs';
 
 function fakeRepo(files) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'i18n-'));
@@ -137,12 +138,60 @@ test('pages read a translation only when its language is on', () => {
   assert.deepEqual(translatedField(record, 'es', 'contact', { root, published: ['es'] }), { phone: '304-555-0100' });
 });
 
-test('no page can sit in a language folder until that language is on', () => {
-  const root = fakeRepo({ 'site/src/pages/money.astro': '', 'site/src/pages/es/money.astro': '', 'site/src/pages/es/nothing.astro': '' });
-  const off = checkTranslations({ root, published: [] }).errors.join('\n');
-  assert.match(off, /es\/money.astro: Español pages are off/);
-  const on = checkTranslations({ root, published: ['es'] }).errors.join('\n');
-  assert.doesNotMatch(on, /pages are off/);
-  assert.match(on, /es\/nothing.astro: has no English page/);
+test('a page in a language folder must be a template the router builds', () => {
+  const words = (h = 'aaaaaaaaaaaa', reviewed = '2026-11-12') => `of: pages/money\nlang: es\nstrings:\n  heading: Dinero\nenglish_hash: ${h}\nmethod: community-reviewed\ntranslated: 2026-11-10\nreviewed: ${reviewed}\nreviewer: es-reviewer-1\n`;
+  const root = fakeRepo({
+    'site/src/pages/money.astro': '<h1>Money</h1>',
+    'site/src/pages/es/[...page].astro': '',
+    'site/src/pages/es/money.astro': '',
+    'site/src/pages/es/_pages/money.astro': '',
+    'site/src/pages/es/_pages/nothing.astro': '',
+    'content/translations/es/pages/money.yaml': words(),
+  });
+  const errs = checkTranslations({ root, published: [] }).errors.join('\n');
+  assert.match(errs, /es\/money.astro: a Español page goes in site\/src\/pages\/es\/_pages\//);
+  assert.match(errs, /_pages\/nothing.astro: has no English page/);
+  assert.match(errs, /_pages\/nothing.astro: has no words file/);
+  assert.doesNotMatch(errs, /_pages\/money.astro/);
+  assert.doesNotMatch(errs, /\[\.\.\.page\]/);
   assert.match(checkTranslations({ root, published: ['xx'] }).errors.join('\n'), /PUBLISHED has xx/);
+});
+
+test('a draft (reviewed: false) passes the check but never shows or builds', () => {
+  const draft = good().replace('reviewed: 2026-11-12\nreviewer: es-reviewer-1\n', 'reviewed: false\n');
+  const root = fakeRepo({ 'content/resources/book-club.yaml': BOOK_CLUB, 'content/translations/es/resources/book-club.yaml': draft });
+  const p = translationProblems(readTranslation('content/translations/es/resources/book-club.yaml', { root }), { today: '2026-11-20' });
+  assert.deepEqual(p.errors, []);
+  assert.match(p.warnings.join('\n'), /draft: not reviewed yet/);
+  assert.equal(loadTranslation('es', 'resources/book-club', { root, today: '2026-11-20', published: ['es'] }), null);
+  // A draft still cannot carry a fact or a new number.
+  fs.writeFileSync(path.join(root, 'content/translations/es/resources/book-club.yaml'), draft.replace('304-555-0100', '304-555-0111'));
+  assert.match(translationProblems(readTranslation('content/translations/es/resources/book-club.yaml', { root }), { today: '2026-11-20' }).errors.join('\n'), /not in the English/);
+});
+
+test('a translated page builds, with hreflang links, only when reviewed and the language is on', () => {
+  const english = '<h1>Money help</h1><p>Call us.</p>';
+  const h = englishHash('pages', english);
+  const words = (reviewed) => `of: pages/money\nlang: es\nstrings:\n  heading: Ayuda con dinero\nenglish_hash: ${h}\nmethod: community-reviewed\ntranslated: 2026-11-10\nreviewed: ${reviewed}\n${reviewed === 'false' ? '' : 'reviewer: es-reviewer-1\n'}`;
+  const root = fakeRepo({
+    'site/src/pages/money.astro': english,
+    'site/src/pages/es/_pages/money.astro': '',
+    'content/translations/es/pages/money.yaml': words('false'),
+  });
+  const opts = { root, today: '2026-11-20' };
+  assert.equal(pageReady('es', '/money/', { ...opts, published: ['es'] }), false, 'a draft builds nothing');
+  assert.deepEqual(readyPages('es', { ...opts, published: ['es'] }), []);
+  assert.deepEqual(pageAlternates('/money/', { ...opts, published: ['es'] }), []);
+  fs.writeFileSync(path.join(root, 'content/translations/es/pages/money.yaml'), words('2026-11-12'));
+  assert.equal(pageReady('es', '/money/', { ...opts, published: [] }), false, 'nothing builds while the language is off');
+  assert.equal(pageReady('es', '/money/', { ...opts, published: ['es'] }), true);
+  assert.deepEqual(readyPages('es', { ...opts, published: ['es'] }).map((p) => [p.route, p.slug]), [['/money/', 'money']]);
+  assert.deepEqual(pageAlternates('/es/money/', { ...opts, published: ['es'] }).map((a) => `${a.hreflang} ${a.href}`), ['en /money/', 'es /es/money/', 'x-default /money/']);
+  // The English changed: this page is not high stakes, but git cannot say
+  // when (no repo here), so it is hidden to be safe.
+  fs.writeFileSync(path.join(root, 'site/src/pages/money.astro'), '<h1>Money help</h1><p>Call us today.</p>');
+  assert.equal(pageReady('es', '/money/', { ...opts, published: ['es'] }), false);
+  assert.equal(templateRoute('site/src/pages/es/_pages/help/food/index.astro'), '/help/food/');
+  assert.deepEqual(templateFiles('es', '/help/food/'), ['site/src/pages/es/_pages/help/food.astro', 'site/src/pages/es/_pages/help/food/index.astro']);
+  assert.equal(pageTranslationOf('/es/help/food/'), 'pages/help/food');
 });

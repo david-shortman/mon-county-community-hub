@@ -119,6 +119,9 @@ export function numbersIn(text) {
 const flat = (v) => (Array.isArray(v) ? v.map(flat).join('\n') : v && typeof v === 'object' ? Object.values(v).map(flat).join('\n') : String(v ?? ''));
 const isText = (v) => typeof v === 'string' || (Array.isArray(v) && v.length > 0 && v.every((x) => typeof x === 'string'));
 
+// A draft: written, but no fluent reader has checked it yet (reviewed: false).
+export const isDraft = (d) => d?.reviewed === false;
+
 // Errors and warnings for one translation (from readTranslation).
 export function translationProblems(t, { today, allowMachine = ALLOW_MACHINE_DRAFTS } = {}) {
   const errors = [];
@@ -156,9 +159,19 @@ export function translationProblems(t, { today, allowMachine = ALLOW_MACHINE_DRA
   if (!METHODS.includes(d.method)) err(`method must be one of ${METHODS.join(', ')}`);
   else if (d.method === 'machine-plus-review' && !allowMachine) err('machine-plus-review is off until David decides (#1067, decision 3)');
   const translated = ymd(d.translated);
-  const reviewed = ymd(d.reviewed);
   if (!isDate(translated)) err('translated must be a date (YYYY-MM-DD)');
-  if (!isDate(reviewed)) err('reviewed must be a date (YYYY-MM-DD); nothing goes on the site before a fluent person checks it');
+  // A draft (reviewed: false) waits for a fluent reviewer. It is checked like
+  // any translation (no facts, no new numbers, a real hash), but it never
+  // shows on the site and never builds a page (#1101).
+  if (isDraft(d)) {
+    if (d.reviewer != null && !ROLE_ID.test(d.reviewer)) err('reviewer must be a role ID like es-reviewer-1, never a name');
+    if (d.second_review != null) err('a draft has no second_review yet; add it after the first reviewer marks it reviewed');
+    warn(`draft: not reviewed yet, so it is hidden and the English shows. A fluent reader checks it, then sets reviewed to the date and reviewer to their role ID${t.highStakes ? ', and a second reader adds second_review (high stakes)' : ''}.`);
+    for (const k of Object.keys(d)) if (!KNOWN_FIELDS.includes(k)) warn(`unknown field ${k}`);
+    return { errors, warnings };
+  }
+  const reviewed = ymd(d.reviewed);
+  if (!isDate(reviewed)) err('reviewed must be a date (YYYY-MM-DD), or false for a draft that stays hidden; nothing goes on the site before a fluent person checks it');
   if (today && isDate(reviewed) && reviewed > today) err(`reviewed ${reviewed} is in the future`);
   if (isDate(translated) && isDate(reviewed) && reviewed < translated) err('reviewed is before translated');
   if (!ROLE_ID.test(d.reviewer ?? '')) err('reviewer must be a role ID like es-reviewer-1, never a name');
@@ -208,7 +221,7 @@ export function loadTranslation(lang, of, { root = REPO_ROOT, today, published =
   const file = [`${TRANSLATIONS_DIR}/${lang}/${of}.yaml`, `${TRANSLATIONS_DIR}/${lang}/${of}.yml`].find((f) => fs.existsSync(path.join(root, f)));
   if (!file) return null;
   const t = readTranslation(file, { root });
-  if (translationProblems(t, { today }).errors.length) return null;
+  if (isDraft(t.data) || translationProblems(t, { today }).errors.length) return null;
   const stale = t.currentHash !== t.data.english_hash;
   const staleSince = stale ? firstChangeAfter(t.source, ymd(t.data.reviewed), { root }) : null;
   const state = translationState({ storedHash: t.data.english_hash, currentHash: t.currentHash, highStakes: t.highStakes, staleSince, today });
