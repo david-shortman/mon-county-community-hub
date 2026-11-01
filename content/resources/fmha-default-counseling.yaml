@@ -3,7 +3,7 @@ slug: fmha-default-counseling
 org: fairmont-morgantown-housing-authority
 topics: [housing, money]
 who_it_is_for: "Homeowners behind on a mortgage. The housing authority serves Monongalia, Marion, Preston and Taylor counties, and it is the HUD-approved counseling agency closest to Morgantown on the CFPB's list."
-hours: Monday to Thursday, 8:30 a.m. to 4:30 p.m. Closed noon to 1 p.m.
+hours: Monday to Thursday, closed noon to 1 p.m. Closed Fridays. Call for times.
 what_to_do: "Call to ask for delinquency or default counseling. The housing authority says it is a one-on-one session, and counselors work with you to look at your finances, redo your budget and make a plan to prevent foreclosure."
 contact:
   phone: "304-363-0860"
@@ -16,3 +16,5 @@ sources:
     checked: 2026-10-31
   - url: https://www.consumerfinance.gov/find-a-housing-counselor/?zipcode=26505
     checked: 2026-10-31
+  - url: https://fmhousing.com/hours_and_directions.php
+    checked: 2026-11-01

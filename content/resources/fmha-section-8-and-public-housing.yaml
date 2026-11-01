@@ -3,7 +3,7 @@ slug: fmha-section-8-and-public-housing
 org: fairmont-morgantown-housing-authority
 topics: [housing, money]
 who_it_is_for: Households with lower income in Monongalia, Marion, Preston or Taylor county who need help paying rent over time. This is not quick help for rent that is due now.
-what_to_do: Get the Section 8 or public housing application from fmhousing.com or at the office, 103 12th Street, Fairmont. Fill in every part, because an incomplete application can be sent back and delay your place in line. Drop it off, mail it to P.O. Box 2738, Fairmont, WV 26555-2738, or fax every page to 304-366-0469. You are placed on the waiting list by the date and time your application arrives, and you stay on it until they send you a letter. Tell the office about any change in your household while you wait. The office is open Monday to Thursday, 8:30 a.m. to 4:30 p.m., closed noon to 1 p.m. Call 304-363-0860 to ask whether the list is open and how long the wait is.
+what_to_do: Get the Section 8 or public housing application from fmhousing.com or at the office, 103 12th Street, Fairmont. Fill in every part, because an incomplete application can be sent back and delay your place in line. Drop it off, mail it to P.O. Box 2738, Fairmont, WV 26555-2738, or fax every page to 304-366-0469. You are placed on the waiting list by the date and time your application arrives, and you stay on it until they send you a letter. Tell the office about any change in your household while you wait. The office is open Monday to Thursday, closed noon to 1 p.m., and closed Fridays. Call for times. Call 304-363-0860 to ask whether the list is open and how long the wait is.
 contact:
   phone: "304-363-0860"
   url: https://fmhousing.com/visitors/faq_-_section_8.php
@@ -14,3 +14,5 @@ sources:
     checked: 2026-10-31
   - url: https://fmhousing.com/project_based_vouchers.php
     checked: 2026-10-31
+  - url: https://fmhousing.com/hours_and_directions.php
+    checked: 2026-11-01
