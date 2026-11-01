@@ -16,6 +16,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
 import { CONTENT_DIR, todayYmd } from '../src/lib/content.mjs';
+import { robotsCheck } from '../src/lib/robots.mjs';
 
 const DIR = path.join(CONTENT_DIR, 'indicators');
 const HISTORY_YEARS = 10;
@@ -40,6 +41,9 @@ function parseCsv(text) {
 const cache = new Map();
 async function csv(url) {
   if (!cache.has(url)) {
+    // Same robots.txt rule as every automated read (docs/operations/automated-reads.md).
+    const rc = await robotsCheck(url);
+    if (!rc.allowed) throw new Error(rc.reason);
     const res = await fetch(url, { headers: { 'User-Agent': 'everything-morgantown-indicators (+https://github.com/david-shortman/mon-county-community-hub)' }, signal: AbortSignal.timeout(120000) });
     if (!res.ok) throw new Error(`${url}: ${res.status}`);
     cache.set(url, parseCsv(Buffer.from(await res.arrayBuffer()).toString('latin1')));

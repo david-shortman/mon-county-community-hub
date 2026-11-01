@@ -17,6 +17,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar, loadDir, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
 import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
+import { robotsCheck } from '../src/lib/robots.mjs';
+import { ADAPTERS } from '../src/lib/feeds/index.mjs';
 
 // ---------- settings ----------
 const args = process.argv.slice(2);
@@ -315,12 +317,18 @@ async function checkFeeds() {
   const details = [];
   let worst = 'ok';
   const bump = (s) => { if (s === 'fail' || (s === 'warn' && worst === 'ok')) worst = s; };
+  // Feeds turned off on purpose (docs/operations/automated-reads.md) are
+  // never read, and their saved copy is meant to age.
+  const off = new Map(ADAPTERS.filter((a) => a.off).map((a) => [a.id, a.off]));
   for (const f of files) {
     let snap;
     try { snap = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch { details.push(`${f}: snapshot is not valid JSON`); bump('fail'); continue; }
+    if (off.has(snap.id)) { details.push(`${snap.id}: turned off on ${off.get(snap.id).since}, not read (${off.get(snap.id).reason})`); continue; }
     const age = snap.fetched ? Math.floor(hoursSince(snap.fetched) / 24) : null;
     if (age === null || age > T.feedSnapshotMaxDays) { details.push(`${snap.id ?? f}: saved copy is ${age ?? '?'} days old`); bump('warn'); }
     if (!snap.feed_url) continue;
+    const rc = await robotsCheck(snap.feed_url, { userAgent: UA });
+    if (!rc.allowed) { details.push(`${snap.id}: not read: ${rc.reason}. The site uses the saved copy.`); bump('warn'); continue; }
     try {
       const r = await get(snap.feed_url, { timeout: T.linkTimeoutMs });
       if (!r.ok) { details.push(`${snap.id}: feed returns ${r.status}`); bump('warn'); }
@@ -361,9 +369,16 @@ async function checkLinks() {
   const needsLogin = (u) => /^https:\/\/github\.com\/[^/]+\/[^/]+\/issues\/new/.test(u);
   const urls = [...outbound.keys()].filter((u) => !u.startsWith(SITE) && !needsLogin(u));
   const results = new Map();
+  const notRead = [];
   let i = 0;
   await Promise.all(Array.from({ length: T.linkConcurrency }, async () => {
-    while (i < urls.length) { const u = urls[i++]; results.set(u, await checkLink(u)); }
+    while (i < urls.length) {
+      const u = urls[i++];
+      // Same robots.txt rule as every other automated read.
+      const rc = await robotsCheck(u, { userAgent: UA });
+      if (!rc.allowed) { notRead.push(`${u}: ${rc.reason}`); continue; }
+      results.set(u, await checkLink(u));
+    }
   }));
   const broken = [];
   const unsure = [];
@@ -376,8 +391,8 @@ async function checkLinks() {
   }
   const status = broken.length ? 'fail' : unsure.length ? 'warn' : 'ok';
   record('links', 'product', status,
-    status === 'ok' ? `All ${urls.length} outbound links work.` : `${broken.length} broken and ${unsure.length} unverified of ${urls.length} outbound links.`,
-    { details: [...broken.map((b) => `broken: ${b}`), ...unsure.map((u) => `unverified: ${u}`)], owner: 'Claude Code (fix the link), Duet (find the new page)', fixable: broken.length > 0 });
+    status === 'ok' ? `All ${results.size} outbound links checked work${notRead.length ? ` (${notRead.length} not checked: robots.txt)` : ''}.` : `${broken.length} broken and ${unsure.length} unverified of ${results.size} outbound links checked.`,
+    { details: [...broken.map((b) => `broken: ${b}`), ...unsure.map((u) => `unverified: ${u}`), ...notRead.map((n) => `not checked: ${n}`)], owner: 'Claude Code (fix the link), Duet (find the new page)', fixable: broken.length > 0 });
 }
 
 // ---------- product: basic accessibility (static, no browser) ----------

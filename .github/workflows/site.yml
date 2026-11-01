@@ -41,6 +41,10 @@ jobs:
         env:
           # Read-only, to count group requests (#523). The build still works without it.
           GITHUB_TOKEN: ${{ github.token }}
+      # Site search test (#529): do the words residents type find the right page?
+      # A report on the run's summary page, never a gate. docs/operations/search-test.md
+      - continue-on-error: true
+        run: node scripts/search-test.mjs --summary search-test.md && cat search-test.md >> "$GITHUB_STEP_SUMMARY"
       # Accessibility scan (#105): axe-core on every page, light and dark, plus 320px reflow.
       # Fails only on serious or critical problems. Free: Chromium comes from npm's Playwright.
       # Pull requests only, so the daily rebuild and deploys never wait on a browser download.

@@ -1,0 +1,24 @@
+title: SSI for a child with a disability
+slug: ssi-for-children
+org: us-social-security-administration
+topics: [disability, family]
+who_it_is_for: "Children under 18 with a disability that seriously limits what they can do and has lasted or is expected to last at least 12 months. Supplemental Security Income (SSI) is for people with little or no income. While a child under 18 lives with a parent, Social Security counts part of the parents' income and savings."
+what_to_do: "USAGov says you can start a child's SSI application online, but you finish it by phone or in person. Call Social Security at 1-800-772-1213."
+contact:
+  phone: "1-800-772-1213"
+  url: https://www.usa.gov/social-security-disability
+  url_label: SSI and disability benefits
+cost: Free to apply.
+notes:
+  - "Social Security's own website blocked our checks, so we could not confirm its forms or the local office. The phone number above is the national line."
+sources:
+  - url: https://www.usa.gov/social-security-disability
+    checked: 2026-10-31
+  - url: https://www.usa.gov/agencies/social-security-administration
+    checked: 2026-10-31
+  - url: https://www.ecfr.gov/current/title-20/section-416.906
+    checked: 2026-10-31
+  - url: https://www.ecfr.gov/current/title-20/section-416.1165
+    checked: 2026-10-31
+  - url: https://www.ecfr.gov/current/title-20/section-416.1202
+    checked: 2026-10-31
