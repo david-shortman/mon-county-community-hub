@@ -3,8 +3,11 @@ import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
 import { ROLES } from '../lib/helper-roles.mjs';
 import { HUBS } from '../lib/town-hubs.mjs';
+import { groupPages } from '../lib/group-pages.mjs';
+import { loadCalendarWithFeeds } from '../lib/content.mjs';
+import { BODIES } from '../lib/agendas.mjs';
 
-export function GET({ site }) {
+export async function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const u = (p) => new URL(`${base}${p}`, site).href;
   // One line per community center page (#463), built from content/places.
@@ -12,6 +15,9 @@ export function GET({ site }) {
   const roleCards = ROLES.map((r) => `- [Card for ${r.name.toLowerCase()}](${u(`/for/helpers/${r.slug}/`)}): ${r.situations.map((s) => s.hears.toLowerCase()).join('; ')}, with first steps`).join('\n');
   // One line per town page (#1120).
   const towns = HUBS.map((h) => `- [${h.name}](${u(`/towns/${h.slug}/`)}): ${h.kind === 'cdp' ? 'a named area with no town government' : `the ${h.full}`}: who to call, who decides and where they meet, places, dates and bus routes`).join('\n');
+  // One link per group page (/groups/<slug>/), with the name its page uses.
+  const groups = groupPages(await loadCalendarWithFeeds()).map((g) => `[${g.name}](${u(`/groups/${g.org.slug}/`)})`).join(', ');
+  const agendaBodies = Object.entries(BODIES).map(([slug, b]) => `- [${b.name}: agendas in plain language](${u(`/meetings/agendas/${slug}/`)}): coming ${b.name} agenda guides, and the motions recorded in its minutes from the last 30 days, with results and vote counts as written`).join('\n');
   const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
 
@@ -26,7 +32,7 @@ export function GET({ site }) {
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
 - [This month in Mon County](${u('/calendar/month/')}): the next 30 days from the calendar on one page you can print
 - [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
-- [Tonight: is the warming shelter open?](${u('/tonight/')}): winter warming shelter status, checked each day with the time shown: where, hours, rules and the bus, never a bed count; "open" only with a same-day check
+- [Tonight: is the warming shelter open?](${u('/tonight/')}): winter warming shelter status, with the time it was last checked: where, hours, rules and the bus, never a bed count; "open" only with a same-day check
 - [What help might I get?](${u('/help/what-help/')}): two quick questions, no name needed, then the pages that may help with food, bills, rent, a place to stay, care or work. Question 2 pages: ${NEEDS.map((n) => `[${n.label}](${u(`/help/what-help/${n.id}/`)})`).join(', ')}. Answer pages, one per pair of answers: ${NEEDS.flatMap((n) => WHO.map((w) => `[${n.label}; ${w.label}](${u(`/help/what-help/${n.id}/${w.id}/`)})`)).join(', ')}
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
 - [Before you call](${u('/before-you-call/')}): what to have ready, a place to write notes, and short scripts for calling a utility, a landlord or a billing office
@@ -124,7 +130,8 @@ ${centers}
 - [Start a swap, market or reuse store](${u('/start-something/')}): what Mon County is missing for secondhand and sharing (a regular flea market, a building materials reuse store, a Buy Nothing group, kids' gear swaps), what each would take, and free or low cost guides
 - [City and county meetings: agendas and minutes](${u('/meetings/')}): posted agendas for coming Morgantown City Council, city board and County Commission meetings, minutes from the last 60 days, and where the school board and towns post theirs
 - [Ask for public records](${u('/public-records/')}): West Virginia's Freedom of Information Act quoted (who can ask, asking the office that keeps the record, the five business day answer, copy fees and no search fees, going to circuit court after a denial), the Secretary of State's database of past requests, and City of Morgantown Clerk records
-- [Coming meetings in plain language](${u('/meetings/agendas/')}): guides to posted agendas for coming Morgantown City Council, Monongalia County Commission and Board of Education meetings: when, where, how to watch and comment, and every item with its exact agenda title and one neutral line on what kind of item it is
+- [Coming meetings in plain language](${u('/meetings/agendas/')}): guides to posted agendas for coming meetings of Morgantown City Council, the Monongalia County Commission, the Board of Education, city boards, regional boards and town councils: when, where, how to watch and comment, and every item with its exact agenda title and one neutral line on what kind of item it is; plus, from posted minutes, each motion recorded in the last 30 days with its result and vote count as written, on a page for each body
+${agendaBodies}
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
@@ -150,6 +157,7 @@ ${roleCards}
 - [Have your say at a public meeting](${u('/have-your-say/')}): when Morgantown City Council, the Monongalia County Commission, the Board of Education, BOPARC and the Planning Commission meet, how public comment works at each (from official pages), and where agendas are
 - [Who decides what](${u('/who-decides/')}): what City Council, the County Commission, the Board of Education, MUB, the MPO Policy Board, Mountain Line, the Board of Health, the Solid Waste Authority, the Development Authority and Region VI decide, how members are chosen, when each meets, and where records are
 - [How to read a meeting agenda](${u('/meetings/how-to-read-an-agenda/')}): what consent agenda, first and second reading, public hearing, public comment and executive session mean on Morgantown City Council and Monongalia County Commission agendas, from state law (W. Va. Code 6-9A and 8-11-4) and the boards' own agendas
+- [Renters](${u('/for/renters/')}): a starting page that links to finding a place, repairs, your deposit, rent help and legal help
 - [Older adults and retirees](${u('/for/older-adults/')}): a starting page that links to Medicare, care at home, food and bill help, veterans help, and ways to stay involved
 - [Parents of babies and toddlers](${u('/for/parents-young-kids/')}): a starting page that links to child development help, Pre-K and Head Start, playgroups, checkups and food help
 - [New to Mon County](${u('/for/new-to-mon-county/')}): a starting page with a first 30 days list (utilities, who serves my address, license and plates, voting, a library card, care, meeting people), then links to trash day, care, kids, work and English lessons, and this month's events
@@ -191,6 +199,7 @@ ${roleCards}
 - [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; with years and sources
 - [What people here need most](${u('/needs/')}): the needs register, a ranked list of the hardest problems people in Mon County face (food, health care costs, housing, utility bills, mental health and more), each with how many people it affects, its sources, and the local groups working on it
 - [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; Monongalia County Schools state test proficiency in math, reading and science from ZoomWV (WV Department of Education); with years and sources
+- [Every group we list](${u('/groups/')}): A to Z list of the groups and offices the site lists, each with a page showing what the site says about it, its listings as residents see them, its upcoming dates, sources, and how to ask for a fix or removal. Group pages: ${groups}
 
 ## Notes for AI tools
 

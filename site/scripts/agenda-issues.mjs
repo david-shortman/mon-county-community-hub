@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Agenda guides check (#529). Once a day, reads the City AgendaCenter and the
 // County Commission's agenda page (the same readers as the meetings list),
-// and opens one issue for each City Council or County Commission meeting in
+// and opens one issue for each meeting of a body in MEETING_BODIES (City
+// Council, County Commission and the city boards we write guides for) in
 // the next 14 days that has a posted agenda but no guide in content/agendas/.
 // One issue per meeting, ever: an issue already opened for it (open or
 // closed) is found by a hidden marker and not opened again. Nothing here
@@ -30,11 +31,13 @@ export function plan({ meetings, guides, today, existing = [] }) {
   const until = addDays(today, DAYS);
   const covered = new Set(guides.map((g) => `${g.body}-${g.date}`));
   const byKey = new Map();
+  // A meeting with any file marked cancelled gets no issue.
+  const cancelled = new Set(meetings.filter((m) => MEETING_BODIES[m.body] && /cancel/i.test(m.title ?? '')).map((m) => `${MEETING_BODIES[m.body]}-${m.date}`));
   for (const m of meetings) {
     const body = MEETING_BODIES[m.body];
     if (!body || !m.agenda_url || m.date < today || m.date > until) continue;
     const key = `${body}-${m.date}`;
-    if (covered.has(key) || existing.some((t) => String(t).includes(marker(key)))) continue;
+    if (covered.has(key) || cancelled.has(key) || existing.some((t) => String(t).includes(marker(key)))) continue;
     if (!byKey.has(key)) byKey.set(key, { key, body, date: m.date, files: [] });
     byKey.get(key).files.push({ title: m.title, url: m.agenda_url });
   }
