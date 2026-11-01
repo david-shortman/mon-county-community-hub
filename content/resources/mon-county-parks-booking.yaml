@@ -6,7 +6,7 @@ who_it_is_for: Anyone who wants to reserve a pavilion, cabin or campsite at Camp
 what_to_do: "Book online through the county's booking page, or call the county parks office."
 contact:
   phone: "304-291-7013"
-  url: https://www.amilia.com/store/en/monongalia-county-parks--recreation/shop/facilitybookings
+  url: https://app.amilia.com/store/en/monongalia-county-parks--recreation/shop/facilitybookings
   url_label: Book online
 sources:
   - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/

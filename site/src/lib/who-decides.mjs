@@ -51,8 +51,8 @@ export const bodies = [
     chosen: 'Seven board members: three appointed by the County Commission, three by the City of Morgantown, and one both agree on.',
     meets: 'Sources differ. The city\'s page says the 3rd Wednesday of each month at noon at the Mountain Line depot in Westover. The county\'s page says the 2nd Wednesday of each month at 6 p.m. at the transit station in Westover. Check with Mountain Line before you go.',
     comment: 'Each monthly meeting has up to 30 minutes for public comment, up to 5 minutes per person, on transit topics. Give your name, address and topic first. You can bring written comments to hand to the board.',
-    records: [['Public comment rules', 'https://busride.org/board-meeting-public-comment-procedures']],
-    sources: [{ url: 'https://www.morgantownwv.gov/692/Transit-Authority-Board-of-Directors', checked: day }, { url: countyBoards, checked: day }, { url: 'https://busride.org/board-meeting-public-comment-procedures', checked: day }],
+    records: [['Public comment rules', 'https://www.busride.org/board-meeting-public-comment-procedures']],
+    sources: [{ url: 'https://www.morgantownwv.gov/692/Transit-Authority-Board-of-Directors', checked: day }, { url: countyBoards, checked: day }, { url: 'https://www.busride.org/board-meeting-public-comment-procedures', checked: day }],
   },
   {
     id: 'board-of-health', name: 'Monongalia County Board of Health',
