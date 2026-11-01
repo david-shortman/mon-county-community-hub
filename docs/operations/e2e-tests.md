@@ -26,6 +26,7 @@ Run one file with `node --test e2e/tonight.test.mjs`. In a Claude Code cloud ses
 | `tonight.test.mjs` | `/tonight/` never says "open" unless the check is from today in Morgantown, on the phone's own clock, including near midnight. |
 | `print-and-api.test.mjs` | Printing hides the menus and the crisis strip and keeps the page. Pages print to PDF. Every printout on `/print/` opens. The API index lists types whose files load and match their counts, every API JSON file parses, and `/data/` links to the API. |
 | `links.test.mjs` | Every internal link, asset and `#anchor` on every built page points to something that exists. Links to everythingmorgantown.org count as internal. Reads the HTML only, so it is quick. |
+| `offline.test.mjs` | After one visit, every hard-moment page opens with no signal, with a dated "Call before you go" note. An unsaved page falls back to Help now. Old saved copies are not shown. Back online, pages show with no note. See [offline.md](offline.md). |
 
 `screenshots.mjs` is not a test. It takes phone-width (390px) pictures of 15 pages residents most likely need. The site has no visit counts yet, so the list is a judgment call. Long pages stop at 6000px. The phone tab bar is fixed to the screen, so in a full-page picture it shows partway down the page. That is expected.
 

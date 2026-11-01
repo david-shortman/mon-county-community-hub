@@ -1,8 +1,8 @@
 ---
-// Language switcher (#1083). Built, but not on any page yet: residents see
-// no switcher until David turns a language on (#1067). When that happens,
-// Base.astro renders it in the header with:
-//   <LanguageSwitcher lang={lang} alternates={alternates} />
+// Language switcher (#1083, #1099). Base.astro renders it in the header on
+// every page, but it shows only on pages that also exist, reviewed, in
+// another language (alternates from src/lib/locale-pages.mjs). Today that is
+// no page, so residents see no switcher.
 // It links to the same page in each other language, names each language in
 // that language, and never uses flags. With nothing to switch to, it
 // renders nothing, so pages that exist only in English never show it.

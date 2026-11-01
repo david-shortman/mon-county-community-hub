@@ -26,6 +26,7 @@ const LABELS = { orgs: 'Groups and offices', resources: 'Programs and services',
     <li><a href={api('index.json')}>The catalog</a>: every file, how many records each has, the license, and the build time.</li>
     <li><a href={api('openapi.yaml')}>The field list for developers</a> (OpenAPI 3.1): every field and what it means.</li>
     <li><a href={`${base}/calendar.ics`}>The calendar for calendar apps</a> (calendar.ics).</li>
+    <li><a href={`${base}/home.ics`}>Home and yearly dates for calendar apps</a> (home.ics): tax and Assessor deadlines, burning seasons, frost dates and upkeep tips. See <a href={`${base}/home-calendar/`}>the home calendar page</a>.</li>
     <li><a href={api('hsds/services.json')}>Groups and programs in Open Referral format</a> (HSDS 3.1): the shared format that help lines and referral tools read. Also as <a href={api('hsds/datapackage.json')}>spreadsheet tables</a> (CSV files with a Tabular Data Package description). Each record keeps the same id on every build.</li>
   </ul>
   <p>Developers can also get one record at a time, like <code>/api/v1/orgs/&#123;slug&#125;.json</code>. The catalog lists the address for each kind.</p>

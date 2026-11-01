@@ -1,0 +1,21 @@
+---
+// Spanish pages (#1099). This file builds a /es/ page only when its words are
+// reviewed: see src/lib/locale-pages.mjs. Each page's template is in
+// ./_pages/ (Astro never builds files in a "_" folder on their own) and its
+// words are in content/translations/es/pages/. A draft builds nothing, so
+// residents never see unreviewed Spanish. How to add one:
+// docs/process/translations.md.
+import { readyPages } from '../../lib/locale-pages.mjs';
+import { todayYmd } from '../../lib/content.mjs';
+
+export function getStaticPaths() {
+  return readyPages('es', { today: todayYmd() }).map((p) => ({ params: { page: p.slug }, props: { file: p.file, route: p.route } }));
+}
+
+const templates = import.meta.glob('./_pages/**/*.astro', { eager: true });
+const { file, route } = Astro.props;
+const key = `./${file.replace(/^site\/src\/pages\/es\//, '')}`;
+const Template = templates[key]?.default;
+if (!Template) throw new Error(`es/[...page].astro: no template ${key} for ${route}`);
+---
+<Template route={route} />
