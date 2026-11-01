@@ -34,8 +34,7 @@ severity: high
 severity_why: Going without enough food harms health, school and work, and hits children and older adults hardest.
 trend: unknown
 working_on:
-  - name: Mountaineer Food Bank
-    url: https://mountaineerfoodbank.org/
+  - org: mountaineer-food-bank
   - org: christian-help
   - org: scotts-run-settlement-house
   - org: the-shack-neighborhood-house
@@ -43,6 +42,8 @@ working_on:
   - org: wv-department-of-human-services
   - org: monongalia-county-health-department
   - org: west-virginia-211
+  - org: salvation-army-morgantown
+  - org: morgantown-area-meals-on-wheels
 gaps:
   - Pantry days and hours change often, and sources disagree on several of them (issue 932).
   - There is no one place to see which pantry is open on a given day in the county.
@@ -52,3 +53,16 @@ rank: 1
 rank_why: "Score 12 of 12: severity 3, reach 3 (about 13,370 people), agreement 3 (four sources), room to help 3 (pantries, SNAP and WIC exist but are hard to line up). Tie broken by a county-wide official estimate."
 questions: [q02, q04, q45]
 issues: [60, 570, 922, 932]
+get_help:
+  - path: /help/food/
+    label: Find food today, or help buying groceries each month
+  - path: /snap/
+    label: How to apply for SNAP (food stamps)
+  - path: /after-you-apply/snap/
+    label: What happens after you apply for SNAP
+  - path: /families-and-kids/
+    label: WIC, formula, diapers and a baby pantry
+site_coverage:
+  level: good
+  why: The food help pages ask when you need food, then list pantries, free meals and SNAP. Pantry hours change often and some sources disagree, so each card says to call first.
+  checked: 2026-11-01

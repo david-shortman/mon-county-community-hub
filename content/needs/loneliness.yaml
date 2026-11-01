@@ -40,3 +40,18 @@ topics: [community]
 rank: 8
 rank_why: "Score 10 of 12: severity 2, reach 3, agreement 2, room to help 3 (many free groups exist; finding them is the hard part)."
 questions: [q16, q43, q45]
+get_help:
+  - path: /find-your-people/
+    label: Groups that meet again and again, and places to sit for free
+  - path: /meet-people/
+    label: Meet people and get a library card
+  - path: /community-centers/
+    label: Community centers and halls
+  - path: /staying-active/
+    label: Staying active after 55
+  - path: /volunteer/
+    label: Volunteer this weekend or all year
+site_coverage:
+  level: good
+  why: Meet people and Find your people show clubs, library programs, neighborhood groups, community centers and free places to sit. Many groups post only on social media, so some listings have few details.
+  checked: 2026-11-01

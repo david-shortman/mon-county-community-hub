@@ -17,6 +17,8 @@ const checked = '2026-10-31';
 const ORG = 'wv-department-of-human-services';
 const src = {
   facts: { url: 'https://bfa.wv.gov/media/39943/download?inline', checked, name: 'WV DoHS LIEAP fact sheet, FY 2027' },
+  bor: { url: 'https://oig.wv.gov/board-review', checked: '2026-11-01', name: 'WV Office of Inspector General, Board of Review' },
+  cc700: { url: 'https://oig.wv.gov/media/1696/download?inline', checked: '2026-11-01', name: 'Common Chapters 700, Hearings Held by Board of Review' },
   ch21: { url: 'https://bfa.wv.gov/media/40005/download?inline', checked, name: 'WV DoHS Income Maintenance Manual, Chapter 21, LIEAP' },
 };
 const lieap = resource('lieap-heating-help');
@@ -55,11 +57,11 @@ const ok = (r) => r && !r.hidden;
   <ul>
     <li><strong>Apply again, if it is still open.</strong> The fact sheet says people who are denied "may reapply, providing the program is still open, or may request a fair hearing." Once the program closes, applications are no longer accepted.</li>
     <li><strong>When you can ask for a hearing.</strong> The manual says you can ask if your application is denied, you think the payment amount is wrong, it took too long, or you think you were treated unfairly because of race, color, national origin, sex, age, disability, religion or political beliefs.</li>
-    <li><strong>Ask within 60 days.</strong> The LIEAP chapter says "The client must request a hearing within 60 days of receipt of the notification." The state's general hearing form says 90 days, so ask as soon as you can and within 60 days to be safe.</li>
+    <li><strong>Ask within 60 days.</strong> The LIEAP chapter says "The client must request a hearing within 60 days of receipt of the notification." The state's general hearing form and the Board of Review's own rules say 90 days from the date of the action, so ask as soon as you can and within 60 days to be safe.</li>
     <li><strong>How long the hearing takes.</strong> The manual says DoHS "has 30 days after the hearing request is received to schedule the hearing, arrive at a decision, and initiate the appropriate action."</li>
-    <li><strong>How to ask.</strong> Your decision letter should come with the state's hearing request form (DFA-FH-1). Return it to your local DoHS office, or call DoHS at <a href="tel:18006428589">1-800-642-8589</a>.</li>
+    <li><strong>How to ask.</strong> Your decision letter should come with the state's hearing request form (DFA-FH-1). Return it to your local DoHS office, or call DoHS at <a href="tel:18006428589">1-800-642-8589</a>. The Board of Review, which holds the hearings, also takes requests by mail (State Capitol Complex, Building 6, Room 817, Charleston, WV 25305), by email at <a href="mailto:OIGBOR@wv.gov">OIGBOR@wv.gov</a>, or by phone at <a href="tel:13043520805">304-352-0805</a>.</li>
   </ul>
-  <SourceLine sources={[src.ch21, src.facts]} org={ORG} about="LIEAP fair hearings" />
+  <SourceLine sources={[src.ch21, src.facts, src.bor, src.cc700]} org={ORG} about="LIEAP fair hearings" />
   {ok(legal) && <ResourceCard r={legal} />}
 
   <h2 id="help">Who can help</h2>

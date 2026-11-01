@@ -38,6 +38,8 @@ working_on:
   - org: wvu-medicine
   - org: mon-health-medical-center
   - org: milan-puskar-health-right
+  - org: valley-healthcare-system
+  - org: first-choice-services
 gaps:
   - No public list shows which counselors are taking new patients.
   - Provider counts look high, but people still report waits and cost, so the problem may be appointments and price more than the number of providers.
@@ -46,3 +48,14 @@ rank: 5
 rank_why: "Score 11 of 12: severity 3, reach 3, agreement 3, room to help 2 (help exists, but appointments are limited). Lower 211 demand than housing and utilities."
 questions: [q06]
 issues: [203]
+get_help:
+  - path: /mental-health/
+    label: Mental health help today, and ongoing counseling
+  - path: /drugs-and-alcohol/
+    label: Help with drugs or alcohol
+  - path: /no-insurance/
+    label: Free and sliding-fee clinics
+site_coverage:
+  level: good
+  why: Need mental health help starts with crisis lines, then someone to talk to today, help for a child or teen, and counseling with a sliding fee. No public source shows which counselors are taking new patients, so the site cannot either.
+  checked: 2026-11-01

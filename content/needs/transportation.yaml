@@ -40,3 +40,16 @@ rank: 11
 rank_why: "Score 9 of 12: severity 2, reach 2, agreement 3, room to help 2."
 questions: [q28, q29]
 issues: [407, 562, 580]
+get_help:
+  - path: /getting-around/
+    label: Getting around without a car
+  - path: /bus-routes/
+    label: Every bus route and when it runs
+  - path: /bus-passes/
+    label: Half-fare bus passes
+  - path: /medical-rides/
+    label: A ride to a medical visit
+site_coverage:
+  level: good
+  why: Getting around without a car covers buses, fares and rides to medical visits, and Every bus route shows when each one runs. Most listings do not say yet whether a bus can get you there and back the same day (issue 407).
+  checked: 2026-11-01

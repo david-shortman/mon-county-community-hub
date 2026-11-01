@@ -115,7 +115,14 @@
       "rank",
       "rank_why",
       "questions",
-      "issues"
+      "issues",
+      "get_help",
+      "get_help[].path",
+      "get_help[].label",
+      "site_coverage",
+      "site_coverage.level",
+      "site_coverage.why",
+      "site_coverage.checked"
     ],
     "meetings": [
       "slug",
