@@ -1,0 +1,134 @@
+---
+// After you apply: Medicare Savings Programs (QMB, SLIMB, QI-1, run by WV
+// DoHS) and Extra Help (the Part D Low-Income Subsidy, run by Social
+// Security). MSP facts from the WV DoHS Income Maintenance Manual (IMM,
+// effective October 5, 2026), chapter 1 section 1.16, chapter 9 and the
+// DFA-FH-1 form in chapter 9's Appendix C, chapter 10 section 10.6. Extra
+// Help facts from 20 CFR part 418 subpart D on ecfr.gov and medicare.gov.
+// All read 2026-11-01. ssa.gov refused automated reads, so SSA's own steps
+// for checking status are left off. Benefits page: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'care', topic: 'health', label: 'After you apply for help with Medicare costs', summary: 'Medicare Savings Programs and Extra Help: how long it takes, when help starts, renewals and appeal deadlines' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-01';
+const ORG = 'wv-department-of-human-services';
+const SSA = 'us-social-security-administration';
+const IMM = 'https://bfa.wv.gov/media/40005/download?inline';
+const imm = (part) => ({ url: IMM, checked, name: `WV DoHS Income Maintenance Manual, ${part}` });
+const cfr = (s, name) => ({ url: `https://www.ecfr.gov/current/title-20/section-${s}`, checked, name: `20 CFR ${s}, ${name}` });
+const src = {
+  msp: imm('Chapter 1, section 1.16 (QMB, SLIMB and QI-1)'),
+  ch9: imm('Chapter 9, section 9.3.1'),
+  fh1: imm('Chapter 9, Appendix C: form DFA-FH-1, Rev. 6/22'),
+  ch10: imm('Chapter 10, section 10.6.2'),
+  apply: cfr('418.3110', 'What happens when you apply for a subsidy?'),
+  notice: cfr('418.3615', 'Will we mail you a notice of the initial determination?'),
+  review: cfr('418.3625', 'What is the process for administrative review?'),
+  ask: cfr('418.3630', 'How do you request administrative review?'),
+  change: cfr('418.3510', 'When would an increase, reduction or termination start?'),
+  redet: cfr('418.3125', 'What are redeterminations?'),
+  report: cfr('418.3120', 'What happens if your circumstances change after we determine you are eligible for a subsidy?'),
+  drug: { url: 'https://www.medicare.gov/basics/costs/help/drug-costs', checked, name: 'Medicare.gov, Help with drug costs' },
+  mspPage: { url: 'https://www.medicare.gov/basics/costs/help/medicare-savings-programs', checked, name: 'Medicare.gov, Medicare Savings Programs' },
+};
+const office = resource('monongalia-county-dohs-office');
+const ship = resource('wv-ship-medicare-counseling');
+const legal = resource('legal-aid-wv-civil-legal-help');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for help with Medicare costs in Mon County: Medicare Savings Programs and Extra Help" description="What happens after you apply for a Medicare Savings Program (QMB, SLIMB or QI-1) or Extra Help in Monongalia County, WV: the 30 day time limit, when help starts, letters, yearly renewals, what to report, and the 90 day and 60 day appeal deadlines. Quoted from the state manual and federal rules.">
+  <h1>After you apply for help with Medicare costs</h1>
+  <p class="lede">Watch your mail and answer each letter by its date. There are two programs here, run by two different offices, with different deadlines.</p>
+  <ul>
+    <li><strong>Medicare Savings Programs</strong> (QMB, SLIMB and QI-1) help pay your Medicare Part B premium, and QMB also helps with other Medicare costs. The West Virginia Department of Human Services (DoHS) runs them.</li>
+    <li><strong>Extra Help</strong> lowers what you pay for prescription drugs under Medicare Part D. Social Security runs it.</li>
+  </ul>
+  <p>Not applied yet? See <a href={`${base}/turning-65/`}>Turning 65 or on Medicare</a>.</p>
+  <p class="note">This page quotes the state's staff manual and the federal rules. DoHS and Social Security decide each case. It is information, not legal advice.</p>
+  <ul class="topic-list">
+    <li><a href="#msp-next">Medicare Savings Programs: what happens next</a></li>
+    <li><a href="#msp-start">When the help starts</a></li>
+    <li><a href="#msp-appeal">If DoHS says no or stops your help</a></li>
+    <li><a href="#msp-renew">Renewing and reporting changes</a></li>
+    <li><a href="#xh-next">Extra Help: what happens next</a></li>
+    <li><a href="#xh-appeal">If Social Security says no or lowers your Extra Help</a></li>
+    <li><a href="#xh-renew">Keeping Extra Help</a></li>
+    <li><a href="#help">Who can help</a></li>
+  </ul>
+
+  <h2 id="msp-next">Medicare Savings Programs: what happens next</h2>
+  <ul>
+    <li><strong>30 days.</strong> The manual says "The processing time frame is 30 days, beginning with the date of application."</li>
+    <li><strong>Usually no interview.</strong> "An interview is not routinely required."</li>
+    <li><strong>If DoHS needs papers,</strong> it sends a checklist or a form called the DFA-6. The manual says you "must be given at least 10 days after the date the verification checklist or DFA-6 is mailed to return the information." The date is on the form.</li>
+    <li><strong>If you asked for this through Extra Help,</strong> Social Security sends your information to the state, and DoHS mails you a short form. The manual says if you do not return it "within 31 days from the date the eligibility system received the LIS file, the eligibility system sends a denial notice."</li>
+  </ul>
+  <SourceLine sources={[src.msp, src.drug]} org={ORG} about="Medicare Savings Program applications" />
+
+  <h2 id="msp-start">When the help starts</h2>
+  <ul>
+    <li><strong>QMB</strong> starts "the first day of the month following the month in which the application for QMB coverage is approved." The manual says it "cannot be backdated unless there is a corrective action." QMB comes with a Medical ID card.</li>
+    <li><strong>SLIMB</strong> starts "the first day of the month in which the application for SLIMB coverage is approved," and "may be backdated up to three months prior to the month of application, if all eligibility requirements were met." The manual says the same for QI-1.</li>
+    <li><strong>SLIMB and QI-1</strong> only pay the Part B premium. "SLIMB and QI-1 clients do not receive a Medical ID card." The manual says Social Security refunds Part B premiums you already paid for those months, once the state starts paying.</li>
+    <li><strong>Extra Help comes too.</strong> Medicare.gov says you get Extra Help automatically if your state helps pay your Part B premium through a Medicare Savings Program, and "You'll get a notice in the mail about your Extra Help."</li>
+  </ul>
+  <SourceLine sources={[src.msp, src.drug]} org={ORG} about="when Medicare Savings Programs start" />
+
+  <h2 id="msp-appeal">If DoHS says no or stops your help</h2>
+  <ul>
+    <li><strong>Advance notice.</strong> The manual says a notice of a cut or closure is mailed "at least 13 days prior to the first day of the month in which the benefits are affected."</li>
+    <li><strong>The deadline is 90 days.</strong> The state's hearing form says "you may ask for a Fair Hearing or Pre-Hearing Conference within 90 days of the effective date of the actions."</li>
+    <li><strong>To keep your help while you wait,</strong> ask before the closing date on your letter. The form says then "your benefits will not be reduced or stopped, pending a final decision." If the state wins, the manual says what you got while waiting may have to be paid back.</li>
+    <li><strong>How to ask.</strong> Use the hearing request form (DFA-FH-1) that comes with your letter, or ask out loud. The form says you can ask "either orally or in writing," and the hearing can be by phone. DoHS Client Services: <a href="tel:18006428589">1-800-642-8589</a>.</li>
+  </ul>
+  <SourceLine sources={[src.fh1, src.ch9]} org={ORG} about="Medicare Savings Program fair hearings" />
+
+  <h2 id="msp-renew">Renewing and reporting changes</h2>
+  <ul>
+    <li><strong>Once a year.</strong> "QMB, SLIMB and QI-1 cases are redetermined annually, scheduled in the 12th month of eligibility."</li>
+    <li><strong>Sometimes automatic.</strong> DoHS first tries to renew you using records it can check. If it can, you get a notice. If the notice is right, you do not need to do anything.</li>
+    <li><strong>If you get a renewal form,</strong> the manual says it "is due by the first day of the 12th month." If it is not back by the date on the letter, the case closes. You can renew by mail or on WV PATH.</li>
+    <li><strong>QI-1 is first come, first served.</strong> Medicare.gov says "You must apply every year to stay in the QI Program. States approve applications on a first-come, first-served basis."</li>
+    <li><strong>If you get SSI,</strong> the manual says QMB has no renewal cycle while SSI continues.</li>
+    <li><strong>Report changes soon.</strong> The manual says you "must report changes as soon as possible" in income, assets, who lives with you, and your address.</li>
+  </ul>
+  <SourceLine sources={[src.msp, src.ch10, src.mspPage]} org={ORG} about="renewing a Medicare Savings Program" />
+  {ok(office) && <ResourceCard r={office} />}
+
+  <h2 id="xh-next">Extra Help: what happens next</h2>
+  <ul>
+    <li><strong>The approval letter.</strong> The federal rule says Social Security sends a notice that you are eligible "for a period not to exceed 1 year," how it figured your income and resources, and your appeal rights.</li>
+    <li><strong>You need a drug plan.</strong> "If you are not already enrolled with a Medicare prescription drug plan or a Medicare Advantage plan with prescription drug coverage, you must enroll in order to receive your subsidy."</li>
+    <li><strong>A Medicare Savings Program application too.</strong> Medicare.gov says "Social Security will send information to your state to initiate an MSP application unless you tell them not to on the Extra Help application." Watch for that mail from DoHS (see above).</li>
+  </ul>
+  <p>Questions about an Extra Help application: call Social Security at <a href="tel:18007721213">1-800-772-1213</a>. We could not read Social Security's own web pages, so this page does not say how long a decision takes or how to check status online.</p>
+  <SourceLine sources={[src.apply, src.drug]} org={SSA} about="Extra Help applications" />
+
+  <h2 id="xh-appeal">If Social Security says no or lowers your Extra Help</h2>
+  <ul>
+    <li><strong>The deadline is 60 days.</strong> "You must request administrative review within 60 days after the date you receive notice of the initial determination." Note the date on the letter.</li>
+    <li><strong>Many ways to ask.</strong> "You can request administrative review in person, by phone, fax, or mail."</li>
+    <li><strong>A phone hearing.</strong> The review is "either a hearing conducted by telephone or a case review." The hearing notice comes "at least 20 days before the hearing."</li>
+    <li><strong>To keep your Extra Help while you wait,</strong> appeal "within 10 days after you receive our notice." The rule says "You will not be required to pay back any subsidy you received while your appeal was pending."</li>
+    <li><strong>Late?</strong> You can ask for more time and explain why. Social Security decides if you had good cause.</li>
+  </ul>
+  <SourceLine sources={[src.ask, src.review, src.notice, src.change]} org={SSA} about="Extra Help appeals" />
+
+  <h2 id="xh-renew">Keeping Extra Help</h2>
+  <ul>
+    <li><strong>A review within a year.</strong> "We will redetermine your subsidy eligibility within one year after we determine that you are eligible." After that, the rule says how often depends on how likely your situation is to change.</li>
+    <li><strong>Changes to report.</strong> The rule lists marriage, divorce, a spouse's death, separating or moving back together, and an annulment. If Social Security sends you a form after one of these, "You must return the completed form within 90 days of the date of the form."</li>
+    <li><strong>If you get Extra Help automatically,</strong> Medicare.gov says "If you don't get a notice from Medicare or Social Security, you'll keep getting Extra Help and keep the same plan for next year."</li>
+  </ul>
+  <SourceLine sources={[src.redet, src.report, src.drug]} org={SSA} about="keeping Extra Help" />
+
+  <h2 id="help">Who can help</h2>
+  <p>WV SHIP gives free, one-on-one Medicare counseling, including help applying for Extra Help and filing an appeal. Legal Aid of West Virginia takes cases about government benefits.</p>
+  {ok(ship) && <ResourceCard r={ship} />}
+  {ok(legal) && <ResourceCard r={legal} />}
+  <p class="meta">We describe the official rules. DoHS and Social Security decide who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
