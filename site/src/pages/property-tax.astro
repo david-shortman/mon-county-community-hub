@@ -5,6 +5,7 @@
 // 2026-10-30. Where the county page and state law differ, the page says who
 // says what (#660). No 2027 appeal dates until the county posts them.
 import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import { telHref } from '../lib/content.mjs';
@@ -67,5 +68,5 @@ const phones = { tax: '304-291-7244', assessor: '304-291-7222', commission: '304
   <p><strong>After the County Commission decides,</strong> sources differ on the next step. The county page says the decision "can be appealed within 30 days to the Circuit Court in your county." State law (§11-3-24) says a taxpayer who has a hearing before the Board of Equalization and Review "may appeal the board's order to the Office of Tax Appeals." Ask the County Commission office which applies to you.</p>
   <SourceLine sources={[...board, ...law]} about="appeals after the County Commission" />
 
-  <p class="meta">Sources checked October 30, 2026. Dates and rates change each year, so check the Assessor's and Sheriff's pages. Something wrong? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Dates and rates change each year, so check the Assessor's and Sheriff's pages. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
