@@ -1,0 +1,8 @@
+# No official page explains reentry steps that state law and Medicaid set up
+
+- **Found:** 2026-11-01, building the reentry page (#1182, part of #529)
+- **What we found:** dcr.wv.gov has no adult reentry or release planning page, though W. Va. Code §17B-2-1c lets DCR give a free temporary ID before release and says the DMV must accept it. DMV pages do not mention that ID. Medicaid's reentry services were approved in December 2024, but no public BMS page says if they have started. Two DCR pages disagree on which parole region Pendleton County is in (Monongalia is Region 6 on both). The Monongalia County Day Report Center's site shows leftover template text. The North Central Regional Jail resource guide PDF has agency names and phone numbers that do not line up. The Secretary of State's felony voting brochure has no date, and its older address is a 404.
+- **Evidence:** https://dcr.wv.gov/Pages/site-map.aspx, https://code.wvlegislature.gov/17B-2-1C/, https://bms.wv.gov/media/39906/download?inline, https://dcr.wv.gov/aboutus/parole-services/Pages/parole-services-organization.aspx, https://dcr.wv.gov/facilities/Pages/parole-services-offices/Clarksburg-Parole-Office.aspx, https://www.moncodrc.net/, https://dcr.wv.gov/resources/Pages/resource-guides.aspx, https://sos.wv.gov/media/466/download, all checked 2026-11-01.
+- **Why it matters:** A person coming home, or their family, cannot find out from an official page how to get an ID or turn health coverage back on.
+- **Who keeps it:** WV Division of Corrections and Rehabilitation; WV DMV; WV DoHS Bureau for Medical Services; Monongalia County Day Report Center; WV Secretary of State
+- **Status:** open (#1228)

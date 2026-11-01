@@ -1,13 +1,15 @@
 title: Ask the state to fix a road
 slug: wvdoh-road-repair
 org: wv-division-of-highways
-topics: [moving]
-who_it_is_for: People with a problem on a state road, like a pothole. Not sure if a road is a state road? The state has a road search map by address.
+topics: [moving, government]
+who_it_is_for: People with a problem on a state road, like a pothole. Not sure if a road is a state road? The state has a road search map by address. The Division of Highways District 4 office covers Monongalia County.
+hours: District 4 office Monday to Friday, 7:30 a.m. to 4 p.m.
 what_to_do: Fill out the state's Request for Road Repair form. Requests are handled Monday to Friday, 7:30 a.m. to 4 p.m. Do not use the form for a highway emergency. Or call the District 4 office in Clarksburg at 304-842-1500, Monday to Friday, 7:30 a.m. to 4 p.m.
 contact:
   phone: "304-842-1500"
   url: https://webapps.transportation.wv.gov/swat/
   url_label: Report a road problem
+cost: free
 sources:
   - url: https://webapps.transportation.wv.gov/swat/
     checked: 2026-10-30
