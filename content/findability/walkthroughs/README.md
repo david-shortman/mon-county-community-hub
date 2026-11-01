@@ -15,3 +15,9 @@ python3 content/findability/walkthroughs/score.py build content/findability/walk
 ```
 
 Then add notes per task by reading each answer page. Keep task ids stable so runs compare. The first run and what it found: `docs/reviews/2026-10-31-simulated-walkthroughs.md`.
+
+## November 1 rerun (#529, wave 8)
+
+- `tasks-new-pages.yaml`: 20 more tasks (ids n01 to n20) for pages added October 31 and November 1 (after you apply guides, life events, towns, `/for/` pages, parking, protective orders, mortgage help, holidays, agendas, Find your people). Same format and scripts.
+- `page-search.js`: runs the 246 search test queries through the real `/search/` page in a browser, since `npm run search-test` scores shared code the page does not fully use.
+- Results: `2026-11-01.yaml` (the 30 tasks) and `2026-11-01-new-pages.yaml` (the 20). Write-up: `docs/reviews/2026-11-01-simulated-walkthroughs-rerun.md`.
