@@ -13,11 +13,11 @@ evidence:
     shows: In the health department's 2025 survey of 1,457 people, high cost of care was the top thing that makes care hard to get, for every adult age group and every income range (page 54 of the PDF).
     data_date: "2025"
     publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
-  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-31
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
     shows: The share of people under 65 with no health insurance.
     figure: "6.2% (West Virginia 7.4%, US 9.5%)"
-    publisher: County Health Rankings (2025 release)
+    publisher: County Health Rankings (March 2026 supplemental release)
   - url: https://bms.wv.gov/new-medicaid-rules-are-coming
     checked: 2026-10-31
     shows: West Virginia Medicaid says some members ages 19 to 64 must meet new work or community engagement rules starting January 1, 2027, unless they are exempt.

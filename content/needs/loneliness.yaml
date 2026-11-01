@@ -13,11 +13,11 @@ evidence:
     shows: Anxiety, depression and loneliness were the top three hardships across all gender groups and all age groups over 18 in the health department's 2025 survey (page 55 of the PDF).
     data_date: "2025"
     publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
-  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-31
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
     shows: The share of adults who report feeling lonely.
-    figure: "31.6% (West Virginia 31.1%, US 33%)"
-    publisher: County Health Rankings (2025 release)
+    figure: "33.3% (West Virginia 35.5%, US 34%)"
+    publisher: County Health Rankings (March 2026 supplemental release)
 affected:
   estimate: "35.2% of adults"
   description: Adults in Monongalia County who feel lonely, as estimated by CDC.

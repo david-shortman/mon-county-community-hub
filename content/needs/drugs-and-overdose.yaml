@@ -8,11 +8,11 @@ evidence:
     figure: "77 deaths in 2023, 49 in 2024"
     data_date: 2023 and 2024
     publisher: West Virginia Office of Drug Control Policy, At-A-Glance 2025
-  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-31
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
     shows: Drug overdose deaths for each 100,000 people.
-    figure: "42 per 100,000 (West Virginia 78, US 31)"
-    publisher: County Health Rankings (2025 release)
+    figure: "43 per 100,000 (West Virginia 79, US 32)"
+    publisher: County Health Rankings (March 2026 supplemental release)
   - url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
     checked: 2026-10-31
     shows: Drug or alcohol use was the third most named health problem in the 2025 community survey (page 22).
