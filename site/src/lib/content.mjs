@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
 import { loadFeedEntries } from './feeds/index.mjs';
 import { FIX_FORM, fixFormUrl } from './group-requests.mjs';
+import { loadHomeRules, homeEntries, KIND_LABEL } from './home-year.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const CONTENT_DIR = path.resolve(here, '../../../content');
@@ -69,8 +70,13 @@ let merged;
 export function loadCalendarWithFeeds() {
   merged ??= (async () => {
     // A hidden hand-written entry also hides the feed item with its slug (#519).
-    const hand = loadCalendar();
+    const handOnly = loadCalendar();
     const taken = new Set(loadCalendar({ withHidden: true }).map((e) => e.slug));
+    // Yearly home dates (#1051) come next. A hand-written entry with the same
+    // slug (for example homestead-exemption-deadline-2026) wins.
+    const yearly = homeYearEntries().filter((e) => !taken.has(e.slug));
+    for (const e of yearly) taken.add(e.slug);
+    const hand = [...handOnly, ...yearly];
     // A feed item that a hand-written entry already covers (same first three
     // title words, starting within the hand entry's dates) is left out too,
     // so one event never shows twice under two slugs (#761).
@@ -91,6 +97,42 @@ export function loadCalendarWithFeeds() {
     return [...hand, ...deduped];
   })();
   return merged;
+}
+
+// The yearly rules in content/home-year.yaml as dated entries (#1051).
+// Stale or broken rules are left out with a warning in the build output.
+export function homeYearEntries(today = todayYmd()) {
+  return homeEntries(loadHomeRules(CONTENT_DIR), today, (msg) => console.warn(`warning: ${msg}`));
+}
+
+// The Home and adulting feed (home.ics, #1051): every yearly home date
+// (including a hand-written entry that overrides one, like the 2026 homestead
+// deadline), anything tagged home, plus live items people asked for: dates
+// tagged recycling (e-waste and tire days) and the LIEAP heating help window.
+// Those live items come from the calendar as it is, never copied by hand.
+// Each one gets a title prefix and category (Due, Season, Tip, or Event) and
+// a description that ends with its source and checked date.
+const HOME_LIVE = (e) => (e.topics ?? []).includes('recycling') || /^lieap/.test(e.slug);
+export async function loadHomeFeed(today = todayYmd()) {
+  const yearly = new Map(homeEntries(loadHomeRules(CONTENT_DIR), today).map((e) => [e.slug, e]));
+  return (await loadCalendarWithFeeds())
+    .filter((e) => e.ends >= today)
+    .filter((e) => yearly.has(e.slug) || (e.topics ?? []).includes('home') || HOME_LIVE(e))
+    .map((e) => {
+      const kind = e.home_kind ?? yearly.get(e.slug)?.home_kind;
+      const label = kind ? KIND_LABEL[kind] : 'Event';
+      const title = kind && !/^(Due|Season|Tip):/.test(e.title) ? `${label}: ${e.title}` : e.title;
+      const source = e.sources?.[0]?.url ?? e.url;
+      const checked = (e.sources ?? []).map((x) => ymd(x.checked)).filter(Boolean).sort().at(-1);
+      const where = /Monongalia County, WV/.test(`${e.who_it_is_for} ${e.what_to_do}`) ? '' : ' Monongalia County, WV.';
+      return {
+        ...e,
+        title,
+        ics_categories: [label],
+        ics_description: `${e.who_it_is_for} ${e.what_to_do}${where} From ${e.org_name}. Source: ${source} Checked: ${checked ?? 'not recorded'}`,
+      };
+    })
+    .sort((a, b) => (a.starts < b.starts ? -1 : a.starts > b.starts ? 1 : a.title.localeCompare(b.title)));
 }
 
 // Entries still worth showing: not over yet, and starting within `days`.

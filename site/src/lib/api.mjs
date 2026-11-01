@@ -267,6 +267,8 @@ export async function catalog() {
     exports: [
       { name: 'hsds', description: 'Organizations and services in Open Referral HSDS 3.1 JSON, the format 211 and referral tools read', url: `${API_BASE}hsds/services.json` },
       { name: 'hsds-tabular', description: 'The same in CSV tables, with a Tabular Data Package description', url: `${API_BASE}hsds/datapackage.json` },
+      { name: 'calendar-ics', description: 'Every upcoming date as an iCalendar feed for calendar apps', url: `${SITE_URL}/calendar.ics` },
+      { name: 'home-ics', description: 'Yearly home dates for Monongalia County, WV (tax and Assessor deadlines, forest fire seasons, frost dates, upkeep tips) as an iCalendar feed. Each event lists its source and checked date', url: `${SITE_URL}/home.ics` },
     ],
   };
 }
