@@ -5,6 +5,9 @@
 // warns above grade 9. Lists and phone blocks (no real sentences) are skipped.
 // The same formula is used by the source benchmark
 // (content/findability/benchmark/measure.js). See docs/visibility/answer-pages.md.
+// It also writes dist/reading-grades.json (#1054) for the weekly scorecard:
+// each page's grade for its opening and for all its paragraph text, its door,
+// and a summary (middle values, count above 9, Help now pages above 8).
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -39,7 +42,22 @@ const files = [];
   }
 })(dist);
 
+// The door a page sits in, read from its source file's `export const page`.
+function doorFor(url) {
+  const r = url.replace(/^\/|\/$/g, '');
+  for (const f of [`src/pages/${r}.astro`, `src/pages/${r}${r ? '/' : ''}index.astro`]) {
+    if (fs.existsSync(f)) return fs.readFileSync(f, 'utf8').match(/door:\s*["']([a-z-]+)["']/)?.[1] ?? null;
+  }
+  return null;
+}
+const median = (xs) => {
+  if (!xs.length) return null;
+  const s = [...xs].sort((a, b) => a - b), m = Math.floor(s.length / 2);
+  return Math.round((s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) * 10) / 10;
+};
+
 const high = [];
+const rows = [];
 let checked = 0;
 for (const file of files) {
   const html = fs.readFileSync(file, 'utf8');
@@ -52,8 +70,32 @@ for (const file of files) {
   const g = grade(lead);
   if (g == null) continue;
   checked++;
-  if (g > LIMIT) high.push({ url: '/' + path.relative(dist, path.dirname(file)).split(path.sep).join('/'), g, lead });
+  const rel = path.relative(dist, path.dirname(file)).split(path.sep).join('/');
+  const url = '/' + rel + (rel ? '/' : '');
+  // All paragraph text after the H1, as one block.
+  const full = grade([...after.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/g)].map((m) => strip(m[1])).filter(Boolean).join(' '));
+  rows.push({ url, door: doorFor(url), opening: g, full });
+  if (g > LIMIT) high.push({ url: '/' + rel, g, lead });
 }
 high.sort((a, b) => b.g - a.g);
 console.log(`\nReading grade of page openings (first two sentences after the H1), warn above ${LIMIT}: ${checked} pages checked, ${high.length} above.`);
 for (const h of high) console.log(`  warning: grade ${h.g.toFixed(1)}  ${h.url}  "${h.lead.slice(0, 110)}${h.lead.length > 110 ? '...' : ''}"`);
+
+const openings = rows.map((r) => r.opening);
+const fulls = rows.map((r) => r.full).filter((g) => g != null);
+const summary = {
+  pages: rows.length,
+  opening_median: median(openings),
+  opening_grade_8_or_under: openings.filter((g) => g <= 8).length,
+  opening_above_9: openings.filter((g) => g > LIMIT).length,
+  full_median: median(fulls),
+  full_above_10: fulls.filter((g) => g > 10).length,
+  help_now_above_8: rows.filter((r) => r.door === 'help-now' && r.opening > 8).map((r) => r.url),
+};
+fs.writeFileSync(path.join(dist, 'reading-grades.json'), JSON.stringify({
+  about: 'Flesch-Kincaid reading grade for each built page: its opening (first two sentences after the H1) and all its paragraph text. From site/scripts/check-reading.mjs.',
+  built: new Date().toISOString().slice(0, 10),
+  summary,
+  pages: rows.sort((a, b) => a.url.localeCompare(b.url)),
+}, null, 1) + '\n');
+console.log(`Middle value: openings ${summary.opening_median}, full text ${summary.full_median}. Wrote dist/reading-grades.json.`);
