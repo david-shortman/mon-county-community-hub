@@ -17,6 +17,7 @@
     "check-a11y": "node scripts/check-a11y.mjs",
     "check-contrast": "node scripts/check-contrast.mjs",
     "check-weight": "node scripts/check-weight.mjs",
+    "slow-3g": "node scripts/slow-3g.mjs",
     "check-api": "node scripts/check-api.mjs",
     "call-queue": "node scripts/call-queue.mjs",
     "secondhand-due": "node scripts/secondhand-due.mjs",
