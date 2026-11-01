@@ -7,6 +7,7 @@
 import Base from '../layouts/Base.astro';
 import GroupCard from '../components/GroupCard.astro';
 import HelpWanted from '../components/HelpWanted.astro';
+import Fold from '../components/Fold.astro';
 import { BUCKETS, loadDirectory, inBucket, areasWithout } from '../lib/people.mjs';
 import { SECTION } from '../lib/places.mjs';
 import { loadPages } from '../lib/pages.mjs';
@@ -64,19 +65,19 @@ const also = [
     </ul>
   </nav>
 
+  {/* Each list is folded (#1174): open, they ran about 60 phone screens. The
+      jump links above open the list they point to, and so does a link to one group. */}
   {sections.map((s) => (
-    <section id={s.key}>
-      <h2>{s.label}</h2>
+    <Fold id={s.key} title={s.label} hint={`${s.groups.length} ${s.groups.length === 1 ? 'group' : 'groups'}. Tap to see them.`}>
       {s.groups.map((p) => <GroupCard p={p} venue={p.venueRecord} anchor={firstIn.get(p.slug) === s.key} />)}
-    </section>
+    </Fold>
   ))}
 
   {dir.libraries.length > 0 && (
-    <section id="places-to-sit">
-      <h2>Free places to sit</h2>
+    <Fold id="places-to-sit" title="Free places to sit" hint={`${dir.libraries.length} library branches. Tap to see them.`}>
       <p>Public library branches are open to everyone, with nothing to buy.</p>
       {dir.libraries.map((p) => <GroupCard p={p} />)}
-    </section>
+    </Fold>
   )}
 
   {dir.meals.length > 0 && (
@@ -126,7 +127,7 @@ const also = [
     return s;
   }
   function show(into, time, withWho) {
-    var cards = Array.prototype.slice.call(document.querySelectorAll('section[id] > article.group'));
+    var cards = Array.prototype.slice.call(document.querySelectorAll('details.fold > .fold-body > article.group'));
     var seen = {}, ranked = cards.map(function (c, i) { return { c: c, s: score(c, into, time, withWho), i: i }; })
       .filter(function (x) { if (x.s < 0 || seen[x.c.dataset.slug]) return false; seen[x.c.dataset.slug] = 1; return true; })
       .sort(function (a, b) { return b.s - a.s || a.i - b.i; }).slice(0, 3);
