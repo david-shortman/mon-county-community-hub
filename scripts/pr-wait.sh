@@ -17,7 +17,7 @@ deadline=$(( $(date +%s) + LIMIT_MIN * 60 ))
 # whether the site deployed. Exit 0 green, 1 red, 3 timed out.
 # A Site run cancelled because a newer push landed is not a failure: the newer
 # run builds everything in it, including this merge. So on "cancelled" the
-# script follows the newest Site run on main and waits for that one instead.
+# script follows the Site run for main's current head commit instead.
 if [ "$PR" = "main" ]; then
   sleep 10
   sha=$(gh api "$REPO/commits/main" --jq .sha)
@@ -28,7 +28,9 @@ if [ "$PR" = "main" ]; then
     case "$s" in
       completed\|success*) echo "main ${sha:0:7}: Site build passed$note"; exit 0 ;;
       completed\|cancelled*)
-        newest=$(gh api "$REPO/actions/runs?branch=main&event=push&per_page=30" --jq '[.workflow_runs[] | select(.name=="Site")][0].head_sha' 2>/dev/null)
+        # Follow main's current head commit, not the newest run: a re-run of an
+        # old commit's build is newer but does not include this merge (#529).
+        newest=$(gh api "$REPO/commits/main" --jq .sha 2>/dev/null)
         if [ -n "$newest" ] && [ "$newest" != "$sha" ]; then
           echo "main ${sha:0:7}: Site run superseded by a newer push; following ${newest:0:7}"
           sha=$newest; continue
