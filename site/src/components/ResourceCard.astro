@@ -66,8 +66,15 @@ const parts = (list) => (list ?? []).map(labelPart);
 </article>
 )}
 
+<script>
+  // Printouts show everything (#1381 review): open folded parts before printing, close them after.
+  window.addEventListener('beforeprint', () => document.querySelectorAll('details.card-more:not([open])').forEach((d) => { d.open = true; d.dataset.printOpened = '1'; }));
+  window.addEventListener('afterprint', () => document.querySelectorAll('details.card-more[data-print-opened]').forEach((d) => { d.open = false; delete d.dataset.printOpened; }));
+</script>
+
 <style>
   .card-more { margin: 0 0 12px; }
   .card-more > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
   .card-more[open] > summary { margin-bottom: 4px; }
+  @media print { .card-more > summary { display: none; } }
 </style>
