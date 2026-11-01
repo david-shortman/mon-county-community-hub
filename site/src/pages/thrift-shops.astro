@@ -9,6 +9,7 @@ import ShopCard from '../components/ShopCard.astro';
 import AreaPicker from '../components/AreaPicker.astro';
 import Fold from '../components/Fold.astro';
 import OnThisPage from '../components/OnThisPage.astro';
+import CheckedRange from '../components/CheckedRange.astro';
 // Areas that share a name with a town page (#1120).
 const TOWN_PAGES = { westover: 'Westover', 'cheat-lake': 'Cheat Lake' };
 import { loadSecondhand, SECONDHAND_AREAS, SECONDHAND_GOODS } from '../lib/content.mjs';
@@ -27,6 +28,7 @@ const causes = shops.filter((s) => s.funds_local_cause);
 <Base title="Thrift and resale shops in Morgantown and Mon County, WV" description="Secondhand, thrift, consignment, vintage and used book and game shops in Morgantown and Monongalia County, grouped by area, with hours, what each sells, and which buy from you.">
   <h1>Thrift and resale shops</h1>
   <p class="lede">Secondhand shops in Mon County, grouped by part of town and listed A to Z. Most cluster in two places: the Westover strip along Mall Rd and Fairmont Rd, and downtown on and near High St. We list every shop the same way, with no ratings and no paid spots.</p>
+  <CheckedRange sources={shops.map((s) => s.sources)} what="shops" />
 
   <OnThisPage items={[['#filters-h', 'Looking for something?'], ...areas.map((a) => [`#area-${a.slug}`, a.name]), ['#more-ways', 'More ways to buy, sell and share']]} />
 
