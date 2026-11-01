@@ -1,0 +1,140 @@
+# The WV Department of Agriculture's "Homemade Cottage Foods Product Guide"
+# (part of #393), linked from /selling-food/ (read 2026-11-01). The cover
+# says "Version – Oct 2026" and "This document is updated when revisions to
+# legislation, rules or other authorities occur." 30 pages. Food lists and
+# rules are quoted or copied as printed. The guide's list of named process
+# authority experts (with personal emails) is left out; readers are sent to
+# the PDF and WVDA for it.
+slug: wvda-cottage-food-guide
+title: Homemade Cottage Foods Product Guide
+publisher: West Virginia Department of Agriculture
+pdf: https://agriculture.wv.gov/wp-content/uploads/West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf
+pdf_date: "Version – Oct 2026"
+found_on: https://agriculture.wv.gov/divisions/regulatory-and-environmental-affairs/potentially-hazardous-cottage-foods/
+intro: West Virginia lets people sell some food made in their home kitchen straight to buyers. Some foods need no state permit. Others need a free WVDA permit and a kitchen inspection first. These lists are from the state's guide. The parts in quotes are its own words.
+recheck_days: 120
+sources:
+  - url: https://agriculture.wv.gov/wp-content/uploads/West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf
+    name: West Virginia Department of Agriculture
+    checked: 2026-11-01
+sections:
+  - heading: What counts as cottage food
+    id: what
+    items:
+      - "\"Cottage food is a homemade food item intended for human consumption that is produced, packaged, and labeled at the residential property of the producer and sold directly to a consumer.\""
+      - "It does not include \"meat, meat products, poultry, seafood, and Grade A dairy products.\""
+      - "\"Depending upon the product sold, a cottage food seller may be required to obtain a Cottage Food Vendor Permit from WVDA at no cost.\""
+      - "Even with no permit, \"Applicable labeling and other legal requirements, e.g. state or local business licenses still need to be followed.\""
+  - heading: Foods that need no cottage food permit
+    id: no-permit
+    note: The guide calls these "non-potentially hazardous" (NPH) foods. It says "WVDA allows non-potentially hazardous foods to be sold as cottage foods without a potentially hazardous cottage food vendor permit." Its examples, as printed
+    items:
+      - "Breads, rolls, biscuits"
+      - "Cakes"
+      - "Candies & confections"
+      - "Cereals, trail mixes, granola"
+      - "Coated or uncoated nuts"
+      - "Commercially harvested mushrooms"
+      - "Condiments (non-potentially hazardous)"
+      - "Dehydrated fruits and vegetables (whole)"
+      - "Dog food, treats, or animal feed"
+      - "Fresh, uncut produce"
+      - "Fruit pies"
+      - "Honey"
+      - "Jams & jellies (standard fruits, e.g., grape, strawberry, raspberry)"
+      - "Molasses"
+      - "Pepperoni rolls"
+      - "Popcorn, popcorn balls, cotton candy"
+      - "Sorghum"
+      - "Tomato sauce & juice"
+      - "Tree syrup"
+      - "Whole or chopped canned tomatoes"
+      - "A warning from the guide: \"Do not assume food is automatically exempt because it is homemade, sold in a jar, baked in an oven or offered at a farmers market or residence.\""
+  - heading: Foods that need a permit first
+    id: permit
+    note: The guide calls these "potentially hazardous" (PH) foods. "A PH cottage food vendor permit is required for all home sales of products that are considered potentially hazardous." Next to each food, what the guide says it needs.
+    items:
+      - name: "Acidified Foods"
+        lines: ["Process Authority, WVDA label review and training certification"]
+      - name: "Condiments-Potentially Hazardous"
+        lines: ["Acidified: Process Authority, WVDA label review and a training certificate.", "Time/temp only: Cottage Food Vendor Permit, WVDA label review, training certification"]
+      - name: "Cut Produce"
+        lines: ["No process required. Once cut, it \"must be held below 41°F\" and needs the permit."]
+      - name: "Fermented products"
+        lines: ["Process Authority and WVDA label review"]
+      - name: "Freeze Dried Products/Dehydrated"
+        lines: ["\"The same requirements apply as before the freeze-drying/dehydrating process.\""]
+      - name: "Non-standard Jams & Jellies (basil, hot pepper, etc., no sugar added/artificially sweetened)"
+        lines: ["Process Authority, WVDA label review and training certification"]
+      - name: "Other canned or preserved foods"
+        lines: ["Contact WVDA"]
+      - name: "Pickled products"
+        lines: ["Process Authority, WVDA label review and training certification"]
+      - name: "Salsas"
+        lines: ["Process Authority, WVDA label review and training certification"]
+      - name: "Sauces (hot sauce, marinara, spaghetti)"
+        lines: ["Process Authority and WVDA label review"]
+      - name: "Time/Temp Controlled Foods"
+        lines: ["Contact WVDA"]
+      - name: "Infused honey and syrups"
+        lines: ["Contact WVDA"]
+      - "\"WVDA's classification list is not exhaustive.\" For a food not listed, send WVDA \"the complete recipe, preparation process, packaging method and intended storage conditions.\""
+  - heading: Baked goods that need a permit
+    id: baked
+    items:
+      - "The guide says these \"must be time and temperature controlled\": meringue, custard or cream pies; cheesecake; cream-filled cupcakes, donuts, pastries; cream cheese-based frostings or fillings."
+  - heading: Not allowed
+    id: not-allowed
+    items:
+      - "\"Wild-harvested mushrooms are NOT permitted to be sold at West Virginia Cottage Foods.\""
+  - heading: Extra rules for permit foods
+    id: extra
+    items:
+      - name: "Process authority letter"
+        lines: ["A process authority is a food safety expert who approves a recipe and method. \"A copy of the approval letter from a Process Authority must be supplied to the WVDA to sell certain potentially hazardous foods, such as sauces, salsas, fermented and picked [pickled] products.\" The guide lists some process authorities; see the PDF, or call WVDA."]
+      - name: "Label review"
+        lines: ["WVDA's label review is free. It is \"required for potentially hazardous foods such as sauces, salsas, fermented foods, pickled items, and other acidified foods.\""]
+      - name: "Training"
+        lines: ["Makers of certain permit foods need one approved course, such as a Statewide Food Handlers Card (\"ONLY applicable for time/temp controlled foods\"), Better Process Control School, Acidified Foods Manufacturing School, or a good manufacturing practices (GMP) certificate."]
+      - name: "Well or spring water"
+        lines: ["\"A producer who has a private water supply must have the supply tested prior to permitting and at least annually thereafter\" for coliform bacteria. WVDA wants a test with numbers, \"not a present/absent test.\""]
+      - name: "Records for canned acidified foods"
+        lines: ["Keep the product name, number of units made, the raw ingredients and where you bought them, the date or lot code, and where each lot went."]
+      - name: "Kitchen inspection"
+        lines: ["\"The agency requires a kitchen inspection before issuing the permit.\" Kitchens that freeze-dry permit foods \"will need a WVDA annual kitchen inspection.\""]
+  - heading: What a label needs
+    id: labels
+    note: The guide's checklist "Before printing labels"
+    items:
+      - "Product name that accurately describes the food."
+      - "Ingredients listed in the required order (most to least by weight)."
+      - "Required allergen declarations."
+      - "Net quantity, when required."
+      - "Producer or business identification and address/contact details, as applicable."
+      - "Any required cottage food statement, warnings or storage instructions."
+      - "WVDA label approval for products that require review."
+  - heading: Getting a permit, step by step
+    id: steps
+    items:
+      - "List every product you plan to sell, with ingredient lists and recipes."
+      - "Confirm with WVDA which kind each product is, and whether it needs a permit, a process authority letter, label review or training."
+      - "Finish any required training and process authority approval."
+      - "Make your labels and send them to WVDA for review when required."
+      - "Apply with \"the official WVDA potentially hazardous cottage food vendor application\" and get ready for the kitchen inspection."
+      - "\"Wait for approval before selling covered products.\""
+  - heading: WVDA contacts
+    id: contacts
+    items:
+      - name: "WVDA Cottage Food Program"
+        lines: ["Phone: 304-558-2227", "Email: cottagefood@wvda.us"]
+      - name: "WVDA Label Review"
+        lines: ["Phone: 304-558-2210", "Email: productlabeling@wvda.us"]
+  - heading: The guide
+    id: guide
+    items:
+      - name: "Homemade Cottage Foods Product Guide"
+        lines: ["30 pages, from the WV Department of Agriculture, with definitions, how pH and water activity decide which kind a food is, and a list of process authorities."]
+        links:
+          - label: "Homemade Cottage Foods Product Guide (PDF)"
+            url: https://agriculture.wv.gov/wp-content/uploads/West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf
+            date: "Version – Oct 2026"
