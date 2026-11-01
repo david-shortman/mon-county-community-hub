@@ -114,10 +114,10 @@ const measures = places.data?.measures ?? [];
   <p>Which of these problems people here say are hardest, ranked with more local sources: <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/needs/`}>What people here need most</a>.</p>
 
   <h2 id="basic-budget">What a basic budget costs here</h2>
-  <p>Two public sources estimate how much money a household in Monongalia County needs for basics like housing, child care, food, getting around, health care and taxes. They measure different years and count different costs, so their numbers are not the same. Neither one is the official poverty line, and neither one says what any one family spends.</p>
+  <p>Two public sources estimate how much money a household in Monongalia County needs for basics like housing, child care, food, getting around, health care and taxes. ALICE stands for Asset Limited, Income Constrained, Employed: households that earn more than the poverty line but not enough for the basics. The two sources measure different years and count different costs, so their numbers are not the same. Neither one is the official poverty line, and neither one says what any one family spends.</p>
   <Fact f={moneyFact('alice-survival-budget')} about="the ALICE household budget" />
   <Fact f={moneyFact('mit-living-wage')} about="the MIT living wage" />
-  <p>Why they differ: ALICE's numbers are 2023 costs. MIT's are adjusted to December 2025 prices, and the two sort and count some costs in different ways. Looking for help with costs? <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/help/what-help/`}>See what help you might get</a>.</p>
+  <p>Why they differ: ALICE's numbers are 2023 costs. MIT's are adjusted to December 2025 prices, and MIT also counts civic costs, which ALICE's list does not. Looking for help with costs? <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/help/what-help/`}>See what help you might get</a>.</p>
 
   <h2 id="what-it-means">What these numbers do and don't tell you</h2>
   <ul>
