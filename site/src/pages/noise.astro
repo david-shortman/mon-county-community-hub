@@ -7,6 +7,7 @@
 // line. The property complaint steps come from the city's Code Enforcement
 // PDF (content/pdf-pages/morgantown-code-complaints.yaml, part of #393).
 import Base from '../layouts/Base.astro';
+import BigChoices from '../components/BigChoices.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import FromPdf from '../components/FromPdf.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -21,6 +22,13 @@ const noiseSources = [{ url: 'https://www.morgantownwv.gov/165/Noise-Ordinance',
 <Base title="Noise rules and neighbor problems in Morgantown, WV: quiet hours, party waivers, complaints" description="Morgantown's noise ordinance in plain words: quiet hours for music, power tools, loudspeakers and yelling, the $20 party waiver, fines up to $500, and what happens after you report a property problem to Code Enforcement.">
   <h1>Noise and neighbor problems</h1>
   <p class="lede">Check the quiet hours below to see what Morgantown's noise rules allow and when. Planning a loud party? You can apply to the city for a waiver. For a run-down or unsafe property, see how to report it and what happens next.</p>
+  {/* Lead block (#199): the four things most people come here for. */}
+  <BigChoices label="Noise: start here" choices={[
+    { href: '#quiet-hours', label: 'Quiet hours', icon: 'clock' },
+    { href: '#party', label: 'Having a party', icon: 'people' },
+    { href: '#report-noise', label: 'Report noise', icon: 'phone' },
+    { href: '#property', label: 'Property problems', icon: 'home' },
+  ]} />
 
   <nav aria-label="On this page">
     <ul>

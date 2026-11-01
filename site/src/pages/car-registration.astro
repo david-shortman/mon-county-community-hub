@@ -5,6 +5,7 @@
 // site does not say), and the WV State Police inspection station list (its
 // site did not load).
 import Base from '../layouts/Base.astro';
+import BigChoices from '../components/BigChoices.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -14,6 +15,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Base title="Renew car registration and inspection in Morgantown, WV" description="Renew a West Virginia vehicle registration online, by mail or at the Morgantown DMV, what to bring (insurance and personal property tax receipt), the 24-month state inspection sticker, and replacing a lost plate, decal or registration card.">
   <h1>Car registration and inspection</h1>
   <p class="lede">You can renew your registration online any time with a credit card. Have your insurance and personal property tax receipt ready. Your inspection sticker is a separate step, every 24 months, at a licensed inspection station.</p>
+  {/* Lead block (#199): the four things most people come here for. */}
+  <BigChoices label="Car registration: start here" choices={[
+    { href: '#renew', label: 'Renew my registration', icon: 'calendar' },
+    { href: '#inspection', label: 'Inspection sticker', icon: 'receipt' },
+    { href: '#lost', label: 'Lost plate, decal or card', icon: 'search' },
+    { href: '#office', label: 'The DMV office', icon: 'pin' },
+  ]} />
 
   <h2 id="renew">Renew your registration</h2>
   <ResourceCard r={resource('wv-dmv-registration-renewal')} showCost />
