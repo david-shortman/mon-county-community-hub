@@ -1,0 +1,39 @@
+---
+// "I'm leaving jail or prison" life event page (#1178, sprint #529). Links
+// only, so it states no facts of its own; each linked page has its sources.
+// A local reentry page is a gap (see #1178 and #215).
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "work", label: "I'm leaving jail or prison", summary: "A place to stay and food, an ID, health coverage, then work with a record and clearing a record, in order" };
+const sections = [
+  { title: "Today", links: [
+    { href: "/stay-tonight/#bed-h", label: "A bed tonight", text: "emergency shelter, and who to call if it is full" },
+    { href: "/help/food/", label: "Food", text: "food today or this week" },
+    { href: "/drugs-and-alcohol/", label: "Drugs or alcohol", text: "free naloxone (Narcan), help lines, detox and treatment" },
+  ] },
+  { title: "This week", links: [
+    { href: "/ids-and-records/#id", label: "A West Virginia ID card", text: "what to bring and where to go" },
+    { href: "/ids-and-records/#certificates", label: "A copy of your birth certificate", text: "from the County Clerk or the state" },
+    { href: "/file-today/", label: "SNAP and Medicaid", text: "how to start an application today, and what to bring" },
+    { href: "/getting-around/", label: "Getting around without a car", text: "buses, fares and which bus goes where" },
+  ] },
+  { title: "In the next few weeks", links: [
+    { href: "/work-and-learning/", label: "Work with a record", text: "federal bonding, and Jobs & Hope West Virginia" },
+    { href: "/find-a-job/#help", label: "Free resume and interview help", text: "resume, interview and computer help" },
+    { href: "/legal-help/#record", label: "Clear a record", text: "expungement forms and free legal help" },
+    { href: "/pay-for-training/", label: "Get training paid for", text: "training scholarships and state grants" },
+    { href: "/no-insurance/", label: "See a doctor", text: "a free clinic and sliding fee care" },
+  ] },
+  { title: "If this also fits, check", links: [
+    { href: "/mental-health/", label: "Someone to talk to", text: "a person to talk to today, and counseling you can afford" },
+    { href: "/renting/#before", label: "Renting a place", text: "check a rental and read the lease before you sign" },
+    { href: "/veterans/", label: "You served", text: "VA health care, the Vet Center and help with a claim" },
+    { href: "/for/job-seekers/", text: null },
+  ] },
+];
+---
+<Base title="Leaving jail or prison: first steps in Morgantown and Mon County" description="Steps after release from jail or prison in Monongalia County, WV, in order: a bed and food, help with drugs or alcohol, a WV ID and birth certificate, SNAP and Medicaid, then jobs with a record, free resume help and clearing a record.">
+  <h1>I'm leaving jail or prison</h1>
+  <p class="lede">Here are steps for the first days and weeks after release, in order. Start with today. Each link goes to one of our pages with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

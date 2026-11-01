@@ -1,0 +1,40 @@
+---
+// "I'm separating or divorcing" life event page (#1178, sprint #529). Links
+// only, so it states no facts of its own; each linked page has its sources.
+// A page on family court, custody and child support is a gap (see #1178).
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "family", label: "I'm separating or divorcing", summary: "Free legal help and court forms, money and health coverage on your own, then records, a new place and your kids, in order" };
+const sections = [
+  { title: "First", links: [
+    { href: "/life-events/leaving-an-unsafe-home/", label: "Not safe at home?", text: "steps for leaving an unsafe home" },
+    { href: "/legal-help/#free-help", label: "Free or low cost legal help", text: "Legal Aid of West Virginia, free online answers and lawyer referral" },
+    { href: "/legal-help/#forms", label: "Court forms", text: "free state court forms, including divorce and child support, and case search" },
+  ] },
+  { title: "This week", links: [
+    { href: "/money/#bills", label: "A bill due this month", text: "who can help with a bill you can't pay" },
+    { href: "/file-today/", label: "SNAP, Medicaid and WV WORKS", text: "if your household or income changed, how to start an application today" },
+    { href: "/no-insurance/", label: "Health coverage", text: "if you were on a spouse's plan: other ways to get coverage" },
+    { href: "/help-in-your-language/#legal", label: "An interpreter in court", text: "free interpreters at court and other offices" },
+  ] },
+  { title: "In the next few weeks", links: [
+    { href: "/ids-and-records/#certificates", label: "A copy of your marriage certificate", text: "from the County Clerk or the state" },
+    { href: "/ids-and-records/#id", label: "Update your ID", text: "a West Virginia ID card or REAL ID" },
+    { href: "/renting/", label: "A new place to rent", text: "before you rent, repairs and your deposit" },
+    { href: "/moving-here/", label: "Power, water, gas and trash in your name", text: "how to start service" },
+    { href: "/vote/#register", label: "Update your voter registration", text: "if your name or address changed" },
+    { href: "/free-tax-help/", label: "Taxes", text: "free help filing your taxes" },
+  ] },
+  { title: "If this also fits, check", links: [
+    { href: "/mental-health/", label: "Someone to talk to", text: "a person to talk to today, and counseling you can afford" },
+    { href: "/school-age/#enroll", label: "Your kids changing schools", text: "how to enroll and find your school and bus" },
+    { href: "/for/parents-young-kids/", text: null },
+    { href: "/for/parents-school-age/", text: null },
+  ] },
+];
+---
+<Base title="Separating or divorcing: where to start in Morgantown and Mon County" description="Steps for people separating or divorcing in Monongalia County, WV, in order: free legal help and state court forms, bills, SNAP, Medicaid and health coverage, then records, a new place, voter registration and taxes.">
+  <h1>I'm separating or divorcing</h1>
+  <p class="lede">Here are steps to take when a marriage or partnership ends, in the order they often come up. Start with free legal help. Each link goes to one of our pages with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
