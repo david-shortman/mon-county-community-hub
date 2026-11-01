@@ -1,0 +1,40 @@
+---
+// "I'm leaving an unsafe home" life event page (#1178, sprint #529). It uses
+// the crisis pattern (#174): the crisis strip, Quick exit and the note on
+// leaving. Links only past the lede, so it states no facts of its own; each
+// linked page has its sources. A protective order page is a gap (see #1178).
+// Waits for David: names 911 and routes to crisis help.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "family", label: "I'm leaving an unsafe home", summary: "A 24-hour hotline, a safe place tonight, free legal help and court forms, then an ID, money help and a new place, in order" };
+const sections = [
+  { title: "Today", links: [
+    { href: "/stay-tonight/#safe-h", label: "Safe from someone", text: "a 24-hour hotline for domestic or sexual violence" },
+    { href: "/stay-tonight/#bed-h", label: "A bed tonight", text: "emergency shelter, and who to call if it is full" },
+    { href: "/help/food/", label: "Food", text: "food today or this week" },
+  ] },
+  { title: "This week", links: [
+    { href: "/legal-help/#free-help", label: "Free legal help", text: "Legal Aid of West Virginia, which takes protective order cases, and other free help" },
+    { href: "/legal-help/#forms", label: "Court forms", text: "free state court forms, including personal safety orders, and case search" },
+    { href: "/ids-and-records/#lost", label: "Replace a lost ID", text: "a new license or ID card" },
+    { href: "/ids-and-records/#certificates", label: "A copy of a birth certificate", text: "from the County Clerk or the state" },
+    { href: "/file-today/", label: "SNAP, Medicaid and WV WORKS", text: "how to start an application today, and what to bring" },
+  ] },
+  { title: "In the next few weeks", links: [
+    { href: "/renting/#before", label: "A new place to rent", text: "check a rental and read the lease before you sign" },
+    { href: "/mental-health/", label: "Someone to talk to", text: "a person to talk to today, and counseling you can afford" },
+    { href: "/pets/#rehome", label: "Your pet", text: "options if you can't keep your pet" },
+    { href: "/help-in-your-language/", label: "Help in your language", text: "free interpreters at court and other offices" },
+  ] },
+  { title: "If this also fits, check", links: [
+    { href: "/life-events/separating-or-divorcing/", text: null },
+    { href: "/life-events/losing-my-home/", text: null },
+    { href: "/money/#bills", label: "A bill due this month", text: "who can help with a bill you can't pay" },
+  ] },
+];
+---
+<Base crisis title="Leaving an unsafe home: first steps in Morgantown and Mon County" description="Steps for leaving an unsafe home in Monongalia County, WV, in order: a 24-hour hotline and a safe place tonight, free legal help and state court forms, a new ID, SNAP and Medicaid, then a new place and someone to talk to.">
+  <h1>I'm leaving an unsafe home</h1>
+  <p class="lede">In danger right now? Call <a href="tel:911">911</a>. To leave this page fast, tap Quick exit at the top. Below are next steps, in order. Each link goes to one of our pages with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

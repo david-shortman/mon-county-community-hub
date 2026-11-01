@@ -1,0 +1,43 @@
+---
+// "I lost my home or may lose it" life event page (#1178, sprint #529).
+// Links only, so it states no facts of its own; each linked page has its
+// sources. Help for homeowners behind on a mortgage is a gap (see #1178).
+// Waits for David: topic housing.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "this-month", topic: "housing", label: "I lost my home or may lose it", summary: "Behind on rent or facing eviction, a place to stay tonight, free legal help, then bills, your things and a new place, in order" };
+const sections = [
+  { title: "Today", links: [
+    { href: "/stay-tonight/#bed-h", label: "A bed tonight", text: "emergency shelter, and who to call if it is full" },
+    { href: "/money/#rent", label: "Behind on rent or facing eviction", text: "keep every notice, and free legal help from Legal Aid" },
+    { href: "/help/food/", label: "Food", text: "food today or this week" },
+  ] },
+  { title: "This week", links: [
+    { href: "/renting/#legal-help", label: "Free legal help for renters", text: "Legal Aid of West Virginia's eviction help" },
+    { href: "/utility-bills/", label: "A shutoff notice", text: "heat, water or electric, before or after a shutoff" },
+    { href: "/help/what-help/", label: "What help might I get?", text: "two quick questions, no name needed, then places that may help" },
+    { href: "/before-you-call/", label: "Before you call", text: "what to have ready and what to say to a landlord or utility" },
+    { href: "/for/renters/", text: null },
+  ] },
+  { title: "In the next few weeks", links: [
+    { href: "/renting/#deposit", label: "Your security deposit", text: "what state law says about getting it back" },
+    { href: "/renting/#before", label: "Your next place", text: "check a rental and read the lease before you sign" },
+    { href: "/pets/#rehome", label: "Your pet", text: "options if you can't keep your pet" },
+    { href: "/sell-or-donate/", label: "Your things", text: "where to sell, donate or give away what you can't take" },
+    { href: "/ids-and-records/#lost", label: "Replace a lost ID", text: "a new license or ID card" },
+    { href: "/vote/#register", label: "Update your voter registration", text: "after you move" },
+  ] },
+  { title: "If this also fits, check", links: [
+    { href: "/life-events/lost-my-job/", text: null },
+    { href: "/life-events/leaving-an-unsafe-home/", text: null },
+    { href: "/property-tax/", label: "You own your home", text: "property tax due dates, the homestead exemption and appeals" },
+    { href: "/veterans/", label: "You served", text: "help for veterans losing housing or already homeless" },
+    { href: "/mental-health/", label: "Someone to talk to", text: "a person to talk to today, and counseling you can afford" },
+  ] },
+];
+---
+<Base title="Losing your home: first steps in Morgantown and Mon County" description="Steps if you lost your home or may lose it in Monongalia County, WV, in order: a bed tonight, help when you are behind on rent or facing eviction, free legal help, utility shutoffs, then your deposit, your pet, your things and a new place.">
+  <h1>I lost my home or may lose it</h1>
+  <p class="lede">Here are steps to take, in order. If you got a notice from your landlord or the court, start with today's list. Each link goes to one of our pages with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
