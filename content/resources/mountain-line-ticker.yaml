@@ -10,4 +10,4 @@ contact:
   url_label: Bus ticker
 sources:
   - url: https://www.busride.org/pda-ticker
-    checked: 2026-10-31
+    checked: 2026-11-01

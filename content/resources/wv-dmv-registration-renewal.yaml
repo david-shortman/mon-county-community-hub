@@ -23,6 +23,6 @@ contact:
 if_you_want_help: [wv-dmv-morgantown-office]
 sources:
   - url: https://dmv.wv.gov/vehicle-services/vehicles/registrations
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://dmv.wv.gov/offices/morgantown
-    checked: 2026-10-31
+    checked: 2026-11-01

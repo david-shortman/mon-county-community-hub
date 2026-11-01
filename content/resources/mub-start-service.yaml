@@ -10,6 +10,10 @@ contact:
 cost: A $125 security deposit for all new customers, paid at the end of the application.
 sources:
   - url: https://mub.org/start-service
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://mub.org/contact
-    checked: 2026-10-30
+    checked: 2026-11-01
+  - url: https://townofgranvillewv.gov/community/
+    checked: 2026-11-01
+  - url: https://www.starcitywv.com/
+    checked: 2026-11-01

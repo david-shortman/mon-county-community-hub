@@ -11,6 +11,6 @@ contact:
   url_label: Towing
 sources:
   - url: https://www.parkmpa.com/public-alerts/
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.parkmpa.com/parking-info/
-    checked: 2026-10-31
+    checked: 2026-11-01

@@ -4,5 +4,5 @@ quote: "Glass: Only food or beverage containers of any color. ... Ceramics, drin
 sources:
   - url: https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-WV-service-guide-2019.pdf
     name: Republic Services
-    checked: 2026-10-30
+    checked: 2026-11-01
 recheck_days: 90    # an old guide; look for a newer one often (#25)

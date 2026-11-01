@@ -12,8 +12,8 @@ contact:
 get_in: call-first
 sources:
   - url: https://www.farmers.gov/sites/default/files/json/scl.json
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.farmers.gov/working-with-us/service-center-locator
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://agriculture.wv.gov/ag-business/usda-and-other-funding/
-    checked: 2026-10-31
+    checked: 2026-11-01
