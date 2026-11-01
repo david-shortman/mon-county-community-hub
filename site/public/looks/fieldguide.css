@@ -1,1 +1,223 @@
-/* Preview look "fieldguide" (#396). Loaded only when a visitor opens ?look=fieldguide. Rules are scoped under html[data-look="fieldguide"]. Built by the design wave phase 2 lane. */
+/* Preview look "fieldguide" (#396). Loaded only when a visitor opens ?look=fieldguide.
+   Rules are scoped under html[data-look="fieldguide"]. Built by the design wave phase 2 lane.
+   Idea: a park map or naturalist's field guide, made by people who measured the place.
+   Notes, palette contrast and known issues: docs/design/looks/fieldguide.md
+   No new font. Motifs are traced from USGS 3DEP elevation data (public domain): fieldguide/*.svg */
+
+/* ---------- 1. Topo sheet palette (USGS map inks). Text pairs 7:1 or better. ---------- */
+html[data-look="fieldguide"] {
+  --bg: #f7f4ea; --card: #ffffff; --fg: #1c1b18; --muted: #4e4a42;
+  --accent: #1d4c74;      /* water blue: links, dates, focus, the main button */
+  --accent-bg: #e3ead8;   /* woods tint: callouts */
+  --brick: #683f1b;       /* contour brown: rules, trail, motifs */
+  --line: #d3cab6;        /* hairlines, decorative */
+  --ridge: #683f1b;
+  --band: #1c1b18; --on-band: #f7f4ea; --on-band-muted: #d6d1c2; --on-band-link: #b9d6ee;
+  --fg-label: 0.9375rem;  /* type scale: 15 / 18 / 21 / 26 / 30 to 44px */
+  --fg-h3: 1.3125rem; --fg-h2: 1.625rem;
+  --fg-serif: Georgia, "Noto Serif", "Source Serif 4", "Times New Roman", serif;
+  --fg-col: 13rem; --fg-gap: 2rem;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-look="fieldguide"] {
+    --bg: #151613; --card: #1c1e1a; --fg: #ecebe4; --muted: #b8b4a8;
+    --accent: #8cbde3; --accent-bg: #1f2a1f; --brick: #ddb38c; --line: #3a3c35; --ridge: #ddb38c;
+    --band: #262822; --on-band: #ecebe4; --on-band-muted: #c9c5b8; --on-band-link: #a9cdea;
+  }
+}
+
+/* ---------- 2. Type: Atkinson for headings and labels, system text for reading. Five sizes. ---------- */
+html[data-look="fieldguide"] body { font-size: 1.125rem; line-height: 1.6; }
+html[data-look="fieldguide"] a { text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+html[data-look="fieldguide"] a:hover { text-decoration-thickness: 2px; }
+html[data-look="fieldguide"] :is(h1, .front-h) {
+  font-size: clamp(1.85rem, 1.25rem + 2.6vw, 2.75rem); line-height: 1.08; letter-spacing: -0.012em; margin: 0.5em 0 0.3em;
+}
+html[data-look="fieldguide"] h2 { font-size: var(--fg-h2); line-height: 1.15; }
+html[data-look="fieldguide"] h3,
+html[data-look="fieldguide"] .card h3,
+html[data-look="fieldguide"] :is(.card.resource, .card.place) > h2,
+html[data-look="fieldguide"] .place h3 { font-size: var(--fg-h3); line-height: 1.2; }
+html[data-look="fieldguide"] .lede { font-size: var(--fg-h3); line-height: 1.45; color: var(--fg); max-width: 38em; }
+html[data-look="fieldguide"] :is(.meta, .door-hint, .choice-hint, .crumbs ol, .pass-it-on, .relay, .rel, .date-chip .rel,
+  .topic-list .hint, .fold-hint, .search-results p, .home-band span, .qe-what, .crisis-strip p, .right-now .crisis) { font-size: var(--fg-label); }
+html[data-look="fieldguide"] :is(.meta, .relay) { line-height: 1.5; }
+/* Labels read like a map's legend: small capitals, spaced. */
+html[data-look="fieldguide"] :is(.eyebrow, .mp-when, .q-step) {
+  font-family: var(--display); font-size: var(--fg-label); font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+html[data-look="fieldguide"] :is(.date-chip, .when, .mp-num, .wk-count, .week .day, time) { font-variant-numeric: tabular-nums lining-nums; }
+
+/* ---------- 3. Header: a solid ink band with the name, the menu on paper below a heavy rule. ---------- */
+html[data-look="fieldguide"] header.site { background: var(--band); color: var(--on-band); border-bottom: 0; }
+html[data-look="fieldguide"] header.site .brand { color: var(--on-band); }
+html[data-look="fieldguide"] .brand-mark { box-shadow: 0 0 0 1px rgb(255 255 255 / 0.28); }
+html[data-look="fieldguide"] .dateline {
+  color: var(--on-band-muted); font-family: var(--display); font-weight: 700; font-size: var(--fg-label);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+html[data-look="fieldguide"] .dateline a { color: var(--on-band-muted); }
+html[data-look="fieldguide"] header.site a:focus-visible { outline-color: var(--on-band); }
+@media (min-width: 40.0625rem) {
+  html[data-look="fieldguide"] header.site { border-bottom: 3px solid var(--fg); }
+  html[data-look="fieldguide"] header.site .wrap { padding-block: 18px 0; row-gap: 4px; }
+  /* The menu row is painted paper edge to edge (box-shadow adds no scroll width). */
+  html[data-look="fieldguide"] nav.main {
+    margin-top: 14px; background: var(--bg); box-shadow: 0 0 0 100vmax var(--bg); clip-path: inset(0 -100vmax);
+    gap: 0 18px; padding-block: 2px;
+  }
+  html[data-look="fieldguide"] nav.main .wide { color: var(--fg); font-family: var(--display); font-weight: 700; font-size: var(--fg-label); text-decoration: none; }
+  html[data-look="fieldguide"] nav.main .wide:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+  html[data-look="fieldguide"] nav.main .wide[aria-current] { font-weight: 800; box-shadow: inset 0 -5px 0 var(--fg); text-decoration: none; }
+  html[data-look="fieldguide"] nav.main .wide:focus-visible { outline-color: var(--accent); outline-offset: -3px; }
+}
+/* Phones: the tab bar stays plain. Square marker instead of a pill, a heavier top edge. */
+@media (max-width: 40rem) {
+  html[data-look="fieldguide"] nav.main { border-top: 2px solid var(--fg); }
+  html[data-look="fieldguide"] nav.main .icon { border-radius: 0; stroke-linecap: square; stroke-linejoin: miter; }
+  html[data-look="fieldguide"] nav.main .tab[aria-current] { box-shadow: inset 0 3px 0 var(--accent); }
+  html[data-look="fieldguide"] nav.main .tab[aria-current] .icon { background: transparent; }
+  html[data-look="fieldguide"] nav.main .tab:focus-visible { border-radius: 0; }
+  html[data-look="fieldguide"] .dateline { letter-spacing: 0.03em; }
+}
+
+/* ---------- 4. Square corners and rules. Only urgent things get a filled box. ---------- */
+html[data-look="fieldguide"] :is(.btn, .btn-search, .search input, .add-cal input, .skip, .quick-exit, .pi-btn, .choice, .pick label,
+  .table-scroll, details.fold, details.fold > summary, .cal-week > summary, .milepost details, .milepost summary, .share-this,
+  .note, .add-cal, .right-now, .next-box, .crisis-line, .choices4 a, .home-band li a, .door, .door-name .icon, .step, .card) { border-radius: 0; }
+html[data-look="fieldguide"] .icon { stroke-linecap: square; stroke-linejoin: miter; }
+
+/* Cards lose their box: a 2px ink rule on top, space below. */
+html[data-look="fieldguide"] .card { background: transparent; border: 0; border-top: 2px solid var(--fg); padding: 12px 0 6px; margin: 20px 0; }
+html[data-look="fieldguide"] .card.season { border-left: 0; }
+/* Callouts: woods tint, square, a short heavy rule like a legend box. */
+html[data-look="fieldguide"] :is(.note, .add-cal) { background: var(--accent-bg); border: 0; border-top: 4px solid var(--fg); padding: 12px 16px 14px; }
+html[data-look="fieldguide"]:not(#fg) .next-box { border-left: 3px solid var(--brick); background: transparent; padding: 6px 12px; }
+html[data-look="fieldguide"] .crisis-line { border-left: 4px solid var(--fg); }
+html[data-look="fieldguide"]:not(#fg) .share-this { background: transparent; border: 0; border-top: 2px solid var(--fg); padding: 12px 0 0; }
+
+/* Help now bar: the one boxed panel on the home page. Heavy frame, no tint tricks. */
+html[data-look="fieldguide"] .right-now { background: var(--card); border: 2px solid var(--fg); border-top-width: 6px; padding: 6px 14px 12px; }
+
+/* Buttons: square. Main action is a solid water-blue block; the rest a 2px outline. */
+html[data-look="fieldguide"] .btn { border-width: 2px; font-family: var(--display); font-weight: 700; }
+html[data-look="fieldguide"] .btn:hover { background: var(--accent-bg); text-decoration: underline; }
+html[data-look="fieldguide"] .btn-primary:hover, html[data-look="fieldguide"] .btn-search:hover { background: var(--accent); }
+html[data-look="fieldguide"]:not(#fg) .pi-btn { border-color: var(--line); }
+html[data-look="fieldguide"] .search input { border-width: 2px; }
+html[data-look="fieldguide"] :is(a, button, summary, input, .table-scroll):focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- 5. Home: doors as a ruled index, not tiles. ---------- */
+html[data-look="fieldguide"] .door-list { gap: 0 var(--fg-gap); margin-top: 6px; }
+html[data-look="fieldguide"] .door { background: transparent; border: 0; border-top: 2px solid var(--fg); padding: 6px 0 14px; }
+html[data-look="fieldguide"] .door:has(.door-name:hover) { border-color: var(--accent); }
+html[data-look="fieldguide"] .door-name { font-size: var(--fg-h3); gap: 10px; color: var(--accent); }
+html[data-look="fieldguide"] .door-name .icon { width: 26px; height: 26px; padding: 0; background: transparent; color: var(--fg); stroke-width: 2; }
+html[data-look="fieldguide"] .door-ex { gap: 0 16px; }
+html[data-look="fieldguide"] .door-ex a { font-weight: 600; }
+html[data-look="fieldguide"]:not(#fg) .home-band ul { gap: 0 var(--fg-gap); }
+html[data-look="fieldguide"]:not(#fg) .home-band li a { background: transparent; border: 0; border-radius: 0; border-top: 1px solid var(--line); padding: 10px 0; }
+html[data-look="fieldguide"]:not(#fg) .home-band strong { font-family: var(--display); font-weight: 800; }
+
+/* Help tiles on Where to stay tonight keep their layout; only the look changes. */
+html[data-look="fieldguide"]:not(#fg) .choices4 a { background: var(--card); border: 2px solid var(--accent); }
+html[data-look="fieldguide"] .choice { border-width: 2px; }
+html[data-look="fieldguide"] .pick label { border-width: 2px; }
+
+/* ---------- 6. Routes and steps: a dashed trail with square blazes, like a park map. ---------- */
+html[data-look="fieldguide"] .route { border-left: 3px dashed var(--brick); }
+html[data-look="fieldguide"] .mp-num {
+  border-radius: 0; background: var(--fg); color: var(--bg); border: 3px solid var(--bg);
+  font-family: var(--display); font-weight: 800;
+}
+html[data-look="fieldguide"] .milepost details { background: transparent; border: 0; border-top: 2px solid var(--fg); border-bottom: 1px solid var(--line); }
+html[data-look="fieldguide"] .milepost summary { padding-left: 4px; }
+html[data-look="fieldguide"] .milepost summary h2 { font-size: var(--fg-h3); }
+html[data-look="fieldguide"] .mp-body { padding: 0 4px 8px; border-top: 0; }
+html[data-look="fieldguide"] .steps { border-left: 3px dashed var(--brick); }
+html[data-look="fieldguide"] .step { background: transparent; border: 0; border-top: 2px solid var(--fg); padding: 10px 0 4px; }
+html[data-look="fieldguide"] .step::before { border-radius: 0; background: var(--fg); left: -26.5px; top: -7px; }
+html[data-look="fieldguide"] details.fold { background: transparent; border: 0; border-top: 2px solid var(--fg); border-bottom: 1px solid var(--line); }
+html[data-look="fieldguide"] details.fold > summary { padding-left: 0; }
+html[data-look="fieldguide"] .fold-body { padding: 0 0 8px; border-top: 0; }
+
+/* ---------- 7. Dates: tabular, ink rules between days. ---------- */
+html[data-look="fieldguide"] .date-chip { font-family: var(--display); font-size: var(--fg-h3); font-weight: 800; }
+html[data-look="fieldguide"]:not(#fg) .cal-week > summary { background: transparent; border: 0; border-top: 3px solid var(--fg); padding-inline: 0; font-family: var(--display); font-size: var(--fg-h3); }
+html[data-look="fieldguide"]:not(#fg) .week li { border-top-color: var(--line); }
+
+/* ---------- 8. Section heads: a heavy rule, with a contour rule on long pages. ---------- */
+html[data-look="fieldguide"] :is(main > h2, main > :is(section, nav, div):not(.card, .note, .add-cal, .right-now, .share-this, .link-row) > h2) {
+  border-top: 4px solid var(--fg); padding-top: 10px; margin-top: 2.4em;
+}
+html[data-look="fieldguide"] .doors > h2 { margin-top: 1.4em; }
+
+/* ---------- 9. Wide screens: a margin label column, like a field guide's side heads. ---------- */
+@media (min-width: 64rem) {
+  html[data-look="fieldguide"] :is(header.site, footer.site) .wrap,
+  html[data-look="fieldguide"] main.wrap { max-width: calc(var(--fg-col) + var(--fg-gap) + 46rem + 32px); }
+  html[data-look="fieldguide"] main.wrap { padding-left: calc(16px + var(--fg-col) + var(--fg-gap)); }
+  /* Section heads hang in the margin: a block with no height, so the text column starts on the same rule. */
+  html[data-look="fieldguide"] :is(main > h2, main > :is(section, nav, div):not(.card, .note, .add-cal, .right-now, .share-this, .link-row) > h2) {
+    position: relative; width: var(--fg-col); height: 0; overflow: visible; margin: 3.4rem 0 0 calc(-1 * (var(--fg-col) + var(--fg-gap)));
+    font-size: var(--fg-h3); line-height: 1.2;
+  }
+  /* The same rule runs on across the text column as a strip of real contour lines. */
+  html[data-look="fieldguide"] :is(main > h2, main > :is(section, nav, div):not(.card, .note, .add-cal, .right-now, .share-this, .link-row) > h2)::after {
+    content: ""; position: absolute; bottom: calc(100% + 16px); left: calc(var(--fg-col) + var(--fg-gap)); width: 46rem; height: 20px;
+    background: var(--brick); -webkit-mask: url(fieldguide/contours.svg) 0 0 / 100% 100% no-repeat; mask: url(fieldguide/contours.svg) 0 0 / 100% 100% no-repeat;
+    opacity: 0.7; pointer-events: none;
+  }
+  /* The first block after a side head starts level with its rule, and is at least as tall as the head. */
+  html[data-look="fieldguide"]:not(#fg) :is(main > h2, main > :is(section, nav, div):not(.card, .note, .add-cal, .right-now, .share-this, .link-row) > h2) + * { margin-top: -14px; min-height: 5.5rem; }
+  /* Breadcrumbs sit in the margin too. */
+  html[data-look="fieldguide"] main > nav.crumbs { float: left; width: var(--fg-col); margin-left: calc(-1 * (var(--fg-col) + var(--fg-gap))); margin-top: 0.6rem; }
+  html[data-look="fieldguide"] main > nav.crumbs ol { flex-direction: column; align-items: flex-start; gap: 0; }
+  html[data-look="fieldguide"] main > nav.crumbs li + li::before { content: none; }
+  html[data-look="fieldguide"] main > nav.crumbs li { border-top: 1px solid var(--line); width: 100%; }
+}
+
+/* ---------- 10. Footer: the page ends on the measured ridge across the valley. ---------- */
+html[data-look="fieldguide"] footer.site {
+  position: relative; margin-top: 72px; border-top: 0; background: var(--band); color: var(--on-band-muted); padding-block: 8px 40px;
+}
+html[data-look="fieldguide"] footer.site::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: calc(100% - 1px); height: clamp(34px, 5vw, 64px);
+  background: var(--band); -webkit-mask: url(fieldguide/ridge.svg) 0 0 / 100% 100% no-repeat; mask: url(fieldguide/ridge.svg) 0 0 / 100% 100% no-repeat;
+}
+html[data-look="fieldguide"] footer.site a { color: var(--on-band-link); }
+html[data-look="fieldguide"] footer.site a:focus-visible { outline-color: var(--on-band); }
+html[data-look="fieldguide"] footer.site strong { color: var(--on-band); }
+html[data-look="fieldguide"] footer.site .foot-links { border-bottom: 1px solid rgb(255 255 255 / 0.22); margin-bottom: 8px; }
+html[data-look="fieldguide"] footer.site .foot-links a { color: var(--on-band); font-family: var(--display); font-weight: 700; text-decoration: none; }
+html[data-look="fieldguide"] footer.site .foot-links a:hover { text-decoration: underline; }
+html[data-look="fieldguide"] footer.site .wrap::after {
+  content: "The ridge above is the ground across the valley at 39.630\B0  N, from west of Westover over the Monongahela River to the hills east of town. Height is stretched. Elevation data: U.S. Geological Survey.";
+  display: block; margin-top: 16px; padding-top: 10px; border-top: 1px solid rgb(255 255 255 / 0.22); font-size: var(--fg-label);
+}
+
+/* ---------- 11. The 404: a labeled profile of the valley, then the way back. ---------- */
+html[data-look="fieldguide"] main:has(> p.actions > a.btn[href="/"]:first-child)::before {
+  content: ""; display: block; height: clamp(72px, 14vw, 120px); margin: 8px 0 34px;
+  background: var(--brick); -webkit-mask: url(fieldguide/ridge-line.svg) 0 0 / 100% 100% no-repeat; mask: url(fieldguide/ridge-line.svg) 0 0 / 100% 100% no-repeat;
+  border-bottom: 1px solid var(--line);
+}
+/* The river sits at 45.9% of the profile's width, so the label is placed there at any size. Water names are italic, as on USGS maps. */
+html[data-look="fieldguide"] main:has(> p.actions > a.btn[href="/"]:first-child) > h1 { position: relative; }
+html[data-look="fieldguide"] main:has(> p.actions > a.btn[href="/"]:first-child) > h1::before {
+  content: "Monongahela River"; position: absolute; top: -28px; left: 45.9%; transform: translateX(-50%);
+  font-family: var(--fg-serif); font-style: italic; font-weight: 400; font-size: var(--fg-label); letter-spacing: 0; line-height: 1.3; color: var(--accent); white-space: nowrap;
+}
+@media (min-width: 64rem) {
+  html[data-look="fieldguide"] main:has(> p.actions > a.btn[href="/"]:first-child)::before { margin-left: calc(-1 * (var(--fg-col) + var(--fg-gap))); }
+  html[data-look="fieldguide"] main:has(> p.actions > a.btn[href="/"]:first-child) > h1::before {
+    left: calc(-1 * (var(--fg-col) + var(--fg-gap)) + (100% + var(--fg-col) + var(--fg-gap)) * 0.459);
+  }
+}
+
+/* ---------- 12. Crisis strip and Quick exit: unchanged except square corners and the palette. ---------- */
+html[data-look="fieldguide"] .crisis-strip { border-bottom: 2px solid var(--fg); }
+
+@media print {
+  html[data-look="fieldguide"] footer.site::before, html[data-look="fieldguide"] main::before, html[data-look="fieldguide"] main > h1::before { display: none; }
+}
