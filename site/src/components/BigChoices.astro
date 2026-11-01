@@ -1,0 +1,25 @@
+---
+// Big choices (#199): two to four big buttons at the top of a guide page,
+// one for each thing most people come to the page to do. Each one jumps to
+// its section, so it works with no script. The same shape as the four big
+// choices on /stay-tonight/, for everyday pages.
+//   choices: [{ href: '#section', label, icon? }]
+//   label: what the buttons are, for screen readers
+import Icon from './Icon.astro';
+const { choices = [], label = 'Start here' } = Astro.props;
+---
+{choices.length > 0 && (
+  <nav class="big-choices" aria-label={label}>
+    <ul>
+      {choices.map((c) => <li><a href={c.href}>{c.icon && <Icon name={c.icon} />}<span>{c.label}</span></a></li>)}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .big-choices ul { list-style: none; margin: 12px 0 16px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 10px; }
+  .big-choices a { display: flex; flex-direction: column; justify-content: center; gap: 6px; min-height: 80px; height: 100%; box-sizing: border-box; padding: 12px; border-radius: 12px; background: var(--accent-bg); border: 2px solid var(--accent); color: var(--fg); text-decoration: none; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+  .big-choices a:hover span { text-decoration: underline; }
+  .big-choices :global(.icon) { color: var(--accent); width: 28px; height: 28px; }
+  @media print { .big-choices { display: none; } }
+</style>
