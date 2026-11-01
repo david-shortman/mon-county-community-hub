@@ -24,7 +24,7 @@ const roads = [
   { url: 'https://www.wv511.org/NetworkCoverage/usingAlertingService.aspx', checked },
   { url: 'https://www.wv511.org/NetworkCoverage/usingApp.aspx', checked },
 ];
-const schools = [{ url: 'https://wveis.k12.wv.us/closings/', checked }];
+const schools = [{ url: 'https://wveis.k12.wv.us/closings/', checked }, { url: 'https://boe.mono.k12.wv.us/page/closings/', checked: '2026-11-01' }];
 const power = [{ url: 'https://www.firstenergycorp.com/outages_help/outage_help/outage_notifications.html', checked }];
 const plan = [{ url: 'https://www.mecca911.org/Documents/Emergency_Management/2026%20Update%20Monongalia%20County%20EOP.pdf', checked, name: 'Monongalia County Emergency Operations Plan, 2026 update' }];
 ---
@@ -71,7 +71,7 @@ const plan = [{ url: 'https://www.mecca911.org/Documents/Emergency_Management/20
   </div>
 
   <h2 id="schools">School closings and delays</h2>
-  <p>The West Virginia Department of Education has a statewide School Closings and Delays page. County board offices post their own announcements there. Your child's school or the county school system may also send notices, so ask them how they reach families.</p>
+  <p>The West Virginia Department of Education has a statewide School Closings and Delays page. County board offices post their own announcements there. Monongalia County Schools says families get an email, text message and voice message about school closings, and that closings are also posted on its websites and its Facebook and Twitter (X) accounts.</p>
   <SourceLine sources={schools} about="school closings" />
   <div class="actions">
     <a class="btn" href="https://wveis.k12.wv.us/closings/"><Icon name="open" /><span>School closings and delays</span></a>
