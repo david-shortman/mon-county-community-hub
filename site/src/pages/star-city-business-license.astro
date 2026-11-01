@@ -1,0 +1,30 @@
+---
+// Star City business license fees (part of #393): the Town of Star City's
+// Business License Application PDF as short lists. Every business type and
+// fee is copied in content/pdf-pages/star-city-business-license.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Star City business license fees", summary: "Every business type and yearly fee on the Town of Star City's business license application, the July 1 deadline and the late penalty" };
+const d = pdfPage('star-city-business-license');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-599-3550';
+---
+<Base title="Star City business license fees in Mon County, WV: every type and amount" description="The Town of Star City's business license fees for each business type ($25 for most, $50 for handyman contractors and mobile vendors, $0 for non-profits, and beer, wine, liquor and private club amounts), the July 1 deadline and the 10% a month late penalty, copied from the town's application.">
+  <h1>Star City business license fees</h1>
+  <p class="lede">Most businesses in Star City pay $25 a year for a town business license. The full list of types and fees is in a PDF form, so here it is as a short list. Questions: call the town's Business Office at <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>The B&amp;O tax form, building permits, and what to do in Granville, Westover or outside any town: see <a href={`${base}/business-by-town/`}>start a business in Star City, Granville or Westover</a>.</p>
+
+  <p class="meta">This page is a reading aid. The town's form is the official version. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>
