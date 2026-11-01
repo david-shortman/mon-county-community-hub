@@ -28,7 +28,7 @@ export function GET({ site }) {
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps
 - [This month in Mon County](${u('/calendar/month/')}): the next 30 days from the calendar on one page you can print
 - [Where to stay tonight](${u('/stay-tonight/')}): emergency shelter, a 24-hour hotline, and 211
-- [Tonight: is the warming shelter open?](${u('/tonight/')}): winter warming shelter status, checked each day with the time shown: where, hours, rules and the bus, never a bed count; "open" only with a same-day check
+- [Tonight: is the warming shelter open?](${u('/tonight/')}): winter warming shelter status, with the time it was last checked: where, hours, rules and the bus, never a bed count; "open" only with a same-day check
 - [What help might I get?](${u('/help/what-help/')}): two quick questions, no name needed, then the pages that may help with food, bills, rent, a place to stay, care or work. Question 2 pages: ${NEEDS.map((n) => `[${n.label}](${u(`/help/what-help/${n.id}/`)})`).join(', ')}. Answer pages, one per pair of answers: ${NEEDS.flatMap((n) => WHO.map((w) => `[${n.label}; ${w.label}](${u(`/help/what-help/${n.id}/${w.id}/`)})`)).join(', ')}
 - [Help paying a utility bill](${u('/utility-bills/')}): who to call first and programs that help with heat, water and electric bills
 - [Before you call](${u('/before-you-call/')}): what to have ready, a place to write notes, and short scripts for calling a utility, a landlord or a billing office
