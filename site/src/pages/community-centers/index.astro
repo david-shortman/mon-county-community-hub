@@ -7,6 +7,7 @@ import Base from '../../layouts/Base.astro';
 import CenterCard from '../../components/CenterCard.astro';
 import EventCard from '../../components/EventCard.astro';
 import Fold from '../../components/Fold.astro';
+import CheckedRange from '../../components/CheckedRange.astro';
 import { loadCalendarWithFeeds, upcoming } from '../../lib/content.mjs';
 import { loadPlaces, byArea, rentalRows, SECTION } from '../../lib/places.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
@@ -26,6 +27,7 @@ const members = centers.filter((p) => p.membership);
 <Base title="Community centers and halls in Mon County and Morgantown" description="Find a community center, senior center or hall near you in Monongalia County, WV: what's there, community dinners and events, halls to rent and their prices, and how to join. Every listing has a source and the date we checked it.">
   <h1>{SECTION.name}</h1>
   <p class="lede">Community centers, senior centers and halls across Mon County, most run by neighbors. Find one near you, go to a dinner, rent a hall, or join.</p>
+  <CheckedRange sources={places.map((p) => p.sources)} what="centers and buildings" />
   <ul class="topic-list">
     <li><a href="#find">Find a center near me</a></li>
     <li><a href="#eat">Eat with neighbors</a></li>
