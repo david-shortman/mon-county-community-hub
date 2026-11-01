@@ -2,7 +2,8 @@
 // New to Mon County, part 2 (#204): start power, water, gas and trash.
 // Only companies and towns confirmed on official pages are listed. Not yet
 // here: other water, gas and trash providers (#524), and Morgantown and
-// Westover trash sign-up (#525).
+// Westover trash sign-up (#525). Part 4: links for WVU students moving off
+// campus, reusing existing records and pages.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
@@ -36,6 +37,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2>Not sure who serves your address?</h2>
   <p>Pick your town on <a href={`${base}/who-serves-me/`}>Who serves my address?</a>, or open your <a href={`${base}/towns/`}>town or area's page</a> for its council, places, dates and buses too. Or ask your landlord, the seller or a neighbor. The state agency that oversees utility companies can also answer questions.</p>
   {r('wv-psc-utility-questions') && <ResourceCard r={r('wv-psc-utility-questions')} />}
+
+  <h2 id="students">WVU students moving off campus</h2>
+  <p>WVU's Off-Campus Housing office helps students find a place and roommates, and holds housing fairs with landlords and utility companies. More for students, including food, buses, legal help and money, is on <a href={`${base}/for/college-students/`}>College students</a>. Students on the Morgantown campus can also get free food at The Rack: see <a href={`${base}/help/food/today/student/`}>food today for WVU students</a>.</p>
+  {r('wvu-off-campus-housing') && <ResourceCard r={r('wvu-off-campus-housing')} />}
 
   <p>Renting or buying? Check whether the home is in a flood zone or a slide area first: <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
 
