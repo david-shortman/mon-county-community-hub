@@ -103,4 +103,4 @@ The page decides this at build time, from whether the reviewed Spanish page exis
 
 ## Not included: official Spanish pages
 
-The plan says to link official Spanish pages (988, SNAP, Medicaid, WIC) only after checking each is a current official page. On November 1, 2026 none could be confirmed by an automated read: the USDA addresses for Spanish SNAP and WIC (`fns.usda.gov/es/snap`, `/es/wic`) now send readers to the English pages, and 988lifeline.org and medicaid.gov refuse automated reads. So the Spanish page links none of them yet. A person can check them (see the `needs-verification` issue linked from #1101).
+The plan says to link official Spanish pages (988, SNAP, Medicaid, WIC) only after checking each is a current official page. On November 1, 2026 none could be confirmed by an automated read: the USDA addresses for Spanish SNAP and WIC (`fns.usda.gov/es/snap`, `/es/wic`) now send readers to the English pages, and 988lifeline.org and medicaid.gov refuse automated reads. So the Spanish page links none of them yet. A person can check them (#1303).
