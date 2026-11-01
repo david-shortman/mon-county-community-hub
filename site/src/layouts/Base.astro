@@ -3,6 +3,7 @@ import Icon from '../components/Icon.astro';
 import AlsoCheck from '../components/AlsoCheck.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import CrisisStrip from '../components/CrisisStrip.astro';
+import LeaveNote from '../components/LeaveNote.astro';
 import CrisisLine from '../components/CrisisLine.astro';
 import AppShell from '../components/AppShell.astro';
 import UpkeepNotice from '../components/UpkeepNotice.astro';
@@ -14,7 +15,8 @@ import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
 import { alternatesFor, dirFor } from '../lib/i18n.mjs';
 import nameFont from '../fonts/fraunces-name-800.woff2?inline';
 import tileSvg from '../../public/favicon.svg?raw';
-const { crisis = false, help = false, searchable = true, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
+// noindex: print copies and the 404 page stay out of search results; they get no canonical link (#89).
+const { crisis = false, help = false, searchable = true, noindex = false, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(/\.\w+$/.test(Astro.url.pathname) ? Astro.url.pathname : Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
 const shareImage = new URL(`${base}/share.png`, Astro.site).href;
@@ -86,7 +88,10 @@ const forecast = await todaysForecast();
 const alternates = alternatesFor(Astro.url.pathname.slice(base.length) || '/', { site: Astro.site });
 const { lang = 'en' } = Astro.props;
 const dir = dirFor(lang);
-const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morgantown';
+// Search results cut titles at about 60 characters, so the site name is added
+// only when it fits. og:site_name still names the site on shares (#939).
+const SITE_NAME = 'Everything Morgantown';
+const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? `${title} | ${SITE_NAME}` : title;
 ---
 <!doctype html>
 <html lang={lang} dir={dir}>
@@ -98,8 +103,8 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
     <meta name="theme-color" content="#f9f7f2" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#161714" media="(prefers-color-scheme: dark)" />
     {crisis && <meta name="referrer" content="no-referrer" />}
-    <link rel="canonical" href={canonical} />
-    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
+    {!noindex && alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Everything Morgantown" />
     <meta property="og:title" content={fullTitle} />
@@ -367,6 +372,7 @@ const fullTitle = title ? `${title} | Everything Morgantown` : 'Everything Morga
       {searchable && tagTopic && <p hidden data-pagefind-filter="topic">{tagTopic}</p>}
       {(crisis || tags?.door === 'help-now') && <p class="disclaimer meta">{disclaimer}</p>}
       <slot />
+      {crisis && <LeaveNote />}
       {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
       <AlsoCheck route={route} />
     </main>

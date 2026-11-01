@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
 import SourceLine from '../components/SourceLine.astro';
+import ResourceCard from '../components/ResourceCard.astro';
 import { resource, org, telHref, loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "this-month", label: "Get through this month", summary: "Can't pay a bill, behind on rent, short on food, cash fast, free tax help" };
@@ -17,6 +18,8 @@ const legalAidName = org(legalAid.org).name;
 const wv211 = resource('wv-211');
 const dfi = resource('wv-dfi-check-a-lender');
 const taxPrep = resource('christian-help-free-tax-prep');
+const rack = resource('the-rack-wvu-student-food-pantry');
+const studentLegal = resource('wvu-student-legal-services');
 // The Lifeline link shows once its record is in (#668, #735).
 const lifeline = loadDir('resources').some((e) => e.slug === 'lifeline-phone-internet-discount');
 const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/government-program-pays-your-bills', checked: '2026-10-29', name: 'Federal Trade Commission' }];
@@ -32,8 +35,11 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
   {lifeline && <p>Phone or internet bill? See <a href={`${base}/internet/#lifeline`}>Help paying for phone or internet</a>.</p>}
 
   <h3 id="rent">I'm behind on rent or facing eviction</h3>
-  <p>Keep any notice from your landlord or the court, and do not ignore it. If you have a court hearing or another deadline in the next 10 days, call {legalAidName} at <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a> right away. Its help is free, though some court filing fees may still apply. For other help with rent, call <a href="tel:211">211</a> and say you are behind on rent. We are still building our housing page.</p>
-  <SourceLine sources={legalAid.sources} org={legalAid.org} about="eviction help" />
+  <p>Keep any notice from your landlord or the court, and do not ignore it. {legalAidName} gives free legal help to renters with low income who face eviction. The card below says who qualifies. If you have a court hearing or another deadline in the next 10 days, call <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a> right away.</p>
+  {/* The whole Legal Aid card, so a link to /money/#rent lands on hours, who qualifies and how to apply (#803). */}
+  <ResourceCard r={legalAid} headingLevel={4} showCost />
+  <p>For other help with rent, call <a href="tel:211">211</a> and say you are behind on rent. We are still building our housing page.</p>
+  <SourceLine sources={wv211.sources} org={wv211.org} about="211" />
 
   <h3 id="payday">I need cash fast and I'm thinking about a payday loan</h3>
   <p>The West Virginia Division of Financial Institutions says traditional payday lenders are generally prohibited in this state. An online lender that offers one anyway is a warning sign. Before you borrow from anyone, call the Division at <a href={telHref(dfi.contact.phone)}>{dfi.contact.phone}</a> and ask if the lender is allowed to lend here.</p>
@@ -45,7 +51,7 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
   <ul>
     <li><strong>Call to book:</strong> <a href={telHref(taxPrep.contact.phone)}>{taxPrep.contact.phone}</a></li>
     <li><strong>When:</strong> Wednesdays, 9 a.m. to 2 p.m., through April 1 (from the January 2026 article; the 2027 season dates are not published yet). Call to confirm.</li>
-    <li><strong>Who:</strong> households that earned $67,000 or less in 2025 may qualify (that was last season's limit; ask for this season's)</li>
+    <li><strong>Who:</strong> Christian Help sets an income limit each season. Ask for this season's limit when you call.</li>
     <li><strong>Bring:</strong>
       <ul>
         <li>a photo ID for each person who earned money</li>
@@ -57,6 +63,12 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
       If you file together, both spouses come.</li>
   </ul>
   <SourceLine sources={taxPrep.sources} org={taxPrep.org} about="free tax help"> The source is a Morgantown Magazine article from January 14, 2026.</SourceLine>
+
+  <h3 id="students">Are you a WVU student?</h3>
+  <p>WVU has its own free help for students. Start with these, then see the rest of this page.</p>
+  {/* Add the WVU emergency funds card here once its record is on main (#888, #602). */}
+  <ResourceCard r={rack} headingLevel={4} lead="Short on food: The Rack is free for WVU students." />
+  <ResourceCard r={studentLegal} headingLevel={4} showCost lead="Trouble with a lease or a landlord: Student Legal Services can help." />
 
   <h3>What things cost here</h3>
   <p>We have not found a trusted, sourced list of local rent, child care or pay figures yet, so we do not show numbers. We would rather show nothing than a guess. Know a public source? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>

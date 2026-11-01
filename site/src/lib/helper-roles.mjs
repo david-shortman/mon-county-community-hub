@@ -61,6 +61,14 @@ export const ROLES = [
           { text: 'If someone is in danger right now, call 911.' },
         ],
       },
+      {
+        hears: 'Someone is caring for an aging parent or a family member and is worn out',
+        steps: [
+          { resource: 'wv-adrc-region-1', text: 'The Aging and Disability Resource Center helps caregivers find in-home care, meals, rides and respite, for free.' },
+          { resource: 'senior-monongalians-caregiver-support', text: 'Ask the county senior center what caregiver support it offers. The state lists support groups and respite care.' },
+          { page: '/caregivers/', text: 'More help for family caregivers in Mon County.' },
+        ],
+      },
     ],
   },
   {
@@ -115,6 +123,14 @@ export const ROLES = [
         steps: [
           { resource: 'wv-ship-medicare-counseling', text: 'WV SHIP gives free Medicare help by phone, including choosing a plan.' },
           { page: '/turning-65/', text: 'When to sign up, and help paying Medicare costs.' },
+        ],
+      },
+      {
+        hears: 'A patient\'s family member is caring for them at home and is worn out',
+        steps: [
+          { resource: 'wv-adrc-region-1', text: 'The Aging and Disability Resource Center helps caregivers find in-home care, meals, rides and respite, for free.' },
+          { resource: 'senior-monongalians-caregiver-support', text: 'Ask the county senior center what caregiver support it offers. The state lists support groups and respite care.' },
+          { page: '/caregivers/', text: 'More help for family caregivers in Mon County.' },
         ],
       },
     ],

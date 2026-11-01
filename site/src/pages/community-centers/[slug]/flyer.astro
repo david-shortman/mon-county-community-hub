@@ -26,7 +26,7 @@ const there = whatsThere(p);
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 90).filter((e) => e.venue === p.slug).slice(0, 3);
 const checked = oldestChecked(p.sources);
 ---
-<Base title={`Printable flyer: ${p.name}, Mon County`} description={`A one-page flyer for ${p.name} in ${p.community}, Monongalia County, WV, to print and post.`} searchable={false}>
+<Base title={`Printable flyer: ${p.name}, Mon County`} description={`A one-page flyer for ${p.name} in ${p.community}, Monongalia County, WV, to print and post.`} searchable={false} noindex>
   <p class="flyer-note no-print">This is a one-page flyer to print and post. Use your browser's Print command. <a href={`${base}${SECTION.route}${p.slug}/`}>Back to {p.name}</a>.</p>
   <article class="flyer">
     <p class="flyer-kind">{KIND_LABELS[p.kind]} in {p.community}</p>
@@ -75,7 +75,7 @@ const checked = oldestChecked(p.sources);
   .flyer-story { font-size: 1.15rem; }
   .flyer-reach { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; border-top: 2px solid #000; margin-top: 16px; padding-top: 8px; }
   .flyer-reach p { margin: 4px 0; overflow-wrap: anywhere; }
-  .flyer-qr { width: 9rem; flex: 0 0 auto; }
+  .flyer-qr { width: 9rem; max-width: 100%; flex: 0 0 auto; }
   .flyer-qr :global(svg) { width: 100%; height: auto; display: block; }
   .flyer-small { font-size: 0.9rem; margin-top: 12px; }
   @media print {

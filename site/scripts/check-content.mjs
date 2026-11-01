@@ -9,6 +9,7 @@ import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
 import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
+import { agendaProblems, decidedProblems } from '../src/lib/agendas.mjs';
 
 const errors = [];
 const warnings = [];
@@ -426,6 +427,11 @@ for (const topic of factTopics()) {
 for (const d of loadPdfPages()) for (const p of pdfPageProblems(d)) errors.push(`${d._file}: ${p}`);
 // Tonight's warming shelter status (content/tonight, #401).
 for (const p of tonightProblems(loadTonight())) errors.push(`tonight/warming-shelter.yaml: ${p}`);
+
+// Plain-language agenda guides (content/agendas, #529).
+for (const p of agendaProblems()) errors.push(p);
+// What was decided: actions from posted minutes (content/minutes, #529).
+for (const p of decidedProblems()) errors.push(p);
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

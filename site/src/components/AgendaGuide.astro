@@ -1,0 +1,47 @@
+---
+// One plain-language agenda guide (#529): when, where, how to watch and
+// comment, and every item with its exact title and one neutral line. Used on
+// /meetings/agendas/ and each body's page there. Data: content/agendas/.
+import SourceLine from './SourceLine.astro';
+import { prettyDate } from '../lib/content.mjs';
+import { BODIES, KINDS, clock } from '../lib/agendas.mjs';
+const { g, level = 2 } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const b = BODIES[g.body];
+const H = `h${level}`;
+const H2 = `h${level + 1}`;
+---
+<article class="card agenda" id={g.slug} aria-labelledby={`${g.slug}-h`}>
+  <H id={`${g.slug}-h`}>{b.name}: {g.meeting}, {prettyDate(g.date)}</H>
+  <ul class="facts">
+    <li><strong>When:</strong> {prettyDate(g.date)}, {clock(g.time)}</li>
+    <li><strong>Where:</strong> {g.place}</li>
+    <li><strong>Watch:</strong> {g.watch}</li>
+    <li><strong>Comment:</strong> {b.comment
+      ? <>see <a href={`${base}${b.comment}`}>how to comment at the {b.name}</a>.</>
+      : <>the agenda shows if there is time for public comment. {b.home && <>The board's own page: <a href={b.home}>{new URL(b.home).hostname.replace(/^www\./, '')}</a>.</>}</>}</li>
+  </ul>
+  <p><a href={g.agenda_url}>Official agenda<span class="sr-only">, {b.name}, {prettyDate(g.date)}</span></a>{g.packet_url && <> and <a href={g.packet_url}>full packet<span class="sr-only">, {b.name}, {prettyDate(g.date)}</span></a></>}. We read it on {prettyDate(g.read)}.</p>
+  <H2 id={`${g.slug}-items`}>On the agenda</H2>
+  <ul class="items" aria-labelledby={`${g.slug}-items`}>
+    {g.items.map((it) => (
+      <li>
+        <p class="item-title">{it.number}. {it.title}</p>
+        <p><span class="kind">{KINDS[it.kind]}:</span> {it.line}</p>
+        {it.parts && <ul>{it.parts.map((p) => <li>{p}</li>)}</ul>}
+      </li>
+    ))}
+  </ul>
+  {g.note && <p class="meta">{g.note}</p>}
+  <p class="meta">Titles are copied from the agenda as written. "[name]" marks where we left out a person's name.</p>
+  <SourceLine sources={g.sources} about={`${b.name} agenda, ${prettyDate(g.date)}`} />
+</article>
+
+<style>
+  .facts { list-style: none; padding-left: 0; }
+  .items { list-style: none; padding-left: 0; }
+  .items > li { margin-bottom: 0.9rem; }
+  .items p { margin: 0.2rem 0; }
+  .item-title { font-weight: 600; }
+  .kind { font-weight: 600; }
+</style>

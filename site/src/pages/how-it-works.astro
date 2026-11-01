@@ -270,8 +270,9 @@ const doorSnippet = `- slug: this-month
     table { width: 100%; border-collapse: collapse; margin: 12px 0; }
     th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
     th { font-size: 0.95rem; color: var(--muted); }
-    td:first-child { font-weight: 700; white-space: nowrap; }
-    @media (max-width: 30rem) { td:first-child { white-space: normal; } }
+    /* The "When" column may wrap: with browser text at 400% on a wide screen the
+       narrow-screen rule below never applies, so nowrap pushed the table off the side. */
+    td:first-child { font-weight: 700; }
     /* On narrow screens and at big text sizes, each row stacks: "When" on top, then what gets checked (#971) */
     @media (max-width: 30rem) {
       table, tbody, tr, td { display: block; }

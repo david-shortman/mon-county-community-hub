@@ -1,0 +1,39 @@
+title: Finding and paying for child care
+slug: child-care
+summary: Child care for two children costs about a quarter of a typical household's income in Mon County. The state estimates the county needs about 355 more child care slots for young children with working parents.
+evidence:
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-10-31
+    shows: Child care costs for a household with two children, as a share of median household income.
+    figure: "27.4% (West Virginia 35.5%, US 27.9%)"
+    publisher: County Health Rankings (2025 release)
+  - url: https://wvpolicy.org/wp-content/uploads/2025/05/WVCBP_2024KidsCountDataBook_updated.pdf
+    checked: 2026-10-31
+    shows: The Monongalia County page compares children under six whose parents all work with the number of child care slots, and counts children getting state child care help (page 63 of the PDF).
+    figure: "355 more slots needed; 316 children a month got child care help"
+    data_date: "2023"
+    publisher: West Virginia Center on Budget and Policy, 2024 Kids Count Data Book
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-10-31
+    shows: North Central West Virginia Community Action's 2022 needs assessment named a lack of affordable child care among Monongalia County's top four needs, and the health department's 2025 survey named lack of child care as one thing that makes medical care hard to get (pages 54 and 56 of the PDF).
+    data_date: 2022 and 2025
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+affected:
+  count: 355
+  description: Additional child care slots the Kids Count data book estimates the county needs for children under six whose parents all work.
+  url: https://wvpolicy.org/wp-content/uploads/2025/05/WVCBP_2024KidsCountDataBook_updated.pdf
+  checked: 2026-10-31
+severity: medium
+severity_why: Without child care, parents can lose work or miss care, but the harm builds over time rather than all at once.
+trend: unknown
+working_on:
+  - org: wv-department-of-human-services
+  - org: starting-points-family-support-center
+  - org: monongalia-county-schools
+gaps:
+  - Help paying for child care (the state subsidy and the local referral agency) is not explained plainly in one place (issue 571).
+  - Open child care slots are not listed publicly in one place; the state's licensed provider search is being linked (issue 943).
+topics: [family]
+rank: 7
+rank_why: "Score 10 of 12: severity 2, reach 2, agreement 3, room to help 3 (the subsidy and the provider search exist but are hard to find)."
+issues: [571, 943]

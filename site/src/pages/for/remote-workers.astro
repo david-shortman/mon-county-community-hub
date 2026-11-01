@@ -1,0 +1,40 @@
+---
+// Starting page for remote workers (#278, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/remote-workers.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "living-here", topic: "moving", label: "Remote workers", summary: "A place to work, internet at home, help paying for internet, tech help, and meeting people, in one place" };
+const sections = [
+  { title: "A place to work", links: [
+    { href: "/internet/#library", label: "Library Wi-Fi", text: "free Wi-Fi at the library" },
+    { href: "/meet-people/#work-from-home", label: "Work from the library", text: "the library as a place to work and meet" },
+  ] },
+  { title: "Internet at home", links: [
+    { href: "/internet/", text: "internet service where you live, the speed test, and complaints" },
+    { href: "/internet/#lifeline", label: "Lifeline", text: "help paying for phone or internet" },
+  ] },
+  { title: "Meet people", links: [
+    { href: "/find-your-people/", text: "groups, clubs, game nights and free places to sit" },
+    { href: "/meet-people/", text: "a library card, library programs and neighborhood associations" },
+    { href: "/volunteer/", text: "a volunteer shift this weekend" },
+  ] },
+  { title: "Settling in", links: [
+    { href: "/moving-here/", text: "start power, water, gas and trash" },
+    { href: "/who-serves-me/", text: "who serves your address" },
+  ] },
+  { title: "Get out of the house", links: [
+    { href: "/parks/", text: "parks, rail-trails and groups to ride or run with" },
+    { href: "/calendar/month/", text: "what is happening this month" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/new-to-mon-county/", text: null },
+    { href: "/for/small-business/", text: null },
+    { href: "/for/outdoor-and-active/", text: null },
+  ] },
+];
+---
+<Base title="Working from home in Morgantown and Mon County: where to start" description="A starting page for remote workers in Monongalia County: library Wi-Fi and rooms, internet at home and help paying for it, tech help, meeting people, and settling in.">
+  <h1>For people who work from home</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

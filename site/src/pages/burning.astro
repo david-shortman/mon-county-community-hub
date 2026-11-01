@@ -1,0 +1,26 @@
+---
+// Burning leaves and brush (#222, a missing life area under home and
+// safety). State law only, quoted from WV Code 20-3-5 (read 2026-10-31). The
+// Division of Forestry's site returned 403 and Morgantown's City Code site
+// returned 403, so city and town rules are left off; see
+// needs-verification issue #1118.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "safety", label: "Burning leaves and brush", summary: "West Virginia's forest fire seasons, the 5 p.m. to 7 a.m. burning hours, the 10-foot safety strip, burning bans and fines" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Burning leaves and brush in Mon County, WV: fire season hours and rules" description="West Virginia's outdoor burning law for Monongalia County residents: forest fire seasons (October 1 to December 31 and March 1 to May 31), burning only from 5 p.m. to 7 a.m., the 10-foot safety strip, burning bans, and fines.">
+  <h1>Burning leaves and brush</h1>
+  <p class="lede">From October 1 through December 31, and March 1 through May 31, West Virginia law says you may burn leaves, brush and yard debris outdoors only between 5 p.m. and 7 a.m. Clear a strip at least 10 feet wide around the pile first.</p>
+
+  <ResourceCard r={resource('wv-outdoor-burning-rules')} showCost headingLevel={2} />
+
+  <h2 id="towns">Living in a city or town?</h2>
+  <p>This page covers state law only. It does not cover city or town rules, which we could not check. If you live in Morgantown, Westover, Star City, Granville or another town, check your town's rules before you burn. Not sure which town you are in? See <a href={`${base}/who-serves-me/`}>who serves my address</a>.</p>
+
+  <p>Also see <a href={`${base}/home-safety/`}>home safety</a> and <a href={`${base}/recycling/`}>trash, recycling and drop-off</a>.</p>
+
+  <p class="meta">Sources checked October 31, 2026. This page describes the law; it is not legal advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

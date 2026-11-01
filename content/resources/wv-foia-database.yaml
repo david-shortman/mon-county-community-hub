@@ -1,0 +1,15 @@
+title: Search past public records requests (state FOIA database)
+slug: wv-foia-database
+org: wv-secretary-of-state
+topics: [government]
+who_it_is_for: Anyone who wants to see what others have asked a public body for, and how it answered, before making a request. The Secretary of State says public bodies "are required to report information about completed requests" to this database.
+what_to_do: Open the FOIA Database search and look up a public body, like a city, county or school board. The Secretary of State says the database shows "basic information about completed FOIA requests," but "the actual records responsive to each request are not hosted in the database." To get the records, ask the public body yourself.
+contact:
+  url: https://erls.wvsos.gov/FOIA_Database/Search
+  url_label: Search the FOIA Database
+cost: free
+sources:
+  - url: https://sos.wv.gov/freedom-information-act-foia-request
+    checked: 2026-10-31
+  - url: https://code.wvlegislature.gov/29B-1-3/
+    checked: 2026-10-31

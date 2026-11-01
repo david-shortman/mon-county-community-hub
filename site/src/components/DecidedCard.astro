@@ -1,0 +1,35 @@
+---
+// "What was decided" at one past meeting (#529): each motion the official
+// minutes record, with the result and vote count as the minutes write them,
+// and a link to the minutes. No summary of debate, comments or reasons.
+// Data: content/minutes/.
+import SourceLine from './SourceLine.astro';
+import { prettyDate } from '../lib/content.mjs';
+import { BODIES, MINUTES_STATUS } from '../lib/agendas.mjs';
+const { r, level = 2 } = Astro.props;
+const b = BODIES[r.body];
+const H = `h${level}`;
+---
+<article class="card decided" id={r.slug} aria-labelledby={`${r.slug}-h`}>
+  <H id={`${r.slug}-h`}>{b.name}: {r.meeting}, {prettyDate(r.date)}</H>
+  <p><a href={r.minutes_url}>Official minutes<span class="sr-only">, {b.name}, {prettyDate(r.date)}</span></a>. We read them on {prettyDate(r.read)}. {MINUTES_STATUS[r.minutes_status]}</p>
+  <ol class="actions">
+    {r.actions.map((a) => (
+      <li>
+        {a.item && <p class="item">{a.item}</p>}
+        <p><strong>Motion:</strong> {a.motion}</p>
+        <p><strong>Result:</strong> {a.result ?? 'The minutes do not record a result.'}{a.vote && <>, <strong>vote:</strong> {a.vote}</>}</p>
+      </li>
+    ))}
+  </ol>
+  {r.note && <p class="meta">{r.note}</p>}
+  <p class="meta">Motions and results are copied from the minutes as written. "[name]" marks where we left out a person's name. We list only the actions the minutes record, not what people said.</p>
+  <SourceLine sources={r.sources} about={`${b.name} minutes, ${prettyDate(r.date)}`} />
+</article>
+
+<style>
+  .actions { padding-left: 1.4rem; }
+  .actions > li { margin-bottom: 0.8rem; }
+  .actions p { margin: 0.15rem 0; }
+  .item { font-weight: 600; }
+</style>

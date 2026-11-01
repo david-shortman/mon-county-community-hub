@@ -1,0 +1,22 @@
+title: Ask for a public record (West Virginia Freedom of Information Act)
+slug: wv-foia-request
+org: wv-secretary-of-state
+topics: [government]
+who_it_is_for: "Anyone. State law says: \"Every person has a right to inspect or copy any public record of a public body in this state,\" except records the law exempts. Public bodies include state agencies, county and city governments, school districts, and their boards. Some records are exempt. For example, personal or medical files can be kept private when sharing them would be an \"unreasonable invasion of privacy.\" You can still see your own file."
+what_to_do: "Ask the office that keeps the record. The law says a request \"shall be made directly to the custodian of such public record\" and \"must state with reasonable specificity the information sought.\" Say exactly what you want, such as the record type, the dates, and the names or addresses involved. Put it in writing and keep a copy."
+what_happens: "The office has five business days to answer. The law says it must answer \"as soon as is practicable but within a maximum of five days not including Saturdays, Sundays or legal holidays.\" It must do one of three things: send copies, tell you when and where you can look at the records, or say no in writing and give the reasons. If it says no, the law lets you ask the circuit court in the county where the record is kept to order the records released."
+contact:
+  url: https://code.wvlegislature.gov/29B-1-3/
+  url_label: Read the law
+cost: "The law lets an office charge fees \"reasonably calculated to reimburse it for its actual cost in making reproductions of records.\" It \"may not charge a search or retrieval fee.\""
+sources:
+  - url: https://code.wvlegislature.gov/29B-1-3/
+    checked: 2026-10-31
+  - url: https://code.wvlegislature.gov/29B-1-2/
+    checked: 2026-10-31
+  - url: https://code.wvlegislature.gov/29B-1-4/
+    checked: 2026-10-31
+  - url: https://code.wvlegislature.gov/29B-1-5/
+    checked: 2026-10-31
+  - url: https://sos.wv.gov/freedom-information-act-foia-request
+    checked: 2026-10-31
