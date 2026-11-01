@@ -51,7 +51,22 @@ I looked at these. No images from them go in the repo. They are references for d
 
 The earlier ridge motif was invented: a wavy line that could be any hills anywhere. This one is measured. I asked the USGS elevation service for the ground height at 61 points on a straight line running west to east across town at latitude 39.630, from longitude -80.030 (west of Westover) to -79.880 (east of town), about 13 km. The river is the low point in the middle.
 
-PROFILE_RESULTS
+What came back (queried November 1, 2026, 60 of 61 points answered, heights in feet):
+
+- **Lowest:** 797 ft at longitude -79.960, the Monongahela by downtown.
+- **Highest:** 1,391 ft at -79.8825, the ridge east of town.
+- **Shape, west to east:** an uneven ridge around 1,100 to 1,240 ft on the Westover side, a dip to about 860 ft (a hollow on the Westover side), back up to about 1,120 ft, the deep drop to the river, a climb to about 1,130 ft through town, a second drop to about 845 ft near -79.935 (in line with the Deckers Creek valley), then a long climb to the eastern ridge.
+
+That is three valleys, not one: a real shape nobody would draw by hand. As a 600 by 40 SVG it is 464 characters of path data, about 0.7 KB with the wrapper:
+
+```html
+<!-- Measured ridge: ground height across the Monongahela valley at latitude 39.630,
+     longitude -80.030 to -79.880, from USGS 3DEP (public domain), queried 2026-11-01.
+     Height is stretched about 4.5 times in the viewBox so the shape reads at 40px. Decorative. -->
+<svg aria-hidden="true" focusable="false" viewBox="0 0 600 40" width="100%" height="40" preserveAspectRatio="none" style="color: var(--line)"><path d="M0 18 L10 11 L20 17 L30 19 L40 20 L50 12 L60 19 L70 13 L80 14 L90 12 L100 13 L120 20 L130 18 L140 21 L150 23 L160 33 L170 35 L180 32 L190 26 L200 24 L210 24 L220 18 L230 18 L240 22 L250 21 L260 21 L270 36 L280 39 L290 35 L300 32 L310 32 L320 25 L330 17 L340 20 L350 18 L360 25 L370 34 L380 36 L390 35 L400 32 L410 29 L420 25 L430 23 L440 15 L450 17 L460 22 L470 22 L480 13 L490 11 L500 10 L510 12 L520 14 L530 13 L540 15 L550 16 L560 14 L570 5 L580 7 L590 1 L600 7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+```
+
+Notes for a builder: the jagged steps come from sampling about every 215 m. Sampling every 100 m, or rounding corners with a light curve fit, gives a softer line that is still true. The vertical stretch is a design choice; say so in the SVG comment so nobody reads it as a to-scale chart. The service took about 14 seconds per point, so run it once at design time and paste the path in. Never call it from the browser or at build time.
 
 How a builder makes more of these, for $0:
 
