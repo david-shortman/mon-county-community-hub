@@ -1,0 +1,14 @@
+---
+// A folded section (#1174): a native <details> for a long, secondary part of a
+// page. It opens with no script, opens on find-in-page, opens when a link
+// points at it or inside it (script in Base.astro), and prints open.
+// Never fold urgent help ("can't wait" steps, shutoff or eviction help)
+// or the main answer to the page's question.
+// Props: id, title, hint (one short line under the title), level (2 to 4).
+const { id, title, hint, level = 2 } = Astro.props;
+const H = `h${level}`;
+---
+<details class="fold" id={id}>
+  <summary><H>{title}{hint && <span class="fold-hint">{hint}</span>}</H></summary>
+  <div class="fold-body"><slot /></div>
+</details>
