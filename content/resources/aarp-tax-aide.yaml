@@ -6,11 +6,11 @@ who_it_is_for: AARP says Tax-Aide gives tax help "free of charge," with "a speci
 what_to_do: As of October 31, 2026, AARP's site locator says it "is now closed" and will be back "in time for the next tax season." The IRS says to use the AARP Site Locator Tool between January and April, or call 888-227-7669.
 contact:
   phone: "888-227-7669"
-  url: https://www.aarp.org/money/taxes/aarp_taxaide/locations/
+  url: https://www.aarp.org/money/taxes/aarp-taxaide/locations/
   url_label: AARP site locator
 cost: free
 sources:
-  - url: https://www.aarp.org/money/taxes/aarp_taxaide/locations/
+  - url: https://www.aarp.org/money/taxes/aarp-taxaide/locations/
     checked: 2026-10-31
   - url: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers
     checked: 2026-10-31
