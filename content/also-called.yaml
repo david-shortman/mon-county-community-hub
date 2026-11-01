@@ -12,6 +12,8 @@
 #   any change to what those pages show (docs/COORDINATION.md).
 # Test the effect with `npm run search-test` in site/ (docs/operations/search-test.md).
 /accessible-parking-placard/: [handicap placard, handicap parking permit, disability parking]
+/after-you-apply/social-security-disability/: [SSDI appeal, disability denied]
+/after-you-apply/unemployment/: [unemployment appeal, unemployment denied]
 /birth-control-and-testing/: [STD testing, family planning, sexual health]
 /caregivers/: [respite care, caregiver support]
 /families-and-kids/: [daycare, day care, early childhood]
@@ -20,6 +22,7 @@
 /have-your-say/: [speak at a meeting, school board meeting, public comment]
 /help-at-home/: [home health aide, home care, senior meals]
 /help-in-your-language/: [Spanish, interpreter, translation]
+/help/food/: [hungry, free food]
 /holidays/: [Christmas help, toy drive, winter coats]
 /legal-help/: [lawyer, attorney, small claims court]
 /life-events/child-delay-or-disability/: [developmental delay, speech delay, special needs]
@@ -29,7 +32,10 @@
 /no-insurance/: [free clinic, sliding scale, uninsured]
 /parks/: [swimming pools, pools, playgrounds]
 /pets/: [spay and neuter, pet adoption]
+/protective-orders/: [restraining order, order of protection]
 /recycling/: [garbage pickup, trash day, rubbish]
 /snow-and-ice/: [snow removal, snow plowing]
+/stay-tonight/: [homeless shelter, place to sleep]
 /teen-drivers/: [learners permit, graduated driver license]
+/utility-bills/: [heating bill, water bill, gas bill]
 /who-serves-me/: [police non-emergency number, city services]
