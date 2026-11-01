@@ -64,6 +64,9 @@ situations:
     label: I have tires or electronics to get rid of
     page: /recycling/#hard-items
     steps: [hard-items]
+  - id: property-tax
+    label: I have a question about my property tax
+    page: /property-tax/
   - id: license
     label: I need a West Virginia driver's license or plates
     page: /drivers-license/
