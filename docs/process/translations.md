@@ -101,3 +101,13 @@ To clear a stale warning, a reviewer compares the new English with the translati
 4. Nothing builds until the language is in `PUBLISHED` (David's call, #1067) and a reviewer marks the words reviewed. Then the router builds the page, `Base.astro` adds the hreflang links and the language switcher, and the page joins the sitemap. Site search and `llms.txt` stay English only for the pilot.
 
 Cost: $0. Everything here runs in the build and on GitHub Pages, which do not change.
+
+## Pages for the phone's own translator
+
+Most people who read another language better than English will use the translate button in Chrome, Safari or their phone, not a page we translated. That works on every page today, unreviewed, so we make English pages that survive it (plan option E):
+
+- **Plain words and short sentences.** The reading level check (`check-reading.mjs`) already holds pages to about 8th grade, and simple English translates better.
+- **No text inside images.** The site has no `<img>` tags at all; icons are drawn shapes with no words.
+- **A real language tag.** Every page has `<html lang="en">`, and the page check refuses a page without one.
+- **Facts stay as written.** Street addresses and phone numbers in the shared parts are marked `translate="no"`, so a translator does not turn "114 South High Street" into a street name that does not exist, or reformat a number. That covers the call buttons (`Actions.astro`), "Where:" lines (`FoodToday.astro`, `ShopCard.astro`, `AgendaGuide.astro`, listing embeds) and helper phone links (`WhatHappensNext.astro`). Use the same mark when you add a new part that prints an address or a phone number on its own.
+- **Do not mark sentences or labels.** Only the fact itself gets `translate="no"`: "Call" and "Where" should still translate.
