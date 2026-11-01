@@ -7,10 +7,20 @@ what_to_do: "The West Virginia courts post a free packet for this (instructions 
 contact:
   url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-03/SCA-FC-260.pdf
   url_label: Instructions (PDF)
-cost: "The forms are free. Ask the Circuit Clerk about the filing fee, or ask to have fees waived if you cannot afford them."
+cost: "The forms are free. The filing fee is $200, the Monongalia Circuit Clerk's fee list and state law say. Each parent also pays a $25 parent education fee. You can ask to have fees waived if you cannot afford them."
+notes:
+  - "Questions about the parent education class: call the courts' office at 304-558-6831 or email Parent.Education@courtswv.gov."
 if_you_want_help: [legal-aid-wv-guided-self-help-forms, legal-aid-wv-civil-legal-help, court-fee-waiver-wv]
 sources:
   - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-03/SCA-FC-260.pdf
     checked: 2026-10-31
   - url: https://www.courtswv.gov/public-resources/court-forms
     checked: 2026-10-31
+  - url: http://www.monongaliacircuitclerk.com/fees.html
+    checked: 2026-11-01
+  - url: https://code.wvlegislature.gov/59-1-11/
+    checked: 2026-11-01
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-02/SCA-FC-100.pdf
+    checked: 2026-11-01
+  - url: https://www.courtswv.gov/lower-courts/family-courts/parent-education
+    checked: 2026-11-01
