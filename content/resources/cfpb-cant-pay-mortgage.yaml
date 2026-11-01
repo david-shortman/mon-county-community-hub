@@ -1,0 +1,26 @@
+title: Behind on your mortgage? First steps from the CFPB
+slug: cfpb-cant-pay-mortgage
+org: consumer-financial-protection-bureau
+topics: [housing, money]
+who_it_is_for: Homeowners who have missed a mortgage payment, are worried about missing one, or got a foreclosure notice.
+what_to_do: "The Consumer Financial Protection Bureau says to call your mortgage servicer right away, and also contact a HUD-approved housing counselor for free help avoiding foreclosure."
+steps:
+  - "Call your mortgage servicer. The CFPB says the phone number is on your monthly statement, your coupon book or the servicer's website. If you don't know who your servicer is, a housing counselor can help."
+  - Fill out a mortgage assistance application if your servicer gives you one.
+  - Call a HUD-approved housing counselor (listed below).
+  - "If you are facing foreclosure soon or have been served with legal papers, the CFPB says you might also need a lawyer."
+notes:
+  - "The CFPB says you don't have to pay anyone to help you avoid foreclosure. Warning signs of a scam include being asked to pay up front, being told to stop paying your mortgage, or being asked to sign over the title to your home."
+  - "To report a scam in West Virginia, the Attorney General's Consumer Protection Hotline is 1-800-368-8808."
+contact:
+  url: https://www.consumerfinance.gov/ask-cfpb/if-i-cant-pay-my-mortgage-loan-what-are-my-options-en-268/
+  url_label: Your options
+cost: free
+if_you_want_help: [hud-housing-counseling]
+sources:
+  - url: https://www.consumerfinance.gov/ask-cfpb/if-i-cant-pay-my-mortgage-loan-what-are-my-options-en-268/
+    checked: 2026-10-31
+  - url: https://www.consumerfinance.gov/mortgagehelp/
+    checked: 2026-10-31
+  - url: https://ago.wv.gov/consumer-protection-and-antitrust-division
+    checked: 2026-10-31

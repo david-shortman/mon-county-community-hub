@@ -1,0 +1,20 @@
+title: Find a HUD-approved housing counselor
+slug: hud-housing-counseling
+org: us-department-of-housing-and-urban-development
+topics: [housing, money]
+who_it_is_for: "Anyone behind on a mortgage or worried about foreclosure. HUD says counselors can help you understand your options, organize your finances and talk to your lender for you if you need it."
+what_to_do: "Call HUD at 800-569-4287 and enter your ZIP code to be sent to a counselor near you, or search by ZIP code on the CFPB's counselor list, which uses HUD's official list. The CFPB says not every counselor offers every service, so check that the agency lists default or foreclosure counseling."
+notes:
+  - "Have an FHA loan? HUD says to call the FHA Resource Center at 800-225-5342."
+contact:
+  phone: "800-569-4287"
+  url: https://www.consumerfinance.gov/find-a-housing-counselor/?zipcode=26505
+  url_label: Counselors near Morgantown
+cost: HUD says it funds free or very low cost housing counseling.
+sources:
+  - url: https://www.hud.gov/helping-americans/avoiding-foreclosure
+    checked: 2026-10-31
+  - url: https://www.consumerfinance.gov/find-a-housing-counselor/?zipcode=26505
+    checked: 2026-10-31
+  - url: https://www.consumerfinance.gov/mortgagehelp/
+    checked: 2026-10-31
