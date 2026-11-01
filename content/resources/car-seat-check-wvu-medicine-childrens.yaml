@@ -7,11 +7,11 @@ what_to_do: Call or email the fitting station to set up an appointment. The stat
 contact:
   phone: "304-554-8519"
   email: wvumchildrensinjuryprevention@wvumedicine.org
-  url: https://dmv.wv.gov/cps-seat-fitting-stations
+  url: https://dmv.wv.gov/governors-highway-safety-program-ghsp/child-passenger-safety/cps-seat-fitting-stations
   url_label: State list of fitting stations
   place: "1 Medical Center Drive, Morgantown, WV 26506"
 cost: free
 get_in: appointment
 sources:
-  - url: https://dmv.wv.gov/cps-seat-fitting-stations
-    checked: 2026-10-30
+  - url: https://dmv.wv.gov/governors-highway-safety-program-ghsp/child-passenger-safety/cps-seat-fitting-stations
+    checked: 2026-10-31
