@@ -33,7 +33,7 @@ const checked = oldestChecked(p.sources);
     <h1>{p.name}</h1>
     <p class="flyer-story">{p.story}</p>
     {st.label && <p><strong>{st.label}.</strong></p>}
-    {there && <p><strong>What's there:</strong> {there}.</p>}
+    {there && <p><strong>What's there:</strong>{' '}{there}.</p>}
     {p.regular?.length > 0 && (
       <>
         <h2>Regular happenings</h2>
@@ -46,7 +46,7 @@ const checked = oldestChecked(p.sources);
         <ul>{events.map((e) => <li><strong>{prettyDate(e.starts)}</strong>{e.start_time && `, ${prettyTimes(e.start_time, e.end_time)}`}: {e.title}</li>)}</ul>
       </>
     )}
-    {p.membership && <p><strong>Join:</strong> {p.membership.dues}.</p>}
+    {p.membership && <p><strong>Join:</strong>{' '}{p.membership.dues}.</p>}
     {p.rentals?.length > 0 && (
       <>
         <h2>Rent a space</h2>

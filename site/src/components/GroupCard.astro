@@ -21,9 +21,9 @@ const venueHref = venue && !['library', 'group'].includes(venue.kind) ? `${base}
   <p class="group-where">{p.community}{p.run_by?.text && <>, run by {p.run_by.text}</>}</p>
   {st.label && <p class="group-status"><strong>{st.label}.</strong></p>}
   <p>{p.story}</p>
-  {p.regular?.length > 0 && <p><strong>{p.kind === 'library' ? 'Open' : 'When'}:</strong> {p.regular.map((r) => r.replace(/\.\s*$/, '')).join('; ')}.</p>}
-  {p.cost && <p><strong>Cost:</strong> {p.cost}</p>}
-  {venue && <p><strong>Where:</strong> {venueHref ? <a href={venueHref}>{venue.name}</a> : venue.name}</p>}
+  {p.regular?.length > 0 && <p><strong>{p.kind === 'library' ? 'Open' : 'When'}:</strong>{' '}{p.regular.map((r) => r.replace(/\.\s*$/, '')).join('; ')}.</p>}
+  {p.cost && <p><strong>Cost:</strong>{' '}{p.cost}</p>}
+  {venue && <p><strong>Where:</strong>{' '}{venueHref ? <a href={venueHref}>{venue.name}</a> : venue.name}</p>}
   {tags.length > 0 && <p class="group-tags">{tags.join(' · ')}</p>}
   {p.notes?.map((n) => <p class="group-note">{n}</p>)}
   <Actions callFirst phone={p.contact?.phone} phoneLabel={p.name} link={p.contact?.url} linkLabel={p.contact?.url_label ?? 'Website'} place={p.contact?.place} about={p.name} />

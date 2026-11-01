@@ -118,7 +118,7 @@ const online = steps.map((st) => resource(st.resource)).filter((r, i, a) => r?.c
               <li class="step" data-sits={stepSits(st.id).map((s) => s.id).join(' ')}>
                 <p>{st.text}</p>
                 <Actions callFirst phone={r.contact?.phone} phoneLabel={r.title} link={r.contact?.url} linkLabel={st.action ?? websiteLabel(r)} place={r.contact?.place} about={r.title} />
-                {r.cost && <p class="step-cost"><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>}
+                {r.cost && <p class="step-cost"><strong>Cost:</strong>{' '}{r.cost === 'free' ? 'Free.' : r.cost}</p>}
                 <SourceLine sources={r.sources} org={r.org} about={r.title}><Fragment slot="before">More on this: <a href={`${base}${first.page}`}>{first.label}</a>{/[?!.]$/.test(first.label) ? ' ' : '. '}</Fragment></SourceLine>
               </li>
             );

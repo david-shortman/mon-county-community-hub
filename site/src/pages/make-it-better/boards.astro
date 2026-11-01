@@ -40,8 +40,8 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
       <h3>{b.name}</h3>
       <p><strong>{seats(b.open_seats)}</strong> on the city's vacancy list.</p>
       <p>{b.decides}</p>
-      {b.who_can_serve && <p><strong>Who can serve:</strong> {b.who_can_serve}</p>}
-      <p><strong>Meets:</strong> {b.meets}</p>
+      {b.who_can_serve && <p><strong>Who can serve:</strong>{' '}{b.who_can_serve}</p>}
+      <p><strong>Meets:</strong>{' '}{b.meets}</p>
       <Actions link={applyOnline} linkLabel="Apply online" about={b.name} />
       <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
       <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
@@ -55,8 +55,8 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
       <h3>{b.name}</h3>
       {b.page_vacant > 0 && <p><strong>Sources differ:</strong> the board's own page shows {b.page_vacant === 1 ? '1 vacant seat' : `${b.page_vacant} vacant seats`}, but the city's vacancy list does not list it. Ask the City Clerk's office.</p>}
       <p>{b.decides}</p>
-      {b.who_can_serve && <p><strong>Who can serve:</strong> {b.who_can_serve}</p>}
-      <p><strong>Meets:</strong> {b.meets}</p>
+      {b.who_can_serve && <p><strong>Who can serve:</strong>{' '}{b.who_can_serve}</p>}
+      <p><strong>Meets:</strong>{' '}{b.meets}</p>
       <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
       <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
     </article>
@@ -65,7 +65,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
   <h2>Other city boards with open seats</h2>
   <p>These boards are not mainly about how the city looks, but they also have open seats on the city's list.</p>
   <ul>
-    {others.map((b) => <li><strong>{b.name}:</strong> {b.open_note}. {b.who_can_serve}</li>)}
+    {others.map((b) => <li><strong>{b.name}:</strong>{' '}{b.open_note}. {b.who_can_serve}</li>)}
   </ul>
   <p class="more"><a href={vacancyList}>The city's full vacancy list</a></p>
   <SourceLine sources={listSrc} staleDays={FAST_STALE_DAYS} about="the other open seats" />
@@ -77,8 +77,8 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
     <article class="card" id={b.slug}>
       <h3>{b.name}</h3>
       <p>{b.created}</p>
-      <p><strong>Who serves:</strong> {b.who_can_serve}</p>
-      <p><strong>Meets:</strong> {b.meets}</p>
+      <p><strong>Who serves:</strong>{' '}{b.who_can_serve}</p>
+      <p><strong>Meets:</strong>{' '}{b.meets}</p>
       <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
     </article>
   ))}

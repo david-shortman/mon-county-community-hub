@@ -20,7 +20,7 @@ const steps = (s) => s.steps.map((st) => ({ ...st, record: st.resource ? resourc
             {st.page && <p>{st.text} <a href={`${base}${st.page}`}>Go to the page<span class="sr-only"> for: {s.hears}</span></a>. <span class="print-url">everythingmorgantown.org{st.page.split('?')[0]}</span></p>}
             {st.record && (
               <>
-                <p><strong>{st.record.title}.</strong> {st.text}{(st.record.contact?.phone || st.record.contact?.text) && <span class="print-url"> {st.record.contact?.phone && `Call ${st.record.contact.phone}`}{st.record.contact?.phone && st.record.contact?.text && ', or text '}{!st.record.contact?.phone && st.record.contact?.text && 'Text '}{st.record.contact?.text}.</span>}</p>
+                <p><strong>{st.record.title}.</strong>{' '}{st.text}{(st.record.contact?.phone || st.record.contact?.text) && <span class="print-url"> {st.record.contact?.phone && `Call ${st.record.contact.phone}`}{st.record.contact?.phone && st.record.contact?.text && ', or text '}{!st.record.contact?.phone && st.record.contact?.text && 'Text '}{st.record.contact?.text}.</span>}</p>
                 <Actions callFirst phone={st.record.contact?.phone} phoneLabel={st.record.title} sms={st.record.contact?.text} link={st.record.contact?.url} linkLabel={websiteLabel(st.record)} about={st.record.title} />
                 <SourceLine sources={st.record.sources} org={st.record.org} about={st.record.title} />
               </>

@@ -26,7 +26,7 @@ const firstWard = (nbhd?.meetings ?? []).find((m) => m.name.startsWith('First Wa
   {card && (
     <Milepost n={1} title="Get a free library card" when="Week 1" id="card" open>
       <p>{card.who_it_is_for}</p>
-      {card.what_to_bring?.length > 0 && <p><strong>What to bring:</strong> {card.what_to_bring.join(' ')}.</p>}
+      {card.what_to_bring?.length > 0 && <p><strong>What to bring:</strong>{' '}{card.what_to_bring.join(' ')}.</p>}
       <div class="actions"><a class="btn" href={card.contact.url}><span>Library card page</span></a></div>
       <SourceLine sources={card.sources} org={card.org} about={card.title} slug={card.slug} />
     </Milepost>
