@@ -5,9 +5,15 @@
 // once its page exists, and a section with no live links is left out, so the
 // page grows as the group's build issues ship. Research: docs/groups/.
 //
-// sections: [{ title, links: [{ href, label?, text? }] }]
+// sections: [{ title, links: [{ href, label?, text?, resource? }] }]
 // href is a site route, and may carry a ?pick= or #part (checked by path).
+// resource: a record slug from content/resources. The link then also shows
+// that record's phone (or website) and its source line with the checked
+// date, so a reader can act from this page (#1288). The record is the only
+// place those facts come from. A hidden record shows nothing extra.
 import { loadPages } from '../lib/pages.mjs';
+import { resource, telHref, websiteLabel } from '../lib/content.mjs';
+import SourceLine from './SourceLine.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 const { sections } = Astro.props;
 const pages = await loadPages();
@@ -20,7 +26,8 @@ const live = sections
       .map((l) => {
         const p = pages.get(l.href.split(/[?#]/)[0]);
         // With no text of its own, a link uses the linked page's summary.
-        return { ...l, label: l.label ?? p.label, text: l.text ?? p.summary };
+        const r = l.resource ? resource(l.resource) : null;
+        return { ...l, label: l.label ?? p.label, text: l.text ?? p.summary, r: r && !r.hidden ? r : null };
       }),
   }))
   .filter((s) => s.links.length);
@@ -29,7 +36,19 @@ const live = sections
   <section>
     <h2>{s.title}</h2>
     <ul class="group-links">
-      {s.links.map((l) => <li><a href={`${base}${l.href}`}><strong>{l.label}</strong></a>: {l.text}</li>)}
+      {s.links.map((l) => (
+        <li>
+          <a href={`${base}${l.href}`}><strong>{l.label}</strong></a>: {l.text}
+          {l.r && (
+            <div class="gs-record">
+              {l.r.contact?.phone
+                ? <p><a class="gs-call" href={telHref(l.r.contact.phone)}>Call <span class="nowrap">{l.r.contact.phone}</span><span class="sr-only">, {l.r.title}</span></a> {l.r.title}</p>
+                : l.r.contact?.url && <p><a class="gs-call" href={l.r.contact.url}>{websiteLabel(l.r)}<span class="sr-only">: {l.r.title}</span></a> {l.r.title}</p>}
+              <SourceLine sources={l.r.sources} org={l.r.org} about={l.r.title} />
+            </div>
+          )}
+        </li>
+      ))}
     </ul>
   </section>
 ))}
@@ -38,4 +57,6 @@ const live = sections
 <style>
   .group-links { padding-left: 1.2rem; }
   .group-links li { margin-bottom: 0.5rem; }
+  .gs-record p { margin: 2px 0; }
+  .gs-call { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; margin-right: 6px; }
 </style>
