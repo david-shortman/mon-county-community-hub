@@ -8,6 +8,7 @@
 // local BCSE office hours.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "Family court, custody and child support", summary: "Starting a divorce, custody and parenting plans, the parent class, and applying for, paying or changing child support in Mon County" };
@@ -18,6 +19,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p class="lede">The state court forms for divorce and custody are free online, any time, with instructions. Legal Aid of West Virginia has a free tool that fills them out with you. For child support, you can apply online with the state, and the service is free. This page says where to go. It is not legal advice.</p>
 
   <p>Not safe at home? See <a href={`${base}/stay-tonight/#safe`}>safe from someone</a> and <a href={`${base}/protective-orders/`}>protective orders</a>.</p>
+
+  <OnThisPage items={[['#court', 'Where Family Court is'], ['#divorce', 'Start a divorce'], ['#custody', 'Custody and parenting plans'], ['#child-support', 'Child support']]} />
 
   <h2 id="court">Where Family Court is</h2>
   <ResourceCard r={resource('mon-family-court')} showCost />
