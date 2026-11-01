@@ -20,12 +20,14 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 | Chalmers (Ample Labs) | Chatbot for people experiencing homelessness | Unknown, likely lapsed |
 | FORWARD Ally | Benefits finder | Active, commercial |
 | Civic AI Tools | Directory of open data portals and MCP servers | Active, accepts submissions |
-| West Virginia 211 | Statewide service referrals | Active, no AI |
+| West Virginia 211 | Statewide service referrals | Active, no AI (rechecked 2026-11-01) |
+| TheLink (Hope in Action Alliance and WVU CED) | Resource finder app for 13 north central WV counties, including Monongalia | Pilot, launched July 2026 (checked 2026-11-01) |
 | Appalachian Ohio Regional GIS Hub | Regional open data | Unknown |
 | vTaiwan and Pol.is | Public deliberation | vTaiwan stalled, Pol.is active |
 | Talk to the City | AI summary of public input | Active, proof of concept |
 | AI Village charity experiment | Autonomous AI agents raising money | Active, cautionary results |
 | New York City MyCity chatbot | City business advice | Shut down |
+| Denver "Sunny" chatbot | City 311 questions and reports | Contract voted down October 2026 (checked 2026-11-01) |
 | NEDA Tessa chatbot | Health support chatbot | Shut down |
 | Crescent City Intel | City code, meetings and hazard alerts (California) | Active, open source |
 | Nano Media | AI-written local news (Massachusetts, Maine) | Active, Maine site slower |
@@ -49,7 +51,7 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 
 **Approach.** Open-source local models on station hardware, not cloud models. The toolkit (CC BY-SA 4.0) also includes searchable meeting transcripts and a tool that structures municipal PDFs. Search snippets of the project site (which we could not load) describe a resident council that ratifies rules and can switch it off.
 
-**Status:** unknown (checked 2026-10-28). BIG's page says local AI "is not yet publicly accessible" and asks for donations to fund servers.
+**Status:** unknown (checked 2026-11-01). BIG's page still says "we are still a ways away from making local AI publicly-accessible" and asks for donations to fund servers.
 
 **What we can adopt or integrate.** Resident-written rules for any future Q&A tool. Structured meeting records we could link from local government pages.
 
@@ -131,7 +133,7 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 
 **Approach.** Nonprofits (or public benefit corporations) apply with a committed city government partner; governments cannot apply directly. Focus areas: public health, economic mobility, environmental resilience, civic engagement (not voting or elections). Frontier AI must be core to the project. Seed and scale tracks.
 
-**Status:** active (checked 2026-10-28). Call opened October 14, 2026. Round 1 due November 29, 2026; Round 2 due March 1, 2027.
+**Status:** active (checked 2026-11-01). Call opened October 14, 2026. Round 1 due November 29, 2026; Round 2 due March 1, 2027. Revised FAQs are due November 4, 2026.
 
 **What we can adopt or integrate.** List it in our small business and philanthropy funding resources with the deadline and source.
 
@@ -361,7 +363,7 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 
 **Approach.** Call 2-1-1, text a ZIP code to 898-211, or search online. The search site draws on the 211 National Data Platform run by United Way Worldwide, which lists WV 211 as a user and offers search and export APIs. No AI features found.
 
-**Status:** active (checked 2026-10-28). Site and lines live; WV Public Broadcasting covered it October 2025.
+**Status:** active (checked 2026-11-01). Site and lines live ("Dial 2-1-1, Text your Zip Code to 898-211"); WV Public Broadcasting covered it October 2025.
 
 **What we can adopt or integrate.** Point residents to 211 for anything we lack. Do not copy its data: the platform calls it "proprietary."
 
@@ -376,6 +378,26 @@ Each entry covers what the project is, who runs it, how it works, its status wit
 - [211 National Data Platform API portal](https://apiportal.211.org/)
 - [211 NDP snapshot (PDF)](https://register.211.org/files/211%20NDP%20Snapshot.pdf)
 - [WV Public Broadcasting (Oct 2025)](https://wvpublic.org/story/government/wv-211-connects-people-with-needed-help/)
+
+### TheLink (north central West Virginia)
+
+**What it is.** A free resource finder app for people, families and service providers in West Virginia Prevention Region 4: Randolph, Barbour, Tucker, Upshur, Lewis, Braxton, Doddridge, Gilmer, Harrison, Marion, Monongalia, Preston and Taylor counties. Users search local services, save the ones they use and set appointment reminders in the app's calendar.
+
+**Who runs it.** Hope in Action Alliance (HIAA), a West Virginia nonprofit, with the WVU Center for Excellence in Disabilities.
+
+**Approach.** Built from community input gathered starting in 2025. Available in the Apple and Google app stores and on the web. The news story does not say whether it uses AI.
+
+**Status:** pilot (checked 2026-11-01). Launched July 2026. Its next phase is "launch, field testing, outreach, evaluation," and later the rest of the state.
+
+**What we can adopt or integrate.** It covers Monongalia County, so residents may find both. Our open listings (with sources and checked dates) could help keep its Mon County entries current, if HIAA wants that.
+
+**How we could amplify it.** A `for:david` issue to ask HIAA whether our open data or listings would be useful to TheLink, and whether we should link it.
+
+**Lessons.** A peer is building the same kind of tool for the same county. Connect, don't compete: share data instead of duplicating effort.
+
+**Sources:**
+- [The Inter-Mountain: Pilot app to help residents find services, support (Jul 7, 2026)](https://www.theintermountain.com/news/local-news/2026/07/pilot-app-to-help-residents-find-services-support/)
+- [TheLink web app](https://thelinkapp.io)
 
 ### Appalachian Ohio Regional GIS Hub
 
@@ -680,6 +702,26 @@ Checked 2026-10-30. These are building blocks, not community services. Listed fo
 - [The Markup, Mar 2024](https://themarkup.org/news/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law)
 - [The Markup, Jan 2026, shutdown](https://themarkup.org/artificial-intelligence/2026/01/30/mamdani-to-kill-the-nyc-ai-chatbot-we-caught-telling-businesses-to-break-the-law)
 
+### Denver "Sunny" 311 chatbot
+
+**What it is.** An AI chatbot that answers simple questions and takes non-emergency 311 reports, like potholes, for the City and County of Denver.
+
+**Who runs it.** The city, through a contract with the company Citibot.
+
+**Approach.** Text chat on city channels. The city says about 40% of 311 contacts this year came through Sunny and its online reporting hub, with a 90% satisfaction rating. A contract extension would have added a "voicebot" for 311 phone calls.
+
+**Status:** uncertain (checked 2026-11-01). On Tuesday, October 13, 2026, the City Council voted 9 to 3 against a five-year, $3.9 million extension. The contract was paid through the end of October, and the mayor's office said it would look for a way to keep the service. We found no later report.
+
+**What we can adopt or integrate.** Nothing to reuse.
+
+**How we could amplify it.** Not applicable.
+
+**Lessons.** Council members said it "often provides inaccurate information" and replaces jobs people should have. Accuracy and how a tool affects local workers both decide whether it lasts. Our tools point to people and offices, never replace them.
+
+**Sources:**
+- [GovTech, from The Denver Post (Oct 14, 2026)](https://www.govtech.com/artificial-intelligence/denver-ai-chatbot-sunny-may-go-dark-after-contract-vote)
+- [Denver7: After council pushback, Denver's AI chatbot faces uncertain future](https://www.denver7.com/news/local-news/after-council-pushback-denvers-ai-chatbot-faces-uncertain-future)
+
 ### NEDA Tessa chatbot
 
 **What it is.** A wellness chatbot offered by the National Eating Disorders Association (NEDA) as its human-staffed helpline was being closed in 2023.
@@ -734,3 +776,11 @@ Duet runs a monthly sweep:
 ## Checked
 
 Sources checked 2026-10-28. Entries added from the October 30 peer research checked 2026-10-30 (#473).
+
+### Sweep of 2026-11-01 (#55)
+
+- **Links re-opened:** 97. 68 loaded. 19 GitHub pages could not be read from our build sessions (GitHub only lets them reach this project's own repository), so the Talk to the City, Pol.is, Crescent City Intel, Civic AI Tools and open-source tool entries keep their October dates. 9 other pages refused automated reads (HTTP 403 or 503: Brookline.News, Code for America, CivicPlus, Smart Cities Dive, CityByApp, News Futures), and civicaitools.org's robots.txt says no, so we did not read it. Those entries also keep their earlier dates.
+- **Statuses rechecked and still the same:** Neighborhood AI (still not public), Cities Deliver (Round 1 due November 29), West Virginia 211.
+- **Added:** TheLink, a resource finder pilot that covers Monongalia County, and Denver's "Sunny" chatbot as a cautionary case.
+- **Searched, nothing new found:** an AI resource directory launched in West Virginia in 2026, and Appalachian civic AI tools for residents.
+- **Next sweep:** early December 2026, on Duet's schedule. A person should re-read the GitHub and refused pages in a browser.
