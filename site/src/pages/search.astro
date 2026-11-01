@@ -5,6 +5,7 @@
 import Base from '../layouts/Base.astro';
 import SearchBox from '../components/SearchBox.astro';
 import DoorCards from '../components/DoorCards.astro';
+import { SPELLING } from '../lib/search-plan.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <Base searchable={false} title="Search Mon County help" description="Search plain-language help pages for Morgantown and Monongalia County, WV. The search runs on your phone, and we never collect what you search for.">
@@ -15,7 +16,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <noscript><p>Search needs JavaScript, which is off on this browser. Pick what is going on below, see <a href={`${base}/topics/`}>all topics</a>, or call or text 211.</p></noscript>
   <DoorCards heading="Or pick what is going on" id="browse" />
   <p class="meta">The search runs on your phone. Your words are never sent to us or to the site’s host, and we never store them. Like any visit, the host can see which files your phone loads, including the search files for the pages that match.</p>
-  <script is:inline define:vars={{ base }}>
+  <script is:inline define:vars={{ base, SPELLING }}>
     (function () {
       var input = document.getElementById('search-q');
       var status = document.getElementById('search-status');
@@ -40,14 +41,33 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       var FILLER = ('a an the and or of to for in on at by from with about my me i im we our you your it its this that is are was be ' +
         'can cant do does dont how what where when who why get got need want please help near find someone some any just really ' +
         'morgantown wv west virginia mon monongalia county').split(' ');
-      function words(q) {
+      // Common misspellings (SPELLING in src/lib/search-plan.mjs) are fixed first,
+      // and the page says so.
+      function raw(q) {
         return q.toLowerCase().replace(/[’']/g, '').replace(/\bday care\b/g, 'daycare').match(/[a-z0-9]+/g) || [];
+      }
+      function words(q) {
+        var out = [];
+        raw(q).forEach(function (w) { (SPELLING[w] || w).split(' ').forEach(function (x) { out.push(x); }); });
+        return out;
+      }
+      function fixedText(q) {
+        return raw(q).some(function (w) { return SPELLING[w]; }) ? words(q).join(' ') : '';
       }
       function plain(q) {
         return words(q).filter(function (w) { return FILLER.indexOf(w) < 0; }).map(function (w) { return SAME[w] || w; }).join(' ');
       }
-      // Help-giver and printout pages repeat what the main pages say, so they go last.
-      function later(url) { return /\/(print|for\/helpers)\//.test(url) ? 1 : 0; }
+      // Help-giver and printout pages repeat what the main pages say, and group
+      // profile pages crowd out the guides that answer a question, so they go last.
+      // A group page stays in place when its name has every word typed, so
+      // searching a group by name still finds it first.
+      function later(d, q) {
+        if (/\/(print|for\/helpers)\//.test(d.url)) return 1;
+        if (!/\/groups\//.test(d.url)) return 0;
+        var name = ' ' + raw((d.meta && d.meta.title) || '').join(' ') + ' ';
+        var typed = words(q).filter(function (w) { return FILLER.indexOf(w) < 0; });
+        return typed.length && typed.every(function (w) { return name.indexOf(' ' + w + ' ') >= 0; }) ? 0 : 1;
+      }
       // Pages with more of the reader's words come first. Pagefind's own order
       // breaks ties, and a word a page has near the top of its results counts a bit more.
       function find(pf, q) {
@@ -55,7 +75,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         var units = words(q).filter(function (w, i, a) { return FILLER.indexOf(w) < 0 && a.indexOf(w) === i; })
           .map(function (w) { return SAME[w] ? [w, SAME[w]] : [w]; });
         var p = plain(q);
-        var jobs = [{ q: q }];
+        var fixed = fixedText(q);
+        var jobs = [{ q: fixed || q }];
         if (p && p !== q.toLowerCase().trim()) jobs.push({ q: p });
         if (units.length > 1 || (units[0] && units[0].length > 1)) {
           units.forEach(function (alts, u) { alts.forEach(function (w) { jobs.push({ q: w, unit: u }); }); });
@@ -77,9 +98,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
           var some = units.length > 1 && !ids.some(function (id) { return has[id] && Object.keys(has[id]).length === units.length; });
           return Promise.all(ids.slice(0, 20).map(function (id) { return byId[id].data(); })).then(function (items) {
             items = items.map(function (d, i) { return { d: d, i: i }; })
-              .sort(function (x, y) { return later(x.d.url) - later(y.d.url) || x.i - y.i; })
+              .sort(function (x, y) { return later(x.d, q) - later(y.d, q) || x.i - y.i; })
               .map(function (x) { return x.d; }).slice(0, 10);
-            return { items: items, some: some };
+            return { items: items, some: some, fixed: fixed };
           });
         });
       }
@@ -103,9 +124,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             li.append(a, p); list.append(li);
           });
           list.hidden = false;
-          status.textContent = found.some
-            ? 'No page has all of "' + q + '". These pages have some of your words.'
-            : items.length + (items.length === 1 ? ' page matches "' : ' pages match "') + q + '".';
+          var shown = found.fixed || q;
+          status.textContent = (found.fixed ? 'Showing results for "' + found.fixed + '". ' : '') + (found.some
+            ? 'No page has all of "' + shown + '". These pages have some of your words.'
+            : items.length + (items.length === 1 ? ' page matches "' : ' pages match "') + shown + '".');
         }).catch(function () {
           status.textContent = 'Search could not load. Pick from the list below, or call or text 211.';
         });
