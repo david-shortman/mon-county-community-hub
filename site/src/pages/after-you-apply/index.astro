@@ -33,7 +33,7 @@ const rows = ROWS.map((r) => ({ ...r, href: have.includes(r.slug) ? `${base}/aft
   <p class="note">These deadlines are quoted from each program's own rules. Your letter may give an exact date: go by that. This is information, not legal advice.</p>
 
   <h2 id="deadlines">Appeal deadlines at a glance</h2>
-  <div class="table-wrap">
+  <div class="table-wrap" role="region" aria-label="Appeal deadlines by program" tabindex="0">
     <table>
       <thead><tr><th scope="col">Program</th><th scope="col">Run by</th><th scope="col">Deadline to appeal</th><th scope="col">To keep benefits while you appeal</th></tr></thead>
       <tbody>
