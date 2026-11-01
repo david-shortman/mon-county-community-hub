@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Design lab (#396): preview looks for the visual identity wave. Hidden from
+// search and the sitemap. A look only changes this browser, and only after
+// someone opens one of these links.
+const looks = [
+  { id: 'fieldguide', name: 'Field guide', blurb: 'Like a park map or field guide: a dark band header, square corners, strong ruled lines, a margin column for labels, and the real ridge line across the Mon valley.' },
+  { id: 'ledger', name: 'Ledger', blurb: 'Like a well-kept town ledger or timetable: big even dates, "checked" stamps, the calendar as a printed listing, and warm brick tones from old downtown.' },
+  { id: 'press', name: 'Press', blurb: 'Like a small local paper or a quilted bulletin board: a serif voice for headings, flat ink colors, quilt-corner cards, and steps drawn like river locks.' },
+];
+---
+<Base title="Design lab: preview looks for Everything Morgantown" description="Preview looks for the Everything Morgantown site, for Morgantown and Mon County." noindex searchable={false}>
+  <h1>Design lab</h1>
+  <p class="lede">We are trying three looks for the site. Pick one to browse the whole site in that look. Only your browser changes, and you can switch back at any time.</p>
+  <ul>
+    {looks.map((l) => <li><a href={`${base}/?look=${l.id}`}><strong>{l.name}</strong></a>: {l.blurb}</li>)}
+  </ul>
+  <p><a href={`${base}/?look=off`}>Back to the normal look</a></p>
+  <p class="meta">Crisis lines, Quick exit and help pages stay easy to find in every look. These previews are not final.</p>
+</Base>

@@ -30,7 +30,7 @@ export default defineConfig({
   // other sites show in a frame), pages in a language that is off,
   // and old addresses that only send people on (src/lib/moved.mjs).
   integrations: [sitemap({
-    filter: (page) => !page.endsWith('/flyer/') && !/\/embed\/.+/.test(page) && !inUnpublishedLocale(page) && !isMoved(new URL(page).pathname),
+    filter: (page) => !page.endsWith('/flyer/') && !page.includes('/design-lab/') && !/\/embed\/.+/.test(page) && !inUnpublishedLocale(page) && !isMoved(new URL(page).pathname),
     ...(sitemapI18n() ? { i18n: sitemapI18n() } : {}),
     serialize: withLastmod,
   }),
