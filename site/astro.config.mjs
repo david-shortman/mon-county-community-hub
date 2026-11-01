@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { astroI18n, sitemapI18n, inUnpublishedLocale } from './src/lib/i18n.mjs';
 import { isMoved } from './src/lib/moved.mjs';
+import { pruneCssIntegration } from './src/lib/prune-css.mjs';
 
 // Served from GitHub Pages at the custom domain everythingmorgantown.org (#89).
 export default defineConfig({
@@ -20,5 +21,7 @@ export default defineConfig({
   integrations: [sitemap({
     filter: (page) => !page.endsWith('/flyer/') && !/\/embed\/.+/.test(page) && !inUnpublishedLocale(page) && !isMoved(new URL(page).pathname),
     ...(sitemapI18n() ? { i18n: sitemapI18n() } : {}),
-  })],
+  }),
+  // Drop inlined CSS a page cannot use (slow phones, wave 8). See the file.
+  pruneCssIntegration()],
 });

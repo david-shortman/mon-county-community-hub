@@ -1,0 +1,80 @@
+# The County Clerk's "Full Probate Overview and Timeline" (part of #393), a
+# two-page PDF linked on the Clerk's Probate Office page for estates without
+# a will (read 2026-11-01). No date is printed on it; the file was saved
+# November 16, 2021. Steps, days and fees are quoted.
+#
+# The $32 for opening matches the Clerk's newer "Opening Probate Forms and
+# Instructions" PDF (saved November 14, 2025: $12 Application of Fiduciaries
+# and $20 Notice of Administration). The $12 appraisement and $17 closing
+# fees appear only in this 2021 PDF, and the page says so.
+slug: mon-county-clerk-probate-timeline
+title: Full Probate Overview and Timeline
+publisher: Monongalia County Clerk
+pdf: https://www.monongaliacountyclerk.com/myfiles/probate_office/Full_Probate_Overview_and_Timeline.pdf
+pdf_date: "no date is printed on it (the file was saved November 16, 2021)"
+found_on: https://www.monongaliacountyclerk.com/index.php/fiduciary-probate/16-general-info/109-decedent-did-not-leave-a-will
+intro: Full probate is how an estate is settled through the County Clerk when a small estate form is not enough. These are the steps and deadlines in the order the Clerk lists them. The parts in quotes are the Clerk's own words.
+recheck_days: 180
+sources:
+  - url: https://www.monongaliacountyclerk.com/myfiles/probate_office/Full_Probate_Overview_and_Timeline.pdf
+    name: Monongalia County Clerk
+    checked: 2026-11-01
+  - url: https://www.monongaliacountyclerk.com/index.php/fiduciary-probate/16-general-info/109-decedent-did-not-leave-a-will
+    checked: 2026-11-01
+  - url: "https://www.monongaliacountyclerk.com/myfiles/probate_office/Opening_Probate_Forms_and_Instructions_Intestate(No_Will).pdf"
+    name: Monongalia County Clerk, Opening Probate Forms and Instructions
+    checked: 2026-11-01
+sections:
+  - heading: "Step 1: Open the estate"
+    id: open
+    items:
+      - "The person who will handle the estate (the executor, administrator or personal representative) signs an Oath. The Clerk says it \"attests that the information provided to the Clerk is true and correct to the best of your knowledge.\""
+      - "\"Letters of Administration are given at the time of the appointment, or through the mail if received remotely, that prove authority to handle the affairs of the estate.\""
+      - name: "Fee"
+        lines: ["\"The filing fees for the Oath and Notice of Administration are collected at the same time, and are a total of $32.\" The Clerk's November 2025 opening forms list the same: $12 Application of Fiduciaries and $20 Notice of Administration."]
+  - heading: "Step 2: File the appraisement within 90 days"
+    id: appraisement
+    items:
+      - "\"The Appraisement of the Estate is to be completed and submitted to the Clerk's office within ninety (90) days from the date of appointment.\" The form also lists property that passes outside probate (the Non-Probate Inventory)."
+      - name: "Fee"
+        lines: ["\"Provided that there are no additional pages added to the form, the recording fee will be $12.00.\" This fee is in the 2021 PDF only; ask the Clerk to confirm it."]
+      - name: "Large estates"
+        lines: ["\"If the estate has more than one beneficiary and the probate assets (from page 1, Part 3, line 7 of the Appraisement of the Estate 6.01 form) are over $200,000, a fiduciary commissioner may be assigned to the estate\". \"Additional fees will be required.\""]
+  - heading: "Step 3: Notice to creditors, 60 days"
+    id: creditors
+    items:
+      - "\"After the County Clerk records the Appraisement, or after 120 days if the appraisement has not been received, Notice of Administration will be published in the local newspaper.\""
+      - "\"This notice gives creditors sixty (60) days to file a claim against the estate. If a claim is received, a copy will be promptly forwarded to the personal representative.\""
+  - heading: "Step 4: Close the estate"
+    id: close
+    note: The Clerk lists two ways. File one or the other.
+    items:
+      - name: "Waiver of Final Settlement"
+        lines:
+          - "\"Requires the notarized signature of all beneficiaries/heirs unless the beneficiary/heir only receives a specific bequest of tangible personal property or a specific bequest of cash\"."
+          - "\"The filing fee is $17 for up to 5 pages.\""
+      - name: "Report of Receipts, Disbursements and Distribution Affidavit"
+        lines:
+          - "\"Requires only the notarized signature of the Personal Representative.\""
+          - "\"It is an accounting of all assets that came into the estate, were paid out of the estate, and a proposed distribution of the remaining assets.\""
+          - "\"If the probate estate is open for more than one year, annual accountings are required.\""
+          - "\"The filing fee is $17 for up to 5 pages.\""
+      - "The $17 closing fees are in the 2021 PDF only; ask the Clerk to confirm them."
+  - heading: How long it takes
+    id: time
+    items:
+      - "\"Probate takes at the minimum four months, but can take much longer due to many factors.\""
+  - heading: What the Clerk's staff can and cannot do
+    id: advice
+    items:
+      - "The Clerk's staff cannot give legal advice. The PDF says: \"we have to be careful that we are not 'practicing law'.\""
+      - "\"If you have retained an attorney or certified public accountant, your questions can best be answered through them.\""
+  - heading: The PDF
+    id: pdf
+    items:
+      - name: "Full Probate Overview and Timeline"
+        lines: ["Two pages, from the County Clerk's Probate Office."]
+        links:
+          - label: "Full Probate Overview and Timeline (PDF)"
+            url: https://www.monongaliacountyclerk.com/myfiles/probate_office/Full_Probate_Overview_and_Timeline.pdf
+            saved: "November 16, 2021"

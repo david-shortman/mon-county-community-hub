@@ -1,0 +1,30 @@
+---
+// Probate steps and timeline (part of #393): the County Clerk's "Full
+// Probate Overview and Timeline" PDF as short lists. Every step, deadline
+// and fee is quoted in content/pdf-pages/mon-county-clerk-probate-timeline.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "records", label: "Probate steps and timeline", summary: "The County Clerk's steps for full probate: opening the estate, the 90-day appraisement, the 60-day notice to creditors, closing, and the fees" };
+const d = pdfPage('mon-county-clerk-probate-timeline');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-291-7230';
+---
+<Base title="Probate steps and timeline in Mon County, WV: the County Clerk's overview" description="The Monongalia County Clerk's steps for full probate of an estate: the Oath and Letters of Administration ($32), the appraisement within 90 days, the 60-day notice to creditors, the two ways to close, and how long it takes, quoted from the Clerk's PDF.">
+  <h1>Probate steps and timeline</h1>
+  <p class="lede">Settling the estate of someone who died while living in Mon County? If a small estate form is not enough, the estate goes through full probate at the County Clerk's office. The Clerk's steps and deadlines are in a PDF, so here they are as a short list. Questions: call the Clerk at <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>Which path fits (recording a will, the small estate form, or full probate), what to bring, and office hours: see <a href={`${base}/when-someone-dies/#estate`}>when someone dies</a>. Free and low cost legal help: <a href={`${base}/legal-help/`}>courts and legal help</a>.</p>
+
+  <p class="meta">This page is a reading aid, not legal advice. The County Clerk's PDF is the official version. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>
