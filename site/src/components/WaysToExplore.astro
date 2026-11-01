@@ -1,0 +1,56 @@
+---
+// "Ways to explore" on /topics/ (#1039): four rows of links above the door
+// lists, for people who come to look around. Each row is built from data, so
+// it updates with new pages: towns (lib/town-hubs.mjs), the /for/ starting
+// pages and a few life-stage pages (page tags), this month's calendar dates,
+// and questions in content/explore.yaml. A link shows only when its page exists.
+import fs from 'node:fs';
+import path from 'node:path';
+import YAML from 'yaml';
+import { CONTENT_DIR, loadCalendar, upcoming } from '../lib/content.mjs';
+import { loadPages } from '../lib/pages.mjs';
+import { HUBS } from '../lib/town-hubs.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pages = await loadPages();
+const live = (href) => pages.has(href.split(/[?#]/)[0]);
+
+const towns = HUBS.filter((h) => h.kind !== 'cdp').map((h) => ({ href: `/towns/${h.slug}/`, text: h.name }));
+const lifeStage = [...pages.values()]
+  .filter((p) => /^\/for\/[^/]+\/$/.test(p.route) && !p.route.startsWith('/for/helpers/'))
+  .map((p) => ({ href: p.route, text: p.label }))
+  // Life-stage pages that have no /for/ starting page of their own.
+  .concat(['/teens/', '/veterans/', '/turning-65/'].filter((r) => live(r) && !pages.has(`/for${r}`)).map((r) => ({ href: r, text: pages.get(r).label })))
+  .sort((a, b) => a.text.localeCompare(b.text));
+const soon = upcoming(loadCalendar(), undefined, 31).slice(0, 4).map((e) => ({ href: `/calendar/#${e.slug}`, text: e.title }));
+const file = path.join(CONTENT_DIR, 'explore.yaml');
+const questions = (fs.existsSync(file) ? YAML.parse(fs.readFileSync(file, 'utf8'))?.questions ?? [] : [])
+  .filter((q) => live(q.href)).map((q) => ({ href: q.href, text: q.q }));
+
+const rows = [
+  { id: 'where', title: 'By where you live', links: towns, more: live('/towns/') && { href: '/towns/', text: 'Every town and area' } },
+  { id: 'life', title: 'By time of life', links: lifeStage },
+  { id: 'season', title: 'Coming up this month', links: soon, more: { href: '/calendar/', text: 'All dates and deadlines' } },
+  { id: 'curious', title: 'Just curious', links: questions },
+].filter((r) => r.links.length);
+---
+{rows.length > 0 && (
+  <section class="explore" aria-labelledby="explore-h">
+    <h2 id="explore-h">Ways to explore</h2>
+    {rows.map((r) => (
+      <div class="explore-row">
+        <h3 id={`explore-${r.id}`}>{r.title}</h3>
+        <ul aria-labelledby={`explore-${r.id}`}>
+          {r.links.map((l) => <li><a href={`${base}${l.href}`}>{l.text}</a></li>)}
+          {r.more && <li><a class="explore-more" href={`${base}${r.more.href}`}>{r.more.text}</a></li>}
+        </ul>
+      </div>
+    ))}
+  </section>
+)}
+
+<style>
+  .explore h3 { margin: 14px 0 6px; font-size: 1.05rem; }
+  .explore ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .explore li a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); }
+  .explore li a.explore-more { border-style: dashed; }
+</style>
