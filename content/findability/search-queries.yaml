@@ -73,7 +73,7 @@ queries:
   - {q: utlity bill, expect: [/utility-bills/, /money/], kind: misspelled}
   - {q: evicition, expect: [/legal-help/, /renting/, /money/], kind: misspelled}
 
-  # Shelter and safety
+  # Shelter and crisis
   - {q: warming center, expect: [/tonight/, /stay-tonight/], kind: everyday}
   - {q: warming shelter, expect: [/tonight/, /stay-tonight/], kind: everyday}
   - {q: homeless shelter, expect: [/stay-tonight/, /tonight/], kind: everyday}
@@ -82,6 +82,9 @@ queries:
   - {q: domestic violence, expect: [/stay-tonight/], kind: everyday}
   - {q: abuse, expect: [/stay-tonight/], kind: everyday}
   - {q: suicide, expect: [/mental-health/], kind: everyday}
+  - {q: 988, expect: [/mental-health/], kind: short}
+  - {q: 211, expect: [/money/, /help/what-help/, /how-we-check/], kind: short}
+  - {q: crisis line, expect: [/mental-health/, /stay-tonight/], kind: everyday}
   - {q: narcan, expect: [/drugs-and-alcohol/], kind: everyday}
   - {q: naloxone, expect: [/drugs-and-alcohol/], kind: everyday}
   - {q: overdose, expect: [/drugs-and-alcohol/], kind: everyday}
