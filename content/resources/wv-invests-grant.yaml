@@ -2,7 +2,7 @@ title: WV Invests Grant (two-year college for free)
 slug: wv-invests-grant
 org: wv-community-and-technical-college-system
 topics: [work]
-who_it_is_for: U.S. citizens who have lived in West Virginia for at least one year and want a certificate or two-year degree in a high-demand field at a West Virginia public college. People who already have a bachelor's degree cannot get it, except for some emergency medical services programs.
+who_it_is_for: U.S. citizens, and non-citizens who can get federal student aid, who have lived in West Virginia for at least one year before applying and want a certificate or two-year degree in a high-demand field at a West Virginia public college. People who already have a bachelor's degree cannot get it, except for some emergency medical services programs.
 what_to_do: Every year, fill out the FAFSA at StudentAid.gov and the WV Invests application, before the April 15 priority deadline. You can still apply after that date. The grant pays the tuition and fees other aid does not cover. Each term you get it, you must do 2 hours of community service. You must live in West Virginia for 2 years after you finish or drop below half time. If you move away, the grant turns into a loan you pay back, with interest.
 contact:
   phone: "877-987-7664"
@@ -12,8 +12,10 @@ contact:
 cost: free
 sources:
   - url: https://www.cfwv.com/financial-aid/wv-invests-grant/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.cfwv.com/financial-aid/wv-invests-grant/faqs/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.cfwv.com/financial-aid/wv-invests-grant/apply-now/
-    checked: 2026-10-30
+    checked: 2026-11-01
+  - url: https://www.cfwv.com/financial-aid/wv-invests-grant/how-it-works/
+    checked: 2026-11-01

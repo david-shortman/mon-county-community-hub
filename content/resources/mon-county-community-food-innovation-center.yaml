@@ -13,6 +13,6 @@ cost: The county says rates vary by use.
 get_in: call-first
 sources:
   - url: https://www.monongaliacounty.gov/departments/mon_county_center/community_food_innovation_center.php
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.monongaliacounty.gov/departments/mon_county_center/contact_us.php
-    checked: 2026-10-31
+    checked: 2026-11-01
