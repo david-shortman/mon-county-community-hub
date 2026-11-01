@@ -1,0 +1,11 @@
+slug: hardiness-zone
+text: "USDA's 2023 [Plant Hardiness Zone Map](https://planthardiness.ars.usda.gov/) puts Morgantown ZIP codes 26505 and 26508 in **zone 7a** and 26501 in **zone 6b**. Zones are based on the coldest winter night in an average year: 0 to 5°F for 7a, and -5 to 0°F for 6b. USDA says the map helps gardeners tell which perennial plants are most likely to thrive where they live. Look up your own ZIP code on the USDA map."
+quote: "The USDA Plant Hardiness Zone Map is the standard by which gardeners and growers can determine which perennial plants are most likely to thrive at a location. The map is based on the average annual extreme minimum winter temperature, displayed as 10-degree F zones and 5-degree F half zones. ... 26501: 6b (-5 to 0 °F/-20.6 to -17.8 °C) ... 26505: 7a (0 to 5 °F/-17.8 to -15 °C) ... 26508: 7a (0 to 5 °F/-17.8 to -15 °C)"
+sources:
+  - url: https://planthardiness.ars.usda.gov/
+    name: USDA Agricultural Research Service
+    checked: 2026-11-01
+  - url: "https://services1.arcgis.com/SyUSN23vOoYdfLC8/arcgis/rest/services/PHZM_2023_Zip_Code_Table/FeatureServer/296/query?where=ZIP_CODE+IN+('26501','26505','26508')&outFields=ZIP_CODE,Class&returnGeometry=false&f=json"
+    name: USDA ARS zone lookup table (ZIP codes)
+    checked: 2026-11-01
+recheck_days: 365   # the zone map changes rarely (the lookup has 2012 and 2023 maps)

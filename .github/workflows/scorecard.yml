@@ -1,0 +1,95 @@
+name: Scorecard
+
+# The weekly scorecard (#1052): one table a week of what the project's checks
+# already measure, with last week's value beside each number. Runs Monday
+# morning, after the Sunday findability check and before the Monday retro.
+#  1. Builds the site (page count, weight, reading grade, contrast).
+#  2. Runs Lighthouse on five key pages of the live site on a simulated slow 4G
+#     phone (#1053). Warn only: a slow page never fails the job.
+#  3. Runs site/scripts/scorecard.mjs, which also reads open PRs, the Source
+#     check and Health issues, and the live feed health file (#1056).
+#  4. Opens and merges a PR that adds docs/scorecard/YYYY-Www.md and .json, and
+#     nothing else. If GitHub will not let it, it opens a for:code issue with
+#     both files so a session can add them.
+# Free: a GitHub runner for about 10 minutes a week. No accounts, no keys, no
+# secrets beyond the workflow's own token. Runbook: docs/scorecard/README.md.
+#
+# Uses only actions/checkout and actions/setup-node, to stay inside the allow list.
+
+on:
+  schedule:
+    - cron: '23 10 * * 1' # Mondays, 10:23 UTC (early morning Eastern)
+  workflow_dispatch:
+
+concurrency:
+  group: scorecard
+  cancel-in-progress: false
+
+jobs:
+  scorecard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    defaults:
+      run:
+        working-directory: site
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # git history for "added this week" and PR comparisons
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: python3 -c 'import yaml' 2>/dev/null || pip install --user pyyaml
+      - run: npm ci
+      - run: npm run build
+
+      - name: Slow-phone speed (Lighthouse, warn only)
+        continue-on-error: true
+        timeout-minutes: 10
+        run: node scripts/lighthouse.mjs --json "$RUNNER_TEMP/lighthouse.json"
+
+      - name: Make the scorecard
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/scorecard.mjs --lighthouse "$RUNNER_TEMP/lighthouse.json" > "$RUNNER_TEMP/scorecard.log"
+          week=$(ls ../docs/scorecard/*-W*.md | sort | tail -1 | xargs basename -s .md)
+          echo "WEEK=$week" >> "$GITHUB_ENV"
+          cat "../docs/scorecard/$week.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Add it to the repo
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -uo pipefail
+          cd ..
+          # Only the scorecard folder may change.
+          if git status --porcelain | grep -v ' docs/scorecard/'; then
+            echo "Something outside docs/scorecard/ changed; not committing."; exit 1
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          branch="code/scorecard-$WEEK"
+          git checkout -q -B "$branch"
+          git add docs/scorecard
+          git commit -qm "Weekly scorecard $WEEK (#1052)"
+          body="The weekly scorecard for $WEEK, made by the Scorecard workflow ($RUN_URL). It only adds docs/scorecard/$WEEK.md and .json, so it does not wait for David. How to read it: docs/scorecard/README.md."
+          if git push -q -f origin "$branch" \
+            && url=$(gh pr create --base main --head "$branch" --title "Weekly scorecard $WEEK" --body "$body") \
+            && gh pr merge "$url" --squash --delete-branch; then
+            echo "Merged $url"
+          else
+            title="Weekly scorecard $WEEK: add it by hand"
+            note=$(printf 'The Scorecard workflow could not open or merge its PR (%s). A session should add the two files below to `docs/scorecard/` on a `code/` branch and merge it.\n\n<details><summary>%s.md</summary>\n\n````markdown\n%s\n````\n</details>\n\n<details><summary>%s.json</summary>\n\n```json\n%s\n```\n</details>\n\n---\n_Opened by the Scorecard workflow (#1052)._' \
+              "$RUN_URL" "$WEEK" "$(head -c 40000 "docs/scorecard/$WEEK.md")" "$WEEK" "$(cat "docs/scorecard/$WEEK.json")")
+            gh api "repos/${{ github.repository }}/issues" -f title="$title" -f body="$note" -f "labels[]=for:code" > /dev/null
+            echo "Opened a for:code issue instead."
+          fi

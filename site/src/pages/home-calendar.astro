@@ -30,8 +30,21 @@ const icsGoogle = `https://calendar.google.com/calendar/render?cid=${encodeURICo
       <a class="btn" href={icsWebcal}>iPhone or Mac calendar</a>
       <a class="btn" href={icsGoogle} rel="noopener">Google Calendar</a>
     </p>
-    <p><strong>iPhone:</strong> tap the iPhone button above. Or open Calendar, tap Calendars, then Add Calendar, then Add Subscription Calendar, and paste the link below. Next to Account, choose iCloud so it shows on your other Apple devices too (<a href="https://support.apple.com/en-us/102301">Apple's steps</a>).</p>
-    <p><strong>Android or Google Calendar:</strong> on a computer, open Google Calendar. Next to "Other calendars," click the plus, then From URL, and paste the link below. Google's phone app can't add it, but once you add it on a computer it shows in the app too (<a href="https://support.google.com/calendar/answer/37100">Google's steps</a>).</p>
+    <p><strong>iPhone:</strong> tap the iPhone button above. Or do it by hand:</p>
+    <ol>
+      <li>Open Calendar and tap Calendars.</li>
+      <li>Tap Add Calendar, then Add Subscription Calendar.</li>
+      <li>Paste the link below.</li>
+      <li>Next to Account, choose iCloud, so it shows on your other Apple devices too.</li>
+    </ol>
+    <p>These steps come from <a href="https://support.apple.com/en-us/102301">Apple's help page (on Apple's site)</a>.</p>
+    <p><strong>Android or Google Calendar:</strong> Google's phone app can't add it, so start on a computer. Once added, it shows in the app too.</p>
+    <ol>
+      <li>On a computer, open Google Calendar.</li>
+      <li>Next to "Other calendars," click the plus, then From URL.</li>
+      <li>Paste the link below, then click Add calendar.</li>
+    </ol>
+    <p>These steps come from <a href="https://support.google.com/calendar/answer/37100">Google's help page (on Google's site)</a>.</p>
     <p><label for="home-ics-link">Calendar link</label><br /><input id="home-ics-link" type="text" readonly value={icsHttp} onfocus="this.select()" /></p>
     <p>Titles start with "Due:" for deadlines, "Season:" for date ranges and "Tip:" for upkeep advice. The calendar also includes recycling and tire collection days and the state's heating bill help window when they are on our <a href={`${base}/calendar/`}>Dates and deadlines</a> page. It is the same for everyone, and we don't know who adds it.</p>
   </section>

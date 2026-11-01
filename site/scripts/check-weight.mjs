@@ -67,6 +67,20 @@ for (const r of rows) {
   console.log(`${kb(r.bytes)} KB  ${r.urgent ? 'urgent  ' : 'everyday'}  ${r.where} (${r.files} files)${flag}`);
 }
 const over = rows.filter((r) => r.bytes > r.budget);
+// Saved for the weekly scorecard (scripts/scorecard.mjs, #1052).
+const sizes = rows.map((r) => r.bytes).sort((a, b) => a - b);
+if (rows.length) fs.writeFileSync(path.join(dist, 'page-weight.json'), JSON.stringify({
+  about: 'Gzipped weight of each built page plus what it loads on a first visit. From site/scripts/check-weight.mjs.',
+  budget_kb: { urgent: URGENT_KB, everyday: EVERYDAY_KB },
+  summary: {
+    pages: rows.length,
+    median_kb: Number((sizes[Math.floor((sizes.length - 1) / 2)] / KB).toFixed(1)),
+    heaviest_kb: Number((rows[0].bytes / KB).toFixed(1)),
+    heaviest: rows[0].where,
+    urgent_heaviest_kb: Number((Math.max(0, ...rows.filter((r) => r.urgent).map((r) => r.bytes)) / KB).toFixed(1)),
+    over_budget: over.length,
+  },
+}, null, 1) + '\n');
 if (!rows.length) { console.error('check-weight: no pages found in dist/ (run npm run build first)'); process.exit(1); }
 if (over.length) {
   console.error(`\ncheck-weight: ${over.length} page(s) over budget. See "Weight budget" in docs/design/presentation.md.`);
