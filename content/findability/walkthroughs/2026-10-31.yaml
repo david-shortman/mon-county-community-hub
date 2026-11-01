@@ -678,7 +678,7 @@ results:
     before the search fix.
 - id: w11
   task: I feel like I can't go on.
-  who: Person in crisis at night
+  who: Person having a very hard time at night
   group: null
   need: mental-health-care
   before:
@@ -737,8 +737,8 @@ results:
       II1: 3
     total: 18
     out_of: 18
-  notes: The crisis line is on the top strip of every page, and the Mental health page opens with it. 'suicidal'
-    put the home page first, which shows the crisis line at the top, so this is not a dead end.
+  notes: The call-or-text help line is on the top strip of every page, and the Mental health page opens with it. 'suicidal'
+    put the home page first, which shows that help line at the top, so this is not a dead end.
 - id: w12
   task: I lost my job and need food stamps.
   who: Laid off worker

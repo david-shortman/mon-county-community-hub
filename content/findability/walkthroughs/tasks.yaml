@@ -89,7 +89,7 @@
   targets: [{url: /drugs-and-alcohol/, marker: "treatment|detox", path: [/drugs-and-alcohol/]}]
 - id: w11
   task: I feel like I can't go on.
-  who: Person in crisis at night
+  who: Person having a very hard time at night
   group: null
   need: mental-health-care
   searches: [suicidal, need someone to talk to]
