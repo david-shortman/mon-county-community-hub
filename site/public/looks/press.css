@@ -1,1 +1,276 @@
-/* Preview look "press" (#396). Loaded only when a visitor opens ?look=press. Rules are scoped under html[data-look="press"]. Built by the design wave phase 2 lane. */
+/* Preview look "press" (#396). Loaded only when a visitor opens ?look=press.
+   Every rule is scoped under html[data-look="press"]. Notes and contrast
+   numbers: docs/design/looks/press.md.
+
+   The idea: a small local paper, set by hand. A serif second voice for
+   headings, flat inks from the Coopers Rock sandstone and hemlock palette,
+   ruled lines instead of soft boxes, quilt geometry as a grid and as small
+   corner marks, and route steps that drop like the locks on the Mon.
+   No texture, no motion. Crisis strip, Quick exit and the tab bar stay plain,
+   and pages with a crisis strip or in Help now keep the plain heading face. */
+
+/* Newsreader (Production Type, SIL OFL 1.1, license in press/OFL.txt).
+   One static cut: weight 600, optical size 48, Latin subset, 14.3 KB.
+   Only downloaded on pages where a heading uses it, so never on crisis pages. */
+@font-face {
+  font-family: "Newsreader Press";
+  font-weight: 600; font-style: normal; font-display: swap;
+  src: url("press/newsreader-600.woff2") format("woff2");
+}
+
+/* ---------- Inks (tokens) ---------- */
+html[data-look="press"] {
+  --bg: #f6f1e6;        /* sandstone paper */
+  --card: #fffdf8;
+  --fg: #1f1d19;
+  --muted: #4a453b;
+  --line: #d6cab3;      /* deco only */
+  --accent: #24493d;    /* hemlock: links, dates, focus, the one "act" ink */
+  --accent-bg: #e7ece4; /* pale hemlock */
+  --sand: #ece2cd;      /* sandstone tint, for the Help now bar and notes */
+  --water: #1c4a50;     /* Cheat water: rules, step rail, step numbers */
+  --rust: #9a4b2c;      /* sandstone rust: quilt marks only, never text */
+  --brick: var(--rust);
+  --ridge: var(--water);
+  --serif: "Newsreader Press", Georgia, "Times New Roman", serif;
+  --kicker: var(--display);
+}
+@media (prefers-color-scheme: dark) {
+  html[data-look="press"] {
+    --bg: #171613; --card: #1f1d19; --fg: #eeeae0; --muted: #bcb5a6; --line: #3a352c;
+    --accent: #93cdb6; --accent-bg: #1f2a24; --sand: #2a261e;
+    --water: #8ccbd1; --rust: #d98c6c;
+  }
+}
+/* Crisis pages and the Help now door keep today's heading face: no serif, no font download. */
+html[data-look="press"]:has(.crisis-strip),
+html[data-look="press"]:has(nav.main .tab[href$="/stay-tonight/"][aria-current]) {
+  --serif: var(--display);
+}
+
+/* ---------- Type: two voices, five sizes ----------
+   Serif (Newsreader 600): h1, h2, h3, lede, door names, big dates.
+   Working voice (Atkinson 800): kickers, labels, the dateline.
+   Body stays on the system face. Sizes: 15.2px meta, 18px body,
+   ~21px h3 and lede, 28px h2, 34 to 48px h1. */
+html[data-look="press"] :is(h1, h2, h3) {
+  font-family: var(--serif); font-weight: 600; letter-spacing: -0.005em;
+  font-size-adjust: 0.47;
+}
+html[data-look="press"] h1 {
+  font-size: clamp(2.1rem, 1.55rem + 2.4vw, 2.75rem); line-height: 1.08; letter-spacing: -0.015em;
+  margin: 0.35em 0 0.3em;
+}
+html[data-look="press"] h1.front-h { font-size: clamp(2.3rem, 1.5rem + 3.4vw, 3rem); }
+html[data-look="press"] h2 { font-size: 1.75rem; line-height: 1.15; }
+html[data-look="press"] h3,
+html[data-look="press"] .card h3,
+html[data-look="press"] :is(.card.resource, .card.place) > h2 { font-size: 1.3rem; line-height: 1.22; }
+html[data-look="press"] .lede { font-size: 1.2rem; line-height: 1.5; color: var(--muted); }
+/* The front page lede is short, so it gets the serif voice too. */
+html[data-look="press"] .front-h + .lede {
+  font-family: var(--serif); font-weight: 600; font-size: 1.3rem; line-height: 1.4; font-size-adjust: 0.47;
+}
+html[data-look="press"] :is(.eyebrow, .mp-when) {
+  font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+}
+
+/* Section heads on the page get a printer's rule above them, like a column head. */
+html[data-look="press"] main > h2,
+html[data-look="press"] main > section:not(.note, .card, .right-now, .add-cal, .cant-wait) > h2:first-child,
+html[data-look="press"] .doors > h2 {
+  border-top: 2px solid var(--fg); padding-top: 0.4em; margin-top: 1.6em;
+}
+
+/* ---------- Masthead ---------- */
+html[data-look="press"] header.site {
+  border-bottom: 3px solid var(--fg);
+  box-shadow: 0 3px 0 var(--bg), 0 4px 0 var(--fg); /* thick and thin, the old newspaper rule */
+  margin-bottom: 4px;
+}
+html[data-look="press"] .dateline {
+  font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--fg);
+}
+html[data-look="press"] .dateline a { color: var(--fg); }
+@media (min-width: 40.01rem) {
+  html[data-look="press"] header.site .wrap {
+    max-width: 72rem; display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center;
+    row-gap: 6px; padding-block: 18px 6px;
+  }
+  html[data-look="press"] header.site .brand { margin: 0; font-size: 2rem; }
+  html[data-look="press"] .brand-mark { width: 48px; height: 48px; border-radius: 2px; }
+  html[data-look="press"] .dateline {
+    justify-self: stretch; text-align: center; padding: 5px 0;
+    border-block: 1px solid var(--fg);
+  }
+  /* The menu as a section index: plain words between thin rules. */
+  html[data-look="press"] nav.main { justify-content: center; gap: 0; }
+  html[data-look="press"] nav.main .wide {
+    color: var(--fg); text-decoration: none; padding: 0 9px; font-weight: 700; font-size: 1rem;
+    border-left: 1px solid var(--line);
+  }
+  html[data-look="press"] nav.main .wide:first-of-type { border-left: 0; }
+  html[data-look="press"] nav.main .wide:hover { text-decoration: underline; }
+  html[data-look="press"] nav.main .wide[aria-current] {
+    color: var(--accent); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px;
+  }
+}
+@media (max-width: 40rem) {
+  html[data-look="press"] .brand-mark { border-radius: 2px; }
+  /* Tab bar: same layout, only a firmer top edge. */
+  html[data-look="press"] nav.main { border-top: 2px solid var(--fg); }
+}
+
+/* ---------- Corners: one radius ---------- */
+html[data-look="press"] :is(.card, .note, .add-cal, .right-now, .crisis-line, .step, .milepost details,
+  .milepost summary, details.fold, details.fold > summary, .table-scroll, .pick label, .choice, .door,
+  .search input, .btn-search, .add-cal input, .skip) { border-radius: 2px; }
+html[data-look="press"] .btn { border-radius: 3px; border-width: 2px; }
+
+/* ---------- Cards: paper slips with a quilt corner ---------- */
+html[data-look="press"] .card { position: relative; border: 1px solid var(--line); border-top: 2px solid var(--fg); }
+html[data-look="press"] .card::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 14px; height: 14px; pointer-events: none;
+  background: linear-gradient(135deg, var(--quilt, var(--rust)) 50%, transparent 50%);
+}
+html[data-look="press"] .card.event { --quilt: var(--accent); }
+html[data-look="press"] .card:is(.place, .center, .group, .shop) { --quilt: var(--water); }
+html[data-look="press"] .card > :first-child { margin-top: 2px; }
+
+/* ---------- Home: Help now bar, plain and firm ---------- */
+html[data-look="press"] .right-now {
+  margin-top: 14px; background: var(--sand); border: 2px solid var(--fg); padding: 4px 14px 12px;
+}
+html[data-look="press"] .right-now .rn-h { font-family: var(--display); }
+
+/* ---------- Home: the doors as a pieced grid ---------- */
+html[data-look="press"] .door-list {
+  gap: 2px; background: var(--fg); border: 2px solid var(--fg); margin-top: 14px;
+}
+html[data-look="press"] .door {
+  position: relative; border: 0; border-radius: 0; background: var(--card); padding: 8px 16px 12px 22px;
+}
+html[data-look="press"] .door::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 16px; height: 16px;
+  background: linear-gradient(135deg, var(--quilt, var(--rust)) 50%, transparent 50%);
+}
+html[data-look="press"] .door:nth-child(3n+2) { --quilt: var(--water); }
+html[data-look="press"] .door:nth-child(3n) { --quilt: var(--accent); }
+html[data-look="press"] .door:has(.door-name:hover) { background: var(--accent-bg); }
+html[data-look="press"] .door-name {
+  font-family: var(--serif); font-weight: 600; font-size: 1.5rem; line-height: 1.15; color: var(--fg);
+  font-size-adjust: 0.47;
+}
+html[data-look="press"] .door-name .icon { display: none; } /* no icons in tinted circles */
+html[data-look="press"] .door-ex { gap: 0 16px; }
+
+/* Sentence entry lines: "I can't pay a bill", "Just moved here?" read as lines on a page. */
+html[data-look="press"] .sit-links { list-style: none; padding: 0; gap: 0; border-top: 2px solid var(--fg); }
+html[data-look="press"] .sit-links > li { border-bottom: 1px solid var(--line); }
+html[data-look="press"] .sit-links > li > a {
+  display: flex; align-items: center; gap: 12px; min-height: 52px; padding-block: 8px;
+  font-size: 1.2rem; font-weight: 600; text-decoration: none; color: var(--fg);
+}
+html[data-look="press"] .sit-links > li > a::before { /* a Flying Geese unit: one triangle pointing on */
+  content: ""; flex: none; width: 10px; height: 16px; background: var(--accent);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+html[data-look="press"] .sit-links > li > a:hover { text-decoration: underline; color: var(--accent); }
+
+html[data-look="press"] .home-band ul { gap: 0 24px; }
+html[data-look="press"] .home-band li { border-top: 1px solid var(--fg); }
+html[data-look="press"] .home-band.home-band.home-band li a { border: 0; border-radius: 0; background: none; padding: 10px 0 12px; }
+html[data-look="press"] .home-band strong {
+  font-family: var(--serif); font-weight: 600; font-size: 1.3rem; line-height: 1.22; font-size-adjust: 0.47;
+}
+
+/* Search box: a ruled field, not a pill. */
+html[data-look="press"] .search label { font-family: var(--serif); font-weight: 600; font-size: 1.3rem; }
+html[data-look="press"] .search input { border-width: 2px; }
+
+/* ---------- Notes and season cards: flat sandstone ink ---------- */
+html[data-look="press"] :is(.note, .add-cal) {
+  background: var(--sand); border-left: 0; border-top: 2px solid var(--fg); padding: 12px 16px;
+}
+html[data-look="press"] .card.season { background: var(--sand); border-left: 1px solid var(--line); }
+html[data-look="press"] .crisis-line { border-radius: 0; }
+
+/* The checked date (span.checked, #1395) reads like a printer's imprint: text ink, bold. */
+html[data-look="press"] .meta .checked { color: var(--fg); font-weight: 700; font-variant-numeric: lining-nums; }
+
+/* ---------- Dates: a printed listing ---------- */
+html[data-look="press"] .date-chip { align-items: baseline; color: var(--accent); }
+html[data-look="press"] .date-chip > span:first-child {
+  font-family: var(--serif); font-weight: 600; font-size: 1.45rem; line-height: 1.15;
+  font-variant-numeric: lining-nums tabular-nums; font-size-adjust: 0.47;
+}
+html[data-look="press"] .date-chip .rel {
+  font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase;
+}
+html[data-look="press"] .week.week.week ul { list-style: none; padding: 0; margin: 8px 0; }
+html[data-look="press"] .week.week.week li { border-bottom: 1px solid var(--line); padding: 6px 0; }
+html[data-look="press"] .week.week.week li > a { display: grid; grid-template-columns: 6.6rem minmax(0, 1fr); gap: 0 12px; }
+html[data-look="press"] .week.week.week .day {
+  font-family: var(--serif); font-weight: 600; color: var(--accent); margin: 0; font-variant-numeric: lining-nums tabular-nums;
+}
+html[data-look="press"] .week.week.week .rel { display: block; padding-left: calc(6.6rem + 12px); font-size: 0.95rem; color: var(--muted); }
+@media (max-width: 22rem) {
+  html[data-look="press"] .week.week.week li > a { grid-template-columns: minmax(0, 1fr); }
+  html[data-look="press"] .week.week.week .rel { padding-left: 0; }
+}
+
+/* ---------- Trailhead: lock steps ----------
+   The rail drops one notch to the right at every step, like the pools behind
+   the locks and dams on the Mon. Step numbers are square gates on the rail. */
+html[data-look="press"] .route { border-left: 0; margin-left: 0; padding-left: 48px; gap: 14px; }
+html[data-look="press"] .milepost { --x: 10px; }
+html[data-look="press"] .milepost:nth-child(2) { --x: 16px; }
+html[data-look="press"] .milepost:nth-child(3) { --x: 22px; }
+html[data-look="press"] .milepost:nth-child(4) { --x: 28px; }
+html[data-look="press"] .milepost:nth-child(n+5) { --x: 34px; }
+html[data-look="press"] .milepost::before {
+  content: ""; position: absolute; left: calc(var(--x) - 48px); top: 20px; bottom: -34px; width: 6px;
+  border-left: 3px solid var(--water); border-bottom: 3px solid var(--water);
+}
+html[data-look="press"] .milepost:nth-child(n+5)::before { width: 0; } /* after step 5 the rail runs straight */
+html[data-look="press"] .milepost:last-child::before { bottom: auto; height: 12px; border-bottom: 0; }
+html[data-look="press"] .mp-num {
+  left: calc(var(--x) - 48px - 14px); top: 12px; width: 30px; height: 30px; border-radius: 2px;
+  background: var(--water); color: var(--card); border: 3px solid var(--bg);
+  font-family: var(--serif); font-weight: 600; font-size: 1.05rem; font-variant-numeric: lining-nums;
+}
+html[data-look="press"] .milepost summary h2 { color: var(--fg); }
+html[data-look="press"] .milepost details { border-top: 2px solid var(--fg); }
+html[data-look="press"] .milepost details[open] { background: var(--card); }
+html[data-look="press"] .mp-body { border-top-color: var(--line); }
+
+/* Door page step lists: square markers on the water rail. */
+html[data-look="press"] .steps { border-left-color: var(--water); }
+html[data-look="press"] .step::before { border-radius: 0; background: var(--water); }
+
+/* ---------- Not found: a Log Cabin block, the plainest empty state ---------- */
+html[data-look="press"]:has(meta[name="robots"][content^="noindex"]) main:has(> section.note #help-now-h) > h1::before {
+  content: ""; display: block; width: 56px; height: 56px; margin: 0 0 18px;
+  background: var(--rust);
+  -webkit-mask: url("press/log-cabin.svg") center / contain no-repeat; mask: url("press/log-cabin.svg") center / contain no-repeat;
+}
+
+/* ---------- Footer: the same thick and thin rule closes the page ---------- */
+html[data-look="press"] footer.site {
+  border-top: 3px solid var(--fg); box-shadow: inset 0 3px 0 var(--bg), inset 0 4px 0 var(--fg);
+  padding-top: 24px;
+}
+
+/* ---------- Focus: a firm hemlock outline on every focusable thing ---------- */
+html[data-look="press"] :is(a, button, summary, input):focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* High contrast mode: drop the quilt marks and rules that rely on fills. */
+@media (forced-colors: active) {
+  html[data-look="press"] :is(.card, .door, .milepost)::before { display: none; }
+  html[data-look="press"] header.site { box-shadow: none; }
+}
+@media print {
+  html[data-look="press"] :is(.card, .door, .milepost)::before { display: none; }
+}
