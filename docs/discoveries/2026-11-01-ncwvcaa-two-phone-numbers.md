@@ -5,4 +5,4 @@
 - **Evidence:** https://ncwvcaacorp.net/counties/monongalia-county-office-2/ and https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php, both read 2026-10-30.
 - **Why it matters:** people looking for weatherization or tax help may call a number that is not the Mon County office.
 - **Who keeps it:** North Central West Virginia Community Action Association
-- **Status:** open, #1209
+- **Status:** resolved 2026-11-01 (#1209). The agency's Mon County office page lists 304-363-4367 for the Westover office; 304-363-2170 is the main office line in the site header.
