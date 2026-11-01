@@ -341,7 +341,10 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
       .on-page { margin: 12px 0 16px; }
       .on-page p { margin: 0; font-weight: 600; }
       .on-page ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 16px; }
-      .on-page a { display: inline-flex; align-items: center; min-height: 44px; }
+      .on-page a, .link-row a { display: inline-flex; align-items: center; min-height: 44px; }
+      .link-row { margin: 12px 0 16px; }
+      .link-row h2 { font-size: 1.1rem; margin: 0; }
+      .link-row ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 16px; }
       details.fold { margin: 20px 0; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
       details.fold > summary { cursor: pointer; list-style: none; padding: 8px 44px 8px 14px; position: relative; border-radius: 10px; min-height: 44px; display: flex; align-items: center; }
       details.fold > summary::-webkit-details-marker { display: none; }
