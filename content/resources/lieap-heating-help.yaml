@@ -7,10 +7,19 @@ what_to_do: DoHS starts mailing 2026-27 applications on Monday, November 2, 2026
 contact:
   phone: "800-642-8589"
   url: https://www.wvpath.wv.gov
+what_to_bring:
+  - Name, Social Security number and birth date of everyone living in your home
+  - Proof of all household income if anyone in the home works, such as check stubs, award letters or a statement from the employer
+  - A recent heating bill that shows the account number, or a bulk fuel receipt. If you have neither, other proof of your monthly heating cost, such as last winter's receipts (if your address and heat source have not changed) or a note from your landlord or utility
+  - If your household has no income, a form that explains how you have paid your living costs
+  - An electric bill, if electric is not your main heat
+  - A phone number where you can be reached or get a message
+what_happens: DoHS says it processes each application within 30 days of getting it, or of the program opening if that is later. If it needs more information, it contacts you and gives you 15 calendar days to send it. If you apply in person, bring your papers to the interview. Emergency LIEAP opens after regular LIEAP closes. It is for a shutoff notice or running out of fuel, and you apply for it in person at a DoHS office.
+if_you_want_help: [monongalia-county-dohs-office]
 sources:
   - url: https://dohs.wv.gov/article/west-virginia-department-human-services-announces-lieap-application-mailing-beginning
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
     checked: 2026-10-31
   - url: https://bfa.wv.gov/media/39943/download?inline
-    checked: 2026-10-31
+    checked: 2026-11-01
