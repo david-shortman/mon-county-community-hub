@@ -14,3 +14,7 @@ sources:
     checked: 2026-11-01
   - url: https://sos.wv.gov/early-voting-locations
     checked: 2026-11-01
+hidden:
+  reason: other
+  since: 2026-11-01
+  note: Early voting ended Saturday, October 31, 2026. Election Day is Tuesday, November 3.
