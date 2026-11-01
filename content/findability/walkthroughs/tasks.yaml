@@ -1,0 +1,234 @@
+# Simulated resident tasks for the walkthrough check (#529, sprint wave 6).
+# These are made-up tasks, not real residents or real feedback. Each comes
+# from a resident group (docs/groups/), a need on the needs register
+# (content/needs/), or a findability question.
+#
+# searches: two things a stressed resident might type in the site search.
+# targets: the page that answers the task. marker is a regular expression for
+#   the answer's first words on that page. path is the links tapped from the
+#   home page, in order. A door page link counts 3 taps when it sits behind
+#   the "pick what is going on" list (tick, Show my steps, tap the link).
+# need: the needs register entry (content/needs/), if any.
+# answer: all (every target is needed) or any (one target is enough).
+# after_path: a shorter path that a fix PR adds, measured in the after run.
+- id: w01
+  task: My power gets shut off Friday and I can't pay.
+  who: Renter with a shutoff notice
+  group: renters
+  need: utility-bills
+  searches: [power shut off friday, shutoff notice]
+  targets: [{url: /utility-bills/, marker: "shut ?off|shutoff", path: [/utility-bills/]}]
+- id: w02
+  task: I just moved here and need a library card and to register to vote.
+  who: New resident from out of state
+  group: new-residents
+  need: null
+  searches: [library card, register to vote]
+  answer: all
+  targets:
+    - {url: /meet-people/, marker: "library card", path: [/community/, /meet-people/]}
+    - {url: /vote/, marker: "register", path: [/living-here/, /vote/]}
+- id: w03
+  task: My mom is 70 and needs rides to dialysis three times a week.
+  who: Adult child helping an older parent
+  group: older-adults
+  need: transportation
+  searches: [rides to dialysis, ride to doctor for senior]
+  targets: [{url: /medical-rides/, marker: "dialysis|ride", path: [/care/, /medical-rides/]}]
+- id: w04
+  task: I'm a WVU student and I can't afford groceries.
+  who: College student
+  group: college-students
+  need: enough-food
+  searches: [wvu student food pantry, student can't afford groceries]
+  answer: any
+  targets:
+    - {url: /money/#students, marker: "The Rack", path: [/money/, /money/#students]}
+    - {url: /help/food/today/student/, marker: "Rack", path: [/help/food/, /help/food/today/, /help/food/today/student/]}
+- id: w05
+  task: A storm flooded my basement last night.
+  who: Homeowner
+  group: homeowners
+  need: null
+  searches: [basement flooded, flood damage help]
+  targets: [{url: /after-a-storm/, marker: "flood", path: [/living-here/, /after-a-storm/]}]
+- id: w06
+  task: I have nowhere to sleep tonight and it's freezing.
+  who: Person without housing
+  group: null
+  need: homelessness
+  searches: [warming shelter tonight, homeless shelter]
+  targets: [{url: /stay-tonight/, marker: "tonight|shelter", path: [/stay-tonight/]}]
+- id: w07
+  task: I got an eviction notice taped to my door.
+  who: Renter behind on rent
+  group: renters
+  need: housing-costs
+  searches: [eviction notice, evicted what do i do]
+  targets: [{url: /money/#rent, marker: "evict", path: ["/money/?pick=rent"]}]
+- id: w08
+  task: My kid needs shots before school starts.
+  who: Parent of a kindergartner
+  group: parents-school-age
+  need: null
+  searches: [school shots, kindergarten vaccines]
+  targets: [{url: /school-shots/, marker: "shot", path: [/family/, /school-age/, /school-shots/]}]
+- id: w09
+  task: I have no insurance and my tooth is killing me.
+  who: Uninsured adult with tooth pain
+  group: null
+  need: paying-for-health-care
+  searches: [toothache no insurance, cheap dentist]
+  targets: [{url: /dental-and-prescriptions/, marker: "dent", path: [/care/, /dental-and-prescriptions/]}]
+- id: w10
+  task: My brother is using again. Where can he get treatment?
+  who: Family member
+  group: null
+  need: drugs-and-overdose
+  searches: [rehab, detox near me]
+  targets: [{url: /drugs-and-alcohol/, marker: "treatment|detox", path: [/drugs-and-alcohol/]}]
+- id: w11
+  task: I feel like I can't go on.
+  who: Person in crisis at night
+  group: null
+  need: mental-health-care
+  searches: [suicidal, need someone to talk to]
+  targets: [{url: /mental-health/, marker: "talk with you", path: [/mental-health/]}]
+- id: w12
+  task: I lost my job and need food stamps.
+  who: Laid off worker
+  group: job-seekers
+  need: enough-food
+  searches: [food stamps, apply for snap]
+  targets: [{url: /snap/, marker: "apply", path: [/help/food/, /help/food/monthly/, /snap/]}]
+- id: w13
+  task: I need child care so I can go back to work.
+  who: Parent of a toddler
+  group: parents-young-kids
+  need: child-care
+  searches: [daycare, help paying for child care]
+  targets: [{url: /families-and-kids/, marker: "child care", path: [/family/, /families-and-kids/]}]
+  after_path: {url: /families-and-kids/#child-care, path: [/family/, /families-and-kids/#child-care], pr: 1163}
+- id: w14
+  task: I turn 65 in March. How do I sign up for Medicare?
+  who: Older adult
+  group: older-adults
+  need: null
+  searches: [sign up for medicare, turning 65]
+  targets: [{url: /turning-65/, marker: "sign up|enroll", path: [/turning-65/]}]
+- id: w15
+  task: I'm pregnant and don't have a doctor or insurance.
+  who: Pregnant woman, uninsured
+  group: parents-young-kids
+  need: paying-for-health-care
+  searches: [pregnant no insurance, prenatal care]
+  targets: [{url: /pregnant-or-new-baby/, marker: "Medicaid|insurance", path: [/care/, /pregnant-or-new-baby/]}]
+- id: w16
+  task: I moved from Pennsylvania. How do I get a West Virginia driver's license?
+  who: New resident
+  group: new-residents
+  need: null
+  searches: [transfer drivers license, dmv]
+  targets: [{url: /drivers-license/, marker: "license", path: [/living-here/, /drivers-license/]}]
+- id: w17
+  task: What day is my trash picked up?
+  who: Homeowner
+  group: homeowners
+  need: null
+  searches: [trash day, garbage pickup]
+  targets: [{url: /recycling/#pickup, marker: "pickup", path: ["/living-here/?pick=pickup"]}]
+- id: w18
+  task: Where do I get rid of old tires and a broken TV?
+  who: Renter cleaning out a garage
+  group: renters
+  need: null
+  searches: [tire disposal, old tv recycling]
+  targets: [{url: /recycling/#hard-items, marker: "tire", path: [/living-here/, /recycling/#hard-items]}]
+- id: w19
+  task: I'm a veteran and I could lose my apartment.
+  who: Veteran
+  group: veterans
+  need: homelessness
+  searches: [veteran housing help, veteran homeless]
+  targets: [{url: /veterans/, marker: "hous", path: [/veterans/]}]
+- id: w20
+  task: I care for my dad with dementia and I need a break.
+  who: Family caregiver
+  group: disability-caregivers
+  need: null
+  searches: [respite care, dementia caregiver help]
+  targets: [{url: /caregivers/, marker: "respite|break", path: [/family/, /caregivers/]}]
+- id: w21
+  task: I got a letter saying I have to renew my Medicaid.
+  who: Adult on Medicaid
+  group: null
+  need: paying-for-health-care
+  searches: [medicaid renewal, medicaid letter]
+  targets: [{url: /medicaid-2027/, marker: "renew", path: [/medicaid-2027/]}]
+- id: w22
+  task: I can't afford internet for my kid's homework.
+  who: Parent on a tight budget
+  group: parents-school-age
+  need: wages-and-cost-of-living
+  searches: [cheap internet, internet for low income]
+  targets: [{url: /internet/, marker: "internet", path: [/living-here/, /internet/]}]
+- id: w23
+  task: I want to sell cookies and cakes I bake at home.
+  who: Home baker
+  group: small-business
+  need: null
+  searches: [cottage food, sell baked goods from home]
+  targets: [{url: /selling-food/, marker: "home", path: [/family/, /selling-food/]}]
+- id: w24
+  task: My landlord won't fix the heat.
+  who: Renter
+  group: renters
+  need: housing-costs
+  searches: [landlord won't fix heat, repairs landlord]
+  targets: [{url: /renting/, marker: "repair", path: [/money/, /renting/]}]
+  after_path: {url: /renting/#repairs, path: [/living-here/, /renting/#repairs], pr: 1156}
+- id: w25
+  task: I need a job but I don't have a car.
+  who: Job seeker
+  group: job-seekers
+  need: transportation
+  searches: [jobs, job center]
+  targets: [{url: /find-a-job/, marker: "job", path: ["/family/?pick=job", /work-and-learning/, /find-a-job/]}]
+- id: w26
+  task: I'm 68. Can I get a break on my property tax?
+  who: Older homeowner
+  group: older-adults
+  need: null
+  searches: [homestead exemption, senior property tax]
+  targets: [{url: /property-tax/, marker: "homestead", path: [/money/, /property-tax/]}]
+- id: w27
+  task: My dad just died. What do I do first?
+  who: Adult child
+  group: null
+  need: null
+  searches: [someone died, death certificate]
+  targets: [{url: /when-someone-dies/, marker: "death|died", path: [/living-here/, /when-someone-dies/]}]
+- id: w28
+  task: I need free help doing my taxes.
+  who: Worker
+  group: null
+  need: wages-and-cost-of-living
+  searches: [free tax help, file taxes free]
+  answer: any
+  targets:
+    - {url: /free-tax-help/, marker: "free", path: [/money/, /free-tax-help/]}
+    - {url: /money/#taxes, marker: "tax", path: [/money/, /money/#taxes]}
+- id: w29
+  task: I take the bus to work. Is there a cheaper bus pass?
+  who: Bus rider
+  group: null
+  need: transportation
+  searches: [bus pass, half fare bus]
+  targets: [{url: /bus-passes/, marker: "pass", path: [/living-here/, /bus-passes/]}]
+- id: w30
+  task: I'm lonely since I retired and want to meet people.
+  who: Retiree living alone
+  group: older-adults
+  need: loneliness
+  searches: [senior center, meet people]
+  targets: [{url: /community-centers/, marker: "senior", path: [/community/, /community-centers/]}]
