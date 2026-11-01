@@ -13,6 +13,8 @@
 // An "On this page" jump list sits above the picker so a reader whose need
 // is not a choice can skip the long parts (#1174). A page with its own
 // sections passes them as jump={[['#id', 'Label']]}.
+// A page can put a short block right under the lede and the "can't wait"
+// strip with slot="top" (the Family door's big life changes row, #1287).
 // A situation shows only once its page exists. Steps carry no facts of their
 // own: phone, link, cost and source come from the step's resource record.
 import Actions from './Actions.astro';
@@ -67,6 +69,8 @@ const online = steps.map((st) => resource(st.resource)).filter((r, i, a) => r?.c
     <SourceLine sources={cw.sources} org={cw.org} about={cw.title}>{data.cant_wait.emergency && ' 911 is the standard emergency number.'}</SourceLine>
   </section>
 )}
+
+<slot name="top" />
 
 <OnThisPage items={[
   ['#pick-h', 'Pick what is going on'],
