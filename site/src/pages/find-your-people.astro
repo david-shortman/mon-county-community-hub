@@ -9,6 +9,7 @@ import GroupCard from '../components/GroupCard.astro';
 import HelpWanted from '../components/HelpWanted.astro';
 import Fold from '../components/Fold.astro';
 import { BUCKETS, loadDirectory, inBucket, areasWithout } from '../lib/people.mjs';
+import CheckedRange from '../components/CheckedRange.astro';
 import { SECTION } from '../lib/places.mjs';
 import { loadPages } from '../lib/pages.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -30,6 +31,7 @@ const also = [
 <Base title="Find your people in Mon County: groups, clubs, places to sit" description="Recurring groups in Morgantown and Monongalia County, from game nights and craft circles to runs, rides and dances, plus free places to sit. Answer three questions for three picks, or browse the lists.">
   <h1>Find your people</h1>
   <p class="lede">Groups that meet again and again, and places you can sit without buying anything. Answer three questions for three picks, or scroll the lists.</p>
+  <CheckedRange sources={[...dir.groups, ...dir.libraries].map((p) => p.sources)} what="groups and libraries" />
 
   <form id="finder" class="card" hidden>
     <fieldset>

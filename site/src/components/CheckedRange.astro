@@ -1,0 +1,20 @@
+---
+// A short "When we checked" line for a page of many listings (#1288), so the
+// first screen says how fresh the listings are even when every card sits in
+// a closed section. Each listing's own card still shows its source and date.
+//   sources: one list of sources per listing ([[{ url, checked }], ...])
+//   what: what the listings are, like "centers" or "groups and places"
+import { ymd, prettyDate } from '../lib/content.mjs';
+const { sources = [], what = 'listings' } = Astro.props;
+// Each listing counts by its oldest source, like its card does.
+const dates = sources.map((list) => (list ?? []).map((s) => ymd(s.checked)).filter(Boolean).sort()[0]).filter(Boolean).sort();
+const oldest = dates[0];
+const newest = dates.at(-1);
+---
+{oldest && (
+  <p class="meta checked-range">
+    {oldest === newest
+      ? `We checked all ${dates.length} ${what} on ${prettyDate(oldest)}.`
+      : `We checked these ${dates.length} ${what} between ${prettyDate(oldest)} and ${prettyDate(newest)}. Each one shows its own date.`}
+  </p>
+)}
