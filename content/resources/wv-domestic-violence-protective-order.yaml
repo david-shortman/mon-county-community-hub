@@ -11,7 +11,8 @@ steps:
   - "Family Court holds the final hearing no later than 10 days later. Go to it, or the case may be dismissed. Bring police or medical reports, text messages, photos and other proof. You do not need a lawyer."
   - "The Family Court judge can give a protective order for 90 or 180 days. You can ask to extend it before it ends."
 notes:
-  - "If the magistrate says no, you can appeal within 5 days with form MDVDNYE, the petition says."
+  - "If the magistrate says no, you can appeal to Family Court within 5 days with form MDVDNYE. The form says there is no filing fee for the appeal, and Family Court must hear it within 10 days."
+  - "If you disagree with the Family Court's decision, state law says you can appeal to Circuit Court within 10 days."
   - "In Monongalia County, a court form lets you take part in the final hearing by video from the local advocacy center instead of the courtroom. File it at least 48 hours before the hearing."
   - Protective orders work in every county in West Virginia, and the courts say emergency orders work in other states too.
 contact:
@@ -24,8 +25,12 @@ if_you_want_help: [rdvic-court-advocacy, legal-aid-wv-civil-legal-help]
 sources:
   - url: https://www.courtswv.gov/public-resources/domestic-violence
     checked: 2026-10-31
-  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2023-06/DV_Brochure_English_2019.pdf
-    checked: 2026-10-31
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-04/DV_Brochure_English_R.pdf
+    checked: 2026-11-01
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-03/MDVDNYE.pdf
+    checked: 2026-11-01
+  - url: https://code.wvlegislature.gov/48-27-510/
+    checked: 2026-11-01
   - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-04/MDVPETNCombo.pdf
     checked: 2026-10-31
   - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-03/MDVNORP-Monongalia.pdf

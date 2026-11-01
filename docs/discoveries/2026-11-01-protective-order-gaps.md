@@ -6,3 +6,4 @@
 - **Why it matters:** A person in danger at night needs to know where to go, and anyone filing needs to know what it may cost.
 - **Who keeps it:** Supreme Court of Appeals of West Virginia; Monongalia County Magistrate Court; RDVIC
 - **Status:** open (#1234)
+- **Update, sweep 3 (#529):** The courts now link a revised brochure (https://www.courtswv.gov/sites/default/pubfilesmnt/2026-04/DV_Brochure_English_R.pdf), which still says magistrates are on call 24 hours a day. Form MDVDNYE (https://www.courtswv.gov/sites/default/pubfilesmnt/2026-03/MDVDNYE.pdf) says the denial appeal "must be filed, in the Magistrate Clerk's office," which still differs from the petition form. W. Va. Code §48-27-510 sends the appeal to family court but does not name an office. All read 2026-11-01.
