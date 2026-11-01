@@ -1,0 +1,13 @@
+of: parts/CrisisStrip
+lang: es
+strings:
+  label: Peligro o crisis
+  danger: ¿Peligro? Llame al
+  crisis: ¿Crisis? Llame o envíe un mensaje de texto al
+  quick_exit: Salida rápida
+  what_is_this: ¿Qué es esto?
+english_hash: 5e06b87e1a21
+method: machine-plus-review
+translated: 2026-11-01
+reviewed: false
+notes: Claude draft (#1101). A fluent Spanish reader checks every line against the English before this goes live. See docs/reviews/2026-11-01-spanish-pilot.md.
