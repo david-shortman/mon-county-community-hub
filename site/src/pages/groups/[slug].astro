@@ -1,0 +1,84 @@
+---
+// One group's page (src/lib/group-pages.mjs, docs/operations/group-pages.md): how its listings look on this
+// site and how to ask for a fix. Printable. Speaks the same way the For
+// groups page does; it never says a group works with us.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { loadCalendarWithFeeds, prettyRange, prettyDate, oldestChecked, telHref } from '../../lib/content.mjs';
+import { groupPages, KIND_LABELS, AREA_LABELS } from '../../lib/group-pages.mjs';
+import { fixFormUrl, FIX_EMAIL, REQUEST_DAYS } from '../../lib/group-requests.mjs';
+
+export async function getStaticPaths() {
+  return groupPages(await loadCalendarWithFeeds()).map((g) => ({ params: { slug: g.org.slug }, props: g }));
+}
+const { org, name, listings, dates, sheets } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const here = Astro.url.pathname;
+const fixGroup = fixFormUrl({ listing: org.slug, page: here });
+const api = (p) => `${base}/api/v1/${p}`;
+const checked = oldestChecked(org.sources);
+---
+<Base title={`${name} on Everything Morgantown`} description={`What Everything Morgantown lists about ${org.name} in Morgantown and Mon County: ${listings.length} listing${listings.length === 1 ? '' : 's'}, upcoming dates, sources, and how to ask for a fix.`}>
+  <h1>{org.name} on this site</h1>
+  <p class="lede">This page shows all we list about this group, just as residents see it. You can ask us to fix or remove any of it. A listing here does not mean {org.name} works with us or approves of the site.</p>
+
+  <ul class="jump no-print">
+    <li><a href="#about">What we say about the group</a></li>
+    {listings.length > 0 && <li><a href="#listings">Its listings ({listings.length})</a></li>}
+    {dates.length > 0 && <li><a href="#dates">Its upcoming dates ({dates.length})</a></li>}
+    <li><a href="#fix">Fix or remove something</a></li>
+    <li><a href="#reuse">Reuse these listings</a></li>
+  </ul>
+
+  <h2 id="about">What we say about the group</h2>
+  <div class="card">
+    <p><strong>{org.name}</strong> ({KIND_LABELS[org.kind] ?? org.kind}, {AREA_LABELS[org.area] ?? org.area})</p>
+    <p>{org.summary}</p>
+    {org.phone && <p>Phone: <a href={telHref(org.phone)}>{org.phone}</a></p>}
+    {org.website && <p>Website: <a href={org.website}>{org.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}</a></p>}
+    <SourceLine sources={org.sources} about={org.name} />
+  </div>
+
+  {listings.length > 0 ? (
+    <>
+      <h2 id="listings">Its listings</h2>
+      <p>These are the programs and services we list for {org.name}. Residents see each one as a card like this on our pages.</p>
+      {listings.map((r) => <ResourceCard r={r} showCost />)}
+    </>
+  ) : (
+    <p>We don't list any programs or services for {org.name} yet. If you run one, you can <a href={fixFormUrl({ page: here })}>tell us about it</a>.</p>
+  )}
+
+  {sheets.length > 0 && (
+    <>
+      <h3>On printable sheets</h3>
+      <p>Its listings are also on these sheets that people print and hand out:</p>
+      <ul>{sheets.map((s) => <li><a href={`${base}/print/${s.slug}/`}>{s.name}</a></li>)}</ul>
+    </>
+  )}
+
+  {dates.length > 0 && (
+    <>
+      <h2 id="dates">Its upcoming dates</h2>
+      <ul>{dates.map((e) => <li><a href={`${base}/calendar/#${e.slug}`}>{e.title}</a>: {prettyRange(e.starts, e.ends)}. Checked {prettyDate(oldestChecked(e.sources))}.</li>)}</ul>
+    </>
+  )}
+
+  <h2 id="fix">Fix or remove something</h2>
+  <p>You can ask us to fix anything on this page, add a program we missed, or take a listing down. You don't need an account.</p>
+  <ul>
+    <li><strong>Use our <a href={fixGroup}>fix or removal form</a>.</strong> It already knows this page. What you send is not posted. Your email is optional.</li>
+    <li><strong>Or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>.</strong> Tell us the group, the listing, and what should change.</li>
+  </ul>
+  <p>We only post facts we can find on a public page, like your own website, and we link to it. We aim to finish a request, or take the item down, within {REQUEST_DAYS} days. More on how this works is on the <a href={`${base}/partners/`}>For groups and helpers</a> page.</p>
+  {checked && <p class="meta">We last checked the group's own details on {prettyDate(checked)}.</p>}
+
+  <h2 id="reuse">Reuse these listings</h2>
+  <p>You can reuse anything here for free, with credit to Everything Morgantown (CC BY 4.0).</p>
+  <ul>
+    <li>This group as data: <a href={api(`orgs/${org.slug}.json`)}>{org.slug}.json</a>{listings.length > 0 && <>, and its listings: {listings.map((r, i) => <>{i > 0 && ', '}<a href={api(`resources/${r.slug}.json`)}>{r.slug}.json</a></>)}</>}. See the <a href={`${base}/data/`}>open data page</a>.</li>
+    <li>To print this page, use your browser's Print button.</li>
+  </ul>
+  <p class="no-print"><a href={`${base}/groups/`}>See every group we list</a></p>
+</Base>

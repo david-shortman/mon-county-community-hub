@@ -17,7 +17,6 @@ const notAnchor = (f) => f.includes('=') || f.startsWith(':~:');
 // failing. Remove each line once its PR merges.
 const WAITING = [
   [/^\/404\.html: <link href="https:\/\/everythingmorgantown\.org\/404\/">/, '#938 (the 404 page gets no canonical link)'],
-  [/^\/(tonight|mental-health|drugs-and-alcohol)\/: link to [^ ]+#leave-note,/, '#1126 (every crisis page gets the Quick exit note)'],
 ];
 
 const ids = new Map();

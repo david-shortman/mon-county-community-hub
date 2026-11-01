@@ -1,0 +1,41 @@
+---
+// Family court, custody and child support in Mon County (#1181, gap from
+// #1178, sprint #529). Facts come from the records, each read on a WV courts,
+// Circuit Clerk, BCSE or Legal Aid page on 2026-10-31. Left off until a person
+// confirms them (#1219): the sheriff
+// service fee ($30 in state packets, $25 on the clerk's page), the custody or
+// support petition fee (only on the undated clerk page), copy fees, and the
+// local BCSE office hours.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "family", label: "Family court, custody and child support", summary: "Starting a divorce, custody and parenting plans, the parent class, and applying for, paying or changing child support in Mon County" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Family court, custody and child support in Mon County, WV" description="Family Court in Monongalia County, WV: where to file, the divorce fee and free state forms, custody without a divorce, parenting plans and mediation, the $25 parent class, and applying for, paying or changing child support through the state BCSE.">
+  <h1>Family court, custody and child support</h1>
+  <p class="lede">The state court forms for divorce and custody are free online, any time, with instructions. Legal Aid of West Virginia has a free tool that fills them out with you. For child support, you can apply online with the state, and the service is free. This page says where to go. It is not legal advice.</p>
+
+  <p>Not safe at home? See <a href={`${base}/stay-tonight/#safe`}>safe from someone</a> and <a href={`${base}/protective-orders/`}>protective orders</a>.</p>
+
+  <h2 id="court">Where Family Court is</h2>
+  <ResourceCard r={resource('mon-family-court')} showCost />
+
+  <h2 id="divorce">Start a divorce</h2>
+  <ResourceCard r={resource('wv-divorce-forms')} showCost />
+  <ResourceCard r={resource('legal-aid-wv-guided-self-help-forms')} showCost />
+  <p>For free or low cost legal help, see <a href={`${base}/legal-help/#free-help`}>courts and legal help</a>.</p>
+
+  <h2 id="custody">Custody and parenting plans</h2>
+  <ResourceCard r={resource('wv-custody-support-petition')} showCost />
+  <ResourceCard r={resource('wv-parenting-plan-and-mediation')} showCost />
+  <ResourceCard r={resource('wv-parent-education-class')} showCost />
+
+  <h2 id="child-support">Child support</h2>
+  <ResourceCard r={resource('bcse-child-support-services')} showCost />
+  <ResourceCard r={resource('bcse-pay-child-support')} showCost />
+  <ResourceCard r={resource('change-a-child-support-order')} showCost />
+
+  <p class="meta">Sources checked October 31, 2026. Court fees and rules change, so check with the Circuit Clerk before you file. We could not confirm the fee to have the sheriff serve papers or the fee for a custody or support case without a divorce on a current official page, so ask the clerk. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

@@ -1,0 +1,29 @@
+---
+// Every group we list, A to Z, each linking to its own page
+// (src/lib/group-pages.mjs) so a group can find what we say about it.
+import Base from '../../layouts/Base.astro';
+import { loadCalendarWithFeeds } from '../../lib/content.mjs';
+import { groupPages } from '../../lib/group-pages.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: "about", label: "Every group we list", summary: "Find your group's page: what we list about it and how to ask for a fix" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const groups = groupPages(await loadCalendarWithFeeds());
+const letters = [...new Set(groups.map((g) => g.org.name[0].toUpperCase()))];
+const letterId = (l) => `letter-${/[A-Z]/.test(l) ? l.toLowerCase() : 'num'}`;
+---
+<Base title="Every group Everything Morgantown lists in Mon County" description="Find your group's page on Everything Morgantown: what we list about each Morgantown and Mon County group, its sources, and how to ask for a fix.">
+  <h1>Every group we list</h1>
+  <p class="lede">We list {groups.length} groups, offices and programs. Each has a page that shows what we say about it, where each fact came from, and how to ask us to fix or remove it.</p>
+  <p>Don't see your group? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us about it</a>. A listing does not mean a group works with us.</p>
+  <nav aria-label="Jump to a letter" class="no-print"><ul class="letters">{letters.map((l) => <li><a href={`#${letterId(l)}`}>{l}</a></li>)}</ul></nav>
+  {letters.map((l) => (
+    <section aria-labelledby={letterId(l)}>
+      <h2 id={letterId(l)}>{l}</h2>
+      <ul>{groups.filter((g) => g.org.name[0].toUpperCase() === l).map((g) => <li><a href={`${base}/groups/${g.org.slug}/`}>{g.name}</a>{g.listings.length > 0 && <span class="meta"> ({g.listings.length} listing{g.listings.length === 1 ? '' : 's'})</span>}</li>)}</ul>
+    </section>
+  ))}
+</Base>
+<style>
+  .letters { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .letters a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; border: 1.5px solid var(--accent); border-radius: 8px; font-weight: 600; text-decoration: none; }
+</style>

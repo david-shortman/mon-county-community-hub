@@ -1,0 +1,27 @@
+# "Also called" (#529): other plain words people use for what a page covers.
+# Each page listed here shows one line near its end, "Also called: ...", and
+# the site search (Pagefind) finds the page by those words too.
+#
+# Rules:
+# - Only words a reader would use for what the page really covers. If the page
+#   does not answer it, fix the page or leave the word off.
+# - Short: 2 to 6 entries, each a few words. No misspellings (those go in
+#   SPELLING in site/src/lib/search-plan.mjs) and no group or brand names.
+# - Each key is a page's web path. Keep keys in alphabetical order.
+# - Pages about shelter, safety lines, food or benefits wait for David, like
+#   any change to what those pages show (docs/COORDINATION.md).
+# Test the effect with `npm run search-test` in site/ (docs/operations/search-test.md).
+/accessible-parking-placard/: [handicap placard, handicap parking permit, disability parking]
+/birth-control-and-testing/: [STD testing, family planning, sexual health]
+/caregivers/: [respite care, caregiver support]
+/families-and-kids/: [daycare, day care, early childhood]
+/have-your-say/: [speak at a meeting, school board meeting, public comment]
+/help-at-home/: [home health aide, home care, senior meals]
+/holidays/: [Christmas help, toy drive, winter coats]
+/legal-help/: [lawyer, attorney, small claims court]
+/medical-rides/: [medical transportation, ride to the doctor]
+/no-insurance/: [free clinic, sliding scale, uninsured]
+/recycling/: [garbage pickup, trash day, rubbish]
+/snow-and-ice/: [snow removal, snow plowing]
+/teen-drivers/: [learners permit, graduated driver license]
+/who-serves-me/: [police non-emergency number, city services]

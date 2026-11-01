@@ -99,6 +99,10 @@ describe('crisis strip in a browser', () => {
     await page.keyboard.press('Shift');
     await page.waitForTimeout(100);
     assert.equal(new URL(page.url()).pathname, '/stay-tonight/', 'a capital letter should reset the count');
+    // The count now stands at 2 (Shift+A's own Shift key-up counts), so wait out
+    // its 1 second window. Otherwise the first press below leaves and the next two
+    // start a second exit that cancels the first (ERR_ABORTED on slow CI runners).
+    await page.waitForTimeout(1100);
     for (let i = 0; i < 3; i++) await page.keyboard.press('Shift');
     await page.waitForURL(EXIT);
     await ctx.close();

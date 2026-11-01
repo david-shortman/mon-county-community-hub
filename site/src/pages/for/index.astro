@@ -19,6 +19,7 @@ const helpers = pages.get('/for/helpers/');
   <ul class="topic-list">
     {groups.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}
   </ul>
+  <p>Going through a big change, like losing a job or a new baby? See <a href={`${base}/life-events/`}>what to do first, by life event</a>.</p>
   <p>More than one fits? Open each one. Or see <a href={`${base}/topics/`}>every topic</a>.</p>
   {helpers && <p>Helping someone else, like a student, a neighbor or a church member? See <a href={`${base}${helpers.route}`}>{helpers.label}</a>.</p>}
 </Base>

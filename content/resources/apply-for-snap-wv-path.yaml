@@ -12,10 +12,12 @@ cost: free
 what_happens: A worker from the state Department of Human Services (DoHS) interviews you. If you qualify, your SNAP counts from the day DoHS got your signed application. The application lists three cases where SNAP can come within seven days.
 sources:
   - url: https://www.wvpath.wv.gov/
-    checked: 2026-10-29
+    checked: 2026-10-31
   - url: https://learning-public.wvpath.wv.gov/SubmitanApplication.html
-    checked: 2026-10-29
+    checked: 2026-10-31
   - url: https://bfa.wv.gov/frequently-asked-questions-faq
-    checked: 2026-10-29
+    checked: 2026-10-31
   - url: https://bfa.wv.gov/media/40007/download?inline
+    checked: 2026-10-31
+  - url: https://dohs.wv.gov/article/west-virginia-announces-changes-snap-able-bodied-adults-without-dependents-abawd-policy
     checked: 2026-10-31

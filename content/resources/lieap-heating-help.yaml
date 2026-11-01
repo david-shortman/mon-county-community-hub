@@ -3,12 +3,14 @@ slug: lieap-heating-help
 org: wv-department-of-human-services
 topics: [money]
 who_it_is_for: West Virginia households that need help paying for winter heat. It depends on household income, household size and whether you pay for your own heat.
-what_to_do: DoHS starts mailing 2026-27 applications on Monday, November 2, 2026. The last day to send a pre-LIEAP application is Wednesday, November 25, 2026. Return it by mail, drop it off at your local DoHS office, or apply online at WV PATH. If your main heat is a utility regulated by the Public Service Commission, include a current utility bill. If you heat with bulk fuel, include proof from your fuel supplier and a receipt. Funding is limited and given first come, first served, so DoHS says to apply early. Questions, call 800-642-8589.
+what_to_do: DoHS starts mailing 2026-27 applications on Monday, November 2, 2026, to households that got LIEAP last season and to households with a child under 6, an adult 60 or older, or someone with a disability. The last day to send a pre-LIEAP application is Wednesday, November 25, 2026. Return it by mail, drop it off at your local DoHS office, or apply online at WV PATH. If your main heat is a utility regulated by the Public Service Commission, include a current utility bill. If you heat with bulk fuel, include proof from your fuel supplier and a receipt. Funding is limited and given first come, first served, so DoHS says to apply early. Questions, call 800-642-8589.
 contact:
   phone: "800-642-8589"
   url: https://www.wvpath.wv.gov
 sources:
   - url: https://dohs.wv.gov/article/west-virginia-department-human-services-announces-lieap-application-mailing-beginning
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
-    checked: 2026-10-28
+    checked: 2026-10-31
+  - url: https://bfa.wv.gov/media/39943/download?inline
+    checked: 2026-10-31

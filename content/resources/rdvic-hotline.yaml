@@ -8,8 +8,7 @@ hours: Hotline answers 24 hours a day
 contact:
   phone: "304-292-5100"
   url: https://fris.org/centers/rdvic/
-cost: free
 sources:
   - url: https://fris.org/centers/rdvic/
-    checked: 2026-10-30
+    checked: 2026-10-31
 private_trace: true  # no Text, Print or Share row: a text or share leaves a trace on the phone (#555)

@@ -6,10 +6,13 @@ import { loadTonight, tonightProblems } from '../src/lib/tonight.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 import { factTopics, loadFacts } from '../src/lib/facts.mjs';
 import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
-import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
+import { TOWN_FIELDS, TOWNS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
 import { checkPlaces } from './check-places.mjs';
-import { agendaProblems } from '../src/lib/agendas.mjs';
+import { agendaProblems, decidedProblems } from '../src/lib/agendas.mjs';
+import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } from '../src/lib/content-dupes.mjs';
+import { MOVED } from '../src/lib/moved.mjs';
+import YAML from 'yaml';
 
 const errors = [];
 const warnings = [];
@@ -430,6 +433,20 @@ for (const p of tonightProblems(loadTonight())) errors.push(`tonight/warming-she
 
 // Plain-language agenda guides (content/agendas, #529).
 for (const p of agendaProblems()) errors.push(p);
+// What was decided: actions from posted minutes (content/minutes, #529).
+for (const p of decidedProblems()) errors.push(p);
+
+// Duplicates and broken org links (#1170): the same group under two slugs,
+// or an org: anywhere else in content/ that has no file in content/orgs/
+// (resources, secondhand, boards and places are checked above).
+warnings.push(...duplicateWarnings({ orgs, places: loadDir('places'), resources }));
+const everyRecord = fs.readdirSync(CONTENT_DIR, { recursive: true })
+  .filter((f) => /\.ya?ml$/.test(f) && !/^(orgs|resources|secondhand|boards|places)\//.test(f))
+  .flatMap((f) => { try { return [{ ...YAML.parse(fs.readFileSync(path.join(CONTENT_DIR, f), 'utf8')), _file: f }]; } catch { return []; } });
+errors.push(...missingOrgErrors(everyRecord, orgSlugs));
+errors.push(...movedErrors(MOVED, orgSlugs));
+// A date held at a place whose record names its town gets that town (#395).
+warnings.push(...venueTownWarnings(loadCalendar(), loadDir('places'), TOWNS));
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

@@ -1,0 +1,13 @@
+name: West Virginia Housing Development Fund (WVHDF)
+slug: wv-housing-development-fund
+kind: government
+website: https://www.wvhdf.com/
+phone: "800-933-1272"
+summary: The state's housing finance agency. It makes home loans and helps its own borrowers who are behind on payments.
+topics: [housing]
+area: statewide
+sources:
+  - url: https://www.wvhdf.com/
+    checked: 2026-10-31
+  - url: https://www.wvhdf.com/current-customers/help-for-homeowners/
+    checked: 2026-10-31

@@ -1,10 +1,10 @@
 name: AARP Foundation
 slug: aarp-foundation
 kind: nonprofit
-website: https://www.aarp.org/money/taxes/aarp_taxaide/locations/
+website: https://www.aarp.org/money/taxes/aarp-taxaide/locations/
 summary: A national charity tied to AARP. Its Tax-Aide program gives free tax help, with a focus on people over 50 with low to moderate income.
 topics: [taxes, money]
 area: national
 sources:
-  - url: https://www.aarp.org/money/taxes/aarp_taxaide/locations/
+  - url: https://www.aarp.org/money/taxes/aarp-taxaide/locations/
     checked: 2026-10-31
