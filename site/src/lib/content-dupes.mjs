@@ -70,3 +70,29 @@ export function movedErrors(moved, orgSlugs) {
   }
   return out;
 }
+
+// The town a place record names in `community`, when it is one name from
+// TOWNS ("Westover") or "<neighborhood>, <town>" ("Wiles Hill, Morgantown").
+// Anything vaguer ("west of Morgantown", "Morgantown (Mountaineer Mall)") gives null.
+export function townFromCommunity(community, towns) {
+  const c = String(community ?? '').trim();
+  if (towns.includes(c)) return { town: c };
+  const m = c.match(/^([^,()]+), ([^,()]+)$/);
+  return m && towns.includes(m[2]) ? { town: m[2], neighborhood: m[1] } : null;
+}
+
+// Warnings for dates held at a place (venue) whose record names its town,
+// when the date has no town or a different one, so the Dates page can group it.
+export function venueTownWarnings(calendar, places, towns) {
+  const bySlug = new Map(places.map((p) => [p.slug, p]));
+  const out = [];
+  for (const e of calendar) {
+    const place = e.venue && bySlug.get(e.venue);
+    const t = place && townFromCommunity(place.community, towns);
+    if (!t) continue;
+    const want = t.neighborhood ? `town: ${t.town} and neighborhood: ${t.neighborhood}` : `town: ${t.town}`;
+    if (!e.town) out.push(`${e._file}: its venue ${e.venue} is in ${place.community}; add ${want}`);
+    else if (e.town !== t.town) out.push(`${e._file}: town ${e.town} differs from its venue ${e.venue} (${place.community}); check which is right`);
+  }
+  return out;
+}
