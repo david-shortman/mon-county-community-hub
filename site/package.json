@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs && node scripts/check-weight.mjs && node scripts/check-api.mjs && node scripts/test-ics.mjs && node scripts/check-hsds.mjs && node scripts/check-jsonld.mjs && node ../apps/mcp/test/smoke.mjs dist/api/v1 && node scripts/check-reading.mjs && node scripts/check-label-space.mjs && npm test",
+    "postbuild": "pagefind --site dist && node scripts/check-pages.mjs && node scripts/check-contrast.mjs && node scripts/check-weight.mjs && node scripts/check-api.mjs && node scripts/test-ics.mjs && node scripts/check-hsds.mjs && node scripts/check-jsonld.mjs && node ../apps/mcp/test/smoke.mjs dist/api/v1 && node scripts/check-reading.mjs && node scripts/check-label-space.mjs && node scripts/check-personas.mjs && npm test",
     "check-pages": "node scripts/check-pages.mjs",
     "preview": "astro preview",
     "check-content": "node scripts/check-content.mjs && node scripts/check-translations.mjs && node scripts/check-needs.mjs && node scripts/check-season-dates.mjs && node scripts/high-stakes.mjs --self-test && node scripts/watch.mjs --self-test && node scripts/checklists.mjs --self-test && node scripts/test-meetings.mjs && node scripts/check-typed-facts.mjs --list && node --test test/content-dupes.test.mjs",
