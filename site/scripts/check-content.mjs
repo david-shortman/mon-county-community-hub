@@ -13,6 +13,7 @@ import { agendaProblems, decidedProblems } from '../src/lib/agendas.mjs';
 import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } from '../src/lib/content-dupes.mjs';
 import { MOVED } from '../src/lib/moved.mjs';
 import YAML from 'yaml';
+import { loadHomeRules, ruleProblems, isStale } from '../src/lib/home-year.mjs';
 
 const errors = [];
 const warnings = [];
@@ -261,7 +262,7 @@ if (doors) {
     }
   }
   if (JSON.stringify(doors).includes('\u2014')) errors.push('doors.yaml: contains an em dash');
-  for (const e of [...loadDir('orgs'), ...loadDir('resources'), ...loadCalendar()]) {
+  for (const e of [...loadDir('orgs'), ...loadDir('resources'), ...loadCalendar(), ...loadHomeRules(CONTENT_DIR).map((r) => ({ ...r, _file: 'home-year.yaml' }))]) {
     for (const t of e.topics ?? []) {
       if (!topicHome.has(t)) errors.push(`${e._file}: topic "${t}" has no door; add it to a door in content/doors.yaml`);
     }
@@ -355,6 +356,21 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
       if (BY_DATE.test(sentence) && DEADLINE_VERB.test(sentence)) warnings.push(`${e._file}: what_to_do: for a deadline, write "The last day is Tuesday, December 15." instead of "${sentence.match(BY_DATE)[0]}"`);
     }
   });
+}
+
+// Yearly home dates (content/home-year.yaml, #1051): each rule is complete,
+// slugs are unique and do not clash with a hand-written calendar slug pattern,
+// and a stale rule is a warning (the build leaves it off the calendar).
+{
+  const seen = new Set();
+  for (const r of loadHomeRules(CONTENT_DIR)) {
+    const where = `home-year.yaml: ${r.slug ?? '(no slug)'}`;
+    for (const p of ruleProblems(r)) errors.push(`${where}: ${p}`);
+    if (seen.has(r.slug)) errors.push(`${where}: duplicate slug`);
+    seen.add(r.slug);
+    if (r.sources?.length && isStale(r, todayYmd())) warnings.push(`${where}: a source was last checked more than 13 months ago; re-check it, or it stays off the calendar`);
+    if (JSON.stringify(r).includes('\u2014')) errors.push(`${where}: contains an em dash`);
+  }
 }
 
 // Gathering places (content/places, #455), checked against content/schemas/place.schema.json.

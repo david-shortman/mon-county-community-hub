@@ -1,0 +1,49 @@
+---
+// Home and yearly dates (#1051): the yearly rules in content/home-year.yaml
+// (tax deadlines, burning seasons, frost dates, upkeep tips) and how to add
+// home.ics to a phone. Every date links its source and checked date.
+// Subscribe steps from Apple (support.apple.com/en-us/102301) and Google
+// (support.google.com/calendar/answer/37100), both read 2026-11-01.
+import Base from '../layouts/Base.astro';
+import EventCard from '../components/EventCard.astro';
+import { loadHomeFeed, todayYmd, prettyDate, ymd } from '../lib/content.mjs';
+import { HOME_FEED_NAME } from '../lib/home-year.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "home", label: "Home and yearly dates calendar", summary: "Property tax and Assessor deadlines, burning seasons, frost dates and upkeep tips, as a calendar you can add to your phone" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+// Only the yearly items show here. The feed also carries recycling days and
+// the heating help window from the main Dates page.
+const items = (await loadHomeFeed(today)).filter((e) => e.ics_categories[0] !== 'Event');
+const updated = [today, ...items.flatMap((e) => (e.sources ?? []).map((s) => ymd(s.checked)))].filter(Boolean).sort().at(-1);
+const icsHttp = new URL(`${base}/home.ics`, Astro.site).href;
+const icsWebcal = icsHttp.replace(/^https?:/, 'webcal:');
+const icsGoogle = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(icsWebcal)}`;
+---
+<Base title="Home and yearly dates calendar for Mon County, WV" description="Yearly home dates for Monongalia County, WV, as a calendar for your phone: property tax due dates, Assessor deadlines, forest fire seasons, frost dates and upkeep tips, each with its source.">
+  <h1>Home and yearly dates in Mon County</h1>
+  <p class="lede">Property tax due dates, Assessor deadlines, burning seasons, frost dates and a few upkeep tips. Each date links to the official page or law it comes from. Add them all to your phone below, so the reminders come to you.</p>
+
+  <section class="add-cal" aria-labelledby="add-h">
+    <h2 id="add-h">Add it to your phone</h2>
+    <p class="actions">
+      <a class="btn" href={icsWebcal}>iPhone or Mac calendar</a>
+      <a class="btn" href={icsGoogle} rel="noopener">Google Calendar</a>
+    </p>
+    <p><strong>iPhone:</strong> tap the iPhone button above. Or open Calendar, tap Calendars, then Add Calendar, then Add Subscription Calendar, and paste the link below. Next to Account, choose iCloud so it shows on your other Apple devices too (<a href="https://support.apple.com/en-us/102301">Apple's steps</a>).</p>
+    <p><strong>Android or Google Calendar:</strong> on a computer, open Google Calendar. Next to "Other calendars," click the plus, then From URL, and paste the link below. Google's phone app can't add it, but once you add it on a computer it shows in the app too (<a href="https://support.google.com/calendar/answer/37100">Google's steps</a>).</p>
+    <p><label for="home-ics-link">Calendar link</label><br /><input id="home-ics-link" type="text" readonly value={icsHttp} onfocus="this.select()" /></p>
+    <p>Titles start with "Due:" for deadlines, "Season:" for date ranges and "Tip:" for upkeep advice. The calendar also includes recycling and tire collection days and the state's heating bill help window when they are on our <a href={`${base}/calendar/`}>Dates and deadlines</a> page. It is the same for everyone, and we don't know who adds it.</p>
+  </section>
+
+  <h2 id="dates">Coming up in the next 12 months</h2>
+  <p class="meta">Updated {prettyDate(updated)}.</p>
+  {items.map((e) => <EventCard e={e} />)}
+
+  <h2 id="your-own">Your own dates</h2>
+  <p>Some dates depend on you, like your license plate month, when your septic tank was last pumped, or when your furnace was serviced. This calendar leaves those out. Put them in your phone's own reminders. See <a href={`${base}/car-registration/`}>car registration</a> to look up how renewals work.</p>
+
+  <p>Also see <a href={`${base}/burning/`}>burning leaves and brush</a>, <a href={`${base}/grow/`}>grow food and flowers</a> and <a href={`${base}/home-safety/`}>home safety</a>.</p>
+
+  <p class="meta">{HOME_FEED_NAME}. Dates and rules come from state law, the Monongalia County Assessor, the EPA, NOAA and the American Red Cross, as each card shows. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
