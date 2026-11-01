@@ -1,0 +1,54 @@
+---
+// One public body's page (#529): its coming agenda guides, what its meetings
+// in the last 30 days decided (from posted minutes), and its guides from the
+// last 30 days with their agenda links. Data: content/agendas/,
+// content/minutes/. Rules: docs/process/agenda-guides.md.
+import Base from '../../../layouts/Base.astro';
+import AgendaGuide from '../../../components/AgendaGuide.astro';
+import DecidedCard from '../../../components/DecidedCard.astro';
+import { fixFormUrl } from '../../../lib/group-requests.mjs';
+import { prettyDate, todayYmd } from '../../../lib/content.mjs';
+import { loadAgendas, loadDecided, upcomingGuides, recentDecided, pastGuides, BODIES } from '../../../lib/agendas.mjs';
+
+export function getStaticPaths() {
+  return Object.keys(BODIES).map((body) => ({ params: { body } }));
+}
+const { body } = Astro.params;
+const b = BODIES[body];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const mine = loadAgendas().filter((g) => g.body === body);
+const coming = upcomingGuides(mine, today);
+const past = pastGuides(mine, today);
+const decided = recentDecided(loadDecided().filter((r) => r.body === body), today);
+// Residents search with the place name, so every title has one (check-pages).
+const named = /Morgantown|Mon(ongalia)? County/i.test(b.name) ? b.name : `${b.name}, Mon County`;
+const host = b.home && new URL(b.home).hostname.replace(/^www\./, '');
+---
+<Base title={`${named}: agendas in plain language`} description={`Coming ${b.name} agendas in plain language, and the actions recorded in its recent minutes, each linked to the official record.`}>
+  <p class="meta"><a href={`${base}/meetings/agendas/`}>Coming meetings in plain language</a></p>
+  <h1>{b.name}</h1>
+  <p class="lede">Coming agendas in plain language, and what recent meetings decided, from the official minutes.</p>
+  {b.home ? <p>The {b.name} posts its agendas and minutes at <a href={b.home}>{host}</a>. That is the official record.</p>
+    : <p>We have not found an official page where the {b.name} posts agendas or minutes.</p>}
+
+  <h2 id="coming">Coming meetings</h2>
+  {coming.length ? coming.map((g) => <AgendaGuide g={g} level={3} />)
+    : <p>No guide yet for a coming meeting. We write one when an agenda is posted, usually a few days before the meeting.</p>}
+
+  <h2 id="decided">What was decided in the last 30 days</h2>
+  <p>Each motion the minutes record, with the result and the vote count as the minutes write them. We do not cover what people said or why.</p>
+  {decided.length ? decided.map((r) => <DecidedCard r={r} level={3} />)
+    : <p>No minutes are posted yet for meetings in the last 30 days. Boards often approve and post minutes at their next meeting.</p>}
+
+  {past.length > 0 && (
+    <>
+      <h2 id="recent">Recent agendas</h2>
+      <ul>
+        {past.map((g) => <li><strong>{prettyDate(g.date)}</strong>: <a href={g.agenda_url}>{g.meeting}, official agenda</a></li>)}
+      </ul>
+    </>
+  )}
+
+  <p class="meta">We describe; we do not say whether an item or a vote was good or bad. Something wrong or slanted? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
