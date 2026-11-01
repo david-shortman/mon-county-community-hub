@@ -22,7 +22,7 @@ const fields = [
 {slug && phone && (
   <details class="call-notes-panel" data-slug={slug} data-service={service} data-phone={phone} data-pagefind-ignore hidden>
     <summary>Notes for this call<span class="sr-only">: {service}</span></summary>
-    <p class="meta">Saved only on this phone, in this browser. Nothing is sent to us.</p>
+    <p class="meta">Saved only on this phone, in this browser. Nothing is sent to us. Anyone who uses this phone can see them.</p>
     {fields.map(([name, label, kind]) => (
       <label class="cn-field">
         <span>{label}</span>
@@ -91,6 +91,8 @@ const fields = [
       } catch { /* share closed or copy blocked */ }
     });
     box.querySelector('.cn-delete')!.addEventListener('click', () => {
+      // The note may be the only copy of a reference number, so ask first.
+      if (inputs.some((i) => i.value.trim()) && !window.confirm(`Delete your notes for ${service}? This cannot be undone.`)) return;
       inputs.forEach((i) => { i.value = ''; });
       save();
       say('Notes deleted');
