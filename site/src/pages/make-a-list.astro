@@ -5,7 +5,8 @@
 // The picks and the note ride in the web address (?pick=a&pick=b&note=...),
 // so nothing is saved or sent anywhere. Every line comes from a resource
 // record, with its source and checked date. Without scripts the page is a
-// plain list of every place, which prints as it is.
+// plain list of every place, which prints as it is. Site search skips that
+// list (#529): each place is found on its own topic page instead.
 import Base from '../layouts/Base.astro';
 import Fold from '../components/Fold.astro';
 import { loadDir, loadDoors, oldestChecked, prettyDate, todayYmd, shortUrl, isStale } from '../lib/content.mjs';
@@ -51,7 +52,7 @@ const NOTE_MAX = 200;
     <p id="mal-noscript">Your browser is not running scripts, so here is every place. Print this page, or circle the ones you want.</p>
   </div>
 
-  <section id="mal-list" aria-labelledby="mal-list-h">
+  <section id="mal-list" aria-labelledby="mal-list-h" data-pagefind-ignore>
     <h2 id="mal-list-h" tabindex="-1">Places that can help</h2>
     <p id="mal-note-out" class="mal-note" hidden></p>
     <ul class="sheet-list">
