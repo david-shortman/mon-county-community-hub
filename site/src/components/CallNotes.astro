@@ -1,0 +1,99 @@
+---
+// Call notes (#1071): a small notes form next to a Call button, for what an
+// office tells you on the call: who you talked to, what they said, a
+// reference number and the next step. Saved only on this phone (localStorage,
+// one note per service under "em-notes:<slug>"), never sent to us, and easy
+// to delete. "Text to myself" opens the phone's messages app, and "Share"
+// uses the phone's share sheet or copies the note.
+// With no script the form stays hidden, since it could not save: the "What to
+// have ready" list and the printable notes on /before-you-call/ still work.
+//   slug: the resource's slug (the note's key)
+//   service: what the note is about, like "Mon Power"
+//   phone: the number called
+const { slug, service, phone } = Astro.props;
+const fields = [
+  ['when', 'When I called', 'input'],
+  ['who', 'Who I talked to', 'input'],
+  ['said', 'What they said', 'textarea'],
+  ['ref', 'Reference or confirmation number', 'input'],
+  ['next', 'What I do next, and by when', 'textarea'],
+];
+---
+{slug && phone && (
+  <details class="call-notes-panel" data-slug={slug} data-service={service} data-phone={phone} data-pagefind-ignore hidden>
+    <summary>Notes for this call<span class="sr-only">: {service}</span></summary>
+    <p class="meta">Saved only on this phone, in this browser. Nothing is sent to us.</p>
+    {fields.map(([name, label, kind]) => (
+      <label class="cn-field">
+        <span>{label}</span>
+        {kind === 'textarea' ? <textarea name={name} rows="2" autocomplete="off"></textarea> : <input type="text" name={name} autocomplete="off" />}
+      </label>
+    ))}
+    <p class="meta cn-saved" aria-live="polite"></p>
+    <div class="cn-btns">
+      <a class="btn cn-sms" href="sms:"><span>Text to myself</span></a>
+      <button class="btn cn-share" type="button"><span>Share or copy</span></button>
+      <button class="btn cn-delete" type="button"><span>Delete my notes</span></button>
+    </div>
+  </details>
+)}
+
+<style is:global>
+  .call-notes-panel { margin: 8px 0; padding: 4px 12px; border: 1.5px dashed var(--muted); border-radius: 10px; }
+  .call-notes-panel summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 600; color: var(--accent); }
+  .call-notes-panel .cn-field { display: grid; gap: 4px; margin: 10px 0; }
+  .call-notes-panel input, .call-notes-panel textarea { font: inherit; width: 100%; box-sizing: border-box; min-height: 44px; padding: 8px; border: 1.5px solid var(--muted); border-radius: 6px; background: var(--bg); color: var(--fg); }
+  @media print { .call-notes-panel { display: none !important; } }
+  .call-notes-panel .cn-btns { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 10px; }
+</style>
+
+<script>
+  // Every read and write is wrapped: storage can be blocked (private windows),
+  // and then the form still works for this visit.
+  document.querySelectorAll<HTMLDetailsElement>('.call-notes-panel').forEach((box) => {
+    const { slug = '', service = '', phone = '' } = box.dataset;
+    const key = `em-notes:${slug}`;
+    const inputs = [...box.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea')];
+    const saved = box.querySelector<HTMLElement>('.cn-saved')!;
+    const say = (t: string) => {
+      const s = document.getElementById('announce');
+      if (s) { s.textContent = ''; setTimeout(() => { s.textContent = t; }, 50); }
+    };
+    let note: { page?: string; saved?: string; fields?: Record<string, string> } = {};
+    try { note = JSON.parse(localStorage.getItem(key) || '{}'); } catch { /* not saved */ }
+    inputs.forEach((i) => { i.value = note.fields?.[i.name] ?? ''; });
+    const show = () => { saved.textContent = note.saved ? `Last saved ${new Date(note.saved).toLocaleString()}.` : ''; };
+    show();
+    if (inputs.some((i) => i.value)) box.open = true;
+    box.hidden = false;
+    const text = () => {
+      const lines = [`${service}, called ${phone}`];
+      inputs.forEach((i) => { if (i.value.trim()) lines.push(`${i.closest('label')?.querySelector('span')?.textContent}: ${i.value.trim()}`); });
+      lines.push(note.page || location.href.split('#')[0]);
+      return lines.join('\n');
+    };
+    const sms = box.querySelector<HTMLAnchorElement>('.cn-sms')!;
+    const save = () => {
+      const fields = Object.fromEntries(inputs.filter((i) => i.value.trim()).map((i) => [i.name, i.value]));
+      note = Object.keys(fields).length ? { page: location.href.split('#')[0], saved: new Date().toISOString(), fields } : {};
+      try { if (note.fields) localStorage.setItem(key, JSON.stringify(note)); else localStorage.removeItem(key); } catch { /* not saved */ }
+      show();
+      sms.href = `sms:?&body=${encodeURIComponent(text())}`;
+    };
+    sms.href = `sms:?&body=${encodeURIComponent(text())}`;
+    inputs.forEach((i) => i.addEventListener('input', save));
+    box.querySelector('.cn-share')!.addEventListener('click', async () => {
+      const body = text();
+      try {
+        if (navigator.share) { await navigator.share({ title: `Call notes: ${service}`, text: body }); return; }
+        await navigator.clipboard.writeText(body);
+        say('Notes copied');
+      } catch { /* share closed or copy blocked */ }
+    });
+    box.querySelector('.cn-delete')!.addEventListener('click', () => {
+      inputs.forEach((i) => { i.value = ''; });
+      save();
+      say('Notes deleted');
+    });
+  });
+</script>
