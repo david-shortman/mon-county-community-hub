@@ -76,9 +76,12 @@ export function pageExists(lang, route, { root = REPO_ROOT } = {}) {
 // The hreflang links for a page: one per language the page exists in, plus
 // x-default (English). Empty unless the page exists in at least one
 // published language, so English-only pages get nothing.
-export function alternatesFor(route, { site, published = PUBLISHED, root = REPO_ROOT } = {}) {
+// `exists(lang, englishRoute)` says whether the page is there in a language;
+// the site passes pageReady from locale-pages.mjs, which counts only
+// reviewed pages that build.
+export function alternatesFor(route, { site, published = PUBLISHED, root = REPO_ROOT, exists = (l, en) => pageExists(l, en, { root }) } = {}) {
   const en = englishRoute(route);
-  const langs = published.filter((l) => LOCALES[l] && l !== DEFAULT_LOCALE && pageExists(l, en, { root }));
+  const langs = published.filter((l) => LOCALES[l] && l !== DEFAULT_LOCALE && exists(l, en));
   if (!langs.length) return [];
   const href = (lang) => (site ? new URL(localeRoute(lang, en), site).href : localeRoute(lang, en));
   return [

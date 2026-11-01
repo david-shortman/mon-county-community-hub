@@ -20,6 +20,7 @@ const nfip = [{ url: 'https://www.floodsmart.gov/get-insured/buy-a-policy', chec
 const ordinance = [
   { url: 'https://www.monongaliacounty.gov/departments/floodplain/index.php', checked },
   { url: 'https://www.monongaliacounty.gov/departments/floodplain/history.php', checked: '2026-10-31' },
+  { url: 'https://www.monongaliacounty.gov/document_center/Floodplain/Floodplain%20Fillable.pdf', checked: '2026-11-01', name: 'County floodplain application (PDF)' },
   { url: 'https://www.monongaliacounty.gov/document_center/Ordinances/Monongalia%20County%20Floodplain%20Ordinance.pdf', checked, name: 'Monongalia County Floodplain Ordinance (updated March 2019)' },
 ];
 const cityForm = [{ url: 'https://morgantownwv.gov/DocumentCenter/View/210/Floodplain-Permits-PDF', checked }];
@@ -59,7 +60,7 @@ const countyPhone = '304-599-6332';
 
   <Milepost n={3} title="Building, adding on or filling in a floodplain needs a permit" id="permit">
   <p>In Monongalia County, you need a <strong>floodplain permit</strong> before you build, add on, make a big repair, place a manufactured home, or fill, grade or pave land in or right next to the floodplain. The county ordinance says the work cannot start until the Floodplain Administrator issues the permit.</p>
-  <p>Questions or an application: the <strong>Monongalia County Floodplain Office</strong>, <a href={telHref(countyPhone)}>{countyPhone}</a> ext. 2, or email <a href="mailto:floodplain@monongaliacounty.gov">floodplain@monongaliacounty.gov</a>. The office is part of the county Emergency Management Office.</p>
+  <p>Questions or an application: the <strong>Monongalia County Floodplain Office</strong>, <a href={telHref(countyPhone)}>{countyPhone}</a> ext. 2, or email <a href="mailto:floodplain@monongaliacounty.gov">floodplain@monongaliacounty.gov</a>. The office is part of the county Emergency Management Office. The county's application form lists a $20 fee.</p>
   <SourceLine sources={ordinance} about="the county floodplain permit" />
   <div class="actions">
     <a class="btn" href={telHref(countyPhone)}><Icon name="phone" /><span>Call the county floodplain office</span></a>

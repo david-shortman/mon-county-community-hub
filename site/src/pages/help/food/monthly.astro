@@ -13,6 +13,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <li><ResourceCard r={resource('apply-for-snap-wv-path')} lead="Apply online, or call with questions." /></li>
   </ol>
   <p><a href={`${base}/snap/`}>Step-by-step: how to apply for SNAP</a></p>
+  <h2>Pregnant, or have a child under 5?</h2>
+  <p>WIC gives healthy foods, plus nutrition and breastfeeding help. Families on SNAP qualify for WIC on income automatically.</p>
+  <ol class="results">
+    <li><ResourceCard r={resource('monchd-wic')} /></li>
+  </ol>
   <h2>Need food before SNAP starts?</h2>
   <p>Call 211 or text your ZIP code to 898-211, any hour. Or see <a href={`${base}/help/food/today/`}>food today or this week</a>.</p>
 </Base>

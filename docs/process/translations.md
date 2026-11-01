@@ -1,8 +1,8 @@
 # How to add a translation
 
-The site is in English only today. This page explains the setup that is ready for other languages, so a Spanish pilot can start as soon as David decides on the questions in #1067. The plan behind it is [`docs/plans/2026-10-31-languages.md`](../plans/2026-10-31-languages.md).
+The site is in English only today. This page explains the setup for other languages. On November 1, 2026 David decided on #1067: Spanish goes first, and Claude may draft Spanish text, but a fluent person reviews it before it goes live (crisis, shelter, food and benefits text is never machine-only). The plan behind it is [`docs/plans/2026-10-31-languages.md`](../plans/2026-10-31-languages.md).
 
-**Before David decides, do not add translated text to the repo.** Nothing in this setup shows anything new to residents until a language is turned on.
+**Unreviewed text is only ever a draft** (`reviewed: false`, see "Drafts stay hidden" below). Nothing in this setup shows anything new to residents until a language is turned on and a fluent reviewer marks the words reviewed.
 
 ## The parts
 
@@ -15,6 +15,7 @@ The site is in English only today. This page explains the setup that is ready fo
 | hreflang | `Base.astro`, `alternatesFor()` in `i18n.mjs` | Adds `<link rel="alternate" hreflang>` links when a page exists in a published language. English-only pages get none. |
 | Sitemap | `astro.config.mjs` | Pages in a language that is off never go in the sitemap. Once a language is on, each URL lists its language pairs. |
 | Switcher | [`site/src/components/LanguageSwitcher.astro`](../../site/src/components/LanguageSwitcher.astro) | Built, not shown. Names each language in that language, never with a flag. Renders nothing when a page has no other language. |
+| Translated pages | `site/src/pages/<lang>/_pages/<route>.astro` (templates) and the router `site/src/pages/<lang>/[...page].astro` | A template never builds by itself. The router builds a page only when the language is on and its words file is reviewed and current ([`locale-pages.mjs`](../../site/src/lib/locale-pages.mjs)). |
 | Translation files | `content/translations/<lang>/<kind>/<name>.yaml` | The translated words, kept apart from the English records. |
 | The check | [`site/scripts/check-translations.mjs`](../../site/scripts/check-translations.mjs), part of `npm run check-content` | Checks every translation file and the language folders. |
 | Loader | [`site/src/lib/translations.mjs`](../../site/src/lib/translations.mjs) | `loadTranslation()` and `translatedField()` give a page the translation, or the English when there is none or it is hidden. |
@@ -61,6 +62,15 @@ notes: optional, for the reviewer
 - **`strings`** (pages and parts): any keys the page reads, for example `heading` or `intro`.
 - **`reviewer`**: a role ID such as `es-reviewer-1`. Who that is stays in private Notion unless David decides to credit reviewers by name (#1067, decision 8).
 
+## Drafts stay hidden
+
+A translation that no fluent person has checked yet is a **draft**: write `reviewed: false` and leave out `reviewer` and `second_review`. The check still tests it (no facts, no new numbers, a real `english_hash`) and prints a `draft` warning, but:
+
+- the site shows the English instead of a draft, everywhere;
+- a page whose words file is a draft builds nothing: no `/es/` page, no sitemap entry, no hreflang link and no language switcher.
+
+To publish it, the reviewer checks every string against the English, fixes what is wrong, then sets `reviewed` to the date and `reviewer` to their role ID (and a second reader adds `second_review` on high-stakes files). That PR changes what residents see, so it waits for David.
+
 ## Getting `english_hash`
 
 The hash records which English the translation was made from.
@@ -83,14 +93,21 @@ The check prints a `stale` warning for each translation whose English changed si
 
 To clear a stale warning, a reviewer compares the new English with the translation, fixes the translation if needed, updates `reviewed` (and `second_review` for high-stakes files), and copies in the new hash.
 
-## Turning a language on (after David decides)
+## Adding a translated page
 
-These steps wait for #1067. Each one is tracked in its own issue linked there.
-
-1. Add the language to `PUBLISHED` in `site/src/lib/i18n.mjs`. The PR is labeled `for:david`.
-2. Add pages under `site/src/pages/<lang>/`, each matching an English page. The check refuses a page with no English match, and refuses any page in a language folder while the language is off.
-3. Pass `lang="es"` to `Base.astro` on those pages, and render `<LanguageSwitcher lang={lang} alternates={alternates} />` in the header.
-4. Add the reviewed words for the switcher label and the "this part changed" note.
-5. Update the Help in your language page if machine drafts are allowed.
+1. Write the words file, `content/translations/<lang>/pages/<route>.yaml`, with `strings` for every sentence the page shows. Start it as a draft (`reviewed: false`).
+2. Write the template, `site/src/pages/<lang>/_pages/<route>.astro`. It reads the words with `loadTranslation()` and takes every phone number, address, hour and link from the English records. Pass `lang="<lang>"` to `Base.astro`.
+3. Run `npm run check-content`. The check refuses a template with no English page or no words file, and any other `.astro` file in the language folder.
+4. Nothing builds until the language is in `PUBLISHED` (David's call, #1067) and a reviewer marks the words reviewed. Then the router builds the page, `Base.astro` adds the hreflang links and the language switcher, and the page joins the sitemap. Site search and `llms.txt` stay English only for the pilot.
 
 Cost: $0. Everything here runs in the build and on GitHub Pages, which do not change.
+
+## Pages for the phone's own translator
+
+Most people who read another language better than English will use the translate button in Chrome, Safari or their phone, not a page we translated. That works on every page today, unreviewed, so we make English pages that survive it (plan option E):
+
+- **Plain words and short sentences.** The reading level check (`check-reading.mjs`) already holds pages to about 8th grade, and simple English translates better.
+- **No text inside images.** The site has no `<img>` tags at all; icons are drawn shapes with no words.
+- **A real language tag.** Every page has `<html lang="en">`, and the page check refuses a page without one.
+- **Facts stay as written.** Street addresses and phone numbers in the shared parts are marked `translate="no"`, so a translator does not turn "114 South High Street" into a street name that does not exist, or reformat a number. That covers the call buttons (`Actions.astro`), "Where:" lines (`FoodToday.astro`, `ShopCard.astro`, `AgendaGuide.astro`, listing embeds) and helper phone links (`WhatHappensNext.astro`). Use the same mark when you add a new part that prints an address or a phone number on its own.
+- **Do not mark sentences or labels.** Only the fact itself gets `translate="no"`: "Call" and "Where" should still translate.

@@ -17,7 +17,10 @@ const parts = (e.what_to_do || '').split(phoneRe);
 // The oldest source date, so a card never looks fresher than it is (#39).
 const checked = oldestChecked(e.sources);
 // Feed entries say which feed and when; hand-written ones say when a person checked.
-const fetchedOn = e.feed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(e.feed.fetched)) : null;
+// Which one comes from the source's `method` (one provenance shape for every
+// record, ADR 0002, #70). The feed's name is still on `e.feed`, which API v1 publishes.
+const fed = e.sources?.[0]?.method === 'feed' ? e.sources[0] : null;
+const fetchedOn = fed ? new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date(fed.fetched)) : null;
 
 // Share points at this card on the page it is shown on, so the link always lands on it.
 const shareUrl = new URL(`${Astro.url.pathname}#${e.slug}`, Astro.site).href;
@@ -46,8 +49,8 @@ const topicLabel = (t) => doors.bySlug[doors.topicDoor[t]]?.topics[t] ?? t;
     about={`${e.title}, ${prettyDate(e.starts)}`}
   />
   <p class="meta">
-    {e.feed ? (
-      <>Pulled from the <a href={e.feed.page_url}>{e.feed.name}</a> on {prettyDate(fetchedOn)}.</>
+    {fed ? (
+      <>Pulled from the <a href={fed.url}>{e.feed?.name ?? sourceLabel(fed.url)}</a> on {prettyDate(fetchedOn)}.</>
     ) : (
       <>Run by {e.org_name}.
       {extraSources.length ? <> Source: {extraSources.map((s, i) => (<>{i > 0 && ', '}<a href={s.url}>{sourceLabel(s.url)}</a>{isGovSite(s.url) && ' (government site)'}</>))}.</> : <> Source: {sourceLabel(e.url)}{isGovSite(e.url) ? ' (the details page, a government site)' : ' (the details page)'}.</>}

@@ -2,6 +2,7 @@
 // Runs automatically after `npm run build`.
 import fs from 'node:fs';
 import path from 'node:path';
+import { OTHER_LOCALES, localeOfPath } from '../src/lib/i18n.mjs';
 
 const dist = new URL('../dist/', import.meta.url).pathname;
 const errors = [];
@@ -20,6 +21,9 @@ function htmlFiles(dir) {
   });
 }
 
+// Folders that hold translated pages (site/src/lib/i18n.mjs).
+const translatedLangs = OTHER_LOCALES;
+
 const pages = htmlFiles(dist);
 if (!pages.length) errors.push('no pages found in dist/ (run npm run build first)');
 
@@ -36,6 +40,16 @@ for (const file of pages) {
   }
   if (!desc) errors.push(`${where}: missing meta description`);
   if (!/<html[^>]*\slang="/.test(html)) errors.push(`${where}: missing lang on <html>`);
+  // A translated page (#1099) says its language and links to the English
+  // page and back, so search engines show the right one.
+  const lang = where.match(/^([a-z]{2,3})\//)?.[1];
+  if (lang && translatedLangs.includes(lang)) {
+    if (!new RegExp(`<html[^>]*\\slang="${lang}"`).test(html)) errors.push(`${where}: a ${lang} page needs lang="${lang}" on <html>`);
+    for (const h of ['en', lang, 'x-default']) {
+      if (!new RegExp(`<link rel="alternate" hreflang="${h}" href="https?://`).test(html)) errors.push(`${where}: missing the hreflang="${h}" link`);
+    }
+    if (/data-pagefind-body/.test(html)) errors.push(`${where}: site search is English only for now, so a ${lang} page stays out of it`);
+  }
   const noindex = /<meta name="robots" content="[^"]*noindex/.test(html);
   if (noindex) noindexed.add(where);
   if (!noindex && !/<link rel="canonical" href="https?:\/\//.test(html)) errors.push(`${where}: missing canonical link`);
@@ -64,11 +78,13 @@ for (const f of ['robots.txt', 'llms.txt']) {
 if (!fs.existsSync(path.join(dist, 'sitemap-index.xml'))) errors.push('sitemap-index.xml: missing from dist/');
 
 // llms.txt should list every page in the sitemap, so AI tools see new guides too.
+// It stays English only for the language pilot (#1099), so translated pages are left out.
 const sitemapFile = path.join(dist, 'sitemap-0.xml');
 const llmsFile = path.join(dist, 'llms.txt');
 if (fs.existsSync(sitemapFile) && fs.existsSync(llmsFile)) {
   const llms = fs.readFileSync(llmsFile, 'utf8');
   for (const [, loc] of fs.readFileSync(sitemapFile, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    if (localeOfPath(new URL(loc).pathname) !== 'en') continue;
     if (!llms.includes(`(${loc})`)) errors.push(`llms.txt: does not list ${loc}`);
   }
 }

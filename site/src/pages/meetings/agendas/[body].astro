@@ -7,7 +7,7 @@ import Base from '../../../layouts/Base.astro';
 import AgendaGuide from '../../../components/AgendaGuide.astro';
 import DecidedCard from '../../../components/DecidedCard.astro';
 import { fixFormUrl } from '../../../lib/group-requests.mjs';
-import { prettyDate, todayYmd } from '../../../lib/content.mjs';
+import { prettyDate, todayYmd, ymd } from '../../../lib/content.mjs';
 import { loadAgendas, loadDecided, upcomingGuides, recentDecided, pastGuides, BODIES } from '../../../lib/agendas.mjs';
 
 export function getStaticPaths() {
@@ -23,6 +23,9 @@ const past = pastGuides(mine, today);
 const decided = recentDecided(loadDecided().filter((r) => r.body === body), today);
 // Residents search with the place name, so every title has one (check-pages).
 const named = /Morgantown|Mon(ongalia)? County/i.test(b.name) ? b.name : `${b.name}, Mon County`;
+// The newest read date of anything this page shows, so the first screen says
+// how fresh it is (#1288). Each guide and record also shows its own date.
+const lastRead = [...coming, ...past, ...decided].map((x) => ymd(x.read)).filter(Boolean).sort().at(-1);
 const host = b.home && new URL(b.home).hostname.replace(/^www\./, '');
 ---
 <Base title={`${named}: agendas in plain language`} description={`Coming ${b.name} agendas in plain language, and the actions recorded in its recent minutes, each linked to the official record.`}>
@@ -31,6 +34,7 @@ const host = b.home && new URL(b.home).hostname.replace(/^www\./, '');
   <p class="lede">See what is on the agenda for coming meetings, in plain words. See what recent meetings decided, from the official minutes.</p>
   {b.home ? <p>The {b.name} posts its agendas and minutes at <a href={b.home}>{host}</a>. That is the official record.</p>
     : <p>We have not found an official page where the {b.name} posts agendas or minutes.</p>}
+  {lastRead && <p class="meta">The newest agenda or minutes on this page were read on {prettyDate(lastRead)}.</p>}
 
   <h2 id="coming">Coming meetings</h2>
   {coming.length ? coming.map((g) => <AgendaGuide g={g} level={3} />)

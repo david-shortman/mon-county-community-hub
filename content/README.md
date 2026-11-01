@@ -115,6 +115,8 @@ sources:
     checked: 2026-10-28
 ```
 
+Home dates that fall on the same day every year (tax deadlines, fire seasons, upkeep tips) can go in `home-year.yaml` instead, as one rule each; the build shows each rule's next date and puts it in `home.ics` (#1051). The file's header lists the fields.
+
 To roll a yearly item forward, copy the file, change the slug, dates, and sources, and re-check the source. Never guess a date: if the new date is not published yet, leave the item out and note it in an issue.
 
 Run `npm run check-content` in `site/` to validate entries.
@@ -128,6 +130,8 @@ Best first. Use the highest tier a source supports.
 3. **Hand-checked.** A YAML file in `calendar/`, for dates published once (state law, one-off notices). The card says "Checked against the source on <date>." Don't say "by hand" or "by a person" unless a person did the check. Re-check when it goes stale.
 
 If a hand-checked entry and a feed entry have the same `slug`, the hand-checked one wins. Use this to correct or add detail to a feed item.
+
+Every record says how its facts were read in `sources[].method` (ADR 0002, #70): `hand` (a person or agent read the page), `feed` (from the publisher's own feed) or `watched-page` (read from the page by a program). Hand YAML files leave it out, and `hand` is assumed. The feed loader writes `method: feed`, the `fetched` time and the feed's id on `sources[0]`, and the card picks "Pulled from" or "Checked against" from it.
 
 Live feeds wired in now:
 
@@ -559,6 +563,7 @@ sources:
 ```
 
 - **Charts and updates (#15).** A file can name its County Health Rankings measure under `chr:` (`measure: v024`, `trend_name: Children in poverty`). `node scripts/update-chr-indicators.mjs --check` in `site/` compares the file with County Health Rankings' public files, and `--write` fills `values`, `data_year` and `history` (Mon County and West Virginia by year, only after the source's last trend break), and sets `checked`. The page draws a chart from `history`. A monthly workflow (`.github/workflows/indicators.yml`) runs the check and opens an issue for Duet when the source changes. No key, no account.
+- **Supplements (#1357).** CHR&R made no 2026 annual release; a March 2026 supplemental file refreshed 34 measures. An indicator on that file puts it first in `sources`, adds the supplement codebook as a source, and sets `chr.data_year` to the year the codebook gives for its measure (the trends file stops at the 2025 release, so the chart can end a year earlier than the number). `children-in-poverty` is not in the supplement and stays on the 2025 file.
 - **Official sources only**, read in the same session: a government agency or a program that publishes the same data for every county. Never a real estate, "best places" or other commercial site.
 - **Copy the number and its definition exactly.** Never compute a new number (a rank, a change, a per-person rate) the source does not give.
 - **Describe, never judge.** No "good", "bad", "safe" or "failing". The page says what the numbers do and don't tell you.

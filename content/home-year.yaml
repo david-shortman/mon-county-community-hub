@@ -1,0 +1,214 @@
+# Home and adulting calendar (#1051): dates that come back every year.
+#
+# Each rule turns into its next date in the coming 12 months on the Dates
+# page, calendar.ics and home.ics (see site/src/lib/home-year.mjs). Only add
+# a rule when a current official page or state law gives the date. Write the
+# text in our own words.
+#
+# Fields:
+#   slug: unique. The dated entry gets "<slug>-<year>". A hand-written file in
+#     content/calendar/ with that same slug wins (for example a year with an
+#     odd date or extra detail), so the date is never listed twice.
+#   kind: due (a deadline or a window that opens), season (a date range) or
+#     tip (upkeep advice on a date we picked as a reminder).
+#   month, day: when it happens each year. end_month, end_day: last day of a
+#     season (it can run into the next year).
+#   title: no "Due:", "Season:" or "Tip:" prefix; the build adds it.
+#   topics: always include home. Never housing, money or food here: those
+#     are high stakes and go through a hand-written calendar file instead.
+#   sources: every source with the date a person or session last read it.
+#     A rule with any source checked more than 13 months ago is left out of
+#     every feed and flagged in the build output until someone re-checks it.
+#
+# Nothing personal goes here: no plate month, no "last pumped" date. Those
+# belong in the reader's own phone reminders.
+rules:
+  - slug: property-tax-first-half
+    kind: due
+    month: 9
+    day: 1
+    title: First half of property taxes, with a discount for paying on time
+    org_name: Monongalia County Sheriff's Tax Office (dates set by West Virginia law)
+    who_it_is_for: People who owe real estate or personal property taxes in Monongalia County, WV.
+    what_to_do: Pay the first half on or before September 1 to get 2.5% off. Unpaid first-half taxes become late on October 1, and state law then adds 9% interest a year. These dates come from state law (W. Va. Code 11A-1-3), so confirm with the Sheriff's tax office.
+    url: https://monongaliasheriff.gov/tax/index.php
+    topics: [home, taxes]
+    sources:
+      - url: https://code.wvlegislature.gov/11A-1-3/
+        checked: 2026-11-01
+
+  - slug: property-tax-second-half
+    kind: due
+    month: 3
+    day: 1
+    title: Second half of property taxes, with a discount for paying on time
+    org_name: Monongalia County Sheriff's Tax Office (dates set by West Virginia law)
+    who_it_is_for: People who owe real estate or personal property taxes in Monongalia County, WV.
+    what_to_do: Pay the second half on or before March 1 to get 2.5% off. Unpaid second-half taxes become late on April 1, and state law then adds 9% interest a year. These dates come from state law (W. Va. Code 11A-1-3), so confirm with the Sheriff's tax office.
+    url: https://monongaliasheriff.gov/tax/index.php
+    topics: [home, taxes]
+    sources:
+      - url: https://code.wvlegislature.gov/11A-1-3/
+        checked: 2026-11-01
+
+  - slug: personal-property-returns-open
+    kind: due
+    month: 7
+    day: 1
+    title: Personal property returns open (vehicles and more)
+    org_name: Monongalia County Assessor
+    who_it_is_for: People in Monongalia County, WV, who own vehicles or other personal property that is taxed.
+    what_to_do: You can file your personal property return with the Monongalia County Assessor from July 1 to October 1. File online from the Assessor's page, or call 304-291-7222 and choose option 1.
+    url: https://assessor.org/2155/Personal-Property-Assessment-Returns
+    topics: [home, taxes]
+    sources:
+      - url: https://assessor.org/2155/Personal-Property-Assessment-Returns
+        checked: 2026-11-01
+
+  - slug: personal-property-returns-due
+    kind: due
+    month: 10
+    day: 1
+    title: Last day for personal property returns (vehicles and more)
+    org_name: Monongalia County Assessor
+    who_it_is_for: People in Monongalia County, WV, who own vehicles or other personal property that is taxed.
+    what_to_do: Online filing with the Monongalia County Assessor ends October 1. To renew a vehicle registration in West Virginia, the DMV asks for your personal property tax receipt, so this return matters for your car or truck too.
+    url: https://assessor.org/2155/Personal-Property-Assessment-Returns
+    topics: [home, taxes]
+    sources:
+      - url: https://assessor.org/2155/Personal-Property-Assessment-Returns
+        checked: 2026-11-01
+      - url: https://dmv.wv.gov/vehicle-services/vehicles/registrations
+        checked: 2026-11-01
+
+  - slug: homestead-exemption-opens
+    kind: due
+    month: 7
+    day: 1
+    title: Homestead property tax exemption applications open
+    org_name: Monongalia County Assessor (dates set by West Virginia law)
+    who_it_is_for: Homeowners in Monongalia County, WV, who are 65 or older, or permanently and totally disabled, and live in the home they own.
+    what_to_do: New applicants can file with the Monongalia County Assessor from July 1 to December 1. You only need to apply once. The Assessor's Real Estate page has the form and a link to file online.
+    url: https://assessor.org/2205/Real-Estate
+    topics: [home, taxes]
+    sources:
+      - url: https://assessor.org/2205/Real-Estate
+        checked: 2026-11-01
+
+  - slug: homestead-exemption-deadline
+    kind: due
+    month: 12
+    day: 1
+    title: Last day to apply for the homestead property tax exemption
+    org_name: Monongalia County Assessor (dates set by West Virginia law)
+    who_it_is_for: Homeowners in Monongalia County, WV, who are 65 or older, or permanently and totally disabled, and live in the home they own.
+    what_to_do: New applicants file with the Monongalia County Assessor between July 1 and December 1. The last day is December 1. You only need to apply once. The Assessor's Real Estate page has the form and a link to file online.
+    url: https://assessor.org/2205/Real-Estate
+    topics: [home, taxes]
+    sources:
+      - url: https://assessor.org/2205/Real-Estate
+        checked: 2026-11-01
+
+  - slug: farm-status-deadline
+    kind: due
+    month: 9
+    day: 1
+    title: Farm status applications due
+    org_name: Monongalia County Assessor
+    who_it_is_for: Farm owners in Monongalia County, WV.
+    what_to_do: The Monongalia County Assessor must receive farm status applications by September 1. Ask the Assessor's office for the form.
+    url: https://assessor.org/2205/Real-Estate
+    topics: [home, taxes]
+    sources:
+      - url: https://assessor.org/2205/Real-Estate
+        checked: 2026-11-01
+
+  - slug: spring-fire-season
+    kind: season
+    month: 3
+    day: 1
+    end_month: 5
+    end_day: 31
+    title: Spring forest fire season (outdoor burning only 5 p.m. to 7 a.m.)
+    org_name: West Virginia Division of Forestry (dates set by state law)
+    who_it_is_for: Anyone in Monongalia County, WV, who burns leaves, brush or yard waste outdoors.
+    what_to_do: From March 1 through May 31, state law lets you burn outdoors only between 5 p.m. and 7 a.m., and the fire must be out by 7 a.m. Clear a strip at least 10 feet wide around the pile first. A burning ban can stop all burning. Towns may have their own rules.
+    url: https://code.wvlegislature.gov/20-3-5/
+    topics: [home, safety]
+    sources:
+      - url: https://code.wvlegislature.gov/20-3-5/
+        checked: 2026-11-01
+
+  - slug: fall-fire-season
+    kind: season
+    month: 10
+    day: 1
+    end_month: 12
+    end_day: 31
+    title: Fall forest fire season (outdoor burning only 5 p.m. to 7 a.m.)
+    org_name: West Virginia Division of Forestry (dates set by state law)
+    who_it_is_for: Anyone in Monongalia County, WV, who burns leaves, brush or yard waste outdoors.
+    what_to_do: From October 1 through December 31, state law lets you burn outdoors only between 5 p.m. and 7 a.m., and the fire must be out by 7 a.m. Clear a strip at least 10 feet wide around the pile first. A burning ban can stop all burning. Towns may have their own rules.
+    url: https://code.wvlegislature.gov/20-3-5/
+    topics: [home, safety]
+    sources:
+      - url: https://code.wvlegislature.gov/20-3-5/
+        checked: 2026-11-01
+
+  - slug: well-water-test
+    kind: tip
+    month: 3
+    day: 15
+    title: Test your well water this year
+    org_name: U.S. Environmental Protection Agency
+    who_it_is_for: Homes in Monongalia County, WV, that get water from a private well.
+    what_to_do: The EPA says to test a private well every year for total coliform bacteria, nitrates, total dissolved solids and pH. This yearly reminder comes in March; pick any date that works for you.
+    url: https://www.epa.gov/privatewells/protect-your-homes-water
+    topics: [home]
+    sources:
+      - url: https://www.epa.gov/privatewells/protect-your-homes-water
+        checked: 2026-11-01
+
+  - slug: last-spring-frost
+    kind: tip
+    month: 4
+    day: 23
+    title: Last spring frost is often around now
+    org_name: NOAA National Centers for Environmental Information
+    who_it_is_for: Gardeners in Monongalia County, WV.
+    what_to_do: At the Morgantown airport weather station (Hart Field), half of years have their last spring frost (32°F) after April 23. In 3 of 10 years it comes after May 1, and in 1 of 10 after May 14. These are 1991 to 2020 averages, and your yard may differ. Wait to set out plants that frost can harm, or be ready to cover them.
+    url: https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
+    topics: [home, growing]
+    sources:
+      - url: https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USW00013736&format=json&dataTypes=ANN-TMIN-PRBLST-T32FP50,ANN-TMIN-PRBLST-T32FP30,ANN-TMIN-PRBLST-T32FP10&includeStationName=true
+        checked: 2026-11-01
+
+  - slug: first-fall-frost
+    kind: tip
+    month: 10
+    day: 11
+    title: First fall frost can come soon, so put away hoses
+    org_name: NOAA National Centers for Environmental Information and the American Red Cross
+    who_it_is_for: Anyone in Monongalia County, WV, with outdoor faucets, hoses or a garden.
+    what_to_do: At the Morgantown airport weather station (Hart Field), 1 in 10 years has its first fall frost (32°F) by October 11, and half of years by October 24 (1991 to 2020 averages). Before it freezes, the Red Cross says to drain and store outdoor hoses, close the inside valves that feed outdoor faucets, and open the outdoor faucets so they drain.
+    url: https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/winter-storm/frozen-pipes.html
+    topics: [home, growing]
+    sources:
+      - url: https://www.ncei.noaa.gov/access/services/data/v1?dataset=normals-annualseasonal-1991-2020&stations=USW00013736&format=json&dataTypes=ANN-TMIN-PRBFST-T32FP50,ANN-TMIN-PRBFST-T32FP10&includeStationName=true
+        checked: 2026-11-01
+      - url: https://www.redcross.org/get-help/how-to-prepare-for-emergencies/types-of-emergencies/winter-storm/frozen-pipes.html
+        checked: 2026-11-01
+
+  - slug: septic-check
+    kind: tip
+    month: 9
+    day: 1
+    title: Is your septic system due for a check?
+    org_name: U.S. Environmental Protection Agency
+    who_it_is_for: Homes in Monongalia County, WV, on a septic system.
+    what_to_do: The EPA says to have a septic system inspected by a professional at least every 3 years, and that most household tanks are pumped every 3 to 5 years. Put the date of your own last pumping in your phone's reminders; this calendar does not know it.
+    url: https://www.epa.gov/septic/how-care-your-septic-system
+    topics: [home]
+    sources:
+      - url: https://www.epa.gov/septic/how-care-your-septic-system
+        checked: 2026-11-01

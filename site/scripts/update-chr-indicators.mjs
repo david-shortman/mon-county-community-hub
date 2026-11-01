@@ -8,6 +8,11 @@
 // Each indicator names its measure under `chr:`. The source URLs are the
 // indicator's own first two sources, so a new yearly release is a change to
 // those URLs plus a run of this script.
+// Supplements (#1357): CHR&R made no 2026 annual release. Its March 2026
+// supplemental file refreshed 34 measures, has no label row and no year
+// column. An indicator that reads it sets `chr.data_year` to the year the
+// supplement's codebook gives for that measure, since the trends file stops
+// at the last annual release. History still comes from the trends file.
 //
 // Usage (from site/):
 //   node scripts/update-chr-indicators.mjs --check   # exit 1 and list what differs
@@ -57,8 +62,10 @@ const PLACES = { monongalia: ['54', '061'], west_virginia: ['54', '000'], united
 export async function freshValues(ind) {
   const [dataUrl, trendsUrl] = ind.sources.map((s) => s.url);
   const data = await csv(dataUrl);
-  const head = data[0];
-  const col = head.indexOf(`${head.find((h, i) => data[1][i] === `${ind.chr.measure}_rawvalue`)}`);
+  // The annual file has a label row first and variable names second; the
+  // supplement has only the variable names.
+  const want = `${ind.chr.measure}_rawvalue`;
+  const col = data[0].includes(want) ? data[0].indexOf(want) : data[1].indexOf(want);
   if (col < 0) throw new Error(`${ind.slug}: measure ${ind.chr.measure} not in ${dataUrl}`);
   const values = {};
   for (const [k, [st, co]] of Object.entries(PLACES)) {
@@ -79,7 +86,7 @@ export async function freshValues(ind) {
     history[key] = usable.map((r) => ({ year: at(r, 'yearspan'), value: num(at(r, 'rawvalue')) })).filter((p) => p.value != null);
     if (key === 'monongalia') dataYear = rows.at(-1) ? at(rows.at(-1), 'yearspan') : null;
   }
-  return { values, history, data_year: dataYear };
+  return { values, history, data_year: ind.chr.data_year ? String(ind.chr.data_year) : dataYear };
 }
 
 const files = fs.readdirSync(DIR).filter((f) => /\.ya?ml$/.test(f)).sort();

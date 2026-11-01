@@ -2,12 +2,14 @@
 // Do I need a permit? City vs county (#661, part of #271). Who issues
 // building permits depends on where the property is, so the page starts with
 // "are you in a town?" and then gives each town's own office. Only facts on
-// official pages read 2026-10-30. Left off until a person confirms (#660):
+// official pages read 2026-10-30. Shown as a Trailhead route (#240). Left off until a person confirms (#660):
 // where to appeal an assessment, and the contractor dollar limit (#603).
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
 import { loadDir, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Do I need a building permit?", summary: "City or county: who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Mon County" };
@@ -31,9 +33,10 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
 ---
 <Base title="Do I need a building permit? Morgantown and Mon County, WV" description="Who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Mon County, how to apply, and the county forms.">
   <h1>Do I need a building permit?</h1>
-  <p class="lede">It depends on where the property is. Each town has its own rules and office. Outside town limits, the county has no local building code office, but other permits and forms can still apply. Start by finding out which one you are in.</p>
+  <p class="lede">It depends on where the property is. Each town has its own rules and office. Outside town limits, the county has no local building code office, but other permits and forms can still apply. Start with step 1. Steps 2, 3 and 4 are for different places, so open the one that fits. Step 5 is for everyone. Tap a step to open it.</p>
 
-  <h2 id="where">1. Are you inside a town?</h2>
+  <Route label="Steps to find out who issues your permit">
+  <Milepost n={1} title="Find out if you are inside a town" id="where" open>
   <p>Your mailing address can say "Morgantown" even when the home is outside city limits. To check, the City of Morgantown says to look up the address on its <strong>City Zoning Viewer</strong> map.</p>
   <SourceLine sources={city} about="checking Morgantown city limits" />
   <div class="actions">
@@ -41,7 +44,9 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
   </div>
   {exists('who-serves-me') && <p>Not sure which town you are in? <a href={`${base}/who-serves-me/`}>Who serves my address?</a></p>}
 
-  <h2 id="morgantown">2. Inside Morgantown city limits</h2>
+  </Milepost>
+
+  <Milepost n={2} title="Inside Morgantown city limits" id="morgantown">
   <ul>
     <li><strong>Apply online.</strong> All building permit applications go through the <strong>Morgantown Access Portal</strong>. You make an account, apply, pay fees and track it there. The city does not take paper permit applications.</li>
     <li><strong>One application for each kind of work.</strong> Electrical work and plumbing work, for example, each need their own permit application.</li>
@@ -56,7 +61,9 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
     <a class="btn" href={telHref(phones.cityCode)}><Icon name="phone" /><span>Call Code Enforcement</span></a>
   </div>
 
-  <h2 id="towns">3. Star City, Westover, Granville or Blacksville</h2>
+  </Milepost>
+
+  <Milepost n={3} title="In Star City, Westover, Granville or Blacksville" id="towns">
   <h3>Star City</h3>
   <p>Download the application from the town's Building Permits page, print it, fill it out and return it to the town office at 370 Broadway Ave. Fees must be paid in full before the permit is issued. Allow 72 hours. Do not start work until you have the approved permit. The town calls you when it is ready to pick up. Questions go to the Code Enforcement Officer at <a href={telHref(phones.starCity)}>{phones.starCity}</a>, Monday to Friday, 8 a.m. to 4:30 p.m.</p>
   <SourceLine sources={starCity} about="Star City building permits" />
@@ -70,7 +77,9 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
   <p>The county says Blacksville does not have a website. Ask the town office.</p>
   <SourceLine sources={county} about="Blacksville" />
 
-  <h2 id="county">4. Outside town limits</h2>
+  </Milepost>
+
+  <Milepost n={4} title="Outside town limits" id="county">
   <p>The county says there is no local enforcement of the state building code outside the towns. These can still apply:</p>
   <ul>
     <li><strong>Zoning, only in the West Run district.</strong> Only the West Run Planning District, north of Morgantown, is zoned. There, building or adding on to a home, a new or replaced deck, a shed or garage, a patio, a paved driveway or an in-ground pool needs a <strong>Land Use Permit</strong>. The county says a fence, landscaping, a retaining wall, a new roof or siding, new windows or doors, and work inside the home do not. Check the County GIS map to see if the property is zoned.</li>
@@ -85,7 +94,9 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
   </div>
   {r('mon-county-planning-permits') && <ResourceCard r={r('mon-county-planning-permits')} />}
 
-  <h2 id="assessor">5. Anywhere in the county: tell the Assessor</h2>
+  </Milepost>
+
+  <Milepost n={5} title="Anywhere in the county: tell the Assessor" id="assessor" when="Within 60 days">
   <p>The Monongalia County Assessor says:</p>
   <ul>
     <li>If you build, add on or remodel and the property's value goes up by more than $1,000, you must tell the Assessor on <strong>Form 12:75</strong>.</li>
@@ -94,6 +105,9 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
     <li>Forms are at the Assessor's office.</li>
   </ul>
   <SourceLine sources={assessor} about="telling the Assessor about improvements" />
+
+  </Milepost>
+  </Route>
 
   <p>Hiring someone to do the work? See <a href={`${base}/contractor-license/`}>contractor licenses and how to check one</a>.</p>
 

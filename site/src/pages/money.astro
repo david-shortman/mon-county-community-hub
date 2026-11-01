@@ -2,7 +2,7 @@
 // The Get through this month door (#251). It took over the old Money help
 // page and keeps its link: the steps come from content/doors/this-month.yaml
 // through the shared door layout, and the old sections sit below them with
-// the same anchors (#bills, #rent, #payday, #taxes).
+// the same anchors (#bills, #rent, #payday, #taxes). Child care help (#571) is #child-care.
 import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -21,6 +21,7 @@ const dfi = resource('wv-dfi-check-a-lender');
 const taxPrep = resource('christian-help-free-tax-prep');
 const rack = resource('the-rack-wvu-student-food-pantry');
 const studentLegal = resource('wvu-student-legal-services');
+const childCare = resource('child-care-resource-center-morgantown');
 // The Lifeline link shows once its record is in (#668, #735).
 const lifeline = loadDir('resources').some((e) => e.slug === 'lifeline-phone-internet-discount');
 const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/government-program-pays-your-bills', checked: '2026-10-29', name: 'Federal Trade Commission' }];
@@ -64,6 +65,10 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
       If you file together, both spouses come.</li>
   </ul>
   <SourceLine sources={taxPrep.sources} org={taxPrep.org} about="free tax help"> The source is a Morgantown Magazine article from January 14, 2026.</SourceLine>
+
+  <h3 id="child-care">I need help paying for child care</h3>
+  <p>Parents who work or go to school, and meet income rules, can get help paying for child care. Call the Child Care Resource Center in Morgantown at <a href={telHref(childCare.contact.phone)}>{childCare.contact.phone}</a> to ask about help with the cost and about providers near you. More in <a href={`${base}/families-and-kids/#child-care`}>Finding child care, and help paying for it</a>.</p>
+  <SourceLine sources={childCare.sources} org={childCare.org} about="child care help" />
 
   {/* Folded (#1174): it is for one group of readers and runs about 3 phone screens. */}
   <Fold id="students" level={3} title="Are you a WVU student?" hint="Tap to see WVU's own free help for students.">

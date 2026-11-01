@@ -8,11 +8,13 @@ contact:
   phone: "304-291-9226"
   url: https://wvde.us/academics/adult-education/wvadulted-class-locations
   url_label: Class locations
-cost: "Free. The state says adult education services are available at no cost to adult learners. Ask whether there is a fee for the GED exam itself."
+cost: "Free. The state says adult education services are available at no cost to adult learners. The GED test is also free if you first pass the official GED practice test in each subject at an adult education class."
 sources:
   - url: https://wvde.us/academics/adult-education/wvadulted-class-locations
     checked: 2026-11-01
   - url: https://wvde.us/academics/adult-education
     checked: 2026-11-01
   - url: https://wvde.us/academics/adult-education/student-information
+    checked: 2026-11-01
+  - url: https://wvde.us/academics/adult-education/adult-education-student-information/west-virginia-high-school-equivalency-diploma
     checked: 2026-11-01

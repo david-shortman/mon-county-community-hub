@@ -34,6 +34,9 @@ Adding a new automated reader: use `fetchWithRetry`, or call `robotsCheck` befor
 | City of Morgantown calendar feed | `common/modules/iCalendar/` | **Blocked by robots.txt** since 2026-10-21 (`Disallow: /common/modules/icalendar/`). The site uses the saved copy, so past events drop and no new ones arrive. A person reads `calendar.aspx` on the weekly centers checklist. |
 | Unemployment rate (BLS) | `api.bls.gov` | **Blocked by robots.txt** (`Disallow: /`). The site shows the saved number with the date it was read. `data.bls.gov` also says `Disallow: /`, and `www.bls.gov` and `download.bls.gov` refuse automated reads. |
 | Weather in the header | `api.weather.gov` (`Disallow: /`) | **Switched** to the forecast page's JSON on `forecast.weather.gov`, which has no robots.txt. Same NWS forecast for downtown. |
+| Source check: Pre-K sign-up site | `www.preschoolsteps.org` (`Disallow: /`) | **Manual.** Skipped by the Source check (`content/source-rules.yaml`). A person re-reads it on the monthly person sources checklist (`content/checklists/person-sources.yaml`). |
+| Source check: Contractor Licensing Board | `wvclboard.wv.gov` (`Disallow: /`) | **Manual.** Same as above. |
+| Source check: health department PDFs | `cdn.sanity.io` (`Disallow: /*.pdf`, only another site's folder allowed) | **Manual.** The health department's fee, permit and loan PDFs are stored here. Same as above. The health department's own pages on `www.monchd.org` are still read. |
 
 ## Per-host results
 
