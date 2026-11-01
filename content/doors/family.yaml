@@ -90,6 +90,9 @@ situations:
     label: I need a job or job training
     page: /work-and-learning/
     steps: [workforce]
+  - id: lost-job
+    label: I just lost my job
+    page: /life-events/lost-my-job/
   - id: read
     label: I want to read, write or speak English better
     page: /work-and-learning/
@@ -116,6 +119,18 @@ situations:
   - id: death
     label: Someone in my family died
     page: /when-someone-dies/
+  - id: divorce
+    label: I'm separating or getting divorced
+    page: /life-events/separating-or-divorcing/
+  - id: unsafe-home
+    label: I'm leaving an unsafe home
+    page: /life-events/leaving-an-unsafe-home/
+  - id: reentry
+    label: I or someone in my family is leaving jail or prison
+    page: /life-events/leaving-jail-or-prison/
+  - id: new-country
+    label: We're new to the country
+    page: /life-events/new-to-the-country/
 also:
   - text: Short on money this month
     href: /money/
