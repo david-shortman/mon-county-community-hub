@@ -27,7 +27,7 @@ const election = currentElection();
   {election?.phase === 'before' && (
     <section id="election" aria-labelledby="election-h">
       <h2 id="election-h">Election Day is {longDate(election.election_day)}</h2>
-      <p>Polls are open from {election.polls}. Bring a valid photo ID.{election.registrationClosed && ' The deadline to register for this election has passed, so check that you are registered and find your polling place below.'}</p>
+      <p>Polls are open from {election.polls.replace(/\.$/, '')}. Bring a valid photo ID.{election.registrationClosed && ' The deadline to register for this election has passed, so check that you are registered and find your polling place below.'}</p>
       {election.earlyVotingOpen && r(election.early_voting.resource) && <ResourceCard r={r(election.early_voting.resource)} />}
       {election.before.map((slug) => r(slug) && <ResourceCard r={r(slug)} />)}
     </section>
