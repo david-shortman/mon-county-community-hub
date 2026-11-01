@@ -6,6 +6,7 @@
 // buy a dog tag, the Humane Society (its site blocked us), city pet rules.
 import Base from '../layouts/Base.astro';
 import OnThisPage from '../components/OnThisPage.astro';
+import BigChoices from '../components/BigChoices.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -14,7 +15,14 @@ export const page = { door: "living-here", topic: "pets", label: "Pets and anima
 <Base title="Pets and animals in Morgantown and Mon County, WV" description="Pets in Monongalia County, WV: report a stray or found dog, find a lost pet at the county shelter, adopt a dog or cat, low cost spay, neuter and rabies shots, county dog tags and the leash law, and options if you can't keep your pet.">
   <h1>Pets and animals</h1>
   <p class="lede">Lost a pet? Check the county shelter's online list of found pets first. Found a dog, or see one loose? Call county animal control at 304-291-7267, option 1. That number covers Morgantown too.</p>
-  <OnThisPage items={[['#found', "Found a dog"], ['#lost', "Lost your pet"], ['#bite', "Animal bite or scratch"], ['#adopt', "Adopt"], ['#spay-neuter', "Low cost spay, neuter and shots"], ['#rules', "Rabies shots, tags and leash law"], ['#rehome', "Can't keep your pet"], ['#help-animals', "Foster or volunteer"]]} />
+  {/* Lead block (#199): the four things most people come here for. */}
+  <BigChoices label="Pets: start here" choices={[
+    { href: '#found', label: 'Found a dog', icon: 'pin' },
+    { href: '#lost', label: 'Lost my pet', icon: 'search' },
+    { href: '#bite', label: 'Bitten or scratched', icon: 'health' },
+    { href: '#adopt', label: 'Adopt a pet', icon: 'home' },
+  ]} />
+  <OnThisPage items={[['#spay-neuter', "Low cost spay, neuter and shots"], ['#rules', "Rabies shots, tags and leash law"], ['#rehome', "Can't keep your pet"], ['#help-animals', "Foster or volunteer"]]} />
 
   <h2 id="found">Found a dog, or see a loose dog</h2>
   <ResourceCard r={resource('mccac-animal-control-stray-dog')} />
