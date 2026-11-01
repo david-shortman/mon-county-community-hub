@@ -1,0 +1,69 @@
+---
+// After you apply (#1148): what comes after an application, and the appeal
+// deadline for each program at a glance. Each program's own page lives in
+// this folder and is linked only when it is on the site. Every deadline below
+// is quoted on that program's page; sources were read 2026-10-31.
+// High-stakes benefits page: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'this-month', topic: 'money', label: 'After you apply', summary: 'What comes next for SNAP, Medicaid, LIEAP, WIC, WV WORKS, unemployment and disability, and each appeal deadline' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const have = Object.keys(import.meta.glob('./*.astro')).map((k) => k.slice(2, -6));
+const checked = '2026-10-31';
+const IMM = { url: 'https://bfa.wv.gov/media/40005/download?inline', checked, name: 'WV DoHS Income Maintenance Manual, Chapter 9 Appendix C (form DFA-FH-1) and section 21.6.9' };
+const WIC = { url: 'https://dhhr.wv.gov/WIC/policyprocedure/Documents/1.07%20Fair%20Hearing%20Policy%20for%20Applicants%20and%20Participants.pdf', checked, name: 'WV WIC Policy 1.07' };
+const UI = { url: 'https://code.wvlegislature.gov/pdf/21A-7/', checked, name: 'West Virginia Code §21A-7-8' };
+const SSA = { url: 'https://www.ecfr.gov/current/title-20/section-404.909', checked, name: '20 CFR 404.909 and 404.901' };
+const ROWS = [
+  { slug: 'snap', name: 'SNAP (food stamps)', who: 'DoHS', deadline: '90 days from the date the change takes effect', keep: 'Ask before the cut or closure date on your letter' },
+  { slug: 'medicaid', name: 'Medicaid and WVCHIP', who: 'DoHS', deadline: '90 days from the date the change takes effect', keep: 'Ask before the closing date on your letter' },
+  { slug: 'wv-works', name: 'WV WORKS (cash help)', who: 'DoHS', deadline: '90 days from the date the change takes effect', keep: 'Ask before the cut or closure date on your letter' },
+  { slug: 'lieap', name: 'LIEAP (heating help)', who: 'DoHS', deadline: '60 days from when you get the notice (the LIEAP rule)', keep: 'The LIEAP rules we read do not say' },
+  { slug: 'wic', name: 'WIC', who: 'WIC clinic', deadline: '60 days from when the notice is mailed or given', keep: 'Appeal within the 15 day notice period' },
+  { slug: 'unemployment', name: 'Unemployment', who: 'WorkForce West Virginia', deadline: '8 calendar days from when the decision is delivered or mailed', keep: 'Benefits found payable are paid while appeals go on' },
+  { slug: 'social-security-disability', name: 'Social Security disability (SSDI and SSI)', who: 'Social Security', deadline: '60 days, plus 5 days for mail', keep: 'Ask within 10 days if payments are being stopped' },
+];
+const rows = ROWS.map((r) => ({ ...r, href: have.includes(r.slug) ? `${base}/after-you-apply/${r.slug}/` : null }));
+---
+<Base help title="After you apply for benefits in Mon County: next steps and appeal deadlines" description="What happens after you apply for SNAP, Medicaid, WVCHIP, LIEAP, WIC, WV WORKS, unemployment or Social Security disability in Monongalia County, WV, and the deadline to appeal each one, quoted from the official rules.">
+  <h1>After you apply</h1>
+  <p class="lede">Read every letter as soon as it comes, and answer by the date on it. If you are turned down or cut off, you can appeal, but each program has its own deadline. Here they are side by side.</p>
+  <p>Not applied yet? Start with <a href={`${base}/file-today/`}>File today</a>.</p>
+  <p class="note">These deadlines are quoted from each program's own rules. Your letter may give an exact date: go by that. This is information, not legal advice.</p>
+
+  <h2 id="deadlines">Appeal deadlines at a glance</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th scope="col">Program</th><th scope="col">Run by</th><th scope="col">Deadline to appeal</th><th scope="col">To keep benefits while you appeal</th></tr></thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <th scope="row">{r.href ? <a href={r.href}>{r.name}</a> : r.name}</th>
+            <td>{r.who}</td>
+            <td>{r.deadline}</td>
+            <td>{r.keep}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <SourceLine sources={[IMM, WIC, UI, SSA]} about="appeal deadlines" />
+
+  <h2 id="guides">Step by step, for each program</h2>
+  {rows.some((r) => r.href) ? (
+    <ul>
+      {rows.filter((r) => r.href).map((r) => <li><a href={r.href}>After you apply for {r.name}</a></li>)}
+    </ul>
+  ) : <p>Guides for each program are being checked and will appear here.</p>}
+
+  <h2 id="help">Free legal help with an appeal</h2>
+  <p>Legal Aid of West Virginia takes cases about government benefits and unemployment. See <a href={`${base}/legal-help/`}>Free legal help</a>.</p>
+  <p class="meta">We describe each program's rules. The agencies decide who gets benefits. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; vertical-align: top; padding: 6px 8px; border-bottom: 1px solid var(--line, #ccc); }
+</style>
