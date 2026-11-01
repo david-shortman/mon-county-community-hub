@@ -11,6 +11,6 @@ contact:
   url_label: Polling places and sample ballots
 sources:
   - url: https://monongaliacountyclerk.com/index.php/elections/17-current-election/124-2026-general-election-information
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://sos.wv.gov/govotewv
-    checked: 2026-10-31
+    checked: 2026-11-01

@@ -9,6 +9,6 @@ contact:
   url_label: Poll worker sign-up
 sources:
   - url: https://apps.sos.wv.gov/elections/PollWorkers/Register
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://sos.wv.gov/govotewv
-    checked: 2026-10-31
+    checked: 2026-11-01
