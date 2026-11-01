@@ -1,0 +1,30 @@
+---
+// Small estate affidavit, what happens next (part of #393): the County
+// Clerk's one-page overview PDF as short lists. Every step is quoted in
+// content/pdf-pages/mon-county-clerk-small-estate.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "records", label: "Small estate affidavit: what happens next", summary: "After you file a Small Estate Affidavit with the County Clerk: the Certificate of Authorization, the 30 days heirs have to object, and the Authorized Successor's duties" };
+const d = pdfPage('mon-county-clerk-small-estate');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-291-7230';
+---
+<Base title="Small estate affidavit in Mon County, WV: what happens after you file" description="What the Monongalia County Clerk says happens after a Small Estate Affidavit is filed: who can use it, the Certificate of Authorization (good for 6 months), the 30 days heirs have to object, and the Authorized Successor's duties, quoted from the Clerk's overview.">
+  <h1>Small estate affidavit: what happens next</h1>
+  <p class="lede">If someone who died had only small assets, like a bank account or a car, one person can often handle them with a Small Estate Affidavit instead of full probate. The County Clerk explains what happens after you file in a PDF, so here it is as a short list. Questions: call the Clerk at <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>The forms, what to bring, fees and office hours: see <a href={`${base}/when-someone-dies/#estate`}>when someone dies</a>. Free and low cost legal help: <a href={`${base}/legal-help/`}>courts and legal help</a>.</p>
+
+  <p class="meta">This page is a reading aid, not legal advice. The County Clerk's PDF is the official version. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

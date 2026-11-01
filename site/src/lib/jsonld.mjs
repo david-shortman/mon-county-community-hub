@@ -9,7 +9,10 @@
 //   with the organization as provider.
 // - calendar: Event only for in-person entries with a `place`. Deadlines and
 //   application windows get no Event markup (Google's Event rules).
+// - the home page also gets WebSite (the site's name in search results), and
+//   every page with a breadcrumb gets a BreadcrumbList that matches it (#1044).
 import { loadCalendarWithFeeds, loadDir } from './content.mjs';
+import { crumbsFromHtml, breadcrumbNode, websiteNode } from './site-meta.mjs';
 
 const ORG_TYPES = { government: 'GovernmentOrganization', nonprofit: 'NGO', school: 'EducationalOrganization' };
 const clean = (o) => Object.fromEntries(Object.entries(o).filter(([, v]) => v != null && v !== '' && !(Array.isArray(v) && !v.length)));
@@ -72,8 +75,9 @@ async function load() {
 
 const CARD = /<article class="card (resource|place|event)" id="([a-z0-9-]+)"/g;
 
-// The JSON-LD graph for one built page, or null when it has no listings.
-export async function jsonLdForHtml(html) {
+// The JSON-LD graph for one built page, or null when it has nothing to mark up.
+// `home` is true for the home page.
+export async function jsonLdForHtml(html, { home = false } = {}) {
   const { orgs, resources, events } = await load();
   const nodes = [];
   const seen = new Set();
@@ -89,6 +93,9 @@ export async function jsonLdForHtml(html) {
       if (r) nodes.push(serviceNode(r, orgs.get(r.org)));
     }
   }
+  if (home) nodes.unshift(websiteNode());
+  const crumbs = breadcrumbNode(crumbsFromHtml(html));
+  if (crumbs) nodes.push(crumbs);
   return nodes.length ? { '@context': 'https://schema.org', '@graph': nodes } : null;
 }
 
