@@ -73,7 +73,7 @@ Taps and screens are for the tap path before the fixes. "Search" is how many of 
 
 ## Top problems, most common first
 
-1. **Search missed people's own words** (18 of 60 phrases before). Pagefind only matched pages with every word, so "detox near me" found nothing, and words our pages do not use ("garbage", "rehab", "toothache", "daycare") missed. Printout and help-giver pages often ranked above the pages they copy. *Fixed in #1153*: ranks pages by how many of your words they have, maps common words, skips filler, lists printouts and helper pages last. 42 to 50 of 60 in the top 3.
+1. **Search missed people's own words** (18 of 60 phrases before). Pagefind only matched pages with every word, so "detox near me" found nothing, and words our pages do not use ("garbage", "rehab", "toothache", "daycare") missed. Printout and help-giver pages often ranked above the pages they copy. *Fixed in #1153*: ranks pages by how many of your words they have, maps common words, skips filler, lists printouts and helper pages last. 42 to 50 of 60 in the top 3. The search lane's #1151 and #1162 change the same page with a fuller plan (spelling fixes, a 249-query test set, visible "Also called" lines); on these 60 phrases they reach 46 of 60. The suggestion on #1153 is to merge those first and fold this PR's word map and helper-page ordering into them.
 2. **Answers at the bottom of long door pages** (10 tasks needed 7 or more screens of scrolling). Renting, Property tax and Free tax help sit 16 to 17 screens down Get through this month. Caregivers, When someone dies and Internet sit 6 to 12 screens down their door's topic list. *Partly fixed*: new door choices in #1156 (landlord repairs) and #1171 (caregiving, a death in the family, property tax). The page itself is #1174.
 3. **Missing links between pages** (2 dead ends, 1 near miss). School-age kids did not link to the school shots page; Work and learning did not link to Find a job; Selling food did not link to the bake sale rules. *Fixed in #1156 and #1160.*
 4. **Content we have but do not show.** A checked record for help finding and paying for child care (#735) appeared on no page, and the Family door had no child care choice. Child care is on the needs register. *Fixed in #1163* (waits for David, as #571 asks).
@@ -101,7 +101,7 @@ The benchmark run was a check only; no new benchmark file was saved.
 
 ## PRs and issues from this run
 
-- #1153 Search finds pages in residents' own words (waits for David: the search page names 211)
+- #1153 Search finds pages in residents' own words (waits for David: the search page names 211; overlaps #1151 and #1162, see the comment there)
 - #1156 Links: school shots, bake sales, landlord repairs (labeled for David by the High stakes check while it still held the Work and learning change; that change moved to #1160)
 - #1160 Work and learning links to Find a job (waits for David: the page names 211)
 - #1163 Child care help on Families and kids and the Family door (waits for David)
