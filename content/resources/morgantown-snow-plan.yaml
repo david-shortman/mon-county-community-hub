@@ -3,7 +3,14 @@ slug: morgantown-snow-plan
 org: city-of-morgantown
 topics: [weather]
 who_it_is_for: People who live, drive or walk in the City of Morgantown.
-what_to_do: "The city plows and treats its streets in order: first major streets and busy collector streets, then low-traffic roads, then side streets and dead ends. Crews start treating the first group before snow is expected. Residents and businesses must clear the sidewalk next to their property within 24 hours after a storm ends, and pile the snow in your yard, not in the street. To report a sidewalk still not cleared after 24 hours, use the city's service request page. Can't shovel because of a health or physical limit? Call Code Enforcement at 304-284-7401 for help. Questions about a city street: call the Streets division at 304-291-7465."
+what_to_do: The city clears busy streets first and side streets last. You must clear the sidewalk next to your home or business within 24 hours after a storm ends.
+steps:
+  - "Streets: crews treat major and busy streets before snow is expected, and plow them first. Then they clear low-traffic roads, then side streets and dead ends."
+  - "Sidewalks: clear the sidewalk next to your property within 24 hours after the storm ends. Pile the snow in your yard, not in the street."
+  - "Driveways: shovel or plow snow to the right side of the driveway as you face the street, so passing plows do not push it back. Never push snow into the road."
+  - Sidewalk still not cleared 24 hours after the storm? Report it on the city's service request page.
+  - Physically unable to clear your sidewalk, and no neighbor, family or friend can help? Call Code Enforcement at 304-284-7401.
+  - "Questions about a city street: call the Streets division at 304-291-7465."
 contact:
   phone: "304-291-7465"
   url: https://www.morgantownwv.gov/496/Snow-Plan

@@ -3,7 +3,15 @@ slug: wvdoh-snow-priorities
 org: wv-division-of-highways
 topics: [weather]
 who_it_is_for: Anyone driving on state roads in Mon County. Not sure if a road is a state road? The state has a road search map by address.
-what_to_do: "The state's snow and ice season usually runs November through March. Crews clear roads in this order: first, interstates, expressways and major routes; second, school bus routes not in the first group; third, local roads; fourth, park and forest roads. While snow is still falling, crews may go back to the first group, which can delay side roads. Mon County is in District 4, based in Clarksburg: call 304-842-1500, Monday to Friday, 7:30 a.m. to 4 p.m. For road conditions, check WV 511."
+what_to_do: The state clears interstates and major routes first, then school bus routes, then local roads. Snow season usually runs November through March.
+steps:
+  - "First: interstates, expressways and major routes."
+  - "Second: school bus routes not in the first group."
+  - "Third: local roads."
+  - "Fourth: park and forest roads."
+  - While snow is still falling, crews may go back to the first group. That can delay side roads.
+  - For road conditions, check WV 511.
+  - "Mon County is in District 4, based in Clarksburg: call 304-842-1500, Monday to Friday, 7:30 a.m. to 4 p.m."
 contact:
   phone: "304-842-1500"
   url: https://transportation.wv.gov/routes-and-priorities
