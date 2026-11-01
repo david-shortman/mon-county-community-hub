@@ -23,14 +23,14 @@ contact:
 cost: "Fees the Clerk lists include $12 to record a will of up to 4 pages ($1 per extra page), $12 for a Small Estate Affidavit of up to 5 pages, and, to open probate, $12 for the Application of Fiduciaries and $20 for the Notice of Administration. Extra Letters of Administration are $2.50 each. The Clerk takes cash, check, money order or credit card ($2 card fee)."
 sources:
   - url: https://www.monongaliacountyclerk.com/index.php/fiduciary-probate
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.monongaliacountyclerk.com/index.php/fiduciary-probate/16-general-info/108-decedent-had-a-will
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.monongaliacountyclerk.com/index.php/fiduciary-probate/16-general-info/109-decedent-did-not-leave-a-will
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: "https://www.monongaliacountyclerk.com/myfiles/probate_office/Opening_Probate_Forms_and_Instructions_Testate_(Will).pdf"
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: "https://www.monongaliacountyclerk.com/myfiles/probate_office/Small_Estate_Affidavit_Form_and_Instructions_Intestate_(No_Will).pdf"
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.monongaliacountyclerk.com/myfiles/probate_office/Full_Probate_Overview_and_Timeline.pdf
-    checked: 2026-10-31
+    checked: 2026-11-01
