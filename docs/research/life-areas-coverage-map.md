@@ -26,6 +26,7 @@ Review this table monthly with the #222 table. When a PR merges, move its row.
 | | Pregnancy, birth control, testing | Waiting for David | #742 |
 | | Hospital bills and financial help | In progress, other lane | #985 (wave 4 tax and medical bills lane) |
 | | Rides to care | Covered | `/medical-rides/` |
+| | Living will, medical power of attorney, POST | Covered | `/advance-directives/` (#1108) |
 | Money and work | Bills, rent, cash, free tax help | Covered, more waiting | `/utility-bills/`, `/money/`; #702, #755, #825, #933, #935 |
 | | Free tax filing | In progress, other lane | #987 |
 | | Jobs and training | Covered | `/find-a-job/`, `/work-and-learning/`, `/teens/` |
@@ -41,6 +42,8 @@ Review this table monthly with the #222 table. When a PR merges, move its row.
 | | Moving here, utilities, internet | Covered | `/moving-here/`, `/internet/`, `/for/new-to-mon-county/` |
 | | Pets and animals | Covered, more waiting | `/pets/` (#1007); bite steps in #1021; unknowns in #1024 |
 | Safety | Scams | Covered | `/scams/` |
+| | Burning leaves and brush | Covered (state law only) | `/burning/` (#1121); town rules and burn bans in #1118 |
+| | Noise and neighbor problems | Covered | `/noise/` (#1122); who takes noise calls in #1113 |
 | | Weather alerts, storms | Covered, more waiting | `/weather-alerts/`; #811, #871 |
 | | Safe from someone at home | Covered (crisis only) | `/stay-tonight/` |
 | | Everyday safety | In progress (Duet) | #213, `docs/research/everyday-safety.md` |
@@ -56,7 +59,7 @@ Review this table monthly with the #222 table. When a PR merges, move its row.
 | | Refugees and immigrants | Partly, more waiting | `/help-in-your-language/`; #801 |
 | | Veterans | Covered, more waiting | `/veterans/`; #828 |
 | Place and getting around | Bus, rides, licenses | Covered | `/getting-around/`, `/bus-routes/`, `/bus-passes/`, `/drivers-license/` |
-| | Parking in Morgantown | **Missing** | No page; a common question near WVU and downtown |
+| | Parking in Morgantown | Covered | `/parking/` (#1030); placards at `/accessible-parking-placard/` (#1091) |
 | | Roads, streetlights, reporting a problem | Covered | `/make-it-better/` |
 | | Trash, recycling, drop-off | Covered | `/recycling/`, `/sell-or-donate/` |
 | | Parks and trails | Covered | `/parks/`, `/park-refunds/` |
@@ -64,6 +67,7 @@ Review this table monthly with the #222 table. When a PR merges, move its row.
 | Voice and civic life | Voting | Covered | `/vote/` |
 | | Meetings, who decides, boards | Covered | `/meetings/`, `/have-your-say/`, `/who-decides/`, `/make-it-better/boards/` |
 | | Jury duty | Covered | `/legal-help/#jury` (#1002) |
+| | Asking for public records (FOIA) | Covered | `/public-records/` (#1111) |
 | Purpose, culture and free time | Arts and making | Covered | `/arts-and-making/` |
 | | Events and dates | Covered | `/calendar/`, `/pulse/`, `/markets/` |
 | Community money | Grants for projects and groups | Covered | `/make-it-better/grants/`, `/start-a-group/`; #844 waits |
@@ -127,7 +131,9 @@ Scored the way the needs register in #984 scores needs: severity, reach, and roo
 - **Caregivers:** 63 million Americans are family caregivers (AARP and the National Alliance for Caregiving, Caregiving in the US 2025, https://www.aarp.org/pri/topics/ltss/family-caregiving/caregiving-in-the-us-2025/). National.
 - **Birth certificate and ID, when someone dies, parking:** no public count found. Reach is scored from how widely the need comes up: almost everyone needs a birth certificate for a REAL ID, a passport or some jobs, and every family deals with a death at some point. Parking reach is a judgment, not a number.
 
-**Built in wave 4 (October 31, 2026):** ranks 1 to 5, as `/legal-help/` (#1002), `/pets/` (#1007), `/ids-and-records/` and `/when-someone-dies/` (#1018) and `/caregivers/` (#1011). Rank 6 (parking) is next. Rank 7 needs David, because any money page waits for him.
+**Built in wave 4 (October 31, 2026):** ranks 1 to 5, as `/legal-help/` (#1002), `/pets/` (#1007), `/ids-and-records/` and `/when-someone-dies/` (#1018) and `/caregivers/` (#1011). Rank 6 (parking) was built as `/parking/`. Rank 7 needs David, because any money page waits for him.
+
+**Built in wave 5 (October 31, 2026):** with the ranked list done, five more missing areas that are not high stakes: planning medical care ahead (`/advance-directives/`, #1108), asking for public records (`/public-records/`, #1111), noise rules (`/noise/`, #1122), burning leaves and brush (`/burning/`, #1121), and accessible parking placards (`/accessible-parking-placard/`, #1091). Gaps that need a person: #1113 (who takes noise complaints) and #1118 (town burning rules, burn bans and fall leaf pickup).
 
 ### Questions to add to the findability set
 

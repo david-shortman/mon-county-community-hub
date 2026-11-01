@@ -1,0 +1,52 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: land-reuse-2026-11-02
+body: land-reuse
+meeting: Property Management Committee
+date: 2026-11-02
+time: "13:00"
+place: Online only, on Microsoft Teams. The agenda has the link.
+watch: Join the Teams meeting with the link, meeting ID and passcode on the agenda. We did not find a separate live stream.
+agenda_url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11022026-3923
+read: 2026-10-31
+items:
+  - number: "I"
+    title: Call to Order
+    kind: opening
+    line: The meeting is called to order.
+  - number: "II"
+    title: Proof of Notice of Meeting or Waiver of Notice
+    kind: opening
+    line: The committee confirms that notice of the meeting was given.
+  - number: "III"
+    title: Report of Chair
+    kind: report
+    line: An update from the committee chair.
+  - number: "IV"
+    title: Report of Staff
+    kind: report
+    line: An update from agency staff. The agenda lists this part.
+    parts:
+      - Update regarding leasing inquiry at 430 Spruce Street.
+  - number: "V"
+    title: Unfinished Business
+    kind: discussion
+    line: A discussion of items from earlier meetings. The agenda lists these parts and no vote.
+    parts:
+      - Review of and discussion on to-do list items from previous strategic planning session(s).
+      - Review of and discussion on draft Expression of Interest (EOI) regarding property in the Lower Greenmont neighborhood.
+  - number: "VI"
+    title: New Business
+    kind: other
+    line: New items. The agenda lists none.
+  - number: "VII"
+    title: Adjournment
+    kind: closing
+    line: The meeting ends.
+note: This is a committee of the Morgantown Land Reuse and Preservation Agency, not a meeting of its full board.
+sources:
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11022026-3923
+    checked: 2026-10-31
+  - url: https://www.morgantownwv.gov/AgendaCenter
+    checked: 2026-10-31

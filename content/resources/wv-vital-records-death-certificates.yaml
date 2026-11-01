@@ -5,7 +5,7 @@ topics: [records]
 who_it_is_for: People who need a certified copy of a West Virginia death certificate. Death records less than 50 years old are not public. The state form lists who may get one. They are the informant on the death certificate, parents and grandparents, adult children and grandchildren, adult siblings, the spouse, and legal representatives. Proof of relationship may be required.
 hours: Same-day walk-in service at the Charleston office. The office says 11:30 a.m. to 1 p.m. is busy.
 get_in: walk-in
-what_to_do: Order in person in Charleston for same-day service, by mail, or online through VitalChek, the vendor the state links to. By mail, send the application form, a color copy of your ID, and a check or money order to Vital Registration Office, 350 Capitol Street, Room 165, Charleston, WV 25301-3701.
+what_to_do: The funeral home can order certified copies for you through the state's system once the death is registered, and send them to whoever it names. You can also order in person in Charleston for same-day service, by mail, or online through VitalChek, the vendor the state links to. By mail, send the application form, a color copy of your ID, and a check or money order to Vital Registration Office, 350 Capitol Street, Room 165, Charleston, WV 25301-3701.
 what_to_bring:
   - One photo ID, such as a driver's license (it can be expired), passport or military ID. Or two other items, such as a major credit card, vehicle registration card, state social services card, or a recent utility bill in your name.
   - The application form, filled out ahead of time to save time.
@@ -16,6 +16,8 @@ contact:
   place: 350 Capitol Street, Charleston, WV 25301
 cost: "$12 per copy, which includes a search fee that is not refunded. In person, the office takes cash, check or money order, and cards with a 4% surcharge. By mail, check or money order only. Online vendors may charge more, but the state gets $12 per copy."
 sources:
+  - url: https://dhhr.wv.gov/HSC/VR/Documents/WV%20DAVE%20Training%20FAQ.pdf
+    checked: 2026-10-31
   - url: https://dhhr.wv.gov/HSC/VR/CR/Pages/default.aspx
     checked: 2026-10-31
   - url: https://dhhr.wv.gov/HSC/VR/CR/Documents/HSC%20fee%20memo%20060623.pdf
