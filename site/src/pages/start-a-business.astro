@@ -9,11 +9,14 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
 import { resource, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Start a business in Morgantown, step by step", summary: "Zoning, state registration, the city license, the Certificate of Occupancy, inspections and city B&O tax, in order" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const city = [{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked: '2026-10-30' }];
+const city = [{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked: '2026-11-01' }];
 const portal = [{ url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-10-30' }];
 const tax = [{ url: 'https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx', checked: '2026-10-30' }];
 const eh = [{ url: 'https://www.monchd.org/departments-programs/environmental-health', checked: '2026-10-30' }];
@@ -21,13 +24,19 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
 ---
 <Base title="Start a business in Morgantown, WV, step by step" description="The City of Morgantown's steps to open a business inside city limits, in order: check zoning, register with the state, get a city business license, get a Certificate of Occupancy ($65), schedule inspections, and file city B&O tax. Each step links to the official page.">
   <h1>Start a business in Morgantown, step by step</h1>
-  <p class="lede">These are the steps the City of Morgantown lists for a business inside city limits, in order. Each step links to the official page. If your business is in Star City, Granville, Westover or outside any town, the local steps are different, so ask that town or the county. Free help with planning is on <a href={`${base}/business/`}>Start or grow a business</a>.</p>
+  <p class="lede">These are the steps the City of Morgantown lists for a business inside city limits, in order. Each step links to the official page. Tap a step to open it. If your business is in Star City, Granville, Westover or outside any town, the local steps are different, so ask that town or the county. Free help with planning is on <a href={`${base}/business/`}>Start or grow a business</a>.</p>
 
-  <h2>1. Check the zoning</h2>
+  <Route label="Steps to start a business in Morgantown">
+  <Milepost n={1} title="Check the zoning" id="zoning" open>
   <p>Call the city Planning Division at <a href={telHref('304-284-7431')}>304-284-7431</a> to check that your location is zoned for your business. Have the property's parcel and tax map numbers ready. If you do not have them, call the Monongalia County Assessor's Office at <a href={telHref('304-291-7222')}>304-291-7222</a> or look them up on the WV Property Viewer.</p>
   <SourceLine sources={city} about="Step 1, zoning" />
+  <div class="actions">
+    <a class="btn" href={telHref('304-284-7431')}><Icon name="phone" /><span>Call the Planning Division</span></a>
+  </div>
 
-  <h2>2. Register with the state</h2>
+  </Milepost>
+
+  <Milepost n={2} title="Register with the state" id="state">
   {resource('wv-one-stop-business-registration') && <ResourceCard r={resource('wv-one-stop-business-registration')} showCost />}
   <p>The State Tax Division says anyone doing business in West Virginia must register with it before starting. It gives you a Business Registration Certificate.</p>
   <ul>
@@ -38,15 +47,23 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
     <li><strong>Post it</strong> where you do business.</li>
   </ul>
   <p>Tax help: <a href={telHref('304-558-3333')}>304-558-3333</a> or <a href={telHref('800-982-8297')}>800-982-8297</a>.</p>
-  <p><a class="btn" href="https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx"><span>Tax Division questions and answers</span></a></p>
+  <div class="actions">
+    <a class="btn" href="https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx"><Icon name="open" /><span>Tax Division questions and answers</span></a>
+  </div>
   <SourceLine sources={tax} about="Step 2, state Business Registration Certificate" />
 
-  <h2>3. Apply for a city business license</h2>
-  <p>Apply after you have your state Business Registration Certificate. Create an account and apply through the Morgantown Access Portal. The portal's web address changed, so old bookmarks may not work. If your business has a place inside city limits, you need a Certificate of Occupancy (step 4) before the city issues the license. License questions: Finance Department, <a href={telHref('304-284-7408')}>304-284-7408</a>.</p>
-  <p><a class="btn" href="https://www.morgantownwv.gov/747/Permitting-Licensing-Registration"><span>City permitting and licensing page</span></a></p>
+  </Milepost>
+
+  <Milepost n={3} title="Apply for a city business license" id="license">
+  <p>Apply after you have your state Business Registration Certificate. Create an account and apply through the Morgantown Access Portal. The portal's web address changed, so old bookmarks may not work. If your business has a place inside city limits, you need a Certificate of Occupancy (<a href="#occupancy">step 4</a>) before the city issues the license. License questions: Finance Department, <a href={telHref('304-284-7408')}>304-284-7408</a>.</p>
+  <div class="actions">
+    <a class="btn" href="https://www.morgantownwv.gov/747/Permitting-Licensing-Registration"><Icon name="open" /><span>City permitting and licensing page</span></a>
+  </div>
   <SourceLine sources={[...city, ...portal]} about="Step 3, city business license" />
 
-  <h2>4. Apply for a Certificate of Occupancy</h2>
+  </Milepost>
+
+  <Milepost n={4} title="Apply for a Certificate of Occupancy" id="occupancy">
   <p>The city says new and existing businesses inside city limits need one, and so do businesses that change name, owner or location. You cannot legally use the building or open until you have it. Bring:</p>
   <ul>
     <li>A completed Municipal Business License application</li>
@@ -57,14 +74,23 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
   <p>You get a card with contacts for the Fire Marshal and Code Enforcement. If you are not changing the space, contact Code Enforcement within 10 days of applying to set up an inspection. If you are changing the space, ask Code Enforcement about permits first.</p>
   <SourceLine sources={city} about="Step 4, Certificate of Occupancy" />
 
-  <h2>5. Get inspected before you open</h2>
+  </Milepost>
+
+  <Milepost n={5} title="Get inspected before you open" id="inspection">
   <p>Contact Code Enforcement and the Fire Marshal early enough to be inspected no less than one week before opening day. Restaurants, bars and nightclubs have stricter Fire Code rules, so contact the Fire Marshal's Office. The city mails the Certificate of Occupancy after all departments approve.</p>
   <SourceLine sources={city} about="Step 5, inspections" />
 
-  <h2>6. File city B&O tax</h2>
+  </Milepost>
+
+  <Milepost n={6} title="File city B&O tax" id="bo-tax">
   <p>Morgantown charges a business and occupation (B&O) tax on business done inside city limits. The city posts an annual return, a "by the job" return and a quarterly return, plus a worksheet for your records. The page does not say which return fits your business or when it is due, so call the Finance Department at <a href={telHref('304-284-7401')}>304-284-7401</a>.</p>
-  <p><a class="btn" href="https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns"><span>City B&O tax forms</span></a></p>
+  <div class="actions">
+    <a class="btn" href="https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns"><Icon name="open" /><span>City B&O tax forms</span></a>
+  </div>
   <SourceLine sources={bo} about="Step 6, city B&O tax" />
+
+  </Milepost>
+  </Route>
 
   <h2>Selling food?</h2>
   <p>The Monongalia County Health Department posts food permit applications for food businesses, mobile food units and temporary events. Call Environmental Health at <a href={telHref('304-598-5131')}>304-598-5131</a> or see the <a href="https://www.monchd.org/departments-programs/environmental-health">Environmental Health permit applications</a>.</p>
@@ -76,5 +102,5 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
   <p>City Hall: 389 Spruce Street, Morgantown. Monday through Thursday, 7 a.m. to 5:30 p.m. <a href={telHref('304-284-7405')}>304-284-7405</a>. The city suggests checking with each department that you have everything before you open.</p>
   <SourceLine sources={city} about="City Hall contact" />
 
-  <p class="meta">Sources checked October 30, 2026. Fees and rules can change, so check the official page before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026, and the city steps page again November 1, 2026. Fees and rules can change, so check the official page before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
