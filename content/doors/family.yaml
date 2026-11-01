@@ -102,6 +102,12 @@ situations:
     label: I'm a veteran and could lose my housing
     page: /veterans/
     steps: [homeless-line]
+  - id: caregiving
+    label: I'm caring for a family member who is older or has a disability
+    page: /caregivers/
+  - id: death
+    label: Someone in my family died
+    page: /when-someone-dies/
 also:
   - text: Short on money this month
     href: /money/
