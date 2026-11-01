@@ -6,15 +6,15 @@ who_it_is_for: Anyone in Morgantown and Mon County. Riders 62 and older can get 
 what_to_do: Route 9 Purple Line goes to Ruby Memorial. Route 47 Northern Circulator goes to Van Voorhis Road and Mon General. For trip times, use the trip planner at busride.org or call 304-291-RIDE (304-291-7433). Buses can go up to three-quarters of a mile off the route to pick you up, once a Deviation Request Form is approved; then call as little as 15 minutes ahead.
 contact:
   phone: "304-291-7433"
-  url: https://www.busride.org/newpage
+  url: https://www.busride.org/Maps-Schedules
   url_label: Routes
 cost: A single ride is $0.75 to $1.00. Children 5 and under ride free. A deviation pickup adds $0.50. Half fare programs for riders 62 and older, Medicare cardholders and people with disabilities.
 sources:
-  - url: https://www.busride.org/newpage
-    checked: 2026-10-30
+  - url: https://www.busride.org/Maps-Schedules
+    checked: 2026-10-31
   - url: https://www.busride.org/Fares-Programs
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://www.busride.org/persons-with-disabilities
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://www.busride.org/deviations
-    checked: 2026-10-30
+    checked: 2026-10-31

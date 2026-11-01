@@ -1,0 +1,36 @@
+---
+// Protective orders in Mon County (#1187, gap from #1178, sprint #529). On
+// the crisis pattern (docs/design/presentation.md): Base crisis adds the
+// crisis strip, Quick exit and the leave note, and every listing here has
+// private_trace so no Text, Print or Share row shows (#555). Facts come from
+// the records, each read on a WV courts, state code, Legal Aid or RDVIC page
+// on 2026-10-31. Left off until a person confirms them (#1234): where to go
+// after hours in Mon County, the dollar amount of costs, where a denial
+// appeal is filed (sources disagree), and court office hours. Waits for David.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "help-now", label: "Protective orders", summary: "Asking a court for protection from abuse, stalking or threats in Mon County, and free help from a local advocate" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base crisis title="Protective orders in Morgantown and Mon County, WV" description="How to ask a court for protection in Monongalia County, WV: a domestic violence protective order or a personal safety order at Magistrate Court, the final hearing, filing by video from RDVIC, and free help from an advocate and Legal Aid.">
+  <h1>Protective orders</h1>
+  <p class="lede">You can read the court's steps here, then file at Magistrate Court in the Justice Center. A local advocate can go with you for free, and you can call the hotline any hour. This page says where to go. It is not legal advice.</p>
+
+  <p>Need a safe place tonight? See <a href={`${base}/stay-tonight/#safe`}>safe from someone</a>.</p>
+
+  <h2 id="help">Free help from an advocate</h2>
+  <ResourceCard r={resource('rdvic-court-advocacy')} showCost />
+
+  <h2 id="dvpo">From a family member, household member or partner</h2>
+  <ResourceCard r={resource('wv-domestic-violence-protective-order')} showCost />
+
+  <h2 id="pso">From someone else: stalking, sexual assault or threats</h2>
+  <ResourceCard r={resource('wv-personal-safety-order')} showCost />
+
+  <h2 id="legal">A lawyer</h2>
+  <p>Legal Aid of West Virginia gives free civil legal help to people with low income and to victims of domestic violence, and says it takes protective order cases. See <a href={`${base}/legal-help/#free-help`}>free legal help</a> for how to apply.</p>
+
+  <p class="meta">Sources checked October 31, 2026. We could not find an official page that says where to go after hours in Monongalia County, or the exact court costs, so ask the advocate or the Magistrate Court clerk. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

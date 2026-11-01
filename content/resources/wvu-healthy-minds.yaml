@@ -10,6 +10,9 @@ contact:
   place: 930 Chestnut Ridge Road, Morgantown, WV 26506
 sources:
   - url: https://wvumedicine.org/our-care/institutes/rni/departments/bmed/treatment-centers-and-clinics/
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://wvumedicine.org/our-care/institutes/rni/departments/bmed/
-    checked: 2026-10-30
+    checked: 2026-10-31
+  - url: https://988lifeline.org/
+    checked: 2026-10-31
+    name: 988 Suicide and Crisis Lifeline

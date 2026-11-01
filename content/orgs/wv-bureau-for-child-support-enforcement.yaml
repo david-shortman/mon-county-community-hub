@@ -1,0 +1,13 @@
+name: West Virginia Bureau for Child Support Enforcement (BCSE)
+slug: wv-bureau-for-child-support-enforcement
+kind: government
+website: https://bcse.wv.gov/
+phone: "1-800-249-3778"
+summary: The state office that sets up paternity and child support, collects payments, enforces support orders and reviews orders. It is part of the West Virginia Department of Human Services. Its services are free.
+topics: [family, legal]
+area: statewide
+sources:
+  - url: https://bcse.wv.gov/about-us
+    checked: 2026-10-31
+  - url: https://bcse.wv.gov/page/customer-service
+    checked: 2026-10-31

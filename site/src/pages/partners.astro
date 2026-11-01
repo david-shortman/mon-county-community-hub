@@ -33,6 +33,7 @@ const listingCount = loadDir('resources').length;
 
   <h2 id="fix">Fix or update a listing</h2>
   <p>You can ask us to fix anything we say about your group, add a program we missed, or take your listing down. Hours, phone numbers, who a program serves, and dates all count.</p>
+  <p>To see everything we list about your group in one place, with the source for each fact, find it on <a href={`${base}/groups/`}>every group we list</a>.</p>
   <h3>How to tell us today</h3>
   <p>Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>. You don't need an account, and what you send is not posted. It asks what you need, which page or listing, and what should change. Your email is optional, if you want a reply.</p>
   <p>Or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. Tell us your group's name, the page or listing, and what should change. We don't post your message.</p>
@@ -53,16 +54,14 @@ const listingCount = loadDir('resources').length;
 
   <h2 id="reuse">Reuse the information</h2>
   <p>Everything we gather is free to reuse. You don't need to ask, sign up, or pay. Today that is {orgCount} groups, {listingCount} listings, and a calendar of local dates and deadlines, each with its source and the date we checked it.</p>
+  <p>The <a href={`${base}/use-our-data/`}>Use our data</a> page lists every way, simplest first, with code to copy.</p>
   <h3>What you can use now</h3>
   <ul>
     <li><strong>The dates and deadlines calendar as a feed.</strong> <a href={calendarFeed}>calendar.ics</a> works in Google Calendar, Apple Calendar, Outlook, and most other calendar apps. New dates show up on their own.</li>
     <li><strong>Every listing as a text file.</strong> Each group, program, and date is its own small file in the <a href={tree('content')}>content folder</a> on GitHub. You can read them in a browser or download them all at once. The <a href={doc('content/README.md')}>guide to the files</a> explains each field.</li>
     <li><strong>The code that runs the site.</strong> All of it is on <a href={repo}>GitHub</a>, so another town or group can copy the whole thing.</li>
     <li><strong>The same data for apps and AI tools.</strong> Every listing, date, meeting and correction is also published as JSON, a plain data format apps can read from the web. The <a href={`${base}/data/`}>open data page</a> lists the files and how to cite them.</li>
-  </ul>
-  <h3>Coming later</h3>
-  <ul>
-    <li>Listings in the Open Referral format, a shared standard that 211 systems and referral tools can read (<a href={issue(36)}>planned, issue 36</a> and <a href={issue(73)}>issue 73</a>)</li>
+    <li><strong>Listings in the Open Referral format.</strong> A shared standard that 211 systems and referral tools can read, as <a href={`${base}/api/v1/hsds/services.json`}>JSON</a> and <a href={`${base}/api/v1/hsds/datapackage.json`}>spreadsheet tables</a>.</li>
   </ul>
   <h3>The license</h3>
   <ul>

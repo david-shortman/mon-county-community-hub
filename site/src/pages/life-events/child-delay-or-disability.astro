@@ -1,0 +1,40 @@
+---
+// "My child has a delay or disability" life event page (#1178, sprint #529).
+// Links only, so it states no facts of its own; each linked page has its
+// sources. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "disability", label: "My child has a delay or disability", summary: "Birth to Three for babies and toddlers, special education at school, your rights, health costs and care at home" };
+const sections = [
+  { title: "First", links: [
+    { href: "/families-and-kids/", label: "Under 3", text: "WV Birth to Three, for babies and toddlers who may be behind in how they move, talk, learn or get along" },
+    { href: "/disability-and-aging/#special-education", label: "Age 3 and up", text: "special education through the county schools" },
+  ] },
+  { title: "This week", links: [
+    { href: "/file-today/#medicaid", label: "Health coverage for your child", text: "Medicaid and WVCHIP" },
+    { href: "/no-insurance/", label: "No insurance, or not enough", text: "free and sliding fee clinics, and help with hospital bills" },
+    { href: "/disability-and-aging/#rights", label: "Know your rights", text: "free help from Disability Rights of West Virginia" },
+    { href: "/kids-with-disabilities/#school", label: "Help with the IEP", text: "the state parent center, and what to do if you disagree with the school" },
+    { href: "/kids-with-disabilities/#money", label: "SSI and Medicaid for your child", text: "SSI for children, and Medicaid whatever you earn (CDCSP)" },
+  ] },
+  { title: "In the next few weeks", links: [
+    { href: "/medicaid-waivers/", label: "Care at home through Medicaid", text: "Medicaid waivers, including two for children age 3 and up" },
+    { href: "/disability-and-aging/#devices", label: "Devices and getting around", text: "try or borrow a device, change your home or car, and rides" },
+    { href: "/disability-and-aging/#recreation", label: "Sports, swimming and fun", text: "recreation and Special Olympics" },
+    { href: "/kids-with-disabilities/#respite", label: "A break and parent mentors", text: "respite while you wait for a waiver, Parent to Parent and Sibshops" },
+    { href: "/families-and-kids/#parent-groups", label: "Meet other parents", text: "playgroups and parent groups" },
+    { href: "/accessible-parking-placard/", text: null },
+  ] },
+  { title: "If this also fits, check", links: [
+    { href: "/for/disability-and-caregivers/", text: null },
+    { href: "/for/parents-young-kids/", text: null },
+    { href: "/for/parents-school-age/", text: null },
+    { href: "/school-age/", text: null },
+  ] },
+];
+---
+<Base title="My child has a delay or disability: where to start in Mon County, WV" description="Steps for parents in Monongalia County, WV, whose child has a delay or disability: WV Birth to Three for children under 3, special education at school, Medicaid and WVCHIP, your rights, and Medicaid waivers.">
+  <h1>My child has a delay or disability</h1>
+  <p class="lede">Start with the step that fits your child's age. Each link goes to one of our pages with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
