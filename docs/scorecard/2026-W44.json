@@ -1,0 +1,234 @@
+{
+ "week": "2026-W44",
+ "made": "2026-11-01",
+ "measures": {
+  "lag_prs": {
+   "lane": "Information",
+   "what": "Open PRs that change high-stakes pages",
+   "ours": 3,
+   "shown": "3 (0 older than 2 days)"
+  },
+  "lag_prs_late": {
+   "lane": "Information",
+   "what": "High-stakes PRs older than 2 days",
+   "ours": 0,
+   "shown": "0"
+  },
+  "not_yet_lines": {
+   "lane": "Information",
+   "what": "High-stakes lines saying a date or fact is \"not out yet\"",
+   "ours": 3,
+   "shown": "3"
+  },
+  "typed_phones_unmatched": {
+   "lane": "Information",
+   "what": "Phone numbers typed on high-stakes pages that no record has",
+   "ours": 12,
+   "shown": "12"
+  },
+  "fresh_30": {
+   "lane": "Information",
+   "what": "Checked dates within 30 days",
+   "ours": 100,
+   "shown": "100% of 1921"
+  },
+  "fresh_90": {
+   "lane": "Information",
+   "what": "Checked dates within 90 days",
+   "ours": 100,
+   "shown": "100%"
+  },
+  "fresh_oldest_days": {
+   "lane": "Information",
+   "what": "Oldest checked date",
+   "ours": 4,
+   "shown": "2026-10-28 (4 days)"
+  },
+  "sources_broken": {
+   "lane": "Information",
+   "what": "Source check: broken links",
+   "ours": 0,
+   "shown": "0"
+  },
+  "sources_moved": {
+   "lane": "Information",
+   "what": "Source check: moved to another domain",
+   "ours": 20,
+   "shown": "20"
+  },
+  "sources_phones": {
+   "lane": "Information",
+   "what": "Source check: phone not found on its source",
+   "ours": 10,
+   "shown": "10"
+  },
+  "corrections": {
+   "lane": "Information",
+   "what": "Corrections logged",
+   "ours": 61,
+   "shown": "61 (61 this week)"
+  },
+  "answer_pages": {
+   "lane": "Information",
+   "what": "Findability questions with an answer page of ours",
+   "ours": 38,
+   "shown": "38 of 45"
+  },
+  "gaps": {
+   "lane": "Information",
+   "what": "Open \"Help wanted\" gaps",
+   "ours": 12,
+   "shown": "12"
+  },
+  "reach": {
+   "lane": "Information",
+   "what": "In-person listings in the rest of the county",
+   "ours": 16,
+   "shown": "16% (31 of 181)"
+  },
+  "first_screen": {
+   "lane": "Presentation",
+   "what": "Urgent needs answered on the first page",
+   "ours": 6,
+   "shown": "6 of 8"
+  },
+  "words_before": {
+   "lane": "Presentation",
+   "what": "Words before the answer (middle value)",
+   "ours": 70.5,
+   "shown": "70.5"
+  },
+  "must_call": {
+   "lane": "Presentation",
+   "what": "Needs where you must call to learn the key fact",
+   "ours": 1,
+   "shown": "1 of 8"
+  },
+  "grade_opening": {
+   "lane": "Presentation",
+   "what": "Reading grade of page openings (middle value)",
+   "ours": 3,
+   "shown": "3"
+  },
+  "grade_full": {
+   "lane": "Presentation",
+   "what": "Reading grade of full text (middle value)",
+   "ours": 7.6,
+   "shown": "7.6"
+  },
+  "grade_above_9": {
+   "lane": "Presentation",
+   "what": "Page openings above grade 9",
+   "ours": 8,
+   "shown": "8"
+  },
+  "help_now_above_8": {
+   "lane": "Presentation",
+   "what": "Help now openings above grade 8",
+   "ours": 0,
+   "shown": "0"
+  },
+  "contrast": {
+   "lane": "Presentation",
+   "what": "Color contrast",
+   "ours": null,
+   "shown": "all pairs pass"
+  },
+  "a11y_waiting": {
+   "lane": "Presentation",
+   "what": "Accessibility fixes waiting",
+   "ours": 3,
+   "shown": "3"
+  },
+  "pages": {
+   "lane": "Infrastructure",
+   "what": "Pages built",
+   "ours": 936,
+   "shown": "936"
+  },
+  "weight_median": {
+   "lane": "Infrastructure",
+   "what": "Page weight (middle value, KB)",
+   "ours": 28.6,
+   "shown": "28.6"
+  },
+  "weight_urgent_max": {
+   "lane": "Infrastructure",
+   "what": "Heaviest urgent page (KB)",
+   "ours": 35.3,
+   "shown": "35.3"
+  },
+  "weight_over": {
+   "lane": "Infrastructure",
+   "what": "Pages over the weight budget",
+   "ours": 0,
+   "shown": "0"
+  },
+  "lcp_max": {
+   "lane": "Infrastructure",
+   "what": "Slow 4G phone: main content shows (slowest of 5 pages, seconds)",
+   "ours": 1.2,
+   "shown": "1.2 (Home)"
+  },
+  "lcp_ok": {
+   "lane": "Infrastructure",
+   "what": "Key pages under the 2.5 second goal",
+   "ours": 5,
+   "shown": "5 of 5"
+  },
+  "tbt_max": {
+   "lane": "Infrastructure",
+   "what": "Slow 4G phone: most blocking time (ms)",
+   "ours": 15,
+   "shown": "15"
+  },
+  "cls_max": {
+   "lane": "Infrastructure",
+   "what": "Slow 4G phone: most layout shift",
+   "ours": 0,
+   "shown": "0"
+  },
+  "health_fails": {
+   "lane": "Infrastructure",
+   "what": "Health check failures this week",
+   "ours": 9,
+   "shown": "9"
+  },
+  "feeds_live": {
+   "lane": "Infrastructure",
+   "what": "Calendar feeds loading live",
+   "ours": 4,
+   "shown": "4 of 8"
+  },
+  "pages_added": {
+   "lane": "Infrastructure",
+   "what": "Page files added this week",
+   "ours": 207,
+   "shown": "207"
+  },
+  "findability": {
+   "lane": "Outcomes",
+   "what": "Findability score (0 to 100)",
+   "ours": 71,
+   "shown": "71"
+  },
+  "in_search": {
+   "lane": "Outcomes",
+   "what": "Our answer pages showing up in search",
+   "ours": 0,
+   "shown": "0 of 38"
+  },
+  "beats_sources": {
+   "lane": "Outcomes",
+   "what": "Urgent needs where our page beats every source",
+   "ours": 7,
+   "shown": "7 of 8"
+  },
+  "visits": {
+   "lane": "Outcomes",
+   "what": "Visits and recognition",
+   "ours": null,
+   "shown": "not measured"
+  }
+ }
+}
