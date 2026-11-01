@@ -3,9 +3,11 @@ import { NEEDS, WHO } from '../lib/what-help.mjs';
 import { loadPlaces } from '../lib/places.mjs';
 import { ROLES } from '../lib/helper-roles.mjs';
 import { HUBS } from '../lib/town-hubs.mjs';
+import { groupPages } from '../lib/group-pages.mjs';
+import { loadCalendarWithFeeds } from '../lib/content.mjs';
 import { BODIES } from '../lib/agendas.mjs';
 
-export function GET({ site }) {
+export async function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const u = (p) => new URL(`${base}${p}`, site).href;
   // One line per community center page (#463), built from content/places.
@@ -13,6 +15,8 @@ export function GET({ site }) {
   const roleCards = ROLES.map((r) => `- [Card for ${r.name.toLowerCase()}](${u(`/for/helpers/${r.slug}/`)}): ${r.situations.map((s) => s.hears.toLowerCase()).join('; ')}, with first steps`).join('\n');
   // One line per town page (#1120).
   const towns = HUBS.map((h) => `- [${h.name}](${u(`/towns/${h.slug}/`)}): ${h.kind === 'cdp' ? 'a named area with no town government' : `the ${h.full}`}: who to call, who decides and where they meet, places, dates and bus routes`).join('\n');
+  // One link per group page (/groups/<slug>/), with the name its page uses.
+  const groups = groupPages(await loadCalendarWithFeeds()).map((g) => `[${g.name}](${u(`/groups/${g.org.slug}/`)})`).join(', ');
   const agendaBodies = Object.entries(BODIES).map(([slug, b]) => `- [${b.name}: agendas in plain language](${u(`/meetings/agendas/${slug}/`)}): coming ${b.name} agenda guides, and the motions recorded in its minutes from the last 30 days, with results and vote counts as written`).join('\n');
   const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
@@ -194,6 +198,7 @@ ${roleCards}
 - [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; with years and sources
 - [What people here need most](${u('/needs/')}): the needs register, a ranked list of the hardest problems people in Mon County face (food, health care costs, housing, utility bills, mental health and more), each with how many people it affects, its sources, and the local groups working on it
 - [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; Monongalia County Schools state test proficiency in math, reading and science from ZoomWV (WV Department of Education); with years and sources
+- [Every group we list](${u('/groups/')}): A to Z list of the groups and offices the site lists, each with a page showing what the site says about it, its listings as residents see them, its upcoming dates, sources, and how to ask for a fix or removal. Group pages: ${groups}
 
 ## Notes for AI tools
 
