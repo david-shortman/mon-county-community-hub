@@ -1,0 +1,122 @@
+---
+// After you apply: child care help (WV Child Care Assistance, the subsidy).
+// From the WV DoHS Child Care Subsidy Policies and Procedures Manual dated
+// October 1, 2024 (the "Child Care Assistance Policy and Procedure Manual"
+// linked from bfa.wv.gov/bfa-policy-and-plans/child-care-policy), read
+// 2026-11-01. In Mon County, the Child Care Resource Center (Catholic
+// Charities WV) takes applications; see the child-care-resource-center
+// record. The manual sets no overall number of days to decide an
+// application, and it words the appeal deadline two ways, so the page quotes
+// both and says to go by the letter. Benefits page: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'family', topic: 'family', label: 'After you apply for child care help', summary: 'The interview, papers due in 13 days, your certificate and fee, the 12 month status check, and how to appeal' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-01';
+const ORG = 'wv-department-of-human-services';
+const MANUAL = 'https://bfa.wv.gov/media/1461/download?inline';
+const man = (part) => ({ url: MANUAL, checked, name: `WV DoHS Child Care Subsidy Policies and Procedures Manual (October 1, 2024), ${part}` });
+const src = {
+  apply: man('sections 2.1 to 2.4'),
+  duties: man('section 2.5'),
+  renew: man('sections 6.0 and 6.1'),
+  fees: man('section 6.4'),
+  negative: man('section 6.6'),
+  hearing: man('chapter 11'),
+  policy: { url: 'https://bfa.wv.gov/bfa-policy-and-plans/child-care-policy', checked, name: 'WV DoHS Bureau for Family Assistance, Child Care Policy' },
+};
+const ccrc = resource('child-care-resource-center-morgantown');
+const legal = resource('legal-aid-wv-civil-legal-help');
+const r211 = resource('wv-211');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for child care help in Mon County: interview, papers, fees and appeals" description="What happens after you apply for help paying for child care in Monongalia County, WV: the interview, papers due within 13 days, your certificate and parent fee, reporting changes within 5 days, the 12 month status check, and how to appeal. Quoted from the state's child care manual.">
+  <h1>After you apply for child care help</h1>
+  <p class="lede">Keep every letter from the Child Care Resource Center and note the date on it. Most deadlines in this program are 13 days. Here is what comes next, in the state's own rules.</p>
+  <p>West Virginia's help paying for child care is called Child Care Assistance. The state's Department of Human Services (DoHS) runs it, and local Child Care Resource and Referral offices take the applications. In Mon County that is the Child Care Resource Center, listed below. To find a provider, see <a href={`${base}/families-and-kids/`}>Families and kids</a>.</p>
+  <p class="note">This page quotes the state's child care manual, dated October 1, 2024. The Child Care Resource Center and DoHS decide each case. It is information, not legal advice.</p>
+  <ul class="topic-list">
+    <li><a href="#interview">1. The interview</a></li>
+    <li><a href="#papers">2. Papers, due in 13 days</a></li>
+    <li><a href="#decision">3. The decision, your certificate and your fee</a></li>
+    <li><a href="#status">Check where things stand</a></li>
+    <li><a href="#appeal">If you are denied, cut or closed</a></li>
+    <li><a href="#report">What to report</a></li>
+    <li><a href="#renew">The 12 month status check</a></li>
+    <li><a href="#help">Who can help</a></li>
+  </ul>
+
+  <h2 id="interview">1. The interview</h2>
+  <ul>
+    <li><strong>In person is the usual way.</strong> The manual says staff "shall conduct a face-to-face interview with the parent within 5 days of the parent's initial contact" at main offices.</li>
+    <li><strong>If you cannot come in,</strong> the manual says "a phone application should be offered."</li>
+    <li><strong>If you applied online on WV PATH,</strong> the manual says payment "cannot begin until the date of the face-to-face interview, regardless of when the online application was completed." Set up the interview soon.</li>
+  </ul>
+  <SourceLine sources={[src.apply]} org={ORG} about="the child care interview" />
+
+  <h2 id="papers">2. Papers, due in 13 days</h2>
+  <p>The manual lists proof of identity, West Virginia residency, "All income, including child support, if received," and your work, school, training or WV WORKS activity for each parent.</p>
+  <ul>
+    <li><strong>If papers are missing,</strong> you get a letter saying the application "will be denied if the necessary information is not received within 13 days."</li>
+    <li><strong>If you applied by phone,</strong> the manual says you "will be given 13 days to submit all required documents," including the original signed Parent Service Agreement and signature page. These "cannot be faxed or emailed."</li>
+    <li><strong>If you cannot get something in time,</strong> call your case manager before the date on the letter.</li>
+  </ul>
+  <SourceLine sources={[src.apply]} org={ORG} about="papers for child care help" />
+
+  <h2 id="decision">3. The decision, your certificate and your fee</h2>
+  <ul>
+    <li><strong>If approved,</strong> you get a Child Care Certificate. The manual says your fee "must be indicated on the Child Care Certificate." You take it to your provider, and both of you sign it.</li>
+    <li><strong>Your fee</strong> is set by a sliding scale. The manual says parents with earnings under 40% of the federal poverty level "are exempt from fees," and "Parents shall not be charged for more than 3 children." The scale is Appendix A on the <a href="https://bfa.wv.gov/bfa-policy-and-plans/child-care-policy">state's child care policy page</a>.</li>
+    <li><strong>Your help lasts 12 months.</strong> The manual says "the benefit cannot be reduced during the twelve-month period."</li>
+    <li><strong>If denied,</strong> you get a letter that says so, with a hearing request form. See the appeal section below.</li>
+  </ul>
+  <p>The manual does not set a number of days for the decision itself. Ask your case manager when to expect it.</p>
+  <SourceLine sources={[src.apply, src.fees, src.renew, src.policy]} org={ORG} about="the child care decision and fees" />
+
+  <h2 id="status">Check where things stand</h2>
+  <p>Call your case manager at the Child Care Resource Center. The manual does not name a separate status line.</p>
+  {ok(ccrc) && <ResourceCard r={ccrc} />}
+
+  <h2 id="appeal">If you are denied, cut or closed</h2>
+  <p>The manual says most cuts or closures "cannot be taken until 13 calendar days after the client has been notified." You can send the information that is needed, or ask for a hearing.</p>
+  <ul>
+    <li><strong>Ask in writing.</strong> "Requests must be made in writing, using the hearing request form included with the notification letter." Only the parent on the case can ask.</li>
+    <li><strong>To keep care going while you wait,</strong> ask "before the end of the 13-day notice period." Then, the manual says, "the action should not be taken until the hearing is held."</li>
+    <li><strong>Care does not continue in three cases:</strong> the manual says "if a hearing is requested in response to an increase in fees, a notice of closure for exceeding income guidelines, or a denial of application, fees cannot be reduced, nor services continued."</li>
+    <li><strong>If your application was denied,</strong> chapter 11 says "Applicants shall be allowed 13 days from the date of the notification letter to request a hearing or pre-conference hearing."</li>
+    <li><strong>If you already get care,</strong> you can still ask after the 13 days, but care is not kept going. The manual says this two ways: "up to 60 days after the action was taken" (chapter 11) and "within 60 days of the notification" (chapter 6). Go by the date on your letter, and ask as early as you can.</li>
+    <li><strong>If care continues and you lose,</strong> the manual says you "will have to enter into a repayment agreement."</li>
+    <li><strong>A higher fee is not a cut.</strong> The manual says "A fee increase is not considered a negative action" (a cut or closure).</li>
+    <li><strong>Your file.</strong> You, or your lawyer or helper with your written OK, can see your case record and get a free copy of it and of the policy used.</li>
+    <li><strong>The decision.</strong> "The hearings office will render a decision within 90 days."</li>
+  </ul>
+  <SourceLine sources={[src.negative, src.hearing]} org={ORG} about="child care appeals" />
+  {ok(legal) && <ResourceCard r={legal} />}
+
+  <h2 id="report">What to report</h2>
+  <p>The manual lists "Reporting changes in circumstances within five days." It says not reporting "may result in case closure, repayment of services used for time not approved, and/or 30-day penalty closure."</p>
+  <ul>
+    <li>Report changes to who lives with you, your address and phone, your job or hours, your school or training, losing a job or school, or needing time to look for work.</li>
+    <li><strong>Changing providers?</strong> Tell your case manager "in writing within five (5) working days."</li>
+    <li><strong>Income changes</strong> during the 12 months "will not impact a parent's continuing eligibility for care unless the parent requests a redetermination due to decreases in income that might result in reduced fees." A redetermination is a new review of your case. If your income drops, you can ask for one to lower your fee.</li>
+  </ul>
+  <SourceLine sources={[src.duties]} org={ORG} about="what to report" />
+
+  <h2 id="renew">The 12 month status check</h2>
+  <ul>
+    <li><strong>Once a year.</strong> The manual says a status check is done "during the twelfth month of the current service period."</li>
+    <li><strong>It comes by mail.</strong> A Notification of Redetermination and a Status Review form are mailed "no later than the first day of the month, with the due date on the 15th day of the month."</li>
+    <li><strong>Return it by the 15th</strong> with proof of work, school and income. If it is not back by then, your provider is told your care will close on the last day of the month.</li>
+    <li><strong>It is still on you.</strong> The manual says the office mails the status check "30 days before the certificate expires. However, it remains the parent's responsibility to obtain and complete a status check to renew the certificate." If it has not come, call.</li>
+    <li><strong>If you still qualify,</strong> you get a new certificate with your fee.</li>
+  </ul>
+  <SourceLine sources={[src.renew, src.duties]} org={ORG} about="the child care status check" />
+
+  <h2 id="help">Who can help</h2>
+  <p>Your case manager at the Child Care Resource Center can answer questions about your case. Legal Aid of West Virginia, listed above, takes cases about government benefits. 211 is free and can point you to other local help.</p>
+  {ok(r211) && <ResourceCard r={r211} />}
+  <p class="meta">We describe the state's steps. The Child Care Resource Center and DoHS decide who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

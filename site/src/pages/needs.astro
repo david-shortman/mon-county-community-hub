@@ -4,6 +4,7 @@
 // the date we read it. We describe problems; we never take a policy side,
 // and we name the local groups already working on each one.
 import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 import { loadDir, prettyDate, ymd } from '../lib/content.mjs';
 export const page = { door: 'community', topic: 'data', label: 'What people here need most', summary: 'A ranked list of the hardest problems people in Mon County face, with the numbers, their sources, and who is working on each' };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -88,7 +89,7 @@ const oldest = checkedDates[0];
     <li><strong>Most trends are not known yet.</strong> We only say a need is getting better or worse when a source shows the change over time.</li>
     <li><strong>We name groups, not people,</strong> and use only public, county-wide numbers.</li>
   </ul>
-  <p>The same numbers for the whole county, with charts, are on <a href={`${base}/how-we-are-doing/`}>How is Mon County doing?</a> The list is also open data at <a href={`${base}/api/v1/needs.json`}>/api/v1/needs.json</a>, and each need is a file in <a href={`${repo}/tree/main/content/needs`}>content/needs</a>. See something wrong or missing? <a href={`${repo}/issues/44`}>Tell us on issue 44</a>.</p>
+  <p>The same numbers for the whole county, with charts, are on <a href={`${base}/how-we-are-doing/`}>How is Mon County doing?</a> The list is also open data at <a href={`${base}/api/v1/needs.json`}>/api/v1/needs.json</a>, and each need is a file in <a href={`${repo}/tree/main/content/needs`}>content/needs</a>. See something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
   {oldest && <p class="meta">Oldest source on this page checked {prettyDate(oldest)}.</p>}
 </Base>
 

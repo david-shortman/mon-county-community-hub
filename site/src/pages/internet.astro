@@ -19,9 +19,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const state = [{ url: 'https://broadband.wv.gov/', checked: '2026-10-30' }];
 const navigator = [{ url: 'https://events.mympls.org/event/17866389', checked: '2026-10-30' }];
 ---
-<Base title="Internet at home in Morgantown and Mon County" description="Internet at home in Morgantown and Mon County: broadband maps, the state speed test, how to complain about a provider, and free Wi-Fi at the library.">
+<Base title="Internet at home in Morgantown and Mon County" description="Internet at home in Morgantown and Mon County: help paying for internet (Lifeline), broadband maps, the state speed test, how to complain about a provider, and free Wi-Fi at the library.">
   <h1>Internet at home</h1>
   <p class="lede">Slow internet, or none at your house? The state has a speed test and maps, and the Attorney General takes complaints about internet companies. The library has free Wi-Fi and computers.</p>
+  {r('lifeline-phone-internet-discount') && <p><strong>Need help paying for internet?</strong> Lifeline takes up to $9.25 a month off phone or internet service for households that get SNAP, Medicaid or some other benefits, or that have low income. See <a href="#lifeline">Help paying for phone or internet</a>.</p>}
 
   <h2 id="maps">See internet service in your area</h2>
   <p>The West Virginia Office of Broadband publishes a map of broadband funding and availability across the state. The state marks it updated July 24, 2026.</p>

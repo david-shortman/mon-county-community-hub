@@ -15,7 +15,7 @@ what_happens: The market moves indoors to the Mon County Center. The same token 
 sources:
   - url: https://www.morgantownfarmersmarket.org/markets.html
     checked: 2026-10-31
-  - url: https://www.morgantownfarmersmarket.org/news.html
+  - url: https://www.morgantownfarmersmarket.org/news
     checked: 2026-10-31
   - url: https://www.morgantownfarmersmarket.org/about-us.html
     checked: 2026-10-31
