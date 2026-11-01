@@ -221,3 +221,6 @@ html[data-look="fieldguide"] .crisis-strip { border-bottom: 2px solid var(--fg);
 @media print {
   html[data-look="fieldguide"] footer.site::before, html[data-look="fieldguide"] main::before, html[data-look="fieldguide"] main > h1::before { display: none; }
 }
+
+/* ---------- 13. "Checked <date>" (#1395) reads as a field note: ink, bold, in the label face. ---------- */
+html[data-look="fieldguide"] span.checked { font-family: var(--display); font-weight: 700; color: var(--fg); }
