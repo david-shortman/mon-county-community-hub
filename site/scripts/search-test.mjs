@@ -110,6 +110,9 @@ if (flag('--save')) {
   mkdirSync(dir, { recursive: true });
   const stamp = date.slice(0, 16).replace(/[-:]/g, '').replace('T', '-');
   const file = join(dir, `${stamp.slice(0, 4)}-${stamp.slice(4, 6)}-${stamp.slice(6, 8)}-${stamp.slice(9)}${plain ? '-plain' : ''}.json`);
-  writeFileSync(file, JSON.stringify(report, null, 1) + '\n');
+  // One line per query keeps the file short and easy to diff between runs.
+  const { results: rows, ...head } = report;
+  const text = JSON.stringify(head, null, 1).replace(/\n}$/, `,\n "results": [\n${rows.map((r) => `  ${JSON.stringify(r)}`).join(',\n')}\n ]\n}`);
+  writeFileSync(file, text + '\n');
   console.log(`Saved ${file.slice(repo.length + 1)}`);
 }
