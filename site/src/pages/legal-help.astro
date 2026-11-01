@@ -6,6 +6,7 @@
 // and name change fees, the WVU law clinic and Senior Legal Aid were confirmed
 // in verification sweep 2 (#1023).
 import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -15,6 +16,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Base title="Courts and legal help in Morgantown and Mon County, WV" description="Everyday legal help in Monongalia County, WV: free civil legal help, filing a civil case up to $20,000 in Magistrate Court, expungement forms, changing your name, jury duty, free court forms and case search, and finding a notary.">
   <h1>Courts and legal help</h1>
   <p class="lede">Free court forms and a free online question service are open to anyone, any time. For a person to talk to, Legal Aid of West Virginia and a Tuesday night lawyer phone line are free. This page says where to go. It is not legal advice.</p>
+  <OnThisPage items={[['#free-help', "Free legal help"], ['#small-claims', "Small claims ($20,000 or less)"], ['#record', "Clear a criminal record"], ['#name', "Change your name"], ['#jury', "Jury summons"], ['#forms', "Court forms and case lookup"], ['#notary', "Notary"]]} />
 
   <p>Facing eviction or a rent problem? See <a href={`${base}/money/?pick=rent`}>behind on rent</a>.</p>
 
