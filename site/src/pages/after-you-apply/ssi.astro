@@ -1,0 +1,133 @@
+---
+// After you apply: SSI (Supplemental Security Income). From the federal
+// rules in 20 CFR part 416 on ecfr.gov and the WV DoHS Income Maintenance
+// Manual (IMM, effective October 5, 2026), chapters 1 and 23, read
+// 2026-11-01. ssa.gov and SSA's PDF publications refused automated reads
+// (HTTP 403), so SSA's processing times, notice names and online status
+// steps are left off; see needs-verification issue #1165. Disability appeal
+// levels and the 10 day rule for keeping payments are on
+// /after-you-apply/social-security-disability/, so this page links there
+// and covers what is special to SSI. Benefits page: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'family', topic: 'disability', label: 'After you apply for SSI', summary: 'When SSI starts, Medicaid with SSI, the 60 day appeal deadline, reporting changes by the 10th, and reviews' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-01';
+const ORG = 'us-social-security-administration';
+const cfr = (s, name) => ({ url: `https://www.ecfr.gov/current/title-20/section-${s}`, checked, name: `20 CFR ${s}, ${name}` });
+const IMM = 'https://bfa.wv.gov/media/40005/download?inline';
+const imm = (part) => ({ url: IMM, checked, name: `WV DoHS Income Maintenance Manual, ${part}` });
+const src = {
+  start: cfr('416.335', 'Filing in or after the month you meet the requirements for eligibility'),
+  notice: cfr('416.1404', 'Notice of the initial determination'),
+  defs: cfr('416.1401', 'Definitions'),
+  recon: cfr('416.1409', 'How to request reconsideration'),
+  methods: cfr('416.1413', 'Reconsideration procedures'),
+  methodsApp: cfr('416.1413a', 'Reconsiderations of initial determinations on applications'),
+  methodsCut: cfr('416.1413b', 'Reconsideration procedures for post-eligibility claims'),
+  cont: cfr('416.1336', 'Notice of intended action affecting recipient\'s payment status'),
+  hearing: cfr('416.1433', 'How to request a hearing before an administrative law judge'),
+  redet: cfr('416.204', 'Redeterminations of SSI eligibility'),
+  what: cfr('416.708', 'What you must report'),
+  when: cfr('416.714', 'When reports are due'),
+  penalty: cfr('416.724', 'Amounts of penalty deductions'),
+  cause: cfr('416.732', 'No penalty deduction if you have good cause for failure to report timely'),
+  medicaid: imm('section 23.11.1 and sections 1.14.5 to 1.14.7 (SSI Medicaid)'),
+  phone: { url: 'https://www.usa.gov/social-security-report-a-death', checked: '2026-10-31', name: 'USA.gov, Report a death to Social Security (lists the SSA phone number)' },
+};
+const legal = resource('legal-aid-wv-civil-legal-help');
+const ok = (r) => r && !r.hidden;
+// Sibling pages from other PRs are linked only once they are on the site.
+const have = Object.keys(import.meta.glob('./*.astro')).map((k) => k.slice(2, -6));
+---
+<Base help title="After you apply for SSI in Mon County: when it starts, Medicaid, reporting and appeals" description="What happens after you apply for Supplemental Security Income (SSI) in Monongalia County, WV: when payments can start, Medicaid that comes with SSI in West Virginia, the 60 day appeal deadline and SSI's three kinds of reconsideration, reporting changes by the 10th of the next month, and reviews. Quoted from the federal rules and the state manual.">
+  <h1>After you apply for SSI</h1>
+  <p class="lede">Keep every letter from Social Security, and note the date on it. If you are turned down, you have 60 days to appeal. Once you get SSI, report changes by the 10th of the next month.</p>
+  <p>SSI (Supplemental Security Income) is run by the Social Security Administration (SSA). Questions about your claim: call SSA at <a href="tel:18007721213">1-800-772-1213</a>.</p>
+  <SourceLine sources={[src.phone]} org={ORG} about="the Social Security phone number" />
+  <p class="note">This page quotes the federal rules and the state's Medicaid manual. Social Security decides each claim. It is information, not legal advice. We could not read Social Security's own web pages, so it does not say how long decisions take or how to check status online.</p>
+  <ul class="topic-list">
+    <li><a href="#start">When SSI can start</a></li>
+    <li><a href="#medicaid">Medicaid comes with SSI</a></li>
+    <li><a href="#appeal">If you are turned down</a></li>
+    <li><a href="#report">What to report, and by when</a></li>
+    <li><a href="#review">Reviews</a></li>
+    <li><a href="#help">Who can help</a></li>
+  </ul>
+
+  <h2 id="start">When SSI can start</h2>
+  <ul>
+    <li><strong>The decision comes by mail.</strong> The rules say SSA "will mail a written notice of our initial determination to you at your last known address," explaining what it decided and why, and your right to appeal.</li>
+    <li><strong>The month after you apply.</strong> "When you file an application in the month that you meet all the other requirements for eligibility, the earliest month for which we can pay you benefits is the month following the month you filed the application."</li>
+    <li><strong>If you called or wrote first,</strong> the rules say that date can count as your filing date in some cases, so keep a note of when you first contacted SSA.</li>
+  </ul>
+  <SourceLine sources={[src.notice, src.start]} org={ORG} about="when SSI starts" />
+
+  <h2 id="medicaid">Medicaid comes with SSI</h2>
+  <p>In West Virginia, you do not apply for Medicaid separately if you get SSI. The state's manual says "West Virginia elected to cover all SSI recipients and to accept SSA's determination of eligibility for SSI as the sole eligibility determination for Medicaid."</p>
+  <ul>
+    <li><strong>When it starts.</strong> "SSI Medicaid eligibility begins with the first month for which an SSI payment is made." If you had medical bills before that, the manual says it can start up to three months earlier.</li>
+    <li><strong>Your card.</strong> "The Medical ID card for the SSI recipient will be included in the Medicaid approval notice."</li>
+    <li><strong>No separate renewal.</strong> "There is no redetermination of SSI Medicaid eligibility." It lasts as long as SSA says you get SSI. The manual says it "ends when SSI ends in most situations."</li>
+  </ul>
+  <p>Questions about the Medicaid part go to the state's Department of Human Services (DoHS).{have.includes('medicaid') && <> See <a href={`${base}/after-you-apply/medicaid/`}>After you apply for Medicaid</a>.</>}</p>
+  <SourceLine sources={[src.medicaid]} org="wv-department-of-human-services" about="Medicaid with SSI" />
+
+  <h2 id="appeal">If you are turned down</h2>
+  <ul>
+    <li><strong>60 days.</strong> SSA will reconsider if you send "a written request at one of our offices within 60 days after the date you receive notice of the initial determination."</li>
+    <li><strong>How the days are counted.</strong> The rules say the day you receive the notice "means 5 days after the date on the notice, unless you show us that you did not receive it within the 5-day period."</li>
+    <li><strong>Late?</strong> You can ask for more time in writing and give your reasons. SSA decides if you had good cause.</li>
+  </ul>
+  <h3>SSI has three kinds of reconsideration</h3>
+  <dl class="letters">
+    <dt>Case review</dt>
+    <dd>You can look at the evidence in your file and send more, in writing or by talking with SSA.</dd>
+    <dt>Informal conference</dt>
+    <dd>A case review, plus you can bring witnesses.</dd>
+    <dt>Formal conference</dt>
+    <dd>An informal conference, plus you can ask SSA to make people come or send records, and question them.</dd>
+  </dl>
+  <ul>
+    <li><strong>If your application was turned down for a reason that is not medical,</strong> such as income or resources, the rules say SSA "shall offer you a case review or an informal conference."</li>
+    <li><strong>If it was turned down for a medical reason,</strong> the reconsideration is a case review.</li>
+    <li><strong>If SSI you already get is cut or stopped</strong> for a reason that is not medical, "you have the choice of a case review, informal conference or formal conference."</li>
+  </ul>
+  <p>After reconsideration you can ask for a hearing before a judge, then the Appeals Council, then federal court. Each step has its own 60 days. If SSA plans to cut or stop your SSI, the rules say payment continues if you appeal "within 10 days after the individual's receipt of the notice."{have.includes('social-security-disability') && <> For more on each step, see <a href={`${base}/after-you-apply/social-security-disability/`}>After you apply for Social Security disability</a>.</>}</p>
+  <SourceLine sources={[src.recon, src.defs, src.methods, src.methodsApp, src.methodsCut, src.hearing, src.cont]} org={ORG} about="SSI appeals" />
+
+  <h2 id="report">What to report, and by when</h2>
+  <p>The rules list what you must tell SSA. Some of them are:</p>
+  <ul>
+    <li>A new address, or someone moving into or out of your home.</li>
+    <li>Changes in your income or resources (money and things you own), and in the income of a spouse or parent you live with.</li>
+    <li>Getting married, separated or divorced.</li>
+    <li>Going into or leaving a hospital, nursing home or other institution.</li>
+    <li>Leaving the U.S. "for 30 or more consecutive days or for a full calendar month."</li>
+    <li>If you get SSI for blindness or disability, your condition getting better.</li>
+  </ul>
+  <p>You do not have to report a Social Security raise that is "only a cost-of-living adjustment."</p>
+  <ul>
+    <li><strong>By the 10th of the next month.</strong> "You should report to us as soon as an event listed in § 416.708 happens. If you do not report within 10 days after the close of the month in which the event happens, your report will be late."</li>
+    <li><strong>If SSA asks you for information,</strong> answer within 30 days. The rules say if you do not, "we may determine that you are ineligible to receive SSI benefits."</li>
+    <li><strong>Late reports can cost money.</strong> The rules set penalties of "$25 for a report overdue in the first penalty period," then $50, then $100. There is no penalty if you had good cause, but you may still have to pay back money you should not have gotten.</li>
+  </ul>
+  <SourceLine sources={[src.what, src.when, src.penalty, src.cause]} org={ORG} about="reporting changes for SSI" />
+
+  <h2 id="review">Reviews</h2>
+  <p>SSA checks from time to time that you still qualify and get the right amount. The rules call this a redetermination and say it happens "on a scheduled basis at periodic intervals," more often if your situation is likely to change. SSA can also do one when you report a change. If you get SSI for a disability, SSA may also review your medical condition.</p>
+  <SourceLine sources={[src.redet]} org={ORG} about="SSI reviews" />
+
+  <h2 id="help">Who can help</h2>
+  <p>You can name a representative to deal with Social Security for you. Legal Aid of West Virginia takes cases about government benefits. For other help near you, see <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</p>
+  {ok(legal) && <ResourceCard r={legal} />}
+  <p class="meta">We describe the federal rules. Social Security decides who gets SSI. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .letters dt { font-weight: 700; margin-top: 8px; }
+  .letters dd { margin: 2px 0 0 1rem; }
+</style>
