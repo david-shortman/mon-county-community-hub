@@ -59,6 +59,8 @@ if (process.argv[2] === '--self-test') {
   expect(withoutLocale('site/src/pages/events/x.astro') === 'site/src/pages/events/x.astro', 'withoutLocale should leave other folders alone');
   expect(englishPageFiles('site/src/pages/es/money.astro').includes('site/src/pages/money.astro'), 'a Spanish page should map to its English page');
   expect(englishPageFiles('site/src/pages/es/help/food/index.astro').includes('site/src/pages/help/food/index.astro'), 'a Spanish index page should map to its English page');
+  expect(withoutLocale('site/src/pages/es/_pages/help/food/index.astro') === 'site/src/pages/help/food/index.astro', 'a Spanish template should follow its English page');
+  expect(englishPageFiles('site/src/pages/es/_pages/money.astro').includes('site/src/pages/money.astro'), 'a Spanish template should map to its English page');
   expect(flipsLanguage("-export const PUBLISHED = [];\n+export const PUBLISHED = ['es'];"), 'turning a language on should count');
   expect(flipsLanguage("-export const PUBLISHED = ['es'];\n+export const PUBLISHED = [];"), 'turning a language off should count');
   expect(flipsLanguage('-export const ALLOW_MACHINE_DRAFTS = false;\n+export const ALLOW_MACHINE_DRAFTS = true;'), 'allowing machine drafts should count');
