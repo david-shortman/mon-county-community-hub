@@ -1,6 +1,6 @@
 ---
 // The Front Door (#250, identity v2 direction B): Help now on top, what the
-// site is, the five doors, search, the season, what is coming up, and a
+// site is, the five doors, search, more of the site (#1038), the season, what is coming up, and a
 // person to talk to. Help is one tap away through a door's examples, and
 // every live door is two taps from a phone number, a place or a date.
 import Base from '../layouts/Base.astro';
@@ -9,6 +9,7 @@ import HelpNowSources from '../components/HelpNowSources.astro';
 import DoorCards from '../components/DoorCards.astro';
 import SearchBox from '../components/SearchBox.astro';
 import SeasonCard from '../components/SeasonCard.astro';
+import HomeBand from '../components/HomeBand.astro';
 import EventCard from '../components/EventCard.astro';
 import { loadCalendar, upcoming, resource, telHref } from '../lib/content.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -25,6 +26,8 @@ const r211 = resource('wv-211');
 
   <SearchBox label="Or type what's going on" />
   <noscript><p><a href={`${base}/topics/`}>See all topics, A to Z</a></p></noscript>
+
+  <HomeBand />
 
   <SeasonCard />
 

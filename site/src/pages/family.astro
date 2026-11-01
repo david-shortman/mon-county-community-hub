@@ -1,11 +1,30 @@
 ---
 // The Family and life changes door (#252). Content lives in
 // content/doors/family.yaml; the layout is shared with every door.
+// "Big life change?" sits near the top so the life event pages are on the
+// first phone screen, not 4 to 9 screens down (#1287). Its links come from
+// the pages' own tags, so a new life event page shows up here by itself.
 import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
+import { loadPages } from '../lib/pages.mjs';
 export const page = { door: "family", label: "Family and life changes", summary: "Young kids, jobs and training, reading and English lessons, and help for veterans" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pages = await loadPages();
+const changes = [...pages.values()]
+  .filter((p) => /^\/life-events\/[^/]+\/$/.test(p.route) && p.door === 'family')
+  .sort((a, b) => a.label.replace(/^I'm /, '').localeCompare(b.label.replace(/^I'm /, '')));
 ---
 <Base title="Family and life changes in Morgantown and Mon County" description="Pick what is going on: a young child, a job or training, English lessons, or help for veterans. Local steps in order, with phone numbers and sources.">
   <h1>Family and life changes</h1>
-  <DoorPage slug="family" />
+  <DoorPage slug="family">
+    {changes.length > 0 && (
+      <nav class="link-row" aria-labelledby="big-change-h" slot="top">
+        <h2 id="big-change-h">Big life change?</h2>
+        <ul>
+          {changes.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a></li>)}
+          {pages.has('/life-events/') && <li><a href={`${base}/life-events/`}>See all big changes</a></li>}
+        </ul>
+      </nav>
+    )}
+  </DoorPage>
 </Base>

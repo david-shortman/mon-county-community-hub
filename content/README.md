@@ -115,6 +115,8 @@ sources:
     checked: 2026-10-28
 ```
 
+Home dates that fall on the same day every year (tax deadlines, fire seasons, upkeep tips) can go in `home-year.yaml` instead, as one rule each; the build shows each rule's next date and puts it in `home.ics` (#1051). The file's header lists the fields.
+
 To roll a yearly item forward, copy the file, change the slug, dates, and sources, and re-check the source. Never guess a date: if the new date is not published yet, leave the item out and note it in an issue.
 
 Run `npm run check-content` in `site/` to validate entries.
