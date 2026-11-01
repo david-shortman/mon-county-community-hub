@@ -28,7 +28,7 @@ const host = b.home && new URL(b.home).hostname.replace(/^www\./, '');
 <Base title={`${named}: agendas in plain language`} description={`Coming ${b.name} agendas in plain language, and the actions recorded in its recent minutes, each linked to the official record.`}>
   <p class="meta"><a href={`${base}/meetings/agendas/`}>Coming meetings in plain language</a></p>
   <h1>{b.name}</h1>
-  <p class="lede">Coming agendas in plain language, and what recent meetings decided, from the official minutes.</p>
+  <p class="lede">See what is on the agenda for coming meetings, in plain words. See what recent meetings decided, from the official minutes.</p>
   {b.home ? <p>The {b.name} posts its agendas and minutes at <a href={b.home}>{host}</a>. That is the official record.</p>
     : <p>We have not found an official page where the {b.name} posts agendas or minutes.</p>}
 

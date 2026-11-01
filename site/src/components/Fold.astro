@@ -5,10 +5,11 @@
 // Never fold urgent help ("can't wait" steps, shutoff or eviction help)
 // or the main answer to the page's question.
 // Props: id, title, hint (one short line under the title), level (2 to 4).
-const { id, title, hint, level = 2 } = Astro.props;
+// Other attributes (for example data-area for AreaPicker) go on the <details>.
+const { id, title, hint, level = 2, ...rest } = Astro.props;
 const H = `h${level}`;
 ---
-<details class="fold" id={id}>
+<details class="fold" id={id} {...rest}>
   <summary><H>{title}{hint && <span class="fold-hint">{hint}</span>}</H></summary>
   <div class="fold-body"><slot /></div>
 </details>
