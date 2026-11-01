@@ -50,6 +50,6 @@ get_help:
   - path: /parks/
     label: Parks and trails
 site_coverage:
-  level: thin
-  why: "Diabetes, blood pressure or weight lists two programs: the health department dietitians and Health Right clinics. Free classes, screenings and places to be active are spread across other pages and are not gathered in one place yet (issue 1256)."
+  level: partial
+  why: "Diabetes, blood pressure or weight gathers a free diabetes prevention class, diabetes classes and a support group from Mon Health, health department dietitians, Health Right's diabetes and heart clinics, and places to be active. WVU Medicine's and WVU Extension's diabetes programs and free blood pressure checks are not listed yet, because no current page we could read confirms them (issue 1312)."
   checked: 2026-11-01
