@@ -7,6 +7,8 @@
 // printed beside it. Printing and placing sheets is David's call (#163).
 // Town-by-town sheets (Westover, Star City, Cheat Lake) need town-level data
 // on each record first.
+// Site search skips the list itself (#529): the same places are on the topic
+// pages, so the sheet is found by its title and does not crowd them out.
 import Base from '../../layouts/Base.astro';
 import { loadDoors, resource, oldestChecked, isStale, prettyDate, todayYmd, shortUrl } from '../../lib/content.mjs';
 import { loadPages } from '../../lib/pages.mjs';
@@ -41,7 +43,7 @@ const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href)
   </div>
   <p class="no-print">This sheet is made from our listings every morning. Print it, fold it, and hand it to someone. <button class="btn" type="button" id="print-sheet" hidden><span>Print this sheet</span></button> <a href={`${base}/print/`}>All printouts</a>.</p>
 
-  <ul class="sheet-list">
+  <ul class="sheet-list" data-pagefind-ignore>
     {items.map((r) => (
       <li>
         <p class="sh-title">{r.title}</p>
