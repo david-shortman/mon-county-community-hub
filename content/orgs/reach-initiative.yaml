@@ -1,0 +1,13 @@
+name: The REACH Initiative
+slug: reach-initiative
+kind: nonprofit
+website: https://wvreentry.org/
+phone: "855-987-3224"
+summary: A statewide nonprofit that helps people coming home from jail or prison find programs, matches them with peer mentors, and runs local reentry councils, including one for Monongalia, Marion and Preston counties.
+topics: [work, legal]
+area: statewide
+sources:
+  - url: https://wvreentry.org/
+    checked: 2026-10-31
+  - url: https://wvreentry.org/councils/
+    checked: 2026-10-31

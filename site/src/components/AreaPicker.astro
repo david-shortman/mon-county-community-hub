@@ -10,6 +10,7 @@
 // other under one parent; the picked area moves to the front of that group.
 // An area can also name its town page ({ slug, name, town: { name, href } }),
 // and the picker then links to it when that area is picked (#1120).
+// A section can be a folded <details> (Fold.astro): the picked one opens.
 const { areas = [] } = Astro.props;
 ---
 <form class="area-picker" hidden aria-label="Put your area first">
@@ -37,6 +38,7 @@ const { areas = [] } = Astro.props;
       var order = sections.filter(function (el) { return el.getAttribute('data-area') === slug; })
         .concat(sections.filter(function (el) { return el.getAttribute('data-area') !== slug; }));
       order.forEach(function (el) { parent.insertBefore(el, groupEnd); });
+      if (slug && order[0].tagName === 'DETAILS') order[0].open = true;
       var name = slug && select.selectedOptions[0] ? select.selectedOptions[0].text : '';
       status.textContent = name ? name + ' is shown first.' : '';
       var opt = slug ? select.selectedOptions[0] : null;

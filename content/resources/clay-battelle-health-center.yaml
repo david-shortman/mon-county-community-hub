@@ -12,6 +12,6 @@ contact:
 cost: Sliding fee with 4 discount levels, based on household size and income. Takes Medicare and Medicaid.
 sources:
   - url: https://cbhealthwv.org/locations/blacksville/
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://cbhealthwv.org/for-patients/assistance-programs/
-    checked: 2026-10-30
+    checked: 2026-10-31

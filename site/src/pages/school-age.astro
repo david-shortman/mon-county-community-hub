@@ -6,6 +6,7 @@
 // Energy Express, the Boys and Girls Club, library makerspace hours, school
 // transfers, Kidematics prices and The SOURCE's tuition amounts.
 import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
@@ -25,9 +26,11 @@ const ccrcSources = [
 <Base title="School-age kids in Morgantown and Mon County: enroll, buses, after school, tutoring" description="For parents of kids in Monongalia County Schools: how to sign up and find your school, bus times and delay alerts, days off and early dismissals, free school meals, before and after school care, after-school programs at middle and high schools, free online tutoring, and things to do.">
   <h1>School-age kids: school, buses and after school</h1>
   <p class="lede">For parents of kids in kindergarten through 12th grade in Monongalia County Schools. Not sure which school your child goes to? Look up your address on the district's map, then contact that school.</p>
+  <OnThisPage items={[['#enroll', "Starting or moving schools"], ['#bus', "Buses and days off"], ['#meals', "School meals"], ['#care', "Before and after care (elementary)"], ['#after-school', "After school (middle and high)"], ['#tutoring', "Free tutoring"], ['#things-to-do', "Things to do"]]} />
 
   <h2 id="enroll">Starting school or moving schools</h2>
   {r('mcs-enroll-and-find-your-school') && <ResourceCard r={r('mcs-enroll-and-find-your-school')} />}
+  <p>Shots and forms your child needs before school starts: see <a href={`${base}/school-shots/`}>Shots and physicals for school and sports</a>.</p>
   <p>Younger than 5? See <a href={`${base}/families-and-kids/`}>Families and kids</a> for Pre-K, Head Start and Birth to Three.</p>
 
   <h2 id="bus">Buses, days off and early dismissals</h2>

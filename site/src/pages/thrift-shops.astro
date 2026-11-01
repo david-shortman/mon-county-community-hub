@@ -2,10 +2,13 @@
 // Thrift and resale shops by area (#427, part of #422). Built only from
 // content/secondhand: shops are grouped by area, A to Z within each. The quick
 // filters are plain links to each shop's card, so they work with no script.
-// No ratings, no "best of", no paid placement.
+// No ratings, no "best of", no paid placement. Each area is folded (#1174):
+// a link to a shop opens its area, and the area picker opens the one picked.
 import Base from '../layouts/Base.astro';
 import ShopCard from '../components/ShopCard.astro';
 import AreaPicker from '../components/AreaPicker.astro';
+import Fold from '../components/Fold.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 // Areas that share a name with a town page (#1120).
 const TOWN_PAGES = { westover: 'Westover', 'cheat-lake': 'Cheat Lake' };
 import { loadSecondhand, SECONDHAND_AREAS, SECONDHAND_GOODS } from '../lib/content.mjs';
@@ -25,6 +28,8 @@ const causes = shops.filter((s) => s.funds_local_cause);
   <h1>Thrift and resale shops</h1>
   <p class="lede">Secondhand shops in Mon County, grouped by part of town and listed A to Z. Most cluster in two places: the Westover strip along Mall Rd and Fairmont Rd, and downtown on and near High St. We list every shop the same way, with no ratings and no paid spots.</p>
 
+  <OnThisPage items={[['#filters-h', 'Looking for something?'], ...areas.map((a) => [`#area-${a.slug}`, a.name]), ['#more-ways', 'More ways to buy, sell and share']]} />
+
   <nav aria-labelledby="filters-h">
     <h2 id="filters-h">Looking for something?</h2>
     <ul class="filters">
@@ -32,21 +37,19 @@ const causes = shops.filter((s) => s.funds_local_cause);
       {buyers.length > 0 && <li><strong>Buys from you</strong> (cash or store credit): {buyers.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>}
       {causes.length > 0 && <li><strong>Funds a local cause:</strong> {causes.map((s, i) => <>{i > 0 && ', '}<a href={`#${s.slug}`}>{s.name}</a></>)}</li>}
     </ul>
-    <p>By area: {areas.map((a, i) => <>{i > 0 && ' · '}<a href={`#area-${a.slug}`}>{a.name}</a></>)}</p>
   </nav>
 
   <AreaPicker areas={areas.map((a) => ({ slug: a.slug, name: a.name, town: TOWN_PAGES[a.slug] && { name: TOWN_PAGES[a.slug], href: `${base}/towns/${a.slug}/` } }))} />
 
   <div class="area-group">
   {areas.map((a) => (
-    <section data-area={a.slug} aria-labelledby={`area-${a.slug}`}>
-      <h2 id={`area-${a.slug}`}>{a.name}</h2>
+    <Fold id={`area-${a.slug}`} data-area={a.slug} title={a.name} hint={`${a.shops.length} ${a.shops.length === 1 ? 'shop' : 'shops'}. Tap to see them.`}>
       {a.shops.map((s) => <ShopCard s={s} />)}
-    </section>
+    </Fold>
   ))}
   </div>
 
-  <h2>More ways to buy, sell and share</h2>
+  <h2 id="more-ways">More ways to buy, sell and share</h2>
   <ul>
     <li><a href={`${base}/sell-or-donate/`}>Sell, donate or give away your stuff</a></li>
     {hasBorrow && <li><a href={`${base}/borrow-or-get-free/`}>Borrow it or get it free</a></li>}

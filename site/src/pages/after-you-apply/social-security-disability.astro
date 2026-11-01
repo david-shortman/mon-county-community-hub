@@ -1,0 +1,74 @@
+---
+// After you apply: Social Security disability (SSDI and SSI). From the
+// federal rules in 20 CFR parts 404 and 416 on ecfr.gov, read 2026-10-31.
+// ssa.gov refused automated reads (HTTP 403), so SSA's processing times and
+// online status steps are left off; see needs-verification issue #1165.
+// The SSA phone number comes from the us-social-security-administration
+// org record. Benefits page: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'family', topic: 'disability', label: 'After you apply for Social Security disability', summary: 'The 60 day appeal deadline, the four appeal levels, and keeping payments while you appeal' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const ORG = 'us-social-security-administration';
+const cfr = (s, name) => ({ url: `https://www.ecfr.gov/current/title-20/section-${s}`, checked, name: `20 CFR ${s}, ${name}` });
+const src = {
+  defs: cfr('404.901', 'Definitions'),
+  recon: cfr('404.909', 'How to request reconsideration'),
+  reconSsi: cfr('416.1409', 'How to request reconsideration (SSI)'),
+  hearing: cfr('404.933', 'How to request a hearing before an administrative law judge'),
+  council: cfr('404.968', 'How to request Appeals Council review'),
+  court: cfr('404.981', 'Effect of Appeals Council\'s decision or denial of review'),
+  cont: cfr('404.1597a', 'Continued benefits pending appeal of a medical cessation determination'),
+  contSsi: cfr('416.1336', 'Notice of intended action affecting recipient\'s payment status (SSI)'),
+  review: cfr('404.1589', 'We may conduct a review to find out whether you continue to be disabled'),
+  report: cfr('404.1588', 'Your responsibility to tell us of events that may change your disability status'),
+  rep: cfr('404.1705', 'Who may be your representative'),
+  phone: { url: 'https://www.usa.gov/social-security-report-a-death', checked, name: 'USA.gov, Report a death to Social Security (lists the SSA phone number)' },
+};
+const legal = resource('legal-aid-wv-civil-legal-help');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for Social Security disability in Mon County: appeals and deadlines" description="What happens after you apply for Social Security disability (SSDI) or SSI in Monongalia County, WV: the 60 day deadline to appeal, the four appeal levels, the 10 day deadline to keep payments during an appeal, reviews, and reporting changes. Quoted from the federal rules.">
+  <h1>After you apply for Social Security disability</h1>
+  <p class="lede">Keep every letter from Social Security, and note the date on it. If you are turned down, you have 60 days to appeal, and you can appeal more than once. Here are the steps, in the words of the federal rules.</p>
+  <p>This covers Social Security Disability Insurance (SSDI) and Supplemental Security Income (SSI), both run by the Social Security Administration (SSA). Questions about your claim: call SSA at <a href="tel:18007721213">1-800-772-1213</a>.</p>
+  <SourceLine sources={[src.phone]} org={ORG} about="the Social Security phone number" />
+  <p class="note">This page quotes the federal rules. Social Security decides each claim. It is information, not legal advice. We could not read SSA's own web pages, so it does not list how long decisions take or how to check status online.</p>
+
+  <h2 id="clock">How the 60 days are counted</h2>
+  <p>Every appeal deadline below is counted from the day you get the letter. The rules say that day "means 5 days after the date on the notice, unless you show us that you did not receive it within the 5-day period." So, in most cases, you have 65 days from the date printed on the letter.</p>
+  <SourceLine sources={[src.defs]} org={ORG} about="how deadlines are counted" />
+
+  <h2 id="levels">If you are turned down: four levels of appeal</h2>
+  <ol>
+    <li><strong>Reconsideration.</strong> A new look at your claim. Ask in writing "Within 60 days after the date you receive notice of the initial determination." The same 60 days apply to SSI.</li>
+    <li><strong>A hearing before a judge</strong> (an administrative law judge). Ask in writing "Within 60 days after the date you receive notice of the previous determination or decision." The rules say to include why you disagree and any new evidence you will send.</li>
+    <li><strong>Appeals Council review.</strong> Ask "Within 60 days after the date you receive notice of the hearing decision or dismissal." Send any evidence you want considered with your request.</li>
+    <li><strong>Federal court.</strong> The rules say you "may file an action in a Federal district court within 60 days after the date you receive notice of the Appeals Council's action."</li>
+  </ol>
+  <p><strong>Late?</strong> The rules say you can ask for more time in writing, with your reasons. Social Security decides if you had good cause.</p>
+  <SourceLine sources={[src.recon, src.reconSsi, src.hearing, src.council, src.court]} org={ORG} about="Social Security appeals" />
+
+  <h2 id="keep">If your disability payments are being stopped</h2>
+  <p>From time to time Social Security checks whether you are still disabled. The rules call this a "continuing disability review," and say SSA will tell you when it starts one and why.</p>
+  <ul>
+    <li><strong>SSDI: 10 days to keep payments.</strong> If SSA decides you are no longer disabled, you can keep getting payments during your appeal. You must ask for reconsideration and for continued benefits "no later than 10 days after the date you receive the notice." The same 10 days apply when asking for a hearing after reconsideration.</li>
+    <li><strong>SSI: 10 days too.</strong> For SSI, the rules say if you appeal "within 10 days after the individual's receipt of the notice," payment "shall be continued or reinstated at the previously established payment level." You still have 60 days to appeal, but payments are not kept up after the 10 days unless you show good cause.</li>
+    <li><strong>If you lose the appeal.</strong> The rules say "you will be asked to pay back any continued benefits you receive," but you can ask not to have to pay them back. You "will not be asked to pay back any Medicare benefits" from that time.</li>
+  </ul>
+  <SourceLine sources={[src.review, src.cont, src.contSsi]} org={ORG} about="keeping payments during an appeal" />
+
+  <h2 id="report">Reporting changes</h2>
+  <p>If you get disability benefits, the rules say you "should promptly tell us if" your condition improves, you go back to work, you have a new employer, you work more, or your earnings go up.</p>
+  <SourceLine sources={[src.report]} org={ORG} about="reporting changes" />
+
+  <h2 id="help">Who can help</h2>
+  <p>You can name a representative to deal with Social Security for you. The rules say it can be a lawyer, or a person who is not a lawyer who can give you "valuable help" with your claim. Legal Aid of West Virginia takes government benefits cases. For other disability help near you, see <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</p>
+  <SourceLine sources={[src.rep]} org={ORG} about="representatives" />
+  {ok(legal) && <ResourceCard r={legal} />}
+  <p class="meta">We describe the federal rules. Social Security decides who gets benefits. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

@@ -3,11 +3,11 @@ slug: wv-graduated-drivers-license
 org: wv-dmv
 topics: [family]
 who_it_is_for: Teens who are at least 15 and under 18 and want to learn to drive. West Virginia licenses new drivers in three levels.
-what_to_do: Start with the Level 1 permit at the DMV. You take a knowledge test, and a parent or guardian signs if you are under 18. Check the DMV's page for the documents to bring and to book a visit.
+what_to_do: Start with the Level 1 permit at the DMV. You take a knowledge test, and a parent or guardian signs if you are under 18. Check the DMV's page for the rules at each level and to book a visit.
 contact:
   url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
   url_label: DMV license levels
 cost: "$7.50 for each knowledge test try (Level 1), $7.50 for the road test (Level 2), and $5.00 for each year until age 21 (Level 3)."
 sources:
   - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
-    checked: 2026-10-30
+    checked: 2026-10-31
