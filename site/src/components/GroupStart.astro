@@ -5,7 +5,7 @@
 // once its page exists, and a section with no live links is left out, so the
 // page grows as the group's build issues ship. Research: docs/groups/.
 //
-// sections: [{ title, links: [{ href, text }] }]
+// sections: [{ title, links: [{ href, label?, text? }] }]
 // href is a site route, and may carry a ?pick= or #part (checked by path).
 import { loadPages } from '../lib/pages.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -17,7 +17,11 @@ const live = sections
     ...s,
     links: s.links
       .filter((l) => pages.has(l.href.split(/[?#]/)[0]))
-      .map((l) => ({ ...l, label: l.label ?? pages.get(l.href.split(/[?#]/)[0]).label })),
+      .map((l) => {
+        const p = pages.get(l.href.split(/[?#]/)[0]);
+        // With no text of its own, a link uses the linked page's summary.
+        return { ...l, label: l.label ?? p.label, text: l.text ?? p.summary };
+      }),
   }))
   .filter((s) => s.links.length);
 ---

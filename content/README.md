@@ -617,3 +617,11 @@ Neither folder shows on the site. Both feed issues for a person, from the daily 
 ## `translations/<lang>/<kind>/<name>.yaml`: other languages (not on the site yet)
 
 Sidecar files with reviewed translations of a record, page or part. They hold only words, never facts: numbers, hours, addresses and links always come from the English record. No language is turned on yet (#1067). Schema, the staleness hash and how to add one: [`docs/process/translations.md`](../docs/process/translations.md).
+
+## `agendas/<body>-<date>.yaml`: plain-language agenda guides (#529)
+
+One file per coming meeting with a posted agenda, for any body listed in `BODIES` in `site/src/lib/agendas.mjs` (City Council, County Commission, school board, city boards, regional boards and town councils), shown on `/meetings/agendas/` and the body's own page until the meeting day passes. Every agenda item keeps its exact title, plus a `kind` and one neutral `line`. Neutrality rules: [`docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md`](../docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md). Fields, kinds and the weekly steps: [`docs/process/agenda-guides.md`](../docs/process/agenda-guides.md). `npm run check-content` checks the fields and fails a line with a judging word or an em dash (`site/src/lib/agendas.mjs`).
+
+## `minutes/<body>-<date>.yaml`: what was decided (#529)
+
+One file per past meeting with posted minutes, shown on the body's page under `/meetings/agendas/<body>/` for 30 days after the meeting. It lists every motion the official minutes record, in order: `motion` and `result` copied as written, `vote` as the minutes give it, and `item` (the agenda number or title) when the minutes give one. `minutes_status` is `Approved`, `Draft` or `Not marked`, as the minutes or the posting page say. Never a summary of debate, comments or reasons. Steps: "What was decided" in [`docs/process/agenda-guides.md`](../docs/process/agenda-guides.md). `npm run check-content` checks the fields (`decidedProblems` in `site/src/lib/agendas.mjs`).

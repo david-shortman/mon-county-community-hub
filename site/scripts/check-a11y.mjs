@@ -72,8 +72,6 @@ for (const scheme of ['light', 'dark']) {
 // instead of failing. The fixes are written out on #971. Remove each line once it is fixed.
 const WAITING = [
   [/^\/$/, '#1016 (crisis buttons)'],
-  [/^\/community-centers\/[^/]+\/flyer\/$/, '#938 (open, edits the flyer page)'],
-  [/^\/how-we-are-doing\/$/, '#956 (open, edits this page)'],
 ];
 const narrow = await browser.newPage({ viewport: { width: 320, height: 640 } });
 for (const u of urls) {

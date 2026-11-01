@@ -5,12 +5,14 @@ import Route from '../components/Route.astro';
 import Milepost from '../components/Milepost.astro';
 import Icon from '../components/Icon.astro';
 import Actions from '../components/Actions.astro';
-import { resource, telHref, loadDir } from '../lib/content.mjs';
+import PassItOn from '../components/PassItOn.astro';
+import { resource, telHref, oldestChecked, loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "this-month", topic: "money", label: "Help paying a utility bill", summary: "Heat, water or electric, before or after a shutoff" };
 // Each program reads its phone and sources from its resource record, so its
 // source and checked date sit right under it (#135).
 const monPower = resource('mon-power-payment-help');
+const wx = resource('ncwvcaa-weatherization');
 const mub = resource('mub-customer-service');
 // The "This season" line shows the record's own what_to_do, so new season
 // dates reach the page when the record changes (#1046).
@@ -21,7 +23,10 @@ const wv211 = resource('wv-211');
 // The Lifeline link shows once its record is in (#668, #735).
 const lifeline = loadDir('resources').some((e) => e.slug === 'lifeline-phone-internet-discount');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/monongalia_county_assistance_p.html', checked: '2026-10-28', name: 'Need Help Paying Bills (a national directory)' }];
+const charitySources = [
+  { url: 'https://www.needhelppayingbills.com/html/monongalia_county_assistance_p.html', checked: '2026-10-28', name: 'Need Help Paying Bills (a national directory)' },
+  { url: 'https://www.needhelppayingbills.com/html/morgantown_salvation_army_assi.html', checked: '2026-10-31', name: 'Need Help Paying Bills, Salvation Army page' },
+];
 ---
 <Base help title="Help paying a utility bill in Morgantown and Mon County" description="What to do if you cannot pay a heat, water or electric bill in Morgantown and Monongalia County: who to call first, and the programs that can help.">
   <h1>Help paying a utility bill</h1>
@@ -36,6 +41,7 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
         <li><strong>Payment arrangement:</strong> smaller payments added to your monthly bill.</li>
         <li><strong>A later due date</strong> for customers who are 60 or older and get Social Security, a pension or disability benefits.</li>
         <li><strong>Someone to warn:</strong> a friend, relative, clergy member or agency can be told before your power is shut off.</li>
+        <li><strong>Payment agreement and shutoffs:</strong> Mon Power says that under state Public Service Commission rules, a payment agreement for your past due amount delays a shutoff, and paying it as agreed prevents one. A doctor's note about a health problem does not stop a shutoff by itself.</li>
         <li><strong>Critical Care program:</strong> for homes where someone uses electric medical equipment to stay alive. Mon Power says it helps these customers get ready for power outages.</li>
       </ul>
       <SourceLine sources={monPower.sources} org={monPower.org} about="Mon Power" /></li>
@@ -51,11 +57,10 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   <Milepost n={2} title="Apply for help paying" id="programs">
 
   <h3>LIEAP: heating help from the state</h3>
-  <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Eligibility depends on household income, household size and whether you pay for your own heat. The maximum benefit last season was $2,000 per household.</p>
+  <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Eligibility depends on household income, household size and whether you pay for your own heat. The maximum benefit is $2,000 per household.</p>
   <ul>
-    <li><strong>Last season (2026):</strong> applications were mailed starting January 5 to households that got LIEAP the season before, older adults and people with disabilities. For them, the last day was Friday, January 30, or sooner if money ran out. Everyone else could apply starting February 2.</li>
     <li><strong>This season:</strong> {lieap.what_to_do}</li>
-    <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel (like propane or oil). Do not mail the form to your utility.</li>
+    <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel (like propane or oil).</li>
     <li><strong>Emergency help:</strong> Mon Power's page says LIEAP includes one emergency payment per heating season. It can stop a shutoff or turn service back on. It is for customers who got a termination notice (a notice that service will be shut off) after they qualified for LIEAP.</li>
   </ul>
   <SourceLine sources={lieap.sources} org={lieap.org} about="LIEAP" />
@@ -89,12 +94,18 @@ const charitySources = [{ url: 'https://www.needhelppayingbills.com/html/mononga
   </Milepost>
 
   <Milepost n={4} title="Lower the bill for next time" when="Later" id="next-time">
-  <p>Mon Power's page lists free home weatherization: energy-saving upgrades to your home that lower energy costs. It also lists a program that repairs or replaces broken heating systems. Both go through your local Community Action Agency, the local group that hands out this help. Ask 211 which agency serves you.</p>
+  <p>Mon Power's page lists free home weatherization: energy-saving upgrades to your home that lower energy costs. It also lists a program that repairs or replaces broken heating systems. Both go through your local Community Action Agency, the local group that hands out this help. In Monongalia County, that is the North Central West Virginia Community Action Association (NCWVCAA).</p>
   <SourceLine sources={monPower.sources} org={monPower.org} about="lowering the bill" />
-  <div class="actions"><a class="btn" href={telHref(wv211.contact.phone)}><Icon name="phone" /><span>Call 211 to find your agency</span></a></div>
+  <p>NCWVCAA's Weatherization Program can insulate, seal air leaks, and repair or replace the heating system. Homes with children, older adults or people with disabilities get priority, and approved homes wait on a list. The application is on its Weatherization page, or ask its Monongalia County office in Westover.</p>
+  <SourceLine sources={wx.sources} org={wx.org} about="weatherization" />
+  <div class="actions">
+    <a class="btn" href={wx.contact.url}><Icon name="open" /><span>Weatherization application</span></a>
+    <a class="btn" href={telHref(wx.contact.phone)}><Icon name="phone" /><span>Call about weatherization</span></a>
+  </div>
   </Milepost>
   </Route>
 
+  <PassItOn whole title="Help paying a utility bill in Mon County" checked={oldestChecked([monPower, mub, lieap, emergency, def, wv211].flatMap((r) => r.sources))} />
   <div class="note">
     <p><strong>Do this today:</strong> call your utility, ask for a payment plan, then call 211.</p>
   </div>

@@ -1,0 +1,13 @@
+name: Kidematics
+slug: kidematics
+kind: business
+website: https://kidematics.com/
+phone: "304-906-3612"
+summary: Runs before and after school programs at Cheat Lake and Suncrest elementary schools, with physical activity and social skills lessons.
+topics: [family]
+area: monongalia-county
+sources:
+  - url: https://kidematics.com/beforeandafter.html
+    checked: 2026-10-30
+  - url: https://www.boe.mono.k12.wv.us/page/before-after-school-care
+    checked: 2026-10-30

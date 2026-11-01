@@ -9,7 +9,7 @@ import ResourceCard from '../components/ResourceCard.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "living-here", topic: "voting", label: "Register to vote and find your polling place", summary: "Register or update online or at the County Clerk, check your registration, find your polling place, and city elections" };
+export const page = { door: "living-here", topic: "voting", label: "Register to vote and find your polling place", summary: "Register or update online or at the County Clerk, check your registration, find your polling place, city elections, and working at the polls" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -19,7 +19,7 @@ const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_Yo
 const electionWeek = today <= '2026-11-03';
 const earlyVotingOpen = today <= '2026-10-31';
 ---
-<Base title="Register to vote and find your polling place in Mon County" description="How to register to vote or update your registration in Morgantown and Monongalia County, WV: the Secretary of State's online registration, the Monongalia County Clerk's office, checking your registration, finding your polling place, and Morgantown city elections.">
+<Base title="Register to vote and find your polling place in Mon County" description="Register to vote or update your registration in Morgantown and Monongalia County, WV, check your registration, and find your polling place.">
   <h1>Register to vote and find your polling place</h1>
   <p class="lede">These are the official places to register, check your registration and find where you vote. They come from the West Virginia Secretary of State, the Monongalia County Clerk and the City of Morgantown.</p>
 
@@ -43,6 +43,10 @@ const earlyVotingOpen = today <= '2026-10-31';
 
   <h2 id="city">Morgantown city elections</h2>
   {r('morgantown-city-voter-information') && <ResourceCard r={r('morgantown-city-voter-information')} />}
+
+  <h2 id="poll-worker">Work at the polls</h2>
+  <p>Poll workers run the polls on Election Day. People registered to vote in the county can sign up, and some high school juniors and seniors can too. The work is the same for every party and candidate.</p>
+  {r('wv-poll-worker') && <ResourceCard r={r('wv-poll-worker')} />}
 
   <p>Election days and deadlines we have confirmed are on <a href={`${base}/calendar/`}>Dates</a>.</p>
 

@@ -1,0 +1,95 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: westover-2026-11-02
+body: westover
+meeting: Common Council Meeting
+date: 2026-11-02
+time: "18:00"
+place: City Hall, 500 Dupont Road, Westover
+watch: The agenda says the meeting is tape recorded. We did not find a live stream.
+agenda_url: "https://www.dropbox.com/scl/fo/cz3nuib5ikb6rchmvs2gj/AGOR8C2QM-W2eSC0BVX5Bu4?rlkey=pia680ypedmxjgj4mfwmqngry&st=x0iodjyw&dl=0"
+read: 2026-10-31
+items:
+  - number: "1"
+    title: "MEETING IS TAPE RECORDED:"
+    kind: opening
+    line: The meeting opens, and the council notes that it is being recorded.
+  - number: "2"
+    title: "APPROVAL OF MINUTES: Common Council, October 19, 2026"
+    kind: minutes
+    line: A vote to approve the written record of the October 19, 2026 meeting.
+  - number: "3"
+    title: "TREASURER'S REPORT:"
+    kind: report
+    line: A report from the city treasurer. The agenda gives no more detail.
+  - number: "4"
+    title: "CHIEF OF POLICE REPORT:"
+    kind: report
+    line: A report from the police chief. The agenda gives no more detail.
+  - number: "5"
+    title: "DIRECTOR OF PUBLIC WORK'S REPORT:"
+    kind: report
+    line: A report from the public works director. The agenda gives no more detail.
+  - number: "6"
+    title: "CLERK'S REPORT:"
+    kind: report
+    line: A report from the city clerk. The agenda gives no more detail.
+  - number: "7"
+    title: "MAYOR'S REPORT:"
+    kind: report
+    line: A report from the mayor. The agenda gives no more detail.
+  - number: "8"
+    title: "ATTORNEY'S REPORT:"
+    kind: report
+    line: A report from the city attorney. The agenda gives no more detail.
+  - number: "9"
+    title: "COMMITTEE REPORTS/COUNCIL INPUT:"
+    kind: report
+    line: Reports from council committees and comments from council members.
+  - number: "10"
+    title: "CITIZEN'S COMMENTS (AGENDA ITEMS ONLY):"
+    kind: public-comment
+    line: Time for members of the public to speak to the council about items on this agenda.
+  - number: "11"
+    title: "OLD BUSINESS: NONE"
+    kind: other
+    line: The agenda lists no old business.
+  - number: "12"
+    title: "NEW BUSINESS: GARBAGE TRUCK BIDS"
+    kind: bids
+    line: An item about bids for a garbage truck. The agenda gives no more detail.
+  - number: "13"
+    title: "AMEND AND REENACT ORDINANCE 1111.07 GARBAGE, REFUSE & WEEDS, First Reading"
+    kind: first-reading
+    line: A first reading of an ordinance about garbage, refuse and weeds, section 1111.07. No final vote at this reading.
+  - number: "14"
+    title: "ORDINANCE REZONING 30 NORTH STREET, First Reading"
+    kind: first-reading
+    line: A first reading of an ordinance about the zoning of 30 North Street. No final vote at this reading.
+  - number: "15"
+    title: "ACCOUNTS PAYABLE:"
+    kind: vote
+    line: A vote on the city's bills to be paid. The agenda gives no more detail.
+  - number: "16"
+    title: "CITIZEN'S COMMENTS:"
+    kind: public-comment
+    line: Time for members of the public to speak to the council.
+  - number: "17"
+    title: "COUNCIL FINAL COMMENTS:"
+    kind: other
+    line: Closing comments from council members.
+  - number: "18"
+    title: "NEXT MEETING, November 16, 2026"
+    kind: other
+    line: The date of the next council meeting.
+  - number: "19"
+    title: "ADJOURNMENT:"
+    kind: closing
+    line: The meeting ends.
+note: The agenda has no item numbers, so we numbered the items in order. Long dashes in the agenda are shown as commas here. The agenda file is in the city's shared agendas folder, named "26.11.2 City of Westover Agenda". The place comes from the city's government page.
+sources:
+  - url: "https://www.dropbox.com/scl/fo/cz3nuib5ikb6rchmvs2gj/AGOR8C2QM-W2eSC0BVX5Bu4?rlkey=pia680ypedmxjgj4mfwmqngry&st=x0iodjyw&dl=0"
+    checked: 2026-10-31
+  - url: https://www.westoverwv.org/government
+    checked: 2026-10-31
