@@ -28,3 +28,8 @@ test('reads the cids from the markup, not from the styles', () => {
   const html = '<style>.x[data-astro-cid-bbb]{color:red}.y[data-astro-cid-aaa]{color:blue}</style><p data-astro-cid-aaa>Hi</p>';
   assert.equal(pruneHtml(html), '<style>.y[data-astro-cid-aaa]{color:blue}</style><p data-astro-cid-aaa>Hi</p>');
 });
+
+test('keeps rules that only exclude a missing component with :not()', () => {
+  const css = 'p:not([data-astro-cid-bbb]){color:red}';
+  assert.equal(pruneCss(css, has), css);
+});

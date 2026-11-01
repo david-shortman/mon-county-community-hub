@@ -4,7 +4,8 @@
 // components into every page. A rule whose every selector needs an element
 // with a cid the page does not have can never apply, so it is removed.
 // Everything else (global rules, @font-face, @keyframes, rules we cannot
-// read) is kept as is.
+// read) is kept as is. Elements a script adds later keep their cid only if
+// they are copies of markup already on the page, as all of ours are.
 
 // Split CSS text into top-level blocks: { head, body } for "x { ... }", or
 // { text } for anything else. Handles nested braces, strings and comments.
@@ -51,8 +52,9 @@ function selectors(head) {
 }
 
 const CID = /data-astro-cid-([a-z0-9]+)/g;
+// A cid inside :not(...) does not need the element, so it is ignored.
 const dead = (sel, has) => {
-  const ids = [...sel.matchAll(CID)].map((m) => m[1]);
+  const ids = [...sel.replace(/:not\([^()]*\)/g, '').matchAll(CID)].map((m) => m[1]);
   return ids.length > 0 && ids.some((id) => !has.has(id));
 };
 
