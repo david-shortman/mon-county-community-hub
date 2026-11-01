@@ -1,0 +1,54 @@
+# Monthly checklist for sources whose robots.txt asks robots to stay out (#529,
+# decision docs/decisions/2026-11-01-0715-keep-robots-strict.md). The daily
+# Source check skips these hosts (group: manual in content/source-rules.yaml),
+# so a person re-reads them here. How it works: site/scripts/checklists.mjs
+id: person-sources
+title: Sources a person re-checks
+issue_title: Monthly checklist, sources a person re-checks
+intro: >-
+  Each source below blocks automated reads in its robots.txt, so no robot
+  reads it. Open each one in a browser and compare it with the files named.
+  If a fact changed, fix the file and its checked date in one PR (health,
+  food and money facts wait for David). If nothing changed, update only the
+  checked dates, or comment "no change" with the date. See
+  docs/operations/automated-reads.md.
+items:
+  - text: >-
+      Health department fee schedule, fiscal year 2026-2027 (PDF). Check the
+      fees in content/pdf-pages/monchd-fees-2026-27.yaml and the monchd-*
+      resources that cite it, and whether a new fiscal year form is posted.
+    url: https://www.monchd.org/departments-programs/environmental-health
+    how: >-
+      The PDFs are linked from this page and stored on cdn.sanity.io. The fee
+      form is .../9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf.
+    person: true
+    when: month
+  - text: >-
+      Health department food plan review packet and bake sale guidance (PDFs).
+      Check content/pdf-pages/monchd-food-plan-review.yaml and
+      monchd-bake-sale.yaml, including the ABCC add-on question in #1271.
+    url: https://www.monchd.org/departments-programs/environmental-health
+    person: true
+    when: month
+  - text: >-
+      Health department home loan water and sewage evaluation form and the
+      wastewater loan fund guidelines (PDFs). Check
+      content/pdf-pages/monchd-home-loan-evaluation.yaml and
+      content/resources/mon-county-wastewater-loan-fund.yaml.
+    url: https://www.monchd.org/services/septic-and-wells
+    person: true
+    when: month
+  - text: >-
+      Pre-K and Head Start sign-up site. Check
+      content/resources/mcs-prek-and-head-start.yaml, and in January whether
+      2027-28 applications are open (#418).
+    url: https://www.preschoolsteps.org/login.cfm
+    person: true
+    when: month
+  - text: >-
+      WV Contractor Licensing Board: license guide, license lookup and
+      complaints. Check site/src/pages/contractor-license.astro, and the fee
+      question in #603.
+    url: https://wvclboard.wv.gov/
+    person: true
+    when: month
