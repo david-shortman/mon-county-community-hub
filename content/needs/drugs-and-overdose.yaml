@@ -33,11 +33,21 @@ working_on:
   - org: wvu-medicine
   - org: mon-health-medical-center
   - org: milan-puskar-health-right
+  - org: valley-healthcare-system
+  - org: first-choice-services
 gaps:
-  - Where to get free naloxone (Narcan) and how to start treatment today are not in one plain place (issue 477).
   - No public source lists open treatment or recovery housing beds day to day.
 topics: [health]
 rank: 6
 rank_why: "Score 10 of 12: severity 3, reach 2, agreement 3, room to help 2."
 questions: [q06]
 issues: [477]
+get_help:
+  - path: /drugs-and-alcohol/
+    label: Overdose steps, free Narcan, help lines and treatment
+  - path: /mental-health/
+    label: Mental health help today
+site_coverage:
+  level: good
+  why: Help with drugs or alcohol covers what to do in an overdose, free naloxone (Narcan), help lines at any hour, and treatment in Mon County. No public source lists open treatment or recovery beds day to day.
+  checked: 2026-11-01

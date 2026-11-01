@@ -39,3 +39,17 @@ gaps:
 topics: [health]
 rank: 12
 rank_why: "Score 8 of 12: severity 2, reach 3, agreement 2, room to help 1 (the site can point to programs, but this is mostly ongoing medical care)."
+issues: [1256]
+get_help:
+  - path: /diabetes-and-weight/
+    label: Help managing diabetes, blood pressure or weight
+  - path: /staying-well/
+    label: "Staying well: shots, checkups and walks, and what they cost"
+  - path: /staying-active/
+    label: Staying active after 55
+  - path: /parks/
+    label: Parks and trails
+site_coverage:
+  level: thin
+  why: "Diabetes, blood pressure or weight lists two programs: the health department dietitians and Health Right clinics. Free classes, screenings and places to be active are spread across other pages and are not gathered in one place yet (issue 1256)."
+  checked: 2026-11-01
