@@ -4,7 +4,7 @@ One table a week that shows whether the site is better than what residents have 
 
 ## How it is made
 
-The [Scorecard workflow](../../.github/workflows/scorecard.yml) runs every Monday at 10:23 UTC, after the Sunday findability check. It builds the site, runs the slow-phone test, runs [`site/scripts/scorecard.mjs`](../../site/scripts/scorecard.mjs), and opens and merges a PR that adds only the two files here. If GitHub does not let the workflow open or merge that PR, it opens a `for:code` issue with both files, and a session adds them by hand.
+The [Scorecard workflow](../../.github/workflows/scorecard.yml) runs every Monday at 10:23 UTC, after the Sunday findability check. It builds the site, runs the slow-phone test, runs [`site/scripts/scorecard.mjs`](../../site/scripts/scorecard.mjs), and opens and merges a PR that adds only the two files here. If GitHub does not let the workflow open or merge that PR, it opens a `for:code` issue with both files, and a session adds them by hand. Right now the repo setting does not let workflows open PRs, so every week ends in that issue until David decides (#1340).
 
 It costs nothing: about 10 minutes of a free GitHub runner a week. It uses no accounts, no keys and no data about people.
 
@@ -48,5 +48,5 @@ GitHub reads use the `gh` command on a hand run. Add `--no-github` to skip them.
 
 - "High-stakes PRs waiting" counts changes that are written but not live. It cannot see a change in the world that nobody has written up yet.
 - The two typed-text counts are hints, not errors. A "not out yet" line is right until the source posts the date; the list is there so a person re-checks each one. This is the gap that let last season's LIEAP line stay on `/utility-bills/` after its record was fixed (#1056).
-- Lighthouse runs once per page from a GitHub server, so the time moves a little from week to week. The goal from #1053 is under 2.5 seconds for the main content on every page.
+- Lighthouse runs once per page from a GitHub server, after one warm-up run that is thrown away, so the time moves a little from week to week. The first GitHub run (2026-W44) had no warm-up, and its 536 ms of blocking time on the home page was most likely Chrome starting up. The goal from #1053 is under 2.5 seconds for the main content on every page.
 - Visits are not measured. That waits on a choice by David.

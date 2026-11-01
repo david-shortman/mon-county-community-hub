@@ -1,7 +1,7 @@
 // Slow-phone load speed with Lighthouse (#1053). Free, no account, no API key.
 // Runs Lighthouse's mobile test (a mid-range phone on a slow 4G connection,
 // simulated: 150 ms round trip, about 1.6 Mbps, CPU 4 times slower) on five key
-// pages of the live site, one run each, and saves the numbers as JSON for the
+// pages of the live site, one run each after a warm-up run, and saves the numbers as JSON for the
 // weekly scorecard (scripts/scorecard.mjs).
 //
 // Usage (from site/): node scripts/lighthouse.mjs [--json out.json] [--base URL]
@@ -52,6 +52,13 @@ async function main() {
   const pages = [];
   let settings = null;
   let version = null;
+  // One run first, thrown away: the first run on a fresh machine pays for
+  // starting Chrome and the npx download, which showed as 536 ms of blocking
+  // time on the home page in the first GitHub run (it was 0 to 15 ms after).
+  try {
+    execFileSync('npx', ['-y', LIGHTHOUSE, `${base}/`, '--quiet', '--output=json', `--output-path=${path.join(tmp, 'warmup.json')}`,
+      '--only-categories=performance', '--chrome-flags=--headless=new --no-sandbox'], { stdio: 'ignore', timeout: 180_000 });
+  } catch { /* the real runs below report any problem */ }
   for (const [name, route] of PAGES) {
     const file = path.join(tmp, 'report.json');
     let row = { name, route };
