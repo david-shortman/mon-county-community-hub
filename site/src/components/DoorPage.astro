@@ -19,6 +19,8 @@ import Actions from './Actions.astro';
 import EventCard from './EventCard.astro';
 import SourceLine from './SourceLine.astro';
 import AfterHours from './AfterHours.astro';
+import OnThisPage from './OnThisPage.astro';
+import Fold from './Fold.astro';
 import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, telHref, resource, websiteLabel } from '../lib/content.mjs';
 import { loadPages, doorTopics } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -66,16 +68,13 @@ const online = steps.map((st) => resource(st.resource)).filter((r, i, a) => r?.c
   </section>
 )}
 
-<nav class="on-page no-print" aria-label="On this page">
-  <p>On this page:</p>
-  <ul>
-    <li><a href="#pick-h">Pick what is going on</a></li>
-    {inDoor.length > 0 && <li><a href="#every-page">{guide ? `Every ${door.topics[data.topic]} page` : `Every ${door.name} page`}</a></li>}
-    {jump.map(([href, text]) => <li><a href={href}>{text}</a></li>)}
-    <li><a href="#dates">Dates</a></li>
-    <li><a href="#person-h">Talk to a person</a></li>
-  </ul>
-</nav>
+<OnThisPage items={[
+  ['#pick-h', 'Pick what is going on'],
+  ...(inDoor.length > 0 ? [['#every-page', guide ? `Every ${door.topics[data.topic]} page` : `Every ${door.name} page`]] : []),
+  ...jump,
+  ['#dates', 'Dates'],
+  ['#person-h', 'Talk to a person'],
+]} />
 
 {helpDoor && <AfterHours online={online} />}
 
@@ -152,12 +151,9 @@ const online = steps.map((st) => resource(st.resource)).filter((r, i, a) => r?.c
 
 <slot />
 
-<details class="fold" id="dates">
-  <summary><h2>Dates for this<span class="fold-hint">{dates.length ? `${dates.length} coming up. Tap to see them.` : 'None on our calendar right now.'}</span></h2></summary>
-  <div class="fold-body">
-    {dates.length ? dates.map((e) => <EventCard e={e} />) : <p>No dates for this on our calendar right now. <a href={`${base}/calendar/`}>See all dates</a>.</p>}
-  </div>
-</details>
+<Fold id="dates" title="Dates for this" hint={dates.length ? `${dates.length} coming up. Tap to see them.` : 'None on our calendar right now.'}>
+  {dates.length ? dates.map((e) => <EventCard e={e} />) : <p>No dates for this on our calendar right now. <a href={`${base}/calendar/`}>See all dates</a>.</p>}
+</Fold>
 
 <section class="note" aria-labelledby="person-h">
   <h2 id="person-h">Rather talk to a person?</h2>

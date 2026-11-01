@@ -7,6 +7,7 @@ import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
 import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import Fold from '../components/Fold.astro';
 import { resource, org, telHref, loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "this-month", label: "Get through this month", summary: "Can't pay a bill, behind on rent, short on food, cash fast, free tax help" };
@@ -65,15 +66,12 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
   <SourceLine sources={taxPrep.sources} org={taxPrep.org} about="free tax help"> The source is a Morgantown Magazine article from January 14, 2026.</SourceLine>
 
   {/* Folded (#1174): it is for one group of readers and runs about 3 phone screens. */}
-  <details class="fold" id="students">
-  <summary><h3>Are you a WVU student?<span class="fold-hint">Tap to see WVU's own free help for students.</span></h3></summary>
-  <div class="fold-body">
+  <Fold id="students" level={3} title="Are you a WVU student?" hint="Tap to see WVU's own free help for students.">
   <p>WVU has its own free help for students. Start with these, then see the rest of this page.</p>
   {/* Add the WVU emergency funds card here once its record is on main (#888, #602). */}
   <ResourceCard r={rack} headingLevel={4} lead="Short on food: The Rack is free for WVU students." />
   <ResourceCard r={studentLegal} headingLevel={4} showCost lead="Trouble with a lease or a landlord: Student Legal Services can help." />
-  </div>
-  </details>
+  </Fold>
 
   <h3>What things cost here</h3>
   <p>We have not found a trusted, sourced list of local rent, child care or pay figures yet, so we do not show numbers. We would rather show nothing than a guess. Know a public source? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
