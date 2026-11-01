@@ -64,6 +64,30 @@
     "rank": { "type": "integer", "minimum": 1, "description": "1 is the most pressing. Unique across needs." },
     "rank_why": { "type": "string", "description": "The scoring behind the rank" },
     "questions": { "type": "array", "items": { "type": "string", "pattern": "^q\\d+$" }, "description": "Related findability question ids from content/findability/questions.yaml" },
-    "issues": { "type": "array", "items": { "type": "integer" }, "description": "GitHub issue numbers for ideas that address this need" }
+    "issues": { "type": "array", "items": { "type": "integer" }, "description": "GitHub issue numbers for ideas that address this need" },
+    "get_help": {
+      "type": "array",
+      "description": "Pages on this site where a person can get help with this need, best first. Shown on /needs/ as 'Where to get help on this site'.",
+      "items": {
+        "type": "object",
+        "required": ["path", "label"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "pattern": "^/", "description": "A path on this site, like /help/food/ or /money/?pick=rent. The page must exist." },
+          "label": { "type": "string", "description": "What the reader finds there, in plain words" }
+        }
+      }
+    },
+    "site_coverage": {
+      "type": "object",
+      "description": "How well this site helps with the need today. A self-check, not a measure of the need itself.",
+      "required": ["level", "why", "checked"],
+      "additionalProperties": false,
+      "properties": {
+        "level": { "type": "string", "enum": ["good", "partial", "thin"], "description": "good: a clear starting page and the main help is listed. partial: help is listed but spread out or missing a piece. thin: little on the site yet." },
+        "why": { "type": "string", "description": "One or two plain sentences on what the site has and what it lacks" },
+        "checked": { "type": "string", "format": "date", "description": "Date (YYYY-MM-DD) the site's pages were checked for this" }
+      }
+    }
   }
 }

@@ -37,12 +37,27 @@ working_on:
   - org: monongalia-county-health-department
   - org: wv-department-of-human-services
   - org: wvu-school-of-dentistry
+  - org: clay-battelle-health-services-association
 gaps:
   - Free and low-cost clinics, hospital financial help and prescription programs are spread across many sites.
-  - Plain steps for keeping Medicaid under the 2027 rules are not yet in one place (issues 221 and 214).
   - Dental care is on the health department's list of the hardest care to get.
 topics: [health]
 rank: 2
 rank_why: "Score 12 of 12: severity 3, reach 3, agreement 3, room to help 3 (programs exist that people miss, and the Medicaid change is time sensitive). Ranked below food because its reach comes from a small survey, not a county-wide estimate."
 questions: [q05, q08]
 issues: [221, 403, 478, 985]
+get_help:
+  - path: /no-insurance/
+    label: No insurance, or can't afford a doctor
+  - path: /dental-and-prescriptions/
+    label: A dentist, or help paying for medicine
+  - path: /medicaid-2027/
+    label: Keep your Medicaid in 2027
+  - path: /turning-65/
+    label: Turning 65 or on Medicare, and help with Medicare costs
+  - path: /care/
+    label: "Get care: pick what is going on and get the steps in order"
+site_coverage:
+  level: good
+  why: No insurance lists free and sliding-fee clinics, ways to get coverage, and help with a hospital bill. Dental care, medicine and Medicaid in 2027 each have their own page, so Get care is the place to start.
+  checked: 2026-11-01

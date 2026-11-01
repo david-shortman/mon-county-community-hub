@@ -290,7 +290,16 @@ rank: 1                                 # 1 is the most pressing; unique
 rank_why: The score behind the rank.    # optional
 questions: [q01]                        # optional; findability question ids
 issues: [123]                           # optional; idea issues for this need
+get_help:                               # optional (#1248); our own pages for this need, best first
+  - path: /utility-bills/               # a path on this site; the page must exist
+    label: Help paying a heat, power or water bill
+site_coverage:                          # optional (#1248); how well this site helps today
+  level: good                           # good | partial | thin
+  why: What the site has and what it lacks, in one or two sentences.
+  checked: 2026-11-01
 ```
+
+`get_help` shows on `/needs/` as "Where to get help on this site". `site_coverage` is a self-check of this site, not a measure of the need: `good` means a clear starting page and the main help is listed, `partial` means help is listed but spread out or missing a piece, and `thin` means little is on the site yet. Re-check it when a page for the need is added or changed. The full coverage review is in [`docs/research/needs-coverage.md`](../docs/research/needs-coverage.md).
 
 `npm run check-content` also runs `scripts/check-needs.mjs`, which fails on: a field the schema does not name, evidence without a source url or checked date, a count that is not a whole number, a person instead of a group in `working_on`, an unknown topic or org, a repeated rank, and anything that looks personal (an email address, a phone number, or a quoted passage of six or more words). Signals are public and aggregate; never profile or quote a private person. Test data lives in `site/scripts/fixtures/needs/`, never in this folder.
 
