@@ -26,6 +26,7 @@ const also = [
   { route: SECTION.route, text: 'community centers, senior centers and fire halls, with their dinners and events' },
   { route: '/make-it-better/', text: 'cleanups, adopting a spot and serving on a city board' },
   { route: '/calendar/month/', text: 'what is happening in Mon County this month' },
+  { route: '/parks/', text: 'parks and trails, and groups to ride or run with' },
 ].filter((a) => pages.has(a.route)).map((a) => ({ ...a, label: pages.get(a.route).label }));
 ---
 <Base title="Find your people in Mon County: groups, clubs, places to sit" description="Recurring groups in Morgantown and Monongalia County, from game nights and craft circles to runs, rides and dances, plus free places to sit. Answer three questions for three picks, or browse the lists.">
