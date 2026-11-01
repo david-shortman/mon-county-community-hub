@@ -14,7 +14,7 @@ const newest = dates.at(-1);
 {oldest && (
   <p class="meta checked-range">
     {oldest === newest
-      ? <>We checked all {dates.length} {what} on {prettyDate(oldest)}.</>
-      : <>We checked these {dates.length} {what} between {prettyDate(oldest)} and {prettyDate(newest)}. Each one shows its own date.</>}
+      ? `We checked all ${dates.length} ${what} on ${prettyDate(oldest)}.`
+      : `We checked these ${dates.length} ${what} between ${prettyDate(oldest)} and ${prettyDate(newest)}. Each one shows its own date.`}
   </p>
 )}
