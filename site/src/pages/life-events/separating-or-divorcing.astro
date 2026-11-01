@@ -1,7 +1,6 @@
 ---
 // "I'm separating or divorcing" life event page (#1178, sprint #529). Links
 // only, so it states no facts of its own; each linked page has its sources.
-// A page on family court, custody and child support is a gap (see #1178).
 import Base from '../../layouts/Base.astro';
 import GroupStart from '../../components/GroupStart.astro';
 export const page = { door: "family", topic: "family", label: "I'm separating or divorcing", summary: "Free legal help and court forms, money and health coverage on your own, then records, a new place and your kids, in order" };
@@ -10,8 +9,11 @@ const sections = [
     { href: "/life-events/leaving-an-unsafe-home/", label: "Not safe at home?", text: "steps for leaving an unsafe home" },
     { href: "/legal-help/#free-help", label: "Free or low cost legal help", text: "Legal Aid of West Virginia, free online answers and lawyer referral" },
     { href: "/legal-help/#forms", label: "Court forms", text: "free state court forms, including divorce and child support, and case search" },
+    { href: "/family-court/", label: "Family court in Mon County", text: "where to file, the divorce fee, and the parent class" },
   ] },
   { title: "This week", links: [
+    { href: "/family-court/#child-support", label: "Child support", text: "apply for free with the state, pay, or change an order" },
+    { href: "/family-court/#custody", label: "Custody and a parenting plan", text: "forms, mediation and the parent class" },
     { href: "/money/#bills", label: "A bill due this month", text: "who can help with a bill you can't pay" },
     { href: "/file-today/", label: "SNAP, Medicaid and WV WORKS", text: "if your household or income changed, how to start an application today" },
     { href: "/no-insurance/", label: "Health coverage", text: "if you were on a spouse's plan: other ways to get coverage" },
