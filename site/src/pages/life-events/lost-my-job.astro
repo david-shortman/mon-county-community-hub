@@ -1,0 +1,41 @@
+---
+// "I lost my job" life event page (#1178, sprint #529). Links only, so it
+// states no facts of its own; each linked page has its sources. A link shows
+// once its page exists (unemployment pages are in #790 and #1161).
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "work", label: "I lost my job", summary: "Unemployment, food and bills this month, health coverage, then finding work or training, in order" };
+const sections = [
+  { title: "Today", links: [
+    { href: "/unemployment/", label: "File for unemployment", text: "how to file, and what to do each week" },
+    { href: "/money/#bills", label: "A bill due this month", text: "who can help with a bill you can't pay" },
+    { href: "/help/food/", label: "Food", text: "food today or this week, and help buying groceries" },
+  ] },
+  { title: "This week", links: [
+    { href: "/file-today/#snap", label: "SNAP (food stamps)", text: "how to start an application today" },
+    { href: "/file-today/#medicaid", label: "Health coverage", text: "Medicaid and WVCHIP, if your job's health plan is ending" },
+    { href: "/no-insurance/", label: "No insurance right now", text: "free and sliding fee clinics, and other ways to get coverage" },
+    { href: "/utility-bills/", label: "Heat, water or electric bill", text: "call the company first, then programs that help" },
+    { href: "/before-you-call/", label: "Before you call", text: "what to have ready and what to say to a utility, landlord or medical office" },
+  ] },
+  { title: "In the next few weeks", links: [
+    { href: "/after-you-apply/unemployment/", label: "After you file for unemployment", text: "the decision letter, and how to appeal" },
+    { href: "/find-a-job/#boards", label: "Where jobs are posted", text: "city, county, state and hospital job boards" },
+    { href: "/find-a-job/#help", label: "Free resume and interview help", text: "resume, interview and computer help" },
+    { href: "/pay-for-training/", label: "Get training paid for", text: "training scholarships and state grants" },
+    { href: "/medicaid-2027/", label: "Medicaid work rules in 2027", text: "what counts, and who does not have to meet them" },
+  ] },
+  { title: "If this also fits, check", links: [
+    { href: "/money/#rent", label: "Behind on rent", text: "help with rent or an eviction notice" },
+    { href: "/life-events/losing-my-home/", text: null },
+    { href: "/mental-health/", label: "Someone to talk to", text: "a person to talk to today, and counseling you can afford" },
+    { href: "/for/job-seekers/", text: null },
+    { href: "/veterans/", label: "You served", text: "jobs and other help for veterans" },
+  ] },
+];
+---
+<Base title="I lost my job: what to do first in Morgantown and Mon County" description="Steps after a job ends in Monongalia County, WV, in order: file for unemployment, food and bills this month, SNAP and health coverage, then job boards, free resume help and paid training.">
+  <h1>I lost my job</h1>
+  <p class="lede">Here are steps to take after a job ends, in the order they usually come up. Start with today. Each link goes to one of our pages with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>
