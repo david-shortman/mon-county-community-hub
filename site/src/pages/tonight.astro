@@ -11,7 +11,7 @@ import Actions from '../components/Actions.astro';
 import { resource, telHref, prettyDate } from '../lib/content.mjs';
 import { loadTonight } from '../lib/tonight.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "help-now", label: "Tonight: is the warming shelter open?", summary: "Winter warming shelter status for tonight, checked each day: where, hours, rules and the bus" };
+export const page = { door: "help-now", label: "Tonight: is the warming shelter open?", summary: "Winter warming shelter status, with the time we last checked: where, hours, rules and the bus" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const t = loadTonight();
 const r211 = resource('wv-211');
@@ -33,7 +33,7 @@ const ruleRows = [
 ---
 <Base crisis title="Tonight: is the Morgantown warming shelter open?" description="Is the winter warming shelter in Morgantown open tonight? Where, hours, rules and the bus, with the time we last checked. Call 211 to confirm before you go.">
   <h1>Tonight: is the warming shelter open?</h1>
-  <p class="lede">We check this each day in winter and show the time we checked. Always call to confirm before you go.</p>
+  <p class="lede">We show the time we last checked. Always call to confirm before you go.</p>
 
   <div id="tonight" class="note" data-checked={t.checkedDay} data-status={t.status}>
     {t.status === 'open' && (

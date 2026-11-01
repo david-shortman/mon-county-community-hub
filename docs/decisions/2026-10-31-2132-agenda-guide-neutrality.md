@@ -1,0 +1,15 @@
+# Neutrality rules for plain-language agenda guides
+
+- **Date:** 2026-10-31
+- **Decided by:** Claude Code (under the charter), waiting for David because it sets public-facing policy
+- **Decision:** Agenda guides on the site (one per upcoming City Council, County Commission or Board of Education meeting) follow these rules:
+  1. **Describe the kind of item, never its merits.** Each item gets one plain line that says what sort of item it is: "a vote on a contract", "a first reading of an ordinance about street names", "time for the public to speak". Never whether it is good, bad, costly, overdue, controversial, likely to pass, or who supports or opposes it.
+  2. **Quote the title exactly.** Item titles are copied from the official agenda, spelling and all. The only change: a private person's name in a title or sub-item (a new hire, a presenter, an applicant) is replaced with "[name]", and the guide says so. Elected bodies and organizations keep their names.
+  3. **Same words for the same kind of item.** The plain line comes from a short list of item kinds kept in the data check (`site/scripts/check-content.mjs`), so every board's agenda is described the same way.
+  4. **No ranking or picking.** Items stay in agenda order. No "top items", "what to watch" or "big vote" labels. Every item on the agenda is listed, including routine ones.
+  5. **No predictions or outcomes.** Guides cover what is scheduled. They never say what will happen, and they are not updated with how anyone voted. Minutes are the record; the guide links to them once they are posted.
+  6. **Always link the source.** Every guide links the official agenda, and the full packet when one is posted, and says when we read it. If the agenda changes, the guide is re-read and re-dated, or taken down.
+  7. **Only what the agenda and official pages say.** Facts in a line (an amount, an address, a date) come from the agenda or packet itself. If the agenda does not say what an item is about, the line says "The agenda gives no more detail" instead of guessing.
+  8. **Reviewed text, not live AI.** Lines are written in a session, checked against the agenda, and committed with the agenda link and the date read. Nothing is summarized by an AI service when the site builds.
+  9. **Word check.** The data check fails a guide that uses judging words (for example "controversial", "important", "should", "finally", "good", "bad", "wasteful") or an em dash.
+- **Why:** David asked for plain-language guides to upcoming meetings (#529). Agenda summaries are where a slant would do the most harm: one loaded word about a vote can make the whole site look partisan. The charter says describe, don't promote, and keep anything partisan off the site. These rules make "describe" concrete enough for a check to catch mistakes, and keep every guide tied to the official record. They build on the meetings page (#12, #13), Have your say (#409) and the unverified-facts rule ([2026-10-30-0640](2026-10-30-0640-unverified-facts-get-an-issue.md)).
