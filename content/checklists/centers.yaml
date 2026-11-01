@@ -47,5 +47,27 @@ items:
     url: https://www.cheatlakefire.org/events
     person: true
   - text: >-
+      Monongalia Arts Center calendar (a Google Calendar shown on the center's
+      site, whose robots.txt asks robots to stay out). Its feed used to fill
+      the calendar on its own and was turned off on 2026-11-01. Add dated
+      public classes, concerts and markets at the center.
+    url: https://www.monartscenter.com/
+    person: true
+    how: >-
+      Saved feed events still show until their dates pass, with the day they
+      were checked. Before adding one, search content/calendar/ and
+      site/src/lib/feeds/snapshots/monongalia-arts-center.json so it is not
+      listed twice.
+  - text: >-
+      City of Morgantown calendar: public events at city parks, centers and
+      halls. Since 2026-10-21 the city's robots.txt asks robots to stay out of
+      its iCalendar feed, so the site keeps only the saved feed events.
+    url: https://www.morgantownwv.gov/calendar.aspx
+    person: true
+    how: >-
+      Search content/calendar/ and
+      site/src/lib/feeds/snapshots/morgantown-city.json first so an event is
+      not listed twice.
+  - text: >-
       If a "Community center or park event page changed" issue is open (label
       source-changed), work through it too.

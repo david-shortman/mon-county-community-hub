@@ -35,9 +35,9 @@ import crypto from 'node:crypto';
 import YAML from 'yaml';
 import { CONTENT_DIR } from '../src/lib/content.mjs';
 import { loadWatch, watchedUrls, evaluateWatch, watchMd, withPdfLinks } from './watch.mjs';
+import { robotsRules, robotsDelay, robotsAllows, readRobots } from '../src/lib/robots.mjs';
 
 const UA = 'MonCountyCommunityHub-sourcecheck/1.0 (+https://github.com/david-shortman/mon-county-community-hub)';
-const UA_TOKEN = 'moncountycommunityhub';
 const SITE_DIR = path.resolve(CONTENT_DIR, '../site');
 const DIST = path.join(SITE_DIR, 'dist');
 
@@ -221,61 +221,10 @@ async function readCapped(res) {
   return Buffer.concat(chunks.map((c) => Buffer.from(c)));
 }
 
-// Robots.txt: the rules for our name, else for "*". Simple prefix matching with
-// `*` and `$`, which covers what local sites use.
-export function robotsRules(txt) {
-  const groups = [];
-  let cur = null;
-  let lastWasAgent = false;
-  for (const raw of txt.split(/\r?\n/)) {
-    const line = raw.replace(/#.*$/, '').trim();
-    const m = line.match(/^([a-z-]+)\s*:\s*(.*)$/i);
-    if (!m) continue;
-    const key = m[1].toLowerCase();
-    const val = m[2].trim();
-    if (key === 'user-agent') {
-      if (!lastWasAgent || !cur) { cur = { agents: [], rules: [] }; groups.push(cur); }
-      cur.agents.push(val.toLowerCase());
-      lastWasAgent = true;
-    } else {
-      lastWasAgent = false;
-      if (cur && (key === 'allow' || key === 'disallow')) cur.rules.push({ allow: key === 'allow', path: val });
-    }
-  }
-  const mine = groups.filter((g) => g.agents.some((a) => a !== '*' && UA_TOKEN.includes(a)));
-  const pick = mine.length ? mine : groups.filter((g) => g.agents.includes('*'));
-  return pick.flatMap((g) => g.rules).filter((r) => r.path);
-}
-
-// Crawl-delay in seconds for our name, else for "*" (#166). 0 if none.
-export function robotsDelay(txt) {
-  let agents = [];
-  let lastWasAgent = false;
-  let mine = null;
-  let star = null;
-  for (const raw of txt.split(/\r?\n/)) {
-    const m = raw.replace(/#.*$/, '').trim().match(/^([a-z-]+)\s*:\s*(.*)$/i);
-    if (!m) continue;
-    const key = m[1].toLowerCase();
-    if (key === 'user-agent') { agents = lastWasAgent ? [...agents, m[2].trim().toLowerCase()] : [m[2].trim().toLowerCase()]; lastWasAgent = true; continue; }
-    lastWasAgent = false;
-    if (key !== 'crawl-delay') continue;
-    const n = Number(m[2]);
-    if (!Number.isFinite(n)) continue;
-    if (agents.some((a) => a !== '*' && UA_TOKEN.includes(a))) mine = n;
-    else if (agents.includes('*')) star = n;
-  }
-  return mine ?? star ?? 0;
-}
-
-export function robotsAllows(rules, pathAndQuery) {
-  let best = null;
-  for (const r of rules) {
-    const re = new RegExp(`^${r.path.replace(/[.+?^{}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*')}`);
-    if (re.test(pathAndQuery) && (!best || r.path.length > best.path.length || (r.path.length === best.path.length && r.allow))) best = r;
-  }
-  return !best || best.allow;
-}
+// Robots.txt rules live in ../src/lib/robots.mjs, shared with every other
+// automated read (docs/operations/automated-reads.md). Re-exported here for
+// older callers.
+export { robotsRules, robotsDelay, robotsAllows };
 
 function errCode(err) {
   return err?.cause?.code || err?.code || err?.name || err?.message || 'error';
@@ -384,18 +333,12 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
     while (next < hosts.length) {
       const host = hosts[next++];
       const list = byHost.get(host);
-      let robots = [];
       let pause = T.pauseMs;
-      try {
-        const origin = new URL(list[0].url).origin;
-        const rr = await fetch(`${origin}/robots.txt`, { signal: AbortSignal.timeout(T.timeoutMs), headers: { 'User-Agent': UA } });
-        if (rr.ok && /text\/plain/.test(rr.headers.get('content-type') || 'text/plain')) {
-          const txt = await rr.text();
-          robots = robotsRules(txt);
-          pause = Math.min(Math.max(pause, robotsDelay(txt) * 1000), T.maxCrawlDelayMs);
-        }
-        await sleep(T.pauseMs);
-      } catch { /* no robots.txt: allowed */ }
+      // No robots.txt: all allowed. One we cannot get: read nothing here.
+      const rb = await readRobots(new URL(list[0].url).origin, { userAgent: UA, timeoutMs: T.timeoutMs });
+      const robots = rb.state === 'unreadable' ? [{ allow: false, path: '/' }] : rb.rules;
+      pause = Math.min(Math.max(pause, rb.delay * 1000), T.maxCrawlDelayMs);
+      await sleep(T.pauseMs);
       const perRun = Math.max(1, Math.floor(T.hostBudgetMs / (pause + 1_000)));
       const picked = pickForRun(list, perRun, { keep: keepText });
       if (picked.length < list.length) deferred.push({ host, checked: picked.length, total: list.length, delay: pause / 1000 });

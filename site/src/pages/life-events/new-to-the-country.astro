@@ -1,0 +1,40 @@
+---
+// "I'm new to the country" life event page for immigrants and refugees
+// (#1178, sprint #529). Links only, so it states no facts of its own; each
+// linked page has its sources. Whether local refugee resettlement is taking
+// new arrivals is open in #768, so this page does not say.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "family", label: "I'm new to the country", summary: "For immigrants and refugees: free interpreters, immigration legal help, school, a doctor, English classes and work" };
+const sections = [
+  { title: "First", links: [
+    { href: "/help-in-your-language/#doctor", label: "Free interpreters", text: "at the hospital, the health department, state offices and courts" },
+    { href: "/help-in-your-language/#legal", label: "Immigration legal help", text: "refugee resettlement and low cost immigration legal help" },
+    { href: "/help/food/", label: "Food", text: "food today or this week" },
+  ] },
+  { title: "This week", links: [
+    { href: "/school-age/#enroll", label: "Sign your children up for school", text: "how to enroll and find your school and bus" },
+    { href: "/no-insurance/", label: "See a doctor", text: "a free clinic and sliding fee care" },
+    { href: "/moving-here/", label: "Power, water, gas and trash", text: "how to start service at your home" },
+    { href: "/getting-around/", label: "Getting around", text: "buses, fares and which bus goes where" },
+  ] },
+  { title: "In the next few weeks", links: [
+    { href: "/work-and-learning/", label: "Learn English", text: "free English classes and reading help for adults" },
+    { href: "/find-a-job/", label: "Find a job", text: "where jobs are posted, and free resume help" },
+    { href: "/meet-people/#library-card", label: "A library card", text: "how to get one, and free library programs for adults" },
+    { href: "/find-your-people/", label: "Meet people", text: "groups, clubs and free places to sit" },
+    { href: "/scams/", label: "Is this a scam?", text: "how to check a call or letter, and where to report" },
+  ] },
+  { title: "If this also fits, check", links: [
+    { href: "/for/new-to-mon-county/", text: null },
+    { href: "/for/college-students/", text: null },
+    { href: "/families-and-kids/", text: null },
+    { href: "/legal-help/", text: null },
+  ] },
+];
+---
+<Base title="New to the country: where to start in Morgantown and Mon County" description="Steps for immigrants and refugees new to Monongalia County, WV: free interpreters, immigration legal help, food, enrolling children in school, a doctor, English classes, jobs and meeting people.">
+  <h1>I'm new to the country</h1>
+  <p class="lede">Welcome. Here are first steps for immigrants and refugees, in order. You can ask for a free interpreter at many offices. Each link goes to one of our pages with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

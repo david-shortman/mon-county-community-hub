@@ -6,15 +6,15 @@ who_it_is_for: Families looking for child care. To get help paying for it, paren
 what_to_do: The state's list of child care resource and referral offices shows a Child Care Resource Center office at 20 Scott Avenue, Suite 302, Morgantown, run by Catholic Charities West Virginia. Call 304-292-7357 or 1-888-272-7357 to ask about providers near you and about help with the cost. Working parents should have pay stubs from the last 30 days. Parents in school need their grades and a class schedule stamped and signed by the registrar. You must show all income, including child support. You can also search licensed providers by county on the state's child care provider search.
 contact:
   phone: "304-292-7357"
-  url: https://www.ccwva.org/child-care-resource-center
+  url: https://www.ccwva.org/programs/child-care-resource-center/
   place: "20 Scott Avenue, Suite 302, Morgantown, WV"
 cost: Free to ask. If you get help paying, what you pay is based on your monthly income before taxes and your family size, on a sliding scale.
 sources:
-  - url: https://www.ccwva.org/child-care-resource-center
-    checked: 2026-10-30
+  - url: https://www.ccwva.org/programs/child-care-resource-center/
+    checked: 2026-10-31
   - url: https://bfa.wv.gov/media/39934/download
-    checked: 2026-10-30
-  - url: https://bfa.wv.gov/bfa-programs/child-care-assistance
-    checked: 2026-10-30
-  - url: https://www.wvdhhr.org/bfa/ece-locator
-    checked: 2026-10-30
+    checked: 2026-10-31
+  - url: https://bfa.wv.gov/child-care-assistance-and-early-childhood-resources
+    checked: 2026-10-31
+  - url: https://www.wvdhhr.org/bfa/ece-locator/
+    checked: 2026-10-31
