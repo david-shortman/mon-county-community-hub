@@ -9,8 +9,8 @@
 //   npm run search-test -- --show-misses
 //
 // It loads the real Pagefind index from dist/pagefind in Node and runs each
-// query in content/findability/search-queries.yaml through the same plan the
-// search page uses (src/lib/search-plan.mjs). A query is a hit when one of its
+// query in content/findability/search-queries.yaml through the same `find`
+// code the search page runs (src/lib/search-plan.mjs, #1286). A query is a hit when one of its
 // expected pages is in the top 3. It never fails the build: it is a report.
 // See docs/operations/search-test.md.
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
@@ -18,7 +18,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { execSync } from 'node:child_process';
 import YAML from 'yaml';
-import { SPELLING, STOP, planWords, searchPlan } from '../src/lib/search-plan.mjs';
+import { find } from '../src/lib/search-plan.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const site = resolve(here, '..');
@@ -55,22 +55,24 @@ const routeOf = (url) => url.replace(/index\.html$/, '').replace(/\.html$/, '/')
 const plain = flag('--plain');
 const results = [];
 for (const item of queries) {
-  let res;
+  let top; let searched = item.q; let loose = false;
   if (plain) {
     const r = await pf.search(item.q);
-    res = { results: r.results, searched: item.q, fixed: false, loose: false };
+    top = await Promise.all(r.results.slice(0, 10).map((x) => x.data()));
   } else {
-    res = await searchPlan(pf, item.q, SPELLING, STOP, planWords);
+    const found = await find(pf, item.q);
+    top = found.items;
+    if (found.fixed) searched = found.fixed;
+    loose = found.some;
   }
-  const top = await Promise.all(res.results.slice(0, 10).map((r) => r.data()));
   const routes = top.map((d) => routeOf(d.url));
   const rank = routes.findIndex((r) => item.expect.includes(r));
   results.push({
     q: item.q, kind: item.kind, expect: item.expect,
     hit: rank >= 0 && rank < TOP, rank: rank >= 0 ? rank + 1 : null,
-    count: res.results.length, top3: routes.slice(0, TOP),
-    ...(res.searched !== item.q ? { searched: res.searched } : {}),
-    ...(res.loose ? { loose: true } : {}),
+    count: top.length, top3: routes.slice(0, TOP),
+    ...(searched !== item.q ? { searched } : {}),
+    ...(loose ? { loose: true } : {}),
   });
 }
 
@@ -85,7 +87,7 @@ const report = { date, mode: plain ? 'plain' : 'plan', top: TOP, summary, result
 const line = (k, s) => `| ${k} | ${s.queries} | ${s.hits} | ${s.top3_percent}% | ${s.zero_results} |`;
 const misses = results.filter((r) => !r.hit);
 const md = [
-  `## Site search test (${plain ? 'plain words' : 'search plan'})`,
+  `## Site search test (${plain ? 'plain words' : 'the search page code'})`,
   '',
   `Expected page in the top ${TOP}: **${summary.all.hits} of ${summary.all.queries} (${summary.all.top3_percent}%)**. Queries with no results: ${summary.all.zero_results}.`,
   '',
