@@ -19,7 +19,8 @@ const countyList = 'https://www.monongaliacounty.gov/authorities,_boards_and_com
 const others = all.filter((b) => b.section === 'other' && b.open_seats > 0);
 const open = boards.filter((b) => b.open_seats > 0);
 const full = boards.filter((b) => !(b.open_seats > 0));
-const applyOnline = 'https://arcg.is/4G8PK';
+// The city's vacancy page links https://arcg.is/4G8PK, which goes to this form (checked 2026-11-01, #506).
+const applyOnline = 'https://survey123.arcgis.com/share/f5da6abf08fd45d5aea222d894dfc484';
 const applyPdf = 'https://www.morgantownwv.gov/DocumentCenter/View/5371/Updated-Board-and-Commission-Application';
 const vacancyList = 'https://www.morgantownwv.gov/210/Volunteer-Opportunities';
 const listSrc = [{ url: vacancyList, checked: '2026-10-30' }];
