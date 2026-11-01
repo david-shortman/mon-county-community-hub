@@ -19,7 +19,7 @@ const dohsPlan = [{ url: 'https://dohs.wv.gov/nondiscrimination-policies-and-pla
   <h1>Help in your language</h1>
   <p class="lede">Many offices here will get you an interpreter for free. Say "I need an interpreter" and the name of your language. You can also ask a friend to call with you, but in court a family member or friend cannot interpret for you.</p>
 
-  <h2>At the doctor, hospital or clinic</h2>
+  <h2 id="doctor">At the doctor, hospital or clinic</h2>
   {r('wvu-medicine-language-services') && <ResourceCard r={r('wvu-medicine-language-services')} />}
   {r('monchd-language-help') && <ResourceCard r={r('monchd-language-help')} />}
 
@@ -28,12 +28,12 @@ const dohsPlan = [{ url: 'https://dohs.wv.gov/nondiscrimination-policies-and-pla
   <SourceLine sources={dohsPlan} about="the state's language access plan" />
   {r('monongalia-county-dohs-office') && <ResourceCard r={r('monongalia-county-dohs-office')} />}
 
-  <h2>Court and legal help</h2>
+  <h2 id="legal">Court and legal help</h2>
   {r('wv-court-interpreters') && <ResourceCard r={r('wv-court-interpreters')} />}
   {r('msj-immigration-legal-help') && <ResourceCard r={r('msj-immigration-legal-help')} />}
   {r('ccwva-immigration-services') && <ResourceCard r={r('ccwva-immigration-services')} />}
 
-  <h2>Learn English</h2>
+  <h2 id="english">Learn English</h2>
   {r('mtec-adult-education-esl') && <ResourceCard r={r('mtec-adult-education-esl')} />}
 
   <h2>Not on this list yet</h2>
