@@ -9,16 +9,27 @@
 // leaves too. Base sets no-referrer on these pages, so weather.gov is never
 // told which page a person left from. Leaving does not erase history; the note at the end of the
 // page says so. 988 facts: content/resources/988-lifeline.yaml.
-import { resource, telHref } from '../lib/content.mjs';
+// On a translated page (#1101), the words come from
+// content/translations/<lang>/parts/CrisisStrip.yaml, only once two fluent
+// readers have reviewed them. Until then, and whenever the English here
+// changes, the strip stays in English. The numbers are never translated.
+import { resource, telHref, todayYmd } from '../lib/content.mjs';
+import { loadTranslation } from '../lib/translations.mjs';
+const { lang = 'en' } = Astro.props;
 const r988 = resource('988-lifeline');
 const exitUrl = 'https://www.weather.gov/';
+const t = lang === 'en' ? null : loadTranslation(lang, 'parts/CrisisStrip', { today: todayYmd() });
+const s = t?.values ?? {};
+const words = t ? lang : 'en';
 ---
-<div class="crisis-strip" role="region" aria-label="Danger or crisis">
+<div class="crisis-strip" role="region" aria-label={s.label ?? 'Danger or crisis'} lang={lang === 'en' ? undefined : words}>
   <div class="wrap">
-    <p>Danger? Call <a href="tel:911">911</a>. Crisis? Call or text <a href={telHref(r988.contact.phone)}>{r988.contact.phone}</a>.</p>
+    {t
+      ? <p>{s.danger} <a href="tel:911">911</a>. {s.crisis} <a href={telHref(r988.contact.phone)}>{r988.contact.phone}</a>.</p>
+      : <p>Danger? Call <a href="tel:911">911</a>. Crisis? Call or text <a href={telHref(r988.contact.phone)}>{r988.contact.phone}</a>.</p>}
     <span class="qe-group">
-      <a class="quick-exit" id="quick-exit" href={exitUrl} rel="noreferrer">Quick exit</a>
-      <a class="qe-what" href="#leave-note">What is this?</a>
+      {t ? <a class="quick-exit" id="quick-exit" href={exitUrl} rel="noreferrer">{s.quick_exit}</a> : <a class="quick-exit" id="quick-exit" href={exitUrl} rel="noreferrer">Quick exit</a>}
+      {t ? <a class="qe-what" href="#leave-note">{s.what_is_this}</a> : <a class="qe-what" href="#leave-note">What is this?</a>}
     </span>
   </div>
 </div>

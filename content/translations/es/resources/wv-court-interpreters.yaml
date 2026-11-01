@@ -1,0 +1,9 @@
+of: resources/wv-court-interpreters
+lang: es
+fields:
+  title: Intérpretes gratis en los tribunales estatales de West Virginia
+english_hash: f8a21b4436e2
+method: machine-plus-review
+translated: 2026-11-01
+reviewed: false
+notes: Claude draft (#1101). A fluent Spanish reader checks every line against the English before this goes live. See docs/reviews/2026-11-01-spanish-pilot.md.

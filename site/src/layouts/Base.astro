@@ -385,7 +385,7 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
   </head>
   <body>
     <a class="skip" href="#main">Skip to main content</a>
-    {crisis && <CrisisStrip />}
+    {crisis && <CrisisStrip lang={lang} />}
     <header class="site" lang={chromeLang}>
       <div class="wrap">
         <a class="brand" href={`${base}/`}><Fragment set:html={brandMark} /><span>Everything Morgantown</span></a>
