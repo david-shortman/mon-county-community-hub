@@ -6,6 +6,7 @@
 // times (DMV pages differ), Social Security cards (ssa.gov blocked us) and
 // passport places (the locators would not load).
 import Base from '../layouts/Base.astro';
+import BigChoices from '../components/BigChoices.astro';
 import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
@@ -16,7 +17,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Base title="Birth certificate, ID and marriage license in Morgantown, WV" description="Get papers in Monongalia County, WV: a copy of a birth, death or marriage certificate from the County Clerk or the state, a marriage license, a West Virginia ID card or REAL ID, replacing a lost ID, fixing a certificate, and a veteran's DD-214.">
   <h1>Birth certificates, IDs and records</h1>
   <p class="lede">Born in Monongalia County? The County Clerk in Morgantown sells a certified birth certificate for $5, with a form you can print and mail. Born anywhere else in West Virginia? The state sells copies for $12, online, by mail or in person.</p>
-  <OnThisPage items={[['#certificates', "Birth, death or marriage certificate"], ['#marriage', "Getting married"], ['#id', "WV ID or REAL ID"], ['#donor', "Organ donor"], ['#lost', "Lost or stolen license or ID"], ['#fix', "Fix a certificate"], ['#dd214', "Discharge papers (DD-214)"]]} />
+  {/* Lead block (#199): the four things most people come here for. */}
+  <BigChoices label="IDs and records: start here" choices={[
+    { href: '#certificates', label: 'Birth, death or marriage certificate', icon: 'list' },
+    { href: '#id', label: 'WV ID or REAL ID', icon: 'key' },
+    { href: '#lost', label: 'Lost license or ID', icon: 'search' },
+    { href: '#marriage', label: 'Getting married', icon: 'people' },
+  ]} />
+  <OnThisPage items={[['#donor', "Organ donor"], ['#fix', "Fix a certificate"], ['#dd214', "Discharge papers (DD-214)"]]} />
 
   <h2 id="certificates">A copy of a birth, death or marriage certificate</h2>
   <ResourceCard r={resource('mon-county-clerk-vital-certificates')} showCost />
