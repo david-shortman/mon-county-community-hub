@@ -31,6 +31,10 @@ situations:
     label: Meet people, get a library card or find my neighborhood association
     page: /meet-people/
     steps: []
+  - id: people
+    label: Find a group that meets regularly, or a free place to sit
+    page: /find-your-people/
+    steps: []
 also:
   - text: Dates and deadlines
     href: /calendar/

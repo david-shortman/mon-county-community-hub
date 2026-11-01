@@ -8,7 +8,7 @@ run_by:
   text: Miles with Her Women's Running Club
 story: A women's running club from Parkersburg that also holds some runs in the Morgantown area. Runs are listed on a monthly calendar.
 regular:
-  - Some weekend runs, posted on a monthly calendar. In October 2026 this included a 2-mile run on the Morgantown rail trail on Saturday, October 3, 8:30 a.m.
+  - Some weekend runs, posted on a monthly calendar.
 cost: Free
 interests: [running, outdoors, social]
 tags: [free, come-alone]
@@ -19,7 +19,6 @@ last_activity_seen: 2026-10-11
 notes:
   - The club is for women.
   - Most weekly runs on the calendar are in the Parkersburg area. Check the monthly calendar for Morgantown dates.
-  - The October 2026 calendar also listed a run at Cheat Lake Park on Sunday, October 11, 1 p.m.
   - The site also sells a paid founding membership. The site says the runs themselves are always free.
 sources:
   - url: https://mileswithher.com/pages/run-club-schedule
