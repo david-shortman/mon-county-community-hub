@@ -74,4 +74,14 @@ rules:
 # Redirects to another domain count as "moved" (a domain can lapse and be
 # bought by someone else). These pairs are the same owner, so a redirect between
 # them is fine. Add a pair only after a person has confirmed it.
-same_owner: []
+same_owner:
+  # The county site's own server sends its document links to its web vendor,
+  # Revize, under /revize/monongoliacountywv/ (seen 2026-11-01, #506).
+  - [monongaliacounty.gov, revize.com]
+  # Monongalia County Schools' site runs on Apptegy ("Powered By Apptegy" on
+  # boe.mono.k12.wv.us). Its aptg.co short links go to Apptegy's file host
+  # (seen 2026-11-01, #506).
+  - [aptg.co, thrillshare.com]
+  # The state's landslide map address on mapwv.gov goes to an ArcGIS
+  # Experience app (seen 2026-11-01, #506).
+  - [mapwv.gov, arcgis.com]
