@@ -38,6 +38,7 @@ export async function GET({ site }) {
 - [Before you call](${u('/before-you-call/')}): what to have ready, a place to write notes, and short scripts for calling a utility, a landlord or a billing office
 - [Get through this month](${u('/money/')}): pick what is going on (a utility or other bill, short on food, behind on rent, cash fast or a payday loan, free tax help) and get local steps in order, with phone numbers and sources; also the scam warning
 - [Property tax: pay, homestead and appeals](${u('/property-tax/')}): Monongalia County tax dates and 2.5% discounts, paying at the Sheriff's Tax Office or online, how the tax is figured, the $20,000 homestead exemption, and how to ask for a review of your assessed value
+- [After you apply for the homestead exemption](${u('/after-you-apply/homestead/')}): the Assessor's denial notice by January 1, the 30 day appeal to the County Commission, when to tell the Assessor about a move or change, and the Senior Citizens Tax Credit and Homestead Excess Property Tax Credit, quoted from West Virginia law
 - [Food help](${u('/help/food/')}): two questions (when you need food, and whether you are a WVU student) leading to sourced options
 - [Food today or this week](${u('/help/food/today/other/')}): 211, Scott's Run Settlement House, and upcoming free food dates
 - [Food today for WVU students](${u('/help/food/today/student/')}): The Rack student food pantry first, then 211 and other options

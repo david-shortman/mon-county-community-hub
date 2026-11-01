@@ -1,0 +1,113 @@
+---
+// After you apply: the homestead exemption (Monongalia County Assessor) and
+// two related state income tax credits for homeowners, the Senior Citizens'
+// Tax Credit and the Homestead Excess Property Tax Credit. From W. Va. Code
+// §11-6B-3 to §11-6B-7 and §11-6B-10, §11-21-21 and §11-21-23 on
+// code.wvlegislature.gov, the Assessor's Real Estate page and SmartFile
+// guide, and the State Tax Division's credit page and 2025 Schedule HEPTC-1,
+// read 2026-11-01. No official page says whether the Assessor sends an
+// approval letter, or the deadline to go from the County Commission to
+// circuit court (§11-3-25, not read), so both are left off. Benefits page:
+// the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'this-month', topic: 'taxes', label: 'After you apply for the homestead exemption', summary: 'Approval or denial by January 1, the 30 day appeal, when to tell the Assessor, and senior property tax credits' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-01';
+const code = (s) => ({ url: `https://code.wvlegislature.gov/${s}/`, checked, name: `W. Va. Code §${s}` });
+const src = {
+  file: code('11-6B-4'),
+  move: code('11-6B-3'),
+  decide: code('11-6B-5'),
+  appeal: code('11-6B-6'),
+  books: code('11-6B-7'),
+  notify: code('11-6B-10'),
+  sctcLaw: code('11-21-21'),
+  heptcLaw: code('11-21-23'),
+  assessor: { url: 'https://www.assessor.org/2205/Real-Estate', checked, name: 'Monongalia County Assessor, Real Estate' },
+  guide: { url: 'https://www.assessor.org/DocumentCenter/View/16089', checked, name: 'Monongalia County Assessor, SmartFile homestead filing guide' },
+  sctc: { url: 'https://tax.wv.gov/Individuals/SeniorCitizens/Pages/SeniorCitizensTaxCredit.aspx', checked, name: 'WV Tax Division, Senior Citizens Tax Credit' },
+  heptc: { url: 'https://tax.wv.gov/Documents/PIT/2025/it140.HEPTC-1.2025.pdf', checked, name: 'WV Tax Division, Schedule HEPTC-1 (2025)' },
+};
+const ASSESSOR = 'monongalia-county-assessor';
+const TAX = 'wv-tax-division';
+const vita = resource('irs-vita-tce');
+const aarp = resource('aarp-tax-aide');
+const senior = resource('wv-senior-legal-aid');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for the homestead exemption in Mon County: decisions, appeals and senior tax credits" description="What happens after you file for the $20,000 homestead exemption with the Monongalia County Assessor: the January 1 denial notice, the 30 day appeal to the County Commission, when you must tell the Assessor about a change, and the Senior Citizens Tax Credit and Homestead Excess Property Tax Credit on your state return. Quoted from West Virginia law.">
+  <h1>After you apply for the homestead exemption</h1>
+  <p class="lede">You file once. If the Assessor denies it, you get a written notice by January 1 and have 30 days to appeal. After that, tell the Assessor if you move, sell, or stop qualifying.</p>
+  <p>The homestead exemption takes $20,000 off the assessed value of your home for property tax. It is for homeowners 65 or older, or permanently and totally disabled, who meet the rules on the <a href={`${base}/property-tax/#homestead`}>Property tax page</a>. Not filed yet? That page has how and when.</p>
+  <p class="note">This page quotes West Virginia law and the Assessor's pages. The Assessor decides each claim. It is information, not legal or tax advice.</p>
+  <ul class="topic-list">
+    <li><a href="#decision">1. The Assessor's decision</a></li>
+    <li><a href="#appeal">If you are denied</a></li>
+    <li><a href="#bill">On your tax bill</a></li>
+    <li><a href="#tell">When to tell the Assessor</a></li>
+    <li><a href="#credits">Two state tax credits for homeowners</a></li>
+    <li><a href="#help">Who can help</a></li>
+  </ul>
+
+  <h2 id="decision">1. The Assessor's decision</h2>
+  <ul>
+    <li><strong>If you filed online,</strong> the Assessor's guide says "Once submitted the county will review and either approve or deny your application." It also says you can print a copy of what you sent. Keep it.</li>
+    <li><strong>A denial comes in writing by January 1.</strong> State law says if the claim is denied, the Assessor "shall promptly, but not later than January 1, serve the claimant with written notice explaining why the exemption was denied and furnish a form for filing with the county commission." The notice comes in person or by certified mail.</li>
+    <li><strong>No need to file again.</strong> The Assessor says "Those eligible for homestead exemption only need to apply once." State law says you only refile if you move to a new home.</li>
+  </ul>
+  <p>State law does not say the Assessor sends a letter when you are approved. To check, call the Assessor's office.</p>
+  <SourceLine sources={[src.guide, src.decide, src.assessor, src.file]} org={ASSESSOR} about="the homestead decision" />
+
+  <h2 id="appeal">If you are denied</h2>
+  <ul>
+    <li><strong>30 days.</strong> "Any claimant aggrieved by the denial of his or her claim for exemption or the subsequent denial of his or her exemption may appeal to the county commission within thirty days after receipt of written notice explaining why the exemption was denied."</li>
+    <li><strong>Use the form that came with the notice.</strong> The law says the Assessor must give you one for the County Commission.</li>
+    <li><strong>The County Commission decides by February 28.</strong> The law says it rules "as soon as practicable after receipt of the notice of appeal, but in no event later than the twenty-eighth day of February" of the tax year. It "may hold a hearing on the claim."</li>
+    <li><strong>After that,</strong> you or the Assessor can ask the county's circuit court to review the decision, the same way as other appeals from the County Commission.</li>
+    <li><strong>If you already had the exemption,</strong> the same steps apply. The law says if the Assessor thinks you no longer qualify, it denies the exemption on the next July 1 and sends written notice by January 1.</li>
+  </ul>
+  <SourceLine sources={[src.appeal, src.decide]} org={ASSESSOR} about="homestead appeals" />
+
+  <h2 id="bill">On your tax bill</h2>
+  <p>The law says the exemption "shall be shown on the property books as a deduction from the total assessed value." If the exemption is more than your home's whole assessed value, "The sheriff shall issue a statement to the owner showing that no taxes are due." For tax due dates and discounts, see <a href={`${base}/property-tax/`}>Property tax</a>.</p>
+  <SourceLine sources={[src.books]} org={ASSESSOR} about="the exemption on your bill" />
+
+  <h2 id="tell">When to tell the Assessor</h2>
+  <ul>
+    <li><strong>If you move or sell.</strong> The law says the exemption stays with your home until the next July 1, then "shall be removed from the property on the next July first assessment date unless the new owner qualifies." You can file again for a new home.</li>
+    <li><strong>Moving in with family or into a care home</strong> does not count as moving. The law says a person who "resides with a family member or is a resident at a nursing home, personal care home, rehabilitation center or similar facility is not considered to have moved to a new homestead."</li>
+    <li><strong>If you qualified by disability,</strong> you signed a statement that you will tell the Assessor if you no longer qualify, and "within thirty days of the discontinuance of the receipt of benefits for permanent and total disability."</li>
+    <li><strong>Before July 1.</strong> The law makes it a crime to fail to tell the Assessor, "prior to the next first day of July," that the home was transferred, is no longer lived in only by you as your home, or that you are no longer permanently and totally disabled. The fine can be up to $1,000, and you may have to repay the tax.</li>
+  </ul>
+  <SourceLine sources={[src.move, src.file, src.notify]} org={ASSESSOR} about="telling the Assessor about changes" />
+
+  <h2 id="credits">Two state tax credits for homeowners</h2>
+  <p>These come from the State Tax Division, not the Assessor. You claim them after you pay your property tax.</p>
+  <h3>Senior Citizens Tax Credit</h3>
+  <ul>
+    <li><strong>Who.</strong> State law gives it to people who have the homestead exemption and have income "one hundred fifty percent or less of the federal poverty guideline." It is a refund of the property tax paid on "up to the first $20,000 of taxable assessed value." People who must pay the federal alternative minimum tax cannot get it. The Tax Division's page has this year's income table.</li>
+    <li><strong>How.</strong> The Tax Division says you can file free on its MyTaxes site by choosing "Claim The Motor Vehicle and/or Senior Citizen Property Tax Credit(s)," or "send-in their copy of the SCTC‐A form and instructions for claiming the refund each January when the filing season opens."</li>
+    <li><strong>Deadline.</strong> The law says to claim it "within three years after the due date for the personal income tax return upon which the credit is first available."</li>
+    <li>The Tax Division says you cannot claim it if you claim the Disabled Veteran Property Tax Credit.</li>
+  </ul>
+  <SourceLine sources={[src.sctc, src.sctcLaw]} org={TAX} about="the Senior Citizens Tax Credit" />
+  <h3>Homestead Excess Property Tax Credit</h3>
+  <ul>
+    <li><strong>Who.</strong> State law gives it to a homeowner "living in his or her homestead" whose federal adjusted gross income is "three hundred percent or less of the federal poverty guideline." The law has no age rule. The schedule lists this year's income limits.</li>
+    <li><strong>How much.</strong> The law says it refunds the property tax you paid, minus any Senior Citizens Tax Credit, above "four percent of the taxpayer's gross household income." It says no one may get more than $1,000.</li>
+    <li><strong>How.</strong> Fill out Schedule HEPTC-1 with your state return. The schedule says "If this schedule is not enclosed with Form IT-140, the credit will be disallowed."</li>
+    <li><strong>Deadline.</strong> The law says to claim it "within twelve months after the real property taxes are paid on the homestead."</li>
+  </ul>
+  <SourceLine sources={[src.heptc, src.heptcLaw]} org={TAX} about="the Homestead Excess Property Tax Credit" />
+
+  <h2 id="help">Who can help</h2>
+  <p>The Assessor's office answers questions about your homestead claim: Room 335, 243 High Street, Morgantown, 304-291-7222. Free tax help can file the state credits with you. For more, see <a href={`${base}/free-tax-help/`}>Free help filing your taxes</a>.</p>
+  {ok(vita) && <ResourceCard r={vita} />}
+  {ok(aarp) && <ResourceCard r={aarp} />}
+  {ok(senior) && <ResourceCard r={senior} />}
+  <p class="meta">We describe West Virginia law. The Assessor and the Tax Division decide each claim. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
