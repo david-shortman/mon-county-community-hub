@@ -1,7 +1,6 @@
 ---
 // "I'm leaving jail or prison" life event page (#1178, sprint #529). Links
 // only, so it states no facts of its own; each linked page has its sources.
-// A local reentry page is a gap (see #1178 and #215).
 import Base from '../../layouts/Base.astro';
 import GroupStart from '../../components/GroupStart.astro';
 export const page = { door: "family", topic: "work", label: "I'm leaving jail or prison", summary: "A place to stay and food, an ID, health coverage, then work with a record and clearing a record, in order" };
@@ -12,6 +11,8 @@ const sections = [
     { href: "/drugs-and-alcohol/", label: "Drugs or alcohol", text: "free naloxone (Narcan), help lines, detox and treatment" },
   ] },
   { title: "This week", links: [
+    { href: "/reentry/#supervision", label: "Probation or parole", text: "the local probation office and the parole office for Mon County" },
+    { href: "/reentry/#help", label: "A reentry mentor", text: "peer mentors and the local reentry council" },
     { href: "/ids-and-records/#id", label: "A West Virginia ID card", text: "what to bring and where to go" },
     { href: "/ids-and-records/#certificates", label: "A copy of your birth certificate", text: "from the County Clerk or the state" },
     { href: "/file-today/", label: "SNAP and Medicaid", text: "how to start an application today, and what to bring" },
@@ -21,6 +22,7 @@ const sections = [
     { href: "/work-and-learning/", label: "Work with a record", text: "federal bonding, and Jobs & Hope West Virginia" },
     { href: "/find-a-job/#help", label: "Free resume and interview help", text: "resume, interview and computer help" },
     { href: "/legal-help/#record", label: "Clear a record", text: "expungement forms and free legal help" },
+    { href: "/reentry/#vote", label: "Voting again", text: "when your right to vote comes back, and registering again" },
     { href: "/pay-for-training/", label: "Get training paid for", text: "training scholarships and state grants" },
     { href: "/no-insurance/", label: "See a doctor", text: "a free clinic and sliding fee care" },
   ] },

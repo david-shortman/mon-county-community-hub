@@ -39,6 +39,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="record">Clear a criminal record (expungement)</h2>
   <ResourceCard r={resource('wv-expungement-petition')} showCost />
+  <p>Coming home from jail or prison? See <a href={`${base}/reentry/`}>coming home</a> for probation, parole and reentry help.</p>
 
   <h2 id="name">Change your name</h2>
   <ResourceCard r={resource('mon-name-change-petition')} showCost />

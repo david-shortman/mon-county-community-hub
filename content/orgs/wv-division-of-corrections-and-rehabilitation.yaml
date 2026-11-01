@@ -1,0 +1,11 @@
+name: West Virginia Division of Corrections and Rehabilitation (DCR)
+slug: wv-division-of-corrections-and-rehabilitation
+kind: government
+website: https://dcr.wv.gov/
+phone: "304-558-2036"
+summary: The state agency that runs West Virginia's prisons, regional jails and parole services. Monongalia County is in parole Region 6, served by the Clarksburg parole office.
+topics: [legal, government]
+area: statewide
+sources:
+  - url: https://dcr.wv.gov/aboutus/parole-services/Pages/parole-services-organization.aspx
+    checked: 2026-10-31
