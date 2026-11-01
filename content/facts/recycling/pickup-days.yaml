@@ -1,0 +1,7 @@
+slug: pickup-days
+text: "We could not find a public map or street list of pickup days. Inside Morgantown city limits, Republic Services is the hauler."
+quote: "Recycling - City of Morgantown (within city limits) To learn more about Recycling for the City of Morgantown visit their Recycling Guide of Morgantown ... For more information about the Residents living within the city limits of Morgantown Saturday Recycling event visit the Morgantown, WV Republic Services webpage. Republic Services of City of Morgantown website"
+sources:
+  - url: https://www.monongaliacountyswa.com/recycling
+    checked: 2026-11-01
+recheck_days: 180   # who hauls changes only with a new contract
