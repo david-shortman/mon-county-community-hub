@@ -3,7 +3,16 @@ slug: mympls-story-times
 org: morgantown-public-library-system
 topics: [family]
 who_it_is_for: Babies, toddlers and preschoolers, with a parent or caregiver.
-what_to_do: "At the main library on Spruce Street: Preschool Storytime on some Tuesdays and Wednesdays at 10 a.m., Evening Preschool Storytime on some Tuesdays at 6:30 p.m., and Read Baby Read, play time for babies from birth to 24 months and their grown-ups, on some Thursdays at 10:30 a.m. Check the library calendar for exact dates. Branches: Cheat Area Public Library has story time every Wednesday at 10:30 a.m. and a Toddler Playgroup every Friday at 10:30 a.m. Clay-Battelle has Pre-K Storytime every Friday at 10:30 a.m. Clinton District has Toddler Storytime every Friday at 11 a.m. Questions, call 304-291-7425."
+what_to_do: "Story times at the main library on Spruce Street are on some days only. Check the library calendar for exact dates."
+options:
+  - "Preschool Storytime: some Tuesdays and Wednesdays at 10 a.m., main library."
+  - "Evening Preschool Storytime: some Tuesdays at 6:30 p.m., main library."
+  - "Read Baby Read: play time for babies from birth to 24 months and their grown-ups, some Thursdays at 10:30 a.m., main library."
+  - "Cheat Area Public Library: story time every Wednesday at 10:30 a.m. and a Toddler Playgroup every Friday at 10:30 a.m."
+  - "Clay-Battelle: Pre-K Storytime every Friday at 10:30 a.m."
+  - "Clinton District: Toddler Storytime every Friday at 11 a.m."
+notes:
+  - "Questions, call 304-291-7425."
 contact:
   phone: "304-291-7425"
   url: https://mympls.org/programs/kids/preschool-storytime/

@@ -3,7 +3,12 @@ slug: mountain-line-wvu-ride-free
 org: mountain-line-transit-authority
 topics: [moving]
 who_it_is_for: WVU students, faculty and staff. Mountain Line says their bus service "has been prepaid." It covers local routes, not the Grey Line to Pittsburgh.
-what_to_do: Swipe your valid WVU ID through the card reader when you get on any local Mountain Line bus. Using someone else's ID is not allowed. In the evening and at night during the WVU fall and spring sessions, Route 1 Campus PM runs from Towers to downtown, 6 p.m. to 3:40 a.m. Thursday to Saturday, and Route 30 West Run has late runs from 9 p.m. to 2:30 a.m. Thursday to Saturday. For help, call 304-291-RIDE (304-291-7433), open 7 a.m. to 8 p.m. every day.
+what_to_do: "Swipe your valid WVU ID through the card reader when you get on any local Mountain Line bus. Using someone else's ID is not allowed."
+options:
+  - "Route 1 Campus PM: runs from Towers to downtown, 6 p.m. to 3:40 a.m. Thursday to Saturday, in the evening and at night during the WVU fall and spring sessions."
+  - "Route 30 West Run: late runs from 9 p.m. to 2:30 a.m. Thursday to Saturday, during the WVU fall and spring sessions."
+notes:
+  - "For help, call 304-291-RIDE (304-291-7433), open 7 a.m. to 8 p.m. every day."
 contact:
   phone: "304-291-7433"
   url: https://www.busride.org/wvu-ride-free

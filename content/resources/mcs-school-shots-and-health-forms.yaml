@@ -3,7 +3,12 @@ slug: mcs-school-shots-and-health-forms
 org: monongalia-county-schools
 topics: [family, health]
 who_it_is_for: Families with a child in Monongalia County public schools. Students entering 7th or 12th grade need certain shots. Students in Pre-K, kindergarten, 2nd, 7th and 12th grade need a health check form and a dental form each year.
-what_to_do: Bring proof of your child's shots to the school before the first day. Students without the required 7th or 12th grade shots are sent home until the school gets proof, and those days count as unexcused absences. Get the health check form at your doctor's office. The dental form is on the schools' health forms page. Questions? Call your child's school or the district office at 304-291-9210.
+what_to_do: "Bring proof of your child's shots to the school before the first day. Students without the required 7th or 12th grade shots are sent home until the school gets proof, and those days count as unexcused absences."
+options:
+  - "Health check form: get it at your doctor's office."
+  - "Dental form: it is on the schools' health forms page."
+notes:
+  - "Questions? Call your child's school or the district office at 304-291-9210."
 contact:
   phone: "304-291-9210"
   url: https://www.boe.mono.k12.wv.us/o/mcs/page/health-forms
