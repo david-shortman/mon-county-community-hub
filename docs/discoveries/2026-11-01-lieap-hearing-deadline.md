@@ -6,3 +6,4 @@
 - **Why it matters:** Someone who goes by the form could miss the 60 day LIEAP deadline.
 - **Who keeps it:** West Virginia Department of Human Services, Bureau for Family Assistance
 - **Status:** open (#1164)
+- **Update, sweep 3 (#529):** The Board of Review's own rule, Common Chapters 700 (https://oig.wv.gov/media/1696/download?inline, read 2026-11-01), lists LIEAP among its hearings and sets "90 days from the effective date of the action." That matches form DFA-FH-1 and Income Maintenance Manual chapter 9, but not chapter 21's 60 days. The FY 2027 LIEAP fact sheet also counts the Emergency LIEAP 5 calendar days from "the date of the request" in one place and "the date of application" in another.

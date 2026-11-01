@@ -45,14 +45,29 @@ working_on:
   - org: united-way-monongalia-preston
   - org: west-virginia-211
   - org: city-of-morgantown
-  - name: North Central West Virginia Community Action
-    url: https://ncwvcaa.org/
+  - org: ncwvcaa
+  - org: wv-housing-development-fund
 gaps:
   - Housing voucher and subsidized housing wait lists are not posted in one plain place.
-  - Renters have few plain guides to repairs, leases and eviction steps (issues 565 and 566).
+  - Rent help, eviction steps, repairs and vouchers are on separate pages of this site, with no single starting page for housing yet (issue 202).
   - Local Fair Market Rent figures still need checking on HUD's own page (issue 740).
 topics: [housing]
 rank: 3
 rank_why: "Score 11 of 12: severity 3, reach 3 (6,702 households), agreement 3 (five sources), room to help 2 (help exists, but the main problem is cost and supply). Highest 211 demand among the needs that scored 11."
 questions: [q25, q27]
 issues: [202, 565, 566, 740]
+get_help:
+  - path: /money/?pick=rent
+    label: Behind on rent or got an eviction notice
+  - path: /life-events/losing-my-home/
+    label: "Lost your home or may lose it: steps in order"
+  - path: /renting/
+    label: Before you rent, getting repairs made, and your deposit
+  - path: /after-you-apply/housing-voucher/
+    label: After you apply for a housing voucher or public housing
+  - path: /behind-on-mortgage/
+    label: Behind on your mortgage
+site_coverage:
+  level: partial
+  why: Rent help, eviction steps, repairs, deposits, vouchers and mortgage help each have a page or section. There is no single housing starting page yet (issue 202), and the full eviction help card is two taps into Get through this month.
+  checked: 2026-11-01

@@ -1,7 +1,8 @@
 ---
 // Add to home screen and offline (#150). Goes in Base's <head>.
 // The manifest and theme colors let a phone add the site like an app. The
-// script asks the browser to keep saved copies of pages (src/pages/sw.js.js).
+// script asks the browser to keep saved copies of pages (src/pages/sw.js.js,
+// docs/operations/offline.md).
 // Without it, or in a browser that does not support it, pages work the same.
 // No accounts, no tracking, no push messages.
 // Instant pages (#151). Browsers that do not know these ignore them.
@@ -17,7 +18,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <meta name="theme-color" content="#1e5847" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#1f2c26" media="(prefers-color-scheme: dark)" />
 <script is:inline define:vars={{ sw: `${base}/sw.js` }}>
-  if ('serviceWorker' in navigator) addEventListener('load', function () { navigator.serviceWorker.register(sw).catch(function () {}); });
+  if ('serviceWorker' in navigator) addEventListener('load', function () {
+    navigator.serviceWorker.register(sw).catch(function () {});
+    // Once the worker is ready, ask it to save the hard-moment pages, so they
+    // open with no signal after one visit. It does this at most once an hour.
+    navigator.serviceWorker.ready.then(function (r) { if (r.active) r.active.postMessage('save'); }).catch(function () {});
+  });
 </script>
 <script type="speculationrules" is:inline>
 {"prerender": [{"where": {"and": [

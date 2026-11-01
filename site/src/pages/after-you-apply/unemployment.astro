@@ -15,6 +15,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const hasFile = Object.keys(import.meta.glob('../unemployment.astro')).length > 0;
 const hasJobs = Object.keys(import.meta.glob('../find-a-job.astro')).length > 0;
 const code = { url: 'https://code.wvlegislature.gov/pdf/21A-7/', checked: '2026-10-31', name: 'West Virginia Code §21A-7, Unemployment Compensation: Claims and Appeals' };
+const wfwv = { url: 'https://workforcewv.org/unemployment-insurance-benefits/my-unemployment-claim/disqualification-appeals/', checked: '2026-11-01', name: 'WorkForce West Virginia, Disqualification and Appeals' };
 const strike = { url: 'https://code.wvlegislature.gov/pdf/21A-6-3/', checked: '2026-10-31', name: 'West Virginia Code §21A-6-3' };
 const legal = resource('legal-aid-wv-civil-legal-help');
 const ok = (r) => r && !r.hidden;
@@ -36,18 +37,22 @@ const ok = (r) => r && !r.hidden;
   <h2 id="appeal">2. If you disagree: appeal within 8 days</h2>
   <ul>
     <li><strong>The deadline.</strong> The law says you "may file an appeal from the decision of the deputy within eight calendar days after notice of the decision has been delivered or mailed." The deadline is printed on your notice. If you miss it, "The decision of the deputy shall be final."</li>
+    <li><strong>Where to file.</strong> WorkForce West Virginia says to file your appeal with your WorkForce WV local office, by the appeal date on the decision.</li>
     <li><strong>Your employer can appeal too.</strong> The law gives your last employer the same 8 days.</li>
     <li><strong>The hearing.</strong> You are "entitled to a fair hearing" before an appeal tribunal (a hearing judge). The law says you get notice "ten days in advance of the date set for hearing."</li>
     <li><strong>The ruling.</strong> The appeal tribunal "shall make a decision within twenty-one days after the date of the hearing."</li>
+    <li><strong>Getting ready.</strong> WorkForce West Virginia says most hearings are by phone, and in-person hearings are held only in Charleston or Fairmont. When the hearing notice comes, and up to 2 days before the hearing, give the Board of Review the phone number where the judge can reach you. Send copies of your papers, and the names and numbers of your witnesses, at least 48 hours before. This hearing is your only chance to give evidence and testify.</li>
+    <li><strong>Keep filing.</strong> WorkForce West Virginia says to keep filing your weekly claims and looking for work while you wait.</li>
   </ul>
-  <SourceLine sources={[code]} about="appealing a deputy decision" />
+  <SourceLine sources={[code, wfwv]} about="appealing a deputy decision" />
 
   <h2 id="board">3. The next steps up</h2>
   <ul>
     <li><strong>Board of Review.</strong> If you disagree with the hearing judge, you can appeal to the Board of Review "within eight calendar days after notice of the decision has been delivered or mailed."</li>
+    <li><strong>Contact the Board of Review.</strong> 5707 MacCorkle Avenue SE, Suite 500, Room 104, Charleston, WV 25304. Phone 304-558-2636, fax 304-558-1363.</li>
     <li><strong>Court.</strong> The Board's decision is final unless you appeal to the Intermediate Court of Appeals "within 30 days after mailing of notification of the board's decision." For claims about a strike or other labor dispute, the law sets 20 days.</li>
   </ul>
-  <SourceLine sources={[code, strike]} about="Board of Review and court appeals" />
+  <SourceLine sources={[code, strike, wfwv]} about="Board of Review and court appeals" />
 
   <h2 id="paid">Getting paid while an appeal goes on</h2>
   <ul>

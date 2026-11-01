@@ -16,6 +16,7 @@ const group = (w) => {
   return { name: w.name, url: w.url };
 };
 const SEVERITY = { high: 'High', medium: 'Medium', low: 'Low' };
+const COVERAGE = { good: 'Good', partial: 'Partly', thin: 'Not much yet' };
 const TREND = { better: 'Getting better', worse: 'Getting worse', flat: 'About the same', unknown: 'Not known yet' };
 const score = (n) => n.rank_why?.match(/Score (\d+) of 12/)?.[1];
 const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
@@ -24,7 +25,7 @@ const oldest = checkedDates[0];
 ---
 <Base title="What people in Mon County need most: a ranked, sourced list" description="The problems people in Monongalia County, WV face most, ranked from public data and local surveys: food, health care costs, housing, utility bills, mental health and more. Each one shows how many people it affects, its sources, and the local groups working on it.">
   <h1>What people here need most</h1>
-  <p class="lede">A ranked list of the hardest problems people in Monongalia County face, built from public numbers and local surveys. Each one says how many people it affects, where the numbers come from, and which local groups are already working on it.</p>
+  <p class="lede">A ranked list of the hardest problems people in Monongalia County face, built from public numbers and local surveys. Each one says how many people it affects, where the numbers come from, which local groups are already working on it, and where on this site to get help.</p>
   <p>We use this list to decide what to build next. It describes problems; it does not say what any government or group should do about them.</p>
 
   <nav aria-label="The list">
@@ -37,6 +38,14 @@ const oldest = checkedDates[0];
     <article class="card" id={n.slug}>
       <h2><span class="rank">{n.rank}.</span> {n.title}</h2>
       <p>{n.summary}</p>
+      {n.get_help?.length > 0 && (
+        <div class="get-help">
+          <h3>Where to get help on this site</h3>
+          <ul>
+            {n.get_help.map((g) => <li><a href={`${base}${g.path}`}>{g.label}</a></li>)}
+          </ul>
+        </div>
+      )}
       <dl class="facts">
         <div><dt>How many people</dt><dd>{n.affected.count != null ? n.affected.count.toLocaleString('en-US') : n.affected.estimate}. {n.affected.description}</dd></div>
         <div><dt>How serious</dt><dd>{SEVERITY[n.severity]}{n.severity_why && `. ${n.severity_why}`}</dd></div>
@@ -55,6 +64,9 @@ const oldest = checkedDates[0];
           <h3>What is missing or hard to find</h3>
           <ul>{n.gaps.map((g) => <li>{g}</li>)}</ul>
         </>
+      )}
+      {n.site_coverage && (
+        <p class="coverage"><strong>How well this site helps: {COVERAGE[n.site_coverage.level]}.</strong> {n.site_coverage.why} <span class="meta">Checked {prettyDate(ymd(n.site_coverage.checked))}.</span></p>
       )}
       <details>
         <summary>The evidence ({n.evidence.length} {n.evidence.length === 1 ? 'source' : 'sources'})</summary>
@@ -102,4 +114,7 @@ const oldest = checkedDates[0];
   .facts dd { margin: 0; }
   .groups { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; padding-left: 1.25rem; }
   .evidence li { margin-bottom: 0.5rem; }
+  .get-help { border-left: 4px solid var(--accent, currentColor); padding: 0.25rem 0 0.25rem 0.75rem; margin: 0.75rem 0; }
+  .get-help h3 { margin-top: 0; }
+  .get-help ul { margin-bottom: 0; }
 </style>

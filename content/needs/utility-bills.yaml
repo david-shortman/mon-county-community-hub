@@ -35,8 +35,7 @@ working_on:
   - org: wv-department-of-human-services
   - org: wv-public-service-commission
   - org: west-virginia-211
-  - name: North Central West Virginia Community Action
-    url: https://ncwvcaa.org/
+  - org: ncwvcaa
 gaps:
   - Bill help comes from many programs with different windows, like the state heating help (LIEAP) season.
   - What to do in the days before a shutoff is not easy to find in one place.
@@ -45,3 +44,14 @@ rank: 4
 rank_why: "Score 11 of 12: severity 3, reach 2, agreement 3, room to help 3 (several bill programs exist and have deadlines). Second highest 211 demand."
 questions: [q01, q03]
 issues: [134, 135, 664]
+get_help:
+  - path: /utility-bills/
+    label: Help paying a heat, power or water bill
+  - path: /after-you-apply/lieap/
+    label: After you apply for LIEAP heating help
+  - path: /file-today/
+    label: File today for SNAP, Medicaid, heating help and WV WORKS
+site_coverage:
+  level: good
+  why: Help paying a utility bill lists the programs for heat, power and water, and what to do before a shutoff. The state heating help (LIEAP) has its own page on what happens after you apply.
+  checked: 2026-11-01

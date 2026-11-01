@@ -30,10 +30,22 @@ working_on:
   - org: wv-department-of-human-services
   - org: starting-points-family-support-center
   - org: monongalia-county-schools
+  - org: child-care-resource-center-morgantown
 gaps:
-  - Help paying for child care (the state subsidy and the local referral agency) is not explained plainly in one place (issue 571).
-  - Open child care slots are not listed publicly in one place; the state's licensed provider search is being linked (issue 943).
+  - Who qualifies for the state's help paying for child care is not explained plainly in one place (issue 571).
+  - Open child care slots are not listed publicly in one place.
 topics: [family]
 rank: 7
 rank_why: "Score 10 of 12: severity 2, reach 2, agreement 3, room to help 3 (the subsidy and the provider search exist but are hard to find)."
 issues: [571, 943]
+get_help:
+  - path: /families-and-kids/#child-care
+    label: Finding child care, and help paying for it
+  - path: /after-you-apply/child-care/
+    label: After you apply for child care help
+  - path: /school-age/#care
+    label: Care before and after school
+site_coverage:
+  level: partial
+  why: Families and kids links the state search for licensed child care and the Child Care Resource Center, which helps with finding care and the cost. Who qualifies for the state child care subsidy is not explained on our pages yet (issue 571).
+  checked: 2026-11-01

@@ -8,6 +8,8 @@ steps:
   - "Check the date. Fall forest fire season is October 1 through December 31, and spring season is March 1 through May 31."
   - "Burn only between 5 p.m. and 7 a.m., and put the fire out by 7 a.m."
   - "Clear a safety strip. The law says to \"remove all flammable material from the area immediately surrounding the material to be burned,\" and \"this safety strip shall in no event be less than 10 feet wide.\""
+  - "Burn only plant material. The Division of Forestry says \"only vegetative materials such as leaves, brush and yard clippings are permitted to be burnt.\""
+  - "Stay with the fire. The Division of Forestry says \"Fire must be attended until completely extinguished.\""
   - "Do not burn during a burning ban. The law lets the state Division of Forestry, with the Governor's approval, ban fires in an area, even the ones it usually allows."
 what_happens: "Two kinds of attended fires are allowed at any hour during fire season, unless a burning ban is in effect: a small fire for cooking, light or warmth with all grass, brush and debris cleared for 10 feet around it, and burning when the ground around it is covered by \"one inch or more of snow.\" Breaking the law is a misdemeanor, with a fine of \"not less than $100 and not more than $1,000 for each violation,\" plus a $200 civil penalty."
 contact:
@@ -17,3 +19,5 @@ cost: Free for households. The law's $125 burning permit fee is only for busines
 sources:
   - url: https://code.wvlegislature.gov/20-3-5/
     checked: 2026-10-31
+  - url: https://wvforestry.com/fire-laws/
+    checked: 2026-11-01

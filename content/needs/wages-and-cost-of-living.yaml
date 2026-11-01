@@ -40,4 +40,19 @@ gaps:
 topics: [money, work]
 rank: 10
 rank_why: "Score 9 of 12: severity 2, reach 3, agreement 2, room to help 2. Above transportation because of higher 211 demand."
-issues: [403, 987]
+issues: [403, 987, 1258]
+get_help:
+  - path: /help/what-help/
+    label: Answer two questions to see help you might get
+  - path: /find-a-job/
+    label: Find a job, and free help with a resume
+  - path: /pay-for-training/
+    label: Get training or school paid for
+  - path: /free-tax-help/
+    label: Free help filing your taxes, and tax credits for working families
+  - path: /file-today/
+    label: File today for SNAP, Medicaid, heating help and WV WORKS
+site_coverage:
+  level: partial
+  why: Jobs, paid training, free tax help with tax credits, and benefits each have a page, and What help might I get points to programs by need. No local page shows a basic household budget for the county.
+  checked: 2026-11-01
