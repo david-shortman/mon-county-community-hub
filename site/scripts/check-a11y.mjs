@@ -41,7 +41,7 @@ urls.sort();
 // Families of pages made from one template with different data (the embeds,
 // docs/operations/embeds.md): scan the first SAMPLE of each, not every one.
 // Add a family here only when its pages differ in data, not in markup.
-const FAMILIES = [/^\/embed\/dates\/topic\//, /^\/embed\/dates\/town\//];
+const FAMILIES = [/^\/embed\/dates\/topic\//, /^\/embed\/dates\/town\//, /^\/embed\/listing\//];
 const SAMPLE = 3;
 {
   const seen = new Map();

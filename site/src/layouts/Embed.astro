@@ -6,6 +6,7 @@
 // Links open in a new tab, so a person never gets stuck inside a frame.
 // The color tokens are a copy of the ones in Base.astro, so the contrast
 // check's results hold here too; test/embeds.test.mjs keeps them in step.
+// The footer has the same 911 and 988 line as every page (e2e/crisis.test.mjs).
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import { prettyDate, todayYmd } from '../lib/content.mjs';
 const { title, description, heading, more, moreLabel = 'See more on Everything Morgantown' } = Astro.props;
@@ -63,6 +64,7 @@ const report = fixFormUrl({ page: Astro.url.pathname });
     </main>
     <footer>
       <p>From <a href={home}>Everything Morgantown</a>, a free guide to help in Morgantown and Mon County. Updated {prettyDate(todayYmd())}. Each item shows its source and the date we checked it. Details change, so check the source before you go.</p>
+      <p>In an emergency, call 911. In a crisis, call or text 988.</p>
       <p>Something wrong? <a href={report}>Report a problem</a>. Links open in a new tab.</p>
     </footer>
   </body>

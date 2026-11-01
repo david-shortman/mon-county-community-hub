@@ -1,0 +1,42 @@
+---
+// Single-listing card embed (docs/operations/embeds.md): one program or
+// service from content/resources, for another site to show in an iframe.
+// Every record gets one, hidden ones too, so pasted code never breaks: a
+// hidden record shows the "re-checking" note and no facts (#519).
+import Embed from '../../../layouts/Embed.astro';
+import { loadDir, isHidden, org as orgOf, telHref, prettyDate, oldestChecked, sourceGroups, isStale, staleDaysFor, RECHECK_TEXT } from '../../../lib/content.mjs';
+
+export function getStaticPaths() {
+  return loadDir('resources', { withHidden: true }).filter((r) => r.slug).map((r) => ({ params: { slug: r.slug }, props: { r } }));
+}
+const { r } = Astro.props;
+const hidden = isHidden(r);
+let group = null;
+try { group = r.org ? orgOf(r.org) : null; } catch { group = null; }
+const groupName = group && !isHidden(group) ? group.name : null;
+const checked = hidden ? null : oldestChecked(r.sources);
+const stale = checked && isStale(checked, undefined, staleDaysFor(r));
+const links = hidden ? [] : sourceGroups(r.sources ?? [], r.org).flatMap((g) => g.links.map((l) => ({ ...l, name: g.name })));
+const sms = (n) => `sms:${String(n).replace(/[^\d+]/g, '')}`;
+const more = r.org && groupName ? `/groups/${r.org}/` : '/';
+---
+<Embed title={`${r.title}: Mon County listing (embed)`} description={`One listing from Everything Morgantown for other websites to show: ${r.title}, with its source and the date it was checked.`} heading={r.title} more={more} moreLabel="See this on Everything Morgantown">
+  {hidden ? (
+    <p><strong>{RECHECK_TEXT}</strong></p>
+  ) : (
+    <div class="card">
+      {groupName && <p class="meta">From {groupName}</p>}
+      <p>{r.who_it_is_for}</p>
+      <p>{r.what_to_do}</p>
+      {r.hours && <p><strong>Hours:</strong> {r.hours}</p>}
+      {r.cost && <p><strong>Cost:</strong> {r.cost}</p>}
+      {r.contact?.place && <p><strong>Where:</strong> {r.contact.place}</p>}
+      <p>
+        {r.contact?.phone && <a class="btn" href={telHref(r.contact.phone)}>Call {r.contact.phone}<span class="sr-only">, {r.title}</span></a>}
+        {r.contact?.text && <a class="btn" href={sms(r.contact.text)}>Text {r.contact.text}<span class="sr-only">, {r.title}</span></a>}
+        {r.contact?.url && <a class="btn" href={r.contact.url}>{r.contact.url_label ?? 'Website'}<span class="sr-only">, {r.title} (opens in a new tab)</span></a>}
+      </p>
+      <p class="meta">{links.length > 1 ? 'Sources' : 'Source'}: {links.map((l, i) => <>{i > 0 && '; '}<a href={l.url}>{l.name ? `${l.name}: ` : ''}{l.text}<span class="sr-only">, source for {r.title}</span></a></>)}. Checked {prettyDate(checked)}.{stale ? <strong> This may be out of date, so check with them before you go.</strong> : ' Details can change, so check with them first.'}</p>
+    </div>
+  )}
+</Embed>

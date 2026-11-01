@@ -26,6 +26,15 @@ test('the embed frame loads no scripts', () => {
   assert.doesNotMatch(read('../src/layouts/Embed.astro'), /<script/);
 });
 
+// After a build (npm run build runs npm test), every built widget page too.
+const dist = new URL('../dist/embed/', import.meta.url);
+test('no built widget page has a script', { skip: !fs.existsSync(dist) && 'no build yet' }, () => {
+  const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => (d.isDirectory() ? walk(new URL(`${d.name}/`, dir)) : d.name.endsWith('.html') ? [new URL(d.name, dir)] : []));
+  const widgets = walk(dist).filter((f) => f.pathname !== new URL('index.html', dist).pathname);
+  assert.ok(widgets.length > 0);
+  for (const f of widgets) assert.doesNotMatch(fs.readFileSync(f, 'utf8'), /<script/, f.pathname);
+});
+
 const day = (n) => `2026-11-${String(n).padStart(2, '0')}`;
 const entry = (slug, starts, extra = {}) => ({ slug, title: slug, starts, ends: starts, topics: ['community'], sources: [{ url: 'https://example.org', checked: '2026-10-30' }], ...extra });
 

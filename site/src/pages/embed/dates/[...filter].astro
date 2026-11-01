@@ -37,7 +37,7 @@ const cal = (slug) => new URL(`${base}/calendar/#${slug}`, Astro.site).href;
             <p class="when">{prettyRange(e.starts, e.ends)}{e.start_time && `, ${prettyTimes(e.start_time, e.end_time)}`}</p>
             <h2><a href={cal(e.slug)}>{e.title}</a></h2>
             <p class="meta">{e.org_name}{e.town && `, ${e.town}`}</p>
-            <p class="meta">Source: <a href={src}>{hostOf(src)}<span class="sr-only">, source for {e.title}</span></a>.{checked && ` Checked ${prettyDate(checked)}.`}</p>
+            <p class="meta">{src && <>Source: <a href={src}>{hostOf(src)}<span class="sr-only">, source for {e.title}</span></a>. </>}{checked && `Checked ${prettyDate(checked)}.`}</p>
           </li>
         );
       })}

@@ -190,7 +190,7 @@ ${roleCards}
 - [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; with years and sources
 - [What people here need most](${u('/needs/')}): the needs register, a ranked list of the hardest problems people in Mon County face (food, health care costs, housing, utility bills, mental health and more), each with how many people it affects, its sources, and the local groups working on it
 - [How is Mon County doing?](${u('/how-we-are-doing/')}): official County Health Rankings numbers on child poverty, health insurance and unemployment, next to West Virginia and the US; the monthly unemployment rate (BLS) and CDC PLACES estimates on food, housing, utility bills and transportation; Monongalia County Schools state test proficiency in math, reading and science from ZoomWV (WV Department of Education); with years and sources
-- [Add our dates to your website](${u('/embed/')}): free copy-paste iframe code that shows upcoming Mon County dates on another website, for all dates, one topic or one town; plain pages with no scripts, cookies or tracking, each date with its source and checked date
+- [Add our dates and listings to your website](${u('/embed/')}): free copy-paste iframe code for other websites: upcoming Mon County dates (all, one topic or one town), one listing as a card, and a help now box with 911, 988 and 211; plain pages with no scripts, cookies or tracking, each date with its source and checked date
 
 ## Notes for AI tools
 
