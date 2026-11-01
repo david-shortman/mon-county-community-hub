@@ -4,6 +4,7 @@
 // year's dates posted are left off until a 2026 date is posted. "Coming up"
 // is built from the calendar: holiday words in the title, in the next 62 days.
 import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import EventCard from '../components/EventCard.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -38,6 +39,7 @@ const src = {
 <Base title="Holiday season help in Morgantown and Mon County, WV" description="November and December 2026 in Morgantown and Monongalia County, WV: toy sign-ups, free clothing, help with heat bills, county and state office holiday closings, and ways to give or volunteer.">
   <h1>Holiday season help</h1>
   <p class="lede">Many holiday sign-ups close weeks before the holiday. Check the dates below, then call the group to ask about anything not listed. Each item links to the group that runs it.</p>
+  <OnThisPage items={[['#soon', "Coming up"], ['#food', "Holiday meals and food"], ['#toys', "Toys for kids"], ['#warm', "Warm clothes and heat"], ['#closed', "Holiday closings"], ['#give', "Give or volunteer"]]} />
   <p>Jump to: <a href="#soon">Coming up</a> · <a href="#food">Holiday meals and food</a> · <a href="#toys">Toys for kids</a> · <a href="#warm">Warm clothes and heat</a> · <a href="#closed">Holiday closings</a> · <a href="#give">Give or volunteer</a></p>
 
   <section aria-labelledby="soon">
