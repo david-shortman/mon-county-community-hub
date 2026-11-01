@@ -8,7 +8,8 @@ hours: Hotline answers 24 hours a day
 contact:
   phone: "304-292-5100"
   url: https://fris.org/centers/rdvic/
+what_happens: RDVIC says its services are free and confidential. Besides the hotline, it offers counseling, emergency shelter, and advocates who can support you at the hospital and in civil and criminal court. It also has a free cell phone program.
 sources:
   - url: https://fris.org/centers/rdvic/
-    checked: 2026-10-31
+    checked: 2026-11-01
 private_trace: true  # no Text, Print or Share row: a text or share leaves a trace on the phone (#555)
