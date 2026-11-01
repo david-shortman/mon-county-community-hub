@@ -6,8 +6,9 @@
 //   hash of the English it was made from, no translated facts.
 // - A translation whose English changed is listed as stale. High-stakes ones
 //   are hidden on the site until a reviewer checks them again.
-// - No page can sit in site/src/pages/<lang>/ until that language is turned
-//   on in site/src/lib/i18n.mjs (PUBLISHED).
+// - Pages in site/src/pages/<lang>/ are templates in _pages/, each matching
+//   an English page and with a words file. The router there builds one only
+//   when its language is on (PUBLISHED) and its words are reviewed.
 //
 // `node scripts/check-translations.mjs --hash <translation file>` prints the
 // current english_hash for a file, for the reviewer to copy in.
@@ -15,7 +16,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { REPO_ROOT, LOCALES, DEFAULT_LOCALE, OTHER_LOCALES, PUBLISHED, englishRoute, pageExists } from '../src/lib/i18n.mjs';
-import { listTranslationFiles, readTranslation, translationProblems } from '../src/lib/translations.mjs';
+import { listTranslationFiles, readTranslation, translationProblems, TRANSLATIONS_DIR } from '../src/lib/translations.mjs';
+import { TEMPLATE_DIR, templateRoute, pageTranslationOf } from '../src/lib/locale-pages.mjs';
+
+const ROUTER = '[...page].astro';
 
 const today = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date());
 
@@ -40,10 +44,18 @@ export function localeFolderProblems({ root = REPO_ROOT, published = PUBLISHED }
     const pages = walk(dir).filter((f) => f.endsWith('.astro'));
     for (const f of pages) {
       const rel = path.relative(root, f).split(path.sep).join('/');
-      if (!published.includes(lang)) errors.push(`${rel}: ${LOCALES[lang].name} pages are off (add '${lang}' to PUBLISHED in site/src/lib/i18n.mjs, which is David's call, #1067)`);
-      const route = englishRoute(rel.replace(/^site\/src\/pages/, '').replace(/\.astro$/, '').replace(/(^|\/)index$/, '/'));
+      // The router builds reviewed pages from templates (src/lib/locale-pages.mjs).
+      if (rel === `site/src/pages/${lang}/${ROUTER}`) continue;
+      const route = templateRoute(rel);
+      if (!route) {
+        errors.push(`${rel}: a ${LOCALES[lang].name} page goes in site/src/pages/${lang}/${TEMPLATE_DIR}/ as a template, so it builds only once its words are reviewed (docs/process/translations.md)`);
+        continue;
+      }
       if (!pageExists(DEFAULT_LOCALE, route, { root })) errors.push(`${rel}: has no English page at ${route}; every translated page matches an English one`);
+      const words = `${TRANSLATIONS_DIR}/${lang}/${pageTranslationOf(route)}.yaml`;
+      if (!fs.existsSync(path.join(root, words))) errors.push(`${rel}: has no words file ${words}`);
     }
+    if (pages.length && !pages.some((f) => path.basename(f) === ROUTER)) errors.push(`site/src/pages/${lang}/${ROUTER}: missing, so no ${LOCALES[lang].name} page can build`);
   }
   return errors;
 }

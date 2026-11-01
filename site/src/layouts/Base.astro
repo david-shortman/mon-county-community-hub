@@ -13,7 +13,9 @@ import { loadPages, doorHref } from '../lib/pages.mjs';
 import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 import { loadDoors, todayYmd } from '../lib/content.mjs';
 import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
-import { alternatesFor, dirFor } from '../lib/i18n.mjs';
+import { dirFor } from '../lib/i18n.mjs';
+import { pageAlternates } from '../lib/locale-pages.mjs';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import nameFont from '../fonts/fraunces-name-800.woff2?inline';
 import tileSvg from '../../public/favicon.svg?raw';
 // noindex: print copies and the 404 page stay out of search results; they get no canonical link (#89).
@@ -82,13 +84,18 @@ const today = todayYmd();
 const dayFmt = (style) => new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: style, month: style, day: 'numeric' }).format(new Date(`${today}T12:00:00Z`));
 const [longToday, shortToday] = [dayFmt('long'), dayFmt('short')];
 const forecast = await todaysForecast();
-// Other languages (#1083): the page's language (English unless a page in a
-// language folder says otherwise), and hreflang links to the
-// same page in each published language. Both stay empty on English-only
-// pages, which today is every page.
-const alternates = alternatesFor(Astro.url.pathname.slice(base.length) || '/', { site: Astro.site });
-const { lang = 'en' } = Astro.props;
+// Other languages (#1083, #1099): the page's language (English unless a
+// translated page says otherwise), and hreflang links to the same page in
+// each published language. Only reviewed translated pages count
+// (src/lib/locale-pages.mjs), so English-only pages get no links and no
+// switcher. On a translated page, the menu and footer are still English, so
+// they say so with lang="en" for screen readers, and the page stays out of
+// site search, which is English only for the pilot.
+const alternates = pageAlternates(Astro.url.pathname.slice(base.length) || '/', { site: Astro.site, today });
+const { lang = 'en', langLabel } = Astro.props;
 const dir = dirFor(lang);
+const chromeLang = lang === 'en' ? undefined : 'en';
+const indexed = searchable && lang === 'en';
 // Search results cut titles at about 60 characters, so the site name is added
 // only when it fits. og:site_name still names the site on shares (#939).
 const SITE_NAME = 'Everything Morgantown';
@@ -379,9 +386,10 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
   <body>
     <a class="skip" href="#main">Skip to main content</a>
     {crisis && <CrisisStrip />}
-    <header class="site">
+    <header class="site" lang={chromeLang}>
       <div class="wrap">
         <a class="brand" href={`${base}/`}><Fragment set:html={brandMark} /><span>Everything Morgantown</span></a>
+        <LanguageSwitcher lang={lang} alternates={alternates} label={langLabel} />
         <p class="dateline">Morgantown <span aria-hidden="true">·</span> <span class="dl-long" data-fmt="long">{longToday}</span><span class="dl-short" data-fmt="short">{shortToday}</span>{forecast && <span id="dl-wx" data-day={forecast.day}> <span aria-hidden="true">·</span> <a href={FORECAST_PAGE}><Icon name={forecast.icon} />{forecast.text}<span class="sr-only"> (National Weather Service forecast)</span></a></span>}</p>
         <nav class="main" aria-label="Main">
           {tabs.map((t) => <a class="tab" href={`${base}${t.href}`} aria-current={t.current}><Icon name={t.icon} /><span>{t.label}</span></a>)}
@@ -389,7 +397,7 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
         </nav>
       </div>
     </header>
-    <main class="wrap" id="main" tabindex="-1" data-pagefind-body={searchable ? '' : undefined}>
+    <main class="wrap" id="main" tabindex="-1" data-pagefind-body={indexed ? '' : undefined}>
       <UpkeepNotice />
       <Breadcrumb route={route} />
       {help && !crisis && <CrisisLine />}
@@ -402,7 +410,7 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
       {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
       <AlsoCheck route={route} />
     </main>
-    <footer class="site">
+    <footer class="site" lang={chromeLang}>
       <div class="wrap">
         <nav class="foot-links" aria-label="Doors and site">
           <ul>{footerLinks.map((n) => <li><a href={`${base}${n.href}`}>{n.label}</a></li>)}</ul>
