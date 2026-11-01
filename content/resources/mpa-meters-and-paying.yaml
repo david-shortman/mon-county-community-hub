@@ -19,10 +19,10 @@ contact:
   url_label: Pay with ParkMobile
 sources:
   - url: https://www.parkmpa.com/parking-info/
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.parkmpa.com/using-paystations/
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.parkmpa.com/parkmobile/
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.parkmpa.com/faq/
-    checked: 2026-10-31
+    checked: 2026-11-01

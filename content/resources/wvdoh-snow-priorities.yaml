@@ -10,8 +10,8 @@ contact:
   url_label: State snow priorities
 sources:
   - url: https://transportation.wv.gov/routes-and-priorities
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://transportation.wv.gov/winter-driving
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://transportation.wv.gov/agencies/highways/districts/district-four
-    checked: 2026-10-31
+    checked: 2026-11-01

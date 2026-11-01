@@ -8,12 +8,12 @@ sells: Used kids' clothing, shoes, toys and baby gear.
 takes: Kids' clothing, shoes, toys and baby gear in good shape. No appointment needed.
 goods: [kids, clothes]
 buys_from_you: true
-url: https://onceuponachild.com/locations/morgantown-wv/
-url_label: Shop website
+url: https://onceuponachild.com/
+url_label: Chain website
 status: likely
 note: Check the shop website for hours.
 sources:
-  - url: https://onceuponachild.com/locations/morgantown-wv/
-    checked: 2026-10-30
+  - url: https://onceuponachild.com/
+    checked: 2026-11-01
   - url: https://wrc.wvu.edu/resources/basic-needs/clothing
-    checked: 2026-10-30
+    checked: 2026-11-01

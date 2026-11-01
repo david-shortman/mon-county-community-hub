@@ -15,10 +15,10 @@ what_to_bring:
 if_you_want_help: [wv-dmv-morgantown-office]
 sources:
   - url: https://dmv.wv.gov/not-federal-identification-card-requirements
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://dmv.wv.gov/federal-identification-real-id-card-requirements
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://dmv.wv.gov/license-and-renewal-fees
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://dmv.wv.gov/driver-services/drivers/drivers-licenses-and-id-cards
-    checked: 2026-10-31
+    checked: 2026-11-01

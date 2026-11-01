@@ -11,7 +11,7 @@ town: Smithtown
 venue: smithtown
 sources:
   - url: http://www.smithtowncommunity.com/calendar.html
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://calendar.google.com/calendar/ical/info%40smithtowncommunity.com/public/basic.ics
-    checked: 2026-10-31
+    checked: 2026-11-01
     name: Smithtown Community Center's public calendar feed
