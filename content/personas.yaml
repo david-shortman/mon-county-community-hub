@@ -1,0 +1,610 @@
+# Personas (#1036): people in a moment, not profiles. Each is tied to a need
+# in content/needs/ or a life area, with public evidence, the words they would
+# search, the page search should land them on, and two or three next steps.
+# Pages only: no phones, dates or costs here. Read by
+# site/scripts/check-personas.mjs after every build (#1042): the landing page
+# must exist and each next step must be one or two taps from it.
+# not_linked_yet: next steps from the plan that the landing page does not reach
+# in two taps yet (#1338). questions: ids in content/findability/questions.yaml.
+personas:
+- slug: nowhere-to-sleep
+  name: Nowhere to sleep tonight
+  needs:
+  - homelessness
+  evidence:
+  - source: https://wvmetronews.com/2026/07/26/morgantown-warming-shelter-planning-gets-off-to-early-start/
+    publisher: MetroNews
+    shows: about 150 people; 21 beds at the Grace Shelter
+    checked: '2026-10-31'
+  search: where can I stay tonight morgantown
+  landing: /stay-tonight/
+  next_steps:
+  - /help/food/
+  questions:
+  - q26
+  last_reviewed: '2026-11-01'
+- slug: in-crisis
+  name: In crisis, or scared for someone
+  needs:
+  - mental-health-care
+  - drugs-and-overdose
+  evidence:
+  - source: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+    shows: 64% named mental health a top problem; 26% cannot get care when needed
+    checked: '2026-10-31'
+  - source: https://odcp.wv.gov/media/39878/download?inline
+    publisher: West Virginia Office of Drug Control Policy, At-A-Glance 2025
+    shows: 77 deaths in 2023, 49 in 2024
+    checked: '2026-10-31'
+  search: mental health help today morgantown
+  landing: /mental-health/
+  next_steps:
+  - /drugs-and-alcohol/
+  questions:
+  - q06
+  last_reviewed: '2026-11-01'
+- slug: shutoff-notice
+  name: Shutoff notice on the power or water
+  groups:
+  - renters
+  - homeowners
+  needs:
+  - utility-bills
+  evidence:
+  - source: https://data.cdc.gov/d/swc5-untb
+    publisher: CDC PLACES (2025 release)
+    shows: 9.5% of adults (likely between 7.8% and 11.5%)
+    checked: '2026-10-31'
+  - source: docs/groups/renters.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  - source: docs/groups/homeowners.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: help paying electric bill morgantown
+  landing: /utility-bills/
+  next_steps:
+  - /money/
+  questions:
+  - q01
+  - q03
+  last_reviewed: '2026-11-01'
+- slug: behind-on-rent
+  name: Behind on rent or got an eviction notice
+  groups:
+  - renters
+  needs:
+  - housing-costs
+  evidence:
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    publisher: County Health Rankings (2025 release)
+    shows: 15.7% of households, 6,702 of 42,652 (West Virginia 10.2%, US 14.7%)
+    checked: '2026-10-31'
+  - source: docs/groups/renters.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: eviction help morgantown wv
+  landing: /money/
+  next_steps:
+  - /stay-tonight/
+  - /legal-help/
+  questions:
+  - q25
+  last_reviewed: '2026-11-01'
+- slug: short-on-food
+  name: Short on food this week
+  needs:
+  - enough-food
+  evidence:
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    publisher: County Health Rankings (2025 release)
+    shows: 12.6% of people, about 13,370 people (West Virginia 15%, US 13.5%)
+    checked: '2026-10-31'
+  search: food pantry open today morgantown
+  landing: /help/food/
+  next_steps:
+  - /snap/
+  questions:
+  - q02
+  - q04
+  last_reviewed: '2026-11-01'
+- slug: tax-season
+  name: Working, paycheck to paycheck, at tax season
+  groups:
+  - job-seekers
+  needs:
+  - wages-and-cost-of-living
+  evidence:
+  - source: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+    shows: 49% of single or cohabiting adults without children; 67% of single mothers; 83% of householders under 25; 48% of householders 65 and older
+    checked: '2026-10-31'
+  - source: docs/groups/job-seekers.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: free tax help morgantown
+  landing: /free-tax-help/
+  next_steps:
+  - /money/
+  questions:
+  - q46
+  last_reviewed: '2026-11-01'
+- slug: no-insurance
+  name: No insurance, needs a doctor or medicine
+  needs:
+  - paying-for-health-care
+  evidence:
+  - source: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+    shows: 50% named cost of care or medicine a top problem; 25% cannot afford care; 19% cannot afford medicine
+    checked: '2026-10-31'
+  search: free clinic morgantown
+  landing: /dental-and-prescriptions/
+  next_steps:
+  - /care/
+  - /medical-rides/
+  questions:
+  - q05
+  - q08
+  last_reviewed: '2026-11-01'
+- slug: flu-shot
+  name: Wants a flu or COVID shot
+  life_area: health
+  evidence:
+  - source: docs/playbook/what-people-search-for.md
+    shows: What residents ask about in public local forums, counted by topic
+  search: free flu shot morgantown
+  landing: /flu-shots/
+  next_steps:
+  - /staying-well/
+  questions:
+  - q07
+  last_reviewed: '2026-11-01'
+- slug: prediabetes
+  name: Just told they have prediabetes or high blood pressure
+  needs:
+  - chronic-disease
+  evidence:
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    publisher: County Health Rankings (2025 release)
+    shows: 36.7% (West Virginia 41.5%, US 33.5%)
+    checked: '2026-10-31'
+  search: diabetes class morgantown wv
+  landing: /diabetes-and-weight/
+  next_steps:
+  - /staying-well/
+  - /staying-active/
+  questions:
+  - q47
+  last_reviewed: '2026-11-01'
+- slug: turning-65
+  name: Turning 65
+  groups:
+  - older-adults
+  needs:
+  - paying-for-health-care
+  evidence:
+  - source: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+    shows: 50% named cost of care or medicine a top problem; 25% cannot afford care; 19% cannot afford medicine
+    checked: '2026-10-31'
+  - source: docs/groups/older-adults.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: medicare help morgantown wv
+  landing: /turning-65/
+  next_steps:
+  - /after-you-apply/medicare-savings/
+  - /staying-well/
+  not_linked_yet:
+  - /bus-passes/
+  - /staying-active/
+  questions:
+  - q48
+  last_reviewed: '2026-11-01'
+- slug: aging-parent
+  name: Adult child caring for an aging parent
+  groups:
+  - older-adults
+  - disability-caregivers
+  needs:
+  - transportation
+  evidence:
+  - source: https://data.cdc.gov/d/swc5-untb
+    publisher: CDC PLACES (2025 release)
+    shows: 8.3% of adults (likely between 6.7% and 10.3%)
+    checked: '2026-10-31'
+  - source: docs/groups/older-adults.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  - source: docs/groups/disability-caregivers.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: in home care for elderly parent wv
+  landing: /for/older-adults/
+  next_steps:
+  - /medicaid-waivers/
+  - /medical-rides/
+  questions:
+  - q29
+  last_reviewed: '2026-11-01'
+- slug: disability
+  name: Person with a disability or a caregiver
+  groups:
+  - disability-caregivers
+  needs:
+  - transportation
+  evidence:
+  - source: https://data.cdc.gov/d/swc5-untb
+    publisher: CDC PLACES (2025 release)
+    shows: 8.3% of adults (likely between 6.7% and 10.3%)
+    checked: '2026-10-31'
+  - source: docs/groups/disability-caregivers.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: disability help morgantown
+  landing: /for/disability-and-caregivers/
+  next_steps:
+  - /disability-and-aging/
+  - /help-at-home/
+  not_linked_yet:
+  - /bus-passes/
+  questions:
+  - q49
+  last_reviewed: '2026-11-01'
+- slug: new-baby
+  name: Pregnant or has a new baby
+  groups:
+  - parents-young-kids
+  needs:
+  - child-care
+  evidence:
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    publisher: County Health Rankings (2025 release)
+    shows: 27.4% (West Virginia 35.5%, US 27.9%)
+    checked: '2026-10-31'
+  - source: docs/groups/parents-young-kids.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: wic morgantown
+  landing: /for/parents-young-kids/
+  next_steps:
+  - /families-and-kids/
+  - /car-seat-checks/
+  questions:
+  - q50
+  last_reviewed: '2026-11-01'
+- slug: school-age-kid
+  name: Parent of a school-age kid
+  groups:
+  - parents-school-age
+  needs:
+  - child-care
+  evidence:
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    publisher: County Health Rankings (2025 release)
+    shows: 27.4% (West Virginia 35.5%, US 27.9%)
+    checked: '2026-10-31'
+  - source: docs/groups/parents-school-age.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: enroll monongalia county schools
+  landing: /school-age/
+  next_steps:
+  - /families-and-kids/
+  questions:
+  - q51
+  last_reviewed: '2026-11-01'
+- slug: teen-first-job
+  name: Teen wanting a first job or a license
+  groups:
+  - teens
+  life_area: work
+  evidence:
+  - source: docs/groups/teens.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: work permit 15 year old wv
+  landing: /teens/
+  next_steps:
+  - /teen-drivers/
+  - /find-a-job/
+  questions:
+  - q52
+  last_reviewed: '2026-11-01'
+- slug: broke-student
+  name: WVU student who is short on money
+  groups:
+  - college-students
+  needs:
+  - enough-food
+  evidence:
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    publisher: County Health Rankings (2025 release)
+    shows: 12.6% of people, about 13,370 people (West Virginia 15%, US 13.5%)
+    checked: '2026-10-31'
+  - source: docs/groups/college-students.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: wvu food pantry
+  landing: /help/food/today/student/
+  next_steps:
+  - /help/food/today/
+  - /money/
+  not_linked_yet:
+  - /getting-around/
+  questions:
+  - q53
+  last_reviewed: '2026-11-01'
+- slug: lost-job
+  name: Just lost a job
+  groups:
+  - job-seekers
+  needs:
+  - wages-and-cost-of-living
+  evidence:
+  - source: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+    shows: 49% of single or cohabiting adults without children; 67% of single mothers; 83% of householders under 25; 48% of householders 65 and older
+    checked: '2026-10-31'
+  - source: docs/groups/job-seekers.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: file unemployment wv
+  landing: /find-a-job/
+  next_steps:
+  - /work-and-learning/
+  questions:
+  - q54
+  last_reviewed: '2026-11-01'
+- slug: home-from-jail
+  name: Home from jail or prison
+  groups:
+  - job-seekers
+  needs:
+  - wages-and-cost-of-living
+  evidence:
+  - source: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+    shows: 49% of single or cohabiting adults without children; 67% of single mothers; 83% of householders under 25; 48% of householders 65 and older
+    checked: '2026-10-31'
+  - source: docs/groups/job-seekers.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: jobs for felons morgantown
+  landing: /reentry/
+  next_steps:
+  - /find-a-job/
+  questions:
+  - q55
+  last_reviewed: '2026-11-01'
+- slug: starting-business
+  name: Starting a business or a trade
+  groups:
+  - small-business
+  - tradespeople
+  life_area: business
+  evidence:
+  - source: docs/groups/small-business.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  - source: docs/groups/tradespeople.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: business license morgantown
+  landing: /business/
+  next_steps:
+  - /contractor-license/
+  - /work-and-learning/
+  not_linked_yet:
+  - /permits/
+  questions:
+  - q09
+  - q10
+  last_reviewed: '2026-11-01'
+- slug: remote-worker
+  name: Remote worker moving here
+  groups:
+  - remote-workers
+  life_area: moving
+  evidence:
+  - source: docs/groups/remote-workers.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: moving to morgantown remote work
+  landing: /moving-here/
+  next_steps:
+  - /internet/
+  - /find-your-people/
+  questions:
+  - q56
+  last_reviewed: '2026-11-01'
+- slug: just-moved
+  name: Just moved here
+  groups:
+  - new-residents
+  life_area: moving
+  evidence:
+  - source: docs/groups/new-residents.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: morgantown trash pickup
+  landing: /for/new-to-mon-county/
+  next_steps:
+  - /moving-here/
+  - /recycling/
+  - /vote/
+  questions:
+  - q19
+  last_reviewed: '2026-11-01'
+- slug: renter-repair
+  name: Renter with a repair or deposit problem
+  groups:
+  - renters
+  needs:
+  - housing-costs
+  evidence:
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    publisher: County Health Rankings (2025 release)
+    shows: 15.7% of households, 6,702 of 42,652 (West Virginia 10.2%, US 14.7%)
+    checked: '2026-10-31'
+  - source: docs/groups/renters.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: landlord won't fix morgantown
+  landing: /renting/
+  next_steps:
+  - /legal-help/
+  questions:
+  - q57
+  last_reviewed: '2026-11-01'
+- slug: rural-homeowner
+  name: Rural homeowner
+  groups:
+  - homeowners
+  life_area: home
+  evidence:
+  - source: docs/groups/homeowners.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: septic permit monongalia county
+  landing: /septic-and-wells/
+  next_steps:
+  - /flood-zone/
+  - /permits/
+  questions:
+  - q58
+  last_reviewed: '2026-11-01'
+- slug: after-a-storm
+  name: After a storm, power out or flooding
+  groups:
+  - homeowners
+  - renters
+  life_area: safety
+  evidence:
+  - source: docs/groups/homeowners.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  - source: docs/groups/renters.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: power outage morgantown
+  landing: /after-a-storm/
+  next_steps:
+  - /weather-alerts/
+  - /flood-zone/
+  questions:
+  - q59
+  last_reviewed: '2026-11-01'
+- slug: other-language
+  name: Reads another language best
+  groups:
+  - new-residents
+  life_area: language
+  evidence:
+  - source: docs/groups/new-residents.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: interpreter morgantown
+  landing: /help-in-your-language/
+  next_steps:
+  - /legal-help/
+  questions:
+  - q60
+  last_reviewed: '2026-11-01'
+- slug: veteran
+  name: Veteran looking for care or benefits
+  groups:
+  - veterans
+  life_area: veterans
+  evidence:
+  - source: docs/groups/veterans.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: va clinic morgantown
+  landing: /veterans/
+  next_steps:
+  - /find-a-job/
+  questions:
+  - q61
+  last_reviewed: '2026-11-01'
+- slug: wants-to-help
+  name: Wants to help or give
+  life_area: giving
+  evidence:
+  - source: docs/playbook/what-people-search-for.md
+    shows: What residents ask about in public local forums, counted by topic
+  search: volunteer morgantown this weekend
+  landing: /volunteer/
+  next_steps:
+  - /make-it-better/
+  - /find-your-people/
+  not_linked_yet:
+  - /sell-or-donate/
+  questions:
+  - q16
+  - q18
+  last_reviewed: '2026-11-01'
+- slug: wants-a-say
+  name: Wants a say in local decisions
+  life_area: civic
+  evidence:
+  - source: docs/playbook/what-people-search-for.md
+    shows: What residents ask about in public local forums, counted by topic
+  search: speak at city council morgantown
+  landing: /have-your-say/
+  next_steps:
+  - /make-it-better/boards/
+  - /meetings/agendas/
+  not_linked_yet:
+  - /vote/
+  questions:
+  - q12
+  - q13
+  last_reviewed: '2026-11-01'
+- slug: looking-for-people
+  name: Lonely or new, looking for their people
+  groups:
+  - outdoor-active
+  - artists-makers
+  needs:
+  - loneliness
+  evidence:
+  - source: https://data.cdc.gov/d/swc5-untb
+    publisher: CDC PLACES (2025 release)
+    shows: 35.2% loneliness; 20.9% lack support
+    checked: '2026-10-31'
+  - source: docs/groups/outdoor-active.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  - source: docs/groups/artists-makers.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: things to do in morgantown
+  landing: /find-your-people/
+  next_steps:
+  - /community-centers/
+  - /arts-and-making/
+  - /meet-people/
+  not_linked_yet:
+  - /parks/
+  questions:
+  - q43
+  - q45
+  last_reviewed: '2026-11-01'
+- slug: gardener
+  name: Gardener or would-be grower
+  life_area: growing
+  evidence:
+  - source: docs/playbook/what-people-search-for.md
+    shows: What residents ask about in public local forums, counted by topic
+  search: soil test wv
+  landing: /soil-test/
+  next_steps:
+  - /grow/
+  questions:
+  - q33
+  last_reviewed: '2026-11-01'
+- slug: helper
+  name: 'Helper: librarian, pastor or case worker'
+  groups:
+  - helpers
+  life_area: helpers
+  evidence:
+  - source: docs/groups/helpers.md
+    shows: 'Group research: what people in this group are trying to do, with sources'
+  search: morgantown resource list
+  landing: /make-a-list/
+  next_steps:
+  - /partners/
+  questions:
+  - q62
+  last_reviewed: '2026-11-01'
+- slug: curious-resident
+  name: Curious long-time resident, just looking around
+  life_area: community data
+  evidence:
+  - source: docs/playbook/what-people-search-for.md
+    shows: What residents ask about in public local forums, counted by topic
+  search: what's going on in morgantown this week
+  landing: /pulse/
+  next_steps:
+  - /how-we-are-doing/
+  questions:
+  - q24
+  last_reviewed: '2026-11-01'
