@@ -24,6 +24,14 @@ const ROWS = [
   { slug: 'unemployment', name: 'Unemployment', who: 'WorkForce West Virginia', deadline: '8 calendar days from when the decision is delivered or mailed', keep: 'Benefits found payable are paid while appeals go on' },
   { slug: 'social-security-disability', name: 'Social Security disability (SSDI and SSI)', who: 'Social Security', deadline: '60 days, plus 5 days for mail', keep: 'Ask within 10 days if payments are being stopped' },
 ];
+// Guides added after the table above. Their deadlines are on their own pages.
+const MORE = [
+  { slug: 'ssi', name: 'After you apply for SSI' },
+  { slug: 'medicare-savings', name: 'After you apply for help with Medicare costs' },
+  { slug: 'child-care', name: 'After you apply for child care help' },
+  { slug: 'housing-voucher', name: 'After you apply for a housing voucher or public housing' },
+  { slug: 'homestead', name: 'After you apply for the homestead exemption' },
+];
 const rows = ROWS.map((r) => ({ ...r, href: have.includes(r.slug) ? `${base}/after-you-apply/${r.slug}/` : null }));
 ---
 <Base help title="After you apply for benefits in Mon County: next steps and appeal deadlines" description="What happens after you apply for SNAP, Medicaid, WVCHIP, LIEAP, WIC, WV WORKS, unemployment or Social Security disability in Monongalia County, WV, and the deadline to appeal each one, quoted from the official rules.">
@@ -54,6 +62,7 @@ const rows = ROWS.map((r) => ({ ...r, href: have.includes(r.slug) ? `${base}/aft
   {rows.some((r) => r.href) ? (
     <ul>
       {rows.filter((r) => r.href).map((r) => <li><a href={r.href}>After you apply for {r.name}</a></li>)}
+      {MORE.filter((m) => have.includes(m.slug)).map((m) => <li><a href={`${base}/after-you-apply/${m.slug}/`}>{m.name}</a></li>)}
     </ul>
   ) : <p>Guides for each program are being checked and will appear here.</p>}
 

@@ -23,6 +23,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2>Under 3: worried about how your child is growing</h2>
   <p>Birth to Three helps children under 3 who have a delay in how they move, talk, learn or get along, or who may be at risk of one. You do not need a doctor to send you.</p>
   {r('wv-birth-to-three-referral') && <ResourceCard r={r('wv-birth-to-three-referral')} showCost />}
+  <p>Steps for each age, in one list: <a href={`${base}/life-events/child-delay-or-disability/`}>My child has a delay or disability</a>.</p>
 
   <h2>Ages 3 and 4: Pre-K and Head Start</h2>
   <p>The county schools run both, with one application. The dates for the 2027-28 school year are not posted yet. For 2026-27, applications sent from February 4 to April 16 all had an equal chance at a spot.</p>
@@ -43,6 +44,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>The state keeps one search for child care it licenses or registers. You can filter it to Monongalia County. To ask about providers near you and help with the cost, call the Child Care Resource Center in Morgantown.</p>
   {r('wv-child-care-provider-search') && <ResourceCard r={r('wv-child-care-provider-search')} />}
   {r('child-care-resource-center-morgantown') && <ResourceCard r={r('child-care-resource-center-morgantown')} showCost />}
+  <p>Applied for help paying for child care? <a href={`${base}/after-you-apply/child-care/`}>After you apply for child care help</a> says what comes next.</p>
 
   <h2 id="playgroups">Playgroups, a baby pantry and more</h2>
   <p>Starting Points in Pursglove has free programs for parents and young children, including a playgroup for children under 3 and their parents.</p>
