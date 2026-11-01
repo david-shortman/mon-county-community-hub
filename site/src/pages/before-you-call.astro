@@ -7,6 +7,8 @@
 // (`what_to_bring`, #159), so it has a source and a checked date.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import OnThisPage from '../components/OnThisPage.astro';
+import Fold from '../components/Fold.astro';
 import { loadDir } from '../lib/content.mjs';
 export const page = { door: "this-month", topic: "money", label: "Before you call: what to have ready and what to say", summary: "A checklist, a place to write notes, and short scripts for a utility, a landlord or a medical bill" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -48,7 +50,9 @@ const scripts = [
   <h1>Before you call: what to have ready and what to say</h1>
   <p class="lede">A phone call to an office goes faster when you have your papers in front of you and know what to ask. Print this page or keep it open while you call.</p>
 
-  <h2>Before any call</h2>
+  <OnThisPage items={[['#any-call', 'Before any call'], ['#notes', 'Write down what they tell you'], ['#scripts', 'What to say'], ...(ready.length ? [['#ready', `What to have ready for ${ready.length} offices`]] : [])]} />
+
+  <h2 id="any-call">Before any call</h2>
   <ul class="checklist">
     <li>The letter, bill or notice, if you got one</li>
     <li>Your account number or case number, if you have one</li>
@@ -58,7 +62,7 @@ const scripts = [
   </ul>
   <p>The office may ask for more than what is listed here. If they do, write it down and ask how to send it.</p>
 
-  <h2>Write down what they tell you</h2>
+  <h2 id="notes">Write down what they tell you</h2>
   <div class="call-notes">
     <p>Date and time of the call: ____________________</p>
     <p>Who I talked to: ____________________</p>
@@ -68,7 +72,7 @@ const scripts = [
     <p>What I need to do next, and by when: ________________________</p>
   </div>
 
-  <h2>What to say: short scripts</h2>
+  <h2 id="scripts">What to say: short scripts</h2>
   <p>Fill in the blanks before you call. It is fine to read from the page. These are questions to ask, not legal advice.</p>
   {scripts.map((s) => (
     <section class="script" id={s.id} aria-labelledby={`${s.id}-h`}>
@@ -79,9 +83,10 @@ const scripts = [
 
   {ready.length > 0 && (
     <>
-      <h2>What to have ready for these offices</h2>
-      <p>From each office's own page. Each card shows its source and when we checked it.</p>
-      {ready.map((r) => <ResourceCard r={r} showCost />)}
+      <h2 id="ready">What to have ready for these offices</h2>
+      <p>From each office's own page. Each card shows its source and when we checked it. Tap an office to open its card.</p>
+      {/* Folded (#1174): 34 full cards ran about 73 phone screens. A link to /before-you-call/#<slug> opens that card. */}
+      {ready.map((r) => <Fold id={`ready-${r.slug}`} title={r.title} level={3}><ResourceCard r={r} showCost headingLevel={4} /></Fold>)}
     </>
   )}
 

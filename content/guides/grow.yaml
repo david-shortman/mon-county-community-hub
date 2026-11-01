@@ -21,7 +21,7 @@ steps:
     action: Read the state flyer
   health-permit:
     when: week
-    resource: monchd-farmers-market-permit
+    resource: monchd-farmers-market-vendor-permit
     text: Read the county health department's farmers market rules to see whether the foods you want to sell need its permit.
   wvda-permit:
     when: season

@@ -10,10 +10,8 @@ run_by:
 story: A monthly lunch for seniors at the Arnettsville library, with a guest speaker or activity over a shared meal.
 regular:
   - First Friday of each month, noon to 2 p.m.
-cost: Free
 venue: arnettsville
 interests: [food, social, learning]
-tags: [free]
 contact:
   url: https://mympls.org/programs/adults/senior-lunch-and-learn/
   phone: "304-278-2021"
@@ -22,11 +20,13 @@ status: active
 last_activity_seen: 2026-10-30
 notes:
   - Attendees are often asked to bring a side dish to share. Check that month's listing.
-  - The January date is Friday, January 8, 2027, because the library is closed January 1.
+  - The January date is Friday, January 8, 2027, not the first Friday.
 sources:
   - url: https://mympls.org/programs/adults/senior-lunch-and-learn/
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://events.mympls.org/event/17537549
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://events.mympls.org/event/17835056
-    checked: 2026-10-30
+    checked: 2026-10-31
+  - url: https://mympls.org/about/locations/arnettsville/
+    checked: 2026-10-31

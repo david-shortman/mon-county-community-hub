@@ -11,7 +11,7 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "family", topic: "family", label: "Families and kids", summary: "Babies, toddlers and preschool: Birth to Three, Pre-K, Head Start, home visits, breastfeeding help, diapers, playgroups and story times" };
+export const page = { door: "family", topic: "family", label: "Families and kids", summary: "Babies, toddlers and preschool: Birth to Three, Pre-K, Head Start, child care, home visits, breastfeeding help, diapers, playgroups and story times" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -39,9 +39,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>We have not found a diaper bank in Mon County. Two places give out baby items: Scott's Run Settlement House, by appointment, and the Starting Points baby pantry at The Shack, Wednesdays from 9 a.m. to noon, with items based on what is on hand.</p>
   {r('srsh-baby-pantry') && <ResourceCard r={r('srsh-baby-pantry')} />}
 
-  <h2>Finding child care</h2>
-  <p>The state keeps one search for child care it licenses or registers. You can filter it to Monongalia County.</p>
+  <h2 id="child-care">Finding child care, and help paying for it</h2>
+  <p>The state keeps one search for child care it licenses or registers. You can filter it to Monongalia County. To ask about providers near you and help with the cost, call the Child Care Resource Center in Morgantown.</p>
   {r('wv-child-care-provider-search') && <ResourceCard r={r('wv-child-care-provider-search')} />}
+  {r('child-care-resource-center-morgantown') && <ResourceCard r={r('child-care-resource-center-morgantown')} showCost />}
 
   <h2 id="playgroups">Playgroups, a baby pantry and more</h2>
   <p>Starting Points in Pursglove has free programs for parents and young children, including a playgroup for children under 3 and their parents.</p>

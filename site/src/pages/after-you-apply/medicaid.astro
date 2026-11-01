@@ -1,0 +1,129 @@
+---
+// After you apply: Medicaid and WVCHIP. From the WV DoHS Income Maintenance
+// Manual (IMM, effective October 5, 2026): chapter 1 (sections 1.6 to 1.8),
+// chapter 9, chapter 10 (10.6 to 10.8), chapter 22 (WVCHIP), and the hearing
+// request form DFA-FH-1 in chapter 9's Appendix C, read 2026-10-31. Builds on
+// /file-today/#medicaid (how to apply) and /medicaid-2027/ (the 2027 rules)
+// and does not repeat them. High-stakes benefits page: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'care', topic: 'health', label: 'After you apply for Medicaid or WVCHIP', summary: 'How long it takes, when coverage starts, renewals, and how to ask for a fair hearing' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const ORG = 'wv-department-of-human-services';
+const IMM = 'https://bfa.wv.gov/media/40005/download?inline';
+const imm = (part) => ({ url: IMM, checked, name: `WV DoHS Income Maintenance Manual, ${part}` });
+const src = {
+  ch1: imm('Chapter 1, sections 1.6 to 1.8'),
+  ch9: imm('Chapter 9, Client Notification'),
+  fh1: imm('Chapter 9, Appendix C: form DFA-FH-1, Rev. 6/22'),
+  ch10: imm('Chapter 10, sections 10.6 to 10.8'),
+  ch22: imm('Chapter 22, WVCHIP'),
+  sla1: { url: 'https://bfa.wv.gov/media/2196/download?inline', checked, name: 'WV DoHS health coverage application, form DFA-SLA-1, Rev. 10/24' },
+};
+const office = resource('monongalia-county-dohs-office');
+const legal = resource('legal-aid-wv-civil-legal-help');
+const nav = resource('wv-navigator');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for Medicaid or WVCHIP in Mon County: timelines, renewals and appeals" description="What happens after you apply for Medicaid or WVCHIP in Monongalia County, WV: no interview, how long a decision takes, when coverage starts, the letters DoHS sends, renewals, what to report, and how to ask for a fair hearing within 90 days. Quoted from the state's own manual.">
+  <h1>After you apply for Medicaid or WVCHIP</h1>
+  <p class="lede">There is no interview. Watch your mail or WV PATH for a request for papers, and send what it asks for by the date on it. Here is what comes next, in the state's own rules.</p>
+  <p>Not applied yet? See <a href={`${base}/file-today/#medicaid`}>File today</a>. Already have Medicaid as an adult? Read <a href={`${base}/medicaid-2027/`}>Keep my Medicaid in 2027</a> for the new rules that start January 1, 2027. WVCHIP is the state's health coverage for children. Both are handled by the West Virginia Department of Human Services (DoHS).</p>
+  <p class="note">This page quotes the state's staff manual and forms. DoHS decides each case. It is information, not legal advice.</p>
+  <ul class="topic-list">
+    <li><a href="#papers">1. If DoHS asks for papers</a></li>
+    <li><a href="#decision">2. How long it takes and when coverage starts</a></li>
+    <li><a href="#letters">Letters you may get</a></li>
+    <li><a href="#status">Check where things stand</a></li>
+    <li><a href="#hearing">If you are denied or cut off</a></li>
+    <li><a href="#report">Reporting changes</a></li>
+    <li><a href="#renew">Renewing</a></li>
+    <li><a href="#help">Who can help</a></li>
+  </ul>
+
+  <h2 id="papers">1. If DoHS asks for papers</h2>
+  <ul>
+    <li><strong>No interview.</strong> The manual says "There is no interview required for any Medicaid coverage group." A worker may contact you if they need more.</li>
+    <li><strong>The request.</strong> DoHS asks for proof on a verification checklist or a form called the <strong>DFA-6, Notice of Information Needed</strong>. The manual says you "must be given at least 10 days after the date the verification checklist or DFA-6 is mailed to return the information." The due date is on the form.</li>
+    <li><strong>Missing something?</strong> The health coverage application says to sign and send it anyway, and DoHS will follow up with you within 1 to 2 weeks.</li>
+    <li><strong>Letters by email.</strong> The manual says you can choose paper mail or email notices through WV PATH. With email, you get a message telling you to sign in and read the letter.</li>
+  </ul>
+  <SourceLine sources={[src.ch1, src.ch9, src.sla1]} org={ORG} about="papers DoHS asks for" />
+
+  <h2 id="decision">2. How long it takes and when coverage starts</h2>
+  <ul>
+    <li><strong>Children under 19:</strong> the manual says an application must be approved "within 13 business days of the date a complete application is received," and denied or withdrawn within 30 days if it cannot be approved.</li>
+    <li><strong>Adults 19 to 64 (the "Adult Group"):</strong> action "within 30 days of the date of application."</li>
+    <li><strong>Coverage can go back up to 3 months.</strong> For children and adults, coverage starts the first day of the month you apply (adults: the month you qualify), and "may be backdated up to three months" before that if you met the rules then. Tell the worker if you had medical bills in those months.</li>
+    <li><strong>WVCHIP is different.</strong> The manual says WVCHIP starts the first day of the month you apply and "is not backdated up to three months as is permitted for Medicaid," except in a few cases. If you have other insurance that is ending, WVCHIP starts the first of the month after it ends.</li>
+    <li><strong>Your card.</strong> The manual says the Medical ID card "is now included in all Medicaid approval notices." Keep your approval letter.</li>
+    <li><strong>If DoHS is late,</strong> it sends a letter called the DFA-20 listing what it is still missing. The manual says if the delay is DoHS's fault, coverage is backdated, and Medicaid (not WVCHIP) may pay you back for some medical bills you paid yourself.</li>
+  </ul>
+  <SourceLine sources={[src.ch1, src.ch22]} org={ORG} about="Medicaid and WVCHIP timelines" />
+
+  <h2 id="letters">Letters you may get</h2>
+  <dl class="letters">
+    <dt>DFA-6, Notice of Information Needed (or a verification checklist)</dt>
+    <dd>What proof to send, and the date it is due.</dd>
+    <dt>DFA-NL-A, Action Taken on Your Application</dt>
+    <dd>The decision. The manual says an approval must show when coverage begins and ends, any premiums or copays, the changes you must report, and your right to appeal the level of coverage. A denial must give the reason and the manual section.</dd>
+    <dt>DFA-NL-C, Pending Change in the Benefits You Receive</dt>
+    <dd>Your coverage will stop, or someone will be taken off. It is mailed at least 13 days before the first day of the month the change starts.</dd>
+    <dt>DFA-FH-1, Pre-Hearing Conference and/or Fair Hearing Request Form</dt>
+    <dd>Comes with every decision letter. Use it to ask for a hearing.</dd>
+    <dt>DFA-20 (or a notice called NMRL)</dt>
+    <dd>DoHS ran past its time limit. It lists what it is still missing.</dd>
+  </dl>
+  <SourceLine sources={[src.ch9, src.ch1]} org={ORG} about="Medicaid letters" />
+
+  <h2 id="status">Check where things stand</h2>
+  <p>Sign in to WV PATH, or call DoHS at <a href="tel:18777161212">1-877-716-1212</a>. For WVCHIP questions about copays and services, the manual lists the WVCHIP Helpline at <a href="tel:18779822447">1-877-982-2447</a>.</p>
+  <SourceLine sources={[src.ch22]} org={ORG} about="checking your Medicaid status" />
+  {ok(office) && <ResourceCard r={office} />}
+
+  <h2 id="hearing">If you are denied or cut off</h2>
+  <p>You can ask for a <strong>Pre-Hearing Conference</strong> (an informal meeting with your worker and a supervisor), a <strong>Fair Hearing</strong> (before a State Hearings Officer), or both. The state's form says you can ask "either orally or in writing."</p>
+  <ul>
+    <li><strong>The deadline is 90 days.</strong> The form says "you may ask for a Fair Hearing or Pre-Hearing Conference within 90 days of the effective date of the actions."</li>
+    <li><strong>To keep your coverage while you wait,</strong> ask before the closing date on your DFA-NL-C letter. The form says then your benefits "will not be reduced or stopped, pending a final decision." For WVCHIP, the manual says coverage continues while you wait if you ask for a hearing within the advance notice period (the time before the change starts).</li>
+    <li><strong>How to ask.</strong> Fill out the DFA-FH-1 that came with your letter and return it to your local DoHS office, or ask out loud. You can ask for the hearing by phone, and for a copy of the manual section your decision used.</li>
+    <li><strong>You can bring someone.</strong> The form says a friend, relative, lawyer "or any other person" can help or speak for you.</li>
+    <li><strong>Getting there.</strong> The form says your case worker will help arrange a ride if you ask, and help you prepare. Call DoHS Client Services at <a href="tel:18006428589">1-800-642-8589</a>.</li>
+    <li><strong>WVCHIP health plan questions.</strong> The manual says hearing requests about WVCHIP health plans go to the WVCHIP Helpline at 1-877-982-2447.</li>
+  </ul>
+  <SourceLine sources={[src.fh1, src.ch22]} org={ORG} about="asking for a Medicaid fair hearing" />
+  {ok(legal) && <ResourceCard r={legal} />}
+
+  <h2 id="report">Reporting changes</h2>
+  <ul>
+    <li><strong>Report as soon as you can.</strong> The manual says Medicaid members "must report all changes in circumstances such as, but not limited to, income, assets, household composition, and change of address," and "as soon as possible after he becomes aware of them."</li>
+    <li><strong>Children keep coverage for 12 months.</strong> For children under 19 on Medicaid or WVCHIP, the manual says a change in income "does not affect eligibility once the 12-month" period is set. Coverage can end early only for set reasons, like moving out of state or turning 19.</li>
+    <li><strong>Report a pregnancy.</strong> The manual says to report when a child on Medicaid becomes pregnant, and a pregnancy or birth while on WVCHIP. A baby born to a mother on WVCHIP gets WVCHIP for 12 months without an application.</li>
+    <li>Report on WV PATH or at 1-877-716-1212.</li>
+  </ul>
+  <SourceLine sources={[src.ch10, src.ch1, src.ch22]} org={ORG} about="reporting changes" />
+
+  <h2 id="renew">Renewing</h2>
+  <ul>
+    <li><strong>Often automatic.</strong> The manual says renewals are "normally" yearly, and DoHS first tries to renew you using records it can check. If it can, you get a notice. If the notice is right, you do not need to do anything.</li>
+    <li><strong>If you get a form,</strong> you have "30 days from the date of the letter to return the information," by mail, phone, online or in person. If you do not answer, coverage ends.</li>
+    <li><strong>Missed it? You have 90 days.</strong> The manual says if you send the information "within 90 days of the effective date of closure," DoHS will decide without a new application, and coverage can be backdated up to 3 months.</li>
+    <li><strong>Changes in 2027.</strong> The state says some adult renewals will be every 6 months starting in 2027. See <a href={`${base}/medicaid-2027/`}>Keep my Medicaid in 2027</a>.</li>
+    <li><strong>If a child is over the WVCHIP income limit at renewal,</strong> the manual says the case closes and is sent to the federal Marketplace (HealthCare.gov) to check for other coverage.</li>
+  </ul>
+  <SourceLine sources={[src.ch1, src.ch22]} org={ORG} about="renewing Medicaid" />
+
+  <h2 id="help">Who can help</h2>
+  <p>You can name someone, in writing, as your authorized representative to deal with DoHS for you. The manual says a power of attorney or guardianship order counts. Free help with forms is below.</p>
+  {ok(nav) && <ResourceCard r={nav} />}
+  <p class="meta">We describe the state's steps. DoHS decides who gets Medicaid and WVCHIP. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .letters dt { font-weight: 700; margin-top: 8px; }
+  .letters dd { margin: 2px 0 0 1rem; }
+</style>
