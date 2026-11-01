@@ -12,7 +12,7 @@ import { resource, loadCalendarWithFeeds, upcoming, telHref } from '../lib/conte
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "Holiday season help", summary: "Toys, warm clothes, heat bills, holiday office closings, and ways to give in November and December" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const holidayWords = /thanksgiving|christmas|holiday|new year|veterans day|toy|angel tree|coat/i;
+const holidayWords = /thanksgiving|christmas|holiday|new year|veterans day|toy|angel tree|coat|library closed|parade|glow/i;
 const soon = upcoming(await loadCalendarWithFeeds()).filter((e) => holidayWords.test(e.title));
 const freeStore = resource('christian-help-free-store');
 const toyGive = resource('toys-for-tots-morgantown-donate');
@@ -30,6 +30,12 @@ const src = {
     { url: 'https://code.wvlegislature.gov/2-2-1/', checked, name: 'WV Code 2-2-1' },
   ],
   federal: [{ url: 'https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/', checked, name: 'U.S. Office of Personnel Management' }],
+  library: [{ url: 'https://events.mympls.org/event/16028720', checked: '2026-11-01', name: 'Morgantown Public Library System events calendar' }],
+  notYet: [
+    { url: 'https://www.busride.org/', checked: '2026-11-01', name: 'Mountain Line' },
+    { url: 'https://www.monchd.org/newsroom', checked: '2026-11-01', name: 'Monongalia County Health Department news' },
+    { url: 'https://www.morgantownwv.gov/CivicAlerts.aspx', checked: '2026-11-01', name: 'City of Morgantown news' },
+  ],
   food: [{ url: 'https://www.unitedwaympc.org/HFTD', checked, name: 'United Way of Monongalia and Preston Counties' }],
   chMeal: [{ url: 'https://motownchristianhelp.com/programs/', checked, name: 'Christian Help programs' }],
   srsh: [{ url: 'https://www.srsh.org/seasonal-programs', checked, name: "Scott's Run Settlement House seasonal programs" }],
@@ -45,6 +51,7 @@ const src = {
   <section aria-labelledby="soon">
     <h2 id="soon">Coming up</h2>
     {soon.length ? soon.map((e) => <EventCard e={e} />) : <p>Nothing holiday related on our calendar in the next two months yet.</p>}
+    <p>The downtown tree lighting and Small Business Saturday had no 2026 date on a page we could read on November 1. We add them when one is posted.</p>
     <p class="more"><a href={`${base}/calendar/`}>All dates and deadlines</a></p>
   </section>
 
@@ -98,8 +105,13 @@ const src = {
     <p>Federal offices, like Social Security and the post office, close on November 11, November 26, December 25 and January 1, 2027.</p>
     <SourceLine sources={src.federal} about="Federal holidays" />
 
+    <h3>Morgantown Public Library</h3>
+    <p>The library's calendar lists all branches closed on Thursday, November 26 and Friday, November 27 (Thanksgiving), Thursday, December 24 and Friday, December 25 (Christmas), and Thursday, December 31 and Friday, January 1, 2027 (New Year's). These closings also show on our <a href={`${base}/calendar/`}>calendar</a>.</p>
+    <SourceLine sources={src.library} about="Library holiday closings" />
+
     <h3>Not posted yet</h3>
-    <p>The library, the health department, Mountain Line buses and the City of Morgantown had not posted 2026 holiday hours when we checked on October 31. They usually post a notice shortly before each holiday. Library closings show on our <a href={`${base}/calendar/`}>calendar</a> once the library posts them.</p>
+    <p>The health department, Mountain Line buses and the City of Morgantown had not posted 2026 holiday hours or trash changes when we checked on November 1. They usually post a notice shortly before each holiday, so call first.</p>
+    <SourceLine sources={src.notYet} about="Holiday hours not posted yet" />
   </section>
 
   <section aria-labelledby="give">
