@@ -5,9 +5,9 @@ topics: [taxes, money]
 who_it_is_for: The IRS lists two choices. Guided tax software is "For $95,000 adjusted gross income (AGI) or less," and each software company sets its own rules, such as income, age and state. Free File Fillable Forms is "For any income level," but it does not file state returns.
 what_to_do: As of October 31, 2026, the IRS page says "IRS Free File has closed. Please check back January 2027." When it opens, start at IRS.gov/freefile. The IRS says "You won't get IRS Free File if you go directly to a partner's commercial website."
 contact:
-  url: https://www.irs.gov/filing/free-file-do-your-federal-taxes-for-free
+  url: https://www.irs.gov/e-file-do-your-taxes-for-free
   url_label: IRS Free File page
 cost: free
 sources:
-  - url: https://www.irs.gov/filing/free-file-do-your-federal-taxes-for-free
+  - url: https://www.irs.gov/e-file-do-your-taxes-for-free
     checked: 2026-10-31

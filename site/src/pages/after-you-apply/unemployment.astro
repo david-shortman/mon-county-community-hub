@@ -1,0 +1,65 @@
+---
+// After you apply: unemployment. From West Virginia Code chapter 21A,
+// article 7 (claims, deputy decisions, appeals, benefits pending appeal),
+// read 2026-10-31 on code.wvlegislature.gov. WorkForce WV's own pages refuse
+// automated reads, so how to file a claim and weekly claims are left to the
+// /unemployment/ page (#790), linked when it is on the site. High-stakes:
+// the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'this-month', topic: 'money', label: 'After you file for unemployment', summary: 'The deputy decision, the 8 day appeal deadline, hearings, and benefits while you appeal' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const hasFile = Object.keys(import.meta.glob('../unemployment.astro')).length > 0;
+const hasJobs = Object.keys(import.meta.glob('../find-a-job.astro')).length > 0;
+const code = { url: 'https://code.wvlegislature.gov/pdf/21A-7/', checked: '2026-10-31', name: 'West Virginia Code §21A-7, Unemployment Compensation: Claims and Appeals' };
+const strike = { url: 'https://code.wvlegislature.gov/pdf/21A-6-3/', checked: '2026-10-31', name: 'West Virginia Code §21A-6-3' };
+const legal = resource('legal-aid-wv-civil-legal-help');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you file for unemployment in Mon County, WV: the decision, appeals and deadlines" description="What happens after you file an unemployment claim in West Virginia: a deputy decides your claim, you have 8 calendar days to appeal, then a hearing before an appeal tribunal, the Board of Review, and court. Quoted from the state law.">
+  <h1>After you file for unemployment</h1>
+  <p class="lede">Read your decision letter as soon as it comes. If you disagree, you have only 8 calendar days to appeal. Here is each step, in the words of West Virginia law.</p>
+  <p>Unemployment in West Virginia is run by WorkForce West Virginia. {hasFile ? <>For how to file and how to file your weekly claims, see <a href={`${base}/unemployment/`}>File for unemployment</a>.</> : <>File and send weekly claims the way your claim papers from WorkForce West Virginia say.</>}</p>
+  <p class="note">This page quotes the state law. WorkForce West Virginia and the appeal judges decide each claim. It is information, not legal advice.</p>
+
+  <h2 id="deputy">1. A deputy looks at your claim</h2>
+  <ul>
+    <li><strong>Your employer is told.</strong> The law says your last employer gets written notice of your claim and has "four calendar days" from getting it to send information about why you are out of work.</li>
+    <li><strong>You can ask for an informal hearing.</strong> If anyone asks for a hearing in those four days, the law says it is held within five calendar days of the request.</li>
+    <li><strong>The decision.</strong> A deputy decides whether your claim is valid. If it is, the deputy decides the week benefits start, the amount, and the most weeks you can be paid. You and your employer are notified.</li>
+  </ul>
+  <SourceLine sources={[code]} about="the deputy's decision" />
+
+  <h2 id="appeal">2. If you disagree: appeal within 8 days</h2>
+  <ul>
+    <li><strong>The deadline.</strong> The law says you "may file an appeal from the decision of the deputy within eight calendar days after notice of the decision has been delivered or mailed." The deadline is printed on your notice. If you miss it, "The decision of the deputy shall be final."</li>
+    <li><strong>Your employer can appeal too.</strong> The law gives your last employer the same 8 days.</li>
+    <li><strong>The hearing.</strong> You are "entitled to a fair hearing" before an appeal tribunal (a hearing judge). The law says you get notice "ten days in advance of the date set for hearing."</li>
+    <li><strong>The ruling.</strong> The appeal tribunal "shall make a decision within twenty-one days after the date of the hearing."</li>
+  </ul>
+  <SourceLine sources={[code]} about="appealing a deputy decision" />
+
+  <h2 id="board">3. The next steps up</h2>
+  <ul>
+    <li><strong>Board of Review.</strong> If you disagree with the hearing judge, you can appeal to the Board of Review "within eight calendar days after notice of the decision has been delivered or mailed."</li>
+    <li><strong>Court.</strong> The Board's decision is final unless you appeal to the Intermediate Court of Appeals "within 30 days after mailing of notification of the board's decision." For claims about a strike or other labor dispute, the law sets 20 days.</li>
+  </ul>
+  <SourceLine sources={[code, strike]} about="Board of Review and court appeals" />
+
+  <h2 id="paid">Getting paid while an appeal goes on</h2>
+  <ul>
+    <li>The law says benefits found payable at any step "shall be immediately paid" until a later decision says they are not.</li>
+    <li>If an appeal finds you should have been paid after all, payments are started again.</li>
+    <li>If the final decision says you should not have been paid, the money is counted as an overpayment. The state can take it out of future benefits until it is repaid.</li>
+  </ul>
+  <SourceLine sources={[code]} about="benefits during an appeal" />
+
+  <h2 id="help">Who can help</h2>
+  <p>Legal Aid of West Virginia lists unemployment among the kinds of cases it takes. With an 8 day deadline, call rather than apply online if your deadline is close.</p>
+  {ok(legal) && <ResourceCard r={legal} />}
+  {hasJobs && <p>Looking for work in the meantime? See <a href={`${base}/find-a-job/`}>Find a job</a>.</p>}
+  <p class="meta">We describe the state's law. WorkForce West Virginia decides each claim. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

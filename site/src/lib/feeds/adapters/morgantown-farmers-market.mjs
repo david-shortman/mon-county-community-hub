@@ -1,6 +1,12 @@
 // Morgantown Farmers Market dates, from the market's public Google Calendar
 // (#761). Human page: https://morgantownfarmersmarket.org/
 //
+// Turned off on 2026-11-01 (#529): Google Calendar's robots.txt asks robots
+// to stay out of everything but its home page. The market's own site allows
+// robots but lists its seasons in plain text, not as a feed. The site keeps
+// the saved dates until they pass, and a person reads markets.html on the
+// weekly sale dates checklist. Policy: docs/operations/automated-reads.md.
+//
 // The calendar also holds old social media reminders from 2014; those are
 // long past, so the date window drops them. Markets that repeat show only the
 // first date the feed gives, with a note; we never expand repeat rules.
@@ -16,6 +22,7 @@ export default {
   page_url: `${SITE}/`,
   feed_url: 'https://calendar.google.com/calendar/ical/morgantownfarmersmarket%40gmail.com/public/basic.ics',
   format: 'text',
+  off: { since: '2026-11-01', reason: "calendar.google.com/robots.txt asks robots not to read calendar feeds; a person reads it on a weekly checklist" },
 
   parse(text) {
     const out = [];

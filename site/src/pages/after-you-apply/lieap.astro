@@ -1,0 +1,69 @@
+---
+// After you apply: LIEAP (heating bill help). From the WV DoHS LIEAP fact
+// sheet FY 2027 and the Income Maintenance Manual (IMM, effective October 5,
+// 2026) chapter 21, read 2026-10-31. Dates for this season live in the
+// lieap-heating-help record, so this page does not repeat them. Note: IMM
+// 21.6.9 gives LIEAP a 60 day hearing deadline; the general form DFA-FH-1
+// says 90 days. We quote the LIEAP rule and tell people to use the shorter
+// one (flagged for David in the PR). High-stakes benefits page.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'this-month', topic: 'money', label: 'After you apply for LIEAP', summary: 'How long heating help takes, how it is paid, and how to ask for a fair hearing' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const ORG = 'wv-department-of-human-services';
+const src = {
+  facts: { url: 'https://bfa.wv.gov/media/39943/download?inline', checked, name: 'WV DoHS LIEAP fact sheet, FY 2027' },
+  ch21: { url: 'https://bfa.wv.gov/media/40005/download?inline', checked, name: 'WV DoHS Income Maintenance Manual, Chapter 21, LIEAP' },
+};
+const lieap = resource('lieap-heating-help');
+const office = resource('monongalia-county-dohs-office');
+const legal = resource('legal-aid-wv-civil-legal-help');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for LIEAP heating help in Mon County: timelines, payments and appeals" description="What happens after you apply for LIEAP, West Virginia's help with winter heating bills, in Monongalia County: 15 days to send papers, a decision within 30 days, how the payment is made, Emergency LIEAP time limits, and how to ask for a fair hearing. Quoted from the state's own fact sheet and manual.">
+  <h1>After you apply for LIEAP heating help</h1>
+  <p class="lede">If DoHS asks for more papers, send them within 15 days, or your application is denied. A decision comes within 30 days. Here is the rest, in the state's own words.</p>
+  <p>LIEAP is West Virginia's help with winter heating bills, run by the Department of Human Services (DoHS). For this season's dates and how to apply, see the card below and <a href={`${base}/file-today/#lieap`}>File today</a>.</p>
+  <p class="note">This page quotes the state's fact sheet and staff manual. DoHS decides each case. It is information, not legal advice.</p>
+  {ok(lieap) && <ResourceCard r={lieap} />}
+
+  <h2 id="regular">Regular LIEAP: what happens next</h2>
+  <ul>
+    <li><strong>If DoHS needs more,</strong> the fact sheet says you will be contacted and "allowed 15 calendar days for Regular LIEAP" to get and return it, from the date of the request. The manual says workers "need to deny an application when the verification is not received by the due date."</li>
+    <li><strong>The decision.</strong> The fact sheet says "All applications will be processed within 30 days after receipt" by DoHS or an agency that takes LIEAP applications, "or after the date the program opens, whichever is later." You get a letter with the decision.</li>
+    <li><strong>How it is paid.</strong> The fact sheet says "Approved payments will be made directly to a vendor where appropriate." The manual says the payment goes to your heating company when it is a regulated utility that has an agreement with DoHS, or when the bill is in the name of someone outside your home. It comes to you directly in some cases, such as when you heat with propane, oil, coal, kerosene or wood and there is no emergency, or when heat is paid to your landlord.</li>
+    <li><strong>Do not mail your application to your heating company.</strong> The fact sheet says this "will delay the application process."</li>
+  </ul>
+  <SourceLine sources={[src.facts, src.ch21]} org={ORG} about="Regular LIEAP steps" />
+
+  <h2 id="emergency">Emergency LIEAP</h2>
+  <p>The fact sheet says Emergency LIEAP opens after Regular LIEAP closes and runs "until remaining funds are exhausted." You apply in person at a DoHS office when you get a shutoff notice from your heating company or run out, or nearly run out, of bulk fuel.</p>
+  <ul>
+    <li><strong>5 days for papers.</strong> The fact sheet says any added information "must be provided within five (5) calendar days from the date of application." The manual says "five working days." Plan on the shorter one. The manual says you must also go back to the office to finish and sign the voucher.</li>
+    <li><strong>48 hours.</strong> The manual says DoHS "must ensure assistance is offered to resolve the home energy emergency to all eligible clients no later than 48 hours from the time of application completion."</li>
+    <li><strong>18 hours if life is at risk.</strong> For a life-threatening emergency, help must be offered "no later than 18 hours from the time of application."</li>
+    <li><strong>On a payment plan?</strong> The manual says if you have a payment agreement with your utility that is in good standing, you are not counted as having an emergency.</li>
+  </ul>
+  <SourceLine sources={[src.facts, src.ch21]} org={ORG} about="Emergency LIEAP" />
+  {ok(office) && <ResourceCard r={office} />}
+
+  <h2 id="hearing">If you are denied</h2>
+  <ul>
+    <li><strong>Apply again, if it is still open.</strong> The fact sheet says people who are denied "may reapply, providing the program is still open, or may request a fair hearing." Once the program closes, applications are no longer accepted.</li>
+    <li><strong>When you can ask for a hearing.</strong> The manual says you can ask if your application is denied, you think the payment amount is wrong, it took too long, or you think you were treated unfairly because of race, color, national origin, sex, age, disability, religion or political beliefs.</li>
+    <li><strong>Ask within 60 days.</strong> The LIEAP chapter says "The client must request a hearing within 60 days of receipt of the notification." The state's general hearing form says 90 days, so ask as soon as you can and within 60 days to be safe.</li>
+    <li><strong>How long the hearing takes.</strong> The manual says DoHS "has 30 days after the hearing request is received to schedule the hearing, arrive at a decision, and initiate the appropriate action."</li>
+    <li><strong>How to ask.</strong> Your decision letter should come with the state's hearing request form (DFA-FH-1). Return it to your local DoHS office, or call DoHS at <a href="tel:18006428589">1-800-642-8589</a>.</li>
+  </ul>
+  <SourceLine sources={[src.ch21, src.facts]} org={ORG} about="LIEAP fair hearings" />
+  {ok(legal) && <ResourceCard r={legal} />}
+
+  <h2 id="help">Who can help</h2>
+  <p>The fact sheet says you can get applications and answers at local DoHS offices, Community Action agencies and senior centers, or by calling <a href="tel:18006428589">1-800-642-8589</a>. For other help with heat and power bills, see <a href={`${base}/utility-bills/`}>Help paying a utility bill</a>.</p>
+  <SourceLine sources={[src.facts]} org={ORG} about="LIEAP help" />
+  <p class="meta">We describe the state's steps. DoHS decides who gets LIEAP. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

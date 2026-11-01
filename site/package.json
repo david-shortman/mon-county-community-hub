@@ -22,6 +22,7 @@
     "secondhand-due": "node scripts/secondhand-due.mjs",
     "checklists": "node scripts/checklists.mjs --dry-run",
     "test": "node --test test/*.test.mjs",
+    "search-test": "node scripts/search-test.mjs",
     "e2e": "node --test e2e/*.test.mjs",
     "e2e:smoke": "E2E_SMOKE=1 node --test e2e/*.test.mjs",
     "screenshots": "node e2e/screenshots.mjs"
