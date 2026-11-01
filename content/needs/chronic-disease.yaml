@@ -2,11 +2,11 @@ title: Obesity, diabetes and heart health
 slug: chronic-disease
 summary: About 1 in 3 adults in Mon County has obesity and about 1 in 3 has high blood pressure. Obesity was the second top health problem in a 2025 hospital survey, and both local hospitals list chronic disease as a priority.
 evidence:
-  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-31
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
     shows: The share of adults with obesity.
-    figure: "36.7% (West Virginia 41.5%, US 33.5%)"
-    publisher: County Health Rankings (2025 release)
+    figure: "34.2% (West Virginia 41.3%, US 38.2%)"
+    publisher: County Health Rankings (March 2026 supplemental release)
   - url: https://data.cdc.gov/d/swc5-untb
     checked: 2026-10-31
     shows: CDC estimates the share of adults with high blood pressure and with diagnosed diabetes. These are model-based estimates, not counts.
@@ -20,10 +20,10 @@ evidence:
     data_date: "2025"
     publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
 affected:
-  estimate: "36.7% of adults"
+  estimate: "34.2% of adults"
   description: Adults in Monongalia County with obesity, from County Health Rankings.
-  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-  checked: 2026-10-31
+  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+  checked: 2026-11-01
 severity: medium
 severity_why: These conditions raise the risk of heart disease and stroke over many years, and care can manage them.
 trend: unknown

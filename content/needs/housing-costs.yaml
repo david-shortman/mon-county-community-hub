@@ -2,11 +2,11 @@ title: Affording a place to live
 slug: housing-costs
 summary: More than 1 in 4 households in Mon County spend 30% or more of their income on housing, and about 1 in 7 spend half or more. Housing and shelter is the biggest reason people here call West Virginia 211.
 evidence:
-  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-31
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
     shows: The share of households that spend half or more of their income on housing.
-    figure: "15.7% of households, 6,702 of 42,652 (West Virginia 10.2%, US 14.7%)"
-    publisher: County Health Rankings (2025 release)
+    figure: "15% of households, 6,386 of 42,653 (West Virginia 10.4%, US 15.1%)"
+    publisher: County Health Rankings (March 2026 supplemental release)
   - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
     checked: 2026-10-31
     shows: The share of households whose housing costs are 30% or more of their income, from Census survey data (page 31 of the PDF). Mon County's share is the highest of the six counties in the report.
@@ -31,10 +31,10 @@ evidence:
     data_date: "2023"
     publisher: CDC PLACES (2025 release)
 affected:
-  count: 6702
+  count: 6386
   description: Households in Monongalia County that spend half or more of their income on housing. Many college students rent here, which raises this number.
-  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-  checked: 2026-10-31
+  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+  checked: 2026-11-01
 severity: high
 severity_why: Paying half of income for housing leaves little for food, medicine and bills, and can lead to eviction.
 trend: unknown
