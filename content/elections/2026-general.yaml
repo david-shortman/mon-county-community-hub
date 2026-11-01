@@ -1,0 +1,22 @@
+# One election (#1365). /vote/ shows the "before" part through Election Day,
+# then the results part until results_until, by the Morgantown date when the
+# site is built. Fields are checked in site/src/lib/elections.mjs; a missing
+# one fails the build. Facts and links only from official election pages.
+slug: 2026-general
+name: general election
+election_day: 2026-11-03
+polls: 6:30 a.m. to 7:30 p.m.
+register_by: 2026-10-13
+early_voting:
+  from: 2026-10-21
+  to: 2026-10-31
+  resource: mon-county-early-voting-2026
+before: [mon-county-polling-places-2026, wv-voter-id, mon-county-absentee-ballot-2026]
+canvass: 2026-11-09
+results_url: https://results.enr.clarityelections.com/WV/127496/web.345435/#/summary
+results_until: 2026-11-30
+sources:
+  - url: https://monongaliacountyclerk.com/index.php/elections/17-current-election/124-2026-general-election-information
+    checked: 2026-10-31
+  - url: https://sos.wv.gov/govotewv
+    checked: 2026-11-01

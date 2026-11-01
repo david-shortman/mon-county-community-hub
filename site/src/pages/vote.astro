@@ -6,31 +6,38 @@
 // once the state posts it.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
 import PlaceCard from '../components/PlaceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
+import { currentElection, longDate } from '../lib/elections.mjs';
 export const page = { door: "living-here", topic: "voting", label: "Register to vote and find your polling place", summary: "Register or update online or at the County Clerk, check your registration, find your polling place, city elections, and working at the polls" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-// The 2026 general election (#970). Shown through Election Day, by the date in
-// Morgantown when the site was built; the daily build hides it after that.
-const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
-const electionWeek = today <= '2026-11-03';
-const earlyVotingOpen = today <= '2026-10-31';
+// The election that is coming up or just happened (#970, #1365), from
+// content/elections/. Before Election Day it shows what to know to vote; after,
+// the official results link and the canvass date. The daily build moves it.
+const election = currentElection();
 ---
 <Base title="Register to vote and find your polling place in Mon County" description="Register to vote or update your registration in Morgantown and Monongalia County, WV, check your registration, and find your polling place.">
   <h1>Register to vote and find your polling place</h1>
   <p class="lede">Use these official links to register to vote, check that you are registered and find where you vote. They come from the West Virginia Secretary of State, the Mon County Clerk and the City of Morgantown.</p>
 
-  {electionWeek && (
-    <section id="election-2026" aria-labelledby="election-2026-h">
-      <h2 id="election-2026-h">Election Day is Tuesday, November 3</h2>
-      <p>Polls are open from 6:30 a.m. to 7:30 p.m. Bring a valid photo ID. The deadline to register for this election has passed, so check that you are registered and find your polling place below.</p>
-      {earlyVotingOpen && r('mon-county-early-voting-2026') && <ResourceCard r={r('mon-county-early-voting-2026')} />}
-      {r('mon-county-polling-places-2026') && <ResourceCard r={r('mon-county-polling-places-2026')} />}
-      {r('wv-voter-id') && <ResourceCard r={r('wv-voter-id')} />}
-      {r('mon-county-absentee-ballot-2026') && <ResourceCard r={r('mon-county-absentee-ballot-2026')} />}
+  {election?.phase === 'before' && (
+    <section id="election" aria-labelledby="election-h">
+      <h2 id="election-h">Election Day is {longDate(election.election_day)}</h2>
+      <p>Polls are open from {election.polls}. Bring a valid photo ID.{election.registrationClosed && ' The deadline to register for this election has passed, so check that you are registered and find your polling place below.'}</p>
+      {election.earlyVotingOpen && r(election.early_voting.resource) && <ResourceCard r={r(election.early_voting.resource)} />}
+      {election.before.map((slug) => r(slug) && <ResourceCard r={r(slug)} />)}
+    </section>
+  )}
+  {election?.phase === 'after' && (
+    <section id="election" aria-labelledby="election-h">
+      <h2 id="election-h">Results of the {election.name} on {longDate(election.election_day)}</h2>
+      <p>The West Virginia Secretary of State posts the results on its official results page. The county canvass, when the county's official count starts, is on {longDate(election.canvass)}.</p>
+      <div class="actions"><a class="btn" href={election.results_url}>Official election results</a></div>
+      <SourceLine sources={election.sources} about={`the ${election.name}`} />
     </section>
   )}
 
