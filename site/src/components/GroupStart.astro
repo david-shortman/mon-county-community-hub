@@ -42,7 +42,7 @@ const live = sections
           {l.r && (
             <div class="gs-record">
               {l.r.contact?.phone
-                ? <p><a class="gs-call" href={telHref(l.r.contact.phone)}><span>Call</span><span class="nowrap">{l.r.contact.phone}</span><span class="sr-only">, {l.r.title}</span></a>{" "}{l.r.title}</p>
+                ? <p><a class="gs-call" href={telHref(l.r.contact.phone)}><span>Call</span><span>{l.r.contact.phone}</span><span class="sr-only">, {l.r.title}</span></a>{" "}{l.r.title}</p>
                 : l.r.contact?.url && <p><a class="gs-call" href={l.r.contact.url}>{websiteLabel(l.r)}<span class="sr-only">: {l.r.title}</span></a>{" "}{l.r.title}</p>}
               <SourceLine sources={l.r.sources} org={l.r.org} about={l.r.title} />
             </div>
