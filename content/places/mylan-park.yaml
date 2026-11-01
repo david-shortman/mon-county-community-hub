@@ -26,17 +26,17 @@ rentals:
   - space: Multipurpose Room
     seats: 120
     outdoor: false
-    book: Price not published. Use Book Now on the rooms page, or call 304-973-9733.
+    book: Price not published. Call 304-973-9733, or use the form on the Contact Us page.
     source: https://mylanpark.org/sports-complex-rooms/
   - space: First United Lounge
     seats: 60
     outdoor: false
-    book: Price not published. Use Book Now on the rooms page, or call 304-973-9733.
+    book: Price not published. Call 304-973-9733, or use the form on the Contact Us page.
     source: https://mylanpark.org/sports-complex-rooms/
   - space: Conference Room
     seats: 20
     outdoor: false
-    book: Price not published. Use Book Now on the rooms page, or call 304-973-9733.
+    book: Price not published. Call 304-973-9733, or use the form on the Contact Us page.
     source: https://mylanpark.org/sports-complex-rooms/
 contact:
   phone: "304-973-9733"
@@ -47,12 +47,12 @@ status: active
 last_activity_seen: 2026-10-30
 sources:
   - url: https://mylanpark.org/event-complex/
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://mylanpark.org/contact-us/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://mylanpark.org/memberships/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://mylanpark.org/sports-complex-rooms/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://mylanpark.org/facility-hours/sportscomplex/
-    checked: 2026-10-30
+    checked: 2026-11-01
