@@ -26,7 +26,7 @@ const choices = [
 ---
 <Base crisis title="Where to stay tonight in Morgantown, WV" description="A bed tonight, a warm place, food tonight, or safety from someone, in Morgantown and Monongalia County: emergency shelter, a 24-hour hotline, and 211.">
   <h1>Where to stay tonight</h1>
-  <p class="lede">All of these are free. Tap what you need.</p>
+  <p class="lede">Tap what you need.</p>
 
   <nav aria-label="What do you need?">
     <ul class="choices4">
@@ -44,14 +44,14 @@ const choices = [
     <h2 id="warm-h">A warm place right now</h2>
     <p>We have not found a sourced daytime warming place to list yet. <a href="#bed">Grace Shelter</a> is for adults. {grace.hours}. Call to confirm. For other places to get warm, call <a href={telHref(r211.contact.phone)}>211</a>.</p>
     <div class="note">
-      <p><strong>Winter warming shelter:</strong> no opening date or hours have been announced for this winter yet. In August, local news reported that Catholic Charities West Virginia plans to run it on the first floor of Hazel's House of Hope on Scott Avenue in Morgantown. The report said the money would come from the city and from a funding request to the county. Call 211 for the latest. <span class="meta">Last checked October 29, 2026. <a href="https://wajr.com/2026/08/24/catholic-charities-west-virginia-makes-request-to-mon-county-commission-for-warming-shelter-funding/">Source: wajr.com</a></span></p>
+      <p><strong>Winter warming shelter:</strong> no opening date or hours have been announced for this winter yet. In August, local news reported that Catholic Charities West Virginia plans to run it on the first floor of Hazel's House of Hope on Scott Avenue in Morgantown. The report said the money would come from the city and from a funding request to the county. Call 211 for the latest. <span class="meta">Last checked October 31, 2026. <a href="https://wajr.com/2026/08/24/catholic-charities-west-virginia-makes-request-to-mon-county-commission-for-warming-shelter-funding/">Source: wajr.com</a></span></p>
     </div>
-    <p>Is the warming shelter open tonight? See <a href={`${base}/tonight/`}>tonight's status</a>, checked each day in winter.</p>
+    <p>Is the warming shelter open tonight? See <a href={`${base}/tonight/`}>tonight's status</a>. It shows when we last checked.</p>
   </section>
 
   <section class="need" id="food" aria-labelledby="food-h">
     <h2 id="food-h">Food tonight</h2>
-    <p>We have not found a sourced place for a free meal tonight yet. Call or text <a href={telHref(r211.contact.phone)}>211</a> and ask what is open now. For food today or this week, see <a href={`${base}/help/food/today/other/`}>food today or this week</a>.</p>
+    <p>For free meals and food this week, see <a href={`${base}/help/food/today/other/`}>food today or this week</a>. Or call or text <a href={telHref(r211.contact.phone)}>211</a> and ask what is open now.</p>
   </section>
 
   <section class="need" id="safe" aria-labelledby="safe-h">
@@ -63,12 +63,11 @@ const choices = [
 
   <section class="note" aria-labelledby="unsure-h">
     <h2 id="unsure-h">Not sure where to go?</h2>
-    <p>Call <a href={telHref(r211.contact.phone)}>211</a>, text your ZIP code to <a href={`sms:${r211.contact.text.replace(/\D/g, '')}`}>{r211.contact.text}</a>, or chat at <a href={r211.contact.url}>wv211.org</a>. It is free and open {r211.hours.toLowerCase().replace(/^open /, '')}.</p>
+    <p>Call <a href={telHref(r211.contact.phone)}>211</a>, text your ZIP code to <a href={`sms:${r211.contact.text.replace(/\D/g, '')}`}>{r211.contact.text}</a>, or chat at <a href={r211.contact.url}>wv211.org</a>. It is open {r211.hours.toLowerCase().replace(/^open /, '')}. If your phone can't reach 211 (some Wi-Fi calling phones can't), call <a href="tel:18338489905">1-833-848-9905</a>.</p>
   </section>
 
   <HelpNowSources />
 
-  <p class="meta" id="leave-note"><strong>About "Quick exit":</strong> it opens a weather site, and on a keyboard you can also press Shift three times. It does not erase your history. If someone may check your phone, use a private window or clear this page from your history. The National Domestic Violence Hotline has <a href="https://www.thehotline.org/plan-for-safety/internet-safety/">internet safety tips</a>.</p>
   <p class="meta">Hours and bed counts can change. Call before you go. We describe these services and do not decide who can stay. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
 

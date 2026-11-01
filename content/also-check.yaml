@@ -15,6 +15,7 @@
 /medicaid-waivers/: [/disability-and-aging/, /turning-65/]
 /moving-here/: [/recycling/, /calendar/month/]
 /recycling/: [/moving-here/, /calendar/month/]
+/renting/: [/for/renters/, /utility-bills/, /legal-help/]
 /snap/: [/help/food/, /utility-bills/, /flu-shots/, /staying-well/]
 /staying-well/: [/flu-shots/, /dental-and-prescriptions/, /turning-65/, /snap/]
 /turning-65/: [/disability-and-aging/, /medicaid-waivers/, /flu-shots/, /dental-and-prescriptions/]
