@@ -7,6 +7,7 @@
 // The Start's local agency, Starting Points playgroup days, Scott's Run hours.
 // Not yet here until confirmed: 4-H (#416), Early Head Start (#417),
 // next year's Pre-K dates and summer meals (#418).
+// By age list at the top (#766): links only, to sections here and pages by age.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
@@ -20,11 +21,24 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h1>Help for families with young kids in Mon County</h1>
   <p class="lede">Worried about how your baby or toddler is growing? Call WV Birth to Three at <a href="tel:18663214728">1-866-321-4728</a>. Parents can call on their own, and there is no charge for the services in your child's plan.</p>
 
-  <h2>Under 3: worried about how your child is growing</h2>
+  <nav class="on-page no-print" aria-label="By your child's age">
+    <p>By your child's age:</p>
+    <ul>
+      <li><a href={`${base}/pregnant-or-new-baby/`}>Pregnant or a new baby</a>, and <a href="#home-visits">help at home</a></li>
+      <li><a href="#under-3">Under 3: how your child is growing</a></li>
+      <li><a href="#pre-k">Ages 3 and 4: Pre-K and Head Start</a></li>
+      <li><a href="#child-care">Child care, any age</a></li>
+      <li><a href={`${base}/school-shots/`}>Starting school: shots and forms</a></li>
+      <li><a href={`${base}/school-age/`}>School-age kids</a></li>
+      <li><a href={`${base}/teens/`}>Teens</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="under-3">Under 3: worried about how your child is growing</h2>
   <p>Birth to Three helps children under 3 who have a delay in how they move, talk, learn or get along, or who may be at risk of one. You do not need a doctor to send you.</p>
   {r('wv-birth-to-three-referral') && <ResourceCard r={r('wv-birth-to-three-referral')} showCost />}
 
-  <h2>Ages 3 and 4: Pre-K and Head Start</h2>
+  <h2 id="pre-k">Ages 3 and 4: Pre-K and Head Start</h2>
   <p>The county schools run both, with one application. The dates for the 2027-28 school year are not posted yet. For 2026-27, applications sent from February 4 to April 16 all had an equal chance at a spot.</p>
   {r('mcs-prek-and-head-start') && <ResourceCard r={r('mcs-prek-and-head-start')} showCost />}
 
