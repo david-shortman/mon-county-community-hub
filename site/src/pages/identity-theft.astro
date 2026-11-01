@@ -1,0 +1,103 @@
+---
+// Identity theft: what to do (#222, the Safety life area). Every step comes
+// from USA.gov's identity theft, credit report and credit freeze pages and the
+// WV Attorney General's identity theft page, all read 2026-11-01. The FTC's
+// consumer site refused our reads, so it is linked only through IdentityTheft.gov
+// as USA.gov names it. Credit freeze cost: USA.gov says it is free; the AG page
+// says fees may apply, so the page gives USA.gov's rule and the AG's number,
+// and the conflict is logged in docs/discoveries/.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "safety", label: "Identity theft: what to do", summary: "Report it, freeze your credit, call your bank, check your credit reports, and get help from the WV Attorney General" };
+const checked = '2026-11-01';
+const usaIt = [{ url: 'https://www.usa.gov/identity-theft', name: 'USAGov', checked }];
+const usaFreeze = [{ url: 'https://www.usa.gov/credit-freeze', name: 'USAGov', checked }];
+const usaReports = [{ url: 'https://www.usa.gov/credit-reports', name: 'USAGov', checked }];
+const ag = [{ url: 'https://ago.wv.gov/consumer-protection/identity-theft-protection-prevention', name: 'WV Attorney General', checked }];
+---
+<Base title="Identity theft: what to do in West Virginia" description="If someone used your name, Social Security number or cards: report it at IdentityTheft.gov, place a fraud alert or credit freeze with Equifax, Experian and TransUnion, call your bank, get your free credit reports, and call the WV Attorney General's Consumer Protection Division.">
+  <h1>Identity theft: what to do</h1>
+  <p class="lede">If someone used your name, Social Security number, or card or account numbers, you can start tonight: report it online at IdentityTheft.gov and get a list of steps to recover. Or call the Federal Trade Commission at <a href={telHref('1-877-438-4338')}>1-877-438-4338</a>. Lost your wallet but see no problems yet? The state says to act anyway. Tap a step to open it.</p>
+
+  <h2 id="signs">Warning signs</h2>
+  <p>USA.gov lists these signs:</p>
+  <ul>
+    <li>Bills for things you did not buy</li>
+    <li>Debt collectors calling about accounts you did not open</li>
+    <li>Accounts you did not open on your credit report</li>
+    <li>A loan application turned down</li>
+    <li>Mail that stops coming or goes missing</li>
+  </ul>
+  <SourceLine sources={usaIt} about="warning signs of identity theft" />
+
+  <Route label="Steps after identity theft">
+  <Milepost n={1} title="Report it to the FTC" when="Today" id="report" open>
+  <p>Report it at IdentityTheft.gov, run by the Federal Trade Commission (FTC), or call <a href={telHref('1-877-438-4338')}>1-877-438-4338</a>. USA.gov says to use IdentityTheft.gov's list of steps to help you recover.</p>
+  <SourceLine sources={usaIt} about="reporting identity theft" />
+  <div class="actions">
+    <a class="btn" href="https://www.identitytheft.gov/#/Steps"><Icon name="open" /><span>IdentityTheft.gov steps</span></a>
+    <a class="btn" href={telHref('1-877-438-4338')}><Icon name="phone" /><span>Call the FTC</span></a>
+  </div>
+  </Milepost>
+
+  <Milepost n={2} title="Put a fraud alert or credit freeze on your credit" when="Today" id="freeze">
+  <p>Contact the three credit reporting companies. Ask for a fraud alert and a credit freeze. The WV Attorney General lists these numbers:</p>
+  <ul>
+    <li>Equifax: <a href={telHref('1-800-525-6285')}>1-800-525-6285</a></li>
+    <li>Experian: <a href={telHref('1-888-397-3742')}>1-888-397-3742</a></li>
+    <li>TransUnion: <a href={telHref('1-800-680-7289')}>1-800-680-7289</a></li>
+  </ul>
+  <SourceLine sources={ag} about="the credit reporting companies' phone numbers" />
+  <p><strong>A credit freeze</strong> stops lenders from seeing your credit report, so no one can open a new account in your name. USA.gov says you can freeze and unfreeze for free with each company. A freeze asked for online or by phone must start within one business day (three by mail). To apply for credit later, you lift the freeze. A lift asked for online or by phone must happen within one hour.</p>
+  <SourceLine sources={usaFreeze} about="credit freezes" />
+  <p><strong>An extended fraud alert</strong> lasts seven years and is free for identity theft victims. To get one, you need an Identity Theft Report filed with law enforcement. It also gives you two free credit reports from each company within 12 months, the Attorney General says.</p>
+  <SourceLine sources={ag} about="extended fraud alerts" />
+  </Milepost>
+
+  <Milepost n={3} title="Call your bank and card companies" when="Today" id="bank">
+  <p>Call the fraud department at your bank, your credit card companies and other places where you have accounts. Use the card company's 24 hour fraud number, then follow up in writing.</p>
+  <p>Reporting fast limits what you may owe, the Attorney General says:</p>
+  <ul>
+    <li><strong>Credit cards:</strong> at most $50 for charges you did not make. Nothing, if you report a lost card before it is used, or if only the number was stolen.</li>
+    <li><strong>Debit and ATM cards:</strong> nothing if you report before it is used; up to $50 if you report within 2 business days of finding out; up to $500 within 2 to 60 days; possibly unlimited after 60 days from your statement.</li>
+  </ul>
+  <SourceLine sources={[...usaIt, ...ag]} about="calling your bank and what you may owe" />
+  </Milepost>
+
+  <Milepost n={4} title="Check your credit reports" when="This week" id="reports">
+  <p>You can get a free credit report each year from Equifax, Experian and TransUnion. USA.gov says AnnualCreditReport.com is the only website the federal government authorizes for these free reports. Or call <a href={telHref('1-877-322-8228')}>1-877-322-8228</a> (TTY 1-800-821-7232). Look for accounts you did not open.</p>
+  <SourceLine sources={usaReports} about="free credit reports" />
+  <div class="actions">
+    <a class="btn" href="https://www.annualcreditreport.com/"><Icon name="open" /><span>AnnualCreditReport.com</span></a>
+  </div>
+  </Milepost>
+
+  <Milepost n={5} title="If someone filed taxes in your name" id="taxes">
+  <p>If you think someone used your information to file a tax return and the IRS has not contacted you about it, USA.gov points to IRS Form 14039, the Identity Theft Affidavit.</p>
+  <SourceLine sources={usaIt} about="tax identity theft" />
+  <div class="actions">
+    <a class="btn" href="https://www.irs.gov/newsroom/when-to-file-an-identity-theft-affidavit"><Icon name="open" /><span>IRS: when to file Form 14039</span></a>
+  </div>
+  </Milepost>
+
+  <Milepost n={6} title="Get help from the WV Attorney General" id="help">
+  <p>The Attorney General's Consumer Protection Division takes questions from identity theft victims. Call <a href={telHref('1-800-368-8808')}>1-800-368-8808</a>. If a business treated you unfairly, you can also file a consumer complaint online.</p>
+  <SourceLine sources={ag} org="wv-attorney-general" about="the Consumer Protection Division" />
+  <div class="actions">
+    <a class="btn" href={telHref('1-800-368-8808')}><Icon name="phone" /><span>Call Consumer Protection</span></a>
+    <a class="btn" href="https://ago.wv.gov/consumer-protection/file-complaint-consumer-protection-division"><Icon name="open" /><span>File a complaint</span></a>
+  </div>
+  </Milepost>
+  </Route>
+
+  <h2 id="protect">Protect yourself</h2>
+  <p>USA.gov suggests: don't answer calls, texts or messages from people you don't know. Don't share your bank account number, Social Security number or birth date. Pick up your mail every day, and ask the post office to hold it when you are away. Keep your Social Security card in a safe place, not in your wallet.</p>
+  <SourceLine sources={usaIt} about="protecting yourself" />
+
+  <p class="meta">Sources checked November 1, 2026. We describe the official steps; this is not legal advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
