@@ -33,6 +33,7 @@ const src = {
   redet: cfr('418.3125', 'What are redeterminations?'),
   report: cfr('418.3120', 'What happens if your circumstances change after we determine you are eligible for a subsidy?'),
   drug: { url: 'https://www.medicare.gov/basics/costs/help/drug-costs', checked, name: 'Medicare.gov, Help with drug costs' },
+  phone: { url: 'https://www.usa.gov/social-security-report-a-death', checked: '2026-10-31', name: 'USA.gov, Report a death to Social Security (lists the SSA phone number)' },
   mspPage: { url: 'https://www.medicare.gov/basics/costs/help/medicare-savings-programs', checked, name: 'Medicare.gov, Medicare Savings Programs' },
 };
 const office = resource('monongalia-county-dohs-office');
@@ -83,13 +84,13 @@ const ok = (r) => r && !r.hidden;
     <li><strong>Advance notice.</strong> The manual says a notice of a cut or closure is mailed "at least 13 days prior to the first day of the month in which the benefits are affected."</li>
     <li><strong>The deadline is 90 days.</strong> The state's hearing form says "you may ask for a Fair Hearing or Pre-Hearing Conference within 90 days of the effective date of the actions."</li>
     <li><strong>To keep your help while you wait,</strong> ask before the closing date on your letter. The form says then "your benefits will not be reduced or stopped, pending a final decision." If the state wins, the manual says what you got while waiting may have to be paid back.</li>
-    <li><strong>How to ask.</strong> Use the hearing request form (DFA-FH-1) that comes with your letter, or ask out loud. The form says you can ask "either orally or in writing," and the hearing can be by phone. DoHS Client Services: <a href="tel:18006428589">1-800-642-8589</a>.</li>
+    <li><strong>How to ask.</strong> Use the hearing request form (DFA-FH-1) that comes with your letter, or ask out loud. The form says you can ask "either orally or in writing," and the hearing can be by phone. The form lists DoHS Client Services at <a href="tel:18006428589">1-800-642-8589</a>.</li>
   </ul>
   <SourceLine sources={[src.fh1, src.ch9]} org={ORG} about="Medicare Savings Program fair hearings" />
 
   <h2 id="msp-renew">Renewing and reporting changes</h2>
   <ul>
-    <li><strong>Once a year.</strong> "QMB, SLIMB and QI-1 cases are redetermined annually, scheduled in the 12th month of eligibility."</li>
+    <li><strong>Once a year.</strong> DoHS reviews your case again each year. The manual says "QMB, SLIMB and QI-1 cases are redetermined annually, scheduled in the 12th month of eligibility."</li>
     <li><strong>Sometimes automatic.</strong> DoHS first tries to renew you using records it can check. If it can, you get a notice. If the notice is right, you do not need to do anything.</li>
     <li><strong>If you get a renewal form,</strong> the manual says it "is due by the first day of the 12th month." If it is not back by the date on the letter, the case closes. You can renew by mail or on WV PATH.</li>
     <li><strong>QI-1 is first come, first served.</strong> Medicare.gov says "You must apply every year to stay in the QI Program. States approve applications on a first-come, first-served basis."</li>
@@ -106,7 +107,7 @@ const ok = (r) => r && !r.hidden;
     <li><strong>A Medicare Savings Program application too.</strong> Medicare.gov says "Social Security will send information to your state to initiate an MSP application unless you tell them not to on the Extra Help application." Watch for that mail from DoHS (see above).</li>
   </ul>
   <p>Questions about an Extra Help application: call Social Security at <a href="tel:18007721213">1-800-772-1213</a>. We could not read Social Security's own web pages, so this page does not say how long a decision takes or how to check status online.</p>
-  <SourceLine sources={[src.apply, src.drug]} org={SSA} about="Extra Help applications" />
+  <SourceLine sources={[src.apply, src.drug, src.phone]} org={SSA} about="Extra Help applications" />
 
   <h2 id="xh-appeal">If Social Security says no or lowers your Extra Help</h2>
   <ul>
