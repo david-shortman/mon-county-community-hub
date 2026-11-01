@@ -6,3 +6,4 @@
   - RDVIC hotline (`rdvic-hotline`): that its services are free and confidential, and what it offers besides the hotline, from its page on the WV FRIS site, read today.
 - **Left out:** Scott's Run baby pantry and Senior Monongalians meals (their pages add nothing beyond what the records already say), MUB (its site gives nothing for these fields, per #716).
 - **Cost:** $0.
+- **Also:** Lifeline (`lifeline-phone-internet-discount`, #217): what proof to have ready, from Lifeline's Supporting Documents page, read today. #217 notes that more than a third of WV Lifeline applications were turned down for missing papers.

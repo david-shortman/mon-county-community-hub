@@ -9,6 +9,12 @@ contact:
   url: https://www.lifelinesupport.org/how-to-apply/
   url_label: How to apply
 cost: Lifeline takes up to $9.25 a month off phone, internet, or bundled service.
+what_to_bring:
+  - "If you get SNAP, Medicaid, SSI, public housing help or a Veterans Pension: a benefit letter, statement or a screenshot of your online benefits account. It must show your name, the program, who issued it, and a date in the last 12 months or an end date in the future."
+  - "If you apply by income: last year's tax return, a yearly income statement from your job, a Social Security or unemployment benefit statement, or three months of pay stubs in a row, dated in the last 12 months"
+  - "If asked to prove your birth date: a driver's license, U.S. birth certificate, passport or other government ID that has not expired"
+  - "If asked to prove your Social Security number: a Social Security card, an SSA-1099, a W-2 from the last 2 years, or last year's tax return"
+what_happens: Lifeline says it will contact you if it needs more papers and tell you how to send them. After you are approved, you sign up with a phone or internet company that offers Lifeline.
 sources:
   - url: https://www.lifelinesupport.org/how-to-qualify/
     checked: 2026-10-31
@@ -17,4 +23,4 @@ sources:
   - url: https://www.lifelinesupport.org/about-lifeline/
     checked: 2026-10-31
   - url: https://www.lifelinesupport.org/supporting-documents/
-    checked: 2026-10-31
+    checked: 2026-11-01
