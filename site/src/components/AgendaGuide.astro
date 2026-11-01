@@ -15,7 +15,7 @@ const H2 = `h${level + 1}`;
   <H id={`${g.slug}-h`}>{b.name}: {g.meeting}, {prettyDate(g.date)}</H>
   <ul class="facts">
     <li><strong>When:</strong>{' '}{prettyDate(g.date)}, {clock(g.time)}</li>
-    <li><strong>Where:</strong>{' '}{g.place}</li>
+    <li><strong>Where:</strong>{' '}<span translate="no">{g.place}</span></li>
     <li><strong>Watch:</strong>{' '}{g.watch}</li>
     <li><strong>Comment:</strong>{' '}{b.comment
       ? <>see <a href={`${base}${b.comment}`}>how to comment at the {b.name}</a>.</>
