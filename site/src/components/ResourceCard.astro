@@ -3,6 +3,7 @@
 // is for, what to do, then big buttons. Source and checked date in small print,
 // naming who published the source (#327).
 import WhatHappensNext from './WhatHappensNext.astro';
+import CallNotes from './CallNotes.astro';
 import BusLink from './BusLink.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
@@ -40,6 +41,8 @@ const H = `h${headingLevel}`;
   <RelayLine phone={r.contact?.phone} sms={sms} text={r.contact?.text} />
   <BusLink place={r.contact?.place} about={r.title} />
   <WhatHappensNext r={r} />
+  {/* Notes for the call, saved on this phone only (#1071), on cards that list what to have ready. */}
+  {r.what_to_bring?.length > 0 && <CallNotes slug={r.slug} service={r.title} phone={r.contact?.phone} />}
   <SourceLine sources={r.sources} phone={r.phone_confirmed} staleDays={staleDaysFor(r)} remind={remind} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>
   <PassItOn title={r.title} slug={r.slug} org={r.org} privateTrace={r.private_trace} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
