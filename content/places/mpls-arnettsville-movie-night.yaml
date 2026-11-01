@@ -19,10 +19,12 @@ contact:
 status: active
 last_activity_seen: 2026-10-30
 notes:
-  - Listed dates are Friday, October 30 (6:30 p.m.), November 20 (5:30 p.m.), December 18 (5:30 p.m.) and January 29, 2027 (5:30 p.m.).
+  - Listed dates are Friday, November 20 (5:30 p.m.), December 18 (5:30 p.m.) and January 29, 2027 (5:30 p.m.).
   - Listed in the calendar for adults.
 sources:
-  - url: https://events.mympls.org/event/17276983
-    checked: 2026-10-30
   - url: https://events.mympls.org/event/17537584
-    checked: 2026-10-30
+    checked: 2026-11-01
+  - url: https://events.mympls.org/event/17577678
+    checked: 2026-11-01
+  - url: https://events.mympls.org/event/17835063
+    checked: 2026-11-01
