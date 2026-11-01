@@ -69,15 +69,15 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Four big choices** | Big buttons that jump to sections on a crisis page: "A bed tonight", "Food tonight" | Anchor links | Exists (`/stay-tonight/`) |
 | **Place card** | Name, hours in words, who it is for, how to get in, cost, action buttons, and a source link named for the place | Everything | Exists (`PlaceCard.astro`), with the town, an open now badge from `opening_hours` and word tags (#176, #395) |
 | **Tags** | Small icon plus word labels: walk in, appointment, no ID needed, free, hot meal, groceries, kid friendly, on a bus line | Plain text | Exists in `PlaceCard.astro` for how to get in and languages (#176) |
-| **Day list** | "Open today" first, then each day of the week, with jump links | Anchor links | Use in #60 |
+| **Day list** | "Open today" first, then each day of the week, with jump links | Anchor links | Not built yet. It needs hours for each day, which today means food pantries (#60, with Duet) |
 | **Days left chip** | "in 3 days", "closes Friday" next to the date | Worked out at build time; the site rebuilds every morning | Exists (calendar) |
 | **Step path** | Numbered steps for "How do I...": what to do first, what to bring, cost, where, how long | Plain ordered list; each step is a native `details`, so it opens with no script | Door steps exist (`DoorPage.astro`). Topic routes exist: `Route` and `Milepost` (#240), first on `/utility-bills/`. They print every step, even with scripts off (#368) |
-| **Question path** | One question per small page that leads to an answer: "Where should I go for care?" | Each answer is a link to the next page | #178 |
+| **Question path** | One question per small page that leads to an answer: "Where should I go for care?" | Each answer is a link to the next page | Exists (`Question.astro`, on `/help/food/`, #178) |
 | **Checklist** | "What to bring" with tick boxes | Boxes work but do not save; script saves them on the phone only | Exists (`Checklist.astro`), used for "What to have ready" in `WhatHappensNext` |
-| **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | Exists (`Timeline.astro`); no page uses it yet |
+| **Timeline** | A dated line of what happens and when, such as an eviction case | An ordered list with dates | Exists (`Timeline.astro`), first on `/burning/` (the year's fire seasons, with today marked "Now" at build time, #172) |
 | **Labeled picture** | A drawing of a letter or notice with numbered callouts that match a list below it | The list carries all the meaning; the picture only helps | Exists (`LabeledPicture.astro`): put our own small SVG in the slot, with numbered circles that match `items`. No page uses it yet; the first drawing is chosen with Duet |
-| **Printout** | A one page version that a pantry, library, or clinic can post | Print stylesheet | Door steps print cleanly; listing printouts and posters are #157 and #160 |
-| **Send by text** | A link that opens a text message with the page link filled in | An `sms:` link | Exists on door steps ("Text these steps to myself"); listings are #157 |
+| **Printout** | A one page version that a pantry, library, or clinic can post | Print stylesheet | Door steps and Trailhead routes print cleanly. Every resource, place and event card prints alone from Pass it on (`PassItOn.astro`, #157). Printable sheets and cards are at `/print/` (#160) |
+| **Send by text** | A link that opens a text message with the page link filled in | An `sms:` link | Exists on door steps ("Text these steps to myself") and on every resource, place and event card (`PassItOn.astro`, #157). Not on domestic or sexual violence listings, since a text leaves a trace on the phone |
 | **Map on tap** | A Directions button that opens the phone's own map app | A link to the map app | Exists (`Actions`) |
 | **211 fallback** | The help now box | Plain links | Exists (`HelpNow`, and `HelpNowBar` on the home page) |
 | **Breadcrumb** | "Home › Get through this month" above the heading, from the page's tags | Plain links | Exists (`Breadcrumb.astro`) |
@@ -85,6 +85,7 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Area picker** | "Your area": a person picks a part of the county and that area's places move to the top. Saved on the phone only (localStorage), no location, no cookies | Hidden; the page lists every area in its usual order | Exists (`AreaPicker.astro`, first on `/thrift-shops/`, #152) |
 | **On this page** | A short jump list under the lede of a long page: "On this page:" and links to its sections. Keep it to about five links | Anchor links | Exists (`OnThisPage.astro`, #1174) |
 | **Fold** | A long secondary section folded into a box with its heading and a one-line hint, like "4 coming up". Opens on a tap, on find-in-page, and when a link points at it or inside it; prints open. Never fold urgent help (crisis lines, can't wait steps, shutoff or eviction help) or the page's main answer | A native `details`, so it opens with no script | Exists (`Fold.astro`, #1174) |
+| **Big choices** | Two to four big buttons at the top of a guide page, one for each thing most people come to do, each jumping to its section. Use only when a page has a few clear top tasks; keep "On this page" for the rest | Anchor links | Exists (`BigChoices.astro`, on `/pets/`, `/parking/`, `/noise/`, `/car-registration/` and `/ids-and-records/`, #199; `/stay-tonight/` has its own four big choices) |
 | **Call notes** | "Notes for this call" under a Call button: when you called, who you talked to, what they said, a reference number and the next step. Saved on the phone only (localStorage, one note per service), with Text to myself, Share or copy, and Delete my notes. Nothing is sent to us | Hidden, since it could not save; the "What to have ready" list and the printable notes on `/before-you-call/` still work | Exists (`CallNotes.astro`, on resource cards that list what to have ready, #1071) |
 
 ## What every listing needs
@@ -137,6 +138,8 @@ Each door and lane page has one job, and its first phone screen leads with the b
 | Utility bills, `/utility-bills/` | "My power, water or gas may be cut off" | A step route, call your utility first |
 | Recycling, `/recycling/` | "What do I do with this thing?" | Item lookup (#199) |
 | Flood zone, `/flood-zone/` | "Is my home at risk of flood or slide?" | A step route, look up the address first |
+| Parking, `/parking/` | "Where do I park, and what do I do about this ticket?" | Big choices: where to park, pay a meter, I got a ticket, towed (#199) |
+| Pets, `/pets/` | "I found a dog, or lost mine" | Big choices: found a dog, lost my pet, bitten, adopt (#199) |
 | About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
 
 ### How new content slots in

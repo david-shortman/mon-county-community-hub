@@ -9,6 +9,14 @@ contact:
   url: https://www.wvpath.wv.gov/
   url_label: Apply online
 cost: free
+what_to_bring:
+  - Your Social Security number (or your immigration papers, if you are a legal immigrant)
+  - Information about your job and income, such as pay stubs
+what_happens: If you don't have all the information the paper form asks for, the state says to sign and send it anyway, and it will follow up with you within 1 to 2 weeks. If the health care form leads to a no for Medicaid or WVCHIP, the worker checks whether you can get another type of Medicaid, and may ask you to fill out a form about what you own.
+if_you_want_help: [wv-navigator, monongalia-county-dohs-office]
 sources:
   - url: https://bms.wv.gov/members/applying-healthcare
-    checked: 2026-10-31
+    checked: 2026-11-01
+  - url: https://bms.wv.gov/media/40622/download?inline
+    checked: 2026-11-01
+    name: Health care application for one person (short form)

@@ -3,18 +3,21 @@ slug: unemployment
 topic: health
 definition: "Percentage of population ages 16 and older unemployed but seeking work." # County Health Rankings' own definition (v023)
 unit: percent
-data_year: "2023"
-release: County Health Rankings 2025
+data_year: "2024"
+release: County Health Rankings, March 2026 supplemental release
 values:
-  monongalia: 0.0310493083
-  west_virginia: 0.039021292
-  united_states: 0.036390896
+  monongalia: 0.03224385516694565
+  west_virginia: 0.04071955977480397
+  united_states: 0.04023453710483819
 sources:
-  - name: County Health Rankings 2025 data file
-    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-30
+  - name: County Health Rankings March 2026 supplemental data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
-    checked: 2026-10-30
+    checked: 2026-11-01
+  - name: Supplemental release codebook (data years by measure)
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf
+    checked: 2026-11-01
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
     checked: 2026-10-30
 more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia # the human page for this county
@@ -22,6 +25,7 @@ chr:
   # where scripts/update-chr-indicators.mjs reads it
   measure: v023
   trend_name: Unemployment rate
+  data_year: "2024" # from the supplement codebook; the trends file stops at the 2025 release
 history:
   monongalia:
     - year: "2014"

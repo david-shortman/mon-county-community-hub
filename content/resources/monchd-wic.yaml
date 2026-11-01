@@ -10,10 +10,25 @@ contact:
   url: https://www.monchd.org/departments-programs/wic
   place: 1311 Pineview Drive, Morgantown, WV 26505
 cost: free
+what_to_bring:
+  - "ID for the parent: a photo driver's license or state ID, a Social Security card, a state birth certificate or a marriage license"
+  - "ID for each child: a photo state ID, a Social Security card or a state birth certificate"
+  - "For a baby: a state birth certificate, crib card or hospital discharge papers"
+  - Proof of address, such as a rent receipt or a utility bill
+  - Proof of household income, such as pay stubs, a TANF or SNAP letter, or a Medicaid card
+  - If you are pregnant, proof of pregnancy from a doctor, the health department or a family planning clinic
+  - Shot records for babies and children
+  - Custody or foster papers, if you have them
+  - A dry diaper may also help
+what_happens: Call to set up an appointment. State WIC says to plan on about an hour. Staff look over your papers and health history, do a short health check for each person, talk with you about eating habits, and then tell you if you can get WIC.
 sources:
   - url: https://www.monchd.org/departments-programs/wic
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.monchd.org/departments-programs/pages/mchd-wic-locations
     checked: 2026-10-31
   - url: https://dhhr.wv.gov/WIC/apply/Pages/Do%20I%20Qualify%20For%20WIC.aspx
     checked: 2026-10-31
+  - url: https://dhhr.wv.gov/WIC/Pages/What-Do-I-need-to-bring-to-my-first-appointment.aspx
+    checked: 2026-11-01
+  - url: https://www.monchd.org/departments-programs/pages/wic-eligibility-guidelines
+    checked: 2026-11-01

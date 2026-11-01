@@ -1,8 +1,8 @@
 ---
 // Sell what you grow (#440, epic #432). Rules are linked, never restated or
-// applied to a person's case. Not here yet: current farmers market days and
-// which markets take SNAP (no current official page found, see #443 and
-// #426), and eggs.
+// applied to a person's case. Homemade foods link to /cottage-food/ and
+// /selling-food/, which carry their own sources. Not here yet: Star City and
+// Cheat Lake market days and the state's market search results (#1027).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -20,6 +20,9 @@ const nursery = [{ url: 'https://agriculture.wv.gov/divisions/plant-industries/n
 
   <h2>Canned foods like salsa, pickles and sauces</h2>
   <ResourceCard r={resource('wvda-farmers-market-vendor-permit')} showCost />
+
+  <h2>Baked goods, jams and other foods made at home</h2>
+  <p>The state's cottage food rules cover foods you make in your own kitchen to sell. See <a href={`${base}/cottage-food/`}>selling food made at home</a> for the state guide's lists of which foods need a permit and the label rules, and <a href={`${base}/selling-food/`}>selling food</a> for bake sales, food trucks and events.</p>
 
   <h2>Plants and seedlings</h2>
   <p>The state Department of Agriculture registers nurseries and nursery dealers. Read its nursery page, or call <a href={telHref('304-558-3550')}>304-558-3550</a> to ask whether you need to register.</p>

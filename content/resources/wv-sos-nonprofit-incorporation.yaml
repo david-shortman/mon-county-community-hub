@@ -3,16 +3,22 @@ slug: wv-sos-nonprofit-incorporation
 org: wv-secretary-of-state
 topics: [community]
 who_it_is_for: A group that wants to become a nonprofit corporation under West Virginia law. A corporation is a legal body that is separate from the people in it.
-what_to_do: File Articles of Incorporation (Form CD-1) with the West Virginia Secretary of State. This is the form that creates the corporation. You can file online through the One Stop Business Portal or on the paper form. The form says to file one original. Some groups also want federal tax-exempt status, called 501(c)(3), from the IRS. If you do, the form says your articles need extra wording. Read the form's non-profit section first. Questions, call the Secretary of State.
+what_to_do: File Articles of Incorporation (Form CD-1) with the West Virginia Secretary of State. This is the form that creates the corporation. You can file online through the One Stop Business Portal or on the paper form. The form says to file one original. Some groups also want federal tax-exempt status, called 501(c)(3), from the IRS. If you plan to ask the IRS for 501(c)(3) status, the Secretary of State has a separate form, Form CD-1NP, with that wording attached. Each year after that, file an annual report between January 1 and June 30. Questions, call the Secretary of State.
 contact:
   phone: "304-558-8000"
   url: https://sos.wv.gov/sites/default/files/2026-07/cd-1.pdf
   url_label: Form CD-1 (PDF)
-cost: "$25 filing fee for a non-profit corporation, per Form CD-1 (Rev. 7/2026). Filing online adds $1."
+cost: "$25 filing fee for a non-profit corporation, on Form CD-1 or Form CD-1NP (both Rev. 7/2026). The yearly annual report is $25 if filed by June 30, or $50 after that. Filing online adds $1."
 sources:
   - url: https://sos.wv.gov/sites/default/files/2026-07/cd-1.pdf
     checked: 2026-11-01
   - url: https://sos.wv.gov/register-new-wv-business
     checked: 2026-11-01
   - url: https://sos.wv.gov/business/charities/charitable-organizations
+    checked: 2026-11-01
+  - url: https://sos.wv.gov/sites/default/files/2026-07/cd-1np.pdf
+    checked: 2026-11-01
+  - url: https://sos.wv.gov/corporations-limited-partnerships-voluntary-associations-and-business-trusts
+    checked: 2026-11-01
+  - url: https://sos.wv.gov/business
     checked: 2026-11-01

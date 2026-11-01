@@ -13,3 +13,7 @@ what_happens: Mon Power's page says "Emergency Assistance is a one-time payment 
 sources:
   - url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
     checked: 2026-10-31
+  - url: https://bfa.wv.gov/bfa-programs/emergency-assistance
+    checked: 2026-11-01
+  - url: https://dohs.wv.gov/offices/monongalia-county-dohs-office
+    checked: 2026-11-01

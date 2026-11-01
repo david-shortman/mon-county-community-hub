@@ -1,0 +1,8 @@
+# Two public basic budgets for Monongalia County differ by thousands of dollars
+
+- **Found:** 2026-11-01, while researching a basic household budget for the county (#1258)
+- **What we found:** The two public, county-level budgets give very different totals. United For ALICE (2023 costs) puts a single adult at $30,672 a year and two adults with two children at $67,188. The MIT Living Wage Calculator (updated February 15, 2026, in December 2025 dollars) puts a single adult at $42,121 before taxes and two working adults with two children at $100,600. The years, the cost items and the methods differ, so neither is wrong, but a reader cannot compare them without reading both methods. The newest ALICE numbers for the county that we could read are for 2023, and only as reprinted in a hospital report: unitedforalice.org refused our automated read (HTTP 403), so we did not read it.
+- **Evidence:** https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf (pages 18 and 21, "Household Survival Budget, Monongalia County, West Virginia, 2023"), https://livingwage.mit.edu/counties/54061 and https://livingwage.mit.edu/pages/methodology, all read 2026-11-01. https://www.unitedforalice.org/county-profiles/west-virginia returned 403 the same day.
+- **Why it matters:** Residents, employers and groups planning around "what it costs to live here" can land on numbers that are $10,000 to $30,000 apart for the same family. No local government page states a county budget for basics.
+- **Who keeps it:** United For ALICE (United Way), the Living Wage Institute at MIT
+- **Status:** open

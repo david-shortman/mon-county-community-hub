@@ -1,0 +1,8 @@
+slug: center-rules
+text: "The county drop-off center no longer takes plastic bags, so bring recyclables in a box or bin. Flatten cardboard boxes by breaking them down at the seams. No greasy pizza boxes."
+quote: "PLASTIC BAGS WILL NO LONGER BE ACCEPTED. PLEASE BRING RECYCLABLES IN A RECYCLABLE BOX OR REUSABLE CONTAINER. FLATTEN ALL CARDBOARD BOXES. NOT SMASHED, BUT ACTUALLY BROKEN DOWN AT SEAMS. NO SOILED PIZZA BOXES."
+sources:
+  - url: https://www.moncountyrecycling.com/
+    name: Monongalia County Recycling Center
+    checked: 2026-11-01
+recheck_days: 90    # drop-off rules change with the center's notices

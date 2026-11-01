@@ -18,6 +18,7 @@ const mub = resource('mub-customer-service');
 // dates reach the page when the record changes (#1046).
 const lieap = resource('lieap-heating-help');
 const emergency = resource('wv-emergency-assistance-utility');
+const hopeGas = resource('hope-gas-bill-help');
 const def = resource('dollar-energy-fund-mon-power');
 const wv211 = resource('wv-211');
 // The Lifeline link shows once its record is in (#668, #735).
@@ -45,8 +46,9 @@ const charitySources = [
         <li><strong>Critical Care program:</strong> for homes where someone uses electric medical equipment to stay alive. Mon Power says it helps these customers get ready for power outages.</li>
       </ul>
       <SourceLine sources={monPower.sources} org={monPower.org} about="Mon Power" /></li>
-    <li><strong>Morgantown Utility Board (water and sewer):</strong> <a href={telHref(mub.contact.phone)}>{mub.contact.phone}</a>, Monday to Friday, 8 a.m. to 4:30 p.m. (staffed around the clock for emergencies). Call to confirm. Email customer-service@mub.org, or visit 278 Greenbag Road. MUB's website does not currently describe payment plans or shutoff rules, so ask on the phone. If water is shut off, you have to call to get it turned back on. <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" /></li>
-    <li><strong>Gas or bulk fuel (propane, oil):</strong> call your supplier. We did not research gas utilities for this page.</li>
+    <li><strong>Morgantown Utility Board (water and sewer):</strong> <a href={telHref(mub.contact.phone)}>{mub.contact.phone}</a>, Monday to Friday, 8 a.m. to 4:30 p.m. (staffed around the clock for emergencies). Call to confirm. Email customer-service@mub.org, or visit 278 Greenbag Road. MUB's website does not currently describe payment plans or shutoff rules, so ask on the phone. If your water is shut off, call MUB to ask what you need to do to get it back on. <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" /></li>
+    <li><strong>Hope Gas:</strong> <a href={telHref(hopeGas.contact.phone)}>{hopeGas.contact.phone}</a>, Monday to Friday, 8 a.m. to 5 p.m. Hope Gas offers payment plans if you have fallen behind, and budget billing. Its Hope Cares program takes 25% off the monthly gas bill for residential heat customers with income up to 200% of the poverty guidelines who have applied for LIEAP. <SourceLine sources={hopeGas.sources} org={hopeGas.org} about="Hope Gas" /></li>
+    <li><strong>Other gas companies or bulk fuel (propane, oil):</strong> call your supplier and ask about payment plans.</li>
   </ul>
   <div class="actions">
     <a class="btn" href={telHref(monPower.contact.phone)}><Icon name="phone" /><span>Call Mon Power</span></a>
@@ -67,11 +69,11 @@ const charitySources = [
   <p>Already applied? <a href={`${base}/after-you-apply/lieap/`}>After you apply for LIEAP heating help</a> says when a decision comes and how to appeal.</p>
 
   <h3>Emergency Assistance (state)</h3>
-  <p>Mon Power's page lists a one-time payment, open year-round, for customers at risk of shutoff. Bring your disconnect notice to your county DoHS office, or call <a href={telHref(emergency.contact.phone)}>{emergency.contact.phone}</a>.</p>
+  <p>Mon Power's page lists a one-time payment, open year-round, for customers at risk of shutoff. Bring your disconnect notice to your county DoHS office, or call <a href={telHref(emergency.contact.phone)}>{emergency.contact.phone}</a>. The state's own page gives no phone number. It says to contact your local DoHS office, and that this help is limited to one 30-day period in any 12 months. The Mon County DoHS office is at 114 South High Street, Morgantown: <a href="tel:3042853175">304-285-3175</a>.</p>
   <SourceLine sources={emergency.sources} org={emergency.org} about="Emergency Assistance" />
 
-  <h3>Dollar Energy Fund (electric)</h3>
-  <p>A hardship fund for Mon Power customers with a recent financial hardship. Mon Power says it opens October 1 and stays open until the money runs out. Apply through a local agency (call <a href={telHref(def.contact.phone)}>{def.contact.phone}</a> or use the <a href={def.contact.url}>Dollar Energy Fund agency finder</a>).</p>
+  <h3>Dollar Energy Fund</h3>
+  <p>A hardship fund for Mon Power customers with a recent financial hardship. Mon Power says it opens October 1 and stays open until the money runs out. Dollar Energy Fund says its West Virginia program helps with gas, electric and water bills, most often up to $500 per utility, and that you must apply for LIEAP and Emergency LIEAP first when they are open. Apply through a local agency (call <a href={telHref(def.contact.phone)}>{def.contact.phone}</a> or use the <a href={def.contact.url}>Dollar Energy Fund agency finder</a>).</p>
   <SourceLine sources={def.sources} org={def.org} about="Dollar Energy Fund" />
 
   <h3>Local charities</h3>

@@ -3,7 +3,7 @@
 // the two hospital systems post jobs, free resume and computer help, and short
 // trainings. Paying for training and unemployment are separate pages that wait
 // for David (high stakes). Left off until a person confirms them (#644):
-// Monongalia County Schools and WVU job boards.
+// WVU job boards. Monongalia County Schools added 2026-11-01 (#644).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
@@ -32,6 +32,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
   {r('morgantown-city-jobs') && <ResourceCard r={r('morgantown-city-jobs')} />}
   {r('mon-county-commission-jobs') && <ResourceCard r={r('mon-county-commission-jobs')} />}
   {r('wv-state-government-jobs') && <ResourceCard r={r('wv-state-government-jobs')} />}
+  {r('mon-county-schools-jobs') && <ResourceCard r={r('mon-county-schools-jobs')} />}
   <p>The two hospital systems in Morgantown, listed A to Z:</p>
   {r('mon-health-jobs') && <ResourceCard r={r('mon-health-jobs')} />}
   {r('wvu-medicine-jobs') && <ResourceCard r={r('wvu-medicine-jobs')} />}
@@ -47,5 +48,5 @@ const r = (slug) => all.find((e) => e.slug === slug);
   {r('apprenticeships-wv') && <ResourceCard r={r('apprenticeships-wv')} showCost />}
   <p>More classes, help finishing high school, English lessons, and help if a record or recovery makes it hard to get hired: see <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We list where employers post their own jobs. We do not list single job openings, and we do not place people in jobs. Not here yet: job boards for Monongalia County Schools and WVU, until we can read their pages. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We list where employers post their own jobs. We do not list single job openings, and we do not place people in jobs. Not here yet: WVU's job board, until we can read its pages. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

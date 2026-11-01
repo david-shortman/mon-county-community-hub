@@ -6,14 +6,34 @@
 // needs-verification issue #1118.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
-import { resource } from '../lib/content.mjs';
+import Timeline from '../components/Timeline.astro';
+import { resource, todayYmd, prettyDate } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "safety", label: "Burning leaves and brush", summary: "West Virginia's forest fire seasons, the 5 p.m. to 7 a.m. burning hours, the 10-foot safety strip, burning bans and fines" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// The year at a glance (#172, the first page to use Timeline). Season dates
+// are from WV Code 20-3-5, the same source as the card below. "Now" is worked
+// out at build time; the site rebuilds every morning.
+const today = todayYmd();
+const md = today.slice(5);
+const off = 'Not a forest fire season under state law. Your town\'s rules can still apply.';
+const on = 'Forest fire season. Burn only from 5 p.m. to 7 a.m.';
+const year = [
+  { when: 'January 1 to the end of February', text: off, now: md < '03-01' },
+  { when: 'March 1 to May 31', text: `Spring ${on.charAt(0).toLowerCase()}${on.slice(1)}`, now: md >= '03-01' && md <= '05-31', season: 'the spring forest fire season' },
+  { when: 'June 1 to September 30', text: off, now: md >= '06-01' && md <= '09-30' },
+  { when: 'October 1 to December 31', text: `Fall ${on.charAt(0).toLowerCase()}${on.slice(1)}`, now: md >= '10-01', season: 'the fall forest fire season' },
+];
+const current = year.find((y) => y.now);
 ---
 <Base title="Burning leaves and brush in Mon County, WV: fire season hours and rules" description="West Virginia's outdoor burning law for Monongalia County residents: forest fire seasons (October 1 to December 31 and March 1 to May 31), burning only from 5 p.m. to 7 a.m., the 10-foot safety strip, burning bans, and fines.">
   <h1>Burning leaves and brush</h1>
   <p class="lede">From October 1 through December 31, and March 1 through May 31, West Virginia law says you may burn leaves, brush and yard debris outdoors only between 5 p.m. and 7 a.m. Clear a strip at least 10 feet wide around the pile first.</p>
+
+  <h2 id="year">The year at a glance</h2>
+  <p>{current.season ? `Today, ${prettyDate(today)}, is in ${current.season}.` : `Today, ${prettyDate(today)}, is not in a forest fire season under state law.`}</p>
+  <Timeline steps={year} label="Forest fire seasons in West Virginia" />
+  <p class="meta">Season dates from West Virginia Code 20-3-5, quoted in the card below with its source and checked date.</p>
 
   <ResourceCard r={resource('wv-outdoor-burning-rules')} showCost headingLevel={2} />
 
