@@ -3,11 +3,13 @@ slug: morgantown-parking-authority
 kind: government
 website: https://www.parkmpa.com/
 phone: "304-284-7435"
-summary: Runs all public parking garages, lots and on-street parking in the City of Morgantown, sells monthly and blue curb permits, and handles its own parking tickets. Its office is in the Public Safety Building at 300 Spruce Street, open Monday to Friday, 8 a.m. to 5 p.m. The night and weekend help line is 304-376-5252.
+summary: Runs all public parking garages, lots and on-street parking in the City of Morgantown, sells garage and blue curb permits, and handles its own parking tickets. Its office is in the Public Safety Building at 300 Spruce Street, open Monday to Friday, 8 a.m. to 5 p.m. The night and weekend help line is 304-376-5252.
 topics: [moving]
 area: morgantown
 sources:
   - url: https://www.morgantownwv.gov/300/Parking-Authority
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.parkmpa.com/about-us/
-    checked: 2026-10-31
+    checked: 2026-11-01
+  - url: https://www.parkmpa.com/
+    checked: 2026-11-01
