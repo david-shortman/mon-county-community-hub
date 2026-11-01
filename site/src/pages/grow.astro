@@ -8,9 +8,17 @@ import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import HelpWanted from '../components/HelpWanted.astro';
-import { resource } from '../lib/content.mjs';
+import Fact from '../components/Fact.astro';
+import { resource, CONTENT_DIR, oldestChecked } from '../lib/content.mjs';
+import { factsFor } from '../lib/facts.mjs';
+import { loadHomeRules } from '../lib/home-year.mjs';
 export const page = { door: "living-here", topic: "growing", label: "Grow food and flowers", summary: "Free seeds, selling what you grow, and help for a small farm" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fact = factsFor('growing');
+// Frost dates come from the same yearly rules as the home calendar (#1051,
+// #442), so they are written in one place: content/home-year.yaml.
+const rules = new Map(loadHomeRules(CONTENT_DIR).map((r) => [r.slug, r]));
+const frostFact = (slug) => { const r = rules.get(slug); return { slug, text: r.what_to_do, sources: r.sources, checked: oldestChecked(r.sources) }; };
 ---
 <Base title="Grow food and flowers in Morgantown and Mon County" description="Pick what you are hoping to do: grow food on a budget, sell what you grow, or start a small farm. Local steps in order for Morgantown and Monongalia County, WV, with phone numbers and sources.">
   <h1>Grow food and flowers</h1>
@@ -35,6 +43,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <ResourceCard r={resource('mon-county-beekeepers-meetings')} />
 
     <HelpWanted topic="growing" />
+
+    <h2 id="frost-and-zone">Frost dates and your growing zone</h2>
+    <Fact f={frostFact('last-spring-frost')} about="the last spring frost" />
+    <Fact f={frostFact('first-fall-frost')} about="the first fall frost" />
+    <Fact f={fact('hardiness-zone')} about="the hardiness zone" />
+    <p>Want a reminder? The <a href={`${base}/home-calendar/`}>home and yearly dates calendar</a> puts both frost dates on your phone.</p>
 
     <h2 id="soil-and-plants">Soil tests and sick plants</h2>
     <p>WVU tests garden soil for free for West Virginia residents: <a href={`${base}/soil-test/`}>How do I get my garden soil tested?</a> For spots, bugs or plants that will not grow, start with WVU Extension's county office: <a href={`${base}/plant-problems/`}>Who can tell me what's wrong with my plants?</a></p>
