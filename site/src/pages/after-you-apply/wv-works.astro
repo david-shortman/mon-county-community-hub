@@ -1,0 +1,106 @@
+---
+// After you apply: WV WORKS (cash help for families). From the WV DoHS Income
+// Maintenance Manual (IMM, effective October 5, 2026): chapter 1 section 1.5,
+// chapter 9 (9.3.7 and form DFA-FH-1 in Appendix C), chapter 10 section 10.5,
+// and chapter 18 section 18.2, read 2026-10-31. Builds on /file-today/#works.
+// High-stakes benefits page: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'this-month', topic: 'money', label: 'After you apply for WV WORKS', summary: 'The interview, orientation, your contract and plan, reporting in 10 days, and fair hearings' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const ORG = 'wv-department-of-human-services';
+const IMM = 'https://bfa.wv.gov/media/40005/download?inline';
+const imm = (part) => ({ url: IMM, checked, name: `WV DoHS Income Maintenance Manual, ${part}` });
+const src = {
+  ch1: imm('Chapter 1, section 1.5'),
+  ch9: imm('Chapter 9, sections 9.2 and 9.3.7'),
+  fh1: imm('Chapter 9, Appendix C: form DFA-FH-1, Rev. 6/22'),
+  ch10: imm('Chapter 10, section 10.5.2'),
+  ch18: imm('Chapter 18, section 18.2'),
+};
+const office = resource('monongalia-county-dohs-office');
+const legal = resource('legal-aid-wv-civil-legal-help');
+const r211 = resource('wv-211');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for WV WORKS in Mon County: interview, orientation, reporting and appeals" description="What happens after you apply for WV WORKS, West Virginia's cash help for families with children, in Monongalia County: the face-to-face interview, orientation, the Personal Responsibility Contract and Self-Sufficiency Plan, the 30 day decision, reporting changes within 10 days, renewals, and fair hearings. Quoted from the state's own manual.">
+  <h1>After you apply for WV WORKS</h1>
+  <p class="lede">You will meet with a worker in person, go to an orientation, and sign a contract and a plan. Here is each step and its time limit, in the state's own rules.</p>
+  <p>WV WORKS is West Virginia's cash help for families with children, run by the Department of Human Services (DoHS). Not applied yet? See <a href={`${base}/file-today/#works`}>File today</a>.</p>
+  <p class="note">This page quotes the state's staff manual and forms. DoHS decides each case. It is information, not legal advice.</p>
+  <ul class="topic-list">
+    <li><a href="#steps">1. The first 10 working days</a></li>
+    <li><a href="#decision">2. The decision and your money</a></li>
+    <li><a href="#report">Reporting changes</a></li>
+    <li><a href="#sanction">If DoHS says you did not follow your plan</a></li>
+    <li><a href="#hearing">If you are denied, cut or cut off</a></li>
+    <li><a href="#renew">Renewing and the 60 month limit</a></li>
+    <li><a href="#help">Who can help</a></li>
+  </ul>
+
+  <h2 id="steps">1. The first 10 working days</h2>
+  <p>The manual says that by the 10th working day after you first contact the office about applying, the worker must have:</p>
+  <ul>
+    <li>your application,</li>
+    <li>your <strong>orientation</strong> to WV WORKS,</li>
+    <li>your first <strong>Self-Sufficiency Plan</strong> (your goals and the steps to reach them), and</li>
+    <li>your answers on a <strong>Drug Use Questionnaire</strong>. The manual says anyone who refuses it, or a drug test, cannot get WV WORKS, though the rest of the family still can.</li>
+  </ul>
+  <p><strong>The interview is in person.</strong> The manual says "A face-to-face interview is required." If you applied online and the office cannot reach you by phone, you get an appointment letter. Missing that appointment means the application is denied. If you need to move it, call. The manual says steps can be put off when you ask.</p>
+  <p><strong>Who comes.</strong> The parent or relative the child lives with must take part. If both parents (or a parent and stepparent) live with the child, both are usually interviewed and both sign.</p>
+  <p><strong>The Personal Responsibility Contract</strong> lists what you agree to do. The manual says it can be signed at the interview or later. The manual says taking part in a work activity is one of the rules for getting WV WORKS.</p>
+  <SourceLine sources={[src.ch1]} org={ORG} about="the first WV WORKS steps" />
+
+  <h2 id="decision">2. The decision and your money</h2>
+  <ul>
+    <li><strong>Papers.</strong> You and the worker agree on a due date. The manual says you get "at least 10 days."</li>
+    <li><strong>Within 30 days.</strong> "The Worker must approve, deny or withdraw the application within 30 days of the date of application."</li>
+    <li><strong>Back to the day you applied,</strong> once you finish orientation, the contract, the plan and the papers.</li>
+    <li><strong>A recent job change can delay it.</strong> The manual says if a parent or caretaker quit a job, cut hours or turned down work in the 30 days before applying, without good cause, the family cannot get WV WORKS until 45 days after that job was no longer open.</li>
+    <li><strong>How you are paid.</strong> You choose direct deposit or an EBT card. The manual says the monthly payment is deposited "on the last State workday of the month prior to the month the benefit is due."</li>
+  </ul>
+  <SourceLine sources={[src.ch1]} org={ORG} about="the WV WORKS decision" />
+
+  <h2 id="report">Reporting changes</h2>
+  <ul>
+    <li><strong>Within 10 days.</strong> "For WV WORKS cases, a client must report all changes in circumstances within 10 days." That includes income, money in the bank, and who lives with you.</li>
+    <li><strong>A new job, within 10 days of starting.</strong> The manual says if you report late, some of the income that is normally not counted will be counted for those months.</li>
+    <li><strong>A child away 30 days or more.</strong> Tell DoHS by the end of the 5th day after you know the child will be gone at least 30 days.</li>
+    <li><strong>A pregnancy.</strong> The manual says to report it right away.</li>
+    <li><strong>Direct deposit.</strong> Report bank account changes to the State Auditor's Office.</li>
+  </ul>
+  <SourceLine sources={[src.ch10, src.ch1]} org={ORG} about="WV WORKS reporting" />
+
+  <h2 id="sanction">If DoHS says you did not follow your plan</h2>
+  <p>A cut for not following the contract or plan is called a sanction. The manual says DoHS uses a letter called the <strong>DFA-WVW-NL-1, Notice of Pending Reduction of Benefits</strong>. It sets a <strong>good cause interview</strong>, where you can explain why. The interview must be at least 7 calendar days after the letter, unless you and the worker agree on an earlier date. Go to it, or call before it.</p>
+  <SourceLine sources={[src.ch9]} org={ORG} about="WV WORKS sanctions" />
+
+  <h2 id="hearing">If you are denied, cut or cut off</h2>
+  <p>You can ask for a <strong>Pre-Hearing Conference</strong> (an informal meeting with your worker and a supervisor), a <strong>Fair Hearing</strong> (before a State Hearings Officer), or both. The state's form says you can ask "either orally or in writing."</p>
+  <ul>
+    <li><strong>The deadline is 90 days.</strong> The form says "you may ask for a Fair Hearing or Pre-Hearing Conference within 90 days of the effective date of the actions."</li>
+    <li><strong>To keep your payment the same while you wait,</strong> ask before the date of the cut or closure on your letter. The form says then "your benefits will not be reduced or stopped, pending a final decision." If the state wins, the manual says you may have to pay back the extra.</li>
+    <li><strong>How to ask.</strong> Fill out the DFA-FH-1 form that came with your letter and return it to your local DoHS office, or ask out loud. You can ask for the hearing by phone.</li>
+    <li><strong>You can bring someone.</strong> A friend, relative, lawyer "or any other person."</li>
+    <li><strong>Getting there.</strong> Your case worker will help arrange a ride if you ask, and help you prepare. Call DoHS Client Services at <a href="tel:18006428589">1-800-642-8589</a>.</li>
+  </ul>
+  <SourceLine sources={[src.fh1, src.ch9]} org={ORG} about="asking for a WV WORKS fair hearing" />
+  {ok(legal) && <ResourceCard r={legal} />}
+
+  <h2 id="renew">Renewing and the 60 month limit</h2>
+  <ul>
+    <li><strong>Once a year, in person.</strong> The manual says cases are "normally redetermined annually," with a new application or an online review. A face-to-face interview is still required, even when the renewal is lined up with SNAP.</li>
+    <li><strong>60 months in a lifetime.</strong> "There is a lifetime limit of 60 months that a family may receive cash assistance." Any month with a payment counts, even $1. In the 55th month, DoHS mails a letter about the limit and how to ask for an extension.</li>
+  </ul>
+  <SourceLine sources={[src.ch1, src.ch18]} org={ORG} about="renewing WV WORKS" />
+
+  <h2 id="help">Who can help</h2>
+  <p>You can bring anyone to a hearing. Legal Aid is listed above. The Mon County DoHS office answers questions about your case, and 211 is free and can point you to local help.</p>
+  {ok(office) && <ResourceCard r={office} />}
+  {ok(r211) && <ResourceCard r={r211} />}
+  <p class="meta">We describe the state's steps. DoHS decides who gets WV WORKS. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

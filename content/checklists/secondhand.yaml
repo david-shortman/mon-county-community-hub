@@ -35,6 +35,15 @@ items:
     url: https://mountaineerweek.wvu.edu/
     person: true
     months: [9, 10, 11]
+  - text: >-
+      Morgantown Farmers Market season dates on its Markets page. Its Google
+      Calendar feed was turned off on 2026-11-01 because calendar.google.com
+      asks robots to stay out.
+    url: https://www.morgantownfarmersmarket.org/markets.html
+    how: >-
+      The page itself allows robots and lists each season in plain text, with
+      dates, days, times and place. Compare with
+      content/calendar/morgantown-farmers-market-*.yaml.
   - text: Sale and market dates that passed in the last 4 months. The site already hides them; look for each one's next date.
     run: past-sale-dates
   - text: If a "Sale or market date page changed" issue is open (label source-changed), work through it too.

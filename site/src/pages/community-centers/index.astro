@@ -6,6 +6,7 @@
 import Base from '../../layouts/Base.astro';
 import CenterCard from '../../components/CenterCard.astro';
 import EventCard from '../../components/EventCard.astro';
+import Fold from '../../components/Fold.astro';
 import { loadCalendarWithFeeds, upcoming } from '../../lib/content.mjs';
 import { loadPlaces, byArea, rentalRows, SECTION } from '../../lib/places.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
@@ -43,23 +44,29 @@ const members = centers.filter((p) => p.membership);
     <input id="center-q" type="search" autocomplete="off" placeholder="Smithtown, Blacksville, Westover..." />
     <p class="meta" id="center-count" aria-live="polite"></p>
   </div>
+  {/* Each part of the county is folded (#1174): open, the cards ran about 15
+      phone screens. The area links above open the part they point to, and typing
+      a name opens every part with a match. */}
   {groups.map((g) => (
-    <section class="center-area" aria-labelledby={`area-${g.key}`}>
-      <h3 id={`area-${g.key}`}>{g.label}</h3>
-      {g.places.map((p) => <CenterCard p={p} next={nextAt(p.slug)} headingLevel={4} />)}
+    <section class="center-area">
+      <Fold id={`area-${g.key}`} level={3} title={g.label} hint={`${g.places.length} ${g.places.length === 1 ? 'place' : 'places'}. Tap to see them.`}>
+        {g.places.map((p) => <CenterCard p={p} next={nextAt(p.slug)} headingLevel={4} />)}
+      </Fold>
     </section>
   ))}
   {publicBuildings.length > 0 && (
-    <section class="center-area" aria-labelledby="also-nearby">
-      <h3 id="also-nearby">Also nearby: public rec buildings and park halls</h3>
-      <p>Run by the parks board, the county or a park foundation. They have staff and set prices.</p>
-      {publicBuildings.map((p) => <CenterCard p={p} next={nextAt(p.slug)} headingLevel={4} />)}
+    <section class="center-area">
+      <Fold id="also-nearby" level={3} title="Also nearby: public rec buildings and park halls" hint={`${publicBuildings.length} places. Tap to see them.`}>
+        <p>Run by the parks board, the county or a park foundation. They have staff and set prices.</p>
+        {publicBuildings.map((p) => <CenterCard p={p} next={nextAt(p.slug)} headingLevel={4} />)}
+      </Fold>
     </section>
   )}
 
-  <h2 id="eat">Eat with neighbors</h2>
+  <Fold id="eat" title="Eat with neighbors" hint={events.length ? `${events.length} dinners and events in the next 60 days. Tap to see them.` : 'None on our list right now.'}>
   <p>Dinners, bazaars, bingo and festivals at these centers in the next 60 days. Weekly lunches and regular nights are on each center's card above.</p>
   {events.length ? events.map((e) => <EventCard e={e} />) : <p>No dated center events on our list right now. Centers often post dinners on Facebook first, so check a center's page or call. <a href={`${base}/calendar/`}>See all dates</a>.</p>}
+  </Fold>
 
   <h2 id="rent">Rent a hall</h2>
   <p>{halls.length} halls, rooms and pavilions with a published way to rent them. <a href={`${base}${SECTION.route}halls/`}>Compare halls side by side</a>: seats, kitchen, outdoor space, price, deposit and how to book. Prices are what each source showed on the date we checked. Confirm when you book.</p>
@@ -96,7 +103,7 @@ const members = centers.filter((p) => p.membership);
       var v = q.value.trim().toLowerCase();
       var shown = 0;
       cards.forEach(function (c) { var on = !v || c.dataset.search.indexOf(v) > -1; c.hidden = !on; if (on) shown++; });
-      document.querySelectorAll('.center-area').forEach(function (s) { s.hidden = !s.querySelector('.card.center:not([hidden])'); });
+      document.querySelectorAll('.center-area').forEach(function (s) { s.hidden = !s.querySelector('.card.center:not([hidden])'); if (v && !s.hidden) s.querySelector('details').open = true; });
       count.textContent = v ? (shown ? shown + ' found.' : 'None found. Try a nearby community, or pick a part of the county above.') : '';
     });
   })();

@@ -8,11 +8,11 @@ hours: Monday to Thursday, 7 a.m. to 5:30 p.m.
 contact:
   phone: "304-284-7401"
   email: rentals@morgantownwv.gov
-  url: https://www.morgantownwv.gov/435/Rental-Information
+  url: https://www.morgantownwv.gov/176/Rental-Information
   url_label: Rental information and report a concern
   place: "389 Spruce Street, Morgantown, WV 26505"
 sources:
-  - url: https://www.morgantownwv.gov/435/Rental-Information
-    checked: 2026-10-30
+  - url: https://www.morgantownwv.gov/176/Rental-Information
+    checked: 2026-10-31
   - url: https://www.morgantownwv.gov/167/Code-Enforcement
-    checked: 2026-10-30
+    checked: 2026-10-31

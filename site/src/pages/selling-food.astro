@@ -9,14 +9,15 @@ import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, telHref } from '../lib/content.mjs';
-export const page = { door: "family", topic: "work", label: "Selling food at markets, events and food trucks", summary: "Which health department permit fits a fair, a farmers market, a bake sale or a food truck, and the city rule for trucks and carts" };
+export const page = { door: "family", topic: "work", label: "Selling food at markets, events and food trucks", summary: "Which permit fits a fair, a farmers market, a bake sale, food made in your home kitchen (cottage food) or a food truck, and the city rule for trucks and carts" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const eh = [{ url: 'https://www.monchd.org/departments-programs/environmental-health', checked: '2026-10-30' }];
 const temp = [{ url: 'https://www.monchd.org/services/temporary-food-worker-cards', checked: '2026-10-30' }];
+const cottage = [{ url: 'https://agriculture.wv.gov/divisions/regulatory-and-environmental-affairs/potentially-hazardous-cottage-foods/', checked: '2026-11-01' }, { url: 'https://code.wvlegislature.gov/19-40-1/', checked: '2026-11-01' }];
 const vending = [{ url: 'https://www.morgantownwv.gov/256/Vending-Downtown', checked: '2026-10-30' }];
 const r = (slug) => resource(slug);
 ---
-<Base title="Selling food in Morgantown and Mon County: markets, events, bake sales and food trucks" description="Which Monongalia County Health Department permit fits selling food at a fair or festival, a farmers market, a bake sale, or from a food truck or cart, the fee schedule, and the City of Morgantown business license rule for vending trucks and carts.">
+<Base title="Selling food in Morgantown and Mon County: markets, events, bake sales and food trucks" description="Which Monongalia County Health Department permit fits selling food at a fair or festival, a farmers market, a bake sale, from your home kitchen (cottage food), or from a food truck or cart, the fee schedule, and the City of Morgantown business license rule for vending trucks and carts.">
   <h1>Selling food at markets, events and food trucks</h1>
   <p class="lede">The Monongalia County Health Department handles food permits in Mon County. Which permit you need depends on where and how you sell. If you sell from a truck or cart in Morgantown, the city also needs you to have a business license. Read each office's rules, and call them if you are not sure. We link the rules and do not decide what applies to you.</p>
 
@@ -29,8 +30,16 @@ const r = (slug) => resource(slug);
 
   <h2>A bake sale, or a nonprofit selling food</h2>
   <p>The health department's Environmental Health page posts a Bake Sale Application and an Exemption Application. Its event page says to call with questions about bake sales or nonprofit status: <a href={telHref('304-598-5131')}>304-598-5131</a>.</p>
+  <p>The bake sale rules, as a short list: <a href={`${base}/bake-sale-rules/`}>Holding a bake sale</a>.</p>
   <p><a class="btn" href="https://www.monchd.org/departments-programs/environmental-health"><span>Health department applications</span></a></p>
   <SourceLine sources={[...eh, ...temp]} org="monongalia-county-health-department" about="Bake sale and nonprofit food applications" />
+
+  <h2 id="home-kitchen">Food you make in your home kitchen (cottage food)</h2>
+  <p>Baking cookies or cakes at home to sell, or making jam, salsa or other food? West Virginia law calls food made at the maker's home, and packed there if it is packed, and sold straight to the buyer "cottage food." It does not include meat, poultry, seafood or Grade A dairy products.</p>
+  <p>The West Virginia Department of Agriculture (WVDA) says foods that are not "potentially hazardous" can be sold as cottage foods with no cottage food permit. Potentially hazardous foods need a WVDA permit first, and WVDA inspects your kitchen before it gives one. Its list of foods that need a permit includes salsas, sauces, pickled and fermented foods, canned acidified foods and cut produce; for some foods it says "Contact WVDA." Permits run January 1 through December 31. Cottage foods may be sold only inside West Virginia.</p>
+  <p>Not sure which kind your food is? Ask WVDA at <a href={telHref('304-558-2227')}>304-558-2227</a> or <a href="mailto:cottagefood@wvda.us">cottagefood@wvda.us</a>. We have not found a Mon County Health Department or City of Morgantown page about selling food made at home yet.</p>
+  <p><a class="btn" href="https://agriculture.wv.gov/divisions/regulatory-and-environmental-affairs/potentially-hazardous-cottage-foods/"><span>WVDA cottage food rules</span></a></p>
+  <SourceLine sources={cottage} org="wv-department-of-agriculture" about="Cottage food rules" />
 
   <h2>A food truck, cart, restaurant or shop</h2>
   {r('monchd-food-business-plan-review') && <ResourceCard r={r('monchd-food-business-plan-review')} />}

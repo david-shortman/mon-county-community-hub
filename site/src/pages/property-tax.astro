@@ -5,6 +5,7 @@
 // 2026-10-30. Where the county page and state law differ, the page says who
 // says what (#660). No 2027 appeal dates until the county posts them.
 import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import { telHref } from '../lib/content.mjs';
@@ -21,6 +22,7 @@ const phones = { tax: '304-291-7244', assessor: '304-291-7222', commission: '304
 <Base title="Property tax in Mon County, WV: due dates, paying, homestead and appeals" description="Monongalia County property tax: when tax bills come and when halves are due for the 2.5% discount, where to pay at the Sheriff's Tax Office, the $20,000 homestead exemption, and how to ask for a review of your assessed value.">
   <h1>Property tax: pay, homestead and appeals</h1>
   <p class="lede">The County Assessor sets your property's value. The Sheriff's Tax Office sends the bill and collects the tax. If you think the value is wrong, there are deadlines to ask for a review.</p>
+  <p>Behind on your mortgage? See <a href={`${base}/behind-on-mortgage/`}>behind on your mortgage</a> for free counselors and legal help.</p>
 
   <h2 id="dates">Key dates</h2>
   <p>From the Assessor's information sheet for tax year 2026:</p>
@@ -55,6 +57,7 @@ const phones = { tax: '304-291-7244', assessor: '304-291-7222', commission: '304
     <a class="btn" href="https://www.assessor.org/2205/Real-Estate"><Icon name="open" /><span>Assessor: homestead and real estate</span></a>
   </div>
   <p>This year's last day is on <a href={`${base}/calendar/`}>Deadlines and dates</a>.</p>
+  <p>Already filed? See <a href={`${base}/after-you-apply/homestead/`}>After you apply for the homestead exemption</a> for denials, the 30 day appeal, and two state tax credits for homeowners.</p>
 
   <h2 id="appeal">Think your value is wrong?</h2>
   <p>The County Commission's page describes these steps:</p>
@@ -67,5 +70,5 @@ const phones = { tax: '304-291-7244', assessor: '304-291-7222', commission: '304
   <p><strong>After the County Commission decides,</strong> sources differ on the next step. The county page says the decision "can be appealed within 30 days to the Circuit Court in your county." State law (§11-3-24) says a taxpayer who has a hearing before the Board of Equalization and Review "may appeal the board's order to the Office of Tax Appeals." Ask the County Commission office which applies to you.</p>
   <SourceLine sources={[...board, ...law]} about="appeals after the County Commission" />
 
-  <p class="meta">Sources checked October 30, 2026. Dates and rates change each year, so check the Assessor's and Sheriff's pages. Something wrong? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Dates and rates change each year, so check the Assessor's and Sheriff's pages. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

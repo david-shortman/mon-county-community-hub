@@ -1,0 +1,8 @@
+# Family court fee sheets disagree, and the courts have no self-help page
+
+- **Found:** 2026-11-01, building the family court page (#1181, part of #529)
+- **What we found:** The state Family Court instruction packets say sheriff service costs $30, while the Monongalia Circuit Clerk's fee page says $25. The packets also disagree with each other on subpoena service ($25 or $30) and copy fees ($1.00 or 50 cents a page). The clerk's fee page has no date. The courts' site has no self-help page (`/public-resources/self-help` is a 404), so people piece the steps together from PDFs. Form SCA-FC-225 names its own petition as SCA-FC-226 in one place and SCA-FC-201 in another. Older 2023 copies of the packets are still online, and some outside sites link to them. Old BCSE addresses (bcse.wvdhhr.org, dohs.wv.gov/bcse) no longer load.
+- **Evidence:** https://www.courtswv.gov/sites/default/pubfilesmnt/2026-02/SCA-FC-100.pdf, https://www.courtswv.gov/sites/default/pubfilesmnt/2026-03/SCA-FC-260.pdf, https://www.courtswv.gov/sites/default/pubfilesmnt/2026-02/SCA-FC-225.pdf, http://www.monongaliacircuitclerk.com/fees.html, https://www.courtswv.gov/public-resources/self-help, all checked 2026-11-01.
+- **Why it matters:** A parent filing without a lawyer needs to bring the right amount in cash or money order, and may not know which version of a form is current.
+- **Who keeps it:** Supreme Court of Appeals of West Virginia; Monongalia County Circuit Clerk; WV Bureau for Child Support Enforcement
+- **Status:** open (#1219)

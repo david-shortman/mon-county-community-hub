@@ -4,6 +4,7 @@
 // resource records or quoted below with their sources, read 2026-10-30.
 // High-stakes topic (names 911 and 988): the PR waits for David (#97).
 import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
@@ -59,5 +60,5 @@ const lawSources = [
     <li>Low income and no insurance: <a href={`${base}/dental-and-prescriptions/`}>the free Health Right clinic</a>.</li>
   </ul>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these services and the law; we do not give medical or legal advice. Call first, since hours and programs change. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these services and the law; we do not give medical or legal advice. Call first, since hours and programs change. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

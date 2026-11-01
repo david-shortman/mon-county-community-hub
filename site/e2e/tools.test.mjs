@@ -47,7 +47,9 @@ describe('tools', () => {
     const ctx = await s.browser.newContext(PHONE);
     const page = await ctx.newPage();
     await page.goto(s.origin + '/make-a-list/');
-    const boxes = page.locator('#mal-form input[name="pick"]');
+    // Places are folded by door (#1174): open the first door, as a person would.
+    await page.locator('#mal-form details.fold > summary').first().click();
+    const boxes = page.locator('#mal-form details.fold').first().locator('input[name="pick"]');
     await boxes.nth(0).check();
     await boxes.nth(1).check();
     await page.locator('#mal-note').fill('Call the first one in the morning.');
@@ -76,6 +78,29 @@ describe('tools', () => {
       if (r.status() !== 200) none.push(`${w}: first result ${href} gives HTTP ${r.status()}`);
     }
     assert.deepEqual(none, []);
+    await ctx.close();
+  });
+
+  // Resident phrases from the simulated walkthroughs (docs/reviews/2026-10-31-simulated-walkthroughs.md).
+  // Each should put its page in the top 3, even when the page uses other words.
+  const PHRASES = SMOKE ? [] : [
+    ['detox near me', '/drugs-and-alcohol/'],
+    ['garbage pickup', '/recycling/'],
+    ['toothache no insurance', '/dental-and-prescriptions/'],
+    ['homeless shelter', '/stay-tonight/'],
+    ['senior property tax', '/property-tax/'],
+  ];
+  test('search finds the right page for resident phrases', async () => {
+    const ctx = await s.browser.newContext(PHONE);
+    const page = await ctx.newPage();
+    const missed = [];
+    for (const [q, want] of PHRASES) {
+      await page.goto(`${s.origin}/search/#q=${encodeURIComponent(q)}`);
+      await page.waitForFunction(() => !/Searching/.test(document.getElementById('search-status').textContent) && document.getElementById('search-status').textContent);
+      const top = await page.$$eval('#search-results li a', (as) => as.slice(0, 3).map((a) => new URL(a.href).pathname));
+      if (!top.includes(want)) missed.push(`${q}: wanted ${want}, got ${top.join(' ')}`);
+    }
+    assert.deepEqual(missed, []);
     await ctx.close();
   });
 
