@@ -54,6 +54,7 @@ export async function GET({ site }) {
 - [Staying well](${u('/staying-well/')}): a simple yearly list (flu shot, checkup, dental, moving more, help to quit tobacco, 988) with costs and local places
 - [Dentist or prescriptions](${u('/dental-and-prescriptions/')}): a dentist with no dental insurance (health department dental clinic, WVU Dental) and help paying for medicine (Milan Puskar Health Right free clinic)
 - [Turning 65 or on Medicare](${u('/turning-65/')}): when to sign up, visits and shots Medicare pays for, free help from WV SHIP, help paying Medicare costs
+- [After you apply for help with Medicare costs](${u('/after-you-apply/medicare-savings/')}): Medicare Savings Programs (QMB, SLIMB, QI-1) and Extra Help: the 30 day time limit, when help starts, yearly renewals, and the 90 day (DoHS) and 60 day (Social Security) appeal deadlines, quoted from the state manual and federal rules
 - [School shots and sports physicals](${u('/school-shots/')}): 7th and 12th grade shots, health check and dental forms by grade, the sports physical May 1 rule, and free shots for children who qualify
 - [Drugs or alcohol help](${u('/drugs-and-alcohol/')}): what to do in an overdose, West Virginia's overdose 911 law, free naloxone (Narcan) from the Mon County health department, HELP4WV and SAMHSA help lines, and treatment at Valley HealthCare and WVU Medicine
 - [Pregnant or new baby](${u('/pregnant-or-new-baby/')}): Medicaid and WVCHIP for pregnancy and 12 months after, pregnancy tests at the health department, WIC, and free programs for families with babies
