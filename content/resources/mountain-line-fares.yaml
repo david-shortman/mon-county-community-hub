@@ -13,14 +13,14 @@ hours: Pifer Terminal depot, Monday to Sunday, 7 a.m. to 8 p.m.
 cost: "One ride, one way: $0.75 to $1.00. 15 Ride Pass: $10.00. 30 Day Pass: $38.50, in the Token Transit app only. Monster Pass: $125.00 for one month of local routes plus the Grey Line. In the Token Transit app, a single ride is $0.86."
 sources:
   - url: https://www.busride.org/Fares-Programs
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.busride.org/how-to-pay
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.busride.org/getting-on-and-off-the-bus
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.busride.org/wvu-campus-services
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.busride.org/days-of-operation
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.busride.org/WestoverTerminal
-    checked: 2026-10-30
+    checked: 2026-11-01
