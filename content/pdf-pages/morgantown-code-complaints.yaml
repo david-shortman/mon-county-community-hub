@@ -13,9 +13,9 @@ recheck_days: 180
 sources:
   - url: https://www.morgantownwv.gov/DocumentCenter/View/1372/Code-Enforcement-Complaint-Process
     name: City of Morgantown
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.morgantownwv.gov/167/Code-Enforcement
-    checked: 2026-10-31
+    checked: 2026-11-01
 sections:
   - heading: What happens after you report a property problem
     id: complaint-steps
