@@ -83,6 +83,8 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Breadcrumb** | "Home › Get through this month" above the heading, from the page's tags | Plain links | Exists (`Breadcrumb.astro`) |
 | **Item lookup** | "What do you want to get rid of?": an A to Z list of things, each saying in one line where it goes and linking to its sourced details on the page | A plain list of anchor links | Exists (`/recycling/`, #199) |
 | **Area picker** | "Your area": a person picks a part of the county and that area's places move to the top. Saved on the phone only (localStorage), no location, no cookies | Hidden; the page lists every area in its usual order | Exists (`AreaPicker.astro`, first on `/thrift-shops/`, #152) |
+| **On this page** | A short jump list under the lede of a long page: "On this page:" and links to its sections. Keep it to about five links | Anchor links | Exists (`OnThisPage.astro`, #1174) |
+| **Fold** | A long secondary section folded into a box with its heading and a one-line hint, like "4 coming up". Opens on a tap, on find-in-page, and when a link points at it or inside it; prints open. Never fold urgent help (crisis lines, can't wait steps, shutoff or eviction help) or the page's main answer | A native `details`, so it opens with no script | Exists (`Fold.astro`, #1174) |
 
 ## What every listing needs
 

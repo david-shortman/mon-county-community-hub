@@ -1,0 +1,117 @@
+---
+// After you apply: Section 8 Housing Choice Vouchers and public housing at
+// the Fairmont-Morgantown Housing Authority (FMHA). From FMHA's own Section 8
+// and public housing FAQ pages, its public housing lease (dated 2023-12-04)
+// and grievance procedure, and the federal rules in 24 CFR parts 960 and 982
+// on ecfr.gov, read 2026-11-01. FMHA's Administrative Plan and its
+// Admissions and Continued Occupancy Policy (ACOP) are not posted online, so
+// its deadline to ask for an informal review is not stated here; see
+// needs-verification issue #1213. Housing page: the PR waits for
+// David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'this-month', topic: 'housing', label: 'After you apply for a housing voucher or public housing', summary: 'The waiting list, keeping your place, the 60 day voucher, reporting changes and asking for a review' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-01';
+const ORG = 'fairmont-morgantown-housing-authority';
+const cfr = (s, name) => ({ url: `https://www.ecfr.gov/current/title-24/section-${s}`, checked, name: `24 CFR ${s}, ${name}` });
+const src = {
+  faq8: { url: 'https://fmhousing.com/visitors/faq_-_section_8.php', checked, name: 'FMHA, Section 8 FAQ' },
+  faqPh: { url: 'https://fmhousing.com/faq_-_public_housing.php', checked, name: 'FMHA, Public Housing FAQ' },
+  app8: { url: 'https://fmhousing.com/docs/2024%20Section%208%20Application%20and%20Forms%20Redacted.pdf', checked, name: 'FMHA, Section 8 application (2024)' },
+  lease: { url: 'https://fmhousing.com/Public%20Housing%20Lease%2020231204.pdf', checked, name: 'FMHA, Public Housing Lease (December 4, 2023)' },
+  grievance: { url: 'https://fmhousing.com/Public%20Housing%20Grievance%20Procedure.pdf', checked, name: 'FMHA, Public Housing Grievance Procedure' },
+  docs: { url: 'https://fmhousing.com/document_center.php', checked, name: 'FMHA, Document Center' },
+  list: cfr('982.204', 'Waiting list: Administration of waiting list'),
+  deny: cfr('982.201', 'Eligibility and targeting'),
+  review: cfr('982.554', 'Informal review for applicant'),
+  brief: cfr('982.301', 'Information when family is selected'),
+  term: cfr('982.303', 'Term of voucher'),
+  reexam: cfr('982.516', 'Family income and composition: Annual and interim examinations'),
+  oblig: cfr('982.551', 'Obligations of participant'),
+  phDeny: cfr('960.208', 'Notification to applicants'),
+  phReexam: cfr('960.257', 'Family income and composition: Annual and interim reexaminations'),
+};
+const fmha = resource('fmha-section-8-and-public-housing');
+const legal = resource('legal-aid-wv-civil-legal-help');
+const r211 = resource('wv-211');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for Section 8 or public housing in Mon County: the waiting list, vouchers and reviews" description="What happens after you apply for a Section 8 Housing Choice Voucher or public housing with the Fairmont-Morgantown Housing Authority: the waiting list, keeping your place, the orientation, the 60 day voucher, reporting changes within 10 days, yearly reexams, and asking for a review if you are denied. Quoted from the housing authority and federal rules.">
+  <h1>After you apply for a housing voucher or public housing</h1>
+  <p class="lede">Keep your address and phone number up to date with the housing authority, and answer every letter fast. That is how you keep your place on the waiting list.</p>
+  <p>In Mon County, Section 8 Housing Choice Vouchers and public housing are run by the Fairmont-Morgantown Housing Authority (FMHA). This is help paying rent over time, not quick help for rent due now. For rent due now, see <a href={`${base}/money/`}>Get through this month</a>. Not applied yet? The steps are in the card below.</p>
+  <p class="note">This page quotes FMHA's own pages and the federal rules. FMHA decides each case. It is information, not legal advice.</p>
+  <ul class="topic-list">
+    <li><a href="#list">1. The waiting list</a></li>
+    <li><a href="#keep">2. Keeping your place</a></li>
+    <li><a href="#voucher">3. When your name comes up: Section 8</a></li>
+    <li><a href="#ph">3. When your name comes up: public housing</a></li>
+    <li><a href="#denied">If you are denied</a></li>
+    <li><a href="#report">Reporting changes and yearly reexams</a></li>
+    <li><a href="#help">Who can help</a></li>
+  </ul>
+
+  <h2 id="list">1. The waiting list</h2>
+  <ul>
+    <li><strong>Fill in every part.</strong> FMHA's application says "Incomplete applications will be mailed back, and your name will not be added to FMHAs' waiting list(s)."</li>
+    <li><strong>Your place.</strong> FMHA says you are "placed on the waiting list according to the date and time your application was received and any preferences that may apply to the household."</li>
+    <li><strong>Preferences.</strong> For Section 8, FMHA says "Preferences are given to families who are currently experiencing a government declared disaster, disabled families, working families, and residency within our state of West Virginia, as per our administrative policy." Its application says "Project Based Voucher waiting lists do not have preferences."</li>
+    <li><strong>How long.</strong> FMHA does not post wait times. Call to ask whether a list is open and how long the wait is.</li>
+  </ul>
+  <SourceLine sources={[src.faq8, src.app8]} org={ORG} about="the FMHA waiting list" />
+  {ok(fmha) && <ResourceCard r={fmha} />}
+
+  <h2 id="keep">2. Keeping your place</h2>
+  <ul>
+    <li><strong>Section 8:</strong> "It is your responsibility to report any changes in your household while you are on the waiting list. Examples of changes that need to be reported are: your address, your phone number, you or your co-head start or lose employment, etc."</li>
+    <li><strong>Public housing:</strong> FMHA says "We communicate by letter and telephone. If we are trying to contact you and don't hear from you within 10 days we will consider your file closed. Your name will then be removed from the waiting list and you will have to apply again."</li>
+    <li><strong>If a disability kept you from answering,</strong> the federal rule says the housing authority "must reinstate the applicant in the family's former position" on the list.</li>
+  </ul>
+  <SourceLine sources={[src.faq8, src.faqPh, src.list]} org={ORG} about="keeping your place on the list" />
+
+  <h2 id="voucher">3. When your name comes up: Section 8</h2>
+  <ol>
+    <li><strong>Orientation.</strong> FMHA says you stay on the list "until you reach the point where we are able to send you a letter to call you in for an orientation meeting (group meeting)" and to check whether your family is eligible. The federal rule says the housing authority "must give the family an oral briefing."</li>
+    <li><strong>Your voucher.</strong> Once your file is complete, FMHA says "we will mail your housing choice voucher and a packet of paperwork for you to locate a rental unit."</li>
+    <li><strong>60 days to find a place.</strong> "Initially the housing choice voucher is issued for sixty (60) days." FMHA says "an extension may be granted for additional time with a WRITTEN request to your worker," but "the total time allowed on a voucher is 120 days. If you are unable to locate a rental unit within that time period you will be required to reapply to receive a new voucher."</li>
+    <li><strong>More time for a disability.</strong> The federal rule says if you need more time as a reasonable accommodation for a disability, the housing authority must extend it "up to the term reasonably required for that purpose."</li>
+    <li><strong>After you find a place.</strong> FMHA says "Your worker has fifteen (15) days to complete the calculation and get the inspection on his/her schedule." If the unit fails the first inspection, "the landlord will be given thirty (30) days to make the necessary repairs."</li>
+  </ol>
+  <SourceLine sources={[src.faq8, src.brief, src.term]} org={ORG} about="Section 8 vouchers" />
+
+  <h2 id="ph">3. When your name comes up: public housing</h2>
+  <ul>
+    <li>FMHA says "you will remain on our waiting list until your name reaches the top."</li>
+    <li>The federal rule says applicants found eligible "must be notified of the approximate date of occupancy insofar as that date can be reasonably determined."</li>
+    <li><strong>Saying no to a unit.</strong> FMHA says "Should you refuse the unit that is offered to you it may cause your name to be removed from the waiting list."</li>
+  </ul>
+  <SourceLine sources={[src.faqPh, src.phDeny]} org={ORG} about="public housing offers" />
+
+  <h2 id="denied">If you are denied</h2>
+  <ul>
+    <li><strong>Section 8.</strong> An informal review is a meeting or written review where you can say why you think the decision is wrong. The federal rule says the housing authority "must give an applicant prompt written notice of a decision denying admission." The notice "must also state that the applicant may request an informal review of the decision, and state how to arrange for the informal review." In the review you can give "written or oral objections," and it is done by someone other than the person who made the decision.</li>
+    <li><strong>Public housing.</strong> The federal rule says the housing authority must tell you why you were found ineligible, and give you "upon request, within a reasonable time after the determination is made, with an opportunity for an informal hearing."</li>
+    <li><strong>The deadline is on your letter.</strong> The federal rules leave the number of days to each housing authority. FMHA's plans that set it are not posted online, so we cannot list it. Ask for the review in writing as soon as you get the letter, and keep a copy.</li>
+  </ul>
+  <SourceLine sources={[src.deny, src.review, src.phDeny, src.docs]} org={ORG} about="asking for a review" />
+
+  <h2 id="report">Reporting changes and yearly reexams</h2>
+  <ul>
+    <li><strong>Every year (the reexam).</strong> The federal rules say the housing authority must check your family's income and who lives with you "at least annually," for both Section 8 and public housing.</li>
+    <li><strong>Section 8 changes.</strong> Tell FMHA right away when someone joins or leaves your home. The federal rule (where "PHA" means the housing authority) says your family "must promptly inform the PHA of the birth, adoption or court-awarded custody of a child," and "must promptly notify the PHA if any family member no longer resides in the unit." It also says you must give information the housing authority asks for at your reexams.</li>
+    <li><strong>Public housing: 10 days, in writing.</strong> FMHA's lease says "Resident must report to the Fairmont-Morgantown Housing Authority any changes in Household composition or household income, in writing within (10) calendar days of the change." If you do not, the lease says you may owe back rent.</li>
+    <li><strong>Public housing lease.</strong> The lease says it "will renew automatically for 12-month terms," as long as you follow it and are still eligible at your yearly reexam.</li>
+    <li><strong>Public housing complaints.</strong> FMHA's grievance procedure starts with a written complaint and a meeting. After you get the written summary, you have "ten (10) calendar days from the date of the mailing of the summary" to ask in writing for a hearing.</li>
+  </ul>
+  <SourceLine sources={[src.reexam, src.phReexam, src.oblig, src.lease, src.grievance]} org={ORG} about="reporting changes" />
+
+  <h2 id="help">Who can help</h2>
+  <p>Call FMHA with questions about your application or your place on the list. Legal Aid of West Virginia helps with housing problems. 211 is free and can point you to rent help and other local help. For renting rights, see <a href={`${base}/renting/`}>Renting a home</a>.</p>
+  {ok(legal) && <ResourceCard r={legal} />}
+  {ok(r211) && <ResourceCard r={r211} />}
+  <p class="meta">We describe FMHA's steps and the federal rules. FMHA decides who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

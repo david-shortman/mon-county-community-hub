@@ -1,0 +1,116 @@
+---
+// Use our data (docs/operations/reuse.md): one page for a library, office,
+// group or developer that wants to reuse what the site gathers. It points to
+// what exists today (the API, the calendar feeds, the Open Referral export,
+// the MCP server, printouts and group pages), with copy-paste snippets, the
+// license, and how to report a correction. Addresses and counts come from the
+// same code that writes the files, so the page never names a file the build
+// did not make.
+import Base from '../layouts/Base.astro';
+import { catalog } from '../lib/api.mjs';
+import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
+export const page = { door: "about", label: "Use our data", summary: "Reuse our listings and dates on your site, in an app or an AI tool: free, with copy-paste code" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const cat = await catalog();
+const abs = (p) => new URL(`${base}${p}`, Astro.site).href;
+const api = (p) => abs(`/api/v1/${p}`);
+const count = (name) => cat.types.find((t) => t.name === name)?.count ?? 0;
+const ics = abs('/calendar.ics');
+const webcal = ics.replace(/^https?:/, 'webcal:');
+const credit = `${cat.license.credit} (${cat.license.credit_url.replace(/^https:\/\//, '')})`;
+const snippets = {
+  link: `<a href="${abs('/calendar/')}">Local dates and deadlines from ${cat.license.credit}</a>`,
+  subscribe: `<a href="${webcal}">Add Mon County dates to your calendar</a>`,
+  curl: `curl ${api('calendar.json')}`,
+  js: `fetch("${api('calendar.json')}")
+  .then((r) => r.json())
+  .then((dates) => {
+    for (const d of dates.slice(0, 5)) {
+      // Show the title, the date, and where it came from.
+      console.log(d.title, d.starts, d.sources[0].url, d.sources[0].checked);
+    }
+  });`,
+  cite: `Listing from ${credit}, CC BY 4.0. Source: the group's own page, checked on the date shown.`,
+};
+---
+<Base title="Use our data: Morgantown and Mon County listings, free" description="How libraries, offices, groups and developers can reuse Everything Morgantown's Mon County listings and dates: links, calendar feeds, JSON, Open Referral and an MCP server.">
+  <h1>Use our data</h1>
+  <p class="lede">Anyone can reuse the listings and dates we gather, for free. You don't need to ask, sign up, or pay. Pick what fits how you work, then copy the code.</p>
+
+  <ul class="jump">
+    <li><a href="#link">Link to us</a></li>
+    <li><a href="#calendar">Put our dates in a calendar</a></li>
+    <li><a href="#print">Print and hand out</a></li>
+    <li><a href="#files">Data files for apps</a></li>
+    <li><a href="#ai">For AI tools</a></li>
+    <li><a href="#license">License and credit</a></li>
+    <li><a href="#fix">Report a correction</a></li>
+  </ul>
+
+  <h2 id="link">Link to us</h2>
+  <p>The simplest way. A link sends people to the newest version, with sources on every item. Paste this into your website:</p>
+  <pre class="code"><code>{snippets.link}</code></pre>
+  <p>If you run a program, your <a href={`${base}/groups/`}>group's page</a> shows every listing we have for you, so you can check it first.</p>
+
+  <h2 id="calendar">Put our dates in a calendar</h2>
+  <p>Our {count('calendar')} upcoming dates and deadlines are also a calendar feed. Calendar apps check it on their own, so new dates show up without you doing anything.</p>
+  <ul>
+    <li>Feed address: <code>{ics}</code></li>
+    <li>On a phone or Mac, this link adds it in one tap: <a href={webcal}>add Mon County dates to my calendar</a>. The <a href={`${base}/calendar/`}>dates page</a> has buttons for Google Calendar and Outlook.</li>
+    <li>Each date also has its own file, so people can add just one. Its address is <code>{abs('/calendar/')}&lt;date&gt;.ics</code>, and the dates page links to each.</li>
+  </ul>
+  <p>To give readers a subscribe link on your own site:</p>
+  <pre class="code"><code>{snippets.subscribe}</code></pre>
+
+  <h2 id="print">Print and hand out</h2>
+  <ul>
+    <li><a href={`${base}/print/`}>Printable sheets</a>: places and phone numbers by topic, each with sources and the date it was made.</li>
+    <li><a href={`${base}/print/cards/`}>Wallet cards and posters</a> with a QR code and a short web address.</li>
+    <li><a href={`${base}/calendar/month/`}>This month in Mon County</a>: the next 30 days of dates on one page you can print.</li>
+  </ul>
+
+  <h2 id="files">Data files for apps and websites</h2>
+  <p>Every listing is also published as JSON, a plain data format apps can read. The files are made from the same records as the site and rebuilt every morning. No key and no sign-up. Other websites can read them straight from the browser.</p>
+  <ul>
+    <li><a href={api('index.json')}>The catalog</a>: every file, how many records each has, and the license.</li>
+    <li><a href={api('orgs.json')}>Groups and offices</a> ({count('orgs')}), <a href={api('resources.json')}>programs and services</a> ({count('resources')}), <a href={api('calendar.json')}>dates</a> ({count('calendar')}), and the other files on the <a href={`${base}/data/`}>open data page</a>.</li>
+    <li>One record at a time: <code>{api('orgs/')}&lt;id&gt;.json</code>, and the same for the other kinds.</li>
+    <li><a href={api('openapi.yaml')}>The field list</a> (OpenAPI 3.1), for developers.</li>
+    <li><a href={api('hsds/services.json')}>Open Referral format</a> (HSDS 3.1), the shared format that help lines and referral tools read, also as <a href={api('hsds/datapackage.json')}>spreadsheet tables</a> (CSV).</li>
+  </ul>
+  <p>Get the dates from a command line:</p>
+  <pre class="code"><code>{snippets.curl}</code></pre>
+  <p>Or in JavaScript on a web page:</p>
+  <pre class="code"><code>{snippets.js}</code></pre>
+  <p>We only add fields to version 1, never remove or rename them. A check runs on every change to make sure of it. If we ever need to break something, it will be a new version at <code>/api/v2/</code>, and version 1 stays up for at least 6 months.</p>
+
+  <h2 id="ai">For AI tools</h2>
+  <ul>
+    <li><a href={abs('/llms.txt')}>llms.txt</a>: a plain list of every page, for AI tools that read the web.</li>
+    <li><a href={`${repo}/tree/main/apps/mcp`}>An MCP server</a> that lets AI tools like Claude search our programs and dates and cite each source. It is read-only and runs on your own computer, so it costs nothing. The <a href={`${repo}/blob/main/apps/mcp/README.md`}>setup steps</a> are on GitHub.</li>
+  </ul>
+
+  <h2 id="license">License and credit</h2>
+  <p>The data is under <a href={cat.license.url}>Creative Commons Attribution 4.0</a> (CC BY 4.0). Use it for anything, even in a paid product. Credit "{cat.license.credit}" and link to <a href={cat.license.credit_url}>{cat.license.credit_url.replace(/^https:\/\//, '')}</a>. For example:</p>
+  <pre class="code"><code>{snippets.cite}</code></pre>
+  <ul>
+    <li><strong>Keep the sources and dates.</strong> Every record has a <code>sources</code> list, each with a web address and the date we checked it. Please show them, and send people to the source. Details change.</li>
+    <li><strong>Link to the group, too.</strong> Each listing links to the group that runs it. People get the newest details from them.</li>
+    <li><strong>No endorsement.</strong> Reusing our data does not mean you work with us, and a listing does not mean a group works with us.</li>
+    <li>The code is under the <a href={`${repo}/blob/main/LICENSE`}>MIT License</a>, on <a href={repo}>GitHub</a>.</li>
+  </ul>
+
+  <h2 id="fix">Report a correction</h2>
+  <p>If something is wrong, tell us and we fix it at the source. The fix shows up on the site, in the files and in the calendar feed on the next build.</p>
+  <ul>
+    <li>Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix form</a>. You don't need an account, and what you send is not posted.</li>
+    <li>Or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>.</li>
+    <li>Every fix we make is listed on the <a href={`${base}/corrections/`}>Corrections page</a> and in <a href={api('corrections.json')}>corrections.json</a>.</li>
+  </ul>
+  <p>More for groups, including what we will and won't do, is on the <a href={`${base}/partners/`}>For groups and helpers</a> page.</p>
+</Base>
+<style>
+  pre.code { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 0.875rem; }
+  code { overflow-wrap: anywhere; }
+</style>

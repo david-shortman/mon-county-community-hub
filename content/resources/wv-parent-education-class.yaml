@@ -1,0 +1,27 @@
+title: Parent education class for family court
+slug: wv-parent-education-class
+org: wv-supreme-court-of-appeals
+topics: [legal, family]
+who_it_is_for: "Parents in a family court case that involves children under 18, such as a divorce or a custody case. The courts say parents must take the class and file the certificate with the Circuit Clerk, unless the judge waives it."
+what_to_do: "The class approved by the West Virginia courts is Children in Between, taken online. It covers making a parenting plan, mediation, how divorce and family abuse affect children, and where to find help with abuse."
+steps:
+  - Pay the class fee at the Circuit Clerk's office, or ask for a fee waiver. The clerk gives you a registration code.
+  - "Sign up online using the link on the courts' Parent Education page. You need an internet device, an email address and the Google Chrome browser."
+  - Watch for an email with login steps within 48 hours. Check your spam folder.
+  - Finish the class and file the certificate of completion with the Circuit Clerk.
+notes:
+  - "The court's divorce instructions say to try to finish the class before your first hearing, or your case may be delayed."
+  - "If you cannot take the class online, the courts' Court Services Division says to call 304-558-6831 or email Parent.Education@courtswv.gov."
+contact:
+  phone: "304-558-6831"
+  url: https://www.courtswv.gov/lower-courts/family-courts/parent-education
+  url_label: Parent education
+cost: "$25 per class, paid to the Circuit Clerk. The courts say the cost is waived if you qualify for a fee waiver."
+if_you_want_help: [court-fee-waiver-wv]
+sources:
+  - url: https://www.courtswv.gov/lower-courts/family-courts/parent-education
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-04/ChildrenInBetweenCard_R.pdf
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-02/SCA-FC-100.pdf
+    checked: 2026-10-31
