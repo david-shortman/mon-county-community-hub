@@ -22,7 +22,7 @@ const old = notCheckedLately(s.sources);
       {s.funds_local_cause && <span class="tag">Funds a local cause</span>}
     </p>
   )}
-  {s.address && <p><strong>Where:</strong>{' '}{s.address}</p>}
+  {s.address && <p><strong>Where:</strong>{' '}<span translate="no">{s.address}</span></p>}
   {s.hours && <p><strong>Hours:</strong>{' '}{s.hours}{s.status === 'likely' && <> <strong>Check before you go.</strong></>}</p>}
   {!s.hours && s.status === 'likely' && <p><strong>Check hours before you go.</strong></p>}
   <p><strong>{s.kind === 'lending' ? 'What you can borrow' : s.kind === 'free-program' ? 'What it gives' : s.kind === 'online-group' ? 'What it is' : 'What it sells'}:</strong>{' '}{s.sells}</p>

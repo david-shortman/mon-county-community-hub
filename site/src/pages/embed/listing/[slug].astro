@@ -30,7 +30,7 @@ const more = r.org && groupName ? `/groups/${r.org}/` : '/';
       <p>{r.what_to_do}</p>
       {r.hours && <p><strong>Hours:</strong>{' '}{r.hours}</p>}
       {r.cost && <p><strong>Cost:</strong>{' '}{r.cost}</p>}
-      {r.contact?.place && <p><strong>Where:</strong>{' '}{r.contact.place}</p>}
+      {r.contact?.place && <p><strong>Where:</strong>{' '}<span translate="no">{r.contact.place}</span></p>}
       <p>
         {r.contact?.phone && <a class="btn" href={telHref(r.contact.phone)}>Call {r.contact.phone}<span class="sr-only">, {r.title}</span></a>}
         {r.contact?.text && <a class="btn" href={sms(r.contact.text)}>Text {r.contact.text}<span class="sr-only">, {r.title}</span></a>}
