@@ -1,0 +1,71 @@
+---
+// The frame for embeds (src/lib/embeds.mjs, docs/operations/embeds.md): a
+// small page another site shows in an iframe. No scripts, no cookies, no
+// outside fonts or images, and no site menu. Kept out of search (noindex) and
+// the sitemap, since the real pages are the ones people should find.
+// Links open in a new tab, so a person never gets stuck inside a frame.
+// The color tokens are a copy of the ones in Base.astro, so the contrast
+// check's results hold here too; test/embeds.test.mjs keeps them in step.
+// The footer has the same 911 and 988 line as every page (e2e/crisis.test.mjs).
+import { fixFormUrl } from '../lib/group-requests.mjs';
+import { prettyDate, todayYmd } from '../lib/content.mjs';
+const { title, description, heading, more, moreLabel = 'See more on Everything Morgantown' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const shareImage = new URL(`${base}/share.png`, Astro.site).href;
+const home = new URL(`${base}/`, Astro.site).href;
+const moreHref = more ? new URL(`${base}${more}`, Astro.site).href : home;
+const report = fixFormUrl({ page: Astro.url.pathname });
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex" />
+    <meta name="referrer" content="no-referrer" />
+    <meta property="og:image" content={shareImage} />
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <base target="_blank" />
+    <style is:inline>
+      :root {
+        --bg: #f9f7f2; --fg: #1d1d1b; --muted: #4f4e4a; --line: #ddd6ca;
+        --accent: #1e5847; --accent-bg: #e6f0ec; --card: #ffffff;
+        color-scheme: light dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root { --bg: #161714; --fg: #ecebe6; --muted: #b7b5ae; --line: #363830; --accent: #8fd1b5; --accent-bg: #1f2c26; --card: #1d1f1b; }
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--fg); font: 1rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; overflow-wrap: anywhere; }
+      a { color: var(--accent); text-underline-offset: 3px; }
+      a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      main { padding: 12px 16px; }
+      h1 { font-size: 1.25rem; line-height: 1.25; margin: 0 0 8px; }
+      h2 { font-size: 1.05rem; line-height: 1.3; margin: 0 0 2px; }
+      p { margin: 0 0 6px; }
+      .meta { color: var(--muted); font-size: 0.9rem; }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin: 0 0 10px; }
+      .when { font-weight: 600; }
+      ul.items { list-style: none; margin: 0; padding: 0; }
+      .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; margin: 4px 8px 4px 0; border: 1.5px solid var(--accent); border-radius: 999px; font-weight: 600; text-decoration: none; background: var(--card); }
+      .btn:hover { background: var(--accent-bg); }
+      footer { padding: 8px 16px 14px; border-top: 1px solid var(--line); }
+      footer p { color: var(--muted); font-size: 0.875rem; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>{heading ?? title}</h1>
+      <slot />
+      <p><a href={moreHref}>{moreLabel}<span class="sr-only"> (opens in a new tab)</span></a></p>
+    </main>
+    <footer>
+      <p>From <a href={home}>Everything Morgantown</a>, a free guide to help in Morgantown and Mon County. Updated {prettyDate(todayYmd())}. Each item shows its source and the date we checked it. Details change, so check the source before you go.</p>
+      <p>In an emergency, call 911. In a crisis, call or text 988.</p>
+      <p>Something wrong? <a href={report}>Report a problem</a>. Links open in a new tab.</p>
+    </footer>
+  </body>
+</html>

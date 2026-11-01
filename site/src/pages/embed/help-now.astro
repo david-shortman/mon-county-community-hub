@@ -1,0 +1,37 @@
+---
+// "Help now" strip embed (docs/operations/embeds.md): 911, 988 and 211 in
+// one short block, for a library, school or office site to show in an
+// iframe. Same facts and words as the Help now bar on the home page
+// (HelpNowBar.astro): content/resources/wv-211.yaml and 988-lifeline.yaml.
+// 911 is the standard U.S. emergency number, so it has no record.
+// High stakes: names crisis lines, so a change here waits for David.
+import Embed from '../../layouts/Embed.astro';
+import { resource, telHref, prettyDate, oldestChecked } from '../../lib/content.mjs';
+export const page = { parent: '/embed/', label: 'Help now strip (embed)' };
+const r211 = resource('wv-211');
+const r988 = resource('988-lifeline');
+const sms = (n) => `sms:${String(n).replace(/[^\d+]/g, '')}`;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tonight = new URL(`${base}/stay-tonight/`, Astro.site).href;
+const checked = oldestChecked([...(r211.sources ?? []), ...(r988.sources ?? [])]);
+---
+<Embed title="Help now in Morgantown and Mon County (embed)" description="A short block with 911, the 988 crisis line and 211, for other websites to show. Free, with no tracking, and each number shows its source." heading="Need help now?" more="/" moreLabel="More local help on Everything Morgantown">
+  <ul class="items">
+    <li class="card">
+      <h2>Danger or an emergency</h2>
+      <p><a class="btn" href="tel:911">Call 911</a></p>
+    </li>
+    <li class="card">
+      <h2>A mental health or drug or alcohol crisis</h2>
+      <p>The 988 Lifeline is free and open all day, every day.</p>
+      <p><a class="btn" href={telHref(r988.contact.phone)}>Call {r988.contact.phone}<span class="sr-only">, 988 Lifeline</span></a> <a class="btn" href={sms(r988.contact.phone)}>Text {r988.contact.phone}<span class="sr-only">, 988 Lifeline</span></a></p>
+    </li>
+    <li class="card">
+      <h2>Food, housing, bills and more</h2>
+      <p>211 is a free help line, any hour. Call, or text your ZIP code.</p>
+      <p><a class="btn" href={telHref(r211.contact.phone)}>Call {r211.contact.phone}<span class="sr-only">, West Virginia 211</span></a> <a class="btn" href={sms(r211.contact.text)}>Text {r211.contact.text}<span class="sr-only">, send your ZIP code to West Virginia 211</span></a></p>
+      <p><a href={tonight}>Need a place to stay tonight?<span class="sr-only"> (opens in a new tab)</span></a></p>
+    </li>
+  </ul>
+  <p class="meta">Sources: <a href={r988.sources[0].url}>988 Lifeline</a>, <a href={r211.sources[0].url}>West Virginia 211</a>. Checked {prettyDate(checked)}.</p>
+</Embed>

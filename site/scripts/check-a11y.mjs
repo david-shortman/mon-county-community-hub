@@ -39,9 +39,10 @@ const urls = [];
 })(dist);
 urls.sort();
 // Families of pages made from one template with different data (the group
-// pages, docs/operations/group-pages.md): scan the first SAMPLE of each, not
-// every one. Add a family only when its pages differ in data, not in markup.
-const FAMILIES = [/^\/groups\/[^/]+\/$/];
+// pages, docs/operations/group-pages.md, and the embeds,
+// docs/operations/embeds.md): scan the first SAMPLE of each, not every one.
+// Add a family only when its pages differ in data, not in markup.
+const FAMILIES = [/^\/groups\/[^/]+\/$/, /^\/embed\/dates\/topic\//, /^\/embed\/dates\/town\//, /^\/embed\/listing\//];
 const SAMPLE = 3;
 {
   const seen = new Map();

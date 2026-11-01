@@ -77,6 +77,8 @@ const checked = oldestChecked(org.sources);
   <h2 id="reuse">Reuse these listings</h2>
   <p>You can reuse anything here for free, with credit to Everything Morgantown (CC BY 4.0).</p>
   <ul>
+    <li><a href={`${base}/embed/`}>Copy-paste widgets</a> that show local dates, or one of these listings, on your own site.</li>
+    {listings.length > 0 && <li>A card for each listing, to put on your site in an iframe: {listings.map((r, i) => <>{i > 0 && ', '}<a href={`${base}/embed/listing/${r.slug}/`}>{r.title}<span class="sr-only"> card</span></a></>)}. The <a href={`${base}/embed/#listing`}>widgets page</a> has the code to copy.</li>}
     <li>This group as data: <a href={api(`orgs/${org.slug}.json`)}>{org.slug}.json</a>{listings.length > 0 && <>, and its listings: {listings.map((r, i) => <>{i > 0 && ', '}<a href={api(`resources/${r.slug}.json`)}>{r.slug}.json</a></>)}</>}. See the <a href={`${base}/data/`}>open data page</a>.</li>
     <li>To print this page, use your browser's Print button.</li>
   </ul>

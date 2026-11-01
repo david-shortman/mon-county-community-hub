@@ -9,7 +9,7 @@ Every group in `content/orgs` that is not hidden has a page at `/groups/<slug>/`
 3. The printable sheets those listings are on (`src/lib/printouts.mjs`).
 4. Its upcoming dates (next 62 days). A calendar entry names its group in words (`org_name`), so a date belongs to a group only when `org_name` matches the group's `name` exactly, ignoring case.
 5. How to ask for a fix: the fix form with the group's slug filled in, and the fix email. The promise in days comes from `REQUEST_DAYS` in `src/lib/group-requests.mjs`.
-6. The group's records as JSON from the open data API.
+6. The group's records as JSON from the open data API, and a link to each listing's card widget (`/embed/listing/<slug>/`, see [embeds.md](embeds.md)).
 
 Code: [`site/src/lib/group-pages.mjs`](../../site/src/lib/group-pages.mjs), [`site/src/pages/groups/[slug].astro`](../../site/src/pages/groups/[slug].astro), [`site/src/pages/groups/index.astro`](../../site/src/pages/groups/index.astro).
 

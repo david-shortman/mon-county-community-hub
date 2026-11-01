@@ -1,6 +1,6 @@
 # Reuse: the ways groups can use our data
 
-The public page [`/use-our-data/`](https://everythingmorgantown.org/use-our-data/) (`site/src/pages/use-our-data.astro`) is the one place that lists every way to reuse the site's data, simplest first: a link, the calendar feed, printouts, the JSON API, Open Referral (HSDS), llms.txt and the MCP server, then the license and how to report a correction.
+The public page [`/use-our-data/`](https://everythingmorgantown.org/use-our-data/) (`site/src/pages/use-our-data.astro`) is the one place that lists every way to reuse the site's data, simplest first: a link, the embed widgets ([embeds.md](embeds.md)), the calendar feed, printouts, the JSON API, Open Referral (HSDS), llms.txt and the MCP server, then the license and how to report a correction.
 
 ## Keeping it true
 
