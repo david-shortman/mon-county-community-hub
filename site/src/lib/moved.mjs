@@ -3,7 +3,9 @@
 // new one, so old links and bookmarks keep working. Old address on the left,
 // new one on the right, both with a trailing slash. Keep sorted.
 export const MOVED = {
+  '/groups/irs/': '/groups/internal-revenue-service/',
   '/groups/mountain-line-transit/': '/groups/mountain-line-transit-authority/',
+  '/groups/north-central-wv-community-action/': '/groups/ncwvcaa/',
 };
 
 // True for an old address. The sitemap leaves these out.
