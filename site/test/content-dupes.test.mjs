@@ -46,3 +46,16 @@ test('pairs listed as not duplicates are not flagged', () => {
   const orgs = [{ _file: 'orgs/usda-farm-service-agency.yaml', website: 'https://x.gov/a' }, { _file: 'orgs/usda-natural-resources-conservation-service.yaml', website: 'https://x.gov/a' }];
   assert.deepEqual(duplicateWarnings({ orgs }), []);
 });
+
+test('a date at a venue gets the town its place record names', async () => {
+  const { townFromCommunity, venueTownWarnings } = await import('../src/lib/content-dupes.mjs');
+  const towns = ['Morgantown', 'Westover'];
+  assert.deepEqual(townFromCommunity('Westover', towns), { town: 'Westover' });
+  assert.deepEqual(townFromCommunity('Wiles Hill, Morgantown', towns), { town: 'Morgantown', neighborhood: 'Wiles Hill' });
+  assert.equal(townFromCommunity('Mylan Park, west of Morgantown', towns), null);
+  assert.equal(townFromCommunity('Morgantown (Mountaineer Mall)', towns), null);
+  const places = [{ slug: 'hall', community: 'Westover' }];
+  assert.equal(venueTownWarnings([{ _file: 'calendar/a.yaml', venue: 'hall' }], places, towns).length, 1);
+  assert.equal(venueTownWarnings([{ _file: 'calendar/a.yaml', venue: 'hall', town: 'Westover' }], places, towns).length, 0);
+  assert.match(venueTownWarnings([{ _file: 'calendar/a.yaml', venue: 'hall', town: 'Morgantown' }], places, towns)[0], /differs/);
+});

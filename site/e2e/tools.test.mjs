@@ -47,7 +47,9 @@ describe('tools', () => {
     const ctx = await s.browser.newContext(PHONE);
     const page = await ctx.newPage();
     await page.goto(s.origin + '/make-a-list/');
-    const boxes = page.locator('#mal-form input[name="pick"]');
+    // Places are folded by door (#1174): open the first door, as a person would.
+    await page.locator('#mal-form details.fold > summary').first().click();
+    const boxes = page.locator('#mal-form details.fold').first().locator('input[name="pick"]');
     await boxes.nth(0).check();
     await boxes.nth(1).check();
     await page.locator('#mal-note').fill('Call the first one in the morning.');
