@@ -1,1 +1,181 @@
-/* Preview look "ledger" (#396). Loaded only when a visitor opens ?look=ledger. Rules are scoped under html[data-look="ledger"]. Built by the design wave phase 2 lane. */
+/* Preview look "ledger" (#396). Loaded only when a visitor opens ?look=ledger.
+   Every rule is scoped under html[data-look="ledger"]. Notes: docs/design/looks/ledger.md
+
+   The idea: a well-kept town ledger, a bus timetable and an old downtown sign,
+   built around the site's real signature, the date we checked each fact.
+   Moves: the checked date as a typed stamp, sign-painted section heads,
+   dates as a printed listing, survey ticks under the header, entries ruled
+   like a ledger instead of boxed, and a colophon footer. Wharf brick and
+   river slate palette. Fonts: League Gothic (dates, section heads) and
+   Atkinson Hyperlegible Mono (stamps, labels), both SIL OFL, about 10 KB,
+   font-display: fallback (a short wait, then the
+   system font), and never used on crisis pages. */
+
+@font-face { font-family: "Ledger Sign"; src: url("ledger/league-gothic.woff2") format("woff2"); font-weight: 400; font-display: fallback; }
+@font-face { font-family: "Ledger Mono"; src: url("ledger/atkinson-mono.woff2") format("woff2"); font-weight: 600; font-display: fallback; }
+
+/* ---------- Tokens: Wharf brick and river slate ---------- */
+html[data-look="ledger"] {
+  --bg: #f8f6f1; --card: #ffffff; --fg: #1e1d1b; --muted: #4a4742;
+  --line: #d9cfc1; --accent: #264a5c; --accent-bg: #efe6dc;
+  --brick: #7a3322; --ridge: #8a8176;
+  --rule: #8a8176; /* survey ticks and quiet rules: 3.5:1, an edge you can see */
+  --sign: "Ledger Sign", "League Gothic", "Arial Narrow", "Roboto Condensed", var(--display);
+  --mono: "Ledger Mono", "Atkinson Hyperlegible Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-look="ledger"] {
+    --bg: #161615; --card: #1e1e1c; --fg: #ecebe7; --muted: #b8b4ad;
+    --line: #3a3732; --accent: #93bdd3; --accent-bg: #2b221e;
+    --brick: #e59d86; --ridge: #6f685f; --rule: #6f685f;
+  }
+}
+/* Crisis pages keep the system and heading fonts only: nothing new to download. */
+html[data-look="ledger"]:has(.crisis-strip) { --sign: var(--display); --mono: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+
+/* ---------- One shape: square corners, rules not boxes ---------- */
+html[data-look="ledger"] :is(.card, .note, .add-cal, .right-now, .door, .step, .milepost details, .milepost summary, details.fold, details.fold > summary, .table-scroll, .search input, .btn-search, .choice, .pick label, .cal-week > summary, .skip, .crisis-line, .next-box) { border-radius: 0; }
+html[data-look="ledger"] :is(.btn, .quick-exit, .town-pick a, .add-cal input, .pi-btn) { border-radius: 3px; }
+html[data-look="ledger"] .btn { border-width: 2px; font-weight: 700; }
+html[data-look="ledger"] :is(a, button):focus-visible { outline: 3px solid var(--fg); outline-offset: 2px; box-shadow: 0 0 0 6px var(--accent-bg); }
+
+/* ---------- Header: the town ledger's title block ---------- */
+html[data-look="ledger"] header.site { border-bottom: 0; position: relative; padding-bottom: 14px; }
+/* Survey ticks: a chained line with a tick every 24px, a taller one every 120px, and a square stone at each end. */
+html[data-look="ledger"] header.site::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px; pointer-events: none;
+  background:
+    linear-gradient(var(--fg), var(--fg)) left center / 8px 8px no-repeat,
+    linear-gradient(var(--fg), var(--fg)) right center / 8px 8px no-repeat,
+    linear-gradient(var(--fg), var(--fg)) left center / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--fg) 0 2px, transparent 2px 120px) left 59px top 0 / calc(100% - 118px) 12px no-repeat,
+    repeating-linear-gradient(90deg, var(--fg) 0 1px, transparent 1px 24px) left 11px top 2px / calc(100% - 22px) 8px no-repeat;
+}
+html[data-look="ledger"] .dateline { font-family: var(--mono); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
+html[data-look="ledger"] .dateline a { text-decoration-thickness: 1px; }
+html[data-look="ledger"] nav.main .wide { color: var(--fg); font-family: var(--display); font-weight: 800; font-size: 1rem; text-decoration: none; border-bottom: 4px solid transparent; }
+html[data-look="ledger"] nav.main .wide:hover { border-bottom-color: var(--rule); }
+html[data-look="ledger"] nav.main .wide[aria-current] { border-bottom-color: var(--brick); }
+@media (max-width: 40rem) {
+  html[data-look="ledger"] nav.main { border-top: 2px solid var(--fg); }
+  html[data-look="ledger"] nav.main .icon { border-radius: 3px; }
+}
+
+/* ---------- Type: a short, decided scale ---------- */
+html[data-look="ledger"] h1 { font-size: clamp(2rem, 1.5rem + 2.2vw, 2.75rem); line-height: 1.08; letter-spacing: -0.015em; margin: 0.35em 0 0.3em; }
+html[data-look="ledger"] .lede { color: var(--fg); font-size: 1.2rem; line-height: 1.5; }
+/* Section heads are sign-painted: tall capitals on a heavy rule, like a storefront board. */
+html[data-look="ledger"] main h2 { font-family: var(--sign); font-weight: 400; text-transform: uppercase; font-size: 2.1rem; line-height: 1.02; letter-spacing: 0.015em; border-top: 4px solid var(--fg); padding-top: 10px; margin-top: 1.6em; }
+html[data-look="ledger"]:has(.crisis-strip) main h2 { font-weight: 800; text-transform: none; font-size: 1.45rem; line-height: 1.2; letter-spacing: 0; }
+html[data-look="ledger"] main h3 { font-size: 1.25rem; line-height: 1.25; }
+html[data-look="ledger"] .eyebrow, html[data-look="ledger"] .mp-when { font-family: var(--mono); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.06em; }
+html[data-look="ledger"] .meta { font-size: 0.95rem; }
+
+/* ---------- Entries: ruled like a ledger, not boxed ---------- */
+html[data-look="ledger"] .card { background: transparent; border: 0; border-top: 2px solid var(--fg); padding: 14px 0 6px; margin: 26px 0; }
+html[data-look="ledger"] .card > :is(h2, h3) { font-family: var(--display); font-weight: 800; text-transform: none; font-size: 1.3rem; line-height: 1.22; letter-spacing: -0.005em; border: 0; padding: 0; margin: 0 0 8px; }
+html[data-look="ledger"] .card .meta { border-top: 1px dashed var(--rule); padding-top: 10px; margin-top: 14px; }
+html[data-look="ledger"] .card .actions { margin: 16px 0; }
+html[data-look="ledger"] .note, html[data-look="ledger"] .add-cal { border-left-width: 6px; }
+
+/* ---------- The checked stamp: the site's signature, set as a typed stamp ---------- */
+html[data-look="ledger"] .checked {
+  display: table; margin: 10px 0 8px; padding: 3px 8px 3px 6px;
+  font-family: var(--mono); font-weight: 600; font-size: 0.875rem; line-height: 1.35; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--brick); border: 2px solid var(--brick); background: var(--bg);
+  transform: rotate(-1.2deg); transform-origin: left center;
+}
+html[data-look="ledger"] .checked::before {
+  content: ""; display: inline-block; width: 0.95em; height: 0.95em; margin-right: 6px; vertical-align: -0.12em; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5l4 4L14 3.5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5l4 4L14 3.5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='square'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+@media (forced-colors: active) { html[data-look="ledger"] .checked::before { background: CanvasText; } }
+
+/* ---------- Home: Help now stays plain; doors become a ruled index ---------- */
+html[data-look="ledger"] .right-now { border-left-width: 6px; }
+html[data-look="ledger"] .front-h { font-size: clamp(2.1rem, 1.5rem + 2.6vw, 3rem); line-height: 1.05; letter-spacing: -0.02em; }
+html[data-look="ledger"] .door-list { gap: 0 28px; }
+html[data-look="ledger"] .door { background: transparent; border: 0; border-top: 2px solid var(--fg); padding: 6px 0 14px; }
+html[data-look="ledger"] .door:has(.door-name:hover) { border-top-color: var(--accent); }
+html[data-look="ledger"] .door-name { color: var(--fg); font-size: 1.3rem; }
+html[data-look="ledger"] .door-name .icon { padding: 0; width: 26px; height: 26px; background: none; color: var(--brick); stroke-width: 2; stroke-linecap: square; stroke-linejoin: miter; }
+html[data-look="ledger"] .door-name:hover span { text-decoration-thickness: 2px; }
+html[data-look="ledger"] .season { background: var(--accent-bg); border: 0; border-left: 6px solid var(--brick); padding: 14px 16px; }
+html[data-look="ledger"] .season > h2 { font-family: var(--sign); font-weight: 400; text-transform: uppercase; font-size: 1.9rem; }
+html[data-look="ledger"] .search input { border-width: 2px; }
+
+/* ---------- Dates: a printed listing with big dates ---------- */
+html[data-look="ledger"] .date-chip { display: grid; gap: 2px; margin: 0 0 8px; color: var(--brick); }
+html[data-look="ledger"] .date-chip > span:first-child { font-family: var(--sign); font-weight: 400; text-transform: uppercase; font-size: 2.3rem; line-height: 1; letter-spacing: 0.01em; }
+html[data-look="ledger"]:has(.crisis-strip) .date-chip > span:first-child { font-family: var(--display); font-weight: 800; font-size: 1.4rem; text-transform: none; }
+html[data-look="ledger"] .date-chip .time { font-family: var(--mono); font-weight: 600; font-size: 0.95rem; color: var(--fg); }
+html[data-look="ledger"] .date-chip .rel { font-family: var(--mono); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+/* Wide screens: the date gets its own column, like a timetable. */
+@media (min-width: 48em) {
+  html[data-look="ledger"] .card.event { display: grid; grid-template-columns: minmax(8.5rem, 12rem) minmax(0, 1fr); column-gap: 24px; }
+  html[data-look="ledger"] .card.event > * { grid-column: 2; }
+  html[data-look="ledger"] .card.event > .date-chip { grid-column: 1; grid-row: 1 / span 8; align-self: start; align-content: start; }
+}
+/* "This week" on Dates: a timetable of rows, day in a fixed column. */
+html[data-look="ledger"] .week ul { border-bottom: 2px solid var(--fg); }
+html[data-look="ledger"] .week li { border-top: 1px solid var(--line); padding: 6px 0; }
+html[data-look="ledger"] .week li:last-child { border-bottom: 0; }
+html[data-look="ledger"] .week a { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); column-gap: 12px; align-items: baseline; }
+html[data-look="ledger"] .week .day { font-family: var(--mono); font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--brick); margin: 0; }
+html[data-look="ledger"] .week .rel { display: block; margin-left: calc(6.5em + 12px); font-family: var(--mono); font-weight: 600; font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.04em; }
+@media (max-width: 22em) { html[data-look="ledger"] .week a { grid-template-columns: minmax(0, 1fr); } html[data-look="ledger"] .week .rel { margin-left: 0; } }
+html[data-look="ledger"] .cal-week > summary { background: transparent; border: 0; border-top: 4px solid var(--fg); padding: 10px 0; color: var(--fg); font-family: var(--sign); font-weight: 400; text-transform: uppercase; font-size: 1.9rem; line-height: 1.05; }
+html[data-look="ledger"] .cal-week .wk-count { font-family: var(--mono); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.04em; color: var(--muted); }
+html[data-look="ledger"] .cal-week > summary:hover .wk-name { text-decoration-thickness: 2px; }
+html[data-look="ledger"] .town-pick a { border-width: 2px; }
+
+/* ---------- Trailhead routes: mile markers on a chained survey line ---------- */
+html[data-look="ledger"] .route { border-left: 0; background: repeating-linear-gradient(var(--fg) 0 2px, transparent 2px 24px) 4px 0 / 9px 100% no-repeat, linear-gradient(var(--fg), var(--fg)) 7px 0 / 3px 100% no-repeat; padding-left: 30px; margin-left: 4px; }
+html[data-look="ledger"] .milepost details { background: var(--card); border: 2px solid var(--fg); }
+html[data-look="ledger"] .milepost summary h2 { font-family: var(--display); font-weight: 800; text-transform: none; font-size: 1.2rem; line-height: 1.25; letter-spacing: 0; border: 0; padding: 0; margin: 0; color: var(--fg); }
+html[data-look="ledger"] .milepost summary:hover h2 .mp-title { text-decoration: underline; }
+html[data-look="ledger"] .milepost summary::after { border-color: var(--fg); }
+html[data-look="ledger"] .mp-num { left: -44px; width: 34px; height: 38px; border-radius: 0; border: 3px solid var(--bg); background: var(--fg); color: var(--bg); font-family: var(--sign); font-weight: 400; font-size: 1.6rem; line-height: 1; }
+html[data-look="ledger"] .mp-body { border-top: 1px dashed var(--rule); }
+html[data-look="ledger"] .steps { border-left: 3px solid var(--fg); }
+html[data-look="ledger"] .step { border: 2px solid var(--fg); }
+html[data-look="ledger"] .step::before { border-radius: 0; background: var(--fg); }
+html[data-look="ledger"] details.fold { border: 0; border-top: 2px solid var(--fg); border-bottom: 1px solid var(--line); background: transparent; }
+html[data-look="ledger"] details.fold > summary { padding-left: 0; }
+html[data-look="ledger"] details.fold > summary :is(h2, h3, h4) { font-family: var(--display); font-weight: 800; text-transform: none; font-size: 1.2rem; letter-spacing: 0; border: 0; padding: 0; color: var(--fg); }
+html[data-look="ledger"] .fold-body { padding-inline: 0; border-top: 1px dashed var(--rule); }
+
+/* ---------- Footer: a colophon ---------- */
+html[data-look="ledger"] footer.site { border-top: 0; position: relative; margin-top: 24px; padding-top: 30px; color: var(--muted); }
+html[data-look="ledger"] footer.site::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 9px; border-top: 4px solid var(--fg); border-bottom: 1px solid var(--fg); }
+html[data-look="ledger"] .foot-links a { color: var(--fg); font-family: var(--display); font-weight: 800; text-decoration-thickness: 1px; }
+html[data-look="ledger"] footer.site p { font-size: 0.95rem; line-height: 1.6; }
+html[data-look="ledger"] footer.site .not-official { font-family: var(--mono); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.01em; border-block: 1px dashed var(--rule); padding-block: 10px; }
+html[data-look="ledger"] footer.site .wrap::after {
+  content: "Colophon: set in Atkinson Hyperlegible Next, Atkinson Hyperlegible Mono and League Gothic, all open-licensed. Every entry shows its source and the day it was checked.";
+  display: block; margin-top: 16px; font-family: var(--mono); font-weight: 600; font-size: 0.875rem; line-height: 1.55; color: var(--muted);
+}
+
+/* ---------- Desktop: a ledger's red-line margin beside the page ---------- */
+@media (min-width: 64em) {
+  html[data-look="ledger"] main.wrap { position: relative; }
+  html[data-look="ledger"] main.wrap::before { content: ""; position: absolute; top: 24px; bottom: 0; left: -22px; width: 5px; border-inline: 1px solid var(--brick); pointer-events: none; }
+}
+
+@media print {
+  html[data-look="ledger"] .checked { transform: none; }
+  html[data-look="ledger"] main.wrap::before { display: none; }
+}
+
+/* A section head's rule already opens the first entry under it. */
+html[data-look="ledger"] main h2 + .card { border-top: 0; padding-top: 4px; }
+/* Inside a tinted box the box is the frame, so its heading needs no rule. */
+html[data-look="ledger"] main :is(.note, .add-cal, .right-now, .season, .next-box) h2 { border-top: 0; padding-top: 0; margin-top: 0.5em; }
+
+/* One shape everywhere: square corners. Only buttons keep a slight 3px round. */
+html[data-look="ledger"] main *:not(.btn):not(.pi-btn):not(.quick-exit):not(.town-pick a) { border-radius: 0 !important; }
+/* "There's more" on home: a ruled list, two columns on wide screens. */
+html[data-look="ledger"] .home-band ul { column-gap: 28px; row-gap: 0; }
+html[data-look="ledger"] .home-band li a { background: transparent; border: 0; border-top: 1px solid var(--fg); padding: 10px 0 12px; }
+html[data-look="ledger"] .home-band strong { font-family: var(--display); font-weight: 800; }
