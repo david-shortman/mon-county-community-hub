@@ -46,6 +46,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2 id="pittsburgh">Bus to Pittsburgh and the airport</h2>
   {r('grey-line-pittsburgh') && <ResourceCard r={r('grey-line-pittsburgh')} showCost />}
 
+  <p>Driving instead? See <a href={`${base}/parking/`}>Parking in Morgantown</a> for garage and meter rates and what to do about a ticket.</p>
+
   <h2 id="rides">Can't take the bus to a medical visit?</h2>
   {r('mountain-line-newfit') && <ResourceCard r={r('mountain-line-newfit')} showCost />}
   <p>On Medicaid or WVCHIP? See <a href={`${base}/medical-rides/`}>Ride to a medical visit</a> for rides through Modivcare.</p>

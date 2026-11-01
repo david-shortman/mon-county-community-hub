@@ -52,13 +52,13 @@ const ITEMS = [
       <h2 id={it.id}>{it.label}</h2>
       {it.note && <p>{it.note}</p>}
       <ul class="ways">
-        {it.sell.length > 0 && <li><strong>Sell it:</strong> {it.sell.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
-        {it.online.length > 0 && <li><strong>Sell it online:</strong> {it.online.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
-        {it.donate.length > 0 && <li><strong>Donate it:</strong> {it.donate.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
-        {it.free.length > 0 && <li><strong>Give it away free:</strong> {it.free.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
-        {it.borrow.length > 0 && <li><strong>Need one instead? Borrow it:</strong> {it.borrow.map((x, i) => <>{i > 0 && '; '}<a href={x.href}>{x.name}</a>{x.who && <>. {x.who}</>}</>)}</li>}
+        {it.sell.length > 0 && <li><strong>Sell it:</strong>{' '}{it.sell.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.online.length > 0 && <li><strong>Sell it online:</strong>{' '}{it.online.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.donate.length > 0 && <li><strong>Donate it:</strong>{' '}{it.donate.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.free.length > 0 && <li><strong>Give it away free:</strong>{' '}{it.free.map((x, i) => <>{i > 0 && ', '}<a href={x.href}>{x.name}</a></>)}</li>}
+        {it.borrow.length > 0 && <li><strong>Need one instead? Borrow it:</strong>{' '}{it.borrow.map((x, i) => <>{i > 0 && '; '}<a href={x.href}>{x.name}</a>{x.who && <>. {x.who}</>}</>)}</li>}
         {it.recycle && <li><strong>Recycle it:</strong> <a href={it.recycle.href}>{it.recycle.text}</a></li>}
-        {it.none && <li><strong>No local option:</strong> {it.none}</li>}
+        {it.none && <li><strong>No local option:</strong>{' '}{it.none}</li>}
       </ul>
       {it.borrow.length > 0 && !hasBorrow && it.borrow.map((x) => <SourceLine sources={x.sources} about={x.name} />)}
       {it.none && restore && <SourceLine sources={restore.sources} about="the ReStore closing" />}

@@ -53,7 +53,7 @@ const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${
 
   <h2 id="coming-up">Coming up this week</h2>
   {events.length ? (
-    <ul>{events.map((e) => <li><strong>{when(e)}:</strong> {e.url ? <a href={e.url}>{e.title}</a> : e.title}{e.org_name && <> ({e.org_name})</>}</li>)}</ul>
+    <ul>{events.map((e) => <li><strong>{when(e)}:</strong>{' '}{e.url ? <a href={e.url}>{e.title}</a> : e.title}{e.org_name && <> ({e.org_name})</>}</li>)}</ul>
   ) : <p>Nothing on our calendar for the next 7 days.</p>}
   {allEvents.length > events.length && <p>Showing the first {events.length} of {allEvents.length} this week.</p>}
   <p>More dates, and help with food, bills and housing: <a href={`${base}/calendar/`}>Dates and deadlines</a>. Call ahead, since times can change.</p>
@@ -61,11 +61,11 @@ const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${
   <h2 id="meetings">Public meetings</h2>
   <h3>This week</h3>
   {meetingsAhead.length ? (
-    <ul>{meetingsAhead.map((m) => <li><strong>{prettyDate(m.date)}:</strong> {m.body}{m.agenda_url && <>, <a href={m.agenda_url}>agenda<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></>}</li>)}</ul>
+    <ul>{meetingsAhead.map((m) => <li><strong>{prettyDate(m.date)}:</strong>{' '}{m.body}{m.agenda_url && <>, <a href={m.agenda_url}>agenda<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></>}</li>)}</ul>
   ) : <p>No city or county meetings listed for the next 7 days yet.</p>}
   <h3>New since {prettyDate(newFrom)}</h3>
   {newOnes.length ? (
-    <ul>{newOnes.map((m) => <li><strong>{m.body}, {prettyDate(m.date)}:</strong> {m.what_is_new.map((w) => NEW_LABEL[w]).join(', ')}{(m.minutes_url && m.what_is_new.includes('minutes')) ? <>, <a href={m.minutes_url}>minutes<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></> : m.agenda_url && <>, <a href={m.agenda_url}>agenda<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></>}</li>)}</ul>
+    <ul>{newOnes.map((m) => <li><strong>{m.body}, {prettyDate(m.date)}:</strong>{' '}{m.what_is_new.map((w) => NEW_LABEL[w]).join(', ')}{(m.minutes_url && m.what_is_new.includes('minutes')) ? <>, <a href={m.minutes_url}>minutes<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></> : m.agenda_url && <>, <a href={m.agenda_url}>agenda<span class="sr-only"> for {m.body} on {prettyDate(m.date)}</span></a></>}</li>)}</ul>
   ) : <p>Nothing new posted since then that we have seen.</p>}
   <p>All agendas and minutes, and other boards we link: <a href={`${base}/meetings/`}>City and county meetings</a>. We list what the city and county post. We do not summarize decisions.</p>
 
@@ -79,13 +79,13 @@ const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${
   <h2 id="thin">Where help is thin</h2>
   <p>Kinds of groups or help a resident might look for that we searched for and could not find on a current page. This is what we found, not a judgment of anyone.</p>
   {gaps.length ? (
-    <ul>{gaps.map((g) => <li><strong>{g.what}.</strong> {g.why} <span class="meta">Last looked {prettyDate(g.checked)}.</span></li>)}</ul>
+    <ul>{gaps.map((g) => <li><strong>{g.what}.</strong>{' '}{g.why} <span class="meta">Last looked {prettyDate(g.checked)}.</span></li>)}</ul>
   ) : <p>Nothing on file yet.</p>}
   <p>Know a group we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 
   <h2 id="changed">What changed on this site</h2>
   {fixes.length ? (
-    <ul>{fixes.map((c) => <li><strong>{prettyDate(c.date)}:</strong> {c.item}. {c.what}</li>)}</ul>
+    <ul>{fixes.map((c) => <li><strong>{prettyDate(c.date)}:</strong>{' '}{c.item}. {c.what}</li>)}</ul>
   ) : <p>No fixes logged yet.</p>}
   <p>Every fix: <a href={`${base}/corrections/`}>Corrections</a>. Slower numbers, like jobs and health: <a href={`${base}/how-we-are-doing/`}>How is Mon County doing?</a></p>
 

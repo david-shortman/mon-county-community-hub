@@ -13,5 +13,5 @@ const map = fs.existsSync(file) ? YAML.parse(fs.readFileSync(file, 'utf8')) ?? {
 const words = map[route] ?? [];
 ---
 {words.length > 0 && (
-  <p class="also-called meta" data-pagefind-weight="7"><strong>Also called:</strong> {words.join(', ')}.</p>
+  <p class="also-called meta" data-pagefind-weight="7"><strong>Also called:</strong>{' '}{words.join(', ')}.</p>
 )}

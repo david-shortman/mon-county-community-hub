@@ -24,7 +24,7 @@ const ok = (r) => r && !r.hidden;
   {ok(fares) && (
     <Milepost n={1} title="Learn how to pay the bus" when="Day 1" id="pay" open>
       <p>{fares.what_to_do}</p>
-      {fares.cost && <p><strong>Cost:</strong> {fares.cost}</p>}
+      {fares.cost && <p><strong>Cost:</strong>{' '}{fares.cost}</p>}
       <div class="actions"><a class="btn" href={fares.contact.url}><span>Fares and programs</span></a></div>
       <SourceLine sources={fares.sources} org={fares.org} about={fares.title} slug={fares.slug} />
     </Milepost>
@@ -42,7 +42,7 @@ const ok = (r) => r && !r.hidden;
   {ok(ruby) && (
     <Milepost n={3} title="Take the bus to a doctor's visit" when="Midweek" id="doctor">
       <p>Their doctor is at Ruby Memorial Hospital. {ruby.what_to_do}</p>
-      {ruby.cost && <p><strong>Cost:</strong> {ruby.cost}</p>}
+      {ruby.cost && <p><strong>Cost:</strong>{' '}{ruby.cost}</p>}
       <SourceLine sources={ruby.sources} org={ruby.org} about={ruby.title} slug={ruby.slug} />
     </Milepost>
   )}
@@ -50,7 +50,7 @@ const ok = (r) => r && !r.hidden;
   {ok(grey) && (
     <Milepost n={4} title="Book a seat to the Pittsburgh airport" when="End of the week" id="airport">
       <p>{grey.who_it_is_for} {grey.what_to_do}</p>
-      {grey.cost && <p><strong>Cost:</strong> {grey.cost}</p>}
+      {grey.cost && <p><strong>Cost:</strong>{' '}{grey.cost}</p>}
       <div class="actions"><a class="btn" href={grey.contact.url}><span>Grey Line page</span></a></div>
       <SourceLine sources={grey.sources} org={grey.org} about={grey.title} slug={grey.slug} />
     </Milepost>

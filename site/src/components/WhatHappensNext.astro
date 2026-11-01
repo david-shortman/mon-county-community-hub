@@ -19,7 +19,7 @@ const has = Boolean(r.what_to_bring?.length || r.what_happens || r.best_time || 
       </>
     )}
     {r.what_happens && <p>{r.what_happens}</p>}
-    {r.best_time && <p><strong>Best time:</strong> {r.best_time}</p>}
+    {r.best_time && <p><strong>Best time:</strong>{' '}{r.best_time}</p>}
     {helpers.length > 0 && (
       <p>Want help with this? {helpers.map((h, i) => <>{i > 0 && ' Or '}{h.title}{h.contact?.phone && <>: <a href={telHref(h.contact.phone)}>{h.contact.phone}</a></>}.</>)}</p>
     )}
