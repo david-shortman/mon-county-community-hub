@@ -6,3 +6,4 @@
 - **Why it matters:** An applicant who is denied can't look up the deadline to ask for a review before the letter arrives, or check it if the letter is lost.
 - **Who keeps it:** Fairmont-Morgantown Housing Authority
 - **Status:** open
+- **Update, sweep 3 (#529):** FMHA's Hours and Directions page (https://fmhousing.com/hours_and_directions.php, read 2026-11-01) says "8:00am - 5:30pm, Monday through Thursday," while the footer on the same page says "8:30am - 4:30pm M-Thurs." Both say closed noon to 1 p.m. The posted grievance procedure is marked "Appendix D" of a larger policy that is not posted.
