@@ -157,7 +157,7 @@ ${agendaBodies}
 - [Printouts](${u('/print/')}): printable sheets of places and phone numbers, made from the listings every morning. Sheets: ${printSheets().map((s) => `[${s.name}](${u(`/print/${s.slug}/`)})`).join(', ')}
 - [Cards and posters to print](${u('/print/cards/')}): wallet cards and half-page posters with a QR code and a short web address
 - [Terms](${u('/terms/')}): what the site is, that information can change, and how to ask for a fix or removal
-- [Privacy](${u('/privacy/')}): what the site collects (no analytics), and how the public Tell us form works
+- [Privacy](${u('/privacy/')}): what the site collects (a cookie-free visit counter, no ads or cookies), and how the public Tell us form works
 - [Make a list for someone](${u('/make-a-list/')}): a helper picks up to 6 places and adds a note, then prints or texts a one-page list; picks live only in the web address
 - [Cards for helpers](${u('/for/helpers/')}): one-page cards for teachers, pastors, librarians, nurses, landlords and bus drivers: if someone tells you about a problem, the first steps with local numbers
 ${roleCards}
