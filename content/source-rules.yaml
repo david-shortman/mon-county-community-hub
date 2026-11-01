@@ -37,6 +37,15 @@ rules:
   - host: instagram.com
     group: manual
     why: Meta's terms allow automated collection only through its API (#166).
+  - host: preschoolsteps.org
+    group: manual
+    why: Its robots.txt says Disallow / for all robots (read 2026-11-01). A person re-checks it on the person sources checklist.
+  - host: wvclboard.wv.gov
+    group: manual
+    why: Its robots.txt says Disallow / for all robots (read 2026-11-01). A person re-checks it on the person sources checklist.
+  - host: cdn.sanity.io
+    group: manual
+    why: Its robots.txt disallows PDFs (Disallow /*.pdf, read 2026-11-01). The health department's fee and permit PDFs live here. A person re-checks them on the person sources checklist.
   - prefix: https://github.com/david-shortman/mon-county-community-hub
     group: reference
     why: Our own repo and report forms.
