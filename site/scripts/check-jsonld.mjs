@@ -7,7 +7,7 @@
 // last-changed dates.
 import fs from 'node:fs';
 import path from 'node:path';
-import { crumbsFromHtml, SITE_NAME, SITE_ORIGIN } from '../src/lib/site-meta.mjs';
+import { crumbsFromHtml, oldestCheckedShown, skipsLastReviewed, SITE_NAME, SITE_ORIGIN } from '../src/lib/site-meta.mjs';
 
 const dist = new URL('../dist/', import.meta.url).pathname;
 const html = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => {
@@ -15,7 +15,7 @@ const html = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) =
   return d.isDirectory() ? html(p) : p.endsWith('.html') ? [p] : [];
 });
 const errors = [];
-let pages = 0, nodes = 0, events = 0, trails = 0;
+let pages = 0, nodes = 0, events = 0, trails = 0, reviewed = 0;
 for (const file of html(dist)) {
   const where = path.relative(dist, file);
   const page = fs.readFileSync(file, 'utf8');
@@ -33,6 +33,16 @@ for (const file of html(dist)) {
     if (!list) errors.push(`${where}: shows a breadcrumb but has no BreadcrumbList`);
     else if (got !== want) errors.push(`${where}: BreadcrumbList "${got}" does not match the breadcrumb "${want}"`);
     else if (list.itemListElement.some((it, i) => it.position !== i + 1)) errors.push(`${where}: BreadcrumbList positions should count from 1`);
+  }
+  // A page that shows a checked date says so in WebPage.lastReviewed, and it
+  // is the oldest one shown (#122).
+  const oldest = skipsLastReviewed(where) ? null : oldestCheckedShown(page);
+  if (oldest) {
+    let graph = [];
+    try { graph = JSON.parse(blocks[0]?.[1] ?? '{}')['@graph'] ?? []; } catch { /* reported below */ }
+    const wp = graph.find((n) => n['@type'] === 'WebPage');
+    if (wp?.lastReviewed !== oldest) errors.push(`${where}: WebPage lastReviewed should be ${oldest}, the oldest checked date shown (got ${wp?.lastReviewed ?? 'none'})`);
+    else reviewed++;
   }
   if (where === 'index.html') {
     let graph = [];
@@ -73,4 +83,4 @@ if (errors.length) {
   console.error(`JSON-LD check failed (${errors.length}):\n- ${errors.join('\n- ')}`);
   process.exit(1);
 }
-console.log(`JSON-LD check: ${pages} pages, ${nodes} items, ${events} in-person events, ${trails} breadcrumbs. Sitemap: ${dated} of ${urls} entries dated.`);
+console.log(`JSON-LD check: ${pages} pages, ${nodes} items, ${events} in-person events, ${trails} breadcrumbs, ${reviewed} pages with lastReviewed. Sitemap: ${dated} of ${urls} entries dated.`);
