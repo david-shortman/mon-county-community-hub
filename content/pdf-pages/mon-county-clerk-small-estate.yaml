@@ -1,0 +1,61 @@
+# The County Clerk's "Small Estate Affidavit Overview of Process (what
+# happens next)" (part of #393), a one-page PDF linked on the Clerk's Probate
+# Office pages (read 2026-11-01). No date is printed on it; the file was saved
+# April 17, 2025. What happens after filing is quoted. Who can use the form
+# and when come from the Clerk's "did not leave a will" page, and are marked.
+slug: mon-county-clerk-small-estate
+title: Small Estate Affidavit Overview of Process (what happens next)
+publisher: Monongalia County Clerk
+pdf: "https://www.monongaliacountyclerk.com/myfiles/probate_office/Small_Estate_Affidavit_Overview_of_Process_(what_happens_next).pdf"
+pdf_date: "no date is printed on it (the file was saved April 17, 2025)"
+found_on: https://www.monongaliacountyclerk.com/index.php/fiduciary-probate/16-general-info/109-decedent-did-not-leave-a-will
+intro: A Small Estate Affidavit lets one person, called the Authorized Successor, collect and pass on a person's small assets without full probate. This is what the County Clerk says happens after you file it. The parts in quotes are the Clerk's own words.
+recheck_days: 180
+sources:
+  - url: "https://www.monongaliacountyclerk.com/myfiles/probate_office/Small_Estate_Affidavit_Overview_of_Process_(what_happens_next).pdf"
+    name: Monongalia County Clerk
+    checked: 2026-11-01
+  - url: https://www.monongaliacountyclerk.com/index.php/fiduciary-probate/16-general-info/109-decedent-did-not-leave-a-will
+    checked: 2026-11-01
+sections:
+  - heading: Who can use it
+    id: who
+    note: From the Clerk's Probate Office page, not the PDF.
+    items:
+      - "The Clerk's page says it can be used \"if the assets of the decedent were under $50,000 for personal property (i.e., bank accounts, anything payable to the estate, automobiles, household goods).\""
+      - "\"If there are real estate or oil and gas interests in the decedent's name only, full probate is required.\""
+      - "Without a will, \"An heir-at-law can file 61 or more days after death if no other probate has been opened.\""
+      - "\"NO BOND IS REQUIRED.\""
+  - heading: After you file
+    id: after
+    items:
+      - "\"Our office reviews the Small Estate Affidavit and will contact the Authorized Successor if any additional information is required.\""
+      - "The Clerk issues a Certificate of Authorization to the Authorized Successor. It lists the assets named on the affidavit, such as \"checks made payable to the decedent's estate, automobiles, bank accounts\"."
+      - "\"The Certificate is good for 6 months from the date of issue.\""
+  - heading: Heirs get a copy and 30 days to object
+    id: object
+    items:
+      - "The Clerk mails a copy of the affidavit to each beneficiary (if there is a will) or heir, \"with a letter explaining their right to object within 30 days to the information on the Affidavit.\""
+      - "\"If an objection is filed, the Small Estate Affidavit may be revoked, and a full probate and administration of the decedent's estate may be required.\""
+      - "\"If no objections are received, the process is complete, and no further interaction is necessary with the County Clerk's Office.\""
+  - heading: Using the certificate
+    id: use
+    items:
+      - "\"The Authorized Successor can use the Certificate of Authorization and the death certificate to complete the necessary business transfers of the decedent's estate assets.\""
+      - "\"The Certificate of Authorization can be presented to banks, the Department of Motor Vehicles or any agency which holds the personal property asset as listed on the Small Estate Affidavit.\""
+      - "\"Banks operate under their own internal policies and procedures and will provide guidance directly to the Authorized Successor.\""
+  - heading: Your duties as Authorized Successor
+    id: duties
+    items:
+      - "You agree to pay or deliver the small assets to the beneficiaries or heirs \"after paying any known or ascertainable creditors of the decedent.\""
+      - "\"The Authorized Successor is liable to the beneficiaries/heirs of the decedent for any breach of fiduciary duty in failing to pay, deliver or administer the small assets for a period of three years after the date of issuance of the Certificate.\""
+      - "\"For legal guidance regarding the decedent's estate, you will need to contact an estate attorney.\""
+  - heading: The PDF
+    id: pdf
+    items:
+      - name: "Small Estate Affidavit Overview of Process (what happens next)"
+        lines: ["One page, from the County Clerk's Probate Office. The affidavit form itself is a separate PDF on the Clerk's page."]
+        links:
+          - label: "Small Estate Affidavit Overview of Process (PDF)"
+            url: "https://www.monongaliacountyclerk.com/myfiles/probate_office/Small_Estate_Affidavit_Overview_of_Process_(what_happens_next).pdf"
+            saved: "April 17, 2025"
