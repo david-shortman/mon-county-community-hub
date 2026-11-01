@@ -1,0 +1,6 @@
+# 2026-11-01: Cards in short labeled parts (#1381)
+
+- **Considered:** David flagged the Mountain Line fares card on /getting-around/ as one long block on a phone. 109 card fields run over 60 words, many on high-stakes pages. Rewriting each record would take many runs, and most would wait for David.
+- **Chose:** fix it in the shared ResourceCard so every card gets it without changing any wording. "Who it's for" and "What to do" get bold labels. A field over 60 words shows its first two sentences; the rest goes behind "More details" (a native `<details>`, so it works without scripts). Option lists and notes that run over 60 words fold too; numbered steps, the actions, always stay visible. Text that names a crisis line (988, 211, 911) is never folded. A short label before a colon in a list item ("Passes:") is bolded. Split the fares record itself into short labeled options, same facts and words.
+- **Shipped:** `site/src/lib/card-text.mjs` with tests (sentence split that skips "a.m.", "St." and the like; no word dropped), the card change, the fares record, and a `check-content` warning for any card field over 60 words (109 today, a list for later passes).
+- **Scoreboard:** none directly. Check the warning count drop as records are split; it should fall below 109 by the next weekly scorecard (November 9).

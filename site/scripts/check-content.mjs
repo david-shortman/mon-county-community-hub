@@ -8,6 +8,7 @@ import { factTopics, loadFacts } from '../src/lib/facts.mjs';
 import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
 import { TOWN_FIELDS, TOWNS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
+import { longFields, FOLD_WORDS } from '../src/lib/card-text.mjs';
 import { checkPlaces } from './check-places.mjs';
 import { agendaProblems, decidedProblems } from '../src/lib/agendas.mjs';
 import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } from '../src/lib/content-dupes.mjs';
@@ -155,6 +156,8 @@ for (const r of resources) {
   for (const f of ['what_happens', 'best_time']) if (r[f] != null && (typeof r[f] !== 'string' || !r[f].trim())) errors.push(`${where}: ${f} must be text`);
   if (r.if_you_want_help != null && (!Array.isArray(r.if_you_want_help) || r.if_you_want_help.some((x) => typeof x !== 'string'))) errors.push(`${where}: if_you_want_help must be a list of resource slugs`);
   { const l = checkListing(r); errors.push(...l.errors); warnings.push(...l.warnings); }
+  // Short card text (#1381): the card folds long fields, but a short field reads best.
+  for (const f of longFields(r)) warnings.push(`${where}: ${f.field} is ${f.words} words (over ${FOLD_WORDS}); move details into steps, options or notes`);
   const c = r.contact;
   if (c == null) continue;
   if (typeof c !== 'object') { errors.push(`${where}: contact must have phone, text, url, place or email under it`); continue; }

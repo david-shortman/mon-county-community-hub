@@ -10,6 +10,7 @@ import SourceLine from './SourceLine.astro';
 import PassItOn from './PassItOn.astro';
 import RelayLine from './RelayLine.astro';
 import { websiteLabel, oldestChecked, staleDaysFor } from '../lib/content.mjs';
+import { foldText, foldExtras, labelPart } from '../lib/card-text.mjs';
 // headingLevel: 3 by default; use 2 when cards sit right under the page's h1.
 // checkFirst: false hides the "check with them first" line (#942), for example on lines that are always open.
 const { r, sms, smsLabel, lead, showCost = false, headingLevel = 3, checkFirst = true } = Astro.props;
@@ -17,6 +18,13 @@ const { r, sms, smsLabel, lead, showCost = false, headingLevel = 3, checkFirst =
 const ALWAYS_OPEN = ['988-lifeline', 'veterans-crisis-line', 'wv-211', 'rdvic-hotline', 'va-homeless-veterans-line'];
 const remind = checkFirst && !ALWAYS_OPEN.includes(r.slug);
 const H = `h${headingLevel}`;
+// Short labeled parts on phones (#1381): a long field shows two sentences,
+// and the rest waits behind "More details". Crisis text is never folded.
+const who = foldText(r.who_it_is_for);
+const what = foldText(r.what_to_do);
+const foldList = foldExtras(r);
+const more = who.rest || what.rest || foldList;
+const parts = (list) => (list ?? []).map(labelPart);
 ---
 {r.hidden ? (
 <article class="card resource" id={r.slug}>
@@ -27,10 +35,20 @@ const H = `h${headingLevel}`;
 <article class="card resource" id={r.slug}>
   <H>{r.title}</H>
   {lead && <p><strong>{lead}</strong></p>}
-  <p>{r.who_it_is_for}{' '}{r.what_to_do}</p>
+  {who.short && <p><strong>Who it's for:</strong>{' '}{who.short}</p>}
+  {what.short && <p><strong>What to do:</strong>{' '}{what.short}</p>}
   {r.steps?.length > 0 && <ol class="card-steps">{r.steps.map((t) => <li>{t}</li>)}</ol>}
-  {r.options?.length > 0 && <ul class="card-steps">{r.options.map((t) => <li>{t}</li>)}</ul>}
-  {r.notes?.map((t) => <p>{t}</p>)}
+  {!foldList && r.options?.length > 0 && <ul class="card-steps">{parts(r.options).map((p) => <li>{p.label && <><strong>{p.label}:</strong>{' '}</>}{p.text}</li>)}</ul>}
+  {!foldList && parts(r.notes).map((p) => <p>{p.label && <><strong>{p.label}:</strong>{' '}</>}{p.text}</p>)}
+  {more && (
+    <details class="card-more">
+      <summary>More details<span class="sr-only"> about {r.title}</span></summary>
+      {who.rest && <p><strong>More on who it's for:</strong>{' '}{who.rest}</p>}
+      {what.rest && <p><strong>More on what to do:</strong>{' '}{what.rest}</p>}
+      {foldList && r.options?.length > 0 && <ul class="card-steps">{parts(r.options).map((p) => <li>{p.label && <><strong>{p.label}:</strong>{' '}</>}{p.text}</li>)}</ul>}
+      {foldList && parts(r.notes).map((p) => <p>{p.label && <><strong>{p.label}:</strong>{' '}</>}{p.text}</p>)}
+    </details>
+  )}
   {showCost && r.cost && r.cost !== 'free' && <p><strong>Cost:</strong>{' '}{r.cost}</p>}
   <Actions callFirst
     phone={r.contact?.phone} phoneLabel={r.title}
@@ -47,3 +65,16 @@ const H = `h${headingLevel}`;
   <PassItOn title={r.title} slug={r.slug} org={r.org} privateTrace={r.private_trace} phone={r.contact?.phone} place={r.contact?.place} hours={r.hours} checked={oldestChecked(r.sources)} />
 </article>
 )}
+
+<script>
+  // Printouts show everything (#1381 review): open folded parts before printing, close them after.
+  window.addEventListener('beforeprint', () => document.querySelectorAll('details.card-more:not([open])').forEach((d) => { d.open = true; d.dataset.printOpened = '1'; }));
+  window.addEventListener('afterprint', () => document.querySelectorAll('details.card-more[data-print-opened]').forEach((d) => { d.open = false; delete d.dataset.printOpened; }));
+</script>
+
+<style>
+  .card-more { margin: 0 0 12px; }
+  .card-more > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .card-more[open] > summary { margin-bottom: 4px; }
+  @media print { .card-more > summary { display: none; } }
+</style>
