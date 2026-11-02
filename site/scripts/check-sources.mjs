@@ -297,6 +297,11 @@ export function phonesOnPage(html) {
     const rest = `${m[2]}${m[3]}`.toUpperCase();
     if (rest.length === 7 && /[A-Z]/.test(rest)) found.add(m[1] + rest.replace(/[A-Z]/g, (c) => KEYPAD[c]));
   }
+  // Local lettered numbers like 304-291-RIDE (Mountain Line). Capital letters
+  // only, so ordinary words after a number are not read as a phone number.
+  for (const m of text.matchAll(/\b([2-9]\d\d)[\s.-]+(\d{3})[\s.-]+([A-Z]{4})\b/g)) {
+    found.add(m[1] + m[2] + m[3].replace(/[A-Z]/g, (c) => KEYPAD[c]));
+  }
   return found;
 }
 
