@@ -60,6 +60,12 @@ sections:
     id: city
     items:
       - name: "Route 4 Orange Line"
+        hours:
+          short: "Orange"
+          trip: 60
+          runs:
+            - { days: mtwrfs, first: "7:00", last: "19:00" }
+          early: { days: mtwrf, at: ["5:40", "6:40"] }
         lines:
           - "Monday to Saturday: first run 7 a.m., last run 7 p.m."
           - "Monday to Friday, early buses to the Waterfront area and Dorsey Lane leave Pifer Terminal at 5:40 a.m. and 6:40 a.m."
@@ -76,6 +82,12 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_4.pdf
             date: "Vigente en enero de 2019"
       - name: "Route 6 Gold Line"
+        hours:
+          short: "Gold"
+          trip: 53
+          runs:
+            - { days: mtwrf, first: "6:00", last: "19:00" }
+            - { days: su, first: "7:00", last: "19:00" }
         lines:
           - "Monday to Friday: first run 6 a.m., last run 7 p.m."
           - "Saturday and Sunday: first run 7 a.m., last run 7 p.m."
@@ -92,6 +104,13 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_6.pdf
             date: "Vigente en agosto de 2021"
       - name: "Route 7 Red Line"
+        hours:
+          short: "Red"
+          trip: 45
+          runs:
+            - { days: mtwrf, first: "6:20", last: "18:30" }
+            - { days: s, first: "7:30", last: "18:30" }
+          unsure: "Weekday first run: the route page says 6:20 a.m., the 2018 PDF says 6:30 a.m."
         lines:
           - "Monday to Friday: first run 6:20 a.m., last run 6:30 p.m."
           - "Saturday: first run 7:30 a.m., last run 6:30 p.m."
@@ -109,6 +128,12 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_7.pdf
             date: "Vigente en agosto de 2018"
       - name: "Route 8 Brookhaven"
+        hours:
+          short: "Brookhaven"
+          runs:
+            - { days: mtwrf, first: "6:30", last: "19:30" }
+            - { days: s, first: "7:40", last: "19:30" }
+          unsure: "One trip takes 90 or 40 minutes (the route page says \"90/40 minutes\"), so the chart does not draw its last trip."
         lines:
           - "Monday to Friday: first run 6:30 a.m., last run 7:30 p.m."
           - "Saturday: first run 7:40 a.m., last run 7:30 p.m."
@@ -125,6 +150,12 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_8.pdf
             date: "Vigente en febrero de 2023"
       - name: "Route 9 Purple Line"
+        hours:
+          short: "Purple"
+          trip: 83
+          runs:
+            - { days: mtwrfs, first: "6:30", last: "19:15" }
+            - { days: u, first: "9:30", last: "21:30" }
         lines:
           - "Monday to Saturday: first run 6:30 a.m., last run 7:15 p.m."
           - "Sunday: first run 9:30 a.m., last run 9:30 p.m."
@@ -141,6 +172,13 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_9.pdf
             date: "Vigente en agosto de 2018"
       - name: "Route 11 Cassville"
+        hours:
+          short: "Cassville"
+          trip: 55
+          runs:
+            - { days: mtwrf, first: "6:00", last: "19:30" }
+            - { days: s, first: "8:00", last: "19:40" }
+            - { days: u, first: "11:00", last: "18:00" }
         lines:
           - "Monday to Friday: first run 6 a.m., last run 7:30 p.m."
           - "Saturday: first run 8 a.m., last run 7:40 p.m."
@@ -158,6 +196,12 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_11.pdf
             date: "Vigente septiembre de 2020"
       - name: "Route 12 Blue Line"
+        hours:
+          short: "Blue"
+          trip: 60
+          runs:
+            - { days: mtwrf, first: "6:00", last: "17:00" }
+            - { days: s, first: "8:00", last: "16:00" }
         lines:
           - "Monday to Friday: first run 6 a.m., last run 5 p.m."
           - "Saturday: first run 8 a.m., last run 4 p.m."
@@ -174,6 +218,11 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_12.pdf
             date: "Vigente en enero de 2019"
       - name: "Route 13 Crown"
+        hours:
+          short: "Crown"
+          trip: 70
+          runs:
+            - { days: mtwrfs, first: "7:00", last: "17:15" }
         lines:
           - "Monday to Saturday: first run 7 a.m., last run 5:15 p.m."
           - "One trip around the route: 70 minutes."
@@ -189,6 +238,11 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_13.pdf
             date: "Vigente en enero de 2024"
       - name: "Route 16 Pink Line"
+        hours:
+          short: "Pink"
+          trip: 40
+          runs:
+            - { days: mtwrfs, first: "7:15", last: "18:05" }
         lines:
           - "Monday to Saturday: first run 7:15 a.m., last run 6:05 p.m."
           - "One trip around the route: 40 minutes."
@@ -204,6 +258,12 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_16.pdf
             date: "Vigente en agosto de 2018"
       - name: "Route 46 Eastern Circulator"
+        hours:
+          short: "Eastern"
+          trip: 60
+          runs:
+            - { days: mtwrf, first: "6:25", last: "18:45" }
+            - { days: s, first: "6:45", last: "17:15" }
         lines:
           - "Monday to Friday, all year: first run 6:25 a.m., last run 6:45 p.m."
           - "Saturday: first run 6:45 a.m., last run 5:15 p.m."
@@ -220,6 +280,12 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_46.pdf
             date: "Vigente en enero de 2019"
       - name: "Route 47 Northern Circulator"
+        hours:
+          short: "Northern"
+          trip: 60
+          runs:
+            - { days: mtwrf, first: "5:55", last: "18:55" }
+            - { days: s, first: "7:26", last: "18:55" }
         lines:
           - "Monday to Friday: first run 5:55 a.m., last run 6:55 p.m."
           - "Saturday: first run 7:26 a.m., last run 6:55 p.m."
@@ -236,6 +302,11 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_47.pdf
             date: "Vigente en agosto de 2018"
       - name: "Route 50 Don Knotts"
+        hours:
+          short: "Don Knotts"
+          trip: 51
+          runs:
+            - { days: mtwrfsu, first: "7:00", last: "20:00" }
         lines:
           - "Monday to Sunday: first run 7 a.m., last run 8 p.m."
           - "One trip around the route: 51 minutes."
@@ -251,6 +322,13 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_50.pdf
             date: "Vigente septiembre de 2022"
       - name: "Route 51 Westridge Mylan"
+        hours:
+          short: "Westridge"
+          trip: 60
+          runs:
+            - { days: mtwrf, first: "7:00", last: "21:00" }
+            - { days: s, first: "8:00", last: "21:00" }
+            - { days: u, first: "11:00", last: "21:00" }
         lines:
           - "Monday to Friday: first run 7 a.m., last run 9 p.m."
           - "Saturday: first run 8 a.m., last run 9 p.m."
@@ -268,6 +346,13 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_51.pdf
             date: "Vigente en mayo de 2022"
       - name: "Route 52 Wadestown"
+        hours:
+          short: "Wadestown"
+          trip: 60
+          runs:
+            - { days: mtwrf, first: "6:30", last: "19:00" }
+          unsure_from: "17:00"
+          unsure: "Last run: the route page says 7 p.m., the 2018 PDF says service ends at 5 p.m. The chart marks 5 to 7 p.m. as unsure."
         lines:
           - "Monday to Friday: first run 6:30 a.m., last run 7 p.m."
           - "One trip around the route: 60 minutes."
@@ -287,6 +372,11 @@ sections:
     id: evening
     items:
       - name: "Route 2 Downtown Mall PM"
+        hours:
+          short: "Mall PM"
+          trip: 60
+          runs:
+            - { days: mtwrfs, first: "18:00", last: "23:00" }
         lines:
           - "Monday to Saturday: first run 6 p.m., last run 11 p.m."
           - "One trip around the route: 60 minutes."
@@ -302,6 +392,12 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_2.pdf
             date: "Vigente en agosto de 2018"
       - name: "Route 1 Campus PM"
+        hours:
+          short: "Campus PM"
+          trip: 30
+          runs:
+            - { days: rfs, first: "18:00", last: "3:40" }
+          wvu: true
         lines:
           - "Thursday to Saturday: first run 6 p.m., last run 3:40 a.m."
           - "Only during the WVU fall and spring sessions."
@@ -322,6 +418,12 @@ sections:
     note: "Most of these run only during the WVU fall and spring sessions."
     items:
       - name: "Route 30 West Run"
+        hours:
+          short: "West Run"
+          runs:
+            - { days: mtwrf, first: "7:10", last: "19:50" }
+            - { days: rfs, first: "21:00", last: "2:30" }
+          wvu: true
         lines:
           - "Monday to Friday: first run 7:10 a.m., last run 7:50 p.m."
           - "Thursday to Saturday nights: first run 9 p.m., last run 2:30 a.m."
@@ -339,6 +441,12 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_30.pdf
             date: "Vigente en enero de 2025"
       - name: "Route 38 Blue & Gold"
+        hours:
+          short: "Blue & Gold"
+          runs:
+            - { days: mtwrf, first: "6:40", last: "20:40" }
+            - { days: su, first: "15:20", last: "19:20" }
+          wvu_note: "Weekend runs are only in the fall and spring sessions; no weekend service in summer."
         lines:
           - "During the WVU fall and spring sessions, including breaks: Monday to Friday, first run 6:40 a.m., last run 8:40 p.m. Saturday and Sunday, first run 3:20 p.m., last run 7:20 p.m."
           - "During the WVU summer session: Monday to Friday, first run 6:40 a.m., last run 8:40 p.m. No weekend service in summer."
@@ -355,6 +463,11 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_38.pdf
             date: "Vigente en agosto de 2021"
       - name: "Route 39 Beechurst Express"
+        hours:
+          short: "Beechurst"
+          runs:
+            - { days: mtwrf, first: "8:10", last: "17:50" }
+          wvu: true
         lines:
           - "Monday to Friday: first run 8:10 a.m., last run 5:50 p.m."
           - "Only during the WVU fall and spring sessions."
@@ -371,6 +484,11 @@ sections:
             url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_39.pdf
             date: "Vigente en agosto de 2016"
       - name: "Route 44 Valley View"
+        hours:
+          short: "Valley View"
+          runs:
+            - { days: mtwrf, first: "7:30", last: "14:15" }
+          wvu: true
         lines:
           - "Monday to Friday: first run 7:30 a.m., last run 2:15 p.m."
           - "Only during the WVU fall and spring sessions, including breaks. The route page says there is no longer summer service."

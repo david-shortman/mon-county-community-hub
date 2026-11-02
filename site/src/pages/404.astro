@@ -12,3 +12,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   </p>
   <HelpNow />
 </Base>
+<style is:global>
+  /* Not found (#396, Press look): a Log Cabin quilt block, our plainest
+     "nothing here" mark, above the title. Our own drawing; the page sets the color. */
+  main:has(> section.note #help-now-h) > h1::before {
+    content: ""; display: block; width: 56px; height: 56px; margin: 0 0 var(--s4);
+    background: var(--rust);
+    -webkit-mask: url("/marks/log-cabin.svg") center / contain no-repeat; mask: url("/marks/log-cabin.svg") center / contain no-repeat;
+  }
+  @media (forced-colors: active) { main > h1::before { display: none; } }
+</style>

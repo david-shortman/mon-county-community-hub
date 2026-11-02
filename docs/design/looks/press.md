@@ -1,5 +1,7 @@
 # Look: Press
 
+**Status (November 2, 2026): Press is the site's design.** David picked it and it went live for everyone ([decision](../../decisions/2026-11-02-1545-press-look.md)). The `?look=press` preview no longer exists; the rules now live in `site/src/styles/press.css` and the tokens in `site/src/layouts/Base.astro`. One change from the preview: urgent pages, including the home page, keep Atkinson headings and do not load the serif, so they stay under the 50 KB budget. The rest of this page is the record of how the look was built.
+
 Preview: [everythingmorgantown.org/?look=press](https://everythingmorgantown.org/?look=press). Part of the visual identity wave (#396), phase 2. Built November 1, 2026. Only a browser that opens that link sees it; `?look=off` goes back to normal.
 
 ## The idea
@@ -134,6 +136,16 @@ Before and after at 390px:
 The tab bar and preview bar are hidden in these shots so the page shows.
 
 Checked after the pass: no overflow at 320px with 200% text on ten pages (home, `/money/`, `/stay-tonight/`, `/legal-help/`, `/calendar/`, `/start-a-business/`, 404, `/utility-bills/`, `/care/`, `/thrift-shops/`). axe (A, AA and AAA rules) found no violations on seven pages at 390px and 1280px, light and dark.
+
+## Shorter header on phones (November 2, 2026)
+
+David asked for a shorter header. On phones the date line had "MORGANTOWN" in spaced capitals plus the full forecast, so it wrapped to two lines under the name. Now, on phones only:
+
+- "Morgantown" is hidden from sight on the date line, because the name right above already says it. Screen readers still hear it.
+- The line is in normal case, not spaced capitals.
+- The weather shows the glyph and temperature only ("High 70°"). The sky words ("mostly sunny") stay for screen readers. This uses the neutral `.wx-temp` and `.wx-sky` spans added to the dateline (#396); the normal look is unchanged.
+
+Result at 390px: the header goes from 116px to 89px, and the date line fits on one line even at 320px. Nothing overflows at 200% text. Wide screens keep the centered masthead.
 
 ## How it was checked
 
