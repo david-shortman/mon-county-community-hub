@@ -192,7 +192,6 @@ personas:
   next_steps:
   - /after-you-apply/medicare-savings/
   - /staying-well/
-  not_linked_yet:
   - /bus-passes/
   - /staying-active/
   questions:
@@ -240,7 +239,6 @@ personas:
   next_steps:
   - /disability-and-aging/
   - /help-at-home/
-  not_linked_yet:
   - /bus-passes/
   questions:
   - q49
@@ -320,7 +318,6 @@ personas:
   next_steps:
   - /help/food/today/
   - /money/
-  not_linked_yet:
   - /getting-around/
   questions:
   - q53
@@ -381,7 +378,6 @@ personas:
   next_steps:
   - /contractor-license/
   - /work-and-learning/
-  not_linked_yet:
   - /permits/
   questions:
   - q09
@@ -516,7 +512,6 @@ personas:
   next_steps:
   - /make-it-better/
   - /find-your-people/
-  not_linked_yet:
   - /sell-or-donate/
   questions:
   - q16
@@ -533,7 +528,6 @@ personas:
   next_steps:
   - /make-it-better/boards/
   - /meetings/agendas/
-  not_linked_yet:
   - /vote/
   questions:
   - q12
@@ -561,7 +555,6 @@ personas:
   - /community-centers/
   - /arts-and-making/
   - /meet-people/
-  not_linked_yet:
   - /parks/
   questions:
   - q43

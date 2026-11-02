@@ -3,8 +3,7 @@
 // getting around Morgantown without a car in the first week. The person is
 // made up; every fact is read from a resource record in content/resources/.
 import Base from '../../layouts/Base.astro';
-import Route from '../../components/Route.astro';
-import Milepost from '../../components/Milepost.astro';
+import { scene } from '../../lib/first-week-scene.mjs';
 import SourceLine from '../../components/SourceLine.astro';
 import { resource, telHref } from '../../lib/content.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
@@ -18,48 +17,65 @@ const ok = (r) => r && !r.hidden;
 <Base title="Example: a first week in Morgantown without a car" description="A made-up example of how someone new to Morgantown without a car could get around in their first week: paying the Mountain Line bus fare, ride free and half fare programs, the bus to Ruby Memorial, and the Grey Line to Pittsburgh.">
   <p class="example-tag"><strong>Example.</strong> This is a made-up person, not a real story. The bus routes and programs are real, and each step shows its source.</p>
   <h1>Example: a first week in Morgantown without a car</h1>
-  <p class="lede">Someone just moved to Morgantown without a car. They need to get to a doctor's visit this week and to the Pittsburgh airport later on. Here is what they could do in their first week. Tap a step to open it.</p>
+  <p class="lede">Someone just moved to Morgantown without a car. They need to get to a doctor's visit this week and to the Pittsburgh airport later on. Here is what they could do in their first week, one step at a time.</p>
 
-  <Route label="Steps in the example">
+  <section class="wk" id="wk-explainer" aria-labelledby="wk-h">
+  <h2 id="wk-h">The week, step by step</h2>
+  <p class="wk-key"><strong>About the drawing:</strong> it is a sketch, not a map, and not to scale. Home is an example. The bus stops and routes are real.</p>
+  <ol class="wk-cards" aria-label="Steps in the example">
   {ok(fares) && (
-    <Milepost n={1} title="Learn how to pay the bus" when="Day 1" id="pay" open>
+    <li id="pay">
+      <p class="wk-when">Day 1</p>
+      <h3>Step 1 of 5. Learn how to pay the bus</h3>
+      <div class="wk-snap"><Fragment set:html={scene(1)} /></div>
       <p>{fares.what_to_do}</p>
       {fares.cost && <p><strong>Cost:</strong>{' '}{fares.cost}</p>}
       <div class="actions"><a class="btn" href={fares.contact.url}><span>Fares and programs</span></a></div>
       <SourceLine sources={fares.sources} org={fares.org} about={fares.title} slug={fares.slug} />
-    </Milepost>
+    </li>
   )}
-
   {ok(fares) && (
-    <Milepost n={2} title="Check whether they ride free or for half fare" when="Day 1" id="free">
+    <li id="free">
+      <p class="wk-when">Day 1</p>
+      <h3>Step 2 of 5. Check whether they ride free or for half fare</h3>
+      <div class="wk-snap"><Fragment set:html={scene(2)} /></div>
       <p>{fares.who_it_is_for}</p>
+      {fares.options?.[0] && <p>{fares.options[0]}</p>}
       <p>Not sure? They can call Mountain Line at <a href={telHref(fares.contact.phone)}>{fares.contact.phone}</a>.</p>
       <div class="actions"><a class="btn" href={fares.contact.url}><span>Ride free and half fare rules</span></a></div>
-      <SourceLine sources={fares.sources} org={fares.org} about={fares.title} slug={fares.slug} />
-    </Milepost>
+      <SourceLine sources={fares.sources} org={fares.org} about={`${fares.title}, free and half fare`} slug={fares.slug} />
+    </li>
   )}
-
   {ok(ruby) && (
-    <Milepost n={3} title="Take the bus to a doctor's visit" when="Midweek" id="doctor">
+    <li id="doctor">
+      <p class="wk-when">Midweek</p>
+      <h3>Step 3 of 5. Take the bus to a doctor's visit</h3>
+      <div class="wk-snap"><Fragment set:html={scene(3)} /></div>
       <p>Their doctor is at Ruby Memorial Hospital. {ruby.what_to_do}</p>
       {ruby.cost && <p><strong>Cost:</strong>{' '}{ruby.cost}</p>}
       <SourceLine sources={ruby.sources} org={ruby.org} about={ruby.title} slug={ruby.slug} />
-    </Milepost>
+    </li>
   )}
-
   {ok(grey) && (
-    <Milepost n={4} title="Book a seat to the Pittsburgh airport" when="End of the week" id="airport">
+    <li id="airport">
+      <p class="wk-when">End of the week</p>
+      <h3>Step 4 of 5. Book a seat to the Pittsburgh airport</h3>
+      <div class="wk-snap"><Fragment set:html={scene(4)} /></div>
       <p>{grey.who_it_is_for} {grey.what_to_do}</p>
+      {grey.options?.find((o) => o.includes('Pifer Terminal')) && <p>{grey.options.find((o) => o.includes('Pifer Terminal'))}</p>}
       {grey.cost && <p><strong>Cost:</strong>{' '}{grey.cost}</p>}
       <div class="actions"><a class="btn" href={grey.contact.url}><span>Grey Line page</span></a></div>
       <SourceLine sources={grey.sources} org={grey.org} about={grey.title} slug={grey.slug} />
-    </Milepost>
+    </li>
   )}
-
-  <Milepost n={5} title="Look for what comes next" when="Later" id="next">
-    <p>For rides to medical visits by appointment, see <a href={`${base}/medical-rides/`}>Ride to a medical visit</a>. For every route and the WVU Ride Free program, see <a href={`${base}/getting-around/`}>Getting around without a car</a>.</p>
-  </Milepost>
-  </Route>
+    <li id="next">
+      <p class="wk-when">Later</p>
+      <h3>Step 5 of 5. Look for what comes next</h3>
+      <div class="wk-snap"><Fragment set:html={scene(5)} /></div>
+      <p>By now the week has two trips: the bus to a doctor's visit and the Grey Line toward Pittsburgh. For rides to medical visits by appointment, see <a href={`${base}/medical-rides/`}>Ride to a medical visit</a>. For every route and the WVU Ride Free program, see <a href={`${base}/getting-around/`}>Getting around without a car</a>.</p>
+    </li>
+  </ol>
+  </section>
 
   <p>Rather start on your own? Everything above is on <a href={`${base}/getting-around/`}>Getting around without a car</a>.</p>
 
@@ -68,4 +84,39 @@ const ok = (r) => r && !r.hidden;
 
 <style>
   .example-tag { border-left: 4px solid var(--accent); padding: 0.5rem 0.75rem; background: var(--accent-bg); color: var(--fg); }
+  /* The week as cards (#1442). Still version: a plain numbered list, each card with
+     its own still drawing. Press tokens only. */
+  .wk-key { font-size: 0.95rem; color: var(--muted); }
+  .wk-cards { list-style: none; margin: var(--s5) 0; padding: 0; }
+  .wk-cards > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
+  .wk-cards h3 { margin: 0 0 var(--s2); }
+  .wk-cards p { margin: 0 0 var(--s2); }
+  .wk-when { font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  .wk-snap { margin: var(--s2) 0 var(--s3); padding: var(--s2); background: var(--bg); border-radius: 2px; }
+  .wk-cards :global(.wk-scene) { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; overflow: visible; }
+  .wk-cards :global(.wk-scene text) { font-size: 10px; fill: var(--muted); }
+  .wk-cards :global(.wk-scene .tb) { font: 800 11px var(--kicker); fill: var(--fg); }
+  .wk-cards :global(.wk-scene .tc) { fill: var(--fg); font-weight: 700; }
+  .wk-cards :global(.wk-scene .route) { fill: none; stroke: var(--line); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  .wk-cards :global(.wk-scene .road) { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 2 4; }
+  .wk-cards :global(.wk-scene .trip) { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .wk-cards :global(.wk-scene .trip2) { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 2 5; stroke-linecap: round; }
+  .wk-cards :global(.wk-scene .trip3) { fill: none; stroke: var(--water); stroke-width: 3; stroke-dasharray: 10 5; }
+  .wk-cards :global(.wk-scene .arrh3) { fill: var(--water); }
+  .wk-cards :global(.wk-scene .stop) { fill: var(--card); stroke: var(--fg); stroke-width: 2; }
+  .wk-cards :global(.wk-scene .dn) { fill: var(--card); stroke: var(--fg); stroke-width: 1.5; }
+  .wk-cards :global(.wk-scene .home) { fill: var(--rust); stroke: var(--card); stroke-width: 2; }
+  .wk-cards :global(.wk-scene .chip) { fill: var(--sand); stroke: var(--fg); stroke-width: 1; }
+  .wk-cards :global(.wk-scene .tag) { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 1.5; }
+  .wk-cards :global(.wk-scene .bs) { fill: var(--accent); }
+  .wk-cards :global(.wk-scene .bs2) { fill: var(--water); }
+  .wk-cards :global(.wk-scene .e) { opacity: 0; }
+  .wk-cards :global(.wk-scene .bus-doc) { transform: translate(250px, 46px); }
+  .wk-cards :global(.wk-scene .bus-air) { transform: translate(286px, 176px); }
+  .wk-cards :global(.wk-scene[data-s="1"] .e-pay),
+  .wk-cards :global(.wk-scene[data-s="2"] .e-fare),
+  .wk-cards :global(.wk-scene[data-s="3"] :is(.e-trip-doc, .e-bus-doc)),
+  .wk-cards :global(.wk-scene[data-s="4"] :is(.e-trip-doc, .e-trip-air, .e-bus-air)),
+  .wk-cards :global(.wk-scene[data-s="5"] :is(.e-trip-doc, .e-trip-air, .e-lbl-doc, .e-lbl-air)) { opacity: 1; }
+  .wk-cards :global(.wk-scene[data-s="4"] .e-trip-doc) { opacity: 0.45; }
 </style>
