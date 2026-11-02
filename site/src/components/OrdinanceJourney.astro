@@ -14,7 +14,13 @@
 // How it behaves:
 // - Still version (no script, reduced motion, motion turned off): a plain
 //   numbered list, each step with its own still drawing.
+// - Otherwise one drawing stays in view (beside the steps on wide screens, at
+//   the top on tall phones) and the ordinance card moves to the agenda line of
+//   the step in the middle of the screen, while the date marker slides from
+//   October 6 to October 20. Only opacity and transform move. The step watcher
+//   and "Turn off motion" come from the shared kit (#1441).
 // - The drawings are aria-hidden; each step's text says where the ordinance is.
+import MotionSwitch from './MotionSwitch.astro';
 const { cite } = Astro.props;
 const ORD = 'An Ordinance Providing for Release of an Easement and Acceptance of a Modified Easement over Parcel 45.4 of Tax Map 15';
 // Rows of the drawn agenda, in agenda order. y is the row's top edge.
@@ -91,9 +97,14 @@ const N = steps.length;
 <section class="ord-x" id="ord-explainer" aria-labelledby="ord-h">
   <h2 id="ord-h">Follow one ordinance through the agenda</h2>
   <p>One ordinance can come up at more than one meeting, and in a different part of the agenda each time. Here is a real one from 2026, followed across two City Council agendas, so you can see when to show up.</p>
-  <p class="ord-tools"><a href="#ord-summary">Skip to the summary</a></p>
+  <MotionSwitch skip="#ord-summary" />
   <p class="ord-key"><strong>About the drawing:</strong> the agenda lines are the real ones, in the same order as on the <a href={cite.oct20}>October 20, 2026 agenda</a>. The drawing leaves out the other lines and is not to scale.</p>
 
+  <div class="ord-scrolly">
+  <figure class="ord-stage" aria-hidden="true">
+    <Fragment set:html={scene(1)} />
+    <p class="ord-now" data-now></p>
+  </figure>
   <ol class="ord-steps" aria-label="One ordinance, step by step">
     {steps.map((st, i) => (
       <li id={st.id} data-short={st.short}>
@@ -104,6 +115,7 @@ const N = steps.length;
       </li>
     ))}
   </ol>
+  </div>
 
   <div class="ord-summary" id="ord-summary" tabindex="-1">
     <h3>The path in short</h3>
@@ -112,10 +124,20 @@ const N = steps.length;
   </div>
 </section>
 
+<script>
+  import { watchSteps } from '../lib/motion-client.mjs';
+  const sec = document.getElementById('ord-explainer');
+  const stage = sec?.querySelector('.ord-stage .ord-scene');
+  const now = sec?.querySelector('[data-now]');
+  const steps = sec ? Array.from(sec.querySelectorAll<HTMLElement>('.ord-steps > li')) : [];
+  watchSteps(sec, steps, (i) => {
+    stage?.setAttribute('data-s', String(i + 1));
+    if (now) now.textContent = 'Step ' + (i + 1) + ' of ' + steps.length + ': ' + (steps[i].dataset.short ?? '');
+  });
+</script>
+
 <style is:global>
   /* ===== Follow one ordinance (#1443). Press tokens only; all scoped to #ord-explainer. ===== */
-  #ord-explainer .ord-tools { margin: 0 0 var(--s2); }
-  #ord-explainer .ord-tools a { display: inline-flex; align-items: center; min-height: 44px; }
   #ord-explainer .ord-key { font-size: 0.95rem; color: var(--muted); }
   #ord-explainer .ord-steps { list-style: none; margin: var(--s5) 0; padding: 0; }
   #ord-explainer .ord-steps > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
@@ -171,4 +193,35 @@ const N = steps.length;
   #ord-explainer .ord-scene[data-s="4"] .e-note,
   #ord-explainer .ord-scene[data-s="5"] .e-r2,
   #ord-explainer .ord-scene[data-s="5"] .e-vote { opacity: 1; }
+
+  /* Live: only with script, motion allowed and not turned off (the kit adds .is-live). */
+  #ord-explainer .ord-stage { display: none; margin: 0; }
+  #ord-explainer .ord-now { margin: var(--s2) 0 0; font-weight: 700; font-size: 1rem; text-align: center; }
+  #ord-explainer.is-live .ord-snap { display: none; }
+  #ord-explainer#ord-explainer.is-live .ord-stage { display: block; }
+  #ord-explainer.is-live .ord-steps > li { margin-bottom: calc(3.5 * var(--s8)); }
+  #ord-explainer.is-live .ord-steps > li:last-child { margin-bottom: var(--s7); }
+  #ord-explainer.is-live .ord-steps > li.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    #ord-explainer.is-live .ord-stage :is(.ord, .mark) { transition: transform 0.7s ease, opacity 0.4s ease; }
+    #ord-explainer.is-live .ord-stage :is(.e, .paper) { transition: opacity 0.4s ease; }
+    #ord-explainer.is-live .ord-stage[data-s] .e-note, #ord-explainer.is-live .ord-stage .e-vote, #ord-explainer.is-live .ord-stage .e-speak { transition-delay: 0.5s; }
+  }
+  @media (min-width: 44rem) {
+    #ord-explainer.is-live .ord-scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+    #ord-explainer#ord-explainer.is-live .ord-stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--s4)); margin-top: var(--s5); padding: var(--s3); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; }
+  }
+  /* Tall phones: the drawing holds at the top while the steps scroll under it.
+     Short or zoomed-in screens keep a still drawing in each step instead. */
+  @media (max-width: 43.99rem) and (min-height: 36rem) {
+    #ord-explainer#ord-explainer.is-live .ord-stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 calc(-1 * var(--s2)) var(--s4); padding: var(--s2); background: var(--card); border-bottom: 2px solid var(--fg); }
+    /* 290px: about the height of the held drawing on a phone. */
+    #ord-explainer.is-live .ord-steps > li { scroll-margin-top: 290px; }
+    html:has(#ord-explainer.is-live) { scroll-padding-top: 290px; }
+  }
+  @media (max-width: 43.99rem) and (max-height: 35.99rem) {
+    #ord-explainer.is-live .ord-snap { display: block; }
+    #ord-explainer#ord-explainer.is-live .ord-stage { display: none; }
+    #ord-explainer.is-live .ord-steps > li { margin-bottom: var(--s4); }
+  }
 </style>
