@@ -1,0 +1,18 @@
+title: WVU PRT (Personal Rapid Transit)
+slug: wvu-prt
+org: west-virginia-university
+topics: [moving]
+who_it_is_for: WVU says the PRT connects "students, faculty, staff, and community members" to the Downtown, Evansdale and Health Sciences campuses. WVU students, faculty and staff ride free. Anyone else can ride for 50 cents.
+what_to_do: Go to the PRT station closest to where you are starting. WVU students, faculty and staff tap their Mountaineer ID Card at the turnstile. Everyone else puts 50 cents in the coin slot at the turnstile. Five stations serve the three campuses.
+contact:
+  url: https://prt.wvu.edu/hours-of-operation
+  url_label: PRT hours
+hours: "Monday to Friday, 6:30 a.m. to 10:15 p.m. Saturday, 9:30 a.m. to 5 p.m. Closed Sunday. WVU says the PRT closes for school breaks and runs one extra hour after a home football or men's basketball game that goes past normal hours. Check WVU's hours page before you go."
+cost: "Free for WVU students, faculty and staff. 50 cents a ride for everyone else."
+sources:
+  - url: https://prt.wvu.edu/hours-of-operation
+    checked: 2026-11-02
+  - url: https://prt.wvu.edu/how-to-ride
+    checked: 2026-11-02
+  - url: https://prt.wvu.edu/
+    checked: 2026-11-02
