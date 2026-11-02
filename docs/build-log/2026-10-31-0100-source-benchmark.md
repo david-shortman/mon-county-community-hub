@@ -6,3 +6,5 @@
 - **Result:** our pages beat every source on 7 of 8 needs and meet the full bar on 1 of 8 (where to stay tonight). Gaps: food this week has no pantry list with days and hours, a doctor without insurance has no page of its own (ties the city's page), eviction help is two taps in, and water shutoff help still needs a call. Three WVU pages refused our tools after the automatic check, so they were left out, not guessed. Comparing formats, not organizations: these sources are where much of our information comes from.
 - **Scoreboard:** Level 1, new "Source benchmark" table. Check 2026-11-01 (first Sunday run).
 - **Cost:** $0. Playwright and poppler are already in the environment.
+
+Checked 2026-11-01: first Sunday run, full monthly re-measure. Our page beats every source on 7 of 8 needs (no change) and meets the bar on 6 of 8 (was 1 of 8). q03 still needs a call. [Run file](../../content/findability/benchmark/2026-11-01.yaml).

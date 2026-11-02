@@ -1,0 +1,5 @@
+# 2026-10-31: Voter ID wording matches the state's "must" (#529 wave 3, lane Q)
+
+- **Considered:** the election week additions to /vote/ (#970). About 40 dates, hours, places, deadlines, phone numbers and ID rules were checked against the County Clerk's 2026 general election page and the Secretary of State's GoVoteWV, early voting, absentee and voter ID pages on October 31, 2026. All dates, hours and places matched.
+- **Found:** the voter ID record said first-time voters "may need" to show ID in person or mail a copy with an absentee ballot. The state's page says "must show" and "You must send a copy". It also left out what happens with no ID ("The voter will vote a provisional ballot at the polls") and the free voter ID card from the county clerk. The polling places record said the clerk's page lists "every precinct"; the page does not say that.
+- **Shipped:** both records reworded to match the sources, and a Corrections entry. The election is Tuesday, November 3, so this went out today.

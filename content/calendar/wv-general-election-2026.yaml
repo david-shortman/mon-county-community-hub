@@ -12,12 +12,12 @@ phone_label: the Monongalia County Clerk
 topics: [voting]
 sources:
   - url: https://sos.wv.gov/govotewv
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://apps.sos.wv.gov/Elections/Voter/FindMyPollingPlace
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://ovr.sos.wv.gov/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://monongaliacountyclerk.com/index.php/voter-registration
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.busride.org/free-rides-for-election-day
-    checked: 2026-10-30
+    checked: 2026-11-01

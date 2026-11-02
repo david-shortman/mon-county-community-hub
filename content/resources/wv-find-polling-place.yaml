@@ -9,6 +9,6 @@ contact:
   url_label: Search my registration
 sources:
   - url: https://apps.sos.wv.gov/Elections/Voter/FindMyPollingPlace
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://sos.wv.gov/govotewv
-    checked: 2026-10-30
+    checked: 2026-11-01

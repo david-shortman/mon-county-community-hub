@@ -1,0 +1,7 @@
+date: 2026-10-31
+item: What ID to bring to vote, on Vote
+page: /vote/
+kind: wording
+found_by: our-check
+what: We said first-time voters "may need" to show or mail an ID. The state says they must, if they did not show ID when they registered. The page now says must, and adds that a voter with no ID can still vote a provisional ballot and can get a free voter ID card from the County Clerk.
+link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=head%3Acode%2Fqa3-voter-id

@@ -1,0 +1,5 @@
+# 2026-11-01: Start a group and building permits as Trailhead routes
+
+- **Considered:** #240 (sprint wave 9, round two, #529): turn more low-stakes guides into Trailhead routes of numbered steps. `/start-a-group/` and `/permits/` already used numbered headings ("1. Become a nonprofit corporation", "1. Are you inside a town?"), like `/flood-zone/` did before #810. PDF reading pages (restaurant plan review, placard form) have their own layout, and guides about money, food, housing or benefits wait for David.
+- **Chose:** both pages now use `Route` and `Milepost`. Each step is a native `details`, so it opens with no script, prints open, and opens when a link points at it. Old anchors stay (`/permits/#where`, `#morgantown`, `#towns`, `#county`, `#assessor`). On `/permits/`, the lede says steps 2, 3 and 4 are for different places, and step 5 (tell the Assessor) shows "Within 60 days", which the Assessor's page states. No facts changed: the records and sources were checked October 30 to November 1, 2026.
+- **Cost:** $0.

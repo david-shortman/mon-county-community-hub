@@ -1,0 +1,101 @@
+# The health department's "Food Establishment Plan Review Application"
+# packet (part of #393), linked on its Environmental Health page (read
+# 2026-11-01). 24 pages: the plan review steps and fee table, a check-off
+# list, the plan review questions, the permit application, manager and food
+# worker training sign-ups, and the county's Clean Indoor Air Regulation
+# (scanned, pages 19 to 24, left off here). No date is printed on it; the file
+# was saved January 15, 2026. Steps and fees are quoted.
+#
+# The packet's fee table has a "Liquor License" column of $150, but its
+# footnote says "add $125 to the Permit Fee". The 2026-2027 fee form says
+# "ABCC Lic. Add $150". The page says who says what. See
+# docs/discoveries/2026-11-01-monchd-abcc-fee-125-or-150.md and #1271.
+slug: monchd-food-plan-review
+title: Food Establishment Plan Review Application
+publisher: Monongalia County Health Department
+pdf: https://cdn.sanity.io/files/95aan9ec/production/314943135511dce2b9e78860326f3f7924614741.pdf
+pdf_date: "no date is printed on it (the file was saved January 15, 2026)"
+found_on: https://www.monchd.org/departments-programs/environmental-health
+intro: Opening, buying or remodeling a restaurant, coffee shop, bakery or other food place in Mon County starts with a plan review by the health department. These are the steps, fees and papers from its packet. The parts in quotes are its own words.
+recheck_days: 180
+sources:
+  - url: https://cdn.sanity.io/files/95aan9ec/production/314943135511dce2b9e78860326f3f7924614741.pdf
+    name: Monongalia County Health Department
+    checked: 2026-11-01
+  - url: https://www.monchd.org/departments-programs/environmental-health
+    checked: 2026-11-01
+  - url: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
+    name: Health department fee schedule, fiscal year 2026-2027
+    checked: 2026-11-01
+sections:
+  - heading: The steps
+    id: steps
+    items:
+      - "1. Get the plan review and application forms from the health department office or website. The packet says the plan review form \"must be completed in accordance with the 2013 FDA Food Code as adopted by the West Virginia legislature.\""
+      - "2. Send in the plan review and application forms with the fees below. \"Please allow 7 days for the review process of new, existing or remodeled facilities.\""
+      - "3. \"You will be contacted at the phone number provided to schedule a walk through of the facility\" with the program manager and the sanitarian (inspector) assigned to you."
+      - "Before you open: \"A pre-opening inspection of the establishment with equipment in place & operational will be necessary\"."
+      - "Plan approval \"does not indicate compliance with any other code, law or regulation that may be required--federal, state or local.\" Other permits, like a building permit or business license, are separate."
+      - "Questions: the packet says to call (304) 598-5131."
+  - heading: Fees, by number of seats
+    id: fees
+    note: The packet lists four fees for each size. Manager Training is the food manager class (see below), needed if no one on staff has passed it.
+    items:
+      - name: "0 - 20 seats"
+        lines: ["Plan Review Fee: $250", "Permit Fee: $150", "Liquor License: $150", "Manager Training: $150"]
+      - name: "21 - 50 seats"
+        lines: ["Plan Review Fee: $300", "Permit Fee: $300", "Liquor License: $150", "Manager Training: $150"]
+      - name: "51 - 79 seats"
+        lines: ["Plan Review Fee: $350", "Permit Fee: $450", "Liquor License: $150", "Manager Training: $150"]
+      - name: "80 and over"
+        lines: ["Plan Review Fee: $400", "Permit Fee: $600", "Liquor License: $150", "Manager Training: $150"]
+      - name: "Change of Ownership"
+        lines: ["Plan Review Fee: $150", "Permit Fee and Liquor License: \"see above\"", "Manager Training: $150"]
+      - name: "Renovation/Remodel"
+        lines: ["Plan Review Fee: $200", "Permit Fee and Liquor License: \"see above\", but only for \"a facility that does not already have a current Food Establishment Permit due to an extended closure or other reason.\"", "Manager Training: $150"]
+      - name: "Places with a liquor (ABCC) license"
+        lines: ["The packet's table lists $150 under Liquor License, but its footnote says \"For facilities with an ABCC license, add $125 to the Permit Fee.\" The health department's 2026-2027 fee form says \"ABCC Lic. Add $150\". Ask the health department which applies."]
+  - heading: What to send with the plan review
+    id: checklist
+    note: The packet's "Check Off List".
+    items:
+      - "\"Plan Review Filled out 100%\""
+      - "\"Copy of the MENU\""
+      - "\"Equipment List (All Equipment Must Be Commercial)\""
+      - "\"Copy of the Certified Food Manager or ServSafe\""
+      - "\"Drawing of the Whole Establishment Lay Out Must Be Labeled (hand sinks(s), 3 bowl sink, mop sink, bathroom(s) grease trap, dish machine if needed, etc.)\""
+  - heading: What the plans must show
+    id: plans
+    note: A short version of the packet's "Contents and Format of Plans and Specifications". The PDF has the full list.
+    items:
+      - "Floor plans, the menu (including seasonal, off-site and banquet menus), seating, and how many meals a day you expect to serve."
+      - "Where each piece of food equipment goes, labeled with its common name."
+      - "Equipment for cooling food fast and keeping hot food hot."
+      - "Separate food prep sinks when the menu calls for them."
+      - "Hand sinks for each toilet and \"in the immediate area (20-25 feet) of food preparation/cooking, dispensing/serving and dishwashing.\""
+      - "Storage rooms, garbage rooms, toilets, and basements used for storage or food prep."
+      - "Plumbing, lighting, ventilation, a mop sink, a cabinet for chemicals, and a site plan showing outside equipment like dumpsters, and a well or septic system if there is one."
+  - heading: Training your staff needs
+    id: training
+    items:
+      - name: "One certified food manager"
+        lines:
+          - "\"Every facility must have at least one person on staff that has completed the MCHD Food Manager's Training class.\" If no one has, you register someone and pay for the class with your plan review. \"An individual may only represent one facility.\""
+          - "Course and exam: $150.00. Exam only: $100.00. Study guide: $25.00."
+          - "\"You must pre-register and pre-pay 3 weeks in advance if you intend to take the exam. Fees are not refundable.\""
+          - "\"A passing score of 75% or above is required to become certified.\" The exam is offered in English, Spanish, Korean, Modern Chinese and Traditional Chinese."
+      - name: "Food worker cards for everyone who handles food"
+        lines:
+          - "\"Food Worker Training is required for all persons involved in preparing, storing, or handling food in restaurants and other facilities offering food for sale to the public.\""
+          - "In-person class: about 50 minutes. Bring a photo ID. Cards for one year ($10), two years ($20) or three years ($30)."
+          - "Online (StateFoodSafety.com, about two hours, take the Monongalia County course): 1 year, county only, $20.00. 1 year, statewide, $20.00. 2 years, statewide, $30.00."
+          - "Temporary cards between classes: weekdays 9 to 11 a.m. and 2 to 3 p.m., \"$1 for each week issued\". Holders \"are expected to attend the next available class.\""
+  - heading: The PDF
+    id: pdf
+    items:
+      - name: "Food Establishment Plan Review Application"
+        lines: ["24 pages: the steps and fees, the check-off list, the plan review questions, the permit application, the training sign-ups, and the county's Clean Indoor Air Regulation."]
+        links:
+          - label: "Food Establishment Plan Review Application (PDF)"
+            url: https://cdn.sanity.io/files/95aan9ec/production/314943135511dce2b9e78860326f3f7924614741.pdf
+            saved: "January 15, 2026"

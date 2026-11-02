@@ -191,6 +191,8 @@ The comment shows a table with each rubric, its average for the changed parts, w
 
 **A soft gate to start (decided by David, 2026-10-28).** The check turns red when it finds a blocker, but it is not a required check on `main`. The gate is a rule agents follow: for any PR that changes `site/` or `content/`, wait for "Claude review" and do not merge while it is red. The weekly retrospective reports any PR merged with a red or missing review. If that happens, the retro can propose making it a required check (a repo setting, David's call).
 
+**`scripts/safe-merge.sh` waits for the review too (proposed 2026-11-02).** In week 1, nine PRs that changed `site/` or `content/` merged before their review posted (#129, #130, #194, #196, #283, #303, #304, #319, #448). The merge script already waits for the High stakes check on the PR's latest commit. For a PR that changes `site/` or `content/`, it also waits for "Claude review" on that commit to finish green, and refuses (exit 4) if it is red or missing. This keeps the gate a script rule, not a repo setting.
+
 One thing to verify now that PR #32 is merged: GitHub does not start other workflows for PRs opened with the default Actions token. If the `up-next` Action opens PRs that way, neither the Site check nor this review will run on them. The Claude GitHub App token avoids this, so the first Action-built PR should be checked for both runs.
 
 ### 6. Ship
@@ -234,6 +236,11 @@ It writes these sections, in plain language:
 7. **Process changes to propose:** at most three, each with the problem it fixes, the evidence, and how we will know in two weeks if it worked.
 
 The retro itself is a log entry and can be self-merged. Any process change it proposes is a separate PR (see below).
+
+**Running a scheduled job now, and checking it can write (proposed 2026-11-02).** Scheduled Claude Code runs failed three ways in week 1: the first ones had no repo attached, a manual "run now" (`fire_trigger`) started a new session without the repo, and the retro on October 28 and November 2 could not write to GitHub until #1418.
+
+- **To run a scheduled job now,** send the request in the session the job is bound to, or move its schedule to a minute from now. Do not use `fire_trigger` for jobs that need the repo.
+- **Every scheduled job checks its access first.** Before any real work, it makes one harmless read and confirms the repo is checked out. On its first real write, if GitHub refuses, it stops, writes what it was doing to a local branch, and says so at the end of the run. Duet copies that into #81 on its next sweep.
 
 ## Part 3: How the process improves itself
 

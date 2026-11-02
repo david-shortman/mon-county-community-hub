@@ -1,0 +1,15 @@
+---
+// "What help might I get?" (#188), question 2 of 2: who is in your home.
+import Base from '../../../../layouts/Base.astro';
+import Question from '../../../../components/Question.astro';
+import { NEEDS, WHO } from '../../../../lib/what-help.mjs';
+export function getStaticPaths() {
+  return NEEDS.map((n) => ({ params: { need: n.id }, props: { need: n } }));
+}
+const { need } = Astro.props;
+---
+<Base help title={`What help might I get in Mon County? ${need.label}: who lives with you`} description="Question 2 of 2: who lives with you. Some programs in Mon County are for families with young children, older adults, people with disabilities or veterans.">
+  <h1>Does anyone in your home fit one of these?</h1>
+  <p class="lede">Some programs are for these groups. Pick the one that fits best, or skip. You picked: {need.label}.</p>
+  <Question step={2} of={2} back="/help/what-help/" choices={WHO.map((w) => ({ label: w.label, href: `/help/what-help/${need.id}/${w.id}/` }))} />
+</Base>

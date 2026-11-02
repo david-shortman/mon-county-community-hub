@@ -37,7 +37,7 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 | [WV arts grants](https://wvculture.org/agencies/arts/grants/) | Whether Public Art grants open, and the deadline | `wv-arts-public-art-grants`, a calendar entry when a deadline is posted |
 | [Organizational Arts Grants](https://ycfwv.org/arts-fund-grants/) | The 2027-28 round (the page says to check back in April 2027) | `ycf-organizational-arts-grants`, a calendar entry |
 | [BOPARC trail cleanups](https://www.boparc.org/trail-clean-ups-and-events.html) | How to host, insurance rule | `boparc-trail-cleanups` |
-| [WVDOT District 4](https://transportation.wv.gov/agencies/highways/districts/district-four) | Phone, hours, the road repair form | `wvdoh-road-repair-request` |
+| [WVDOT District 4](https://transportation.wv.gov/agencies/highways/districts/district-four) | Phone, hours, the road repair form | `wvdoh-road-repair` |
 | Main Street Morgantown, Friends of Deckers Creek, Mon River Trails Conservancy, Solid Waste Authority | New programs or cleanups with dates | New entries (and #700 for the facade program) |
 
 ## Seasonal
@@ -45,6 +45,11 @@ The first full read of every source below was on 2026-10-30 (Morgantown date), a
 - **March and April:** budget season. State law has local levying bodies meet between March 7 and March 28 (WV Code 11-8-9). Read City Council and County Commission agendas weekly for budget items.
 - **March and April:** REAP litter grants and Make It Shine cleanups. Check the REAP pages weekly.
 - **April 2027:** the Organizational Arts Grants round should reopen.
+
+## Automated since 2026-10-31
+
+- **Weekly checklist issue:** the weekly, monthly and seasonal lists above are posted as one standing issue, refreshed each Monday by the daily Source check (`content/checklists/make-it-better.yaml`, see `docs/operations/recurring-checks.md`). It also lists entries that will say "may be out of date" within 30 days.
+- **Daily watch:** the city vacancy list and the three grant pages whose rounds open and close (Organizational Arts Grants, WV Public Art, Community Tree Grants) are on `content/watch/make-it-better.yaml`. A change opens one issue for a person. The saved "not currently open" and "check back in April 2027" lines alert when they go away.
 
 ## Known gaps
 

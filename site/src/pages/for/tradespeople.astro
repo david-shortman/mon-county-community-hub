@@ -1,0 +1,39 @@
+---
+// Starting page for tradespeople and handymen (#276, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/tradespeople.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "family", topic: "work", label: "Tradespeople and handymen", summary: "Licenses, working in city limits, permits, apprenticeships and paying for tools, in one place" };
+const sections = [
+  { title: "Licenses and permits", links: [
+    { href: "/contractor-license/", text: "state contractor, plumber, HVAC and electrician licenses, and working in Morgantown city limits" },
+    { href: "/permits/", text: "who issues building permits where the job is" },
+    { href: "/septic-and-wells/", text: "septic and well permits" },
+  ] },
+  { title: "Learn a trade", links: [
+    { href: "/work-and-learning/", text: "apprenticeships and adult evening classes" },
+    { href: "/find-a-job/#train", label: "Short trainings", text: "short trainings near here" },
+  ] },
+  { title: "Pay for training, tools and fees", links: [
+    { href: "/pay-for-training/", text: "training scholarships and Jumpstart Savings for tools and licenses" },
+    { href: "/calendar/", text: "class registration and grant dates" },
+  ] },
+  { title: "Get hired or work for yourself", links: [
+    { href: "/find-a-job/", text: "where local employers post jobs" },
+    { href: "/start-a-business/", text: "starting a business in Morgantown, step by step" },
+  ] },
+  { title: "Share your skills", links: [
+    { href: "/volunteer/", text: "groups that take volunteers all year" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/homeowners/", text: null },
+    { href: "/for/job-seekers/", text: null },
+    { href: "/for/small-business/", text: null },
+  ] },
+];
+---
+<Base title="Tradespeople in Morgantown and Mon County: where to start" description="A starting page for tradespeople and handymen in Monongalia County: contractor and trade licenses, working in Morgantown city limits, building permits, apprenticeships, and help paying for training, tools and license fees.">
+  <h1>For tradespeople and handymen</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

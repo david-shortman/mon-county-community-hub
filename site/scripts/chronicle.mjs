@@ -74,7 +74,7 @@ async function capture() {
             colorScheme: theme,
           });
           const tab = await ctx.newPage();
-          await tab.goto(base + page.path, { waitUntil: 'networkidle' });
+          await tab.goto(base + page.path, { waitUntil: 'load' });
           const stem = `${page.name}-${width}-${theme}`;
           const png = join(outDir, `${stem}.png`);
           await tab.screenshot({ path: png, fullPage: true });
@@ -100,10 +100,10 @@ async function capture() {
       recordVideo: { dir: vidDir, size: { width: 390, height: 844 } },
     });
     const tab = await ctx.newPage();
-    await tab.goto(base + '/', { waitUntil: 'networkidle' });
+    await tab.goto(base + '/', { waitUntil: 'load' });
     await tab.waitForTimeout(2500);
     await tab.getByRole('link', { name: 'Deadlines' }).first().click();
-    await tab.waitForLoadState('networkidle');
+    await tab.waitForLoadState('load');
     await tab.waitForTimeout(1500);
     for (let i = 0; i < 8; i++) {
       await tab.mouse.wheel(0, 350);
@@ -111,7 +111,7 @@ async function capture() {
     }
     await tab.waitForTimeout(800);
     await tab.getByRole('link', { name: 'About' }).first().click();
-    await tab.waitForLoadState('networkidle');
+    await tab.waitForLoadState('load');
     await tab.waitForTimeout(2500);
     const raw = await tab.video().path();
     await ctx.close();

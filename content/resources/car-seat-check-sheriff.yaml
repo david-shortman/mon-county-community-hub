@@ -6,13 +6,13 @@ who_it_is_for: Anyone who wants a child car seat checked. The state says seats a
 what_to_do: Call the fitting station to set up an appointment. The state asks people not to reach fitting stations through social media.
 contact:
   phone: "304-291-7260"
-  url: https://dmv.wv.gov/cps-seat-fitting-stations
+  url: https://dmv.wv.gov/governors-highway-safety-program-ghsp/child-passenger-safety/cps-seat-fitting-stations
   url_label: State list of fitting stations
   place: "116 Walnut Street, Morgantown, WV 26505"
 cost: free
 get_in: appointment
 sources:
-  - url: https://dmv.wv.gov/cps-seat-fitting-stations
-    checked: 2026-10-30
+  - url: https://dmv.wv.gov/governors-highway-safety-program-ghsp/child-passenger-safety/cps-seat-fitting-stations
+    checked: 2026-10-31
   - url: https://monongaliasheriff.gov/contact_us/car_seat_installation/index.php
-    checked: 2026-10-30
+    checked: 2026-10-31

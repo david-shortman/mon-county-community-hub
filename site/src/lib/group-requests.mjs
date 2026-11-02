@@ -6,6 +6,26 @@
 // REQUEST_DAYS is the one number to change if David picks a different promise
 // (#502). The two warning steps move with it.
 export const REQUEST_DAYS = 7;
+
+// The no-account way in (#522): a private Tally form in David's account.
+// Answers go to David, never to GitHub. A team member files the issue, only on
+// David's yes, with no sender details or message text.
+export const FIX_FORM = 'https://tally.so/r/rD5adv';
+
+// The fix form link with its two hidden fields filled in (Tally): `listing`,
+// the listing's slug, and `page`, the path of the page it was opened from.
+// Only the field names travel; nothing about the person.
+export function fixFormUrl({ listing, page } = {}) {
+  const q = new URLSearchParams();
+  if (listing) q.set('listing', listing);
+  if (page) q.set('page', page);
+  const qs = q.toString();
+  return qs ? `${FIX_FORM}?${qs}` : FIX_FORM;
+}
+
+// The same way in by email (#522). It forwards to David's private inbox.
+// Same rule as the form: mail never goes into the repo or to GitHub as-is.
+export const FIX_EMAIL = 'fix@everythingmorgantown.org';
 export const PRIORITY_DAY = Math.max(1, REQUEST_DAYS - 4); // 3 when the promise is 7 days
 export const DAVID_DAY = Math.max(1, REQUEST_DAYS - 2); // 5 when the promise is 7 days
 

@@ -1,0 +1,8 @@
+# 2026-10-30: Make it better starts: Fix what you see
+
+- **Considered:** the Make it better epic (#288) needs a home in the Your community door, a shared "next step" link (#295), and the page that sends each problem to the office that fixes it (#292). Potholes (#86) fit inside it: the key question is whether a road is a city street or a state road.
+- **Chose:** a `better` topic ("Make it better") in the Your community door, a hub at `/make-it-better/`, and `/make-it-better/report/`. The report page is a list of plain anchor links, so each problem is two taps from its office, with no script. Each office is a resource record, so later pages reuse them.
+- **Shipped:** 5 report routes as records (Morgantown 311, the county Litter Control Office form, the state Open Dump Reporter, the county Abandoned and Dilapidated Property complaint form, and the Division of Highways District 4 road repair form) and 4 government orgs. 311 category names come from the city's 311 page. The link to WVDOT's "Identify State Roads Near an Address" map is from WVDOT's home page menu. `NextRung.astro` shows one link up the ladder and falls back to the hub until the target page exists.
+- **Left out:** 1-833-WV-ROADS. News stories give it, but no current WVDOT page does (the old wvroads page returns "Site Under Construction"), so the page uses the District 4 number and form that WVDOT does publish. Graffiti outside city limits: no county office found, and the page says so. The health department's environmental health page lists no complaint process, so it is not listed.
+- **311 response times (#86):** the SeeClickFix API still returns 403 from this sandbox. David's decision on #300 allows big-picture totals with credit, so that is a follow-up.
+- **Cost:** $0.

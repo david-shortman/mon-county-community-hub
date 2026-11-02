@@ -4,5 +4,5 @@ quote: "Single stream recycling: (also referred to as commingled recycling) is a
 sources:
   - url: https://www.epa.gov/sites/default/files/2015-09/documents/smp_definitions.pdf
     name: U.S. Environmental Protection Agency
-    checked: 2026-10-30
+    checked: 2026-11-01
 recheck_days: 365   # a definition; rarely changes

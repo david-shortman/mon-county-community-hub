@@ -1,0 +1,283 @@
+# Site search test set (#529, wave 6)
+#
+# Words residents actually type into the site's own search box (/search/), and
+# the page that should come back. `npm run search-test` in site/ builds the
+# search index, runs each query the same way the search page does, and checks
+# whether an expected page is in the top 3. Results go to
+# content/findability/search-runs/<date>.json. How it works and how to read it:
+# docs/operations/search-test.md.
+#
+# q: what the person types, as typed (misspellings on purpose).
+# expect: routes that fully answer it. The first is the best page; any of them
+#   in the top 3 counts as a hit.
+# kind: everyday (plain words and slang), short (an acronym or short form),
+#   misspelled, question (a full question, many from questions.yaml).
+#
+# Keep queries stable so runs can be compared. Add new ones at the end of their
+# section. Never put a private person's words or searches here: these are
+# written by us, not collected from visitors (the site logs no searches).
+
+queries:
+  # Food
+  - {q: food stamps, expect: [/snap/, /file-today/], kind: everyday}
+  - {q: EBT, expect: [/snap/, /file-today/, /help/food/monthly/], kind: short}
+  - {q: SNAP, expect: [/snap/, /file-today/], kind: short}
+  - {q: food pantry, expect: [/help/food/, /help/food/today/other/, /help/food/today/], kind: everyday}
+  - {q: free food, expect: [/help/food/, /help/food/today/other/, /help/food/today/], kind: everyday}
+  - {q: food bank, expect: [/help/food/, /help/food/today/other/, /help/food/today/], kind: everyday}
+  - {q: hungry, expect: [/help/food/, /help/food/today/, /stay-tonight/], kind: everyday}
+  - {q: soup kitchen, expect: [/help/food/today/other/, /help/food/today/, /help/food/, /stay-tonight/], kind: everyday}
+  - {q: free meals, expect: [/help/food/today/other/, /help/food/today/, /help/food/, /community-centers/], kind: everyday}
+  - {q: WIC, expect: [/pregnant-or-new-baby/, /help/food/monthly/, /families-and-kids/], kind: short}
+  - {q: food stamp application, expect: [/snap/, /file-today/], kind: everyday}
+  - {q: groceries help, expect: [/help/food/monthly/, /help/food/, /snap/], kind: everyday}
+  - {q: food for students, expect: [/help/food/today/student/, /for/college-students/], kind: everyday}
+  - {q: school lunch, expect: [/school-age/, /for/parents-school-age/], kind: everyday}
+  - {q: community dinner, expect: [/community-centers/, /help/food/today/other/], kind: everyday}
+  - {q: snap benefits stolen, expect: [/scams/, /snap/], kind: everyday}
+  - {q: foodstamps, expect: [/snap/, /file-today/], kind: misspelled}
+  - {q: food pantrys, expect: [/help/food/, /help/food/today/other/, /help/food/today/], kind: misspelled}
+  - {q: wick, expect: [/pregnant-or-new-baby/, /help/food/monthly/], kind: misspelled}
+
+  # Bills, money and housing
+  - {q: rent help, expect: [/money/, /renting/, /help/what-help/], kind: everyday}
+  - {q: behind on rent, expect: [/money/, /renting/], kind: everyday}
+  - {q: shut off notice, expect: [/utility-bills/, /money/], kind: everyday}
+  - {q: shutoff, expect: [/utility-bills/, /money/], kind: everyday}
+  - {q: electric bill, expect: [/utility-bills/, /money/], kind: everyday}
+  - {q: heating bill, expect: [/utility-bills/, /money/], kind: everyday}
+  - {q: water bill, expect: [/utility-bills/, /money/], kind: everyday}
+  - {q: gas bill help, expect: [/utility-bills/, /money/], kind: everyday}
+  - {q: LIEAP, expect: [/utility-bills/, /file-today/], kind: short}
+  - {q: leap heating, expect: [/utility-bills/, /file-today/], kind: misspelled}
+  - {q: LIHEAP, expect: [/utility-bills/, /file-today/], kind: short}
+  - {q: power company, expect: [/moving-here/, /utility-bills/, /after-a-storm/], kind: everyday}
+  - {q: Mon Power, expect: [/utility-bills/, /moving-here/, /after-a-storm/], kind: everyday}
+  - {q: MUB, expect: [/moving-here/, /utility-bills/, /who-decides/], kind: short}
+  - {q: eviction, expect: [/legal-help/, /renting/, /money/], kind: everyday}
+  - {q: evicted, expect: [/legal-help/, /renting/, /money/], kind: everyday}
+  - {q: landlord wont fix, expect: [/renting/], kind: everyday}
+  - {q: security deposit, expect: [/renting/], kind: everyday}
+  - {q: section 8, expect: [/money/, /renting/], kind: everyday}
+  - {q: cash assistance, expect: [/file-today/, /money/], kind: everyday}
+  - {q: WV WORKS, expect: [/file-today/, /money/], kind: short}
+  - {q: TANF, expect: [/file-today/, /money/], kind: short}
+  - {q: free tax help, expect: [/free-tax-help/], kind: everyday}
+  - {q: taxes, expect: [/free-tax-help/, /property-tax/], kind: everyday}
+  - {q: EITC, expect: [/free-tax-help/], kind: short}
+  - {q: property tax, expect: [/property-tax/], kind: everyday}
+  - {q: homestead exemption, expect: [/property-tax/], kind: everyday}
+  - {q: scam call, expect: [/scams/], kind: everyday}
+  - {q: christmas toys, expect: [/holidays/], kind: everyday}
+  - {q: free coat, expect: [/holidays/, /borrow-or-get-free/], kind: everyday}
+  - {q: utlity bill, expect: [/utility-bills/, /money/], kind: misspelled}
+  - {q: evicition, expect: [/legal-help/, /renting/, /money/], kind: misspelled}
+
+  # Shelter and safety
+  - {q: warming center, expect: [/tonight/, /stay-tonight/], kind: everyday}
+  - {q: warming shelter, expect: [/tonight/, /stay-tonight/], kind: everyday}
+  - {q: homeless shelter, expect: [/stay-tonight/, /tonight/], kind: everyday}
+  - {q: homeless, expect: [/stay-tonight/, /tonight/], kind: everyday}
+  - {q: place to sleep, expect: [/stay-tonight/, /tonight/], kind: everyday}
+  - {q: domestic violence, expect: [/stay-tonight/], kind: everyday}
+  - {q: abuse, expect: [/stay-tonight/], kind: everyday}
+  - {q: suicide, expect: [/mental-health/], kind: everyday}
+  - {q: narcan, expect: [/drugs-and-alcohol/], kind: everyday}
+  - {q: naloxone, expect: [/drugs-and-alcohol/], kind: everyday}
+  - {q: overdose, expect: [/drugs-and-alcohol/], kind: everyday}
+  - {q: rehab, expect: [/drugs-and-alcohol/], kind: everyday}
+  - {q: detox, expect: [/drugs-and-alcohol/], kind: everyday}
+  - {q: AA meetings, expect: [/drugs-and-alcohol/], kind: everyday}
+  - {q: therapist, expect: [/mental-health/], kind: everyday}
+  - {q: counseling, expect: [/mental-health/], kind: everyday}
+  - {q: depression, expect: [/mental-health/], kind: everyday}
+  - {q: power outage, expect: [/after-a-storm/, /weather-alerts/], kind: everyday}
+  - {q: flooded basement, expect: [/after-a-storm/], kind: everyday}
+  - {q: narcan free, expect: [/drugs-and-alcohol/], kind: everyday}
+  - {q: shelter tonight, expect: [/stay-tonight/, /tonight/], kind: everyday}
+  - {q: narcain, expect: [/drugs-and-alcohol/], kind: misspelled}
+  - {q: sheltor, expect: [/stay-tonight/, /tonight/], kind: misspelled}
+
+  # Health care
+  - {q: dentist cheap, expect: [/dental-and-prescriptions/], kind: everyday}
+  - {q: dentist, expect: [/dental-and-prescriptions/], kind: everyday}
+  - {q: free clinic, expect: [/no-insurance/], kind: everyday}
+  - {q: doctor no insurance, expect: [/no-insurance/], kind: everyday}
+  - {q: sliding scale, expect: [/no-insurance/, /dental-and-prescriptions/, /mental-health/], kind: everyday}
+  - {q: Health Right, expect: [/no-insurance/, /dental-and-prescriptions/], kind: everyday}
+  - {q: medicaid, expect: [/file-today/, /no-insurance/, /medicaid-2027/], kind: everyday}
+  - {q: medicade, expect: [/file-today/, /no-insurance/, /medicaid-2027/], kind: misspelled}
+  - {q: medicare, expect: [/turning-65/], kind: everyday}
+  - {q: medicair, expect: [/turning-65/], kind: misspelled}
+  - {q: prescriptions, expect: [/dental-and-prescriptions/], kind: everyday}
+  - {q: medicine cost, expect: [/dental-and-prescriptions/], kind: everyday}
+  - {q: flu shot, expect: [/flu-shots/], kind: everyday}
+  - {q: covid vaccine, expect: [/flu-shots/], kind: everyday}
+  - {q: vaccines kids, expect: [/school-shots/, /flu-shots/], kind: everyday}
+  - {q: sports physical, expect: [/school-shots/], kind: everyday}
+  - {q: birth control, expect: [/birth-control-and-testing/], kind: everyday}
+  - {q: STD testing, expect: [/birth-control-and-testing/], kind: everyday}
+  - {q: pregnancy test, expect: [/birth-control-and-testing/, /pregnant-or-new-baby/], kind: everyday}
+  - {q: pregnant, expect: [/pregnant-or-new-baby/], kind: everyday}
+  - {q: diabetes, expect: [/diabetes-and-weight/], kind: everyday}
+  - {q: ride to doctor, expect: [/medical-rides/], kind: everyday}
+  - {q: medical transportation, expect: [/medical-rides/], kind: everyday}
+  - {q: living will, expect: [/advance-directives/], kind: everyday}
+  - {q: power of attorney, expect: [/advance-directives/], kind: everyday}
+  - {q: nursing home, expect: [/medicaid-waivers/, /help-at-home/], kind: everyday}
+  - {q: meals on wheels, expect: [/help-at-home/], kind: everyday}
+  - {q: home health aide, expect: [/help-at-home/, /medicaid-waivers/], kind: everyday}
+  - {q: respite, expect: [/caregivers/], kind: everyday}
+  - {q: interpreter, expect: [/help-in-your-language/], kind: everyday}
+  - {q: spanish, expect: [/help-in-your-language/], kind: everyday}
+  - {q: dentsit, expect: [/dental-and-prescriptions/], kind: misspelled}
+  - {q: perscriptions, expect: [/dental-and-prescriptions/], kind: misspelled}
+  - {q: obamacare, expect: [/no-insurance/], kind: everyday}
+
+  # Government, voting and civic
+  - {q: where do I vote, expect: [/vote/], kind: question}
+  - {q: register to vote, expect: [/vote/], kind: everyday}
+  - {q: polling place, expect: [/vote/], kind: everyday}
+  - {q: absentee ballot, expect: [/vote/], kind: everyday}
+  - {q: city council, expect: [/have-your-say/, /who-decides/, /meetings/], kind: everyday}
+  - {q: county commission, expect: [/have-your-say/, /who-decides/, /meetings/], kind: everyday}
+  - {q: school board, expect: [/have-your-say/, /who-decides/, /meetings/agendas/], kind: everyday}
+  - {q: agenda, expect: [/meetings/, /meetings/agendas/, /meetings/how-to-read-an-agenda/], kind: everyday}
+  - {q: public comment, expect: [/have-your-say/, /meetings/how-to-read-an-agenda/], kind: everyday}
+  - {q: FOIA, expect: [/public-records/], kind: short}
+  - {q: public records, expect: [/public-records/], kind: everyday}
+  - {q: potholes, expect: [/make-it-better/report/], kind: everyday}
+  - {q: pothole, expect: [/make-it-better/report/], kind: everyday}
+  - {q: streetlight out, expect: [/make-it-better/report/], kind: everyday}
+  - {q: graffiti, expect: [/make-it-better/report/], kind: everyday}
+  - {q: illegal dumping, expect: [/make-it-better/report/], kind: everyday}
+  - {q: city boards, expect: [/make-it-better/boards/], kind: everyday}
+  - {q: building permit, expect: [/permits/], kind: everyday}
+  - {q: noise complaint, expect: [/noise/], kind: everyday}
+  - {q: barking dog, expect: [/noise/, /pets/], kind: everyday}
+  - {q: jury duty, expect: [/legal-help/], kind: everyday}
+  - {q: small claims, expect: [/legal-help/], kind: everyday}
+  - {q: lawyer, expect: [/legal-help/], kind: everyday}
+  - {q: free lawyer, expect: [/legal-help/], kind: everyday}
+  - {q: attorney, expect: [/legal-help/], kind: everyday}
+  - {q: expungement, expect: [/legal-help/], kind: everyday}
+  - {q: notary, expect: [/legal-help/], kind: everyday}
+  - {q: police non emergency, expect: [/who-serves-me/], kind: everyday}
+  - {q: flood zone, expect: [/flood-zone/], kind: everyday}
+  - {q: grants, expect: [/make-it-better/grants/], kind: everyday}
+  - {q: lawer, expect: [/legal-help/], kind: misspelled}
+  - {q: pot holes, expect: [/make-it-better/report/], kind: misspelled}
+
+  # Getting around, IDs and cars
+  - {q: DMV, expect: [/drivers-license/, /car-registration/, /ids-and-records/], kind: short}
+  - {q: drivers license, expect: [/drivers-license/, /teen-drivers/], kind: everyday}
+  - {q: learners permit, expect: [/teen-drivers/], kind: everyday}
+  - {q: car registration, expect: [/car-registration/], kind: everyday}
+  - {q: inspection sticker, expect: [/car-registration/], kind: everyday}
+  - {q: REAL ID, expect: [/ids-and-records/, /drivers-license/], kind: short}
+  - {q: birth certificate, expect: [/ids-and-records/], kind: everyday}
+  - {q: handicap placard, expect: [/accessible-parking-placard/], kind: everyday}
+  - {q: bus schedule, expect: [/bus-routes/, /getting-around/], kind: everyday}
+  - {q: bus pass, expect: [/bus-passes/, /getting-around/], kind: everyday}
+  - {q: Mountain Line, expect: [/getting-around/, /bus-routes/], kind: everyday}
+  - {q: bus to hospital, expect: [/getting-around/, /medical-rides/], kind: everyday}
+  - {q: parking ticket, expect: [/parking/], kind: everyday}
+  - {q: parking garage, expect: [/parking/], kind: everyday}
+  - {q: car seat, expect: [/car-seat-checks/], kind: everyday}
+  - {q: dmv hours, expect: [/drivers-license/, /car-registration/], kind: short}
+  - {q: liscense, expect: [/drivers-license/, /contractor-license/, /teen-drivers/], kind: misspelled}
+
+  # Trash, home and neighborhood
+  - {q: trash day, expect: [/recycling/], kind: everyday}
+  - {q: garbage pickup, expect: [/recycling/], kind: everyday}
+  - {q: recycling, expect: [/recycling/], kind: everyday}
+  - {q: glass recycling, expect: [/recycling/], kind: everyday}
+  - {q: old tires, expect: [/recycling/], kind: everyday}
+  - {q: electronics recycling, expect: [/recycling/], kind: everyday}
+  - {q: paint disposal, expect: [/recycling/], kind: everyday}
+  - {q: bulk trash, expect: [/recycling/], kind: everyday}
+  - {q: burn barrel, expect: [/burning/], kind: everyday}
+  - {q: leaf pickup, expect: [/recycling/, /burning/], kind: everyday}
+  - {q: snow removal, expect: [/snow-and-ice/], kind: everyday}
+  - {q: school closings, expect: [/snow-and-ice/, /weather-alerts/], kind: everyday}
+  - {q: smoke detector, expect: [/home-safety/], kind: everyday}
+  - {q: lead test, expect: [/home-safety/], kind: everyday}
+  - {q: septic, expect: [/septic-and-wells/], kind: everyday}
+  - {q: well water test, expect: [/septic-and-wells/], kind: everyday}
+  - {q: internet, expect: [/internet/], kind: everyday}
+  - {q: wifi, expect: [/internet/], kind: everyday}
+  - {q: contractor, expect: [/contractor-license/], kind: everyday}
+  - {q: start utilities, expect: [/moving-here/], kind: everyday}
+  - {q: lost dog, expect: [/pets/], kind: everyday}
+  - {q: spay neuter, expect: [/pets/], kind: everyday}
+  - {q: soil test, expect: [/soil-test/], kind: everyday}
+  - {q: recyling, expect: [/recycling/], kind: misspelled}
+  - {q: garbage, expect: [/recycling/], kind: everyday}
+
+  # Work, school, family and community
+  - {q: jobs, expect: [/find-a-job/], kind: everyday}
+  - {q: job training, expect: [/pay-for-training/, /find-a-job/, /work-and-learning/], kind: everyday}
+  - {q: resume help, expect: [/find-a-job/], kind: everyday}
+  - {q: GED, expect: [/work-and-learning/], kind: short}
+  - {q: English classes, expect: [/help-in-your-language/, /work-and-learning/], kind: everyday}
+  - {q: daycare, expect: [/families-and-kids/, /school-age/], kind: everyday}
+  - {q: pre k, expect: [/families-and-kids/], kind: everyday}
+  - {q: head start, expect: [/families-and-kids/], kind: everyday}
+  - {q: diapers, expect: [/families-and-kids/, /pregnant-or-new-baby/], kind: everyday}
+  - {q: after school, expect: [/school-age/], kind: everyday}
+  - {q: tutoring, expect: [/school-age/], kind: everyday}
+  - {q: work permit teen, expect: [/teens/], kind: everyday}
+  - {q: volunteer, expect: [/volunteer/], kind: everyday}
+  - {q: library card, expect: [/meet-people/], kind: everyday}
+  - {q: start a business, expect: [/start-a-business/, /business/], kind: everyday}
+  - {q: business license, expect: [/start-a-business/, /business-by-town/], kind: everyday}
+  - {q: food truck, expect: [/selling-food/], kind: everyday}
+  - {q: nonprofit, expect: [/start-a-group/, /check-a-charity/], kind: everyday}
+  - {q: VA clinic, expect: [/veterans/], kind: everyday}
+  - {q: veterans, expect: [/veterans/, /for/veterans/], kind: everyday}
+  - {q: funeral, expect: [/when-someone-dies/], kind: everyday}
+  - {q: death certificate, expect: [/when-someone-dies/, /ids-and-records/], kind: everyday}
+  - {q: thrift store, expect: [/thrift-shops/], kind: everyday}
+  - {q: goodwill, expect: [/thrift-shops/, /sell-or-donate/], kind: everyday}
+  - {q: donate furniture, expect: [/sell-or-donate/], kind: everyday}
+  - {q: flea market, expect: [/markets/], kind: everyday}
+  - {q: farmers market, expect: [/markets/, /sell-what-you-grow/], kind: everyday}
+  - {q: rent a hall, expect: [/community-centers/halls/, /community-centers/], kind: everyday}
+  - {q: community center, expect: [/community-centers/], kind: everyday}
+  - {q: pools, expect: [/parks/], kind: everyday}
+  - {q: hunting license, expect: [/parks/], kind: everyday}
+  - {q: senior center, expect: [/staying-active/, /help-at-home/, /community-centers/, /community-centers/westside-senior-center/, /community-centers/clay-battelle-senior-center/], kind: everyday}
+  - {q: daycare cost help, expect: [/families-and-kids/, /school-age/], kind: everyday}
+  - {q: volenteer, expect: [/volunteer/], kind: misspelled}
+
+  # Full questions (many from questions.yaml)
+  - {q: I can't pay my heating bill, expect: [/utility-bills/, /money/], kind: question}
+  - {q: where is a food pantry open this week, expect: [/help/food/, /help/food/today/other/, /help/food/today/], kind: question}
+  - {q: my water is about to be shut off, expect: [/utility-bills/, /money/], kind: question}
+  - {q: how do I apply for food stamps, expect: [/snap/, /file-today/], kind: question}
+  - {q: where can I see a doctor with no insurance, expect: [/no-insurance/], kind: question}
+  - {q: where can I get a free flu shot, expect: [/flu-shots/], kind: question}
+  - {q: I need a dentist but have no insurance, expect: [/dental-and-prescriptions/], kind: question}
+  - {q: what license do I need to open a business, expect: [/start-a-business/, /business-by-town/], kind: question}
+  - {q: how do I speak at city council, expect: [/have-your-say/], kind: question}
+  - {q: how do I report a pothole, expect: [/make-it-better/report/], kind: question}
+  - {q: when is trash pickup, expect: [/recycling/], kind: question}
+  - {q: can I put glass in my recycling bin, expect: [/recycling/], kind: question}
+  - {q: where can I drop off old paint, expect: [/recycling/], kind: question}
+  - {q: I'm being evicted, expect: [/legal-help/, /renting/, /money/], kind: question}
+  - {q: where can I stay tonight, expect: [/stay-tonight/, /tonight/], kind: question}
+  - {q: which bus goes to the hospital, expect: [/getting-around/, /medical-rides/], kind: question}
+  - {q: how do I register to vote, expect: [/vote/], kind: question}
+  - {q: how can I serve on a city board, expect: [/make-it-better/boards/], kind: question}
+  - {q: how do I get my soil tested, expect: [/soil-test/], kind: question}
+  - {q: what's wrong with my plants, expect: [/plant-problems/], kind: question}
+  - {q: where can I borrow a drill, expect: [/borrow-or-get-free/], kind: question}
+  - {q: where can I sell kids clothes, expect: [/sell-or-donate/, /thrift-shops/], kind: question}
+  - {q: is the warming shelter open tonight, expect: [/tonight/, /stay-tonight/], kind: question}
+  - {q: where do I get narcan, expect: [/drugs-and-alcohol/], kind: question}
+  - {q: who do I call about a pothole, expect: [/make-it-better/report/], kind: question}
+  - {q: how do I get a birth certificate, expect: [/ids-and-records/], kind: question}
+  - {q: what day is my trash picked up, expect: [/recycling/], kind: question}
+  - {q: do I need a permit to build a deck, expect: [/permits/], kind: question}
+  - {q: where can I volunteer this weekend, expect: [/volunteer/], kind: question}
+  - {q: how do I keep my medicaid, expect: [/medicaid-2027/], kind: question}

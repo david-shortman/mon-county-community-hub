@@ -44,4 +44,4 @@ Code is under the [MIT License](LICENSE). Content in `content/` is under [CC BY 
 
 ## Found something wrong or missing?
 
-Open an issue using the "Suggest a resource or correction" form.
+Use the [fix or removal form](https://tally.so/r/rD5adv). You don't need an account, and what you send is not posted. The "Report a problem" and "Tell us" links on the site open the same form.

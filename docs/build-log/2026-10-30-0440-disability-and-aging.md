@@ -7,3 +7,5 @@
 - **Next step (on #227):** a plain Medicaid waiver guide quoted from the state's own pages, which needs the extra review in #97.
 - **Noticed:** `/stay-tonight/` now scrolls sideways at 320px with 200% text after #334; added to #332.
 - **Scoreboard:** suggest "disability services Morgantown" at the next weekly findability check (2026-11-01).
+
+Checked 2026-11-01: added as q49 ("disability services help at home Monongalia County WV", #1036). First score 12 of 15 (the state's in-home care waiver page, after a reworded search). Our /help-at-home/ page is not in search yet.

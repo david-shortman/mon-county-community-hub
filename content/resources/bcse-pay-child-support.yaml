@@ -1,0 +1,24 @@
+title: Pay child support
+slug: bcse-pay-child-support
+org: wv-bureau-for-child-support-enforcement
+topics: [family, legal]
+who_it_is_for: Parents who pay child support through the West Virginia Bureau for Child Support Enforcement.
+what_to_do: "Pay online at the SMART West Virginia Child Support Payment Center, by phone, by mail, or with cash at a store that takes payments. Help with a payment: 1-855-363-1753."
+options:
+  - "Bank draft online, one time or every month: no fee"
+  - "Debit or credit card, Apple Pay, Google Pay, PayPal or Venmo: 2.5% fee"
+  - "Cash at a store that takes payments: $2 fee"
+  - "By phone at 1-855-303-0094 with a debit or credit card: 2.5% fee"
+  - "By mail: a check or money order (no cash) with a payment coupon to Bureau for Child Support Enforcement, PO Box 247, Charleston, WV 25321"
+notes:
+  - "BCSE says giving the child or the other parent something directly counts as a gift, and you still owe the full court-ordered support."
+contact:
+  phone: "1-855-363-1753"
+  url: https://bcse.wv.gov/make-payment
+  url_label: Ways to pay
+cost: "Free by bank draft. Some other ways have a fee, listed above."
+sources:
+  - url: https://bcse.wv.gov/make-payment
+    checked: 2026-10-31
+  - url: https://bcse.wv.gov/bcse-child-support-questions
+    checked: 2026-10-31

@@ -4,5 +4,5 @@ quote: "Western Mon County Recycling site is a SOURCED-SEPERATED site, operated 
 place: "Arnettsville Community Association, 4120 Fairmont Rd, Morgantown, WV"
 sources:
   - url: https://www.monongaliacountyswa.com/recycling
-    checked: 2026-10-30
+    checked: 2026-11-01
 recheck_days: 90    # hours and a place

@@ -1,0 +1,31 @@
+of: pages/help-in-your-language
+lang: es
+strings:
+  title: Ayuda en su idioma en Morgantown y el condado de Monongalia
+  description: "Dónde conseguir intérpretes gratis y ayuda en otros idiomas en Morgantown y el condado de Monongalia, WV: hospitales, el Departamento de Salud, oficinas del estado, tribunales, ayuda legal y clases de inglés."
+  heading: Ayuda en su idioma
+  lede: 'Muchas oficinas de aquí le consiguen un intérprete gratis. Diga "I need an interpreter" (necesito un intérprete) y el nombre de su idioma. También puede pedirle a un amigo que llame con usted, pero en un tribunal un familiar o un amigo no puede ser su intérprete.'
+  h_doctor: En el médico, el hospital o la clínica
+  h_state: Comida, seguro médico y otra ayuda del estado
+  state_text: El Departamento de Servicios Humanos del estado (DoHS) se encarga de SNAP, Medicaid y otra ayuda del estado. El plan de acceso a idiomas del estado, de junio de 2023 (escrito cuando el departamento era parte del WVDHHR), dice que hay personal bilingüe que puede ayudar en español, que se usan intérpretes de afuera cuando hace falta, y que las oficinas deben tener tarjetas en varios idiomas para que usted pueda señalar el suyo. Pida un intérprete en la oficina o cuando llame.
+  h_legal: Tribunales y ayuda legal
+  h_english: Aprender inglés
+  h_not_listed: Todavía no están en esta lista
+  not_listed: El 30 de octubre de 2026 revisamos los sitios web de Milan Puskar Health Right, Monongalia County Schools y la Morgantown Public Library, y ninguno decía si ofrece intérpretes. Pregunte cuando llame. Si usted trabaja en uno de estos lugares y nos puede mostrar una página que lo diga,
+  not_listed_link: díganos
+  about_translation: Claude, una inteligencia artificial (IA), escribió el primer borrador de esta página en español. Una persona que lee bien el español revisó cada línea antes de ponerla en el sitio. Los números de teléfono, las direcciones y los horarios siempre vienen de nuestras listas en inglés, así que coinciden. El resto del sitio está solo en inglés por ahora.
+  new_country: "¿Es nuevo en el país? Esta página da los primeros pasos en orden:"
+  families: "Más para familias:"
+  in_english: (en inglés)
+  call: Llamar al
+  website: Sitio web
+  more_in_english: Más detalles en inglés
+  checked_label: Lo revisamos el
+  source_label: Fuente
+  stale_note: Una parte de esta página cambió en inglés y la estamos revisando.
+  language_label: Idioma
+english_hash: 77cf48170bcf
+method: machine-plus-review
+translated: 2026-11-01
+reviewed: false
+notes: Claude draft (#1101). A fluent Spanish reader checks every line against the English before this goes live. See docs/reviews/2026-11-01-spanish-pilot.md.

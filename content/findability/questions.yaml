@@ -307,3 +307,107 @@ questions:
     question: Is there a community dinner I can go to this weekend near Morgantown?
     who: Someone who lives alone and wants to meet neighbors
     search: community dinner this weekend Morgantown WV
+
+  # Personas without a question yet (#1036, content/personas.yaml)
+  - id: q46
+    topic: bills-food
+    kind: everyday
+    question: Where can I get my taxes done for free?
+    who: A cashier in Morgantown who works full time
+    search: free tax help Morgantown WV
+  - id: q47
+    topic: medical
+    kind: everyday
+    question: My doctor says I have prediabetes. Is there a class that can help?
+    who: A 50-year-old in Cheat Lake
+    search: diabetes prevention class Morgantown WV
+  - id: q48
+    topic: aging
+    kind: everyday
+    question: I turn 65 soon. Where can I get free help choosing Medicare?
+    who: A retiree-to-be in Westover
+    search: free Medicare help Monongalia County WV
+  - id: q49
+    topic: aging
+    kind: everyday
+    question: Where can my brother get help at home for his disability?
+    who: A caregiver in Morgantown
+    search: disability services help at home Monongalia County WV
+  - id: q50
+    topic: family
+    kind: urgent
+    question: I am pregnant. How do I sign up for WIC?
+    who: A first-time parent in Star City
+    search: WIC office Morgantown WV
+  - id: q51
+    topic: family
+    kind: everyday
+    question: How do I enroll my child in Monongalia County Schools?
+    who: A parent who just moved to Granville
+    search: enroll Monongalia County Schools new student
+  - id: q52
+    topic: work
+    kind: everyday
+    question: I am 15. Do I need a work permit for my first job?
+    who: A teen in Morgantown
+    search: work permit 15 year old West Virginia
+  - id: q53
+    topic: bills-food
+    kind: urgent
+    question: I am a WVU student and out of food money. Where can I get food?
+    who: A WVU sophomore living off campus
+    search: WVU student food pantry
+  - id: q54
+    topic: work
+    kind: urgent
+    question: I just lost my job. How do I file for unemployment?
+    who: A warehouse worker in Westover
+    search: file unemployment WV Morgantown
+  - id: q55
+    topic: work
+    kind: urgent
+    question: I just got out of prison. Who helps with a job and an ID?
+    who: A man back home in Morgantown
+    search: reentry help jobs after prison Morgantown WV
+  - id: q56
+    topic: moving
+    kind: everyday
+    question: I am moving to Morgantown for remote work. Can I get fast internet?
+    who: A remote worker choosing a town
+    search: internet providers Morgantown WV
+  - id: q57
+    topic: housing
+    kind: everyday
+    question: My landlord will not fix the heat. What can I do?
+    who: A renter in Sunnyside
+    search: landlord won't make repairs Morgantown WV renter rights
+  - id: q58
+    topic: housing
+    kind: everyday
+    question: How do I get a permit for a new septic system?
+    who: A homeowner near Blacksville
+    search: septic permit Monongalia County health department
+  - id: q59
+    topic: safety
+    kind: urgent
+    question: The power is out after a storm. Who do I call and where can I get warm?
+    who: A family in Cassville
+    search: power outage Monongalia County who to call
+  - id: q60
+    topic: language
+    kind: everyday
+    question: Where can I get an interpreter for a doctor visit?
+    who: A Spanish speaker new to Morgantown
+    search: free interpreter Morgantown WV
+  - id: q61
+    topic: veterans
+    kind: everyday
+    question: Where is the VA clinic and how do I sign up for care?
+    who: A veteran who just moved to Mon County
+    search: VA clinic Morgantown WV
+  - id: q62
+    topic: helpers
+    kind: everyday
+    question: Is there a list of local resources I can print for people I help?
+    who: A church volunteer in Morgantown
+    search: Morgantown community resource list printable

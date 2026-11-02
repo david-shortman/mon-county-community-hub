@@ -1,0 +1,93 @@
+# Community center, hall and park event pages the daily Source check watches
+# closely (#752). How it works: docs/plans/2026-10-30-centers-watch.md
+#
+# This is a watch list, not a listing. Nothing here shows on the site. Fields
+# are explained in content/watch/food.yaml and content/watch/shelter.yaml.
+# The Dominion Post's weekly columns have a new address every week, so they
+# are on the weekly checklist issue (#752), not here.
+group: centers
+title: Community center and park event pages
+issue_title: Community center or park event page changed
+plan: docs/plans/2026-10-30-centers-watch.md
+todo: >-
+  What to do: open each page and read it. For a new dated public event at a
+  place in content/places/, add content/calendar/<place>-<event>-<date>.yaml
+  with venue and topic community (event facts only, with a link, never copied
+  text, no event without a confirmed year, no volunteers' names or numbers).
+  For changed hours, dues, prices or status, update the place file and its
+  checked date. Do it in one PR, then close this issue. If nothing new, close
+  it. If a place seems closed or moved, open a needs-verification issue.
+entries:
+  - name: BOPARC public notices and park or facility closures
+    kind: page
+    url: https://www.boparc.org/public-notices--parkfacility-closures.html
+    start: BOPARC Privacy Policy Gift Cards
+    end: Home Facilities BOPARC Sports Complex
+    checked: 2026-10-31
+    note: Marilla Park closures run until early 2027, per this page.
+
+  - name: BOPARC events and activities
+    kind: page
+    url: https://www.boparc.org/events--activities.html
+    start: BOPARC Privacy Policy Gift Cards
+    end: Home Facilities BOPARC Sports Complex
+    checked: 2026-10-31
+
+  - name: Marilla Recreation Center (reopening)
+    kind: page
+    url: https://www.boparc.org/marilla-recreation-center.html
+    start: BOPARC Privacy Policy Gift Cards
+    end: Home Facilities BOPARC Sports Complex
+    quote: A re-opening date will be determined at a later date
+    checked: 2026-10-31
+    note: The one to watch. When the quote goes away, read the page for the reopening date and new rental rates.
+
+  - name: Wiles Hill Community Center
+    kind: page
+    url: https://www.boparc.org/wiles-hill-community-center.html
+    start: BOPARC Privacy Policy Gift Cards
+    end: Home Facilities BOPARC Sports Complex
+    checked: 2026-10-31
+
+  - name: Dorsey's Knob Lodge
+    kind: page
+    url: https://www.boparc.org/dorseys-knob-lodge.html
+    start: BOPARC Privacy Policy Gift Cards
+    end: Home Facilities BOPARC Sports Complex
+    checked: 2026-10-31
+
+  - name: County parks events (Mason-Dixon, Chestnut Ridge, Camp Muffly)
+    kind: page
+    url: https://www.monongaliacounty.gov/parks_and_rec_events/
+    start: Return to Parks and Recreation Home Page
+    end: Online Information and Resources
+    checked: 2026-10-31
+    note: Some cards give a month and day but no year. No event without a confirmed year.
+
+  - name: Westside Senior Center (Westover)
+    kind: page
+    url: https://www.westoverwv.org/westside-senior-center
+    start: Welcome from the President and Board
+    end: Resources To maintain
+    quote: 9 a.m. to Noon - Monday to Friday
+    checked: 2026-10-31
+    note: The calendar and newsletter are PDFs linked here. A new file name counts as a change.
+
+  - name: Senior Monongalians events and activities
+    kind: page
+    url: https://www.seniormons.org/blank-4
+    start: Menu Close
+    end: Daily Lunch
+    checked: 2026-10-31
+
+  - name: Smithtown Community and Senior Center calendar
+    kind: blocked
+    url: http://www.smithtowncommunity.com/calendar.html
+    checked: 2026-10-31
+    note: The events are in an embedded Google Calendar, and Google's robots.txt asks robots to stay out. A person reads it on the weekly checklist. Leave times off (wrong on some entries).
+
+  - name: Cheat Lake VFD events calendar
+    kind: blocked
+    url: https://www.cheatlakefire.org/events
+    checked: 2026-10-31
+    note: Embedded Google Calendar, same as Smithtown. Public events only; skip rentals and anything marked private.

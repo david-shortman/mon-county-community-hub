@@ -36,20 +36,23 @@ function vevent(e, stamp) {
       ? [`DTSTART;TZID=America/New_York:${local(e.starts, e.start_time)}`, ...(e.end_time ? [`DTEND;TZID=America/New_York:${local(e.starts, e.end_time)}`] : [])]
       : [`DTSTART;VALUE=DATE:${compact(e.starts)}`, `DTEND;VALUE=DATE:${compact(nextDay(e.ends))}`]),
     `SUMMARY:${esc(e.title)}`,
-    `DESCRIPTION:${esc(`${e.who_it_is_for} ${e.what_to_do} ${e.feed ? `Listed by ${e.org_name}.` : `Run by ${e.org_name}.`} Check the source before you go: ${e.sources?.[0]?.url ?? e.url}`)}`,
+    `DESCRIPTION:${esc(e.ics_description ?? `${e.who_it_is_for} ${e.what_to_do} ${e.feed ? `Listed by ${e.org_name}.` : `Run by ${e.org_name}.`} Check the source before you go: ${e.sources?.[0]?.url ?? e.url}`)}`,
   ];
+  // Optional categories, like Due, Season or Tip in home.ics (#1051).
+  if (e.ics_categories?.length) lines.push(`CATEGORIES:${e.ics_categories.map(esc).join(',')}`);
   if (e.place) lines.push(`LOCATION:${esc(e.place)}`);
   lines.push(`URL:${e.url}`, 'TRANSP:TRANSPARENT', 'END:VEVENT');
   return lines;
 }
 
-export function icsDocument(events, name = 'Mon County deadlines and dates') {
+export function icsDocument(events, name = 'Mon County deadlines and dates', { description } = {}) {
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
   const lines = [
     'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Everything Morgantown//Deadlines//EN',
     'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', `X-WR-CALNAME:${esc(name)}`, 'X-WR-TIMEZONE:America/New_York',
     // RFC 7986 names and refresh hint, for apps that skip the X-WR- lines (#108).
     `NAME:${esc(name)}`, 'REFRESH-INTERVAL;VALUE=DURATION:P1D', 'X-PUBLISHED-TTL:P1D',
+    ...(description ? [`DESCRIPTION:${esc(description)}`, `X-WR-CALDESC:${esc(description)}`] : []),
     ...VTIMEZONE,
     ...events.flatMap((e) => vevent(e, stamp)),
     'END:VCALENDAR',

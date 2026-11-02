@@ -2,6 +2,7 @@
 // A summary with ; , \ and a line break must come out escaped the way
 // RFC 5545 section 3.3.11 requires, and read back to the same text. The same
 // check must catch the old bug from #77, where ';' was not escaped.
+import fs from 'node:fs';
 import { esc, icsDocument } from '../src/lib/ics.mjs';
 
 const failures = [];
@@ -43,8 +44,33 @@ expect(lines.some((l) => l.startsWith('X-WR-CALNAME:')), 'missing X-WR-CALNAME')
 // UIDs stay <slug>@mon-county-community-hub so subscribers never see duplicates (#108).
 expect(value('UID') === `${event.slug}@mon-county-community-hub`, 'UID format changed; subscribers would see every event twice');
 
+// home.ics (#1051), as built: every event has a Due:, Season: or Tip: title
+// (or the Event category for live items), a category, and a description that
+// ends with its source and checked date. No event shows twice.
+const homeFile = new URL('../dist/home.ics', import.meta.url);
+if (fs.existsSync(homeFile)) {
+  const text = fs.readFileSync(homeFile, 'utf8');
+  expect(text.startsWith('BEGIN:VCALENDAR\r\n') && text.endsWith('END:VCALENDAR\r\n'), 'home.ics is not a whole calendar');
+  expect(text.split('\r\n').every((l) => Buffer.byteLength(l, 'utf8') <= 75), 'home.ics has a line longer than 75 octets');
+  const unfolded = text.replace(/\r\n /g, '');
+  const events = unfolded.split('BEGIN:VEVENT').slice(1);
+  expect(events.length >= 10, `home.ics has only ${events.length} events`);
+  const uids = new Set();
+  for (const ev of events) {
+    const get = (name) => ev.split('\r\n').find((l) => l.split(/[;:]/)[0] === name)?.replace(/^[^:]*:/, '') ?? '';
+    const summary = unescape(get('SUMMARY'));
+    const cat = get('CATEGORIES');
+    expect(['Due', 'Season', 'Tip', 'Event'].includes(cat), `home.ics: ${summary} has category "${cat}"`);
+    if (cat !== 'Event') expect(summary.startsWith(`${cat}: `), `home.ics: "${summary}" should start with "${cat}: "`);
+    expect(/Source: \S+ Checked: \d{4}-\d{2}-\d{2}$/.test(unescape(get('DESCRIPTION'))), `home.ics: ${summary} should end with its source and checked date`);
+    const uid = get('UID');
+    expect(!uids.has(uid), `home.ics lists ${uid} twice`);
+    uids.add(uid);
+  }
+} else failures.push('dist/home.ics is missing (run npm run build first)');
+
 if (failures.length) {
   console.error(`Calendar feed tests failed:\n- ${failures.join('\n- ')}`);
   process.exit(1);
 }
-console.log('Calendar feed tests passed: escaping, folding, NAME, REFRESH-INTERVAL and UID.');
+console.log('Calendar feed tests passed: escaping, folding, NAME, REFRESH-INTERVAL, UID and home.ics.');

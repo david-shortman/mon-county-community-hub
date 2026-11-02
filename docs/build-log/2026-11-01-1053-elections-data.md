@@ -1,0 +1,6 @@
+# 2026-11-01: Each election from one data file (#1365)
+
+- **Considered:** the open epics and the coverage map (#222) had nothing free. Every child issue was built, in a PR, or waiting on David or a phone call. The /vote/ election section I built for #970 was hard-coded for November 3, and after that day /vote/ would say nothing about results. Each new election would need hand edits, against David's rule that every run is automatic.
+- **Chose:** `content/elections/`, one file per election (dates, poll hours, early voting, the cards to show, canvass, official results link, sources), read by `site/src/lib/elections.mjs`. /vote/ picks the election by the Morgantown date at build time: what to know to vote through Election Day, then the Secretary of State's official results link and the canvass date until `results_until`. A missing or out-of-order date fails the build.
+- **Shipped:** the 2026 general election file (results link confirmed on GoVoteWV today), the helper, and /vote/ reading from it. Tested every phase by date (October 30 to December 1) and built the after-Election-Day view once with a fixed date to check it.
+- **Scoreboard:** none directly. Check on November 4 that /vote/ shows the results link with no edits.

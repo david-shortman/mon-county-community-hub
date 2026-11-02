@@ -1,0 +1,42 @@
+name: Agenda guides
+
+# Once a day, opens one issue for each City Council or County Commission
+# meeting in the next 14 days that has a posted agenda but no plain-language
+# guide in content/agendas/ (#529). One issue per meeting, never repeated.
+# No Claude calls and no content writes; a run takes a minute or two of a free
+# runner. See site/scripts/agenda-issues.mjs and docs/process/agenda-guides.md.
+#
+# Uses only actions/checkout and actions/setup-node, to stay inside the allow list.
+
+on:
+  schedule:
+    - cron: '17 14 * * *' # daily, mid-morning in Morgantown
+  workflow_dispatch:
+
+concurrency:
+  group: agendas
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/agenda-issues.mjs run

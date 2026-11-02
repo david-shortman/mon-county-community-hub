@@ -1,0 +1,11 @@
+name: U.S. Department of Housing and Urban Development (HUD)
+slug: us-department-of-housing-and-urban-development
+kind: government
+website: https://www.hud.gov/
+phone: "800-569-4287"
+summary: The federal housing agency. It approves and funds housing counseling agencies that give free or very low cost help, including help avoiding foreclosure.
+topics: [housing]
+area: national
+sources:
+  - url: https://www.hud.gov/helping-americans/avoiding-foreclosure
+    checked: 2026-10-31

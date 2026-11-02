@@ -1,0 +1,93 @@
+# The Town of Star City's "Business License Application" (part of #393),
+# linked on its Business Registrations page as "Business Registration
+# Application (v.2025)" (read 2026-11-01). Two pages: the fee list and the
+# form. No date is printed on it; the file was saved June 30, 2026. Every
+# business type and fee is copied as printed.
+slug: star-city-business-license
+title: Business License Application, Town of Star City
+publisher: Town of Star City
+pdf: https://www.starcitywv.com/wp-content/uploads/2026/07/BUSINESS-LICENSE-APPLICATION-v.2025.pdf
+pdf_date: "no date is printed on it. The town's page calls it \"v.2025\", and the file was saved June 30, 2026"
+found_on: https://www.starcitywv.com/business-registrations/
+intro: Doing business in Star City? The town asks for a yearly business registration. These are the fees and rules from its application. The parts in quotes are the town's own words.
+recheck_days: 180
+sources:
+  - url: https://www.starcitywv.com/wp-content/uploads/2026/07/BUSINESS-LICENSE-APPLICATION-v.2025.pdf
+    name: Town of Star City
+    checked: 2026-11-01
+  - url: https://www.starcitywv.com/business-registrations/
+    checked: 2026-11-01
+sections:
+  - heading: The rules
+    id: rules
+    items:
+      - "Registrations run for the \"Fiscal Year July 1 to June 30\"."
+      - "\"Please Apply For All Types Of Registration Needed On This Form\""
+      - "\"MUST PROVIDE A COPY OF CURRENT WV STATE BUSINESS LICENSE\""
+      - "\"Failure to secure a new license before July 1st will make you liable to punishment for operating without a license.\""
+      - "Late fee: \"Failure to apply for a license after July 1st will make you liable to punishment PLUS a penalty of ten percent (10%) of the annual fee for each month, or fraction thereof, delinquent.\""
+      - "The form asks for the business name, address, phone, an email for renewal and tax reminders, and the names of all owners, partners or corporate officers."
+  - heading: "$25 a year"
+    id: fee-25
+    items:
+      - Attorney
+      - Auctioneer
+      - Barber/Beautician/Manicurist
+      - Hotel/Motel
+      - Insurance Company
+      - Physician/Surgeon/Podiatrist
+      - Restaurant
+      - Store (establishment that sells goods)
+      - Veterinarian
+      - Manufacturing
+      - Wholesale
+      - Bank or Other Financial Institution
+      - Amusements
+      - Dentist/Orthodontist
+      - Engineering/Architecture
+      - Other Business Not Listed (the form asks you to say what it is)
+  - heading: "$50 a year"
+    id: fee-50
+    items:
+      - Handyman Contractor
+      - Mobile Vendor
+  - heading: Non-profit
+    id: nonprofit
+    items:
+      - name: "Non-Profit"
+        lines: ["$0.00"]
+  - heading: Beer, wine and liquor
+    id: alcohol
+    note: These are on top of the state license. For a beer license, the town says you need a questionnaire and the state license.
+    items:
+      - name: "Beer (non-intoxicating)"
+        lines: ["Distributor: $250.00", "Class A (Bar/Restaurant): $100.00", "Class B (Grocer): $100.00"]
+      - name: "Wine"
+        lines: ["Distributor/Wholesaler: $2,500.00", "Retailer (Grocer): $150.00", "Bar/Restaurant: $150.00"]
+      - name: "Liquor"
+        lines: ["Distributor/Wholesaler: $2,500.00", "Bar/Restaurant: $375.00"]
+      - "\"Applicants for BEER LICENSES must have questionnaire including signature and acknowledgement, along with a state beer license to be presented to the business office at the time of application.\""
+  - heading: Private clubs
+    id: clubs
+    items:
+      - name: "Less than 1000 members"
+        lines: ["$500.00"]
+      - name: "More than 1000 members"
+        lines: ["$1,250.00"]
+  - heading: How to turn it in
+    id: turn-in
+    note: From the town's Business Registrations page, not the PDF.
+    items:
+      - "Print the form, fill it out, and bring or mail it to the Town of Star City, 370 Broadway Ave, Star City, WV 26505."
+      - "You can pay on the town's website under Payments, but then \"you must email the application form to info@starcitywv.com\"."
+      - "\"Please note that the completed application and payment in full must be received for the license to be processed.\""
+      - "Questions: the Business Office, 304-599-3550, 8 a.m. to 4:30 p.m., Monday to Friday."
+  - heading: The form
+    id: form
+    items:
+      - name: "Business License Application"
+        lines: ["Two pages: the fee list and the form."]
+        links:
+          - label: "Business License Application (PDF)"
+            url: https://www.starcitywv.com/wp-content/uploads/2026/07/BUSINESS-LICENSE-APPLICATION-v.2025.pdf
+            saved: "June 30, 2026"

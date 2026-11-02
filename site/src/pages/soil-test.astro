@@ -1,0 +1,45 @@
+---
+// How do I get my garden soil tested? (#435, findability q33). Facts from the
+// WVU Soil Testing Lab and WVU Extension pages, read 2026-10-31 (first
+// confirmed on #552). No lime or fertilizer advice here: the report and the
+// county Extension office give that.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "growing", label: "Get your garden soil tested", summary: "WVU's free soil test for West Virginia residents: how to take a sample, mail it or drop it off, and who helps you read the report" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const howTo = [{ url: 'https://extension.wvu.edu/lawn-gardening-pests/gardening/gardening-101/soil-testing-for-beginning-gardeners', checked }];
+const faq = [{ url: 'https://soiltesting.wvu.edu/faq', checked }];
+const report = [{ url: 'https://extension.wvu.edu/natural-resources/soil-water/using-the-wvu-soil-testing-report', checked }];
+---
+<Base title="How do I get my garden soil tested in Morgantown or Mon County, WV?" description="WVU tests garden soil for free for West Virginia residents. How to take a soil sample, mail it or drop it off at the WVU Soil Testing Lab in Morgantown, when results come, and where Monongalia County gardeners get help reading the report.">
+  <h1>How do I get my garden soil tested?</h1>
+  <p class="lede">Send a soil sample to the WVU Soil Testing Lab in Morgantown. The basic test is free for West Virginia residents. Mix soil from your garden, then mail 1 to 2 cups with the lab's form, or drop it off on campus.</p>
+
+  <h2 id="steps">Take a good sample</h2>
+  <p>WVU Extension's guide for new gardeners gives these steps:</p>
+  <ol>
+    <li>Use a clean plastic or stainless steel trowel, spade or soil probe, and a plastic bucket. Iron can change the results.</li>
+    <li>Move aside leaves and other litter. Take 10 to 20 small scoops from around the bed, as deep as you dig or till.</li>
+    <li>Mix them in the bucket. Pick out rocks and roots. Keep 1 to 2 cups.</li>
+    <li>Test each area that is different, like a slope or a bed you treated another way, as its own sample.</li>
+  </ol>
+  <p><strong>When not to sample:</strong> right after you add lime or fertilizer, where compost, manure or lime was piled, or when the soil is wet, frozen or very dry. You can let a sample dry a little on clean paper out of the sun. Do not dry it in an oven.</p>
+  <p>WVU suggests testing your garden every 2 to 3 years. The basic test checks pH and nutrients. It does not check drainage or packed soil.</p>
+  <SourceLine sources={howTo} about="how to take a soil sample" />
+  <p>No soil probe? The lab says it and many county Extension offices lend them if you ask. A small spade works too.</p>
+  <SourceLine sources={faq} about="borrowing a soil probe" />
+
+  <h2 id="send">Fill out the form and send it</h2>
+  <ResourceCard r={resource('wvu-free-soil-test')} headingLevel={3} showCost />
+  <p>The form is a fillable PDF. If you cannot use a computer at home, WVU says your county Extension office can help.</p>
+  <SourceLine sources={report} about="getting help with the form" />
+
+  <h2 id="report">Reading your report</h2>
+  <p>Your report says how much lime and fertilizer to add for the plants you listed on the form. WVU explains each part in <a href="https://extension.wvu.edu/natural-resources/soil-water/using-the-wvu-soil-testing-report">Using the WVU soil testing report</a>. For questions, the lab sends you to your county Extension agent.</p>
+  <ResourceCard r={resource('wvu-extension-monongalia-garden-help')} headingLevel={3} />
+
+  <p>Plants still struggling? See <a href={`${base}/plant-problems/`}>Who can tell me what's wrong with my plants?</a> More for gardeners: <a href={`${base}/grow/`}>Grow food and flowers</a>.</p>
+</Base>

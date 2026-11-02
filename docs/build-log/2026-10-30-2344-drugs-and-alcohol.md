@@ -1,0 +1,6 @@
+# 2026-10-30: Help with drugs or alcohol, and free Narcan
+
+- **Considered:** drugs and alcohol are the third top problem in Ruby Memorial's 2025 survey (53%), and residents search "detox", "free Narcan" and "my son is using" (#477). It was split from the mental health page (#203) so each stays short.
+- **Chose:** lead with an overdose (signs from Help and Hope WV, steps from the CDC, over-the-counter naloxone from the FDA), then West Virginia's overdose 911 law described in plain words from W. Va. Code §16-47-4 and §16-47-5, then free naloxone, help lines and local treatment. The page uses the full crisis strip.
+- **Left off:** program contacts on the health department page are named staff, so only the department's program number is used. The health department's Free Naloxone Day dates are out of date on its page (last listed 2024). Recovery housing counts differ between the 2024 and 2025 state county snapshots (74 and 6), so no count is shown. Wise Path is named only as the place of the free naloxone machine, as the health department lists it. Health Right's LIGHT harm reduction hours were not confirmed as current. FindTreatment.gov did not load.
+- **Shipped:** `/drugs-and-alcohol/`, a SAMHSA org, four new records (plus HELP4WV and two orgs shared with the mental health PR), and a Get care pick. Waits for David (#97).

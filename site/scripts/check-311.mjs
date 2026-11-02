@@ -10,12 +10,17 @@
 //
 // Usage (from site/): node scripts/check-311.mjs   prints JSON totals
 // Exit codes: 0 ok, 1 the API or the place lookup failed.
+import { robotsCheck } from '../src/lib/robots.mjs';
+
 const API = 'https://seeclickfix.com/api/v2';
 const HEADERS = { 'User-Agent': 'mon-county-community-hub (github.com/david-shortman/mon-county-community-hub)', Accept: 'application/json' };
 const DAY = 864e5;
 
 async function get(path, params) {
   const url = `${API}/${path}?${new URLSearchParams(params)}`;
+  // Same robots.txt rule as every automated read (docs/operations/automated-reads.md).
+  const rc = await robotsCheck(url, { userAgent: HEADERS['User-Agent'] });
+  if (!rc.allowed) throw new Error(rc.reason);
   const res = await fetch(url, { headers: HEADERS, signal: AbortSignal.timeout(20000) });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${path}`);
   return res.json();

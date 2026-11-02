@@ -1,0 +1,32 @@
+---
+// "I need an interpreter" card (#1101, plan rank 3): a card a reader can show
+// at an office, clinic or court. Each line is in the reader's language with
+// the English under it, so staff can read it too. The reader's lines come
+// from content/translations/<lang>/parts/InterpreterCard.yaml and show only
+// once a fluent reader has reviewed them; until then the card shows nothing,
+// since an English-only card would not help. English pages never show it.
+import { LOCALES, DEFAULT_LOCALE } from '../lib/i18n.mjs';
+import { loadTranslation } from '../lib/translations.mjs';
+import { todayYmd } from '../lib/content.mjs';
+const { lang = DEFAULT_LOCALE } = Astro.props;
+const t = lang === DEFAULT_LOCALE ? null : loadTranslation(lang, 'parts/InterpreterCard', { today: todayYmd() });
+const s = t?.values ?? {};
+const language = LOCALES[lang]?.english;
+---
+{t && language && (
+  <section class="interp-card" aria-labelledby="interp-card-h">
+    <h2 id="interp-card-h" lang={lang}>{s.heading}</h2>
+    <p class="meta" lang={lang}>{s.show_this}</p>
+    <div class="interp-lines">
+      <p><strong lang={lang}>{s.need}</strong><br /><span lang="en">I need an interpreter.</span></p>
+      <p><strong lang={lang}>{s.my_language}</strong><br /><span lang="en">My language is {language}.</span></p>
+      <p><strong lang={lang}>{s.please}</strong><br /><span lang="en">Please get an interpreter for me.</span></p>
+    </div>
+  </section>
+)}
+<style>
+  .interp-card { margin: 24px 0; padding: 4px 16px 8px; border: 2px solid var(--accent); border-radius: 10px; background: var(--card); }
+  .interp-card h2 { margin-top: 0.6em; }
+  .interp-lines p { font-size: 1.25rem; line-height: 1.4; margin: 0.8em 0; }
+  .interp-lines span { color: var(--muted); font-size: 1.05rem; }
+</style>

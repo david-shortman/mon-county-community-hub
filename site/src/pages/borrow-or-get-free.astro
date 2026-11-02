@@ -1,0 +1,45 @@
+---
+// Borrow it or get it free (#429, part of #422). Built from content/secondhand:
+// lending libraries, free programs, online giving groups and repair help.
+// The next repair cafe date comes from the calendar (topic secondhand).
+import Base from '../layouts/Base.astro';
+import ShopCard from '../components/ShopCard.astro';
+import EventCard from '../components/EventCard.astro';
+import { loadSecondhand, loadCalendarWithFeeds, upcoming } from '../lib/content.mjs';
+export const page = { door: "this-month", topic: "poverty", label: "Borrow it or get it free", summary: "Tool and library lending, free clothes and household goods, free giving groups, and free repairs" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadSecondhand().sort((a, b) => a.name.localeCompare(b.name));
+const borrow = all.filter((s) => s.kind === 'lending');
+const free = all.filter((s) => s.kind === 'free-program' && s.area !== 'online');
+const online = all.filter((s) => s.kind === 'free-program' && s.area === 'online');
+const fix = all.filter((s) => s.kind === 'repair');
+const repairDates = upcoming(await loadCalendarWithFeeds(), undefined, 183).filter((e) => /repair/i.test(e.title));
+---
+<Base title="Borrow it or get it free in Morgantown, WV" description="Free tool and library lending, free clothing and household goods, free giving groups like Freecycle, and free repair events in Morgantown and Monongalia County.">
+  <h1>Borrow it or get it free</h1>
+  <p class="lede">Before you buy, you may be able to borrow it, get it free, or get it fixed. These programs are run by the city, the library, local nonprofits and neighbors. Each card says who can use it and what to bring.</p>
+  <p>Jump to: <a href="#borrow">Borrow</a> · <a href="#free">Get it free</a> · <a href="#fix">Get it fixed</a></p>
+
+  {borrow.length > 0 && <section aria-labelledby="borrow"><h2 id="borrow">Borrow</h2>{borrow.map((s) => <ShopCard s={s} />)}</section>}
+
+  <section aria-labelledby="free">
+    <h2 id="free">Get it free</h2>
+    {free.map((s) => <ShopCard s={s} />)}
+    {online.length > 0 && <>
+      <h3>Free giving groups online</h3>
+      <p>On these, neighbors post things they are giving away. Meet in a public place to pick things up.</p>
+      {online.map((s) => <ShopCard s={s} headingLevel={4} />)}
+    </>}
+  </section>
+
+  {(fix.length > 0 || repairDates.length > 0) && (
+    <section aria-labelledby="fix">
+      <h2 id="fix">Get it fixed</h2>
+      {repairDates.map((e) => <EventCard e={e} />)}
+      {fix.map((s) => <ShopCard s={s} />)}
+    </section>
+  )}
+
+  <p>More in this section: <a href={`${base}/thrift-shops/`}>Thrift and resale shops</a> · <a href={`${base}/sell-or-donate/`}>Sell, donate or give away your stuff</a> · <a href={`${base}/markets/`}>Markets and sales coming up</a></p>
+  <p class="meta">Programs change. Each card says when we last checked it. Something wrong or changed? Use the Report a problem link on that card.</p>
+</Base>

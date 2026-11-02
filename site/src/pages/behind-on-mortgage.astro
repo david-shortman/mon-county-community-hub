@@ -1,0 +1,37 @@
+---
+// Behind on a mortgage or facing foreclosure (#1188, gap from #1178, sprint
+// #529). Facts come from the records, each read on a CFPB, HUD, VA, WVHDF,
+// Fairmont-Morgantown Housing Authority, Mountain State Justice or Legal Aid
+// page on 2026-10-31. Left off until a person confirms them (#1236): any state
+// program for homeowners whose loan is not from WVHDF, USDA Rural Development
+// help (rd.usda.gov blocks automated reads), the housing authority's
+// counseling fee, and the WV foreclosure timeline. Waits for David (housing).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "this-month", topic: "housing", label: "Behind on your mortgage", summary: "First steps after a missed payment or a foreclosure notice, free housing counselors, and free legal help with foreclosure" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Behind on your mortgage or facing foreclosure in Mon County, WV" description="For homeowners in Monongalia County, WV who missed a mortgage payment or got a foreclosure notice: first steps from the CFPB, free HUD-approved housing counselors near Morgantown, free legal help from Mountain State Justice, and help for WVHDF and VA loans.">
+  <h1>Behind on your mortgage</h1>
+  <p class="lede">Call your mortgage servicer first. The number is on your monthly statement. A HUD-approved housing counselor can help for free or at low cost, and you don't have to pay anyone to help you avoid foreclosure.</p>
+
+  <p>Rent instead of own? See <a href={`${base}/money/?pick=rent`}>behind on rent</a>. Behind on property tax? See <a href={`${base}/property-tax/`}>property tax</a>.</p>
+
+  <h2 id="first">First steps</h2>
+  <ResourceCard r={resource('cfpb-cant-pay-mortgage')} showCost />
+
+  <h2 id="counselor">A free housing counselor</h2>
+  <ResourceCard r={resource('fmha-default-counseling')} />
+  <ResourceCard r={resource('hud-housing-counseling')} showCost />
+
+  <h2 id="legal">Free legal help</h2>
+  <ResourceCard r={resource('msj-foreclosure-legal-help')} showCost />
+
+  <h2 id="loan-type">If your loan is from the state or the VA</h2>
+  <ResourceCard r={resource('wvhdf-help-for-borrowers')} />
+  <ResourceCard r={resource('va-home-loan-trouble-paying')} showCost />
+
+  <p class="meta">Sources checked October 31, 2026. We could not find a state program open now for homeowners whose loan is not from the WV Housing Development Fund. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

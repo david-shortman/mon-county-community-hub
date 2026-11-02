@@ -48,6 +48,10 @@ Who keeps the listing: County Commission office (304-291-7257), which keeps the 
 
 What differs: two WVU pages appear to still list Bartlett as an active housing provider. A person should open both pages in a browser to confirm before contacting WVU.
 
+Update, October 31, 2026: a person confirmed in a browser that the Women's Resource Center housing page still lists Bartlett Housing Solutions (304-292-0101, 20 Scott Ave) with a "Bartlett House" button. The Graduate Education page is not yet confirmed.
+
+**Do not link either Bartlett domain.** bartletthouse.org now shows a gambling site. bartletthousingsolutions.org serves an old copy of the site (newest post June 2020, newest images May 2023), and its /contact/ page redirects (301) to vantageatburleson.com, an apartment complex in Texas (checked October 31, 2026). This site links neither.
+
 Who keeps the listing: WVU Women's Resource Center; WVU Office of Graduate Education.
 
 ## 4. Monongalia Historical Society: dissolved, but still listed

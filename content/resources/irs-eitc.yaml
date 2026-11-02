@@ -1,0 +1,17 @@
+title: Earned Income Tax Credit (EITC)
+slug: irs-eitc
+org: internal-revenue-service
+topics: [taxes, money]
+who_it_is_for: The IRS says the EITC "helps low- to moderate-income workers and families get a tax break." It says "The amount of your credit may change if you have children or dependents, are disabled or meet other criteria." The IRS posts the income limits and credit amounts for each tax year on its EITC tables page. As of October 31, 2026, the newest table there is for tax year 2025.
+what_to_do: Use the IRS EITC Assistant to check if you qualify. You claim the credit when you file your federal tax return, and the free tax help sites on this page can help. The IRS says "By law, we must wait until mid-February to issue refunds to taxpayers who claim the Earned Income Tax Credit."
+contact:
+  url: https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/use-the-eitc-assistant
+  url_label: Check if you qualify
+cost: free
+sources:
+  - url: https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit-eitc
+    checked: 2026-10-31
+  - url: https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/earned-income-and-earned-income-tax-credit-eitc-tables
+    checked: 2026-10-31
+  - url: https://www.irs.gov/credits-deductions/individuals/earned-income-tax-credit/use-the-eitc-assistant
+    checked: 2026-10-31

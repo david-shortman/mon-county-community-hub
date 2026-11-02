@@ -6,3 +6,5 @@
 - **Conflicts flagged (as #226 asks):** WorkForce WV's office page says Westover 26501 and lists only the statewide line; its American Job Center contact list says Morgantown 26505 and 681-404-6377. The page uses the office page. Literacy Volunteers' own site lists 724-491-2007; older directories list 304-296-3400. The page uses the group's own site.
 - **Next step (left on #226):** MTEC adult education classes (no current official source found today), apprenticeships, and reentry help.
 - **Scoreboard:** no findability question covers jobs yet. Suggest "job help Morgantown" and "free GED classes Morgantown" at the next weekly findability check (2026-11-01).
+
+Checked 2026-11-01: work questions were added in #1036: q52 teen work permit (12), q54 filing for unemployment (13, no page of ours yet; #790, #1161) and q55 help after prison (9). "Job help" and free GED classes were not added as questions.

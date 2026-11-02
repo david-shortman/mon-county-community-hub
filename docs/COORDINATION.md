@@ -75,7 +75,7 @@ The repo is public. Before anything is committed, ask: would we be comfortable w
 ## Rules of the road
 
 1. **Claim before you start.** Add `in-progress` and comment who has it (`Duet`, `Claude Code`, or `David`). Do not work on an issue someone else has claimed.
-2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. The author merges its own PR (squash merge) once the PR checklist passes, unless it falls under "When a PR waits for David" below. To merge from the command line: `gh api -X PUT repos/david-shortman/mon-county-community-hub/pulls/<number>/merge -f merge_method=squash` (`gh pr merge` does not work in cloud sessions).
+2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. The author merges its own PR (squash merge) once the PR checklist passes, unless it falls under "When a PR waits for David" below. To merge from the command line, use `scripts/safe-merge.sh <number>`. It waits for the High stakes check on the PR's latest commit, re-reads the labels, refuses a `for:david` PR, and then squash-merges and checks `main`. Do not merge with a raw `gh api -X PUT .../pulls/<number>/merge` call: on 2026-10-31 three `for:david` PRs were merged that way before the label landed (#910). (`gh pr merge` does not work in cloud sessions.) A GitHub branch rule on `main` that requires the High stakes check is the backstop; David sets that in the repo settings.
 3. **Link everything.** PRs say `Closes #N`. Activity log rows link to the PR or issue.
 4. **Log at the end of every session.** One row in the Notion Activity log: What, Type, Who, Date, Link. Who is `David`, `Duet`, or `Claude Code`.
 5. **Decisions get written down.** Small ones: an Activity log row with Type `Decision`. Ones that shape the repo: also a new file in [`docs/decisions/`](decisions/) (format in [`docs/decisions.md`](decisions.md)).
@@ -134,3 +134,11 @@ Duet cannot be messaged directly by Claude Code, so most handoffs go through iss
 3. Pick or get pointed at an issue with `for:code`, claim it.
 4. Work on a `code/...` branch, open a PR.
 5. Log a row in the Activity log.
+
+### Using `gh` in a cloud session
+
+`gh` works in cloud sessions, with three catches:
+
+- **Ignore `gh auth status`.** It says the token is invalid even when `gh` works. The session's proxy adds the real credential to each request. Test with a real call instead, like `gh api repos/david-shortman/mon-county-community-hub --jq .full_name`.
+- **Use `gh api` REST calls, not `gh pr ...` or `gh issue ...`.** Those commands use GraphQL, which cloud sessions block with an HTTP 403. `scripts/pr-wait.sh` and `scripts/safe-merge.sh` use REST only, so they work. The 403 message lists REST routes for auto-merge, review threads and draft status.
+- **Start child sessions with the repo attached.** The proxy only adds credentials for repos attached to the session, so a child session started without this repo as its source gets refused.

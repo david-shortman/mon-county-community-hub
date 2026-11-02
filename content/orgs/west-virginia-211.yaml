@@ -2,9 +2,9 @@ name: West Virginia 211
 slug: west-virginia-211
 kind: nonprofit
 website: https://wv211.org/
-summary: A free help line run by the United Ways of West Virginia. It connects you with local services like shelter, food, health care, and bill help, 24 hours a day.
+summary: A help line run by the United Ways of West Virginia. It connects you with local services like shelter, food, health care, and bill help, 24 hours a day.
 topics: [housing, food, health, money]
 area: statewide
 sources:
   - url: https://bfa.wv.gov/page/west-virginia-211
-    checked: 2026-10-28
+    checked: 2026-10-31

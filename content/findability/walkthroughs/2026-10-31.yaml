@@ -1,0 +1,1940 @@
+# Simulated resident walkthroughs, October 31, 2026 (#529, sprint wave 6)
+#
+# SIMULATED. These are made-up tasks walked by Claude Code with a script, not
+# real residents and not resident feedback. They show where a stressed person
+# on a phone might get stuck. They do not show what real people do.
+#
+# Tasks: tasks.yaml (30 tasks from docs/groups/, content/needs/ and the
+# findability questions). Script: walk.js, at 390 by 844, on the built site.
+# Scores: score.py (each score is 0 to 3 and names its rubric criterion in
+# docs/rubrics/). Write-up: docs/reviews/2026-10-31-simulated-walkthroughs.md.
+#
+# before: main at f971492 plus merges up to the evening of October 31.
+# after: the same main plus the fix PRs #1153 (search), #1156 (links),
+# #1160 (jobs link) and #1163 (child care), built together locally. Those
+# PRs were open, not live, when this was measured. #1171 (door choices) came
+# after this run and is not in the after numbers.
+#
+# Recompute the summary with: python3 content/findability/walkthroughs/score.py summary <this file>
+
+date: '2026-10-31'
+tester: 'Claude Code (sprint wave 6, our own tests lane, #529)'
+simulated: true
+viewport: 390x844, phone user agent, touch
+summary:
+  before:
+    tasks: 30
+    score: 85
+    averages:
+      IA1: 2.87
+      IA2: 1.47
+      IA7: 2.27
+      PL1: 2.67
+      TR1: 2.97
+      II1: 3.0
+    dead_ends: 2
+    searches_top3: 42
+    searches: 60
+    average_taps: 2.5
+  after:
+    tasks: 30
+    score: 88
+    averages:
+      IA1: 3.0
+      IA2: 1.57
+      IA7: 2.67
+      PL1: 2.67
+      TR1: 2.97
+      II1: 3.0
+    dead_ends: 0
+    searches_top3: 50
+    searches: 60
+    average_taps: 2.5
+results:
+- id: w01
+  task: My power gets shut off Friday and I can't pay.
+  who: Renter with a shutoff notice
+  group: renters
+  need: utility-bills
+  before:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: power shut off friday
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /before-you-call/
+      - /money/
+    - q: shutoff notice
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /money/
+      - /scams/
+    reading_grade: 4.7
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: power shut off friday
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /before-you-call/
+      - /money/
+    - q: shutoff notice
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /money/
+      - /scams/
+    reading_grade: 4.7
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  notes: Home page door button goes straight to the page. Step 1 (call your utility today) is on the first screen
+    with phone numbers. Clear.
+- id: w02
+  task: I just moved here and need a library card and to register to vote.
+  who: New resident from out of state
+  group: new-residents
+  need: null
+  before:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: library card
+      rank: 2
+      top3:
+      - /for/helpers/librarians/
+      - /meet-people/
+      - /for/helpers/
+    - q: register to vote
+      rank: 1
+      top3:
+      - /vote/
+      - /print/voting/
+      - /living-here/
+    reading_grade: 6.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: library card
+      rank: 1
+      top3:
+      - /meet-people/
+      - /meet-people/example/
+      - /sell-or-donate/
+    - q: register to vote
+      rank: 1
+      top3:
+      - /vote/
+      - /living-here/
+      - /corrections/
+    reading_grade: 6.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: 'Two tasks in one. Vote: Living here choice, page is current (Election Day banner). Library card: Your
+    community door, then Meet people; the card rules are on the first screen. Search for ''library card'' put the
+    librarians helper page first; after the search fix, Meet people is first.'
+- id: w03
+  task: My mom is 70 and needs rides to dialysis three times a week.
+  who: Adult child helping an older parent
+  group: older-adults
+  need: transportation
+  before:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: rides to dialysis
+      rank: 1
+      top3:
+      - /medical-rides/
+      - /getting-around/
+      - /disability-and-aging/
+    - q: ride to doctor for senior
+      rank: null
+      top3:
+      - /print/disability/
+      - /disability-and-aging/
+      - /print/care/
+    reading_grade: 4.9
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: rides to dialysis
+      rank: 1
+      top3:
+      - /medical-rides/
+      - /disability-and-aging/
+      - /getting-around/
+    - q: ride to doctor for senior
+      rank: 9
+      top3:
+      - /disability-and-aging/
+      - /getting-around/example/
+      - /make-a-list/
+    reading_grade: 4.9
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: Get care door lists 'I need a ride to a medical visit'. The page opens with the Medicaid ride line and
+    the half-fare bus. Nothing says dialysis by name, but 'rides to dialysis' still found it. 'ride to doctor for
+    senior' found nothing useful before; after, it is in the top 10 but not the top 3 because the page says '62
+    and older', not 'senior'.
+- id: w04
+  task: I'm a WVU student and I can't afford groceries.
+  who: College student
+  group: college-students
+  need: enough-food
+  before:
+    taps: 2
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: wvu student food pantry
+      rank: 1
+      top3:
+      - /help/food/today/student/
+      - /help/food/today/
+      - /money/
+    - q: student can't afford groceries
+      rank: null
+      top3: []
+    reading_grade: 3.8
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: wvu student food pantry
+      rank: 1
+      top3:
+      - /help/food/today/student/
+      - /help/food/today/
+      - /money/
+    - q: student can't afford groceries
+      rank: 5
+      top3:
+      - /for/college-students/
+      - /needs/
+      - /for/teens/
+    reading_grade: 3.8
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  notes: 'Two good paths: Food help asks ''Are you a student at WVU?'' and points to The Rack; Get through this
+    month has a ''Help just for WVU students'' link that jumps to The Rack. ''student can''t afford groceries''
+    found nothing before; after, it reaches the college students page, but not The Rack page itself.'
+- id: w05
+  task: A storm flooded my basement last night.
+  who: Homeowner
+  group: homeowners
+  need: null
+  before:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: basement flooded
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /for/homeowners/
+      - /living-here/
+    - q: flood damage help
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /for/homeowners/
+      - /living-here/
+    reading_grade: 3.1
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: basement flooded
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /for/homeowners/
+      - /living-here/
+    - q: flood damage help
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /for/homeowners/
+      - /living-here/
+    reading_grade: 3.1
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  notes: Living here choice 'Storm damage, flooding or power out'. The page has a 'Water in the basement' choice.
+    Clear and current.
+- id: w06
+  task: I have nowhere to sleep tonight and it's freezing.
+  who: Person without housing
+  group: null
+  need: homelessness
+  before:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: warming shelter tonight
+      rank: 2
+      top3:
+      - /tonight/
+      - /stay-tonight/
+    - q: homeless shelter
+      rank: 3
+      top3:
+      - /for/helpers/bus-drivers/
+      - /print/housing/
+      - /stay-tonight/
+    reading_grade: 3
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: warming shelter tonight
+      rank: 2
+      top3:
+      - /tonight/
+      - /stay-tonight/
+      - /help/what-help/stay/none/
+    - q: homeless shelter
+      rank: 1
+      top3:
+      - /stay-tonight/
+      - /tonight/
+      - /pets/
+    reading_grade: 3
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  notes: One tap from the home page's top strip. Grace Shelter is first with hours and how to get in.
+- id: w07
+  task: I got an eviction notice taped to my door.
+  who: Renter behind on rent
+  group: renters
+  need: housing-costs
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: eviction notice
+      rank: 2
+      top3:
+      - /for/helpers/faith-leaders/
+      - /money/
+      - /help/what-help/rent/none/
+    - q: evicted what do i do
+      rank: 1
+      top3:
+      - /money/
+      - /renting/
+      - /for/helpers/faith-leaders/
+    reading_grade: 3.2
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: eviction notice
+      rank: 2
+      top3:
+      - /help/what-help/rent/none/
+      - /money/
+      - /help/what-help/rent/veteran/
+    - q: evicted what do i do
+      rank: 1
+      top3:
+      - /money/
+      - /renting/
+      - /help/what-help/rent/none/
+    reading_grade: 3.2
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  notes: Home page 'Behind on rent' opens the rent steps with Legal Aid's eviction line. Search 'eviction notice'
+    put the faith leaders helper page first before the fix.
+- id: w08
+  task: My kid needs shots before school starts.
+  who: Parent of a kindergartner
+  group: parents-school-age
+  need: null
+  before:
+    taps: 5
+    screens_scrolled: 3
+    dead_end: /school-shots/ not visible on /school-age/
+    search:
+    - q: school shots
+      rank: 1
+      top3:
+      - /school-shots/
+      - /for/parents-school-age/
+      - /for/new-to-mon-county/
+    - q: kindergarten vaccines
+      rank: 1
+      top3:
+      - /school-shots/
+      - /print/care/
+      - /print/family/
+    reading_grade: 4.7
+    oldest_checked_days: 1
+    scores:
+      IA1: 1
+      IA2: 0
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 13
+    out_of: 18
+  after:
+    taps: 5
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: school shots
+      rank: 1
+      top3:
+      - /school-shots/
+      - /school-age/
+      - /for/parents-school-age/
+    - q: kindergarten vaccines
+      rank: 1
+      top3:
+      - /school-shots/
+      - /make-a-list/
+      - /school-age/
+    reading_grade: 4.7
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: 'Dead end before the fix: Family door, School-age kids, and no link to the school shots page. Search found
+    it at once. Fixed in #1156 (waits for David).'
+- id: w09
+  task: I have no insurance and my tooth is killing me.
+  who: Uninsured adult with tooth pain
+  group: null
+  need: paying-for-health-care
+  before:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: toothache no insurance
+      rank: null
+      top3:
+      - /flood-zone/
+      - /no-insurance/
+      - /print/care/
+    - q: cheap dentist
+      rank: 1
+      top3:
+      - /dental-and-prescriptions/
+      - /money/
+    reading_grade: 6.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: toothache no insurance
+      rank: 2
+      top3:
+      - /no-insurance/
+      - /dental-and-prescriptions/
+      - /flood-zone/
+    - q: cheap dentist
+      rank: 1
+      top3:
+      - /dental-and-prescriptions/
+      - /money/
+      - /the-idea/
+    reading_grade: 6.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: Get care choice 'I need a dentist, or help paying for medicine'. Opens with Health Right and the health
+    department dental clinic. 'toothache no insurance' found nothing on point before; after, dental is second.
+- id: w10
+  task: My brother is using again. Where can he get treatment?
+  who: Family member
+  group: null
+  need: drugs-and-overdose
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: rehab
+      rank: null
+      top3:
+      - /grow/
+      - /print/growing/
+      - /teens/
+    - q: detox near me
+      rank: null
+      top3: []
+    reading_grade: 4.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 0
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: rehab
+      rank: 2
+      top3:
+      - /grow/
+      - /drugs-and-alcohol/
+      - /care/
+    - q: detox near me
+      rank: 1
+      top3:
+      - /drugs-and-alcohol/
+      - /care/
+      - /birth-control-and-testing/
+    reading_grade: 4.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  notes: Home page door button. The lede names two treatment phone numbers. 'rehab' and 'detox near me' found nothing
+    before the search fix.
+- id: w11
+  task: I feel like I can't go on.
+  who: Person having a very hard time at night
+  group: null
+  need: mental-health-care
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: suicidal
+      rank: 4
+      top3:
+      - /
+      - /staying-well/
+      - /for/helpers/faith-leaders/
+    - q: need someone to talk to
+      rank: 3
+      top3:
+      - /for/teens/
+      - /for/veterans/
+      - /mental-health/
+    reading_grade: 4.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: suicidal
+      rank: 3
+      top3:
+      - /
+      - /staying-well/
+      - /mental-health/
+    - q: need someone to talk to
+      rank: 3
+      top3:
+      - /for/teens/
+      - /for/veterans/
+      - /mental-health/
+    reading_grade: 4.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  notes: The call-or-text help line is on the top strip of every page, and the Mental health page opens with it. 'suicidal'
+    put the home page first, which shows that help line at the top, so this is not a dead end.
+- id: w12
+  task: I lost my job and need food stamps.
+  who: Laid off worker
+  group: job-seekers
+  need: enough-food
+  before:
+    taps: 3
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: food stamps
+      rank: 1
+      top3:
+      - /snap/
+      - /help/food/monthly/
+      - /for/helpers/librarians/
+    - q: apply for snap
+      rank: 1
+      top3:
+      - /snap/
+      - /file-today/
+      - /help/food/monthly/
+    reading_grade: 3.4
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: food stamps
+      rank: 1
+      top3:
+      - /snap/
+      - /help/food/monthly/
+      - /help/food/
+    - q: apply for snap
+      rank: 1
+      top3:
+      - /snap/
+      - /file-today/
+      - /help/food/monthly/
+    reading_grade: 3.4
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  notes: Food help, then 'Help buying groceries every month', then Apply for SNAP. 'WV PATH' and 'DoHS' are explained
+    the first time they appear.
+- id: w13
+  task: I need child care so I can go back to work.
+  who: Parent of a toddler
+  group: parents-young-kids
+  need: child-care
+  before:
+    taps: 4
+    screens_scrolled: 12
+    dead_end: null
+    search:
+    - q: daycare
+      rank: null
+      top3:
+      - /living-here/
+      - /holidays/
+      - /vote/
+    - q: help paying for child care
+      rank: null
+      top3:
+      - /print/family/
+      - /for/disability-and-caregivers/
+      - /print/care/
+    reading_grade: 5.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 0
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 12
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: daycare
+      rank: 5
+      top3:
+      - /family/
+      - /living-here/
+      - /holidays/
+    - q: help paying for child care
+      rank: 1
+      top3:
+      - /families-and-kids/
+      - /family/
+      - /for/disability-and-caregivers/
+    reading_grade: 5.8
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: 'Weakest task before the fixes. No child care choice on the Family door, child care 9 screens down Families
+    and kids, and nothing about help paying for it, though a checked record for that exists (#735). Search for ''daycare''
+    and ''help paying for child care'' found nothing useful. Fixed in #1163 (waits for David) and by the search
+    fix.'
+- id: w14
+  task: I turn 65 in March. How do I sign up for Medicare?
+  who: Older adult
+  group: older-adults
+  need: null
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: sign up for medicare
+      rank: 1
+      top3:
+      - /turning-65/
+      - /care/
+      - /for/helpers/nurses/
+    - q: turning 65
+      rank: 1
+      top3:
+      - /turning-65/
+      - /for/veterans/
+      - /for/helpers/nurses/
+    reading_grade: 4.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: sign up for medicare
+      rank: 1
+      top3:
+      - /turning-65/
+      - /care/
+      - /disability-and-aging/
+    - q: turning 65
+      rank: 1
+      top3:
+      - /turning-65/
+      - /for/veterans/
+      - /for/disability-and-caregivers/
+    reading_grade: 4.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  notes: One tap from the home page. 'When to sign up' is the first section, with the 7 month window in plain words.
+- id: w15
+  task: I'm pregnant and don't have a doctor or insurance.
+  who: Pregnant woman, uninsured
+  group: parents-young-kids
+  need: paying-for-health-care
+  before:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: pregnant no insurance
+      rank: 1
+      top3:
+      - /pregnant-or-new-baby/
+      - /flu-shots/
+      - /care/
+    - q: prenatal care
+      rank: 2
+      top3:
+      - /birth-control-and-testing/
+      - /pregnant-or-new-baby/
+    reading_grade: 4.1
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: pregnant no insurance
+      rank: 2
+      top3:
+      - /flu-shots/
+      - /pregnant-or-new-baby/
+      - /care/
+    - q: prenatal care
+      rank: 2
+      top3:
+      - /birth-control-and-testing/
+      - /pregnant-or-new-baby/
+      - /caregivers/
+    reading_grade: 4.1
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  notes: Get care choice. The lede gives the Medicaid number and WIC. 'WV PATH', 'WVCHIP' and 'WIC' are used in
+    the lede; WIC is explained, WVCHIP is not.
+- id: w16
+  task: I moved from Pennsylvania. How do I get a West Virginia driver's license?
+  who: New resident
+  group: new-residents
+  need: null
+  before:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: transfer drivers license
+      rank: 1
+      top3:
+      - /drivers-license/
+      - /before-you-call/
+      - /print/living-here/
+    - q: dmv
+      rank: 3
+      top3:
+      - /ids-and-records/
+      - /car-registration/
+      - /drivers-license/
+    reading_grade: 7.3
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: transfer drivers license
+      rank: 1
+      top3:
+      - /drivers-license/
+      - /before-you-call/
+      - /make-a-list/
+    - q: dmv
+      rank: 3
+      top3:
+      - /ids-and-records/
+      - /car-registration/
+      - /drivers-license/
+    reading_grade: 7.3
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: 'Living here choice. Grade 7.3: quotes the DMV (''establishing residency''). Only one phone number; the
+    DMV office is in the page.'
+- id: w17
+  task: What day is my trash picked up?
+  who: Homeowner
+  group: homeowners
+  need: null
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: trash day
+      rank: 3
+      top3:
+      - /print/recycling/
+      - /moving-here/
+      - /recycling/
+    - q: garbage pickup
+      rank: null
+      top3:
+      - /print/recycling/
+      - /moving-here/
+      - /print/moving/
+    reading_grade: 4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: trash day
+      rank: 1
+      top3:
+      - /recycling/
+      - /moving-here/
+      - /living-here/
+    - q: garbage pickup
+      rank: 2
+      top3:
+      - /moving-here/
+      - /recycling/
+      - /who-serves-me/
+    reading_grade: 4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  notes: 'Home page ''Trash pickup day'' opens the step. The answer is honest: no public map of pickup days, so
+    call the Solid Waste Authority. ''garbage pickup'' missed before the fix.'
+- id: w18
+  task: Where do I get rid of old tires and a broken TV?
+  who: Renter cleaning out a garage
+  group: renters
+  need: null
+  before:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: tire disposal
+      rank: 1
+      top3:
+      - /recycling/
+      - /print/recycling/
+      - /print/living-here/
+    - q: old tv recycling
+      rank: 1
+      top3:
+      - /recycling/
+      - /
+      - /living-here/
+    reading_grade: 5.3
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: tire disposal
+      rank: 1
+      top3:
+      - /recycling/
+      - /make-a-list/
+      - /make-it-better/report/
+    - q: old tv recycling
+      rank: 1
+      top3:
+      - /recycling/
+      - /
+      - /living-here/
+    reading_grade: 5.3
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  notes: Living here choice 'I have tires or electronics to get rid of'. The tires answer says the state collection
+    runs monthly except December to February.
+- id: w19
+  task: I'm a veteran and I could lose my apartment.
+  who: Veteran
+  group: veterans
+  need: homelessness
+  before:
+    taps: 1
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: veteran housing help
+      rank: 1
+      top3:
+      - /veterans/
+      - /print/veterans/
+      - /print/housing/
+    - q: veteran homeless
+      rank: 2
+      top3:
+      - /print/veterans/
+      - /veterans/
+      - /for/helpers/bus-drivers/
+    reading_grade: 6.6
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: veteran housing help
+      rank: 1
+      top3:
+      - /veterans/
+      - /for/veterans/
+      - /family/
+    - q: veteran homeless
+      rank: 1
+      top3:
+      - /veterans/
+      - /make-a-list/
+      - /family/
+    reading_grade: 6.6
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  notes: Veterans page from the home page. The housing help is 5 screens down a long page, but the Family door's
+    'could lose my housing' choice goes straight to the VA homeless line.
+- id: w20
+  task: I care for my dad with dementia and I need a break.
+  who: Family caregiver
+  group: disability-caregivers
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 11
+    dead_end: null
+    search:
+    - q: respite care
+      rank: 2
+      top3:
+      - /help-at-home/
+      - /caregivers/
+      - /for/helpers/nurses/
+    - q: dementia caregiver help
+      rank: 1
+      top3:
+      - /caregivers/
+      - /help-at-home/
+      - /for/disability-and-caregivers/
+    reading_grade: 8
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 12
+    dead_end: null
+    search:
+    - q: respite care
+      rank: 1
+      top3:
+      - /caregivers/
+      - /help-at-home/
+      - /for/disability-and-caregivers/
+    - q: dementia caregiver help
+      rank: 1
+      top3:
+      - /caregivers/
+      - /for/disability-and-caregivers/
+      - /help-at-home/
+    reading_grade: 8
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: 'No caregiving choice on the Family door: the page link sat 10 screens down the topic list. Respite care
+    is on the page, but ''respite care'' and ''eligibility process'' are not explained, and the part that answers
+    this reads at about grade 8. Choice added in #1171.'
+- id: w21
+  task: I got a letter saying I have to renew my Medicaid.
+  who: Adult on Medicaid
+  group: null
+  need: paying-for-health-care
+  before:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: medicaid renewal
+      rank: 1
+      top3:
+      - /medicaid-2027/
+      - /care/
+      - /help-in-your-language/
+    - q: medicaid letter
+      rank: null
+      top3:
+      - /file-today/
+      - /medicaid-waivers/
+      - /care/
+    reading_grade: 8.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 2
+      PL1: 1
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: medicaid renewal
+      rank: 1
+      top3:
+      - /medicaid-2027/
+      - /care/
+      - /before-you-call/
+    - q: medicaid letter
+      rank: 8
+      top3:
+      - /file-today/
+      - /medicaid-waivers/
+      - /care/
+    reading_grade: 8.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 2
+      PL1: 1
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: Home page door button. The page is about 2027 rule changes; the renewal answer is 3 screens down and quotes
+    the state (grade 8.4). 'medicaid letter' does not find it.
+- id: w22
+  task: I can't afford internet for my kid's homework.
+  who: Parent on a tight budget
+  group: parents-school-age
+  need: wages-and-cost-of-living
+  before:
+    taps: 2
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: cheap internet
+      rank: null
+      top3:
+      - /the-idea/
+      - /money/
+    - q: internet for low income
+      rank: null
+      top3:
+      - /print/money/
+      - /utility-bills/
+      - /print/this-month/
+    reading_grade: 4.7
+    oldest_checked_days: 99
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 0
+      PL1: 3
+      TR1: 2
+      II1: 3
+    total: 12
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: cheap internet
+      rank: 3
+      top3:
+      - /the-idea/
+      - /money/
+      - /internet/
+    - q: internet for low income
+      rank: 6
+      top3:
+      - /utility-bills/
+      - /make-a-list/
+      - /money/
+    reading_grade: 4.7
+    oldest_checked_days: 99
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 2
+      II1: 3
+    total: 14
+    out_of: 18
+  notes: Living here, then Internet at home. The lede is about slow internet and maps. Lifeline, the monthly discount,
+    is 6 screens down. 'cheap internet' and 'internet for low income' found nothing on point before; after, 'cheap
+    internet' has it third.
+- id: w23
+  task: I want to sell cookies and cakes I bake at home.
+  who: Home baker
+  group: small-business
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 9
+    dead_end: null
+    search:
+    - q: cottage food
+      rank: null
+      top3:
+      - /help-at-home/
+      - /holidays/
+      - /family/
+    - q: sell baked goods from home
+      rank: null
+      top3:
+      - /print/growing/
+      - /print/living-here/
+      - /print/work/
+    reading_grade: 6
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 0
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 13
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 9
+    dead_end: null
+    search:
+    - q: cottage food
+      rank: 6
+      top3:
+      - /help-at-home/
+      - /holidays/
+      - /family/
+    - q: sell baked goods from home
+      rank: 5
+      top3:
+      - /holidays/
+      - /calendar/
+      - /make-a-list/
+    reading_grade: 6
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 1
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  notes: Missing content. Selling food covers events, markets and trucks; nothing covers selling food made in a
+    home kitchen. The bake sale page is about group sales. Search for 'cottage food' finds nothing. Selling food
+    now links to the bake sale page (#1156).
+- id: w24
+  task: My landlord won't fix the heat.
+  who: Renter
+  group: renters
+  need: housing-costs
+  before:
+    taps: 2
+    screens_scrolled: 16
+    dead_end: null
+    search:
+    - q: landlord won't fix heat
+      rank: null
+      top3:
+      - /print/this-month/
+      - /before-you-call/
+      - /make-a-list/
+    - q: repairs landlord
+      rank: 1
+      top3:
+      - /renting/
+      - /money/
+      - /who-serves-me/
+    reading_grade: 6.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 13
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: landlord won't fix heat
+      rank: 6
+      top3:
+      - /living-here/
+      - /before-you-call/
+      - /make-a-list/
+    - q: repairs landlord
+      rank: 1
+      top3:
+      - /renting/
+      - /money/
+      - /who-serves-me/
+    reading_grade: 6.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  notes: 'No renting choice on Living here. The Renting link was 16 screens down Get through this month. The page
+    itself is clear (''Getting repairs made''). Choice added in #1156.'
+- id: w25
+  task: I need a job but I don't have a car.
+  who: Job seeker
+  group: job-seekers
+  need: transportation
+  before:
+    taps: 3
+    screens_scrolled: 3
+    dead_end: /find-a-job/ not visible on /work-and-learning/
+    search:
+    - q: jobs
+      rank: 1
+      top3:
+      - /find-a-job/
+      - /for/job-seekers/
+      - /teens/
+    - q: job center
+      rank: 1
+      top3:
+      - /find-a-job/
+      - /veterans/
+      - /family/
+    reading_grade: 5
+    oldest_checked_days: 1
+    scores:
+      IA1: 1
+      IA2: 0
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 13
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: jobs
+      rank: 1
+      top3:
+      - /find-a-job/
+      - /for/job-seekers/
+      - /teens/
+    - q: job center
+      rank: 1
+      top3:
+      - /find-a-job/
+      - /veterans/
+      - /family/
+    reading_grade: 5
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  notes: 'Dead end before the fix: Family door, ''I need a job'', Work and learning, and no link to Find a job.
+    Fixed in #1160 (waits for David).'
+- id: w26
+  task: I'm 68. Can I get a break on my property tax?
+  who: Older homeowner
+  group: older-adults
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 17
+    dead_end: null
+    search:
+    - q: homestead exemption
+      rank: 1
+      top3:
+      - /property-tax/
+      - /money/
+      - /corrections/
+    - q: senior property tax
+      rank: null
+      top3:
+      - /money/
+      - /print/this-month/
+      - /print/disability/
+    reading_grade: 6.5
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 13
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 17
+    dead_end: null
+    search:
+    - q: homestead exemption
+      rank: 1
+      top3:
+      - /property-tax/
+      - /money/
+      - /corrections/
+    - q: senior property tax
+      rank: 2
+      top3:
+      - /money/
+      - /property-tax/
+      - /bus-passes/
+    reading_grade: 6.5
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  notes: 'Property tax was 17 screens down Get through this month. The page explains the homestead exemption for
+    65 and older. Living here choice added in #1171.'
+- id: w27
+  task: My dad just died. What do I do first?
+  who: Adult child
+  group: null
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 12
+    dead_end: null
+    search:
+    - q: someone died
+      rank: 1
+      top3:
+      - /when-someone-dies/
+      - /for/helpers/faith-leaders/
+      - /print/records/
+    - q: death certificate
+      rank: 1
+      top3:
+      - /when-someone-dies/
+      - /ids-and-records/
+      - /print/records/
+    reading_grade: 6.2
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 12
+    dead_end: null
+    search:
+    - q: someone died
+      rank: 1
+      top3:
+      - /when-someone-dies/
+      - /for/veterans/
+      - /veterans/
+    - q: death certificate
+      rank: 1
+      top3:
+      - /when-someone-dies/
+      - /ids-and-records/
+      - /before-you-call/
+    reading_grade: 6.2
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  notes: 'When someone dies was 11 screens down Living here''s topic list. The page is clear and orders the offices.
+    Family door choice added in #1171.'
+- id: w28
+  task: I need free help doing my taxes.
+  who: Worker
+  group: null
+  need: wages-and-cost-of-living
+  before:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: free tax help
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /print/taxes/
+      - /print/money/
+    - q: file taxes free
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /print/taxes/
+      - /print/money/
+    reading_grade: 3.9
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: free tax help
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /money/
+      - /for/small-business/
+    - q: file taxes free
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /money/
+      - /bus-passes/
+    reading_grade: 3.9
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  notes: 'Two paths: the Get through this month choice ''I want free help filing taxes'' gives the Christian Help
+    step; the Free tax help page link sits 16 screens down.'
+- id: w29
+  task: I take the bus to work. Is there a cheaper bus pass?
+  who: Bus rider
+  group: null
+  need: transportation
+  before:
+    taps: 2
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: bus pass
+      rank: 1
+      top3:
+      - /bus-passes/
+      - /getting-around/example/
+      - /getting-around/
+    - q: half fare bus
+      rank: 1
+      top3:
+      - /bus-passes/
+      - /getting-around/example/
+      - /medical-rides/
+    reading_grade: 2.9
+    oldest_checked_days: 0
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: bus pass
+      rank: 1
+      top3:
+      - /bus-passes/
+      - /getting-around/
+      - /getting-around/example/
+    - q: half fare bus
+      rank: 1
+      top3:
+      - /bus-passes/
+      - /getting-around/example/
+      - /getting-around/
+    reading_grade: 2.9
+    oldest_checked_days: 0
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  notes: Living here lists 'Half-fare and property tax bus passes' 6 screens down; the page is short lists in Mountain
+    Line's words.
+- id: w30
+  task: I'm lonely since I retired and want to meet people.
+  who: Retiree living alone
+  group: older-adults
+  need: loneliness
+  before:
+    taps: 2
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: senior center
+      rank: 9
+      top3:
+      - /community-centers/westside-senior-center/
+      - /community-centers/clay-battelle-senior-center/
+      - /community-centers/smithtown/
+    - q: meet people
+      rank: null
+      top3:
+      - /meet-people/
+      - /meet-people/example/
+      - /have-your-say/
+    reading_grade: 3.7
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 1
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: senior center
+      rank: 5
+      top3:
+      - /community-centers/westside-senior-center/
+      - /for/older-adults/
+      - /caregivers/
+    - q: meet people
+      rank: null
+      top3:
+      - /meet-people/
+      - /meet-people/example/
+      - /for/remote-workers/
+    reading_grade: 3.7
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 1
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  notes: Your community door, 'Find a community center or senior center near me'. 'senior center' search lists individual
+    center pages first, which is fine; the Community centers overview is not in the top 3.

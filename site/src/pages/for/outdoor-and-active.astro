@@ -1,0 +1,45 @@
+---
+// Starting page for outdoor and active people (#281, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/outdoor-active.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "living-here", topic: "outdoors", label: "Outdoor and active people", summary: "Rail-trails, parks, hiking, pools and rinks, fishing and hunting licenses, and groups to join, in one place" };
+const sections = [
+  { title: "Walk, run or bike", links: [
+    { href: "/parks/#rail-trail", label: "Rail-trails", text: "walk, run or bike the rail-trails" },
+    { href: "/parks/#trails", label: "Trails", text: "hiking and mountain bike trails" },
+    { href: "/parks/#coopers-rock", label: "Coopers Rock", text: "the state forest near Morgantown" },
+  ] },
+  { title: "Parks near you", links: [
+    { href: "/parks/#city-parks", label: "City parks", text: "parks in Morgantown" },
+    { href: "/parks/#county-parks", label: "County parks", text: "parks around the county" },
+    { href: "/park-refunds/", text: "refunds and cancellations for park programs and rentals" },
+  ] },
+  { title: "Swim and skate", links: [
+    { href: "/parks/#swim-skate", label: "Pools and ice skating", text: "pools and the ice rink" },
+  ] },
+  { title: "Fish and hunt", links: [
+    { href: "/parks/#fish-hunt", label: "Fishing and hunting licenses", text: "the state license, and where you need one" },
+    { href: "/parks/#fish-hunt", label: "Free Fishing Days", text: "when anyone can fish without a license" },
+  ] },
+  { title: "Find a group", links: [
+    { href: "/parks/#groups", label: "Groups to ride or run with", text: "local riding and running groups" },
+    { href: "/find-your-people/", text: "more groups, clubs and runs" },
+  ] },
+  { title: "Before you go", links: [
+    { href: "/weather-alerts/", text: "weather and emergency alerts" },
+    { href: "/staying-well/", text: "checkups and everyday habits" },
+    { href: "/staying-active/", text: "exercise classes for 55 and over" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/remote-workers/", text: null },
+    { href: "/for/people-who-want-to-help/", text: null },
+    { href: "/for/new-to-mon-county/", text: null },
+  ] },
+];
+---
+<Base title="Getting outside in Morgantown and Mon County: where to start" description="A starting page for outdoor and active people in Monongalia County: rail-trails, city and county parks, hiking at Coopers Rock, pools and ice skating, fishing and hunting licenses, and groups to ride or run with.">
+  <h1>For people who like to get outside</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

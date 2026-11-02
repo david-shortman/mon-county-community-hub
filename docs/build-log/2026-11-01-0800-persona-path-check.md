@@ -1,0 +1,7 @@
+# 2026-11-01: Persona path check in the build (#1042)
+
+- **Considered:** the persona list (#1036) will name, for each persona, the page search should land them on and two or three next steps. Pages get renamed and links get dropped, so a path can break with no warning.
+- **Chose:** a check after the build that reads the built pages, not the source, so it sees the links residents get. Only links in each page's main content count: the header and footer link almost everywhere, so counting them would let any path pass. Cost: $0, well under a second per build.
+- **Shipped:** `site/scripts/check-personas.mjs`, run in `postbuild`. For each persona in `content/personas.yaml` it checks that the `landing` page exists, and that each page in `next_steps` exists and is linked from the landing page or from a page it links to (two taps). A broken path fails the build with the persona and the missing link. A persona with `gap: <issue>` (no landing page yet) is skipped and listed as a warning, and so is one whose `last_reviewed` date is more than six months old, the same rule `check-needs.mjs` uses. Tests: `site/test/check-personas.test.mjs`.
+- **Not yet:** `content/personas.yaml` does not exist yet (#1036, a Duet task). Until it does, the check says so and passes. The field names it reads are in the script's header and on #1036.
+- **Tried by hand:** with a sample file, a persona from `/money/` to `/utility-bills/` and `/after-you-apply/lieap/` passed, and one from `/stay-tonight/` to `/selling-food/` failed with a clear message.

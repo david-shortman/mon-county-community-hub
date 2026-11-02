@@ -1,0 +1,1272 @@
+# Simulated walkthroughs of pages added October 31 and November 1, 2026
+# (#529, sprint wave 8). SIMULATED, NOT REAL RESIDENTS.
+# Tasks: tasks-new-pages.yaml. Scripts: walk.js and score.py, unchanged.
+# before: main at ac78619. after: main at 8353cba plus open PRs #1254 and #1274.
+# Ten of these tasks end on a link hub (life events, /for/ pages, the agenda
+# list, Find your people). Hubs show no checked date or phone number of their
+# own, so they score 0 on TR1 and 1 on II1 by design of score.py.
+# Write-up: docs/reviews/2026-11-01-simulated-walkthroughs-rerun.md
+summary:
+  before:
+    tasks: 20
+    score: 73
+    averages:
+      IA1: 2.55
+      IA2: 1.7
+      IA7: 2.4
+      PL1: 2.95
+      TR1: 1.5
+      II1: 2.1
+    dead_ends: 0
+    searches_top3: 28
+    searches: 40
+    average_taps: 2.1
+  after:
+    tasks: 20
+    score: 74
+    averages:
+      IA1: 2.55
+      IA2: 1.7
+      IA7: 2.55
+      PL1: 2.95
+      TR1: 1.5
+      II1: 2.1
+    dead_ends: 0
+    searches_top3: 31
+    searches: 40
+    average_taps: 2.1
+results:
+- id: n01
+  task: I applied for SNAP last week. What happens now?
+  who: Parent who just applied for food help
+  group: parents-young-kids
+  need: enough-food
+  before:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: applied for snap what happens next
+      rank: 1
+      top3:
+      - /after-you-apply/snap/
+      - /snap/
+      - /help/food/monthly/
+    - q: snap interview
+      rank: 1
+      top3:
+      - /after-you-apply/snap/
+      - /snap/
+      - /help/food/monthly/
+    reading_grade: 4.6
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: applied for snap what happens next
+      rank: 1
+      top3:
+      - /after-you-apply/snap/
+      - /snap/
+      - /help/food/monthly/
+    - q: snap interview
+      rank: 1
+      top3:
+      - /after-you-apply/snap/
+      - /snap/
+      - /help/food/monthly/
+    reading_grade: 4.6
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: n02
+  task: My unemployment got denied. Can I fight it?
+  who: Worker who lost a job
+  group: job-seekers
+  need: wages-and-cost-of-living
+  before:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: unemployment denied appeal
+      rank: 8
+      top3:
+      - /after-you-apply/child-care/
+      - /after-you-apply/wic/
+      - /after-you-apply/social-security-disability/
+    - q: appeal unemployment
+      rank: 1
+      top3:
+      - /after-you-apply/unemployment/
+      - /after-you-apply/
+      - /after-you-apply/social-security-disability/
+    reading_grade: 4.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: unemployment denied appeal
+      rank: 8
+      top3:
+      - /after-you-apply/child-care/
+      - /after-you-apply/wic/
+      - /after-you-apply/social-security-disability/
+    - q: appeal unemployment
+      rank: 1
+      top3:
+      - /after-you-apply/unemployment/
+      - /after-you-apply/
+      - /after-you-apply/social-security-disability/
+    reading_grade: 4.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: n03
+  task: I applied for heating help a month ago and haven't heard back.
+  who: Renter with a high heating bill
+  group: renters
+  need: utility-bills
+  before:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: lieap application status
+      rank: 6
+      top3:
+      - /help-in-your-language/
+      - /after-you-apply/snap/
+      - /after-you-apply/medicare-savings/
+    - q: heating assistance applied
+      rank: 1
+      top3:
+      - /after-you-apply/lieap/
+      - /utility-bills/
+      - /groups/wv-department-of-human-services/
+    reading_grade: 5.2
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: lieap application status
+      rank: 6
+      top3:
+      - /help-in-your-language/
+      - /after-you-apply/snap/
+      - /after-you-apply/medicare-savings/
+    - q: heating assistance applied
+      rank: 1
+      top3:
+      - /after-you-apply/lieap/
+      - /utility-bills/
+      - /money/
+    reading_grade: 5.2
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  note: 'The home page link "Heat, water or power bill" opens /utility-bills/, which did not link this guide. Fixed
+    in #1254 (waits for David).'
+- id: n04
+  task: Social Security turned down my disability claim.
+  who: Adult with a disability
+  group: disability-caregivers
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 9
+    dead_end: null
+    search:
+    - q: disability denied
+      rank: 10
+      top3:
+      - /after-you-apply/homestead/
+      - /after-you-apply/snap/
+      - /after-you-apply/lieap/
+    - q: ssdi appeal
+      rank: 2
+      top3:
+      - /after-you-apply/
+      - /after-you-apply/social-security-disability/
+      - /property-tax/
+    reading_grade: 6.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 9
+    dead_end: null
+    search:
+    - q: disability denied
+      rank: 8
+      top3:
+      - /after-you-apply/homestead/
+      - /after-you-apply/snap/
+      - /after-you-apply/lieap/
+    - q: ssdi appeal
+      rank: 2
+      top3:
+      - /after-you-apply/
+      - /after-you-apply/social-security-disability/
+      - /property-tax/
+    reading_grade: 6.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+- id: n05
+  task: I just got laid off. What do I do first?
+  who: Worker who lost a job
+  group: job-seekers
+  need: wages-and-cost-of-living
+  before:
+    taps: 2
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: laid off
+      rank: null
+      top3:
+      - /groups/
+      - /veterans/
+      - /disability-and-aging/
+    - q: lost my job
+      rank: 1
+      top3:
+      - /life-events/lost-my-job/
+      - /life-events/losing-my-home/
+      - /life-events/
+    reading_grade: 4.5
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 9
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: laid off
+      rank: 1
+      top3:
+      - /life-events/lost-my-job/
+      - /recycling/
+      - /reentry/
+    - q: lost my job
+      rank: 1
+      top3:
+      - /life-events/lost-my-job/
+      - /life-events/losing-my-home/
+      - /life-events/
+    reading_grade: 4.5
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 10
+    out_of: 18
+  note: '"laid off" found nothing useful before; 1st after #1265. The page is a link hub with no number on it.'
+- id: n06
+  task: I need to get away from my partner. He hurts me.
+  who: Person in an unsafe home
+  group: null
+  need: homelessness
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: domestic violence
+      rank: 2
+      top3:
+      - /groups/rdvic/
+      - /protective-orders/
+      - /stay-tonight/
+    - q: leave abusive partner
+      rank: 1
+      top3:
+      - /protective-orders/
+      - /groups/monongalia-county-magistrate-court/
+      - /groups/m-snap/
+    reading_grade: 3.7
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 11
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: domestic violence
+      rank: 2
+      top3:
+      - /groups/rdvic/
+      - /protective-orders/
+      - /stay-tonight/
+    - q: leave abusive partner
+      rank: 1
+      top3:
+      - /protective-orders/
+      - /stay-tonight/
+      - /caregivers/
+    reading_grade: 3.8
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 11
+    out_of: 18
+  note: 'Before, Protective orders, A place to stay and this page did not link each other. Fixed in #1254.'
+- id: n07
+  task: How do I get a protective order against my ex?
+  who: Person who needs a protective order
+  group: null
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: protective order
+      rank: 1
+      top3:
+      - /protective-orders/
+      - /groups/monongalia-county-magistrate-court/
+      - /groups/rdvic/
+    - q: restraining order
+      rank: 7
+      top3:
+      - /before-you-call/
+      - /after-you-apply/lieap/
+      - /after-you-apply/wv-works/
+    reading_grade: 5.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: protective order
+      rank: 1
+      top3:
+      - /protective-orders/
+      - /life-events/leaving-an-unsafe-home/
+      - /scams/
+    - q: restraining order
+      rank: 7
+      top3:
+      - /before-you-call/
+      - /after-you-apply/lieap/
+      - /after-you-apply/wv-works/
+    reading_grade: 5.2
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  note: '"restraining order" is 7th: the page never uses the words. Alias needs David (help now door).'
+- id: n08
+  task: My brother gets out of prison next month. How can I help him get set up?
+  who: Family member of someone leaving prison
+  group: null
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 8
+    dead_end: null
+    search:
+    - q: getting out of prison
+      rank: null
+      top3:
+      - /reentry/
+      - /groups/reach-initiative/
+      - /life-events/
+    - q: reentry help
+      rank: 3
+      top3:
+      - /groups/reach-initiative/
+      - /reentry/
+      - /life-events/leaving-jail-or-prison/
+    reading_grade: 4.5
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 9
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 8
+    dead_end: null
+    search:
+    - q: getting out of prison
+      rank: 9
+      top3:
+      - /reentry/
+      - /life-events/
+      - /medicaid-2027/
+    - q: reentry help
+      rank: 2
+      top3:
+      - /reentry/
+      - /life-events/leaving-jail-or-prison/
+      - /legal-help/
+    reading_grade: 4.5
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 9
+    out_of: 18
+  note: /reentry/ ranks first for both searches and also answers the task; it and this page link each other.
+- id: n09
+  task: We just moved here from another country. Where do we start?
+  who: Immigrant family
+  group: new-residents
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: immigrant help
+      rank: 4
+      top3:
+      - /groups/mountain-state-justice/
+      - /help-in-your-language/
+      - /groups/catholic-charities-west-virginia/
+    - q: refugee
+      rank: 3
+      top3:
+      - /groups/catholic-charities-west-virginia/
+      - /help-in-your-language/
+      - /life-events/new-to-the-country/
+    reading_grade: 3.4
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 10
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: immigrant help
+      rank: 2
+      top3:
+      - /help-in-your-language/
+      - /life-events/new-to-the-country/
+      - /life-events/
+    - q: refugee
+      rank: 2
+      top3:
+      - /help-in-your-language/
+      - /life-events/new-to-the-country/
+      - /life-events/
+    reading_grade: 3.4
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 11
+    out_of: 18
+- id: n10
+  task: My wife and I are getting a divorce. Where do I start?
+  who: Parent going through a divorce
+  group: null
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: divorce
+      rank: 1
+      top3:
+      - /life-events/separating-or-divorcing/
+      - /groups/wv-supreme-court-of-appeals/
+      - /family-court/
+    - q: child custody
+      rank: 8
+      top3:
+      - /family-court/
+      - /groups/wv-supreme-court-of-appeals/
+      - /kids-with-disabilities/
+    reading_grade: 4.5
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 10
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: divorce
+      rank: 1
+      top3:
+      - /life-events/separating-or-divorcing/
+      - /family-court/
+      - /life-events/leaving-an-unsafe-home/
+    - q: child custody
+      rank: 5
+      top3:
+      - /family-court/
+      - /kids-with-disabilities/
+      - /after-you-apply/child-care/
+    reading_grade: 4.5
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 10
+    out_of: 18
+  note: '"child custody" finds Family Court first, which also answers it.'
+- id: n11
+  task: My 2 year old still isn't talking. Who can check him?
+  who: Parent of a toddler
+  group: parents-young-kids
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 10
+    dead_end: null
+    search:
+    - q: speech delay toddler
+      rank: 1
+      top3:
+      - /life-events/child-delay-or-disability/
+      - /groups/wv-birth-to-three/
+      - /family/
+    - q: birth to three
+      rank: null
+      top3:
+      - /groups/wv-birth-to-three/
+      - /pregnant-or-new-baby/
+      - /families-and-kids/
+    reading_grade: 4.5
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 9
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 10
+    dead_end: null
+    search:
+    - q: speech delay toddler
+      rank: 1
+      top3:
+      - /life-events/child-delay-or-disability/
+      - /families-and-kids/
+      - /family/
+    - q: birth to three
+      rank: 9
+      top3:
+      - /groups/wv-birth-to-three/
+      - /pregnant-or-new-baby/
+      - /families-and-kids/
+    reading_grade: 4.5
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 9
+    out_of: 18
+  note: '/families-and-kids/ leads with WV Birth to Three and also answers the task. Its link to this page comes
+    in #1254. The link on Family sits 9 screens down.'
+- id: n12
+  task: I live out at Cheat Lake. Who runs things out here and who do I call?
+  who: Homeowner outside city limits
+  group: homeowners
+  need: null
+  before:
+    taps: 3
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: cheat lake
+      rank: 2
+      top3:
+      - /community-centers/cheat-lake-vfd-hall/
+      - /towns/cheat-lake/
+      - /community-centers/
+    - q: who do i call cheat lake
+      rank: 1
+      top3:
+      - /towns/cheat-lake/
+      - /community-centers/
+      - /school-age/
+    reading_grade: 4.5
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: cheat lake
+      rank: 2
+      top3:
+      - /community-centers/cheat-lake-vfd-hall/
+      - /towns/cheat-lake/
+      - /community-centers/
+    - q: who do i call cheat lake
+      rank: 1
+      top3:
+      - /towns/cheat-lake/
+      - /community-centers/
+      - /school-age/
+    reading_grade: 4.5
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: n13
+  task: When does Westover city council meet?
+  who: Westover resident
+  group: null
+  need: null
+  before:
+    taps: 3
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: westover city council
+      rank: 2
+      top3:
+      - /meetings/agendas/westover/
+      - /towns/westover/
+      - /meetings/agendas/
+    - q: westover meeting
+      rank: 3
+      top3:
+      - /meetings/agendas/
+      - /meetings/agendas/westover/
+      - /towns/westover/
+    reading_grade: 4.6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: westover city council
+      rank: 2
+      top3:
+      - /meetings/agendas/westover/
+      - /towns/westover/
+      - /meetings/agendas/
+    - q: westover meeting
+      rank: 3
+      top3:
+      - /meetings/agendas/
+      - /meetings/agendas/westover/
+      - /towns/westover/
+    reading_grade: 4.6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: n14
+  task: I'm 72 and live alone. What help is there for people my age?
+  who: Older adult living alone
+  group: older-adults
+  need: loneliness
+  before:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: help for seniors
+      rank: 5
+      top3:
+      - /groups/senior-monongalians/
+      - /help-at-home/
+      - /groups/wv-senior-legal-aid/
+    - q: older adults
+      rank: 1
+      top3:
+      - /for/older-adults/
+      - /groups/olli-at-wvu/
+      - /groups/us-administration-for-community-living/
+    reading_grade: 4.9
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 10
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: help for seniors
+      rank: 2
+      top3:
+      - /help-at-home/
+      - /for/older-adults/
+      - /disability-and-aging/
+    - q: older adults
+      rank: 1
+      top3:
+      - /for/older-adults/
+      - /caregivers/
+      - /disability-and-aging/
+    reading_grade: 4.9
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 11
+    out_of: 18
+  note: '"help for seniors" ranks group pages first before #1274.'
+- id: n15
+  task: I'm a renter. Show me everything for renters.
+  who: Renter
+  group: renters
+  need: housing-costs
+  before:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: renters
+      rank: 1
+      top3:
+      - /for/renters/
+      - /flood-zone/
+      - /life-events/losing-my-home/
+    - q: tenant help
+      rank: 1
+      top3:
+      - /renting/
+      - /groups/hazels-house-of-hope/
+      - /groups/west-virginia-state-bar/
+    reading_grade: 3.3
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 11
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: renters
+      rank: 1
+      top3:
+      - /for/renters/
+      - /flood-zone/
+      - /life-events/losing-my-home/
+    - q: tenant help
+      rank: 1
+      top3:
+      - /renting/
+      - /parking/
+      - /legal-help/
+    reading_grade: 3.3
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 11
+    out_of: 18
+- id: n16
+  task: Where can I park downtown and what does it cost?
+  who: Visitor driving downtown
+  group: null
+  need: transportation
+  before:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: downtown parking
+      rank: 2
+      top3:
+      - /groups/morgantown-parking-authority/
+      - /parking/
+      - /groups/morgantown-farmers-market-growers-association/
+    - q: parking ticket
+      rank: 2
+      top3:
+      - /groups/morgantown-parking-authority/
+      - /parking/
+      - /towns/morgantown/
+    reading_grade: 4.5
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: downtown parking
+      rank: 1
+      top3:
+      - /parking/
+      - /towns/morgantown/
+      - /bus-routes/
+    - q: parking ticket
+      rank: 1
+      top3:
+      - /parking/
+      - /community-centers/mylan-park/
+      - /towns/morgantown/
+    reading_grade: 4.5
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: n17
+  task: I'm two months behind on my mortgage.
+  who: Homeowner
+  group: homeowners
+  need: housing-costs
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: behind on mortgage
+      rank: 1
+      top3:
+      - /behind-on-mortgage/
+      - /groups/consumer-financial-protection-bureau/
+      - /groups/wv-housing-development-fund/
+    - q: foreclosure
+      rank: 1
+      top3:
+      - /behind-on-mortgage/
+      - /groups/fairmont-morgantown-housing-authority/
+      - /groups/mountain-state-justice/
+    reading_grade: 5.9
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: behind on mortgage
+      rank: 1
+      top3:
+      - /behind-on-mortgage/
+      - /life-events/losing-my-home/
+      - /property-tax/
+    - q: foreclosure
+      rank: 1
+      top3:
+      - /behind-on-mortgage/
+      - /money/
+      - /groups/fairmont-morgantown-housing-authority/
+    reading_grade: 5.9
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: n18
+  task: Where can I get Christmas toys for my kids?
+  who: Parent on a tight budget
+  group: parents-young-kids
+  need: wages-and-cost-of-living
+  before:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: christmas toys
+      rank: 2
+      top3:
+      - /groups/toys-for-tots-morgantown/
+      - /holidays/
+      - /calendar/
+    - q: toys for kids christmas
+      rank: 1
+      top3:
+      - /holidays/
+      - /calendar/
+      - /groups/toys-for-tots-morgantown/
+    reading_grade: 5.7
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: christmas toys
+      rank: 1
+      top3:
+      - /holidays/
+      - /calendar/
+      - /community-centers/cheat-lake-vfd-hall/
+    - q: toys for kids christmas
+      rank: 1
+      top3:
+      - /holidays/
+      - /calendar/
+      - /start-something/
+    reading_grade: 5.7
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: n19
+  task: What is the school board deciding at its next meeting?
+  who: Parent of a school-age child
+  group: parents-school-age
+  need: null
+  before:
+    taps: 3
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: school board agenda
+      rank: null
+      top3:
+      - /meetings/
+      - /have-your-say/
+      - /meetings/agendas/
+    - q: board of education meeting
+      rank: 1
+      top3:
+      - /meetings/agendas/school-board/
+      - /have-your-say/
+      - /who-decides/
+    reading_grade: 4.6
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 9
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: school board agenda
+      rank: null
+      top3:
+      - /meetings/
+      - /meetings/agendas/
+      - /have-your-say/
+    - q: board of education meeting
+      rank: 1
+      top3:
+      - /meetings/agendas/school-board/
+      - /have-your-say/
+      - /meetings/agendas/
+    reading_grade: 4.6
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 9
+    out_of: 18
+  note: '"school board agenda" did not reach the school board agenda page (it reaches the agenda list, 3rd). The
+    agenda pages are built from one template, so Also called cannot target them.'
+- id: n20
+  task: I'm new in town and want to join a group, like a book club or a walking group.
+  who: New resident
+  group: new-residents
+  need: loneliness
+  before:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: book club
+      rank: 1
+      top3:
+      - /find-your-people/
+      - /parks/
+      - /pulse/
+    - q: groups to join
+      rank: null
+      top3:
+      - /groups/special-olympics-west-virginia/
+      - /community-centers/clay-battelle-senior-center/
+      - /community-centers/smithtown/
+    reading_grade: 1.7
+    oldest_checked_days: null
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 3
+    total: 13
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: book club
+      rank: 1
+      top3:
+      - /find-your-people/
+      - /parks/
+      - /pulse/
+    - q: groups to join
+      rank: 8
+      top3:
+      - /community-centers/clay-battelle-senior-center/
+      - /community-centers/smithtown/
+      - /community-centers/wiles-hill-community-center/
+    reading_grade: 1.7
+    oldest_checked_days: null
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 3
+    total: 13
+    out_of: 18
+  note: Dates on Find your people sit in closed sections, so the script sees none. "groups to join" ranks group
+    profile pages first.
