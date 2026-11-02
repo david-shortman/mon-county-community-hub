@@ -5,7 +5,7 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 | Level | Status | Latest |
 |---|---|---|
 | 1. Findability | **Measured** | **76 / 100** on the original 32 questions, 2026-11-01 (weekly run; baseline also 76). All 62 questions: 71. Answer pages on our site: 59 of 62, none in search yet. |
-| 2. Use | Not measured yet | A visit counter (GoatCounter) went live on 2026-11-01. Its counts are not public, so the weekly run cannot read them yet. |
+| 2. Use | Waiting for the first monthly totals | A visit counter (GoatCounter) went live on 2026-11-01. No script may read it, so David copies monthly page views into [`content/use/visits.yaml`](../content/use/visits.yaml). The first totals (November 2026) are due in early December. |
 | 3. Action | Not measured yet | None |
 | 4. Recognition | Not measured yet | None |
 
@@ -254,9 +254,24 @@ About 72% of residents live outside Morgantown city limits ([who lives here](pla
 
 "Morgantown" here means a Morgantown mailing address, which also covers some close-in places outside city limits, so the share is not directly comparable to the 72%. Most of the rest-of-county listings are community centers and halls (11 of 18). On 2026-11-01 the count more than doubled, mostly in Morgantown, so the rest-of-county share fell from 22% to 16% even though the number of rest-of-county listings grew from 18 to 31 (19 of them community places). Westover has the most outside Morgantown (7).
 
-## Level 2: Use (not measured yet)
+## Level 2: Use (waiting for the first monthly totals)
 
-Whether people use what we build. To be measured as aggregate counts only, with no tracking of individuals: page views per guide, calendar feed subscriptions, tool uses, searches on the site, and API or MCP calls. David chose GoatCounter and the cookie-free visit counter went live on 2026-11-01 (#1352). Its dashboard needs a login and has no public view, so the weekly run cannot read the counts yet, and it has under a day of data. Until there is a way to read them without handling a login: not measured yet.
+Whether people use what we build, as aggregate page views only, never anything about a person. The visit counter is GoatCounter (#1352): free, no cookies, live since 2026-11-01.
+
+**Where the numbers come from.** Nothing reads the counter on its own. Its dashboard needs a login, its robots.txt (`everythingmorgantown.goatcounter.com/robots.txt`) says `Disallow: /` to every robot, its public visitor-count JSON is turned off, and its read API needs a key, which we do not keep (checked 2026-11-02). So once a month David copies the totals from the dashboard into [`content/use/visits.yaml`](../content/use/visits.yaml): the date range, page views for the whole site, and page views for the main guides and doors. The file explains how. Every build checks it (`site/scripts/check-use.mjs`), and the [weekly scorecard](scorecard/README.md) shows the newest month in its Outcomes table.
+
+**Counting rules** ([shared rules](measurement-plans/README.md#small-counts)):
+
+- Any count from 1 to 9 is written "fewer than 10". The build fails on a smaller number.
+- Totals under 100 come with a note that small numbers could be chance.
+- A count is a floor. GoatCounter estimates ad blockers hide about a third of page views, and saved copies and AI apps are not counted ([analytics options](research/analytics-options.md)).
+- Monthly, not weekly, for now: weekly counts per page would be small enough to show single visits.
+
+| Month | Page views, whole site | Main guides and doors | Copied |
+|---|---|---|---|
+| November 2026 | not entered yet | not entered yet | due early December |
+
+Still not measured: calendar feed subscriptions, tool uses, searches on the site, and API or MCP calls.
 
 ## Level 3: Action (not measured yet)
 
