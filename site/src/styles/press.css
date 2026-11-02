@@ -139,6 +139,9 @@ html:root :is(.card, .note, .add-cal, .right-now, .crisis-line, .step, .milepost
   .milepost summary, details.fold, details.fold > summary, .table-scroll, .pick label, .choice, .door,
   .search input, .btn-search, .add-cal input, .skip) { border-radius: 2px; }
 html:root .btn { border-radius: 3px; border-width: 2px; }
+/* Tables: a printer's rule under the column heads, and even figures. */
+html:root main thead th { border-bottom: 2px solid var(--fg); }
+html:root main :is(td, th) { font-variant-numeric: lining-nums tabular-nums; }
 
 /* ---------- Cards: paper slips with a quilt corner ---------- */
 html:root .card {
@@ -219,6 +222,7 @@ html:root .home-band strong {
 html:root .search label { font-family: var(--serif); font-weight: 600; font-size: 1.3rem; }
 html:root .search input { border-width: 2px; }
 html:root .search { margin: var(--s7) 0 0; gap: var(--s2); }
+html:root .search-status:not(:empty) { margin-top: var(--s3); }
 
 /* ---------- Notes and season cards: flat sandstone ink ---------- */
 html:root :is(.note, .add-cal) {

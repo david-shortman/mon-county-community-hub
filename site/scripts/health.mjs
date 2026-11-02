@@ -15,7 +15,7 @@
 // Thresholds and who reacts to what are in docs/operations/README.md.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, loadSecondhand, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR, recheckDaysFor, recheckDue, isTopTier, oldestChecked } from '../src/lib/content.mjs';
 import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
 import { robotsCheck } from '../src/lib/robots.mjs';
 import { ADAPTERS } from '../src/lib/feeds/index.mjs';
@@ -292,6 +292,22 @@ function checkContent() {
       : `All ${facts.length} facts are within their re-check window.`,
     { details: dueFacts.map((f) => `${f._file}: checked ${f.checked}, re-check every ${f.recheck_days ?? 'about 183'} days, sources ${(f.sources ?? []).map((x) => x.url).join(', ')}`), owner: 'Duet', fixable: true });
 
+  // Re-checked on time (#1461): the share of listings whose oldest source was
+  // read within their re-check cadence (risk rubric: 90 days for high-stakes
+  // topics and calendar entries, otherwise the card's own rule). Cards do not
+  // use this cadence yet; it is the schedule we hold ourselves to.
+  const listed = [...loadDir('resources'), ...loadDir('orgs'), ...loadDir('boards'), ...loadSecondhand(), ...loadCalendar()];
+  const late = listed.filter((e) => recheckDue(e, today))
+    .map((e) => ({ e, c: oldestChecked((e.sources ?? []).map((x) => ({ ...x, checked: ymd(x.checked) }))) }))
+    .sort((a, b) => String(a.c).localeCompare(String(b.c)));
+  const onTime = listed.length - late.length;
+  const pct = listed.length ? Math.round((100 * onTime) / listed.length) : 100;
+  const topLate = late.filter(({ e }) => isTopTier(e)).length;
+  record('content-recheck-on-time', 'product', late.length ? 'warn' : 'ok',
+    late.length ? `${pct}% of ${listed.length} listings were re-checked on time. ${late.length} are past their re-check date (${topLate} high-stakes, due every 90 days). Re-read each one's sources, oldest first.`
+      : `All ${listed.length} listings were re-checked on time (high-stakes topics and calendar entries every 90 days).`,
+    { details: late.map(({ e, c }) => `${e._file}: oldest check ${c}, re-check every ${recheckDaysFor(e)} days`), owner: 'Duet', fixable: true });
+
   // Hidden items (#519): off the site until someone re-checks them.
   const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);
   record('content-hidden', 'product', hidden.length ? 'warn' : 'ok',
@@ -335,6 +351,20 @@ async function checkFeeds() {
       else if (r.body.length < 50) { details.push(`${snap.id}: feed is empty`); bump('warn'); }
     } catch (err) { details.push(`${snap.id}: feed unreachable (${err.cause?.code || err.message})`); bump('warn'); }
   }
+  // What the last site build saw (#71): /api/v1/feed-health.json says, per
+  // feed, whether the build read it live or fell back to its saved copy, and
+  // how many dates it had. A feed that answers here but failed in the build,
+  // or that has gone quiet, shows up only in this file.
+  try {
+    const r = await get(`${SITE}api/v1/feed-health.json`, { timeout: T.linkTimeoutMs });
+    const built = r.ok ? JSON.parse(r.body) : null;
+    for (const fh of built?.feeds ?? []) {
+      if (fh.status === 'skipped') { details.push(`${fh.id}: the last build had no live copy and no saved copy (${fh.error ?? 'no reason given'})`); bump('warn'); }
+      else if (fh.status === 'snapshot' && !fh.robots_txt_disallows) details.push(`${fh.id}: the last build used the saved copy from ${String(fh.fetched).slice(0, 10)} (${fh.error ?? 'no reason given'})`);
+      else if (fh.status === 'live' && fh.entries === 0) details.push(`${fh.id}: the last build read it live, but it had no upcoming dates`);
+    }
+    if (!built) details.push(`feed-health.json: could not read it from the live site (${r.status})`);
+  } catch (err) { details.push(`feed-health.json: could not read it from the live site (${err.cause?.code || err.message})`); }
   record('feeds', 'product', worst, worst === 'ok' ? `All ${files.length} live feeds respond.` : `Problems with ${details.length} live feed items. The site falls back to saved copies.`,
     { details, owner: 'Claude Code (Builder, #31)', fixable: true });
 }

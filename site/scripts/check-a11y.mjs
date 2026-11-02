@@ -87,9 +87,7 @@ for (const scheme of ['light', 'dark']) {
 // Reflow (WCAG 1.4.10): nothing should scroll sideways on a 320px screen.
 // Pages whose 200% text fix waits on a PR that David must review, so they print a note
 // instead of failing. The fixes are written out on #971. Remove each line once it is fixed.
-const WAITING = [
-  [/^\/$/, '#1016 (crisis buttons)'],
-];
+const WAITING = [];
 const narrow = await browser.newPage({ viewport: { width: 320, height: 640 } });
 for (const u of urls) {
   await narrow.goto(origin + u, { waitUntil: 'load' });

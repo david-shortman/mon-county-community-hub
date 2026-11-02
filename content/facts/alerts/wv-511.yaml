@@ -1,0 +1,12 @@
+slug: wv-511
+text: "**WV 511** has road conditions and closures. Dial 5-1-1 from anywhere in West Virginia, use the WV 511 Drive Safe app, or sign up for Personal Travel Alerts by email or text and pick the region, times and kinds of alerts you want."
+quote: >-
+  "From anywhere within the state, simply dial 5-1-1" (Calling 511). "West Virginia 511 can send email and/or text message notifications to travelers who sign up for Personal Travel Alerts, and lets you tailor your notifications based on region, time, date, and alert category." (Personal Alerts). "WV 511 Drive Safe Mobile App" (mobile app page).
+sources:
+  - url: https://www.wv511.org/NetworkCoverage/calling511.aspx
+    checked: 2026-11-02
+  - url: https://www.wv511.org/NetworkCoverage/usingAlertingService.aspx
+    checked: 2026-11-02
+  - url: https://www.wv511.org/NetworkCoverage/usingApp.aspx
+    checked: 2026-11-02
+recheck_days: 180

@@ -87,6 +87,8 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Fold** | A long secondary section folded into a box with its heading and a one-line hint, like "4 coming up". Opens on a tap, on find-in-page, and when a link points at it or inside it; prints open. Never fold urgent help (crisis lines, can't wait steps, shutoff or eviction help) or the page's main answer | A native `details`, so it opens with no script | Exists (`Fold.astro`, #1174) |
 | **Big choices** | Two to four big buttons at the top of a guide page, one for each thing most people come to do, each jumping to its section. Use only when a page has a few clear top tasks; keep "On this page" for the rest | Anchor links | Exists (`BigChoices.astro`, on `/pets/`, `/parking/`, `/noise/`, `/car-registration/` and `/ids-and-records/`, #199; `/stay-tonight/` has its own four big choices) |
 | **Call notes** | "Notes for this call" under a Call button: when you called, who you talked to, what they said, a reference number and the next step. Saved on the phone only (localStorage, one note per service), with Text to myself, Share or copy, and Delete my notes. Nothing is sent to us | Hidden, since it could not save; the "What to have ready" list and the printable notes on `/before-you-call/` still work | Exists (`CallNotes.astro`, on resource cards that list what to have ready, #1071) |
+| **Scroll story** | One picture stays in view while 3 to 7 numbered steps scroll past, and the picture changes to show each step happening. Only where the change itself is the point; rules in the motion guide (#1377) | Every step shows its own still picture, as a plain numbered list. The same happens with "Turn off motion" or a device set to reduce motion | Exists: the kit is `MotionSwitch.astro` (skip link and the shared "Turn off motion" switch) and `watchSteps()` in `src/lib/motion-client.mjs` (#1441). Used by `FollowOneListing.astro` on `/how-it-works/` and `DayOnTheBuses.astro` on `/bus-routes/` |
+| **Swipe cards** | A row of cards that scroll sideways and snap, with big Back and Next buttons, "Step 2 of 5" and a peek of the next card. Never moves on its own; rules in the motion guide (#1377) | The cards still scroll sideways; the buttons and the step label stay hidden. Order matches the screen, so a screen reader hears a list | Kit exists: `swipeCards()` in `src/lib/motion-client.mjs` (#1441). No page uses it yet; the first is planned in #1442 |
 
 ## What every listing needs
 
@@ -140,6 +142,9 @@ Each door and lane page has one job, and its first phone screen leads with the b
 | Flood zone, `/flood-zone/` | "Is my home at risk of flood or slide?" | A step route, look up the address first |
 | Parking, `/parking/` | "Where do I park, and what do I do about this ticket?" | Big choices: where to park, pay a meter, I got a ticket, towed (#199) |
 | Pets, `/pets/` | "I found a dog, or lost mine" | Big choices: found a dog, lost my pet, bitten, adopt (#199) |
+| Snow and ice, `/snow-and-ice/` | "Who clears my street, and is school or the bus running?" | Big choices: Morgantown street or sidewalk, state road, school delays, is my bus late (#199) |
+| Weather alerts, `/weather-alerts/` | "How do I get warned?" | Big choices: alerts on my phone, weather warnings, school closings, power outage texts (#199) |
+| Markets, `/markets/` | "What markets and sales are coming up?" | Big choices: coming up soon, every week, yard sales, sell at a market (#199) |
 | About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
 
 ### How new content slots in

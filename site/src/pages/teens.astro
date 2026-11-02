@@ -43,6 +43,9 @@ const gdl = r('wv-graduated-drivers-license');
   </ul>
   {cert && <SourceLine sources={cert.sources} org={cert.org} about="teen work rules" />}
 
+  <h2 id="mtec">Job training in high school</h2>
+  {r('mtec-high-school-programs') && <ResourceCard r={r('mtec-high-school-programs')} showCost />}
+
   <h2 id="ages-16-to-24">Ages 16 to 24 and out of school: job and training help</h2>
   {r('region-vi-career-connections') && <ResourceCard r={r('region-vi-career-connections')} />}
   <p>Any age: WorkForce West Virginia on Commerce Drive helps with job leads and training. See <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>

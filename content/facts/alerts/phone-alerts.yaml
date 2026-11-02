@@ -1,0 +1,8 @@
+slug: phone-alerts
+text: "**Wireless Emergency Alerts** are the loud alerts that pop up on cell phones for things like extreme weather. FEMA says they are free, do not count against the texting limits on your plan, need no app or sign-up, and do not track your location. To find out if your phone can get them, ask your wireless company."
+quote: >-
+  "WEAs can be sent to your mobile device when you may be in harm's way, without the need to download an app or subscribe to a service. ... WEA messages are free and will not count towards texting limits on your wireless plan. ... To find out if your phone can receive WEA alerts, contact your wireless provider. ... WEAs do not track your location."
+sources:
+  - url: https://www.fema.gov/emergency-managers/practitioners/integrated-public-alert-warning-system/public/wireless-emergency-alerts
+    checked: 2026-11-02
+recheck_days: 365   # a national program description, changes rarely

@@ -1,4 +1,5 @@
 {
+  "generated_by": "Made by site/src/lib/feeds/index.mjs. Do not edit by hand: rebuild with `npm run update-feeds` in site/.",
   "id": "monongalia-county",
   "feed_url": "https://www.monongaliacounty.gov/_assets_/plugins/revizeCalendar/calendar_data_handler.php?webspace=monongoliacountywv&relative_revize_url=//cms2.revize.com&protocol=https:",
   "fetched": "2026-10-30T23:57:12.228Z",

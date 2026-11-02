@@ -469,6 +469,7 @@ From these tags the build makes the Topics page (`/topics/`), each door's list o
 - Every entry has at least one source with a `checked` date.
 - Entries older than 6 months since `checked` get flagged for re-verification.
 - On the site, a card says "may be out of date" after 6 months without a check, or after 90 days for Make it better entries (topic `better`, and `boards/`), since seats and grant rounds change faster (#791).
+- **Re-check cadence (#1461).** The risk rubric in `docs/playbook/trust-and-ai.md` sets how often we re-read each listing's sources: every 90 days for the high-stakes topics (`health`, `money`, `housing`, `family`, `taxes`, `voting`) and every `calendar/` entry, otherwise the card's own rule above. An org, resource, board or secondhand record can set `recheck_days: 30` (a whole number of days, 1 to 365) to go faster, or, outside those topics, slower. `npm run check-content` fails a high-stakes record set slower than 90 days. The Health check reports the share re-checked on time (`content-recheck-on-time`) and lists the late ones, oldest first. This is our own schedule: cards still use the 6 month and 90 day rule above until David decides whether to change the promise shown to residents.
 - Every outside link is checked daily by the source check (`docs/operations/README.md`). If a source should not be fetched by a robot (Facebook, a login page), add a rule to `source-rules.yaml`.
 
 ### Rules for every entry
@@ -639,3 +640,7 @@ One file per coming meeting with a posted agenda, for any body listed in `BODIES
 ## `minutes/<body>-<date>.yaml`: what was decided (#529)
 
 One file per past meeting with posted minutes, shown on the body's page under `/meetings/agendas/<body>/` for 30 days after the meeting. It lists every motion the official minutes record, in order: `motion` and `result` copied as written, `vote` as the minutes give it, and `item` (the agenda number or title) when the minutes give one. `minutes_status` is `Approved`, `Draft` or `Not marked`, as the minutes or the posting page say. Never a summary of debate, comments or reasons. Steps: "What was decided" in [`docs/process/agenda-guides.md`](../docs/process/agenda-guides.md). `npm run check-content` checks the fields (`decidedProblems` in `site/src/lib/agendas.mjs`).
+
+## `use/visits.yaml`: page views copied by hand (#1432)
+
+Level 2 (Use) on the [scoreboard](../docs/scoreboard.md#level-2-use-waiting-for-the-first-monthly-totals). Once a month David copies aggregate page views from the visit counter: a date range, the whole-site total, and the main guides and doors. Counts from 1 to 9 are written "fewer than 10". `site/scripts/check-use.mjs` checks it on every build. Not shown on the site.

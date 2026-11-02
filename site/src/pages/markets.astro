@@ -4,6 +4,8 @@
 // yearly and nearby lists below name their own sources. Yard sales lists only
 // online groups whose own page we could open; no individual home sales.
 import Base from '../layouts/Base.astro';
+import BigChoices from '../components/BigChoices.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import EventCard from '../components/EventCard.astro';
 import ShopCard from '../components/ShopCard.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -31,7 +33,14 @@ const src = {
 <Base title="Markets, sales and flea markets near Morgantown, WV" description="Craft markets, card shows, the farmers market, yearly sales like the WVU Blue and Gold Mine Sale, and the nearest flea markets to Morgantown and Monongalia County.">
   <h1>Markets and sales coming up</h1>
   <p class="lede">Mon County has no regular flea market. What it has is a calendar of craft markets, card shows, a weekly farmers market and a few big yearly sales. The nearest weekly flea markets are in Pennsylvania. Each listing links to the group that runs it.</p>
-  <p>Jump to: <a href="#soon">Coming up</a> · <a href="#weekly">Every week</a> · <a href="#yearly">Once a year</a> · <a href="#drive">Worth the drive</a> · <a href="#yard">Yard sales</a> · <a href="#sell">Selling at a market</a></p>
+  {/* Lead block (#199): the four things most people come here for. */}
+  <BigChoices label="Markets: start here" choices={[
+    { href: '#soon', label: 'Coming up soon', icon: 'calendar' },
+    { href: '#weekly', label: 'Every week', icon: 'clock' },
+    { href: '#yard', label: 'Yard sales', icon: 'home' },
+    { href: '#sell', label: 'Sell at a market', icon: 'receipt' },
+  ]} />
+  <OnThisPage items={[['#yearly', 'Once a year'], ['#drive', 'Worth the drive']]} />
 
   <section aria-labelledby="soon">
     <h2 id="soon">Coming up in the next 30 days</h2>
