@@ -351,6 +351,20 @@ async function checkFeeds() {
       else if (r.body.length < 50) { details.push(`${snap.id}: feed is empty`); bump('warn'); }
     } catch (err) { details.push(`${snap.id}: feed unreachable (${err.cause?.code || err.message})`); bump('warn'); }
   }
+  // What the last site build saw (#71): /api/v1/feed-health.json says, per
+  // feed, whether the build read it live or fell back to its saved copy, and
+  // how many dates it had. A feed that answers here but failed in the build,
+  // or that has gone quiet, shows up only in this file.
+  try {
+    const r = await get(`${SITE}api/v1/feed-health.json`, { timeout: T.linkTimeoutMs });
+    const built = r.ok ? JSON.parse(r.body) : null;
+    for (const fh of built?.feeds ?? []) {
+      if (fh.status === 'skipped') { details.push(`${fh.id}: the last build had no live copy and no saved copy (${fh.error ?? 'no reason given'})`); bump('warn'); }
+      else if (fh.status === 'snapshot' && !fh.robots_txt_disallows) details.push(`${fh.id}: the last build used the saved copy from ${String(fh.fetched).slice(0, 10)} (${fh.error ?? 'no reason given'})`);
+      else if (fh.status === 'live' && fh.entries === 0) details.push(`${fh.id}: the last build read it live, but it had no upcoming dates`);
+    }
+    if (!built) details.push(`feed-health.json: could not read it from the live site (${r.status})`);
+  } catch (err) { details.push(`feed-health.json: could not read it from the live site (${err.cause?.code || err.message})`); }
   record('feeds', 'product', worst, worst === 'ok' ? `All ${files.length} live feeds respond.` : `Problems with ${details.length} live feed items. The site falls back to saved copies.`,
     { details, owner: 'Claude Code (Builder, #31)', fixable: true });
 }

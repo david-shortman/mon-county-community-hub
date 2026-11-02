@@ -27,7 +27,8 @@ const call = (method, params) => new Promise((resolve, reject) => {
 const problems = [];
 const expect = (ok, msg) => { if (!ok) problems.push(msg); };
 try {
-  const init = await call('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'smoke', version: '1' } });
+  // Say we can show MCP Apps views, so the dates view is offered (#1371).
+  const init = await call('initialize', { protocolVersion: '2025-06-18', capabilities: { extensions: { 'io.modelcontextprotocol/ui': { mimeTypes: ['text/html;profile=mcp-app'] } } }, clientInfo: { name: 'smoke', version: '1' } });
   expect(init.result?.serverInfo?.name === 'everything-morgantown', 'initialize: wrong serverInfo');
   server.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' })}\n`);
   const list = await call('tools/list', {});
@@ -47,6 +48,15 @@ try {
   expect(o.found && o.organization?.sources?.length, 'get_organization: west-virginia-211 not found with sources');
   const d = await run('upcoming_dates', { days: 365 });
   for (const e of d.results ?? []) expect(e.sources?.length, `upcoming_dates: ${e.id} has no sources`);
+  for (const e of d.results ?? []) expect(/\/calendar\/[a-z0-9-]+\.ics$/.test(e.add_to_calendar ?? ''), `upcoming_dates: ${e.id} has no add_to_calendar link`);
+  // MCP Apps view: linked from the tool, readable as a resource, plain text fallback.
+  const view = list.result?.tools?.find((t) => t.name === 'upcoming_dates')?._meta?.ui?.resourceUri;
+  expect(view?.startsWith('ui://'), 'upcoming_dates: no MCP Apps view linked');
+  const res = await call('resources/read', { uri: view });
+  const page = res.result?.contents?.[0];
+  expect(page?.mimeType === 'text/html;profile=mcp-app' && /ui\/initialize/.test(page?.text ?? '') && !/<script[^>]+src=|<link[^>]+href=/i.test(page?.text ?? ''), 'resources/read: the view is missing, has the wrong type, or loads outside files');
+  const plain = await call('tools/call', { name: 'upcoming_dates', arguments: { days: 30 } });
+  expect(/^\d+ upcoming date/.test(plain.result?.content?.[0]?.text ?? ''), 'upcoming_dates: no plain text fallback');
   const n = await run('list_needs', {});
   expect(Array.isArray(n.results), 'list_needs: no results list');
   const h = await run('how_to_report_a_problem', { id: 'wv-211' });

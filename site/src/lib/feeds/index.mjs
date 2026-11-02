@@ -84,9 +84,12 @@ function readSnapshot(adapter) {
   }
 }
 
+// Every saved copy says it was made by a script and how to remake it (#71).
+export const SNAPSHOT_NOTE = 'Made by site/src/lib/feeds/index.mjs. Do not edit by hand: rebuild with `npm run update-feeds` in site/.';
+
 function writeSnapshot(adapter, snap) {
   fs.mkdirSync(SNAPSHOT_DIR, { recursive: true });
-  fs.writeFileSync(path.join(SNAPSHOT_DIR, `${adapter.id}.json`), JSON.stringify(snap, null, 2) + '\n');
+  fs.writeFileSync(path.join(SNAPSHOT_DIR, `${adapter.id}.json`), JSON.stringify({ generated_by: SNAPSHOT_NOTE, ...snap }, null, 2) + '\n');
 }
 
 // Loads one feed. Returns { entries, status } and never throws.

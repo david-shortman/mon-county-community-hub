@@ -5,6 +5,8 @@
 // Westover, Star City and Granville, and a snow-specific way to report a
 // state road (none found on an official page).
 import Base from '../layouts/Base.astro';
+import BigChoices from '../components/BigChoices.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -16,6 +18,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Base title="Snow and ice in Morgantown and Mon County: plowing, sidewalks, schools" description="Who clears snow from city streets and state roads in Morgantown and Monongalia County, which roads go first, the 24-hour sidewalk rule, where school closings are posted, and how to see if your bus is late.">
   <h1>Snow and ice in Mon County</h1>
   <p class="lede">Who clears a road depends on who owns it. In Morgantown, the city clears city streets. The state clears state roads. Both start with the busiest roads, so side streets come last.</p>
+  {/* Lead block (#199): the four things most people come here for on a snowy morning. */}
+  <BigChoices label="Snow and ice: start here" choices={[
+    { href: '#city', label: 'Morgantown street or sidewalk', icon: 'home' },
+    { href: '#state', label: 'State road', icon: 'pin' },
+    { href: '#schools', label: 'School delays and closings', icon: 'calendar' },
+    { href: '#buses', label: 'Is my bus late?', icon: 'clock' },
+  ]} />
+  <OnThisPage items={[['#alerts', 'Alerts, road conditions and power outages']]} />
 
   <h2 id="city">City of Morgantown streets and sidewalks</h2>
   {r('morgantown-snow-plan') && <ResourceCard r={r('morgantown-snow-plan')} />}

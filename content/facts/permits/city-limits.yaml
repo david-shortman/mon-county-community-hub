@@ -1,0 +1,8 @@
+slug: city-limits
+text: "Your mailing address can say \"Morgantown\" even when the home is outside city limits. To check, the City of Morgantown says to look up the address on its **City Zoning Viewer** map."
+quote: >-
+  Is this address in Morgantown city limits? To verify if an address is within Morgantown City Limits, please utilize our City of Morgantown Zoning Viewer to determine if the address is within our City Limits.
+sources:
+  - url: https://www.morgantownwv.gov/704/Permitting-Licensing-Registration
+    checked: 2026-11-02
+recheck_days: 180
