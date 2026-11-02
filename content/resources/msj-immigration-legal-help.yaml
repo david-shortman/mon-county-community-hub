@@ -12,8 +12,8 @@ cost: free
 get_in: call-first
 sources:
   - url: https://mountainstatejustice.org/our-work/immigration/
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://mountainstatejustice.org/get-help/
-    checked: 2026-10-30
+    checked: 2026-10-31
   - url: https://mountainstatejustice.org/get-help/spanish-espanol/
-    checked: 2026-10-30
+    checked: 2026-10-31

@@ -16,8 +16,10 @@ status: likely
 note: Board games are at the main library. Video games are at the main library and many branches.
 sources:
   - url: https://mympls.org/books-music-more/library-of-things/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://mympls.org/about/locations/morgantown/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://mympls.org/about/faqs/
     checked: 2026-10-30
+  - url: https://mympls.org/books-music-more/get-a-library-card/
+    checked: 2026-11-01

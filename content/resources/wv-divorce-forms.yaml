@@ -1,0 +1,25 @@
+title: File for divorce with the state court forms
+slug: wv-divorce-forms
+org: wv-supreme-court-of-appeals
+topics: [legal, family]
+who_it_is_for: "People who want to file for divorce in West Virginia, with or without a lawyer. The court's instructions say you can file here only if you or your spouse have lived in West Virginia for at least one year, or if you live here now and you were married in West Virginia. The instructions say a lawyer may better protect your rights if you have minor children, own a home or business together, or either of you has a pension or retirement plan."
+what_to_do: "The West Virginia courts post free divorce forms with step by step instructions (form SCA-FC-100 for the person filing, SCA-FC-100A for the person answering). You file all of your forms at the Circuit Clerk's office."
+steps:
+  - Read the instructions packet (SCA-FC-100) on the courts' Divorce Forms page.
+  - "Fill out the forms every divorce needs: the Petition for Divorce, the Civil Case Information Statement, the Financial Statement and the Vital Statistics form."
+  - "If you have children under 18 or ask for spousal support, the instructions say you also need the child support application, a proposed parenting plan and the parent education notice."
+  - Do not sign the Verification on the petition until you are in front of a notary. The instructions say deputy circuit clerks can notarize it.
+  - "File at the Circuit Clerk's office and pay the fees, or ask for a fee waiver."
+notes:
+  - "If telling the other person where you live could put you or your children at risk, the instructions say to check the box on the Civil Case Information Statement and file an Affidavit to Withhold Identifying Information."
+  - "If you need an interpreter or other help to take part in court, check the box on the Civil Case Information Statement."
+contact:
+  url: https://www.courtswv.gov/public-resources/court-forms/divorce-forms
+  url_label: Divorce forms
+cost: "The forms are free. The court's instructions say the filing fee is $135 and is not refunded if you change your mind. You can ask to have fees waived if you cannot afford them."
+if_you_want_help: [legal-aid-wv-guided-self-help-forms, legal-aid-wv-civil-legal-help, court-fee-waiver-wv]
+sources:
+  - url: https://www.courtswv.gov/public-resources/court-forms/divorce-forms
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-02/SCA-FC-100.pdf
+    checked: 2026-10-31

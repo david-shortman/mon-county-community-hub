@@ -1,0 +1,66 @@
+---
+// Ayuda en su idioma: the Spanish version of /help-in-your-language/ (#1101).
+// The router (../[...page].astro) builds it only once a fluent reader has
+// reviewed its words in content/translations/es/pages/help-in-your-language.yaml.
+// Every phone number, link and checked date comes from the English records,
+// never from the translation. Each listing's title is translated in its own
+// file (content/translations/es/resources/<slug>.yaml); until that one is
+// reviewed, the English title shows, marked as English.
+import Base from '../../../layouts/Base.astro';
+import InterpreterCard from '../../../components/InterpreterCard.astro';
+import { loadDir, telHref, oldestChecked, todayYmd } from '../../../lib/content.mjs';
+import { loadTranslation, translatedField } from '../../../lib/translations.mjs';
+import { fixFormUrl } from '../../../lib/group-requests.mjs';
+const today = todayYmd();
+const t = loadTranslation('es', 'pages/help-in-your-language', { today });
+if (!t) throw new Error('es/help-in-your-language: built without reviewed words');
+const s = t.values;
+const all = loadDir('resources');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fecha = (ymd) => new Intl.DateTimeFormat('es-US', { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${ymd}T12:00:00Z`));
+// One listing: its title in Spanish (or English, marked), then the facts
+// from the English record.
+const item = (slug) => {
+  const r = all.find((e) => e.slug === slug);
+  if (!r || r.hidden) return null;
+  const title = translatedField(r, 'es', 'title', { today });
+  return { slug, title, english: title === r.title, phone: r.contact?.phone, url: r.contact?.url, checked: oldestChecked(r.sources) };
+};
+const sections = [
+  { id: 'doctor', heading: s.h_doctor, items: ['wvu-medicine-language-services', 'monchd-language-help'] },
+  { id: 'state', heading: s.h_state, text: s.state_text, source: { url: 'https://dohs.wv.gov/nondiscrimination-policies-and-plans', name: 'WV Department of Human Services', checked: '2026-10-30' }, items: ['monongalia-county-dohs-office'] },
+  { id: 'legal', heading: s.h_legal, items: ['wv-court-interpreters', 'msj-immigration-legal-help', 'ccwva-immigration-services'] },
+  { id: 'english', heading: s.h_english, items: ['mtec-adult-education-esl'] },
+].map((sec) => ({ ...sec, items: sec.items.map(item).filter(Boolean) }));
+---
+<Base lang="es" langLabel={s.language_label} title={s.title} description={s.description}>
+  <h1>{s.heading}</h1>
+  {t.stale && <p class="meta">{s.stale_note}</p>}
+  <p class="lede">{s.lede}</p>
+
+  <InterpreterCard lang="es" />
+
+  {sections.map((sec) => (
+    <>
+      <h2 id={sec.id}>{sec.heading}</h2>
+      {sec.text && <p>{sec.text}</p>}
+      {sec.source && <p class="meta">{s.source_label} {s.in_english}: <a href={sec.source.url} hreflang="en">{sec.source.name}</a>. {s.checked_label} {fecha(sec.source.checked)}.</p>}
+      {sec.items.map((i) => (
+        <article class="card resource" id={i.slug}>
+          <h3 lang={i.english ? 'en' : undefined}>{i.title}</h3>
+          <div class="actions">
+            {i.phone && <a class="btn btn-primary" href={telHref(i.phone)}><span>{s.call} <span class="nowrap">{i.phone}</span></span></a>}
+            {i.url && <a class="btn" href={i.url} hreflang="en"><span>{s.website} {s.in_english}</span></a>}
+          </div>
+          <p class="meta"><a href={`${base}/help-in-your-language/#${i.slug}`} hreflang="en">{s.more_in_english}</a>. {s.checked_label} {fecha(i.checked)}.</p>
+        </article>
+      ))}
+    </>
+  ))}
+
+  <h2>{s.h_not_listed}</h2>
+  <p>{s.not_listed} <a href={fixFormUrl({ page: Astro.url.pathname })}>{s.not_listed_link}</a>.</p>
+  <p>{s.about_translation}</p>
+  <p>{s.new_country} <a href={`${base}/life-events/new-to-the-country/`} hreflang="en" lang="en">I'm new to the country</a> {s.in_english}.</p>
+  <p>{s.families} <a href={`${base}/family/`} hreflang="en" lang="en">Family and life changes</a> {s.in_english}.</p>
+</Base>

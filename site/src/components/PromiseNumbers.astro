@@ -38,7 +38,7 @@ const line = (s) => {
     <p><strong>No requests yet.</strong></p>
   ) : (
     <>
-      <ul>{scopes.map(([label, s]) => <li><strong>{label}:</strong> {line(s)}</li>)}</ul>
+      <ul>{scopes.map(([label, s]) => <li><strong>{label}:</strong>{' '}{line(s)}</li>)}</ul>
       {late.length > 0 && (
         <>
           <p>These took longer than {REQUEST_DAYS} days:</p>

@@ -16,6 +16,7 @@ items:
     url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
   - text: City Council agendas. Trees, murals, landscape plans, the downtown plan, budget lines, board appointments.
     url: https://www.morgantownwv.gov/AgendaCenter/City-Council-3
+    how: The site's /meetings/ page lists every agenda. Read only those posted since last week's run. The city's site often drops the first connection; try again.
   - text: Agenda Center for the Urban Landscape Commission, Tree Board, Cultural Arts Commission and Historic Landmarks Commission (links on each board's page).
     url: https://www.morgantownwv.gov/AgendaCenter
   - text: Each board's own page (links in content/boards/). Meeting day, time and place; vacant seats shown on the page.
@@ -43,9 +44,11 @@ items:
     when: month
   - text: WV Forestry urban forestry. Whether Community Tree Grants are still open.
     url: https://wvforestry.com/urban-forestry
+    person: true
     when: month
   - text: WV arts grants. Whether Public Art grants open, and the deadline.
     url: https://wvculture.org/agencies/arts/grants/
+    person: true
     when: month
   - text: Organizational Arts Grants. The 2027-28 round.
     url: https://ycfwv.org/arts-fund-grants/

@@ -1,13 +1,13 @@
 name: Fairmont-Morgantown Housing Authority
 slug: fairmont-morgantown-housing-authority
 kind: government
-website: https://fmhousing.com
+website: https://fmhousing.com/
 phone: "304-363-0860"
 summary: The public housing authority for Marion, Monongalia, Preston and Taylor counties. It runs the Section 8 housing voucher program, public housing, and project-based voucher apartments.
 topics: [housing]
 area: monongalia-county
 sources:
   - url: https://fmhousing.com/visitors/faq_-_section_8.php
-    checked: 2026-10-29
+    checked: 2026-10-31
   - url: https://fmhousing.com/project_based_vouchers.php
-    checked: 2026-10-29
+    checked: 2026-10-31

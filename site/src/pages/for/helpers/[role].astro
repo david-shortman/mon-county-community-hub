@@ -1,0 +1,31 @@
+---
+// One helper role card per page (#404), so it prints on its own. The printed
+// copy carries the build date as its version, since numbers can change.
+import Base from '../../../layouts/Base.astro';
+import RoleCard from '../../../components/RoleCard.astro';
+import { ROLES } from '../../../lib/helper-roles.mjs';
+import { prettyDate, todayYmd } from '../../../lib/content.mjs';
+export function getStaticPaths() {
+  return ROLES.map((r) => ({ params: { role: r.slug }, props: { r } }));
+}
+const { r } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const built = prettyDate(todayYmd());
+---
+<Base title={`Card for ${r.name.toLowerCase()} in Mon County: what to do when someone asks`} description={`For ${r.name.toLowerCase()} in Morgantown and Monongalia County: ${r.situations.map((s) => s.hears.toLowerCase()).join('; ')}. First steps with local phone numbers and sources.`}>
+  <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
+    <ol><li><a href={`${base}/`}>Home</a></li><li><a href={`${base}/for/helpers/`}>Cards for helpers</a></li></ol>
+  </nav>
+  <h1>For {r.name.toLowerCase()}</h1>
+  <p class="lede">If someone tells you about one of these problems, here is what to do first. You do not need to solve it: pointing them to the right place is enough.</p>
+  <RoleCard r={r} />
+  <p class="note">Public information, not legal, medical or professional advice. Numbers and hours can change: check the page or call before you send someone.</p>
+  <p class="meta">Card version {built}, from everythingmorgantown.org/for/helpers/{r.slug}. Print a fresh copy every few months. <a href={`${base}/for/helpers/`}>All helper cards</a>.</p>
+</Base>
+
+<style>
+  @media print {
+    h1 { font-size: 18pt; margin: 0; }
+    .lede, .note, .meta { font-size: 9.5pt; margin: 4px 0; }
+  }
+</style>

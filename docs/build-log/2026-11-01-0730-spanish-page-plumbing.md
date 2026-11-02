@@ -1,0 +1,7 @@
+# 2026-11-01: Spanish pages build only once reviewed (plumbing, #1099)
+
+- **Considered:** David said go on Spanish (#1067, decision 1) and allowed Claude drafts that a fluent person reviews before they go live (decision 3). The groundwork from #1097 refused any translation without a review date, so a draft could not be stored at all, and any `.astro` file in `site/src/pages/es/` would always build.
+- **Chose:** drafts and a router. A translation can now be a draft (`reviewed: false`): checked like any other, but never shown. Spanish pages are templates in `site/src/pages/es/_pages/`, and `site/src/pages/es/[...page].astro` builds one only when Spanish is on and its words are reviewed and current. hreflang links, the sitemap and the language switcher (now in the header of every page) count only pages that build. The menu and footer get `lang="en"` on translated pages. Translated pages stay out of site search and `llms.txt` for the pilot, and the page check makes sure they carry `lang="es"` and hreflang links.
+- **What residents see:** nothing new. Spanish is still off (`PUBLISHED` is empty) and no Spanish words are in the repo. A build before and after gives the same 936 pages and the same sitemap; the only HTML difference is one space in the header.
+- **Next:** the Spanish drafts and turning Spanish on, in a PR that waits for David and a fluent reviewer (#1101, #1102).
+- **Cost:** $0.

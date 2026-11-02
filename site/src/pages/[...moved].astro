@@ -1,0 +1,18 @@
+---
+// A page that moved (src/lib/moved.mjs): sends people on to its new address.
+// Out of search results; the new page carries the canonical link.
+import Base from '../layouts/Base.astro';
+import { MOVED } from '../lib/moved.mjs';
+
+export function getStaticPaths() {
+  return Object.entries(MOVED).map(([from, to]) => ({ params: { moved: from.replace(/^\/|\/$/g, '') }, props: { from, to } }));
+}
+const { from, to } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const href = `${base}${to}`;
+---
+<Base title={`Everything Morgantown page moved: ${from}`} description={`This Everything Morgantown page moved to ${to}.`} noindex searchable={false}>
+  <meta http-equiv="refresh" content={`0; url=${href}`} />
+  <h1>This page moved</h1>
+  <p>Two listings for the same group were merged into one. Go to <a href={href}>{to}</a>.</p>
+</Base>

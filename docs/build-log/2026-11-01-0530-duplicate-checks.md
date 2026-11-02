@@ -1,0 +1,6 @@
+# 2026-11-01: Duplicate and broken-link checks for content
+
+- **Considered:** dozens of sessions added records on 2026-10-31 and 2026-11-01, and some groups landed twice under two slugs (#1170). Each copy got its own group page, and listings were split between them. Nothing caught it.
+- **Chose:** merged the two Mountain Line Transit Authority records into `mountain-line-transit-authority`, kept every source, and sent the old `/groups/mountain-line-transit/` address on to the new page. Old addresses live in `site/src/lib/moved.mjs`; each gets a small page that sends people on and stays out of search. `npm run check-content` now warns when two orgs share a name, website or phone, two places share a name, or one org has two resources with the same title. It fails when any `org:` in content/ has no org file, or a moved page points nowhere. A test (`site/test/content-dupes.test.mjs`) runs with the check.
+- **Left off:** places and resources that share a phone or address on purpose (groups meeting in one library room, several programs at one office) are not flagged. Two records that look alike but are different groups go in `NOT_DUPLICATES` in `site/src/lib/content-dupes.mjs`, with why.
+- **Cost:** $0.

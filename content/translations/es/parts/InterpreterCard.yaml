@@ -1,0 +1,13 @@
+of: parts/InterpreterCard
+lang: es
+strings:
+  heading: Tarjeta para pedir un intérprete
+  show_this: Muestre esta tarjeta en una oficina, una clínica o un tribunal.
+  need: Necesito un intérprete.
+  my_language: Mi idioma es el español.
+  please: Por favor, pida un intérprete para mí.
+english_hash: eab1260af2f0
+method: machine-plus-review
+translated: 2026-11-01
+reviewed: false
+notes: Claude draft (#1101). A fluent Spanish reader checks every line against the English before this goes live. See docs/reviews/2026-11-01-spanish-pilot.md.

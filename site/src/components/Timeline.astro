@@ -4,12 +4,14 @@
 //   steps: list of { when, text }, in order. `when` is short: "Day 1",
 //     "Within 5 days", "Friday, January 30". Only dates and times the source
 //     states; legal or court timelines cite a court or legal aid source.
+//     A step with `now: true` is marked "Now" (worked out at build time; the
+//     site rebuilds every morning).
 //   label: what the timeline is, for screen readers
 const { steps = [], label = 'Timeline' } = Astro.props;
 ---
 {steps.length > 0 && (
   <ol class="timeline" aria-label={label}>
-    {steps.map((s) => <li><span class="tl-when">{s.when}</span><span class="tl-text">{s.text}</span></li>)}
+    {steps.map((s) => <li class:list={[s.now && 'tl-now']} aria-current={s.now ? 'date' : undefined}><span class="tl-when">{s.when}{s.now && <span class="tl-badge">Now</span>}</span><span class="tl-text">{s.text}</span></li>)}
   </ol>
 )}
 
@@ -18,5 +20,7 @@ const { steps = [], label = 'Timeline' } = Astro.props;
   .timeline li { position: relative; display: grid; gap: 2px; }
   .timeline li::before { content: ""; position: absolute; left: -29px; top: 6px; width: 12px; height: 12px; border-radius: 999px; background: var(--accent); border: 3px solid var(--bg); }
   .tl-when { font-weight: 700; color: var(--accent); }
+  .tl-badge { display: inline-block; margin-left: 8px; padding: 0 8px; border-radius: 999px; background: var(--accent); color: var(--bg); font-size: 0.85rem; }
+  .timeline .tl-now::before { width: 16px; height: 16px; left: -31px; top: 4px; }
   @media print { .timeline li { break-inside: avoid; } }
 </style>

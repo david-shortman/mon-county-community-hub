@@ -9,13 +9,14 @@ import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, org } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Start or grow a business", summary: "Free business coaching and classes, help with a business plan, and local business groups" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const r = (slug) => resource(slug);
 const mainStreet = org('main-street-morgantown');
 const partnership = org('morgantown-area-partnership');
 ---
-<Base title="Start or grow a business in Morgantown and Mon County: free coaching, classes and business groups" description="Free one-on-one business coaching and Business Fundamentals classes from the WV SBDC, the SBA West Virginia District Office, a state list of business plan help, and the Morgantown Area Partnership, Chamber of Commerce and Main Street Morgantown.">
+<Base title="Start or grow a business in Morgantown and Mon County" description="Free business coaching and classes in Morgantown and Mon County from the WV SBDC and the SBA, plus business plan help and local business groups.">
   <h1>Start or grow a business</h1>
   <p class="lede">Thinking about starting a business, or want help with the one you have? Free coaching and classes are open to anyone in West Virginia. Local business groups are listed in their own words. We do not list or rank businesses.</p>
 
@@ -49,7 +50,8 @@ const partnership = org('morgantown-area-partnership');
     <SourceLine sources={mainStreet.sources} org="main-street-morgantown" about={mainStreet.name} slug="main-street-morgantown" />
   </article>
 
+  <p>Building, adding on or changing a space? See <a href={`${base}/permits/`}>Do I need a building permit?</a> for who issues permits in the city and the county.</p>
   <p>Looking for a job or training for yourself? See <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these programs and groups; we do not endorse them or any business. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these programs and groups; we do not endorse them or any business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

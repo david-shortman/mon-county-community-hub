@@ -1,0 +1,28 @@
+title: Change a child support order
+slug: change-a-child-support-order
+org: wv-bureau-for-child-support-enforcement
+topics: [family, legal]
+who_it_is_for: "Parents who pay or get child support and whose situation has changed, such as a lost job, a new job or a raise."
+what_to_do: "There are two ways. You can ask BCSE to review the order, or you can file a petition with the Family Court yourself. BCSE says only a judge's order changes what you owe, so telling the clerk or BCSE is not enough. Keep paying the current amount until a new order says otherwise."
+options:
+  - "Ask BCSE to review it. BCSE says either parent can ask 3 years after the order started, or sooner if there has been a big change. Ask at the BCSE office in the county handling your case. The review may raise, lower or keep the amount."
+  - "File a Petition for Modification in Family Court (instructions SCA-FC-200). The court's instructions say the fee is $85 and is not refunded."
+  - "File a Petition for Expedited Modification of Child Support (instructions SCA-FC-225), only to change child support. The instructions say it is for a change in income from a job change (not quitting on purpose) that would change support by more than 15%. The fee is $35."
+notes:
+  - "Legal Aid of West Virginia says BCSE can help either parent with the paperwork, but the BCSE lawyer does not represent either parent."
+  - "If the other parent is not paying, the court's instructions say you can file a Contempt Petition (SCA-FC-251) to ask the court to enforce the order."
+contact:
+  phone: "304-285-3218"
+  url: https://bcse.wv.gov/bcse-parents/modification-of-child-support-orders
+  url_label: Change an order
+cost: "A BCSE review is free. Court petitions have the fees above, or you can ask to have fees waived."
+if_you_want_help: [legal-aid-wv-civil-legal-help, court-fee-waiver-wv]
+sources:
+  - url: https://bcse.wv.gov/bcse-parents/modification-of-child-support-orders
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-02/SCA-FC-200.pdf
+    checked: 2026-10-31
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-02/SCA-FC-225.pdf
+    checked: 2026-10-31
+  - url: https://legalaidwv.org/legal-information/changing-or-modifying-child-support/
+    checked: 2026-10-31

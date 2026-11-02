@@ -1,6 +1,12 @@
 // Monongalia Arts Center (MAC) events, from the public Google Calendar the
 // center embeds on its site (#761). Human page: https://www.monartscenter.com/
 //
+// Turned off on 2026-11-01 (#529): Google Calendar's robots.txt asks robots
+// to stay out of everything but its home page, and the center's own site
+// gave us no other feed (it dropped our connection). The site keeps the
+// saved events until their dates pass, and a person reads the calendar on
+// the weekly centers checklist. Policy: docs/operations/automated-reads.md.
+//
 // The feed has classes, workshops, concerts and markets, mostly at the center
 // on High Street. Many classes cost money, and the feed does not say how
 // much, so cards send people to the center's site for cost. Repeating events
@@ -19,6 +25,7 @@ export default {
   page_url: `${SITE}/`,
   feed_url: 'https://calendar.google.com/calendar/ical/56d22ade1ef4e02b8eddb9fe26435b043cfa785f0123a23adc4abf5c85ec826a%40group.calendar.google.com/public/basic.ics',
   format: 'text',
+  off: { since: '2026-11-01', reason: "calendar.google.com/robots.txt asks robots not to read calendar feeds; a person reads it on a weekly checklist" },
 
   parse(text) {
     const out = [];

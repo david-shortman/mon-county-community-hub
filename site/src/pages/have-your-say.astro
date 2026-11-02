@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import Actions from '../components/Actions.astro';
 import SourceLine from '../components/SourceLine.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Have your say at a public meeting", summary: "When City Council, the County Commission, the school board, BOPARC and the Planning Commission meet, and how to comment" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const day = '2026-10-30';
@@ -66,7 +67,7 @@ const bodies = [
   },
 ];
 ---
-<Base title="Have your say: how to comment at public meetings in Morgantown and Mon County" description="When Morgantown City Council, the Monongalia County Commission, the Board of Education, BOPARC and the Planning Commission meet, how public comment works at each, and where to find agendas.">
+<Base title="Have your say at Morgantown and Mon County meetings" description="When Morgantown City Council, the Monongalia County Commission, the Board of Education, BOPARC and the Planning Commission meet, how public comment works at each, and where to find agendas.">
   <h1>Have your say at a public meeting</h1>
   <p class="lede">Most public boards set aside time for people to speak. Here is when each one meets and how comment works, from their own pages.</p>
 
@@ -81,7 +82,7 @@ const bodies = [
   {bodies.map((b) => (
     <article class="card" id={b.id}>
       <h2>{b.name}</h2>
-      <p><strong>When it meets:</strong> {b.meets}</p>
+      <p><strong>When it meets:</strong>{' '}{b.meets}</p>
       {b.comment.map((c, i) => <p>{i === 0 && <strong>How to comment: </strong>}{c}</p>)}
       <p>{b.agenda}</p>
       <Actions link={b.links[0][1]} linkLabel={b.links[0][0]} phone={b.phone} phoneLabel={b.phoneLabel} place={b.place} about={b.name} />
@@ -90,8 +91,11 @@ const bodies = [
     </article>
   ))}
 
+  <p>Want to know what is coming up first? <a href={`${base}/meetings/agendas/`}>Coming meetings in plain language</a> lists agenda items for City Council, the County Commission, the school board and other boards.</p>
+
   <h2>Want to do more than comment?</h2>
+  <p>Voting is another way to have a say. See <a href={`${base}/vote/`}>Register to vote and find your polling place</a>.</p>
   <p>City boards and commissions have seats for residents. See <a href={`${base}/make-it-better/boards/`}>Serve on a city board</a>.</p>
 
-  <p class="meta">We describe how to take part. We do not take sides on any issue or say what anyone should say. This page is not the official record; the boards' own agendas and minutes are. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We describe how to take part. We do not take sides on any issue or say what anyone should say. This page is not the official record; the boards' own agendas and minutes are. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

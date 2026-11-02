@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import FromPdf from '../components/FromPdf.astro';
 import { pdfPage } from '../lib/pdf-pages.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "outdoors", label: "Park and rec refunds and cancellations", summary: "BOPARC's rules for getting money back on camps, programs, pavilion and building rentals, and Dorsey's Knob Lodge" };
 const d = pdfPage('boparc-refunds');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -24,5 +25,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <p>Parks, pools, trails and places to rent are on <a href={`${base}/parks/`}>Parks, trails and outdoors</a>.</p>
 
-  <p class="meta">This page is a reading aid. BOPARC's PDFs are the official policy. Something wrong? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us what is wrong on this page</a>.</p>
+  <p class="meta">This page is a reading aid. BOPARC's PDFs are the official policy. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
 </Base>

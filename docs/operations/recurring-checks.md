@@ -26,6 +26,13 @@ Each file in `content/checklists/` is one standing issue labeled `checklist` and
 
 Preview this week's lists with `npm run checklists` in `site/`. Add or change an item by editing the YAML; `npm run check-content` validates it.
 
+Each item has `text` and usually `url`. Two optional fields make a run faster (added after the first run, 2026-W44):
+
+- `person: true` marks a page that blocks automated reads (a bot check, a refused connection, or a robots.txt that asks robots to stay out). The item starts with "A person reads this", so an agent run notes "not read" and moves on instead of trying.
+- `how:` one line on how to find or read the source, such as the Dominion Post address pattern or where to see which agendas are new.
+
+When you tick an item, add a one-line note in a comment on the issue: what changed, "no change", or "not read" and why.
+
 ## What still needs a person
 
 - Reading every changed page or checklist item and writing the PR. Food, shelter and money PRs wait for David.

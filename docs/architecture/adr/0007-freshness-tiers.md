@@ -29,7 +29,7 @@ Rules that hold across tiers:
 - Some pages still hold facts in their templates. Moving them into records is page-by-page work, best done by the lane that owns each page. Sentences that are not listings go in `content/facts/<topic>/` (a quote, `sources`, optional `recheck_days`) and render with the `Fact` component; the recycling page was first (#814).
 - "Source changed" from tier 3 already lands in one standing "Source check" issue, with the records that use each source (`site/scripts/source-issue.mjs`). It does not yet open one issue per changed source with a `source-changed` label, as #122 first sketched; one standing issue may be enough, and is easier on the issue list.
 - Per-fact `recheck_days` by volatility (hours about 90 days, addresses and phones about 180) exists only on fact records so far (#814): past it, the page shows the stale note and Health lists the fact (`facts-due`). Other records still use one 6-month rule, plus the weekly rule for high-stakes details. Adding the same optional field to them is backward compatible.
-- Pages could expose `dateModified` (their oldest fact) in structured data. The JSON-LD from #37 is the place to add it.
+- Done (#122, wave 9): every page that shows a checked date has a schema.org `WebPage` node with `lastReviewed`, the oldest checked date the page shows. `lastReviewed` ("last reviewed for accuracy") fits better than `dateModified`, which would claim the page itself changed. The sitemap's `lastmod` stays the newest checked date (#1044). Widget pages under `/embed/` get none, since they carry no scripts. `check-jsonld.mjs` checks it.
 
 ## Consequences
 

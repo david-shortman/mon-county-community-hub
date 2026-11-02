@@ -1,0 +1,48 @@
+---
+// Starting page for college students (#274, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/college-students.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "living-here", topic: "moving", label: "College students", summary: "Food, renting off campus, getting around, legal help, money, voting and jobs, in one place" };
+const sections = [
+  { title: "Food this week", links: [
+    { href: "/help/food/today/student/", text: "food today for WVU students" },
+    { href: "/snap/", text: "how to apply for SNAP" },
+  ] },
+  { title: "Renting off campus", links: [
+    { href: "/renting/", text: "check a rental is registered, read the lease, repairs and your deposit" },
+    { href: "/moving-here/", text: "start power, water, gas and trash" },
+  ] },
+  { title: "Getting around", links: [
+    { href: "/getting-around/", text: "Mountain Line buses, WVU Ride Free and the Grey Line" },
+    { href: "/parking/", text: "garages, meters and paying a ticket" },
+  ] },
+  { title: "Legal help and money", links: [
+    { href: "/legal-help/", text: "free legal help and court forms" },
+    { href: "/money/", text: "help with a bill this month" },
+    { href: "/free-tax-help/", text: "free help filing your taxes" },
+  ] },
+  { title: "Vote", links: [
+    { href: "/vote/", text: "register to vote and find your polling place" },
+  ] },
+  { title: "Work and health", links: [
+    { href: "/find-a-job/", text: "where local employers post jobs" },
+    { href: "/mental-health/", text: "someone to talk to today, and counseling you can afford" },
+    { href: "/birth-control-and-testing/", text: "free or low cost birth control and testing" },
+  ] },
+  { title: "Living in town", links: [
+    { href: "/recycling/", text: "pickup days, and where to take hard items when you move out" },
+    { href: "/find-your-people/", text: "groups, clubs and free places to sit" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/renters/", text: null },
+    { href: "/for/job-seekers/", text: null },
+    { href: "/for/new-to-mon-county/", text: null },
+  ] },
+];
+---
+<Base title="College students in Morgantown: where to start" description="A starting page for WVU and other college students in Monongalia County: food help, renting off campus, buses, free legal help, money, voting, jobs, and trash at move-out.">
+  <h1>For college students</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

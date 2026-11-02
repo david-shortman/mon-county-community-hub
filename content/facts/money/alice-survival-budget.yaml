@@ -1,0 +1,8 @@
+slug: alice-survival-budget
+text: "**United For ALICE, 2023 costs:** a single adult needed **$30,672 a year**, about $15.34 an hour at a full-time job. One adult with one child needed $41,880. Two adults with two children needed $67,188, or $78,360 if both children were in child care. For a single adult, the monthly budget was $868 for housing, $462 for food, $414 for transportation and $187 for health care, plus technology, other costs and taxes. It does not include savings."
+quote: "ALICE HOUSEHOLDS are Asset Limited, Income Constrained, Employed, earning more than the Federal Poverty Level, but not enough to afford the basics where they live. Household Survival Budget, Monongalia County, West Virginia, 2023 ... Single Adult ... Housing $868 ... Food $462 ... Transportation $414 ... Health Care $187 ... ANNUAL TOTAL $30,672 ... Hourly Wage $15.34 ... One Adult, One Child ... $41,880 ... Two Adults Two Children ... $67,188 ... Two Adults, Two In Child Care ... $78,360. The Household Survival Budget reflects the minimum cost to live and work in the current economy and includes housing, child care, food, transportation, health care, technology, and taxes. It does not include savings for emergencies or future goals like college or retirement."
+sources:
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    name: Mon Health Medical Center, 2025 Community Health Needs Assessment (United For ALICE data, pages 18 and 21 of the PDF)
+    checked: 2026-11-01
+recheck_days: 365   # yearly data

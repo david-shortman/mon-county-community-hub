@@ -12,19 +12,19 @@ recheck_days: 120
 sources:
   - url: https://www.busride.org/gold-card-program
     name: Mountain Line
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.busride.org/persons-with-disabilities
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.busride.org/Property-Tax-Bus-Pass-Program
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://www.busride.org/Fares-Programs
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://irp-cdn.multiscreensite.com/869937e9/files/uploaded/GoldCardApplication2020.pdf
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://irp.cdn-website.com/869937e9/files/uploaded/MedicareDisabledCardApplication2021.pdf
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://irp.cdn-website.com/869937e9/files/uploaded/Tax%20Pass%20Form.pdf
-    checked: 2026-10-31
+    checked: 2026-11-01
 sections:
   - heading: Gold Card, half fare at age 62 and older
     id: gold-card

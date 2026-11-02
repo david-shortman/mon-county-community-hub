@@ -68,9 +68,15 @@ meetings:               # optional (#902); regular meetings in the source's word
 steps:                  # optional (#822); what to do as a short numbered list
   - Make a free account on the site.
   - Upload your resume.
+options:                # optional (#973); a short bulleted list of choices, like the IDs that count
+  - A U.S. passport
+notes:                  # optional (#973); short paragraphs after the lists, for exceptions
+  - If you are 65 or older, an expired ID may still count.
 ```
 
-`steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+`steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `options` works the same way for a list of choices where order does not matter (a bulleted list), and `notes` holds exceptions as separate short paragraphs after the lists. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+
+Set `private_trace: true` on a domestic or sexual violence listing, or any listing where a text or share left on someone's phone could put them at risk (#555). The card then leaves off the "Pass it on" row (Text, Print, Share). Calendar entries take the same flag. The page's quick exit is still the way out.
 
 ### Town and neighborhood (#395)
 
@@ -85,7 +91,7 @@ Set them only when the record's own source names the place. Never work a town ou
 
 ## `calendar/<slug>.yaml`: dates and deadlines
 
-Shown on the site's Deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).
+Shown on the site's Dates and deadlines page and in the subscribable `calendar.ics` feed. Entries drop off the site automatically once `ends` has passed (the site rebuilds every morning).
 
 ```yaml
 title: Heating bill help (LIEAP) applications open
@@ -109,6 +115,8 @@ sources:
     checked: 2026-10-28
 ```
 
+Home dates that fall on the same day every year (tax deadlines, fire seasons, upkeep tips) can go in `home-year.yaml` instead, as one rule each; the build shows each rule's next date and puts it in `home.ics` (#1051). The file's header lists the fields.
+
 To roll a yearly item forward, copy the file, change the slug, dates, and sources, and re-check the source. Never guess a date: if the new date is not published yet, leave the item out and note it in an issue.
 
 Run `npm run check-content` in `site/` to validate entries.
@@ -122,6 +130,8 @@ Best first. Use the highest tier a source supports.
 3. **Hand-checked.** A YAML file in `calendar/`, for dates published once (state law, one-off notices). The card says "Checked against the source on <date>." Don't say "by hand" or "by a person" unless a person did the check. Re-check when it goes stale.
 
 If a hand-checked entry and a feed entry have the same `slug`, the hand-checked one wins. Use this to correct or add detail to a feed item.
+
+Every record says how its facts were read in `sources[].method` (ADR 0002, #70): `hand` (a person or agent read the page), `feed` (from the publisher's own feed) or `watched-page` (read from the page by a program). Hand YAML files leave it out, and `hand` is assumed. The feed loader writes `method: feed`, the `fetched` time and the feed's id on `sources[0]`, and the card picks "Pulled from" or "Checked against" from it.
 
 Live feeds wired in now:
 
@@ -284,7 +294,16 @@ rank: 1                                 # 1 is the most pressing; unique
 rank_why: The score behind the rank.    # optional
 questions: [q01]                        # optional; findability question ids
 issues: [123]                           # optional; idea issues for this need
+get_help:                               # optional (#1248); our own pages for this need, best first
+  - path: /utility-bills/               # a path on this site; the page must exist
+    label: Help paying a heat, power or water bill
+site_coverage:                          # optional (#1248); how well this site helps today
+  level: good                           # good | partial | thin
+  why: What the site has and what it lacks, in one or two sentences.
+  checked: 2026-11-01
 ```
+
+`get_help` shows on `/needs/` as "Where to get help on this site". `site_coverage` is a self-check of this site, not a measure of the need: `good` means a clear starting page and the main help is listed, `partial` means help is listed but spread out or missing a piece, and `thin` means little is on the site yet. Re-check it when a page for the need is added or changed. The full coverage review is in [`docs/research/needs-coverage.md`](../docs/research/needs-coverage.md).
 
 `npm run check-content` also runs `scripts/check-needs.mjs`, which fails on: a field the schema does not name, evidence without a source url or checked date, a count that is not a whole number, a person instead of a group in `working_on`, an unknown topic or org, a repeated rank, and anything that looks personal (an email address, a phone number, or a quoted passage of six or more words). Signals are public and aggregate; never profile or quote a private person. Test data lives in `site/scripts/fixtures/needs/`, never in this folder.
 
@@ -359,6 +378,32 @@ sources:
   - url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
     checked: 2026-10-30
 ```
+
+## `tonight/warming-shelter.yaml`: tonight's warming shelter status
+
+One file, shown on `/tonight/` (#401). Update it each day in winter, after reading a same-day source.
+
+```yaml
+status: open              # not-announced | open | closed-tonight | season-over
+checked: "2026-12-05 15:30"   # Morgantown date and time you read the source, quoted
+where: 123 Example St, Morgantown   # needed when open
+hours: 7 p.m. to 7 a.m.             # needed when open
+rules:                    # optional; shown before anything else, in the source's words
+  who: Adults 18 and older
+  pets: No pets
+  sobriety: ...
+  id: ...
+bus: ...                  # optional; how to get there
+last_bus: ...             # optional
+confirm_phone: "211"      # needed when open; a public number to confirm
+confirm_label: ...        # optional; who answers
+note: ...                 # optional; one plain sentence, like "No opening date has been announced yet."
+sources:
+  - url: https://example.org/warming-shelter
+    checked: 2026-12-05
+```
+
+The page says "open" only when `checked` is today in Morgantown, both when the site builds and again on the phone, so a page saved from an earlier day reads "Not confirmed for today." There is never a bed count. `npm run check-content` checks the status, the `checked` format, and that an open shelter has `where`, `hours` and `confirm_phone`.
 
 ## `doors.yaml`: the five doors
 
@@ -518,6 +563,7 @@ sources:
 ```
 
 - **Charts and updates (#15).** A file can name its County Health Rankings measure under `chr:` (`measure: v024`, `trend_name: Children in poverty`). `node scripts/update-chr-indicators.mjs --check` in `site/` compares the file with County Health Rankings' public files, and `--write` fills `values`, `data_year` and `history` (Mon County and West Virginia by year, only after the source's last trend break), and sets `checked`. The page draws a chart from `history`. A monthly workflow (`.github/workflows/indicators.yml`) runs the check and opens an issue for Duet when the source changes. No key, no account.
+- **Supplements (#1357).** CHR&R made no 2026 annual release; a March 2026 supplemental file refreshed 34 measures. An indicator on that file puts it first in `sources`, adds the supplement codebook as a source, and sets `chr.data_year` to the year the codebook gives for its measure (the trends file stops at the 2025 release, so the chart can end a year earlier than the number). `children-in-poverty` is not in the supplement and stays on the 2025 file.
 - **Official sources only**, read in the same session: a government agency or a program that publishes the same data for every county. Never a real estate, "best places" or other commercial site.
 - **Copy the number and its definition exactly.** Never compute a new number (a rank, a change, a per-person rate) the source does not give.
 - **Describe, never judge.** No "good", "bad", "safe" or "failing". The page says what the numbers do and don't tell you.
@@ -581,3 +627,15 @@ Neither folder shows on the site. Both feed issues for a person, from the daily 
 
 - `watch/`: pages a robot reads every day, comparing only the part between `start` and `end` (#166). Optional list fields: `season` (`"11-01 to 03-31"`), `words`, `todo`, `plan`. A change opens or comments on one issue per list. Field notes are at the top of `watch/food.yaml` and `watch/shelter.yaml`.
 - `checklists/`: what a robot cannot read (#752, #718, #793). One standing issue per file, refreshed each week. Item fields: `text`, `url`, `when` (`month` or `quarter`: only in the first week of one), `months` (only in those months), `from` (not before that date), `run` (a computed list: `secondhand-due`, `past-sale-dates`, `better-stale-soon`). Preview with `npm run checklists` in `site/`.
+
+## `translations/<lang>/<kind>/<name>.yaml`: other languages (not on the site yet)
+
+Sidecar files with reviewed translations of a record, page or part. They hold only words, never facts: numbers, hours, addresses and links always come from the English record. No language is turned on yet (#1067). Schema, the staleness hash and how to add one: [`docs/process/translations.md`](../docs/process/translations.md).
+
+## `agendas/<body>-<date>.yaml`: plain-language agenda guides (#529)
+
+One file per coming meeting with a posted agenda, for any body listed in `BODIES` in `site/src/lib/agendas.mjs` (City Council, County Commission, school board, city boards, regional boards and town councils), shown on `/meetings/agendas/` and the body's own page until the meeting day passes. Every agenda item keeps its exact title, plus a `kind` and one neutral `line`. Neutrality rules: [`docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md`](../docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md). Fields, kinds and the weekly steps: [`docs/process/agenda-guides.md`](../docs/process/agenda-guides.md). `npm run check-content` checks the fields and fails a line with a judging word or an em dash (`site/src/lib/agendas.mjs`).
+
+## `minutes/<body>-<date>.yaml`: what was decided (#529)
+
+One file per past meeting with posted minutes, shown on the body's page under `/meetings/agendas/<body>/` for 30 days after the meeting. It lists every motion the official minutes record, in order: `motion` and `result` copied as written, `vote` as the minutes give it, and `item` (the agenda number or title) when the minutes give one. `minutes_status` is `Approved`, `Draft` or `Not marked`, as the minutes or the posting page say. Never a summary of debate, comments or reasons. Steps: "What was decided" in [`docs/process/agenda-guides.md`](../docs/process/agenda-guides.md). `npm run check-content` checks the fields (`decidedProblems` in `site/src/lib/agendas.mjs`).

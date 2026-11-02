@@ -66,7 +66,7 @@ The current form is a GitHub issue form, so GitHub's own account rules apply and
 
 ### 8. Tell people to check before they go
 
-A reviewed and rewritten listing is still our words, and details change between checks. Listings should say to check with the group before going. Today, place cards say "Call to confirm," event cards say "Call to confirm the time," and some pages have a "Call before you go" line, but resource cards only say it once a listing is past its re-check date. Adding it to every resource card is a follow-up build issue for #168.
+A reviewed and rewritten listing is still our words, and details change between checks. Listings should say to check with the group before going. Today, place cards say "Call to confirm," event cards say "Call to confirm the time," and some pages have a "Call before you go" line, and every resource card says "Details can change, so check with them first," or the stronger "This may be out of date" line once a listing is past its re-check date (#942). Crisis lines that are always open skip the reminder.
 
 ## Checklist for one report
 

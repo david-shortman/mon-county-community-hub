@@ -6,6 +6,7 @@
 // links to its full card on /calendar/, which has the buttons and sources.
 import Base from '../../layouts/Base.astro';
 import { loadCalendarWithFeeds, upcoming, todayYmd, prettyDate, prettyTimes, ymd } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: "dates", label: "This month in Mon County", summary: "The next 30 days on one page you can print" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const DAYS = 30;
@@ -58,7 +59,7 @@ const who = (e) => (e.feed ? e.feed.name : e.org_name);
     </section>
   )) : <p>No single-day dates on our calendar in the next 30 days. Dates are added as we check them, so look again soon.</p>}
 
-  <p class="meta">Built from our calendar: dates we checked against each source, and dates pulled each morning from the City of Morgantown, Monongalia County and Mountaineer Food Bank calendars. Online at everythingmorgantown.org/calendar/month/. Know a date that should be here? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Suggest it</a>.</p>
+  <p class="meta">Built from our calendar: dates we checked against each source, and dates pulled each morning from the City of Morgantown, Monongalia County and Mountaineer Food Bank calendars. Online at everythingmorgantown.org/calendar/month/. Know a date that should be here? <a href={fixFormUrl({ page: Astro.url.pathname })}>Suggest it</a>.</p>
 
   <style>
     .month-list { padding-left: 1.2rem; }

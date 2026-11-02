@@ -1,0 +1,5 @@
+# 2026-11-01: Burning page shows the year at a glance, with today marked
+
+- **Considered:** #172 (sprint wave 9, round two, #529): every block in the presentation guide should be built and used, or marked not needed. The Timeline block (#179) was built but no page used it. The Day list block needs hours for many days, which mostly means food pantries (high stakes, and #60 is with Duet). `/burning/` answers "Can I burn today?", but the reader had to work out from the dates in the lede whether today falls in a fire season.
+- **Chose:** "The year at a glance" on `/burning/`: a Timeline of the four parts of the year (the two forest fire seasons and the time between them), with today's part marked "Now", and a line that says it in words ("Today, November 1, 2026, is in the fall forest fire season."). "Now" is worked out when the site builds, and the site rebuilds every morning. Timeline gained an optional `now` flag for this (`aria-current="date"`). Season dates come from WV Code 20-3-5, the source of the card below it. Outside the seasons the page says only that it is not a forest fire season under state law and that town rules can still apply.
+- **Cost:** $0.

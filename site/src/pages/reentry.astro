@@ -1,0 +1,48 @@
+---
+// Coming home from jail or prison in Mon County (#1182, gap from #1178 and
+// #215, sprint #529). Facts come from the records, each read on a WV courts,
+// DCR, Monongalia County, Day Report Center, Secretary of State or REACH page
+// on 2026-10-31. Left off until a person confirms them (#1228): whether DCR
+// gives the free temporary ID that state law allows before release, and
+// whether Medicaid's approved pre-release services have started.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Coming home from jail or prison", summary: "Reentry help and peer mentors, probation and parole offices, the Day Report Center, getting an ID and benefits, and voting again" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Coming home from jail or prison in Mon County, WV" description="Reentry in Monongalia County, WV: The REACH Initiative's peer mentors and local reentry council, the probation office, the Clarksburg parole office for Mon County, the Day Report Center and home confinement, getting an ID, SNAP and Medicaid, voting after a felony, and clearing a record.">
+  <h1>Coming home from jail or prison</h1>
+  <p class="lede">You can read the steps on this page any time, in any order. For a person to call, The REACH Initiative matches people coming home with a mentor who has been through it. Below are the local offices for probation, parole and court programs, then IDs, benefits and voting.</p>
+
+  <p>Need a bed or food today? See <a href={`${base}/life-events/leaving-jail-or-prison/`}>I'm leaving jail or prison</a> for steps in order.</p>
+
+  <h2 id="help">Reentry help</h2>
+  <ResourceCard r={resource('reach-reentry-help')} />
+
+  <h2 id="supervision">Probation, parole and court programs</h2>
+  <ResourceCard r={resource('mon-probation-office')} />
+  <ResourceCard r={resource('dcr-clarksburg-parole-office')} />
+  <ResourceCard r={resource('mon-day-report-center')} />
+  <ResourceCard r={resource('mon-sheriff-home-confinement')} />
+
+  <h2 id="id-and-benefits">An ID, a birth certificate and benefits</h2>
+  <ul>
+    <li><a href={`${base}/ids-and-records/#id`}>A West Virginia ID card</a>: what to bring and where to go.</li>
+    <li><a href={`${base}/ids-and-records/#certificates`}>A copy of your birth certificate</a>: from the County Clerk or the state.</li>
+    <li><a href={`${base}/file-today/`}>SNAP and Medicaid</a>: how to start an application today, and what to bring.</li>
+  </ul>
+
+  <h2 id="vote">Voting again</h2>
+  <ResourceCard r={resource('wv-voting-after-felony')} />
+  <p>Ready to register? See <a href={`${base}/vote/#register`}>register to vote</a>.</p>
+
+  <h2 id="record">Work and your record</h2>
+  <ul>
+    <li><a href={`${base}/work-and-learning/`}>Work with a record</a>: federal bonding, and Jobs &amp; Hope West Virginia.</li>
+    <li><a href={`${base}/legal-help/#record`}>Clear a record</a>: expungement forms and free legal help.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 31, 2026. This page says where to go. It is not legal advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

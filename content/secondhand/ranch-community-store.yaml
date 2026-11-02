@@ -17,10 +17,10 @@ url_label: Store website
 status: confirmed
 sources:
   - url: https://ranchstore.org/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://ranchstore.org/contact/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://ranchstore.org/donations/
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://ranchstore.org/pickup/
-    checked: 2026-10-30
+    checked: 2026-11-01

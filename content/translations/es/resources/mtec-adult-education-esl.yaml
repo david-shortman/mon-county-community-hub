@@ -1,0 +1,9 @@
+of: resources/mtec-adult-education-esl
+lang: es
+fields:
+  title: Educación para adultos y clases de inglés en MTEC
+english_hash: 94a7f7bcdff6
+method: machine-plus-review
+translated: 2026-11-01
+reviewed: false
+notes: Claude draft (#1101). A fluent Spanish reader checks every line against the English before this goes live. See docs/reviews/2026-11-01-spanish-pilot.md.

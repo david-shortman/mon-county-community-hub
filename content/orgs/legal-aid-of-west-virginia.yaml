@@ -1,13 +1,13 @@
 name: Legal Aid of West Virginia
 slug: legal-aid-of-west-virginia
 kind: nonprofit
-website: https://legalaidwv.org
+website: https://legalaidwv.org/
 phone: "866-255-4370"
 summary: A statewide nonprofit that gives free help with civil legal problems, like eviction, to people with low income and to victims of domestic violence.
 topics: [housing, legal]
 area: statewide
 sources:
   - url: https://legalaidwv.org/get-help/eligibility/
-    checked: 2026-10-29
+    checked: 2026-10-31
   - url: https://legalaidwv.org/get-help/apply-for-help/
-    checked: 2026-10-29
+    checked: 2026-10-31

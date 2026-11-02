@@ -1,0 +1,14 @@
+title: School delays and closings for Monongalia County Schools
+slug: mcs-school-closings
+org: monongalia-county-schools
+topics: [weather, family]
+who_it_is_for: Families with children in Monongalia County public schools.
+what_to_do: The schools send an email, text message and voice message to families when school is closed. Closings are also posted on the schools' websites, Facebook and Twitter, and in the Monongalia County Schools Board of Education app. The state also keeps a list of school closings and delays for every county.
+contact:
+  url: https://boe.mono.k12.wv.us/page/closings
+  url_label: School closings page
+sources:
+  - url: https://boe.mono.k12.wv.us/page/closings
+    checked: 2026-10-31
+  - url: https://wveis.k12.wv.us/closings/
+    checked: 2026-10-31

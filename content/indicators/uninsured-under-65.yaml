@@ -3,18 +3,21 @@ slug: uninsured-under-65
 topic: health
 definition: "Percentage of population under age 65 without health insurance." # County Health Rankings' own definition (v085)
 unit: percent
-data_year: "2022"
-release: County Health Rankings 2025
+data_year: "2023"
+release: County Health Rankings, March 2026 supplemental release
 values:
-  monongalia: 0.0621527087
-  west_virginia: 0.0741239201
-  united_states: 0.0954837794
+  monongalia: 0.06202388844306433
+  west_virginia: 0.07437298218563448
+  united_states: 0.09457094600301255
 sources:
-  - name: County Health Rankings 2025 data file
-    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-30
+  - name: County Health Rankings March 2026 supplemental data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
-    checked: 2026-10-30
+    checked: 2026-11-01
+  - name: Supplemental release codebook (data years by measure)
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf
+    checked: 2026-11-01
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
     checked: 2026-10-30
 more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia # the human page for this county
@@ -22,6 +25,7 @@ chr:
   # where scripts/update-chr-indicators.mjs reads it
   measure: v085
   trend_name: Uninsured
+  data_year: "2023" # from the supplement codebook; the trends file stops at the 2025 release
 history:
   monongalia:
     - year: "2013"

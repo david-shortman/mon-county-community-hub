@@ -11,6 +11,10 @@ contact:
   url_label: County election page
 sources:
   - url: https://monongaliacountyclerk.com/index.php/elections/17-current-election/124-2026-general-election-information
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://sos.wv.gov/early-voting-locations
-    checked: 2026-10-31
+    checked: 2026-11-01
+hidden:
+  reason: other
+  since: 2026-11-01
+  note: Early voting ended Saturday, October 31, 2026. Election Day is Tuesday, November 3.

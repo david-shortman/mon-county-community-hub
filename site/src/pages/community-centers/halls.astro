@@ -25,7 +25,7 @@ const COLS = ['Place and space', 'Area', 'Seats', 'Kitchen', 'Outdoor', 'Price',
   <div class="table-scroll" role="region" aria-labelledby="halls-cap" tabindex="0">
     {/* On phones each row shows as a card (#917). Display changes can drop table
         meaning for screen readers, so the roles are set by hand. */}
-    <table class="halls" role="table">
+    <table class="halls" role="table" aria-labelledby="halls-cap">
       <caption id="halls-cap">{rows.length} spaces to rent, by part of the county</caption>
       <thead role="rowgroup">
         <tr role="row">{COLS.map((c) => <th scope="col" role="columnheader">{c}</th>)}</tr>
@@ -63,8 +63,9 @@ const COLS = ['Place and space', 'Area', 'Seats', 'Kitchen', 'Outdoor', 'Price',
   /* Phones: each row is a small card with labeled lines (#917). */
   @media (max-width: 40rem) {
     .table-scroll { overflow: visible; border: 0; background: none; }
-    table.halls { min-width: 0; }
-    table.halls caption { padding: 0 0 4px; }
+    /* As a real table, the caption and cells force a wider box that scrolls sideways at 200% text (#971). role="table" keeps the table semantics. */
+    table.halls { min-width: 0; display: block; }
+    table.halls caption { display: block; padding: 0 0 4px; }
     table.halls thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     table.halls tbody, table.halls tr, table.halls th, table.halls td { display: block; }
     table.halls tbody tr { margin: 12px 0; border: 1px solid var(--line); border-radius: 10px; background: var(--card); overflow: hidden; }
