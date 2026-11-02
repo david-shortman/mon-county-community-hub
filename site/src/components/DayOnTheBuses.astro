@@ -1,0 +1,148 @@
+---
+// A day on the buses: the scroll story on /bus-routes/ (Nov 2026).
+// Follows docs/design/motion.md. One chart, one bar per Mountain Line route
+// from its first run to its last. It opens with "Right now": how many routes are
+// running at this minute, with each route's status in a fold-out list. Then you
+// scroll through three moments in a weekday (first bus, midday, evening) while a
+// time line slides across and each route lights up while its trips are still
+// starting. Then "Pick a day and a time" lets you check any hour or day.
+// How it behaves:
+// - No script, "Turn off motion", or a device set to reduce motion: three numbered
+//   steps, each with its own still chart. The tool still works, with no sliding.
+//   Right now and the tool need script, so they stay hidden without it.
+// - Hours come from each route item's `hours` in
+//   content/pdf-pages/mountain-line-routes.yaml. check-content makes sure every
+//   first and last run there is worded the same in that item's own lines, so the
+//   chart and the list below it can't disagree.
+// - Charts are aria-hidden; the step text, the summary and the tool's text say
+//   the same things in words.
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { routesFromRecord } from '../lib/bus-day.mjs';
+import { dayMarkup } from '../lib/bus-day-markup.mjs';
+const d = pdfPage('mountain-line-routes');
+const html = dayMarkup(routesFromRecord(d), { checked: d.checked });
+---
+<Fragment set:html={html} />
+
+<script>
+  import * as api from '../lib/bus-day.mjs';
+  import { initDay } from '../lib/bus-day-client.mjs';
+  const sec = document.getElementById('day-explainer');
+  if (sec) initDay(sec, JSON.parse(sec.dataset.routes ?? '[]'), api);
+</script>
+
+<style is:global>
+  /* ===== A day on the buses (component styles; all scoped to #day-explainer) ===== */
+  #day-explainer .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 4px 0 12px; font-size: 1rem; }
+  #day-explainer .tools a { display: inline-flex; align-items: center; min-height: 44px; }
+  #motion-toggle { min-height: 44px; padding: 0 16px; font: inherit; font-weight: 600; color: var(--accent); background: var(--card); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
+  #day-explainer .motion-note { margin: 0; flex-basis: 100%; color: var(--muted); font-size: 0.95rem; }
+
+  /* Right now: first thing in the section */
+  #day-explainer .rightnow { margin: 4px 0 8px; padding: 12px 16px; background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 10px; }
+  #day-explainer .rightnow h3 { margin: 0 0 4px; font-size: 1.05rem; color: var(--accent); }
+  #day-explainer .rn-line { margin: 0 0 6px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  #day-explainer .rightnow summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: var(--accent); font-weight: 600; }
+  #day-explainer .rightnow summary::before { content: "\25B8"; margin-right: 8px; }
+  #day-explainer .rightnow details[open] summary::before { content: "\25BE"; }
+  #day-explainer .rightnow summary::-webkit-details-marker { display: none; }
+  #day-explainer .rightnow summary { list-style: none; }
+  #day-explainer .rightnow ul { margin: 0 0 6px; padding-left: 1.2em; font-size: 0.95rem; }
+  #day-explainer .rn-note { margin: 0; font-size: 0.85rem; color: var(--muted); }
+  #day-explainer .rightnow summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  /* Steps: plain numbered cards */
+  #day-explainer .days { list-style: none; margin: 16px 0; padding: 0; }
+  #day-explainer .days > li { margin: 0 0 18px; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; scroll-margin-top: 16px; }
+  #day-explainer .days h3 { margin: 2px 0 6px; font-size: 1.05rem; }
+  #day-explainer .days p { margin: 0; }
+  #day-explainer .when { font-size: 0.9rem; font-weight: 700; color: var(--brick); font-variant-numeric: tabular-nums; }
+  #day-explainer .snap { margin: 8px 0 10px; padding: 8px 6px; background: var(--bg); border-radius: 8px; }
+  #day-explainer .stage { display: none; margin: 0; }
+  #day-explainer .now { margin: 4px 0 0; font-weight: 700; font-size: 1rem; text-align: center; font-variant-numeric: tabular-nums; }
+  #day-explainer .now span { color: var(--brick); }
+  #day-explainer .key { margin: 2px 0 0; font-size: 0.8rem; line-height: 1.35; color: var(--muted); text-align: center; }
+  #day-explainer .key .k-tail { color: var(--accent); font-weight: 700; }
+  #day-explainer .key .k-un { color: var(--brick); font-weight: 700; }
+
+  /* The chart */
+  #day-explainer .bd-chart { display: block; width: 100%; max-width: 520px; height: auto; margin: 0 auto; }
+  #day-explainer .bd-chart text { font-family: var(--body, system-ui, sans-serif); }
+  #day-explainer .bd-tick { font-size: 8.5px; fill: var(--muted); }
+  #day-explainer .bd-grid { stroke: var(--line); stroke-width: 0.7; }
+  #day-explainer .bd-mid { stroke-dasharray: 2 2; stroke: var(--muted); }
+  #day-explainer .bd-group { font-size: 8px; font-weight: 700; fill: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  #day-explainer .bd-lab { font-size: 8.6px; fill: var(--fg); }
+  #day-explainer .bd-num { font-weight: 800; }
+  #day-explainer .bd-track { fill: var(--line); }
+  #day-explainer .bd-span { fill: var(--accent); }
+  #day-explainer .bd-span.bd-unsure { fill: var(--brick); }
+  #day-explainer .bd-tail { fill: var(--accent); opacity: 0.35; }
+  #day-explainer .bd-early { fill: var(--accent); }
+  #day-explainer .bd-now line { stroke: var(--brick); stroke-width: 1.6; }
+  #day-explainer .bd-pill { fill: var(--brick); }
+  #day-explainer .bd-pilltx { font-size: 8.5px; font-weight: 700; fill: var(--card); font-variant-numeric: tabular-nums; }
+  /* What each route is doing at the time line: only the part of the bar the line is on lights up */
+  #day-explainer .bd-timed .bd-span, #day-explainer .bd-timed .bd-early { opacity: 0.22; }
+  #day-explainer .bd-timed .bd-tail { opacity: 0.1; }
+  #day-explainer .bd-timed .bd-span.on, #day-explainer .bd-timed .bd-early.on, #day-explainer .bd-timed .bd-tail.on { opacity: 1; }
+  #day-explainer .bd-timed .bd-tail.near { opacity: 0.35; }
+  #day-explainer .is-before .bd-lab, #day-explainer .is-done .bd-lab, #day-explainer .is-gap .bd-lab { fill: var(--muted); }
+  #day-explainer .is-off .bd-lab { fill: var(--muted); opacity: 0.55; }
+  #day-explainer .is-off .bd-track { opacity: 0.4; }
+  #day-explainer .is-run .bd-lab, #day-explainer .is-last .bd-lab, #day-explainer .is-early .bd-lab { font-weight: 700; }
+
+  /* The summary and the try-it tool */
+  #day-explainer .summary { margin-top: 8px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+  #day-explainer .summary:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+  #day-explainer .summary h3 { margin: 18px 0 6px; font-size: 1.1rem; }
+  #day-explainer .summary h3:first-child { margin-top: 0; }
+  #day-explainer .summary p { margin: 0 0 8px; }
+  #day-try { margin-top: 12px; padding-top: 4px; border-top: 1px solid var(--line); }
+  #day-try .picks { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 10px; }
+  #day-try .picks button, #day-now { min-height: 44px; padding: 0 14px; font: inherit; font-size: 1rem; font-weight: 600; color: var(--accent); background: var(--card); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
+  #day-try .picks button[aria-pressed="true"] { color: var(--card); background: var(--accent); }
+  #day-try .timerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  #day-try .timerow b { color: var(--brick); font-variant-numeric: tabular-nums; }
+  #day-time { width: 100%; min-height: 44px; margin: 4px 0 0; accent-color: var(--brick); }
+  #day-try .scale { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 8px; }
+  #day-try .note { font-size: 0.9rem; color: var(--muted); }
+  #day-try .chartbox { padding: 8px 6px; background: var(--bg); border-radius: 8px; }
+  #day-try .out { margin: 10px 0 4px; font-weight: 700; }
+  #day-try .lists { margin: 0; padding-left: 1.2em; font-size: 0.95rem; }
+  #day-try .lists li + li { margin-top: 4px; }
+  #day-explainer .care { margin: 0; padding-left: 1.2em; font-size: 0.95rem; }
+  #day-explainer .care li + li { margin-top: 6px; }
+  #day-explainer .care ul { margin: 6px 0 0; padding-left: 1.2em; }
+  #day-explainer button:focus-visible, #day-explainer a:focus-visible, #day-time:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  /* Live mode: only with script, a device that allows motion, and motion not turned off */
+  #day-explainer.is-live .snap { display: none; }
+  #day-explainer#day-explainer.is-live .stage { display: block; }
+  #day-explainer.is-live .days > li { margin-bottom: 14rem; }
+  #day-explainer.is-live .days > li:last-child { margin-bottom: 5rem; }
+  #day-explainer.is-live .days > li.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    #day-explainer.is-moving .bd-span, #day-explainer.is-moving .bd-tail { transition: transform 0.6s ease, opacity 0.25s ease; }
+    #day-explainer.is-moving .bd-early { transition: opacity 0.25s ease; }
+    #day-explainer.is-moving .bd-lab { transition: fill 0.25s ease, opacity 0.25s ease; }
+  }
+  /* Wide screens: the chart beside the steps, held in place */
+  @media (min-width: 44rem) {
+    #day-explainer.is-live .scrolly { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+    #day-explainer#day-explainer.is-live .stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); margin-top: 16px; padding: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+  }
+  /* Phones tall enough: the chart held at the top, steps scroll under it */
+  @media (max-width: 43.99rem) and (min-height: 40rem) {
+    #day-explainer#day-explainer.is-live .stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 -8px 16px; padding: 4px 8px 6px; background: var(--card); border-bottom: 1px solid var(--line); border-radius: 0 0 10px 10px; box-shadow: 0 8px 12px -12px var(--fg); }
+    #day-explainer.is-live .days > li { scroll-margin-top: 350px; }
+    html:has(#day-explainer.is-live) { scroll-padding-top: 350px; }
+  }
+  /* Short or zoomed-in phone screens keep a still chart in each step */
+  @media (max-width: 43.99rem) and (max-height: 39.99rem) {
+    #day-explainer.is-live .snap { display: block; }
+    #day-explainer#day-explainer.is-live .stage { display: none; }
+    #day-explainer.is-live .days > li { margin-bottom: 18px; }
+    #day-explainer.is-live .days > li.on { border-color: var(--line); box-shadow: none; }
+  }
+</style>
