@@ -70,7 +70,7 @@ Free. The kit uses the page's own words and the page's share card. No link short
 
 ## How we will know
 
-- **Use:** once analytics are decided (#41), aggregate counts of Copy text and Download image clicks. No tracking codes in shared links.
+- **Use:** page views of the page are counted by GoatCounter, live since November 1, 2026 (#1352). Copy text and Download image clicks are not counted; that would need click events, which are not set up. No tracking codes in shared links.
 - **Recognition:** a local group linking to a guide, which the [measurement playbook](measurement.md) counts only from public pages or through David.
 
 ## Sources checked

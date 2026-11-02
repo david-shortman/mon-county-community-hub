@@ -34,7 +34,7 @@ Example: `https://example.org/apply?utm_source=monhub&utm_medium=site&utm_campai
 - Never put anything about a person in a tag.
 - Only tag a link when its owner has no objection. If unsure, ask through a `for:david` issue. Leave government links that must stay clean, like voter registration, untagged.
 - A click is a click toward a partner, not an action. Report it as "clicks toward", never "applications" or "sign-ups".
-- Tags only help if someone counts them. Today the site has no analytics (that choice is David's, #41), so tagged links are counted only by partners who share their own numbers, which goes through David (#98).
+- Tags only help if someone counts them. The site counts page views with GoatCounter, live since November 1, 2026 (#1352), but it does not count clicks on outbound links, so tagged links are counted only by partners who share their own numbers, which goes through David (#98).
 
 ### Small counts
 
