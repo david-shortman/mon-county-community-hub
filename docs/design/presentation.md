@@ -144,6 +144,7 @@ Each door and lane page has one job, and its first phone screen leads with the b
 | Pets, `/pets/` | "I found a dog, or lost mine" | Big choices: found a dog, lost my pet, bitten, adopt (#199) |
 | Snow and ice, `/snow-and-ice/` | "Who clears my street, and is school or the bus running?" | Big choices: Morgantown street or sidewalk, state road, school delays, is my bus late (#199) |
 | Weather alerts, `/weather-alerts/` | "How do I get warned?" | Big choices: alerts on my phone, weather warnings, school closings, power outage texts (#199) |
+| Markets, `/markets/` | "What markets and sales are coming up?" | Big choices: coming up soon, every week, yard sales, sell at a market (#199) |
 | About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
 
 ### How new content slots in
