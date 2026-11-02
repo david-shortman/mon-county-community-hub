@@ -84,6 +84,10 @@ const today = todayYmd();
 const dayFmt = (style) => new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: style, month: style, day: 'numeric' }).format(new Date(`${today}T12:00:00Z`));
 const [longToday, shortToday] = [dayFmt('long'), dayFmt('short')];
 const forecast = await todaysForecast();
+// Neutral hooks for preview looks (#396): the temperature and the sky in their own spans. Same text and look.
+const wxCut = forecast ? forecast.text.indexOf(', ') : -1;
+const wxTemp = forecast ? (wxCut < 0 ? forecast.text : forecast.text.slice(0, wxCut)) : '';
+const wxSky = wxCut < 0 ? '' : forecast.text.slice(wxCut);
 // Other languages (#1083, #1099): the page's language (English unless a
 // translated page says otherwise), and hreflang links to the same page in
 // each published language. Only reviewed translated pages count
@@ -398,7 +402,7 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
       <div class="wrap">
         <a class="brand" href={`${base}/`}><Fragment set:html={brandMark} /><span>Everything Morgantown</span></a>
         <LanguageSwitcher lang={lang} alternates={alternates} label={langLabel} />
-        <p class="dateline">Morgantown <span aria-hidden="true">·</span> <span class="dl-long" data-fmt="long">{longToday}</span><span class="dl-short" data-fmt="short">{shortToday}</span>{forecast && <span id="dl-wx" data-day={forecast.day}> <span aria-hidden="true">·</span> <a href={FORECAST_PAGE}><Icon name={forecast.icon} />{forecast.text}<span class="sr-only"> (National Weather Service forecast)</span></a></span>}</p>
+        <p class="dateline">Morgantown <span aria-hidden="true">·</span> <span class="dl-long" data-fmt="long">{longToday}</span><span class="dl-short" data-fmt="short">{shortToday}</span>{forecast && <span id="dl-wx" data-day={forecast.day}> <span aria-hidden="true">·</span> <a href={FORECAST_PAGE}><Icon name={forecast.icon} /><span class="wx-temp">{wxTemp}</span>{wxSky && <span class="wx-sky">{wxSky}</span>}<span class="sr-only"> (National Weather Service forecast)</span></a></span>}</p>
         <nav class="main" aria-label="Main">
           {tabs.map((t) => <a class="tab" href={`${base}${t.href}`} aria-current={t.current}><Icon name={t.icon} /><span>{t.label}</span></a>)}
           {wide.map((w) => <a class="wide" href={`${base}${w.href}`} aria-current={w.current}>{w.label}</a>)}
