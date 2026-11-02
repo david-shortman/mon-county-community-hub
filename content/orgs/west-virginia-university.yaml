@@ -1,0 +1,10 @@
+name: West Virginia University
+slug: west-virginia-university
+kind: school
+website: https://www.wvu.edu/
+summary: The state university in Morgantown. It runs the PRT (Personal Rapid Transit), small automated cars that link the Downtown, Evansdale and Health Sciences campuses.
+topics: [moving]
+area: morgantown
+sources:
+  - url: https://prt.wvu.edu/
+    checked: 2026-11-02

@@ -2,9 +2,10 @@
 // Getting around without a car (#599) and "which bus gets me to X" (#61).
 // Every fact is in a resource record in content/resources/, read on
 // Mountain Line's own pages (busride.org) on 2026-10-30. Left off on purpose:
-// PRT hours and how many Grey Line trips run a day (sources differ, see #598),
-// and a bus for the DoHS office, Health Right and food pantries (no Mountain
-// Line route page names a stop at them).
+// how many Grey Line trips run a day (sources differ, see #598), and a bus for
+// the DoHS office, Health Right and food pantries (no Mountain
+// Line route page names a stop at them). PRT facts are from WVU's own PRT
+// pages, read on 2026-11-02 (#598).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
@@ -25,6 +26,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <li><a href={`${base}/bus-passes/`}>Half-fare and property tax bus passes</a></li>
       <li><a href="#fares">Fares and how to ride</a></li>
       <li><a href="#wvu">Free with a WVU ID</a></li>
+      <li><a href="#prt">The WVU PRT</a></li>
       <li><a href="#which-bus">Which bus gets me to the hospital?</a></li>
       <li><a href="#pittsburgh">Bus to Pittsburgh and the airport</a></li>
       <li><a href="#rides">Can't take the bus to a medical visit?</a></li>
@@ -36,6 +38,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="wvu">Free with a WVU ID</h2>
   {r('mountain-line-wvu-ride-free') && <ResourceCard r={r('mountain-line-wvu-ride-free')} />}
+
+  <h2 id="prt">The WVU PRT</h2>
+  {r('wvu-prt') && <ResourceCard r={r('wvu-prt')} showCost />}
 
   <h2 id="which-bus">Which bus gets me to the hospital?</h2>
   <p>First and last runs are when the route starts its first and last trip. The bus reaches your stop later, so check the trip planner for the time at your stop.</p>
@@ -52,5 +57,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   {r('mountain-line-newfit') && <ResourceCard r={r('mountain-line-newfit')} showCost />}
   <p>On Medicaid or WVCHIP? See <a href={`${base}/medical-rides/`}>Ride to a medical visit</a> for rides through Modivcare.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Routes and times change, so check the trip planner before you go. Hours for the WVU PRT (Personal Rapid Transit) are not on this page yet because we could not confirm them on WVU's page. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026, and the PRT on November 2, 2026. Routes and times change, so check the trip planner before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
