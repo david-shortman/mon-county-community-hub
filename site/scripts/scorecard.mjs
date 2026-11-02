@@ -299,7 +299,7 @@ async function gather() {
   if (fd) add({ lane: I, key: 'answer_pages', what: 'Findability questions with an answer page of ours', ours: fd.pages, shown: `${fd.pages} of ${fd.questions}`, better: 'up', note: `run ${fd.run}` });
   add({ lane: I, key: 'gaps', what: 'Open "Help wanted" gaps', ours: gaps(), shown: String(gaps()), note: 'shrinks as sources are found' });
   const r = await tryRun(I, 'reach', 'In-person listings outside Morgantown', reach);
-  if (r) add({ lane: I, key: 'reach', what: 'In-person listings in the rest of the county', ours: r.share, shown: `${r.share}% (${r.rest} of ${r.rest + r.morgantown})`, better: 'up', note: 'about 72% of residents live outside the city' });
+  if (r) add({ lane: I, key: 'reach', what: 'In-person listings in the rest of the county', ours: r.share, shown: `${r.share}% (${r.rest} of ${r.rest + r.morgantown})`, better: 'up', note: 'about 72% of residents live outside the city; by Census place since 2026-11-02 (#1412), by mailing town before, so the first move is the method' });
 
   // Presentation
   const b = await tryRun(P, 'bench', 'Source benchmark', benchmark);
