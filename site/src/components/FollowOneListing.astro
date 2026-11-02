@@ -388,5 +388,7 @@ const scene = (s) => SCENE.replace('__S__', String(s));
   @media (max-width: 43.99rem) {
     #flow-explainer#flow-explainer.is-live .stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 -8px 16px; padding: 6px 8px 8px; background: var(--card); border-bottom: 1px solid var(--line); border-radius: 0 0 10px 10px; box-shadow: 0 8px 12px -12px var(--fg); }
     #flow-explainer.is-live .flow > li { scroll-margin-top: 290px; }
+    /* Keep a focused link or the skip target from landing under the held picture */
+    html:has(#flow-explainer.is-live) { scroll-padding-top: 290px; }
   }
 </style>
