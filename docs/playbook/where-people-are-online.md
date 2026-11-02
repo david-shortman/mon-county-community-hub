@@ -27,7 +27,7 @@ One small box at the bottom of each guide, under the heading **Share this**. It 
 
 - **A two-sentence summary** in plain words. Sentence one says what the guide helps with. Sentence two says it is free and lists sources and checked dates. Build it from the page's `label` and `summary` (the `page` export every page has), so it never says more than the page does.
 - **A short link** to the guide, written the way people say it: `everythingmorgantown.org/recycling`.
-- **A small image:** the site's existing share image (`site/public/share.png`), which link previews in Facebook and messaging apps already show.
+- **A small image:** the guide's own share card (`/share/<page>.png`, see "Share cards" in `docs/design/identity.md`), the same picture link previews in Facebook and messaging apps show for that page.
 
 And two buttons: **Copy text** (summary plus link) and **Download image**. No tracking codes in the link, no account, nothing stored.
 
@@ -66,7 +66,7 @@ Nothing, unless it wants to. If a group finds the kit, it can paste the text int
 
 ## Cost
 
-Free. The kit uses the page's own words and the existing share image. No link shortener, no analytics service.
+Free. The kit uses the page's own words and the page's share card. No link shortener, no analytics service.
 
 ## How we will know
 

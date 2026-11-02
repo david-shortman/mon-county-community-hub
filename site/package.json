@@ -30,8 +30,10 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
+    "@resvg/resvg-js": "^2.6.2",
     "astro": "^5.18.2",
     "qrcode-generator": "^2.0.4",
+    "satori": "^0.63.2",
     "yaml": "^2.9.1"
   },
   "devDependencies": {

@@ -164,7 +164,7 @@ Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base
 
 David picked the icon on October 30, 2026 (#390, #389): Westover and Morgantown on two sage hills facing each other across the Monongahela River, joined by an open arch bridge, with ridges behind. Two towns, one river, joined: it says "connect, don't compete" without naming or favoring any institution.
 
-- **Files:** [`site/public/favicon.svg`](../../site/public/favicon.svg) (rounded corners) and [`site/public/icons/icon-full.svg`](../../site/public/icons/icon-full.svg) (square, for home screens that round icons themselves). The PNG icons are made from these. The link preview image, [`site/public/share.png`](../../site/public/share.png), shows the icon beside the site name; redraw it with `node scripts/make-share-image.mjs` in `site/`.
+- **Files:** [`site/public/favicon.svg`](../../site/public/favicon.svg) (rounded corners) and [`site/public/icons/icon-full.svg`](../../site/public/icons/icon-full.svg) (square, for home screens that round icons themselves). The PNG icons are made from these. The plain link preview image, [`site/public/share.png`](../../site/public/share.png), shows the icon beside the site name; redraw it with `node scripts/make-share-image.mjs` in `site/`. Guides get their own preview picture, see "Share cards" below.
 - **Colors:** existing tokens only: hill green (`#1f5c4a`, `#2f7a63`), `--accent-bg` for the pale houses and bridge, sage for the hills, and the dark mode accent for the river.
 - **Rules David set during review:**
   - Pale houses on sage hills, so they do not blend.
@@ -178,12 +178,23 @@ David picked the icon on October 30, 2026 (#390, #389): Westover and Morgantown 
 
 David picked it on October 30, 2026 ([decision](../decisions/2026-10-30-1500-header-logo.md), #421): the icon as a small rounded tile, then the name "Everything Morgantown" on one line in Fraunces, soft. He chose the tile over a one-color line drawing and a name-only version, and Fraunces over Nunito and Bitter, because it adds warmth and a nod to the old downtown while staying bold and easy to read.
 
-- **Where:** the site header (`site/src/layouts/Base.astro`) and the link preview image (`site/public/share.png`, made by `scripts/make-share-image.mjs`). Headings and everything else keep Atkinson Hyperlegible Next.
+- **Where:** the site header (`site/src/layouts/Base.astro`), the plain link preview image (`site/public/share.png`, made by `scripts/make-share-image.mjs`) and the top of every share card (see below). Headings and everything else keep Atkinson Hyperlegible Next.
 - **Tile:** the same drawing as `public/favicon.svg`, read in at build time, so the two never drift. 40px on wide screens, 34px on phones, with a thin `--line` ring in dark mode so the green edge does not sink into the page.
 - **Name:** real text, so screen readers read it and it grows with the reader's text size. The tile is hidden from screen readers. Text color is `--fg`, the same 7:1 pair as body text.
 - **How the font loads:** `site/src/fonts/fraunces-name-800.woff2` holds only the letters in "Everything Morgantown" (E, M, a, e, g, h, i, n, o, r, t, v, w, y and a space), about 2.5 KB. It is built into each page's CSS, so the name never waits for a download and never changes font as it loads (`font-display: block` is safe here because there is nothing to wait for). It adds about 3.5 KB gzipped to each page, tile included. License: SIL Open Font License, in `site/src/fonts/OFL-Fraunces.txt`.
 - **If the name changes:** cut a new file, or new letters will show in Georgia. Made with fontTools from Fraunces in the Google Fonts repo: instance `wght=800, SOFT=100, WONK=0, opsz=48`, then `pyftsubset` with `--text="Everything Morgantown" --flavor=woff2 --layout-features=kern,liga --no-hinting`.
 - **Don't** use Fraunces for headings or body text, stretch or recolor the tile, or put the name in hill green (green means "you can act on this").
+
+## Share cards
+
+David asked on November 2, 2026 for link previews that change from page to page: the image at least by category, the logo kept, and above all the title and text varied ([decision](../decisions/2026-11-02-1500-share-cards.md)). So every guide has its own 1200 by 630 preview picture, at `/share/<page>.png`, which is also what its Share this box downloads.
+
+- **What it shows:** the logo (icon tile and name in Fraunces) at the top; the page's door (Get care, Living here and so on) with that door's menu icon; the page's label in Atkinson Hyperlegible Next 800; its one-line summary; and its short address. Hill green ground, `--bg` white for the name and title, `--accent-bg` for the summary, the dark mode accent for the door and address. A door's own page leaves out the door line, since its title is the door's name.
+- **Made at build time** by [`site/src/lib/share-cards.mjs`](../../site/src/lib/share-cards.mjs) and [`site/src/pages/share/[...card].js`](../../site/src/pages/share/[...card].js), from the same page tags as door lists and breadcrumbs, so a new page gets its card with no extra step. Free: satori lays it out and resvg draws the PNG, inside the build. About 50 to 70 KB each. A preview picture is never loaded by the page itself, so it does not count toward page weight.
+- **Fonts:** TrueType copies in `site/src/fonts/` (the drawing tools cannot read woff2): `atkinson-hyperlegible-next-800.ttf` (the same Latin cut as the web font), `atkinson-hyperlegible-next-500.ttf` (weight 500 for the summary, same letters, cut from the Google Fonts variable font with fontTools) and `fraunces-name-800.ttf` (the logo letters only). SIL Open Font License, see `site/public/fonts/OFL.txt` and `site/src/fonts/OFL-Fraunces.txt`. If a label uses a letter outside Latin, add it to the cut.
+- **Which pages:** every tagged page with a label. Crisis pages (the ones with the crisis strip) and pages about domestic or sexual violence keep the plain `share.png`, so a link to one never shows its name in big type in a group chat. Pages with no tags (home, Topics, search, and pages built from lists, like each town or group) also keep the plain picture.
+- **Checks:** `npm run check-pages` fails if a page's `og:image` is not a file in `dist/` or has no alt text. `test/share-cards.test.mjs` checks the paths, the quiet pages and the picture size.
+- **Don't** add photos, drawn motifs or a different color per door (see "No drawn motif"); the door's name and icon are what change.
 
 ## No drawn motif
 

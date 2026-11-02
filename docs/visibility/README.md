@@ -11,7 +11,7 @@ If our help is digital, people have to be able to find it. This page explains th
 | `llms.txt` | `site/src/pages/llms.txt.js` | A short plain description of the site for AI tools. Also tracked in #72. |
 | Title and description | `site/src/layouts/Base.astro`, set per page | Each page has its own title and a one-sentence description, written the way a resident would search. |
 | Canonical link | `Base.astro` | Tells search engines the one true URL of a page. Makes the move to a custom domain (#89) easier. |
-| `lang`, Open Graph, share image | `Base.astro`, `site/public/share.png` | Good previews when a link is shared. |
+| `lang`, Open Graph, share image | `Base.astro`, `site/src/lib/share-cards.mjs`, `site/public/share.png` | Good previews when a link is shared. Each guide has its own card. |
 | Structured data | Tracked in #37 | Not built yet. |
 
 ## The check
@@ -29,4 +29,4 @@ If our help is digital, people have to be able to find it. This page explains th
 
 While the site lives at `david-shortman.github.io/mon-county-community-hub`, `robots.txt` and `llms.txt` sit under that folder, not at the root of the host. Crawlers look for `robots.txt` at the host root, so they will not see ours yet. The sitemap still works when submitted directly. A custom domain (#89) fixes this; when it arrives, update `site` and `base` in `astro.config.mjs`.
 
-The share image (`site/public/share.png`, 1200 by 630) shows the icon beside the site name. Redraw it with `node scripts/make-share-image.mjs` in `site/` (see the icon section of `docs/design/identity.md`).
+Each guide has its own share card (`/share/<page>.png`, 1200 by 630) with its name, summary, door and the logo, drawn at build time (see "Share cards" in `docs/design/identity.md`). Other pages use the plain share image (`site/public/share.png`), which shows the icon beside the site name. Redraw that one with `node scripts/make-share-image.mjs` in `site/`.

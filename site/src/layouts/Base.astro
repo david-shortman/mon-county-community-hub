@@ -16,13 +16,13 @@ import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
 import { dirFor } from '../lib/i18n.mjs';
 import { pageAlternates } from '../lib/locale-pages.mjs';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { PLAIN_CARD, cardAlt, cardDoor, cardPath, hasCard } from '../lib/share-cards.mjs';
 import nameFont from '../fonts/fraunces-name-800.woff2?inline';
 import tileSvg from '../../public/favicon.svg?raw';
 // noindex: print copies and the 404 page stay out of search results; they get no canonical link (#89).
 const { crisis = false, help = false, searchable = true, noindex = false, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(/\.\w+$/.test(Astro.url.pathname) ? Astro.url.pathname : Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
-const shareImage = new URL(`${base}/share.png`, Astro.site).href;
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 // Heading face: Atkinson Hyperlegible Next (SIL Open Font License, see
 // public/fonts/OFL.txt), self-hosted, one weight, Latin only, about 11 KB.
@@ -43,6 +43,12 @@ const tags = (await loadPages()).get(route);
 const doors = loadDoors();
 const tagDoor = tags && doors.bySlug[tags.door];
 const tagTopic = tagDoor?.topics?.[tags.topic];
+// Link preview picture (share cards, src/lib/share-cards.mjs): each guide has
+// its own, with its name, summary and door. Other pages use the plain one, and
+// so do crisis pages, so a shared link to one does not show its name in big type.
+const ownCard = !crisis && hasCard(tags, route);
+const shareImage = new URL(`${base}${ownCard ? cardPath(route) : PLAIN_CARD}`, Astro.site).href;
+const shareAlt = ownCard ? cardAlt({ label: tags.label, doorName: cardDoor(tags, route, doors)?.name }) : 'Everything Morgantown: the site icon, two hills joined by a bridge over the river';
 // Share this (#947): on listed guides only. High-stakes doors and topics wait
 // for David, and safety pages never get it (a share leaves a trace).
 const shareable = tags?.listed && !['help-now', 'this-month', 'about'].includes(tags.door)
@@ -123,7 +129,9 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={shareImage} />
-    <meta property="og:image:alt" content="Everything Morgantown: the site icon, two hills joined by a bridge over the river" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={shareAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
     <AppShell />
@@ -419,7 +427,7 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
       <slot />
       {searchable && <AlsoCalled route={route} />}
       {crisis && <LeaveNote />}
-      {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
+      {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} image={ownCard ? cardPath(route) : PLAIN_CARD} />}
       <AlsoCheck route={route} />
     </main>
     <footer class="site" lang={chromeLang}>

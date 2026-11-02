@@ -57,6 +57,10 @@ for (const file of pages) {
   // A canonical URL that redirects (folder without its trailing slash) wastes the crawl.
   if (canonical && !/(\/|\.\w+)$/.test(canonical)) errors.push(`${where}: canonical ${canonical} should end with /`);
   if (!/<meta property="og:image" content="https?:\/\//.test(html)) errors.push(`${where}: missing og:image`);
+  // The link preview picture must be a file the build made (share cards, src/lib/share-cards.mjs).
+  const ogImage = html.match(/<meta property="og:image" content="https?:\/\/[^/"]+(\/[^"]*)"/)?.[1];
+  if (ogImage && !fs.existsSync(path.join(dist, decodeURIComponent(ogImage)))) errors.push(`${where}: og:image ${ogImage} is not in dist/`);
+  if (ogImage && !/<meta property="og:image:alt" content="[^"]+"/.test(html)) errors.push(`${where}: og:image has no alt text`);
   const h1s = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1s !== 1) errors.push(`${where}: needs exactly one <h1>, found ${h1s}`);
   if (/—/.test(`${title} ${desc}`)) errors.push(`${where}: title or description has an em dash`);
