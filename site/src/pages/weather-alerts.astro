@@ -5,6 +5,8 @@
 // page), who can sign up for WVU Alert, and Monongalia County Schools'
 // own closing notices (#727).
 import Base from '../layouts/Base.astro';
+import BigChoices from '../components/BigChoices.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -31,6 +33,14 @@ const plan = [{ url: 'https://www.mecca911.org/Documents/Emergency_Management/20
 <Base title="Get weather and emergency alerts in Morgantown and Mon County" description="Official ways to get weather warnings and emergency alerts in Morgantown and Monongalia County, WV: phone alerts, the National Weather Service, City of Morgantown alerts, WVU Alert, WV 511 road alerts, school closings and Mon Power outage texts.">
   <h1>Get weather and emergency alerts</h1>
   <p class="lede">These are the official places that send warnings for Mon County. Most are free. We do not send alerts ourselves.</p>
+  {/* Lead block (#199): the four alerts most people look for. */}
+  <BigChoices label="Alerts: start here" choices={[
+    { href: '#phone', label: 'Alerts on my phone', icon: 'phone' },
+    { href: '#weather', label: 'Weather warnings', icon: 'info' },
+    { href: '#schools', label: 'School closings', icon: 'calendar' },
+    { href: '#power', label: 'Power outage texts', icon: 'bulb' },
+  ]} />
+  <OnThisPage items={[['#city', 'City of Morgantown alerts'], ['#county', 'Monongalia County alerts'], ['#wvu', 'WVU students and staff'], ['#roads', 'Roads and closures']]} />
 
   <h2 id="phone">On your phone, with no sign-up</h2>
   <p><strong>Wireless Emergency Alerts</strong> are the loud alerts that pop up on cell phones for things like extreme weather. FEMA says they are free, do not count against your texting plan, and need no sign-up or personal information. To turn them on or off, look in your phone's notification settings. To find out if your phone can get them, ask your wireless company.</p>
