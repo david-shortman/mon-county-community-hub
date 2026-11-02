@@ -7,6 +7,7 @@
 import Base from '../../layouts/Base.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import SourceLine from '../../components/SourceLine.astro';
+import WhereYouAre from '../../components/WhereYouAre.astro';
 import { resource } from '../../lib/content.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: 'care', topic: 'health', label: 'After you apply for WIC', summary: 'The clinic visit, how fast WIC decides, keeping benefits, and asking for a fair hearing within 60 days' };
@@ -29,6 +30,12 @@ const ok = (r) => r && !r.hidden;
   <p class="lede">Your next step is a visit to the WIC clinic, called a certification appointment. Bring the person who is applying. Here is what happens there and after, in West Virginia WIC's own policies.</p>
   <p>WIC helps with healthy food and nutrition for pregnant women, new mothers, babies and children under 5. Who it is for, and how to reach the Mon County clinic, are on the card below. For more help around a new baby, see <a href={`${base}/pregnant-or-new-baby/`}>Pregnant or new baby</a>.</p>
   <p class="note">This page quotes the state WIC program's policies. WIC decides each case. It is information, not legal advice.</p>
+  <WhereYouAre label="Steps after you apply for WIC" steps={[
+    { id: 'visit', title: 'The clinic visit', when: "Bring proof of where you live, who you are and your income" },
+    { id: 'decision', title: 'The decision', when: "Within 10 or 20 calendar days of the application date" },
+    { id: 'keep', title: 'Keeping WIC', when: "Keep appointments and report changes" },
+    { id: 'hearing', title: 'If denied or taken off', when: "Ask for a hearing within 60 days" },
+  ]} />
   {ok(wic) && <ResourceCard r={wic} />}
 
   <h2 id="visit">1. The clinic visit</h2>
