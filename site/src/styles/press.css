@@ -318,4 +318,15 @@ html:root :is(a, button, summary, input):focus-visible { outline: 3px solid var(
 }
 @media print {
   html:root :is(.card, .door, .milepost)::before { display: none; }
+  /* Paper is always light. A device in dark mode would otherwise print dark
+     boxes with black text, and pale links and source lines on white paper.
+     These are the light inks from Base.astro, with white paper and cards. */
+  html:root {
+    --bg: #fff; --card: #fff; --fg: #1f1d19; --muted: #4a453b; --line: #d6cab3;
+    --accent: #24493d; --accent-bg: #e7ece4; --sand: #ece2cd; --water: #1c4a50;
+    --rust: #9a4b2c; --brick: #9a4b2c; --ridge: #1c4a50; color-scheme: light;
+  }
+  /* Buttons only work on a screen (Copy link, Print this, Share). Links styled
+     as buttons stay, since they carry the words. */
+  html:root main button { display: none !important; }
 }
