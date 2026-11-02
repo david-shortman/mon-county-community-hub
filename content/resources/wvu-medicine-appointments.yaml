@@ -1,0 +1,15 @@
+title: Make a WVU Medicine appointment
+slug: wvu-medicine-appointments
+org: wvu-medicine
+topics: [health]
+who_it_is_for: New and current WVU Medicine patients who want to make, change or cancel an appointment.
+what_to_do: In the Morgantown area, call 855-WVU-CARE (855-988-2273). You can also book on WVU Medicine's Book an Appointment page, which has links for new patients, current patients and finding a provider. If you have a MyWVUChart account, you can make, cancel or change appointments there, or contact your provider directly.
+contact:
+  phone: "855-988-2273"
+  url: https://wvumedicine.org/our-care/book-appointment/
+  url_label: Book an appointment
+sources:
+  - url: https://wvumedicine.org/our-care/book-appointment/
+    checked: 2026-11-02
+  - url: https://wvumedicine.org/about-us/contact-us/
+    checked: 2026-11-02
