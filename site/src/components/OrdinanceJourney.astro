@@ -1,0 +1,174 @@
+---
+// Follow one ordinance (#1443, part of #1440): how a city law gets passed, on
+// /meetings/how-to-read-an-agenda/. Follows docs/design/motion.md.
+// One real ordinance, followed across two real Morgantown City Council
+// agendas: "An Ordinance Providing for Release of an Easement and Acceptance
+// of a Modified Easement over Parcel 45.4 of Tax Map 15". First reading under
+// New Business on October 6, 2026; public hearing and second reading on the
+// consent agenda on October 20, 2026. The five agenda lines in the drawing are
+// copied, in order, from the October 20 agenda (the October 6 agenda has the
+// same order).
+// Process only (docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md):
+// the title is quoted exactly, nothing says whether the ordinance is good or
+// how anyone voted. The minutes are the record.
+// How it behaves:
+// - Still version (no script, reduced motion, motion turned off): a plain
+//   numbered list, each step with its own still drawing.
+// - The drawings are aria-hidden; each step's text says where the ordinance is.
+const { cite } = Astro.props;
+const ORD = 'An Ordinance Providing for Release of an Easement and Acceptance of a Modified Easement over Parcel 45.4 of Tax Map 15';
+// Rows of the drawn agenda, in agenda order. y is the row's top edge.
+const rows = ['Public hearings', 'Public portion', 'Consent agenda', 'New business', 'Adjournment'];
+const rowY = (i) => 62 + i * 26;
+const scene = (s) => `<svg class="ord-scene" data-s="${s}" viewBox="0 0 320 206" aria-hidden="true" focusable="false">
+  <g class="cal">
+    <path class="cal-line" d="M24 22H296"/>
+    <path class="cal-tick" d="M72 16v12M248 16v12"/>
+    <text class="tx" x="72" y="11" text-anchor="middle">Oct 6</text>
+    <text class="tx" x="248" y="11" text-anchor="middle">Oct 20</text>
+    <g class="e e-gap"><path class="gap" d="M86 22H234"/><text class="tx tgap" x="160" y="16" text-anchor="middle">14 days</text></g>
+    <g class="mark"><circle class="mk" cx="72" cy="22" r="6"/></g>
+  </g>
+  <g class="paper">
+    <rect class="pg" x="6" y="36" width="192" height="166" rx="2"/>
+    <text class="tb" x="16" y="53">Council agenda</text>
+    ${rows.map((r, i) => `<g class="row r${i}"><rect class="rw" x="10" y="${rowY(i)}" width="184" height="22" rx="2"/><text class="t" x="18" y="${rowY(i) + 15}">${r}</text></g>`).join('')}
+  </g>
+  <g class="e e-speak">
+    <path class="spk" d="M204 ${rowY(0) + 34}h108v26h-92l-8 7v-7h-8z"/>
+    <text class="tx tspk" x="211" y="${rowY(0) + 51}">Speak on this item</text>
+  </g>
+  <g class="e e-any">
+    <text class="tx" x="208" y="${rowY(1) + 52}">Public portion:</text>
+    <text class="tx" x="208" y="${rowY(1) + 64}">speak on any topic</text>
+  </g>
+  <g class="ord">
+    <path class="ptr" d="M194 11h10"/>
+    <rect class="oc" x="204" y="0" width="110" height="30" rx="2"/>
+    <path class="ocq" d="M204 0h10l-10 10z"/>
+    <text class="tb tsm" x="214" y="13">Easement</text>
+    <text class="tx" x="214" y="25">ordinance</text>
+    <text class="tx e e-r1" x="310" y="13" text-anchor="end">1st read</text>
+    <text class="tx e e-r2" x="310" y="13" text-anchor="end">2nd read</text>
+    <g class="e e-note"><text class="tx" x="204" y="44">First Reading</text><text class="tx" x="204" y="56">October 6, 2026</text></g>
+    <g class="e e-vote"><rect class="vt" x="204" y="38" width="110" height="22" rx="2"/><text class="tvt" x="259" y="53" text-anchor="middle">Final vote</text><text class="tx" x="204" y="74">No big changes</text><text class="tx" x="204" y="86">at this meeting</text></g>
+  </g>
+</svg>`;
+const steps = [
+  {
+    id: 'ord-1', title: 'First reading', when: 'October 6, 2026',
+    short: 'First reading, under New Business',
+    body: [`The ordinance is on the October 6 agenda under New Business, as "Consideration of APPROVAL of (First Reading) of ${ORD}." Council reads it by its title.`],
+  },
+  {
+    id: 'ord-2', title: 'At least a week passes', when: 'October 6 to 20',
+    short: 'At least a week passes',
+    body: ['State law says a city must read an ordinance at two or more meetings, at least a week apart. Council\'s next regular meeting is 14 days later, on October 20.'],
+  },
+  {
+    id: 'ord-3', title: 'Public hearing', when: 'October 20, 2026',
+    short: 'Public hearing: a chance to speak on it',
+    body: [
+      'On October 20 the same ordinance is listed under Public Hearings. This is a set time to speak about this one item before Council acts on it. Not every ordinance has a hearing.',
+      'Later on the same agenda, the Public Portion is time to speak on any topic.',
+    ],
+  },
+  {
+    id: 'ord-4', title: 'Second reading, on the consent agenda', when: 'October 20, 2026',
+    short: 'Second reading, on the consent agenda',
+    body: ['Further down the same agenda, the second reading sits on the consent agenda with a note: "(First Reading October 6, 2026)". Consent items pass together with one vote. If a member objects, an item is taken out and handled under New Business.'],
+  },
+  {
+    id: 'ord-5', title: 'The final vote', when: 'October 20, 2026',
+    short: 'The final vote',
+    body: [
+      'Here the second reading is the last one, so this vote is the vote to pass it. State law says an ordinance cannot be changed in a big way at the meeting where it is finally passed. The minutes, posted after Council approves them, are the official record of the vote.',
+    ],
+  },
+];
+const N = steps.length;
+---
+<section class="ord-x" id="ord-explainer" aria-labelledby="ord-h">
+  <h2 id="ord-h">Follow one ordinance through the agenda</h2>
+  <p>One ordinance can come up at more than one meeting, and in a different part of the agenda each time. Here is a real one from 2026, followed across two City Council agendas, so you can see when to show up.</p>
+  <p class="ord-tools"><a href="#ord-summary">Skip to the summary</a></p>
+  <p class="ord-key"><strong>About the drawing:</strong> the agenda lines are the real ones, in the same order as on the <a href={cite.oct20}>October 20, 2026 agenda</a>. The drawing leaves out the other lines and is not to scale.</p>
+
+  <ol class="ord-steps" aria-label="One ordinance, step by step">
+    {steps.map((st, i) => (
+      <li id={st.id} data-short={st.short}>
+        <p class="ord-when">{st.when}</p>
+        <h3>Step {i + 1} of {N}. {st.title}</h3>
+        <div class="ord-snap"><Fragment set:html={scene(i + 1)} /></div>
+        {st.body.map((t) => <p>{t}</p>)}
+      </li>
+    ))}
+  </ol>
+
+  <div class="ord-summary" id="ord-summary" tabindex="-1">
+    <h3>The path in short</h3>
+    <p>First reading under New Business. At least a week later, the next reading, often on the consent agenda, sometimes with a public hearing first. Some ordinances get a third reading. For example, the water line bond ordinance on the same October 20 agenda had its first reading on September 15, its second on October 6 under Unfinished Business, and its third on October 20.</p>
+    <p>To speak on an ordinance, look for it on the agenda for its public hearing or later reading. Agendas are posted the week before. This is how Morgantown City Council does it. Other boards, like the County Commission and the Board of Education, follow their own rules, so timing and order can differ.</p>
+  </div>
+</section>
+
+<style is:global>
+  /* ===== Follow one ordinance (#1443). Press tokens only; all scoped to #ord-explainer. ===== */
+  #ord-explainer .ord-tools { margin: 0 0 var(--s2); }
+  #ord-explainer .ord-tools a { display: inline-flex; align-items: center; min-height: 44px; }
+  #ord-explainer .ord-key { font-size: 0.95rem; color: var(--muted); }
+  #ord-explainer .ord-steps { list-style: none; margin: var(--s5) 0; padding: 0; }
+  #ord-explainer .ord-steps > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
+  #ord-explainer .ord-steps h3 { margin: 0 0 var(--s2); }
+  #ord-explainer .ord-steps p { margin: 0 0 var(--s2); }
+  #ord-explainer .ord-steps p:last-child { margin-bottom: 0; }
+  #ord-explainer .ord-when { font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  #ord-explainer .ord-snap { margin: var(--s2) 0 var(--s3); padding: var(--s2); background: var(--bg); border-radius: 2px; }
+  #ord-explainer .ord-summary h3 { margin: 0 0 var(--s2); }
+
+  /* Drawing parts */
+  #ord-explainer .ord-scene { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; overflow: visible; }
+  #ord-explainer .ord-scene text { font-size: 11px; fill: var(--fg); }
+  #ord-explainer .ord-scene .tx { font-size: 10px; fill: var(--muted); }
+  #ord-explainer .ord-scene .tb { font: 800 12px var(--kicker); fill: var(--fg); }
+  #ord-explainer .ord-scene .tsm { font-size: 11px; }
+  #ord-explainer .ord-scene .tgap { fill: var(--accent); font-weight: 700; }
+  #ord-explainer .ord-scene .tspk { fill: var(--fg); font-weight: 700; }
+  #ord-explainer .ord-scene .tvt { font-size: 11px; font-weight: 700; fill: var(--card); }
+  #ord-explainer .ord-scene .cal-line { stroke: var(--line); stroke-width: 2; }
+  #ord-explainer .ord-scene .cal-tick { stroke: var(--fg); stroke-width: 2; }
+  #ord-explainer .ord-scene .gap { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 3; }
+  #ord-explainer .ord-scene .mk { fill: var(--accent); stroke: var(--card); stroke-width: 2; }
+  #ord-explainer .ord-scene .pg { fill: var(--card); stroke: var(--fg); stroke-width: 1.5; }
+  #ord-explainer .ord-scene .rw { fill: var(--bg); stroke: var(--line); stroke-width: 1; }
+  #ord-explainer .ord-scene .oc { fill: var(--card); stroke: var(--accent); stroke-width: 2; }
+  #ord-explainer .ord-scene .ocq { fill: var(--rust); }
+  #ord-explainer .ord-scene .ptr { stroke: var(--accent); stroke-width: 2; }
+  #ord-explainer .ord-scene .spk { fill: var(--sand); stroke: var(--fg); stroke-width: 1; }
+  #ord-explainer .ord-scene .vt { fill: var(--accent); }
+
+  /* What each step shows. The card sits beside one agenda row per step. */
+  #ord-explainer .ord-scene .e { opacity: 0; }
+  #ord-explainer .ord-scene .ord { transform: translateY(140px); }
+  #ord-explainer .ord-scene[data-s="1"] .e-r1,
+  #ord-explainer .ord-scene[data-s="2"] .e-r1 { opacity: 1; }
+  #ord-explainer .ord-scene[data-s="1"] .r3 .rw,
+  #ord-explainer .ord-scene[data-s="3"] .r0 .rw,
+  #ord-explainer .ord-scene[data-s="4"] .r2 .rw,
+  #ord-explainer .ord-scene[data-s="5"] .r2 .rw { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 2; }
+  #ord-explainer .ord-scene[data-s="3"] .r1 .rw { stroke: var(--accent); stroke-dasharray: 3 3; }
+  /* Step 2: the agenda steps back and the date marker moves to the next meeting. */
+  #ord-explainer .ord-scene[data-s="2"] .paper { opacity: 0.4; }
+  #ord-explainer .ord-scene[data-s="2"] .ord { opacity: 0.4; }
+  #ord-explainer .ord-scene:not([data-s="1"]) .mark { transform: translateX(176px); }
+  #ord-explainer .ord-scene:not([data-s="1"]) .e-gap { opacity: 1; }
+  #ord-explainer .ord-scene[data-s="3"] .ord { transform: translateY(62px); }
+  #ord-explainer .ord-scene[data-s="3"] .e-speak,
+  #ord-explainer .ord-scene[data-s="3"] .e-any { opacity: 1; }
+  #ord-explainer .ord-scene[data-s="4"] .ord,
+  #ord-explainer .ord-scene[data-s="5"] .ord { transform: translateY(114px); }
+  #ord-explainer .ord-scene[data-s="4"] .e-r2,
+  #ord-explainer .ord-scene[data-s="4"] .e-note,
+  #ord-explainer .ord-scene[data-s="5"] .e-r2,
+  #ord-explainer .ord-scene[data-s="5"] .e-vote { opacity: 1; }
+</style>

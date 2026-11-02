@@ -4,6 +4,7 @@
 // agendas. Process only. Never says how any board should act.
 import Base from '../../layouts/Base.astro';
 import SourceLine from '../../components/SourceLine.astro';
+import OrdinanceJourney from '../../components/OrdinanceJourney.astro';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "How to read a meeting agenda", summary: "Consent agenda, first and second reading, public hearing, public comment and executive session, explained from state law and local agendas" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -14,6 +15,7 @@ const law = {
   ordinance: 'https://code.wvlegislature.gov/8-11-4/',
 };
 const cityOct20 = 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_10202026-3912';
+const cityOct6 = 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_10062026-3899';
 const cityFeb17 = 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_02172026-3659';
 const city2021 = 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_09072021-1736';
 const countyNov4 = 'https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380';
@@ -90,12 +92,20 @@ const parts = [
   </ul>
 
   {parts.map((p) => (
+    <Fragment>
     <section class="card" id={p.id} aria-labelledby={`${p.id}-h`}>
       <h2 id={`${p.id}-h`}>{p.term}</h2>
       {p.text?.map((t) => <p>{t}</p>)}
       {p.list && <ul>{p.list.map(([w, d]) => <li><strong>{w}:</strong>{' '}{d}</li>)}</ul>}
       <SourceLine sources={p.sources} about={p.term} />
     </section>
+    {p.id === 'hearing' && (
+      <Fragment>
+        <OrdinanceJourney cite={{ oct20: cityOct20 }} />
+        <SourceLine sources={[{ url: cityOct6, checked: '2026-11-02' }, { url: cityOct20, checked: '2026-11-02' }, { url: law.ordinance, checked: day }]} about="the ordinance followed above" />
+      </Fragment>
+    )}
+    </Fragment>
   ))}
 
   <h2>Next steps</h2>
