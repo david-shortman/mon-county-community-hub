@@ -142,6 +142,9 @@ Each door and lane page has one job, and its first phone screen leads with the b
 | Flood zone, `/flood-zone/` | "Is my home at risk of flood or slide?" | A step route, look up the address first |
 | Parking, `/parking/` | "Where do I park, and what do I do about this ticket?" | Big choices: where to park, pay a meter, I got a ticket, towed (#199) |
 | Pets, `/pets/` | "I found a dog, or lost mine" | Big choices: found a dog, lost my pet, bitten, adopt (#199) |
+| Noise, `/noise/` | "It's too loud, or I'm having a party" | Big choices: quiet hours, having a party, report noise, property problems (#1372) |
+| Car registration, `/car-registration/` | "My registration or sticker is due" | Big choices: renew, inspection sticker, lost plate or card, the DMV office (#1372) |
+| IDs and records, `/ids-and-records/` | "I need a certificate or an ID" | Big choices: a certificate, WV ID or REAL ID, a lost ID, getting married (#1372) |
 | Snow and ice, `/snow-and-ice/` | "Who clears my street, and is school or the bus running?" | Big choices: Morgantown street or sidewalk, state road, school delays, is my bus late (#199) |
 | Weather alerts, `/weather-alerts/` | "How do I get warned?" | Big choices: alerts on my phone, weather warnings, school closings, power outage texts (#199) |
 | Markets, `/markets/` | "What markets and sales are coming up?" | Big choices: coming up soon, every week, yard sales, sell at a market (#199) |
@@ -149,6 +152,8 @@ Each door and lane page has one job, and its first phone screen leads with the b
 | Arts and making, `/arts-and-making/` | "Where can I make art or learn a craft?" | Big choices: take a class, find space and tools, show and sell, grants (#199) |
 | Meet people, `/meet-people/` | "How do I meet people here?" | Big choices: library card, library programs, neighborhood associations, working from home (#199) |
 | About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
+
+Other pages that lead with a step route: `/start-a-business/`, `/start-a-group/`, `/permits/`, `/teen-drivers/` and `/identity-theft/`. Question paths: food help (`/help/food/`), What help is there (`/help/what-help/`) and Who serves me (`/who-serves-me/`). Checked against the built site on November 2, 2026.
 
 ### How new content slots in
 
