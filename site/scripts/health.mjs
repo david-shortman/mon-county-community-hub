@@ -15,7 +15,7 @@
 // Thresholds and who reacts to what are in docs/operations/README.md.
 import fs from 'node:fs';
 import path from 'node:path';
-import { loadCalendar, loadDir, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { loadCalendar, loadDir, loadSecondhand, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR, recheckDaysFor, recheckDue, isTopTier, oldestChecked } from '../src/lib/content.mjs';
 import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
 import { robotsCheck } from '../src/lib/robots.mjs';
 import { ADAPTERS } from '../src/lib/feeds/index.mjs';
@@ -291,6 +291,22 @@ function checkContent() {
     dueFacts.length ? `${dueFacts.length} of ${facts.length} facts are past their re-check window. Re-read each source: confirm (update checked) or correct it.`
       : `All ${facts.length} facts are within their re-check window.`,
     { details: dueFacts.map((f) => `${f._file}: checked ${f.checked}, re-check every ${f.recheck_days ?? 'about 183'} days, sources ${(f.sources ?? []).map((x) => x.url).join(', ')}`), owner: 'Duet', fixable: true });
+
+  // Re-checked on time (#1461): the share of listings whose oldest source was
+  // read within their re-check cadence (risk rubric: 90 days for high-stakes
+  // topics and calendar entries, otherwise the card's own rule). Cards do not
+  // use this cadence yet; it is the schedule we hold ourselves to.
+  const listed = [...loadDir('resources'), ...loadDir('orgs'), ...loadDir('boards'), ...loadSecondhand(), ...loadCalendar()];
+  const late = listed.filter((e) => recheckDue(e, today))
+    .map((e) => ({ e, c: oldestChecked((e.sources ?? []).map((x) => ({ ...x, checked: ymd(x.checked) }))) }))
+    .sort((a, b) => String(a.c).localeCompare(String(b.c)));
+  const onTime = listed.length - late.length;
+  const pct = listed.length ? Math.round((100 * onTime) / listed.length) : 100;
+  const topLate = late.filter(({ e }) => isTopTier(e)).length;
+  record('content-recheck-on-time', 'product', late.length ? 'warn' : 'ok',
+    late.length ? `${pct}% of ${listed.length} listings were re-checked on time. ${late.length} are past their re-check date (${topLate} high-stakes, due every 90 days). Re-read each one's sources, oldest first.`
+      : `All ${listed.length} listings were re-checked on time (high-stakes topics and calendar entries every 90 days).`,
+    { details: late.map(({ e, c }) => `${e._file}: oldest check ${c}, re-check every ${recheckDaysFor(e)} days`), owner: 'Duet', fixable: true });
 
   // Hidden items (#519): off the site until someone re-checks them.
   const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);
