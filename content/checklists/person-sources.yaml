@@ -6,8 +6,8 @@ id: person-sources
 title: Sources a person re-checks
 issue_title: Monthly checklist, sources a person re-checks
 intro: >-
-  Each source below blocks automated reads in its robots.txt, so no robot
-  reads it. Open each one in a browser and compare it with the files named.
+  Each source below blocks automated reads, in its robots.txt or by sending
+  robots to a block page, so no robot reads it. Open each one in a browser and compare it with the files named.
   If a fact changed, fix the file and its checked date in one PR (health,
   food and money facts wait for David). If nothing changed, update only the
   checked dates, or comment "no change" with the date. See
@@ -52,3 +52,15 @@ items:
     url: https://wvclboard.wv.gov/
     person: true
     when: month
+  - text: >-
+      Federal rules (eCFR) cited on the after-you-apply pages (SSI, Social
+      Security disability, housing voucher), the funeral rule and the report
+      a death pages. Check that each cited section still exists and still
+      says what the page says. Federal rules change rarely; a changed section
+      shows an amendment note at the top.
+    url: https://www.ecfr.gov/
+    how: >-
+      Find the pages with: grep -rn "ecfr.gov" content site/src. The site
+      sends automated reads to a block page, so open it in a browser.
+    person: true
+    when: quarter

@@ -17,6 +17,7 @@ import path from 'node:path';
 import YAML from 'yaml';
 import { scanTypedFacts, phoneDigits } from './check-typed-facts.mjs';
 import { LCP_GOAL_MS } from './lighthouse.mjs';
+import { loadUse, latestUse, useLine } from './check-use.mjs';
 
 const REPO = process.env.GITHUB_REPOSITORY || 'david-shortman/mon-county-community-hub';
 const SITE = 'https://everythingmorgantown.org';
@@ -298,7 +299,7 @@ async function gather() {
   if (fd) add({ lane: I, key: 'answer_pages', what: 'Findability questions with an answer page of ours', ours: fd.pages, shown: `${fd.pages} of ${fd.questions}`, better: 'up', note: `run ${fd.run}` });
   add({ lane: I, key: 'gaps', what: 'Open "Help wanted" gaps', ours: gaps(), shown: String(gaps()), note: 'shrinks as sources are found' });
   const r = await tryRun(I, 'reach', 'In-person listings outside Morgantown', reach);
-  if (r) add({ lane: I, key: 'reach', what: 'In-person listings in the rest of the county', ours: r.share, shown: `${r.share}% (${r.rest} of ${r.rest + r.morgantown})`, better: 'up', note: 'about 72% of residents live outside the city' });
+  if (r) add({ lane: I, key: 'reach', what: 'In-person listings in the rest of the county', ours: r.share, shown: `${r.share}% (${r.rest} of ${r.rest + r.morgantown})`, better: 'up', note: 'about 72% of residents live outside the city; by Census place since 2026-11-02 (#1412), by mailing town before, so the first move is the method' });
 
   // Presentation
   const b = await tryRun(P, 'bench', 'Source benchmark', benchmark);
@@ -351,7 +352,11 @@ async function gather() {
     add({ lane: O, key: 'in_search', what: 'Our answer pages showing up in search', ours: fd.inSearch, shown: `${fd.inSearch} of ${fd.pages}`, better: 'up' });
   }
   if (b) add({ lane: O, key: 'beats_sources', what: 'Urgent needs where our page beats every source', ours: b.beats, shown: `${b.beats} of ${b.needs}`, better: 'up', note: `meets the bar on ${b.bar}` });
-  add({ lane: O, key: 'visits', what: 'Visits and recognition', ours: null, shown: 'not measured', note: 'visit counts wait on a choice by David' });
+  // Level 2 use: page views David copies by hand from the visit counter (#1432).
+  let use = null;
+  try { use = useLine(latestUse(loadUse())); } catch { /* no file or bad YAML: check-content reports it */ }
+  if (use) add({ lane: O, key: 'visits', what: 'Page views, whole site (latest period copied)', ...use, better: 'up' });
+  else add({ lane: O, key: 'visits', what: 'Page views, whole site (latest period copied)', ours: null, shown: 'not entered yet', note: 'the visit counter has no public read; David copies monthly totals into content/use/visits.yaml (#1432)' });
   return details;
 }
 

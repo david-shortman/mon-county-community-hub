@@ -1,0 +1,644 @@
+# Which Census place each in-person listing's address is in (#1412).
+# Made by `python3 content/findability/reach.py --geocode` from the U.S. Census
+# Bureau's geocoder (https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress).
+# `place` is the city, town or census-designated place, or
+# "county, outside any town or named place". `checked` is the day of the lookup.
+# Fix a wrong match by hand and say why in `note`.
+source: https://geocoding.geo.census.gov/geocoder/geographies/onelineaddress
+addresses:
+  1 Fawley Lane, Morgantown, WV:
+    county: Monongalia County
+    place: Star City town
+    matched: 1 HAWLEY LN, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  1 Medical Center Drive, Morgantown, WV 26506:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1 MEDICAL CENTER DR, MORGANTOWN, WV, 26506
+    checked: '2026-11-02'
+  10 Scott Avenue, Morgantown, WV 26508:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 10 SCOTT AVE, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  1001 Mississippi Street, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1001 MISSISSIPPI ST, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  1029 University Avenue, Suite 101, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1029 UNIVERSITY AVE, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  106 Lockside Rd, Westover, WV 26501:
+    result: no match
+    checked: '2026-11-02'
+  107 High Street, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 107 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  113 Mathieson Street, Suite 100, Morgantown, WV 26501:
+    result: no match
+    checked: '2026-11-02'
+  116 Walnut Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 116 WALNUT ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  118 South High Street, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 118 S HIGH ST, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  121 Crosby Road, Morgantown, WV 26508:
+    county: Monongalia County
+    place: Cheat Lake CDP
+    matched: 121 CROSBY RD, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  123 Pleasant Street, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 123 PLEASANT ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  1235 Parkview Drive, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1235 PARKVIEW DR, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  128 Pleasant St, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 128 PLEASANT ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  130 Academy Drive, Dunbar, WV:
+    county: Kanawha County
+    place: county, outside any town or named place
+    matched: 130 ACADEMY DR, DUNBAR, WV, 25064
+    checked: '2026-11-02'
+  1311 Pineview Drive, Morgantown, WV 26505:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 1311 PINEVIEW DR, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  1429 Earl L Core Rd, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1429 EARL L CORE RD, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  1470 Earl L Core Road, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1470 EARL L CORE RD, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  1474 Four-H Camp Road, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 1474 4 H CAMP RD, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  1507 University Avenue, Morgantown, WV 26506:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1507 UNIVERSITY AVE, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  1525 Deckers Creek Blvd, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1525 DECKERS CREEK BLVD, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  153 W Main Street, Suite C, Clarksburg, WV:
+    county: Harrison County
+    place: Clarksburg city
+    matched: 153 W MAIN ST, CLARKSBURG, WV, 26301
+    checked: '2026-11-02'
+  156 Mylan Park Lane, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 156 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  1756 Mileground Rd, Suite D, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 1756 MILEGROUND RD, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  1837 Listravia Avenue, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1837 LISTRAVIA AVE, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  1847 Fitness Way, Morgantown, WV:
+    result: no match
+    checked: '2026-11-02'
+  1954 Hunter's Way, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1954 HUNTERS WAY, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  20 Scott Ave, Suite 201, Morgantown, WV 26508:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 20 SCOTT AVE, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  20 Scott Avenue, Suite 302, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 20 SCOTT AVE, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  2005 Grafton Road, Morgantown, WV 26508:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 2005 GRAFTON RD, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  201 Scott Ave, Suite B, Morgantown, WV 26508:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 201 SCOTT AVE, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  201 Scott Avenue, Morgantown, WV 26508:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 201 SCOTT AVE, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  203 Parsons Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 203 PARSONS ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  205 10th Street, Fairmont, WV:
+    county: Marion County
+    place: Fairmont city
+    matched: 205 10TH ST, FAIRMONT, WV, 26554
+    checked: '2026-11-02'
+  2130 Rail Street, Westover, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 2130 RAIL ST, WESTOVER, WV, 26501
+    checked: '2026-11-02'
+  214 High St, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 214 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  215 West Main Street, Clarksburg, WV 26301:
+    county: Harrison County
+    place: Clarksburg city
+    matched: 215 W MAIN ST, CLARKSBURG, WV, 26301
+    checked: '2026-11-02'
+  219 Walnut Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 219 WALNUT ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  243 High St, Courthouse Room 123, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 243 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  243 High St, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 243 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  243 High St, Room 123, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 243 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  243 High St, Room 202, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 243 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  243 High Street, Room 026, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 243 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  243 High Street, Room 335, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 243 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  252 Brewer Road, Morgantown, WV 26508:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 252 BREWER RD, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  255 Don Knotts Blvd, Morgantown, WV 26501:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 255 DON KNOTTS BLVD, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  265 Spruce Street, Suite 100, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 265 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  270 Mylan Park Lane, Morgantown, WV 26501:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 270 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  270 Mylan Park Lane, Suite 250, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 270 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  270 Mylan Park Lane, Suite 250, Morgantown, WV 26501:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 270 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  270 Mylan Park Ln, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 270 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  270 Mylan Park Ln, Morgantown, WV 26501:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 270 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  28 Commerce Drive, Westover, WV:
+    county: Monongalia County
+    place: Westover city
+    matched: 28 COMMERCE DR, WESTOVER, WV, 26501
+    checked: '2026-11-02'
+  2805 White Hall Blvd, White Hall, WV 26554:
+    result: no match
+    checked: '2026-11-02'
+  287 Eureka Dr, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 287 EUREKA DR, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  287 Eureka Dr., Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 287 EUREKA DR, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  287 Eureka Dr., Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 287 EUREKA DR, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  287 Eureka Drive, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 287 EUREKA DR, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  300 Spruce Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 300 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  301 Scott Avenue, Morgantown, WV 26508:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 301 SCOTT AVE, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  320 W. Pike St., Suite 330, Clarksburg, WV 26301:
+    county: Harrison County
+    place: Clarksburg city
+    matched: 320 W PIKE ST, CLARKSBURG, WV, 26301
+    checked: '2026-11-02'
+  327 High St, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 327 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  34 Olin St, Industrial Park, Monongalia County, WV:
+    result: no match
+    checked: '2026-11-02'
+  3414 Jakes Run Road, Rivesville, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 3414 JAKES RUN RD, RIVESVILLE, WV, 26588
+    checked: '2026-11-02'
+  3438 University Ave, Morgantown, WV:
+    county: Monongalia County
+    place: Star City town
+    matched: 3438 UNIVERSITY AVE, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  346 Chestnut Ridge Camp Road, Bruceton Mills, WV:
+    result: no match
+    checked: '2026-11-02'
+  350 Capitol Street, Charleston, WV 25301:
+    county: Kanawha County
+    place: Charleston city
+    matched: 350 CAPITOL ST, CHARLESTON, WV, 25301
+    checked: '2026-11-02'
+  351 Spruce Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 351 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  360 High St, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 360 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  370 Broadway Ave, Star City, WV 26505:
+    county: Monongalia County
+    place: Star City town
+    matched: 370 BROADWAY AVE, STAR CITY, WV, 26505
+    checked: '2026-11-02'
+  373 Spruce St, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 373 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  373 Spruce Street, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 373 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  373 Spruce Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 373 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  389 Spruce Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 389 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  389 Spruce Street, Room 10, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 389 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  40 Commerce Dr. Suite 200, Westover, WV 26501:
+    county: Monongalia County
+    place: Westover city
+    matched: 40 COMMERCE DR, WESTOVER, WV, 26501
+    checked: '2026-11-02'
+  40 Commerce Drive, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Westover city
+    matched: 40 COMMERCE DR, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  40 High St, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 40 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  400 Mylan Park Ln, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 400 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  409 Fairchance Road, Morgantown, WV:
+    county: Monongalia County
+    place: Cheat Lake CDP
+    matched: 409 N FAIRCHANCE RD, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  4120 Fairmont Road, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 4120 FAIRMONT RD, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  4120 Fairmont Road, Morgantown, WV 26501:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 4120 FAIRMONT RD, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  42 Veterans Memorial Lane, Grafton, WV:
+    result: no match
+    checked: '2026-11-02'
+  440 Spruce St, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 440 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  453 Van Voorhis Road, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 453 VAN VOORHIS RD, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  456 Spruce St., Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 456 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  47 Mountain Park Dr, Fairmont, WV 26554:
+    county: Marion County
+    place: Fairmont city
+    matched: 47 PARK DR, FAIRMONT, WV, 26554
+    checked: '2026-11-02'
+  500 Dupont Road, Westover, WV:
+    result: no match
+    checked: '2026-11-02'
+  500 Mylan Park Lane, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 500 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  5000 Green Bag Rd, Morgantown, WV:
+    result: no match
+    checked: '2026-11-02'
+  5000 Green Bag Road, Morgantown, WV:
+    result: no match
+    checked: '2026-11-02'
+  5000 Greenbag Road, Suite A5, Morgantown, WV:
+    result: no match
+    checked: '2026-11-02'
+  5000 Greenbag Road, Suite A5, Morgantown, WV 26501:
+    result: no match
+    checked: '2026-11-02'
+  5001 Mid Atlantic Dr, Morgantown, WV:
+    result: no match
+    checked: '2026-11-02'
+  537 Blue Horizon Drive, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 537 BLUE HORIZON DR, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  56 Smithtown School Rd, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 56 SMITHTOWN SCHOOL RD, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  5861 Mason Dixon Highway, Blacksville, WV 26521:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 5861 MASON DIXON HWY, BLACKSVILLE, WV, 26521
+    checked: '2026-11-02'
+  5977 Mason-Dixon Highway, Blacksville, WV:
+    county: Monongalia County
+    place: Blacksville town
+    matched: 5977 MASON DIXON HWY, BLACKSVILLE, WV, 26521
+    checked: '2026-11-02'
+  6059 Mason-Dixon Hwy, Blacksville, WV 26521:
+    county: Monongalia County
+    place: Blacksville town
+    matched: 6059 MASON DIXON HWY, BLACKSVILLE, WV, 26521
+    checked: '2026-11-02'
+  61 County Line Dr., Morgantown, WV:
+    result: no match
+    checked: '2026-11-02'
+  640 4th Avenue, Huntington, WV:
+    county: Cabell County
+    place: Huntington city
+    matched: 640 4TH AVE, HUNTINGTON, WV, 25701
+    checked: '2026-11-02'
+  6504 Mall Rd, Morgantown, WV:
+    result: no match
+    checked: '2026-11-02'
+  6540 Mall Road, Morgantown, WV 26501:
+    result: no match
+    checked: '2026-11-02'
+  691 Fairmont Road, Morgantown, WV 26501:
+    county: Monongalia County
+    place: Westover city
+    matched: 691 FAIRMONT RD, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  705 East Brockway Ave, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 705 E BROCKWAY AVE, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  7093 Mall Rd, Westover, WV:
+    county: Monongalia County
+    place: Westover city
+    matched: 7093 MALL RD, WESTOVER, WV, 26501
+    checked: '2026-11-02'
+  '7100 Willie G Ave, #104, Morgantown, WV':
+    county: Monongalia County
+    place: Westover city
+    matched: 7100 WILLIE G, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  727 Fairmont Road, Morgantown, WV 26501:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 727 FAIRMONT RD, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  75 High Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 75 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  75 High Street, Suite 12, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 75 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  75 High Street, Suite 16, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 75 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  75 High Street, Suite 25, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 75 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  759 Fairmont Rd, Westover, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 759 FAIRMONT RD, WESTOVER, WV, 26501
+    checked: '2026-11-02'
+  79 Buckeye Road, Core, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 79 BUCKEYE RD, CORE, WV, 26541
+    checked: '2026-11-02'
+  799 East Brockway Ave, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 799 E BROCKWAY AVE, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  799 East Brockway Avenue, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 799 E BROCKWAY AVE, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  930 Chestnut Ridge Road, Morgantown, WV 26506:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 930 CHESTNUT RIDGE RD, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  959 Hartman Run Road, Morgantown, WV 26505:
+    result: no match
+    checked: '2026-11-02'
+  Agricultural Sciences Building, Room 1309B, Morgantown, WV 26506:
+    result: no match
+    checked: '2026-11-02'
+  Arnettsville Public Library, 4120 Fairmont Road, Morgantown, WV 26501:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 4120 FAIRMONT RD, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  Clinton District Public Library, 2005 Grafton Road, Morgantown, WV 26508:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 2005 GRAFTON RD, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  Hazel Ruby McQuain Park, 185 Garrett St, Morgantown, WV 26501:
+    result: no match
+    checked: '2026-11-02'
+  Hope Café, 20 Scott Avenue, Morgantown, WV:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 20 SCOTT AVE, MORGANTOWN, WV, 26508
+    checked: '2026-11-02'
+  Madigan Avenue, Morgantown, WV:
+    result: no match
+    checked: '2026-11-02'
+  Monongalia Arts Center, 107 High Street, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 107 HIGH ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  Monongalia County Center, 270 Mylan Park Ln, Morgantown, WV 26501:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 270 MYLAN PARK LN, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
+  Morgantown Market Place Pavilion, 400 Spruce Street, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 400 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  Morgantown Public Library, 373 Spruce Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 373 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  Morgantown Public Library, Meeting Room A, 373 Spruce Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 373 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  Morgantown Public Library, Meeting Room B, 373 Spruce Street, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 373 SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  Mountaineer Mall, 5000 Greenbag Road, Suite 10, Morgantown, WV 26501:
+    result: no match
+    checked: '2026-11-02'
+  Panera Bread, 357 Patteson Drive, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 357 PATTESON DR, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  Squibb Wilson Blvd., Fairmont, WV:
+    result: no match
+    checked: '2026-11-02'
+  St. John University Parish, 1481 University Ave., Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1481 UNIVERSITY AVE, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  The Encore, 720 Powell Avenue, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 720 POWELL AVE, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'
+  Trinity Episcopal Church, corner of Willey and Spruce Streets, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: WILLEY ST & SPRUCE ST, MORGANTOWN, WV, 26505
+    checked: '2026-11-02'

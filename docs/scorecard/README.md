@@ -35,6 +35,7 @@ GitHub reads use the `gh` command on a hand run. Add `--no-github` to skip them.
 | Infrastructure | Health failures this week, live feeds | Health issues opened in the last 7 days, `/api/v1/feed-health.json` on the live site |
 | Infrastructure | Page files added this week | git history of `site/src/pages/` |
 | Outcomes | Findability score, our pages in search, needs where we beat every source | The latest findability run and source benchmark |
+| Outcomes | Page views, whole site (#1432) | The newest month in `content/use/visits.yaml`, copied by hand from the visit counter (no script may read it) |
 
 "Today's sources" means the other sources in the latest source benchmark (the county resource guide PDF, the city page and official pages), where a number can be compared. A number that could not be read says "not read", never zero.
 
