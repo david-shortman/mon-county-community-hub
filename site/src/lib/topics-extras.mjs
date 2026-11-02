@@ -53,3 +53,13 @@ export function recentPages(logDir, routes, ymd, { days = 7, n = 6 } = {}) {
   }
   return { count: out.size, pages: [...out].slice(0, n).map(([route, date]) => ({ route, date })) };
 }
+
+// Life areas map (#1040): docs/research/life-areas.yaml, beside the coverage
+// map. `exists(route)` says whether a page is built; a tile counts only those.
+export const LIFE_AREAS_FILE = path.join(path.dirname(new URL(import.meta.url).pathname), '../../../docs/research/life-areas.yaml');
+export function lifeAreaTiles(doc, exists) {
+  return (doc?.areas ?? []).map((a) => {
+    const pages = (a.pages ?? []).filter(exists);
+    return { name: a.name, href: pages[0] ?? null, count: pages.length, missing: (a.pages ?? []).filter((r) => !exists(r)), notYet: (a.not_yet ?? []).map((g) => g.text) };
+  }).filter((t) => t.count > 0);
+}
