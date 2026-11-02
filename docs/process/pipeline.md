@@ -2,7 +2,7 @@
 
 How an idea becomes something residents use, and how we find out if it helped.
 
-**Status: proposal.** This page was drafted by the process designer session on 2026-10-28. It changes how agents work, so only David can adopt it. Until he merges it, [`docs/COORDINATION.md`](../COORDINATION.md) and the [charter](../CHARTER.md) are the rules. If this page and those disagree, they win.
+**Status: adopted by David, 2026-11-02 (#96, #1410).** Drafted by the process designer session on 2026-10-28. [`docs/COORDINATION.md`](../COORDINATION.md) and the [charter](../CHARTER.md) still win if this page and those disagree.
 
 ## Part 1: Diagnosis of the pipeline today
 
@@ -84,7 +84,7 @@ People 4 | Amplifies 5 | Evidence 3 | Effort 4 | Risk 3
 Why: one or two sentences.
 ```
 
-Each factor is 1 to 5, and higher is always better:
+Each factor is 1 to 5, and higher is always better. This 1 to 5 formula is the project's standard score (David, 2026-11-02):
 
 | Factor | 1 | 3 | 5 |
 |---|---|---|---|
@@ -115,14 +115,14 @@ Before Duet adds `up-next`, the issue must answer five questions. The existing T
 4. **Which rubrics apply** (see the review gate below).
 5. **Which local groups it points to.**
 
-A spec that is missing any part stays `for:code` without `up-next`. Only one issue at a time may carry `up-next` per builder, which also limits double builds (see Build).
+A spec that is missing any part stays `for:code` without `up-next`. How many issues may carry `up-next` at once is set in one place, [`docs/operations/budget.md`](../operations/budget.md), and changes with the pace there.
 
 ### 4. Build
 
 The builder (the 6:41 AM session or the `claude.yml` Action):
 
 - **Claims with a comment, then re-checks.** Add `in-progress`, post a claim comment, wait a few seconds, then reread the issue. If an earlier claim comment from another run exists, stop. The earliest claim comment wins. This turns the label race into a rule anyone can check.
-- **Claims expire after 24 hours with no linked PR.** Anyone may remove a stale `in-progress` with a comment saying so.
+- **Claims expire after 3 days with no linked PR** (David, 2026-11-02), matching the Health check's 3-day flag on quiet `in-progress` issues. Anyone may then remove the stale `in-progress` with a comment saying so.
 - **Work in progress limit:** at most one open build PR per builder, and at most three open self-merge PRs total. Finish or close before starting more.
 - **Runs the local checks** (`npm ci && npm run check-content && npm run build`) before opening the PR.
 - **Adds a build log entry in the PR** as a new file (see Ship), including the metric and check date from the spec.
@@ -254,7 +254,11 @@ The retro itself is a log entry and can be self-merged. Any process change it pr
 
 Existing: `idea`, `for:code`, `for:duet`, `for:david`, `up-next`, `in-progress`, `blocked`.
 
-New, if adopted: `type:process` (a change to how we work; always `for:david`).
+Also: `type:process` (a change to how we work; always `for:david`).
+
+## Later: model and product quality thresholds
+
+Separate quality bars for the model and for the product (#96, item 6) wait until a tool gives residents answers that a person did not write. Until then, every resident-facing answer is written, sourced and reviewed as a page.
 
 ## Decisions so far
 
