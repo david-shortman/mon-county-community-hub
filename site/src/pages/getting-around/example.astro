@@ -4,6 +4,7 @@
 // made up; every fact is read from a resource record in content/resources/.
 import Base from '../../layouts/Base.astro';
 import { scene } from '../../lib/first-week-scene.mjs';
+import MotionSwitch from '../../components/MotionSwitch.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import { resource, telHref } from '../../lib/content.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
@@ -22,7 +23,15 @@ const ok = (r) => r && !r.hidden;
   <section class="wk" id="wk-explainer" aria-labelledby="wk-h">
   <h2 id="wk-h">The week, step by step</h2>
   <p class="wk-key"><strong>About the drawing:</strong> it is a sketch, not a map, and not to scale. Home is an example. The bus stops and routes are real.</p>
-  <ol class="wk-cards" aria-label="Steps in the example">
+  <MotionSwitch skip="#wk-after" skipText="Skip past the steps" />
+  <figure class="wk-stage" aria-hidden="true"><Fragment set:html={scene(1)} /></figure>
+  <div class="wk-nav" data-card-nav hidden>
+    <button type="button" class="btn wk-btn" data-back>Back</button>
+    <p class="wk-label" data-card-label>Step 1 of 5</p>
+    <button type="button" class="btn wk-btn" data-next>Next</button>
+  </div>
+  <p class="sr-only" aria-live="polite" data-wk-say></p>
+  <ol class="wk-cards" data-cards aria-label="Steps in the example">
   {ok(fares) && (
     <li id="pay">
       <p class="wk-when">Day 1</p>
@@ -76,11 +85,41 @@ const ok = (r) => r && !r.hidden;
     </li>
   </ol>
   </section>
+  <span id="wk-after" tabindex="-1"></span>
 
   <p>Rather start on your own? Everything above is on <a href={`${base}/getting-around/`}>Getting around without a car</a>.</p>
 
   <p class="meta">This example is made up. It is not a real person or a real case. Sources checked October 30, 2026. Bus times and fares change, so check Mountain Line before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
+
+<script>
+  // Swipe cards (#1442) from the shared kit (#1441). With script the steps become a
+  // row of cards with Back and Next, and one drawing above them follows the card in
+  // view. The bus moves along each trip only when motion is allowed.
+  import { swipeCards, motion, bindMotionSwitch } from '../../lib/motion-client.mjs';
+  const sec = document.getElementById('wk-explainer');
+  const stage = sec?.querySelector('.wk-stage .wk-scene');
+  const label = sec?.querySelector('[data-card-label]');
+  const say = sec?.querySelector('[data-wk-say]');
+  if (sec && stage && label) {
+    sec.classList.add('is-cards');
+    const m = motion();
+    bindMotionSwitch(sec, m);
+    m.onChange((on) => sec.classList.toggle('is-live', on));
+    swipeCards(sec, { motion: m });
+    const show = () => { const n = /Step (\d+)/.exec(label.textContent ?? ''); if (n) stage.setAttribute('data-s', n[1]); };
+    new MutationObserver(show).observe(label, { childList: true, characterData: true, subtree: true });
+    show();
+    // Say the new step only after Back or Next, never while swiping.
+    sec.querySelectorAll('[data-back], [data-next]').forEach((b) => b.addEventListener('click', () => {
+      setTimeout(() => {
+        const n = Number(/Step (\d+)/.exec(label.textContent ?? '')?.[1] ?? 0);
+        const h = sec.querySelectorAll('.wk-cards > li h3')[n - 1]?.textContent ?? '';
+        if (say) say.textContent = h || (label.textContent ?? '');
+      }, 700);
+    }));
+  }
+</script>
 
 <style>
   .example-tag { border-left: 4px solid var(--accent); padding: 0.5rem 0.75rem; background: var(--accent-bg); color: var(--fg); }
@@ -93,30 +132,50 @@ const ok = (r) => r && !r.hidden;
   .wk-cards p { margin: 0 0 var(--s2); }
   .wk-when { font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
   .wk-snap { margin: var(--s2) 0 var(--s3); padding: var(--s2); background: var(--bg); border-radius: 2px; }
-  .wk-cards :global(.wk-scene) { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; overflow: visible; }
-  .wk-cards :global(.wk-scene text) { font-size: 10px; fill: var(--muted); }
-  .wk-cards :global(.wk-scene .tb) { font: 800 11px var(--kicker); fill: var(--fg); }
-  .wk-cards :global(.wk-scene .tc) { fill: var(--fg); font-weight: 700; }
-  .wk-cards :global(.wk-scene .route) { fill: none; stroke: var(--line); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
-  .wk-cards :global(.wk-scene .road) { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 2 4; }
-  .wk-cards :global(.wk-scene .trip) { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-  .wk-cards :global(.wk-scene .trip2) { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 2 5; stroke-linecap: round; }
-  .wk-cards :global(.wk-scene .trip3) { fill: none; stroke: var(--water); stroke-width: 3; stroke-dasharray: 10 5; }
-  .wk-cards :global(.wk-scene .arrh3) { fill: var(--water); }
-  .wk-cards :global(.wk-scene .stop) { fill: var(--card); stroke: var(--fg); stroke-width: 2; }
-  .wk-cards :global(.wk-scene .dn) { fill: var(--card); stroke: var(--fg); stroke-width: 1.5; }
-  .wk-cards :global(.wk-scene .home) { fill: var(--rust); stroke: var(--card); stroke-width: 2; }
-  .wk-cards :global(.wk-scene .chip) { fill: var(--sand); stroke: var(--fg); stroke-width: 1; }
-  .wk-cards :global(.wk-scene .tag) { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 1.5; }
-  .wk-cards :global(.wk-scene .bs) { fill: var(--accent); }
-  .wk-cards :global(.wk-scene .bs2) { fill: var(--water); }
-  .wk-cards :global(.wk-scene .e) { opacity: 0; }
-  .wk-cards :global(.wk-scene .bus-doc) { transform: translate(250px, 46px); }
-  .wk-cards :global(.wk-scene .bus-air) { transform: translate(286px, 176px); }
-  .wk-cards :global(.wk-scene[data-s="1"] .e-pay),
-  .wk-cards :global(.wk-scene[data-s="2"] .e-fare),
-  .wk-cards :global(.wk-scene[data-s="3"] :is(.e-trip-doc, .e-bus-doc)),
-  .wk-cards :global(.wk-scene[data-s="4"] :is(.e-trip-doc, .e-trip-air, .e-bus-air)),
-  .wk-cards :global(.wk-scene[data-s="5"] :is(.e-trip-doc, .e-trip-air, .e-lbl-doc, .e-lbl-air)) { opacity: 1; }
-  .wk-cards :global(.wk-scene[data-s="4"] .e-trip-doc) { opacity: 0.45; }
+  #wk-explainer :global(.wk-scene) { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; overflow: visible; }
+  #wk-explainer :global(.wk-scene text) { font-size: 10px; fill: var(--muted); }
+  #wk-explainer :global(.wk-scene .tb) { font: 800 11px var(--kicker); fill: var(--fg); }
+  #wk-explainer :global(.wk-scene .tc) { fill: var(--fg); font-weight: 700; }
+  #wk-explainer :global(.wk-scene .route) { fill: none; stroke: var(--line); stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  #wk-explainer :global(.wk-scene .road) { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 2 4; }
+  #wk-explainer :global(.wk-scene .trip) { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  #wk-explainer :global(.wk-scene .trip2) { fill: none; stroke: var(--accent); stroke-width: 3; stroke-dasharray: 2 5; stroke-linecap: round; }
+  #wk-explainer :global(.wk-scene .trip3) { fill: none; stroke: var(--water); stroke-width: 3; stroke-dasharray: 10 5; }
+  #wk-explainer :global(.wk-scene .arrh3) { fill: var(--water); }
+  #wk-explainer :global(.wk-scene .stop) { fill: var(--card); stroke: var(--fg); stroke-width: 2; }
+  #wk-explainer :global(.wk-scene .dn) { fill: var(--card); stroke: var(--fg); stroke-width: 1.5; }
+  #wk-explainer :global(.wk-scene .home) { fill: var(--rust); stroke: var(--card); stroke-width: 2; }
+  #wk-explainer :global(.wk-scene .chip) { fill: var(--sand); stroke: var(--fg); stroke-width: 1; }
+  #wk-explainer :global(.wk-scene .tag) { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 1.5; }
+  #wk-explainer :global(.wk-scene .bs) { fill: var(--accent); }
+  #wk-explainer :global(.wk-scene .bs2) { fill: var(--water); }
+  #wk-explainer :global(.wk-scene .e) { opacity: 0; }
+  #wk-explainer :global(.wk-scene .bus-doc) { transform: translate(250px, 46px); }
+  #wk-explainer :global(.wk-scene .bus-air) { transform: translate(286px, 176px); }
+  #wk-explainer :global(.wk-scene[data-s="1"] .e-pay),
+  #wk-explainer :global(.wk-scene[data-s="2"] .e-fare),
+  #wk-explainer :global(.wk-scene[data-s="3"] :is(.e-trip-doc, .e-bus-doc)),
+  #wk-explainer :global(.wk-scene[data-s="4"] :is(.e-trip-doc, .e-trip-air, .e-bus-air)),
+  #wk-explainer :global(.wk-scene[data-s="5"] :is(.e-trip-doc, .e-trip-air, .e-lbl-doc, .e-lbl-air)) { opacity: 1; }
+  #wk-explainer :global(.wk-scene[data-s="4"] .e-trip-doc) { opacity: 0.45; }
+  /* Cards mode (script only): a row of scroll-snap cards with a peek of the next one,
+     and one drawing above them. Without script the list above stays as it is. */
+  .wk-stage { display: none; margin: 0 0 var(--s3); padding: var(--s2); background: var(--bg); border-top: 2px solid var(--fg); }
+  .is-cards .wk-stage { display: block; }
+  .is-cards .wk-snap { display: none; }
+  .is-cards .wk-cards { display: flex; gap: var(--s3); overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding-bottom: var(--s2); margin-top: var(--s3); }
+  .is-cards .wk-cards > li { flex: 0 0 86%; scroll-snap-align: start; margin: 0; }
+  .wk-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }
+  .wk-nav[hidden] { display: none; }
+  .wk-label { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .wk-btn { min-width: 6rem; min-height: 44px; justify-content: center; }
+  .wk-btn[aria-disabled="true"] { opacity: 0.45; cursor: default; }
+  /* The bus rides each trip, only with motion on. */
+  @media (prefers-reduced-motion: no-preference) {
+    .is-live :global(.wk-stage .e) { transition: opacity 0.5s ease; }
+    .is-live :global(.wk-stage .wk-scene[data-s="3"] .bus-doc) { animation: wk-doc 1.6s ease-in-out both; }
+    .is-live :global(.wk-stage .wk-scene[data-s="4"] .bus-air) { animation: wk-air 1.8s ease-in-out both; }
+  }
+  @keyframes wk-doc { 0% { transform: translate(92px, 122px); } 25% { transform: translate(118px, 96px); } 60% { transform: translate(180px, 70px); } 100% { transform: translate(250px, 46px); } }
+  @keyframes wk-air { 0% { transform: translate(92px, 122px); } 25% { transform: translate(40px, 150px); } 40% { transform: translate(40px, 176px); } 100% { transform: translate(286px, 176px); } }
 </style>
