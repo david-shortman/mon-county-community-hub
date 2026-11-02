@@ -23,6 +23,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2>Water and sewer</h2>
   <p>The Morgantown Utility Board (MUB) serves Morgantown, and Star City and Granville send residents to MUB too. If MUB does not serve the address, ask your landlord or the seller who does.</p>
   {r('mub-start-service') && <ResourceCard r={r('mub-start-service')} showCost />}
+  <p>Clay Battelle Public Service District is a county water district with its office in Core, in western Mon County:</p>
+  {r('cbpsd-start-service') && <ResourceCard r={r('cbpsd-start-service')} />}
 
   <h2>Gas</h2>
   {r('hope-gas-start-service') && <ResourceCard r={r('hope-gas-start-service')} showCost />}
