@@ -2,7 +2,7 @@ title: Adopt a dog or cat from the county shelter
 slug: mccac-adopt-a-dog-or-cat
 org: monongalia-county-canine-adoption-center
 topics: [pets]
-who_it_is_for: People who want to adopt a dog or cat from the Monongalia County Canine Adoption Center. The shelter says adopters must have all current pets spayed or neutered and up to date on rabies shots, show landlord approval if they rent, pass an adoption application, and have no history of animal cruelty or neglect. People under 18 need a parent or legal guardian. The shelter does not let you adopt an animal as a gift for someone else.
+who_it_is_for: People who want to adopt a dog or cat from the Monongalia County Canine Adoption Center. People under 18 need a parent or legal guardian.
 hours: Monday to Friday, by appointment only. Closed weekends and major holidays.
 get_in: appointment
 what_to_do: Look at the pets on the shelter's website, then call to set up a visit.
@@ -11,6 +11,9 @@ steps:
   - Call 304-291-7267 and choose option 2 to make an appointment. The center is open to the public by appointment only.
   - Fill out and pass the adoption application.
   - Pay the adoption fee. The shelter says all adoption fees are non-refundable.
+notes:
+  - The shelter says adopters must have all current pets spayed or neutered and up to date on rabies shots, show landlord approval if they rent, pass an adoption application, and have no history of animal cruelty or neglect.
+  - The shelter does not let you adopt an animal as a gift for someone else.
 contact:
   phone: "304-291-7267"
   url: https://monongaliawv.animalservices.website/shelterpronet/home.spn
