@@ -1,0 +1,9 @@
+slug: county-alerts
+text: "We did not find a public page where residents can sign up for county emergency alerts. The county's 2026 emergency plan says public information may go out through the Emergency Alert System, a mass notification system, social media, local TV and radio, and NOAA Weather Radio, but it does not say how to sign up. The alerts above still reach you."
+quote: >-
+  "Emergency public information (EPI) may be provided through a. Emergency Alert System (EAS) b. Message boards c. Mass notification system d. Social media e. Local television stations f. Local radio stations g. NOAA Radio h. Press releases"
+sources:
+  - url: https://www.mecca911.org/Documents/Emergency_Management/2026%20Update%20Monongalia%20County%20EOP.pdf
+    name: Monongalia County Emergency Operations Plan, 2026 update
+    checked: 2026-11-02
+recheck_days: 90   # look again for a county sign-up page

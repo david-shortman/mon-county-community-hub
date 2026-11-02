@@ -10,6 +10,8 @@ import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
 import Route from '../components/Route.astro';
 import Milepost from '../components/Milepost.astro';
+import Fact from '../components/Fact.astro';
+import { factsFor } from '../lib/facts.mjs';
 import { loadDir, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Do I need a building permit?", summary: "City or county: who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Mon County" };
@@ -17,19 +19,20 @@ const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const exists = (p) => Object.keys(import.meta.glob('./**/*.astro')).some((k) => k === `./${p}.astro` || k === `./${p}/index.astro`);
+// Step 1 and the town paragraphs in step 3 are fact records in
+// content/facts/permits/ (#122), each with the source's words and its own
+// checked date. The lists in steps 2, 4 and 5 are still typed here.
+const fact = factsFor('permits');
 const checked = '2026-10-30';
 const city = [{ url: 'https://www.morgantownwv.gov/704/Permitting-Licensing-Registration', checked }];
 const cityCode = [{ url: 'https://www.morgantownwv.gov/167/Code-Enforcement', checked }];
-const starCity = [{ url: 'http://www.starcitywv.com/building-permits/', checked }];
-const westover = [{ url: 'https://www.westoverwv.org/code-enforcement', checked }];
-const granville = [{ url: 'https://townofgranvillewv.gov/', checked }];
 const county = [{ url: 'https://www.monongaliacounty.gov/moncpc/about/building_enforcement.php', checked }];
 const countyFaq = [{ url: 'https://www.monongaliacounty.gov/moncpc/frequently_asked_questions.php', checked }];
 const septic = [{ url: 'https://www.monchd.org/services/septic-and-wells', checked }];
 const assessor = [{ url: 'https://assessor.org/DocumentCenter/View/16109/Important-Information-for-Monongalia-Taxpayers-TY-2026-PDF', checked, name: 'Monongalia County Assessor, Important Information for Monongalia Taxpayers, TY 2026 (PDF)' }];
 const zoningViewer = 'https://morgantownwv.maps.arcgis.com/apps/instant/sidebar/index.html?appid=7e73a491ac63495b846f4ada7358f24f';
 const countyGis = 'https://experience.arcgis.com/experience/ebaf60bd87bd475ea7b4710a575eb3eb/page/Page/';
-const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '304-296-6860', granville: '304-599-5080', health: '304-598-5131' };
+const phones = { cityCode: '304-284-7401', health: '304-598-5131' };
 ---
 <Base title="Do I need a building permit? Morgantown and Mon County, WV" description="Who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Mon County, how to apply, and the county forms.">
   <h1>Do I need a building permit?</h1>
@@ -37,8 +40,7 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
 
   <Route label="Steps to find out who issues your permit">
   <Milepost n={1} title="Find out if you are inside a town" id="where" open>
-  <p>Your mailing address can say "Morgantown" even when the home is outside city limits. To check, the City of Morgantown says to look up the address on its <strong>City Zoning Viewer</strong> map.</p>
-  <SourceLine sources={city} about="checking Morgantown city limits" />
+  <Fact f={fact('city-limits')} about="checking Morgantown city limits" />
   <div class="actions">
     <a class="btn" href={zoningViewer}><Icon name="open" /><span>Open the City Zoning Viewer</span></a>
   </div>
@@ -65,17 +67,13 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
 
   <Milepost n={3} title="In Star City, Westover, Granville or Blacksville" id="towns">
   <h3>Star City</h3>
-  <p>Download the application from the town's Building Permits page, print it, fill it out and return it to the town office at 370 Broadway Ave. Fees must be paid in full before the permit is issued. Allow 72 hours. Do not start work until you have the approved permit. The town calls you when it is ready to pick up. Questions go to the Code Enforcement Officer at <a href={telHref(phones.starCity)}>{phones.starCity}</a>, Monday to Friday, 8 a.m. to 4:30 p.m.</p>
-  <SourceLine sources={starCity} about="Star City building permits" />
+  <Fact f={fact('star-city')} about="Star City building permits" />
   <h3>Westover</h3>
-  <p>Westover's Code Enforcement page has packets for its code requirements. Each packet lists what you need, then the forms to turn in. City of Westover, 500 Dupont Road, <a href={telHref(phones.westover)}>{phones.westover}</a>.</p>
-  <SourceLine sources={westover} about="Westover code enforcement" />
+  <Fact f={fact('westover')} about="Westover code enforcement" />
   <h3>Granville</h3>
-  <p>We did not find a permit page on Granville's website. Call the Town of Granville, 1245 Main Street, at <a href={telHref(phones.granville)}>{phones.granville}</a> and ask.</p>
-  <SourceLine sources={granville} about="the Town of Granville" />
+  <Fact f={fact('granville')} about="the Town of Granville" />
   <h3>Blacksville</h3>
-  <p>The county says Blacksville does not have a website. Ask the town office.</p>
-  <SourceLine sources={county} about="Blacksville" />
+  <Fact f={fact('blacksville')} about="Blacksville" />
 
   </Milepost>
 
@@ -111,5 +109,5 @@ const phones = { cityCode: '304-284-7401', starCity: '304-599-3550', westover: '
 
   <p>Hiring someone to do the work? See <a href={`${base}/contractor-license/`}>contractor licenses and how to check one</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Rules and fees change, so ask the office before you start work. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Each step shows when we last checked its source. Rules and fees change, so ask the office before you start work. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

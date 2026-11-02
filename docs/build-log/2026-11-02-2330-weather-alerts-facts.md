@@ -1,0 +1,7 @@
+# 2026-11-02: Weather alerts page reads from fact records (#122)
+
+- **Considered:** the next high-traffic pages that still type facts and checked dates into the template, after the recycling page (#1349, #1343). `/weather-alerts/` (a Living here page, not high stakes) typed nine source groups under one "checked October 30" date.
+- **Chose:** move each section that a script may read into `content/facts/alerts/`, with the source's exact words (`quote`) and a re-check interval by how fast it changes (90 days for "no county sign-up page yet", 180 for sign-ups and stations, 365 for program descriptions). Every source was re-read on November 2 through the shared robots.txt check.
+- **Shipped:** 7 fact records: phone alerts, the Pittsburgh weather office, NOAA Weather Radio, city Notify Me, county alerts, WVU Alert and WV 511. School closings and power outage texts stay typed: the state's closings page asks robots not to read it, and the county schools and FirstEnergy pages load their text by script, so a person re-reads them.
+- **Fixed:** the Wireless Emergency Alerts text said FEMA's page mentions "no personal information" and phone notification settings. It does not; the text now follows the page (no app or sign-up, does not track your location). Logged on Corrections.
+- **Also found:** the NOAA table lists a second station for the county, KWN36 at Terra Alta (162.500 MHz). Not added; the page names the Morgantown station only.

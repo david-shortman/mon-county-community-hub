@@ -1,0 +1,10 @@
+slug: weather-office
+text: "The **National Weather Service office in Pittsburgh** covers Monongalia County. It issues the weather watches and warnings for the county. Check its Mon County forecast page before a storm."
+quote: >-
+  "Your local forecast office is Pittsburgh ... Monongalia County" (Mon County forecast page). "Marion-Monongalia- Ridges of Eastern Monongalia and Northwestern Preston ... This Hazardous Weather Outlook is for east central Ohio, western Pennsylvania, and northern West Virginia." (Pittsburgh office briefing page)
+sources:
+  - url: https://forecast.weather.gov/MapClick.php?zoneid=WVZ509
+    checked: 2026-11-02
+  - url: https://www.weather.gov/pbz/weatherbriefingpage
+    checked: 2026-11-02
+recheck_days: 365   # which office covers the county changes rarely

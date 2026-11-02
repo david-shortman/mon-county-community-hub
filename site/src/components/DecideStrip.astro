@@ -4,11 +4,16 @@
 // 5-year capital plan to ten years of comprehensive plans, then back to now,
 // for the city, the County Commission and the Board of Education.
 // Still version (no script, reduced motion, motion turned off): a numbered
-// list, each step with its own still strip. Strips are aria-hidden; every date
+// list, each step with its own still strip.
+// Live (script, motion allowed and not turned off): one strip stays in view and
+// zooms as each step reaches the middle of the screen. The step watcher and
+// "Turn off motion" come from the shared kit (#1441). Only transform and
+// opacity move. Strips are aria-hidden; every date
 // is in the step text with its source. Process only: no side on any plan,
 // budget or levy.
 import SourceLine from './SourceLine.astro';
-import { strip } from '../lib/decide-strip.mjs';
+import { strip, stage } from '../lib/decide-strip.mjs';
+import MotionSwitch from './MotionSwitch.astro';
 const { base } = Astro.props;
 const day = '2026-11-02';
 const s = (...urls) => urls.map((url) => ({ url, checked: day }));
@@ -57,11 +62,13 @@ const N = steps.length;
 <section class="dc-x" id="dc-explainer" aria-labelledby="dc-h">
   <h2 id="dc-h">How the plans fit inside each other</h2>
   <p>Budgets and plans run on different clocks. Here they are on one time strip, from one year out to ten.</p>
-  <p class="dc-tools"><a href="#dc-summary">Skip past the time strip</a></p>
+  <MotionSwitch skip="#dc-summary" skipText="Skip past the time strip" />
   <p class="dc-key"><strong>About the drawing:</strong> a sketch, not to scale. Every date is also in the words under it. Dates can change, so check each board's documents.</p>
+  <div class="dc-scrolly">
+  <figure class="dc-stage" aria-hidden="true"><Fragment set:html={stage()} /></figure>
   <ol class="dc-steps" aria-label="The time strip, step by step">
     {steps.map((st, i) => (
-      <li id={st.id}>
+      <li id={st.id} data-z={st.z}>
         <h3>Step {i + 1} of {N}. {st.title}</h3>
         <div class="dc-snap"><Fragment set:html={strip(st.z)} /></div>
         {st.body.map((t) => <p>{t}</p>)}
@@ -70,13 +77,20 @@ const N = steps.length;
       </li>
     ))}
   </ol>
+  </div>
   <p id="dc-summary" tabindex="-1" class="dc-sum"><strong>In short:</strong> a 10-year plan holds 5-year plans, and those hold one budget year at a time. The time to weigh in comes months or years before work starts.</p>
 </section>
 
+<script>
+  import { watchSteps } from '../lib/motion-client.mjs';
+  const sec = document.getElementById('dc-explainer');
+  const svg = sec?.querySelector('.dc-stage svg');
+  const steps = sec ? Array.from(sec.querySelectorAll<HTMLElement>('.dc-steps > li')) : [];
+  watchSteps(sec, steps, (i) => svg?.setAttribute('data-z', steps[i].dataset.z ?? '1'));
+</script>
+
 <style is:global>
   /* ===== When it gets decided time strip (#1444). Press tokens only; scoped to #dc-explainer. ===== */
-  #dc-explainer .dc-tools { margin: 0 0 var(--s2); }
-  #dc-explainer .dc-tools a { display: inline-flex; align-items: center; min-height: 44px; }
   #dc-explainer .dc-key { font-size: 0.95rem; color: var(--muted); }
   #dc-explainer .dc-steps { list-style: none; margin: var(--s5) 0; padding: 0; }
   #dc-explainer .dc-steps > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
@@ -98,4 +112,44 @@ const N = steps.length;
   #dc-explainer .dc-strip .cell.now { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 2; }
   #dc-explainer .dc-strip .ln1, #dc-explainer .dc-strip .ln2 { fill: var(--accent); }
   #dc-explainer .dc-strip .ln3 { fill: var(--water); }
+
+  /* Live: one strip, zooming. The kit adds .is-live only when motion is allowed. */
+  #dc-explainer .dc-stage { display: none; margin: 0; }
+  #dc-explainer.is-live .dc-snap { display: none; }
+  #dc-explainer#dc-explainer.is-live .dc-stage { display: block; }
+  #dc-explainer.is-live .dc-steps > li { margin-bottom: calc(3.5 * var(--s8)); }
+  #dc-explainer.is-live .dc-steps > li:last-child { margin-bottom: var(--s7); }
+  #dc-explainer.is-live .dc-steps > li.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  #dc-explainer .dc-stage-svg .z { transform-box: view-box; opacity: 0; }
+  #dc-explainer .dc-stage-svg .t-now { opacity: 0; }
+  /* The year sits in the first slot of the five; the five sit in their place on the ten. */
+  #dc-explainer .dc-stage-svg .z-yr { transform-origin: 16px 62px; transform: scale(0.2); }
+  #dc-explainer .dc-stage-svg .z-five { transform-origin: 16px 62px; transform: scale(5); }
+  #dc-explainer .dc-stage-svg .z-ten { transform-origin: 217.6px 62px; transform: scale(2); }
+  #dc-explainer .dc-stage-svg:is([data-z="1"], [data-z="now"]) .z-yr,
+  #dc-explainer .dc-stage-svg[data-z="5"] .z-five,
+  #dc-explainer .dc-stage-svg[data-z="10"] .z-ten { opacity: 1; transform: none; }
+  #dc-explainer .dc-stage-svg[data-z="10"] .z-five { transform-origin: 217.6px 62px; transform: scale(0.5); }
+  #dc-explainer .dc-stage-svg[data-z="10"] .z-yr { transform-origin: 128px 62px; transform: scale(0.1); }
+  #dc-explainer .dc-stage-svg[data-z="now"] .t-idea { opacity: 0; }
+  #dc-explainer .dc-stage-svg[data-z="now"] .t-now { opacity: 1; }
+  @media (prefers-reduced-motion: no-preference) {
+    #dc-explainer.is-live .dc-stage-svg .z { transition: transform 0.8s ease, opacity 0.5s ease; }
+    #dc-explainer.is-live .dc-stage-svg :is(.t-now, .t-idea) { transition: opacity 0.4s ease; }
+  }
+  @media (min-width: 44rem) {
+    #dc-explainer.is-live .dc-scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+    #dc-explainer#dc-explainer.is-live .dc-stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--s4)); margin-top: var(--s5); padding: var(--s3); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; overflow: hidden; }
+  }
+  @media (max-width: 43.99rem) and (min-height: 36rem) {
+    #dc-explainer#dc-explainer.is-live .dc-stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 calc(-1 * var(--s2)) var(--s4); padding: var(--s2); background: var(--card); border-bottom: 2px solid var(--fg); overflow: hidden; }
+    /* 260px: about the height of the held strip on a phone. */
+    #dc-explainer.is-live .dc-steps > li { scroll-margin-top: 260px; }
+    html:has(#dc-explainer.is-live) { scroll-padding-top: 260px; }
+  }
+  @media (max-width: 43.99rem) and (max-height: 35.99rem) {
+    #dc-explainer.is-live .dc-snap { display: block; }
+    #dc-explainer#dc-explainer.is-live .dc-stage { display: none; }
+    #dc-explainer.is-live .dc-steps > li { margin-bottom: var(--s4); }
+  }
 </style>

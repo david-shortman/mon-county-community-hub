@@ -1,4 +1,5 @@
 {
+  "generated_by": "Made by site/src/lib/feeds/index.mjs. Do not edit by hand: rebuild with `npm run update-feeds` in site/.",
   "id": "morgantown-farmers-market",
   "feed_url": "https://calendar.google.com/calendar/ical/morgantownfarmersmarket%40gmail.com/public/basic.ics",
   "fetched": "2026-10-31T00:18:02.935Z",

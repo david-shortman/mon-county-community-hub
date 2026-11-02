@@ -1,4 +1,5 @@
 {
+  "generated_by": "Made by site/src/lib/feeds/index.mjs. Do not edit by hand: rebuild with `npm run update-feeds` in site/.",
   "id": "mountaineer-food-bank",
   "feed_url": "https://mountaineerfoodbank.org/wp-json/tribe/events/v1/events?categories=monongalia-county&per_page=50&start_date=2026-10-30",
   "fetched": "2026-10-31T00:08:07.879Z",

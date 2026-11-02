@@ -1,0 +1,10 @@
+slug: weather-radio
+text: "**NOAA Weather Radio** plays weather warnings around the clock on a weather radio, with no internet needed. The Morgantown station is KWN35 on 162.475 MHz. Mon County's code for radios that let you pick your county (SAME code) is 054061."
+quote: >-
+  "NWR broadcasts official Weather Service warnings, watches, forecasts and other hazard information 24 hours a day, 7 days a week." (NWR home page). County coverage data for Monongalia: SITENAME "Morgantown", CALLSIGN "KWN35", FREQ "162.475", SAME "054061", STATUS "NORMAL" (the county coverage table, read from its data file /source/nwr/JS/CCL.js).
+sources:
+  - url: https://www.weather.gov/nwr/county_coverage?State=WV
+    checked: 2026-11-02
+  - url: https://www.weather.gov/nwr/
+    checked: 2026-11-02
+recheck_days: 180   # stations and frequencies change now and then

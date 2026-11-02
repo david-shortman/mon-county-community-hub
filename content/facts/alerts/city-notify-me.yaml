@@ -1,0 +1,8 @@
+slug: city-notify-me
+text: "The city's **Notify Me** page has an Emergency Alerts list. You can sign up for email, or for text messages (standard text rates apply). The same page has lists for city news, meetings and more."
+quote: >-
+  "Alert Center ... Emergency Alerts" and "I would like to be able to receive text messages on my mobile phone ... Standard text messaging rates apply."
+sources:
+  - url: https://www.morgantownwv.gov/list.aspx
+    checked: 2026-11-02
+recheck_days: 180
