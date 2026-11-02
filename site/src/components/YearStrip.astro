@@ -1,0 +1,104 @@
+---
+// Your year at home and in the garden (#1448): a year strip from frost to
+// frost, part of the explainers in #1440. Rules: docs/design/motion.md.
+// Built from content/home-year.yaml (src/lib/year-strip.mjs), so every date
+// here is also a card below on the page, with its source.
+// - No script, "Turn off motion", or a device set to reduce motion: the whole
+//   strip shows, every dot and the season filled, next to four numbered steps.
+// - Otherwise, as each step reaches the middle of the screen, its months fill
+//   in: dates drop into place and the growing season grows month by month.
+//   Steps already passed stay filled. Only transform and opacity move.
+// - The strip is aria-hidden; the step text names every date.
+import MotionSwitch from './MotionSwitch.astro';
+import { loadHomeRules } from '../lib/home-year.mjs';
+import { CONTENT_DIR } from '../lib/content.mjs';
+import { yearStrip, STEP_MONTHS } from '../lib/year-strip.mjs';
+const ys = yearStrip(loadHomeRules(CONTENT_DIR));
+const { id = 'year-strip' } = Astro.props;
+const pct = (v: number) => `${(v * 100).toFixed(1)}%`;
+---
+<div class="ys" id={id}>
+  <MotionSwitch skip={`#${id}-end`} skipText="Skip past the year strip" />
+  <p class="ys-key" aria-hidden="true"><span class="k-grow"></span> Growing season, frost to frost <span class="k-fire"></span> Forest fire season <span class="k-dot"></span> A date below</p>
+  <ol class="ys-steps">
+    {ys.steps.map((st, i) => (
+      <li data-i={i}>
+        <div class="ys-months" aria-hidden="true">
+          {STEP_MONTHS[i].map((m) => {
+            const mo = ys.months[m - 1];
+            return (
+              <div class="ys-m">
+                <span class="ys-name">{mo.short}</span>
+                <span class="ys-rail">
+                  {mo.fire && <span class="ys-fire"></span>}
+                  {mo.grow && <span class="ys-grow" style={`top:${pct(mo.grow.a)};height:${pct(mo.grow.b - mo.grow.a)}`}></span>}
+                  {mo.frost.map((f) => <span class="ys-frost" style={`top:${pct(f.at)}`}></span>)}
+                </span>
+                <span class="ys-dots">
+                  {mo.frost.map((f) => <span class="ys-flab">Frost {f.day}</span>)}
+                  {mo.items.map((it) => <span class="ys-dot">{it.day}</span>)}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+        <div class="ys-say">
+          <h3>{i + 1}. {st.title}</h3>
+          <p>{st.text}</p>
+          {st.list.length > 0 && <ul>{st.list.map((t) => <li>{t}</li>)}</ul>}
+        </div>
+      </li>
+    ))}
+  </ol>
+  <p class="ys-note" id={`${id}-end`}>Frost dates are for the Morgantown airport weather station, 1991 to 2020 (NOAA). Half of years are earlier and half later, and your yard may differ. Each date above is a card below, with its source.</p>
+</div>
+
+<script>
+  import { watchSteps } from '../lib/motion-client.mjs';
+  document.querySelectorAll<HTMLElement>('.ys').forEach((sec) => {
+    const steps = Array.from(sec.querySelectorAll<HTMLElement>('.ys-steps > li'));
+    watchSteps(sec, steps, (i) => steps.forEach((s, n) => s.classList.toggle('reached', n <= i)), {
+      onLive: (on) => { if (!on) steps.forEach((s) => s.classList.remove('reached')); },
+    });
+  });
+</script>
+
+<style>
+  .ys { margin: var(--s5) 0; }
+  .ys-key { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); font-size: 0.95rem; color: var(--muted); }
+  .ys-key span { display: inline-block; width: 14px; height: 14px; }
+  .ys-key .k-grow { background: var(--accent); }
+  .ys-key .k-fire { width: 5px; background: var(--water); margin-left: var(--s2); }
+  .ys-key .k-dot { border-radius: 50%; border: 2px solid var(--accent); margin-left: var(--s2); }
+  .ys-steps { list-style: none; padding: 0; margin: 0; }
+  .ys-steps > li { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: var(--s4); padding-block: var(--s4); border-top: 1px solid var(--line); }
+  .ys-say h3 { margin-top: 0; }
+  .ys-say ul { margin: 0; }
+  .ys-m { display: grid; grid-template-columns: 2.4rem 1rem minmax(0, 1fr); gap: var(--s3); min-height: 2.6rem; }
+  .ys-name { font-weight: 700; font-size: 0.95rem; }
+  .ys-rail { position: relative; background: var(--sand); }
+  .ys-grow { position: absolute; left: 0; right: 0; background: var(--accent); transform-origin: top; }
+  .ys-fire { position: absolute; top: 0; bottom: 0; left: -7px; width: 4px; background: var(--water); }
+  .ys-frost { position: absolute; left: -4px; right: -4px; height: 3px; margin-top: -1px; background: var(--fg); }
+  .ys-dots { display: flex; flex-wrap: wrap; align-content: flex-start; gap: var(--s1); }
+  .ys-dot { display: inline-grid; place-items: center; min-width: 1.6rem; height: 1.6rem; border: 2px solid var(--accent); border-radius: 999px; font-size: 0.8rem; font-weight: 700; color: var(--accent); }
+  .ys-flab { display: inline-block; font-size: 0.8rem; font-weight: 700; line-height: 1.6rem; }
+  .ys-note { color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 30rem) {
+    .ys-steps > li { grid-template-columns: minmax(0, 1fr); gap: var(--s3); }
+  }
+  /* Live: months not reached yet wait empty; they fill in as each step arrives. */
+  .ys:global(.is-live) .ys-steps > li:not(.reached) :is(.ys-grow, .ys-frost) { transform: scaleY(0); }
+  /* Dates pop in with scale, never a half faded text, so contrast always holds. */
+  .ys:global(.is-live) .ys-steps > li:not(.reached) :is(.ys-dot, .ys-flab) { transform: scale(0); }
+  .ys:global(.is-live) .ys-steps > li:not(.reached) .ys-fire { opacity: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .ys:global(.is-live) :is(.ys-grow, .ys-frost) { transition: transform 0.5s ease; }
+    .ys:global(.is-live) :is(.ys-dot, .ys-flab) { transition: transform 0.35s ease 0.2s; }
+    .ys:global(.is-live) .ys-fire { transition: opacity 0.4s ease; }
+    .ys:global(.is-live) .ys-m:nth-child(2) :is(.ys-grow, .ys-dot) { transition-delay: 0.25s; }
+    .ys:global(.is-live) .ys-m:nth-child(3) :is(.ys-grow, .ys-dot) { transition-delay: 0.5s; }
+    .ys:global(.is-live) .ys-m:nth-child(4) :is(.ys-grow, .ys-dot) { transition-delay: 0.75s; }
+    .ys:global(.is-live) .ys-m:nth-child(5) :is(.ys-grow, .ys-dot) { transition-delay: 1s; }
+  }
+</style>
