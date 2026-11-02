@@ -46,6 +46,9 @@ rules:
   - host: cdn.sanity.io
     group: manual
     why: Its robots.txt disallows PDFs (Disallow /*.pdf, read 2026-11-01). The health department's fee and permit PDFs live here. A person re-checks them on the person sources checklist.
+  - host: ecfr.gov
+    group: manual
+    why: Its robots.txt allows these pages, but it sends automated reads to a block page on unblock.federalregister.gov (seen 2026-11-01 and 2026-11-02, #506), so the Source check listed about 50 false "moved" links. A person re-checks the federal rules on the person sources checklist.
   - prefix: https://github.com/david-shortman/mon-county-community-hub
     group: reference
     why: Our own repo and report forms.

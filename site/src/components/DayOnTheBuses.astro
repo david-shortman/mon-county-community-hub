@@ -19,6 +19,7 @@
 import { pdfPage } from '../lib/pdf-pages.mjs';
 import { routesFromRecord } from '../lib/bus-day.mjs';
 import { dayMarkup } from '../lib/bus-day-markup.mjs';
+import '../styles/motion-switch.css';
 const d = pdfPage('mountain-line-routes');
 const html = dayMarkup(routesFromRecord(d), { checked: d.checked });
 ---
@@ -33,10 +34,6 @@ const html = dayMarkup(routesFromRecord(d), { checked: d.checked });
 
 <style is:global>
   /* ===== A day on the buses (component styles; all scoped to #day-explainer) ===== */
-  #day-explainer .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 4px 0 12px; font-size: 1rem; }
-  #day-explainer .tools a { display: inline-flex; align-items: center; min-height: 44px; }
-  #motion-toggle { min-height: 44px; padding: 0 16px; font: inherit; font-weight: 600; color: var(--accent); background: var(--card); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
-  #day-explainer .motion-note { margin: 0; flex-basis: 100%; color: var(--muted); font-size: 0.95rem; }
 
   /* Right now: first thing in the section */
   #day-explainer .rightnow { margin: 4px 0 8px; padding: 12px 16px; background: var(--accent-bg); border: 1px solid var(--accent); border-radius: 10px; }
