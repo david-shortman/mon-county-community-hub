@@ -61,6 +61,9 @@ for (const file of pages) {
   const ogImage = html.match(/<meta property="og:image" content="https?:\/\/[^/"]+(\/[^"]*)"/)?.[1];
   if (ogImage && !fs.existsSync(path.join(dist, decodeURIComponent(ogImage)))) errors.push(`${where}: og:image ${ogImage} is not in dist/`);
   if (ogImage && !/<meta property="og:image:alt" content="[^"]+"/.test(html)) errors.push(`${where}: og:image has no alt text`);
+  // Crisis pages (no-referrer) keep the plain picture and get no card file of their own.
+  const cardFile = path.join(dist, 'share', `${where.replace(/\/?index\.html$/, '')}.png`);
+  if (/<meta name="referrer" content="no-referrer"/.test(html) && where !== 'index.html' && fs.existsSync(cardFile)) errors.push(`${where}: crisis page has a share card at /share/${path.relative(path.join(dist, 'share'), cardFile)}; it should keep the plain picture`);
   const h1s = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1s !== 1) errors.push(`${where}: needs exactly one <h1>, found ${h1s}`);
   if (/—/.test(`${title} ${desc}`)) errors.push(`${where}: title or description has an em dash`);

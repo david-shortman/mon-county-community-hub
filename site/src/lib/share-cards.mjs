@@ -15,17 +15,27 @@ export const CARD_H = 630;
 const TEXT_W = CARD_W - 160;
 
 // Pages about domestic or sexual violence keep the plain site picture, the
-// same rule Share this follows (a share can leave a trace). Base.astro also
-// gives crisis pages (the ones with the crisis strip) the plain picture.
+// same rule Share this follows (a share can leave a trace), whether the
+// address or the label says so. Crisis pages (the ones with the crisis strip)
+// keep it too: Base.astro skips them, and so does the card builder.
 const QUIET = /domestic|sexual|abuse/i;
+
+// A crisis page is one whose source opens <Base crisis ...>. Quoted values
+// and {expressions} are dropped first, so a description that says "crisis"
+// does not count.
+export function isCrisisSource(source) {
+  const tag = source.match(/<Base\b(?:"[^"]*"|'[^']*'|\{[^}]*\}|[^>])*>/)?.[0] ?? '';
+  return /\scrisis(?=[\s=>/])/.test(tag.replace(/"[^"]*"|'[^']*'|\{[^}]*\}/g, '""'));
+}
 
 // The one card for every page that has no card of its own.
 export const PLAIN_CARD = '/share.png';
 
 // Which pages get their own card: every tagged page with a label, except the
 // quiet ones above.
+// Embeds (/embed/) live inside other sites' pages and keep the plain picture.
 export function hasCard(tags, route) {
-  return Boolean(tags?.label) && !QUIET.test(route);
+  return Boolean(tags?.label) && !route.startsWith('/embed/') && !QUIET.test(route) && !QUIET.test(tags.label);
 }
 
 // The door or lane named on the card. A door's own page skips it, since its

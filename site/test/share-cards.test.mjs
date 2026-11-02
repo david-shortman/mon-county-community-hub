@@ -2,7 +2,7 @@
 // and that a card draws as a 1200 by 630 PNG.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { CARD_H, CARD_W, cardAlt, cardDoor, cardPath, drawCard, hasCard } from '../src/lib/share-cards.mjs';
+import { CARD_H, CARD_W, cardAlt, cardDoor, cardPath, drawCard, hasCard, isCrisisSource } from '../src/lib/share-cards.mjs';
 
 test('a card lives at /share/<page>.png', () => {
   assert.equal(cardPath('/grow/'), '/share/grow.png');
@@ -12,8 +12,20 @@ test('a card lives at /share/<page>.png', () => {
 test('tagged pages get a card, but pages about domestic or sexual violence keep the plain one', () => {
   assert.ok(hasCard({ label: 'Grow food and flowers' }, '/grow/'));
   assert.ok(!hasCard(undefined, '/'));
+  assert.ok(!hasCard({ label: 'Help now' }, '/embed/help-now/'));
   assert.ok(!hasCard({ label: 'Domestic violence help' }, '/domestic-violence/'));
   assert.ok(!hasCard({ label: 'After a sexual assault' }, '/sexual-assault/'));
+  assert.ok(!hasCard({ label: 'Help after domestic violence' }, '/getting-safe/'));
+});
+
+test('crisis pages are found from their source, so they get no card file', () => {
+  assert.ok(isCrisisSource('<Base crisis title="Leaving an unsafe home">'));
+  assert.ok(isCrisisSource('<Base title="Mental health help" crisis>'));
+  assert.ok(isCrisisSource('<Base\n  crisis\n  title="x">'));
+  assert.ok(!isCrisisSource('<Base title="Grow food" help>'));
+  assert.ok(!isCrisisSource('<Base title="Crisis lines near you">'));
+  assert.ok(!isCrisisSource('<Base title="Veterans" description="24/7 lines for crisis and housing help">'));
+  assert.ok(isCrisisSource('<Base crisis={true} title="x">'));
 });
 
 test("a door's own page does not name its door twice", () => {
