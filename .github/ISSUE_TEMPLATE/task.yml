@@ -8,6 +8,14 @@ body:
       label: What needs doing
     validations:
       required: true
+  - type: input
+    id: serves
+    attributes:
+      label: Serves
+      description: Who this is for. One or more slugs from content/personas.yaml or content/needs/, like short-on-food or enough-food. Use "project" for work on the project itself (#1037).
+      placeholder: short-on-food
+    validations:
+      required: true
   - type: textarea
     id: why
     attributes:

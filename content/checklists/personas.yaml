@@ -1,0 +1,39 @@
+# Monthly loop that keeps personas and needs current (#1037). Runs in the first
+# week of each month, with the needs register upkeep (#988). How it works:
+# site/scripts/checklists.mjs. The loop and its log: docs/personas.md,
+# "Monthly review".
+id: personas
+title: Personas and needs, monthly review
+issue_title: Monthly checklist, personas and needs
+tracking: 1037
+intro: >-
+  Once a month, listen, sort, act and report, then log the run as
+  docs/persona-reviews/YYYY-MM-DD.md (one file per run). Topic counts only:
+  no on-site searches, no visitor tracking, no names or quotes from forums or
+  feedback. A new persona needs evidence from two different signals. Merge or
+  retire a persona with no fresh evidence for two reviews in a row. Changes to
+  content/personas.yaml or content/needs/ go in one PR.
+items:
+  - text: >-
+      Listen: read what changed since last month in the Sunday findability
+      runs (content/findability/), This week in Mon County, the needs register
+      sources (content/needs/), the care pulse, the life areas map, visit
+      totals (content/use/visits.yaml) and resident and partner feedback once
+      it has an inbox (#197). Also local news, meeting agendas and public
+      community forums, as topic counts only.
+    when: month
+  - text: >-
+      Sort: tie each new signal to a need and a persona. A new need goes into
+      content/needs/ with its sources, plus a persona and a findability
+      question in the same PR. Note personas with no fresh evidence this month.
+    when: month
+  - text: >-
+      Act: open or re-rank issues for the top needs. Each new issue has a
+      "Serves:" line naming a persona or need slug. The Health check lists
+      issues without one (issues-serves).
+    when: month
+  - text: >-
+      Report: copy the persona line below into docs/scoreboard.md (Level 1,
+      Personas), and log the run in docs/persona-reviews/.
+    run: persona-line
+    when: month
