@@ -1,0 +1,27 @@
+name: Monday Group Run from Morgantown Running
+slug: morgantown-running-monday-group-run
+kind: group
+area: morgantown
+community: Morgantown
+run_by:
+  kind: business
+  text: Morgantown Running, a running shoe store on Beechurst Avenue
+story: A weekly group run on the rail-trail behind the store. The store says all ages and abilities are welcome.
+regular:
+  - Mondays, 5:30 p.m. Meet at the store.
+cost: Free
+interests: [running, outdoors, social]
+tags: [free, come-alone, beginners, weekly]
+contact:
+  url: https://www.morgantownrunning.com/racesrunningcommunity
+  phone: "304-241-5223"
+  place: 709 Beechurst Ave., Ste. 1A, Morgantown, WV 26505
+status: active
+notes:
+  - The store's page does not give a date for this schedule, so call the store before your first run.
+  - The store also lists a free one-mile run on Wednesday evenings, June to August. The place can change.
+sources:
+  - url: https://www.morgantownrunning.com/racesrunningcommunity
+    checked: 2026-11-02
+  - url: https://www.morgantownrunning.com/
+    checked: 2026-11-02
