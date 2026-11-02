@@ -251,8 +251,17 @@ About 72% of residents live outside Morgantown city limits ([who lives here](pla
 |---|---|---|---|---|---|
 | 2026-10-31 | 80 | 59 (74%) | 18 (22%) | 3 | 37 of 127, 30 of them in Morgantown |
 | 2026-11-01 | 194 | 151 (78%) | 31 (16%) | 12 | 107 of 392, 86 of them in Morgantown |
+| 2026-11-02, by Census place | 194 | 121 (62%) | 61 (31%) | 12 | 107 of 394, 64 of them in the city |
 
-"Morgantown" here means a Morgantown mailing address, which also covers some close-in places outside city limits, so the share is not directly comparable to the 72%. Most of the rest-of-county listings are community centers and halls (11 of 18). On 2026-11-01 the count more than doubled, mostly in Morgantown, so the rest-of-county share fell from 22% to 16% even though the number of rest-of-county listings grew from 18 to 31 (19 of them community places). Westover has the most outside Morgantown (7).
+Until 2026-11-01, "Morgantown" meant a Morgantown mailing address, which also covers some close-in places outside city limits, so the share is not directly comparable to the 72%. Most of the rest-of-county listings are community centers and halls (11 of 18). On 2026-11-01 the count more than doubled, mostly in Morgantown, so the rest-of-county share fell from 22% to 16% even though the number of rest-of-county listings grew from 18 to 31 (19 of them community places). Westover has the most outside Morgantown (7).
+
+**Since 2026-11-02 the count is by Census place, not mailing town (#1412).** `reach.py` looks up each address with the U.S. Census Bureau's free geocoder and counts it in the city, town or census-designated place it is in (lookups saved in [`content/findability/reach-places.yaml`](../content/findability/reach-places.yaml) with their dates). Same 194 listings, so the jump from 16% to 31% is the method, not new listings: of 155 listings with a Morgantown mailing address, 94 are in the city, 40 are elsewhere in the county (for example Mylan Park, Scott Avenue, and the Arnettsville and Clinton District libraries) and 21 the geocoder could not place. Those 21 are still counted by mailing town, so the city count may be a little high. Because the 72% also uses city limits, the two shares can now be compared. A match on a different street (the geocoder sometimes returns a near miss) is not used.
+
+What the place count shows (2026-11-02):
+
+- **Most rest-of-county listings are outside any town or named place** (40 of 61). Westover has 6, Star City 3, Blacksville 3, Cheat Lake 2 and Brookhaven none.
+- **By topic, outside the city:** food help 2 resources, health care 5, housing and shelter 3, money, jobs and benefits 3.
+- **Food pantries and meal sites are not counted yet.** They have no listing records (#1413). The DoHS office's address is only in its text, so it is not counted either; adding it waits for David because the record is high stakes.
 
 ## Level 2: Use (not measured yet)
 
