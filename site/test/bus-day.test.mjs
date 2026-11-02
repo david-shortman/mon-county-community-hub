@@ -14,8 +14,12 @@ test('every Mountain Line route has hours, and they match its own lines', () => 
   assert.deepEqual(pdfPageProblems(d), []);
 });
 
+// The step and summary text in bus-day-markup.mjs quote these numbers. If the
+// hours change and one of these fails, update that text too.
 test('the three weekday moments in the scroll story', () => {
   assert.equal(fmt(firstStart(routes, 'm')), '5:40 a.m.');
+  assert.equal(count('m', '7:30'), 17);
+  assert.equal(count('m', '9:00'), 18);
   assert.equal(count('m', '12:00'), 18);
   assert.equal(count('m', '20:30'), 3);
 });
