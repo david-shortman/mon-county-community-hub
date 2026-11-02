@@ -2,17 +2,21 @@ title: "Buy a West Virginia hunting or fishing license"
 slug: wv-hunting-fishing-license
 org: wv-division-of-natural-resources
 topics: [outdoors]
-who_it_is_for: "Anyone who wants to hunt or fish in West Virginia."
+who_it_is_for: "Anyone who wants to hunt or fish in West Virginia. Residents and nonresidents under age 15 do not need a fishing license."
 what_to_do: "Buy online at WVhunt.com. First time? Choose Enroll today! and fill in your residency, ID and contact details. Bought one before but forgot your login? Choose Look up your Account. Questions: call the DNR, Monday to Friday, 8:30 a.m. to 5 p.m."
 contact:
   phone: "304-558-6200"
   url: https://wvdnr.gov/buy-a-license
   url_label: How to buy
 cost: "2026 prices from the DNR's fishing rules summary: resident fishing license (Class B) $19, Conservation Stamp $5, trout stamp $10, five-day fishing license $8. Licenses are good for the calendar year, so you buy new ones each January."
+notes:
+  - "Ages 15 to 17: the Junior Sportsman license (Class XJ) is $16. It covers hunting, fishing and trapping."
+  - "Residents who turned 65 on or after January 1, 2012 need the Senior license (Class XS), $25. It includes the trout stamp."
+  - "Residents who turned 65 before January 1, 2012 (born before January 1, 1947) do not need a fishing license. Carry a WV driver's license or WV photo ID card while fishing."
 sources:
   - url: https://wvdnr.gov/buy-a-license
     checked: 2026-11-01
   - url: https://wvdnr.gov/free-fishing-days/
     checked: 2026-11-01
   - url: https://wvdnr.gov/wp-content/uploads/2026/02/Pub_Regs_Fishing_2026_DNR_WILD_pp.pdf
-    checked: 2026-11-01
+    checked: 2026-11-02
