@@ -6,3 +6,5 @@
 - **Left out:** Christian Help prescription vouchers, prescription discount cards, and the WV Rx program named in the plan, because no current official source was checked today.
 - **Waits for David:** high-stakes health topic (#97).
 - **Scoreboard:** findability q08 ("low cost dentist no insurance Morgantown WV"). Re-run at the next weekly check (2026-11-01).
+
+Checked 2026-11-01: q08 no change, 13 of 15. q05 (a doctor without insurance) now points to /no-insurance/ as our answer page. Neither showed up in search.

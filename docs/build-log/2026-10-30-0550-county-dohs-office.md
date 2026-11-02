@@ -4,3 +4,5 @@
 - **Chose:** one verified entry for the Monongalia County Department of Human Services office, from the agency's own field office page, shown where people need it.
 - **Shipped:** `content/resources/monongalia-county-dohs-office.yaml` (114 South High Street, Morgantown; Monday to Friday, 8:30 a.m. to 5 p.m.; 304-285-3175; the programs it handles). Shown on `/snap/` ("Rather apply in person?") and `/medicaid-waivers/` ("The local office for the money side").
 - **Scoreboard:** findability question q04 (apply for SNAP in Mon County) now has the local office. Re-run at the next weekly check (2026-11-01).
+
+Checked 2026-11-01: q04 (apply for SNAP) no change, 12 of 15. Our /snap/ page has the local office but did not show up in search.
