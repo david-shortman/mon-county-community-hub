@@ -174,7 +174,7 @@ html:root .door {
   position: relative; border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 0;
   background: var(--card); padding: var(--s3) var(--s4) var(--s4) var(--s5);
 }
-html:root .door-name { min-height: 0; padding-block: var(--s1) var(--s2); }
+html:root .door-name { min-height: 44px; padding-block: var(--s1) var(--s2); } /* keeps the site's 44px tap target */
 html:root .doors > h2 { margin-bottom: 0; }
 html:root .door::before {
   content: ""; position: absolute; top: 0; left: 0; width: 16px; height: 16px;
