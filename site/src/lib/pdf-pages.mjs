@@ -7,11 +7,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
 import { CONTENT_DIR, ymd, todayYmd, oldestChecked, STALE_DAYS } from './content.mjs';
+import { routesFromRecord, hoursProblems } from './bus-day.mjs';
 
 export const PDF_PAGES_DIR = path.join(CONTENT_DIR, 'pdf-pages');
 export const PDF_PAGE_FIELDS = ['slug', 'title', 'publisher', 'pdf', 'pdf_date', 'found_on', 'intro', 'sections', 'sources', 'recheck_days'];
 export const SECTION_FIELDS = ['heading', 'id', 'note', 'items'];
-export const ITEM_FIELDS = ['name', 'lines', 'links'];
+// hours: a route's run times for the chart on /bus-routes/ (see bus-day.mjs).
+export const ITEM_FIELDS = ['name', 'lines', 'links', 'hours'];
 
 export function loadPdfPages() {
   if (!fs.existsSync(PDF_PAGES_DIR)) return [];
@@ -73,6 +75,9 @@ export function pdfPageProblems(d) {
       }
     }
   }
+  // Route hours must say the same as the route's own lines (bus-day.mjs).
+  const items = (Array.isArray(d.sections) ? d.sections : []).flatMap((s) => s?.items ?? []);
+  for (const r of routesFromRecord(d)) out.push(...hoursProblems(r, items.find((it) => it?.name === r.name)?.lines));
   if (JSON.stringify(d).includes('—')) out.push('contains an em dash');
   return out;
 }
