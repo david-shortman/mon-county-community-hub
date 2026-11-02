@@ -16,6 +16,8 @@ contact:
   url_label: Get the forms
 cost: "Free forms. A notary may charge. State law says the most a notary may charge is \"$10.00 for each signature notarized.\""
 sources:
+  - url: https://wvendoflife.org/contact/
+    checked: 2026-11-02
   - url: https://wvendoflife.org/individuals/
     checked: 2026-10-31
   - url: https://wvendoflife.org/faq/advance-care-plan-faqs/
