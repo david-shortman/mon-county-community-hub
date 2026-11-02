@@ -1,0 +1,13 @@
+name: Clay Battelle Public Service District
+slug: clay-battelle-psd
+kind: government
+website: https://cbpsdwater.com/
+phone: "304-292-4003"
+summary: A public water district created by the Monongalia County Commission in 1967. Its office is in Core, in western Mon County.
+topics: [moving]
+area: monongalia-county
+sources:
+  - url: https://cbpsdwater.com/about-us
+    checked: 2026-11-02
+  - url: https://cbpsdwater.com/location
+    checked: 2026-11-02
