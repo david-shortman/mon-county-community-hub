@@ -191,6 +191,8 @@ The comment shows a table with each rubric, its average for the changed parts, w
 
 **A soft gate to start (decided by David, 2026-10-28).** The check turns red when it finds a blocker, but it is not a required check on `main`. The gate is a rule agents follow: for any PR that changes `site/` or `content/`, wait for "Claude review" and do not merge while it is red. The weekly retrospective reports any PR merged with a red or missing review. If that happens, the retro can propose making it a required check (a repo setting, David's call).
 
+**`scripts/safe-merge.sh` waits for the review too (proposed 2026-11-02).** In week 1, nine PRs that changed `site/` or `content/` merged before their review posted (#129, #130, #194, #196, #283, #303, #304, #319, #448). The merge script already waits for the High stakes check on the PR's latest commit. For a PR that changes `site/` or `content/`, it also waits for "Claude review" on that commit to finish green, and refuses (exit 4) if it is red or missing. This keeps the gate a script rule, not a repo setting.
+
 One thing to verify now that PR #32 is merged: GitHub does not start other workflows for PRs opened with the default Actions token. If the `up-next` Action opens PRs that way, neither the Site check nor this review will run on them. The Claude GitHub App token avoids this, so the first Action-built PR should be checked for both runs.
 
 ### 6. Ship
