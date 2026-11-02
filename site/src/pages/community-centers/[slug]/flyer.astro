@@ -8,6 +8,7 @@ import qrcode from 'qrcode-generator';
 import Base from '../../../layouts/Base.astro';
 import { loadCalendarWithFeeds, upcoming, prettyDate, prettyTimes, oldestChecked } from '../../../lib/content.mjs';
 import { loadPlaces, placeStatus, whatsThere, KIND_LABELS, SECTION } from '../../../lib/places.mjs';
+import { hoursLines } from '../../../lib/listing.mjs';
 
 export function getStaticPaths() {
   return loadPlaces().map((p) => ({ params: { slug: p.slug }, props: { p } }));
@@ -34,6 +35,7 @@ const checked = oldestChecked(p.sources);
     <p class="flyer-story">{p.story}</p>
     {st.label && <p><strong>{st.label}.</strong></p>}
     {there && <p><strong>What's there:</strong>{' '}{there}.</p>}
+    {p.opening_hours && <p><strong>Open:</strong>{' '}{hoursLines(p.opening_hours).join('. ')}.</p>}
     {p.regular?.length > 0 && (
       <>
         <h2>Regular happenings</h2>

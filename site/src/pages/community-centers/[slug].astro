@@ -9,6 +9,7 @@ import EventCard from '../../components/EventCard.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import { loadCalendarWithFeeds, upcoming, reportUrl, prettyDate, loadDoors } from '../../lib/content.mjs';
 import { loadPlaces, placeStatus, whatsThere, areaLabel, KIND_LABELS, SECTION } from '../../lib/places.mjs';
+import { hoursLines } from '../../lib/listing.mjs';
 
 export function getStaticPaths() {
   return loadPlaces().map((p) => ({ params: { slug: p.slug }, props: { p } }));
@@ -20,6 +21,7 @@ const st = placeStatus(p);
 const there = whatsThere(p);
 const events = upcoming(await loadCalendarWithFeeds(), undefined, 120).filter((e) => e.venue === p.slug);
 const f = p.facilities ?? {};
+const hours = hoursLines(p.opening_hours);
 // Lowercase "South county" mid-sentence, but keep the name Morgantown capitalized.
 // Search results show about 160 characters of a description, so the list of
 // what is there is left out when it would make it longer (#939).
@@ -45,6 +47,8 @@ const where = `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|E
   {p.contact?.place && <p><strong>Address:</strong>{' '}{p.contact.place}</p>}
   {p.contact?.email && <p><strong>Email:</strong> <a href={`mailto:${p.contact.email}`}>{p.contact.email}</a></p>}
   {p.contact?.facebook && <p><a href={p.contact.facebook}>{p.name} on Facebook</a>. We cannot check Facebook, so it may have newer news than this page.</p>}
+  {hours.length > 0 && <><p><strong>Open:</strong></p><ul>{hours.map((h) => <li>{h}</li>)}</ul></>}
+  {p.drop_in && <p><strong>Who can come in and sit:</strong>{' '}{p.drop_in.replace(/\.\s*$/, '')}. It is listed with the <a href={`${base}/find-your-people/#places-to-sit`}>free places to sit</a>.</p>}
   {p.notes?.map((n) => <p class="note">{n}</p>)}
 
   <h2>What's there</h2>

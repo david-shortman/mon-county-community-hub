@@ -8,14 +8,13 @@ run_by:
   org: morgantown-public-library-system
   text: Morgantown Public Library System
 story: The main library downtown, open since 1926, with books, programs, public computers and meeting rooms.
-regular:
-  - Monday 9 a.m. to 8 p.m.
-  - Tuesday 9 a.m. to 8 p.m.
-  - Wednesday 9 a.m. to 8 p.m.
-  - Thursday 9 a.m. to 8 p.m.
-  - Friday 9 a.m. to 4 p.m.
-  - Saturday 9 a.m. to 4 p.m.
-  - "Sunday: Closed"
+opening_hours:
+  - days: [mon, tue, wed, thu]
+    opens: "09:00"
+    closes: "20:00"
+  - days: [fri, sat]
+    opens: "09:00"
+    closes: "16:00"
 interests: [books, learning, games]
 tags: [free]
 contact:

@@ -1,6 +1,7 @@
 // The Find your people directory (#263): recurring groups and free places to
-// sit, from content/places records with kind `group` or `library`.
-import { loadAllPlaces, placeStatus, AREAS } from './places.mjs';
+// sit, from content/places records with kind `group` or `library`, plus any
+// other building whose record says who can drop in (`drop_in`, #1439).
+import { loadAllPlaces, placeStatus, AREAS, DIRECTORY_KINDS } from './places.mjs';
 
 // What you're into: the finder's first question and the page's sections.
 // Each bucket gathers a few `interests` values from the records.
@@ -29,7 +30,7 @@ export const TAG_LABELS = {
 // drop-in (a place you can go any open hour). Read from tags and the
 // `regular` words; "other" when the source gives no pattern.
 export function rhythm(p) {
-  if (p.kind === 'library') return 'drop-in';
+  if (p.kind === 'library' || p.drop_in) return 'drop-in';
   if (p.tags?.includes('weekly')) return 'weekly';
   const words = (p.regular ?? []).join(' ').toLowerCase();
   if (/\bmonth|\bmonthly/.test(words)) return 'monthly';
@@ -45,9 +46,13 @@ export function loadDirectory() {
     const live = (p) => placeStatus(p).status !== 'closed';
     const groups = all.filter((p) => p.kind === 'group' && live(p)).map((p) => ({ ...p, venueRecord: p.venue ? bySlug[p.venue] : null }));
     const libraries = all.filter((p) => p.kind === 'library' && live(p));
+    // Free places to sit (#1439): library branches first, then other buildings
+    // that say who can come in and sit, each A to Z.
+    const others = all.filter((p) => p.kind !== 'library' && p.kind !== 'group' && p.drop_in && live(p)).sort((a, b) => a.name.localeCompare(b.name));
+    const sit = [...libraries.slice().sort((a, b) => a.name.localeCompare(b.name)), ...others];
     // Buildings whose weekly happenings include a meal (#263, eat with others).
-    const meals = all.filter((p) => !['group', 'library'].includes(p.kind) && live(p) && (p.regular ?? []).some((r) => /\b(lunch|dinner|supper|breakfast|potluck|meal)/i.test(r)));
-    return { groups, libraries, meals, bySlug };
+    const meals = all.filter((p) => !DIRECTORY_KINDS.includes(p.kind) && live(p) && (p.regular ?? []).some((r) => /\b(lunch|dinner|supper|breakfast|potluck|meal)/i.test(r)));
+    return { groups, libraries, sit, meals, bySlug };
   })();
   return cache;
 }
@@ -66,7 +71,7 @@ export function inBucket(groups, bucket) {
 
 // Parts of the county where we have found no free place to sit and no group
 // that meets there (the gap map's first half).
-export function areasWithout({ groups, libraries }) {
-  const covered = new Set([...groups, ...libraries].map((p) => p.area));
+export function areasWithout({ groups, sit }) {
+  const covered = new Set([...groups, ...sit].map((p) => p.area));
   return AREAS.filter(([k]) => !covered.has(k)).map(([, label]) => label);
 }

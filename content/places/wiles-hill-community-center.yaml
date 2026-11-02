@@ -10,8 +10,11 @@ story: A BOPARC community center with a gym and fitness room on Eureka Drive.
 facilities:
   gym: true
   other: [fitness room]
-regular:
-  - Open Monday to Friday, 8 a.m. to 5 p.m. Starting November 16, 2026, it closes at 4 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:00"
+    closes: "16:00"
+drop_in: Anyone. BOPARC says the center is open to the public. The fitness room and gym cost money
 membership:
   dues: Fitness room $15 a year for one person 50 or older, $50 a year for ages 18 to 49 (2024 prices)
 rentals:
@@ -25,9 +28,14 @@ contact:
   url: https://www.boparc.org/wiles-hill-community-center.html
   place: 287 Eureka Dr, Morgantown, WV
 status: active
-last_activity_seen: 2026-10-30
+last_activity_seen: 2026-11-02
+notes:
+  - Until November 15, 2026, it stays open until 5 p.m. From November 16, it closes at 4 p.m.
+  - All BOPARC buildings are closed November 26 and 27 for Thanksgiving.
 sources:
   - url: https://www.boparc.org/wiles-hill-community-center.html
-    checked: 2026-11-01
+    checked: 2026-11-02
+  - url: https://www.boparc.org/public-notices--parkfacility-closures.html
+    checked: 2026-11-02
   - url: https://www.boparc.org/know-before-you-go.html
     checked: 2026-11-01

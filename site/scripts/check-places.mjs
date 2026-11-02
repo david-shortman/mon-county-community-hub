@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadDir, loadCalendar, todayYmd, ymd, CONTENT_DIR } from '../src/lib/content.mjs';
+import { checkOpeningHours } from '../src/lib/listing.mjs';
 
 const schema = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas', 'place.schema.json'), 'utf8'));
 
@@ -86,6 +87,13 @@ export function checkPlaces() {
       if (isDate(d) && d > today) errors.push(`${where}: date ${d} is in the future`);
     }
     for (const s of p.sources ?? []) if (isDate(s.checked) && s.checked < stale) warnings.push(`${where}: source last checked ${s.checked}, re-verify`);
+    // Open hours (#1439): the same shape resources use, checked the same way.
+    errors.push(...checkOpeningHours(p.opening_hours, where));
+    if (p.drop_in != null && !p.opening_hours && !['library', 'park'].includes(p.kind)) errors.push(`${where}: drop_in needs opening_hours, so the Free places to sit card can say when to come`);
+    if (p.kind === 'park' && !p.drop_in) errors.push(`${where}: a park is listed only as a free place to sit, so it needs drop_in`);
+    if (p.kind === 'park' && !p.opening_hours && !(p.notes ?? []).some((n) => /\b(open|dawn|dusk)\b/i.test(n))) errors.push(`${where}: a park needs opening_hours, or a note that says when it is open`);
+    if (p.drop_in != null && p.kind === 'group') errors.push(`${where}: a group has no building, so it cannot have drop_in`);
+    if (p.kind === 'library' && (p.regular ?? []).some((r) => /\b(a\.m|p\.m|closed)\b/i.test(r))) errors.push(`${where}: put a library's open hours in opening_hours, not regular, so they read as short lines`);
     if (JSON.stringify(p).includes('—')) errors.push(`${where}: contains an em dash`);
   }
   // A group can name the place it meets at (#263).
