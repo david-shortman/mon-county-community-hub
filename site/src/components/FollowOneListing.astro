@@ -12,9 +12,9 @@
 // - Otherwise one drawing stays in view (beside the steps on wide screens, at the
 //   top on phones) and changes as each step reaches the middle of the screen.
 //   Only opacity and transform move. The scroll is never taken over.
-// - "Turn off motion" is remembered on this phone only (localStorage
-//   "em-motion-off") and sets html[data-motion-off] so a later site-wide switch
-//   can reuse it.
+// - "Turn off motion" and the step watcher come from the shared scroll story
+//   kit (MotionSwitch.astro, src/lib/motion-client.mjs, #1441), so turning
+//   motion off here turns it off on every explainer.
 // - The drawings are aria-hidden; the step text carries the meaning.
 // - The step 7 change (3:00 p.m.) is pretend and is labeled that way.
 // Speaks for the project, so changes wait for David (for:david).
@@ -131,13 +131,10 @@ const SCENE = `<svg class="scene" data-s="__S__" viewBox="0 0 340 200" aria-hidd
   </g>
 </svg>`;
 const scene = (s) => SCENE.replace('__S__', String(s));
+import MotionSwitch from './MotionSwitch.astro';
 ---
   <div id="flow-explainer">
-    <div class="tools">
-      <a href="#flow-summary">Skip to the summary</a>
-      <button id="motion-toggle" type="button" hidden>Turn off motion</button>
-      <p class="motion-note" id="motion-note" hidden>Motion is off because your device is set to reduce motion.</p>
-    </div>
+    <MotionSwitch skip="#flow-summary" />
 
     <div class="scrolly">
       <figure class="stage" aria-hidden="true">
@@ -207,63 +204,19 @@ const scene = (s) => SCENE.replace('__S__', String(s));
   </div>
 
 <script>
-(function () {
-  var sec = document.getElementById('flow-explainer');
-  if (!sec || !('IntersectionObserver' in window)) return;
-  var root = document.documentElement;
-  var stage = sec.querySelector('.stage .scene');
-  var steps = Array.prototype.slice.call(sec.querySelectorAll('.flow > li'));
-  var now = sec.querySelector('[data-now]');
-  var btn = document.getElementById('motion-toggle');
-  var note = document.getElementById('motion-note');
-  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var userOff = false, io = null, current = -1;
-  try { userOff = localStorage.getItem('em-motion-off') === '1'; } catch (e) {}
-
-  function setStep(i) {
-    if (i < 0 || i === current) return;
-    current = i;
-    stage.setAttribute('data-s', String(i + 1));
-    steps.forEach(function (s, n) { s.classList.toggle('on', n === i); });
-    now.innerHTML = '<span>Step ' + (i + 1) + ' of 7:</span> ' + steps[i].getAttribute('data-short');
-  }
-  function live(on) {
-    sec.classList.toggle('is-live', on);
-    if (on && !io) {
-      io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) setStep(steps.indexOf(e.target)); });
-      }, { rootMargin: '-45% 0px -50% 0px' });
-      steps.forEach(function (s) { io.observe(s); });
-      setStep(0);
-    } else if (!on && io) {
-      io.disconnect(); io = null; current = -1;
-      steps.forEach(function (s) { s.classList.remove('on'); });
-    }
-  }
-  function update() {
-    var off = userOff || mq.matches;
-    if (off) root.setAttribute('data-motion-off', ''); else root.removeAttribute('data-motion-off');
-    btn.hidden = mq.matches;
-    btn.textContent = userOff ? 'Turn on motion' : 'Turn off motion';
-    note.hidden = !mq.matches;
-    live(!off);
-  }
-  btn.addEventListener('click', function () {
-    userOff = !userOff;
-    try { localStorage.setItem('em-motion-off', userOff ? '1' : '0'); } catch (e) {}
-    update();
+  import { watchSteps } from '../lib/motion-client.mjs';
+  const sec = document.getElementById('flow-explainer');
+  const stage = sec?.querySelector('.stage .scene');
+  const now = sec?.querySelector('[data-now]');
+  const steps = sec ? Array.from(sec.querySelectorAll<HTMLElement>('.flow > li')) : [];
+  watchSteps(sec, steps, (i) => {
+    stage?.setAttribute('data-s', String(i + 1));
+    if (now) now.innerHTML = '<span>Step ' + (i + 1) + ' of 7:</span> ' + steps[i].getAttribute('data-short');
   });
-  if (mq.addEventListener) mq.addEventListener('change', update); else if (mq.addListener) mq.addListener(update);
-  update();
-})();
 </script>
 
 <style is:global>
   /* ===== Follow one listing (component styles; all scoped to #flow-explainer) ===== */
-  #flow-explainer .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 4px 0 12px; font-size: 1rem; }
-  #flow-explainer .tools a { display: inline-flex; align-items: center; min-height: 44px; }
-  #motion-toggle { min-height: 44px; padding: 0 16px; font: inherit; font-weight: 600; color: var(--accent); background: var(--card); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
-  #flow-explainer .motion-note { margin: 0; flex-basis: 100%; color: var(--muted); font-size: 0.95rem; }
 
   /* The steps: the same cards the live page uses, joined by a line */
   #flow-explainer .flow { list-style: none; margin: 16px 0; padding: 0; }

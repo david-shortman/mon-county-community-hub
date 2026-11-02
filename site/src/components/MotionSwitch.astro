@@ -1,0 +1,12 @@
+---
+// The scroll story kit (#1441): "Skip to the summary" plus the shared
+// "Turn off motion" switch. Put it at the top of a scroll story, inside the
+// element you pass to watchSteps() from src/lib/motion-client.mjs, which shows
+// the button and keeps every explainer on the site in step with it.
+// Rules: docs/design/motion.md.
+import '../styles/motion-switch.css';
+import { motionSwitchHtml } from '../lib/motion-markup.mjs';
+interface Props { skip?: string; skipText?: string }
+const { skip, skipText } = Astro.props;
+---
+<Fragment set:html={motionSwitchHtml({ skip, skipText })} />

@@ -244,7 +244,7 @@ describe('access promises in a browser', { skip: fullOnly }, () => {
     const { ctx } = await context();
     const page = await ctx.newPage();
     await page.goto(s.origin + '/how-it-works/');
-    const btn = page.locator('#motion-toggle');
+    const btn = page.locator('#flow-explainer .motion-toggle');
     assert.equal(await page.locator('#flow-explainer.is-live').count(), 1, 'the story moves before the switch');
     await btn.click();
     assert.equal(await btn.innerText(), 'Turn on motion');

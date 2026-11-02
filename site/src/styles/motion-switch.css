@@ -1,0 +1,6 @@
+/* The scroll story kit (#1441): "Skip to the summary" and the "Turn off motion"
+   switch above every scroll story. Markup: src/lib/motion-markup.mjs. */
+.motion-tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s4); margin: var(--s1) 0 var(--s3); font-size: 1rem; }
+.motion-tools a { display: inline-flex; align-items: center; min-height: 44px; }
+.motion-toggle { min-height: 44px; padding: 0 var(--s4); font: inherit; font-weight: 600; color: var(--accent); background: var(--card); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
+.motion-tools .motion-note { margin: 0; flex-basis: 100%; color: var(--muted); font-size: 0.95rem; }
