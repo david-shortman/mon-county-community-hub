@@ -21,10 +21,10 @@ It merges three phase 1 directions: "Broadsheet" ([generic tells](../research/20
 1. **A serif second voice.** Newsreader (a newspaper face) for h1, h2, h3, card titles, door names, the home page lede and big dates. Atkinson Hyperlegible Next stays the working voice for kickers, labels and the dateline. Body stays on the system font.
 2. **A masthead.** The dateline becomes a folio line in small capitals. The header closes with a thick and thin rule, the old newspaper rule, and the footer opens with the same rule. On wide screens the name is centered between rules, and the menu is a section index of plain words split by thin rules.
 3. **Rules instead of soft boxes.** One radius (2px, 3px for buttons). Section heads get a 2px rule above, like a column head. Cards are paper slips with a 2px top rule.
-4. **Quilt geometry as a grid.** On the home page the five doors are pieced together like quilt blocks: square patches joined by 2px seams, no icons in tinted circles.
+4. **Quilt geometry as a grid.** On the home page the five doors are laid out like quilt blocks before they are sewn: square patches with a 2px top rule and an even 16px gap, no icons in tinted circles.
 5. **Quilt corners.** Every card and door has one half-square triangle in its top left corner, 14 to 16px, in one of three inks: rust for resources, hemlock for dates, Cheat water for places and groups. Pure CSS, no image. Never called a barn quilt.
 6. **Sentence entry lines.** On door pages, "I can't pay a heat, water or power bill" and the other choices read as ruled lines with a Flying Geese triangle pointing on. On the home page, "Just moved here?" and the other questions are set in the serif.
-7. **Lock steps.** On Trailhead routes the rail drops one notch to the right at each step, like the pools behind the locks and dams on the Mon. Step numbers are square gates on the rail. After step 5 the rail runs straight, so long routes never crowd the text.
+7. **Lock steps.** On Trailhead routes the rail drops one rail-width to the right at each step, like the pools behind the locks and dams on the Mon. Step numbers are square gates on the rail, level with the first line of each step's title. After step 5 the rail runs straight, so long routes never crowd the text.
 8. **Dates as a printed listing.** Big serif dates with even (tabular) figures, "today" and "tomorrow" as small capitals, and the calendar's "This week" as a date column beside each title.
 9. **The checked date as an imprint.** "Checked November 1, 2026" (the `span.checked` hook from #1395) is set bold in the text ink, so our hand-checking stands out from the grey source line.
 10. **A Log Cabin block for "nothing here."** The site has no empty state component, so the block sits above the title of the 404 page, 56px, in rust. It is our own drawing on a plain grid (`press/log-cabin.svg`, 0.7 KB), used as a mask so it follows light and dark.
@@ -70,7 +70,7 @@ No gold or yellow. Sandstone is a pale tan used only as a surface.
 | Kickers, dateline, "today" | Atkinson Hyperlegible Next 800, small capitals | 14px |
 | Meta, sources | system | 15.2px |
 
-**Weight added:** Newsreader, one static cut (weight 600, optical size 48, Latin subset with kerning and figure features), **14.3 KB** woff2. The stylesheet is 14.6 KB raw, about **4.3 KB** gzipped. The Log Cabin block is 0.7 KB and loads on the 404 only. Total first visit on an everyday page: about 19 KB.
+**Weight added:** Newsreader, one static cut (weight 600, optical size 48, Latin subset with kerning and figure features), **14.3 KB** woff2. The stylesheet is 20.6 KB raw, about **5.7 KB** gzipped. The Log Cabin block is 0.7 KB and loads on the 404 only. Total first visit on an everyday page: about 20 KB.
 
 **Kept off crisis and Help now pages.** On any page with the crisis strip (Where to stay tonight, Tonight, Mental health, Drugs and alcohol, Protective orders, Leaving an unsafe home) or with the Help now tab current, headings stay in Atkinson and the serif is never downloaded (checked by watching network requests). Colors and corners still change there; the crisis strip, Quick exit and tab bar keep their layout.
 
@@ -90,12 +90,50 @@ License: SIL Open Font License 1.1, copy at `site/public/looks/press/OFL.txt`. S
 
 ## Known issues
 
-- The h1 sits close under the home page Help now bar on wide screens; it could use a little more room.
 - Some component styles needed a doubled class to win (`.home-band`, `.week`), because Astro scopes them with extra attributes. If this look ships, the rules belong in the components instead.
 - The 404 is found by its structure (a noindex page whose main ends in the "Need help now?" note). A neutral `data-empty` hook would be sturdier.
 - At 320px and 200% text the masthead dateline in capitals takes four lines. Nothing overflows, but it is tall.
 - Dates on event cards wrap when a range is long ("Thu, Oct 1 to Thu, Dec 31"). They wrap cleanly but are big.
 - Windows High Contrast drops the quilt corners and the masthead's thin rule on purpose.
+
+## Spacing pass (November 2, 2026)
+
+David picked Press and asked for spacing refinements. Every gap in the look now comes from one scale, set as custom properties under `html[data-look="press"]`:
+
+| Token | `--s1` | `--s2` | `--s3` | `--s4` | `--s5` | `--s6` | `--s7` | `--s8` |
+|---|---|---|---|---|---|---|---|---|
+| Size | 4px | 8px | 12px | 16px | 24px | 32px | 48px | 64px |
+
+The same relationship always gets the same gap: `--s2` inside a group, `--s3` from a heading to its text, `--s4` between paragraphs and between cards in a list, `--s5` from one block to the next, `--s7` before a new section. There is always more room above a heading than below it.
+
+What changed:
+
+1. **Room under the masthead.** The built pages had no top padding on `main`, so the first block (the Help now box, the danger note, the breadcrumb) touched the header rule. `main` now has a 32px top gap and a 48px bottom gap on every page.
+2. **Doors stand apart.** The doors had shared 2px seams, which read as doubled borders on a phone. Each door is now its own patch with a 16px gap, the same 2px top rule as a card, and a hairline on the other sides.
+3. **Titles breathe.** h1 has 32px above it (48px on the home page) and 12px below it before the lede; after a breadcrumb it has 12px. Section heads have 48px above their rule and 12px below.
+4. **Wider steps on phones.** The route rail column went from 48px to 42px, and step padding from 14px to 12px, so the step text column is about 22px wider at 390px. The step number now lines up with the first line of the step title. The cost: the lock-step drop is 3px per step instead of 6px, so it is quieter.
+5. **Link lists read as lists.** "Looking for something?" on Thrift and resale shops had a line height of 1.9. It is now 1.6, with 12px between items. These are inline links, which WCAG 2.5.8 exempts from the 24px target size.
+6. **Calendar.** The "All dates" line has 16px above it, the week jump list has a 48px section gap above it, and every bulleted list in the look uses the same 24px indent.
+7. **Source lines.** "Source ... Checked ..." in cards, notes and steps has 16px above it, a 1.5 line height, and stays at 15.2px (the site keeps sources at 15px or more, #50), so it sits clearly below the 18px body text.
+8. **Page ends.** When the preview bar shows, the footer adds room so its last line clears both the preview bar and the tab bar (about 57px to spare at 390px).
+9. **Line length.** The reading column is 43rem on wide screens, so body lines run about 62 to 76 characters. The desktop menu now fits on one row.
+
+Plain paragraph and list margins sit in a CSS layer (`@layer press-flow`), so any spacing a component sets on purpose still wins.
+
+Before and after at 390px:
+
+| | Before | After |
+|---|---|---|
+| Home, top | ![Home top before](press-spacing/home-top-before.png) | ![Home top after](press-spacing/home-top-after.png) |
+| Home, doors | ![Doors before](press-spacing/home-doors-before.png) | ![Doors after](press-spacing/home-doors-after.png) |
+| Get through this month | ![Money top before](press-spacing/money-top-before.png) | ![Money top after](press-spacing/money-top-after.png) |
+| Start a business steps | ![Route before](press-spacing/route-before.png) | ![Route after](press-spacing/route-after.png) |
+| Thrift shops link lists | ![Thrift before](press-spacing/thrift-links-before.png) | ![Thrift after](press-spacing/thrift-links-after.png) |
+| Calendar, end of this week | ![Calendar before](press-spacing/calendar-week-before.png) | ![Calendar after](press-spacing/calendar-week-after.png) |
+
+The tab bar and preview bar are hidden in these shots so the page shows.
+
+Checked after the pass: no overflow at 320px with 200% text on ten pages (home, `/money/`, `/stay-tonight/`, `/legal-help/`, `/calendar/`, `/start-a-business/`, 404, `/utility-bills/`, `/care/`, `/thrift-shops/`). axe (A, AA and AAA rules) found no violations on seven pages at 390px and 1280px, light and dark.
 
 ## How it was checked
 
