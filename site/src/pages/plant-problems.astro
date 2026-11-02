@@ -1,0 +1,38 @@
+---
+// Who can tell me what's wrong with my plants? (#436, findability q34).
+// Points to WVU Extension and the WVU Plant Diagnostic Clinic, read
+// 2026-10-31 (first confirmed on #552). No diagnosis or spray advice here:
+// Extension gives that. The clinic's cost is not on its page, so the page
+// says to ask first.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource, telHref } from '../lib/content.mjs';
+export const page = { door: "living-here", topic: "growing", label: "Something's wrong with my plants", summary: "Who to ask when plants are sick, eaten or not growing: the county WVU Extension office, then the WVU Plant Diagnostic Clinic" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const clinic = [{ url: 'https://extension.wvu.edu/lawn-gardening-pests/plant-disease/plant-diagnostic-clinic', checked }];
+const form = 'https://extension.wvu.edu/files/d/c0ca38eb-b4a8-45ab-922e-0bb0a4e2cb3a/2021-plant-diagnostic-clinic-sample-submission-form-digital.pdf';
+const phone = '304-291-7201';
+---
+<Base title="Who can tell me what's wrong with my plants? Morgantown and Mon County, WV" description="Sick, spotted or chewed plants in Monongalia County: call the WVU Extension county office at Mylan Park first, then send a sample to the WVU Plant Diagnostic Clinic in Morgantown if needed. How to collect and mail a plant sample.">
+  <h1>Who can tell me what's wrong with my plants?</h1>
+  <p class="lede">Call WVU Extension's Monongalia County office at <a href={telHref(phone)}>{phone}</a>. Their experts can spot many common plant diseases and bugs. If they need a closer look, they help you send a sample to the WVU Plant Diagnostic Clinic in Morgantown.</p>
+
+  <h2 id="ask">Start with the county office</h2>
+  <ResourceCard r={resource('wvu-extension-monongalia-garden-help')} headingLevel={3} />
+  <p>It helps to have clear photos of the problem, the name of the plant, and what you have already tried.</p>
+
+  <h2 id="clinic">Send a sample to the clinic</h2>
+  <ResourceCard r={resource('wvu-plant-diagnostic-clinic')} headingLevel={3} />
+  <p>The clinic's steps for a good sample:</p>
+  <ol>
+    <li><strong>Pick the right plant.</strong> Send a sick plant that is still alive, not one that died a while ago. Include the roots, and a healthy plant if you can. If the whole plant is slowly failing, the roots are a must. To have a plant named, send the whole plant with flowers or fruit.</li>
+    <li><strong>Fill out the form.</strong> Use the <a href={form}>submission form (PDF, dated 2021)</a> and put it in its own plastic bag.</li>
+    <li><strong>Pack it.</strong> Seal the plant in a plastic bag. Do not add wet paper towels. Ship it in a mailing tube or a strong box. Keep it from drying out or getting hot. If you cannot mail it right away, put it in the fridge.</li>
+    <li><strong>Mail it early in the week</strong> to: WVU Plant Diagnostic Clinic, G102 South Agricultural Sciences Building, P.O. Box 6108, Morgantown, WV 26506.</li>
+  </ol>
+  <SourceLine sources={clinic} about="how to send a plant sample" />
+
+  <p>Wondering about your soil? See <a href={`${base}/soil-test/`}>How do I get my garden soil tested?</a> More for gardeners: <a href={`${base}/grow/`}>Grow food and flowers</a>.</p>
+</Base>

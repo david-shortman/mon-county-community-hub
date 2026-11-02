@@ -30,7 +30,44 @@ export const WATCH_DIR = path.join(CONTENT_DIR, 'watch');
 export const KINDS = ['page', 'pdf', 'facebook', 'none', 'blocked'];
 const FETCHED = new Set(['page', 'pdf']);
 const ENTRY_FIELDS = ['name', 'org', 'kind', 'url', 'start', 'end', 'quote', 'checked', 'note'];
-const FILE_FIELDS = ['group', 'title', 'issue_title', 'entries'];
+const FILE_FIELDS = ['group', 'title', 'issue_title', 'season', 'words', 'todo', 'plan', 'entries'];
+const DEFAULT_TODO = 'What to do: open each page and read the hours. If they changed, update the record with the new hours, the quoted text and a new `checked` date in a PR (food and shelter PRs wait for David). If they did not change, update `start`, `end` or `quote` in the watch list so the alarm stops. If the page no longer gives hours, say "Call before you go" and add the place to the call queue (#156). Never copy hours from this issue onto the site without reading the page.';
+const DEFAULT_PLAN = 'docs/plans/2026-10-31-pantry-watch.md';
+
+// A season such as "11-01 to 03-31" (month-day, Morgantown dates, may wrap the
+// new year). Outside it the list is skipped and its saved state dropped, so the
+// first run of the next season starts fresh.
+const SEASON = /^(\d{2})-(\d{2}) to (\d{2})-(\d{2})$/;
+export function inSeason(season, ymdToday) {
+  if (!season) return true;
+  const m = String(season).match(SEASON);
+  if (!m) return true;
+  const md = ymdToday.slice(5);
+  const from = `${m[1]}-${m[2]}`;
+  const to = `${m[3]}-${m[4]}`;
+  return from <= to ? md >= from && md <= to : md >= from || md <= to;
+}
+
+// Short bits of the watched text around each alert word ("warming shelter",
+// "code blue"), so the issue shows why it matters without opening the page.
+export function mentions(text, words = [], { width = 90, max = 4 } = {}) {
+  const t = norm(text);
+  const out = [];
+  for (const w of words) {
+    const k = norm(w);
+    let i = t.indexOf(k);
+    while (i >= 0 && out.length < max) {
+      const a = Math.max(0, i - width);
+      const b = Math.min(t.length, i + k.length + width);
+      out.push(`${a ? '...' : ''}${t.slice(a, b)}${b < t.length ? '...' : ''}`);
+      i = t.indexOf(k, b);
+    }
+  }
+  return [...new Set(out)];
+}
+
+// Today in Morgantown (the runner's clock is UTC).
+export const morgantownYmd = (d = new Date()) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(d);
 
 // ---------- loading ----------
 export function loadWatch(dir = WATCH_DIR) {
@@ -54,6 +91,10 @@ export function validateWatch(groups) {
     seen.add(g.group);
     if (!g.title) errors.push(`${at}: needs a title`);
     if (!g.issue_title) errors.push(`${at}: needs an issue_title`);
+    if (g.season !== undefined && !SEASON.test(String(g.season))) errors.push(`${at}: season must look like "11-01 to 03-31"`);
+    if (g.words !== undefined && (!Array.isArray(g.words) || g.words.some((w) => typeof w !== 'string' || !w.trim()))) errors.push(`${at}: words must be a list of short phrases`);
+    if (g.plan !== undefined && !fs.existsSync(path.join(CONTENT_DIR, '..', g.plan))) errors.push(`${at}: plan ${g.plan} does not exist`);
+    if (/[\u2014]/.test(JSON.stringify({ t: g.title, i: g.issue_title, w: g.words, d: g.todo }))) errors.push(`${at}: no em dashes`);
     g.entries.forEach((e, i) => {
       const w = `${at} entry ${i + 1} (${e?.name || 'no name'})`;
       for (const k of Object.keys(e || {})) if (!ENTRY_FIELDS.includes(k)) errors.push(`${w}: unknown field ${k}`);
@@ -137,6 +178,11 @@ export function evaluateWatch(groups, results, prev = {}, { now = new Date() } =
   const out = [];
   for (const g of groups) {
     const rows = [];
+    const base = { group: g.group, title: g.title, issue_title: g.issue_title, file: g._file, todo: g.todo, plan: g.plan };
+    if (!inSeason(g.season, morgantownYmd(now))) {
+      out.push({ ...base, off_season: g.season, rows: g.entries.map((e) => ({ ...e, status: 'off-season' })), alerts: [] });
+      continue;
+    }
     for (const e of g.entries) {
       if (!FETCHED.has(e.kind)) { rows.push({ ...e, status: e.kind === 'facebook' ? 'by-hand' : 'call' }); continue; }
       const r = results.get(e.url);
@@ -150,24 +196,29 @@ export function evaluateWatch(groups, results, prev = {}, { now = new Date() } =
       let h;
       let miss = '';
       let excerpt = '';
+      let said = [];
       if (e.kind === 'pdf' || r.kind === 'pdf') {
         h = r.fingerprint;
       } else {
         const s = section(r.text || '', e.start, e.end);
         if (!s.found) miss = 'start';
         else if (!quoteFound(s.text, e.quote)) miss = 'quote';
-        h = hash(s.text);
+        h = hash(s.text.replace(/dtstamp:[0-9tz]+/g, ''));
         excerpt = s.text.slice(0, 500);
+        said = mentions(s.text, g.words);
       }
       state[e.url] = { h, since: p?.h === h ? p.since : today, ...(miss ? { miss } : {}) };
       const reasons = [];
       if (p?.h && p.h !== h) reasons.push(e.kind === 'pdf' ? 'The file changed.' : e.start ? 'The hours part of the page changed.' : 'The page text changed.');
       if (miss === 'start' && p?.miss !== 'start') reasons.push(`The marker "${e.start}" is no longer on the page, so the page may have been rebuilt.`);
       if (miss === 'quote' && p?.miss !== 'quote') reasons.push('The hours text we saved is no longer on the page.');
+      // A list with alert words also speaks up on its first check (the first
+      // day of its season), when the page already mentions one of them.
+      if (!p && said.length) reasons.push('First check this season, and the page mentions one of the words this list watches for.');
       const status = reasons.length ? 'alert' : !p ? 'new' : miss ? 'still-missing' : 'same';
-      rows.push({ ...e, status, reasons, excerpt });
+      rows.push({ ...e, status, reasons, excerpt, mentions: said });
     }
-    out.push({ group: g.group, title: g.title, issue_title: g.issue_title, file: g._file, rows, alerts: rows.filter((x) => x.status === 'alert') });
+    out.push({ ...base, rows, alerts: rows.filter((x) => x.status === 'alert') });
   }
   return { groups: out, state };
 }
@@ -182,6 +233,7 @@ export function watchMd(watch) {
     const c = (st) => g.rows.filter((r) => r.status === st).length;
     const fetched = g.rows.filter((r) => FETCHED.has(r.kind)).length;
     L.push(`### Watched: ${g.title}`, '');
+    if (g.off_season) { L.push(`Off season (watched ${g.off_season}). ${g.rows.length} entries skipped. List: \`${g.file}\`.`, ''); continue; }
     L.push(`${fetched} pages watched, ${c('alert')} changed this run, ${c('unread')} could not be read, ${c('call') + c('by-hand')} need a call or a look by hand. List: \`${g.file}\`.`);
     const unread = g.rows.filter((r) => r.status === 'unread');
     if (unread.length) L.push('', ...unread.map((r) => `- Could not read: ${r.name}, ${r.url} (${r.why})`));
@@ -195,7 +247,7 @@ export function alertMd(g, { runUrl = '', today = '' } = {}) {
   const L = [
     `**${g.alerts.length} watched ${g.alerts.length === 1 ? 'page' : 'pages'} changed** (${today}). ${runUrl ? `Run: ${runUrl}` : ''}`.trim(),
     '',
-    'What to do: open each page and read the hours. If they changed, update the record with the new hours, the quoted text and a new `checked` date in a PR (food and shelter PRs wait for David). If they did not change, update `start`, `end` or `quote` in the watch list so the alarm stops. If the page no longer gives hours, say "Call before you go" and add the place to the call queue (#156). Never copy hours from this issue onto the site without reading the page.',
+    String(g.todo || DEFAULT_TODO).trim(),
     '',
   ];
   for (const a of g.alerts) {
@@ -203,9 +255,10 @@ export function alertMd(g, { runUrl = '', today = '' } = {}) {
     for (const r of a.reasons) L.push(`- ${r}`);
     if (a.quote) L.push(`- Hours we saved on ${ymd(a.checked)}: "${a.quote}"`);
     if (a.excerpt) L.push(`- What that part of the page says now: "${short(a.excerpt, 400)}"`);
+    for (const m of a.mentions || []) L.push(`- Mentions: "${m}"`);
     L.push('');
   }
-  L.push(`Watch list: \`${g.file}\`. How it works: \`site/scripts/watch.mjs\` and \`docs/plans/2026-10-31-pantry-watch.md\`.`);
+  L.push(`Watch list: \`${g.file}\`. How it works: \`site/scripts/watch.mjs\` and \`${g.plan || DEFAULT_PLAN}\`.`);
   return L.join('\n');
 }
 
@@ -264,6 +317,41 @@ async function selfTest() {
   const back = unpackState(JSON.parse(JSON.stringify(packState(st))), ['https://x.example/'], ['https://a.example/']);
   expect(back['https://x.example/']?.f === 'abc' && back['~watch']['https://a.example/']?.miss === 'quote', 'packed state should read back');
   expect(unpackState({ 'https://x.example/': { f: 'abc' } }, [])['https://x.example/'].f === 'abc', 'old state should still read');
+
+  const { pickForRun } = await import('./check-sources.mjs');
+  const many = Array.from({ length: 10 }, (_, i) => ({ url: `u${i}`, help_now: i === 9 }));
+  const d0 = pickForRun(many, 4, { keep: new Set(['u0']), day: 0 });
+  const d1 = pickForRun(many, 4, { keep: new Set(['u0']), day: 1 });
+  expect(d0.length === 4 && d0.some((x) => x.url === 'u0') && d0.some((x) => x.url === 'u9'), 'watched and Help now pages should always be fetched');
+  expect(d0.map((x) => x.url).join() !== d1.map((x) => x.url).join(), 'the rest should take turns by day');
+  expect(pickForRun(many.slice(0, 3), 4).length === 3, 'a small site should be fetched in full');
+
+  // Seasonal lists with alert words (warming shelter, #863).
+  expect(inSeason('11-01 to 03-31', '2026-11-01') && inSeason('11-01 to 03-31', '2027-03-31') && inSeason('11-01 to 03-31', '2027-01-15'), 'a season should wrap the new year');
+  expect(!inSeason('11-01 to 03-31', '2026-10-31') && !inSeason('11-01 to 03-31', '2027-04-01'), 'days outside the season should be off');
+  expect(inSeason('04-01 to 05-31', '2027-04-10') && !inSeason('04-01 to 05-31', '2027-06-01'), 'a season inside one year should work');
+  expect(morgantownYmd(new Date('2026-11-01T03:00:00Z')) === '2026-10-31', 'the season should use the Morgantown date');
+  const winter = [{ group: 'winter', title: 'Winter', issue_title: 'Winter page changed', season: '11-01 to 03-31', words: ['warming shelter', 'code blue'], todo: 'Read the page.', _file: 'content/watch/winter.yaml', entries: [
+    { name: 'News', kind: 'page', url: 'https://n.example/', start: 'TAG:', end: 'Trending', checked: '2026-10-31' },
+  ] }];
+  expect(validateWatch(winter).length === 0, `seasonal sample should validate: ${validateWatch(winter).join('; ')}`);
+  expect(validateWatch([{ ...winter[0], season: 'November to March' }]).length === 1, 'a bad season should fail');
+  const news = (t) => new Map([['https://n.example/', { state: 'ok', kind: 'html', fingerprint: 'x', text: `Menu TAG: ${t} Trending stories` }]]);
+  const off = evaluateWatch(winter, news('Warming shelter opens Dec. 1'), { 'https://n.example/': { h: 'old' } }, { now: new Date('2026-10-31T15:00:00Z') });
+  expect(off.groups[0].off_season && !off.groups[0].alerts.length && !off.state['https://n.example/'], 'off season: no alerts and the saved state is dropped');
+  expect(watchMd(off).includes('Off season'), 'the report should say the list is off season');
+  const day1 = evaluateWatch(winter, news('Warming shelter opens Dec. 1 at Scott Ave'), {}, { now });
+  expect(day1.groups[0].alerts.length === 1 && day1.groups[0].alerts[0].mentions[0].includes('warming shelter opens dec. 1'), 'the first check of the season should alert when the page mentions a word');
+  const quiet = evaluateWatch(winter, news('Holiday parade route'), {}, { now });
+  expect(quiet.groups[0].alerts.length === 0, 'the first check should stay quiet when no word is mentioned');
+  const day2 = evaluateWatch(winter, news('Code Blue tonight: warming shelter open 7 p.m.'), day1.state, { now });
+  expect(day2.groups[0].alerts.length === 1 && day2.groups[0].alerts[0].mentions.some((m) => m.includes('code blue')), 'a change should alert and show what the page says');
+  const md = alertMd(day2.groups[0], { today: '2026-11-02' });
+  expect(md.startsWith('**1 watched page changed**') && md.includes('Read the page.') && md.includes('Mentions: "code blue tonight'), 'the issue should use the list\'s own instructions and show mentions');
+  expect(!md.includes('Never copy hours'), 'a list\'s own instructions replace the pantry ones');
+  const ics = (stamp) => new Map([['https://n.example/', { state: 'ok', kind: 'html', fingerprint: 'x', text: `TAG: BEGIN:VEVENT DTSTAMP:${stamp} SUMMARY:Bingo END:VEVENT Trending` }]]);
+  const i1 = evaluateWatch(winter, ics('20261101T120000Z'), {}, { now });
+  expect(evaluateWatch(winter, ics('20261102T120000Z'), i1.state, { now }).groups[0].alerts.length === 0, 'a calendar feed\'s DTSTAMP should not count as a change');
 
   // The real watch files.
   const real = loadWatch();

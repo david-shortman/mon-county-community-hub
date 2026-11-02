@@ -45,6 +45,25 @@ function readSnapshot(src) {
   try { return JSON.parse(fs.readFileSync(snapshotFile(src), 'utf8')); } catch { return null; }
 }
 
+// The first date we saw a meeting's agenda or minutes file at this URL.
+function firstSeenFile(old, kind, url, checked) {
+  if (!old || old[`${kind}_url`] !== url) return checked;
+  return old[`${kind}_first_seen`] ?? old.first_seen ?? checked;
+}
+
+// Meetings with a new meeting, agenda or minutes first seen on or after
+// `since` (YYYY-MM-DD), each with `what_is_new`: a list of 'meeting',
+// 'agenda' and 'minutes'. For "new this week" lists (#951, #949).
+export function newSince(meetings, since) {
+  return meetings.flatMap((m) => {
+    const what = [];
+    if (m.first_seen >= since) what.push('meeting');
+    if (m.agenda_first_seen && m.agenda_first_seen >= since && !what.includes('meeting')) what.push('agenda');
+    if (m.minutes_first_seen && m.minutes_first_seen >= since) what.push('minutes');
+    return what.length ? [{ ...m, what_is_new: what }] : [];
+  });
+}
+
 // Turn parsed rows into records, carrying first_seen and last_changed over
 // from the previous snapshot so changes can be seen between runs.
 export function toRecords(src, rows, { checked, previous = [] }) {
@@ -64,6 +83,12 @@ export function toRecords(src, rows, { checked, previous = [] }) {
       sources: [{ url: src.page_url, checked, method: 'watched-page' }],
       first_seen: old?.first_seen ?? checked,
       last_changed: changed ? checked : (old.last_changed ?? old.first_seen ?? checked),
+      // When we first saw this agenda file and these minutes (#951), so a page
+      // can show "new on an agenda this week". Older snapshots have no such
+      // field; for those we use the meeting's first_seen, so nothing old is
+      // shown as new.
+      ...(r.agenda_url && { agenda_first_seen: firstSeenFile(old, 'agenda', r.agenda_url, checked) }),
+      ...(r.minutes_url && { minutes_first_seen: firstSeenFile(old, 'minutes', r.minutes_url, checked) }),
     };
   });
   const seen = new Set();

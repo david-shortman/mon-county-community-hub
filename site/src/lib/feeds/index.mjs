@@ -7,6 +7,13 @@
 // because of a feed.
 //
 // To refresh the saved copies: `npm run update-feeds` in site/, then commit.
+//
+// Every read goes through fetchWithRetry, which checks robots.txt first
+// (docs/operations/automated-reads.md). A feed whose robots.txt says no falls
+// back to its saved copy, with the reason in feed health. An adapter with
+// `off: { since, reason }` is never read: the site keeps its saved events
+// (dates already past drop out), each still showing the day it was checked,
+// and a person reads the source on a weekly checklist instead.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -86,7 +93,9 @@ function writeSnapshot(adapter, snap) {
 export async function loadFeed(adapter, { today, live = true, save = false, log = console } = {}) {
   const feedUrl = feedUrlFor(adapter, today);
   let error = live ? null : 'live fetch turned off';
-  if (live) {
+  let robots = false;
+  if (adapter.off) error = `turned off on ${adapter.off.since}: ${adapter.off.reason}`;
+  if (live && !adapter.off) {
     try {
       const raw = await fetchWithRetry(feedUrl, { format: adapter.format });
       const parsed = adapter.parse(raw);
@@ -105,16 +114,17 @@ export async function loadFeed(adapter, { today, live = true, save = false, log 
       return { entries: stamp(adapter, good, fetched, feedUrl), status: 'live', fetched };
     } catch (err) {
       error = err.message;
+      robots = Boolean(err.robots);
       log.warn(`feeds: ${adapter.id}: could not load ${feedUrl} (${err.message}). Using the saved copy if there is one.`);
     }
   }
   const snap = readSnapshot(adapter);
   if (!snap) {
     log.warn(`feeds: ${adapter.id}: no saved copy, skipping this feed`);
-    return { entries: [], status: 'skipped', fetched: null, error };
+    return { entries: [], status: adapter.off ? 'off' : 'skipped', fetched: null, error, robots };
   }
   const entries = (snap.entries ?? []).filter((e) => !entryProblems(e).length && inWindow(e, today));
-  return { entries: stamp(adapter, entries, snap.fetched, snap.feed_url), status: 'snapshot', fetched: snap.fetched, error };
+  return { entries: stamp(adapter, entries, snap.fetched, snap.feed_url), status: adapter.off ? 'off' : 'snapshot', fetched: snap.fetched, error, robots };
 }
 
 // All feed entries from every adapter.
@@ -130,10 +140,14 @@ export async function loadFeedEntries({ today, live = process.env.FEEDS_OFFLINE 
     id: ADAPTERS[i].id,
     name: ADAPTERS[i].name,
     page_url: ADAPTERS[i].page_url,
-    status: r.status, // live, snapshot (live failed, saved copy used) or skipped
+    // live, snapshot (live read failed or robots.txt said no, saved copy
+    // used), off (never read, saved copy used) or skipped (nothing to show).
+    status: r.status,
     entries: r.entries.length,
     fetched: r.fetched ?? null,
     error: r.error ?? null,
+    // True when the site's robots.txt asks robots not to read the feed.
+    robots_txt_disallows: Boolean(r.robots),
   }));
   return results.flatMap((r) => r.entries);
 }

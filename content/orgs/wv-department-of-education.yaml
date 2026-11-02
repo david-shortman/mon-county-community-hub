@@ -1,0 +1,10 @@
+name: West Virginia Department of Education (WVDE)
+slug: wv-department-of-education
+kind: government
+website: https://wvde.us/
+summary: The state agency for public schools. Its Office of Special Education handles state complaints, mediation and other ways to settle special education disagreements.
+topics: [family, disability]
+area: statewide
+sources:
+  - url: https://wvde.us/academics/special-education/general-supervision-system/idea-dispute-resolution
+    checked: 2026-10-31

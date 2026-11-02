@@ -26,3 +26,12 @@ gaps:
 topics: [money]
 rank: 1
 questions: [q01]
+get_help:
+  - path: /money/?pick=rent
+    label: A real page, with a query string
+  - path: /help/food/
+    label: A folder page
+site_coverage:
+  level: partial
+  why: Nothing real; this is a fixture.
+  checked: 2026-11-01

@@ -1,0 +1,7 @@
+date: 2026-11-01
+item: Mailing address for internet complaints to the Attorney General, on the Internet at home page
+page: /internet/
+kind: fact
+found_by: our-check
+what: We gave the mailing ZIP code as 25325, which is what the printed broadband complaint form says. The Attorney General's complaint page says to mail complaints to P.O. Box 1789, Charleston, WV 25326-1789. The listing now uses the address on the Attorney General's page.
+link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=head%3Acode%2Frecheck-b-around-town

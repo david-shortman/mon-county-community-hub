@@ -1,0 +1,44 @@
+---
+// Starting page for homeowners (#271, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/homeowners.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "living-here", topic: "moving", label: "Homeowners", summary: "Who serves your address, permits, hiring a contractor, septic and wells, property tax and bills, in one place" };
+const sections = [
+  { title: "In the city or the county?", links: [
+    { href: "/who-serves-me/", text: "who to call for police, trash, water and streets where you live" },
+    { href: "/flood-zone/", text: "flood and slide maps, and when you need a floodplain permit" },
+  ] },
+  { title: "Repairs and building", links: [
+    { href: "/permits/", text: "who issues building permits where you live" },
+    { href: "/contractor-license/", text: "check a contractor before you hire" },
+    { href: "/borrow-or-get-free/", text: "borrow tools, and free repairs" },
+  ] },
+  { title: "Septic, wells and trash", links: [
+    { href: "/septic-and-wells/", text: "permits for a septic system or well, and testing well water" },
+    { href: "/recycling/", text: "pickup days and where to take hard items" },
+  ] },
+  { title: "Property tax", links: [
+    { href: "/property-tax/", text: "due dates, the homestead exemption, and asking for a review of your assessment" },
+  ] },
+  { title: "Bills and safety", links: [
+    { href: "/utility-bills/", text: "help with a heat, water or electric bill" },
+    { href: "/home-safety/", text: "free smoke alarms, carbon monoxide and heating safety" },
+    { href: "/after-a-storm/", text: "power out, water in the basement, or a tree down" },
+  ] },
+  { title: "Yard and garden", links: [
+    { href: "/grow/", text: "grow food and flowers" },
+    { href: "/soil-test/", text: "a free soil test from WVU" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/new-to-mon-county/", text: null },
+    { href: "/for/older-adults/", text: null },
+    { href: "/for/tradespeople/", text: null },
+  ] },
+];
+---
+<Base title="Homeowners in Morgantown and Mon County: where to start" description="A starting page for homeowners in Monongalia County, in town or out: who serves your address, building permits, checking a contractor, septic and well water, property tax and the homestead exemption, and help with bills.">
+  <h1>For homeowners</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

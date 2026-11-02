@@ -6,14 +6,19 @@ import GroupStart from '../../components/GroupStart.astro';
 export const page = { door: "family", topic: "disability", label: "Older adults and retirees", summary: "Medicare, help at home, food and bill help, and ways to stay involved, in one place" };
 const sections = [
   { title: 'Medicare and health costs', links: [
-    { href: '/turning-65/', text: 'when to sign up, free visits and shots, and help with costs' },
+    { href: '/turning-65/', text: 'when to sign up, free visits and shots, and help with costs', resource: 'wv-ship-medicare-counseling' },
     { href: '/dental-and-prescriptions/', text: 'a dentist without dental insurance, and help paying for medicine' },
     { href: '/flu-shots/', text: 'who should get one, when, and what it costs' },
     { href: '/staying-well/', text: 'checkups and shots to get each year' },
   ] },
   { title: 'Help at home, and a break for caregivers', links: [
+    { href: '/help-at-home/', text: 'meals brought to your home, lunch with others, in-home care, and a break for caregivers' },
     { href: '/medicaid-waivers/', text: 'care at home instead of a nursing home, through Medicaid' },
     { href: '/disability-and-aging/', text: 'independent living help and free Medicare counseling' },
+  ] },
+  { title: 'Getting around', links: [
+    { href: '/disability-and-aging/#mountain-line-gold-card', label: 'Half fare on the bus at 62', text: 'the Mountain Line Gold Card, and rides to the senior center' },
+    { href: '/medical-rides/', text: 'Medicaid rides and bus routes to the hospitals' },
   ] },
   { title: 'Food and bills', links: [
     { href: '/help/food/', text: 'food today or this week, or help buying groceries every month' },

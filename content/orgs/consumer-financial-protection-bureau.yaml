@@ -1,0 +1,10 @@
+name: Consumer Financial Protection Bureau (CFPB)
+slug: consumer-financial-protection-bureau
+kind: government
+website: https://www.consumerfinance.gov/
+summary: The federal agency that protects people in dealings with banks, lenders and mortgage servicers. Its site explains what to do if you cannot pay your mortgage and lists housing counselors by ZIP code.
+topics: [money, housing]
+area: national
+sources:
+  - url: https://www.consumerfinance.gov/ask-cfpb/if-i-cant-pay-my-mortgage-loan-what-are-my-options-en-268/
+    checked: 2026-10-31

@@ -1,0 +1,12 @@
+---
+// "On this page" jump list (#1174): put it near the top of a long page so a
+// reader can skip to the part they need. items: [['#id', 'Label'], ...].
+// Styles: .on-page in Base.astro.
+const { items = [] } = Astro.props;
+---
+{items.length > 0 && (
+  <nav class="on-page no-print" aria-label="On this page">
+    <p>On this page:</p>
+    <ul>{items.map(([href, text]) => <li><a href={href}>{text}</a></li>)}</ul>
+  </nav>
+)}

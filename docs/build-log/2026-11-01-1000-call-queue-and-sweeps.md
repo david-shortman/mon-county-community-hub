@@ -1,0 +1,6 @@
+# 2026-11-01: The call queue and recurring source sweeps, planned (#156, #6)
+
+- **Considered:** calls to make were spread over two dated call lists (sweeps 1 to 4), the `npm run call-queue` script, and a comment on #156 listing pantries with no web page. #6 asked for recurring sweeps of local sources, most of which daily jobs already cover.
+- **Chose:** `docs/operations/call-queue.md`: one queue grouped by organization (so one call settles several issues), food and holiday help first, only issues still open (9 closed ones dropped, 7 left out of the first draft added back after a check that every open issue from the dated lists is in it). It has the how-often rule (food, shelter and crisis monthly, everything else yearly), a four-question script, courtesy rules (notes only, never the name of the person who answered, an opt-out), and the call log format, matching the `phone_confirmed` fields from #164. Sweeps keep writing dated lists; the queue is refreshed from them. And `docs/operations/source-sweeps.md`: each #6 source, who reads it and how often, and three small proposed additions. WVU Extension refuses automated reads (HTTP 403), so a person reads it monthly.
+- **Not done:** no calls. Who calls, and from what number, is David's decision (#165).
+- **Cost:** $0.

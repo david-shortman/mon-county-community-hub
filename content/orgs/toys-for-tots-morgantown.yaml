@@ -1,0 +1,10 @@
+name: Marine Toys for Tots, Morgantown Area campaign
+slug: toys-for-tots-morgantown
+kind: nonprofit
+website: https://morgantown-wv.toysfortots.org/
+summary: The local Toys for Tots campaign. It collects new toys and gives them to children in Monongalia, Marion, Preston and Taylor counties at Christmas.
+topics: [family]
+area: monongalia-county
+sources:
+  - url: https://morgantown-wv.toysfortots.org/
+    checked: 2026-10-31

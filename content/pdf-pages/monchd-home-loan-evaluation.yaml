@@ -1,0 +1,109 @@
+# The health department's home loan septic and well evaluation packet (part
+# of #393), from the "Request for water and sewage evaluation" PDF linked on
+# its Septic and Wells and Environmental Health pages (read 2026-11-01). Six
+# pages: a cover memo dated October 1, 2025, the SG-55 request form (Rev.
+# 10/07), and state procedure H-12 (dated February 24, 2012), the guidelines
+# staff follow. Rules and fees are quoted. The memo and H-12 name staff; names
+# and a staff email are left out.
+#
+# The same Septic and Wells page also links "Request for a home loan
+# evaluation" to an older copy of this packet on Dropbox (memo dated August
+# 8, 2016, same fees). See docs/discoveries/2026-11-01-monchd-two-home-loan-packets.md.
+slug: monchd-home-loan-evaluation
+title: Request for water and sewage evaluation
+publisher: Monongalia County Health Department
+pdf: https://cdn.sanity.io/files/95aan9ec/production/e39c6b23f86e7bfcbcf6625ff51adb35955a4af4.pdf
+pdf_date: "October 1, 2025 (the cover memo). The guidelines inside are dated February 24, 2012"
+found_on: https://www.monchd.org/services/septic-and-wells
+intro: When a home with a well or septic system is sold, many lenders want a health department check first. These are the department's own rules for that check. The parts in quotes are its own words.
+recheck_days: 180
+sources:
+  - url: https://cdn.sanity.io/files/95aan9ec/production/e39c6b23f86e7bfcbcf6625ff51adb35955a4af4.pdf
+    name: Monongalia County Health Department
+    checked: 2026-11-01
+  - url: https://www.monchd.org/services/septic-and-wells
+    checked: 2026-11-01
+  - url: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
+    name: Health department fee schedule, fiscal year 2026-2027
+    checked: 2026-11-01
+sections:
+  - heading: What the check covers
+    id: covers
+    items:
+      - "\"The service is completely impartial, reporting the actual conditions found, regardless of who requests the service.\""
+      - "\"The service always includes an evaluation of the water system, the sewer system and a water sample. A Radon Test may also be requested with this evaluation.\""
+      - "What the water test does not cover. The form says: \"Inspection and sampling does not address chemical contamination, mineral concerns, or yield of the supply.\""
+  - heading: Cost
+    id: cost
+    items:
+      - name: "Water and sewer evaluation"
+        lines: ["$225.00"]
+      - name: "With a radon test added"
+        lines: ["$325.00 in all (the radon test is \"an additional $100.00\")"]
+      - "The health department's fee schedule for fiscal year 2026-2027 lists the same amounts: Home Loan Evaluation $225, and radon testing \"As part of a Home Loan Evaluation\" $100."
+  - heading: How to ask for it
+    id: ask
+    items:
+      - "\"The evaluation process begins following receipt of an original completed Form SG – 55 and payment.\" Form SG-55 is page 2 of the PDF. The lender, buyer and owner details go at the top."
+      - "\"Submit payment of $225.00 or $325.00 with a completed, original (FAX not accepted) SG – 55\""
+      - "\"Provide clear information about the buyer, seller, and lending institution.\""
+      - "\"Provide any available information about previous owner(s).\""
+      - "\"Provide a contact number where someone can always be reached regarding the property.\""
+      - "Have other papers ready if asked, such as \"H.A.U. service contracts, affidavits, legal easements, or septic tank pump receipts\"."
+      - "Questions: the health department's phone is 304-598-5131."
+  - heading: How long it takes
+    id: time
+    items:
+      - "\"Allow at least two weeks (minimally) for the evaluation process to be completed.\""
+      - "\"An average turnover time for this service is usually within two weeks of the receipt of the SG – 55 and payment.\" It \"may be delayed as much as three weeks during busy periods.\""
+      - "Bad weather, missing information, or trouble setting up the tests can make it take longer."
+  - heading: Before the septic test
+    id: before
+    items:
+      - "\"Homes must be occupied for at least 30 consecutive days prior to dye testing of the system.\" (This does not apply to surface discharge systems.)"
+      - "The inspector puts dye in the drains on each floor, then looks for dye on the ground, in ditches and in streams. The guidelines say results \"should not be reported as negative until rechecked after at least the next working day.\""
+  - heading: Well, spring or cistern rules
+    id: water
+    items:
+      - "\"Wells installed after June 8, 1985, are required to have been drilled by a certified well driller under permit issued by the county health department.\""
+      - "\"Water supply must test safe bacteriologically.\" If the first sample fails, the owner gets disinfection steps, then the supply is checked and sampled again."
+      - "\"All spring and cistern water supplies are required to be chlorinated by a positive feed-type hypochlorinator or by means of NSF approved ultraviolet disinfection units.\" They must be installed and in use at the time of the check."
+      - "\"No individual water supply shall have more than two unsatisfactory bacteriological sample results.\" After that, no more samples are taken until a disinfection system runs all the time."
+  - heading: Septic system rules
+    id: septic
+    items:
+      - "\"Sewage systems must meet design standards which were in effect at the time the system was installed.\""
+      - "Systems put in after July 1, 1970 need an inspection report (form SS-177) on file. Without one, the system \"cannot be approved until the property owner verifies that the system is in compliance\"."
+      - "Systems put in before July 1, 1970: \"an affidavit attesting thereto is acceptable\" if it is complete."
+      - "Part of the system on someone else's land: it is not approved unless \"a legal easement has been prepared and filed with the county clerk\"."
+      - "In a subdivision created after July 1, 1970: not approved without \"a subdivision approval or a declaratory ruling\"."
+      - "Tank size: at least 500 gallons for tanks put in before June 30, 1959, and at least 750 gallons for tanks put in on or after July 1, 1959."
+      - "Pumping: \"Septic tanks that have been in use for five or more years and which have not been pumped out within the last three years are to be pumped and their physical condition checked after the sewage disposal system evaluation has been conducted.\" The owner must show \"a dated receipt\"."
+      - "Homes on public or community sewer \"shall be considered to meet the requirements of the state code and regulations.\""
+  - heading: Home aeration units (HAU) and media filters
+    id: hau
+    note: A home aeration unit (HAU) is a kind of home sewage treatment system. Some let treated water out on the surface (surface discharge), others underground (subsurface). WVDEP is the WV Department of Environmental Protection.
+    items:
+      - "Surface discharge systems put in after May 1, 1998 \"must have an approved perpetual maintenance contract.\""
+      - "Surface discharge systems permitted after January 1, 1999 \"must have a valid WVDEP registration when evaluation is performed.\""
+      - "Surface discharge systems permitted before January 1, 1999 \"shall obtain a permit registration from WVDEP at the time the home is sold.\""
+      - "Systems with subsurface discharge \"must be serviced a minimum twice per year by an approved maintenance provider\", with papers to show it."
+  - heading: If the system does not pass
+    id: fail
+    items:
+      - "The owner is told what changes are needed, and that \"a permit must be obtained from the health department prior to making the required modifications.\""
+      - "If the owner does not contact the health department within ten days of that written notice, the form is marked not approved and mailed to the lender."
+  - heading: Selling? Ask for a check before you list
+    id: pre-need
+    items:
+      - "\"The property owner or real estate agency may request a pre-need evaluation by submitting to the local health department form SG-55 without the lender or purchaser information.\""
+      - "\"The lending agency, however, may reject an evaluation it does not consider current. For example, WV Housing requires form SG-55 to be dated within 90 days of the closing date.\""
+  - heading: The form
+    id: form
+    items:
+      - name: "Request for water and sewage evaluation"
+        lines: ["Six pages: a cover memo, the SG-55 request form, and the guidelines staff follow (procedure H-12)."]
+        links:
+          - label: "Request for water and sewage evaluation (PDF)"
+            url: https://cdn.sanity.io/files/95aan9ec/production/e39c6b23f86e7bfcbcf6625ff51adb35955a4af4.pdf
+            date: "October 1, 2025"

@@ -1,0 +1,45 @@
+title: Students proficient in science
+slug: school-tests-science
+topic: schools
+# The definition is ZoomWV's own note on its Assessment Achievement chart. The number is the
+# "Proficiency Rate Trend by Subject" chart for Science, all tested grades.
+definition: 'Performance at "Meets Standard" and "Exceeds Standard" is proficient. Performance at "Does Not Meet Standard" and "Partially Meets Standard" is not proficient.'
+unit: percent
+data_year: "2025-2026"
+release: ZoomWV, West Virginia Department of Education, State Assessment Summary
+values:
+  monongalia: 0.4431
+  west_virginia: 0.2927
+more: https://zoomwv.k12.wv.us/Dashboard/dashboard/7301
+sources:
+  # Read in a browser on 2026-10-31: the page needs JavaScript. Monongalia is
+  # "(056) - Monongalia" under Filter Data, District/County. West Virginia is
+  # the default "[All Districts]" view. History starts in 2021-2022, after the
+  # 2019-2020 year with no tests and the 2020-2021 year ZoomWV says to read
+  # with caution.
+  - name: ZoomWV State Assessment Summary (West Virginia Department of Education)
+    url: https://zoomwv.k12.wv.us/Dashboard/dashboard/7301
+    checked: 2026-10-31
+history:
+  monongalia:
+    - year: "2021-2022"
+      value: 0.4186
+    - year: "2022-2023"
+      value: 0.4248
+    - year: "2023-2024"
+      value: 0.432
+    - year: "2024-2025"
+      value: 0.4748
+    - year: "2025-2026"
+      value: 0.4431
+  west_virginia:
+    - year: "2021-2022"
+      value: 0.2793
+    - year: "2022-2023"
+      value: 0.2867
+    - year: "2023-2024"
+      value: 0.2872
+    - year: "2024-2025"
+      value: 0.2985
+    - year: "2025-2026"
+      value: 0.2927

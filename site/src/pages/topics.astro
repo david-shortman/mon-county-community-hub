@@ -1,7 +1,9 @@
 ---
 // Every door with its topics, then every page A to Z. Built from the page
 // tags (see src/lib/pages.mjs), so a new page shows here with no edits (#249).
+// Ways to explore (#1039) sits between Help now and the door lists.
 import Base from '../layouts/Base.astro';
+import WaysToExplore from '../components/WaysToExplore.astro';
 import { loadDoors } from '../lib/content.mjs';
 import { doorTopics, allListed } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -23,6 +25,8 @@ const az = await allListed();
       </ul>
     </section>
   )}
+
+  <WaysToExplore />
 
   {sections.map((d) => (
     <section class="topic-door" id={d.slug} aria-labelledby={`${d.slug}-h`}>

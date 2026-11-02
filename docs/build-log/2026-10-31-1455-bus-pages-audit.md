@@ -1,0 +1,6 @@
+# 2026-10-31: Bus routes and bus passes checked against Mountain Line (#529 wave 3, lane Q)
+
+- **Considered:** the two Mountain Line phone pages from wave 2 (#950, #969). Every time, run time, stop list, PDF date, fee, address and quote was compared with the 21 route pages, 40 schedule PDFs, 4 program pages and 3 forms (all loaded on October 31, 2026).
+- **Found:** times, stops, prices and quotes matched. Five things did not: the routes page said two PDFs differ from their route page, but seven do (five give a different run time); the RideMon line dropped the condition that someone else can request rides for you when you have no smartphone or computer; the passes page said Mountain Line has "three pass programs" (its Fares page lists more); the list of who cannot get a Property Tax pass read as complete, but Mountain Line says "include, but are not limited to"; and the Property Tax form's save date was off by a day (May 5, not May 6, 2020).
+- **Shipped:** all five fixed, with three entries on the Corrections page.
+- **Open question:** Mountain Line's Fares page now lists fares of $0.75 to $1.00, while the half-fare pages only say what a 75 cent fare costs. Filed as a needs-verification issue rather than guessing.

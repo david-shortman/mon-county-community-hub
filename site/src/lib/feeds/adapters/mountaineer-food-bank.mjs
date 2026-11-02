@@ -1,7 +1,7 @@
 // Mountaineer Food Bank mobile pantry dates in Monongalia County, from the
 // food bank's public events API (The Events Calendar plugin for WordPress).
 // Human page: https://mountaineerfoodbank.org/food-pantries/
-import { plain } from '../util.mjs';
+import { plain, realTime } from '../util.mjs';
 
 const SITE = 'https://mountaineerfoodbank.org';
 
@@ -24,6 +24,11 @@ export default {
       const starts = String(ev.start_date ?? '').slice(0, 10);
       const ends = String(ev.end_date ?? '').slice(0, 10) || starts;
       if (!/^\d{4}-\d{2}-\d{2}$/.test(starts)) continue;
+      // Times from the feed (#230), for a single-day pantry with a set time.
+      const t0 = String(ev.start_date ?? '').slice(11, 16);
+      const t1 = String(ev.end_date ?? '').slice(11, 16);
+      const oneDay = (ends || starts) === starts && !ev.all_day;
+      const times = oneDay && realTime(t0) ? { start_time: t0, ...(realTime(t1) && t1 > t0 ? { end_time: t1 } : {}) } : {};
       const v = Array.isArray(ev.venue) ? null : ev.venue;
       const place = v?.venue ? plain([v.venue, v.city].filter(Boolean).join(', ')) : '';
       // A full place for the Directions button, only when the feed gives a city.
@@ -38,7 +43,8 @@ export default {
         ends: ends < starts ? starts : ends,
         org_name: 'Mountaineer Food Bank',
         who_it_is_for: 'Listed by the food bank for Monongalia County.',
-        what_to_do: `${place ? `Location: ${place}. ` : ''}See the event page for the time and place.`,
+        what_to_do: place ? `At ${place}.` : "The food bank's event page has the place.",
+        ...times,
         url: ev.url || `${SITE}/food-pantries/`,
         topics: ['food'],
         ...(mapPlace ? { place: mapPlace } : {}),

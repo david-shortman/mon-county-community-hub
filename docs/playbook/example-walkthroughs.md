@@ -2,7 +2,7 @@
 
 A walkthrough is a short, step-by-step story about a made-up person in a common situation, using real local programs and places. It shows that taking a step is normal and doable. This page is the pattern and the rules. From #190, part of #155 (idea 11 in [reaching people](reaching-people.md#11-show-how-someone-like-me-did-it)).
 
-The first one is [Example: new in town, working from home, and wanting to meet people](../../site/src/pages/meet-people/example.astro) at `/meet-people/example/`.
+The first one is [Example: new in town, working from home, and wanting to meet people](../../site/src/pages/meet-people/example.astro) at `/meet-people/example/`. The second is [Example: a first week without a car](../../site/src/pages/getting-around/example.astro) at `/getting-around/example/`.
 
 ## Why
 
@@ -50,7 +50,6 @@ The first one is [Example: new in town, working from home, and wanting to meet p
 
 These need build work and are tracked in a follow-up issue for #190:
 
-- Getting around without a car in your first week (bus pass, trip planner).
 - A first city council or county commission meeting: finding the agenda, signing up to speak.
 - Starting to volunteer: picking one cleanup and going.
 

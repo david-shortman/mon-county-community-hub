@@ -13,6 +13,16 @@ import YAML from 'yaml';
 import { CONTENT_DIR, loadDir, loadDoors, todayYmd, ymd } from '../src/lib/content.mjs';
 
 const here = path.dirname(new URL(import.meta.url).pathname);
+const PAGES_DIR = path.join(here, '../src/pages');
+
+// True when a site path like /help/food/ or /money/?pick=rent has a page file.
+export function pageExists(p, pagesDir = PAGES_DIR) {
+  const route = String(p ?? '').replace(/[?#].*$/, '');
+  if (!route.startsWith('/') || route.includes('..')) return false;
+  const bare = route.replace(/\/$/, '');
+  const candidates = [path.join(pagesDir, bare, 'index.astro'), `${path.join(pagesDir, bare)}.astro`];
+  return candidates.some((f) => fs.existsSync(f));
+}
 const schema = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/need.schema.json'), 'utf8'));
 const P = schema.properties;
 
@@ -105,6 +115,22 @@ export function checkNeeds(entries, { label, orgSlugs, topics, questionIds, toda
     for (const q of n.questions ?? []) if (!questionIds.has(q)) err(`question ${q} is not in content/findability/questions.yaml`);
     for (const i of n.issues ?? []) if (!Number.isInteger(i)) err('issues must be issue numbers');
 
+    // Where to get help on this site (#1248): every link goes to a real page.
+    (Array.isArray(n.get_help) ? n.get_help : n.get_help == null ? [] : (err('get_help must be a list'), [])).forEach((g, i) => {
+      const at = `get_help[${i}]`;
+      unknown(g, P.get_help.items.properties, `${at}.`);
+      if (!g?.label) err(`${at} needs a label: what the reader finds there`);
+      if (typeof g?.path !== 'string' || !g.path.startsWith('/')) err(`${at}.path must be a path on this site, starting with /`);
+      else if (!pageExists(g.path)) err(`${at}.path ${g.path} has no page in site/src/pages`);
+    });
+    const c = n.site_coverage;
+    if (c != null) {
+      unknown(c, P.site_coverage.properties, 'site_coverage.');
+      if (!P.site_coverage.properties.level.enum.includes(c.level)) err(`site_coverage.level must be one of ${P.site_coverage.properties.level.enum.join(', ')}`);
+      if (!c.why) err('site_coverage needs "why": what the site has and lacks');
+      checkDate(c.checked, 'site_coverage');
+    }
+
     // Privacy: a need is about a problem, not about people.
     const text = strings(n).join('\n');
     if (EMAIL.test(text)) err('contains an email address; needs never hold contact details');
@@ -126,7 +152,7 @@ const good = checkNeeds(fixtures.filter((f) => !f.file.includes('bad')), { ...ct
 const bad = checkNeeds(fixtures.filter((f) => f.file.includes('bad')), { ...ctx, label: 'fixtures/needs' });
 const selfTest = [];
 if (good.errors.length) selfTest.push(`the good fixture should pass but got:\n  ${good.errors.join('\n  ')}`);
-for (const expect of ['unknown field contact_email', 'evidence[0] needs a source url', 'whole number', 'severity must be', 'long quote', 'in the future', 'never a private person', 'is not in content/doors.yaml', 'file name should match'])
+for (const expect of ['unknown field contact_email', 'evidence[0] needs a source url', 'whole number', 'severity must be', 'long quote', 'in the future', 'never a private person', 'is not in content/doors.yaml', 'file name should match', 'has no page in site/src/pages', 'must be a path on this site', 'site_coverage.level must be', 'site_coverage needs "why"'])
   if (!bad.errors.some((e) => e.includes(expect))) selfTest.push(`the bad fixture should fail with "${expect}"`);
 if (selfTest.length) {
   console.error(`check-needs self-test failed:\n- ${selfTest.join('\n- ')}`);

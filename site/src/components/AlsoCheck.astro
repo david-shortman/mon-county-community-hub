@@ -1,7 +1,8 @@
 ---
 // "Also check" (#224): 2 to 4 links at the end of a topic page to pages that
 // often go with it, from content/also-check.yaml. Link text is each page's own
-// label and summary, so nothing here can go stale on its own. A link shows
+// label and summary, so nothing here can go stale on its own. Search skips
+// these links (#529), so a page is found for its own words, not its neighbors'. A link shows
 // only once its page exists; the block shows only with at least one link.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,7 +17,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const links = (map[route] ?? []).map((href) => pages.get(href)).filter((p) => p && p.route !== route);
 ---
 {links.length > 0 && (
-  <nav class="also-check" aria-labelledby="also-check-h">
+  <nav class="also-check" aria-labelledby="also-check-h" data-pagefind-ignore>
     <h2 id="also-check-h">Also check</h2>
     <ul class="topic-list">
       {links.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a>{p.summary && <span class="hint">{p.summary}</span>}</li>)}

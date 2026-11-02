@@ -1,0 +1,6 @@
+# 2026-11-01: Life event pages show a number and a checked date on their first steps
+
+- **Considered:** #1288 (sprint wave 9, phone design, #529). In the November 1 simulated walkthroughs (made-up tasks, not resident feedback), the life event pages were link hubs: no phone number and no checked date of their own, so a reader had to tap again to find anything to act on.
+- **Chose:** option 1. A link on a "start here" page (`GroupStart.astro`, used by life event and `/for/` pages) can name a resource record. It then shows that record's Call button (or website) and its source line with the checked date, right under the link. The record is the only place those facts come from, and a hidden record shows nothing extra. Added to seven links on five life event pages: legal help and family court (separating or divorcing), Birth to Three and county special education (a child with a delay), Catholic Charities immigration help (new to the country), the REACH reentry mentors (leaving jail or prison), and WorkForce West Virginia (lost my job). Each record is the one shown on the page the link goes to.
+- **Left out on purpose:** links about food, money, housing or crisis lines, and the leaving an unsafe home page, since those wait for David.
+- **Cost:** $0.

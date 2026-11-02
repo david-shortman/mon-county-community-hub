@@ -8,19 +8,29 @@
 //      person can text or bookmark their steps.
 //   3. Your steps: one list for everything picked, grouped Today, This week,
 //      When it opens, each step ending in an action (Trailhead, #237).
-//   4. Often goes with this, dates for this door, the door's own sections
-//      (the slot), every page in the door, and a person to talk to.
+//   4. Often goes with this, every page in the door, the door's own sections
+//      (the slot), dates for this door (folded), and a person to talk to.
+// An "On this page" jump list sits above the picker so a reader whose need
+// is not a choice can skip the long parts (#1174). A page with its own
+// sections passes them as jump={[['#id', 'Label']]}.
+// A page can put a short block right under the lede and the "can't wait"
+// strip with slot="top" (the Family door's big life changes row, #1287).
 // A situation shows only once its page exists. Steps carry no facts of their
 // own: phone, link, cost and source come from the step's resource record.
 import Actions from './Actions.astro';
 import EventCard from './EventCard.astro';
 import SourceLine from './SourceLine.astro';
+import AfterHours from './AfterHours.astro';
+import OnThisPage from './OnThisPage.astro';
+import Fold from './Fold.astro';
+import Checklist from './Checklist.astro';
+import CallNotes from './CallNotes.astro';
 import { loadDoors, loadDoorPage, loadCalendarWithFeeds, upcoming, telHref, resource, websiteLabel } from '../lib/content.mjs';
 import { loadPages, doorTopics } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // A topic guide (like /grow/, #437) uses the same layout from
 // content/guides/<guide>.yaml: it names its door, topic and page.
-const { slug, guide } = Astro.props;
+const { slug, guide, jump = [] } = Astro.props;
 const data = guide ? loadDoorPage(guide, 'guides') : loadDoorPage(slug);
 const door = loadDoors().bySlug[guide ? data.door : slug];
 const home = guide ? data.page : door.page;
@@ -43,6 +53,10 @@ const cw = data.cant_wait && resource(data.cant_wait.resource);
 // The text line: set in the door file (988 texts at its own number), or the record's text line (211 texts at 898-211).
 const cwSms = cw && (data.cant_wait.sms ?? cw.contact.text);
 const r211 = resource('wv-211');
+// The after hours box (#192) shows on the doors people use to get help, with
+// any step that can be started online.
+const helpDoor = !guide && ['this-month', 'care', 'family'].includes(slug);
+const online = steps.map((st) => resource(st.resource)).filter((r, i, a) => r?.contact?.url_label === 'Apply online' && a.indexOf(r) === i);
 ---
 <p class="lede">{data.lede}</p>
 
@@ -57,6 +71,18 @@ const r211 = resource('wv-211');
     <SourceLine sources={cw.sources} org={cw.org} about={cw.title}>{data.cant_wait.emergency && ' 911 is the standard emergency number.'}</SourceLine>
   </section>
 )}
+
+<slot name="top" />
+
+<OnThisPage items={[
+  ['#pick-h', 'Pick what is going on'],
+  ...(inDoor.length > 0 ? [['#every-page', guide ? `Every ${door.topics[data.topic]} page` : `Every ${door.name} page`]] : []),
+  ...jump,
+  ['#dates', 'Dates'],
+  ['#person-h', 'Talk to a person'],
+]} />
+
+{helpDoor && <AfterHours online={online} />}
 
 <h2 id="pick-h">{ask}</h2>
 <ul class="topic-list sit-links" id="door-links">
@@ -98,7 +124,15 @@ const r211 = resource('wv-211');
               <li class="step" data-sits={stepSits(st.id).map((s) => s.id).join(' ')}>
                 <p>{st.text}</p>
                 <Actions callFirst phone={r.contact?.phone} phoneLabel={r.title} link={r.contact?.url} linkLabel={st.action ?? websiteLabel(r)} place={r.contact?.place} about={r.title} />
-                {r.cost && <p class="step-cost"><strong>Cost:</strong> {r.cost === 'free' ? 'Free.' : r.cost}</p>}
+                {/* What to have ready, from the record, next to its Call button (#1071). Same key as the card's list, so ticks are shared. */}
+                {r.what_to_bring?.length > 0 && (
+                  <div class="step-ready">
+                    <p>Have ready:</p>
+                    <Checklist items={r.what_to_bring} key={`bring-${r.slug}`} label={`What to have ready: ${r.title}`} />
+                    <CallNotes slug={r.slug} service={r.title} phone={r.contact?.phone} />
+                  </div>
+                )}
+                {r.cost && <p class="step-cost"><strong>Cost:</strong>{' '}{r.cost === 'free' ? 'Free.' : r.cost}</p>}
                 <SourceLine sources={r.sources} org={r.org} about={r.title}><Fragment slot="before">More on this: <a href={`${base}${first.page}`}>{first.label}</a>{/[?!.]$/.test(first.label) ? ' ' : '. '}</Fragment></SourceLine>
               </li>
             );
@@ -116,23 +150,24 @@ const r211 = resource('wv-211');
 
 {also.length > 0 && (
   <>
-    <h2>Often goes with this</h2>
+    <h2 id="also">Often goes with this</h2>
     <ul class="topic-list">{also.map((a) => <li><a href={`${base}${a.href}`}>{a.text}</a></li>)}</ul>
   </>
 )}
 
-<h2>Dates for this</h2>
-{dates.length ? dates.map((e) => <EventCard e={e} />) : <p>No dates for this on our calendar right now. <a href={`${base}/calendar/`}>See all dates</a>.</p>}
-
-<slot />
-
-{inDoor.length > 0 && <h2>{guide ? `Every ${door.topics[data.topic]} page` : `Every ${door.name} page`}</h2>}
+{inDoor.length > 0 && <h2 id="every-page">{guide ? `Every ${door.topics[data.topic]} page` : `Every ${door.name} page`}</h2>}
 {inDoor.map((t) => (
   <>
     <h3>{t.label}</h3>
     <ul class="topic-list">{t.pages.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}</ul>
   </>
 ))}
+
+<slot />
+
+<Fold id="dates" title="Dates for this" hint={dates.length ? `${dates.length} coming up. Tap to see them.` : 'None on our calendar right now.'}>
+  {dates.length ? dates.map((e) => <EventCard e={e} />) : <p>No dates for this on our calendar right now. <a href={`${base}/calendar/`}>See all dates</a>.</p>}
+</Fold>
 
 <section class="note" aria-labelledby="person-h">
   <h2 id="person-h">Rather talk to a person?</h2>

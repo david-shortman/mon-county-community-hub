@@ -1,0 +1,7 @@
+date: 2026-10-31
+item: Morgantown neighborhood associations
+page: /meet-people/example/
+kind: fact
+found_by: our-check
+what: We said Morgantown has nine neighborhood associations. The city's page names ten, and gives meeting times for nine. The page now says the city lists when nine of them meet.
+link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=head%3Acode%2Fqa3-walkthroughs

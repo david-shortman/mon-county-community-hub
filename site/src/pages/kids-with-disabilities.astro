@@ -1,0 +1,43 @@
+---
+// Help for parents of kids with disabilities (#1183, gap from #1178, sprint
+// #529): special education help, SSI for children, Medicaid through CDCSP,
+// respite and parent support. Facts come from the records, each read on a
+// WVDE, DoHS, WVU CED, USAGov or eCFR page on 2026-10-31. Left off until a
+// person confirms them (#1225): what
+// WVPTI offers and its address (its site blocks automated reads), the local
+// Social Security office (ssa.gov blocks automated reads), the CDCSP age
+// limit and the CSHCN toll-free number (official pages disagree).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "family", label: "Help for parents of kids with disabilities", summary: "Help with special education and IEP disagreements, SSI and Medicaid for a child with a disability, respite, and parent mentors" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Help for parents of kids with disabilities in Mon County, WV" description="For parents of children with disabilities in Monongalia County, WV: the state parent center and options when you disagree with the school about an IEP, SSI for children, Medicaid through CDCSP, respite while waiting for the I/DD Waiver, care coordination, and parent mentors from WVU CED.">
+  <h1>Help for parents of kids with disabilities</h1>
+  <p class="lede">You can read your child's school rights online, any time. The state's free guide is linked below. In Morgantown, parents of kids with disabilities are trained to help other families find services. Below are the offices for school, money, health care and a break.</p>
+
+  <p>Just starting out? See <a href={`${base}/life-events/child-delay-or-disability/`}>my child has a delay or disability</a> for Birth to Three and how special education starts.</p>
+
+  <h2 id="school">School and the IEP</h2>
+  <ResourceCard r={resource('mcs-special-education')} />
+  <ResourceCard r={resource('wvpti-parent-center')} />
+  <ResourceCard r={resource('wvde-special-education-disagreements')} showCost />
+
+  <h2 id="money">Money and health coverage for your child</h2>
+  <ResourceCard r={resource('ssi-for-children')} showCost />
+  <ResourceCard r={resource('wv-cdcsp-medicaid-for-children')} />
+  <ResourceCard r={resource('wv-cshcn-care-coordination')} />
+  <p>For Medicaid waivers that pay for care at home, see <a href={`${base}/medicaid-waivers/`}>Medicaid waivers</a>.</p>
+
+  <h2 id="respite">A break, and other parents who get it</h2>
+  <ResourceCard r={resource('wv-idd-waitlist-family-support')} />
+  <ResourceCard r={resource('ced-family-resource-specialists')} />
+  <ResourceCard r={resource('ced-circle-of-parents')} />
+
+  <h2 id="rights">Know your rights</h2>
+  <ResourceCard r={resource('drwv-intake')} />
+
+  <p class="meta">Sources checked October 31, 2026. Programs decide who qualifies, not this page. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

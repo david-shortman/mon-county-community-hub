@@ -1,0 +1,44 @@
+---
+// Starting page for renters (#265, epic #261, built in #1116). Links only;
+// research and gaps: docs/groups/renters.md. A link shows once its page exists.
+import Base from '../../layouts/Base.astro';
+import GroupStart from '../../components/GroupStart.astro';
+export const page = { door: "this-month", topic: "housing", label: "Renters", summary: "Finding a place, repairs, your deposit, rent help and legal help, in one place" };
+const sections = [
+  { title: "Looking for a place", links: [
+    { href: "/renting/#before", label: "Before you rent", text: "check a rental is registered and read the lease" },
+    { href: "/flood-zone/", text: "check an address on the state flood and slide maps" },
+  ] },
+  { title: "Something needs fixing", links: [
+    { href: "/renting/#repairs", label: "Getting repairs made", text: "how to ask your landlord for repairs" },
+    { href: "/borrow-or-get-free/#borrow", label: "Borrow tools", text: "tool and library lending" },
+  ] },
+  { title: "Moving out", links: [
+    { href: "/renting/#deposit", label: "Getting your deposit back", text: "what state law says about your security deposit" },
+    { href: "/sell-or-donate/", text: "where furniture, clothes and other things can go" },
+  ] },
+  { title: "Behind on rent, or got a notice", links: [
+    { href: "/money/?pick=rent", label: "Behind on rent", text: "steps for help with rent" },
+    { href: "/legal-help/#free-help", label: "Free legal help", text: "free civil legal help and the lawyer line" },
+    { href: "/before-you-call/", text: "what to have ready and what to say to a landlord" },
+  ] },
+  { title: "Power, water, gas and trash", links: [
+    { href: "/moving-here/", text: "who serves your home and how to start service" },
+    { href: "/utility-bills/", text: "help with a heat, water or electric bill" },
+    { href: "/internet/", text: "internet service where you live" },
+  ] },
+  { title: "No place to stay tonight", links: [
+    { href: "/stay-tonight/", text: "a bed tonight or a warm place" },
+  ] },
+  { title: "If this fits you, also check", links: [
+    { href: "/for/college-students/", text: null },
+    { href: "/for/new-to-mon-county/", text: null },
+    { href: "/for/job-seekers/", text: null },
+  ] },
+];
+---
+<Base title="Renters in Morgantown and Mon County: where to start" description="A starting page for renters in Monongalia County: before you rent, getting repairs made, your security deposit, help with rent, legal help, and setting up utilities.">
+  <h1>For renters</h1>
+  <p class="lede">Pick what you need. Each link goes to a page with local phone numbers and where we found them.</p>
+  <GroupStart sections={sections} />
+</Base>

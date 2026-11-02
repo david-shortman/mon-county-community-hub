@@ -1,6 +1,6 @@
 # Little web presence sweep: what to re-read and how often
 
-Last checked: 2026-10-30
+Last checked: 2026-10-30. Later runs, one file each: [`little-web-presence-runs/`](little-web-presence-runs/).
 
 For issue #22. Some groups post little online, so their facts go stale fast. This is the recurring check list: for each group, the page to re-read, what to look for, and how often. A Claude session or a person can run it. Never call or email anyone as part of the sweep; if a fact can only be confirmed by phone, open a `needs-verification` issue for David.
 

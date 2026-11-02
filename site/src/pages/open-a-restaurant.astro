@@ -1,0 +1,31 @@
+---
+// Opening a restaurant or food place (part of #393): the health
+// department's Food Establishment Plan Review Application packet as short
+// lists. Every step and fee is quoted in
+// content/pdf-pages/monchd-food-plan-review.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Opening a restaurant or food place", summary: "The health department's plan review for a new, remodeled or newly bought restaurant: the steps, fees by number of seats, what to send, and staff training" };
+const d = pdfPage('monchd-food-plan-review');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-598-5131';
+---
+<Base title="Opening a restaurant in Mon County, WV: health department plan review and fees" description="The Monongalia County Health Department's plan review for a new, remodeled or newly bought restaurant, coffee shop or other food place: the steps, plan review and permit fees by number of seats, the check-off list, and food manager and food worker training, quoted from its packet.">
+  <h1>Opening a restaurant or food place</h1>
+  <p class="lede">Opening, buying or remodeling a restaurant, coffee shop, bakery or other food place in Mon County? The health department reviews your plans first, then inspects before you open. Its steps and fees are in a 24-page PDF, so here they are as a short list. Questions: call <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>A food truck, a fair booth, a farmers market stand or food made at home: see <a href={`${base}/selling-food/`}>selling food at markets, events and food trucks</a>. All the department's fees: <a href={`${base}/health-department-fees/`}>health department permit fees</a>.</p>
+
+  <p class="meta">This page is a reading aid. The health department's packet is the official version. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

@@ -29,6 +29,10 @@ steps:
     when: today
     resource: va-homeless-veterans-line
     text: Call the VA's line for veterans who are homeless or may lose their housing.
+  va-enroll:
+    when: week
+    resource: va-health-care-apply
+    text: Not signed up for VA health care yet? Apply online or call VA's toll-free line.
   va-clinic:
     when: week
     resource: monongalia-county-va-clinic
@@ -53,6 +57,10 @@ steps:
     when: week
     resource: region-vi-career-connections
     text: Ages 16 to 24 and out of school? Call Career Connections about job and training help.
+  child-care-help:
+    when: week
+    resource: child-care-resource-center-morgantown
+    text: Call the Child Care Resource Center to ask about child care near you and help with the cost.
   school-enroll:
     when: week
     resource: mcs-enroll-and-find-your-school
@@ -74,6 +82,10 @@ situations:
     label: I want things to do with my young child
     page: /families-and-kids/
     steps: [starting-points, story-time]
+  - id: child-care
+    label: I need child care, or help paying for it
+    page: /families-and-kids/#child-care
+    steps: [child-care-help]
   - id: school-age
     label: My child is starting school, or needs a bus or after-school program
     page: /school-age/
@@ -93,7 +105,7 @@ situations:
   - id: vet-health
     label: I'm a veteran and need health care
     page: /veterans/
-    steps: [va-clinic]
+    steps: [va-enroll, va-clinic]
   - id: vet-talk
     label: I'm a veteran and need someone to talk to
     page: /veterans/
@@ -102,8 +114,16 @@ situations:
     label: I'm a veteran and could lose my housing
     page: /veterans/
     steps: [homeless-line]
+  - id: caregiving
+    label: I'm caring for a family member who is older or has a disability
+    page: /caregivers/
+  - id: death
+    label: Someone in my family died
+    page: /when-someone-dies/
 also:
   - text: Short on money this month
     href: /money/
   - text: Health care and shots
     href: /care/
+  - text: "Pages by who you are: parents, teens, job seekers and more"
+    href: /for/

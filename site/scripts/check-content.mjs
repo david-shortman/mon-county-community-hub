@@ -2,12 +2,19 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS } from '../src/lib/content.mjs';
+import { loadTonight, tonightProblems } from '../src/lib/tonight.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 import { factTopics, loadFacts } from '../src/lib/facts.mjs';
 import { loadPdfPages, pdfPageProblems } from '../src/lib/pdf-pages.mjs';
-import { TOWN_FIELDS, checkTown } from '../src/lib/towns.mjs';
+import { TOWN_FIELDS, TOWNS, checkTown } from '../src/lib/towns.mjs';
 import { LISTING_FIELDS, checkListing } from '../src/lib/listing.mjs';
+import { longFields, FOLD_WORDS } from '../src/lib/card-text.mjs';
 import { checkPlaces } from './check-places.mjs';
+import { agendaProblems, decidedProblems } from '../src/lib/agendas.mjs';
+import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } from '../src/lib/content-dupes.mjs';
+import { MOVED } from '../src/lib/moved.mjs';
+import YAML from 'yaml';
+import { loadHomeRules, ruleProblems, isStale } from '../src/lib/home-year.mjs';
 
 const errors = [];
 const warnings = [];
@@ -44,6 +51,7 @@ const slugs = new Set();
 for (const e of loadCalendar()) {
   const where = e._file;
   checkHidden(e);
+  if (e.private_trace != null && e.private_trace !== true) errors.push(`${where}: private_trace is true or left out (#555)`);
   for (const f of ['title', 'slug', 'starts', 'org_name', 'who_it_is_for', 'what_to_do', 'url']) {
     if (!e[f]) errors.push(`${where}: missing ${f}`);
   }
@@ -82,13 +90,14 @@ const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(Strin
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
 const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'hidden', 'phone_confirmed', 'phone_confirmed_by'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by', 'private_trace'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
 function checkRecord(e, required, known) {
   const where = e._file;
   checkHidden(e);
+  if (e.private_trace != null && e.private_trace !== true) errors.push(`${where}: private_trace is true or left out (#555)`);
   // Confirmed by phone (#164): a date, and optionally the caller's initials.
   // Never the name of the person who answered.
   if (e.phone_confirmed != null) {
@@ -147,6 +156,8 @@ for (const r of resources) {
   for (const f of ['what_happens', 'best_time']) if (r[f] != null && (typeof r[f] !== 'string' || !r[f].trim())) errors.push(`${where}: ${f} must be text`);
   if (r.if_you_want_help != null && (!Array.isArray(r.if_you_want_help) || r.if_you_want_help.some((x) => typeof x !== 'string'))) errors.push(`${where}: if_you_want_help must be a list of resource slugs`);
   { const l = checkListing(r); errors.push(...l.errors); warnings.push(...l.warnings); }
+  // Short card text (#1381): the card folds long fields, but a short field reads best.
+  for (const f of longFields(r)) warnings.push(`${where}: ${f.field} is ${f.words} words (over ${FOLD_WORDS}); move details into steps, options or notes`);
   const c = r.contact;
   if (c == null) continue;
   if (typeof c !== 'object') { errors.push(`${where}: contact must have phone, text, url, place or email under it`); continue; }
@@ -254,7 +265,7 @@ if (doors) {
     }
   }
   if (JSON.stringify(doors).includes('\u2014')) errors.push('doors.yaml: contains an em dash');
-  for (const e of [...loadDir('orgs'), ...loadDir('resources'), ...loadCalendar()]) {
+  for (const e of [...loadDir('orgs'), ...loadDir('resources'), ...loadCalendar(), ...loadHomeRules(CONTENT_DIR).map((r) => ({ ...r, _file: 'home-year.yaml' }))]) {
     for (const t of e.topics ?? []) {
       if (!topicHome.has(t)) errors.push(`${e._file}: topic "${t}" has no door; add it to a door in content/doors.yaml`);
     }
@@ -350,6 +361,21 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
   });
 }
 
+// Yearly home dates (content/home-year.yaml, #1051): each rule is complete,
+// slugs are unique and do not clash with a hand-written calendar slug pattern,
+// and a stale rule is a warning (the build leaves it off the calendar).
+{
+  const seen = new Set();
+  for (const r of loadHomeRules(CONTENT_DIR)) {
+    const where = `home-year.yaml: ${r.slug ?? '(no slug)'}`;
+    for (const p of ruleProblems(r)) errors.push(`${where}: ${p}`);
+    if (seen.has(r.slug)) errors.push(`${where}: duplicate slug`);
+    seen.add(r.slug);
+    if (r.sources?.length && isStale(r, todayYmd())) warnings.push(`${where}: a source was last checked more than 13 months ago; re-check it, or it stays off the calendar`);
+    if (JSON.stringify(r).includes('\u2014')) errors.push(`${where}: contains an em dash`);
+  }
+}
+
 // Gathering places (content/places, #455), checked against content/schemas/place.schema.json.
 const placeCheck = checkPlaces();
 errors.push(...placeCheck.errors);
@@ -421,6 +447,25 @@ for (const topic of factTopics()) {
 // Each needs a title, publisher, sections and sources with checked dates, and
 // a PDF link needs the date printed on that PDF.
 for (const d of loadPdfPages()) for (const p of pdfPageProblems(d)) errors.push(`${d._file}: ${p}`);
+// Tonight's warming shelter status (content/tonight, #401).
+for (const p of tonightProblems(loadTonight())) errors.push(`tonight/warming-shelter.yaml: ${p}`);
+
+// Plain-language agenda guides (content/agendas, #529).
+for (const p of agendaProblems()) errors.push(p);
+// What was decided: actions from posted minutes (content/minutes, #529).
+for (const p of decidedProblems()) errors.push(p);
+
+// Duplicates and broken org links (#1170): the same group under two slugs,
+// or an org: anywhere else in content/ that has no file in content/orgs/
+// (resources, secondhand, boards and places are checked above).
+warnings.push(...duplicateWarnings({ orgs, places: loadDir('places'), resources }));
+const everyRecord = fs.readdirSync(CONTENT_DIR, { recursive: true })
+  .filter((f) => /\.ya?ml$/.test(f) && !/^(orgs|resources|secondhand|boards|places)\//.test(f))
+  .flatMap((f) => { try { return [{ ...YAML.parse(fs.readFileSync(path.join(CONTENT_DIR, f), 'utf8')), _file: f }]; } catch { return []; } });
+errors.push(...missingOrgErrors(everyRecord, orgSlugs));
+errors.push(...movedErrors(MOVED, orgSlugs));
+// A date held at a place whose record names its town gets that town (#395).
+warnings.push(...venueTownWarnings(loadCalendar(), loadDir('places'), TOWNS));
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

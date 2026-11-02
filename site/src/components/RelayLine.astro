@@ -1,0 +1,18 @@
+---
+// A line for people who cannot make a voice call (#835): on a card whose only
+// way to reach the group is a phone call, point to the free 7-1-1 relay. The
+// relay fact is national and comes from ADA.gov, so it is the same on every
+// card. Cards with a text line already have a no-voice option and skip this.
+const SOURCE = 'https://www.ada.gov/resources/effective-communication/';
+const CHECKED = 'October 30, 2026';
+const { phone, sms, text } = Astro.props;
+const show = Boolean(phone) && !sms && !text && !/^(911|988|211)$/.test(String(phone).trim());
+---
+{show && (
+  <p class="relay">Deaf, hard of hearing, or hard to speak on the phone? Dial 7-1-1 for the free relay service, then give them the number. <span class="relay-src">(<a href={SOURCE}>ADA.gov</a>, checked {CHECKED})</span></p>
+)}
+
+<style>
+  .relay { font-size: 0.92rem; margin: 6px 0; }
+  .relay-src { color: var(--muted); }
+</style>

@@ -1,0 +1,13 @@
+# "Ways to explore" on /topics/ (#1039): questions in residents' words that
+# open pages we already have. The other rows on that page (where you live,
+# time of life, this month) are built from the pages, towns and calendar.
+# A question shows only when its page exists. Links only, no facts here.
+questions:
+  - q: Who decides what happens on my street?
+    href: /who-decides/
+  - q: How is Mon County doing?
+    href: /how-we-are-doing/
+  - q: Where can I sit for free?
+    href: /find-your-people/
+  - q: What's going on this week?
+    href: /pulse/

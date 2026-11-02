@@ -1,0 +1,1877 @@
+# Simulated resident walkthroughs, rerun November 1, 2026 (#529, sprint wave 8).
+# SIMULATED, NOT REAL RESIDENTS. A script and Claude walked made-up tasks on
+# the built site at phone width. Nothing here is resident feedback.
+#
+# Same 30 tasks (tasks.yaml), same scripts (walk.js with --after, score.py).
+# before: main at ac78619, the start of this run, about 70 merges after the
+#         October 31 run (its "after" score was 88).
+# after:  main at 8353cba plus open PRs #1254 and #1274, built together.
+# Write-up: docs/reviews/2026-11-01-simulated-walkthroughs-rerun.md
+summary:
+  before:
+    tasks: 30
+    score: 90
+    averages:
+      IA1: 2.97
+      IA2: 1.87
+      IA7: 2.8
+      PL1: 2.73
+      TR1: 2.87
+      II1: 2.93
+    dead_ends: 0
+    searches_top3: 54
+    searches: 60
+    average_taps: 2.3
+  after:
+    tasks: 30
+    score: 91
+    averages:
+      IA1: 3.0
+      IA2: 1.87
+      IA7: 2.83
+      PL1: 2.73
+      TR1: 2.87
+      II1: 3.0
+    dead_ends: 0
+    searches_top3: 55
+    searches: 60
+    average_taps: 2.3
+results:
+- id: w01
+  task: My power gets shut off Friday and I can't pay.
+  who: Renter with a shutoff notice
+  group: renters
+  need: utility-bills
+  before:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: power shut off friday
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /groups/mon-power/
+      - /groups/wv-department-of-human-services/
+    - q: shutoff notice
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /life-events/losing-my-home/
+      - /money/
+    reading_grade: 4.7
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: power shut off friday
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /before-you-call/
+      - /money/
+    - q: shutoff notice
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /life-events/losing-my-home/
+      - /money/
+    reading_grade: 4.7
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: w02
+  task: I just moved here and need a library card and to register to vote.
+  who: New resident from out of state
+  group: new-residents
+  need: null
+  before:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: library card
+      rank: 1
+      top3:
+      - /meet-people/
+      - /groups/morgantown-public-library-system/
+      - /meet-people/example/
+    - q: register to vote
+      rank: 1
+      top3:
+      - /vote/
+      - /groups/wv-secretary-of-state/
+      - /living-here/
+    reading_grade: 6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: library card
+      rank: 1
+      top3:
+      - /meet-people/
+      - /meet-people/example/
+      - /holidays/
+    - q: register to vote
+      rank: 1
+      top3:
+      - /vote/
+      - /living-here/
+      - /for/new-to-mon-county/
+    reading_grade: 6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w03
+  task: My mom is 70 and needs rides to dialysis three times a week.
+  who: Adult child helping an older parent
+  group: older-adults
+  need: transportation
+  before:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: rides to dialysis
+      rank: 1
+      top3:
+      - /medical-rides/
+      - /getting-around/
+      - /disability-and-aging/
+    - q: ride to doctor for senior
+      rank: 3
+      top3:
+      - /groups/senior-monongalians/
+      - /disability-and-aging/
+      - /medical-rides/
+    reading_grade: 4.9
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: rides to dialysis
+      rank: 1
+      top3:
+      - /medical-rides/
+      - /disability-and-aging/
+      - /getting-around/
+    - q: ride to doctor for senior
+      rank: 2
+      top3:
+      - /disability-and-aging/
+      - /medical-rides/
+      - /getting-around/example/
+    reading_grade: 4.9
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w04
+  task: I'm a WVU student and I can't afford groceries.
+  who: College student
+  group: college-students
+  need: enough-food
+  before:
+    taps: 2
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: wvu student food pantry
+      rank: 2
+      top3:
+      - /groups/wvu-student-engagement-and-leadership/
+      - /help/food/today/student/
+      - /help/food/today/
+    - q: student can't afford groceries
+      rank: 4
+      top3:
+      - /for/college-students/
+      - /needs/
+      - /for/teens/
+    reading_grade: 4.6
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: wvu student food pantry
+      rank: 1
+      top3:
+      - /help/food/today/student/
+      - /help/food/today/
+      - /money/
+    - q: student can't afford groceries
+      rank: 4
+      top3:
+      - /for/college-students/
+      - /needs/
+      - /for/teens/
+    reading_grade: 4.6
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w05
+  task: A storm flooded my basement last night.
+  who: Homeowner
+  group: homeowners
+  need: null
+  before:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: basement flooded
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /for/homeowners/
+      - /life-events/
+    - q: flood damage help
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /for/homeowners/
+      - /living-here/
+    reading_grade: 3.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: basement flooded
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /for/homeowners/
+      - /life-events/
+    - q: flood damage help
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /for/homeowners/
+      - /living-here/
+    reading_grade: 3.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w06
+  task: I have nowhere to sleep tonight and it's freezing.
+  who: Person without housing
+  group: null
+  need: homelessness
+  before:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: warming shelter tonight
+      rank: 2
+      top3:
+      - /tonight/
+      - /stay-tonight/
+      - /help/what-help/stay/none/
+    - q: homeless shelter
+      rank: 1
+      top3:
+      - /stay-tonight/
+      - /groups/catholic-charities-west-virginia/
+      - /groups/monongalia-county-canine-adoption-center/
+    reading_grade: 3.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: warming shelter tonight
+      rank: 2
+      top3:
+      - /tonight/
+      - /stay-tonight/
+      - /help/what-help/stay/none/
+    - q: homeless shelter
+      rank: 1
+      top3:
+      - /stay-tonight/
+      - /tonight/
+      - /pets/
+    reading_grade: 3.4
+    oldest_checked_days: 1
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: w07
+  task: I got an eviction notice taped to my door.
+  who: Renter behind on rent
+  group: renters
+  need: housing-costs
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: eviction notice
+      rank: 1
+      top3:
+      - /money/
+      - /help/what-help/rent/none/
+      - /help/what-help/rent/veteran/
+    - q: evicted what do i do
+      rank: 2
+      top3:
+      - /groups/legal-aid-of-west-virginia/
+      - /money/
+      - /renting/
+    reading_grade: 3.1
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: eviction notice
+      rank: 1
+      top3:
+      - /money/
+      - /help/what-help/rent/none/
+      - /help/what-help/rent/veteran/
+    - q: evicted what do i do
+      rank: 1
+      top3:
+      - /money/
+      - /renting/
+      - /help/what-help/rent/none/
+    reading_grade: 3.1
+    oldest_checked_days: 3
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: w08
+  task: My kid needs shots before school starts.
+  who: Parent of a kindergartner
+  group: parents-school-age
+  need: null
+  before:
+    taps: 3
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: school shots
+      rank: 1
+      top3:
+      - /school-shots/
+      - /groups/monongalia-county-schools/
+      - /for/parents-school-age/
+    - q: kindergarten vaccines
+      rank: 1
+      top3:
+      - /school-shots/
+      - /groups/monongalia-county-schools/
+      - /school-age/
+    reading_grade: 4.7
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 7
+    dead_end: null
+    search:
+    - q: school shots
+      rank: 1
+      top3:
+      - /school-shots/
+      - /for/parents-school-age/
+      - /school-age/
+    - q: kindergarten vaccines
+      rank: 1
+      top3:
+      - /school-shots/
+      - /school-age/
+      - /before-you-call/
+    reading_grade: 4.7
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  note: Tap path now goes Family, School-age; the school shots link sits 6 to 7 screens down School-age.
+- id: w09
+  task: I have no insurance and my tooth is killing me.
+  who: Uninsured adult with tooth pain
+  group: null
+  need: paying-for-health-care
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: toothache no insurance
+      rank: 3
+      top3:
+      - /no-insurance/
+      - /flood-zone/
+      - /dental-and-prescriptions/
+    - q: cheap dentist
+      rank: 1
+      top3:
+      - /dental-and-prescriptions/
+      - /money/
+      - /the-idea/
+    reading_grade: 6.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: toothache no insurance
+      rank: 3
+      top3:
+      - /no-insurance/
+      - /flood-zone/
+      - /dental-and-prescriptions/
+    - q: cheap dentist
+      rank: 1
+      top3:
+      - /dental-and-prescriptions/
+      - /money/
+      - /the-idea/
+    reading_grade: 6.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w10
+  task: My brother is using again. Where can he get treatment?
+  who: Family member
+  group: null
+  need: drugs-and-overdose
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: rehab
+      rank: 2
+      top3:
+      - /groups/wv-division-of-corrections-and-rehabilitation/
+      - /drugs-and-alcohol/
+      - /reentry/
+    - q: detox near me
+      rank: 1
+      top3:
+      - /drugs-and-alcohol/
+      - /groups/samhsa/
+      - /groups/valley-healthcare-system/
+    reading_grade: 4.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: rehab
+      rank: 1
+      top3:
+      - /drugs-and-alcohol/
+      - /reentry/
+      - /grow/
+    - q: detox near me
+      rank: 1
+      top3:
+      - /drugs-and-alcohol/
+      - /care/
+      - /life-events/leaving-jail-or-prison/
+    reading_grade: 4.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: w11
+  task: I feel like I can't go on.
+  who: Person having a very hard time at night
+  group: null
+  need: mental-health-care
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: suicidal
+      rank: 3
+      top3:
+      - /groups/988-suicide-and-crisis-lifeline/
+      - /
+      - /mental-health/
+    - q: need someone to talk to
+      rank: 3
+      top3:
+      - /for/teens/
+      - /for/veterans/
+      - /mental-health/
+    reading_grade: 4.6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: suicidal
+      rank: 2
+      top3:
+      - /
+      - /mental-health/
+      - /staying-well/
+    - q: need someone to talk to
+      rank: 3
+      top3:
+      - /for/teens/
+      - /for/veterans/
+      - /mental-health/
+    reading_grade: 4.6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: w12
+  task: I lost my job and need food stamps.
+  who: Laid off worker
+  group: job-seekers
+  need: enough-food
+  before:
+    taps: 3
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: food stamps
+      rank: 1
+      top3:
+      - /snap/
+      - /help/food/monthly/
+      - /help/food/
+    - q: apply for snap
+      rank: 2
+      top3:
+      - /after-you-apply/snap/
+      - /snap/
+      - /file-today/
+    reading_grade: 3.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: food stamps
+      rank: 1
+      top3:
+      - /snap/
+      - /help/food/monthly/
+      - /help/food/
+    - q: apply for snap
+      rank: 2
+      top3:
+      - /after-you-apply/snap/
+      - /snap/
+      - /file-today/
+    reading_grade: 3.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: w13
+  task: I need child care so I can go back to work.
+  who: Parent of a toddler
+  group: parents-young-kids
+  need: child-care
+  before:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: daycare
+      rank: 1
+      top3:
+      - /families-and-kids/
+      - /after-you-apply/child-care/
+      - /groups/child-care-resource-center-morgantown/
+    - q: help paying for child care
+      rank: 2
+      top3:
+      - /after-you-apply/child-care/
+      - /families-and-kids/
+      - /groups/child-care-resource-center-morgantown/
+    reading_grade: 5.8
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: daycare
+      rank: 1
+      top3:
+      - /families-and-kids/
+      - /after-you-apply/child-care/
+      - /life-events/child-delay-or-disability/
+    - q: help paying for child care
+      rank: 2
+      top3:
+      - /after-you-apply/child-care/
+      - /families-and-kids/
+      - /family/
+    reading_grade: 5.8
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w14
+  task: I turn 65 in March. How do I sign up for Medicare?
+  who: Older adult
+  group: older-adults
+  need: null
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: sign up for medicare
+      rank: 1
+      top3:
+      - /turning-65/
+      - /
+      - /disability-and-aging/
+    - q: turning 65
+      rank: 1
+      top3:
+      - /turning-65/
+      - /for/veterans/
+      - /for/disability-and-caregivers/
+    reading_grade: 4.5
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: sign up for medicare
+      rank: 1
+      top3:
+      - /turning-65/
+      - /
+      - /disability-and-aging/
+    - q: turning 65
+      rank: 1
+      top3:
+      - /turning-65/
+      - /for/veterans/
+      - /for/disability-and-caregivers/
+    reading_grade: 4.5
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: w15
+  task: I'm pregnant and don't have a doctor or insurance.
+  who: Pregnant woman, uninsured
+  group: parents-young-kids
+  need: paying-for-health-care
+  before:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: pregnant no insurance
+      rank: 2
+      top3:
+      - /flu-shots/
+      - /pregnant-or-new-baby/
+      - /care/
+    - q: prenatal care
+      rank: 2
+      top3:
+      - /birth-control-and-testing/
+      - /pregnant-or-new-baby/
+      - /groups/monongalia-county-health-department/
+    reading_grade: 4.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: pregnant no insurance
+      rank: 1
+      top3:
+      - /pregnant-or-new-baby/
+      - /flu-shots/
+      - /care/
+    - q: prenatal care
+      rank: 2
+      top3:
+      - /birth-control-and-testing/
+      - /pregnant-or-new-baby/
+      - /caregivers/
+    reading_grade: 4.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w16
+  task: I moved from Pennsylvania. How do I get a West Virginia driver's license?
+  who: New resident
+  group: new-residents
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: transfer drivers license
+      rank: 1
+      top3:
+      - /drivers-license/
+      - /groups/wv-dmv/
+      - /before-you-call/
+    - q: dmv
+      rank: 4
+      top3:
+      - /car-registration/
+      - /groups/wv-dmv/
+      - /ids-and-records/
+    reading_grade: 7.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: transfer drivers license
+      rank: 1
+      top3:
+      - /drivers-license/
+      - /before-you-call/
+      - /after-you-apply/wic/
+    - q: dmv
+      rank: 3
+      top3:
+      - /car-registration/
+      - /ids-and-records/
+      - /drivers-license/
+    reading_grade: 7.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  note: '"dmv" moved into the top 3 with group pages listed after guides (#1274).'
+- id: w17
+  task: What day is my trash picked up?
+  who: Homeowner
+  group: homeowners
+  need: null
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: trash day
+      rank: 1
+      top3:
+      - /recycling/
+      - /moving-here/
+      - /living-here/
+    - q: garbage pickup
+      rank: 3
+      top3:
+      - /moving-here/
+      - /groups/city-of-westover/
+      - /recycling/
+    reading_grade: 4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: trash day
+      rank: 1
+      top3:
+      - /recycling/
+      - /moving-here/
+      - /living-here/
+    - q: garbage pickup
+      rank: 1
+      top3:
+      - /recycling/
+      - /moving-here/
+      - /towns/star-city/
+    reading_grade: 4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: w18
+  task: Where do I get rid of old tires and a broken TV?
+  who: Renter cleaning out a garage
+  group: renters
+  need: null
+  before:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: tire disposal
+      rank: 1
+      top3:
+      - /recycling/
+      - /groups/monongalia-county-solid-waste-authority/
+      - /groups/republic-services/
+    - q: old tv recycling
+      rank: 1
+      top3:
+      - /recycling/
+      - /thrift-shops/
+      - /community-centers/westside-senior-center/
+    reading_grade: 5.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: tire disposal
+      rank: 1
+      top3:
+      - /recycling/
+      - /make-it-better/report/
+      - /home-sale-septic-check/
+    - q: old tv recycling
+      rank: 1
+      top3:
+      - /recycling/
+      - /thrift-shops/
+      - /community-centers/westside-senior-center/
+    reading_grade: 5.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w19
+  task: I'm a veteran and I could lose my apartment.
+  who: Veteran
+  group: veterans
+  need: homelessness
+  before:
+    taps: 1
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: veteran housing help
+      rank: 1
+      top3:
+      - /veterans/
+      - /groups/us-department-of-veterans-affairs/
+      - /groups/wv-department-of-veterans-assistance/
+    - q: veteran homeless
+      rank: 2
+      top3:
+      - /groups/us-department-of-veterans-affairs/
+      - /veterans/
+      - /life-events/losing-my-home/
+    reading_grade: 6.6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: veteran housing help
+      rank: 1
+      top3:
+      - /veterans/
+      - /for/veterans/
+      - /after-you-apply/housing-voucher/
+    - q: veteran homeless
+      rank: 1
+      top3:
+      - /veterans/
+      - /life-events/losing-my-home/
+      - /family/
+    reading_grade: 6.6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w20
+  task: I care for my dad with dementia and I need a break.
+  who: Family caregiver
+  group: disability-caregivers
+  need: null
+  before:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: respite care
+      rank: 1
+      top3:
+      - /caregivers/
+      - /help-at-home/
+      - /groups/senior-monongalians/
+    - q: dementia caregiver help
+      rank: 1
+      top3:
+      - /caregivers/
+      - /for/disability-and-caregivers/
+      - /help-at-home/
+    reading_grade: 7.2
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: respite care
+      rank: 1
+      top3:
+      - /caregivers/
+      - /help-at-home/
+      - /for/disability-and-caregivers/
+    - q: dementia caregiver help
+      rank: 1
+      top3:
+      - /caregivers/
+      - /for/disability-and-caregivers/
+      - /help-at-home/
+    reading_grade: 7.2
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+- id: w21
+  task: I got a letter saying I have to renew my Medicaid.
+  who: Adult on Medicaid
+  group: null
+  need: paying-for-health-care
+  before:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: medicaid renewal
+      rank: 2
+      top3:
+      - /after-you-apply/medicaid/
+      - /medicaid-2027/
+      - /care/
+    - q: medicaid letter
+      rank: 3
+      top3:
+      - /after-you-apply/medicaid/
+      - /file-today/
+      - /medicaid-2027/
+    reading_grade: 8.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 1
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: medicaid renewal
+      rank: 2
+      top3:
+      - /after-you-apply/medicaid/
+      - /medicaid-2027/
+      - /care/
+    - q: medicaid letter
+      rank: 2
+      top3:
+      - /after-you-apply/medicaid/
+      - /medicaid-2027/
+      - /file-today/
+    reading_grade: 8.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 1
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w22
+  task: I can't afford internet for my kid's homework.
+  who: Parent on a tight budget
+  group: parents-school-age
+  need: wages-and-cost-of-living
+  before:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: cheap internet
+      rank: 4
+      top3:
+      - /corrections/
+      - /the-idea/
+      - /money/
+    - q: internet for low income
+      rank: 1
+      top3:
+      - /internet/
+      - /utility-bills/
+      - /money/
+    reading_grade: 5.1
+    oldest_checked_days: 100
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 2
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: cheap internet
+      rank: 4
+      top3:
+      - /corrections/
+      - /the-idea/
+      - /money/
+    - q: internet for low income
+      rank: 1
+      top3:
+      - /internet/
+      - /utility-bills/
+      - /money/
+    reading_grade: 5.1
+    oldest_checked_days: 100
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 2
+      II1: 3
+    total: 15
+    out_of: 18
+  note: 'Internet at home: oldest checked date is 100 days old, past the 90 day mark.'
+- id: w23
+  task: I want to sell cookies and cakes I bake at home.
+  who: Home baker
+  group: small-business
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 8
+    dead_end: null
+    search:
+    - q: cottage food
+      rank: 1
+      top3:
+      - /selling-food/
+      - /family/
+      - /help/food/today/student/
+    - q: sell baked goods from home
+      rank: 1
+      top3:
+      - /selling-food/
+      - /holidays/
+      - /calendar/
+    reading_grade: 6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 8
+    dead_end: null
+    search:
+    - q: cottage food
+      rank: 1
+      top3:
+      - /selling-food/
+      - /family/
+      - /help/food/today/student/
+    - q: sell baked goods from home
+      rank: 1
+      top3:
+      - /selling-food/
+      - /calendar/
+      - /holidays/
+    reading_grade: 6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w24
+  task: My landlord won't fix the heat.
+  who: Renter
+  group: renters
+  need: housing-costs
+  before:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: landlord won't fix heat
+      rank: 6
+      top3:
+      - /living-here/
+      - /before-you-call/
+      - /groups/ncwvcaa/
+    - q: repairs landlord
+      rank: 1
+      top3:
+      - /renting/
+      - /for/renters/
+      - /life-events/losing-my-home/
+    reading_grade: 6.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: landlord won't fix heat
+      rank: 5
+      top3:
+      - /living-here/
+      - /before-you-call/
+      - /file-today/
+    - q: repairs landlord
+      rank: 1
+      top3:
+      - /renting/
+      - /for/renters/
+      - /life-events/losing-my-home/
+    reading_grade: 6.3
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 14
+    out_of: 18
+  note: '"landlord won''t fix heat" ranks the renting page 6th.'
+- id: w25
+  task: I need a job but I don't have a car.
+  who: Job seeker
+  group: job-seekers
+  need: transportation
+  before:
+    taps: 3
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: jobs
+      rank: 2
+      top3:
+      - /groups/jobs-and-hope-wv/
+      - /find-a-job/
+      - /for/job-seekers/
+    - q: job center
+      rank: 1
+      top3:
+      - /find-a-job/
+      - /groups/mon-health-medical-center/
+      - /groups/monongalia-county-commission/
+    reading_grade: 5
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: jobs
+      rank: 2
+      top3:
+      - /groups/jobs-and-hope-wv/
+      - /find-a-job/
+      - /life-events/lost-my-job/
+    - q: job center
+      rank: 1
+      top3:
+      - /find-a-job/
+      - /veterans/
+      - /family/
+    reading_grade: 4.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w26
+  task: I'm 68. Can I get a break on my property tax?
+  who: Older homeowner
+  group: older-adults
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: homestead exemption
+      rank: 2
+      top3:
+      - /after-you-apply/homestead/
+      - /property-tax/
+      - /money/
+    - q: senior property tax
+      rank: 3
+      top3:
+      - /after-you-apply/homestead/
+      - /money/
+      - /property-tax/
+    reading_grade: 6.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: homestead exemption
+      rank: 2
+      top3:
+      - /after-you-apply/homestead/
+      - /property-tax/
+      - /money/
+    - q: senior property tax
+      rank: 3
+      top3:
+      - /after-you-apply/homestead/
+      - /money/
+      - /property-tax/
+    reading_grade: 6.1
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w27
+  task: My dad just died. What do I do first?
+  who: Adult child
+  group: null
+  need: null
+  before:
+    taps: 2
+    screens_scrolled: 9
+    dead_end: null
+    search:
+    - q: someone died
+      rank: 1
+      top3:
+      - /when-someone-dies/
+      - /groups/monongalia-county-health-department/
+      - /for/veterans/
+    - q: death certificate
+      rank: 2
+      top3:
+      - /groups/wv-vital-registration/
+      - /when-someone-dies/
+      - /ids-and-records/
+    reading_grade: 5.6
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 9
+    dead_end: null
+    search:
+    - q: someone died
+      rank: 1
+      top3:
+      - /when-someone-dies/
+      - /for/veterans/
+      - /probate-steps/
+    - q: death certificate
+      rank: 1
+      top3:
+      - /when-someone-dies/
+      - /ids-and-records/
+      - /before-you-call/
+    reading_grade: 5.4
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: w28
+  task: I need free help doing my taxes.
+  who: Worker
+  group: null
+  need: wages-and-cost-of-living
+  before:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: free tax help
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /after-you-apply/homestead/
+      - /property-tax/
+    - q: file taxes free
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /groups/wv-tax-division/
+      - /groups/internal-revenue-service/
+    reading_grade: 3.7
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: free tax help
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /after-you-apply/homestead/
+      - /property-tax/
+    - q: file taxes free
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /after-you-apply/homestead/
+      - /property-tax/
+    reading_grade: 3.7
+    oldest_checked_days: 2
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: w29
+  task: I take the bus to work. Is there a cheaper bus pass?
+  who: Bus rider
+  group: null
+  need: transportation
+  before:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: bus pass
+      rank: 2
+      top3:
+      - /getting-around/example/
+      - /bus-passes/
+      - /groups/mountain-line-transit-authority/
+    - q: half fare bus
+      rank: 1
+      top3:
+      - /bus-passes/
+      - /getting-around/example/
+      - /groups/mountain-line-transit-authority/
+    reading_grade: 2.9
+    oldest_checked_days: 0
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 1
+    total: 14
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: bus pass
+      rank: 2
+      top3:
+      - /getting-around/example/
+      - /bus-passes/
+      - /getting-around/
+    - q: half fare bus
+      rank: 1
+      top3:
+      - /bus-passes/
+      - /getting-around/example/
+      - /medical-rides/
+    reading_grade: 2.4
+    oldest_checked_days: 0
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  note: 'Before: the bus passes page had Mountain Line''s number only as text, no tap-to-call link (II1 1). Fixed
+    in #1250.'
+- id: w30
+  task: I'm lonely since I retired and want to meet people.
+  who: Retiree living alone
+  group: older-adults
+  need: loneliness
+  before:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: senior center
+      rank: 7
+      top3:
+      - /community-centers/westside-senior-center/
+      - /groups/senior-monongalians/
+      - /for/older-adults/
+    - q: meet people
+      rank: null
+      top3:
+      - /meet-people/example/
+      - /meet-people/
+      - /have-your-say/
+    reading_grade: 1.8
+    oldest_checked_days: null
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 1
+      PL1: 3
+      TR1: 0
+      II1: 3
+    total: 12
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: senior center
+      rank: 6
+      top3:
+      - /community-centers/westside-senior-center/
+      - /for/older-adults/
+      - /help-at-home/
+    - q: meet people
+      rank: null
+      top3:
+      - /meet-people/
+      - /meet-people/example/
+      - /have-your-say/
+    reading_grade: 1.8
+    oldest_checked_days: null
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 1
+      PL1: 3
+      TR1: 0
+      II1: 3
+    total: 12
+    out_of: 18
+  note: Community centers keeps checked dates inside closed sections, so the script sees none (TR1 0). "meet people"
+    finds Meet people and its example first, which also answer the task, but not this target.

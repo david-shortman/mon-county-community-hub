@@ -1,0 +1,7 @@
+# 2026-10-30: Audit of benefits and rights pages: quote or link, never restate
+
+- **Considered:** AI tools have been confidently wrong about benefits and legal rights (#499, part of #490). The site's rules already say: copy eligibility wording from the source, never compute limits, never say "you qualify." This audit checked that the pages follow them.
+- **Checked against the live source on October 30, 2026:** `/medicaid-waivers/` (every rule in the ADW and IDDW cards: ages, the three of six areas, the 14-day psychologist choice, 56 and 44 days, who decides money eligibility), `/utility-bills/` (LIEAP's $2,000 maximum and the 2026 dates, DoHS December 18, 2025), `/money/` (Legal Aid's "deadline in the next 10 days", phone hours and court fees; Christian Help's $67,000 limit and IRS-certified volunteers), `/turning-65/` (homestead rules on the Assessor's page), and the homestead calendar entry ($20,000, phone, room and hours, from the Assessor's site and its 2026 taxpayer guide). `/snap/` and `/veterans/` state no limits or amounts. Every rule names the office that decides.
+- **Fixed:** "may qualify" wording that hinted at the reader's eligibility, on Money (free tax help) and the SNAP steps in the food finder. The homestead entry said "$20,000 of assessed value off your tax bill", which could read as $20,000 off the bill; it now says what the Assessor's guide says. Logged in `content/corrections/`.
+- **Waits for David:** the pages are money, food and housing topics.
+- **Cost:** $0.

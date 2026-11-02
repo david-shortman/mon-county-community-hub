@@ -12,6 +12,7 @@ import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
 import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Contractor and trade licenses", summary: "State contractor license, plumber, HVAC and electrician licenses, working in Morgantown city limits, and how to check a contractor before you hire" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
@@ -40,9 +41,9 @@ const lookup = [
 ];
 const complaint = [{ url: 'https://www.wvclboard.wv.gov/complaint/', checked }];
 ---
-<Base title="Contractor and trade licenses in West Virginia, and checking a contractor in Morgantown" description="Where West Virginia contractors, plumbers, HVAC technicians and electricians get licensed, what Morgantown asks of contractors working in city limits, and how to look up a contractor's license or file a complaint with the WV Contractor Licensing Board.">
+<Base title="Contractor licenses and checking a contractor in Morgantown" description="How West Virginia contractors, plumbers, HVAC techs and electricians get licensed, Morgantown's rules, and how to check a contractor or file a complaint.">
   <h1>Contractor and trade licenses</h1>
-  <p class="lede">West Virginia has separate licenses for contractors, plumbers, HVAC technicians and electricians. Each one comes from a different state office. Working inside Morgantown city limits also takes a city business license. Hiring someone? See <a href="#check">check a contractor before you hire</a>.</p>
+  <p class="lede">In West Virginia, contractors, plumbers, HVAC technicians and electricians each need their own license. Each one comes from a different state office. Working inside Morgantown city limits also takes a city business license. Hiring someone? See <a href="#check">check a contractor before you hire</a>.</p>
 
   <h2 id="contractor">State contractor license</h2>
   <p>The <strong>West Virginia Contractor Licensing Board</strong> issues state contractor licenses. State law says which jobs need one. It depends on the kind of work and the total cost of the job. Read the definition of "contractor" in <a href="https://code.wvlegislature.gov/30-42-3/">WV Code §30-42-3</a>, or ask the board.</p>
@@ -83,7 +84,7 @@ const complaint = [{ url: 'https://www.wvclboard.wv.gov/complaint/', checked }];
   </div>
 
   <h2 id="electrician">Electricians</h2>
-  <p>The <strong>West Virginia State Fire Marshal's Office</strong>, Regulatory and Licensing Division, licenses electricians. It also licenses electrical inspectors, home inspectors, fire protection workers and more. Apply or renew through its online license portal. Exam dates and places for 2026 and 2027 are on its page. The office is open Monday to Friday, 8 a.m. to 4 p.m. Email <a href="mailto:sfmlicensing@wv.gov">sfmlicensing@wv.gov</a>.</p>
+  <p>The <strong>West Virginia State Fire Marshal's Office</strong>, Regulatory and Licensing Division, licenses electricians. State law lists master, journeyman and temporary electrician licenses, plus specialty licenses (<a href="https://code.wvlegislature.gov/29-3B-4/">WV Code 29-3B-4</a>, checked November 1, 2026). It also licenses electrical inspectors, home inspectors, fire protection workers and more. Apply or renew through its online license portal. Exam dates and places for 2026 and 2027 are on its page. The office is open Monday to Friday, 8 a.m. to 4 p.m. Email <a href="mailto:sfmlicensing@wv.gov">sfmlicensing@wv.gov</a>.</p>
   <SourceLine sources={sfm} about="electrician licenses" />
   <div class="actions">
     <a class="btn" href="tel:+13045582191"><Icon name="phone" /><span>Call the Fire Marshal: 304-558-2191</span></a>
@@ -122,5 +123,5 @@ const complaint = [{ url: 'https://www.wvclboard.wv.gov/complaint/', checked }];
     <a class="btn" href="https://www.wvclboard.wv.gov/complaint/"><Icon name="open" /><span>Board complaint page</span></a>
   </div>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these rules and link the official pages; we do not decide whether a job needs a license. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. We describe these rules and link the official pages; we do not decide whether a job needs a license. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

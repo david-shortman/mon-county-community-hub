@@ -8,17 +8,26 @@ opening_hours:
   - days: [mon, tue, wed, thu]
     opens: "07:00"
     closes: "17:30"
-what_to_do: "The city lists four steps. 1. Call the Planning Division at 304-284-7431 to check that your location is zoned for your business. 2. Register with the state through the One Stop Business Portal. 3. Apply for a city business license through the Morgantown Access Portal. 4. If your business has a physical location in the city, apply for a Certificate of Occupancy and schedule inspections with Code Enforcement and the Fire Marshal at least one week before opening. The city also charges a B&O tax on gross income and a municipal service fee. Licenses run for a fiscal year and expire June 30. B&O tax questions: BandO@morgantownwv.gov or the Finance Department at 304-284-7408."
+what_to_do: "The city lists four steps. Licenses run for a fiscal year and expire June 30."
+steps:
+  - "Call the Planning Division at 304-284-7431 to check that your location is zoned for your business."
+  - "Register with the state through the One Stop Business Portal."
+  - "Apply for a city business license through the Morgantown Access Portal."
+  - "If your business has a physical location in the city, apply for a Certificate of Occupancy and schedule inspections with Code Enforcement and the Fire Marshal at least one week before opening."
+notes:
+  - "The city also charges a B&O tax on gross income and a municipal service fee. B&O tax questions: BandO@morgantownwv.gov or the Finance Department at 304-284-7408."
 contact:
   phone: "304-284-7408"
   url: https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business
   url_label: City steps and forms
   place: "389 Spruce Street, Morgantown, WV 26505"
-cost: "Certificate of Occupancy application fee: $65. Other license fees and B&O tax rates are not listed on the city's web page."
+cost: "City business license fee: $20 (also $20 for a nonprofit). Certificate of Occupancy application fee: $65. Businesses that sell beer, wine or liquor pay extra city license fees, listed on the application. B&O tax rates are not listed on the city's web page."
 sources:
   - url: https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.morgantownwv.gov/742/Licensing
-    checked: 2026-10-30
+    checked: 2026-11-01
   - url: https://www.morgantownwv.gov/202/Finance
-    checked: 2026-10-30
+    checked: 2026-11-01
+  - url: https://www.morgantownwv.gov/DocumentCenter/View/5595/Fillable-Municipal-Business-License-Application
+    checked: 2026-11-01

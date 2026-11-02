@@ -1,0 +1,30 @@
+---
+// Selling food made at home (part of #393): the WV Department of
+// Agriculture's Homemade Cottage Foods Product Guide as short lists. Every
+// food list and rule is quoted in content/pdf-pages/wvda-cottage-food-guide.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Selling food made at home (cottage food)", summary: "Which homemade foods West Virginia lets you sell with no permit, which need a free WVDA permit and kitchen inspection, label rules, and the steps" };
+const d = pdfPage('wvda-cottage-food-guide');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-558-2227';
+---
+<Base title="Selling homemade food in Mon County, WV: which cottage foods need a permit" description="From the WV Department of Agriculture's Homemade Cottage Foods Product Guide (Oct 2026): homemade foods you can sell with no permit, foods that need a free WVDA permit, process authority letter or label review, baked goods that need a permit, label rules and the steps to apply.">
+  <h1>Selling food made at home (cottage food)</h1>
+  <p class="lede">Want to sell cookies, jam, salsa or pickles you make at home? Some homemade foods need no state permit. Others need a free permit and a kitchen inspection first. The state's guide is a 30-page PDF, so here are the lists and rules. Questions: call WVDA at <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>Selling at a fair, a farmers market, a bake sale or from a food truck in Mon County: see <a href={`${base}/selling-food/`}>selling food at markets, events and food trucks</a>.</p>
+
+  <p class="meta">This page is a reading aid. The state's guide is the official version, and WVDA says it is updated when laws or rules change. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

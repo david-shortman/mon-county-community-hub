@@ -1,0 +1,7 @@
+date: 2026-10-31
+item: Bake sale rules
+page: /bake-sale-rules/
+kind: wording
+found_by: our-check
+what: The page said the health department "asks" you to register a bake sale and called its food list "Allowed". The form says you are "required" to register and the menu "must be limited to" that list. The page now says both.
+link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=head%3Acode%2Fqa3-bake-sale-wording

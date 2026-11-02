@@ -1,0 +1,54 @@
+# Sale and market date pages the daily Source check watches closely (#718).
+# How it works: docs/operations/secondhand-checks.md
+#
+# This is a watch list, not a listing. Nothing here shows on the site. Fields
+# are explained in content/watch/food.yaml and content/watch/shelter.yaml.
+# Sources that change every day (WVU calendar, card show and festival lists,
+# the Dominion Post) are on the weekly checklist issue (#718) instead.
+group: secondhand
+title: Sale and market date pages
+issue_title: Sale or market date page changed
+plan: docs/operations/secondhand-checks.md
+todo: >-
+  What to do: open each page and read it. Add any new confirmed sale or market
+  date to content/calendar/ (topic secondhand or market) in a PR, following
+  the calendar rules in content/README.md. Never guess a date. If a listed
+  shop's hours or status changed, update its content/secondhand/ entry and
+  checked date. Close this issue when done, or close it if nothing new.
+entries:
+  - name: Moonlight Market
+    kind: page
+    url: https://www.wvmoonlightmarket.com/
+    checked: 2026-10-31
+    note: On 2026-10-31 the page listed 2026 dates 5/16, 7/18, 9/19 and 11/7. Watch for 2027 dates.
+
+  - name: MRTC Handmade Market
+    kind: page
+    url: https://montrails.org/mrtc-handmade-market
+    start: "Fund/Fundraise Volunteer Handmade Market:"
+    quote: Saturday, April 25, 2026
+    checked: 2026-10-31
+    note: When the 2026 date goes away, look for the April 2027 date.
+
+  - name: Morgantown Farmers Market dates
+    kind: page
+    url: https://morgantownfarmersmarket.org/markets.html
+    checked: 2026-10-31
+
+  - name: Friends of the Morgantown Public Library (book sales)
+    kind: blocked
+    url: https://www.mympls.org/get-involved/friends/
+    checked: 2026-10-31
+    note: Sends an empty page to robots (202). A person reads it on the weekly checklist.
+
+  - name: Visit Mountaineer Country, Vintage Fest
+    kind: blocked
+    url: https://www.visitmountaineercountry.com/?p=334848
+    checked: 2026-10-31
+    note: A bot check page blocks robots.
+
+  - name: Mountaineer Week (Arts and Craft Fair)
+    kind: blocked
+    url: https://mountaineerweek.wvu.edu/
+    checked: 2026-10-31
+    note: Blocks robots (403).

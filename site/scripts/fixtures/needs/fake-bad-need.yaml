@@ -17,3 +17,10 @@ working_on:
 topics: [not-a-topic]
 rank: 0
 contact_email: jane@example.org
+get_help:
+  - path: /no-such-page-here/
+    label: A page that does not exist
+  - path: https://example.org/
+site_coverage:
+  level: great
+  checked: 2026-11-01

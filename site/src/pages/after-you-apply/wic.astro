@@ -1,0 +1,76 @@
+---
+// After you apply: WIC. From the West Virginia WIC Policy and Procedure
+// manual (policies 1.07, 2.01, 2.05, 2.09) and the WIC Participant Agreement
+// (WIC-05, 12/2022), read 2026-10-31. Policy 2.05 (time frames) is dated
+// 1997 but is the version the state posts. Local clinic details come from the
+// monchd-wic record. Food and family help: the PR waits for David.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { door: 'care', topic: 'health', label: 'After you apply for WIC', summary: 'The clinic visit, how fast WIC decides, keeping benefits, and asking for a fair hearing within 60 days' };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-10-31';
+const P = 'https://dhhr.wv.gov/WIC/policyprocedure/Documents/';
+const src = {
+  hearing: { url: `${P}1.07%20Fair%20Hearing%20Policy%20for%20Applicants%20and%20Participants.pdf`, checked, name: 'WV WIC Policy 1.07, Fair Hearing Policy for Applicants and Participants, effective 7/24/20' },
+  cert: { url: `${P}2.01%20Certification%20of%20WIC%20Participants.pdf`, checked, name: 'WV WIC Policy 2.01, Certification of WIC Participants, effective 4/21/2021' },
+  time: { url: `${P}2.05%20Time%20Frames%20for%20Processing%20Applicants.pdf`, checked, name: 'WV WIC Policy 2.05, Time Frames for Processing Applicants, effective 08/01/97' },
+  notice: { url: `${P}2.09%20Notification%20of%20Ineligibility.pdf`, checked, name: 'WV WIC Policy 2.09, Notification of Ineligibility, effective 4/21/2021' },
+  agree: { url: `${P}ONS%207289%20WIC%20Participant%20Agreement%202022_Engish_FINAL.pdf`, checked, name: 'West Virginia WIC Participant Agreement, WIC-05, 12/2022' },
+};
+const wic = resource('monchd-wic');
+const legal = resource('legal-aid-wv-civil-legal-help');
+const ok = (r) => r && !r.hidden;
+---
+<Base help title="After you apply for WIC in Mon County: the clinic visit, keeping benefits and appeals" description="What happens after you ask for WIC in Monongalia County, WV: the certification visit, how fast WIC must decide, what you agree to, the eWIC card, keeping appointments, and how to ask for a fair hearing within 60 days. Quoted from West Virginia WIC's own policies.">
+  <h1>After you apply for WIC</h1>
+  <p class="lede">Your next step is a visit to the WIC clinic, called a certification appointment. Bring the person who is applying. Here is what happens there and after, in West Virginia WIC's own policies.</p>
+  <p>WIC helps with healthy food and nutrition for pregnant women, new mothers, babies and children under 5. Who it is for, and how to reach the Mon County clinic, are on the card below. For more help around a new baby, see <a href={`${base}/pregnant-or-new-baby/`}>Pregnant or new baby</a>.</p>
+  <p class="note">This page quotes the state WIC program's policies. WIC decides each case. It is information, not legal advice.</p>
+  {ok(wic) && <ResourceCard r={wic} />}
+
+  <h2 id="visit">1. The clinic visit</h2>
+  <ul>
+    <li><strong>Your application date</strong> is the day you first ask for WIC by phone, in writing or in person. WIC then sets an appointment and sends an appointment letter.</li>
+    <li><strong>Bring proof</strong> of where you live, who you are, and your income. Policy 2.01 says the clinic "will require each applicant to present" these three.</li>
+    <li><strong>Bring your baby or child.</strong> Policy 2.01 says infants "must be physically present" for their appointment, and a child "must be physically present" at each certification appointment. There are exceptions for some disabilities and serious illness, with a note from a health care provider.</li>
+    <li><strong>A nutrition check.</strong> A WIC nutritionist checks whether there is a nutrition need. The participant agreement says this includes height and weight and "a small amount of blood" to check iron.</li>
+    <li><strong>Pregnant but no proof yet?</strong> Policy 2.01 says you can be approved for 30 days. Bring proof within 30 days, or benefits stop. A home pregnancy test does not count as proof.</li>
+    <li><strong>It is free.</strong> Policy 2.01 says certification "will be performed at no cost to the applicant."</li>
+  </ul>
+  <SourceLine sources={[src.time, src.cert, src.agree]} about="the WIC clinic visit" />
+
+  <h2 id="decision">2. How fast WIC decides</h2>
+  <p>Policy 2.05 says that when the clinic is not at its limit, it will decide and give benefits:</p>
+  <ul>
+    <li>"Within ten (10) calendar days of the application date" for women in WIC's "Priority I" group, all infants, and migrant farm worker families, and</li>
+    <li>"Within twenty (20) calendar days of the application date for all other applicants."</li>
+  </ul>
+  <p>If you are not approved, Policy 2.09 says you get a written notice with the reason and your right to a fair hearing.</p>
+  <SourceLine sources={[src.time, src.notice]} about="how fast WIC decides" />
+
+  <h2 id="keep">3. Keeping WIC</h2>
+  <ul>
+    <li><strong>Your eWIC card.</strong> You buy foods on your WIC shopping list with your eWIC card. The participant agreement says lost or stolen benefits are not replaced, so tell your clinic right away.</li>
+    <li><strong>Keep appointments,</strong> or call ahead. Policy 2.09 says WIC will tell you at each certification that missing a certification appointment ends your WIC.</li>
+    <li><strong>Report changes right away:</strong> your address, phone number, income, family size, Medicaid, or if you stop breastfeeding.</li>
+    <li><strong>When WIC ends on its own.</strong> Policy 2.09 lists a child turning 5, 6 months after a pregnancy ends, and 1 year after birth for a breastfeeding mother.</li>
+    <li><strong>One clinic at a time.</strong> If you move out of state, you can ask for a transfer.</li>
+  </ul>
+  <SourceLine sources={[src.agree, src.notice]} about="keeping WIC" />
+
+  <h2 id="hearing">If you are denied or taken off WIC</h2>
+  <ul>
+    <li><strong>Ask within 60 days.</strong> Policy 1.07 says you "will have 60 days from the date the agency mails or gives the applicant or participant the notice of adverse action to request a hearing."</li>
+    <li><strong>How to ask.</strong> The participant agreement says to ask "by writing or calling my Local WIC Clinic or the State WIC Office." The State WIC Office is at 350 Capitol Street, Room 515, Charleston, WV 25301, <a href="tel:13045580030">304-558-0030</a>.</li>
+    <li><strong>Keep benefits while you wait</strong> by appealing within the 15 day notice period before benefits stop. Policy 1.07 says benefits then continue until the hearing decision or the end of your certification, whichever comes first. This does not apply to a first application that was denied, an ended certification, or no longer fitting a WIC group.</li>
+    <li><strong>Someone can speak for you,</strong> such as "a relative, friend, legal counsel or other spokesperson."</li>
+    <li><strong>Who decides.</strong> Policy 1.07 says hearings are run by an impartial official from the state's Board of Review.</li>
+  </ul>
+  <SourceLine sources={[src.hearing, src.agree]} about="asking for a WIC fair hearing" />
+  {ok(legal) && <ResourceCard r={legal} />}
+
+  <p class="meta">We describe the state's steps. WIC decides who gets WIC. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

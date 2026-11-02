@@ -1,0 +1,155 @@
+# Simulated resident tasks for pages added on October 31 and November 1, 2026
+# (#529, sprint wave 8). Same format and rules as tasks.yaml. These are
+# made-up tasks, not real residents or real feedback.
+#
+# Paths are the taps we judged a resident would take from the home page,
+# using the home page's own words. Where a related page a resident is likely
+# to open first does not link to the new page, the task says so in `note`
+# and uses the shortest path that works, so the score shows the cost.
+- id: n01
+  task: I applied for SNAP last week. What happens now?
+  who: Parent who just applied for food help
+  group: parents-young-kids
+  need: enough-food
+  searches: [applied for snap what happens next, snap interview]
+  targets: [{url: /after-you-apply/snap/, marker: "interview", path: [/money/, /after-you-apply/snap/]}]
+- id: n02
+  task: My unemployment got denied. Can I fight it?
+  who: Worker who lost a job
+  group: job-seekers
+  need: wages-and-cost-of-living
+  searches: [unemployment denied appeal, appeal unemployment]
+  targets: [{url: /after-you-apply/unemployment/, marker: "8 calendar days|appeal", path: [/money/, /after-you-apply/unemployment/]}]
+- id: n03
+  task: I applied for heating help a month ago and haven't heard back.
+  who: Renter with a high heating bill
+  group: renters
+  need: utility-bills
+  note: The home page's "Heat, water or power bill" link leads to /utility-bills/, which does not link to this guide.
+  searches: [lieap application status, heating assistance applied]
+  targets: [{url: /after-you-apply/lieap/, marker: "30 days|decision", path: [/money/, /after-you-apply/lieap/]}]
+- id: n04
+  task: Social Security turned down my disability claim.
+  who: Adult with a disability
+  group: disability-caregivers
+  need: null
+  searches: [disability denied, ssdi appeal]
+  targets: [{url: /after-you-apply/social-security-disability/, marker: "60 days|appeal", path: [/family/, /after-you-apply/social-security-disability/]}]
+- id: n05
+  task: I just got laid off. What do I do first?
+  who: Worker who lost a job
+  group: job-seekers
+  need: wages-and-cost-of-living
+  searches: [laid off, lost my job]
+  targets: [{url: /life-events/lost-my-job/, marker: "today", path: [/family/, /life-events/lost-my-job/]}]
+- id: n06
+  task: I need to get away from my partner. He hurts me.
+  who: Person in an unsafe home
+  group: null
+  need: homelessness
+  searches: [domestic violence, leave abusive partner]
+  answer: any
+  targets:
+    - {url: /life-events/leaving-an-unsafe-home/, marker: "danger|hotline", path: [/family/, /life-events/leaving-an-unsafe-home/]}
+    - {url: /protective-orders/, marker: "hotline|advocate", path: [/stay-tonight/, /protective-orders/]}
+- id: n07
+  task: How do I get a protective order against my ex?
+  who: Person who needs a protective order
+  group: null
+  need: null
+  searches: [protective order, restraining order]
+  targets: [{url: /protective-orders/, marker: "Magistrate Court", path: [/stay-tonight/, /protective-orders/]}]
+- id: n08
+  task: My brother gets out of prison next month. How can I help him get set up?
+  who: Family member of someone leaving prison
+  group: null
+  need: null
+  searches: [getting out of prison, reentry help]
+  targets: [{url: /life-events/leaving-jail-or-prison/, marker: "today|ID", path: [/family/, /life-events/leaving-jail-or-prison/]}]
+- id: n09
+  task: We just moved here from another country. Where do we start?
+  who: Immigrant family
+  group: new-residents
+  need: null
+  searches: [immigrant help, refugee]
+  targets: [{url: /life-events/new-to-the-country/, marker: "interpreter", path: [/family/, /life-events/new-to-the-country/]}]
+- id: n10
+  task: My wife and I are getting a divorce. Where do I start?
+  who: Parent going through a divorce
+  group: null
+  need: null
+  searches: [divorce, child custody]
+  targets: [{url: /life-events/separating-or-divorcing/, marker: "legal help", path: [/family/, /life-events/separating-or-divorcing/]}]
+- id: n11
+  task: My 2 year old still isn't talking. Who can check him?
+  who: Parent of a toddler
+  group: parents-young-kids
+  need: null
+  searches: [speech delay toddler, birth to three]
+  targets: [{url: /life-events/child-delay-or-disability/, marker: "Birth to Three|under 3|age", path: [/family/, /life-events/child-delay-or-disability/]}]
+- id: n12
+  task: I live out at Cheat Lake. Who runs things out here and who do I call?
+  who: Homeowner outside city limits
+  group: homeowners
+  need: null
+  searches: [cheat lake, who do i call cheat lake]
+  targets: [{url: /towns/cheat-lake/, marker: "call", path: [/living-here/, /towns/, /towns/cheat-lake/]}]
+- id: n13
+  task: When does Westover city council meet?
+  who: Westover resident
+  group: null
+  need: null
+  searches: [westover city council, westover meeting]
+  targets: [{url: /towns/westover/, marker: "meet", path: [/living-here/, /towns/, /towns/westover/]}]
+- id: n14
+  task: I'm 72 and live alone. What help is there for people my age?
+  who: Older adult living alone
+  group: older-adults
+  need: loneliness
+  searches: [help for seniors, older adults]
+  targets: [{url: /for/older-adults/, marker: "Pick what you need", path: [/care/, /for/older-adults/]}]
+- id: n15
+  task: I'm a renter. Show me everything for renters.
+  who: Renter
+  group: renters
+  need: housing-costs
+  searches: [renters, tenant help]
+  answer: any
+  targets:
+    - {url: /for/renters/, marker: "Pick what you need", path: [/money/, /for/renters/]}
+    - {url: /renting/, marker: "rent", path: [/money/, /renting/]}
+- id: n16
+  task: Where can I park downtown and what does it cost?
+  who: Visitor driving downtown
+  group: null
+  need: transportation
+  searches: [downtown parking, parking ticket]
+  targets: [{url: /parking/, marker: "75 cents", path: [/living-here/, /parking/]}]
+- id: n17
+  task: I'm two months behind on my mortgage.
+  who: Homeowner
+  group: homeowners
+  need: housing-costs
+  searches: [behind on mortgage, foreclosure]
+  targets: [{url: /behind-on-mortgage/, marker: "servicer", path: [/money/, /behind-on-mortgage/]}]
+- id: n18
+  task: Where can I get Christmas toys for my kids?
+  who: Parent on a tight budget
+  group: parents-young-kids
+  need: wages-and-cost-of-living
+  searches: [christmas toys, toys for kids christmas]
+  targets: [{url: /holidays/, marker: "toy", path: [/holidays/]}]
+- id: n19
+  task: What is the school board deciding at its next meeting?
+  who: Parent of a school-age child
+  group: parents-school-age
+  need: null
+  searches: [school board agenda, board of education meeting]
+  targets: [{url: /meetings/agendas/school-board/, marker: "agenda", path: [/community/, /meetings/agendas/, /meetings/agendas/school-board/]}]
+- id: n20
+  task: I'm new in town and want to join a group, like a book club or a walking group.
+  who: New resident
+  group: new-residents
+  need: loneliness
+  searches: [book club, groups to join]
+  targets: [{url: /find-your-people/, marker: "Groups|three questions", path: [/community/, /find-your-people/]}]

@@ -1,0 +1,84 @@
+---
+// Printout sheets made from the data (#405): one sheet per door and per big
+// topic, listing every resource record in it with its phone, text line,
+// address, hours and checked date. Rebuilt every morning with the site, so a
+// sheet is never older than the data. Each sheet says when it was made and to
+// call or text 211 to confirm, and has a QR code with the short web address
+// printed beside it. Printing and placing sheets is David's call (#163).
+// Town-by-town sheets (Westover, Star City, Cheat Lake) need town-level data
+// on each record first.
+import Base from '../../layouts/Base.astro';
+import { loadDoors, resource, oldestChecked, isStale, prettyDate, todayYmd, shortUrl } from '../../lib/content.mjs';
+import { loadPages } from '../../lib/pages.mjs';
+import { qrSvg, shortAddress, addressParts } from '../../lib/qr.mjs';
+import { printSheets } from '../../lib/printouts.mjs';
+
+export function getStaticPaths() {
+  return printSheets().map((s) => ({ params: { slug: s.slug }, props: { kind: s.kind, key: s.slug, name: s.name, list: s.list } }));
+}
+
+const { kind, key, name, list } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const doors = loadDoors();
+const pages = await loadPages();
+// Where the QR code points: the door's own page, or the first listed page with this topic.
+const topicPage = [...pages.values()].find((p) => p.listed !== false && !p.parent && p.topic === key);
+const target = kind === 'door' ? (doors.bySlug[key].page ?? `/topics/#${key}`) : (topicPage?.route ?? '/topics/');
+const targetUrl = new URL(`${base}${target}`, Astro.site).href;
+const qr = await qrSvg(targetUrl);
+const today = todayYmd();
+const items = [...list].sort((a, b) => a.title.localeCompare(b.title));
+const r211 = resource('wv-211');
+const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href);
+---
+<Base title={`${name}: a printable sheet for Mon County`} description={`A one-page printable list of ${name.toLowerCase()} help in Morgantown and Monongalia County, WV, with phone numbers, addresses, hours and checked dates.`}>
+  <div class="sheet-head">
+    <div>
+      <h1>{name}: help in Mon County</h1>
+      <p class="sheet-asof"><strong>Made from our listings on {prettyDate(today)}.</strong> Each place says when we last checked it. Things change, so call first. Not sure where to start? Call {r211.contact.phone} or text your ZIP code to {r211.contact.text}. {r211.hours}.</p>
+    </div>
+    <figure class="sheet-qr"><Fragment set:html={qr} /><figcaption>More online:<br /><strong>{addressParts(targetUrl)[0]}<wbr />{addressParts(targetUrl)[1]}</strong></figcaption></figure>
+  </div>
+  <p class="no-print">This sheet is made from our listings every morning. Print it, fold it, and hand it to someone. <button class="btn" type="button" id="print-sheet" hidden><span>Print this sheet</span></button> <a href={`${base}/print/`}>All printouts</a>.</p>
+
+  <ul class="sheet-list">
+    {items.map((r) => (
+      <li>
+        <p class="sh-title">{r.title}</p>
+        <p class="sh-reach">
+          {r.contact?.phone && <span>Call <strong>{r.contact.phone}</strong></span>}
+          {r.contact?.text && <span>Text <strong>{r.contact.text}</strong></span>}
+          {!r.contact?.phone && r.contact?.url && <span>Online: <strong>{shortUrl(r.contact.url)}</strong></span>}
+        </p>
+        {r.contact?.place && <p>{r.contact.place}</p>}
+        {r.hours && <p>{r.hours}</p>}
+        <p>{r.who_it_is_for}{r.cost === 'free' && ' Free.'}</p>
+        <p class="sh-src">{r.sources.length > 1 ? 'Sources' : 'Source'}: {r.sources.map((s) => shortUrl(s.url)).join(', ')}. Checked {prettyDate(oldestChecked(r.sources))}.{isStale(oldestChecked(r.sources), today) && <strong> Not checked in over 6 months: call to confirm.</strong>}</p>
+      </li>
+    ))}
+  </ul>
+  <p class="meta">Made from everythingmorgantown.org on {prettyDate(today)}, an independent community guide (not a government site). This sheet: {sheetUrl}. Each listing online links to its full source.</p>
+
+  <style>
+    .sheet-head { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; }
+    .sheet-head h1 { margin-top: 0; }
+    .sheet-qr { margin: 0; flex: 0 0 auto; width: 190px; text-align: center; font-size: 0.85rem; overflow-wrap: anywhere; }
+    .sheet-qr :global(svg) { width: 120px; height: 120px; display: block; margin: 0 auto 4px; }
+    .sheet-list { list-style: none; padding: 0; margin: 12px 0; columns: 2 16rem; column-gap: 24px; }
+    .sheet-list li { break-inside: avoid; border-top: 1px solid var(--line); padding: 6px 0 8px; }
+    .sheet-list p { margin: 2px 0; }
+    .sh-title { font-weight: 800; }
+    .sh-reach { display: flex; flex-wrap: wrap; gap: 0 14px; font-size: 1.1rem; }
+    .sh-src { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
+    @media (max-width: 30rem) { .sheet-head { flex-direction: column-reverse; } }
+    @media print {
+      .no-print { display: none; }
+      .sheet-list { font-size: 10.5pt; columns: 2; }
+      .sheet-head h1 { font-size: 18pt; }
+      .sh-src { color: #000; }
+    }
+  </style>
+  <script is:inline>
+    (function () { var b = document.getElementById('print-sheet'); if (!b) return; b.hidden = false; b.addEventListener('click', function () { window.print(); }); })();
+  </script>
+</Base>

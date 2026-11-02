@@ -1,0 +1,37 @@
+---
+// "I'm going through..." starting pages for life events (#1178, sprint #529),
+// the way /for/ serves groups. Pages under /life-events/ show here from their
+// tags, so a new one needs no edit. Life events that already had a page
+// before this folder are listed by hand below. Links only, no facts.
+import Base from '../../layouts/Base.astro';
+import { loadPages } from '../../lib/pages.mjs';
+export const page = { door: "family", topic: "family", label: "Going through a big change", summary: "A lost job, a divorce, leaving jail, a new baby, a death, a move: what to do first, in order" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pages = await loadPages();
+const fromFolder = [...pages.values()]
+  .filter((p) => /^\/life-events\/[^/]+\/$/.test(p.route))
+  .map((p) => ({ href: p.route, label: p.label, hint: p.summary }));
+// Pages built before this folder, with an "I'm ..." label. A link shows only
+// once its page exists.
+const older = [
+  { href: '/pregnant-or-new-baby/', label: "I'm pregnant or have a new baby" },
+  { href: '/when-someone-dies/', label: 'Someone in my family died' },
+  { href: '/for/new-to-mon-county/', label: "I just moved to Mon County" },
+  { href: '/after-a-storm/', label: 'A storm or flood hit my home' },
+  { href: '/caregivers/', label: "I'm caring for an aging parent or family member" },
+  { href: '/turning-65/', label: "I'm turning 65" },
+  { href: '/for/older-adults/', label: "I'm retiring or getting older" },
+  { href: '/for/college-students/', label: "I'm starting college here" },
+]
+  .filter((l) => pages.has(l.href))
+  .map((l) => ({ ...l, hint: pages.get(l.href).summary }));
+const all = [...fromFolder, ...older].sort((a, b) => a.label.replace(/^I'm /, '').localeCompare(b.label.replace(/^I'm /, '')));
+---
+<Base title="Going through a big change? Where to start in Morgantown and Mon County" description="Starting pages for life changes in Monongalia County, WV: losing a job, separating or divorcing, leaving jail or prison, a child with a delay or disability, new to the country, a new baby, a death in the family, a move, and more. Each lists what to do first, in order.">
+  <h1>Going through a big change?</h1>
+  <p class="lede">Pick what is happening. Each page lists what to do today, this week and later, with links to our pages that have local phone numbers and sources.</p>
+  <ul class="topic-list">
+    {all.map((l) => <li><a href={`${base}${l.href}`}>{l.label}</a><span class="hint">{l.hint}</span></li>)}
+  </ul>
+  <p>Looking for pages by who you are, like renters, parents or veterans? See <a href={`${base}/for/`}>Start here: pages by who you are</a>. Not sure what help fits? Try <a href={`${base}/help/what-help/`}>What help might I get?</a></p>
+</Base>

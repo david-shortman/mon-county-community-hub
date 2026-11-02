@@ -7,6 +7,7 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadMeetings } from '../lib/meetings/index.mjs';
+import { others, OTHER_CHECKED } from '../lib/meetings/others.mjs';
 import { prettyDate, todayYmd } from '../lib/content.mjs';
 export const page = { door: "community", topic: "government", label: "City and county meetings: agendas and minutes", summary: "Morgantown City Council, city boards and the County Commission: posted agendas for coming meetings, and minutes from recent ones" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -16,16 +17,6 @@ const agendaCenter = 'https://www.morgantownwv.gov/AgendaCenter';
 const countyPage = 'https://www.monongaliacounty.gov/commission/meeting_schedule/index.php';
 const checkedFor = (url) => meetings.find((m) => m.sources[0]?.url === url)?.sources[0]?.checked ?? today;
 const sources = [{ url: agendaCenter, checked: checkedFor(agendaCenter) }, { url: countyPage, checked: checkedFor(countyPage) }];
-// Bodies whose records we link but do not read, each checked by hand (#13).
-const OTHER_CHECKED = '2026-10-30';
-const others = [
-  { name: 'Monongalia County Board of Education', url: 'https://go.boarddocs.com/wv/mono/Board.nsf/Public', link: 'Agendas and minutes on BoardDocs', note: 'That site does not let this page read it, so open the link to see the meetings.' },
-  { name: 'Star City Town Council', url: 'https://www.starcitywv.com/minutes/', link: 'Signed council minutes, by year', note: 'We found no agendas posted.' },
-  { name: 'Granville Town Council', url: 'https://townofgranvillewv.gov/meeting-minutes-agendas', link: 'Council agendas and minutes', note: 'Posted as Word files.' },
-  { name: 'Westover City Council, Planning Commission and Sewer Board', url: 'https://www.westoverwv.org/', link: 'Minutes, in shared folders linked from the city home page', note: 'We found no agendas posted.' },
-  { name: 'Monongalia County Board of Health', url: 'https://www.monchd.org/about', link: 'Meeting agenda, and minutes for 2025 and 2026', note: 'The health department says the board meets the last Thursday in January, March, May, July, September and November at 9 a.m. in its Training Center, with dates subject to change.' },
-  { name: 'Morgantown Monongalia MPO Policy Board', url: 'https://www.plantogether.org/agendas', link: 'Policy Board agendas and minutes', note: 'Back to 2018, with its committees on the same page.' },
-];
 const ahead = meetings.filter((m) => m.date >= today);
 const since = (() => { const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.getUTCDate() - 60); return d.toISOString().slice(0, 10); })();
 const recent = meetings.filter((m) => m.date < today && m.date >= since).reverse();
@@ -39,6 +30,7 @@ const id = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, 
 
   <div class="note">
     <p>Open the agenda to see when and where a meeting is. Plans can change, so check it before you go. Dates of meetings that have no agenda yet are on the <a href={`${base}/calendar/`}>Dates page</a>.</p>
+    <p>For some City Council, County Commission and school board meetings, we list every agenda item in plain language: see <a href={`${base}/meetings/agendas/`}>coming meetings in plain language</a>.</p>
   </div>
 
   <h2 id="coming">Agendas posted for coming meetings</h2>

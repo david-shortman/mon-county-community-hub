@@ -9,6 +9,7 @@ import Actions from '../../components/Actions.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import NextRung from '../../components/NextRung.astro';
 import { loadDir, FAST_STALE_DAYS } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City boards that shape how Morgantown looks, which have open seats, and how to apply" };
 const all = loadDir('boards');
 const boards = all.filter((b) => !b.section);
@@ -18,7 +19,8 @@ const countyList = 'https://www.monongaliacounty.gov/authorities,_boards_and_com
 const others = all.filter((b) => b.section === 'other' && b.open_seats > 0);
 const open = boards.filter((b) => b.open_seats > 0);
 const full = boards.filter((b) => !(b.open_seats > 0));
-const applyOnline = 'https://arcg.is/4G8PK';
+// The city's vacancy page links https://arcg.is/4G8PK, which goes to this form (checked 2026-11-01, #506).
+const applyOnline = 'https://survey123.arcgis.com/share/f5da6abf08fd45d5aea222d894dfc484';
 const applyPdf = 'https://www.morgantownwv.gov/DocumentCenter/View/5371/Updated-Board-and-Commission-Application';
 const vacancyList = 'https://www.morgantownwv.gov/210/Volunteer-Opportunities';
 const listSrc = [{ url: vacancyList, checked: '2026-10-30' }];
@@ -39,8 +41,8 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
       <h3>{b.name}</h3>
       <p><strong>{seats(b.open_seats)}</strong> on the city's vacancy list.</p>
       <p>{b.decides}</p>
-      {b.who_can_serve && <p><strong>Who can serve:</strong> {b.who_can_serve}</p>}
-      <p><strong>Meets:</strong> {b.meets}</p>
+      {b.who_can_serve && <p><strong>Who can serve:</strong>{' '}{b.who_can_serve}</p>}
+      <p><strong>Meets:</strong>{' '}{b.meets}</p>
       <Actions link={applyOnline} linkLabel="Apply online" about={b.name} />
       <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
       <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
@@ -54,8 +56,8 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
       <h3>{b.name}</h3>
       {b.page_vacant > 0 && <p><strong>Sources differ:</strong> the board's own page shows {b.page_vacant === 1 ? '1 vacant seat' : `${b.page_vacant} vacant seats`}, but the city's vacancy list does not list it. Ask the City Clerk's office.</p>}
       <p>{b.decides}</p>
-      {b.who_can_serve && <p><strong>Who can serve:</strong> {b.who_can_serve}</p>}
-      <p><strong>Meets:</strong> {b.meets}</p>
+      {b.who_can_serve && <p><strong>Who can serve:</strong>{' '}{b.who_can_serve}</p>}
+      <p><strong>Meets:</strong>{' '}{b.meets}</p>
       <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
       <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
     </article>
@@ -64,7 +66,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
   <h2>Other city boards with open seats</h2>
   <p>These boards are not mainly about how the city looks, but they also have open seats on the city's list.</p>
   <ul>
-    {others.map((b) => <li><strong>{b.name}:</strong> {b.open_note}. {b.who_can_serve}</li>)}
+    {others.map((b) => <li><strong>{b.name}:</strong>{' '}{b.open_note}. {b.who_can_serve}</li>)}
   </ul>
   <p class="more"><a href={vacancyList}>The city's full vacancy list</a></p>
   <SourceLine sources={listSrc} staleDays={FAST_STALE_DAYS} about="the other open seats" />
@@ -76,12 +78,12 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
     <article class="card" id={b.slug}>
       <h3>{b.name}</h3>
       <p>{b.created}</p>
-      <p><strong>Who serves:</strong> {b.who_can_serve}</p>
-      <p><strong>Meets:</strong> {b.meets}</p>
+      <p><strong>Who serves:</strong>{' '}{b.who_can_serve}</p>
+      <p><strong>Meets:</strong>{' '}{b.meets}</p>
       <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
     </article>
   ))}
 
   <NextRung next="budget" />
-  <p class="meta">We list open seats as the city posts them. We do not say who should apply or take positions on what any board decides. Seat counts change, so check the city's list before you apply. Something out of date? <a href="https://github.com/david-shortman/mon-county-community-hub/issues/new?template=suggest-resource.yml">Tell us</a>.</p>
+  <p class="meta">We list open seats as the city posts them. We do not say who should apply or take positions on what any board decides. Seat counts change, so check the city's list before you apply. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

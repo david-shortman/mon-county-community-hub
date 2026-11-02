@@ -10,7 +10,9 @@ buys_from_you: false
 url: https://morgantownmag.com/cheat-lake-curation/
 url_label: Source
 status: unclear
-note: Newest source is from 2022. No website found.
+note: Newest article is from 2022. The shop's website lists the same hours.
 sources:
   - url: https://morgantownmag.com/cheat-lake-curation/
-    checked: 2026-10-30
+    checked: 2026-11-01
+  - url: https://antiquesandoldbooks.com/
+    checked: 2026-11-01
