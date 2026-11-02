@@ -1,5 +1,7 @@
 # Look: Press
 
+**Status (November 2, 2026): Press is the site's design.** David picked it and it went live for everyone ([decision](../../decisions/2026-11-02-1545-press-look.md)). The `?look=press` preview no longer exists; the rules now live in `site/src/styles/press.css` and the tokens in `site/src/layouts/Base.astro`. One change from the preview: urgent pages, including the home page, keep Atkinson headings and do not load the serif, so they stay under the 50 KB budget. The rest of this page is the record of how the look was built.
+
 Preview: [everythingmorgantown.org/?look=press](https://everythingmorgantown.org/?look=press). Part of the visual identity wave (#396), phase 2. Built November 1, 2026. Only a browser that opens that link sees it; `?look=off` goes back to normal.
 
 ## The idea

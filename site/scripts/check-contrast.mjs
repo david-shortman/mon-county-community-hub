@@ -31,6 +31,10 @@ const pairs = [
   ['muted', 'bg', 'text'], ['muted', 'card', 'text'], ['muted', 'accent-bg', 'text'],
   ['accent', 'bg', 'text'], ['accent', 'card', 'text'], ['accent', 'accent-bg', 'text'],
   ['card', 'accent', 'text'],
+  // Press inks (#396): sandstone boxes, and step numbers on Cheat water.
+  ['fg', 'sand', 'text'], ['muted', 'sand', 'text'], ['accent', 'sand', 'text'],
+  ['card', 'water', 'text'],
+  ['rust', 'bg', 'non-text'], ['rust', 'card', 'non-text'],
   ['brick', 'bg', 'non-text'], ['brick', 'accent-bg', 'non-text'],
   ['ridge', 'bg', 'decorative'], ['line', 'bg', 'decorative'], ['line', 'card', 'decorative'],
 ];
