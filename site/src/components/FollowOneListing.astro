@@ -118,7 +118,7 @@ const SCENE = `<svg class="scene" data-s="__S__" viewBox="0 0 340 200" aria-hidd
       <g class="val v1"><text class="t" x="8" y="54">7 a.m. to 3:25 p.m.</text><text class="tx9" x="8" y="66">County page: 3:30</text></g>
       <g class="val v2"><text class="t" x="8" y="98">34 Olin St.</text></g>
       <g class="val v3"><text class="t" x="82" y="98">Free</text></g>
-      <g class="val v4"><text class="t" x="8" y="132">2 pages, read Nov 1</text></g>
+      <g class="val v4"><text class="t" x="8" y="132">2 pages, each dated</text></g>
       <g class="e e-flag"><rect class="flag" x="40" y="-26" width="92" height="21" rx="10.5"/><text class="tflag" x="86" y="-11.5" text-anchor="middle">Back to step 2</text></g>
     </g>
   </g>
@@ -384,11 +384,20 @@ const scene = (s) => SCENE.replace('__S__', String(s));
     #flow-explainer.is-live .scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
     #flow-explainer#flow-explainer.is-live .stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); margin-top: 16px; padding: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
   }
-  /* Phones, live: the picture sits at the top of the screen, the steps scroll under it */
-  @media (max-width: 43.99rem) {
+  /* Phones, live: the picture sits at the top of the screen, the steps scroll under it.
+     Only on screens tall enough that the held picture leaves most of the screen for reading;
+     short or zoomed-in screens keep a still drawing in each step instead. */
+  @media (max-width: 43.99rem) and (min-height: 36rem) {
     #flow-explainer#flow-explainer.is-live .stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 -8px 16px; padding: 6px 8px 8px; background: var(--card); border-bottom: 1px solid var(--line); border-radius: 0 0 10px 10px; box-shadow: 0 8px 12px -12px var(--fg); }
     #flow-explainer.is-live .flow > li { scroll-margin-top: 290px; }
     /* Keep a focused link or the skip target from landing under the held picture */
     html:has(#flow-explainer.is-live) { scroll-padding-top: 290px; }
+  }
+  @media (max-width: 43.99rem) and (max-height: 35.99rem) {
+    #flow-explainer.is-live .snap { display: block; }
+    #flow-explainer#flow-explainer.is-live .stage { display: none; }
+    #flow-explainer.is-live .flow > li { margin-bottom: 22px; }
+    #flow-explainer.is-live .flow > li.on { border-color: var(--line); box-shadow: none; }
+    #flow-explainer.is-live .flow > li:not(:last-child)::after { display: block; }
   }
 </style>
