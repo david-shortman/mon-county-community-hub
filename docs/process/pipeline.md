@@ -235,6 +235,11 @@ It writes these sections, in plain language:
 
 The retro itself is a log entry and can be self-merged. Any process change it proposes is a separate PR (see below).
 
+**Running a scheduled job now, and checking it can write (proposed 2026-11-02).** Scheduled Claude Code runs failed three ways in week 1: the first ones had no repo attached, a manual "run now" (`fire_trigger`) started a new session without the repo, and the retro on October 28 and November 2 could not write to GitHub until #1418.
+
+- **To run a scheduled job now,** send the request in the session the job is bound to, or move its schedule to a minute from now. Do not use `fire_trigger` for jobs that need the repo.
+- **Every scheduled job checks its access first.** Before any real work, it makes one harmless read and confirms the repo is checked out. On its first real write, if GitHub refuses, it stops, writes what it was doing to a local branch, and says so at the end of the run. Duet copies that into #81 on its next sweep.
+
 ## Part 3: How the process improves itself
 
 - **Any agent may propose a process change.** It opens a PR that edits this page or `COORDINATION.md`, labeled `for:david` and `type:process`. It states the problem, the evidence, and the test.
