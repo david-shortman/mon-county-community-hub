@@ -45,7 +45,9 @@ function yearStrip(markNow) {
   <rect class="hot" x="${apr}" y="48" width="5" height="18"/>
   <text class="tx th" x="${a}" y="98" text-anchor="middle">March 7 to 28</text>
   <text class="tx th" x="${apr + 6}" y="112">3rd Tuesday</text><text class="tx th" x="${apr + 6}" y="124">in April</text>
-  <g class="idea"><path class="pin" d="M${a + 8} 132l-6 -10h12z"/><text class="tidea" x="${a + 8}" y="146" text-anchor="middle">${markNow ? 'Speak here' : 'Your idea'}</text></g>
+  <g class="idea"><path class="pin" d="M${a + 8} 132l-6 -10h12z"/>${markNow === null
+    ? `<text class="tidea t-idea" x="${a + 8}" y="146" text-anchor="middle">Your idea</text><text class="tidea t-now" x="${a + 8}" y="146" text-anchor="middle">Speak here</text>`
+    : `<text class="tidea" x="${a + 8}" y="146" text-anchor="middle">${markNow ? 'Speak here' : 'Your idea'}</text>`}</g>
 </g>`;
 }
 
@@ -93,4 +95,16 @@ export function strip(z) {
   if (!ZOOMS.includes(z)) throw new RangeError(`zoom ${z}`);
   const body = z === '1' ? yearStrip(false) : z === '5' ? fiveStrip() : z === '10' ? tenStrip() : yearStrip(true);
   return `<svg class="dc-strip" data-z="${z}" viewBox="0 0 320 ${z === '1' || z === 'now' ? 154 : 196}" aria-hidden="true" focusable="false">${body}</svg>`;
+}
+
+// One drawing for the scroll story: all three strips in one picture. CSS on the
+// page shows one at a time by data-z and, with motion on, zooms between them:
+// the year shrinks into the first slot of the 5-year plan, and the 5-year plan
+// shrinks into its place on the ten years.
+export function stage() {
+  return `<svg class="dc-strip dc-stage-svg" data-z="1" viewBox="0 0 320 196" aria-hidden="true" focusable="false">
+  <g class="z z-yr">${yearStrip(null)}</g>
+  <g class="z z-five">${fiveStrip()}</g>
+  <g class="z z-ten">${tenStrip()}</g>
+</svg>`;
 }
