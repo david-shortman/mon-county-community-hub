@@ -17,8 +17,7 @@
 import { loadDoors, todayYmd } from './content.mjs';
 
 // Pages that sit above the doors, so they carry no tags.
-// /design-lab/ (#396) is a hidden preview page, not part of any door.
-const UNTAGGED = new Set(['/', '/404/', '/search/', '/topics/', '/design-lab/']);
+const UNTAGGED = new Set(['/', '/404/', '/search/', '/topics/']);
 
 const modules = import.meta.glob('../pages/**/*.astro');
 

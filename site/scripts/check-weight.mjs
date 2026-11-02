@@ -12,9 +12,9 @@ import zlib from 'node:zlib';
 const KB = 1024;
 const URGENT_KB = 50;
 const EVERYDAY_KB = 150;
-// Urgent pages: the one list. Any page with the crisis strip counts as urgent too.
-// The hard-moment pages the service worker saves for offline use are all here.
-const URGENT = ['index.html', 'stay-tonight/index.html', 'tonight/index.html', 'help/food/', 'utility-bills/index.html', 'after-a-storm/index.html', 'mental-health/index.html', 'drugs-and-alcohol/index.html', 'protective-orders/index.html'];
+// Urgent pages: the one list, shared with Base.astro (src/lib/urgent-pages.mjs).
+// Any page with the crisis strip counts as urgent too.
+import { isUrgentFile } from '../src/lib/urgent-pages.mjs';
 
 const dist = new URL('../dist/', import.meta.url).pathname;
 const gz = new Map();
@@ -52,7 +52,7 @@ const rows = [];
 for (const file of htmlFiles(dist)) {
   const where = path.relative(dist, file);
   const html = fs.readFileSync(file, 'utf8');
-  const urgent = URGENT.some((u) => (u.endsWith('/') ? where.startsWith(u) : where === u)) || html.includes('class="crisis-strip"');
+  const urgent = isUrgentFile(where) || html.includes('class="crisis-strip"');
   const files = assets(html, path.dirname(file));
   const bytes = gzSize(file) + files.reduce((n, f) => n + gzSize(f), 0);
   const budget = (urgent ? URGENT_KB : EVERYDAY_KB) * KB;
