@@ -2,6 +2,7 @@
 // so the words and pictures are written once. Everything here reads fine with
 // no script: numbered steps, each with its own still chart.
 import { svg, fmt, mins, DAYS } from './bus-day.mjs';
+import { motionSwitchHtml } from './motion-markup.mjs';
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -23,7 +24,7 @@ export function dayMarkup(routes, { checked, tripPlanner = 'https://www.busride.
   const o = [];
   o.push(`<div id="day-explainer" data-routes="${esc(JSON.stringify(data))}">`);
   o.push('<div class="rightnow" id="day-rightnow" hidden><h3>Right now</h3><p class="rn-line" id="day-rn-line"></p><details><summary>Each route right now</summary><ul id="day-rn-list"></ul></details><p class="rn-note">By the posted hours. Holidays and WVU breaks can change service.</p></div>');
-  o.push(`<div class="tools"><a href="#day-sum">Skip to the summary</a><button id="motion-toggle" type="button" hidden>Turn off motion</button><p class="motion-note" id="motion-note" hidden>Motion is off because your device is set to reduce motion.</p></div>`);
+  o.push(motionSwitchHtml({ skip: '#day-sum' }));
   o.push('<div class="scrolly">');
   o.push(`<figure class="stage" aria-hidden="true">${svg(routes, { day: 'm', t: mins('5:40'), live: true })}<p class="now" data-now></p><p class="key">Bar: first run to last run. <span class="k-tail">Faint end:</span> last trip still on the road. <span class="k-un">Red:</span> unsure.</p></figure>`);
   o.push('<ol class="days" aria-label="One weekday on the buses: morning, midday and evening">');
