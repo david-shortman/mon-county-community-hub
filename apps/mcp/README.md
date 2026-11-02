@@ -14,9 +14,19 @@ A small, read-only [MCP](https://modelcontextprotocol.io) server so AI tools (Cl
 |---|---|
 | `search_services` | Search programs and services by plain words and an optional topic (`money`, `food`, `health`, `housing`, `recycling` and others) |
 | `get_organization` | One organization by id (like `west-virginia-211`) or name, with its programs |
-| `upcoming_dates` | Upcoming deadlines and community dates, soonest first, with an optional topic and how many days ahead |
+| `upcoming_dates` | Upcoming deadlines and community dates, soonest first, with an optional topic and how many days ahead. Each date has an Add to calendar link (`.ics`). Chat apps that support MCP Apps show it as an interactive list (below) |
 | `list_needs` | The needs register (#74): ranked, sourced problems. Empty until entries are published |
 | `how_to_report_a_problem` | Where to report a wrong or missing listing, and where fixes are published |
+
+## Interactive view (MCP Apps)
+
+Chat apps that support [MCP Apps](https://github.com/modelcontextprotocol/ext-apps) can show `upcoming_dates` as a small list instead of text (#1371): each date with when and where, topic buttons to filter, and **Add to calendar**, **Source** and **Details** buttons. Other apps get a plain text list.
+
+- The view is one file, [`views/upcoming-dates.html`](views/upcoming-dates.html), served as the resource `ui://everything-morgantown/upcoming-dates.html` (type `text/html;profile=mcp-app`). The tool links to it with `_meta.ui.resourceUri`, only when the chat app says it can show views (`io.modelcontextprotocol/ui` in its capabilities).
+- It loads nothing from the internet. The chat app hands it the tool result, and links open through the chat app (`ui/open-link`). Add to calendar opens the date's `.ics` file on everythingmorgantown.org, which phones open in their calendar app.
+- Read-only: no storage, no tracking, no accounts.
+
+To use it in Claude or ChatGPT, the server has to be reachable online first (hosting is David's decision, #1370). The smoke test checks that the view is linked, has the right type and loads no outside files.
 
 ## Set it up
 
