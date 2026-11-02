@@ -32,3 +32,13 @@ test('the dates drawn match the dates in the page text', () => {
 test('no amounts in the drawing', () => {
   for (const z of ZOOMS) assert.doesNotMatch(strip(z), /\$/);
 });
+
+test('the scroll story drawing holds all three strips and starts at one year', async () => {
+  const { stage } = await import('../src/lib/decide-strip.mjs');
+  const svg = stage();
+  assert.match(svg, /data-z="1"/);
+  for (const g of ['z-yr', 'z-five', 'z-ten']) assert.ok(svg.includes(`z ${g}`), g);
+  assert.match(svg, /t-idea/);
+  assert.match(svg, /t-now/);
+  assert.match(svg, /aria-hidden="true"/);
+});

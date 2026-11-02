@@ -12,6 +12,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import readline from 'node:readline';
+import { fileURLToPath } from 'node:url';
 
 const argBase = process.argv.indexOf('--base');
 const BASE = (argBase > 0 ? process.argv[argBase + 1] : process.env.EM_API_BASE) || 'https://everythingmorgantown.org/api/v1/';
@@ -21,6 +22,19 @@ const STALE_DAYS = 183;
 const SITE = 'https://everythingmorgantown.org';
 // Our private fix form (site/src/lib/group-requests.mjs FIX_FORM, #522).
 const REPORT_FORM = 'https://tally.so/r/rD5adv';
+// MCP Apps (#1371): one interactive view, for upcoming_dates. A chat app that
+// supports MCP Apps shows it in a sandbox; others get the plain text answer.
+const UI_EXT = 'io.modelcontextprotocol/ui';
+const UI_MIME = 'text/html;profile=mcp-app';
+const DATES_VIEW = 'ui://everything-morgantown/upcoming-dates.html';
+const VIEWS = {
+  [DATES_VIEW]: {
+    name: 'Upcoming dates',
+    description: 'A list of upcoming dates with topic filters, Add to calendar and source buttons.',
+    file: path.join(path.dirname(fileURLToPath(import.meta.url)), 'views', 'upcoming-dates.html'),
+  },
+};
+let clientShowsViews = false;
 const NOTE = 'Data from public sources, gathered by Everything Morgantown (CC BY 4.0). Details change: check the source before acting, and send people to the group itself. This tool describes programs; it never decides who qualifies.';
 
 // ---------- data ----------
@@ -134,6 +148,9 @@ const TOOLS = [
   },
   {
     name: 'upcoming_dates',
+    view: DATES_VIEW,
+    // Plain text for chat apps that do not show views.
+    text: (r) => [`${r.count} upcoming ${r.count === 1 ? 'date' : 'dates'}, soonest first. ${r.note}`, ...r.results.map((e) => `- ${e.starts}${e.ends && e.ends !== e.starts ? ` to ${e.ends}` : ''}${e.start_time ? ` ${e.start_time}` : ''}: ${e.title}${e.org_name ? ` (${e.org_name})` : ''}. Add to calendar: ${e.add_to_calendar}. Source: ${e.sources?.[0]?.url ?? 'none'}, checked ${e.oldest_checked ?? 'unknown'}.`)].join('\n'),
     description: 'List upcoming deadlines and community dates in Morgantown and Monongalia County, WV (application windows, tax dates, public meetings, mobile pantries, collection days), soonest first, with sources. Dates can change; check the source before acting.',
     inputSchema: {
       type: 'object',
@@ -156,7 +173,9 @@ const TOOLS = [
         .map((e) => ({
           title: e.title, id: e.slug, starts: e.starts, ends: e.ends, start_time: e.start_time, end_time: e.end_time,
           org_name: e.org_name, who_it_is_for: e.who_it_is_for, what_to_do: e.what_to_do, url: e.url, place: e.place, phone: e.phone,
-          topics: e.topics, from_feed: e.feed ? e.feed.name : undefined, ...freshness(e.sources),
+          topics: e.topics, from_feed: e.feed ? e.feed.name : undefined,
+          add_to_calendar: `${SITE}/calendar/${e.slug}.ics`, page: `${SITE}/calendar/#${e.slug}`,
+          ...freshness(e.sources),
         }));
       return { note: `${NOTE} Times are Eastern. Today in Morgantown is ${today}.`, count: hits.length, results: hits };
     },
@@ -199,9 +218,10 @@ async function handle(msg) {
   switch (method) {
     case 'initialize': {
       const asked = params.protocolVersion;
+      clientShowsViews = Boolean(params.capabilities?.extensions?.[UI_EXT]?.mimeTypes?.includes(UI_MIME));
       return reply(id, {
         protocolVersion: PROTOCOLS.includes(asked) ? asked : PROTOCOLS[0],
-        capabilities: { tools: { listChanged: false } },
+        capabilities: { tools: { listChanged: false }, resources: { listChanged: false } },
         serverInfo: SERVER,
         instructions: `${NOTE} Cite each record's sources and checked date. If a result says it is stale, say so. Point people to the group and to 211 for anything not listed.`,
       });
@@ -209,13 +229,26 @@ async function handle(msg) {
     case 'ping':
       return reply(id, {});
     case 'tools/list':
-      return reply(id, { tools: TOOLS.map(({ name, description, inputSchema }) => ({ name, description, inputSchema, annotations: { readOnlyHint: true, openWorldHint: true } })) });
+      return reply(id, { tools: TOOLS.map(({ name, description, inputSchema, view }) => ({
+        name, description, inputSchema, annotations: { readOnlyHint: true, openWorldHint: true },
+        // Only offer the view to chat apps that say they can show one.
+        ...(view && clientShowsViews ? { _meta: { ui: { resourceUri: view } } } : {}),
+      })) });
+    case 'resources/list':
+      return reply(id, { resources: Object.entries(VIEWS).map(([uri, v]) => ({ uri, name: v.name, description: v.description, mimeType: UI_MIME })) });
+    case 'resources/read': {
+      const v = VIEWS[params.uri];
+      if (!v) return fail(id, -32602, `Unknown resource: ${params.uri}`);
+      // No csp domains: the view loads nothing from outside and opens links through the chat app.
+      return reply(id, { contents: [{ uri: params.uri, mimeType: UI_MIME, text: await fs.readFile(v.file, 'utf8'), _meta: { ui: { prefersBorder: true } } }] });
+    }
     case 'tools/call': {
       const tool = TOOLS.find((t) => t.name === params.name);
       if (!tool) return fail(id, -32602, `Unknown tool: ${params.name}`);
       try {
         const result = await tool.run(params.arguments ?? {});
-        return reply(id, { content: [{ type: 'text', text: JSON.stringify(result, null, 2) }], structuredContent: result, isError: false });
+        const text = tool.text ? tool.text(result) : JSON.stringify(result, null, 2);
+        return reply(id, { content: [{ type: 'text', text }], structuredContent: result, isError: false });
       } catch (err) {
         return reply(id, { content: [{ type: 'text', text: `Could not load the data: ${err.message}` }], isError: true });
       }
