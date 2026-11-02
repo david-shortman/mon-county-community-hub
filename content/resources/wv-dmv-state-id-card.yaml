@@ -3,7 +3,9 @@ slug: wv-dmv-state-id-card
 org: wv-dmv
 topics: [records, moving]
 who_it_is_for: "West Virginia residents who need a state photo ID card, or want to switch to a REAL ID. There are two kinds of card. A REAL ID has a gold star. The DMV says a card marked \"Not for Federal Identification\" can no longer be used to board a plane or enter some federal buildings since May 7, 2025."
-what_to_do: Apply at a DMV regional office. You leave with a temporary card that is good for 60 days, and your card comes in the mail. If you already have a WV license or ID that is not a REAL ID, you can upload your documents ahead of time with REAL ID Headstart, then book an appointment. The DMV says this can cut your time in the office by up to half.
+what_to_do: "Apply at a DMV regional office. You leave with a temporary card that is good for 60 days, and your card comes in the mail."
+notes:
+  - "If you already have a WV license or ID that is not a REAL ID, you can upload your documents ahead of time with REAL ID Headstart, then book an appointment. The DMV says this can cut your time in the office by up to half."
 contact:
   phone: "1-800-642-9066"
   url: https://dmv.wv.gov/driver-services/drivers/drivers-licenses-and-id-cards
