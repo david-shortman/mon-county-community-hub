@@ -50,7 +50,7 @@ const latestLow = guide?.yearAgo ? latest.value < guide.yearAgo.value : false;
 // Short words under the held chart, one per step (the steps say it in full).
 const short = (p) => `${p.label.replace(/^(\w{3})\w*/, '$1')}: ${p.value}%`;
 const caps = guide ? {
-  latest: `Newest month. ${short(latest)}`,
+  latest: `Newest month, ${short(latest)}.`,
   year: guide.yearAgo ? `${short(guide.yearAgo)}. ${short(latest)}.` : '',
   read: 'The side shows the rate. The bottom shows the months.',
 } : {};
@@ -115,6 +115,7 @@ const measures = places.data?.measures ?? [];
       </div>
       <p class="chart-note">Not seasonally adjusted, so it rises and falls with the time of year. To see change over a year, compare a month with the same month a year before. Months with no published estimate are left out.</p>
       <h3 id="ue-guide-h">A guided look at this chart</h3>
+      <p>{guide.steps.length === 3 ? "Three" : "Two"} steps that walk through the chart above, using its real numbers.</p>
       <ol class="guide-steps" aria-labelledby="ue-guide-h">
         {guide.steps.map((st) => <li data-key={st.key} data-cap={caps[st.key]}><strong>{st.title}.</strong> {st.text}</li>)}
       </ol>
