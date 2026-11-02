@@ -37,6 +37,10 @@ None of these are on. Each one is David's call, through a `for:david` issue.
 
 Many free or discounted programs (for example nonprofit plans from software companies) are only open to registered nonprofits. The project is not one today.
 
+## Energy use
+
+We do not know how much energy the AI work uses. Anthropic has not published energy, water or emissions figures that we could find. What is known, what is not, and ways to use less: [research/ai-energy-use.md](research/ai-energy-use.md) (#495). Any change to how often the AI runs is David's call.
+
 ## If things stop
 
 - **If the Claude plan stops:** the site stays up. GitHub still rebuilds it every morning, so past dates still drop off and live feeds still update. What stops is new pages, reviews, and the re-checking of sources. After about 6 months, entries start showing as past their re-check date in the Health report.

@@ -22,14 +22,14 @@ Machines catch only part of the problems. The "Needs a person" list below is the
 | Text contrast (1.4.3, 1.4.6) | Pass | Text pairs are at least 7:1 in both themes |
 | Contrast of chart lines and controls (1.4.11) | Pass, after a fix | The orange trend line was 2.99:1 on the page background. Now 3.17:1 (#1035) |
 | Reflow at 320px (1.4.10) | Pass | No page scrolls sideways at 320px. 400% zoom on a 1280px screen is the same test |
-| Text at 400% on a wide screen (1.4.4) | 210 of 211 pass; 1 fix waiting | `/how-it-works/` scrolled sideways at 1280px with text at 400%: its table kept the first column on one line. The fix is #1105, which waits for David because the page names 211 |
-| Text at 200% (1.4.4) | Pass, after fixes | Fixed in #1008 and #1146 (19 flyers and How is Mon County doing?, #971). `check-a11y` on 276 pages: none scroll sideways at 320px with text at 200%. Home page crisis buttons (#1016) no longer scroll sideways, but their fix still waits for David |
+| Text at 400% on a wide screen (1.4.4) | Pass, after a fix | `/how-it-works/` scrolled sideways at 1280px with text at 400%: its table kept the first column on one line. Fixed in #1105 |
+| Text at 200% (1.4.4) | Pass, after fixes | Fixed in #1008 and #1146 (19 flyers and How is Mon County doing?, #971). `check-a11y` on 276 pages: none scroll sideways at 320px with text at 200%. Home page crisis buttons no longer scroll sideways (#1016) |
 | Text spacing (1.4.12) | Pass | Nothing scrolls sideways or gets cut off |
 | Keyboard (2.1.1, 2.1.2) | Pass | Tabbed through every page: every link, button and input can be reached, and focus never gets stuck. Pressing Space and Enter on each control was not tested one by one |
 | Skip link (2.4.1) | Pass | "Skip to main content" is the first Tab stop on every page |
 | Focus visible (2.4.7) | Pass | Every Tab stop shows a focus ring |
 | Focus not hidden (2.4.11) | Pass | On a 390px phone, no focused item sits under the header or the bottom tabs |
-| Focus order (2.4.3) | Pass, one fix waiting | Order follows the page. `/calendar/` has 911 Tab stops. #1090 (waits for David) groups it by week with jump links: 223 Tab stops, and "Skip past the dates" is the 20th (#1033) |
+| Focus order (2.4.3) | Pass, after a fix | Order follows the page. `/calendar/` had 911 Tab stops. #1090 groups it by week with jump links: 223 Tab stops in the audit, and "Skip past the dates" is the 20th (#1033) |
 | Quick exit | Pass | On `/stay-tonight/`, "Leave this page" is the 4th Tab stop, after 911 and 988. Pressing Shift 3 times also leaves |
 | Headings, landmarks, page titles (1.3.1, 2.4.2, 2.4.6) | Pass, after a fix | `/birth-control-and-testing/` jumped from `h1` to `h3`. Fixed in this round. One `h1`, main landmark and region rules pass on every page |
 | Form labels (1.3.1, 3.3.2) | Pass | axe's label rules pass on every checkbox, search box and finder input |
@@ -43,13 +43,11 @@ Machines catch only part of the problems. The "Needs a person" list below is the
 - #1008: no sideways scroll at 200% text on Compare halls and on trend chart number tables; `check-a11y` now checks 200% text.
 - #1022: the Vote page's voter ID card shows the IDs as a list and each exception apart (#973).
 - #1035: the trend chart's orange line meets 3:1, and `scripts/a11y-deep.mjs` lets anyone re-run this audit.
-- Wave 5: the heading order on Birth control and testing (#1110) and Burning leaves and brush (#1146) is fixed, and the flyers and How is Mon County doing? fit at 200% text (#1146, closes #971). #1105 (waits for David) fixes the How it works table at 400% text, and #1090 (waits for David) makes the calendar one week at a time.
+- Wave 5: the heading order on Birth control and testing (#1110) and Burning leaves and brush (#1146) is fixed, and the flyers and How is Mon County doing? fit at 200% text (#1146, closes #971). #1105 fixes the How it works table at 400% text, and #1090 makes the calendar one week at a time.
 
 ## Waiting
 
-- #1016 (waits for David): home page crisis buttons stack when text is big.
-- #1105 (waits for David): How it works at 400% text.
-- #1090 (waits for David): the calendar, one week at a time, with jump links (#1033).
+Nothing is waiting. The three fixes listed here before (#1016, #1105, #1090) are merged. Checked November 2, 2026.
 
 ## Needs a person
 
