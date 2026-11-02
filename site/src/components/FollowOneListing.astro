@@ -1,0 +1,392 @@
+---
+// Follow one listing: the scroll story on How this site works (Nov 2026).
+// Follows docs/design/motion.md (the motion guide) where it exists.
+// The "How a listing gets here" steps on /how-it-works/, each with a small
+// drawing of what happens to one real listing (the county recycling drop-off
+// center): its source pages, the facts moving onto a listing card, the public
+// file, the checks ticking, the second look, the card going live in a phone,
+// and the daily recheck finding a (pretend) change and sending it back to step 2.
+// How it behaves:
+// - No script, or "Turn off motion", or a device set to reduce motion: every step
+//   shows its own still drawing, and the steps read as a plain numbered list.
+// - Otherwise one drawing stays in view (beside the steps on wide screens, at the
+//   top on phones) and changes as each step reaches the middle of the screen.
+//   Only opacity and transform move. The scroll is never taken over.
+// - "Turn off motion" is remembered on this phone only (localStorage
+//   "em-motion-off") and sets html[data-motion-off] so a later site-wide switch
+//   can reuse it.
+// - The drawings are aria-hidden; the step text carries the meaning.
+// - The step 7 change (3:00 p.m.) is pretend and is labeled that way.
+// Speaks for the project, so changes wait for David (for:david).
+const { base, example } = Astro.props;
+const SCENE = `<svg class="scene" data-s="__S__" viewBox="0 0 340 200" aria-hidden="true" focusable="false">
+  <g class="e e-src">
+    <rect class="pg" x="22" y="18" width="130" height="150" rx="6"/>
+    <text class="tx9" x="28" y="27">County page</text>
+    <g transform="translate(8 30)">
+      <rect class="pg" width="130" height="150" rx="6"/>
+      <path class="bar" d="M0 6a6 6 0 0 1 6-6h118a6 6 0 0 1 6 6v10H0z"/>
+      <circle class="dt" cx="8" cy="8" r="2"/><circle class="dt" cx="15" cy="8" r="2"/><circle class="dt" cx="22" cy="8" r="2"/>
+      <text class="tx9" x="30" y="11.5">Center's website</text>
+      <text class="tb" x="8" y="34">Recycling Center</text>
+      <text class="tm" x="8" y="52">Hours</text>
+      <text class="t" x="8" y="66">Mon to Fri, 7 a.m.</text>
+      <rect class="e e-chg hl-b" x="4" y="70" width="122" height="15" rx="3"/>
+      <text class="t h-old" x="8" y="81">to 3:25 p.m.</text>
+      <text class="t tbrick e e-chg" x="8" y="81">to 3:00 p.m.</text>
+      <text class="t" x="8" y="102">34 Olin St.</text>
+      <text class="t" x="8" y="120">Free</text>
+      <text class="tm" x="8" y="138">Closed weekends</text>
+    </g>
+  </g>
+  <g class="e e-read">
+    <path class="arr" d="M142 100h46"/>
+    <path class="arrh" d="M186 95l7 5-7 5z"/>
+    <text class="tx9" x="142" y="92">read</text>
+  </g>
+  <g class="e e-pub">
+    <path class="folder" d="M30 50a4 4 0 0 1 4-4h28l7 7h66a4 4 0 0 1 4 4v58a4 4 0 0 1-4 4H34a4 4 0 0 1-4-4z"/>
+    <rect class="pg" x="44" y="66" width="22" height="28" rx="3"/>
+    <rect class="pg" x="74" y="66" width="22" height="28" rx="3"/>
+    <rect class="pg cur" x="104" y="66" width="22" height="28" rx="3"/>
+    <text class="tb" x="30" y="142">Public folder</text>
+    <text class="tm" x="30" y="158">Anyone can read it</text>
+    <text class="tm" x="30" y="173">Every change is kept</text>
+  </g>
+  <g class="e e-file">
+    <rect class="pg" x="184" y="18" width="136" height="150" rx="8"/>
+    <rect class="pg" x="190" y="24" width="136" height="150" rx="8"/>
+    <text class="tx9 tfile" x="176" y="195" font-size="9" textLength="160" lengthAdjust="spacingAndGlyphs">mon-county-recycling-drop-off.yaml</text>
+  </g>
+  <g class="e e-chk" transform="translate(8 30)">
+    <text class="tb" x="0" y="12">Programs check</text>
+    <g class="tick"><circle class="tk" cx="8" cy="34" r="8"/><path class="tkm" d="M4 34l3 3 5-6"/></g>
+    <text class="t" x="22" y="38">Has a source</text>
+    <g class="tick"><circle class="tk" cx="8" cy="60" r="8"/><path class="tkm" d="M4 60l3 3 5-6"/></g>
+    <text class="t" x="22" y="64">Each source has a date</text>
+    <g class="tick"><circle class="tk" cx="8" cy="86" r="8"/><path class="tkm" d="M4 86l3 3 5-6"/></g>
+    <text class="t" x="22" y="90">Page builds</text>
+    <g class="tick"><circle class="tk" cx="8" cy="112" r="8"/><path class="tkm" d="M4 112l3 3 5-6"/></g>
+    <text class="t" x="22" y="116">Small enough for a phone</text>
+    <text class="tm" x="0" y="146">All pass, so it can go on</text>
+  </g>
+  <g class="e e-rev" transform="translate(8 30)">
+    <text class="tb" x="0" y="12">Second look by AI</text>
+    <g class="tick"><circle class="tk" cx="7" cy="30" r="7"/><path class="tkm" d="M3.5 30l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="34">Sources</text>
+    <g class="tick"><circle class="tk" cx="7" cy="50" r="7"/><path class="tkm" d="M3.5 50l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="54">Fair to everyone</text>
+    <g class="tick"><circle class="tk" cx="7" cy="70" r="7"/><path class="tkm" d="M3.5 70l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="74">Privacy</text>
+    <g class="tick"><circle class="tk" cx="7" cy="90" r="7"/><path class="tkm" d="M3.5 90l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="94">Easy to use</text>
+    <g class="tick"><circle class="tk" cx="7" cy="110" r="7"/><path class="tkm" d="M3.5 110l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="114">Clear words</text>
+    <circle class="ps" cx="7" cy="133" r="4"/><path class="ps" d="M0 147a7 7 0 0 1 14 0z"/>
+    <text class="tx9" x="20" y="138">Owner: not needed here.</text>
+    <text class="tx9" x="20" y="150">Not shelter, crisis, food</text>
+    <text class="tx9" x="20" y="162">or benefits.</text>
+  </g>
+  <g class="e e-ph" transform="translate(30 4)">
+    <rect class="phone" width="104" height="192" rx="14"/>
+    <rect class="notch" x="38" y="7" width="28" height="5" rx="2.5"/>
+    <text class="tb" x="10" y="31">Recycling</text>
+    <rect class="ln" x="10" y="38" width="80" height="4" rx="2"/>
+    <rect class="ln" x="10" y="46" width="62" height="4" rx="2"/>
+    <rect class="ln" x="10" y="154" width="80" height="4" rx="2"/>
+    <rect class="ln" x="10" y="162" width="56" height="4" rx="2"/>
+  </g>
+  <g class="e e-feeds">
+    <text class="tb" x="196" y="44">Also goes out as</text>
+    <rect class="chip" x="196" y="56" width="136" height="26" rx="13"/><text class="t" x="210" y="73">Calendar feed</text>
+    <rect class="chip" x="196" y="90" width="136" height="26" rx="13"/><text class="t" x="210" y="107">Free data files</text>
+    <rect class="chip" x="196" y="124" width="136" height="26" rx="13"/><text class="t" x="210" y="141">Read by apps and AI</text>
+  </g>
+  <g class="cw">
+    <g transform="translate(196 30)">
+      <g class="e e-frame">
+        <rect class="cd" width="136" height="150" rx="8"/>
+        <path class="cdh" d="M1 8a7 7 0 0 1 7-7h120a7 7 0 0 1 7 7v16H1z"/>
+        <text class="tb" x="8" y="17">Recycling drop-off</text>
+        <rect class="e e-hlsrc hl-a" x="4" y="106" width="128" height="32" rx="4"/>
+        <rect class="e e-hlh hl-b" x="4" y="29" width="128" height="42" rx="4"/>
+        <text class="tm" x="8" y="40">Hours</text>
+        <text class="tm" x="8" y="84">Where</text>
+        <text class="tm" x="82" y="84">Cost</text>
+        <text class="tm" x="8" y="118">Sources</text>
+      </g>
+      <g class="val v1"><text class="t" x="8" y="54">7 a.m. to 3:25 p.m.</text><text class="tx9" x="8" y="66">County page: 3:30</text></g>
+      <g class="val v2"><text class="t" x="8" y="98">34 Olin St.</text></g>
+      <g class="val v3"><text class="t" x="82" y="98">Free</text></g>
+      <g class="val v4"><text class="t" x="8" y="132">2 pages, read Nov 1</text></g>
+      <g class="e e-flag"><rect class="flag" x="40" y="-26" width="92" height="21" rx="10.5"/><text class="tflag" x="86" y="-11.5" text-anchor="middle">Back to step 2</text></g>
+    </g>
+  </g>
+  <g class="e e-mag"><circle class="mg" cx="316" cy="62" r="13"/><path class="mgh" d="M325 71l8 8"/></g>
+  <g class="e e-re">
+    <text class="tx9" x="167" y="78" text-anchor="middle">Daily check</text>
+    <path class="diff" d="M140 107L194 82"/>
+    <circle class="neq" cx="167" cy="94.5" r="9"/><text class="tneq" x="167" y="98.5" text-anchor="middle">&#8800;</text>
+    <text class="tx9" x="8" y="196">Pretend change, for this example</text>
+  </g>
+</svg>`;
+const scene = (s) => SCENE.replace('__S__', String(s));
+---
+  <div id="flow-explainer">
+    <div class="tools">
+      <a href="#flow-summary">Skip to the summary</a>
+      <button id="motion-toggle" type="button" hidden>Turn off motion</button>
+      <p class="motion-note" id="motion-note" hidden>Motion is off because your device is set to reduce motion.</p>
+    </div>
+
+    <div class="scrolly">
+      <figure class="stage" aria-hidden="true">
+        <Fragment set:html={scene(1)} />
+        <p class="now" data-now></p>
+      </figure>
+
+      <ol class="flow" aria-label="The path a listing takes, from a public page to this site and back">
+        <li id="step-1" data-short="It starts on someone else's page">
+          <p class="who"><span class="tag src">Public page</span></p>
+          <h3>1. It starts on someone else's page</h3>
+          <div class="snap"><Fragment set:html={scene(1)} /></div>
+          <p>A local group's own website, or a city, county, state or federal page. That group does the real work. We point back to it.</p>
+          <p class="eg"><b>Our example:</b> the recycling center has its own website, and the county Solid Waste Authority has a page about it too. Both list its hours.</p>
+        </li>
+        <li id="step-2" data-short="The AI copies the facts onto a listing">
+          <p class="who"><span class="tag ai">AI</span></p>
+          <h3>2. The AI reads it and writes a listing</h3>
+          <div class="snap"><Fragment set:html={scene(2)} /></div>
+          <p>It copies the facts that matter (hours, cost, who it's for, what to do) as close to the page's own words as it can. It saves the web address and the date it read the page.</p>
+          <p class="eg"><b>Our example:</b> the two pages disagree on closing time, 3:25 or 3:30 p.m. So the listing says which page says what, instead of picking one.</p>
+        </li>
+        <li id="step-3" data-short="Saved as a small public file">
+          <p class="who"><span class="tag file">Public file</span></p>
+          <h3>3. The listing is saved as a small public file</h3>
+          <div class="snap"><Fragment set:html={scene(3)} /></div>
+          <p>One file per listing, in a public folder on GitHub. Anyone can read it, and every change to it is kept.</p>
+          <p class="eg"><b>Our example:</b> the file is called mon-county-recycling-drop-off.yaml. It names both pages, each with the date it was read.</p>
+        </li>
+        <li id="step-4" data-short="Programs check the change">
+          <p class="who"><span class="tag auto">Automatic</span></p>
+          <h3>4. Programs check the change</h3>
+          <div class="snap"><Fragment set:html={scene(4)} /></div>
+          <p>Does every listing have a source and a date? Does every page build, stay small enough for a phone, and pass basic checks? If a check fails, the change can't go live.</p>
+          <p class="eg"><b>Our example:</b> both sources have a web address and a date, so this check passes.</p>
+        </li>
+        <li id="step-5" data-short="A second look">
+          <p class="who"><span class="tag ai">AI</span> <span class="tag person">Person</span></p>
+          <h3>5. A second look</h3>
+          <div class="snap"><Fragment set:html={scene(5)} /></div>
+          <p>Another AI run reviews the change against our written guides for sources, fairness, privacy, ease of use and clear words. Changes about shelter, crisis help, food and benefits also wait for the owner.</p>
+          <p class="eg"><b>Our example:</b> recycling isn't shelter, crisis help, food or benefits, so after the AI review it doesn't wait for the owner.</p>
+        </li>
+        <li id="step-6" data-short="It goes live">
+          <p class="who"><span class="tag file">Published</span></p>
+          <h3>6. It goes live</h3>
+          <div class="snap"><Fragment set:html={scene(6)} /></div>
+          <p>The site is rebuilt from the files. The same listings also go out as a calendar feed and as <a href={`${base}/data/`}>free data files</a> other apps and AI tools can read.</p>
+          <p class="eg"><b>Our example:</b> the listing shows up on the recycling page and in the free data files.</p>
+        </li>
+        <li id="step-7" class="loopstep" data-short="Rechecked every day">
+          <p class="who"><span class="tag auto">Automatic</span></p>
+          <h3>7. It keeps getting rechecked</h3>
+          <div class="snap"><Fragment set:html={scene(7)} /></div>
+          <p>Every day a program visits the outside pages we rely on and flags ones that broke, moved or changed. A flagged listing goes back to step 2. So does any problem you report.</p>
+          <p class="eg"><b>Our example:</b> pretend the center's website changes its closing time to 3:00 p.m. The daily check sees the page changed, flags the listing, and it goes back to step 2 to be read again.</p>
+          <p class="back" aria-hidden="true">Back to step 2</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="summary" id="flow-summary" tabindex="-1">
+      <h3>The path in short</h3>
+      <p>A public page, read by AI, saved as a public file, checked by programs and a second look, then live on the site. Every day the sources get rechecked, and when one changes, or you report a problem, the listing goes back to step 2.</p>
+      <p class="check"><strong>See a real one:</strong> the <a href={example}>file for the county recycling drop-off center</a>. You can see the same listing on the <a href={`${base}/recycling/`}>recycling page</a>.</p>
+    </div>
+  </div>
+
+<script>
+(function () {
+  var sec = document.getElementById('flow-explainer');
+  if (!sec || !('IntersectionObserver' in window)) return;
+  var root = document.documentElement;
+  var stage = sec.querySelector('.stage .scene');
+  var steps = Array.prototype.slice.call(sec.querySelectorAll('.flow > li'));
+  var now = sec.querySelector('[data-now]');
+  var btn = document.getElementById('motion-toggle');
+  var note = document.getElementById('motion-note');
+  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var userOff = false, io = null, current = -1;
+  try { userOff = localStorage.getItem('em-motion-off') === '1'; } catch (e) {}
+
+  function setStep(i) {
+    if (i < 0 || i === current) return;
+    current = i;
+    stage.setAttribute('data-s', String(i + 1));
+    steps.forEach(function (s, n) { s.classList.toggle('on', n === i); });
+    now.innerHTML = '<span>Step ' + (i + 1) + ' of 7:</span> ' + steps[i].getAttribute('data-short');
+  }
+  function live(on) {
+    sec.classList.toggle('is-live', on);
+    if (on && !io) {
+      io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) setStep(steps.indexOf(e.target)); });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      steps.forEach(function (s) { io.observe(s); });
+      setStep(0);
+    } else if (!on && io) {
+      io.disconnect(); io = null; current = -1;
+      steps.forEach(function (s) { s.classList.remove('on'); });
+    }
+  }
+  function update() {
+    var off = userOff || mq.matches;
+    if (off) root.setAttribute('data-motion-off', ''); else root.removeAttribute('data-motion-off');
+    btn.hidden = mq.matches;
+    btn.textContent = userOff ? 'Turn on motion' : 'Turn off motion';
+    note.hidden = !mq.matches;
+    live(!off);
+  }
+  btn.addEventListener('click', function () {
+    userOff = !userOff;
+    try { localStorage.setItem('em-motion-off', userOff ? '1' : '0'); } catch (e) {}
+    update();
+  });
+  if (mq.addEventListener) mq.addEventListener('change', update); else if (mq.addListener) mq.addListener(update);
+  update();
+})();
+</script>
+
+<style is:global>
+  /* ===== Follow one listing (component styles; all scoped to #flow-explainer) ===== */
+  #flow-explainer .tools { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 4px 0 12px; font-size: 1rem; }
+  #flow-explainer .tools a { display: inline-flex; align-items: center; min-height: 44px; }
+  #motion-toggle { min-height: 44px; padding: 0 16px; font: inherit; font-weight: 600; color: var(--accent); background: var(--card); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
+  #flow-explainer .motion-note { margin: 0; flex-basis: 100%; color: var(--muted); font-size: 0.95rem; }
+
+  /* The steps: the same cards the live page uses, joined by a line */
+  #flow-explainer .flow { list-style: none; margin: 16px 0; padding: 0; }
+  #flow-explainer .flow > li { position: relative; margin: 0 0 22px; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; scroll-margin-top: 16px; }
+  #flow-explainer .flow > li:not(:last-child)::after { content: ""; position: absolute; left: 28px; bottom: -23px; width: 3px; height: 22px; background: var(--ridge); }
+  #flow-explainer .flow h3 { margin: 4px 0; font-size: 1.05rem; }
+  #flow-explainer .flow p { margin: 0; }
+  #flow-explainer .flow .who { display: flex; flex-wrap: wrap; gap: 6px; }
+  #flow-explainer .flow .loopstep { border: 2px dashed var(--accent); }
+  #flow-explainer .flow .back { margin-top: 8px; font-weight: 700; color: var(--accent); }
+  #flow-explainer .flow .back::before { content: "\21BA  "; }
+  #flow-explainer .flow .eg { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 1rem; color: var(--muted); }
+  #flow-explainer .flow .eg b { color: var(--brick); }
+  #flow-explainer .tag { display: inline-block; padding: 1px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; border: 1px solid currentColor; }
+  #flow-explainer .tag.src { color: var(--muted); }
+  #flow-explainer .tag.ai { color: var(--accent); background: var(--accent-bg); }
+  #flow-explainer .tag.auto { color: var(--fg); }
+  #flow-explainer .tag.file { color: var(--muted); border-style: dashed; }
+  #flow-explainer .tag.person { color: var(--brick); }
+
+  /* Pictures: one small drawing per step (still), or one stage that changes as you scroll */
+  #flow-explainer .snap { margin: 10px 0; padding: 8px; background: var(--bg); border-radius: 8px; }
+  #flow-explainer .scene { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; overflow: visible; }
+  #flow-explainer .stage { display: none; margin: 0; }
+  #flow-explainer .now { margin: 6px 0 0; font-weight: 700; font-size: 1rem; text-align: center; }
+  #flow-explainer .summary { margin: 8px 0 0; }
+  #flow-explainer .summary h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  #flow-explainer .summary p { margin: 0 0 8px; }
+  #flow-explainer .summary .check { font-size: 0.95rem; }
+  #flow-explainer .now span { color: var(--brick); font-variant-numeric: tabular-nums; }
+
+  /* Drawing parts */
+  #flow-explainer .scene text { font-size: 11px; fill: var(--fg); }
+  #flow-explainer .scene .tm { font-size: 10px; fill: var(--muted); }
+  #flow-explainer .scene .tx9 { font-size: 9.5px; fill: var(--muted); }
+  #flow-explainer .scene .tb { font: 800 12px var(--display); fill: var(--fg); }
+  #flow-explainer .scene .tbrick { fill: var(--brick); font-weight: 700; }
+  #flow-explainer .scene .tflag { font-size: 10px; font-weight: 700; fill: var(--card); }
+  #flow-explainer .scene .tneq { font-size: 13px; font-weight: 800; fill: var(--brick); }
+  #flow-explainer .scene .pg { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
+  #flow-explainer .scene .pg.cur { fill: var(--accent-bg); stroke: var(--accent); }
+  #flow-explainer .scene .bar { fill: var(--line); }
+  #flow-explainer .scene .dt { fill: var(--muted); }
+  #flow-explainer .scene .cd { fill: var(--card); stroke: var(--accent); stroke-width: 2; }
+  #flow-explainer .scene .cdh { fill: var(--accent-bg); }
+  #flow-explainer .scene .fold { fill: var(--ridge); }
+  #flow-explainer .scene .hl-a { fill: var(--accent-bg); }
+  #flow-explainer .scene .hl-b { fill: var(--brick); fill-opacity: 0.16; }
+  #flow-explainer .scene .tk { fill: var(--accent); }
+  #flow-explainer .scene .tkm { fill: none; stroke: var(--card); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  #flow-explainer .scene .ps { fill: var(--muted); }
+  #flow-explainer .scene .flag { fill: var(--brick); }
+  #flow-explainer .scene .phone { fill: var(--bg); stroke: var(--fg); stroke-width: 2; }
+  #flow-explainer .scene .notch { fill: var(--fg); }
+  #flow-explainer .scene .ln { fill: var(--line); }
+  #flow-explainer .scene .chip { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 1.5; }
+  #flow-explainer .scene .folder { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 2; }
+  #flow-explainer .scene .arr { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 3; }
+  #flow-explainer .scene .arrh { fill: var(--accent); }
+  #flow-explainer .scene .diff { fill: none; stroke: var(--brick); stroke-width: 2; stroke-dasharray: 4 3; }
+  #flow-explainer .scene .neq { fill: var(--card); stroke: var(--brick); stroke-width: 2; }
+  #flow-explainer .scene .mg { fill: var(--accent-bg); fill-opacity: 0.4; stroke: var(--fg); stroke-width: 2.5; }
+  #flow-explainer .scene .mgh { fill: none; stroke: var(--fg); stroke-width: 3.5; stroke-linecap: round; }
+
+  /* What each step shows. Parts start hidden; each step turns on its own. */
+  #flow-explainer .scene .e { opacity: 0; }
+  #flow-explainer .scene .tick { opacity: 0; transform: scale(0.4); transform-box: fill-box; transform-origin: center; }
+  #flow-explainer .scene .val { opacity: 0; }
+  #flow-explainer .scene .v1 { transform: translate(-188px, 18px); }
+  #flow-explainer .scene .v2 { transform: translate(-188px, 4px); }
+  #flow-explainer .scene .v3 { transform: translate(-262px, 22px); }
+  #flow-explainer .scene .v4 { transform: translate(-166px, -120px); }
+  #flow-explainer .scene .cw { transform-origin: 196px 30px; }
+  #flow-explainer .scene:not([data-s="1"]) .val { opacity: 1; transform: none; }
+  #flow-explainer .scene:not([data-s="1"]) .e-frame { opacity: 1; }
+  #flow-explainer .scene[data-s="1"] .e-src, #flow-explainer .scene[data-s="2"] .e-src, #flow-explainer .scene[data-s="7"] .e-src { opacity: 1; }
+  #flow-explainer .scene[data-s="2"] .e-read { opacity: 1; }
+  #flow-explainer .scene[data-s="3"] .e-pub, #flow-explainer .scene[data-s="3"] .e-file { opacity: 1; }
+  #flow-explainer .scene[data-s="4"] .e-chk, #flow-explainer .scene[data-s="4"] .e-hlsrc { opacity: 1; }
+  #flow-explainer .scene[data-s="4"] .e-chk .tick, #flow-explainer .scene[data-s="5"] .e-rev .tick { opacity: 1; transform: none; }
+  #flow-explainer .scene[data-s="5"] .e-rev, #flow-explainer .scene[data-s="5"] .e-mag { opacity: 1; }
+  #flow-explainer .scene[data-s="5"] .e-mag { transform: translateY(44px); }
+  #flow-explainer .scene[data-s="6"] .e-ph, #flow-explainer .scene[data-s="6"] .e-feeds { opacity: 1; }
+  #flow-explainer .scene[data-s="6"] .cw { transform: translate(-156px, 30px) scale(0.6); }
+  #flow-explainer .scene[data-s="7"] .e-re, #flow-explainer .scene[data-s="7"] .e-chg, #flow-explainer .scene[data-s="7"] .e-hlh, #flow-explainer .scene[data-s="7"] .e-flag { opacity: 1; }
+  #flow-explainer .scene[data-s="7"] .h-old { opacity: 0; }
+
+  /* Live mode: only when script runs, the device allows motion, and motion is not turned off */
+  #flow-explainer.is-live .snap { display: none; }
+  #flow-explainer#flow-explainer.is-live .stage { display: block; }
+  #flow-explainer.is-live .flow > li { margin-bottom: 14rem; }
+  #flow-explainer.is-live .flow > li:last-child { margin-bottom: 5rem; }
+  #flow-explainer.is-live .flow > li::after { display: none; }
+  #flow-explainer.is-live .flow > li.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    #flow-explainer.is-live .stage .e, #flow-explainer.is-live .stage .h-old { transition: opacity 0.4s ease; }
+    #flow-explainer.is-live .stage .val, #flow-explainer.is-live .stage .tick { transition: opacity 0.4s ease, transform 0.6s ease; }
+    #flow-explainer.is-live .stage .cw { transition: transform 0.7s ease; }
+    #flow-explainer.is-live .stage .e-mag { transition: opacity 0.4s ease, transform 0.6s ease; }
+    /* Facts move over one at a time; ticks land one at a time */
+    #flow-explainer.is-live .stage[data-s="2"] .v1 { transition-delay: 0.15s; }
+    #flow-explainer.is-live .stage[data-s="2"] .v2 { transition-delay: 0.45s; }
+    #flow-explainer.is-live .stage[data-s="2"] .v3 { transition-delay: 0.75s; }
+    #flow-explainer.is-live .stage[data-s="2"] .v4 { transition-delay: 1.05s; }
+    #flow-explainer.is-live .stage .tick:nth-of-type(2) { transition-delay: 0.3s; }
+    #flow-explainer.is-live .stage .tick:nth-of-type(3) { transition-delay: 0.6s; }
+    #flow-explainer.is-live .stage .tick:nth-of-type(4) { transition-delay: 0.9s; }
+    #flow-explainer.is-live .stage .tick:nth-of-type(5) { transition-delay: 1.2s; }
+    #flow-explainer.is-live .stage[data-s="5"] .e-mag { animation: fol-scan 2s ease-in-out 0.3s both; }
+    #flow-explainer.is-live .stage[data-s="7"] .e-chg, #flow-explainer.is-live .stage[data-s="7"] .e-hlh { transition-delay: 0.3s; }
+    #flow-explainer.is-live .stage[data-s="7"] .e-re { transition-delay: 0.8s; }
+    #flow-explainer.is-live .stage[data-s="7"] .e-flag { transition-delay: 1.3s; }
+  }
+  @keyframes fol-scan { 0% { transform: translateY(0); } 55% { transform: translateY(90px); } 100% { transform: translateY(44px); } }
+
+  /* Wide screens, live: the picture beside the steps, held in place while the steps scroll */
+  @media (min-width: 44rem) {
+    #flow-explainer.is-live .scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+    #flow-explainer#flow-explainer.is-live .stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); margin-top: 16px; padding: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+  }
+  /* Phones, live: the picture sits at the top of the screen, the steps scroll under it */
+  @media (max-width: 43.99rem) {
+    #flow-explainer#flow-explainer.is-live .stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 -8px 16px; padding: 6px 8px 8px; background: var(--card); border-bottom: 1px solid var(--line); border-radius: 0 0 10px 10px; box-shadow: 0 8px 12px -12px var(--fg); }
+    #flow-explainer.is-live .flow > li { scroll-margin-top: 290px; }
+  }
+</style>
