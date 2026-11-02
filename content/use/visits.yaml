@@ -1,0 +1,27 @@
+# Level 2 (Use): page views from the site's visit counter (#1432).
+#
+# The counter is GoatCounter (#1352, live since 2026-11-01). Its dashboard
+# needs a login, its robots.txt says no automated reads, and its read API
+# needs a key we do not keep, so nothing here is read by a script. David
+# copies the totals from the dashboard by hand, about once a month, and adds
+# one entry under `periods` (newest last). The weekly scorecard and
+# docs/scoreboard.md show the newest entry.
+#
+# Rules (checked by site/scripts/check-use.mjs on every build):
+# - Aggregate page views only. Never anything about a person.
+# - Write any count from 1 to 9 as "fewer than 10" (docs/measurement-plans,
+#   "Small counts"). 0 and counts of 10 or more are written as numbers.
+# - `pages` lists only the main guides and doors, by site path.
+#
+# Example entry (copy, then fill in from the dashboard for that date range):
+#
+#   - start: 2026-11-01        # first day counted
+#     end: 2026-11-30          # last day counted
+#     read: 2026-12-01         # the day the numbers were copied
+#     total: 1234              # page views, whole site
+#     pages:                   # page views for each main guide or door
+#       /: 300
+#       /help/food/: 45
+#       /money/: fewer than 10
+counter: GoatCounter
+periods: []
