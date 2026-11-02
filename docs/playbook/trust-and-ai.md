@@ -53,7 +53,41 @@ We will not use AI-generated images of real places or people, and we will not le
 
 **Why it matters here.** The site is not a federal agency, but the same logic fits. Wrong details about health, benefits eligibility, legal rights, or deadlines can cause real harm.
 
-**How we apply it.** Treat entries with topics `health`, `money`, `housing`, `family`, `taxes`, or `voting`, and every `calendar/` entry, as high stakes. These get a second, independent check against the source before merge: a different session (or Duet) re-opens each source and confirms each field, and notes it in the PR. We will not give advice on someone's own case ("you qualify"). We describe the program and point to the office that decides. On top of that, David checks changes about shelter, crisis help, food and benefits before they go live (his decision, October 30, 2026, #493). The exact list is in "When a PR waits for David" in `docs/COORDINATION.md`.
+**How we apply it.** Treat entries with topics `health`, `money`, `housing`, `family`, `taxes`, or `voting`, and every `calendar/` entry, as high stakes. These get the independent second check below before merge. We will not give advice on someone's own case ("you qualify"). We describe the program and point to the office that decides. On top of that, David checks changes about shelter, crisis help, food and benefits before they go live (his decision, October 30, 2026, #493). The exact list is in "When a PR waits for David" in `docs/COORDINATION.md`.
+
+### The independent second check
+
+David chose this process on #97 (October 30, 2026, [his decision](https://github.com/david-shortman/mon-county-community-hub/issues/97#issuecomment-6524402282)): a second agent checks before merge, with no David review step for this part. It is built so the second check does not just repeat the first session's sourcing.
+
+1. **Blind start.** The checker gets only the list of claims (one per field), not the draft's sources, links or wording. It finds sources on its own. Checking each claim separately, without the draft in view, catches the most errors ([Chain-of-Verification, factored variant](https://arxiv.org/pdf/2309.11495)). A review that reads the PR and agrees is not a check.
+2. **Go to the owner.** Trace each fact to the program's own page, form or document, not a news story, aggregator or directory that repeats it ([SIFT: trace claims to the original](https://hapgood.us/sift/)).
+3. **Copies count once.** Two pages that copy each other, or a directory scraping the agency's page, are one source, not two.
+4. **Field by field.** Hours, phone, cost, eligibility, address, dates and deadlines are each marked confirmed, changed or not found, with the source URL and the date checked, in a table in the PR. The table is in the PR template (`.github/pull_request_template.md`).
+5. **A mismatch blocks the merge.** If the checker's answer differs from the draft, the item stays hidden until a third look settles it or the owner's page is clear. Never average or smooth over a disagreement.
+6. **Re-check on a clock.** Every item carries a last-verified date. The tier sets how often (below). Track the share of items verified on time, as 211 directories do under the [Inform USA standards](https://www.informusa.org/standards).
+
+### Risk rubric
+
+Score each item 0 to 2 on four questions:
+
+| Question | 0 | 1 | 2 |
+|---|---|---|---|
+| Would a wrong detail make someone act wrongly? | No | Maybe | Yes (miss a deadline, go somewhere closed, skip a benefit) |
+| How bad is that? | Mild inconvenience | Lost time or money | Health, housing, safety, a legal right or a vote |
+| Can they recover easily? | Yes | With effort | No, the window is gone |
+| How many people will use it? | Few | Some | Many |
+
+| Total | Check |
+|---|---|
+| 0 to 2 | One check (the authoring session's own sourcing), re-check yearly |
+| 3 to 5 | Blind second check, re-check every 6 months |
+| 6 to 8 | Blind second check, plus the owner's own source required, hidden until checked, re-check every 90 days |
+
+The high-stakes topics above (`health`, `money`, `housing`, `family`, `taxes`, `voting`, and every `calendar/` entry) score at least 6 automatically. The rubric can raise other items into the top tier but never lowers those. David's own check of shelter, crisis help, food and benefits changes (#493) stays as written: the rubric adds to it and never replaces it.
+
+Why tiers instead of checking everything the same way: hospitals keep independent double checks for the riskiest tasks, because checking everything turns checks into rubber stamps ([ISMP](https://home.ecri.org/blogs/ismp-alerts-and-articles-library/independent-double-checks-worth-the-effort-if-used-judiciously-and-properly)). The questions follow harm-based fact-check triage: does the error mislead, will people act on it, and how bad is the harm ([Full Fact](https://fullfact.org/blog/2025/apr/how-does-the-full-fact-team-choose-what-to-fact-check/), [Cunliffe-Jones](https://misinforeview.hks.harvard.edu/wp-content/uploads/2026/07/cunliffe_jones_fact_checking_what_matters_20260707.pdf)).
+
+Today the schema has no field for an item's tier or re-check cadence, so the cadence is set by topic: the existing 6-month "may be out of date" rule (`STALE_DAYS`) and the 90-day rule for some fast-changing items. A per-record field is a follow-up: #1461.
 
 **Sources:**
 - [OMB M-25-21, Accelerating Federal Use of AI (PDF)](https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf)
@@ -81,7 +115,7 @@ We will not use AI-generated images of real places or people, and we will not le
 
 1. **What counts:** wrong facts, broken or wrong links, out-of-date details, and wording that is not neutral.
 2. **How to tell us:** the "Report a problem" link on each listing.
-3. **What we do first:** for high-stakes items (health, benefits, legal, deadlines), hide the item until it is re-checked.
+3. **What we do first:** for top-tier items (risk score 6 to 8 in the rubric above, which includes every high-stakes topic), hide the item until a blind second check confirms the fix.
 4. **How we fix it:** re-check the source, fix the entry, and update the `checked` date.
 5. **How we show it:** a dated "Corrected" note on the item for major errors; typos fixed without a note.
 6. **Public record:** every correction is a public GitHub issue and PR, and gets a file in `content/corrections/`, shown on the public Corrections page. How we check a report before it changes anything: [checking corrections](checking-corrections.md).
@@ -119,4 +153,4 @@ We will not use AI-generated images of real places or people, and we will not le
 
 ## Checked
 
-Sources checked 2026-10-28.
+Sources checked 2026-10-28. The second check and risk rubric sources were copied on 2026-11-02 from David's #97 decision comment (October 30, 2026), with its wording kept (#1367).
