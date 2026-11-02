@@ -7,9 +7,10 @@ what_to_do: The office is at 114 South High Street, Morgantown. Open Monday to F
 contact:
   phone: "304-285-3175"
   url: https://dohs.wv.gov/offices/monongalia-county-dohs-office
+  place: 114 South High Street, Morgantown, WV
 cost: free
 sources:
   - url: https://dohs.wv.gov/offices/monongalia-county-dohs-office
-    checked: 2026-10-31
+    checked: 2026-11-02
   - url: https://dohs.wv.gov/field-offices?field_county_target_id=34
     checked: 2026-10-31
