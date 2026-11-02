@@ -28,4 +28,13 @@ The Press lane tuned the main page types: home, doors, help pages, cards, Dates,
 | 14 | `/print/cards/` | Fixed white and black colors. | No change: these are wallet cards meant for paper. |
 | 15 | Share cards (#1417), the link preview picture for each guide | Still the old look: the old hill green ground and the heading face, not hemlock and Newsreader. | Hemlock ground, paper and pale hemlock text, Newsreader for the title, one rust quilt corner. Same size and layout. |
 
-Fixes 1 to 10 and 15 land in small PRs listed on #396.
+## Status
+
+| PR | Rows | State |
+|---|---|---|
+| #1469 | 1, 2 | Waits for David (changes how Help now pages print) |
+| #1490 | 3 to 9, for pages that do not name a crisis line | Merged |
+| #1492 | 3, 4, 6, 7 for shared components and pages that name a crisis line | Waits for David |
+| #1495 | 15 | Merged |
+| #1497 | 10 | Waits for David (Help now embed) |
+| #1441 comment | 11 | For the explainer lane |
