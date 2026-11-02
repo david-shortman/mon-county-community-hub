@@ -150,6 +150,17 @@ html[data-look="press"] .dateline a { color: var(--fg); }
 }
 @media (max-width: 40rem) {
   html[data-look="press"] .brand-mark { border-radius: 2px; }
+  /* Phones: a one-line dateline. The name above already says Morgantown, so the
+     word is hidden from sight here (screen readers still hear it), the line is
+     in normal case, and the weather shows the glyph and temperature only. The
+     sky words ("mostly sunny") stay for screen readers. */
+  html[data-look="press"] header.site .wrap { padding-block: var(--s3) var(--s2); row-gap: 0; }
+  html[data-look="press"] .dateline { font-size: 0; letter-spacing: 0.02em; text-transform: none; }
+  html[data-look="press"] .dateline > :not(:first-child) { font-size: 0.875rem; }
+  html[data-look="press"] .dateline > span[aria-hidden]:first-child { display: none; }
+  html[data-look="press"] .dateline .wx-sky {
+    position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
   /* Tab bar: same layout, only a firmer top edge. */
   html[data-look="press"] nav.main { border-top: 2px solid var(--fg); }
 }
