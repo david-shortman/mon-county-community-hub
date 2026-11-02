@@ -1,0 +1,101 @@
+---
+// When it gets decided, as a time strip (#1444, part of #1440). Follows
+// docs/design/motion.md. Four steps that zoom out from one budget year to the
+// 5-year capital plan to ten years of comprehensive plans, then back to now,
+// for the city, the County Commission and the Board of Education.
+// Still version (no script, reduced motion, motion turned off): a numbered
+// list, each step with its own still strip. Strips are aria-hidden; every date
+// is in the step text with its source. Process only: no side on any plan,
+// budget or levy.
+import SourceLine from './SourceLine.astro';
+import { strip } from '../lib/decide-strip.mjs';
+const { base } = Astro.props;
+const day = '2026-11-02';
+const s = (...urls) => urls.map((url) => ({ url, checked: day }));
+const law = (n) => `https://code.wvlegislature.gov/${n}/`;
+const src = {
+  year: s(law('11-8-9'), law('11-8-10'), law('11-8-12'), law('11-8-14'), 'https://www.morgantownwv.gov/202/Finance', 'https://www.monongaliacountyclerk.com/myfiles/documents/budget/FY27_Budget.pdf', law('18-9B-6'), 'https://boe.mono.k12.wv.us/page/financial-services/'),
+  five: s('https://www.morgantownwv.gov/DocumentCenter/View/6522/FY27-5-Year-Capital-Improvement-Plan', 'https://www.monongaliacountyclerk.com/myfiles/elections/2026Primary/Sample_Ballots/82non26p.pdf', 'https://www.monongaliacountyclerk.com/myfiles/elections/2026Primary/Results/2026_Primary_Election_Summary_by_Group_Details.pdf', law('11-8-16')),
+  ten: s(law('8A-3-11'), 'https://www.monongaliacounty.gov/moncpc/about/comprehensive_plan.php', 'https://www.monongaliacounty.gov/document_center/MONCPC/Comp%20Plan/CompPlan_2023clickable.pdf', 'https://www.morgantownwv.gov/652/Morgantown-2033', 'https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_12192023-2801', 'https://wvde.us/media/8581/attachment-h-10125pdf'),
+};
+const steps = [
+  {
+    id: 'dc-1', z: '1', title: 'One budget year',
+    body: [
+      'The city, county and school budget years each run from July 1 to June 30. State law says City Council, the County Commission and the Board of Education each hold levy estimate meetings between March 7 and March 28, then meet again on the third Tuesday in April.',
+      'The school board cannot adopt its budget until the state school superintendent approves it. It adopted its last two budgets in late May (May 28, 2024 and May 27, 2025).',
+      'So spring is when next year\'s money is set, months before July 1.',
+    ],
+    sources: src.year, about: 'one budget year',
+  },
+  {
+    id: 'dc-2', z: '5', title: 'Five years',
+    body: [
+      'Zoom out, and this budget year is the first of five in the city\'s 2027-2031 capital plan. The plan puts a downtown master plan in 2027-28, and wayfinding and gateway signs in 2027-28 through 2029-30.',
+      'School levies work on a similar span. A school excess levy for the budget years starting July 1, 2027 through July 1, 2030 was on the May 12, 2026 ballot, and voters approved it. State law says an excess levy can run up to five years before it goes back to voters.',
+    ],
+    sources: src.five, about: 'the five year plans',
+  },
+  {
+    id: 'dc-3', z: '10', title: 'Ten years',
+    body: [
+      'Zoom out again, and the 5-year plan is one part of a comprehensive plan, a long-range guide for land use, housing and roads. State law says it must be updated at least every ten years.',
+      'The County Commission adopted the county\'s plan on February 1, 2023. Morgantown\'s plan, Morgantown 2033, had a Planning Commission public hearing on September 21, 2023, and its final reading at City Council on December 19, 2023. The schools have a 10-year facilities plan for 2020 to 2030.',
+    ],
+    sources: src.ten, about: 'the ten year plans',
+  },
+  {
+    id: 'dc-4', z: 'now', title: 'Back to now',
+    body: [
+      'Big plans are set years ahead, and each year\'s money is set in the spring before. To speak about next year\'s budget, watch City Council, County Commission and Board of Education agendas in March and April.',
+    ],
+    link: true,
+  },
+];
+const N = steps.length;
+---
+<section class="dc-x" id="dc-explainer" aria-labelledby="dc-h">
+  <h2 id="dc-h">How the plans fit inside each other</h2>
+  <p>Budgets and plans run on different clocks. Here they are on one time strip, from one year out to ten.</p>
+  <p class="dc-tools"><a href="#dc-summary">Skip past the time strip</a></p>
+  <p class="dc-key"><strong>About the drawing:</strong> a sketch, not to scale. Every date is also in the words under it. Dates can change, so check each board's documents.</p>
+  <ol class="dc-steps" aria-label="The time strip, step by step">
+    {steps.map((st, i) => (
+      <li id={st.id}>
+        <h3>Step {i + 1} of {N}. {st.title}</h3>
+        <div class="dc-snap"><Fragment set:html={strip(st.z)} /></div>
+        {st.body.map((t) => <p>{t}</p>)}
+        {st.link && <p><a href={`${base}/have-your-say/`}>Have your say at a public meeting</a></p>}
+        {st.sources && <SourceLine sources={st.sources} about={st.about} />}
+      </li>
+    ))}
+  </ol>
+  <p id="dc-summary" tabindex="-1" class="dc-sum"><strong>In short:</strong> a 10-year plan holds 5-year plans, and those hold one budget year at a time. The time to weigh in comes months or years before work starts.</p>
+</section>
+
+<style is:global>
+  /* ===== When it gets decided time strip (#1444). Press tokens only; scoped to #dc-explainer. ===== */
+  #dc-explainer .dc-tools { margin: 0 0 var(--s2); }
+  #dc-explainer .dc-tools a { display: inline-flex; align-items: center; min-height: 44px; }
+  #dc-explainer .dc-key { font-size: 0.95rem; color: var(--muted); }
+  #dc-explainer .dc-steps { list-style: none; margin: var(--s5) 0; padding: 0; }
+  #dc-explainer .dc-steps > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
+  #dc-explainer .dc-steps h3 { margin: 0 0 var(--s2); }
+  #dc-explainer .dc-steps p { margin: 0 0 var(--s2); }
+  #dc-explainer .dc-snap { margin: var(--s2) 0 var(--s3); padding: var(--s2); background: var(--bg); border-radius: 2px; }
+  #dc-explainer .dc-strip { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; overflow: visible; }
+  #dc-explainer .dc-strip text { font-size: 10px; fill: var(--muted); }
+  #dc-explainer .dc-strip .tb { font: 800 12px var(--kicker); fill: var(--fg); }
+  #dc-explainer .dc-strip .tm { font-size: 10px; fill: var(--fg); font-variant-numeric: tabular-nums; }
+  #dc-explainer .dc-strip .th { fill: var(--fg); font-weight: 700; }
+  #dc-explainer .dc-strip .tidea { font-size: 10px; font-weight: 700; fill: var(--accent); }
+  #dc-explainer .dc-strip .bar { fill: var(--line); }
+  #dc-explainer .dc-strip .tk { stroke: var(--fg); stroke-width: 1; }
+  #dc-explainer .dc-strip .hot { fill: var(--accent); }
+  #dc-explainer .dc-strip .pin { fill: var(--rust); }
+  #dc-explainer .dc-strip .pin2 { fill: var(--water); }
+  #dc-explainer .dc-strip .cell { fill: var(--card); stroke: var(--fg); stroke-width: 1; }
+  #dc-explainer .dc-strip .cell.now { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 2; }
+  #dc-explainer .dc-strip .ln1, #dc-explainer .dc-strip .ln2 { fill: var(--accent); }
+  #dc-explainer .dc-strip .ln3 { fill: var(--water); }
+</style>
