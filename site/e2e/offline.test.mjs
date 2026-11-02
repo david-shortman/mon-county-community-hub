@@ -67,6 +67,26 @@ describe('offline', { skip: fullOnly }, () => {
     await ctx.close();
   });
 
+  // Privacy (#1423): the first saved list is the same for every visitor, so having a
+  // hard-moment page saved does not show that a person opened it.
+  test('the first saved list is the same whichever page a person opens first', async () => {
+    const saved = [];
+    for (const first of ['/pets/', '/vote/']) {
+      const ctx = await s.browser.newContext(PHONE);
+      const page = await ctx.newPage();
+      await page.goto(s.origin + first);
+      await page.evaluate(() => navigator.serviceWorker.ready);
+      await page.waitForFunction(async (n) => (await (await caches.open('pages-v1')).keys()).length >= n, HARD.length, { timeout: 30000 });
+      await page.waitForTimeout(1000);
+      const keys = await page.evaluate(async () => (await (await caches.open('pages-v1')).keys()).map((r) => new URL(r.url).pathname));
+      // The page itself is saved too once the worker is in charge; leave it out of the comparison.
+      saved.push(keys.filter((k) => k !== first).sort());
+      await ctx.close();
+    }
+    assert.deepEqual(saved[0], saved[1]);
+    for (const url of HARD) assert.ok(saved[0].includes(url), `${url} is in the first saved list`);
+  });
+
   test('back online, pages come from the network with no note', async () => {
     const { ctx, page } = await visitOnce();
     await page.goto(s.origin + '/mental-health/');

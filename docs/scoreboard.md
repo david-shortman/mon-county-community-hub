@@ -5,7 +5,7 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 | Level | Status | Latest |
 |---|---|---|
 | 1. Findability | **Measured** | **76 / 100** on the original 32 questions, 2026-11-01 (weekly run; baseline also 76). All 62 questions: 71. Answer pages on our site: 59 of 62, none in search yet. |
-| 2. Use | Not measured yet | A visit counter (GoatCounter) went live on 2026-11-01. Its counts are not public, so the weekly run cannot read them yet. |
+| 2. Use | Waiting for the first monthly totals | A visit counter (GoatCounter) went live on 2026-11-01. No script may read it, so David copies monthly page views into [`content/use/visits.yaml`](../content/use/visits.yaml). The first totals (November 2026) are due in early December. |
 | 3. Action | Not measured yet | None |
 | 4. Recognition | Not measured yet | None |
 
@@ -251,12 +251,36 @@ About 72% of residents live outside Morgantown city limits ([who lives here](pla
 |---|---|---|---|---|---|
 | 2026-10-31 | 80 | 59 (74%) | 18 (22%) | 3 | 37 of 127, 30 of them in Morgantown |
 | 2026-11-01 | 194 | 151 (78%) | 31 (16%) | 12 | 107 of 392, 86 of them in Morgantown |
+| 2026-11-02, by Census place | 194 | 121 (62%) | 61 (31%) | 12 | 107 of 394, 64 of them in the city |
 
-"Morgantown" here means a Morgantown mailing address, which also covers some close-in places outside city limits, so the share is not directly comparable to the 72%. Most of the rest-of-county listings are community centers and halls (11 of 18). On 2026-11-01 the count more than doubled, mostly in Morgantown, so the rest-of-county share fell from 22% to 16% even though the number of rest-of-county listings grew from 18 to 31 (19 of them community places). Westover has the most outside Morgantown (7).
+Until 2026-11-01, "Morgantown" meant a Morgantown mailing address, which also covers some close-in places outside city limits, so the share is not directly comparable to the 72%. Most of the rest-of-county listings are community centers and halls (11 of 18). On 2026-11-01 the count more than doubled, mostly in Morgantown, so the rest-of-county share fell from 22% to 16% even though the number of rest-of-county listings grew from 18 to 31 (19 of them community places). Westover has the most outside Morgantown (7).
 
-## Level 2: Use (not measured yet)
+**Since 2026-11-02 the count is by Census place, not mailing town (#1412).** `reach.py` looks up each address with the U.S. Census Bureau's free geocoder and counts it in the city, town or census-designated place it is in (lookups saved in [`content/findability/reach-places.yaml`](../content/findability/reach-places.yaml) with their dates). Same 194 listings, so the jump from 16% to 31% is the method, not new listings: of 155 listings with a Morgantown mailing address, 94 are in the city, 40 are elsewhere in the county (for example Mylan Park, Scott Avenue, and the Arnettsville and Clinton District libraries) and 21 the geocoder could not place. Those 21 are still counted by mailing town, so the city count may be a little high. Because the 72% also uses city limits, the two shares can now be compared. A match on a different street (the geocoder sometimes returns a near miss) is not used.
 
-Whether people use what we build. To be measured as aggregate counts only, with no tracking of individuals: page views per guide, calendar feed subscriptions, tool uses, searches on the site, and API or MCP calls. David chose GoatCounter and the cookie-free visit counter went live on 2026-11-01 (#1352). Its dashboard needs a login and has no public view, so the weekly run cannot read the counts yet, and it has under a day of data. Until there is a way to read them without handling a login: not measured yet.
+What the place count shows (2026-11-02):
+
+- **Most rest-of-county listings are outside any town or named place** (40 of 61). Westover has 6, Star City 3, Blacksville 3, Cheat Lake 2 and Brookhaven none.
+- **By topic, outside the city:** food help 2 resources, health care 5, housing and shelter 3, money, jobs and benefits 3.
+- **Food pantries and meal sites are not counted yet.** They have no listing records (#1413). The DoHS office's address is only in its text, so it is not counted either; adding it waits for David because the record is high stakes.
+
+## Level 2: Use (waiting for the first monthly totals)
+
+Whether people use what we build, as aggregate page views only, never anything about a person. The visit counter is GoatCounter (#1352): free, no cookies, live since 2026-11-01.
+
+**Where the numbers come from.** Nothing reads the counter on its own. Its dashboard needs a login, its robots.txt (`everythingmorgantown.goatcounter.com/robots.txt`) says `Disallow: /` to every robot, its public visitor-count JSON is turned off, and its read API needs a key, which we do not keep (checked 2026-11-02). So once a month David copies the totals from the dashboard into [`content/use/visits.yaml`](../content/use/visits.yaml): the date range, page views for the whole site, and page views for the main guides and doors. The file explains how. Every build checks it (`site/scripts/check-use.mjs`), and the [weekly scorecard](scorecard/README.md) shows the newest month in its Outcomes table.
+
+**Counting rules** ([shared rules](measurement-plans/README.md#small-counts)):
+
+- Any count from 1 to 9 is written "fewer than 10". The build fails on a smaller number.
+- Totals under 100 come with a note that small numbers could be chance.
+- A count is a floor. GoatCounter estimates ad blockers hide about a third of page views, and saved copies and AI apps are not counted ([analytics options](research/analytics-options.md)).
+- Monthly, not weekly, for now: weekly counts per page would be small enough to show single visits.
+
+| Month | Page views, whole site | Main guides and doors | Copied |
+|---|---|---|---|
+| November 2026 | not entered yet | not entered yet | due early December |
+
+Still not measured: calendar feed subscriptions, tool uses, searches on the site, and API or MCP calls.
 
 ## Level 3: Action (not measured yet)
 
