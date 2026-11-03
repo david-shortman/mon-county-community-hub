@@ -4,6 +4,8 @@
 // work, traditional arts, and grants for artists. Every fact is on a record
 // with its own source. Things we could not confirm are in #653 and stay off.
 import Base from '../layouts/Base.astro';
+import BigChoices from '../components/BigChoices.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -16,16 +18,14 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h1>Make art, learn a craft, show your work</h1>
   <p class="lede">Places in and near Morgantown to take a class, use shared tools, rent a studio, show your work, and learn a traditional art. Most of it is at the Monongalia Arts Center on High Street and the Morgantown Public Library.</p>
 
-  <nav aria-labelledby="jump-h">
-    <h2 id="jump-h">On this page</h2>
-    <ul>
-      <li><a href="#classes">Take a class</a></li>
-      <li><a href="#space">Find space and tools</a></li>
-      <li><a href="#show">Show and sell your work</a></li>
-      <li><a href="#traditional">Learn a traditional art</a></li>
-      <li><a href="#grants">Grants for artists and arts groups</a></li>
-    </ul>
-  </nav>
+  {/* Lead block (#199): the four things most people come here for. */}
+  <BigChoices label="Arts and making: start here" choices={[
+    { href: '#classes', label: 'Take a class', icon: 'people' },
+    { href: '#space', label: 'Find space and tools', icon: 'key' },
+    { href: '#show', label: 'Show and sell your work', icon: 'share' },
+    { href: '#grants', label: 'Grants for artists', icon: 'receipt' },
+  ]} />
+  <OnThisPage items={[['#traditional', 'Learn a traditional art']]} />
 
   <h2 id="classes">Take a class</h2>
   {r('mac-classes-and-workshops') && <ResourceCard r={r('mac-classes-and-workshops')} />}
