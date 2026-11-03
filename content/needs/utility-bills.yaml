@@ -38,7 +38,7 @@ working_on:
   - org: ncwvcaa
 gaps:
   - Bill help comes from many programs with different windows, like the state heating help (LIEAP) season.
-  - What to do in the days before a shutoff is not easy to find in one place.
+  - Water shutoff and reconnection rules for MUB are not on MUB's site, so the site cannot show them yet (issue 1193).
 topics: [money]
 rank: 4
 rank_why: "Score 11 of 12: severity 3, reach 2, agreement 3, room to help 3 (several bill programs exist and have deadlines). Second highest 211 demand."
@@ -53,5 +53,5 @@ get_help:
     label: File today for SNAP, Medicaid, heating help and WV WORKS
 site_coverage:
   level: good
-  why: Help paying a utility bill lists the programs for heat, power and water, and what to do before a shutoff. The state heating help (LIEAP) has its own page on what happens after you apply.
-  checked: 2026-11-01
+  why: Help paying a utility bill lists the programs for heat, power and water, the state's electric and gas shutoff rules (payment plans, notice, no shutoffs at 32 degrees or colder or on Fridays and weekends), and the 20% winter discount. The state heating help (LIEAP) has its own page on what happens after you apply. Water shutoff rules are not shown yet.
+  checked: 2026-11-02
