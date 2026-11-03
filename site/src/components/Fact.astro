@@ -7,19 +7,20 @@ import SourceLine from './SourceLine.astro';
 import { factHtml, isDue } from '../lib/facts.mjs';
 const { f, tag = 'div', about } = Astro.props;
 const label = about ?? f.slug.replace(/-/g, ' ');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // The source line and buttons are their own paragraphs, so the default is a
 // <div> holding a <p>, never a <p> inside a <p>. The slot adds words after
 // the sentence (start it with a space).
 ---
 {tag === 'li' ? (
   <li class="fact" id={`fact-${f.slug}`}>
-    <Fragment set:html={factHtml(f.text)} /><slot />
+    <Fragment set:html={factHtml(f.text, base)} /><slot />
     {(f.phone || f.place) && <Actions phone={f.phone} phoneLabel={f.phone_label} place={f.place} about={label} />}
     <SourceLine sources={f.sources} about={label} stale={isDue(f)} />
   </li>
 ) : (
   <div class="fact" id={`fact-${f.slug}`}>
-    <p><Fragment set:html={factHtml(f.text)} /><slot /></p>
+    <p><Fragment set:html={factHtml(f.text, base)} /><slot /></p>
     {(f.phone || f.place) && <Actions phone={f.phone} phoneLabel={f.phone_label} place={f.place} about={label} />}
     <SourceLine sources={f.sources} about={label} stale={isDue(f)} />
   </div>

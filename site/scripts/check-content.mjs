@@ -424,7 +424,7 @@ for (const i of loadDir('indicators')) {
 // Fact records (content/facts/<topic>/, #122, tier 2 of ADR 0007): text,
 // the source's exact words, and sources with checked dates. recheck_days is
 // optional. A page cannot render a fact without them.
-const FACT_FIELDS = ['slug', 'text', 'quote', 'sources', 'recheck_days', 'phone', 'phone_label', 'place'];
+const FACT_FIELDS = ['slug', 'text', 'quote', 'sources', 'recheck_days', 'phone', 'phone_label', 'place', 'rates'];
 let factCount = 0;
 for (const topic of factTopics()) {
   for (const f of Object.values(loadFacts(topic))) {
@@ -444,6 +444,14 @@ for (const topic of factTopics()) {
     if (f.phone != null && !isPhone(f.phone)) errors.push(`${where}: phone must look like 304-555-0100 (quote it)`);
     if (f.place != null && !/,/.test(String(f.place))) errors.push(`${where}: place must be text like "200 M-Tec Dr, Morgantown, WV"`);
     if (JSON.stringify(f).includes('\u2014')) errors.push(`${where}: contains an em dash`);
+    // Levy rates (#1446): numbers a tool computes with. Each needs its parts
+    // adding up to its total, and the record's sources cover every rate.
+    for (const r of f.rates ?? []) {
+      if (!r.id || !r.label || !Array.isArray(r.districts) || !r.districts.length) errors.push(`${where}: each rate needs id, label and districts`);
+      const parts = Object.values(r.parts ?? {});
+      if (typeof r.total !== 'number' || !parts.length || parts.some((v) => typeof v !== 'number')) errors.push(`${where}: rate ${r.id}: total and parts must be numbers`);
+      else if (Math.abs(parts.reduce((a, b) => a + b, 0) - r.total) > 1e-9) errors.push(`${where}: rate ${r.id}: parts do not add up to total ${r.total}`);
+    }
   }
 }
 
