@@ -1,0 +1,228 @@
+{
+  "date": "2026-10-29",
+  "capturedAt": "2026-10-30T16:44:43.309Z",
+  "site": "https://everythingmorgantown.org/",
+  "repo": "https://github.com/david-shortman/mon-county-community-hub",
+  "note": "Days are UTC. Screenshots show the live site at capturedAt. Open-by-label counts use current labels.",
+  "screenshots": [],
+  "video": null,
+  "stats": {
+    "day": {
+      "issuesOpened": 93,
+      "issuesClosed": 11,
+      "prsOpened": 17,
+      "prsMerged": [
+        {
+          "number": 306,
+          "title": "Quit line: nicotine replacement is free if you qualify; shorter rail-trail card (#287, #286)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/306"
+        },
+        {
+          "number": 304,
+          "title": "Housing entries: free eviction legal help and Section 8 applications",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/304"
+        },
+        {
+          "number": 303,
+          "title": "Chronicle: crop very tall pages before WebP encoding",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/303"
+        },
+        {
+          "number": 284,
+          "title": "Staying well page: a simple yearly list with costs and local places (#243)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/284"
+        },
+        {
+          "number": 283,
+          "title": "Dated warming shelter line on the stay tonight page",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/283"
+        },
+        {
+          "number": 264,
+          "title": "The idea page: the project story, with before and after you can check",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/264"
+        },
+        {
+          "number": 256,
+          "title": "Budget pace: scheduled build runs three times a day",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/256"
+        },
+        {
+          "number": 255,
+          "title": "Front Door home page: what do you need help with?",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/255"
+        },
+        {
+          "number": 238,
+          "title": "Identity v2 foundation: workshop decisions, 7:1 contrast, heading typeface",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/238"
+        },
+        {
+          "number": 236,
+          "title": "Flu shots page: who should get one, when, and what it costs (#234)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/236"
+        },
+        {
+          "number": 231,
+          "title": "Answer pages: apply for SNAP, and flu or COVID shots (#195)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/231"
+        },
+        {
+          "number": 206,
+          "title": "Money page built around situations (#201)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/206"
+        },
+        {
+          "number": 205,
+          "title": "Playbook: what people search for, and what they need next",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/205"
+        },
+        {
+          "number": 200,
+          "title": "Center the More button in the phone tab bar",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/200"
+        },
+        {
+          "number": 186,
+          "title": "Low or no cost first: a standing principle for every agent",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/186"
+        }
+      ],
+      "prsClosedUnmerged": 1,
+      "commitsToMain": 15
+    },
+    "totals": {
+      "issues": 240,
+      "issuesOpen": 204,
+      "prs": 66,
+      "prsMerged": 63,
+      "prsOpen": 2,
+      "commitsToMain": 65,
+      "calendarEntries": 8
+    },
+    "openByLabel": {
+      "for:code": 116,
+      "idea": 69,
+      "for:duet": 68,
+      "type:build": 53,
+      "type:design": 44,
+      "type:research": 41,
+      "type:content": 23,
+      "for:david": 21,
+      "in-progress": 21,
+      "type:decision": 16,
+      "up-next": 4,
+      "(none)": 2,
+      "hold: legal": 1
+    },
+    "waitingOnDavid": [
+      {
+        "number": 305,
+        "title": "Serve the site at everythingmorgantown.org",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/305"
+      },
+      {
+        "number": 300,
+        "title": "Decide: photos for before and after stories, and 311 data use",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/300"
+      },
+      {
+        "number": 262,
+        "title": "New doors for getting involved, learning, finding your people and getting outside",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/262"
+      },
+      {
+        "number": 242,
+        "title": "Test the hub with residents twice a year",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/242"
+      },
+      {
+        "number": 185,
+        "title": "Decide: run the before-and-after benchmark in the Sunday findability check and report it in the Monday retro",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/185"
+      },
+      {
+        "number": 169,
+        "title": "Decide later: a text check-in pilot with orgs that agree to it",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/169"
+      },
+      {
+        "number": 165,
+        "title": "Decide: who makes verification calls, and from what number",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/165"
+      },
+      {
+        "number": 163,
+        "title": "Decide: in-person reach with local helpers (meeting demo, library, printed cards)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/163"
+      },
+      {
+        "number": 125,
+        "title": "Ask a few local groups if the hub feels like Morgantown",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/125"
+      },
+      {
+        "number": 99,
+        "title": "Decide: should we reach residents on channels they already use (texting, city channels)?",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/99"
+      },
+      {
+        "number": 98,
+        "title": "Decide: outreach ideas from day one (none urgent)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/98"
+      },
+      {
+        "number": 97,
+        "title": "Decide: extra human review for high-stakes topics, and the About page's funding line",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/97"
+      },
+      {
+        "number": 96,
+        "title": "Decide: mark the work pipeline adopted, and which of its unbuilt parts to switch on",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/96"
+      },
+      {
+        "number": 95,
+        "title": "Decide: repo settings for required checks and secret scanning",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/95"
+      },
+      {
+        "number": 94,
+        "title": "Decide: accept ADR 0005 (folder ownership, contracts between layers, CODEOWNERS)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/94"
+      },
+      {
+        "number": 93,
+        "title": "Decide: accept the proposed data, provenance, and API architecture records (ADRs 0001 to 0003)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/93"
+      },
+      {
+        "number": 89,
+        "title": "Set up search engine accounts and choose a domain",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/89"
+      },
+      {
+        "number": 26,
+        "title": "Decide: ask Mountain Line and the city about transit and 311 data",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/26"
+      },
+      {
+        "number": 25,
+        "title": "Confirm whether glass is accepted in curbside recycling",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/25"
+      },
+      {
+        "number": 24,
+        "title": "Decide: ask WV 211 about a data-sharing agreement",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/24"
+      },
+      {
+        "number": 23,
+        "title": "Decide: ask the United Way Family Resource Network about sharing listing data",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/23"
+      }
+    ]
+  },
+  "sessions": [],
+  "sizeKB": 0
+}

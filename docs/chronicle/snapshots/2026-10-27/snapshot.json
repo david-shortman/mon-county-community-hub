@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-27",
+  "capturedAt": "2026-10-28T05:06:12.187Z",
+  "site": "https://david-shortman.github.io/mon-county-community-hub/",
+  "repo": "https://github.com/david-shortman/mon-county-community-hub",
+  "note": "Days are UTC. Screenshots show the live site at capturedAt. Open-by-label counts use current labels.",
+  "screenshots": [],
+  "video": null,
+  "stats": {
+    "day": {
+      "issuesOpened": 0,
+      "issuesClosed": 0,
+      "prsOpened": 0,
+      "prsMerged": [],
+      "prsClosedUnmerged": 0,
+      "commitsToMain": 0
+    },
+    "totals": {
+      "issues": 0,
+      "issuesOpen": 0,
+      "prs": 0,
+      "prsMerged": 0,
+      "prsOpen": 0,
+      "commitsToMain": 0,
+      "calendarEntries": null
+    },
+    "openByLabel": {},
+    "waitingOnDavid": []
+  },
+  "sessions": [],
+  "sizeKB": 0
+}
