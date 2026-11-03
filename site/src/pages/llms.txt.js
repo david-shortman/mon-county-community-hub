@@ -164,6 +164,7 @@ ${agendaBodies}
 ${roleCards}
 - [Hard questions](${u('/hard-questions/')}): straight answers about who runs the site, why it uses AI, how facts get checked, who pays, and where it falls short today
 - [How this site works](${u('/how-it-works/')}): the path a listing takes from a public page to the site, who does what (a person, two AI helpers, automatic programs), how pages are sorted and kept, the checks that run on their own, and current limits
+- [Is this site better than what was here?](${u('/progress/')}): monthly, dated snapshots comparing our pages with the sources people here use today, with what we got wrong and what still falls short
 - [How we check](${u('/how-we-check/')}): what counts as a source, how often listings are rechecked, who does the checking, and how that compares with 211
 - [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
 - [Fix what you see: who to tell](${u('/make-it-better/report/')}): the office that handles graffiti, illegal dumping, litter, potholes (city street or state road), broken sidewalks, trees and run-down buildings, inside or outside city limits
@@ -179,6 +180,7 @@ ${roleCards}
 - [Protective orders](${u('/protective-orders/')}): asking a court for protection in Monongalia County: a domestic violence protective order or a personal safety order at Magistrate Court, the Family Court final hearing, taking part by video from RDVIC, costs and fee waivers, and free help from an RDVIC advocate and Legal Aid
 - [Have your say at a public meeting](${u('/have-your-say/')}): when Morgantown City Council, the Monongalia County Commission, the Board of Education, BOPARC and the Planning Commission meet, how public comment works at each (from official pages), and where agendas are
 - [Who decides what](${u('/who-decides/')}): what City Council, the County Commission, the Board of Education, MUB, the MPO Policy Board, Mountain Line, the Board of Health, the Solid Waste Authority, the Development Authority and Region VI decide, how members are chosen, when each meets, and where records are
+- [Which office handles it?](${u('/which-office/')}): common tasks sorted by the city, county or state office that handles them (property tax, deeds and records, court records, victim help, fingerprints, zoning outside towns, flood zones, new addresses, litter, town halls, schools, driver's licenses), with office phone numbers from official pages
 - [How to read a meeting agenda](${u('/meetings/how-to-read-an-agenda/')}): what consent agenda, first and second reading, public hearing, public comment and executive session mean on Morgantown City Council and Monongalia County Commission agendas, from state law (W. Va. Code 6-9A and 8-11-4) and the boards' own agendas
 - [Renters](${u('/for/renters/')}): a starting page that links to finding a place, repairs, your deposit, rent help and legal help
 - [Older adults and retirees](${u('/for/older-adults/')}): a starting page that links to Medicare, care at home, food and bill help, veterans help, and ways to stay involved

@@ -30,6 +30,7 @@ const NOTE_MAX = 200;
   <div class="mal-pick-area">
     <h1>Make a list for someone</h1>
     <p class="lede">Pick up to {MAX} places, add a short note if you like, and print or text the list to the person you are helping.</p>
+    <p>Want a ready-made sheet instead? <a href={`${base}/print/`}>Printouts</a> has sheets of places and phone numbers by topic.</p>
     <p class="note"><strong>Keep it private:</strong> do not type names, addresses, health details or anything personal in the note. The note is only in the web address of the list. Nothing is saved or sent to us.</p>
 
     <form id="mal-form" method="get" action={`${base}/make-a-list/`} hidden>

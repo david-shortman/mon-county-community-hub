@@ -17,6 +17,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const legalAid = resource('legal-aid-wv-eviction-help');
 const legalAidName = org(legalAid.org).name;
 const wv211 = resource('wv-211');
+const ccRent = resource('catholic-charities-emergency-financial-assistance');
 const dfi = resource('wv-dfi-check-a-lender');
 const taxPrep = resource('christian-help-free-tax-prep');
 const rack = resource('the-rack-wvu-student-food-pantry');
@@ -40,7 +41,9 @@ const scamSources = [{ url: 'https://consumer.ftc.gov/consumer-alerts/2017/01/go
   <p>Keep any notice from your landlord or the court, and do not ignore it. {legalAidName} gives free legal help to renters with low income who face eviction. The card below says who qualifies. If you have a court hearing or another deadline in the next 10 days, call <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a> right away.</p>
   {/* The whole Legal Aid card, so a link to /money/#rent lands on hours, who qualifies and how to apply (#803). */}
   <ResourceCard r={legalAid} headingLevel={4} showCost />
-  <p>For other help with rent, call <a href="tel:211">211</a> and say you are behind on rent. We are still building our housing page.</p>
+  <p>Catholic Charities can help some households with rent to avoid an eviction. The card says who it is for.</p>
+  {ccRent && <ResourceCard r={ccRent} headingLevel={4} />}
+  <p>For other help with rent, call <a href="tel:211">211</a> and say you are behind on rent. Got court papers? <a href={`${base}/renting/#court`}>If your landlord takes you to court</a> says what the law says happens next.</p>
   <SourceLine sources={wv211.sources} org={wv211.org} about="211" />
 
   <h3 id="payday">I need cash fast and I'm thinking about a payday loan</h3>

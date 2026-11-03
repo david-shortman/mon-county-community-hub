@@ -26,7 +26,7 @@ const fact = factsFor('recycling');
 // answer repeats a fact sourced further down the page and links to it.
 const lookup = [
   { item: 'Bagged household trash', say: 'Free at the Mountaineer Transfer Station on the first Thursday of each month.', href: '#mountaineer-transfer-station' },
-  { item: 'Batteries', say: 'We could not find a local drop-off. Ask the Solid Waste Authority.', href: '#hard-items' },
+  { item: 'Batteries', say: 'Lithium, button and rechargeable batteries never go in the trash or bin. Take them to a recycler or a store that takes them back.', href: '#fact-batteries' },
   { item: 'Building materials', say: 'No reuse store in the county right now.', href: `${base}/sell-or-donate/#building` },
   { item: 'Cardboard', say: 'Flatten boxes for the county drop-off center. No greasy pizza boxes.', href: '#drop-off' },
   { item: 'Clothes and furniture', say: 'Donate, sell or give them away.', href: `${base}/sell-or-donate/` },
@@ -34,7 +34,9 @@ const lookup = [
   { item: 'Glass bottles and jars', say: 'A 2019 hauler guide says curbside takes them. Confirm first.', href: '#curbside' },
   { item: 'Household chemicals, oil-based paint', say: "The Morgantown Utility Board's yearly household hazardous waste day.", href: '#hard-items' },
   { item: 'Latex paint', say: 'The county plans a collection in 2027. No date yet.', href: '#hard-items' },
+  { item: 'Leaves', say: 'No current city page about leaf pickup. Morgantown residents can ask the Streets and ROW Division.', href: '#fact-leaves' },
   { item: 'Medicines, old or unused', say: 'A drug take-back site or mail-back envelope first. The FDA says how to use the trash if neither is near.', href: '#medicines' },
+  { item: 'Motor oil and oil filters', say: 'Never down a drain. Ask auto shops or the Solid Waste Authority where to drop it off.', href: '#fact-motor-oil' },
   { item: 'Needles and syringes', say: 'Use a sharps container. Ask the Solid Waste Authority what to do when it is full.', href: '#medicines' },
   { item: 'Paper to shred', say: 'PACE Enterprises at Mylan Park.', href: '#drop-off' },
   { item: 'Plastic bags', say: 'Not at the county drop-off center. Bring recyclables in a box or bin.', href: '#drop-off' },
@@ -78,7 +80,9 @@ const lookup = [
     <Fact tag="li" f={fact('electronics')} about="electronics" />
     <Fact tag="li" f={fact('tires')} about="tires" />
     <Fact tag="li" f={fact('latex-paint')} about="paint" />
-    <li><strong>Batteries:</strong> we could not find a local drop-off program for batteries. Ask the Solid Waste Authority at <a href={swaTel}>{swaPhone}</a>.</li>
+    <Fact tag="li" f={fact('batteries')} about="batteries"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
+    <Fact tag="li" f={fact('motor-oil')} about="motor oil"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
+    <Fact tag="li" f={fact('leaves')} about="leaves" />
   </ul>
 
   <h2 id="medicines">Medicines and needles</h2>

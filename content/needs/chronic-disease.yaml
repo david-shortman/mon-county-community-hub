@@ -43,6 +43,8 @@ issues: [1256]
 get_help:
   - path: /diabetes-and-weight/
     label: Help managing diabetes, blood pressure or weight
+  - path: /diabetes-and-weight/#insulin
+    label: Paying for insulin and diabetes supplies
   - path: /staying-well/
     label: "Staying well: shots, checkups and walks, and what they cost"
   - path: /staying-active/
@@ -51,5 +53,5 @@ get_help:
     label: Parks and trails
 site_coverage:
   level: partial
-  why: "Diabetes, blood pressure or weight gathers a free diabetes prevention class, diabetes classes and a support group from Mon Health, health department dietitians, Health Right's diabetes and heart clinics, and places to be active. WVU Medicine's and WVU Extension's diabetes programs and free blood pressure checks are not listed yet, because no current page we could read confirms them (issue 1312)."
-  checked: 2026-11-01
+  why: "Diabetes, blood pressure or weight gathers free diabetes prevention classes (Mon Health, and Medicare's for people with Medicare), diabetes classes and a support group, the $35 insulin caps in state law and Medicare, a blood pressure monitor to borrow from the library, dietitians, free clinics and places to be active. WVU Medicine's and WVU Extension's diabetes programs and free blood pressure checks are still not listed, because no current page we could read confirms them (issue 1312)."
+  checked: 2026-11-02
