@@ -312,7 +312,8 @@ async function gather() {
   if (rg) {
     const s = rg.summary;
     add({ lane: P, key: 'grade_opening', what: 'Reading grade of page openings (middle value)', ours: s.opening_median, shown: String(s.opening_median), better: 'down', noise: 0.3, note: `${s.opening_grade_8_or_under} of ${s.pages} at 8 or under` });
-    add({ lane: P, key: 'grade_full', what: 'Reading grade of full text (middle value)', today: b?.others.grade != null ? String(round(b.others.grade)) : '', ours: s.full_median, shown: String(s.full_median), better: 'down', noise: 0.3 });
+    add({ lane: P, key: 'grade_full', what: 'Reading grade of full text (middle value)', today: b?.others.grade != null ? String(round(b.others.grade)) : '', ours: s.full_median, shown: String(s.full_median), better: 'down', noise: 0.3, note: rg.method ? `${rg.method}: before, button rows and source lines counted, so the first move is the method` : '' });
+    if (s.cards != null) add({ lane: P, key: 'cards_above_9', what: 'Resource card "Who it\'s for" lines above grade 9', ours: s.cards_above_9, shown: `${s.cards_above_9} of ${s.cards}`, better: 'down', note: 'from the embed listings, one per card (#1621)' });
     add({ lane: P, key: 'grade_above_9', what: 'Page openings above grade 9', ours: s.opening_above_9, shown: String(s.opening_above_9), better: 'down' });
     add({ lane: P, key: 'help_now_above_8', what: 'Help now openings above grade 8', ours: s.help_now_above_8.length, shown: String(s.help_now_above_8.length), better: 'down' });
   } else notRead(P, 'grade_opening', 'Reading grade', 'run npm run build first');
