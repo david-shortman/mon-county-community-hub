@@ -116,7 +116,7 @@ const ok = (r) => r && !r.hidden;
   <SourceLine sources={[src.renew, src.duties]} org={ORG} about="the child care status check" />
 
   <h2 id="help">Who can help</h2>
-  <p>Your case manager at the Child Care Resource Center can answer questions about your case. Legal Aid of West Virginia, listed above, takes cases about government benefits. 211 is free and can point you to other local help.</p>
+  <p>Your case manager at the Child Care Resource Center can answer questions about your case. Legal Aid of West Virginia, listed above, takes cases about government benefits. 211 can point you to other local help.</p>
   {ok(r211) && <ResourceCard r={r211} />}
   <p class="meta">We describe the state's steps. The Child Care Resource Center and DoHS decide who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
