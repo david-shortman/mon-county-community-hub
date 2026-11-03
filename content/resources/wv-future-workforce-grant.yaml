@@ -7,9 +7,9 @@ what_to_do: Fill out the FAFSA and the state's HEAPS Workforce application as so
 contact:
   phone: "877-987-7664"
   email: workforce@wvhepc.edu
-  url: https://www.cfwv.com/financial-aid/workforce/
+  url: https://www.cfwv.com/financial-aid/workforcegrant/
   url_label: About the grant
 cost: free
 sources:
-  - url: https://www.cfwv.com/financial-aid/workforce/
+  - url: https://www.cfwv.com/financial-aid/workforcegrant/
     checked: 2026-11-01
