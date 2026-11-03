@@ -101,7 +101,11 @@ for (const scheme of ['light', 'dark']) {
 // Reflow (WCAG 1.4.10): nothing should scroll sideways on a 320px screen.
 // Pages whose 200% text fix waits on a PR that David must review, so they print a note
 // instead of failing. The fixes are written out on #971. Remove each line once it is fixed.
-const WAITING = [];
+const WAITING = [
+  // The printout list's two columns overflow at 320px with 200% text. The fix is in
+  // print/[slug].astro, which names 211, so it waits for David (#1601).
+  [/^\/print\/family\/$/, 'the printout column fix on #1601 (for:david)'],
+];
 const narrowCtx = await browser.newContext({ viewport: { width: 320, height: 640 } });
 const reflow = await eachPage(() => narrowCtx.newPage(), async (narrow, u) => {
   const out = [];
