@@ -1,0 +1,18 @@
+title: Compare nursing homes on Medicare Care Compare
+slug: medicare-care-compare-nursing-homes
+org: centers-for-medicare-and-medicaid-services
+topics: [disability, health]
+who_it_is_for: Anyone looking for a nursing home, for themselves or a family member. All nursing homes on Care Compare are Medicare-certified.
+what_to_do: Go to Care Compare, choose "Nursing homes including rehab services," and enter your location or a nursing home name. You can compare up to 3 nursing homes side by side. Nursing homes are rated from 1 to 5 stars, based on health inspections, staffing and quality measures. Select "View Inspection Results" to read 3 years of inspection reports. Medicare says star ratings are not a substitute for visiting a nursing home.
+contact:
+  phone: "1-800-633-4227"
+  url: https://www.medicare.gov/care-compare/?providerType=NursingHome
+  url_label: Find nursing homes
+what_happens: You see each nursing home's star ratings, health and safety inspection reports, quality measures and staffing levels. A special symbol marks nursing homes cited for abuse, and another marks nursing homes with a history of serious quality issues, which are not rated.
+sources:
+  - url: https://www.medicare.gov/publications/02174-your-guide-to-choosing-a-nursing-home.pdf
+    checked: 2026-11-02
+  - url: https://www.medicare.gov/providers-services/original-medicare/nursing-homes
+    checked: 2026-11-02
+  - url: https://www.medicare.gov/providers-services/claims-appeals-complaints/complaints
+    checked: 2026-11-02
