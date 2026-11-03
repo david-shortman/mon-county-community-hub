@@ -10,6 +10,7 @@ contact:
   url: https://www.moncountyrecycling.com/
   place: 34 Olin St, Industrial Park, Monongalia County, WV
 cost: free
+not_posted: [get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://www.moncountyrecycling.com/
     checked: 2026-11-01

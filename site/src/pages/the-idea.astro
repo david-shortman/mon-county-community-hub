@@ -86,7 +86,7 @@ const calendarOrgs = new Set((await loadCalendarWithFeeds()).map((e) => e.org_na
       <p>The site is new. Its pages don't show up in search yet, so the score has not moved. A recheck the same day found 6 of 32, because of changes on other sites, not ours. We say that plainly. We test again every week. Later we will also count whether people use the site and whether it helped them act.</p>
     </section>
   </div>
-  <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/scoreboard.md')}>the scoreboard</a> and <a href={`${repo}/tree/main/docs/build-log`}>the build log</a>, both on GitHub.</p>
+  <p class="check"><strong>Check it yourself:</strong> <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/progress/`}>our monthly checks</a>, <a href={doc('docs/scoreboard.md')}>the scoreboard</a> and <a href={`${repo}/tree/main/docs/build-log`}>the build log</a>, both on GitHub.</p>
 
   <h2>A person is responsible</h2>
   <p>AI does most of the research, writing, and checking. A local resident, David McCoy, sets the direction. He checks pages about shelter, crisis help, food and benefits before changes go live, and looks over other pages when he can, after they are up. On its own, the AI may never contact anyone, spend money, take sides, or collect personal information it does not need. <a href={`${base}/about/`}>Read who is behind this and how it runs</a>.</p>

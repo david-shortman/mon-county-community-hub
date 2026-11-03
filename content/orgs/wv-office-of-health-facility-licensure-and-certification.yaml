@@ -1,0 +1,13 @@
+name: West Virginia Office of Health Facility Licensure and Certification (OHFLAC)
+slug: wv-office-of-health-facility-licensure-and-certification
+kind: government
+website: https://oig.wv.gov/OHFLAC
+phone: "304-558-0050"
+summary: The state office, part of the WV Office of Inspector General, that licenses and certifies health care facilities, including nursing homes, assisted living residences and residential care communities. It takes complaints about these facilities.
+topics: [health, disability]
+area: statewide
+sources:
+  - url: https://oig.wv.gov/page/office-health-facility-licensure-and-certification
+    checked: 2026-11-02
+  - url: https://www.cms.gov/medicare/health-safety-standards/quality-safety-oversight-general-information/contact-information
+    checked: 2026-11-02

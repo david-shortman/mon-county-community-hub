@@ -24,7 +24,24 @@ const CRISIS = /\b(988|211|911)\b|crisis/i;
 // text line, the Veterans Crisis Line's text line, the RDVIC 24-hour hotline,
 // and the VA line for homeless veterans.
 const CRISIS_MORE = /\b(898-211|838255|304-292-5100|877-424-3838)\b|\b(988-lifeline|veterans-crisis-line|wv-211|rdvic-hotline|va-homeless-veterans-line)\b/;
-export const mentionsCrisis = (text) => CRISIS.test(text) || CRISIS_MORE.test(text);
+// Text that looks like a crisis number but is not one (#529 wave 10): issue and
+// PR references (#988, .../issues/988), numbers inside drawing and layout
+// attributes (x="211", viewBox="0 0 988 400", d="M211 30"), and numbers with
+// a unit (911px, 988ms). These are removed before matching, so a real "Call
+// 211" or "988" in resident text still counts.
+const DRAWING_ATTRS = 'x|y|x1|x2|y1|y2|cx|cy|r|rx|ry|dx|dy|d|points|width|height|viewBox|transform|offset|stroke-width|stroke-dasharray|font-size|fill-opacity|opacity|tabindex|data-[a-z-]+';
+const NOISE = [
+  /(?:^|[^&\w])#\d+\b/g, // issue or PR reference: #988 (not an HTML entity like &#988;)
+  /\b(?:issues|pull|pulls)\/\d+\b/gi, // GitHub links: .../issues/988
+  new RegExp(`\\b(?:${DRAWING_ATTRS})\\s*[=:]\\s*(?:"[^"]*"|'[^']*'|\\{[^}]*\\}|[\\d.\\s-]+)`, 'g'), // x="211", viewBox='0 0 988 400', width={911}
+  /\b\d+(?:\.\d+)?(?:px|em|rem|vh|vw|ms|s|deg|%)(?![\w-])/g, // 911px, 988ms
+];
+export const withoutNoise = (text) => NOISE.reduce((t, re) => t.replace(re, ' '), String(text ?? ''));
+export const mentionsCrisis = (text) => { const t = withoutNoise(text); return CRISIS.test(t) || CRISIS_MORE.test(t); };
+// Content files residents never see: recurring-check lists, watch lists,
+// findability runs, schemas, persona and source rules, notes for the team.
+// A crisis number there is about our work, not something we tell residents.
+export const NOT_RESIDENT = /^content\/(README\.md|checklists\/|watch\/|findability\/|schemas\/|use\/|source-rules\.ya?ml|personas\.ya?ml)/;
 // Records that feed listings. Places (content/places, schema v2) say what
 // they are about in `interests` (for example a free meal has `food`), so both
 // `topics` and `interests` are read.
