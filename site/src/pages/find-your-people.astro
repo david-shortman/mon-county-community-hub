@@ -35,7 +35,7 @@ const also = [
   { route: '/parks/', text: 'parks and trails, and groups to ride or run with' },
 ].filter((a) => pages.has(a.route)).map((a) => ({ ...a, label: pages.get(a.route).label }));
 ---
-<Base title="Find your people in Mon County: groups, clubs, places to sit" description="Recurring groups in Morgantown and Monongalia County, from game nights and craft circles to runs, rides and dances, plus free places to sit. Answer three questions for three picks, or browse the lists.">
+<Base title="Find your people in Mon County: groups, clubs, places to sit" description="Recurring groups in Mon County, from game nights and craft circles to runs, rides and dances, plus free places to sit. Answer three questions or browse the lists.">
   <h1>Find your people</h1>
   <p class="lede">Groups that meet again and again, and places you can sit without buying anything. Answer three questions for three picks, or scroll the lists.</p>
   <CheckedRange sources={[...dir.groups, ...dir.sit].map((p) => p.sources)} what="groups and places to sit" />

@@ -24,7 +24,7 @@ const recent = meetings.filter((m) => m.date < today && m.date >= since).reverse
 const byBody = [...new Set(recent.map((m) => m.body))].sort((a, b) => a.localeCompare(b)).map((body) => ({ body, items: recent.filter((m) => m.body === body) }));
 const id = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
-<Base title="Morgantown and Mon County meetings: agendas and minutes" description="Posted agendas for coming Morgantown City Council, city board and Monongalia County Commission meetings, minutes from recent ones, and where towns and the school board post theirs.">
+<Base title="Morgantown and Mon County meetings: agendas and minutes" description="Agendas for coming Morgantown City Council, city board and County Commission meetings, recent minutes, and where towns and the school board post theirs.">
   <h1>City and county meetings: agendas and minutes</h1>
   <p class="lede">The City of Morgantown and the Monongalia County Commission post meeting agendas on their websites, and the city posts minutes too. This page lists what they have posted, so you can see what is coming up and what happened.</p>
 
