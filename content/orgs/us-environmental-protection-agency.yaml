@@ -1,0 +1,10 @@
+name: U.S. Environmental Protection Agency
+slug: us-environmental-protection-agency
+kind: government
+website: https://www.epa.gov/
+summary: The federal agency for the environment, known as EPA. Its lead rules cover paid work that disturbs paint in homes built before 1978, and it shares tips on lead in drinking water.
+topics: [safety]
+area: national
+sources:
+  - url: https://www.epa.gov/lead/lead-renovation-repair-and-painting-program
+    checked: 2026-11-02
