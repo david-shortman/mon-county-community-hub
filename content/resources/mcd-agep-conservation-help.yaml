@@ -9,6 +9,7 @@ opening_hours:
     opens: "08:00"
     closes: "16:00"
 what_to_do: Call the Monongahela Conservation District and ask about the Agricultural Enhancement Program, which practices it covers this year, and how to sign up.
+get_in: appointment   # the district page says to set an appointment to come into the office
 contact:
   phone: "304-296-0081"
   url: https://www.wvca.us/agep/
@@ -19,6 +20,6 @@ sources:
   - url: https://www.wvca.us/agep/
     checked: 2026-11-01
   - url: https://www.wvca.us/district/mcd.cfm
-    checked: 2026-11-01
+    checked: 2026-11-02
   - url: https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php
     checked: 2026-11-01
