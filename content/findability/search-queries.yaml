@@ -116,7 +116,8 @@ queries:
   - {q: free clinic, expect: [/no-insurance/], kind: everyday}
   - {q: doctor no insurance, expect: [/no-insurance/], kind: everyday}
   - {q: sliding scale, expect: [/no-insurance/, /dental-and-prescriptions/, /mental-health/], kind: everyday}
-  - {q: Health Right, expect: [/no-insurance/, /dental-and-prescriptions/], kind: everyday}
+  # The clinic's own group page answers a search for its name (round 4, wave 14).
+  - {q: Health Right, expect: [/no-insurance/, /dental-and-prescriptions/, /groups/milan-puskar-health-right/], kind: everyday}
   - {q: medicaid, expect: [/file-today/, /no-insurance/, /medicaid-2027/], kind: everyday}
   - {q: medicade, expect: [/file-today/, /no-insurance/, /medicaid-2027/], kind: misspelled}
   - {q: medicare, expect: [/turning-65/], kind: everyday}
