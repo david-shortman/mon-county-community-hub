@@ -1,0 +1,5 @@
+# 2026-11-03: Child care: who can get help paying (#571, #1534)
+
+- **Considered:** the needs register rated child care "partial" because no page said who qualifies for the state's help paying for child care. The Child Care Resource Center's own site (ccrcwv.org), which returned 502 errors on October 30, loaded on November 2 and states the income rule.
+- **Shipped:** a "Who can get help paying for child care" section on `/families-and-kids/`: the child's age and the work or school rule from the state manual (sections 3.1 and 3.2) and the center's page, the 150% to start and 185% to keep rule in the center's words, and a table of monthly limits for families of 2 to 6 copied from the state's fee scale (Appendix A, dated October 1, 2024, 2024 poverty levels). The center's record says the same in short. The need is re-rated good, with the earlier rating shown on `/needs/`.
+- **Left:** open child care slots are not listed anywhere public. The intake details on #571 (walk-in intake, hours) still need a call to the center. The fee scale uses 2024 poverty levels; the page says the center may use newer numbers.
