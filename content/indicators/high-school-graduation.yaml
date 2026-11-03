@@ -1,0 +1,47 @@
+title: Students who graduate high school in four years
+slug: high-school-graduation
+topic: schools
+# The number is ZoomWV's "Graduation Rate Trend" chart (the four-year rate: it matches the
+# "Graduation Rate by Gender (4 Year Grads)" chart). The definition is ZoomWV's own note under
+# the Graduation Summary, with "in either four or five years" left out (...) because this number is the four-year rate.
+definition: "Students who received a regular diploma or a standards-based alternate diploma ... as part of the four-year adjusted cohort are included in this data, but not students who received a high school equivalency diploma."
+unit: percent
+data_year: "2024-2025"
+release: ZoomWV, West Virginia Department of Education, Graduation Summary
+values:
+  monongalia: 0.9622
+  west_virginia: 0.928
+more: https://zoomwv.k12.wv.us/Dashboard/dashboard/2111
+sources:
+  # Read in a browser on 2026-11-03: the page needs JavaScript. Monongalia is
+  # "(056) - Monongalia" under Filter Data, District/County. West Virginia is
+  # the default view. Exact values are in each bar's hover label. History
+  # starts in 2020-2021: ZoomWV's note says standards-based alternate diplomas
+  # count as graduates from that year on, and modified diplomas did not count
+  # before it, so earlier years are counted a different way.
+  - name: ZoomWV Graduation Summary (West Virginia Department of Education)
+    url: https://zoomwv.k12.wv.us/Dashboard/dashboard/2111
+    checked: 2026-11-03
+history:
+  monongalia:
+    - year: "2020-2021"
+      value: 0.9423
+    - year: "2021-2022"
+      value: 0.9469
+    - year: "2022-2023"
+      value: 0.9484
+    - year: "2023-2024"
+      value: 0.9571
+    - year: "2024-2025"
+      value: 0.9622
+  west_virginia:
+    - year: "2020-2021"
+      value: 0.9112
+    - year: "2021-2022"
+      value: 0.9117
+    - year: "2022-2023"
+      value: 0.9257
+    - year: "2023-2024"
+      value: 0.9258
+    - year: "2024-2025"
+      value: 0.928
