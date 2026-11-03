@@ -39,6 +39,9 @@ test('each paragraph ends a sentence', () => {
 test('opening is the first two sentences of the first paragraph', () => {
   assert.equal(opening(['One. Two? Three.', 'Four.']), 'One. Two?');
   assert.equal(opening([]), '');
+  // A closing quote mark or bracket after the period still ends the sentence (#1665).
+  assert.equal(opening(['Most people can use it. The state says it "helps people get a tax break." It is free.']), 'Most people can use it. The state says it "helps people get a tax break."');
+  assert.equal(opening(['Call the office (they help with forms.) Then wait. Then go.']), 'Call the office (they help with forms.) Then wait.');
 });
 
 test('grade: short plain text is low, long words are high, too short is null', () => {
@@ -47,6 +50,13 @@ test('grade: short plain text is low, long words are high, too short is null', (
   assert.ok(plain < 4, `plain ${plain}`);
   assert.ok(hard > 14, `hard ${hard}`);
   assert.equal(grade('Too short.'), null);
+});
+
+test('grade counts a sentence that ends in a quote mark or bracket (#1665)', () => {
+  const plain = 'Most people can use it. The state says it helps people get a tax break. It is free to use for you.';
+  assert.equal(grade('Most people can use it. The state says it "helps people get a tax break." It is free to use for you.'), grade(plain));
+  assert.equal(grade("Most people can use it. The state says it \u201chelps people get a tax break.\u201d It is free to use for you."), grade(plain));
+  assert.equal(grade('Most people can use it. The state says it (helps people get a tax break.) It is free to use for you.'), grade(plain));
 });
 
 test('a card with its button row grades near its own prose', () => {
