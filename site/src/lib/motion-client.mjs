@@ -1,5 +1,6 @@
 // The scroll story kit: the browser part every explainer shares (#1441).
-// Rules: docs/design/motion.md. Plain script, no library.
+// Rules: docs/design/motion.md (arrives with PR #1377; until then see the
+// epic #1440). Plain script, no library.
 //
 // - motionAllowed(): false when the device asks for reduced motion or the
 //   reader pressed "Turn off motion". One setting for the whole site: it is
@@ -65,6 +66,8 @@ export function bindMotionSwitch(root, m = motion()) {
 // step. opts.onLive(on) runs when the story starts or stops following.
 export function watchSteps(sec, steps, onStep, opts = {}) {
   const win = opts.win || window;
+  // An old browser with no IntersectionObserver keeps the still page, and the
+  // switch stays hidden, since there is no motion for it to turn off (#1500).
   if (!sec || !steps.length || !win.IntersectionObserver) return null;
   const m = opts.motion || motion(win);
   let io = null, current = -1;
