@@ -17,6 +17,20 @@ body:
     validations:
       required: true
   - type: textarea
+    id: question
+    attributes:
+      label: The resident question this answers
+      description: In a resident's own words, for example "Where can I get a flu shot this week?"
+    validations:
+      required: true
+  - type: textarea
+    id: measure
+    attributes:
+      label: How we will know it worked
+      description: The scoreboard row or findability question it should move, and when to check (7 or 30 days).
+    validations:
+      required: true
+  - type: textarea
     id: why
     attributes:
       label: Why it matters

@@ -148,6 +148,9 @@ Each door and lane page has one job, and its first phone screen leads with the b
 | Snow and ice, `/snow-and-ice/` | "Who clears my street, and is school or the bus running?" | Big choices: Morgantown street or sidewalk, state road, school delays, is my bus late (#199) |
 | Weather alerts, `/weather-alerts/` | "How do I get warned?" | Big choices: alerts on my phone, weather warnings, school closings, power outage texts (#199) |
 | Markets, `/markets/` | "What markets and sales are coming up?" | Big choices: coming up soon, every week, yard sales, sell at a market (#199) |
+| Parks, `/parks/` | "Where can I go outside?" | Big choices: city parks, rail-trails, book a pavilion or cabin, swim and ice skate (#199) |
+| Arts and making, `/arts-and-making/` | "Where can I make art or learn a craft?" | Big choices: take a class, find space and tools, show and sell, grants (#199) |
+| Meet people, `/meet-people/` | "How do I meet people here?" | Big choices: library card, library programs, neighborhood associations, working from home (#199) |
 | About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
 
 Other pages that lead with a step route: `/start-a-business/`, `/start-a-group/`, `/permits/`, `/teen-drivers/` and `/identity-theft/`. Question paths: food help (`/help/food/`), What help is there (`/help/what-help/`) and Who serves me (`/who-serves-me/`). Checked against the built site on November 2, 2026.

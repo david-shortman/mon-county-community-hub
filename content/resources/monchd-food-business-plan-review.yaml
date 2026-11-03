@@ -3,7 +3,7 @@ slug: monchd-food-business-plan-review
 org: monongalia-county-health-department
 topics: [work]
 who_it_is_for: New food establishments and mobile food units (food trucks and hot dog carts), and ones being renovated or changing owners, anywhere in Mon County.
-what_to_do: Fill out the plan review application (there is a separate one for mobile food units). Once plans are approved, schedule an inspection with a sanitarian. Every food business needs at least one Certified Food Protection Manager, and all workers need a current food handler's card. The health department offers food safety classes; online food worker training costs $20 for a one-year Mon County card.
+what_to_do: "Fill out the plan review application (there is a separate one for mobile food units). Once plans are approved, schedule an inspection with a sanitarian."
 contact:
   phone: "304-598-5131"
   url: https://www.monchd.org/services/food-and-retail-establishment-permits
@@ -19,6 +19,8 @@ options:
   - "Retail food store: plan review $250, permit $72 for each checkout"
 notes:
   - Places with an ABCC (alcohol) license add $150.
+  - "Every food business needs at least one Certified Food Protection Manager, and all workers need a current food handler's card."
+  - "The health department offers food safety classes; online food worker training costs $20 for a one-year Mon County card."
 sources:
   - url: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
     checked: 2026-11-01

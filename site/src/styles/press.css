@@ -139,6 +139,12 @@ html:root :is(.card, .note, .add-cal, .right-now, .crisis-line, .step, .milepost
   .milepost summary, details.fold, details.fold > summary, .table-scroll, .pick label, .choice, .door,
   .search input, .btn-search, .add-cal input, .skip) { border-radius: 2px; }
 html:root .btn { border-radius: 3px; border-width: 2px; }
+/* Keep a phone number on one line, so 898-211 never reads as 898- and 211.
+   Only when the screen holds 24em of the reader's own text size, so a big
+   text setting can still wrap a long one like 1-800-RED-CROSS (1-800-733-2767). */
+@media (min-width: 24em) {
+  html:root a:is([href^="tel:"], [href^="sms:"]):not(.btn) { white-space: nowrap; }
+}
 /* Tables: a printer's rule under the column heads, and even figures. */
 html:root main thead th { border-bottom: 2px solid var(--fg); }
 html:root main :is(td, th) { font-variant-numeric: lining-nums tabular-nums; }
@@ -322,4 +328,15 @@ html:root :is(a, button, summary, input):focus-visible { outline: 3px solid var(
 }
 @media print {
   html:root :is(.card, .door, .milepost)::before { display: none; }
+  /* Paper is always light. A device in dark mode would otherwise print dark
+     boxes with black text, and pale links and source lines on white paper.
+     These are the light inks from Base.astro, with white paper and cards. */
+  html:root {
+    --bg: #fff; --card: #fff; --fg: #1f1d19; --muted: #4a453b; --line: #d6cab3;
+    --accent: #24493d; --accent-bg: #e7ece4; --sand: #ece2cd; --water: #1c4a50;
+    --rust: #9a4b2c; --brick: #9a4b2c; --ridge: #1c4a50; color-scheme: light;
+  }
+  /* Buttons only work on a screen (Copy link, Print this, Share). Links styled
+     as buttons stay, since they carry the words. */
+  html:root main button { display: none !important; }
 }

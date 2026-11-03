@@ -1,6 +1,10 @@
 # 0005: Folder ownership, contracts between layers, and no shared append points
 
-Status: proposed, 2026-10-28
+Status: accepted by David, 2026-11-02, except CODEOWNERS (#94, #1410). Proposed 2026-10-28.
+
+- Accepted: a breaking change to a content schema or to `/api/v1/` needs a new ADR and a version bump, and generated files carry a header saying what made them.
+- Not now: the `CODEOWNERS` file in point 1 waits until a second person or group helps build.
+- Done: validation blocks merges, because `build` is a required check on `main` (#95).
 
 ## Context
 

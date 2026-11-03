@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Wait for a PR's checks, but stop early if the PR cannot run them.
 # Usage: scripts/pr-wait.sh <pr-number> [timeout-minutes, default 25]
-#        scripts/pr-wait.sh main   (after merging: did main build and deploy?)
+#        scripts/pr-wait.sh main [timeout-minutes] [merge-commit-sha]
+#          (after merging: did main build and deploy? safe-merge.sh passes the
+#          merge commit, so the script never reads main before it moves.)
 # Exit codes: 0 all checks done (see output for results; a cancelled check is
 #             reported as superseded, not failed), 2 merge conflict,
 #             3 timed out, 4 PR closed or not found.
@@ -10,8 +12,12 @@
 set -uo pipefail
 PR="${1:?usage: scripts/pr-wait.sh <pr-number> [timeout-minutes]  or  scripts/pr-wait.sh main}"
 LIMIT_MIN="${2:-25}"
-REPO="repos/david-shortman/mon-county-community-hub"
-deadline=$(( $(date +%s) + LIMIT_MIN * 60 ))
+REPO="${PR_WAIT_REPO:-repos/david-shortman/mon-county-community-hub}"
+# Seconds between polls. Tests set it to 0 (scripts/test/pr-wait.test.sh).
+POLL="${PR_WAIT_POLL:-}"
+nap() { sleep "${POLL:-$1}"; }
+start=$(date +%s)
+deadline=$(( start + LIMIT_MIN * 60 ))
 
 # `scripts/pr-wait.sh main`: after a merge, wait for main's Site build and say
 # whether the site deployed. Exit 0 green, 1 red, 3 timed out.
@@ -19,8 +25,12 @@ deadline=$(( $(date +%s) + LIMIT_MIN * 60 ))
 # run builds everything in it, including this merge. So on "cancelled" the
 # script follows the Site run for main's current head commit instead.
 if [ "$PR" = "main" ]; then
-  sleep 10
-  sha=$(gh api "$REPO/commits/main" --jq .sha)
+  sha="${3:-}"
+  if [ -z "$sha" ]; then
+    # Without the merge commit, give main a moment to move to it.
+    nap 10
+    sha=$(gh api "$REPO/commits/main" --jq .sha)
+  fi
   first=$sha
   while :; do
     s=$(gh api "$REPO/actions/runs?branch=main&head_sha=$sha" --jq '[.workflow_runs[] | select(.name=="Site")][0] | "\(.status)|\(.conclusion)|\(.html_url)"' 2>/dev/null)
@@ -41,7 +51,7 @@ if [ "$PR" = "main" ]; then
         echo "Fix forward now. First check open PRs: another session may already be fixing it."; exit 1 ;;
     esac
     [ "$(date +%s)" -ge "$deadline" ] && { echo "TIMEOUT waiting for main's Site build"; exit 3; }
-    sleep 15
+    nap 15
   done
 fi
 
@@ -50,11 +60,21 @@ while :; do
   IFS='|' read -r state mergeable mstate sha ref <<< "$info"
   [ "$state" = "open" ] || { echo "PR #$PR is $state"; exit 4; }
   # Right after a push, GitHub can still show the old commit. If this is the
-  # PR for the branch checked out here, wait until it shows our latest commit.
-  if [ "$ref" = "$(git rev-parse --abbrev-ref HEAD 2>/dev/null)" ] && [ "$sha" != "$(git rev-parse HEAD 2>/dev/null)" ]; then
+  # PR for the branch checked out here and GitHub's head is an older commit of
+  # ours, wait until it shows our latest commit. If the head moved somewhere
+  # else (a merge from main made on GitHub, or another session pushed), follow
+  # GitHub's head instead of waiting for a commit that will never show.
+  local_sha=$(git rev-parse HEAD 2>/dev/null)
+  if [ "$ref" = "$(git rev-parse --abbrev-ref HEAD 2>/dev/null)" ] && [ "$sha" != "$local_sha" ] \
+     && git merge-base --is-ancestor "$sha" "$local_sha" 2>/dev/null; then
     [ "$(date +%s)" -ge "$deadline" ] && { echo "TIMEOUT: PR #$PR never showed the local commit. Did the push work?"; exit 3; }
-    sleep 10; continue
+    nap 10; continue
   fi
+  if [ -n "${last_sha:-}" ] && [ "$sha" != "$last_sha" ]; then
+    echo "PR #$PR head moved from ${last_sha:0:7} to ${sha:0:7}; waiting on the new commit's checks."
+    sha_seen=$(date +%s)
+  fi
+  last_sha=$sha; : "${sha_seen:=$start}"
   if [ "$mstate" = "dirty" ] || [ "$mergeable" = "false" ]; then
     echo "CONFLICT: PR #$PR conflicts with main, so its checks will not run."
     echo "Fix: git fetch origin main && git merge origin/main, resolve, rebuild, commit, push."
@@ -66,7 +86,11 @@ while :; do
   # Checks can take a minute to appear after a push, so an empty list is not done.
   if [ -n "$runs" ] && ! grep -qv '|completed|' <<< "$runs"; then
     # Give a just-pushed PR a moment for a slower check (like review) to register.
-    if grep -q '^review|' <<< "$runs" || [ "$(date +%s)" -gt $(( deadline - LIMIT_MIN * 60 + 120 )) ]; then
+    if grep -q '^review|' <<< "$runs" || [ "$(date +%s)" -gt $(( sha_seen + 120 )) ]; then
+      # A newer commit cancels the old commit's runs. If the head moved while we
+      # read the checks, these results are stale: go round again on the new head.
+      now=$(gh api "$REPO/pulls/$PR" --jq .head.sha 2>/dev/null)
+      [ -n "$now" ] && [ "$now" != "$sha" ] && continue
       echo "Checks on $sha:"; echo "$runs" | sed 's/^/  /'
       gh api "$REPO/issues/$PR/comments" --jq '.[] | select(.body | contains("<!-- claude-review -->")) | .body' \
         | sed -n '2p;/^### Blockers/,/^### Already on the site/p'
@@ -80,5 +104,5 @@ while :; do
     echo "TIMEOUT after $LIMIT_MIN minutes. Current checks on $sha:"; echo "${runs:-  (none yet)}" | sed 's/^/  /'
     exit 3
   fi
-  sleep 20
+  nap 20
 done

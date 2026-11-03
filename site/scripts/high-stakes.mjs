@@ -8,7 +8,7 @@ import { execFileSync } from 'node:child_process';
 import YAML from 'yaml';
 // The rules themselves live in scripts/high-stakes-rules.mjs, so the
 // translation check can use them too (#1083).
-import { PAGES, CONTENT, contentHit, mentionsCrisis, changedLines, pageHit, translationHit, englishPageFiles, withoutLocale, I18N_FILE, flipsLanguage } from './high-stakes-rules.mjs';
+import { PAGES, CONTENT, NOT_RESIDENT, contentHit, mentionsCrisis, changedLines, pageHit, translationHit, englishPageFiles, withoutLocale, I18N_FILE, flipsLanguage } from './high-stakes-rules.mjs';
 import { parseTranslationPath } from '../src/lib/i18n.mjs';
 
 // Other files residents see through the site: code under site/src (lib,
@@ -66,6 +66,20 @@ if (process.argv[2] === '--self-test') {
   expect(flipsLanguage('-export const ALLOW_MACHINE_DRAFTS = false;\n+export const ALLOW_MACHINE_DRAFTS = true;'), 'allowing machine drafts should count');
   expect(!flipsLanguage('+export const PUBLISHED = [];\n+export const ALLOW_MACHINE_DRAFTS = false;'), 'a new i18n.mjs with the defaults should not count');
   expect(!flipsLanguage('-// old comment\n+// a comment about languages'), 'other edits to i18n.mjs should not count');
+  // False alarms (#529 wave 10): issue numbers, drawing attributes, units and team-only files.
+  expect(!mentionsCrisis('# Monthly loop, with the needs register upkeep (#988).'), 'an issue reference like #988 should not count');
+  expect(!mentionsCrisis('See https://github.com/x/y/issues/911 for why.'), 'a GitHub issue link should not count');
+  expect(!mentionsCrisis('<text x="211" y="40">Mon</text>'), 'an SVG x="211" should not count');
+  expect(!mentionsCrisis('<svg viewBox="0 0 988 400"><path d="M211 30L988 4"/></svg>'), 'SVG viewBox and path numbers should not count');
+  expect(!mentionsCrisis('<rect width={911} height="211" />'), 'width and height numbers should not count');
+  expect(!mentionsCrisis('.card { max-width: 911px; transition: opacity 988ms; }'), 'numbers with a unit should not count');
+  expect(mentionsCrisis('<p>Call 211 to find help near you.</p>'), 'a real 211 in resident text should still count');
+  expect(mentionsCrisis('<a href="tel:988">Call or text 988</a>'), 'a real 988 link should still count');
+  expect(mentionsCrisis('In an emergency, call 911. (#988)'), 'a real 911 next to an issue reference should still count');
+  expect(mentionsCrisis('<text x="211" y="40">Call 911</text>'), 'a real 911 inside an SVG label should still count');
+  expect(mentionsCrisis('Dial 911 or text 988'), 'real numbers with no noise should still count');
+  expect(NOT_RESIDENT.test('content/checklists/personas.yaml') && NOT_RESIDENT.test('content/watch/shelter.yaml') && NOT_RESIDENT.test('content/README.md'), 'team-only content files should be skipped');
+  expect(!NOT_RESIDENT.test('content/resources/wv-211.yaml') && !NOT_RESIDENT.test('content/tonight/warming-shelter.yaml') && !NOT_RESIDENT.test('content/places/smithtown.yaml'), 'resident content files should still be read');
   if (fails.length) { console.error(`high-stakes self-test failed:\n- ${fails.join('\n- ')}`); process.exit(1); }
   console.log('high-stakes self-test passed.');
   process.exit(0);
@@ -100,6 +114,8 @@ function onlyHides(file) {
 const diffLines = (file) => changedLines(git('diff', '-U0', `${base}...HEAD`, '--', file));
 
 for (const file of changed) {
+  // Lists and notes for the team that residents never see (NOT_RESIDENT).
+  if (NOT_RESIDENT.test(file)) continue;
   // Turning a language on, or allowing machine drafts, changes what
   // residents see (#1067), so it waits for David.
   if (file === I18N_FILE && flipsLanguage(git('diff', '-U0', `${base}...HEAD`, '--', file))) { console.log(`${file}: turns a language or machine drafts on or off`); continue; }

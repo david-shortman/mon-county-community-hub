@@ -236,6 +236,7 @@ Use the names residents use, when it makes directions clearer. Always give the f
 - **Neighborhoods and towns:** Sunnyside, Wiles Hill, South Park, Evansdale, Suncrest, the Wharf District, downtown. Westover, Star City, Granville, Cheat Lake, and Blacksville are their own places; don't fold them into "Morgantown."
 - **Landmarks for directions:** "the rail-trail," "Hazel Ruby McQuain Riverfront Park," "the Seneca Center on Beechurst Avenue," "the PRT." Landmarks help people find a place, but always give a street address too.
 - **Deadlines (#51):** say plainly that the last day counts, with the weekday: "The last day is Tuesday, December 15." Not "by December 15" or "on or before," which people read differently. Give a time only when the source sets one ("until 7 p.m. on Saturday, November 7"). Times read "8 a.m.", "8:30 a.m.", "noon".
+- **Time of day (#1378):** no "tonight", "this morning" or "right now" unless the time is the point (a place to stay tonight, a crisis right now, a calendar date). A reader may arrive at any hour. For a source, say "when we checked", not "today". Details and the build check: "Rules for every entry" in `content/README.md`.
 - **Don't** use slang, dialect spelling, or sports chants. Plain, warm, and neutral.
 
 ## Mobile first
