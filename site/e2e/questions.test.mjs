@@ -111,7 +111,7 @@ describe('question paths', () => {
     await page.goto(s.origin + '/help/what-help/');
     await page.locator('.question a.choice').first().click();
     await page.locator('.question a.choice').first().click();
-    assert.equal(await page.locator('h1').textContent(), 'Places that may help');
+    assert.match(await page.locator('h1').textContent(), /^Places that may help with /);
     const leaves = ALL.filter((p) => /^\/help\/what-help\/[^/]+\/[^/]+\/$/.test(p));
     assert.ok(leaves.length >= 10, `expected the answer pages, found ${leaves.length}`);
     const picks = new Set();
