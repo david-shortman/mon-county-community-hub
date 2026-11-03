@@ -32,7 +32,6 @@ working_on:
   - org: monongalia-county-schools
   - org: child-care-resource-center-morgantown
 gaps:
-  - Who qualifies for the state's help paying for child care is not explained plainly in one place (issue 571).
   - Open child care slots are not listed publicly in one place.
 topics: [family]
 rank: 7
@@ -41,11 +40,17 @@ issues: [571, 943]
 get_help:
   - path: /families-and-kids/#child-care
     label: Finding child care, and help paying for it
+  - path: /families-and-kids/#child-care-who
+    label: Who can get help paying for child care
   - path: /after-you-apply/child-care/
     label: After you apply for child care help
   - path: /school-age/#care
     label: Care before and after school
 site_coverage:
-  level: partial
-  why: Families and kids links the state search for licensed child care and the Child Care Resource Center, which helps with finding care and the cost. Who qualifies for the state child care subsidy is not explained on our pages yet (issue 571).
-  checked: 2026-11-01
+  level: good
+  why: Families and kids links the state search for licensed child care and the Child Care Resource Center, says who can get help paying (age, work or school, and the income limits by family size), and links what happens after you apply. Open child care slots are not listed anywhere public, so the site cannot show them.
+  checked: 2026-11-02
+  before:
+    level: partial
+    checked: 2026-11-01
+    why: Who qualifies for the state's help paying for child care was not explained (issue 571).

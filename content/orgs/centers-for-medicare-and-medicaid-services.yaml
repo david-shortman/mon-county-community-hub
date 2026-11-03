@@ -1,0 +1,13 @@
+name: Centers for Medicare & Medicaid Services (CMS)
+slug: centers-for-medicare-and-medicaid-services
+kind: government
+website: https://www.medicare.gov/
+phone: "1-800-633-4227"
+summary: The federal agency that runs Medicare. Its website, Medicare.gov, has Care Compare, a tool to find and compare nursing homes and other care providers.
+topics: [health]
+area: national
+sources:
+  - url: https://www.medicare.gov/providers-services/claims-appeals-complaints/complaints
+    checked: 2026-11-02
+  - url: https://www.medicare.gov/providers-services/original-medicare/nursing-homes
+    checked: 2026-11-02
