@@ -16,6 +16,8 @@ Several sessions open PRs at the same time, so a branch often falls behind `main
 5. **After you merge, check `main`.** Run `scripts/pr-wait.sh main`. If main's Site run was cancelled because a newer merge landed, the script says "superseded" and follows the newest run, since that build includes your merge. Only a real build failure exits 1. Two PRs can each pass on their own and still break `main` when they land minutes apart. This happened on 2026-10-30: a new page (#313) and a rule that every page needs tags (#314) merged together, and the site stopped deploying.
 6. **If `main` is red, fix it forward right away, but look first.** Check open PRs and the last few commits: another session may already be fixing it. On 2026-10-30 two sessions sent the same fix (#318, #319), which broke the build a second time until #320 removed the duplicate.
 
+If the PR's head moves while you wait (a newer push, or a merge from `main` made on GitHub), `scripts/pr-wait.sh` follows the new commit and says so, instead of reporting the old commit's cancelled checks. `scripts/test/pr-wait.test.sh` tests both scripts with a fake `gh`; the Site workflow runs it.
+
 ## Resolving the usual conflicts
 
 - **Two PRs added items to the same list** (menu items in `site/src/layouts/Base.astro`, lines in `site/src/pages/llms.txt.js`, rows in a table): keep both. Take the other side's version of lines it changed (for example a renamed label) and add yours.

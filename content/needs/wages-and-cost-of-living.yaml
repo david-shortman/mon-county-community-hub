@@ -48,6 +48,8 @@ get_help:
     label: Answer two questions to see help you might get
   - path: /find-a-job/
     label: Find a job, and free help with a resume
+  - path: /find-a-job/#pay
+    label: If you were not paid, and the state minimum wage
   - path: /pay-for-training/
     label: Get training or school paid for
   - path: /free-tax-help/
@@ -56,5 +58,5 @@ get_help:
     label: File today for SNAP, Medicaid, heating help and WV WORKS
 site_coverage:
   level: partial
-  why: Jobs, paid training, free tax help with tax credits, and benefits each have a page, and What help might I get points to programs by need. How we're doing shows a basic household budget for the county from United For ALICE (2023) and the MIT Living Wage Calculator (2026).
-  checked: 2026-11-01
+  why: Jobs, paid training, pay rules and how to report unpaid wages, free tax help with tax credits (including the Child Tax Credit and the state's low-income exclusion), and benefits each have a page, and How we're doing shows a basic household budget. It stays partial because the help is spread over six pages with no one place to start, and What help might I get has no link from a home page door.
+  checked: 2026-11-02

@@ -24,3 +24,6 @@ get_help:
 site_coverage:
   level: great
   checked: 2026-11-01
+  before:
+    level: fine
+    checked: 2026-11-02

@@ -12,7 +12,9 @@
 //      (the slot), dates for this door (folded), and a person to talk to.
 // An "On this page" jump list sits above the picker so a reader whose need
 // is not a choice can skip the long parts (#1174). A page with its own
-// sections passes them as jump={[['#id', 'Label']]}.
+// sections passes them as jump={[['#id', 'Label']]}. Each group in "Every ... page"
+// has the id group-<topic>, so a door can list its groups in the jump list
+// (the Family door does, #1571).
 // A page can put a short block right under the lede and the "can't wait"
 // strip with slot="top" (the Family door's big life changes row, #1287).
 // A situation shows only once its page exists. Steps carry no facts of their
@@ -158,7 +160,7 @@ const online = steps.map((st) => resource(st.resource)).filter((r, i, a) => r?.c
 {inDoor.length > 0 && <h2 id="every-page">{guide ? `Every ${door.topics[data.topic]} page` : `Every ${door.name} page`}</h2>}
 {inDoor.map((t) => (
   <>
-    <h3>{t.label}</h3>
+    <h3 id={t.topic ? `group-${t.topic}` : undefined}>{t.label}</h3>
     <ul class="topic-list">{t.pages.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}</ul>
   </>
 ))}

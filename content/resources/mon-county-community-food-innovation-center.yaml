@@ -11,6 +11,7 @@ contact:
   place: "270 Mylan Park Ln, Morgantown, WV 26501"
 cost: The county says rates vary by use.
 get_in: call-first
+not_posted: [hours]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://www.monongaliacounty.gov/departments/mon_county_center/community_food_innovation_center.php
     checked: 2026-11-01

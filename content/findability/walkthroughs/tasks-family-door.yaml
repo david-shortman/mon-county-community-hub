@@ -1,0 +1,170 @@
+# Family door tasks (#1571, sprint wave 11, see #529). SIMULATED, NOT REAL RESIDENTS.
+# The seven persona tasks from tasks-personas.yaml whose tap path runs through
+# the Family and life changes door. Each has two paths to an answer: the best
+# path that existed before #1571 (the door's links, pick list or "Big life
+# change?" row) and the path through the door's new jump list ("#group-..."
+# taps an "On this page" link). answer: any, so the score keeps whichever is
+# better; before the change the jump path is missing. p17 and p18 use the
+# "Big life change?" row, which round 3 (2026-11-03-personas.yaml) missed.
+- id: p12
+  task: Where can my brother get help at home for his disability?
+  who: Person with a disability or a caregiver
+  persona: disability
+  group: disability-caregivers
+  need: transportation
+  question: q49
+  searches:
+  - disability help morgantown
+  - help at home for disability
+  answer: any
+  targets:
+  - url: /for/disability-and-caregivers/
+    marker: home
+    path:
+    - /family/
+    - /for/disability-and-caregivers/
+  - url: /for/disability-and-caregivers/
+    marker: home
+    path:
+    - /family/
+    - '#group-disability'
+    - /for/disability-and-caregivers/
+- id: p14
+  task: How do I enroll my child in Monongalia County Schools?
+  who: Parent of a school-age kid
+  persona: school-age-kid
+  group: parents-school-age
+  need: child-care
+  question: q51
+  searches:
+  - enroll monongalia county schools
+  - register child for school
+  answer: any
+  targets:
+  - url: /school-age/
+    marker: enroll|register
+    path:
+    - /family/
+    - /school-age/
+  - url: /school-age/
+    marker: enroll|register
+    path:
+    - /family/
+    - '#group-family'
+    - /school-age/
+- id: p15
+  task: I am 15. Do I need a work permit for my first job?
+  who: Teen wanting a first job or a license
+  persona: teen-first-job
+  group: teens
+  need: null
+  question: q52
+  searches:
+  - work permit 15 year old wv
+  - first job at 15
+  answer: any
+  targets:
+  - url: /teens/
+    marker: permit|certificate
+    path:
+    - /family/
+    - /teens/
+  - url: /teens/
+    marker: permit|certificate
+    path:
+    - /family/
+    - '#group-family'
+    - /teens/
+- id: p17
+  task: I just lost my job. How do I file for unemployment?
+  who: Just lost a job
+  persona: lost-job
+  group: job-seekers
+  need: wages-and-cost-of-living
+  question: q54
+  searches:
+  - file unemployment wv
+  - lost my job
+  answer: any
+  targets:
+  - url: /unemployment/
+    marker: file
+    path:
+    - /family/
+    - /life-events/lost-my-job/
+    - /unemployment/
+  - url: /unemployment/
+    marker: file
+    path:
+    - /family/
+    - '#group-work'
+    - /unemployment/
+- id: p18
+  task: I just got out of prison. Who helps with a job and an ID?
+  who: Home from jail or prison
+  persona: home-from-jail
+  group: job-seekers
+  need: wages-and-cost-of-living
+  question: q55
+  searches:
+  - jobs for felons morgantown
+  - just got out of prison id
+  answer: any
+  targets:
+  - url: /life-events/leaving-jail-or-prison/
+    marker: \bID\b|job
+    path:
+    - /family/
+    - /life-events/leaving-jail-or-prison/
+  - url: /reentry/
+    marker: job|ID
+    path:
+    - /family/
+    - '#group-work'
+    - /reentry/
+- id: p19
+  task: What license do I need to open a small business in Morgantown?
+  who: Starting a business or a trade
+  persona: starting-business
+  group: small-business
+  need: null
+  question: q09
+  searches:
+  - business license morgantown
+  - free help business plan loan
+  answer: any
+  targets:
+  - url: /start-a-business/
+    marker: license
+    path:
+    - /family/
+    - /start-a-business/
+  - url: /start-a-business/
+    marker: license
+    path:
+    - /family/
+    - '#group-work'
+    - /start-a-business/
+- id: p25
+  task: Where can I get an interpreter for a doctor visit?
+  who: Reads another language best
+  persona: other-language
+  group: new-residents
+  need: null
+  question: q60
+  searches:
+  - interpreter morgantown
+  - interpreter doctor visit
+  answer: any
+  targets:
+  - url: /help-in-your-language/
+    marker: interpret
+    path:
+    - /family/
+    - /help-in-your-language/
+  - url: /help-in-your-language/
+    marker: interpret
+    path:
+    - /family/
+    - '#group-family'
+    - /help-in-your-language/
