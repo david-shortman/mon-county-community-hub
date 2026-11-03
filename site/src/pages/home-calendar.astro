@@ -21,7 +21,7 @@ const icsHttp = new URL(`${base}/home.ics`, Astro.site).href;
 const icsWebcal = icsHttp.replace(/^https?:/, 'webcal:');
 const icsGoogle = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(icsWebcal)}`;
 ---
-<Base title="Home and yearly dates calendar for Mon County, WV" description="Yearly home dates for Monongalia County, WV, as a calendar for your phone: property tax due dates, Assessor deadlines, forest fire seasons, frost dates and upkeep tips, each with its source.">
+<Base title="Home and yearly dates calendar for Mon County, WV" description="Yearly home dates for Mon County, WV, for your phone's calendar: property tax due dates, Assessor deadlines, burning seasons, frost dates and upkeep tips, with sources.">
   <h1>Home and yearly dates in Mon County</h1>
   <p class="lede">Property tax due dates, Assessor deadlines, burning seasons, frost dates and a few upkeep tips. Each date links to the official page or law it comes from. Add them all to your phone below, so the reminders come to you.</p>
 

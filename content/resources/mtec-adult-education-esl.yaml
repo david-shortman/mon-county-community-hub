@@ -3,13 +3,15 @@ slug: mtec-adult-education-esl
 org: mtec
 topics: [work]
 who_it_is_for: Adults who want to finish a high school equivalency diploma, build reading and math skills, or learn English. It is the county's site for the state's adult education program.
-what_to_do: MTEC is at 1000 Mississippi Street, Morgantown. Call 304-291-9226, or start registration online from the state's class list. The state's adult education hotline is 800-642-2670.
+what_to_do: MTEC is at 1000 Mississippi Street, Morgantown. Call 304-291-9226, or start registration online from the state's class list. The state's adult education hotline is 800-642-2670. English classes are free and meet on weekdays from 9 a.m. to 12:30 p.m. in Room 108 of the Pierpont Center. Call to set up a time to sign up. Sign-up takes 2 to 3 hours and includes a reading test. You must be 18 or older. You can start any time of year. There is no child care, and parking is free.
 contact:
   phone: "304-291-9226"
   url: https://wvde.us/academics/adult-education/wvadulted-class-locations
   url_label: Class locations
 cost: "Free. The state says adult education services are available at no cost to adult learners. The GED test is also free if you first pass the official GED practice test in each subject at an adult education class."
 sources:
+  - url: https://mtec.mono.k12.wv.us/page/english-language-acquisition-ela/
+    checked: 2026-11-03
   - url: https://wvde.us/academics/adult-education/wvadulted-class-locations
     checked: 2026-11-01
   - url: https://wvde.us/academics/adult-education

@@ -6,6 +6,7 @@
 // says what (#660). No 2027 appeal dates until the county posts them.
 import Base from '../layouts/Base.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
+import PropertyTaxTry from '../components/PropertyTaxTry.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import { telHref } from '../lib/content.mjs';
@@ -49,6 +50,7 @@ const phones = { tax: '304-291-7244', assessor: '304-291-7222', commission: '304
   <h2 id="how">How the tax is figured</h2>
   <p>The Assessor's sheet gives this formula: market value times 60% is the <strong>assessed value</strong>. The assessed value times the levy rate is the tax. If you have the homestead exemption, subtract $20,000 from the assessed value first. The sheet lists each area's levy rate.</p>
   <SourceLine sources={pdf} about="how property tax is figured" />
+  <PropertyTaxTry />
 
   <h2 id="homestead">Homestead exemption (65 and older, or disabled)</h2>
   <p>The Assessor says that if you are 65 or older on or before June 30 following the July 1 assessment date, or permanently and totally disabled, you may file for the homestead exemption. New applicants file between July 1 and December 1 each year. People who qualify only need to apply once. You can file online or at the Assessor's office, Room 335, 243 High Street, <a href={telHref(phones.assessor)}>{phones.assessor}</a>, Monday to Friday, 8:30 a.m. to 4:30 p.m. See the full rules at the link.</p>

@@ -1,0 +1,54 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: planning-commission-2026-11-12
+body: planning-commission
+meeting: Regular meeting
+date: 2026-11-12
+time: "18:30"
+place: City Hall, City Council Chambers, 389 Spruce Street, 2nd floor, Morgantown
+watch: The agenda does not name a live stream.
+agenda_url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11122026-3924
+read: 2026-11-03
+items:
+  - number: "I"
+    title: CALL TO ORDER AND ROLL CALL
+    kind: opening
+    line: The meeting is called to order and the roll is called.
+  - number: "II"
+    title: GENERAL PUBLIC COMMENTS – concerning matters not on the agenda
+    kind: public-comment
+    line: Time for members of the public to speak to the commission about matters that are not on the agenda.
+  - number: "III"
+    title: "MATTERS OF BUSINESS:"
+    kind: minutes
+    line: A vote to approve the written record of the September 10, 2026 meeting. The agenda lists this part.
+    parts:
+      - Meeting minutes from September 10, 2026.
+  - number: "IV"
+    title: NEW BUSINESS
+    kind: other
+    line: New items. The agenda lists one, below.
+  - number: "IV.A"
+    title: Proposed Amendments to Articles 367, 1329, 1331, 1358, and 1385 of the City’s Planning and Zoning Code Establishing Requirements for Accessory Dwelling Units (ADUs) and Updating Site Plan Review Standards.
+    kind: other
+    line: Proposed changes to five articles of the city's Planning and Zoning Code, about accessory dwelling units (ADUs) and site plan review standards. The agenda gives no more detail.
+  - number: "V"
+    title: OTHER BUSINESS
+    kind: report
+    line: Updates from the commission's committees and from city staff. The agenda lists these parts.
+    parts:
+      - Committee Reports
+      - Staff Comments
+  - number: "VI"
+    title: FOR THE GOOD OF THE COMMISSION
+    kind: other
+    line: An item for the commission. The agenda gives no more detail.
+  - number: "VII"
+    title: ADJOURNMENT
+    kind: closing
+    line: The meeting ends.
+note: "If you need an accommodation, the agenda says to call 304-284-7431 or TDD 304-284-7512."
+sources:
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11122026-3924
+    checked: 2026-11-03

@@ -21,7 +21,7 @@ const fact = factsFor('growing');
 const rules = new Map(loadHomeRules(CONTENT_DIR).map((r) => [r.slug, r]));
 const frostFact = (slug) => { const r = rules.get(slug); return { slug, text: r.what_to_do, sources: r.sources, checked: oldestChecked(r.sources) }; };
 ---
-<Base title="Grow food and flowers in Morgantown and Mon County" description="Pick what you are hoping to do: grow food on a budget, sell what you grow, or start a small farm. Local steps in order for Morgantown and Monongalia County, WV, with phone numbers and sources.">
+<Base title="Grow food and flowers in Morgantown and Mon County" description="Grow food on a budget, sell what you grow, or start a small farm in Morgantown and Monongalia County, WV: local steps in order, with phone numbers and sources.">
   <h1>Grow food and flowers</h1>
   <DoorPage guide="grow">
     <h2 id="budget">Grow food on a budget</h2>
