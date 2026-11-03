@@ -32,19 +32,22 @@ function syl(w){w=w.toLowerCase().replace(/[^a-z]/g,'');if(!w)return 0;if(w.leng
 function grade(t){const s=Math.max(1,(t.match(/[.!?](\s|$)/g)||[]).length);const ws=t.match(/[A-Za-z][A-Za-z'-]*/g)||[];if(ws.length<20||ws.length/s>40)return null;const y=ws.reduce((n,w)=>n+syl(w),0);return Math.round((0.39*(ws.length/s)+11.8*(y/ws.length)-15.59)*10)/10;}
 const pathOf = (u) => { try { const x = new URL(u, BASE); return x.pathname; } catch { return u; } };
 
-async function visibleLink(page, href) {
-  return page.evaluate((href) => {
+// from: page offset in pixels where the reader is after an in-page jump (0 at the top).
+async function visibleLink(page, href, from = 0) {
+  return page.evaluate(({ href, from }) => {
     const as = [...document.querySelectorAll('a')].filter(a => a.getAttribute('href') === href);
     for (const a of as) {
       const r = a.getBoundingClientRect();
       const st = getComputedStyle(a);
       if (r.width > 0 && r.height > 0 && st.visibility !== 'hidden') {
-        return { text: a.innerText.replace(/\s+/g, ' ').trim().slice(0, 90), screen: Math.floor((r.top + scrollY) / innerHeight), inMain: !!a.closest('main') };
+        return { text: a.innerText.replace(/\s+/g, ' ').trim().slice(0, 90), screen: Math.max(0, Math.floor((r.top + scrollY - from) / innerHeight)), inMain: !!a.closest('main') };
       }
     }
     return as.length ? { hidden: true, count: as.length } : null;
-  }, href);
+  }, { href, from });
 }
+// Where an in-page jump target starts, in pixels from the top of the page.
+const anchorTop = (page, id) => page.evaluate((id) => { const el = document.getElementById(id); return el ? el.getBoundingClientRect().top + scrollY : null; }, id);
 
 async function analyze(page, url, marker) {
   const resp = await page.goto(BASE + url, { waitUntil: 'load' });
@@ -97,9 +100,21 @@ async function search(page, q) {
     const r = { id: t.id, task: t.task, targets: [], searches: [] };
     for (const tg of t.targets) {
       const steps = []; let cur = '/'; let broken = null;
+      let from = 0; // set by an in-page jump ("#id" in a path), cleared on the next page
       for (const href of tg.path) {
-        await page.goto(BASE + cur, { waitUntil: 'load' });
-        let l = await visibleLink(page, href);
+        if (href.startsWith('#')) {
+          // An in-page jump: tap the "On this page" link, then read on from its target.
+          if (!from) await page.goto(BASE + cur, { waitUntil: 'load' });
+          const l = await visibleLink(page, href, from);
+          const top = await anchorTop(page, href.slice(1));
+          steps.push({ from: cur, href, taps: 1, ...(l || { missing: true }) });
+          if (!l || l.hidden || top == null) broken = broken || `${href} not visible on ${cur}`;
+          from = top ?? from;
+          continue;
+        }
+        if (!from) await page.goto(BASE + cur, { waitUntil: 'load' });
+        let l = await visibleLink(page, href, from);
+        from = 0;
         let taps = 1;
         // Prefer the door's choice list when the plain link is hidden or far down.
         if (l && (l.hidden || l.screen > 2)) {
