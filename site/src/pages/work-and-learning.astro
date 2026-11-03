@@ -40,6 +40,8 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2>Reading, writing and English for adults</h2>
   {r('lvmpc-adult-literacy') && <ResourceCard r={r('lvmpc-adult-literacy')} sms="724-491-2007" smsLabel="Literacy Volunteers" />}
 
+  <p>Classes for fun, free online lessons with a library card, and lower college tuition at 60 and older: see <a href={`${base}/keep-learning/`}>Keep learning as an adult</a>.</p>
+
   <p>Staying healthy: see <a href={`${base}/staying-well/`}>Staying well: a simple list</a>. Need help with food or bills while you look for work? <a href="tel:211">Call 211</a>.</p>
 
   <p class="meta">Sources checked October 30, 2026. We describe these services; we do not place people in jobs or classes. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
