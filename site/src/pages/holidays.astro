@@ -32,10 +32,14 @@ const src = {
   federal: [{ url: 'https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/', checked, name: 'U.S. Office of Personnel Management' }],
   library: [{ url: 'https://events.mympls.org/event/16028720', checked: '2026-11-01', name: 'Morgantown Public Library System events calendar' }],
   notYet: [
-    { url: 'https://www.busride.org/', checked: '2026-11-01', name: 'Mountain Line' },
-    { url: 'https://www.monchd.org/newsroom', checked: '2026-11-01', name: 'Monongalia County Health Department news' },
-    { url: 'https://www.morgantownwv.gov/CivicAlerts.aspx', checked: '2026-11-01', name: 'City of Morgantown news' },
+    { url: 'https://www.monchd.org/newsroom', checked: '2026-11-02', name: 'Monongalia County Health Department news' },
+    { url: 'https://www.morgantownwv.gov/CivicAlerts.aspx', checked: '2026-11-02', name: 'City of Morgantown news' },
+    { url: 'https://www.westoverwv.org/utilities', checked: '2026-11-02', name: 'City of Westover utilities' },
+    { url: 'https://www.starcitywv.com/garbage-recycling/', checked: '2026-11-02', name: 'Town of Star City garbage and recycling' },
   ],
+  bus: [{ url: 'https://www.busride.org/days-of-operation', checked: '2026-11-02', name: 'Mountain Line days of operation' }],
+  granville: [{ url: 'https://townofgranvillewv.gov/community/', checked: '2026-11-02', name: 'Town of Granville' }],
+  srshXmas: [{ url: 'https://www.srsh.org/seasonal-programs', checked: '2026-11-02', name: "Scott's Run Settlement House seasonal programs" }],
   food: [{ url: 'https://www.unitedwaympc.org/HFTD', checked, name: 'United Way of Monongalia and Preston Counties' }],
   chMeal: [{ url: 'https://motownchristianhelp.com/programs/', checked, name: 'Christian Help programs' }],
   srsh: [{ url: 'https://www.srsh.org/seasonal-programs', checked, name: "Scott's Run Settlement House seasonal programs" }],
@@ -72,6 +76,7 @@ const src = {
     <ul>
       <li><strong>Signed up already?</strong> Toys are given out on Thursday, December 10, 2026, at the Morgantown Readiness Center (Armory), 90 Army Band Way. Toys for Tots says to go only if the campaign told you your application was approved.</li>
       <li><strong>Missed it?</strong> Call Christian Help at <a href={telHref('304-296-0221')}>304-296-0221</a> and ask what is still open. Christian Help says its toys are for children ages 0 to 18.</li>
+      <li><strong>Scott's Run Settlement House:</strong> says families who need more help at Christmas can call <a href={telHref('304-435-5098')}>304-435-5098</a> to see how it can help. The page gives no dates. <SourceLine sources={src.srshXmas} about="Scott's Run Christmas help" /></li>
       <li><strong>Other toy programs:</strong> we have not found 2026 sign-up dates for other programs in the county yet. We add them when a group posts them.</li>
     </ul>
     <SourceLine sources={src.toys} about="Toy sign-up" />
@@ -109,8 +114,15 @@ const src = {
     <p>The library's calendar lists all branches closed on Thursday, November 26 and Friday, November 27 (Thanksgiving), Thursday, December 24 and Friday, December 25 (Christmas), and Thursday, December 31 and Friday, January 1, 2027 (New Year's). These closings also show on our <a href={`${base}/calendar/`}>calendar</a>.</p>
     <SourceLine sources={src.library} about="Library holiday closings" />
 
+    <h3>Mountain Line buses</h3>
+    <p>Mountain Line says all of its services except the Grey Line are closed on Thanksgiving (November 26), Christmas Day (December 25) and New Year's Day (January 1, 2027). The Grey Line to Pittsburgh runs every day of the year.</p>
+    <SourceLine sources={src.bus} about="Mountain Line holiday service" />
+
+    <h3>Trash pickup</h3>
+    <p>In Granville, the town says trash pickup is one day late when there is a holiday. <SourceLine sources={src.granville} about="Granville trash on holidays" /></p>
+
     <h3>Not posted yet</h3>
-    <p>The health department, Mountain Line buses and the City of Morgantown had not posted 2026 holiday hours or trash changes when we checked on November 1. They usually post a notice shortly before each holiday, so call first.</p>
+    <p>The health department and the City of Morgantown had not posted 2026 holiday hours or trash changes when we checked on November 2. The health department posted a closing notice a few days before Labor Day, so check back near each holiday. Westover's and Star City's trash pages say nothing about holidays. Call first.</p>
     <SourceLine sources={src.notYet} about="Holiday hours not posted yet" />
   </section>
 
