@@ -1,0 +1,199 @@
+---
+// Plan a trip by bus (#1656), at the top of /bus-routes/. Pick where you start,
+// where you are going and the day; the answer says which routes, where to get
+// on, where to change and each route's first and last run that day, and the
+// map draws the trip. Logic and drawing: src/lib/bus-trips.mjs.
+// Still version (no script): an example trip with its map, and a list of every
+// place and the routes that stop there. The map is aria-hidden; the words
+// carry everything.
+import { readFileSync } from 'node:fs';
+import { parse } from 'yaml';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { routesFrom } from '../lib/bus-network.mjs';
+import { routesFromRecord } from '../lib/bus-day.mjs';
+import { joinRoutes, plan, answerHtml, mapModel, mapSvg, stopPlace } from '../lib/bus-trips.mjs';
+const d = pdfPage('mountain-line-routes');
+const routes = joinRoutes(routesFrom(d), routesFromRecord(d));
+const placesFile = parse(readFileSync(new URL('../../../content/bus-map/places.yaml', import.meta.url), 'utf8'));
+const places = placesFile.places;
+const base = JSON.parse(readFileSync(new URL('../../../content/bus-map/base.json', import.meta.url), 'utf8'));
+const m = mapModel(routes, places, base);
+const EX = { from: 'sabraton', to: 'ruby', day: 'm' };
+const P = Object.fromEntries(places.map((p) => [p.id, p]));
+const ex = plan(routes, places, EX.from, EX.to, EX.day);
+const GROUPS = [['hub', 'Bus terminal and main stops'], ['place', 'Hospitals, shopping, parks and the airport'], ['town', 'Towns'], ['area', 'Neighborhoods and communities']];
+const byKind = (k) => places.filter((p) => p.kind === k).sort((a, b) => (k === 'hub' ? 0 : a.name.localeCompare(b.name)));
+const sp = stopPlace(places);
+const servedBy = (p) => routes.filter((r) => r.stops.some((s) => p.stops.includes(s)));
+const client = {
+  routes: routes.map(({ id, name, trip, stops, runs, early }) => ({ id, name, trip, stops, runs, early })),
+  places: places.map(({ id, name, short, kind, stops, label }) => ({ id, name, short, kind, stops, label })),
+  at: m.at,
+  H: m.H,
+};
+const checked = d.sources?.[0]?.checked ?? '';
+---
+<section class="tp" id="plan" aria-labelledby="tp-h">
+  <h2 id="tp-h">Plan a trip by bus</h2>
+  <p>Pick where you start and where you are going. You will see which bus to take, where to change, and when it runs that day.</p>
+  <form class="tp-form" hidden>
+    <div class="tp-field">
+      <label for="tp-from">From</label>
+      <select id="tp-from" name="from">
+        {GROUPS.map(([k, label]) => <optgroup label={label}>{byKind(k).map((p) => <option value={p.id} selected={p.id === EX.from}>{p.name}</option>)}</optgroup>)}
+      </select>
+    </div>
+    <button type="button" class="tp-swap" aria-label="Swap From and To"><span aria-hidden="true">⇅</span> Swap</button>
+    <div class="tp-field">
+      <label for="tp-to">To</label>
+      <select id="tp-to" name="to">
+        {GROUPS.map(([k, label]) => <optgroup label={label}>{byKind(k).map((p) => <option value={p.id} selected={p.id === EX.to}>{p.name}</option>)}</optgroup>)}
+      </select>
+    </div>
+    <div class="tp-field">
+      <label for="tp-day">Day</label>
+      <select id="tp-day" name="day">
+        <option value="m" selected>Monday to Wednesday</option>
+        <option value="r">Thursday or Friday</option>
+        <option value="s">Saturday</option>
+        <option value="u">Sunday</option>
+      </select>
+    </div>
+  </form>
+
+  <div class="tp-grid">
+    <figure class="tp-fig">
+      <Fragment set:html={mapSvg(m, { trip: ex[0], from: EX.from, to: EX.to })} />
+      <figcaption>
+        <span class="tp-key"><span class="tp-sw tp-sw-1" aria-hidden="true"></span>First bus <span class="tp-sw tp-sw-2" aria-hidden="true"></span>Next bus <span class="tp-sw tp-sw-all" aria-hidden="true"></span>Other routes</span>
+        A simple map, not to scale: directions are true, but the middle of town is drawn bigger so it fits. Lines join places in each route's stop order, not along real streets.
+        <span class="tp-credit">Map: U.S. Census Bureau TIGER/Line 2024 and Census Geocoder, simplified. Routes and hours: Mountain Line route pages, read {checked}.</span>
+      </figcaption>
+    </figure>
+    <div class="tp-card">
+      <p class="tp-kicker" data-ex>Example trip</p>
+      <div class="tp-answer" aria-live="polite"><Fragment set:html={answerHtml(ex, P[EX.from], P[EX.to], EX.day)} /></div>
+      <p class="tp-care">For the time the bus reaches your stop, use Mountain Line's <a href="https://www.busride.org/google-trip-planner">trip planner</a> or call <a href="tel:3042917433">304-291-RIDE (304-291-7433)</a>. Plans use each route's main stops only, so a bus may also stop closer to you.</p>
+    </div>
+  </div>
+
+  <details class="tp-list">
+    <summary>Every place on the map and the routes that stop there</summary>
+    <table>
+      <thead><tr><th scope="col">Place</th><th scope="col">Routes and stops</th></tr></thead>
+      <tbody>{places.slice().sort((a, b) => a.name.localeCompare(b.name)).map((p) => (
+        <tr><th scope="row">{p.name}</th><td>{servedBy(p).map((r) => `${r.name.replace(/^Route /, '')} (${r.stops.filter((s) => p.stops.includes(s)).join(', ')})`).join('; ')}</td></tr>
+      ))}</tbody>
+    </table>
+    <p class="meta">Places are placed from Census data and official addresses, listed with their sources in <a href="https://github.com/david-shortman/mon-county-community-hub/blob/main/content/bus-map/places.yaml">places.yaml</a>. Some stops are not on the map yet because no official page we could read says where they are.</p>
+  </details>
+  <script type="application/json" id="tp-data" set:html={JSON.stringify(client)} />
+</section>
+
+<script>
+  import { plan, answerHtml, tripSvg, tripIds, mapLabels, stopPlace, DAY_OF_WEEK } from '../lib/bus-trips.mjs';
+  const sec = document.getElementById('plan');
+  const data = JSON.parse(document.getElementById('tp-data')?.textContent ?? '{}');
+  const form = sec?.querySelector<HTMLFormElement>('.tp-form');
+  const from = sec?.querySelector<HTMLSelectElement>('#tp-from');
+  const to = sec?.querySelector<HTMLSelectElement>('#tp-to');
+  const day = sec?.querySelector<HTMLSelectElement>('#tp-day');
+  const out = sec?.querySelector('.tp-answer');
+  const svg = sec?.querySelector('svg.tm');
+  if (sec && form && from && to && day && out && svg && data.places) {
+    const m = { at: data.at, sp: stopPlace(data.places), places: data.places, H: data.H };
+    const P = Object.fromEntries(data.places.map((p: { id: string }) => [p.id, p]));
+    const run = () => {
+      const plans = plan(data.routes, data.places, from.value, to.value, day.value);
+      out.innerHTML = answerHtml(plans, P[from.value], P[to.value], day.value);
+      const best = plans[0];
+      const trip = svg.querySelector('.tm-trip');
+      if (trip) trip.innerHTML = best ? tripSvg(m, best) : '';
+      const marks = svg.querySelector('.tm-marks');
+      if (marks) marks.innerHTML = best ? tripSvg(m, best, 'marks') : '';
+      const labels = svg.querySelector('.tm-labels');
+      if (labels) labels.innerHTML = mapLabels(m, best ? tripIds(m, best, from.value, to.value) : [from.value, to.value]);
+      const used = new Set(best ? best.legs.map((l: { r: { id: string } }) => l.r.id) : []);
+      svg.querySelectorAll('.tm-ln').forEach((l) => l.classList.toggle('is-used', used.has(l.getAttribute('data-r'))));
+      const change = new Set(best ? best.legs.slice(1).map((l: { on: string }) => m.sp.get(l.on)) : []);
+      svg.querySelectorAll<SVGGElement>('.tm-p').forEach((g) => {
+        const id = g.dataset.p ?? '';
+        g.classList.toggle('is-end', id === from.value || id === to.value);
+        g.classList.toggle('is-change', change.has(id));
+      });
+    };
+    form.hidden = false;
+    sec.querySelector('[data-ex]')?.remove();
+    day.value = DAY_OF_WEEK[new Date().getDay()];
+    form.addEventListener('change', run);
+    sec.querySelector('.tp-swap')?.addEventListener('click', () => { const a = from.value; from.value = to.value; to.value = a; run(); });
+    run();
+  }
+</script>
+
+<style is:global>
+  /* ===== Plan a trip by bus (#1656). Press tokens only; scoped to #plan. ===== */
+  #plan .tp-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s3); margin: 0 0 var(--s4); padding: var(--s3); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; }
+  #plan .tp-form[hidden] { display: none; }
+  #plan .tp-field { display: grid; gap: var(--s1); }
+  #plan .tp-field label { font-weight: 700; }
+  #plan .tp-form select { min-height: 44px; font: inherit; width: 100%; max-width: 100%; }
+  #plan .tp-swap { justify-self: start; min-height: 44px; padding: 0 var(--s3); font: inherit; font-weight: 700; color: var(--accent); background: var(--bg); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
+  @media (min-width: 44rem) {
+    #plan .tp-form { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; }
+    #plan .tp-form .tp-field:last-child { grid-column: 1 / -1; max-width: 20rem; }
+    #plan .tp-swap { justify-self: center; }
+  }
+  #plan .tp-card { padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 2px; margin: 0 0 var(--s4); }
+  #plan .tp-kicker, #plan .tp-for { margin: 0 0 var(--s1); font-family: var(--kicker); font-size: 0.85rem; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
+  #plan .tp-head { margin: 0 0 var(--s3); }
+  #plan .tp-steps { margin: 0 0 var(--s3); padding-left: 0; list-style: none; counter-reset: leg; }
+  #plan .tp-steps li { position: relative; margin: 0 0 var(--s3); padding-left: 2.25rem; counter-increment: leg; }
+  #plan .tp-steps li::before { content: counter(leg); position: absolute; left: 0; top: 0; width: 1.6rem; height: 1.6rem; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 0.9rem; color: var(--card); background: var(--accent); }
+  #plan .tp-steps li:nth-child(2)::before { background: var(--rust); }
+  #plan .tp-steps li:nth-child(3)::before { background: var(--water); }
+  #plan .tp-when { display: block; color: var(--muted); font-size: 0.95rem; margin-top: var(--s1); }
+  #plan .tp-tip, #plan .tp-none { padding: var(--s2) var(--s3); background: var(--accent-bg); border-radius: 2px; }
+  #plan .tp-more summary, #plan .tp-list summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: var(--accent); font-weight: 700; }
+  #plan .tp-more h4 { margin: var(--s3) 0 var(--s2); }
+  #plan .tp-care { font-size: 0.95rem; color: var(--muted); margin: 0; }
+  #plan .tp-fig { margin: 0 0 var(--s4); }
+  #plan .tp-fig figcaption { font-size: 0.9rem; color: var(--muted); margin-top: var(--s2); }
+  #plan .tp-key { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); margin-bottom: var(--s1); color: var(--fg); font-weight: 600; }
+  #plan .tp-sw { display: inline-block; width: 1.5rem; height: 0.35rem; border-radius: 2px; background: var(--accent); }
+  #plan .tp-sw-2 { background: var(--rust); }
+  #plan .tp-sw-all { background: var(--line); }
+  #plan .tp-credit { display: block; margin-top: var(--s1); font-size: 0.85rem; }
+  #plan .tp-list table { width: 100%; table-layout: fixed; border-collapse: collapse; overflow-wrap: anywhere; }
+  #plan .tp-list thead th:first-child { width: 35%; }
+  #plan .tp-list :is(th, td) { text-align: left; vertical-align: top; padding: var(--s2) var(--s2) var(--s2) 0; border-top: 1px solid var(--line); }
+
+  /* The map */
+  #plan .tm { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 2px; }
+  #plan .tm-bg { fill: var(--card); }
+  #plan .tm-river { fill: var(--water); opacity: 0.35; stroke: none; }
+  #plan .tm-road { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; opacity: 0.55; }
+  #plan .tm-road-l { font: 700 9px var(--kicker); fill: var(--muted); paint-order: stroke; stroke: var(--card); stroke-width: 3px; }
+  #plan .tm-ln { fill: none; stroke: var(--line); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  #plan .tm-leg { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+  #plan .tm-leg-1 { stroke: var(--accent); }
+  #plan .tm-leg-2 { stroke: var(--rust); }
+  #plan .tm-leg-3 { stroke: var(--water); }
+  #plan .tm-num circle { stroke: var(--card); stroke-width: 2; }
+  #plan .tm-ln.is-used { stroke: var(--muted); opacity: 0.5; }
+  #plan .tm-num-1 circle { fill: var(--accent); }
+  #plan .tm-num-2 circle { fill: var(--rust); }
+  #plan .tm-num-3 circle { fill: var(--water); }
+  #plan .tm-num text { font: 800 10px var(--kicker); fill: var(--card); }
+  #plan .tm-p circle { fill: var(--card); stroke: var(--fg); stroke-width: 1.4; }
+  #plan .tm-p.k-hub circle { fill: var(--fg); }
+  #plan .tm-l, #plan .tm-ol { font: 800 10px var(--kicker); fill: var(--fg); paint-order: stroke; stroke: var(--card); stroke-width: 3px; stroke-linejoin: round; }
+  /* Other places are named only where there is room, in a quieter ink. */
+  #plan .tm-ol { font-weight: 600; font-size: 9px; fill: var(--muted); }
+  #plan .tm-p.is-end circle { r: 5.5; fill: var(--fg); stroke: var(--card); stroke-width: 2; }
+  #plan .tm-p.is-change circle { r: 5.5; fill: var(--card); stroke: var(--rust); stroke-width: 2.5; }
+  @media (forced-colors: active) {
+    #plan .tm-leg, #plan .tm-ln { stroke: CanvasText; }
+    #plan .tm-num circle, #plan .tp-sw { background: CanvasText; fill: CanvasText; }
+  }
+</style>

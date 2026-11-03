@@ -1,169 +1,102 @@
 ---
-// How the routes fit together (#1445, part of #1440): a diagram of the
-// Mountain Line network on /bus-routes/, built from
-// content/pdf-pages/mountain-line-routes.yaml by src/lib/bus-network.mjs.
-// Every count in the words is worked out from that file.
-// How it behaves:
-// - Still version (no script, reduced motion, motion turned off): four steps,
-//   each with its own still diagram, then the shared stops as a table and every
-//   route's "ride it" line as text.
-// - With script: "Ride one route" gets a picker that marks the route on the
-//   diagram. With motion on, a bus moves stop to stop along it, and the steps
-//   share one diagram that changes as you scroll (shared kit, #1441).
-// - Diagrams are aria-hidden; the words carry the meaning. Never promises a
-//   connection: a shared stop does not mean buses wait for each other.
+// How the routes fit together (#1445, redone in #1656): where the Mountain Line
+// routes meet, on /bus-routes/. Built from
+// content/pdf-pages/mountain-line-routes.yaml by src/lib/bus-network.mjs, and
+// every count in the words is worked out from that file.
+// The first version was a network drawing with a scroll story. With 20 routes
+// its lines crossed everywhere on a phone, so this is a plain table instead:
+// one row per route, one column per busy stop, a dot where the route stops.
+// It reads the same with no script, no motion and a screen reader. Never
+// promises a connection: a shared stop does not mean buses wait.
 import { pdfPage } from '../lib/pdf-pages.mjs';
-import { routesFrom, diagram, facts, rideText, routeId, path } from '../lib/bus-network.mjs';
-import MotionSwitch from './MotionSwitch.astro';
+import { routesFrom, grid, sharedStops, rideText } from '../lib/bus-network.mjs';
 const rec = pdfPage('mountain-line-routes');
 const routes = routesFrom(rec);
-const f = facts(routes);
-const example = routes.find((r) => /Purple/.test(r.name)) ?? routes[0];
+const { cols, groups } = grid(routes);
+const shared = sharedStops(routes);
+const SHORT = { 'Pifer Terminal': 'Pifer', "Colasante's Shelter": "Colasante's", 'Public Safety Building': 'Public Safety' };
+const label = (s) => SHORT[s] ?? s;
 const short = (n) => n.replace(/^Route \d+ /, '');
+const rowName = (n) => n.replace(/^Route /, '');
 const list = (xs) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}` : xs[0] ?? '');
-const piferRoutes = f.shared.find(([s]) => s === 'Pifer Terminal')?.[1] ?? [];
-const steps = [
-  { s: '1', title: 'Many routes start at Pifer', text: [`${f.pifer} of the ${f.n} bus routes stop at Pifer Terminal in Westover: ${list(piferRoutes.map(short))}.`] },
-  { s: '2', title: 'Where routes share stops', text: [`Some stops are on several routes. ${f.downtown === f.towers ? `Downtown and Towers are each on ${f.downtown} routes` : `Downtown is on ${f.downtown} routes and Towers on ${f.towers}`}, and the Mountainlair is on ${f.lair}. The bigger the dot, the more routes stop there; the filled dots are on 5 or more. A shared stop is a place you could change buses, but buses do not wait for each other.`] },
-  { s: '3', title: 'Routes that start somewhere else', text: [`${f.noPifer.length} routes never stop at Pifer: ${list(f.noPifer.map((r) => short(r.name)))}. They meet the rest at stops like Towers, the Mountainlair and Westover Terminal.`] },
-  { s: '4', title: 'Ride one route', text: [rideText(routes, example)], pick: true },
-];
-const N = steps.length;
-const pts = Object.fromEntries(routes.map((r) => [routeId(r), path(r)]));
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+const title = (g) => (g.hub ? `Through ${g.hub}${g.not.length ? `, not ${list(g.not.map(label))}` : ''}` : 'Other routes');
+// Takeaways: the first two groups and what is left.
+const [g1, g2] = groups;
+const also1 = g1 && cols[1] ? g1.rows.filter((row) => row.on[1]).length : 0;
+const rest = groups.filter((g) => g !== g1 && g !== g2).flatMap((g) => g.rows);
+const take = [
+  g1 && `${g1.rows.length} of the ${routes.length} routes stop at ${g1.hub}${g1.hub === 'Pifer Terminal' ? ' in Westover' : ''}. ${also1 ? `${also1} of them also stop at ${cols[1]}.` : ''}`,
+  g2 && `${shared.find(([s]) => s === g2.hub)?.[1].length ?? 0} routes stop at ${g2.hub}. For ${plural(g2.rows.length, 'route', 'routes')} that never reach ${list(g2.not.map(label))}, ${g2.hub} is the main place to meet the rest.`,
+  rest.length && `The other ${plural(rest.length, 'route', 'routes')} share only a few stops with the rest. Those stops are listed under each one.`,
+].filter(Boolean);
 ---
-<section class="net-x" id="net-explainer" aria-labelledby="net-h" data-pts={JSON.stringify(pts)}>
+<section class="net-x" id="net-explainer" aria-labelledby="net-h">
   <h2 id="net-h">How the routes fit together</h2>
-  <p>The bus routes connect at a few busy stops. Here is the network as a diagram, built from Mountain Line's route pages.</p>
-  <MotionSwitch skip="#net-sum" skipText="Skip to the list of shared stops" />
-  <p class="net-key"><strong>About the drawing:</strong> a diagram, not a map, and not to scale. It shows only stops on two or more routes. RideMon vans have no fixed route, so they are not on it.</p>
-  <div class="net-scrolly">
-    <figure class="net-stage" aria-hidden="true"><Fragment set:html={diagram(routes, { step: '1' })} /></figure>
-    <ol class="net-steps" aria-label="The bus network, step by step">
-      {steps.map((st, i) => (
-        <li data-s={st.s}>
-          <h3>Step {i + 1} of {N}. {st.title}</h3>
-          <div class="net-snap"><Fragment set:html={diagram(routes, { step: st.s, pick: st.pick ? routeId(example) : '' })} /></div>
-          {st.pick && (
-            <div class="net-pick" hidden>
-              <label for="net-route">Pick a route</label>
-              <select id="net-route">
-                {routes.map((r) => <option value={routeId(r)} selected={r === example} data-text={rideText(routes, r)}>{r.name}</option>)}
-              </select>
-            </div>
-          )}
-          {st.text.map((t) => <p class={st.pick ? 'net-ride' : undefined} aria-live={st.pick ? 'polite' : undefined}>{t}</p>)}
-        </li>
+  <p>Most routes meet at a few busy stops, where you could get off one bus and onto another. Find your route to see where it meets the others.</p>
+  <ul class="net-take">{take.map((t) => <li>{t}</li>)}</ul>
+  <div class="net-wrap" role="region" aria-labelledby="net-cap" tabindex="0">
+    <table class="net-grid">
+      <caption id="net-cap">Which routes stop at the {cols.length} busiest stops</caption>
+      <thead>
+        <tr><th scope="col" class="net-rh">Route</th>{cols.map((c) => <th scope="col" class="net-ch"><span>{label(c)}</span></th>)}</tr>
+      </thead>
+      {groups.map((g) => (
+        <tbody>
+          <tr class="net-g"><th scope="colgroup" colspan={cols.length + 1}>{title(g)} <span class="net-n">({plural(g.rows.length, 'route', 'routes')})</span></th></tr>
+          {g.rows.map((row) => (
+            <tr>
+              <th scope="row">{rowName(row.r.name)}{!g.hub && <span class="net-also">{row.also.length ? `Also meets others at ${list(row.also)}` : 'Shares no stops with other routes'}</span>}</th>
+              {row.on.map((on, i) => (
+                <td class={cols[i] === g.hub ? 'net-hub' : undefined}>{on ? <><span class="net-dot" aria-hidden="true"></span><span class="sr-only">Stops here</span></> : <span class="sr-only">No</span>}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
       ))}
-    </ol>
+    </table>
   </div>
-  <div id="net-sum" tabindex="-1">
-    <h3>Stops on more than one route</h3>
+  <p class="net-key">A dot means the route stops there. Busiest stops are those on {cols.length ? shared.find(([s]) => s === cols[cols.length - 1])?.[1].length : 0} or more routes. RideMon vans have no fixed route, so they are not listed. A shared stop is a place you could change buses, but buses do not wait for each other.</p>
+  <details class="net-all">
+    <summary>All {shared.length} stops on more than one route</summary>
     <table class="net-table">
       <thead><tr><th scope="col">Stop</th><th scope="col">Routes</th></tr></thead>
-      <tbody>{f.shared.map(([s, rs]) => <tr><th scope="row">{s}</th><td>{rs.length}: {rs.map(short).join(', ')}</td></tr>)}</tbody>
+      <tbody>{shared.map(([s, rs]) => <tr><th scope="row">{s}</th><td>{rs.length}: {rs.map(short).join(', ')}</td></tr>)}</tbody>
     </table>
-    <details class="net-all">
-      <summary>Every route: its stops and where it meets other routes</summary>
-      <ul>{routes.map((r) => <li>{rideText(routes, r)}</li>)}</ul>
-    </details>
-    <p class="meta">From each route's "Stops along the way" on busride.org, read {rec.sources?.[0]?.checked ?? ''}. A few stop names are spelled more than one way there; we joined only clear spelling differences (like "Public Safety Bldg." and "Public Safety Building").</p>
-  </div>
+  </details>
+  <details class="net-all">
+    <summary>Every route: its stops and where it meets other routes</summary>
+    <ul>{routes.map((r) => <li>{rideText(routes, r)}</li>)}</ul>
+  </details>
+  <p class="meta">From each route's "Stops along the way" on busride.org, read {rec.sources?.[0]?.checked ?? ''}. Those lists name the main stops, not every stop. A few stop names are spelled more than one way there; we joined only clear spelling differences (like "Public Safety Bldg." and "Public Safety Building").</p>
 </section>
 
-<script>
-  import { watchSteps, motion } from '../lib/motion-client.mjs';
-  const sec = document.getElementById('net-explainer');
-  const stage = sec?.querySelector('.net-stage svg');
-  const steps = sec ? Array.from(sec.querySelectorAll<HTMLElement>('.net-steps > li')) : [];
-  const pick = sec?.querySelector<HTMLDivElement>('.net-pick');
-  const sel = sec?.querySelector<HTMLSelectElement>('#net-route');
-  const pts: Record<string, number[][]> = JSON.parse(sec?.dataset.pts ?? '{}');
-  let timer = 0;
-  const ride = (svg: Element | null | undefined) => {
-    if (!svg || !sel) return;
-    const id = sel.value;
-    svg.querySelectorAll('.ln').forEach((l) => l.classList.toggle('ln-pick', l.getAttribute('data-r') === id));
-    const bus = svg.querySelector<SVGGElement>('.bus');
-    const p = pts[id] ?? [];
-    clearTimeout(timer);
-    if (!bus || !p.length) return;
-    const at = (i: number) => { bus.style.transform = `translate(${p[i][0]}px, ${p[i][1]}px)`; };
-    bus.style.transition = 'none';
-    at(0);
-    if (!motion().allowed()) return;
-    let i = 0;
-    const next = () => { i += 1; if (i >= p.length) return; bus.style.transition = 'transform 0.6s ease'; at(i); timer = window.setTimeout(next, 900); };
-    timer = window.setTimeout(next, 400);
-  };
-  if (pick && sel) {
-    pick.hidden = false;
-    const say = sec?.querySelector('.net-ride');
-    sel.addEventListener('change', () => {
-      if (say) say.textContent = sel.selectedOptions[0]?.dataset.text ?? '';
-      ride(stage?.getAttribute('data-s') === '4' ? stage : null);
-      ride(sec?.querySelector('.net-snap .net[data-s="4"]'));
-    });
-  }
-  watchSteps(sec, steps, (i) => {
-    stage?.setAttribute('data-s', steps[i].dataset.s ?? '1');
-    if (steps[i].dataset.s === '4') ride(stage); else clearTimeout(timer);
-  });
-</script>
-
 <style is:global>
-  /* ===== How the routes fit together (#1445). Press tokens only; scoped to #net-explainer. ===== */
+  /* ===== How the routes fit together (#1445, #1656). Press tokens only; scoped to #net-explainer. ===== */
+  #net-explainer .net-take { margin: 0 0 var(--s5); }
+  #net-explainer .net-take li { margin-bottom: var(--s2); }
+  #net-explainer .net-wrap { overflow-x: auto; margin: 0 0 var(--s3); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; }
+  #net-explainer .net-wrap:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  #net-explainer .net-grid { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  #net-explainer .net-grid caption { text-align: left; font-weight: 700; padding: var(--s3) var(--s3) var(--s2); }
+  #net-explainer .net-grid :is(th, td) { padding: var(--s1) var(--s1); border-top: 1px solid var(--line); }
+  #net-explainer .net-grid thead th { border-top: 0; vertical-align: bottom; font-size: 0.85rem; color: var(--muted); }
+  #net-explainer .net-grid .net-rh { text-align: left; padding-left: var(--s3); }
+  /* Stop names stand on end so six columns fit a phone. */
+  #net-explainer .net-grid .net-ch { width: 2.25rem; padding-bottom: var(--s2); }
+  #net-explainer .net-grid .net-ch span { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; display: inline-block; font-weight: 700; color: var(--fg); }
+  #net-explainer .net-grid tbody th[scope="row"] { text-align: left; font-weight: 600; padding-left: var(--s3); line-height: 1.3; }
+  #net-explainer .net-grid td { text-align: center; vertical-align: middle; height: 2.25rem; }
+  #net-explainer .net-grid .net-g th { text-align: left; padding: var(--s3) var(--s3) var(--s1); border-top: 2px solid var(--fg); font-family: var(--kicker); font-weight: 800; font-size: 0.9rem; }
+  #net-explainer .net-grid .net-n { font-weight: 400; color: var(--muted); }
+  #net-explainer .net-grid td.net-hub { background: var(--accent-bg); }
+  #net-explainer .net-dot { display: inline-block; width: 0.9rem; height: 0.9rem; border-radius: 50%; background: var(--accent); vertical-align: middle; forced-color-adjust: none; }
+  @media (forced-colors: active) { #net-explainer .net-dot { background: CanvasText; } }
+  #net-explainer .net-also { display: block; font-weight: 400; font-size: 0.85rem; color: var(--muted); }
   #net-explainer .net-key { font-size: 0.95rem; color: var(--muted); }
-  #net-explainer .net-steps { list-style: none; margin: var(--s5) 0; padding: 0; }
-  #net-explainer .net-steps > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
-  #net-explainer .net-steps h3 { margin: 0 0 var(--s2); }
-  #net-explainer .net-steps p { margin: 0 0 var(--s2); }
-  #net-explainer .net-snap { margin: var(--s2) 0 var(--s3); padding: var(--s2); background: var(--bg); border-radius: 2px; }
-  #net-explainer .net-pick { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); margin: 0 0 var(--s3); }
-  #net-explainer .net-pick select { min-height: 44px; font: inherit; max-width: 100%; }
   #net-explainer .net-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 1rem; overflow-wrap: anywhere; }
   #net-explainer .net-table thead th:first-child { width: 40%; }
   #net-explainer .net-table :is(th, td) { text-align: left; vertical-align: top; padding: var(--s2) var(--s2) var(--s2) 0; border-top: 1px solid var(--line); }
   #net-explainer .net-all { margin: var(--s4) 0; }
   #net-explainer .net-all summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: var(--accent); font-weight: 700; }
-
-  /* Diagram parts */
-  #net-explainer .net { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; overflow: visible; }
-  #net-explainer .net .ln { fill: none; stroke: var(--line); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
-  #net-explainer .net .stop circle { fill: var(--card); stroke: var(--fg); stroke-width: 2; }
-  #net-explainer .net .lbl { font: 800 12.5px var(--kicker); fill: var(--fg); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
-  #net-explainer .net .bus { opacity: 0; }
-  #net-explainer .net .bus rect { fill: var(--accent); stroke: var(--card); stroke-width: 1.5; }
-  /* Step 1: the routes through Pifer. Step 3: the others. Step 4: one route. */
-  #net-explainer .net[data-s="1"] .ln-p,
-  #net-explainer .net[data-s="3"] .ln-o { stroke: var(--water); }
-  #net-explainer .net[data-s="1"] .hub circle { fill: var(--water); }
-  #net-explainer .net[data-s="2"] .stop.big circle { fill: var(--accent); }
-  #net-explainer .net[data-s="4"] .ln-pick { stroke: var(--accent); stroke-width: 5; }
-  #net-explainer .net[data-s="4"] .bus { opacity: 1; }
-
-  /* Live: one diagram held in view, changing with the steps (kit adds .is-live). */
-  #net-explainer .net-stage { display: none; margin: 0; }
-  #net-explainer.is-live .net-snap { display: none; }
-  #net-explainer#net-explainer.is-live .net-stage { display: block; }
-  #net-explainer.is-live .net-steps > li { margin-bottom: calc(3.5 * var(--s8)); }
-  #net-explainer.is-live .net-steps > li:last-child { margin-bottom: var(--s7); }
-  #net-explainer.is-live .net-steps > li.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-  @media (prefers-reduced-motion: no-preference) {
-    #net-explainer.is-live .net-stage :is(.ln, .stop circle) { transition: opacity 0.4s ease; }
-  }
-  @media (min-width: 44rem) {
-    #net-explainer.is-live .net-scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
-    #net-explainer#net-explainer.is-live .net-stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--s4)); margin-top: var(--s5); padding: var(--s3); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; }
-  }
-  @media (max-width: 43.99rem) and (min-height: 36rem) {
-    #net-explainer#net-explainer.is-live .net-stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 calc(-1 * var(--s2)) var(--s4); padding: var(--s2); background: var(--card); border-bottom: 2px solid var(--fg); }
-    /* 300px: about the height of the held diagram on a phone. */
-    #net-explainer.is-live .net-steps > li { scroll-margin-top: 300px; }
-    html:has(#net-explainer.is-live) { scroll-padding-top: 300px; }
-  }
-  @media (max-width: 43.99rem) and (max-height: 35.99rem) {
-    #net-explainer.is-live .net-snap { display: block; }
-    #net-explainer#net-explainer.is-live .net-stage { display: none; }
-    #net-explainer.is-live .net-steps > li { margin-bottom: var(--s4); }
-  }
 </style>

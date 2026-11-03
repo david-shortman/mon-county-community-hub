@@ -10,6 +10,7 @@ import Base from '../layouts/Base.astro';
 import FromPdf from '../components/FromPdf.astro';
 import DayOnTheBuses from '../components/DayOnTheBuses.astro';
 import BusNetwork from '../components/BusNetwork.astro';
+import TripPlanner from '../components/TripPlanner.astro';
 import { pdfPage } from '../lib/pdf-pages.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "moving", label: "Every bus route and when it runs", summary: "All Mountain Line routes: where each one goes, the days it runs, its first and last run, and its schedule PDF" };
@@ -23,11 +24,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <nav aria-label="On this page">
     <ul>
+      <li><a href="#tp-h">Plan a trip by bus</a></li>
       <li><a href="#when">When the buses run</a></li>
       <li><a href="#net-h">How the routes fit together</a></li>
       {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
     </ul>
   </nav>
+
+  <TripPlanner />
 
   <section aria-labelledby="when">
     <h2 id="when">When the buses run</h2>
