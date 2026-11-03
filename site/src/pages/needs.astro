@@ -24,7 +24,7 @@ const checkedDates = needs.flatMap((n) => [n.affected?.checked, ...(n.evidence ?
 const oldest = checkedDates[0];
 const changed = needs.filter((n) => n.site_coverage?.before && n.site_coverage.before.level !== n.site_coverage.level);
 ---
-<Base title="What people in Mon County need most: a ranked, sourced list" description="The problems people in Monongalia County, WV face most, ranked from public data and local surveys: food, health care costs, housing, utility bills, mental health and more. Each one shows how many people it affects, its sources, and the local groups working on it.">
+<Base title="What people in Mon County need most: a ranked, sourced list" description="The problems people in Mon County, WV face most, ranked from public data and local surveys: how many people each affects, sources, and local groups working on it.">
   <h1>What people here need most</h1>
   <p class="lede">A ranked list of the hardest problems people in Mon County face. It is built from public numbers and local surveys. Each one says how many people it affects and where the numbers come from. It also says which local groups already work on it, and where on this site to get help.</p>
   {changed.length > 0 && (
