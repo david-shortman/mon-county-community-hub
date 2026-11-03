@@ -9,7 +9,7 @@ run_by:
   text: Morgantown Public Library System
 story: Drop-in time to try the library's makerspace equipment, such as 3D pens, a button maker, a sewing machine and a laser cutter. For all ages.
 regular:
-  - Monday evenings, 5 p.m. to 7 p.m. See the library calendar for dates.
+  - Some Monday evenings, 5 p.m. to 7 p.m. See the library calendar for dates.
 interests: [crafts, learning, families]
 tags: [come-alone, family-friendly]
 contact:
@@ -17,11 +17,13 @@ contact:
   phone: "304-291-7425"
   place: Morgantown Public Library, Meeting Room A, 373 Spruce Street, Morgantown, WV 26505
 status: active
-last_activity_seen: 2026-10-30
+last_activity_seen: 2026-11-02
 notes:
-  - Next listed dates are Monday, November 2, 2026 and Monday, January 4, 2027.
+  - After November 2, the next date on the library calendar is Monday, January 4, 2027.
 sources:
   - url: https://events.mympls.org/event/17364567
-    checked: 2026-11-01
+    checked: 2026-11-02
+  - url: https://events.mympls.org/event/17873056
+    checked: 2026-11-02
   - url: https://mympls.org/programs/adults/makerspace-spotlight/
     checked: 2026-11-01

@@ -72,9 +72,10 @@ options:                # optional (#973); a short bulleted list of choices, lik
   - A U.S. passport
 notes:                  # optional (#973); short paragraphs after the lists, for exceptions
   - If you are 65 or older, an expired ID may still count.
+not_posted: [cost]      # optional (#529); place facts the source was read for and does not state
 ```
 
-`steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `options` works the same way for a list of choices where order does not matter (a bulleted list), and `notes` holds exceptions as separate short paragraphs after the lists. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet.
+`steps` works on any resource, not just places: keep `what_to_do` as a one-line summary and put the rest in `steps`, so a card shows a short numbered list instead of a long paragraph. `options` works the same way for a list of choices where order does not matter (a bulleted list), and `notes` holds exceptions as separate short paragraphs after the lists. `opening_hours` needs `hours` too, because the words always show and the badge only adds to them. Holidays and one-off closings are not in `opening_hours`, so a card with it still says "Call to confirm." `npm run check-content` checks these fields, and warns when a place to go has no `hours`, `cost` or `get_in` yet. `meetings` count as hours. If you read the sources and they do not state one of these, list it in `not_posted` so the warning stops; the source's checked date says when. Never use `not_posted` for something you did not look for, and take it out when you add the fact (`check-content` errors if the record has a fact it lists).
 
 Set `private_trace: true` on a domestic or sexual violence listing, or any listing where a text or share left on someone's phone could put them at risk (#555). The card then leaves off the "Pass it on" row (Text, Print, Share). Calendar entries take the same flag. The page's quick exit is still the way out.
 
@@ -211,6 +212,11 @@ facilities:                 # only what the source says
   step_free: true           # only when published
 regular:                    # weekly or monthly happenings, in words
   - Lunch Monday, Wednesday and Friday
+opening_hours:              # optional; when the building is open, same shape as resources (#1439)
+  - days: [mon, tue, wed, thu, fri]
+    opens: "09:00"
+    closes: "16:00"
+drop_in: People 50 and older   # optional; who can come in and sit, as the source says (#1439)
 membership:
   dues: $5 a family a year
 rentals:
@@ -244,7 +250,9 @@ phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
 
 The Find your people page (`/find-your-people/`) uses the same record with two more kinds. The community centers pages leave both out.
 
-- `kind: library`: a library branch, listed as a free place to sit. `regular` holds its open hours in words.
+- `kind: library`: a library branch, listed as a free place to sit. Its open hours go in `opening_hours`, not `regular`, so the card can say them as a few short lines ("Monday to Thursday: 9 a.m. to 8 p.m.", "Closed Sunday") instead of one line per day (#1439).
+- **Other free places to sit (#1439).** Any other building can be listed there too when its own source says when it is open and who can walk in. Give it `opening_hours` and `drop_in`, a few words on who can come ("Anyone", "People 50 and older"). Set `drop_in` only when the source says people can drop in; a hall you can only rent does not count. Leave out places that charge to come in, or that need a membership the source does not say is free. On Find your people its card is short (who can come, hours, a link to its own page), because its dinners and rentals would make it long on a phone.
+- `kind: park`: an outdoor place with public seats or benches, listed only as a free place to sit (it gets no community centers page). It needs `drop_in`, and `opening_hours` or a note that says when it is open (many parks go by dawn and dusk, which `opening_hours` cannot say).
 - `kind: group`: something people can join more than once, like a game night, a run club or a dance. It has no building of its own. Extra fields:
 
 ```yaml
@@ -301,9 +309,13 @@ site_coverage:                          # optional (#1248); how well this site h
   level: good                           # good | partial | thin
   why: What the site has and what it lacks, in one or two sentences.
   checked: 2026-11-01
+  before:                               # optional (#1534); the rating just before the last change
+    level: partial
+    checked: 2026-11-01
+    why: What was missing then, in one sentence.
 ```
 
-`get_help` shows on `/needs/` as "Where to get help on this site". `site_coverage` is a self-check of this site, not a measure of the need: `good` means a clear starting page and the main help is listed, `partial` means help is listed but spread out or missing a piece, and `thin` means little is on the site yet. Re-check it when a page for the need is added or changed. The full coverage review is in [`docs/research/needs-coverage.md`](../docs/research/needs-coverage.md).
+`get_help` shows on `/needs/` as "Where to get help on this site". `site_coverage` is a self-check of this site, not a measure of the need: `good` means a clear starting page and the main help is listed, `partial` means help is listed but spread out or missing a piece, and `thin` means little is on the site yet. Re-check it when a page for the need is added or changed. When the level changes, move the old level and date into `before`, so `/needs/` shows the before and after. The full coverage review is in [`docs/research/needs-coverage.md`](../docs/research/needs-coverage.md).
 
 `npm run check-content` also runs `scripts/check-needs.mjs`, which fails on: a field the schema does not name, evidence without a source url or checked date, a count that is not a whole number, a person instead of a group in `working_on`, an unknown topic or org, a repeated rank, and anything that looks personal (an email address, a phone number, or a quoted passage of six or more words). Signals are public and aggregate; never profile or quote a private person. Test data lives in `site/scripts/fixtures/needs/`, never in this folder.
 
@@ -468,7 +480,8 @@ From these tags the build makes the Topics page (`/topics/`), each door's list o
 - Only public organizational contact details. Never a private person's info.
 - Every entry has at least one source with a `checked` date.
 - Entries older than 6 months since `checked` get flagged for re-verification.
-- On the site, a card says "may be out of date" after 6 months without a check, or after 90 days for Make it better entries (topic `better`, and `boards/`), since seats and grant rounds change faster (#791).
+- On the site, a card says "may be out of date" after 6 months without a check, or after 90 days for high-stakes listings (see the re-check cadence below) and Make it better entries (topic `better`, and `boards/`), since seats and grant rounds change faster (#791).
+- **Re-check cadence (#1461).** The risk rubric in `docs/playbook/trust-and-ai.md` sets how often we re-read each listing's sources: every 90 days for the high-stakes topics (`health`, `money`, `housing`, `family`, `taxes`, `voting`) and every `calendar/` entry, otherwise the card's own rule above. An org, resource, board or secondhand record can set `recheck_days: 30` (a whole number of days, 1 to 365) to go faster, or, outside those topics, slower. `npm run check-content` fails a high-stakes record set slower than 90 days. The Health check reports the share re-checked on time (`content-recheck-on-time`) and lists the late ones, oldest first. Cards say "may be out of date" once a listing is past its cadence, never later than 6 months, so a high-stakes listing shows it after 90 days.
 - Every outside link is checked daily by the source check (`docs/operations/README.md`). If a source should not be fetched by a robot (Facebook, a login page), add a rule to `source-rules.yaml`.
 
 ### Rules for every entry
@@ -486,6 +499,7 @@ These come from the [trust and AI playbook](../docs/playbook/trust-and-ai.md) an
 - **Phone numbers come from the group or the government (#494).** A phone or text number must be on the group's own website or an official government page. Never take one from a directory, a news story, a search result or an AI answer: scammers plant fake support numbers there. If only a directory has the number, leave it out.
 - **Check it is the right Morgantown (#494).** Make sure each source is about Morgantown or Monongalia County, West Virginia, not Morgantown, Kentucky or Indiana, and not a neighboring county. `npm run check-content` warns when an address leaves out WV or any text names Morgantown in another state, and the daily source check warns when a source page does.
 - **Crisis, shelter and food-today details are re-checked every week (#494).** Every record named on the Where to stay tonight page, the food pages, the crisis strip and the Help now parts, the orgs behind them, and any record that names 988 or a crisis line. The Health check lists the ones last checked over 7 days ago (`content-recheck-weekly`). Re-check each phone number and hours on the group's own page.
+- **No time-of-day words unless the time is the point (#1378).** A reader may land on a page at any hour, so "download the forms tonight" or "call this morning" can read wrong. Keep "tonight", "today" and "right now" where the time is the point: a place to stay tonight, food today, a crisis right now, a date on the calendar. When you describe a source, say "when we checked", not "the page shows today": the card already shows the checked date, and "today" is wrong the next day. `npm run build` runs `scripts/check-time-words.mjs`, which fails on "this morning", "this evening", "this afternoon", "tonight" outside a hard-moment sentence, and "today" used for a source, except on pages about that time (`PAGES` in the script).
 - **Keep "Call to confirm" on anything that changes fast.** Hours, open status and bed or food availability always say to call first. The place cards do this on their own; keep it in any sentence you write about hours.
 
 ### What `npm run check-content` checks in orgs and resources
@@ -643,3 +657,7 @@ One file per past meeting with posted minutes, shown on the body's page under `/
 ## `use/visits.yaml`: page views copied by hand (#1432)
 
 Level 2 (Use) on the [scoreboard](../docs/scoreboard.md#level-2-use-waiting-for-the-first-monthly-totals). Once a month David copies aggregate page views from the visit counter: a date range, the whole-site total, and the main guides and doors. Counts from 1 to 9 are written "fewer than 10". `site/scripts/check-use.mjs` checks it on every build. Not shown on the site.
+
+## `progress/<YYYY-MM>.yaml`: monthly snapshots of our checks (#1057)
+
+One file a month, shown newest first on `/progress/`. Every number belongs to the snapshot's `checked` date and is never updated; a new month gets a new file. Fields: `month`, `title`, `checked`, `summary` (one sentence: better where, not yet where), `story` (`need`, `before`, `after`: compare formats, not organizations), `comparisons` (`what`, `plain`), `corrections` (`count`, `text`), `short` (what still falls short), `check` (`label`, `url` of the run files). No visitor counts until they are measured. These speak for the project, so their PRs wait for David.

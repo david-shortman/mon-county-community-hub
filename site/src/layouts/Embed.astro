@@ -7,6 +7,9 @@
 // The color tokens are a copy of the ones in Base.astro, so the contrast
 // check's results hold here too; test/embeds.test.mjs keeps them in step.
 // The footer has the same 911 and 988 line as every page (e2e/crisis.test.mjs).
+// Shapes follow the Press look (docs/design/looks/press.md): 2px corners, a
+// 2px top rule on cards and above the footer, square-cornered buttons. No
+// fonts are loaded, so embeds stay small; headings use the system face.
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import { prettyDate, todayYmd } from '../lib/content.mjs';
 const { title, description, heading, more, moreLabel = 'See more on Everything Morgantown' } = Astro.props;
@@ -47,12 +50,12 @@ const report = fixFormUrl({ page: Astro.url.pathname });
       h2 { font-size: 1.05rem; line-height: 1.3; margin: 0 0 2px; }
       p { margin: 0 0 6px; }
       .meta { color: var(--muted); font-size: 0.9rem; }
-      .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin: 0 0 10px; }
+      .card { background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; padding: 10px 12px; margin: 0 0 10px; }
       .when { font-weight: 600; }
       ul.items { list-style: none; margin: 0; padding: 0; }
-      .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; margin: 4px 8px 4px 0; border: 1.5px solid var(--accent); border-radius: 999px; font-weight: 600; text-decoration: none; background: var(--card); }
+      .btn { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; margin: 4px 8px 4px 0; border: 2px solid var(--accent); border-radius: 3px; font-weight: 600; text-decoration: none; background: var(--card); }
       .btn:hover { background: var(--accent-bg); }
-      footer { padding: 8px 16px 14px; border-top: 1px solid var(--line); }
+      footer { padding: 8px 16px 14px; border-top: 2px solid var(--fg); }
       footer p { color: var(--muted); font-size: 0.875rem; }
       .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
     </style>

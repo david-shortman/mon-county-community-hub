@@ -20,9 +20,9 @@ const city = [{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Bu
 const portal = [{ url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-10-30' }];
 const tax = [{ url: 'https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx', checked: '2026-10-30' }];
 const eh = [{ url: 'https://www.monchd.org/departments-programs/environmental-health', checked: '2026-10-30' }];
-const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns', checked: '2026-10-30' }];
+const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns', checked: '2026-10-30' }, { url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-11-02' }, { url: 'https://www.morgantownwv.gov/202/Finance', checked: '2026-11-02' }];
 ---
-<Base title="Start a business in Morgantown, WV, step by step" description="The City of Morgantown's steps to open a business inside city limits, in order: check zoning, register with the state, get a city business license, get a Certificate of Occupancy ($65), schedule inspections, and file city B&O tax. Each step links to the official page.">
+<Base title="Start a business in Morgantown, WV, step by step" description="The City of Morgantown's steps to open a business, in order: check zoning, register with the state, get a city license and Certificate of Occupancy, inspections, and B&O tax.">
   <h1>Start a business in Morgantown, step by step</h1>
   <p class="lede">These are the steps the City of Morgantown lists for a business inside city limits, in order. Each step links to the official page. Tap a step to open it. If your business is in Star City, Granville, Westover or outside any town, the local steps are different, so ask that town or the county. Free help with planning is on <a href={`${base}/business/`}>Start or grow a business</a>.</p>
 
@@ -83,7 +83,7 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
   </Milepost>
 
   <Milepost n={6} title="File city B&O tax" id="bo-tax">
-  <p>Morgantown charges a business and occupation (B&O) tax on business done inside city limits. The city posts an annual return, a "by the job" return and a quarterly return, plus a worksheet for your records. The page does not say which return fits your business or when it is due, so call the Finance Department at <a href={telHref('304-284-7401')}>304-284-7401</a>.</p>
+  <p>Morgantown charges a business and occupation (B&O) tax on business done inside city limits. The city posts an annual return, a "by the job" return and a quarterly return, plus a worksheet for your records. The page does not say which return fits your business or when it is due, so ask the Finance Department. The city's permitting page gives <a href={telHref('304-284-7401')}>304-284-7401</a> for B&O questions. The Finance page lists <a href={telHref('304-284-7408')}>304-284-7408</a> and the email BandO@morgantownwv.gov.</p>
   <div class="actions">
     <a class="btn" href="https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns"><Icon name="open" /><span>City B&O tax forms</span></a>
   </div>

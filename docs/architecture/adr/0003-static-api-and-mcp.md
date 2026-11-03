@@ -1,6 +1,8 @@
 # 0003: A static, versioned JSON API on Pages first, and a read-only MCP server over it
 
-Status: proposed, 2026-10-28
+Status: accepted as direction by David, 2026-11-02 (#94, #1410). Proposed 2026-10-28.
+
+Hosting an MCP server (stage 2) is a later decision for David.
 
 ## Context
 

@@ -4,23 +4,59 @@
 // its own checked date. Describe only.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "care", topic: "health", label: "Diabetes, blood pressure or weight", summary: "A free class to prevent diabetes, diabetes classes, diet help, free clinics and places to be active" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
+// Insulin caps, Medicare's prevention program and the library's monitor (#1534), read 2026-11-02.
+const checked = '2026-11-02';
+const mdpp = [{ url: 'https://www.medicare.gov/coverage/medicare-diabetes-prevention-program', checked, name: 'Medicare, Medicare Diabetes Prevention Program' }];
+const insulin = [
+  { url: 'https://code.wvlegislature.gov/33-59-1/', checked, name: 'West Virginia Code §33-59-1' },
+  { url: 'https://code.wvlegislature.gov/5-16-7g/', checked, name: 'West Virginia Code §5-16-7g (PEIA)' },
+  { url: 'https://www.medicare.gov/coverage/insulin', checked, name: 'Medicare, Insulin' },
+];
+const bp = [{ url: 'https://mympls.org/books-music-more/library-of-things/', checked, name: 'Morgantown Public Library, Library of Things' }];
 ---
-<Base title="Diabetes, blood pressure or weight help in Morgantown and Mon County" description="Low cost help with diabetes, blood pressure or weight in Morgantown and Monongalia County: a free class to prevent type 2 diabetes, diabetes classes and a support group, health department dietitians, free diabetes and heart clinics, and places to be active.">
+<Base title="Diabetes, blood pressure or weight help in Morgantown and Mon County" description="Low cost help with diabetes, blood pressure or weight in Mon County: a free class to prevent type 2 diabetes, a support group, dietitians, free clinics and places to be active.">
   <h1>Diabetes, blood pressure or weight: help managing it</h1>
   <p class="lede">Have prediabetes, or a higher chance of getting diabetes? Mon Health runs a free, year-long class to help prevent type 2 diabetes, and you can call to sign up yourself, no referral needed. Already have diabetes? There are classes, a support group, dietitians and free clinics below.</p>
 
   <h2 id="prevent">Lower your risk of type 2 diabetes</h2>
   {r('mon-health-diabetes-prevention-program') && <ResourceCard r={r('mon-health-diabetes-prevention-program')} showCost />}
 
+  <p>Have Medicare? The Medicare Diabetes Prevention Program is a class to help prevent type 2 diabetes. Medicare says "You pay nothing if you qualify." It has 16 weekly sessions over 6 months, then 6 monthly ones, online or in person. You qualify if all of these are true:</p>
+  <ul>
+    <li>In the 12 months before you start, a blood sugar test came back a little high. One example is an A1c (a test of your average blood sugar) of 5.7% to 6.4%.</li>
+    <li>Your body mass index (BMI) is 25 or more, or 23 or more if you are Asian.</li>
+    <li>You have never been told you have diabetes or end-stage kidney disease.</li>
+  </ul>
+  <SourceLine sources={mdpp} about="the Medicare Diabetes Prevention Program" />
+
   <h2 id="manage">Learn to manage diabetes</h2>
   {r('mon-health-diabetes-education-series') && <ResourceCard r={r('mon-health-diabetes-education-series')} showCost />}
   {r('mon-health-diabetes-support-group') && <ResourceCard r={r('mon-health-diabetes-support-group')} showCost />}
+
+  <h2 id="insulin">Paying for insulin and diabetes supplies</h2>
+  <ul>
+    <li><strong>Many West Virginia health plans.</strong> State law says what you pay for a 30-day supply of covered insulin "may not exceed $35," and for covered supplies "may not exceed $100," no matter your deductible.
+      <ul>
+        <li>Supplies include test strips, glucose meters, continuous glucose monitors (CGMs), lancets and insulin syringes. Insulin pumps are not included.</li>
+        <li>The law covers state-regulated insurance plans issued or renewed since January 1, 2023, and PEIA, the state employees' plan, since January 1, 2024.</li>
+        <li>Not every plan is covered by this law, so ask your plan whether the cap applies to you.</li>
+      </ul>
+    </li>
+    <li><strong>Medicare.</strong> Medicare says a one-month supply of each covered insulin "is no more than $35, and you don't have to pay a deductible for insulin." The $35 limit "applies to everyone who takes insulin, even if you get Extra Help."</li>
+  </ul>
+  <SourceLine sources={insulin} about="insulin and diabetes supply costs" />
+  <p>More ways to pay less for medicine: <a href={`${base}/dental-and-prescriptions/`}>Help paying for medicine</a>.</p>
+
+  <h2 id="blood-pressure">Check your blood pressure at home</h2>
+  <p>Morgantown Public Library lends a blood pressure monitor through its Library of Things, free with a library card. Loans last 21 days, one item per card, and items cannot be renewed or put on hold.</p>
+  <SourceLine sources={bp} about="the library's blood pressure monitor" />
 
   <h2 id="diet">Help with what you eat</h2>
   <p>The Monongalia County Health Department has dietitians who help with diabetes, weight and heart health, with a sliding fee if you have no insurance.</p>

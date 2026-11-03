@@ -10,7 +10,10 @@
 // own pages, the browser starts loading it so it opens at once. Only our
 // pages, never search, the calendar file, or nofollow and download links.
 // Chrome skips this with Data Saver or low battery on.
-// View transitions: a short, calm fade, and none for people who ask for less motion.
+// View transitions: a short, calm fade, and none for people who ask for less
+// motion: the device setting (CSS below) or the site's "Turn off motion" switch
+// (em-motion-off, src/lib/motion-client.mjs, #1500), which skips the fade on
+// both the page being left and the page being opened.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <link rel="manifest" href={`${base}/manifest.webmanifest`} />
@@ -24,6 +27,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     // open with no signal after one visit. It does this at most once an hour.
     navigator.serviceWorker.ready.then(function (r) { if (r.active) r.active.postMessage('save'); }).catch(function () {});
   });
+</script>
+<script is:inline>
+  (function () {
+    function skip(e) { try { if (e.viewTransition && localStorage.getItem('em-motion-off') === '1') e.viewTransition.skipTransition(); } catch (x) {} }
+    addEventListener('pageswap', skip); addEventListener('pagereveal', skip);
+  })();
 </script>
 <script type="speculationrules" is:inline>
 {"prerender": [{"where": {"and": [

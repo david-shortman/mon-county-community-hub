@@ -30,6 +30,33 @@ describe('print views', () => {
     await ctx.close();
   });
 
+  // A device in dark mode still prints dark text on light paper (#1469): every
+  // text color in main is dark, and cards, notes and boxes are light.
+  test('dark mode prints in light inks', async () => {
+    const ctx = await s.browser.newContext({ viewport: { width: 800, height: 1000 }, colorScheme: 'dark' });
+    const page = await ctx.newPage();
+    await page.emulateMedia({ media: 'print', colorScheme: 'dark' });
+    const bad = [];
+    for (const [p] of SMOKE ? PRINTED.slice(0, 2) : PRINTED.slice(0, 5)) {
+      await page.goto(s.origin + p);
+      bad.push(...(await page.evaluate((p) => {
+        const lum = (c) => { const m = c.match(/[\d.]+/g); if (!m || (m[3] !== undefined && +m[3] === 0)) return null; return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; };
+        const out = [];
+        for (const el of document.querySelectorAll('main p, main li, main h2, main .card, main .note')) {
+          const cs = getComputedStyle(el);
+          if (cs.display === 'none' || !el.getClientRects().length) continue;
+          const fg = lum(cs.color), bg = lum(cs.backgroundColor);
+          if (fg !== null && fg > 0.5) out.push(`${p}: light text (${cs.color}) on ${el.tagName.toLowerCase()}.${el.className}`);
+          if (bg !== null && bg < 0.5) out.push(`${p}: dark fill (${cs.backgroundColor}) on ${el.tagName.toLowerCase()}.${el.className}`);
+          if (out.length > 3) break;
+        }
+        return out;
+      }, p)));
+    }
+    assert.deepEqual(bad, []);
+    await ctx.close();
+  });
+
   test('pages print to paper without errors', { skip: SMOKE && 'full suite only (E2E_SMOKE=1)' }, async () => {
     const ctx = await s.browser.newContext();
     const page = await ctx.newPage();

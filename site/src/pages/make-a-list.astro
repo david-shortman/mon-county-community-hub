@@ -30,6 +30,7 @@ const NOTE_MAX = 200;
   <div class="mal-pick-area">
     <h1>Make a list for someone</h1>
     <p class="lede">Pick up to {MAX} places, add a short note if you like, and print or text the list to the person you are helping.</p>
+    <p>Want a ready-made sheet instead? <a href={`${base}/print/`}>Printouts</a> has sheets of places and phone numbers by topic.</p>
     <p class="note"><strong>Keep it private:</strong> do not type names, addresses, health details or anything personal in the note. The note is only in the web address of the list. Nothing is saved or sent to us.</p>
 
     <form id="mal-form" method="get" action={`${base}/make-a-list/`} hidden>
@@ -82,7 +83,7 @@ const NOTE_MAX = 200;
 
   <style>
     .mal-group { border: 0; margin: 8px 0 0; padding: 0; }
-    #mal-note { width: 100%; max-width: 32rem; font: inherit; padding: 8px; border: 1.5px solid var(--muted); border-radius: 8px; background: var(--card); color: var(--fg); box-sizing: border-box; }
+    #mal-note { width: 100%; max-width: 32rem; font: inherit; padding: 8px; border: 1.5px solid var(--muted); border-radius: 2px; background: var(--card); color: var(--fg); box-sizing: border-box; }
     .mal-note { font-size: 1.1rem; border-left: 4px solid var(--brick); padding: 6px 12px; background: var(--accent-bg); }
     .sheet-list { list-style: none; padding: 0; margin: 12px 0; }
     .sheet-list li { break-inside: avoid; border-top: 1px solid var(--line); padding: 6px 0 8px; }

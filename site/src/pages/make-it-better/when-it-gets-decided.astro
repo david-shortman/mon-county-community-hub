@@ -5,12 +5,13 @@
 import Base from '../../layouts/Base.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import NextRung from '../../components/NextRung.astro';
+import DecideStrip from '../../components/DecideStrip.astro';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: "community", topic: "better", label: "When plans and budgets get decided", summary: "The yearly budget, the 5-year capital plan, the comprehensive plan and the downtown plan: when each is decided and how to comment" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const day = '2026-10-30';
 const src = {
-  law: [{ url: 'https://code.wvlegislature.gov/11-8-9/', checked: day }, { url: 'https://code.wvlegislature.gov/11-8-14/', checked: day }],
+  law: [{ url: 'https://code.wvlegislature.gov/11-8-9/', checked: '2026-11-02' }, { url: 'https://code.wvlegislature.gov/11-8-10/', checked: '2026-11-02' }, { url: 'https://code.wvlegislature.gov/11-8-12/', checked: '2026-11-02' }, { url: 'https://code.wvlegislature.gov/11-8-14/', checked: '2026-11-02' }],
   finance: [{ url: 'https://www.morgantownwv.gov/202/Finance', checked: day }, { url: 'https://www.morgantownwv.gov/DocumentCenter/View/6521/FY27-Budget-Book', checked: day }],
   cip: [{ url: 'https://www.morgantownwv.gov/DocumentCenter/View/6522/FY27-5-Year-Capital-Improvement-Plan', checked: day }, { url: 'https://www.morgantownwv.gov/202/Finance', checked: day }],
   comp: [{ url: 'https://www.morgantownwv.gov/652/Morgantown-2033', checked: day }],
@@ -20,8 +21,10 @@ const src = {
   <h1>When plans and budgets get decided</h1>
   <p class="lede">Many choices about how Morgantown looks are made in a plan or a budget, often months before work starts. Here is when each one happens and how to take part.</p>
 
+  <DecideStrip base={base} />
+
   <h2>The yearly budget</h2>
-  <p>The city's budget year runs from July 1 to June 30. State law says each local body that sets a tax levy, like City Council and the County Commission, holds its levy estimate meetings between March 7 and March 28. For cities, that session then meets again on the third Tuesday in April.</p>
+  <p>The city's budget year runs from July 1 to June 30. State law says each local body that sets a tax levy, like City Council and the County Commission, holds its levy estimate meetings between March 7 and March 28. City Council, the County Commission and the Board of Education then each meet again on the third Tuesday in April.</p>
   <SourceLine sources={src.law} about="budget timing in state law" />
   <p>The city posts its budget on the Finance page. The current one is the <a href={src.finance[1].url}>2026-2027 budget (PDF, large file)</a>.</p>
   <SourceLine sources={src.finance} about="the city budget" />

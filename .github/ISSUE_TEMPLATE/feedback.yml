@@ -1,0 +1,46 @@
+name: Feedback (project team)
+description: For the project team. Turn resident or partner feedback that is not a group request into work, without personal details.
+labels: ["for:duet"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. File it only after David says yes to the message (#522). Write what we need to act, in our own words. **No sender name, email, phone or message text.** A group's fix, removal or add uses the Group request form instead, so the one-week clock runs. Plan: docs/plans/2026-11-02-feedback-inbox.md (#197).
+  - type: input
+    id: page
+    attributes:
+      label: Page or item
+      description: The page path (like /utility-bills/) or content file it is about, if any.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - something is wrong
+        - a suggestion
+        - a question we should answer on the site
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What to do
+      description: In our words, one or two lines. Not the sender's message.
+    validations:
+      required: true
+  - type: input
+    id: serves
+    attributes:
+      label: Serves
+      description: A persona or need slug from content/personas.yaml or content/needs/, or "project" (#1037).
+    validations:
+      required: true
+  - type: input
+    id: received
+    attributes:
+      label: Received date
+      description: Morgantown date it came in, YYYY-MM-DD.
+      placeholder: "2026-11-02"
+    validations:
+      required: true

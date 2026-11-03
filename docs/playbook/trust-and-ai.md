@@ -87,7 +87,7 @@ The high-stakes topics above (`health`, `money`, `housing`, `family`, `taxes`, `
 
 Why tiers instead of checking everything the same way: hospitals keep independent double checks for the riskiest tasks, because checking everything turns checks into rubber stamps ([ISMP](https://home.ecri.org/blogs/ismp-alerts-and-articles-library/independent-double-checks-worth-the-effort-if-used-judiciously-and-properly)). The questions follow harm-based fact-check triage: does the error mislead, will people act on it, and how bad is the harm ([Full Fact](https://fullfact.org/blog/2025/apr/how-does-the-full-fact-team-choose-what-to-fact-check/), [Cunliffe-Jones](https://misinforeview.hks.harvard.edu/wp-content/uploads/2026/07/cunliffe_jones_fact_checking_what_matters_20260707.pdf)).
 
-Today the schema has no field for an item's tier or re-check cadence, so the cadence is set by topic: the existing 6-month "may be out of date" rule (`STALE_DAYS`) and the 90-day rule for some fast-changing items. A per-record field is a follow-up: #1461.
+The cadence lives in `recheckDaysFor()` in `site/src/lib/content.mjs` (#1461): 90 days for the high-stakes topics and every calendar entry, otherwise the card's own rule, and a record can set `recheck_days` to raise its tier (never to lower a high-stakes one; `npm run check-content` refuses that). The Health check reports the share of listings re-checked on time (`content-recheck-on-time`). Cards show "may be out of date" once a listing is past its cadence, never later than 6 months.
 
 **Sources:**
 - [OMB M-25-21, Accelerating Federal Use of AI (PDF)](https://www.whitehouse.gov/wp-content/uploads/2025/02/M-25-21-Accelerating-Federal-Use-of-AI-through-Innovation-Governance-and-Public-Trust.pdf)

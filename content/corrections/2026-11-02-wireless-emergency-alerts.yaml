@@ -1,0 +1,7 @@
+date: 2026-11-02
+item: Wireless Emergency Alerts, on the Get weather and emergency alerts page
+page: /weather-alerts/
+kind: wording
+found_by: our-check
+what: We said FEMA's page says the alerts need no personal information, and told you to turn them on or off in your phone's notification settings. FEMA's page does not say either. It says the alerts need no app or sign-up and do not track your location, and the page now says that.
+link: https://github.com/david-shortman/mon-county-community-hub/pulls?q=head%3Acode%2Fweather-alerts-facts

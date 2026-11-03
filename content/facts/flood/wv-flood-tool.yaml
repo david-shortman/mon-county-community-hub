@@ -1,0 +1,8 @@
+slug: wv-flood-tool
+text: "The **West Virginia Flood Tool** is a public state map. Type a street address to zoom to it. It shows the flood zone, and how high and deep the water could get in a big flood. Red or orange means high risk. Yellow means moderate risk. Its flood data comes from FEMA's flood maps."
+quote: >-
+  Data displayed on the WV Flood Tool are directly sourced from FEMA's National Flood Hazard Layer ... identified flood hazard (flood zone, flood height, flood depth) ... Multiple ways to zoom to geographic locations: street addresses, tax parcels ... Warning colors denote risk level: high risk (red/orange), moderate risk (yellow)
+sources:
+  - url: https://www.mapwv.gov/flood/
+    checked: 2026-11-03
+recheck_days: 180

@@ -16,20 +16,20 @@ The data is in [`content/personas.yaml`](../content/personas.yaml). After every 
 | Behind on rent or got an eviction notice | `housing-costs` | eviction help morgantown wv | `/money/` | `/stay-tonight/`, `/legal-help/` | q25 |
 | Short on food this week | `enough-food` | food pantry open today morgantown | `/help/food/` | `/snap/` | q02, q04 |
 | Working, paycheck to paycheck, at tax season | `wages-and-cost-of-living` | free tax help morgantown | `/free-tax-help/` | `/money/` | q46 |
-| No insurance, needs a doctor or medicine | `paying-for-health-care` | free clinic morgantown | `/dental-and-prescriptions/` | `/care/`, `/medical-rides/` | q05, q08 |
+| No insurance, needs a doctor or medicine | `paying-for-health-care` | free clinic morgantown | `/no-insurance/` | `/dental-and-prescriptions/`, `/care/`, `/medical-rides/` | q05, q08 |
 | Wants a flu or COVID shot | health | free flu shot morgantown | `/flu-shots/` | `/staying-well/` | q07 |
 | Just told they have prediabetes or high blood pressure | `chronic-disease` | diabetes class morgantown wv | `/diabetes-and-weight/` | `/staying-well/`, `/staying-active/` | q47 |
 | Turning 65 | `paying-for-health-care` | medicare help morgantown wv | `/turning-65/` | `/after-you-apply/medicare-savings/`, `/staying-well/` (not linked yet: `/bus-passes/`, `/staying-active/`) | q48 |
 | Adult child caring for an aging parent | `transportation` | in home care for elderly parent wv | `/for/older-adults/` | `/medicaid-waivers/`, `/medical-rides/` | q29 |
 | Person with a disability or a caregiver | `transportation` | disability help morgantown | `/for/disability-and-caregivers/` | `/disability-and-aging/`, `/help-at-home/` (not linked yet: `/bus-passes/`) | q49 |
-| Pregnant or has a new baby | `child-care` | wic morgantown | `/for/parents-young-kids/` | `/families-and-kids/`, `/car-seat-checks/` | q50 |
+| Pregnant or has a new baby | `child-care` | wic morgantown | `/pregnant-or-new-baby/` | `/families-and-kids/`, `/car-seat-checks/` | q50 |
 | Parent of a school-age kid | `child-care` | enroll monongalia county schools | `/school-age/` | `/families-and-kids/` | q51 |
 | Teen wanting a first job or a license | work | work permit 15 year old wv | `/teens/` | `/teen-drivers/`, `/find-a-job/` | q52 |
 | WVU student who is short on money | `enough-food` | wvu food pantry | `/help/food/today/student/` | `/help/food/today/`, `/money/` (not linked yet: `/getting-around/`) | q53 |
-| Just lost a job | `wages-and-cost-of-living` | file unemployment wv | `/find-a-job/` | `/work-and-learning/` | q54 |
+| Just lost a job | `wages-and-cost-of-living` | file unemployment wv | `/unemployment/` | `/find-a-job/`, `/work-and-learning/` | q54 |
 | Home from jail or prison | `wages-and-cost-of-living` | jobs for felons morgantown | `/reentry/` | `/find-a-job/` | q55 |
-| Starting a business or a trade | business | business license morgantown | `/business/` | `/contractor-license/`, `/work-and-learning/` (not linked yet: `/permits/`) | q09, q10 |
-| Remote worker moving here | moving | moving to morgantown remote work | `/moving-here/` | `/internet/`, `/find-your-people/` | q56 |
+| Starting a business or a trade | business | business license morgantown | `/start-a-business/` | `/business/`, `/contractor-license/`, `/work-and-learning/`, `/permits/` | q09, q10 |
+| Remote worker moving here | moving | moving to morgantown remote work | `/for/remote-workers/` | `/moving-here/`, `/internet/`, `/find-your-people/` | q56 |
 | Just moved here | moving | morgantown trash pickup | `/for/new-to-mon-county/` | `/moving-here/`, `/recycling/`, `/vote/` | q19 |
 | Renter with a repair or deposit problem | `housing-costs` | landlord won't fix morgantown | `/renting/` | `/legal-help/` | q57 |
 | Rural homeowner | home | septic permit monongalia county | `/septic-and-wells/` | `/flood-zone/`, `/permits/` | q58 |
@@ -40,7 +40,7 @@ The data is in [`content/personas.yaml`](../content/personas.yaml). After every 
 | Wants a say in local decisions | civic | speak at city council morgantown | `/have-your-say/` | `/make-it-better/boards/`, `/meetings/agendas/` (not linked yet: `/vote/`) | q12, q13 |
 | Lonely or new, looking for their people | `loneliness` | things to do in morgantown | `/find-your-people/` | `/community-centers/`, `/arts-and-making/`, `/meet-people/` (not linked yet: `/parks/`) | q43, q45 |
 | Gardener or would-be grower | growing | soil test wv | `/soil-test/` | `/grow/` | q33 |
-| Helper: librarian, pastor or case worker | helpers | morgantown resource list | `/make-a-list/` | `/partners/` | q62 |
+| Helper: librarian, pastor or case worker | helpers | morgantown resource list | `/make-a-list/` | `/print/`, `/partners/` | q62 |
 | Curious long-time resident, just looking around | community data | what's going on in morgantown this week | `/pulse/` | `/how-we-are-doing/` | q24 |
 
 ## What the first check found
@@ -54,3 +54,16 @@ The data is in [`content/personas.yaml`](../content/personas.yaml). After every 
 - When a page is renamed or a link is dropped, the build names the persona that broke. Fix the link, or update the persona.
 - Review each persona every six months (`last_reviewed`); the check warns after that.
 - A new need in the register gets a persona and a findability question in the same PR.
+
+On 2026-11-03 (#1533) five landing pages were changed after a simulated walkthrough (not resident feedback) found pages that answer the persona's question better: `/no-insurance/` (free clinic), `/pregnant-or-new-baby/` (WIC), `/unemployment/` (filing a claim), `/start-a-business/` (the city license) and `/for/remote-workers/` (internet and a place to work). The old landing pages are now next steps where they still help.
+
+## Monthly review (#1037)
+
+Once a month, with the needs register upkeep (#988), a short loop keeps this list tied to real signals. The steps are on a monthly checklist (`content/checklists/personas.yaml`), which opens in the first week of each month.
+
+1. **Listen.** What changed since last month in the findability runs, This week in Mon County, the needs register sources, the care pulse, visit totals, resident and partner feedback, local news, meeting agendas and public forums. Topic counts only.
+2. **Sort.** Tie each new signal to a need and a persona. A new persona needs evidence from two different signals. A persona with no fresh evidence for two reviews in a row is merged or retired.
+3. **Act.** Open or re-rank issues. Every new issue has a **"Serves:" line** naming a persona or need slug (or `project` for work on the project itself). The Task issue form asks for it, and the Health check lists open issues opened since 2026-11-03 without one (`issues-serves`, `site/src/lib/serves.mjs`).
+4. **Report.** `node scripts/persona-report.mjs` (in `site/`, after a build) prints the scoreboard persona line: personas passing the path check, personas whose findability questions all score 10 or more of 15, and needs with no persona or no page. Copy it into the scoreboard.
+
+Each run is logged as one file in [`persona-reviews/`](persona-reviews/), named by date. No on-site searches are logged, no visitors are tracked, and no names or quotes from forums or feedback are kept.

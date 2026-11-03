@@ -1,0 +1,35 @@
+title: If you are sued over a debt in Magistrate Court
+slug: mon-magistrate-answer-debt-lawsuit
+org: monongalia-county-magistrate-court
+topics: [money]
+who_it_is_for: People who got a civil complaint and summons from Magistrate Court, such as from a creditor or debt collector.
+what_to_do: File an Answer (form SCA-M225) with the Magistrate Court, usually within 20 days of getting the complaint and summons. Mail or hand a copy to the other side.
+steps:
+  - Read the complaint and summons, and note the date you got them.
+  - Get the Answer form, SCA-M225, from the Magistrate Clerk or the WV courts forms page.
+  - "On the form, choose one: admit and confess judgment, deny, or admit in part and deny in part. You can also list your defenses or a counterclaim."
+  - File one copy with the court. Mail or hand one copy to the other side or their lawyer, and fill in the Certificate of Service.
+  - In Monongalia County, the Magistrate Clerk is at the Monongalia County Justice Center, 75 High Street, Suite 25, Morgantown. Call 304-291-7296.
+notes:
+  - The court says if you do not answer, you will be in default and the magistrate may enter a judgment against you. The other side can ask for a default judgment 21 days after you were served.
+  - If you confess judgment, the court says you still owe court costs, and on the 21st day the other side can have the clerk take steps to collect in full.
+  - If you deny all or part of the complaint, a trial is set. You and the other side can still settle before the trial date. The court says no fee is required to add a counterclaim.
+  - You may ask for a jury trial if the claim is at least $20. The court says to ask in writing within 20 days after you serve your answer.
+  - The CFPB says answering does not mean you agree you owe the debt. If you do not answer, a judgment could let a creditor garnish your wages, put a lien on your property, or freeze money in your bank account, depending on state law.
+contact:
+  phone: "304-291-7296"
+  url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-04/SCA-MI-401NP.pdf
+  url_label: Court's information sheet for defendants
+  place: 75 High Street, Suite 25, Morgantown, WV 26505
+if_you_want_help: [msj-consumer-debt-legal-help, legal-aid-wv-civil-legal-help]
+sources:
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-04/SCA-MI-401NP.pdf
+    checked: 2026-11-02
+  - url: https://www.courtswv.gov/sites/default/pubfilesmnt/2026-04/SCA-M225.pdf
+    checked: 2026-11-02
+  - url: https://www.courtswv.gov/public-resources/court-forms/magistrate-court-forms
+    checked: 2026-11-02
+  - url: https://www.courtswv.gov/public-resources/court-information-county/monongalia_county
+    checked: 2026-11-02
+  - url: https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-if-im-sued-by-a-debt-collector-or-creditor-en-334/
+    checked: 2026-11-02

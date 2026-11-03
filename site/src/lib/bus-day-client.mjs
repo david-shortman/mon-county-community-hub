@@ -1,17 +1,16 @@
 // A day on the buses: the browser part. Works on the markup DayOnTheBuses
 // draws: a held chart (.stage) that follows the scroll steps, and a
 // "Pick a day and a time" tool. Needs bus-day.mjs (passed in as api).
+// "Turn off motion" and the step watcher come from the shared scroll story kit
+// (motion-client.mjs, #1441).
+import { motion, watchSteps } from './motion-client.mjs';
+
 export function initDay(sec, routes, api) {
   if (!sec) return;
-  var root = document.documentElement;
-  var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var btn = sec.querySelector('#motion-toggle');
-  var note = sec.querySelector('#motion-note');
-  var userOff = false;
-  try { userOff = localStorage.getItem('em-motion-off') === '1'; } catch (e) {}
+  var m = motion();
   var byN = {}; routes.forEach(function (r) { byN[r.n] = r; });
   var DAYLABEL = {}; api.DAYS.forEach(function (d) { DAYLABEL[d.key] = d; });
-  function moving() { return !(userOff || mq.matches); }
+  function moving() { return m.allowed(); }
 
   // ---- one chart: slide bars for a day, move the time line, light the rows ----
   function chart(svgEl) {
@@ -94,11 +93,10 @@ export function initDay(sec, routes, api) {
   var steps = Array.prototype.slice.call(sec.querySelectorAll('.days > li'));
   var cap = sec.querySelector('[data-now]');
   var story = stageSvg ? chart(stageSvg) : null;
-  var io = null, current = -1, pending = 0;
+  var current = -1, pending = 0;
   function go(i) {
-    if (i < 0 || i === current || !story) return;
+    if (!story) return;
     current = i;
-    steps.forEach(function (s, n) { s.classList.toggle('on', n === i); });
     var li = steps[i], day = li.getAttribute('data-day'), t = Number(li.getAttribute('data-t'));
     function caption() { cap.innerHTML = '<span>' + DAYLABEL[day].label + ', ' + api.fmt(t) + ':</span> ' + countLine(day, t); }
     clearTimeout(pending);
@@ -113,20 +111,6 @@ export function initDay(sec, routes, api) {
   if (story) story.listeners.push(function (day, t) {
     if (cap && current >= 0) cap.innerHTML = '<span>' + DAYLABEL[day].label + ', ' + api.fmt(Math.round(t / 5) * 5) + ':</span> ' + countLine(day, t);
   });
-  function live(on) {
-    sec.classList.toggle('is-live', on);
-    if (on && !io && 'IntersectionObserver' in window) {
-      io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) go(steps.indexOf(e.target)); });
-      }, { rootMargin: '-45% 0px -50% 0px' });
-      steps.forEach(function (s) { io.observe(s); });
-      go(0);
-    } else if (!on && io) {
-      io.disconnect(); io = null; current = -1;
-      steps.forEach(function (s) { s.classList.remove('on'); });
-    }
-  }
-
   function nowInTown() {
     var p = {};
     try {
@@ -214,21 +198,11 @@ export function initDay(sec, routes, api) {
     if (!toNow()) { pickDay('m'); range.value = '540'; tc.setTime(540); }
   }
 
-  // ---- Turn off motion ----
-  function update() {
-    var off = userOff || mq.matches;
-    if (off) root.setAttribute('data-motion-off', ''); else root.removeAttribute('data-motion-off');
-    sec.classList.toggle('is-moving', !off);
-    btn.hidden = mq.matches;
-    btn.textContent = userOff ? 'Turn on motion' : 'Turn off motion';
-    note.hidden = !mq.matches;
-    live(!off);
-  }
-  btn.addEventListener('click', function () {
-    userOff = !userOff;
-    try { localStorage.setItem('em-motion-off', userOff ? '1' : '0'); } catch (e) {}
-    update();
+  // ---- Follow the scroll, only while motion is allowed ----
+  watchSteps(sec, steps, go, {
+    onLive: function (on) {
+      sec.classList.toggle('is-moving', on);
+      if (!on) current = -1;
+    },
   });
-  if (mq.addEventListener) mq.addEventListener('change', update); else if (mq.addListener) mq.addListener(update);
-  update();
 }

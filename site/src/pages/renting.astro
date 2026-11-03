@@ -27,6 +27,8 @@ const moveOut = src('https://legalaidwv.org/renters-rights-west-virginia/moving-
 const code = (n) => `https://code.wvlegislature.gov/37-6A-${n}/`;
 const depositCode = [1, 2, 3, 4, 5].map((n) => ({ url: code(n), checked, name: `West Virginia Code §37-6A-${n}` }));
 const rentalPage = 'https://www.morgantownwv.gov/435/Rental-Information';
+// Eviction court steps (#1534), quoted from the WV Code, read 2026-11-02.
+const court = [['55-3A-1', '§55-3A-1'], ['55-3A-3', '§55-3A-3'], ['37-6-23', '§37-6-23']].map(([n, name]) => ({ url: `https://code.wvlegislature.gov/${n}/`, checked: '2026-11-02', name: `West Virginia Code ${name}` }));
 ---
 <Base title="Renting a home in Morgantown and Mon County: before you rent, repairs and your deposit" description="Check that a Morgantown or Star City rental is registered, read a lease, ask a landlord for repairs, and what West Virginia law and Legal Aid of WV say about getting a security deposit back.">
   <h1>Renting a home: before you rent, repairs and your deposit</h1>
@@ -37,6 +39,7 @@ const rentalPage = 'https://www.morgantownwv.gov/435/Rental-Information';
       <li><a href="#before">Before you rent</a></li>
       <li><a href="#repairs">Getting repairs made</a></li>
       <li><a href="#deposit">Getting your deposit back</a></li>
+      <li><a href="#court">If your landlord takes you to court</a></li>
       <li><a href="#legal-help">Free legal help</a></li>
     </ul>
   </nav>
@@ -134,6 +137,17 @@ const rentalPage = 'https://www.morgantownwv.gov/435/Rental-Information';
     <a class="btn" href={depArticle[0].url}><Icon name="open" /><span>Legal Aid: get your deposit back</span></a>
     <a class="btn" href={moveOut[0].url}><Icon name="open" /><span>Deposit letter and checklist</span></a>
   </div>
+
+  <h2 id="court">If your landlord takes you to court</h2>
+  <p>Got court papers about leaving your home? Call Legal Aid, listed below, the same day. Here is what West Virginia law says about how a landlord asks a court to remove a renter. In Mon County, the case is in magistrate court or circuit court.</p>
+  <ol>
+    <li><strong>You get a notice of the hearing.</strong> The law says the hearing "may not be less than five nor more than 10 judicial days" after the landlord files. Judicial days are days the court is open. The notice must tell you that you can file a written defense within five days of getting it.</li>
+    <li><strong>Go to the hearing.</strong> If you file no answer and do not show up, the law says "the court shall make and enter an order granting immediate possession of the property to the landlord." A delay is "for cause only." If you get one, you pay rent that comes due during the delay to the court.</li>
+    <li><strong>Paying can end the case.</strong> If all the rent owed, "with interest and costs," is paid "at any time before the trial," the law says "all further proceedings in the action shall cease."</li>
+    <li><strong>If the court rules for the landlord,</strong> the order sets a time to move out. After that time, the law says "the sheriff shall forthwith remove the tenant."</li>
+  </ol>
+  <p class="note">This is what the law says, not legal advice. Appeals and other rules can change what happens in a case, and Legal Aid can tell you about yours.</p>
+  <SourceLine sources={court} about="eviction court steps" />
 
   <h2 id="legal-help">Free legal help</h2>
   <p>Legal Aid of West Virginia gives free help to renters with low income. WVU students can use Student Legal Services (see above).</p>

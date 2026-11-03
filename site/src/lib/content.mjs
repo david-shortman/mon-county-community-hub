@@ -266,7 +266,41 @@ export function isStale(checked, today = todayYmd(), days = STALE_DAYS) {
 // content/boards/) change faster: seat counts and grant rounds. They say
 // "may be out of date" after 90 days instead of 6 months (#791, #291).
 export const FAST_STALE_DAYS = 90;
-export const staleDaysFor = (r) => ((r?.topics ?? []).includes('better') || String(r?._file ?? '').startsWith('boards/') ? FAST_STALE_DAYS : STALE_DAYS);
+const baseStaleDays = (r) => ((r?.topics ?? []).includes('better') || String(r?._file ?? '').startsWith('boards/') ? FAST_STALE_DAYS : STALE_DAYS);
+// Cards follow the re-check cadence below (#1461), never later than 6 months.
+export const staleDaysFor = (r) => Math.min(recheckDaysFor(r), STALE_DAYS);
+
+// Re-check cadence from the risk rubric (docs/playbook/trust-and-ai.md, #1461).
+// The high-stakes topics and every calendar entry are in the top tier: re-check
+// every 90 days. A record can set `recheck_days` to go faster (or, outside the
+// top tier, slower, up to a year); check-content refuses a top-tier record
+// slower than 90 days. Otherwise the cadence is the card's own rule above.
+//
+// The Health check counts items re-checked on time, and cards say "may be
+// out of date" once a listing is past its cadence (staleDaysFor, capped at 6
+// months, the promise on About and How we check).
+export const HIGH_STAKES_TOPICS = ['health', 'money', 'housing', 'family', 'taxes', 'voting'];
+export const TOP_TIER_DAYS = 90;
+export const MAX_RECHECK_DAYS = 365;
+export const isTopTier = (r) => (r?.topics ?? []).some((t) => HIGH_STAKES_TOPICS.includes(t)) || String(r?._file ?? '').startsWith('calendar/');
+export function recheckDaysFor(r) {
+  const set = Number(r?.recheck_days);
+  if (Number.isInteger(set) && set > 0) return set;
+  return isTopTier(r) ? TOP_TIER_DAYS : baseStaleDays(r);
+}
+// Problems with a record's recheck_days, for check-content.
+export function recheckProblems(r) {
+  if (r?.recheck_days == null) return [];
+  const d = r.recheck_days;
+  if (!Number.isInteger(d) || d < 1 || d > MAX_RECHECK_DAYS) return [`recheck_days must be a whole number of days from 1 to ${MAX_RECHECK_DAYS}, like 90`];
+  if (isTopTier(r) && d > TOP_TIER_DAYS) return [`recheck_days ${d} is slower than the ${TOP_TIER_DAYS} days every high-stakes record needs (risk rubric, docs/playbook/trust-and-ai.md)`];
+  return [];
+}
+// Is a record past its re-check date? Uses the oldest source check.
+export const recheckDue = (r, today = todayYmd()) => {
+  const c = oldestChecked((r?.sources ?? []).map((s) => ({ ...s, checked: ymd(s.checked) })));
+  return Boolean(c) && isStale(c, today, recheckDaysFor(r));
+};
 
 // A "Report a problem" link. It opens our private fix form (FIX_FORM, #522),
 // because David keeps GitHub issues for the people who work on the project.

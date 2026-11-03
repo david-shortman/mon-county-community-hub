@@ -1,0 +1,8 @@
+slug: fema-map-service-center
+text: "The official federal map is FEMA's **Flood Map Service Center**. Enter an address, a place, or map coordinates to find the official flood map for that spot. Lenders and insurers use these maps."
+quote: >-
+  MSC Search by Address ... Enter an address, a place, or longitude/latitude coordinates: ... The FEMA Flood Map Service Center (MSC) is the official ... your official flood map
+sources:
+  - url: https://msc.fema.gov/portal/home
+    checked: 2026-11-03
+recheck_days: 365

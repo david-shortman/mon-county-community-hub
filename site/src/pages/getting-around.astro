@@ -18,7 +18,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Base title="Getting around Morgantown without a car: Mountain Line buses" description="Ride Mountain Line buses in Morgantown and Mon County: fares and passes, free rides with a WVU ID, the Grey Line, and buses to the hospitals.">
   <h1>Getting around without a car</h1>
   <p class="lede">Mountain Line runs the public buses in Morgantown and Mon County. Most local buses stop anywhere along the route if you wave to the driver. For live bus times, use Mountain Line's <a href="https://www.busride.org/google-trip-planner">trip planner</a> or call <a href="tel:3042917433">304-291-RIDE (304-291-7433)</a>.</p>
-  <p>See how it could go: <a href={`${base}/getting-around/example/`}>an example first week without a car</a> (a made-up person, real routes).</p>
+  <p>New to the bus? Walk through <a href={`${base}/getting-around/example/`}>a sample first week without a car</a>, using real routes.</p>
 
   <nav aria-label="On this page">
     <ul>
@@ -35,6 +35,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="fares">Fares and how to ride</h2>
   {r('mountain-line-fares') && <ResourceCard r={r('mountain-line-fares')} showCost />}
+  {r('mountain-line-high-school-id') && <ResourceCard r={r('mountain-line-high-school-id')} />}
 
   <h2 id="wvu">Free with a WVU ID</h2>
   {r('mountain-line-wvu-ride-free') && <ResourceCard r={r('mountain-line-wvu-ride-free')} />}
@@ -55,7 +56,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="rides">Can't take the bus to a medical visit?</h2>
   {r('mountain-line-newfit') && <ResourceCard r={r('mountain-line-newfit')} showCost />}
-  <p>On Medicaid or WVCHIP? See <a href={`${base}/medical-rides/`}>Ride to a medical visit</a> for rides through Modivcare.</p>
+  <p>On Medicaid or WVCHIP? See <a href={`${base}/medical-rides/`}>Ride to a medical visit</a> for rides through Modivcare. Older adults and people with disabilities can also get half fare, buses that go off route to pick you up, and Senior Monongalians rides: see <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</p>
 
   <p class="meta">Sources checked October 30, 2026, and the PRT on November 2, 2026. Routes and times change, so check the trip planner before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

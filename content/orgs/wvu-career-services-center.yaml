@@ -1,0 +1,11 @@
+name: WVU Career Services Center
+slug: wvu-career-services-center
+kind: school
+website: https://careercenter.wvu.edu/
+phone: "304-293-2221"
+summary: WVU's career office. It posts student jobs on Handshake, WVU's online job board, and helps students use it.
+topics: [work]
+area: morgantown
+sources:
+  - url: https://careercenter.wvu.edu/channels/student-employment-resources/
+    checked: 2026-11-02

@@ -20,7 +20,9 @@ export const HOLIDAYS = {
   christmas: 'Christmas Day',
 };
 // `meetings` (#902): regular meetings, each { name, when }, in the source's words.
-export const LISTING_FIELDS = ['opening_hours', 'get_in', 'languages', 'access', 'steps', 'closed_on', 'meetings', 'options', 'notes'];
+// `not_posted` (#529): place facts the source was read for and does not state.
+export const LISTING_FIELDS = ['opening_hours', 'get_in', 'languages', 'access', 'steps', 'closed_on', 'meetings', 'options', 'notes', 'not_posted'];
+export const PLACE_FACTS = ['hours', 'cost', 'get_in'];
 
 const isTime = (t) => /^([01]\d|2[0-3]):[0-5]\d$|^24:00$/.test(String(t));
 const minutes = (t) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
@@ -35,20 +37,70 @@ export function schedule(r) {
   return h.map((p) => ({ days: p.days, opens: minutes(p.opens), closes: minutes(p.closes) }));
 }
 
+// Problems with an `opening_hours` value. Resources and places (#1439) share it.
+export function checkOpeningHours(h, where) {
+  const errors = [];
+  if (h == null || h === 'always') return errors;
+  if (!Array.isArray(h) || !h.length) errors.push(`${where}: opening_hours must be "always" or a list of days with opens and closes (see content/README.md)`);
+  else for (const p of h) {
+    if (!Array.isArray(p?.days) || !p.days.length || p.days.some((d) => !DAYS.includes(d))) errors.push(`${where}: opening_hours days must be a list from ${DAYS.join(', ')}`);
+    if (!isTime(p?.opens) || !isTime(p?.closes)) errors.push(`${where}: opening_hours opens and closes must be quoted 24-hour times like "08:30"`);
+    else if (p.opens === p.closes) errors.push(`${where}: opening_hours opens and closes are the same time; use "always" for 24 hours`);
+  }
+  return errors;
+}
+
+const DAY_NAMES = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
+// "8 a.m.", "11:30 a.m.", "noon": the same way times read everywhere (#51).
+function timeWords(t) {
+  const [h, m] = t.split(':').map(Number);
+  if (h === 12 && !m) return 'noon';
+  if ((h === 0 || h === 24) && !m) return 'midnight';
+  return `${h % 12 || 12}${m ? `:${String(m).padStart(2, '0')}` : ''} ${h < 12 ? 'a.m.' : 'p.m.'}`;
+}
+const andList = (xs) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}`);
+// "Monday to Thursday", "Friday and Saturday", "Monday, Wednesday and Friday".
+// Three or more days in a row read as a range.
+export function dayWords(days) {
+  const idx = [...new Set(days)].map((d) => DAYS.indexOf(d)).sort((a, b) => a - b);
+  if (idx.length === 7) return 'Every day';
+  const runs = [];
+  for (const i of idx) {
+    const last = runs[runs.length - 1];
+    if (last && i === last[last.length - 1] + 1) last.push(i); else runs.push([i]);
+  }
+  const parts = runs.flatMap((r) => (r.length >= 3 ? [`${DAY_NAMES[DAYS[r[0]]]} to ${DAY_NAMES[DAYS[r[r.length - 1]]]}`] : r.map((i) => DAY_NAMES[DAYS[i]])));
+  return andList(parts);
+}
+
+// Opening hours as a few short lines, days with the same hours together (#1439):
+// ["Monday to Thursday: 9 a.m. to 8 p.m.", "Friday and Saturday: 9 a.m. to 4 p.m.", "Closed Sunday"].
+// One line per day ran long on a phone and read as "Tuesdays Closed".
+export function hoursLines(h) {
+  if (h == null) return [];
+  if (h === 'always') return ['Open 24 hours, every day'];
+  const byDay = Object.fromEntries(DAYS.map((d) => [d, []]));
+  for (const p of h) for (const d of p.days) byDay[d].push(p);
+  const groups = [];
+  for (const d of DAYS) {
+    if (!byDay[d].length) continue;
+    const key = byDay[d].slice().sort((a, b) => (a.opens < b.opens ? -1 : 1)).map((p) => `${timeWords(p.opens)} to ${timeWords(p.closes)}`).join(' and ');
+    const g = groups.find((x) => x.key === key);
+    if (g) g.days.push(d); else groups.push({ key, days: [d] });
+  }
+  const lines = groups.map((g) => `${dayWords(g.days)}: ${g.key}`);
+  const closed = DAYS.filter((d) => !byDay[d].length);
+  if (closed.length && closed.length < 7) lines.push(`Closed ${dayWords(closed)}`);
+  return lines;
+}
+
 // Problems with the listing fields on one resource record.
 export function checkListing(r) {
   const where = r._file;
   const errors = [];
   const warnings = [];
   const h = r.opening_hours;
-  if (h != null && h !== 'always') {
-    if (!Array.isArray(h) || !h.length) errors.push(`${where}: opening_hours must be "always" or a list of days with opens and closes (see content/README.md)`);
-    else for (const p of h) {
-      if (!Array.isArray(p?.days) || !p.days.length || p.days.some((d) => !DAYS.includes(d))) errors.push(`${where}: opening_hours days must be a list from ${DAYS.join(', ')}`);
-      if (!isTime(p?.opens) || !isTime(p?.closes)) errors.push(`${where}: opening_hours opens and closes must be quoted 24-hour times like "08:30"`);
-      else if (p.opens === p.closes) errors.push(`${where}: opening_hours opens and closes are the same time; use "always" for 24 hours`);
-    }
-  }
+  errors.push(...checkOpeningHours(h, where));
   if (h != null && !r.hours) errors.push(`${where}: opening_hours needs hours in words too, so the card can always say them`);
   if (r.get_in != null && !GET_IN[r.get_in]) errors.push(`${where}: get_in must be one of ${Object.keys(GET_IN).join(', ')}`);
   if (r.languages != null && (!Array.isArray(r.languages) || r.languages.some((l) => typeof l !== 'string' || !l.trim()))) errors.push(`${where}: languages must be a list of language names`);
@@ -60,9 +112,17 @@ export function checkListing(r) {
   // `options` (#973): a short bulleted list of choices, like the kinds of ID that count.
   // `notes`: short paragraphs shown after the lists, for exceptions and special cases.
   for (const f of ['options', 'notes']) if (r[f] != null && (!Array.isArray(r[f]) || !r[f].length || r[f].some((t) => typeof t !== 'string' || !t.trim()))) errors.push(`${where}: ${f} must be a list of short text items`);
-  // A place a person goes to needs the first seven listing facts.
+  // `not_posted`: the source was read and does not say these, so the warning
+  // below does not repeat for a gap someone already checked. Listing a fact the
+  // record has is an error, so the list cannot go stale once the fact is added.
+  const notPosted = r.not_posted ?? [];
+  if (r.not_posted != null && (!Array.isArray(notPosted) || !notPosted.length || notPosted.some((f) => !PLACE_FACTS.includes(f)))) errors.push(`${where}: not_posted must be a list from ${PLACE_FACTS.join(', ')}`);
+  else for (const f of notPosted) if (r[f]) errors.push(`${where}: not_posted lists ${f}, but the record has ${f}; take it out of not_posted`);
+  // A place a person goes to needs the first seven listing facts. A group's
+  // `meetings` are its times, so they count as hours.
   if (r.contact?.place) {
-    const missing = [!r.hours && 'hours', !r.cost && 'cost', !r.get_in && 'get_in'].filter(Boolean);
+    const has = (f) => r[f] || (f === 'hours' && r.meetings) || (Array.isArray(notPosted) && notPosted.includes(f));
+    const missing = PLACE_FACTS.filter((f) => !has(f));
     if (missing.length) warnings.push(`${where}: a place to go, but no ${missing.join(', ')} yet. Add from the source only, never guess`);
   }
   return { errors, warnings };

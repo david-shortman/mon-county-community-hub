@@ -115,7 +115,7 @@ describe('privacy promises in the built pages', () => {
     assert.deepEqual(bad, []);
   });
 
-  test('domestic and sexual violence listings never show Text this, Print this or Share', () => {
+  test('domestic and sexual violence listings never show Text this, Print this or Share, and their pages have Quick exit', () => {
     const records = privateTrace();
     assert.ok(records.length >= 3, 'expected the private_trace listings in content/');
     const bad = [];
@@ -128,6 +128,8 @@ describe('privacy promises in the built pages', () => {
           seen.add(r.slug);
           const card = h.slice(at, h.indexOf('</article>', at));
           if (card.includes('class="pass-it-on"')) bad.push(`${p}#${r.slug}: has the Pass it on row`);
+          // Privacy page: "Their pages have Quick exit instead" (#1422).
+          if (!h.includes('id="quick-exit"')) bad.push(`${p}#${r.slug}: the page has no Quick exit`);
         }
         // Wherever it appears, no text message or share button carries its title.
         const enc = encodeURIComponent(r.title);
@@ -244,7 +246,7 @@ describe('access promises in a browser', { skip: fullOnly }, () => {
     const { ctx } = await context();
     const page = await ctx.newPage();
     await page.goto(s.origin + '/how-it-works/');
-    const btn = page.locator('#motion-toggle');
+    const btn = page.locator('#flow-explainer .motion-toggle');
     assert.equal(await page.locator('#flow-explainer.is-live').count(), 1, 'the story moves before the switch');
     await btn.click();
     assert.equal(await btn.innerText(), 'Turn on motion');
