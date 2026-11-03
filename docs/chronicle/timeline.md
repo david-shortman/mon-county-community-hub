@@ -47,3 +47,13 @@ One line per notable event, oldest first. Times are UTC. Add new lines at the bo
 ## 2026-10-31
 
 - 00:14 First before-and-after benchmark: our pages beat every other source on 7 of 8 urgent needs, and meet the full bar on 1 ([#788](https://github.com/david-shortman/mon-county-community-hub/pull/788))
+
+## 2026-10-31 to 2026-11-01
+
+- 18:00 Answer-page recheck: 38 of 45 questions have an answer page on the site ([#993](https://github.com/david-shortman/mon-county-community-hub/pull/993))
+- 20:04 Runs become automatic ([decision](../decisions/2026-10-31-2004-runs-are-automatic.md))
+- 21:30 Discoveries log starts ([decision](../decisions/2026-10-31-2130-discoveries-log.md))
+- Nov 1: Weekly findability run: 76 on the original 32 questions, 59 of 62 have an answer page ([scoreboard](../scoreboard.md))
+- Nov 1: Visit counter goes live; first totals due in December ([scoreboard](../scoreboard.md))
+- Nov 1: Design lab lets David preview several site looks ([#1392](https://github.com/david-shortman/mon-county-community-hub/pull/1392))
+- Nov 1: Week one dispatch: 667 PRs merged, 119 items waiting on David ([dispatch](2026-11-01-week.md))

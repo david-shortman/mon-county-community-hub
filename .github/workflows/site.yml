@@ -21,22 +21,24 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: site
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # Two commits, so a pull request can see which files it changed (the e2e scope below).
           fetch-depth: 2
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: site/package-lock.json
       - run: npm ci
       - run: npm run check-content
+      # scripts/pr-wait.sh and scripts/safe-merge.sh against a fake gh: no network, about 2 seconds.
+      - run: bash ../scripts/test/pr-wait.test.sh
       - run: npm run build
         env:
           # Read-only, to count group requests (#523). The build still works without it.
@@ -70,13 +72,13 @@ jobs:
       - if: ${{ !cancelled() && steps.scope.outputs.suite == 'e2e' }}
         run: npm run screenshots
       - if: ${{ !cancelled() && steps.scope.outputs.suite == 'e2e' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: phone-screenshots
           path: site/e2e-shots/
           retention-days: 14
           if-no-files-found: ignore
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         if: github.event_name != 'pull_request'
         with:
           path: site/dist
@@ -84,10 +86,10 @@ jobs:
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

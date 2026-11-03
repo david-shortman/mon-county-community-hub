@@ -9,6 +9,7 @@ contact:
   place: "113 Mathieson Street, Suite 100, Morgantown, WV 26501"
   url: https://www.monongaliacountyswa.com
 cost: free
+not_posted: [hours, get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://www.monongaliacountyswa.com
     checked: 2026-11-01

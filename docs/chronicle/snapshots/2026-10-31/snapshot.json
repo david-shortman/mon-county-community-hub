@@ -1,0 +1,2077 @@
+{
+  "date": "2026-10-31",
+  "capturedAt": "2026-11-01T16:55:50.191Z",
+  "site": "https://everythingmorgantown.org/",
+  "repo": "https://github.com/david-shortman/mon-county-community-hub",
+  "note": "Days are UTC. Screenshots show the live site at capturedAt. Open-by-label counts use current labels.",
+  "screenshots": [],
+  "video": null,
+  "stats": {
+    "day": {
+      "issuesOpened": 139,
+      "issuesClosed": 239,
+      "prsOpened": 265,
+      "prsMerged": [
+        {
+          "number": 1147,
+          "title": "Accessibility status: 200% text fixes landed (#971)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1147"
+        },
+        {
+          "number": 1146,
+          "title": "Flyers and How is Mon County doing? fit at 200% text (#971)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1146"
+        },
+        {
+          "number": 1144,
+          "title": "\"Tell us\" opens the fix form, not GitHub, plus a build check (#1079)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1144"
+        },
+        {
+          "number": 1143,
+          "title": "Coverage map after wave 5: five more life areas (#222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1143"
+        },
+        {
+          "number": 1142,
+          "title": "Helper cards: what to tell a worn-out caregiver (#1134)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1142"
+        },
+        {
+          "number": 1141,
+          "title": "Legal help and volunteer pages: a note for volunteer lawyers (#1088)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1141"
+        },
+        {
+          "number": 1140,
+          "title": "Door pages link related resident group starting pages",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1140"
+        },
+        {
+          "number": 1139,
+          "title": "Agenda guides check: one issue per newly posted agenda (part of #529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1139"
+        },
+        {
+          "number": 1136,
+          "title": "Starting pages: homeowners, college students, remote workers, artists, people who want to help, outdoor",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1136"
+        },
+        {
+          "number": 1135,
+          "title": "Call list: verification sweep 2 additions (#529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1135"
+        },
+        {
+          "number": 1130,
+          "title": "Coming meetings in plain language: agenda guides, first for the Nov 4 County Commission (part of #529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1130"
+        },
+        {
+          "number": 1129,
+          "title": "Pets and volunteer pages: foster or volunteer with Animal Friends (#1087)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1129"
+        },
+        {
+          "number": 1128,
+          "title": "Town pages: one page per town and census place in Mon County (#1120)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1128"
+        },
+        {
+          "number": 1127,
+          "title": "End-to-end tests: crisis strip, question paths, tools, calendar, Tonight, print, API and links",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1127"
+        },
+        {
+          "number": 1125,
+          "title": "Starting pages: /for/ index, veterans, school-age parents, teens, job seekers, tradespeople, small business",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1125"
+        },
+        {
+          "number": 1124,
+          "title": "How to read a meeting agenda (part of #529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1124"
+        },
+        {
+          "number": 1123,
+          "title": "Vote and volunteer pages: work at the polls (#1086)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1123"
+        },
+        {
+          "number": 1122,
+          "title": "Noise and neighbor problems, with the city's code complaint PDF (part of #222, #393)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1122"
+        },
+        {
+          "number": 1121,
+          "title": "Burning leaves and brush: West Virginia's fire season rules (part of #222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1121"
+        },
+        {
+          "number": 1119,
+          "title": "Verification sweep 2: federal bonding cost, floodplain ordinance label (#900, #901)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1119"
+        },
+        {
+          "number": 1115,
+          "title": "Untrack the site/node_modules link that came in with #866",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1115"
+        },
+        {
+          "number": 1112,
+          "title": "Verification sweep 2: records and pets facts (#1024, #1025)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1112"
+        },
+        {
+          "number": 1111,
+          "title": "Ask for public records: West Virginia FOIA, past requests and city records (part of #222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1111"
+        },
+        {
+          "number": 1110,
+          "title": "Accessibility wave 5: audit of 211 pages and a heading fix",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1110"
+        },
+        {
+          "number": 1109,
+          "title": "Verification sweep 2: legal help facts (#1023)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1109"
+        },
+        {
+          "number": 1108,
+          "title": "Living will and medical power of attorney: free WV forms, the registry and POST (part of #222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1108"
+        },
+        {
+          "number": 1107,
+          "title": "IDs page: sign up as an organ, eye and tissue donor (#1085)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1107"
+        },
+        {
+          "number": 1100,
+          "title": "Verification sweep 2: listing facts from official pages (#872, #898)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1100"
+        },
+        {
+          "number": 1097,
+          "title": "Languages groundwork: i18n routing, translation files and checks, nothing residents see (#1083)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1097"
+        },
+        {
+          "number": 1091,
+          "title": "Accessible parking placard: the DMV form as a phone page (part of #393)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1091"
+        },
+        {
+          "number": 1089,
+          "title": "Volunteer: prepare free tax returns with the IRS (#1084)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1089"
+        },
+        {
+          "number": 1081,
+          "title": "Discoveries log: holes in the public record (#1080)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1081"
+        },
+        {
+          "number": 1077,
+          "title": "How it works: table stacks on narrow screens (fixes 200% text check)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1077"
+        },
+        {
+          "number": 1076,
+          "title": "Report a problem and Tell us open the fix form; How it works says the owner",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1076"
+        },
+        {
+          "number": 1075,
+          "title": "Run 311 totals on a schedule, nothing manual (#881)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1075"
+        },
+        {
+          "number": 1070,
+          "title": "How this site works: one page on how the whole system fits together",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1070"
+        },
+        {
+          "number": 1069,
+          "title": "Document how gh works in cloud sessions",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1069"
+        },
+        {
+          "number": 1068,
+          "title": "Plan: the site in other languages (Spanish pilot first)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1068"
+        },
+        {
+          "number": 1066,
+          "title": "Add the fix@ email beside the fix form",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1066"
+        },
+        {
+          "number": 1058,
+          "title": "Utility bills: show this season's LIEAP dates from the record",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1058"
+        },
+        {
+          "number": 1035,
+          "title": "Accessibility audit: status page, re-runnable audit script, chart line contrast",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1035"
+        },
+        {
+          "number": 1034,
+          "title": "Parking page: review fixes (#1030)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1034"
+        },
+        {
+          "number": 1032,
+          "title": "Car registration and inspection: renew, inspection sticker, lost plates (#222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1032"
+        },
+        {
+          "number": 1031,
+          "title": "Parking in Morgantown: garages, meters, blue curb permits, tickets (#1030)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1031"
+        },
+        {
+          "number": 1029,
+          "title": "Coverage map after wave 4; build logs link their needs-verification issues (#222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1029"
+        },
+        {
+          "number": 1028,
+          "title": "Morgantown Farmers Market days, Saturday and winter (waits for David: SNAP match)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1028"
+        },
+        {
+          "number": 1022,
+          "title": "Voter ID card: IDs as a list, exceptions apart (#973)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1022"
+        },
+        {
+          "number": 1021,
+          "title": "Pets page: what to do after an animal bite (waits for David: names 911)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1021"
+        },
+        {
+          "number": 1020,
+          "title": "Growing: USDA offices, WVDA farm programs, eggs, shared kitchen, market vendor rules (#434, #441, #443)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1020"
+        },
+        {
+          "number": 1018,
+          "title": "Birth certificates, IDs and records, and When someone dies (#222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1018"
+        },
+        {
+          "number": 1017,
+          "title": "Snow and ice page: who plows, sidewalks, schools, buses (#1005)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1017"
+        },
+        {
+          "number": 1016,
+          "title": "Home page crisis buttons stack when text is big (#971)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1016"
+        },
+        {
+          "number": 1014,
+          "title": "Holiday page: Dec 10 food distribution and senior holiday meal sign-up (for David)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1014"
+        },
+        {
+          "number": 1013,
+          "title": "What happens next: shelter, utility bill and SNAP records (part of #716)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1013"
+        },
+        {
+          "number": 1011,
+          "title": "Caring for a family member: where to start, respite, support groups, kinship care (#222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1011"
+        },
+        {
+          "number": 1009,
+          "title": "Weekly checklists: person-only items and How lines",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1009"
+        },
+        {
+          "number": 1008,
+          "title": "No sideways scroll at 200% text: halls and trend tables (#971)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1008"
+        },
+        {
+          "number": 1007,
+          "title": "Pets and animals: strays, lost pets, adoption, low cost spay and neuter, dog tags (#222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1007"
+        },
+        {
+          "number": 1006,
+          "title": "Weekly Make it better run, week of Oct 26 (#998)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1006"
+        },
+        {
+          "number": 1004,
+          "title": "Free help filing your taxes: volunteers, Free File, the EITC and the WV Family Tax Credit (#987, #209)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1004"
+        },
+        {
+          "number": 1003,
+          "title": "Weekly centers and sale dates, week of Oct 26 (#997, #999)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1003"
+        },
+        {
+          "number": 1002,
+          "title": "Courts and legal help: small claims, clearing a record, name change, jury duty (#222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1002"
+        },
+        {
+          "number": 1001,
+          "title": "Holiday season help page: toys, warm clothes, office closings, giving",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1001"
+        },
+        {
+          "number": 1000,
+          "title": "Life areas coverage map: what is covered, waiting for David, or missing (#222)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1000"
+        },
+        {
+          "number": 996,
+          "title": "Chronicle: wait for load, not networkidle (#995)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/996"
+        },
+        {
+          "number": 994,
+          "title": "Daily watch on Make it better grant and seat pages (#793)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/994"
+        },
+        {
+          "number": 993,
+          "title": "Findability: answer-page recheck, 38 of 45 questions answered on our site",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/993"
+        },
+        {
+          "number": 992,
+          "title": "Weekly checklist issues for what a robot cannot read (#752, #718, #793)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/992"
+        },
+        {
+          "number": 991,
+          "title": "How is Mon County doing: state test scores for Mon County Schools (q22, part of #772)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/991"
+        },
+        {
+          "number": 990,
+          "title": "Research: do not link either Bartlett domain; WRC listing confirmed (#529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/990"
+        },
+        {
+          "number": 989,
+          "title": "Adopt-A-Street: link the city's program page, add the Public Works number (#710)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/989"
+        },
+        {
+          "number": 986,
+          "title": "Daily watch on community center and sale date pages (#752, #718)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/986"
+        },
+        {
+          "number": 984,
+          "title": "Needs register: 12 ranked, sourced needs and a /needs/ page",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/984"
+        },
+        {
+          "number": 982,
+          "title": "Walkthroughs and small wave 2 fixes from a source check (#529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/982"
+        },
+        {
+          "number": 981,
+          "title": "Answer page: where can I volunteer in Morgantown this weekend? (q16)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/981"
+        },
+        {
+          "number": 980,
+          "title": "Bake sale rules: say required and must be limited to, as the form does (#529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/980"
+        },
+        {
+          "number": 979,
+          "title": "Voter ID: first-time voters must show ID, and no ID means a provisional ballot (#529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/979"
+        },
+        {
+          "number": 978,
+          "title": "Daily winter watch on warming shelter sources (#863)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/978"
+        },
+        {
+          "number": 977,
+          "title": "Answer pages: free WVU soil test, and who can tell what's wrong with my plants (#435, #436)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/977"
+        },
+        {
+          "number": 976,
+          "title": "Bus routes and passes: five fixes from a check against Mountain Line (#529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/976"
+        },
+        {
+          "number": 975,
+          "title": "Fix or removal form: link it across the site (#522)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/975"
+        },
+        {
+          "number": 974,
+          "title": "Plainer openings on six place pages, halls and the month page (#529)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/974"
+        },
+        {
+          "number": 972,
+          "title": "Election week on the vote page: early voting, ID, absentee, polling places (#970)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/972"
+        },
+        {
+          "number": 969,
+          "title": "Half-fare and property tax bus passes as a phone page (#955, part of #393)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/969"
+        },
+        {
+          "number": 968,
+          "title": "Example walkthrough: a first week in Morgantown without a car (#946)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/968"
+        },
+        {
+          "number": 967,
+          "title": "Research: volunteer-ask sources, and read the Deckers Creek feed (#952)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/967"
+        },
+        {
+          "number": 966,
+          "title": "This week in Mon County: the community pulse page, version 1 (#949)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/966"
+        },
+        {
+          "number": 965,
+          "title": "Bake sale rules from the health department as a phone page (#954, part of #393)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/965"
+        },
+        {
+          "number": 964,
+          "title": "Source check: slow sites take turns so the job fits in 30 minutes",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/964"
+        },
+        {
+          "number": 963,
+          "title": "Share this: a ready-to-paste summary, short link and image on each guide (#947)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/963"
+        },
+        {
+          "number": 962,
+          "title": "Meetings: save when each agenda and minutes file was first seen (#951)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/962"
+        },
+        {
+          "number": 961,
+          "title": "Every resource card says to check with the group first (#942)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/961"
+        },
+        {
+          "number": 960,
+          "title": "Families and kids: the state's licensed child care search (#943)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/960"
+        },
+        {
+          "number": 959,
+          "title": "Plain language rubric: point help pages to the tone guide (#941)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/959"
+        },
+        {
+          "number": 958,
+          "title": "BOPARC refunds and cancellations as a phone page (#953, part of #393)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/958"
+        },
+        {
+          "number": 956,
+          "title": "Shorter page titles and descriptions for search results (#939)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/956"
+        },
+        {
+          "number": 950,
+          "title": "Every Mountain Line bus route on one phone page, with its schedule PDFs (#924, part of #393)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/950"
+        },
+        {
+          "number": 945,
+          "title": "Watch pantry and meal pages closely for hour changes (#166, #167)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/945"
+        },
+        {
+          "number": 940,
+          "title": "Plan: a community pulse refreshed a few times a week (#258)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/940"
+        },
+        {
+          "number": 938,
+          "title": "Search readiness: flyers and the 404 page stay out of search (#89)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/938"
+        },
+        {
+          "number": 937,
+          "title": "Unit tests for the shared loader and API shape (#69)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/937"
+        },
+        {
+          "number": 935,
+          "title": "Money page: Are you a WVU student? section, The Rack re-checked (#602)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/935"
+        },
+        {
+          "number": 934,
+          "title": "Playbook: show up where people already are online, and a draft share kit (#191)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/934"
+        },
+        {
+          "number": 933,
+          "title": "Money page: the whole Legal Aid card in the #rent section (#803)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/933"
+        },
+        {
+          "number": 931,
+          "title": "Health department fees as a phone page, and a PDF to page pattern (#926, part of #393)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/931"
+        },
+        {
+          "number": 930,
+          "title": "One shared fetch for feeds, meetings and live numbers (#71)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/930"
+        },
+        {
+          "number": 929,
+          "title": "Playbook: public government data first, records requests as a rare backup (#170)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/929"
+        },
+        {
+          "number": 928,
+          "title": "Playbook: checking reported corrections before they go live (#168)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/928"
+        },
+        {
+          "number": 927,
+          "title": "Example walkthroughs: the pattern and a first one for meeting people (#190)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/927"
+        },
+        {
+          "number": 925,
+          "title": "Provenance: every source says how it was read (#70)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/925"
+        },
+        {
+          "number": 923,
+          "title": "Find a job: re-check the three job board links (#822)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/923"
+        },
+        {
+          "number": 921,
+          "title": "Apply the help page tone guide to recycling, flu shots and diabetes (#162)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/921"
+        },
+        {
+          "number": 920,
+          "title": "Playbook: tone for help pages (#162)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/920"
+        },
+        {
+          "number": 919,
+          "title": "Tables no longer break on phones (#917)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/919"
+        },
+        {
+          "number": 918,
+          "title": "Feeds found by folder, and per-feed health (#71)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/918"
+        },
+        {
+          "number": 916,
+          "title": "Labeled picture block (#179)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/916"
+        },
+        {
+          "number": 915,
+          "title": "A manual Actions job for Morgantown 311 totals (#881)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/915"
+        },
+        {
+          "number": 914,
+          "title": "Find a job cards: short lists instead of long paragraphs (#822)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/914"
+        },
+        {
+          "number": 913,
+          "title": "Neighborhood association meeting times live in content (#902)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/913"
+        },
+        {
+          "number": 912,
+          "title": "Make it better entries say \"may be out of date\" after 90 days (#791)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/912"
+        },
+        {
+          "number": 911,
+          "title": "Sell or donate page: borrow tools from MOTO (#907)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/911"
+        },
+        {
+          "number": 909,
+          "title": "scripts/safe-merge.sh: refuse to merge for:david PRs or before the High stakes check finishes",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/909"
+        },
+        {
+          "number": 906,
+          "title": "End-of-sprint findability recheck: 45 questions, leading measure (#110)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/906"
+        },
+        {
+          "number": 905,
+          "title": "High stakes check: read content/places records, including their interests",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/905"
+        },
+        {
+          "number": 904,
+          "title": "Who decides what: ten public bodies, how members are chosen, when they meet (#20)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/904"
+        },
+        {
+          "number": 903,
+          "title": "Find your people: five free community meals (for David, food help)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/903"
+        },
+        {
+          "number": 899,
+          "title": "Audit: arts, outdoors and community facts checked against sources",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/899"
+        },
+        {
+          "number": 897,
+          "title": "Audit: recycling center operator and eligibility, seed swap gap",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/897"
+        },
+        {
+          "number": 896,
+          "title": "Audit: centers, halls, thrift and markets, fix 7 facts to match sources",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/896"
+        },
+        {
+          "number": 895,
+          "title": "Link the permit, septic, contractor and flood pages",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/895"
+        },
+        {
+          "number": 894,
+          "title": "Your first 30 days on the New to Mon County page (#623)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/894"
+        },
+        {
+          "number": 893,
+          "title": "Audit jobs and business: county zoning wording, federal bonding cost",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/893"
+        },
+        {
+          "number": 892,
+          "title": "pr-wait.sh: follow the newest run when one is cancelled by a newer push",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/892"
+        },
+        {
+          "number": 891,
+          "title": "QA: card heading levels and small range text",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/891"
+        },
+        {
+          "number": 890,
+          "title": "Phone-only cards: point to the free 7-1-1 relay (#835)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/890"
+        },
+        {
+          "number": 888,
+          "title": "WVU student emergency funds record, verified on WVU's page (#601)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/888"
+        },
+        {
+          "number": 887,
+          "title": "Find your people: groups and free places to sit (#263)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/887"
+        },
+        {
+          "number": 886,
+          "title": "Verified: OLLI, Senior Monongalians in-home care, WVU Student Legal Services and veterans center (#600, #559, #577, #585)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/886"
+        },
+        {
+          "number": 884,
+          "title": "Combined call list from the verification sweep",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/884"
+        },
+        {
+          "number": 883,
+          "title": "Community center pages: keep Morgantown capitalized in the area line",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/883"
+        },
+        {
+          "number": 882,
+          "title": "Site-wide QA: taller tap areas, 14px labels, hub pages first, flyer wording",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/882"
+        },
+        {
+          "number": 880,
+          "title": "Audit: remove 10 facts the sources do not state, including 'wave the bus down'",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/880"
+        },
+        {
+          "number": 879,
+          "title": "County boards on Serve on a board; Make It Shine on Adopt a place (#289, #856)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/879"
+        },
+        {
+          "number": 878,
+          "title": "Listing facts from sources, second batch (#177)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/878"
+        },
+        {
+          "number": 877,
+          "title": "Is this a scam? How to check and where to report",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/877"
+        },
+        {
+          "number": 876,
+          "title": "Home safety: free smoke alarms, carbon monoxide, heating and lead",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/876"
+        },
+        {
+          "number": 875,
+          "title": "Your area picker, saved on the phone only (#152)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/875"
+        },
+        {
+          "number": 874,
+          "title": "Everyday safety research note: scams, weather and floods, home safety (#213)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/874"
+        },
+        {
+          "number": 873,
+          "title": "Listing facts from sources: hours, get in, access and costs (#177)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/873"
+        },
+        {
+          "number": 871,
+          "title": "After hours box on the help doors (#192)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/871"
+        },
+        {
+          "number": 870,
+          "title": "School-age page: before and after school care, and free school meals (#617, #619)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/870"
+        },
+        {
+          "number": 869,
+          "title": "Source credit and opening-hours warnings: two small fixes",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/869"
+        },
+        {
+          "number": 868,
+          "title": "Meetings: add the Board of Health and the MPO Policy Board",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/868"
+        },
+        {
+          "number": 867,
+          "title": "Work and learning: job help for ages 16 to 24, and a link to the teens page (#595)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/867"
+        },
+        {
+          "number": 866,
+          "title": "Families and kids: home visits, breastfeeding help, baby pantries and parent groups (#572, #574, #575, #576)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/866"
+        },
+        {
+          "number": 865,
+          "title": "School-age kids page: enroll, buses, after school, tutoring, things to do (#615, #618, #620, #621)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/865"
+        },
+        {
+          "number": 864,
+          "title": "Build warning when a page's opening reads above grade 9 (#833)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/864"
+        },
+        {
+          "number": 862,
+          "title": "Winter Tonight status page: open only with a same-day check (#401)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/862"
+        },
+        {
+          "number": 859,
+          "title": "Dates: an event listed by two feeds shows once (#852)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/859"
+        },
+        {
+          "number": 858,
+          "title": "Count in-person listings by area on the scoreboard (#834)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/858"
+        },
+        {
+          "number": 857,
+          "title": "Dentist page: shorter opening sentences (#804)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/857"
+        },
+        {
+          "number": 855,
+          "title": "Chronicle: timeline catch-up and monthly release check (#109)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/855"
+        },
+        {
+          "number": 854,
+          "title": "Open now badge knows the holidays a place closes (#726)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/854"
+        },
+        {
+          "number": 853,
+          "title": "Publish gathering places in the open data API (#399)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/853"
+        },
+        {
+          "number": 851,
+          "title": "Families and kids: link to special education contacts (#581 follow-up)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/851"
+        },
+        {
+          "number": 850,
+          "title": "Org entries: Monongalia County Assessor and Friends of Deckers Creek (#5)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/850"
+        },
+        {
+          "number": 849,
+          "title": "Help at home as you get older: meals and in-home care (#560, #561)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/849"
+        },
+        {
+          "number": 848,
+          "title": "High stakes check: catch crisis lines in code files and other content folders",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/848"
+        },
+        {
+          "number": 847,
+          "title": "Medical rides: shorter Medicaid ride steps, sourced address",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/847"
+        },
+        {
+          "number": 846,
+          "title": "Boards: other open seats as content entries; drop unused classes (#676, #677)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/846"
+        },
+        {
+          "number": 845,
+          "title": "Verified: WVU Dental student clinic costs and steps; MTEC adult education is free (#377, #376)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/845"
+        },
+        {
+          "number": 844,
+          "title": "Check a charity before you give (#611)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/844"
+        },
+        {
+          "number": 843,
+          "title": "Dates: Monongalia Arts Center, Morgantown Farmers Market and Mylan Park feeds (#761)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/843"
+        },
+        {
+          "number": 842,
+          "title": "Property tax: pay, homestead and appeals (#663)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/842"
+        },
+        {
+          "number": 841,
+          "title": "Change your home, leaving a nursing home, and getting around (#578, #580, #562)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/841"
+        },
+        {
+          "number": 840,
+          "title": "Help in your language: interpreters and language help (#181)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/840"
+        },
+        {
+          "number": 839,
+          "title": "County Health Rankings numbers: ten-year charts and a monthly check",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/839"
+        },
+        {
+          "number": 838,
+          "title": "Selling food at markets, events and food trucks (#642)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/838"
+        },
+        {
+          "number": 837,
+          "title": "Reach check: who our pages reach and who they miss (#112)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/837"
+        },
+        {
+          "number": 836,
+          "title": "Dates page leads with a This week list (#199)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/836"
+        },
+        {
+          "number": 832,
+          "title": "Renting a home: before you rent, repairs and your deposit (#565, #566, #567)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/832"
+        },
+        {
+          "number": 831,
+          "title": "Start a business in Star City, Granville or Westover (#640)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/831"
+        },
+        {
+          "number": 830,
+          "title": "Resource and place cards can show a short numbered list (steps) (#822)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/830"
+        },
+        {
+          "number": 829,
+          "title": "Meet people and get a library card (#626, #627, #669)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/829"
+        },
+        {
+          "number": 828,
+          "title": "Veterans: free help with a VA claim, jobs, posts and burial benefits (#586, #588, #589, #590, #591)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/828"
+        },
+        {
+          "number": 827,
+          "title": "For groups page: the JSON data is available now (#72)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/827"
+        },
+        {
+          "number": 826,
+          "title": "Recycling lookup: rows for building materials, clothes and furniture (#199)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/826"
+        },
+        {
+          "number": 825,
+          "title": "File today: start a SNAP, Medicaid, LIEAP or WV WORKS application, and a what-to-bring list (#402)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/825"
+        },
+        {
+          "number": 824,
+          "title": "Season cards: storm season and fall, outages on the winter card (#511, #299)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/824"
+        },
+        {
+          "number": 821,
+          "title": "Teen drivers page: permit to full license (#594)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/821"
+        },
+        {
+          "number": 820,
+          "title": "Presentation guide: site map points to /topics/ and names each page's job",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/820"
+        },
+        {
+          "number": 819,
+          "title": "Answer-first page pattern and audit; recycling page opens with the answer (#88)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/819"
+        },
+        {
+          "number": 818,
+          "title": "ADR 0007: four freshness tiers, and what is still open (#122)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/818"
+        },
+        {
+          "number": 817,
+          "title": "Start a business in Morgantown, step by step (#639)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/817"
+        },
+        {
+          "number": 815,
+          "title": "Care needs ledger: the evidence behind the Get care order",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/815"
+        },
+        {
+          "number": 814,
+          "title": "Facts with their own re-check clock, recycling page first (#122)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/814"
+        },
+        {
+          "number": 813,
+          "title": "Weatherization: name NCWVCAA on the utility bills page (#664)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/813"
+        },
+        {
+          "number": 812,
+          "title": "School calendar 2026-27: days off, early dismissals and last day on Dates (#616)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/812"
+        },
+        {
+          "number": 811,
+          "title": "Storm damage, flooding or power out? A step page for after a storm (#508)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/811"
+        },
+        {
+          "number": 810,
+          "title": "Flood zone guide as a step route; links to a step open it (#240)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/810"
+        },
+        {
+          "number": 809,
+          "title": "Live unemployment and CDC estimates on the How we're doing page (#15)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/809"
+        },
+        {
+          "number": 808,
+          "title": "Link the bills pages to Lifeline on Internet at home (#668)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/808"
+        },
+        {
+          "number": 807,
+          "title": "Outdoors: trails, swim and skate, Coopers Rock, licenses, groups (#632 to #637)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/807"
+        },
+        {
+          "number": 806,
+          "title": "Register to vote and find your polling place (#625)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/806"
+        },
+        {
+          "number": 805,
+          "title": "Meals on Wheels and county Emergency Management org records (#612)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/805"
+        },
+        {
+          "number": 802,
+          "title": "Getting around without a car: Mountain Line, Grey Line, bus to the hospitals (#599, #61)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/802"
+        },
+        {
+          "number": 801,
+          "title": "Catholic Charities: refugee resettlement in the immigration help record (#628)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/801"
+        },
+        {
+          "number": 800,
+          "title": "Septic repair loan fund record (#662)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/800"
+        },
+        {
+          "number": 799,
+          "title": "Things that last: first tally of durable counts (#296)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/799"
+        },
+        {
+          "number": 797,
+          "title": "Start a nonprofit or community group page, and helper org records (#610, #612)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/797"
+        },
+        {
+          "number": 796,
+          "title": "Teens page: first jobs, driving, job help for 16 to 24, volunteering, library (#593 to #597)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/796"
+        },
+        {
+          "number": 795,
+          "title": "Septic systems and well water (#662)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/795"
+        },
+        {
+          "number": 794,
+          "title": "Make it better: the watch list and cadence (#291)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/794"
+        },
+        {
+          "number": 792,
+          "title": "Internet at home page and library Wi-Fi record (#667, #666)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/792"
+        },
+        {
+          "number": 789,
+          "title": "Food bank pantry cards show the time (#230)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/789"
+        },
+        {
+          "number": 788,
+          "title": "Before-and-after source benchmark: first run (#183, #184)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/788"
+        },
+        {
+          "number": 787,
+          "title": "Contractor and trade licenses: a license page, working in Morgantown, checking a contractor (#604, #605, #608)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/787"
+        },
+        {
+          "number": 786,
+          "title": "Staying active after 55: BOPARC classes, the senior center and trails (#563)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/786"
+        },
+        {
+          "number": 785,
+          "title": "Get training or school paid for: WIOA scholarships, WV Invests, Future Workforce Grant, Jumpstart Savings (#648, #649, #606)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/785"
+        },
+        {
+          "number": 784,
+          "title": "Driver's license and plates for new residents (#624)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/784"
+        },
+        {
+          "number": 783,
+          "title": "Recycling page leads with an item lookup (#199)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/783"
+        },
+        {
+          "number": 782,
+          "title": "Make art, learn a craft, show your work: arts and making page (#654, #655, #656, #657, #658)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/782"
+        },
+        {
+          "number": 781,
+          "title": "Library drop-in tech help dates on the calendar (#670)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/781"
+        },
+        {
+          "number": 780,
+          "title": "Pass it on for a whole guide page, starting with utility bills (#157)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/780"
+        },
+        {
+          "number": 779,
+          "title": "Meetings: County Commission, and where schools and towns post (#13)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/779"
+        },
+        {
+          "number": 778,
+          "title": "How is Mon County doing? Official health and money numbers (#62)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/778"
+        },
+        {
+          "number": 777,
+          "title": "Parks page: city and county parks (#631)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/777"
+        },
+        {
+          "number": 776,
+          "title": "Cards for helpers: what to do when someone tells you about a problem (#404)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/776"
+        },
+        {
+          "number": 775,
+          "title": "Do I need a building permit? City vs county (#661)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/775"
+        },
+        {
+          "number": 774,
+          "title": "Resource cards: remove the stray 0 and put back the missing space",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/774"
+        },
+        {
+          "number": 773,
+          "title": "Start or grow a business: free coaching, classes and business groups (#641, #643)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/773"
+        },
+        {
+          "number": 771,
+          "title": "What help might I get? Two quick questions, no name needed (#188)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/771"
+        },
+        {
+          "number": 770,
+          "title": "Find a job: where local employers post jobs, free resume and computer help, short trainings (#645, #651, #650, #607)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/770"
+        },
+        {
+          "number": 769,
+          "title": "Devices, special education, rights, recreation and caregiver help on Disability and aging (#579, #581, #582, #583, #584)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/769"
+        },
+        {
+          "number": 764,
+          "title": "Checklist and timeline blocks; what to have ready is a checklist (#179)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/764"
+        },
+        {
+          "number": 763,
+          "title": "Belonging and connection research note (#211)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/763"
+        },
+        {
+          "number": 762,
+          "title": "Calendar seed list, benefit window watch, event sources; tire limit conflict (#17, #216, #218)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/762"
+        },
+        {
+          "number": 759,
+          "title": "Secondhand cards: split takes, does not take and drop-off (#690)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/759"
+        },
+        {
+          "number": 758,
+          "title": "Make it better: When plans and budgets get decided (#297)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/758"
+        },
+        {
+          "number": 756,
+          "title": "Dates by town (#395)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/756"
+        },
+        {
+          "number": 755,
+          "title": "LIEAP 2026-27: pre-application window Nov 2 to 25 on the calendar (#137, #216)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/755"
+        },
+        {
+          "number": 754,
+          "title": "Place cards name their town (#395)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/754"
+        },
+        {
+          "number": 753,
+          "title": "Watch plan for community centers and halls (#458)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/753"
+        },
+        {
+          "number": 751,
+          "title": "Draft: start a swap, market or reuse store (#431)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/751"
+        },
+        {
+          "number": 749,
+          "title": "Free car seat checks page (#573)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/749"
+        },
+        {
+          "number": 748,
+          "title": "Hide Pass it on with a record flag on safety listings (#555)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/748"
+        },
+        {
+          "number": 747,
+          "title": "Door sort: findability questions against the door names (#254)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/747"
+        },
+        {
+          "number": 744,
+          "title": "Have your say: how to comment at public meetings (#409)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/744"
+        },
+        {
+          "number": 743,
+          "title": "Meeting tracker: Morgantown AgendaCenter agendas and minutes (#12)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/743"
+        },
+        {
+          "number": 742,
+          "title": "Pregnant or new baby, and birth control and testing pages",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/742"
+        },
+        {
+          "number": 741,
+          "title": "Borrow it or get it free page (#429)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/741"
+        },
+        {
+          "number": 738,
+          "title": "Before you call: checklist, notes and call scripts (#406)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/738"
+        },
+        {
+          "number": 737,
+          "title": "Smaller crisis strip with a Quick exit button (#420)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/737"
+        },
+        {
+          "number": 736,
+          "title": "Audit benefits and rights pages: quote or link, never restate (#499)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/736"
+        },
+        {
+          "number": 735,
+          "title": "Lifeline and child care help entries, getting online research (#217, #212)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/735"
+        },
+        {
+          "number": 730,
+          "title": "Library events on the calendar from its public LibCal feed (#107)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/730"
+        },
+        {
+          "number": 724,
+          "title": "SNAP can buy seeds and plants that grow food (#437, #439)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/724"
+        },
+        {
+          "number": 715,
+          "title": "Dentist and prescriptions page: more ways to get help paying for medicine",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/715"
+        },
+        {
+          "number": 709,
+          "title": "schema.org JSON-LD for listings and in-person events (#37)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/709"
+        },
+        {
+          "number": 707,
+          "title": "No insurance or can't afford a doctor",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/707"
+        },
+        {
+          "number": 702,
+          "title": "Shorter sentences and plain terms on the bill, money and stay tonight pages (#134, #347)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/702"
+        },
+        {
+          "number": 696,
+          "title": "Help with drugs or alcohol, and free Narcan",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/696"
+        },
+        {
+          "number": 691,
+          "title": "Also check: links on the food, SNAP and utility bill pages (#224)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/691"
+        },
+        {
+          "number": 689,
+          "title": "Add six help org entries: food, shelter, child care, crisis line (#5)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/689"
+        },
+        {
+          "number": 687,
+          "title": "Mental health help page: someone to talk to today, then counseling you can afford",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/687"
+        },
+        {
+          "number": 683,
+          "title": "Open Referral HSDS export and field mapping (#36, #73)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/683"
+        },
+        {
+          "number": 675,
+          "title": "Who serves my address? Pick your town (#204)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/675"
+        },
+        {
+          "number": 671,
+          "title": "Keep my Medicaid in 2027: the new rules, quoted from the state",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/671"
+        },
+        {
+          "number": 659,
+          "title": "Printouts: sheets made from the data, and wallet cards and posters with QR codes (#405, #160)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/659"
+        },
+        {
+          "number": 636,
+          "title": "How we check: our verification standard, compared with 211 (#496)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/636"
+        },
+        {
+          "number": 556,
+          "title": "About and idea pages: say exactly who checks what (#492, #498)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/556"
+        },
+        {
+          "number": 550,
+          "title": "Make it better: Fix what you see, who to tell about each problem (#292)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/550"
+        },
+        {
+          "number": 547,
+          "title": "Bill help: show each source line once; guard hours punctuation (#471, #472)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/547"
+        },
+        {
+          "number": 546,
+          "title": "One name for the Dates page; clearer Outlook buttons (#101, #141)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/546"
+        },
+        {
+          "number": 537,
+          "title": "Hard questions page: jump list of the questions (#504)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/537"
+        },
+        {
+          "number": 535,
+          "title": "County DoHS office entry: group the programs by health, food and money",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/535"
+        },
+        {
+          "number": 467,
+          "title": "Add a disclaimer, a terms page and a privacy page",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/467"
+        },
+        {
+          "number": 388,
+          "title": "School shots and sports physicals page (#244)",
+          "url": "https://github.com/david-shortman/mon-county-community-hub/pull/388"
+        }
+      ],
+      "prsClosedUnmerged": 3,
+      "commitsToMain": 278
+    },
+    "totals": {
+      "issues": 653,
+      "issuesOpen": 236,
+      "prs": 507,
+      "prsMerged": 477,
+      "prsOpen": 24,
+      "commitsToMain": 479,
+      "calendarEntries": 71
+    },
+    "openByLabel": {
+      "for:david": 127,
+      "for:duet": 80,
+      "for:code": 70,
+      "needs-verification": 67,
+      "type:build": 50,
+      "in-progress": 34,
+      "type:research": 29,
+      "type:decision": 26,
+      "idea": 21,
+      "type:content": 20,
+      "(none)": 15,
+      "type:design": 9,
+      "blocked": 8,
+      "hold: legal": 5,
+      "accessibility": 1,
+      "source-check": 1,
+      "up-next": 1
+    },
+    "waitingOnDavid": [
+      {
+        "number": 1160,
+        "title": "Work and learning links to Find a job and paid training (#529)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1160"
+      },
+      {
+        "number": 1158,
+        "title": "After you apply for WIC: clinic visit, time frames, fair hearings (waits for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1158"
+      },
+      {
+        "number": 1157,
+        "title": "Decision: \"what was decided\" lists from official minutes (for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1157"
+      },
+      {
+        "number": 1156,
+        "title": "Links residents looked for: school shots, bake sales, landlord repairs (#529)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1156"
+      },
+      {
+        "number": 1155,
+        "title": "After you apply for WV WORKS: interview, orientation, reporting, fair hearings (waits for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1155"
+      },
+      {
+        "number": 1154,
+        "title": "Embeds: dates, listing cards and a help now box for other websites (waits for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1154"
+      },
+      {
+        "number": 1153,
+        "title": "Search finds pages in residents' own words (#529)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1153"
+      },
+      {
+        "number": 1152,
+        "title": "After you apply for LIEAP: timelines, payments, fair hearings (waits for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1152"
+      },
+      {
+        "number": 1151,
+        "title": "Site search test: 249 resident queries, shared search plan, Also called lines (#529)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1151"
+      },
+      {
+        "number": 1150,
+        "title": "After you apply for Medicaid or WVCHIP: timelines, renewals, fair hearings (waits for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1150"
+      },
+      {
+        "number": 1149,
+        "title": "After you apply for SNAP: interview, letters, deadlines, fair hearings (waits for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1149"
+      },
+      {
+        "number": 1145,
+        "title": "High-stakes pages: \"Tell us\" opens the fix form (#1079)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1145"
+      },
+      {
+        "number": 1138,
+        "title": "Starting page for renters (waits for David: housing topic)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1138"
+      },
+      {
+        "number": 1137,
+        "title": "High-stakes check: fixes from David's review, remove the Not yet line (closes #516)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1137"
+      },
+      {
+        "number": 1133,
+        "title": "Needs verification: poll worker pay in Monongalia County",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1133"
+      },
+      {
+        "number": 1132,
+        "title": "Needs verification: other ways to sign up as an organ donor in WV, and the age rule",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1132"
+      },
+      {
+        "number": 1126,
+        "title": "Crisis pages: the Quick exit note is on every page its link points from",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1126"
+      },
+      {
+        "number": 1118,
+        "title": "Needs verification: outdoor burning rules in Morgantown and other towns, and state burning bans",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1118"
+      },
+      {
+        "number": 1117,
+        "title": "Decision: neutrality rules for agenda guides (for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1117"
+      },
+      {
+        "number": 1113,
+        "title": "Needs verification: who takes noise complaints in Morgantown",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1113"
+      },
+      {
+        "number": 1105,
+        "title": "How it works: the checks table fits at 400% text (#971)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1105"
+      },
+      {
+        "number": 1090,
+        "title": "Calendar: one week at a time, with jump links (#1033)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1090"
+      },
+      {
+        "number": 1082,
+        "title": "CLAUDE.md: every session logs discoveries (#1080)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/1082"
+      },
+      {
+        "number": 1067,
+        "title": "Epic: the site in other languages, decisions for David",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1067"
+      },
+      {
+        "number": 1065,
+        "title": "Research: gas bill help, PSC line and emergency numbers for the utility page",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1065"
+      },
+      {
+        "number": 1063,
+        "title": "Money page: homestead, free tax help and scam wording",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1063"
+      },
+      {
+        "number": 1062,
+        "title": "SNAP work rules line and Medicaid waiver wording",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1062"
+      },
+      {
+        "number": 1061,
+        "title": "Help pages: tap to call 211, crisis text before the page title, shorter link names",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1061"
+      },
+      {
+        "number": 1060,
+        "title": "Report a problem links on high-stakes pages should not open public GitHub",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1060"
+      },
+      {
+        "number": 1059,
+        "title": "Utility bills: fix Mon Power later due date rule, Salvation Army address and Dollar Energy link",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1059"
+      },
+      {
+        "number": 1057,
+        "title": "Public progress page: dated snapshots of the scorecard",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1057"
+      },
+      {
+        "number": 1049,
+        "title": "Stay tonight: page date should match today",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1049"
+      },
+      {
+        "number": 1048,
+        "title": "Rent and eviction help: checked rent help list, and fix eviction lines on Legal help",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1048"
+      },
+      {
+        "number": 1027,
+        "title": "Verify growing facts that don't need WVU Extension: market days, garden plots, seed library",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1027"
+      },
+      {
+        "number": 1026,
+        "title": "Verify caregiver support and respite programs for the caregivers page",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1026"
+      },
+      {
+        "number": 1025,
+        "title": "Verify ID fees, Social Security, passport and death record facts for the records pages",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1025"
+      },
+      {
+        "number": 1024,
+        "title": "Verify shelter fees and hours, dog tags and Humane Society facts for the pets page",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1024"
+      },
+      {
+        "number": 1023,
+        "title": "Verify court fees, name change and expungement facts for the legal help page",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1023"
+      },
+      {
+        "number": 1015,
+        "title": "Holiday 2026 programs to re-check: dinners, Angel Tree, coat drives, holiday hours",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1015"
+      },
+      {
+        "number": 1012,
+        "title": "Needs verification: how long a WVU Medicine financial assistance approval lasts (6 or 12 months)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1012"
+      },
+      {
+        "number": 1010,
+        "title": "Needs verification: Dollar Energy Fund phone number (800-683-7036 or 1-888-282-6816)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/1010"
+      },
+      {
+        "number": 983,
+        "title": "Needs verification: half fare on a $1.00 Mountain Line fare",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/983"
+      },
+      {
+        "number": 957,
+        "title": "Verify: BOPARC refund fee, 10% or 25% (two BOPARC PDFs differ)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/957"
+      },
+      {
+        "number": 948,
+        "title": "Decide: should the AI run less often to use less energy?",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/948"
+      },
+      {
+        "number": 944,
+        "title": "Decide: is a records request for the winter warming shelter plan worth it?",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/944"
+      },
+      {
+        "number": 936,
+        "title": "AI energy use: research note and a draft Hard questions answer (#495)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/936"
+      },
+      {
+        "number": 932,
+        "title": "Needs verification: Mon County pantry and meal hours that sources disagree on",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/932"
+      },
+      {
+        "number": 922,
+        "title": "Ask Mountaineer Food Bank about sharing Mon County pantry hours from Vivery?",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/922"
+      },
+      {
+        "number": 910,
+        "title": "Decide: point merge instructions at scripts/safe-merge.sh, and a branch rule for for:david PRs",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/910"
+      },
+      {
+        "number": 908,
+        "title": "Needs verification: is there a regular flea market in Mon County (\"Blue Horizon Flea Market\")?",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/908"
+      },
+      {
+        "number": 901,
+        "title": "needs-verification: SWA hauler lookup claim, City Clerk phone, floodplain ordinance label",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/901"
+      },
+      {
+        "number": 898,
+        "title": "Needs verification: Mountaineer Week fair hours, Mylan Park size, Shop Til You Drop goods, Goodwill hours (audit)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/898"
+      },
+      {
+        "number": 885,
+        "title": "Verify: Find your people leads (groups we could not confirm)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/885"
+      },
+      {
+        "number": 872,
+        "title": "Needs verification: listing facts that conflict with their sources",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/872"
+      },
+      {
+        "number": 823,
+        "title": "Verify: 2026 Morgantown leaf pickup and student move-out rules",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/823"
+      },
+      {
+        "number": 816,
+        "title": "What other towns did: sourced options explainer (#298, waits for David)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/816"
+      },
+      {
+        "number": 798,
+        "title": "Verify: nonprofit Form CD-1NP and annual report date and fee (WV Secretary of State)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/798"
+      },
+      {
+        "number": 790,
+        "title": "File for unemployment: steps, weekly claims, work search and appeals (#646)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/pull/790"
+      },
+      {
+        "number": 772,
+        "title": "Check official school test scores and crime numbers for the How is Mon County doing page",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/772"
+      },
+      {
+        "number": 768,
+        "title": "Is Catholic Charities refugee resettlement taking new arrivals in Morgantown?",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/768"
+      },
+      {
+        "number": 760,
+        "title": "Verify: community center facts we left off (Brown's Halleck, Triune, Woodburn and others)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/760"
+      },
+      {
+        "number": 757,
+        "title": "Verify: Monongalia County Parks and Trails levy, current status and next vote",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/757"
+      },
+      {
+        "number": 727,
+        "title": "Verify: county alert sign-up, WVU Alert eligibility, Mon County Schools closing notices",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/727"
+      },
+      {
+        "number": 704,
+        "title": "Verify Christmas at the Barn 2026 sale (source page moved)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/704"
+      },
+      {
+        "number": 700,
+        "title": "Verify: downtown facade grant or loan programs (Main Street Morgantown and the city)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/700"
+      },
+      {
+        "number": 681,
+        "title": "Needs verification: tool library address, market dates and free programs",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/681"
+      },
+      {
+        "number": 674,
+        "title": "Verify: who provides water and police for the Town of Blacksville",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/674"
+      },
+      {
+        "number": 660,
+        "title": "Verify: homeowners, in town and out (facts found in group research)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/660"
+      },
+      {
+        "number": 613,
+        "title": "Verify: parents of school-age kids (facts found in group research)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/613"
+      },
+      {
+        "number": 609,
+        "title": "Verify: people who want to help (facts found in group research)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/609"
+      },
+      {
+        "number": 603,
+        "title": "Verify: tradespeople and handymen (facts found in group research)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/603"
+      },
+      {
+        "number": 585,
+        "title": "Verify: veterans (facts found in group research)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/585"
+      },
+      {
+        "number": 577,
+        "title": "Verify: people with disabilities and caregivers (facts found in group research)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/577"
+      },
+      {
+        "number": 569,
+        "title": "Verify: parents of babies and toddlers (facts found in group research)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/569"
+      },
+      {
+        "number": 564,
+        "title": "Verify: renters (which number checks a rental, MOTO address, Westover and Granville rules, rent increases)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/564"
+      },
+      {
+        "number": 559,
+        "title": "Verify: older adults services (Senior Monongalians phones, Gold Card, senior centers, OLLI, ombudsman)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/559"
+      },
+      {
+        "number": 557,
+        "title": "Link the new writing rules from CLAUDE.md",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/557"
+      },
+      {
+        "number": 553,
+        "title": "Verify: Mon County flood and landslide counts, city floodplain office, county permit fee",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/553"
+      },
+      {
+        "number": 530,
+        "title": "Rename the project in CLAUDE.md, the charter and the agent prompts to \"Everything Morgantown\"",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/530"
+      },
+      {
+        "number": 525,
+        "title": "Verify: how to start trash pickup in Morgantown",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/525"
+      },
+      {
+        "number": 524,
+        "title": "Verify: other water, gas and trash providers in Mon County for the Moving here page",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/524"
+      },
+      {
+        "number": 520,
+        "title": "Rule: hiding a listing does not wait for David",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/520"
+      },
+      {
+        "number": 516,
+        "title": "One-time check of shelter, crisis, food and benefits pages",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/516"
+      },
+      {
+        "number": 512,
+        "title": "Decide: show \"weather warning in effect\" from the National Weather Service",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/512"
+      },
+      {
+        "number": 502,
+        "title": "Decide: how fast we act on a group's fix or removal request",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/502"
+      },
+      {
+        "number": 484,
+        "title": "Care pulse: keep Get care on Mon County's needs",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/484"
+      },
+      {
+        "number": 469,
+        "title": "Add the personal-data rule to COORDINATION.md",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/469"
+      },
+      {
+        "number": 461,
+        "title": "Later: ask centers to check their listing and send their dinners",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/461"
+      },
+      {
+        "number": 459,
+        "title": "Decide: how to fill in centers that only post on Facebook",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/459"
+      },
+      {
+        "number": 454,
+        "title": "Decide: the community centers section name",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/454"
+      },
+      {
+        "number": 417,
+        "title": "Verify: Early Head Start in Monongalia County (who runs it, how to apply)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/417"
+      },
+      {
+        "number": 410,
+        "title": "Voice info line",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/410"
+      },
+      {
+        "number": 408,
+        "title": "Letter builder with reviewed templates",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/408"
+      },
+      {
+        "number": 407,
+        "title": "Bus-aware listings with the last bus back",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/407"
+      },
+      {
+        "number": 403,
+        "title": "\"Does the Medicaid or SNAP change affect me?\"",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/403"
+      },
+      {
+        "number": 400,
+        "title": "\"I got a notice\" pages: eviction, shutoff, benefit denial",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/400"
+      },
+      {
+        "number": 387,
+        "title": "Verify: current WV rule on religious exemptions for school shots",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/387"
+      },
+      {
+        "number": 382,
+        "title": "Needs verification: adult flu and COVID shot price at the health department, without insurance",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/382"
+      },
+      {
+        "number": 381,
+        "title": "Needs verification: Social Security phone and local office for Medicare sign-up and Extra Help",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/381"
+      },
+      {
+        "number": 380,
+        "title": "Needs verification: WV Tobacco Quitline, how long free nicotine replacement lasts",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/380"
+      },
+      {
+        "number": 379,
+        "title": "Needs verification: WorkForce WV Morgantown office, local phone and ZIP",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/379"
+      },
+      {
+        "number": 376,
+        "title": "Needs verification: is MTEC adult education (high school equivalency, ESL) free?",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/376"
+      },
+      {
+        "number": 375,
+        "title": "Needs verification: WV Aging and Disability Resource Network phone and local office",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/375"
+      },
+      {
+        "number": 374,
+        "title": "Needs verification: prescription help (Christian Help vouchers, discount cards, WV Rx)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/374"
+      },
+      {
+        "number": 369,
+        "title": "Trailhead routes: check the step headings in VoiceOver and TalkBack",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/369"
+      },
+      {
+        "number": 362,
+        "title": "Decide: a way to report a problem without a GitHub account",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/362"
+      },
+      {
+        "number": 300,
+        "title": "Decide: photos for before and after stories, and 311 data use",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/300"
+      },
+      {
+        "number": 262,
+        "title": "New doors for getting involved, learning, finding your people and getting outside",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/262"
+      },
+      {
+        "number": 242,
+        "title": "Test the hub with residents twice a year",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/242"
+      },
+      {
+        "number": 185,
+        "title": "Decide: run the before-and-after benchmark in the Sunday findability check and report it in the Monday retro",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/185"
+      },
+      {
+        "number": 169,
+        "title": "Decide later: a text check-in pilot with orgs that agree to it",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/169"
+      },
+      {
+        "number": 165,
+        "title": "Decide: who makes verification calls, and from what number",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/165"
+      },
+      {
+        "number": 163,
+        "title": "Decide: in-person reach with local helpers (meeting demo, library, printed cards)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/163"
+      },
+      {
+        "number": 125,
+        "title": "Ask a few local groups if the hub feels like Morgantown",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/125"
+      },
+      {
+        "number": 99,
+        "title": "Decide: should we reach residents on channels they already use (texting, city channels)?",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/99"
+      },
+      {
+        "number": 98,
+        "title": "Decide: outreach ideas from day one (none urgent)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/98"
+      },
+      {
+        "number": 97,
+        "title": "Decide: extra human review for high-stakes topics, and the About page's funding line",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/97"
+      },
+      {
+        "number": 96,
+        "title": "Decide: mark the work pipeline adopted, and which of its unbuilt parts to switch on",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/96"
+      },
+      {
+        "number": 95,
+        "title": "Decide: repo settings for required checks and secret scanning",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/95"
+      },
+      {
+        "number": 94,
+        "title": "Decide: accept ADR 0005 (folder ownership, contracts between layers, CODEOWNERS)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/94"
+      },
+      {
+        "number": 93,
+        "title": "Decide: accept the proposed data, provenance, and API architecture records (ADRs 0001 to 0003)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/93"
+      },
+      {
+        "number": 89,
+        "title": "Set up search engine accounts and choose a domain",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/89"
+      },
+      {
+        "number": 69,
+        "title": "Data layer: shared loader and JSON Schemas for all content (packages/data)",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/69"
+      },
+      {
+        "number": 26,
+        "title": "Decide: ask Mountain Line and the city about transit and 311 data",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/26"
+      },
+      {
+        "number": 25,
+        "title": "Confirm whether glass is accepted in curbside recycling",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/25"
+      },
+      {
+        "number": 24,
+        "title": "Decide: ask WV 211 about a data-sharing agreement",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/24"
+      },
+      {
+        "number": 23,
+        "title": "Decide: ask the United Way Family Resource Network about sharing listing data",
+        "url": "https://github.com/david-shortman/mon-county-community-hub/issues/23"
+      }
+    ]
+  },
+  "sessions": [],
+  "sizeKB": 0
+}

@@ -10,6 +10,7 @@ contact:
   url: https://www.boparc.org/krepps-park.html
   url_label: Park page
   place: 1235 Parkview Drive, Morgantown, WV
+not_posted: [hours, get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://www.boparc.org/krepps-park.html
     checked: 2026-11-01

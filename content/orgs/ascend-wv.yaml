@@ -1,0 +1,10 @@
+name: Ascend WV
+slug: ascend-wv
+kind: school
+website: https://ascendwv.com/
+summary: A program that pays remote workers to move to certain West Virginia areas, including the Morgantown area. Its site says it is run by West Virginia University and was made possible by a $25 million gift from Brad and Alys Smith, which founded WVU's Brad and Alys Smith Outdoor Economic Development Collaborative.
+topics: [moving, work]
+area: statewide
+sources:
+  - url: https://ascendwv.com/faq-2026/
+    checked: 2026-11-02

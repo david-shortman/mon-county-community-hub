@@ -1,0 +1,7 @@
+slug: leaves
+text: "**Leaves in Morgantown:** we could not find a current city page about leaf pickup this year. Ask the city's Streets and ROW Division at [304-291-7465](tel:+13042917465). Outside the city, ask your town or your trash hauler."
+quote: 'Engineering and Public Works page: "Streets and ROW Division 200 M-Tec Drive Morgantown WV 26505 Phone: 304-291-7465". The page does not mention leaves. The newest city notice about leaf pickup we found is dated October 31, 2023 (https://www.morgantownwv.gov/CivicSend/ViewMessage/message/215386).'
+sources:
+  - url: https://www.morgantownwv.gov/219/Public-Works-Streets
+    checked: 2026-11-02
+recheck_days: 30    # waiting on a current notice, so check often

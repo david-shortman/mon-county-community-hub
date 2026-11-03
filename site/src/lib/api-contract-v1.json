@@ -122,7 +122,11 @@
       "site_coverage",
       "site_coverage.level",
       "site_coverage.why",
-      "site_coverage.checked"
+      "site_coverage.checked",
+      "site_coverage.before",
+      "site_coverage.before.level",
+      "site_coverage.before.checked",
+      "site_coverage.before.why"
     ],
     "meetings": [
       "slug",

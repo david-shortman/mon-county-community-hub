@@ -1,0 +1,35 @@
+# One snapshot of our checks for /progress/ (#1057). Every number here belongs
+# to the dates below and is never updated. A new month gets a new file.
+# Sources: the weekly scorecard and the source benchmark linked under `check`.
+month: 2026-10
+title: October 2026
+checked: 2026-11-01          # the day the scorecard that this snapshot reads was made
+summary: "On the 8 urgent needs we test, our pages were lighter, plainer and quicker to the answer than the sources people use today. But search engines did not show any of our pages yet, so most people would not find them."
+story:
+  need: Help paying a heating bill
+  before: "The county resource guide is an 11-page PDF of 324 KB. Its Financial Assistance list on page 3 names groups with phone numbers, but does not say which ones help with heating bills. It does not mention LIEAP, the state's heating help program."
+  after: "Our Help paying utility bills page is 29 KB and needs no taps. It lists the steps in order: call your utility first, then apply for LIEAP, with what to bring. LIEAP's dates for this season were not out yet, and the page said so instead of guessing."
+comparisons:
+  - what: Page size
+    plain: "About 11 times lighter: our middle page was 28.8 KB, the sources' middle page 324 KB."
+  - what: Reading before the answer
+    plain: "About 5 times less: 70 words before the answer on our middle page, 378 on the sources'."
+  - what: Answer on the first page
+    plain: "6 of our 8 pages had the answer on the first page. 4 of the 15 other sources did."
+  - what: Reading grade
+    plain: "Grade 7.6 for our full pages, grade 13.7 for the sources (middle values)."
+corrections:
+  count: 48
+  text: "48 fixes in October: 30 facts, 13 wording, 3 out of date and 2 links. Our own checks found all of them. Each one is listed with its date."
+short:
+  - "Search engines did not show our pages yet: 0 of our 38 answer pages came up in a search. Setting up search is still waiting on a decision."
+  - "Most in-person listings were in Morgantown. By mailing address, 16% were in the rest of the county, where about 72% of residents live."
+  - "For help with a water shutoff, you still had to call to learn the key fact: the utility does not post its payment plans."
+  - "We did not measure visits yet, so we cannot say how many people used the site."
+check:
+  - label: The weekly scorecard this snapshot reads (2026-W44)
+    url: https://github.com/david-shortman/mon-county-community-hub/blob/main/docs/scorecard/2026-W44.md
+  - label: The source benchmark, 8 needs scored on October 30
+    url: https://github.com/david-shortman/mon-county-community-hub/blob/main/content/findability/benchmark/2026-10-30.yaml
+  - label: How the scorecard is made
+    url: https://github.com/david-shortman/mon-county-community-hub/blob/main/docs/scorecard/README.md

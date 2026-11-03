@@ -12,6 +12,7 @@ contact:
   url_label: City Clerk
   place: 389 Spruce Street, Room 10, Morgantown, WV 26505
 cost: The city's page lists no fees.
+not_posted: [get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://www.morgantownwv.gov/156/City-Clerk
     checked: 2026-11-01
