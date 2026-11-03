@@ -212,6 +212,11 @@ facilities:                 # only what the source says
   step_free: true           # only when published
 regular:                    # weekly or monthly happenings, in words
   - Lunch Monday, Wednesday and Friday
+opening_hours:              # optional; when the building is open, same shape as resources (#1439)
+  - days: [mon, tue, wed, thu, fri]
+    opens: "09:00"
+    closes: "16:00"
+drop_in: People 50 and older   # optional; who can come in and sit, as the source says (#1439)
 membership:
   dues: $5 a family a year
 rentals:
@@ -245,7 +250,9 @@ phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
 
 The Find your people page (`/find-your-people/`) uses the same record with two more kinds. The community centers pages leave both out.
 
-- `kind: library`: a library branch, listed as a free place to sit. `regular` holds its open hours in words.
+- `kind: library`: a library branch, listed as a free place to sit. Its open hours go in `opening_hours`, not `regular`, so the card can say them as a few short lines ("Monday to Thursday: 9 a.m. to 8 p.m.", "Closed Sunday") instead of one line per day (#1439).
+- **Other free places to sit (#1439).** Any other building can be listed there too when its own source says when it is open and who can walk in. Give it `opening_hours` and `drop_in`, a few words on who can come ("Anyone", "People 50 and older"). Set `drop_in` only when the source says people can drop in; a hall you can only rent does not count. Leave out places that charge to come in, or that need a membership the source does not say is free. On Find your people its card is short (who can come, hours, a link to its own page), because its dinners and rentals would make it long on a phone.
+- `kind: park`: an outdoor place with public seats or benches, listed only as a free place to sit (it gets no community centers page). It needs `drop_in`, and `opening_hours` or a note that says when it is open (many parks go by dawn and dusk, which `opening_hours` cannot say).
 - `kind: group`: something people can join more than once, like a game night, a run club or a dance. It has no building of its own. Extra fields:
 
 ```yaml
