@@ -8,6 +8,7 @@
 import Base from '../../layouts/Base.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import SourceLine from '../../components/SourceLine.astro';
+import WhereYouAre from '../../components/WhereYouAre.astro';
 import { resource } from '../../lib/content.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: 'care', topic: 'health', label: 'After you apply for Medicaid or WVCHIP', summary: 'How long it takes, when coverage starts, renewals, and how to ask for a fair hearing' };
@@ -34,6 +35,12 @@ const ok = (r) => r && !r.hidden;
   <p class="lede">There is no interview. Watch your mail or WV PATH for a request for papers, and send what it asks for by the date on it. Here is what comes next, in the state's own rules.</p>
   <p>Not applied yet? See <a href={`${base}/file-today/#medicaid`}>File today</a>. Already have Medicaid as an adult? Read <a href={`${base}/medicaid-2027/`}>Keep my Medicaid in 2027</a> for the new rules that start January 1, 2027. WVCHIP is the state's health coverage for children. Both are handled by the West Virginia Department of Human Services (DoHS).</p>
   <p class="note">This page quotes the state's staff manual and forms. DoHS decides each case. It is information, not legal advice.</p>
+  <WhereYouAre label="Steps after you apply for Medicaid or WVCHIP" steps={[
+    { id: 'papers', title: 'Papers, if asked', when: "At least 10 days after the form is mailed" },
+    { id: 'decision', title: 'The decision', when: "Children: 13 business days. Adults 19 to 64: 30 days" },
+    { id: 'hearing', title: 'If denied or cut off', when: "Ask for a hearing within 90 days" },
+    { id: 'renew', title: 'Renewing', when: "Return the form within 30 days of the letter" },
+  ]} />
   <ul class="topic-list">
     <li><a href="#papers">1. If DoHS asks for papers</a></li>
     <li><a href="#decision">2. How long it takes and when coverage starts</a></li>

@@ -35,7 +35,7 @@ import crypto from 'node:crypto';
 import YAML from 'yaml';
 import { CONTENT_DIR } from '../src/lib/content.mjs';
 import { loadWatch, watchedUrls, evaluateWatch, watchMd, withPdfLinks } from './watch.mjs';
-import { robotsRules, robotsDelay, robotsAllows, readRobots } from '../src/lib/robots.mjs';
+import { robotsRules, robotsDelay, robotsAllows, readRobots, robotsCheck } from '../src/lib/robots.mjs';
 
 const UA = 'MonCountyCommunityHub-sourcecheck/1.0 (+https://github.com/david-shortman/mon-county-community-hub)';
 const SITE_DIR = path.resolve(CONTENT_DIR, '../site');
@@ -233,7 +233,7 @@ function errCode(err) {
 const BROKEN_CODES = new Set(['ENOTFOUND', 'CERT_HAS_EXPIRED', 'ERR_TLS_CERT_ALTNAME_INVALID', 'DEPTH_ZERO_SELF_SIGNED_CERT', 'UNABLE_TO_VERIFY_LEAF_SIGNATURE', 'SELF_SIGNED_CERT_IN_CHAIN']);
 
 // Follow redirects by hand so a move to another domain is seen, not followed.
-async function fetchSource(url) {
+export async function fetchSource(url) {
   const chain = [];
   let cur = url;
   for (let hop = 0; hop <= T.maxRedirects; hop++) {
@@ -247,6 +247,9 @@ async function fetchSource(url) {
       const next = new URL(res.headers.get('location'), cur).href;
       chain.push({ from: cur, to: next, status: res.status });
       try { await res.body?.cancel(); } catch { /* ignore */ }
+      // Check robots.txt again before following, even on another site (#529).
+      const rc = await robotsCheck(next, { userAgent: UA, timeoutMs: T.timeoutMs });
+      if (!rc.allowed) return { status: null, robots: true, error: rc.reason, final: next, chain };
       cur = next;
       continue;
     }
@@ -351,6 +354,7 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
         const u = new URL(s.url);
         if (!robotsAllows(robots, u.pathname + u.search)) { results.set(s.url, { state: 'robots', status: null }); continue; }
         const r = await fetchSource(s.url);
+        if (r.robots) { results.set(s.url, { state: 'robots', status: null, final: r.final }); continue; }
         const state = classify(s, r, sameOwnerPairs);
         const out = { state, status: r.status, error: r.error, final: r.final !== s.url ? r.final : undefined };
         if (r.body?.length) {

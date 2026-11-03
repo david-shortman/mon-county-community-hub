@@ -55,6 +55,7 @@ const places = [
 ].map((p) => ({ ...p, lines: p.lines.filter(Boolean) }));
 const roads = r('wvdoh-road-repair');
 const map = r('mon-county-parcel-viewer');
+const limits = r('morgantown-city-limits-check');
 ---
 <Base title="Who serves my address in Mon County? Police, trash, water, streets" description="Pick your town in Monongalia County, or outside any town, and see who to call for police, trash, water and streets: Morgantown, Westover, Star City, Granville, Blacksville or the county.">
   <h1>Who serves my address?</h1>
@@ -89,6 +90,7 @@ const map = r('mon-county-parcel-viewer');
 
   <section id="not-sure">
     <h2>Not sure if you live in a town?</h2>
+    {limits && <p>For Morgantown: {limits.what_to_do} <a href={limits.contact.url}>{limits.contact.url_label}</a>. <span class="meta"><a href={limits.sources[0].url}>Source</a>, checked {fmt(String(limits.sources[0].checked).slice(0, 10))}.</span></p>}
     {map && <p>{map.what_to_do} <a href={map.contact.url}>{map.contact.url_label}</a>. <span class="meta"><a href={map.sources[0].url}>Source</a>, checked {fmt(String(map.sources[0].checked).slice(0, 10))}.</span></p>}
   </section>
 

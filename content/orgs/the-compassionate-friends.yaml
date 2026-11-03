@@ -1,0 +1,13 @@
+name: The Compassionate Friends
+slug: the-compassionate-friends
+kind: nonprofit
+website: https://www.compassionatefriends.org/
+phone: "877-969-0010"
+summary: A national nonprofit for parents, grandparents and siblings grieving the death of a child. It runs peer-led support groups led by bereaved family members, not therapists, plus online support.
+topics: [health, family]
+area: national
+sources:
+  - url: https://www.compassionatefriends.org/find-support/chapters/
+    checked: 2026-11-02
+  - url: https://www.compassionatefriends.org/find-support/online-communities/
+    checked: 2026-11-02

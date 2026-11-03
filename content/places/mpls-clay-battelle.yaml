@@ -8,14 +8,13 @@ run_by:
   org: morgantown-public-library-system
   text: Morgantown Public Library System
 story: A branch library in Blacksville with programs for children and adults, three public computers, color printing and fax.
-regular:
-  - Mondays 10 a.m. to 5 p.m.
-  - Tuesdays 10 a.m. to 5 p.m.
-  - Wednesdays 9 a.m. to 4 p.m.
-  - Thursdays 9 a.m. to 4 p.m.
-  - Fridays 9 a.m. to 4 p.m.
-  - Saturdays Closed
-  - Sundays Closed
+opening_hours:
+  - days: [mon, tue]
+    opens: "10:00"
+    closes: "17:00"
+  - days: [wed, thu, fri]
+    opens: "09:00"
+    closes: "16:00"
 interests: [books, learning]
 tags: [free]
 contact:

@@ -6,11 +6,17 @@
 import Base from '../layouts/Base.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
 export const page = { door: "care", topic: "health", label: "Mental health help", summary: "Someone to talk to today, a crisis line, and counseling you can afford" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
+// What happens when you call or text 988 (#1534), read 2026-11-02.
+const expect988 = [
+  { url: 'https://988lifeline.org/get-help/what-to-expect/', checked: '2026-11-02', name: '988 Lifeline, What to expect' },
+  { url: 'https://www.samhsa.gov/mental-health/988/faqs', checked: '2026-11-02', name: 'SAMHSA, 988 frequently asked questions' },
+];
 ---
 <Base crisis title="Mental health help in Morgantown and Mon County: someone to talk to today" description="Mental health help in Morgantown and Monongalia County: call or text 988 any hour, Valley HealthCare's 24/7 crisis line and walk-in crisis clinic, HELP4WV, and counseling that takes Medicaid or has a sliding fee.">
   <h1>Need mental health help?</h1>
@@ -21,6 +27,13 @@ const r = (slug) => all.find((e) => e.slug === slug);
 
   <h2>Someone to talk to today</h2>
   {r('988-lifeline') && <ResourceCard r={r('988-lifeline')} sms="988" smsLabel="Text 988" />}
+  <h3 id="988-what-happens">What happens when you call or text 988</h3>
+  <ul>
+    <li><strong>A trained counselor answers.</strong> The 988 Lifeline says "Your skilled counselor will ask you if you are safe." Then they listen, offer support, and share resources that may help.</li>
+    <li><strong>It is free.</strong> You do not have to give "any payment or insurance information." If you text, SAMHSA says "standard data rates from telecommunication mobile carriers may apply."</li>
+    <li><strong>Most calls do not need 911.</strong> SAMHSA, the federal agency behind 988, says "a small percentage of 988 Lifeline callers require activation of the 911 system, and many of those are done with the consent and cooperation of the caller."</li>
+  </ul>
+  <SourceLine sources={expect988} about="what happens when you call 988" />
   {r('valley-crisis-services') && <ResourceCard r={r('valley-crisis-services')} />}
   {r('help4wv') && <ResourceCard r={r('help4wv')} sms={r('help4wv').contact.text} smsLabel="Text HELP4WV" />}
 

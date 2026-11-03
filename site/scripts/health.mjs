@@ -18,6 +18,8 @@ import path from 'node:path';
 import { loadCalendar, loadDir, loadSecondhand, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR, recheckDaysFor, recheckDue, isTopTier, oldestChecked } from '../src/lib/content.mjs';
 import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
 import { robotsCheck } from '../src/lib/robots.mjs';
+import { servesProblems, SERVES_SINCE } from '../src/lib/serves.mjs';
+import YAML from 'yaml';
 import { ADAPTERS } from '../src/lib/feeds/index.mjs';
 
 // ---------- settings ----------
@@ -558,6 +560,19 @@ async function checkIssues() {
   record('up-next-queue', 'pipeline', queue.length ? 'ok' : 'warn',
     queue.length ? `${queue.length} issues waiting in the up-next queue.` : `The up-next queue is empty (${forCode.length} unclaimed for:code issues could be queued).`,
     { owner: 'Duet or the daily run (pick and label the next issue)' });
+
+  // A "Serves:" line naming a persona or need (#1037, src/lib/serves.mjs).
+  const personaFile = path.join(CONTENT_DIR, 'personas.yaml');
+  const pdata = fs.existsSync(personaFile) ? YAML.parse(fs.readFileSync(personaFile, 'utf8')) : [];
+  const known = new Set([
+    ...(Array.isArray(pdata) ? pdata : pdata?.personas ?? []).map((p) => p.slug),
+    ...loadDir('needs').map((n) => n.slug),
+  ].filter(Boolean));
+  const { missing, unknown } = servesProblems(issues, known);
+  record('issues-serves', 'pipeline', missing.length || unknown.length ? 'warn' : 'ok',
+    missing.length || unknown.length ? `${missing.length} issues opened since ${SERVES_SINCE} have no "Serves:" line, and ${unknown.length} name no persona or need we know. Add a line like "Serves: short-on-food" (a slug from content/personas.yaml or content/needs/, or "project").`
+      : `Every issue opened since ${SERVES_SINCE} names who it serves.`,
+    { details: [...missing.map((i) => `#${i.number} ${i.title}: no Serves line`), ...unknown.map((u) => `#${u.issue.number} ${u.issue.title}: Serves ${u.named.join(', ')}`)], owner: 'Whoever opened it' });
 
   const davidOpen = issues.filter((i) => has(i, 'for:david'));
   record('for-david', 'pipeline', 'ok', `${davidOpen.length} open issues wait for David.`, { details: davidOpen.map((i) => `#${i.number} ${i.title}`), owner: 'David' });

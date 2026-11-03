@@ -37,6 +37,7 @@ const compareSources = [
     <li>Flagged listings go on a public to-do list to be rechecked.</li>
     <li><strong>Every 4 hours</strong>, a health check lists any listing that has not been rechecked in 6 months.</li>
     <li>After 6 months without a recheck, the listing itself says it may be out of date.</li>
+    <li>Pages saved on your phone for when there is no signal expire too: after 3 days for Tonight, Food today and Dates, 30 days for the other pages for a hard moment, and 90 days for the rest. So an old saved page can't send you to a closed door.</li>
   </ul>
   <p>How these checks work is public: <a href={doc('docs/operations/README.md')}>our operations guide</a> on GitHub.</p>
 
@@ -57,6 +58,6 @@ const compareSources = [
   <p>The full rules are in <a href={doc('content/README.md')}>our content guide</a>.</p>
 
   <style>
-    .gap { padding: 10px 14px; border-left: 4px solid var(--accent); background: var(--accent-bg); border-radius: 4px 10px 10px 4px; }
+    .gap { padding: var(--s3) var(--s4); border-top: 2px solid var(--fg); background: var(--sand); border-radius: 2px; }
   </style>
 </Base>

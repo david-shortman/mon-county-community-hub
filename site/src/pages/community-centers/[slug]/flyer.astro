@@ -8,6 +8,7 @@ import qrcode from 'qrcode-generator';
 import Base from '../../../layouts/Base.astro';
 import { loadCalendarWithFeeds, upcoming, prettyDate, prettyTimes, oldestChecked } from '../../../lib/content.mjs';
 import { loadPlaces, placeStatus, whatsThere, KIND_LABELS, SECTION } from '../../../lib/places.mjs';
+import { hoursLines } from '../../../lib/listing.mjs';
 
 export function getStaticPaths() {
   return loadPlaces().map((p) => ({ params: { slug: p.slug }, props: { p } }));
@@ -34,6 +35,7 @@ const checked = oldestChecked(p.sources);
     <p class="flyer-story">{p.story}</p>
     {st.label && <p><strong>{st.label}.</strong></p>}
     {there && <p><strong>What's there:</strong>{' '}{there}.</p>}
+    {p.opening_hours && <p><strong>Open:</strong>{' '}{hoursLines(p.opening_hours).join('. ')}.</p>}
     {p.regular?.length > 0 && (
       <>
         <h2>Regular happenings</h2>
@@ -68,7 +70,7 @@ const checked = oldestChecked(p.sources);
 </Base>
 
 <style>
-  .flyer { max-width: 44rem; margin: 0 auto; padding: 20px; background: #fff; color: #000; border: 1px solid var(--line); border-radius: 10px; }
+  .flyer { max-width: 44rem; margin: 0 auto; padding: 20px; background: #fff; color: #000; border: 1px solid var(--line); border-radius: 2px; }
   .flyer h1 { font-size: 2.2rem; margin: 4px 0 8px; }
   .flyer h2 { font-size: 1.2rem; margin: 16px 0 4px; }
   .flyer-kind { margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.95rem; }

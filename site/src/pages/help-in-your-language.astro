@@ -18,6 +18,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // The Spanish version (#1101, #1102) builds only once a fluent reader has
 // reviewed it. Until then this page keeps saying it is English only.
 const spanish = pageReady('es', '/help-in-your-language/', { today: todayYmd() }) ? `${base}/es/help-in-your-language/` : null;
+const dohsLep = [{ url: 'https://www.wvpath.wv.gov/assets/pdf-files/LimtedEnglishProficiency_LEP.pdf', checked: '2026-11-03', name: 'WV PATH' }];
 const dohsPlan = [{ url: 'https://dohs.wv.gov/nondiscrimination-policies-and-plans', checked: '2026-10-30', name: 'WV Department of Human Services' }];
 ---
 <Base title="Help in your language in Morgantown and Mon County" description="Where to get free interpreters and help in languages other than English in Morgantown and Monongalia County, WV: hospitals, the Health Department, state benefit offices, courts, legal help and English classes.">
@@ -30,7 +31,8 @@ const dohsPlan = [{ url: 'https://dohs.wv.gov/nondiscrimination-policies-and-pla
 
   <h2>Food, health coverage and other state help</h2>
   <p>The state Department of Human Services handles SNAP, Medicaid and other state help. The state's language access plan from June 2023 (written when the department was part of WVDHHR) says bilingual staff can help in Spanish, outside interpreters are used when needed, and offices are to get cards in several languages so you can point to yours. Ask for an interpreter at the office or when you call.</p>
-  <SourceLine sources={dohsPlan} about="the state's language access plan" />
+  <p>The state's WV PATH website says language help is free. Call the state's customer service line at <a href="tel:+18777161212">1-877-716-1212</a> and say the name of your language.</p>
+  <SourceLine sources={[...dohsPlan, ...dohsLep]} about="state language help" />
   {r('monongalia-county-dohs-office') && <ResourceCard r={r('monongalia-county-dohs-office')} />}
 
   <h2 id="legal">Court and legal help</h2>
