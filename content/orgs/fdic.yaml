@@ -1,0 +1,10 @@
+name: Federal Deposit Insurance Corporation (FDIC)
+slug: fdic
+kind: government
+website: https://www.fdic.gov/
+summary: An independent federal agency that insures money in deposit accounts at FDIC-insured banks. Its GetBanked pages explain how to choose and open a bank account.
+topics: [money]
+area: national
+sources:
+  - url: https://www.fdic.gov/getbanked
+    checked: 2026-11-02
