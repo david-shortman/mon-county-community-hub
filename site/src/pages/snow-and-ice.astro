@@ -1,19 +1,32 @@
 ---
 // Snow and ice in Mon County (#1005): who clears which roads, the city's
 // sidewalk rule, school closings and late buses. Alerts, road conditions and
-// power outage texts are on /weather-alerts/. Not here yet: rules for
-// Westover, Star City and Granville, and a snow-specific way to report a
-// state road (none found on an official page).
+// power outage texts are on /weather-alerts/. Wave 11 (#529) added buses in
+// winter weather, getting a home and car ready, water pipes and power.
+// Not here yet: rules for Westover, Star City and Granville, a snow-specific
+// way to report a state road, a Morgantown rule on parking during snow, and
+// frozen pipe advice from MUB (none found on an official page we can read).
 import Base from '../layouts/Base.astro';
 import BigChoices from '../components/BigChoices.astro';
 import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
-import { loadDir } from '../lib/content.mjs';
+import SourceLine from '../components/SourceLine.astro';
+import { loadDir, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "weather", label: "Snow and ice: who plows, sidewalks, schools and buses", summary: "Which roads get cleared first, the 24-hour sidewalk rule in Morgantown, school closings and late buses" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-03';
+const src = {
+  busWinter: [{ url: 'https://www.busride.org/winter-weather-notice', checked, name: 'Mountain Line winter weather notice, January 23, 2026' }],
+  ready: [{ url: 'https://www.monchd.org/newsroom/winterizing-goes-a-long-way-toward-staying-safe', checked, name: 'Monongalia County Health Department, January 14, 2026' }],
+  pipes: [
+    { url: 'https://mub.org/', checked, name: 'Morgantown Utility Board' },
+    { url: 'https://www.ready.gov/winter-weather', checked, name: 'Ready.gov winter weather' },
+  ],
+};
+const outage = r('mon-power-report-outage');
 ---
 <Base title="Snow and ice in Morgantown and Mon County: plowing, sidewalks, schools" description="Who clears snow from city streets and state roads in Morgantown and Monongalia County, which roads go first, the 24-hour sidewalk rule, where school closings are posted, and how to see if your bus is late.">
   <h1>Snow and ice in Mon County</h1>
@@ -25,7 +38,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     { href: '#schools', label: 'School delays and closings', icon: 'calendar' },
     { href: '#buses', label: 'Is my bus late?', icon: 'clock' },
   ]} />
-  <OnThisPage items={[['#alerts', 'Alerts, road conditions and power outages']]} />
+  <OnThisPage items={[['#ready', 'Get your home and car ready'], ['#pipes', 'Water pipes'], ['#power', 'Power out'], ['#alerts', 'Alerts and road conditions']]} />
 
   <h2 id="city">City of Morgantown streets and sidewalks</h2>
   {r('morgantown-snow-plan') && <ResourceCard r={r('morgantown-snow-plan')} />}
@@ -39,9 +52,33 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="buses">Buses</h2>
   {r('mountain-line-ticker') && <ResourceCard r={r('mountain-line-ticker')} />}
+  <p>In winter weather, Mountain Line says local routes keep running as long as roads allow. When a road can't be driven, it posts the change right away on its ticker on X, <a href="https://x.com/MLticker">@MLticker</a>. The Grey Line to Pittsburgh can stop running when Pennsylvania closes roads. <SourceLine sources={src.busWinter} about="buses in winter weather" /></p>
 
-  <h2 id="alerts">Alerts, road conditions and power outages</h2>
+  <h2 id="ready">Get your home and car ready</h2>
+  <p>The Monongalia County Health Department gives these winter tips:</p>
+  <ul>
+    <li><strong>Heaters:</strong> keep at least 3 feet of space around fireplaces and space heaters. Do not plug a space heater into a power strip, keep it away from fabric, and do not leave it on when no one is there.</li>
+    <li><strong>Detectors:</strong> check the batteries in your smoke and carbon monoxide detectors.</li>
+    <li><strong>Generators:</strong> never run one inside. If you use a portable generator, you need a working carbon monoxide detector.</li>
+    <li><strong>Home kit:</strong> keep at least 3 days of supplies for each person and pet, including a gallon of water a day for each person, food that won't spoil, a can opener, a battery radio, flashlights and a phone charger.</li>
+    <li><strong>Car kit:</strong> blankets, snacks, jumper cables, a phone charger, a flashlight, a first aid kit, and sand or cat litter to help tires grip. Keep your gas tank on the fuller side.</li>
+    <li><strong>Shoveling:</strong> stretch first and go slow. Push snow instead of lifting it. If you lift, fill the shovel only part way and lift with your legs. Take breaks.</li>
+  </ul>
+  <SourceLine sources={src.ready} about="winter tips" />
+  <p>Need help paying for heat? See <a href={`${base}/utility-bills/`}>Help paying a utility bill</a>.</p>
+
+  <h2 id="pipes">Water pipes</h2>
+  <p>For a water emergency, like a broken water main or no water, call the Morgantown Utility Board (MUB) at <a href={telHref('304-292-8443')}>304-292-8443</a>. MUB says the line answers emergencies 24 hours a day. MUB's website does not give tips on frozen pipes. Ready.gov, the federal emergency site, links to <a href="https://www.ready.gov/winter-weather">tips to keep pipes from freezing</a>.</p>
+  <SourceLine sources={src.pipes} about="water emergencies and frozen pipes" />
+
+  {outage && <>
+    <h2 id="power">Power out</h2>
+    <p>Report it to Mon Power at <a href={telHref(outage.contact.phone)}>{outage.contact.phone}</a>, or text OUT to 544487 after you sign up by texting REG. More on what to do is on <a href={`${base}/after-a-storm/#power`}>Storm damage, flooding or power out?</a></p>
+    <SourceLine sources={outage.sources} org={outage.org} about="reporting an outage" slug={outage.slug} />
+  </>}
+
+  <h2 id="alerts">Alerts and road conditions</h2>
   <p>Weather warnings, WV 511 road conditions and Mon Power outage texts are on <a href={`${base}/weather-alerts/`}>Get weather and emergency alerts</a>.</p>
 
-  <p class="meta">Sources checked October 31, 2026. Westover, Star City and Granville do not post snow rules on their websites; call your town hall to ask. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Each section shows when we last checked its source. Westover, Star City and Granville do not post snow rules on their websites; call your town hall to ask. We have not found a Morgantown rule about parking on the street during snow on a city page we can read. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
