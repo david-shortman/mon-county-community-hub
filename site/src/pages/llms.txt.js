@@ -169,6 +169,7 @@ ${roleCards}
 - [How this site works](${u('/how-it-works/')}): the path a listing takes from a public page to the site, who does what (a person, two AI helpers, automatic programs), how pages are sorted and kept, the checks that run on their own, and current limits
 - [Is this site better than what was here?](${u('/progress/')}): monthly, dated snapshots comparing our pages with the sources people here use today, with what we got wrong and what still falls short
 - [How we check](${u('/how-we-check/')}): what counts as a source, how often listings are rechecked, who does the checking, and how that compares with 211
+- [Built for any phone and every reader](${u('/access/')}): the site's promises about small pages, contrast, big text, no signal and privacy, each with the check that holds it and today's numbers
 - [Make it better](${u('/make-it-better/')}): ways to improve Morgantown and Mon County, from reporting a problem to serving on a city board
 - [Fix what you see: who to tell](${u('/make-it-better/report/')}): the office that handles graffiti, illegal dumping, litter, potholes (city street or state road), broken sidewalks, trees and run-down buildings, inside or outside city limits
 - [Serve on a city board](${u('/make-it-better/boards/')}): city boards that shape how Morgantown looks and feels (Urban Landscape Commission, Tree Board, Cultural Arts, Historic Landmarks, Planning, and more), what each does, when it meets, open seats from the city's vacancy list, and how to apply
