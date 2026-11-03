@@ -37,8 +37,11 @@ function syllables(w) {
   const m = w.match(/[aeiouy]{1,2}/g);
   return m ? m.length : 1;
 }
+// A sentence ends at . ! or ? and any closing quote marks or brackets right
+// after it, then a space or the end: 'a tax break." It' is two sentences (#1665).
+const END = /[.!?]["'\u201d\u2019)\]]*(?=\s|$)/g;
 export function grade(text) {
-  const sentences = Math.max(1, (text.match(/[.!?](\s|$)/g) || []).length);
+  const sentences = Math.max(1, (text.match(END) || []).length);
   const ws = text.match(/[A-Za-z][A-Za-z'-]*/g) || [];
   if (ws.length < MIN_WORDS || ws.length / sentences > 40) return null;
   const syl = ws.reduce((n, w) => n + syllables(w), 0);
@@ -64,7 +67,7 @@ export function paragraphs(html) {
   return out;
 }
 // The first two sentences of the first paragraph.
-export const opening = (ps) => (ps[0] || '').split(/(?<=[.!?])\s+/).slice(0, 2).join(' ');
+export const opening = (ps) => (ps[0] || '').split(/(?<=[.!?]["'\u201d\u2019)\]]*)\s+/).slice(0, 2).join(' ');
 // All paragraphs as one text, each ending a sentence.
 export const fullText = (ps) => ps.map((t) => (/[.!?]["')]?$/.test(t) ? t : t + '.')).join(' ');
 
