@@ -40,7 +40,7 @@ The data is in [`content/personas.yaml`](../content/personas.yaml). After every 
 | Wants a say in local decisions | civic | speak at city council morgantown | `/have-your-say/` | `/make-it-better/boards/`, `/meetings/agendas/` (not linked yet: `/vote/`) | q12, q13 |
 | Lonely or new, looking for their people | `loneliness` | things to do in morgantown | `/find-your-people/` | `/community-centers/`, `/arts-and-making/`, `/meet-people/` (not linked yet: `/parks/`) | q43, q45 |
 | Gardener or would-be grower | growing | soil test wv | `/soil-test/` | `/grow/` | q33 |
-| Helper: librarian, pastor or case worker | helpers | morgantown resource list | `/make-a-list/` | `/partners/` | q62 |
+| Helper: librarian, pastor or case worker | helpers | morgantown resource list | `/make-a-list/` | `/print/`, `/partners/` | q62 |
 | Curious long-time resident, just looking around | community data | what's going on in morgantown this week | `/pulse/` | `/how-we-are-doing/` | q24 |
 
 ## What the first check found
