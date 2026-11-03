@@ -51,5 +51,5 @@ get_help:
     label: A ride to a medical visit
 site_coverage:
   level: good
-  why: Getting around without a car covers buses, fares and rides to medical visits, and Every bus route shows when each one runs. Most listings do not say yet whether a bus can get you there and back the same day (issue 407).
-  checked: 2026-11-01
+  why: Getting around without a car covers buses, fares, free rides for high school students and rides to medical visits, and Every bus route shows when each one runs. Ride to a medical visit adds VA travel pay for veterans. Most listings do not say yet whether a bus can get you there and back the same day (issue 407).
+  checked: 2026-11-02
