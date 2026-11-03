@@ -26,7 +26,11 @@ const f = p.facilities ?? {};
 const descTail = `${p.membership ? 'How to join, ' : ''}${p.rentals?.length ? 'renting a hall, ' : ''}upcoming events and how to reach it, with sources.`;
 const descLong = `${p.name} in ${p.community}, Monongalia County, WV: ${there ? `${there.toLowerCase()}. ` : ''}${descTail}`;
 const description = descLong.length <= 170 ? descLong : `${p.name} in ${p.community}, Monongalia County, WV: ${descTail}`;
-const where = `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|East)\b/, (c) => c.toLowerCase())}`;
+// "Sabraton, in the Morgantown area" or "Blacksville, west county". Places whose
+// community already names Morgantown skip the area, so it is not said twice.
+const where = p.area !== 'morgantown'
+  ? `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|East)\b/, (c) => c.toLowerCase())}`
+  : /Morgantown/.test(p.community) ? p.community : `${p.community}, in the Morgantown area`;
 ---
 <Base title={`${p.name}, Mon County WV`} description={description}>
   <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
