@@ -1,0 +1,45 @@
+# Life areas for the tiles on /topics/ (#1040). The data behind the table in
+# life-areas-coverage-map.md, kept beside it so the tiles change when the map
+# does. Each area: its name, its pages (the first is where the tile links), and
+# what is not covered yet, each gap with the open issue or PR that tracks it.
+# The tile counts only pages that exist, and the build fails on a page that
+# does not (site/test/life-areas.test.mjs). Recheck gaps when the map is
+# reviewed (monthly), and remove a gap when its issue or PR closes.
+checked: 2026-11-02
+areas:
+  - name: Health, body and mind
+    pages: [/care/, /staying-well/, /flu-shots/, /dental-and-prescriptions/, /diabetes-and-weight/, /turning-65/, /no-insurance/, /medicaid-2027/, /mental-health/, /drugs-and-alcohol/, /pregnant-or-new-baby/, /birth-control-and-testing/, /medical-rides/, /advance-directives/, /staying-active/]
+  - name: Money and work
+    pages: [/money/, /utility-bills/, /free-tax-help/, /find-a-job/, /work-and-learning/, /pay-for-training/, /business/, /start-a-business/, /property-tax/, /behind-on-mortgage/]
+    not_yet:
+      - text: Filing for unemployment
+        issue: 790
+      - text: Banking, credit and debt help
+  - name: Home and basic needs
+    pages: [/living-here/, /stay-tonight/, /help/food/, /snap/, /renting/, /permits/, /septic-and-wells/, /flood-zone/, /home-safety/, /moving-here/, /internet/, /pets/]
+  - name: Safety
+    pages: [/scams/, /identity-theft/, /weather-alerts/, /after-a-storm/, /snow-and-ice/, /burning/, /noise/, /protective-orders/, /legal-help/]
+  - name: Growing up and learning
+    pages: [/family/, /families-and-kids/, /school-age/, /teens/, /teen-drivers/, /school-shots/, /kids-with-disabilities/, /car-seat-checks/, /help-in-your-language/]
+  - name: Belonging
+    pages: [/find-your-people/, /meet-people/, /community-centers/, /volunteer/, /caregivers/, /help-at-home/, /veterans/, /start-a-group/]
+  - name: Getting around
+    pages: [/getting-around/, /bus-routes/, /bus-passes/, /drivers-license/, /car-registration/, /parking/, /accessible-parking-placard/]
+  - name: Parks, trash and growing
+    pages: [/parks/, /park-refunds/, /recycling/, /sell-or-donate/, /thrift-shops/, /grow/, /soil-test/, /plant-problems/, /sell-what-you-grow/, /markets/]
+    not_yet:
+      - text: Community garden plots (no official page lists them)
+        issue: 1027
+  - name: Voice and civic life
+    pages: [/have-your-say/, /vote/, /meetings/, /who-decides/, /public-records/, /make-it-better/]
+  - name: Arts and free time
+    pages: [/arts-and-making/, /calendar/, /pulse/]
+  - name: Community money
+    pages: [/make-it-better/grants/, /check-a-charity/]
+  - name: Life events and papers
+    pages: [/life-events/, /ids-and-records/, /when-someone-dies/, /probate-steps/, /small-estate-affidavit/, /family-court/]
+  - name: How the county is doing
+    pages: [/how-we-are-doing/, /needs/, /data/]
+    not_yet:
+      - text: Crime numbers
+        issue: 772
