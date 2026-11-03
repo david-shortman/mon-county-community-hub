@@ -140,9 +140,9 @@ const checked = d.sources?.[0]?.checked ?? '';
   #plan .tp-form select { min-height: 44px; font: inherit; width: 100%; max-width: 100%; }
   #plan .tp-swap { justify-self: start; min-height: 44px; padding: 0 var(--s3); font: inherit; font-weight: 700; color: var(--accent); background: var(--bg); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
   @media (min-width: 44rem) {
-    #plan .tp-form { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) minmax(0, 0.8fr); align-items: end; }
+    #plan .tp-form { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; }
+    #plan .tp-form .tp-field:last-child { grid-column: 1 / -1; max-width: 20rem; }
     #plan .tp-swap { justify-self: center; }
-    #plan .tp-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
   }
   #plan .tp-card { padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 2px; margin: 0 0 var(--s4); }
   #plan .tp-kicker, #plan .tp-for { margin: 0 0 var(--s1); font-family: var(--kicker); font-size: 0.85rem; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; color: var(--muted); }
