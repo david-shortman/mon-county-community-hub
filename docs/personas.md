@@ -56,3 +56,14 @@ The data is in [`content/personas.yaml`](../content/personas.yaml). After every 
 - A new need in the register gets a persona and a findability question in the same PR.
 
 On 2026-11-03 (#1533) five landing pages were changed after a simulated walkthrough (not resident feedback) found pages that answer the persona's question better: `/no-insurance/` (free clinic), `/pregnant-or-new-baby/` (WIC), `/unemployment/` (filing a claim), `/start-a-business/` (the city license) and `/for/remote-workers/` (internet and a place to work). The old landing pages are now next steps where they still help.
+
+## Monthly review (#1037)
+
+Once a month, with the needs register upkeep (#988), a short loop keeps this list tied to real signals. The steps are on a monthly checklist (`content/checklists/personas.yaml`), which opens in the first week of each month.
+
+1. **Listen.** What changed since last month in the findability runs, This week in Mon County, the needs register sources, the care pulse, visit totals, resident and partner feedback, local news, meeting agendas and public forums. Topic counts only.
+2. **Sort.** Tie each new signal to a need and a persona. A new persona needs evidence from two different signals. A persona with no fresh evidence for two reviews in a row is merged or retired.
+3. **Act.** Open or re-rank issues. Every new issue has a **"Serves:" line** naming a persona or need slug (or `project` for work on the project itself). The Task issue form asks for it, and the Health check lists open issues opened since 2026-11-03 without one (`issues-serves`, `site/src/lib/serves.mjs`).
+4. **Report.** `node scripts/persona-report.mjs` (in `site/`, after a build) prints the scoreboard persona line: personas passing the path check, personas whose findability questions all score 10 or more of 15, and needs with no persona or no page. Copy it into the scoreboard.
+
+Each run is logged as one file in [`persona-reviews/`](persona-reviews/), named by date. No on-site searches are logged, no visitors are tracked, and no names or quotes from forums or feedback are kept.

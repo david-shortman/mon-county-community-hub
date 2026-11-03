@@ -200,7 +200,12 @@
       "phone_confirmed",
       "cost",
       "venue",
-      "interests"
+      "interests",
+      "opening_hours",
+      "opening_hours[].days",
+      "opening_hours[].opens",
+      "opening_hours[].closes",
+      "drop_in"
     ]
   },
   "index": [

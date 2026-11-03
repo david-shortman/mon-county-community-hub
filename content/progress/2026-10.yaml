@@ -4,7 +4,7 @@
 month: 2026-10
 title: October 2026
 checked: 2026-11-01          # the day the scorecard that this snapshot reads was made
-summary: "On the 8 urgent needs we test, our pages were lighter, plainer and quicker to the answer than the sources people use today. But search engines did not show any of our pages yet, so most people would not find them."
+summary: "For the 8 urgent needs tested, this site's pages were smaller, had less to read before the answer, and were at a lower reading grade than the other sources. But no search engine showed this site's pages yet, so most people looking for help would not have found them."
 story:
   need: Help paying a heating bill
   before: "The county resource guide is an 11-page PDF of 324 KB. Its Financial Assistance list on page 3 names groups with phone numbers, but does not say which ones help with heating bills. It does not mention LIEAP, the state's heating help program."

@@ -145,6 +145,14 @@ html:root .btn { border-radius: 3px; border-width: 2px; }
 @media (min-width: 24em) {
   html:root a:is([href^="tel:"], [href^="sms:"]):not(.btn) { white-space: nowrap; }
 }
+/* A route step is narrower than the page. A media query's em ignores the page's
+   own text size, so at 390px with 200% text a number like 1-800-525-6285 could
+   not fit a step (#1641). A container query's em does follow it: let the number
+   wrap when the step holds less than 12em of its own text. */
+html:root .mp-body { container-type: inline-size; }
+@container (max-width: 12em) {
+  html:root .mp-body a:is([href^="tel:"], [href^="sms:"]):not(.btn) { white-space: normal; }
+}
 /* Tables: a printer's rule under the column heads, and even figures. */
 html:root main thead th { border-bottom: 2px solid var(--fg); }
 html:root main :is(td, th) { font-variant-numeric: lining-nums tabular-nums; }

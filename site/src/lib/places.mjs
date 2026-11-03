@@ -25,6 +25,7 @@ export const KIND_LABELS = {
   'fire-hall': 'Fire hall',
   library: 'Library',
   group: 'Group',
+  park: 'Park',
 };
 
 const STATUS_LABELS = {
@@ -44,9 +45,10 @@ export function placeStatus(p, today = todayYmd()) {
   return { status, label: STATUS_LABELS[status] ?? null };
 }
 
-// Library branches and groups share the record (#263) but are not
-// community centers or halls, so the section's pages leave them out.
-export const DIRECTORY_KINDS = ['library', 'group'];
+// Library branches, groups and parks with places to sit share the record
+// (#263, #1439) but are not community centers or halls, so the section's
+// pages leave them out.
+export const DIRECTORY_KINDS = ['library', 'group', 'park'];
 
 let cache;
 export function loadPlaces() {

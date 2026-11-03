@@ -2,7 +2,7 @@ title: Free West Virginia living will and medical power of attorney forms
 slug: wv-advance-directive-forms
 org: wv-center-for-end-of-life-care
 topics: [health, legal]
-who_it_is_for: "Any adult. The Center says advance directives are \"recommended for everyone 18 years of age and older including mature and emancipated minors.\" You do not need a lawyer: \"Anyone can create a WV advance directive without the assistance of a lawyer.\""
+who_it_is_for: "Any adult can make one. You do not need a lawyer to make an advance directive. The Center says advance directives are \"recommended for everyone 18 years of age and older including mature and emancipated minors.\" It also says: \"Anyone can create a WV advance directive without the assistance of a lawyer.\""
 what_to_do: "Download the West Virginia forms from the Center's Forms and Resources page, or call the Center to get free forms. There are four: a Living Will, a Medical Power of Attorney (you name a person to make health care decisions for you if you are too sick to make them), a Combined Living Will and Medical Power of Attorney, and a Mental Health Advance Directive. The Center says most West Virginians who fill one out use the combined form."
 steps:
   - "Pick your form and talk with the person you want to name. The Center says: \"Choose someone who knows your values and wishes, and whom you trust to make decisions for you.\" Do not name your own doctor or nurse."
@@ -16,6 +16,8 @@ contact:
   url_label: Get the forms
 cost: "Free forms. A notary may charge. State law says the most a notary may charge is \"$10.00 for each signature notarized.\""
 sources:
+  - url: https://wvendoflife.org/contact/
+    checked: 2026-11-02
   - url: https://wvendoflife.org/individuals/
     checked: 2026-10-31
   - url: https://wvendoflife.org/faq/advance-care-plan-faqs/

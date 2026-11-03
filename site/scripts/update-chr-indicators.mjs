@@ -13,6 +13,9 @@
 // column. An indicator that reads it sets `chr.data_year` to the year the
 // supplement's codebook gives for that measure, since the trends file stops
 // at the last annual release. History still comes from the trends file.
+// Some measures (life expectancy, overdose deaths) are not in the trends file
+// at all: those leave out `chr.trend_name`, get no history and no chart, and
+// take their year from `chr.data_year`.
 //
 // Usage (from site/):
 //   node scripts/update-chr-indicators.mjs --check   # exit 1 and list what differs
@@ -72,6 +75,7 @@ export async function freshValues(ind) {
     const row = data.find((r) => r[0] === st && r[1] === co);
     if (row && num(row[col]) != null) values[k] = num(row[col]);
   }
+  if (!ind.chr.trend_name) return { values, history: null, data_year: String(ind.chr.data_year) };
   const trends = await csv(trendsUrl);
   const th = trends[0];
   const at = (r, name) => r[th.indexOf(name)];
@@ -103,9 +107,9 @@ for (const f of files) {
   differs++;
   if (mode === 'write') {
     doc.set('values', fresh.values);
-    doc.set('history', fresh.history);
+    if (fresh.history) doc.set('history', fresh.history);
     doc.set('data_year', String(fresh.data_year));
-    for (const s of doc.get('sources').items.slice(0, 2)) s.set('checked', todayYmd());
+    for (const s of doc.get('sources').items.slice(0, fresh.history ? 2 : 1)) s.set('checked', todayYmd());
     fs.writeFileSync(file, doc.toString());
   }
 }

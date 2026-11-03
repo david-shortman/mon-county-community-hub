@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
+import ResourceCard from '../components/ResourceCard.astro';
 import Route from '../components/Route.astro';
 import Milepost from '../components/Milepost.astro';
 import Icon from '../components/Icon.astro';
@@ -21,6 +22,13 @@ const lieap = resource('lieap-heating-help');
 const emergency = resource('wv-emergency-assistance-utility');
 const hopeGas = resource('hope-gas-bill-help');
 const def = resource('dollar-energy-fund-mon-power');
+const discount = resource('wv-20-percent-utility-discount');
+// Electric and gas shutoff rules (#1131, #1534): PSC rules 150CSR3 and 150CSR4,
+// read 2026-11-02 on the Secretary of State's rules site (the PSC's own site refused the read).
+const pscRules = [
+  { url: 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50441&Format=WORD&KeyWord=', checked: '2026-11-02', name: 'PSC rule 150CSR3, electric utilities (2018), rules 4.8.1 and 4.8.2' },
+  { url: 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50440&Format=WORD&KeyWord=', checked: '2026-11-02', name: 'PSC rule 150CSR4, gas utilities (2018), rule 4.8.2' },
+];
 const wv211 = resource('wv-211');
 // The Lifeline link shows once its record is in (#668, #735).
 const lifeline = loadDir('resources').some((e) => e.slug === 'lifeline-phone-internet-discount');
@@ -51,6 +59,17 @@ const charitySources = [
     <li><strong>Hope Gas:</strong> <a href={telHref(hopeGas.contact.phone)}>{hopeGas.contact.phone}</a>, Monday to Friday, 8 a.m. to 5 p.m. Hope Gas offers payment plans if you have fallen behind, and budget billing. Its Hope Cares program takes 25% off the monthly gas bill for residential heat customers with income up to 200% of the poverty guidelines who have applied for LIEAP. <SourceLine sources={hopeGas.sources} org={hopeGas.org} about="Hope Gas" /></li>
     <li><strong>Other gas companies or bulk fuel (propane, oil):</strong> call your supplier and ask about payment plans.</li>
   </ul>
+  <h3 id="shutoff-rules">State rules on electric and gas shutoffs</h3>
+  <p>The Public Service Commission's rules for electric and gas companies say:</p>
+  <ul>
+    <li><strong>A payment plan is yours to ask for.</strong> The company must offer a standard plan: what you owe plus a 2% fee, paid over 12 months on top of your current bills. If you cannot afford that, you can work out a different plan.</li>
+    <li><strong>Notice first.</strong> A written notice must be mailed at least 10 days before a shutoff. From November 1 to March 31, the company must also try three times to reach you.</li>
+    <li><strong>Days service cannot be shut off:</strong> any day the National Weather Service predicts "thirty-two (32) degrees or colder" where you live, and any Friday, Saturday, Sunday or legal holiday. Shutoffs happen only between 8 a.m. and 4 p.m.</li>
+    <li><strong>Getting it back on.</strong> Service must come back "no more than eight (8) hours after receipt of payment."</li>
+    <li><strong>A note from a doctor, nurse practitioner or physician assistant</strong> adds more notice steps but does not stop a shutoff. It must reach the company within 10 days and be renewed every 30 days.</li>
+  </ul>
+  <p>These rules do not cover water. Ask MUB about its rules.</p>
+  <SourceLine sources={pscRules} about="state rules on electric and gas shutoffs" />
   <div class="actions">
     <a class="btn" href={telHref(monPower.contact.phone)}><Icon name="phone" /><span>Call Mon Power</span></a>
     <a class="btn" href={telHref(mub.contact.phone)}><Icon name="phone" /><span>Call MUB (water)</span></a>
@@ -69,6 +88,10 @@ const charitySources = [
   </ul>
   <SourceLine sources={lieap.sources} org={lieap.org} about="LIEAP" />
   <p>Already applied? <a href={`${base}/after-you-apply/lieap/`}>After you apply for LIEAP heating help</a> says when a decision comes and how to appeal.</p>
+
+  <h3 id="discount">20% off winter gas and electric bills</h3>
+  <p>If you get SSI or WV WORKS, or get SNAP and are 60 or older, state law gives you a lower gas and electric rate in winter.</p>
+  {discount && <ResourceCard r={discount} headingLevel={4} />}
 
   <h3>Emergency Assistance (state)</h3>
   <p>Mon Power's page lists a one-time payment, open year-round, for customers at risk of shutoff. Bring your disconnect notice to your county DoHS office, or call <a href={telHref(emergency.contact.phone)}>{emergency.contact.phone}</a>. The state's own page gives no phone number. It says to contact your local DoHS office, and that this help is limited to one 30-day period in any 12 months. The Mon County DoHS office is at 114 South High Street, Morgantown: <a href="tel:3042853175">304-285-3175</a>.</p>
