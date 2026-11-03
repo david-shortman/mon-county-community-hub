@@ -144,6 +144,7 @@ ${towns}
 - [Compare halls](${u('/community-centers/halls/')}): halls, rooms and pavilions to rent, side by side: seats, kitchen, price, deposit and how to book, with the date each price was checked
 - [Make art, learn a craft, show your work](${u('/arts-and-making/')}): Monongalia Arts Center classes, Community Maker Space, studios and gallery applications; library craft nights, knitting group and ArtistWorks lessons; folk arts apprenticeships and jams; state grants for individual artists
 - [Start a nonprofit or community group](${u('/start-a-group/')}): the West Virginia steps: Articles of Incorporation for a nonprofit corporation ($25, Form CD-1), registering with the Secretary of State before asking the public for donations, and links to the IRS for tax-exempt status
+- [Grants for local nonprofits](${u('/grants-for-nonprofits/')}): open grant rounds from Your Community Foundation, United Way of Monongalia and Preston Counties, 100+ People Who Care and the Benedum Foundation, with who can apply, how much and when, from each funder's own page
 - [Check a charity before you give](${u('/check-a-charity/')}): how to look up a group's registration with the West Virginia Secretary of State, and what registration does and does not tell you
 ${centers}
 - [Start a swap, market or reuse store](${u('/start-something/')}): what Mon County is missing for secondhand and sharing (a regular flea market, a building materials reuse store, a Buy Nothing group, kids' gear swaps), what each would take, and free or low cost guides
