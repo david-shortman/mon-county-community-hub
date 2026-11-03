@@ -106,7 +106,7 @@ const ok = (r) => r && !r.hidden;
   <SourceLine sources={[src.ch1, src.ch18]} org={ORG} about="renewing WV WORKS" />
 
   <h2 id="help">Who can help</h2>
-  <p>You can bring anyone to a hearing. Legal Aid is listed above. The Mon County DoHS office answers questions about your case, and 211 is free and can point you to local help.</p>
+  <p>You can bring anyone to a hearing. Legal Aid is listed above. The Mon County DoHS office answers questions about your case, and 211 can point you to local help.</p>
   {ok(office) && <ResourceCard r={office} />}
   {ok(r211) && <ResourceCard r={r211} />}
   <p class="meta">We describe the state's steps. DoHS decides who gets WV WORKS. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>

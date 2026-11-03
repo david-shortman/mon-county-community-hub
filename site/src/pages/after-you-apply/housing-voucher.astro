@@ -110,7 +110,7 @@ const ok = (r) => r && !r.hidden;
   <SourceLine sources={[src.reexam, src.phReexam, src.oblig, src.lease, src.grievance]} org={ORG} about="reporting changes" />
 
   <h2 id="help">Who can help</h2>
-  <p>Call FMHA with questions about your application or your place on the list. Legal Aid of West Virginia helps with housing problems. 211 is free and can point you to rent help and other local help. For renting rights, see <a href={`${base}/renting/`}>Renting a home</a>.</p>
+  <p>Call FMHA with questions about your application or your place on the list. Legal Aid of West Virginia helps with housing problems. 211 can point you to rent help and other local help. For renting rights, see <a href={`${base}/renting/`}>Renting a home</a>.</p>
   {ok(legal) && <ResourceCard r={legal} />}
   {ok(r211) && <ResourceCard r={r211} />}
   <p class="meta">We describe FMHA's steps and the federal rules. FMHA decides who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
