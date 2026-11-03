@@ -42,11 +42,11 @@ const charitySources = [
         <li><strong>Payment arrangement:</strong> smaller payments added to your monthly bill.</li>
         <li><strong>A later due date</strong> for customers who are 60 or older and get Social Security, a pension or disability benefits.</li>
         <li><strong>Someone to warn:</strong> a friend, relative, clergy member or agency can be told before your power is shut off.</li>
-        <li><strong>Payment agreement and shutoffs:</strong> Mon Power says that under state Public Service Commission rules, a payment agreement for your past due amount delays a shutoff, and paying it as agreed prevents one. A doctor's note about a health problem does not stop a shutoff by itself.</li>
+        <li><strong>Payment agreement and shutoffs:</strong> Mon Power says a payment agreement for your past due amount delays a shutoff, under state Public Service Commission rules. Paying it as agreed prevents a shutoff. A doctor's note about a health problem does not stop a shutoff by itself.</li>
         <li><strong>Critical Care program:</strong> for homes where someone uses electric medical equipment to stay alive. Mon Power says it helps these customers get ready for power outages.</li>
       </ul>
       <SourceLine sources={monPower.sources} org={monPower.org} about="Mon Power" /></li>
-    <li><strong>Morgantown Utility Board (water and sewer):</strong> <a href={telHref(mub.contact.phone)}>{mub.contact.phone}</a>, Monday to Friday, 8 a.m. to 4:30 p.m. (staffed around the clock for emergencies). Call to confirm. Email customer-service@mub.org, or visit 278 Greenbag Road. MUB's website does not currently describe payment plans or shutoff rules, so ask on the phone. If your water is shut off, call MUB to ask what you need to do to get it back on. <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" /></li>
+    <li><strong>Morgantown Utility Board (water and sewer):</strong> <a href={telHref(mub.contact.phone)}>{mub.contact.phone}</a>, Monday to Friday, 8 a.m. to 4:30 p.m. (staffed around the clock for emergencies). Call to confirm. Email customer-service@mub.org, or visit 278 Greenbag Road. MUB's website does not describe payment plans or shutoff rules right now, so ask on the phone. If your water is shut off, call MUB to ask what you need to do to get it back on. <SourceLine sources={mub.sources} org={mub.org} about="Morgantown Utility Board" /></li>
     <li><strong>Hope Gas:</strong> <a href={telHref(hopeGas.contact.phone)}>{hopeGas.contact.phone}</a>, Monday to Friday, 8 a.m. to 5 p.m. Hope Gas offers payment plans if you have fallen behind, and budget billing. Its Hope Cares program takes 25% off the monthly gas bill for residential heat customers with income up to 200% of the poverty guidelines who have applied for LIEAP. <SourceLine sources={hopeGas.sources} org={hopeGas.org} about="Hope Gas" /></li>
     <li><strong>Other gas companies or bulk fuel (propane, oil):</strong> call your supplier and ask about payment plans.</li>
   </ul>
@@ -59,7 +59,7 @@ const charitySources = [
   <Milepost n={2} title="Apply for help paying" id="programs">
 
   <h3>LIEAP: heating help from the state</h3>
-  <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Eligibility depends on household income, household size and whether you pay for your own heat. The maximum benefit is $2,000 per household.</p>
+  <p>The Low Income Energy Assistance Program (LIEAP) is run by the West Virginia Department of Human Services (DoHS). It helps with winter heating bills. Who can get it depends on your household's income and size, and whether you pay for your own heat. The maximum benefit is $2,000 per household.</p>
   <ul>
     <li><strong>This season:</strong> {lieap.what_to_do}</li>
     <li><strong>How to apply:</strong> online at <a href="https://www.wvpath.wv.gov">wvpath.wv.gov</a>, at your local DoHS office, or by mail. Have a recent utility bill, or a fuel supplier receipt if you heat with bulk fuel (like propane or oil).</li>
@@ -73,11 +73,11 @@ const charitySources = [
   <SourceLine sources={emergency.sources} org={emergency.org} about="Emergency Assistance" />
 
   <h3>Dollar Energy Fund</h3>
-  <p>A hardship fund for Mon Power customers with a recent financial hardship. Mon Power says it opens October 1 and stays open until the money runs out. Dollar Energy Fund says its West Virginia program helps with gas, electric and water bills, most often up to $500 per utility, and that you must apply for LIEAP and Emergency LIEAP first when they are open. Apply through a local agency (call <a href={telHref(def.contact.phone)}>{def.contact.phone}</a> or use the <a href={def.contact.url}>Dollar Energy Fund agency finder</a>).</p>
+  <p>A hardship fund for Mon Power customers with a recent financial hardship. Mon Power says it opens October 1 and stays open until the money runs out. Dollar Energy Fund says its West Virginia program helps with gas, electric and water bills, most often up to $500 per utility. It says you must apply for LIEAP and Emergency LIEAP first when they are open. Apply through a local agency (call <a href={telHref(def.contact.phone)}>{def.contact.phone}</a> or use the <a href={def.contact.url}>Dollar Energy Fund agency finder</a>).</p>
   <SourceLine sources={def.sources} org={def.org} about="Dollar Energy Fund" />
 
   <h3>Local charities</h3>
-  <p>These groups have helped Morgantown residents with utility bills, but their money is limited and we could not confirm current rules or hours. Call to confirm before you go, and ask what to bring.</p>
+  <p>These groups have helped Morgantown residents with utility bills. Their money is limited, and we could not confirm current rules or hours. Call to confirm before you go, and ask what to bring.</p>
   <ul>
     <li><strong>Christian Help</strong>, 219 Walnut Street: <a href="tel:3042960221">304-296-0221</a></li>
     <li><strong>The Salvation Army of Morgantown</strong>, 1264 University Ave.: <a href="tel:3042963525">304-296-3525</a></li>
@@ -97,9 +97,9 @@ const charitySources = [
   </Milepost>
 
   <Milepost n={4} title="Lower the bill for next time" when="Later" id="next-time">
-  <p>Mon Power's page lists free home weatherization: energy-saving upgrades to your home that lower energy costs. It also lists a program that repairs or replaces broken heating systems. Both go through your local Community Action Agency, the local group that hands out this help. In Monongalia County, that is the North Central West Virginia Community Action Association (NCWVCAA).</p>
+  <p>Mon Power's page lists free home weatherization: energy-saving upgrades to your home that lower energy costs. It also lists a program that repairs or replaces broken heating systems. Both go through your local Community Action Agency. That is the local group that hands out this help. In Monongalia County, that is the North Central West Virginia Community Action Association (NCWVCAA).</p>
   <SourceLine sources={monPower.sources} org={monPower.org} about="lowering the bill" />
-  <p>NCWVCAA's Weatherization Program can insulate, seal air leaks, and repair or replace the heating system. Homes with children, older adults or people with disabilities get priority, and approved homes wait on a list. The application is on its Weatherization page, or ask its Monongalia County office in Westover.</p>
+  <p>NCWVCAA's Weatherization Program can insulate, seal air leaks, and repair or replace the heating system. Homes with children, older adults or people with disabilities get priority. Approved homes wait on a list. The application is on its Weatherization page, or ask its Monongalia County office in Westover.</p>
   <SourceLine sources={wx.sources} org={wx.org} about="weatherization" />
   <div class="actions">
     <a class="btn" href={wx.contact.url}><Icon name="open" /><span>Weatherization application</span></a>
