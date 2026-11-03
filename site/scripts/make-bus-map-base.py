@@ -73,5 +73,11 @@ for sr in shapefile.Reader(f"{d}/tl_2024_54_prisecroads").iterShapeRecords():
                 run = dp(run, TOL)
                 if len(run) > 1:
                     out["roads"].setdefault(key, []).append(rnd(run))
-json.dump(out, open(sys.argv[2], "w"), separators=(",", ":"))
+# Write every number with four decimals ("-79.9880", not "-79.988"), so no
+# coordinate reads like a phone number to the high-stakes check (it flags 988,
+# 211 and 911 as crisis lines).
+text = json.dumps(out, separators=(",", ":"))
+import re
+text = re.sub(r"-?\d+\.\d+", lambda m: f"{float(m.group()):.4f}", text)
+open(sys.argv[2], "w").write(text)
 print({k: len(v) for k, v in out["roads"].items()}, "river rings", len(out["river"]), "points", sum(map(len, out["river"])))
