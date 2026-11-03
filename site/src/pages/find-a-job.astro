@@ -34,6 +34,8 @@ const r = (slug) => all.find((e) => e.slug === slug);
   {r('mon-county-commission-jobs') && <ResourceCard r={r('mon-county-commission-jobs')} />}
   {r('wv-state-government-jobs') && <ResourceCard r={r('wv-state-government-jobs')} />}
   {r('mon-county-schools-jobs') && <ResourceCard r={r('mon-county-schools-jobs')} />}
+  <p>WVU students looking for a job on or off campus:</p>
+  {r('wvu-student-jobs-handshake') && <ResourceCard r={r('wvu-student-jobs-handshake')} />}
   <p>The two hospital systems in Morgantown, listed A to Z:</p>
   {r('mon-health-jobs') && <ResourceCard r={r('mon-health-jobs')} />}
   {r('wvu-medicine-jobs') && <ResourceCard r={r('wvu-medicine-jobs')} />}
