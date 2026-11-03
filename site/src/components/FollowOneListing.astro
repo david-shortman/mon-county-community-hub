@@ -16,7 +16,8 @@
 //   kit (MotionSwitch.astro, src/lib/motion-client.mjs, #1441), so turning
 //   motion off here turns it off on every explainer.
 // - The drawings are aria-hidden; the step text carries the meaning.
-// - The step 7 change (3:00 p.m.) is pretend and is labeled that way.
+// - The step 7 change (3:00 p.m.) is pretend and is labeled that way. So is the
+//   saved copy time in step 6 (#1421); its wording follows the real note in sw.js.js.
 // Speaks for the project, so changes wait for David (for:david).
 const { base, example } = Astro.props;
 const SCENE = `<svg class="scene" data-s="__S__" viewBox="0 0 340 200" aria-hidden="true" focusable="false">
@@ -58,17 +59,21 @@ const SCENE = `<svg class="scene" data-s="__S__" viewBox="0 0 340 200" aria-hidd
     <rect class="pg" x="190" y="24" width="136" height="150" rx="8"/>
     <text class="tx9 tfile" x="176" y="195" font-size="9" textLength="160" lengthAdjust="spacingAndGlyphs">mon-county-recycling-drop-off.yaml</text>
   </g>
-  <g class="e e-chk" transform="translate(8 30)">
+  <g class="e e-chk" transform="translate(8 26)">
     <text class="tb" x="0" y="12">Programs check</text>
-    <g class="tick"><circle class="tk" cx="8" cy="34" r="8"/><path class="tkm" d="M4 34l3 3 5-6"/></g>
-    <text class="t" x="22" y="38">Has a source</text>
-    <g class="tick"><circle class="tk" cx="8" cy="60" r="8"/><path class="tkm" d="M4 60l3 3 5-6"/></g>
-    <text class="t" x="22" y="64">Each source has a date</text>
-    <g class="tick"><circle class="tk" cx="8" cy="86" r="8"/><path class="tkm" d="M4 86l3 3 5-6"/></g>
-    <text class="t" x="22" y="90">Page builds</text>
-    <g class="tick"><circle class="tk" cx="8" cy="112" r="8"/><path class="tkm" d="M4 112l3 3 5-6"/></g>
-    <text class="t" x="22" y="116">Small enough for a phone</text>
-    <text class="tm" x="0" y="146">All pass, so it can go on</text>
+    <g class="tick"><circle class="tk" cx="7" cy="30" r="7"/><path class="tkm" d="M3.5 30l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="34">Has a source</text>
+    <g class="tick"><circle class="tk" cx="7" cy="50" r="7"/><path class="tkm" d="M3.5 50l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="54">Each source has a date</text>
+    <g class="tick"><circle class="tk" cx="7" cy="70" r="7"/><path class="tkm" d="M3.5 70l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="74">Page builds</text>
+    <g class="tick"><circle class="tk" cx="7" cy="90" r="7"/><path class="tkm" d="M3.5 90l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="94">Small for an old phone</text>
+    <g class="tick"><circle class="tk" cx="7" cy="110" r="7"/><path class="tkm" d="M3.5 110l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="114">Easy to read, light or dark</text>
+    <g class="tick"><circle class="tk" cx="7" cy="130" r="7"/><path class="tkm" d="M3.5 130l2.5 2.5 4.5-5"/></g>
+    <text class="t" x="20" y="134">Fits 320 px, big text too</text>
+    <text class="tm" x="0" y="158">All pass, so it can go on</text>
   </g>
   <g class="e e-rev" transform="translate(8 30)">
     <text class="tb" x="0" y="12">Second look by AI</text>
@@ -96,11 +101,20 @@ const SCENE = `<svg class="scene" data-s="__S__" viewBox="0 0 340 200" aria-hidd
     <rect class="ln" x="10" y="154" width="80" height="4" rx="2"/>
     <rect class="ln" x="10" y="162" width="56" height="4" rx="2"/>
   </g>
-  <g class="e e-feeds">
-    <text class="tb" x="196" y="44">Also goes out as</text>
-    <rect class="chip" x="196" y="56" width="136" height="26" rx="13"/><text class="t" x="210" y="73">Calendar feed</text>
-    <rect class="chip" x="196" y="90" width="136" height="26" rx="13"/><text class="t" x="210" y="107">Free data files</text>
-    <rect class="chip" x="196" y="124" width="136" height="26" rx="13"/><text class="t" x="210" y="141">Read by apps and AI</text>
+  <g class="e e-off" transform="translate(206 4)">
+    <rect class="phone" width="104" height="192" rx="14"/>
+    <rect class="notch" x="38" y="7" width="28" height="5" rx="2.5"/>
+    <g class="nosig"><rect x="76" y="14" width="3" height="4"/><rect x="81" y="11" width="3" height="7"/><rect x="86" y="8" width="3" height="10"/><path d="M74 7l17 13"/></g>
+    <rect class="savedbg" x="5" y="22" width="94" height="44" rx="4"/>
+    <text class="tx9" x="9" y="34">Saved copy from</text>
+    <text class="tx9" x="9" y="46">9:15 a.m., Nov. 2.</text>
+    <text class="tx9 tsaved" x="9" y="58">Call before you go.</text>
+    <text class="tb" x="10" y="84">Recycling</text>
+    <text class="tx9" x="10" y="102">Hours</text>
+    <text class="tx9 tsaved" x="10" y="114">7 a.m. to 3:25 p.m.</text>
+    <text class="tx9" x="10" y="132">Where</text>
+    <text class="tx9 tsaved" x="10" y="144">34 Olin St.</text>
+    <text class="tx9" x="10" y="176">No signal</text>
   </g>
   <g class="cw">
     <g transform="translate(196 30)">
@@ -168,8 +182,8 @@ import MotionSwitch from './MotionSwitch.astro';
           <p class="who"><span class="tag auto">Automatic</span></p>
           <h3>4. Programs check the change</h3>
           <div class="snap"><Fragment set:html={scene(4)} /></div>
-          <p>Does every listing have a source and a date? Does every page build, stay small enough for a phone, and pass basic checks? If a check fails, the change can't go live.</p>
-          <p class="eg"><b>Our example:</b> both sources have a web address and a date, so this check passes.</p>
+          <p>Does every listing have a source and a date? Does every page build? Three of the checks are about you: is each page small enough for an old phone, easy to read in light and dark, and does it fit a 320 pixel screen even with big text? If a check fails, the change can't go live.</p>
+          <p class="eg"><b>Our example:</b> both sources have a web address and a date, and the recycling page passes the size, color and screen checks.</p>
         </li>
         <li id="step-5" data-short="A second look">
           <p class="who"><span class="tag ai">AI</span> <span class="tag person">Person</span></p>
@@ -182,8 +196,8 @@ import MotionSwitch from './MotionSwitch.astro';
           <p class="who"><span class="tag file">Published</span></p>
           <h3>6. It goes live</h3>
           <div class="snap"><Fragment set:html={scene(6)} /></div>
-          <p>The site is rebuilt from the files. The same listings also go out as a calendar feed and as <a href={`${base}/data/`}>free data files</a> other apps and AI tools can read.</p>
-          <p class="eg"><b>Our example:</b> the listing shows up on the recycling page and in the free data files.</p>
+          <p>The site is rebuilt from the files. The same listings also go out as a calendar feed and as <a href={`${base}/data/`}>free data files</a> other apps and AI tools can read. Once you have opened a page, your phone keeps a copy, so it opens even with no signal. The copy says when it was saved and to call before you go.</p>
+          <p class="eg"><b>Our example:</b> the listing shows up on the recycling page and in the free data files. On a phone that opened the recycling page before, it still opens with no signal, marked as a saved copy.</p>
         </li>
         <li id="step-7" class="loopstep" data-short="Rechecked every day">
           <p class="who"><span class="tag auto">Automatic</span></p>
@@ -199,6 +213,7 @@ import MotionSwitch from './MotionSwitch.astro';
     <div class="summary" id="flow-summary" tabindex="-1">
       <h3>The path in short</h3>
       <p>A public page, read by AI, saved as a public file, checked by programs and a second look, then live on the site. Every day the sources get rechecked, and when one changes, or you report a problem, the listing goes back to step 2.</p>
+      <p class="meta">This story follows its own rules: it reads as a plain list without script, and "Turn off motion" stops it.</p>
       <p class="check"><strong>See a real one:</strong> the <a href={example}>file for the county recycling drop-off center</a>. You can see the same listing on the <a href={`${base}/recycling/`}>recycling page</a>.</p>
     </div>
   </div>
@@ -279,6 +294,10 @@ import MotionSwitch from './MotionSwitch.astro';
   #flow-explainer .scene .diff { fill: none; stroke: var(--brick); stroke-width: 2; stroke-dasharray: 4 3; }
   #flow-explainer .scene .neq { fill: var(--card); stroke: var(--brick); stroke-width: 2; }
   #flow-explainer .scene .mg { fill: var(--accent-bg); fill-opacity: 0.4; stroke: var(--fg); stroke-width: 2.5; }
+  #flow-explainer .scene .nosig rect { fill: var(--muted); }
+  #flow-explainer .scene .nosig path { fill: none; stroke: var(--brick); stroke-width: 2; stroke-linecap: round; }
+  #flow-explainer .scene .savedbg { fill: var(--accent-bg); stroke: var(--accent); stroke-width: 1; }
+  #flow-explainer .scene .tsaved { font-size: 9px; font-weight: 700; fill: var(--fg); }
   #flow-explainer .scene .mgh { fill: none; stroke: var(--fg); stroke-width: 3.5; stroke-linecap: round; }
 
   /* What each step shows. Parts start hidden; each step turns on its own. */
@@ -299,7 +318,7 @@ import MotionSwitch from './MotionSwitch.astro';
   #flow-explainer .scene[data-s="4"] .e-chk .tick, #flow-explainer .scene[data-s="5"] .e-rev .tick { opacity: 1; transform: none; }
   #flow-explainer .scene[data-s="5"] .e-rev, #flow-explainer .scene[data-s="5"] .e-mag { opacity: 1; }
   #flow-explainer .scene[data-s="5"] .e-mag { transform: translateY(44px); }
-  #flow-explainer .scene[data-s="6"] .e-ph, #flow-explainer .scene[data-s="6"] .e-feeds { opacity: 1; }
+  #flow-explainer .scene[data-s="6"] .e-ph, #flow-explainer .scene[data-s="6"] .e-off { opacity: 1; }
   #flow-explainer .scene[data-s="6"] .cw { transform: translate(-156px, 30px) scale(0.6); }
   #flow-explainer .scene[data-s="7"] .e-re, #flow-explainer .scene[data-s="7"] .e-chg, #flow-explainer .scene[data-s="7"] .e-hlh, #flow-explainer .scene[data-s="7"] .e-flag { opacity: 1; }
   #flow-explainer .scene[data-s="7"] .h-old { opacity: 0; }
@@ -325,6 +344,7 @@ import MotionSwitch from './MotionSwitch.astro';
     #flow-explainer.is-live .stage .tick:nth-of-type(3) { transition-delay: 0.6s; }
     #flow-explainer.is-live .stage .tick:nth-of-type(4) { transition-delay: 0.9s; }
     #flow-explainer.is-live .stage .tick:nth-of-type(5) { transition-delay: 1.2s; }
+    #flow-explainer.is-live .stage .tick:nth-of-type(6) { transition-delay: 1.5s; }
     #flow-explainer.is-live .stage[data-s="5"] .e-mag { animation: fol-scan 2s ease-in-out 0.3s both; }
     #flow-explainer.is-live .stage[data-s="7"] .e-chg, #flow-explainer.is-live .stage[data-s="7"] .e-hlh { transition-delay: 0.3s; }
     #flow-explainer.is-live .stage[data-s="7"] .e-re { transition-delay: 0.8s; }
