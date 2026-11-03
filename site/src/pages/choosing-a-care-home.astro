@@ -3,8 +3,8 @@
 // with care (#222 life areas: caring for an aging parent, sprint wave 11).
 // Facts come from the records, each read on Medicare, the WV Bureau of Senior
 // Services, the WV Office of Inspector General and DoHS pages on 2026-11-02.
-// Left off until a person confirms them: whether the ombudsman is free (no
-// page we read says so), how OHFLAC's facility search and inspection reports
+// Legal Aid of WV's page (read 2026-11-03, #1559) says the ombudsman is free.
+// Left off until a person confirms them: how OHFLAC's facility search and inspection reports
 // work (its own site blocks automated reads), and any facility by name.
 import Base from '../layouts/Base.astro';
 import OnThisPage from '../components/OnThisPage.astro';
@@ -28,7 +28,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="problem">A problem with care</h2>
   <p>An <strong>ombudsman</strong> speaks up for people who live in nursing homes and other care homes. Ombudsmen do not work for the homes.</p>
-  <ResourceCard r={resource('wv-long-term-care-ombudsman')} />
+  <ResourceCard r={resource('wv-long-term-care-ombudsman')} showCost />
   <ResourceCard r={resource('ohflac-facility-complaints')} />
 
   <h2 id="abuse">Abuse or neglect</h2>

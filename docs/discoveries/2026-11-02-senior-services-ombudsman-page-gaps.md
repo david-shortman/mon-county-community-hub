@@ -6,4 +6,5 @@
 - **Why it matters:** A family with a problem at a care home cannot read the brochures, and cannot be sure which regional office covers a county listed twice. Monongalia County is listed once, under the Morgantown office.
 - **What we did:** `/choosing-a-care-home/` gives the statewide number from the program page and the Morgantown region from the coverage list, with its date. It does not say the program is free.
 - **Who keeps it:** WV Bureau of Senior Services.
+- **Update 2026-11-03 (verification sweep 5, #529):** Legal Aid of West Virginia, which runs the program, lists the counties each regional ombudsman serves on https://legalaidwv.org/our-programs/long-term-care/ (read 2026-11-03). It puts Monongalia under the Wheeling office ("Serving the following counties: Brooke, Hancock, Marion, Marshall, Monongalia, and Ohio"), not Morgantown. The two official lists now disagree. The same page says all services are free, so `/choosing-a-care-home/` now says free and names both lists.
 - **Status:** open. A person could check whether the brochures moved and whether a newer coverage list exists.
