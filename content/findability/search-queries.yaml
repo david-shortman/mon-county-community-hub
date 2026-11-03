@@ -12,6 +12,8 @@
 #   in the top 3 counts as a hit.
 # kind: everyday (plain words and slang), short (an acronym or short form),
 #   misspelled, question (a full question, many from questions.yaml).
+# first: true when the first expected page must be the very first result, not
+#   just in the top 3. Only for pinned crisis words (PIN in search-plan.mjs, #1647).
 #
 # Keep queries stable so runs can be compared. Add new ones at the end of their
 # section. Never put a private person's words or searches here: these are
@@ -81,7 +83,7 @@ queries:
   - {q: place to sleep, expect: [/stay-tonight/, /tonight/], kind: everyday}
   - {q: domestic violence, expect: [/stay-tonight/], kind: everyday}
   - {q: abuse, expect: [/stay-tonight/], kind: everyday}
-  - {q: suicide, expect: [/mental-health/], kind: everyday}
+  - {q: suicide, expect: [/mental-health/], kind: everyday, first: true}
   - {q: narcan, expect: [/drugs-and-alcohol/], kind: everyday}
   - {q: naloxone, expect: [/drugs-and-alcohol/], kind: everyday}
   - {q: overdose, expect: [/drugs-and-alcohol/], kind: everyday}
@@ -97,10 +99,16 @@ queries:
   - {q: shelter tonight, expect: [/stay-tonight/, /tonight/], kind: everyday}
   - {q: narcain, expect: [/drugs-and-alcohol/], kind: misspelled}
   - {q: sheltor, expect: [/stay-tonight/, /tonight/], kind: misspelled}
+  - {q: suicidal, expect: [/mental-health/], kind: everyday, first: true}
+  - {q: kill myself, expect: [/mental-health/], kind: everyday, first: true}
+  - {q: sucide, expect: [/mental-health/], kind: misspelled, first: true}
   - {q: identity theft, expect: [/identity-theft/], kind: everyday}
   - {q: credit freeze, expect: [/identity-theft/], kind: everyday}
   - {q: fraud alert, expect: [/identity-theft/, /scams/], kind: everyday}
   - {q: stolen social security number, expect: [/identity-theft/], kind: everyday}
+  - {q: debt collector, expect: [/credit-and-debt/], kind: everyday}
+  - {q: free credit report, expect: [/credit-and-debt/, /identity-theft/], kind: everyday}
+  - {q: open a bank account, expect: [/credit-and-debt/], kind: everyday}
 
   # Health care
   - {q: dentist cheap, expect: [/dental-and-prescriptions/], kind: everyday}
@@ -108,7 +116,8 @@ queries:
   - {q: free clinic, expect: [/no-insurance/], kind: everyday}
   - {q: doctor no insurance, expect: [/no-insurance/], kind: everyday}
   - {q: sliding scale, expect: [/no-insurance/, /dental-and-prescriptions/, /mental-health/], kind: everyday}
-  - {q: Health Right, expect: [/no-insurance/, /dental-and-prescriptions/], kind: everyday}
+  # The clinic's own group page answers a search for its name (round 4, wave 14).
+  - {q: Health Right, expect: [/no-insurance/, /dental-and-prescriptions/, /groups/milan-puskar-health-right/], kind: everyday}
   - {q: medicaid, expect: [/file-today/, /no-insurance/, /medicaid-2027/], kind: everyday}
   - {q: medicade, expect: [/file-today/, /no-insurance/, /medicaid-2027/], kind: misspelled}
   - {q: medicare, expect: [/turning-65/], kind: everyday}
@@ -234,6 +243,8 @@ queries:
   - {q: free seeds, expect: [/grow/], kind: everyday}
   - {q: sell vegetables, expect: [/sell-what-you-grow/], kind: everyday}
   - {q: farmers market vendor, expect: [/sell-what-you-grow/, /markets/], kind: everyday}
+  - {q: lead paint, expect: [/lead/], kind: everyday}
+  - {q: lead in water, expect: [/lead/], kind: everyday}
   - {q: accessibility, expect: [/access/], kind: everyday}
 
   # Work, school, family and community
@@ -314,3 +325,5 @@ queries:
   - {q: can seniors take college classes for less, expect: [/keep-learning/], kind: question}
   - {q: where can I find a grief group, expect: [/grief/], kind: question}
   - {q: where can our nonprofit get a grant, expect: [/grants-for-nonprofits/, /make-it-better/grants/], kind: question}
+  - {q: is there lead in my old house, expect: [/lead/], kind: question}
+  - {q: I am being sued over a debt, expect: [/credit-and-debt/, /legal-help/], kind: question}

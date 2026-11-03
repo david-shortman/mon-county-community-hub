@@ -14,6 +14,8 @@ what_to_bring:
   - "For a REAL ID: one proof of identity, one proof of Social Security number, two proofs of WV residency with your name and street address, and proof of any legal name change."
 if_you_want_help: [wv-dmv-morgantown-office]
 sources:
+  - url: https://dmv.wv.gov/contact-us
+    checked: 2026-11-02
   - url: https://dmv.wv.gov/not-federal-identification-card-requirements
     checked: 2026-11-01
   - url: https://dmv.wv.gov/federal-identification-real-id-card-requirements
