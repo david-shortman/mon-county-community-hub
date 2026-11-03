@@ -1,0 +1,13 @@
+name: West Virginia Caring (WV Caring)
+slug: wv-caring
+kind: nonprofit
+website: https://www.wvcaring.org/
+phone: "1-866-656-9790"
+summary: A nonprofit hospice with a Monongalia County office at 3433 University Avenue in Morgantown. It cares for people with a serious illness that has no cure, and its Grief and Loss staff, based at the Morgantown office, offer grief support and run Camp Caring, a grief camp for children.
+topics: [health]
+area: statewide
+sources:
+  - url: https://www.wvcaring.org/contact-hospice-care-provider/
+    checked: 2026-11-02
+  - url: https://www.wvcaring.org/
+    checked: 2026-11-02
