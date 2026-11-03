@@ -1,0 +1,12 @@
+name: West Virginia Childhood Lead Poisoning Prevention Project
+slug: wv-childhood-lead-poisoning-prevention-project
+kind: government
+website: https://dhhr.wv.gov/wvchildhoodleadpoisoning/Pages/default.aspx
+summary: The state program, part of the Office of Maternal, Child and Family Health, that works to end childhood lead poisoning. It follows West Virginia children who have a high blood lead level.
+topics: [health]
+area: statewide
+sources:
+  - url: https://dhhr.wv.gov/wvchildhoodleadpoisoning/about/Pages/default.aspx
+    checked: 2026-11-02
+  - url: https://dhhr.wv.gov/wvchildhoodleadpoisoning/PublishingImages/Brochure%20-%20FINAL%2006.26.2024.pdf
+    checked: 2026-11-02

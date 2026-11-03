@@ -5,6 +5,7 @@
 import Base from '../layouts/Base.astro';
 import SearchBox from '../components/SearchBox.astro';
 import DoorCards from '../components/DoorCards.astro';
+import CrisisLine from '../components/CrisisLine.astro';
 import { inlineSource } from '../lib/search-plan.mjs';
 // The search code is shared with the search test (#1286).
 const searchCode = inlineSource();
@@ -13,17 +14,25 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Base searchable={false} title="Search Mon County help" description="Search plain-language help pages for Morgantown and Monongalia County, WV. The search runs on your phone, and we never collect what you search for.">
   <h1>Search</h1>
   <SearchBox id="search-q" />
+  {/* Crisis words (CRISIS in search-plan.mjs, #1647) show the crisis line's
+      911 and 988 box here, above the results. The script copies it from the
+      template into this live region, so screen readers read it out. */}
+  <div id="search-crisis" aria-live="polite"></div>
+  <template id="search-crisis-box"><CrisisLine /></template>
   <p id="search-status" class="search-status" role="status" aria-live="polite"></p>
   <ol id="search-results" class="search-results" hidden></ol>
-  <noscript><p>Search needs JavaScript, which is off on this browser. Pick what is going on below, see <a href={`${base}/topics/`}>all topics</a>, or call or text 211.</p></noscript>
+  <noscript><CrisisLine /><p>Search needs JavaScript, which is off on this browser. Pick what is going on below, see <a href={`${base}/topics/`}>all topics</a>, or call or text 211.</p></noscript>
   <DoorCards heading="Or pick what is going on" id="browse" />
   <p class="meta">The search runs on your phone. Your words are never sent to us or to the site’s host, and we never store them. Like any visit, the host can see which files your phone loads, including the search files for the pages that match.</p>
   <script is:inline set:html={searchCode}></script>
+  <style>:global(#search-crisis .crisis-line) { margin-top: 12px; }</style>
   <script is:inline define:vars={{ base }}>
     (function () {
       var input = document.getElementById('search-q');
       var status = document.getElementById('search-status');
       var list = document.getElementById('search-results');
+      var crisisBox = document.getElementById('search-crisis');
+      var crisisTpl = document.getElementById('search-crisis-box');
       var pagefind;
       function current() {
         var h = location.hash.match(/^#q=(.*)$/);
@@ -40,6 +49,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       function run(q) {
         input.value = q;
         list.hidden = true; list.innerHTML = '';
+        // Show the 988 box before the search loads, so it shows even if search fails.
+        var danger = SearchPlan.crisis(q);
+        if (!danger) crisisBox.innerHTML = '';
+        else if (!crisisBox.firstElementChild) crisisBox.appendChild(crisisTpl.content.cloneNode(true));
         if (!q.trim()) { status.textContent = ''; return; }
         status.textContent = 'Searching…';
         load().then(function (pf) { return find(pf, q); }).then(function (found) {

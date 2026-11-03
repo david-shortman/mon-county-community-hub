@@ -1,0 +1,26 @@
+title: Life expectancy
+slug: life-expectancy
+topic: health
+definition: "Average number of years people are expected to live." # County Health Rankings' own definition (v147)
+unit: years
+digits: 1 # County Health Rankings shows this to one decimal place
+data_year: "2021-2023"
+release: County Health Rankings, March 2026 supplemental release
+values:
+  monongalia: 77.81125490871702
+  west_virginia: 72.44401379788155
+  united_states: 77.55068689793733
+sources:
+  - name: County Health Rankings March 2026 supplemental data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-03
+  - name: Supplemental release codebook (data years by measure)
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf
+    checked: 2026-11-03
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    checked: 2026-11-03
+more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia # the human page for this county
+chr:
+  # where scripts/update-chr-indicators.mjs reads it. Not in the trends file, so no trend_name and no chart.
+  measure: v147
+  data_year: "2021-2023" # from the supplement codebook

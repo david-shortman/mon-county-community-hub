@@ -1,0 +1,5 @@
+# 2026-11-03: Transportation: VA travel pay and free bus rides for high school students (#1534)
+
+- **Considered:** round two of the needs coverage lane re-checked "Getting where you need to go". Most of it holds up. Missing: VA travel pay (there is a VA clinic in Westover), and how a high school student gets the ID for free rides. Half fare, route deviations and Senior Monongalians rides were only reachable from the disability pages.
+- **Shipped:** `va-travel-pay` (who qualifies, the 30 day filing rule, 41.5 cents a mile, the monthly deductible) on `/medical-rides/#veterans` and `/veterans/`; `mountain-line-high-school-id` (the GMAYC ID, 1 to 2 weeks, pickup at Westover Terminal, the 30 day grace period) on `/getting-around/`; a pointer from `/getting-around/#rides` to the half fare, deviation and senior ride cards. The need stays good.
+- **Left:** whether a bus gets you there and back the same day (#407). Mountain Line's military pass page lists the program but says it is "currently looking for a sponsor", so whether it is running is unclear.

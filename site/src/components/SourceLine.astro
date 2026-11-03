@@ -12,7 +12,7 @@
 //   skip: source URLs already linked elsewhere on the card
 // Reads like "Source: Mon River Trails Conservancy: montrails.org/rail-trail-info.
 // Checked October 29, 2026." The checked date is the oldest across all
-// sources (#39); past 6 months the line says the item may be out of date.
+// sources (#39); past its re-check date (6 months, 90 days for high stakes) the line says it may be out of date.
 // Text before the source goes in the "before" slot; anything after goes in
 // the default slot.
 // With no sources (a hidden record's stand-in, #519) it says the item is
@@ -23,7 +23,7 @@ import { prettyDate, oldestChecked, sourceGroups, isStale, reportUrl, ymd, RECHE
 //     gets the same out-of-date note.
 //   stale: true or false to override the 6-month rule, for facts with their
 //     own re-check window (#122)
-// staleDays: after how many days unchecked the line says "may be out of date" (default 6 months; #791).
+// staleDays: after how many days unchecked the line says "may be out of date" (default 6 months; staleDaysFor gives 90 for high-stakes listings, #791, #1461).
 // remind: when true and the item is not stale, add a short "check with them first" line (#942).
 const { sources = [], org, about, slug, skip = [], phone, stale: staleOverride, staleDays, remind = false } = Astro.props;
 const groups = sourceGroups(sources.filter((s) => !skip.includes(s.url)), org);

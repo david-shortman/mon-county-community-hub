@@ -12,9 +12,13 @@ export function loadIndicators(topic) {
     .filter((i) => !topic || i.topic === topic);
 }
 
-// 0.129 as a percent reads "12.9%". Other units are shown as the source gives them.
+// 0.129 as a percent reads "12.9%". Other units are rounded to the record's
+// `digits` (as the publisher shows them) and get their unit words:
+// "77.8 years", "43 per 100,000 people".
 export function showValue(i, v) {
   if (v == null) return 'not given';
   if (i.unit === 'percent') return `${(v * 100).toFixed(1)}%`;
-  return String(v);
+  const n = i.digits == null ? String(v) : v.toLocaleString('en-US', { minimumFractionDigits: i.digits, maximumFractionDigits: i.digits });
+  if (i.unit === 'years') return `${n} years`;
+  return i.per ? `${n} ${i.per}` : n;
 }
