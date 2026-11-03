@@ -8,6 +8,8 @@ steps:
   - You need an insurance certificate or owner's statement of insurance before the DMV issues a new plate.
   - A plate reported lost or stolen gets a new number. For a personalized plate, use form DMV-43-TR to ask for a replica.
 cost: "$10.50 for a new plate. $10 for a new decal or registration card."
+what_to_bring:
+  - "An insurance certificate or owner's statement of insurance"
 contact:
   url: https://dmv.wv.gov/vehicle-services/vehicles/registrations
   url_label: Replace a plate or decal
