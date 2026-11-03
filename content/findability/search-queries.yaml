@@ -140,6 +140,8 @@ queries:
   - {q: assisted living, expect: [/choosing-a-care-home/], kind: everyday}
   - {q: nursing home ratings, expect: [/choosing-a-care-home/], kind: everyday}
   - {q: complaint about a nursing home, expect: [/choosing-a-care-home/], kind: everyday}
+  - {q: grief support, expect: [/grief/], kind: everyday}
+  - {q: bereavement group, expect: [/grief/], kind: everyday}
 
   # Government, voting and civic
   - {q: where do I vote, expect: [/vote/], kind: question}
@@ -177,6 +179,8 @@ queries:
   - {q: county offices, expect: [/which-office/, /who-serves-me/], kind: everyday}
   - {q: court records, expect: [/which-office/], kind: everyday}
   - {q: record a deed, expect: [/which-office/], kind: everyday}
+  - {q: nonprofit grants, expect: [/grants-for-nonprofits/, /make-it-better/grants/], kind: everyday}
+  - {q: foundation grants, expect: [/grants-for-nonprofits/], kind: everyday}
 
   # Getting around, IDs and cars
   - {q: DMV, expect: [/drivers-license/, /car-registration/, /ids-and-records/], kind: short}
@@ -307,3 +311,5 @@ queries:
   - {q: is this website accurate, expect: [/progress/, /how-we-check/], kind: question}
   - {q: how do I pick a nursing home for my mom, expect: [/choosing-a-care-home/], kind: question}
   - {q: can seniors take college classes for less, expect: [/keep-learning/], kind: question}
+  - {q: where can I find a grief group, expect: [/grief/], kind: question}
+  - {q: where can our nonprofit get a grant, expect: [/grants-for-nonprofits/, /make-it-better/grants/], kind: question}
