@@ -537,6 +537,16 @@ hidden:
 - **211 and 988 cannot be hidden.** They show on every page. If one looks wrong, fix it from the line's own page the same day.
 - **Who can merge.** A PR that only adds or changes `hidden` blocks does not wait for David, and the High stakes check does not flag it (`docs/COORDINATION.md`: "taking down or hiding a wrong item does not wait"). A PR that removes a `hidden` block is checked like any other content change.
 
+### Listings tied to one date
+
+A resource that only makes sense up to a date (Election Day polling places, a ballot that must be postmarked by Election Day) can set `show_until`:
+
+```yaml
+show_until: 2026-11-03   # last Morgantown day it shows
+```
+
+From the next day on, the daily build leaves it off every page, the search index and the counts, the same way `hidden` does, with no edit needed. A page that names it by slug still finds it. Use `hidden` instead when a listing is wrong. `npm run check-content` fails if `show_until` is not a date. Added in QA sweep 2 (#529).
+
 ## Confirmed by phone and the call queue
 
 Some groups have no website, or only a page robots cannot read, so a phone call is the only way to check them (#164). After a person confirms a listing by phone, add to its file in `orgs/`, `resources/` or `places/`:
@@ -578,6 +588,8 @@ sources:
 
 - **Charts and updates (#15).** A file can name its County Health Rankings measure under `chr:` (`measure: v024`, `trend_name: Children in poverty`). `node scripts/update-chr-indicators.mjs --check` in `site/` compares the file with County Health Rankings' public files, and `--write` fills `values`, `data_year` and `history` (Mon County and West Virginia by year, only after the source's last trend break), and sets `checked`. The page draws a chart from `history`. A monthly workflow (`.github/workflows/indicators.yml`) runs the check and opens an issue for Duet when the source changes. No key, no account.
 - **Supplements (#1357).** CHR&R made no 2026 annual release; a March 2026 supplemental file refreshed 34 measures. An indicator on that file puts it first in `sources`, adds the supplement codebook as a source, and sets `chr.data_year` to the year the codebook gives for its measure (the trends file stops at the 2025 release, so the chart can end a year earlier than the number). `children-in-poverty` is not in the supplement and stays on the 2025 file.
+- **Measures with no trend (#1662).** Some County Health Rankings measures, like life expectancy (`v147`) and drug overdose deaths (`v138`), are not in the trends file. Their `chr:` has `measure` and `data_year` (from the codebook) but no `trend_name`, so the script refreshes only `values`, and the page shows no chart.
+- **Showing whole numbers.** For `unit: number` or `years`, `digits` (0, 1 or 2) rounds the number on the page the way the publisher shows it, and `per` (for `number` only) adds the unit words, like `per 100,000 people`. The file keeps the full number.
 - **Official sources only**, read in the same session: a government agency or a program that publishes the same data for every county. Never a real estate, "best places" or other commercial site.
 - **Copy the number and its definition exactly.** Never compute a new number (a rank, a change, a per-person rate) the source does not give.
 - **Describe, never judge.** No "good", "bad", "safe" or "failing". The page says what the numbers do and don't tell you.

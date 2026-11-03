@@ -16,6 +16,11 @@ export const CONTENT_DIR = path.resolve(here, '../../../content');
 // re-checked and can come back by removing the `hidden` block.
 export const HIDDEN_REASONS = ['group-request', 'unconfirmed-risky', 'overdue', 'other'];
 export const isHidden = (e) => e?.hidden != null && e.hidden !== false;
+// A listing tied to one date (Election Day polling places, say) can set
+// `show_until: YYYY-MM-DD`. From the next Morgantown day on, the daily build
+// leaves it off pages like a hidden record, with no edit needed (QA sweep 2,
+// #529). Lookups by slug still find it, so a page that names it keeps working.
+export const isPast = (e, today = todayYmd()) => e?.show_until != null && ymd(e.show_until) < today;
 
 export function loadDir(name, { withHidden = false } = {}) {
   const dir = path.join(CONTENT_DIR, name);
@@ -25,7 +30,7 @@ export function loadDir(name, { withHidden = false } = {}) {
     .filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'))
     .sort()
     .map((f) => ({ ...YAML.parse(fs.readFileSync(path.join(dir, f), 'utf8')), _file: `${name}/${f}` }));
-  return withHidden ? all : all.filter((e) => !isHidden(e));
+  return withHidden ? all : all.filter((e) => !isHidden(e) && !isPast(e));
 }
 
 // What a page shows in place of a hidden record it names on purpose (a
@@ -67,6 +72,13 @@ export function loadCalendar({ withHidden = false } = {}) {
 // A hand-written entry wins when both have the same slug.
 // Cached so the page and the .ics feed share one fetch per build.
 let merged;
+// The words two listings of one event share: the first three title words,
+// lowercased, with years left out. Feeds often put the year first ("2026
+// General Election Day") where a hand-written entry doesn't, and the year
+// alone kept the two from matching, so Election Day showed twice.
+export const titleKey = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/)
+  .filter((w) => w && !/^(19|20)\d\d$/.test(w)).slice(0, 3).join(' ');
+
 export function loadCalendarWithFeeds() {
   merged ??= (async () => {
     // A hidden hand-written entry also hides the feed item with its slug (#519).
@@ -80,7 +92,7 @@ export function loadCalendarWithFeeds() {
     // A feed item that a hand-written entry already covers (same first three
     // title words, starting within the hand entry's dates) is left out too,
     // so one event never shows twice under two slugs (#761).
-    const words = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 3).join(' ');
+    const words = titleKey;
     const covered = (f) => hand.some((h) => words(h.title) === words(f.title) && f.starts >= h.starts && f.starts <= h.ends);
     const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug) && !covered(e));
     // Two feeds can list the same event (#852). Same rule across feeds: same
