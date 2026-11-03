@@ -1,0 +1,46 @@
+---
+// Bank accounts, credit reports and debt help (#222 coverage map rank 7, a
+// money page, so it waits for David; sprint wave 11). Facts come from the
+// records, each read on CFPB, USA.gov, FDIC, Bank On, U.S. Trustee Program,
+// WV Attorney General and WV Courts pages on 2026-11-02. Left off: FTC pages
+// and AnnualCreditReport.com (both refuse automated reads), Legal Aid of WV's
+// own pages (not found that day), and free money coaching in Mon County (no
+// official page found). No bank, lender or company is named or ranked.
+import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "this-month", topic: "money", label: "Bank account, credit report and debt help", summary: "Free credit reports, opening a low-cost bank account, your rights with debt collectors, being sued over a debt, finding a credit counselor, and where to complain" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Bank account, credit report and debt help in Mon County, WV" description="Free credit reports, how to open a low-cost bank account, your rights when a debt collector calls, what to do if you are sued over a debt in Monongalia County Magistrate Court, how to find an approved credit counselor, and where to complain.">
+  <h1>Bank account, credit report and debt help</h1>
+  <p class="lede">You can get your free credit reports online or by phone, any time. If a debt collector contacts you, the CFPB has sample letters you can use. Got court papers about a debt? See <a href="#sued">Sued over a debt</a>: there is a deadline.</p>
+  <OnThisPage items={[['#report', "Free credit reports"], ['#bank', "Open a bank account"], ['#collector', "A debt collector contacts you"], ['#sued', "Sued over a debt"], ['#counselor', "Credit counseling"], ['#complain', "Where to complain"]]} />
+
+  <h2 id="report">Free credit reports</h2>
+  <ResourceCard r={resource('free-credit-reports')} showCost />
+  <p>Think someone opened an account in your name? See <a href={`${base}/identity-theft/`}>Identity theft: what to do</a>.</p>
+
+  <h2 id="bank">Open a bank account</h2>
+  <ResourceCard r={resource('fdic-open-a-bank-account')} showCost />
+
+  <h2 id="collector">A debt collector contacts you</h2>
+  <ResourceCard r={resource('cfpb-debt-collector-rights')} />
+  <ResourceCard r={resource('msj-consumer-debt-legal-help')} showCost />
+  <p>Not sure the caller is real? See <a href={`${base}/scams/`}>Is this a scam?</a></p>
+
+  <h2 id="sued">Sued over a debt</h2>
+  <ResourceCard r={resource('mon-magistrate-answer-debt-lawsuit')} />
+  <p>More free and low cost legal help: <a href={`${base}/legal-help/`}>Courts and legal help</a>.</p>
+
+  <h2 id="counselor">Credit counseling</h2>
+  <ResourceCard r={resource('find-approved-credit-counselor')} showCost />
+
+  <h2 id="complain">Where to complain</h2>
+  <ResourceCard r={resource('cfpb-submit-a-complaint')} />
+  <ResourceCard r={resource('wv-ag-debt-collector-complaint')} />
+
+  <p class="meta">Sources checked November 2, 2026. This page says where to go. It is not legal or money advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
