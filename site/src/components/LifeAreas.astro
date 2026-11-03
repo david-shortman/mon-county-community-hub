@@ -1,0 +1,36 @@
+---
+// Life areas map on /topics/ (#1040): one tile per part of life in
+// docs/research/life-areas.yaml, with how many of our pages cover it and what
+// is not on the site yet. Plain tiles, no map and no script.
+import fs from 'node:fs';
+import YAML from 'yaml';
+import { loadPages } from '../lib/pages.mjs';
+import { LIFE_AREAS_FILE, lifeAreaTiles } from '../lib/topics-extras.mjs';
+import { prettyDate, ymd } from '../lib/content.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pages = await loadPages();
+const doc = YAML.parse(fs.readFileSync(LIFE_AREAS_FILE, 'utf8'));
+const tiles = lifeAreaTiles(doc, (r) => pages.has(r));
+---
+{tiles.length > 0 && (
+  <section class="life-areas" aria-labelledby="life-areas-h">
+    <h2 id="life-areas-h">Parts of life we cover</h2>
+    <p>How many of our pages cover each part of life, and what is not on the site yet. Last reviewed {prettyDate(ymd(doc.checked))}.</p>
+    <ul class="la-tiles">
+      {tiles.map((t) => (
+        <li>
+          <a href={`${base}${t.href}`}>{t.name}</a>
+          <span class="la-count">{`${t.count} ${t.count === 1 ? 'page' : 'pages'}`}</span>
+          {t.notYet.length > 0 && <span class="la-gap">Not here yet: {t.notYet.join('; ')}.</span>}
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .la-tiles { list-style: none; margin: var(--s4) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: var(--s4); }
+  .la-tiles li { border: 1px solid var(--line); border-top: 2px solid var(--fg); padding: var(--s3) var(--s4); display: flex; flex-direction: column; gap: var(--s1); }
+  .la-tiles a { font-weight: 700; }
+  .la-count, .la-gap { color: var(--muted); }
+</style>
