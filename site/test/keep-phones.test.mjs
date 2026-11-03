@@ -9,6 +9,10 @@ test('wraps numbers in sentences', () => {
   assert.match(out, /Call <span class="nowrap">1-877-322-8228<\/span> or <span class="nowrap">\(304\) 598-5181<\/span>, or text <span class="nowrap">898-211<\/span>\./);
 });
 
+test('wraps letter numbers', () => {
+  assert.match(keepPhones(page('<p>Call 304-291-RIDE or 1-800-252-JOBS.</p>')), /<span class="nowrap">304-291-RIDE<\/span> or <span class="nowrap">1-800-252-JOBS<\/span>/);
+});
+
 test('leaves tags, scripts, titles, tel links and wrapped numbers alone', () => {
   const html = page('<a href="tel:3045550100" data-n="304-555-0100">304-555-0100</a><script>var n="304-555-0100"</script><span class="nowrap">304-555-0100</span>');
   assert.equal(keepPhones(html), html);

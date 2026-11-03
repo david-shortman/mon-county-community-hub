@@ -7,9 +7,9 @@
 // inside a tel: or sms: link are left alone. Inside a button, .btn .nowrap
 // wraps normally, so button labels still fit.
 
-// 1-800-642-8589, 304-285-3175, (304) 598-5181, 304.293.4897, and the 211
-// text line 898-211.
-const PHONE = /(?<![\w-])(?:1[- ])?(?:\(\d{3}\) ?|\d{3}[-.])\d{3}[-.]\d{4}(?![\w-])|(?<![\w-])898-211(?![\w-])/g;
+// 1-800-642-8589, 304-285-3175, (304) 598-5181, 304.293.4897, letter numbers
+// like 304-291-RIDE, and the 211 text line 898-211.
+const PHONE = /(?<![\w-])(?:1[- ])?(?:\(\d{3}\) ?|\d{3}[-.])\d{3}[-.](?:\d{4}|[A-Z]{4})(?![\w-])|(?<![\w-])898-211(?![\w-])/g;
 const SKIP = new Set(['script', 'style', 'textarea', 'title', 'head', 'svg', 'pre', 'code', 'option']);
 
 export function keepPhones(html) {
