@@ -40,5 +40,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <ResourceCard r={resource('va-burial-benefits')} />
   <ResourceCard r={resource('mon-county-clerk-dd214')} />
 
+  <p>Grief support for you and your family: see <a href={`${base}/grief/`}>Grief and losing someone</a>.</p>
+
   <p class="meta">Sources checked October 31, 2026. This page says where to go. It is not legal advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
