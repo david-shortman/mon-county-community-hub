@@ -37,6 +37,8 @@ jobs:
           cache-dependency-path: site/package-lock.json
       - run: npm ci
       - run: npm run check-content
+      # scripts/pr-wait.sh and scripts/safe-merge.sh against a fake gh: no network, about 2 seconds.
+      - run: bash ../scripts/test/pr-wait.test.sh
       - run: npm run build
         env:
           # Read-only, to count group requests (#523). The build still works without it.
