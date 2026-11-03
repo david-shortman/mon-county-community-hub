@@ -2,7 +2,7 @@
 
 The Privacy, About and How this site works pages, and [`docs/accessibility.md`](../accessibility.md), promise residents things about access and privacy. This page lists each promise and the check that fails the build if a change breaks it. A promise with no check is either a fact about another company (cited on the page with a link to that company's own policy) or a hand-run audit with a date. Added for #1423 on November 2, 2026.
 
-When you add a promise to a public page, add a check here first. If no check is possible, word the promise as a fact with a date or a source, not as a guarantee.
+The public version of this list is `/access/`, "Built for any phone and every reader" (#1419). When you add a promise to a public page, add a check here first. If no check is possible, word the promise as a fact with a date or a source, not as a guarantee.
 
 ## Privacy (`/privacy/`, `/about/`, `/how-it-works/`)
 
