@@ -11,7 +11,8 @@
 // It loads the real Pagefind index from dist/pagefind in Node and runs each
 // query in content/findability/search-queries.yaml through the same `find`
 // code the search page runs (src/lib/search-plan.mjs, #1286). A query is a hit when one of its
-// expected pages is in the top 3. It never fails the build: it is a report.
+// expected pages is in the top 3, or, for a query marked `first: true` (pinned crisis
+// words, #1647), when its first expected page is the very first result. It never fails the build: it is a report.
 // See docs/operations/search-test.md.
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -67,9 +68,10 @@ for (const item of queries) {
   }
   const routes = top.map((d) => routeOf(d.url));
   const rank = routes.findIndex((r) => item.expect.includes(r));
+  const hit = item.first ? routes[0] === item.expect[0] : rank >= 0 && rank < TOP;
   results.push({
     q: item.q, kind: item.kind, expect: item.expect,
-    hit: rank >= 0 && rank < TOP, rank: rank >= 0 ? rank + 1 : null,
+    hit, rank: rank >= 0 ? rank + 1 : null,
     count: top.length, top3: routes.slice(0, TOP),
     ...(searched !== item.q ? { searched } : {}),
     ...(loose ? { loose: true } : {}),

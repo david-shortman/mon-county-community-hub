@@ -17,6 +17,9 @@ const moneyFact = factsFor('money');
 export const page = { door: 'community', topic: 'data', label: "How we're doing", summary: 'Official numbers on health, money, jobs and daily needs in Mon County, with sources' };
 const health = loadIndicators('health');
 const schools = loadIndicators('schools');
+// Test scores share one intro; the graduation rate gets its own (#1662).
+const tests = schools.filter((i) => i.slug.startsWith('school-tests-'));
+const grad = schools.filter((i) => !i.slug.startsWith('school-tests-'));
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
 // Live numbers read from the sources' own data at each build (#15).
 const ind = await loadLive();
@@ -58,12 +61,12 @@ const caps = guide ? {
 const places = ind['cdc-places-monongalia'];
 const measures = places.data?.measures ?? [];
 ---
-<Base title="How is Mon County doing? Official numbers for Monongalia County, WV" description="Official numbers on poverty, health insurance, jobs, unemployment, school test scores and daily needs in Monongalia County, WV, next to West Virginia and the US, with sources.">
+<Base title="How is Mon County doing? Official numbers for Monongalia County, WV" description="Official numbers on poverty, health insurance, life expectancy, overdose deaths, jobs, school test scores, graduation and daily needs in Monongalia County, WV, next to West Virginia and the US, with sources.">
   <h1>How is Mon County doing?</h1>
   <p class="lede">Official numbers about Monongalia County, next to West Virginia and the whole country. Each one links to where it comes from and says what year it covers, and the charts show up to ten years.</p>
 
   <h2 id="health">Health and money</h2>
-  <p>These come from <a href="https://www.countyhealthrankings.org/health-data/west-virginia/monongalia">County Health Rankings</a>, a program that gathers the same public numbers for every county in the US. We use its 2025 data file. The definitions come from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx">2025 data dictionary</a>, and the years from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv">2025 trends file</a>.</p>
+  <p>These come from <a href="https://www.countyhealthrankings.org/health-data/west-virginia/monongalia">County Health Rankings</a>, a program that gathers the same public numbers for every county in the US. We use its March 2026 update where it has the measure, and its 2025 data file where it does not. Each card names the one it uses. Some numbers cover three years together, like 2021-2023. The definitions come from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx">2025 data dictionary</a>, and the years from its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv">2025 trends file</a> and its <a href="https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf">March 2026 codebook</a>.</p>
   {health.map((i) => (
     <article class="card" id={i.slug}>
       <h3>{i.title} ({i.data_year})</h3>
@@ -168,7 +171,7 @@ const measures = places.data?.measures ?? [];
 
   <h2 id="schools">School test scores</h2>
   <p>How Monongalia County Schools students did on West Virginia's yearly state tests, next to the whole state. Each number is the share of students tested who scored proficient. These come from <a href="https://zoomwv.k12.wv.us/Dashboard/dashboard/7301">ZoomWV</a>, the West Virginia Department of Education's data site. It needs JavaScript. To see Mon County there, open Filter Data, then District/County, and pick (056) - Monongalia. Students in grades 3 to 8 and 11 take these tests. There were no state tests in 2019-2020.</p>
-  {schools.map((i) => (
+  {tests.map((i) => (
     <article class="card" id={i.slug}>
       <h3>{i.title} ({i.data_year} school year)</h3>
       <p>{i.definition}</p>
@@ -182,6 +185,22 @@ const measures = places.data?.measures ?? [];
     </article>
   ))}
   <p>Test scores are one measure. They do not show everything a school does, and they do not compare schools within the county.</p>
+
+  <h2 id="graduation">High school graduation</h2>
+  <p>The share of Monongalia County Schools students who finished high school in four years, next to the whole state. A class is counted from when students start 9th grade. This comes from the <a href="https://zoomwv.k12.wv.us/Dashboard/dashboard/2111">ZoomWV Graduation Summary</a>. To see Mon County there, open Filter Data, then District/County, and pick (056) - Monongalia. Since the 2020-2021 school year, the state counts students who earn an alternate diploma as graduates, so the chart starts that year.</p>
+  {grad.map((i) => (
+    <article class="card" id={i.slug}>
+      <h3>{i.title} ({i.data_year} school year)</h3>
+      <p>{i.definition}</p>
+      <ul>
+        {PLACES.filter(([k]) => i.values[k] != null).map(([k, label]) => (
+          <li>{k === 'monongalia' ? <strong>{label}: {showValue(i, i.values[k])}</strong> : <>{label}: {showValue(i, i.values[k])}</>}</li>
+        ))}
+      </ul>
+      <TrendChart i={i} />
+      <SourceLine sources={i.sources.slice(0, 1)} about={i.title} slug={i.slug} />
+    </article>
+  ))}
 
   <h2 id="coming">Crime</h2>
   <p>We have not added official crime numbers yet, because we could not check them on the official source this time. That work is tracked in <a href={`${repo}/issues/772`}>issue 772</a>.</p>

@@ -91,7 +91,7 @@ const isPhone = (p) => /^(\d{3}|\d{3}-\d{3}|(1-)?\d{3}-\d{3}-\d{4})$/.test(Strin
 const AREAS = ['morgantown', 'monongalia-county', 'statewide', 'national'];
 const KINDS = ['nonprofit', 'government', 'community-group', 'business', 'school', 'faith'];
 const ORG_FIELDS = ['name', 'slug', 'kind', 'website', 'phone', 'summary', 'topics', 'area', 'sources', 'recheck_days', 'hidden', 'phone_confirmed', 'phone_confirmed_by'];
-const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'recheck_days', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by', 'private_trace'];
+const RESOURCE_FIELDS = ['title', 'slug', 'org', 'topics', 'who_it_is_for', 'hours', 'what_to_do', 'contact', 'cost', 'sources', 'recheck_days', 'hidden', 'what_to_bring', 'what_happens', 'best_time', 'if_you_want_help', 'phone_confirmed', 'phone_confirmed_by', 'private_trace', 'show_until'];
 const CONTACT_FIELDS = ['phone', 'text', 'url', 'place', 'email', 'url_label'];
 const isSlug = (s) => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s ?? '');
 
@@ -152,6 +152,8 @@ for (const r of resources) {
   if (r.hours != null && (typeof r.hours !== 'string' || !r.hours.trim())) errors.push(`${where}: hours must be text, like "Monday to Friday, 9 a.m. to 5 p.m."`);
   if (r.cost != null && typeof r.cost !== 'string') errors.push(`${where}: cost must be text`);
   errors.push(...checkTown(r));
+  // A listing tied to one date drops off pages after this day (QA sweep 2, #529).
+  if (r.show_until != null && !isDate(ymd(r.show_until))) errors.push(`${where}: show_until must be a date (YYYY-MM-DD)`);
   // What happens next (#159): optional, each from the record's own sources.
   if (r.what_to_bring != null && (!Array.isArray(r.what_to_bring) || !r.what_to_bring.length || r.what_to_bring.some((x) => typeof x !== 'string' || !x.trim()))) errors.push(`${where}: what_to_bring must be a list of short text items`);
   for (const f of ['what_happens', 'best_time']) if (r[f] != null && (typeof r[f] !== 'string' || !r[f].trim())) errors.push(`${where}: ${f} must be text`);
@@ -399,7 +401,7 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
 
 // County indicators (content/indicators, #62): an official number, its own
 // definition, the data year, and sources with checked dates.
-const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'digits', 'per', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
 for (const i of loadDir('indicators')) {
   checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
   if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
@@ -409,6 +411,9 @@ for (const i of loadDir('indicators')) {
   for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
   if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
   if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+  if (i.digits != null && (!Number.isInteger(i.digits) || i.digits < 0 || i.digits > 2)) errors.push(`${i._file}: digits must be 0, 1 or 2`);
+  if (i.per != null && i.unit !== 'number') errors.push(`${i._file}: per is only for unit: number`);
+  if (i.chr && !i.chr.trend_name && !/^\d{4}(-\d{4})?$/.test(String(i.chr.data_year ?? ''))) errors.push(`${i._file}: chr with no trend_name needs chr.data_year from the codebook`);
   // history (#15): years in order, each with a number, as the source gives it.
   for (const [k, pts] of Object.entries(i.history ?? {})) {
     if (!Array.isArray(pts)) { errors.push(`${i._file}: history.${k} must be a list`); continue; }

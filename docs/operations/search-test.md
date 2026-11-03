@@ -10,6 +10,17 @@ It costs nothing: it runs in Node on the index the build already makes, with no 
 - **A hit** is a query whose expected page is in the **top 3** results. The score is hits out of all queries, also broken out by kind (everyday, short, misspelled, question), plus how many queries got no results at all.
 - **The same code as the page.** The search page and this test both run `find` from [`site/src/lib/search-plan.mjs`](../../site/src/lib/search-plan.mjs) (#1286): fix common misspellings, drop filler words, swap words our pages say another way ("rehab" becomes "treatment", in `SAME`), search, put pages with more of the reader's words first, and put printouts, helper pages and group pages whose name does not match after the guides. The page gets this code as an inline script from `inlineSource()`, so one change moves both. A test checks that the page's copy gives the same answers as the module. In saved runs, `count` is how many results were shown, up to 10.
 
+## Crisis words and pins (#1647)
+
+Two rules in `search-plan.mjs` are about safety, not ranking. David chose both on November 3, 2026.
+
+- **`CRISIS`:** a short list of words and phrases that mean someone may be in danger now ("suicide", "suicidal", "kill myself", "want to die", "self harm", "overdose", and a few close variants and misspellings). When a search has one, the search page shows the same 911 and 988 box as the crisis line (`CrisisLine.astro`) above the results, in a live region so screen readers read it out. It shows before the search loads, so it is there even if search fails. Without JavaScript the search page always shows that box.
+- **`PIN`:** for the suicide and self harm words in `CRISIS`, `/mental-health/` goes first, ahead of the usual order. It is the page with 988, the 24/7 crisis line and the walk-in crisis clinic. Without the pin, group pages whose names have "suicide" (and `/grief/`) came first. Overdose is not pinned: `/drugs-and-alcohol/` (Narcan, overdose help) already comes first for it.
+
+A query marked `first: true` in the test set must have its first expected page as the very first result, not just in the top 3. "suicide", "suicidal", "kill myself" and "sucide" use it.
+
+Pins are a new kind of rule that overrides the order, so keep them to crisis words. Adding a pin or a crisis word changes what residents see about crisis help, so it waits for David ([`docs/COORDINATION.md`](../COORDINATION.md)). The box's words come from the crisis line, never from the search code.
+
 The queries are written by us. The site never logs, counts or stores what visitors search for (see the [privacy page](../../site/src/pages/privacy.astro)), and this test does not change that.
 
 ## Running it
