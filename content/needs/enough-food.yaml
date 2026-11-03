@@ -1,12 +1,12 @@
 title: Having enough food
 slug: enough-food
-summary: About 1 in 8 people in Mon County do not always have enough food. Food is also one of the most common reasons people call West Virginia 211 here.
+summary: About 1 in 7 people in Mon County do not always have enough food. Food is also one of the most common reasons people call West Virginia 211 here.
 evidence:
-  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-31
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
     shows: County Health Rankings estimates the share of people who lack steady access to enough food, using Feeding America's Map the Meal Gap numbers.
-    figure: "12.6% of people, about 13,370 people (West Virginia 15%, US 13.5%)"
-    publisher: County Health Rankings (2025 release)
+    figure: "14% of people, about 14,940 people (West Virginia 15.7%, US 14.3%)"
+    publisher: County Health Rankings (March 2026 supplemental release)
   - url: https://data.cdc.gov/d/swc5-untb
     checked: 2026-10-31
     shows: CDC estimates the share of adults who had trouble getting enough food in the past year. It is a model-based estimate, not a count.
@@ -26,10 +26,10 @@ evidence:
     data_date: "2023"
     publisher: West Virginia Center on Budget and Policy, 2024 Kids Count Data Book
 affected:
-  count: 13370
+  count: 14940
   description: People in Monongalia County who lack steady access to enough food, as estimated by County Health Rankings.
-  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-  checked: 2026-10-31
+  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+  checked: 2026-11-01
 severity: high
 severity_why: Going without enough food harms health, school and work, and hits children and older adults hardest.
 trend: unknown

@@ -70,3 +70,7 @@ People under stress or trying to finish a task are slowed down by scroll effects
 - [The Pudding: Easier scrollytelling with position sticky](https://pudding.cool/process/scrollytelling-sticky/)
 - [Smashing Magazine: Usability guidelines for better carousels](https://www.smashingmagazine.com/2022/04/designing-better-carousel-ux)
 - [MDN: CSS scroll-driven animations](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations)
+
+## Build with the shared kit
+
+Since November 2, 2026, every scroll story and swipe card set uses one kit (#1441, #1500): `site/src/components/MotionSwitch.astro` (the "Turn off motion" switch, which also honors the phone's reduced motion setting) and `watchSteps`, `swipeCards` and `motionAllowed` from `site/src/lib/motion-client.mjs`. Do not build a separate switch or step watcher. Every piece must still work as a plain list or table with no JavaScript.

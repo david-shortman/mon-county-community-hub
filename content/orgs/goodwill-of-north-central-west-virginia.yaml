@@ -1,0 +1,13 @@
+name: Goodwill of North Central West Virginia
+slug: goodwill-of-north-central-west-virginia
+kind: nonprofit
+website: https://www.goodwillncwv.org/
+phone: "1-877-499-3526"
+summary: Runs the Goodwill stores in the Morgantown area. It also offers free career help, computer classes and a Welcome Center that connects people to Goodwill programs and other local help.
+topics: [work]
+area: statewide
+sources:
+  - url: https://www.goodwillncwv.org/life-changing-services/welcome-center/
+    checked: 2026-11-02
+  - url: https://www.goodwillncwv.org/shop/store-locations/
+    checked: 2026-11-01

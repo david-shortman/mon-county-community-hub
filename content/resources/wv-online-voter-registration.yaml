@@ -3,7 +3,15 @@ slug: wv-online-voter-registration
 org: wv-secretary-of-state
 topics: [voting]
 who_it_is_for: West Virginia's online voter registration, run by the Secretary of State. You can also register in person at your County Clerk's office, or by mail.
-what_to_do: To register or update online, you need your name as it appears on your West Virginia driver's license or ID card, your date of birth, your West Virginia driver's license or ID card number, and the last four digits of your Social Security Number. Your county clerk processes the application and will tell you if it was accepted or rejected. Without a West Virginia license or ID number, you can fill out the form online, then print, sign and deliver it to your County Clerk by mail or in person.
+what_to_do: "To register or update online, you need four things."
+options:
+  - "Your name as it appears on your West Virginia driver's license or ID card"
+  - "Your date of birth"
+  - "Your West Virginia driver's license or ID card number"
+  - "The last four digits of your Social Security Number"
+notes:
+  - "Your county clerk processes the application and will tell you if it was accepted or rejected."
+  - "Without a West Virginia license or ID number, you can fill out the form online, then print, sign and deliver it to your County Clerk by mail or in person."
 contact:
   url: https://ovr.sos.wv.gov/
   url_label: Register online

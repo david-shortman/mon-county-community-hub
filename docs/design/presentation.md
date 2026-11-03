@@ -28,7 +28,7 @@ Every page follows these. The rubric criteria they come from are in brackets.
 
 1. **One main message and one action first.** The first screen on a phone says what the page is for and what to do now. Put the most important thing in the first lines, show it with a visual cue, and back it with a picture or block when that helps (CDC Clear Communication Index items 1 to 5) [PL2, II1].
 2. **Every icon has a word next to it.** Pictures with a few words help most for people with lower health literacy, but an icon alone is a guess (Schubbe and others, 2020). Icons stay decorative and hidden from screen readers, as `Icon.astro` already does [A3, II2].
-3. **Show, don't just tell, when a picture explains faster.** A timeline for a process with dates, a days-left chip for a deadline, a labeled picture of a letter people get. Not decoration, not photos of people (see identity.md).
+3. **Show, don't just tell, when a picture explains faster.** A timeline for a process with dates, a days-left chip for a deadline, a labeled picture of a letter people get. Not decoration, not photos of people (see identity.md). The [image guide](images.md) says which kind of picture to use, how to credit it, and when to skip one.
 4. **Short words, short lines.** Sentences of 20 words or fewer, lists of 7 or fewer, numbers as people use them ("1 in 4", "in 3 days"), and we do the math for them [PL1, PL3, PL6].
 5. **A list first, a map only on a tap.** In a study of map and text search on phones, people chose text when rushed (71%) and maps when they did not know the area (94%), and the authors recommended both (Church and others, 2010). A map also costs data, so it loads only when asked for.
 6. **Every place is something you can act on.** Call, Directions, Add to calendar, Share, and Send by text, using the [`Actions`](../../site/src/components/Actions.astro) component. A button shows only when the source gives what it needs [II4, TR6].
@@ -87,6 +87,8 @@ Reuse these instead of inventing a new layout. "Status" says whether it exists y
 | **Fold** | A long secondary section folded into a box with its heading and a one-line hint, like "4 coming up". Opens on a tap, on find-in-page, and when a link points at it or inside it; prints open. Never fold urgent help (crisis lines, can't wait steps, shutoff or eviction help) or the page's main answer | A native `details`, so it opens with no script | Exists (`Fold.astro`, #1174) |
 | **Big choices** | Two to four big buttons at the top of a guide page, one for each thing most people come to do, each jumping to its section. Use only when a page has a few clear top tasks; keep "On this page" for the rest | Anchor links | Exists (`BigChoices.astro`, on `/pets/`, `/parking/`, `/noise/`, `/car-registration/` and `/ids-and-records/`, #199; `/stay-tonight/` has its own four big choices) |
 | **Call notes** | "Notes for this call" under a Call button: when you called, who you talked to, what they said, a reference number and the next step. Saved on the phone only (localStorage, one note per service), with Text to myself, Share or copy, and Delete my notes. Nothing is sent to us | Hidden, since it could not save; the "What to have ready" list and the printable notes on `/before-you-call/` still work | Exists (`CallNotes.astro`, on resource cards that list what to have ready, #1071) |
+| **Scroll story** | One picture stays in view while 3 to 7 numbered steps scroll past, and the picture changes to show each step happening. Only where the change itself is the point; rules in the motion guide (#1377) | Every step shows its own still picture, as a plain numbered list. The same happens with "Turn off motion" or a device set to reduce motion | Exists: the kit is `MotionSwitch.astro` (skip link and the shared "Turn off motion" switch) and `watchSteps()` in `src/lib/motion-client.mjs` (#1441). Used by `FollowOneListing.astro` on `/how-it-works/` and `DayOnTheBuses.astro` on `/bus-routes/` |
+| **Swipe cards** | A row of cards that scroll sideways and snap, with big Back and Next buttons, "Step 2 of 5" and a peek of the next card. Never moves on its own; rules in the motion guide (#1377) | The cards still scroll sideways; the buttons and the step label stay hidden. Order matches the screen, so a screen reader hears a list | Kit exists: `swipeCards()` in `src/lib/motion-client.mjs` (#1441). No page uses it yet; the first is planned in #1442 |
 
 ## What every listing needs
 
@@ -140,7 +142,18 @@ Each door and lane page has one job, and its first phone screen leads with the b
 | Flood zone, `/flood-zone/` | "Is my home at risk of flood or slide?" | A step route, look up the address first |
 | Parking, `/parking/` | "Where do I park, and what do I do about this ticket?" | Big choices: where to park, pay a meter, I got a ticket, towed (#199) |
 | Pets, `/pets/` | "I found a dog, or lost mine" | Big choices: found a dog, lost my pet, bitten, adopt (#199) |
+| Noise, `/noise/` | "It's too loud, or I'm having a party" | Big choices: quiet hours, having a party, report noise, property problems (#1372) |
+| Car registration, `/car-registration/` | "My registration or sticker is due" | Big choices: renew, inspection sticker, lost plate or card, the DMV office (#1372) |
+| IDs and records, `/ids-and-records/` | "I need a certificate or an ID" | Big choices: a certificate, WV ID or REAL ID, a lost ID, getting married (#1372) |
+| Snow and ice, `/snow-and-ice/` | "Who clears my street, and is school or the bus running?" | Big choices: Morgantown street or sidewalk, state road, school delays, is my bus late (#199) |
+| Weather alerts, `/weather-alerts/` | "How do I get warned?" | Big choices: alerts on my phone, weather warnings, school closings, power outage texts (#199) |
+| Markets, `/markets/` | "What markets and sales are coming up?" | Big choices: coming up soon, every week, yard sales, sell at a market (#199) |
+| Parks, `/parks/` | "Where can I go outside?" | Big choices: city parks, rail-trails, book a pavilion or cabin, swim and ice skate (#199) |
+| Arts and making, `/arts-and-making/` | "Where can I make art or learn a craft?" | Big choices: take a class, find space and tools, show and sell, grants (#199) |
+| Meet people, `/meet-people/` | "How do I meet people here?" | Big choices: library card, library programs, neighborhood associations, working from home (#199) |
 | About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
+
+Other pages that lead with a step route: `/start-a-business/`, `/start-a-group/`, `/permits/`, `/teen-drivers/` and `/identity-theft/`. Question paths: food help (`/help/food/`), What help is there (`/help/what-help/`) and Who serves me (`/who-serves-me/`). Checked against the built site on November 2, 2026.
 
 ### How new content slots in
 

@@ -1,0 +1,30 @@
+title: Sign up for VA health care
+slug: va-health-care-apply
+org: us-department-of-veterans-affairs
+topics: [veterans, health]
+who_it_is_for: Veterans and service members who want VA health care. VA's eligibility page lists who can get it.
+what_to_do: Apply online on VA's how to apply page, or call VA's toll-free line at 877-222-8387, Monday to Friday, 8 a.m. to 8 p.m. Eastern. VA says a decision takes less than 1 week.
+options:
+  - "Online: apply on VA's how to apply page."
+  - "By phone: call 877-222-8387, Monday to Friday, 8 a.m. to 8 p.m. Eastern."
+  - "By mail: fill out VA Form 10-10EZ, sign and date it, and mail it to Health Eligibility Center, PO Box 5207, Janesville, WI 53547-5207."
+  - "In person: bring a signed VA Form 10-10EZ to a VA medical center or clinic, such as the Monongalia County VA Clinic in Westover."
+  - "With help: an accredited attorney, claims agent, or Veterans Service Organization (VSO) representative can help you apply."
+notes:
+  - "You don't have to give your income and expenses when you apply. VA says it will ask for them only if you are not eligible based on other factors."
+  - "If more than a week has passed and you haven't heard back, VA says not to apply again. Call 877-222-8387 instead."
+what_to_bring:
+  - Social Security numbers for you, your spouse and your qualified dependents
+  - Your military discharge papers (DD214 or other separation documents) and service history
+  - Insurance card information for every insurance that covers you, including Medicare
+  - Gross household income from last year, and your deductible expenses (only if VA asks)
+if_you_want_help: [wvdva-clarksburg-benefit-office]
+contact:
+  phone: "877-222-8387"
+  url: https://www.va.gov/health-care/how-to-apply/
+  url_label: How to apply
+sources:
+  - url: https://www.va.gov/health-care/how-to-apply/
+    checked: 2026-11-02
+  - url: https://www.va.gov/health-care/eligibility/
+    checked: 2026-11-02

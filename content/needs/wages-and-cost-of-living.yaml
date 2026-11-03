@@ -14,11 +14,11 @@ evidence:
     figure: "444 employment and income requests"
     data_date: 2022 and August 2024 to August 2025
     publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
-  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-31
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
     shows: Income inequality, the income at the 80th percentile divided by the income at the 20th percentile.
-    figure: "6.3 (West Virginia 5.1, US 4.9)"
-    publisher: County Health Rankings (2025 release)
+    figure: "6.2 (West Virginia 5.0, US 4.9)"
+    publisher: County Health Rankings (March 2026 supplemental release)
 affected:
   estimate: "about half of single adults and two thirds of single mothers"
   description: Households in Monongalia County below the ALICE Threshold, by household type, from United For ALICE as reported by Mon Health.

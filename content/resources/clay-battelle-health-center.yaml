@@ -3,15 +3,19 @@ slug: clay-battelle-health-center
 org: clay-battelle-health-services-association
 topics: [health]
 who_it_is_for: Anyone. The health center says uninsured, insured, Medicare and Medicaid patients are welcome. Its sliding fee discount is based on household size and income.
-what_to_do: Call 304-432-8211 for an appointment. It is at 5861 Mason Dixon Highway, Blacksville, in western Mon County. To get the sliding fee, fill out a Sliding Fee Application and bring proof of income, like a tax return, W-2, recent pay stubs or a Social Security benefits statement. It also has help paying for medicines, and mileage payback for uninsured patients.
-hours: "Medical: Monday 8 a.m. to 8 p.m., Tuesday and Wednesday 8 a.m. to 4 p.m., Thursday 8 a.m. to 8 p.m., Friday 8 a.m. to 5 p.m., Saturday 8 a.m. to noon."
+what_to_do: Call 304-432-8211 for an appointment. It is at 5861 Mason Dixon Highway, Blacksville, in western Mon County. To get the sliding fee, fill out a Sliding Fee Application and bring proof of income, like a tax return, W-2, recent pay stubs or a Social Security benefits statement. It also has help paying for medicines, and mileage payback for uninsured patients. The dental program includes routine exams and cleanings, and takes uninsured, insured and Medicaid patients.
+hours: "Medical: Monday 8 a.m. to 8 p.m., Tuesday and Wednesday 8 a.m. to 4 p.m., Thursday 8 a.m. to 8 p.m., Friday 8 a.m. to 5 p.m., Saturday 8 a.m. to noon. Dental: Monday and Thursday 8 a.m. to 7 p.m., Tuesday 8 a.m. to 4 p.m., Wednesday 8 a.m. to 5 p.m., closed Friday and Saturday."
 contact:
   phone: "304-432-8211"
   url: https://cbhealthwv.org/locations/blacksville/
   place: 5861 Mason Dixon Highway, Blacksville, WV 26521
 cost: Sliding fee with 4 discount levels, based on household size and income. Takes Medicare and Medicaid.
+what_to_bring:
+  - A Sliding Fee Application, if you want the sliding fee
+  - Proof of income, such as a tax return, W-2, recent pay stubs or a Social Security benefits statement
+what_happens: The sliding fee works for both medical and dental care, at 4 discount levels set by household size and income. The health center says the sliding fee is not insurance, and its staff can help you fill out a Medicaid application.
 sources:
   - url: https://cbhealthwv.org/locations/blacksville/
-    checked: 2026-10-31
+    checked: 2026-11-01
   - url: https://cbhealthwv.org/for-patients/assistance-programs/
-    checked: 2026-10-31
+    checked: 2026-11-01

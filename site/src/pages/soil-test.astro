@@ -6,6 +6,8 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
 import { resource } from '../lib/content.mjs';
 export const page = { door: "living-here", topic: "growing", label: "Get your garden soil tested", summary: "WVU's free soil test for West Virginia residents: how to take a sample, mail it or drop it off, and who helps you read the report" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -18,7 +20,8 @@ const report = [{ url: 'https://extension.wvu.edu/natural-resources/soil-water/u
   <h1>How do I get my garden soil tested?</h1>
   <p class="lede">Send a soil sample to the WVU Soil Testing Lab in Morgantown. The basic test is free for West Virginia residents. Mix soil from your garden, then mail 1 to 2 cups with the lab's form, or drop it off on campus.</p>
 
-  <h2 id="steps">Take a good sample</h2>
+  <Route label="Steps to get your soil tested">
+  <Milepost n={1} title="Take a good sample" id="steps" open>
   <p>WVU Extension's guide for new gardeners gives these steps:</p>
   <ol>
     <li>Use a clean plastic or stainless steel trowel, spade or soil probe, and a plastic bucket. Iron can change the results.</li>
@@ -31,15 +34,19 @@ const report = [{ url: 'https://extension.wvu.edu/natural-resources/soil-water/u
   <SourceLine sources={howTo} about="how to take a soil sample" />
   <p>No soil probe? The lab says it and many county Extension offices lend them if you ask. A small spade works too.</p>
   <SourceLine sources={faq} about="borrowing a soil probe" />
+  </Milepost>
 
-  <h2 id="send">Fill out the form and send it</h2>
+  <Milepost n={2} title="Fill out the form and send it" id="send">
   <ResourceCard r={resource('wvu-free-soil-test')} headingLevel={3} showCost />
   <p>The form is a fillable PDF. If you cannot use a computer at home, WVU says your county Extension office can help.</p>
   <SourceLine sources={report} about="getting help with the form" />
+  </Milepost>
 
-  <h2 id="report">Reading your report</h2>
+  <Milepost n={3} title="Read your report" id="report">
   <p>Your report says how much lime and fertilizer to add for the plants you listed on the form. WVU explains each part in <a href="https://extension.wvu.edu/natural-resources/soil-water/using-the-wvu-soil-testing-report">Using the WVU soil testing report</a>. For questions, the lab sends you to your county Extension agent.</p>
   <ResourceCard r={resource('wvu-extension-monongalia-garden-help')} headingLevel={3} />
+  </Milepost>
+  </Route>
 
   <p>Plants still struggling? See <a href={`${base}/plant-problems/`}>Who can tell me what's wrong with my plants?</a> More for gardeners: <a href={`${base}/grow/`}>Grow food and flowers</a>.</p>
 </Base>

@@ -30,12 +30,16 @@ None of these are on. Each one is David's call, through a `for:david` issue.
 
 | Idea | Rough cost | Notes |
 |---|---|---|
-| Visit counts (analytics) | $0 to about $10 a month | Free tools exist that count visits without tracking people. See #41 |
+| Visit counts (analytics) | $0 today | GoatCounter, live since November 1, 2026 (#1352): free "for reasonable public usage" in GoatCounter's words, no cookies, page views only. See `docs/research/analytics-options.md` |
 | Forms, alerts or an API that needs a server | $0 on a free tier, more with heavy use | Needs an outside account. See ADR 0006 for the order we would try hosts in |
 | Text or email alerts to the public | A few cents a message for texts; email has free tiers | Turning alerts on for real people is David's call |
 | A paid data source | Varies | We use public data first |
 
 Many free or discounted programs (for example nonprofit plans from software companies) are only open to registered nonprofits. The project is not one today.
+
+## Energy use
+
+We do not know how much energy the AI work uses. Anthropic has not published energy, water or emissions figures that we could find. What is known, what is not, and ways to use less: [research/ai-energy-use.md](research/ai-energy-use.md) (#495). Any change to how often the AI runs is David's call.
 
 ## If things stop
 

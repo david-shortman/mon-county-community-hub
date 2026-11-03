@@ -1,28 +1,47 @@
 ---
 // Diabetes, blood pressure or weight: low cost help managing it (#481, rank 10
-// in #475). Facts are in resource records, read 2026-10-30. Describe only.
+// in #475; classes added for #1256). Facts are in resource records, each with
+// its own checked date. Describe only.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "care", topic: "health", label: "Diabetes, blood pressure or weight", summary: "Low cost diet help and free clinics for diabetes and heart health" };
+export const page = { door: "care", topic: "health", label: "Diabetes, blood pressure or weight", summary: "A free class to prevent diabetes, diabetes classes, diet help, free clinics and places to be active" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 ---
-<Base title="Diabetes, blood pressure or weight help in Morgantown and Mon County" description="Low cost help managing diabetes, blood pressure or weight in Morgantown and Monongalia County: health department dietitians with a sliding fee, and free diabetes and heart clinics for Health Right patients.">
+<Base title="Diabetes, blood pressure or weight help in Morgantown and Mon County" description="Low cost help with diabetes, blood pressure or weight in Morgantown and Monongalia County: a free class to prevent type 2 diabetes, diabetes classes and a support group, health department dietitians, free diabetes and heart clinics, and places to be active.">
   <h1>Diabetes, blood pressure or weight: help managing it</h1>
-  <p class="lede">The Monongalia County Health Department has dietitians who help with diabetes, weight and heart health, with a sliding fee if you have no insurance. No insurance, or not enough? Health Right is a free clinic for West Virginians with low income, and it also takes Medicaid. Its patients can join its diabetes and heart clinics.</p>
+  <p class="lede">Have prediabetes, or a higher chance of getting diabetes? Mon Health runs a free, year-long class to help prevent type 2 diabetes, and you can call to sign up yourself, no referral needed. Already have diabetes? There are classes, a support group, dietitians and free clinics below.</p>
 
-  {r('monchd-nutrition-counseling') && <ResourceCard r={r('monchd-nutrition-counseling')} headingLevel={2} showCost />}
-  {r('health-right-specialty-clinics') && <ResourceCard r={r('health-right-specialty-clinics')} headingLevel={2} />}
+  <h2 id="prevent">Lower your risk of type 2 diabetes</h2>
+  {r('mon-health-diabetes-prevention-program') && <ResourceCard r={r('mon-health-diabetes-prevention-program')} showCost />}
 
-  <h2>Also check</h2>
+  <h2 id="manage">Learn to manage diabetes</h2>
+  {r('mon-health-diabetes-education-series') && <ResourceCard r={r('mon-health-diabetes-education-series')} showCost />}
+  {r('mon-health-diabetes-support-group') && <ResourceCard r={r('mon-health-diabetes-support-group')} showCost />}
+
+  <h2 id="diet">Help with what you eat</h2>
+  <p>The Monongalia County Health Department has dietitians who help with diabetes, weight and heart health, with a sliding fee if you have no insurance.</p>
+  {r('monchd-nutrition-counseling') && <ResourceCard r={r('monchd-nutrition-counseling')} showCost />}
+
+  <h2 id="clinics">No insurance, or not enough?</h2>
+  <p>Health Right is a free clinic for West Virginians with low income, and it also takes Medicaid. Its patients can join its diabetes and heart clinics.</p>
+  {r('health-right-specialty-clinics') && <ResourceCard r={r('health-right-specialty-clinics')} showCost />}
+
+  <h2 id="move">Places to be active</h2>
+  {r('boparc-wellness-classes-55') && <ResourceCard r={r('boparc-wellness-classes-55')} showCost />}
   <ul>
-    <li><a href={`${base}/staying-well/`}>Staying well</a>: a yearly checkup, moving more and the rail-trails, and help to quit tobacco.</li>
-    <li><a href={`${base}/dental-and-prescriptions/`}>Help paying for medicine</a>.</li>
+    <li><a href={`${base}/parks/#rail-trail`}>Walk, run or bike the rail-trails</a>, and other parks and trails.</li>
     <li><a href={`${base}/staying-active/`}>Staying active after 55</a>: low-cost exercise classes, the senior center and smooth trails for walking.</li>
   </ul>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these services; we do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <h2>Also check</h2>
+  <ul>
+    <li><a href={`${base}/staying-well/`}>Staying well</a>: a yearly checkup, moving more, and help to quit tobacco.</li>
+    <li><a href={`${base}/dental-and-prescriptions/`}>Help paying for medicine</a>.</li>
+  </ul>
+
+  <p class="meta">Each listing shows the date we checked it. We describe these services; we do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for you. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

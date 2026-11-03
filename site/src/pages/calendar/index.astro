@@ -135,7 +135,7 @@ const icsOutlook = `https://outlook.live.com/calendar/0/addfromweb?url=${encodeU
   // opens its week, so the reader lands on the date, not on a closed box.
   const openTarget = () => {
     const id = decodeURIComponent(location.hash.slice(1));
-    const el = id && document.getElementById(id);
+    const el = id ? document.getElementById(id) : null;
     const d = el?.closest('details.cal-week') as HTMLDetailsElement | null;
     if (el && d && !d.open) { d.open = true; el.scrollIntoView({ block: 'start' }); }
   };

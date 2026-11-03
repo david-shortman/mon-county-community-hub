@@ -46,7 +46,7 @@ This page covers how we measure what the site does without fooling ourselves or 
 
 **Why it matters here.** All four levels. Many local needs are seasonal: heating help in fall, taxes in spring. Comparing October to September will mislead.
 
-**How we apply it.** Before any change ships, record the current Findability score for that topic and at least two weeks of Use counts, if analytics exist. When judging a change, say what else changed in the same window (deadlines, school calendar, news). Prefer comparing the same page against itself over time, or a changed page against similar unchanged pages. If no fair comparison exists, say so and report the result as descriptive only. OES notes that a null result means no difference stood out from background variation, not proof of no effect.
+**How we apply it.** Before any change ships, record the current Findability score for that topic and at least two weeks of Use counts from GoatCounter. When judging a change, say what else changed in the same window (deadlines, school calendar, news). Prefer comparing the same page against itself over time, or a changed page against similar unchanged pages. If no fair comparison exists, say so and report the result as descriptive only. OES notes that a null result means no difference stood out from background variation, not proof of no effect.
 
 **Sources:**
 - [Unexpected and null results (OES, GSA)](https://oes.gsa.gov/assets/files/unexpected-results-2-pager.pdf)
@@ -81,9 +81,9 @@ This page covers how we measure what the site does without fooling ourselves or 
 
 **What it is.** Plausible, GoatCounter, and Umami count page views without cookies and without storing personal data. GoatCounter, for example, keys a visit to a random ID kept in memory for 8 hours and never writes IP addresses to disk. Plausible Cloud starts at $9 a month; its open source Community Edition is free to self-host on your own server. Umami Cloud has a free Hobby tier of 100,000 events a month, and self-hosting is free. GoatCounter.com says it is free "for reasonable public usage" and can be self-hosted.
 
-**Why it matters here.** Level 2 (Use) has no data today. GitHub Pages logs visitor IP addresses for its own security, but its docs do not describe giving site owners logs or visitor stats.
+**Why it matters here.** Level 2 (Use) had no data until November 2026. GitHub Pages logs visitor IP addresses for its own security, but its docs do not describe giving site owners logs or visitor stats.
 
-**How we apply it.** Any hosted service needs an account, and self-hosting needs a server, so adoption is a `for:david` issue comparing the three. Until then, measure without analytics: Findability tests, outbound links counted by partners, and Recognition. Whatever is chosen, collect page views and outbound click events only. No session recording, no cross-site tracking, no custom user IDs. Publish the dashboard or monthly totals.
+**How we apply it.** Any hosted service needs an account, and self-hosting needs a server, so adoption was a `for:david` issue comparing the three. David chose GoatCounter on November 1, 2026 (#1352), and it is live on every page except the embeds. Outbound clicks are not counted yet, so partner numbers, Findability tests and Recognition still carry Levels 1, 3 and 4. Whatever is chosen, collect page views and outbound click events only. No session recording, no cross-site tracking, no custom user IDs. Publish the dashboard or monthly totals.
 
 **Sources:**
 - [GoatCounter home](https://www.goatcounter.com/) and [how sessions work](https://www.goatcounter.com/help/sessions)

@@ -7,6 +7,7 @@
 // parts and their limits. Every claim points to a file in the repo.
 // Speaks for the project, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
+import FollowOneListing from '../components/FollowOneListing.astro';
 import { fixFormUrl, REQUEST_DAYS } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "How this site works", summary: "The people, AI and automatic checks behind each page, and how they fit together" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -70,48 +71,9 @@ const doorSnippet = `- slug: this-month
   </nav>
 
   <h2 id="flow">How a listing gets here</h2>
-  <p>Every listing on this site takes the same path. Each step says who does it.</p>
+  <p>Every listing on this site takes the same path. Each step says who does it. Below, we follow one real listing: the county recycling drop-off center.</p>
 
-  <ol class="flow" aria-label="The path a listing takes, from a public page to this site and back">
-    <li>
-      <p class="who"><span class="tag src">Public page</span></p>
-      <h3>1. It starts on someone else's page</h3>
-      <p>A local group's own website, or a city, county, state or federal page. That group does the real work. We point back to it.</p>
-    </li>
-    <li>
-      <p class="who"><span class="tag ai">AI</span></p>
-      <h3>2. The AI reads it and writes a listing</h3>
-      <p>It copies the facts that matter (hours, cost, who it's for, what to do) as close to the page's own words as it can. It saves the web address and the date it read the page.</p>
-    </li>
-    <li>
-      <p class="who"><span class="tag file">Public file</span></p>
-      <h3>3. The listing is saved as a small public file</h3>
-      <p>One file per listing, in a public folder on GitHub. Anyone can read it, and every change to it is kept.</p>
-    </li>
-    <li>
-      <p class="who"><span class="tag auto">Automatic</span></p>
-      <h3>4. Programs check the change</h3>
-      <p>Does every listing have a source and a date? Does every page build, stay small enough for a phone, and pass basic checks? If a check fails, the change can't go live.</p>
-    </li>
-    <li>
-      <p class="who"><span class="tag ai">AI</span> <span class="tag person">Person</span></p>
-      <h3>5. A second look</h3>
-      <p>Another AI run reviews the change against our written guides for sources, fairness, privacy, ease of use and clear words. Changes about shelter, crisis help, food and benefits also wait for the owner.</p>
-    </li>
-    <li>
-      <p class="who"><span class="tag file">Published</span></p>
-      <h3>6. It goes live</h3>
-      <p>The site is rebuilt from the files. The same listings also go out as a calendar feed and as <a href={`${base}/data/`}>free data files</a> other apps and AI tools can read.</p>
-    </li>
-    <li class="loop">
-      <p class="who"><span class="tag auto">Automatic</span></p>
-      <h3>7. It keeps getting rechecked</h3>
-      <p>Every day a program visits the outside pages we rely on and flags ones that broke, moved or changed. A flagged listing goes back to step 2. So does any problem you report.</p>
-      <p class="back" aria-hidden="true">Back to step 2</p>
-    </li>
-  </ol>
-
-  <p class="check"><strong>See a real one:</strong> the <a href={example}>file for the county recycling drop-off center</a>. It lists two sources, each with the date it was read. The two sources give different closing times, so the listing says which says what. You can see the same listing on the <a href={`${base}/recycling/`}>recycling page</a>.</p>
+  <FollowOneListing base={base} example={example} />
 
   <h2 id="who">Who does what</h2>
   <p>A small team of one person, two kinds of AI helper, and some automatic programs. Each has a set job.</p>
@@ -180,7 +142,7 @@ const doorSnippet = `- slug: this-month
   <p>The goal is simple: make it easy to find and use the help that's already here, and send people to the groups doing the work. We judge that at four levels, from what the AI can change by itself to what only people here can tell us:</p>
   <ol>
     <li><strong>Can you find it?</strong> We test real questions people ask, like "where can I get food today?", and score how easy the answer is to find.</li>
-    <li><strong>Do people use it?</strong> Counted in total only. We never track a person.</li>
+    <li><strong>Do people use it?</strong> Counted in total only, with a visit counter that uses no cookies and stores nothing that identifies you (see <a href={`${base}/privacy/`}>Privacy</a>). We never track a person. The counts are rough: ad blockers skip them and anyone can send fake visits, so we watch trends, not single numbers.</li>
     <li><strong>Did it help someone act?</strong> Like signing up to volunteer or applying for a program.</li>
     <li><strong>Do people here say it helped?</strong> Feedback, and local groups using the work.</li>
   </ol>
@@ -242,24 +204,6 @@ const doorSnippet = `- slug: this-month
     .toc h2 { font-size: 1rem; margin-bottom: 4px; }
     .toc ol { margin: 0; }
     .toc a { display: inline-flex; align-items: center; min-height: 44px; }
-
-    /* The flow: one card per step, joined by a line, top to bottom so it reads
-       the same on any phone and with any text size. */
-    .flow { list-style: none; margin: 16px 0; padding: 0; }
-    .flow li { position: relative; margin: 0 0 22px; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
-    .flow li:not(:last-child)::after { content: ""; position: absolute; left: 28px; bottom: -23px; width: 3px; height: 22px; background: var(--ridge); }
-    .flow h3 { margin: 4px 0 4px; font-size: 1.05rem; }
-    .flow p { margin: 0; }
-    .flow .who { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-    .flow .loop { border: 2px dashed var(--accent); }
-    .flow .back { margin-top: 8px; font-weight: 700; color: var(--accent); }
-    .flow .back::before { content: "\21BA  "; }
-    .tag { display: inline-block; padding: 1px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; border: 1px solid currentColor; }
-    .tag.src { color: var(--muted); }
-    .tag.ai { color: var(--accent); background: var(--accent-bg); }
-    .tag.auto { color: var(--fg); }
-    .tag.file { color: var(--muted); border-style: dashed; }
-    .tag.person { color: var(--brick); }
 
     .roles { display: grid; gap: 0 14px; }
     .roles .card { margin: 10px 0 0; }

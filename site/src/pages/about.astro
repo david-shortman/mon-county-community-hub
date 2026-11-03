@@ -23,11 +23,12 @@ const tellUs = fixFormUrl({ page: Astro.url.pathname });
     <li><strong>You deal with the group, not us.</strong> When you sign up, call, or give, you do it with them. This site has no sign-up forms and takes no payments. It never asks for your name. Our one form, for fixes and removals, asks for an email only if you want a reply.</li>
     <li><strong>Any group can ask us to fix or remove its listing.</strong> Use our <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a>, or email <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. You don't need an account, and what you send is not posted. The "Report a problem" link on each listing opens the same form.</li>
     <li><strong>Every listing shows its oldest checked date.</strong> If any of its sources was last checked more than 6 months ago, the listing says it may be out of date.</li>
+    <li><strong>We compare ourselves with what was here.</strong> Each month we check our pages against the sources people use today and publish what we find, good and bad: <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/progress/`}>Is this site better than what was here?</a></li>
     <li><strong>The work is public.</strong> The code, the data, the rules the AI follows, and a log of what it built and why are all on <a href={repo}>GitHub</a>. Planning notes and notes about specific people are kept private.</li>
   </ul>
 
   <h2>How we use AI</h2>
-  <p>Most of this site is researched and written by an AI assistant (Claude, made by Anthropic). The AI only repeats facts it found in a public source, and every listing links to that source and shows the date it was last checked. A person, not the AI, oversees the project, and anyone can see our work and our mistakes on GitHub. AI can still get things wrong, so please confirm details with the group before you act, and tell us if something is off.</p>
+  <p>Most of this site is researched and written by an AI assistant (Claude, made by Anthropic). Our rule is that the AI only repeats facts it found in a public source, and every listing links to that source and shows the date it was last checked. A person, not the AI, oversees the project, and anyone can see our work and our mistakes on GitHub. AI can still get things wrong, so please confirm details with the group before you act, and tell us if something is off.</p>
   <p>We don't use AI-made pictures of real places or people. No page speaks for a government office or nonprofit: we describe what they offer and link to them.</p>
 
   <h2>How it runs</h2>
@@ -37,7 +38,7 @@ const tellUs = fixFormUrl({ page: Astro.url.pathname });
   <ul>
     <li><strong>Every fact needs a public source</strong> and the date it was checked. If the AI can't find a source, the fact stays off the site.</li>
     <li><strong>Describe, don't take sides.</strong> No candidates, parties, or favorite businesses. Voting information points to the West Virginia Secretary of State.</li>
-    <li><strong>No personal information</strong> about private people, ever. We don't track you. Directions buttons open Google Maps, and nothing goes to Google unless you tap one.</li>
+    <li><strong>No personal information</strong> about private people, ever. We don't track you. We only count page visits, with no cookies. Directions buttons open Google Maps, and nothing goes to Google unless you tap one.</li>
     <li><strong>Saved copies stay on your phone.</strong> So pages can open with no signal, your browser keeps copies of the Help now page, the pages for a hard moment (Tonight, food help, utility bills, after a storm, mental health, drugs and alcohol, protective orders), the home page, the main topic pages and Dates, plus pages you open. A saved copy shows the date it was saved, and old copies are deleted: after 3 days for pages that change daily, 30 days for the hard moment pages, and 90 days for the rest. The copies stay on your phone and are not sent anywhere. To remove them, clear this site's data in your browser settings.</li>
   </ul>
   <p>Some things the AI is never allowed to do on its own. They always wait for my yes:</p>
@@ -53,9 +54,9 @@ const tellUs = fixFormUrl({ page: Astro.url.pathname });
   <h3>How items are chosen and checked</h3>
   <ul>
     <li><strong>Chosen:</strong> the AI tries to answer real questions people here ask, like "where can I get food today?", and fixes the places where the answer is hard to find, out of date, or hard to read on a phone.</li>
-    <li><strong>Checked:</strong> every phone number, hour, rule and date must be on a public page the AI opened and read that same day. It never fills a gap from memory. If the source doesn't say it, it stays off the site.</li>
-    <li><strong>Kept close to the source:</strong> who a program is for, dates and costs are written as close to the source's own words as plain language allows. We never tell you that you qualify. The program decides.</li>
-    <li><strong>When sources disagree:</strong> we say who says what, and point you to your doctor or the office that decides.</li>
+    <li><strong>Checked:</strong> our rule is that every phone number, hour, rule and date must be on the source page we link, read the day it was added or last checked. If the source doesn't say it, it stays off the site.</li>
+    <li><strong>Kept close to the source:</strong> who a program is for, dates and costs are written as close to the source's own words as we can. We never tell you that you qualify. The program decides.</li>
+    <li><strong>When sources disagree:</strong> we say who says what, and point you to the office or group that decides.</li>
   </ul>
   <p>The full rules are in <a href={doc('content/README.md')}>our content guide</a>.</p>
   <p>My part: I guide the project at the top. Some changes always wait for me to check them before they go live:</p>
@@ -71,7 +72,7 @@ const tellUs = fixFormUrl({ page: Astro.url.pathname });
   <h2 id="corrections">How we fix mistakes</h2>
   <ul>
     <li><strong>What counts:</strong> a wrong fact, a broken or wrong link, a detail that is out of date, or wording that takes a side.</li>
-    <li><strong>How to tell us:</strong> the "Report a problem" link on the listing, or "Tell us" at the bottom of any page. If you work at the place or help people find services, say so on the form, and we read your report first. No names needed.</li>
+    <li><strong>How to tell us:</strong> the "Report a problem" link on the listing, or "Tell us" at the bottom of any page. If you work at the place or help people find services, say so on the form. No names needed.</li>
     <li><strong>If it could hurt someone</strong> (a wrong crisis line, shelter, deadline or benefit rule), we take the item down until it is re-checked.</li>
     <li><strong>How we fix it:</strong> we re-read the source, fix the listing, and update its checked date.</li>
     <li><strong>How we show it:</strong> every fix to a fact, link or date is listed on our <a href={`${base}/corrections/`}>Corrections page</a>, with the date. Typos are fixed without a note. Every change is also public on GitHub.</li>

@@ -19,23 +19,26 @@ export const DEFAULT_LOCALE = 'en';
 // Languages the site is set up for. `name` is the language's name in that
 // language (never a flag). `dir` is 'rtl' for right-to-left scripts such as
 // Arabic, which need layout testing before they are turned on.
+// `english` is its name in English, for lines staff read (the interpreter card).
 export const LOCALES = {
-  en: { name: 'English', dir: 'ltr' },
-  es: { name: 'Español', dir: 'ltr' },
+  en: { name: 'English', english: 'English', dir: 'ltr' },
+  es: { name: 'Español', english: 'Spanish', dir: 'ltr' },
 };
 
-// THE FLAG. Languages residents can see. Empty means English only: no /es/
-// pages are allowed, no hreflang links, no language switcher. Adding 'es'
-// here is David's call (#1067) and the High stakes check labels that PR
-// for:david.
-export const PUBLISHED = [];
+// THE FLAG. Languages that may have pages. Empty means English only. Spanish
+// is on since David's go on November 1, 2026 (#1067, decision 1). Even so, a
+// Spanish page builds only once a fluent reader marks its words reviewed
+// (src/lib/locale-pages.mjs), so drafts never reach residents. Changing this
+// is David's call and the High stakes check labels that PR for:david.
+export const PUBLISHED = ['es'];
 
-// Translation methods from the plan. 'machine-plus-review' (a Claude draft
-// that a fluent person corrects) stays off until David decides (#1067,
-// decision 3), because the Help in your language page says we do not use
-// machine translation.
+// Translation methods from the plan. 'machine-plus-review' is a Claude draft
+// that a fluent person corrects and marks reviewed. David allowed it on
+// November 1, 2026 (#1067, decision 3). It is never machine-only: nothing
+// shows until a reviewer signs off, and high-stakes files (crisis, shelter,
+// food, benefits) also need a second reader.
 export const METHODS = ['official-link', 'professional', 'community-reviewed', 'machine-plus-review'];
-export const ALLOW_MACHINE_DRAFTS = false;
+export const ALLOW_MACHINE_DRAFTS = true;
 
 // Every language code that could have a folder (all but English).
 export const OTHER_LOCALES = Object.keys(LOCALES).filter((l) => l !== DEFAULT_LOCALE);

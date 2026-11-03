@@ -26,10 +26,10 @@ const RENT = 'title: Rent help\nslug: rent-help\ntopics: [housing]\nwho_it_is_fo
 const bookHash = englishHash('resources', BOOK_CLUB, ['title', 'what_to_do']);
 const good = (extra = '') => `of: resources/book-club\nlang: es\nfields:\n  title: Club de lectura\n  what_to_do: Venga a la biblioteca. Llame al 304-555-0100.\nenglish_hash: ${bookHash}\nmethod: community-reviewed\ntranslated: 2026-11-10\nreviewed: 2026-11-12\nreviewer: es-reviewer-1\n${extra}`;
 
-test('nothing is turned on yet, so residents see English only', () => {
-  assert.deepEqual(PUBLISHED, []);
-  assert.deepEqual(astroI18n().locales, ['en']);
-  assert.equal(sitemapI18n(), undefined);
+test('Spanish is the only other language on (#1067), and off means English only', () => {
+  assert.deepEqual(PUBLISHED, ['es']);
+  assert.deepEqual(astroI18n([]).locales, ['en']);
+  assert.equal(sitemapI18n([]), undefined);
 });
 
 test('English URLs never change; other languages get a prefix', () => {
@@ -97,7 +97,11 @@ test('a good translation passes; facts, names, missing reviews and new numbers d
   assert.match(bad(good().replace('reviewer: es-reviewer-1', 'reviewer: Maria Lopez')), /role ID/);
   assert.match(bad(good().replace('reviewed: 2026-11-12\n', '')), /reviewed must be a date/);
   assert.match(bad(good().replace('304-555-0100', '304-555-0111')), /304-555-0111, which is not in the English/);
-  assert.match(bad(good().replace('community-reviewed', 'machine-plus-review')), /off until David decides/);
+  const machine = good().replace('community-reviewed', 'machine-plus-review');
+  fs.writeFileSync(path.join(root, 'content/translations/es/resources/book-club.yaml'), machine);
+  const t = readTranslation('content/translations/es/resources/book-club.yaml', { root });
+  assert.match(translationProblems(t, { today: '2026-11-20', allowMachine: false }).errors.join('\n'), /off until David decides/);
+  assert.deepEqual(translationProblems(t, { today: '2026-11-20', allowMachine: true }).errors, []);
   assert.match(bad(good().replace('lang: es', 'lang: fr')), /lang must be es/);
   assert.match(bad(good().replace('fields:', 'strings:')), /uses fields, not strings/);
 });
@@ -128,12 +132,12 @@ test('a stale translation is flagged, and hidden when high stakes', () => {
 
 test('pages read a translation only when its language is on', () => {
   const root = fakeRepo({ 'content/resources/book-club.yaml': BOOK_CLUB, 'content/translations/es/resources/book-club.yaml': good() });
-  assert.equal(loadTranslation('es', 'resources/book-club', { root, today: '2026-11-20' }), null);
+  assert.equal(loadTranslation('es', 'resources/book-club', { root, today: '2026-11-20', published: [] }), null);
   const t = loadTranslation('es', 'resources/book-club', { root, today: '2026-11-20', published: ['es'] });
   assert.equal(t.values.title, 'Club de lectura');
   assert.equal(t.stale, false);
   const record = { title: 'Book club', contact: { phone: '304-555-0100' }, _file: 'resources/book-club.yaml' };
-  assert.equal(translatedField(record, 'es', 'title', { root, today: '2026-11-20' }), 'Book club');
+  assert.equal(translatedField(record, 'es', 'title', { root, today: '2026-11-20', published: [] }), 'Book club');
   assert.equal(translatedField(record, 'es', 'title', { root, today: '2026-11-20', published: ['es'] }), 'Club de lectura');
   assert.deepEqual(translatedField(record, 'es', 'contact', { root, published: ['es'] }), { phone: '304-555-0100' });
 });

@@ -3,7 +3,11 @@ slug: wv-dmv-new-resident
 org: wv-dmv
 topics: [moving]
 who_it_is_for: People moving to West Virginia with a driver's license from another state, or a vehicle titled in another state.
-what_to_do: The DMV says new residents must have their vehicles titled and registered within 30 days of establishing residency. With a valid, non-expired out-of-state license, you can transfer it. You pass a vision screening, take a brief alcohol awareness course, and give up your out-of-state license. If your license is expired, you take all the tests (vision, written and road skills). Your car insurance must be from a company licensed to sell insurance in West Virginia. See the full rules at the link.
+what_to_do: "The DMV says new residents must have their vehicles titled and registered within 30 days of establishing residency. See the full rules at the link."
+options:
+  - "With a valid, non-expired out-of-state license, you can transfer it. You pass a vision screening, take a brief alcohol awareness course, and give up your out-of-state license."
+  - "If your license is expired, you take all the tests (vision, written and road skills)."
+  - "Your car insurance must be from a company licensed to sell insurance in West Virginia."
 contact:
   url: https://dmv.wv.gov/moving-wv
   url_label: Moving to WV rules

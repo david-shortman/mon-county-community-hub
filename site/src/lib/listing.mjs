@@ -20,7 +20,9 @@ export const HOLIDAYS = {
   christmas: 'Christmas Day',
 };
 // `meetings` (#902): regular meetings, each { name, when }, in the source's words.
-export const LISTING_FIELDS = ['opening_hours', 'get_in', 'languages', 'access', 'steps', 'closed_on', 'meetings', 'options', 'notes'];
+// `not_posted` (#529): place facts the source was read for and does not state.
+export const LISTING_FIELDS = ['opening_hours', 'get_in', 'languages', 'access', 'steps', 'closed_on', 'meetings', 'options', 'notes', 'not_posted'];
+export const PLACE_FACTS = ['hours', 'cost', 'get_in'];
 
 const isTime = (t) => /^([01]\d|2[0-3]):[0-5]\d$|^24:00$/.test(String(t));
 const minutes = (t) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
@@ -60,9 +62,17 @@ export function checkListing(r) {
   // `options` (#973): a short bulleted list of choices, like the kinds of ID that count.
   // `notes`: short paragraphs shown after the lists, for exceptions and special cases.
   for (const f of ['options', 'notes']) if (r[f] != null && (!Array.isArray(r[f]) || !r[f].length || r[f].some((t) => typeof t !== 'string' || !t.trim()))) errors.push(`${where}: ${f} must be a list of short text items`);
-  // A place a person goes to needs the first seven listing facts.
+  // `not_posted`: the source was read and does not say these, so the warning
+  // below does not repeat for a gap someone already checked. Listing a fact the
+  // record has is an error, so the list cannot go stale once the fact is added.
+  const notPosted = r.not_posted ?? [];
+  if (r.not_posted != null && (!Array.isArray(notPosted) || !notPosted.length || notPosted.some((f) => !PLACE_FACTS.includes(f)))) errors.push(`${where}: not_posted must be a list from ${PLACE_FACTS.join(', ')}`);
+  else for (const f of notPosted) if (r[f]) errors.push(`${where}: not_posted lists ${f}, but the record has ${f}; take it out of not_posted`);
+  // A place a person goes to needs the first seven listing facts. A group's
+  // `meetings` are its times, so they count as hours.
   if (r.contact?.place) {
-    const missing = [!r.hours && 'hours', !r.cost && 'cost', !r.get_in && 'get_in'].filter(Boolean);
+    const has = (f) => r[f] || (f === 'hours' && r.meetings) || (Array.isArray(notPosted) && notPosted.includes(f));
+    const missing = PLACE_FACTS.filter((f) => !has(f));
     if (missing.length) warnings.push(`${where}: a place to go, but no ${missing.join(', ')} yet. Add from the source only, never guess`);
   }
   return { errors, warnings };

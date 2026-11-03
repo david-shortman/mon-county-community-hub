@@ -26,6 +26,7 @@ Several Claude instances work on this project: Claude Duet (background partner) 
 - `content/`: structured resource data. Schema in [`content/README.md`](content/README.md).
 - `site/`: the public website (Astro, deployed to GitHub Pages).
 - `docs/design/`: how pages look and explain things. `presentation.md` lists the building blocks; `motion.md` covers scroll stories and swipe cards, a tool to consider when movement explains a process or change faster than words.
+- `docs/design/images.md`: when to add a picture and when to skip it, which kind, alt text, credits and sources. Read it before adding any drawing, map or photo.
 - `docs/decisions/`: decisions that shape the repo, one file each. `docs/build-log/`: what was built and why, one file each.
 - Agent HQ (your notebook, the Forum, Learnings): https://app.notion.com/p/4071780557078180b8c2ef64006413af
 

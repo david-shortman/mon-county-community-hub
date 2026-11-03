@@ -7,6 +7,7 @@
 // Needs a browser: in CI the Site workflow runs `npx playwright install chromium` first.
 import fs from 'node:fs';
 import http from 'node:http';
+import os from 'node:os';
 import path from 'node:path';
 import { createRequire } from 'node:module';
 import { chromium } from 'playwright';
@@ -65,46 +66,61 @@ catch (e) {
   browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 }
 
+// Pages are checked by a few browser tabs at once (CI runners have 4 cores), and the
+// results are printed in page order, so the output reads the same as a one-tab run.
+const WORKERS = Math.max(1, Number(process.env.A11Y_WORKERS) || Math.min(4, os.availableParallelism()));
+async function eachPage(newPage, check) {
+  const out = new Array(urls.length);
+  let next = 0;
+  await Promise.all(Array.from({ length: Math.min(WORKERS, urls.length) }, async () => {
+    const page = await newPage();
+    while (next < urls.length) { const i = next++; out[i] = await check(page, urls[i]); }
+    await page.close();
+  }));
+  return out.flat();
+}
+
 let blocking = 0;
 let other = 0;
 for (const scheme of ['light', 'dark']) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, colorScheme: scheme });
-  const page = await ctx.newPage();
-  for (const u of urls) {
+  const lines = await eachPage(() => ctx.newPage(), async (page, u) => {
     await page.goto(origin + u, { waitUntil: 'load' });
     await page.addScriptTag({ content: axeSrc });
     const found = await page.evaluate(async (tags) => (await window.axe.run(document, { runOnly: { type: 'tag', values: tags } })).violations
       .map((v) => ({ id: v.id, impact: v.impact, help: v.help, nodes: v.nodes.slice(0, 3).map((n) => n.target.join(' ')) })), TAGS);
-    for (const v of found) {
+    return found.map((v) => {
       const block = BLOCKING.has(v.impact);
-      block ? blocking++ : other++;
-      console.log(`${block ? 'FAIL' : 'note'} ${u} (${scheme}) ${v.impact} ${v.id}: ${v.help}\n     at ${v.nodes.join(' | ')}`);
-    }
-  }
+      return { block, text: `${block ? 'FAIL' : 'note'} ${u} (${scheme}) ${v.impact} ${v.id}: ${v.help}\n     at ${v.nodes.join(' | ')}` };
+    });
+  });
+  for (const l of lines) { l.block ? blocking++ : other++; console.log(l.text); }
   await ctx.close();
 }
 
 // Reflow (WCAG 1.4.10): nothing should scroll sideways on a 320px screen.
 // Pages whose 200% text fix waits on a PR that David must review, so they print a note
 // instead of failing. The fixes are written out on #971. Remove each line once it is fixed.
-const WAITING = [
-  [/^\/$/, '#1016 (crisis buttons)'],
-];
-const narrow = await browser.newPage({ viewport: { width: 320, height: 640 } });
-for (const u of urls) {
+const WAITING = [];
+const narrowCtx = await browser.newContext({ viewport: { width: 320, height: 640 } });
+const reflow = await eachPage(() => narrowCtx.newPage(), async (narrow, u) => {
+  const out = [];
   await narrow.goto(origin + u, { waitUntil: 'load' });
   const w = await narrow.evaluate(() => document.documentElement.scrollWidth);
-  if (w > 320) { blocking++; console.log(`FAIL ${u} scrolls sideways at 320px (${w}px wide)`); }
+  if (w > 320) out.push({ block: true, text: `FAIL ${u} scrolls sideways at 320px (${w}px wide)` });
   // Text resize (WCAG 1.4.4): with text at 200%, the page still fits a 320px screen (#971).
   await narrow.addStyleTag({ content: 'html{font-size:200% !important}' });
   const w2 = await narrow.evaluate(() => document.documentElement.scrollWidth);
   const waits = WAITING.find(([re]) => re.test(u));
-  if (w2 > 320 && waits) { other++; console.log(`note ${u} scrolls sideways at 320px with text at 200% (${w2}px wide). Its fix waits for ${waits[1]}, see #971.`); }
-  else if (w2 > 320) { blocking++; console.log(`FAIL ${u} scrolls sideways at 320px with text at 200% (${w2}px wide)`); }
-  else if (waits) console.log(`note ${u} fits at 200% text in this run. If its fix has landed, remove it from WAITING in scripts/check-a11y.mjs`);
-}
+  if (w2 > 320 && waits) out.push({ block: false, text: `note ${u} scrolls sideways at 320px with text at 200% (${w2}px wide). Its fix waits for ${waits[1]}, see #971.` });
+  else if (w2 > 320) out.push({ block: true, text: `FAIL ${u} scrolls sideways at 320px with text at 200% (${w2}px wide)` });
+  else if (waits) out.push({ text: `note ${u} fits at 200% text in this run. If its fix has landed, remove it from WAITING in scripts/check-a11y.mjs` });
+  return out;
+});
+for (const l of reflow) { if (l.block === true) blocking++; else if (l.block === false) other++; console.log(l.text); }
+await narrowCtx.close();
 
 await browser.close();
 server.close();
-console.log(`\ncheck-a11y: ${urls.length} pages, light and dark at 390px, and 320px reflow at 100% and 200% text. ${blocking} blocking, ${other} other.`);
+console.log(`\ncheck-a11y: ${urls.length} pages, light and dark at 390px, and 320px reflow at 100% and 200% text, ${WORKERS} tabs at once. ${blocking} blocking, ${other} other.`);
 if (blocking) process.exit(1);

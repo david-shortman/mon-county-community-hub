@@ -23,6 +23,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2>Water and sewer</h2>
   <p>The Morgantown Utility Board (MUB) serves Morgantown, and Star City and Granville send residents to MUB too. If MUB does not serve the address, ask your landlord or the seller who does.</p>
   {r('mub-start-service') && <ResourceCard r={r('mub-start-service')} showCost />}
+  <p>Clay Battelle Public Service District is a county water district with its office in Core, in western Mon County:</p>
+  {r('cbpsd-start-service') && <ResourceCard r={r('cbpsd-start-service')} />}
 
   <h2>Gas</h2>
   {r('hope-gas-start-service') && <ResourceCard r={r('hope-gas-start-service')} showCost />}
@@ -38,11 +40,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>Pick your town on <a href={`${base}/who-serves-me/`}>Who serves my address?</a>, or open your <a href={`${base}/towns/`}>town or area's page</a> for its council, places, dates and buses too. Or ask your landlord, the seller or a neighbor. The state agency that oversees utility companies can also answer questions.</p>
   {r('wv-psc-utility-questions') && <ResourceCard r={r('wv-psc-utility-questions')} />}
 
+  <h2 id="costs">What things cost here</h2>
+  <p>We have not yet found an official source for typical rents here that we can check, so this page lists no rent numbers. For what a basic household budget costs in Monongalia County, see <a href={`${base}/how-we-are-doing/#basic-budget`}>What a basic budget costs here</a>. It shows two public estimates and explains how they differ.</p>
+
   <h2 id="students">WVU students moving off campus</h2>
   <p>WVU's Off-Campus Housing office helps students find a place and roommates, and holds housing fairs with landlords and utility companies. More for students, including food, buses, legal help and money, is on <a href={`${base}/for/college-students/`}>College students</a>. Students on the Morgantown campus can also get free food at The Rack: see <a href={`${base}/help/food/today/student/`}>food today for WVU students</a>.</p>
   {r('wvu-off-campus-housing') && <ResourceCard r={r('wvu-off-campus-housing')} />}
 
   <p>Renting or buying? Check whether the home is in a flood zone or a slide area first: <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
+
+  <p>Need internet at home? See what service reaches your area on <a href={`${base}/internet/`}>Internet at home</a>.</p>
 
   <p>Trouble paying a power or water bill later? See <a href={`${base}/utility-bills/`}>Help paying a utility bill</a>.</p>
 

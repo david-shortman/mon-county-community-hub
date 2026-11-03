@@ -12,7 +12,12 @@ opening_hours:
     opens: "13:00"
     closes: "17:00"
 get_in: call-first
-what_to_do: Follow the steps on your summons. The Circuit Clerk runs jury duty for the county and has a jury line at 304-291-7276. The state has an online jury portal. The courts say there are no automatic excuses by job. To ask to be excused for a hardship, put your request in writing to the presiding circuit judge. If you are 70 or older, you will be excused if you ask, and there is a place on the questionnaire to say so. If you need a disability accommodation, say so on the questionnaire before you serve.
+what_to_do: "Follow the steps on your summons. The Circuit Clerk runs jury duty for the county and has a jury line at 304-291-7276."
+options:
+  - "Online: the state has an online jury portal."
+  - "Hardship: the courts say there are no automatic excuses by job. To ask to be excused for a hardship, put your request in writing to the presiding circuit judge."
+  - "Age 70 or older: you will be excused if you ask, and there is a place on the questionnaire to say so."
+  - "Disability: if you need an accommodation, say so on the questionnaire before you serve."
 contact:
   phone: "304-291-7276"
   url: https://www.courtswv.gov/public-resources/jury-information

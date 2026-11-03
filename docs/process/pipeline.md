@@ -2,7 +2,7 @@
 
 How an idea becomes something residents use, and how we find out if it helped.
 
-**Status: proposal.** This page was drafted by the process designer session on 2026-10-28. It changes how agents work, so only David can adopt it. Until he merges it, [`docs/COORDINATION.md`](../COORDINATION.md) and the [charter](../CHARTER.md) are the rules. If this page and those disagree, they win.
+**Status: adopted by David, 2026-11-02 (#96, #1410).** Drafted by the process designer session on 2026-10-28. [`docs/COORDINATION.md`](../COORDINATION.md) and the [charter](../CHARTER.md) still win if this page and those disagree.
 
 ## Part 1: Diagnosis of the pipeline today
 
@@ -84,7 +84,7 @@ People 4 | Amplifies 5 | Evidence 3 | Effort 4 | Risk 3
 Why: one or two sentences.
 ```
 
-Each factor is 1 to 5, and higher is always better:
+Each factor is 1 to 5, and higher is always better. This 1 to 5 formula is the project's standard score (David, 2026-11-02):
 
 | Factor | 1 | 3 | 5 |
 |---|---|---|---|
@@ -115,14 +115,14 @@ Before Duet adds `up-next`, the issue must answer five questions. The existing T
 4. **Which rubrics apply** (see the review gate below).
 5. **Which local groups it points to.**
 
-A spec that is missing any part stays `for:code` without `up-next`. Only one issue at a time may carry `up-next` per builder, which also limits double builds (see Build).
+A spec that is missing any part stays `for:code` without `up-next`. How many issues may carry `up-next` at once is set in one place, [`docs/operations/budget.md`](../operations/budget.md), and changes with the pace there.
 
 ### 4. Build
 
 The builder (the 6:41 AM session or the `claude.yml` Action):
 
 - **Claims with a comment, then re-checks.** Add `in-progress`, post a claim comment, wait a few seconds, then reread the issue. If an earlier claim comment from another run exists, stop. The earliest claim comment wins. This turns the label race into a rule anyone can check.
-- **Claims expire after 24 hours with no linked PR.** Anyone may remove a stale `in-progress` with a comment saying so.
+- **Claims expire after 3 days with no linked PR** (David, 2026-11-02), matching the Health check's 3-day flag on quiet `in-progress` issues. Anyone may then remove the stale `in-progress` with a comment saying so.
 - **Work in progress limit:** at most one open build PR per builder, and at most three open self-merge PRs total. Finish or close before starting more.
 - **Runs the local checks** (`npm ci && npm run check-content && npm run build`) before opening the PR.
 - **Adds a build log entry in the PR** as a new file (see Ship), including the metric and check date from the spec.
@@ -191,6 +191,8 @@ The comment shows a table with each rubric, its average for the changed parts, w
 
 **A soft gate to start (decided by David, 2026-10-28).** The check turns red when it finds a blocker, but it is not a required check on `main`. The gate is a rule agents follow: for any PR that changes `site/` or `content/`, wait for "Claude review" and do not merge while it is red. The weekly retrospective reports any PR merged with a red or missing review. If that happens, the retro can propose making it a required check (a repo setting, David's call).
 
+**`scripts/safe-merge.sh` waits for the review too (proposed 2026-11-02).** In week 1, nine PRs that changed `site/` or `content/` merged before their review posted (#129, #130, #194, #196, #283, #303, #304, #319, #448). The merge script already waits for the High stakes check on the PR's latest commit. For a PR that changes `site/` or `content/`, it also waits for "Claude review" on that commit to finish green, and refuses (exit 4) if it is red or missing. This keeps the gate a script rule, not a repo setting.
+
 One thing to verify now that PR #32 is merged: GitHub does not start other workflows for PRs opened with the default Actions token. If the `up-next` Action opens PRs that way, neither the Site check nor this review will run on them. The Claude GitHub App token avoids this, so the first Action-built PR should be checked for both runs.
 
 ### 6. Ship
@@ -235,6 +237,11 @@ It writes these sections, in plain language:
 
 The retro itself is a log entry and can be self-merged. Any process change it proposes is a separate PR (see below).
 
+**Running a scheduled job now, and checking it can write (proposed 2026-11-02).** Scheduled Claude Code runs failed three ways in week 1: the first ones had no repo attached, a manual "run now" (`fire_trigger`) started a new session without the repo, and the retro on October 28 and November 2 could not write to GitHub until #1418.
+
+- **To run a scheduled job now,** send the request in the session the job is bound to, or move its schedule to a minute from now. Do not use `fire_trigger` for jobs that need the repo.
+- **Every scheduled job checks its access first.** Before any real work, it makes one harmless read and confirms the repo is checked out. On its first real write, if GitHub refuses, it stops, writes what it was doing to a local branch, and says so at the end of the run. Duet copies that into #81 on its next sweep.
+
 ## Part 3: How the process improves itself
 
 - **Any agent may propose a process change.** It opens a PR that edits this page or `COORDINATION.md`, labeled `for:david` and `type:process`. It states the problem, the evidence, and the test.
@@ -243,11 +250,24 @@ The retro itself is a log entry and can be self-merged. Any process change it pr
 - **Small, few, and measured.** At most three proposals a week, so David is not buried. The pipeline health numbers above are the evidence.
 - **Rubrics improve the same way.** If a rubric blocks things that should not be blocked, or misses something that hurt residents, the retro notes it and the Design reviewer lane updates the rubric.
 
+## A weekly decision list for David (proposed 2026-11-02)
+
+Items that need David pile up faster than he can clear them: at the end of week 1 there were 110 open `for:david` issues and 8 open `for:david` PRs, the oldest about 5.5 days old.
+
+- **Once a week, before the Monday retro, Duet writes one decision list** as a new issue titled "Decisions for David, week of <date>", labeled `for:david`. It lists every open `for:david` item, grouped as: PRs to merge, decisions to make, and calls or contacts only David can make. Each item gets one line: what it is, the recommended answer, and what happens if David says nothing.
+- **David answers in that one issue.** Agents apply the answers on the linked issues and PRs.
+- **`needs-verification` issues get `for:david` only when a call or contact is the only way left to confirm the fact.** Otherwise they stay with Duet.
+- **The retro reports** the open `for:david` count and the oldest item's age each week.
+
 ## Labels this page uses
 
 Existing: `idea`, `for:code`, `for:duet`, `for:david`, `up-next`, `in-progress`, `blocked`.
 
-New, if adopted: `type:process` (a change to how we work; always `for:david`).
+Also: `type:process` (a change to how we work; always `for:david`).
+
+## Later: model and product quality thresholds
+
+Separate quality bars for the model and for the product (#96, item 6) wait until a tool gives residents answers that a person did not write. Until then, every resident-facing answer is written, sourced and reviewed as a page.
 
 ## Decisions so far
 

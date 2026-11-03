@@ -6,6 +6,8 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import TrendChart from '../components/TrendChart.astro';
+import MotionSwitch from '../components/MotionSwitch.astro';
+import { chartGuide } from '../lib/chart-guide.mjs';
 import { loadIndicators, showValue, PLACES } from '../lib/indicators.mjs';
 import { loadIndicators as loadLive } from '../lib/live-indicators/index.mjs';
 import { todayYmd } from '../lib/content.mjs';
@@ -32,6 +34,26 @@ const y = (v) => T + (H - T - B) * (1 - v / top);
 const line = pts.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join(' ');
 const step = top <= 6 ? 1 : 2;
 const ticks = Array.from({ length: Math.floor(top / step) + 1 }, (_, i) => i * step);
+// A guided look at this chart (#1451): the steps' words come from the same points.
+const guide = chartGuide(pts, { top });
+const yi = guide?.yearAgo ? pts.indexOf(guide.yearAgo) : -1;
+const at = (i) => ({ x: x(i).toFixed(1), y: y(pts[i].value).toFixed(1) });
+const lp = latest ? at(pts.length - 1) : null;
+const yp = yi >= 0 ? at(yi) : null;
+// Each value label sits above its point, or below it when it is the lower of the
+// two (or too near the top), so the two labels never cover each other.
+const labelY = (py, below) => {
+  const n = Number(py), under = (below || n < 34) && n + 24 <= H - B - 4;
+  return (under ? n + 24 : n - 14).toFixed(1);
+};
+const latestLow = guide?.yearAgo ? latest.value < guide.yearAgo.value : false;
+// Short words under the held chart, one per step (the steps say it in full).
+const short = (p) => `${p.label.replace(/^(\w{3})\w*/, '$1')}: ${p.value}%`;
+const caps = guide ? {
+  latest: `Newest month, ${short(latest)}.`,
+  year: guide.yearAgo ? `${short(guide.yearAgo)}. ${short(latest)}.` : '',
+  read: 'The side shows the rate. The bottom shows the months.',
+} : {};
 
 const places = ind['cdc-places-monongalia'];
 const measures = places.data?.measures ?? [];
@@ -61,7 +83,9 @@ const measures = places.data?.measures ?? [];
   {latest ? (
     <>
       <p>In <strong>{latest.label}</strong>, the unemployment rate in Monongalia County was <strong>{latest.value}%</strong>{latest.preliminary && ' (a preliminary number, which can change)'}.{yearAgo && ` In ${yearAgo.label} it was ${yearAgo.value}%.`}</p>
-      <figure class="chart">
+      <div id="ue-guide">
+      <MotionSwitch skip="#ue-table" skipText="Skip the guided look" />
+      <div class="chart stage" data-step="none">
         <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby="ue-title">
           <title id="ue-title">Monongalia County unemployment rate by month, {pts[0].label} to {latest.label}. The table below has every value.</title>
           {ticks.map((t) => (
@@ -78,10 +102,25 @@ const measures = places.data?.measures ?? [];
             </g>
           ))}
           <circle cx={x(pts.length - 1)} cy={y(latest.value)} r="4" class="dot" />
+          <g class="gd" aria-hidden="true">
+            {yp && (
+              <path d={`M${yp.x},${yp.y} H${lp.x} V${lp.y}`} class="gd-line gd-gap" />
+            )}
+            <text x={lp.x} y={labelY(lp.y, latestLow)} text-anchor="end" class="gd-tx gd-lt">{latest.value}%</text>
+            {yp && <text x={yp.x} y={labelY(yp.y, !latestLow)} text-anchor="middle" class="gd-tx gd-yt">{guide.yearAgo.value}%</text>}
+            <circle r="9" class="gd-ring" style={`--lx:${lp.x}px;--ly:${lp.y}px;--yx:${(yp ?? lp).x}px;--yy:${(yp ?? lp).y}px`} />
+          </g>
         </svg>
-        <figcaption>Not seasonally adjusted, so it rises and falls with the time of year. To see change over a year, compare a month with the same month a year before. Months with no published estimate are left out.</figcaption>
-      </figure>
-      <details>
+        <p class="gd-cap" aria-hidden="true"></p>
+      </div>
+      <p class="chart-note">Not seasonally adjusted, so it rises and falls with the time of year. To see change over a year, compare a month with the same month a year before. Months with no published estimate are left out.</p>
+      <h3 id="ue-guide-h">A guided look at this chart</h3>
+      <p>{guide.steps.length === 3 ? "Three" : "Two"} steps that walk through the chart above, using its real numbers.</p>
+      <ol class="guide-steps" aria-labelledby="ue-guide-h">
+        {guide.steps.map((st) => <li data-key={st.key} data-cap={caps[st.key]}><strong>{st.title}.</strong> {st.text}</li>)}
+      </ol>
+      </div>
+      <details id="ue-table">
         <summary>Show the numbers as a table</summary>
         <div class="table-scroll" role="region" aria-label="Unemployment rate by month" tabindex="0">
           <table>
@@ -148,6 +187,20 @@ const measures = places.data?.measures ?? [];
   <p>We have not added official crime numbers yet, because we could not check them on the official source this time. That work is tracked in <a href={`${repo}/issues/772`}>issue 772</a>.</p>
 </Base>
 
+<script>
+  import { watchSteps } from '../lib/motion-client.mjs';
+  const sec = document.getElementById('ue-guide');
+  const stage = sec?.querySelector('.stage');
+  const steps = sec ? Array.from(sec.querySelectorAll<HTMLElement>('.guide-steps > li')) : [];
+  const cap = sec?.querySelector('.gd-cap');
+  watchSteps(sec, steps, (i) => {
+    stage?.setAttribute('data-step', steps[i].dataset.key ?? '');
+    if (cap) cap.textContent = 'Step ' + (i + 1) + ' of ' + steps.length + ': ' + (steps[i].dataset.cap ?? '');
+  }, {
+    onLive: (on) => { if (!on) stage?.setAttribute('data-step', 'none'); },
+  });
+</script>
+
 <style>
   .chart { margin: 1rem 0; }
   .chart svg { width: 100%; height: auto; display: block; }
@@ -157,9 +210,37 @@ const measures = places.data?.measures ?? [];
   .chart .dot { fill: var(--accent); stroke: var(--card); stroke-width: 2; }
   .chart .hit { fill: transparent; }
   .chart .hit:hover { fill: var(--accent); fill-opacity: 0.25; }
-  .chart figcaption { color: var(--muted); font-size: 0.9rem; }
+  .chart-note { color: var(--muted); font-size: 0.9rem; }
+  /* A guided look at this chart (#1451). The still page is the chart plus the
+     numbered steps. With script, motion allowed and a tall enough screen, the
+     chart stays in view and a ring moves to the point each step names. */
+  .guide-steps { padding-left: var(--s5); }
+  .guide-steps > li { margin: 0 0 var(--s3); }
+  .gd { display: none; pointer-events: none; }
+  .gd-cap { display: none; margin: var(--s1) 0 0; font-size: 0.95rem; font-weight: 700; }
+  .gd-ring { fill: none; stroke: var(--accent); stroke-width: 2.5; transform: translate(var(--lx), var(--ly)); }
+  .gd-line { fill: none; stroke: var(--fg); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .gd-tx { fill: var(--fg); font-size: 15px; font-weight: 700; }
+  .gd-gap, .gd-yt, .gd-lt { opacity: 0; }
+  @media (min-height: 36rem) {
+    #ue-guide.is-live .gd { display: inline; }
+    #ue-guide.is-live .gd-cap { display: block; }
+    #ue-guide.is-live .stage { position: sticky; top: 0; z-index: 2; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: var(--s2); }
+    #ue-guide.is-live .guide-steps > li { margin-bottom: 12rem; padding-left: var(--s3); border-left: 3px solid transparent; }
+    #ue-guide.is-live .guide-steps > li:last-child { margin-bottom: var(--s6); }
+    #ue-guide.is-live .guide-steps > li.on { border-left-color: var(--accent); }
+    #ue-guide .stage[data-step="latest"] .gd-lt,
+    #ue-guide .stage[data-step="year"] :is(.gd-gap, .gd-yt, .gd-lt) { opacity: 1; }
+    #ue-guide .stage[data-step="year"] .gd-ring { transform: translate(var(--yx), var(--yy)); }
+    #ue-guide .stage[data-step="read"] :is(.series, .dot, .gd-ring) { opacity: 0.3; }
+    #ue-guide .stage[data-step="read"] .axis { fill: var(--accent); font-weight: 700; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    #ue-guide.is-live .gd-ring { transition: transform 0.9s ease, opacity 0.4s ease; }
+    #ue-guide.is-live :is(.gd-gap, .gd-yt, .gd-lt, .series, .dot) { transition: opacity 0.4s ease 0.3s; }
+  }
   .tiles { list-style: none; padding: 0; display: grid; gap: 0.75rem; grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr)); }
-  .tile { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
+  .tile { background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.25rem; }
   .tile .num { font-size: 1.6rem; font-weight: 700; }
   .tile .range { color: var(--muted); font-size: 0.9rem; }
   table { border-collapse: collapse; }

@@ -11,7 +11,9 @@ const MCS712 = 'https://www.boe.mono.k12.wv.us/o/mcs/page/7th-12th-grade-immuniz
 const NEW = 'https://oeps.wv.gov/media/1109/download?inline';
 const PREK = 'https://oeps.wv.gov/media/1110/download?inline';
 const WVSSAC = 'https://www.wvssac.org/new-physical-forms-for-2026-27-available/';
-const GOV = 'https://governor.wv.gov/article/governor-morrisey-applauds-major-legal-win-vaccine-exemption-case';
+// Exemption sources, checked 2026-11-01 (#387).
+const OEPS = 'https://oeps.wv.gov/immunizations-religious-and-philosophical-exemptions';
+const WVDE = 'https://wvde.us/articles/west-virginia-board-education-reinstates-policy-compulsory-vaccination-law';
 ---
 <Base title="School shots and sports physicals in Mon County: what your child needs" description="Which shots and health forms Monongalia County Schools ask for in Pre-K, kindergarten, 2nd, 7th and 12th grade, the sports physical rule, and where to get shots free for children who qualify.">
   <h1>What shots and forms does my child need for school in Mon County?</h1>
@@ -50,10 +52,10 @@ const GOV = 'https://governor.wv.gov/article/governor-morrisey-applauds-major-le
   <p>Your child's doctor can also give school shots.</p>
 
   <h2>What about exemptions?</h2>
-  <p>A doctor who has treated or examined your child can ask the state for a medical exemption (<a href={NEW}>state chart, PDF</a>). Rules on exemptions for religious reasons have been fought over in court since 2025 (<a href={GOV}>Governor's office, November 2025</a>). We could not find a current official page that says what applies now, so we do not list the rule here. Ask your child's school or the health department.</p>
+  <p>A doctor who has treated or examined your child can ask the state for a medical exemption (<a href={NEW}>state chart, PDF</a>). Rules on exemptions for religious reasons have been fought over in court since 2025. The state Department of Health says it grants religious exemptions for each school year and asks families to renew for 2026-2027 (<a href={OEPS}>Department of Health</a>). On December 2, 2025, the state Board of Education told county schools not to accept religious exemptions until the state Supreme Court gives more guidance (<a href={WVDE}>Department of Education</a>). We could not find a newer official statement, so ask your child's school what applies now.</p>
 
   <h2>Questions?</h2>
   <AnswerFacts slug="mcs-school-shots-and-health-forms" linkLabel="County schools health forms page" />
 
-  <p class="meta">Sources checked October 30, 2026. State chart links checked November 1, 2026. We describe what the schools and health offices say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for your child. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. State chart links and exemption sources checked November 1, 2026. We describe what the schools and health offices say. We do not give medical advice. Ask a doctor, nurse or pharmacist about what is right for your child. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

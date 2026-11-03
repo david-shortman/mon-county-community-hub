@@ -9,10 +9,15 @@ import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
+import { pageReady } from '../lib/locale-pages.mjs';
+import { todayYmd } from '../lib/content.mjs';
 export const page = { door: "family", topic: "family", label: "Help in your language", summary: "Free interpreters at the hospital, the Health Department, state offices and courts, and English classes" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// The Spanish version (#1101, #1102) builds only once a fluent reader has
+// reviewed it. Until then this page keeps saying it is English only.
+const spanish = pageReady('es', '/help-in-your-language/', { today: todayYmd() }) ? `${base}/es/help-in-your-language/` : null;
 const dohsPlan = [{ url: 'https://dohs.wv.gov/nondiscrimination-policies-and-plans', checked: '2026-10-30', name: 'WV Department of Human Services' }];
 ---
 <Base title="Help in your language in Morgantown and Mon County" description="Where to get free interpreters and help in languages other than English in Morgantown and Monongalia County, WV: hospitals, the Health Department, state benefit offices, courts, legal help and English classes.">
@@ -38,7 +43,9 @@ const dohsPlan = [{ url: 'https://dohs.wv.gov/nondiscrimination-policies-and-pla
 
   <h2>Not on this list yet</h2>
   <p>We checked the websites of Milan Puskar Health Right, Monongalia County Schools and the Morgantown Public Library on October 30, 2026, and none said whether they offer interpreters. Ask when you call. If you work at one of these places and can point us to a page that says so, <a href={fixFormUrl({ page: Astro.url.pathname })}>tell us</a>.</p>
-  <p>This site is in English only for now. We do not use machine translation, because a wrong phone number, date or rule could send someone to the wrong place.</p>
+  {spanish
+    ? <p>This page is also <a href={spanish} hreflang="es">in Spanish (<span lang="es">en español</span>)</a>. Claude, an AI, wrote the first draft of the Spanish, and a person who reads Spanish well checked every line before it went on the site. Phone numbers, addresses and hours always come from the English listings, so they match. The rest of the site is in English only for now.</p>
+    : <p>This site is in English only for now. We do not use machine translation, because a wrong phone number, date or rule could send someone to the wrong place.</p>}
   <p>New to the country? <a href={`${base}/life-events/new-to-the-country/`}>I'm new to the country</a> lists first steps in order.</p>
   <p>More for families: <a href={`${base}/family/`}>Family and life changes</a>.</p>
 </Base>

@@ -19,11 +19,11 @@ evidence:
     figure: "20.9% frequent mental distress; 29.4% depression"
     data_date: "2023"
     publisher: CDC PLACES (2025 release)
-  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
-    checked: 2026-10-31
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-01
     shows: The number of people for each mental health provider. A lower number means more providers per person.
-    figure: "256 people per provider (West Virginia 506, US 301)"
-    publisher: County Health Rankings (2025 release)
+    figure: "240 people per provider (West Virginia 464, US 287)"
+    publisher: County Health Rankings (March 2026 supplemental release)
 affected:
   estimate: "20.9% of adults"
   description: Adults in Monongalia County with frequent mental distress, as estimated by CDC.

@@ -29,6 +29,10 @@ steps:
     when: today
     resource: va-homeless-veterans-line
     text: Call the VA's line for veterans who are homeless or may lose their housing.
+  va-enroll:
+    when: week
+    resource: va-health-care-apply
+    text: Not signed up for VA health care yet? Apply online or call VA's toll-free line.
   va-clinic:
     when: week
     resource: monongalia-county-va-clinic
@@ -101,7 +105,7 @@ situations:
   - id: vet-health
     label: I'm a veteran and need health care
     page: /veterans/
-    steps: [va-clinic]
+    steps: [va-enroll, va-clinic]
   - id: vet-talk
     label: I'm a veteran and need someone to talk to
     page: /veterans/

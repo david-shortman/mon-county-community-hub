@@ -8,7 +8,14 @@ opening_hours:
   - days: [mon, tue, wed, thu]
     opens: "07:00"
     closes: "17:30"
-what_to_do: "The city lists four steps. 1. Call the Planning Division at 304-284-7431 to check that your location is zoned for your business. 2. Register with the state through the One Stop Business Portal. 3. Apply for a city business license through the Morgantown Access Portal. 4. If your business has a physical location in the city, apply for a Certificate of Occupancy and schedule inspections with Code Enforcement and the Fire Marshal at least one week before opening. The city also charges a B&O tax on gross income and a municipal service fee. Licenses run for a fiscal year and expire June 30. B&O tax questions: BandO@morgantownwv.gov or the Finance Department at 304-284-7408."
+what_to_do: "The city lists four steps. Licenses run for a fiscal year and expire June 30."
+steps:
+  - "Call the Planning Division at 304-284-7431 to check that your location is zoned for your business."
+  - "Register with the state through the One Stop Business Portal."
+  - "Apply for a city business license through the Morgantown Access Portal."
+  - "If your business has a physical location in the city, apply for a Certificate of Occupancy and schedule inspections with Code Enforcement and the Fire Marshal at least one week before opening."
+notes:
+  - "The city also charges a B&O tax on gross income and a municipal service fee. B&O tax questions: BandO@morgantownwv.gov or the Finance Department at 304-284-7408."
 contact:
   phone: "304-284-7408"
   url: https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business

@@ -16,13 +16,15 @@ import { todaysForecast, FORECAST_PAGE } from '../lib/weather.mjs';
 import { dirFor } from '../lib/i18n.mjs';
 import { pageAlternates } from '../lib/locale-pages.mjs';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { PLAIN_CARD, cardAlt, cardDoor, cardPath, hasCard } from '../lib/share-cards.mjs';
 import nameFont from '../fonts/fraunces-name-800.woff2?inline';
 import tileSvg from '../../public/favicon.svg?raw';
+import pressCss from '../styles/press.css?raw';
+import { isUrgentPath } from '../lib/urgent-pages.mjs';
 // noindex: print copies and the 404 page stay out of search results; they get no canonical link (#89).
 const { crisis = false, help = false, searchable = true, noindex = false, title, description = 'Local help for life in Morgantown and Monongalia County, WV.' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const canonical = new URL(/\.\w+$/.test(Astro.url.pathname) ? Astro.url.pathname : Astro.url.pathname.replace(/\/?$/, '/'), Astro.site).href;
-const shareImage = new URL(`${base}/share.png`, Astro.site).href;
 const here = Astro.url.pathname.replace(/\/$/, '') || '/';
 // Heading face: Atkinson Hyperlegible Next (SIL Open Font License, see
 // public/fonts/OFL.txt), self-hosted, one weight, Latin only, about 11 KB.
@@ -33,7 +35,15 @@ const headingFont = `${base}/fonts/atkinson-hyperlegible-next-800.woff2`;
 // letters in "Everything Morgantown" (about 2.5 KB) and built into the page,
 // so the name never waits for a download and never changes font as it loads.
 const nameFontFace = `@font-face { font-family: "Fraunces Name"; font-weight: 800; font-style: normal; font-display: block; src: url("${nameFont}") format("woff2"); }`;
-const fontFace = `@font-face { font-family: "Atkinson Hyperlegible Next"; font-weight: 800; font-style: normal; font-display: optional; src: url("${headingFont}") format("woff2"); }${nameFontFace}`;
+// Serif face for headings (the Press look, #396): Newsreader by Production Type
+// (SIL Open Font License, public/fonts/OFL-Newsreader.txt), one static cut,
+// weight 600, optical size 48, Latin only, 14.3 KB. Urgent pages (the home
+// page, Help now, food help, crisis pages) keep Atkinson headings and never
+// load it, so they stay under 50 KB (docs/design/identity.md "Type").
+const serif = !crisis && !isUrgentPath(Astro.url.pathname);
+const serifFont = `${base}/fonts/newsreader-600.woff2`;
+const serifFace = serif ? `@font-face { font-family: "Newsreader"; font-weight: 600; font-style: normal; font-display: optional; src: url("${serifFont}") format("woff2"); }` : '';
+const fontFace = `@font-face { font-family: "Atkinson Hyperlegible Next"; font-weight: 800; font-style: normal; font-display: optional; src: url("${headingFont}") format("woff2"); }${nameFontFace}${serifFace}html { --serif: ${serif ? '"Newsreader", Georgia, "Times New Roman", serif' : 'var(--display); --serif-lede: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --serif-lede-weight: 400'}; }`;
 // The logo's tile is the site icon (public/favicon.svg, #390), drawn inline.
 const brandMark = tileSvg.replace(/<!--[\s\S]*?-->\s*/, '').replace(/id="r"/, 'id="brand-clip"').replace('url(#r)', 'url(#brand-clip)')
   .replace('<svg ', '<svg class="brand-mark" aria-hidden="true" focusable="false" ');
@@ -43,6 +53,12 @@ const tags = (await loadPages()).get(route);
 const doors = loadDoors();
 const tagDoor = tags && doors.bySlug[tags.door];
 const tagTopic = tagDoor?.topics?.[tags.topic];
+// Link preview picture (share cards, src/lib/share-cards.mjs): each guide has
+// its own, with its name, summary and door. Other pages use the plain one, and
+// so do crisis pages, so a shared link to one does not show its name in big type.
+const ownCard = !crisis && hasCard(tags, route);
+const shareImage = new URL(`${base}${ownCard ? cardPath(route) : PLAIN_CARD}`, Astro.site).href;
+const shareAlt = ownCard ? cardAlt({ label: tags.label, doorName: cardDoor(tags, route, doors)?.name }) : 'Everything Morgantown: the site icon, two hills joined by a bridge over the river';
 // Share this (#947): on listed guides only. High-stakes doors and topics wait
 // for David, and safety pages never get it (a share leaves a trace).
 const shareable = tags?.listed && !['help-now', 'this-month', 'about'].includes(tags.door)
@@ -73,6 +89,7 @@ const footerLinks = [
   ...doors.doors.map((d) => ({ href: doorHref(d), label: d.name })),
   { href: '/topics/', label: 'All topics' },
   { href: '/about/', label: 'About this site' },
+  { href: '/progress/', label: 'Our checks' },
   { href: '/partners/', label: 'For groups and helpers' },
   { href: '/terms/', label: 'Terms' },
   { href: '/privacy/', label: 'Privacy' },
@@ -84,6 +101,10 @@ const today = todayYmd();
 const dayFmt = (style) => new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: style, month: style, day: 'numeric' }).format(new Date(`${today}T12:00:00Z`));
 const [longToday, shortToday] = [dayFmt('long'), dayFmt('short')];
 const forecast = await todaysForecast();
+// Neutral hooks for preview looks (#396): the temperature and the sky in their own spans. Same text and look.
+const wxCut = forecast ? forecast.text.indexOf(', ') : -1;
+const wxTemp = forecast ? (wxCut < 0 ? forecast.text : forecast.text.slice(0, wxCut)) : '';
+const wxSky = wxCut < 0 ? '' : forecast.text.slice(wxCut);
 // Other languages (#1083, #1099): the page's language (English unless a
 // translated page says otherwise), and hreflang links to the same page in
 // each published language. Only reviewed translated pages count
@@ -108,8 +129,8 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f9f7f2" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#161714" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f6f1e6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#171613" media="(prefers-color-scheme: dark)" />
     {crisis && <meta name="referrer" content="no-referrer" />}
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
     {!noindex && alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
@@ -119,23 +140,28 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={shareImage} />
-    <meta property="og:image:alt" content="Everything Morgantown: the site icon, two hills joined by a bridge over the river" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={shareAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
     <AppShell />
     <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
+    {serif && <link rel="preload" href={serifFont} as="font" type="font/woff2" crossorigin />}
     <style set:html={fontFace}></style>
     <style is:global>
       /* Local identity tokens. Source of truth and contrast ratios: docs/design/identity.md */
       :root {
-        --bg: #f9f7f2; --fg: #1d1d1b; --muted: #4f4e4a; --line: #ddd6ca;
-        --accent: #1e5847; --accent-bg: #e6f0ec; --card: #ffffff;
+        --bg: #f6f1e6; --fg: #1f1d19; --muted: #4a453b; --line: #d6cab3;
+        --accent: #24493d; --accent-bg: #e7ece4; --card: #fffdf8;
         --display: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-        --brick: #9b4a34; --ridge: #a9bcb1;
+        --kicker: var(--display);
+        --brick: #9a4b2c; --ridge: #1c4a50;
+        --sand: #ece2cd; --water: #1c4a50; --rust: #9a4b2c;
         color-scheme: light dark;
       }
       @media (prefers-color-scheme: dark) {
-        :root { --bg: #161714; --fg: #ecebe6; --muted: #b7b5ae; --line: #363830; --accent: #8fd1b5; --accent-bg: #1f2c26; --card: #1d1f1b; --brick: #d98c72; --ridge: #3f5449; }
+        :root { --bg: #171613; --fg: #eeeae0; --muted: #bcb5a6; --line: #3a352c; --accent: #93cdb6; --accent-bg: #1f2a24; --card: #1f1d19; --brick: #d98c6c; --ridge: #8ccbd1; --sand: #2a261e; --water: #8ccbd1; --rust: #d98c6c; }
       }
       * { box-sizing: border-box; }
       [hidden] { display: none !important; }
@@ -386,15 +412,21 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
       /* overflow-wrap: the long fix@ email address wraps at 320px */
       footer.site { border-top: 2px solid var(--brick); font-size: 0.9rem; color: var(--muted); padding-block: 20px 40px; overflow-wrap: anywhere; }
     </style>
+    {/* The Press look (#396): src/styles/press.css, after the base styles so it wins where they overlap. */}
+    <style set:html={pressCss}></style>
+    {/* Visit counter (#1352, David chose GoatCounter on 2026-11-01): free, no cookies, stores no IP addresses or personal data. The widgets in embed/ use Embed.astro and stay script-free. */}
+    {/* The design lab previews (#396) ended when Press became the site's look. This clears a preview choice a browser may still hold. Remove after December 2026. */}
+    <script is:inline>try{localStorage.removeItem('em-look')}catch(e){}</script>
+    <script is:inline data-goatcounter="https://everythingmorgantown.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to main content</a>
-    {crisis && <CrisisStrip />}
+    {crisis && <CrisisStrip lang={lang} />}
     <header class="site" lang={chromeLang}>
       <div class="wrap">
         <a class="brand" href={`${base}/`}><Fragment set:html={brandMark} /><span>Everything Morgantown</span></a>
         <LanguageSwitcher lang={lang} alternates={alternates} label={langLabel} />
-        <p class="dateline">Morgantown <span aria-hidden="true">·</span> <span class="dl-long" data-fmt="long">{longToday}</span><span class="dl-short" data-fmt="short">{shortToday}</span>{forecast && <span id="dl-wx" data-day={forecast.day}> <span aria-hidden="true">·</span> <a href={FORECAST_PAGE}><Icon name={forecast.icon} />{forecast.text}<span class="sr-only"> (National Weather Service forecast)</span></a></span>}</p>
+        <p class="dateline">Morgantown <span aria-hidden="true">·</span> <span class="dl-long" data-fmt="long">{longToday}</span><span class="dl-short" data-fmt="short">{shortToday}</span>{forecast && <span id="dl-wx" data-day={forecast.day}> <span aria-hidden="true">·</span> <a href={FORECAST_PAGE}><Icon name={forecast.icon} /><span class="wx-temp">{wxTemp}</span>{wxSky && <span class="wx-sky">{wxSky}</span>}<span class="sr-only"> (National Weather Service forecast)</span></a></span>}</p>
         <nav class="main" aria-label="Main">
           {tabs.map((t) => <a class="tab" href={`${base}${t.href}`} aria-current={t.current}><Icon name={t.icon} /><span>{t.label}</span></a>)}
           {wide.map((w) => <a class="wide" href={`${base}${w.href}`} aria-current={w.current}>{w.label}</a>)}
@@ -411,7 +443,7 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
       <slot />
       {searchable && <AlsoCalled route={route} />}
       {crisis && <LeaveNote />}
-      {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} />}
+      {shareable && <ShareThis label={tags.label} summary={tags.summary} route={route} image={ownCard ? cardPath(route) : PLAIN_CARD} />}
       <AlsoCheck route={route} />
     </main>
     <footer class="site" lang={chromeLang}>

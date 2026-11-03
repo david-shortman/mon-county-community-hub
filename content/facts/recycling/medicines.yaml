@@ -1,0 +1,9 @@
+slug: medicines
+text: "**Old or unused medicines:** the FDA says the best choice is a drug take-back site or a prepaid mail-back envelope. Take-back sites are often at pharmacies, hospitals or police stations. Find one with the DEA's [year-round drop-off search](https://apps.deadiversion.usdoj.gov/pubdispsearch/spring/main?execution=e1s1), or ask your pharmacist about mail-back envelopes. Scratch your name and other personal details off the label first. No take-back site near you? Check the FDA's [flush list](https://www.fda.gov/drugs/disposal-unused-medicines-what-you-should-know/drug-disposal-fdas-flush-list-certain-medicines). If your medicine is not on it, mix it with dirt, cat litter or used coffee grounds, seal it in a plastic bag and put it in the trash. Do not crush pills."
+quote: 'Main page: "The best way to dispose of most types* of unused or expired medicines (both prescription and over-the-counter) is to immediately use a take-back option" ... "If your medicine is not on the flush list, you should follow these instructions to discard the medicine in your trash at home." Video transcript on the same page: "mix them with an unappealing substance such as dirt, cat litter, or used coffee grounds. Don''t crush pills. Then place the mixture in a sealed plastic bag before throwing it away. Scratch out personal information from the prescription label". Take-back page: "authorized drug take-back locations may be retail, hospital, or clinic pharmacies, and law enforcement facilities" ... "Year-Round Drop-Off Locations search" ... "check with your pharmacist to see if they offer drug mail-back envelopes."'
+sources:
+  - url: https://www.fda.gov/drugs/safe-disposal-medicines/disposal-unused-medicines-what-you-should-know
+    checked: 2026-11-02
+  - url: https://www.fda.gov/drugs/disposal-unused-medicines-what-you-should-know/drug-disposal-drug-take-back-options
+    checked: 2026-11-02
+recheck_days: 180

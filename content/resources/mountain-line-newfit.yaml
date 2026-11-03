@@ -3,7 +3,14 @@ slug: mountain-line-newfit
 org: mountain-line-transit-authority
 topics: [health]
 who_it_is_for: Riders going to medical appointments in Monongalia County who "have no other transportation options." Mountain Line says riders with Medicare, or who can pay out of pocket, may benefit most. People covered by Medicaid are sent to other resources. If you live on a bus route, Mountain Line asks you to use the bus first.
-what_to_do: Fill out the sign-up survey on the NewFIT page, at the Westover Terminal, or by calling 304-296-3869. Once you are approved, request your appointment with your return trip details, then pay before the trip is scheduled. Requests are due at 5 p.m. on the Wednesday of the week before your appointment. NewFIT runs Monday to Friday, except New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day and Christmas Day. Be ready 5 minutes before your pickup time. To cancel, call 24 hours ahead. There are no refunds for cancellations or no-shows, and no-shows can end your service.
+what_to_do: "Fill out the sign-up survey on the NewFIT page, at the Westover Terminal, or by calling 304-296-3869. Requests are due at 5 p.m. on the Wednesday of the week before your appointment."
+steps:
+  - "Once you are approved, request your appointment with your return trip details."
+  - "Pay before the trip is scheduled."
+  - "Be ready 5 minutes before your pickup time."
+notes:
+  - "NewFIT runs Monday to Friday, except New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day and Christmas Day."
+  - "To cancel, call 24 hours ahead. There are no refunds for cancellations or no-shows, and no-shows can end your service."
 what_happens: Mountain Line may group your trip with other riders, and part of your trip may be on a regular bus route. Drivers do not enter homes or lift riders, so riders travel with a care provider or move on their own.
 contact:
   phone: "304-296-3869"

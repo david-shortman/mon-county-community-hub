@@ -46,6 +46,9 @@ rules:
   - host: cdn.sanity.io
     group: manual
     why: Its robots.txt disallows PDFs (Disallow /*.pdf, read 2026-11-01). The health department's fee and permit PDFs live here. A person re-checks them on the person sources checklist.
+  - host: ecfr.gov
+    group: manual
+    why: Its robots.txt allows these pages, but it sends automated reads to a block page on unblock.federalregister.gov (seen 2026-11-01 and 2026-11-02, #506), so the Source check listed about 50 false "moved" links. A person re-checks the federal rules on the person sources checklist.
   - prefix: https://github.com/david-shortman/mon-county-community-hub
     group: reference
     why: Our own repo and report forms.
@@ -74,4 +77,14 @@ rules:
 # Redirects to another domain count as "moved" (a domain can lapse and be
 # bought by someone else). These pairs are the same owner, so a redirect between
 # them is fine. Add a pair only after a person has confirmed it.
-same_owner: []
+same_owner:
+  # The county site's own server sends its document links to its web vendor,
+  # Revize, under /revize/monongoliacountywv/ (seen 2026-11-01, #506).
+  - [monongaliacounty.gov, revize.com]
+  # Monongalia County Schools' site runs on Apptegy ("Powered By Apptegy" on
+  # boe.mono.k12.wv.us). Its aptg.co short links go to Apptegy's file host
+  # (seen 2026-11-01, #506).
+  - [aptg.co, thrillshare.com]
+  # The state's landslide map address on mapwv.gov goes to an ArcGIS
+  # Experience app (seen 2026-11-01, #506).
+  - [mapwv.gov, arcgis.com]

@@ -1,0 +1,8 @@
+slug: wvu-alert
+text: "WVU sends emergency updates for the Morgantown campus by text and email through its safety notification system, and by push notice in the LiveSafe app. Its emergency site links to the WVU Alert sign-up. Check there for who can sign up."
+quote: >-
+  "This site is intended to inform the WVU community about emergencies occurring on the Morgantown Campus. In the event of an emergency, updated information will be posted on this web page as a supplement to text and email messages sent through the WVU Safety Notification System and push notifications sent through the LiveSafe app." The page links "Sign up for WVU Alerts".
+sources:
+  - url: https://emergency.wvu.edu/
+    checked: 2026-11-02
+recheck_days: 180

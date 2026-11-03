@@ -2,13 +2,22 @@ title: Get a birth, death or marriage certificate from the Monongalia County Cle
 slug: mon-county-clerk-vital-certificates
 org: monongalia-county-clerk
 topics: [records, family]
-who_it_is_for: "People who need a certified copy of a birth, death or marriage recorded in Monongalia County. The county keeps birth and death records from 1853 and marriage records from 1795. By the county's forms: a birth certificate is for the person, an immediate family member or a legal representative. A death certificate is for an immediate family member, the executor, or the estate's attorney. A marriage certificate is for the couple, their children or grandchildren, or a legal representative."
+who_it_is_for: "People who need a certified copy of a birth, death or marriage recorded in Monongalia County. The county keeps birth and death records from 1853 and marriage records from 1795. The county's forms say who can ask for each."
 hours: Monday to Friday, 8:30 a.m. to 4:30 p.m.
 opening_hours:
   - days: [mon, tue, wed, thu, fri]
     opens: "08:30"
     closes: "16:30"
-what_to_do: The County Clerk's page gives mail-in applications for each certificate. Print the form, fill it out (you must give a reason for the request), sign it by hand, and include a copy of your ID. The office is in Room 123 of the Courthouse, 243 High St. Call to ask about getting one in person.
+what_to_do: "The County Clerk's page gives mail-in applications for each certificate. The office is in Room 123 of the Courthouse, 243 High St. Call to ask about getting one in person."
+steps:
+  - "Print the form."
+  - "Fill it out. You must give a reason for the request."
+  - "Sign it by hand."
+  - "Include a copy of your ID."
+options:
+  - "Birth certificate: for the person, an immediate family member or a legal representative."
+  - "Death certificate: for an immediate family member, the executor, or the estate's attorney."
+  - "Marriage certificate: for the couple, their children or grandchildren, or a legal representative."
 contact:
   phone: "304-291-7230"
   url: https://www.monongaliacountyclerk.com/index.php/birth-certificates

@@ -2,6 +2,8 @@
 
 This guide says how the things we build can feel like they come from Morgantown and Monongalia County, without getting harder to read or use. It is the source of truth for colors, the one motif, and local wording. Every site, app, and tool we build should follow it.
 
+**Version 3 (November 2, 2026): the Press look.** David picked "Press" from three preview looks in the identity wave (#396): a small local paper, set by hand. It changed the palette (sandstone and hemlock inks), added a serif for headings on everyday pages, ruled lines instead of soft boxes, quilt marks, and one spacing scale. The decision is in [`docs/decisions/2026-11-02-1545-press-look.md`](../decisions/2026-11-02-1545-press-look.md), and the full notes are in [`docs/design/looks/press.md`](looks/press.md). The sections changed are "Palette," "Type" and "No drawn motif."
+
 **Version 2 (October 29, 2026).** David chose a bolder, more distinct direction after the [Hub Identity Workshop](https://claude.ai/artifact/MR7VsryBth6f47tK2gnKmN) brainstorm. The decision is in [`docs/decisions/2026-10-29-1306-identity-v2.md`](../decisions/2026-10-29-1306-identity-v2.md). The new sections are "Personality," "Design principles," "Voice: this, not that," and "Three directions." The type and contrast rules changed.
 
 **Rule one: readability first.** Local feel is seasoning, not the meal. Every change still has to pass all six [design rubrics](../rubrics/README.md). If a local touch ever gets in the way of reading or acting, the touch goes.
@@ -116,15 +118,18 @@ All colors are CSS variables in [`site/src/layouts/Base.astro`](../../site/src/l
 
 | Token | Role | Light | Dark |
 |---|---|---|---|
-| `--bg` | Page background (sandstone paper) | `#f9f7f2` | `#161714` |
-| `--card` | Card background | `#ffffff` | `#1d1f1b` |
-| `--fg` | Main text | `#1d1d1b` | `#ecebe6` |
-| `--muted` | Secondary text, fine print | `#4f4e4a` | `#b7b5ae` |
-| `--line` | Card and section borders (mortar) | `#ddd6ca` | `#363830` |
-| `--accent` | Links, dates, focus ring (hill green) | `#1e5847` | `#8fd1b5` |
-| `--accent-bg` | Callout and tag background | `#e6f0ec` | `#1f2c26` |
-| `--brick` | Brick edge on callouts, footer line | `#9b4a34` | `#d98c72` |
-| `--ridge` | Soft rail beside step lists | `#a9bcb1` | `#3f5449` |
+| `--bg` | Page background (sandstone paper) | `#f6f1e6` | `#171613` |
+| `--card` | Card background | `#fffdf8` | `#1f1d19` |
+| `--fg` | Main text, rules | `#1f1d19` | `#eeeae0` |
+| `--muted` | Secondary text, fine print | `#4a453b` | `#bcb5a6` |
+| `--line` | Hairlines (decorative) | `#d6cab3` | `#3a352c` |
+| `--accent` | Hemlock: links, dates, buttons, focus. The one "act" ink | `#24493d` | `#93cdb6` |
+| `--accent-bg` | Pale hemlock: hover, crisis line | `#e7ece4` | `#1f2a24` |
+| `--sand` | Sandstone: Help now box, notes, season cards | `#ece2cd` | `#2a261e` |
+| `--water` | Cheat water: step rail and step numbers | `#1c4a50` | `#8ccbd1` |
+| `--rust` | Quilt marks only, never text | `#9a4b2c` | `#d98c6c` |
+| `--brick` | Same as rust, kept for older rules | `#9a4b2c` | `#d98c6c` |
+| `--ridge` | Same as water, kept for older rules | `#1c4a50` | `#8ccbd1` |
 
 **Color roles stay single.** Green means "you can act on this" (links, dates, focus). Brick is decoration only and never carries meaning, so it never conflicts with status colors later. Brick does pass 4.5:1 on the page background in both modes, so it could hold text if we ever need it, but don't use it for links.
 
@@ -136,35 +141,45 @@ Run `npm run check-contrast` in `site/`. It reads the tokens straight from `Base
 
 | Pair | Kind | Light | Dark |
 |---|---|---|---|
-| `--fg` on `--bg` | text | 15.77:1 pass | 15.08:1 pass |
-| `--fg` on `--card` | text | 16.88:1 pass | 13.92:1 pass |
-| `--fg` on `--accent-bg` | text | 14.50:1 pass | 12.16:1 pass |
-| `--muted` on `--bg` | text | 7.78:1 pass | 8.77:1 pass |
-| `--muted` on `--card` | text | 8.33:1 pass | 8.10:1 pass |
-| `--muted` on `--accent-bg` | text | 7.16:1 pass | 7.08:1 pass |
-| `--accent` on `--bg` | text | 7.72:1 pass | 10.25:1 pass |
-| `--accent` on `--card` | text | 8.26:1 pass | 9.46:1 pass |
-| `--accent` on `--accent-bg` | text | 7.10:1 pass | 8.26:1 pass |
-| `--card` on `--accent` | text | 8.26:1 pass | 9.46:1 pass |
-| `--brick` on `--bg` | non-text | 5.73:1 pass | 6.81:1 pass |
-| `--brick` on `--accent-bg` | non-text | 5.27:1 pass | 5.49:1 pass |
-| `--ridge` on `--bg` | decorative | 1.87:1 | 2.21:1 |
-| `--line` on `--bg` | decorative | 1.35:1 | 1.51:1 |
-| `--line` on `--card` | decorative | 1.44:1 | 1.40:1 |
+| `--fg` on `--bg` | text | 14.94:1 pass | 15.06:1 pass |
+| `--fg` on `--card` | text | 16.55:1 pass | 14.01:1 pass |
+| `--fg` on `--accent-bg` | text | 14.03:1 pass | 12.35:1 pass |
+| `--muted` on `--bg` | text | 8.45:1 pass | 8.87:1 pass |
+| `--muted` on `--card` | text | 9.37:1 pass | 8.25:1 pass |
+| `--muted` on `--accent-bg` | text | 7.94:1 pass | 7.28:1 pass |
+| `--accent` on `--bg` | text | 8.90:1 pass | 10.04:1 pass |
+| `--accent` on `--card` | text | 9.86:1 pass | 9.33:1 pass |
+| `--accent` on `--accent-bg` | text | 8.36:1 pass | 8.23:1 pass |
+| `--card` on `--accent` | text | 9.86:1 pass | 9.33:1 pass |
+| `--fg` on `--sand` | text | 13.08:1 pass | 12.54:1 pass |
+| `--muted` on `--sand` | text | 7.40:1 pass | 7.39:1 pass |
+| `--accent` on `--sand` | text | 7.79:1 pass | 8.35:1 pass |
+| `--card` on `--water` | text | 9.63:1 pass | 9.28:1 pass |
+| `--rust` on `--bg` | non-text | 5.46:1 pass | 6.82:1 pass |
+| `--rust` on `--card` | non-text | 6.05:1 pass | 6.34:1 pass |
+| `--brick` on `--bg` | non-text | 5.46:1 pass | 6.82:1 pass |
+| `--brick` on `--accent-bg` | non-text | 5.13:1 pass | 5.60:1 pass |
+| `--ridge` on `--bg` | decorative | 8.69:1 | 9.98:1 |
+| `--line` on `--bg` | decorative | 1.44:1 | 1.49:1 |
+| `--line` on `--card` | decorative | 1.59:1 | 1.38:1 |
 
 ## Type
 
-- **Headings:** Atkinson Hyperlegible Next, weight 800, for `h1` to `h3` and the site name. It was made by the Braille Institute so letters that look alike (l, I, 1, O, 0) are easy to tell apart. It is free under the SIL Open Font License ([`site/public/fonts/OFL.txt`](../../site/public/fonts/OFL.txt)).
+- **Headings on everyday pages (Press, #396):** Newsreader, weight 600 (Production Type, SIL Open Font License, [`site/public/fonts/OFL-Newsreader.txt`](../../site/public/fonts/OFL-Newsreader.txt)), one static cut at optical size 48, Latin only, 14.3 KB, `font-display: optional`. It sets `h1` to `h3`, card titles, door names and big dates.
+- **Headings on urgent pages, and labels everywhere:** Atkinson Hyperlegible Next, weight 800. Urgent pages are the home page, Help now, food help, utility bills, after a storm and every page with the crisis strip (the list is in [`site/src/lib/urgent-pages.mjs`](../../site/src/lib/urgent-pages.mjs)). They never load the serif, so they stay under the 50 KB budget. Atkinson also sets kickers, the dateline and buttons.
+- **About Atkinson:** It was made by the Braille Institute so letters that look alike (l, I, 1, O, 0) are easy to tell apart. It is free under the SIL Open Font License ([`site/public/fonts/OFL.txt`](../../site/public/fonts/OFL.txt)).
 - **How it loads:** self-hosted, never from a font service, so no third party sees our visitors. One weight, Latin characters only, about 11 KB. It uses `font-display: optional`: if it is not ready in a moment, the page uses the system font for that visit and never waits or jumps. Next visit it comes from the cache.
 - **Body text:** the system font stack. Research finds no single font is fastest for everyone, and serif versus sans does not change legibility, so body text stays on what each phone does best, at no cost.
 - **Site name (the logo):** Fraunces, soft (weight 800, softness 100, no wonky letters, optical size 48), for the name in the header and the link preview only. See "The logo" below.
+- **Sizes:** five. 15.2px for sources and fine print, 18px body, about 21px for h3 and the home intro, 28px for h2, 34 to 48px for h1.
+- **Spacing:** one scale of 4, 8, 12, 16, 24, 32, 48 and 64px (`--s1` to `--s8` in [`site/src/styles/press.css`](../../site/src/styles/press.css)). The same relationship always gets the same gap, and there is more room above a heading than below it.
 - **Don't** add more weights or families without updating this section and checking page weight. Don't use Public Sans: it reads as a federal government site.
 
 ## The icon
 
 David picked the icon on October 30, 2026 (#390, #389): Westover and Morgantown on two sage hills facing each other across the Monongahela River, joined by an open arch bridge, with ridges behind. Two towns, one river, joined: it says "connect, don't compete" without naming or favoring any institution.
 
-- **Files:** [`site/public/favicon.svg`](../../site/public/favicon.svg) (rounded corners) and [`site/public/icons/icon-full.svg`](../../site/public/icons/icon-full.svg) (square, for home screens that round icons themselves). The PNG icons are made from these. The link preview image, [`site/public/share.png`](../../site/public/share.png), shows the icon beside the site name; redraw it with `node scripts/make-share-image.mjs` in `site/`.
+- **Files:** [`site/public/favicon.svg`](../../site/public/favicon.svg) (rounded corners) and [`site/public/icons/icon-full.svg`](../../site/public/icons/icon-full.svg) (square, for home screens that round icons themselves). The PNG icons are made from these. The plain link preview image, [`site/public/share.png`](../../site/public/share.png), shows the icon beside the site name; redraw it with `node scripts/make-share-image.mjs` in `site/`. Guides get their own preview picture, see "Share cards" below.
 - **Colors:** existing tokens only: hill green (`#1f5c4a`, `#2f7a63`), `--accent-bg` for the pale houses and bridge, sage for the hills, and the dark mode accent for the river.
 - **Rules David set during review:**
   - Pale houses on sage hills, so they do not blend.
@@ -178,16 +193,29 @@ David picked the icon on October 30, 2026 (#390, #389): Westover and Morgantown 
 
 David picked it on October 30, 2026 ([decision](../decisions/2026-10-30-1500-header-logo.md), #421): the icon as a small rounded tile, then the name "Everything Morgantown" on one line in Fraunces, soft. He chose the tile over a one-color line drawing and a name-only version, and Fraunces over Nunito and Bitter, because it adds warmth and a nod to the old downtown while staying bold and easy to read.
 
-- **Where:** the site header (`site/src/layouts/Base.astro`) and the link preview image (`site/public/share.png`, made by `scripts/make-share-image.mjs`). Headings and everything else keep Atkinson Hyperlegible Next.
+- **Where:** the site header (`site/src/layouts/Base.astro`), the plain link preview image (`site/public/share.png`, made by `scripts/make-share-image.mjs`) and the top of every share card (see below). Headings and everything else keep Atkinson Hyperlegible Next.
 - **Tile:** the same drawing as `public/favicon.svg`, read in at build time, so the two never drift. 40px on wide screens, 34px on phones, with a thin `--line` ring in dark mode so the green edge does not sink into the page.
 - **Name:** real text, so screen readers read it and it grows with the reader's text size. The tile is hidden from screen readers. Text color is `--fg`, the same 7:1 pair as body text.
 - **How the font loads:** `site/src/fonts/fraunces-name-800.woff2` holds only the letters in "Everything Morgantown" (E, M, a, e, g, h, i, n, o, r, t, v, w, y and a space), about 2.5 KB. It is built into each page's CSS, so the name never waits for a download and never changes font as it loads (`font-display: block` is safe here because there is nothing to wait for). It adds about 3.5 KB gzipped to each page, tile included. License: SIL Open Font License, in `site/src/fonts/OFL-Fraunces.txt`.
 - **If the name changes:** cut a new file, or new letters will show in Georgia. Made with fontTools from Fraunces in the Google Fonts repo: instance `wght=800, SOFT=100, WONK=0, opsz=48`, then `pyftsubset` with `--text="Everything Morgantown" --flavor=woff2 --layout-features=kern,liga --no-hinting`.
 - **Don't** use Fraunces for headings or body text, stretch or recolor the tile, or put the name in hill green (green means "you can act on this").
 
-## No drawn motif
+## Share cards
 
-The site has no drawn motif right now. On October 30, 2026 we tried three (a wavy ridge of hills under the menu, a named landmark drawing for each door, and a tiny skyline of local shapes on the menu line). David found each one distracting, so all three were removed ([decision](../decisions/2026-10-30-1000-no-drawn-motif.md)). The menu border is a plain 1px `--line` rule, under the header on wide screens and on top of the tab bar on phones.
+David asked on November 2, 2026 for link previews that change from page to page: the image at least by category, the logo kept, and above all the title and text varied ([decision](../decisions/2026-11-02-1500-share-cards.md)). So every guide has its own 1200 by 630 preview picture, at `/share/<page>.png`, which is also what its Share this box downloads.
+
+- **What it shows:** the logo (icon tile and name in Fraunces) at the top; the page's door (Get care, Living here and so on) with that door's menu icon; the page's label in Atkinson Hyperlegible Next 800; its one-line summary; and its short address. Hill green ground, `--bg` white for the name and title, `--accent-bg` for the summary, the dark mode accent for the door and address. A door's own page leaves out the door line, since its title is the door's name.
+- **Made at build time** by [`site/src/lib/share-cards.mjs`](../../site/src/lib/share-cards.mjs) and [`site/src/pages/share/[...card].js`](../../site/src/pages/share/[...card].js), from the same page tags as door lists and breadcrumbs, so a new page gets its card with no extra step. Free: satori (MPL-2.0) lays it out and resvg (`@resvg/resvg-js`, MPL-2.0) draws the PNG, inside the build. About 50 to 70 KB each. A preview picture is never loaded by the page itself, so it does not count toward page weight.
+- **Fonts:** TrueType copies in `site/src/fonts/` (the drawing tools cannot read woff2): `atkinson-hyperlegible-next-800.ttf` (the same Latin cut as the web font), `atkinson-hyperlegible-next-500.ttf` (weight 500 for the summary, same letters, cut from the Google Fonts variable font with fontTools) and `fraunces-name-800.ttf` (the logo letters only). SIL Open Font License, see `site/public/fonts/OFL.txt` and `site/src/fonts/OFL-Fraunces.txt`. If a label uses a letter outside Latin, add it to the cut.
+- **Which pages:** every tagged page with a label. Crisis pages (the ones with the crisis strip) and pages whose address or label is about domestic or sexual violence keep the plain `share.png` and get no card file at all, so a link to one never shows its name in big type in a group chat. Pages with no tags (home, Topics, search, and pages built from lists, like each town or group) also keep the plain picture. Guides in the Help now, Get through this month and About doors, and on housing, money or food, do get cards even though their Share this box waits for David: he chose that on November 2, 2026, since a pasted link already shows the same title and summary as text. A new safety page (stalking, for example) gets the plain picture by using the `crisis` layout option, not by its wording.
+- **Checks:** `npm run check-pages` fails if a page's `og:image` is not a file in `dist/`, has no alt text, or if a crisis page has a card file. `test/share-cards.test.mjs` checks the paths, the quiet and crisis pages and the picture size.
+- **Don't** add photos, drawn motifs or a different color per door (see "Quilt marks"); the door's name and icon are what change.
+
+## Quilt marks (was: No drawn motif)
+
+**Since November 2, 2026 (Press):** the site uses quilt geometry, drawn plainly, in three places only: a small half-square triangle in the top left corner of each card and home door (rust, hemlock or Cheat water, pure CSS), a Flying Geese triangle before each choice on door pages, and one Log Cabin block above the title of the 404 page. They are never called barn quilts, never round, and never on the crisis strip, Quick exit or tab bar. David saw them in the Press preview and picked it (#396).
+
+**Before that:** the site had no drawn motif. On October 30, 2026 we tried three (a wavy ridge of hills under the menu, a named landmark drawing for each door, and a tiny skyline of local shapes on the menu line). David found each one distracting, so all three were removed ([decision](../decisions/2026-10-30-1000-no-drawn-motif.md)). The menu border is a plain 1px `--line` rule, under the header on wide screens and on top of the tab bar on phones.
 
 Before adding any drawn shape again, show David screenshots first and run the "Is it too much?" check below.
 
@@ -208,6 +236,7 @@ Use the names residents use, when it makes directions clearer. Always give the f
 - **Neighborhoods and towns:** Sunnyside, Wiles Hill, South Park, Evansdale, Suncrest, the Wharf District, downtown. Westover, Star City, Granville, Cheat Lake, and Blacksville are their own places; don't fold them into "Morgantown."
 - **Landmarks for directions:** "the rail-trail," "Hazel Ruby McQuain Riverfront Park," "the Seneca Center on Beechurst Avenue," "the PRT." Landmarks help people find a place, but always give a street address too.
 - **Deadlines (#51):** say plainly that the last day counts, with the weekday: "The last day is Tuesday, December 15." Not "by December 15" or "on or before," which people read differently. Give a time only when the source sets one ("until 7 p.m. on Saturday, November 7"). Times read "8 a.m.", "8:30 a.m.", "noon".
+- **Time of day (#1378):** no "tonight", "this morning" or "right now" unless the time is the point (a place to stay tonight, a crisis right now, a calendar date). A reader may arrive at any hour. For a source, say "when we checked", not "today". Details and the build check: "Rules for every entry" in `content/README.md`.
 - **Don't** use slang, dialect spelling, or sports chants. Plain, warm, and neutral.
 
 ## Mobile first

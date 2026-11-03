@@ -1,0 +1,9 @@
+of: resources/monchd-language-help
+lang: es
+fields:
+  title: Intérpretes en el Monongalia County Health Department (el Departamento de Salud del condado)
+english_hash: e7ae59996e97
+method: machine-plus-review
+translated: 2026-11-01
+reviewed: false
+notes: Claude draft (#1101). A fluent Spanish reader checks every line against the English before this goes live. See docs/reviews/2026-11-01-spanish-pilot.md.
