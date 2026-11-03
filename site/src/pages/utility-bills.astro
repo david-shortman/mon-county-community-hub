@@ -6,6 +6,7 @@ import Milepost from '../components/Milepost.astro';
 import Icon from '../components/Icon.astro';
 import Actions from '../components/Actions.astro';
 import PassItOn from '../components/PassItOn.astro';
+import CallScript from '../components/CallScript.astro';
 import { resource, telHref, oldestChecked, loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "this-month", topic: "money", label: "Help paying a utility bill", summary: "Heat, water or electric, before or after a shutoff" };
@@ -54,6 +55,7 @@ const charitySources = [
     <a class="btn" href={telHref(monPower.contact.phone)}><Icon name="phone" /><span>Call Mon Power</span></a>
     <a class="btn" href={telHref(mub.contact.phone)}><Icon name="phone" /><span>Call MUB (water)</span></a>
   </div>
+  <CallScript id="utility" service="calling your utility about a bill" />
   </Milepost>
 
   <Milepost n={2} title="Apply for help paying" id="programs">
