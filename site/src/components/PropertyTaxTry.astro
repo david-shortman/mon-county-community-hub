@@ -1,0 +1,151 @@
+---
+// See how your bill is figured (#1446), part of the explainers in #1440.
+// Rules: docs/design/motion.md. The Assessor's formula, worked through once
+// as a plain example (the still version), then a try-it tool: a market value,
+// where the home is, and the homestead box. Four bars show the money moving
+// through the formula. Every rate comes from
+// content/facts/property-tax/levy-rates-class-2.yaml; the math is in
+// src/lib/property-tax-estimate.mjs, shared with the browser, so the example
+// and the tool always agree.
+// - No script: the worked example only. The tool stays hidden.
+// - Motion off or reduced motion: the bars change size without animating.
+// - The bars are aria-hidden. A polite status line reads the result in words.
+// - Stores nothing; the value stays on the phone.
+import Fact from './Fact.astro';
+import Icon from './Icon.astro';
+import MotionSwitch from './MotionSwitch.astro';
+import { loadFacts } from '../lib/facts.mjs';
+import { estimate, sayMath, money, HOMESTEAD } from '../lib/property-tax-estimate.mjs';
+const levy = loadFacts('property-tax')['levy-rates-class-2'];
+const rates = levy.rates.map((r) => ({ id: r.id, label: r.label, total: r.total }));
+const towns = levy.rates.find((r) => r.id === 'towns');
+const SAMPLE = 150000;
+const ex = estimate(SAMPLE, towns.total, false);
+const exH = estimate(SAMPLE, towns.total, true);
+const ROWS = [['market', 'Market value'], ['assessed', 'Assessed value, 60%'], ['taxable', 'After homestead'], ['tax', 'Tax for one year']];
+---
+<div class="ptx" id="ptx" data-rates={JSON.stringify(rates)}>
+  <h3 id="ptx-h">See how a bill is figured</h3>
+  <Fact f={levy} about="the levy rates" />
+  <p><strong>An example, not a real bill:</strong> a home with a market value of {money(SAMPLE)} inside Morgantown. {sayMath(ex, towns.total)}</p>
+  <p>With the homestead exemption: {sayMath(exH, towns.total)}</p>
+
+  <div class="ptx-tool" hidden>
+    <MotionSwitch />
+    <p><strong>Try your own numbers.</strong> This is an estimate. Your real bill comes from the Sheriff's Tax Office. Nothing you type is saved or sent.</p>
+    <p class="ptx-field">
+      <label for="ptx-value">Market value of your home, in dollars</label>
+      <input id="ptx-value" type="text" inputmode="numeric" autocomplete="off" value={String(SAMPLE)} />
+      <input id="ptx-range" type="range" min="10000" max="1000000" step="5000" value={String(SAMPLE)} aria-label="Market value slider" />
+    </p>
+    <fieldset class="ptx-field">
+      <legend>Where is the home?</legend>
+      {rates.map((r, i) => (
+        <label class="ptx-opt"><input type="radio" name="ptx-where" value={r.id} checked={i === 0} /> {r.label}</label>
+      ))}
+    </fieldset>
+    <p class="ptx-field"><label class="ptx-opt"><input id="ptx-home" type="checkbox" /> I have the homestead exemption (takes {money(HOMESTEAD)} off the assessed value, not off the bill)</label></p>
+    <div class="ptx-bars" aria-hidden="true">
+      {ROWS.map(([k, name]) => (
+        <div class={`ptx-row r-${k}`}>
+          <span class="ptx-name">{name}</span>
+          <span class="ptx-track"><span class="ptx-fill"></span>{k === 'taxable' && <span class="ptx-off"></span>}</span>
+          <span class="ptx-amt" data-amt={k}></span>
+        </div>
+      ))}
+    </div>
+    <p class="ptx-math" id="ptx-math"></p>
+    <p class="sr-only" role="status" id="ptx-status"></p>
+  </div>
+  <p>Not sure which area you are in? Your tax statement and the Sheriff's lookup show your district.</p>
+  <div class="actions">
+    <a class="btn" href="https://monongalia.softwaresystems.com/index.html"><Icon name="open" /><span>Look up your tax</span></a>
+  </div>
+
+</div>
+
+<script>
+  import { estimate, sayMath, money } from '../lib/property-tax-estimate.mjs';
+  import { bindMotionSwitch } from '../lib/motion-client.mjs';
+  const root = document.getElementById('ptx');
+  const tool = root?.querySelector<HTMLElement>('.ptx-tool');
+  if (root && tool) {
+    const rates: { id: string; total: number }[] = JSON.parse(root.dataset.rates ?? '[]');
+    const box = tool.querySelector<HTMLInputElement>('#ptx-value')!;
+    const range = tool.querySelector<HTMLInputElement>('#ptx-range')!;
+    const home = tool.querySelector<HTMLInputElement>('#ptx-home')!;
+    const math = tool.querySelector('#ptx-math')!;
+    const status = tool.querySelector('#ptx-status')!;
+    const bar = (k: string) => tool.querySelector<HTMLElement>(`.r-${k} .ptx-fill`)!;
+    const amt = (k: string) => tool.querySelector<HTMLElement>(`[data-amt="${k}"]`)!;
+    const off = tool.querySelector<HTMLElement>('.ptx-off')!;
+    let timer = 0;
+    const update = (say: boolean) => {
+      const value = Number(box.value.replace(/[^\d.]/g, '')) || 0;
+      const where = tool.querySelector<HTMLInputElement>('input[name="ptx-where"]:checked')?.value;
+      const rate = rates.find((r) => r.id === where)?.total ?? rates[0].total;
+      const e = estimate(value, rate, home.checked);
+      const of = (n: number) => (e.market ? n / e.market : 0);
+      bar('market').style.transform = `scaleX(${e.market ? 1 : 0})`;
+      bar('assessed').style.transform = `scaleX(${of(e.assessed)})`;
+      bar('taxable').style.transform = `scaleX(${of(e.taxable)})`;
+      // The homestead piece sits where it came off, and drops away when it is off.
+      off.style.left = `${of(e.taxable) * 100}%`;
+      off.style.width = `${of(home.checked ? e.off : 0) * 100}%`;
+      tool.classList.toggle('has-home', home.checked && e.off > 0);
+      bar('tax').style.transform = `scaleX(${Math.max(of(e.tax), e.tax ? 0.01 : 0)})`;
+      amt('market').textContent = money(e.market);
+      amt('assessed').textContent = money(e.assessed);
+      amt('taxable').textContent = home.checked ? money(e.taxable) : 'No exemption';
+      amt('tax').textContent = 'about ' + money(e.tax);
+      math.textContent = sayMath(e, rate);
+      clearTimeout(timer);
+      if (say) timer = window.setTimeout(() => {
+        status.textContent = `Estimate: about ${money(e.tax)} a year. This is not your bill. Your bill comes from the Sheriff's Tax Office.`;
+      }, 700);
+    };
+    box.addEventListener('input', () => {
+      const v = Number(box.value.replace(/[^\d.]/g, '')) || 0;
+      range.value = String(Math.min(Number(range.max), Math.max(Number(range.min), v)));
+      update(true);
+    });
+    range.addEventListener('input', () => { box.value = range.value; update(true); });
+    home.addEventListener('change', () => update(true));
+    tool.querySelectorAll('input[name="ptx-where"]').forEach((r) => r.addEventListener('change', () => update(true)));
+    tool.hidden = false;
+    bindMotionSwitch(tool);
+    update(false);
+  }
+</script>
+
+<style>
+  .ptx-tool { margin: var(--s5) 0; padding: var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); }
+  .ptx-field { margin: 0 0 var(--s4); }
+  .ptx-field label[for] { display: block; font-weight: 700; margin-bottom: var(--s2); }
+  #ptx-value { font: inherit; width: 100%; max-width: 14rem; min-height: 44px; padding: 0 var(--s3); border: 1px solid var(--fg); border-radius: 3px; background: var(--card); color: var(--fg); }
+  #ptx-range { display: block; width: 100%; min-height: 44px; margin-top: var(--s2); accent-color: var(--accent); }
+  fieldset.ptx-field { border: 0; padding: 0; }
+  fieldset.ptx-field legend { font-weight: 700; margin-bottom: var(--s2); padding: 0; }
+  .ptx-opt { display: flex; gap: var(--s2); align-items: flex-start; min-height: 44px; padding-block: var(--s2); }
+  .ptx-opt input { width: 22px; height: 22px; margin-top: 2px; flex: none; accent-color: var(--accent); }
+  .ptx-bars { display: grid; gap: var(--s3); margin: var(--s5) 0 var(--s4); }
+  .ptx-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s1) var(--s3); align-items: center; }
+  .ptx-name { font-weight: 700; font-size: 0.95rem; }
+  .ptx-amt { grid-row: 1; grid-column: 2; font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; }
+  .ptx-track { grid-column: 1 / -1; position: relative; height: 18px; background: var(--sand); overflow: hidden; }
+  .ptx-fill { position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(0); }
+  .r-tax .ptx-fill { background: var(--water); }
+  .ptx-off { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--muted) 0 3px, transparent 3px 7px); opacity: 0; }
+  .has-home .ptx-off { opacity: 1; animation: ptx-drop 1.2s ease 0.4s both; }
+  .ptx-math { font-weight: 700; }
+  @keyframes ptx-drop { from { transform: translateY(0); opacity: 1; } to { transform: translateY(18px); opacity: 0; } }
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html:not([data-motion-off])) .ptx-fill { transition: transform 0.6s ease; }
+    :global(html:not([data-motion-off])) .r-assessed .ptx-fill { transition-delay: 0.15s; }
+    :global(html:not([data-motion-off])) .r-taxable .ptx-fill { transition-delay: 0.3s; }
+    :global(html:not([data-motion-off])) .r-tax .ptx-fill { transition-delay: 0.45s; }
+  }
+  /* Motion off: the homestead piece simply is not shown. */
+  @media (prefers-reduced-motion: reduce) { .has-home .ptx-off { animation: none; opacity: 0; } }
+  :global(html[data-motion-off]) .has-home .ptx-off { animation: none; opacity: 0; }
+</style>

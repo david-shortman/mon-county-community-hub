@@ -1,0 +1,60 @@
+---
+// Where you are (#1452, part of #1440): a still line of the steps after you
+// apply, each with its time limit, above the page's own step list. No motion
+// on purpose: these are benefits pages with deadlines (docs/design/motion.md).
+// Each step links to its section on the page; when you follow a link, that
+// step is marked on the line (CSS :target, no script).
+//   steps: [{ id, title, when? }] in order. id is the section's id on the page,
+//     and each step needs its own id.
+//     `when` repeats a time limit the section itself states, word for word in
+//     meaning. Never draw a count that an open needs-verification issue
+//     questions; leave `when` as a plain step instead.
+//   label: what the line is, for screen readers.
+// Every deadline stays in the page text; the line only repeats it.
+const { steps = [], label = 'Steps after you apply' } = Astro.props;
+const ids = steps.map((s) => s.id);
+if (new Set(ids).size !== ids.length) throw new Error(`WhereYouAre: two steps share an id (${ids.join(', ')}) on ${Astro.url.pathname}`);
+const marks = steps
+  .map((s) => `html:has(#${s.id}:target) .way a[href="#${s.id}"]{background:var(--accent-bg);border-color:var(--accent)}html:has(#${s.id}:target) .way a[href="#${s.id}"] .way-n{background:var(--accent)}`)
+  .join('');
+---
+{steps.length > 0 && (
+  <nav class="way-wrap" aria-label={label}>
+    <p class="way-h">Where you are</p>
+    <ol class="way" style={`--n: ${steps.length}`}>
+      {steps.map((s, i) => (
+        <li>
+          <a href={`#${s.id}`}>
+            <span class="way-n" aria-hidden="true">{i + 1}</span>
+            <span class="way-t"><span class="sr-only">Step {i + 1}: </span>{s.title}</span>
+            {s.when && <span class="way-c">{s.when}</span>}
+          </a>
+        </li>
+      ))}
+    </ol>
+    <p class="way-note">Tap a step to go to it. The times come from the sections below, with their sources.</p>
+  </nav>
+)}
+<Fragment set:html={`<style>${marks}</style>`} />
+
+<style>
+  .way-wrap { margin: var(--s5) 0; }
+  .way-h { margin: 0 0 var(--s2); font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .way { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); position: relative; }
+  /* The line: a rail joining the step gates, down on phones and across on wide screens. */
+  .way::before { content: ""; position: absolute; left: 21px; top: var(--s4); bottom: var(--s4); width: 3px; background: var(--water); }
+  .way li { position: relative; }
+  .way a { display: grid; grid-template-columns: 42px minmax(0, 1fr); column-gap: var(--s3); align-items: start; min-height: 44px; padding: var(--s2) var(--s3) var(--s2) 0; color: var(--fg); text-decoration: none; border: 1px solid transparent; border-radius: 2px; }
+  .way a:hover .way-t { text-decoration: underline; }
+  .way-n { grid-row: span 2; justify-self: center; display: grid; place-items: center; width: 30px; height: 30px; background: var(--water); color: var(--card); font-weight: 800; border-radius: 2px; font-variant-numeric: tabular-nums; }
+  .way-t { font-weight: 700; color: var(--accent); }
+  .way-c { color: var(--fg); font-size: 1rem; }
+  .way-note { margin: var(--s2) 0 0; font-size: 0.95rem; color: var(--muted); }
+  @media (min-width: 44rem) {
+    .way { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--s3); }
+    .way::before { left: calc(100% / (2 * var(--n))); right: calc(100% / (2 * var(--n))); top: 22px; bottom: auto; width: auto; height: 3px; }
+    .way a { grid-template-columns: minmax(0, 1fr); row-gap: var(--s1); padding: var(--s2); text-align: center; justify-items: center; }
+    .way-n { grid-row: auto; }
+  }
+  @media print { .way::before { display: none; } }
+</style>

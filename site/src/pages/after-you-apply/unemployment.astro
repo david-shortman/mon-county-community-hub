@@ -8,6 +8,7 @@
 import Base from '../../layouts/Base.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import SourceLine from '../../components/SourceLine.astro';
+import WhereYouAre from '../../components/WhereYouAre.astro';
 import { resource } from '../../lib/content.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: 'this-month', topic: 'money', label: 'After you file for unemployment', summary: 'The deputy decision, the 8 day appeal deadline, hearings, and benefits while you appeal' };
@@ -25,6 +26,11 @@ const ok = (r) => r && !r.hidden;
   <p class="lede">Read your decision letter as soon as it comes. If you disagree, you have only 8 calendar days to appeal. Here is each step, in the words of West Virginia law.</p>
   <p>Unemployment in West Virginia is run by WorkForce West Virginia. {hasFile ? <>For how to file and how to file your weekly claims, see <a href={`${base}/unemployment/`}>File for unemployment</a>.</> : <>File and send weekly claims the way your claim papers from WorkForce West Virginia say.</>}</p>
   <p class="note">This page quotes the state law. WorkForce West Virginia and the appeal judges decide each claim. It is information, not legal advice.</p>
+  <WhereYouAre label="Steps after you apply for unemployment" steps={[
+    { id: 'deputy', title: 'A deputy decides', when: "Your employer has 4 calendar days to answer" },
+    { id: 'appeal', title: 'If you disagree', when: "Appeal within 8 calendar days of the notice" },
+    { id: 'board', title: 'Board of Review, then court', when: "8 calendar days to appeal to the Board; then 30 days to court, or 20 for a labor dispute" },
+  ]} />
 
   <h2 id="deputy">1. A deputy looks at your claim</h2>
   <ul>

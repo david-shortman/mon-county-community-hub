@@ -88,9 +88,10 @@ const lookup = [
   <h2 id="medicines">Medicines and needles</h2>
   <ul>
     <Fact tag="li" f={fact('medicines')} about="old medicines" />
+    <Fact tag="li" f={fact('medicine-drop-off-local')} about="local medicine drop-off" />
     <Fact tag="li" f={fact('needles')} about="used needles" />
   </ul>
-  <p>We could not find a current official local page that lists a year-round medicine drop box in Mon County, or local rules for full sharps containers. Ask the Solid Waste Authority at <a href={swaTel}>{swaPhone}</a>, or your pharmacist.</p>
+  <p>We could not find a current official local page with the hours of the police drop-off bins, or local rules for full sharps containers. Ask the Solid Waste Authority at <a href={swaTel}>{swaPhone}</a>, or your pharmacist.</p>
 
   <h2>Coming up</h2>
   {events.length ? events.map((e) => <EventCard e={e} />) : <p>No recycling events are on the calendar right now.</p>}
