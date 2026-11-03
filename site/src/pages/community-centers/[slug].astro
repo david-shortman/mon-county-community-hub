@@ -7,6 +7,7 @@ import Base from '../../layouts/Base.astro';
 import Actions from '../../components/Actions.astro';
 import EventCard from '../../components/EventCard.astro';
 import SourceLine from '../../components/SourceLine.astro';
+import PassItOn from '../../components/PassItOn.astro';
 import { loadCalendarWithFeeds, upcoming, reportUrl, prettyDate, loadDoors } from '../../lib/content.mjs';
 import { loadPlaces, placeStatus, whatsThere, areaLabel, KIND_LABELS, SECTION } from '../../lib/places.mjs';
 
@@ -26,7 +27,11 @@ const f = p.facilities ?? {};
 const descTail = `${p.membership ? 'How to join, ' : ''}${p.rentals?.length ? 'renting a hall, ' : ''}upcoming events and how to reach it, with sources.`;
 const descLong = `${p.name} in ${p.community}, Monongalia County, WV: ${there ? `${there.toLowerCase()}. ` : ''}${descTail}`;
 const description = descLong.length <= 170 ? descLong : `${p.name} in ${p.community}, Monongalia County, WV: ${descTail}`;
-const where = `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|East)\b/, (c) => c.toLowerCase())}`;
+// "Sabraton, in the Morgantown area" or "Blacksville, west county". Places whose
+// community already names Morgantown skip the area, so it is not said twice.
+const where = p.area !== 'morgantown'
+  ? `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|East)\b/, (c) => c.toLowerCase())}`
+  : /Morgantown/.test(p.community) ? p.community : `${p.community}, in the Morgantown area`;
 ---
 <Base title={`${p.name}, Mon County WV`} description={description}>
   <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
@@ -42,6 +47,8 @@ const where = `${p.community}, ${areaLabel(p.area).replace(/^(South|West|North|E
   {st.label && <p class="note"><strong>{st.label}.</strong>{p.last_activity_seen && ` The newest sign of activity we found was from ${prettyDate(p.last_activity_seen)}.`}</p>}
 
   <Actions callFirst phone={p.contact?.phone} phoneLabel={p.name} link={p.contact?.url} linkLabel={p.contact?.url_label ?? 'Website'} place={p.contact?.place} about={p.name} />
+  {/* Pass it on (#399): a text, printout or share made from the same place record as the page. */}
+  <PassItOn title={p.name} phone={p.contact?.phone} place={p.contact?.place} checked={p.checked} whole />
   {p.contact?.place && <p><strong>Address:</strong>{' '}{p.contact.place}</p>}
   {p.contact?.email && <p><strong>Email:</strong> <a href={`mailto:${p.contact.email}`}>{p.contact.email}</a></p>}
   {p.contact?.facebook && <p><a href={p.contact.facebook}>{p.name} on Facebook</a>. We cannot check Facebook, so it may have newer news than this page.</p>}
