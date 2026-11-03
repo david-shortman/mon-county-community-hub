@@ -10,7 +10,7 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: Mental health help, help with drugs or alcohol, care with no insurance, a dentist, help paying for medicine, keeping your Medicaid in 2027, a new baby, birth control, shots, Medicare and staying healthy in Mon County. Pick what is going on, and we put the steps in order.
+lede: Pick what is going on, and we put the steps in order. Get help with mental health, drugs or alcohol, no insurance, a dentist or paying for medicine. Or get help keeping your Medicaid in 2027, with a new baby, birth control, shots, Medicare or staying healthy in Mon County.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
