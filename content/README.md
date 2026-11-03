@@ -644,3 +644,7 @@ One file per past meeting with posted minutes, shown on the body's page under `/
 ## `use/visits.yaml`: page views copied by hand (#1432)
 
 Level 2 (Use) on the [scoreboard](../docs/scoreboard.md#level-2-use-waiting-for-the-first-monthly-totals). Once a month David copies aggregate page views from the visit counter: a date range, the whole-site total, and the main guides and doors. Counts from 1 to 9 are written "fewer than 10". `site/scripts/check-use.mjs` checks it on every build. Not shown on the site.
+
+## `progress/<YYYY-MM>.yaml`: monthly snapshots of our checks (#1057)
+
+One file a month, shown newest first on `/progress/`. Every number belongs to the snapshot's `checked` date and is never updated; a new month gets a new file. Fields: `month`, `title`, `checked`, `summary` (one sentence: better where, not yet where), `story` (`need`, `before`, `after`: compare formats, not organizations), `comparisons` (`what`, `plain`), `corrections` (`count`, `text`), `short` (what still falls short), `check` (`label`, `url` of the run files). No visitor counts until they are measured. These speak for the project, so their PRs wait for David.
