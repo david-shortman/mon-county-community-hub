@@ -1,0 +1,102 @@
+---
+// Built for any phone and every reader (#1419): the site's access and
+// usability promises, each with the check that holds it and, where the build
+// makes one, today's number. The contrast numbers are worked out from the
+// color tokens on every build (src/lib/contrast.mjs). The page weights come
+// from scripts/check-weight.mjs, which runs after the build, so they are a
+// dated measurement; the budgets themselves can never be broken, because a
+// page over budget fails the build. Every promise here maps to a check in
+// docs/operations/promise-checks.md. Add a check there before adding a promise.
+// Speaks for the project and names crisis lines, so changes wait for David (for:david).
+import Base from '../layouts/Base.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+import { lowestText } from '../lib/contrast.mjs';
+export const page = { door: "about", label: "Built for any phone and every reader", summary: "Our promises about small pages, big text, no signal and privacy, and the check behind each" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const repo = 'https://github.com/david-shortman/mon-county-community-hub';
+const doc = (p) => `${repo}/blob/main/${p}`;
+const tellUs = fixFormUrl({ page: Astro.url.pathname });
+const low = lowestText();
+const fmt = (r) => `${(Math.floor(r * 10) / 10).toFixed(1)} to 1`;
+// Measured with `npm run build` (scripts/check-weight.mjs) on this date. Update both together.
+const WEIGHED = { date: 'November 2, 2026', urgent: { kb: 42.5, page: 'Need mental health help?' }, everyday: { kb: 116.7, page: 'Make a list for someone' } };
+---
+<Base title="Built for any phone and every reader: Everything Morgantown" description="What Everything Morgantown promises about small pages, big text, slow or no signal, and privacy, and the check behind each promise.">
+  <h1>Built for any phone and every reader</h1>
+  <p class="lede">This site should work on an old phone, on a slow signal or none, with big text, and without scripts. Here is each promise, how we know we keep it, and what we can't check yet.</p>
+  <p>A program checks most of these on every change. If a check fails, the change can't go live.</p>
+
+  <h2 id="checked">Checked on every change</h2>
+  <ul>
+    <li>
+      <strong>Small pages for slow phones and small data plans.</strong> Pages for a hard moment, like Help now and Where to stay tonight, load under 50 KB. Every other page loads under 150 KB.
+      <p class="meta">How we know: a program weighs every page after each build. Heaviest on {WEIGHED.date}: {WEIGHED.urgent.kb} KB for a hard-moment page ({WEIGHED.urgent.page}), and {WEIGHED.everyday.kb} KB for any other page ({WEIGHED.everyday.page}).</p>
+    </li>
+    <li>
+      <strong>Easy to read in light and dark.</strong> All text is at least 7 to 1 against its background, the strictest level in the web accessibility rules (WCAG AAA).
+      <p class="meta">How we know: a program checks every text color against every background it sits on. Lowest today: {fmt(low.light)} in light mode and {fmt(low.dark)} in dark mode.</p>
+    </li>
+    <li>
+      <strong>Fits a small screen, even with big text.</strong> No page scrolls sideways on a 320 pixel phone, with text at normal size or twice as big.
+      <p class="meta">How we know: a program opens every page at phone width, in light and dark, and runs a standard accessibility scan (axe). Serious problems stop the change.</p>
+    </li>
+    <li>
+      <strong>Works with scripts turned off.</strong> Pages are plain web pages first. The question paths and topic pages still lead to an answer with scripts off.
+      <p class="meta">How we know: a test clicks through every choice with scripts off.</p>
+    </li>
+    <li>
+      <strong>Opens with no signal after one visit.</strong> Help now and the pages for a hard moment are saved on your phone. A saved copy shows the date it was saved and says to call before you go. Old copies delete themselves: after 3 days for pages that change daily, 30 days for hard-moment pages, and 90 days for the rest.
+      <p class="meta">How we know: a test visits once, turns the signal off, and opens each page. Another test makes copies 40 days old and checks they are not shown.</p>
+    </li>
+    <li>
+      <strong>911 and 988 on every page.</strong> Every link that shows 911, 988 or 211 dials that number. The 211 and 988 listings can never be hidden.
+      <p class="meta">How we know: a test reads every page and every phone link. The content check refuses to hide those two listings.</p>
+    </li>
+    <li>
+      <strong>The warming shelter says "open" only when it was checked today.</strong> The page compares the check date with the clock on your own phone, so a page saved yesterday can't say "open."
+      <p class="meta">How we know: a test sets the phone's clock to different days and times, including late at night, when the date in other time zones has already changed.</p>
+    </li>
+    <li>
+      <strong>Old listings say so.</strong> A listing not rechecked in 6 months says it may be out of date.
+      <p class="meta">How we know: the content check and the site's tests.</p>
+    </li>
+    <li>
+      <strong>Reporting a problem never needs an account.</strong>
+      <p class="meta">How we know: a program fails any page that links to a GitHub form, which needs an account. Our fix form does not.</p>
+    </li>
+  </ul>
+
+  <h2 id="built-in">Built in, and checked too</h2>
+  <ul>
+    <li>
+      <strong>Quick exit.</strong> Pages for danger or a crisis have a Quick exit button that swaps the page for a weather site. On a keyboard, pressing Shift three times does the same. We borrowed this from the UK government's <a href="https://design-system.service.gov.uk/patterns/exit-a-page-quickly/">Exit a page quickly</a> pattern. It does not erase your history.
+    </li>
+    <li>
+      <strong>Crisis pages tell no other site where you came from.</strong> If you follow a link from one, your browser doesn't send the page's address.
+    </li>
+    <li>
+      <strong>No Text or Share buttons on domestic or sexual violence listings</strong>, because a text or a share can stay on a phone where someone else might see it.
+    </li>
+    <li>
+      <strong>No cookies and no ad trackers.</strong> The one outside script is a visit counter that uses no cookies. Search runs on your phone. See <a href={`${base}/privacy/`}>Privacy</a>.
+    </li>
+    <li>
+      <strong>Nothing moves if your phone asks for less motion.</strong> The moving story on <a href={`${base}/how-it-works/`}>How this site works</a> also has its own "Turn off motion" button.
+    </li>
+  </ul>
+  <p class="meta">How we know: a test for each one, added in November 2026. The motion test opens the pages with the most moving parts; a full sweep of every page is run by hand.</p>
+
+  <h2 id="not-yet">What we can't check yet</h2>
+  <p>Programs can't tell how a page sounds or feels. These need a person using the real tool on a real device, and nobody has done that yet:</p>
+  <ul>
+    <li>Screen readers: VoiceOver on iPhone, TalkBack on Android, and NVDA on Windows.</li>
+    <li>Voice control, like saying "Tap Call 988."</li>
+    <li>Windows high contrast mode.</li>
+    <li>The text size settings on your phone itself. Our checks make text bigger inside the page instead.</li>
+  </ul>
+  <p>Keyboard use, focus order and spacing were checked by a program run by hand on October 31, 2026, not on every change.</p>
+
+  <h2 id="tell-us">Something doesn't work for you?</h2>
+  <p>If a page is hard to use with your phone, your screen reader or your settings, <a href={tellUs}>tell us</a>. You don't need an account, and what you send is not posted.</p>
+  <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/operations/promise-checks.md')}>every promise and the check behind it</a>, and <a href={doc('docs/accessibility.md')}>our accessibility results</a>, both on GitHub.</p>
+</Base>
