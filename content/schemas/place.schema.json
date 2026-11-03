@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://everythingmorgantown.org/schemas/place.schema.json",
   "title": "Gathering place",
-  "description": "A building people gather in: a community center, senior center, neighborhood house, public rec building or a fire hall that rents a hall (#455). Shared with the groups and third spaces directory (#263), which adds library branches as free places to sit and recurring groups. Plain-language guide: content/README.md. Version 2 adds the library and group kinds and the cost, venue and interests fields.",
-  "version": 2,
+  "description": "A building people gather in: a community center, senior center, neighborhood house, public rec building or a fire hall that rents a hall (#455). Shared with the groups and third spaces directory (#263), which adds library branches as free places to sit and recurring groups. Plain-language guide: content/README.md. Version 2 adds the library and group kinds and the cost, venue and interests fields. Version 3 adds opening_hours, drop_in and the park kind (#1439).",
+  "version": 3,
   "type": "object",
   "required": ["name", "slug", "kind", "area", "community", "run_by", "story", "status", "sources"],
   "additionalProperties": false,
@@ -11,7 +11,7 @@
     "name": { "type": "string", "minLength": 1 },
     "other_names": { "type": "array", "items": { "type": "string" }, "description": "Other names sources use. List both when sources disagree." },
     "slug": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
-    "kind": { "enum": ["community-center", "senior-center", "neighborhood-house", "rec-center", "park-building", "fire-hall", "library", "group"] },
+    "kind": { "enum": ["community-center", "senior-center", "neighborhood-house", "rec-center", "park-building", "fire-hall", "library", "group", "park"] },
     "area": { "enum": ["south", "west", "north", "east", "morgantown"], "description": "Part of the county, for grouping. morgantown means Morgantown and close in." },
     "community": { "type": "string", "description": "The community or town name people would type." },
     "run_by": {
@@ -37,6 +37,8 @@
         "step_free": { "type": "boolean", "description": "Only when the source says so." }
       }
     },
+    "opening_hours": { "type": "array", "minItems": 1, "description": "When it is open, as a list of { days, opens, closes }, the same shape resources use (content/README.md). Cards show it as short lines, days with the same hours together (#1439).", "items": { "type": "object", "required": ["days", "opens", "closes"], "additionalProperties": false, "properties": { "days": { "type": "array", "items": { "enum": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"] } }, "opens": { "type": "string", "description": "Quoted 24-hour time like \"08:30\"." }, "closes": { "type": "string", "description": "Quoted 24-hour time like \"17:00\"." } } } },
+    "drop_in": { "type": "string", "minLength": 1, "description": "Who can come in and sit during open hours, as the source says, like 'Anyone' or 'People 50 and older'. Only when the source says so. Puts the place under Free places to sit on Find your people (#1439). Library branches are listed there without it." },
     "regular": { "type": "array", "items": { "type": "string" }, "description": "Weekly or monthly happenings in words. Dated events go in content/calendar/ with venue: <slug>." },
     "membership": {
       "type": "object",

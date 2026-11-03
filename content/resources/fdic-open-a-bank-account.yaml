@@ -1,0 +1,28 @@
+title: Open a low-cost bank account
+slug: fdic-open-a-bank-account
+org: fdic
+topics: [money]
+who_it_is_for: Anyone who wants a bank account, including people who do not have much money, who had bank account problems before, or who are not U.S. citizens. The FDIC says you must be at least 18 in most places, but a parent, guardian or other trusted adult may be able to help someone younger.
+what_to_do: Use the FDIC's GetBanked checklist to compare accounts, then apply in person, online or in a bank's app.
+steps:
+  - Ask about monthly fees, overdraft fees and ATM fees, and whether the account is FDIC insured.
+  - Bring your Social Security number or ITIN, and an ID such as a driver's license, state or military ID, or passport. Some banks accept other IDs.
+  - Fill out the application.
+  - Make your first deposit. The FDIC says you may be able to open an account with as little as $25.
+  - Set up online or mobile banking and your debit card.
+options:
+  - "Low or no minimum balance: the FDIC says many banks offer these accounts."
+  - "Second chance banking: the FDIC says some banks offer this for people who had banking problems before."
+  - "Bank On certified accounts: the FDIC says these have low and clear costs and do not allow overdraft or insufficient fund fees. The Bank On site lists certified accounts by state."
+notes:
+  - If you are not a U.S. citizen, the FDIC says you may need other ID, such as a foreign passport, a consular ID or an ITIN.
+  - We do not list or rank banks. Ask each bank about its own fees.
+contact:
+  url: https://www.fdic.gov/getbanked
+  url_label: FDIC GetBanked
+cost: Depends on the bank and account. The FDIC says many banks offer accounts with low or no minimum balance.
+sources:
+  - url: https://www.fdic.gov/getbanked
+    checked: 2026-11-02
+  - url: https://joinbankon.org/accounts/
+    checked: 2026-11-02

@@ -11,6 +11,10 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 
 ## Level 1: Findability
 
+### Personas (2026-11-02)
+
+32 of 32 personas pass the path check; 26 of 32 pass every findability question (10 or more of 15, in runs up to 2026-11-01); every top need has a persona and a page. The six below 10: new baby, home from jail, just moved, rural homeowner, reads another language best, looking for their people. Updated monthly by the persona review ([`docs/personas.md`](personas.md#monthly-review-1037), #1037).
+
 ### Weekly run: 76 on the original 32, 71 on all 62 questions (2026-11-01)
 
 The first Sunday run, two days after the backlog sprint. Six testers ran all 62 questions with the same search words and rubric. Results: [`content/findability/2026-11-01.yaml`](../content/findability/2026-11-01.yaml), [build log](build-log/2026-11-02-0030-findability-weekly-2026-11-01.md).

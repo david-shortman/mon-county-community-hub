@@ -37,6 +37,8 @@ const monchdSources = [{ url: 'https://www.monchd.org/', checked: '2026-10-30' }
     <li>No insurance? See <a href={`${base}/dental-and-prescriptions/`}>dentist and prescription help</a>, including the free Health Right clinic on Scott Avenue.</li>
     <li>Disability or aging: <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</li>
   </ul>
+  <h2 id="veterans">Veterans: get paid back for travel to VA care</h2>
+  {r('va-travel-pay') && <ResourceCard r={r('va-travel-pay')} />}
 
   <p class="meta">Sources checked October 30, 2026. Bus routes and times change, so check the trip planner before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
