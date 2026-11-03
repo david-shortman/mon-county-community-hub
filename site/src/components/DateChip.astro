@@ -1,0 +1,31 @@
+---
+// A dated window on a topic page (#1688): the days-left chip and an Add to
+// calendar link, from one calendar entry, so the date is never typed on the
+// page. Shows while the entry is upcoming or open; gone once it ends (the site
+// rebuilds daily, and Base.astro updates the "in N days" words between builds).
+//   slug: a content/calendar entry slug
+//   label: optional words before the dates, defaults to the entry's title
+import { loadCalendar, chipDate, relativeLabel, todayYmd } from '../lib/content.mjs';
+const { slug, label } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const e = loadCalendar().find((x) => x.slug === slug);
+if (!e) throw new Error(`DateChip: no calendar entry "${slug}"`);
+const show = e.ends >= today;
+---
+{show && (
+  <div class="date-window">
+    <p class="date-chip">
+      <span class="dw-label">{label ?? e.title}:</span>
+      <span><time datetime={e.starts}>{chipDate(e.starts, today)}</time>{e.ends !== e.starts && <> to <time datetime={e.ends}>{chipDate(e.ends, today)}</time></>}</span>
+      <span class="rel" data-starts={e.starts} data-ends={e.ends}>{relativeLabel(e.starts, e.ends, today)}</span>
+    </p>
+    <p class="dw-actions"><a href={`${base}/calendar/${e.slug}.ics`}>Add to my calendar<span class="sr-only">: {e.title}</span></a> · <a href={`${base}/calendar/#${e.slug}`}>Details on Dates</a></p>
+  </div>
+)}
+
+<style>
+  .date-window { margin: 12px 0 16px; }
+  .dw-label { font-weight: 700; }
+  .dw-actions { margin: 0; }
+</style>
