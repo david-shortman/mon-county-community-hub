@@ -1,12 +1,14 @@
 name: West Virginia Parent Training and Information (WVPTI)
 slug: wv-parent-training-and-information
 kind: nonprofit
-website: http://www.wvpti-inc.org/
+website: https://wvpti-inc.org/
 phone: "800-281-1436"
 summary: West Virginia's Parent Training and Information center, listed by the state Department of Education in its resources for families of students in special education.
 topics: [family, disability]
 area: statewide
 sources:
+  - url: https://wvpti-inc.org/contact/
+    checked: 2026-11-03
   - url: https://wvde.us/academics/special-education/additional-resources-families
     checked: 2026-10-31
   - url: https://www.parentcenterhub.org/find-your-center/

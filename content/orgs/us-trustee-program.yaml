@@ -1,0 +1,12 @@
+name: U.S. Trustee Program (U.S. Department of Justice)
+slug: us-trustee-program
+kind: government
+website: https://www.justice.gov/ust
+summary: A part of the U.S. Department of Justice that oversees bankruptcy cases. It keeps the lists of credit counseling agencies and debtor education providers approved for people filing bankruptcy.
+topics: [money]
+area: national
+sources:
+  - url: https://www.justice.gov/ust/credit-counseling-debtor-education-information
+    checked: 2026-11-02
+  - url: https://www.justice.gov/ust/list-credit-counseling-agencies-approved-pursuant-11-usc-111
+    checked: 2026-11-02

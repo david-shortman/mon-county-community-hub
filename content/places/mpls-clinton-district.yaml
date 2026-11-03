@@ -8,14 +8,22 @@ run_by:
   org: morgantown-public-library-system
   text: Morgantown Public Library System
 story: A branch library on Grafton Road in southern Monongalia County, with books, DVDs, programs for adults, kids and families, public computers, printing, copying and fax.
-regular:
-  - Mondays 10 a.m. to 5 p.m.
-  - Tuesdays 10 a.m. to 5 p.m.
-  - Wednesdays 10 a.m. to 6 p.m.
-  - Thursdays 1 p.m. to 5 p.m.
-  - Fridays 10 a.m. to 3 p.m.
-  - Saturdays 10 a.m. to 1 p.m.
-  - Sundays (Closed)
+opening_hours:
+  - days: [mon, tue]
+    opens: "10:00"
+    closes: "17:00"
+  - days: [wed]
+    opens: "10:00"
+    closes: "18:00"
+  - days: [thu]
+    opens: "13:00"
+    closes: "17:00"
+  - days: [fri]
+    opens: "10:00"
+    closes: "15:00"
+  - days: [sat]
+    opens: "10:00"
+    closes: "13:00"
 interests: [books, learning]
 tags: [free]
 contact:

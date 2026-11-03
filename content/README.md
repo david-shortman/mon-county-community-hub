@@ -212,6 +212,11 @@ facilities:                 # only what the source says
   step_free: true           # only when published
 regular:                    # weekly or monthly happenings, in words
   - Lunch Monday, Wednesday and Friday
+opening_hours:              # optional; when the building is open, same shape as resources (#1439)
+  - days: [mon, tue, wed, thu, fri]
+    opens: "09:00"
+    closes: "16:00"
+drop_in: People 50 and older   # optional; who can come in and sit, as the source says (#1439)
 membership:
   dues: $5 a family a year
 rentals:
@@ -245,7 +250,9 @@ phone_confirmed: 2026-11-02 # optional; when a person confirmed by phone (#164)
 
 The Find your people page (`/find-your-people/`) uses the same record with two more kinds. The community centers pages leave both out.
 
-- `kind: library`: a library branch, listed as a free place to sit. `regular` holds its open hours in words.
+- `kind: library`: a library branch, listed as a free place to sit. Its open hours go in `opening_hours`, not `regular`, so the card can say them as a few short lines ("Monday to Thursday: 9 a.m. to 8 p.m.", "Closed Sunday") instead of one line per day (#1439).
+- **Other free places to sit (#1439).** Any other building can be listed there too when its own source says when it is open and who can walk in. Give it `opening_hours` and `drop_in`, a few words on who can come ("Anyone", "People 50 and older"). Set `drop_in` only when the source says people can drop in; a hall you can only rent does not count. Leave out places that charge to come in, or that need a membership the source does not say is free. On Find your people its card is short (who can come, hours, a link to its own page), because its dinners and rentals would make it long on a phone.
+- `kind: park`: an outdoor place with public seats or benches, listed only as a free place to sit (it gets no community centers page). It needs `drop_in`, and `opening_hours` or a note that says when it is open (many parks go by dawn and dusk, which `opening_hours` cannot say).
 - `kind: group`: something people can join more than once, like a game night, a run club or a dance. It has no building of its own. Extra fields:
 
 ```yaml
@@ -473,8 +480,8 @@ From these tags the build makes the Topics page (`/topics/`), each door's list o
 - Only public organizational contact details. Never a private person's info.
 - Every entry has at least one source with a `checked` date.
 - Entries older than 6 months since `checked` get flagged for re-verification.
-- On the site, a card says "may be out of date" after 6 months without a check, or after 90 days for Make it better entries (topic `better`, and `boards/`), since seats and grant rounds change faster (#791).
-- **Re-check cadence (#1461).** The risk rubric in `docs/playbook/trust-and-ai.md` sets how often we re-read each listing's sources: every 90 days for the high-stakes topics (`health`, `money`, `housing`, `family`, `taxes`, `voting`) and every `calendar/` entry, otherwise the card's own rule above. An org, resource, board or secondhand record can set `recheck_days: 30` (a whole number of days, 1 to 365) to go faster, or, outside those topics, slower. `npm run check-content` fails a high-stakes record set slower than 90 days. The Health check reports the share re-checked on time (`content-recheck-on-time`) and lists the late ones, oldest first. This is our own schedule: cards still use the 6 month and 90 day rule above until David decides whether to change the promise shown to residents.
+- On the site, a card says "may be out of date" after 6 months without a check, or after 90 days for high-stakes listings (see the re-check cadence below) and Make it better entries (topic `better`, and `boards/`), since seats and grant rounds change faster (#791).
+- **Re-check cadence (#1461).** The risk rubric in `docs/playbook/trust-and-ai.md` sets how often we re-read each listing's sources: every 90 days for the high-stakes topics (`health`, `money`, `housing`, `family`, `taxes`, `voting`) and every `calendar/` entry, otherwise the card's own rule above. An org, resource, board or secondhand record can set `recheck_days: 30` (a whole number of days, 1 to 365) to go faster, or, outside those topics, slower. `npm run check-content` fails a high-stakes record set slower than 90 days. The Health check reports the share re-checked on time (`content-recheck-on-time`) and lists the late ones, oldest first. Cards say "may be out of date" once a listing is past its cadence, never later than 6 months, so a high-stakes listing shows it after 90 days.
 - Every outside link is checked daily by the source check (`docs/operations/README.md`). If a source should not be fetched by a robot (Facebook, a login page), add a rule to `source-rules.yaml`.
 
 ### Rules for every entry
@@ -530,6 +537,16 @@ hidden:
 - **211 and 988 cannot be hidden.** They show on every page. If one looks wrong, fix it from the line's own page the same day.
 - **Who can merge.** A PR that only adds or changes `hidden` blocks does not wait for David, and the High stakes check does not flag it (`docs/COORDINATION.md`: "taking down or hiding a wrong item does not wait"). A PR that removes a `hidden` block is checked like any other content change.
 
+### Listings tied to one date
+
+A resource that only makes sense up to a date (Election Day polling places, a ballot that must be postmarked by Election Day) can set `show_until`:
+
+```yaml
+show_until: 2026-11-03   # last Morgantown day it shows
+```
+
+From the next day on, the daily build leaves it off every page, the search index and the counts, the same way `hidden` does, with no edit needed. A page that names it by slug still finds it. Use `hidden` instead when a listing is wrong. `npm run check-content` fails if `show_until` is not a date. Added in QA sweep 2 (#529).
+
 ## Confirmed by phone and the call queue
 
 Some groups have no website, or only a page robots cannot read, so a phone call is the only way to check them (#164). After a person confirms a listing by phone, add to its file in `orgs/`, `resources/` or `places/`:
@@ -571,6 +588,8 @@ sources:
 
 - **Charts and updates (#15).** A file can name its County Health Rankings measure under `chr:` (`measure: v024`, `trend_name: Children in poverty`). `node scripts/update-chr-indicators.mjs --check` in `site/` compares the file with County Health Rankings' public files, and `--write` fills `values`, `data_year` and `history` (Mon County and West Virginia by year, only after the source's last trend break), and sets `checked`. The page draws a chart from `history`. A monthly workflow (`.github/workflows/indicators.yml`) runs the check and opens an issue for Duet when the source changes. No key, no account.
 - **Supplements (#1357).** CHR&R made no 2026 annual release; a March 2026 supplemental file refreshed 34 measures. An indicator on that file puts it first in `sources`, adds the supplement codebook as a source, and sets `chr.data_year` to the year the codebook gives for its measure (the trends file stops at the 2025 release, so the chart can end a year earlier than the number). `children-in-poverty` is not in the supplement and stays on the 2025 file.
+- **Measures with no trend (#1662).** Some County Health Rankings measures, like life expectancy (`v147`) and drug overdose deaths (`v138`), are not in the trends file. Their `chr:` has `measure` and `data_year` (from the codebook) but no `trend_name`, so the script refreshes only `values`, and the page shows no chart.
+- **Showing whole numbers.** For `unit: number` or `years`, `digits` (0, 1 or 2) rounds the number on the page the way the publisher shows it, and `per` (for `number` only) adds the unit words, like `per 100,000 people`. The file keeps the full number.
 - **Official sources only**, read in the same session: a government agency or a program that publishes the same data for every county. Never a real estate, "best places" or other commercial site.
 - **Copy the number and its definition exactly.** Never compute a new number (a rank, a change, a per-person rate) the source does not give.
 - **Describe, never judge.** No "good", "bad", "safe" or "failing". The page says what the numbers do and don't tell you.

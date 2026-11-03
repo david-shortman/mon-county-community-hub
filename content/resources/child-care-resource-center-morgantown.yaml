@@ -10,6 +10,8 @@ contact:
   place: "20 Scott Avenue, Suite 302, Morgantown, WV"
 cost: Free to ask. If you get help paying, what you pay is based on your monthly income before taxes and your family size, on a sliding scale.
 sources:
+  - url: https://ccrcwv.org/
+    checked: 2026-11-02
   - url: https://ccrcwv.org/families/
     checked: 2026-11-02
   - url: https://bfa.wv.gov/media/6826/download?inline

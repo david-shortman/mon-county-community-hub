@@ -59,5 +59,5 @@ get_help:
     label: "Get care: pick what is going on and get the steps in order"
 site_coverage:
   level: good
-  why: No insurance lists free and sliding-fee clinics, ways to get coverage, and help with a hospital bill. Dental care, medicine and Medicaid in 2027 each have their own page, so Get care is the place to start.
-  checked: 2026-11-01
+  why: No insurance lists free and sliding-fee clinics, ways to get coverage, help with a hospital bill, and how to get a price estimate when paying on your own. Turning 65 covers Medicare sign-up, the yearly plan change window and Extra Help limits. Dental care, medicine and Medicaid in 2027 each have their own page, so Get care is the place to start. Income limits for WVCHIP are not shown yet.
+  checked: 2026-11-02

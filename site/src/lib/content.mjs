@@ -16,6 +16,11 @@ export const CONTENT_DIR = path.resolve(here, '../../../content');
 // re-checked and can come back by removing the `hidden` block.
 export const HIDDEN_REASONS = ['group-request', 'unconfirmed-risky', 'overdue', 'other'];
 export const isHidden = (e) => e?.hidden != null && e.hidden !== false;
+// A listing tied to one date (Election Day polling places, say) can set
+// `show_until: YYYY-MM-DD`. From the next Morgantown day on, the daily build
+// leaves it off pages like a hidden record, with no edit needed (QA sweep 2,
+// #529). Lookups by slug still find it, so a page that names it keeps working.
+export const isPast = (e, today = todayYmd()) => e?.show_until != null && ymd(e.show_until) < today;
 
 export function loadDir(name, { withHidden = false } = {}) {
   const dir = path.join(CONTENT_DIR, name);
@@ -25,7 +30,7 @@ export function loadDir(name, { withHidden = false } = {}) {
     .filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'))
     .sort()
     .map((f) => ({ ...YAML.parse(fs.readFileSync(path.join(dir, f), 'utf8')), _file: `${name}/${f}` }));
-  return withHidden ? all : all.filter((e) => !isHidden(e));
+  return withHidden ? all : all.filter((e) => !isHidden(e) && !isPast(e));
 }
 
 // What a page shows in place of a hidden record it names on purpose (a
@@ -67,6 +72,13 @@ export function loadCalendar({ withHidden = false } = {}) {
 // A hand-written entry wins when both have the same slug.
 // Cached so the page and the .ics feed share one fetch per build.
 let merged;
+// The words two listings of one event share: the first three title words,
+// lowercased, with years left out. Feeds often put the year first ("2026
+// General Election Day") where a hand-written entry doesn't, and the year
+// alone kept the two from matching, so Election Day showed twice.
+export const titleKey = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/)
+  .filter((w) => w && !/^(19|20)\d\d$/.test(w)).slice(0, 3).join(' ');
+
 export function loadCalendarWithFeeds() {
   merged ??= (async () => {
     // A hidden hand-written entry also hides the feed item with its slug (#519).
@@ -80,7 +92,7 @@ export function loadCalendarWithFeeds() {
     // A feed item that a hand-written entry already covers (same first three
     // title words, starting within the hand entry's dates) is left out too,
     // so one event never shows twice under two slugs (#761).
-    const words = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 3).join(' ');
+    const words = titleKey;
     const covered = (f) => hand.some((h) => words(h.title) === words(f.title) && f.starts >= h.starts && f.starts <= h.ends);
     const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug) && !covered(e));
     // Two feeds can list the same event (#852). Same rule across feeds: same
@@ -266,7 +278,9 @@ export function isStale(checked, today = todayYmd(), days = STALE_DAYS) {
 // content/boards/) change faster: seat counts and grant rounds. They say
 // "may be out of date" after 90 days instead of 6 months (#791, #291).
 export const FAST_STALE_DAYS = 90;
-export const staleDaysFor = (r) => ((r?.topics ?? []).includes('better') || String(r?._file ?? '').startsWith('boards/') ? FAST_STALE_DAYS : STALE_DAYS);
+const baseStaleDays = (r) => ((r?.topics ?? []).includes('better') || String(r?._file ?? '').startsWith('boards/') ? FAST_STALE_DAYS : STALE_DAYS);
+// Cards follow the re-check cadence below (#1461), never later than 6 months.
+export const staleDaysFor = (r) => Math.min(recheckDaysFor(r), STALE_DAYS);
 
 // Re-check cadence from the risk rubric (docs/playbook/trust-and-ai.md, #1461).
 // The high-stakes topics and every calendar entry are in the top tier: re-check
@@ -274,10 +288,9 @@ export const staleDaysFor = (r) => ((r?.topics ?? []).includes('better') || Stri
 // top tier, slower, up to a year); check-content refuses a top-tier record
 // slower than 90 days. Otherwise the cadence is the card's own rule above.
 //
-// This is the schedule we hold ourselves to (the Health check counts items
-// re-checked on time). It does not change what cards show yet: cards still say
-// "may be out of date" by staleDaysFor, because changing that promise to
-// residents is David's call (#1461).
+// The Health check counts items re-checked on time, and cards say "may be
+// out of date" once a listing is past its cadence (staleDaysFor, capped at 6
+// months, the promise on About and How we check).
 export const HIGH_STAKES_TOPICS = ['health', 'money', 'housing', 'family', 'taxes', 'voting'];
 export const TOP_TIER_DAYS = 90;
 export const MAX_RECHECK_DAYS = 365;
@@ -285,7 +298,7 @@ export const isTopTier = (r) => (r?.topics ?? []).some((t) => HIGH_STAKES_TOPICS
 export function recheckDaysFor(r) {
   const set = Number(r?.recheck_days);
   if (Number.isInteger(set) && set > 0) return set;
-  return isTopTier(r) ? TOP_TIER_DAYS : staleDaysFor(r);
+  return isTopTier(r) ? TOP_TIER_DAYS : baseStaleDays(r);
 }
 // Problems with a record's recheck_days, for check-content.
 export function recheckProblems(r) {

@@ -13,6 +13,8 @@
 //      Pages with more of the reader's words come first.
 //   5. Helper and printout pages, and group pages whose name does not match,
 //      go after the guides.
+//   6. For a few crisis words (CRISIS, PIN), put Mental health first, and
+//      tell the page to show the 988 box (#1647).
 //
 // Everything here runs on the phone. Nothing is sent anywhere or saved.
 //
@@ -57,6 +59,9 @@ export const SPELLING = {
   registation: 'registration',
   sheltor: 'shelter',
   shleter: 'shelter',
+  sucide: 'suicide',
+  suicde: 'suicide',
+  suiside: 'suicide',
   utlity: 'utility',
   utilty: 'utility',
   volenteer: 'volunteer',
@@ -80,9 +85,33 @@ export const FILLER = ('a an the and or of to for in on at by from with about my
   'can cant do does dont how what where when who why get got need want please help near find someone some any just really ' +
   'morgantown wv west virginia mon monongalia county').split(' ');
 
-// The search code, given the three lists. Old-style JavaScript on purpose:
+// Crisis words (#1647). When a search has one of these, the search page shows
+// the same 911 and 988 box as the crisis line (CrisisLine.astro) above the
+// results, and PIN below puts a named page first. Keep this list short: only
+// words that clearly mean someone may be in danger now. Each is matched as
+// whole words in what was typed, before misspellings are fixed, so a few
+// common misspellings are listed too. Sorted, one place, nowhere else.
+// SUICIDE is the part about suicide and self harm; CRISIS adds overdose.
+const SUICIDE = [
+  'end my life', 'ending my life', 'harm myself', 'hurt myself', 'kill myself', 'killing myself',
+  'self harm', 'selfharm', 'sucide', 'suicde', 'suicidal', 'suicide', 'suiside', 'take my life',
+  'wanna die', 'want to die',
+];
+export const CRISIS = SUICIDE.concat(['overdose', 'overdosed', 'overdosing']);
+
+// Pins (#1647): for these words, this page goes first, ahead of the usual
+// order. A new kind of rule, so keep it to crisis words and get David's yes
+// before adding one (docs/operations/search-test.md). `search` is a word that
+// always finds the page, so it can be pinned even when the typed words miss it.
+// Overdose is not pinned: Drugs and alcohol (Narcan, overdose help) already
+// comes first for it, and the 988 box still shows.
+export const PIN = [
+  { page: '/mental-health/', search: 'mental health', words: SUICIDE },
+];
+
+// The search code, given the lists. Old-style JavaScript on purpose:
 // it runs as is on older phones.
-export function makeSearch(SPELLING, SAME, FILLER) {
+export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
   function own(map, w) { return Object.prototype.hasOwnProperty.call(map, w) ? map[w] : null; }
   // The typed words, lower case, without apostrophes.
   function raw(q) {
@@ -102,6 +131,21 @@ export function makeSearch(SPELLING, SAME, FILLER) {
   function plain(q) {
     return words(q).filter(function (w) { return FILLER.indexOf(w) < 0; }).map(function (w) { return own(SAME, w) || w; }).join(' ');
   }
+  // True when the typed words have one of `list` (CRISIS by default).
+  function crisis(q, list) {
+    var typed = ' ' + raw(q).join(' ') + ' ';
+    return (list || CRISIS).some(function (c) { return typed.indexOf(' ' + c + ' ') >= 0; });
+  }
+  // The pin for these words, or null.
+  function pinFor(q) {
+    for (var i = 0; i < PIN.length; i++) if (crisis(q, PIN[i].words)) return PIN[i];
+    return null;
+  }
+  // True when a result's address is this page (with or without index.html).
+  function isPage(d, page) {
+    var u = String(d.url || '').split('#')[0].replace(/index\.html$/, '');
+    return u.length >= page.length && u.slice(u.length - page.length) === page;
+  }
   // Help-giver and printout pages, and the What help finder's answer pages,
   // repeat what the main pages say, and group profile pages crowd out the
   // guides that answer a question, so they go last.
@@ -114,9 +158,10 @@ export function makeSearch(SPELLING, SAME, FILLER) {
     var typed = words(q).filter(function (w) { return FILLER.indexOf(w) < 0; });
     return typed.length && typed.every(function (w) { return name.indexOf(' ' + w + ' ') >= 0; }) ? 0 : 1;
   }
-  // Search with a loaded Pagefind module. Resolves to { items, some, fixed }:
+  // Search with a loaded Pagefind module. Resolves to { items, some, fixed, crisis }:
   // up to 10 results' data in order, `some` when no page had every word (so
-  // pages with some of them are shown), and the fixed words if any.
+  // pages with some of them are shown), the fixed words if any, and whether
+  // the words had a crisis word. A pinned page goes first.
   // Pages with more of the reader's words come first. Pagefind's own order
   // breaks ties, and a word a page has near the top of its results counts a bit more.
   function find(pf, q) {
@@ -130,10 +175,14 @@ export function makeSearch(SPELLING, SAME, FILLER) {
     if (units.length > 1 || (units[0] && units[0].length > 1)) {
       units.forEach(function (alts, u) { alts.forEach(function (w) { jobs.push({ q: w, unit: u }); }); });
     }
+    var pin = pinFor(q);
+    // The pinned page's own search finds it; it does not change any score.
+    if (pin) jobs.push({ q: pin.search, pin: true });
     return Promise.all(jobs.map(function (j) { return pf.search(j.q); })).then(function (all) {
-      var score = {}, has = {}, byId = {};
+      var score = {}, has = {}, byId = {}, pinned = [];
       all.forEach(function (res, k) {
         var unit = jobs[k].unit;
+        if (jobs[k].pin) { pinned = ((res && res.results) || []).slice(0, 5); return; }
         ((res && res.results) || []).forEach(function (r, i) {
           byId[r.id] = r;
           var near = 1 / (1 + i / 10);
@@ -145,21 +194,28 @@ export function makeSearch(SPELLING, SAME, FILLER) {
       });
       var ids = Object.keys(byId).sort(function (x, y) { return score[y] - score[x]; });
       var some = units.length > 1 && !ids.some(function (id) { return has[id] && Object.keys(has[id]).length === units.length; });
-      return Promise.all(ids.slice(0, 20).map(function (id) { return byId[id].data(); })).then(function (items) {
-        items = items.map(function (d, i) { return { d: d, i: i }; })
+      return Promise.all([
+        Promise.all(ids.slice(0, 20).map(function (id) { return byId[id].data(); })),
+        Promise.all(pinned.map(function (r) { return r.data(); })),
+      ]).then(function (got) {
+        var items = got[0].map(function (d, i) { return { d: d, i: i }; })
           .sort(function (x, y) { return later(x.d, q) - later(y.d, q) || x.i - y.i; })
-          .map(function (x) { return x.d; }).slice(0, 10);
-        return { items: items, some: some, fixed: fixed };
+          .map(function (x) { return x.d; });
+        if (pin) {
+          var top = got[1].filter(function (d) { return isPage(d, pin.page); })[0];
+          if (top) items = [top].concat(items.filter(function (d) { return !isPage(d, pin.page); }));
+        }
+        return { items: items.slice(0, 10), some: some, fixed: fixed, crisis: crisis(q) };
       });
     });
   }
-  return { raw: raw, words: words, fixedText: fixedText, plain: plain, later: later, find: find };
+  return { raw: raw, words: words, fixedText: fixedText, plain: plain, crisis: crisis, later: later, find: find };
 }
 
-export const { raw, words, fixedText, plain, later, find } = makeSearch(SPELLING, SAME, FILLER);
+export const { raw, words, fixedText, plain, crisis, later, find } = makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN);
 
 // The search code for the search page's inline script: defines one global,
 // SearchPlan, with the functions above.
 export function inlineSource() {
-  return 'var SearchPlan = (' + makeSearch.toString() + ')(' + JSON.stringify(SPELLING) + ', ' + JSON.stringify(SAME) + ', ' + JSON.stringify(FILLER) + ');\n';
+  return 'var SearchPlan = (' + makeSearch.toString() + ')(' + JSON.stringify(SPELLING) + ', ' + JSON.stringify(SAME) + ', ' + JSON.stringify(FILLER) + ', ' + JSON.stringify(CRISIS) + ', ' + JSON.stringify(PIN) + ');\n';
 }

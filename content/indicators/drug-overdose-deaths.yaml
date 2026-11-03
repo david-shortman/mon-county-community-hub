@@ -1,0 +1,27 @@
+title: Drug overdose deaths
+slug: drug-overdose-deaths
+topic: health
+definition: "Number of drug poisoning deaths per 100,000 population." # County Health Rankings' own definition (v138)
+unit: number
+digits: 0 # County Health Rankings shows this as a whole number
+per: per 100,000 people
+data_year: "2021-2023"
+release: County Health Rankings, March 2026 supplemental release
+values:
+  monongalia: 43.30568831120278
+  west_virginia: 79.07006249406459
+  united_states: 31.961625387522595
+sources:
+  - name: County Health Rankings March 2026 supplemental data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-03
+  - name: Supplemental release codebook (data years by measure)
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf
+    checked: 2026-11-03
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    checked: 2026-11-03
+more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia # the human page for this county
+chr:
+  # where scripts/update-chr-indicators.mjs reads it. Not in the trends file, so no trend_name and no chart.
+  measure: v138
+  data_year: "2021-2023" # from the supplement codebook

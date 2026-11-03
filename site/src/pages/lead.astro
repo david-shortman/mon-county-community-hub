@@ -1,0 +1,38 @@
+---
+// Lead in old paint and tap water (#222 life areas, a gap named in wave 9;
+// sprint wave 11). Facts come from the records, each read on the WV
+// Childhood Lead Poisoning Prevention Project, Monongalia County Health
+// Department and EPA pages on 2026-11-02. Left off: the Morgantown Utility
+// Board's lead service line inventory and water quality report (mub.org's
+// lead pages were not found during its site rebuild; see #1574), and any blood lead level number (state pages
+// give two different numbers).
+import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "safety", label: "Lead in old paint and tap water", summary: "Blood lead tests for young children, a lead test at the health department, lead-safe work on homes built before 1978, renters' rights, and lowering lead in tap water" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Lead in paint and tap water in Morgantown and Mon County, WV" description="Lead help in Mon County, WV: blood lead tests for young children, tests at the health department, lead-safe work on pre-1978 homes, renters' rights and safer tap water.">
+  <h1>Lead in old paint and tap water</h1>
+  <p class="lede">A blood test is the only way to know if someone has too much lead. West Virginia's rule says every child gets a lead test at age 1 and again at age 2. The health department gives a finger stick test to anyone 1 or older.</p>
+  <OnThisPage items={[['#test', "Get a lead test"], ['#paint', "Old paint and repairs"], ['#rent', "If you rent"], ['#water', "Tap water"]]} />
+
+  <h2 id="test">Get a lead test</h2>
+  <ResourceCard r={resource('wv-child-blood-lead-test')} />
+  <ResourceCard r={resource('monchd-lead-test')} showCost />
+
+  <h2 id="paint">Old paint and repairs</h2>
+  <ResourceCard r={resource('epa-lead-safe-contractor')} />
+
+  <h2 id="rent">If you rent</h2>
+  <ResourceCard r={resource('epa-lead-paint-renters-report')} />
+  <p>More on renting: <a href={`${base}/renting/`}>Renting a home</a>.</p>
+
+  <h2 id="water">Tap water</h2>
+  <ResourceCard r={resource('epa-reduce-lead-in-tap-water')} />
+  <p>Wondering whether the pipe to your home is lead? Ask your water utility. Not sure who that is? See <a href={`${base}/who-serves-me/`}>Who serves my address</a>.</p>
+
+  <p class="meta">Sources checked November 2, 2026. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
