@@ -2,10 +2,11 @@
 // #1552 kept tel: and sms: links whole, but numbers written in a sentence
 // ("call 1-877-322-8228") still broke at a hyphen on phones: 192 splits on
 // 96 pages at 390px on November 3, 2026. After the build, this wraps each
-// number in the text of a page in <span class="nowrap">, the class Base and
-// Embed already define. Tags, attributes, scripts, styles and numbers already
-// inside a tel: or sms: link are left alone. Inside a button, .btn .nowrap
-// wraps normally, so button labels still fit.
+// number in the text of a page in <span class="tel-text">. press.css keeps it
+// on one line only when the screen holds 24em of text, the same rule as tel:
+// links, so at 200% text on a small phone a long number can still wrap and
+// the page never scrolls sideways. Tags, attributes, scripts, styles and
+// numbers already inside a tel: or sms: link are left alone.
 
 // 1-800-642-8589, 304-285-3175, (304) 598-5181, 304.293.4897, letter numbers
 // like 304-291-RIDE, and the 211 text line 898-211.
@@ -13,7 +14,7 @@ const PHONE = /(?<![\w-])(?:1[- ])?(?:\(\d{3}\) ?|\d{3}[-.])\d{3}[-.](?:\d{4}|[A
 const SKIP = new Set(['script', 'style', 'textarea', 'title', 'head', 'svg', 'pre', 'code', 'option']);
 
 export function keepPhones(html) {
-  if (!/\.nowrap\s*\{/.test(html)) return html; // no class to lean on
+  if (!/\.tel-text\s*\{/.test(html)) return html; // no Press styles on this page
   const parts = html.split(/(<!--[\s\S]*?-->|<[^>]+>)/);
   const skip = [];
   let inLink = 0;
@@ -37,8 +38,8 @@ export function keepPhones(html) {
       continue;
     }
     if (!p || skip.length || inLink) continue;
-    if (/^<span class="nowrap"/.test(prevTag)) continue; // already kept whole
-    parts[i] = p.replace(PHONE, (n) => `<span class="nowrap">${n}</span>`);
+    if (/^<span class="(nowrap|tel-text)"/.test(prevTag)) continue; // already kept whole
+    parts[i] = p.replace(PHONE, (n) => `<span class="tel-text">${n}</span>`);
   }
   return parts.join('');
 }
