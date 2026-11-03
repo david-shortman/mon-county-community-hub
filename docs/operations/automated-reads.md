@@ -10,10 +10,10 @@ Google Calendar feeds are never read automatically: `calendar.google.com/robots.
 
 - **One check, shared.** [`site/src/lib/robots.mjs`](../../site/src/lib/robots.mjs) reads each site's robots.txt once per run and says whether a path is allowed. Rules for our name (`MonCountyCommunityHub`) win over rules for `*`. Rules aimed at other robots (for example `ClaudeBot` or `GPTBot`) do not apply to us, but nothing here pretends to be another robot either.
 - **When unsure, do not read.** A path is skipped if a rule matches it as written, or if it only matches when upper and lower case are ignored. Many local sites run on servers where `/iCalendar/` and `/icalendar/` are the same page.
-- **Missing or unreadable robots.txt** (RFC 9309): no robots.txt (a 4xx answer) means everything is allowed. A robots.txt we cannot get (a 5xx answer, a timeout, a dropped connection) means we read nothing on that site in that run. A robots.txt that comes back as an HTML page has no rules.
+- **Missing or unreadable robots.txt** (RFC 9309, made stricter on 2026-11-03): only a 404 or 410 answer means "no robots.txt", so everything is allowed. Any other answer that is not a robots.txt means we read nothing on that site in that run: a 403, 429 or other refusal, a 5xx, a timeout, a dropped connection, or a web page sent in its place (a bot check, a firewall page or a home page). Each read tries 3 times, a second apart, before giving up.
 - **The fetch helper checks before every read.** `fetchWithRetry` in [`site/src/lib/ingest.mjs`](../../site/src/lib/ingest.mjs) (the shared helper from #930) runs the check first and follows redirects one at a time, checking each address. A disallowed path throws `RobotsDisallowed` and is never requested. Calendar feeds, meetings, live numbers and the weather all use it.
 - **Feed health says why.** A feed that robots.txt blocks falls back to its saved copy, and `/api/v1/feed-health.json` shows the reason in `error` with `robots_txt_disallows: true`. A feed turned off on purpose shows `status: "off"`.
-- **The other readers** use the same module: the daily Source check and the page watchers that ride on it (`site/scripts/check-sources.mjs`; pantry, centers, sales, shelter and Make it better watch lists), the Health check's feed and link checks (`site/scripts/health.mjs`), 311 totals (`check-311.mjs`) and County Health Rankings numbers (`update-chr-indicators.mjs`).
+- **The other readers** use the same module: the daily Source check (which checks robots.txt again before following each redirect, since 2026-11-03) and the page watchers that ride on it (`site/scripts/check-sources.mjs`; pantry, centers, sales, shelter and Make it better watch lists), the Health check's feed and link checks (`site/scripts/health.mjs`), 311 totals (`check-311.mjs`) and County Health Rankings numbers (`update-chr-indicators.mjs`).
 - **Tests:** [`site/test/robots.test.mjs`](../../site/test/robots.test.mjs), run by `npm test` after every build.
 
 ## When a source says no
@@ -24,6 +24,23 @@ Google Calendar feeds are never read automatically: `calendar.google.com/robots.
 4. Log a discovery in [`docs/discoveries/`](../discoveries/) if it leaves a gap.
 
 Adding a new automated reader: use `fetchWithRetry`, or call `robotsCheck` before any other `fetch`, and run `node scripts/robots-audit.mjs` in `site/` to see the result.
+
+## What changed on 2026-11-03
+
+Running `npm run update-feeds` once saved a fresh "live" copy of the City of Morgantown calendar feed, even though the City's robots.txt blocks it (#529). The cause: the City's server answers some reads of `/robots.txt` with a 403 page or a 503, and the code treated any 4xx answer as "this site has no robots.txt, read anything". So on runs that drew a 403, the feed was read.
+
+| Change | Before | Now |
+|---|---|---|
+| robots.txt answers 403, 429 or another 4xx (not 404 or 410) | Everything allowed | Nothing read on that site this run |
+| robots.txt answers with a web page | No rules, everything allowed | Nothing read on that site this run |
+| robots.txt read fails | 2 tries, no pause | 3 tries, a second apart |
+| Source check follows a redirect | Followed without a robots.txt check | robots.txt checked for each new address, on any site |
+
+What this means day to day:
+
+- On a run where the City answers every try with 403 or 503, nothing on `www.morgantownwv.gov` is read: the meetings reader, the shelter and food watches of City pages, and the volunteer page watch. They use their saved copy or skip, and try again the next run.
+- `www.pantryplusmore.org` answers `/robots.txt` with its home page, so the food watch no longer reads its mobile giveaways page. The Source check lists it under "Robots.txt asks us not to fetch (check by hand)".
+- Tests in `site/test/robots.test.mjs` check that a blocked feed is never requested or saved as live, whatever the robots.txt answer is (the rules, 403, 429, 503, a web page, a dropped connection), and that the Source check never follows a redirect into a blocked path.
 
 ## What changed on 2026-11-01
 
