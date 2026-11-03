@@ -1,0 +1,65 @@
+---
+// Our checks in the open (#1057): one dated snapshot a month from
+// content/progress/<YYYY-MM>.yaml, newest first. Every number sits under its
+// snapshot's dated heading, never in a sentence about "now" (David's rule), and
+// old snapshots stay so the page shows a trend. No visitor counts.
+import fs from 'node:fs';
+import path from 'node:path';
+import YAML from 'yaml';
+import Base from '../layouts/Base.astro';
+import { CONTENT_DIR, prettyDate, ymd } from '../lib/content.mjs';
+export const page = { door: "about", label: "Is this site better than what was here?", summary: "Our checks in the open, as dated monthly snapshots" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const dir = path.join(CONTENT_DIR, 'progress');
+const NEED = ['month', 'title', 'checked', 'summary', 'story', 'comparisons', 'corrections', 'short', 'check'];
+const snapshots = (fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^\d{4}-\d{2}\.yaml$/.test(f)) : []).map((f) => {
+  const s = YAML.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+  const missing = NEED.filter((k) => s?.[k] == null);
+  if (missing.length) throw new Error(`content/progress/${f}: needs ${missing.join(', ')}`);
+  return { ...s, checked: ymd(s.checked), id: `snapshot-${String(s.month).slice(0, 7)}` };
+}).sort((a, b) => String(b.month).localeCompare(String(a.month)));
+---
+<Base title="Is this site better than what was here? Mon County checks" description="Monthly, dated snapshots comparing Everything Morgantown with the sources people in Mon County use today: what is better, what we got wrong, what still falls short.">
+  <h1>Is this site better than what was here?</h1>
+  <p class="lede">Each month we compare our pages with the sources people here use today, like printed guides and official pages. Here is what we found, good and bad. Each snapshot keeps the numbers from its own date, so you can see the trend.</p>
+  <p>We compare formats, not organizations: the groups behind those sources do the real work, and we point to them.</p>
+
+  {snapshots.length > 1 && (
+    <nav aria-label="Snapshots"><ul>{snapshots.map((s) => <li><a href={`#${s.id}`}>{s.title}</a></li>)}</ul></nav>
+  )}
+
+  {snapshots.map((s) => (
+    <section class="progress-snapshot" aria-labelledby={s.id}>
+      <h2 id={s.id}>{s.title}</h2>
+      <p class="eyebrow">Checked {prettyDate(s.checked)}</p>
+      <p><strong>{s.summary}</strong></p>
+
+      <h3>One need, before and after: {s.story.need}</h3>
+      <div class="ba">
+        <section class="card"><h4>Before</h4><p>{s.story.before}</p></section>
+        <section class="card"><h4>On our site</h4><p>{s.story.after}</p></section>
+      </div>
+
+      <h3>Compared with today's sources</h3>
+      <ul>{s.comparisons.map((c) => <li><strong>{c.what}:</strong>{' '}{c.plain}</li>)}</ul>
+
+      <h3>What we got wrong</h3>
+      <p>{s.corrections.text} See them all on <a href={`${base}/corrections/`}>Corrections</a>.</p>
+
+      <h3>What still falls short</h3>
+      <ul>{s.short.map((t) => <li>{t}</li>)}</ul>
+
+      <h3>Check it yourself</h3>
+      <ul>{s.check.map((c) => <li><a href={c.url}>{c.label}</a></li>)}</ul>
+    </section>
+  ))}
+
+  <p class="meta">A new snapshot comes from the first weekly scorecard run of each month. How we check facts: <a href={`${base}/how-we-check/`}>How we check</a>.</p>
+</Base>
+
+<style>
+  .progress-snapshot .eyebrow { margin: 0 0 var(--s3); }
+  .progress-snapshot h4 { margin: 0 0 var(--s2); font-size: 1.1rem; }
+  .ba { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .ba .card { margin: 0; }
+</style>

@@ -21,6 +21,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
     <ul>
       <li><a href="#boards">Where local employers post jobs</a></li>
       <li><a href="#help">Free help with a resume, interviews or a computer</a></li>
+      <li><a href="#pay">Your pay: the minimum wage, and wages you are owed</a></li>
       <li><a href="#train">Short trainings and apprenticeships</a></li>
     </ul>
   </nav>
@@ -33,6 +34,8 @@ const r = (slug) => all.find((e) => e.slug === slug);
   {r('mon-county-commission-jobs') && <ResourceCard r={r('mon-county-commission-jobs')} />}
   {r('wv-state-government-jobs') && <ResourceCard r={r('wv-state-government-jobs')} />}
   {r('mon-county-schools-jobs') && <ResourceCard r={r('mon-county-schools-jobs')} />}
+  <p>WVU students looking for a job on or off campus:</p>
+  {r('wvu-student-jobs-handshake') && <ResourceCard r={r('wvu-student-jobs-handshake')} />}
   <p>The two hospital systems in Morgantown, listed A to Z:</p>
   {r('mon-health-jobs') && <ResourceCard r={r('mon-health-jobs')} />}
   {r('wvu-medicine-jobs') && <ResourceCard r={r('wvu-medicine-jobs')} />}
@@ -44,6 +47,12 @@ const r = (slug) => all.find((e) => e.slug === slug);
   {r('mympls-job-and-computer-help') && <ResourceCard r={r('mympls-job-and-computer-help')} showCost />}
   {r('goodwill-ncwv-career-and-computer-help') && <ResourceCard r={r('goodwill-ncwv-career-and-computer-help')} showCost />}
   {r('wvu-career-center-alumni') && <ResourceCard r={r('wvu-career-center-alumni')} />}
+
+  <h2 id="pay">Your pay: the minimum wage, and wages you are owed</h2>
+  <p>The state Division of Labor enforces pay rules, like the minimum wage, how often payday comes, and when your last paycheck is due. If you were not paid, you can ask it to look into it, for free.</p>
+  {r('wv-unpaid-wages') && <ResourceCard r={r('wv-unpaid-wages')} />}
+  {r('wv-minimum-wage') && <ResourceCard r={r('wv-minimum-wage')} />}
+  <p>Working and still short each month? <a href={`${base}/free-tax-help/`}>Free tax help</a> lists tax credits for working households, and <a href={`${base}/help/what-help/`}>What help might I get</a> points to programs by need.</p>
 
   <h2 id="train">Short trainings and apprenticeships</h2>
   {r('pierpont-career-training') && <ResourceCard r={r('pierpont-career-training')} showCost />}

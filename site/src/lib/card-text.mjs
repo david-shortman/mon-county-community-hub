@@ -1,6 +1,7 @@
 // Short card text on phones (#1381). A long card field shows its first two
-// sentences, and the rest goes behind "More details". Nothing is reworded or
-// dropped; the words are only split. Text that names a crisis line is never
+// sentences, plus any sentence with a cost, a deadline, what to bring or
+// "call first" (#1393), and the rest goes behind "More details". Nothing is
+// reworded or dropped; the words are only split. Text that names a crisis line is never
 // folded, so safety lines always show.
 
 export const FOLD_WORDS = 60; // a field longer than this gets folded
@@ -26,14 +27,32 @@ export function sentences(text) {
   return parts;
 }
 
+// Sentences that stay in sight even past the fold (#1393): an amount of money,
+// a fee or cost, a deadline or last day, what to bring, or "call first".
+// "Questions, call ..." is not one: the card's Call button already shows the number.
+export const KEY = /\$\s?\d|\b(fees?|costs?|charges?|tuition|deadlines?|last day|due (on|by)|bring|call (first|ahead|before)|before you (go|come|visit))\b/i;
+// A sentence that points back ("That is $31,920 for 1 person") keeps the one before it.
+const REFERS = /^(?:\S+\s+){0,3}(it|this|that|these|those|they|then)\b/i;
+
 // { short, rest }: rest is '' when the text is short enough or names a crisis line.
+// The first two sentences and every KEY sentence stay visible, in their
+// original order; the other sentences go behind "More details".
 export function foldText(text, { force = false } = {}) {
   const t = (text ?? '').trim();
   if (!t) return { short: '', rest: '' };
   if (!force && (words(t) <= FOLD_WORDS || CRISIS.test(t))) return { short: t, rest: '' };
   const s = sentences(t);
   if (s.length <= KEEP) return { short: t, rest: '' };
-  return { short: s.slice(0, KEEP).join(' '), rest: s.slice(KEEP).join(' ') };
+  const show = new Set(s.map((_, i) => i).filter((i) => i < KEEP));
+  for (let i = s.length - 1; i >= KEEP; i -= 1) {
+    if (KEY.test(s[i]) || (show.has(i) && i > 0 && REFERS.test(s[i]))) {
+      show.add(i);
+      if (REFERS.test(s[i])) show.add(i - 1);
+    }
+  }
+  const rest = s.filter((_, i) => !show.has(i));
+  if (!rest.length) return { short: t, rest: '' };
+  return { short: s.filter((_, i) => show.has(i)).join(' '), rest: rest.join(' ') };
 }
 
 export const longFields = (r, limit = FOLD_WORDS) =>

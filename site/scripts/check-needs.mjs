@@ -129,6 +129,14 @@ export function checkNeeds(entries, { label, orgSlugs, topics, questionIds, toda
       if (!P.site_coverage.properties.level.enum.includes(c.level)) err(`site_coverage.level must be one of ${P.site_coverage.properties.level.enum.join(', ')}`);
       if (!c.why) err('site_coverage needs "why": what the site has and lacks');
       checkDate(c.checked, 'site_coverage');
+      // The earlier rating (#1534): shown on /needs/ as before and after.
+      const b = c.before;
+      if (b != null) {
+        unknown(b, P.site_coverage.properties.before.properties, 'site_coverage.before.');
+        if (!P.site_coverage.properties.level.enum.includes(b.level)) err(`site_coverage.before.level must be one of ${P.site_coverage.properties.level.enum.join(', ')}`);
+        checkDate(b.checked, 'site_coverage.before');
+        if (String(b.checked) > String(c.checked)) err('site_coverage.before.checked must not be after site_coverage.checked');
+      }
     }
 
     // Privacy: a need is about a problem, not about people.
@@ -152,7 +160,7 @@ const good = checkNeeds(fixtures.filter((f) => !f.file.includes('bad')), { ...ct
 const bad = checkNeeds(fixtures.filter((f) => f.file.includes('bad')), { ...ctx, label: 'fixtures/needs' });
 const selfTest = [];
 if (good.errors.length) selfTest.push(`the good fixture should pass but got:\n  ${good.errors.join('\n  ')}`);
-for (const expect of ['unknown field contact_email', 'evidence[0] needs a source url', 'whole number', 'severity must be', 'long quote', 'in the future', 'never a private person', 'is not in content/doors.yaml', 'file name should match', 'has no page in site/src/pages', 'must be a path on this site', 'site_coverage.level must be', 'site_coverage needs "why"'])
+for (const expect of ['unknown field contact_email', 'evidence[0] needs a source url', 'whole number', 'severity must be', 'long quote', 'in the future', 'never a private person', 'is not in content/doors.yaml', 'file name should match', 'has no page in site/src/pages', 'must be a path on this site', 'site_coverage.level must be', 'site_coverage needs "why"', 'site_coverage.before.level must be', 'before.checked must not be after'])
   if (!bad.errors.some((e) => e.includes(expect))) selfTest.push(`the bad fixture should fail with "${expect}"`);
 if (selfTest.length) {
   console.error(`check-needs self-test failed:\n- ${selfTest.join('\n- ')}`);

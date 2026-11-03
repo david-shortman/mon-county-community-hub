@@ -121,14 +121,14 @@ const doorSnippet = `- slug: this-month
   <table>
     <thead><tr><th scope="col">When</th><th scope="col">What gets checked</th></tr></thead>
     <tbody>
-      <tr><td>Every change</td><td>Every listing has a source and a date. No broken pages, colors are easy to read, and pages stay small for phones.</td></tr>
+      <tr><td>Every change</td><td>Every listing has a source and a date. No broken pages or links. Pages for a hard moment stay under 50 KB and all others under 150 KB. All text is at least 7 to 1 against its background, in light and dark. No page scrolls sideways on a 320 pixel phone, even with text twice as big. Question paths and topic pages work with scripts off.</td></tr>
       <tr><td>Every change to what you see</td><td>A second AI run scores it with the guides that fit: works for everyone, easy to use, clear look, easy to find, clear words, and honest and fair. A program flags shelter, crisis, food and benefits changes for the owner.</td></tr>
       <tr><td>Every morning</td><td>The site is rebuilt, so past dates drop off.</td></tr>
       <tr><td>Every day</td><td>Every outside page we use is visited, Help now pages first. Broken pages, moved pages and phone numbers no longer on the source get flagged.</td></tr>
       <tr><td>Every 4 hours</td><td>A health check: is the site up, are dates current, did the last update go live? A listing not rechecked in 6 months (90 days for health, money, housing, family, taxes, voting and dates) is flagged, and the listing itself says it may be out of date.</td></tr>
     </tbody>
   </table>
-  <p class="check"><strong>Check it yourself:</strong> <a href={tree('.github/workflows')}>the programs themselves</a>, <a href={doc('docs/operations/README.md')}>what each check does</a> and <a href={tree('docs/rubrics')}>the six review guides</a>, all on GitHub. <a href={`${base}/how-we-check/`}>How we check</a> says how this compares with 211.</p>
+  <p class="check"><strong>Check it yourself:</strong> <a href={tree('.github/workflows')}>the programs themselves</a>, <a href={doc('docs/operations/README.md')}>what each check does</a> and <a href={tree('docs/rubrics')}>the six review guides</a>, all on GitHub. <a href={`${base}/how-we-check/`}>How we check</a> says how this compares with 211. <a href={`${base}/access/`}>Built for any phone and every reader</a> lists each promise about phones, big text and no signal, with the check behind it and today's numbers.</p>
 
   <h2 id="wrong">When something is wrong</h2>
   <ul>
@@ -154,6 +154,7 @@ const doorSnippet = `- slug: this-month
     <li><strong>Most changes go live without a person looking first.</strong> Only the most serious ones wait for the owner, who looks over the rest when there is time, after they're up.</li>
     <li><strong>The AI review is a rule, not a lock.</strong> The AI helpers are told to wait for it, but GitHub doesn't force them to.</li>
     <li><strong>AI can get things wrong.</strong> Please check details with the group before you act.</li>
+    <li><strong>Not tested with screen readers or voice control yet.</strong> Programs check what they can, but these need a person on a real device, and nobody has done that yet.</li>
   </ul>
   <p>Straight answers to tougher questions, like who pays for this and what happens if the owner stops, are on <a href={`${base}/hard-questions/`}>Hard questions</a>.</p>
 

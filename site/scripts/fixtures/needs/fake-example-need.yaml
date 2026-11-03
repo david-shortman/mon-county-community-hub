@@ -35,3 +35,7 @@ site_coverage:
   level: partial
   why: Nothing real; this is a fixture.
   checked: 2026-11-01
+  before:
+    level: thin
+    checked: 2026-10-31
+    why: Nothing real; this is a fixture too.

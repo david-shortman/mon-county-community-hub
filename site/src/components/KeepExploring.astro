@@ -1,0 +1,61 @@
+---
+// "Keep exploring" on /topics/ (#1040), above the A to Z: three small pieces
+// picked when the site is built, so no script runs and nothing is tracked.
+// - Did you know: up to three place stories (content/places `story`), each
+//   with the place's sources and checked date, from different parts of the county.
+// - New or changed this week: pages the build log names in the last 7 days.
+// - Show me something: one listed page, a different one each day.
+import path from 'node:path';
+import SourceLine from './SourceLine.astro';
+import { CONTENT_DIR, todayYmd } from '../lib/content.mjs';
+import { loadPlaces, placeStatus, AREAS } from '../lib/places.mjs';
+import { loadPages, allListed } from '../lib/pages.mjs';
+import { pickStories, pickSurprise, recentPages } from '../lib/topics-extras.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const areaName = Object.fromEntries(AREAS);
+// Only places open now, so a story never sends someone to a closed hall.
+const stories = pickStories(loadPlaces().filter((p) => placeStatus(p, today).status === 'active'), today);
+const pages = await loadPages();
+const listed = (await allListed()).filter((p) => p.door !== 'help-now' && p.route !== '/topics/');
+const surprise = pickSurprise(listed, today);
+const recent = recentPages(path.join(CONTENT_DIR, '..', 'docs', 'build-log'), new Set([...pages.values()].filter((p) => p.listed).map((p) => p.route)), today);
+---
+<section class="keep-exploring" aria-labelledby="keep-h">
+  <h2 id="keep-h">Keep exploring</h2>
+
+  {stories.length > 0 && (
+    <>
+      <h3 id="did-you-know">Did you know?</h3>
+      {stories.map((p) => (
+        <article class="card place" aria-labelledby={`dyk-${p.slug}`}>
+          <p class="eyebrow">{areaName[p.area] ?? 'Mon County'}</p>
+          <h4 id={`dyk-${p.slug}`}><a href={`${base}/community-centers/${p.slug}/`}>{p.name}</a></h4>
+          <p>{p.story}</p>
+          <SourceLine sources={p.sources} about={p.name} />
+        </article>
+      ))}
+    </>
+  )}
+
+  {recent.pages.length > 0 && (
+    <>
+      <h3 id="new-this-week">New or changed this week</h3>
+      <ul class="topic-list">
+        {recent.pages.map((r) => <li><a href={`${base}${r.route}`}>{pages.get(r.route).label}</a><span class="hint">{pages.get(r.route).summary}</span></li>)}
+      </ul>
+      <p>{recent.count > recent.pages.length ? `Our build log names ${recent.count} pages from the last 7 days. ` : ''}What is happening around the county this week: <a href={`${base}/pulse/`}>This week in Mon County</a>.</p>
+    </>
+  )}
+
+  {surprise && (
+    <>
+      <h3 id="show-me">Show me something</h3>
+      <p>Today's pick: <a href={`${base}${surprise.route}`}>{surprise.label}</a>. {surprise.summary}. A new page is picked each day.</p>
+    </>
+  )}
+</section>
+
+<style>
+  .keep-exploring h4 { margin: 0 0 var(--s2); font-size: 1.15rem; }
+</style>
