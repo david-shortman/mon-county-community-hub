@@ -17,6 +17,9 @@ export const ALIASES = {
   'Wal-mart/UTC': 'Walmart/UTC',
   'Stewart St.': 'Stewart Street',
   Courthouse: 'Court House',
+  // Mountain Line's "Westover Terminal" page (busride.org/WestoverTerminal) is
+  // about Pifer Terminal, 691 Fairmont Road: one terminal, two names.
+  'Westover Terminal': 'Pifer Terminal',
 };
 export const one = (s) => ALIASES[s] ?? s;
 

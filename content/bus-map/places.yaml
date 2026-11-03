@@ -1,0 +1,316 @@
+# Places for the bus trip planner and map on /bus-routes/ (#1656).
+#
+# Each place is a point on the map and a list of Mountain Line stops that are
+# at or in it. Stop names are spelled exactly as in
+# content/pdf-pages/mountain-line-routes.yaml (after the spelling joins in
+# site/src/lib/bus-network.mjs); a test fails when a name is not on a route.
+#
+# Where the points come from (all public domain or official):
+#   census-point: U.S. Census Bureau TIGER/Line 2024 point landmarks (populated
+#     places and neighborhoods, tl_2024_54_pointlm).
+#   census-area: TIGER/Line 2024 area landmarks (tl_2024_54_arealm), the
+#     landmark's internal point.
+#   census-town: Census 2024 Gazetteer, places file for West Virginia, the
+#     town's internal point.
+#   address: the address on the official page in `source`, placed with the
+#     Census Geocoder (geocoding.geo.census.gov, Public_AR_Current).
+# https://www2.census.gov/geo/tiger/TIGER2024/
+# https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
+#
+# Why a stop is in a place: its name names the place ("Sabraton Goodwill"),
+# or the official page in `source` says so. Stops we could not place are left
+# off the map and the planner (see docs/discoveries/2026-11-03-bus-stops-without-places.md).
+# `label` is where the name sits beside the dot: n, s, e or w.
+checked: 2026-11-03
+places:
+  - id: pifer
+    name: Pifer Terminal
+    kind: hub
+    point: [39.63242, -79.97421]
+    from: address
+    address: 691 Fairmont Road
+    source: https://www.busride.org/WestoverTerminal
+    note: Mountain Line's "Westover Terminal" page gives this address for Pifer Terminal.
+    label: s
+    stops: [Pifer Terminal]
+  - id: downtown
+    name: Downtown Morgantown
+    short: Downtown
+    kind: hub
+    point: [39.6295, -79.9559]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    note: Court House is the county courthouse at 243 High St and Public Safety Building is at 300 Spruce Street, both in downtown Morgantown (content/orgs/monongalia-county-clerk.yaml, content/orgs/morgantown-parking-authority.yaml).
+    label: s
+    stops: [Downtown, Court House, Court House (High St.), Public Safety Building]
+  - id: mountainlair
+    name: Mountainlair (WVU Downtown campus)
+    short: Mountainlair
+    kind: hub
+    point: [39.63375, -79.95502]
+    from: address
+    address: 1550 University Ave
+    source: https://www.wvu.edu/faqs/what-is-the-mountainlair/
+    note: WVU says the Mountainlair is the student union on its Downtown campus. Read through a web search of that page on 2026-11-03, since WVU's site blocks direct reads from our tools.
+    label: e
+    stops: [Mountainlair]
+  - id: evansdale
+    name: Towers and WVU Evansdale campus
+    short: Towers
+    kind: hub
+    point: [39.64874, -79.96702]
+    from: address
+    address: 356 Evansdale Drive
+    source: https://housing.wvu.edu/housing-options/residence-halls/bennett-tower
+    note: WVU Housing says Towers is the Evansdale Residential Complex at 356 Evansdale Drive. WVU's site blocks direct reads from our tools, so this was read through a web search of that page on 2026-11-03.
+    label: w
+    stops: [Towers, Evansdale Crossing, Evansdale McDonalds]
+  - id: mountaineer-station
+    name: Mountaineer Station
+    kind: place
+    point: [39.65541, -79.96333]
+    from: address
+    address: 1112 Van Voorhis Road
+    source: https://campuslife.wvu.edu/resource-portal/transportation
+    note: WVU's transportation page gives this address for pick up and drop off at Mountaineer Station (read through a web search on 2026-11-03, since WVU's site blocks direct reads from our tools). The parking garage there has the same name and address (content/resources/wvu-dental-clinics.yaml).
+    label: w
+    stops: [Mountaineer Station]
+  - id: ruby
+    name: Ruby Memorial Hospital
+    short: Ruby Memorial
+    kind: place
+    point: [39.6501, -79.9581]
+    from: census-point
+    source: content/resources/bus-to-ruby-memorial.yaml
+    note: The stop called Ruby is J.W. Ruby Memorial Hospital (Census calls the point "University Hosp").
+    label: e
+    stops: [Ruby]
+  - id: mon-general
+    name: Mon General Hospital
+    short: Mon General
+    kind: place
+    point: [39.6631, -79.9464]
+    from: census-area
+    source: https://www2.census.gov/geo/tiger/TIGER2024/AREALM/
+    label: e
+    stops: [Mon General]
+  - id: airport
+    name: Morgantown airport
+    short: Airport
+    kind: place
+    point: [39.6428, -79.9131]
+    from: census-area
+    source: https://www2.census.gov/geo/tiger/TIGER2024/AREALM/
+    label: n
+    stops: [Airport]
+  - id: mylan-park
+    name: Mylan Park
+    kind: place
+    point: [39.64299, -80.04036]
+    from: address
+    address: 500 Mylan Park Lane
+    source: https://mylanpark.org/about/
+    label: n
+    stops: [Mylan Park, Mylan Aquatic Center, Mylan Community Center]
+  - id: morgantown-mall
+    name: Morgantown Mall
+    kind: place
+    point: [39.6292, -79.9859]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Morgantown Mall, Morgantown Mall Theater]
+  - id: mountaineer-mall
+    name: Mountaineer Mall
+    kind: place
+    point: [39.6056, -79.9609]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Mountaineer Mall]
+  - id: westover
+    name: Westover
+    kind: town
+    point: [39.63377, -79.98996]
+    from: census-town
+    source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
+    label: n
+    stops: [Westover Triangle, Westover Town Hall, Westover Park & Ride, McDonald's Westover]
+  - id: star-city
+    name: Star City
+    kind: town
+    point: [39.65916, -79.98663]
+    from: census-town
+    source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
+    label: n
+    stops: [Star City CVS]
+  - id: granville
+    name: Granville
+    kind: town
+    point: [39.64878, -79.99918]
+    from: census-town
+    source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
+    label: w
+    stops: [Granville VFD, Granville P&R]
+  - id: suncrest
+    name: Suncrest
+    kind: area
+    point: [39.6551, -79.9745]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: n
+    stops: [Suncrest Town Centre]
+  - id: sunnyside
+    name: Sunnyside
+    kind: area
+    point: [39.6387, -79.9562]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: w
+    stops: [Sunnyside]
+  - id: south-park
+    name: South Park
+    kind: area
+    point: [39.619, -79.954]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: e
+    stops: [South Park]
+  - id: sabraton
+    name: Sabraton
+    kind: area
+    point: [39.6295, -79.9284]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Sabraton Goodwill, Sabraton Sheetz]
+  - id: mileground
+    name: The Mileground
+    short: Mileground
+    kind: area
+    point: [39.6426, -79.9306]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: n
+    stops: [Mileground Honda]
+  - id: brookhaven
+    name: Brookhaven
+    kind: town
+    point: [39.60621, -79.88295]
+    from: census-town
+    source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
+    label: e
+    stops: [Brookhaven, Brookhaven Fire Department]
+  - id: dellslow
+    name: Dellslow
+    kind: area
+    point: [39.607, -79.892]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Dellslow]
+  - id: rock-forge
+    name: Rock Forge
+    kind: area
+    point: [39.6051, -79.9173]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Rock Forge Community House]
+  - id: laurel-point
+    name: Laurel Point
+    kind: area
+    point: [39.6192, -80.0081]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Laurel Point]
+  - id: booth
+    name: Booth
+    kind: town
+    point: [39.59762, -80.0191]
+    from: census-town
+    source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
+    label: s
+    stops: [Booth]
+  - id: crown
+    name: Crown
+    kind: area
+    point: [39.5831, -80.1026]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Crown Turn Around]
+  - id: bertha-hill
+    name: Bertha Hill
+    kind: area
+    point: [39.6645, -79.9923]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: n
+    stops: [Bertha Hill]
+  - id: jere
+    name: Jere
+    kind: area
+    point: [39.667, -80.0353]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Jere]
+  - id: cassville
+    name: Cassville
+    kind: town
+    point: [39.68148, -80.06547]
+    from: census-town
+    source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
+    label: n
+    stops: [Cassville]
+  - id: new-hill
+    name: New Hill
+    kind: area
+    point: [39.6684, -80.0715]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    note: Census spells it "New Hl".
+    label: s
+    stops: [New Hill]
+  - id: core
+    name: Core
+    kind: area
+    point: [39.6801, -80.1073]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Core]
+  - id: blacksville
+    name: Blacksville
+    kind: town
+    point: [39.71564, -80.21471]
+    from: census-town
+    source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
+    label: n
+    stops: [Blacksville]
+  - id: bula
+    name: Bula
+    kind: area
+    point: [39.7031, -80.2573]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Bula]
+  - id: wana
+    name: Wana
+    kind: area
+    point: [39.7037, -80.2984]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: n
+    stops: [Wana]
+  - id: wadestown
+    name: Wadestown
+    kind: area
+    point: [39.6754, -80.3381]
+    from: census-point
+    source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
+    label: s
+    stops: [Wadestown]
