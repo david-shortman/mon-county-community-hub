@@ -37,6 +37,17 @@ Calls are grouped by organization so one call settles several questions. Each nu
 ### Morgantown Area Partnership: 304-292-3311 (from the November 1 list)
 - What are the 2027 Arts Walk dates? (#653)
 
+## Round two calls (older issues, added 2026-11-02)
+
+### Senior Monongalians: 304-296-9812 (https://www.seniormons.org/blank)
+- What is the Core meal site's address, what does a home-delivered meal cost, and which number books rides? (#559)
+
+### The SOURCE (number on https://www.thesourcewv.org/)
+- Which school year are the before and after school rates in the posted handbooks for? (#613)
+
+### MECCA 911
+- #609 lists two numbers (304-599-6332 and 304-599-6382). Check MECCA's own contact page first, then ask who sponsors Mon County CERT and when classes run. (#609)
+
 ## Pages to open in a normal browser
 
 These refuse automated reads (HTTP 403, a bot challenge, or an outage) on 2026-11-02. Paste what the page says on the issue.

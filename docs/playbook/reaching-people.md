@@ -155,7 +155,7 @@ Notes about specific people, conversations, and outreach plans stay in the priva
 These map to the charter's scoreboard levels.
 
 - **Findability:** helper questions and after-hours questions added to the findability test, such as "A family needs food tonight. What do I hand them?" and "It is Sunday night and my power is being shut off. What can I do?"
-- **Use:** aggregate counts of print, text, and share clicks, question paths finished, and visits outside business hours, once analytics are decided (#41).
+- **Use:** page views, counted by GoatCounter, live since November 1, 2026 (#1352). Print, text and share clicks and finished question paths are not counted yet; that would need click events, which are not set up.
 - **Action:** partner-reported numbers only through David, per the measurement playbook.
 - **Recognition:** corrections from helpers, questions asked, and local groups linking to or sharing the site.
 

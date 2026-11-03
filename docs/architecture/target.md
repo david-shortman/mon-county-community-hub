@@ -1,6 +1,6 @@
 # Target architecture: the next 6 to 12 months
 
-Status: proposed, 2026-10-28.
+Status: accepted as direction by David, 2026-11-02 (#94, #1410). Proposed 2026-10-28.
 
 The project is meant to grow into many websites, apps, tools, open data, APIs, and MCP servers. This page says how to do that without the system becoming hard to change, expensive, or untrustworthy. Today's state is in [README.md](README.md). The choices behind this page are in [adr/](adr/).
 

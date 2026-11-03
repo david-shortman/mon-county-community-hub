@@ -6,6 +6,8 @@
 // says to ask first.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, telHref } from '../lib/content.mjs';
 export const page = { door: "living-here", topic: "growing", label: "Something's wrong with my plants", summary: "Who to ask when plants are sick, eaten or not growing: the county WVU Extension office, then the WVU Plant Diagnostic Clinic" };
@@ -19,11 +21,13 @@ const phone = '304-291-7201';
   <h1>Who can tell me what's wrong with my plants?</h1>
   <p class="lede">Call WVU Extension's Monongalia County office at <a href={telHref(phone)}>{phone}</a>. Their experts can spot many common plant diseases and bugs. If they need a closer look, they help you send a sample to the WVU Plant Diagnostic Clinic in Morgantown.</p>
 
-  <h2 id="ask">Start with the county office</h2>
+  <Route label="Steps to find out what is wrong with a plant">
+  <Milepost n={1} title="Start with the county office" id="ask" open>
   <ResourceCard r={resource('wvu-extension-monongalia-garden-help')} headingLevel={3} />
   <p>It helps to have clear photos of the problem, the name of the plant, and what you have already tried.</p>
+  </Milepost>
 
-  <h2 id="clinic">Send a sample to the clinic</h2>
+  <Milepost n={2} title="If they need a closer look, send a sample to the clinic" id="clinic">
   <ResourceCard r={resource('wvu-plant-diagnostic-clinic')} headingLevel={3} />
   <p>The clinic's steps for a good sample:</p>
   <ol>
@@ -33,6 +37,8 @@ const phone = '304-291-7201';
     <li><strong>Mail it early in the week</strong> to: WVU Plant Diagnostic Clinic, G102 South Agricultural Sciences Building, P.O. Box 6108, Morgantown, WV 26506.</li>
   </ol>
   <SourceLine sources={clinic} about="how to send a plant sample" />
+  </Milepost>
+  </Route>
 
   <p>Wondering about your soil? See <a href={`${base}/soil-test/`}>How do I get my garden soil tested?</a> More for gardeners: <a href={`${base}/grow/`}>Grow food and flowers</a>.</p>
 </Base>

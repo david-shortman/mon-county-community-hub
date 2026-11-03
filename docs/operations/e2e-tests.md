@@ -29,7 +29,7 @@ Run one file with `node --test e2e/tonight.test.mjs`. In a Claude Code cloud ses
 | `offline.test.mjs` | After one visit, every hard-moment page opens with no signal, with a dated "Call before you go" note. An unsaved page falls back to Help now. Old saved copies are not shown. The first saved list is the same whichever page a person opens first. Back online, pages show with no note. See [offline.md](offline.md). |
 | `promises.test.mjs` | The access and privacy promises on Privacy, About and How this site works (#1423): no outside files except the visit counter, no cookies, no form asks for a name or email, Quick exit sends no referrer, no Text or Share on `private_trace` listings, the saved offline list is fixed and expires on time, the skip link comes first, nothing moves with reduced motion on, and the scroll story works with scripts off and stops with Turn off motion. See [promise-checks.md](promise-checks.md). |
 
-`screenshots.mjs` is not a test. It takes phone-width (390px) pictures of 15 pages residents most likely need. The site has no visit counts yet, so the list is a judgment call. Long pages stop at 6000px. The phone tab bar is fixed to the screen, so in a full-page picture it shows partway down the page. That is expected.
+`screenshots.mjs` is not a test. It takes phone-width (390px) pictures of 15 pages residents most likely need. The list was a judgment call made before the visit counter went live (#1352); check it against the counts once a few weeks of them exist. Long pages stop at 6000px. The phone tab bar is fixed to the screen, so in a full-page picture it shows partway down the page. That is expected.
 
 ## In CI
 

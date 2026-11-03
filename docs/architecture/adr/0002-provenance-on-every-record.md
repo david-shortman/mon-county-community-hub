@@ -1,6 +1,6 @@
 # 0002: Provenance fields on every record
 
-Status: proposed, 2026-10-28
+Status: accepted by David, 2026-11-02 (#93, #1410). Proposed 2026-10-28.
 
 ## Context
 
