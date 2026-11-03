@@ -6,6 +6,7 @@
 // address (?have=job&have=rent), so nothing is stored or sent. Without
 // scripts the page shows the whole list, grouped by "If you...".
 import Base from '../layouts/Base.astro';
+import DateChip from '../components/DateChip.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource } from '../lib/content.mjs';
@@ -93,6 +94,7 @@ const label = Object.fromEntries(SITUATIONS);
   <h2 id="lieap">LIEAP: help with heating bills</h2>
   <p>LIEAP has set application windows, and funding can run out early: last season's regular window was set to run February 2 to 20, 2026, and DoHS closed it on February 9 when the money ran out. Check the dates on the card below before you go.</p>
   <SourceLine sources={[src.lieapOpened, src.lieapClosed]} org={ORG} about="last season's LIEAP window" />
+  <DateChip slug="lieap-pre-application-2026-27" label="Pre-LIEAP applications" />
   <ResourceCard r={lieap} />
 
   <h2 id="works">WV WORKS: cash help for families</h2>

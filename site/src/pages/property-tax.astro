@@ -5,6 +5,7 @@
 // 2026-10-30. Where the county page and state law differ, the page says who
 // says what (#660). No 2027 appeal dates until the county posts them.
 import Base from '../layouts/Base.astro';
+import DateChip from '../components/DateChip.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import PropertyTaxTry from '../components/PropertyTaxTry.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -36,6 +37,7 @@ const phones = { tax: '304-291-7244', assessor: '304-291-7222', commission: '304
     <li><strong>March 1:</strong> second half of taxes due to get a 2.5% discount.</li>
     <li><strong>April 30:</strong> last day to pay taxes without a penalty.</li>
   </ul>
+  <DateChip slug="homestead-exemption-deadline-2026" label="Homestead exemption" />
   <SourceLine sources={pdf} about="property tax dates" />
 
   <h2 id="pay">Paying your tax</h2>

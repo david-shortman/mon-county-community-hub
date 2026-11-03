@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import DateChip from '../components/DateChip.astro';
 import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Route from '../components/Route.astro';
@@ -85,6 +86,8 @@ const charitySources = [
     <li><strong>Emergency help:</strong> Mon Power's page says LIEAP includes one emergency payment per heating season. It can stop a shutoff or turn service back on. It is for customers who got a termination notice (a notice that service will be shut off) after they qualified for LIEAP.</li>
   </ul>
   <SourceLine sources={lieap.sources} org={lieap.org} about="LIEAP" />
+  <DateChip slug="lieap-pre-application-2026-27" label="Pre-LIEAP applications" />
+  <p>Not sure where to start? Call 211 or text your ZIP code to 898211. They can point you to programs near you.</p>
   <p>Already applied? <a href={`${base}/after-you-apply/lieap/`}>After you apply for LIEAP heating help</a> says when a decision comes and how to appeal.</p>
 
   <h3 id="discount">20% off winter gas and electric bills</h3>
