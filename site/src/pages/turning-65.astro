@@ -3,6 +3,7 @@
 // Facts from medicare.gov, checked 2026-10-30; WV SHIP from content/.
 export const page = { door: "care", topic: "health", label: "Turning 65 or on Medicare", summary: "When to sign up, free visits and shots, help with costs" };
 import Base from '../layouts/Base.astro';
+import DateChip from '../components/DateChip.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -20,6 +21,7 @@ const MG = 'https://www.medicare.gov';
 
   <h2 id="change-plans">Change your plan: October 15 to December 7</h2>
   <p>Already on Medicare? Each year, Open Enrollment "is the time each year when you can make changes to your coverage," Medicare says, like switching a Medicare Advantage Plan or a drug plan. This year it ends Monday, December 7. Changes start January 1, and "the plan must get your enrollment request by December 7" (<a href={`${MG}/health-drug-plans/open-enrollment`}>Medicare</a>, checked November 2, 2026). WV SHIP, below, can help you compare plans for free.</p>
+  <DateChip slug="medicare-open-enrollment-2027" label="Medicare Open Enrollment" />
 
   <h2>Visits and shots Medicare pays for in full</h2>
   <p>You pay nothing for these if your doctor or provider accepts Medicare. Other tests during the visit may cost extra.</p>

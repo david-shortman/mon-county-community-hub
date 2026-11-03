@@ -5,6 +5,7 @@
 // We quote and link the state's rules; we never work out who qualifies.
 // High-stakes benefits topic: the PR waits for David (#97).
 import Base from '../layouts/Base.astro';
+import DateChip from '../components/DateChip.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
@@ -39,6 +40,7 @@ const outreachSources = [{ url: 'https://bms.wv.gov/members/new-medicaid-rules-a
   <SourceLine sources={stateSources} about="what to do now" />
 
   <h2>When it starts</h2>
+  <DateChip slug="medicaid-community-engagement-start-2027" label="New rules start" />
   <ul>
     <li><strong>January 1, 2027:</strong> the start date. "Beginning January 1, 2027, some Medicaid members (age 19-64) must meet Community Engagement requirements, unless exempt."</li>
     <li><strong>New applicants:</strong> "applicants for January 2027 may have to meet requirements in December 2026."</li>

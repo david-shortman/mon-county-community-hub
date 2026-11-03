@@ -4,6 +4,7 @@
 // fact is in a resource record in content/resources/, read 2026-10-30.
 // Health coverage is a high-stakes topic: the PR waits for David (#97).
 import Base from '../layouts/Base.astro';
+import DateChip from '../components/DateChip.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -36,6 +37,8 @@ const gfe = [
   {r('apply-for-medicaid-wv') && <ResourceCard r={r('apply-for-medicaid-wv')} />}
   {r('wv-navigator') && <ResourceCard r={r('wv-navigator')} />}
   {open && <p>Marketplace plans for 2027: you can sign up at HealthCare.gov from November 1 to January 15. See <a href={`${base}/calendar/`}>Deadlines and dates</a> for the last day to sign up for coverage that starts January 1.</p>}
+  <DateChip slug="marketplace-open-enrollment-2027" label="Marketplace sign-up" />
+  <DateChip slug="marketplace-deadline-jan-1-coverage-2027" label="Last day for coverage that starts January 1" />
 
   <h2>Got a hospital bill you can't pay?</h2>
   <p>Both Morgantown hospitals have programs that can lower or cancel a bill for people who qualify.</p>
