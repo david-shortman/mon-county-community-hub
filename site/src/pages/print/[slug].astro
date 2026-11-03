@@ -71,6 +71,7 @@ const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href)
     .sh-reach { display: flex; flex-wrap: wrap; gap: 0 14px; font-size: 1.1rem; }
     .sh-src { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
     @media (max-width: 30rem) { .sheet-head { flex-direction: column-reverse; } }
+    @media (max-width: 40rem) { .sheet-list { display: block; columns: auto; } }
     @media print {
       .no-print { display: none; }
       .sheet-list { font-size: 10.5pt; columns: 2; }
