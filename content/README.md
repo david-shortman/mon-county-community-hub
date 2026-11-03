@@ -537,6 +537,16 @@ hidden:
 - **211 and 988 cannot be hidden.** They show on every page. If one looks wrong, fix it from the line's own page the same day.
 - **Who can merge.** A PR that only adds or changes `hidden` blocks does not wait for David, and the High stakes check does not flag it (`docs/COORDINATION.md`: "taking down or hiding a wrong item does not wait"). A PR that removes a `hidden` block is checked like any other content change.
 
+### Listings tied to one date
+
+A resource that only makes sense up to a date (Election Day polling places, a ballot that must be postmarked by Election Day) can set `show_until`:
+
+```yaml
+show_until: 2026-11-03   # last Morgantown day it shows
+```
+
+From the next day on, the daily build leaves it off every page, the search index and the counts, the same way `hidden` does, with no edit needed. A page that names it by slug still finds it. Use `hidden` instead when a listing is wrong. `npm run check-content` fails if `show_until` is not a date. Added in QA sweep 2 (#529).
+
 ## Confirmed by phone and the call queue
 
 Some groups have no website, or only a page robots cannot read, so a phone call is the only way to check them (#164). After a person confirms a listing by phone, add to its file in `orgs/`, `resources/` or `places/`:

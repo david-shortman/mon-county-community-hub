@@ -16,6 +16,11 @@ export const CONTENT_DIR = path.resolve(here, '../../../content');
 // re-checked and can come back by removing the `hidden` block.
 export const HIDDEN_REASONS = ['group-request', 'unconfirmed-risky', 'overdue', 'other'];
 export const isHidden = (e) => e?.hidden != null && e.hidden !== false;
+// A listing tied to one date (Election Day polling places, say) can set
+// `show_until: YYYY-MM-DD`. From the next Morgantown day on, the daily build
+// leaves it off pages like a hidden record, with no edit needed (QA sweep 2,
+// #529). Lookups by slug still find it, so a page that names it keeps working.
+export const isPast = (e, today = todayYmd()) => e?.show_until != null && ymd(e.show_until) < today;
 
 export function loadDir(name, { withHidden = false } = {}) {
   const dir = path.join(CONTENT_DIR, name);
@@ -25,7 +30,7 @@ export function loadDir(name, { withHidden = false } = {}) {
     .filter((f) => f.endsWith('.yaml') || f.endsWith('.yml'))
     .sort()
     .map((f) => ({ ...YAML.parse(fs.readFileSync(path.join(dir, f), 'utf8')), _file: `${name}/${f}` }));
-  return withHidden ? all : all.filter((e) => !isHidden(e));
+  return withHidden ? all : all.filter((e) => !isHidden(e) && !isPast(e));
 }
 
 // What a page shows in place of a hidden record it names on purpose (a
