@@ -42,6 +42,11 @@ addresses:
   113 Mathieson Street, Suite 100, Morgantown, WV 26501:
     result: no match
     checked: '2026-11-02'
+  114 South High Street, Morgantown, WV:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 114 S HIGH ST, MORGANTOWN, WV, 26501
+    checked: '2026-11-02'
   116 Walnut Street, Morgantown, WV 26505:
     county: Monongalia County
     place: Morgantown city

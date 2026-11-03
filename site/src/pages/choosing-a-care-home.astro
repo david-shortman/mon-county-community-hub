@@ -1,0 +1,46 @@
+---
+// Choosing a nursing home or assisted living, and what to do about a problem
+// with care (#222 life areas: caring for an aging parent, sprint wave 11).
+// Facts come from the records, each read on Medicare, the WV Bureau of Senior
+// Services, the WV Office of Inspector General and DoHS pages on 2026-11-02.
+// Legal Aid of WV's page (read 2026-11-03, #1559) says the ombudsman is free.
+// Left off until a person confirms them: how OHFLAC's facility search and inspection reports
+// work (its own site blocks automated reads), and any facility by name.
+import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "disability", label: "Choosing a nursing home or assisted living", summary: "Compare nursing homes on Medicare's Care Compare, Medicare's visit checklist, the Long-Term Care Ombudsman, state complaints and reporting abuse" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Choosing a nursing home or assisted living in Mon County, WV" description="How to choose and check a nursing home or assisted living for a parent or yourself in Monongalia County, WV: Medicare Care Compare star ratings and inspections, Medicare's visit checklist, the free Aging and Disability Resource Center, the Long-Term Care Ombudsman, state complaints and reporting abuse.">
+  <h1>Choosing a nursing home or assisted living</h1>
+  <p class="lede">You can compare nursing homes near you on Medicare's Care Compare, with star ratings and three years of inspection reports. For a person to talk options through with you, the Aging and Disability Resource Center is free.</p>
+  <OnThisPage items={[['#compare', "Compare and visit"], ['#talk', "Talk it through with someone"], ['#problem', "A problem with care"], ['#abuse', "Abuse or neglect"], ['#home', "Care at home instead"]]} />
+
+  <h2 id="compare">Compare and visit</h2>
+  <ResourceCard r={resource('medicare-care-compare-nursing-homes')} />
+  <ResourceCard r={resource('medicare-choosing-a-nursing-home')} />
+
+  <h2 id="talk">Talk it through with someone</h2>
+  <ResourceCard r={resource('wv-adrc-region-1')} showCost />
+
+  <h2 id="problem">A problem with care</h2>
+  <p>An <strong>ombudsman</strong> speaks up for people who live in nursing homes and other care homes. Ombudsmen do not work for the homes.</p>
+  <ResourceCard r={resource('wv-long-term-care-ombudsman')} showCost />
+  <ResourceCard r={resource('ohflac-facility-complaints')} />
+
+  <h2 id="abuse">Abuse or neglect</h2>
+  <ResourceCard r={resource('wv-adult-abuse-neglect-hotline')} />
+
+  <h2 id="home">Care at home instead</h2>
+  <ul>
+    <li>Meals, in-home help and respite: <a href={`${base}/help-at-home/`}>Help at home as you get older</a>.</li>
+    <li>Care at home through Medicaid: <a href={`${base}/medicaid-waivers/`}>Medicaid waivers</a>.</li>
+    <li>Help for you as a caregiver: <a href={`${base}/caregivers/`}>Caring for a family member</a>.</li>
+    <li>Writing down care wishes ahead of time: <a href={`${base}/advance-directives/`}>Living will and medical power of attorney</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 31 to November 2, 2026. We do not rate or recommend any home. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

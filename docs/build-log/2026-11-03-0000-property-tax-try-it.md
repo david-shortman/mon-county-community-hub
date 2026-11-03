@@ -1,0 +1,6 @@
+# 2026-11-03: Property tax, see how a bill is figured (#1446)
+
+- **Considered:** `/property-tax/` gave the Assessor's formula in one sentence, but not the levy rates, and the math (60%, the homestead piece, a rate for each $100) is three steps people find hard.
+- **Chose:** the levy rates as a sourced record (`content/facts/property-tax/levy-rates-class-2.yaml`, Class II homes, inside and outside the five towns, exactly as the Assessor's TY 2026 sheet prints them; `check-content` checks the parts add up). A worked example in plain text, then a try-it tool with a value box and slider, a "where is the home" choice and the homestead box. Four bars show the money moving through the formula, and the math is spelled out in words. The example and the tool share one function (`site/src/lib/property-tax-estimate.mjs`), tested against the sheet's own $60,000 example.
+- **Care:** every result is called an estimate and points to the Sheriff's lookup. Due dates and discounts stay in the text above. Nothing is stored. The rate table on the TY 2026 sheet is labeled 2025, so the page says so, a discovery is logged, and #1520 asks a person to confirm this year's rates.
+- **Shipped:** waits for David (money page). About 3.6 KB compressed added.

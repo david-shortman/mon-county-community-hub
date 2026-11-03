@@ -89,6 +89,7 @@ const footerLinks = [
   ...doors.doors.map((d) => ({ href: doorHref(d), label: d.name })),
   { href: '/topics/', label: 'All topics' },
   { href: '/about/', label: 'About this site' },
+  { href: '/progress/', label: 'Our checks' },
   { href: '/partners/', label: 'For groups and helpers' },
   { href: '/terms/', label: 'Terms' },
   { href: '/privacy/', label: 'Privacy' },
@@ -355,7 +356,7 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
       .keep-steps { margin-top: 18px; }
       /* Trailhead routes (#240): numbered mileposts on a rail, each a <details> */
       .route { list-style: none; margin: 20px 0 20px 14px; padding: 0 0 0 22px; border-left: 3px solid var(--ridge); display: grid; gap: 12px; }
-      .milepost { position: relative; }
+      .milepost { position: relative; min-width: 0; } /* a grid item: let long words wrap instead of widening the page at 200% text */
       .milepost details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
       .milepost summary { display: block; cursor: pointer; list-style: none; padding: 10px 44px 10px 14px; position: relative; border-radius: 10px; }
       .milepost summary::-webkit-details-marker { display: none; }

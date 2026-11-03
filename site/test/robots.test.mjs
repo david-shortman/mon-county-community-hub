@@ -4,7 +4,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { robotsRules, robotsAllows, robotsDelay, readRobots, robotsCheck, clearRobotsCache } from '../src/lib/robots.mjs';
 import { fetchWithRetry, RobotsDisallowed } from '../src/lib/ingest.mjs';
-import { loadFeed, ADAPTERS } from '../src/lib/feeds/index.mjs';
+import { loadFeed, ADAPTERS, SNAPSHOT_DIR } from '../src/lib/feeds/index.mjs';
+import { fetchSource } from '../scripts/check-sources.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const quiet = { warn() {}, log() {} };
 
@@ -71,16 +74,29 @@ test('crawl-delay is read', () => {
   assert.equal(robotsDelay('User-agent: *\nCrawl-delay: 10\nDisallow: /process_\n'), 10);
 });
 
-test('robots.txt answers: missing allows all, server error or no answer reads nothing, HTML has no rules', async () => {
+test('robots.txt answers: only 404 or 410 allows all; a refusal, server error, no answer or web page reads nothing', async () => {
   const o = 'https://a.example';
   assert.equal((await readRobots(o, { fetchImpl: fakeFetch({}) })).state, 'none');
-  assert.equal((await readRobots(o, { fetchImpl: fakeFetch({ robots: { [o]: 503 } }), tries: 1 })).state, 'unreadable');
+  assert.equal((await readRobots(o, { fetchImpl: fakeFetch({ robots: { [o]: 410 } }) })).state, 'none');
+  for (const status of [401, 403, 429, 451, 500, 503]) {
+    assert.equal((await readRobots(o, { fetchImpl: fakeFetch({ robots: { [o]: status } }), tries: 1 })).state, 'unreadable', `HTTP ${status}`);
+  }
   assert.equal((await readRobots(o, { fetchImpl: fakeFetch({ robots: { [o]: new Error('reset') } }), tries: 1 })).state, 'unreadable');
-  assert.equal((await readRobots(o, { fetchImpl: fakeFetch({ robots: { [o]: '<!DOCTYPE html><html>x</html>' } }) })).state, 'none');
+  // A web page in place of a robots.txt (a bot check or a home page) is not the rules.
+  assert.equal((await readRobots(o, { fetchImpl: fakeFetch({ robots: { [o]: '<!DOCTYPE html><html>x</html>' } }), tries: 1 })).state, 'unreadable');
   // A robots.txt sent as HTML text type but with real rules still counts (api.bls.gov).
   const r = await readRobots(o, { fetchImpl: fakeFetch({ robots: { [o]: 'User-agent: *\nDisallow: /\n' } }) });
   assert.equal(r.state, 'read');
   assert.equal(robotsAllows(r.rules, '/publicAPI/v1/x'), false);
+});
+
+test('a retry that gets the real robots.txt after a 403 uses its rules', async () => {
+  const o = 'https://flaky.example';
+  let n = 0;
+  const f = async () => (n++ === 0 ? new Response('<html>Forbidden</html>', { status: 403 }) : new Response('User-agent: *\nDisallow: /feed/\n', { status: 200 }));
+  const r = await readRobots(o, { fetchImpl: f, tries: 2 });
+  assert.equal(r.state, 'read');
+  assert.equal(robotsAllows(r.rules, '/feed/x.ics'), false);
 });
 
 test('robotsCheck explains a skip', async () => {
@@ -120,6 +136,61 @@ test('a feed robots.txt disallows falls back to its saved copy with a clear note
   assert.equal(r.status, 'skipped');
   assert.equal(r.robots, true);
   assert.match(r.error, /robots\.txt asks robots not to read \/feed\.ics/);
+});
+
+// The City's robots.txt blocks its calendar feed, but its server sometimes
+// answers robots.txt with a 403 page or a web page. None of those answers may
+// let the feed be read, or saved as a fresh "live" copy (#529).
+for (const [label, answer] of [
+  ['the real rules', 'User-agent: *\nDisallow: /common/modules/icalendar/\n'],
+  ['a 403', 403],
+  ['a 429', 429],
+  ['a 503', 503],
+  ['a web page', '<!DOCTYPE html><html><body>Checking your browser</body></html>'],
+  ['a dropped connection', new Error('reset')],
+]) {
+  test(`a blocked feed is never read or saved as live when robots.txt answers with ${label}`, async (t) => {
+    clearRobotsCache();
+    const id = 'robots-guard-test';
+    const snap = path.join(SNAPSHOT_DIR, `${id}.json`);
+    const feedUrl = 'https://city.example/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar';
+    const real = globalThis.fetch;
+    globalThis.fetch = fakeFetch({ robots: { 'https://city.example': answer }, pages: { [feedUrl]: { body: 'BEGIN:VCALENDAR\nEND:VCALENDAR' } } });
+    t.after(() => { globalThis.fetch = real; clearRobotsCache(); fs.rmSync(snap, { force: true }); });
+    const adapter = { id, name: 'Test', page_url: 'https://city.example/', feed_url: feedUrl, format: 'text', parse: () => [] };
+    const r = await loadFeed(adapter, { today: '2026-11-03', save: true, log: quiet });
+    assert.notEqual(r.status, 'live');
+    assert.equal(r.robots, true);
+    assert.ok(!globalThis.fetch.calls.includes(feedUrl), 'the feed was requested');
+    assert.equal(fs.existsSync(snap), false, 'a snapshot was saved');
+  });
+}
+
+test('the City adapter is never read while its robots.txt blocks it or answers 403', async (t) => {
+  const city = ADAPTERS.find((a) => a.id === 'morgantown-city');
+  const url = city.feedUrl ? city.feedUrl('2026-11-03') : city.feed_url;
+  const origin = new URL(url).origin;
+  const real = globalThis.fetch;
+  t.after(() => { globalThis.fetch = real; clearRobotsCache(); });
+  for (const answer of ['User-agent: *\nDisallow: /common/modules/icalendar/\n', 403]) {
+    clearRobotsCache();
+    globalThis.fetch = fakeFetch({ robots: { [origin]: answer }, pages: { [url]: { body: 'BEGIN:VCALENDAR\nEND:VCALENDAR' } } });
+    const r = await loadFeed(city, { today: '2026-11-03', log: quiet });
+    assert.notEqual(r.status, 'live');
+    assert.ok(!globalThis.fetch.calls.includes(url));
+  }
+});
+
+test('the Source check checks robots.txt before following a redirect, even to another site', async (t) => {
+  clearRobotsCache();
+  const start = 'https://d.example/page';
+  const away = 'https://e.example/private/page';
+  const real = globalThis.fetch;
+  globalThis.fetch = fakeFetch({ robots: { 'https://e.example': 'User-agent: *\nDisallow: /private/\n' }, pages: { [start]: { redirect: away }, [away]: { body: 'secret' } } });
+  t.after(() => { globalThis.fetch = real; clearRobotsCache(); });
+  const r = await fetchSource(start);
+  assert.equal(r.robots, true);
+  assert.ok(!globalThis.fetch.calls.includes(away));
 });
 
 test('the Google Calendar adapters are off, never read, and drop past dates', async (t) => {

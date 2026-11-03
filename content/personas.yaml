@@ -588,10 +588,11 @@ personas:
   search: morgantown resource list
   landing: /make-a-list/
   next_steps:
+  - /print/
   - /partners/
   questions:
   - q62
-  last_reviewed: '2026-11-01'
+  last_reviewed: '2026-11-03'
 - slug: curious-resident
   name: Curious long-time resident, just looking around
   life_area: community data

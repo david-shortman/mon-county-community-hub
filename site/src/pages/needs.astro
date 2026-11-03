@@ -22,10 +22,14 @@ const score = (n) => n.rank_why?.match(/Score (\d+) of 12/)?.[1];
 const host = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; } };
 const checkedDates = needs.flatMap((n) => [n.affected?.checked, ...(n.evidence ?? []).map((e) => e.checked)]).filter(Boolean).map(ymd).sort();
 const oldest = checkedDates[0];
+const changed = needs.filter((n) => n.site_coverage?.before && n.site_coverage.before.level !== n.site_coverage.level);
 ---
 <Base title="What people in Mon County need most: a ranked, sourced list" description="The problems people in Monongalia County, WV face most, ranked from public data and local surveys: food, health care costs, housing, utility bills, mental health and more. Each one shows how many people it affects, its sources, and the local groups working on it.">
   <h1>What people here need most</h1>
   <p class="lede">A ranked list of the hardest problems people in Mon County face. It is built from public numbers and local surveys. Each one says how many people it affects and where the numbers come from. It also says which local groups already work on it, and where on this site to get help.</p>
+  {changed.length > 0 && (
+    <p>Since we first rated how well this site helps, {changed.length === 1 ? 'one need has' : `${changed.length} needs have`} a new rating: {changed.map((n, i) => <>{i > 0 && (i === changed.length - 1 ? ' and ' : ', ')}<a href={`#${n.slug}`}>{n.title.charAt(0).toLowerCase() + n.title.slice(1)}</a> ({COVERAGE[n.site_coverage.before.level].toLowerCase()} to {COVERAGE[n.site_coverage.level].toLowerCase()})</>)}.</p>
+  )}
   <p>We use this list to decide what to build next. It describes problems; it does not say what any government or group should do about them.</p>
 
   <nav aria-label="The list">
@@ -66,7 +70,12 @@ const oldest = checkedDates[0];
         </>
       )}
       {n.site_coverage && (
-        <p class="coverage"><strong>How well this site helps: {COVERAGE[n.site_coverage.level]}.</strong> {n.site_coverage.why} <span class="meta">Checked {prettyDate(ymd(n.site_coverage.checked))}.</span></p>
+        <div class="coverage">
+          <p><strong>How well this site helps: {COVERAGE[n.site_coverage.level]}.</strong> {n.site_coverage.why} <span class="meta">Checked {prettyDate(ymd(n.site_coverage.checked))}.</span></p>
+          {n.site_coverage.before && (
+            <p class="meta">Before: {COVERAGE[n.site_coverage.before.level]}, checked {prettyDate(ymd(n.site_coverage.before.checked))}.{n.site_coverage.before.why && ` ${n.site_coverage.before.why}`}</p>
+          )}
+        </div>
       )}
       <details>
         <summary>The evidence ({n.evidence.length} {n.evidence.length === 1 ? 'source' : 'sources'})</summary>

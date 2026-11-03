@@ -61,6 +61,8 @@ get_help:
     label: Behind on rent or got an eviction notice
   - path: /life-events/losing-my-home/
     label: "Lost your home or may lose it: steps in order"
+  - path: /renting/#court
+    label: If your landlord takes you to court
   - path: /renting/
     label: Before you rent, getting repairs made, and your deposit
   - path: /after-you-apply/housing-voucher/
@@ -69,5 +71,5 @@ get_help:
     label: Behind on your mortgage
 site_coverage:
   level: partial
-  why: Rent help, eviction steps, repairs, deposits, vouchers and mortgage help each have a page or section. There is no single housing starting page yet (issue 202), and the full eviction help card is two taps into Get through this month.
-  checked: 2026-11-01
+  why: Rent help (Legal Aid, Catholic Charities and 211), the eviction court steps from state law, repairs, deposits, vouchers with the Morgantown office and posted list status, housing help for veteran families, and mortgage help each have a page or section. It stays partial because there is no single housing starting page yet (issue 202).
+  checked: 2026-11-02

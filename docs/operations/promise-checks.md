@@ -2,7 +2,7 @@
 
 The Privacy, About and How this site works pages, and [`docs/accessibility.md`](../accessibility.md), promise residents things about access and privacy. This page lists each promise and the check that fails the build if a change breaks it. A promise with no check is either a fact about another company (cited on the page with a link to that company's own policy) or a hand-run audit with a date. Added for #1423 on November 2, 2026.
 
-When you add a promise to a public page, add a check here first. If no check is possible, word the promise as a fact with a date or a source, not as a guarantee.
+The public version of this list is `/access/`, "Built for any phone and every reader" (#1419). When you add a promise to a public page, add a check here first. If no check is possible, word the promise as a fact with a date or a source, not as a guarantee.
 
 ## Privacy (`/privacy/`, `/about/`, `/how-it-works/`)
 
@@ -16,7 +16,7 @@ When you add a promise to a public page, add a check here first. If no check is 
 | No sign-up forms, no payments, the site never asks for your name | `e2e/promises.test.mjs`: "no page asks for a name, email, phone, address or password, and no form sends anything to a server" |
 | Reporting a problem never needs an account | `scripts/check-pages.mjs` (#1079): no GitHub "new issue" links that need an account |
 | Crisis pages tell no other site where you came from | `e2e/crisis.test.mjs`: "crisis pages have the full strip" checks `<meta name="referrer" content="no-referrer">`. `e2e/promises.test.mjs` checks every Quick exit link has `rel="noreferrer"` |
-| No Text this, Print this or Share on domestic or sexual violence listings | `e2e/promises.test.mjs`: every record with `private_trace: true` is found on a built page, its card has no Pass it on row, and no page has a text link or Share button carrying its title |
+| No Text this, Print this or Share on domestic or sexual violence listings | `e2e/promises.test.mjs`: every record with `private_trace: true` is found on a built page, its card has no Pass it on row, every page that shows it has Quick exit, and no page has a text link or Share button carrying its title |
 | Saved offline copies: the same first list for everyone, the pages About names, expiring after 3, 30 and 90 days, never sent anywhere | `e2e/promises.test.mjs`: "the saved offline list is the same for everyone" (reads the built `sw.js`). `e2e/offline.test.mjs`: "the first saved list is the same whichever page a person opens first", and the 40-day test for expiry |
 | Search runs on the phone | Search is Pagefind, built into `dist/pagefind/`. The off-site checks above fail if search ever loads from another site |
 

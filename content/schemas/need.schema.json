@@ -86,7 +86,18 @@
       "properties": {
         "level": { "type": "string", "enum": ["good", "partial", "thin"], "description": "good: a clear starting page and the main help is listed. partial: help is listed but spread out or missing a piece. thin: little on the site yet." },
         "why": { "type": "string", "description": "One or two plain sentences on what the site has and what it lacks" },
-        "checked": { "type": "string", "format": "date", "description": "Date (YYYY-MM-DD) the site's pages were checked for this" }
+        "checked": { "type": "string", "format": "date", "description": "Date (YYYY-MM-DD) the site's pages were checked for this" },
+        "before": {
+          "type": "object",
+          "description": "The rating before the last change (#1534), so /needs/ can show before and after. Set it when the level changes; keep only the one just before.",
+          "required": ["level", "checked"],
+          "additionalProperties": false,
+          "properties": {
+            "level": { "type": "string", "enum": ["good", "partial", "thin"] },
+            "checked": { "type": "string", "format": "date", "description": "Date of the earlier rating; must be before site_coverage.checked or the same day" },
+            "why": { "type": "string", "description": "What was missing then, in one plain sentence" }
+          }
+        }
       }
     }
   }

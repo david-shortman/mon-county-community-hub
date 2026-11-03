@@ -12,7 +12,7 @@
 # docs/operations/merge-conflicts.md.
 set -uo pipefail
 PR="${1:?usage: scripts/safe-merge.sh <pr-number>}"
-REPO="repos/david-shortman/mon-county-community-hub"
+REPO="${PR_WAIT_REPO:-repos/david-shortman/mon-county-community-hub}"
 refuse() { echo "REFUSED: PR #$PR: $1"; exit 4; }
 
 pr=$(gh api "$REPO/pulls/$PR" --jq '"\(.state)|\(.merged)|\(.head.sha)"' 2>/dev/null) || refuse "not found"
@@ -23,8 +23,9 @@ IFS='|' read -r state merged sha <<<"$pr"
 labels() { gh api "$REPO/issues/$PR/labels" --jq '[.[].name] | join(",")'; }
 case ",$(labels)," in *,for:david,*) refuse "labeled for:david. It waits for David (docs/COORDINATION.md, \"When a PR waits for David\"). Do not merge it." ;; esac
 
-# The High stakes workflow run for this exact head commit.
-hs=$(gh api "$REPO/actions/runs?head_sha=$sha&per_page=50" --jq '[.workflow_runs[] | select(.name=="High stakes")][0] | "\(.status)|\(.conclusion)"' 2>/dev/null)
+# The newest High stakes run for this exact head commit. Asking the workflow's
+# own list means other workflows' runs on the same commit can never crowd it out.
+hs=$(gh api "$REPO/actions/workflows/high-stakes.yml/runs?head_sha=$sha&per_page=10" --jq '[.workflow_runs[] | select(.name=="High stakes")][0] | "\(.status)|\(.conclusion)"' 2>/dev/null)
 case "$hs" in
   completed\|success) ;;
   ""|null\|null) refuse "the High stakes check has not started for head commit ${sha:0:7}. Wait with scripts/pr-wait.sh $PR, then try again." ;;
@@ -39,8 +40,10 @@ now=$(gh api "$REPO/pulls/$PR" --jq .head.sha)
 case ",$(labels)," in *,for:david,*) refuse "labeled for:david. It waits for David. Do not merge it." ;; esac
 
 # sha= makes GitHub refuse the merge if the head changed in the last second.
-if ! out=$(gh api -X PUT "$REPO/pulls/$PR/merge" -f merge_method=squash -f sha="$sha" 2>&1); then
+if ! out=$(gh api -X PUT "$REPO/pulls/$PR/merge" -f merge_method=squash -f sha="$sha" --jq .sha 2>&1); then
   echo "GitHub refused the merge of #$PR: $out"; exit 5
 fi
-echo "Merged #$PR (head ${sha:0:7}). Checking main..."
-exec "$(dirname "$0")/pr-wait.sh" main
+echo "Merged #$PR (head ${sha:0:7}) as ${out:0:7}. Checking main..."
+# Pass the merge commit, so pr-wait.sh follows that build, not whatever main
+# showed a second ago.
+exec "$(dirname "$0")/pr-wait.sh" main 25 "$out"

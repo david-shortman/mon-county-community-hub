@@ -164,7 +164,9 @@ These sites refuse automated reads or load only by script. The dated lists name 
 
 ### Not yet merged into this queue
 
-Open `needs-verification` issues with no call or browser step written yet: #418, #592, #629, #665, #1303, #1312. Read each before the next refresh.
+Open `needs-verification` issues with no call or browser step written yet: #418, #592, #629, #665. Read each before the next refresh.
+
+New dated list to fold in at the next refresh: [call-list-2026-11-03-sweep-5.md](call-list-2026-11-03-sweep-5.md) (verification sweep 5: calls and browser checks for the issues opened November 1 to 3, including #1303 and #1312).
 
 ## Refreshing the queue
 

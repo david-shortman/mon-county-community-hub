@@ -28,7 +28,9 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2>Tax credits to check for</h2>
   <p>A tax credit lowers the tax you owe. Some can also add to your refund. The tax agency decides who gets each credit.</p>
   {r('irs-eitc') && <ResourceCard r={r('irs-eitc')} />}
+  {r('irs-child-tax-credit') && <ResourceCard r={r('irs-child-tax-credit')} />}
   {r('wv-family-tax-credit') && <ResourceCard r={r('wv-family-tax-credit')} />}
+  {r('wv-low-income-earned-income-exclusion') && <ResourceCard r={r('wv-low-income-earned-income-exclusion')} />}
 
   <h2>Also check</h2>
   <ul>

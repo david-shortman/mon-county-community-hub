@@ -47,6 +47,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>WVU's Off-Campus Housing office helps students find a place and roommates, and holds housing fairs with landlords and utility companies. More for students, including food, buses, legal help and money, is on <a href={`${base}/for/college-students/`}>College students</a>. Students on the Morgantown campus can also get free food at The Rack: see <a href={`${base}/help/food/today/student/`}>food today for WVU students</a>.</p>
   {r('wvu-off-campus-housing') && <ResourceCard r={r('wvu-off-campus-housing')} />}
 
+  <h2 id="remote-move">Moving here to work remotely</h2>
+  <p>One program pays some remote workers who move to the Morgantown area from outside West Virginia. Read its own rules before you plan around it.</p>
+  {r('ascend-wv-morgantown') && <ResourceCard r={r('ascend-wv-morgantown')} />}
+
   <p>Renting or buying? Check whether the home is in a flood zone or a slide area first: <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
 
   <p>Need internet at home? See what service reaches your area on <a href={`${base}/internet/`}>Internet at home</a>.</p>

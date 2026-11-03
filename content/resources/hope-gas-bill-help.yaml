@@ -8,6 +8,7 @@ contact:
   phone: "1-800-688-4673"
   url: https://hopegas.com/my-account-information/help-with-my-bill
 cost: free
+if_you_want_help: [wv-211]   # Hope Gas's page sends people who are past due or facing shutoff to 211
 sources:
   - url: https://hopegas.com/my-account-information/help-with-my-bill
-    checked: 2026-11-01
+    checked: 2026-11-02
