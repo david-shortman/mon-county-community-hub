@@ -5,9 +5,9 @@ topics: [work]
 who_it_is_for: Anyone looking for a job with Mon Health. Its job board covers Morgantown and other towns in the region, such as Kingwood, Fairmont and Elkins.
 what_to_do: Open the careers page and choose All Open Positions to search and apply.
 contact:
-  url: https://www.monhealth.com/careers
+  url: https://www.monhealth.com/careers/careers-home
   url_label: See Mon Health jobs
 cost: free
 sources:
-  - url: https://www.monhealth.com/careers
+  - url: https://www.monhealth.com/careers/careers-home
     checked: 2026-11-01

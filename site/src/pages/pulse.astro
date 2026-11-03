@@ -37,7 +37,7 @@ const gaps = gapFiles.flatMap((g) => g.gaps.map((x) => ({ ...x, checked: ymd(x.c
 const fixes = loadDir('corrections').map((c) => ({ ...c, date: ymd(c.date) })).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
 const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${prettyDate(e.starts)} to ${prettyDate(e.ends)}`);
 ---
-<Base title="This week in Mon County: events, meetings and where help is thin" description="A picture of Morgantown and Monongalia County this week, rebuilt every day: what is coming up, city and county meetings, ways to help, gaps we have found, and what changed on this site.">
+<Base title="This week in Mon County: events, meetings and where help is thin" description="Morgantown and Mon County this week, rebuilt every day: what is coming up, city and county meetings, ways to help, gaps we have found, and what changed here.">
   <h1>This week in Mon County</h1>
   <p class="lede">What is coming up, public meetings, ways to help, and where help is thin. This page is rebuilt every day from the same public sources as the rest of the site. Updated {prettyDate(today)}.</p>
 
