@@ -26,7 +26,7 @@ const changed = needs.filter((n) => n.site_coverage?.before && n.site_coverage.b
 ---
 <Base title="What people in Mon County need most: a ranked, sourced list" description="The problems people in Monongalia County, WV face most, ranked from public data and local surveys: food, health care costs, housing, utility bills, mental health and more. Each one shows how many people it affects, its sources, and the local groups working on it.">
   <h1>What people here need most</h1>
-  <p class="lede">A ranked list of the hardest problems people in Monongalia County face, built from public numbers and local surveys. Each one says how many people it affects, where the numbers come from, which local groups are already working on it, and where on this site to get help.</p>
+  <p class="lede">A ranked list of the hardest problems people in Mon County face. It is built from public numbers and local surveys. Each one says how many people it affects and where the numbers come from. It also says which local groups already work on it, and where on this site to get help.</p>
   {changed.length > 0 && (
     <p>Since we first rated how well this site helps, {changed.length === 1 ? 'one need has' : `${changed.length} needs have`} a new rating: {changed.map((n, i) => <>{i > 0 && (i === changed.length - 1 ? ' and ' : ', ')}<a href={`#${n.slug}`}>{n.title.charAt(0).toLowerCase() + n.title.slice(1)}</a> ({COVERAGE[n.site_coverage.before.level].toLowerCase()} to {COVERAGE[n.site_coverage.level].toLowerCase()})</>)}.</p>
   )}
