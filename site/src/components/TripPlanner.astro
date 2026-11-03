@@ -63,7 +63,19 @@ const checked = d.sources?.[0]?.checked ?? '';
 
   <div class="tp-grid">
     <figure class="tp-fig">
-      <Fragment set:html={mapSvg(m, { trip: ex[0], from: EX.from, to: EX.to })} />
+      <div class="tp-tools" hidden>
+        <div class="tp-field tp-look">
+          <label for="tp-look">Look at a place or route</label>
+          <select id="tp-look">
+            <option value="">Choose one, or tap the map</option>
+            <optgroup label="Places">{places.slice().sort((a, b) => a.name.localeCompare(b.name)).map((p) => <option value={`p:${p.id}`}>{p.name}</option>)}</optgroup>
+            <optgroup label="Routes">{routes.map((r) => <option value={`r:${r.id}`}>{r.name}</option>)}</optgroup>
+          </select>
+        </div>
+        <button type="button" class="tp-expand" hidden><span aria-hidden="true">⤢</span> Expand map</button>
+      </div>
+      <div class="tp-mapbox"><Fragment set:html={mapSvg(m, { trip: ex[0], from: EX.from, to: EX.to })} /></div>
+      <div class="tp-info" aria-live="polite" hidden></div>
       <figcaption>
         <span class="tp-key"><span class="tp-sw tp-sw-1" aria-hidden="true"></span>First bus <span class="tp-sw tp-sw-2" aria-hidden="true"></span>Next bus <span class="tp-sw tp-sw-all" aria-hidden="true"></span>Other routes</span>
         A simple map, not to scale: directions are true, but the middle of town is drawn bigger so it fits. Lines join places in each route's stop order, not along real streets.
@@ -87,48 +99,25 @@ const checked = d.sources?.[0]?.checked ?? '';
     </table>
     <p class="meta">Places are placed from Census data and official addresses, listed with their sources in <a href="https://github.com/david-shortman/mon-county-community-hub/blob/main/content/bus-map/places.yaml">places.yaml</a>. Some stops are not on the map yet because no official page we could read says where they are.</p>
   </details>
+  <dialog class="tp-dlg" aria-labelledby="tp-dlg-h">
+    <div class="tp-dlg-bar">
+      <h2 id="tp-dlg-h" class="tp-dlg-h">Bus map</h2>
+      <button type="button" class="tp-zin" aria-label="Zoom in">+</button>
+      <button type="button" class="tp-zout" aria-label="Zoom out">−</button>
+      <button type="button" class="tp-zfit">Fit</button>
+      <button type="button" class="tp-close">Close</button>
+    </div>
+    <p class="tp-dlg-hint">Pinch or use + and − to zoom. Drag to move. Tap a place or a line.</p>
+    <div class="tp-dlg-map"></div>
+    <div class="tp-dlg-info" aria-live="polite" hidden></div>
+  </dialog>
   <script type="application/json" id="tp-data" set:html={JSON.stringify(client)} />
 </section>
 
 <script>
-  import { plan, answerHtml, tripSvg, tripIds, mapLabels, stopPlace, DAY_OF_WEEK } from '../lib/bus-trips.mjs';
+  import { initPlanner } from '../lib/bus-map-client.mjs';
   const sec = document.getElementById('plan');
-  const data = JSON.parse(document.getElementById('tp-data')?.textContent ?? '{}');
-  const form = sec?.querySelector<HTMLFormElement>('.tp-form');
-  const from = sec?.querySelector<HTMLSelectElement>('#tp-from');
-  const to = sec?.querySelector<HTMLSelectElement>('#tp-to');
-  const day = sec?.querySelector<HTMLSelectElement>('#tp-day');
-  const out = sec?.querySelector('.tp-answer');
-  const svg = sec?.querySelector('svg.tm');
-  if (sec && form && from && to && day && out && svg && data.places) {
-    const m = { at: data.at, sp: stopPlace(data.places), places: data.places, H: data.H };
-    const P = Object.fromEntries(data.places.map((p: { id: string }) => [p.id, p]));
-    const run = () => {
-      const plans = plan(data.routes, data.places, from.value, to.value, day.value);
-      out.innerHTML = answerHtml(plans, P[from.value], P[to.value], day.value);
-      const best = plans[0];
-      const trip = svg.querySelector('.tm-trip');
-      if (trip) trip.innerHTML = best ? tripSvg(m, best) : '';
-      const marks = svg.querySelector('.tm-marks');
-      if (marks) marks.innerHTML = best ? tripSvg(m, best, 'marks') : '';
-      const labels = svg.querySelector('.tm-labels');
-      if (labels) labels.innerHTML = mapLabels(m, best ? tripIds(m, best, from.value, to.value) : [from.value, to.value]);
-      const used = new Set(best ? best.legs.map((l: { r: { id: string } }) => l.r.id) : []);
-      svg.querySelectorAll('.tm-ln').forEach((l) => l.classList.toggle('is-used', used.has(l.getAttribute('data-r'))));
-      const change = new Set(best ? best.legs.slice(1).map((l: { on: string }) => m.sp.get(l.on)) : []);
-      svg.querySelectorAll<SVGGElement>('.tm-p').forEach((g) => {
-        const id = g.dataset.p ?? '';
-        g.classList.toggle('is-end', id === from.value || id === to.value);
-        g.classList.toggle('is-change', change.has(id));
-      });
-    };
-    form.hidden = false;
-    sec.querySelector('[data-ex]')?.remove();
-    day.value = DAY_OF_WEEK[new Date().getDay()];
-    form.addEventListener('change', run);
-    sec.querySelector('.tp-swap')?.addEventListener('click', () => { const a = from.value; from.value = to.value; to.value = a; run(); });
-    run();
-  }
+  if (sec) initPlanner(sec);
 </script>
 
 <style is:global>
@@ -192,6 +181,56 @@ const checked = d.sources?.[0]?.checked ?? '';
   #plan .tm-ol { font-weight: 600; font-size: 9px; fill: var(--muted); }
   #plan .tm-p.is-end circle { r: 5.5; fill: var(--fg); stroke: var(--card); stroke-width: 2; }
   #plan .tm-p.is-change circle { r: 5.5; fill: var(--card); stroke: var(--rust); stroke-width: 2.5; }
+
+  /* Exploring: tools, the panel, and the full screen map (#1708). */
+  #plan .tp-tools { display: flex; flex-wrap: wrap; align-items: end; gap: var(--s2) var(--s3); margin: 0 0 var(--s2); }
+  #plan .tp-tools[hidden] { display: none; }
+  #plan .tp-look { flex: 1 1 14rem; }
+  #plan .tp-look select { min-height: 44px; font: inherit; width: 100%; }
+  #plan .tp-expand, #plan .tp-act, #plan .tp-clear, #plan .tp-dlg-bar button { min-height: 44px; padding: 0 var(--s3); font: inherit; font-weight: 700; color: var(--accent); background: var(--card); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; }
+  #plan .tp-expand[hidden] { display: none; }
+  #plan .tp-mapbox { position: relative; }
+  #plan .tp-mapbox .tm { cursor: pointer; }
+  #plan .tp-info, #plan .tp-dlg-info { margin: var(--s3) 0; padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--fg); border-radius: 2px; }
+  #plan .tp-info[hidden], #plan .tp-dlg-info[hidden] { display: none; }
+  #plan .tp-info h3, #plan .tp-dlg-info h3 { margin: 0 0 var(--s2); }
+  #plan .tp-acts { display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0 0 var(--s3); }
+  #plan .tp-act { background: var(--accent); color: var(--card); }
+  #plan .tp-rl, #plan .tp-pl { list-style: none; padding: 0; margin: 0 0 var(--s3); }
+  #plan .tp-rl li { margin: 0 0 var(--s2); }
+  #plan .tp-pl { display: flex; flex-wrap: wrap; gap: var(--s2); counter-reset: none; }
+  #plan .tp-chip { min-height: 36px; padding: 0 var(--s3); font: inherit; font-weight: 700; color: var(--fg); background: var(--accent-bg); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; }
+  #plan .tp-off-map { font-size: 0.95rem; color: var(--muted); }
+  #plan .tp-clear { margin-top: var(--s1); }
+  /* Map states while exploring */
+  #plan .tm.is-looking .tm-leg, #plan .tm.is-looking .tm-num { opacity: 0.3; }
+  #plan .tm.is-looking .tm-ln { opacity: 0.45; }
+  #plan .tm.is-looking .tm-ln.is-look { opacity: 1; stroke: var(--fg); stroke-width: 3.5; }
+  #plan .tm-p.is-look circle { fill: var(--accent); stroke: var(--card); stroke-width: 2.5; }
+  #plan .tm .tm-p.is-look { transform: scale(calc(var(--iz, 1) * 1.8)); }
+  #plan .tm-hits * { fill: none; stroke: transparent; pointer-events: all; }
+  #plan .tm-hit-r { stroke-width: 12; fill: none !important; pointer-events: stroke !important; vector-effect: non-scaling-stroke; }
+  #plan .tm-hit-p { fill: transparent !important; }
+  /* Things that keep their size on screen while zoomed (--iz is 1 / zoom). */
+  #plan .tm :is(.tm-ln, .tm-leg, .tm-road, .tm-p circle, .tm-num circle) { vector-effect: non-scaling-stroke; }
+  #plan .tm .tm-p, #plan .tm .tm-num { transform-box: fill-box; transform-origin: center; transform: scale(var(--iz, 1)); }
+  #plan .tm .tm-hit-p { transform-box: fill-box; transform-origin: center; transform: scale(var(--iz, 1)); }
+  #plan .tm :is(.tm-l, .tm-ol) { font-size: calc(10px * var(--iz, 1)); stroke-width: calc(3px * var(--iz, 1)); }
+  #plan .tm .tm-ol { font-size: calc(9px * var(--iz, 1)); }
+  #plan .tm .tm-road-l { font-size: calc(9px * var(--iz, 1)); }
+  /* Full screen */
+  #plan .tp-dlg { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: var(--bg); color: var(--fg); display: none; flex-direction: column; }
+  #plan .tp-dlg[open] { display: flex; }
+  #plan .tp-dlg::backdrop { background: rgb(0 0 0 / 0.5); }
+  #plan .tp-dlg-bar { display: flex; align-items: center; gap: var(--s2); padding: calc(env(safe-area-inset-top, 0px) + var(--s2)) var(--s3) var(--s2); border-bottom: 2px solid var(--fg); background: var(--card); }
+  #plan .tp-dlg-h { margin: 0 auto 0 0; font-size: 1.15rem; }
+  #plan .tp-dlg-bar :is(.tp-zin, .tp-zout) { width: 44px; padding: 0; font-size: 1.4rem; line-height: 1; }
+  #plan .tp-dlg-hint { margin: 0; padding: var(--s1) var(--s3); font-size: 0.85rem; color: var(--muted); }
+  #plan .tp-dlg-map { flex: 1 1 auto; min-height: 0; position: relative; background: var(--card); }
+  #plan .tp-dlg-map .tm { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; touch-action: none; cursor: grab; }
+  #plan .tp-dlg-info { flex: 0 1 auto; max-height: 30dvh; overflow: auto; margin: 0; border-radius: 0; border-width: 2px 0 0; padding: var(--s2) var(--s3) calc(env(safe-area-inset-bottom, 0px) + var(--s2)); font-size: 0.95rem; }
+  #plan .tp-dlg-info h3 { font-size: 1.1rem; }
+  html.tp-locked { overflow: hidden; }
   @media (forced-colors: active) {
     #plan .tm-leg, #plan .tm-ln { stroke: CanvasText; }
     #plan .tm-num circle, #plan .tp-sw { background: CanvasText; fill: CanvasText; }
