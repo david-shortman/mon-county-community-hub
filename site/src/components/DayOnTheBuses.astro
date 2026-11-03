@@ -85,7 +85,8 @@ const html = dayMarkup(routesFromRecord(d), { checked: d.checked });
   #day-explainer .bd-timed .bd-span.on, #day-explainer .bd-timed .bd-early.on, #day-explainer .bd-timed .bd-tail.on { opacity: 1; }
   #day-explainer .bd-timed .bd-tail.near { opacity: 0.35; }
   #day-explainer .is-before .bd-lab, #day-explainer .is-done .bd-lab, #day-explainer .is-gap .bd-lab { fill: var(--muted); }
-  #day-explainer .is-off .bd-lab { fill: var(--muted); opacity: 0.55; }
+  /* Off routes: muted ink at full strength (7:1 or more); the faded track says "off". */
+  #day-explainer .is-off .bd-lab { fill: var(--muted); }
   #day-explainer .is-off .bd-track { opacity: 0.4; }
   #day-explainer .is-run .bd-lab, #day-explainer .is-last .bd-lab, #day-explainer .is-early .bd-lab { font-weight: 700; }
 
