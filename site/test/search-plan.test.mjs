@@ -30,6 +30,8 @@ test('words, spelling and filler', () => {
 
 test('group and print pages go after guides', () => {
   assert.equal(later({ url: '/print/food/' }, 'food'), 1);
+  assert.equal(later({ url: '/help/what-help/rent/none/' }, 'eviction'), 1);
+  assert.equal(later({ url: '/help/what-help/' }, 'what help'), 0);
   assert.equal(later({ url: '/groups/recovery-place/', meta: { title: 'Recovery Place' } }, 'treatment'), 1);
   assert.equal(later({ url: '/groups/recovery-place/', meta: { title: 'Recovery Place' } }, 'recovery place'), 0);
 });
