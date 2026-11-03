@@ -34,6 +34,8 @@ const lookup = [
   { item: 'Glass bottles and jars', say: 'A 2019 hauler guide says curbside takes them. Confirm first.', href: '#curbside' },
   { item: 'Household chemicals, oil-based paint', say: "The Morgantown Utility Board's yearly household hazardous waste day.", href: '#hard-items' },
   { item: 'Latex paint', say: 'The county plans a collection in 2027. No date yet.', href: '#hard-items' },
+  { item: 'Medicines, old or unused', say: 'A drug take-back site or mail-back envelope first. The FDA says how to use the trash if neither is near.', href: '#medicines' },
+  { item: 'Needles and syringes', say: 'Use a sharps container. Ask the Solid Waste Authority what to do when it is full.', href: '#medicines' },
   { item: 'Paper to shred', say: 'PACE Enterprises at Mylan Park.', href: '#drop-off' },
   { item: 'Plastic bags', say: 'Not at the county drop-off center. Bring recyclables in a box or bin.', href: '#drop-off' },
   { item: 'Tires', say: 'A state tire collection runs monthly, except December to February. The transfer station does not take them.', href: '#hard-items' },
@@ -78,6 +80,13 @@ const lookup = [
     <Fact tag="li" f={fact('latex-paint')} about="paint" />
     <li><strong>Batteries:</strong> we could not find a local drop-off program for batteries. Ask the Solid Waste Authority at <a href={swaTel}>{swaPhone}</a>.</li>
   </ul>
+
+  <h2 id="medicines">Medicines and needles</h2>
+  <ul>
+    <Fact tag="li" f={fact('medicines')} about="old medicines" />
+    <Fact tag="li" f={fact('needles')} about="used needles" />
+  </ul>
+  <p>We could not find a current official local page that lists a year-round medicine drop box in Mon County, or local rules for full sharps containers. Ask the Solid Waste Authority at <a href={swaTel}>{swaPhone}</a>, or your pharmacist.</p>
 
   <h2>Coming up</h2>
   {events.length ? events.map((e) => <EventCard e={e} />) : <p>No recycling events are on the calendar right now.</p>}

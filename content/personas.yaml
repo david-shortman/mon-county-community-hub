@@ -136,14 +136,15 @@ personas:
     shows: 50% named cost of care or medicine a top problem; 25% cannot afford care; 19% cannot afford medicine
     checked: '2026-10-31'
   search: free clinic morgantown
-  landing: /dental-and-prescriptions/
+  landing: /no-insurance/
   next_steps:
+  - /dental-and-prescriptions/
   - /care/
   - /medical-rides/
   questions:
   - q05
   - q08
-  last_reviewed: '2026-11-01'
+  last_reviewed: '2026-11-03'
 - slug: flu-shot
   name: Wants a flu or COVID shot
   life_area: health
@@ -257,13 +258,13 @@ personas:
   - source: docs/groups/parents-young-kids.md
     shows: 'Group research: what people in this group are trying to do, with sources'
   search: wic morgantown
-  landing: /for/parents-young-kids/
+  landing: /pregnant-or-new-baby/
   next_steps:
   - /families-and-kids/
   - /car-seat-checks/
   questions:
   - q50
-  last_reviewed: '2026-11-01'
+  last_reviewed: '2026-11-03'
 - slug: school-age-kid
   name: Parent of a school-age kid
   groups:
@@ -336,12 +337,13 @@ personas:
   - source: docs/groups/job-seekers.md
     shows: 'Group research: what people in this group are trying to do, with sources'
   search: file unemployment wv
-  landing: /find-a-job/
+  landing: /unemployment/
   next_steps:
+  - /find-a-job/
   - /work-and-learning/
   questions:
   - q54
-  last_reviewed: '2026-11-01'
+  last_reviewed: '2026-11-03'
 - slug: home-from-jail
   name: Home from jail or prison
   groups:
@@ -374,15 +376,16 @@ personas:
   - source: docs/groups/tradespeople.md
     shows: 'Group research: what people in this group are trying to do, with sources'
   search: business license morgantown
-  landing: /business/
+  landing: /start-a-business/
   next_steps:
+  - /business/
   - /contractor-license/
   - /work-and-learning/
   - /permits/
   questions:
   - q09
   - q10
-  last_reviewed: '2026-11-01'
+  last_reviewed: '2026-11-03'
 - slug: remote-worker
   name: Remote worker moving here
   groups:
@@ -392,13 +395,14 @@ personas:
   - source: docs/groups/remote-workers.md
     shows: 'Group research: what people in this group are trying to do, with sources'
   search: moving to morgantown remote work
-  landing: /moving-here/
+  landing: /for/remote-workers/
   next_steps:
+  - /moving-here/
   - /internet/
   - /find-your-people/
   questions:
   - q56
-  last_reviewed: '2026-11-01'
+  last_reviewed: '2026-11-03'
 - slug: just-moved
   name: Just moved here
   groups:
