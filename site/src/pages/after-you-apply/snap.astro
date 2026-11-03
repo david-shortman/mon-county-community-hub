@@ -150,7 +150,7 @@ const ok = (r) => r && !r.hidden;
   <SourceLine sources={[src.ch1]} org={ORG} about="renewing SNAP" />
 
   <h2 id="help">Who can help</h2>
-  <p>Many people bring someone to the interview or name a helper. The Mon County DoHS office and Legal Aid are listed above. 211 is free and can point you to local help.</p>
+  <p>Many people bring someone to the interview or name a helper. The Mon County DoHS office and Legal Aid are listed above. 211 can point you to local help.</p>
   {ok(r211) && <ResourceCard r={r211} />}
   <p class="meta">We describe the state's steps. DoHS decides who gets SNAP. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

@@ -20,7 +20,7 @@ const r211 = resource('wv-211');
   <HelpNowBar />
 
   <h1 class="front-h">Find help in Mon County</h1>
-  <p class="lede">We point you to local help in Morgantown and Monongalia County, and show where every fact came from.</p>
+  <p class="lede">We point you to local help in Morgantown and Monongalia County. We show where every fact came from.</p>
 
   <DoorCards />
 
@@ -40,7 +40,7 @@ const r211 = resource('wv-211');
     <p>Call <a href={telHref(r211.contact.phone)}>{r211.contact.phone}</a>. It is a free West Virginia help line, open any hour. Tell them what is going on and they will point you to local help. You can also text your ZIP code to <a href={`sms:${r211.contact.text.replace(/[^\d]/g, '')}`}>{r211.contact.text}</a>.</p>
   </section>
 
-  <p>A local resident runs this site, and an AI assistant (Claude) does the research and building every day. <a href={`${base}/about/`}>How it works</a>.</p>
+  <p>A local resident runs this site. An AI assistant (Claude) does the research and building every day. <a href={`${base}/about/`}>How it works</a>.</p>
 
   <HelpNowSources />
 </Base>
