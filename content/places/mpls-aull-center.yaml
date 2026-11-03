@@ -8,14 +8,16 @@ run_by:
   org: morgantown-public-library-system
   text: Morgantown Public Library System
 story: The library's genealogy, local history and West Virginia collections, in the historic Garlow House next door to the Morgantown Public Library.
-regular:
-  - Mondays 9 a.m. to 6 p.m.
-  - Tuesdays 9 a.m. to 6 p.m.
-  - Wednesdays 9 a.m. to 4 p.m.
-  - Thursdays 9 a.m. to 4 p.m.
-  - Fridays 9 a.m. to 4 p.m.
-  - Saturdays 9 a.m. to 1 p.m.
-  - Sundays Closed
+opening_hours:
+  - days: [mon, tue]
+    opens: "09:00"
+    closes: "18:00"
+  - days: [wed, thu, fri]
+    opens: "09:00"
+    closes: "16:00"
+  - days: [sat]
+    opens: "09:00"
+    closes: "13:00"
 interests: [books, learning]
 tags: [free]
 contact:

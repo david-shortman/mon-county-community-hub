@@ -1,0 +1,26 @@
+name: Hazel Ruby McQuain Park
+slug: hazel-ruby-mcquain-park
+kind: park
+area: morgantown
+community: Morgantown (downtown riverfront)
+run_by:
+  kind: city
+  org: city-of-morgantown
+  text: City of Morgantown
+story: The downtown riverfront park on the rail trail, home of the Ruby Amphitheater.
+drop_in: Anyone. City rules say the public may use the park's seats, benches and tables when no event is scheduled
+tags: [free]
+contact:
+  url: https://rubyampwv.com
+  url_label: Ruby Amphitheater website
+  place: 185 Garrett St, Morgantown, WV 26501
+status: active
+notes:
+  - The rail trail is open at all times. The amphitheater and Walnut Street Landing are open from dawn to dusk.
+  - It is a tobacco-free park, so no smoking or vaping.
+sources:
+  - url: https://www.morgantownwv.gov/DocumentCenter/View/3784/HRMP-Rules--Regulations-Policy-PDF
+    name: City of Morgantown park rules, adopted November 11, 2020
+    checked: 2026-11-02
+  - url: https://rubyampwv.com
+    checked: 2026-11-02
