@@ -1,0 +1,42 @@
+---
+// Grief and losing someone (#222 life areas, sprint wave 11). Facts come from
+// the records, each read on WV Caring, WVU Medicine, VA, AFSP and The
+// Compassionate Friends pages on 2026-11-02. Left off until a person confirms
+// it: the West Virginia Family Grief Center in Morgantown (listed by Mon
+// Health, but its website is a "Coming Soon" page; see the discovery and the
+// needs-verification issue). No in-person grief group in Monongalia County
+// was found on an official page.
+import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "care", topic: "health", label: "Grief and losing someone", summary: "Grief support from local hospices, a grief camp for kids, counseling for military and veteran families, and support after a suicide or a child's death" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Grief support in Morgantown and Mon County, WV" description="Grief support near Morgantown and Monongalia County, WV: WV Caring hospice grief support and Camp Caring for kids, WVU Medicine Hospice grief groups, free counseling at the Morgantown Vet Center for military and veteran families, Healing Conversations after a suicide, and online support after a child dies.">
+  <h1>Grief and losing someone</h1>
+  <p class="lede">After a child's death, you can join a live online group from home. After a suicide, you can ask for a talk with a volunteer who has had the same loss. Local hospices also run grief support and a grief camp for children. For papers and next steps after a death, see <a href={`${base}/when-someone-dies/`}>When someone dies</a>.</p>
+  <OnThisPage items={[['#hospice', "Grief support from hospices"], ['#kids', "For children"], ['#military', "Military and veteran families"], ['#suicide', "After a suicide"], ['#child', "After a child dies"], ['#more', "Counseling"]]} />
+
+  <h2 id="hospice">Grief support from hospices</h2>
+  <ResourceCard r={resource('wv-caring-grief-and-loss')} showCost />
+  <ResourceCard r={resource('wvu-medicine-hospice-grief-groups')} />
+
+  <h2 id="kids">For children</h2>
+  <ResourceCard r={resource('wv-caring-camp-caring')} />
+
+  <h2 id="military">Military and veteran families</h2>
+  <ResourceCard r={resource('morgantown-vet-center-bereavement')} showCost />
+
+  <h2 id="suicide">After a suicide</h2>
+  <ResourceCard r={resource('afsp-healing-conversations')} />
+
+  <h2 id="child">After a child dies</h2>
+  <ResourceCard r={resource('compassionate-friends-online-support')} />
+
+  <h2 id="more">Counseling</h2>
+  <p>To talk with a counselor, see <a href={`${base}/mental-health/`}>Mental health help</a>.</p>
+
+  <p class="meta">Sources checked November 2, 2026. Group times change, so call to check what is meeting now. Know a grief group in Mon County with its own web page? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

@@ -8,9 +8,9 @@
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
-import { resource, org } from '../lib/content.mjs';
+import { resource, org, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "family", topic: "work", label: "Start or grow a business", summary: "Free business coaching and classes, help with a business plan, and local business groups" };
+export const page = { door: "family", topic: "work", label: "Start or grow a business", summary: "Free business coaching and classes, state loan and investment programs, help with a business plan, and local business groups" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const r = (slug) => resource(slug);
 const mainStreet = org('main-street-morgantown');
@@ -31,6 +31,18 @@ const partnership = org('morgantown-area-partnership');
 
   <h2>Federal help: loans, counseling and contracting</h2>
   {r('sba-west-virginia-district-office') && <ResourceCard r={r('sba-west-virginia-district-office')} />}
+
+  <h2 id="money">State loans, investment and grant help</h2>
+  <p>The West Virginia Secretary of State keeps a list of programs that offer money or funding help to businesses. Some of them, as that list describes them:</p>
+  <ul>
+    <li><strong>WV Capital Access Program (WVCAP):</strong> for creditworthy small businesses of any size or age. It has three funds: seed capital, subordinated debt and collateral support. Generally $10,000 to $2 million per business. Email WVCAP@wv.gov, or see <a href="https://wvjit.wv.gov/wvcap/">its page</a>.</li>
+    <li><strong>WV Jobs Investment Trust:</strong> investment (such as buying stock) in small West Virginia companies that want to grow. Generally $100,000 to $2 million. Email WVJITInfo@wv.gov.</li>
+    <li><strong>WV Economic Development Authority:</strong> loans and financing for manufacturing, industrial, distribution, warehouse and destination businesses. $50,000 to $15 million, depending on the project. <a href={telHref('304-558-3651')}>304-558-3651</a>.</li>
+    <li><strong>WV Grant Resource Center:</strong> free help writing grant applications, for businesses, local governments and others working on jobs, workforce, community or outdoor recreation projects. It has an office in Morgantown at 83 Beechurst Avenue. <a href={telHref('304-293-6444')}>304-293-6444</a>.</li>
+    <li><strong>County economic development:</strong> for Monongalia County, the state lists the Morgantown Area Partnership, <a href={telHref('304-292-3311')}>304-292-3311</a>. The state says county economic development groups may offer matching grants and other programs.</li>
+  </ul>
+  <p><a class="btn" href="https://sos.wv.gov/business/general-information/funding-grant-resources"><span>The state's full funding list</span></a></p>
+  <SourceLine sources={[{ url: 'https://sos.wv.gov/business/general-information/funding-grant-resources', checked: '2026-11-02' }]} org="wv-secretary-of-state" about="State loans, investment and grant help" />
 
   <h2>Help writing a business plan</h2>
   {r('wv-sos-business-plan-assistance') && <ResourceCard r={r('wv-sos-business-plan-assistance')} />}
