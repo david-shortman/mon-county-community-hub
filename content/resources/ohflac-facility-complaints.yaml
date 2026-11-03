@@ -6,10 +6,10 @@ who_it_is_for: "Anyone worried about the care or conditions at a health care fac
 what_to_do: To file a complaint, use the online complaint form or call 304-558-0050. You can also mail it to OHFLAC, State Capitol Complex Building 6, Suite 825, Charleston, WV 25305. To check whether a facility is licensed, use the Facility Search on the OHFLAC page.
 contact:
   phone: "304-558-0050"
-  url: https://oig.wv.gov/page/office-health-facility-licensure-and-certification
+  url: https://oig.wv.gov/OHFLAC
   url_label: OHFLAC page
 sources:
-  - url: https://oig.wv.gov/page/office-health-facility-licensure-and-certification
+  - url: https://oig.wv.gov/OHFLAC
     checked: 2026-11-02
   - url: https://www.cms.gov/medicare/health-safety-standards/quality-safety-oversight-general-information/contact-information
     checked: 2026-11-02
