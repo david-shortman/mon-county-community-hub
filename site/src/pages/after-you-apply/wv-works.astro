@@ -7,6 +7,7 @@
 import Base from '../../layouts/Base.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import SourceLine from '../../components/SourceLine.astro';
+import WhereYouAre from '../../components/WhereYouAre.astro';
 import { resource } from '../../lib/content.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
 export const page = { door: 'this-month', topic: 'money', label: 'After you apply for WV WORKS', summary: 'The interview, orientation, your contract and plan, reporting in 10 days, and fair hearings' };
@@ -32,6 +33,12 @@ const ok = (r) => r && !r.hidden;
   <p class="lede">You will meet with a worker in person, go to an orientation, and sign a contract and a plan. Here is each step and its time limit, in the state's own rules.</p>
   <p>WV WORKS is West Virginia's cash help for families with children, run by the Department of Human Services (DoHS). Not applied yet? See <a href={`${base}/file-today/#works`}>File today</a>.</p>
   <p class="note">This page quotes the state's staff manual and forms. DoHS decides each case. It is information, not legal advice.</p>
+  <WhereYouAre label="Steps after you apply for WV WORKS" steps={[
+    { id: 'steps', title: 'The first steps', when: "By the 10th working day" },
+    { id: 'decision', title: 'The decision', when: "Within 30 days of the application date" },
+    { id: 'report', title: 'Report changes', when: "Within 10 days" },
+    { id: 'hearing', title: 'If denied, cut or cut off', when: "Ask for a hearing within 90 days" },
+  ]} />
   <ul class="topic-list">
     <li><a href="#steps">1. The first 10 working days</a></li>
     <li><a href="#decision">2. The decision and your money</a></li>
