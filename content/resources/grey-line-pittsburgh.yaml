@@ -7,6 +7,7 @@ what_to_do: "Reserve a seat on the Grey Line page or call 304-296-3869. If you p
 options:
   - "In Morgantown, the Grey Line leaves from Pifer Terminal, 691 Fairmont Road. It also stops at Mountaineer Station."
   - "Other stops include Fairmont, Clarksburg, Waynesburg PA, Washington PA, Pittsburgh International Airport and the Pittsburgh Greyhound Station."
+  - "At Pittsburgh International Airport, the Grey Line stops outside Door 9 on the ground level of the terminal, before security."
   - "The Grey Line runs 365 days a year, with 3 trips each day."
   - "For trips home and back at college breaks and holidays, Mountain Line says to book a few weeks ahead."
   - "To change or cancel a ticket, call at least 24 hours before you leave. A change or cancellation costs $5."
@@ -20,7 +21,9 @@ contact:
 cost: "Morgantown to Pittsburgh or the Pittsburgh airport: $15. Morgantown to Washington PA: $10. Morgantown to Waynesburg PA: $5. Morgantown to Fairmont: $3."
 sources:
   - url: https://www.busride.org/29-grey-line
-    checked: 2026-11-01
+    checked: 2026-11-03
+  - url: https://flypittsburgh.com/pittsburgh-international-airport/ground-transport/
+    checked: 2026-11-03
   - url: https://www.busride.org/days-of-operation
     checked: 2026-11-01
   - url: https://www.busride.org/wvu-ride-free
