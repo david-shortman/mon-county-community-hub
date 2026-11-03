@@ -124,7 +124,7 @@ queries:
   - {q: medical transportation, expect: [/medical-rides/], kind: everyday}
   - {q: living will, expect: [/advance-directives/], kind: everyday}
   - {q: power of attorney, expect: [/advance-directives/], kind: everyday}
-  - {q: nursing home, expect: [/medicaid-waivers/, /help-at-home/], kind: everyday}
+  - {q: nursing home, expect: [/choosing-a-care-home/, /medicaid-waivers/, /help-at-home/], kind: everyday}
   - {q: meals on wheels, expect: [/help-at-home/], kind: everyday}
   - {q: home health aide, expect: [/help-at-home/, /medicaid-waivers/], kind: everyday}
   - {q: respite, expect: [/caregivers/], kind: everyday}
@@ -133,6 +133,9 @@ queries:
   - {q: dentsit, expect: [/dental-and-prescriptions/], kind: misspelled}
   - {q: perscriptions, expect: [/dental-and-prescriptions/], kind: misspelled}
   - {q: obamacare, expect: [/no-insurance/], kind: everyday}
+  - {q: assisted living, expect: [/choosing-a-care-home/], kind: everyday}
+  - {q: nursing home ratings, expect: [/choosing-a-care-home/], kind: everyday}
+  - {q: complaint about a nursing home, expect: [/choosing-a-care-home/], kind: everyday}
 
   # Government, voting and civic
   - {q: where do I vote, expect: [/vote/], kind: question}
@@ -249,6 +252,9 @@ queries:
   - {q: senior center, expect: [/staying-active/, /help-at-home/, /community-centers/, /community-centers/westside-senior-center/, /community-centers/clay-battelle-senior-center/], kind: everyday}
   - {q: daycare cost help, expect: [/families-and-kids/, /school-age/], kind: everyday}
   - {q: volenteer, expect: [/volunteer/], kind: misspelled}
+  - {q: adult education classes, expect: [/keep-learning/, /work-and-learning/], kind: everyday}
+  - {q: classes for seniors, expect: [/keep-learning/, /staying-active/], kind: everyday}
+  - {q: free online classes, expect: [/keep-learning/], kind: everyday}
 
   # Full questions (many from questions.yaml)
   - {q: I can't pay my heating bill, expect: [/utility-bills/, /money/], kind: question}
@@ -281,3 +287,5 @@ queries:
   - {q: do I need a permit to build a deck, expect: [/permits/], kind: question}
   - {q: where can I volunteer this weekend, expect: [/volunteer/], kind: question}
   - {q: how do I keep my medicaid, expect: [/medicaid-2027/], kind: question}
+  - {q: how do I pick a nursing home for my mom, expect: [/choosing-a-care-home/], kind: question}
+  - {q: can seniors take college classes for less, expect: [/keep-learning/], kind: question}

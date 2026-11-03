@@ -7,16 +7,22 @@
 # David asked on #224. Door pages have their own "Often goes with this" list in
 # content/doors/<slug>.yaml, so they are not here.
 # Keep keys in alphabetical order.
+/caregivers/: [/choosing-a-care-home/, /help-at-home/, /disability-and-aging/]
+/choosing-a-care-home/: [/help-at-home/, /caregivers/, /disability-and-aging/]
 /dental-and-prescriptions/: [/staying-well/, /turning-65/, /flu-shots/]
-/disability-and-aging/: [/medicaid-waivers/, /turning-65/, /work-and-learning/]
+/disability-and-aging/: [/medicaid-waivers/, /turning-65/, /work-and-learning/, /choosing-a-care-home/]
 /families-and-kids/: [/flu-shots/, /staying-well/, /work-and-learning/]
 /flu-shots/: [/staying-well/, /turning-65/, /families-and-kids/, /snap/]
+/help-at-home/: [/choosing-a-care-home/, /caregivers/, /staying-active/]
 /help/food/: [/snap/, /utility-bills/, /families-and-kids/]
+/keep-learning/: [/pay-for-training/, /staying-active/, /for/older-adults/]
 /medicaid-waivers/: [/disability-and-aging/, /turning-65/]
 /moving-here/: [/recycling/, /calendar/month/]
+/pay-for-training/: [/keep-learning/, /find-a-job/]
 /recycling/: [/moving-here/, /calendar/month/]
 /renting/: [/for/renters/, /utility-bills/, /legal-help/]
 /snap/: [/help/food/, /utility-bills/, /flu-shots/, /staying-well/]
+/staying-active/: [/keep-learning/, /help-at-home/]
 /staying-well/: [/flu-shots/, /dental-and-prescriptions/, /turning-65/, /snap/]
 /turning-65/: [/disability-and-aging/, /medicaid-waivers/, /flu-shots/, /dental-and-prescriptions/]
 /utility-bills/: [/help/food/, /snap/, /moving-here/]
