@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { parse } from 'yaml';
 import { routesFrom } from '../src/lib/bus-network.mjs';
 import { routesFromRecord } from '../src/lib/bus-day.mjs';
-import { joinRoutes, plan, answerHtml, mapModel, mapSvg, between, hoursOn } from '../src/lib/bus-trips.mjs';
+import { joinRoutes, plan, answerHtml, mapModel, mapSvg, between, hoursOn, placeInfoHtml, routeInfoHtml, placeLabels } from '../src/lib/bus-trips.mjs';
 
 const read = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
 const rec = parse(read('../../content/pdf-pages/mountain-line-routes.yaml'));
@@ -88,4 +88,33 @@ test('the map fits a phone and has no crisis numbers', () => {
   assert.ok(svg.length < 40000, `map is ${svg.length} bytes`);
   const words = svg.replace(/<[^>]*>/g, ' ');
   assert.doesNotMatch(words, /\b(988|211|911)\b/);
+});
+
+test('the explore panels name every route at a place and every mapped place on a route', () => {
+  for (const p of places) {
+    const html = placeInfoHtml(p, routes, 'm');
+    for (const r of routes.filter((r) => r.stops.some((s) => p.stops.includes(s)))) assert.ok(html.includes(`data-look-r="${r.id}"`), `${p.id} panel misses ${r.name}`);
+    assert.match(html, /data-set="from"/);
+    assert.doesNotMatch(html, /\.\.|\u2014/);
+  }
+  for (const r of routes) {
+    const html = routeInfoHtml(r, places, 'm');
+    assert.doesNotMatch(html, /\.\.|\u2014/);
+    assert.match(html, new RegExp(r.name.replace(/[&]/g, '&amp;')));
+  }
+});
+
+test('zoomed-in names keep their screen size: smaller boxes let more names fit', () => {
+  const m = mapModel(routes, places, base);
+  const ids = places.map((p) => p.id);
+  const at1 = placeLabels(m.at, places, { maybe: ids, H: m.H }).length;
+  const at3 = placeLabels(m.at, places, { maybe: ids, H: m.H, k: 1 / 3 }).length;
+  assert.ok(at3 >= at1, `${at3} names at 3x, ${at1} at 1x`);
+  assert.equal(at3, places.length);
+});
+
+test('the map has a tap target for every place and every drawn route', () => {
+  const svg = mapSvg(mapModel(routes, places, base));
+  for (const p of places) assert.ok(svg.includes(`class="tm-hit-p" data-p="${p.id}"`), p.id);
+  for (const r of routes) if (svg.includes(`class="tm-ln" data-r="${r.id}"`)) assert.ok(svg.includes(`class="tm-hit-r" data-r="${r.id}"`), r.id);
 });

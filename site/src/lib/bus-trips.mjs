@@ -246,7 +246,10 @@ export function mapSvg(m, { trip = null, from = '', to = '', id = 'tp-map' } = {
     const mark = p.id === from || p.id === to ? ' is-end' : change.has(p.id) ? ' is-change' : '';
     return `<g class="tm-p k-${p.kind}${mark}" data-p="${p.id}"><circle cx="${x}" cy="${y}" r="${p.kind === 'hub' ? 5 : 3.2}"/></g>`;
   }).join('');
-  return `<svg class="tm" id="${id}" viewBox="0 0 ${W} ${H}" aria-hidden="true" focusable="false"><rect class="tm-bg" width="${W}" height="${H}"/><g class="tm-base">${river}${roads}</g><g class="tm-lines">${lines}</g><g class="tm-trip">${trip ? tripSvg(m, trip) : ''}</g><g class="tm-places">${dots}</g><g class="tm-labels">${mapLabels(m, trip ? tripIds(m, trip, from, to) : [])}</g><g class="tm-marks">${trip ? tripSvg(m, trip, 'marks') : ''}</g></svg>`;
+  // Invisible, wider targets so a finger can tap a place or a route line.
+  const hits = routes.map((r) => { const d = smooth(placePath(r.stops, sp, at)); return d ? `<path class="tm-hit-r" data-r="${r.id}" d="${d}"/>` : ''; }).join('')
+    + places.map((p) => { const [x, y] = at[p.id]; return `<circle class="tm-hit-p" data-p="${p.id}" cx="${x}" cy="${y}" r="9"/>`; }).join('');
+  return `<svg class="tm" id="${id}" viewBox="0 0 ${W} ${H}" aria-hidden="true" focusable="false"><rect class="tm-bg" width="${W}" height="${H}"/><g class="tm-base">${river}${roads}</g><g class="tm-lines">${lines}</g><g class="tm-trip">${trip ? tripSvg(m, trip) : ''}</g><g class="tm-places">${dots}</g><g class="tm-labels">${mapLabels(m, trip ? tripIds(m, trip, from, to) : [])}</g><g class="tm-marks">${trip ? tripSvg(m, trip, 'marks') : ''}</g><g class="tm-hits">${hits}</g></svg>`;
 }
 
 // The highlighted legs of one plan, with a numbered marker where you get on.
@@ -275,13 +278,17 @@ function box(x, y, dx, dy, a, text, k = 1) {
 const overlap = (a, b) => Math.max(0, Math.min(a[2], b[2]) - Math.max(a[0], b[0])) * Math.max(0, Math.min(a[3], b[3]) - Math.max(a[1], b[1]));
 export function placeLabels(at, places, { must = [], maybe = [], k = 1, H = 1e9 } = {}) {
   const P = new Map(places.map((p) => [p.id, p]));
-  const taken = places.map((p) => { const [x, y] = at[p.id]; return [x - 4.5, y - 4.5, x + 4.5, y + 4.5]; });
+  // k < 1 when the map is zoomed in: names, dots and gaps shrink in map units
+  // so they stay the same size on screen.
+  const d = 4.5 * k;
+  const taken = places.map((p) => { const [x, y] = at[p.id]; return [x - d, y - d, x + d, y + d]; });
   const out = [];
   const one = (id, need) => {
     const p = P.get(id); if (!p) return;
     const [x, y] = at[id], name = p.short ?? p.name;
     let best = null;
-    SPOTS.forEach(([dx, dy, a], i) => {
+    SPOTS.forEach(([sx, sy, a], i) => {
+      const dx = sx * k, dy = sy * k;
       const b = box(x, y, dx, dy, a, name, k);
       const off = Math.max(0, -b[0]) + Math.max(0, b[2] - W) + Math.max(0, -b[1]) + Math.max(0, b[3] - H);
       const hit = taken.reduce((t, o) => t + overlap(b, o), 0);
@@ -303,11 +310,11 @@ export function labelText(ls, cls) {
 }
 // The map's names for one trip (or none): main stops and the trip's places
 // always, other places where they fit.
-export function mapLabels(m, ids = []) {
+export function mapLabels(m, ids = [], { k = 1 } = {}) {
   const { at, places, H } = m;
   const trip = ids.filter((id) => !hubIds(places).includes(id));
   const others = places.filter((p) => p.kind !== 'hub' && !ids.includes(p.id)).sort((a, b) => KIND_ORDER[a.kind] - KIND_ORDER[b.kind]).map((p) => p.id);
-  const ls = placeLabels(at, places, { must: [...trip, ...hubIds(places)], maybe: others, H });
+  const ls = placeLabels(at, places, { must: [...trip, ...hubIds(places)], maybe: others, H, k });
   const strong = new Set([...ids, ...hubIds(places)]);
   return labelText(ls.filter((l) => strong.has(l.id)), 'tm-l') + labelText(ls.filter((l) => !strong.has(l.id)), 'tm-ol');
 }
@@ -316,4 +323,38 @@ export function mapLabels(m, ids = []) {
 export function tripPlaces(m, p, fromId, toId) {
   const change = p.legs.slice(1).map((l) => m.sp.get(l.on)).filter(Boolean);
   return { from: fromId, to: toId, change };
+}
+
+// ---------- Exploring the map ----------
+// Words for the panel under the map when someone taps a place or a route, or
+// picks one from the "Look at" list. Buttons carry data-* for the page script.
+export function placeInfoHtml(place, routes, day) {
+  const rs = routes.filter((r) => r.stops.some((s) => place.stops.includes(s)));
+  const items = rs.map((r) => {
+    const h = hoursOn(r, day);
+    const at = r.stops.filter((s) => place.stops.includes(s)).join(', ');
+    return `<li><button type="button" class="tp-chip" data-look-r="${r.id}">${esc(routeName(r))}</button> <span>at ${esc(at)}. ${h ? `${DAY_WORDS[day]}: ${h.first} to ${h.last}`.replace(/\.?$/, '.') : `Not on ${DAY_WORDS[day]}.`}</span></li>`;
+  }).join('');
+  return `<h3>${esc(place.name)}</h3>`
+    + `<div class="tp-acts"><button type="button" class="tp-act" data-set="from" data-p="${place.id}">Start here</button><button type="button" class="tp-act" data-set="to" data-p="${place.id}">Go here</button></div>`
+    + (rs.length ? `<p>${rs.length === 1 ? 'One route stops' : `${rs.length} routes stop`} here. Tap a route to see it.</p><ul class="tp-rl">${items}</ul>` : '<p>No route lists a stop here.</p>');
+}
+
+export function routeInfoHtml(r, places, day) {
+  const sp = stopPlace(places), P = new Map(places.map((p) => [p.id, p]));
+  const h = hoursOn(r, day);
+  const ids = [];
+  for (const s of r.stops) { const id = sp.get(s); if (id && ids[ids.length - 1] !== id && ids[0] !== id) ids.push(id); }
+  const chips = ids.map((id) => `<li><button type="button" class="tp-chip" data-look-p="${id}">${esc(P.get(id).short ?? P.get(id).name)}</button></li>`).join('');
+  const off = r.stops.filter((s) => !sp.has(s));
+  return `<h3>${esc(routeName(r))}</h3>`
+    + `<p>${h ? `${DAY_WORDS[day]}: first run ${h.first}, last run ${h.last}`.replace(/\.?$/, '.') : `It does not run on ${DAY_WORDS[day]}.`}${r.trip ? ` One trip around takes about ${r.trip} minutes.` : ''}</p>`
+    + `<p>Places on the map, in stop order:</p><ol class="tp-pl">${chips}</ol>`
+    + (off.length ? `<p class="tp-off-map">Also stops at ${esc(off.join(', '))} (not on the map).</p>` : '');
+}
+
+// Place ids a route passes, for its names on the map.
+export function routePlaceIds(r, places) {
+  const sp = stopPlace(places);
+  return [...new Set(r.stops.map((s) => sp.get(s)).filter(Boolean))];
 }
