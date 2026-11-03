@@ -130,7 +130,7 @@ const pts = Object.fromEntries(routes.map((r) => [routeId(r), path(r)]));
   #net-explainer .net { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; overflow: visible; }
   #net-explainer .net .ln { fill: none; stroke: var(--line); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
   #net-explainer .net .stop circle { fill: var(--card); stroke: var(--fg); stroke-width: 2; }
-  #net-explainer .net .lbl { font: 800 10px var(--kicker); fill: var(--fg); }
+  #net-explainer .net .lbl { font: 800 12.5px var(--kicker); fill: var(--fg); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
   #net-explainer .net .bus { opacity: 0; }
   #net-explainer .net .bus rect { fill: var(--accent); stroke: var(--card); stroke-width: 1.5; }
   /* Step 1: the routes through Pifer. Step 3: the others. Step 4: one route. */
