@@ -64,7 +64,10 @@ const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href)
     .sheet-head h1 { margin-top: 0; }
     .sheet-qr { margin: 0; flex: 0 0 auto; width: 190px; text-align: center; font-size: 0.85rem; overflow-wrap: anywhere; }
     .sheet-qr :global(svg) { width: 120px; height: 120px; display: block; margin: 0 auto 4px; }
-    .sheet-list { list-style: none; padding: 0; margin: 12px 0; columns: 2 16rem; column-gap: 24px; }
+    .sheet-list { list-style: none; padding: 0; margin: 12px 0; }
+    /* Two columns only on a wide screen: at 320px with text at 200%, 16rem columns
+       spilled off the right edge (#1601). Print keeps two columns below. */
+    @media (min-width: 48rem) { .sheet-list { columns: 2 16rem; column-gap: 24px; } }
     .sheet-list li { break-inside: avoid; border-top: 1px solid var(--line); padding: 6px 0 8px; }
     .sheet-list p { margin: 2px 0; }
     .sh-title { font-weight: 800; }
