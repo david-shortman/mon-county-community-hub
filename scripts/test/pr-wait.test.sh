@@ -89,7 +89,7 @@ new_case
 answer pulls/7 "$(pr open aaa)"
 answer commits/aaa/check-runs "$(checks 'build|completed|failure' 'review|completed|success')"
 answer issues/7/comments '[]'
-expect "a failed check is reported" 0 "RESULT: a check failed" -- "$HERE/pr-wait.sh" 7
+expect "a failed check is reported and exits 1" 1 "RESULT: a check failed" -- "$HERE/pr-wait.sh" 7
 
 # 3. A conflict stops right away.
 new_case

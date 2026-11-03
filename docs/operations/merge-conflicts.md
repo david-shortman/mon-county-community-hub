@@ -4,7 +4,7 @@ Several sessions open PRs at the same time, so a branch often falls behind `main
 
 ## Every session that opens a PR
 
-1. **Wait with the script, not a bare loop.** Run `scripts/pr-wait.sh <pr-number>`. It stops right away with exit code 2 if the PR has a conflict, and gives up after 25 minutes (exit code 3) instead of hanging.
+1. **Wait with the script, not a bare loop.** Run `scripts/pr-wait.sh <pr-number>`. It exits 1 if a check failed, stops right away with exit code 2 if the PR has a conflict, and gives up after 25 minutes (exit code 3) instead of hanging. So `scripts/pr-wait.sh N && scripts/safe-merge.sh N` never merges a PR with a failed check.
 2. **On a conflict, merge `main` into your branch:**
    ```
    git fetch origin main
