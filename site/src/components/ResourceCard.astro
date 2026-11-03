@@ -4,6 +4,7 @@
 // naming who published the source (#327).
 import WhatHappensNext from './WhatHappensNext.astro';
 import CallNotes from './CallNotes.astro';
+import CallScript from './CallScript.astro';
 import BusLink from './BusLink.astro';
 import Actions from './Actions.astro';
 import SourceLine from './SourceLine.astro';
@@ -59,6 +60,8 @@ const parts = (list) => (list ?? []).map(labelPart);
   <RelayLine phone={r.contact?.phone} sms={sms} text={r.contact?.text} />
   <BusLink place={r.contact?.place} about={r.title} />
   <WhatHappensNext r={r} />
+  {/* What to say on the call (#1071), on cards whose record names a script. */}
+  {r.call_script && r.contact?.phone && <CallScript id={r.call_script} service={r.title} />}
   {/* Notes for the call, saved on this phone only (#1071), on cards that list what to have ready. */}
   {r.what_to_bring?.length > 0 && <CallNotes slug={r.slug} service={r.title} phone={r.contact?.phone} />}
   <SourceLine sources={r.sources} phone={r.phone_confirmed} staleDays={staleDaysFor(r)} remind={remind} org={r.org} about={r.title} slug={r.slug}>{r.cost === 'free' && ' Free.'}</SourceLine>

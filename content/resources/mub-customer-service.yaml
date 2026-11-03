@@ -7,6 +7,7 @@ what_to_do: Call 304-292-8443, Monday to Friday, 8 a.m. to 4:30 p.m. It is staff
 contact:
   phone: "304-292-8443"
   url: https://mub.org/
+call_script: utility
 sources:
   - url: https://mub.org/
     checked: 2026-10-31
