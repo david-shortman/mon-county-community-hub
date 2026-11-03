@@ -67,6 +67,13 @@ export function loadCalendar({ withHidden = false } = {}) {
 // A hand-written entry wins when both have the same slug.
 // Cached so the page and the .ics feed share one fetch per build.
 let merged;
+// The words two listings of one event share: the first three title words,
+// lowercased, with years left out. Feeds often put the year first ("2026
+// General Election Day") where a hand-written entry doesn't, and the year
+// alone kept the two from matching, so Election Day showed twice.
+export const titleKey = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/)
+  .filter((w) => w && !/^(19|20)\d\d$/.test(w)).slice(0, 3).join(' ');
+
 export function loadCalendarWithFeeds() {
   merged ??= (async () => {
     // A hidden hand-written entry also hides the feed item with its slug (#519).
@@ -80,7 +87,7 @@ export function loadCalendarWithFeeds() {
     // A feed item that a hand-written entry already covers (same first three
     // title words, starting within the hand entry's dates) is left out too,
     // so one event never shows twice under two slugs (#761).
-    const words = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean).slice(0, 3).join(' ');
+    const words = titleKey;
     const covered = (f) => hand.some((h) => words(h.title) === words(f.title) && f.starts >= h.starts && f.starts <= h.ends);
     const fromFeeds = (await loadFeedEntries({ today: todayYmd() })).filter((e) => !taken.has(e.slug) && !covered(e));
     // Two feeds can list the same event (#852). Same rule across feeds: same
