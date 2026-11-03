@@ -28,7 +28,7 @@ GitHub reads use the `gh` command on a hand run. Add `--no-github` to skip them.
 | Information | Corrections, Help wanted gaps | `content/corrections/`, `content/gaps/` |
 | Information | Answer pages, reach outside Morgantown | `content/findability/score.py` on the latest run, `content/findability/reach.py` |
 | Presentation | First page, words before the answer, must call | The latest source benchmark (`content/findability/benchmark/`) |
-| Presentation | Reading grade | `dist/reading-grades.json` from `check-reading.mjs` |
+| Presentation | Reading grade, resource card lines above grade 9 | `dist/reading-grades.json` from `check-reading.mjs`. Since 2026-11-03 only prose counts: button rows, source lines and date chips are left out (#1621) |
 | Presentation | Contrast, accessibility fixes waiting | The build (it fails if contrast drops), `docs/accessibility.md` |
 | Infrastructure | Pages, page weight | `dist/page-weight.json` from `check-weight.mjs` |
 | Infrastructure | Slow 4G phone speed (#1053) | `site/scripts/lighthouse.mjs`: Lighthouse 13.5.0 mobile test on five pages of the live site, one run each |
