@@ -4,13 +4,16 @@
 // on purpose: these are benefits pages with deadlines (docs/design/motion.md).
 // Each step links to its section on the page; when you follow a link, that
 // step is marked on the line (CSS :target, no script).
-//   steps: [{ id, title, when }] in order. id is the section's id on the page.
+//   steps: [{ id, title, when? }] in order. id is the section's id on the page,
+//     and each step needs its own id.
 //     `when` repeats a time limit the section itself states, word for word in
 //     meaning. Never draw a count that an open needs-verification issue
 //     questions; leave `when` as a plain step instead.
 //   label: what the line is, for screen readers.
 // Every deadline stays in the page text; the line only repeats it.
 const { steps = [], label = 'Steps after you apply' } = Astro.props;
+const ids = steps.map((s) => s.id);
+if (new Set(ids).size !== ids.length) throw new Error(`WhereYouAre: two steps share an id (${ids.join(', ')}) on ${Astro.url.pathname}`);
 const marks = steps
   .map((s) => `html:has(#${s.id}:target) .way a[href="#${s.id}"]{background:var(--accent-bg);border-color:var(--accent)}html:has(#${s.id}:target) .way a[href="#${s.id}"] .way-n{background:var(--accent)}`)
   .join('');

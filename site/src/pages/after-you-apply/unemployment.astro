@@ -29,8 +29,7 @@ const ok = (r) => r && !r.hidden;
   <WhereYouAre label="Steps after you apply for unemployment" steps={[
     { id: 'deputy', title: 'A deputy decides', when: "Your employer has 4 calendar days to answer" },
     { id: 'appeal', title: 'If you disagree', when: "Appeal within 8 calendar days of the notice" },
-    { id: 'board', title: 'Board of Review', when: "Appeal within 8 calendar days" },
-    { id: 'board', title: 'Court', when: "Within 30 days of the Board's notice, or 20 for a labor dispute" },
+    { id: 'board', title: 'Board of Review, then court', when: "8 calendar days to appeal to the Board; then 30 days to court, or 20 for a labor dispute" },
   ]} />
 
   <h2 id="deputy">1. A deputy looks at your claim</h2>
