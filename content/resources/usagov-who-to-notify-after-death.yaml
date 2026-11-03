@@ -12,6 +12,9 @@ steps:
   - The state social services office, to stop benefits like SNAP or Medicaid.
   - The local election office, to cancel the voter registration.
   - The VA, if the person was a veteran, about burial, survivor benefits and life insurance.
+what_to_bring:
+  - "The person's Social Security number"
+  - "Certified copies of the death certificate"
 contact:
   url: https://www.usa.gov/report-a-death
   url_label: Agencies to notify

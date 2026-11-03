@@ -14,6 +14,10 @@ opening_hours:
 get_in: appointment
 access: "Free patient parking is in the Health Sciences Center Upper Campus lot and the J.W. Ruby Memorial Hospital and Physician Office Center lots. For the car to curb shuttle in these lots, call 304-598-4444 when you arrive and when you leave. Paid short-term parking is at the Mountaineer Station garage, 1112 Van Voorhis Road, with a covered walkway to the clinics."
 what_to_do: Call 304-293-6208 to make an appointment. The first visit is a full assessment with x-rays and takes about three hours. Arrive 20 minutes early and bring your insurance card or WV Medicaid card, a written list of your medicines, and any recent dental x-rays. Later visits are every two to three weeks, when your assigned student is available.
+what_to_bring:
+  - "Your insurance card or WV Medicaid card"
+  - "A written list of your medicines"
+  - "Any recent dental x-rays"
 contact:
   phone: "304-293-6208"
   url: https://wvudentalcare.org/locations/health-sciences-campus/student-clinic/
