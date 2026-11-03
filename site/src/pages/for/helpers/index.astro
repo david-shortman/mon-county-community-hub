@@ -14,6 +14,6 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <ul class="topic-list">
     {ROLES.map((r) => <li><a href={`${base}/for/helpers/${r.slug}/`}>{r.name}</a><span class="hint">{r.situations.map((s) => s.hears).join('. ')}.</span></li>)}
   </ul>
-  <p>Want to hand someone a short list of places instead? <a href={`${base}/make-a-list/`}>Make a list for someone</a>.</p>
+  <p>Want to hand someone a short list of places instead? <a href={`${base}/make-a-list/`}>Make a list for someone</a>, or print a ready-made sheet from <a href={`${base}/print/`}>Printouts</a>.</p>
   <p class="note">These cards share public information. They are not legal, medical or professional advice. You do not need to solve the problem: pointing someone to the right place is enough.</p>
 </Base>
