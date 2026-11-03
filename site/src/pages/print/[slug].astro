@@ -70,7 +70,11 @@ const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href)
     .sh-title { font-weight: 800; }
     .sh-reach { display: flex; flex-wrap: wrap; gap: 0 14px; font-size: 1.1rem; }
     .sh-src { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
-    @media (max-width: 30rem) { .sheet-head { flex-direction: column-reverse; } }
+    @media (max-width: 30rem) {
+      .sheet-head { flex-direction: column-reverse; }
+      /* One column on a phone, so a long list never spills into a second column off screen (#971). */
+      .sheet-list { columns: auto; }
+    }
     @media print {
       .no-print { display: none; }
       .sheet-list { font-size: 10.5pt; columns: 2; }
