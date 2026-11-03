@@ -25,7 +25,7 @@ const filters = FILTERS.map((g) => ({ g, name: SECONDHAND_GOODS[g], shops: shops
 const buyers = shops.filter((s) => s.buys_from_you);
 const causes = shops.filter((s) => s.funds_local_cause);
 ---
-<Base title="Thrift and resale shops in Morgantown and Mon County, WV" description="Secondhand, thrift, consignment, vintage and used book and game shops in Morgantown and Monongalia County, grouped by area, with hours, what each sells, and which buy from you.">
+<Base title="Thrift and resale shops in Morgantown and Mon County, WV" description="Thrift, consignment, vintage and used book and game shops in Morgantown and Mon County, grouped by area, with hours, what each sells, and which buy from you.">
   <h1>Thrift and resale shops</h1>
   <p class="lede">Secondhand shops in Mon County, grouped by part of town and listed A to Z. Most cluster in two places: the Westover strip along Mall Rd and Fairmont Rd, and downtown on and near High St. We list every shop the same way, with no ratings and no paid spots.</p>
   <CheckedRange sources={shops.map((s) => s.sources)} what="shops" />
