@@ -2,10 +2,9 @@
 // Do I need a permit? City vs county (#661, part of #271). Who issues
 // building permits depends on where the property is, so the page starts with
 // "are you in a town?" and then gives each town's own office. Only facts on
-// official pages read 2026-10-30. Shown as a Trailhead route (#240). Left off until a person confirms (#660):
+// official pages, re-read 2026-11-03 as fact records (#122). Shown as a Trailhead route (#240). Left off until a person confirms (#660):
 // where to appeal an assessment, and the contractor dollar limit (#603).
 import Base from '../layouts/Base.astro';
-import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
 import Route from '../components/Route.astro';
@@ -19,20 +18,12 @@ const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const exists = (p) => Object.keys(import.meta.glob('./**/*.astro')).some((k) => k === `./${p}.astro` || k === `./${p}/index.astro`);
-// Step 1 and the town paragraphs in step 3 are fact records in
-// content/facts/permits/ (#122), each with the source's words and its own
-// checked date. The lists in steps 2, 4 and 5 are still typed here.
+// Every step's text is a fact record in content/facts/permits/ (#122), each
+// with the source's words and its own checked date.
 const fact = factsFor('permits');
-const checked = '2026-10-30';
-const city = [{ url: 'https://www.morgantownwv.gov/704/Permitting-Licensing-Registration', checked }];
-const cityCode = [{ url: 'https://www.morgantownwv.gov/167/Code-Enforcement', checked }];
-const county = [{ url: 'https://www.monongaliacounty.gov/moncpc/about/building_enforcement.php', checked }];
-const countyFaq = [{ url: 'https://www.monongaliacounty.gov/moncpc/frequently_asked_questions.php', checked }];
-const septic = [{ url: 'https://www.monchd.org/services/septic-and-wells', checked }];
-const assessor = [{ url: 'https://assessor.org/DocumentCenter/View/16109/Important-Information-for-Monongalia-Taxpayers-TY-2026-PDF', checked, name: 'Monongalia County Assessor, Important Information for Monongalia Taxpayers, TY 2026 (PDF)' }];
 const zoningViewer = 'https://morgantownwv.maps.arcgis.com/apps/instant/sidebar/index.html?appid=7e73a491ac63495b846f4ada7358f24f';
 const countyGis = 'https://experience.arcgis.com/experience/ebaf60bd87bd475ea7b4710a575eb3eb/page/Page/';
-const phones = { cityCode: '304-284-7401', health: '304-598-5131' };
+const phones = { cityCode: '304-284-7401' };
 ---
 <Base title="Do I need a building permit? Morgantown and Mon County, WV" description="Who issues building permits in Morgantown, Star City, Westover, Granville and the rest of Mon County, how to apply, and the county forms.">
   <h1>Do I need a building permit?</h1>
@@ -50,14 +41,12 @@ const phones = { cityCode: '304-284-7401', health: '304-598-5131' };
 
   <Milepost n={2} title="Inside Morgantown city limits" id="morgantown">
   <ul>
-    <li><strong>Apply online.</strong> All building permit applications go through the <strong>Morgantown Access Portal</strong>. You make an account, apply, pay fees and track it there. The city does not take paper permit applications.</li>
-    <li><strong>One application for each kind of work.</strong> Electrical work and plumbing work, for example, each need their own permit application.</li>
-    <li><strong>Fees.</strong> The city posts its permit fee schedule on the same page. B&amp;O taxes are separate from permit fees.</li>
-    <li><strong>Help.</strong> The city has user guides and video tutorials for the portal.</li>
+    <Fact tag="li" f={fact('morgantown-apply-online')} about="applying for a Morgantown building permit" />
+    <Fact tag="li" f={fact('morgantown-one-per-scope')} about="one Morgantown permit for each kind of work" />
+    <Fact tag="li" f={fact('morgantown-fees')} about="Morgantown permit fees" />
+    <Fact tag="li" f={fact('morgantown-portal-help')} about="help with the Morgantown Access Portal" />
   </ul>
-  <SourceLine sources={city} about="Morgantown building permits" />
-  <p>Questions: <strong>Code Enforcement</strong>, which issues building permits, at 389 Spruce Street, <a href={telHref(phones.cityCode)}>{phones.cityCode}</a>.</p>
-  <SourceLine sources={cityCode} about="Morgantown Code Enforcement" />
+  <Fact f={fact('morgantown-code-enforcement')} about="Morgantown Code Enforcement" />
   <div class="actions">
     <a class="btn" href="https://www.morgantownwv.gov/704/Permitting-Licensing-Registration"><Icon name="open" /><span>Morgantown permits and portal</span></a>
     <a class="btn" href={telHref(phones.cityCode)}><Icon name="phone" /><span>Call Code Enforcement</span></a>
@@ -78,15 +67,14 @@ const phones = { cityCode: '304-284-7401', health: '304-598-5131' };
   </Milepost>
 
   <Milepost n={4} title="Outside town limits" id="county">
-  <p>The county says there is no local enforcement of the state building code outside the towns. These can still apply:</p>
+  <Fact f={fact('county-no-building-code')} about="building code outside town limits" />
   <ul>
-    <li><strong>Zoning, only in the West Run district.</strong> Only the West Run Planning District, north of Morgantown, is zoned. There, building or adding on to a home, a new or replaced deck, a shed or garage, a patio, a paved driveway or an in-ground pool needs a <strong>Land Use Permit</strong>. The county says a fence, landscaping, a retaining wall, a new roof or siding, new windows or doors, and work inside the home do not. Check the County GIS map to see if the property is zoned.</li>
-    <li><strong>Floodplain.</strong> If any part of the property is in the floodplain, contact the county Floodplain Administrator. See <a href={`${base}/flood-zone/#permit`}>Is my home in a flood zone?</a></li>
-    <li><strong>A new driveway onto a state road</strong> needs a Division of Highways encroachment permit.</li>
-    <li><strong>Commercial buildings and apartments.</strong> The State Fire Marshal handles industrial, commercial and multi-family inspections.</li>
-    <li><strong>Septic systems and wells.</strong> A new, changed or failing septic system starts with a certified installer, and a new well starts with a certified well driller. Each one sends an application to the Monongalia County Health Department, which issues a construction permit. Call <a href={telHref(phones.health)}>{phones.health}</a>, or see <a href={`${base}/septic-and-wells/`}>Septic systems and well water</a>.</li>
+    <Fact tag="li" f={fact('county-west-run-zoning')} about="West Run zoning and Land Use Permits" />
+    <Fact tag="li" f={fact('county-floodplain')} about="floodplain permits" />
+    <Fact tag="li" f={fact('county-state-road-driveway')} about="a driveway onto a state road" />
+    <Fact tag="li" f={fact('county-fire-marshal')} about="commercial and multi-family inspections" />
+    <Fact tag="li" f={fact('county-septic-wells')} about="septic and well permits" />
   </ul>
-  <SourceLine sources={[...county, ...countyFaq, ...septic]} about="permits outside town limits" />
   <div class="actions">
     <a class="btn" href={countyGis}><Icon name="open" /><span>Open the County GIS map</span></a>
   </div>
@@ -96,13 +84,7 @@ const phones = { cityCode: '304-284-7401', health: '304-598-5131' };
 
   <Milepost n={5} title="Anywhere in the county: tell the Assessor" id="assessor" when="Within 60 days">
   <p>The Monongalia County Assessor says:</p>
-  <ul>
-    <li>If you build, add on or remodel and the property's value goes up by more than $1,000, you must tell the Assessor on <strong>Form 12:75</strong>.</li>
-    <li>Do it within 60 days of when the work started.</li>
-    <li>If you got a permit from a town, that counts as telling the Assessor.</li>
-    <li>Forms are at the Assessor's office.</li>
-  </ul>
-  <SourceLine sources={assessor} about="telling the Assessor about improvements" />
+  <Fact f={fact('assessor-form-12-75')} about="telling the Assessor about improvements" />
 
   </Milepost>
   </Route>

@@ -43,11 +43,13 @@ export function factsFor(topic) {
   };
 }
 
-// Fact text allows **bold** and [label](https://... or tel:...) links only.
-// Everything else is escaped.
+// Fact text allows **bold** and [label](https://... or tel:...) links, plus
+// links to our own pages written as [label](/path/) (#122). Those get the
+// site's base path, so they work on a preview too. Everything else is escaped.
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-export function factHtml(text) {
+export function factHtml(text, base = '') {
   return esc(text)
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\[([^\]]+)\]\(((?:https?:\/\/|tel:)[^)\s]+)\)/g, '<a href="$2">$1</a>');
+    .replace(/\[([^\]]+)\]\(((?:https?:\/\/|tel:)[^)\s]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\[([^\]]+)\]\((\/(?!\/)[^)\s]*)\)/g, (m, label, href) => `<a href="${base}${href}">${label}</a>`);
 }
