@@ -11,6 +11,7 @@ contact:
   url_label: Park page
   place: 346 Chestnut Ridge Camp Road, Bruceton Mills, WV
 cost: "The park says daytime and winter activities are free. Camping and cabins are booked and paid for separately."
+not_posted: [get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/chestnut_ridge_park_and_campground/index.php
     checked: 2026-11-01

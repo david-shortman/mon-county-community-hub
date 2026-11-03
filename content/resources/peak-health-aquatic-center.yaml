@@ -20,6 +20,7 @@ contact:
   url: https://mylanpark.org/facility-hours/aquatics/
   url_label: Hours
   place: 1847 Fitness Way, Morgantown, WV
+not_posted: [cost, get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://mylanpark.org/facility-hours/aquatics/
     checked: 2026-11-01
