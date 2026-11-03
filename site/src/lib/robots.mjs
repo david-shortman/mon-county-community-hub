@@ -9,10 +9,12 @@
 //   upper and lower case are ignored. Many local sites run on servers where
 //   /iCalendar/ and /icalendar/ are the same page, so a rule for one is meant
 //   for both. When unsure, we do not read.
-// - No robots.txt (404, 410 or another 4xx answer): every path is allowed,
-//   as RFC 9309 says. A robots.txt we cannot get (5xx, a timeout, a dropped
-//   connection): we read nothing on that site this run, also as RFC 9309 says.
-// - A page that answers robots.txt with an HTML page has no rules.
+// - No robots.txt (a 404 or 410 answer): every path is allowed, as RFC 9309
+//   says. Any other answer that is not a robots.txt (a 403, 429 or other
+//   refusal, a 5xx, a timeout, a dropped connection, or a web page such as a
+//   bot check) means we read nothing on that site this run. RFC 9309 lets a
+//   robot read everything after a 4xx, but a firewall's 403 is not a site
+//   saying yes, so we are stricter (#529).
 export const UA_TOKEN = 'moncountycommunityhub';
 
 // The rules for our name, else for "*". Simple prefix matching with `*` and
@@ -91,15 +93,24 @@ const looksLikeHtml = (s) => /^\s*(<!doctype|<html|<head|<body)/i.test(s);
 // Reads one site's robots.txt. Returns { rules, delay, state } where state is
 // 'read', 'none' (no robots.txt, so all allowed) or 'unreadable' (read nothing).
 // Never throws.
-export async function readRobots(origin, { userAgent, fetchImpl = fetch, timeoutMs = 15_000, tries = 2 } = {}) {
+export async function readRobots(origin, { userAgent, fetchImpl = fetch, timeoutMs = 15_000, tries = 3, pauseMs = 1_000 } = {}) {
   let lastError = '';
   for (let i = 0; i < tries; i++) {
+    // Some servers (the City's) answer 403 or 503 now and then, so wait a
+    // moment and ask again before giving up on the site for this run.
+    if (i > 0 && pauseMs) await new Promise((r) => setTimeout(r, pauseMs));
     try {
       const res = await fetchImpl(`${origin}/robots.txt`, { redirect: 'follow', signal: AbortSignal.timeout(timeoutMs), headers: userAgent ? { 'User-Agent': userAgent } : {} });
-      if (res.status >= 400 && res.status < 500) return { rules: [], delay: 0, state: 'none', status: res.status };
+      // Only "not found" or "gone" means the site has no robots.txt. A 403,
+      // 429 or other refusal is a firewall saying no, not "read anything":
+      // the City's server sends 403 to some reads of a robots.txt that blocks
+      // its calendar feed, and treating that as "none" let the feed be read.
+      if (res.status === 404 || res.status === 410) return { rules: [], delay: 0, state: 'none', status: res.status };
       if (!res.ok) { lastError = `HTTP ${res.status}`; continue; }
       const txt = await res.text();
-      if (looksLikeHtml(txt)) return { rules: [], delay: 0, state: 'none', status: res.status };
+      // A web page instead of a robots.txt (a bot check, a firewall page or a
+      // home page) means we did not get the rules, so read nothing this run.
+      if (looksLikeHtml(txt)) { lastError = 'answered with a web page, not a robots.txt'; continue; }
       return { rules: robotsRules(txt), delay: robotsDelay(txt), state: 'read', status: res.status };
     } catch (err) {
       lastError = err.cause?.code || err.message;
