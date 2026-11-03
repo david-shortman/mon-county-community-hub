@@ -227,6 +227,7 @@ queries:
   - {q: free seeds, expect: [/grow/], kind: everyday}
   - {q: sell vegetables, expect: [/sell-what-you-grow/], kind: everyday}
   - {q: farmers market vendor, expect: [/sell-what-you-grow/, /markets/], kind: everyday}
+  - {q: accessibility, expect: [/access/], kind: everyday}
 
   # Work, school, family and community
   - {q: jobs, expect: [/find-a-job/], kind: everyday}
