@@ -97,6 +97,10 @@ queries:
   - {q: shelter tonight, expect: [/stay-tonight/, /tonight/], kind: everyday}
   - {q: narcain, expect: [/drugs-and-alcohol/], kind: misspelled}
   - {q: sheltor, expect: [/stay-tonight/, /tonight/], kind: misspelled}
+  - {q: identity theft, expect: [/identity-theft/], kind: everyday}
+  - {q: credit freeze, expect: [/identity-theft/], kind: everyday}
+  - {q: fraud alert, expect: [/identity-theft/, /scams/], kind: everyday}
+  - {q: stolen social security number, expect: [/identity-theft/], kind: everyday}
 
   # Health care
   - {q: dentist cheap, expect: [/dental-and-prescriptions/], kind: everyday}
@@ -170,6 +174,9 @@ queries:
   - {q: grants, expect: [/make-it-better/grants/], kind: everyday}
   - {q: lawer, expect: [/legal-help/], kind: misspelled}
   - {q: pot holes, expect: [/make-it-better/report/], kind: misspelled}
+  - {q: county offices, expect: [/which-office/, /who-serves-me/], kind: everyday}
+  - {q: court records, expect: [/which-office/], kind: everyday}
+  - {q: record a deed, expect: [/which-office/], kind: everyday}
 
   # Getting around, IDs and cars
   - {q: DMV, expect: [/drivers-license/, /car-registration/, /ids-and-records/], kind: short}
@@ -216,6 +223,13 @@ queries:
   - {q: soil test, expect: [/soil-test/], kind: everyday}
   - {q: recyling, expect: [/recycling/], kind: misspelled}
   - {q: garbage, expect: [/recycling/], kind: everyday}
+  - {q: property tax due date, expect: [/property-tax/, /home-calendar/], kind: everyday}
+  - {q: last frost date, expect: [/home-calendar/, /grow/], kind: everyday}
+  - {q: home maintenance calendar, expect: [/home-calendar/], kind: everyday}
+  - {q: gardening, expect: [/grow/], kind: everyday}
+  - {q: free seeds, expect: [/grow/], kind: everyday}
+  - {q: sell vegetables, expect: [/sell-what-you-grow/], kind: everyday}
+  - {q: farmers market vendor, expect: [/sell-what-you-grow/, /markets/], kind: everyday}
 
   # Work, school, family and community
   - {q: jobs, expect: [/find-a-job/], kind: everyday}
@@ -287,5 +301,9 @@ queries:
   - {q: do I need a permit to build a deck, expect: [/permits/], kind: question}
   - {q: where can I volunteer this weekend, expect: [/volunteer/], kind: question}
   - {q: how do I keep my medicaid, expect: [/medicaid-2027/], kind: question}
+  - {q: someone opened a credit card in my name, expect: [/identity-theft/], kind: question}
+  - {q: which office do I call about my property, expect: [/which-office/, /property-tax/], kind: question}
+  - {q: when should I plant my garden, expect: [/home-calendar/, /grow/], kind: question}
+  - {q: is this website accurate, expect: [/progress/, /how-we-check/], kind: question}
   - {q: how do I pick a nursing home for my mom, expect: [/choosing-a-care-home/], kind: question}
   - {q: can seniors take college classes for less, expect: [/keep-learning/], kind: question}
