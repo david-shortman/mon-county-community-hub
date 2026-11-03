@@ -1,0 +1,90 @@
+---
+// Grants for local nonprofits (#529, topic depth: local philanthropy). The
+// open grant rounds that local and state funders post for nonprofits, schools
+// and public bodies in Mon County, each from the funder's own page, read
+// 2026-11-02 (Eastern). Research behind it: docs/research/local-grants-and-funders.md.
+// Describe only: no funder or charity is ranked or recommended, and no one
+// is asked to give. Dates are only what each page says; no guessed dates.
+// Money page, so it waits for David.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { org } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "community", label: "Grants for local nonprofits", summary: "Which local and state funders give grants to nonprofits here, who can apply, how much, and when the next round opens" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-02';
+const src = (url) => [{ url, checked }];
+const ycf = org('your-community-foundation');
+const funders = [
+  { id: 'ycf-community', funder: 'Your Community Foundation', name: 'Community Grants', org: 'your-community-foundation', url: 'https://ycfwv.org/ycf-community-grants-2/',
+    who: '501(c)(3) nonprofits and public institutions. Basic needs requests must serve Harrison, Marion, Monongalia, Preston or Taylor County.',
+    amount: 'Up to $10,000 for basic needs. Up to $2,500 for addiction prevention, which gives priority to other counties before Monongalia.',
+    when: 'The 2026-27 round closed September 21, 2026. The foundation says to check back in August 2027.' },
+  { id: 'ycf-womens-giving-circle', funder: 'Your Community Foundation', name: "Women's Giving Circle grants", org: 'your-community-foundation', url: 'https://ycfwv.org/womens-giving-circle-grants/',
+    who: '501(c)(3) nonprofits and public institutions in Harrison, Marion, Monongalia, Preston and Taylor counties, for programs that serve women and girls. Faith groups can apply for activities that are nonsectarian and benefit the wider community.',
+    amount: 'Up to $5,000.',
+    when: 'The 2026-27 round closed September 21, 2026. The foundation says to check back in August 2027.' },
+  { id: 'ycf-tanner', funder: 'Your Community Foundation', name: "Stephen D. Tanner Children's Enrichment Fund", org: 'your-community-foundation', url: 'https://ycfwv.org/stephen-d-tanner-childrens-enrichment-fund-grants/',
+    who: 'Public elementary schools in Harrison, Marion, Monongalia, Preston and Taylor counties (Title I schools first), and nonprofits there with enrichment programs for children.',
+    amount: 'Up to $2,500.',
+    when: 'The 2026-27 round closed September 21, 2026. The foundation says to check back in August 2027.' },
+  { id: 'ycf-educators', funder: 'Your Community Foundation', name: 'Educator Mini-Grants', org: 'your-community-foundation', url: 'https://ycfwv.org/ycf-educator-mini-grants/',
+    who: 'PK-12 teachers, counselors, librarians and nurses in traditional public schools in the same five counties. Not administrators or central office staff.',
+    amount: 'Up to $750.',
+    when: 'The 2026-27 round closed September 21, 2026. The foundation says to check back in August 2027.' },
+  { id: 'united-way', funder: 'United Way of Monongalia and Preston Counties', name: 'Funded Partner grants', org: 'united-way-monongalia-preston', url: 'https://www.unitedwaympc.org/agency-application',
+    who: '501(c)(3) nonprofits serving Monongalia or Preston County, with programs in youth opportunity, healthy community, financial security or community resiliency.',
+    amount: 'Not stated on the page.',
+    when: 'Applications for 2027-28 open January 11, 2027 and close March 5, 2027 at 11 a.m. An application overview is on January 13, 2027.' },
+  { id: 'hundred-plus', funder: '100+ People Who Care (Morgantown)', name: 'Quarterly giving circle', org: 'hundred-plus-people-who-care-morgantown', url: 'https://100pluspeople.org/charities/',
+    who: 'Local 501(c)(3) charities in the Greater Morgantown area.',
+    amount: 'Members each give $250 toward a goal of $25,000 per meeting. The page says the final amount varies.',
+    when: 'Members choose one charity at each quarterly meeting. An application stays active for the whole calendar year.' },
+  { id: 'benedum', funder: 'Claude Worthington Benedum Foundation', name: 'Grants in West Virginia', org: 'benedum-foundation', url: 'https://benedum.org/online-apply-report/application-guidelines/',
+    who: '501(c)(3) nonprofits and government units. Not individuals or single K-12 schools.',
+    amount: 'Not stated on the page.',
+    when: 'No deadlines. Applications are taken all year. Unsure if a project fits? The foundation says to email info@benedum.org, and staff reply within 10 business days.' },
+];
+---
+<Base title="Grants for local nonprofits in Morgantown and Mon County, WV" description="Which local and state funders give grants to nonprofits, schools and public bodies in Morgantown and Monongalia County: who can apply, how much, and when the next round opens, from each funder's own page.">
+  <h1>Grants for local nonprofits</h1>
+  <p class="lede">These funders post open grant rounds for nonprofits, schools or public bodies in Mon County. Each line comes from the funder's own page. Read the full rules on that page before you apply. We do not rank funders or help pick winners.</p>
+
+  <p>Looking for a small grant for a neighborhood, art or tree project? See <a href={`${base}/make-it-better/grants/`}>Get money for a project</a>.</p>
+
+  {funders.map((f) => (
+    <article class="card" id={f.id}>
+      <h2>{f.name}</h2>
+      <p class="from">{f.funder}</p>
+      <dl class="compare">
+        <dt>Who can apply</dt><dd>{f.who}</dd>
+        <dt>How much</dt><dd>{f.amount}</dd>
+        <dt>When</dt><dd>{f.when}</dd>
+      </dl>
+      <p><a class="btn" href={f.url}><span>Grant page<span class="sr-only">: {f.name}</span></span></a></p>
+      <SourceLine sources={src(f.url)} org={f.org} about={f.name} />
+    </article>
+  ))}
+
+  <h2 id="ask">Questions about a Your Community Foundation grant</h2>
+  <p>The foundation asks applicants to call {ycf?.phone ?? '304-296-3433'} to talk about a project and whether it fits.</p>
+  <SourceLine sources={src('https://ycfwv.org/ycf-community-grants-2/')} org="your-community-foundation" about="Your Community Foundation grant questions" />
+
+  <h2 id="not-listed">Not listed here</h2>
+  <ul>
+    <li>Arts grants from the foundation and the state are on <a href={`${base}/make-it-better/grants/`}>Get money for a project</a>.</li>
+    <li>The West Virginia Humanities Council says its grantmaking is limited for now and most grant types are paused. See its <a href="https://wvhumanities.org/grants/aboutourgrants/">grants page</a>.</li>
+  </ul>
+  <SourceLine sources={[{ url: 'https://wvhumanities.org/grants/aboutourgrants/', checked: '2026-11-01' }]} org="wv-humanities-council" about="West Virginia Humanities Council grants" />
+
+  <p>Giving to a group? See <a href={`${base}/check-a-charity/`}>Check a charity before you give</a>.</p>
+
+  <p class="meta">We describe these grants; we do not run them, rank them or speak for the funders. Dates and amounts change, so read the funder's page before you apply. Know a local funder with an open round we should add? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .from { color: var(--muted); margin-top: 0; }
+  .compare { margin: 0; }
+  .compare dt { font-weight: 700; }
+  .compare dd { margin: 0 0 var(--s2); }
+</style>

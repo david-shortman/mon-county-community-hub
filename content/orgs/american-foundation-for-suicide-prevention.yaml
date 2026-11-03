@@ -1,0 +1,12 @@
+name: American Foundation for Suicide Prevention (AFSP)
+slug: american-foundation-for-suicide-prevention
+kind: nonprofit
+website: https://afsp.org/
+summary: A national nonprofit that works to prevent suicide and supports people who have lost someone to suicide. It has a West Virginia chapter and keeps a public list of suicide loss support groups.
+topics: [health]
+area: national
+sources:
+  - url: https://afsp.org/chapter/west-virginia
+    checked: 2026-11-02
+  - url: https://afsp.org/ive-lost-someone
+    checked: 2026-11-02
