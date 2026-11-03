@@ -14,6 +14,7 @@ contact:
   url: https://extension.wvu.edu/monongalia/4h
   place: "270 Mylan Park Lane, Suite 250, Morgantown, WV"
 cost: There is no fee to join 4-H. Some projects and events may cost money.
+not_posted: [get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://extension.wvu.edu/monongalia/4h
     checked: 2026-10-31

@@ -9,6 +9,7 @@ contact:
   url: https://www.monongaliacounty.gov/departments/mon_county_center/community_seed_library.php
   url_label: County page
   place: "270 Mylan Park Ln, Morgantown, WV 26501"
+not_posted: [hours, cost, get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://www.monongaliacounty.gov/departments/mon_county_center/community_seed_library.php
     checked: 2026-11-01

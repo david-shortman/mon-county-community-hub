@@ -224,7 +224,7 @@ Page-level text (headings and paragraphs written in `.astro` files) goes in a ma
 | Errors found | 0 errors in facts; any wording problem fixed within 7 days | A second fluent reader audits the pages at week 4 and week 8; corrections go to the Corrections page |
 | Staleness | No high-stakes translation shown stale; reviewer turnaround under 14 days | `check-translations.mjs` output, logged weekly |
 | Findability in Spanish | Spanish questions ("¿Dónde pido un intérprete gratis en Morgantown?") find the page | Add Spanish questions to `content/findability/questions.yaml` and the answer audit |
-| Use | Page views of `/es/` pages | Only if David chooses analytics (#41); until then, not measured |
+| Use | Page views of `/es/` pages | Counted by GoatCounter, live since November 1, 2026 (#1352) once `/es/` pages are live |
 | Recognition | At least one local group links to, shares or comments on the Spanish page | Feedback and partner reports through David |
 
 **Stop rule:** if no reviewer is found in 6 weeks, nothing is published, and the plumbing stays dark.
@@ -254,7 +254,7 @@ Tracked in the `for:david` epic issue opened with this plan.
 7. **Applying to nonprofit programs or grants,** which need a nonprofit or fiscal sponsor and an outside account.
 8. **Reviewer credit:** name volunteer reviewers on the site (with their consent) or keep them as role IDs with names in private Notion.
 9. **Approving the first Spanish pages** (they are high stakes).
-10. **Analytics** (already #41): without it, the pilot cannot measure use.
+10. **Analytics** (#41): done. GoatCounter counts page views since November 1, 2026 (#1352).
 
 ## Sources checked
 

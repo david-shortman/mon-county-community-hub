@@ -1,0 +1,8 @@
+slug: granville
+text: "We did not find a permit page on Granville's website. Call the Town of Granville, 1245 Main Street, at [304-599-5080](tel:+13045995080) and ask."
+quote: >-
+  Town of Granville Main: (304) 599-5080 City Hall 1245 Main Street Granville, WV 26534 8am - 4pm daily
+sources:
+  - url: https://townofgranvillewv.gov/
+    checked: 2026-11-02
+recheck_days: 90   # look again for a permit page

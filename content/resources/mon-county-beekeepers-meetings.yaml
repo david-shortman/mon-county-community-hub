@@ -11,6 +11,7 @@ contact:
 meetings:
   - name: Monthly meeting
     when: First Tuesday of each month, 6 p.m. to 8 p.m.
+not_posted: [cost, get_in]   # read the sources 2026-11-02; they do not say
 sources:
   - url: https://www.moncountybeekeepers.org/
     checked: 2026-11-01

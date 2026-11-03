@@ -2,12 +2,14 @@
 // Hard questions (#490): straight answers to what a fair critic would ask.
 // Answers only from what the site and repo show today. "Not yet" marks a gap,
 // never a promise. Speaks for the project, so changes wait for David (for:david).
+import { UPKEEP_NOTICE_DAYS } from '../lib/upkeep.mjs';
 import Base from '../layouts/Base.astro';
 import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "Hard questions", summary: "Who runs it, why AI, how facts get checked, and where we fall short" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const tellUs = fixFormUrl({ page: Astro.url.pathname });
 const googleEnergy = 'https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference';
+const ghPages = 'https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection';
 const epoch = 'https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use';
 const eia = 'https://www.eia.gov/tools/faqs/faq.php?id=97&t=3';
 const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-reported-45-billion-ai-agreement-morrisey-says/';
@@ -102,7 +104,7 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
   <p>David does. The web address costs about $10 to $20 a year. The AI runs on David's own Claude plan, which he already pays for. Hosting and the code tools are free. There are no ads, no donations and no funding.</p>
 
   <h2 id="what-happens-if-david-stops">What happens if David stops?</h2>
-  <p>The site stays up, and the calendar feeds keep updating. New pages and rechecks stop. After about 90 days, listings about health, money and housing start showing as past due for a recheck, and after about 6 months the rest do too. All the data and code are free for anyone to reuse.</p>
+  <p>The site stays up, and the calendar feeds keep updating. New pages and rechecks stop. After about 90 days, listings about health, money and housing start showing as past due for a recheck, and after about 6 months the rest do too. If nobody rechecks any listing for {UPKEEP_NOTICE_DAYS} days, a notice on every page says the site is not being kept up and to check with the group or call 211. All the data and code are free for anyone to reuse.</p>
   <p class="gap"><strong>Not yet:</strong> no one else has agreed to take it over.</p>
 
   <h2 id="what-do-you-know-about-me">What do you know about me?</h2>
@@ -110,10 +112,10 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
     <li>No sign-ups, no accounts, no ads.</li>
     <li>We have one form, for asking us to fix or remove something. A company called Tally runs it and stores what you send. We never post it. Your email is optional.</li>
     <li>If you email {FIX_EMAIL}, our domain company, Porkbun, passes your message on to a private inbox. We never post it.</li>
-    <li>We don't count or track visitors.</li>
+    <li>We count page visits with GoatCounter, a counter that uses no cookies and does not store your IP address. We never track a person. The full list is on our <a href={`${base}/privacy/`}>Privacy</a> page.</li>
     <li>Map buttons open Google Maps. Nothing goes to Google unless you tap one.</li>
   </ul>
-  <p class="gap"><strong>Not yet:</strong> the site is hosted by GitHub. We have not checked what basic server records GitHub keeps.</p>
+  <p>The site is hosted on GitHub Pages. <a href={ghPages}>GitHub says</a> it logs and stores the IP address of each visitor to a GitHub Pages site, for security (we checked on November 2, 2026). We don't see those records.</p>
 
   <h2 id="is-this-political">Is this political?</h2>
   <p>No. No candidates, no parties, no favorite businesses. Voting information points to the West Virginia Secretary of State. We describe problems and point to help. We don't take sides on policy.</p>

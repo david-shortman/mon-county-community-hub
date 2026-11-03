@@ -6,17 +6,20 @@
 // the pages' own tags, so a new life event page shows up here by itself.
 import Base from '../layouts/Base.astro';
 import DoorPage from '../components/DoorPage.astro';
-import { loadPages } from '../lib/pages.mjs';
+import { loadPages, doorTopics } from '../lib/pages.mjs';
 export const page = { door: "family", label: "Family and life changes", summary: "Young kids, jobs and training, reading and English lessons, and help for veterans" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const pages = await loadPages();
+// Each group of "Every Family and life changes page" in the jump list, so work,
+// business and disability pages are one tap away, not 6 to 10 screens down (#1571).
+const groups = (await doorTopics('family')).filter((t) => t.topic).map((t) => [`#group-${t.topic}`, t.label]);
 const changes = [...pages.values()]
   .filter((p) => /^\/life-events\/[^/]+\/$/.test(p.route) && p.door === 'family')
   .sort((a, b) => a.label.replace(/^I'm /, '').localeCompare(b.label.replace(/^I'm /, '')));
 ---
 <Base title="Family and life changes in Morgantown and Mon County" description="Pick what is going on: a young child, a job or training, English lessons, or help for veterans. Local steps in order, with phone numbers and sources.">
   <h1>Family and life changes</h1>
-  <DoorPage slug="family">
+  <DoorPage slug="family" jump={groups}>
     {changes.length > 0 && (
       <nav class="link-row" aria-labelledby="big-change-h" slot="top">
         <h2 id="big-change-h">Big life change?</h2>
