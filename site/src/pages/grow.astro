@@ -51,7 +51,7 @@ const frostFact = (slug) => { const r = rules.get(slug); return { slug, text: r.
     <Fact f={fact('hardiness-zone')} about="the hardiness zone" />
     <h3 id="year-at-a-glance">The year at a glance</h3>
     <p>The growing season between the two frosts, with the home dates around it.</p>
-    <YearStrip />
+    <YearStrip cardsHref={`${base}/home-calendar/#dates`} level={4} />
     <p>Want a reminder? The <a href={`${base}/home-calendar/`}>home and yearly dates calendar</a> puts both frost dates on your phone.</p>
 
     <h2 id="soil-and-plants">Soil tests and sick plants</h2>
