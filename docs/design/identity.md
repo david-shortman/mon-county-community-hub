@@ -4,11 +4,13 @@ This guide says how the things we build can feel like they come from Morgantown 
 
 **Version 3 (November 2, 2026): the Press look.** David picked "Press" from three preview looks in the identity wave (#396): a small local paper, set by hand. It changed the palette (sandstone and hemlock inks), added a serif for headings on everyday pages, ruled lines instead of soft boxes, quilt marks, and one spacing scale. The decision is in [`docs/decisions/2026-11-02-1545-press-look.md`](../decisions/2026-11-02-1545-press-look.md), and the full notes are in [`docs/design/looks/press.md`](looks/press.md). The sections changed are "Palette," "Type" and "No drawn motif."
 
+**What changed (November 3, 2026, monthly refresh):** Rust was used as text on two pages (bus routes and how it works), below the 7:1 rule; it is now hemlock or text ink, and `check-contrast` fails the build if any style sets text `color` to `--rust` or `--brick`. The bus trip planner's menus got their own colors in dark mode. Older sections of this guide that still described the pre-Press look ("The cues we use," "Color roles," "The logo," "Applying it" and "Is it too much?") now match version 3. New research on quilting in Mon County is in [`research/2026-11-03-quilts-in-mon-county.md`](research/2026-11-03-quilts-in-mon-county.md): no local tie is confirmed yet. No resident feedback has been logged yet (#125, #242).
+
 **Version 2 (October 29, 2026).** David chose a bolder, more distinct direction after the [Hub Identity Workshop](https://claude.ai/artifact/MR7VsryBth6f47tK2gnKmN) brainstorm. The decision is in [`docs/decisions/2026-10-29-1306-identity-v2.md`](../decisions/2026-10-29-1306-identity-v2.md). The new sections are "Personality," "Design principles," "Voice: this, not that," and "Three directions." The type and contrast rules changed.
 
 **Rule one: readability first.** Local feel is seasoning, not the meal. Every change still has to pass all six [design rubrics](../rubrics/README.md). If a local touch ever gets in the way of reading or acting, the touch goes.
 
-Last checked: October 29, 2026. Refreshed monthly (see "Keeping this current" below).
+Last checked: November 3, 2026. Refreshed monthly (see "Keeping this current" below).
 
 ## What makes this place look like itself
 
@@ -89,14 +91,14 @@ Each direction gets its own issue and PR. Until those ship, the rules below stil
 
 ## The cues we use
 
-We use two cues. That is the whole list. Adding a fourth needs a note in this file and a fresh "is it too much?" check.
+Since version 3 (Press), the local cues are flat inks taken from one place, Coopers Rock and the Cheat River, plus one plain shape. That is the whole list. Adding another needs a note in this file and a fresh "is it too much?" check.
 
 | Cue | Where it comes from | How we use it | Why this one |
 |---|---|---|---|
-| **Hill green** | The same wooded hills | The accent color for links, dates, and focus (`--accent`, kept from before) | Already readable and trusted. Green from the hills, not from a team or agency. |
-| **Brick** | Downtown and the old glass factories | A thin edge on "who to ask" boxes (`.note`) and the line above the footer (`--brick`) | Brick is what the old town is built from. It ties the site to downtown without copying any building or sign. |
-
-The page background also moved a little warmer (`--bg: #f9f7f2`), closer to sandstone and old paper than to cold white. Most people will not notice, which is the point.
+| **Hemlock** | The hemlock woods at Coopers Rock | The one "act" ink: links, dates, buttons, focus (`--accent`) | Green from the woods, not from a team or agency. Readable at 7:1 and more. |
+| **Sandstone** | The sandstone cliffs and CCC stone walls at the Coopers Rock overlook | Paper (`--bg`) and surfaces for the Help now box, notes and season cards (`--sand`) | Warm, quiet, and local. Most people will not notice it, which is the point. |
+| **Cheat water** | The green water of the Cheat River below the overlook | Step rails, step numbers and place corners (`--water`) | Ties guides to the river without drawing it. Never used for anything a person must read as a signal next to hemlock. |
+| **Rust quilt marks** | Traditional quilt block geometry (see "Quilt marks") | Three plain marks only, in `--rust` | A shared folk shape drawn as structure, not a picture. No Mon County quilt tradition is confirmed yet ([research](research/2026-11-03-quilts-in-mon-county.md)), so we never call it local or a barn quilt. |
 
 ## The cues we avoid
 
@@ -131,7 +133,7 @@ All colors are CSS variables in [`site/src/layouts/Base.astro`](../../site/src/l
 | `--brick` | Same as rust, kept for older rules | `#9a4b2c` | `#d98c6c` |
 | `--ridge` | Same as water, kept for older rules | `#1c4a50` | `#8ccbd1` |
 
-**Color roles stay single.** Green means "you can act on this" (links, dates, focus). Brick is decoration only and never carries meaning, so it never conflicts with status colors later. Brick does pass 4.5:1 on the page background in both modes, so it could hold text if we ever need it, but don't use it for links.
+**Color roles stay single.** Hemlock means "you can act on this" (links, dates, focus). Rust (`--brick` is its old name) is for marks only and never carries meaning or text: it is about 6:1, under the 7:1 text rule. `npm run check-contrast` fails the build if any style sets text `color` to `--rust` or `--brick`. Where a chart needs a rust key, put a small rust swatch next to text-colored words.
 
 ### Measured contrast (WCAG AAA for text)
 
@@ -193,7 +195,7 @@ David picked the icon on October 30, 2026 (#390, #389): Westover and Morgantown 
 
 David picked it on October 30, 2026 ([decision](../decisions/2026-10-30-1500-header-logo.md), #421): the icon as a small rounded tile, then the name "Everything Morgantown" on one line in Fraunces, soft. He chose the tile over a one-color line drawing and a name-only version, and Fraunces over Nunito and Bitter, because it adds warmth and a nod to the old downtown while staying bold and easy to read.
 
-- **Where:** the site header (`site/src/layouts/Base.astro`), the plain link preview image (`site/public/share.png`, made by `scripts/make-share-image.mjs`) and the top of every share card (see below). Headings and everything else keep Atkinson Hyperlegible Next.
+- **Where:** the site header (`site/src/layouts/Base.astro`), the plain link preview image (`site/public/share.png`, made by `scripts/make-share-image.mjs`) and the top of every share card (see below). Headings follow "Type" (Newsreader on everyday pages, Atkinson on urgent pages); nothing else uses Fraunces.
 - **Tile:** the same drawing as `public/favicon.svg`, read in at build time, so the two never drift. 40px on wide screens, 34px on phones, with a thin `--line` ring in dark mode so the green edge does not sink into the page.
 - **Name:** real text, so screen readers read it and it grows with the reader's text size. The tile is hidden from screen readers. Text color is `--fg`, the same 7:1 pair as body text.
 - **How the font loads:** `site/src/fonts/fraunces-name-800.woff2` holds only the letters in "Everything Morgantown" (E, M, a, e, g, h, i, n, o, r, t, v, w, y and a space), about 2.5 KB. It is built into each page's CSS, so the name never waits for a download and never changes font as it loads (`font-display: block` is safe here because there is nothing to wait for). It adds about 3.5 KB gzipped to each page, tile included. License: SIL Open Font License, in `site/src/fonts/OFL-Fraunces.txt`.
@@ -257,8 +259,8 @@ Nearly everyone reaches the site on a phone. Design for a 390px screen first, th
 ## Applying it to new pages and apps
 
 1. Use the `Base` layout, or copy its `:root` tokens exactly. Don't invent new colors. If you truly need one, add it here with its contrast ratio first.
-2. Use the `Base` layout's header and tab bar. Don't add drawn shapes or motifs to pages.
-3. Use `--brick` only for thin edges and rules, never for text people need to read or click.
+2. Use the `Base` layout's header and tab bar. Don't add drawn shapes beyond the three quilt marks.
+3. Use `--rust` (or `--brick`) only for quilt marks, thin edges and chart swatches, never for text.
 4. Keep the layout, sizes, and type scale from the rubrics. Local identity never changes where things are.
 5. Use local place names from the voice notes when they make an answer clearer.
 6. Run `npm run build` (which runs the contrast check) and the rubric checks in light and dark mode at 390px and 1280px.
@@ -268,7 +270,7 @@ Nearly everyone reaches the site on a phone. Design for a 390px screen first, th
 Answer each one by looking at a 390px screenshot. Any "yes" means pull back.
 
 - Do you notice the local touch before you notice the page title?
-- Is there any drawn decoration, or more than a few thin brick edges, on the screen?
+- Is there drawn decoration beyond the quilt marks, or more than a few quilt corners on one screen?
 - Would someone think this site belongs to the city, the county, WVU, or a business?
 - Does any local touch carry meaning (status, warning, "click here")?
 - Would a long-time resident, a newcomer, and a student each feel it is not about them?

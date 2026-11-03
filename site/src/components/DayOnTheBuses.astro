@@ -53,14 +53,16 @@ const html = dayMarkup(routesFromRecord(d), { checked: d.checked });
   #day-explainer .days > li { margin: 0 0 18px; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 2px; scroll-margin-top: 16px; }
   #day-explainer .days h3 { margin: 2px 0 6px; font-size: 1.05rem; }
   #day-explainer .days p { margin: 0; }
-  #day-explainer .when { font-size: 0.9rem; font-weight: 700; color: var(--brick); font-variant-numeric: tabular-nums; }
+  #day-explainer .when { font-size: 0.9rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
   #day-explainer .snap { margin: 8px 0 10px; padding: 8px 6px; background: var(--bg); border-radius: 2px; }
   #day-explainer .stage { display: none; margin: 0; }
   #day-explainer .now { margin: 4px 0 0; font-weight: 700; font-size: 1rem; text-align: center; font-variant-numeric: tabular-nums; }
-  #day-explainer .now span { color: var(--brick); }
+  #day-explainer .now span { color: var(--accent); }
   #day-explainer .key { margin: 2px 0 0; font-size: 0.8rem; line-height: 1.35; color: var(--muted); text-align: center; }
   #day-explainer .key .k-tail { color: var(--accent); font-weight: 700; }
-  #day-explainer .key .k-un { color: var(--brick); font-weight: 700; }
+  #day-explainer .key .k-un { color: var(--fg); font-weight: 700; }
+  /* Rust is for marks, never text (identity.md): a rust swatch ties the word to the chart. */
+  #day-explainer .key .k-un::before { content: ""; display: inline-block; width: 0.7em; height: 0.7em; margin-right: 4px; vertical-align: -0.05em; background: var(--brick); }
 
   /* The chart */
   #day-explainer .bd-chart { display: block; width: 100%; max-width: 520px; height: auto; margin: 0 auto; }
@@ -101,7 +103,7 @@ const html = dayMarkup(routesFromRecord(d), { checked: d.checked });
   #day-try .picks button, #day-now { min-height: 44px; padding: 0 14px; font: inherit; font-size: 1rem; font-weight: 600; color: var(--accent); background: var(--card); border: 1px solid var(--accent); border-radius: 3px; cursor: pointer; }
   #day-try .picks button[aria-pressed="true"] { color: var(--card); background: var(--accent); }
   #day-try .timerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  #day-try .timerow b { color: var(--brick); font-variant-numeric: tabular-nums; }
+  #day-try .timerow b { color: var(--accent); font-variant-numeric: tabular-nums; }
   #day-time { width: 100%; min-height: 44px; margin: 4px 0 0; accent-color: var(--brick); }
   #day-try .scale { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); margin-bottom: 8px; }
   #day-try .note { font-size: 0.9rem; color: var(--muted); }
