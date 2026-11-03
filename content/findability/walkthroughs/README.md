@@ -26,3 +26,7 @@ Then add notes per task by reading each answer page. Keep task ids stable so run
 
 - `tasks-personas.yaml`: one task per persona in `content/personas.yaml` (ids p01 to p32), using the persona's findability question, search words and landing page. `after_path` holds the new landing for five personas changed in #1540.
 - Results: `2026-11-03-personas.yaml`, with `landing_answers` (Claude's read of whether the landing page answers the question). Write-up: `docs/reviews/2026-11-03-persona-walkthroughs.md`.
+
+## November 3 round 4 (sprint wave 14, see #529)
+
+- Same 32 persona tasks, run with `--after` on `main` after about 96 more commits, plus the Family door tasks. Results: `2026-11-03-personas-round-4.yaml`, with each task's round 3 total for comparison. Write-up, with the search test: `docs/reviews/2026-11-03-walkthroughs-and-search-round-4.md`.

@@ -3,7 +3,7 @@
 // the build also runs them. Uses Node's built-in test runner, no packages.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { ymd, todayYmd, isStale, oldestChecked, isHidden, loadDir, loadCalendarWithFeeds, titleKey } from '../src/lib/content.mjs';
+import { ymd, todayYmd, isStale, oldestChecked, isHidden, isPast, loadDir, loadCalendarWithFeeds, titleKey } from '../src/lib/content.mjs';
 import { TYPES, shape, fieldPaths } from '../src/lib/api.mjs';
 
 test('ymd turns YAML dates and strings into YYYY-MM-DD', () => {
@@ -33,10 +33,10 @@ test('isHidden reads the hidden block', () => {
   assert.equal(isHidden({}), false);
 });
 
-test('loadDir leaves hidden records out unless asked', () => {
+test('loadDir leaves hidden and past (show_until) records out unless asked', () => {
   const all = loadDir('resources', { withHidden: true });
   const shown = loadDir('resources');
-  assert.equal(shown.length, all.filter((r) => !isHidden(r)).length);
+  assert.equal(shown.length, all.filter((r) => !isHidden(r) && !isPast(r)).length);
   assert.ok(shown.every((r) => r._file.startsWith('resources/')));
 });
 

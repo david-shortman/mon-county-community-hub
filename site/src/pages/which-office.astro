@@ -71,7 +71,7 @@ const groups = [
       <ul>
         {g.rows.map((r) => (
           <li>
-            <p><strong>{r.task}:</strong> {r.office}{r.phone && <>, <a href={telHref(r.phone)}>{r.phone}</a></>}.{r.note && <>{' '}{r.note}</>}</p>
+            <p><strong>{r.task}{/\?$/.test(r.task) ? '' : ':'}</strong> {r.office}{r.phone && <>, <a href={telHref(r.phone)}>{r.phone}</a></>}.{r.note && <>{' '}{r.note}</>}</p>
             {r.page && <p class="more">More: <a href={`${base}${r.page[0]}`}>{r.page[1]}</a></p>}
             <SourceLine sources={r.sources} org={r.org} about={r.task} />
           </li>
@@ -83,7 +83,7 @@ const groups = [
   <h2 id="more">More about local government</h2>
   <ul>
     <li><a href={`${base}/who-decides/`}>Who decides what</a>: City Council, the County Commission, the school board and other public bodies.</li>
-    <li><a href={`${base}/who-serves-me/`}>Who serves my address?</a>: police, trash, water and streets by town.</li>
+    <li><a href={`${base}/who-serves-me/`}>Who serves my address?</a> Police, trash, water and streets by town.</li>
     <li><a href={`${base}/public-records/`}>Ask for public records</a>.</li>
   </ul>
 
