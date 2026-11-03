@@ -139,6 +139,12 @@ html:root :is(.card, .note, .add-cal, .right-now, .crisis-line, .step, .milepost
   .milepost summary, details.fold, details.fold > summary, .table-scroll, .pick label, .choice, .door,
   .search input, .btn-search, .add-cal input, .skip) { border-radius: 2px; }
 html:root .btn { border-radius: 3px; border-width: 2px; }
+/* Keep a phone number on one line, so 898-211 never reads as 898- and 211.
+   Only when the screen holds 24em of the reader's own text size, so a big
+   text setting can still wrap a long one like 1-800-RED-CROSS (1-800-733-2767). */
+@media (min-width: 24em) {
+  html:root a:is([href^="tel:"], [href^="sms:"]):not(.btn) { white-space: nowrap; }
+}
 /* Tables: a printer's rule under the column heads, and even figures. */
 html:root main thead th { border-bottom: 2px solid var(--fg); }
 html:root main :is(td, th) { font-variant-numeric: lining-nums tabular-nums; }
