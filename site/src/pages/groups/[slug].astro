@@ -18,8 +18,11 @@ const here = Astro.url.pathname;
 const fixGroup = fixFormUrl({ listing: org.slug, page: here });
 const api = (p) => `${base}/api/v1/${p}`;
 const checked = oldestChecked(org.sources);
+// A group with a domestic or sexual violence listing (private_trace, #555) gets the
+// crisis strip: Quick exit, and no referrer to other sites, like the listing's own page.
+const crisis = listings.some((r) => r.private_trace === true);
 ---
-<Base title={`${name} on Everything Morgantown`} description={`What Everything Morgantown lists about ${org.name} in Morgantown and Mon County: ${listings.length} listing${listings.length === 1 ? '' : 's'}, upcoming dates, sources, and how to ask for a fix.`}>
+<Base crisis={crisis} title={`${name} on Everything Morgantown`} description={`What Everything Morgantown lists about ${org.name} in Morgantown and Mon County: ${listings.length} listing${listings.length === 1 ? '' : 's'}, upcoming dates, sources, and how to ask for a fix.`}>
   <h1>{org.name} on this site</h1>
   <p class="lede">This page shows all we list about this group, just as residents see it. You can ask us to fix or remove any of it. A listing here does not mean {org.name} works with us or approves of the site.</p>
 

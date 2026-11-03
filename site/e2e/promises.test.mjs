@@ -115,7 +115,7 @@ describe('privacy promises in the built pages', () => {
     assert.deepEqual(bad, []);
   });
 
-  test('domestic and sexual violence listings never show Text this, Print this or Share', () => {
+  test('domestic and sexual violence listings never show Text this, Print this or Share, and their pages have Quick exit', () => {
     const records = privateTrace();
     assert.ok(records.length >= 3, 'expected the private_trace listings in content/');
     const bad = [];
@@ -128,6 +128,8 @@ describe('privacy promises in the built pages', () => {
           seen.add(r.slug);
           const card = h.slice(at, h.indexOf('</article>', at));
           if (card.includes('class="pass-it-on"')) bad.push(`${p}#${r.slug}: has the Pass it on row`);
+          // Privacy page: "Their pages have Quick exit instead" (#1422).
+          if (!h.includes('id="quick-exit"')) bad.push(`${p}#${r.slug}: the page has no Quick exit`);
         }
         // Wherever it appears, no text message or share button carries its title.
         const enc = encodeURIComponent(r.title);
