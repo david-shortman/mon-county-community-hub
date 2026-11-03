@@ -39,3 +39,11 @@ test('due when the oldest source is past the cadence', () => {
   assert.equal(recheckDue(r, '2026-11-01'), true);
   assert.equal(recheckDue(rec(['outdoors']), '2027-02-15'), false);
 });
+
+test('cards follow the cadence, never later than 6 months', () => {
+  assert.equal(staleDaysFor(rec(['money'])), 90);
+  assert.equal(staleDaysFor({ _file: 'calendar/fair-2026-11-20.yaml', topics: ['community'] }), 90);
+  assert.equal(staleDaysFor(rec(['outdoors'])), 183);
+  assert.equal(staleDaysFor(rec(['outdoors'], { recheck_days: 365 })), 183);
+  assert.equal(staleDaysFor(rec(['outdoors'], { recheck_days: 30 })), 30);
+});
