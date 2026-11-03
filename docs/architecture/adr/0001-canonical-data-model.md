@@ -1,6 +1,8 @@
 # 0001: One canonical data layer in `content/`, checked by JSON Schemas, exported to open standards
 
-Status: proposed, 2026-10-28
+Status: accepted by David, 2026-11-02 (#93, #1410). Proposed 2026-10-28.
+
+For now, `site/scripts/check-content.mjs` is the validation for every record type. The JSON Schema files in point 3 come once outside groups reuse the data.
 
 ## Context
 

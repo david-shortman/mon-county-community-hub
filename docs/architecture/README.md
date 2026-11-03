@@ -75,6 +75,6 @@ Several sessions work at once. To avoid stepping on each other, each has a lane.
 | `docs/operations/`, health workflows | Watchdog |
 | `docs/architecture/` | Architect |
 
-Shared files that every lane touches: `docs/build-log.md`, `docs/decisions.md`, `content/README.md`, `site/package.json`. These are where conflicts happen. [ADR 0005](adr/0005-agent-safety-and-ownership.md) proposes how to shrink that list.
+Shared files that every lane touches: `docs/build-log.md`, `docs/decisions.md`, `content/README.md`, `site/package.json`. These are where conflicts happen. [ADR 0005](adr/0005-agent-safety-and-ownership.md), accepted on 2026-11-02, says how to shrink that list.
 
 Last checked: 2026-10-28.

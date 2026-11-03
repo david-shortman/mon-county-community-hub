@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upcoming dates in Mon County</title>
+<!--
+  MCP Apps view for the upcoming_dates tool (#1371). The chat app shows it in
+  a sandbox. It loads nothing from the internet: the host hands it the tool's
+  result, and links open through the host (ui/open-link). Read-only, no
+  storage, no tracking.
+-->
+<style>
+  :root {
+    --bg: #f6f1e6; --fg: #1f1d19; --muted: #4a453b; --line: #d6cab3; --accent: #24493d; --card: #fffdf8; --rust: #9a4b2c;
+    --s1: 0.25rem; --s2: 0.5rem; --s3: 0.75rem; --s4: 1rem; --s5: 1.5rem;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #171613; --fg: #eeeae0; --muted: #bcb5a6; --line: #3a352c; --accent: #93cdb6; --card: #1f1d19; --rust: #d98c6c; }
+  }
+  :root[data-theme="dark"] { --bg: #171613; --fg: #eeeae0; --muted: #bcb5a6; --line: #3a352c; --accent: #93cdb6; --card: #1f1d19; --rust: #d98c6c; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: var(--s3); background: var(--bg); color: var(--fg); font: 1rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  h1 { font-size: 1.15rem; margin: 0 0 var(--s2); }
+  .note { color: var(--muted); font-size: 0.9rem; margin: 0 0 var(--s3); }
+  .filters { display: flex; flex-wrap: wrap; gap: var(--s2); margin: 0 0 var(--s3); padding: 0; list-style: none; }
+  .filters button { min-height: 44px; padding: var(--s1) var(--s3); border: 1px solid var(--line); border-radius: 22px; background: var(--card); color: var(--fg); font: inherit; cursor: pointer; }
+  .filters button[aria-pressed="true"] { border-color: var(--accent); outline: 2px solid var(--accent); }
+  ol { list-style: none; margin: 0; padding: 0; }
+  li.date { border: 1px solid var(--line); border-top: 2px solid var(--fg); background: var(--card); padding: var(--s3) var(--s4); margin: 0 0 var(--s3); }
+  .when { font-weight: 700; color: var(--rust); margin: 0; }
+  h2 { font-size: 1.05rem; margin: var(--s1) 0; }
+  .meta { color: var(--muted); font-size: 0.9rem; margin: var(--s1) 0 0; }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s2); margin: var(--s2) 0 0; }
+  .actions button { min-height: 44px; padding: var(--s1) var(--s3); border: 2px solid var(--accent); border-radius: 3px; background: transparent; color: var(--accent); font: inherit; font-weight: 700; cursor: pointer; }
+  .stale { color: var(--rust); }
+  button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<h1>Upcoming dates in Mon County</h1>
+<p class="note" id="status">Loading dates…</p>
+<ul class="filters" id="filters" aria-label="Show dates about"></ul>
+<ol id="list"></ol>
+<p class="note">From Everything Morgantown. Dates can change: check the source before you go. For help right now, call or text 211.</p>
+<script>
+(() => {
+  const SITE = 'https://everythingmorgantown.org';
+  const TOPICS = { money: 'Money', food: 'Food', health: 'Health', housing: 'Housing', government: 'Government', voting: 'Voting', recycling: 'Recycling', community: 'Community', family: 'Family', outdoors: 'Outdoors', work: 'Work', taxes: 'Taxes', better: 'Make it better' };
+  let nextId = 1;
+  const waiting = new Map();
+  let items = [];
+  let topic = '';
+
+  // JSON-RPC over postMessage to the host.
+  const post = (msg) => window.parent.postMessage({ jsonrpc: '2.0', ...msg }, '*');
+  const request = (method, params) => new Promise((resolve, reject) => {
+    const id = nextId++;
+    waiting.set(id, { resolve, reject });
+    post({ id, method, params });
+  });
+  const openLink = (url) => request('ui/open-link', { url }).catch(() => { document.getElementById('status').textContent = `Open this link: ${url}`; });
+
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const pretty = (ymd) => { const d = new Date(`${ymd}T12:00:00Z`); return `${DAYS[d.getUTCDay()]}, ${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`; };
+  const time = (t) => { if (!t) return ''; const [h, m] = t.split(':').map(Number); const ap = h < 12 ? 'a.m.' : 'p.m.'; const hh = h % 12 || 12; return m ? `${hh}:${String(m).padStart(2, '0')} ${ap}` : `${hh} ${ap}`; };
+  const when = (e) => {
+    const day = e.starts === e.ends || !e.ends ? pretty(e.starts) : `${pretty(e.starts)} to ${pretty(e.ends)}`;
+    const t = e.start_time ? `, ${time(e.start_time)}${e.end_time ? ` to ${time(e.end_time)}` : ''}` : '';
+    return day + t;
+  };
+  const el = (tag, props = {}, ...kids) => { const n = Object.assign(document.createElement(tag), props); n.append(...kids.filter(Boolean)); return n; };
+  const button = (label, url) => el('button', { type: 'button', onclick: () => openLink(url) }, label);
+
+  function render() {
+    const shown = topic ? items.filter((e) => (e.topics || []).includes(topic)) : items;
+    const list = document.getElementById('list');
+    list.replaceChildren(...shown.map((e) => {
+      const src = (e.sources || [])[0];
+      const checked = e.oldest_checked ? `Checked ${pretty(e.oldest_checked).replace(/^\w+, /, '')}, ${e.oldest_checked.slice(0, 4)}.` : '';
+      return el('li', { className: 'date' },
+        el('p', { className: 'when' }, when(e)),
+        el('h2', {}, e.title),
+        (e.org_name || e.place) ? el('p', { className: 'meta' }, [e.org_name, e.place].filter(Boolean).join(' · ')) : null,
+        e.what_to_do ? el('p', {}, e.what_to_do) : null,
+        el('p', { className: 'meta' }, checked, e.stale ? el('span', { className: 'stale' }, ' May be out of date.') : null),
+        el('div', { className: 'actions' },
+          e.add_to_calendar ? button('Add to calendar', e.add_to_calendar) : null,
+          src ? button('Source', src.url) : null,
+          e.url && (!src || e.url !== src.url) ? button('Details', e.url) : null),
+      );
+    }));
+    document.getElementById('status').textContent = shown.length ? `${shown.length} ${shown.length === 1 ? 'date' : 'dates'}${topic ? ` about ${TOPICS[topic] || topic}` : ''}, soonest first.` : 'No dates to show.';
+  }
+
+  function renderFilters() {
+    const topics = [...new Set(items.flatMap((e) => e.topics || []))].filter((t) => TOPICS[t]).sort();
+    const make = (value, label) => {
+      const b = el('button', { type: 'button', onclick: () => { topic = value; renderFilters(); render(); } }, label);
+      b.setAttribute('aria-pressed', String(topic === value));
+      return el('li', {}, b);
+    };
+    document.getElementById('filters').replaceChildren(...(topics.length > 1 ? [make('', 'All'), ...topics.map((t) => make(t, TOPICS[t]))] : []));
+  }
+
+  function show(result) {
+    const data = result && result.structuredContent;
+    if (!data || !Array.isArray(data.results)) return;
+    items = data.results;
+    renderFilters();
+    render();
+  }
+
+  window.addEventListener('message', (ev) => {
+    const m = ev.data;
+    if (!m || m.jsonrpc !== '2.0') return;
+    if (m.id != null && waiting.has(m.id)) {
+      const w = waiting.get(m.id); waiting.delete(m.id);
+      return m.error ? w.reject(m.error) : w.resolve(m.result);
+    }
+    if (m.method === 'ui/notifications/tool-result') show(m.params);
+    if (m.method === 'ui/notifications/host-context-changed' && m.params && m.params.theme) document.documentElement.dataset.theme = m.params.theme;
+  });
+
+  request('ui/initialize', { protocolVersion: '2026-01-26', appInfo: { name: 'everything-morgantown-dates', version: '1.0.0' }, appCapabilities: {} })
+    .then((r) => {
+      const theme = r && r.hostContext && r.hostContext.theme;
+      if (theme) document.documentElement.dataset.theme = theme;
+      post({ method: 'ui/notifications/initialized' });
+    })
+    .catch(() => {});
+})();
+</script>
+</body>
+</html>

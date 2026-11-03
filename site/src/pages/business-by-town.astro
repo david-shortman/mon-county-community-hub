@@ -12,7 +12,7 @@ import SourceLine from '../components/SourceLine.astro';
 import { resource, telHref } from '../lib/content.mjs';
 export const page = { door: "family", topic: "work", label: "Start a business in Star City, Granville or Westover", summary: "Which town you are in decides the local business license and B&O tax form" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '2026-10-30' }];
+const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '2026-11-02' }, { url: 'https://www.westoverwv.org/_files/ugd/d2114f_50052056caff40fc91000a6134690e2d.pdf', checked: '2026-11-02' }, { url: 'https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf', checked: '2026-11-02' }];
 ---
 <Base title="Start a business in Star City, Granville or Westover, Mon County, WV" description="Which town your business is in decides the local business license and B&O tax form. The Star City, Granville and Westover forms and offices, and who to ask outside any town in Monongalia County.">
   <h1>Start a business in Star City, Granville or Westover</h1>
@@ -37,7 +37,7 @@ const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '
       <li>Business and Occupation (Gross Sales) Tax</li>
       <li>Homeland Security and MECCA 9-1-1 Registration</li>
     </ul>
-    <p>Contractor, building permit and Certificate of Occupancy forms are on the same page. The page does not list fees or rates. City office: 500 Dupont Road, Westover. Paperwork questions: cityofwestover@westoverwv.gov.</p>
+    <p>Contractor, building permit and Certificate of Occupancy forms are on the same page. The page itself does not list fees or rates, but two of the forms do. The Business License Application (dated April 27, 2023) lists a yearly fee for each kind of business, and says licenses run on a fiscal year ending June 30. The B&O tax return (revised July 1, 2024) lists the tax rates and says each return is due 30 days after the quarter ends (March 31, June 30, September 30 and December 31). Ask the city if the forms are still current before you pay. City office: 500 Dupont Road, Westover. Paperwork questions: cityofwestover@westoverwv.gov.</p>
     <p><a class="btn" href="https://www.westoverwv.org/new-businesses"><span>Westover business forms</span></a></p>
     <SourceLine sources={westover} about="Westover business forms" />
   </article>
@@ -45,5 +45,5 @@ const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '
   <h2>Outside any town</h2>
   {resource('mon-county-planning-permits') && <ResourceCard r={resource('mon-county-planning-permits')} />}
 
-  <p class="meta">Sources checked October 30, 2026. None of these town pages list license fees, B&O rates or due dates, so call the town office before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30, 2026. Most of these town pages do not list license fees, B&O rates or due dates, so call the town office before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

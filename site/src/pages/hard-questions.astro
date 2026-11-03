@@ -2,11 +2,16 @@
 // Hard questions (#490): straight answers to what a fair critic would ask.
 // Answers only from what the site and repo show today. "Not yet" marks a gap,
 // never a promise. Speaks for the project, so changes wait for David (for:david).
+import { UPKEEP_NOTICE_DAYS } from '../lib/upkeep.mjs';
 import Base from '../layouts/Base.astro';
 import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 export const page = { door: "about", label: "Hard questions", summary: "Who runs it, why AI, how facts get checked, and where we fall short" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const tellUs = fixFormUrl({ page: Astro.url.pathname });
+const googleEnergy = 'https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference';
+const ghPages = 'https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages#data-collection';
+const epoch = 'https://epoch.ai/gradient-updates/how-much-energy-does-chatgpt-use';
+const eia = 'https://www.eia.gov/tools/faqs/faq.php?id=97&t=3';
 const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-reported-45-billion-ai-agreement-morrisey-says/';
 ---
 <Base title="Hard questions about Everything Morgantown" description="Straight answers about who runs Everything Morgantown, why it uses AI, how facts get checked, and where it falls short today.">
@@ -51,7 +56,12 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
 
   <h2 id="isnt-anthropic-tied-to-the-data-center-in-mason-county">Isn't Anthropic tied to the data center in Mason County?</h2>
   <p>Yes, by news reports. In August 2026, <a href={wdtv}>WDTV reported</a> (we last checked the story on October 30, 2026), citing Bloomberg, that Anthropic agreed to buy computing at a data center campus in Mason County. Many people in West Virginia have real concerns about data centers: power, water, noise, and who gets a say. We think those concerns are fair. We are telling you up front so you can decide for yourself.</p>
-  <p class="gap"><strong>Not yet:</strong> we do not know how much energy this site's AI work uses.</p>
+
+  <h2 id="how-much-energy-does-the-ai-behind-this-site-use">How much energy does the AI behind this site use?</h2>
+  <p>We don't know, and we can't measure it yet. Anthropic has not published how much energy, water or carbon its AI uses, for one question or in total. We looked in its filings, model reports and transparency pages on October 31, 2026.</p>
+  <p>Other companies have published numbers for one chat question about their own AI. <a href={googleEnergy}>Google says</a> a typical text question to its Gemini app uses 0.24 watt-hours, and says outside groups have not checked that. <a href={epoch}>Epoch AI</a>, an independent research group, estimates about 0.3 watt-hours for a typical ChatGPT question on its GPT-4o model. These are not numbers for Claude. For scale, the average U.S. home uses about 899,000 watt-hours of electricity a month (<a href={eia}>U.S. Energy Information Administration</a>, 2022 data).</p>
+  <p>The work behind this site is bigger than one question. An AI that reads sources and writes pages runs for many minutes at a time, and outside estimates for that kind of work differ by more than ten times. We will not call this site green or low impact. What we know, what we don't, and ways to use less are in <a href="https://github.com/david-shortman/mon-county-community-hub/blob/main/docs/research/ai-energy-use.md">our research note</a>.</p>
+  <p class="gap"><strong>Not yet:</strong> a count of how much AI work this site uses, or any energy figure for it.</p>
 
   <h2 id="does-a-person-check-every-page-before-it-goes-up">Does a person check every page before it goes up?</h2>
   <p>No, not today. The AI publishes most changes on its own. Before each change goes live, another AI run checks it against our rules for sources, plain words, fairness and privacy. Some changes always wait for David to check them first:</p>
@@ -94,7 +104,7 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
   <p>David does. The web address costs about $10 to $20 a year. The AI runs on David's own Claude plan, which he already pays for. Hosting and the code tools are free. There are no ads, no donations and no funding.</p>
 
   <h2 id="what-happens-if-david-stops">What happens if David stops?</h2>
-  <p>The site stays up, and the calendar feeds keep updating. New pages and rechecks stop. After about 6 months, listings start showing as past due for a recheck. All the data and code are free for anyone to reuse.</p>
+  <p>The site stays up, and the calendar feeds keep updating. New pages and rechecks stop. After about 6 months, listings start showing as past due for a recheck. If nobody rechecks any listing for {UPKEEP_NOTICE_DAYS} days, a notice on every page says the site is not being kept up and to check with the group or call 211. All the data and code are free for anyone to reuse.</p>
   <p class="gap"><strong>Not yet:</strong> no one else has agreed to take it over.</p>
 
   <h2 id="what-do-you-know-about-me">What do you know about me?</h2>
@@ -102,10 +112,10 @@ const wdtv = 'https://www.wdtv.com/2026/08/27/west-virginia-data-center-lands-re
     <li>No sign-ups, no accounts, no ads.</li>
     <li>We have one form, for asking us to fix or remove something. A company called Tally runs it and stores what you send. We never post it. Your email is optional.</li>
     <li>If you email {FIX_EMAIL}, our domain company, Porkbun, passes your message on to a private inbox. We never post it.</li>
-    <li>We don't count or track visitors.</li>
+    <li>We count page visits with GoatCounter, a counter that uses no cookies and does not store your IP address. We never track a person. The full list is on our <a href={`${base}/privacy/`}>Privacy</a> page.</li>
     <li>Map buttons open Google Maps. Nothing goes to Google unless you tap one.</li>
   </ul>
-  <p class="gap"><strong>Not yet:</strong> the site is hosted by GitHub. We have not checked what basic server records GitHub keeps.</p>
+  <p>The site is hosted on GitHub Pages. <a href={ghPages}>GitHub says</a> it logs and stores the IP address of each visitor to a GitHub Pages site, for security (we checked on November 2, 2026). We don't see those records.</p>
 
   <h2 id="is-this-political">Is this political?</h2>
   <p>No. No candidates, no parties, no favorite businesses. Voting information points to the West Virginia Secretary of State. We describe problems and point to help. We don't take sides on policy.</p>

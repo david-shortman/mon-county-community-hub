@@ -5,67 +5,63 @@
 // page), who can sign up for WVU Alert, and Monongalia County Schools'
 // own closing notices (#727).
 import Base from '../layouts/Base.astro';
+import BigChoices from '../components/BigChoices.astro';
+import OnThisPage from '../components/OnThisPage.astro';
 import SourceLine from '../components/SourceLine.astro';
+import Fact from '../components/Fact.astro';
+import { factsFor } from '../lib/facts.mjs';
 import Icon from '../components/Icon.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "weather", label: "Get weather and emergency alerts", summary: "Phone alerts, the National Weather Service, city alerts, WVU Alert, road conditions, school closings and power outage texts" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Most sections are fact records in content/facts/alerts/ (#122), each with
+// the source's own words and its own checked date. Schools and power outage
+// texts stay typed for now: those pages load their text by script or ask
+// robots not to read them, so a person re-reads them.
+const fact = factsFor('alerts');
 const checked = '2026-10-30';
-const wea = [{ url: 'https://www.fema.gov/emergency-managers/practitioners/integrated-public-alert-warning-system/public/wireless-emergency-alerts', checked }];
-const nws = [
-  { url: 'https://forecast.weather.gov/MapClick.php?zoneid=WVZ509', checked },
-  { url: 'https://www.weather.gov/pbz/weatherbriefingpage', checked },
-];
-const radio = [{ url: 'https://www.weather.gov/nwr/county_coverage?State=WV', checked }];
-const city = [{ url: 'https://www.morgantownwv.gov/list.aspx', checked }];
-const wvu = [{ url: 'https://emergency.wvu.edu/', checked }];
-const roads = [
-  { url: 'https://www.wv511.org/NetworkCoverage/calling511.aspx', checked },
-  { url: 'https://www.wv511.org/NetworkCoverage/usingAlertingService.aspx', checked },
-  { url: 'https://www.wv511.org/NetworkCoverage/usingApp.aspx', checked },
-];
 const schools = [{ url: 'https://wveis.k12.wv.us/closings/', checked }, { url: 'https://boe.mono.k12.wv.us/page/closings/', checked: '2026-11-01' }];
 const power = [{ url: 'https://www.firstenergycorp.com/outages_help/outage_help/outage_notifications.html', checked }];
-const plan = [{ url: 'https://www.mecca911.org/Documents/Emergency_Management/2026%20Update%20Monongalia%20County%20EOP.pdf', checked, name: 'Monongalia County Emergency Operations Plan, 2026 update' }];
 ---
 <Base title="Get weather and emergency alerts in Morgantown and Mon County" description="Official ways to get weather warnings and emergency alerts in Morgantown and Monongalia County, WV: phone alerts, the National Weather Service, City of Morgantown alerts, WVU Alert, WV 511 road alerts, school closings and Mon Power outage texts.">
   <h1>Get weather and emergency alerts</h1>
   <p class="lede">These are the official places that send warnings for Mon County. Most are free. We do not send alerts ourselves.</p>
+  {/* Lead block (#199): the four alerts most people look for. */}
+  <BigChoices label="Alerts: start here" choices={[
+    { href: '#phone', label: 'Alerts on my phone', icon: 'phone' },
+    { href: '#weather', label: 'Weather warnings', icon: 'info' },
+    { href: '#schools', label: 'School closings', icon: 'calendar' },
+    { href: '#power', label: 'Power outage texts', icon: 'bulb' },
+  ]} />
+  <OnThisPage items={[['#city', 'City of Morgantown alerts'], ['#county', 'Monongalia County alerts'], ['#wvu', 'WVU students and staff'], ['#roads', 'Roads and closures']]} />
 
   <h2 id="phone">On your phone, with no sign-up</h2>
-  <p><strong>Wireless Emergency Alerts</strong> are the loud alerts that pop up on cell phones for things like extreme weather. FEMA says they are free, do not count against your texting plan, and need no sign-up or personal information. To turn them on or off, look in your phone's notification settings. To find out if your phone can get them, ask your wireless company.</p>
-  <SourceLine sources={wea} about="Wireless Emergency Alerts" />
+  <Fact f={fact('phone-alerts')} about="Wireless Emergency Alerts" />
 
   <h2 id="weather">Weather warnings</h2>
-  <p>The <strong>National Weather Service office in Pittsburgh</strong> covers Monongalia County. It issues the weather watches and warnings for the county. Check its Mon County forecast page before a storm.</p>
-  <SourceLine sources={nws} about="the National Weather Service" />
+  <Fact f={fact('weather-office')} about="the National Weather Service" />
   <div class="actions">
     <a class="btn" href="https://forecast.weather.gov/MapClick.php?zoneid=WVZ509"><Icon name="open" /><span>Mon County forecast and warnings</span></a>
   </div>
-  <p><strong>NOAA Weather Radio</strong> plays weather warnings around the clock on a weather radio, with no internet needed. The Morgantown station is KWN35 on 162.475 MHz. Mon County's code for radios that let you pick your county (SAME code) is 054061.</p>
-  <SourceLine sources={radio} about="NOAA Weather Radio" />
+  <Fact f={fact('weather-radio')} about="NOAA Weather Radio" />
 
   <h2 id="city">City of Morgantown alerts</h2>
-  <p>The city's <strong>Notify Me</strong> page has an Emergency Alerts list. You can sign up for email, or for text messages (standard text rates apply). The same page has lists for city news, meetings and more.</p>
-  <SourceLine sources={city} about="City of Morgantown Notify Me" />
+  <Fact f={fact('city-notify-me')} about="City of Morgantown Notify Me" />
   <div class="actions">
     <a class="btn" href="https://www.morgantownwv.gov/list.aspx"><Icon name="open" /><span>Sign up for city alerts</span></a>
   </div>
 
   <h2 id="county">Monongalia County alerts</h2>
-  <p>We did not find a public page where residents can sign up for county emergency alerts. The county's 2026 emergency plan says public information may go out through the Emergency Alert System, a mass notification system, social media, local TV and radio, and NOAA Weather Radio, but it does not say how to sign up. The alerts above still reach you.</p>
-  <SourceLine sources={plan} about="the county emergency plan" />
+  <Fact f={fact('county-alerts')} about="the county emergency plan" />
 
   <h2 id="wvu">WVU students and staff</h2>
-  <p>WVU sends emergency updates for the Morgantown campus by text and email through its safety notification system, and by push notice in the LiveSafe app. Its emergency site links to the WVU Alert sign-up. Check there for who can sign up.</p>
-  <SourceLine sources={wvu} about="WVU Alert" />
+  <Fact f={fact('wvu-alert')} about="WVU Alert" />
   <div class="actions">
     <a class="btn" href="https://emergency.wvu.edu/"><Icon name="open" /><span>WVU emergency site and sign-up</span></a>
   </div>
 
   <h2 id="roads">Roads and closures</h2>
-  <p><strong>WV 511</strong> has road conditions and closures. Dial 5-1-1 from anywhere in West Virginia, use the WV 511 Drive Safe app, or sign up for Personal Travel Alerts by email or text and pick the region, times and kinds of alerts you want.</p>
-  <SourceLine sources={roads} about="WV 511" />
+  <Fact f={fact('wv-511')} about="WV 511" />
   <div class="actions">
     <a class="btn" href="https://www.wv511.org/personalAlerts/newUser.aspx"><Icon name="open" /><span>Sign up for WV 511 alerts</span></a>
   </div>
@@ -86,5 +82,5 @@ const plan = [{ url: 'https://www.mecca911.org/Documents/Emergency_Management/20
 
   <p>Storm already hit? See <a href={`${base}/after-a-storm/`}>Storm damage, flooding or power out?</a></p>
   <p>Want to know your flood risk before a storm? See <a href={`${base}/flood-zone/`}>Is my home in a flood zone or a slide area?</a></p>
-  <p class="meta">Sources checked October 30, 2026. We point to official alert services and do not run any of them. Know an official alert service we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Each section shows when we last checked its source. We point to official alert services and do not run any of them. Know an official alert service we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

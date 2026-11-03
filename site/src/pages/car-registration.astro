@@ -1,23 +1,40 @@
 ---
 // Renew a car registration and get a state inspection (#222 coverage map
 // follow-up). Facts come from the WV DMV registrations page, read 2026-10-31.
-// Left off: whether the Monongalia County Sheriff renews registrations (its
-// site does not say), and the WV State Police inspection station list (its
-// site did not load).
+// The tax receipt part (David's feedback, Nov 1) comes from the Sheriff's Tax
+// Office page and its online tax search and help text, the DMV page and the
+// Assessor's new residents page, read 2026-11-01. The Sheriff's Tax Office
+// page says it offers one year car registration renewals.
+// Left off: the WV State Police inspection station list (its site did not
+// load), and any card fee for paying tax online (the site did not show one
+// before you pick a bill).
 import Base from '../layouts/Base.astro';
 import BigChoices from '../components/BigChoices.astro';
 import ResourceCard from '../components/ResourceCard.astro';
-import { resource } from '../lib/content.mjs';
+import { resource, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
+import SourceLine from '../components/SourceLine.astro';
+import Icon from '../components/Icon.astro';
 export const page = { door: "living-here", topic: "moving", label: "Car registration and inspection", summary: "Renew your registration online or in person, what to bring, the 24-month inspection sticker, and lost plates or decals" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-01';
+const taxSearch = 'https://monongalia.softwaresystems.com/index.html';
+const taxPay = 'https://monongalia.softwaresystems.com/INDEXp.html';
+const receiptSources = [
+  { url: 'https://monongaliasheriff.gov/tax/index.php', checked },
+  { url: taxSearch, checked, name: "Monongalia County Sheriff's Tax Office, online tax search" },
+  { url: 'https://dmv.wv.gov/vehicle-services/vehicles/registrations', checked },
+  { url: 'https://www.assessor.org/2223/Information-for-New-Residents', checked },
+];
+const phones = { tax: '304-291-7244', assessor: '304-291-7222' };
 ---
 <Base title="Renew car registration and inspection in Morgantown, WV" description="Renew a West Virginia vehicle registration online, by mail or at the Morgantown DMV, what to bring (insurance and personal property tax receipt), the 24-month state inspection sticker, and replacing a lost plate, decal or registration card.">
   <h1>Car registration and inspection</h1>
   <p class="lede">You can renew your registration online any time with a credit card. Have your insurance and personal property tax receipt ready. Your inspection sticker is a separate step, every 24 months, at a licensed inspection station.</p>
-  {/* Lead block (#199): the four things most people come here for. */}
+  {/* Lead block (#199): the main things most people come here for. */}
   <BigChoices label="Car registration: start here" choices={[
     { href: '#renew', label: 'Renew my registration', icon: 'calendar' },
+    { href: '#tax-receipt', label: 'Find my tax receipt', icon: 'receipt' },
     { href: '#inspection', label: 'Inspection sticker', icon: 'receipt' },
     { href: '#lost', label: 'Lost plate, decal or card', icon: 'search' },
     { href: '#office', label: 'The DMV office', icon: 'pin' },
@@ -25,6 +42,29 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="renew">Renew your registration</h2>
   <ResourceCard r={resource('wv-dmv-registration-renewal')} showCost />
+
+  <h2 id="tax-receipt">Get your tax receipt online</h2>
+  <p>The DMV wants proof that you paid personal property tax on your car. Lost your receipt? You can find a copy on the Sheriff's Tax Office website with just your name, then print it.</p>
+  <ol>
+    <li>Open the Sheriff's <a href={taxSearch}>online tax search</a>.</li>
+    <li>Type your last name, then your first name, like <em>Smith John</em>. Set <strong>Real/Personal</strong> to <strong>Personal</strong>, then press <strong>Search by Name</strong>.</li>
+    <li>Find the newest year marked <strong>PP</strong> (personal property) and tap its ticket number. Under <strong>Payments received</strong> you can see the date you paid.</li>
+    <li>Tap <strong>Format for Printer</strong> to print it or save it as a PDF.</li>
+  </ol>
+  <p>Still owe the tax? The same site lets you <a href={taxPay}>pay online</a>. That page only shows bills that are not paid yet.</p>
+  <div class="actions">
+    <a class="btn" href={taxSearch}><Icon name="open" /><span>Look up your receipt</span></a>
+  </div>
+
+  <h3 id="tax-receipt-not-found">If your name does not show up</h3>
+  <ul>
+    <li>Try just your last name. Part of a name works too.</li>
+    <li>Changed your name? Try the name you used before.</li>
+    <li>Own the car with someone else? Try their name.</li>
+    <li>New to the county, or didn't own the car on July 1? You may not have a tax bill yet. The DMV will take a statement (affidavit) from the County Assessor instead. Call the Assessor at <a href={telHref(phones.assessor)}>{phones.assessor}</a>.</li>
+    <li>Still stuck? Call the Sheriff's Tax Office at <a href={telHref(phones.tax)}>{phones.tax}</a>, Monday to Friday, 8:30 a.m. to 4:30 p.m., or go to 243 High Street, Room 300, Morgantown. The office can also renew your car registration for one year.</li>
+  </ul>
+  <SourceLine sources={receiptSources} about="getting your personal property tax receipt" />
 
   <h2 id="inspection">Get your inspection sticker</h2>
   <ResourceCard r={resource('wv-vehicle-inspection')} />
@@ -37,5 +77,5 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <p>Just moved here? See <a href={`${base}/drivers-license/`}>driver's license and plates for new residents</a>. Need a state ID? See <a href={`${base}/ids-and-records/`}>birth certificates, IDs and records</a>.</p>
 
-  <p class="meta">Sources checked October 31, 2026. Fees and rules can change, so check the DMV's page before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 31 and November 1, 2026. Fees and rules can change, so check the DMV's page before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

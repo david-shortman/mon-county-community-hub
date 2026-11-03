@@ -69,9 +69,12 @@ const ICONS = {
 const LANE_ICONS = { 'help-now': 'bed', dates: 'calendar', about: 'info' };
 export const doorIcon = (door) => (door ? ICONS[door.icon] ?? ICONS[LANE_ICONS[door.slug]] : undefined);
 
-// Identity colors only (docs/design/identity.md): hill green ground, page
-// white for the name and title, pale green for the rest.
-const C = { ground: '#1f5c4a', hill: '#2f7a63', white: '#f9f7f2', pale: '#e6f0ec', river: '#8fd1b5' };
+// Press inks only (docs/design/identity.md, docs/design/looks/press.md):
+// a hemlock ground, paper for the name and title, pale hemlock for the
+// summary, sandstone for the door and the address, and one rust quilt corner.
+// Every text color is 7:1 or more on the hemlock (paper 8.9, pale hemlock
+// 8.4, sandstone 7.8). Rust is a mark, never text.
+const C = { ground: '#24493d', paper: '#f6f1e6', pale: '#e7ece4', sand: '#ece2cd', rust: '#d98c6c' };
 
 // The site folder: two levels up both here (src/lib) and in the built copy
 // of this file (dist/chunks), the same way content.mjs finds content/.
@@ -84,6 +87,8 @@ function load() {
       { name: 'Atkinson', weight: 800, style: 'normal', data: fs.readFileSync(new URL('atkinson-hyperlegible-next-800.ttf', fontsDir)) },
       { name: 'Atkinson', weight: 500, style: 'normal', data: fs.readFileSync(new URL('atkinson-hyperlegible-next-500.ttf', fontsDir)) },
       { name: 'Fraunces', weight: 800, style: 'normal', data: fs.readFileSync(new URL('fraunces-name-800.ttf', fontsDir)) },
+      // The site's heading serif, the same cut as public/fonts/newsreader-600.woff2 (OFL-Newsreader.txt).
+      { name: 'Newsreader', weight: 600, style: 'normal', data: fs.readFileSync(new URL('newsreader-600.ttf', fontsDir)) },
     ],
     tile: `data:image/svg+xml;base64,${Buffer.from(
       fs.readFileSync(new URL('public/favicon.svg', siteDir), 'utf8').replace(/<!--[\s\S]*?-->\s*/, ''),
@@ -115,22 +120,25 @@ export async function drawCard({ label, summary, door, link }) {
   const d = doorIcon(door);
   const tree = h('div', {
     width: CARD_W, height: CARD_H, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-    boxSizing: 'border-box', padding: '60px 80px 52px', background: C.ground, fontFamily: 'Atkinson',
+    boxSizing: 'border-box', padding: '60px 80px 52px', background: C.ground, fontFamily: 'Atkinson', position: 'relative',
   }, [
+    // One quilt corner: a half-square triangle, as on the site's cards.
+    h('div', { position: 'absolute', top: 0, left: 0, width: 56, height: 56, backgroundImage: `linear-gradient(135deg, ${C.rust} 50%, transparent 50%)` }, []),
     // The logo: the icon tile and the name, as in the site header.
-    h('div', { display: 'flex', alignItems: 'center' }, [
-      { type: 'img', props: { src: tile, width: 76, height: 76, style: { borderRadius: 17, boxShadow: `0 0 0 4px ${C.hill}` } } },
-      h('div', { marginLeft: 24, fontFamily: 'Fraunces', fontWeight: 800, fontSize: 42, color: C.white }, 'Everything Morgantown'),
+    // A rule under the name, like the site's masthead.
+    h('div', { display: 'flex', alignItems: 'center', paddingBottom: 22, borderBottom: `5px solid ${C.paper}` }, [
+      { type: 'img', props: { src: tile, width: 76, height: 76, style: { borderRadius: 4 } } },
+      h('div', { marginLeft: 24, fontFamily: 'Fraunces', fontWeight: 800, fontSize: 42, color: C.paper }, 'Everything Morgantown'),
     ]),
     h('div', { display: 'flex', flexDirection: 'column', width: TEXT_W }, [
-      door && h('div', { display: 'flex', alignItems: 'center', marginBottom: 18, color: C.river, fontWeight: 800, fontSize: 32 }, [
-        d && icon(d, 38, C.river),
+      door && h('div', { display: 'flex', alignItems: 'center', marginBottom: 18, color: C.sand, fontWeight: 800, fontSize: 32 }, [
+        d && icon(d, 38, C.sand),
         h('div', { marginLeft: d ? 14 : 0 }, door.name),
       ].filter(Boolean)),
-      h('div', { display: 'block', width: TEXT_W, lineClamp: 3, color: C.white, fontWeight: 800, fontSize: titleSize(label), lineHeight: 1.08 }, label),
+      h('div', { display: 'block', width: TEXT_W, lineClamp: 3, color: C.paper, fontFamily: 'Newsreader', fontWeight: 600, fontSize: titleSize(label), lineHeight: 1.08 }, label),
       summary && h('div', { display: 'block', width: TEXT_W, lineClamp: 2, marginTop: 22, color: C.pale, fontWeight: 500, fontSize: 32, lineHeight: 1.3 }, summary),
     ].filter(Boolean)),
-    h('div', { display: 'flex', width: TEXT_W, color: C.river, fontWeight: 800, fontSize: 28 }, link),
+    h('div', { display: 'flex', width: TEXT_W, color: C.sand, fontWeight: 800, fontSize: 28 }, link),
   ]);
   const svg = await satori(tree, { width: CARD_W, height: CARD_H, fonts });
   return new Resvg(svg, { fitTo: { mode: 'width', value: CARD_W } }).render().asPng();

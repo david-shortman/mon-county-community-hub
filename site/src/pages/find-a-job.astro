@@ -25,7 +25,7 @@ const r = (slug) => all.find((e) => e.slug === slug);
     </ul>
   </nav>
 
-  <p>Just lost a job? <a href={`${base}/life-events/lost-my-job/`}>I lost my job</a> lists what to do first, in order.</p>
+  <p>Just lost a job? <a href={`${base}/life-events/lost-my-job/`}>I lost my job</a> lists what to do first, in order. To file a claim, see <a href={`${base}/unemployment/`}>File for unemployment</a>.</p>
 
   <h2 id="boards">Where local employers post jobs</h2>
   <p>Government jobs, from the city to the state:</p>
@@ -42,6 +42,8 @@ const r = (slug) => all.find((e) => e.slug === slug);
   <h2 id="help">Free help with a resume, interviews or a computer</h2>
   {r('american-job-center-job-seeker-help') && <ResourceCard r={r('american-job-center-job-seeker-help')} />}
   {r('mympls-job-and-computer-help') && <ResourceCard r={r('mympls-job-and-computer-help')} showCost />}
+  {r('goodwill-ncwv-career-and-computer-help') && <ResourceCard r={r('goodwill-ncwv-career-and-computer-help')} showCost />}
+  {r('wvu-career-center-alumni') && <ResourceCard r={r('wvu-career-center-alumni')} />}
 
   <h2 id="train">Short trainings and apprenticeships</h2>
   {r('pierpont-career-training') && <ResourceCard r={r('pierpont-career-training')} showCost />}
