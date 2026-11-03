@@ -1,0 +1,22 @@
+slug: levy-rates-class-2
+text: "**Levy rates for a home you own and live in (Class II):** $1.3184 for each $100 of assessed value inside Blacksville, Granville, Star City, Westover and Morgantown, and $1.0684 for each $100 in the rest of the county. The Assessor's tax year 2026 sheet labels this rate table \"Monongalia County 2025\"."
+quote: "RATE ON EACH $100.00 VALUATION / MONONGALIA COUNTY 2025 ... Class II ... Districts / State / County / County Excess / School / Municipal / Total ... Battelle, Cass, Clay, Clinton, Grant, Morgan, Osage, Union / 0.005 / 0.22 / 0.0946 / 0.7488 / [blank] / 1.0684 ... Blacksville, Granville, Star City, Westover, Morgantown / 0.005 / 0.22 / 0.0946 / 0.7488 / 0.25 / 1.3184"
+sources:
+  - url: https://www.assessor.org/DocumentCenter/View/16109/Important-Information-for-Monongalia-Taxpayers-TY-2026-PDF
+    name: Monongalia County Assessor, Important Information for Monongalia Taxpayers, TY 2026 (PDF), page 1
+    checked: 2026-11-02
+recheck_days: 90   # new rates each tax year; the table on the TY 2026 sheet is labeled 2025 (needs-verification #1520)
+# The rates as numbers, for the "See how your bill is figured" tool on
+# /property-tax/ (#1446). Dollars for each $100 of assessed value, exactly as
+# the sheet prints them. parts must add up to total (check-content checks it).
+rates:
+  - id: towns
+    label: Inside Blacksville, Granville, Star City, Westover or Morgantown
+    districts: [Blacksville, Granville, Star City, Westover, Morgantown]
+    parts: { state: 0.005, county: 0.22, county_excess: 0.0946, school: 0.7488, municipal: 0.25 }
+    total: 1.3184
+  - id: county
+    label: Anywhere else in the county
+    districts: [Battelle, Cass, Clay, Clinton, Grant, Morgan, Osage, Union]
+    parts: { state: 0.005, county: 0.22, county_excess: 0.0946, school: 0.7488 }
+    total: 1.0684
