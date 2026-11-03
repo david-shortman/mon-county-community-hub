@@ -1,0 +1,17 @@
+title: Look up a licensed care facility or file a complaint with the state (OHFLAC)
+slug: ohflac-facility-complaints
+org: wv-office-of-health-facility-licensure-and-certification
+topics: [disability, health]
+who_it_is_for: Anyone with a concern about care or conditions at a West Virginia health care facility, including a nursing home, assisted living residence or residential care community. Medicare says to file nursing home complaints, like abuse of a resident, not enough staff, or unsafe or unsanitary conditions, with your State Survey Agency. In West Virginia, that is OHFLAC.
+what_to_do: To file a complaint, use the online complaint form or call 304-558-0050. You can also mail it to OHFLAC, State Capitol Complex Building 6, Suite 825, Charleston, WV 25305. To check whether a facility is licensed, use the Facility Search on the OHFLAC page.
+contact:
+  phone: "304-558-0050"
+  url: https://oig.wv.gov/page/office-health-facility-licensure-and-certification
+  url_label: OHFLAC page
+sources:
+  - url: https://oig.wv.gov/page/office-health-facility-licensure-and-certification
+    checked: 2026-11-02
+  - url: https://www.cms.gov/medicare/health-safety-standards/quality-safety-oversight-general-information/contact-information
+    checked: 2026-11-02
+  - url: https://www.medicare.gov/providers-services/claims-appeals-complaints/complaints
+    checked: 2026-11-02
