@@ -16,6 +16,7 @@ export function checkElection(e, file) {
   for (const k of ['election_day', 'canvass', 'results_until']) if (!YMD.test(ymd(e[k]))) bad(`${k} must be a YYYY-MM-DD date`);
   if (e.register_by && !YMD.test(ymd(e.register_by))) bad('register_by must be a YYYY-MM-DD date');
   if (!/^https:\/\//.test(e.results_url)) bad('results_url must be an https link');
+  if (e.polls_close != null && !/^([01]\d|2[0-3]):[0-5]\d$/.test(String(e.polls_close))) bad('polls_close must be a quoted 24-hour "HH:MM" time');
   if (!(ymd(e.election_day) < ymd(e.canvass) && ymd(e.canvass) <= ymd(e.results_until))) bad('dates must run election_day < canvass <= results_until');
   if (e.early_voting) {
     const ev = e.early_voting;

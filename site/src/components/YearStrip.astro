@@ -14,7 +14,10 @@ import { loadHomeRules } from '../lib/home-year.mjs';
 import { CONTENT_DIR } from '../lib/content.mjs';
 import { yearStrip, STEP_MONTHS } from '../lib/year-strip.mjs';
 const ys = yearStrip(loadHomeRules(CONTENT_DIR));
-const { id = 'year-strip' } = Astro.props;
+// cardsHref: where every date has a card with its source. Leave it out on the
+// page that lists the cards itself. level: the step heading level (3 or 4).
+const { id = 'year-strip', cardsHref, level = 3 } = Astro.props;
+const H = level === 4 ? 'h4' : 'h3';
 const pct = (v: number) => `${(v * 100).toFixed(1)}%`;
 ---
 <div class="ys" id={id}>
@@ -43,14 +46,14 @@ const pct = (v: number) => `${(v * 100).toFixed(1)}%`;
           })}
         </div>
         <div class="ys-say">
-          <h3>{i + 1}. {st.title}</h3>
+          <H>{i + 1}. {st.title}</H>
           <p>{st.text}</p>
           {st.list.length > 0 && <ul>{st.list.map((t) => <li>{t}</li>)}</ul>}
         </div>
       </li>
     ))}
   </ol>
-  <p class="ys-note" id={`${id}-end`}>Frost dates are for the Morgantown airport weather station, 1991 to 2020 (NOAA). Half of years are earlier and half later, and your yard may differ. Each date above is a card below, with its source.</p>
+  <p class="ys-note" id={`${id}-end`}>Frost dates are for the Morgantown airport weather station, 1991 to 2020 (NOAA). Half of years are earlier and half later, and your yard may differ. {cardsHref ? <>Every date above has a card with its source on the <a href={cardsHref}>home and yearly dates calendar</a>.</> : 'Each date above is a card below, with its source.'}</p>
 </div>
 
 <script>
@@ -72,7 +75,7 @@ const pct = (v: number) => `${(v * 100).toFixed(1)}%`;
   .ys-key .k-dot { border-radius: 50%; border: 2px solid var(--accent); margin-left: var(--s2); }
   .ys-steps { list-style: none; padding: 0; margin: 0; }
   .ys-steps > li { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: var(--s4); padding-block: var(--s4); border-top: 1px solid var(--line); }
-  .ys-say h3 { margin-top: 0; }
+  .ys-say :is(h3, h4) { margin-top: 0; }
   .ys-say ul { margin: 0; }
   .ys-m { display: grid; grid-template-columns: 2.4rem 1rem minmax(0, 1fr); gap: var(--s3); min-height: 2.6rem; }
   .ys-name { font-weight: 700; font-size: 0.95rem; }
