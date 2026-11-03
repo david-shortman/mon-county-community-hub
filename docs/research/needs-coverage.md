@@ -17,7 +17,7 @@ A review of the needs register (`content/needs/`, `/needs/`) against our own pag
 | 9 | People without a place to sleep | Good | `/stay-tonight/`, `/tonight/`, `/life-events/losing-my-home/` | Help now bar on the home page, and the Help now link | Warming shelter plans change each winter (#219, #863) |
 | 10 | Wages that cover the basics | Partial | `/help/what-help/`, `/find-a-job/`, `/pay-for-training/`, `/free-tax-help/`, `/file-today/` | Find a job is on Work and learning; tax help is a choice in Get through this month; What help might I get has no door link | No local page shows a basic household budget (tax credits for working households are on `/free-tax-help/`, #987) |
 | 11 | Getting where you need to go | Good | `/getting-around/`, `/bus-routes/`, `/bus-passes/`, `/medical-rides/` | Living here door | Listings do not say whether a bus gets you there and back (#407) |
-| 12 | Obesity, diabetes and heart health | Thin | `/diabetes-and-weight/`, `/staying-well/`, `/staying-active/`, `/parks/` | Get care door | `/diabetes-and-weight/` lists two programs; free classes and screenings are not gathered |
+| 12 | Obesity, diabetes and heart health | Partial (re-checked November 2, 2026, #1534: insulin cost caps, Medicare's prevention program and the library's blood pressure monitor added) | `/diabetes-and-weight/`, `/staying-well/`, `/staying-active/`, `/parks/` | Get care door | `/diabetes-and-weight/` lists two programs; free classes and screenings are not gathered |
 
 ## Groups added to "who is working on it"
 
