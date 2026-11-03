@@ -1,0 +1,52 @@
+---
+// Keep learning as an adult (#222 life areas: learning and growing, sprint
+// wave 11). Every listing is a record read on the library's, OLLI's or
+// BOPARC's own pages; the 60 and older college rule is the state code. Left
+// off: WVU's own senior student page, WVU Extension classes and the WVU
+// museums, because WVU's sites refuse automated reads (see the
+// needs-verification issue linked from the PR).
+import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import Fact from '../components/Fact.astro';
+import { resource } from '../lib/content.mjs';
+import { factsFor } from '../lib/facts.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Keep learning as an adult", summary: "Free online lessons with a library card, classes for fun, classes for 50 and older, and lower college tuition at 60 and older" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fact = factsFor('learning');
+---
+<Base title="Keep learning as an adult in Morgantown and Mon County, WV" description="Ways to keep learning as an adult in Monongalia County, WV: free e-books, language lessons and practice tests with a library card, free library programs, OLLI classes for 50 and older, BOPARC classes, and lower college tuition for West Virginians 60 and older.">
+  <h1>Keep learning as an adult</h1>
+  <p class="lede">With a free library card, you can start a language, an audiobook or a practice test from home, any time. For a class with other people, the library's programs are free, and OLLI runs classes for adults 50 and older.</p>
+  <OnThisPage items={[['#online', "Learn online, free"], ['#classes', "Classes with other people"], ['#college', "College classes at 60 and older"], ['#more', "Finish school, learn English, job skills"]]} />
+
+  <h2 id="online">Learn online with a library card</h2>
+  <p>Don't have a card yet? It is free for West Virginia residents.</p>
+  <ResourceCard r={resource('mpls-library-card')} showCost />
+  <ResourceCard r={resource('mympls-ebooks-and-languages')} showCost />
+  <ResourceCard r={resource('mympls-artistworks')} />
+  <ResourceCard r={resource('mympls-online-tutoring')} showCost />
+
+  <h2 id="classes">Classes with other people</h2>
+  <ResourceCard r={resource('mpls-adult-programs')} showCost />
+  <ResourceCard r={resource('olli-classes-50-plus')} showCost />
+  <ResourceCard r={resource('boparc-wellness-classes-55')} showCost />
+  <ResourceCard r={resource('boparc-program-registration')} />
+  <ResourceCard r={resource('mtec-adult-evening-classes')} showCost />
+  <p>Painting, pottery, music and other arts classes: see <a href={`${base}/arts-and-making/`}>Arts and making</a>.</p>
+
+  <h2 id="college">College classes at 60 and older</h2>
+  <Fact f={fact('college-classes-60-plus')} about="lower college tuition at 60 and older" />
+
+  <h2 id="more">Finish high school, learn English, or learn a job skill</h2>
+  <ResourceCard r={resource('mtec-adult-education-esl')} showCost />
+  <ResourceCard r={resource('lvmpc-adult-literacy')} showCost />
+  <ul>
+    <li>Jobs, training and apprenticeships: <a href={`${base}/work-and-learning/`}>Work and learning</a>.</li>
+    <li>Help paying for job training: <a href={`${base}/pay-for-training/`}>Pay for training</a>.</li>
+    <li>Help in another language: <a href={`${base}/help-in-your-language/`}>Help in your language</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked October 30 to November 2, 2026. Class times and prices change, so check the link before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
