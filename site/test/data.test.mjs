@@ -3,7 +3,7 @@
 // the build also runs them. Uses Node's built-in test runner, no packages.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { ymd, todayYmd, isStale, oldestChecked, isHidden, isPast, loadDir, loadCalendarWithFeeds } from '../src/lib/content.mjs';
+import { ymd, todayYmd, isStale, oldestChecked, isHidden, isPast, loadDir, loadCalendarWithFeeds, titleKey } from '../src/lib/content.mjs';
 import { TYPES, shape, fieldPaths } from '../src/lib/api.mjs';
 
 test('ymd turns YAML dates and strings into YYYY-MM-DD', () => {
@@ -53,6 +53,16 @@ test('the calendar never shows one feed event twice', async () => {
   const slugs = all.map((e) => e.slug);
   assert.equal(new Set(slugs).size, slugs.length);
   for (const e of all.filter((x) => x.feed)) assert.equal(e.sources[0].method, 'feed');
+  // One event under two slugs (a feed and a hand-written entry) counts too.
+  const keys = all.map((e) => `${e.starts}|${titleKey(e.title)}`);
+  const twice = keys.filter((k, i) => keys.indexOf(k) !== i);
+  assert.deepEqual(twice, [], 'the same event is listed twice on one day');
+});
+
+test('a year in a title does not stop two listings of one event matching', () => {
+  assert.equal(titleKey('2026 General Election Day'), titleKey('General Election Day'));
+  assert.equal(titleKey('General Election Day 2026'), 'general election day');
+  assert.notEqual(titleKey('Park After Dark'), titleKey('Park Board Meeting'));
 });
 
 test('the API shape drops internal fields and writes dates as text', () => {

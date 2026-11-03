@@ -72,6 +72,8 @@ for (const file of pages) {
   const body = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
   if (/\b(undefined|Invalid Date|NaN)\b/.test(body)) errors.push(`${where}: page text says "${body.match(/\b(undefined|Invalid Date|NaN)\b/)[0]}"; a field is missing`);
   if (/href="tel:"/.test(html)) errors.push(`${where}: a call link has no number`);
+  // The Log Cabin quilt block is the 404 page's mark only (Press look, #396).
+  if (where !== '404.html' && /log-cabin\.svg/.test(html)) errors.push(`${where}: carries the 404 page's Log Cabin block; keep its style scoped to 404.astro`);
   // Residents report and suggest through the fix form (fixFormUrl), never a
   // GitHub "new issue" link that needs an account (#1079).
   if (/href="https:\/\/github\.com\/[^"]*\/issues\/new/.test(html) && !githubAskPending.has(where)) {
