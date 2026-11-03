@@ -227,7 +227,7 @@ ${roleCards}
 - [Meet people and get a library card](${u('/meet-people/')}): a Morgantown Public Library System card (free for WV residents, $20 a year out of state, digital-only for county residents), free library programs for adults, and when each of Morgantown's nine neighborhood associations meets
 - [This week in Mon County](${u('/pulse/')}): rebuilt every day: events in the next 7 days, city and county meetings this week and agendas or minutes newly posted, ways to help, gaps we searched for and could not find, and recent fixes to the site
 - [Example: new in town and working from home](${u('/meet-people/example/')}): a made-up example, clearly labeled, of how someone new to Morgantown could meet people in their first month: a library card, working from the library, a free adult program, and a neighborhood association meeting
-- [Find your people](${u('/find-your-people/')}): recurring groups in Mon County (game nights, book and craft groups, runs, rides, dances, theater, open mics) and library branches as free places to sit, each with when it meets, cost and source, plus a three-question finder and a list of kinds of groups we could not find
+- [Find your people](${u('/find-your-people/')}): recurring groups in Mon County (game nights, book and craft groups, runs, rides, dances, theater, open mics) and free places to sit (library branches and other buildings and parks that say who can come), each with when it meets, cost and source, plus a three-question finder and a list of kinds of groups we could not find
 
 ## Data
 

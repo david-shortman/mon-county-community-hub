@@ -1,6 +1,7 @@
 ---
 // Find your people (#263): recurring groups and free places to sit in Mon
-// County, from content/places (kind group or library). A three-question
+// County, from content/places (kind group or library, plus buildings whose
+// record says who can drop in, #1439). A three-question
 // finder picks three; with scripts off the page is plain lists by interest.
 // Facebook-only groups show their name and a link, never facts from
 // Facebook (same rule as #459). Gaps: content/gaps/community.yaml.
@@ -19,6 +20,11 @@ const pages = await loadPages();
 const dir = loadDirectory();
 const sections = BUCKETS.map((b) => ({ ...b, groups: inBucket(dir.groups, b) })).filter((s) => s.groups.length);
 const missingAreas = areasWithout(dir);
+// Free places to sit (#1439): library branches, then other buildings.
+const otherSit = dir.sit.length - dir.libraries.length;
+const sitHint = otherSit > 0
+  ? `${dir.libraries.length} library branches and ${otherSit} other ${otherSit === 1 ? 'place' : 'places'}. Tap to see them.`
+  : `${dir.libraries.length} library branches. Tap to see them.`;
 const firstIn = new Map();
 for (const s of sections) for (const p of s.groups) if (!firstIn.has(p.slug)) firstIn.set(p.slug, s.key);
 const also = [
@@ -32,7 +38,7 @@ const also = [
 <Base title="Find your people in Mon County: groups, clubs, places to sit" description="Recurring groups in Morgantown and Monongalia County, from game nights and craft circles to runs, rides and dances, plus free places to sit. Answer three questions for three picks, or browse the lists.">
   <h1>Find your people</h1>
   <p class="lede">Groups that meet again and again, and places you can sit without buying anything. Answer three questions for three picks, or scroll the lists.</p>
-  <CheckedRange sources={[...dir.groups, ...dir.libraries].map((p) => p.sources)} what="groups and libraries" />
+  <CheckedRange sources={[...dir.groups, ...dir.sit].map((p) => p.sources)} what="groups and places to sit" />
 
   <form id="finder" class="card" hidden>
     <fieldset>
@@ -62,7 +68,7 @@ const also = [
   <nav aria-label="On this page">
     <ul>
       {sections.map((s) => <li><a href={`#${s.key}`}>{s.label}</a> ({s.groups.length})</li>)}
-      {dir.libraries.length > 0 && <li><a href="#places-to-sit">Free places to sit</a> ({dir.libraries.length})</li>}
+      {dir.sit.length > 0 && <li><a href="#places-to-sit">Free places to sit</a> ({dir.sit.length})</li>}
       {dir.meals.length > 0 && <li><a href="#eat-together">Eat with others</a></li>}
       <li><a href="#missing">What's missing</a></li>
     </ul>
@@ -76,10 +82,11 @@ const also = [
     </Fold>
   ))}
 
-  {dir.libraries.length > 0 && (
-    <Fold id="places-to-sit" title="Free places to sit" hint={`${dir.libraries.length} library branches. Tap to see them.`}>
-      <p>Public library branches are open to everyone, with nothing to buy.</p>
-      {dir.libraries.map((p) => <GroupCard p={p} />)}
+  {dir.sit.length > 0 && (
+    <Fold id="places-to-sit" title="Free places to sit" hint={sitHint}>
+      <p>Places you can sit with nothing to buy. Library branches are open to everyone. The other cards say who can come and when.</p>
+      {pages.has('/parks/') && <p>For more parks and trails, see <a href={`${base}/parks/`}>{pages.get('/parks/').label}</a>.</p>}
+      {dir.sit.map((p) => <GroupCard p={p} />)}
     </Fold>
   )}
 
