@@ -101,6 +101,9 @@ queries:
   - {q: credit freeze, expect: [/identity-theft/], kind: everyday}
   - {q: fraud alert, expect: [/identity-theft/, /scams/], kind: everyday}
   - {q: stolen social security number, expect: [/identity-theft/], kind: everyday}
+  - {q: debt collector, expect: [/credit-and-debt/], kind: everyday}
+  - {q: free credit report, expect: [/credit-and-debt/, /identity-theft/], kind: everyday}
+  - {q: open a bank account, expect: [/credit-and-debt/], kind: everyday}
 
   # Health care
   - {q: dentist cheap, expect: [/dental-and-prescriptions/], kind: everyday}
@@ -234,6 +237,8 @@ queries:
   - {q: free seeds, expect: [/grow/], kind: everyday}
   - {q: sell vegetables, expect: [/sell-what-you-grow/], kind: everyday}
   - {q: farmers market vendor, expect: [/sell-what-you-grow/, /markets/], kind: everyday}
+  - {q: lead paint, expect: [/lead/], kind: everyday}
+  - {q: lead in water, expect: [/lead/], kind: everyday}
 
   # Work, school, family and community
   - {q: jobs, expect: [/find-a-job/], kind: everyday}
@@ -313,3 +318,5 @@ queries:
   - {q: can seniors take college classes for less, expect: [/keep-learning/], kind: question}
   - {q: where can I find a grief group, expect: [/grief/], kind: question}
   - {q: where can our nonprofit get a grant, expect: [/grants-for-nonprofits/, /make-it-better/grants/], kind: question}
+  - {q: is there lead in my old house, expect: [/lead/], kind: question}
+  - {q: I am being sued over a debt, expect: [/credit-and-debt/, /legal-help/], kind: question}
