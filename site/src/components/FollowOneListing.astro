@@ -244,13 +244,13 @@ import MotionSwitch from './MotionSwitch.astro';
   #flow-explainer .flow .back { margin-top: 8px; font-weight: 700; color: var(--accent); }
   #flow-explainer .flow .back::before { content: "\21BA  "; }
   #flow-explainer .flow .eg { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 1rem; color: var(--muted); }
-  #flow-explainer .flow .eg b { color: var(--brick); }
+  #flow-explainer .flow .eg b { color: var(--fg); }
   #flow-explainer .tag { display: inline-block; padding: 1px 10px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; border: 1px solid currentColor; }
   #flow-explainer .tag.src { color: var(--muted); }
   #flow-explainer .tag.ai { color: var(--accent); background: var(--accent-bg); }
   #flow-explainer .tag.auto { color: var(--fg); }
   #flow-explainer .tag.file { color: var(--muted); border-style: dashed; }
-  #flow-explainer .tag.person { color: var(--brick); }
+  #flow-explainer .tag.person { color: var(--fg); border-color: var(--brick); }
 
   /* Pictures: one small drawing per step (still), or one stage that changes as you scroll */
   #flow-explainer .snap { margin: 10px 0; padding: 8px; background: var(--bg); border-radius: 8px; }
@@ -261,7 +261,7 @@ import MotionSwitch from './MotionSwitch.astro';
   #flow-explainer .summary h3 { margin: 0 0 4px; font-size: 1.05rem; }
   #flow-explainer .summary p { margin: 0 0 8px; }
   #flow-explainer .summary .check { font-size: 0.95rem; }
-  #flow-explainer .now span { color: var(--brick); font-variant-numeric: tabular-nums; }
+  #flow-explainer .now span { color: var(--accent); font-variant-numeric: tabular-nums; }
 
   /* Drawing parts */
   #flow-explainer .scene text { font-size: 11px; fill: var(--fg); }
