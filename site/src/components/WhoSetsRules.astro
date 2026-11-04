@@ -1,0 +1,29 @@
+---
+// "Who sets the rules for this" (#1689): the public bodies that make the rules
+// behind a need, from content/needs/<need>.yaml `decided_by`. Each shows what
+// it decides, when it meets, and open seats for residents, with sources. The
+// site cannot change a rule, but it can show where it is made. Never use it
+// on /stay-tonight/ or /tonight/, which must stay short.
+//   need: the slug of a file in content/needs/
+import SourceLine from './SourceLine.astro';
+import { ruleSetters } from '../lib/rule-setters.mjs';
+const { need } = Astro.props;
+const list = ruleSetters(need);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+{list.length > 0 && (
+  <section class="who-sets" aria-labelledby={`who-sets-${need}`}>
+    <h2 id={`who-sets-${need}`}>Who sets the rules for this</h2>
+    <p>These public boards make the rules. We describe what they do. We do not take sides on any rule.</p>
+    {list.map((b) => (
+      <article class="card">
+        <h3>{b.name}</h3>
+        <p>{b.decides}</p>
+        <p><strong>When it meets:</strong>{' '}{b.meets}</p>
+        <p class="more"><a href={`${base}/who-decides/#${b.id}`}>More about this board and its records<span class="sr-only">: {b.name}</span></a></p>
+        {b.openSeats > 0 && <p class="more"><a href={`${base}/make-it-better/boards/`}>{b.openSeats === 1 ? '1 open seat' : `${b.openSeats} open seats`} for residents<span class="sr-only"> on the {b.name} board</span></a></p>}
+        <SourceLine sources={b.sources} about={`${b.name} rules`} />
+      </article>
+    ))}
+  </section>
+)}

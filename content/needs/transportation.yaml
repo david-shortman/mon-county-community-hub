@@ -49,6 +49,20 @@ get_help:
     label: Half-fare bus passes
   - path: /medical-rides/
     label: A ride to a medical visit
+decided_by:
+  - body: mountain-line
+    board: transit-authority
+    decides: Sets bus fares, routes and schedules. Under state law it must hold a public hearing before it starts a new fare or raises one.
+    sources:
+      - url: https://code.wvlegislature.gov/8-27-10/
+        checked: 2026-11-04
+      - url: https://www.monongaliacounty.gov/authorities,_boards_and_commissions/index.php
+        checked: 2026-11-04
+  - body: mpo
+    decides: Approves the long-range transportation plan and the list of transportation projects. These set the area's priorities for using federal transportation money.
+    sources:
+      - url: https://www.plantogether.org/policy-board-1
+        checked: 2026-11-04
 site_coverage:
   level: good
   why: Getting around without a car covers buses, fares, free rides for high school students and rides to medical visits, and Every bus route shows when each one runs. Ride to a medical visit adds VA travel pay for veterans. Most listings do not say yet whether a bus can get you there and back the same day (issue 407).
