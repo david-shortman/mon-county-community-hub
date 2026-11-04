@@ -6,6 +6,7 @@ import Base from '../layouts/Base.astro';
 import PromiseNumbers from '../components/PromiseNumbers.astro';
 import { fixFormUrl, FIX_EMAIL } from '../lib/group-requests.mjs';
 import { loadDir, prettyDate, ymd, todayYmd } from '../lib/content.mjs';
+import { loadPosts } from '../lib/blog.mjs';
 export const page = { door: "about", label: "Corrections", summary: "What we got wrong, what we fixed, and when" };
 const KINDS = { fact: 'Fact fixed or removed', link: 'Broken or wrong link', outdated: 'Out of date', wording: 'Wording' };
 const FOUND = { 'our-check': 'Found in our own check', 'works-there': 'Reported by someone who works there', helper: 'Reported by someone who helps people find services', 'used-it': 'Reported by someone who used it', other: 'Reported by a reader' };
@@ -18,6 +19,8 @@ const all = loadDir('corrections').map((c) => {
 const month = todayYmd().slice(0, 7);
 const thisMonth = all.filter((c) => c.date.startsWith(month));
 const fromHelpers = thisMonth.filter((c) => c.found_by === 'works-there' || c.found_by === 'helper');
+// Blog posts keep their corrections at the top of the post (#1702); each is listed here too.
+const postFixes = (await loadPosts()).flatMap((p) => p.corrections.map((c) => ({ ...c, post: p }))).sort((a, b) => b.date.localeCompare(a.date));
 const count = (n) => (n < 10 ? 'fewer than 10' : String(n));
 const monthName = new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: 'UTC' }).format(new Date(`${month}-15T12:00:00Z`));
 ---
@@ -40,4 +43,19 @@ const monthName = new Intl.DateTimeFormat('en-US', { month: 'long', timeZone: 'U
       ))}
     </ol>
   ) : <p>No corrections yet.</p>}
+  {postFixes.length > 0 && (
+    <>
+      <h2 id="blog">Fixes to blog posts</h2>
+      <p>A blog post is not rewritten after it goes up. A fix is added as a dated note at the top of the post.</p>
+      <ol class="results">
+        {postFixes.map((c) => (
+          <li><article class="card">
+            <h3><a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/blog/${c.post.slug}/`}>{c.post.title}</a></h3>
+            <p class="meta"><time datetime={c.date}>{prettyDate(c.date)}</time>.</p>
+            <p>{c.note}</p>
+          </article></li>
+        ))}
+      </ol>
+    </>
+  )}
 </Base>

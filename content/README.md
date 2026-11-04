@@ -673,3 +673,7 @@ Level 2 (Use) on the [scoreboard](../docs/scoreboard.md#level-2-use-waiting-for-
 ## `progress/<YYYY-MM>.yaml`: monthly snapshots of our checks (#1057)
 
 One file a month, shown newest first on `/progress/`. Every number belongs to the snapshot's `checked` date and is never updated; a new month gets a new file. Fields: `month`, `title`, `checked`, `summary` (one sentence: better where, not yet where), `story` (`need`, `before`, `after`: compare formats, not organizations), `comparisons` (`what`, `plain`), `corrections` (`count`, `text`), `short` (what still falls short), `check` (`label`, `url` of the run files). No visitor counts until they are measured. These speak for the project, so their PRs wait for David.
+
+## `blog/YYYY-MM-DD-<slug>.md`: blog posts (#1701, #1702)
+
+Dated posts for `/blog/`: Markdown with YAML front matter (`title`, `date`, `type`, `summary`, `pages`, optional `corrections`). The shape is [`schemas/blog-post.schema.json`](schemas/blog-post.schema.json), checked at build time by `site/src/lib/blog.mjs`; the folder's [README](blog/README.md) has an example. Every post is its own PR labeled `for:david` and goes live only when David merges it. Posts link to live pages for phone numbers, hours, rules and deadlines instead of repeating them.

@@ -11,7 +11,11 @@ const DIST = new URL('./dist/', import.meta.url);
 // shows (#1044). Pages with no checked date get none, never a made-up one.
 function withLastmod(item) {
   const file = new URL(`.${new URL(item.url).pathname.replace(/\/?$/, '/')}index.html`, DIST);
-  const date = fs.existsSync(file) ? newestChecked(fs.readFileSync(file, 'utf8')) : null;
+  if (!fs.existsSync(file)) return item;
+  const html = fs.readFileSync(file, 'utf8');
+  // A blog post's date is the day it went up or its newest correction (#1702).
+  const post = html.match(/<time data-lastmod datetime="(\d{4}-\d{2}-\d{2})"/)?.[1];
+  const date = post ?? newestChecked(html);
   return date ? { ...item, lastmod: date } : item;
 }
 

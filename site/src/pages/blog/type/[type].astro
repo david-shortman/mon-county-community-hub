@@ -1,0 +1,27 @@
+---
+// Posts of one type (#1702). Plain links from /blog/, no script.
+import Base from '../../../layouts/Base.astro';
+import { loadPosts, TYPES } from '../../../lib/blog.mjs';
+import { prettyDate } from '../../../lib/content.mjs';
+export async function getStaticPaths() {
+  const posts = await loadPosts();
+  return Object.keys(TYPES).filter((t) => posts.some((p) => p.type === t)).map((t) => ({ params: { type: t }, props: { t, posts: posts.filter((p) => p.type === t) } }));
+}
+const { t, posts } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const label = TYPES[t];
+---
+<Base title={`${label}: blog posts on Everything Morgantown, Mon County`} description={`${label} posts from the Everything Morgantown blog, a community guide for Morgantown and Monongalia County, newest first.`}>
+  <p class="crumbs"><a href={`${base}/blog/`}>Blog</a></p>
+  <h1>{label}</h1>
+  <ol class="results">
+    {posts.map((p) => (
+      <li><article class="card">
+        <p class="meta"><time datetime={p.date}>{prettyDate(p.date)}</time></p>
+        <h2><a href={`${base}/blog/${p.slug}/`}>{p.title}</a></h2>
+        <p>{p.summary}</p>
+      </article></li>
+    ))}
+  </ol>
+  <p><a href={`${base}/blog/`}>All posts</a></p>
+</Base>
