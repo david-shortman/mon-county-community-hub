@@ -70,7 +70,10 @@ const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href)
     .sheet-head h1 { margin-top: 0; }
     .sheet-qr { margin: 0; flex: 0 0 auto; width: 190px; text-align: center; font-size: 0.85rem; overflow-wrap: anywhere; }
     .sheet-qr :global(svg) { width: 120px; height: 120px; display: block; margin: 0 auto 4px; }
-    .sheet-list { list-style: none; padding: 0; margin: var(--s3) 0; columns: 2 16rem; column-gap: var(--s5); }
+    .sheet-list { list-style: none; padding: 0; margin: var(--s3) 0; }
+    /* Two columns only on a wide screen: at 320px with text at 200%, 16rem columns
+       spilled off the right edge (#1601). Print keeps two columns below. */
+    @media (min-width: 48rem) { .sheet-list { columns: 2 16rem; column-gap: var(--s5); } }
     .sheet-list li { break-inside: avoid; border-top: 1px solid var(--fg); padding: var(--s2) 0; }
     .sheet-list p { margin: 0 0 var(--s1); }
     .sh-title { font-family: var(--serif); font-weight: 600; font-size: 1.2rem; line-height: 1.2; font-size-adjust: 0.47; }
