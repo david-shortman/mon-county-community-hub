@@ -146,12 +146,13 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
     var u = String(d.url || '').split('#')[0].replace(/index\.html$/, '');
     return u.length >= page.length && u.slice(u.length - page.length) === page;
   }
-  // Help-giver and printout pages repeat what the main pages say, and group
-  // profile pages crowd out the guides that answer a question, so they go last.
+  // Help-giver and printout pages, and the What help finder's answer pages,
+  // repeat what the main pages say, and group profile pages crowd out the
+  // guides that answer a question, so they go last.
   // A group page stays in place when its name has every word typed, so
   // searching a group by name still finds it first. `d` is a result's data.
   function later(d, q) {
-    if (/\/(print|for\/helpers)\//.test(d.url)) return 1;
+    if (/\/(print|for\/helpers|help\/what-help\/[^/]+)\//.test(d.url)) return 1;
     if (!/\/groups\//.test(d.url)) return 0;
     var name = ' ' + raw((d.meta && d.meta.title) || '').join(' ') + ' ';
     var typed = words(q).filter(function (w) { return FILLER.indexOf(w) < 0; });
