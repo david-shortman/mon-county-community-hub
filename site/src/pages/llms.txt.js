@@ -6,6 +6,7 @@ import { HUBS } from '../lib/town-hubs.mjs';
 import { groupPages } from '../lib/group-pages.mjs';
 import { loadCalendarWithFeeds } from '../lib/content.mjs';
 import { BODIES } from '../lib/agendas.mjs';
+import { loadPosts, TYPES } from '../lib/blog.mjs';
 
 export async function GET({ site }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -18,6 +19,14 @@ export async function GET({ site }) {
   // One link per group page (/groups/<slug>/), with the name its page uses.
   const groups = groupPages(await loadCalendarWithFeeds()).map((g) => `[${g.name}](${u(`/groups/${g.org.slug}/`)})`).join(', ');
   const agendaBodies = Object.entries(BODIES).map(([slug, b]) => `- [${b.name}: agendas in plain language](${u(`/meetings/agendas/${slug}/`)}): coming ${b.name} agenda guides, and the motions recorded in its minutes from the last 30 days, with results and vote counts as written`).join('\n');
+  // The blog (#1702): the index, a page per post type that has posts, and each post.
+  const posts = await loadPosts();
+  const postTypes = Object.keys(TYPES).filter((t) => posts.some((p) => p.type === t));
+  const blog = [
+    `- [Blog](${u('/blog/')}): dated posts about the project: week notes, how it works, what we found and what is new; each says when it was written and lists any corrections`,
+    ...postTypes.map((t) => `- [Blog: ${TYPES[t].toLowerCase()}](${u(`/blog/type/${t}/`)}): posts of this kind, newest first`),
+    ...posts.map((p) => `- [${p.title}](${u(`/blog/${p.slug}/`)}): ${p.typeLabel}, ${p.date}. ${p.summary}`),
+  ].join('\n');
   const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
 
@@ -158,6 +167,7 @@ ${centers}
 ${agendaBodies}
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
+${blog}
 - [The idea](${u('/the-idea/')}): what the project is trying to do, in four parts, each with a before, an after, and links to check it
 - [For groups and helpers](${u('/partners/')}): how a group can fix or remove its listing, how to reuse the data (CC BY 4.0 content, MIT code, calendar feed), and what the project will and won't do
 - [Printouts](${u('/print/')}): printable sheets of places and phone numbers, made from the listings every morning. Sheets: ${printSheets().map((s) => `[${s.name}](${u(`/print/${s.slug}/`)})`).join(', ')}

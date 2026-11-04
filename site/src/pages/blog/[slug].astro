@@ -1,0 +1,31 @@
+---
+// One blog post (#1702): date and type, "In short", the body, the pages it
+// points to, a correction note when there is one, the authorship line and the
+// fix form. After 90 days it points to the page that stays current.
+import Base from '../../layouts/Base.astro';
+import { loadPosts, AUTHOR_LINE, STALE_DAYS } from '../../lib/blog.mjs';
+import { prettyDate } from '../../lib/content.mjs';
+import { loadPages } from '../../lib/pages.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export async function getStaticPaths() {
+  return (await loadPosts()).map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pages = await loadPages();
+const labelFor = (route) => pages.get?.(route)?.label ?? route;
+const first = p.pages[0];
+---
+<Base title={`${p.title}: Everything Morgantown blog`} description={p.summary}>
+  <p class="crumbs"><a href={`${base}/blog/`}>Blog</a></p>
+  <p class="meta"><time datetime={p.date}>{prettyDate(p.date)}</time> · <a href={`${base}/blog/type/${p.type}/`}>{p.typeLabel}</a>{p.lastmod !== p.date && <> · Updated <time data-lastmod datetime={p.lastmod}>{prettyDate(p.lastmod)}</time></>}{p.lastmod === p.date && <time data-lastmod datetime={p.lastmod} hidden></time>}</p>
+  <h1>{p.title}</h1>
+  {p.stale && <p class="note"><strong>This post is from {prettyDate(p.date)}.</strong> For current details, see <a href={`${base}${first}`}>{labelFor(first)}</a>.</p>}
+  {p.corrections.map((c) => <p class="note"><strong>Correction, {prettyDate(c.date)}:</strong> {c.note}</p>)}
+  <section class="card" aria-labelledby="in-short"><h2 id="in-short">In short</h2><p>{p.summary}</p></section>
+  <div class="post-body" set:html={p.html} />
+  <h2>Pages in this post</h2>
+  <ul>{p.pages.map((r) => <li><a href={`${base}${r}`}>{labelFor(r)}</a></li>)}</ul>
+  <p class="meta">{AUTHOR_LINE}</p>
+  <p class="meta">See a mistake? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us with the fix form</a>. Posts older than {STALE_DAYS} days point to the page that stays current.</p>
+</Base>

@@ -1,0 +1,29 @@
+---
+// The blog (#1701, #1702): dated posts, newest first. Posts live in
+// content/blog/ and each one goes live only when David merges its PR.
+import Base from '../../layouts/Base.astro';
+import { loadPosts, TYPES } from '../../lib/blog.mjs';
+import { prettyDate } from '../../lib/content.mjs';
+export const page = { door: "about", label: "Blog", summary: "Dated posts about the project: week notes, how it works, what we found and what is new" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const posts = await loadPosts();
+const types = Object.entries(TYPES).filter(([t]) => posts.some((p) => p.type === t));
+---
+<Base title="Blog: notes on Everything Morgantown, a guide to Mon County" description="Dated posts about Everything Morgantown, a community guide for Morgantown and Monongalia County: week notes, how it works, what we found and what is new on the site.">
+  <h1>Blog</h1>
+  <p class="lede">Dated notes about this site: what changed, how it works, and what the work turns up. For phone numbers, hours and deadlines, each post links to the page that keeps them current.</p>
+  {types.length > 1 && (
+    <nav aria-label="Posts by type"><p>Show only: {types.map(([t, label], i) => <>{i > 0 && ' · '}<a href={`${base}/blog/type/${t}/`}>{label}</a></>)}</p></nav>
+  )}
+  {posts.length ? (
+    <ol class="results">
+      {posts.map((p) => (
+        <li><article class="card">
+          <p class="meta"><time datetime={p.date}>{prettyDate(p.date)}</time> · {p.typeLabel}</p>
+          <h2><a href={`${base}/blog/${p.slug}/`}>{p.title}</a></h2>
+          <p>{p.summary}</p>
+        </article></li>
+      ))}
+    </ol>
+  ) : <p>No posts yet.</p>}
+</Base>
