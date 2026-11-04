@@ -21,7 +21,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         <p>{b.decides}</p>
         <p><strong>When it meets:</strong>{' '}{b.meets}</p>
         <p class="more"><a href={`${base}/who-decides/#${b.id}`}>More about this board and its records<span class="sr-only">: {b.name}</span></a></p>
-        {b.openSeats > 0 && <p class="more"><a href={`${base}/make-it-better/boards/`}>{b.openSeats === 1 ? '1 open seat' : `${b.openSeats} open seats`} for residents<span class="sr-only"> on the {b.name} board</span></a></p>}
+        {b.openSeats > 0 && <p class="more"><a href={`${base}/make-it-better/boards/${b.board ? `#${b.board}` : ''}`}>{b.openSeats === 1 ? '1 open seat' : `${b.openSeats} open seats`} for residents<span class="sr-only"> on the {b.name} board</span></a></p>}
         <SourceLine sources={b.sources} about={`${b.name} rules`} />
       </article>
     ))}

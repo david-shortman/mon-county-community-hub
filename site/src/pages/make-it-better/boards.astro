@@ -1,6 +1,7 @@
 ---
 // Serve on a board (#290): city boards that shape how Morgantown looks and
-// feels, open seats first. Built from content/boards. Open seat counts come
+// feels, open seats first, then the boards that shape bills, buses, housing
+// and health (#1691). Built from content/boards. Open seat counts come
 // from the city's vacancy list; when a board's own page shows a vacant seat
 // the list does not, the card says who says what. No advice on who should
 // apply, and no positions on what any board decides.
@@ -10,10 +11,12 @@ import SourceLine from '../../components/SourceLine.astro';
 import NextRung from '../../components/NextRung.astro';
 import { loadDir, FAST_STALE_DAYS } from '../../lib/content.mjs';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
-export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City boards that shape how Morgantown looks, which have open seats, and how to apply" };
+export const page = { door: "community", topic: "better", label: "Serve on a city board", summary: "City and county boards that shape how Morgantown looks and what you pay for water, buses and housing: open seats and how to apply" };
 const all = loadDir('boards');
 const boards = all.filter((b) => !b.section);
 const county = all.filter((b) => b.section === 'county');
+// Boards that set rules for bills, buses, housing and health (#1691), open seats first.
+const services = all.filter((b) => b.section === 'services').sort((a, b) => (b.open_seats ?? 0) - (a.open_seats ?? 0));
 const countyList = 'https://www.monongaliacounty.gov/authorities,_boards_and_commissions/index.php';
 // Other boards with open seats, listed by name from the city's vacancy list (#676).
 const others = all.filter((b) => b.section === 'other' && b.open_seats > 0);
@@ -26,9 +29,10 @@ const vacancyList = 'https://www.morgantownwv.gov/210/Volunteer-Opportunities';
 const listSrc = [{ url: vacancyList, checked: '2026-10-30' }];
 const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
 ---
-<Base title="Serve on a Morgantown city board: open seats and how to apply" description="Morgantown city boards that help shape how the city looks, like the Tree Board: what each does, when it meets, which have open seats, and how to apply.">
+<Base title="Serve on a Morgantown city board: open seats and how to apply" description="Morgantown and Mon County boards that shape how the city looks and what you pay for water, buses and housing: what each does, open seats, and how to apply.">
   <h1>Serve on a city board</h1>
-  <p class="lede">Help decide how Morgantown looks. City Council appoints residents to these boards. Some have open seats now.</p>
+  <p class="lede">Residents sit on the boards that shape how Morgantown looks, and on the boards behind water bills, buses, public housing and public health. Some have open seats now.</p>
+  <p>Jump to: <a href="#services">Bills, buses, housing and health</a> · <a href="#county">County boards</a></p>
 
   <div class="note">
     <p><strong>How to apply:</strong> fill out the city's application <a href={applyOnline}>online</a>, or print the <a href={applyPdf}>paper application (PDF)</a> and return it to the City Clerk's office. Seats stay open until they are filled.</p>
@@ -63,8 +67,25 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
     </article>
   ))}
 
+  <h2 id="services">Boards that shape your bills, buses, housing and health</h2>
+  <p>These boards make rules people run into every day. We describe what each one does. We do not take sides on what any board decides.</p>
+  {services.map((b) => (
+    <article class="card" id={b.slug}>
+      <h3>{b.name}</h3>
+      {b.open_seats > 0 && <p><strong>{seats(b.open_seats)}</strong> on the city's vacancy list.</p>}
+      <p>{b.decides}</p>
+      <p><strong>Who can serve:</strong>{' '}{b.who_can_serve}</p>
+      <p><strong>Meets:</strong>{' '}{b.meets}</p>
+      {b.org === 'monongalia-county-commission'
+        ? <p>The County Commission appoints this board. See <a href="#county">County boards</a> for how to ask about a seat.</p>
+        : b.open_seats > 0 && <Actions link={applyOnline} linkLabel="Apply online" about={b.name} />}
+      <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
+      <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
+    </article>
+  ))}
+
   <h2>Other city boards with open seats</h2>
-  <p>These boards are not mainly about how the city looks, but they also have open seats on the city's list.</p>
+  <p>These boards also have open seats on the city's list.</p>
   <ul>
     {others.map((b) => <li><strong>{b.name}:</strong>{' '}{b.open_note}. {b.who_can_serve}</li>)}
   </ul>
