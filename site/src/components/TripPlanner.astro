@@ -27,9 +27,10 @@ const sp = stopPlace(places);
 const servedBy = (p) => routes.filter((r) => r.stops.some((s) => p.stops.includes(s)));
 const client = {
   routes: routes.map(({ id, name, trip, stops, runs, early }) => ({ id, name, trip, stops, runs, early })),
-  places: places.map(({ id, name, short, kind, stops, label, point }) => ({ id, name, short, kind, stops, label, point })),
+  places: places.map(({ id, name, short, kind, stops, label, point, grid }) => ({ id, name, short, kind, stops, label, point, grid })),
   at: m.at,
   H: m.H,
+  U: m.U,
 };
 const checked = d.sources?.[0]?.checked ?? '';
 ---
@@ -78,8 +79,8 @@ const checked = d.sources?.[0]?.checked ?? '';
       <div class="tp-info" aria-live="polite" hidden></div>
       <figcaption>
         <span class="tp-key"><span class="tp-sw tp-sw-1" aria-hidden="true"></span>First bus <span class="tp-sw tp-sw-2" aria-hidden="true"></span>Next bus <span class="tp-sw tp-sw-all" aria-hidden="true"></span>Other routes</span>
-        A simple map, not to scale: directions are true, but the middle of town is drawn bigger so it fits. Lines join places in each route's stop order, not along real streets.
-        <span class="tp-credit">Map: U.S. Census Bureau TIGER/Line 2024 and Census Geocoder, simplified. Routes and hours: Mountain Line route pages, read {checked}.</span>
+        A simple diagram, like a subway map: places are in the right general direction, but not to scale, and lines are straight, not real streets. For real streets, use Expand map.
+        <span class="tp-credit">Diagram: drawn by us from Mountain Line route pages, read {checked}. Street map: U.S. Census Bureau TIGER/Line 2024 and Census Geocoder.</span>
       </figcaption>
     </figure>
     <div class="tp-card">
@@ -161,6 +162,8 @@ const checked = d.sources?.[0]?.checked ?? '';
   #plan .tm { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 2px; }
   #plan .tm-bg { fill: var(--card); }
   #plan .tm-river { fill: var(--water); opacity: 0.35; stroke: none; }
+  #plan .tm-river-band { fill: none; stroke: var(--water); stroke-width: 9; opacity: 0.22; }
+  #plan .tm-river-l { font: italic 600 8.5px var(--kicker); fill: var(--water); letter-spacing: 0.04em; }
   #plan .tm-road { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; opacity: 0.55; }
   #plan .tm-road-l { font: 700 9px var(--kicker); fill: var(--muted); paint-order: stroke; stroke: var(--card); stroke-width: 3px; }
   #plan .tm-ln { fill: none; stroke: var(--line); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
@@ -230,6 +233,15 @@ const checked = d.sources?.[0]?.checked ?? '';
   #plan .tp-dlg-map .tm { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; touch-action: none; cursor: grab; }
   #plan .tp-dlg-info { flex: 0 1 auto; max-height: 30dvh; overflow: auto; margin: 0; border-radius: 0; border-width: 2px 0 0; padding: var(--s2) var(--s3) calc(env(safe-area-inset-bottom, 0px) + var(--s2)); font-size: 0.95rem; }
   #plan .tp-dlg-info h3 { font-size: 1.1rem; }
+  #plan .tp-ends { margin: 0 0 var(--s2); line-height: 1.4; }
+  #plan .tp-end-k { font-family: var(--kicker); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+  #plan .tp-days { display: flex; flex-wrap: wrap; gap: var(--s1); margin: 0 0 var(--s2); }
+  #plan .tp-day { min-height: 36px; padding: 0 var(--s2); font: inherit; font-size: 0.9rem; font-weight: 700; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 999px; cursor: pointer; }
+  #plan .tp-day.is-on { color: var(--card); background: var(--accent); border-color: var(--accent); }
+  #plan .tp-mini li { margin-bottom: var(--s2); padding-left: 2rem; }
+  #plan .tp-mini li > span { display: block; }
+  #plan .tp-mini .tp-when { margin-top: 0; }
+  #plan .tp-hint { margin: var(--s2) 0 0; font-size: 0.85rem; color: var(--muted); }
   html.tp-locked { overflow: hidden; }
   #plan .tp-street { position: absolute; inset: 0; }
   #plan .tp-dlg.is-street .tp-dlg-map > svg { display: none; }

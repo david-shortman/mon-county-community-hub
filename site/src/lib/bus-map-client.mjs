@@ -11,7 +11,8 @@
 //   MapLibre and Census streets, #1721). Its code and data load only then.
 // The map stays aria-hidden: every fact in it is also in the panel or the
 // answer as text, and every action has a button or a select.
-import { plan, answerHtml, tripSvg, tripIds, mapLabels, stopPlace, DAY_OF_WEEK, placeInfoHtml, routeInfoHtml, routePlaceIds, W } from './bus-trips.mjs';
+import { plan, answerHtml, tripSummaryHtml, tripSvg, tripIds, mapLabels, stopPlace, placeIds, DAY_OF_WEEK, placeInfoHtml, routeInfoHtml, routePlaceIds, W } from './bus-trips.mjs';
+import { lineBoxes } from './bus-diagram.mjs';
 
 export function initPlanner(sec) {
   const data = JSON.parse(sec.querySelector('#tp-data')?.textContent ?? '{}');
@@ -20,12 +21,13 @@ export function initPlanner(sec) {
   const out = $('.tp-answer'), svg = $('svg.tm'), info = $('.tp-info'), look = $('#tp-look');
   const box = $('.tp-mapbox'), dlg = $('.tp-dlg'), dlgMap = $('.tp-dlg-map'), dlgInfo = $('.tp-dlg-info');
   if (!form || !from || !to || !day || !out || !svg || !data.places) return;
-  const m = { at: data.at, sp: stopPlace(data.places), places: data.places, H: data.H };
+  const sp0 = stopPlace(data.places);
+  const m = { at: data.at, sp: sp0, places: data.places, H: data.H, U: data.U, boxes: data.U ? lineBoxes(data.routes.map((r) => placeIds(r.stops, sp0)), data.at, data.U) : [] };
   const P = Object.fromEntries(data.places.map((p) => [p.id, p]));
   const R = Object.fromEntries(data.routes.map((r) => [r.id, r]));
   const H = data.H;
   let best = null, looking = null, z = 1, vb = [0, 0, W, H], base = [0, 0, W, H];
-  let street = null, streetTried = false;
+  let street = null, streetTried = false, lastPlans = [];
   const BASE = (import.meta.env?.BASE_URL ?? '/').replace(/\/$/, '');
   // The trip and the looked-at places, for the street map's markers.
   const streetUpdate = (fit = false) => {
@@ -48,13 +50,17 @@ export function initPlanner(sec) {
     svg.querySelectorAll('.tm-ln').forEach((l) => l.classList.toggle('is-look', rs.has(l.getAttribute('data-r'))));
     svg.querySelectorAll('.tm-p').forEach((g) => g.classList.toggle('is-look', !!looking?.p && g.dataset.p === looking.p));
     const html = !looking ? '' : (looking.p ? placeInfoHtml(P[looking.p], data.routes, day.value) : routeInfoHtml(R[looking.r], data.places, day.value)) + '<button type="button" class="tp-clear" data-clear>Back to my trip</button>';
-    for (const el of [info, dlgInfo]) if (el) { el.innerHTML = html; el.hidden = !looking; }
+    if (info) { info.innerHTML = html; info.hidden = !looking; }
+    // In the full map the panel always shows something: the place or route
+    // being looked at, or else the trip itself.
+    if (dlgInfo) { dlgInfo.innerHTML = html || tripSummaryHtml(lastPlans, P[from.value], P[to.value], day.value); dlgInfo.hidden = false; }
     if (look) look.value = !looking ? '' : looking.p ? `p:${looking.p}` : `r:${looking.r}`;
     relabel();
     streetUpdate(!!looking);
   };
   const run = () => {
     const plans = plan(data.routes, data.places, from.value, to.value, day.value);
+    lastPlans = plans;
     out.innerHTML = answerHtml(plans, P[from.value], P[to.value], day.value);
     best = plans[0] ?? null;
     const trip = svg.querySelector('.tm-trip'), marks = svg.querySelector('.tm-marks');
@@ -81,9 +87,14 @@ export function initPlanner(sec) {
     else if (b.dataset.set) {
       (b.dataset.set === 'from' ? from : to).value = b.dataset.p;
       looking = null; run();
-      if (dlg?.open) closeBig();
-      out.closest('.tp-card')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      // In the full map, stay there: the panel now shows the trip and the map
+      // fits it. On the page, go to the answer card.
+      if (dlg?.open) { streetUpdate(true); dlgInfo?.querySelector('button')?.focus(); }
+      else out.closest('.tp-card')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
+    else if (b.dataset.day) { day.value = b.dataset.day; run(); dlgInfo?.querySelector(`[data-day="${b.dataset.day}"]`)?.focus(); }
+    else if (b.dataset.swap !== undefined) { const a = from.value; from.value = to.value; to.value = a; run(); streetUpdate(true); }
+    else if (b.dataset.full !== undefined) { closeBig(); requestAnimationFrame(() => out.closest('.tp-card')?.scrollIntoView({ block: 'start', behavior: 'smooth' })); }
   };
   info?.addEventListener('click', onPanel);
   dlgInfo?.addEventListener('click', onPanel);

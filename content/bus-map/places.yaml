@@ -21,6 +21,9 @@
 # or the official page in `source` says so. Stops we could not place are left
 # off the map and the planner (see docs/discoveries/2026-11-03-bus-stops-without-places.md).
 # `label` is where the name sits beside the dot: n, s, e or w.
+# `grid` is the place's spot on the simple diagram (x east, y south), placed by
+# hand like a transit map: true in rough direction, not in distance. Lines
+# between places run straight or at 45 degrees (site/src/lib/bus-diagram.mjs).
 checked: 2026-11-03
 places:
   - id: pifer
@@ -32,6 +35,7 @@ places:
     source: https://www.busride.org/WestoverTerminal
     note: Mountain Line's "Westover Terminal" page gives this address for Pifer Terminal.
     label: s
+    grid: [6, 8]
     stops: [Pifer Terminal]
   - id: downtown
     name: Downtown Morgantown
@@ -42,6 +46,7 @@ places:
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     note: Court House is the county courthouse at 243 High St and Public Safety Building is at 300 Spruce Street, both in downtown Morgantown (content/orgs/monongalia-county-clerk.yaml, content/orgs/morgantown-parking-authority.yaml).
     label: s
+    grid: [10, 8]
     stops: [Downtown, Court House, Court House (High St.), Public Safety Building]
   - id: mountainlair
     name: Mountainlair (WVU Downtown campus)
@@ -53,6 +58,7 @@ places:
     source: https://www.wvu.edu/faqs/what-is-the-mountainlair/
     note: WVU says the Mountainlair is the student union on its Downtown campus. Read through a web search of that page on 2026-11-03, since WVU's site blocks direct reads from our tools.
     label: e
+    grid: [10, 6]
     stops: [Mountainlair]
   - id: evansdale
     name: Towers and WVU Evansdale campus
@@ -64,6 +70,7 @@ places:
     source: https://housing.wvu.edu/housing-options/residence-halls/bennett-tower
     note: WVU Housing says Towers is the Evansdale Residential Complex at 356 Evansdale Drive. WVU's site blocks direct reads from our tools, so this was read through a web search of that page on 2026-11-03.
     label: w
+    grid: [10, 3]
     stops: [Towers, Evansdale Crossing, Evansdale McDonalds]
   - id: mountaineer-station
     name: Mountaineer Station
@@ -74,6 +81,7 @@ places:
     source: https://campuslife.wvu.edu/resource-portal/transportation
     note: WVU's transportation page gives this address for pick up and drop off at Mountaineer Station (read through a web search on 2026-11-03, since WVU's site blocks direct reads from our tools). The parking garage there has the same name and address (content/resources/wvu-dental-clinics.yaml).
     label: w
+    grid: [11, 1]
     stops: [Mountaineer Station]
   - id: ruby
     name: Ruby Memorial Hospital
@@ -84,6 +92,7 @@ places:
     source: content/resources/bus-to-ruby-memorial.yaml
     note: The stop called Ruby is J.W. Ruby Memorial Hospital (Census calls the point "University Hosp").
     label: e
+    grid: [12, 3]
     stops: [Ruby]
   - id: mon-general
     name: Mon General Hospital
@@ -93,6 +102,7 @@ places:
     from: census-area
     source: https://www2.census.gov/geo/tiger/TIGER2024/AREALM/
     label: e
+    grid: [14, 1]
     stops: [Mon General]
   - id: airport
     name: Morgantown airport
@@ -102,6 +112,7 @@ places:
     from: census-area
     source: https://www2.census.gov/geo/tiger/TIGER2024/AREALM/
     label: n
+    grid: [14, 6]
     stops: [Airport]
   - id: mylan-park
     name: Mylan Park
@@ -111,6 +122,7 @@ places:
     address: 500 Mylan Park Lane
     source: https://mylanpark.org/about/
     label: n
+    grid: [2, 9]
     stops: [Mylan Park, Mylan Aquatic Center, Mylan Community Center]
   - id: morgantown-mall
     name: Morgantown Mall
@@ -119,6 +131,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [5, 9]
     stops: [Morgantown Mall, Morgantown Mall Theater]
   - id: mountaineer-mall
     name: Mountaineer Mall
@@ -127,6 +140,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [11, 11]
     stops: [Mountaineer Mall]
   - id: westover
     name: Westover
@@ -135,6 +149,7 @@ places:
     from: census-town
     source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
     label: n
+    grid: [4, 7]
     stops: [Westover Triangle, Westover Town Hall, Westover Park & Ride, McDonald's Westover]
   - id: star-city
     name: Star City
@@ -143,6 +158,7 @@ places:
     from: census-town
     source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
     label: n
+    grid: [7, 3]
     stops: [Star City CVS]
   - id: granville
     name: Granville
@@ -151,6 +167,7 @@ places:
     from: census-town
     source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
     label: w
+    grid: [4, 4]
     stops: [Granville VFD, Granville P&R]
   - id: suncrest
     name: Suncrest
@@ -159,6 +176,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: n
+    grid: [8, 1]
     stops: [Suncrest Town Centre]
   - id: sunnyside
     name: Sunnyside
@@ -167,6 +185,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: w
+    grid: [11, 5]
     stops: [Sunnyside]
   - id: south-park
     name: South Park
@@ -175,6 +194,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: e
+    grid: [10, 10]
     stops: [South Park]
   - id: sabraton
     name: Sabraton
@@ -183,6 +203,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [13, 8]
     stops: [Sabraton Goodwill, Sabraton Sheetz]
   - id: mileground
     name: The Mileground
@@ -192,6 +213,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: n
+    grid: [12, 6]
     stops: [Mileground Honda]
   - id: brookhaven
     name: Brookhaven
@@ -200,6 +222,7 @@ places:
     from: census-town
     source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
     label: e
+    grid: [14, 10]
     stops: [Brookhaven, Brookhaven Fire Department]
   - id: dellslow
     name: Dellslow
@@ -208,6 +231,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [13, 10]
     stops: [Dellslow]
   - id: rock-forge
     name: Rock Forge
@@ -216,6 +240,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [12, 11]
     stops: [Rock Forge Community House]
   - id: laurel-point
     name: Laurel Point
@@ -224,6 +249,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [4, 11]
     stops: [Laurel Point]
   - id: booth
     name: Booth
@@ -232,6 +258,7 @@ places:
     from: census-town
     source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
     label: s
+    grid: [2, 12]
     stops: [Booth]
   - id: crown
     name: Crown
@@ -240,6 +267,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [0, 12]
     stops: [Crown Turn Around]
   - id: bertha-hill
     name: Bertha Hill
@@ -248,6 +276,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: n
+    grid: [5, 2]
     stops: [Bertha Hill]
   - id: jere
     name: Jere
@@ -256,6 +285,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [3, 3]
     stops: [Jere]
   - id: cassville
     name: Cassville
@@ -264,6 +294,7 @@ places:
     from: census-town
     source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
     label: n
+    grid: [2, 1]
     stops: [Cassville]
   - id: new-hill
     name: New Hill
@@ -273,6 +304,7 @@ places:
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     note: Census spells it "New Hl".
     label: s
+    grid: [1, 1]
     stops: [New Hill]
   - id: core
     name: Core
@@ -281,6 +313,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [0, 0]
     stops: [Core]
   - id: blacksville
     name: Blacksville
@@ -289,6 +322,7 @@ places:
     from: census-town
     source: https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt
     label: n
+    grid: [0, -1]
     stops: [Blacksville]
   - id: bula
     name: Bula
@@ -297,6 +331,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [-1, -2]
     stops: [Bula]
   - id: wana
     name: Wana
@@ -305,6 +340,7 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: n
+    grid: [-1, -3]
     stops: [Wana]
   - id: wadestown
     name: Wadestown
@@ -313,4 +349,5 @@ places:
     from: census-point
     source: https://www2.census.gov/geo/tiger/TIGER2024/POINTLM/
     label: s
+    grid: [-2, -4]
     stops: [Wadestown]
