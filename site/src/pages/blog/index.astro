@@ -26,4 +26,5 @@ const types = Object.entries(TYPES).filter(([t]) => posts.some((p) => p.type ===
       ))}
     </ol>
   ) : <p>No posts yet.</p>}
+  <p>Follow new posts in a news reader app: <a href={`${base}/blog/feed.xml`}>RSS feed</a> or <a href={`${base}/blog/feed.json`}>JSON Feed</a>. Copy the link into the app.</p>
 </Base>

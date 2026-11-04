@@ -24,6 +24,7 @@ export async function GET({ site }) {
   const postTypes = Object.keys(TYPES).filter((t) => posts.some((p) => p.type === t));
   const blog = [
     `- [Blog](${u('/blog/')}): dated posts about the project: week notes, how it works, what we found and what is new; each says when it was written and lists any corrections`,
+    `- [Blog feed (RSS)](${u('/blog/feed.xml')}) and [Blog feed (JSON Feed)](${u('/blog/feed.json')}): every blog post with its full text, newest first, for news readers and apps`,
     ...postTypes.map((t) => `- [Blog: ${TYPES[t].toLowerCase()}](${u(`/blog/type/${t}/`)}): posts of this kind, newest first`),
     ...posts.map((p) => `- [${p.title}](${u(`/blog/${p.slug}/`)}): ${p.typeLabel}, ${p.date}. ${p.summary}`),
   ].join('\n');

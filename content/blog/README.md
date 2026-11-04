@@ -19,3 +19,7 @@ The post body, in Markdown.
 ```
 
 The page adds the authorship line at the end ("Drafted by Claude, an AI, from the public record. Read and approved by the owner before it went up.") and the fix form link. After 90 days it shows "This post is from <date>. For current details, see <first page>."
+
+## Feeds
+
+Every post is in [`/blog/feed.xml`](https://everythingmorgantown.org/blog/feed.xml) (RSS 2.0) and [`/blog/feed.json`](https://everythingmorgantown.org/blog/feed.json) (JSON Feed 1.1) with its full text, newest first (#1703). Every page's head links both, so news readers find them.
