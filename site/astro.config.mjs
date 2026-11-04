@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import { astroI18n, sitemapI18n, inUnpublishedLocale } from './src/lib/i18n.mjs';
 import { isMoved } from './src/lib/moved.mjs';
 import { pruneCssIntegration } from './src/lib/prune-css.mjs';
+import { keepPhonesIntegration } from './src/lib/keep-phones.mjs';
 import { newestChecked } from './src/lib/site-meta.mjs';
 import fs from 'node:fs';
 
@@ -39,5 +40,7 @@ export default defineConfig({
     serialize: withLastmod,
   }),
   // Drop inlined CSS a page cannot use (slow phones, wave 8). See the file.
-  pruneCssIntegration()],
+  pruneCssIntegration(),
+  // Keep phone numbers in sentences on one line on phones. See the file.
+  keepPhonesIntegration()],
 });
