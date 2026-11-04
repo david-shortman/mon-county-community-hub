@@ -1,0 +1,6 @@
+# 2026-11-04: Weekly visibility audit, and the hidden upkeep notice
+
+- **Considered:** last week's report flagged title length and structured data; both are now tracked or done (#939, #37). The new problem was that the hidden "not being kept up" notice (#497) sat in every page's HTML as plain text. Options: leave it (people never see it), remove the browser fallback, or keep the words out of the page until the notice turns on.
+- **Chose:** keep the browser fallback, but hold the words in a `<template>` while the notice is off. The script copies them in only when upkeep has lapsed. Nothing changes for people. Tools that read the raw page (an AI fetch tool quoted the notice as our stay-tonight page's opening) no longer see a false warning. The `https://www` certificate warning needs a GitHub Pages setting, so it went to David.
+- **Shipped:** `site/src/components/UpkeepNotice.astro`, `docs/visibility/2026-11-04.md`. Checked with a browser clock moved 40 days ahead: the notice still appears, with its full text and label.
+- **Scoreboard:** no number moves yet. Our pages in the 10 resident searches: 0 of 10, same as last week. Check again on the next visibility run, 2026-11-11, and in the Sunday findability run.
