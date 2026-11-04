@@ -245,6 +245,7 @@ queries:
   - {q: farmers market vendor, expect: [/sell-what-you-grow/, /markets/], kind: everyday}
   - {q: lead paint, expect: [/lead/], kind: everyday}
   - {q: lead in water, expect: [/lead/], kind: everyday}
+  - {q: accessibility, expect: [/access/], kind: everyday}
 
   # Work, school, family and community
   - {q: jobs, expect: [/find-a-job/], kind: everyday}
