@@ -17,6 +17,7 @@
 // - Ride length is not stated per leg: we only know one trip around the route.
 import { spans, earlyTimes, fmt } from './bus-day.mjs';
 import { routeId } from './bus-network.mjs';
+import { diagramAt, diagramPath, lineBoxes, riverPath } from './bus-diagram.mjs';
 
 export const DAY_OF_WEEK = ['u', 'm', 'm', 'm', 'r', 'r', 's']; // Date#getDay() -> day key
 export const DAY_WORDS = { m: 'Monday to Wednesday', r: 'Thursday or Friday', s: 'Saturday', u: 'Sunday' };
@@ -210,17 +211,31 @@ export function smooth(pts) {
 
 // The places a list of stops passes, in order, as map points (unplaced stops
 // are skipped and repeats are joined).
-export function placePath(stops, sp, at) {
+export function placeIds(stops, sp) {
   const ids = [];
   for (const s of stops) { const id = sp.get(s); if (id && ids[ids.length - 1] !== id) ids.push(id); }
-  return ids.map((id) => at[id]);
+  return ids;
+}
+export function placePath(stops, sp, at) { return placeIds(stops, sp).map((id) => at[id]); }
+
+// A line through the places a list of stops passes: diagram style (straight
+// and 45 degree) when the model is a diagram, smooth curves otherwise.
+export function drawStops(m, stops, opts) {
+  const ids = placeIds(stops, m.sp);
+  return m.U ? diagramPath(ids, m.at, m.U, opts) : smooth(ids.map((id) => m.at[id]));
 }
 
 // Everything the browser needs to redraw a trip, worked out once at build time.
+// Places with a `grid` spot are drawn as a transit diagram (bus-diagram.mjs);
+// otherwise as the squeezed geographic map above.
 export function mapModel(routes, places, base) {
+  const sp = stopPlace(places);
+  if (places.every((p) => Array.isArray(p.grid))) {
+    const { at, H, U } = diagramAt(places);
+    return { H, U, at, sp, base, routes, places, boxes: lineBoxes(routes.map((r) => placeIds(r.stops, sp)), at, U) };
+  }
   const { f, H } = projection(places);
   const at = Object.fromEntries(places.map((p) => [p.id, f(p.point)]));
-  const sp = stopPlace(places);
   return { f, H, at, sp, base, routes, places };
 }
 
@@ -230,8 +245,9 @@ const line = (pts, f) => 'M' + pts.map(([lon, lat]) => f([lat, lon]).join(' ')).
 export function mapSvg(m, { trip = null, from = '', to = '', id = 'tp-map' } = {}) {
   const { f, H, at, sp, base, routes, places } = m;
   const change = new Set(trip ? trip.legs.slice(1).map((l) => sp.get(l.on)) : []);
-  const river = base.river.map((r) => `<path class="tm-river" d="${ring(r, f)}"/>`).join('');
-  const roads = Object.entries(base.roads).map(([name, ls]) => {
+  const rv = m.U ? riverPath(at, H) : null;
+  const river = m.U ? `<path class="tm-river-band" d="${rv.d}"/><text class="tm-river-l" transform="translate(${rv.x - 3} 12) rotate(90)">Monongahela River</text>` : base.river.map((r) => `<path class="tm-river" d="${ring(r, f)}"/>`).join('');
+  const roads = m.U ? '' : Object.entries(base.roads).map(([name, ls]) => {
     const d = ls.map((l) => line(l, f)).join('');
     const longest = ls.reduce((a, b) => (b.length > a.length ? b : a));
     // Name the road near where it leaves the drawing (north for I-79, east for I-68).
@@ -240,14 +256,14 @@ export function mapSvg(m, { trip = null, from = '', to = '', id = 'tp-map' } = {
     const x = Math.min(Math.max(ex, 14), W - 14), y = Math.min(Math.max(ey, 10), H - 4);
     return `<path class="tm-road" d="${d}"/><text class="tm-road-l" x="${x}" y="${y}" text-anchor="${x > W / 2 ? 'end' : 'start'}" dx="${x > W / 2 ? -4 : 4}" dy="${name === 'I-79' ? 9 : -4}">${name}</text>`;
   }).join('');
-  const lines = routes.map((r) => { const d = smooth(placePath(r.stops, sp, at)); return d ? `<path class="tm-ln" data-r="${r.id}" d="${d}"/>` : ''; }).join('');
+  const lines = routes.map((r) => { const d = drawStops(m, r.stops, { plain: true }); return d ? `<path class="tm-ln" data-r="${r.id}" d="${d}"/>` : ''; }).join('');
   const dots = places.map((p) => {
     const [x, y] = at[p.id];
     const mark = p.id === from || p.id === to ? ' is-end' : change.has(p.id) ? ' is-change' : '';
     return `<g class="tm-p k-${p.kind}${mark}" data-p="${p.id}"><circle cx="${x}" cy="${y}" r="${p.kind === 'hub' ? 5 : 3.2}"/></g>`;
   }).join('');
   // Invisible, wider targets so a finger can tap a place or a route line.
-  const hits = routes.map((r) => { const d = smooth(placePath(r.stops, sp, at)); return d ? `<path class="tm-hit-r" data-r="${r.id}" d="${d}"/>` : ''; }).join('')
+  const hits = routes.map((r) => { const d = drawStops(m, r.stops, { plain: true }); return d ? `<path class="tm-hit-r" data-r="${r.id}" d="${d}"/>` : ''; }).join('')
     + places.map((p) => { const [x, y] = at[p.id]; return `<circle class="tm-hit-p" data-p="${p.id}" cx="${x}" cy="${y}" r="9"/>`; }).join('');
   return `<svg class="tm" id="${id}" viewBox="0 0 ${W} ${H}" aria-hidden="true" focusable="false"><rect class="tm-bg" width="${W}" height="${H}"/><g class="tm-base">${river}${roads}</g><g class="tm-lines">${lines}</g><g class="tm-trip">${trip ? tripSvg(m, trip) : ''}</g><g class="tm-places">${dots}</g><g class="tm-labels">${mapLabels(m, trip ? tripIds(m, trip, from, to) : [])}</g><g class="tm-marks">${trip ? tripSvg(m, trip, 'marks') : ''}</g><g class="tm-hits">${hits}</g></svg>`;
 }
@@ -261,7 +277,7 @@ export function tripSvg(m, p, part = 'legs') {
   return p.legs.map((l, i) => {
     const pts = placePath(between(l.r, l.on, l.off), sp, at);
     const start = at[sp.get(l.on)];
-    if (part === 'legs') return pts.length > 1 ? `<path class="tm-leg tm-leg-${i + 1}" d="${smooth(pts)}"/>` : '';
+    if (part === 'legs') return pts.length > 1 ? `<path class="tm-leg tm-leg-${i + 1}" d="${drawStops(m, between(l.r, l.on, l.off))}"/>` : '';
     return (start ? `<g class="tm-num tm-num-${i + 1}"><circle cx="${start[0]}" cy="${start[1]}" r="7.5"/><text x="${start[0]}" y="${start[1] + 3.6}" text-anchor="middle">${i + 1}</text></g>` : '');
   }).join('');
 }
@@ -276,12 +292,15 @@ function box(x, y, dx, dy, a, text, k = 1) {
   return [x0 - 1, y + dy - TH * k + 1, x0 + w + 1, y + dy + 2];
 }
 const overlap = (a, b) => Math.max(0, Math.min(a[2], b[2]) - Math.max(a[0], b[0])) * Math.max(0, Math.min(a[3], b[3]) - Math.max(a[1], b[1]));
-export function placeLabels(at, places, { must = [], maybe = [], k = 1, H = 1e9 } = {}) {
+export function placeLabels(at, places, { must = [], maybe = [], k = 1, H = 1e9, boxes = [] } = {}) {
   const P = new Map(places.map((p) => [p.id, p]));
   // k < 1 when the map is zoomed in: names, dots and gaps shrink in map units
   // so they stay the same size on screen.
   const d = 4.5 * k;
+  // Dots and names are hard: a name never covers them. Lines (`boxes`) are
+  // soft: a name may sit over a line when there is no better spot.
   const taken = places.map((p) => { const [x, y] = at[p.id]; return [x - d, y - d, x + d, y + d]; });
+  const soft = boxes;
   const out = [];
   const one = (id, need) => {
     const p = P.get(id); if (!p) return;
@@ -292,7 +311,8 @@ export function placeLabels(at, places, { must = [], maybe = [], k = 1, H = 1e9 
       const b = box(x, y, dx, dy, a, name, k);
       const off = Math.max(0, -b[0]) + Math.max(0, b[2] - W) + Math.max(0, -b[1]) + Math.max(0, b[3] - H);
       const hit = taken.reduce((t, o) => t + overlap(b, o), 0);
-      const score = hit + off * 50 + i * 0.5;
+      const lineHit = soft.reduce((t, o) => t + overlap(b, o), 0);
+      const score = hit * 4 + lineHit + off * 50 + i * 0.5;
       if (!best || score < best.score) best = { score, hit: hit + off, dx, dy, a, b };
     });
     if (!need && best.hit > 0) return;
@@ -314,7 +334,7 @@ export function mapLabels(m, ids = [], { k = 1 } = {}) {
   const { at, places, H } = m;
   const trip = ids.filter((id) => !hubIds(places).includes(id));
   const others = places.filter((p) => p.kind !== 'hub' && !ids.includes(p.id)).sort((a, b) => KIND_ORDER[a.kind] - KIND_ORDER[b.kind]).map((p) => p.id);
-  const ls = placeLabels(at, places, { must: [...trip, ...hubIds(places)], maybe: others, H, k });
+  const ls = placeLabels(at, places, { must: [...trip, ...hubIds(places)], maybe: others, H, k, boxes: m.boxes ?? [] });
   const strong = new Set([...ids, ...hubIds(places)]);
   return labelText(ls.filter((l) => strong.has(l.id)), 'tm-l') + labelText(ls.filter((l) => !strong.has(l.id)), 'tm-ol');
 }
@@ -357,4 +377,26 @@ export function routeInfoHtml(r, places, day) {
 export function routePlaceIds(r, places) {
   const sp = stopPlace(places);
   return [...new Set(r.stops.map((s) => sp.get(s)).filter(Boolean))];
+}
+
+// The trip, short, for the panel under the full map (#1723): planning stays
+// in the map. From and To, the day as buttons, one line per bus, and a way to
+// the full steps on the page.
+export function tripSummaryHtml(plans, from, to, day) {
+  const days = Object.entries({ m: 'Mon to Wed', r: 'Thu or Fri', s: 'Sat', u: 'Sun' })
+    .map(([k, v]) => `<button type="button" class="tp-day${k === day ? ' is-on' : ''}" data-day="${k}" aria-pressed="${k === day}">${v}</button>`).join('');
+  const ends = `<p class="tp-ends"><span class="tp-end-k">From</span> <strong>${esc(from?.name ?? 'Pick a place')}</strong> <span aria-hidden="true">→</span> <span class="tp-end-k">To</span> <strong>${esc(to?.name ?? 'Pick a place')}</strong></p>`;
+  const tip = '<p class="tp-hint">Tap a place on the map to start or end there.</p>';
+  if (!from || !to || from.id === to.id) return ends + tip;
+  const best = plans[0];
+  if (!best) return `${ends}<div class="tp-days" role="group" aria-label="Day">${days}</div><p class="tp-none">No trip with two changes or fewer. Call Mountain Line at <a href="tel:3042917433">304-291-RIDE</a>.</p>${tip}`;
+  const legs = best.legs.map((l, i) => {
+    const h = hoursOn(l.r, day);
+    return `<li data-leg="${i + 1}"><strong>${esc(routeName(l.r))}</strong><span>${esc(l.on)} to ${esc(l.off)}</span><span class="tp-when">${h ? `${h.first} to ${h.last}` : `Not on ${DAY_WORDS[day]}`}</span></li>`;
+  }).join('');
+  return `${ends}<div class="tp-days" role="group" aria-label="Day">${days}</div>`
+    + (best.runs ? '' : `<p class="tp-none">Not on ${DAY_WORDS[day]}. These are the buses on the days they run.</p>`)
+    + `<ol class="tp-steps tp-mini">${legs}</ol>`
+    + (best.legs.length > 1 ? '<p class="tp-hint">Buses do not wait for each other.</p>' : '')
+    + `<div class="tp-acts"><button type="button" class="tp-act" data-full>See full steps</button><button type="button" class="tp-clear" data-swap>Swap</button></div>${tip}`;
 }
