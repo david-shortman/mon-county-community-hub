@@ -17,6 +17,7 @@ contact:
   phone: "304-598-1560"
   url: https://www.monhealth.com/main/financial-assistance
 cost: free
+call_script: medical-bill
 sources:
   - url: https://www.monhealth.com/main/financial-assistance
     checked: 2026-10-31

@@ -42,6 +42,7 @@ what_to_bring:          # optional (#159); what to have ready, close to the sour
 what_happens: What the first call or visit is like, in one or two sentences from the source.  # optional
 best_time: Mornings are less busy.  # optional; only when the source says so
 if_you_want_help: [wv-211]  # optional; resource slugs of people who can help you through it, each with its own source
+call_script: utility    # optional (#1071); shows a short call script by the Call button: utility, landlord or medical-bill (site/src/lib/call-scripts.mjs). Needs contact.phone
 sources:
   - url: https://example.org/tax
     checked: 2026-10-27

@@ -19,6 +19,7 @@ contact:
   phone: "304-598-6260"
   url: https://wvumedicine.org/billing-and-insurance/financial-assistance/policies-and-financial-applications/
 cost: free
+call_script: medical-bill
 sources:
   - url: https://wvumedicine.org/billing-and-insurance/financial-assistance/faq/
     checked: 2026-10-31

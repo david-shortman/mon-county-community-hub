@@ -1,0 +1,27 @@
+---
+// What to say on the call (#1071): one short script from
+// site/src/lib/call-scripts.mjs, folded under a card's Call button. A plain
+// <details>, so it opens with no script and prints open.
+//   id: the script's id, from the record's call_script
+//   service: what the call is about, for screen readers
+import { callScript } from '../lib/call-scripts.mjs';
+const { id, service } = Astro.props;
+const s = callScript(id);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+{s && (
+  <details class="call-script-panel" data-pagefind-ignore>
+    <summary>What to say on the call<span class="sr-only">: {service}</span></summary>
+    <p class="meta">Fill in the blanks before you call. It is fine to read from the screen. These are questions to ask, not legal advice.</p>
+    <ul>{s.lines.map((l) => <li>"{l}"</li>)}</ul>
+    <p class="meta"><a href={`${base}/before-you-call/#${s.id}`}>More on getting ready for a call</a></p>
+  </details>
+)}
+
+<style>
+  .call-script-panel { margin: 0 0 var(--s3); }
+  .call-script-panel > summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .call-script-panel ul { padding-left: 1.1rem; margin: var(--s2) 0; }
+  .call-script-panel li { margin: var(--s1) 0; }
+  @media print { .call-script-panel > summary { display: none; } }
+</style>
