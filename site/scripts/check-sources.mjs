@@ -254,7 +254,13 @@ export async function fetchSource(url) {
       continue;
     }
     const type = res.headers.get('content-type') || '';
-    const body = res.ok ? await readCapped(res) : (await res.body?.cancel().catch(() => {}), Buffer.alloc(0));
+    let body;
+    try {
+      body = res.ok ? await readCapped(res) : (await res.body?.cancel().catch(() => {}), Buffer.alloc(0));
+    } catch (err) {
+      // The timeout also covers reading the body; one slow page must not stop the run.
+      return { status: 0, error: errCode(err), final: cur, chain };
+    }
     return { status: res.status, final: cur, chain, type, body };
   }
   return { status: 0, error: 'too many redirects', final: cur, chain };
