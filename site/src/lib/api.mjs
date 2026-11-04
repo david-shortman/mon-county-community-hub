@@ -269,6 +269,8 @@ export async function catalog() {
       { name: 'hsds-tabular', description: 'The same in CSV tables, with a Tabular Data Package description', url: `${API_BASE}hsds/datapackage.json` },
       { name: 'calendar-ics', description: 'Every upcoming date as an iCalendar feed for calendar apps', url: `${SITE_URL}/calendar.ics` },
       { name: 'home-ics', description: 'Yearly home dates for Monongalia County, WV (tax and Assessor deadlines, forest fire seasons, frost dates, upkeep tips) as an iCalendar feed. Each event lists its source and checked date', url: `${SITE_URL}/home.ics` },
+      { name: 'blog-rss', description: 'Every blog post with its full text, newest first, as RSS 2.0', url: `${SITE_URL}/blog/feed.xml` },
+      { name: 'blog-json-feed', description: 'Every blog post with its full text, newest first, as JSON Feed 1.1', url: `${SITE_URL}/blog/feed.json` },
     ],
   };
 }
