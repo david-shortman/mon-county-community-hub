@@ -32,7 +32,7 @@ Real places get real photos. Paper, screens and ideas get drawings. The county m
 - **The home page.** No hero photo. It would push Help now and the doors down.
 - **Decoration.** No drawn motifs, borders, mascots or mood photos (decision [2026-10-30-1000-no-drawn-motif](../decisions/2026-10-30-1000-no-drawn-motif.md)).
 - **Screenshots of other sites.** State forms and map tools change and go stale. Draw a simplified version with a "Last checked" date instead.
-- **Embedded maps, videos and feeds.** The weight rules ban them. Link out and say where the link goes.
+- **Embedded maps, videos and feeds.** The weight rules ban them. Link out and say where the link goes. The one exception is the bus planner's street map, made from Census data and loaded only on a tap ([decision](../decisions/2026-11-04-1500-street-map-on-tap.md)).
 - **When it would push the answer down.** The first phone screen keeps the page's main message and action (presentation rule 1). A picture goes after them.
 
 **Open question for David (Q4): the never-picture list.** Proposed: the pages in the first bullet above, plus anything that shows where a safe place is, plus the home page. Is anything missing, or anything you want to allow?

@@ -27,7 +27,7 @@ const sp = stopPlace(places);
 const servedBy = (p) => routes.filter((r) => r.stops.some((s) => p.stops.includes(s)));
 const client = {
   routes: routes.map(({ id, name, trip, stops, runs, early }) => ({ id, name, trip, stops, runs, early })),
-  places: places.map(({ id, name, short, kind, stops, label }) => ({ id, name, short, kind, stops, label })),
+  places: places.map(({ id, name, short, kind, stops, label, point }) => ({ id, name, short, kind, stops, label, point })),
   at: m.at,
   H: m.H,
 };
@@ -107,7 +107,7 @@ const checked = d.sources?.[0]?.checked ?? '';
       <button type="button" class="tp-zfit">Fit</button>
       <button type="button" class="tp-close">Close</button>
     </div>
-    <p class="tp-dlg-hint">Pinch or use + and − to zoom. Drag to move. Tap a place or a line.</p>
+    <p class="tp-dlg-hint">Pinch or use + and − to zoom. Drag to move. Tap a place to see its buses.</p>
     <div class="tp-dlg-map"></div>
     <div class="tp-dlg-info" aria-live="polite" hidden></div>
   </dialog>
@@ -231,6 +231,10 @@ const checked = d.sources?.[0]?.checked ?? '';
   #plan .tp-dlg-info { flex: 0 1 auto; max-height: 30dvh; overflow: auto; margin: 0; border-radius: 0; border-width: 2px 0 0; padding: var(--s2) var(--s3) calc(env(safe-area-inset-bottom, 0px) + var(--s2)); font-size: 0.95rem; }
   #plan .tp-dlg-info h3 { font-size: 1.1rem; }
   html.tp-locked { overflow: hidden; }
+  #plan .tp-street { position: absolute; inset: 0; }
+  #plan .tp-dlg.is-street .tp-dlg-map > svg { display: none; }
+  #plan .tp-street .maplibregl-ctrl-attrib { font-size: 11px; }
+  #plan .tp-street .maplibregl-ctrl button { width: 44px; height: 44px; }
   @media (forced-colors: active) {
     #plan .tm-leg, #plan .tm-ln { stroke: CanvasText; }
     #plan .tm-num circle, #plan .tp-sw { background: CanvasText; fill: CanvasText; }
