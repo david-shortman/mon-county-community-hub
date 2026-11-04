@@ -4,9 +4,10 @@
 #        scripts/pr-wait.sh main [timeout-minutes] [merge-commit-sha]
 #          (after merging: did main build and deploy? safe-merge.sh passes the
 #          merge commit, so the script never reads main before it moves.)
-# Exit codes: 0 all checks done (see output for results; a cancelled check is
-#             reported as superseded, not failed), 2 merge conflict,
-#             3 timed out, 4 PR closed or not found.
+# Exit codes: 0 all checks passed or skipped (a cancelled check is reported as
+#             superseded, not failed), 1 a check failed or timed out,
+#             2 merge conflict, 3 timed out waiting, 4 PR closed or not found.
+#             So `pr-wait.sh N && safe-merge.sh N` never merges a failed PR.
 # GitHub does not start checks on a PR whose branch conflicts with its base,
 # so waiting on such a PR hangs forever. See docs/operations/merge-conflicts.md.
 set -uo pipefail
@@ -94,7 +95,7 @@ while :; do
       echo "Checks on $sha:"; echo "$runs" | sed 's/^/  /'
       gh api "$REPO/issues/$PR/comments" --jq '.[] | select(.body | contains("<!-- claude-review -->")) | .body' \
         | sed -n '2p;/^### Blockers/,/^### Already on the site/p'
-      if grep -q '|failure$\||timed_out$' <<< "$runs"; then echo "RESULT: a check failed"
+      if grep -q '|failure$\||timed_out$' <<< "$runs"; then echo "RESULT: a check failed"; exit 1
       elif grep -q '|cancelled$' <<< "$runs"; then echo "RESULT: a check was cancelled (superseded by a newer run), not failed. Push again or re-run it if no newer run follows."
       else echo "RESULT: all checks passed or skipped"; fi
       exit 0
