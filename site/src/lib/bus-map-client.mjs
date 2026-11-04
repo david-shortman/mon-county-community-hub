@@ -7,6 +7,8 @@
 // - "Expand map" opens the map full screen (a modal <dialog>) where it can be
 //   zoomed with + and -, a pinch, a mouse wheel, or dragged to pan. Names,
 //   dots and lines keep their size on screen while the map zooms.
+// - With WebGL, "Expand map" opens a street map instead (bus-street-map.mjs,
+//   MapLibre and Census streets, #1721). Its code and data load only then.
 // The map stays aria-hidden: every fact in it is also in the panel or the
 // answer as text, and every action has a button or a select.
 import { plan, answerHtml, tripSvg, tripIds, mapLabels, stopPlace, DAY_OF_WEEK, placeInfoHtml, routeInfoHtml, routePlaceIds, W } from './bus-trips.mjs';
@@ -23,6 +25,15 @@ export function initPlanner(sec) {
   const R = Object.fromEntries(data.routes.map((r) => [r.id, r]));
   const H = data.H;
   let best = null, looking = null, z = 1, vb = [0, 0, W, H], base = [0, 0, W, H];
+  let street = null, streetTried = false;
+  const BASE = (import.meta.env?.BASE_URL ?? '/').replace(/\/$/, '');
+  // The trip and the looked-at places, for the street map's markers.
+  const streetUpdate = (fit = false) => {
+    if (!street) return;
+    const trip = best ? [...best.legs.map((l, i) => ({ p: m.sp.get(l.on), role: 'board', leg: i + 1 })), { p: to.value, role: 'end', leg: 0 }] : [];
+    const lookIds = looking?.r ? routePlaceIds(R[looking.r], data.places) : [];
+    street.update({ trip: trip.filter((t) => t.p), look: lookIds, lookPlace: looking?.p ?? '' }, { fit });
+  };
 
   // ---------- Drawing ----------
   const relabel = () => {
@@ -40,6 +51,7 @@ export function initPlanner(sec) {
     for (const el of [info, dlgInfo]) if (el) { el.innerHTML = html; el.hidden = !looking; }
     if (look) look.value = !looking ? '' : looking.p ? `p:${looking.p}` : `r:${looking.r}`;
     relabel();
+    streetUpdate(!!looking);
   };
   const run = () => {
     const plans = plan(data.routes, data.places, from.value, to.value, day.value);
@@ -156,26 +168,40 @@ export function initPlanner(sec) {
     if (keep) setVb([cx - zw / 2, cy - (zw * aspect) / 2, zw]); else setVb(base.slice(0, 3));
     relabel();
   };
-  const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { if (dlg?.open) fit(true); }) : null;
+  const ro = typeof ResizeObserver === 'function' ? new ResizeObserver(() => { if (!dlg?.open) return; if (dlg.classList.contains('is-street')) street?.resize(); else fit(true); }) : null;
   if (dlgMap) ro?.observe(dlgMap);
-  const openBig = () => {
+  const drawnMap = () => { dlg.classList.remove('is-street'); dlgMap.append(svg); svg.classList.add('is-big'); requestAnimationFrame(() => fit()); };
+  const openBig = async () => {
     if (!dlg?.showModal) return;
     dlg.showModal(); document.documentElement.classList.add('tp-locked');
-    dlgMap.append(svg); svg.classList.add('is-big');
-    requestAnimationFrame(() => fit());
+    if (street) { dlg.classList.add('is-street'); street.resize(); streetUpdate(true); return; }
+    if (streetTried) { drawnMap(); return; }
+    streetTried = true;
+    try {
+      const mod = await import('./bus-street-map.mjs');
+      if (!mod.supported()) throw new Error('no WebGL');
+      const el = document.createElement('div'); el.className = 'tp-street';
+      dlgMap.append(el); dlg.classList.add('is-street');
+      street = await mod.openStreetMap(el, { base: BASE, places: data.places, onTap: (id) => setLook({ p: id }) });
+      streetUpdate(true);
+    } catch (err) {
+      console.warn('Street map could not open; showing the simple map.', err);
+      dlgMap.querySelector('.tp-street')?.remove(); street = null; drawnMap();
+    }
   };
   const closeBig = () => { if (dlg?.open) dlg.close(); };
   dlg?.addEventListener('close', () => {
     document.documentElement.classList.remove('tp-locked');
-    box.append(svg); svg.classList.remove('is-big');
+    if (svg.parentElement !== box) box.append(svg);
+    svg.classList.remove('is-big');
     base = [0, 0, W, H]; setVb([0, 0, W]); z = 1; svg.style.setProperty('--iz', '1'); relabel();
     big?.focus();
   });
   if (big && dlg?.showModal) { big.hidden = false; big.addEventListener('click', openBig); }
   $('.tp-close')?.addEventListener('click', closeBig);
-  $('.tp-zin')?.addEventListener('click', () => { const [cx, cy] = center(); zoomAt(1.5, cx, cy); });
-  $('.tp-zout')?.addEventListener('click', () => { const [cx, cy] = center(); zoomAt(1 / 1.5, cx, cy); });
-  $('.tp-zfit')?.addEventListener('click', () => fit());
+  $('.tp-zin')?.addEventListener('click', () => { if (street && dlg.classList.contains('is-street')) return street.zoomIn(); const [cx, cy] = center(); zoomAt(1.5, cx, cy); });
+  $('.tp-zout')?.addEventListener('click', () => { if (street && dlg.classList.contains('is-street')) return street.zoomOut(); const [cx, cy] = center(); zoomAt(1 / 1.5, cx, cy); });
+  $('.tp-zfit')?.addEventListener('click', () => { if (street && dlg.classList.contains('is-street')) return street.fit(); fit(); });
 
   // ---------- Start ----------
   form.hidden = false;

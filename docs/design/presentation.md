@@ -53,7 +53,7 @@ The build budget is tighter than rubric A8 (under 300 KB scores 2, under 100 KB 
 
 - System fonts only (identity.md already says this).
 - Our own small SVG drawings, sized in the HTML. No photos unless they explain something, and then compressed and lazy loaded.
-- No embedded widgets: no embedded maps, calendars, videos, social feeds, or job boards. Link out instead, and say where the link goes.
+- No embedded widgets: no embedded maps, calendars, videos, social feeds, or job boards. Link out instead, and say where the link goes. One exception: the bus planner's street map, which loads only when someone taps "Expand map" ([decision](../decisions/2026-11-04-1500-street-map-on-tap.md)).
 - CSS inlined, as the `Base` layout already does. The build then drops inlined component CSS a page does not use (`site/src/lib/prune-css.mjs`).
 
 ## Building blocks
