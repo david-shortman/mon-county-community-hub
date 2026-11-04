@@ -4,6 +4,7 @@
 // programs, from their PDF forms and program pages. Every fact is quoted in
 // content/pdf-pages/mountain-line-passes.yaml.
 import Base from '../layouts/Base.astro';
+import WhoSetsRules from '../components/WhoSetsRules.astro';
 import FromPdf from '../components/FromPdf.astro';
 import { pdfPage } from '../lib/pdf-pages.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -26,6 +27,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <FromPdf d={d} />
 
   <p>Regular fares, free rides with a WVU ID and the Grey Line are on <a href={`${base}/getting-around/`}>Getting around without a car</a>. Every route and its hours are on <a href={`${base}/bus-routes/`}>Every bus route and when it runs</a>.</p>
+
+  <WhoSetsRules need="transportation" />
 
   <p class="meta">This page is a reading aid. Mountain Line decides who gets a pass. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
 </Base>

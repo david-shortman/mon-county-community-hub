@@ -7,6 +7,7 @@
 // Line route page names a stop at them). PRT facts are from WVU's own PRT
 // pages, read on 2026-11-02 (#598).
 import Base from '../layouts/Base.astro';
+import WhoSetsRules from '../components/WhoSetsRules.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -57,6 +58,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <h2 id="rides">Can't take the bus to a medical visit?</h2>
   {r('mountain-line-newfit') && <ResourceCard r={r('mountain-line-newfit')} showCost />}
   <p>On Medicaid or WVCHIP? See <a href={`${base}/medical-rides/`}>Ride to a medical visit</a> for rides through Modivcare. Older adults and people with disabilities can also get half fare, buses that go off route to pick you up, and Senior Monongalians rides: see <a href={`${base}/disability-and-aging/`}>Disability and aging</a>.</p>
+
+  <WhoSetsRules need="transportation" />
 
   <p class="meta">Sources checked October 30, 2026, and the PRT on November 2, 2026. Routes and times change, so check the trip planner before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

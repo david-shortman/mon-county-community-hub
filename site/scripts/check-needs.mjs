@@ -11,6 +11,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
 import { CONTENT_DIR, loadDir, loadDoors, todayYmd, ymd } from '../src/lib/content.mjs';
+import { bodies } from '../src/lib/who-decides.mjs';
 
 const here = path.dirname(new URL(import.meta.url).pathname);
 const PAGES_DIR = path.join(here, '../src/pages');
@@ -46,7 +47,7 @@ function loadFrom(dir) {
 const strings = (v) => (typeof v === 'string' ? [v] : Array.isArray(v) ? v.flatMap(strings) : v && typeof v === 'object' ? Object.values(v).flatMap(strings) : []);
 
 // Problems with every need in one folder: { errors, warnings }.
-export function checkNeeds(entries, { label, orgSlugs, topics, questionIds, today = todayYmd() }) {
+export function checkNeeds(entries, { label, orgSlugs, topics, questionIds, bodyIds = new Set(), boardSlugs = new Set(), today = todayYmd() }) {
   const errors = [];
   const warnings = [];
   const ranks = new Map();
@@ -123,6 +124,21 @@ export function checkNeeds(entries, { label, orgSlugs, topics, questionIds, toda
       if (typeof g?.path !== 'string' || !g.path.startsWith('/')) err(`${at}.path must be a path on this site, starting with /`);
       else if (!pageExists(g.path)) err(`${at}.path ${g.path} has no page in site/src/pages`);
     });
+    // Who sets the rules for this (#1689): every body is one the site already
+    // explains, and every line has its own source.
+    (Array.isArray(n.decided_by) ? n.decided_by : n.decided_by == null ? [] : (err('decided_by must be a list'), [])).forEach((d, i) => {
+      const at = `decided_by[${i}]`;
+      unknown(d, P.decided_by.items.properties, `${at}.`);
+      if (!bodyIds.has(d?.body)) err(`${at}.body "${d?.body}" is not a body in site/src/lib/who-decides.mjs`);
+      if (d?.board != null && !boardSlugs.has(d.board)) err(`${at}.board "${d.board}" has no file in content/boards/`);
+      if (!d?.decides) err(`${at} needs "decides": what this body decides for this need`);
+      else if (/\bshould\b/i.test(d.decides)) err(`${at}.decides says "should"; describe what the body decides, never what it ought to do`);
+      if (!Array.isArray(d?.sources) || !d.sources.length) err(`${at} needs sources (every line has a source)`);
+      (Array.isArray(d?.sources) ? d.sources : []).forEach((src, j) => {
+        if (!isUrl(src?.url)) err(`${at}.sources[${j}] needs a url`);
+        checkDate(src?.checked, `${at}.sources[${j}]`);
+      });
+    });
     const c = n.site_coverage;
     if (c != null) {
       unknown(c, P.site_coverage.properties, 'site_coverage.');
@@ -152,7 +168,9 @@ export function checkNeeds(entries, { label, orgSlugs, topics, questionIds, toda
 const orgSlugs = new Set(loadDir('orgs').map((o) => o.slug));
 const topics = new Set(Object.keys(loadDoors().topicDoor));
 const questionIds = new Set((YAML.parse(fs.readFileSync(path.join(CONTENT_DIR, 'findability/questions.yaml'), 'utf8')).questions ?? []).map((q) => q.id));
-const ctx = { orgSlugs, topics, questionIds };
+const bodyIds = new Set(bodies.map((b) => b.id));
+const boardSlugs = new Set(loadDir('boards').map((b) => b.slug));
+const ctx = { orgSlugs, topics, questionIds, bodyIds, boardSlugs };
 
 // Self-test on the fixtures first.
 const fixtures = loadFrom(path.join(here, 'fixtures/needs'));
@@ -160,7 +178,7 @@ const good = checkNeeds(fixtures.filter((f) => !f.file.includes('bad')), { ...ct
 const bad = checkNeeds(fixtures.filter((f) => f.file.includes('bad')), { ...ctx, label: 'fixtures/needs' });
 const selfTest = [];
 if (good.errors.length) selfTest.push(`the good fixture should pass but got:\n  ${good.errors.join('\n  ')}`);
-for (const expect of ['unknown field contact_email', 'evidence[0] needs a source url', 'whole number', 'severity must be', 'long quote', 'in the future', 'never a private person', 'is not in content/doors.yaml', 'file name should match', 'has no page in site/src/pages', 'must be a path on this site', 'site_coverage.level must be', 'site_coverage needs "why"', 'site_coverage.before.level must be', 'before.checked must not be after'])
+for (const expect of ['unknown field contact_email', 'evidence[0] needs a source url', 'whole number', 'severity must be', 'long quote', 'in the future', 'never a private person', 'is not in content/doors.yaml', 'file name should match', 'has no page in site/src/pages', 'must be a path on this site', 'site_coverage.level must be', 'site_coverage needs "why"', 'site_coverage.before.level must be', 'before.checked must not be after', 'is not a body in site/src/lib/who-decides.mjs', 'has no file in content/boards/', 'says "should"', 'needs sources (every line has a source)'])
   if (!bad.errors.some((e) => e.includes(expect))) selfTest.push(`the bad fixture should fail with "${expect}"`);
 if (selfTest.length) {
   console.error(`check-needs self-test failed:\n- ${selfTest.join('\n- ')}`);
