@@ -10,6 +10,8 @@
 # - Each key is a page's web path. Keep keys in alphabetical order.
 # - Pages about shelter, safety lines, food or benefits wait for David, like
 #   any change to what those pages show (docs/COORDINATION.md).
+# A search that is exactly one entry puts that page first (#1676), so an entry
+# should belong to one page only.
 # Test the effect with `npm run search-test` in site/ (docs/operations/search-test.md).
 /accessible-parking-placard/: [handicap placard, handicap parking permit, disability parking]
 /after-you-apply/social-security-disability/: [SSDI appeal, disability denied]
