@@ -14,4 +14,4 @@
   - Each record has a re-check of 180 days, or 365 for state rules.
   - Steps 1, 2, 4 and 5, food permits and City Hall now render with `Fact`. Nothing changed in meaning.
 - **Not yet:** steps 3 and 6 (city license and B&O tax) cite the city's permitting and B&O pages. Those answered 403 this run, so they stay typed, and the next run can convert them. The food permit line no longer says "temporary events", because today's read of the health department page did not show it.
-- **Scoreboard:** freshness. Typed facts on `/start-a-business/` went from 24 to 4 phone numbers, all in steps 3 and 6. Check that the Health check's on-time line still counts these records at the November 9 retro.
+- **Scoreboard:** freshness. The only typed phone numbers left on `/start-a-business/` are in steps 3 and 6. Check that the Health check's on-time line still counts these records at the November 9 retro.
