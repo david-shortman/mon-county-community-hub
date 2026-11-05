@@ -1,7 +1,8 @@
 name: Board of Health
 slug: county-board-of-health
 org: monongalia-county-commission
-section: county
+section: services
+decides: Runs the county health department's public health services, such as disease control, shots and environmental health. Under state law it enforces state health laws, sets the department's budget and fees for some permits, and can adopt local health rules.
 created: Set up in 1958 under WV Code 16-2A-2.
 who_can_serve: Five members appointed by the County Commission for 5 year terms. No more than three can belong to the same political party, and no more than two can live in the same magisterial district.
 meets: Usually the last Thursday of January, March, May, July, September and November, 9 a.m., at the County Health Department
@@ -9,4 +10,6 @@ url: "https://www.monongaliacounty.gov/authorities,_boards_and_commissions/index
 topics: [better]
 sources:
   - url: "https://www.monongaliacounty.gov/authorities,_boards_and_commissions/index.php"
-    checked: 2026-11-02
+    checked: 2026-11-04
+  - url: https://code.wvlegislature.gov/16-2-11/
+    checked: 2026-11-04

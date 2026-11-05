@@ -1,0 +1,26 @@
+# 2026-11-04: Boards that shape bills, buses, housing and health (#1691)
+
+- **Considered:**
+  - No `for:code` issue was `up-next`.
+  - The rest of #1689 is high stakes.
+  - #1691 gives residents full cards for the boards behind water bills, buses and housing. It also gives "Who sets the rules for this" (#1689) a place to link open seats.
+- **Chose:** #1691, minus the Housing Advisory Commission. The City of Morgantown's site answered every read with 403 this run, and the HAC is only on that site. Per `docs/operations/automated-reads.md`, nothing is read on a 403 run, so the HAC waits for the next run.
+- **Shipped:**
+  - **New card section:** a `services` section for `content/boards/`, checked by `check-content`, and a "Boards that shape your bills, buses, housing and health" section on `/make-it-better/boards/`. It has full cards for MUB, the Mountain Line Transit Authority board, the Fairmont-Morgantown Housing Authority board and the County Board of Health. Each card shows what the board decides, who can serve, when it meets and open seats, each with a source.
+  - **Page wording:** the page's intro and description no longer limit it to how the city looks.
+  - **Open-seat links:** the "Who sets the rules for this" block now links open seats straight to the board's card.
+- **Facts checked today:**
+  - **MUB:** water, wastewater and stormwater service, and its October 13, 2026 agenda (bids, 5:30 p.m., 278 Greenbag Road, live stream, a public portion).
+  - **Transit Authority:** WV Code 8-27-10(q), and the county's page (seven members, and meeting times that disagree with the city's).
+  - **Housing Authority:**
+    - WV Code 16-15-5 on commissioners.
+    - The authority's site: public housing, Section 8 vouchers, and a Resident Commissioner seat marked "Position Available".
+    - Fairmont's page: five members with five year terms.
+    - The authority's site lists no board meetings, and the card says so.
+  - **Board of Health:** WV Code 16-2-11 (powers and duties), and the county's page.
+- **Next:** add the Housing Advisory Commission from https://www.morgantownwv.gov/268/Housing-Advisory-Commission once the city's site answers. Compare its seats with the city's vacancy list.
+- **Scoreboard:** Level 3 (action) in time. Check at the November 16 retro whether the visit counter shows `/make-it-better/boards/` views rising after these cards.
+- **Review follow-ups:**
+  - The Housing Authority card no longer shows the city's "Apply online" button. It says to ask the authority how to apply for the resident seat.
+  - The MUB card states the 2nd Tuesday schedule from the city's MUB page (checked October 30).
+  - Rechecking the seat counts when the city's site answers is a new issue.
