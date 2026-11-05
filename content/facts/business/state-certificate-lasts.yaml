@@ -1,0 +1,9 @@
+slug: state-certificate-lasts
+text: "**How long it lasts:** it does not expire. It ends if the business name, location or owner changes. **Post it** where you do business."
+quote: >-
+  permanent and remains valid until ... a change in the legal name, physical location, or ownership ... must be posted
+  conspicuously in the place where you are conducting business
+sources:
+  - url: https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx
+    checked: 2026-11-05
+recheck_days: 365

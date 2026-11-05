@@ -6,20 +6,24 @@
 // license record instead of writing a competing one.
 // Not here: the city license fee, B&O rates and due dates (not on a current
 // city page, see #638).
+// Steps 1, 2, 4 and 5, food permits and City Hall read from fact records in
+// content/facts/business/ (#122), each with its own checked date. Steps 3 and
+// 6 still cite pages the city's site would not let us re-read on 2026-11-05.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import Route from '../components/Route.astro';
+import Fact from '../components/Fact.astro';
+import { factsFor } from '../lib/facts.mjs';
 import Milepost from '../components/Milepost.astro';
 import { resource, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Start a business in Morgantown, step by step", summary: "Zoning, state registration, the city license, the Certificate of Occupancy, inspections and city B&O tax, in order" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const city = [{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked: '2026-11-01' }];
+const fact = factsFor('business');
+const city = [{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked: '2026-11-05' }];
 const portal = [{ url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-10-30' }];
-const tax = [{ url: 'https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx', checked: '2026-10-30' }];
-const eh = [{ url: 'https://www.monchd.org/departments-programs/environmental-health', checked: '2026-10-30' }];
 const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns', checked: '2026-10-30' }, { url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-11-02' }, { url: 'https://www.morgantownwv.gov/202/Finance', checked: '2026-11-02' }];
 ---
 <Base title="Start a business in Morgantown, WV, step by step" description="The City of Morgantown's steps to open a business, in order: check zoning, register with the state, get a city license and Certificate of Occupancy, inspections, and B&O tax.">
@@ -28,29 +32,22 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
 
   <Route label="Steps to start a business in Morgantown">
   <Milepost n={1} title="Check the zoning" id="zoning" open>
-  <p>Call the city Planning Division at <a href={telHref('304-284-7431')}>304-284-7431</a> to check that your location is zoned for your business. Have the property's parcel and tax map numbers ready. If you do not have them, call the Monongalia County Assessor's Office at <a href={telHref('304-291-7222')}>304-291-7222</a> or look them up on the WV Property Viewer.</p>
-  <SourceLine sources={city} about="Step 1, zoning" />
-  <div class="actions">
-    <a class="btn" href={telHref('304-284-7431')}><Icon name="phone" /><span>Call the Planning Division</span></a>
-  </div>
+  <Fact f={fact('zoning')} about="Step 1, zoning" />
 
   </Milepost>
 
   <Milepost n={2} title="Register with the state" id="state">
   {resource('wv-one-stop-business-registration') && <ResourceCard r={resource('wv-one-stop-business-registration')} showCost />}
-  <p>The State Tax Division says anyone doing business in West Virginia must register with it before starting. It gives you a Business Registration Certificate.</p>
+  <Fact f={fact('state-registration')} about="Step 2, state Business Registration Certificate" />
   <ul>
-    <li><strong>Fee:</strong> $30.</li>
-    <li><strong>Some groups pay no fee</strong> but still register, such as qualifying 501(c) nonprofits and farming businesses. See the full list on the Tax Division page.</li>
-    <li><strong>Some very small businesses need no certificate.</strong> The page lists three conditions that must all be true. One is business gross income of $4,000 or less in the last tax year.</li>
-    <li><strong>How long it lasts:</strong> it does not expire. It ends if the business name, location or owner changes.</li>
-    <li><strong>Post it</strong> where you do business.</li>
+    <Fact tag="li" f={fact('state-fee-exempt')} about="who pays no registration fee" />
+    <Fact tag="li" f={fact('state-no-certificate')} about="when no certificate is needed" />
+    <Fact tag="li" f={fact('state-certificate-lasts')} about="how long the certificate lasts" />
   </ul>
-  <p>Tax help: <a href={telHref('304-558-3333')}>304-558-3333</a> or <a href={telHref('800-982-8297')}>800-982-8297</a>.</p>
+  <Fact f={fact('state-tax-help')} about="state tax help lines" />
   <div class="actions">
     <a class="btn" href="https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx"><Icon name="open" /><span>Tax Division questions and answers</span></a>
   </div>
-  <SourceLine sources={tax} about="Step 2, state Business Registration Certificate" />
 
   </Milepost>
 
@@ -64,21 +61,14 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
   </Milepost>
 
   <Milepost n={4} title="Apply for a Certificate of Occupancy" id="occupancy">
-  <p>The city says new and existing businesses inside city limits need one, and so do businesses that change name, owner or location. You cannot legally use the building or open until you have it. Bring:</p>
-  <ul>
-    <li>A completed Municipal Business License application</li>
-    <li>A scaled floor plan with measurements, on 8.5 by 11 inch paper, showing the total square feet and how you will use the space</li>
-    <li>The $65 application fee (cash, check or credit)</li>
-    <li>Signatures from the Planning Division and the Engineering Department</li>
-  </ul>
-  <p>You get a card with contacts for the Fire Marshal and Code Enforcement. If you are not changing the space, contact Code Enforcement within 10 days of applying to set up an inspection. If you are changing the space, ask Code Enforcement about permits first.</p>
-  <SourceLine sources={city} about="Step 4, Certificate of Occupancy" />
+  <Fact f={fact('occupancy-who')} about="Step 4, who needs a Certificate of Occupancy" />
+  <Fact f={fact('occupancy-bring')} about="Step 4, what to bring" />
+  <Fact f={fact('occupancy-inspection')} about="Step 4, after you apply" />
 
   </Milepost>
 
   <Milepost n={5} title="Get inspected before you open" id="inspection">
-  <p>Contact Code Enforcement and the Fire Marshal early enough to be inspected no less than one week before opening day. Restaurants, bars and nightclubs have stricter Fire Code rules, so contact the Fire Marshal's Office. The city mails the Certificate of Occupancy after all departments approve.</p>
-  <SourceLine sources={city} about="Step 5, inspections" />
+  <Fact f={fact('inspection-before-opening')} about="Step 5, inspections" />
 
   </Milepost>
 
@@ -93,14 +83,12 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
   </Route>
 
   <h2>Selling food?</h2>
-  <p>The Monongalia County Health Department posts food permit applications for food businesses, mobile food units and temporary events. Call Environmental Health at <a href={telHref('304-598-5131')}>304-598-5131</a> or see the <a href="https://www.monchd.org/departments-programs/environmental-health">Environmental Health permit applications</a>.</p>
-  <SourceLine sources={eh} org="monongalia-county-health-department" about="Food permits" />
+  <Fact f={fact('food-permits')} about="Food permits" />
 
   <h2>All the city's steps in one card</h2>
   {resource('morgantown-business-license') && <ResourceCard r={resource('morgantown-business-license')} />}
 
-  <p>City Hall: 389 Spruce Street, Morgantown. Monday through Thursday, 7 a.m. to 5:30 p.m. <a href={telHref('304-284-7405')}>304-284-7405</a>. The city suggests checking with each department that you have everything before you open.</p>
-  <SourceLine sources={city} about="City Hall contact" />
+  <Fact f={fact('city-hall')} about="City Hall contact" />
 
-  <p class="meta">Sources checked October 30, 2026, and the city steps page again November 1, 2026. Fees and rules can change, so check the official page before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Each part shows the date we last checked its source. Fees and rules can change, so check the official page before you pay or file. We describe the steps; we do not decide what applies to your business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
