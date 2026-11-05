@@ -24,6 +24,10 @@ test('words, spelling and filler', () => {
   assert.equal(fixedText('food'), '');
   assert.equal(plain('detox near me in Morgantown'), 'treatment');
   assert.equal(plain("I can't afford groceries"), 'afford food');
+  // Small words in a full question are filler (#1676), but "will" is not ("living will").
+  assert.equal(plain('I need a dentist but have no insurance'), 'dentist no insurance');
+  assert.equal(plain('is there lead in my old house'), 'lead old house');
+  assert.equal(plain('living will'), 'living will');
   // Names on Object's prototype are not spelling fixes.
   assert.deepEqual(words('constructor toString'), ['constructor', 'tostring']);
 });
