@@ -231,10 +231,13 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
       });
     });
   }
-  return { raw: raw, words: words, fixedText: fixedText, plain: plain, crisis: crisis, later: later, alsoHit: alsoHit, find: find };
+  find.alsoHit = alsoHit;
+  return { raw: raw, words: words, fixedText: fixedText, plain: plain, crisis: crisis, later: later, find: find };
 }
 
-export const { raw, words, fixedText, plain, crisis, later, alsoHit, find } = makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN);
+export const { raw, words, fixedText, plain, crisis, later, find } = makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN);
+// For tests (#1676).
+export const alsoHit = find.alsoHit;
 
 // The search code for the search page's inline script: defines one global,
 // SearchPlan, with the functions above.
