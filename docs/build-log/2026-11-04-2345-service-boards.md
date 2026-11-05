@@ -20,3 +20,7 @@
   - **Board of Health:** WV Code 16-2-11 (powers and duties), and the county's page.
 - **Next:** add the Housing Advisory Commission from https://www.morgantownwv.gov/268/Housing-Advisory-Commission once the city's site answers. Compare its seats with the city's vacancy list.
 - **Scoreboard:** Level 3 (action) in time. Check at the November 16 retro whether the visit counter shows `/make-it-better/boards/` views rising after these cards.
+- **Review follow-ups:**
+  - The Housing Authority card no longer shows the city's "Apply online" button. It says to ask the authority how to apply for the resident seat.
+  - The MUB card states the 2nd Tuesday schedule from the city's MUB page (checked October 30).
+  - Rechecking the seat counts when the city's site answers is a new issue.

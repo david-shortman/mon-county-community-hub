@@ -202,7 +202,7 @@ for (const s of secondhand) {
 
 // Boards (content/boards/<slug>.yaml): city boards and commissions for the
 // Serve on a board page (#290). Open seats come from the city's vacancy list.
-const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'created', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'url', 'topics', 'sources', 'recheck_days'];
+const BOARD_FIELDS = ['name', 'slug', 'org', 'section', 'created', 'decides', 'meets', 'who_can_serve', 'open_seats', 'open_note', 'page_vacant', 'apply_note', 'url', 'topics', 'sources', 'recheck_days'];
 const boards = loadDir('boards');
 for (const b of boards) {
   const where = b._file;

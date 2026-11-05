@@ -78,7 +78,7 @@ const seats = (n) => (n === 1 ? '1 open seat' : `${n} open seats`);
       <p><strong>Meets:</strong>{' '}{b.meets}</p>
       {b.org === 'monongalia-county-commission'
         ? <p>The County Commission appoints this board. See <a href="#county">County boards</a> for how to ask about a seat.</p>
-        : b.open_seats > 0 && <Actions link={applyOnline} linkLabel="Apply online" about={b.name} />}
+        : b.apply_note ? <p>{b.apply_note}</p> : b.open_seats > 0 && <Actions link={applyOnline} linkLabel="Apply online" about={b.name} />}
       <p class="more"><a href={b.url}>The board's page<span class="sr-only">: {b.name}</span></a></p>
       <SourceLine sources={b.sources} org={b.org} about={b.name} staleDays={FAST_STALE_DAYS} />
     </article>
