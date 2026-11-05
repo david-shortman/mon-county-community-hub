@@ -20,6 +20,9 @@ last_activity_seen: 2026-10-30
 notes:
   - Registration is asked for.
   - Next listed dates are Wednesday, November 11, 2026 and Wednesday, January 13, 2027.
+  - The phone number is the main number for the downtown library.
 sources:
   - url: https://events.mympls.org/event/17364950
-    checked: 2026-11-01
+    checked: 2026-11-05
+  - url: https://mympls.org/about/locations/morgantown/
+    checked: 2026-11-05
