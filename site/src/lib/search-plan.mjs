@@ -13,6 +13,8 @@
 //      Pages with more of the reader's words come first.
 //   5. Helper and printout pages, and group pages whose name does not match,
 //      go after the guides.
+//   5b. A page whose "Also called" line has exactly what was typed (in our
+//      pages' words or the reader's) goes first (#1676).
 //   6. For a few crisis words (CRISIS, PIN), put Mental health first, and
 //      tell the page to show the 988 box (#1647).
 //
@@ -160,6 +162,19 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
     var typed = words(q).filter(function (w) { return FILLER.indexOf(w) < 0; });
     return typed.length && typed.every(function (w) { return name.indexOf(' ' + w + ' ') >= 0; }) ? 0 : 1;
   }
+  // True when the page's "Also called" words (the `also` meta, #1676) have
+  // an entry that is exactly the topic words typed, in the reader's words or
+  // in our pages' words. "free food" puts /help/food/ first.
+  function alsoHit(d, q) {
+    var also = String((d.meta && d.meta.also) || '').toLowerCase();
+    if (!also) return false;
+    var mine = words(q).filter(function (w) { return FILLER.indexOf(w) < 0; }).join(' ');
+    var ours = plain(q);
+    return also.split(',').some(function (e) {
+      var entry = raw(e).join(' ');
+      return entry && (entry === mine || entry === ours);
+    });
+  }
   // Search with a loaded Pagefind module. Resolves to { items, some, fixed, crisis }:
   // up to 10 results' data in order, `some` when no page had every word (so
   // pages with some of them are shown), the fixed words if any, and whether
@@ -206,7 +221,7 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
         Promise.all(pinned.map(function (r) { return r.data(); })),
       ]).then(function (got) {
         var items = got[0].map(function (d, i) { return { d: d, i: i }; })
-          .sort(function (x, y) { return later(x.d, q) - later(y.d, q) || x.i - y.i; })
+          .sort(function (x, y) { return (alsoHit(y.d, q) - alsoHit(x.d, q)) || later(x.d, q) - later(y.d, q) || x.i - y.i; })
           .map(function (x) { return x.d; });
         if (pin) {
           var top = got[1].filter(function (d) { return isPage(d, pin.page); })[0];
@@ -216,10 +231,13 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
       });
     });
   }
+  find.alsoHit = alsoHit;
   return { raw: raw, words: words, fixedText: fixedText, plain: plain, crisis: crisis, later: later, find: find };
 }
 
 export const { raw, words, fixedText, plain, crisis, later, find } = makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN);
+// For tests (#1676).
+export const alsoHit = find.alsoHit;
 
 // The search code for the search page's inline script: defines one global,
 // SearchPlan, with the functions above.
