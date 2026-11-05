@@ -19,3 +19,4 @@
   - the short common words in part 2 ("free food", "gardening")
   - the content gaps in part 4
 - **Scoreboard:** site search test, question kind: 87.8% to 95.1%. Check again at the Sunday findability run (November 8).
+- **Also:** re-read the city's vacancy list (it answered today). MUB, the Transit Authority and the Housing Authority board each still show 1 open seat, so their cards now say checked November 5 (#1732).
