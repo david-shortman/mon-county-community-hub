@@ -83,6 +83,7 @@ export const SAME = {
 // Pagefind would demand that a page have "how" or "near" too.
 export const FILLER = ('a an the and or of to for in on at by from with about my me i im we our you your it its this that is are was be ' +
   'can cant do does dont how what where when who why get got need want please help near find someone some any just really ' +
+  'but have has had there should would could if so am been being go going their them they ' +
   'morgantown wv west virginia mon monongalia county').split(' ');
 
 // Crisis words (#1647). When a search has one of these, the search page shows
@@ -112,6 +113,7 @@ export const PIN = [
 // The search code, given the lists. Old-style JavaScript on purpose:
 // it runs as is on older phones.
 export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
+  var WHOLE_WEIGHT = 0.3;
   function own(map, w) { return Object.prototype.hasOwnProperty.call(map, w) ? map[w] : null; }
   // The typed words, lower case, without apostrophes.
   function raw(q) {
@@ -170,7 +172,12 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
       .map(function (w) { return own(SAME, w) ? [w, own(SAME, w)] : [w]; });
     var p = plain(q);
     var fixed = fixedText(q);
-    var jobs = [{ q: fixed || q }];
+    // In a sentence (4 or more words), the whole thing as typed counts for
+    // less than its topic words, so a page full of small words ("where",
+    // "do", "I") does not win (#1676). Short searches like "WV WORKS" keep it.
+    var whole = fixed || q;
+    var sentence = raw(q).length >= 4 && p && p !== String(whole).toLowerCase().trim();
+    var jobs = [{ q: whole, weight: sentence ? WHOLE_WEIGHT : 1 }];
     if (p && p !== String(q).toLowerCase().trim()) jobs.push({ q: p });
     if (units.length > 1 || (units[0] && units[0].length > 1)) {
       units.forEach(function (alts, u) { alts.forEach(function (w) { jobs.push({ q: w, unit: u }); }); });
@@ -186,7 +193,7 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
         ((res && res.results) || []).forEach(function (r, i) {
           byId[r.id] = r;
           var near = 1 / (1 + i / 10);
-          if (unit === undefined) { score[r.id] = (score[r.id] || 0) + near; return; }
+          if (unit === undefined) { score[r.id] = (score[r.id] || 0) + near * (jobs[k].weight || 1); return; }
           has[r.id] = has[r.id] || {};
           var best = has[r.id][unit] || 0;
           if (1 + near / 2 > best) { score[r.id] = (score[r.id] || 0) + 1 + near / 2 - best; has[r.id][unit] = 1 + near / 2; }
