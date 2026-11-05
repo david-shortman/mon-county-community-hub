@@ -3,6 +3,8 @@
 // from content/also-called.yaml, shown at the end of the page so the site
 // search finds it by those words too. It is a visible line for readers, never
 // hidden text. A word belongs here only when the page really answers it.
+// The words also go in the search index as `also` (#1676), so a search
+// that is exactly one of them puts this page first.
 import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
@@ -13,5 +15,5 @@ const map = fs.existsSync(file) ? YAML.parse(fs.readFileSync(file, 'utf8')) ?? {
 const words = map[route] ?? [];
 ---
 {words.length > 0 && (
-  <p class="also-called meta" data-pagefind-weight="7"><strong>Also called:</strong>{' '}{words.join(', ')}.</p>
+  <p class="also-called meta" data-pagefind-weight="7"><strong>Also called:</strong>{' '}<span data-pagefind-meta="also">{words.join(', ')}</span>.</p>
 )}
