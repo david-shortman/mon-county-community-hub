@@ -1,0 +1,9 @@
+slug: state-registration
+text: "The State Tax Division says anyone doing business in West Virginia must register with it before starting. It gives you a **Business Registration Certificate**. The fee is **$30**."
+quote: >-
+  A person must register with the West Virginia State Tax Division before commencing business activities in the State ...
+  $30.00 Business Registration Fee
+sources:
+  - url: https://tax.wv.gov/Business/BusinessRegistration/Pages/BusinessRegistrationQuestionsAndAnswers.aspx
+    checked: 2026-11-05
+recheck_days: 365

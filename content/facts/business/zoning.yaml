@@ -1,0 +1,12 @@
+slug: zoning
+text: "Call the city **Planning Division** at [304-284-7431](tel:+13042847431) to check that your location is zoned for your business. Have the property's parcel and tax map numbers ready. If you do not have them, call the **Monongalia County Assessor's Office** at [304-291-7222](tel:+13042917222) or look them up on the WV Property Viewer."
+phone: "304-284-7431"
+phone_label: the Planning Division
+quote: >-
+  Contact the City's Planning Division at 304-284-7431 to confirm the location is zoned for your business. Be sure to have the
+  property's parcel and tax map number. If you don't have those numbers, contact the Monongalia County Assessor's Office at
+  304-291-7222 or use the WV Property Viewer.
+sources:
+  - url: https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business
+    checked: 2026-11-05
+recheck_days: 180
