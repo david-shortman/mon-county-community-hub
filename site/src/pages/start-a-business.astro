@@ -6,25 +6,20 @@
 // license record instead of writing a competing one.
 // Not here: the city license fee, B&O rates and due dates (not on a current
 // city page, see #638).
-// Steps 1, 2, 4 and 5, food permits and City Hall read from fact records in
-// content/facts/business/ (#122), each with its own checked date. Steps 3 and
-// 6 still cite pages the city's site would not let us re-read on 2026-11-05.
+// Every step, food permits and City Hall read from fact records in
+// content/facts/business/ (#122), each with its own checked date.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
-import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
 import Route from '../components/Route.astro';
 import Fact from '../components/Fact.astro';
 import { factsFor } from '../lib/facts.mjs';
 import Milepost from '../components/Milepost.astro';
-import { resource, telHref } from '../lib/content.mjs';
+import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Start a business in Morgantown, step by step", summary: "Zoning, state registration, the city license, the Certificate of Occupancy, inspections and city B&O tax, in order" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const fact = factsFor('business');
-const city = [{ url: 'https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business', checked: '2026-11-05' }];
-const portal = [{ url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-10-30' }];
-const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns', checked: '2026-10-30' }, { url: 'https://www.morgantownwv.gov/747/Permitting-Licensing-Registration', checked: '2026-11-02' }, { url: 'https://www.morgantownwv.gov/202/Finance', checked: '2026-11-02' }];
 ---
 <Base title="Start a business in Morgantown, WV, step by step" description="The City of Morgantown's steps to open a business, in order: check zoning, register with the state, get a city license and Certificate of Occupancy, inspections, and B&O tax.">
   <h1>Start a business in Morgantown, step by step</h1>
@@ -52,11 +47,11 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
   </Milepost>
 
   <Milepost n={3} title="Apply for a city business license" id="license">
-  <p>Apply after you have your state Business Registration Certificate. Create an account and apply through the Morgantown Access Portal. The portal's web address changed, so old bookmarks may not work. If your business has a place inside city limits, you need a Certificate of Occupancy (<a href="#occupancy">step 4</a>) before the city issues the license. License questions: Finance Department, <a href={telHref('304-284-7408')}>304-284-7408</a>.</p>
+  <Fact f={fact('city-license')} about="Step 3, city business license" />
+  <Fact f={fact('city-license-help')} about="Step 3, license questions" />
   <div class="actions">
     <a class="btn" href="https://www.morgantownwv.gov/747/Permitting-Licensing-Registration"><Icon name="open" /><span>City permitting and licensing page</span></a>
   </div>
-  <SourceLine sources={[...city, ...portal]} about="Step 3, city business license" />
 
   </Milepost>
 
@@ -73,11 +68,11 @@ const bo = [{ url: 'https://www.morgantownwv.gov/204/Business-Occupation-Tax-Ret
   </Milepost>
 
   <Milepost n={6} title="File city B&O tax" id="bo-tax">
-  <p>Morgantown charges a business and occupation (B&O) tax on business done inside city limits. The city posts an annual return, a "by the job" return and a quarterly return, plus a worksheet for your records. The page does not say which return fits your business or when it is due, so ask the Finance Department. The city's permitting page gives <a href={telHref('304-284-7401')}>304-284-7401</a> for B&O questions. The Finance page lists <a href={telHref('304-284-7408')}>304-284-7408</a> and the email BandO@morgantownwv.gov.</p>
+  <Fact f={fact('bo-tax-forms')} about="Step 6, city B&O tax returns" />
+  <Fact f={fact('bo-tax-help')} about="Step 6, B&O questions" />
   <div class="actions">
     <a class="btn" href="https://www.morgantownwv.gov/204/Business-Occupation-Tax-Returns"><Icon name="open" /><span>City B&O tax forms</span></a>
   </div>
-  <SourceLine sources={bo} about="Step 6, city B&O tax" />
 
   </Milepost>
   </Route>
