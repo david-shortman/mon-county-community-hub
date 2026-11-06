@@ -1,0 +1,9 @@
+slug: bureau-phones
+text: "Contact the three credit reporting companies. Ask for a fraud alert and a credit freeze. The WV Attorney General lists these numbers: Equifax [1-800-525-6285](tel:+18005256285), Experian [1-888-397-3742](tel:+18883973742), TransUnion [1-800-680-7289](tel:+18006807289)."
+quote: "Equifax: 1-800-525-6285 ... Experian: 1-888-397-3742 ... TransUnion: 1-800-680-7289"
+sources:
+  - url: https://ago.wv.gov/consumer-protection/identity-theft-protection-prevention
+    checked: 2026-11-06
+  - url: https://www.usa.gov/identity-theft
+    checked: 2026-11-06
+recheck_days: 180

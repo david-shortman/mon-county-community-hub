@@ -1,0 +1,7 @@
+slug: tax-affidavit
+text: "If you think someone used your information to file a tax return and the IRS has not contacted you about it, USA.gov points to IRS Form 14039, the Identity Theft Affidavit."
+quote: "Completing the Identity Theft Affidavit will invalidate a fraudulent return filed using your information."
+sources:
+  - url: https://www.usa.gov/identity-theft
+    checked: 2026-11-06
+recheck_days: 365

@@ -1,0 +1,9 @@
+slug: report-ftc
+text: "Report it at IdentityTheft.gov, run by the Federal Trade Commission (FTC), or call [1-877-438-4338](tel:+18774384338). USA.gov says to use IdentityTheft.gov's list of steps to help you recover."
+phone: "1-877-438-4338"
+phone_label: the FTC
+quote: "call 1-877-438-4338 ... Use IdentityTheft.gov's list of steps to help you recover."
+sources:
+  - url: https://www.usa.gov/identity-theft
+    checked: 2026-11-06
+recheck_days: 180

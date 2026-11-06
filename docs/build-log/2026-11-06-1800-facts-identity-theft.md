@@ -1,0 +1,26 @@
+# 2026-11-06: Identity theft reads its numbers from fact records (#122)
+
+- **Considered:**
+  - No `for:code` issue was `up-next`.
+  - #122 listed `/identity-theft/` next among pages that are not high stakes (20 typed phone numbers and amounts).
+  - It is the page a resident uses on a bad day, where a wrong number costs the most.
+- **Chose:** move its phone numbers, dollar limits and time rules into fact records.
+- **Shipped:**
+  - 12 records in `content/facts/identity-theft/`, each with the source's exact words, from USA.gov's identity theft, credit freeze and credit report pages and the WV Attorney General's identity theft page, all re-read 2026-11-06.
+  - They cover:
+    - the FTC report line
+    - the lost wallet advice
+    - the three credit bureaus' numbers
+    - credit freeze rules
+    - the extended fraud alert
+    - calling card companies
+    - credit and debit card limits ($50, $500)
+    - free credit reports and spacing them out
+    - IRS Form 14039
+    - the Consumer Protection Division
+  - The two Call buttons come from the records' `phone` field.
+  - The warning signs and safety tips have no numbers, so they stay as typed lists, with their source date updated.
+- **Changed for readers:**
+  - The Consumer Protection step adds the division's own number, 304-558-8986, next to the hotline, as the AG page lists both.
+  - The "file a consumer complaint online" sentence came off because today's read did not show it. The File a complaint button still links the AG's complaint page.
+- **Scoreboard:** freshness. The page now has no typed phone numbers or dollar amounts. Check that the Health check's on-time line counts the new records at the November 9 retro.
