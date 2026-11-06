@@ -4,6 +4,8 @@
 // rows reuse a sourced org or resource record; the rest come from the
 // county's contact directory, the Prosecuting Attorney's page, the Planning
 // Office page and the Sheriff's services page, read 2026-11-02 (Eastern).
+// The typed rows are fact records in content/facts/offices/ (#122), re-read
+// 2026-11-06, each with its own checked date.
 // Office phones only, never names of officials. Where the county directory
 // and an office's own page disagree, the office's own page wins (see
 // docs/discoveries/2026-11-03-county-directory-planning-phone-assessor-room.md).
@@ -11,19 +13,18 @@ import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { org, resource, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
+import { factsFor, factHtml, isDue } from '../lib/facts.mjs';
 export const page = { door: "community", topic: "government", label: "Which office handles it?", summary: "Property tax, deeds, court records, flood zones, a new address, a driver's license: which city, county or state office to call" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const checked = '2026-11-02';
-const dir = [{ url: 'https://www.monongaliacounty.gov/contact_information_for_county_agencies_and_departments/index.php', checked }];
-const pa = [{ url: 'https://www.monongaliacounty.gov/government/prosecuting_attorney/index.php', checked }];
-const planning = [{ url: 'https://www.monongaliacounty.gov/moncpc/index.php', checked }];
-const sheriffSvc = [{ url: 'https://monongaliasheriff.gov/contact_us/additional_services_/index.php', checked }];
+const fact = factsFor('offices');
+// A row read from a fact record: its sentence holds the office, phone and note.
+const fromFact = (slug) => ({ fact: fact(slug) });
 const fromOrg = (slug) => { const o = org(slug); return o ? { office: o.name, phone: o.phone, sources: o.sources, org: slug } : null; };
 const fromRes = (slug) => { const r = resource(slug); return r ? { office: r.title, phone: r.contact?.phone, sources: r.sources, org: r.org } : null; };
 const row = (task, who, extra = {}) => (who ? { task, ...who, ...extra } : null);
 const groups = [
   { id: 'property', title: 'Property and property tax', rows: [
-    row('Pay property tax, or look up a tax bill', { office: "Sheriff's Tax Office", phone: '304-291-7244', sources: dir }, { note: 'Courthouse, 243 High Street, Room 300.', page: ['/property-tax/', 'Property tax'] }),
+    row('Pay property tax, or look up a tax bill', fromFact('sheriff-tax-office'), { page: ['/property-tax/', 'Property tax'] }),
     row('Property value, or a personal property return (cars and other vehicles)', fromOrg('monongalia-county-assessor'), { page: ['/property-tax/', 'Property tax'] }),
   ] },
   { id: 'records', title: 'Records, licenses and elections', rows: [
@@ -34,24 +35,24 @@ const groups = [
   { id: 'courts', title: 'Courts and safety', rows: [
     row('Circuit Court or Family Court records and fees, and jury duty', fromOrg('monongalia-county-circuit-clerk'), { page: ['/family-court/', 'Family court'] }),
     row('Small civil cases ($20,000 or less), misdemeanors and emergency protective orders', fromOrg('monongalia-county-magistrate-court'), { page: ['/protective-orders/', 'Protective orders'] }),
-    row('Help for crime victims and witnesses', { office: "Victim Assistance Program, Prosecuting Attorney's Office", phone: '304-291-7286', sources: dir }),
-    row("The county Prosecuting Attorney's Office", { office: "Monongalia County Prosecuting Attorney", phone: '304-291-7250', sources: pa }, { note: '75 High Street. Monday to Friday, 8:30 a.m. to 5 p.m., closed noon to 1 p.m.' }),
+    row('Help for crime victims and witnesses', fromFact('victim-assistance')),
+    row("The county Prosecuting Attorney's Office", fromFact('prosecuting-attorney')),
     row('Police that is not an emergency, any hour', fromRes('mecca-non-emergency')),
-    row('Fingerprints or a VIN check', { office: "Monongalia County Sheriff's Office", phone: '304-291-7260', sources: [...dir, ...sheriffSvc] }, { note: '$5 each, cash or check only. Fingerprints Tuesday and Thursday only, 8:30 a.m. to 4 p.m., no appointment needed. VIN checks Monday to Friday, 8:30 a.m. to 4 p.m.' }),
+    row('Fingerprints or a VIN check', fromFact('sheriff-fingerprints-vin')),
   ] },
   { id: 'land', title: 'Land, building and addresses', rows: [
-    row('Zoning and building outside any town', { office: 'Monongalia County Planning Office', phone: '304-284-7302', sources: planning }, { note: 'Courthouse, 243 High Street, Room 026.', page: ['/permits/', 'Building permits'] }),
-    row('Is my property in a flood zone?', { office: 'County Floodplain Administrator', phone: '304-599-6332', sources: dir }, { note: 'Extension 2.', page: ['/flood-zone/', 'Flood zone'] }),
-    row('A new street address, or a question about an address', { office: 'MECCA addressing', phone: '304-598-0301', sources: dir }),
-    row('Litter in the county', { office: 'County Litter Control', phone: '304-291-5940', sources: dir }),
+    row('Zoning and building outside any town', fromFact('county-planning'), { page: ['/permits/', 'Building permits'] }),
+    row('Is my property in a flood zone?', fromFact('floodplain'), { page: ['/flood-zone/', 'Flood zone'] }),
+    row('A new street address, or a question about an address', fromFact('mecca-addressing')),
+    row('Litter in the county', fromFact('litter-control')),
   ] },
   { id: 'towns', title: 'Your town', rows: [
     row('Streets, sidewalks, code problems and other city service requests in Morgantown', fromRes('morgantown-311'), { page: ['/who-serves-me/', 'Who serves my address?'] }),
-    row('City Hall in Westover', { office: 'City of Westover', phone: '304-296-6860', sources: dir }),
-    row('Town hall in Star City', { office: 'Town of Star City', phone: '304-599-3550', sources: dir }),
-    row('Town hall in Granville', { office: 'Town of Granville', phone: '304-599-5080', sources: dir }),
-    row('Town office in Blacksville', { office: 'Town of Blacksville', phone: '304-432-8205', sources: dir }),
-    row('Public schools', { office: 'Monongalia County Schools', phone: '304-291-9210', sources: dir }),
+    row('City Hall in Westover', fromFact('westover')),
+    row('Town hall in Star City', fromFact('star-city')),
+    row('Town hall in Granville', fromFact('granville')),
+    row('Town office in Blacksville', fromFact('blacksville')),
+    row('Public schools', fromFact('schools')),
   ] },
 ].map((g) => ({ ...g, rows: g.rows.filter(Boolean) }));
 ---
@@ -71,9 +72,13 @@ const groups = [
       <ul>
         {g.rows.map((r) => (
           <li>
-            <p><strong>{r.task}{/\?$/.test(r.task) ? '' : ':'}</strong> {r.office}{r.phone && <>, <a href={telHref(r.phone)}>{r.phone}</a></>}.{r.note && <>{' '}{r.note}</>}</p>
+            {r.fact
+              ? <p><strong>{r.task}{/\?$/.test(r.task) ? '' : ':'}</strong> <Fragment set:html={factHtml(r.fact.text, base)} /></p>
+              : <p><strong>{r.task}{/\?$/.test(r.task) ? '' : ':'}</strong> {r.office}{r.phone && <>, <a href={telHref(r.phone)}>{r.phone}</a></>}.{r.note && <>{' '}{r.note}</>}</p>}
             {r.page && <p class="more">More: <a href={`${base}${r.page[0]}`}>{r.page[1]}</a></p>}
-            <SourceLine sources={r.sources} org={r.org} about={r.task} />
+            {r.fact
+              ? <SourceLine sources={r.fact.sources} about={r.task} stale={isDue(r.fact)} />
+              : <SourceLine sources={r.sources} org={r.org} about={r.task} />}
           </li>
         ))}
       </ul>
