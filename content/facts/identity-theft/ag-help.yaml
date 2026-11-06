@@ -1,0 +1,9 @@
+slug: ag-help
+text: "The Attorney General's Consumer Protection Division takes questions from identity theft victims. Call the Consumer Hotline at [1-800-368-8808](tel:+18003688808) or the division at [304-558-8986](tel:+13045588986)."
+phone: "1-800-368-8808"
+phone_label: Consumer Protection
+quote: "Consumer Protection Division ... Phone: 304-558-8986 ... Consumer Hotline: 1-800-368-8808"
+sources:
+  - url: https://ago.wv.gov/consumer-protection/identity-theft-protection-prevention
+    checked: 2026-11-06
+recheck_days: 180

@@ -1,0 +1,7 @@
+slug: credit-card-limit
+text: "**Credit cards:** at most **$50** for charges you did not make. Nothing, if you report a lost card before it is used, or if only the number was stolen."
+quote: "your liability for unauthorized credit card use is limited to $50 ... you have no liability"
+sources:
+  - url: https://ago.wv.gov/consumer-protection/identity-theft-protection-prevention
+    checked: 2026-11-06
+recheck_days: 365
