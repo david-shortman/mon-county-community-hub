@@ -33,8 +33,8 @@ export const bodies = [
     id: 'mub', name: 'Morgantown Utility Board (MUB)',
     does: 'Runs water and wastewater service and manages stormwater.',
     chosen: 'Open seats are filled through the City of Morgantown\'s board application. Members must be residential customers of the Utility Board, with some limits on city and county residence.',
-    meets: 'Board of Directors, 2nd Tuesday of each month, 5:30 p.m. Its last posted meeting was at 278 Greenbag Road, and meetings stream live on MUB\'s site.',
-    records: [['MUB board meeting page', 'https://mub.org/newsroom/mub-board-of-directors-meeting']],
+    meets: 'Board of Directors, Tuesdays at 5:30 p.m. (check MUB\'s page for the next date). Its last posted meeting was at 278 Greenbag Road, and meetings stream live on MUB\'s site.',
+    records: [['MUB board meeting page', 'https://www.mub.org/newsroom/mub-board-of-directors']],
     sources: [{ url: 'https://www.mub.org/', checked: day }, { url: 'https://www.morgantownwv.gov/263/Morgantown-Utility-Board-MUB', checked: day }, { url: 'https://www.morgantownwv.gov/210/Volunteer-Opportunities', checked: day }],
   },
   {
