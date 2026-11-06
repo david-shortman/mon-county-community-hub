@@ -69,13 +69,9 @@ entries:
     checked: 2026-10-31
 
   - name: St. Ursula Food Pantry and Outreach
-    kind: page
-    url: https://www.stmarystarcity.com/st--ursula
-    start: FOOD PANTRY
-    end: St. Ursula Food Pantry is a member of
-    quote: The Food pantry is the first 3 Wednesdays of the month by appointment 1:00pm -4:30pm
-    checked: 2026-10-31
-    note: Catholic Charities says 1:30 to 4:00. The city page gives office hours.
+    kind: none
+    checked: 2026-11-06
+    note: The parish site (stmarystarcity.com) now sends the whole domain to 4lpi.com, the home page of LPi, a company that makes parish websites, as of the 2026-11-05 Source check. No new parish page found. On 2026-10-31 the old page said the first 3 Wednesdays of the month by appointment, 1:00pm to 4:30pm. Catholic Charities says 1:30 to 4:00. The city page gives office hours.
 
   - name: Salvation Army Morgantown (office and Sally's Kitchen)
     kind: page
