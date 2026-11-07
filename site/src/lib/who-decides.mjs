@@ -86,6 +86,22 @@ export const bodies = [
     records: [['Region VI site', 'https://regionvi.com/']],
     sources: [{ url: 'https://regionvi.com/', checked: day }],
   },
+  {
+    id: 'psc', name: 'Public Service Commission of West Virginia (PSC)',
+    does: 'Writes the state rules for electric and gas companies, including the shutoff protections on our utility bills page (rules 150CSR3 and 150CSR4).',
+    chosen: 'Three commissioners appointed by the Governor with the consent of the state Senate, for six-year terms. No more than two can belong to the same political party (state law).',
+    meets: 'The PSC\'s own website refused our reads, so its meeting times are not listed here.',
+    records: [['PSC rule for electric utilities (150CSR3)', 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50441&Format=WORD&KeyWord='], ['PSC rule for gas utilities (150CSR4)', 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50440&Format=WORD&KeyWord=']],
+    sources: [{ url: 'https://code.wvlegislature.gov/24-1-3/', checked: '2026-11-07' }, { url: 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50441&Format=WORD&KeyWord=', checked: '2026-11-02' }, { url: 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50440&Format=WORD&KeyWord=', checked: '2026-11-02' }],
+  },
+  {
+    id: 'housing-authority', name: 'Fairmont-Morgantown Housing Authority board',
+    does: 'Its commissioners run the business of the Fairmont-Morgantown Housing Authority, which runs public housing in Fairmont and Section 8 Housing Choice Vouchers. Under state law they adopt its bylaws and rules and hire its staff.',
+    chosen: 'Five members with five year terms: two named by Fairmont, two named by Morgantown, and one resident of public housing or the voucher program.',
+    meets: 'The authority\'s site does not list board meetings. Call the authority to ask.',
+    records: [['The authority\'s board page', 'https://fmhousing.com/about_the_fmha/our_board.php']],
+    sources: [{ url: 'https://code.wvlegislature.gov/16-15-5/', checked: '2026-11-04' }, { url: 'https://fmhousing.com/about_the_fmha/index.php', checked: '2026-11-04' }, { url: 'https://www.fairmontwv.gov/341/Fairmont-Morgantown-Housing-Authority', checked: '2026-11-04' }],
+  },
 ];
 
 export const body = (id) => bodies.find((b) => b.id === id);

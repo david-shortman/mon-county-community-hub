@@ -6,6 +6,7 @@
 // Morgantown number for checking registration, rental rules and complaints in
 // Westover, Granville and outside town limits, and rent increases.
 import Base from '../layouts/Base.astro';
+import WhoSetsRules from '../components/WhoSetsRules.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Icon from '../components/Icon.astro';
@@ -153,6 +154,8 @@ const court = [['55-3A-1', '§55-3A-1'], ['55-3A-3', '§55-3A-3'], ['37-6-23', '
   <p>Legal Aid of West Virginia gives free help to renters with low income. WVU students can use Student Legal Services (see above).</p>
   {r('legal-aid-wv-eviction-help') && <ResourceCard r={r('legal-aid-wv-eviction-help')} showCost />}
   <p>Behind on rent? See <a href={`${base}/money/?pick=rent`}>help with rent</a>. No place to stay tonight? See <a href={`${base}/stay-tonight/`}>Where to stay tonight</a>.</p>
+
+  <WhoSetsRules need="housing-costs" />
 
   <p class="meta">Sources checked October 30, 2026. Laws and office details change, so check the linked page. Something wrong or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
