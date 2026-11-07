@@ -90,7 +90,7 @@ export const bodies = [
     id: 'psc', name: 'Public Service Commission of West Virginia (PSC)',
     does: 'Writes the state rules for electric and gas companies, including the shutoff protections on our utility bills page (rules 150CSR3 and 150CSR4).',
     chosen: 'Three commissioners appointed by the Governor with the consent of the state Senate, for six-year terms. No more than two can belong to the same political party (state law).',
-    meets: 'The PSC\'s own website refused our reads, so its meeting times are not listed here.',
+    meets: 'Not listed here. See the PSC\'s website, psc.state.wv.us.',
     records: [['PSC rule for electric utilities (150CSR3)', 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50441&Format=WORD&KeyWord='], ['PSC rule for gas utilities (150CSR4)', 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50440&Format=WORD&KeyWord=']],
     sources: [{ url: 'https://code.wvlegislature.gov/24-1-3/', checked: '2026-11-07' }, { url: 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50441&Format=WORD&KeyWord=', checked: '2026-11-02' }, { url: 'https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50440&Format=WORD&KeyWord=', checked: '2026-11-02' }],
   },
