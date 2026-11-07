@@ -5,6 +5,7 @@ This is the runbook for noticing problems with the site and the pipeline, and fo
 - **Health check:** [`site/scripts/health.mjs`](../../site/scripts/health.mjs). Run it with `npm run health` in `site/`.
 - **Latest status:** [`status.md`](status.md).
 - **Incidents:** [`incidents/`](incidents/), one file per incident, from [the template](incidents/TEMPLATE.md).
+- **Scheduled jobs and the automations dashboard:** [`automations.md`](automations.md).
 
 ## Running the check
 
