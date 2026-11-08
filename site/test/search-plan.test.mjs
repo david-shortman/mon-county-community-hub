@@ -2,7 +2,7 @@
 // test runs the module. Both must give the same answer.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { words, plain, fixedText, later, find, inlineSource } from '../src/lib/search-plan.mjs';
+import { words, plain, fixedText, later, alsoHit, find, inlineSource } from '../src/lib/search-plan.mjs';
 
 // A tiny fake Pagefind: each page has some words.
 const PAGES = [
@@ -24,6 +24,10 @@ test('words, spelling and filler', () => {
   assert.equal(fixedText('food'), '');
   assert.equal(plain('detox near me in Morgantown'), 'treatment');
   assert.equal(plain("I can't afford groceries"), 'afford food');
+  // Small words in a full question are filler (#1676), but "will" is not ("living will").
+  assert.equal(plain('I need a dentist but have no insurance'), 'dentist no insurance');
+  assert.equal(plain('is there lead in my old house'), 'lead old house');
+  assert.equal(plain('living will'), 'living will');
   // Names on Object's prototype are not spelling fixes.
   assert.deepEqual(words('constructor toString'), ['constructor', 'tostring']);
 });
@@ -51,4 +55,13 @@ test('the page copy gives the same answers as the module', async () => {
     assert.deepEqual(await SearchPlan.find(pf, q), await find(pf, q), q);
     assert.equal(SearchPlan.plain(q), plain(q));
   }
+});
+
+test('a page whose Also called words match the search goes first (#1676)', () => {
+  const food = { url: '/help/food/', meta: { title: 'Food help', also: 'hungry, free food' } };
+  assert.equal(alsoHit(food, 'free food'), true);
+  assert.equal(alsoHit(food, 'Free Food near me'), true);
+  assert.equal(alsoHit(food, 'free'), false);
+  assert.equal(alsoHit(food, 'food'), false);
+  assert.equal(alsoHit({ url: '/x/', meta: { title: 'X' } }, 'free food'), false);
 });

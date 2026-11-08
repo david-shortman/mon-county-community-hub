@@ -26,6 +26,7 @@ export function ruleSetters(needSlug) {
       decides: d.decides,
       meets: b.meets,
       openSeats: board?.open_seats > 0 ? board.open_seats : 0,
+      board: board?.slug ?? null,
       // The decides line's own sources, then /who-decides/'s (for when it
       // meets), then the board file's (for open seats), each URL once.
       sources: onceEach([...d.sources, ...(b.sources ?? []), ...(board?.open_seats > 0 ? board.sources ?? [] : [])]),

@@ -1,0 +1,7 @@
+slug: debit-card-limit
+text: "**Debit and ATM cards:** nothing if you report before it is used; up to **$50** if you report within 2 business days of finding out; up to **$500** within 2 to 60 days; possibly unlimited after 60 days from your statement."
+quote: "Electronic Fund Transfer Act ... within 2 business days ... $50 ... 2 to 60 calendar days ... $500 ... more than 60 days after the statement date: unlimited"
+sources:
+  - url: https://ago.wv.gov/consumer-protection/identity-theft-protection-prevention
+    checked: 2026-11-06
+recheck_days: 365

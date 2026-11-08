@@ -6,6 +6,8 @@ import { OTHER_LOCALES, localeOfPath } from '../src/lib/i18n.mjs';
 
 const dist = new URL('../dist/', import.meta.url).pathname;
 const errors = [];
+// Titles search results cut off (#939). A note, never an error.
+const longTitles = [];
 const seenTitles = new Map();
 const noindexed = new Set();
 // Residents search with the place name ("shelter Morgantown WV"), so guide titles carry it (#143).
@@ -67,6 +69,8 @@ for (const file of pages) {
   const h1s = (html.match(/<h1[\s>]/g) ?? []).length;
   if (h1s !== 1) errors.push(`${where}: needs exactly one <h1>, found ${h1s}`);
   if (/—/.test(`${title} ${desc}`)) errors.push(`${where}: title or description has an em dash`);
+  const shown = (title ?? '').replace(/&amp;/g, '&').replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"');
+  if (shown.length > 70 && !/noindex/.test(html.slice(0, 3000))) longTitles.push([where, shown.length]);
   // A missing field (for example a hidden record a page reads directly, #519)
   // must never ship as "undefined" or an empty call link.
   const body = html.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<[^>]+>/g, ' ');
@@ -116,3 +120,7 @@ if (errors.length) {
   process.exit(1);
 }
 console.log(`Page checks passed for ${pages.length} pages.`);
+if (longTitles.length) {
+  const top = longTitles.sort((x, y) => y[1] - x[1]).slice(0, 5).map(([w, n]) => `${w} (${n})`).join(', ');
+  console.log(`Note: ${longTitles.length} page titles are over 70 characters, so search results cut them off (#939). Longest: ${top}.`);
+}

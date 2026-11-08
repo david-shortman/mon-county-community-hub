@@ -5,14 +5,19 @@
 // for starting a business (#639), towns (#640) and selling food (#642) come
 // in their own PRs because they state fees and taxes (David reviews).
 // Not here yet: SCORE and WVU LaunchLab (their pages could not be read, see #638).
+// The state funding list is fact records in content/facts/business/ (#122),
+// re-read 2026-11-07.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
-import { resource, org, telHref } from '../lib/content.mjs';
+import { resource, org } from '../lib/content.mjs';
+import Fact from '../components/Fact.astro';
+import { factsFor } from '../lib/facts.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "work", label: "Start or grow a business", summary: "Free business coaching and classes, state loan and investment programs, help with a business plan, and local business groups" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const r = (slug) => resource(slug);
+const fact = factsFor('business');
 const mainStreet = org('main-street-morgantown');
 const partnership = org('morgantown-area-partnership');
 ---
@@ -35,14 +40,13 @@ const partnership = org('morgantown-area-partnership');
   <h2 id="money">State loans, investment and grant help</h2>
   <p>The West Virginia Secretary of State keeps a list of programs that offer money or funding help to businesses. Some of them, as that list describes them:</p>
   <ul>
-    <li><strong>WV Capital Access Program (WVCAP):</strong> for creditworthy small businesses of any size or age. It has three funds: seed capital, subordinated debt and collateral support. Generally $10,000 to $2 million per business. Email WVCAP@wv.gov, or see <a href="https://wvjit.wv.gov/wvcap/">its page</a>.</li>
-    <li><strong>WV Jobs Investment Trust:</strong> investment (such as buying stock) in small West Virginia companies that want to grow. Generally $100,000 to $2 million. Email WVJITInfo@wv.gov.</li>
-    <li><strong>WV Economic Development Authority:</strong> loans and financing for manufacturing, industrial, distribution, warehouse and destination businesses. $50,000 to $15 million, depending on the project. <a href={telHref('304-558-3651')}>304-558-3651</a>.</li>
-    <li><strong>WV Grant Resource Center:</strong> free help writing grant applications, for businesses, local governments and others working on jobs, workforce, community or outdoor recreation projects. It has an office in Morgantown at 83 Beechurst Avenue. <a href={telHref('304-293-6444')}>304-293-6444</a>.</li>
-    <li><strong>County economic development:</strong> for Monongalia County, the state lists the Morgantown Area Partnership, <a href={telHref('304-292-3311')}>304-292-3311</a>. The state says county economic development groups may offer matching grants and other programs.</li>
+    <Fact tag="li" f={fact('funding-wvcap')} about="the WV Capital Access Program" />
+    <Fact tag="li" f={fact('funding-wvjit')} about="the WV Jobs Investment Trust" />
+    <Fact tag="li" f={fact('funding-wveda')} about="the WV Economic Development Authority" />
+    <Fact tag="li" f={fact('funding-grant-center')} about="the WV Grant Resource Center" />
+    <Fact tag="li" f={fact('funding-county-eda')} about="county economic development groups" />
   </ul>
   <p><a class="btn" href="https://sos.wv.gov/business/general-information/funding-grant-resources"><span>The state's full funding list</span></a></p>
-  <SourceLine sources={[{ url: 'https://sos.wv.gov/business/general-information/funding-grant-resources', checked: '2026-11-02' }]} org="wv-secretary-of-state" about="State loans, investment and grant help" />
 
   <h2>Help writing a business plan</h2>
   {r('wv-sos-business-plan-assistance') && <ResourceCard r={r('wv-sos-business-plan-assistance')} />}
@@ -65,5 +69,5 @@ const partnership = org('morgantown-area-partnership');
   <p>Building, adding on or changing a space? See <a href={`${base}/permits/`}>Do I need a building permit?</a> for who issues permits in the city and the county.</p>
   <p>Looking for a job or training for yourself? See <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these programs and groups; we do not endorse them or any business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Each part shows the date we last checked its source. We describe these programs and groups; we do not endorse them or any business. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
