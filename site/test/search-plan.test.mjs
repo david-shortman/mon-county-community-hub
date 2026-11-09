@@ -65,3 +65,10 @@ test('a page whose Also called words match the search goes first (#1676)', () =>
   assert.equal(alsoHit(food, 'food'), false);
   assert.equal(alsoHit({ url: '/x/', meta: { title: 'X' } }, 'free food'), false);
 });
+
+test('a longer Also called entry matches when every topic word was typed (#1676)', () => {
+  const lead = { url: '/lead/', meta: { title: 'Lead', also: 'lead paint, lead in an old house' } };
+  assert.equal(alsoHit(lead, 'is there lead in my old house'), true);
+  assert.equal(alsoHit(lead, 'old house'), false);
+  assert.equal(alsoHit(lead, 'lead house'), false);
+});

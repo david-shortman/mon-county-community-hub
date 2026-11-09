@@ -165,14 +165,20 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
   // True when the page's "Also called" words (the `also` meta, #1676) have
   // an entry that is exactly the topic words typed, in the reader's words or
   // in our pages' words. "free food" puts /help/food/ first.
+  // A longer entry also counts when every one of its topic words was typed,
+  // so "is there lead in my old house" matches "lead in an old house".
   function alsoHit(d, q) {
     var also = String((d.meta && d.meta.also) || '').toLowerCase();
     if (!also) return false;
     var mine = words(q).filter(function (w) { return FILLER.indexOf(w) < 0; }).join(' ');
     var ours = plain(q);
+    var typed = (mine + ' ' + ours).split(' ');
     return also.split(',').some(function (e) {
       var entry = raw(e).join(' ');
-      return entry && (entry === mine || entry === ours);
+      if (!entry) return false;
+      if (entry === mine || entry === ours) return true;
+      var topic = raw(e).filter(function (w) { return FILLER.indexOf(w) < 0; });
+      return topic.length >= 3 && topic.every(function (w) { return typed.indexOf(w) >= 0; });
     });
   }
   // Search with a loaded Pagefind module. Resolves to { items, some, fixed, crisis }:
