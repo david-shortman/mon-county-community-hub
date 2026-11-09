@@ -135,6 +135,9 @@ addresses:
   1847 Fitness Way, Morgantown, WV:
     result: no match
     checked: '2026-11-02'
+  185 Garrett St, Morgantown, WV 26501:
+    result: no match
+    checked: '2026-11-09'
   1954 Hunter's Way, Morgantown, WV 26505:
     county: Monongalia County
     place: Morgantown city
@@ -270,6 +273,9 @@ addresses:
     place: Westover city
     matched: 28 COMMERCE DR, WESTOVER, WV, 26501
     checked: '2026-11-02'
+  28 Sable Lane, Core, WV 26541:
+    result: no match
+    checked: '2026-11-09'
   2805 White Hall Blvd, White Hall, WV 26554:
     result: no match
     checked: '2026-11-02'
@@ -313,6 +319,16 @@ addresses:
     place: Morgantown city
     matched: 327 HIGH ST, MORGANTOWN, WV, 26505
     checked: '2026-11-02'
+  327 Medical Park Dr, Bridgeport, WV 26330:
+    county: Harrison County
+    place: Bridgeport city
+    matched: 327 MEDICAL PARK DR, BRIDGEPORT, WV, 26330
+    checked: '2026-11-09'
+  34 Commerce Drive, Suite 101, Morgantown, WV 26501:
+    county: Monongalia County
+    place: Westover city
+    matched: 34 COMMERCE DR, MORGANTOWN, WV, 26501
+    checked: '2026-11-09'
   34 Olin St, Industrial Park, Monongalia County, WV:
     result: no match
     checked: '2026-11-02'
@@ -321,6 +337,11 @@ addresses:
     place: county, outside any town or named place
     matched: 3414 JAKES RUN RD, RIVESVILLE, WV, 26588
     checked: '2026-11-02'
+  3433 University Ave, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Star City town
+    matched: 3433 UNIVERSITY AVE, MORGANTOWN, WV, 26505
+    checked: '2026-11-09'
   3438 University Ave, Morgantown, WV:
     county: Monongalia County
     place: Star City town
@@ -504,6 +525,11 @@ addresses:
     place: Morgantown city
     matched: 705 E BROCKWAY AVE, MORGANTOWN, WV, 26501
     checked: '2026-11-02'
+  709 Beechurst Ave., Ste. 1A, Morgantown, WV 26505:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 709 BEECHURST AVE, MORGANTOWN, WV, 26505
+    checked: '2026-11-09'
   7093 Mall Rd, Westover, WV:
     county: Monongalia County
     place: Westover city
@@ -580,6 +606,9 @@ addresses:
     place: county, outside any town or named place
     matched: 2005 GRAFTON RD, MORGANTOWN, WV, 26508
     checked: '2026-11-02'
+  Evansdale Crossing, 3rd Floor, 62 Morrill Way, Morgantown, WV 26505:
+    result: no match
+    checked: '2026-11-09'
   Hazel Ruby McQuain Park, 185 Garrett St, Morgantown, WV 26501:
     result: no match
     checked: '2026-11-02'

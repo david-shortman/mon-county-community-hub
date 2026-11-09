@@ -20,3 +20,5 @@
   - the content gaps in part 4
 - **Scoreboard:** site search test, question kind: 87.8% to 95.1%. Check again at the Sunday findability run (November 8).
 - **Also:** re-read the city's vacancy list (it answered today). MUB, the Transit Authority and the Housing Authority board each still show 1 open seat, so their cards now say checked November 5 (#1732).
+
+Checked 2026-11-08: question kind is now 100% (41 of 41) in the top 3, and 97.6% for all 289 queries. [Run](../../content/findability/search-runs/2026-11-08-2349.json).
