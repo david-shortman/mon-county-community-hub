@@ -15,3 +15,5 @@
   - "city council" and "county commission" (the agenda pages rank above Have your say)
   - the content gaps in part 4: AA meetings, stolen SNAP benefits, DMV hours, bulk trash
 - **Scoreboard:** site search test, 96.9% (top 3). Check again at the Sunday findability run (November 8).
+
+Checked 2026-11-08: 97.6% in the top 3 (was 96.9%), no zero-result queries. [Run](../../content/findability/search-runs/2026-11-08-2349.json).
