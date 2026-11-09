@@ -1,0 +1,8 @@
+slug: full-infractions
+text: "You must have no infractions for 1 year. Headlamp and improper backing violations do not count."
+quote: "Must be infraction free for 1 year (excludes headlamp violation and improper backing violation)"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

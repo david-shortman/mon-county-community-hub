@@ -1,21 +1,35 @@
 ---
 // Learner's permit to full license (#594, part of #273): West Virginia's
 // graduated driver licensing in three levels, from the DMV's GDL page, and
-// the Morgantown DMV office. Every rule here is on the DMV page read
-// October 30, 2026 and again November 1, 2026 (Route steps, #240):
-// https://dmv.wv.gov/graduated-drivers-licensing-gdl
+// the Morgantown DMV office. Each rule is a fact record in
+// content/facts/teen-drivers/ (#122) with the DMV page's own words, re-read
+// November 9, 2026: https://dmv.wv.gov/graduated-drivers-licensing-gdl
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
 import Route from '../components/Route.astro';
 import Milepost from '../components/Milepost.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
+import { factsFor, factHtml, isDue } from '../lib/facts.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "Teen drivers: permit to full license", summary: "West Virginia's three steps for drivers under 18: ages, hours, passenger and night limits, and fees" };
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const gdl = 'https://dmv.wv.gov/graduated-drivers-licensing-gdl';
+const fact = factsFor('teen-drivers');
+// Each step: its rules in order, and one source line built from their records
+// (every source once, newest date; "may be out of date" when any is due).
+const step = (...slugs) => {
+  const m = new Map();
+  for (const x of slugs.flatMap((sl) => fact(sl).sources)) if (!m.has(x.url) || x.checked > m.get(x.url).checked) m.set(x.url, x);
+  return { items: slugs.map((sl) => factHtml(fact(sl).text, base)), sources: [...m.values()], stale: slugs.some((sl) => isDue(fact(sl))) };
+};
+const permit = step('permit-age', 'permit-parent', 'permit-test-fee', 'permit-supervisor', 'permit-hours', 'permit-passengers', 'belts-alcohol', 'no-phone', 'permit-ends');
+const intermediate = step('intermediate-eligible', 'intermediate-practice', 'intermediate-test-fee', 'intermediate-hours', 'intermediate-passengers', 'belts-alcohol', 'no-phone', 'intermediate-two-violations', 'intermediate-ends');
+const full = step('full-eligible', 'full-infractions', 'full-fee', 'full-points', 'belts-alcohol');
+const tools = step('parent-tools');
 ---
 <Base title="Teen drivers in Mon County: learner's permit to full license" description="West Virginia's three license levels for teens: a permit at 15, an intermediate license at 16, a full license at 17, with limits, fees and the Morgantown DMV.">
   <h1>Teen drivers: permit to full license</h1>
@@ -24,15 +38,9 @@ const gdl = 'https://dmv.wv.gov/graduated-drivers-licensing-gdl';
   <Route label="Steps to a full license for drivers under 18">
   <Milepost n={1} title="Instruction permit" when="Age 15" id="permit" open>
   <ul>
-    <li>You must be at least 15 and under 18.</li>
-    <li>A parent with custody or a legal guardian must sign your application before you take the test.</li>
-    <li>You take a knowledge test. The fee is $7.50 for each try.</li>
-    <li>A licensed driver 21 or older must sit in the front seat with you.</li>
-    <li>You may drive only between 5 a.m. and 10 p.m.</li>
-    <li>You may have no more than two passengers who are not family, plus the supervising adult.</li>
-    <li>No phone use or texting while driving. Police can stop you for it.</li>
-    <li>The permit cannot be renewed. It ends on your 18th birthday, with a 30-day grace period.</li>
+    {permit.items.map((h) => <li set:html={h} />)}
   </ul>
+  <SourceLine sources={permit.sources} about="the instruction permit rules" stale={permit.stale} />
   <div class="actions">
     <a class="btn" href={gdl}><Icon name="open" /><span>DMV teen license rules</span></a>
   </div>
@@ -40,14 +48,9 @@ const gdl = 'https://dmv.wv.gov/graduated-drivers-licensing-gdl';
 
   <Milepost n={2} title="Intermediate license" when="Age 16" id="intermediate">
   <ul>
-    <li>You must be at least 16, have held your permit for 6 months, and have no tickets or other infractions in the 6 months before you apply.</li>
-    <li>You need a form showing 50 hours of practice driving, with 10 of them at night. A parent or legal guardian signs it, or you can use a Driver Education Card.</li>
-    <li>You take a road skills test. The fee is $7.50.</li>
-    <li>You may drive alone between 5 a.m. and 10 p.m. From 10 p.m. to 5 a.m., a supervising adult must be with you, unless you are going to or from work, a school activity, a religious activity, or an emergency.</li>
-    <li>For the first 6 months: no passengers under 20 who are not family. For the next 6 months: no more than one.</li>
-    <li>No phone use or texting while driving.</li>
-    <li>Two violations on this license mean you lose it until your 18th birthday.</li>
+    {intermediate.items.map((h) => <li set:html={h} />)}
   </ul>
+  <SourceLine sources={intermediate.sources} about="the intermediate license rules" stale={intermediate.stale} />
   <div class="actions">
     <a class="btn" href={gdl}><Icon name="open" /><span>DMV teen license rules</span></a>
   </div>
@@ -55,22 +58,21 @@ const gdl = 'https://dmv.wv.gov/graduated-drivers-licensing-gdl';
 
   <Milepost n={3} title="Full license" when="Age 17" id="full">
   <ul>
-    <li>You must be at least 17 and have had your intermediate license for at least 1 year.</li>
-    <li>You must have no infractions for 1 year. Headlamp and improper backing violations do not count.</li>
-    <li>The fee is $5 for each year until your 21st birthday. The license runs out on your 21st birthday, with a 30-day grace period.</li>
+    {full.items.map((h) => <li set:html={h} />)}
   </ul>
+  <SourceLine sources={full.sources} about="the full license rules" stale={full.stale} />
   <div class="actions">
     <a class="btn" href="#dmv"><Icon name="pin" /><span>The DMV office in Morgantown</span></a>
   </div>
   </Milepost>
   </Route>
 
-  <p>The DMV page also links a free practice driving guide for parents and the free RoadReady app for logging hours. See the <a href={gdl}>DMV's graduated driver licensing page</a> for the full rules and the program flyer.</p>
+  <p><Fragment set:html={tools.items[0]} /> See the <a href={gdl}>DMV's graduated driver licensing page</a> for the full rules and the program flyer.</p>
 
   <h2 id="dmv">The DMV office in Morgantown</h2>
   {r('wv-dmv-morgantown-office') && <ResourceCard r={r('wv-dmv-morgantown-office')} />}
 
   <p>More for families: <a href={`${base}/family/`}>Family and life changes</a>.</p>
 
-  <p class="meta">Rules from the <a href={gdl}>WV DMV graduated driver licensing page</a>, checked November 1, 2026. Rules and fees can change, so check the DMV page before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Rules from the <a href={gdl}>WV DMV graduated driver licensing page</a>. Rules and fees can change, so check the DMV page before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

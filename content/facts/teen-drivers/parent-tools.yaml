@@ -1,0 +1,8 @@
+slug: parent-tools
+text: "The DMV page links a supervised driving guide for parents and the free RoadReady app for logging practice hours."
+quote: "Download the digital curriculum for supervised driving. And, download the free app from your phone's App Store by searching RoadReady. The RoadReady app logs and manages hours spent behind the wheel"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

@@ -1,0 +1,8 @@
+slug: full-fee
+text: "The fee is $5 for each year until your 21st birthday. The license runs out on your 21st birthday, with a 30-day grace period."
+quote: "Full Class E License Fee ... $5.00 for each year until 21st birthday ... Expiration Date: 21st birthday with 30 day grace period"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

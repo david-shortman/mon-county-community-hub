@@ -1,0 +1,8 @@
+slug: intermediate-passengers
+text: "For the first 6 months: no passengers under 20 who are not family. For the next 6 months: no more than one."
+quote: "May not operate a motor vehicle during his or her first six months of Level II status with any (0) non-family member passengers under the age of 20. May not operate a motor vehicle with more than one (1) non-family member under the age of 20 as a passenger during the second six months of Level II"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

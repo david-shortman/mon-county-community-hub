@@ -1,0 +1,8 @@
+slug: permit-hours
+text: "You may drive only between 5 a.m. and 10 p.m."
+quote: "May only drive between the hours of 5:00 am and 10:00 pm"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

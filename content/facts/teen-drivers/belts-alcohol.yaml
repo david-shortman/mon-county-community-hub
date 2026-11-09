@@ -1,0 +1,8 @@
+slug: belts-alcohol
+text: "Everyone in the car must wear a seat belt. You may not have any alcohol at all."
+quote: "All occupants must use safety belts in accordance with state law ... Zero alcohol tolerance"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

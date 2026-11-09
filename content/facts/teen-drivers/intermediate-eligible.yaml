@@ -1,0 +1,8 @@
+slug: intermediate-eligible
+text: "You must be at least 16, have held your permit for 6 months, and have no tickets or other infractions in the 6 months before you apply."
+quote: "Be at least 16 years of age ... Held a Level I permit for six (6) months ... Must be infraction free for six (6) months immediately preceding date of application for Level II"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

@@ -1,0 +1,8 @@
+slug: intermediate-practice
+text: "You need a form showing 50 hours of practice driving, with 10 of them at night. A parent or legal guardian signs it, or you can use a Driver Education Card."
+quote: "Must have 50 hour certification form completed, with 10 of the hours being at night, and certified by parent or legal guardian or Driver Education Card"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

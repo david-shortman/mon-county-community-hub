@@ -1,0 +1,8 @@
+slug: full-eligible
+text: "You must be at least 17 and have had your intermediate license for at least 1 year."
+quote: "Must have at least 1 year with Level II ... Must be at least 17 years of age"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180
