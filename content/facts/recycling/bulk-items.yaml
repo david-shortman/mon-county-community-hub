@@ -1,0 +1,10 @@
+slug: bulk-items
+text: "In Westover, call City Hall for a special bulk pickup of big items like furniture. We could not find an official page that says how bulk pickup works in Morgantown, Star City or the rest of the county. Ask the company or town that picks up your trash, or the Solid Waste Authority."
+quote: "Garbage services are provided by the City of Westover and billed on your water bill from Morgantown Utility Board (MUB). Special bulk pickups are available by contacting City Hall at 304-296-6860."
+phone: "304-296-6860"
+phone_label: Westover City Hall
+sources:
+  - url: https://www.westoverwv.org/utilities
+    checked: 2026-11-09
+    name: City of Westover, Utilities
+recheck_days: 180
