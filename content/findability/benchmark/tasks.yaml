@@ -112,7 +112,7 @@ needs:
       - name: ours
         kind: ours
         url: https://everythingmorgantown.org/no-insurance/
-        answer_text: With low income and no insurance, start with Milan Puskar Health Right
+        answer_text: Low income and no insurance? Start with Milan Puskar Health Right
       - <<: *guide
         answer_text: Milan Puskar Health Right 304-292-8234
       - <<: *city
