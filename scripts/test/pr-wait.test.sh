@@ -3,7 +3,7 @@
 # Run: bash scripts/test/pr-wait.test.sh   (needs jq and git; no network)
 # Each case scripts what GitHub answers, call by call, and checks the exit
 # code and output. Covers a head commit that moves mid-wait, runs cancelled by
-# a newer push (superseded), and the safe-merge refusals.
+# a newer push (superseded), the safe-merge refusals, and the review gate.
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 TMP="$(mktemp -d)"
@@ -53,6 +53,8 @@ checks() { # name|status|conclusion ...
 }
 site_run() { printf '{"workflow_runs":[{"name":"Site","status":"%s","conclusion":"%s","html_url":"u"}]}' "$1" "$2"; }
 hs_run() { printf '{"workflow_runs":[{"name":"High stakes","status":"%s","conclusion":"%s"}]}' "$1" "$2"; }
+rv_run() { printf '{"workflow_runs":[{"name":"Claude review","status":"%s","conclusion":"%s"}]}' "$1" "$2"; }
+files() { local out="" f; for f in "$@"; do out+="{\"filename\":\"$f\"},"; done; printf '[%s]' "${out%,}"; }
 
 pass=0; fail=0; CASE_DIR=""
 new_case() { CASE_DIR="$TMP/case$((pass + fail))"; mkdir -p "$CASE_DIR"; export FAKE="$CASE_DIR"; cd "$TMP"; }
@@ -153,21 +155,51 @@ new_case
 answer pulls/7 '{"state":"open","merged":false,"head":{"sha":"aaa"}}' '{"state":"open","merged":false,"head":{"sha":"bbb"}}'
 answer issues/7/labels '[]'
 answer "actions/workflows/high-stakes.yml/runs?head_sha=aaa&per_page=10" "$(hs_run completed success)"
+answer "pulls/7/files?per_page=100" "$(files docs/x.md)"
 expect "safe-merge refuses when the head moves" 4 "a new commit (bbb)" -- "$HERE/safe-merge.sh" 7
 
 new_case
 answer pulls/7 '{"state":"open","merged":false,"head":{"sha":"aaa"}}'
 answer issues/7/labels '[]' '[{"name":"for:david"}]'
 answer "actions/workflows/high-stakes.yml/runs?head_sha=aaa&per_page=10" "$(hs_run completed success)"
+answer "pulls/7/files?per_page=100" "$(files docs/x.md)"
 expect "safe-merge re-reads the label right before merging" 4 "labeled for:david" -- "$HERE/safe-merge.sh" 7
 
 new_case
 answer pulls/7 '{"state":"open","merged":false,"head":{"sha":"aaa"}}'
 answer issues/7/labels '[]'
 answer "actions/workflows/high-stakes.yml/runs?head_sha=aaa&per_page=10" "$(hs_run completed success)"
+answer "pulls/7/files?per_page=100" "$(files docs/x.md)"
 answer pulls/7/merge '{"sha":"m9","merged":true}'
 answer "actions/runs?branch=main&head_sha=m9" "$(site_run completed success)"
-expect "safe-merge merges, then checks that merge's build" 0 "main m9: Site build passed" -- "$HERE/safe-merge.sh" 7
+expect "safe-merge merges a docs-only PR without waiting for the review" 0 "main m9: Site build passed" -- "$HERE/safe-merge.sh" 7
+
+# 7. The review gate (#1763): a PR that changes site/ or content/ needs a green
+#    Claude review on its head commit.
+gate_case() { # <files json> <review runs json or FAIL>
+  new_case
+  answer pulls/7 '{"state":"open","merged":false,"head":{"sha":"aaa"}}'
+  answer issues/7/labels '[]'
+  answer "actions/workflows/high-stakes.yml/runs?head_sha=aaa&per_page=10" "$(hs_run completed success)"
+  answer "pulls/7/files?per_page=100" "$1"
+  answer "actions/workflows/claude-review.yml/runs?head_sha=aaa&per_page=10" "$2"
+  answer pulls/7/merge '{"sha":"m9","merged":true}'
+  answer "actions/runs?branch=main&head_sha=m9" "$(site_run completed success)"
+}
+gate_case "$(files docs/a.md site/src/pages/x.astro)" "$(rv_run in_progress null)"
+expect "safe-merge refuses a site PR while the review runs" 4 "Claude review for aaa is still running" -- "$HERE/safe-merge.sh" 7
+gate_case "$(files content/facts/x/y.yaml)" '{"workflow_runs":[]}'
+expect "safe-merge refuses a content PR with no review" 4 "has not started" -- "$HERE/safe-merge.sh" 7
+gate_case "$(files site/a.mjs)" "$(rv_run completed failure)"
+expect "safe-merge refuses a red review" 4 "found blockers" -- "$HERE/safe-merge.sh" 7
+gate_case "$(files site/a.mjs)" "$(rv_run completed cancelled)"
+expect "safe-merge refuses a review that did not finish" 4 "ended 'cancelled'" -- "$HERE/safe-merge.sh" 7
+gate_case FAIL "$(rv_run completed success)"
+expect "safe-merge refuses when it cannot list the files" 4 "could not list the changed files" -- "$HERE/safe-merge.sh" 7
+gate_case "$(files docs/a.md my-site/b.md)" FAIL
+expect "safe-merge does not ask for a review on paths that only look like site/" 0 "main m9: Site build passed" -- "$HERE/safe-merge.sh" 7
+gate_case "$(files site/src/pages/x.astro)" "$(rv_run completed success)"
+expect "safe-merge merges a site PR once its review is green" 0 "main m9: Site build passed" -- "$HERE/safe-merge.sh" 7
 
 echo "# pass $pass, fail $fail"
 [ "$fail" = 0 ]

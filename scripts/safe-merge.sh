@@ -3,13 +3,17 @@
 # Usage: scripts/safe-merge.sh <pr-number>
 # Exit codes: 0 merged and main checked (pr-wait.sh main's result), 4 refused
 #             (labeled for:david, High stakes check not finished or not green,
-#             PR closed), 5 GitHub refused the merge.
+#             Claude review not finished or not green on a site/ or content/
+#             PR, PR closed), 5 GitHub refused the merge.
 # Why: the High stakes check adds the for:david label a minute or two after a
 # PR opens or gets a new commit. On 2026-10-31 three for:david PRs (#712, #787,
 # #906) were merged with a raw `gh api ... /merge` before or without looking at
 # the label. This script waits for that check on the PR's current head commit
 # and re-reads the labels right before merging. See
 # docs/operations/merge-conflicts.md.
+# A PR that changes site/ or content/ also waits for the "Claude review" check
+# on the same commit and is refused when it is red or missing (review gate in
+# docs/process/pipeline.md, section 5; #1763).
 set -uo pipefail
 PR="${1:?usage: scripts/safe-merge.sh <pr-number>}"
 REPO="${PR_WAIT_REPO:-repos/david-shortman/mon-county-community-hub}"
@@ -32,6 +36,20 @@ case "$hs" in
   completed*) refuse "the High stakes check for ${sha:0:7} ended '${hs#*|}', so the for:david label may be missing. Re-run it, then try again." ;;
   *) refuse "the High stakes check for ${sha:0:7} is still running (${hs%%|*}). Wait with scripts/pr-wait.sh $PR, then try again." ;;
 esac
+
+# The review gate: only PRs that change what residents see. If the file list
+# cannot be read, refuse rather than guess the PR needs no review.
+files=$(gh api --paginate "$REPO/pulls/$PR/files?per_page=100" --jq '.[].filename' 2>/dev/null) || refuse "could not list the changed files, so cannot tell if it needs the Claude review. Try again."
+if grep -qE '^(site|content)/' <<<"$files"; then
+  rv=$(gh api "$REPO/actions/workflows/claude-review.yml/runs?head_sha=$sha&per_page=10" --jq '[.workflow_runs[] | select(.name=="Claude review")][0] | "\(.status)|\(.conclusion)"' 2>/dev/null)
+  case "$rv" in
+    completed\|success) ;;
+    ""|null\|null) refuse "it changes site/ or content/, and the Claude review has not started for head commit ${sha:0:7}. Wait with scripts/pr-wait.sh $PR, then try again." ;;
+    completed\|failure) refuse "the Claude review for ${sha:0:7} found blockers. Fix them and push, or label the PR for:david if a blocker is wrong (docs/process/pipeline.md, section 5)." ;;
+    completed*) refuse "the Claude review for ${sha:0:7} ended '${rv#*|}'. Re-run it once; if it fails again, label the PR for:david." ;;
+    *) refuse "the Claude review for ${sha:0:7} is still running (${rv%%|*}). Wait with scripts/pr-wait.sh $PR, then try again." ;;
+  esac
+fi
 
 # The head must not have moved while we checked, and the label is read once more
 # right before the merge, since the label step runs at the end of that check.
