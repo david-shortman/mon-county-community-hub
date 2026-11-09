@@ -144,7 +144,7 @@ needs:
         kind: ours
         start: https://everythingmorgantown.org/money/
         url: https://everythingmorgantown.org/money/#rent
-        answer_text: facing eviction
+        answer_text: Legal Aid of West Virginia gives free legal help
       - <<: *guide
         answer_text: Legal Aid of West Virginia
       - <<: *city
