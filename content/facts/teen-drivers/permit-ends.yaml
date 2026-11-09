@@ -1,0 +1,8 @@
+slug: permit-ends
+text: "The permit cannot be renewed. It ends on your 18th birthday, with a 30-day grace period."
+quote: "This permit is not renewable. ... Expiration Date: 18th Birthday with 30 Day Grace Period"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

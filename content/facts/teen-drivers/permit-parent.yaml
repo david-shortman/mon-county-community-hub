@@ -1,0 +1,8 @@
+slug: permit-parent
+text: "A parent or legal guardian must sign your application before you take the test."
+quote: "If you are under the age of 18, a parent, single parent having custody, or legal guardian must sign your application before you can be tested."
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

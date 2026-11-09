@@ -1,0 +1,8 @@
+slug: no-phone
+text: "No phone use or texting while driving. Police can stop you for it."
+quote: "No cell phone usage/texting while operating a vehicle. You may be stopped by law enforcement as a primary offense."
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

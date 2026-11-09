@@ -1,0 +1,8 @@
+slug: intermediate-test-fee
+text: "You take a road skills test. The fee is $7.50."
+quote: "Intermediate Driver's License ... Fee $7.50 (road skill examination) ... Take a road skills test"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

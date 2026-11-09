@@ -1,0 +1,8 @@
+slug: permit-supervisor
+text: "A licensed driver 21 or older must sit in the front seat with you."
+quote: "Must have a licensed driver 21 or over in front seat"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

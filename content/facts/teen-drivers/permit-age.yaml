@@ -1,0 +1,8 @@
+slug: permit-age
+text: "You must be at least 15 and under 18."
+quote: "Be at least 15 years old and less than 18 years old"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180

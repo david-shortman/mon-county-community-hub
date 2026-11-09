@@ -1,0 +1,8 @@
+slug: permit-test-fee
+text: "You take a knowledge test. The fee is $7.50 for each try."
+quote: "Knowledge Test ... Fee $7.50 per attempt ... Take a knowledge test"
+sources:
+  - url: https://dmv.wv.gov/graduated-drivers-licensing-gdl
+    checked: 2026-11-09
+    name: WV DMV, Graduated Driver's Licensing (GDL)
+recheck_days: 180
