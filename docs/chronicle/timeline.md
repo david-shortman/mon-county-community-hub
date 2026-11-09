@@ -57,3 +57,16 @@ One line per notable event, oldest first. Times are UTC. Add new lines at the bo
 - Nov 1: Visit counter goes live; first totals due in December ([scoreboard](../scoreboard.md))
 - Nov 1: Design lab lets David preview several site looks ([#1392](https://github.com/david-shortman/mon-county-community-hub/pull/1392))
 - Nov 1: Week one dispatch: 667 PRs merged, 119 items waiting on David ([dispatch](2026-11-01-week.md))
+
+## 2026-11-02 to 2026-11-08
+
+- Nov 2: Architecture records accepted by David ([#1524](https://github.com/david-shortman/mon-county-community-hub/pull/1524))
+- Nov 2: Home calendar gets a year strip from frost to frost ([#1522](https://github.com/david-shortman/mon-county-community-hub/pull/1522))
+- Nov 3: Utility, bus and health board meetings join the calendar ([#1698](https://github.com/david-shortman/mon-county-community-hub/pull/1698))
+- Nov 3: 137 PRs merged, the busiest day of week two, as the last sprint waves ran ([snapshot](snapshots/2026-11-03/snapshot.json))
+- Nov 4: Blog section opens with index and post pages ([#1719](https://github.com/david-shortman/mon-county-community-hub/pull/1719))
+- Nov 4: Bus trip maps load on tap ([#1722](https://github.com/david-shortman/mon-county-community-hub/pull/1722))
+- Nov 5: Site search finds more full questions ([#1733](https://github.com/david-shortman/mon-county-community-hub/pull/1733))
+- Nov 7: Automations dashboard lists every scheduled job, waits for David ([#1753](https://github.com/david-shortman/mon-county-community-hub/pull/1753))
+- Nov 8: Weekly findability run: 76 on the original 32, 71 on all 65, 63 of 65 have an answer page ([scoreboard](../scoreboard.md))
+- Nov 8: Week two dispatch: 241 PRs merged, 124 items waiting on David ([dispatch](2026-11-08-week.md))
