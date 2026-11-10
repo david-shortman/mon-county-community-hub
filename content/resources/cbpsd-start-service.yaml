@@ -12,6 +12,11 @@ notes:
   - Renters may be asked for a copy of the lease.
   - Any past due amount in your name must be paid before new service starts.
 hours: Office, Monday to Thursday, 8 a.m. to 2 p.m., and Friday, 8 a.m. to noon. Drive-thru only.
+what_to_bring:
+  - "The completed, signed service application"
+  - "The required fees (call the office first to ask the amount)"
+  - "A copy of your driver's license or ID card"
+  - "If you rent, a copy of your lease, which may be required"
 contact:
   phone: "304-292-4003"
   url: https://cbpsdwater.com/new-service-request
@@ -20,6 +25,6 @@ contact:
 cost: The fees are not posted. Call the office to ask before you go.
 sources:
   - url: https://cbpsdwater.com/new-service-request
-    checked: 2026-11-02
+    checked: 2026-11-10
   - url: https://cbpsdwater.com/location
     checked: 2026-11-02

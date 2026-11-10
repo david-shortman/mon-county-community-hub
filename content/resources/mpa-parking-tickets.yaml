@@ -16,6 +16,9 @@ options:
   - A yellow and white ticket taped to a side window or mirror is from the Morgantown Police Department; call Municipal Court at 304-284-7497.
   - A white and blue ticket under the wiper is from WVU; call WVU parking at 304-293-5502.
 cost: The fine is on the ticket. Online card payments have a convenience fee. A boot adds a $45 fee.
+what_to_bring:
+  - "Your ticket, or its ticket number"
+  - "The license plate number of the car that got the ticket"
 contact:
   phone: "304-284-7435"
   url: https://www.parkmpa.com/faq/
@@ -29,6 +32,6 @@ opening_hours:
 get_in: walk-in
 sources:
   - url: https://www.parkmpa.com/faq/
-    checked: 2026-11-01
+    checked: 2026-11-10
   - url: https://www.parkmpa.com/parking-info/
     checked: 2026-11-01
