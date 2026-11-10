@@ -25,6 +25,7 @@ const fact = factsFor('recycling');
 // Item lookup (#199): "What do I do with this?" on the first screen. Each
 // answer repeats a fact sourced further down the page and links to it.
 const lookup = [
+  { item: 'Appliances: fridges, freezers, air conditioners', say: 'The transfer station takes them only after a licensed vendor removes the Freon and tags them.', href: '#fact-appliances' },
   { item: 'Bagged household trash', say: 'Free at the Mountaineer Transfer Station on the first Thursday of each month.', href: '#mountaineer-transfer-station' },
   { item: 'Batteries', say: 'Lithium, button and rechargeable batteries never go in the trash or bin. Take them to a recycler or a store that takes them back.', href: '#fact-batteries' },
   { item: 'Building materials', say: 'No reuse store in the county right now.', href: `${base}/sell-or-donate/#building` },
@@ -41,7 +42,9 @@ const lookup = [
   { item: 'Needles and syringes', say: 'Use a sharps container. Ask the Solid Waste Authority what to do when it is full.', href: '#medicines' },
   { item: 'Paper to shred', say: 'PACE Enterprises at Mylan Park.', href: '#drop-off' },
   { item: 'Plastic bags', say: 'Not at the county drop-off center. Bring recyclables in a box or bin.', href: '#drop-off' },
+  { item: 'Scrap metal and other appliances', say: 'We could not find a local official page. Ask the transfer station or the Solid Waste Authority.', href: '#fact-appliances' },
   { item: 'Tires', say: 'A state tire collection runs monthly, except December to February. The transfer station does not take them.', href: '#hard-items' },
+  { item: 'Yard waste and brush', say: 'No local drop-off found. A small county compost demonstration site is in Westover.', href: '#fact-yard-waste' },
 ];
 ---
 <Base title="Trash, recycling and drop-off in Morgantown, WV" description="Pickup days, what goes in the curbside bin, and where to take electronics, paint, tires and other hard items in Morgantown and Monongalia County.">
@@ -83,7 +86,9 @@ const lookup = [
     <Fact tag="li" f={fact('latex-paint')} about="paint" />
     <Fact tag="li" f={fact('batteries')} about="batteries"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
     <Fact tag="li" f={fact('motor-oil')} about="motor oil"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
+    <Fact tag="li" f={fact('appliances')} about="appliances"> The transfer station's number is <a href={telHref(mts.contact.phone)}>{mts.contact.phone}</a>. The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
     <Fact tag="li" f={fact('leaves')} about="leaves" />
+    <Fact tag="li" f={fact('yard-waste')} about="yard waste" />
     <Fact tag="li" f={fact('bulk-items')} about="bulk trash"> To donate or sell big items instead, see <a href={`${base}/sell-or-donate/`}>Sell, donate or give away your stuff</a>. The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
   </ul>
 
