@@ -1,0 +1,11 @@
+slug: appliances
+text: "**Fridges, freezers and air conditioners:** the Mountaineer Transfer Station does not take appliances that hold refrigerant unless a licensed vendor has removed the Freon and tagged the appliance. For other appliances and scrap metal, we could not find a local official page. Call the transfer station or the Solid Waste Authority to ask."
+quote: "Disposal page: \"They do not accept tires and other items which are listed in the letter. If you have questions about what they accept and how contact them at the number listed below.\" ... MTS info sheet: \"WE DO NOT ACCEPT THE FOLLOWING: ... APPLIANCES CONTAINING REFRIGERANT o EXAMPLES INCLUDE AIR CONDITIONERS, REFRIGERATORS, FREEZERS, ETC. UNLESS FREON IS REMOVED AND TAGGED BY A LICENSED VENDOR\""
+sources:
+  - url: https://www.monongaliacountyswa.com/disposal
+    checked: 2026-11-10
+    name: "Monongalia County SWA, Disposal"
+  - url: https://www.monongaliacountyswa.com/_files/ugd/8af711_d3ccbfbb96ca48b7a9d24bd324a23dc3.pdf
+    checked: 2026-11-10
+    name: "Mountaineer Transfer Station information sheet (PDF, linked from the Disposal page)"
+recheck_days: 180
