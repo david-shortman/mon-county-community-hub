@@ -31,6 +31,7 @@ const lookup = [
   { item: 'Cardboard', say: 'Flatten boxes for the county drop-off center. No greasy pizza boxes.', href: '#drop-off' },
   { item: 'Clothes and furniture', say: 'Donate, sell or give them away.', href: `${base}/sell-or-donate/` },
   { item: 'Electronics and TVs', say: 'Free county collection events in the spring and fall.', href: '#hard-items' },
+  { item: 'Furniture, mattresses and other big items', say: 'Donate them if you can. In Westover, call City Hall for a bulk pickup. Elsewhere, ask whoever picks up your trash.', href: '#fact-bulk-items' },
   { item: 'Glass bottles and jars', say: 'A 2019 hauler guide says curbside takes them. Confirm first.', href: '#curbside' },
   { item: 'Household chemicals, oil-based paint', say: "The Morgantown Utility Board's yearly household hazardous waste day.", href: '#hard-items' },
   { item: 'Latex paint', say: 'The county plans a collection in 2027. No date yet.', href: '#hard-items' },
@@ -83,6 +84,7 @@ const lookup = [
     <Fact tag="li" f={fact('batteries')} about="batteries"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
     <Fact tag="li" f={fact('motor-oil')} about="motor oil"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
     <Fact tag="li" f={fact('leaves')} about="leaves" />
+    <Fact tag="li" f={fact('bulk-items')} about="bulk trash"> To donate or sell big items instead, see <a href={`${base}/sell-or-donate/`}>Sell, donate or give away your stuff</a>. The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
   </ul>
 
   <h2 id="medicines">Medicines and needles</h2>
