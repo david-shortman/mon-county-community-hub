@@ -17,7 +17,7 @@ import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "moving", label: "Noise and neighbor problems", summary: "Morgantown's quiet hours for music, power tools and loudspeakers, getting a waiver for a party, fines, and what happens after you report a property problem" };
 const d = pdfPage('morgantown-code-complaints');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const noiseSources = [{ url: 'https://www.morgantownwv.gov/165/Noise-Ordinance', name: 'City of Morgantown (page now removed)', checked: '2026-10-31' }];
+const noiseSources = [{ url: 'https://www.morgantownwv.gov/165/Noise-Ordinance', name: 'City of Morgantown (page not found on November 10, 2026)', checked: '2026-10-31' }];
 const cityCode = 'https://library.municode.com/wv/morgantown/codes/code_of_ordinances';
 ---
 <Base title="Noise rules in Morgantown, WV: quiet hours and complaints" description="Morgantown's noise rules in plain words: quiet hours, the $20 party waiver, fines up to $500, and what happens after you report a property problem to Code Enforcement.">
@@ -42,7 +42,7 @@ const cityCode = 'https://library.municode.com/wv/morgantown/codes/code_of_ordin
   </nav>
 
   <h2 id="quiet-hours">Quiet hours</h2>
-  <p class="note"><strong>Check before you rely on this.</strong> The city removed its noise rules web page. It was gone when we checked on November 10, 2026. The quotes below are from that page as we read it on October 31, 2026. The official words are in Article 527 of the <a href={cityCode}>City Code</a>.</p>
+  <p class="note"><strong>Check before you rely on this.</strong> The city's noise rules web page showed "page not found" when we checked on November 10, 2026. The quotes below are from that page as we read it on October 31, 2026. The official words are in Article 527 of the <a href={cityCode}>City Code</a>.</p>
   <p>These rules are in Morgantown's City Code, Article 527. They apply inside city limits. The parts in quotes are the city's own words. At any hour, the code bans noise that "annoys, disturbs, injures or endangers the comfort, repose, health, peace or safety of others."</p>
   <ul>
     <li><strong>Music, TV and speakers:</strong> not "Between the hours of 11:00 p.m. and 7:00 a.m. the following day in such a manner as to create a noise disturbance across a real property boundary or within a noise sensitive zone." Events open to the public with a city permit are an exception.</li>

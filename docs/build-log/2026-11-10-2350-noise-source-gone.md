@@ -8,7 +8,7 @@
 - **Chose:** not to move the quotes into fact records with a new checked date, since that would claim a check we could not make. Not to delete the section either: deleting published content waits for David, and nothing shows the rules are wrong. Instead, the page now says what happened.
 - **Shipped:**
   - `/noise/`:
-    - A "Check before you rely on this" note: the city removed its page, it was gone on November 10, and the quotes are from our October 31 read.
+    - A "Check before you rely on this" note: the city's page showed "page not found" on November 10, and the quotes are from our October 31 read.
     - Links to the City Code on Municode.
     - Every source line now says "may be out of date".
   - #1782 (`needs-verification`, for David: compare the quotes with Article 527 in a browser, or ask the City Clerk).
