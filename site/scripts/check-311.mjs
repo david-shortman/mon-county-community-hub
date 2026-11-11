@@ -11,6 +11,7 @@
 // Usage (from site/): node scripts/check-311.mjs   prints JSON totals
 // Exit codes: 0 ok, 1 the API or the place lookup failed.
 import { robotsCheck } from '../src/lib/robots.mjs';
+import { totals311 } from '../src/lib/totals-311.mjs';
 
 const API = 'https://seeclickfix.com/api/v2';
 const HEADERS = { 'User-Agent': 'mon-county-community-hub (github.com/david-shortman/mon-county-community-hub)', Accept: 'application/json' };
@@ -51,22 +52,6 @@ async function requestsSince(placeUrl, after) {
   return out;
 }
 
-const median = (xs) => {
-  if (!xs.length) return null;
-  const s = [...xs].sort((a, b) => a - b);
-  const m = Math.floor(s.length / 2);
-  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
-};
-
-function totals(list) {
-  const closed = list.filter((r) => r.closed && /closed/i.test(r.status ?? ''));
-  const days = closed.map((r) => (Date.parse(r.closed) - Date.parse(r.created)) / DAY).filter((d) => d >= 0);
-  // Archived requests are counted on their own, not as closed: the API's
-  // "archived" may not mean the problem was dealt with.
-  const archived = list.filter((r) => /archived/i.test(r.status ?? '')).length;
-  return { opened: list.length, closed: closed.length, archived, median_days_to_close: days.length ? Math.round(median(days) * 10) / 10 : null };
-}
-
 try {
   const now = new Date();
   const after = new Date(now.getTime() - 365 * DAY);
@@ -78,9 +63,9 @@ try {
     credit: 'Data from SeeClickFix, Morgantown 311.',
     place: { name: place.name, url_name: place.url_name },
     window: { from: after.toISOString().slice(0, 10), to: now.toISOString().slice(0, 10) },
-    all_requests: totals(list),
-    street_maintenance_and_potholes: totals(potholes),
-    note: 'Requests opened in the window. "closed" counts those now closed (median days uses only these); "archived" is counted on its own. Closed does not always mean fixed; check the source wording before saying more.',
+    all_requests: totals311(list),
+    street_maintenance_and_potholes: totals311(potholes),
+    note: 'Requests opened in the window. "closed" counts closed plus archived: SeeClickFix archives a request 7 days after it is closed, and an archived request cannot change again. "archived" is also shown on its own. The median uses each request\'s closed date and is null when fewer than 30 requests go in or any has no closed date (see median_null_because). Closed does not always mean fixed; check the source wording before saying more.',
   }, null, 2));
 } catch (e) {
   console.error(`check-311: ${e.message}`);
