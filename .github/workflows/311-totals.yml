@@ -19,6 +19,7 @@ on:
     paths:
       - .github/workflows/311-totals.yml
       - site/scripts/check-311.mjs
+      - site/src/lib/totals-311.mjs
   workflow_dispatch:
 
 permissions:
