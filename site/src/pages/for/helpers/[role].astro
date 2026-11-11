@@ -11,8 +11,11 @@ export function getStaticPaths() {
 const { r } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const built = prettyDate(todayYmd());
+// Short enough for search results (#939): the role's first group, like
+// "bus drivers" from "Bus drivers and transit staff".
+const short = r.name.split(' and ')[0].toLowerCase();
 ---
-<Base title={`Card for ${r.name.toLowerCase()} in Mon County: what to do when someone asks`} description={`For ${r.name.toLowerCase()} in Morgantown and Monongalia County: ${r.situations.map((s) => s.hears.toLowerCase()).join('; ')}. First steps with local phone numbers and sources.`}>
+<Base title={`Helper card for ${short} in Mon County, WV`} description={`For ${r.name.toLowerCase()} in Morgantown and Mon County: what to do first when someone asks you for help, with local phone numbers and sources.`}>
   <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
     <ol><li><a href={`${base}/`}>Home</a></li><li><a href={`${base}/for/helpers/`}>Cards for helpers</a></li></ol>
   </nav>
