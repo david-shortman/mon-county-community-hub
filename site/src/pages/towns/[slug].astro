@@ -51,7 +51,7 @@ const lede = cdp
     <figure class="print-qr"><Fragment set:html={qr} /><figcaption>More online:<br /><strong>{addr1}<wbr />{addr2}</strong></figcaption></figure>
   </div>
   <p class="lede">{lede}</p>
-  <p class="no-print"><button type="button" class="btn" id="print-town">Print this page</button> <span class="hint">A printable sheet for {h.name}, with the date and a QR code. More sheets: <a href={`${base}/print/`}>Printouts</a>.</span></p>
+  <p class="no-print" id="print-town-row" hidden><button type="button" class="btn" id="print-town">Print this page</button> <span class="hint">A printable sheet for {h.name}, with the date and a QR code. More sheets: <a href={`${base}/print/`}>Printouts</a>.</span></p>
 
   <nav aria-labelledby="jump-h">
     <h2 id="jump-h">On this page</h2>
@@ -164,7 +164,10 @@ const lede = cdp
 </Base>
 
 <script>
+  // The button needs a script, so it stays hidden until this runs. Without it,
+  // the browser's own print command still prints the sheet.
   document.getElementById('print-town')?.addEventListener('click', () => window.print());
+  document.getElementById('print-town-row')?.removeAttribute('hidden');
 </script>
 
 <style>
