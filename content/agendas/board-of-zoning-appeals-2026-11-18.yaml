@@ -1,0 +1,55 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: board-of-zoning-appeals-2026-11-18
+body: board-of-zoning-appeals
+meeting: Regular meeting
+date: 2026-11-18
+time: "18:30"
+place: City Hall, City Council Chambers, 389 Spruce Street, 2nd floor, Morgantown
+watch: The agenda does not name a live stream.
+agenda_url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11182026-3932
+read: 2026-11-12
+items:
+  - number: "I"
+    title: CALL TO ORDER AND ROLL CALL
+    kind: opening
+    line: The meeting is called to order and the roll is called.
+  - number: "II"
+    title: MATTERS OF BUSINESS
+    kind: minutes
+    line: A vote to approve the written record of the board's last meeting. The agenda lists this part.
+    parts:
+      - Meeting minutes from previous meeting.
+  - number: "III"
+    title: "OLD BUSINESS:"
+    kind: other
+    line: Items from earlier meetings. The agenda lists two, below.
+  - number: "III.A"
+    title: VAR26-073 / City Neon USA / 781 Chestnut Ridge Rd
+    kind: request
+    line: A request for a variance at 781 Chestnut Ridge Road, from the city's sign rules on lighting and sign size. The board hears it and decides.
+  - number: "III.B"
+    title: VAR26-088 / City Neon USA / 781 Chestnut Ridge Rd
+    kind: request
+    line: A request for a variance at 781 Chestnut Ridge Road, from the city's rules on prohibited signs and devices. The board hears it and decides.
+  - number: "IV"
+    title: "NEW BUSINESS:"
+    kind: other
+    line: New items. The agenda lists one, below.
+  - number: "IV.C"
+    title: VAR26-094 / [name] / 307 Nolan St
+    kind: request
+    line: A request for a variance at 307 Nolan Street, from the city's rules on setbacks and encroachments for accessory structures. Setbacks are how far a structure must stay from a property line. The board hears it and decides.
+  - number: "V"
+    title: ANNOUNCEMENTS
+    kind: report
+    line: Announcements. The agenda gives no more detail.
+  - number: "VI"
+    title: ADJOURNMENT
+    kind: closing
+    line: The meeting ends.
+note: "If you need an accommodation, the agenda says to call 304-284-7431."
+sources:
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11182026-3932
+    checked: 2026-11-12
