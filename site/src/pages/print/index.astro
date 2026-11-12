@@ -4,6 +4,7 @@
 import Base from '../../layouts/Base.astro';
 import { fixFormUrl } from '../../lib/group-requests.mjs';
 import { printSheets } from '../../lib/printouts.mjs';
+import { HUBS } from '../../lib/town-hubs.mjs';
 export const page = { door: "about", label: "Printouts", summary: "Printable sheets of places and phone numbers, and cards with a QR code" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = printSheets();
@@ -23,6 +24,12 @@ const sheets = all.filter((s) => s.kind === 'door').map((d) => ({ ...d, n: d.lis
         {s.sub.length > 0 && <ul>{s.sub.map((t) => <li><a href={`${base}/print/${t.slug}/`}>{t.name}</a> <span class="hint">{t.n} places and programs</span></li>)}</ul>}
       </li>
     ))}
+  </ul>
+
+  <h2>Town sheets</h2>
+  <p>Each town and area page prints as one sheet: who to call, who decides and where they meet, places to gather, dates and buses. Open the page and use "Print this page".</p>
+  <ul class="topic-list">
+    {HUBS.map((h) => <li><a href={`${base}/towns/${h.slug}/`}>{h.name}</a></li>)}
   </ul>
 
   <h2>Cards and posters</h2>
