@@ -8,12 +8,16 @@ import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import EventCard from '../components/EventCard.astro';
 import SourceLine from '../components/SourceLine.astro';
-import { resource, loadCalendarWithFeeds, upcoming, telHref } from '../lib/content.mjs';
+import { resource, loadCalendarWithFeeds, upcoming, telHref, loadDir, prettyDate, ymd } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "family", topic: "family", label: "Holiday season help", summary: "Toys, warm clothes, heat bills, holiday office closings, and ways to give in November and December" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const holidayWords = /thanksgiving|christmas|holiday|new year|veterans day|toy|angel tree|coat|library closed|parade|glow/i;
 const soon = upcoming(await loadCalendarWithFeeds()).filter((e) => holidayWords.test(e.title));
+// The senior meal sign-up line reads its phone and last day from its calendar
+// entry, so the two cannot drift apart (they did: the page had the United
+// Way's main line while the sign-up page names 304-322-2064).
+const seniorMeal = loadDir('calendar').find((e) => e.slug === 'senior-holiday-meal-signup-2026');
 const freeStore = resource('christian-help-free-store');
 const toyGive = resource('toys-for-tots-morgantown-donate');
 const helpVolunteer = resource('christian-help-volunteer');
@@ -40,7 +44,7 @@ const src = {
   bus: [{ url: 'https://www.busride.org/days-of-operation', checked: '2026-11-02', name: 'Mountain Line days of operation' }],
   granville: [{ url: 'https://townofgranvillewv.gov/community/', checked: '2026-11-02', name: 'Town of Granville' }],
   srshXmas: [{ url: 'https://www.srsh.org/seasonal-programs', checked: '2026-11-02', name: "Scott's Run Settlement House seasonal programs" }],
-  food: [{ url: 'https://www.unitedwaympc.org/HFTD', checked, name: 'United Way of Monongalia and Preston Counties' }],
+  food: [{ url: 'https://www.unitedwaympc.org/HFTD', checked: '2026-11-08', name: 'United Way of Monongalia and Preston Counties' }],
   chMeal: [{ url: 'https://motownchristianhelp.com/programs/', checked, name: 'Christian Help programs' }],
   srsh: [{ url: 'https://www.srsh.org/seasonal-programs', checked, name: "Scott's Run Settlement House seasonal programs" }],
   christianHelp: [{ url: 'https://motownchristianhelp.com/contact-us/', checked, name: 'Christian Help' }],
@@ -63,7 +67,7 @@ const src = {
     <h2 id="food">Holiday meals and food</h2>
     <ul>
       <li><strong>Holiday food, no sign-up:</strong> on Thursday, December 10, 2026, the United Way and Christian Help give out food from Mountaineer Food Bank at the Morgantown Armory, 90 Army Band Way. It is first come, first served. <SourceLine sources={src.food} about="Holiday food distribution" /></li>
-      <li><strong>Age 65 or older?</strong> The United Way delivers holiday meals to people 65 and older in Monongalia County on the morning of December 9. Sign up with its <a href="https://www.unitedwaympc.org/HFTD">online form</a> or by calling the United Way at <a href={telHref('304-296-7525')}>304-296-7525</a>. The last day is Thursday, November 12. <SourceLine sources={src.food} about="Senior holiday meal delivery" /></li>
+      <li><strong>Age 65 or older?</strong> The United Way delivers holiday meals to people 65 and older in Monongalia County on the morning of December 9. Sign up with its <a href="https://www.unitedwaympc.org/HFTD">online form</a> or by calling <a href={telHref(seniorMeal.phone)}>{seniorMeal.phone}</a>. The last day is {prettyDate(ymd(seniorMeal.starts))}. <SourceLine sources={seniorMeal.sources} about="Senior holiday meal delivery" /></li>
       <li><strong>Christian Help:</strong> its food pantry says to "stop by before Thanksgiving, Christmas, and Easter for a holiday meal while supplies last." Call <a href={telHref('304-296-0221')}>304-296-0221</a> for hours. <SourceLine sources={src.chMeal} about="Christian Help holiday meal" /></li>
       <li><strong>Scott's Run Settlement House:</strong> has a Thanksgiving sign-up form on its <a href="https://www.srsh.org/seasonal-programs">seasonal programs page</a>. You may get a basket or a gift card. The page gives no deadline or pickup date, so sign up early. <SourceLine sources={src.srsh} about="Scott's Run Thanksgiving sign-up" /></li>
     </ul>
