@@ -57,7 +57,7 @@ items:
     url: https://www.boparc.org/trail-clean-ups-and-events.html
     when: month
   - text: WVDOT District 4. Phone, hours, the road repair form.
-    url: https://transportation.wv.gov/agencies/highways/districts/district-four
+    url: https://transportation.wv.gov/district-four
     when: month
   - text: Main Street Morgantown, Friends of Deckers Creek, Mon River Trails Conservancy, Solid Waste Authority. New programs or cleanups with dates.
     when: month
