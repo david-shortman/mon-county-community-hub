@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://api.github.com; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1f5f4a">
+<title>Swipe Triage</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <h1 class="brand">Swipe Triage</h1>
+    <p class="progress" id="progress" aria-live="polite"></p>
+    <div class="top-actions">
+      <button type="button" class="ghost" id="undoBtn" aria-keyshortcuts="U" disabled>Undo</button>
+      <button type="button" class="ghost" id="reviewBtn">Review <span id="reviewCount" class="pill">0</span></button>
+      <button type="button" class="ghost icon" id="settingsBtn" aria-label="Settings" aria-haspopup="dialog">&#9881;</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Loading and messages -->
+    <section id="status" class="status" hidden></section>
+
+    <!-- Deck -->
+    <section id="deck" class="deck" hidden aria-label="Items to decide">
+      <div class="filters">
+        <label class="sr" for="typeFilter">Show</label>
+        <select id="typeFilter">
+          <option value="all">PRs and issues</option>
+          <option value="pr">PRs only</option>
+          <option value="issue">Issues only</option>
+        </select>
+        <label class="sr" for="labelFilter">Label</label>
+        <select id="labelFilter"><option value="">Any label</option></select>
+      </div>
+      <div class="stack" id="stack">
+        <div class="card-behind" aria-hidden="true"></div>
+        <article class="card" id="card" tabindex="-1" aria-roledescription="card"></article>
+        <div class="drag-hint" id="dragHint" aria-hidden="true"></div>
+      </div>
+      <div class="controls">
+        <fieldset class="weight" id="weight">
+          <legend>How much it matters</legend>
+          <div class="weight-row"></div>
+        </fieldset>
+        <label class="sr" for="note">Note for Claude</label>
+        <textarea id="note" rows="1" placeholder="Note for Claude (optional)" aria-keyshortcuts="C"></textarea>
+        <div class="decide" id="decide"></div>
+      </div>
+    </section>
+
+    <!-- Review and export -->
+    <section id="review" class="review" hidden aria-labelledby="reviewTitle">
+      <div class="review-head">
+        <h2 id="reviewTitle" tabindex="-1">Your calls</h2>
+        <button type="button" class="ghost" id="backBtn">Back to cards</button>
+      </div>
+      <p class="muted" id="reviewSummary"></p>
+      <ol class="calls" id="calls"></ol>
+      <div class="export">
+        <h3>Hand it back to Claude</h3>
+        <label class="check"><input type="checkbox" id="askFirst" checked> Have Claude show me the merges and closes for one yes before doing them</label>
+        <div class="export-buttons">
+          <button type="button" class="primary" id="copyBtn">Copy prompt</button>
+          <button type="button" id="shareBtn" hidden>Share</button>
+          <button type="button" id="mdBtn">Download .md</button>
+          <button type="button" id="jsonBtn">Download .json</button>
+        </div>
+        <details class="preview">
+          <summary>See the prompt</summary>
+          <pre id="promptPreview"></pre>
+        </details>
+        <button type="button" class="danger-link" id="newRoundBtn">Start a new round</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="sr" id="live" aria-live="assertive"></div>
+  <div class="toast" id="toast" role="status" hidden></div>
+</div>
+
+<dialog id="settings" aria-labelledby="settingsTitle">
+  <form method="dialog" class="settings">
+    <h2 id="settingsTitle">Settings</h2>
+    <label>Repository (owner/name)
+      <input id="repoInput" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </label>
+    <label>Label that means "needs me"
+      <input id="labelInput" autocomplete="off" autocapitalize="off" spellcheck="false">
+    </label>
+    <label>Leave these numbers out (comma between)
+      <input id="skipInput" inputmode="numeric" autocomplete="off" placeholder="1727, 1801">
+    </label>
+    <label class="check"><input type="checkbox" id="allPrs"> Include every open PR, not just ones with that label</label>
+    <label>Order
+      <select id="orderInput">
+        <option value="prs-first">PRs first, then newest activity</option>
+        <option value="newest">Newest activity first</option>
+        <option value="oldest">Oldest first</option>
+      </select>
+    </label>
+    <label class="check"><input type="checkbox" id="noMotion"> Turn off motion</label>
+    <fieldset>
+      <legend>GitHub token (optional)</legend>
+      <p class="muted small">Only needed if GitHub says you've hit its limit. Use a fine-grained token with read-only access to public repos. It stays on this device and is only sent to api.github.com.</p>
+      <input id="tokenInput" type="password" autocomplete="off" placeholder="github_pat_...">
+      <label class="check"><input type="checkbox" id="rememberToken"> Remember on this device</label>
+    </fieldset>
+    <div class="settings-buttons">
+      <button type="button" class="danger-link" id="forgetBtn">Forget everything on this device</button>
+      <button value="cancel" type="submit">Cancel</button>
+      <button value="save" class="primary" id="saveSettings" type="submit">Save and reload</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

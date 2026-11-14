@@ -1,0 +1,10 @@
+{
+  "name": "Swipe Triage",
+  "short_name": "Triage",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f1ea",
+  "theme_color": "#1f5f4a",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
