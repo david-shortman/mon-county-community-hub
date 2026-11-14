@@ -15,9 +15,9 @@ export const page = { door: "family", topic: "work", label: "Selling food at mar
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const eh = [{ url: 'https://www.monchd.org/departments-programs/environmental-health', checked: '2026-10-30' }];
 const cottage = [{ url: 'https://agriculture.wv.gov/divisions/regulatory-and-environmental-affairs/potentially-hazardous-cottage-foods/', checked: '2026-11-01' }, { url: 'https://code.wvlegislature.gov/19-40-1/', checked: '2026-11-01' }, { url: 'https://code.wvlegislature.gov/19-35-6/', checked: '2026-11-01' }, { url: 'https://agriculture.wv.gov/wp-content/uploads/Filed-Cottage-Food-Rule-Emergency-Rule-2026.pdf', checked: '2026-11-01' }, { url: 'https://agriculture.wv.gov/wp-content/uploads/West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf', checked: '2026-11-01' }, { url: 'https://www.wvlegislature.gov/Bill_Status/Bills_history.cfm?input=44&year=2026&sessiontype=RS&btype=bill', checked: '2026-11-01' }];
-const vending = [{ url: 'https://www.morgantownwv.gov/256/Vending-Downtown', checked: '2026-10-30' }];
 const r = (slug) => resource(slug);
-// The bake sale and nonprofit lines are fact records (#122), read 2026-11-14.
+// The bake sale, nonprofit and city vending lines are fact records (#122),
+// read 2026-11-14.
 const fact = factsFor('selling-food');
 ---
 <Base title="Selling food in Mon County, WV: markets, events and trucks" description="Which Mon County health permit fits a festival, farmers market, bake sale, home kitchen or food truck, the fees, and Morgantown's rule for trucks.">
@@ -54,9 +54,11 @@ const fact = factsFor('selling-food');
   <p>The plan review steps, fees by number of seats and what to send, as a short list: <a href={`${base}/open-a-restaurant/`}>opening a restaurant or food place</a>.</p>
 
   <h2>Selling from a truck or cart in Morgantown</h2>
-  <p>The City of Morgantown says vending trucks and vending carts both need a City of Morgantown Business License, even if the business is based outside city limits. The city says a permit is not needed if you sell on private property with the landowner's permission. The city's page has maps of the downtown spaces used for vending permits. Questions about applying, or about selling from a truck or cart between 11 p.m. and 6 a.m.: Finance Department, <a href={telHref('304-284-7423')}>304-284-7423</a>.</p>
+  <Fact f={fact('vending-business-license')} about="the city business license for trucks and carts" />
+  <Fact f={fact('vending-private-property')} about="selling on private property" />
+  <Fact f={fact('vending-maps')} about="the city's vending space maps" />
+  <Fact f={fact('vending-questions')} about="who to call about vending" />
   <p><a class="btn" href="https://www.morgantownwv.gov/256/Vending-Downtown"><span>City vending rules</span></a></p>
-  <SourceLine sources={vending} about="Morgantown vending trucks and carts" />
 
   <h2>Fees</h2>
   <p>The health department posts its fee list, "Permit Fees and Fees for Service, Fiscal Year 2026-2027." It lists $72 for a temporary food establishment. For other food permits, read the list or call Environmental Health before you pay. You can pay the health department online.</p>
