@@ -1,0 +1,18 @@
+# Morgantown 311 big-picture totals (#1078, #881). Copied by hand from the
+# 311 totals workflow's latest run, which posts its output on #1078. Only a
+# few totals, credited to SeeClickFix, never single reports (David's rule on
+# #300). "closed" is closed plus archived: SeeClickFix archives a request 7
+# days after it is closed (#1785). The median stays off: the run says 14
+# closed or archived requests have no closed date.
+credit: Data from SeeClickFix, Morgantown 311.
+counted: 2026-11-11
+run: https://github.com/david-shortman/mon-county-community-hub/actions/runs/43073045870
+window_from: 2025-11-11
+window_to: 2026-11-11
+all_requests:
+  opened: 966
+  closed: 787
+potholes_and_streets:
+  opened: 227
+  closed: 219
+report_url: https://www.morgantownwv.gov/428/Service-Request
