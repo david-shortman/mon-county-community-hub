@@ -11,7 +11,7 @@ steps:
 notes:
   - "NewFIT runs Monday to Friday, except New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day and Christmas Day."
   - "To cancel, call 24 hours ahead. There are no refunds for cancellations or no-shows, and no-shows can end your service."
-what_happens: Mountain Line may group your trip with other riders, and part of your trip may be on a regular bus route. Drivers do not enter homes or lift riders, so riders travel with a care provider or move on their own.
+what_happens: Mountain Line may group your trip with other riders, and part of your trip may be on a regular bus route. Drivers do not enter homes or lift riders, so riders travel with a care provider or move on their own. NewFIT cannot take riders with open wounds.
 contact:
   phone: "304-296-3869"
   url: https://www.busride.org/newfit
@@ -19,4 +19,4 @@ contact:
 cost: $10.00 one way, $20.00 round trip, paid in advance.
 sources:
   - url: https://www.busride.org/newfit
-    checked: 2026-10-31
+    checked: 2026-11-14
