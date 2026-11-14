@@ -40,7 +40,7 @@ Rewording a listing, moving facts between files or fixing a typo is not a re-rea
 
 ## What comes next
 
-- **The quote is checked on the page.** A quote can be copied once and kept forever, so the daily Source check should look for each quote on its page and list the ones it cannot find (#1074).
+- **The quote is checked on the page.** A quote could be copied once and kept forever, so the daily Source check looks for each quote on its own page and lists the ones it cannot find ([fact compare](../operations/fact-compare.md), #1074).
 - **Failing instead of warning.** `check-reread.mjs --strict` fails on a missing proof. Turning that on for every PR changes how every content session works, so it waits for David (a `for:david` PR from sprint wave 15 proposes it).
 - **Old listings.** The 1,716 sources on file today have no quote. They need none until their date next moves. Each re-check adds one, so the share with proof grows with the normal re-check clock.
 
