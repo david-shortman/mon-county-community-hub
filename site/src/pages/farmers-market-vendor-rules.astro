@@ -1,0 +1,29 @@
+---
+// Selling at the Morgantown Farmers Market (part of #393): the parts of the
+// market's 37-page 2026-2027 rules PDF a new seller needs first, as short
+// lists. Every rule, date and fee is copied in
+// content/pdf-pages/mfmga-market-rules-2026-27.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Selling at the Morgantown Farmers Market: dates and fees", summary: "The farmers market's 2026-2027 rules for sellers: who can sell, the three markets, the March 1 application due date, and every fee" };
+const d = pdfPage('mfmga-market-rules-2026-27');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Selling at the Morgantown Farmers Market: 2026-2027 rules and fees, Morgantown, WV" description="The Morgantown Farmers' Market Growers Association's 2026-2027 rules for sellers: producer-only within 50 air miles, applications due March 1, a $100 new vendor membership, $100 a space for the summer season, and a 3% commission.">
+  <h1>Selling at the Morgantown Farmers Market</h1>
+  <p class="lede">Grow or make what you sell, within 50 air miles of Morgantown? The market's 2026-2027 rules say vendor applications open January 1 and are due March 1. A new vendor pays $100 to join, $100 a space for a summer market season, a 3% commission on sales and a $50 escrow. Here are the rules a new seller needs first.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>The full rules, with the list of products allowed, permits, insurance and market-day rules, and the application, are on the market's <a href={d.found_on}>Vendors page</a>. Permits for food you make at home: <a href={`${base}/cottage-food/`}>selling food made at home</a>. Other ways to sell what you grow: <a href={`${base}/sell-what-you-grow/`}>sell what you grow</a>.</p>
+
+  <p class="meta">This page is a reading aid. The market's PDF is the official version, and its board decides who can sell. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

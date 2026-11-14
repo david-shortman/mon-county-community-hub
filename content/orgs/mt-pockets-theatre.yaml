@@ -1,0 +1,17 @@
+name: M. T. Pockets Theatre
+slug: mt-pockets-theatre
+kind: nonprofit
+website: https://www.mtpocketstheatre.com/
+summary: A nonprofit community theater at 203 Parsons Street, Morgantown, founded in 1999. It puts on plays year round and posts auditions on its site. Volunteers help with the box office, marketing, sets, props, costumes, lights and sound. It says production jobs need no experience.
+topics: [community]
+area: morgantown
+sources:
+  - url: https://www.mtpocketstheatre.com/about.html
+    checked: 2026-11-14
+    quote: "M. T. Pockets Theatre produces shows year-round"
+  - url: https://www.mtpocketstheatre.com/
+    checked: 2026-11-14
+    quote: "M. T. Pockets Theatre, Inc. 203 Parsons Street, Morgantown, WV 26505"
+  - url: https://www.mtpocketstheatre.com/volunteer.html
+    checked: 2026-11-14
+    quote: "Positions require NO previous experience"

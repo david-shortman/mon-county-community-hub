@@ -54,7 +54,11 @@ export function parseTable(text) {
   const rows = [];
   const parts = String(text ?? '').split(/^##+\s*Second check\b.*$/im).slice(1);
   for (const part of parts) {
-    const body = part.split(/^##\s/m)[0];
+    // The text right under "## Second check", plus every later "## " section
+    // (a record heading, as packetMd() writes them) whose table has a
+    // "| Field | Claim |" header. Other tables, like a review rubric, are skipped.
+    const [first, ...sections] = part.split(/^##\s/m);
+    const body = [first, ...sections.filter((s) => /^\s*\|\s*Field\s*\|\s*Claim\s*\|/im.test(s))].join('\n');
     for (const line of body.split('\n')) {
       if (!/^\s*\|/.test(line) || /^\s*\|\s*-/.test(line) || /\|\s*Field\s*\|/i.test(line)) continue;
       const cells = line.trim().replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
