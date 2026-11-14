@@ -286,6 +286,14 @@ What the place count shows (2026-11-02):
 - **By topic, outside the city:** food help 2 resources, health care 5, housing and shelter 3, money, jobs and benefits 3.
 - **Food pantries and meal sites are not counted yet.** They have no listing records (#1413). The DoHS office's address is only in its text, so it is not counted either; adding it waits for David because the record is high stakes.
 
+### AI answers: monthly check (#1045)
+
+Once a month we ask AI answer tools 10 persona questions and the site's name, and count whether the answer cites one of our pages and names the right local place. Only tools a session can reach for free and whose robots.txt allows it are checked; the others are listed in each run.
+
+| Date | Tools checked | Answers that cite us | Right local place | Wrong facts quoted from our pages |
+|---|---|---|---|---|
+| [2026-11-14](visibility/2026-11-14-ai-answers.md) | Claude with web search | 0 of 11 | 7 of 10 | 0 |
+
 ## Level 2: Use (waiting for the first monthly totals)
 
 Whether people use what we build, as aggregate page views only, never anything about a person. The visit counter is GoatCounter (#1352): free, no cookies, live since 2026-11-01.
