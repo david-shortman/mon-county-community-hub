@@ -1,0 +1,6 @@
+# 2026-11-14: Town sheets print at 11 point (#1794)
+
+- **Considered:** town sheets (`/towns/<slug>/`) printed body text at 9.5 point and source lines at 8.5 point, and nobody had checked a printout. Most print guidance for the public puts body text at 11 or 12 point. The date chips and the "Online:" address under a Pass it on item kept their screen sizes, so on paper a date printed at 17 point next to 9.5 point text.
+- **Checked:** a headless Letter print-to-PDF render of six sheets (Westover, Morgantown, Star City, Granville, Cheat Lake, Blacksville), measuring the computed print size of every piece of text. A test at 12 point body and 10 point sources added a page to Westover, Morgantown and Granville.
+- **Chose:** 11 point body and lede, 9.5 point source lines and QR caption, 13 point h2, 11.5 point h3, and the date chips and Pass it on address brought in line (12 and 9.5 point). Page counts did not change: Westover 3, Morgantown 4, Star City 3, Granville 2, Cheat Lake 3, Blacksville 2. The town type line now has a little room under the name.
+- **Still a person's step:** print one sheet on paper and read it at arm's length. Page 1 of the Westover render is in `docs/design/screenshots/2026-11-14-town-sheet-print.png`. Cost: $0.
