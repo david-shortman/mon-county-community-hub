@@ -28,11 +28,11 @@ items:
   - number: "III.A"
     title: VAR26-073 / City Neon USA / 781 Chestnut Ridge Rd
     kind: request
-    line: A request for a variance at 781 Chestnut Ridge Road, from the city's sign rules on lighting and sign size. The board hears it and decides.
+    line: A request for a variance (permission to set aside a zoning rule) at 781 Chestnut Ridge Road, from the city's sign rules on lighting and sign size. The board hears it and decides.
   - number: "III.B"
     title: VAR26-088 / City Neon USA / 781 Chestnut Ridge Rd
     kind: request
-    line: A request for a variance at 781 Chestnut Ridge Road, from the city's rules on prohibited signs and devices. The board hears it and decides.
+    line: A request for a variance (permission to set aside a zoning rule) at 781 Chestnut Ridge Road, from the city's rules on prohibited signs and devices. The board hears it and decides.
   - number: "IV"
     title: "NEW BUSINESS:"
     kind: other
@@ -40,7 +40,7 @@ items:
   - number: "IV.C"
     title: VAR26-094 / [name] / 307 Nolan St
     kind: request
-    line: A request for a variance at 307 Nolan Street, from the city's rules on setbacks and encroachments for accessory structures. Setbacks are how far a structure must stay from a property line. The board hears it and decides.
+    line: A request for a variance (permission to set aside a zoning rule) at 307 Nolan Street, from the city's rules on setbacks and encroachments for accessory structures, like sheds or garages. Setbacks are how far a structure must stay from a property line. The board hears it and decides.
   - number: "V"
     title: ANNOUNCEMENTS
     kind: report
