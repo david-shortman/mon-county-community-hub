@@ -1,0 +1,11 @@
+name: Morgantown Pride
+slug: morgantown-pride
+kind: nonprofit
+website: https://morgantownwvpride.org/
+summary: A volunteer nonprofit in Morgantown that holds and takes part in community events and shares social and educational resources for LGBTQ+ people and their allies in Monongalia County. People can become members. Email morgantownwvpride@gmail.com.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: https://morgantownwvpride.org/about/
+    checked: 2026-11-14
+    quote: "Morgantown Pride, Inc. is a 501(c)3 non-profit, community-based volunteer organization rooted in Morgantown, WV."
