@@ -123,6 +123,8 @@ To roll a yearly item forward, copy the file, change the slug, dates, and source
 
 Run `npm run check-content` in `site/` to validate entries.
 
+Write each item to the reader ("This is for you if...") and explain any meeting, program or legal word in a few plain words in the same line, like "a variance (permission to set aside a zoning rule)" (#103). Keep dates, times, places and official names exact, and put a law's citation on the source line, not in the card text. `npm run check-content` warns about listed words with no explanation (`site/scripts/check-calendar-jargon.mjs`); add a word to its `TERMS` list when you find a new one.
+
 ### Where calendar dates come from: three tiers
 
 Best first. Use the highest tier a source supports.
