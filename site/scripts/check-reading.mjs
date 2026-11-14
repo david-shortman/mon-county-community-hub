@@ -20,6 +20,11 @@
 // - Embed listings (/embed/listing/<slug>/) are one resource card each, so their
 //   opening is that card's "Who it's for" line. They are kept in the file with
 //   `card: true` and counted on their own (`cards_above_9`), not with pages.
+//
+// Name the manual first (#1368, since 2026-11-14): a page that says "the
+// manual" must name a manual earlier on the page (a capitalized name ending
+// in "Manual", like "Income Maintenance Manual"), so a resident knows whose
+// rules are quoted. Unlike the grades, this one fails the build.
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -71,6 +76,18 @@ export const opening = (ps) => (ps[0] || '').split(/(?<=[.!?]["'\u201d\u2019)\]]
 // All paragraphs as one text, each ending a sentence.
 export const fullText = (ps) => ps.map((t) => (/[.!?]["')]?$/.test(t) ? t : t + '.')).join(' ');
 
+// The first "the manual" in a page's main text that comes before any named
+// manual, with a little text around it, or null if the page is fine.
+export function unnamedManual(html) {
+  const main = (html.match(/<main[\s\S]*?<\/main>/) || [])[0];
+  if (!main) return null;
+  const text = strip(main);
+  const m = text.match(/\bthe manual\b/i);
+  if (!m) return null;
+  if (/\b[A-Z][a-z]+ Manual\b/.test(text.slice(0, m.index))) return null;
+  return text.slice(Math.max(0, m.index - 60), m.index + 50);
+}
+
 const median = (xs) => {
   if (!xs.length) return null;
   const s = [...xs].sort((a, b) => a - b), m = Math.floor(s.length / 2);
@@ -99,8 +116,12 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 
   const high = [];
   const rows = [];
+  const unnamed = [];
   for (const file of files) {
-    const ps = paragraphs(fs.readFileSync(file, 'utf8'));
+    const html = fs.readFileSync(file, 'utf8');
+    const um = unnamedManual(html);
+    if (um) unnamed.push({ url: '/' + path.relative(dist, path.dirname(file)).split(path.sep).join('/'), um });
+    const ps = paragraphs(html);
     if (!ps?.length) continue;
     const lead = opening(ps);
     const g = grade(lead);
@@ -139,4 +160,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   }, null, 1) + '\n');
   console.log(`Resource cards (embed listings): ${summary.cards_above_9} of ${summary.cards} "Who it's for" lines above grade ${LIMIT}.`);
   console.log(`Middle value: openings ${summary.opening_median}, full text ${summary.full_median}. Wrote dist/reading-grades.json.`);
+  if (unnamed.length) {
+    console.error(`\nThese pages say "the manual" before naming it (#1368). Name the manual, with a link, at or before the first mention:`);
+    for (const u of unnamed) console.error(`  error: ${u.url}  "...${u.um}..."`);
+    process.exit(1);
+  }
 }
