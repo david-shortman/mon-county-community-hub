@@ -1,0 +1,191 @@
+# SIMULATED, NOT REAL RESIDENTS. walk.js and score.py, run before and after the wave 17 door changes.
+summary:
+  date: '2026-11-14'
+  who: 'Claude Code, sprint wave 17, site plan and doors lane (see #529)'
+  simulated: Simulated walks by a script, not real residents.
+  build_before: main at 5f5fb06
+  build_after: main at 5f5fb06 plus the three wave 17 door PRs
+  total_before: 97
+  total_after: 104
+  out_of: 126
+results:
+- id: p11
+  task: Is there a free or cheap ride to medical appointments for seniors?
+  before:
+    total: 17
+    taps: 2
+    screens: 6
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+  after:
+    total: 17
+    taps: 2
+    screens: 6
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+  note: No change. The best path is still the Medical rides page; the older adults page now also shows
+    the NewFIT phone and checked date.
+- id: p12
+  task: Where can my brother get help at home for his disability?
+  before:
+    total: 8
+    taps: 2
+    screens: 13
+    scores:
+      IA1: 2
+      IA2: 0
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+  after:
+    total: 16
+    taps: 4
+    screens: 6
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+  note: Lowest persona score before. The disability starting page now shows phones and checked dates (TR1
+    0 to 3), and the Family door picker has the disability choices, so the walk needs 6 screens instead
+    of 13.
+- id: p28
+  task: How do I speak at a Morgantown City Council meeting?
+  before:
+    total: 16
+    taps: 2
+    screens: 6
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+  after:
+    total: 15
+    taps: 4
+    screens: 4
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+  note: Fewer screens (6 to 4) but two more taps, because the walk now ticks the new picker choice and
+    presses Show my steps. Net 1 point lower. The plain link is still in the door's page list.
+- id: d01
+  task: I use a wheelchair and need a ramp at my house. Who can help?
+  before:
+    total: 15
+    taps: 2
+    screens: 16
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+  after:
+    total: 15
+    taps: 4
+    screens: 9
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+  note: Screens 16 to 9 through the new home changes choice. Still above the steps limit for IA2.
+- id: d02
+  task: My mom needs someone to help her at home. Who do I call?
+  before:
+    total: 14
+    taps: 2
+    screens: 13
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+  after:
+    total: 15
+    taps: 4
+    screens: 6
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+  note: Screens 13 to 6 through the new help at home choice.
+- id: d03
+  task: Where can I volunteer this weekend?
+  before:
+    total: 17
+    taps: 2
+    screens: 5
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+  after:
+    total: 16
+    taps: 4
+    screens: 4
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+  note: 'Same as p28: fewer screens, two more taps through the picker. Net 1 point lower.'
+- id: d04
+  task: Who decides on bus routes or the water bill, the city or the county?
+  before:
+    total: 10
+    taps: 2
+    screens: 7
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 1
+      TR1: 3
+      II1: 1
+  after:
+    total: 10
+    taps: 4
+    screens: 4
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 2
+      PL1: 1
+      TR1: 3
+      II1: 1
+  note: Screens 7 to 4 through the new who decides choice; the total holds because the answer page reads
+    at grade 8.7.
