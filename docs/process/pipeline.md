@@ -103,6 +103,8 @@ Two hard rules sit on top of the number:
 - **Risk 1 never ships without David.** It becomes `for:david` no matter the score.
 - **Evidence 1 cannot be `up-next`.** Do a findability test or a research issue first.
 
+**Whoever opens the issue scores it** (proposed 2026-11-09). The agent that opens a `for:code` or `for:duet` issue posts the `Score:` comment when it opens it. Duet checks and adjusts scores on its sweep instead of writing every one. In week 2, none of 69 new `for:code` and `for:duet` issues had a score.
+
 **Where the scored backlog lives:** in GitHub issues, nowhere else. The score comment is on each issue. The ranked view is the issue list filtered by `for:code` and sorted by score. The weekly retrospective prints the top 10 so the order is visible in one place. Notion keeps only private reasons (for example, a partner conversation behind an Evidence score).
 
 ### 3. Spec
@@ -123,6 +125,7 @@ The builder (the 6:41 AM session or the `claude.yml` Action):
 
 - **Claims with a comment, then re-checks.** Add `in-progress`, post a claim comment, wait a few seconds, then reread the issue. If an earlier claim comment from another run exists, stop. The earliest claim comment wins. This turns the label race into a rule anyone can check.
 - **Claims expire after 3 days with no linked PR** (David, 2026-11-02), matching the Health check's 3-day flag on quiet `in-progress` issues. Anyone may then remove the stale `in-progress` with a comment saying so.
+- **A run releases its claims before it ends** (proposed 2026-11-09). Before a run stops, it removes `in-progress` from every issue it claimed that has no open PR, with a one-line comment on what is left. Re-check and verification sweeps that only comment do not claim at all. In week 2, sprint waves left 49 claims behind with no update for 6 to 7 days.
 - **Work in progress limit:** at most one open build PR per builder, and at most three open self-merge PRs total. Finish or close before starting more.
 - **Runs the local checks** (`npm ci && npm run check-content && npm run build`) before opening the PR.
 - **Adds a build log entry in the PR** as a new file (see Ship), including the metric and check date from the spec.
