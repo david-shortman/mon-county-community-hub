@@ -15,9 +15,10 @@ evidence:
     data_date: 2022 and August 2024 to August 2025
     publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
-    checked: 2026-11-01
+    checked: 2026-11-14
     shows: Income inequality, the income at the 80th percentile divided by the income at the 20th percentile.
     figure: "6.2 (West Virginia 5.0, US 4.9)"
+    data_date: "2020 to 2024"
     publisher: County Health Rankings (March 2026 supplemental release)
 affected:
   estimate: "about half of single adults and two thirds of single mothers"

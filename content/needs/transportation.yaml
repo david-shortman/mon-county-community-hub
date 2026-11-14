@@ -3,7 +3,7 @@ slug: transportation
 summary: About 1 in 12 adults in Mon County lacked reliable transportation in the past year. Transportation shows up in every local needs survey, as a quality of life problem and as a reason care is hard to get.
 evidence:
   - url: https://data.cdc.gov/d/swc5-untb
-    checked: 2026-10-31
+    checked: 2026-11-14
     shows: CDC estimates the share of adults who lacked reliable transportation in the past year. It is a model-based estimate, not a count.
     figure: "8.3% of adults (likely between 6.7% and 10.3%)"
     data_date: "2023"
@@ -23,7 +23,7 @@ affected:
   estimate: "8.3% of adults"
   description: Adults in Monongalia County who lacked reliable transportation in the past year, as estimated by CDC.
   url: https://data.cdc.gov/d/swc5-untb
-  checked: 2026-10-31
+  checked: 2026-11-14
 severity: medium
 severity_why: Without a ride, people miss work, appointments and food shopping.
 trend: unknown
