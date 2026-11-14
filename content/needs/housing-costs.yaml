@@ -53,7 +53,7 @@ gaps:
   - Local Fair Market Rent figures still need checking on HUD's own page (issue 740).
 topics: [housing]
 rank: 3
-rank_why: "Score 11 of 12: severity 3, reach 3 (6,702 households), agreement 3 (five sources), room to help 2 (help exists, but the main problem is cost and supply). Highest 211 demand among the needs that scored 11."
+rank_why: "Score 11 of 12: severity 3, reach 3 (6,386 households), agreement 3 (five sources), room to help 2 (help exists, but the main problem is cost and supply). Highest 211 demand among the needs that scored 11."
 questions: [q25, q27]
 issues: [202, 565, 566, 740]
 get_help:
