@@ -3,7 +3,7 @@ slug: utility-bills
 summary: About 1 in 10 adults in Mon County were threatened with a utility shutoff in the past year. Utility bills are the second most common reason people here call West Virginia 211.
 evidence:
   - url: https://data.cdc.gov/d/swc5-untb
-    checked: 2026-10-31
+    checked: 2026-11-14
     shows: CDC estimates the share of adults whose utility service was threatened with a shutoff in the past year. It is a model-based estimate, not a count.
     figure: "9.5% of adults (likely between 7.8% and 11.5%)"
     data_date: "2023"
@@ -23,7 +23,7 @@ affected:
   estimate: "9.5% of adults"
   description: Adults in Monongalia County threatened with a utility shutoff in the past year, as estimated by CDC.
   url: https://data.cdc.gov/d/swc5-untb
-  checked: 2026-10-31
+  checked: 2026-11-14
 severity: high
 severity_why: A winter heat or water shutoff can put health and housing at risk.
 trend: unknown

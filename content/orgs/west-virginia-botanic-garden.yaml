@@ -1,0 +1,21 @@
+name: West Virginia Botanic Garden
+slug: west-virginia-botanic-garden
+kind: nonprofit
+website: https://www.wvbg.org/
+phone: "304-322-2093"
+summary: A nonprofit garden on the 82-acre former Tibbs Run Reservoir at 1061 Tyrone Road, Morgantown, with gardens, woods and trails. The grounds are open every day from dawn to dusk. Entry is free, and it asks for a $5 donation per adult. It also runs nature programs and camps.
+topics: [outdoors, community]
+area: monongalia-county
+sources:
+  - url: https://www.wvbg.org/about-us/
+    checked: 2026-11-14
+    quote: "The West Virginia Botanic Garden at Tibbs Run Preserve is a non-profit organization."
+  - url: https://www.wvbg.org/visit/when-are-we-open/
+    checked: 2026-11-14
+    quote: "The WVBG is open 365 days a year, from dawn to dusk."
+  - url: https://www.wvbg.org/visit/admission/
+    checked: 2026-11-14
+    quote: "Admission to the Garden is free, but donations are welcome. A $5 donation per adult visitor is requested."
+  - url: https://www.wvbg.org/visit/getting-here/
+    checked: 2026-11-14
+    quote: "We are located at 1061 Tyrone Road, Morgantown, WV, 26508."

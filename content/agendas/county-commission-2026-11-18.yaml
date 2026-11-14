@@ -22,7 +22,7 @@ items:
   - number: "3"
     title: Consent and Approval – County Administrator
     kind: consent
-    line: Routine business from the County Administrator approved together with one vote. The agenda lists these parts. Budget revisions list state approval of General Fund items for the County Commission (401) and Law Enforcement (700), and fiduciary orders list two estates.
+    line: Routine business from the County Administrator approved together with one vote. The agenda lists these parts. Budget revisions list state approval of General Fund items for the County Commission (401) and Law Enforcement (700), and fiduciary orders, which are about estates of people who have died, list two estates.
     parts:
       - Erroneous Assessments
       - Minutes
@@ -54,7 +54,7 @@ items:
   - number: "9a"
     title: Consideration of approval of a Consultant Agreement with MuniCap, Inc. under which MuniCap would complete an updated study of the Harmony Grove TIF District and prepare an updated Revenue Report and debt service coverage calculations in connection with proposed modifications to the terms of TIF Bonds previously issued by the County Commission for the Harmony Grove TIF District
     kind: vote
-    line: A vote on a consultant agreement with MuniCap, Inc. for an updated study and revenue report on the Harmony Grove TIF District. The agenda says this is tied to proposed changes to the terms of TIF bonds the Commission issued earlier for that district.
+    line: A vote on a consultant agreement with MuniCap, Inc. for an updated study and revenue report on the Harmony Grove TIF District, tied to proposed changes to the terms of TIF bonds the Commission issued earlier for that district. In a TIF (tax increment financing) district, the growth in property tax from the area pays for projects there.
   - number: "9b"
     title: Consideration to approve AIA B253 Agreement for Furniture, Furnishings and Equipment Design Services as a supplement to the Owner-Architect Agreement dated July 14, 2026 with Silling Associates, Inc. for the Monongalia County Health Department Project
     kind: vote
