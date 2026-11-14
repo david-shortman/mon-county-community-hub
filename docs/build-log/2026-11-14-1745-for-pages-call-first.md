@@ -5,4 +5,4 @@
   - People with disabilities and caregivers: LiveAbility, home changes (CLSP), Disability Rights of WV, a new "Job help for people with disabilities" link to the DRS Morgantown office, and the Aging and Disability Resource Center on the caregiver link.
   - Older adults: Senior Monongalians in-home care, the Aging and Disability Resource Center, and NewFIT rides to medical visits.
 - **Left out:** records with topic housing, money or food (they would make this a high stakes page), and pages with no record behind them (Medicaid waivers).
-- **Measured:** see the wave 17 walkthrough results in `content/findability/walkthroughs/`. Cost: $0.
+- **Measured:** simulated walks, before and after, in `content/findability/walkthroughs/2026-11-14-doors.yaml` (from the site plan and doors PR). Cost: $0.
