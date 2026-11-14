@@ -1,0 +1,31 @@
+---
+// Westover business license fees and B&O tax rates (part of #393): the City
+// of Westover's Business Licence Application and B&O tax return PDFs as
+// short lists. Every fee and rate is copied in
+// content/pdf-pages/westover-business-license.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Westover business license fees and B&O tax", summary: "Every business type and yearly fee on the City of Westover's business license form, the August 1 deadline, and the B&O tax rates, due dates and late penalties" };
+const d = pdfPage('westover-business-license');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-296-6860';
+---
+<Base title="Westover business license fees and B&O tax rates, Mon County, WV" description="The City of Westover's yearly business license fees, the August 1 deadline, and its B&O tax rates, quarterly due dates and late penalties, from its PDF forms.">
+  <h1>Westover business license fees and B&amp;O tax</h1>
+  <p class="lede">Doing business in the City of Westover? The city has a yearly business license and a B&amp;O tax you file each quarter. The fees and rates are in two PDF forms, so here they are as short lists. Questions: call the city at <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>Other Westover forms, and what to do in Star City, Granville or outside any town: see <a href={`${base}/business-by-town/`}>start a business in Star City, Granville or Westover</a>.</p>
+
+  <p class="meta">This page is a reading aid. The city's forms are the official version. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>
