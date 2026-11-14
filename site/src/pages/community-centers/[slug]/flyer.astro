@@ -80,6 +80,10 @@ const checked = oldestChecked(p.sources);
   .flyer-qr { width: 9rem; max-width: 100%; flex: 0 0 auto; }
   .flyer-qr :global(svg) { width: 100%; height: auto; display: block; }
   .flyer-small { font-size: 0.9rem; margin-top: 12px; }
+  /* Big text on a narrow screen: the same step down as other titles (press.css). */
+  @container page (max-width: 14em) {
+    .flyer h1 { font-size: min(1.75rem, 15cqi); hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 8 4 3; }
+  }
   @media print {
     .no-print { display: none; }
     @page { margin: 0.5in; }

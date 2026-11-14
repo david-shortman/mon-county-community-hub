@@ -67,6 +67,26 @@ html:root .lede { font-size: 1.2rem; line-height: 1.5; color: var(--muted); marg
 html:root .front-h + .lede {
   font-family: var(--serif-lede, var(--serif)); font-weight: var(--serif-lede-weight, 600); font-size: 1.3rem; line-height: 1.4; font-size-adjust: 0.47;
 }
+/* Big text on a narrow screen. At 320px with 200% text the column holds about
+   8em of body text, so a 67px title fit only 8 letters and long words like
+   "Everything" or "Monongalia" broke mid-word with no hyphen. A container
+   query's em follows the page's text size (a media query's does not), so this
+   only changes the look when the reader has made text big on a small screen.
+   Headings step down one size on the scale (h1 to the h2 size, h2 to the h3
+   size), and on the narrowest columns shrink a little more with the column
+   (cqi), so a 10 letter word like "Morgantown" fits on one line. Longer words
+   break at a syllable with a hyphen where the browser can hyphenate English.
+   Normal screens and normal text are unchanged. */
+html:root main#main { container: page / inline-size; }
+@container page (max-width: 14em) {
+  html:root main :is(h1, h2, h3, .door-name, .home-band strong, .big-choices a) {
+    hyphens: auto; -webkit-hyphens: auto; hyphenate-limit-chars: 8 4 3; overflow-wrap: break-word;
+  }
+  html:root main h1,
+  html:root main h1.front-h { font-size: min(1.75rem, 16.5cqi); }
+  html:root main h2 { font-size: min(1.3rem, 15cqi); }
+  html:root main :is(h3, .card h3, :is(.card.resource, .card.place) > h2) { font-size: min(1.3rem, 13cqi); }
+}
 html:root :is(.eyebrow, .mp-when) {
   font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--muted);
