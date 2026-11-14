@@ -66,10 +66,13 @@ export function parseTable(text) {
   return rows;
 }
 
-// { ok, problems }: ok only when there is at least one filled row and every
-// filled row is confirmed with an owner's URL and a date. Rows with no claim
-// (the template's empty rows) are skipped.
-export function verdict(rows) {
+// { ok, problems }: ok only when there is at least one filled row, every
+// filled row is confirmed with an owner's URL and a date, and, when the claim
+// packet is given (expected: claimsFor() items), every claim in it has a
+// confirmed row with the same field and claim. Rows with no claim (the
+// template's empty rows) are skipped.
+const key = (field, claim) => `${String(field).trim().toLowerCase()}|${String(claim).replace(/\|/g, '/').replace(/\s+/g, ' ').trim().toLowerCase()}`;
+export function verdict(rows, expected = null) {
   const filled = rows.filter((r) => r.claim);
   const problems = [];
   if (!filled.length) problems.push('no filled Second check table');
@@ -79,6 +82,12 @@ export function verdict(rows) {
     else if (r.result !== 'confirmed') problems.push(`${where} is ${r.result}; this blocks the merge until a third look or the owner's page settles it`);
     if (r.result === 'confirmed' && !/^https?:\/\//.test(r.url)) problems.push(`${where} needs the owner's source URL`);
     if (r.result === 'confirmed' && !/^\d{4}-\d{2}-\d{2}$/.test(r.checked)) problems.push(`${where} needs the checked date (YYYY-MM-DD)`);
+  }
+  if (expected) {
+    const have = new Set(filled.map((r) => key(r.field, r.claim)));
+    for (const it of expected) for (const c of it.claims) {
+      if (!have.has(key(c.field, c.claim))) problems.push(`${it.name}: ${c.field} "${c.claim.slice(0, 50)}" has no row in the Second check table`);
+    }
   }
   return { ok: !problems.length, problems };
 }

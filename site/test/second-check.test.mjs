@@ -35,3 +35,12 @@ test('verdict: all confirmed with URL and date passes; changed, not found or bla
   assert.equal(verdict(parseTable(table(['| Cost | Free | | | |']))).ok, false);
   assert.equal(verdict(parseTable('no table here')).ok, false);
 });
+
+test('verdict with the packet: every claim needs its own confirmed row', () => {
+  const expected = [claimsFor(rec)];
+  const rows = expected[0].claims.map((c) => `| ${c.field} | ${c.claim.replace(/\|/g, '/')} | confirmed | https://example.org/pantry | 2026-11-14 |`);
+  assert.equal(verdict(parseTable(table(rows)), expected).ok, true);
+  const partial = verdict(parseTable(table(rows.slice(1))), expected);
+  assert.equal(partial.ok, false);
+  assert.match(partial.problems.join(' '), /has no row/);
+});

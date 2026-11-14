@@ -4,7 +4,7 @@ David chose a blind second check for high-stakes items on #97 (October 30, 2026)
 
 ## When it is needed
 
-A PR needs a second check when it adds or changes a record in `content/orgs/`, `resources/`, `calendar/`, `secondhand/`, `boards/` or `places/` that is top tier: a topic of `health`, `money`, `housing`, `family`, `taxes` or `voting`, any `calendar/` entry, or a record the risk rubric scores 6 or more. Hiding a record does not need one (taking a wrong item down never waits), and the verdict skips hidden records.
+A PR needs a second check when it adds or changes a record in `content/orgs/`, `resources/`, `calendar/`, `secondhand/`, `boards/` or `places/` that is top tier: a topic of `health`, `money`, `housing`, `family`, `taxes` or `voting`, any `calendar/` entry, or a record the risk rubric scores 6 or more. The tools find the first two kinds on their own (`isTopTier()` in `site/src/lib/content.mjs`). A record the rubric raises has no field that marks it yet, so its author names its file to `claims` by hand. Hiding a record does not need one (taking a wrong item down never waits), and the verdict skips hidden records.
 
 ## The steps
 
@@ -19,8 +19,10 @@ A PR needs a second check when it adds or changes a record in `content/orgs/`, `
    ```
    node scripts/second-check.mjs verdict --pr N
    ```
-   It exits 0 when every filled row is confirmed with a URL and a date, or when the PR changes no top-tier record. It exits 1, and says why, when the table is missing, a row has no result, or a row is `changed` or `not found`.
+   It exits 0 when every claim in the PR's packet has a row that is confirmed with a URL and a date, or when the PR changes no top-tier record. A partial table, or a table for another record, does not pass. It exits 1, and says why, when the table is missing, a row has no result, or a row is `changed` or `not found`.
 5. **A mismatch blocks the merge.** Do not average or smooth it over. Either the author fixes the record to match the owner's page and a third look confirms it, or the record is hidden (`hidden.reason: unconfirmed-risky`) until it is settled. A `not found` means the fact comes off.
+
+One limit: every session posts on GitHub under the same account, so the verdict cannot tell who posted the table. Whoever starts the checker session says so on the PR ("second check by session ..."), and the author never posts the table.
 
 David's own check of shelter, crisis, food and benefits changes (#493) still applies on top: those PRs stay `for:david` either way.
 

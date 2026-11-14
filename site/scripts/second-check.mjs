@@ -101,8 +101,11 @@ if (cmd === 'claims') {
     files = b ? changedFiles(b) : [];
   } else { console.error('Usage: second-check.mjs verdict --pr N | --file BODY.md'); process.exit(2); }
   const top = topTier(files, read);
+  if (top.some((r) => r.unreadable)) { console.log(`Second check: could not read ${top.filter((r) => r.unreadable).map((r) => r._file).join(', ')}, so cannot tell.`); process.exit(1); }
   if (!top.length) { console.log('Second check: not needed (no top-tier record changed).'); process.exit(0); }
-  const v = verdict(parseTable(text));
+  // Every claim in this PR's packet must have a confirmed row, so a partial
+  // table, or one for another record, does not pass.
+  const v = verdict(parseTable(text), top.filter((r) => !r.unreadable).map(claimsFor).filter((it) => it.claims.length));
   if (v.ok) { console.log(`Second check: confirmed for ${top.length} top-tier record(s).`); process.exit(0); }
   console.log(`Second check: not ready for ${top.map((r) => r._file).join(', ')}`);
   for (const p of v.problems) console.log(`- ${p}`);
