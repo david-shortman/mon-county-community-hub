@@ -1,0 +1,41 @@
+# The food day list on /help/food/by-day/ (#60): free food and meals by day of
+# the week, with "Open today" first. Only records already on the site, each
+# checked on the group's own page. A person re-reads every entry once a month
+# (content/checklists/food-days.yaml).
+#
+# Each entry names one record: resource, place (content/places) or org.
+#   days      which days it runs, from mon tue wed thu fri sat sun. Leave it
+#             out when the record has opening_hours: the days come from there.
+#   kind      meal (a meal you sit down to) or groceries (food to take home)
+#   for       optional; who it is only for, in a few words, as it reads after
+#             "Only for" ("WVU students", "people 60 and older")
+#   when      optional; the time in words when the record does not say it on
+#             one line (places use their first `regular` line)
+# Under `appointment:` go pantries with no set walk-in days: call first.
+#
+# Leave a pantry off when its days or hours disagree between sources or no
+# current official page states them (#932, #1413). Food changes wait for David.
+days:
+  - resource: christian-help-food-pantry
+    kind: groceries
+  - place: morgantown-community-kitchen-weekday-lunch
+    days: [mon, tue, wed, thu, fri]
+    kind: meal
+    when: Starts at 11 a.m.
+  - resource: senior-monongalians-meals
+    days: [mon, tue, wed, thu, fri]
+    kind: meal
+    for: people 60 and older
+    when: 11:30 a.m. to 12:30 p.m., at the Mountaineer Mall
+  - place: salvation-army-morgantown-family-dinner
+    days: [sun]
+    kind: meal
+    when: 6 p.m.
+  - resource: the-rack-wvu-student-food-pantry
+    days: [mon, tue, wed, thu, fri]
+    kind: groceries
+    for: WVU students
+    when: 8:15 a.m. to 4:45 p.m.
+appointment:
+  - org: scotts-run-settlement-house
+    kind: groceries

@@ -21,6 +21,7 @@ import YAML from 'yaml';
 import { CONTENT_DIR, todayYmd, ymd, loadDir, loadSecondhand, oldestChecked, isStale, staleDaysFor } from '../src/lib/content.mjs';
 import { reportLines as personaReport } from './persona-report.mjs';
 import { electionRunway, runwayLine } from '../src/lib/elections.mjs';
+import { loadFoodDaysFile, resolveEntries, isOverdue } from '../src/lib/food-days.mjs';
 
 export const CHECKLIST_DIR = path.join(CONTENT_DIR, 'checklists');
 const FILE_FIELDS = ['id', 'title', 'issue_title', 'tracking', 'intro', 'items'];
@@ -80,6 +81,15 @@ export const RUNS = {
   'election-runway': (today) => [runwayLine(electionRunway(today))],
   // The scoreboard persona line for the monthly persona review (#1037).
   'persona-line': (today) => personaReport(today),
+  // Every entry on the food day list (#60), oldest check first: a person
+  // re-reads each one monthly. Entries over 45 days old already say "Call
+  // before you go" on /help/food/by-day/.
+  'food-days': (today) => {
+    const d = loadFoodDaysFile();
+    return [...resolveEntries(d.days), ...resolveEntries(d.appointment)]
+      .sort((a, b) => String(a.checked).localeCompare(String(b.checked)))
+      .map((e) => `${e.name} (\`content/${e.record._file}\`): oldest check ${e.checked}${isOverdue(e.checked, today) ? ' (already says "Call before you go")' : ''}. Re-read ${(e.record.sources || []).map((s) => s.url).join(', ')}`);
+  },
   // Make it better entries that will say "may be out of date" within 30 days
   // (90-day rule, #791), so they can be re-read first.
   'better-stale-soon': (today) => {

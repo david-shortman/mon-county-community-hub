@@ -1,0 +1,27 @@
+# Monthly re-check of the food day list (#60): every pantry and meal on
+# /help/food/by-day/, from content/food-days.yaml. The daily food watch
+# (content/watch/food.yaml) flags page changes between checks; this is the
+# set monthly read. How it works: site/scripts/checklists.mjs
+id: food-days
+title: Food day list, monthly re-check
+issue_title: Monthly checklist, food pantry and meal days
+tracking: 60
+intro: >-
+  Read each group's own page below and compare the days, hours, address and
+  who it is for with the record named. If nothing changed, set the checked
+  date on each source you re-read and add a short quote from the page. If
+  something changed, fix the record in the same PR. If sources now disagree,
+  take the entry off content/food-days.yaml and open a needs-verification
+  issue (see #932). Food changes wait for David. An entry not re-read in 45
+  days says "Call before you go" on the page by itself.
+items:
+  - text: >-
+      Re-read every entry on the food day list, oldest check first.
+    run: food-days
+    when: month
+  - text: >-
+      The Rack at WVU blocks automated reads. Open its page in a browser and
+      compare the hours with content/resources/the-rack-wvu-student-food-pantry.yaml.
+    url: https://campuslife.wvu.edu/the-rack-student-food-pantry
+    person: true
+    when: month
