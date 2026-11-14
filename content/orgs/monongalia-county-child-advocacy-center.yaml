@@ -1,0 +1,18 @@
+name: Monongalia County Child Advocacy Center
+slug: monongalia-county-child-advocacy-center
+kind: nonprofit
+website: https://moncocac.org/
+phone: "304-598-0344"
+summary: A nonprofit at 909 Greenbag Road, Morgantown, that has served children who have been abused or have had other hard experiences, and their families, since 2005. It offers interviews with trained staff, family advocacy, therapy and case management. It works with police, prosecutors, child protection workers and medical and mental health workers. It also runs community education, a program for children Monongalia County Schools identifies, and a program for families affected by substance use. Families have no out-of-pocket cost for these programs.
+topics: [family, health]
+area: monongalia-county
+sources:
+  - url: https://moncocac.org/what-we-do/
+    checked: 2026-11-14
+    quote: "Children and families have no out-of-pocket expenses for participating in these programs."
+  - url: https://moncocac.org/contact/
+    checked: 2026-11-14
+    quote: "909 Greenbag Road Morgantown, WV 26508"
+  - url: https://moncocac.org/about-us/
+    checked: 2026-11-14
+    quote: "The Center opened on April 28, 2005."
