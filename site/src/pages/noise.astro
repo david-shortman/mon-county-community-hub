@@ -11,6 +11,7 @@ import BigChoices from '../components/BigChoices.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import FromPdf from '../components/FromPdf.astro';
 import SourceLine from '../components/SourceLine.astro';
+import ComplaintJourney from '../components/ComplaintJourney.astro';
 import { resource } from '../lib/content.mjs';
 import { pdfPage } from '../lib/pdf-pages.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -79,6 +80,7 @@ const cityCode = 'https://library.municode.com/wv/morgantown/codes/code_of_ordin
 
   <h2 id="property">Property problems</h2>
   <p>Tall grass, trash, or a building that is falling apart? See <a href={`${base}/make-it-better/report/`}>how to report a problem</a> to the city, or to the county outside city limits. Here is what the city says happens after you report.</p>
+  <ComplaintJourney sheet={d.sources[0].url} />
   <FromPdf d={d} />
 
   <p class="meta">Sources checked October 31, 2026. This page is a reading aid; the <a href={cityCode}>City Code</a> is the official version. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
