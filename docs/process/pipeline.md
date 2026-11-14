@@ -254,7 +254,7 @@ The retro itself is a log entry and can be self-merged. Any process change it pr
 
 Items that need David pile up faster than he can clear them: at the end of week 1 there were 110 open `for:david` issues and 8 open `for:david` PRs, the oldest about 5.5 days old.
 
-- **Once a week, before the Monday retro, Duet writes one decision list** as a new issue titled "Decisions for David, week of <date>", labeled `for:david`. It lists every open `for:david` item, grouped as: PRs to merge, decisions to make, and calls or contacts only David can make. Each item gets one line: what it is, the recommended answer, and what happens if David says nothing.
+- **Once a week, the Monday retro writes one decision list** (changed 2026-11-09 from Duet, which did not write one in week 2) as a new issue titled "Decisions for David, week of <date>", labeled `for:david`. It lists every open `for:david` item, grouped as: PRs to merge, decisions to make, and calls or contacts only David can make. Each item gets one line: what it is, the recommended answer, and what happens if David says nothing.
 - **David answers in that one issue.** Agents apply the answers on the linked issues and PRs.
 - **`needs-verification` issues get `for:david` only when a call or contact is the only way left to confirm the fact.** Otherwise they stay with Duet.
 - **The retro reports** the open `for:david` count and the oldest item's age each week.
