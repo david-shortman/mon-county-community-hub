@@ -1,0 +1,34 @@
+# How long each kind of fact stays fresh (#1093, docs/playbook/freshness-by-fact.md).
+# A listing's re-check window is the shortest window among the facts it
+# states, and never longer than its risk tier allows (90 days for the
+# high-stakes topics and calendar entries, recheckDaysFor() in
+# site/src/lib/content.mjs). Read by site/src/lib/fact-windows.mjs.
+#
+# Today these windows drive a report only (the Health check line
+# content-recheck-by-fact). Cards still follow recheckDaysFor(); moving cards
+# to these windows changes what residents see, so it waits for David.
+#
+# fields: the record fields that state this kind of fact (a dot reaches inside
+# contact). days: whole days.
+kinds:
+  - kind: hours
+    fields: [hours, opening_hours, meetings, best_time]
+    days: 90
+    why: Hours change with seasons, staffing and holidays.
+  - kind: cost-and-eligibility
+    fields: [cost, who_it_is_for, what_to_bring]
+    days: 180
+    why: Limits and fees change once or twice a year, often in July or January.
+  - kind: phone
+    fields: [phone, contact.phone, contact.text]
+    days: 365
+    why: Main phone lines rarely change. The daily Source check also looks for each phone on its source.
+  - kind: address
+    fields: [contact.place, address, place]
+    days: 365
+    why: Addresses change only when a group moves.
+# A calendar entry starting soon must have been read recently, whatever its
+# window: a date that moved is worst just before the day.
+upcoming_event:
+  within_days: 14
+  checked_within_days: 30
