@@ -20,6 +20,7 @@ import path from 'node:path';
 import YAML from 'yaml';
 import { CONTENT_DIR, todayYmd, ymd, loadDir, loadSecondhand, oldestChecked, isStale, staleDaysFor } from '../src/lib/content.mjs';
 import { reportLines as personaReport } from './persona-report.mjs';
+import { electionRunway, runwayLine } from '../src/lib/elections.mjs';
 
 export const CHECKLIST_DIR = path.join(CONTENT_DIR, 'checklists');
 const FILE_FIELDS = ['id', 'title', 'issue_title', 'tracking', 'intro', 'items'];
@@ -75,6 +76,8 @@ export const RUNS = {
     .filter((e) => (e.topics || []).some((t) => t === 'secondhand' || t === 'market'))
     .filter((e) => { const end = ymd(e.ends) || ymd(e.starts); return end < today && ageDays(end, today) <= 120; })
     .map((e) => `${e.title} (ended ${ymd(e.ends) || ymd(e.starts)}): look for the next date at ${e.url || e.sources?.[0]?.url}`),
+  // Whether the election files cover the next 60 days (#1383).
+  'election-runway': (today) => [runwayLine(electionRunway(today))],
   // The scoreboard persona line for the monthly persona review (#1037).
   'persona-line': (today) => personaReport(today),
   // Make it better entries that will say "may be out of date" within 30 days
