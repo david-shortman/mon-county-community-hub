@@ -1,0 +1,48 @@
+---
+// Housing path 3 (#202): looking for a place to rent. Links and cards only:
+// each fact comes from a record or a linked page with its own sources. Rent
+// numbers stay off until a person reads HUD's Fair Market Rents (#740).
+// Waits for David: topic housing.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import { loadDir } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { parent: "/housing/", label: "Looking for a place to rent" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+---
+<Base help title="Looking for a place to rent in Morgantown and Mon County" description="Looking for a rental in Monongalia County, WV? Check that it is registered, read the lease, apply for long-term rent help, and set up power, water and trash.">
+  <h1>Looking for a place to rent</h1>
+  <p class="lede">Check a rental before you sign, and get every promise in writing. Here is where to start.</p>
+
+  <h2 id="check">Check the rental</h2>
+  <p>Inside Morgantown and Star City, rentals must be registered with the town. You can ask whether a unit is registered.</p>
+  {r('morgantown-rental-registration') && <ResourceCard r={r('morgantown-rental-registration')} headingLevel={3} />}
+  {r('star-city-rental-registration') && <ResourceCard r={r('star-city-rental-registration')} headingLevel={3} />}
+  <ul>
+    <li><a href={`${base}/renting/#before`}>Before you rent</a>: what Legal Aid of West Virginia says to check in a lease</li>
+    <li><a href={`${base}/flood-zone/`}>Is the home in a flood zone?</a></li>
+    <li><a href={`${base}/lead/`}>Lead in old paint and tap water</a></li>
+  </ul>
+
+  <h2 id="rent-help">Help paying rent over time</h2>
+  <p>A housing voucher or public housing can lower your rent for the long term. There is a waiting list, so this is not quick help.</p>
+  {r('fmha-section-8-and-public-housing') && <ResourceCard r={r('fmha-section-8-and-public-housing')} headingLevel={3} />}
+  <p>Already applied? See <a href={`${base}/after-you-apply/housing-voucher/`}>After you apply for a housing voucher</a>.</p>
+
+  <h2 id="students">WVU students</h2>
+  {r('wvu-off-campus-housing') && <ResourceCard r={r('wvu-off-campus-housing')} headingLevel={3} />}
+
+  <h2 id="move-in">After you move in</h2>
+  <ul>
+    <li><a href={`${base}/who-serves-me/`}>Who serves my address?</a> Police, trash, water and streets</li>
+    <li><a href={`${base}/moving-here/`}>Start power, water, gas and trash</a></li>
+    <li><a href={`${base}/internet/`}>Internet where you live</a></li>
+    <li><a href={`${base}/vote/#register`}>Update your voter registration</a></li>
+  </ul>
+
+  <h2 id="cost">What rent costs here</h2>
+  <p>We have not found a trusted public source for local rent numbers that we can check, so we do not show any. A basic household budget for the county is on <a href={`${base}/how-we-are-doing/#basic-budget`}>How we are doing</a>.</p>
+  <p class="meta">Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

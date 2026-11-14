@@ -1,0 +1,65 @@
+---
+// Housing path 1 (#202): behind on rent, or the landlord says leave. Facts
+// are quoted or credited to Legal Aid of West Virginia by name, from its
+// "Eviction Process Before a Court Case is Filed" article, read 2026-11-14.
+// Rent help comes from the records. Waits for David: topic housing.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import { resource, telHref } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { parent: "/housing/", label: "Behind on rent" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const legalAid = resource('legal-aid-wv-eviction-help');
+const ccRent = resource('catholic-charities-emergency-financial-assistance');
+const wv211 = resource('wv-211');
+const before = [{ url: 'https://legalaidwv.org/legal-information/eviction-process-before-a-court-case-is-filed/', checked: '2026-11-14', name: 'Legal Aid of West Virginia' }];
+---
+<Base help title="Behind on rent in Mon County: help with rent and free legal help" description="Behind on rent or told to leave in Monongalia County, WV? Steps in order: keep every notice, ask for help with rent, call Legal Aid of WV, and what a landlord cannot do without a court order.">
+  <h1>Behind on rent, or told to leave</h1>
+  <p class="lede">Keep every notice from your landlord or the court, and do not ignore it. Legal Aid of West Virginia says a landlord cannot make you leave without a court order.</p>
+
+  <h2 id="steps">What to do, in order</h2>
+  <ol>
+    <li><strong>Talk to your landlord.</strong> Legal Aid says to try to learn why your landlord wants you to leave, and whether you could stay, even for a bit longer. <a href={`${base}/before-you-call/`}>Before you call</a> has what to have ready.</li>
+    <li><strong>Ask for help with rent.</strong> See the rent help below, and call <a href="tel:211">211</a> and say you are behind on rent.</li>
+    <li><strong>Call Legal Aid.</strong> Free legal help for renters with low income. If you have a court date in the next 10 days, call right away.</li>
+    <li><strong>Got court papers?</strong> See <a href={`${base}/housing/eviction-papers/`}>Got eviction papers</a> for what happens and when.</li>
+  </ol>
+
+  <h2 id="legal-aid">Free legal help</h2>
+  <ResourceCard r={legalAid} headingLevel={3} showCost />
+
+  <h2 id="rent-help">Help paying rent</h2>
+  {ccRent && <ResourceCard r={ccRent} headingLevel={3} />}
+  <p>For other help with rent, call <a href="tel:211">211</a>, text your ZIP code to 898211, or visit <a href="https://wv211.org">wv211.org</a>.</p>
+  <SourceLine sources={wv211.sources} org={wv211.org} about="211" />
+
+  <h2 id="cannot">What a landlord cannot do</h2>
+  <p>Legal Aid of West Virginia's article on what happens before a court case says:</p>
+  <ul>
+    <li>"A landlord cannot forcibly evict a tenant without a court order." A landlord cannot lock you out, cut off your utilities, or refuse repairs to force you out without going through court.</li>
+    <li>Without a court order, the police should not remove you because the landlord asks.</li>
+    <li>This is true even if you are behind on rent, and even if you never signed a lease or paid rent but have lived there a long time.</li>
+  </ul>
+  <p>Locked out or had your power cut off? Call Legal Aid at <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a>.</p>
+  <SourceLine sources={before} about="what a landlord cannot do without a court order" />
+
+  <h2 id="notice">Does the landlord have to give notice first?</h2>
+  <p>Legal Aid says it depends on why the landlord wants you to leave, so look at your lease:</p>
+  <ul>
+    <li><strong>Behind on rent or broke the lease:</strong> the landlord likely does not have to give you notice before going to court.</li>
+    <li><strong>Your lease is ending:</strong> the landlord is likely required to give you notice, and it should always be in writing. A month-to-month lease rarely needs more than one month's notice.</li>
+    <li><strong>Public housing or Section 8:</strong> you will get a letter that says why. You can ask the housing authority for an informal hearing before a court case is filed. Legal Aid has a form for this on its <a href="https://legalaidwv.org/renters-rights-west-virginia/eviction-in-west-virginia/">eviction page</a>.</li>
+  </ul>
+  <p class="note">This is general information from Legal Aid, not legal advice. For your own situation, ask Legal Aid or, if you are a WVU student, <a href={`${base}/renting/#before`}>Student Legal Services</a>.</p>
+  <SourceLine sources={[...before, { url: 'https://legalaidwv.org/renters-rights-west-virginia/eviction-in-west-virginia/', checked: '2026-11-14', name: 'Legal Aid of West Virginia' }]} about="notice before an eviction case" />
+
+  <h2 id="also">Also check</h2>
+  <ul>
+    <li><a href={`${base}/utility-bills/`}>A shutoff notice</a> for heat, water or electric</li>
+    <li><a href={`${base}/help/what-help/`}>What help might I get?</a> Two quick questions, no name needed</li>
+    <li><a href={`${base}/stay-tonight/`}>Where to stay tonight</a></li>
+  </ul>
+  <p class="meta">Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

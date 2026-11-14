@@ -1,0 +1,24 @@
+---
+// Housing starting page (#202): one question that leads to three short
+// answer pages (behind on rent, eviction papers, finding a place), plus the
+// existing mortgage and shelter pages. No facts of its own except the Legal
+// Aid phone line, read from its record. Waits for David: topic housing.
+import Base from '../../layouts/Base.astro';
+import Question from '../../components/Question.astro';
+import { resource, telHref } from '../../lib/content.mjs';
+export const page = { door: "this-month", topic: "housing", label: "Housing help", summary: "Behind on rent, got eviction papers, or looking for a place to rent: pick one for steps in order" };
+const legalAid = resource('legal-aid-wv-eviction-help');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base help title="Housing help in Morgantown and Mon County: what is going on?" description="Behind on rent, got eviction papers, or looking for a place to rent in Monongalia County, WV? Pick one for local steps in order, with free legal help.">
+  <h1>Behind on rent or facing eviction?</h1>
+  <p class="lede">Pick what is going on with your home. Got court papers? Call Legal Aid of West Virginia today at <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a>. Their help is free for renters with low income.</p>
+  <Question step={1} of={1} back="/" choices={[
+    { label: "I'm behind on rent, or my landlord says I have to leave", hint: 'Help with rent, free legal help, and what a landlord can and cannot do', href: '/housing/behind-on-rent/' },
+    { label: 'I got court papers about an eviction', hint: 'What happens and when, and how to get ready for the hearing', href: '/housing/eviction-papers/' },
+    { label: "I'm looking for a place to rent", hint: 'Check a rental, read the lease, and long-term help with rent', href: '/housing/find-a-place/' },
+    { label: "I own my home and I'm behind on the mortgage", hint: 'Call your servicer, and free housing counselors', href: '/behind-on-mortgage/' },
+    { label: 'I have no place to stay tonight', hint: 'Emergency shelter, and who to call if it is full', href: '/stay-tonight/' },
+  ]} />
+  <p>Want everything in one list? See <a href={`${base}/life-events/losing-my-home/`}>I lost my home or may lose it</a> or <a href={`${base}/for/renters/`}>For renters</a>.</p>
+</Base>
