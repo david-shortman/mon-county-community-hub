@@ -1,0 +1,177 @@
+---
+// Follow one complaint (#1890, part of #1440): what happens after you report a
+// property problem in Morgantown, on /noise/. Follows docs/design/motion.md.
+// Every step and number comes from the city's own sheet, "How Code
+// Enforcement Handles Complaints from Citizens" (content/pdf-pages/
+// morgantown-code-complaints.yaml), which the page also shows in full. The
+// day line adds up the longest times the sheet gives; that sum is ours and
+// the drawing says so. No new facts.
+// How it behaves:
+// - Still version (no script, reduced motion, motion turned off): a plain
+//   numbered list, each step with its own still drawing.
+// - Otherwise one drawing stays in view and the complaint marker moves along
+//   the day line to the step in the middle of the screen, while the filled
+//   part of the line grows. Only transform and opacity move. The step watcher
+//   and "Turn off motion" come from the shared kit (#1441).
+// - The drawings are aria-hidden; each step's text carries every day count.
+import MotionSwitch from './MotionSwitch.astro';
+const { sheet } = Astro.props;
+// Day line: x = X0 + day * K. 0 to 80 days across the drawing.
+const X0 = 24, K = 3.4;
+const x = (day) => +(X0 + day * K).toFixed(1);
+const TICKS = [[0, '0'], [21, '21'], [42, '42'], [62, '62'], [80, '80+']];
+// The marker stands at days 0, 1, 21, 42 and 62 in steps 1 to 5. The CSS
+// below moves it by day * K (3.4, 71.4, 142.8, 210.8) and fills the line to
+// day / 80. A test checks these match.
+const scene = (s) => `<svg class="cc-scene" data-s="${s}" viewBox="0 0 320 132" aria-hidden="true" focusable="false">
+  <text class="tb" x="${X0}" y="14">Days after you report</text>
+  <path class="axis" d="M${X0} 70H${x(80)}"/>
+  <rect class="fill" x="${X0}" y="67" width="${x(80) - X0}" height="6" rx="1"/>
+  ${TICKS.map(([d, t]) => `<path class="tick" d="M${x(d)} 64v12"/><text class="tx" x="${x(d)}" y="90" text-anchor="middle">${t}</text>`).join('')}
+  <path class="e e-ext ext" d="M${x(42)} 70H${x(62)}"/>
+  <g class="e e-l1"><text class="tc" x="${X0}" y="36">You report it.</text><text class="tx" x="${X0}" y="50">An inspector is assigned.</text></g>
+  <g class="e e-l2"><text class="tc" x="${X0}" y="36">Inspector visits within 24 hours.</text><text class="tx" x="${X0}" y="50">Owner gets a notice and a time to fix.</text></g>
+  <g class="e e-l3"><text class="tc" x="${X0}" y="36">Time to fix runs out: a citation.</text><text class="tx" x="${X0}" y="50">Court date 21 days later.</text></g>
+  <g class="e e-l4"><text class="tc" x="${X0}" y="36">Court date. Up to 20 more days.</text><text class="tx" x="${X0}" y="50">A judge may grant the extension.</text></g>
+  <g class="e e-l5"><text class="tc" x="${X0}" y="36">Still not fixed: larger fines.</text><text class="tx" x="${X0}" y="50">The city says 60 to 80+ days in all.</text></g>
+  <g class="mark"><path class="pin" d="M${X0} 70l-7 -9h14z"/><circle class="dot" cx="${X0}" cy="70" r="5"/></g>
+  <text class="tx tnote" x="${X0}" y="112">Longest times on the city's sheet, added up.</text>
+  <text class="tx tnote" x="${X0}" y="125">Not to scale for every case.</text>
+</svg>`;
+const steps = [
+  {
+    when: 'Day 0', title: 'You report it', short: 'You report it',
+    body: ['Code Enforcement gets the complaint and sorts it: property upkeep, a business property, a home, or an electrical problem. Then the right officer or inspector is assigned to look into it.'],
+  },
+  {
+    when: 'Within 24 hours', title: 'An inspector visits', short: 'An inspector visits',
+    body: ['The city says an officer reviews the property on site within 24 hours. If the complaint is valid, the owner gets an official notice with a time to fix it. That time can be right away for an emergency, anything that threatens life, health or property, or up to 20 days for a non-emergency.'],
+  },
+  {
+    when: 'When the time to fix runs out', title: 'A citation, if it is not fixed', short: 'A citation',
+    body: ['If the time runs out and the work is not done, the owner gets a citation. The court date on the citation is 21 days after it is issued.'],
+  },
+  {
+    when: '21 days after the citation', title: 'The court date', short: 'The court date',
+    body: ['On or before the court date, the owner may get up to 20 more days to fix it. At court, a judge may grant that 20-day extension.'],
+  },
+  {
+    when: 'If it is still not fixed', title: 'Larger fines', short: 'Larger fines',
+    body: ['If the owner still has not fixed it, the city says a judge "will issue more, and often larger, fines."'],
+  },
+];
+const N = steps.length;
+---
+<section class="cc-x" id="cc-explainer" aria-labelledby="cc-h">
+  <h3 id="cc-h">Follow one complaint, day by day</h3>
+  <p>The city says many complaints look as if nothing is happening, even while they move through its steps. Here are those steps on a line of days, so you can see where a complaint may be.</p>
+  <MotionSwitch skip="#cc-summary" />
+  <p class="cc-key"><strong>About the drawing:</strong> the steps and day counts are from the city's <a href={sheet}>complaint process sheet</a>. We added up the longest time for each step to draw the line. Real cases can be shorter or longer.</p>
+
+  <div class="cc-scrolly">
+  <figure class="cc-stage" aria-hidden="true">
+    <Fragment set:html={scene(1)} />
+    <p class="cc-now" data-now></p>
+  </figure>
+  <ol class="cc-steps" aria-label="One complaint, step by step">
+    {steps.map((st, i) => (
+      <li data-short={st.short}>
+        <p class="cc-when">{st.when}</p>
+        <h4>Step {i + 1} of {N}. {st.title}</h4>
+        <div class="cc-snap"><Fragment set:html={scene(i + 1)} /></div>
+        {st.body.map((t) => <p>{t}</p>)}
+      </li>
+    ))}
+  </ol>
+  </div>
+
+  <div class="cc-summary" id="cc-summary" tabindex="-1">
+    <h4>The path in short</h4>
+    <p>Report, a visit within 24 hours, a notice with up to 20 days to fix, a citation with a court date 21 days later, maybe 20 more days, then larger fines. The city says a complaint can take "upwards of 60 to 80+ days" to move through the legal system, and that "Many complaints appear as if they are not addressed, but Code Enforcement always uses this process".</p>
+  </div>
+</section>
+
+<script>
+  import { watchSteps } from '../lib/motion-client.mjs';
+  const sec = document.getElementById('cc-explainer');
+  const stage = sec?.querySelector('.cc-stage .cc-scene');
+  const now = sec?.querySelector('[data-now]');
+  const steps = sec ? Array.from(sec.querySelectorAll<HTMLElement>('.cc-steps > li')) : [];
+  watchSteps(sec, steps, (i) => {
+    stage?.setAttribute('data-s', String(i + 1));
+    if (now) now.textContent = 'Step ' + (i + 1) + ' of ' + steps.length + ': ' + (steps[i].dataset.short ?? '');
+  });
+</script>
+
+<style is:global>
+  /* ===== Follow one complaint (#1890). Press tokens only; all scoped to #cc-explainer. ===== */
+  #cc-explainer .cc-key { font-size: 0.95rem; color: var(--muted); }
+  #cc-explainer .cc-steps { list-style: none; margin: var(--s5) 0; padding: 0; }
+  #cc-explainer .cc-steps > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
+  #cc-explainer .cc-steps h4 { margin: 0 0 var(--s2); font-family: var(--serif); font-size: 1.15rem; }
+  #cc-explainer .cc-steps p { margin: 0 0 var(--s2); }
+  #cc-explainer .cc-steps p:last-child { margin-bottom: 0; }
+  #cc-explainer .cc-when { font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  #cc-explainer .cc-snap { margin: var(--s2) 0 var(--s3); padding: var(--s2); background: var(--bg); border-radius: 2px; }
+  #cc-explainer .cc-summary h4 { margin: 0 0 var(--s2); font-family: var(--serif); font-size: 1.15rem; }
+
+  /* Drawing parts */
+  #cc-explainer .cc-scene { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; overflow: visible; }
+  #cc-explainer .cc-scene text { font-size: 11px; fill: var(--fg); }
+  #cc-explainer .cc-scene .tx { font-size: 11px; fill: var(--muted); }
+  #cc-explainer .cc-scene .tb { font: 800 11px var(--kicker); fill: var(--fg); letter-spacing: 0.04em; }
+  #cc-explainer .cc-scene .tc { font-size: 13px; font-weight: 700; fill: var(--fg); }
+  #cc-explainer .cc-scene .axis { stroke: var(--line); stroke-width: 6; stroke-linecap: butt; }
+  #cc-explainer .cc-scene .tick { stroke: var(--fg); stroke-width: 1.5; }
+  #cc-explainer .cc-scene .fill { fill: var(--accent); transform-box: fill-box; transform-origin: left center; transform: scaleX(0); }
+  #cc-explainer .cc-scene .ext { stroke: var(--accent); stroke-width: 6; stroke-dasharray: 4 3; }
+  #cc-explainer .cc-scene .dot { fill: var(--card); stroke: var(--accent); stroke-width: 3; }
+  #cc-explainer .cc-scene .pin { fill: var(--rust); }
+
+  /* What each step shows: one caption, the marker's place, the filled line. */
+  #cc-explainer .cc-scene .e { opacity: 0; }
+  #cc-explainer .cc-scene[data-s="1"] .e-l1,
+  #cc-explainer .cc-scene[data-s="2"] .e-l2,
+  #cc-explainer .cc-scene[data-s="3"] .e-l3,
+  #cc-explainer .cc-scene[data-s="4"] .e-l4,
+  #cc-explainer .cc-scene[data-s="5"] .e-l5,
+  #cc-explainer .cc-scene[data-s="4"] .e-ext { opacity: 1; }
+  #cc-explainer .cc-scene[data-s="2"] .mark { transform: translateX(3.4px); }
+  #cc-explainer .cc-scene[data-s="3"] .mark { transform: translateX(71.4px); }
+  #cc-explainer .cc-scene[data-s="4"] .mark { transform: translateX(142.8px); }
+  #cc-explainer .cc-scene[data-s="5"] .mark { transform: translateX(210.8px); }
+  #cc-explainer .cc-scene[data-s="2"] .fill { transform: scaleX(0.0125); }
+  #cc-explainer .cc-scene[data-s="3"] .fill { transform: scaleX(0.2625); }
+  #cc-explainer .cc-scene[data-s="4"] .fill { transform: scaleX(0.525); }
+  #cc-explainer .cc-scene[data-s="5"] .fill { transform: scaleX(0.775); }
+
+  /* Live: only with script, motion allowed and not turned off (the kit adds .is-live). */
+  #cc-explainer .cc-stage { display: none; margin: 0; }
+  #cc-explainer .cc-now { margin: var(--s2) 0 0; font-weight: 700; font-size: 1rem; text-align: center; }
+  #cc-explainer.is-live .cc-snap { display: none; }
+  #cc-explainer#cc-explainer.is-live .cc-stage { display: block; }
+  #cc-explainer.is-live .cc-steps > li { margin-bottom: calc(3.5 * var(--s8)); }
+  #cc-explainer.is-live .cc-steps > li:last-child { margin-bottom: var(--s7); }
+  #cc-explainer.is-live .cc-steps > li.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    #cc-explainer.is-live .cc-stage :is(.mark, .fill) { transition: transform 0.7s ease; }
+    #cc-explainer.is-live .cc-stage .e { transition: opacity 0.4s ease; }
+  }
+  @media (min-width: 44rem) {
+    #cc-explainer.is-live .cc-scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+    #cc-explainer#cc-explainer.is-live .cc-stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--s4)); margin-top: var(--s5); padding: var(--s3); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; }
+  }
+  /* Tall phones: the drawing holds at the top while the steps scroll under it.
+     Short or zoomed-in screens keep a still drawing in each step instead. */
+  @media (max-width: 43.99rem) and (min-height: 36rem) {
+    #cc-explainer#cc-explainer.is-live .cc-stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 calc(-1 * var(--s2)) var(--s4); padding: var(--s2); background: var(--card); border-bottom: 2px solid var(--fg); }
+    /* 220px: about the height of the held drawing on a phone. */
+    #cc-explainer.is-live .cc-steps > li { scroll-margin-top: 220px; }
+    html:has(#cc-explainer.is-live) { scroll-padding-top: 220px; }
+  }
+  @media (max-width: 43.99rem) and (max-height: 35.99rem) {
+    #cc-explainer.is-live .cc-snap { display: block; }
+    #cc-explainer#cc-explainer.is-live .cc-stage { display: none; }
+    #cc-explainer.is-live .cc-steps > li { margin-bottom: var(--s4); }
+  }
+</style>
