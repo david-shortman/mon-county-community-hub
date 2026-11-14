@@ -1,0 +1,120 @@
+---
+// Step journey: the shared shell for "follow one thing through the steps"
+// explainers (#1440). Built from the complaint explainer on /noise/ (#1890,
+// ComplaintJourney.astro) so each new one only brings its steps and its
+// drawing. Follows docs/design/motion.md.
+// How it behaves:
+// - Still version (no script, reduced motion, motion turned off): a plain
+//   numbered list, each step with its own still drawing.
+// - Otherwise one drawing stays in view and changes to match the step in the
+//   middle of the screen. The step watcher and "Turn off motion" come from the
+//   shared kit (#1441). Each explainer's own CSS decides what its drawing
+//   shows for data-s="1" to data-s="N", moving only transform and opacity.
+// - The drawings are aria-hidden; each step's words carry every fact.
+// Props:
+//   id       the section id; the explainer's own CSS is scoped to it
+//   heading  the explainer's heading text
+//   level    heading level for the explainer (2 or 3); steps use one deeper
+//   steps    [{ when, title, short, body: [html strings] }], 3 to 7 of them
+//   scene    (s) => the drawing's SVG markup for step s; the root <svg> needs
+//            class "jr-scene" and data-s="${s}"
+// Slots: default (the intro, above the switch), "key" (about the drawing:
+// what is real and what is an example), "summary" (the path in short).
+import MotionSwitch from './MotionSwitch.astro';
+interface Step { when: string; title: string; short: string; body: string[] }
+interface Props { id: string; heading: string; level?: 2 | 3; steps: Step[]; scene: (s: number) => string; listLabel?: string; summaryHeading?: string }
+const { id, heading, level = 3, steps, scene, listLabel = 'Step by step', summaryHeading = 'The path in short' } = Astro.props;
+const H = `h${level}`;
+const HS = `h${level + 1}`;
+const N = steps.length;
+---
+<section class="jr-x" id={id} data-jr aria-labelledby={`${id}-h`}>
+  <H id={`${id}-h`}>{heading}</H>
+  <slot />
+  <MotionSwitch skip={`#${id}-summary`} />
+  <p class="jr-key"><slot name="key" /></p>
+
+  <div class="jr-scrolly">
+    <figure class="jr-stage" aria-hidden="true">
+      <Fragment set:html={scene(1)} />
+      <p class="jr-now" data-now></p>
+    </figure>
+    <ol class="jr-steps" aria-label={listLabel}>
+      {steps.map((st, i) => (
+        <li data-short={st.short}>
+          <p class="jr-when">{st.when}</p>
+          <HS class="jr-h">Step {i + 1} of {N}. {st.title}</HS>
+          <div class="jr-snap"><Fragment set:html={scene(i + 1)} /></div>
+          {st.body.map((t) => <p set:html={t} />)}
+        </li>
+      ))}
+    </ol>
+  </div>
+
+  <div class="jr-summary" id={`${id}-summary`} tabindex="-1">
+    <HS class="jr-h">{summaryHeading}</HS>
+    <slot name="summary" />
+  </div>
+</section>
+
+<script>
+  import { watchSteps } from '../lib/motion-client.mjs';
+  document.querySelectorAll<HTMLElement>('[data-jr]').forEach((sec) => {
+    const stage = sec.querySelector('.jr-stage .jr-scene');
+    const now = sec.querySelector('[data-now]');
+    const steps = Array.from(sec.querySelectorAll<HTMLElement>('.jr-steps > li'));
+    watchSteps(sec, steps, (i) => {
+      stage?.setAttribute('data-s', String(i + 1));
+      if (now) now.textContent = 'Step ' + (i + 1) + ' of ' + steps.length + ': ' + (steps[i].dataset.short ?? '');
+    });
+  });
+</script>
+
+<style is:global>
+  /* ===== Step journey shell (#1440). Press tokens only; scoped to [data-jr]. ===== */
+  .jr-x .jr-key { font-size: 0.95rem; color: var(--muted); }
+  .jr-x .jr-steps { list-style: none; margin: var(--s5) 0; padding: 0; }
+  .jr-x .jr-steps > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
+  .jr-x .jr-h { margin: 0 0 var(--s2); font-family: var(--serif); font-size: 1.15rem; }
+  .jr-x .jr-steps p { margin: 0 0 var(--s2); }
+  .jr-x .jr-steps p:last-child { margin-bottom: 0; }
+  .jr-x .jr-when { font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+  .jr-x .jr-snap { margin: var(--s2) 0 var(--s3); padding: var(--s2); background: var(--bg); border-radius: 2px; }
+
+  /* Drawing basics every scene shares. */
+  .jr-x .jr-scene { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; overflow: visible; }
+  .jr-x .jr-scene text { font-size: 11px; fill: var(--fg); }
+  .jr-x .jr-scene .tx { font-size: 11px; fill: var(--muted); }
+  .jr-x .jr-scene .tb { font: 800 11px var(--kicker); fill: var(--fg); letter-spacing: 0.04em; }
+  .jr-x .jr-scene .tc { font-size: 13px; font-weight: 700; fill: var(--fg); }
+  .jr-x .jr-scene .e { opacity: 0; }
+
+  /* Live: only with script, motion allowed and not turned off (the kit adds .is-live). */
+  .jr-x .jr-stage { display: none; margin: 0; }
+  .jr-x .jr-now { margin: var(--s2) 0 0; font-weight: 700; font-size: 1rem; text-align: center; }
+  .jr-x.is-live .jr-snap { display: none; }
+  .jr-x.jr-x.is-live .jr-stage { display: block; }
+  .jr-x.is-live .jr-steps > li { margin-bottom: calc(3.5 * var(--s8)); }
+  .jr-x.is-live .jr-steps > li:last-child { margin-bottom: var(--s7); }
+  .jr-x.is-live .jr-steps > li.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  @media (prefers-reduced-motion: no-preference) {
+    .jr-x.is-live .jr-stage .jr-scene * { transition: transform 0.7s ease, opacity 0.4s ease; }
+  }
+  @media (min-width: 44rem) {
+    .jr-x.is-live .jr-scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+    .jr-x.jr-x.is-live .jr-stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--s4)); margin-top: var(--s5); padding: var(--s3); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; }
+  }
+  /* Tall phones: the drawing holds at the top while the steps scroll under it.
+     Short or zoomed-in screens keep a still drawing in each step instead. */
+  @media (max-width: 43.99rem) and (min-height: 36rem) {
+    .jr-x.jr-x.is-live .jr-stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 calc(-1 * var(--s2)) var(--s4); padding: var(--s2); background: var(--card); border-bottom: 2px solid var(--fg); }
+    /* 240px: about the height of the held drawing on a phone. */
+    .jr-x.is-live .jr-steps > li { scroll-margin-top: 240px; }
+    html:has(.jr-x.is-live) { scroll-padding-top: 240px; }
+  }
+  @media (max-width: 43.99rem) and (max-height: 35.99rem) {
+    .jr-x.jr-x.is-live .jr-snap { display: block; }
+    .jr-x.jr-x.is-live .jr-stage { display: none; }
+    .jr-x.is-live .jr-steps > li { margin-bottom: var(--s4); }
+  }
+</style>
