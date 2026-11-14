@@ -65,3 +65,12 @@ test('a card with its button row grades near its own prose', () => {
   assert.equal(ps.length, 2);
   assert.ok(!ps.join(' ').includes('Directions'));
 });
+
+test('"the manual" must come after a named manual (#1368)', async () => {
+  const { unnamedManual } = await import('../scripts/check-reading.mjs');
+  const page = (body) => `<main><h1>T</h1>${body}</main>`;
+  assert.ok(unnamedManual(page('<p>The manual says 10 days.</p>')));
+  assert.equal(unnamedManual(page('<p>The rules are in the state\'s <a href="#">Income Maintenance Manual</a>.</p><p>The manual says 10 days.</p>')), null);
+  assert.ok(unnamedManual(page('<p>The manual says 10 days.</p><p>See the Income Maintenance Manual.</p>')));
+  assert.equal(unnamedManual(page('<p>No manual quoted here.</p>')), null);
+});
