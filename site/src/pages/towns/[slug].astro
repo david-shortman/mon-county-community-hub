@@ -7,6 +7,8 @@
 import Base from '../../layouts/Base.astro';
 import EventCard from '../../components/EventCard.astro';
 import SourceLine from '../../components/SourceLine.astro';
+import NearestHelp from '../../components/NearestHelp.astro';
+import { nearestFor } from '../../lib/nearest-help.mjs';
 import { loadCalendarWithFeeds, upcoming, loadDoors, telHref } from '../../lib/content.mjs';
 import { loadAllPlaces, KIND_LABELS, SECTION, DIRECTORY_KINDS } from '../../lib/places.mjs';
 import { HUBS, hubData, CENSUS_LIST, CDP_MEANING, KIND_WORDS } from '../../lib/town-hubs.mjs';
@@ -23,6 +25,7 @@ const door = loadDoors().bySlug['living-here'];
 const calendar = upcoming(await loadCalendarWithFeeds(), undefined, 120);
 const d = hubData(h, { calendar, places: loadAllPlaces() });
 const cdp = h.kind === 'cdp';
+const hasNearest = nearestFor(h.slug).length > 0;
 const shownDates = d.dates.slice(0, 6);
 const others = HUBS.filter((x) => x.slug !== h.slug);
 // Printed, this page is the town sheet (#405): the date it was made, a QR code
@@ -57,6 +60,7 @@ const lede = cdp
     <h2 id="jump-h">On this page</h2>
     <ul>
       <li><a href="#who-to-call">Who to call</a></li>
+      {hasNearest && <li><a href="#nearest-help">Nearest help</a></li>}
       <li><a href="#who-decides">Who decides and where they meet</a></li>
       <li><a href="#places">Places to gather</a></li>
       <li><a href="#dates">Coming up</a></li>
@@ -92,6 +96,8 @@ const lede = cdp
   </ul>
   {d.org?.website && <p>Town website: <a href={d.org.website}>{d.org.name}</a>.</p>}
   <p>Starting power, water, gas or trash after a move? See <a href={`${base}/moving-here/`}>Moving here</a>.</p>
+
+  <NearestHelp slug={h.slug} name={h.name} />
 
   <h2 id="who-decides">Who decides and where they meet</h2>
   {cdp && <p>{h.name} has no town council. The Monongalia County Commission is the local government for it.</p>}
