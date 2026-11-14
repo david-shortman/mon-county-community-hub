@@ -1,9 +1,15 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import ResourceCard from '../../../components/ResourceCard.astro';
-import { resource } from '../../../lib/content.mjs';
+import { resource, todayYmd } from '../../../lib/content.mjs';
+import SourceLine from '../../../components/SourceLine.astro';
 export const page = { parent: "/help/food/", label: "Help buying groceries every month" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// The income tables below are typed from dated charts. Each source line says
+// "may be out of date" from the day after its period ends (#1907): SNAP
+// limits change each October 1, WIC limits each July 1.
+const snapStale = todayYmd() > '2027-09-30';
+const wicStale = todayYmd() > '2027-06-30';
 ---
 <Base help title="Help buying groceries in Mon County: SNAP" description="SNAP (food stamps) puts money for groceries on a card each month in West Virginia. Apply online on WV PATH or call DoHS. Only the state decides who qualifies.">
   <h1>Help buying groceries every month</h1>
@@ -13,11 +19,62 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <li><ResourceCard r={resource('apply-for-snap-wv-path')} lead="Apply online, or call with questions." /></li>
   </ol>
   <p><a href={`${base}/snap/`}>Step-by-step: how to apply for SNAP</a></p>
+  <h3 id="snap-income">SNAP income limits</h3>
+  <p>This is the most a household can make in a month, before taxes, to pass the state's first income check. The state's chart has two columns:</p>
+  <ul>
+    <li><strong>The first limit</strong> is 130% of the poverty line.</li>
+    <li><strong>The higher limit</strong> is 200% of the poverty line. The state's manual says households at or below it get a state information and referral service, and that lets most of them pass the first check. A few exceptions apply.</li>
+    <li><strong>Someone 60 or older, or disabled?</strong> The state says those households have "no gross income test".</li>
+  </ul>
+  <div class="table-scroll" role="region" aria-labelledby="snap-income-cap" tabindex="0"><table>
+    <caption id="snap-income-cap">SNAP monthly limits from October 1, 2026</caption>
+    <thead><tr><th scope="col">People</th><th scope="col">First (130%)</th><th scope="col">Higher (200%)</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">1</th><td>$1,729</td><td>$2,660</td></tr>
+      <tr><th scope="row">2</th><td>$2,345</td><td>$3,608</td></tr>
+      <tr><th scope="row">3</th><td>$2,960</td><td>$4,554</td></tr>
+      <tr><th scope="row">4</th><td>$3,575</td><td>$5,500</td></tr>
+      <tr><th scope="row">5</th><td>$4,191</td><td>$6,448</td></tr>
+      <tr><th scope="row">6</th><td>$4,806</td><td>$7,394</td></tr>
+      <tr><th scope="row">7</th><td>$5,421</td><td>$8,340</td></tr>
+      <tr><th scope="row">8</th><td>$6,037</td><td>$9,288</td></tr>
+      <tr><th scope="row">Each more</th><td>+$616</td><td>+$948</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Passing this check does not mean you get SNAP. The state also looks at your income after some costs are taken off, like child care and housing costs, and at savings and work rules (see <a href={`${base}/snap/`}>how to apply for SNAP</a>). The state updates these limits each October. Only the state decides who qualifies, so apply even if you are close.</p>
+  <SourceLine sources={[
+    { url: 'https://bfa.wv.gov/bfa-programs/snap', checked: '2026-11-14', name: 'WV DoHS Bureau for Family Assistance, SNAP' },
+    { url: 'https://bfa.wv.gov/media/40020/download?inline', checked: '2026-11-14', name: 'WV Income Maintenance Manual, chapter 4, appendix A (updated October 1, 2026), and section 1.4.17.C' },
+  ]} org="wv-department-of-human-services" about="SNAP income limits" stale={snapStale} />
   <h2>Pregnant, or have a child under 5?</h2>
   <p>WIC gives healthy foods, plus nutrition and breastfeeding help. Families on SNAP qualify for WIC on income automatically.</p>
   <ol class="results">
     <li><ResourceCard r={resource('monchd-wic')} /></li>
   </ol>
+  <h3 id="wic-income">WIC income limits</h3>
+  <p>WIC also looks for a health or diet need, the state says. If your household's income before taxes is at or under this limit, you meet the income rule.</p>
+  <div class="table-scroll" role="region" aria-labelledby="wic-income-cap" tabindex="0"><table>
+    <caption id="wic-income-cap">WIC limits, July 1, 2026 to June 30, 2027</caption>
+    <thead><tr><th scope="col">People</th><th scope="col">Monthly</th><th scope="col">Yearly</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">1</th><td>$2,461</td><td>$29,526</td></tr>
+      <tr><th scope="row">2</th><td>$3,337</td><td>$40,034</td></tr>
+      <tr><th scope="row">3</th><td>$4,212</td><td>$50,542</td></tr>
+      <tr><th scope="row">4</th><td>$5,088</td><td>$61,050</td></tr>
+      <tr><th scope="row">5</th><td>$5,964</td><td>$71,558</td></tr>
+      <tr><th scope="row">6</th><td>$6,839</td><td>$82,066</td></tr>
+      <tr><th scope="row">7</th><td>$7,715</td><td>$92,574</td></tr>
+      <tr><th scope="row">8</th><td>$8,591</td><td>$103,082</td></tr>
+      <tr><th scope="row">Each more</th><td>+$876</td><td>+$10,508</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Paid weekly or every two weeks? The state's chart lists those amounts too. If you get SNAP, WV WORKS or Medicaid, you meet WIC's income rule, the state's WIC policy says. If you are pregnant and over the limit, WIC checks again counting your unborn baby (or babies) in your household. The WIC office decides who qualifies.</p>
+  <SourceLine sources={[
+    { url: 'https://dhhr.wv.gov/WIC/apply/Documents/2.06%20Income%20Eligibility%20Requirements%20Attachment%20%23%201%20Income%20Guidelines%20%20%281%29.pdf', checked: '2026-11-14', name: 'West Virginia WIC, Income Eligibility Guidelines, July 1, 2026 to June 30, 2027' },
+    { url: 'https://dhhr.wv.gov/WIC/policyprocedure/Documents/2.06%20Income%20Eligibility%20Requirements.pdf', checked: '2026-11-14', name: 'West Virginia WIC Policy 2.06, Income Eligibility Requirements' },
+    { url: 'https://dhhr.wv.gov/WIC/apply/Pages/default.aspx', checked: '2026-11-14', name: 'West Virginia WIC, Apply for WIC' },
+    { url: 'https://www.fns.usda.gov/wic/fr-042926', checked: '2026-11-14', name: 'USDA, WIC income eligibility guidelines 2026-2027' },
+  ]} about="WIC income limits" stale={wicStale} />
   <h2>Need food before SNAP starts?</h2>
   <p>Call 211 or text your ZIP code to 898-211, any hour. Or see <a href={`${base}/help/food/today/`}>food today or this week</a>.</p>
 </Base>
