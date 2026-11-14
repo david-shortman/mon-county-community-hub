@@ -24,7 +24,7 @@ Several Claude instances work on this project: Claude Duet (background partner) 
 
 - Notion home (private planning, Activity log): https://app.notion.com/p/40717805570781abbde2e8c1975f5f94
 - `content/`: structured resource data. Schema in [`content/README.md`](content/README.md).
-- `site/`: the public website (Astro, deployed to GitHub Pages).
+- `site/`: the public website (Astro, deployed to GitHub Pages). Run `npm ci` at the repo root, not in `site/`: the repo is one npm workspace with one lockfile (#69).
 - `docs/design/`: how pages look and explain things. `presentation.md` lists the building blocks; `motion.md` covers scroll stories and swipe cards, a tool to consider when movement explains a process or change faster than words.
 - `docs/design/images.md`: when to add a picture and when to skip it, which kind, alt text, credits and sources. Read it before adding any drawing, map or photo.
 - `docs/decisions/`: decisions that shape the repo, one file each. `docs/build-log/`: what was built and why, one file each.

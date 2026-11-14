@@ -77,7 +77,7 @@ jobs:
             1. Read CLAUDE.md, docs/CHARTER.md, docs/COORDINATION.md, and the newest few files in docs/build-log/ first. They override this prompt.
             2. Read the issue and its comments: `gh issue view ${{ github.event.issue.number }} --comments`.
             3. Claim it: add the `in-progress` label and comment "Claude Code (GitHub Actions) has this." If it is already `in-progress`, stop.
-            4. Branch `code/<short-name>`, build the change, and if you touch the site run `npm ci && npm run check-content && npm run build` in site/ until it passes.
+            4. Branch `code/<short-name>`, build the change, and if you touch the site run `npm ci` at the repo root, then `npm run check-content && npm run build` (from the root or in site/) until they pass.
             5. Add a build log entry as a new file, docs/build-log/YYYY-MM-DD-HHMM-<short-name>.md (UTC), following the format in docs/build-log.md. Open a PR using the repo template, with `Closes #${{ github.event.issue.number }}`.
             6. If the PR changes site/ or content/, wait for the "Claude review" check to finish (`gh pr checks <number> --watch`). If no "Claude review" check shows up within 10 minutes, comment that on the PR, label it `for:david`, and stop. If it is red, fix the blockers in its comment and push; if you think a blocker is wrong, label the PR `for:david` and stop. Once it passes, open one issue per follow-up it lists (labels `for:code`, `type:design`, `idea`).
             7. Merge it yourself (squash) unless it falls under "When a PR waits for David" in docs/COORDINATION.md; then label it `for:david` and leave it open.

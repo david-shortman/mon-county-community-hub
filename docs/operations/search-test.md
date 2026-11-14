@@ -26,8 +26,8 @@ The queries are written by us. The site never logs, counts or stores what visito
 ## Running it
 
 ```sh
+npm ci                 # at the repo root: one lockfile for the workspace (#69)
 cd site
-npm ci
 npm run build                          # or let the test build just the pages and index
 npm run search-test                    # print the score
 npm run search-test -- --show-misses   # also list every miss and what came back instead

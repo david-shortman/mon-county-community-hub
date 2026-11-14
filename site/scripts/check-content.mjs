@@ -20,11 +20,10 @@ import { loadHomeRules, ruleProblems, isStale } from '../src/lib/home-year.mjs';
 import { quoteProblems } from '../src/lib/reread.mjs';
 import { loadSourceTiers, lowerTierOnly, tierListProblems } from '../src/lib/source-tiers.mjs';
 import { isTopTier } from '../src/lib/content.mjs';
+import { isDate, isUrl, hiddenProblems } from '@everything-morgantown/data/checks';
 
 const errors = [];
 const warnings = [];
-const isDate = (d) => /^\d{4}-\d{2}-\d{2}$/.test(d ?? '');
-const isUrl = (u) => { try { return ['https:', 'http:'].includes(new URL(u).protocol); } catch { return false; } };
 const sixMonthsAgo = new Date(); sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 const stale = sixMonthsAgo.toISOString().slice(0, 10);
 
@@ -32,24 +31,14 @@ const stale = sixMonthsAgo.toISOString().slice(0, 10);
 // block off puts back a record that is still valid.
 const loadDir = (name) => loadDirShown(name, { withHidden: true });
 const loadCalendar = () => loadCalendarShown({ withHidden: true });
-const HIDDEN_FIELDS = ['reason', 'since', 'note'];
-// 211 and 988 show on every page, so the site cannot build without them. If
-// one looks wrong, fix it from the line's own page the same day instead.
-const NEVER_HIDE = ['resources/wv-211.yaml', 'resources/988-lifeline.yaml'];
 let hiddenCount = 0;
+// The rules for the `hidden` block live in packages/data/checks.mjs (#69).
 function checkHidden(e) {
   if (e.hidden == null) return;
-  const where = e._file;
-  const h = e.hidden;
   hiddenCount++;
-  if (NEVER_HIDE.includes(where)) errors.push(`${where}: this line shows on every page and cannot be hidden; fix it from its own page instead`);
-  if (typeof h !== 'object' || Array.isArray(h)) { errors.push(`${where}: hidden needs reason and since under it (see content/README.md)`); return; }
-  if (!HIDDEN_REASONS.includes(h.reason)) errors.push(`${where}: hidden.reason must be one of ${HIDDEN_REASONS.join(', ')}`);
-  const since = ymd(h.since);
-  if (!isDate(since)) errors.push(`${where}: hidden.since must be a date (YYYY-MM-DD)`);
-  else if (since > todayYmd()) errors.push(`${where}: hidden.since ${since} is in the future`);
-  if (h.note != null && typeof h.note !== 'string') errors.push(`${where}: hidden.note must be text`);
-  for (const k of Object.keys(h)) if (!HIDDEN_FIELDS.includes(k)) warnings.push(`${where}: unknown hidden field ${k}`);
+  const { errors: errs, warnings: warns } = hiddenProblems(e);
+  for (const m of errs) errors.push(`${e._file}: ${m}`);
+  for (const m of warns) warnings.push(`${e._file}: ${m}`);
 }
 
 const slugs = new Set();

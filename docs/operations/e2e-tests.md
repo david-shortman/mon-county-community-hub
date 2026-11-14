@@ -5,8 +5,8 @@ The site has 200+ pages and many sessions add more each day. These tests open th
 ## Run them
 
 ```sh
+npm ci                 # at the repo root: one lockfile for the workspace (#69)
 cd site
-npm ci
 npm run build          # the tests read dist/
 npm run e2e            # full suite, about 20 seconds
 npm run e2e:smoke      # quick subset

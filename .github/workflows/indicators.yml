@@ -29,8 +29,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: package-lock.json
+      # One lockfile at the repo root (npm workspaces, #69), so install there.
       - run: npm ci
+        working-directory: .
       - name: Compare with County Health Rankings
         id: cmp
         run: |
