@@ -1,0 +1,62 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: mpo-2026-11-19
+body: mpo
+meeting: Policy Board meeting
+date: 2026-11-19
+time: "18:00"
+place: City of Morgantown, 389 Spruce Street, Morgantown
+watch: The agenda does not name a live stream.
+agenda_url: https://www.plantogether.org/_files/ugd/613794_53dfa2c7bf454c4994b352de5f595966.pdf
+read: 2026-11-13
+items:
+  - number: "1"
+    title: Call to Order
+    kind: opening
+    line: The meeting is called to order.
+  - number: "2"
+    title: Public Comment Period
+    kind: public-comment
+    line: Time for members of the public to speak to the Policy Board.
+  - number: "3"
+    title: Approval of Minutes
+    kind: minutes
+    line: A vote to approve the written record of the board's October 15, 2026 meeting. The packet includes those minutes.
+  - number: "4"
+    title: Committee Reports
+    kind: report
+    line: Updates from the MPO's committees and its executive director. The agenda lists these parts.
+    parts:
+      - Citizens Advisory Committee
+      - Finance
+      - Executive Director
+  - number: "5"
+    title: 2026 November - TIP Amendments and Administrative Adjustments
+    kind: other
+    line: Proposed changes to the MPO's Transportation Improvement Program (TIP), at the request of the state Division of Highways. The packet lists new phases and amounts for projects that include the Chaplin Hill Road improvements, flyover and trail, the Blue Horizon Bridge and the Harmony Grove interchange, plus schedule and funding changes. The packet says the public comment period on the amendments runs November 4 to 18, 2026.
+  - number: "6"
+    title: TAM Targets 2027
+    kind: vote
+    line: A vote on whether to endorse the state's 2027 Transit Asset Management (TAM) targets, which set measures for the useful life of transit vehicles, buildings and equipment. The packet says federal law requires these targets.
+  - number: "7"
+    title: 2027 Meeting Dates
+    kind: other
+    line: The MPO's proposed 2027 meeting dates. The packet lists Policy Board meetings on the third Thursday of January, March, May, August, October and November.
+  - number: "8"
+    title: Route 19 Study
+    kind: other
+    line: An item about a study of Route 19. The agenda gives no more detail.
+  - number: "9"
+    title: Other Business
+    kind: other
+    line: Other items. The agenda gives no more detail.
+  - number: "10"
+    title: Meeting Adjournment
+    kind: closing
+    line: The meeting ends.
+sources:
+  - url: https://www.plantogether.org/_files/ugd/613794_53dfa2c7bf454c4994b352de5f595966.pdf
+    checked: 2026-11-13
+  - url: https://www.plantogether.org/agendas
+    checked: 2026-11-13
