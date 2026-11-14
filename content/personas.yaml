@@ -221,6 +221,8 @@ personas:
   - /medical-rides/
   questions:
   - q29
+  - q69
+  - q75
   last_reviewed: '2026-11-01'
 - slug: disability
   name: Person with a disability or a caregiver
@@ -264,6 +266,7 @@ personas:
   - /car-seat-checks/
   questions:
   - q50
+  - q72
   last_reviewed: '2026-11-03'
 - slug: school-age-kid
   name: Parent of a school-age kid
@@ -343,6 +346,7 @@ personas:
   - /work-and-learning/
   questions:
   - q54
+  - q70
   last_reviewed: '2026-11-03'
 - slug: home-from-jail
   name: Home from jail or prison
@@ -363,6 +367,8 @@ personas:
   - /find-a-job/
   questions:
   - q55
+  - q68
+  - q73
   last_reviewed: '2026-11-01'
 - slug: starting-business
   name: Starting a business or a trade
@@ -419,6 +425,9 @@ personas:
   - /vote/
   questions:
   - q19
+  - q67
+  - q74
+  - q76
   last_reviewed: '2026-11-01'
 - slug: renter-repair
   name: Renter with a repair or deposit problem
@@ -439,6 +448,7 @@ personas:
   - /legal-help/
   questions:
   - q57
+  - q66
   last_reviewed: '2026-11-01'
 - slug: rural-homeowner
   name: Rural homeowner
@@ -563,6 +573,7 @@ personas:
   questions:
   - q43
   - q45
+  - q71
   last_reviewed: '2026-11-01'
 - slug: gardener
   name: Gardener or would-be grower
