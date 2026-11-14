@@ -1,0 +1,55 @@
+title: Reading, math and finishing school as an adult
+slug: adult-skills
+summary: About 1 in 6 adults in Mon County read at the lowest level on a national skills test, and about 1 in 4 do math at that level. About 3,900 adults 25 and older have no high school diploma. The county does better than West Virginia on both, and free classes and tutoring exist here.
+evidence:
+  - url: https://nces.ed.gov/surveys/piaac/skillsmap/
+    checked: 2026-11-14
+    shows: The share of adults ages 16 to 74 at the lowest level (Level 1 or below) in reading and in math. These are model-based estimates, not counts, and the range is wide (reading 11% to 20%, math 21% to 32%).
+    figure: "16% reading; 26% math"
+    data_date: "2012 to 2017"
+    publisher: National Center for Education Statistics, PIAAC Skills Map
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    checked: 2026-11-14
+    shows: The share of adults 25 and older with a high school diploma or the equivalent. 61,985 of 65,916 adults have one, so about 3,931 do not.
+    figure: "94.0% (West Virginia 88.6%, US 89.4%)"
+    publisher: County Health Rankings (2025 release)
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-11-14
+    shows: "Educational and employment opportunities are one of the top community issues the assessment named for its five-county service area, which includes Mon County (page 63 of the PDF). Its Census table says 6.0% of Mon County adults 25 and older have no high school diploma (West Virginia 11.4%) (page 25)."
+    data_date: "2019 to 2023 (Census table); 2025 (assessment)"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
+  - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
+    checked: 2026-11-14
+    shows: West Virginia 211 had 6 requests about education from Mon County in a year, out of 4,428 in all (page 62 of the PDF).
+    figure: "6 of 4,428 requests"
+    data_date: "August 2024 to August 2025"
+    publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment (West Virginia 211 data)
+affected:
+  estimate: "16% of adults ages 16 to 74"
+  description: Adults in Monongalia County at the lowest reading level, as estimated by the National Center for Education Statistics from surveys done from 2012 to 2017.
+  url: https://nces.ed.gov/surveys/piaac/skillsmap/
+  checked: 2026-11-14
+severity: medium
+severity_why: Low reading and math skills, or no diploma, make it harder to find and keep work, fill out forms and follow health instructions.
+trend: unknown
+working_on:
+  - org: mtec
+  - org: literacy-volunteers-monongalia-preston
+  - org: morgantown-public-library-system
+  - org: workforce-west-virginia
+gaps:
+  - No one page walks an adult through the steps to a high school equivalency diploma, from the first class to the free test.
+  - The county's reading and math estimates are from surveys done from 2012 to 2017, so how many adults need help today is not known.
+topics: [work, family]
+rank: 13
+rank_why: "Score 9 of 12: severity 2, reach 3 (16% of adults read at the lowest level), agreement 2 (the two measures are separate, but the newest county skills estimate is from 2012 to 2017 and the hospital assessment names education only together with jobs, for five counties), room to help 2 (free classes and tutoring exist, but a website reaches adults who read with difficulty mostly through the people who help them). Last among the 9s because it had the fewest 211 requests."
+questions: [q78]
+get_help:
+  - path: /work-and-learning/
+    label: Finish high school, learn English, or get reading help
+  - path: /keep-learning/
+    label: Free online lessons and classes with a library card
+site_coverage:
+  level: partial
+  why: Work and learning and Keep learning list the county's adult education site, free reading tutoring and library lessons. No page walks through the steps to a high school equivalency diploma, from the first class to the free test.
+  checked: 2026-11-14

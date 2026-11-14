@@ -429,3 +429,16 @@ questions:
     question: When is the last frost, so I know when to plant my garden?
     who: A first-time gardener in Westover
     search: last frost date Morgantown WV
+  # New needs in the needs register (#1908, #1909, sprint wave 18, #529)
+  - id: q77
+    topic: moving
+    kind: everyday
+    question: How do I get internet at home if I can't afford it?
+    who: A parent in Westover whose phone data runs out each month
+    search: low cost internet Morgantown WV
+  - id: q78
+    topic: work
+    kind: everyday
+    question: Where can I finish my high school diploma or get help with reading as an adult?
+    who: An adult in Star City who left high school without a diploma
+    search: GED classes Morgantown WV

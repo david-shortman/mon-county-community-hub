@@ -1,0 +1,50 @@
+title: Getting and keeping internet at home
+slug: getting-online
+summary: About 1 in 10 households in Mon County has no broadband internet at home. Most homes in the county can get service, but fewer households have it. Some places, mostly in the western part of the county, are still waiting for service to be built. Many forms for help, jobs and health care are online.
+evidence:
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-14
+    shows: The share of households with a broadband internet subscription. 40,252 of 44,629 households have one, so about 4,377 do not.
+    figure: "90.2% (West Virginia 86.1%, US 91.0%)"
+    data_date: "2020 to 2024"
+    publisher: County Health Rankings (March 2026 supplemental release)
+  - url: https://broadband.wv.gov/wp-content/uploads/2026/09/County-availability-Sept2026.pdf
+    checked: 2026-11-14
+    shows: "Of 38,428 homes and businesses that could have broadband, 36,466 have service by cable, fiber or wireless. 1,819 have funding to be connected but are not served yet, and 143 are unserved or underserved with no funding (page 31 of the PDF). The map shows most of these places in the western part of the county."
+    figure: "1,962 of 38,428 places not served yet"
+    data_date: "December 31, 2025"
+    publisher: West Virginia Office of Broadband, Monongalia County Broadband Availability Summary (FCC data)
+  - url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
+    checked: 2026-11-14
+    shows: In the hospital's 2025 survey of Mon and Marion County residents, 6% of the 164 people who answered said they have no high-speed internet at home, and another 6% said theirs is not reliable or fast enough for a video doctor visit (page 31 of the PDF). The survey says it is not a representative sample.
+    figure: "12% no or unreliable home internet"
+    data_date: "2025"
+    publisher: J.W. Ruby Memorial Hospital, 2025 Community Health Needs Assessment
+affected:
+  estimate: "about 1 in 10 households"
+  description: Households in Monongalia County without a broadband internet subscription (9.8%, from County Health Rankings' count of 40,252 of 44,629 with one).
+  url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+  checked: 2026-11-14
+severity: medium
+severity_why: Without internet at home, it is harder to apply for benefits and jobs, do schoolwork, or see a doctor by video.
+trend: unknown
+working_on:
+  - org: wv-office-of-broadband
+  - org: morgantown-public-library-system
+  - name: Lifeline (Universal Service Administrative Company)
+    url: https://www.lifelinesupport.org/
+gaps:
+  - Internet companies' own low-cost plans for Mon County are not on this site yet.
+  - No local program that gives or sells low-cost computers for home use is listed.
+  - People in places that are funded but not built yet cannot easily tell when service will reach them.
+topics: [moving]
+rank: 9
+rank_why: "Score 10 of 12: severity 2, reach 3 (about 1 in 10 households), agreement 3 (three separate sources), room to help 2 (a discount, free library Wi-Fi and a speed test exist, but the monthly cost and places not built yet are things a website cannot change). Last among the 10s: as serious as child care and loneliness, and the 2025 assessment's 211 table has no internet category."
+questions: [q77]
+get_help:
+  - path: /internet/
+    label: Internet at home, help paying, and free Wi-Fi
+site_coverage:
+  level: partial
+  why: Internet at home has the Lifeline discount, free library Wi-Fi and computers, drop-in tech help, the state speed test and maps, and how to complain. It does not list internet companies' low-cost plans or free computers for most people.
+  checked: 2026-11-14

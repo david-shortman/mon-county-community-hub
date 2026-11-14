@@ -327,3 +327,5 @@ queries:
   - {q: where can our nonprofit get a grant, expect: [/grants-for-nonprofits/, /make-it-better/grants/], kind: question}
   - {q: is there lead in my old house, expect: [/lead/], kind: question}
   - {q: I am being sued over a debt, expect: [/credit-and-debt/, /legal-help/], kind: question}
+  - {q: how do I get internet if I can't afford it, expect: [/internet/], kind: question}
+  - {q: where can I get my GED, expect: [/work-and-learning/, /keep-learning/], kind: question}

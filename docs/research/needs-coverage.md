@@ -41,3 +41,14 @@ These groups already had a record in `content/orgs/`, checked against their own 
 ## How to keep this current
 
 Re-check a need's `site_coverage` when a page for it is added or changed, and update its `checked` date. `npm run check-content` fails if a `get_help` link points at a page that does not exist.
+
+## Two needs added, November 14, 2026
+
+For #1908 and #1909, sprint wave 18 (#529). Two needs joined the register, and the needs below them moved down. Ranks in the table above are from before this change.
+
+| Rank | Need | Site coverage | Our pages | Gaps, with issues |
+|---|---|---|---|---|
+| 9 | Getting and keeping internet at home (`getting-online`, new) | Partial | `/internet/` | Low-cost plans from internet companies need a person's read (#217); no local low-cost computer program; Mon County's served, funded and unserved counts are not on the page yet (#1935) |
+| 13 | Reading, math and finishing school as an adult (`adult-skills`, new) | Partial | `/work-and-learning/`, `/keep-learning/` | No page walks through the steps to a high school equivalency diploma (#1936) |
+
+Moved down one place: people without a place to sleep (9 to 10), wages (10 to 11), getting where you need to go (11 to 12). Obesity, diabetes and heart health moved from 12 to 14. Each file's `rank_why` says why.

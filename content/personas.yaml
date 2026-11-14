@@ -606,3 +606,46 @@ personas:
   questions:
   - q24
   last_reviewed: '2026-11-01'
+- slug: no-internet-at-home
+  name: No internet at home
+  needs:
+  - getting-online
+  evidence:
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    publisher: County Health Rankings, March 2026 supplemental release
+    shows: 90.2% of households have broadband, so about 4,377 do not (2020 to 2024)
+    checked: '2026-11-14'
+  - source: https://broadband.wv.gov/wp-content/uploads/2026/09/County-availability-Sept2026.pdf
+    publisher: West Virginia Office of Broadband, Monongalia County Broadband Availability Summary
+    shows: 1,962 of 38,428 places not served yet (FCC data, December 31, 2025)
+    checked: '2026-11-14'
+  search: cheap internet morgantown
+  landing: /internet/
+  next_steps:
+  - /calendar/
+  questions:
+  - q77
+  last_reviewed: '2026-11-14'
+- slug: finish-school
+  name: Finishing school or reading better as an adult
+  groups:
+  - job-seekers
+  needs:
+  - adult-skills
+  evidence:
+  - source: https://nces.ed.gov/surveys/piaac/skillsmap/
+    publisher: National Center for Education Statistics, PIAAC Skills Map
+    shows: 16% of adults read at the lowest level (2012 to 2017)
+    checked: '2026-11-14'
+  - source: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    publisher: County Health Rankings, 2025 release
+    shows: 94.0% of adults 25 and older finished high school, so about 3,931 did not
+    checked: '2026-11-14'
+  search: ged classes morgantown
+  landing: /work-and-learning/
+  next_steps:
+  - /keep-learning/
+  - /pay-for-training/
+  questions:
+  - q78
+  last_reviewed: '2026-11-14'
