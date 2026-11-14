@@ -103,6 +103,8 @@ Two hard rules sit on top of the number:
 - **Risk 1 never ships without David.** It becomes `for:david` no matter the score.
 - **Evidence 1 cannot be `up-next`.** Do a findability test or a research issue first.
 
+**Whoever opens the issue scores it** (proposed 2026-11-09). The agent that opens a `for:code` or `for:duet` issue posts the `Score:` comment when it opens it. Duet checks and adjusts scores on its sweep instead of writing every one. In week 2, none of 69 new `for:code` and `for:duet` issues had a score.
+
 **Where the scored backlog lives:** in GitHub issues, nowhere else. The score comment is on each issue. The ranked view is the issue list filtered by `for:code` and sorted by score. The weekly retrospective prints the top 10 so the order is visible in one place. Notion keeps only private reasons (for example, a partner conversation behind an Evidence score).
 
 ### 3. Spec
