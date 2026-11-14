@@ -1,18 +1,20 @@
 ---
 // Starting page for people with disabilities and caregivers (#268, epic
-// #261). Links only; research and gaps: docs/groups/disability-caregivers.md.
+// #261). Links, plus the phone and source line of the record behind the most
+// asked-for links (#1288), so a reader can call from this page. Research and
+// gaps: docs/groups/disability-caregivers.md.
 import Base from '../../layouts/Base.astro';
 import GroupStart from '../../components/GroupStart.astro';
 export const page = { door: "family", topic: "disability", label: "People with disabilities and caregivers", summary: "Living on your own terms, care at home, job help, and health costs, in one place" };
 const sections = [
   { title: 'Living on your own terms', links: [
-    { href: '/disability-and-aging/', text: 'independent living help, job help, and Medicare help' },
+    { href: '/disability-and-aging/', text: 'independent living help, job help, and Medicare help', resource: 'liveability-morgantown' },
     { href: '/disability-and-aging/#wvats-device-loans', label: 'Try or borrow a device', text: 'free demos, 30-day loans and free used devices from WVATS' },
-    { href: '/disability-and-aging/#drwv-intake', label: 'Know your rights', text: 'free, confidential help from Disability Rights of WV' },
+    { href: '/disability-and-aging/#drwv-intake', label: 'Know your rights', text: 'free, confidential help from Disability Rights of WV', resource: 'drwv-intake' },
   ] },
   { title: 'Care at home', links: [
     { href: '/medicaid-waivers/', text: 'care at home instead of a nursing home or facility, through Medicaid' },
-    { href: '/disability-and-aging/#liveability-clsp', label: 'Change your home or car', text: 'ramps, grab bars, roll-in showers, van lifts and equipment' },
+    { href: '/disability-and-aging/#liveability-clsp', label: 'Change your home or car', text: 'ramps, grab bars, roll-in showers, van lifts and equipment', resource: 'liveability-clsp' },
     { href: '/disability-and-aging/#liveability-transition', label: 'Leaving a nursing home', text: 'help moving back home, or leaving high school' },
   ] },
   { title: 'Getting around', links: [
@@ -20,6 +22,7 @@ const sections = [
     { href: '/bus-passes/', text: 'half fare with Medicare or a disability, and how to apply' },
   ] },
   { title: 'Work', links: [
+    { href: '/disability-and-aging/#drs-morgantown-office', label: 'Job help for people with disabilities', text: 'help finding or keeping a job, from the state office in Morgantown', resource: 'drs-morgantown-office' },
     { href: '/work-and-learning/', text: 'job help and training' },
   ] },
   { title: 'Health costs', links: [
@@ -34,7 +37,7 @@ const sections = [
     { href: '/disability-and-aging/#steppingstones-recreation', label: 'Recreation and Special Olympics', text: 'SteppingStones at Mylan Park, and how to join Special Olympics' },
   ] },
   { title: 'If you are a caregiver', links: [
-    { href: '/caregivers/', text: 'where to start, a break for you, and help sorting out care options' },
+    { href: '/caregivers/', text: 'where to start, a break for you, and help sorting out care options', resource: 'wv-adrc-region-1' },
     { href: '/disability-and-aging/#alz-wv-caregiver-groups', label: 'Dementia caregiver support', text: 'free support groups and a 24/7 Helpline' },
     { href: '/help-at-home/', text: 'in-home care, meals at home, and FAIR respite for dementia caregivers' },
   ] },

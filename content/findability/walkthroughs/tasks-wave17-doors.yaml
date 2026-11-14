@@ -1,0 +1,137 @@
+# Site plan and doors tasks (sprint wave 17, see #529). SIMULATED, NOT REAL RESIDENTS.
+# p11, p12 and p28 are copied from tasks-personas.yaml; d01 to d04 are new and walk the
+# Family and Your community doors. Results: 2026-11-14-doors.yaml.
+- id: p11
+  task: Is there a free or cheap ride to medical appointments for seniors?
+  who: Adult child caring for an aging parent
+  persona: aging-parent
+  group: older-adults
+  need: transportation
+  question: q29
+  searches:
+  - in home care for elderly parent wv
+  - rides for seniors to doctor
+  answer: any
+  targets:
+  - url: /for/older-adults/
+    marker: ride
+    path:
+    - /care/
+    - /for/older-adults/
+  - url: /medical-rides/
+    marker: ride
+    path:
+    - /care/
+    - /medical-rides/
+- id: p12
+  task: Where can my brother get help at home for his disability?
+  who: Person with a disability or a caregiver
+  persona: disability
+  group: disability-caregivers
+  need: transportation
+  question: q49
+  searches:
+  - disability help morgantown
+  - help at home for disability
+  answer: any
+  targets:
+  - url: /for/disability-and-caregivers/
+    marker: home
+    path:
+    - /family/
+    - /for/disability-and-caregivers/
+  - url: /help-at-home/
+    marker: home
+    path:
+    - /family/
+    - /help-at-home/
+- id: p28
+  task: How do I speak at a Morgantown City Council meeting?
+  who: Wants a say in local decisions
+  persona: wants-a-say
+  group: null
+  need: null
+  question: q12
+  searches:
+  - speak at city council morgantown
+  - who is my council member
+  answer: any
+  targets:
+  - url: /have-your-say/
+    marker: speak|comment
+    path:
+    - /community/
+    - /have-your-say/
+- id: d01
+  task: I use a wheelchair and need a ramp at my house. Who can help?
+  who: Person with a disability
+  persona: disability
+  group: disability-caregivers
+  need: null
+  question: q49
+  searches:
+  - wheelchair ramp help
+  - grab bars for disability
+  answer: any
+  targets:
+  - url: /disability-and-aging/
+    marker: ramp
+    path:
+    - /family/
+    - /disability-and-aging/
+  - url: /disability-and-aging/
+    marker: ramp
+    path:
+    - /family/
+    - /disability-and-aging/#home-changes
+- id: d02
+  task: My mom needs someone to help her at home. Who do I call?
+  who: Adult child caring for an aging parent
+  persona: aging-parent
+  group: older-adults
+  need: null
+  question: q29
+  searches:
+  - in home care for elderly parent wv
+  - help at home for seniors
+  answer: any
+  targets:
+  - url: /help-at-home/
+    marker: home
+    path:
+    - /family/
+    - /help-at-home/
+- id: d03
+  task: Where can I volunteer this weekend?
+  who: Wants to help
+  persona: wants-to-help
+  group: null
+  need: null
+  question: null
+  searches:
+  - volunteer morgantown
+  - volunteer this weekend
+  answer: any
+  targets:
+  - url: /volunteer/
+    marker: volunteer|weekend
+    path:
+    - /community/
+    - /volunteer/
+- id: d04
+  task: Who decides on bus routes or the water bill, the city or the county?
+  who: Wants a say in local decisions
+  persona: wants-a-say
+  group: null
+  need: null
+  question: null
+  searches:
+  - who decides morgantown
+  - city or county
+  answer: any
+  targets:
+  - url: /who-decides/
+    marker: decide
+    path:
+    - /community/
+    - /who-decides/
