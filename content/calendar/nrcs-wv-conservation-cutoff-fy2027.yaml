@@ -1,0 +1,21 @@
+title: Last day to apply for USDA farm conservation money for 2027
+slug: nrcs-wv-conservation-cutoff-fy2027
+starts: 2026-12-11
+org_name: USDA Natural Resources Conservation Service (NRCS)
+who_it_is_for: Farmers and landowners in West Virginia who want help paying for conservation work, like better soil, cleaner water or less erosion. Programs include EQIP, CSP, AMA and farmland easements (ACEP).
+what_to_do: Apply by Friday, December 11, 2026, to be considered for the 2027 funding year. NRCS takes applications all year, but later ones wait for a later round. Funding is competitive. Call the NRCS office in Morgantown to start.
+url: https://www.nrcs.usda.gov/state-offices/west-virginia/news/nrcs-in-west-virginia-accepting-applications-for-conservation-0
+phone: "304-291-4377"
+phone_label: the NRCS office in Morgantown
+place: 201 Scott Ave, Suite B, Morgantown, WV 26508
+topics: [growing]
+sources:
+  - url: https://www.nrcs.usda.gov/state-offices/west-virginia/news/nrcs-in-west-virginia-accepting-applications-for-conservation-0
+    checked: 2026-11-14
+    quote: "interested agricultural producers in West Virginia should apply by December 11, 2026, to be considered for fiscal year 2027 funding"
+  - url: https://www.nrcs.usda.gov/application-cutoff-dates
+    checked: 2026-11-14
+    quote: "West Virginia ACEP/CSP/EQIP - Friday, December 11, 2026"
+  - url: https://www.farmers.gov/sites/default/files/json/scl.json
+    checked: 2026-11-14
+    quote: "\"site_nm\": [\"MORGANTOWN SERVICE CENTER\"], \"site_phn_nbr\": [\"3042914377\"]"

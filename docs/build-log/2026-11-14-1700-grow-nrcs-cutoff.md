@@ -1,0 +1,6 @@
+# 2026-11-14: USDA conservation deadline on the calendar, growing gaps brought up to date
+
+- **Considered:** #442 asks for dated growing items on the calendar. WVU Extension and the WVU Soil Testing Lab both refuse automated reads (`soiltesting.wvu.edu` answered its robots.txt with 403 on 2026-11-14), so their dates stay off (#552). The Monongahela Conservation District's news and events pages had no readable dates.
+- **Chose:** one dated item from pages a script may read. NRCS West Virginia posted on November 6, 2026 that producers should apply by Friday, December 11, 2026 to be considered for 2027 funding (EQIP, CSP, AMA, ACEP). The national cutoff table says the same date. It is `content/calendar/nrcs-wv-conservation-cutoff-fy2027.yaml`, topic `growing`, so it shows on /calendar/, calendar.ics and /grow/ "Dates for this". The office phone and address were re-read from the USDA office list the same day.
+- **Also:** the Help wanted box on /grow/ dropped "Farmers market days on a current official page": the market's own Markets page lists them (and /markets/ and /sell-what-you-grow/ already use it). The seed swap gap now says the November 7, 2026 swap has passed. One correction file and one discovery (seed swap with no organizer page).
+- **Cost:** $0.
