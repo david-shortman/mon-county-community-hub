@@ -17,6 +17,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar, loadDir, loadSecondhand, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR, recheckDaysFor, recheckDue, isTopTier, oldestChecked } from '../src/lib/content.mjs';
 import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
+import { loadWindows, factLate } from '../src/lib/fact-windows.mjs';
+import { electionRunway, runwayLine, ELECTION_RUNWAY_DAYS } from '../src/lib/elections.mjs';
 import { robotsCheck } from '../src/lib/robots.mjs';
 import { servesProblems, SERVES_SINCE } from '../src/lib/serves.mjs';
 import YAML from 'yaml';
@@ -310,6 +312,17 @@ function checkContent() {
       : `All ${listed.length} listings were re-checked on time (high-stakes topics and calendar entries every 90 days).`,
     { details: late.map(({ e, c }) => `${e._file}: oldest check ${c}, re-check every ${recheckDaysFor(e)} days`), owner: 'Duet', fixable: true });
 
+  // Re-check windows by kind of fact (#1093, content/recheck-windows.yaml):
+  // hours go stale faster than an address, and a date just before the day
+  // matters most. A to-do list for re-reads; cards do not use it yet.
+  const windows = loadWindows();
+  const factDue = listed.map((e) => ({ e, l: factLate(e, windows, today) })).filter((x) => x.l)
+    .sort((a, b) => String(a.l.checked).localeCompare(String(b.l.checked)));
+  record('content-recheck-by-fact', 'product', factDue.length ? 'warn' : 'ok',
+    factDue.length ? `${factDue.length} of ${listed.length} listings are past the window for the facts they state (hours every 90 days, costs and who can get help every 180, events starting in 14 days read within 30). Re-read each one's sources, oldest first.`
+      : `All ${listed.length} listings are within the re-check window for the facts they state.`,
+    { details: factDue.map(({ e, l }) => `${e._file}: oldest check ${l.checked}, window ${l.days} days (${l.because})`), owner: 'Duet', fixable: true });
+
   // Hidden items (#519): off the site until someone re-checks them.
   const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);
   record('content-hidden', 'product', hidden.length ? 'warn' : 'ok',
@@ -320,6 +333,17 @@ function checkContent() {
   if (ended.length) {
     record('content-ended', 'product', 'warn', `${ended.length} calendar files ended over 30 days ago. Roll them forward or remove them.`,
       { details: ended.map((e) => `${e._file}: ended ${e.ends}`), owner: 'Duet', fixable: true });
+  }
+
+  // Election runway (#1383): warn when no election file runs past today plus
+  // ELECTION_RUNWAY_DAYS, so a missing next election shows up as a flag.
+  let runway;
+  try { runway = electionRunway(today); } catch (err) {
+    record('election-runway', 'product', 'fail', `content/elections could not be read: ${err.message}`, { fixable: true });
+  }
+  if (runway) {
+    record('election-runway', 'product', runway.short ? 'warn' : 'ok', runwayLine(runway),
+      { details: runway.short ? [`Check the WV Secretary of State, Monongalia County Clerk and City of Morgantown election pages for the next election, and add content/elections/<slug>.yaml from official pages only (the monthly elections checklist, content/checklists/elections.yaml). Warns within ${ELECTION_RUNWAY_DAYS} days of the last file's results_until.`] : [], owner: 'Duet', fixable: true });
   }
 
   const soonList = upcoming(entries, today, 62);

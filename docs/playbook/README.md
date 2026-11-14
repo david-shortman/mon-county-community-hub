@@ -55,13 +55,18 @@ Every session should skim this page before picking work in the [daily loop](../C
 | [trust-and-ai.md](trust-and-ai.md) | AI disclosure, sourcing rules, review of high-stakes information, corrections, reporting problems, transparency |
 | [landscape.md](landscape.md) | Living map of peer projects putting AI to work for communities, including failures and shut-downs, with what we can adopt and how we could amplify each |
 | [example-walkthroughs.md](example-walkthroughs.md) | Step-by-step walkthroughs about a clearly labeled made-up person, using real sourced programs: the rules and a checklist |
+| [freshness-by-fact.md](freshness-by-fact.md) | How long each kind of fact stays fresh (hours 90 days, costs and who can get help 180, events read just before the day), and the Health check line that lists the re-reads due |
 | [funder-lens-cities-deliver.md](funder-lens-cities-deliver.md) | What the Cities Deliver AI program funds, its seven principles mapped to our charter, lessons to adopt, and project directions for Mon County |
 | [help-tone.md](help-tone.md) | Tone for help pages: self-serve first, offering a person as a normal choice, saying who qualifies, and no shame words, with before and after examples from our pages |
 | [public-data-first.md](public-data-first.md) | Use public government pages and data first; West Virginia FOIA requests only as a rare backup that David decides, with where to look in Mon County |
 | [reaching-people.md](reaching-people.md) | How the site reaches residents through trusted helpers and directly at any hour: warm handoffs, print and text, no-name and after-hours help, and what needs David's yes |
+| [research-method.md](research-method.md) | From a resident's question to checked facts: list who would own the answer, search their sites first, broaden with set patterns, keep leads apart from facts, and log what was tried |
 | [what-people-search-for.md](what-people-search-for.md) | What residents ask for help with, the words they search in, and what they need next, by topic, to shape landing pages |
 | [where-people-are-online.md](where-people-are-online.md) | Showing up in search, AI assistants and local groups' own pages: what is already built (llms.txt, JSON-LD, the API, the MCP server, Pass it on, flyers) and the draft share kit for each guide |
 | [writing-rules.md](writing-rules.md) | How we write about this place and the project: credit local news, no deficit or efficiency framing, no claims we can't show, keep who runs and funds it current |
+| [reread-proof.md](reread-proof.md) | Proof of a re-read: a source's checked date moves only with a quote copied from the page, a call on that date, or a program read, and the check that warns when it is missing |
+| [slanted-sources.md](slanted-sources.md) | Sources with their own interest (advocacy groups, businesses, campaigns): use them for facts about themselves, and an official or neutral source for rights, rules and other groups |
+| [source-order.md](source-order.md) | Which source to trust for which fact: the owner first, then another office, then news, then directories, and what each tier may support |
 
 ## Keeping this current
 
