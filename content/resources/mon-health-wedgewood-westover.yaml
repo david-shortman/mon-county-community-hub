@@ -1,0 +1,24 @@
+title: Mon Health Wedgewood Primary Care, Westover/Gateway (walk-ins)
+slug: mon-health-wedgewood-westover
+org: mon-health-medical-center
+topics: [health]
+who_it_is_for: Anyone who needs to see a primary care provider. Mon Health lists this office under walk-in care, and says same day visits and walk-ins are available.
+hours: Monday to Friday, 8 a.m. to 7 p.m. Saturday and Sunday, 9 a.m. to 6 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri]
+    opens: "08:00"
+    closes: "19:00"
+  - days: [sat, sun]
+    opens: "09:00"
+    closes: "18:00"
+get_in: walk-in
+what_to_do: Walk in during open hours, or call to make an appointment.
+contact:
+  phone: "304-292-7316"
+  url: https://www.monhealth.com/
+  place: 6000 Memorial Church Dr., Morgantown, WV
+not_posted: [cost]
+sources:
+  - url: https://www.monhealth.com/
+    checked: 2026-11-14
+    quote: "Mon Health Wedgewood Primary Care - Westover/Gateway Monday – Friday | 8AM - 7PM Saturday – Sunday | 9AM-6PM 6000 Memorial Church Dr."

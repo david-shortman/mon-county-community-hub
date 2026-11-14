@@ -1,0 +1,22 @@
+title: WVU Medicine Urgent Care, no appointment needed
+slug: wvu-medicine-urgent-care
+org: wvu-medicine
+topics: [health]
+who_it_is_for: People of all ages with an illness or injury that is not an emergency but needs care soon, like a cough, cold, flu, infection, rash, sprain, strain, abdominal pain or a broken bone. You do not need a referral.
+what_to_do: Use WVU Medicine's "Urgent Care Near Me" search to find a clinic and its hours, then walk in. No appointment is needed. WVU Medicine says most of its urgent care clinics are open seven days a week, and most insurance plans are accepted. Some services are not at every clinic.
+get_in: walk-in
+what_to_bring:
+  - Photo ID
+  - Your insurance card, and your Medicare or Medicaid card if you have one
+  - A list of the medicines you take, including ones you buy without a prescription
+  - Any test results or health history that may matter
+  - A way to pay your copay or charges
+  - Any forms you need filled out for school, work or sports
+contact:
+  url: https://wvumedicine.org/our-care/urgent-care/
+  url_label: Find an urgent care clinic
+not_posted: [cost]
+sources:
+  - url: https://wvumedicine.org/our-care/urgent-care/
+    checked: 2026-11-14
+    quote: "No appointment is necessary at our clinics."

@@ -1,0 +1,15 @@
+name: West Virginia Poison Center
+slug: wv-poison-center
+kind: school
+website: https://wvpoisoncenter.org/
+phone: "1-800-222-1222"
+summary: The state's only poison center, run by West Virginia University's Charleston campus. Nurses, pharmacists and doctors answer poisoning calls from all 55 counties, 24 hours a day.
+topics: [health]
+area: statewide
+sources:
+  - url: https://wvpoisoncenter.org/about-us
+    checked: 2026-11-14
+    quote: "The West Virginia Poison Center serves all 55 counties in West Virginia."
+  - url: https://wvpoisoncenter.org/contact-us
+    checked: 2026-11-14
+    quote: "Poisoning Emergency: 1-800-222-1222"

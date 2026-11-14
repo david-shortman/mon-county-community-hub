@@ -1,0 +1,33 @@
+title: Emergency room at J.W. Ruby Memorial Hospital
+slug: ruby-memorial-emergency-room
+org: wvu-medicine-ruby-memorial
+topics: [health]
+who_it_is_for: Anyone with a serious illness or injury. WVU Medicine says to get emergency care or call 911 right away for severe chest pain, trouble breathing, bleeding that will not stop, sudden confusion, fainting, signs of a stroke like a drooping face or weakness, or severe, sudden pain.
+hours: Open 24 hours
+opening_hours: always
+get_in: walk-in
+what_to_do: Go to the emergency room at 1 Medical Center Drive, or call 911 if you cannot get there safely yourself. Children up to 18 go to the Children's Emergency Department at WVU Medicine Golisano Children's Hospital, on the same campus. Lots D and E are closest to the Children's Emergency Department.
+notes:
+  - Ruby is home to the Jon Michael Moore Trauma Center, the area's only Level 1 trauma center.
+what_to_bring:
+  - Photo ID
+  - Your insurance card, and your Medicare or Medicaid card if you have one
+  - A list of your medicines, with doses, and any vitamins or supplements
+  - A list of your allergies
+  - Phone numbers for your doctor and family
+contact:
+  phone: "304-598-4000"
+  url: https://wvumedicine.org/our-care/emergency-care/
+  url_label: Emergency care
+  place: 1 Medical Center Drive, Morgantown, WV 26506
+not_posted: [cost]
+sources:
+  - url: https://wvumedicine.org/our-care/emergency-care/
+    checked: 2026-11-14
+    quote: "Seek emergency care or call 911 immediately for life-threatening symptoms, including severe chest pain, difficulty breathing, uncontrolled bleeding"
+  - url: https://wvumedicine.org/locations/ruby-memorial-hospital/
+    checked: 2026-11-14
+    quote: "1 Medical Center Drive, Morgantown, WV 26506 Get Directions 304-598-4000 Open 24 Hours"
+  - url: https://wvumedicine.org/our-care/institutes/childrens/locations/emergency-room/
+    checked: 2026-11-14
+    quote: "If you have a child, 0-18 years of age, who needs emergency care, bring them to the Children’s Emergency Department"

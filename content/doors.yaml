@@ -41,7 +41,7 @@ doors:
   - slug: care
     name: Get care
     page: /care/
-    hint: Mental health, drugs or alcohol, no insurance, a dentist, medicine, Medicaid in 2027, a new baby, shots
+    hint: Mental health, drugs or alcohol, no insurance, a dentist, medicine, sick or hurt, Medicaid in 2027, a new baby, shots
     icon: health
     examples:
       # Ranked by local need (#475). Each shows once its page exists.

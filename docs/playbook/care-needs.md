@@ -14,7 +14,7 @@ Last checked: October 30, 2026.
 | 4 | Keep my Medicaid in 2027 | `/medicaid-2027/` (#221) | New state rules start January 1, 2027; time sensitive |
 | 5 | Can't afford my prescriptions | `/dental-and-prescriptions/` (#479) | Cost of care and medicine is the top quality of life worry (50%); 19% could not say they can afford medicine |
 | 6 | Tooth pain or need a dentist | `/dental-and-prescriptions/` (#220) | Dental is on the health department's hard-to-get list |
-| 7 | Find a doctor, or where to go tonight | not built yet (#21) | Primary care and appointment availability on the health department's lists |
+| 7 | Find a doctor, or where to go tonight | `/sick-or-hurt/` (#21) | Primary care and appointment availability on the health department's lists |
 | 8 | Pregnant or new baby | `/pregnant-or-new-baby/` (#245) | Family planning on the hard-to-get list |
 | 9 | Ride to a medical appointment | `/medical-rides/` (#480) | 21% named access to transportation a top quality of life problem |
 | 10 | Diabetes, blood pressure or weight | `/diabetes-and-weight/` (#481) | Obesity is the second top problem (57%); chronic disease management is hard to get |
