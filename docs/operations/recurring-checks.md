@@ -23,6 +23,7 @@ Each file in `content/checklists/` is one standing issue labeled `checklist` and
 - **Community centers** (#752): the Dominion Post "Events and opportunities" and "Senior news" columns (a new address each week), and the Smithtown and Cheat Lake Google calendars (Google's robots.txt asks robots to stay out).
 - **Sale and market dates** (#718): weekly sources that block robots or change every day, plus a computed list of sale and market dates that passed in the last 4 months (look for the next date). From January 2027, the first week of each quarter adds the shop re-check list, the same one `npm run secondhand-due` prints.
 - **Make it better** (#793): weekly city vacancy list and agendas; in the first week of each month the monthly pages from `docs/operations/make-it-better-checks.md` and a computed list of entries that will say "may be out of date" within 30 days; in March and April the budget season and REAP items; in April 2027 the arts grant round.
+- **Next election** (#1383): in the first week of each month, how long the files in `content/elections/` keep /vote/ current, and the Secretary of State, County Clerk and City election pages to check for the next election. The health check also warns (`election-runway`) when no election file runs past today plus 60 days.
 
 Preview this week's lists with `npm run checklists` in `site/`. Add or change an item by editing the YAML; `npm run check-content` validates it.
 
