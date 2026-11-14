@@ -6,6 +6,8 @@
 // Not here yet, until a person confirms them (#665): the FCC National Broadband
 // Map, county broadband projects, Mon County's row in the state summary, the
 // end of the ACP, and internet companies' low-cost plans.
+// Added 2026-11-14 (#217, sprint wave 16): the Lifeline Companies Near Me tool,
+// and a low-cost computer (PCs for People by mail).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -56,13 +58,22 @@ const navigator = [{ url: 'https://events.mympls.org/event/17866389', checked: '
   <p>Need help with a phone, email, online forms or scams? The main library holds drop-in tech help hours with its Digital Navigator. See the dates on <a href={`${base}/calendar/`}>Dates and deadlines</a>.</p>
   <SourceLine sources={navigator} org="morgantown-public-library-system" about="drop-in tech help" />
 
+  {r('pcs-for-people-low-cost-computers') && (
+    <>
+      <h2 id="computer">A low-cost computer</h2>
+      <p>We did not find a local program with a current page that gives out free computers. You can use a computer for free at the library (above). To buy one at low cost, this is the option we could confirm.</p>
+      <ResourceCard r={r('pcs-for-people-low-cost-computers')} showCost />
+    </>
+  )}
+
   {r('lifeline-phone-internet-discount') && (
     <>
       <h2 id="lifeline">Help paying for phone or internet</h2>
       <ResourceCard r={r('lifeline-phone-internet-discount')} showCost />
+      {r('lifeline-companies-near-me') && <ResourceCard r={r('lifeline-companies-near-me')} />}
     </>
   )}
 
   <p>Moving here? Start power, water, gas and trash: <a href={`${base}/moving-here/`}>Moving here</a>.</p>
-  <p class="meta">Sources checked October 30, 2026. We do not sell or recommend any internet company. Know a free Wi-Fi spot or help program we should add? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30 to November 14, 2026. We do not sell or recommend any internet company. Know a free Wi-Fi spot or help program we should add? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

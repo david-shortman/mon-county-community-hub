@@ -41,3 +41,30 @@ The Morgantown Public Library System offers public computers and WiFi, but its s
 - **Need:** some households cannot get or stay online, which cuts them off from most other help.
 - **Evidence:** about 14% of households online only through phone data and 7% with no internet (ACS, in `docs/playbook/audience-facts.md`).
 - **Who works on it:** USAC (Lifeline), the public library.
+
+## Pass 3, November 14, 2026 (sprint wave 16, #529)
+
+What was still open after the October and November 1 passes: free or cheap devices, and low-cost plans.
+
+### Added
+
+- **Find a company that takes Lifeline** (`lifeline-companies-near-me`). USAC's Companies Near Me tool searches by ZIP code or city. USAC says the list may not show every company. This answers "where do I use my Lifeline discount" without the site naming or ranking any company. ([source](https://www.lifelinesupport.org/companies-near-me/), read 2026-11-14)
+- **Low-cost refurbished computers by mail** (`pcs-for-people-low-cost-computers`), a national nonprofit. Who qualifies, in its words: buyers "must generally meet the 80% Area Median Income (AMI) guideline or participate in a qualifying assistance program." It needs a photo ID and proof of a program or income, dated in the last 12 months, and no proof of citizenship. Orders "include shipping within the U.S. (excludes PO Boxes, AK, HI, and PR)" with a one-year warranty. Stores are only in Colorado, Illinois, Maryland, Minnesota, Missouri and Ohio. ([eligibility](https://www.pcsforpeople.org/eligibility/), [get tech](https://www.pcsforpeople.org/get-tech/), read 2026-11-14). Prices were left off because they change often; the card points to the store.
+
+Both show on `/internet/`. The Lifeline card makes the page a money page, so the PR waits for David.
+
+### Checked and left off
+
+- **Human-I-T** (human-i-t.org), another national nonprofit selling low-cost laptops and 5G hotspots to households in 13 programs or at or below 200% of the poverty level. Its pages read on 2026-11-14 did not say it ships to West Virginia, so it was left off. A person could check its store or call 888-391-7249.
+- **PCs for People mobile internet** ("as low as $15 per month", prepaid, from its [internet page](https://www.pcsforpeople.org/internet/)). Left off for the same reason as single-company plans in #665: the site does not list one low-cost internet plan while it cannot read the others. Comcast's Internet Essentials page still refused automated reads on 2026-11-14 (HTTP 403).
+- **EveryoneOn Offer Locator** (everyoneon.org) finds low-cost offers by ZIP code, but the form asks for an email address, so it was not tried and is not linked.
+- **WVATS device loans** are already on `/disability-and-aging/` (`wvats-device-loans`). They are assistive technology, not general computers, so they were not added to the computer section.
+
+### Still open
+
+- A local program that gives out free computers or phones, with its own current page.
+- Low-cost plans from the companies that serve Mon County, read by a person (see #665 and the call list).
+
+### Needs register candidate
+
+Still a candidate, not added: the needs files need a rank and a scored comparison with the other needs, which belongs to the needs lane. The evidence is the same as above (ACS figures in `docs/playbook/audience-facts.md`).

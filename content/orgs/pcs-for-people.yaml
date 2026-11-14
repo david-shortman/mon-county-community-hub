@@ -1,0 +1,13 @@
+name: PCs for People
+slug: pcs-for-people
+kind: nonprofit
+website: https://www.pcsforpeople.org/
+phone: "877-450-8585"
+summary: A national nonprofit that refurbishes donated computers and sells them at low cost to people and nonprofits with low income. It sells online and ships within the U.S. It has no store in West Virginia.
+topics: [work]
+area: national
+sources:
+  - url: https://www.pcsforpeople.org/faqs/
+    checked: 2026-11-14
+  - url: https://www.pcsforpeople.org/get-tech/
+    checked: 2026-11-14
