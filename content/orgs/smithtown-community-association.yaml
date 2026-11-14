@@ -1,0 +1,14 @@
+name: Smithtown Community Association
+slug: smithtown-community-association
+kind: community-group
+website: http://www.smithtowncommunity.com/
+summary: A volunteer group that runs the Smithtown Community and Senior Center in the 1939 Smithtown Grade School, at 56 Smithtown School Road, just off Route 73 between Morgantown and Fairmont. It holds community events and rents the building. For rentals, email smithtowncommunity@gmail.com.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: http://www.smithtowncommunity.com/about.html
+    checked: 2026-11-14
+    quote: "The most recent school was built in 1939"
+  - url: http://www.smithtowncommunity.com/contact.html
+    checked: 2026-11-14
+    quote: "Smithtown Community & Senior Center is located at 56 Smithtown School Rd, just off Route 73/Smithtown Rd."
