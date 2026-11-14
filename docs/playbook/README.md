@@ -62,6 +62,8 @@ Every session should skim this page before picking work in the [daily loop](../C
 | [what-people-search-for.md](what-people-search-for.md) | What residents ask for help with, the words they search in, and what they need next, by topic, to shape landing pages |
 | [where-people-are-online.md](where-people-are-online.md) | Showing up in search, AI assistants and local groups' own pages: what is already built (llms.txt, JSON-LD, the API, the MCP server, Pass it on, flyers) and the draft share kit for each guide |
 | [writing-rules.md](writing-rules.md) | How we write about this place and the project: credit local news, no deficit or efficiency framing, no claims we can't show, keep who runs and funds it current |
+| [slanted-sources.md](slanted-sources.md) | Sources with their own interest (advocacy groups, businesses, campaigns): use them for facts about themselves, and an official or neutral source for rights, rules and other groups |
+| [source-order.md](source-order.md) | Which source to trust for which fact: the owner first, then another office, then news, then directories, and what each tier may support |
 
 ## Keeping this current
 
