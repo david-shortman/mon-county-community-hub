@@ -327,3 +327,12 @@ queries:
   - {q: where can our nonprofit get a grant, expect: [/grants-for-nonprofits/, /make-it-better/grants/], kind: question}
   - {q: is there lead in my old house, expect: [/lead/], kind: question}
   - {q: I am being sued over a debt, expect: [/credit-and-debt/, /legal-help/], kind: question}
+  - {q: how do I sue someone in small claims court, expect: [/legal-help/], kind: question}
+  - {q: I found a stray dog who do I call, expect: [/pets/], kind: question}
+  - {q: where can I get a break from caring for my mom, expect: [/caregivers/], kind: question}
+  - {q: a debt collector keeps calling me, expect: [/credit-and-debt/], kind: question}
+  - {q: how do I get my child tested for lead, expect: [/lead/], kind: question}
+  - {q: how do I get my record expunged, expect: [/legal-help/, /reentry/], kind: question}
+  - {q: where do I get a marriage license, expect: [/ids-and-records/], kind: question}
+  - {q: how do I settle an estate after someone dies, expect: [/probate-steps/, /small-estate-affidavit/], kind: question}
+  - {q: how do I pay a parking ticket, expect: [/parking/], kind: question}
