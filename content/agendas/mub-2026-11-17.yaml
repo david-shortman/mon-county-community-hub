@@ -1,0 +1,78 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: mub-2026-11-17
+body: mub
+meeting: Regular meeting
+date: 2026-11-17
+time: "17:30"
+place: 278 Greenbag Road, Morgantown
+watch: The agenda does not name a live stream.
+agenda_url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11172026-3937
+read: 2026-11-14
+items:
+  - number: "1"
+    title: Call to Order.
+    kind: opening
+    line: The meeting is called to order.
+  - number: "2"
+    title: "Approval of Minutes:"
+    kind: minutes
+    line: A vote to approve the written record of an earlier meeting. The agenda lists this part.
+    parts:
+      - Regular Meeting – October 13, 2026.
+  - number: "3"
+    title: "Public Portion: Shall be subject to rules established by MUB."
+    kind: public-comment
+    line: Time for members of the public to speak to the board. The agenda says the board's own rules apply.
+  - number: "4a"
+    title: Bid Acceptance for Whispering Oak Development- Phase II Sanitary Sewer Project.
+    kind: bids
+    line: An item on accepting a bid for Phase II of a sanitary sewer project at the Whispering Oak development. The agenda gives no more detail.
+  - number: "4b"
+    title: Acceptance of Bid for 2500 HD Regular Cab w/ Camper Shell
+    kind: bids
+    line: An item on accepting a bid for a heavy-duty pickup truck with a camper shell. The agenda gives no more detail.
+  - number: "4c"
+    title: Employee Holiday Bonus
+    kind: personnel
+    line: An item on a holiday bonus for MUB employees. The agenda gives no more detail.
+  - number: "4d"
+    title: MUB’s Website
+    kind: other
+    line: An item about MUB's website. The agenda gives no more detail.
+  - number: "4e"
+    title: Right-of-Way condemnation at 420 Brockway Avenue/Clark Street for Sewer Line Extension
+    kind: other
+    line: An item on using condemnation to get a right-of-way at 420 Brockway Avenue and Clark Street for a sewer line extension. The agenda gives no more detail.
+  - number: "5"
+    title: "Old Business:"
+    kind: other
+    line: Items on ongoing projects from earlier meetings. The agenda lists these and gives no more detail.
+    parts:
+      - Van Voorhis Sanitary Sewer Extension Project
+      - Cheat Lake WWTP Upgrade Project
+      - Phase 1 Water Projects
+      - Central Mon Sewer Interceptor Cleaning & Repair
+      - Cobun Creek Interceptor Phase II
+      - Lower Popenoe Stormwater Project
+      - Morgans Run Waterline Extension Project
+  - number: "6"
+    title: General Manager’s Report.
+    kind: report
+    line: An update from MUB's general manager.
+  - number: "7"
+    title: Board Member Issues/Discussions.
+    kind: discussion
+    line: Time for board members to raise topics. The agenda lists no vote.
+  - number: "8"
+    title: Executive Session
+    kind: executive-session
+    line: A closed session under West Virginia Code 6-9A-4(b)(2)(9) and (12), to discuss advance construction planning, other confidential matters the agenda says are exempt from disclosure under the state Freedom of Information Act, and personnel matters. No decisions are made in it.
+  - number: "9"
+    title: Adjourn.
+    kind: closing
+    line: The meeting ends.
+sources:
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11172026-3937
+    checked: 2026-11-14
