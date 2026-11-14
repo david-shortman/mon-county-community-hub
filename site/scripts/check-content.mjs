@@ -16,6 +16,7 @@ import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } f
 import { MOVED } from '../src/lib/moved.mjs';
 import YAML from 'yaml';
 import { loadHomeRules, ruleProblems, isStale } from '../src/lib/home-year.mjs';
+import { quoteProblems } from '../src/lib/reread.mjs';
 import { loadSourceTiers, lowerTierOnly, tierListProblems } from '../src/lib/source-tiers.mjs';
 import { isTopTier } from '../src/lib/content.mjs';
 
@@ -488,6 +489,11 @@ errors.push(...missingOrgErrors(everyRecord, orgSlugs));
 errors.push(...movedErrors(MOVED, orgSlugs));
 // A date held at a place whose record names its town gets that town (#395).
 warnings.push(...venueTownWarnings(loadCalendar(), loadDir('places'), TOWNS));
+
+// Proof of a re-read (#1094): a source's quote is words copied from the page.
+for (const e of [...orgs, ...resources, ...secondhand, ...boards, ...loadDir('places'), ...loadCalendar()]) {
+  for (const s of e.sources ?? []) for (const p of quoteProblems(s?.quote)) errors.push(`${e._file}: ${s.url}: ${p}`);
+}
 
 // The source order (#1092, docs/playbook/source-order.md): a listing should
 // rest on the owner's own page or another office, not only on news stories or
