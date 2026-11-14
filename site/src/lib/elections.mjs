@@ -50,3 +50,28 @@ export function currentElection(today = morgantownToday(), elections = loadElect
 
 // "Tuesday, November 3"
 export const longDate = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+// Runway (#1383): the last day any election file covers (its results_until),
+// and whether that falls within `days` of today. When it does, nobody has
+// added the next election yet, and /vote/ will soon show no election at all.
+// The health check warns and the monthly elections checklist shows it, so the
+// gap is a flag, not silence. Add the next file only from official pages.
+export const ELECTION_RUNWAY_DAYS = 60;
+export function electionRunway(today = morgantownToday(), elections = loadElections(), days = ELECTION_RUNWAY_DAYS) {
+  const until = elections.map((e) => e.results_until).sort().pop() ?? null;
+  const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + days);
+  const needBy = d.toISOString().slice(0, 10);
+  const next = elections.find((e) => today <= e.election_day) ?? null;
+  return { today, until, needBy, short: !until || until < needBy, next: next && { slug: next.slug, name: next.name, election_day: next.election_day } };
+}
+
+const fullDate = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+// The runway in one plain line, for the health check and the checklist.
+export function runwayLine(r) {
+  if (!r.until) return 'No election file in content/elections/, so /vote/ shows no election.';
+  const lead = r.next ? `Next election on file: ${r.next.name}, ${fullDate(r.next.election_day)}.` : 'No upcoming election is on file.';
+  if (r.until < r.today) return `${lead} The last file stopped showing on ${fullDate(r.until)}, so /vote/ shows no election now. Add the next election's file from official pages.`;
+  return r.short
+    ? `${lead} The last file stops showing on ${fullDate(r.until)}, so after that /vote/ shows no election. Add the next election's file from official pages before then.`
+    : `${lead} Election files cover /vote/ through ${fullDate(r.until)}.`;
+}
