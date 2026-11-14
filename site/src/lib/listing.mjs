@@ -52,7 +52,7 @@ export function checkOpeningHours(h, where) {
 
 const DAY_NAMES = { mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday', sun: 'Sunday' };
 // "8 a.m.", "11:30 a.m.", "noon": the same way times read everywhere (#51).
-function timeWords(t) {
+export function timeWords(t) {
   const [h, m] = t.split(':').map(Number);
   if (h === 12 && !m) return 'noon';
   if ((h === 0 || h === 24) && !m) return 'midnight';

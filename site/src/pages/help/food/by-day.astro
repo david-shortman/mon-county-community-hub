@@ -1,0 +1,149 @@
+---
+// Free food and meals by day of the week (#60), the Day list block in
+// docs/design/presentation.md: "Open today" first (filled in on the phone from
+// its own clock, Morgantown time), then each day, then the full listing for
+// each place. Data: content/food-days.yaml, which only names records already
+// checked on each group's own page. A person re-reads every entry once a month
+// (content/checklists/food-days.yaml). With no script, the day links jump to
+// each day.
+import Base from '../../../layouts/Base.astro';
+import ResourceCard from '../../../components/ResourceCard.astro';
+import Actions from '../../../components/Actions.astro';
+import SourceLine from '../../../components/SourceLine.astro';
+import { resource, todayYmd, prettyDate, telHref, loadCalendarWithFeeds, upcoming } from '../../../lib/content.mjs';
+import { loadFoodDaysFile, resolveEntries, byDay, KINDS, isOverdue, placeOf } from '../../../lib/food-days.mjs';
+import { DAYS } from '../../../lib/listing.mjs';
+import { fixFormUrl } from '../../../lib/group-requests.mjs';
+export const page = { parent: "/help/food/", label: "Free food and meals by day" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const today = todayYmd();
+const data = loadFoodDaysFile();
+const entries = resolveEntries(data.days);
+const byAppt = resolveEntries(data.appointment);
+const week = byDay(entries);
+const r211 = resource('wv-211');
+// One-off free food dates in the next 7 days, shown on their day.
+const dayKey = (ymdStr) => DAYS[(new Date(`${ymdStr}T12:00:00Z`).getUTCDay() + 6) % 7];
+const dated = upcoming(await loadCalendarWithFeeds(), today, 6).filter((e) => (e.topics || []).includes('food'));
+const datedOn = (d) => dated.filter((e) => dayKey(e.starts > today ? e.starts : today) === d);
+// Every place once, in the order it first shows up.
+const all = [...entries, ...byAppt].filter((e, i, a) => a.findIndex((x) => x.slug === e.slug) === i);
+const checkedWords = (e) => (e.checked ? prettyDate(e.checked) : 'not recorded');
+---
+<Base help title="Free food and meals by day in Morgantown" description="Free food pantries and meals in Morgantown and Mon County, day by day, with open today first. Each one shows the day we last checked it. Call 211 any hour.">
+  <h1>Free food and meals by day</h1>
+  <p class="lede">Pick a day to see free meals and food pantries. Each one shows the day we checked it. Hours change, so call before you go if you can.</p>
+
+  <nav aria-label="Days of the week" class="day-jump">
+    <ul>
+      {week.map((w) => <li><a href={`#${w.day}`}>{w.name}</a></li>)}
+    </ul>
+  </nav>
+
+  <section id="today" class="today note" aria-labelledby="today-h" hidden>
+    <h2 id="today-h">Open today</h2>
+    <div data-today-list></div>
+  </section>
+
+  {week.map((w) => (
+    <section class="day" id={w.day} data-day={w.day} aria-labelledby={`${w.day}-h`}>
+      <h2 id={`${w.day}-h`}>{w.name}</h2>
+      {(w.rows.length || datedOn(w.day).length) ? (
+        <ul class="day-rows">
+          {w.rows.map((e) => (
+            <li>
+              <a href={`#${e.slug}`}><strong>{e.name}</strong></a>
+              <span class="row-time">{e.time}</span>
+              <span class="row-tags">{KINDS[e.kind]}{e.for && <>. Only for {e.for}</>}.</span>
+              {placeOf(e) && <span class="row-place" translate="no">{placeOf(e)}</span>}
+              {isOverdue(e.checked, today) && <span class="row-place"><strong>Call before you go:</strong> not re-checked since {checkedWords(e)}.</span>}
+            </li>
+          ))}
+          {datedOn(w.day).map((e) => (
+            <li>
+              <a href={e.url}><strong>{e.title}</strong></a>
+              <span class="row-time">{prettyDate(e.starts)} only</span>
+              <span class="row-tags">A free food date, not every week.</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>Nothing on our list for {w.name}. Call or text <a href={telHref(r211.contact.phone)}>211</a> and ask what is open.</p>
+      )}
+    </section>
+  ))}
+
+  <section aria-labelledby="appt-h">
+    <h2 id="appt-h">By appointment: call first</h2>
+    <p>These pantries give food when you set up a time. Call or text to ask for one.</p>
+    <ul class="day-rows">
+      {byAppt.map((e) => (
+        <li>
+          <a href={`#${e.slug}`}><strong>{e.name}</strong></a>
+          <span class="row-tags">{KINDS[e.kind]}. Call or text <a href={telHref(e.record.phone)}>{e.record.phone}</a>.</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="note" aria-labelledby="more-h">
+    <h2 id="more-h">Not on this list</h2>
+    <p>Many churches and small pantries have hours we could not confirm on their own page yet, so they are not here. Call <a href={telHref(r211.contact.phone)}>211</a> or text your ZIP code to {r211.contact.text}, any hour, to ask what is open near you. Free food on set dates, like mobile pantries, is on <a href={`${base}/help/food/today/other/`}>food today or this week</a>.</p>
+  </section>
+
+  <h2>Each place, with how to get there</h2>
+  {all.map((e) => e.type === 'resource' ? (
+    <ResourceCard r={e.record} />
+  ) : e.type === 'place' ? (
+    <article class="card" id={e.slug}>
+      <h3>{e.name}</h3>
+      <p><strong>When:</strong>{' '}{e.record.regular.join('; ')}</p>
+      {placeOf(e) && <p><strong>Where:</strong>{' '}<span translate="no">{placeOf(e)}</span></p>}
+      {e.record.cost && <p><strong>Cost:</strong>{' '}{e.record.cost}</p>}
+      {(e.record.notes || []).map((n) => <p>{n}</p>)}
+      <Actions callFirst phone={e.record.contact.phone} phoneLabel={e.name} link={e.record.contact.url} linkLabel="Website" about={e.name} />
+      <SourceLine sources={e.record.sources} about={e.name} />
+    </article>
+  ) : (
+    <article class="card" id={e.slug}>
+      <h3>{e.name}</h3>
+      <p>{e.record.summary}</p>
+      <Actions callFirst phone={e.record.phone} phoneLabel={e.name} sms={e.record.phone} smsLabel={e.name} link={e.record.website} linkLabel="Website" about={e.name} />
+      <SourceLine sources={e.record.sources} org={e.slug} about={e.name} />
+    </article>
+  ))}
+
+  <p class="meta">We list only places whose days and hours we found on their own page, and we re-check each one every month. Holidays and bad weather can close them. We describe these services and do not decide who can get food. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+
+  <script is:inline>
+    (function () {
+      // Open today: copy today's day (Morgantown time, from this phone's clock) to the top.
+      var keys = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+      var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'short' }).format(new Date()).toLowerCase().slice(0, 3);
+      var key = keys.indexOf(parts) >= 0 ? parts : null;
+      var day = key && document.getElementById(key);
+      var box = document.getElementById('today');
+      if (!day || !box) return;
+      var name = day.querySelector('h2').textContent;
+      box.querySelector('h2').textContent = 'Open today, ' + name;
+      var body = day.cloneNode(true);
+      body.querySelector('h2').remove();
+      body.removeAttribute('id');
+      body.removeAttribute('aria-labelledby');
+      box.querySelector('[data-today-list]').appendChild(body);
+      box.hidden = false;
+      day.querySelector('h2').textContent = name + ' (today)';
+    })();
+  </script>
+</Base>
+
+<style>
+  .day-jump ul { list-style: none; padding: 0; margin: var(--s4) 0 var(--s5); display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .day-jump a { display: inline-block; padding: var(--s2) var(--s3); min-height: 44px; box-sizing: border-box; border: 2px solid var(--accent); border-radius: 3px; font-weight: 700; }
+  .day-rows { list-style: none; padding: 0; margin: 0 0 var(--s4); }
+  .day-rows li { padding: var(--s3) 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: var(--s1); }
+  .day-rows li:last-child { border-bottom: 1px solid var(--line); }
+  .row-time { font-weight: 700; }
+  .row-place { color: var(--muted); }
+  .today .day { margin: 0; }
+</style>
