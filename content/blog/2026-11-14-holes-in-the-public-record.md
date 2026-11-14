@@ -5,7 +5,7 @@ type: what-we-found
 summary: Checking the same public pages every day turns up places where the record itself has gaps. Two official pages disagree, a page is gone, or public data can't answer the question it seems to answer. Here are three examples, and what the project does when it finds one.
 pages: [/how-we-check/, /bus-routes/]
 ---
-This site only repeats what a current public page says. So when the public record has a hole, the site has the same hole. The project keeps a log of these holes, one short file each, in a public folder called [discoveries](https://github.com/david-shortman/mon-county-community-hub/tree/main/docs/discoveries). It held 107 files on November 14, 2026.
+This site only repeats what a current public page says. So when the public record has a hole, the site has the same hole. The project keeps a log of these holes, one short file each, in a public folder called [discoveries](https://github.com/david-shortman/mon-county-community-hub/tree/main/docs/discoveries). It held more than 100 files on November 14, 2026.
 
 The log describes what a page says or does not say. It does not guess why. Here are three examples.
 
