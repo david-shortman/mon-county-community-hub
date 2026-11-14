@@ -8,4 +8,4 @@
   - An older family member needs help at home: Senior Monongalians in-home care, then the Aging and Disability Resource Center.
   - I'm caring for a family member: the Aging and Disability Resource Center.
 - **Waits for David:** the door file already holds the Veterans Crisis Line, so the High stakes check labels any change to it.
-- **Measured:** see the wave 17 walkthrough results in `content/findability/walkthroughs/`. Cost: $0.
+- **Measured:** simulated walks, before and after, in `content/findability/walkthroughs/2026-11-14-doors.yaml` (from the site plan and doors PR). Cost: $0.
