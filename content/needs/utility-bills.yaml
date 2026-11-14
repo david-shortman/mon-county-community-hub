@@ -51,6 +51,24 @@ get_help:
     label: After you apply for LIEAP heating help
   - path: /file-today/
     label: File today for SNAP, Medicaid, heating help and WV WORKS
+decided_by:
+  - body: psc
+    decides: Writes the state rules for electric and gas companies, including the payment plan you can ask for, notice before a shutoff, and no shutoffs on cold days.
+    sources:
+      - url: "https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50441&Format=WORD&KeyWord="
+        checked: 2026-11-02
+      - url: "https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50440&Format=WORD&KeyWord="
+        checked: 2026-11-02
+      - url: https://code.wvlegislature.gov/24-1-3/
+        checked: 2026-11-07
+  - body: mub
+    board: morgantown-utility-board
+    decides: The board over MUB, which runs water, wastewater and stormwater service. The state's electric and gas shutoff rules do not cover water, so ask MUB about its own rules.
+    sources:
+      - url: https://www.mub.org/
+        checked: 2026-11-04
+      - url: "https://apps.sos.wv.gov/adlaw/csr/readfile.aspx?DocId=50441&Format=WORD&KeyWord="
+        checked: 2026-11-02
 site_coverage:
   level: good
   why: Help paying a utility bill lists the programs for heat, power and water, the state's electric and gas shutoff rules (payment plans, notice, no shutoffs at 32 degrees or colder or on Fridays and weekends), and the 20% winter discount. The state heating help (LIEAP) has its own page on what happens after you apply. Water shutoff rules are not shown yet.

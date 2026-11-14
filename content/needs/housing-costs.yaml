@@ -69,6 +69,22 @@ get_help:
     label: After you apply for a housing voucher or public housing
   - path: /behind-on-mortgage/
     label: Behind on your mortgage
+decided_by:
+  - body: city-council
+    decides: Passes city laws. The city's own rules require every rental in Morgantown to be registered, and Code Enforcement inspects rentals once every 3 years.
+    sources:
+      - url: https://www.morgantownwv.gov/435/Rental-Information
+        checked: 2026-11-07
+      - url: https://www.morgantownwv.gov/154/City-Council
+        checked: 2026-10-30
+  - body: housing-authority
+    board: fairmont-morgantown-housing-authority-board
+    decides: Runs the business of the Fairmont-Morgantown Housing Authority, which runs Section 8 Housing Choice Vouchers and public housing in Fairmont.
+    sources:
+      - url: https://code.wvlegislature.gov/16-15-5/
+        checked: 2026-11-04
+      - url: https://fmhousing.com/about_the_fmha/index.php
+        checked: 2026-11-04
 site_coverage:
   level: partial
   why: Rent help (Legal Aid, Catholic Charities and 211), the eviction court steps from state law, repairs, deposits, vouchers with the Morgantown office and posted list status, housing help for veteran families, and mortgage help each have a page or section. It stays partial because there is no single housing starting page yet (issue 202).

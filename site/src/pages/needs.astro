@@ -6,6 +6,7 @@
 import Base from '../layouts/Base.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import { loadDir, prettyDate, ymd } from '../lib/content.mjs';
+import { ruleSetters } from '../lib/rule-setters.mjs';
 export const page = { door: 'community', topic: 'data', label: 'What people here need most', summary: 'A ranked list of the hardest problems people in Mon County face, with the numbers, their sources, and who is working on each' };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
@@ -60,6 +61,14 @@ const changed = needs.filter((n) => n.site_coverage?.before && n.site_coverage.b
           <h3>Who is working on it</h3>
           <ul class="groups">
             {n.working_on.map(group).map((g) => <li>{g.url ? <a href={g.url}>{g.name}</a> : g.name}</li>)}
+          </ul>
+        </>
+      )}
+      {n.decided_by?.length > 0 && (
+        <>
+          <h3>Who sets the rules for this</h3>
+          <ul>
+            {ruleSetters(n.slug).map((b) => <li><a href={`${base}/who-decides/#${b.id}`}>{b.name}</a>: {b.decides} <span class="meta"><a href={b.sources[0].url}>Source<span class="sr-only"> for {b.name}</span></a>, checked {prettyDate(b.sources.map((x) => ymd(x.checked)).sort()[0])}.</span></li>)}
           </ul>
         </>
       )}
