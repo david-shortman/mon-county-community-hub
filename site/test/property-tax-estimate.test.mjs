@@ -7,24 +7,24 @@ import { loadFacts } from '../src/lib/facts.mjs';
 const levy = loadFacts('property-tax')['levy-rates-class-2'];
 const rate = (id) => levy.rates.find((r) => r.id === id).total;
 
-test('the Assessor sheet example: $60,000 in Morgantown', () => {
+test('$60,000 in Morgantown, with the 2026 rates', () => {
   const e = estimate(60000, rate('towns'));
   assert.equal(e.assessed, 36000);
-  assert.equal(e.tax, 475); // 360 x 1.3184 = 474.62
+  assert.equal(e.tax, 474); // 360 x 1.3176 = 474.34
   const h = estimate(60000, rate('towns'), true);
   assert.equal(h.taxable, 16000);
-  assert.equal(h.tax, 211); // 160 x 1.3184 = 210.94
+  assert.equal(h.tax, 211); // 160 x 1.3176 = 210.82
 });
 
 test('homestead never goes below zero, and the rate is per $100', () => {
-  assert.deepEqual(estimate(20000, 1.0684, true), { market: 20000, assessed: 12000, off: 12000, taxable: 0, tax: 0 });
-  assert.equal(estimate(150000, 1.0684).tax, 962); // 900 x 1.0684 = 961.56
+  assert.deepEqual(estimate(20000, 1.0676, true), { market: 20000, assessed: 12000, off: 12000, taxable: 0, tax: 0 });
+  assert.equal(estimate(150000, 1.0676).tax, 961); // 900 x 1.0676 = 960.84
   assert.equal(estimate('abc', 1).tax, 0);
 });
 
 test('the math in words', () => {
   const r = rate('towns');
-  assert.equal(sayMath(estimate(150000, r, true), r), '$150,000 times 60% is $90,000, the assessed value. Take off $20,000 for the homestead exemption, which leaves $70,000. $70,000 times $1.3184 for each $100 is about $923 a year.');
+  assert.equal(sayMath(estimate(150000, r, true), r), '$150,000 times 60% is $90,000, the assessed value. Take off $20,000 for the homestead exemption, which leaves $70,000. $70,000 times $1.3176 for each $100 is about $922 a year.');
   assert.equal(money(1234.4), '$1,234');
 });
 
