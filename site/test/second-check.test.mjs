@@ -44,3 +44,16 @@ test('verdict with the packet: every claim needs its own confirmed row', () => {
   assert.equal(partial.ok, false);
   assert.match(partial.problems.join(' '), /has no row/);
 });
+
+test('parseTable reads tables under record headings, as packetMd writes them (#1886)', () => {
+  const two = { ...rec, title: 'Clothing closet', hours: 'Fridays 9 a.m.', contact: {}, who_it_is_for: null };
+  const items = [claimsFor(rec), claimsFor(two)];
+  // The checker fills in the packet's own tables and posts them under "## Second check".
+  const filled = packetMd(items).split('\n').slice(packetMd(items).split('\n').findIndex((l) => l.startsWith('## ')))
+    .map((l) => l.replace(/\| \| \| \|$/, '| confirmed | https://example.org/pantry | 2026-11-14 |'));
+  const comment = ['## Second check', '', ...filled, '', '## Claude review', '| Rubric | Score | Notes | x | y |', '|---|---|---|---|---|', '| TR1 | pass | ok | x | y |'].join('\n');
+  const rows = parseTable(comment);
+  assert.equal(rows.length, items[0].claims.length + items[1].claims.length, 'rows from every record, none from the review table');
+  assert.ok(rows.every((r) => r.result === 'confirmed'));
+  assert.equal(verdict(rows, items).ok, true);
+});
