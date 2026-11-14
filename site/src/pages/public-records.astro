@@ -7,6 +7,7 @@
 // the record, as the law does.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import RecordsJourney from '../components/RecordsJourney.astro';
 import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "government", label: "Ask for public records", summary: "Your right under West Virginia's Freedom of Information Act, how to ask, the five-day answer rule, fees, and past requests" };
@@ -19,6 +20,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <nav aria-label="On this page">
     <ul>
       <li><a href="#how">How to ask</a></li>
+      <li><a href="#rq-explainer">What happens after you ask</a></li>
       <li><a href="#past">See past requests</a></li>
       <li><a href="#city">City of Morgantown records</a></li>
     </ul>
@@ -26,6 +28,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
   <h2 id="how">How to ask</h2>
   <ResourceCard r={resource('wv-foia-request')} showCost />
+
+  <RecordsJourney />
 
   <h2 id="past">See past requests</h2>
   <ResourceCard r={resource('wv-foia-database')} showCost />
