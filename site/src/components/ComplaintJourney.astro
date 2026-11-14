@@ -8,15 +8,13 @@
 // step's days come from a different rule, so the end of the line is shown as
 // the city's own range, 60 to 80+ days, not as one summed number (#1925).
 // No new facts.
-// How it behaves:
-// - Still version (no script, reduced motion, motion turned off): a plain
-//   numbered list, each step with its own still drawing.
-// - Otherwise one drawing stays in view and the complaint marker moves along
-//   the day line to the step in the middle of the screen, while the filled
-//   part of the line grows. Only transform and opacity move. The step watcher
-//   and "Turn off motion" come from the shared kit (#1441).
-// - The drawings are aria-hidden; each step's text carries every day count.
-import MotionSwitch from './MotionSwitch.astro';
+// Built on the shared StepJourney shell (#1931): the still numbered list,
+// the held drawing and "Turn off motion" live there. This file keeps only
+// the steps, the drawing and what each step shows: the complaint marker
+// moves along the day line and the filled part of the line grows. Only
+// transform and opacity move. The drawings are aria-hidden; each step's text
+// carries every day count.
+import StepJourney from './StepJourney.astro';
 const { sheet } = Astro.props;
 // Day line: x = X0 + day * K. 0 to 80 days across the drawing.
 const X0 = 24, K = 3.4;
@@ -26,7 +24,7 @@ const TICKS = [[0, '0'], [21, '21'], [42, '42'], [60, '60'], [80, '80+']];
 // below moves it by day * K (3.4, 71.4, 142.8, 204) and fills the line to
 // day / 80. In step 5 a band marks the city's range, 60 to 80+ days.
 // A test checks these match.
-const scene = (s) => `<svg class="cc-scene" data-s="${s}" viewBox="0 0 320 132" aria-hidden="true" focusable="false">
+const scene = (s) => `<svg class="jr-scene cc-scene" data-s="${s}" viewBox="0 0 320 132" aria-hidden="true" focusable="false">
   <text class="tb" x="${X0}" y="14">Days after you report</text>
   <path class="axis" d="M${X0} 70H${x(80)}"/>
   <rect class="fill" x="${X0}" y="67" width="${x(80) - X0}" height="6" rx="1"/>
@@ -64,67 +62,19 @@ const steps = [
     body: ['If the owner still has not fixed it, the city says a judge "will issue more, and often larger, fines."'],
   },
 ];
-const N = steps.length;
 ---
-<section class="cc-x" id="cc-explainer" aria-labelledby="cc-h">
-  <h3 id="cc-h">Follow one complaint, day by day</h3>
+<StepJourney id="cc-explainer" heading="Follow one complaint, day by day" level={3} steps={steps} scene={scene} listLabel="One complaint, step by step">
   <p>The city says many complaints look as if nothing is happening, even while they move through its steps. Here are those steps on a line of days, so you can see where a complaint may be.</p>
-  <MotionSwitch skip="#cc-summary" />
-  <p class="cc-key"><strong>About the drawing:</strong> the steps and day counts are from the city's <a href={sheet}>complaint process sheet</a>. Each step sits at the longest time the sheet gives for it. Those times come from different rules, so the end of the line is not one number: it shows the city's own total, 60 to 80+ days. Real cases can be shorter or longer. The sheet has no printed date; the file was made in 2017. The city's Code Enforcement page now takes complaints through SeeClickFix, which the sheet does not mention, so steps may have changed.</p>
-
-  <div class="cc-scrolly">
-  <figure class="cc-stage" aria-hidden="true">
-    <Fragment set:html={scene(1)} />
-    <p class="cc-now" data-now></p>
-  </figure>
-  <ol class="cc-steps" aria-label="One complaint, step by step">
-    {steps.map((st, i) => (
-      <li data-short={st.short}>
-        <p class="cc-when">{st.when}</p>
-        <h4>Step {i + 1} of {N}. {st.title}</h4>
-        <div class="cc-snap"><Fragment set:html={scene(i + 1)} /></div>
-        {st.body.map((t) => <p>{t}</p>)}
-      </li>
-    ))}
-  </ol>
-  </div>
-
-  <div class="cc-summary" id="cc-summary" tabindex="-1">
-    <h4>The path in short</h4>
+  <Fragment slot="key"><strong>About the drawing:</strong> the steps and day counts are from the city's <a href={sheet}>complaint process sheet</a>. Each step sits at the longest time the sheet gives for it. Those times come from different rules, so the end of the line is not one number: it shows the city's own total, 60 to 80+ days. Real cases can be shorter or longer. The sheet has no printed date; the file was made in 2017. The city's Code Enforcement page now takes complaints through SeeClickFix, which the sheet does not mention, so steps may have changed.</Fragment>
+  <Fragment slot="summary">
     <p>Report, a visit within 24 hours, a notice with up to 20 days to fix, a citation with a court date 21 days later, maybe 20 more days, then larger fines. The city says a complaint can take "upwards of 60 to 80+ days" to move through the legal system, and that "Many complaints appear as if they are not addressed, but Code Enforcement always uses this process".</p>
-  </div>
-</section>
-
-<script>
-  import { watchSteps } from '../lib/motion-client.mjs';
-  const sec = document.getElementById('cc-explainer');
-  const stage = sec?.querySelector('.cc-stage .cc-scene');
-  const now = sec?.querySelector('[data-now]');
-  const steps = sec ? Array.from(sec.querySelectorAll<HTMLElement>('.cc-steps > li')) : [];
-  watchSteps(sec, steps, (i) => {
-    stage?.setAttribute('data-s', String(i + 1));
-    if (now) now.textContent = 'Step ' + (i + 1) + ' of ' + steps.length + ': ' + (steps[i].dataset.short ?? '');
-  });
-</script>
+  </Fragment>
+</StepJourney>
 
 <style is:global>
-  /* ===== Follow one complaint (#1890). Press tokens only; all scoped to #cc-explainer. ===== */
-  #cc-explainer .cc-key { font-size: 0.95rem; color: var(--muted); }
-  #cc-explainer .cc-steps { list-style: none; margin: var(--s5) 0; padding: 0; }
-  #cc-explainer .cc-steps > li { margin: 0 0 var(--s4); padding: var(--s3) var(--s4); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; scroll-margin-top: var(--s4); }
-  #cc-explainer .cc-steps h4 { margin: 0 0 var(--s2); font-family: var(--serif); font-size: 1.15rem; }
-  #cc-explainer .cc-steps p { margin: 0 0 var(--s2); }
-  #cc-explainer .cc-steps p:last-child { margin-bottom: 0; }
-  #cc-explainer .cc-when { font-family: var(--kicker); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
-  #cc-explainer .cc-snap { margin: var(--s2) 0 var(--s3); padding: var(--s2); background: var(--bg); border-radius: 2px; }
-  #cc-explainer .cc-summary h4 { margin: 0 0 var(--s2); font-family: var(--serif); font-size: 1.15rem; }
+  /* ===== Follow one complaint (#1890). Press tokens only; scoped to #cc-explainer. Layout is in StepJourney. ===== */
 
   /* Drawing parts */
-  #cc-explainer .cc-scene { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; overflow: visible; }
-  #cc-explainer .cc-scene text { font-size: 11px; fill: var(--fg); }
-  #cc-explainer .cc-scene .tx { font-size: 11px; fill: var(--muted); }
-  #cc-explainer .cc-scene .tb { font: 800 11px var(--kicker); fill: var(--fg); letter-spacing: 0.04em; }
-  #cc-explainer .cc-scene .tc { font-size: 13px; font-weight: 700; fill: var(--fg); }
   #cc-explainer .cc-scene .axis { stroke: var(--line); stroke-width: 6; stroke-linecap: butt; }
   #cc-explainer .cc-scene .tick { stroke: var(--fg); stroke-width: 1.5; }
   #cc-explainer .cc-scene .fill { fill: var(--accent); transform-box: fill-box; transform-origin: left center; transform: scaleX(0); }
@@ -134,7 +84,6 @@ const N = steps.length;
   #cc-explainer .cc-scene .pin { fill: var(--rust); }
 
   /* What each step shows: one caption, the marker's place, the filled line. */
-  #cc-explainer .cc-scene .e { opacity: 0; }
   #cc-explainer .cc-scene[data-s="1"] .e-l1,
   #cc-explainer .cc-scene[data-s="2"] .e-l2,
   #cc-explainer .cc-scene[data-s="3"] .e-l3,
@@ -150,34 +99,4 @@ const N = steps.length;
   #cc-explainer .cc-scene[data-s="3"] .fill { transform: scaleX(0.2625); }
   #cc-explainer .cc-scene[data-s="4"] .fill { transform: scaleX(0.525); }
   #cc-explainer .cc-scene[data-s="5"] .fill { transform: scaleX(0.75); }
-
-  /* Live: only with script, motion allowed and not turned off (the kit adds .is-live). */
-  #cc-explainer .cc-stage { display: none; margin: 0; }
-  #cc-explainer .cc-now { margin: var(--s2) 0 0; font-weight: 700; font-size: 1rem; text-align: center; }
-  #cc-explainer.is-live .cc-snap { display: none; }
-  #cc-explainer#cc-explainer.is-live .cc-stage { display: block; }
-  #cc-explainer.is-live .cc-steps > li { margin-bottom: calc(3.5 * var(--s8)); }
-  #cc-explainer.is-live .cc-steps > li:last-child { margin-bottom: var(--s7); }
-  #cc-explainer.is-live .cc-steps > li.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-  @media (prefers-reduced-motion: no-preference) {
-    #cc-explainer.is-live .cc-stage :is(.mark, .fill) { transition: transform 0.7s ease; }
-    #cc-explainer.is-live .cc-stage .e { transition: opacity 0.4s ease; }
-  }
-  @media (min-width: 44rem) {
-    #cc-explainer.is-live .cc-scrolly { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
-    #cc-explainer#cc-explainer.is-live .cc-stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--s4)); margin-top: var(--s5); padding: var(--s3); background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--fg); border-radius: 2px; }
-  }
-  /* Tall phones: the drawing holds at the top while the steps scroll under it.
-     Short or zoomed-in screens keep a still drawing in each step instead. */
-  @media (max-width: 43.99rem) and (min-height: 36rem) {
-    #cc-explainer#cc-explainer.is-live .cc-stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 calc(-1 * var(--s2)) var(--s4); padding: var(--s2); background: var(--card); border-bottom: 2px solid var(--fg); }
-    /* 220px: about the height of the held drawing on a phone. */
-    #cc-explainer.is-live .cc-steps > li { scroll-margin-top: 220px; }
-    html:has(#cc-explainer.is-live) { scroll-padding-top: 220px; }
-  }
-  @media (max-width: 43.99rem) and (max-height: 35.99rem) {
-    #cc-explainer.is-live .cc-snap { display: block; }
-    #cc-explainer#cc-explainer.is-live .cc-stage { display: none; }
-    #cc-explainer.is-live .cc-steps > li { margin-bottom: var(--s4); }
-  }
 </style>
