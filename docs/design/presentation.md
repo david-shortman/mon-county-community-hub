@@ -152,6 +152,9 @@ Each door and lane page has one job, and its first phone screen leads with the b
 | Parks, `/parks/` | "Where can I go outside?" | Big choices: city parks, rail-trails, book a pavilion or cabin, swim and ice skate (#199) |
 | Arts and making, `/arts-and-making/` | "Where can I make art or learn a craft?" | Big choices: take a class, find space and tools, show and sell, grants (#199) |
 | Meet people, `/meet-people/` | "How do I meet people here?" | Big choices: library card, library programs, neighborhood associations, working from home (#199) |
+| School shots, `/school-shots/` | "What does my child need for their grade?" | Big choices: entering 7th grade, entering 12th grade, new to school in West Virginia, sports physical (#199) |
+| Courts and legal help, `/legal-help/` | "Where do I get legal help, or handle this court thing?" | Big choices: free legal help, ask the court for $20,000 or less, clear a criminal record, jury summons (#199) |
+| Getting around, `/getting-around/` | "How do I get there without a car?" | Big choices: fares and how to ride, bus to the hospital, Pittsburgh and the airport, ride to a medical visit (#199) |
 | About, `/about/` | "Who is behind this, and can I trust it?" | Who's behind this; a drawing of how it runs is still to come (#179) |
 
 Other pages that lead with a step route: `/start-a-business/`, `/start-a-group/`, `/permits/`, `/teen-drivers/` and `/identity-theft/`. Question paths: food help (`/help/food/`), What help is there (`/help/what-help/`) and Who serves me (`/who-serves-me/`). Checked against the built site on November 2, 2026.
