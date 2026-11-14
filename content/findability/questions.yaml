@@ -429,6 +429,73 @@ questions:
     question: When is the last frost, so I know when to plant my garden?
     who: A first-time gardener in Westover
     search: last frost date Morgantown WV
+  # Life areas built since October 31 (#1910, sprint wave 18, #529)
+  - id: q66
+    topic: government
+    kind: everyday
+    question: How do I sue someone in small claims court in Monongalia County?
+    who: A renter in Sunnyside whose old landlord kept the deposit
+    search: small claims court Monongalia County WV
+  - id: q67
+    topic: pets
+    kind: urgent
+    question: I found a stray dog in Morgantown. Who do I call?
+    who: A new resident in South Park who found a dog with no tag
+    search: found stray dog Morgantown WV
+  - id: q68
+    topic: government
+    kind: everyday
+    question: How do I get a copy of my birth certificate in West Virginia?
+    who: A man back home in Morgantown who needs an ID for a job
+    search: birth certificate copy West Virginia
+  - id: q69
+    topic: aging
+    kind: everyday
+    question: Where can I get a break from caring for a family member?
+    who: An adult child in Cheat Lake caring for a parent at home
+    search: respite care Monongalia County WV
+  - id: q70
+    topic: safety
+    kind: everyday
+    question: A debt collector keeps calling me. What are my rights?
+    who: A worker in Westover who lost a job and fell behind on a card
+    search: debt collector rights West Virginia
+  - id: q71
+    topic: medical
+    kind: everyday
+    question: Is there a grief support group in Morgantown?
+    who: A Morgantown resident whose spouse died this year
+    search: grief support group Morgantown WV
+  - id: q72
+    topic: family
+    kind: everyday
+    question: How do I get my child tested for lead in Mon County?
+    who: A parent of a toddler in an old house in Sabraton
+    search: child lead test Monongalia County WV
+  - id: q73
+    topic: government
+    kind: everyday
+    question: How do I get my record expunged in West Virginia?
+    who: A Morgantown resident with an old conviction applying for jobs
+    search: expungement West Virginia how to
+  - id: q74
+    topic: government
+    kind: everyday
+    question: Where do I get a marriage license in Morgantown?
+    who: A couple in Star City planning a wedding
+    search: marriage license Monongalia County
+  - id: q75
+    topic: government
+    kind: everyday
+    question: Someone in my family died. How do I settle their estate in Mon County?
+    who: An adult child in Granville whose parent died
+    search: probate estate Monongalia County Clerk
+  - id: q76
+    topic: transportation
+    kind: everyday
+    question: Where can I park in downtown Morgantown, and how do I pay a ticket?
+    who: A new resident who got a parking ticket downtown
+    search: parking ticket Morgantown WV
   # New needs in the needs register (#1908, #1909, sprint wave 18, #529)
   - id: q77
     topic: moving
