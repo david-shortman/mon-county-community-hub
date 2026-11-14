@@ -1,0 +1,5 @@
+# 2026-11-14: Calendar wording on housing, money and food items (#103)
+
+- **Considered:** the hand-checked calendar items still on the site with topic housing, money or food, plus the two Medicare and Marketplace items, which the review in #103 named and the earlier pass left for David.
+- **Chose:** wording only. Each "who it is for" line now starts "This is for you if...", program names get a few plain words, and the property tax item's law citation stays on the source line (it is the item's source) instead of in the card text. Eligibility, dates, costs, income limits and phone numbers are unchanged. The LIEAP page was re-read on 2026-11-14 to confirm the program's full name.
+- **Shipped:** seven records in `content/calendar/`: homestead exemption, LIEAP, property tax second half, Marketplace open enrollment, Medicare open enrollment, WV Invests and the December 12 mobile pantry. With this and the first PR, `check-calendar-jargon.mjs` has no warnings. Waits for David (`for:david`). Cost: $0.
