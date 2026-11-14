@@ -39,7 +39,7 @@ Across both: tone for help pages (#162) and the reach check (#112) are built.
 
 ## Decisions for David
 
-All of these already have an issue, so this page opens no new ones:
+Each one has its own issue:
 
 1. Turn on the feedback inbox, and add the "What kind?" and "How do you know?" questions to the form (#1530). This unblocks idea 10 and makes helper reports visible.
 2. In-person reach with helpers: a meeting demo, the library, printed cards (#163).
