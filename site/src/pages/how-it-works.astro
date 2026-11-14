@@ -8,7 +8,8 @@
 // Speaks for the project, so changes wait for David (for:david).
 import Base from '../layouts/Base.astro';
 import FollowOneListing from '../components/FollowOneListing.astro';
-import { fixFormUrl, REQUEST_DAYS } from '../lib/group-requests.mjs';
+import { fixFormUrl, FIX_EMAIL, REQUEST_DAYS } from '../lib/group-requests.mjs';
+import { loadDir, ymd, prettyDate } from '../lib/content.mjs';
 export const page = { door: "about", label: "How this site works", summary: "The people, AI and automatic checks behind each page, and how they fit together" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
@@ -16,6 +17,14 @@ const doc = (p) => `${repo}/blob/main/${p}`;
 const tree = (p) => `${repo}/tree/main/${p}`;
 const wfFile = (f) => doc(`.github/workflows/${f}`);
 const example = doc('content/resources/mon-county-recycling-drop-off.yaml');
+// "How accurate is it?" counts come from the same files as the Corrections page,
+// so they stay current. Under 10 shows as "fewer than 10", like that page.
+const fixes = loadDir('corrections').map((c) => ({ ...c, date: ymd(c.date) }));
+const fixCount = (n) => (n < 10 ? 'fewer than 10' : String(n));
+const firstFix = fixes.length ? fixes.map((c) => c.date).sort()[0] : null;
+const fixesByUs = fixes.filter((c) => c.found_by === 'our-check').length;
+const fixesByReaders = fixes.length - fixesByUs;
+const fixKinds = (k) => fixes.filter((c) => c.kind === k).length;
 // Real snippets, shortened. Copied from the files they name, so update them if those change.
 const recordSnippet = `title: County recycling drop-off center
 slug: mon-county-recycling-drop-off
@@ -60,9 +69,11 @@ const doorSnippet = `- slug: this-month
     <ol>
       <li><a href="#flow">How a listing gets here</a></li>
       <li><a href="#who">Who does what</a></li>
+      <li><a href="#ai-does">What the AI does and doesn't do</a></li>
       <li><a href="#sorted">How it's sorted</a></li>
       <li><a href="#stored">Where it's kept</a></li>
       <li><a href="#checks">Checks that run on their own</a></li>
+      <li><a href="#accurate">How accurate is it?</a></li>
       <li><a href="#wrong">When something is wrong</a></li>
       <li><a href="#goal">What it's all for</a></li>
       <li><a href="#limits">What it can't do yet</a></li>
@@ -98,6 +109,34 @@ const doorSnippet = `- slug: this-month
   <p>Both AI helpers are Claude, made by Anthropic. On their own, they may never contact anyone, send alerts to the public, spend money, handle passwords, collect personal information a feature doesn't need, take sides in politics, or change the project's own rules. <a href={`${base}/about/`}>About this site</a> lists exactly what waits for the owner.</p>
   <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/COORDINATION.md')}>who does what, in full</a> and <a href={doc('docs/CHARTER.md')}>the limits on the AI</a>, both on GitHub.</p>
 
+  <h2 id="ai-does">What the AI does and doesn't do</h2>
+  <p>People fairly ask what an AI is doing on a site like this. Here is the plain answer.</p>
+  <div class="roles">
+    <section class="card">
+      <h3>The AI does</h3>
+      <ul>
+        <li>Read public pages from local groups and offices, and write listings from what they say.</li>
+        <li>Write the guides, pages and tools on this site.</li>
+        <li>Review each change against our rules, as a second AI run.</li>
+        <li>Write a public note on what it built and why.</li>
+      </ul>
+    </section>
+    <section class="card">
+      <h3>The AI is not allowed to</h3>
+      <ul>
+        <li>Fill in a fact from memory. If the source page doesn't say it, it stays off.</li>
+        <li>Call, email or visit anyone. It reads public pages only.</li>
+        <li>Read a site that asks robots not to. A person reads it instead, or we leave it out.</li>
+        <li>Retell local news stories. If a news story is the only source, we name the outlet, link it, and use only the one fact we need.</li>
+        <li>Tell you that you qualify for help. The program decides.</li>
+        <li>Make pictures of real places or people.</li>
+        <li>Put changes about shelter, crisis help, food or benefits live before the owner checks them.</li>
+      </ul>
+    </section>
+  </div>
+  <p>These are rules the AI is given. Programs back up some of them. The site's own reading programs check a site's robot rules before every read. The build stops if a listing has no source or no checked date. A program marks shelter, crisis, food and benefits changes for the owner, and the merge script won't put those live. The other rules depend on the AI following them, and on the review and on readers like you catching it when it doesn't.</p>
+  <p class="check"><strong>Check it yourself:</strong> <a href={doc('docs/playbook/trust-and-ai.md')}>the rules on sources</a>, <a href={doc('docs/operations/automated-reads.md')}>the rules on reading other sites</a>, <a href={doc('docs/playbook/writing-rules.md')}>the rules on local news</a> and <a href={doc('site/scripts/high-stakes.mjs')}>the program that marks changes for the owner</a>, all on GitHub.</p>
+
   <h2 id="sorted">How it's sorted</h2>
   <p>People come with a problem, not an office name. So the site is sorted by what you're trying to do.</p>
   <ul>
@@ -129,6 +168,18 @@ const doorSnippet = `- slug: this-month
     </tbody>
   </table>
   <p class="check"><strong>Check it yourself:</strong> <a href={tree('.github/workflows')}>the programs themselves</a>, <a href={doc('docs/operations/README.md')}>what each check does</a> and <a href={tree('docs/rubrics')}>the six review guides</a>, all on GitHub. <a href={`${base}/how-we-check/`}>How we check</a> says how this compares with 211. <a href={`${base}/access/`}>Built for any phone and every reader</a> lists each promise about phones, big text and no signal, with the check behind it and today's numbers.</p>
+
+  <h2 id="accurate">How accurate is it?</h2>
+  <p>We don't know what share of listings are wrong right now. We have not measured it yet. Here is what we can show.</p>
+  <ul>
+    <li><strong>Every fix is public.</strong> {fixes.length ? <>Since {prettyDate(firstFix)}, the <a href={`${base}/corrections/`}>Corrections page</a> lists {fixCount(fixes.length)} fixes: {fixCount(fixKinds('fact'))} to facts, {fixCount(fixKinds('wording'))} to wording, and {fixCount(fixKinds('link') + fixKinds('outdated'))} to links or out-of-date details.</> : <>No fixes are listed on the <a href={`${base}/corrections/`}>Corrections page</a> yet.</>}</li>
+    {fixes.length > 0 && <li><strong>Who found them:</strong> {fixesByReaders === 0 ? `all ${fixCount(fixesByUs)} were found by our own checks. No reader has reported a mistake that led to a fix yet.` : `${fixCount(fixesByUs)} were found by our own checks and ${fixCount(fixesByReaders)} were reported by readers.`} Some were changes at the source. Others were mistakes the AI made first and a later check caught.</li>}
+    <li><strong>Every listing shows its date.</strong> Each one links to its source and shows the date we last checked it. Old listings say they may be out of date.</li>
+  </ul>
+  <p class="gap"><strong>Not yet:</strong> our rules say a second, separate AI session should check each fact about health, money, housing, family, taxes, voting and dates on its own before it goes live. The tools for this are built, but no program requires it yet. Of the last 25 changes put live before November 14, 2026, 4 changed those listings, and none of the 4 had that check. See <a href={doc('docs/playbook/second-check.md')}>where the second check stands</a>.</p>
+
+  <h3>Who answers for a mistake?</h3>
+  <p>The owner, a person, not the AI. The owner is responsible for what this site says, even when the AI wrote it. You can reach the owner with the <a href={fixFormUrl({ page: Astro.url.pathname })}>fix or removal form</a> or by email at <a href={`mailto:${FIX_EMAIL}`}>{FIX_EMAIL}</a>. No account is needed.</p>
 
   <h2 id="wrong">When something is wrong</h2>
   <ul>
@@ -230,5 +281,8 @@ const doorSnippet = `- slug: this-month
     code { font-size: 0.95em; }
     .check { font-size: 0.95rem; }
     .limits li + li { margin-top: 6px; }
+    .roles ul { margin: 0; padding-left: 1.2em; }
+    .roles li + li { margin-top: 6px; }
+    .gap { padding: var(--s3) var(--s4); border-top: 2px solid var(--fg); background: var(--sand); border-radius: 2px; }
   </style>
 </Base>
