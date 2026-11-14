@@ -34,6 +34,37 @@ const money = (n) => `$${n.toLocaleString('en-US')}`;
 const pct = (x) => `${Math.round(x * 100)}%`;
 const propertyTax = general(d.sections.find((s) => s.id === 'money-in').items.find((it) => it.name === 'Property Taxes Current year'));
 const top = rows[0], second = rows[1];
+
+// Plain meanings for budget words (#1880). Each one quotes West Virginia
+// law, read on code.wvlegislature.gov on 2026-11-14. A word with no
+// official meaning found is named under "not explained here" instead.
+const law = (sec) => ({ url: `https://code.wvlegislature.gov/${sec}/`, name: 'West Virginia Legislature', checked: '2026-11-14' });
+const terms = [
+  {
+    word: 'Levy Estimate',
+    meaning: 'The county\'s yearly plan for money in and money out, and the property tax rate it proposes.',
+    quote: 'State law (WV Code §11-8-10, the section the PDF names) says the County Commission must "ascertain the fiscal condition of the county, and make an itemized statement." The statement lists the money due "from every source," "All other expenditures to be paid out of the receipts for the current fiscal year," and "The proposed county levy in cents on each one hundred dollars\' assessed valuation."',
+    source: law('11-8-10'),
+  },
+  {
+    word: 'General Fund',
+    meaning: 'The county\'s main fund, for its everyday work.',
+    quote: 'State law (WV Code §6-9D-2, in the part about local fiscal emergencies) says the general fund is "the fund used to account for and report the primary operating activities of the local government."',
+    source: law('6-9D-2'),
+  },
+  {
+    word: 'Estimated Revenues',
+    meaning: 'The money the budget expects to come in.',
+    quote: 'The same section says estimated revenues are "the aggregate estimates of revenue receipts in the budget of the general fund of a local government and other funds."',
+    source: law('6-9D-2'),
+  },
+  {
+    word: 'Coal Severance Tax Fund',
+    meaning: 'A separate fund for the county\'s share of a state tax on coal.',
+    quote: 'State law (WV Code §11-13A-6) says every county must create a "coal severance tax revenue fund" for this money. The County Commission may spend it "for such public purposes as the county commission or governing body shall determine to be in the best interest of the people." Money not spent by the end of the year "shall be reappropriated to the budget" for the next year.',
+    source: law('11-13A-6'),
+  },
+];
 ---
 <Base title="Mon County budget 2026-2027: where the money goes, Monongalia County, WV" description={`The Monongalia County Commission's 2026-2027 budget in plain lists: ${money(total)} in the General Fund, where it comes from, and where it goes, with a chart.`}>
   <h1>Mon County's budget for 2026-2027</h1>
@@ -54,6 +85,23 @@ const top = rows[0], second = rows[1];
   </figure>
 
   <p>Where the money comes from: the biggest line is "Property Taxes Current year," at {money(propertyTax)}. Every source is listed below.</p>
+
+  <section class="note" aria-labelledby="words">
+    <h2 id="words">What some budget words mean</h2>
+    <dl class="terms">
+      {terms.map((t) => (
+        <>
+          <dt>{t.word}</dt>
+          <dd>
+            <p>{t.meaning}</p>
+            <p class="quote">{t.quote}</p>
+            <SourceLine sources={[t.source]} about={`the meaning of ${t.word}`} />
+          </dd>
+        </>
+      ))}
+    </dl>
+    <p>Not explained here: "Fund Balance" (the $10,000,000 first line of money in) and the limit in "Contingencies - Not to Exceed 10% of Budget." We could not find an official page that says what they mean for this budget, To ask about them, call the County Clerk at <a href={telHref(phone)}>{phone}</a>. State law does say the plan must make "proper allowance for delinquent taxes, exonerations and contingencies" (WV Code §11-8-10).</p>
+  </section>
 
   <nav aria-label="On this page">
     <ul>
@@ -82,6 +130,11 @@ const top = rows[0], second = rows[1];
   .bar-share { color: var(--muted); }
   .bar-track { flex: 1 0 100%; display: block; height: 0.75rem; background: var(--sand); border: 1px solid var(--line); }
   .bar-fill { display: block; height: 100%; min-width: 2px; background: var(--accent); }
+  .terms dt { font-weight: 700; margin-top: var(--s4); }
+  .terms dt:first-child { margin-top: 0; }
+  .terms dd { margin: var(--s1) 0 0; }
+  .terms dd > p { margin-bottom: var(--s2); }
+  .terms .quote { color: var(--muted); }
   .budget-chart figcaption { margin-top: var(--s3); font-size: 0.95rem; color: var(--muted); }
   @media (forced-colors: active) { .bar-fill { background: CanvasText; } }
 </style>
