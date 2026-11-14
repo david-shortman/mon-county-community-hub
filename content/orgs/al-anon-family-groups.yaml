@@ -1,0 +1,10 @@
+name: Al-Anon Family Groups
+slug: al-anon-family-groups
+kind: nonprofit
+website: https://al-anon.org/
+summary: Support groups for people affected by someone else's drinking. Alateen is its group for teens.
+topics: [health]
+area: national
+sources:
+  - url: https://al-anon.org/al-anon-meetings/
+    checked: 2026-11-14
