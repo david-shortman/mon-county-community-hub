@@ -61,11 +61,11 @@ const checked = oldestChecked(p.sources);
         {p.contact?.phone && <p>Call {p.contact.phone}</p>}
         {p.contact?.email && <p>Email {p.contact.email}</p>}
         {p.contact?.place && <p>{p.contact.place}</p>}
-        <p>More, with sources: <strong>{shortUrl}</strong></p>
+        <p class="flyer-url">More, with sources: <strong>{shortUrl}</strong></p>
       </div>
       <div class="flyer-qr" set:html={qrSvg} />
     </div>
-    <p class="flyer-small">From {p.name} and its sources, checked {prettyDate(checked)}. Details can change, so check before you go. From Everything Morgantown, an independent community guide.</p>
+    <p class="flyer-small">Facts from {p.name} and its sources, checked {prettyDate(checked)}. Details can change, so check before you go. Made by Everything Morgantown, an independent community guide.</p>
   </article>
 </Base>
 

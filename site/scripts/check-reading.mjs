@@ -26,8 +26,8 @@ import path from 'node:path';
 const LIMIT = 9;
 const MIN_WORDS = 12;
 // Paragraph classes that are not prose: source and check lines, date chips,
-// the Pass it on web address.
-const SKIP_CLASSES = ['meta', 'date-chip', 'pi-url'];
+// the Pass it on and flyer web addresses.
+const SKIP_CLASSES = ['meta', 'date-chip', 'pi-url', 'flyer-url'];
 
 function syllables(w) {
   w = w.toLowerCase().replace(/[^a-z]/g, '');
