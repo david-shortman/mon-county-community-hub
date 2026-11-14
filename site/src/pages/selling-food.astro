@@ -9,13 +9,16 @@ import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { resource, telHref } from '../lib/content.mjs';
+import Fact from '../components/Fact.astro';
+import { factsFor } from '../lib/facts.mjs';
 export const page = { door: "family", topic: "work", label: "Selling food at markets, events and food trucks", summary: "Which permit fits a fair, a farmers market, a bake sale, food made in your home kitchen (cottage food) or a food truck, and the city rule for trucks and carts" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const eh = [{ url: 'https://www.monchd.org/departments-programs/environmental-health', checked: '2026-10-30' }];
-const temp = [{ url: 'https://www.monchd.org/services/temporary-food-worker-cards', checked: '2026-10-30' }];
 const cottage = [{ url: 'https://agriculture.wv.gov/divisions/regulatory-and-environmental-affairs/potentially-hazardous-cottage-foods/', checked: '2026-11-01' }, { url: 'https://code.wvlegislature.gov/19-40-1/', checked: '2026-11-01' }, { url: 'https://code.wvlegislature.gov/19-35-6/', checked: '2026-11-01' }, { url: 'https://agriculture.wv.gov/wp-content/uploads/Filed-Cottage-Food-Rule-Emergency-Rule-2026.pdf', checked: '2026-11-01' }, { url: 'https://agriculture.wv.gov/wp-content/uploads/West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf', checked: '2026-11-01' }, { url: 'https://www.wvlegislature.gov/Bill_Status/Bills_history.cfm?input=44&year=2026&sessiontype=RS&btype=bill', checked: '2026-11-01' }];
 const vending = [{ url: 'https://www.morgantownwv.gov/256/Vending-Downtown', checked: '2026-10-30' }];
 const r = (slug) => resource(slug);
+// The bake sale and nonprofit lines are fact records (#122), read 2026-11-14.
+const fact = factsFor('selling-food');
 ---
 <Base title="Selling food in Mon County, WV: markets, events and trucks" description="Which Mon County health permit fits a festival, farmers market, bake sale, home kitchen or food truck, the fees, and Morgantown's rule for trucks.">
   <h1>Selling food at markets, events and food trucks</h1>
@@ -29,10 +32,10 @@ const r = (slug) => resource(slug);
   <p>Selling produce, canned foods or plants you grew? See <a href={`${base}/sell-what-you-grow/`}>Sell what you grow</a>.</p>
 
   <h2>A bake sale, or a nonprofit selling food</h2>
-  <p>The health department's Environmental Health page posts a Bake Sale Application and an Exemption Application. Its event page says to call with questions about bake sales or nonprofit status: <a href={telHref('304-598-5131')}>304-598-5131</a>.</p>
+  <Fact f={fact('nonprofit-exemption')} about="food sales by nonprofit groups" />
+  <Fact f={fact('bake-sale-forms')} about="the bake sale and exemption forms" />
   <p>The bake sale rules, as a short list: <a href={`${base}/bake-sale-rules/`}>Holding a bake sale</a>.</p>
-  <p><a class="btn" href="https://www.monchd.org/departments-programs/environmental-health"><span>Health department applications</span></a></p>
-  <SourceLine sources={[...eh, ...temp]} org="monongalia-county-health-department" about="Bake sale and nonprofit food applications" />
+  <p><a class="btn" href="https://www.monchd.org/services/bake-sales-and-non-profit-organizations"><span>Bake sale and nonprofit forms</span></a></p>
 
   <h2 id="home-kitchen">Food you make in your home kitchen (cottage food)</h2>
   <p>Baking cookies or cakes at home to sell, or making jam, salsa or other food? West Virginia law calls food made at the maker's home, and packed there if it is packed, and sold straight to the buyer "cottage food." It does not include meat, poultry, seafood or Grade A dairy products.</p>
