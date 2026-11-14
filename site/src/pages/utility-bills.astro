@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import WhoSetsRules from '../components/WhoSetsRules.astro';
 import DateChip from '../components/DateChip.astro';
 import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
@@ -141,5 +142,7 @@ const charitySources = [
     <p><strong>Do this today:</strong> call your utility, ask for a payment plan, then call 211.</p>
   </div>
   {lifeline && <p>Phone or internet bill? See <a href={`${base}/internet/#lifeline`}>Help paying for phone or internet</a>.</p>}
+  <WhoSetsRules need="utility-bills" />
+
   <p class="meta">Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
