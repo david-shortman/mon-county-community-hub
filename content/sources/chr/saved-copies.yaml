@@ -1,0 +1,70 @@
+# Saved copies of the County Health Rankings & Roadmaps (CHR&R) files this
+# site reads or cites (#1906). CHR&R says its website "will stay up through
+# December 2026". Its terms do not let us re-host the files in this repo (see
+# README.md here), so this list records each file exactly and points to a copy
+# the Internet Archive's Wayback Machine already holds.
+#
+# Each saved copy was downloaded on the read date and its SHA-256 matched the
+# live file byte for byte. scripts/update-chr-indicators.mjs reads the saved
+# copy when the live file is gone, and refuses it if the checksum differs.
+#   url: the live address the site cites
+#   file_name: the name CHR&R gives the file
+#   bytes, sha256: of the live file on the read date
+#   last_modified: the date CHR&R's server gives for the file
+#   saved_copy: the Wayback Machine capture, for people
+#   saved_copy_raw: the same capture as the original bytes, for scripts
+read: 2026-11-14
+terms: https://www.countyhealthrankings.org/terms-use
+terms_checked: 2026-11-14
+files:
+  - name: March 2026 supplemental data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    file_name: analytic_supplement_20260325[1].csv
+    bytes: 10821950
+    sha256: ba5a8f9565b65afcf103c721f7b0603525ec9fa661d390a1fee229fd1ac1aa91
+    last_modified: 2026-03-25
+    saved_copy: https://web.archive.org/web/20260716114700/https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    saved_copy_raw: https://web.archive.org/web/20260716114700id_/https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    captured: 2026-07-16
+  - name: 2025 analytic data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    file_name: analytic_data2025_v3.csv
+    bytes: 13085361
+    sha256: 5a129b856489fe6646013d7fcf85397dd576f6d67a65f5db72738a1df29643de
+    last_modified: 2025-11-19
+    saved_copy: https://web.archive.org/web/20261013091935/https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    saved_copy_raw: https://web.archive.org/web/20261013091935id_/https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_data2025_v3.csv
+    captured: 2026-10-13
+  - name: 2025 trends file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
+    file_name: chr_trends_csv_2025.csv
+    bytes: 60386144
+    sha256: 7fb5e26824dff4c7d5128fd279d4cf23de55f2a2e3d10e7e6a5e0ba0ac08a13a
+    last_modified: 2025-03-06
+    saved_copy: https://web.archive.org/web/20250829124048/https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
+    saved_copy_raw: https://web.archive.org/web/20250829124048id_/https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
+    captured: 2025-08-29
+  - name: March 2026 supplemental release codebook (PDF)
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf
+    file_name: Analytic_Dataset_Codebook_Supplemental_Release_20260325[1].pdf
+    bytes: 441371
+    sha256: 0b3d483b2f95add21355ace7e5d7489c3fa3ded2c7d9e9e9b6ba2c225402e836
+    last_modified: 2026-03-25
+    saved_copy: https://web.archive.org/web/20260516220718/https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf
+    saved_copy_raw: https://web.archive.org/web/20260516220718id_/https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf
+    captured: 2026-05-16
+  - name: 2025 data dictionary (Excel)
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    file_name: DataDictionary_2025.xlsx
+    bytes: 29136
+    sha256: b98c728a120f129527e98038b9468a79c8a1dddddc4e96913588a018a1dbc115
+    last_modified: 2025-03-06
+    saved_copy: https://web.archive.org/web/20250829123917/https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    saved_copy_raw: https://web.archive.org/web/20250829123917id_/https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    captured: 2025-08-29
+  # A web page, not a file: it changes, so it has no checksum. The capture
+  # is the newest one the Wayback Machine had on the read date.
+  - name: Monongalia County page
+    url: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia
+    saved_copy: https://web.archive.org/web/20260415164206/https://www.countyhealthrankings.org/health-data/west-virginia/monongalia
+    captured: 2026-04-15
