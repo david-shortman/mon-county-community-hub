@@ -220,7 +220,7 @@ The findability check asks whether a resident can find an answer by searching. T
 | `city-pathways` | The City of Morgantown's Community Resources page, then its "PATHWAYS to Help" link (1 tap) |
 | `official` | The best official answer from the latest findability run (`best_url`) |
 
-**Needs (findability ids):** q01 heating bill help, q02 food pantry this week, q03 water shutoff help, q04 apply for SNAP, q05 a doctor without insurance, q08 a dentist without dental insurance, q25 free legal help for an eviction, q26 a place to stay tonight.
+**Needs (findability ids):** q01 heating bill help, q02 food pantry this week, q03 water shutoff help, q04 apply for SNAP, q05 a doctor without insurance, q08 a dentist without dental insurance, q25 free legal help for an eviction, q26 a place to stay tonight, q29 a ride to a medical appointment (added 2026-11-14, #1050).
 
 **Measures.** `measure.js` takes the automatic ones. A person or agent scores the rest by reading the source.
 
@@ -234,7 +234,19 @@ The findability check asks whether a resident can find an answer by searching. T
 | Reading grade | Flesch-Kincaid grade of about 120 words from the answer on. Target: about 8. | Script |
 | Answer card | 1 point each, 8 in all: days and hours; can you tell if it is open today; who qualifies; what to bring; address or how to apply; a next step that is not only a call; a checked or updated date; a link to the provider's own page. | Judgment |
 | Must call to learn | Is a phone call the only way to learn the key fact (hours for a place, how to apply for a program)? | Judgment |
-| Correct today | Two facts per need checked against the provider's own page, with the URL and date. Never guess. | Judgment |
+| Correct today | Two facts per need checked against the provider's own page, with the URL and date. Never guess. Never check a fact against a second-hand list (our page, the guide, the city's list, news or a directory); `score.py` prints a note when a fact's URL is one of those (#1050). | Judgment |
+
+**Whole journey (added 2026-11-14, #1050).** The measures above start with the source already open. The whole journey counts the trip to get there too, from two starting points: **from search** (a plain web search with the need's `search` text in `content/findability/questions.yaml`, opening the top result first and following links from there) and **from home** (our home page). For each, record under `journeys:` in the run file:
+
+| Measure | How it is counted |
+|---|---|
+| Taps | Every tap or click from the start to the key fact, counting the search result |
+| Sites | Different websites opened on the way |
+| Calls | Phone calls needed to learn the key fact (hours for a place, how to apply for a program): 0 or 1 |
+| Words | Words read before the answer on the last page (`words_before_answer`) |
+| Minutes | Rough, from a fixed formula so runs compare: 15 seconds a tap, 200 words a minute, 5 minutes a call. `score.py` works it out and flags a mismatch |
+
+A start that refuses our tools (robots.txt or a block) is written `scored: false` with the reason, never guessed. The first baseline is [`journeys/2026-11-14.yaml`](../content/findability/benchmark/journeys/2026-11-14.yaml): from home, every need is 1 to 3 taps on one site; from search was not scored, since the top result for q29 refused our robots.txt check. The bar below is unchanged.
 
 **The "dramatically better" bar, written before the first run (2026-10-30).** For an urgent need, our page meets the bar when: the answer is on the page or one tap in, the page is under 100 KB, the answer card scores 7 of 8 or better, no phone call is needed to learn the key fact, and every checked fact is confirmed. Our page **beats** a source when the source does not cover the need, or when ours has more answer card points, has no fact found wrong where the source has none, and does not need a call that a source fully covering the need does not. A source we could not read this run is marked "not scored" and left out, never guessed. If a source beats us on anything, that becomes an `idea` issue. Do not loosen the bar after a run; if it must change, add a dated line here with the reason.
 
