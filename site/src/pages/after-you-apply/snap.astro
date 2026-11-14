@@ -15,8 +15,10 @@ export const page = { door: 'this-month', topic: 'food', label: 'After you apply
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const checked = '2026-10-31';
 const ORG = 'wv-department-of-human-services';
-const IMM = 'https://bfa.wv.gov/media/40005/download?inline';
-const imm = (part) => ({ url: IMM, checked, name: `WV DoHS Income Maintenance Manual, ${part}` });
+// The manual moved to media/40020 (#1677); its quotes were re-read there on 2026-11-14.
+const IMM = 'https://bfa.wv.gov/media/40020/download?inline';
+const IMM_CHECKED = '2026-11-14';
+const imm = (part) => ({ url: IMM, checked: IMM_CHECKED, name: `WV DoHS Income Maintenance Manual, ${part}` });
 const src = {
   ch1: imm('Chapter 1, sections 1.4.4 to 1.4.19'),
   ch9: imm('Chapter 9, Client Notification'),
