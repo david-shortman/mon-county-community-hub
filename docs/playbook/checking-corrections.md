@@ -1,6 +1,6 @@
 # Checking reported corrections before they go live
 
-What happens to a report ("this phone number is wrong," "they moved," "hours changed") before it changes a listing. Intake is the "Suggest a resource or correction" form and the "Report a problem" link on every card. Triage order and logging are the recurring job in #371. This page is the checking step in between. From #168.
+What happens to a report ("this phone number is wrong," "they moved," "hours changed") before it changes a listing. Intake is the "Suggest a resource or correction" form and the "Report a problem" link on every card. Triage order and logging are the recurring job in #371, written up in [feedback triage](../operations/feedback-triage.md). This page is the checking step in between. From #168.
 
 ## The short version
 
