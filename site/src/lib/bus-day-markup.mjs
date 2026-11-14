@@ -15,7 +15,7 @@ export const STEPS = [
   { day: 'm', t: '12:00', h: 'At midday, 18 of 20 routes are running',
     p: 'Every daytime route is out. The two that are not are night routes: Downtown Mall PM starts at 6 p.m., and Campus PM runs only Thursday to Saturday nights.' },
   { day: 'm', t: '20:30', h: 'By 8:30 p.m., most routes are done',
-    p: "Most routes start their last trip between 5 and 8 p.m. Westridge Mylan (last run 9 p.m.), Blue & Gold (8:40 p.m.) and Downtown Mall PM (11 p.m.) keep going. Thursday to Saturday nights during WVU's fall and spring sessions, Campus PM runs until 3:40 a.m. and West Run until 2:30 a.m." },
+    p: "Most routes start their last trip between 5 and 8 p.m. Three keep going: Westridge Mylan (last run 9 p.m.), Blue & Gold (8:40 p.m.) and Downtown Mall PM (11 p.m.). On Thursday to Saturday nights during WVU's fall and spring sessions, two run late. Campus PM runs until 3:40 a.m. West Run runs until 2:30 a.m." },
 ];
 
 export function dayMarkup(routes, { checked, tripPlanner = 'https://www.busride.org/google-trip-planner' } = {}) {
@@ -49,7 +49,11 @@ export function dayMarkup(routes, { checked, tripPlanner = 'https://www.busride.
   o.push('<div class="scale" aria-hidden="true"><span>5 a.m.</span><span>noon</span><span>midnight</span><span>4 a.m.</span></div>');
   o.push('<p class="note" id="day-now-note" hidden></p>');
   o.push(`<div class="chartbox">${svg(routes, { day: 'm', t: 540, live: true })}</div>`);
-  o.push('<p class="out" id="day-out" aria-live="polite"></p>');
+  // The result line changes on every slider step, so it is not a live region.
+  // Screen readers hear the slider's own value while it moves, and the result
+  // once the slider settles (day-say, #1427).
+  o.push('<p class="out" id="day-out"></p>');
+  o.push('<p class="sr-only" id="day-say" aria-live="polite"></p>');
   o.push('<ul class="lists" id="day-lists"></ul>');
   o.push('</div>');
   o.push('<h3>Read it with care</h3><ul class="care">');
