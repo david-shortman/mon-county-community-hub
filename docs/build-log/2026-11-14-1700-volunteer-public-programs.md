@@ -1,0 +1,5 @@
+# 2026-11-14: Volunteer page adds library roles and the health department's emergency classes (#411)
+
+- **Considered:** ways to take part that a public office runs itself. Searched the health department, the library, the County and the state CERT directory. The library (a public library system) has standing volunteer roles on its own page. The health department teaches Stop the Bleed and CPR to groups of 5 or more. The county CERT team is named on the health department's page with no way to join.
+- **Chose:** three resource records, each from its own page read 2026-11-14 with a quote: `morgantown-library-volunteer`, `monchd-stop-the-bleed`, `monchd-cpr-class`. A new "Learn to help in an emergency" section on `/volunteer/`, and the library card under "Groups that take volunteers year round". CERT stays off the site: #1882 (needs verification) and `docs/discoveries/2026-11-14-mon-county-cert-no-join-path.md`.
+- **Cost:** $0 to build. The CPR class costs $65 or $60 per person, as the health department's page says; the Stop the Bleed page states no cost, and the card says to ask.
