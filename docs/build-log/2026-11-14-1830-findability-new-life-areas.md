@@ -1,0 +1,7 @@
+# Findability questions for life areas built since October 31 (#1910)
+
+Eleven new questions in `content/findability/questions.yaml` (q66 to q76), so the Sunday findability run measures pages that had no question yet: small claims (`/legal-help/`), a stray dog (`/pets/`), a birth certificate (`/ids-and-records/`), a break for caregivers (`/caregivers/`), debt collectors (`/credit-and-debt/`), grief groups (`/grief/`), a child's lead test (`/lead/`), expungement (`/legal-help/`), a marriage license (`/ids-and-records/`), settling an estate (`/probate-steps/`) and parking tickets (`/parking/`). Seven come from the issue and four from the "Questions to add" list in `docs/research/life-areas-coverage-map.md`, each for a page that now exists. Each question is tied to a persona in `content/personas.yaml`.
+
+Nine matching full-question searches were added to the site search test (`content/findability/search-queries.yaml`; birth certificate and grief group questions were already there). The run saved as `content/findability/search-runs/2026-11-14-1828.json` scored 293 of 298 (98.3%) in the top 3. All 50 question searches hit, including the 9 new ones. The 5 misses are everyday words; 3 were misses in the 14:48 run the same day, and 2 ("accessibility" and "farmers market") are new since then, from pages other PRs added today. Those are left for the search lane.
+
+Sprint wave 18, new needs lane (#529).
