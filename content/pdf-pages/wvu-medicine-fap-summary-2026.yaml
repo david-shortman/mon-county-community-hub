@@ -1,0 +1,82 @@
+# WVU Medicine's "Plain Language Summary of the 2026 Financial Assistance
+# Policy" (part of #393), linked as "Plain Language Summary" on WVU
+# Medicine's Policies and Financial Applications page (read 2026-11-14).
+# Four pages with a text layer; every rule, amount and phone number below
+# was copied from it. The file was saved October 12, 2026. Page 3 lists
+# WVU Medicine hospitals in several states; only the two in Morgantown are
+# kept here, since the page is for Mon County.
+slug: wvu-medicine-fap-summary-2026
+title: Plain Language Summary of the 2026 Financial Assistance Policy
+publisher: WVU Medicine
+pdf: https://wvumedicine.org/wp-content/uploads/System_Pages/2026-Financial-Assistance-Policy-Plain-Language-Summary.pdf
+pdf_date: "2026 (the title says \"2026 Financial Assistance Policy\"; the file was saved October 12, 2026)"
+found_on: https://wvumedicine.org/billing-and-insurance/financial-assistance/policies-and-financial-applications/
+intro: WVU Medicine's own short summary of who can get free hospital care and how to apply. Rules, amounts and phone numbers are copied exactly. The parts in quotes are its own words.
+recheck_days: 90
+sources:
+  - url: https://wvumedicine.org/wp-content/uploads/System_Pages/2026-Financial-Assistance-Policy-Plain-Language-Summary.pdf
+    name: WVU Medicine, Plain Language Summary of the 2026 Financial Assistance Policy (PDF)
+    checked: 2026-11-14
+  - url: https://wvumedicine.org/billing-and-insurance/financial-assistance/policies-and-financial-applications/
+    name: WVU Medicine, Policies and Financial Applications
+    checked: 2026-11-14
+sections:
+  - heading: Who may qualify
+    id: who
+    note: The summary says "Patients who:" and then lists these. Each is copied as printed.
+    items:
+      - "\"Have received or are scheduled to receive emergency or medically necessary care\""
+      - "\"Have a household income less than twice the federal poverty limit\""
+      - "\"Do not have substantial assets\""
+      - "\"Have applied for and have been denied Medicaid coverage\""
+      - "\"Are a citizen or permanent resident of the United States\""
+      - "\"International students may qualify but must provide a copy of their student visa and have primary insurance.\""
+  - heading: The 2026 income limits for free care
+    id: income
+    note: "The summary says: \"100% discount: Patients with household income at or below 200% of the Federal Poverty Level may qualify for free care on eligible services.\" These are its amounts for \"Annual Household Income at 200% FPL\"."
+    items:
+      - name: "1 person"
+        lines: ["$31,920"]
+      - name: "2 people"
+        lines: ["$43,280"]
+      - name: "3 people"
+        lines: ["$54,640"]
+      - name: "4 people"
+        lines: ["$66,000"]
+      - name: "5 people"
+        lines: ["$77,360"]
+      - name: "6 people"
+        lines: ["$88,720"]
+      - name: "7 people"
+        lines: ["$100,080"]
+      - name: "8 people"
+        lines: ["$111,440"]
+      - name: "More than 8"
+        lines: ["\"For households larger than eight, add $11,360 for each additional family member.\""]
+  - heading: What care is covered
+    id: covered
+    items:
+      - "\"All emergency and medically-necessary care is covered. Once you are approved, you are covered for 12 months.\""
+      - "Some services are not covered. The summary says \"A list of excluded services is available online\". Look for it on WVU Medicine's Policies and Financial Applications page (linked at the bottom of this page)."
+  - heading: How and when to apply
+    id: apply
+    items:
+      - name: "How"
+        lines: ["\"you may apply for financial assistance through MyWVUChart or by downloading a copy of the application and returning it by mail.\"", "\"All sections of the financial assistance form must be completed with required documentation prior to submitting your application.\""]
+      - name: "When"
+        lines: ["\"Applications are accepted for up to 240 days after the date of the first post-discharge billing statement.\"", "\"Patients are encouraged to apply as soon as they believe assistance may be needed.\""]
+      - name: "Help with the form"
+        lines: ["Call 304-598-6260 (WVU Medicine Locations), \"Monday – Friday, 8 am – 4 pm\", or visit in person."]
+  - heading: Billing protection
+    id: protection
+    items:
+      - "\"A patient who qualifies for assistance under the Financial Assistance Policy will not be charged more for emergency or other medically necessary care than the amounts generally billed to patients who have insurance.\""
+  - heading: Free copies and Spanish
+    id: copies
+    items:
+      - name: "Spanish"
+        lines: ["\"Free translated copies of the Financial Assistance Policy, Financial Assistance application, and Plain Language Summary are available in English and Spanish online.\""]
+      - name: "By mail"
+        lines: ["WVU Medicine - Hospital Services, PO Box 8031, Morgantown, WV 26506"]
+      - name: "In person in Morgantown"
+        lines: ["\"Ask for a copy of the financial assistance policy at the hospital admissions area or at the registration desk in the Emergency Department\". The summary lists J.W. Ruby Memorial Hospital and WVU Medicine Children's Hospital, both at 1 Medical Center Drive, Morgantown, WV 26506."]
