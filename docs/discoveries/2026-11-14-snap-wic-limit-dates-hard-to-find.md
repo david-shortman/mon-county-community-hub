@@ -1,0 +1,8 @@
+# The state's SNAP and WIC pages do not show which dates their income charts cover
+
+- **Found:** 2026-11-14, while adding SNAP and WIC income limits to the food help pages (#1907, sprint wave 18, #529)
+- **What we found:** The Bureau for Family Assistance SNAP page shows a chart of gross income limits (130% and 200% of the poverty line) but does not say when the chart took effect or when it ends. It sits under "SNAP reporting requirements", so it reads as a reporting threshold, not as "who can apply". The date is only in the Income Maintenance Manual's change log for chapter 4, appendix A ("10/1/26 ... Update with FFY27 Income Limits"), inside a 2,265-page PDF. The West Virginia WIC "Apply for WIC" page links only Policy 2.06 (effective May 2, 2024), not the income chart for July 1, 2026 to June 30, 2027. That chart is a separate PDF we found through a search engine, at an address under `/WIC/apply/Documents/`.
+- **Evidence:** https://bfa.wv.gov/bfa-programs/snap, https://bfa.wv.gov/media/40020/download?inline (chapter 4 change log and appendix A, page 239), https://dhhr.wv.gov/WIC/apply/Pages/default.aspx, https://dhhr.wv.gov/WIC/apply/Documents/2.06%20Income%20Eligibility%20Requirements%20Attachment%20%23%201%20Income%20Guidelines%20%20%281%29.pdf (all read 2026-11-14). The numbers on each page match USDA's tables, so the charts are current; only the dates and the links are hard to find.
+- **Why it matters:** A resident checking whether they can get SNAP or WIC cannot tell from the state's pages whether a chart is this year's. People who think they make too much often do not apply.
+- **Who keeps it:** WV Department of Human Services, Bureau for Family Assistance (SNAP); WV Office of Nutrition Services (WIC)
+- **Status:** open
