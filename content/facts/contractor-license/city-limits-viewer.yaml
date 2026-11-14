@@ -1,0 +1,8 @@
+slug: city-limits-viewer
+text: "Not sure an address is in city limits? The city says to check its [Zoning Viewer](https://morgantownwv.maps.arcgis.com/apps/instant/sidebar/index.html?appid=7e73a491ac63495b846f4ada7358f24f)."
+quote: "To verify if an address is within Morgantown City Limits, please utilize our City of Morgantown Zoning Viewer"
+sources:
+  - url: https://www.morgantownwv.gov/747/Permitting-Licensing-Registration
+    name: City of Morgantown, Permitting, Licensing, and Registration
+    checked: 2026-11-14
+recheck_days: 180
