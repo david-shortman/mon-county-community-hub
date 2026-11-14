@@ -1,0 +1,95 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: county-commission-2026-11-18
+body: county-commission
+meeting: Regular meeting
+date: 2026-11-18
+time: "10:00"
+place: Monongalia County Commission Meeting Room, Monongalia County Courthouse, 243 High Street, Morgantown
+watch: We did not find a live stream. The Commission posts video of past meetings under Commission Videos on its website.
+agenda_url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2018,%202026.pdf?t=202611131601090
+read: 2026-11-14
+items:
+  - number: "1"
+    title: Moment of Silent Meditation and Pledge to the Flag
+    kind: opening
+    line: The meeting opens with a moment of silence and the Pledge of Allegiance.
+  - number: "2"
+    title: Call to Order
+    kind: opening
+    line: The meeting is called to order.
+  - number: "3"
+    title: Consent and Approval – County Administrator
+    kind: consent
+    line: Routine business from the County Administrator approved together with one vote. The agenda lists these parts. Budget revisions list state approval of General Fund items for the County Commission (401) and Law Enforcement (700), and fiduciary orders list two estates.
+    parts:
+      - Erroneous Assessments
+      - Minutes
+      - Pay Vouchers
+      - Miscellaneous Bonds, etc.
+      - Budget Revisions
+      - Vacancies for Boards and Authorities
+      - Fiduciary Orders
+  - number: "4"
+    title: Introduction of new employees/personnel changes
+    kind: personnel
+    line: The Commission is introduced to new staff. The agenda lists one part-time Sheriff Utility Officer/Court Security for the Sheriff, by name.
+  - number: "5"
+    title: Presentation - GIS
+    kind: presentation
+    line: A presentation about GIS (geographic information systems, or mapping data). The agenda gives no more detail.
+  - number: "6"
+    title: "[name] – Grants"
+    kind: presentation
+    line: An item about grants, led by a person the agenda names. The agenda gives no more detail.
+  - number: "7"
+    title: Correspondence
+    kind: correspondence
+    line: Letters the Commission has received. The agenda lists one, from the WV Department of Homeland Security, Division of Administrative Services, about a Regional Jail Per Diem Billing Credit.
+  - number: "8"
+    title: Unfinished Business
+    kind: other
+    line: Items held over from earlier meetings. The agenda lists none.
+  - number: "9a"
+    title: Consideration of approval of a Consultant Agreement with MuniCap, Inc. under which MuniCap would complete an updated study of the Harmony Grove TIF District and prepare an updated Revenue Report and debt service coverage calculations in connection with proposed modifications to the terms of TIF Bonds previously issued by the County Commission for the Harmony Grove TIF District
+    kind: vote
+    line: A vote on a consultant agreement with MuniCap, Inc. for an updated study and revenue report on the Harmony Grove TIF District. The agenda says this is tied to proposed changes to the terms of TIF bonds the Commission issued earlier for that district.
+  - number: "9b"
+    title: Consideration to approve AIA B253 Agreement for Furniture, Furnishings and Equipment Design Services as a supplement to the Owner-Architect Agreement dated July 14, 2026 with Silling Associates, Inc. for the Monongalia County Health Department Project
+    kind: vote
+    line: A vote on an added agreement with Silling Associates, Inc. for furniture and equipment design services for the Health Department project. It adds to the architect agreement dated July 14, 2026.
+  - number: "9c"
+    title: Consideration to approve the additional compensation for the Assessor of Monongalia County as indicated by the letter received from Matthew Irby, WV State Tax Commissioner, that the Assessor has substantially completed the additional duties pursuant to WV Code § 7-7-6b
+    kind: vote
+    line: A vote on added pay for the County Assessor under WV Code § 7-7-6b. The agenda says a letter from the State Tax Commissioner states the Assessor has substantially completed the added duties.
+  - number: "9d"
+    title: Consideration of Requisition No. 120 for the University Town Centre Economic Opportunity Development District Subaccount
+    kind: vote
+    line: A vote on a request to pay money from a University Town Centre Economic Opportunity Development District account.
+  - number: "10"
+    title: Reports from Elected Officials
+    kind: report
+    line: Updates from elected officials.
+  - number: "11"
+    title: Reports from County Commissioners
+    kind: report
+    line: Updates from the commissioners.
+  - number: "12"
+    title: Comments from the public
+    kind: public-comment
+    line: Time for members of the public to speak to the Commission.
+  - number: "13"
+    title: Adjournment
+    kind: closing
+    line: The meeting ends.
+note: Under New Business, item 9, the agenda lists four items, shown here as 9a to 9d. On this agenda, public comment comes near the end, after reports. A separate work session agenda for the same day lists one meeting at 11:00 a.m. with the County Assessor and the Chief Tax Deputy.
+sources:
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2018,%202026.pdf?t=202611131601090
+    checked: 2026-11-14
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20November%2018,%202026.pdf?t=202611131601290
+    checked: 2026-11-14
+  - url: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
+    checked: 2026-11-14
+  - url: https://monongaliacountyclerk.com/myfiles/drafts/draft.pdf
+    checked: 2026-11-14
