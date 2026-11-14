@@ -1,0 +1,293 @@
+# The Monongalia County Commission's "Levy Estimate (Budget), 2026 - 2027
+# Fiscal Year" (part of #393), linked as "FY2027" under "County Budgets" on
+# the County Clerk's County Budget and Finances page (read 2026-11-14).
+# Four pages. Pages 1 to 3 have a text layer; every line item was copied from
+# it, and each section's line items were added up and match the section
+# total printed in the PDF, so no number was misread. Page 4 is an image:
+# the Clerk's certification, read off the page.
+#
+# The chart on /county-budget/ reads the TOTAL items below; nothing is typed
+# twice.
+slug: mon-county-budget-2026-27
+title: Monongalia County Commission Levy Estimate (Budget), 2026 - 2027 Fiscal Year
+publisher: Monongalia County Clerk
+pdf: https://www.monongaliacountyclerk.com/myfiles/documents/budget/FY27_Budget.pdf
+pdf_date: "2026 - 2027 Fiscal Year. The County Clerk certified it as a true copy of orders the County Commission entered \"on the 25th day of March 2026\""
+found_on: https://www.monongaliacountyclerk.com/index.php/county-budget-and-finances
+intro: Every line of the budget, in the order the PDF lists it. Labels and amounts are copied exactly. The PDF shows two funds, the General Fund and the much smaller Coal Severance Tax Fund.
+recheck_days: 180
+sources:
+  - url: https://www.monongaliacountyclerk.com/myfiles/documents/budget/FY27_Budget.pdf
+    name: Monongalia County Clerk
+    checked: 2026-11-14
+  - url: https://www.monongaliacountyclerk.com/index.php/county-budget-and-finances
+    checked: 2026-11-14
+sections:
+  - heading: Where the General Fund money comes from
+    id: money-in
+    note: "The PDF calls these the General Fund's \"Estimated Revenues\". Amounts are copied as printed, in the PDF's order."
+    items:
+      - name: "Fund Balance"
+        lines: ["$10,000,000"]
+      - name: "Property Taxes Current year"
+        lines: ["$21,559,054"]
+      - name: "Prior Year Taxes"
+        lines: ["$1,300,000"]
+      - name: "Tax Penalties, Interest & Publication Fees"
+        lines: ["$375,000"]
+      - name: "Property Transfer Tax"
+        lines: ["$2,250,000"]
+      - name: "Gas and Oil Severance Tax"
+        lines: ["$1,500,000"]
+      - name: "Wine & Liquor Tax"
+        lines: ["$300,000"]
+      - name: "Hotel Occupancy Tax"
+        lines: ["$1,000,000"]
+      - name: "Payment in Lieu of Taxes"
+        lines: ["$500"]
+      - name: "Building Permits"
+        lines: ["$3,000"]
+      - name: "Miscellaneous Permits"
+        lines: ["$300"]
+      - name: "Federal Grants / Federal Payment in Lieu of Taxes"
+        lines: ["$1,190,337"]
+      - name: "State Grants"
+        lines: ["$240,965"]
+      - name: "Charges for Services"
+        lines: ["$500"]
+      - name: "Sheriff's Service of Process"
+        lines: ["$45,000"]
+      - name: "Sheriff's Earnings"
+        lines: ["$12,000"]
+      - name: "County Clerk's Earnings"
+        lines: ["$400,000"]
+      - name: "Circuit Clerk's Earnings"
+        lines: ["$60,000"]
+      - name: "Accident Reports"
+        lines: ["$9,000"]
+      - name: "Motor Vehicle License Fee"
+        lines: ["$2,500"]
+      - name: "Clerk Deed Fees"
+        lines: ["$7,000"]
+      - name: "Rents & Concessions"
+        lines: ["$200,000"]
+      - name: "Franchise Agreement"
+        lines: ["$200,000"]
+      - name: "IRP Fees (Interstate Registration Plan)"
+        lines: ["$75,000"]
+      - name: "Regional Jail Operations Partial Reimbursement"
+        lines: ["$160,000"]
+      - name: "Interest Earned"
+        lines: ["$500,000"]
+      - name: "Miscellaneous Revenue"
+        lines: ["$500,000"]
+      - name: "Sheriff's Commission"
+        lines: ["$15,000"]
+      - name: "Commissions"
+        lines: ["$3,000"]
+      - name: "Gaming Income"
+        lines: ["$35,000"]
+      - name: "Video Lottery"
+        lines: ["$225,000"]
+      - name: "Planning Commission Revenue"
+        lines: ["$2,000"]
+      - name: "Contributions/Transfer from Other Entities"
+        lines: ["$1,000"]
+      - name: "Refunds/Reimbursements (External Sources)"
+        lines: ["$1,840,000"]
+      - name: "Total Estimated General Fund Revenues"
+        lines: ["$44,011,156"]
+  - heading: The Coal Severance Tax Fund
+    id: coal-fund
+    note: A second, smaller fund. The PDF lists its own estimated revenues, and its spending is shown next to the General Fund in each section below.
+    items:
+      - name: "Assigned Fund Balance"
+        lines: ["$300,000"]
+      - name: "Coal Severance Tax"
+        lines: ["$100,000"]
+      - name: "Interest Earned on Investment"
+        lines: ["$10,000"]
+      - name: "Total Coal Severance"
+        lines: ["$410,000"]
+  - heading: "Spending: General government"
+    id: general-government
+    note: The PDF puts these under "GENERAL GOVERNMENT".
+    items:
+      - name: "County Commission"
+        lines:
+          - "General Fund: $925,147"
+          - "Coal Severance Tax Fund: $89,250"
+      - name: "County Clerk"
+        lines: ["General Fund: $2,492,625"]
+      - name: "Circuit Clerk"
+        lines: ["General Fund: $717,131"]
+      - name: "Sheriff - Treasurer"
+        lines: ["General Fund: $1,475,747"]
+      - name: "Prosecuting Attorney"
+        lines: ["General Fund: $2,881,017"]
+      - name: "Assessor"
+        lines: ["General Fund: $1,906,567"]
+      - name: "Statewide Computer Network"
+        lines: ["General Fund: $150,000"]
+      - name: "Agricultural Agent"
+        lines: ["General Fund: $248,916"]
+      - name: "Elections - County Clerk"
+        lines: ["General Fund: $1,096,789"]
+      - name: "Custodial"
+        lines: ["General Fund: $445,014"]
+      - name: "Insurance Program (Self Insured)"
+        lines: ["General Fund: $1,500,000"]
+      - name: "Courthouse"
+        lines: ["General Fund: $1,344,892"]
+      - name: "Other Buildings"
+        lines: ["General Fund: $1,047,000"]
+      - name: "Data Processing"
+        lines: ["General Fund: $480,858"]
+      - name: "Regional Development Authority"
+        lines: ["General Fund: $28,857"]
+      - name: "Economic Development"
+        lines: ["General Fund: $174,000"]
+      - name: "Geographic Information Systems (GIS)"
+        lines: ["General Fund: $118,295"]
+      - name: "Rehabilitation of Property"
+        lines: ["General Fund: $1,400,000"]
+      - name: "Planning & Zoning"
+        lines: ["General Fund: $289,656"]
+      - name: "Federal Grants"
+        lines: ["General Fund: $540,337"]
+      - name: "State Grants"
+        lines: ["General Fund: $240,965"]
+      - name: "Litigation Reserve"
+        lines: ["General Fund: $100,000"]
+      - name: "Teen Court"
+        lines: ["General Fund: $30,000"]
+      - name: "Contingencies - Not to Exceed 10% of Budget"
+        lines:
+          - "General Fund: $2,425,794"
+          - "Coal Severance Tax Fund: $41,000"
+      - name: "TOTAL GENERAL GOVERNMENT"
+        lines:
+          - "General Fund: $22,059,607"
+          - "Coal Severance Tax Fund: $130,250"
+  - heading: "Spending: Public safety"
+    id: public-safety
+    note: The PDF puts these under "PUBLIC SAFETY".
+    items:
+      - name: "Sheriff - Law Enforcement"
+        lines: ["General Fund: $5,451,830"]
+      - name: "Sheriff - Service of Process"
+        lines: ["General Fund: $1,003,133"]
+      - name: "County Jail - Reimbursable J/C"
+        lines: ["General Fund: $1,042,901"]
+      - name: "County Jail - Nonreimbursable J/C"
+        lines: ["General Fund: $1,301,649"]
+      - name: "Regional Jail"
+        lines: ["General Fund: $3,000,000"]
+      - name: "Home Confinement"
+        lines: ["General Fund: $413,329"]
+      - name: "Investigative Services"
+        lines: ["General Fund: $35,000"]
+      - name: "Police Special Duty"
+        lines: ["General Fund: $477,000"]
+      - name: "Juvenile Detention Center"
+        lines: ["General Fund: $1,300,000"]
+      - name: "Emergency Services"
+        lines: ["General Fund: $486,688"]
+      - name: "Fire Department"
+        lines: ["General Fund: $7,000"]
+      - name: "Dog Warden/Humane Society"
+        lines: ["General Fund: $854,422"]
+      - name: "Central Garage"
+        lines: ["General Fund: $874,030"]
+      - name: "Dams & Dredging"
+        lines: ["General Fund: $43,561"]
+      - name: "Community Based Corrections Program"
+        lines: ["General Fund: $541,917"]
+      - name: "TOTAL PUBLIC SAFETY"
+        lines: ["General Fund: $16,832,460"]
+  - heading: "Spending: Health and sanitation"
+    id: health-sanitation
+    note: The PDF puts these under "HEALTH AND SANITATION".
+    items:
+      - name: "Local Health Department"
+        lines: ["General Fund: $500,000"]
+      - name: "Mental Health"
+        lines: ["General Fund: $33,000"]
+      - name: "Solid Waste Authority"
+        lines: ["General Fund: $5,000"]
+      - name: "Water"
+        lines: ["Coal Severance Tax Fund: $60,000"]
+      - name: "Recycling Center"
+        lines: ["General Fund: $60,000"]
+      - name: "Litter Control"
+        lines: ["General Fund: $234,880"]
+      - name: "TOTAL HEALTH & SANITATION"
+        lines:
+          - "General Fund: $832,880"
+          - "Coal Severance Tax Fund: $60,000"
+  - heading: "Spending: Culture and recreation"
+    id: culture-recreation
+    note: The PDF puts these under "CULTURE AND RECREATION".
+    items:
+      - name: "Parks & Recreation"
+        lines: ["General Fund: $1,400,959"]
+      - name: "Swimming Pools"
+        lines: ["General Fund: $17,000"]
+      - name: "4 - H Camp"
+        lines: ["General Fund: $2,000"]
+      - name: "Arts & Humanities"
+        lines: ["Coal Severance Tax Fund: $80,000"]
+      - name: "Fair Associations/Festivals"
+        lines: ["Coal Severance Tax Fund: $11,500"]
+      - name: "Community Center"
+        lines:
+          - "General Fund: $7,000"
+          - "Coal Severance Tax Fund: $50,000"
+      - name: "Historical Commission"
+        lines: ["Coal Severance Tax Fund: $7,000"]
+      - name: "Visitor's Bureau"
+        lines: ["General Fund: $675,000"]
+      - name: "TOTAL CULTURE & RECREATION"
+        lines:
+          - "General Fund: $2,101,959"
+          - "Coal Severance Tax Fund: $148,500"
+  - heading: "Spending: Social services"
+    id: social-services
+    note: The PDF puts these under "SOCIAL SERVICES".
+    items:
+      - name: "Social Services"
+        lines:
+          - "General Fund: $219,250"
+          - "Coal Severance Tax Fund: $23,500"
+      - name: "Human Resources"
+        lines: ["Coal Severance Tax Fund: $47,750"]
+      - name: "Senior Citizens"
+        lines: ["General Fund: $135,000"]
+      - name: "Homeless Shelter"
+        lines: ["General Fund: $120,000"]
+      - name: "TOTAL SOCIAL SERVICES"
+        lines:
+          - "General Fund: $474,250"
+          - "Coal Severance Tax Fund: $71,250"
+  - heading: "Spending: Capital projects"
+    id: capital-projects
+    note: The PDF puts these under "CAPITAL PROJECTS".
+    items:
+      - name: "Central Garage"
+        lines: ["General Fund: $700,000"]
+      - name: "Other Buildings"
+        lines: ["General Fund: $1,010,000"]
+      - name: "TOTAL CAPITAL OUTLAY"
+        lines: ["General Fund: $1,710,000"]
+  - heading: Total spending
+    id: total
+    items:
+      - name: "Total Expenditures"
+        lines:
+          - "General Fund: $44,011,156"
+          - "Coal Severance Tax Fund: $410,000"
+  - heading: Who approved it
+    id: approved
+    items:
+      - "The PDF says the County Commission made this estimate \"In accordance with WV Code §11-8-10, as amended\"."
+      - "The last page is signed by the Clerk of the County Commission. It says the pages \"ARE TRUE COPIES FROM THE RECORD OF ORDERS MADE AND ENTERED BY SAID COMMSSION [COMMISSION] ON THE 25th DAY OF MARCH 2026.\""

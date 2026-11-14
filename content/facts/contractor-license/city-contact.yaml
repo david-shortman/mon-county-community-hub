@@ -1,0 +1,10 @@
+slug: city-contact
+text: "Questions about licenses and permits in the city: City Hall, 389 Spruce Street, Monday through Thursday, 7 a.m. to 5:30 p.m."
+quote: "Contact Us 389 Spruce Street Morgantown WV, 26505 Phone: 304-284-7405 Office Hours: Monday through Thursday 7 am to 5:30 pm"
+sources:
+  - url: https://www.morgantownwv.gov/742/Licensing
+    name: City of Morgantown, Licensing
+    checked: 2026-11-14
+recheck_days: 90
+phone: "304-284-7405"
+phone_label: "Call the city"
