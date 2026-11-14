@@ -66,6 +66,8 @@ David chose this process on #97 (October 30, 2026, [his decision](https://github
 5. **A mismatch blocks the merge.** If the checker's answer differs from the draft, the item stays hidden until a third look settles it or the owner's page is clear. Never average or smooth over a disagreement.
 6. **Re-check on a clock.** Every item carries a last-verified date. The tier sets how often (below). Track the share of items verified on time, as 211 directories do under the [Inform USA standards](https://www.informusa.org/standards).
 
+How to run it, with the claim packet and verdict tools: [running the blind second check](second-check.md) (#1098).
+
 ### Risk rubric
 
 Score each item 0 to 2 on four questions:

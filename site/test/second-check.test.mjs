@@ -1,0 +1,37 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { claimsFor, packetMd, parseTable, verdict } from '../src/lib/second-check.mjs';
+
+const rec = {
+  _file: 'resources/x.yaml', title: 'Food pantry', org: 'example-org', hours: 'Tuesdays 10 a.m. to 1 p.m.',
+  contact: { phone: '304-555-0100', place: '1 Main St, Morgantown, WV', url: 'https://example.org/pantry' },
+  who_it_is_for: 'Anyone in the county. See https://example.org/rules for the rules.',
+  sources: [{ url: 'https://example.org/pantry', checked: '2026-11-14' }],
+};
+
+test('claimsFor lists fields with no links and no sources', () => {
+  const c = claimsFor(rec);
+  assert.deepEqual(c.claims.map((x) => x.field), ['Hours', 'Phone', "Who it's for", 'Address']);
+  const md = packetMd([c]);
+  assert.ok(!md.includes('example.org'), 'no source or link in the packet');
+  assert.ok(!md.includes('resources/x.yaml'), 'no file path in the packet');
+  assert.match(md, /\[link removed\]/);
+});
+
+const table = (rows) => `Some text\n\n## Second check\n\n| Field | Claim | Result (confirmed, changed, not found) | Owner's source URL | Checked |\n|---|---|---|---|---|\n${rows.join('\n')}\n\n## Other\n| a | b | c | d | e |`;
+
+test('parseTable reads only the Second check table and skips empty template rows', () => {
+  const rows = parseTable(table(['| Hours | Tue 10 a.m. | confirmed | https://example.org | 2026-11-14 |', '| Phone | | | | |']));
+  assert.equal(rows.length, 2);
+  assert.equal(rows[0].result, 'confirmed');
+});
+
+test('verdict: all confirmed with URL and date passes; changed, not found or blank fails', () => {
+  const ok = '| Hours | Tue 10 a.m. | Confirmed | https://example.org | 2026-11-14 |';
+  assert.equal(verdict(parseTable(table([ok, '| Phone | | | | |']))).ok, true);
+  assert.equal(verdict(parseTable(table([ok, '| Phone | 304-555-0100 | changed | https://example.org | 2026-11-14 |']))).ok, false);
+  assert.equal(verdict(parseTable(table(['| Cost | Free | not found | | 2026-11-14 |']))).ok, false);
+  assert.equal(verdict(parseTable(table(['| Cost | Free | confirmed | | 2026-11-14 |']))).ok, false);
+  assert.equal(verdict(parseTable(table(['| Cost | Free | | | |']))).ok, false);
+  assert.equal(verdict(parseTable('no table here')).ok, false);
+});
