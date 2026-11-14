@@ -1,0 +1,22 @@
+{
+  "name": "mon-county-community-hub",
+  "private": true,
+  "type": "module",
+  "description": "Everything Morgantown: the site, its shared data package and apps, as one npm workspace. Run npm ci here, at the repo root.",
+  "workspaces": [
+    "site",
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w site",
+    "build": "npm run build -w site",
+    "preview": "npm run preview -w site",
+    "check-content": "npm run check-content -w site",
+    "test": "npm run test -w packages/data && npm run test -w site",
+    "e2e": "npm run e2e -w site",
+    "e2e:smoke": "npm run e2e:smoke -w site",
+    "check-a11y": "npm run check-a11y -w site"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -7,7 +7,7 @@
 - `score.py`: turns the raw measures into 0 to 3 scores tied to rubric criteria (IA1, IA2, IA7, PL1, TR1, II1 in `docs/rubrics/`), and summarizes a results file.
 - `YYYY-MM-DD.yaml`: one run's results, with notes per task.
 
-To run it again: build the site (`npm ci && npm run build` in `site/`), serve `site/dist` on port 4321, then from the repo root:
+To run it again: build the site (`npm ci && npm run build` at the repo root), serve `site/dist` on port 4321, then from the repo root:
 
 ```
 node content/findability/walkthroughs/walk.js content/findability/walkthroughs/tasks.yaml

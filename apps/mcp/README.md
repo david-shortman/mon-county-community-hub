@@ -56,7 +56,7 @@ claude mcp add everything-morgantown -- node /path/to/mon-county-community-hub/a
 }
 ```
 
-To read a local build instead of the live site, build the site (`npm ci && npm run build` in `site/`) and pass the folder: `node apps/mcp/server.mjs --base site/dist/api/v1`, or set `EM_API_BASE` to a folder or URL.
+To read a local build instead of the live site, build the site (`npm ci && npm run build` at the repo root) and pass the folder: `node apps/mcp/server.mjs --base site/dist/api/v1`, or set `EM_API_BASE` to a folder or URL.
 
 ## Test it
 

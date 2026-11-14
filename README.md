@@ -29,12 +29,14 @@ You need [Node.js](https://nodejs.org/) 22 and git. Everything is free.
 
 ```
 git clone https://github.com/david-shortman/mon-county-community-hub.git
-cd mon-county-community-hub/site
-npm ci                 # install the tools
+cd mon-county-community-hub
+npm ci                 # install the tools, once, at the repo root
 npm run check-content  # check the data in content/
 npm run build          # build the site into site/dist and run page checks
 npm run preview        # see it at http://localhost:4321
 ```
+
+The repo is one npm workspace (#69): `site/`, `packages/*` and `apps/*` share one `package-lock.json` at the root, so always run `npm ci` there. Every script also works from inside `site/`.
 
 The data lives in [`content/`](content/README.md) and the website in `site/`. What it costs to run and how someone else could keep it going: [`docs/sustainability.md`](docs/sustainability.md).
 

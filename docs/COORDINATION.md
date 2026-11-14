@@ -129,7 +129,7 @@ Duet cannot be messaged directly by Claude Code, so most handoffs go through iss
 
 ## Starting a Claude Code session
 
-1. `cd ~/mon-county-community-hub && git pull`
+1. `cd ~/mon-county-community-hub && git pull && npm ci` (install at the repo root: one npm workspace and one lockfile, #69)
 2. Read `CLAUDE.md` (Claude Code does this automatically).
 3. Pick or get pointed at an issue with `for:code`, claim it.
 4. Work on a `code/...` branch, open a PR.

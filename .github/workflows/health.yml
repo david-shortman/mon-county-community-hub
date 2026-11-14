@@ -49,8 +49,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: package-lock.json
+      # One lockfile at the repo root (npm workspaces, #69), so install there.
       - run: npm ci
+        working-directory: .
 
       # Give GitHub Pages a minute to serve a fresh deploy before checking it.
       - if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success'
@@ -100,8 +102,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: package-lock.json
+      # One lockfile at the repo root (npm workspaces, #69), so install there.
       - run: npm ci
+        working-directory: .
       - name: Run the clock
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -156,12 +160,13 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: package-lock.json
       - working-directory: site
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm ci
+          # One lockfile at the repo root (npm workspaces, #69), so install there.
+          (cd .. && npm ci)
           mkdir -p /tmp/health
           npm run health -- --json /tmp/health/health.json --md /tmp/health/health.md --no-fail
       - uses: anthropics/claude-code-action@v1
@@ -177,7 +182,7 @@ jobs:
             1. Read CLAUDE.md, docs/CHARTER.md, docs/COORDINATION.md, and docs/operations/README.md first. They override this prompt.
             2. Look only at checks with "status": "fail" and "agent_fixable": true. For a failed Site run, read the logs with `gh run view <id> --log-failed`.
             3. Search open issues and PRs first. If a fix is already in progress, comment on the Health issue with a link and stop.
-            4. Find the root cause. If the fix is small and clear (a broken link, a bad content entry, a build error), branch `code/health-fix-<short-name>`, fix it, run `npm ci && npm run check-content && npm run build` in site/ until it passes, add a build-log entry at the top of docs/build-log.md, and open a PR using the repo template that links the Health issue. Merge it yourself (squash) unless it falls under "When a PR waits for David" in docs/COORDINATION.md.
+            4. Find the root cause. If the fix is small and clear (a broken link, a bad content entry, a build error), branch `code/health-fix-<short-name>`, fix it, run `npm ci` at the repo root, then `npm run check-content && npm run build` (from the root or in site/) until they pass, add a build-log entry at the top of docs/build-log.md, and open a PR using the repo template that links the Health issue. Merge it yourself (squash) unless it falls under "When a PR waits for David" in docs/COORDINATION.md.
             5. If the fix is not small or not clear, open a `for:code` issue (add `bug`) with what you found, and link it from the Health issue.
             6. Comment once on the Health issue with what you did.
 

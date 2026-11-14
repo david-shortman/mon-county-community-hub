@@ -10,8 +10,8 @@ This is the runbook for noticing problems with the site and the pipeline, and fo
 ## Running the check
 
 ```sh
+npm ci                 # at the repo root: one lockfile for the workspace (#69)
 cd site
-npm ci
 GITHUB_TOKEN=... npm run health -- --json health.json --md health.md
 ```
 

@@ -34,8 +34,10 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: package-lock.json
+      # One lockfile at the repo root (npm workspaces, #69), so install there.
       - run: npm ci
+        working-directory: .
       - run: npm run check-content
       # scripts/pr-wait.sh and scripts/safe-merge.sh against a fake gh: no network, about 2 seconds.
       - run: bash ../scripts/test/pr-wait.test.sh
@@ -57,7 +59,7 @@ jobs:
       - if: github.event_name == 'pull_request'
         id: scope
         run: |
-          if git diff --name-only HEAD^1 HEAD | grep -qE '^(site|content|apps)/|^\.github/workflows/site\.yml$'; then
+          if git diff --name-only HEAD^1 HEAD | grep -qE '^(site|content|apps|packages)/|^package(-lock)?\.json$|^\.github/workflows/site\.yml$'; then
             echo "suite=e2e" >> "$GITHUB_OUTPUT"
           else
             echo "suite=e2e:smoke" >> "$GITHUB_OUTPUT"
