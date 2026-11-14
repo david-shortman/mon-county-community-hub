@@ -15,7 +15,7 @@ evidence:
     publisher: County Health Rankings (2025 release)
   - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
     checked: 2026-11-14
-    shows: "Educational and employment opportunities are one of the top community issues the assessment named for its five-county service area, which includes Mon County (page 64 of the PDF). Its Census table says 6.0% of Mon County adults 25 and older have no high school diploma (West Virginia 11.4%) (page 26)."
+    shows: "Educational and employment opportunities are one of the top community issues the assessment named for its six-county service area, which includes Mon County (page 64 of the PDF). Its Census table says 6.0% of Mon County adults 25 and older have no high school diploma (West Virginia 11.4%) (page 26)."
     data_date: "2019 to 2023 (Census table); 2025 (assessment)"
     publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
   - url: https://www.monhealth.com/Uploads/Public/Documents/2025%20MHMC%20Community%20Benefit%20Needs%20Assessment%20and%20Implementation%20Strategies.pdf
@@ -42,7 +42,7 @@ gaps:
   - The county's reading and math estimates are from surveys done from 2012 to 2017, so how many adults need help today is not known.
 topics: [work, family]
 rank: 13
-rank_why: "Score 9 of 12: severity 2, reach 3 (16% of adults read at the lowest level), agreement 2 (the two measures are separate, but the newest county skills estimate is from 2012 to 2017 and the hospital assessment names education only together with jobs, for five counties), room to help 2 (free classes and tutoring exist, but a website reaches adults who read with difficulty mostly through the people who help them). Last among the 9s because it had the fewest 211 requests."
+rank_why: "Score 9 of 12: severity 2, reach 3 (16% of adults read at the lowest level), agreement 2 (the two measures are separate, but the newest county skills estimate is from 2012 to 2017 and the hospital assessment names education only together with jobs, for six counties), room to help 2 (free classes and tutoring exist, but a website reaches adults who read with difficulty mostly through the people who help them). Last among the 9s because it had the fewest 211 requests."
 questions: [q78]
 get_help:
   - path: /work-and-learning/
