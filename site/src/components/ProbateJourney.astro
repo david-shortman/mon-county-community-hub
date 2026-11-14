@@ -1,0 +1,102 @@
+---
+// Follow one estate through full probate (#1934, part of #1440), on /probate-steps/.
+// Uses the shared StepJourney shell. Every step and day count is quoted in
+// content/pdf-pages/mon-county-clerk-probate-timeline.yaml (the County
+// Clerk's "Full Probate Overview and Timeline" PDF). No new facts.
+// The drawing: a marker moves along a line of days from the appointment.
+// The Clerk gives two clocks, 90 days for the appraisement and 60 days for
+// creditors, and the second one starts when the notice is published, which
+// depends on when the appraisement is recorded. So the drawing places the
+// creditor clock as an example (as if the appraisement is filed on day 90)
+// and says so. It never shows a total: the Clerk's own words are "at the
+// minimum four months, but can take much longer".
+import StepJourney from './StepJourney.astro';
+// Day line: x = X0 + day * K. 0 to 180 days across the drawing.
+const X0 = 24, K = 1.5;
+const x = (day) => +(X0 + day * K).toFixed(1);
+const TICKS = [[0, '0'], [30, '30'], [60, '60'], [90, '90'], [120, '120'], [150, '150']];
+// The marker stands at days 0, 90, 90, 150 and 150 in steps 1 to 5; the CSS
+// moves it by day * K. The 90-day band fills in step 2, the 60-day band in
+// step 4. A test checks these match.
+const scene = (s) => `<svg class="jr-scene pb-scene" data-s="${s}" viewBox="0 0 320 140" aria-hidden="true" focusable="false">
+  <text class="tb" x="${X0}" y="14">Days after the Clerk appoints you</text>
+  <g class="e e-l1"><text class="tc" x="${X0}" y="36">You sign the Oath.</text><text class="tx" x="${X0}" y="50">You get Letters of Administration.</text></g>
+  <g class="e e-l2"><text class="tc" x="${X0}" y="36">Appraisement within 90 days.</text><text class="tx" x="${X0}" y="50">A list of what the estate owns.</text></g>
+  <g class="e e-l3"><text class="tc" x="${X0}" y="36">Notice goes in the newspaper.</text><text class="tx" x="${X0}" y="50">After the appraisement, or after day 120.</text></g>
+  <g class="e e-l4"><text class="tc" x="${X0}" y="36">Creditors have 60 days.</text><text class="tx" x="${X0}" y="50">Counted from the notice.</text></g>
+  <g class="e e-l5"><text class="tc" x="${X0}" y="36">You file to close the estate.</text><text class="tx" x="${X0}" y="50">The Clerk: at least four months in all.</text></g>
+  <path class="axis" d="M${X0} 74H${x(180)}"/>
+  <rect class="band b90" x="${X0}" y="71" width="${x(90) - X0}" height="6" rx="1"/>
+  <rect class="band b60" x="${x(90)}" y="71" width="${x(150) - x(90)}" height="6" rx="1"/>
+  ${TICKS.map(([d, t]) => `<path class="tick" d="M${x(d)} 68v12"/><text class="tx" x="${x(d)}" y="94" text-anchor="middle">${t}</text>`).join('')}
+  <path class="e e-120 alt" d="M${x(120)} 60v28"/>
+  <path class="e e-more more" d="M${x(150) + 8} 74H${x(180)}l-6 -5m6 5l-6 5"/>
+  <g class="mark"><path class="pin" d="M${X0} 74l-7 -9h14z"/><circle class="dot" cx="${X0}" cy="74" r="5"/></g>
+  <text class="tx tnote" x="${X0}" y="116">Example: the appraisement is filed on day 90.</text>
+  <text class="tx tnote" x="${X0}" y="130">Real dates vary. It can take much longer.</text>
+</svg>`;
+const steps = [
+  {
+    when: 'The day you are appointed', title: 'Open the estate', short: 'Open the estate',
+    body: [
+      'The person who will handle the estate (the executor, administrator or personal representative) signs an Oath at the County Clerk\'s office.',
+      'The Clerk says "Letters of Administration are given at the time of the appointment, or through the mail if received remotely, that prove authority to handle the affairs of the estate."',
+    ],
+  },
+  {
+    when: 'Within 90 days', title: 'File the appraisement', short: 'File the appraisement',
+    body: ['The Clerk says "The Appraisement of the Estate is to be completed and submitted to the Clerk\'s office within ninety (90) days from the date of appointment."'],
+  },
+  {
+    when: 'After the appraisement, or after 120 days', title: 'The notice in the newspaper', short: 'Notice in the newspaper',
+    body: ['The Clerk says "After the County Clerk records the Appraisement, or after 120 days if the appraisement has not been received, Notice of Administration will be published in the local newspaper."'],
+  },
+  {
+    when: '60 days from the notice', title: 'Creditors have 60 days', short: 'Creditors have 60 days',
+    body: ['The Clerk says "This notice gives creditors sixty (60) days to file a claim against the estate. If a claim is received, a copy will be promptly forwarded to the personal representative."'],
+  },
+  {
+    when: 'At the end', title: 'Close the estate', short: 'Close the estate',
+    body: [
+      'The Clerk lists two ways to close. File one or the other: a Waiver of Final Settlement, signed by the heirs, or a Report of Receipts, Disbursements and Distribution Affidavit, signed by the personal representative. Who must sign each one is in "Step 4: Close the estate" below.',
+      'The Clerk says "Probate takes at the minimum four months, but can take much longer due to many factors."',
+    ],
+  },
+];
+---
+<StepJourney id="pb-explainer" heading="Follow one estate, day by day" level={2} steps={steps} scene={scene} listLabel="One estate in full probate, step by step">
+  <p>The Clerk's steps on a line of days, so you can see which clock is running and when.</p>
+  <Fragment slot="key"><strong>About the drawing:</strong> the steps and day counts are from the County Clerk's <a href="https://www.monongaliacountyclerk.com/myfiles/probate_office/Full_Probate_Overview_and_Timeline.pdf">Full Probate Overview and Timeline</a> (PDF, checked November 1, 2026). The 60 days for creditors start when the notice is published, which depends on when the appraisement is recorded. The drawing starts them at day 90 as an example only.</Fragment>
+  <Fragment slot="summary">
+    <p>Sign the Oath and get Letters of Administration. File the appraisement within 90 days. The Clerk then publishes a notice in the newspaper (or after 120 days if no appraisement came in), and creditors have 60 days from the notice to file a claim. Then close the estate with one of the two forms. The Clerk says probate takes "at the minimum four months, but can take much longer."</p>
+    <p>Fees and the full wording of each step are in the lists below. The Clerk's staff cannot give legal advice.</p>
+  </Fragment>
+</StepJourney>
+
+<style is:global>
+  /* ===== Follow one estate. Press tokens only; scoped to #pb-explainer. ===== */
+  #pb-explainer .pb-scene .axis { stroke: var(--line); stroke-width: 6; }
+  #pb-explainer .pb-scene .tick { stroke: var(--fg); stroke-width: 1.5; }
+  #pb-explainer .pb-scene .band { transform-box: fill-box; transform-origin: left center; transform: scaleX(0); }
+  #pb-explainer .pb-scene .b90 { fill: var(--accent); }
+  #pb-explainer .pb-scene .b60 { fill: var(--rust); }
+  #pb-explainer .pb-scene .alt { stroke: var(--fg); stroke-width: 1.5; stroke-dasharray: 3 3; }
+  #pb-explainer .pb-scene .more { fill: none; stroke: var(--fg); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  #pb-explainer .pb-scene .dot { fill: var(--card); stroke: var(--accent); stroke-width: 3; }
+  #pb-explainer .pb-scene .pin { fill: var(--rust); }
+
+  /* What each step shows: one caption, the marker's place, the clocks. */
+  #pb-explainer .pb-scene[data-s="1"] .e-l1,
+  #pb-explainer .pb-scene[data-s="2"] .e-l2,
+  #pb-explainer .pb-scene[data-s="3"] .e-l3,
+  #pb-explainer .pb-scene[data-s="4"] .e-l4,
+  #pb-explainer .pb-scene[data-s="5"] .e-l5,
+  #pb-explainer .pb-scene[data-s="3"] .e-120,
+  #pb-explainer .pb-scene[data-s="5"] .e-more { opacity: 1; }
+  #pb-explainer .pb-scene:not([data-s="1"]) .b90,
+  #pb-explainer .pb-scene:is([data-s="4"], [data-s="5"]) .b60 { transform: scaleX(1); }
+  #pb-explainer .pb-scene[data-s="2"] .mark { transform: translateX(135px); }
+  #pb-explainer .pb-scene[data-s="3"] .mark { transform: translateX(135px); }
+  #pb-explainer .pb-scene[data-s="4"] .mark { transform: translateX(225px); }
+  #pb-explainer .pb-scene[data-s="5"] .mark { transform: translateX(225px); }
+</style>
