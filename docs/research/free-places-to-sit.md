@@ -48,5 +48,5 @@ Each would need David's yes before anyone outside the project is asked.
 
 ## Follow-ups
 
-- Content: re-check the Mountainlair by hand (its site refuses automated reads).
+- Content: re-check the Mountainlair, BOPARC parks, Mylan Park and Senior Monongalians by hand: #1842.
 - Content: add BOPARC parks once a BOPARC page states park hours and public use (see the discovery [BOPARC park pages give no hours](../discoveries/2026-11-14-boparc-park-hours.md)).
