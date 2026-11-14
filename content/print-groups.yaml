@@ -1,0 +1,40 @@
+# Group sheets (#405): printable sheets for a group of people, not a topic.
+# Each lists the resource records named here, printed from the records
+# themselves, so a sheet never says more than the listings do. The page is
+# where the sheet's QR code points. Records with the housing, money or food
+# topic, or that name a crisis line, are left off these sheets (they wait for
+# David under the High stakes rules) and the sheet points to the Get through
+# this month sheet for them instead. Read each record's who_it_is_for before
+# adding it here.
+groups:
+  - slug: older-adults
+    name: Older adults
+    page: /turning-65/
+    resources:
+      - boparc-wellness-classes-55
+      - eldercare-locator
+      - medicare-care-compare-nursing-homes
+      - mountain-line-gold-card
+      - olli-classes-50-plus
+      - senior-monongalians-activities
+      - senior-monongalians-caregiver-support
+      - senior-monongalians-in-home-care
+      - senior-monongalians-lighthouse
+      - senior-monongalians-rides
+      - wv-adrc-region-1
+      - wv-long-term-care-ombudsman
+      - wv-senior-legal-aid
+  - slug: teens
+    name: Teens and young people
+    page: /teens/
+    resources:
+      - drs-morgantown-office
+      - mon-county-4h
+      - mountain-line-high-school-id
+      - mtec-high-school-programs
+      - mympls-online-tutoring
+      - mympls-teen-programs
+      - region-vi-career-connections
+      - shack-junior-volunteers
+      - wv-graduated-drivers-license
+      - wv-teen-age-certificate
