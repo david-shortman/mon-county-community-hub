@@ -1,0 +1,34 @@
+# Monthly checklist for the next election (#1383). /vote/ reads
+# content/elections/ at every daily build, and shows nothing once the last
+# file's results_until has passed. This list is the prompt to add the next
+# election's file in time. The health check also warns (election-runway)
+# when no file runs past today plus 60 days.
+# How it works: site/scripts/checklists.mjs
+id: elections
+title: Next election
+issue_title: Monthly checklist, next election
+tracking: 1383
+intro: >-
+  Look for the next election that Monongalia County voters can vote in: a
+  statewide primary or general, a special election, or a City of Morgantown
+  election. Use official election pages only, never news or campaign pages.
+  When an office has posted the election day and other dates, add
+  content/elections/<slug>.yaml with the same fields as
+  content/elections/2026-general.yaml (site/src/lib/elections.mjs checks
+  them, and a missing one fails the build), with a source and checked date
+  for each. A date that is not posted yet stays off. If nothing is posted,
+  comment "nothing posted yet" with the date.
+items:
+  - text: Election files on hand. How long content/elections/ keeps /vote/ current.
+    run: election-runway
+    when: month
+  - text: WV Secretary of State elections page. Statewide election dates, special elections, and the registration deadline.
+    url: https://sos.wv.gov/elections
+    when: month
+  - text: Monongalia County Clerk elections page. The next county election, early voting dates and places, and the canvass date.
+    url: https://monongaliacountyclerk.com/index.php/elections
+    when: month
+  - text: City of Morgantown election information. The next city election and its dates.
+    url: https://www.morgantownwv.gov/157/Election-Information
+    how: The City's site often drops the first connection; try again.
+    when: month
