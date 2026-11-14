@@ -1,0 +1,97 @@
+# "Nearest help" boxes on town pages (#1814, from the research in #1416:
+# docs/research/nearest-help-by-area.md).
+#
+# Only providers whose own page gives the address and either set hours or
+# says pickup or visits are by appointment. Facts waiting in #1813 (library
+# branches, list-only pantries, Covenant Church, RideMon hours, buses to
+# Osage and Van Voorhis Road) stay off until a person checks them.
+#
+# How distances are measured (said on the page too):
+# - From: the town's Census point in content/bus-map/places.yaml (Census 2024
+#   Gazetteer, the place's internal point).
+# - To: the provider's address, placed with the Census Geocoder
+#   (geocoding.geo.census.gov, benchmark Public_AR_Current) on 2026-11-14.
+#   `point` is [latitude, longitude] as the geocoder returned it.
+# - Straight-line miles with the haversine formula, rounded (see
+#   site/src/lib/nearest-help.mjs). Never driving miles or time.
+#
+# Buses come from Mountain Line's route pages, through
+# content/pdf-pages/mountain-line-routes.yaml (stops and hours were re-read on
+# busride.org for Routes 6, 8, 13 and 52 on 2026-11-14 and matched).
+# `bus_place` is the place on the bus map (content/bus-map/places.yaml) whose
+# stops serve the address. Leave it off when we could not confirm a bus.
+checked: 2026-11-14
+towns: [brookhaven, star-city, booth, blacksville]
+providers:
+  - id: christian-help-pantry
+    need: food
+    name: Christian Help food pantry
+    org: christian-help
+    address: 219 Walnut Street, Morgantown
+    when: Pickup in person Monday, Tuesday and Thursday 9 a.m. to 4 p.m., and Friday 9 a.m. to 2 p.m. One food order every 30 days per household. Open to everyone, with no income limits.
+    phone: "304-296-0221"
+    point: [39.62971, -79.95566]
+    geocoded: 219 WALNUT ST, MORGANTOWN, WV, 26505
+    bus_place: downtown
+    sources:
+      - url: https://motownchristianhelp.com/programs/
+        checked: 2026-11-14
+  - id: scotts-run-osage
+    need: food
+    name: Scott's Run Settlement House food pantry
+    org: scotts-run-settlement-house
+    address: 41 Lady Bug Drive, Osage
+    when: Pickup is by appointment. Call or text first. It also has a site at 750 Fairchance Road, Morgantown.
+    phone: "304-435-5098"
+    point: [39.65913, -80.00593]
+    geocoded: 41 LADY BUG DR, OSAGE, WV, 26543
+    sources:
+      - url: https://www.srsh.org/food-pantry
+        checked: 2026-11-14
+      - url: https://www.srsh.org/
+        checked: 2026-11-14
+  - id: monchd-clinic
+    need: clinic
+    name: Monongalia County Health Department clinic
+    org: monongalia-county-health-department
+    address: 453 Van Voorhis Road, Morgantown
+    when: Shots, reproductive health, and tests for sexually transmitted infections. Call to book an appointment.
+    phone: "304-598-5119"
+    point: [39.65184, -79.96596]
+    geocoded: 453 VAN VOORHIS RD, MORGANTOWN, WV, 26505
+    sources:
+      - url: https://www.monchd.org/
+        checked: 2026-11-14
+      - url: https://www.monchd.org/departments-programs/clinical-services
+        checked: 2026-11-14
+      - url: https://www.monchd.org/services/immunizations
+        checked: 2026-11-14
+  - id: clay-battelle-health-center
+    need: clinic
+    name: Clay-Battelle Community Health Center
+    org: clay-battelle-health-services-association
+    address: 5861 Mason Dixon Highway, Blacksville
+    when: Medical care Monday and Thursday 8 a.m. to 8 p.m., Tuesday and Wednesday 8 a.m. to 4 p.m., Friday 8 a.m. to 5 p.m., and Saturday 8 a.m. to noon. Sliding fee.
+    phone: "304-432-8211"
+    point: [39.72025, -80.20492]
+    geocoded: 5861 MASON DIXON HWY, BLACKSVILLE, WV, 26521
+    sources:
+      - url: https://cbhealthwv.org/locations/blacksville/
+        checked: 2026-11-14
+  - id: dohs-office
+    need: benefits
+    name: WV Department of Human Services, Monongalia County office
+    org: wv-department-of-human-services
+    address: 114 South High Street, Morgantown
+    when: Monday to Friday, 8:30 a.m. to 5 p.m. Apply for or ask about SNAP, Medicaid, WVCHIP, heating bill help (LIEAP) and cash help for families (TANF).
+    phone: "304-285-3175"
+    # The geocoder gave two matches: this one, and 114 HIGH ST, MORGANTOWN,
+    # WV, 26505 at [39.62803, -79.95733]. They are about 0.2 miles apart, and
+    # every town's rounded distance is the same from either one (a test checks).
+    point: [39.62539, -79.95979]
+    other_point: [39.62803, -79.95733]
+    geocoded: 114 S HIGH ST, MORGANTOWN, WV, 26501
+    bus_place: downtown
+    sources:
+      - url: https://dohs.wv.gov/offices/monongalia-county-dohs-office
+        checked: 2026-11-14
