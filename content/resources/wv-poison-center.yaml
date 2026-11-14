@@ -1,0 +1,17 @@
+title: West Virginia Poison Center
+slug: wv-poison-center
+org: wv-poison-center
+topics: [health]
+who_it_is_for: Anyone in West Virginia, of any age, when a person may have been poisoned. That includes a medicine or household product taken by mistake, an eaten plant, a snake, spider or insect bite or sting, a chemical spill, something at work, or a drug overdose. It also helps with pets. Nurses, pharmacists and doctors give advice.
+hours: 24 hours a day, 7 days a week
+what_to_do: Call 1-800-222-1222 first when you think someone was poisoned. A poison specialist tells you how to handle it at home, or whether to get medical care right away.
+contact:
+  phone: "1-800-222-1222"
+  url: https://wvpoisoncenter.org/
+sources:
+  - url: https://wvpoisoncenter.org/about-us
+    checked: 2026-11-14
+    quote: "for the public and health care professionals 24 hours a day, 7 days a week."
+  - url: https://wvpoisoncenter.org/contact-us
+    checked: 2026-11-14
+    quote: "Poisoning Emergency: 1-800-222-1222"

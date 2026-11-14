@@ -1,0 +1,18 @@
+title: Emergency room at Vandalia Health Mon Medical Center
+slug: mon-medical-center-emergency-room
+org: mon-health-medical-center
+topics: [health]
+who_it_is_for: Anyone with a serious illness or injury.
+hours: Open 24 hours
+opening_hours: always
+get_in: walk-in
+what_to_do: Go to the emergency room at 1200 J.D. Anderson Drive.
+contact:
+  phone: "304-598-1200"
+  url: https://www.monhealth.com/
+  place: 1200 J.D. Anderson Drive, Morgantown, WV
+not_posted: [cost]
+sources:
+  - url: https://www.monhealth.com/
+    checked: 2026-11-14
+    quote: "Mon Medical Center 1200 J.D. Anderson Drive Morgantown, WV Phone: 304-598-1200 Open 24HRS"
