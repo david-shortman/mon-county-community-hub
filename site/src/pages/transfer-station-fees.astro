@@ -1,0 +1,31 @@
+---
+// Transfer station fees and rules (part of #393): the Mountaineer Transfer
+// Station's information sheet PDF, linked from the Solid Waste Authority's
+// Disposal page, as short lists. Every fee, hour and item is copied in
+// content/pdf-pages/mountaineer-transfer-station.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "recycling", label: "Transfer station (the dump): fees and what it won't take", summary: "The Mountaineer Transfer Station's own sheet: $12 minimum for loads up to 220 pounds, $81.25 a ton above that, its hours, and the items it does not accept" };
+const d = pdfPage('mountaineer-transfer-station');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-368-7735';
+---
+<Base title="Mountaineer Transfer Station fees, hours and what it won't take, Morgantown, WV" description="The Mountaineer Transfer Station's own sheet: a $12 minimum for loads up to 220 pounds, $81.25 a ton above that, hours, and the items it does not accept.">
+  <h1>Taking a load to the transfer station</h1>
+  <p class="lede">Going to the Mountaineer Transfer Station (often called the dump)? Its sheet says a load up to 220 pounds costs at least $12.00, and heavier loads cost $81.25 a ton. Those fees date from October 2023, so call <a href={telHref(phone)}>{phone}</a> to confirm before you go. Here is the sheet as a short list.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>Where to take tires, batteries, paint, electronics and other things the station turns away: see <a href={`${base}/recycling/#hard-items`}>trash, recycling and drop-off</a>.</p>
+
+  <p class="meta">This page is a reading aid. The transfer station's sheet is the official version. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

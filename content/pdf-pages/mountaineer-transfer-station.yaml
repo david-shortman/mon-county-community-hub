@@ -1,0 +1,59 @@
+# The Mountaineer Transfer Station's one-page information sheet (part of
+# #393), linked from the Monongalia County Solid Waste Authority's Disposal
+# page (read 2026-11-14). The sheet has a text layer; every fee, hour and
+# item was copied from it and checked against the page image. The station is
+# run by Republic Services, not the Solid Waste Authority (the Disposal page
+# says so).
+#
+# The sheet's fees say "EFFECTIVE OCTOBER 16, 2023" and the file was saved
+# January 5, 2024. No newer fee list was found on an official page, so the
+# page shows that date and says to call to confirm.
+slug: mountaineer-transfer-station
+title: Mountaineer Transfer Station information sheet
+publisher: Mountaineer Transfer Station (Republic Services)
+pdf: https://www.monongaliacountyswa.com/_files/ugd/8af711_d3ccbfbb96ca48b7a9d24bd324a23dc3.pdf
+pdf_date: "fees \"EFFECTIVE OCTOBER 16, 2023\" (the file was saved January 5, 2024)"
+found_on: https://www.monongaliacountyswa.com/disposal
+intro: The transfer station's own sheet lists its hours, what it charges and what it will not take. Fees and items are copied as printed. The parts in quotes are its own words.
+recheck_days: 120
+sources:
+  - url: https://www.monongaliacountyswa.com/_files/ugd/8af711_d3ccbfbb96ca48b7a9d24bd324a23dc3.pdf
+    name: Mountaineer Transfer Station information sheet (PDF, linked from the Solid Waste Authority's Disposal page)
+    checked: 2026-11-14
+  - url: https://www.monongaliacountyswa.com/disposal
+    name: Monongalia County SWA, Disposal
+    checked: 2026-11-14
+sections:
+  - heading: What it costs
+    id: fees
+    note: The sheet says these fees are "EFFECTIVE OCTOBER 16, 2023". Call to confirm before you go.
+    items:
+      - name: "Loads up to 220 pounds"
+        lines: ["\"A MINIMUM CHARGE OF $12.00 WILL APPLY TO LOADS UP TO 220 LBS.\""]
+      - name: "Loads 220 pounds and up"
+        lines: ["\"LOADS 220 LBS AND HIGHER WILL BE CHARGED $81.25 PER TON BASED ON ACTUAL NET WEIGHT.\""]
+      - name: "Free day"
+        lines: ["Not on the sheet. The Solid Waste Authority's Disposal page says the free day is \"the 1st Thursday of each month\" and is for \"Bagged household trash only. Only what fits in your trash bag at home.\" It adds: \"NO trailers or rolls offs of household trash are accepted at free day.\""]
+  - heading: Hours and address
+    id: hours
+    items:
+      - name: "Hours"
+        lines: ["\"MONDAY THROUGH FRIDAY 5:30AM TO 3:00PM\"", "\"SATURDAY 7:00AM TO 11:00AM\""]
+      - name: "Address"
+        lines: ["2130 Rail Street, Morgantown, WV 26505 (as printed on the sheet)"]
+      - name: "Phone"
+        lines: ["(304) 368-7735"]
+  - heading: What it does not take
+    id: not-accepted
+    note: The sheet lists these under "WE DO NOT ACCEPT THE FOLLOWING". Each is copied as printed.
+    items:
+      - "FREEFLOWING LIQUIDS"
+      - "REGULATED HAZARDOUS WASTE AS DEFINED BY 40 CFR 258.20 AND LISTED BY 40 CFR 261.30"
+      - "PESTICIDES INCLUDING CONTAINERS"
+      - "TIRES"
+      - "BATTERIES"
+      - "OILS OR OIL CONTAMINATED SOILS"
+      - "RADIOACTIVE WASTE"
+      - "WHOLE DRUMS OR CONTAINERS"
+      - "ASBESTOS OR ASBESTOS CONTAINING MATERIALS: \"FRIABLE OR CATEGORY 2 NON-FRIABLE\""
+      - "APPLIANCES CONTAINING REFRIGERANT: \"EXAMPLES INCLUDE AIR CONDITIONERS, REFRIGERATORS, FREEZERS, ETC. UNLESS FREON IS REMOVED AND TAGGED BY A LICENSED VENDOR\""
