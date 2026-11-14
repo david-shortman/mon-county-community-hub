@@ -3,8 +3,8 @@
 From verification sweep 6 (sprint wave 15, #529), which re-checked 24 open `needs-verification` issues that are not labeled `for:david`. Each issue got a dated comment on November 14 saying what was checked. What an official page now settles went into a PR:
 
 - #1520, property tax levy rates: the Assessor now posts a 2026 table, now used by the estimate tool (#1808).
-- #1744, MUB board meeting date: MUB's own agenda gives November 17 (PR for #1744).
-- #1677, Income Maintenance Manual link: the manual is back at a new address, and every quote on the 8 pages was found in it (PR for #1677, waits for David).
+- #1744, MUB board meeting date: MUB's own agenda gives November 17 (#1815).
+- #1677, Income Maintenance Manual link: the manual is back at a new address, and every quote on the 8 pages was found in it (#1829, waits for David).
 - #1131, winter shutoff rule, and #1460, Grey Line airport door: already on the site from earlier PRs, closed.
 
 What is left needs a person: a phone call, or a page opened in a normal browser because the site refuses automated reads. This list replaces the [November 3 list](call-list-2026-11-03-sweep-5.md) for these issues. It does not repeat anything on the [November 14 triage call sheet](call-list-2026-11-14-triage.md). Where an office is on both, the line says so, so one call covers both.

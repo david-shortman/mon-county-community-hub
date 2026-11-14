@@ -2,7 +2,7 @@
 
 **What:** Re-checked 24 open `needs-verification` issues that are not labeled `for:david` against current official pages a script may read (#529). Every robots.txt was checked first with the site's own check (`site/src/lib/robots.mjs`); blocked sites (WVU, HUD User, wic.wv.gov, the PSC, the school district's file host) were skipped, not worked around.
 
-**Fixed from official pages:** the property tax estimate now uses the Assessor's 2026 levy rates, 1.3176 in town and 1.0676 outside, instead of the 2025 table (#1520, #1808, with a blind second check); the MUB board's November meeting is November 17, from MUB's own agenda, and a discovery notes the city's page says second Tuesday (#1744); the 8 "After you apply" pages point to the Income Maintenance Manual's new address after every quote was found in it (#1677, waits for David).
+**Fixed from official pages:** the property tax estimate now uses the Assessor's 2026 levy rates, 1.3176 in town and 1.0676 outside, instead of the 2025 table (#1520, #1808, with a blind second check); the MUB board's November meeting is November 17, from MUB's own agenda, and a discovery notes the city's page says second Tuesday (#1744, #1815); the 8 "After you apply" pages point to the Income Maintenance Manual's new address after every quote was found in it (#1677, #1829, waits for David).
 
 **Closed as already done:** the winter shutoff rule, which PSC rule 150CSR3 states and `/utility-bills/` already shows (#1131); the Grey Line airport door (#1460).
 
