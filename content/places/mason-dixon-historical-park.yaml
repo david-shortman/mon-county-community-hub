@@ -44,6 +44,7 @@ contact:
   place: 79 Buckeye Road, Core, WV
 status: active
 last_activity_seen: 2026-10-30
+drop_in: Anyone. The county says the park is open to the public during park hours and no reservation is needed to visit. You may picnic at a pavilion when it is not reserved
 tags: [family-friendly]
 notes:
   - No alcohol. Park hours are 8 a.m. to dusk.
@@ -57,4 +58,4 @@ sources:
   - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/pavilions.php
     checked: 2026-11-01
   - url: https://www.monongaliacounty.gov/departments/parks_and_recreation/mason_dixon_historical_park/faq.php
-    checked: 2026-11-01
+    checked: 2026-11-14
