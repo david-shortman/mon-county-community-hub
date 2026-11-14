@@ -16,6 +16,7 @@ import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } f
 import { MOVED } from '../src/lib/moved.mjs';
 import YAML from 'yaml';
 import { loadHomeRules, ruleProblems, isStale } from '../src/lib/home-year.mjs';
+import { loadWindows, windowProblems } from '../src/lib/fact-windows.mjs';
 
 const errors = [];
 const warnings = [];
@@ -486,6 +487,9 @@ errors.push(...missingOrgErrors(everyRecord, orgSlugs));
 errors.push(...movedErrors(MOVED, orgSlugs));
 // A date held at a place whose record names its town gets that town (#395).
 warnings.push(...venueTownWarnings(loadCalendar(), loadDir('places'), TOWNS));
+
+// Re-check windows by kind of fact (#1093).
+errors.push(...windowProblems(loadWindows()));
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

@@ -17,6 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar, loadDir, loadSecondhand, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR, recheckDaysFor, recheckDue, isTopTier, oldestChecked } from '../src/lib/content.mjs';
 import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
+import { loadWindows, factLate } from '../src/lib/fact-windows.mjs';
 import { robotsCheck } from '../src/lib/robots.mjs';
 import { servesProblems, SERVES_SINCE } from '../src/lib/serves.mjs';
 import YAML from 'yaml';
@@ -309,6 +310,17 @@ function checkContent() {
     late.length ? `${pct}% of ${listed.length} listings were re-checked on time. ${late.length} are past their re-check date (${topLate} high-stakes, due every 90 days). Re-read each one's sources, oldest first.`
       : `All ${listed.length} listings were re-checked on time (high-stakes topics and calendar entries every 90 days).`,
     { details: late.map(({ e, c }) => `${e._file}: oldest check ${c}, re-check every ${recheckDaysFor(e)} days`), owner: 'Duet', fixable: true });
+
+  // Re-check windows by kind of fact (#1093, content/recheck-windows.yaml):
+  // hours go stale faster than an address, and a date just before the day
+  // matters most. A to-do list for re-reads; cards do not use it yet.
+  const windows = loadWindows();
+  const factDue = listed.map((e) => ({ e, l: factLate(e, windows, today) })).filter((x) => x.l)
+    .sort((a, b) => String(a.l.checked).localeCompare(String(b.l.checked)));
+  record('content-recheck-by-fact', 'product', factDue.length ? 'warn' : 'ok',
+    factDue.length ? `${factDue.length} of ${listed.length} listings are past the window for the facts they state (hours every 90 days, costs and who can get help every 180, events starting in 14 days read within 30). Re-read each one's sources, oldest first.`
+      : `All ${listed.length} listings are within the re-check window for the facts they state.`,
+    { details: factDue.map(({ e, l }) => `${e._file}: oldest check ${l.checked}, window ${l.days} days (${l.because})`), owner: 'Duet', fixable: true });
 
   // Hidden items (#519): off the site until someone re-checks them.
   const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);
