@@ -14,21 +14,22 @@ evidence:
     data_date: "2025"
     publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
   - url: https://data.cdc.gov/d/swc5-untb
-    checked: 2026-10-31
+    checked: 2026-11-14
     shows: CDC estimates the share of adults with 14 or more days of poor mental health in the past month, and the share ever told they have depression. These are model-based estimates, not counts.
     figure: "20.9% frequent mental distress; 29.4% depression"
     data_date: "2023"
     publisher: CDC PLACES (2025 release)
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
-    checked: 2026-11-01
+    checked: 2026-11-14
     shows: The number of people for each mental health provider. A lower number means more providers per person.
     figure: "240 people per provider (West Virginia 464, US 287)"
+    data_date: "2025"
     publisher: County Health Rankings (March 2026 supplemental release)
 affected:
   estimate: "20.9% of adults"
   description: Adults in Monongalia County with frequent mental distress, as estimated by CDC.
   url: https://data.cdc.gov/d/swc5-untb
-  checked: 2026-10-31
+  checked: 2026-11-14
 severity: high
 severity_why: Untreated mental illness affects health, work, family and safety, and can be a crisis.
 trend: unknown
