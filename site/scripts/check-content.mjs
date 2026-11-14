@@ -14,6 +14,7 @@ import { checkPlaces } from './check-places.mjs';
 import { agendaProblems, decidedProblems } from '../src/lib/agendas.mjs';
 import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } from '../src/lib/content-dupes.mjs';
 import { MOVED } from '../src/lib/moved.mjs';
+import { loadWindows, windowProblems } from '../src/lib/fact-windows.mjs';
 import YAML from 'yaml';
 import { loadHomeRules, ruleProblems, isStale } from '../src/lib/home-year.mjs';
 import { quoteProblems } from '../src/lib/reread.mjs';
@@ -465,6 +466,9 @@ for (const topic of factTopics()) {
     }
   }
 }
+
+// Re-check windows by kind of fact (#1093).
+errors.push(...windowProblems(loadWindows()));
 
 // PDF pages (content/pdf-pages/, #393): a PDF's useful part as short lists.
 // Each needs a title, publisher, sections and sources with checked dates, and
