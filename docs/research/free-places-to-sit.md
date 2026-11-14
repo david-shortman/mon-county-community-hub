@@ -43,7 +43,7 @@ Each would need David's yes before anyone outside the project is asked.
 
 ## 4. How the site shows it
 
-- The section is a list today (9 places with this PR). A filter only helps once there are more than about 15. When it grows, the fields to filter on are already in the records: `area`, `opening_hours` (which can answer "open now" and "open evenings"), `kind` (indoor building or `park`), and `tags` such as `step-free`. Restrooms and Wi-Fi have no field yet; add one only when sources state them.
+- The section is a list today (11 places with this PR). A filter only helps once there are more than about 15. When it grows, the fields to filter on are already in the records: `area`, `opening_hours` (which can answer "open now" and "open evenings"), `kind` (indoor building or `park`), and `tags` such as `step-free`. Restrooms and Wi-Fi have no field yet; add one only when sources state them.
 - Hours stay fresh the same way as other records: each source has a checked date, and `check-content` warns when it is old.
 
 ## Follow-ups
