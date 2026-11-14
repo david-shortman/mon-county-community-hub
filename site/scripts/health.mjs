@@ -17,6 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar, loadDir, loadSecondhand, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR, recheckDaysFor, recheckDue, isTopTier, oldestChecked } from '../src/lib/content.mjs';
 import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
+import { electionRunway, runwayLine, ELECTION_RUNWAY_DAYS } from '../src/lib/elections.mjs';
 import { robotsCheck } from '../src/lib/robots.mjs';
 import { servesProblems, SERVES_SINCE } from '../src/lib/serves.mjs';
 import YAML from 'yaml';
@@ -320,6 +321,17 @@ function checkContent() {
   if (ended.length) {
     record('content-ended', 'product', 'warn', `${ended.length} calendar files ended over 30 days ago. Roll them forward or remove them.`,
       { details: ended.map((e) => `${e._file}: ended ${e.ends}`), owner: 'Duet', fixable: true });
+  }
+
+  // Election runway (#1383): warn when no election file runs past today plus
+  // ELECTION_RUNWAY_DAYS, so a missing next election shows up as a flag.
+  let runway;
+  try { runway = electionRunway(today); } catch (err) {
+    record('election-runway', 'product', 'fail', `content/elections could not be read: ${err.message}`, { fixable: true });
+  }
+  if (runway) {
+    record('election-runway', 'product', runway.short ? 'warn' : 'ok', runwayLine(runway),
+      { details: runway.short ? [`Check the WV Secretary of State, Monongalia County Clerk and City of Morgantown election pages for the next election, and add content/elections/<slug>.yaml from official pages only (the monthly elections checklist, content/checklists/elections.yaml). Warns within ${ELECTION_RUNWAY_DAYS} days of the last file's results_until.`] : [], owner: 'Duet', fixable: true });
   }
 
   const soonList = upcoming(entries, today, 62);
