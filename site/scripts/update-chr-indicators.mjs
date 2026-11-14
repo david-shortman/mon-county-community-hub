@@ -25,6 +25,9 @@ import path from 'node:path';
 import YAML from 'yaml';
 import { CONTENT_DIR, todayYmd } from '../src/lib/content.mjs';
 import { robotsCheck } from '../src/lib/robots.mjs';
+import { savedCopy } from '../src/lib/saved-copies.mjs';
+import crypto from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 
 const DIR = path.join(CONTENT_DIR, 'indicators');
 const HISTORY_YEARS = 10;
@@ -46,16 +49,39 @@ function parseCsv(text) {
   return rows;
 }
 
-const cache = new Map();
-async function csv(url) {
-  if (!cache.has(url)) {
+const UA = 'everything-morgantown-indicators (+https://github.com/david-shortman/mon-county-community-hub)';
+
+// Reads one file's bytes. Live first; if the live file is gone (any answer
+// but 200, or no answer), the saved copy listed in
+// content/sources/chr/saved-copies.yaml (#1906), which must match the
+// checksum we recorded. `notes` collects a line for each fallback, so the
+// output (and the monthly Indicators issue) says where the numbers came from.
+export async function readChrFile(url, { fetchImpl = fetch, robots = robotsCheck, lookup = savedCopy, notes = [] } = {}) {
+  const get = async (u) => {
     // Same robots.txt rule as every automated read (docs/operations/automated-reads.md).
-    const rc = await robotsCheck(url);
+    const rc = await robots(u);
     if (!rc.allowed) throw new Error(rc.reason);
-    const res = await fetch(url, { headers: { 'User-Agent': 'everything-morgantown-indicators (+https://github.com/david-shortman/mon-county-community-hub)' }, signal: AbortSignal.timeout(120000) });
-    if (!res.ok) throw new Error(`${url}: ${res.status}`);
-    cache.set(url, parseCsv(Buffer.from(await res.arrayBuffer()).toString('latin1')));
+    const res = await fetchImpl(u, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(120000) });
+    if (!res.ok) throw new Error(`${u}: ${res.status}`);
+    return Buffer.from(await res.arrayBuffer());
+  };
+  try {
+    return await get(url);
+  } catch (liveErr) {
+    const saved = lookup(url);
+    if (!saved?.saved_copy_raw) throw liveErr;
+    const buf = await get(saved.saved_copy_raw);
+    const sum = crypto.createHash('sha256').update(buf).digest('hex');
+    if (sum !== saved.sha256) throw new Error(`${liveErr.message}; saved copy ${saved.saved_copy_raw} does not match the recorded checksum`);
+    notes.push(`${saved.file_name}: live file unavailable (${liveErr.message}); read the saved copy from ${saved.captured} (${saved.saved_copy}), checksum matches.`);
+    return buf;
   }
+}
+
+const cache = new Map();
+const notes = [];
+async function csv(url) {
+  if (!cache.has(url)) cache.set(url, parseCsv((await readChrFile(url, { notes })).toString('latin1')));
   return cache.get(url);
 }
 
@@ -93,25 +119,29 @@ export async function freshValues(ind) {
   return { values, history, data_year: ind.chr.data_year ? String(ind.chr.data_year) : dataYear };
 }
 
-const files = fs.readdirSync(DIR).filter((f) => /\.ya?ml$/.test(f)).sort();
-let differs = 0;
-for (const f of files) {
-  const file = path.join(DIR, f);
-  const doc = YAML.parseDocument(fs.readFileSync(file, 'utf8'));
-  const ind = doc.toJS();
-  if (!ind.chr) continue;
-  const fresh = await freshValues(ind);
-  const same = JSON.stringify(ind.values) === JSON.stringify(fresh.values) && JSON.stringify(ind.history ?? null) === JSON.stringify(fresh.history) && String(ind.data_year) === String(fresh.data_year);
-  console.log(`${f}: ${same ? 'same as the source' : 'differs from the source'}`);
-  if (same) continue;
-  differs++;
-  if (mode === 'write') {
-    doc.set('values', fresh.values);
-    if (fresh.history) doc.set('history', fresh.history);
-    doc.set('data_year', String(fresh.data_year));
-    for (const s of doc.get('sources').items.slice(0, fresh.history ? 2 : 1)) s.set('checked', todayYmd());
-    fs.writeFileSync(file, doc.toString());
+// Run only as a script, so tests can import readChrFile.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const files = fs.readdirSync(DIR).filter((f) => /\.ya?ml$/.test(f)).sort();
+  let differs = 0;
+  for (const f of files) {
+    const file = path.join(DIR, f);
+    const doc = YAML.parseDocument(fs.readFileSync(file, 'utf8'));
+    const ind = doc.toJS();
+    if (!ind.chr) continue;
+    const fresh = await freshValues(ind);
+    const same = JSON.stringify(ind.values) === JSON.stringify(fresh.values) && JSON.stringify(ind.history ?? null) === JSON.stringify(fresh.history) && String(ind.data_year) === String(fresh.data_year);
+    console.log(`${f}: ${same ? 'same as the source' : 'differs from the source'}`);
+    if (same) continue;
+    differs++;
+    if (mode === 'write') {
+      doc.set('values', fresh.values);
+      if (fresh.history) doc.set('history', fresh.history);
+      doc.set('data_year', String(fresh.data_year));
+      for (const s of doc.get('sources').items.slice(0, fresh.history ? 2 : 1)) s.set('checked', todayYmd());
+      fs.writeFileSync(file, doc.toString());
+    }
   }
+  for (const n of notes) console.log(`Saved copy used: ${n}`);
+  console.log(differs ? `${differs} indicator files ${mode === 'write' ? 'updated' : 'differ from County Health Rankings'}.` : 'All indicators match County Health Rankings.');
+  if (mode === 'check' && differs) process.exit(1);
 }
-console.log(differs ? `${differs} indicator files ${mode === 'write' ? 'updated' : 'differ from County Health Rankings'}.` : 'All indicators match County Health Rankings.');
-if (mode === 'check' && differs) process.exit(1);
