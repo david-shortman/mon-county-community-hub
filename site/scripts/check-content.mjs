@@ -16,6 +16,7 @@ import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } f
 import { MOVED } from '../src/lib/moved.mjs';
 import YAML from 'yaml';
 import { loadHomeRules, ruleProblems, isStale } from '../src/lib/home-year.mjs';
+import { quoteProblems } from '../src/lib/reread.mjs';
 
 const errors = [];
 const warnings = [];
@@ -486,6 +487,11 @@ errors.push(...missingOrgErrors(everyRecord, orgSlugs));
 errors.push(...movedErrors(MOVED, orgSlugs));
 // A date held at a place whose record names its town gets that town (#395).
 warnings.push(...venueTownWarnings(loadCalendar(), loadDir('places'), TOWNS));
+
+// Proof of a re-read (#1094): a source's quote is words copied from the page.
+for (const e of [...orgs, ...resources, ...secondhand, ...boards, ...loadDir('places'), ...loadCalendar()]) {
+  for (const s of e.sources ?? []) for (const p of quoteProblems(s?.quote)) errors.push(`${e._file}: ${s.url}: ${p}`);
+}
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

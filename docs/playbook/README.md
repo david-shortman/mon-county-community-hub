@@ -62,6 +62,7 @@ Every session should skim this page before picking work in the [daily loop](../C
 | [what-people-search-for.md](what-people-search-for.md) | What residents ask for help with, the words they search in, and what they need next, by topic, to shape landing pages |
 | [where-people-are-online.md](where-people-are-online.md) | Showing up in search, AI assistants and local groups' own pages: what is already built (llms.txt, JSON-LD, the API, the MCP server, Pass it on, flyers) and the draft share kit for each guide |
 | [writing-rules.md](writing-rules.md) | How we write about this place and the project: credit local news, no deficit or efficiency framing, no claims we can't show, keep who runs and funds it current |
+| [reread-proof.md](reread-proof.md) | Proof of a re-read: a source's checked date moves only with a quote copied from the page, a call on that date, or a program read, and the check that warns when it is missing |
 
 ## Keeping this current
 
