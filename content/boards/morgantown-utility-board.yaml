@@ -3,7 +3,7 @@ slug: morgantown-utility-board
 org: city-of-morgantown
 section: services
 decides: The board over MUB, which runs water, wastewater and stormwater service. At its meetings it votes on items like bids for water, sewer and stormwater projects.
-meets: Tuesdays at 5:30 p.m. MUB's page of 2026-11-06 lists the next meeting as Tuesday, November 17, 2026, while the city's page says the 2nd Tuesday of each month. The October 2026 meeting was at 278 Greenbag Road. Meetings stream live on MUB's site, and the October agenda had a public portion.
+meets: Tuesdays at 5:30 p.m. at 278 Greenbag Road. The November 2026 regular meeting is Tuesday, November 17, 2026, by MUB's agenda posted November 13. The October meeting was October 13. The city's page says the second Tuesday of each month, so check MUB's newsroom for each month's date. Meetings stream live on MUB's site, and the agendas have a public portion.
 open_seats: 1
 open_note: 1 seat
 who_can_serve: Residential customers of the Utility Board (some limits apply).
@@ -14,7 +14,9 @@ sources:
     checked: 2026-11-04
   - url: https://mub.org/newsroom
     checked: 2026-11-13
+  - url: https://mub.org/newsroom/mub-board-of-directors-meeting
+    checked: 2026-11-14
   - url: https://www.morgantownwv.gov/263/Morgantown-Utility-Board-MUB
-    checked: 2026-10-30
+    checked: 2026-11-14
   - url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
     checked: 2026-11-05

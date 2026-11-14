@@ -105,3 +105,13 @@ We credit local news instead of rewriting it, talk about help and neighbors inst
 - **2:** News used only for the one fact needed, with the outlet named and linked. Local groups are the ones doing the work. Claims about the project link to a page, log or file.
 - **3:** All of 2, and any change to who runs or funds the project updates the About and Hard questions pages in the same PR.
 - **How to check:** Read the changed text with the five rules in [writing-rules.md](../playbook/writing-rules.md). Search it for "efficient", "streamline", "struggling" and "left behind".
+
+### TR10. Sources with their own slant
+
+A source with its own interest in the answer (an advocacy group, a business, a campaign) is used only for facts about itself. Claims about rights, benefits, rules, policy or other groups come from the office that runs them or a neutral source. ([Sources with their own slant](../playbook/slanted-sources.md) and the [source order](../playbook/source-order.md), #1092 and #1095)
+
+- **0:** A claim about a right, benefit or rule rests only on an advocacy group, business or campaign page, or a group's claim about a rival is repeated.
+- **1:** The facts are right, but an hours, phone or cost fact rests only on a news story or directory, or a number about the community is cited to a group instead of the data it came from.
+- **2:** Each fact comes from its owner or an office. Interested sources are used only for their own hours, contact and offerings. News is used only for a one-time event with no owner page, named by outlet.
+- **3:** All of 2, and where the official and interested sources differ, the page follows the official one and the PR says so.
+- **How to check:** For each changed fact, open its source and ask who runs the site and whether they gain if the reader believes it. Run `node scripts/check-source-tiers.mjs` in `site/` for listings that rest only on news or directories.
