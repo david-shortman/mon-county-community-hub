@@ -63,6 +63,7 @@ Every session should skim this page before picking work in the [daily loop](../C
 | [research-method.md](research-method.md) | From a resident's question to checked facts: list who would own the answer, search their sites first, broaden with set patterns, keep leads apart from facts, and log what was tried |
 | [what-people-search-for.md](what-people-search-for.md) | What residents ask for help with, the words they search in, and what they need next, by topic, to shape landing pages |
 | [where-people-are-online.md](where-people-are-online.md) | Showing up in search, AI assistants and local groups' own pages: what is already built (llms.txt, JSON-LD, the API, the MCP server, Pass it on, flyers) and the draft share kit for each guide |
+| [second-check.md](second-check.md) | Running the blind second check on top-tier changes: the claim packet, a different session checks it, the verdict, and what blocks a merge |
 | [writing-rules.md](writing-rules.md) | How we write about this place and the project: credit local news, no deficit or efficiency framing, no claims we can't show, keep who runs and funds it current |
 | [reread-proof.md](reread-proof.md) | Proof of a re-read: a source's checked date moves only with a quote copied from the page, a call on that date, or a program read, and the check that warns when it is missing |
 | [slanted-sources.md](slanted-sources.md) | Sources with their own interest (advocacy groups, businesses, campaigns): use them for facts about themselves, and an official or neutral source for rights, rules and other groups |
