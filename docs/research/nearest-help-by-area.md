@@ -79,7 +79,7 @@ Measured from the Clinton District Public Library, 2005 Grafton Rd (repo only).
 
 ## Facts we could not confirm
 
-Tracked in a needs-verification issue opened with this PR.
+Tracked in #1813.
 
 1. Library branch addresses and hours: mympls.org refused automated reads. Last known: `content/places/mpls-*.yaml`, checked 2026-11-01.
 2. Wadestown Food Pantry (1902 Range Rd, Wednesday 9 a.m. to noon) and the Clay-Battelle Senior Center pantry (Monday, Wednesday, Friday 8 a.m. to 2 p.m.): list only, no page of their own.
@@ -95,6 +95,6 @@ Tracked in a needs-verification issue opened with this PR.
 
 ## What could go on the site (ideas, not decisions)
 
-- **A "Nearest help" box on each town page** (#1120): pantry, clinic, library and DoHS office, each with its straight-line distance and the bus that gets there, built from records that already have sources. Food and benefits listings are high stakes, so that PR waits for David. A follow-up issue is open for it.
+- **A "Nearest help" box on each town page** (#1120): pantry, clinic, library and DoHS office, each with its straight-line distance and the bus that gets there, built from records that already have sources. Food and benefits listings are high stakes, so that PR waits for David. Follow-up: #1814.
 - Put these areas first in area printouts (#405) and in-person reach (#163).
 - Free places to sit in these areas: Mason-Dixon Historical Park is on Rt 52 (see [free places to sit](free-places-to-sit.md)).
