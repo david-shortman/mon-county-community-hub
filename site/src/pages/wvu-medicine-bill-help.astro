@@ -1,0 +1,36 @@
+---
+// WVU Medicine bill help (part of #393): WVU Medicine's Plain Language
+// Summary of its 2026 Financial Assistance Policy, a 4-page PDF, as short
+// lists. Every rule and amount is copied in
+// content/pdf-pages/wvu-medicine-fap-summary-2026.yaml. Money and health
+// help: the PR waits for David.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "care", topic: "health", label: "Free care at WVU Medicine: the 2026 income limits", summary: "WVU Medicine's own summary of its 2026 financial assistance policy: who may get free hospital care, the income limits by household size, and how to apply" };
+const d = pdfPage('wvu-medicine-fap-summary-2026');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const phone = '304-598-6260';
+// The lede's amounts are looked up by row name, so a reordered list can't show the wrong one.
+const income = (name) => d.sections.find((s) => s.id === 'income').items.find((it) => it.name === name).lines[0];
+const one = income('1 person');
+const four = income('4 people');
+---
+<Base title="WVU Medicine financial assistance 2026: income limits for free care, Morgantown, WV" description={`WVU Medicine's 2026 summary of its financial assistance policy: free care at or below 200% of the poverty level (${one} for 1 person, ${four} for 4), who may qualify, and how to apply.`}>
+  <h1>Free care at WVU Medicine: the 2026 rules</h1>
+  <p class="lede">Have a bill from Ruby Memorial or another WVU Medicine hospital? Find your household size below to see the 2026 income limit for free care. For 1 person it is {one} a year, and for 4 people it is {four}. Help with the form is a call away at <a href={telHref(phone)}>{phone}</a>.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>The application, the full policy and the list of services it does not cover are on WVU Medicine's <a href={d.found_on}>Policies and Financial Applications page</a>. Other ways to get help with hospital bills and care with no insurance, including Mon Health's program: <a href={`${base}/no-insurance/`}>no insurance or can't afford a doctor</a>.</p>
+
+  <p class="meta">This page is a reading aid. WVU Medicine's PDF is the official version, and WVU Medicine decides who qualifies. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>
