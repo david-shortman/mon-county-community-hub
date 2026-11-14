@@ -12,6 +12,8 @@
 //   moved       a redirect to a different domain (a lapsed domain can be bought
 //               by someone else, so this is never followed silently)
 //   phone       a phone number in our entry that no longer appears on its sources
+//   facts       a source's quote, a street address or a dollar amount in our
+//               entry that its sources no longer show (#1074; a hint to re-read)
 //   unverified  blocked, rate limited, server error, timeout or reset (often bot
 //               blocking or a blip, not a problem for people)
 //   changed     the page text changed since the last run (a hint for re-checking)
@@ -36,6 +38,7 @@ import YAML from 'yaml';
 import { CONTENT_DIR } from '../src/lib/content.mjs';
 import { loadWatch, watchedUrls, evaluateWatch, watchMd, withPdfLinks } from './watch.mjs';
 import { robotsRules, robotsDelay, robotsAllows, readRobots, robotsCheck } from '../src/lib/robots.mjs';
+import { pageForms, factChecksFor, pageHas } from '../src/lib/fact-compare.mjs';
 
 const UA = 'MonCountyCommunityHub-sourcecheck/1.0 (+https://github.com/david-shortman/mon-county-community-hub)';
 const SITE_DIR = path.resolve(CONTENT_DIR, '../site');
@@ -166,6 +169,7 @@ export function buildRegistry({ rules = loadRules(), distDir = DIST } = {}) {
     sources.get(url).used_by.add(where);
   };
   const phoneChecks = []; // { file, name, phone, key, urls }
+  const factChecks = []; // { file, name, kind, value, needle, urls } (#1074)
 
   for (const rel of yamlFiles(CONTENT_DIR)) {
     const data = YAML.parse(fs.readFileSync(path.join(CONTENT_DIR, rel), 'utf8'));
@@ -176,6 +180,7 @@ export function buildRegistry({ rules = loadRules(), distDir = DIST } = {}) {
       const key = phoneKey(phone);
       if (key && urls.length) phoneChecks.push({ file: `content/${rel}`, name: data.title || data.name || rel, phone: String(phone), key, urls });
     }
+    for (const fc of factChecksFor(data, urls, isUrl)) factChecks.push({ file: `content/${rel}`, name: data.title || data.name || rel, ...fc, urls: fc.urls.map(clean) });
   }
 
   const distFound = fs.existsSync(distDir);
@@ -200,7 +205,7 @@ export function buildRegistry({ rules = loadRules(), distDir = DIST } = {}) {
   });
   // Help now first, then by host so the report groups by site.
   list.sort((a, b) => (b.help_now - a.help_now) || a.host.localeCompare(b.host) || a.url.localeCompare(b.url));
-  return { sources: list, phoneChecks, distFound };
+  return { sources: list, phoneChecks, factChecks, distFound };
 }
 
 // ---------- fetching ----------
@@ -342,6 +347,12 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
   const hosts = [...byHost.keys()].sort((a, b) => (byHost.get(b).some((s) => s.help_now) - byHost.get(a).some((s) => s.help_now)) || a.localeCompare(b));
   const results = new Map();
   const deferred = [];
+  // The fact needles to look for on each page (#1074).
+  const needlesByUrl = new Map();
+  for (const f of registry.factChecks ?? []) for (const u of f.urls) {
+    if (!needlesByUrl.has(u)) needlesByUrl.set(u, new Set());
+    needlesByUrl.get(u).add(f.needle);
+  }
   let next = 0;
   await Promise.all(Array.from({ length: T.hostConcurrency }, async () => {
     while (next < hosts.length) {
@@ -379,6 +390,11 @@ async function checkAll(registry, { helpNowOnly = false, limit = Infinity, sameO
               out.fingerprint = fingerprint(html);
               if (keepText.has(s.url)) out.text = pageText(withPdfLinks(html));
               out.phones = [...phonesOnPage(html)];
+              const needles = needlesByUrl.get(s.url);
+              if (needles?.size) {
+                const forms = pageForms(pageText(withPdfLinks(html)));
+                out.facts = [...needles].filter((n) => pageHas(forms, n));
+              }
               const elsewhere = otherPlace(html);
               if (elsewhere) out.elsewhere = elsewhere;
             }
@@ -406,6 +422,29 @@ export function missingPhones(phoneChecks, results) {
     const read = p.urls.map((u) => results.get(u)).filter((r) => r?.kind === 'html');
     if (!read.length) continue;
     if (!read.some((r) => r.phones.includes(p.key))) out.push(p);
+  }
+  return out;
+}
+
+// Facts in our entries (#1074) that none of their fetched sources show, with
+// the same care as phones: judged only when every source was fetched this run
+// and one was read as a web page, and skipped for any site that blocked us
+// anywhere in this run. A fact also on a PDF source is not judged unless a
+// web page shows it (PDF text is not read). A miss is a
+// reason to re-read, not proof the entry is wrong.
+export function missingFacts(factChecks = [], results) {
+  const blocked = new Set();
+  for (const [u, r] of results) if (r.state === 'unverified') blocked.add(hostOf(u));
+  const out = [];
+  for (const f of factChecks) {
+    if (f.urls.some((u) => blocked.has(hostOf(u)))) continue;
+    // Every source must have been fetched this run: slow sites take turns
+    // (pickForRun), and a fact may be on the one not read today.
+    if (f.urls.some((u) => !results.has(u))) continue;
+    const got = f.urls.map((u) => results.get(u));
+    const read = got.filter((r) => r?.kind === 'html' && Array.isArray(r.facts));
+    if (!read.length || got.some((r) => r?.kind === 'pdf')) continue;
+    if (!read.some((r) => r.facts.includes(f.needle))) out.push({ file: f.file, name: f.name, kind: f.kind, value: f.value, urls: f.urls });
   }
   return out;
 }
@@ -453,6 +492,7 @@ export function buildReport(registry, results, prevState, { now = new Date() } =
     broken: broken.map((s) => ({ ...s, ...results.get(s.url) })),
     moved: moved.map((s) => ({ ...s, ...results.get(s.url) })),
     phones_missing: phones,
+    facts_missing: missingFacts(registry.factChecks, results),
     other_place: registry.sources.filter((s) => results.get(s.url)?.elsewhere).map((s) => ({ ...s, ...results.get(s.url) })),
     unverified: rows('unverified').map((s) => ({ ...s, ...results.get(s.url) })),
     redirected: rows('redirected').map((s) => ({ ...s, ...results.get(s.url) })),
@@ -485,6 +525,8 @@ export function reportMd(rep, { cap = 40 } = {}) {
   section('Broken', rep.broken, (r) => `${r.url} (${why(r)}) on ${where(r)}`);
   section('Moved to another domain', rep.moved, (r) => `${r.url} now goes to ${r.final}. Check who owns it now. On ${where(r)}`);
   section('Phone number not found on its source', rep.phones_missing, (p) => `${p.name}: ${p.phone} (${p.file}). Not on ${p.urls.join(', ')}`);
+  const kindWord = { quote: 'Quote', address: 'Address', money: 'Amount' };
+  section('Fact not found on its source (re-read it; pages word things differently)', rep.facts_missing ?? [], (f) => `${f.name}: ${kindWord[f.kind] ?? f.kind} "${f.value}" (${f.file}). Not on ${f.urls.join(', ')}`);
   section('May be about another place (check it is Morgantown, WV)', rep.other_place ?? [], (r) => `${r.url} says "${r.elsewhere}" and never says West Virginia. On ${where(r)}`);
   section('Could not check (often bot blocking or a blip)', rep.unverified, (r) => `${r.url} (${why(r)}) on ${where(r)}`);
   section('Changed since the last run (worth a re-check)', rep.changed, (r) => `${r.url} on ${where(r)}`);
