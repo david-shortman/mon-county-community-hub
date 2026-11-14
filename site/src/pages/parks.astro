@@ -2,17 +2,22 @@
 // Parks, trails and outdoors (#631 to #637, part of #281). Built from
 // resource records: city and county parks, trails, swim and skate, Coopers
 // Rock, hunting and fishing licenses, and groups. Facts still waiting on a
-// person to confirm are in #630 and stay off this page.
+// person to confirm are in #630 and stay off this page. The office, pavilion,
+// Flegal Reservoir and Free Fishing Days sentences are fact records in
+// content/facts/parks/ (#122), each with its own source line and date.
 import Base from '../layouts/Base.astro';
 import BigChoices from '../components/BigChoices.astro';
 import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import Fact from '../components/Fact.astro';
+import { factsFor } from '../lib/facts.mjs';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "living-here", topic: "outdoors", label: "Parks, trails and outdoors", summary: "City and county parks, trails, pools and ice skating, Coopers Rock, fishing and hunting licenses, and groups to ride or run with" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
+const fact = factsFor('parks');
 const CITY = ['boparc-dorseys-knob-park', 'boparc-jack-roberts-park', 'boparc-krepps-park', 'boparc-marilla-park', 'boparc-white-park', 'boparc-wiles-hill-park', 'boparc-dog-parks'];
 const COUNTY = ['camp-muffly-park', 'chestnut-ridge-park', 'mason-dixon-park'];
 ---
@@ -30,15 +35,16 @@ const COUNTY = ['camp-muffly-park', 'chestnut-ridge-park', 'mason-dixon-park'];
   <OnThisPage items={[['#county-parks', 'County parks'], ['#trails', 'More trails: hiking and mountain biking'], ['#coopers-rock', 'Coopers Rock State Forest'], ['#fish-hunt', 'Fishing and hunting licenses'], ['#groups', 'Groups to ride or run with']]} />
 
   <h2 id="city-parks">City parks in Morgantown</h2>
-  <p>BOPARC (the Morgantown Board of Parks and Recreation Commissioners) runs these parks. Call 304-296-8356 with questions. Its office is at Marilla Park on Monday, Wednesday and Friday, and at the Wiles Hill Community Center on Tuesday and Thursday (<a href="https://www.boparc.org/">BOPARC hours</a>). Flegal Reservoir is another city park, still being built, with work planned to finish in December 2026 (<a href="https://www.boparc.org/flegal-reservoir.html">BOPARC page</a>).</p>
+  <Fact f={fact('boparc-office')} about="the BOPARC office" />
+  <Fact f={fact('flegal-reservoir')} about="Flegal Reservoir" />
   {CITY.map((s) => r(s) && <ResourceCard r={r(s)} />)}
 
   <h2 id="county-parks">County parks</h2>
-  <p>Monongalia County Parks and Recreation runs these three parks. Its office is at 270 Mylan Park Lane, Suite 150. Call 304-291-7013 or email <a href="mailto:parks@monongaliacounty.gov">parks@monongaliacounty.gov</a> (<a href="https://www.monongaliacounty.gov/departments/parks_and_recreation/">county parks page</a>).</p>
+  <Fact f={fact('county-parks-office')} about="the county parks office" />
   {COUNTY.map((s) => r(s) && <ResourceCard r={r(s)} showCost />)}
 
   <h2 id="book">Book a pavilion, cabin or campsite</h2>
-  <p>City pavilions: call BOPARC at 304-296-8356. You pay and get a permit before you use the pavilion, and BOPARC does not rent pavilions the same day. Some small pavilions, like the ones at Jack Roberts Park, are first come, first served.</p>
+  <Fact f={fact('boparc-pavilions')} about="city pavilion rentals" />
   {r('mon-county-parks-booking') && <ResourceCard r={r('mon-county-parks-booking')} />}
   <p>To compare halls and pavilions side by side, with prices and seats, see <a href={`${base}/community-centers/halls/`}>Compare halls</a>. Mason-Dixon Historical Park's barn, annex and pavilions are listed on <a href={`${base}/community-centers/mason-dixon-historical-park/`}>its own page</a>.</p>
 
@@ -63,12 +69,12 @@ const COUNTY = ['camp-muffly-park', 'chestnut-ridge-park', 'mason-dixon-park'];
   <h2 id="fish-hunt">Fishing and hunting licenses</h2>
   {r('wv-hunting-fishing-license') && <ResourceCard r={r('wv-hunting-fishing-license')} />}
   <p>No license is needed to fish the two ponds at Chestnut Ridge Park, which are catch and release only (see its card above). You do need one at Coopers Rock's Messinger Lake.</p>
-  <p>Free Fishing Days: in 2026 they were June 13 to 14, when anyone could fish public waters in West Virginia with no license. The DNR has not posted next year's dates yet. Check the <a href="https://wvdnr.gov/free-fishing-days/">Free Fishing Days page</a>.</p>
+  <Fact f={fact('free-fishing-days')} about="Free Fishing Days" />
 
   <h2 id="groups">Groups to ride or run with</h2>
   {r('country-roads-cyclists-rides') && <ResourceCard r={r('country-roads-cyclists-rides')} />}
   {r('girls-on-the-run-ncwv-programs') && <ResourceCard r={r('girls-on-the-run-ncwv-programs')} />}
   <p>The Mon River Trails Conservancy keeps a list of local groups for running, paddling, hiking with young kids and birding on its <a href="https://montrails.org/rail-trail-info/">trail info page</a>. We have not found a running club with its own current website yet.</p>
 
-  <p class="meta">Sources checked October 30, 2026. We describe these places and groups; we do not run them. Hours, prices and rental rules change, so call or check the page before you go. Canceling a BOPARC rental or camp? See <a href={`${base}/park-refunds/`}>Park and rec refunds and cancellations</a>. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Each card and source line says when we last checked it. We describe these places and groups; we do not run them. Hours, prices and rental rules change, so call or check the page before you go. Canceling a BOPARC rental or camp? See <a href={`${base}/park-refunds/`}>Park and rec refunds and cancellations</a>. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
