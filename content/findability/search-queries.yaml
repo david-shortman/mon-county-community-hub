@@ -336,3 +336,5 @@ queries:
   - {q: where do I get a marriage license, expect: [/ids-and-records/], kind: question}
   - {q: how do I settle an estate after someone dies, expect: [/probate-steps/, /small-estate-affidavit/], kind: question}
   - {q: how do I pay a parking ticket, expect: [/parking/], kind: question}
+  - {q: how do I get internet if I can't afford it, expect: [/internet/], kind: question}
+  - {q: where can I get my GED, expect: [/work-and-learning/, /keep-learning/], kind: question}

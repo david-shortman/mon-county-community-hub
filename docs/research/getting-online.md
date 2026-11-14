@@ -41,3 +41,7 @@ The Morgantown Public Library System offers public computers and WiFi, but its s
 - **Need:** some households cannot get or stay online, which cuts them off from most other help.
 - **Evidence:** about 14% of households online only through phone data and 7% with no internet (ACS, in `docs/playbook/audience-facts.md`).
 - **Who works on it:** USAC (Lifeline), the public library.
+
+## Needs register, November 14, 2026
+
+Added as `content/needs/getting-online.yaml` (#1908, sprint wave 18, #529), rank 9 of 14, score 10 of 12. The 14% phone-only and 7% no-internet figures above come from Census tables that our automated reads cannot reach, so the need uses County Health Rankings' broadband number (90.2% of households, 2020 to 2024), the West Virginia Office of Broadband's Mon County summary (page 31 of its September 2026 PDF) and the 2025 Ruby Memorial survey instead.

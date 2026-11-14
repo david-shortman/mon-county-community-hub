@@ -36,8 +36,8 @@ gaps:
   - Whether a bus can get you to a place and back the same day is not shown on most listings (issue 407).
   - Rides for older adults and for medical visits come from several programs (issue 562).
 topics: [moving, health]
-rank: 11
-rank_why: "Score 9 of 12: severity 2, reach 2, agreement 3, room to help 2."
+rank: 12
+rank_why: "Score 9 of 12: severity 2, reach 2, agreement 3, room to help 2. Moved from 11 to 12 on November 14, 2026, when getting online (score 10) was added above it."
 questions: [q28, q29]
 issues: [407, 562, 580]
 get_help:
