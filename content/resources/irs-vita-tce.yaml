@@ -5,6 +5,15 @@ topics: [taxes, money]
 who_it_is_for: "People who want free help with their taxes. The IRS says many VITA sites help \"People who generally make about $70,244 or less,\" people with disabilities, and people who speak limited English. The IRS does not set one income limit for every site, and each site may set its own. TCE helps \"particularly\" people 60 and older, with questions about pensions and retirement."
 what_to_do: Find a site near you with the IRS VITA/TCE Locator Tool, or call 800-906-9887. The IRS says the locator "is updated regularly from February through April," so sites for the 2027 season may not show up before then. The IRS page also links a list of what to bring.
 what_happens: The IRS says every volunteer who prepares returns must pass tax law training, and every return gets a quality review before it is filed. Services can vary from site to site.
+what_to_bring:
+  - Photo ID for you, and your spouse if you file jointly
+  - Social Security cards for you, your spouse and your dependents, or ITIN letters if you do not have a Social Security number
+  - Birth dates for everyone on the return
+  - Income forms from every job (W-2, 1099), and Social Security benefit statements (SSA-1099) if you get them
+  - Last year's federal and state returns, if you have them
+  - A blank check or other proof of your bank routing and account numbers, for direct deposit
+  - What you paid for daycare, and the daycare's tax ID number
+  - Form 1095-A, if you had Marketplace health insurance
 contact:
   phone: "800-906-9887"
   url: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers
@@ -13,3 +22,6 @@ cost: free
 sources:
   - url: https://www.irs.gov/individuals/free-tax-return-preparation-for-qualifying-taxpayers
     checked: 2026-10-31
+  - url: https://www.irs.gov/individuals/checklist-for-free-tax-return-preparation
+    name: IRS checklist for free tax return preparation
+    checked: 2026-11-14

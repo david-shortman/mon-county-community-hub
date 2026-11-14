@@ -7,13 +7,14 @@ what_to_do: Watch for the 2027 application in the spring. In 2026, the first dea
 notes:
   - The state's education department says "The total benefit per eligible child is $120."
   - The 2027 dates were not announced when we last checked.
+what_happens: "Many children are signed up without applying. The state puts the money on a family's EBT card if it gets SNAP or WV WORKS, or mails a new EBT card if a child has Medicaid or is in foster care, homeless or in Head Start. If you apply on paper, the state says it decides most applications within 15 business days of getting a complete one. If it asks you to prove something, usually pay, you have 15 calendar days to send it or the application is denied."
 contact:
   phone: "1-877-716-1212"
   url: https://bfa.wv.gov/summer-ebt
 cost: free
 sources:
   - url: https://bfa.wv.gov/summer-ebt
-    checked: 2026-11-02
+    checked: 2026-11-14
   - url: https://dohs.wv.gov/article/west-virginia-department-human-services-announces-launch-summer-ebt-program-west-virginian
     checked: 2026-11-02
   - url: https://wvde.us/wv-sebt/
