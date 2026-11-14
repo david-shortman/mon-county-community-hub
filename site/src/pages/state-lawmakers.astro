@@ -1,0 +1,63 @@
+---
+// Your state lawmakers (#1766): how to find your state House and Senate
+// districts with the Legislature's own District Search, and who represents
+// each district that covers part of Mon County, linked to their official
+// pages. Data and sources in src/lib/state-lawmakers.mjs. Names and districts
+// only: no party, nothing about votes or positions.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+import { districtSearch, lawmakerSearch, senate, house, sources, rosters } from '../lib/state-lawmakers.mjs';
+import { prettyDate } from '../lib/content.mjs';
+export const page = { door: "community", topic: "government", label: "Your state lawmakers", summary: "Find your West Virginia House and Senate districts by address, and the official page for each Mon County lawmaker" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const rosterSources = (chamber) => sources[chamber].filter((s) => s.url === rosters[chamber]);
+---
+<Base title="Your state lawmakers in Mon County, WV: House and Senate districts" description="Find your West Virginia House of Delegates and state Senate districts by address, and the official page for each lawmaker whose district covers part of Monongalia County.">
+  <h1>Your state lawmakers</h1>
+  <p class="lede">West Virginia has a House of Delegates and a state Senate. Mon County is split among six House districts and two Senate districts. Find your districts first, then open your lawmakers' official pages for their phone and email.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      <li><a href="#find">Find your districts</a></li>
+      <li><a href="#house">House of Delegates</a></li>
+      <li><a href="#senate">State Senate</a></li>
+    </ul>
+  </nav>
+
+  <h2 id="find">Find your districts</h2>
+  <ol>
+    <li>Open the Legislature's <a href={districtSearch.url}>District Search</a> map.</li>
+    <li>Type your home address in the search box and pick it from the list.</li>
+    <li>Read the cards on the left. <strong>HODfinal shp</strong> is your House of Delegates district. <strong>WV Senate 2022</strong> is your state Senate district. <strong>WV Congressional</strong> is your district for the U.S. House.</li>
+  </ol>
+  <p>The map shows the districts drawn in 2021. Those are the districts today's lawmakers represent.</p>
+  <SourceLine sources={districtSearch.sources} about="the District Search map" />
+  <div class="note">
+    <p>The Legislature also has a <a href={lawmakerSearch.url}>Lawmaker Search</a>. On {prettyDate(lawmakerSearch.checked)}, it said it was down for maintenance.</p>
+  </div>
+
+  <h2 id="house">House of Delegates</h2>
+  <p>Each House district elects one delegate.</p>
+  <ul>
+    {house.map((d) => <li><strong>District {d.district}</strong>: {d.members.map((m, i) => <>{i > 0 && ', '}<a href={m.url}>{m.name}<span class="sr-only">, official page</span></a></>)}. Counties: {d.covers}.</li>)}
+  </ul>
+  <p class="more"><a href={rosters.house}>Full House roster</a></p>
+  <SourceLine sources={rosterSources('house')} about="the House districts">Each name links to the member's official page, which lists the district's counties.</SourceLine>
+
+  <h2 id="senate">State Senate</h2>
+  <p>Each Senate district elects two senators. Both districts below cover only part of Mon County.</p>
+  <ul>
+    {senate.map((d) => <li><strong>District {d.district}</strong>: {d.members.map((m, i) => <>{i > 0 && ' and '}<a href={m.url}>{m.name}<span class="sr-only">, official page</span></a></>)}. Counties: {d.covers}.</li>)}
+  </ul>
+  <p class="more"><a href={rosters.senate}>Full Senate roster</a></p>
+  <SourceLine sources={rosterSources('senate')} about="the Senate districts">Each name links to the member's official page, which lists the district's counties.</SourceLine>
+
+  <h2>More</h2>
+  <ul>
+    <li><a href={`${base}/who-decides/`}>Who decides what</a>: City Council, the County Commission, the school board and other local bodies.</li>
+    <li>For voting and elections, go to the <a href="https://sos.wv.gov/elections">West Virginia Secretary of State</a>.</li>
+  </ul>
+
+  <p class="meta">We list names and districts from the Legislature's own pages. We take no side on any lawmaker, bill or election. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
