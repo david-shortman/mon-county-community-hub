@@ -3,9 +3,19 @@ import Base from '../layouts/Base.astro';
 import AnswerFacts from '../components/AnswerFacts.astro';
 import HelpNow from '../components/HelpNow.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-const office = loadDir('resources').find((e) => e.slug === 'monongalia-county-dohs-office');
+const all = loadDir('resources');
+const office = all.find((e) => e.slug === 'monongalia-county-dohs-office');
+const navigator = all.find((e) => e.slug === 'mpls-digital-navigator');
+// Stolen SNAP benefits (#1764), from DoHS's own pages, read 2026-11-14.
+const stolenSources = [
+  { url: 'https://bfa.wv.gov/article/dohs-announces-end-snap-stolen-benefits-replacement', checked: '2026-11-14', name: 'WV DoHS, January 1, 2025' },
+  { url: 'https://bfa.wv.gov/article/dohs-urges-ebt-cardholders-take-steps-now-protect-benefits-skimming', checked: '2026-11-14', name: 'WV DoHS, April 17, 2025' },
+  { url: 'https://bfa.wv.gov/office-ebt', checked: '2026-11-14', name: 'WV DoHS Office of EBT' },
+  { url: 'https://www.fns.usda.gov/snap/stolen-benefits', checked: '2026-11-14', name: 'USDA Food and Nutrition Service' },
+];
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const page = { door: "this-month", topic: "food", label: "Apply for SNAP (food stamps)", summary: "Apply online at WV PATH, or call DoHS" };
 ---
@@ -24,8 +34,29 @@ export const page = { door: "this-month", topic: "food", label: "Apply for SNAP 
   </ul>
   <p class="meta">Sources: <a href="https://dohs.wv.gov/article/west-virginia-announces-changes-snap-able-bodied-adults-without-dependents-abawd-policy">West Virginia DoHS</a>, checked November 2, 2026; <a href="https://bfa.wv.gov/media/1761/download?inline">DoHS SNAP work requirement fact sheet (PDF)</a>, checked November 2, 2026.</p>
 
+  <h2 id="help-with-the-form">Want someone to help you with the online form?</h2>
+  <p>The library's Digital Navigator holds drop-in hours where you can ask about "online forms and applications," email and online accounts. It is a walk-in, with no appointment. For SNAP rules and questions about your case, DoHS answers at <a href="tel:18777161212">1-877-716-1212</a>.</p>
+  {navigator && <ResourceCard r={navigator} />}
+
   <h2>Rather apply in person?</h2>
   {office && <ResourceCard r={office} />}
+
+  <h2 id="stolen">If your SNAP benefits were stolen</h2>
+  <p>Thieves can copy an EBT card with a "skimmer" hidden on a card reader, then spend the benefits, often in another state. If you think your card or benefits were stolen:</p>
+  <ol>
+    <li>Call the number on the back of your EBT card, <a href="tel:18665456502">1-866-545-6502</a>. It is open 24 hours a day. You can report a lost or stolen card and get help changing your PIN.</li>
+    <li>Change your PIN right away. The USDA says this stops the thief from making new purchases.</li>
+    <li>Tell DoHS. Call the Office of EBT at <a href="tel:3045584126">304-558-4126</a> or DoHS customer service at <a href="tel:18777161212">1-877-716-1212</a>, or go to the county DoHS office above.</li>
+  </ol>
+  <p><strong>Can you get them back?</strong> DoHS says its power to replace stolen SNAP benefits ended on December 20, 2024, and claims for benefits stolen after that date "will be denied." If your benefits were stolen between October 1, 2022, and December 20, 2024, you may still file a claim at the county DoHS office or at <a href="tel:18777161212">1-877-716-1212</a>.</p>
+  <p><strong>To protect your card,</strong> DoHS suggests:</p>
+  <ul>
+    <li>Check the card reader for loose parts, tape or wires before you use it.</li>
+    <li>Change your PIN each month, before your benefits come.</li>
+    <li>Block out-of-state purchases at ebtEDGE.com or in the ebtEDGE app. You can turn the block off when you need to.</li>
+  </ul>
+  <p>The USDA says state agencies and EBT companies will never call or text to ask for your PIN or card number.</p>
+  <SourceLine sources={stolenSources} about="stolen SNAP benefits" />
 
   <p>SNAP can also buy seeds and plants that grow food. See <a href={`${base}/grow/#budget`}>Grow food on a budget</a>.</p>
 
