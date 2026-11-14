@@ -162,6 +162,13 @@ export function initDay(sec, routes, api) {
     var lists = tool.querySelector('#day-lists');
     var nowBtn = tool.querySelector('#day-now');
     var nowNote = tool.querySelector('#day-now-note');
+    // Say the result once the slider or a button settles, not on every step (#1427).
+    var say = tool.querySelector('#day-say'), sayWait, ready = false;
+    function sayLater() {
+      if (!say || !ready) return;
+      clearTimeout(sayWait);
+      sayWait = setTimeout(function () { say.textContent = out.textContent; }, 700);
+    }
     function names(arr) { return arr.map(function (r) { return r.n + ' ' + r.short; }).join(', '); }
     function render(day, t) {
       var b = counts(day, t).by, tt = Math.round(t / 5) * 5;
@@ -178,6 +185,7 @@ export function initDay(sec, routes, api) {
       if (b.done.length) parts.push(['Done for the day', names(b.done)]);
       if (b.off.length) parts.push(['No service this day', names(b.off)]);
       lists.innerHTML = parts.map(function (p) { return '<li><strong>' + p[0] + ':</strong> ' + p[1] + '</li>'; }).join('');
+      sayLater();
     }
     tc.listeners.push(render);
     function pickDay(day) {
@@ -196,6 +204,7 @@ export function initDay(sec, routes, api) {
     }
     nowBtn.addEventListener('click', toNow);
     if (!toNow()) { pickDay('m'); range.value = '540'; tc.setTime(540); }
+    ready = true;
   }
 
   // ---- Follow the scroll, only while motion is allowed ----
