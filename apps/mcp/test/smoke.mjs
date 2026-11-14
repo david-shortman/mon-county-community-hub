@@ -3,6 +3,7 @@
 // tools and calls each one. Exits 1 on any problem.
 // Usage: node test/smoke.mjs [api-folder-or-url]
 import { spawn } from 'node:child_process';
+import fs from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline';
 
@@ -24,7 +25,15 @@ const call = (method, params) => new Promise((resolve, reject) => {
   server.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', id, method, params })}\n`);
 });
 
+// The server's upcoming-event rule must match content/recheck-windows.yaml (#1093).
+const windowsFile = path.resolve(here, '../../../content/recheck-windows.yaml');
+const upcoming = { within_days: 14, checked_within_days: 30 };
 const problems = [];
+if (fs.existsSync(windowsFile)) {
+  const y = fs.readFileSync(windowsFile, 'utf8');
+  const num = (k) => Number(y.match(new RegExp(`^upcoming_event:[\\s\\S]*?^\\s+${k}:\\s*(\\d+)`, 'm'))?.[1]);
+  if (num('within_days') !== upcoming.within_days || num('checked_within_days') !== upcoming.checked_within_days) problems.push('content/recheck-windows.yaml upcoming_event changed: update UPCOMING in server.mjs and this test');
+}
 const expect = (ok, msg) => { if (!ok) problems.push(msg); };
 try {
   // Say we can show MCP Apps views, so the dates view is offered (#1371).
@@ -49,6 +58,13 @@ try {
   const d = await run('upcoming_dates', { days: 365 });
   for (const e of d.results ?? []) expect(e.sources?.length, `upcoming_dates: ${e.id} has no sources`);
   for (const e of d.results ?? []) expect(/\/calendar\/[a-z0-9-]+\.ics$/.test(e.add_to_calendar ?? ''), `upcoming_dates: ${e.id} has no add_to_calendar link`);
+  // Freshness on each date (#1371): how it was read, how long ago, and check_first
+  // only for a date starting within the window whose source is older than allowed.
+  for (const e of d.results ?? []) {
+    expect(['feed', 'hand', 'watched-page'].includes(e.read_how) && Number.isInteger(e.days_since_checked), `upcoming_dates: ${e.id} has no read_how or days_since_checked`);
+    const soon = (Date.parse(`${e.starts}T12:00:00Z`) - Date.now()) / 86400000 <= upcoming.within_days + 1;
+    if (e.check_first) expect(soon && e.days_since_checked > upcoming.checked_within_days, `upcoming_dates: ${e.id} says check_first but is not soon and old`);
+  }
   // MCP Apps view: linked from the tool, readable as a resource, plain text fallback.
   const view = list.result?.tools?.find((t) => t.name === 'upcoming_dates')?._meta?.ui?.resourceUri;
   expect(view?.startsWith('ui://'), 'upcoming_dates: no MCP Apps view linked');
