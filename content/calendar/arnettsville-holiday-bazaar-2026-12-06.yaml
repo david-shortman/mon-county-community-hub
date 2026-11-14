@@ -12,7 +12,11 @@ place: 4120 Fairmont Road, Morgantown, WV
 town: Arnettsville
 venue: arnettsville
 sources:
-  - url: https://www.dominionpost.com/2026/10/27/events-opportunities-24
-    checked: 2026-11-01
   - url: https://www.dominionpost.com/2026/10/30/events-opportunities-25
-    checked: 2026-11-01
+    checked: 2026-11-14
+    name: Dominion Post, Events and opportunities, October 30, 2026
+    quote: "A holiday bazaar from 11 a.m. to 4 p.m. will feature crafters, vendors, homemade items, baked goods and more. Admission is free."
+  - url: https://www.dominionpost.com/2026/10/27/events-opportunities-24
+    checked: 2026-11-14
+    name: Dominion Post, Events and opportunities, October 27, 2026
+    quote: "A holiday bazaar from 11 a.m. to 4 p.m. will feature crafters, vendors, homemade items, baked goods and more. Admission is free."
