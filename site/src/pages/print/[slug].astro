@@ -5,8 +5,8 @@
 // sheet is never older than the data. Each sheet says when it was made and to
 // call or text 211 to confirm, and has a QR code with the short web address
 // printed beside it. Printing and placing sheets is David's call (#163).
-// Town-by-town sheets (Westover, Star City, Cheat Lake) need town-level data
-// on each record first.
+// Town sheets are the town pages themselves (/towns/<slug>/). Group sheets
+// (older adults, teens) list the records named in content/print-groups.yaml.
 import Base from '../../layouts/Base.astro';
 import { loadDoors, resource, oldestChecked, isStale, prettyDate, todayYmd, shortUrl } from '../../lib/content.mjs';
 import { loadPages } from '../../lib/pages.mjs';
@@ -14,35 +14,40 @@ import { qrSvg, shortAddress, addressParts } from '../../lib/qr.mjs';
 import { printSheets } from '../../lib/printouts.mjs';
 
 export function getStaticPaths() {
-  return printSheets().map((s) => ({ params: { slug: s.slug }, props: { kind: s.kind, key: s.slug, name: s.name, list: s.list } }));
+  return printSheets().map((s) => ({ params: { slug: s.slug }, props: { kind: s.kind, key: s.slug, name: s.name, page: s.page, list: s.list } }));
 }
 
-const { kind, key, name, list } = Astro.props;
+const { kind, key, name, page, list } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const doors = loadDoors();
 const pages = await loadPages();
 // Where the QR code points: the door's own page, or the first listed page with this topic.
 const topicPage = [...pages.values()].find((p) => p.listed !== false && !p.parent && p.topic === key);
-const target = kind === 'door' ? (doors.bySlug[key].page ?? `/topics/#${key}`) : (topicPage?.route ?? '/topics/');
+const target = kind === 'door' ? (doors.bySlug[key].page ?? `/topics/#${key}`) : kind === 'group' ? page : (topicPage?.route ?? '/topics/');
+// A group sheet keeps its listing order (content/print-groups.yaml) and says
+// where the bills, food and rent help is, since it leaves those off.
+const group = kind === 'group';
+const monthSheet = shortAddress(new URL(`${base}/print/this-month/`, Astro.site).href);
 const targetUrl = new URL(`${base}${target}`, Astro.site).href;
 const qr = await qrSvg(targetUrl);
 const today = todayYmd();
-const items = [...list].sort((a, b) => a.title.localeCompare(b.title));
+const items = group ? list : [...list].sort((a, b) => a.title.localeCompare(b.title));
 const r211 = resource('wv-211');
 // Each source address once, even when a record cites several parts of one page.
 const srcs = (r) => [...new Set(r.sources.map((s) => shortUrl(s.url)))];
 const sheetUrl = shortAddress(new URL(`${base}/print/${key}/`, Astro.site).href);
 ---
-<Base title={`${name}: a printable sheet for Mon County`} description={`A one-page printable list of ${name.toLowerCase()} help in Morgantown and Monongalia County, WV, with phone numbers, addresses, hours and checked dates.`}>
+<Base title={`${name}: a printable sheet for Mon County`} description={group ? `A printable list of places and programs for ${name.toLowerCase()} in Morgantown and Monongalia County, WV, with phone numbers, addresses, hours and checked dates.` : `A one-page printable list of ${name.toLowerCase()} help in Morgantown and Monongalia County, WV, with phone numbers, addresses, hours and checked dates.`}>
   <div class="sheet-head">
     <div>
-      <h1>{name}: help in Mon County</h1>
+      <h1>{group ? `For ${name.toLowerCase()} in Mon County` : `${name}: help in Mon County`}</h1>
       <p class="sheet-asof"><strong>Made from our listings on {prettyDate(today)}.</strong> Each place says when we last checked it. Things change, so call first. Not sure where to start? Call {r211.contact.phone} or text your ZIP code to {r211.contact.text}. {r211.hours}.</p>
     </div>
     <figure class="sheet-qr"><Fragment set:html={qr} /><figcaption>More online:<br /><strong>{addressParts(targetUrl)[0]}<wbr />{addressParts(targetUrl)[1]}</strong></figcaption></figure>
   </div>
   <p class="no-print">This sheet is made from our listings every morning. Print it, fold it, and hand it to someone. <button class="btn" type="button" id="print-sheet" hidden><span>Print this sheet</span></button> <a href={`${base}/print/`}>All printouts</a>.</p>
 
+  {group && <p class="sheet-more">Help with bills, food and rent is on its own sheet: <a href={`${base}/print/this-month/`}>Get through this month</a> ({monthSheet}).</p>}
   <ul class="sheet-list">
     {items.map((r) => (
       <li>
