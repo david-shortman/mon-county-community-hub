@@ -44,6 +44,13 @@ items:
       The page itself allows robots and lists each season in plain text, with
       dates, days, times and place. Compare with
       content/calendar/morgantown-farmers-market-*.yaml.
+  - text: >-
+      Shop hours with no readable own page (#1898): Gallery 304, Old School,
+      That's So Cute! and Nonna's Antiques. Their hours came only from news
+      stories, so they are off the site. Read each shop's own Instagram or
+      Facebook page, never a directory, and add hours back only with that page
+      as the source and the date you read it. No contact with any shop.
+    person: true
   - text: Sale and market dates that passed in the last 4 months. The site already hides them; look for each one's next date.
     run: past-sale-dates
   - text: If a "Sale or market date page changed" issue is open (label source-changed), work through it too.
