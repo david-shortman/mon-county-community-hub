@@ -1,0 +1,5 @@
+# 2026-11-14: How it works answers fair questions about the AI (#490)
+
+- **Considered:** About, How it works and Hard questions already answer most of the criticism in #490: who runs it, who pays, how to report a mistake, and what waits for David. Three fair questions had no direct answer: what the AI does and is not allowed to do in one place, how accurate the site is, and who answers for a mistake the AI makes.
+- **Chose:** two new sections on How it works, not Hard questions (a hot file). "What the AI does and doesn't do" lists the rules from the trust playbook, automated reads and the writing rules, and says which ones a program enforces and which depend on the AI following them. "How accurate is it?" says we have not measured an error rate, counts fixes from `content/corrections/` at build time (so the numbers stay current), and says plainly that the blind second check is not required yet, with the baseline from `docs/playbook/second-check.md`.
+- **Shipped:** `site/src/pages/how-it-works.astro`. Waits for David: it speaks for the project. Cost: $0.
