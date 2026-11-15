@@ -296,6 +296,8 @@ queries:
   - {q: Westover business license, expect: [/westover-business-license/, /business-by-town/], kind: everyday}
   - {q: farmers market vendor fee, expect: [/farmers-market-vendor-rules/, /sell-what-you-grow/], kind: everyday}
   - {q: volunteer opportunities, expect: [/volunteer/], kind: everyday}
+  - {q: sell at farmers market, expect: [/farmers-market-vendor-rules/, /sell-what-you-grow/], kind: everyday}
+  - {q: community service hours, expect: [/volunteer/], kind: everyday}
 
   # Full questions (many from questions.yaml)
   - {q: I can't pay my heating bill, expect: [/utility-bills/, /money/], kind: question}
@@ -353,3 +355,4 @@ queries:
   - {q: how do I become a vendor at the farmers market, expect: [/farmers-market-vendor-rules/, /sell-what-you-grow/], kind: question}
   - {q: my neighbor is too loud at night, expect: [/noise/], kind: question}
   - {q: how long does probate take, expect: [/probate-steps/], kind: question}
+  - {q: where do my county taxes go, expect: [/county-budget/], kind: question}
