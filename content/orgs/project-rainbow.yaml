@@ -2,10 +2,10 @@ name: Project Rainbow
 slug: project-rainbow
 kind: nonprofit
 website: https://www.projectrainbowwv.com/
-summary: A Morgantown nonprofit that runs the Rainbow House, an emergency shelter for people experiencing homelessness, and a street outreach program. Its own website loads by script, so this listing comes from the City of Morgantown's resource page.
+summary: A Morgantown nonprofit that runs the Rainbow House, an emergency shelter for people experiencing homelessness that serves people regardless of sexual orientation or gender identity. Its own website loads by script, so this listing comes from the City of Morgantown's resource page.
 topics: [housing]
 area: morgantown
 sources:
   - url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
     checked: 2026-11-15
-    quote: "In addition to its emergency shelter program, Project Rainbow operates a street outreach program that provides direct support and services to individuals experiencing unsheltered homelessness."
+    quote: "The Rainbow House is a 22-bed shelter that operates 24/7 and serves individuals regardless of sexual orientation or gender identity."
