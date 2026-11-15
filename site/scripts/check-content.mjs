@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar as loadCalendarShown, loadDir as loadDirShown, loadDoors, loadDoorPage, loadGaps, resource, todayYmd, ymd, CONTENT_DIR, HIDDEN_REASONS, SECONDHAND_KINDS, SECONDHAND_AREAS, SECONDHAND_GOODS, SECONDHAND_STATUS, recheckProblems } from '../src/lib/content.mjs';
-import { loadTonight, tonightProblems } from '../src/lib/tonight.mjs';
+import { loadTonight, tonightProblems, tonightStaleness } from '../src/lib/tonight.mjs';
 import { ADAPTERS, SNAPSHOT_DIR, entryProblems } from '../src/lib/feeds/index.mjs';
 import { CALL_SCRIPTS, callScript } from '../src/lib/call-scripts.mjs';
 import { factTopics, loadFacts } from '../src/lib/facts.mjs';
@@ -489,6 +489,8 @@ errors.push(...windowProblems(loadWindows()));
 for (const d of loadPdfPages()) for (const p of pdfPageProblems(d)) errors.push(`${d._file}: ${p}`);
 // Tonight's warming shelter status (content/tonight, #401).
 for (const p of tonightProblems(loadTonight())) errors.push(`tonight/warming-shelter.yaml: ${p}`);
+// Winter: a warning when the status is more than 7 days old (#219).
+{ const w = tonightStaleness(loadTonight()); if (w) warnings.push(`tonight/warming-shelter.yaml: ${w}`); }
 
 // Plain-language agenda guides (content/agendas, #529).
 for (const p of agendaProblems()) errors.push(p);

@@ -8,17 +8,14 @@
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Actions from '../components/Actions.astro';
-import { resource, telHref, prettyDate } from '../lib/content.mjs';
-import { loadTonight } from '../lib/tonight.mjs';
+import { resource, telHref } from '../lib/content.mjs';
+import { loadTonight, checkedWhen } from '../lib/tonight.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "help-now", label: "Tonight: is the warming shelter open?", summary: "Winter warming shelter status, with the time we last checked: where, hours, rules and the bus" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const t = loadTonight();
 const r211 = resource('wv-211');
-const time = String(t.checked).slice(11);
-const [h, m] = time.split(':').map(Number);
-const clock = h === 12 && m === 0 ? 'noon' : `${((h + 11) % 12) + 1}${m ? `:${String(m).padStart(2, '0')}` : ''} ${h < 12 ? 'a.m.' : 'p.m.'}`;
-const when = `${prettyDate(t.checkedDay)} at ${clock}`;
+const when = checkedWhen(t);
 // End a sentence once, even when it ends in "a.m." or "p.m.".
 const end = (x) => (String(x).endsWith('.') ? x : `${x}.`);
 const showOpen = t.status === 'open' && t.fresh;
