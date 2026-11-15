@@ -23,7 +23,8 @@ const top = i.unit === 'percent' ? (Math.ceil((max * 100) / step) * step) / 100 
 const x = (year) => L + (years.length > 1 ? (years.indexOf(year) / (years.length - 1)) * (W - L - R) : 0);
 const y = (v) => T + (1 - v / top) * (H - T - B);
 const ticks = [0, top / 2, top];
-const tick = (v) => (i.unit === 'percent' ? `${Math.round(v * 100)}%` : String(v));
+// Other units are rounded the way the card shows them, so an axis never reads 13324.08 (#529).
+const tick = (v) => (i.unit === 'percent' ? `${Math.round(v * 100)}%` : v.toLocaleString('en-US', { maximumFractionDigits: i.digits ?? 0 }));
 // End labels, nudged apart when the two lines end close together.
 const ends = series.map((s) => ({ s, last: s.points.at(-1), ly: y(s.points.at(-1).value) }));
 if (ends.length === 2 && Math.abs(ends[0].ly - ends[1].ly) < 14) {
