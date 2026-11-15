@@ -2,7 +2,8 @@
 // Grants for local nonprofits (#529, topic depth: local philanthropy). The
 // open grant rounds that local and state funders post for nonprofits, schools
 // and public bodies in Mon County, each from the funder's own page, read
-// 2026-11-02 (Eastern). Research behind it: docs/research/local-grants-and-funders.md.
+// 2026-11-02 (Eastern); more funders and the tax filings section added
+// 2026-11-15 (#1982). Research behind it: docs/research/local-grants-and-funders.md.
 // Describe only: no funder or charity is ranked or recommended, and no one
 // is asked to give. Dates are only what each page says; no guessed dates.
 // Money page, so it waits for David.
@@ -13,7 +14,7 @@ import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "community", label: "Grants for local nonprofits", summary: "Which local and state funders give grants to nonprofits here, who can apply, how much, and when the next round opens" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const checked = '2026-11-02';
-const src = (url) => [{ url, checked }];
+const src = (url, on = checked) => [{ url, checked: on }];
 const ycf = org('your-community-foundation');
 const funders = [
   { id: 'ycf-community', funder: 'Your Community Foundation', name: 'Community Grants', org: 'your-community-foundation', url: 'https://ycfwv.org/ycf-community-grants-2/',
@@ -27,6 +28,10 @@ const funders = [
   { id: 'ycf-tanner', funder: 'Your Community Foundation', name: "Stephen D. Tanner Children's Enrichment Fund", org: 'your-community-foundation', url: 'https://ycfwv.org/stephen-d-tanner-childrens-enrichment-fund-grants/',
     who: 'Public elementary schools in Harrison, Marion, Monongalia, Preston and Taylor counties (Title I schools first), and nonprofits there with enrichment programs for children.',
     amount: 'Up to $2,500.',
+    when: 'The 2026-27 round closed September 21, 2026. The foundation says to check back in August 2027.' },
+  { id: 'ycf-stem-girls', funder: 'Your Community Foundation', name: 'S.T.E.M. for Girls grants', org: 'your-community-foundation', url: 'https://ycfwv.org/s-t-e-m-for-girls-grants/', checked: '2026-11-15',
+    who: 'Traditional public schools in Harrison, Marion, Monongalia, Preston and Taylor counties (Title I schools first), and nonprofits, including public libraries. Programs must be for girls only, in grades K-12.',
+    amount: 'Up to $4,000.',
     when: 'The 2026-27 round closed September 21, 2026. The foundation says to check back in August 2027.' },
   { id: 'ycf-educators', funder: 'Your Community Foundation', name: 'Educator Mini-Grants', org: 'your-community-foundation', url: 'https://ycfwv.org/ycf-educator-mini-grants/',
     who: 'PK-12 teachers, counselors, librarians and nurses in traditional public schools in the same five counties. Not administrators or central office staff.',
@@ -44,6 +49,35 @@ const funders = [
     who: '501(c)(3) nonprofits and government units. Not individuals or single K-12 schools.',
     amount: 'Not stated on the page.',
     when: 'No deadlines. Applications are taken all year. Unsure if a project fits? The foundation says to email info@benedum.org, and staff reply within 10 business days.' },
+  { id: 'wv-arts-mini', funder: 'West Virginia Department of Arts, Culture and History', name: 'State arts mini grants and Fast Track', org: 'wv-department-of-arts-culture-and-history', url: 'https://wvculture.org/agencies/arts/grants/', checked: '2026-11-15',
+    who: 'Arts in Education Mini Grant: schools and 501(c)(3) nonprofits, to bring West Virginia artists to K-12 students. Community Arts Mini Grant: local governments and 501(c)(3) nonprofits, for arts performances and workshops. Fast Track: schools, local governments and 501(c)(3) nonprofits, for emergency work on arts venues and history museums.',
+    amount: 'Mini grants up to $1,000. Fast Track up to $10,000.',
+    when: 'Rolling: these three take applications any time. The state\'s larger arts grants (up to $25,000) say "Not Currently Open" with no date posted. Applicants must register as a state vendor and have a free UEI number from SAM.gov.' },
+  { id: 'wv-humanities-mini', funder: 'West Virginia Humanities Council', name: 'Humanities minigrants', org: 'wv-humanities-council', url: 'https://wvhumanities.org/grants/aboutourgrants/', checked: '2026-11-15',
+    who: 'Projects sponsored by a nonprofit, for humanities programs (such as history, literature or talks) for West Virginia audiences.',
+    amount: 'Up to $2,000. The project must match the grant dollar for dollar, in cash or donated time and goods.',
+    when: 'Deadline "to be determined." The council says its grantmaking is limited for now and its other grant types are paused. Plan on six weeks between the deadline and the start of the project.' },
+  { id: 'volunteer-wv-americorps', funder: 'Volunteer West Virginia', name: 'Funding to start an AmeriCorps program', org: 'volunteer-west-virginia', url: 'https://volunteer.wv.gov/AmeriCorps/Pages/Start-an-AmeriCorps-Program.aspx', checked: '2026-11-15',
+    who: 'Nonprofits, colleges, tribes and government agencies that want to run a program with 5 or more AmeriCorps members.',
+    amount: 'Not stated on the page.',
+    when: 'Volunteer West Virginia says it gives this funding each year. Its funding page said "There are currently no funding opportunities" on November 15, 2026. It asks groups to email americorps@wv.gov to talk about an idea.' },
+  { id: 'morgantown-cdbg', funder: 'City of Morgantown', name: 'Community Development Block Grant (CDBG) public service funding', org: 'city-of-morgantown', url: 'https://www.morgantownwv.gov/707/CDBG-Info', checked: '2026-11-15',
+    who: 'Nonprofit public service agencies, for a new service or a measurable increase in a service. Each project must meet a federal CDBG goal, such as helping people with low or moderate income.',
+    amount: 'Not stated on the page.',
+    when: 'The newest application on the City\'s page is for July 2025 to June 2026, and it was due March 7, 2025. No newer round is posted. For help, the City Manager\'s Office lists 304-284-7479.' },
+];
+// Private foundations based here with no website we could find. Each line is
+// from the foundation's ProPublica Nonprofit Explorer page (tax filings),
+// which content/source-tiers.yaml allows for a group's legal name, EIN and
+// filings. Figures are "as filed" and are not a promise of future grants.
+const ppChecked = '2026-11-15';
+const filers = [
+  { id: 'mcquain', name: 'Hazel Ruby McQuain Charitable Trust', ein: '34-6899181', city: 'Morgantown, WV', url: 'https://projects.propublica.org/nonprofits/organizations/346899181',
+    latest: '2025 tax year (Form 990-PF filed May 8, 2026): $12,243,634 in charitable disbursements.' },
+  { id: 'puskar', name: 'Milan Puskar Foundation', ein: '55-0749674', city: 'Morgantown, WV', url: 'https://projects.propublica.org/nonprofits/organizations/550749674',
+    latest: '2024 tax year (Form 990-PF filed November 6, 2025): $2,278,197 in charitable disbursements.' },
+  { id: 'hott', name: 'George D. Hott Memorial Foundation of Morgantown, Monongalia County', ein: '55-6085230', city: 'files from Columbus, OH', url: 'https://projects.propublica.org/nonprofits/organizations/556085230',
+    latest: '2025 tax year (Form 990-PF filed April 10, 2026): $204,320 in charitable disbursements.' },
 ];
 ---
 <Base title="Grants for local nonprofits in Morgantown and Mon County, WV" description="Which local and state funders give grants to nonprofits, schools and public bodies in Mon County, WV: who can apply, how much, and when the next round opens.">
@@ -62,7 +96,7 @@ const funders = [
         <dt>When</dt><dd>{f.when}</dd>
       </dl>
       <p><a class="btn" href={f.url}><span>Grant page<span class="sr-only">: {f.name}</span></span></a></p>
-      <SourceLine sources={src(f.url)} org={f.org} about={f.name} />
+      <SourceLine sources={src(f.url, f.checked)} org={f.org} about={f.name} />
     </article>
   ))}
 
@@ -70,12 +104,22 @@ const funders = [
   <p>The foundation asks applicants to call {ycf?.phone ?? '304-296-3433'} to talk about a project and whether it fits.</p>
   <SourceLine sources={src('https://ycfwv.org/ycf-community-grants-2/')} org="your-community-foundation" about="Your Community Foundation grant questions" />
 
+  <h2 id="tax-filings">Local foundations with no website</h2>
+  <p>Some of the largest private foundations based here have no website we could find, and no grant page. Their yearly tax returns are public. A private foundation's return (Form 990-PF) lists the grants it paid, so it shows which groups a foundation has funded. These links open each foundation's filings on ProPublica Nonprofit Explorer, a free site that posts IRS records.</p>
+  <ul class="filers">
+    {filers.map((p) => (
+      <li id={p.id}>
+        <a href={p.url}>{p.name}</a> ({p.city}, EIN {p.ein}). {p.latest}
+      </li>
+    ))}
+  </ul>
+  <p>"Charitable disbursements" is the line ProPublica pulls from each return. It can include more than grants. These are past amounts, not open grant rounds.</p>
+  <SourceLine sources={filers.map((p) => ({ url: p.url, checked: ppChecked }))} about="tax filings of local private foundations" />
+
   <h2 id="not-listed">Not listed here</h2>
   <ul>
-    <li>Arts grants from the foundation and the state are on <a href={`${base}/make-it-better/grants/`}>Get money for a project</a>.</li>
-    <li>The West Virginia Humanities Council says its grantmaking is limited for now and most grant types are paused. See its <a href="https://wvhumanities.org/grants/aboutourgrants/">grants page</a>.</li>
+    <li>The Organizational Arts Grants for Mon County nonprofits are on <a href={`${base}/make-it-better/grants/`}>Get money for a project</a>, with tree and neighborhood grants.</li>
   </ul>
-  <SourceLine sources={[{ url: 'https://wvhumanities.org/grants/aboutourgrants/', checked: '2026-11-01' }]} org="wv-humanities-council" about="West Virginia Humanities Council grants" />
 
   <p>Giving to a group? See <a href={`${base}/check-a-charity/`}>Check a charity before you give</a>.</p>
 
@@ -87,4 +131,5 @@ const funders = [
   .compare { margin: 0; }
   .compare dt { font-weight: 700; }
   .compare dd { margin: 0 0 var(--s2); }
+  .filers li { margin-bottom: var(--s2); }
 </style>
