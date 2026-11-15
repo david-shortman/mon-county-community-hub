@@ -59,5 +59,5 @@ get_help:
     label: File today for SNAP, Medicaid, heating help and WV WORKS
 site_coverage:
   level: partial
-  why: Jobs, paid training, pay rules and how to report unpaid wages, free tax help with tax credits (including the Child Tax Credit and the state's low-income exclusion), and benefits each have a page, and How we're doing shows a basic household budget. It stays partial because the help is spread over six pages with no one place to start, and What help might I get has no link from a home page door.
-  checked: 2026-11-02
+  why: Jobs, paid training, pay rules and how to report unpaid wages, free tax help with tax credits (including the Child Tax Credit and the state's low-income exclusion), and benefits each have a page, and How we're doing shows a basic household budget. What help might I get now has a link on the Get through this month door. It stays partial because the help is still spread over six pages with no single wages page.
+  checked: 2026-11-14
