@@ -1,0 +1,15 @@
+slug: hire-ui-quarterly
+text: "Unemployment tax reports and payments are due **each quarter**, about a month after it ends: **April 30, July 31, October 31 and January 31**. Each report lists wages paid and each worker's job. You file and pay online. WorkForce WV says the law does not allow it to waive penalties or interest, so file on time. Help with an account: [304-558-2451](tel:+13045582451)."
+phone: "304-558-2451"
+phone_label: WorkForce WV's unemployment tax unit
+quote: >-
+  Quarter ending March 31 is due April 30. Quarter ending June 30 is due July 31. Quarter ending September 30 is due October 31.
+  Quarter ending December 31 is due January 31. ... Gross wages paid in the calendar quarter. The job title or Standard
+  Occupational Classification (SOC) code for each employee. ... The Unemployment Compensation Law has no provision for the waiver of
+  penalties or interest. ... the Compliance and Enforcement Unit at 304-558-2451
+sources:
+  - url: https://workforcewv.org/businesses/unemployment-tax-information/tax-filing-reporting/
+    checked: 2026-11-14
+  - url: https://workforcewv.org/businesses/unemployment-tax-information/frequently-asked-questions/
+    checked: 2026-11-14
+recheck_days: 180
