@@ -1,0 +1,8 @@
+slug: fcc-map-slow-hidden
+text: "The map starts out hiding service slower than 25 Mbps download. To see it, change the speed choices under **Service Filters** above the map."
+quote: "Services with download speeds below 25 Mbps are not shown on the default map, but can be found by using the filtering function described below."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10467446103579-How-to-Use-the-FCC-s-National-Broadband-Map
+    name: FCC Broadband Data Collection Help Center, How to Use the FCC's National Broadband Map
+    checked: 2026-11-15
+recheck_days: 180

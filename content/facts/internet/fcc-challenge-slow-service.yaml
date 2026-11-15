@@ -1,0 +1,8 @@
+slug: fcc-challenge-slow-service
+text: "Already have service, but it is slower than you pay for? The map is about what is offered, so the FCC treats that choice on the form as a consumer complaint, not a map challenge."
+quote: "Actual Speed Lower than Advertised: Use this option if you have internet service but are not receiving the speeds you expect. Since the National Broadband Map shows information about available service, challenges submitted in this category will be treated by the FCC as a consumer complaint."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10476040597787-How-to-Submit-an-Availability-Challenge
+    name: FCC Broadband Data Collection Help Center, How to Submit an Availability Challenge
+    checked: 2026-11-15
+recheck_days: 180

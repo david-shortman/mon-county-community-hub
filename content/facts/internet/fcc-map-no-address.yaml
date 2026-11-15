@@ -1,0 +1,8 @@
+slug: fcc-map-no-address
+text: "No street address yet? Type a town name and state, then zoom in on the map and click the building."
+quote: "If you don’t have a street address, you can enter a town name and state, or select “Location” underneath the search bar on the home page. You can then zoom on the map to find a particular location."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10467446103579-How-to-Use-the-FCC-s-National-Broadband-Map
+    name: FCC Broadband Data Collection Help Center, How to Use the FCC's National Broadband Map
+    checked: 2026-11-15
+recheck_days: 180

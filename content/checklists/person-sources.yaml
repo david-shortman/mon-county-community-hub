@@ -64,3 +64,17 @@ items:
       sends automated reads to a block page, so open it in a browser.
     person: true
     when: quarter
+  - text: >-
+      FCC National Broadband Map. Look up one Mon County address and check
+      that the steps on site/src/pages/internet-service-map.astro (#fcc-map)
+      still match: the search box, the green, red and gray dots, Service
+      Filters, the Mobile Broadband tab, and the Availability Challenge and
+      Location Challenge links. Note the map's data as-of date in #2010's
+      follow-up issue. The fcc-* facts in content/facts/internet/ cite the
+      FCC help center, which the Source check reads.
+    url: https://broadbandmap.fcc.gov/
+    how: >-
+      broadbandmap.fcc.gov answers robots.txt with a 403 (read 2026-11-15),
+      so no robot reads it. Open it in a browser.
+    person: true
+    when: quarter
