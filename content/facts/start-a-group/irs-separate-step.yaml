@@ -1,0 +1,8 @@
+slug: irs-separate-step
+text: "Federal tax-exempt status, such as 501(c)(3), is a separate step with the IRS. The Secretary of State's charities page sends you to the IRS website and IRS Publication 557 to learn the rules."
+quote: "To learn about the general requirements for federal tax-exempt status, visit the IRS website, or download IRS Publication 557, Tax-Exempt Status for Your Organization."
+sources:
+  - url: https://sos.wv.gov/business/charities/charitable-organizations
+    checked: 2026-11-15
+    name: West Virginia Secretary of State, Charitable Organizations
+recheck_days: 180
