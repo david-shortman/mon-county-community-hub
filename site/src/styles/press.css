@@ -161,12 +161,16 @@ html:root :is(.card, .note, .add-cal, .right-now, .crisis-line, .step, .milepost
 html:root .btn { border-radius: 3px; border-width: 2px; }
 /* Keep a phone number on one line, so 898-211 never reads as 898- and 211.
    Only when the screen holds 24em of the reader's own text size, so a big
-   text setting can still wrap a long one like 1-800-RED-CROSS (1-800-733-2767). */
+   text setting can still wrap a long one like 1-800-RED-CROSS (1-800-733-2767).
+   An inline block, not nowrap: it moves to the next line whole, and wraps
+   inside only when it is wider than the whole line. A media query's em ignores
+   the page's own text size, so nowrap ran off the screen at 390px with 200%
+   text on /after-a-storm/ and /getting-around/ (QA sweep, #529). */
 @media (min-width: 24em) {
-  html:root a:is([href^="tel:"], [href^="sms:"]):not(.btn) { white-space: nowrap; }
+  html:root a:is([href^="tel:"], [href^="sms:"]):not(.btn) { display: inline-block; max-width: 100%; }
   /* The same for a number written in a sentence (src/lib/keep-phones.mjs). */
-  html:root .tel-text { white-space: nowrap; }
-  html:root .btn .tel-text { white-space: normal; }
+  html:root .tel-text { display: inline-block; max-width: 100%; }
+  html:root .btn .tel-text { display: inline; }
 }
 /* A route step is narrower than the page. A media query's em ignores the page's
    own text size, so at 390px with 200% text a number like 1-800-525-6285 could
