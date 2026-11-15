@@ -1,0 +1,16 @@
+slug: hhw-day
+text: "**Household hazardous waste day:** the Morgantown Utility Board (MUB) holds a collection for household chemicals once a year. The 2026 day was Saturday, August 1, 8 to 11 a.m., at MUB's offices, 278 Greenbag Road. No 2027 date is posted yet. The Solid Waste Authority's 2025 calendar lists what MUB took that year, including used motor oil and oil filters, antifreeze, gasoline, batteries of all types, fluorescent bulbs, propane cylinders, fire extinguishers, lawn and garden chemicals, pool chemicals and oil-based paint. Latex paint and tires are not taken. MUB's own page for the event did not load when we checked, so call MUB to ask about the next date and what it takes."
+quote: 'SWA event page: "2026 Household Hazardous Waste Collection (HHWC) Day" ... "Aug 01, 2026, 8:00 AM – 11:00 AM" ... "Morgantown Utility Board Offices, 278 Green Bag Road, Morgantown, WV 26501". SWA blog post (updated July 31, 2026): "The Morgantown Utility Board''s (MUB) Household Hazardous Waste Collection Day is one time a year" ... "Saturday, August 1, 2026 8:00 am – 11:00 am MUB''s Offices 278 Greenbag Road" ... "call MUB at 304-292-8443" ... "Note: LATEX paint is NOT accepted at the HHWC Day Event." SWA 2025 calendar, "List of Accepted Items": "Anti-freeze ... Batteries (All types) ... Fluorescent Bulbs - including CFLs ... Lawn & Garden Chemicals ... Motor Oil (Used) ... Gasoline (including that mixed with oil) ... Oil Filters (used) ... Propane Cylinders ... Fire Extinguishers ... Swimming Pool Chemicals ... Oil-Based Paints (NO LATEX PAINT)" and "Tires and LATEX paint are NOT accepted at the Household Hazardous Waste Collection and Electronics Collection events." mub.org/hhwc answered "Page not found" ("The full website is being rebuilt, so some pages are temporarily unavailable.") on 2026-11-14; the MUB site footer gives "(304) 292-8443".'
+phone: "304-292-8443"
+phone_label: Morgantown Utility Board
+sources:
+  - url: https://www.monongaliacountyswa.com/event-details/2026-household-hazardous-waste-collection-hhwc-day
+    checked: 2026-11-14
+    name: "Monongalia County SWA, 2026 Household Hazardous Waste Collection Day event page"
+  - url: https://www.monongaliacountyswa.com/post/2025-how-to-prepare-for-recycle-and-disposal-collection-events
+    checked: 2026-11-14
+    name: "Monongalia County SWA, 2026 How To Prepare for Recycle and Disposal Collection Events (updated July 31, 2026)"
+  - url: https://www.monongaliacountyswa.com/_files/ugd/8af711_907fa483f8df40e9b155cd3da48c0b1e.pdf
+    checked: 2026-11-14
+    name: "Monongalia County SWA, 2025 Hard to Recycle or Hard to Dispose of Items calendar (PDF, linked from its Calendars page), list of accepted items"
+recheck_days: 30    # waiting on a 2027 date, so check often
