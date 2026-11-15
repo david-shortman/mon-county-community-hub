@@ -27,7 +27,7 @@ const data = chipData(doc, await loadPages());
 ---
 <section class="explore-chips" id="curious" aria-labelledby="curious-h">
   <h2 id="curious-h">What are you curious about?</h2>
-  <p class="ec-help">Pick one or more to see pages for them first.</p>
+  <p class="ec-help">Pick one or more to see pages for them first. Your picks stay on this phone.</p>
   <ul class="ec-chips">
     {data.chips.map((c) => <li><a class="ec-chip" href={`${base}/topics/pick/${c.id}/`} data-chip={c.id}>{c.name}</a></li>)}
   </ul>

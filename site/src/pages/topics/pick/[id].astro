@@ -21,7 +21,7 @@ const list = chip.pages.map((r) => tags.get(r)).filter(Boolean);
     <ol><li><a href={`${base}/topics/`}>All topics</a></li><li aria-current="page">{chip.name}</li></ol>
   </nav>
   <h1>{chip.name}</h1>
-  <p class="lede">{list.length} pages picked for "{chip.name}". <a href={`${base}/topics/#curious`}>Pick something else</a> or see <a href={`${base}/topics/`}>all topics</a>.</p>
+  <p class="lede">{list.length} {list.length === 1 ? 'page' : 'pages'} picked for "{chip.name}". <a href={`${base}/topics/#curious`}>Pick something else</a> or see <a href={`${base}/topics/`}>all topics</a>.</p>
   <ul class="topic-list">
     {list.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}
   </ul>
