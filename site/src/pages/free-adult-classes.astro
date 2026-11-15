@@ -1,0 +1,44 @@
+---
+// Free classes for adults: reading and math, English, and computer basics
+// (sprint wave 19 learning lane, #529). Only classes run by public bodies
+// (MTEC, part of Monongalia County Schools, and the Morgantown Public
+// Library System), plus Literacy Volunteers' free lessons, each from its
+// own page. Read 2026-11-14.
+import Base from '../layouts/Base.astro';
+import OnThisPage from '../components/OnThisPage.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { resource } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Free classes to read, learn English or use a computer", summary: "Free adult classes in Mon County: reading, writing and math at MTEC, English classes at MTEC, and computer basics through the library" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-14';
+const mtecInfo = [{ url: 'https://mtec.mono.k12.wv.us/page/general-info', checked }];
+const navigator = [{ url: 'https://events.mympls.org/event/17866413', checked }];
+---
+<Base title="Free adult classes in Morgantown and Mon County, WV: reading, English, computers" description="Free classes for adults in Mon County, WV: reading, writing and math at MTEC, free English classes at MTEC, and free computer lessons and tech help at the library.">
+  <h1>Free classes to read, learn English or use a computer</h1>
+  <p class="lede">Adults in Mon County can take free classes to read and write better, learn English or learn computer basics. MTEC's Adult Learning Center in Morgantown teaches all three. The library teaches computer skills and helps with tech questions.</p>
+  <OnThisPage items={[['#reading', "Reading, writing and math"], ['#english', "Learn English"], ['#computers', "Computer basics"]]} />
+
+  <h2 id="reading">Reading, writing and math</h2>
+  <p>MTEC's Adult Learning Center teaches basic skills, job skills and computer skills, and gets adults ready for the GED. MTEC says all its services there are free.</p>
+  <SourceLine sources={mtecInfo} about="what the MTEC Adult Learning Center teaches" />
+  <ResourceCard r={resource('mtec-ged-prep')} showCost />
+  <ResourceCard r={resource('lvmpc-adult-literacy')} sms="724-491-2007" smsLabel="Literacy Volunteers" showCost />
+  <p>Want to finish high school? See the steps on <a href={`${base}/high-school-equivalency/`}>Finish high school as an adult</a>.</p>
+
+  <h2 id="english">Learn English</h2>
+  <ResourceCard r={resource('mtec-adult-education-esl')} showCost />
+  <p>Need help in your language today, like an interpreter? See <a href={`${base}/help-in-your-language/`}>Help in your language</a>.</p>
+
+  <h2 id="computers">Computer basics</h2>
+  <ResourceCard r={resource('mpls-northstar-digital-literacy')} showCost />
+  <p><strong>A question about a phone, a computer or an online form?</strong> The library's Digital Navigator holds drop-in hours on the first floor of the Morgantown Public Library. Ask about email and online accounts, internet basics, online safety and scams, online forms, or printing and saving files. Bring your device and any passwords you need. Dates are on the <a href="https://events.mympls.org/calendar/events?cid=17544&t=g&d=0000-00-00&cal=17544&cm=7498&inc=0">library's events calendar</a>.</p>
+  <SourceLine sources={navigator} about="the library's Digital Navigator drop-in hours" />
+  <ResourceCard r={resource('mympls-job-and-computer-help')} showCost />
+
+  <p>More classes, for fun or for work: <a href={`${base}/keep-learning/`}>Keep learning as an adult</a>.</p>
+
+  <p class="meta">Sources checked November 14, 2026. Class times change, so call or check the link before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
