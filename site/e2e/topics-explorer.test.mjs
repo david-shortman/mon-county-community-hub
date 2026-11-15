@@ -22,7 +22,7 @@ describe('topics explorer', () => {
     const ctx = await s.browser.newContext({ ...PHONE, javaScriptEnabled: false });
     const page = await ctx.newPage();
     await page.goto(s.origin + '/topics/');
-    assert.equal(await page.locator('#curious button.ec-chip').count(), 0);
+    assert.equal(await page.locator('#curious button[data-chip]').count(), 0);
     assert.equal(await page.locator('#explore-bar').isVisible(), false);
     await page.locator('#curious a.ec-chip', { hasText: 'Get outside' }).click();
     assert.match(new URL(page.url()).pathname, /\/topics\/pick\/outside\/$/);
@@ -93,6 +93,86 @@ describe('topics explorer', () => {
     await page.waitForTimeout(400);
     const back = await page.evaluate(() => scrollY);
     assert.ok(Math.abs(back - y) < 60, `back at ${back}, was ${y}`);
+    await ctx.close();
+  });
+
+  test('Flip through: open, Save, Skip, Back, keys, Escape and focus return (#2028)', async () => {
+    const ctx = await s.browser.newContext(PHONE);
+    await ctx.addInitScript(() => { localStorage.setItem('em-explore-picks', '["outside"]'); localStorage.removeItem('em-explore-saved'); });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    const opener = page.locator('#curious [data-flip]');
+    assert.match(await opener.textContent(), /Flip through \d+ pages picked for you/);
+    await opener.click();
+    const dlg = page.locator('#flip-deck');
+    // With motion on, a card flies off for about 190 ms before the next one shows.
+    const at = (n) => page.waitForFunction((n) => document.getElementById('fd-count')?.textContent?.startsWith(`${n} of`), n, { timeout: 3000 });
+    assert.ok(await dlg.isVisible(), 'the deck opens');
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'fd-title', 'focus on the card heading');
+    assert.match(await page.locator('#fd-count').textContent(), /^1 of \d+$/);
+    const first = await page.locator('#fd-title').textContent();
+    await dlg.locator('[data-fd="save"]').click();
+    await at(2);
+    await dlg.locator('[data-fd="skip"]').click();
+    await at(3);
+    await dlg.locator('[data-fd="back"]').click();
+    await at(2); // Back undoes the Skip
+    await page.keyboard.press('ArrowRight');
+    await at(3); // Right arrow saves
+    await page.keyboard.press('Backspace');
+    await at(2);
+    assert.match(await page.locator('#fd-live').textContent(), /^Card 2 of \d+: /);
+    const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('em-explore-saved') || '[]'));
+    assert.equal(saved.length, 1, 'one page saved after the undo');
+    assert.ok(first && saved[0], 'the first card was saved');
+    await page.keyboard.press('Escape');
+    assert.equal(await dlg.isVisible(), false, 'Escape closes');
+    assert.equal(await page.evaluate(() => document.activeElement?.hasAttribute('data-flip')), true, 'focus goes back to the button');
+    await ctx.close();
+  });
+
+  test('Flip through with no picks uses the starter list, and the last card sums up', async () => {
+    const ctx = await s.browser.newContext({ ...PHONE, reducedMotion: 'reduce' });
+    await ctx.addInitScript(() => { localStorage.removeItem('em-explore-picks'); localStorage.removeItem('em-explore-saved'); });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    const opener = page.locator('#curious [data-flip]');
+    assert.match(await opener.textContent(), /pages to start/);
+    await opener.click();
+    const total = Number((await page.locator('#fd-count').textContent()).split(' of ')[1]);
+    for (let i = 0; i < total; i++) await page.keyboard.press(i < 2 ? 'ArrowRight' : 'ArrowLeft');
+    assert.match(await page.locator('#fd-end-h').textContent(), new RegExp(`You saved 2 of ${total}`));
+    await ctx.close();
+  });
+
+  test('with scripts off, there is no Flip through button', async () => {
+    const ctx = await s.browser.newContext({ ...PHONE, javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    assert.equal(await page.locator('[data-flip]:visible').count(), 0);
+    assert.equal(await page.locator('#flip-deck').isVisible(), false);
+    await ctx.close();
+  });
+
+  test('Flip through: a long drag right saves, a short drag springs back', async () => {
+    const ctx = await s.browser.newContext({ viewport: { width: 390, height: 844 } });
+    await ctx.addInitScript(() => { localStorage.setItem('em-explore-picks', '["grow"]'); localStorage.removeItem('em-explore-saved'); });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    await page.locator('#curious [data-flip]').click();
+    const box = await page.locator('#fd-card').boundingBox();
+    const drag = async (dx) => {
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+      await page.mouse.down();
+      for (let i = 1; i <= 5; i++) await page.mouse.move(box.x + box.width / 2 + (dx * i) / 5, box.y + box.height / 2);
+      await page.mouse.up();
+    };
+    await drag(30);
+    await page.waitForTimeout(300);
+    assert.match(await page.locator('#fd-count').textContent(), /^1 of/, 'a short drag does nothing');
+    await drag(150);
+    await page.waitForFunction(() => document.getElementById('fd-count')?.textContent?.startsWith('2 of'), null, { timeout: 3000 });
+    assert.equal((await page.evaluate(() => JSON.parse(localStorage.getItem('em-explore-saved') || '[]'))).length, 1);
     await ctx.close();
   });
 });
