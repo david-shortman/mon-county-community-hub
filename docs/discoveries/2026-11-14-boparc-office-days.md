@@ -6,3 +6,4 @@
 - **Why it matters:** a person who goes to the Marilla office to sign up on a Monday may find it closed.
 - **Who keeps it:** BOPARC.
 - **Status:** open. /parks/ now shows the home page's days (content/facts/parks/boparc-office.yaml). The program sign-up card (`content/resources/boparc-program-registration.yaml`) still follows the programs page; a person should re-read both pages at its next re-check.
+- **Update 2026-11-14 (evening, Morgantown time):** both pages re-read; same as above. The sign-up card now notes the home page's desk days and says to call first, because the programs page still names only Marilla (#1888).
