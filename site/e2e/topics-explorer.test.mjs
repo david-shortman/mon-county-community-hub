@@ -38,6 +38,11 @@ describe('topics explorer', () => {
     await chip('Get outside').click();
     await chip('Meet people').click();
     assert.equal(await chip('Get outside').getAttribute('aria-pressed'), 'true');
+    // The script makes these buttons; they must keep the chip look, and a picked one must look picked.
+    const look = (name) => chip(name).evaluate((b) => ({ r: getComputedStyle(b).borderRadius, bg: getComputedStyle(b).backgroundColor }));
+    const [on, off] = [await look('Get outside'), await look('Save money')];
+    assert.equal(on.r, '22px', 'chip buttons keep the chip style');
+    assert.notEqual(on.bg, off.bg, 'a picked chip looks different');
     const routes = await page.locator('#picked-list a').evaluateAll((as) => as.map((a) => new URL(a.href).pathname));
     for (const r of ['/find-your-people/', '/parks/']) assert.ok(routes.indexOf(r) > -1 && routes.indexOf(r) < 3, `${r} near the top: ${routes.join(' ')}`);
     assert.ok(routes.includes('/volunteer/'));
@@ -63,6 +68,11 @@ describe('topics explorer', () => {
     const bar = await page.locator('#explore-bar').boundingBox();
     const help = await page.locator('#help-now').boundingBox();
     if (bar && help) assert.ok(bar.y >= help.y + help.height - 1, 'bar is below Help now');
+    // Once you scroll into the explorer, the bar shows just above the phone's tab bar, not under it.
+    await page.evaluate(() => document.getElementById('explore-h')?.scrollIntoView({ block: 'start' }));
+    const b2 = await page.locator('#explore-bar').boundingBox();
+    const tabs = await page.locator('nav.main').boundingBox();
+    assert.ok(b2 && b2.y + b2.height <= (tabs ? tabs.y : 844) + 1 && b2.y + b2.height > 400, `bar sits above the tab bar: ${JSON.stringify(b2)} ${JSON.stringify(tabs)}`);
     await ctx.close();
   });
 
