@@ -73,7 +73,7 @@ const desc = series.map((s) => `${s.label} went from ${whole(s.points[0].value)}
           <tbody>{years.map((yr) => <tr><th scope="row">{yr}</th>{series.map((s) => { const p = s.points.find((q) => q.year === yr); return <td>{p ? whole(p.value) : '-'}</td>; })}</tr>)}</tbody>
         </table></div>
       </details>
-      {i.unit === 'percent' ? 'The chart uses whole percents, so it can differ a little from the number above.' : `The chart is in the same units as the number above (${i.per ?? i.unit}).`} Years before the source changed how it counts are left out.
+      {i.unit === 'percent' ? 'The chart uses whole percents, so it can differ a little from the number above.' : `The chart is in the same units as the number above (${i.per ?? i.unit}).`} The chart comes from an older yearly file, so its last year can be earlier than the number above. Years before the source changed how it counts are left out.
     </figcaption>
   </figure>
 )}
