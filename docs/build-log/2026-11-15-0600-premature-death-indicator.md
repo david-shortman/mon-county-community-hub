@@ -6,7 +6,7 @@ Date: 2026-11-15. Part of #529 (wave 20, health indicators lane).
 
 - `content/indicators/premature-death.yaml`: years of potential life lost before age 75 per 100,000 people (age-adjusted), County Health Rankings measure `v001`, for 2021-2023 from the March 2026 supplemental file. Mon County 7,338, West Virginia 12,969, United States 8,123. The definition is County Health Rankings' own, word for word, from its 2025 data dictionary. The data years come from the supplement codebook.
 - The card has a chart from the 2025 trends file. It starts at 2019-2021 because County Health Rankings marks a trend break there, and the update script never draws a line across a break. So it shows only two spans, which overlap by two years.
-- `TrendChart.astro`: axis labels for numbers that are not percents are now rounded the way the card shows them. Before, a large number like this one would print as 13324.08 on the axis.
+- `TrendChart.astro`: for numbers that are not percents, axis and line-end labels are rounded the way the card shows them (before, an axis would print 13324.08), and the note under the chart names the unit instead of saying "whole percents". The right margin now fits the longest line-end label, so "West Virginia 13,324" is not cut off on a phone.
 - `docs/research/2026-11-03-topic-depth.md`: gaps 2 and 3 marked done. Graduation, life expectancy and overdose deaths were already on the page.
 
 ## Why this way
