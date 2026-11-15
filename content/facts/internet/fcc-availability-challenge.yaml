@@ -1,0 +1,11 @@
+slug: fcc-availability-challenge
+text: "If a company is listed at your address but says it will not serve you, can't install within 10 business days, wants more than its normal install fee, or doesn't sell the listed speed there, you can file an **availability challenge**. Pick your address on the map, then click **Availability Challenge**. You need your name and email. Say how you learned it, like the company's website or a call, and you can add proof."
+quote: "If the information about the internet services available at your home or other location is incorrect, you can dispute it by clicking on the Availability Challenge link on the right-hand side of the map and submitting the form."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10467446103579-How-to-Use-the-FCC-s-National-Broadband-Map
+    name: FCC Broadband Data Collection Help Center, How to Use the FCC's National Broadband Map
+    checked: 2026-11-15
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10476040597787-How-to-Submit-an-Availability-Challenge
+    name: FCC Broadband Data Collection Help Center, How to Submit an Availability Challenge
+    checked: 2026-11-15
+recheck_days: 180
