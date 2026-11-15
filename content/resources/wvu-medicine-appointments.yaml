@@ -10,6 +10,8 @@ contact:
   url_label: Book an appointment
 sources:
   - url: https://wvumedicine.org/our-care/book-appointment/
-    checked: 2026-11-14
+    checked: 2026-11-15
+    quote: "For assistance, call 855-988-2273."
   - url: https://wvumedicine.org/about-us/contact-us/
-    checked: 2026-11-14
+    checked: 2026-11-15
+    quote: "In the Morgantown area, please call 855-WVU-CARE (855-988-2273)."

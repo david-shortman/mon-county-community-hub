@@ -7,6 +7,8 @@ topics: [housing]
 area: statewide
 sources:
   - url: https://www.ccwva.org/programs/grace-shelter/
-    checked: 2026-11-14
+    checked: 2026-11-15
+    quote: "Beds are available 24/7 for a first come, first serve basis"
   - url: https://www.ccwva.org/locations/
-    checked: 2026-11-14
+    checked: 2026-11-15
+    quote: "Monongalia County Services:"
