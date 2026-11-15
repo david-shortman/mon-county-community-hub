@@ -18,6 +18,8 @@ import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
 import { loadDir, telHref } from '../lib/content.mjs';
 import { factsFor, factHtml, isDue } from '../lib/facts.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -62,17 +64,31 @@ const complaint = [{ url: 'https://www.wvclboard.wv.gov/complaint/', checked }];
   {law.items.map((h) => <p set:html={h} />)}
   <SourceLine sources={law.sources} about="West Virginia contractor law" stale={law.stale} />
 
-  <h3>How to apply</h3>
+  <h3 id="apply">How to apply</h3>
   <p>The board's step by step guide says to finish steps 1 to 6 before you send your application:</p>
-  <ol>
-    <li>Email the board your scope of work at <a href="mailto:CLBoard@wv.gov">CLBoard@wv.gov</a>. The board tells you which license classification (the kind of work your license covers) and which exams you need.</li>
-    <li>Take the exam through PROV, Inc. The person taking it must be an officer, member, owner, or full-time employee. A full-time employee needs payroll records as proof.</li>
-    <li>Get a state tax number for your business, called a Business Registration Tax Number, from the West Virginia State Tax Department.</li>
-    <li>Register with the West Virginia Secretary of State, if your business is required to. You can register online through the WV One Stop Business Center.</li>
-    <li>Show proof of workers' compensation and unemployment compensation for all employees working in West Virginia. The guide also lists general liability insurance.</li>
-    <li>Send a signed form about your wage bond status with your application. If you do commercial building work with employees, the guide says to check your status with the Division of Labor's Wage and Hour Section.</li>
-    <li>Apply online, or download a PDF to fill in and mail.</li>
-  </ol>
+  <Route label="How to apply">
+    <Milepost n={1} level={3} title="Email the board your scope of work" open>
+      <p>Email the board your scope of work at <a href="mailto:CLBoard@wv.gov">CLBoard@wv.gov</a>. The board tells you which license classification (the kind of work your license covers) and which exams you need.</p>
+    </Milepost>
+    <Milepost n={2} level={3} title="Take the exam">
+      <p>Take the exam through PROV, Inc. The person taking it must be an officer, member, owner, or full-time employee. A full-time employee needs payroll records as proof.</p>
+    </Milepost>
+    <Milepost n={3} level={3} title="Get a state tax number">
+      <p>Get a state tax number for your business, called a Business Registration Tax Number, from the West Virginia State Tax Department.</p>
+    </Milepost>
+    <Milepost n={4} level={3} title="Register with the Secretary of State">
+      <p>Register with the West Virginia Secretary of State, if your business is required to. You can register online through the WV One Stop Business Center.</p>
+    </Milepost>
+    <Milepost n={5} level={3} title="Show proof of insurance">
+      <p>Show proof of workers' compensation and unemployment compensation for all employees working in West Virginia. The guide also lists general liability insurance.</p>
+    </Milepost>
+    <Milepost n={6} level={3} title="Send the wage bond form">
+      <p>Send a signed form about your wage bond status with your application. If you do commercial building work with employees, the guide says to check your status with the Division of Labor's Wage and Hour Section.</p>
+    </Milepost>
+    <Milepost n={7} level={3} title="Apply online or by mail">
+      <p>Apply online, or download a PDF to fill in and mail.</p>
+    </Milepost>
+  </Route>
   <p>The guide lists a phone number for each office in these steps. The board is open Monday to Friday, 8 a.m. to 5 p.m. Call to confirm.</p>
   <SourceLine sources={board} about="the Contractor Licensing Board" />
   <div class="actions">
