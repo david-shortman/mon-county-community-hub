@@ -49,6 +49,6 @@ For #1908 and #1909, sprint wave 18 (#529). Two needs joined the register, and t
 | Rank | Need | Site coverage | Our pages | Gaps, with issues |
 |---|---|---|---|---|
 | 9 | Getting and keeping internet at home (`getting-online`, new) | Partial | `/internet/` | Low-cost plans from internet companies need a person's read (#217); no local low-cost computer program; Mon County's served, funded and unserved counts are not on the page yet (#1935) |
-| 13 | Reading, math and finishing school as an adult (`adult-skills`, new) | Partial | `/work-and-learning/`, `/keep-learning/` | No page walks through the steps to a high school equivalency diploma (#1936) |
+| 13 | Reading, math and finishing school as an adult (`adult-skills`, new) | Good (was Partial earlier on November 14; `/high-school-equivalency/` then added the steps, #1936) | `/high-school-equivalency/`, `/work-and-learning/`, `/keep-learning/` | The county skills estimate is from 2012 to 2017 |
 
 Moved down one place: people without a place to sleep (9 to 10), wages (10 to 11), getting where you need to go (11 to 12). Obesity, diabetes and heart health moved from 12 to 14. Each file's `rank_why` says why.

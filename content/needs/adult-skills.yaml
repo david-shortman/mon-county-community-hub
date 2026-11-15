@@ -1,6 +1,6 @@
 title: Reading, math and finishing school as an adult
 slug: adult-skills
-summary: About 1 in 6 adults in Mon County read at the lowest level on a national skills test, and about 1 in 4 do math at that level. About 3,900 adults 25 and older have no high school diploma. The county does better than West Virginia on both, and free classes and tutoring exist here.
+summary: About 1 in 6 adults in Mon County read at the lowest level on a national skills test, and about 1 in 4 do math at that level. About 3,900 adults 25 and older have no high school diploma. The county's share of adults with a diploma is higher than West Virginia's, and free classes and tutoring exist here.
 evidence:
   - url: https://nces.ed.gov/surveys/piaac/skillsmap/
     checked: 2026-11-14
@@ -38,18 +38,23 @@ working_on:
   - org: morgantown-public-library-system
   - org: workforce-west-virginia
 gaps:
-  - No one page walks an adult through the steps to a high school equivalency diploma, from the first class to the free test.
   - The county's reading and math estimates are from surveys done from 2012 to 2017, so how many adults need help today is not known.
 topics: [work, family]
 rank: 13
 rank_why: "Score 9 of 12: severity 2, reach 3 (16% of adults read at the lowest level), agreement 2 (the two measures are separate, but the newest county skills estimate is from 2012 to 2017 and the hospital assessment names education only together with jobs, for six counties), room to help 2 (free classes and tutoring exist, but a website reaches adults who read with difficulty mostly through the people who help them). Last among the 9s because it had the fewest 211 requests."
 questions: [q78]
 get_help:
+  - path: /high-school-equivalency/
+    label: Finish high school as an adult, step by step
   - path: /work-and-learning/
     label: Finish high school, learn English, or get reading help
   - path: /keep-learning/
     label: Free online lessons and classes with a library card
 site_coverage:
-  level: partial
-  why: Work and learning and Keep learning list the county's adult education site, free reading tutoring and library lessons. No page walks through the steps to a high school equivalency diploma, from the first class to the free test.
+  level: good
+  why: Finish high school as an adult walks through the steps to a high school equivalency diploma. Work and learning and Keep learning list the county's adult education site, free reading tutoring and library lessons.
   checked: 2026-11-14
+  before:
+    level: partial
+    checked: 2026-11-14
+    why: No page walked through the steps to a high school equivalency diploma.

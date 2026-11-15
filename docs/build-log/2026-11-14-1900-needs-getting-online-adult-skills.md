@@ -14,3 +14,5 @@ This PR waits for David: the moved needs include housing (people without a place
 Sprint wave 18, new needs lane (#529).
 
 Site search: the new question "how do I get internet if I can't afford it" first missed `/internet/` (the page never says "afford", and `/needs/` came first). Two "Also called" entries on `/internet/` in `content/also-called.yaml` ("help paying for internet", "can't afford internet") fixed it; both describe the page's Lifeline section. Run saved as `content/findability/search-runs/2026-11-14-1933.json`: 295 of 300 (98.3%), all 52 question searches in the top 3.
+
+Update after review: #1936 merged (`/high-school-equivalency/`), so the adult skills need now lists that page first, drops the gap it filled, and is re-rated from partial to good (the earlier rating stays in `before`). The summary no longer says the county beats the state on reading and math, since the evidence has a state comparison only for the diploma rate.
