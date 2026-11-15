@@ -13,6 +13,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { CONTENT_DIR } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
+import YAML from 'yaml';
 export const page = { door: "community", topic: "community", label: "This week in Mon County", summary: "What is coming up, public meetings, ways to help, where help is thin, and what changed on this site" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const today = todayYmd();
@@ -34,6 +35,8 @@ const newFrom = [weekAgo, (() => { const d = new Date(`${firstCopy}T12:00:00Z`);
 const newOnes = newSince(meetings, newFrom).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 15);
 const gapFiles = fs.readdirSync(path.join(CONTENT_DIR, 'gaps')).filter((f) => f.endsWith('.yaml')).map((f) => loadGaps(f.replace(/\.yaml$/, ''))).filter((g) => g && !LEFT_OUT.includes(g.topic));
 const gaps = gapFiles.flatMap((g) => g.gaps.map((x) => ({ ...x, checked: ymd(x.checked) })));
+// Morgantown 311 totals, copied by hand from the weekly run (#1078).
+const t311 = YAML.parse(fs.readFileSync(path.join(CONTENT_DIR, 'totals', 'morgantown-311.yaml'), 'utf8'));
 const fixes = loadDir('corrections').map((c) => ({ ...c, date: ymd(c.date) })).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
 const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${prettyDate(e.starts)} to ${prettyDate(e.ends)}`);
 ---
@@ -47,6 +50,7 @@ const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${
       <li><a href="#meetings">Public meetings</a></li>
       <li><a href="#help">Ways to help</a></li>
       <li><a href="#thin">Where help is thin</a></li>
+      <li><a href="#reported">Problems reported to the city</a></li>
       <li><a href="#changed">What changed on this site</a></li>
     </ul>
   </nav>
@@ -82,6 +86,11 @@ const when = (e) => (e.starts === e.ends || !e.ends ? prettyDate(e.starts) : `${
     <ul>{gaps.map((g) => <li><strong>{g.what}.</strong>{' '}{g.why} <span class="meta">Last looked {prettyDate(g.checked)}.</span></li>)}</ul>
   ) : <p>Nothing on file yet.</p>}
   <p>Know a group we missed? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+
+  <h2 id="reported">Problems reported to the city</h2>
+  <p>From {prettyDate(ymd(t311.window_from))} to {prettyDate(ymd(t311.window_to))}, people sent {t311.all_requests.opened.toLocaleString('en-US')} requests to Morgantown 311. By {prettyDate(ymd(t311.counted))}, the city had marked {t311.all_requests.closed.toLocaleString('en-US')} of them closed. For street maintenance and potholes, it was {t311.potholes_and_streets.closed} of {t311.potholes_and_streets.opened}.</p>
+  <p>Closed means the city marked the request closed. It does not always mean the problem is fixed. {t311.credit} <span class="meta">Counted {prettyDate(ymd(t311.counted))} by <a href={t311.run}>our weekly count</a> and copied here by hand, so it is not updated every day.</span></p>
+  <p>To report a problem in the city: <a href={t311.report_url}>Morgantown 311</a>.</p>
 
   <h2 id="changed">What changed on this site</h2>
   {fixes.length ? (

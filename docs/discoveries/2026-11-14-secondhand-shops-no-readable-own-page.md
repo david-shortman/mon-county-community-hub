@@ -1,0 +1,8 @@
+# Several local secondhand shops and two malls have no own page a robot can read
+
+- **Found:** 2026-11-14, while reviewing listings that rest only on news or directory sources (#1827, sprint wave 17, #529)
+- **What we found:** For eight secondhand shops and three mall card shows, no owner page states hours, cost or dates in a form we may read. Gallery 304's website address (`gallery304.com`) shows a Wix "connect your domain" error page. Eloquence Antiques and Artisans' address (`eloquenceantiques.com`) redirects to a "domain for sale" page. Shiny Dome Records' own site is live but gives no address or hours. Other shops post only on Instagram or Facebook, which robots cannot read. Morgantown Mall's site answers `/robots.txt` with a web page, so under our [automated reads rule](../operations/automated-reads.md) nothing there is read. No Mountaineer Mall site was found.
+- **Evidence:** read 2026-11-14 with the repo's robots.txt check: `https://www.gallery304.com/` (HTTP 404, "ConnectYourDomain Error | Wix.com"), `https://www.eloquenceantiques.com/` (redirects to a GoDaddy "forsale" page), `https://www.shinydomerecords.com/` (home page text: "THE RECORD SHOP YOUR MOTHER WARNED YOU ABOUT", no address or hours), `https://www.morgantownmall.com/robots.txt` (a web page, not a robots.txt).
+- **Why it matters:** the only public places that list these shops' hours or these shows' times are news stories and listing sites, and those disagree with each other. A resident cannot confirm the hours without visiting or calling.
+- **Who keeps it:** each shop and show organizer, and the malls' managers.
+- **Status:** open. Hours and costs left off the site. Tracked in #1898 and #1903.

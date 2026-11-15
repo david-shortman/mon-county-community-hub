@@ -5,6 +5,7 @@
 // on 2026-10-31. Left off until a person confirms them (#1228): whether DCR
 // gives the free temporary ID that state law allows before release, and
 // whether Medicaid's approved pre-release services have started.
+// DCR's Reentry Planner workbook added 2026-11-14 (#215, sprint wave 16).
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import { resource } from '../lib/content.mjs';
@@ -39,10 +40,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>Ready to register? See <a href={`${base}/vote/#register`}>register to vote</a>.</p>
 
   <h2 id="record">Work and your record</h2>
+  <ResourceCard r={resource('wvdcr-reentry-planner')} />
   <ul>
     <li><a href={`${base}/work-and-learning/`}>Work with a record</a>: federal bonding, and Jobs &amp; Hope West Virginia.</li>
     <li><a href={`${base}/legal-help/#record`}>Clear a record</a>: expungement forms and free legal help.</li>
   </ul>
 
-  <p class="meta">Sources checked October 31, 2026. This page says where to go. It is not legal advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 31 to November 14, 2026. This page says where to go. It is not legal advice. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

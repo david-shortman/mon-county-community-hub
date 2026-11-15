@@ -17,7 +17,8 @@
       "sources[].name",
       "sources[].method",
       "sources[].fetched",
-      "sources[].feed"
+      "sources[].feed",
+      "sources[].quote"
     ],
     "resources": [
       "title",
@@ -44,7 +45,8 @@
       "sources[].name",
       "sources[].method",
       "sources[].fetched",
-      "sources[].feed"
+      "sources[].feed",
+      "sources[].quote"
     ],
     "calendar": [
       "title",
@@ -73,7 +75,8 @@
       "feed.fetched",
       "sources[].method",
       "sources[].fetched",
-      "sources[].feed"
+      "sources[].feed",
+      "sources[].quote"
     ],
     "corrections": [
       "id",
@@ -152,6 +155,7 @@
       "sources[].method",
       "sources[].fetched",
       "sources[].feed",
+      "sources[].quote",
       "agenda_first_seen",
       "minutes_first_seen"
     ],

@@ -17,8 +17,10 @@ facilities:
       seats: 20
   gym: true
   other: [aquatic center, ice pavilion]
-regular:
-  - Sports complex open Monday to Saturday 8 a.m. to 8 p.m., Sunday 10 a.m. to 9 p.m.
+opening_hours:
+  - days: [mon, tue, wed, thu, fri, sat, sun]
+    opens: "08:00"
+    closes: "20:00"
 membership:
   dues: MyPark Pass $25 a month, or $75 a month for a family of 5
   covers: Members get 10% off private room rentals
@@ -45,14 +47,16 @@ contact:
   place: 500 Mylan Park Lane, Morgantown, WV
 status: active
 last_activity_seen: 2026-10-30
+notes:
+  - The hours are for the Hazel and J.W. Ruby Community Center sports complex. Mylan Park says it is closed on New Year's Day, Easter, Independence Day, Thanksgiving Day and Christmas Day.
 sources:
   - url: https://mylanpark.org/event-complex/
-    checked: 2026-11-01
+    checked: 2026-11-14
   - url: https://mylanpark.org/contact-us/
     checked: 2026-11-01
   - url: https://mylanpark.org/memberships/
     checked: 2026-11-01
   - url: https://mylanpark.org/sports-complex-rooms/
-    checked: 2026-11-01
+    checked: 2026-11-14
   - url: https://mylanpark.org/facility-hours/sportscomplex/
-    checked: 2026-11-01
+    checked: 2026-11-14

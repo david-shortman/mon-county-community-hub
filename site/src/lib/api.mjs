@@ -35,6 +35,7 @@ const SOURCES = {
       method: str('How the facts were read: hand (a person or agent read the page), feed (from the publisher\'s own feed) or watched-page (read from the page by a program)', { enum: ['hand', 'feed', 'watched-page'] }),
       fetched: str('When a program read the feed (UTC); only for feed records', { format: 'date-time' }),
       feed: str('Which feed, by id; only for feed records'),
+      quote: str('A few words copied from the page at the last re-read, showing it was read again'),
     },
   },
 };

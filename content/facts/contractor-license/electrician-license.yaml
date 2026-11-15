@@ -1,0 +1,11 @@
+slug: electrician-license
+text: "The **West Virginia State Fire Marshal's Office**, Regulatory and Licensing Division, licenses electricians. State law lists master, journeyman and temporary electrician licenses, plus specialty licenses ([WV Code 29-3B-4](https://code.wvlegislature.gov/29-3B-4/))."
+quote: "the following classes of license may be issued by the State Fire Marshal: master electrician license, journeyman electrician license, and temporary electrician license. Additional classes of specialty electrician license may be issued"
+sources:
+  - url: https://code.wvlegislature.gov/29-3B-4/
+    name: West Virginia Code §29-3B-4
+    checked: 2026-11-14
+  - url: https://firemarshal.wv.gov/regulatory-and-licensing-division
+    name: Office of the State Fire Marshal, Regulatory and Licensing Division
+    checked: 2026-11-14
+recheck_days: 365

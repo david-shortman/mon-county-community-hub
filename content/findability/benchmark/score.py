@@ -11,6 +11,7 @@ the "Source benchmark" section of docs/scoreboard.md. Needs PyYAML.
 """
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 import yaml
 
@@ -110,6 +111,59 @@ def summarize(run):
     return out
 
 
+def lower_tier_hosts(content_dir):
+    """News and directory hosts from content/source-tiers.yaml (#1092)."""
+    p = content_dir / "source-tiers.yaml"
+    if not p.exists():
+        return set()
+    tiers = yaml.safe_load(p.read_text()) or {}
+    return {e["host"] for group in ("news", "directory", "directories") for e in tiers.get(group) or []}
+
+
+def second_hand_facts(run, hosts):
+    """Facts checked against a second-hand page instead of the provider's own (#1050).
+
+    A fact counts as second-hand when its URL is on a news or directory site,
+    or is one of the benchmark's own sources other than `official` (our page,
+    the guide, the city list): those are lists about providers, not the provider.
+    """
+    out = []
+    for need in run.get("needs") or []:
+        lists = {(s.get("url") or "").split("#")[0] for s in need["sources"] if s.get("kind") != "official"}
+        for s in need["sources"]:
+            for f in s.get("facts") or []:
+                url = f.get("url") or ""
+                host = urlparse(url).hostname or ""
+                if url.split("#")[0] in lists or any(host == h or host.endswith("." + h) for h in hosts):
+                    out.append(f"{need['id']} {s['name']}: {url}")
+    return out
+
+
+def journey_minutes(j):
+    """Rough minutes: 15 seconds a tap, 200 words a minute, 5 minutes a call."""
+    return round(j["taps"] * 0.25 + j.get("words", 0) / 200 + 5 * j.get("calls", 0), 1)
+
+
+def print_journeys(run):
+    rows = run.get("journeys") or []
+    if not rows:
+        return
+    print("\nWhole journey (taps, sites, calls, minutes):")
+    for r in rows:
+        parts = []
+        for start in ("from_search", "from_home"):
+            j = r.get(start)
+            if not j:
+                parts.append(f"{start}: not run")
+            elif j.get("scored") is False:
+                parts.append(f"{start}: not scored")
+            else:
+                m = journey_minutes(j)
+                flag = "" if j.get("minutes") in (None, m) else f" (file says {j['minutes']})"
+                parts.append(f"{start}: {j['taps']} taps, {j['sites']} sites, {j.get('calls', 0)} calls, {m} min{flag}")
+        print(f"  {r['id']}: " + "; ".join(parts))
+
+
 def main(path):
     path = Path(path)
     run = yaml.safe_load(path.read_text())
@@ -140,8 +194,16 @@ def main(path):
                  for k, r in s.items() if k in prev and (prev[k]["card"] != r["card"] or prev[k]["bar"] != r["bar"])]
         print(f"\nSince {runs[-1].stem}: " + ("; ".join(moved) if moved else "no change"))
 
+    print_journeys(run)
+
+    # Every fact is checked against the provider's own page (#1050).
+    content_dir = next((p.parent for p in path.resolve().parents if p.name == "findability"), None)
+    if content_dir:
+        for f in second_hand_facts(run, lower_tier_hosts(content_dir)):
+            print(f"note: fact checked against a second-hand page, use the provider's own page: {f}")
+
     # Our page should match the latest findability run's hub_page.
-    find = sorted((path.parent.parent).glob("20*.yaml"))
+    find = sorted(content_dir.joinpath("findability").glob("20*.yaml")) if content_dir else []
     if find:
         latest = {r["id"]: r.get("hub_page") for r in yaml.safe_load(find[-1].read_text())["results"]}
         for need in run["needs"]:

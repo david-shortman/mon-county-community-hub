@@ -91,3 +91,38 @@ entries:
     url: https://www.cheatlakefire.org/events
     checked: 2026-10-31
     note: Embedded Google Calendar, same as Smithtown. Public events only; skip rentals and anything marked private.
+
+  - name: Mylan Park sports complex hours
+    kind: page
+    url: https://mylanpark.org/facility-hours/sportscomplex/
+    start: Morgantown, WV 26501 Hours
+    end: All rights reserved
+    quote: "Monday – Friday: 8a – 8p"
+    checked: 2026-11-14
+    note: Hours and holiday closures for the Hazel and J.W. Ruby Community Center. The place record had older weekend hours until 2026-11-14.
+
+  - name: The Shack Neighborhood House rentals
+    kind: page
+    url: https://the-shack.org/rentals/
+    start: Book your next party
+    end: Give us a call
+    quote: Gym rentals are $200
+    checked: 2026-11-14
+    note: Gym and pool rental prices. The office hours are in the page footer, outside this part.
+
+  - name: Mon County Center rentals
+    kind: page
+    url: https://www.monongaliacounty.gov/departments/mon_county_center/facility_rentals.php
+    start: Community Meets Here
+    end: Online Information and Resources
+    quote: Contact the Events Coordinator for pricing
+    checked: 2026-11-14
+    note: No prices are published. When the quote goes away, read the page for prices.
+
+  - name: Smithtown Community and Senior Center rentals
+    kind: page
+    url: http://www.smithtowncommunity.com/facility-use.html
+    start: Facility Use The Smithtown
+    end: Copyright
+    quote: The rental fee for building use is $150.00
+    checked: 2026-11-14

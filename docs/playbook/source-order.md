@@ -50,7 +50,7 @@ The report found 21 of 847 listings resting only on news or directory sources:
 - **13 calendar entries** (top tier by the rubric, since every `calendar/` entry is). 8 are Westside and Arnettsville events from Dominion Post stories, which fit the one-time event row above. 5 are craft and card shows from event listing sites (FestivalNet, Treasure Hunter). Those need the organizer's or the venue's own page, or they come off when their dates pass.
 - **8 secondhand shops** whose only sources are Morgantown Magazine, The Daily Athenaeum, WDTV or Dominion Post stories. Their hours and address should come from the shop's own page. If a shop has none, a person can check it on the secondhand checklist.
 
-Run the report again for the current list. The review itself is open as an issue linked from #1092.
+Run the report again for the current list. The review was done on November 14, 2026 in #1827: owner or office pages were added for 10 calendar entries, hours and costs that rested only on news or listing sites were taken off, and the rest are tracked in #1898 (shop hours) and #1903 (mall card shows).
 
 ## Sources checked
 

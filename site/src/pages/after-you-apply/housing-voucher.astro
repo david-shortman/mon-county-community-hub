@@ -9,6 +9,7 @@
 // needs-verification issue #1213. Housing page: the PR waits for
 // David.
 import Base from '../../layouts/Base.astro';
+import WhoSetsRules from '../../components/WhoSetsRules.astro';
 import ResourceCard from '../../components/ResourceCard.astro';
 import SourceLine from '../../components/SourceLine.astro';
 import { resource } from '../../lib/content.mjs';
@@ -113,5 +114,7 @@ const ok = (r) => r && !r.hidden;
   <p>Call FMHA with questions about your application or your place on the list. Legal Aid of West Virginia helps with housing problems. 211 can point you to rent help and other local help. For renting rights, see <a href={`${base}/renting/`}>Renting a home</a>.</p>
   {ok(legal) && <ResourceCard r={legal} />}
   {ok(r211) && <ResourceCard r={r211} />}
+  <WhoSetsRules need="housing-costs" />
+
   <p class="meta">We describe FMHA's steps and the federal rules. FMHA decides who gets help. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>

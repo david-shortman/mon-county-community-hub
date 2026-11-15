@@ -11,6 +11,7 @@ import BigChoices from '../components/BigChoices.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import FromPdf from '../components/FromPdf.astro';
 import SourceLine from '../components/SourceLine.astro';
+import ComplaintJourney from '../components/ComplaintJourney.astro';
 import { resource } from '../lib/content.mjs';
 import { pdfPage } from '../lib/pdf-pages.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -20,7 +21,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const noiseSources = [{ url: 'https://www.morgantownwv.gov/165/Noise-Ordinance', name: 'City of Morgantown (page not found on November 10, 2026)', checked: '2026-10-31' }];
 const cityCode = 'https://library.municode.com/wv/morgantown/codes/code_of_ordinances';
 ---
-<Base title="Noise rules in Morgantown, WV: quiet hours and complaints" description="Morgantown's noise rules in plain words: quiet hours, the $20 party waiver, fines up to $500, and what happens after you report a property problem to Code Enforcement.">
+<Base title="Noise rules and quiet hours in Morgantown, WV" description="Morgantown's noise rules in plain words: quiet hours, the $20 party waiver, fines up to $500, and what happens after you report a property problem to Code Enforcement.">
   <h1>Noise and neighbor problems</h1>
   <p class="lede">Check the quiet hours below to see what Morgantown's noise rules allow and when. Planning a loud party? You can apply to the city for a waiver. For a run-down or unsafe property, see how to report it and what happens next.</p>
   {/* Lead block (#199): the four things most people come here for. */}
@@ -79,6 +80,7 @@ const cityCode = 'https://library.municode.com/wv/morgantown/codes/code_of_ordin
 
   <h2 id="property">Property problems</h2>
   <p>Tall grass, trash, or a building that is falling apart? See <a href={`${base}/make-it-better/report/`}>how to report a problem</a> to the city, or to the county outside city limits. Here is what the city says happens after you report.</p>
+  <ComplaintJourney sheet={d.sources[0].url} />
   <FromPdf d={d} />
 
   <p class="meta">Sources checked October 31, 2026. This page is a reading aid; the <a href={cityCode}>City Code</a> is the official version. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>

@@ -6,6 +6,7 @@
 // the DoHS office, Health Right and food pantries (no Mountain
 // Line route page names a stop at them). PRT facts are from WVU's own PRT
 // pages, read on 2026-11-02 (#598).
+import BigChoices from '../components/BigChoices.astro';
 import Base from '../layouts/Base.astro';
 import WhoSetsRules from '../components/WhoSetsRules.astro';
 import ResourceCard from '../components/ResourceCard.astro';
@@ -19,6 +20,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Base title="Getting around Morgantown without a car: Mountain Line buses" description="Ride Mountain Line buses in Morgantown and Mon County: fares and passes, free rides with a WVU ID, the Grey Line, and buses to the hospitals.">
   <h1>Getting around without a car</h1>
   <p class="lede">Mountain Line runs the public buses in Morgantown and Mon County. Most local buses stop anywhere along the route if you wave to the driver. For live bus times, use Mountain Line's <a href="https://www.busride.org/google-trip-planner">trip planner</a> or call <a href="tel:3042917433">304-291-RIDE (304-291-7433)</a>.</p>
+
+  {/* Lead block (#199): the four things most people come here for. */}
+  <BigChoices label="Getting around: start here" choices={[
+    { href: '#fares', label: 'Fares and how to ride', icon: 'receipt' },
+    { href: '#which-bus', label: 'Bus to the hospital', icon: 'health' },
+    { href: '#pittsburgh', label: 'Pittsburgh and the airport', icon: 'pin' },
+    { href: '#rides', label: 'Ride to a medical visit', icon: 'phone' },
+  ]} />
   <p>New to the bus? Walk through <a href={`${base}/getting-around/example/`}>a sample first week without a car</a>, using real routes.</p>
 
   <nav aria-label="On this page">

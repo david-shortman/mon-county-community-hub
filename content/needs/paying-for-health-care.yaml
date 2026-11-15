@@ -14,9 +14,10 @@ evidence:
     data_date: "2025"
     publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
-    checked: 2026-11-01
+    checked: 2026-11-14
     shows: The share of people under 65 with no health insurance.
     figure: "6.2% (West Virginia 7.4%, US 9.5%)"
+    data_date: "2023"
     publisher: County Health Rankings (March 2026 supplemental release)
   - url: https://bms.wv.gov/new-medicaid-rules-are-coming
     checked: 2026-10-31

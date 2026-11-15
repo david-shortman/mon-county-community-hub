@@ -3,7 +3,14 @@ slug: boparc-ice-arena
 org: boparc
 topics: [outdoors]
 who_it_is_for: "Anyone who wants to ice skate, October through February. The arena is in White Park, 1001 Mississippi Street."
-what_to_do: "Public skating times on the arena page when we checked: Wednesday noon to 2:30 p.m. and 7:15 to 9:15 p.m.; Friday noon to 2 p.m. and 7 to 9 p.m.; Saturday 1 to 3 p.m. and 7 to 9 p.m.; Sunday 1 to 3 p.m. Times change, so check the page before you go. The arena also lists learn to skate, curling and pick-up hockey."
+what_to_do: "Times change, so check the page before you go. These were the public skating times on the arena page when we checked."
+options:
+  - "Wednesday: noon to 2:30 p.m. and 7:15 to 9:15 p.m."
+  - "Friday: noon to 2 p.m. and 7 to 9 p.m."
+  - "Saturday: 1 to 3 p.m. and 7 to 9 p.m."
+  - "Sunday: 1 to 3 p.m."
+notes:
+  - "The arena also lists learn to skate, curling and pick-up hockey."
 hours: "Public skating, October to February: Wednesday noon to 2:30 p.m. and 7:15 to 9:15 p.m.; Friday noon to 2 p.m. and 7 to 9 p.m.; Saturday 1 to 3 p.m. and 7 to 9 p.m.; Sunday 1 to 3 p.m."
 contact:
   phone: "304-296-8356"

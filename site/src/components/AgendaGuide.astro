@@ -10,6 +10,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const b = BODIES[g.body];
 const H = `h${level}`;
 const H2 = `h${level + 1}`;
+// Kinds the how-to-read page explains link to its section there (#103).
+const TERM = { consent: 'consent', 'public-comment': 'comment', 'public-hearing': 'hearing', 'first-reading': 'readings', 'later-reading': 'readings', 'executive-session': 'executive-session' };
 ---
 <article class="card agenda" id={g.slug} aria-labelledby={`${g.slug}-h`}>
   <H id={`${g.slug}-h`}>{b.name}: {g.meeting}, {prettyDate(g.date)}</H>
@@ -27,7 +29,7 @@ const H2 = `h${level + 1}`;
     {g.items.map((it) => (
       <li>
         <p class="item-title">{it.number}. {it.title}</p>
-        <p><span class="kind">{KINDS[it.kind]}:</span> {it.line}</p>
+        <p><span class="kind">{TERM[it.kind] ? <a href={`${base}/meetings/how-to-read-an-agenda/#${TERM[it.kind]}`}>{KINDS[it.kind]}</a> : KINDS[it.kind]}:</span> {it.line}</p>
         {it.parts && <ul>{it.parts.map((p) => <li>{p}</li>)}</ul>}
       </li>
     ))}

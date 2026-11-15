@@ -12,6 +12,14 @@ town: Westover
 phone: 304-296-6583
 venue: westside-senior-center
 sources:
+  - url: https://www.westoverwv.org/westside-senior-center
+    checked: 2026-11-14
+    name: City of Westover, Westside Senior Center page
+    quote: "Give the Center a call at (304) 296-6583"
+  - url: https://www.dominionpost.com/2026/11/13/senior-news-15/
+    checked: 2026-11-14
+    name: Dominion Post, Senior news, November 13, 2026
+    quote: "July 2 - Mark Davis"
   - url: https://www.dominionpost.com/2026/10/30/senior-news-13
     checked: 2026-11-01
     name: Dominion Post, Senior news, October 30, 2026

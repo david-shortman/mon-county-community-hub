@@ -1,0 +1,8 @@
+slug: hvac-classes
+text: "The classes are HVAC Technician (at least 2,000 hours of HVAC work, training and experience), HVAC Residential Technician, and Technician in Training, who works only under the direct supervision of an HVAC Technician."
+quote: "HVAC Technician means a person with at least 2,000 hours of HVAC-related work, training, and experience"
+sources:
+  - url: https://labor.wv.gov/licensing/hvac-technician-certification
+    name: WV Division of Labor, HVAC Technician Certification
+    checked: 2026-11-14
+recheck_days: 365

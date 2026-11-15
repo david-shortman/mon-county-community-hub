@@ -1,10 +1,10 @@
 # The Your community door page, /community/ (#252, #462). Shape and rules:
 # see doors/care.yaml and site/src/components/DoorPage.astro. A situation
-# with no steps shows as a "Start here" link to its page. More situations
-# come as their pages ship: city or county (#20, #86), who decides (#12),
-# how we're doing (#15), small business (#19), giving and grants (#63).
+# with no steps shows as a "Start here" link to its page. The choices cover
+# what the door promises on the home page: city or county, meetings, how
+# we're doing, give or start something (content/doors.yaml hint).
 door: community
-lede: Places to gather, things to do with neighbors, and ways to make Mon County better. Pick what fits.
+lede: Places to gather, ways to have a say in city and county decisions, and ways to help. Pick what fits.
 steps: {}
 situations:
   - id: center
@@ -34,6 +34,34 @@ situations:
   - id: people
     label: Find a group that meets regularly, or a free place to sit
     page: /find-your-people/
+    steps: []
+  - id: say
+    label: Speak up at a city, county or school board meeting
+    page: /have-your-say/
+    steps: []
+  - id: agenda
+    label: See what is on a coming meeting's agenda, or read the minutes
+    page: /meetings/
+    steps: []
+  - id: who
+    label: Find out who decides something, or which office to call
+    page: /who-decides/
+    steps: []
+  - id: volunteer
+    label: Find a place to volunteer
+    page: /volunteer/
+    steps: []
+  - id: give
+    label: Check a charity before I give money
+    page: /check-a-charity/
+    steps: []
+  - id: start
+    label: Start a group, club or nonprofit
+    page: /start-a-group/
+    steps: []
+  - id: numbers
+    label: See how Mon County is doing on health, money and jobs
+    page: /how-we-are-doing/
     steps: []
 also:
   - text: Dates and deadlines

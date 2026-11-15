@@ -13,11 +13,24 @@ facilities:
       seats: 40
   kitchen: true
   outdoor: [deck and patio, park pavilion, playground, trails]
+  other: [8 bedrooms for overnight stays, game room, washer and dryer]
 rentals:
   - space: Lodge, day rental (Monday to Thursday, 8 a.m. to 10 p.m.)
     seats: 40
     kitchen: true
     price: $440 for 8 hours, then $55 an hour, plus taxes (rates updated June 2024)
+    deposit: 10% at booking, not refunded
+    book: Call BOPARC at 304-296-8356.
+    source: https://www.boparc.org/dorseys-knob-lodge.html
+  - space: Lodge, overnight (sleeps 16)
+    kitchen: true
+    price: $760 a night, 2-night minimum, plus taxes. Check in 3 p.m., check out 11 a.m.
+    deposit: 10% at booking, not refunded
+    book: Call BOPARC at 304-296-8356.
+    source: https://www.boparc.org/dorseys-knob-lodge.html
+  - space: Lodge, one week (6 nights)
+    kitchen: true
+    price: $3,250, plus $525 for each extra night, plus taxes. The stay must start Monday to Thursday
     deposit: 10% at booking, not refunded
     book: Call BOPARC at 304-296-8356.
     source: https://www.boparc.org/dorseys-knob-lodge.html
@@ -33,8 +46,14 @@ contact:
   place: 1 Fawley Lane, Morgantown, WV
 status: active
 last_activity_seen: 2026-10-30
+notes:
+  - BOPARC says the main floor is ADA accessible, with an accessible restroom and shower. The second and third floors are for overnight stays only.
+  - If you cancel 30 or more days ahead, BOPARC refunds all but the 10% deposit. From 29 to 15 days ahead, you get half back. With 14 days or less, there is no refund.
+  - BOPARC closed the restrooms in Dorsey's Knob Park for the season on November 11, 2026.
 sources:
   - url: https://www.boparc.org/dorseys-knob-lodge.html
-    checked: 2026-11-01
+    checked: 2026-11-14
   - url: https://www.boparc.org/dorseys-knob-park.html
-    checked: 2026-11-01
+    checked: 2026-11-14
+  - url: https://www.boparc.org/public-notices--parkfacility-closures.html
+    checked: 2026-11-14

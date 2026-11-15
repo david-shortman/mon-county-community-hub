@@ -1,0 +1,8 @@
+slug: plumber-license
+text: "The **West Virginia Division of Labor** licenses plumbers. Its page says that since January 1, 2009, \"no plumber may perform or offer to perform plumbing work in West Virginia without a plumber license.\" The law lists some exceptions."
+quote: "Effective January 1, 2009, no plumber may perform or offer to perform plumbing work in West Virginia without a plumber license issued by the West Virginia Division of Labor."
+sources:
+  - url: https://labor.wv.gov/licensing/plumber-certification
+    name: WV Division of Labor, Plumber Certification
+    checked: 2026-11-14
+recheck_days: 365

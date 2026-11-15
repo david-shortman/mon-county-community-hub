@@ -65,7 +65,7 @@ const html = dayMarkup(routesFromRecord(d), { checked: d.checked });
   #day-explainer .key .k-un::before { content: ""; display: inline-block; width: 0.7em; height: 0.7em; margin-right: 4px; vertical-align: -0.05em; background: var(--brick); }
 
   /* The chart */
-  #day-explainer .bd-chart { display: block; width: 100%; max-width: 520px; height: auto; margin: 0 auto; }
+  #day-explainer .bd-chart { display: block; width: 100%; max-width: 26rem; height: auto; margin: 0 auto; }
   #day-explainer .bd-chart text { font-family: var(--body, system-ui, sans-serif); }
   #day-explainer .bd-tick { font-size: 8.5px; fill: var(--muted); }
   #day-explainer .bd-grid { stroke: var(--line); stroke-width: 0.7; }
@@ -132,14 +132,21 @@ const html = dayMarkup(routesFromRecord(d), { checked: d.checked });
     #day-explainer.is-live .scrolly { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: start; }
     #day-explainer#day-explainer.is-live .stage { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); margin-top: 16px; padding: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 2px; }
   }
-  /* Phones tall enough: the chart held at the top, steps scroll under it */
-  @media (max-width: 43.99rem) and (min-height: 40rem) {
+  /* Phones: the charts use the card's full width, so their labels draw larger (#1427). */
+  @media (max-width: 43.99rem) {
+    #day-explainer .snap { margin-inline: calc(-1 * var(--s4)); padding-inline: var(--s1); border-radius: 0; }
+    #day-try .chartbox { margin-inline: calc(-1 * var(--s4)); padding-inline: var(--s1); border-radius: 0; }
+  }
+  /* Phones tall enough: the chart held at the top, steps scroll under it.
+     The chart is about 440px tall at 390px wide, so shorter screens keep a
+     still chart in each step instead (#1427). */
+  @media (max-width: 43.99rem) and (min-height: 46rem) {
     #day-explainer#day-explainer.is-live .stage { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin: 0 -8px 16px; padding: 4px 8px 6px; background: var(--card); border-bottom: 1px solid var(--line); border-radius: 0 0 2px 2px; box-shadow: 0 8px 12px -12px var(--fg); }
-    #day-explainer.is-live .days > li { scroll-margin-top: 350px; }
-    html:has(#day-explainer.is-live) { scroll-padding-top: 350px; }
+    #day-explainer.is-live .days > li { scroll-margin-top: 460px; }
+    html:has(#day-explainer.is-live) { scroll-padding-top: 460px; }
   }
   /* Short or zoomed-in phone screens keep a still chart in each step */
-  @media (max-width: 43.99rem) and (max-height: 39.99rem) {
+  @media (max-width: 43.99rem) and (max-height: 45.99rem) {
     #day-explainer.is-live .snap { display: block; }
     #day-explainer#day-explainer.is-live .stage { display: none; }
     #day-explainer.is-live .days > li { margin-bottom: 18px; }

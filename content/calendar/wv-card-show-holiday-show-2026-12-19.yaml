@@ -3,12 +3,16 @@ slug: wv-card-show-holiday-show-2026-12-19
 starts: 2026-12-19
 start_time: "10:00"
 end_time: "17:00"
-org_name: WV Card Show (listed on Treasure Hunter)
-who_it_is_for: Open to everyone. The listing does not give a cost to get in.
-what_to_do: A sports card show with vendor tables for buying, selling and trading cards, from 10 a.m. to 5 p.m. Details come from the Treasure Hunter listing.
-url: https://www.treasurehunter.show/show/wv-card-show-holiday-show-morgantown-wv-2026-12-19
-place: Mylan Park, Morgantown, WV
+org_name: BTuck Promotions (WV Card Show)
+who_it_is_for: Open to everyone. Free to get in, with free parking.
+what_to_do: A sports and Pokemon card show with over 150 vendor tables for buying, selling and trading cards and collectibles, from 10 a.m. to 5 p.m. Details come from the show's own page.
+url: https://www.wvcardshow.com/december19mylanpark
+place: Hazel and J.W. Ruby Community Center at Mylan Park, 111 Mylan Park Lane, Morgantown, WV 26501
 topics: [secondhand]
 sources:
+  - url: https://www.wvcardshow.com/december19mylanpark
+    checked: 2026-11-14
+    name: WV Card Show, December 19 show page
+    quote: "Date: Saturday, December 19, 2026 Hours: 10AM - 5PM Venue: Hazel & J.W. Ruby Community Center at Mylan Park"
   - url: https://www.treasurehunter.show/show/wv-card-show-holiday-show-morgantown-wv-2026-12-19
     checked: 2026-11-01

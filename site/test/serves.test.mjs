@@ -28,3 +28,8 @@ test('reads the issue form heading', () => {
   assert.deepEqual(servesLine('### What needs doing\n\nX\n\n### Serves\n\nshort-on-food\n\n### Why'), ['short-on-food']);
   assert.equal(servesLine('### Serves\n\n_No response_\n'), null);
 });
+
+test('keeps slugs that contain "and" whole', () => {
+  assert.deepEqual(servesLine('Serves: wages-and-cost-of-living'), ['wages-and-cost-of-living']);
+  assert.deepEqual(servesLine('Serves: drugs-and-overdose and in-crisis'), ['drugs-and-overdose', 'in-crisis']);
+});
