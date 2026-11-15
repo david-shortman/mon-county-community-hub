@@ -5,4 +5,4 @@
 - **Evidence:** robots.txt reads of the three FCC hosts on 2026-11-15 (403 each, sent as MonCountyCommunityHub); `https://help.bdc.fcc.gov/robots.txt`, read 2026-11-15 (allows `/hc/en-us/articles/`); the four help articles cited in `content/facts/internet/fcc-*.yaml`.
 - **Why it matters:** residents asking "can I get fast internet at this address?" need the FCC map, but the site can only explain how to use it, not show the answer for an address or say how current its data is.
 - **Who keeps it:** the Federal Communications Commission.
-- **Status:** open. `/internet-service-map/#fcc-map` links to the map and gives the FCC's own steps. A person checks the map each quarter (person sources checklist). The data as-of date waits on a `needs-verification` issue.
+- **Status:** open. `/internet-service-map/#fcc-map` links to the map and gives the FCC's own steps. A person checks the map each quarter (person sources checklist). The data as-of date waits on #2013 (needs-verification).

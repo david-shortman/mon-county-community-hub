@@ -69,7 +69,7 @@ items:
       that the steps on site/src/pages/internet-service-map.astro (#fcc-map)
       still match: the search box, the green, red and gray dots, Service
       Filters, the Mobile Broadband tab, and the Availability Challenge and
-      Location Challenge links. Note the map's data as-of date in #2010's
+      Location Challenge links. Note the map's data as-of date on #2013, the
       follow-up issue. The fcc-* facts in content/facts/internet/ cite the
       FCC help center, which the Source check reads.
     url: https://broadbandmap.fcc.gov/
