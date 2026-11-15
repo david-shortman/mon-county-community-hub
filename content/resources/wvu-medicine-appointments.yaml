@@ -10,6 +10,8 @@ contact:
   url_label: Book an appointment
 sources:
   - url: https://wvumedicine.org/our-care/book-appointment/
-    checked: 2026-11-02
+    checked: 2026-11-14
+    quote: "For assistance, call 855-988-2273."
   - url: https://wvumedicine.org/about-us/contact-us/
-    checked: 2026-11-02
+    checked: 2026-11-14
+    quote: "You make, cancel, or reschedule an appointment via your MyWVUChart account or contact your provider directly."

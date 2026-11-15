@@ -10,9 +10,12 @@ contact:
   place: 930 Chestnut Ridge Road, Morgantown, WV 26506
 sources:
   - url: https://wvumedicine.org/our-care/institutes/rni/departments/bmed/treatment-centers-and-clinics/
-    checked: 2026-10-31
+    checked: 2026-11-14
+    quote: "Healthy Minds – Morgantown is a network of behavioral health facilities serving Monongalia and Marion counties"
   - url: https://wvumedicine.org/our-care/institutes/rni/departments/bmed/
-    checked: 2026-10-31
+    checked: 2026-11-14
+    quote: "mental health and addiction treatment for children, adolescents, and adults"
   - url: https://988lifeline.org/
-    checked: 2026-10-31
+    checked: 2026-11-14
+    quote: "The 988 Lifeline is available 24/7/365. Your conversations are free and confidential."
     name: 988 Suicide and Crisis Lifeline
