@@ -1,0 +1,75 @@
+---
+// City rules people ask about most (#1981, #529, topic depth: local
+// government, gap 5). An index only: each line links our own page on that
+// topic, which carries its own sources and checked dates. This page restates
+// no rule. The one fact here, where the City Code lives, comes from the
+// City's Government page, read 2026-11-15. Noise rules are not restated
+// while #1782 is open.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "government", label: "Common city rules", summary: "One list of the Morgantown rules people ask about most: noise, parking, snow on sidewalks, trash, pets, burning, renting, permits and business licenses" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const cityCode = 'https://library.municode.com/wv/morgantown/codes/code_of_ordinances';
+const codeSources = [{ url: 'https://www.morgantownwv.gov/27/Government', name: 'City of Morgantown, Government page (links the City Code)', checked: '2026-11-15' }];
+const groups = [
+  { id: 'home', title: 'Around your home', rows: [
+    ['/noise/', 'Noise and quiet hours', 'Quiet hours, having a party, warnings and fines, and how to report noise.'],
+    ['/recycling/', 'Trash and recycling', 'Pickup days, what goes in the curbside bin, and where to take hard items.'],
+    ['/snow-and-ice/#city', 'Snow on streets and sidewalks', 'Who clears city streets, and the rule for clearing your sidewalk.'],
+    ['/pets/#rules', 'Pets', 'Rabies shots, dog tags and the leash law.'],
+    ['/burning/#towns', 'Burning leaves and brush', 'State burning seasons and hours, and what applies inside a city or town.'],
+  ] },
+  { id: 'parking', title: 'Parking', rows: [
+    ['/parking/', 'Parking in Morgantown', 'Meters and paying, tickets, blue curb permit streets, accessible parking and towing.'],
+  ] },
+  { id: 'housing', title: 'Renting and building', rows: [
+    ['/renting/#before', 'Renting a home', 'Checking that a rental is registered, getting repairs made, and getting your deposit back.'],
+    ['/permits/#morgantown', 'Building permits', 'How to apply inside city limits, the fees, and who to call.'],
+  ] },
+  { id: 'business', title: 'Business and selling', rows: [
+    ['/start-a-business/', 'Starting a business', 'The state registration and the city business license.'],
+    ['/selling-food/', 'Selling food', 'Which permit fits a market, an event or a food truck, and the city rule for trucks and carts.'],
+  ] },
+];
+---
+<Base title="Common city rules in Morgantown, WV: a plain list" description="The Morgantown city rules people ask about most, in one list: noise, parking, snow on sidewalks, trash, pets, burning, renting, building permits and business licenses.">
+  <h1>Common city rules</h1>
+  <p class="lede">These are the Morgantown rules people ask about most. Each link goes to our page on that topic, with the official source and the date we checked it. City rules apply inside Morgantown city limits. If you live in another town, ask your town hall.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {groups.map((g) => <li><a href={`#${g.id}`}>{g.title}</a></li>)}
+      <li><a href="#code">Read the City Code</a></li>
+    </ul>
+  </nav>
+
+  {groups.map((g) => (
+    <section id={g.id} class="rules">
+      <h2>{g.title}</h2>
+      <ul>
+        {g.rows.map(([path, label, what]) => (
+          <li><a href={`${base}${path}`}>{label}</a>: {what}</li>
+        ))}
+      </ul>
+    </section>
+  ))}
+
+  <h2 id="code">Read the City Code</h2>
+  <p>The official words of every city rule are in the <a href={cityCode}>Morgantown City Code</a>. Our pages are a reading aid. If one of our pages and the City Code disagree, the City Code is right.</p>
+  <SourceLine sources={codeSources} about="where the City Code is" />
+
+  <h2 id="more">More about local government</h2>
+  <ul>
+    <li><a href={`${base}/which-office/`}>Which office handles it?</a> City, county or state, and how to call.</li>
+    <li><a href={`${base}/who-decides/`}>Who decides what</a>: City Council and other public bodies.</li>
+    <li><a href={`${base}/who-serves-me/`}>Who serves my address?</a> Police, trash, water and streets by town.</li>
+  </ul>
+
+  <p class="meta">This page links our own pages and adds no rules of its own. Something missing or out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .rules ul { margin: var(--s2) 0; }
+  .rules li { margin: 0 0 var(--s3); }
+</style>
