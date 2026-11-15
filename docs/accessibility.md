@@ -60,6 +60,7 @@ A machine cannot tell how a page sounds or feels. These need a person with the r
    - Trend charts on `/how-we-are-doing/`: is the chart's name read, and can you reach the "See every number" table?
    - Checklists (for example `/drivers-license/`): is each box's ticked state read, and does "Clear ticks" say what it did?
    - `/stay-tonight/`: is the "Danger or crisis" region read first, and does "Leave this page" make sense out loud?
+   - The Topics explorer on `/topics/` (#2030): do the chips read as toggle buttons with "pressed", does "12 pages picked for you" get read, does Flip through read "Card 4 of 12" and keep focus inside until Close, and does each Remove in My list say which page it removes?
 2. **Real text size settings.** The checks above make text bigger with CSS. Also try iPhone Larger Text, Android font size at the largest, and the browser's own text size setting, on the home page, the Vote page and a door page.
 3. **Windows high contrast (forced colors).** Do focus rings, buttons, the crisis strip and chart lines still show?
 4. **Voice control.** With iOS Voice Control or Dragon, can you say what a button says ("Tap Call 988") and have it work?

@@ -1,5 +1,7 @@
 // Topics explorer (#2025) on /topics/: interest chips (#2027) with scripts on
-// and off, picks kept on the phone, and Back landing where you were (#1369).
+// and off, picks kept on the phone, and Back landing where you were (#1369);
+// Flip through (#2028); My list (#2029); and the explorer's promises (#2030):
+// motion off, no script, and 360 px phones.
 import { test, describe, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { setup, html, PHONE } from './lib.mjs';
@@ -244,6 +246,78 @@ describe('topics explorer', () => {
     const page = await ctx.newPage();
     await page.goto(s.origin + '/topics/');
     assert.equal(await page.locator('#my-list').isVisible(), false);
+    await ctx.close();
+  });
+
+  // #2030: one pass that proves the explorer keeps the plain page's promises.
+  const SMALL = { viewport: { width: 360, height: 640 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true };
+  const sideways = (page) => page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+
+  test('motion off by device setting: the deck has no motion and no peek', async () => {
+    const ctx = await s.browser.newContext({ ...PHONE, reducedMotion: 'reduce' });
+    await ctx.addInitScript(() => { localStorage.setItem('em-explore-picks', '["outside"]'); localStorage.removeItem('em-explore-saved'); });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    assert.equal(await page.locator('#curious [data-motion-switch]').isVisible(), false, 'the switch hides when the device already reduces motion');
+    assert.ok(await page.locator('#curious [data-motion-note]').isVisible(), 'and a note says why');
+    await page.locator('#curious [data-flip]').click();
+    assert.equal(await page.locator('.fd-peek').isVisible(), false);
+    await page.locator('#flip-deck [data-fd="save"]').click();
+    assert.match(await page.locator('#fd-count').textContent(), /^2 of/, 'the next card appears at once');
+    assert.equal(await page.locator('#fd-card').evaluate((el) => getComputedStyle(el).transitionDuration), '0s');
+    await ctx.close();
+  });
+
+  test('"Turn off motion" on /topics/ stops the deck motion, and stays off', async () => {
+    const ctx = await s.browser.newContext(PHONE);
+    await ctx.addInitScript(() => { if (!sessionStorage.getItem('seeded')) { localStorage.setItem('em-explore-picks', '["outside"]'); localStorage.removeItem('em-motion-off'); sessionStorage.setItem('seeded', '1'); } });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    const sw = page.locator('#curious [data-motion-switch]');
+    assert.equal(await sw.textContent(), 'Turn off motion');
+    await sw.click();
+    assert.equal(await sw.textContent(), 'Turn on motion');
+    await page.reload();
+    assert.equal(await page.evaluate(() => document.documentElement.hasAttribute('data-motion-off')), true);
+    await page.locator('#curious [data-flip]').click();
+    assert.equal(await page.locator('.fd-peek').isVisible(), false, 'no stack peek');
+    await page.keyboard.press('ArrowLeft');
+    assert.match(await page.locator('#fd-count').textContent(), /^2 of/, 'no fly-off wait');
+    await ctx.close();
+  });
+
+  test('scripts off: no empty boxes or dead buttons, and every chip link works', async () => {
+    const ctx = await s.browser.newContext({ ...SMALL, javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    assert.equal(await page.locator('main button:visible').count(), 0, 'no buttons that need a script');
+    for (const id of ['#picked', '#my-list', '#explore-bar', '#flip-deck']) assert.equal(await page.locator(id).isVisible(), false, `${id} hidden`);
+    assert.ok(await page.locator('#help-now').isVisible() && await page.locator('#a-to-z').isVisible(), 'Help now and the A to Z show');
+    const hrefs = await page.locator('#curious a.ec-chip').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    assert.equal(hrefs.length, 20);
+    for (const h of hrefs) assert.equal((await page.request.get(s.origin + h)).status(), 200, h);
+    assert.ok(await sideways(page) <= 0, 'no sideways scroll');
+    await ctx.close();
+  });
+
+  test('360 px phone: no sideways scroll with picks, My list or the deck, and the deck fits', async () => {
+    const ctx = await s.browser.newContext(SMALL);
+    await ctx.addInitScript(() => { localStorage.setItem('em-explore-picks', '["new","say","older"]'); localStorage.setItem('em-explore-saved', '["/parks/","/grow/","/vote/"]'); });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    assert.ok(await sideways(page) <= 0, 'no sideways scroll with picks and My list');
+    for (const height of [640, 560]) { // address bar hidden, then showing
+      await page.setViewportSize({ width: 360, height });
+      await page.locator('#curious [data-flip]').click();
+      const box = await page.locator('#flip-deck').boundingBox();
+      assert.ok(box.width <= 360 && box.height <= height + 1, `deck fits ${height}`);
+      for (const b of ['[data-fd="save"]', '[data-fd="skip"]', '#fd-open', '.fd-top [data-fd="close"]']) {
+        const r = await page.locator(`#flip-deck ${b}`).boundingBox();
+        assert.ok(r && r.y >= 0 && r.y + r.height <= height + 1, `${b} on screen at ${height}`);
+      }
+      assert.ok(await sideways(page) <= 0, `no sideways scroll with the deck open at ${height}`);
+      await page.keyboard.press('Escape');
+    }
     await ctx.close();
   });
 });
