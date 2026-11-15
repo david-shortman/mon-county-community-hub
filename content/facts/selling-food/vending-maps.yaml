@@ -1,0 +1,8 @@
+slug: vending-maps
+text: "The city's page has maps it used to decide which parking spaces can be used for vending permits."
+quote: "These maps were used to determine valid parking spaces for vending permitting."
+sources:
+  - url: https://www.morgantownwv.gov/256/Vending-Downtown
+    checked: 2026-11-14
+    name: City of Morgantown, Vending Downtown
+recheck_days: 180
