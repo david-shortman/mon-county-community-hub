@@ -1,49 +1,9 @@
 {
   "generated_by": "Made by site/src/lib/feeds/index.mjs. Do not edit by hand: rebuild with `npm run update-feeds` in site/.",
   "id": "mylan-park",
-  "feed_url": "https://mylanpark.org/wp-json/tribe/events/v1/events?per_page=50&start_date=2026-10-30",
-  "fetched": "2026-10-31T00:18:02.984Z",
+  "feed_url": "https://mylanpark.org/wp-json/tribe/events/v1/events?per_page=50&start_date=2026-11-14",
+  "fetched": "2026-11-15T03:30:20.484Z",
   "entries": [
-    {
-      "title": "WV Pickleball Championships",
-      "slug": "mylan-wv-pickleball-championships-2026-11-05",
-      "starts": "2026-11-05",
-      "ends": "2026-11-08",
-      "org_name": "Mylan Park",
-      "who_it_is_for": "Listed on the Mylan Park events calendar.",
-      "what_to_do": "At Hazel & J.W. Ruby Community Center Sports Complex, Mylan Park. See the event page for times, tickets and cost.",
-      "url": "https://mylanpark.org/event/wv-pickleball-championship/",
-      "topics": [
-        "community"
-      ]
-    },
-    {
-      "title": "Epilepsy Foundation Wallk",
-      "slug": "mylan-epilepsy-foundation-wallk-2026-11-07",
-      "starts": "2026-11-07",
-      "ends": "2026-11-07",
-      "start_time": "08:00",
-      "org_name": "Mylan Park",
-      "who_it_is_for": "Listed on the Mylan Park events calendar.",
-      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
-      "url": "https://mylanpark.org/event/epilepsy-foundation-wallk-2/",
-      "topics": [
-        "community"
-      ]
-    },
-    {
-      "title": "Showmasters Gun Show",
-      "slug": "mylan-showmasters-gun-show-2026-11-07",
-      "starts": "2026-11-07",
-      "ends": "2026-11-08",
-      "org_name": "Mylan Park",
-      "who_it_is_for": "Listed on the Mylan Park events calendar.",
-      "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
-      "url": "https://mylanpark.org/event/showmasters-gun-show/",
-      "topics": [
-        "community"
-      ]
-    },
     {
       "title": "Felix Duels Wrestling",
       "slug": "mylan-felix-duels-wrestling-2026-11-21",
@@ -73,6 +33,19 @@
       ]
     },
     {
+      "title": "Mountain Glow WV - A Holiday Walk of Lights",
+      "slug": "mylan-mountain-glow-wv-a-holiday-walk-of-lights-2026-11-27",
+      "starts": "2026-11-27",
+      "ends": "2026-12-23",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-holiday-walk-of-lights/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
       "title": "Shop Til' You Drop Craft Show",
       "slug": "mylan-shop-til-you-drop-craft-show-2026-11-28",
       "starts": "2026-11-28",
@@ -87,6 +60,20 @@
       ]
     },
     {
+      "title": "Mountain Glow WV - Santa Night",
+      "slug": "mylan-mountain-glow-wv-santa-night-2026-12-03",
+      "starts": "2026-12-03",
+      "ends": "2026-12-03",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-santa-night/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
       "title": "MouserFest: The Mouser Sports Festival",
       "slug": "mylan-mouserfest-the-mouser-sports-festival-2026-12-05",
       "starts": "2026-12-05",
@@ -96,6 +83,20 @@
       "who_it_is_for": "Listed on the Mylan Park events calendar.",
       "what_to_do": "At Hazel & J.W. Ruby Community Center Events Complex, Mylan Park. See the event page for times, tickets and cost.",
       "url": "https://mylanpark.org/event/mouserfest-sports-festival/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Mountain Glow WV - Family Night",
+      "slug": "mylan-mountain-glow-wv-family-night-2026-12-06",
+      "starts": "2026-12-06",
+      "ends": "2026-12-06",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-family-night/",
       "topics": [
         "community"
       ]
@@ -114,6 +115,20 @@
       ]
     },
     {
+      "title": "Mountain Glow WV - Santa Night",
+      "slug": "mylan-mountain-glow-wv-santa-night-2026-12-10",
+      "starts": "2026-12-10",
+      "ends": "2026-12-10",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-santa-night-2/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
       "title": "Winter Blues Farmer's Market",
       "slug": "mylan-winter-blues-farmer-s-market-2026-12-12",
       "starts": "2026-12-12",
@@ -125,6 +140,90 @@
       "url": "https://mylanpark.org/event/winter-blues-farmers-market/",
       "topics": [
         "market"
+      ]
+    },
+    {
+      "title": "Mountain Glow WV - Family Night",
+      "slug": "mylan-mountain-glow-wv-family-night-2026-12-13",
+      "starts": "2026-12-13",
+      "ends": "2026-12-13",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-family-night-2/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Mountain Glow WV - Sensory Friendly Night",
+      "slug": "mylan-mountain-glow-wv-sensory-friendly-night-2026-12-14",
+      "starts": "2026-12-14",
+      "ends": "2026-12-14",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-sensory-night/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Mountain Glow WV - Community Heroes Night",
+      "slug": "mylan-mountain-glow-wv-community-heroes-night-2026-12-15",
+      "starts": "2026-12-15",
+      "ends": "2026-12-15",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-community-heroes-night/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Mountain Glow WV - Pet Night",
+      "slug": "mylan-mountain-glow-wv-pet-night-2026-12-16",
+      "starts": "2026-12-16",
+      "ends": "2026-12-16",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-pet-night/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Mountain Glow WV - Santa Night",
+      "slug": "mylan-mountain-glow-wv-santa-night-2026-12-17",
+      "starts": "2026-12-17",
+      "ends": "2026-12-17",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-santa-night-3/",
+      "topics": [
+        "community"
+      ]
+    },
+    {
+      "title": "Mountain Glow WV - Family Night",
+      "slug": "mylan-mountain-glow-wv-family-night-2026-12-20",
+      "starts": "2026-12-20",
+      "ends": "2026-12-20",
+      "start_time": "17:30",
+      "org_name": "Mylan Park",
+      "who_it_is_for": "Listed on the Mylan Park events calendar.",
+      "what_to_do": "At Peak Health Aquatic Center & Track Complex, Mylan Park. See the event page for times, tickets and cost.",
+      "url": "https://mylanpark.org/event/mountain-glow-wv-family-night-3/",
+      "topics": [
+        "community"
       ]
     },
     {
