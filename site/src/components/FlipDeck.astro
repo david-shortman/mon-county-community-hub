@@ -44,7 +44,6 @@
   <div class="fd-end" id="fd-end" hidden>
     <h2 id="fd-end-h" tabindex="-1"></h2>
     <div class="fd-actions">
-      <a class="fd-btn" id="fd-list" href="#my-list" hidden>See My list</a>
       <button type="button" class="fd-btn" data-fd="again">Start over</button>
       <button type="button" class="fd-btn" data-fd="close">Close</button>
     </div>
@@ -137,7 +136,6 @@
       if (done) {
         $('fd-count').textContent = `${total} of ${total}`;
         $('fd-end-h').textContent = `You saved ${deckSavedCount(state)} of ${total}`;
-        ($('fd-list') as HTMLElement).hidden = !document.getElementById('my-list');
         $('fd-end-h').focus();
         $('fd-live').textContent = `Done. You saved ${deckSavedCount(state)} of ${total}.`;
         return;
@@ -195,8 +193,6 @@
       else if (what === 'again') { state = newDeck(deckRoutes()); show(); $('fd-title').focus(); }
       else act(what as 'save' | 'skip' | 'back');
     });
-    // See My list: close first, so the page underneath can scroll to it.
-    $('fd-list').addEventListener('click', () => dlg.close());
     dlg.addEventListener('close', () => { opener?.focus(); });
 
     dlg.addEventListener('keydown', (e) => {
