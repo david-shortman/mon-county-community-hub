@@ -33,8 +33,8 @@
 
 <style>
   .ml-items { padding-left: 1.4em; }
-  .ml-items li { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
-  .ml-items li a { flex: 1 1 12em; }
+  /* The list items are made by the script, so these styles are :global. */
+  .ml-items :global(li) { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 10px; margin: 4px 0; }
   .ml-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
   .ml-btn, :global(.ml-remove) { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; border: 2px solid var(--accent); border-radius: 22px; background: var(--card); color: var(--fg); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
   .ml-btn:focus-visible, :global(.ml-remove:focus-visible) { outline: 3px solid var(--accent); outline-offset: 2px; }

@@ -120,7 +120,10 @@
       const n = deckRoutes().length;
       document.querySelectorAll<HTMLElement>('[data-flip]').forEach((b) => {
         b.hidden = false;
-        b.textContent = picks.length ? `Flip through ${n} pages picked for you` : `Flip through ${n} pages to start`;
+        const full = picks.length ? `Flip through ${n} pages picked for you` : `Flip through ${n} pages to start`;
+        // The bar's button is short, so the bar stays one row on a phone; its name still says it all.
+        if (b.dataset.flip === 'short') { b.textContent = `Flip through ${n}`; b.setAttribute('aria-label', full); }
+        else b.textContent = full;
       });
     }
 
