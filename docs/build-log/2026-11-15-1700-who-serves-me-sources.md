@@ -1,6 +1,6 @@
 # Who serves my address: every row now cites a page that states it
 
-**Issue:** #2008 (sprint wave 21, address lookups, #529)
+**Issue:** #2008 (sprint wave 21, address lookups, #529). The /who-serves-me/ page edits are in #2012, which waits for David because that page names 911.
 
 Each row on /who-serves-me/ showed the first source of its record. For water, that was MUB's start service page, which names no town. We checked every row against current official pages on 2026-11-15.
 
