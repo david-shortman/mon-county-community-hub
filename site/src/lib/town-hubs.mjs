@@ -26,7 +26,7 @@ const SERVICES = {
     ['Police', 'morgantown-police-non-emergency', 'Then press 0.'],
     ['City streets', 'morgantown-streets'],
     ['Water and sewer', 'mub-start-service'],
-    ['Trash', 'mon-swa-ask-about-trash', 'We could not confirm how to start city trash pickup yet.'],
+    ['Trash', 'republic-morgantown-trash', 'Look up your pickup day by address on Republic Services\' site. We could not confirm how to start city trash pickup yet.'],
   ],
   westover: [
     ['Police', 'westover-police-non-emergency'],
