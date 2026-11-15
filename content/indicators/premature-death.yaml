@@ -1,0 +1,42 @@
+title: Premature death (years of life lost before age 75)
+slug: premature-death
+topic: health
+definition: "Years of potential life lost before age 75 per 100,000 population
+  (age-adjusted)." # County Health Rankings' own definition (v001)
+unit: number
+digits: 0 # shown as a whole number
+per: years per 100,000 people
+data_year: "2021-2023"
+release: County Health Rankings, March 2026 supplemental release
+values:
+  monongalia: 7337.676475223104
+  west_virginia: 12968.829107563753
+  united_states: 8122.8240435524785
+sources:
+  - name: County Health Rankings March 2026 supplemental data file
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
+    checked: 2026-11-14
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/chr_trends_csv_2025.csv
+    checked: 2026-11-14
+  - name: Supplemental release codebook (data years by measure)
+    url: https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf
+    checked: 2026-11-14
+  - url: https://www.countyhealthrankings.org/sites/default/files/media/document/DataDictionary_2025.xlsx
+    checked: 2026-11-14
+more: https://www.countyhealthrankings.org/health-data/west-virginia/monongalia # the human page for this county
+chr:
+  # where scripts/update-chr-indicators.mjs reads it
+  measure: v001
+  trend_name: Premature death
+  data_year: "2021-2023" # from the supplement codebook; the trends file stops at the 2025 release
+history:
+  monongalia:
+    - year: "2019-2021"
+      value: 6873.49
+    - year: "2020-2022"
+      value: 7458.56
+  west_virginia:
+    - year: "2019-2021"
+      value: 12553.95
+    - year: "2020-2022"
+      value: 13324.08
