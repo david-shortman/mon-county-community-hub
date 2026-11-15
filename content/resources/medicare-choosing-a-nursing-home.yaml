@@ -3,7 +3,14 @@ slug: medicare-choosing-a-nursing-home
 org: centers-for-medicare-and-medicaid-services
 topics: [disability, health]
 who_it_is_for: People choosing a nursing home for themselves or a family member.
-what_to_do: Medicare gives 4 steps. Research nursing homes in your area. Compare their quality on Care Compare. Visit the ones you are considering, or have someone visit for you, and take a copy of Medicare's Nursing Home Checklist. Use a new checklist for each visit. Then choose the one that best meets your needs. If you are in the hospital, ask your social worker about discharge planning as early as possible.
+what_to_do: Medicare gives 4 steps for choosing a nursing home.
+steps:
+  - Research nursing homes in your area.
+  - Compare their quality on Care Compare.
+  - Visit the ones you are considering, or have someone visit for you, and take a copy of Medicare's Nursing Home Checklist. Use a new checklist for each visit.
+  - Choose the one that best meets your needs.
+notes:
+  - If you are in the hospital, ask your social worker about discharge planning as early as possible.
 contact:
   phone: "1-800-633-4227"
   url: https://www.medicare.gov/providers-services/original-medicare/nursing-homes/choosing
