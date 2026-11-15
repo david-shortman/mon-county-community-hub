@@ -9,10 +9,15 @@ import Base from '../layouts/Base.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
-import { resource, telHref } from '../lib/content.mjs';
+import { resource } from '../lib/content.mjs';
+import Fact from '../components/Fact.astro';
+import { factsFor } from '../lib/facts.mjs';
 export const page = { door: "family", topic: "work", label: "Start a business in Star City, Granville or Westover", summary: "Which town you are in decides the local business license and B&O tax form" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '2026-11-02' }, { url: 'https://www.westoverwv.org/_files/ugd/d2114f_50052056caff40fc91000a6134690e2d.pdf', checked: '2026-11-02' }, { url: 'https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf', checked: '2026-11-02' }];
+// The Westover contact and forms lines are fact records (#122), read
+// 2026-11-14 (Eastern). The fee, rate and due-date sentence stays typed (tax).
+const fact = factsFor('business-by-town');
+const westover = [{ url: 'https://www.westoverwv.org/_files/ugd/d2114f_50052056caff40fc91000a6134690e2d.pdf', checked: '2026-11-02' }, { url: 'https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf', checked: '2026-11-02' }];
 ---
 <Base title="Start a business in Star City, Granville or Westover, Mon County, WV" description="Your town decides your business license and B&O tax form. The Star City, Granville and Westover forms and offices, and who to ask outside any town in Mon County.">
   <h1>Start a business in Star City, Granville or Westover</h1>
@@ -30,17 +35,15 @@ const westover = [{ url: 'https://www.westoverwv.org/new-businesses', checked: '
   <h2>Westover</h2>
   <article class="card resource" id="westover-new-businesses">
     <h3>Westover business forms</h3>
-    <p>The City of Westover asks new businesses to call <a href={telHref('304-296-6860')}>(304) 296-6860</a> to get started. It also asks you to read its New Business Packet. Its New Businesses page lists these forms:</p>
-    <ul>
-      <li>Business Registration Form</li>
-      <li>Business License Application</li>
-      <li>Business and Occupation (Gross Sales) Tax</li>
-      <li>Homeland Security and MECCA 9-1-1 Registration</li>
-    </ul>
-    <p>Contractor, building permit and Certificate of Occupancy forms are on the same page. The page itself does not list fees or rates, but two of the forms do. The Business License Application (dated April 27, 2023) lists a yearly fee for each kind of business, and says licenses run on a fiscal year ending June 30. The B&O tax return (revised July 1, 2024) lists the tax rates and says each return is due 30 days after the quarter ends (March 31, June 30, September 30 and December 31). Ask the city if the forms are still current before you pay. City office: 500 Dupont Road, Westover. Paperwork questions: cityofwestover@westoverwv.gov.</p>
+    <Fact f={fact('westover-get-started')} about="getting started with the City of Westover" />
+    <Fact f={fact('westover-business-forms')} about="the Westover business forms" />
+    <Fact f={fact('westover-other-forms')} about="other Westover forms" />
+    <p>The New Businesses page itself does not list fees or rates, but two of the forms do. The Business License Application (dated April 27, 2023) lists a yearly fee for each kind of business, and says licenses run on a fiscal year ending June 30. The B&O tax return (revised July 1, 2024) lists the tax rates and says each return is due 30 days after the quarter ends (March 31, June 30, September 30 and December 31). Ask the city if the forms are still current before you pay.</p>
+    <SourceLine sources={westover} about="the Westover license fees and B&O tax forms" />
+    <Fact f={fact('westover-office')} about="the Westover city office" />
+    <Fact f={fact('westover-paperwork-email')} about="Westover paperwork questions" />
     <p>Every fee and rate from the two forms, as a short list: <a href={`${base}/westover-business-license/`}>Westover business license fees and B&amp;O tax</a>.</p>
     <p><a class="btn" href="https://www.westoverwv.org/new-businesses"><span>Westover business forms</span></a></p>
-    <SourceLine sources={westover} about="Westover business forms" />
   </article>
 
   <h2>Outside any town</h2>
