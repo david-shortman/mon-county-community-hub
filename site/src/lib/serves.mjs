@@ -13,7 +13,7 @@ export function servesLine(body) {
   const form = text.match(/^#{1,6}\s*serves\s*\n+\s*(\S.*)$/im);
   const m = form ?? text.match(/^[\s>*_-]*serves\s*[:*_]+\s*(.*)$/im);
   if (!m || /^_?no response_?$/i.test(m[1].trim())) return null;
-  return m[1].split(/[,;]|\band\b/).map((s) => s.replace(/[`*_.]/g, '').trim().toLowerCase()).filter(Boolean);
+  return m[1].split(/[,;]|\s+and\s+/).map((s) => s.replace(/[`*_.]/g, '').trim().toLowerCase()).filter(Boolean);
 }
 
 // Issues that should have a "Serves:" line and do not, and lines that name
