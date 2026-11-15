@@ -1,11 +1,14 @@
 slug: appliances
-text: "**Fridges, freezers and air conditioners:** the Mountaineer Transfer Station does not take appliances that hold refrigerant unless a licensed vendor has removed the Freon and tagged the appliance. For other appliances and scrap metal, we could not find a local official page. Call the transfer station or the Solid Waste Authority to ask."
-quote: "Disposal page: \"They do not accept tires and other items which are listed in the letter. If you have questions about what they accept and how contact them at the number listed below.\" ... MTS info sheet: \"WE DO NOT ACCEPT THE FOLLOWING: ... APPLIANCES CONTAINING REFRIGERANT o EXAMPLES INCLUDE AIR CONDITIONERS, REFRIGERATORS, FREEZERS, ETC. UNLESS FREON IS REMOVED AND TAGGED BY A LICENSED VENDOR\""
+text: "**Fridges, freezers, air conditioners and dehumidifiers:** the Mountaineer Transfer Station does not take appliances that hold refrigerant (Freon) unless a licensed vendor has removed the Freon and tagged the appliance. The Solid Waste Authority's 2026 calendar says you can drop these appliances off for free at Appliance Discounters in Westover. It also says most appliance stores will haul away an old one for a small fee when you buy a new one. Ask the store before you go. For other appliances and scrap metal, we could not find a local official page. Call the transfer station or the Solid Waste Authority to ask."
+quote: "Disposal page: \"They do not accept tires and other items which are listed in the letter. If you have questions about what they accept and how contact them at the number listed below.\" ... MTS info sheet: \"WE DO NOT ACCEPT THE FOLLOWING: ... APPLIANCES CONTAINING REFRIGERANT o EXAMPLES INCLUDE AIR CONDITIONERS, REFRIGERATORS, FREEZERS, ETC. UNLESS FREON IS REMOVED AND TAGGED BY A LICENSED VENDOR\" ... SWA 2026 calendar, inside back, \"How to Recycle or Dispose of Appliances with Freon (NOT accepted at the Mountaineer Transfer Station)\": \"Appliances with freon like refrigerators, freezers, window air conditioners and dehumidifiers need to be disposed of or recycled properly. Appliances with freon can be dropped off at Appliance Discounters, in Westover, for free. Most appliance retailers will haul away an appliance for a small fee when you purchase a new one.\""
 sources:
   - url: https://www.monongaliacountyswa.com/disposal
-    checked: 2026-11-10
+    checked: 2026-11-14
     name: "Monongalia County SWA, Disposal"
   - url: https://www.monongaliacountyswa.com/_files/ugd/8af711_d3ccbfbb96ca48b7a9d24bd324a23dc3.pdf
     checked: 2026-11-10
     name: "Mountaineer Transfer Station information sheet (PDF, linked from the Disposal page)"
+  - url: https://www.monongaliacountyswa.com/_files/ugd/8af711_d57f57cbbd0d4f18b336451a1e447a4d.pdf
+    checked: 2026-11-14
+    name: "Monongalia County SWA, 2026 12-month calendar (PDF, linked from its Calendars page), More Disposal and Recycle Information page"
 recheck_days: 180
