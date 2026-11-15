@@ -1,0 +1,2119 @@
+# Persona walkthroughs, wave 20: November 15, 2026 (sprint wave 20, persona walkthroughs lane, see #529).
+# SIMULATED, NOT REAL RESIDENTS. A script and Claude walked each persona's
+# findability question on the built site at 390 by 844. Nothing here is
+# resident feedback or says what real people do.
+#
+# Tasks: tasks-personas.yaml (p01 to p32), run with --after so each task uses
+# its current landing page. p31 gained an after_path (the new Your community
+# door link); its before run used the old three-tap path.
+# Scripts: walk.js and score.py, unchanged.
+# round_4: that task's "after" total in 2026-11-03-personas-round-4.yaml.
+# before: main at 4d0a2dc, the start of this run.
+# after:  main at f3e4341 plus #2001 (new resident and remote worker pages) and
+#         #2003 (Your community door), built together. Only p20, p21 and p31 moved.
+# landing_answers: Claude's own read; carried from round 4 except p20, p21, p31.
+# wave_17_doors: the wave 17 door tasks (tasks-wave17-doors.yaml) on the same two
+#   builds. 100 of 126 both times. Wave 17 reported 104 after, but that count
+#   included the Family door PR #1904, still open for David.
+# Write-up: docs/reviews/2026-11-15-persona-walkthroughs-wave20.md
+summary:
+  before:
+    tasks: 32
+    score: 88
+    averages:
+      IA1: 2.88
+      IA2: 1.97
+      IA7: 2.69
+      PL1: 2.88
+      TR1: 2.72
+      II1: 2.75
+    dead_ends: 0
+    searches_top3: 54
+    searches: 64
+    average_taps: 1.9
+    points: 508
+    out_of: 576
+  after:
+    tasks: 32
+    score: 91
+    averages:
+      IA1: 2.94
+      IA2: 2.0
+      IA7: 2.72
+      PL1: 2.88
+      TR1: 2.91
+      II1: 2.88
+    dead_ends: 0
+    searches_top3: 55
+    searches: 64
+    average_taps: 1.9
+    points: 522
+    out_of: 576
+  round_4_after:
+    score: 87
+    points: 499
+    out_of: 576
+wave_17_doors:
+  before: 100
+  after: 100
+  out_of: 126
+  tasks:
+    p11:
+    - 17
+    - 17
+    p12:
+    - 13
+    - 13
+    p28:
+    - 15
+    - 15
+    d01:
+    - 15
+    - 15
+    d02:
+    - 14
+    - 14
+    d03:
+    - 16
+    - 16
+    d04:
+    - 10
+    - 10
+results:
+- id: p01
+  task: Where can I stay tonight if I have nowhere to go?
+  who: Nowhere to sleep tonight
+  group: null
+  need: homelessness
+  round_4: 18
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: where can I stay tonight morgantown
+      rank: 1
+      top3:
+      - /stay-tonight/
+      - /tonight/
+      - /for/renters/
+    - q: homeless shelter
+      rank: 1
+      top3:
+      - /stay-tonight/
+      - /tonight/
+      - /pets/
+    reading_grade: 3.3
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 0
+    dead_end: null
+    search:
+    - q: where can I stay tonight morgantown
+      rank: 1
+      top3:
+      - /stay-tonight/
+      - /tonight/
+      - /for/renters/
+    - q: homeless shelter
+      rank: 1
+      top3:
+      - /stay-tonight/
+      - /tonight/
+      - /pets/
+    reading_grade: 3.3
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: p02
+  task: Where can I get mental health or addiction help today?
+  who: In crisis, or scared for someone
+  group: null
+  need: mental-health-care
+  round_4: 18
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: mental health help today morgantown
+      rank: 1
+      top3:
+      - /mental-health/
+      - /care/
+      - /for/college-students/
+    - q: addiction help today
+      rank: 1
+      top3:
+      - /mental-health/
+      - /stay-tonight/
+      - /needs/
+    reading_grade: 4.3
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: mental health help today morgantown
+      rank: 1
+      top3:
+      - /mental-health/
+      - /care/
+      - /for/college-students/
+    - q: addiction help today
+      rank: 1
+      top3:
+      - /mental-health/
+      - /stay-tonight/
+      - /needs/
+    reading_grade: 4.3
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: p03
+  task: I can't pay my heating bill this winter. Where can I get help?
+  who: Shutoff notice on the power or water
+  group: renters
+  need: utility-bills
+  round_4: 18
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: help paying electric bill morgantown
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /moving-here/
+      - /money/
+    - q: water shut off help
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /money/
+      - /before-you-call/
+    reading_grade: 4.7
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: help paying electric bill morgantown
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /moving-here/
+      - /money/
+    - q: water shut off help
+      rank: 1
+      top3:
+      - /utility-bills/
+      - /money/
+      - /before-you-call/
+    reading_grade: 4.7
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: p04
+  task: I'm being evicted. Where can I get free legal help?
+  who: Behind on rent or got an eviction notice
+  group: renters
+  need: housing-costs
+  round_4: 18
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: eviction help morgantown wv
+      rank: 1
+      top3:
+      - /money/
+      - /renting/
+      - /life-events/lost-my-job/
+    - q: free lawyer eviction
+      rank: 1
+      top3:
+      - /legal-help/
+      - /renting/
+      - /money/
+    reading_grade: 3.5
+    oldest_checked_days: 17
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: eviction help morgantown wv
+      rank: 1
+      top3:
+      - /money/
+      - /renting/
+      - /life-events/lost-my-job/
+    - q: free lawyer eviction
+      rank: 1
+      top3:
+      - /legal-help/
+      - /renting/
+      - /money/
+    reading_grade: 3.5
+    oldest_checked_days: 17
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: p05
+  task: Where is a food pantry open near me this week?
+  who: Short on food this week
+  group: null
+  need: enough-food
+  round_4: 16
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: food pantry open today morgantown
+      rank: null
+      top3:
+      - /help/food/today/student/
+      - /help/food/today/other/
+      - /money/
+    - q: apply for snap
+      rank: 2
+      top3:
+      - /after-you-apply/snap/
+      - /snap/
+      - /file-today/
+    reading_grade: 3.4
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: food pantry open today morgantown
+      rank: null
+      top3:
+      - /help/food/today/student/
+      - /help/food/today/other/
+      - /money/
+    - q: apply for snap
+      rank: 2
+      top3:
+      - /after-you-apply/snap/
+      - /snap/
+      - /file-today/
+    reading_grade: 3.4
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: p06
+  task: Where can I get my taxes done for free?
+  who: Working, paycheck to paycheck, at tax season
+  group: job-seekers
+  need: wages-and-cost-of-living
+  round_4: 17
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: free tax help morgantown
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /property-tax/
+      - /after-you-apply/homestead/
+    - q: file taxes free
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /after-you-apply/homestead/
+      - /property-tax/
+    reading_grade: 3.3
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: free tax help morgantown
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /property-tax/
+      - /after-you-apply/homestead/
+    - q: file taxes free
+      rank: 1
+      top3:
+      - /free-tax-help/
+      - /after-you-apply/homestead/
+      - /property-tax/
+    reading_grade: 3.3
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: p07
+  task: I have no insurance. Where can I see a doctor for cheap or free?
+  who: No insurance, needs a doctor or medicine
+  group: null
+  need: paying-for-health-care
+  round_4: 18
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: free clinic morgantown
+      rank: 1
+      top3:
+      - /no-insurance/
+      - /dental-and-prescriptions/
+      - /mental-health/
+    - q: dentist no insurance
+      rank: 1
+      top3:
+      - /no-insurance/
+      - /dental-and-prescriptions/
+      - /care/
+    reading_grade: 5
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: free clinic morgantown
+      rank: 1
+      top3:
+      - /no-insurance/
+      - /dental-and-prescriptions/
+      - /mental-health/
+    - q: dentist no insurance
+      rank: 1
+      top3:
+      - /no-insurance/
+      - /dental-and-prescriptions/
+      - /care/
+    reading_grade: 5
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: p08
+  task: Where can I get a flu shot or COVID vaccine for free?
+  who: Wants a flu or COVID shot
+  group: null
+  need: null
+  round_4: 18
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: free flu shot morgantown
+      rank: 1
+      top3:
+      - /flu-shots/
+      - /staying-well/
+      - /care/
+    - q: covid vaccine
+      rank: 1
+      top3:
+      - /flu-shots/
+      - /care/
+      - /turning-65/
+    reading_grade: 4.7
+    oldest_checked_days: 17
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: free flu shot morgantown
+      rank: 1
+      top3:
+      - /flu-shots/
+      - /staying-well/
+      - /care/
+    - q: covid vaccine
+      rank: 1
+      top3:
+      - /flu-shots/
+      - /care/
+      - /turning-65/
+    reading_grade: 4.7
+    oldest_checked_days: 17
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: p09
+  task: My doctor says I have prediabetes. Is there a class that can help?
+  who: Just told they have prediabetes or high blood pressure
+  group: null
+  need: chronic-disease
+  round_4: 17
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: diabetes class morgantown wv
+      rank: 1
+      top3:
+      - /diabetes-and-weight/
+      - /care/
+      - /needs/
+    - q: prediabetes
+      rank: 1
+      top3:
+      - /diabetes-and-weight/
+      - /groups/mon-health-medical-center/
+      - /print/care/
+    reading_grade: 4.7
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: diabetes class morgantown wv
+      rank: 1
+      top3:
+      - /diabetes-and-weight/
+      - /care/
+      - /needs/
+    - q: prediabetes
+      rank: 1
+      top3:
+      - /diabetes-and-weight/
+      - /groups/mon-health-medical-center/
+      - /print/care/
+    reading_grade: 4.7
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: p10
+  task: I turn 65 soon. Where can I get free help choosing Medicare?
+  who: Turning 65
+  group: older-adults
+  need: paying-for-health-care
+  round_4: 17
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: medicare help morgantown wv
+      rank: 2
+      top3:
+      - /after-you-apply/medicare-savings/
+      - /turning-65/
+      - /choosing-a-care-home/
+    - q: choose a medicare plan
+      rank: 1
+      top3:
+      - /turning-65/
+      - /choosing-a-care-home/
+      - /after-you-apply/medicare-savings/
+    reading_grade: 5.2
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: medicare help morgantown wv
+      rank: 2
+      top3:
+      - /after-you-apply/medicare-savings/
+      - /turning-65/
+      - /choosing-a-care-home/
+    - q: choose a medicare plan
+      rank: 1
+      top3:
+      - /turning-65/
+      - /choosing-a-care-home/
+      - /after-you-apply/medicare-savings/
+    reading_grade: 5.2
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: p11
+  task: Is there a free or cheap ride to medical appointments for seniors?
+  who: Adult child caring for an aging parent
+  group: older-adults
+  need: transportation
+  round_4: 16
+  landing_answers: 'partly: links rides'
+  before:
+    taps: 2
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: in home care for elderly parent wv
+      rank: 2
+      top3:
+      - /caregivers/
+      - /for/older-adults/
+      - /family/
+    - q: rides for seniors to doctor
+      rank: 1
+      top3:
+      - /medical-rides/
+      - /disability-and-aging/
+      - /getting-around/example/
+    reading_grade: 5.8
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: in home care for elderly parent wv
+      rank: 2
+      top3:
+      - /caregivers/
+      - /for/older-adults/
+      - /disability-and-aging/
+    - q: rides for seniors to doctor
+      rank: 1
+      top3:
+      - /medical-rides/
+      - /disability-and-aging/
+      - /getting-around/example/
+    reading_grade: 5.8
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: p12
+  task: Where can my brother get help at home for his disability?
+  who: Person with a disability or a caregiver
+  group: disability-caregivers
+  need: transportation
+  round_4: 8
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 14
+    dead_end: null
+    search:
+    - q: disability help morgantown
+      rank: 1
+      top3:
+      - /for/disability-and-caregivers/
+      - /disability-and-aging/
+      - /after-you-apply/social-security-disability/
+    - q: help at home for disability
+      rank: 2
+      top3:
+      - /after-you-apply/homestead/
+      - /for/disability-and-caregivers/
+      - /property-tax/
+    reading_grade: 8.5
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 3
+      PL1: 1
+      TR1: 3
+      II1: 3
+    total: 13
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 14
+    dead_end: null
+    search:
+    - q: disability help morgantown
+      rank: 1
+      top3:
+      - /for/disability-and-caregivers/
+      - /disability-and-aging/
+      - /after-you-apply/social-security-disability/
+    - q: help at home for disability
+      rank: 2
+      top3:
+      - /after-you-apply/homestead/
+      - /for/disability-and-caregivers/
+      - /property-tax/
+    reading_grade: 8.5
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 0
+      IA7: 3
+      PL1: 1
+      TR1: 3
+      II1: 3
+    total: 13
+    out_of: 18
+  note: 'Not changed here. The wave 17 fix for this task is the Family door PR #1904, still open for David. On main
+    the best path is the disability starting page, 14 screens of scrolling to Help at home.'
+- id: p13
+  task: I am pregnant. How do I sign up for WIC?
+  who: Pregnant or has a new baby
+  group: parents-young-kids
+  need: child-care
+  round_4: 15
+  landing_answers: 'yes'
+  before:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: wic morgantown
+      rank: 2
+      top3:
+      - /after-you-apply/wic/
+      - /pregnant-or-new-baby/
+      - /families-and-kids/
+    - q: sign up for wic pregnant
+      rank: 1
+      top3:
+      - /pregnant-or-new-baby/
+      - /help/food/monthly/
+      - /families-and-kids/
+    reading_grade: 4.9
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: wic morgantown
+      rank: 2
+      top3:
+      - /after-you-apply/wic/
+      - /pregnant-or-new-baby/
+      - /families-and-kids/
+    - q: sign up for wic pregnant
+      rank: 1
+      top3:
+      - /pregnant-or-new-baby/
+      - /help/food/monthly/
+      - /families-and-kids/
+    reading_grade: 4.9
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: p14
+  task: How do I enroll my child in Monongalia County Schools?
+  who: Parent of a school-age kid
+  group: parents-school-age
+  need: child-care
+  round_4: 16
+  landing_answers: 'yes'
+  before:
+    taps: 4
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: enroll monongalia county schools
+      rank: 1
+      top3:
+      - /school-age/
+      - /for/parents-school-age/
+      - /life-events/separating-or-divorcing/
+    - q: register child for school
+      rank: 1
+      top3:
+      - /school-age/
+      - /families-and-kids/
+      - /kids-with-disabilities/
+    reading_grade: 2.7
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: enroll monongalia county schools
+      rank: 1
+      top3:
+      - /school-age/
+      - /for/parents-school-age/
+      - /life-events/separating-or-divorcing/
+    - q: register child for school
+      rank: 1
+      top3:
+      - /school-age/
+      - /families-and-kids/
+      - /kids-with-disabilities/
+    reading_grade: 2.7
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: p15
+  task: I am 15. Do I need a work permit for my first job?
+  who: Teen wanting a first job or a license
+  group: teens
+  need: null
+  round_4: 16
+  landing_answers: 'yes'
+  before:
+    taps: 4
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: work permit 15 year old wv
+      rank: 2
+      top3:
+      - /teen-drivers/
+      - /teens/
+      - /community/
+    - q: first job at 15
+      rank: 1
+      top3:
+      - /teens/
+      - /family/
+      - /find-a-job/
+    reading_grade: 5.2
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: work permit 15 year old wv
+      rank: 2
+      top3:
+      - /teen-drivers/
+      - /teens/
+      - /corrections/
+    - q: first job at 15
+      rank: 1
+      top3:
+      - /teens/
+      - /find-a-job/
+      - /family/
+    reading_grade: 5.2
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: p16
+  task: I am a WVU student and out of food money. Where can I get food?
+  who: WVU student who is short on money
+  group: college-students
+  need: enough-food
+  round_4: 17
+  landing_answers: 'yes'
+  before:
+    taps: 3
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: wvu food pantry
+      rank: 1
+      top3:
+      - /help/food/today/student/
+      - /money/
+      - /help/food/today/
+    - q: student out of food money
+      rank: 1
+      top3:
+      - /help/food/today/student/
+      - /for/college-students/
+      - /money/
+    reading_grade: 4
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 3
+    screens_scrolled: 1
+    dead_end: null
+    search:
+    - q: wvu food pantry
+      rank: 1
+      top3:
+      - /help/food/today/student/
+      - /money/
+      - /help/food/today/
+    - q: student out of food money
+      rank: 1
+      top3:
+      - /help/food/today/student/
+      - /for/college-students/
+      - /money/
+    reading_grade: 4
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: p17
+  task: I just lost my job. How do I file for unemployment?
+  who: Just lost a job
+  group: job-seekers
+  need: wages-and-cost-of-living
+  round_4: 15
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 9
+    dead_end: null
+    search:
+    - q: file unemployment wv
+      rank: 1
+      top3:
+      - /unemployment/
+      - /after-you-apply/unemployment/
+      - /how-we-are-doing/
+    - q: lost my job
+      rank: 9
+      top3:
+      - /life-events/lost-my-job/
+      - /life-events/losing-my-home/
+      - /life-events/
+    reading_grade: 4.9
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 9
+    dead_end: null
+    search:
+    - q: file unemployment wv
+      rank: 1
+      top3:
+      - /unemployment/
+      - /after-you-apply/unemployment/
+      - /how-we-are-doing/
+    - q: lost my job
+      rank: 9
+      top3:
+      - /life-events/lost-my-job/
+      - /life-events/losing-my-home/
+      - /life-events/
+    reading_grade: 4.9
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  note: Next lowest. 9 screens of scrolling on Unemployment. 'lost my job' ranks Unemployment 9th; the Lost my job
+    guide ranks first, which also answers.
+- id: p18
+  task: I just got out of prison. Who helps with a job and an ID?
+  who: Home from jail or prison
+  group: job-seekers
+  need: wages-and-cost-of-living
+  round_4: 16
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 8
+    dead_end: null
+    search:
+    - q: jobs for felons morgantown
+      rank: 1
+      top3:
+      - /reentry/
+      - /legal-help/
+      - /life-events/lost-my-job/
+    - q: just got out of prison id
+      rank: 1
+      top3:
+      - /reentry/
+      - /life-events/
+      - /family/
+    reading_grade: 4.6
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 8
+    dead_end: null
+    search:
+    - q: jobs for felons morgantown
+      rank: 1
+      top3:
+      - /reentry/
+      - /legal-help/
+      - /life-events/lost-my-job/
+    - q: just got out of prison id
+      rank: 1
+      top3:
+      - /reentry/
+      - /life-events/
+      - /family/
+    reading_grade: 4.6
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: p19
+  task: What license do I need to open a small business in Morgantown?
+  who: Starting a business or a trade
+  group: small-business
+  need: null
+  round_4: 15
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 12
+    dead_end: null
+    search:
+    - q: business license morgantown
+      rank: 1
+      top3:
+      - /start-a-business/
+      - /contractor-license/
+      - /business-by-town/
+    - q: free help business plan loan
+      rank: null
+      top3:
+      - /grow/
+      - /business/
+      - /credit-and-debt/
+    reading_grade: 5.8
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 12
+    dead_end: null
+    search:
+    - q: business license morgantown
+      rank: 1
+      top3:
+      - /start-a-business/
+      - /contractor-license/
+      - /business-by-town/
+    - q: free help business plan loan
+      rank: null
+      top3:
+      - /grow/
+      - /business/
+      - /credit-and-debt/
+    reading_grade: 5.3
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  note: Next lowest. 12 screens of scrolling. 'free help business plan loan' does not find Start a business in the
+    top 10; Business ranks second, which also answers.
+- id: p20
+  task: I am moving to Morgantown for remote work. Can I get fast internet?
+  who: Remote worker moving here
+  group: remote-workers
+  need: null
+  round_4: 10
+  landing_answers: 'yes: Internet where you will live is one tap away, and the library phone is on the page'
+  before:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: moving to morgantown remote work
+      rank: 2
+      top3:
+      - /moving-here/
+      - /for/remote-workers/
+      - /meet-people/example/
+    - q: fast internet
+      rank: null
+      top3:
+      - /internet/
+      - /internet-service-map/
+      - /corrections/
+    reading_grade: 4.6
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 10
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 5
+    dead_end: null
+    search:
+    - q: moving to morgantown remote work
+      rank: 1
+      top3:
+      - /for/remote-workers/
+      - /moving-here/
+      - /meet-people/example/
+    - q: fast internet
+      rank: null
+      top3:
+      - /internet/
+      - /internet-service-map/
+      - /corrections/
+    reading_grade: 4.9
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  note: 'Fixed in #2001. The remote workers page now shows the library''s phone and source line on Library Wi-Fi,
+    and its internet link goes to the state map of internet service. ''fast internet'' still ranks Internet at home
+    first, which is the right answer, so that search does not count for this landing.'
+- id: p21
+  task: When is trash and recycling pickup on my street?
+  who: Just moved here
+  group: new-residents
+  need: null
+  round_4: 9
+  landing_answers: 'partly: no official list of pickup days by street; the Solid Waste Authority phone is now on
+    the page'
+  before:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: morgantown trash pickup
+      rank: 5
+      top3:
+      - /recycling/
+      - /moving-here/
+      - /who-serves-me/
+    - q: recycling pickup day
+      rank: 6
+      top3:
+      - /recycling/
+      - /moving-here/
+      - /living-here/
+    reading_grade: 4.6
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 1
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 9
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: morgantown trash pickup
+      rank: 4
+      top3:
+      - /recycling/
+      - /moving-here/
+      - /who-serves-me/
+    - q: recycling pickup day
+      rank: 3
+      top3:
+      - /recycling/
+      - /moving-here/
+      - /for/new-to-mon-county/
+    reading_grade: 4.8
+    oldest_checked_days: 14
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  note: 'Fixed in #2001. The trash pickup link now says we could not find a public list of pickup days by street
+    and shows the Solid Waste Authority phone and source line. Still partly answered: we could not find an official page
+    that lists pickup days by street (the pickup-days fact), and whether the Solid Waste Authority can tell a caller their day is
+    open in #901.'
+- id: p22
+  task: My landlord will not fix the heat. What can I do?
+  who: Renter with a repair or deposit problem
+  group: renters
+  need: housing-costs
+  round_4: 17
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: landlord won't fix morgantown
+      rank: 1
+      top3:
+      - /renting/
+      - /living-here/
+      - /legal-help/
+    - q: no heat landlord
+      rank: 1
+      top3:
+      - /renting/
+      - /file-today/
+      - /for/renters/
+    reading_grade: 5.5
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: landlord won't fix morgantown
+      rank: 1
+      top3:
+      - /renting/
+      - /living-here/
+      - /legal-help/
+    - q: no heat landlord
+      rank: 1
+      top3:
+      - /renting/
+      - /file-today/
+      - /for/renters/
+    reading_grade: 5.5
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: p23
+  task: How do I get a permit for a new septic system?
+  who: Rural homeowner
+  group: homeowners
+  need: null
+  round_4: 15
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 8
+    dead_end: null
+    search:
+    - q: septic permit monongalia county
+      rank: 1
+      top3:
+      - /septic-and-wells/
+      - /health-department-fees/
+      - /home-sale-septic-check/
+    - q: new septic system
+      rank: 1
+      top3:
+      - /septic-and-wells/
+      - /home-sale-septic-check/
+      - /for/homeowners/
+    reading_grade: 6.4
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 8
+    dead_end: null
+    search:
+    - q: septic permit monongalia county
+      rank: 1
+      top3:
+      - /septic-and-wells/
+      - /health-department-fees/
+      - /home-sale-septic-check/
+    - q: new septic system
+      rank: 1
+      top3:
+      - /septic-and-wells/
+      - /home-sale-septic-check/
+      - /for/homeowners/
+    reading_grade: 6.4
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  note: Next lowest. 8 screens of scrolling; reading grade 6.4.
+- id: p24
+  task: The power is out after a storm. Who do I call and where can I get warm?
+  who: After a storm, power out or flooding
+  group: homeowners
+  need: null
+  round_4: 16
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: power outage morgantown
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /weather-alerts/
+      - /snow-and-ice/
+    - q: warming center power out
+      rank: 4
+      top3:
+      - /
+      - /holidays/
+      - /needs/
+    reading_grade: 3
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: power outage morgantown
+      rank: 1
+      top3:
+      - /after-a-storm/
+      - /weather-alerts/
+      - /snow-and-ice/
+    - q: warming center power out
+      rank: 4
+      top3:
+      - /
+      - /holidays/
+      - /needs/
+    reading_grade: 3
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: p25
+  task: Where can I get an interpreter for a doctor visit?
+  who: Reads another language best
+  group: new-residents
+  need: null
+  round_4: 16
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: interpreter morgantown
+      rank: 1
+      top3:
+      - /help-in-your-language/
+      - /legal-help/
+      - /corrections/
+    - q: interpreter doctor visit
+      rank: 1
+      top3:
+      - /help-in-your-language/
+      - /life-events/new-to-the-country/
+      - /life-events/
+    reading_grade: 7.1
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: interpreter morgantown
+      rank: 1
+      top3:
+      - /help-in-your-language/
+      - /legal-help/
+      - /corrections/
+    - q: interpreter doctor visit
+      rank: 1
+      top3:
+      - /help-in-your-language/
+      - /life-events/new-to-the-country/
+      - /life-events/
+    reading_grade: 7.1
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 2
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: p26
+  task: Where is the VA clinic and how do I sign up for care?
+  who: Veteran looking for care or benefits
+  group: veterans
+  need: null
+  round_4: 18
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: va clinic morgantown
+      rank: 1
+      top3:
+      - /veterans/
+      - /mental-health/
+      - /before-you-call/
+    - q: sign up for va health care
+      rank: 2
+      top3:
+      - /care/
+      - /veterans/
+      - /before-you-call/
+    reading_grade: 3.2
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: va clinic morgantown
+      rank: 1
+      top3:
+      - /veterans/
+      - /mental-health/
+      - /before-you-call/
+    - q: sign up for va health care
+      rank: 2
+      top3:
+      - /care/
+      - /veterans/
+      - /before-you-call/
+    reading_grade: 3.2
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 18
+    out_of: 18
+- id: p27
+  task: Where can I volunteer in Morgantown this weekend?
+  who: Wants to help or give
+  group: null
+  need: null
+  round_4: 16
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: volunteer morgantown this weekend
+      rank: 1
+      top3:
+      - /volunteer/
+      - /for/remote-workers/
+      - /for/tradespeople/
+    - q: donate furniture clothes
+      rank: 9
+      top3:
+      - /sell-or-donate/
+      - /thrift-shops/
+      - /start-something/
+    reading_grade: 4.5
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: volunteer morgantown this weekend
+      rank: 1
+      top3:
+      - /volunteer/
+      - /for/remote-workers/
+      - /for/tradespeople/
+    - q: donate furniture clothes
+      rank: 9
+      top3:
+      - /sell-or-donate/
+      - /thrift-shops/
+      - /start-something/
+    reading_grade: 4.2
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 16
+    out_of: 18
+- id: p28
+  task: How do I speak at a Morgantown City Council meeting?
+  who: Wants a say in local decisions
+  group: null
+  need: null
+  round_4: 16
+  landing_answers: 'yes'
+  before:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: speak at city council morgantown
+      rank: 1
+      top3:
+      - /have-your-say/
+      - /meetings/how-to-read-an-agenda/
+      - /meetings/agendas/
+    - q: who is my council member
+      rank: null
+      top3:
+      - /who-decides/
+      - /meetings/agendas/westover/
+      - /make-it-better/boards/
+    reading_grade: 4.9
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  after:
+    taps: 4
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: speak at city council morgantown
+      rank: 1
+      top3:
+      - /have-your-say/
+      - /meetings/how-to-read-an-agenda/
+      - /meetings/agendas/
+    - q: who is my council member
+      rank: null
+      top3:
+      - /who-decides/
+      - /meetings/agendas/westover/
+      - /make-it-better/boards/
+    reading_grade: 4.9
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 1
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 15
+    out_of: 18
+  note: Next lowest. 4 taps through the Your community door picker. 'who is my council member' does not find Have
+    your say in the top 10; Who decides ranks first, which also answers.
+- id: p29
+  task: Is there a community center near me in Mon County?
+  who: Lonely or new, looking for their people
+  group: outdoor-active
+  need: loneliness
+  round_4: 17
+  landing_answers: 'yes'
+  before:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: things to do in morgantown
+      rank: 5
+      top3:
+      - /teens/
+      - /for/parents-young-kids/
+      - /borrow-or-get-free/
+    - q: community dinner this weekend
+      rank: 1
+      top3:
+      - /find-your-people/
+      - /community/
+      - /holidays/
+    reading_grade: 1.9
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: things to do in morgantown
+      rank: 5
+      top3:
+      - /teens/
+      - /for/parents-young-kids/
+      - /borrow-or-get-free/
+    - q: community dinner this weekend
+      rank: 1
+      top3:
+      - /find-your-people/
+      - /community/
+      - /holidays/
+    reading_grade: 1.9
+    oldest_checked_days: 16
+    scores:
+      IA1: 3
+      IA2: 3
+      IA7: 2
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: p30
+  task: How do I get my garden soil tested?
+  who: Gardener or would-be grower
+  group: null
+  need: null
+  round_4: 17
+  landing_answers: 'yes'
+  before:
+    taps: 2
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: soil test wv
+      rank: 1
+      top3:
+      - /soil-test/
+      - /grow/
+      - /plant-problems/
+    - q: test garden soil
+      rank: 1
+      top3:
+      - /soil-test/
+      - /grow/
+      - /plant-problems/
+    reading_grade: 3
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 2
+    dead_end: null
+    search:
+    - q: soil test wv
+      rank: 1
+      top3:
+      - /soil-test/
+      - /grow/
+      - /plant-problems/
+    - q: test garden soil
+      rank: 1
+      top3:
+      - /soil-test/
+      - /grow/
+      - /plant-problems/
+    reading_grade: 3
+    oldest_checked_days: 15
+    scores:
+      IA1: 3
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 3
+    total: 17
+    out_of: 18
+- id: p31
+  task: Is there a list of local resources I can print for people I help?
+  who: 'Helper: librarian, pastor or case worker'
+  group: helpers
+  need: null
+  round_4: 10
+  landing_answers: 'yes'
+  before:
+    taps: 3
+    screens_scrolled: 6
+    dead_end: null
+    search:
+    - q: morgantown resource list
+      rank: 1
+      top3:
+      - /make-a-list/
+      - /caregivers/
+      - /choosing-a-care-home/
+    - q: printable resource list
+      rank: 2
+      top3:
+      - /print/
+      - /make-a-list/
+      - /groups/wv-aging-and-disability-resource-center/
+    reading_grade: 1
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 1
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 10
+    out_of: 18
+  after:
+    taps: 2
+    screens_scrolled: 4
+    dead_end: null
+    search:
+    - q: morgantown resource list
+      rank: 1
+      top3:
+      - /make-a-list/
+      - /caregivers/
+      - /choosing-a-care-home/
+    - q: printable resource list
+      rank: 2
+      top3:
+      - /print/
+      - /make-a-list/
+      - /groups/wv-aging-and-disability-resource-center/
+    reading_grade: 1
+    oldest_checked_days: null
+    scores:
+      IA1: 2
+      IA2: 2
+      IA7: 3
+      PL1: 3
+      TR1: 0
+      II1: 1
+    total: 11
+    out_of: 18
+  note: 'Fixed in #2003: Make a list is now on the Your community door, so home, Your community, Make a list (3
+    taps to 2). TR1 and II1 stay low by design: Make a list is a tool, and each place shows its phone, source and
+    checked date once picked, which the script does not do.'
+- id: p32
+  task: How healthy is Monongalia County compared to the rest of West Virginia?
+  who: Curious long-time resident, just looking around
+  group: null
+  need: null
+  round_4: 13
+  landing_answers: 'no: the answer is on How we''re doing, a next step'
+  before:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: what's going on in morgantown this week
+      rank: 1
+      top3:
+      - /pulse/
+      - /help/food/today/other/
+      - /volunteer/
+    - q: how healthy is monongalia county
+      rank: 2
+      top3:
+      - /groups/wvu-healthy-start-hapi/
+      - /how-we-are-doing/
+      - /mental-health/
+    reading_grade: 5.9
+    oldest_checked_days: 1
+    scores:
+      IA1: 2
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 1
+    total: 15
+    out_of: 18
+  after:
+    taps: 1
+    screens_scrolled: 3
+    dead_end: null
+    search:
+    - q: what's going on in morgantown this week
+      rank: 2
+      top3:
+      - /help/food/today/other/
+      - /pulse/
+      - /volunteer/
+    - q: how healthy is monongalia county
+      rank: 2
+      top3:
+      - /groups/wvu-healthy-start-hapi/
+      - /how-we-are-doing/
+      - /mental-health/
+    reading_grade: 6
+    oldest_checked_days: 0
+    scores:
+      IA1: 2
+      IA2: 3
+      IA7: 3
+      PL1: 3
+      TR1: 3
+      II1: 1
+    total: 15
+    out_of: 18
+  note: 'Pulse is a news-style page: no phone or outside link to act on, by design.'
