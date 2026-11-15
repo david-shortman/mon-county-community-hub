@@ -190,6 +190,10 @@ queries:
   - {q: record a deed, expect: [/which-office/], kind: everyday}
   - {q: nonprofit grants, expect: [/grants-for-nonprofits/, /make-it-better/grants/], kind: everyday}
   - {q: foundation grants, expect: [/grants-for-nonprofits/], kind: everyday}
+  - {q: state senator, expect: [/state-lawmakers/, /who-decides/], kind: everyday}
+  - {q: county budget, expect: [/county-budget/], kind: everyday}
+  - {q: freedom of information, expect: [/public-records/], kind: everyday}
+  - {q: probate, expect: [/probate-steps/, /when-someone-dies/, /small-estate-affidavit/], kind: everyday}
 
   # Getting around, IDs and cars
   - {q: DMV, expect: [/drivers-license/, /car-registration/, /ids-and-records/], kind: short}
@@ -246,6 +250,8 @@ queries:
   - {q: lead paint, expect: [/lead/], kind: everyday}
   - {q: lead in water, expect: [/lead/], kind: everyday}
   - {q: accessibility, expect: [/access/], kind: everyday}
+  - {q: the dump, expect: [/transfer-station-fees/, /recycling/], kind: everyday}
+  - {q: quiet hours, expect: [/noise/], kind: everyday}
 
   # Work, school, family and community
   - {q: jobs, expect: [/find-a-job/], kind: everyday}
@@ -285,6 +291,9 @@ queries:
   - {q: adult education classes, expect: [/keep-learning/, /work-and-learning/], kind: everyday}
   - {q: classes for seniors, expect: [/keep-learning/, /staying-active/], kind: everyday}
   - {q: free online classes, expect: [/keep-learning/], kind: everyday}
+  - {q: Westover business license, expect: [/westover-business-license/, /business-by-town/], kind: everyday}
+  - {q: farmers market vendor fee, expect: [/farmers-market-vendor-rules/, /sell-what-you-grow/], kind: everyday}
+  - {q: volunteer opportunities, expect: [/volunteer/], kind: everyday}
 
   # Full questions (many from questions.yaml)
   - {q: I can't pay my heating bill, expect: [/utility-bills/, /money/], kind: question}
@@ -336,3 +345,9 @@ queries:
   - {q: where do I get a marriage license, expect: [/ids-and-records/], kind: question}
   - {q: how do I settle an estate after someone dies, expect: [/probate-steps/, /small-estate-affidavit/], kind: question}
   - {q: how do I pay a parking ticket, expect: [/parking/], kind: question}
+  - {q: who is my state delegate, expect: [/state-lawmakers/], kind: question}
+  - {q: how does the county spend its money, expect: [/county-budget/], kind: question}
+  - {q: how much does the dump cost, expect: [/transfer-station-fees/], kind: question}
+  - {q: how do I become a vendor at the farmers market, expect: [/farmers-market-vendor-rules/, /sell-what-you-grow/], kind: question}
+  - {q: my neighbor is too loud at night, expect: [/noise/], kind: question}
+  - {q: how long does probate take, expect: [/probate-steps/], kind: question}

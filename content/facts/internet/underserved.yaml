@@ -1,0 +1,8 @@
+slug: underserved
+text: "**Underserved:** the place can get internet faster than 25 Mbps download and 3 Mbps upload, but slower than 100 and 20."
+quote: "Underserved : A location receiving broadband speeds less than 100 Mbps download and 20 Mbps upload and greater than 25 Mbps download and 3 Mbps upload"
+sources:
+  - url: https://broadbandwv.org/arcgis/apps/experiencebuilder/experience/?id=2b030b85a8234e89b33fbac8a27e64ce
+    name: West Virginia Office of Broadband, Broadband Availability and Funding Dashboard
+    checked: 2026-11-14
+recheck_days: 365

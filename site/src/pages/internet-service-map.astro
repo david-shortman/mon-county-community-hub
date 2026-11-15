@@ -1,0 +1,79 @@
+---
+// Which places in Mon County have internet service (#1935). Mon County's
+// numbers from the West Virginia Office of Broadband's county summaries
+// (September 2026 PDFs, FCC data as of December 31, 2025), and the state's own
+// definitions of served, underserved and unserved, from its Broadband
+// Availability and Funding Dashboard. Both PDFs are images, so the numbers were
+// read from page 31 of each, rendered, on 2026-11-14.
+// Built as its own page because #1867 (open for David) changes /internet/.
+// No internet company is named or ranked, though the PDFs list them.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Fact from '../components/Fact.astro';
+import Icon from '../components/Icon.astro';
+import { factsFor } from '../lib/facts.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "living-here", topic: "moving", label: "Which places have internet service", summary: "How many places in Mon County are served, funded or still waiting for internet service, what those words mean, and how to check your own address" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const fact = factsFor('internet');
+const map = 'https://broadbandwv.org/arcgis/apps/experiencebuilder/experience/?id=2b030b85a8234e89b33fbac8a27e64ce&page=Availability';
+// Page 31 of the availability PDF, copied exactly. The five rows add up to
+// the total the PDF prints.
+const rows = [
+  { label: 'Served by cable or fiber', count: '36,005' },
+  { label: 'Served by wireless', count: '461' },
+  { label: 'Funded, not served yet', count: '1,819' },
+  { label: 'Unserved or underserved', count: '143' },
+];
+const total = '38,428';
+const availability = [{ url: 'https://broadband.wv.gov/wp-content/uploads/2026/09/County-availability-Sept2026.pdf', checked: '2026-11-14', name: 'West Virginia Office of Broadband, Monongalia County Broadband Availability Summary (page 31)' }];
+---
+<Base title="Which places in Mon County have internet service" description="Mon County's served, funded and unserved places from the West Virginia Office of Broadband, what the words mean, and how to check your address.">
+  <h1>Which places in Mon County have internet service</h1>
+  <p class="lede">Look up your address on the state's broadband map to see if your place is served, funded or unserved. Below are the county's numbers from the West Virginia Office of Broadband, and what each word means.</p>
+  <div class="actions">
+    <a class="btn" href={map}><Icon name="open" /><span>State broadband map</span></a>
+  </div>
+  <Fact f={fact('check-your-address')} about="looking up an address on the state broadband map" />
+
+  <h2 id="numbers">Mon County's numbers</h2>
+  <p>The state counts places, which it calls "broadband serviceable locations." Its summary for Mon County uses FCC data as of December 31, 2025. The state puts unserved and underserved places together in one count. To see where the places are, use the state broadband map.</p>
+  <div class="table-scroll" role="region" aria-labelledby="mon-internet-cap" tabindex="0"><table>
+    <caption id="mon-internet-cap">Places in Mon County, by internet service, from the state's county summary</caption>
+    <thead><tr><th scope="col">What the state's data shows</th><th scope="col" class="num">Places</th></tr></thead>
+    <tbody>
+      {rows.map((x) => <tr><th scope="row">{x.label}</th><td class="num">{x.count}</td></tr>)}
+    </tbody>
+    <tfoot><tr><th scope="row">All places</th><td class="num">{total}</td></tr></tfoot>
+  </table></div>
+  <SourceLine sources={availability} org="wv-office-of-broadband" about="Mon County's broadband numbers" />
+  <Fact f={fact('funded-total')} about="Mon County's broadband funding" />
+
+  <h2 id="words">What the words mean</h2>
+  <p>These are the state's definitions. Mbps (megabits per second) is how fast internet is. Download is how fast things come to you, like a video. Upload is how fast things go out, like a video call.</p>
+  <ul>
+    <Fact tag="li" f={fact('served')} about="the state's meaning of served" />
+    <Fact tag="li" f={fact('underserved')} about="the state's meaning of underserved" />
+    <Fact tag="li" f={fact('unserved')} about="the state's meaning of unserved" />
+    <Fact tag="li" f={fact('funded')} about="the state's meaning of funded" />
+  </ul>
+  <Fact f={fact('bead-older-data')} about="the map's data and BEAD" />
+
+  <h2 id="next">What you can do</h2>
+  <ul>
+    <li><strong>Check your address</strong> on the <a href={map}>state broadband map</a>.</li>
+    <li><strong>Slow or no internet?</strong> Take the state's speed test: <a href={`${base}/internet/#speed-test`}>Slow or no internet? Tell the state</a>.</li>
+    <li><strong>Questions about where the state is building?</strong> The Office of Broadband's phone and email are on <a href={`${base}/internet/#building`}>Where the state is building</a>.</li>
+    <li><strong>A problem with your internet company?</strong> See <a href={`${base}/internet/#complain`}>how to complain</a>.</li>
+    <li><strong>Need to get online today?</strong> The library has <a href={`${base}/internet/#library`}>free Wi-Fi and computers</a>.</li>
+  </ul>
+
+  <p>More about getting online: <a href={`${base}/internet/`}>Internet at home</a>.</p>
+  <p class="meta">We do not sell or recommend any internet company. See something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
+
+<style>
+  .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tfoot th, tfoot td { font-weight: 700; }
+  tbody th, tfoot th { text-align: left; }
+</style>
