@@ -682,3 +682,7 @@ One file a month, shown newest first on `/progress/`. Every number belongs to th
 ## `blog/YYYY-MM-DD-<slug>.md`: blog posts (#1701, #1702)
 
 Dated posts for `/blog/`: Markdown with YAML front matter (`title`, `date`, `type`, `summary`, `pages`, optional `corrections`). The shape is [`schemas/blog-post.schema.json`](schemas/blog-post.schema.json), checked at build time by `site/src/lib/blog.mjs`; the folder's [README](blog/README.md) has an example. Every post is its own PR labeled `for:david` and goes live only when David merges it. Posts link to live pages for phone numbers, hours, rules and deadlines instead of repeating them.
+
+## `explore-chips.yaml`: interest chips on /topics/ (#2026)
+
+The "What are you curious about?" chips for the Topics explorer (#2025). Each chip has an `id`, a short `name` in residents' words (3 words or fewer) and `pages`, 4 to 12 web paths, best first. `starter` lists the pages Flip through shows when no chip is picked. Like `also-check.yaml`, it holds no facts: link text comes from each page's own label and summary. `site/test/explore-chips.test.mjs` (run by `npm test` after every build) checks that every path is a tagged page, ids are unique, and no Help now page or page that names 988, 211 or 911 is in a chip or the starter list.
