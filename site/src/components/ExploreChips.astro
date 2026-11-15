@@ -41,11 +41,13 @@ const data = chipData(doc, await loadPages());
 
 <style>
   .ec-chips { list-style: none; margin: 8px 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .ec-chip { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; padding: 6px 14px; border: 2px solid var(--accent); border-radius: 22px; background: var(--card); color: var(--fg); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
-  .ec-chip:hover { text-decoration: underline; }
-  .ec-chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-  .ec-chip[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
-  .ec-chip[aria-pressed="true"]::before { content: "\2713\00a0"; }
+  /* :global because the script swaps each chip link for a button it makes,
+     and Astro's scoped styles do not reach elements a script creates. */
+  .ec-chips :global(.ec-chip) { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; padding: 6px 14px; border: 2px solid var(--accent); border-radius: 22px; background: var(--card); color: var(--fg); font: inherit; font-weight: 600; line-height: 1.2; text-decoration: none; cursor: pointer; }
+  .ec-chips :global(.ec-chip:hover) { text-decoration: underline; }
+  .ec-chips :global(.ec-chip:focus-visible) { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .ec-chips :global(.ec-chip[aria-pressed="true"]) { background: var(--accent); color: var(--bg); }
+  .ec-chips :global(.ec-chip[aria-pressed="true"])::before { content: "\2713\00a0"; }
   .ec-picked h3 { margin-top: 16px; }
   :global(.ec-tags) { display: block; font-size: 0.9rem; color: var(--muted, inherit); }
 </style>
