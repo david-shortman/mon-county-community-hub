@@ -65,8 +65,8 @@ Each area lists what the site has, the gaps, and which gaps this lane fills now.
 **Gaps.**
 
 1. **Crime.** Still "coming" on `/how-we-are-doing/` (#772, waits for David).
-2. **High school graduation rate.** Not shown. The state posts it.
-3. **Life expectancy, premature death, overdose deaths.** Not shown as indicators, though the needs register cites overdose data.
+2. **High school graduation rate.** Done: `content/indicators/high-school-graduation.yaml` (ZoomWV, 2024-2025).
+3. **Life expectancy, premature death, overdose deaths.** Done: life expectancy and overdose deaths (#1662), and premature death (#529, wave 20), all from County Health Rankings.
 4. **Unemployment is frozen.** The BLS blocks automated reads, so the number shows the date it was last read (see `docs/operations/automated-reads.md`).
 
 **This lane:** leaves these to the data and cards lane (wave 10), which owns `content/indicators/`. Gaps 2 and 3 are listed here as next work.

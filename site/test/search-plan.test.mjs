@@ -72,3 +72,13 @@ test('a longer Also called entry matches when every topic word was typed (#1676)
   assert.equal(alsoHit(lead, 'old house'), false);
   assert.equal(alsoHit(lead, 'lead house'), false);
 });
+
+test('in a question, place words count when matching an Also called entry (#529, wave 20)', () => {
+  const budget = { url: '/county-budget/', meta: { title: 'Budget', also: 'county spending, county budget, where county taxes go' } };
+  assert.equal(alsoHit(budget, 'where do my county taxes go'), true);
+  assert.equal(alsoHit(budget, 'what is the county budget'), true);
+  // Short searches keep their usual order, and one word is never enough.
+  assert.equal(alsoHit(budget, 'county taxes'), false);
+  assert.equal(alsoHit(budget, 'where do my taxes go'), false);
+  assert.equal(alsoHit(budget, 'how do I pay county taxes'), false);
+});
