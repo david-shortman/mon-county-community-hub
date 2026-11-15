@@ -6,7 +6,8 @@
 // Office page and the Sheriff's services page, read 2026-11-02 (Eastern).
 // The typed rows are fact records in content/facts/offices/ (#122), re-read
 // 2026-11-06, each with its own checked date.
-// Office phones only, never names of officials. Where the county directory
+// Each row carries a level label (City, Town, County, State, Court, Utility)
+// so it answers "city, county or state?" (#1980). Office phones only, never names of officials. Where the county directory
 // and an office's own page disagree, the office's own page wins (see
 // docs/discoveries/2026-11-03-county-directory-planning-phone-assessor-room.md).
 import Base from '../layouts/Base.astro';
@@ -14,51 +15,65 @@ import SourceLine from '../components/SourceLine.astro';
 import { org, resource, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import { factsFor, factHtml, isDue } from '../lib/facts.mjs';
-export const page = { door: "community", topic: "government", label: "Which office handles it?", summary: "Property tax, deeds, court records, flood zones, a new address, a driver's license: which city, county or state office to call" };
+export const page = { door: "community", topic: "government", label: "Which office handles it?", summary: "Property tax, deeds, court records, water, trash, a new business, a driver's license: which city, county or state office to call" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const fact = factsFor('offices');
+const permitFact = factsFor('permits');
 // A row read from a fact record: its sentence holds the office, phone and note.
 const fromFact = (slug) => ({ fact: fact(slug) });
 const fromOrg = (slug) => { const o = org(slug); return o ? { office: o.name, phone: o.phone, sources: o.sources, org: slug } : null; };
 const fromRes = (slug) => { const r = resource(slug); return r ? { office: r.title, phone: r.contact?.phone, sources: r.sources, org: r.org } : null; };
+// level: who runs the office (City, County, State, Town or Court), shown as a
+// small label so the page answers "city, county or state?" row by row.
 const row = (task, who, extra = {}) => (who ? { task, ...who, ...extra } : null);
+const mub = resource('mub-start-service');
+const oneStop = resource('wv-one-stop-business-registration');
+const cityLicense = resource('morgantown-business-license');
 const groups = [
   { id: 'property', title: 'Property and property tax', rows: [
-    row('Pay property tax, or look up a tax bill', fromFact('sheriff-tax-office'), { page: ['/property-tax/', 'Property tax'] }),
-    row('Property value, or a personal property return (cars and other vehicles)', fromOrg('monongalia-county-assessor'), { page: ['/property-tax/', 'Property tax'] }),
+    row('Pay property tax, or look up a tax bill', fromFact('sheriff-tax-office'), { level: 'County', page: ['/property-tax/', 'Property tax'] }),
+    row('Property value, or a personal property return (cars and other vehicles)', fromOrg('monongalia-county-assessor'), { level: 'County', page: ['/property-tax/', 'Property tax'] }),
   ] },
   { id: 'records', title: 'Records, licenses and elections', rows: [
-    row('Record a deed, get a marriage license, a birth or death certificate, or start probate', fromOrg('monongalia-county-clerk'), { page: ['/ids-and-records/', 'IDs and records'] }),
-    row('Register to vote, or questions about a county election', fromOrg('monongalia-county-clerk'), { page: ['/vote/', 'Vote'] }),
-    row('Driver\'s license, state ID, car title or plates', fromRes('wv-dmv-morgantown-office'), { page: ['/drivers-license/', 'Driver\'s license'] }),
+    row('Record a deed, get a marriage license, a birth or death certificate, or start probate', fromOrg('monongalia-county-clerk'), { level: 'County', page: ['/ids-and-records/', 'IDs and records'] }),
+    row('A birth or death certificate from the state (any West Virginia county)', fromOrg('wv-vital-registration'), { level: 'State', page: ['/ids-and-records/', 'IDs and records'] }),
+    row('Register to vote, or questions about a county election', fromOrg('monongalia-county-clerk'), { level: 'County', page: ['/vote/', 'Vote'] }),
+    row('Driver\'s license, state ID, car title or plates', fromRes('wv-dmv-morgantown-office'), { level: 'State', page: ['/drivers-license/', 'Driver\'s license'] }),
   ] },
   { id: 'courts', title: 'Courts and safety', rows: [
-    row('Circuit Court or Family Court records and fees, and jury duty', fromOrg('monongalia-county-circuit-clerk'), { page: ['/family-court/', 'Family court'] }),
-    row('Small civil cases ($20,000 or less), misdemeanors and emergency protective orders', fromOrg('monongalia-county-magistrate-court'), { page: ['/protective-orders/', 'Protective orders'] }),
-    row('Help for crime victims and witnesses', fromFact('victim-assistance')),
-    row("The county Prosecuting Attorney's Office", fromFact('prosecuting-attorney')),
-    row('Police that is not an emergency, any hour', fromRes('mecca-non-emergency')),
-    row('Fingerprints or a VIN check', fromFact('sheriff-fingerprints-vin')),
+    row('Circuit Court or Family Court records and fees, and jury duty', fromOrg('monongalia-county-circuit-clerk'), { level: 'County', page: ['/family-court/', 'Family court'] }),
+    row('Small civil cases ($20,000 or less), misdemeanors and emergency protective orders', fromOrg('monongalia-county-magistrate-court'), { level: 'Court', page: ['/protective-orders/', 'Protective orders'] }),
+    row('Help for crime victims and witnesses', fromFact('victim-assistance'), { level: 'County' }),
+    row("The county Prosecuting Attorney's Office", fromFact('prosecuting-attorney'), { level: 'County' }),
+    row('Police that is not an emergency, any hour', fromRes('mecca-non-emergency'), { level: 'County' }),
+    row('Fingerprints or a VIN check', fromFact('sheriff-fingerprints-vin'), { level: 'County' }),
   ] },
   { id: 'land', title: 'Land, building and addresses', rows: [
-    row('Zoning and building outside any town', fromFact('county-planning'), { page: ['/permits/', 'Building permits'] }),
-    row('Is my property in a flood zone?', fromFact('floodplain'), { page: ['/flood-zone/', 'Flood zone'] }),
-    row('A new street address, or a question about an address', fromFact('mecca-addressing')),
-    row('Litter in the county', fromFact('litter-control')),
+    row('Zoning and building outside any town', fromFact('county-planning'), { level: 'County', page: ['/permits/', 'Building permits'] }),
+    row('A building permit inside Morgantown city limits', { fact: permitFact('morgantown-code-enforcement') }, { level: 'City', page: ['/permits/', 'Building permits'] }),
+    row('Is my property in a flood zone?', fromFact('floodplain'), { level: 'County', page: ['/flood-zone/', 'Flood zone'] }),
+    row('A new street address, or a question about an address', fromFact('mecca-addressing'), { level: 'County' }),
+    row('Litter in the county', fromFact('litter-control'), { level: 'County' }),
+  ] },
+  { id: 'home-business', title: 'Water, trash and starting a business', rows: [
+    row('Start water and sewer service in Morgantown, Star City or Granville', mub && { office: 'Morgantown Utility Board (MUB)', phone: mub.contact.phone, sources: mub.sources, org: mub.org, note: 'Not sure who provides your water? Ask your landlord or the seller.' }, { level: 'Utility', page: ['/who-serves-me/', 'Who serves my address?'] }),
+    row('Who picks up trash at my address?', fromOrg('monongalia-county-solid-waste-authority'), { level: 'County', note: 'The Solid Waste Authority can tell you who serves your address.', page: ['/recycling/', 'Recycling and trash'] }),
+    row('Register a new business', oneStop && { office: "The state's One Stop Business Portal", sources: oneStop.sources, org: oneStop.org, note: 'One online filing covers the Secretary of State, the State Tax Department and WorkForce West Virginia. Then check with your town.' }, { level: 'State', page: ['/start-a-business/', 'Start a business'] }),
+    row('A business license inside Morgantown city limits', cityLicense && { office: 'City of Morgantown Finance Department', phone: cityLicense.contact.phone, sources: cityLicense.sources, org: cityLicense.org }, { level: 'City', page: ['/start-a-business/', 'Start a business'] }),
   ] },
   { id: 'towns', title: 'Your town', rows: [
-    row('Streets, sidewalks, code problems and other city service requests in Morgantown', fromRes('morgantown-311'), { page: ['/who-serves-me/', 'Who serves my address?'] }),
-    row('City Hall in Westover', fromFact('westover')),
-    row('Town hall in Star City', fromFact('star-city')),
-    row('Town hall in Granville', fromFact('granville')),
-    row('Town office in Blacksville', fromFact('blacksville')),
+    row('Streets, sidewalks, code problems and other city service requests in Morgantown', fromRes('morgantown-311'), { level: 'City', page: ['/who-serves-me/', 'Who serves my address?'] }),
+    row('City Hall in Westover', fromFact('westover'), { level: 'City' }),
+    row('Town hall in Star City', fromFact('star-city'), { level: 'Town' }),
+    row('Town hall in Granville', fromFact('granville'), { level: 'Town' }),
+    row('Town office in Blacksville', fromFact('blacksville'), { level: 'Town' }),
     row('Public schools', fromFact('schools')),
   ] },
 ].map((g) => ({ ...g, rows: g.rows.filter(Boolean) }));
 ---
 <Base title="Which office handles it? Morgantown and Mon County offices" description="Which city, county or state office to call in Morgantown and Mon County about property tax, deeds, court records or a new address, with phone numbers from official pages.">
   <h1>Which office handles it?</h1>
-  <p class="lede">Find your task below to see which office handles it and how to call. The county offices serve everyone in Mon County, in a town or not. Your town handles its own streets and services. The state handles things like driver's licenses.</p>
+  <p class="lede">Find your task below to see which office handles it and how to call. The county offices serve everyone in Mon County, in a town or not. Your town handles its own streets and services. The state handles things like driver's licenses. Each row has a label that says who runs the office: the city or town, the county, the state, a court or a utility.</p>
 
   <nav aria-label="On this page">
     <ul>
@@ -72,6 +87,7 @@ const groups = [
       <ul>
         {g.rows.map((r) => (
           <li>
+            {r.level && <p class="level">{r.level}</p>}
             {r.fact
               ? <p><strong>{r.task}{/\?$/.test(r.task) ? '' : ':'}</strong> <Fragment set:html={factHtml(r.fact.text, base)} /></p>
               : <p><strong>{r.task}{/\?$/.test(r.task) ? '' : ':'}</strong> {r.office}{r.phone && <>, <a href={telHref(r.phone)}>{r.phone}</a></>}.{r.note && <>{' '}{r.note}</>}</p>}
@@ -99,4 +115,5 @@ const groups = [
   .offices ul { list-style: none; margin: var(--s2) 0; padding: 0; border-top: 1px solid var(--line); }
   .offices li { padding: var(--s2) 0; border-bottom: 1px solid var(--line); }
   .offices li p { margin: 0 0 var(--s1); }
+  .offices .level { font-family: var(--kicker, inherit); font-weight: 800; font-size: 0.875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 </style>
