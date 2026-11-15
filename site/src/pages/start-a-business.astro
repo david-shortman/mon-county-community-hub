@@ -8,6 +8,9 @@
 // city page, see #638).
 // Every step, food permits and City Hall read from fact records in
 // content/facts/business/ (#122), each with its own checked date.
+// A business at home and hiring a first worker (#1985, sprint wave 20): from
+// the city's home occupation packet, the county planning pages, WorkForce WV
+// and the Insurance Commissioner. No fees or tax rates: none are stated there.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import Icon from '../components/Icon.astro';
@@ -17,7 +20,7 @@ import { factsFor } from '../lib/facts.mjs';
 import Milepost from '../components/Milepost.astro';
 import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "family", topic: "work", label: "Start a business in Morgantown, step by step", summary: "Zoning, state registration, the city license, the Certificate of Occupancy, inspections and city B&O tax, in order" };
+export const page = { door: "family", topic: "work", label: "Start a business in Morgantown, step by step", summary: "Zoning, state registration, the city license, the Certificate of Occupancy, inspections and city B&O tax, in order, plus running a business from home and hiring a first worker" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const fact = factsFor('business');
 ---
@@ -76,6 +79,30 @@ const fact = factsFor('business');
 
   </Milepost>
   </Route>
+
+  <h2 id="from-home">Running a business from your home</h2>
+  <p>A business at home still needs the state registration in step 2. Whether it also needs zoning approval depends on where you live.</p>
+  <Fact f={fact('home-occupation-city')} about="a home business in Morgantown" />
+  <Fact f={fact('home-occupation-rules')} about="Morgantown's home business rules" />
+  <div class="actions">
+    <a class="btn" href="https://www.morgantownwv.gov/DocumentCenter/View/314/Home-Occupation-Application-Packet-PDF"><Icon name="open" /><span>City home business packet (PDF)</span></a>
+  </div>
+  <Fact f={fact('home-occupation-county')} about="a home business outside any town" />
+  <div class="actions">
+    <a class="btn" href="https://www.monongaliacounty.gov/moncpc/application_forms.php"><Icon name="open" /><span>County planning forms</span></a>
+  </div>
+  <p>In Star City, Granville or Westover, ask the town. See <a href={`${base}/business-by-town/`}>Start a business in Star City, Granville or Westover</a>.</p>
+
+  <h2 id="hiring">Hiring your first worker</h2>
+  <p>Two state offices oversee what an employer sets up for its workers: WorkForce West Virginia (unemployment tax) and the Insurance Commissioner (workers' compensation).</p>
+  <Fact f={fact('hire-ui-account')} about="state unemployment tax" />
+  <Fact f={fact('hire-ui-quarterly')} about="quarterly unemployment tax reports" />
+  <Fact f={fact('hire-workers-comp')} about="workers' compensation" />
+  <div class="actions">
+    <a class="btn" href="https://workforcewv.org/businesses/unemployment-tax-information/"><Icon name="open" /><span>WorkForce WV unemployment tax pages</span></a>
+    <a class="btn" href="https://www.wvinsurance.gov/EmployerCoverage.aspx"><Icon name="open" /><span>Workers' comp for employers</span></a>
+  </div>
+  <p>Free help is on <a href={`${base}/business/`}>Start or grow a business</a>: the Small Business Development Center coaches owners at no cost.</p>
 
   <h2>Selling food?</h2>
   <Fact f={fact('food-permits')} about="Food permits" />
