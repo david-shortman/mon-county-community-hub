@@ -1,0 +1,23 @@
+---
+// The explorer's bar on /topics/ (#2027): shown by the ExploreChips script
+// once something is picked. It sits at the end of the explorer wrapper in
+// topics.astro with position: sticky, so it stays at the bottom of the screen
+// while you read the rest of the page, can never sit over Help now (above the
+// wrapper), and takes its own space at the end so it never covers the last
+// line. Hidden with no script. Close hides it until the next visit.
+---
+<div class="explore-bar" id="explore-bar" role="region" aria-label="Your picks" hidden>
+  <a class="eb-btn" href="#picked">See your picks</a>
+  <button class="eb-btn" type="button" data-act="surprise">Surprise me</button>
+  <button class="eb-btn" type="button" data-act="clear">Clear picks</button>
+  <button class="eb-btn eb-close" type="button" data-act="close" aria-label="Close this bar">Close</button>
+</div>
+
+<style>
+  .explore-bar { position: sticky; bottom: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px -8px 0; padding: 10px 8px calc(10px + env(safe-area-inset-bottom)); background: var(--bg); border-top: 2px solid var(--accent); }
+  .explore-bar[hidden] { display: none; }
+  .eb-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; border: 2px solid var(--accent); border-radius: 22px; background: var(--card); color: var(--fg); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+  .eb-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .eb-close { margin-left: auto; }
+  @media print { .explore-bar { display: none !important; } }
+</style>

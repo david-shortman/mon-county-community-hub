@@ -13,7 +13,8 @@
 // View transitions: a short, calm fade, and none for people who ask for less
 // motion: the device setting (CSS below) or the site's "Turn off motion" switch
 // (em-motion-off, src/lib/motion-client.mjs, #1500), which skips the fade on
-// both the page being left and the page being opened.
+// both the page being left and the page being opened. Back and Forward never
+// fade (#1369).
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <link rel="manifest" href={`${base}/manifest.webmanifest`} />
@@ -30,7 +31,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </script>
 <script is:inline>
   (function () {
-    function skip(e) { try { if (e.viewTransition && localStorage.getItem('em-motion-off') === '1') e.viewTransition.skipTransition(); } catch (x) {} }
+    // No fade on Back or Forward either (#1369): the fade can run while the
+    // browser restores the scroll spot, and a phone may land at the top.
+    function skip(e) { try { if (!e.viewTransition) return; var back = e.activation && e.activation.navigationType === 'traverse'; if (back || localStorage.getItem('em-motion-off') === '1') e.viewTransition.skipTransition(); } catch (x) {} }
     addEventListener('pageswap', skip); addEventListener('pagereveal', skip);
   })();
 </script>

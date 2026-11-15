@@ -6,6 +6,7 @@ import { HUBS } from '../lib/town-hubs.mjs';
 import { groupPages } from '../lib/group-pages.mjs';
 import { loadCalendarWithFeeds } from '../lib/content.mjs';
 import { BODIES } from '../lib/agendas.mjs';
+import { loadChips } from '../lib/explore.mjs';
 import { loadPosts, TYPES } from '../lib/blog.mjs';
 
 export async function GET({ site }) {
@@ -28,6 +29,8 @@ export async function GET({ site }) {
     ...postTypes.map((t) => `- [Blog: ${TYPES[t].toLowerCase()}](${u(`/blog/type/${t}/`)}): posts of this kind, newest first`),
     ...posts.map((p) => `- [${p.title}](${u(`/blog/${p.slug}/`)}): ${p.typeLabel}, ${p.date}. ${p.summary}`),
   ].join('\n');
+  // One line per interest chip page (/topics/pick/<id>/, #2027).
+  const picks = loadChips().chips.map((c) => `- [Topics for "${c.name}"](${u(`/topics/pick/${c.id}/`)}): pages on this site picked for this interest, best first`).join('\n');
   const centers = loadPlaces().map((p) => `- [${p.name}](${u(`/community-centers/${p.slug}/`)}): ${p.community}. ${p.story}`).join('\n');
   const body = `# Everything Morgantown
 
@@ -37,6 +40,7 @@ export async function GET({ site }) {
 
 - [Home](${u('/')}): "What do you need help with?": 211 and 988 for help right now, search, and need buttons for shelter, food, bills, rent, shots, dates and recycling
 - [All topics](${u('/topics/')}): every page, sorted into five doors named for what is going on in a person's life (Get through this month, Get care, Living here, Family and life changes, Your community), plus A to Z
+${picks}
 - [Search](${u('/search/')}): search every page; runs in the browser, nothing is sent to the site
 - [Dates and deadlines](${u('/calendar/')}): community dates, application windows and deadlines
 - [Calendar feed (iCalendar)](${u('/calendar.ics')}): the same dates, for calendar apps

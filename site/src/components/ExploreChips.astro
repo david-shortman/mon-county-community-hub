@@ -1,0 +1,132 @@
+---
+// "What are you curious about?" on /topics/ (#2027, part of the Topics
+// explorer, #2025). Chips come from content/explore-chips.yaml.
+//
+// With no script, each chip is a link to /topics/pick/<id>/, a built page with
+// that chip's pages. With a script, each chip becomes a toggle button
+// (aria-pressed), and picking one or more shows "Picked for you": the chips'
+// pages ranked by rankPicks() in src/lib/explore-rank.mjs. Picks stay on this
+// phone only (localStorage em-explore-picks), and "Clear picks" empties it.
+// Nothing is sent anywhere.
+//
+// The bar (Surprise me, Clear picks, Close) is sticky at the bottom of the
+// screen, but only inside the explorer wrapper on /topics/ (see topics.astro),
+// so it can never sit over Help now, and it never covers the last line of the
+// page because it takes its own space at the end.
+//
+// Back to the same spot (#1369): saved picks are drawn as soon as the script
+// runs, before the page finishes loading, so the page already has its full
+// height when the browser puts you back where you were. AppShell.astro keeps
+// the fallback that restores the spot if the browser does not.
+// No motion here.
+import { loadChips, chipData } from '../lib/explore.mjs';
+import { loadPages } from '../lib/pages.mjs';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const doc = loadChips();
+const data = chipData(doc, await loadPages());
+---
+<section class="explore-chips" id="curious" aria-labelledby="curious-h">
+  <h2 id="curious-h">What are you curious about?</h2>
+  <p class="ec-help">Pick one or more to see pages for them first.</p>
+  <ul class="ec-chips">
+    {data.chips.map((c) => <li><a class="ec-chip" href={`${base}/topics/pick/${c.id}/`} data-chip={c.id}>{c.name}</a></li>)}
+  </ul>
+  <div class="ec-picked" id="picked" hidden>
+    <h3 id="picked-h" tabindex="-1">Picked for you</h3>
+    <ul class="topic-list" id="picked-list"></ul>
+  </div>
+  <p class="sr-only" id="picked-count" aria-live="polite"></p>
+  <script type="application/json" id="explore-data" set:html={JSON.stringify({ base, ...data })}></script>
+</section>
+
+<style>
+  .ec-chips { list-style: none; margin: 8px 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .ec-chip { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; padding: 6px 14px; border: 2px solid var(--accent); border-radius: 22px; background: var(--card); color: var(--fg); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+  .ec-chip:hover { text-decoration: underline; }
+  .ec-chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .ec-chip[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
+  .ec-chip[aria-pressed="true"]::before { content: "\2713\00a0"; }
+  .ec-picked h3 { margin-top: 16px; }
+  :global(.ec-tags) { display: block; font-size: 0.9rem; color: var(--muted, inherit); }
+</style>
+
+<script>
+  import { rankPicks, cleanPicks } from '../lib/explore-rank.mjs';
+  const KEY = 'em-explore-picks';
+  const root = document.getElementById('curious');
+  const dataEl = document.getElementById('explore-data');
+  if (root && dataEl) {
+    const data = JSON.parse(dataEl.textContent || '{}');
+    const list = root.querySelector('#picked-list') as HTMLUListElement;
+    const box = root.querySelector('#picked') as HTMLElement;
+    const count = root.querySelector('#picked-count') as HTMLElement;
+    const bar = document.getElementById('explore-bar');
+    let saved: string | null = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    let picked: string[] = cleanPicks(saved, data.chips);
+    let barClosed = false;
+
+    // Each chip link becomes a toggle button. The link stays the no-script way.
+    const buttons = [...root.querySelectorAll<HTMLAnchorElement>('a.ec-chip')].map((a) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ec-chip';
+      b.dataset.chip = a.dataset.chip;
+      b.textContent = a.textContent;
+      a.replaceWith(b);
+      return b;
+    });
+
+    function save() {
+      try { picked.length ? localStorage.setItem(KEY, JSON.stringify(picked)) : localStorage.removeItem(KEY); } catch (e) {}
+    }
+
+    function draw(announce: boolean) {
+      for (const b of buttons) b.setAttribute('aria-pressed', String(picked.includes(b.dataset.chip!)));
+      const ranked = rankPicks(data.chips, picked, data.pages);
+      list.replaceChildren(...ranked.map((p) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `${data.base}${p.route}`;
+        a.textContent = p.label;
+        const hint = document.createElement('span');
+        hint.className = 'hint';
+        hint.textContent = p.summary;
+        const tags = document.createElement('span');
+        tags.className = 'ec-tags';
+        tags.textContent = `For: ${p.chips.join(', ')}`;
+        li.append(a, hint, tags);
+        return li;
+      }));
+      box.hidden = ranked.length === 0;
+      if (bar) bar.hidden = ranked.length === 0 || barClosed;
+      document.dispatchEvent(new CustomEvent('explore:picks', { detail: { picked: [...picked], pages: ranked.map((p) => p.route) } }));
+      if (announce) count.textContent = ranked.length ? `${ranked.length} pages picked for you` : 'No picks. The list is empty.';
+    }
+
+    for (const b of buttons) {
+      b.addEventListener('click', () => {
+        const id = b.dataset.chip!;
+        picked = picked.includes(id) ? picked.filter((x) => x !== id) : [...picked, id];
+        save();
+        draw(true);
+      });
+    }
+    bar?.querySelector('[data-act="clear"]')?.addEventListener('click', () => {
+      picked = [];
+      save();
+      draw(true);
+      buttons[0]?.focus();
+    });
+    bar?.querySelector('[data-act="close"]')?.addEventListener('click', () => {
+      barClosed = true;
+      bar.hidden = true;
+      (root.querySelector('#picked-h') as HTMLElement | null)?.focus();
+    });
+    bar?.querySelector('[data-act="surprise"]')?.addEventListener('click', () => {
+      const t = document.getElementById('show-me');
+      if (t) { t.setAttribute('tabindex', '-1'); t.scrollIntoView({ block: 'start' }); t.focus({ preventScroll: true }); }
+    });
+    draw(false);
+  }
+</script>

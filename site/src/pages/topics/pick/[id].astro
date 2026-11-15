@@ -1,0 +1,28 @@
+---
+// One page per interest chip (#2027), for phones with scripts off: the chip's
+// pages, best first, with their labels and summaries. The chips on /topics/
+// link here; with scripts on they become buttons instead. These pages are in
+// the sitemap but not in the A to Z or the door lists (dynamic routes carry
+// no page tag). Data: content/explore-chips.yaml.
+import Base from '../../../layouts/Base.astro';
+import { loadChips } from '../../../lib/explore.mjs';
+import { loadPages } from '../../../lib/pages.mjs';
+
+export function getStaticPaths() {
+  return loadChips().chips.map((c) => ({ params: { id: c.id }, props: { chip: c } }));
+}
+const { chip } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tags = await loadPages();
+const list = chip.pages.map((r) => tags.get(r)).filter(Boolean);
+---
+<Base searchable={false} title={`${chip.name}: pages to explore in Mon County`} description={`Pages on this site for "${chip.name}" in Morgantown and Monongalia County, WV.`}>
+  <nav class="crumbs" aria-label="You are here" data-pagefind-ignore>
+    <ol><li><a href={`${base}/topics/`}>All topics</a></li><li aria-current="page">{chip.name}</li></ol>
+  </nav>
+  <h1>{chip.name}</h1>
+  <p class="lede">{list.length} pages picked for "{chip.name}". <a href={`${base}/topics/#curious`}>Pick something else</a> or see <a href={`${base}/topics/`}>all topics</a>.</p>
+  <ul class="topic-list">
+    {list.map((p) => <li><a href={`${base}${p.route}`}>{p.label}</a><span class="hint">{p.summary}</span></li>)}
+  </ul>
+</Base>
