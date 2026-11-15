@@ -1,0 +1,13 @@
+slug: nursery-office
+text: "The nursery page is part of the department's Plant Industries Division. To ask whether you need to register, call the division's office."
+quote: "Plant Industries Division ... Gus R. Douglass Agricultural Center at Guthrie ... Office: 304-558-2212"
+phone: "304-558-2212"
+phone_label: WVDA Plant Industries Division
+sources:
+  - url: https://agriculture.wv.gov/divisions/plant-industries/plant-industries-contacts/
+    checked: 2026-11-15
+    name: West Virginia Department of Agriculture, Plant Industries Contacts
+  - url: https://agriculture.wv.gov/divisions/plant-industries/nursery-and-nursery-dealer/
+    checked: 2026-11-15
+    name: West Virginia Department of Agriculture, Nursery and Nursery Dealer
+recheck_days: 180

@@ -19,6 +19,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // content/elections/. Before Election Day it shows what to know to vote; after,
 // the official results link and the canvass date. The daily build moves it.
 const election = currentElection();
+// The office that runs this election. A city election names its own office
+// (content/elections/<slug>.yaml, office); otherwise it is the County Clerk.
+const office = election?.office ?? { name: 'County Clerk', url: 'https://monongaliacountyclerk.com/index.php/elections/17-current-election/124-2026-general-election-information', phone: '304-291-7230' };
+const tel = (p) => `tel:${p.replace(/\D/g, '')}`;
 ---
 <Base title="Register to vote and find your polling place in Mon County" description="Register to vote or update your registration in Morgantown and Monongalia County, WV, check your registration, and find your polling place.">
   <h1>Register to vote and find your polling place</h1>
@@ -27,23 +31,26 @@ const election = currentElection();
   {election?.phase === 'before' && (
     <section id="election" aria-labelledby="election-h" data-election-day={election.election_day} data-polls-close={election.polls_close}>
       <h2 id="election-h">Election Day is {longDate(election.election_day)}</h2>
+      {election.who_votes && <p><strong>{election.who_votes}</strong></p>}
       <p>Polls are open from {election.polls.replace(/\.$/, '')}. Bring a valid photo ID.{election.registrationClosed && ' The deadline to register for this election has passed, so check that you are registered and find your polling place below.'}</p>
       {election.earlyVotingOpen && r(election.early_voting.resource) && <ResourceCard r={r(election.early_voting.resource)} />}
       {election.before.map((slug) => r(slug) && <ResourceCard r={r(slug)} />)}
       <h3>Need help voting?</h3>
-      <p>The Secretary of State says every polling place in West Virginia has at least one voting machine that meets the Americans with Disabilities Act. You can get help marking your ballot if you are blind, have a disability, are of advanced age, or cannot read or write. If you qualify for help and cannot get into the polling place because it is not accessible, you may be able to vote from your car outside, as a last resort. Ask a poll worker, or call the County Clerk at <a href="tel:3042917230">304-291-7230</a>.</p>
+      <p>The Secretary of State says every polling place in West Virginia has at least one voting machine that meets the Americans with Disabilities Act. You can get help marking your ballot if you are blind, have a disability, are of advanced age, or cannot read or write. If you qualify for help and cannot get into the polling place because it is not accessible, you may be able to vote from your car outside, as a last resort. Ask a poll worker, or call the {office.name} at <a href={tel(office.phone)}>{office.phone}</a>.</p>
       <SourceLine sources={[{ url: 'https://sos.wv.gov/voters-disabilities', checked: '2026-11-02', name: 'WV Secretary of State, Voters with Disabilities' }]} about="help voting" />
     </section>
   )}
   {election && (
     <section id={election.phase === 'after' ? 'election' : 'election-results'} aria-labelledby="results-h" hidden={election.phase !== 'after'}>
       <h2 id="results-h">Results of the {election.name} on {longDate(election.election_day)}</h2>
-      <p>Polls are closed. The West Virginia Secretary of State posts results on its official results page. The Monongalia County Clerk runs the election in the county and keeps an election page. The county canvass, when the county's official count starts, is on {longDate(election.canvass)}.</p>
+      {election.who_votes && <p><strong>{election.who_votes}</strong></p>}
+      <p>Polls are closed. {election.results_note ?? 'The West Virginia Secretary of State posts results on its official results page. The Monongalia County Clerk runs the election in the county and keeps an election page.'}{election.canvass && ` The ${election.office ? '' : 'county '}canvass, when the official count starts, is on ${longDate(election.canvass)}.`}</p>
       <div class="actions">
         <a class="btn" href={election.results_url}>Official election results</a>
-        <a class="btn" href="https://monongaliacountyclerk.com/index.php/elections/17-current-election/124-2026-general-election-information">County Clerk election page</a>
+        <a class="btn" href={office.url}>{office.name} election page</a>
       </div>
-      <p>Voted a provisional ballot? <a href="https://apps.sos.wv.gov/Elections/Voter/ProvisionalBallotSearch">Track your provisional ballot</a> on the Secretary of State's site.</p>
+      {election.provisional_lookup !== false && <p>Voted a provisional ballot? <a href="https://apps.sos.wv.gov/Elections/Voter/ProvisionalBallotSearch">Track your provisional ballot</a> on the Secretary of State's site.</p>}
+      {election.provisional_lookup === false && <p>Questions about this election? Call the {office.name} at <a href={tel(office.phone)}>{office.phone}</a>.</p>}
       <SourceLine sources={election.sources} about={`the ${election.name}`} />
     </section>
   )}

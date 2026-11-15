@@ -1,0 +1,79 @@
+---
+// Finish high school as an adult: the steps to a West Virginia High School
+// Equivalency Diploma (#1936, sprint wave 19 learning lane, #529). Every
+// step is from the WV Department of Education's adult education pages, GED
+// Testing Service's West Virginia page, or MTEC's Adult Learning Center
+// pages, read 2026-11-14. Left off: which testing center is nearest,
+// because no official page we can read names one in or near Mon County
+// (see the needs-verification issue linked from the PR).
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
+import { resource, telHref } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Finish high school as an adult", summary: "The steps to a West Virginia High School Equivalency Diploma: free GED classes at MTEC, the practice test, the free GED test, and getting your diploma" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-14';
+const wvdeInfo = [{ url: 'https://wvde.us/academics/adult-education/adult-education-student-information', checked }];
+const wvdeGed = [{ url: 'https://wvde.us/academics/adult-education/adult-education-student-information/ged-exam', checked }];
+const wvdeDiploma = [{ url: 'https://wvde.us/academics/adult-education/adult-education-student-information/west-virginia-high-school-equivalency-diploma', checked }];
+const gedWv = [{ url: 'https://www.ged.com/policies/west-virginia.html', checked }];
+const hotline = '800-642-2670';
+---
+<Base title="Finish high school as an adult in Mon County, WV: the steps to a GED" description="How to earn a West Virginia High School Equivalency Diploma in Mon County: free classes at MTEC, the GED practice test, the free GED test, and your diploma.">
+  <h1>Finish high school as an adult</h1>
+  <p class="lede">In West Virginia, you earn a High School Equivalency Diploma by passing the 4 parts of the GED test. The classes and the test are free. Start with the free adult education classes at MTEC in Morgantown: call <a href={telHref('304-291-9226')}>304-291-9226</a>.</p>
+
+  <Route label="Steps to a high school equivalency diploma">
+  <Milepost n={1} title="Check that adult education is for you" id="who" open>
+  <p>The state's free adult education classes are for people 16 and older who are not enrolled in high school, or required to be. You also need at least one of these:</p>
+  <ul>
+    <li>You do not have a high school diploma or the same as one.</li>
+    <li>You want to build basic skills, like reading or math.</li>
+    <li>You are learning English.</li>
+  </ul>
+  <SourceLine sources={wvdeInfo} about="who can take adult education classes" />
+  <p><strong>Under 19?</strong> You can still take the GED test, but you need papers that show you are allowed to. The adult education teacher helps with them. You do not have to live in West Virginia to test here.</p>
+  <SourceLine sources={gedWv} about="the age and residency rules for the GED test" />
+  </Milepost>
+
+  <Milepost n={2} title="Sign up for free classes at MTEC" id="classes">
+  <ResourceCard r={resource('mtec-ged-prep')} headingLevel={3} showCost />
+  <p>The teacher works out a plan with you. It can be classes in person, classes online, or study on your own.</p>
+  <p><strong>Can't make the class times?</strong> The state has free online study you can do any time on a computer or phone. It is offered in some areas. You must live in West Virginia and go to a class in person once to take a skills test and sign up. To find out if it is offered here, call the state's adult education hotline at <a href={telHref(hotline)}>{hotline}</a>.</p>
+  <SourceLine sources={wvdeGed} about="classes and online study for the GED" />
+  </Milepost>
+
+  <Milepost n={3} title="Pass the GED practice test" id="practice">
+  <p>Before you can sign up for the real test, you must pass the official GED practice test, called GED Ready, in each subject. You take it at an adult education class, like MTEC's. It is free there. A practice test you take at home does not count.</p>
+  <SourceLine sources={gedWv} about="the GED practice test rule" />
+  </Milepost>
+
+  <Milepost n={4} title="Take the GED test, free" id="test">
+  <p>Once you pass the practice test, your teacher helps you sign up for the GED test at a testing center. Do not sign up on your own first. The test has 4 parts:</p>
+  <ul>
+    <li><strong>Reading and writing</strong> (Reasoning Through Language Arts): 150 minutes, with a short essay.</li>
+    <li><strong>Math</strong> (Mathematical Reasoning): 115 minutes. You get a formula sheet.</li>
+    <li><strong>Science</strong>: 90 minutes.</li>
+    <li><strong>Social studies</strong>: 70 minutes.</li>
+  </ul>
+  <p>All 4 parts take about 7 and a half hours. You can take them on different days. You pass a part with a score of 145 or more, out of 200. The test is in English or Spanish.</p>
+  <p><strong>Bring a current photo ID,</strong> like a driver's license, learner's permit, state ID or passport. If you are not a U.S. citizen, the state's page says a current passport is the only ID it takes. Without an ID, you can't test that day. Need an ID? See <a href={`${base}/ids-and-records/#id`}>a West Virginia ID card</a>.</p>
+  <p><strong>Have a disability?</strong> You can ask for things like extra time, extra breaks or a separate room. Your teacher can help you ask. It can take up to 30 days to hear back.</p>
+  <SourceLine sources={wvdeGed} about="the parts of the GED test, ID and accommodations" />
+  <p><strong>Cost:</strong> nothing. West Virginia pays for the test, and taking a part again is free too. You wait 14 days before each of your first 2 retakes of a part. The GED test can't be taken online in West Virginia.</p>
+  <SourceLine sources={gedWv} about="the cost and retake rules" />
+  </Milepost>
+
+  <Milepost n={5} title="Get your diploma" id="diploma">
+  <p>When you pass all 4 parts, you earn the State of West Virginia High School Equivalency Diploma. To get it, make an account with <a href="https://www.diplomasender.com">DiplomaSender</a>, the company that keeps official GED scores for the state, and check your mailing address. Your first diploma and transcript are mailed to you free. Colleges and employers may ask for a transcript. You can order more copies there.</p>
+  <SourceLine sources={[...wvdeDiploma, ...wvdeGed]} about="getting your diploma and transcript" />
+  </Milepost>
+  </Route>
+
+  <p>Want to read better, learn English or learn computer basics first? See <a href={`${base}/free-adult-classes/`}>Free classes to read, learn English or use a computer</a>. Looking for work or training after? See <a href={`${base}/work-and-learning/`}>Work and learning</a>.</p>
+
+  <p class="meta">Sources checked November 14, 2026. We describe these programs; we do not sign anyone up. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

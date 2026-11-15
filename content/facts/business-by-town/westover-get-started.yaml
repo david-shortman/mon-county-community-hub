@@ -1,0 +1,10 @@
+slug: westover-get-started
+text: "The City of Westover asks new businesses to call to get started. It also asks you to read its New Business Packet."
+quote: "Give us a call at (304) 296-6860, and we'll get you started. Be sure to check out our New Business Packet for all the information you need."
+phone: "304-296-6860"
+phone_label: City of Westover
+sources:
+  - url: https://www.westoverwv.org/new-businesses
+    checked: 2026-11-14
+    name: City of Westover, New Businesses
+recheck_days: 180
