@@ -1,0 +1,160 @@
+---
+// My list on /topics/ (#2029, part of the Topics explorer, #2025): the pages
+// saved from Flip through or from a Save button on "Picked for you", in the
+// order saved. Each has a Remove button. Copy my list, Text it to myself
+// (an sms: link the person's own phone sends, like PassItOn.astro), Print
+// (just the list) and Clear my list.
+//
+// Kept on this phone only (localStorage em-explore-saved). Nothing is sent
+// anywhere. With no script it does not show at all, since it needs the
+// phone's storage; nothing else depends on it. When the list is empty, only
+// one line shows, saying how to add pages. Pages Pass it on hides
+// (isQuietPage) never get saved, copied or texted. No motion.
+---
+<section class="my-list" id="my-list" aria-labelledby="my-list-h" hidden>
+  <h2 id="my-list-h" tabindex="-1">My list</h2>
+  <p class="ml-empty" id="ml-empty">Nothing saved yet. Tap Save on a page in "Picked for you" or in Flip through, and it shows here. It stays on this phone only.</p>
+  <div id="ml-full" hidden>
+    <p class="ml-note">Saved on this phone only.</p>
+    <ol class="topic-list ml-items" id="ml-items"></ol>
+    <div class="ml-actions">
+      <button type="button" class="ml-btn" data-ml="copy">Copy my list</button>
+      <a class="ml-btn" id="ml-sms" href="sms:">Text it to myself</a>
+      <button type="button" class="ml-btn" data-ml="print">Print</button>
+      <button type="button" class="ml-btn" data-ml="clear">Clear my list</button>
+    </div>
+    <div id="ml-copy-box" hidden>
+      <label for="ml-copy-text">Copying is not allowed here. Select this text and copy it:</label>
+      <textarea id="ml-copy-text" rows="6" readonly></textarea>
+    </div>
+  </div>
+  <p class="sr-only" id="ml-live" aria-live="polite"></p>
+</section>
+
+<style>
+  .ml-items { padding-left: 1.4em; }
+  /* The list items are made by the script, so these styles are :global. */
+  .ml-items :global(li) { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 10px; margin: 4px 0; }
+  .ml-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .ml-btn, :global(.ml-remove) { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; border: 2px solid var(--accent); border-radius: 22px; background: var(--card); color: var(--fg); font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+  .ml-btn:focus-visible, :global(.ml-remove:focus-visible) { outline: 3px solid var(--accent); outline-offset: 2px; }
+  #ml-copy-text { box-sizing: border-box; width: 100%; font: inherit; }
+  .ml-note { margin: 0 0 6px; color: var(--muted); font-size: 0.95rem; }
+  @media print {
+    :global(.ml-hide) { display: none !important; }
+    .ml-actions, :global(.ml-remove), .ml-note { display: none !important; }
+  }
+</style>
+
+<script>
+  import { cleanSaved, listText, smsHref, isQuietPage } from '../lib/explore-rank.mjs';
+  const KEY = 'em-explore-saved';
+  const root = document.getElementById('my-list');
+  const dataEl = document.getElementById('explore-data');
+  if (root && dataEl) {
+    const data = JSON.parse(dataEl.textContent || '{}');
+    const $ = (id: string) => root.querySelector('#' + id) as HTMLElement;
+    const items = $('ml-items'), live = $('ml-live'), sms = $('ml-sms') as HTMLAnchorElement;
+    const read = (): string[] => { try { return cleanSaved(localStorage.getItem(KEY), data.pages); } catch (e) { return []; } };
+    const write = (list: string[]) => {
+      try { list.length ? localStorage.setItem(KEY, JSON.stringify(list)) : localStorage.removeItem(KEY); } catch (e) {}
+      document.dispatchEvent(new CustomEvent('explore:saved', { detail: { saved: [...list] } }));
+    };
+
+    function draw() {
+      const list = read();
+      root!.hidden = false;
+      $('ml-empty').hidden = list.length > 0;
+      $('ml-full').hidden = list.length === 0;
+      items.replaceChildren(...list.map((r) => {
+        const p = data.pages[r];
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = `${data.base}${r}`;
+        a.textContent = p.label;
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'ml-remove';
+        b.dataset.route = r;
+        b.textContent = 'Remove';
+        const sr = document.createElement('span');
+        sr.className = 'sr-only';
+        sr.textContent = ` ${p.label}`;
+        b.append(sr);
+        li.append(a, b);
+        return li;
+      }));
+      sms.href = smsHref(listText(list, data.pages, data.site));
+      $('ml-copy-box').hidden = true;
+    }
+
+    root.addEventListener('click', async (e) => {
+      const t = e.target as HTMLElement;
+      const rm = t.closest?.('.ml-remove') as HTMLElement | null;
+      if (rm) {
+        const label = data.pages[rm.dataset.route!]?.label ?? 'Page';
+        const list = read();
+        const i = list.indexOf(rm.dataset.route!);
+        write(list.filter((r) => r !== rm.dataset.route));
+        live.textContent = `Removed ${label}.`;
+        const next = items.querySelectorAll<HTMLElement>('.ml-remove')[Math.min(i, list.length - 2)];
+        (next ?? $('my-list-h')).focus();
+        return;
+      }
+      const act = (t.closest?.('[data-ml]') as HTMLElement | null)?.dataset.ml;
+      if (act === 'clear') {
+        write([]);
+        live.textContent = 'My list is cleared.';
+        $('my-list-h').focus();
+      } else if (act === 'copy') {
+        const text = listText(read(), data.pages, data.site);
+        try {
+          await navigator.clipboard.writeText(text);
+          live.textContent = 'Copied. You can paste it in a message or a note.';
+        } catch (err) {
+          const box = $('ml-copy-box'), ta = $('ml-copy-text') as HTMLTextAreaElement;
+          ta.value = text;
+          box.hidden = false;
+          ta.focus();
+          ta.select();
+        }
+      } else if (act === 'print') {
+        // Print just the list: hide everything else while printing.
+        const hidden: Element[] = [];
+        for (let el: Element | null = root; el && el !== document.body; el = el.parentElement) {
+          for (const sib of el.parentElement?.children ?? []) {
+            if (sib !== el && !sib.classList.contains('ml-hide')) { sib.classList.add('ml-hide'); hidden.push(sib); }
+          }
+        }
+        const undo = () => { hidden.forEach((h) => h.classList.remove('ml-hide')); removeEventListener('afterprint', undo); };
+        addEventListener('afterprint', undo);
+        window.print();
+        setTimeout(undo, 1000);
+      }
+    });
+
+    // Save buttons on "Picked for you" lines, drawn by ExploreChips.
+    document.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest?.('.ec-save') as HTMLElement | null;
+      if (!b) return;
+      const r = b.dataset.route!;
+      if (isQuietPage(r, data.pages[r])) return;
+      const list = read();
+      const on = list.includes(r);
+      write(on ? list.filter((x) => x !== r) : [...list, r]);
+      live.textContent = on ? `Removed ${data.pages[r].label} from My list.` : `Saved ${data.pages[r].label} to My list.`;
+    });
+    const mark = () => {
+      const list = read();
+      document.querySelectorAll<HTMLElement>('.ec-save').forEach((b) => {
+        const on = list.includes(b.dataset.route!);
+        b.setAttribute('aria-pressed', String(on));
+        b.firstChild!.textContent = on ? 'Saved' : 'Save';
+      });
+    };
+    document.addEventListener('explore:saved', () => { draw(); mark(); });
+    document.addEventListener('explore:picks', () => requestAnimationFrame(mark));
+    draw();
+    mark();
+  }
+</script>
