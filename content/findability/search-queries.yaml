@@ -259,7 +259,7 @@ queries:
   - {q: jobs, expect: [/find-a-job/], kind: everyday}
   - {q: job training, expect: [/pay-for-training/, /find-a-job/, /work-and-learning/], kind: everyday}
   - {q: resume help, expect: [/find-a-job/], kind: everyday}
-  - {q: GED, expect: [/work-and-learning/], kind: short}
+  - {q: GED, expect: [/high-school-equivalency/, /work-and-learning/], kind: short}
   - {q: English classes, expect: [/help-in-your-language/, /work-and-learning/], kind: everyday}
   - {q: daycare, expect: [/families-and-kids/, /school-age/], kind: everyday}
   - {q: pre k, expect: [/families-and-kids/], kind: everyday}
@@ -356,3 +356,17 @@ queries:
   - {q: my neighbor is too loud at night, expect: [/noise/], kind: question}
   - {q: how long does probate take, expect: [/probate-steps/], kind: question}
   - {q: where do my county taxes go, expect: [/county-budget/], kind: question}
+  # Pages merged Nov 15 (wave 21 findability, #529)
+  - {q: GED classes near me, expect: [/high-school-equivalency/, /free-adult-classes/], kind: everyday}
+  - {q: how do I get my GED in West Virginia, expect: [/high-school-equivalency/], kind: question}
+  - {q: free English classes for adults, expect: [/free-adult-classes/], kind: everyday}
+  - {q: where can I learn to use a computer, expect: [/free-adult-classes/], kind: question}
+  - {q: broadband map, expect: [/internet-service-map/, /internet/], kind: everyday}
+  - {q: is high speed internet coming to my area, expect: [/internet-service-map/, /internet/], kind: question}
+  - {q: can I run a business out of my house, expect: [/start-a-business/], kind: question}
+  - {q: hiring my first employee, expect: [/start-a-business/], kind: everyday}
+  - {q: city code, expect: [/city-rules/], kind: everyday}
+  - {q: where do I take old batteries, expect: [/recycling/], kind: question}
+  - {q: used motor oil disposal, expect: [/recycling/], kind: everyday}
+  - {q: old refrigerator disposal, expect: [/recycling/], kind: everyday}
+  - {q: premature death rate, expect: [/how-we-are-doing/], kind: everyday}
