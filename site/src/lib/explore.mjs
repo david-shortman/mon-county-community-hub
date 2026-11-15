@@ -47,3 +47,13 @@ export function chipProblems(doc, pages) {
   if (JSON.stringify(doc).includes('—')) out.push('contains an em dash');
   return out;
 }
+
+export { rankPicks, cleanPicks } from './explore-rank.mjs';
+
+// What the browser needs, kept small: each chip's id, name and page indexes,
+// and each page's route, label and summary once.
+export function chipData(doc, pageTags) {
+  const routes = [...new Set([...doc.chips.flatMap((c) => c.pages), ...doc.starter])].filter((r) => pageTags.has(r));
+  const pages = Object.fromEntries(routes.map((r) => [r, { label: pageTags.get(r).label, summary: pageTags.get(r).summary }]));
+  return { chips: doc.chips.map((c) => ({ id: c.id, name: c.name, pages: c.pages.filter((r) => pages[r]) })), starter: doc.starter.filter((r) => pages[r]), pages };
+}
