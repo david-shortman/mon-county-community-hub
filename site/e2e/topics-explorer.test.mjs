@@ -165,4 +165,75 @@ describe('topics explorer', () => {
     assert.equal((await page.evaluate(() => JSON.parse(localStorage.getItem('em-explore-saved') || '[]'))).length, 1);
     await ctx.close();
   });
+
+  test('My list: save, remove, copy, text and clear (#2029)', async () => {
+    const ctx = await s.browser.newContext({ ...PHONE, permissions: ['clipboard-read', 'clipboard-write'] });
+    await ctx.addInitScript(() => { if (!sessionStorage.getItem('seeded')) { localStorage.setItem('em-explore-picks', '["outside"]'); localStorage.removeItem('em-explore-saved'); sessionStorage.setItem('seeded', '1'); } });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    const list = page.locator('#my-list');
+    assert.ok(await list.isVisible(), 'My list shows with scripts on');
+    assert.ok(await page.locator('#ml-empty').isVisible(), 'empty: one line on how to add pages');
+    const saves = page.locator('#picked-list .ec-save');
+    for (let i = 0; i < 3; i++) await saves.nth(i).click();
+    assert.equal(await saves.nth(0).getAttribute('aria-pressed'), 'true');
+    assert.equal(await page.locator('#ml-items li').count(), 3);
+
+    const href = await page.locator('#ml-sms').getAttribute('href');
+    const body = decodeURIComponent(href.replace(/^sms:\?&body=/, ''));
+    assert.equal((body.match(/https:\/\/everythingmorgantown\.org\/[^\s]*/g) ?? []).length, 3, 'the text has 3 full links');
+
+    await page.locator('[data-ml="copy"]').click();
+    assert.equal(await page.evaluate(() => navigator.clipboard.readText()), body, 'Copy puts the same text on the clipboard');
+
+    const remove = page.locator('#ml-items .ml-remove').first();
+    assert.match(await remove.textContent(), /^Remove .+/, 'Remove names the page');
+    await remove.click();
+    assert.equal(await page.locator('#ml-items li').count(), 2);
+    assert.equal(await saves.nth(0).getAttribute('aria-pressed'), 'false', 'the Save button follows');
+
+    await page.reload();
+    assert.equal(await page.locator('#ml-items li').count(), 2, 'kept on this phone');
+    await page.locator('[data-ml="clear"]').click();
+    assert.ok(await page.locator('#ml-empty').isVisible());
+    assert.equal(await page.evaluate(() => localStorage.getItem('em-explore-saved')), null);
+    await ctx.close();
+  });
+
+  test('My list: Copy shows the text to select when the clipboard is not allowed', async () => {
+    const ctx = await s.browser.newContext(PHONE);
+    await ctx.addInitScript(() => {
+      localStorage.setItem('em-explore-saved', '["/parks/"]');
+      Object.defineProperty(navigator, 'clipboard', { value: { writeText: () => Promise.reject(new Error('no')) } });
+    });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    await page.locator('[data-ml="copy"]').click();
+    assert.ok(await page.locator('#ml-copy-text').isVisible());
+    assert.match(await page.locator('#ml-copy-text').inputValue(), /\/parks\//);
+    await ctx.close();
+  });
+
+  test('My list: deck saves show up, and the last card links to it', async () => {
+    const ctx = await s.browser.newContext({ ...PHONE, reducedMotion: 'reduce' });
+    await ctx.addInitScript(() => { localStorage.setItem('em-explore-picks', '["reuse"]'); localStorage.removeItem('em-explore-saved'); });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    await page.locator('#curious [data-flip]').click();
+    const total = Number((await page.locator('#fd-count').textContent()).split(' of ')[1]);
+    for (let i = 0; i < total; i++) await page.keyboard.press(i === 0 ? 'ArrowRight' : 'ArrowLeft');
+    await page.locator('#fd-list').click();
+    assert.equal(await page.locator('#flip-deck').isVisible(), false);
+    assert.equal(await page.locator('#ml-items li').count(), 1);
+    assert.equal(await page.evaluate(() => document.activeElement?.id), 'my-list-h', 'focus lands on My list');
+    await ctx.close();
+  });
+
+  test('scripts off: My list does not show', async () => {
+    const ctx = await s.browser.newContext({ ...PHONE, javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto(s.origin + '/topics/');
+    assert.equal(await page.locator('#my-list').isVisible(), false);
+    await ctx.close();
+  });
 });

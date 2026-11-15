@@ -67,3 +67,21 @@ export function deckAct(state, saved, act) {
 }
 // How many cards in this run were saved.
 export const deckSavedCount = (state) => state.log.filter((l) => l.act === 'save').length;
+
+// My list (#2029): saved routes from storage, in the order saved, each once,
+// only pages we know, and never a quiet page.
+export function cleanSaved(raw, pages) {
+  let list = [];
+  try { list = JSON.parse(raw ?? '[]'); } catch (e) { return []; }
+  if (!Array.isArray(list)) return [];
+  return [...new Set(list.filter((r) => typeof r === 'string' && pages[r] && !isQuietPage(r, pages[r])))];
+}
+
+// The text that Copy and Text it to myself send: a title line, then each
+// page's label and full link. Quiet pages are left out even if asked for.
+export function listText(routes, pages, site) {
+  const root = String(site).replace(/\/$/, '');
+  const lines = routes.filter((r) => pages[r] && !isQuietPage(r, pages[r])).map((r) => `${pages[r].label}\n${root}${r}`);
+  return lines.length ? ['My list from Everything Morgantown', ...lines].join('\n\n') : '';
+}
+export const smsHref = (text) => `sms:?&body=${encodeURIComponent(text)}`;

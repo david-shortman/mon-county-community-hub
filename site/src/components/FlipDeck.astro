@@ -7,7 +7,7 @@
 // Each card: the page's door, label and summary, with Skip, Open page and
 // Save. Above it: Close, "3 of 12", Back (undo the last Save or Skip) and a
 // progress bar. Saved pages go to My list (localStorage em-explore-saved,
-// #2029). Pages Pass it on hides (isQuietPage) get no Save button.
+// #2029), and the last card links to it. Pages Pass it on hides (isQuietPage) get no Save button.
 //
 // Shortcuts, never the only way: swipe or drag the card right to Save, left
 // to Skip; keys Right arrow Save, Left arrow Skip, Enter opens the page,
@@ -44,6 +44,7 @@
   <div class="fd-end" id="fd-end" hidden>
     <h2 id="fd-end-h" tabindex="-1"></h2>
     <div class="fd-actions">
+      <a class="fd-btn" id="fd-list" href="#my-list">See My list</a>
       <button type="button" class="fd-btn" data-fd="again">Start over</button>
       <button type="button" class="fd-btn" data-fd="close">Close</button>
     </div>
@@ -136,6 +137,7 @@
       if (done) {
         $('fd-count').textContent = `${total} of ${total}`;
         $('fd-end-h').textContent = `You saved ${deckSavedCount(state)} of ${total}`;
+        ($('fd-list') as HTMLElement).hidden = !document.getElementById('my-list');
         $('fd-end-h').focus();
         $('fd-live').textContent = `Done. You saved ${deckSavedCount(state)} of ${total}.`;
         return;
@@ -192,6 +194,13 @@
       if (what === 'close') dlg.close();
       else if (what === 'again') { state = newDeck(deckRoutes()); show(); $('fd-title').focus(); }
       else act(what as 'save' | 'skip' | 'back');
+    });
+    // See My list: close first, then go to the list on the page underneath.
+    $('fd-list').addEventListener('click', (e) => {
+      e.preventDefault();
+      opener = document.getElementById('my-list-h');
+      dlg.close();
+      opener?.scrollIntoView({ block: 'start' });
     });
     dlg.addEventListener('close', () => { opener?.focus(); });
 

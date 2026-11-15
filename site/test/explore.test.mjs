@@ -85,3 +85,20 @@ test('quiet pages: Pass it on hides them', () => {
   assert.ok(isQuietPage('/x/', { label: 'Domestic violence help' }));
   assert.ok(!isQuietPage('/parks/', { label: 'Parks and trails', summary: 'Trails, playgrounds' }));
 });
+
+import { cleanSaved, listText, smsHref } from '../src/lib/explore-rank.mjs';
+
+test('My list text: titles and full links, no quiet pages (#2029)', () => {
+  const pages = {
+    '/parks/': { label: 'Parks and trails' },
+    '/grow/': { label: 'Grow food' },
+    '/protective-orders/': { label: 'Protective orders' },
+    '/x/': { label: 'Domestic violence help' },
+  };
+  const text = listText(['/parks/', '/protective-orders/', '/grow/', '/x/'], pages, 'https://everythingmorgantown.org/');
+  assert.equal(text, 'My list from Everything Morgantown\n\nParks and trails\nhttps://everythingmorgantown.org/parks/\n\nGrow food\nhttps://everythingmorgantown.org/grow/');
+  assert.equal(listText(['/x/'], pages, 'https://e.org'), '', 'nothing to send');
+  assert.ok(smsHref(text).startsWith('sms:?&body=My%20list'));
+  assert.deepEqual(cleanSaved('["/grow/","/x/","/nope/","/grow/","/parks/"]', pages), ['/grow/', '/parks/']);
+  assert.deepEqual(cleanSaved('oops', pages), []);
+});
