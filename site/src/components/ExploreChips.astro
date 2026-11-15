@@ -103,7 +103,7 @@ const data = chipData(doc, await loadPages());
       box.hidden = ranked.length === 0;
       if (bar) bar.hidden = ranked.length === 0 || barClosed;
       document.dispatchEvent(new CustomEvent('explore:picks', { detail: { picked: [...picked], pages: ranked.map((p) => p.route) } }));
-      if (announce) count.textContent = ranked.length ? `${ranked.length} pages picked for you` : 'No picks. The list is empty.';
+      if (announce) count.textContent = ranked.length ? `${ranked.length} ${ranked.length === 1 ? 'page' : 'pages'} picked for you` : 'No picks. The list is empty.';
     }
 
     for (const b of buttons) {
