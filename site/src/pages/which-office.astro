@@ -57,7 +57,7 @@ const groups = [
   ] },
   { id: 'home-business', title: 'Water, trash and starting a business', rows: [
     row('Start water and sewer service in Morgantown, Westover or Star City', mub && { office: 'Morgantown Utility Board (MUB)', phone: mub.contact.phone, sources: mub.sources, org: mub.org, note: 'Not sure who provides your water? Ask your landlord or the seller.' }, { level: 'Water utility', page: ['/who-serves-me/', 'Who serves my address?'] }),
-    row('Who picks up trash at my address?', fromOrg('monongalia-county-solid-waste-authority'), { level: 'County', note: 'The Solid Waste Authority can tell you who serves your address.', page: ['/recycling/', 'Recycling and trash'] }),
+    row('Who picks up trash at my address?', fromOrg('monongalia-county-solid-waste-authority'), { level: 'County', note: 'Ask them or your town office. Some towns pick up trash themselves.', page: ['/recycling/', 'Recycling and trash'] }),
     row('Register a new business', oneStop && { office: "The state's One Stop Business Portal", sources: oneStop.sources, org: oneStop.org, note: 'One online filing covers the Secretary of State, the State Tax Department and WorkForce West Virginia. Then check with your town.' }, { level: 'State', page: ['/start-a-business/', 'Start a business'] }),
     row('A business license inside Morgantown city limits', cityLicense && { office: 'City of Morgantown Finance Department', phone: cityLicense.contact.phone, sources: cityLicense.sources, org: cityLicense.org }, { level: 'City', page: ['/start-a-business/', 'Start a business'] }),
   ] },
