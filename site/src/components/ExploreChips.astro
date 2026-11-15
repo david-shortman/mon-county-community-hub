@@ -133,7 +133,7 @@ const data = chipData(doc, await loadPages(), doorNames);
       const detail = { picked: [...picked], pages: ranked.map((p) => p.route) };
       (window as any).__emPicks = detail;
       document.dispatchEvent(new CustomEvent('explore:picks', { detail }));
-      if (announce) count.textContent = ranked.length ? `${ranked.length} pages picked for you` : 'No picks. The list is empty.';
+      if (announce) count.textContent = ranked.length ? `${ranked.length} ${ranked.length === 1 ? 'page' : 'pages'} picked for you` : 'No picks. The list is empty.';
     }
 
     for (const b of buttons) {
