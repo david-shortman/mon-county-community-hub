@@ -18,12 +18,15 @@
 // runs, before the page finishes loading, so the page already has its full
 // height when the browser puts you back where you were. AppShell.astro keeps
 // the fallback that restores the spot if the browser does not.
-// No motion here.
+// No motion here. Flip through (#2028) is FlipDeck.astro; its buttons carry
+// data-flip and stay hidden with no script.
 import { loadChips, chipData } from '../lib/explore.mjs';
+import { loadDoors } from '../lib/content.mjs';
 import { loadPages } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const doc = loadChips();
-const data = chipData(doc, await loadPages());
+const doorNames = Object.fromEntries([...loadDoors().doors, ...loadDoors().lanes].map((d) => [d.slug, d.name]));
+const data = chipData(doc, await loadPages(), doorNames);
 ---
 <section class="explore-chips" id="curious" aria-labelledby="curious-h">
   <h2 id="curious-h">What are you curious about?</h2>
@@ -31,6 +34,7 @@ const data = chipData(doc, await loadPages());
   <ul class="ec-chips">
     {data.chips.map((c) => <li><a class="ec-chip" href={`${base}/topics/pick/${c.id}/`} data-chip={c.id}>{c.name}</a></li>)}
   </ul>
+  <p class="ec-flip"><button type="button" class="ec-chip ec-flip-btn" data-flip hidden>Flip through pages</button></p>
   <div class="ec-picked" id="picked" hidden>
     <h3 id="picked-h" tabindex="-1">Picked for you</h3>
     <ul class="topic-list" id="picked-list"></ul>
@@ -46,6 +50,9 @@ const data = chipData(doc, await loadPages());
   .ec-chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   .ec-chip[aria-pressed="true"] { background: var(--accent); color: var(--bg); }
   .ec-chip[aria-pressed="true"]::before { content: "\2713\00a0"; }
+  .ec-flip { margin: 4px 0 0; }
+  .ec-flip-btn[hidden] { display: none; }
+  .ec-flip-btn { border-style: dashed; }
   .ec-picked h3 { margin-top: 16px; }
   :global(.ec-tags) { display: block; font-size: 0.9rem; color: var(--muted, inherit); }
 </style>
@@ -100,7 +107,9 @@ const data = chipData(doc, await loadPages());
       }));
       box.hidden = ranked.length === 0;
       if (bar) bar.hidden = ranked.length === 0 || barClosed;
-      document.dispatchEvent(new CustomEvent('explore:picks', { detail: { picked: [...picked], pages: ranked.map((p) => p.route) } }));
+      const detail = { picked: [...picked], pages: ranked.map((p) => p.route) };
+      (window as any).__emPicks = detail;
+      document.dispatchEvent(new CustomEvent('explore:picks', { detail }));
       if (announce) count.textContent = ranked.length ? `${ranked.length} pages picked for you` : 'No picks. The list is empty.';
     }
 

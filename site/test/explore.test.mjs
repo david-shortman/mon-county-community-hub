@@ -49,3 +49,39 @@ test('Get outside and Meet people put the key pages near the top (#2027)', () =>
   assert.ok(order.indexOf('/parks/') < 3, order.join(' '));
   assert.ok(order.indexOf('/volunteer/') > -1 && order.indexOf('/volunteer/') < 10, order.join(' '));
 });
+
+import { newDeck, deckAct, deckSavedCount, isQuietPage } from '../src/lib/explore-rank.mjs';
+
+test('deck: save, skip, back undoes, end stops', () => {
+  let d = newDeck(['/a/', '/b/', '/c/']);
+  let saved = ['/z/'];
+  ({ state: d, saved } = deckAct(d, saved, 'save'));
+  assert.deepEqual(saved, ['/z/', '/a/']);
+  ({ state: d, saved } = deckAct(d, saved, 'skip'));
+  assert.equal(d.i, 2);
+  ({ state: d, saved } = deckAct(d, saved, 'back'));
+  assert.equal(d.i, 1, 'back undoes the skip');
+  ({ state: d, saved } = deckAct(d, saved, 'back'));
+  assert.deepEqual(saved, ['/z/'], 'back undoes the save');
+  assert.equal(d.i, 0);
+  const same = deckAct(d, saved, 'back');
+  assert.equal(same.state, d, 'back at the start does nothing');
+  for (const a of ['save', 'save', 'save']) ({ state: d, saved } = deckAct(d, saved, a));
+  assert.equal(deckSavedCount(d), 3);
+  assert.equal(deckAct(d, saved, 'save').state, d, 'nothing after the last card');
+});
+
+test('deck: saving a page already saved keeps it, and back leaves it', () => {
+  let d = newDeck(['/a/']);
+  let saved = ['/a/'];
+  ({ state: d, saved } = deckAct(d, saved, 'save'));
+  assert.deepEqual(saved, ['/a/']);
+  ({ state: d, saved } = deckAct(d, saved, 'back'));
+  assert.deepEqual(saved, ['/a/'], 'it was saved before, so it stays');
+});
+
+test('quiet pages: Pass it on hides them', () => {
+  assert.ok(isQuietPage('/protective-orders/'));
+  assert.ok(isQuietPage('/x/', { label: 'Domestic violence help' }));
+  assert.ok(!isQuietPage('/parks/', { label: 'Parks and trails', summary: 'Trails, playgrounds' }));
+});

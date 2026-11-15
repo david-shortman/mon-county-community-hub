@@ -48,12 +48,21 @@ export function chipProblems(doc, pages) {
   return out;
 }
 
-export { rankPicks, cleanPicks } from './explore-rank.mjs';
+import { isQuietPage } from './explore-rank.mjs';
+export { rankPicks, cleanPicks, isQuietPage } from './explore-rank.mjs';
 
 // What the browser needs, kept small: each chip's id, name and page indexes,
 // and each page's route, label and summary once.
-export function chipData(doc, pageTags) {
+// `doors` maps a door slug to its name, for the deck's cards (#2028). `quiet`
+// marks pages that never get a Save button (isQuietPage).
+export function chipData(doc, pageTags, doors = {}) {
   const routes = [...new Set([...doc.chips.flatMap((c) => c.pages), ...doc.starter])].filter((r) => pageTags.has(r));
-  const pages = Object.fromEntries(routes.map((r) => [r, { label: pageTags.get(r).label, summary: pageTags.get(r).summary }]));
+  const pages = Object.fromEntries(routes.map((r) => {
+    const t = pageTags.get(r);
+    const p = { label: t.label, summary: t.summary };
+    if (doors[t.door]) p.door = doors[t.door];
+    if (isQuietPage(r, p)) p.quiet = 1;
+    return [r, p];
+  }));
   return { chips: doc.chips.map((c) => ({ id: c.id, name: c.name, pages: c.pages.filter((r) => pages[r]) })), starter: doc.starter.filter((r) => pages[r]), pages };
 }
