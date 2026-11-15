@@ -331,7 +331,7 @@ html:root .mp-num {
   background: var(--water); color: var(--card); border: 3px solid var(--bg);
   font-family: var(--serif); font-weight: 600; font-size: 1.05rem; font-variant-numeric: lining-nums;
 }
-html:root .milepost summary h2 { color: var(--fg); }
+html:root .milepost summary :is(h2, h3) { color: var(--fg); }
 html:root .milepost details { border-top: 2px solid var(--fg); }
 html:root .milepost details[open] { background: var(--card); }
 html:root .mp-body { border-top-color: var(--line); padding: 0 var(--s3) var(--s4); }
