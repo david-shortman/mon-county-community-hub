@@ -2,7 +2,7 @@ title: Start water and sewer service with the Morgantown Utility Board
 slug: mub-start-service
 org: morgantown-utility-board
 topics: [moving]
-who_it_is_for: People moving into a home with Morgantown Utility Board (MUB) water or sewer. Star City and Granville send residents to MUB for water, sewer or trash billing.
+who_it_is_for: People moving into a home with Morgantown Utility Board (MUB) water or sewer. MUB says it serves Morgantown. The City of Westover and Star City name MUB for water and sewer. Granville sends residents to MUB to set up trash billing.
 what_to_do: Apply on MUB's start service page. You need a Visa, MasterCard or Discover card to finish the request. For a brand new building, call 304-292-8443, Monday to Friday, 8 a.m. to 4:30 p.m. The office is at 278 Greenbag Road.
 what_to_bring:
   - "A Visa, MasterCard or Discover card to finish the request"
@@ -12,10 +12,14 @@ contact:
 cost: A $125 security deposit for all new customers, paid at the end of the application.
 sources:
   - url: https://mub.org/start-service
-    checked: 2026-11-01
+    checked: 2026-11-15
   - url: https://mub.org/contact
-    checked: 2026-11-01
+    checked: 2026-11-15
   - url: https://townofgranvillewv.gov/community/
-    checked: 2026-11-01
+    checked: 2026-11-15
   - url: https://www.starcitywv.com/
-    checked: 2026-11-01
+    checked: 2026-11-15
+  - url: https://www.westoverwv.org/utilities
+    checked: 2026-11-15
+  - url: https://mub.org/
+    checked: 2026-11-15

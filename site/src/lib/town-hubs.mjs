@@ -26,7 +26,7 @@ const SERVICES = {
     ['Police', 'morgantown-police-non-emergency', 'Then press 0.'],
     ['City streets', 'morgantown-streets'],
     ['Water and sewer', 'mub-start-service'],
-    ['Trash', 'mon-swa-ask-about-trash', 'We could not confirm how to start city trash pickup yet. The Solid Waste Authority can tell you who serves your address.'],
+    ['Trash', 'mon-swa-ask-about-trash', 'We could not confirm how to start city trash pickup yet.'],
   ],
   westover: [
     ['Police', 'westover-police-non-emergency'],
@@ -41,7 +41,7 @@ const SERVICES = {
   granville: [
     ['Police', 'granville-police'],
     ['Trash', 'granville-trash'],
-    ['Water and sewer', 'mub-start-service'],
+    ['Water and sewer', 'granville-town-office', 'We could not confirm who provides water and sewer here. Ask the town office.'],
   ],
   blacksville: [
     ['Water and police', 'blacksville-town-office', 'We could not confirm who provides water or police here. Ask the town office.'],
@@ -50,7 +50,7 @@ const SERVICES = {
   county: [
     ['Sheriff', 'mon-county-sheriff-office'],
     ['Police non-emergency, any hour', 'mecca-non-emergency'],
-    ['Trash', 'mon-swa-ask-about-trash', 'We could not find a public list of who picks up trash outside town limits. The Solid Waste Authority can tell you who serves your address.'],
+    ['Trash', 'mon-swa-ask-about-trash', 'We could not find a public list of who picks up trash outside town limits.'],
     ['Water', 'wv-psc-utility-questions', 'We could not confirm which water company serves each area outside the towns. Ask your landlord or the seller, or ask the state utility agency.'],
   ],
 };
