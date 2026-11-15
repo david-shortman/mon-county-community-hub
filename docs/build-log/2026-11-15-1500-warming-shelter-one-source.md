@@ -28,6 +28,6 @@
 | WV 211 search | Loads results by script, so a person has to search it. |
 | WAJR, The Dominion Post (news, background only) | Nothing newer than August 24 and 25, 2026. |
 
-The discovery is in `docs/discoveries/2026-11-15-warming-shelter-plan-not-on-official-pages.md`. Leads we could not confirm are in a needs-verification issue.
+The discovery is in `docs/discoveries/2026-11-15-warming-shelter-plan-not-on-official-pages.md`. Leads we could not confirm, and the human follow-up (the City minutes named November 15 as the hoped-for opening), are in #2023.
 
 Cost: $0.
