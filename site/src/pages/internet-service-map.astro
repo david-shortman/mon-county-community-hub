@@ -7,15 +7,22 @@
 // read from page 31 of each, rendered, on 2026-11-14.
 // Built as its own page because #1867 (open for David) changes /internet/.
 // No internet company is named or ranked, though the PDFs list them.
+// The FCC map how-to (#2010) comes from the FCC's own help center
+// (help.bdc.fcc.gov), which robots.txt lets us read. broadbandmap.fcc.gov and
+// www.fcc.gov answer robots.txt with a 403, so no robot reads them: we only
+// link to the map, and a person re-checks it (person sources checklist).
 import Base from '../layouts/Base.astro';
 import SourceLine from '../components/SourceLine.astro';
 import Fact from '../components/Fact.astro';
 import Icon from '../components/Icon.astro';
+import Route from '../components/Route.astro';
+import Milepost from '../components/Milepost.astro';
 import { factsFor } from '../lib/facts.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "living-here", topic: "moving", label: "Which places have internet service", summary: "How many places in Mon County are served, funded or still waiting for internet service, what those words mean, and how to check your own address" };
+export const page = { door: "living-here", topic: "moving", label: "Which places have internet service", summary: "Which internet companies and speeds reach your address on the FCC map, how to challenge the map, and how many places in Mon County are served, funded or still waiting for service" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const fact = factsFor('internet');
+const fccMap = 'https://broadbandmap.fcc.gov/';
 const map = 'https://broadbandwv.org/arcgis/apps/experiencebuilder/experience/?id=2b030b85a8234e89b33fbac8a27e64ce&page=Availability';
 // Page 31 of the availability PDF, copied exactly. The five rows add up to
 // the total the PDF prints.
@@ -28,12 +35,51 @@ const rows = [
 const total = '38,428';
 const availability = [{ url: 'https://broadband.wv.gov/wp-content/uploads/2026/09/County-availability-Sept2026.pdf', checked: '2026-11-14', name: 'West Virginia Office of Broadband, Monongalia County Broadband Availability Summary (page 31)' }];
 ---
-<Base title="Which places in Mon County have internet service" description="Mon County's served, funded and unserved places from the West Virginia Office of Broadband, what the words mean, and how to check your address.">
+<Base title="Which places in Mon County have internet service" description="Which internet companies and speeds reach your address on the FCC National Broadband Map, how to challenge it, and Mon County's served, funded and unserved places from the state.">
   <h1>Which places in Mon County have internet service</h1>
-  <p class="lede">Look up your address on the state's broadband map to see if your place is served, funded or unserved. Below are the county's numbers from the West Virginia Office of Broadband, and what each word means.</p>
+  <p class="lede">To see which internet companies and speeds reach one address, look it up on the FCC's National Broadband Map. To see if a place is served, funded or unserved in the state's plans, use the state's broadband map.</p>
   <div class="actions">
+    <a class="btn" href={fccMap}><Icon name="open" /><span>FCC broadband map</span></a>
     <a class="btn" href={map}><Icon name="open" /><span>State broadband map</span></a>
   </div>
+
+  <h2 id="fcc-map">Which companies and speeds reach your address</h2>
+  <Fact f={fact('fcc-map-about')} about="the FCC National Broadband Map" />
+  <p>Tap a step to open it.</p>
+  <Route label="Steps to look up an address on the FCC map">
+  <Milepost n={1} title="Search for your address" id="fcc-search" level={3} open>
+  <Fact f={fact('fcc-map-address')} about="looking up an address on the FCC map" />
+  <Fact f={fact('fcc-map-no-address')} about="finding a place with no street address" />
+  <div class="actions">
+    <a class="btn" href={fccMap}><Icon name="open" /><span>Open the FCC broadband map</span></a>
+  </div>
+  </Milepost>
+
+  <Milepost n={2} title="Read the dots and the list" id="fcc-read" level={3}>
+  <ul>
+    <Fact tag="li" f={fact('fcc-map-colors')} about="the colors of the dots on the FCC map" />
+    <Fact tag="li" f={fact('fcc-map-slow-hidden')} about="slower service the FCC map hides at first" />
+    <Fact tag="li" f={fact('fcc-map-mobile')} about="cell phone coverage on the FCC map" />
+  </ul>
+  </Milepost>
+
+  <Milepost n={3} title="Know what the list does and does not tell you" id="fcc-means" level={3}>
+  <Fact f={fact('fcc-map-what-it-shows')} about="what the FCC map shows" />
+  <Fact f={fact('fcc-map-available-means')} about="what the FCC means by available" />
+  </Milepost>
+  </Route>
+
+  <h2 id="fcc-challenge">If the FCC map is wrong about your address</h2>
+  <p>There are two kinds of challenge: one for the companies and speeds listed at your address, and one for your building's dot on the map.</p>
+  <ul>
+    <Fact tag="li" f={fact('fcc-availability-challenge')} about="an availability challenge on the FCC map" />
+    <Fact tag="li" f={fact('fcc-challenge-feedback')} about="giving feedback instead of a challenge" />
+    <Fact tag="li" f={fact('fcc-challenge-slow-service')} about="service slower than you pay for" />
+    <Fact tag="li" f={fact('fcc-location-challenge')} about="a location challenge on the FCC map" />
+  </ul>
+  <Fact f={fact('fcc-challenge-after')} about="what happens after an availability challenge" />
+
+  <h2 id="state-map">Served, funded or unserved: the state's map</h2>
   <Fact f={fact('check-your-address')} about="looking up an address on the state broadband map" />
 
   <h2 id="numbers">Mon County's numbers</h2>
@@ -61,7 +107,8 @@ const availability = [{ url: 'https://broadband.wv.gov/wp-content/uploads/2026/0
 
   <h2 id="next">What you can do</h2>
   <ul>
-    <li><strong>Check your address</strong> on the <a href={map}>state broadband map</a>.</li>
+    <li><strong>See which companies and speeds reach your address</strong> on the <a href="#fcc-map">FCC map</a>.</li>
+    <li><strong>See if your place is served, funded or unserved</strong> on the <a href={map}>state broadband map</a>.</li>
     <li><strong>Slow or no internet?</strong> Take the state's speed test: <a href={`${base}/internet/#speed-test`}>Slow or no internet? Tell the state</a>.</li>
     <li><strong>Questions about where the state is building?</strong> The Office of Broadband's phone and email are on <a href={`${base}/internet/#building`}>Where the state is building</a>.</li>
     <li><strong>A problem with your internet company?</strong> See <a href={`${base}/internet/#complain`}>how to complain</a>.</li>

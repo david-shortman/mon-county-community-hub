@@ -3,6 +3,10 @@ slug: premature-death
 topic: health
 definition: "Years of potential life lost before age 75 per 100,000 population
   (age-adjusted)." # County Health Rankings' own definition (v001)
+plain: # a plain sentence from the measure page, shown under the definition (#2002)
+  text: "Each death before age 75 adds the years left until 75, so a death at 35 adds 40 years and a death at 70 adds 5. A higher number means more years lost. Deaths at 75 or older do not count."
+  url: https://www.countyhealthrankings.org/health-data/population-health-and-well-being/length-of-life/life-span/premature-death?year=2025
+  checked: 2026-11-15
 unit: number
 digits: 0 # shown as a whole number
 per: years per 100,000 people

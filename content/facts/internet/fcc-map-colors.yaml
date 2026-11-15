@@ -1,0 +1,8 @@
+slug: fcc-map-colors
+text: "Each building is a dot. A green dot means a company reports service there. A red dot means no company reports service there. A gray dot is a building the FCC thinks uses business-grade service."
+quote: "Green locations have internet services available to them, based on information reported by an ISP. Red locations have no reported internet services available. Gray locations represent buildings or structures that are not likely to use the broadband internet access services typically sold to homes and small businesses"
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10467446103579-How-to-Use-the-FCC-s-National-Broadband-Map
+    name: FCC Broadband Data Collection Help Center, How to Use the FCC's National Broadband Map
+    checked: 2026-11-15
+recheck_days: 180
