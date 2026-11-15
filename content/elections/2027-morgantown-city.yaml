@@ -1,0 +1,28 @@
+# Morgantown City Council election (wave 19, #529). A city election: only
+# voters who live inside Morgantown city limits vote in it, so /vote/ says so
+# and names the City Clerk, not the County Clerk. Dates the City has not
+# posted yet (registration deadline, early voting, absentee deadline, canvass)
+# stay off until an official page states them; see the needs-verification
+# issue linked in the PR. results_until is when /vote/ stops showing it.
+slug: 2027-morgantown-city
+name: Morgantown City Council election
+election_day: 2027-04-27
+polls: 6:30 a.m. to 7:30 p.m.
+polls_close: "19:30"
+who_votes: Only people who live inside Morgantown city limits vote in this election. It picks City Council members for the odd-numbered wards.
+office:
+  name: Morgantown City Clerk
+  url: https://www.morgantownwv.gov/157/Election-Information
+  phone: 304-284-7434
+before: [morgantown-city-limits-check, wv-voter-id]
+results_note: The City of Morgantown posts official city election results on its Election Results page. Questions about city elections go to the Morgantown City Clerk.
+provisional_lookup: false
+results_url: https://www.morgantownwv.gov/158/Election-Results
+results_until: 2027-05-31
+sources:
+  - url: https://www.morgantownwv.gov/157/Election-Information
+    checked: 2026-11-14
+  - url: https://www.morgantownwv.gov/590/Voter-Information
+    checked: 2026-11-14
+  - url: https://www.morgantownwv.gov/158/Election-Results
+    checked: 2026-11-14
