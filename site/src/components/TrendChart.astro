@@ -7,6 +7,7 @@
 // with it. Hover or tap a dot for its value. Colors are the validated
 // blue/orange pair (dataviz palette slots 1 and 2), stepped for dark mode.
 import { showValue } from '../lib/indicators.mjs';
+import { roundTop } from '../lib/chart-scale.mjs';
 // The trends file gives whole percents, so the chart shows them that way.
 const whole = (v) => (i.unit === 'percent' ? `${Math.round(v * 100)}%` : showValue(i, v));
 const { i } = Astro.props;
@@ -24,7 +25,9 @@ const R = Math.max(104, 12 + Math.max(0, ...series.map((s) => endText(s).length)
 const max = Math.max(...series.flatMap((s) => s.points.map((p) => p.value)));
 // Axis tops that halve cleanly: 10%, 20%, 30%... or 4%, 6%, 8% for small rates.
 const step = max > 0.1 ? 10 : 2;
-const top = i.unit === 'percent' ? (Math.ceil((max * 100) / step) * step) / 100 : max;
+// Counts and rates get a round top too, so 13,324 becomes 14,000 with 7,000
+// halfway (#2002): the next multiple of 2 in the second digit.
+const top = i.unit === 'percent' ? (Math.ceil((max * 100) / step) * step) / 100 : roundTop(max);
 const x = (year) => L + (years.length > 1 ? (years.indexOf(year) / (years.length - 1)) * (W - L - R) : 0);
 const y = (v) => T + (1 - v / top) * (H - T - B);
 const ticks = [0, top / 2, top];
