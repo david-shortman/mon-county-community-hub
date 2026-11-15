@@ -27,7 +27,6 @@ const rows = [
 ];
 const total = '38,428';
 const availability = [{ url: 'https://broadband.wv.gov/wp-content/uploads/2026/09/County-availability-Sept2026.pdf', checked: '2026-11-14', name: 'West Virginia Office of Broadband, Monongalia County Broadband Availability Summary (page 31)' }];
-const program = [{ url: 'https://broadband.wv.gov/wp-content/uploads/2026/10/County-program-Sept2026Updated.pdf', checked: '2026-11-14', name: 'West Virginia Office of Broadband, Monongalia County Broadband Program Summary (page 31)' }];
 ---
 <Base title="Which places in Mon County have internet service" description="Mon County's served, funded and unserved places from the West Virginia Office of Broadband, what the words mean, and how to check your address.">
   <h1>Which places in Mon County have internet service</h1>
@@ -38,7 +37,7 @@ const program = [{ url: 'https://broadband.wv.gov/wp-content/uploads/2026/10/Cou
   <Fact f={fact('check-your-address')} about="looking up an address on the state broadband map" />
 
   <h2 id="numbers">Mon County's numbers</h2>
-  <p>The state counts places, which it calls "broadband serviceable locations." Its summary for Mon County uses FCC data as of December 31, 2025.</p>
+  <p>The state counts places, which it calls "broadband serviceable locations." Its summary for Mon County uses FCC data as of December 31, 2025. The state puts unserved and underserved places together in one count. To see where the places are, use the state broadband map.</p>
   <div class="table-scroll" role="region" aria-labelledby="mon-internet-cap" tabindex="0"><table>
     <caption id="mon-internet-cap">Places in Mon County, by internet service, from the state's county summary</caption>
     <thead><tr><th scope="col">What the state's data shows</th><th scope="col" class="num">Places</th></tr></thead>
@@ -47,10 +46,8 @@ const program = [{ url: 'https://broadband.wv.gov/wp-content/uploads/2026/10/Cou
     </tbody>
     <tfoot><tr><th scope="row">All places</th><td class="num">{total}</td></tr></tfoot>
   </table></div>
-  <p>On the state's map of the county, most of the funded places are in the western half of the county.</p>
   <SourceLine sources={availability} org="wv-office-of-broadband" about="Mon County's broadband numbers" />
-  <p>The state's program summary for the county says 8,664 places here have received funding from a broadband program. The 1,819 in the table are the ones the state lists as "Funded (Not Yet Served)."</p>
-  <SourceLine sources={program} org="wv-office-of-broadband" about="Mon County's broadband funding" />
+  <Fact f={fact('funded-total')} about="Mon County's broadband funding" />
 
   <h2 id="words">What the words mean</h2>
   <p>These are the state's definitions. Mbps (megabits per second) is how fast internet is. Download is how fast things come to you, like a video. Upload is how fast things go out, like a video call.</p>

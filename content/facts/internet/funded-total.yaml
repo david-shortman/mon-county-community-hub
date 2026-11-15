@@ -1,0 +1,8 @@
+slug: funded-total
+text: "The state's program summary for the county says 8,664 places here have received funding from a broadband program. The 1,819 in the table are the ones the state lists as \"Funded (Not Yet Served).\""
+quote: "Total Locations That Have Received Funding: 8,664"
+sources:
+  - url: https://broadband.wv.gov/wp-content/uploads/2026/10/County-program-Sept2026Updated.pdf
+    name: West Virginia Office of Broadband, Monongalia County Broadband Program Summary (page 31, read from the page image)
+    checked: 2026-11-14
+recheck_days: 180
