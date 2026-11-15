@@ -18,10 +18,12 @@
 // runs, before the page finishes loading, so the page already has its full
 // height when the browser puts you back where you were. AppShell.astro keeps
 // the fallback that restores the spot if the browser does not.
-// No motion here. Flip through (#2028) is FlipDeck.astro; its buttons carry
+// Nothing here moves. The "Turn off motion" switch (MotionSwitch.astro, #2030)
+// sits under the help line and also stops Flip through's motion. Flip through (#2028) is FlipDeck.astro; its buttons carry
 // data-flip and stay hidden with no script.
 import { loadChips, chipData } from '../lib/explore.mjs';
 import { loadDoors } from '../lib/content.mjs';
+import MotionSwitch from './MotionSwitch.astro';
 import { loadPages } from '../lib/pages.mjs';
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const doc = loadChips();
@@ -31,6 +33,7 @@ const data = chipData(doc, await loadPages(), doorNames);
 <section class="explore-chips" id="curious" aria-labelledby="curious-h">
   <h2 id="curious-h">What are you curious about?</h2>
   <p class="ec-help">Pick one or more to see pages for them first. Your picks stay on this phone.</p>
+  <MotionSwitch />
   <ul class="ec-chips">
     {data.chips.map((c) => <li><a class="ec-chip" href={`${base}/topics/pick/${c.id}/`} data-chip={c.id}>{c.name}</a></li>)}
   </ul>
@@ -62,6 +65,7 @@ const data = chipData(doc, await loadPages(), doorNames);
 
 <script>
   import { rankPicks, cleanPicks } from '../lib/explore-rank.mjs';
+  import { bindMotionSwitch } from '../lib/motion-client.mjs';
   const KEY = 'em-explore-picks';
   const root = document.getElementById('curious');
   const dataEl = document.getElementById('explore-data');
@@ -152,6 +156,9 @@ const data = chipData(doc, await loadPages(), doorNames);
       const t = document.getElementById('show-me');
       if (t) { t.setAttribute('tabindex', '-1'); t.scrollIntoView({ block: 'start' }); t.focus({ preventScroll: true }); }
     });
+    // The shared "Turn off motion" switch (#2030): one setting for the whole
+    // site, so Flip through follows it too.
+    bindMotionSwitch(root);
     draw(false);
   }
 </script>
