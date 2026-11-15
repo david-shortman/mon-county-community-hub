@@ -1,0 +1,8 @@
+slug: fcc-location-challenge
+text: "If your home is missing from the map, or its dot has the wrong address, unit count or building type, or sits on a shed instead of the house, you can file a **location challenge**. Click **Location Challenge** next to the address. For a missing home, zoom to it, click where it is, and choose **Add a New Location**. Accepted fixes show up in a later update of the location data, which the FCC updates every 6 months."
+quote: "If the challenge is accepted, the revised information about the location will be reflected in a future version of the location data on the map, which is updated every 6 months."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10475216120475-How-to-Submit-a-Location-Challenge
+    name: FCC Broadband Data Collection Help Center, How to Submit a Location Challenge
+    checked: 2026-11-15
+recheck_days: 180

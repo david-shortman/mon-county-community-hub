@@ -1,0 +1,8 @@
+slug: fcc-map-what-it-shows
+text: "The map shows what companies say they offer for sale at an address. It does not show prices, or how fast the service really runs. The speeds are the most each company advertises. To learn prices and plans, ask the company."
+quote: "The National Broadband Map shows internet availability, not network performance, affordability, or adoption."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10476040597787-How-to-Submit-an-Availability-Challenge
+    name: FCC Broadband Data Collection Help Center, How to Submit an Availability Challenge
+    checked: 2026-11-15
+recheck_days: 180
