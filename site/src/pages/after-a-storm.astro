@@ -21,8 +21,8 @@ const generator = [{ url: 'https://www.cdc.gov/carbon-monoxide/about/index.html'
 const floodWater = [{ url: 'https://www.weather.gov/safety/flood-turn-around-dont-drown', checked }];
 const mold = [{ url: 'https://www.cdc.gov/mold-health/about/index.html', checked }];
 const claim = [{ url: 'https://www.floodsmart.gov/how-do-i-start-my-flood-claim', checked }];
-// Re-read 2026-11-16 (#2047): the page lists the 1-833-WVROADS number and the
-// Submit a Roadwork Request form, but not wvroads@wv.gov. The two pages that
+// Re-read 2026-11-16 (#2047): the page lists the 1-833-WVROADS number but
+// not wvroads@wv.gov, so the email came off. The two pages that
 // once listed that email (the WVDOH FAQ and the Governor's road page) are 404.
 const doh = [{ url: 'https://transportation.wv.gov/contact-us', checked: '2026-11-16' }];
 const city = [
@@ -97,7 +97,7 @@ const choices = [
   <h2 id="road">A tree, wires or a slip on the road</h2>
   <ul>
     <li><strong>Blocking the road or touching power lines?</strong> Call <a href="tel:911">911</a>.</li>
-    <li><strong>State roads:</strong> report it to the WV Division of Highways at <a href={telHref(dohPhone)}>1-833-WVROADS ({dohPhone})</a>, or use its online <a href="https://webapps.transportation.wv.gov/swat/">Submit a Roadwork Request</a> form.</li>
+    <li><strong>State roads:</strong> report it to the WV Division of Highways at <a href={telHref(dohPhone)}>1-833-WVROADS ({dohPhone})</a>.</li>
     <li><strong>City streets in Morgantown:</strong> report it on the city's Morgantown 311 app or web portal, or call the Streets and ROW Division at <a href={telHref(streetsPhone)}>{streetsPhone}</a>.</li>
   </ul>
   <SourceLine sources={[...doh, ...city]} about="road problems" />
