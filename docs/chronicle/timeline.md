@@ -70,3 +70,15 @@ One line per notable event, oldest first. Times are UTC. Add new lines at the bo
 - Nov 7: Automations dashboard lists every scheduled job, waits for David ([#1753](https://github.com/david-shortman/mon-county-community-hub/pull/1753))
 - Nov 8: Weekly findability run: 76 on the original 32, 71 on all 65, 63 of 65 have an answer page ([scoreboard](../scoreboard.md))
 - Nov 8: Week two dispatch: 241 PRs merged, 124 items waiting on David ([dispatch](2026-11-08-week.md))
+
+## 2026-11-09 to 2026-11-15
+
+- Nov 9: Week two dispatch and week 3 plan merge ([#1776](https://github.com/david-shortman/mon-county-community-hub/pull/1776), [#1772](https://github.com/david-shortman/mon-county-community-hub/pull/1772))
+- Nov 10: Recycling page adds appliances, scrap metal and yard waste ([#1779](https://github.com/david-shortman/mon-county-community-hub/pull/1779))
+- Nov 12: Town pages print as dated sheets with a QR code ([#1792](https://github.com/david-shortman/mon-county-community-hub/pull/1792))
+- Nov 14: Scheduled builds go to four a day ([#1805](https://github.com/david-shortman/mon-county-community-hub/pull/1805))
+- Nov 14: 85 PRs merged in one day as a sprint runs ([snapshot](snapshots/2026-11-14/snapshot.json))
+- Nov 14: Your state lawmakers page opens ([#1942](https://github.com/david-shortman/mon-county-community-hub/pull/1942))
+- Nov 15: 74 of 76 test questions have an answer page; the score holds at 76 on the original 32 ([scoreboard](../scoreboard.md))
+- Nov 15: Items waiting on David reach 173 ([snapshot](snapshots/2026-11-15/snapshot.json))
+- Nov 15: Week three dispatch: 144 PRs merged, 173 items waiting on David ([dispatch](2026-11-15-week.md))
