@@ -14,7 +14,7 @@ No `for:code` + `up-next` issue was open, and no self-merge PR was open.
 
 ## What I chose and why
 
-Only the adult parts. The high school programs already have their own card. The catalog is 60 pages, mostly school rules. A phone page with the adult parts lets someone find the tuition, the grant names and the class list without opening a PDF.
+Only the adult parts. The high school programs already have their own card. The catalog is 61 pages, mostly school rules. A phone page with the adult parts lets someone find the tuition, the grant names and the class list without opening a PDF.
 
 ## What shipped
 
