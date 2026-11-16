@@ -167,7 +167,12 @@ html:root .btn { border-radius: 3px; border-width: 2px; }
    the page's own text size, so nowrap ran off the screen at 390px with 200%
    text on /after-a-storm/ and /getting-around/ (QA sweep, #529). */
 @media (min-width: 24em) {
-  html:root a:is([href^="tel:"], [href^="sms:"]):not(.btn) { display: inline-block; max-width: 100%; }
+  /* position: relative paints the number above a link that wraps onto the
+     next line. As an inline block it sits a few pixels into that line, and
+     the wrapped link covered it, so axe counted it "partially obscured" and
+     too small to tap (WCAG 2.5.8) on /start-a-business/ (#2034). Where a line
+     breaks depends on the fonts, so CI did not always see it. */
+  html:root a:is([href^="tel:"], [href^="sms:"]):not(.btn) { display: inline-block; max-width: 100%; position: relative; }
   /* The same for a number written in a sentence (src/lib/keep-phones.mjs). */
   html:root .tel-text { display: inline-block; max-width: 100%; }
   html:root .btn .tel-text { display: inline; }
