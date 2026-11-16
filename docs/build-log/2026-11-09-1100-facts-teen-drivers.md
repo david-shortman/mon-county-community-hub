@@ -18,3 +18,5 @@
     - With a full license, tickets add points.
   - The permit's signer now reads "a parent or legal guardian", closer to the DMV's list.
 - **Scoreboard:** freshness. `/teen-drivers/` has no typed rules left. Check at the November 15 findability run.
+
+Checked 2026-11-15: not measured by the findability run. No findability question covers teen drivers; freshness checks are outside this run.
