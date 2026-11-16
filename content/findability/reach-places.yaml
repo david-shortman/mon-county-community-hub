@@ -21,6 +21,11 @@ addresses:
     place: Morgantown city
     matched: 10 SCOTT AVE, MORGANTOWN, WV, 26508
     checked: '2026-11-02'
+  1000 Mississippi Street, Morgantown, WV 26501:
+    county: Monongalia County
+    place: Morgantown city
+    matched: 1000 MISSISSIPPI ST, MORGANTOWN, WV, 26501
+    checked: '2026-11-16'
   1001 Mississippi Street, Morgantown, WV:
     county: Monongalia County
     place: Morgantown city
@@ -72,6 +77,9 @@ addresses:
     place: Morgantown city
     matched: 1235 PARKVIEW DR, MORGANTOWN, WV, 26505
     checked: '2026-11-02'
+  1245 Main Street, Granville, WV 26534:
+    result: no match
+    checked: '2026-11-16'
   128 Pleasant St, Morgantown, WV:
     county: Monongalia County
     place: Morgantown city
@@ -102,6 +110,11 @@ addresses:
     place: county, outside any town or named place
     matched: 1474 4 H CAMP RD, MORGANTOWN, WV, 26508
     checked: '2026-11-02'
+  1474 Four-H Camp Road, Morgantown, WV 26508:
+    county: Monongalia County
+    place: county, outside any town or named place
+    matched: 1474 4 H CAMP RD, MORGANTOWN, WV, 26508
+    checked: '2026-11-16'
   1507 University Avenue, Morgantown, WV 26506:
     county: Monongalia County
     place: Morgantown city
@@ -350,6 +363,9 @@ addresses:
   346 Chestnut Ridge Camp Road, Bruceton Mills, WV:
     result: no match
     checked: '2026-11-02'
+  346 Chestnut Ridge Camp Road, Bruceton Mills, WV 26525:
+    result: no match
+    checked: '2026-11-16'
   350 Capitol Street, Charleston, WV 25301:
     county: Kanawha County
     place: Charleston city
