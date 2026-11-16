@@ -2,6 +2,10 @@ title: Life expectancy
 slug: life-expectancy
 topic: health
 definition: "Average number of years people are expected to live." # County Health Rankings' own definition (v147)
+plain: # a plain sentence from the measure page, shown under the definition (#2002)
+  text: "The average number of years people are expected to live. It counts deaths at every age, so deaths of older people shape it most, and a change can take years to show."
+  url: https://www.countyhealthrankings.org/health-data/population-health-and-well-being/length-of-life/life-span/life-expectancy?year=2025
+  checked: 2026-11-15
 unit: years
 digits: 1 # County Health Rankings shows this to one decimal place
 data_year: "2021-2023"

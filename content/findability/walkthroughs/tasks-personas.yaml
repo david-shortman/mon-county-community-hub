@@ -573,6 +573,12 @@
     - /community/
     - /for/people-who-want-to-help/
     - /make-a-list/
+  after_path:
+    url: /make-a-list/
+    marker: print|list
+    path:
+    - /community/
+    - /make-a-list/
 - id: p32
   task: How healthy is Monongalia County compared to the rest of West Virginia?
   who: Curious long-time resident, just looking around

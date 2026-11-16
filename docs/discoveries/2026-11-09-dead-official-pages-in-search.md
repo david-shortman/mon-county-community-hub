@@ -11,3 +11,9 @@
 - **Why it matters:** a resident who taps the first result gets an error page and may give up. People without a reliable way to call, or who search on a phone, are hit hardest.
 - **Who keeps it:** the City of Morgantown, the Morgantown Utility Board, Monongalia County Schools, and the groups whose pages link to the old utility address.
 - **Status:** open.
+
+**Update 2026-11-15** (weekly run, [results](../../content/findability/2026-11-15.yaml)): every page above is still gone. Newly found gone pages that still show up in search:
+- Morgantown Utility Board FAQ (`mub.org/about/faqs`), second result for water shutoff help (q03), the page that described its deferred payment plan.
+- Monongalia County Sheriff's wildlife page (`monongaliasheriff.gov/wildlife.html`), still named in search as where dog calls go (q67).
+- WV Public Defender reentry checklist PDF (`pds.wv.gov/Documents/Re-Entry Checklist WV.pdf`), a new result for help after prison (q55).
+- WV Division of Labor's old child labor FAQ address (`labor.wv.gov/Wage-Hour/Child_Labor/Pages/Child-Labor-FAQs.aspx`), which still ranks for q52; the live FAQ moved to a new address.

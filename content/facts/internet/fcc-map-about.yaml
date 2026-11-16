@@ -1,0 +1,8 @@
+slug: fcc-map-about
+text: "The FCC (Federal Communications Commission) runs the National Broadband Map. It shows where internet service is offered, as reported to the FCC by internet companies. If the map is wrong about your address, you can tell the FCC."
+quote: "The National Broadband Map displays where internet services are available across the United States, as reported by Internet Service Providers (ISPs) in the FCC’s ongoing Broadband Data Collection. The map allows consumers and other stakeholders to easily dispute, or challenge, information shown on the map that they believe is inaccurate."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10467446103579-How-to-Use-the-FCC-s-National-Broadband-Map
+    name: FCC Broadband Data Collection Help Center, How to Use the FCC's National Broadband Map
+    checked: 2026-11-15
+recheck_days: 180

@@ -14,7 +14,8 @@
 //   5. Helper and printout pages, and group pages whose name does not match,
 //      go after the guides.
 //   5b. A page whose "Also called" line has exactly what was typed (in our
-//      pages' words or the reader's) goes first (#1676).
+//      pages' words or the reader's) goes first (#1676). In a question, place
+//      words like "county" count when matching an entry.
 //   6. For a few crisis words (CRISIS, PIN), put Mental health first, and
 //      tell the page to show the 988 box (#1647).
 //
@@ -167,16 +168,27 @@ export function makeSearch(SPELLING, SAME, FILLER, CRISIS, PIN) {
   // in our pages' words. "free food" puts /help/food/ first.
   // A longer entry also counts when every one of its topic words was typed,
   // so "is there lead in my old house" matches "lead in an old house".
+  // In a question of 4 or more words, an entry also counts when both read the
+  // same with only small words dropped, keeping place words like "county":
+  // "where do my county taxes go" matches "where county taxes go", while a
+  // short "county taxes" keeps its usual order (#529, wave 20).
+  var PLACE = ['morgantown', 'wv', 'west', 'virginia', 'mon', 'monongalia', 'county'];
+  function small(w) { return FILLER.indexOf(w) >= 0 && PLACE.indexOf(w) < 0; }
   function alsoHit(d, q) {
     var also = String((d.meta && d.meta.also) || '').toLowerCase();
     if (!also) return false;
     var mine = words(q).filter(function (w) { return FILLER.indexOf(w) < 0; }).join(' ');
     var ours = plain(q);
     var typed = (mine + ' ' + ours).split(' ');
+    var asked = raw(q).length >= 4 ? words(q).filter(function (w) { return !small(w); }).join(' ') : '';
     return also.split(',').some(function (e) {
       var entry = raw(e).join(' ');
       if (!entry) return false;
       if (entry === mine || entry === ours) return true;
+      if (asked) {
+        var kept = raw(e).filter(function (w) { return !small(w); }).join(' ');
+        if (kept.indexOf(' ') > 0 && kept === asked) return true;
+      }
       var topic = raw(e).filter(function (w) { return FILLER.indexOf(w) < 0; });
       return topic.length >= 3 && topic.every(function (w) { return typed.indexOf(w) >= 0; });
     });

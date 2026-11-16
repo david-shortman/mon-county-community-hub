@@ -4,7 +4,7 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 
 | Level | Status | Latest |
 |---|---|---|
-| 1. Findability | **Measured** | **76 / 100** on the original 32 questions, 2026-11-08 (weekly run; baseline also 76). All 65 questions: 71. Answer pages on our site: 63 of 65, none in search yet. |
+| 1. Findability | **Measured** | **76 / 100** on the original 32 questions, 2026-11-15 (weekly run; baseline also 76). All 76 questions: 74. Answer pages on our site: 74 of 76, none in search yet. |
 | 2. Use | Waiting for the first monthly totals | A visit counter (GoatCounter) went live on 2026-11-01. No script may read it, so David copies monthly page views into [`content/use/visits.yaml`](../content/use/visits.yaml). The first totals (November 2026) are due in early December. |
 | 3. Action | Not measured yet | None |
 | 4. Recognition | Not measured yet | None |
@@ -14,6 +14,23 @@ How we know whether the project is helping. The [charter](CHARTER.md#how-we-meas
 ### Personas (2026-11-14)
 
 32 of 32 personas pass the path check; 26 of 32 pass every findability question (10 or more of 15, in runs up to 2026-11-08); every top need has a persona and a page. The six below 10: new baby, home from jail, just moved, rural homeowner, reads another language best, looking for their people. Updated monthly by the persona review ([`docs/personas.md`](personas.md#monthly-review-1037), #1037).
+
+### Weekly run: 76 on the original 32, 74 on all 76 questions (2026-11-15)
+
+Seven testers ran all 76 questions with the same search words and rubric, reusing last week's reworded search where the note named it. Results: [`content/findability/2026-11-15.yaml`](../content/findability/2026-11-15.yaml), [build log](build-log/2026-11-16-0035-findability-weekly-2026-11-15.md).
+
+- **The original 32 stay at 76.** The larger sets rose: the 45 from 71 to 74, the 62 and the 65 from 71 to 73. Almost all of that is one question, and none of it comes from our site:
+  - Renting a hall for a party (q44) rose 0 to 13. A plain search now puts the county parks booking pages first: the Camp Muffly Dining Hall and pavilions that name birthday parties, seats and a day price. This is a change in what search shows, checked again by the lead.
+  - Speaking at City Council (q12) rose 10 to 12: the city's council rules and meeting procedures now rank in the top 3.
+  - Smaller moves of one point: selling food at an event (q11, +1, the health department's permit form now ranks first), plant problems (q34, +1), free tax help (q46, +1, the page fits a phone again), a printable resource list (q62, +1, a different reworded search, so less comparable), school test scores (q22, -1, the best news story now has a pop-up on phones) and garden plots (q35, -1, the older story left search).
+- **11 new questions scored for the first time** (q66 to q76): 77 together. Highest: birth certificate, grief group and marriage license (13). Lowest: a child lead test (q72) 9, a stray dog (q67) and debt collector rights (q70) 10, where search shows no official or nonprofit page.
+- **Leading measure: 74 of 76 questions have an answer page on our site** (every new question has one). Still no page: crime trends (q23, #772) and garden plots (q35).
+- **Our pages are still not in search: 0 of 74** (#89).
+- **Top 3 results with a correct local answer:** 8 of the original 32 (was 6), 23 of all 76.
+- **One fact on our pages is out of date this week:** Legal Aid of West Virginia's online applications are closed November 10 to 19, while our eviction help says you can apply online. The fix is in PR #1824, waiting for David, and #1861 takes the note out after Legal Aid reopens.
+- **Site search test** (our own search box): 98.8% of 331 test queries find the right page in the top 3, and all 63 full questions do.
+
+The topic, dimension and worst-gap tables below are from this 2026-11-15 run.
 
 ### Weekly run: 76 on the original 32, 71 on all 65 questions (2026-11-08)
 
@@ -30,8 +47,6 @@ Six testers ran all 65 questions with the same search words and rubric. Results:
 - **Top 3 results with a correct local answer:** 6 of the original 32 (was 5), 14 of all 65.
 - **Pages that fail:** the same city, utility and school district pages are still gone while they lead search results ([discovery](discoveries/2026-11-09-dead-official-pages-in-search.md)).
 - **Site search test** (our own search box): 97.6% of 289 test queries find the right page in the top 3, and all 41 full questions do ([run](../content/findability/search-runs/2026-11-08-2349.json)).
-
-The topic, dimension and worst-gap tables below are from this 2026-11-08 run.
 
 ### Weekly run: 76 on the original 32, 71 on all 62 questions (2026-11-01)
 
@@ -86,24 +101,24 @@ We asked 32 questions a Mon County resident might have, across 10 topic areas. F
 
 **What the number means.** 76 does not mean things are mostly fine. It scores the *best* answer a determined person could reach, often after rewording a search or digging through a site. The weakest part is the first step: only 5 of 32 questions had a correct local answer in the top 3 search results. In 6 questions, a plain search did not lead to a usable local answer at all.
 
-**Score by topic, original 32 questions** (latest run, 2026-11-08, 0 to 100, lowest first; at baseline local government was 77, small business 73, help with bills and food 78 and civic participation 82):
+**Score by topic, original 32 questions** (latest run, 2026-11-15, 0 to 100, lowest first; at baseline local government was 77, small business 73, help with bills and food 78 and civic participation 82):
 
 | Topic | Score | Questions |
 |---|---|---|
 | Recycling and disposal | 60 | 3 |
 | Transportation | 70 | 2 |
-| Local government | 73 | 4 |
-| Community health data | 73 | 3 |
+| Community health data | 71 | 3 |
 | Civic participation | 76 | 3 |
 | Philanthropy and volunteering | 76 | 3 |
-| Small business | 78 | 3 |
+| Local government | 77 | 4 |
 | Housing | 80 | 3 |
+| Small business | 80 | 3 |
 | Help with bills and food | 83 | 4 |
 | Medical care | 83 | 4 |
 
-All 65 questions by topic (2026-11-08, lowest first): language 0 (1 question), community centers 42, recycling 60, housing 65, helping others 67, secondhand 67, veterans 67, growing 70, transportation 70, community health data 73, safety 73, work 73, local government 75, civic participation 76, philanthropy and volunteering 76, family 77, small business 78, aging 80, medical care 80, help with bills and food 88, moving here 93. Topics with one or two questions move a lot from a single score.
+All 76 questions by topic (2026-11-15, lowest first): language 0 (1 question), recycling 60, housing 65, pets 67, secondhand 67, veterans 67, growing 70, community centers 71, community health data 71, family 71, safety 71, helping others 73, transportation 73, work 73, civic participation 76, philanthropy and volunteering 76, local government 79, aging 80, small business 80, medical care 81, help with bills and food 89, moving here 93. Topics with one or two questions move a lot from a single score.
 
-**Score by dimension** (latest run, original 32, average out of 3): found 2.0, steps 2.5, current 2.2, plain language 2.0, works on a phone 2.7. At baseline plain language was 2.1. All 65: found 1.9, steps 2.4, current 2.0, plain 2.0, phone 2.5.
+**Score by dimension** (latest run, original 32, average out of 3): found 2.1, steps 2.5, current 2.2, plain language 2.0, works on a phone 2.6. At baseline found was 2.0, plain language 2.1 and works on a phone 2.7. All 76: found 2.0, steps 2.5, current 2.0, plain 2.0, phone 2.5.
 
 **Patterns we saw:**
 
@@ -113,19 +128,19 @@ All 65 questions by topic (2026-11-08, lowest first): language 0 (1 question), c
 - **No dates.** Many good pages carry no "last updated" date, so a resident cannot tell if they are current.
 - **Phones mostly work.** Most pages fit a phone screen. The misses were PDFs and a few fixed-width or wide pages.
 
-### The 5 worst gaps (latest run, all 65 questions)
+### The 5 worst gaps (latest run, all 76 questions)
 
 | Question | Score | What is missing |
 |---|---|---|
-| Where can I rent a hall for a party, and what does it cost? (q44) | 0 / 15 | Search shows apartment listings and old photos. Our [halls page](https://everythingmorgantown.org/community-centers/halls/) answers it but is not in search. |
-| Is there a community dinner this weekend? (q45) | 7 / 15 | Only a November 2025 statewide food list names a weekly Saturday meal; nothing confirms this weekend. Our [community centers page](https://everythingmorgantown.org/community-centers/) is not in search. |
-| How do I get a permit for a new septic system? (q58) | 0 / 15 | Both searches return other states' Montgomery and Monroe counties. Our [septic and wells page](https://everythingmorgantown.org/septic-and-wells/) is not in search. |
+| How do I get a permit for a new septic system? (q58) | 0 / 15 | Both searches reach other states' counties, and the state on-site sewage page now shows up but does not say to apply at the county health department. Our [septic and wells page](https://everythingmorgantown.org/septic-and-wells/) is not in search. |
 | Where can I get an interpreter for a doctor visit? (q60) | 0 / 15 | Only interpreter job ads and out-of-state hospitals. Whether local interpreters are free is open in #1194, #1323 and #1325. |
+| Where can I get a community garden plot? (q35) | 7 / 15 | Only an August 2026 planning memo (a PDF) says one garden is full; no page says how to sign up. No page of ours yet. |
+| Is there a community dinner this weekend? (q45) | 7 / 15 | Only a November 2025 statewide food list names a weekly Saturday meal; nothing confirms this weekend. Our [community centers page](https://everythingmorgantown.org/community-centers/) is not in search. |
 | When is trash and recycling pickup on my street? (q19) | 8 / 15 | No pickup-day map or street list loads, and the city's trash page link is dead. Residents have to call the hauler. |
 
-Also at 8: glass in recycling (q21, see #25), the next election (q32, see #1383), garden plots (q35), free seeds (q36), thrift stores (q38) and flea markets (q39). At 9: county commission agendas (q15), crime trends (q23), bus to the hospital (q28), sign up for WIC (q50, the top result is an old desktop-only state page whose hours conflict with the state's clinic list) and help after prison (q55, only a 2023 federal page; see #215, #1228).
+Also at 8: glass in recycling (q21, see #25), the next election (q32, see #1383), free seeds (q36), thrift stores (q38) and flea markets (q39). At 9: county commission agendas (q15), crime trends (q23), bus to the hospital (q28; the plain search now shows only the Montana Mountain Line), seed saving (q37), sign up for WIC (q50), help after prison (q55) and a child lead test (q72, new: only a December 2024 state release for WIC families). Renting a hall (q44), last week's worst, is now 13.
 
-Our site has an answer page for 63 of 65 questions, including every one above except q23 and q35, but none of our pages show up in search yet, so these scores do not change.
+Our site has an answer page for 74 of 76 questions, including every one above except q23 and q35, but none of our pages show up in search yet, so these scores do not change.
 
 ### The 5 best-served areas
 
@@ -202,6 +217,7 @@ Rules for keeping runs comparable: keep question ids and `search` words fixed. A
 | 2026-10-31 | 76 (32 questions); 71 (all 45) | 45 | v1 | End-of-sprint recheck after the site grew to about 118 pages. No change on the original 32: five questions moved a point or two, all from other sites, search ranking or tester judgment. Our answer pages: 24 of 32 (was 6), 33 of 45; in search results: 0 (not indexed yet, #89). Top-3 correct answers: 5 of 32. First scores for q33 to q42. [Results](../content/findability/2026-10-31.yaml), [build log](build-log/2026-10-31-0300-findability-end-of-sprint.md) |
 | 2026-11-01 | 76 (32 questions); 71 (all 45); 71 (all 62) | 62 | v1 | Weekly run, first Sunday. No change on the original 32 or the 45 from last week. One mover, from another site: q14 pothole -1 (city service request page now scrolls sideways on a phone). First scores for q46 to q62 (71 together); q58 septic permit and q60 interpreter score 0. Our answer pages: 59 of 62 (43 of 45, was 38; 31 of 32, was 27), all five pending PRs now merged; in search results: 0 (not indexed yet, #89). Top-3 correct answers: 5 of 32, 13 of 62. [Results](../content/findability/2026-11-01.yaml), [build log](build-log/2026-11-02-0030-findability-weekly-2026-11-01.md) |
 | 2026-11-08 | 76 (32 questions); 71 (all 45); 71 (all 62); 71 (all 65) | 65 | v1 | Weekly run. No change on any comparable set. Movers, none from our site: q32 next election -3 (the election passed and no next date is posted), q45 community dinner +7 (a reworded search reached a year-old state food list; tester method, not a site change), q47 diabetes class -2 (newer notice left search), q09 +1, q14 +1, q46 -1, q48 -1, q52 -1. First scores: q63 12, q64 12, q65 14. Our answer pages: 63 of 65 (60 of 62, was 59: new /unemployment/ page); in search results: 0 (#89). Top-3 correct answers: 6 of 32 (was 5), 14 of 65. [Results](../content/findability/2026-11-08.yaml), [build log](build-log/2026-11-09-0035-findability-weekly-2026-11-08.md) |
+| 2026-11-15 | 76 (32 questions); 74 (all 45); 73 (all 62); 73 (all 65); 74 (all 76) | 76 | v1 | Weekly run. Original 32 unchanged; the larger sets rose 2 to 3, almost all from q44 rent a hall 0 to 13 (county parks booking pages now lead search). Other movers, none from our site: q12 speak at council +2 (city rules now rank), q11 +1, q34 +1, q46 +1, q62 +1 (different reworded search), q22 -1, q35 -1. First scores q66 to q76: 77 together. Our answer pages: 74 of 76; in search results: 0 (#89). Top-3 correct answers: 8 of 32 (was 6), 23 of 76. [Results](../content/findability/2026-11-15.yaml), [build log](build-log/2026-11-16-0035-findability-weekly-2026-11-15.md) |
 
 ### Source benchmark
 
@@ -267,6 +283,7 @@ A start that refuses our tools (robots.txt or a block) is written `scored: false
 | 2026-10-30 | 7 of 8 | 1 of 8 (q26 stay tonight) | q03 water shutoff (the utility does not publish payment plans) | First run. [Run file](../content/findability/benchmark/2026-10-30.yaml), [build log](build-log/2026-10-31-0100-source-benchmark.md). Three WVU pages refused our tools after the automatic check, so they were not scored. |
 | 2026-11-01 | 7 of 8 | 6 of 8 (q01, q04, q05, q08, q25, q26) | q03 water shutoff (the utility's site still says nothing about payment plans) | First monthly full run. Our page for q05 is now [/no-insurance/](https://everythingmorgantown.org/no-insurance/) (8 of 8). All 16 checked facts on our pages are confirmed. q02 food this week ties the WVU Graduate Education list (7 to 7) and is still 2 taps in; that list has days for several pantries but is dated August 2024 and has an outdated Scott's Run number ([discovery](discoveries/2026-11-02-pantry-lists-disagree.md), #60, #932). The 2025 Resource Guide PDF is unchanged. [Run file](../content/findability/benchmark/2026-11-01.yaml) |
 | 2026-11-08 | 7 of 8 | 6 of 8 (q01, q04, q05, q08, q25, q26) | q03 water shutoff | Weekly run, our pages only; outside sources carried forward (the PDF is unchanged). No change. All 16 checked facts on our pages are confirmed. Our pages got heavier (46 to 73 KB, were 36 to 49 KB), still under the 100 KB budget. Still missing on the answer card: what to bring on q02, q04 and q26, and a next step that is not a call on q08. The q25 and q05 answer markers now match the pages' current wording. [Run file](../content/findability/benchmark/2026-11-08.yaml) |
+| 2026-11-15 | 7 of 9 | 6 of 9 (q01, q04, q05, q08, q26, q29) | q03 water shutoff | Weekly run, our pages only; outside sources carried forward (the PDF is unchanged). New need q29 (a ride to a medical appointment) meets the bar and beats every source. q25 eviction help no longer meets the bar: Legal Aid's online applications are closed November 10 to 19 and our page still says you can apply online (fix in PR #1824, waiting for David). 17 of 18 checked facts on our pages are confirmed. First weekly journeys: from home, every need is 1 to 3 taps on one site; from search, only q03 could be scored (others refused our robots.txt check or led nowhere). [Run file](../content/findability/benchmark/2026-11-15.yaml) |
 
 **First run, in plain words (2026-10-30).** Our pages beat every source on 7 of the 8 needs: they are about 30 KB against 300 KB to 5 MB for the other sources, the answer is on the page that opens for 6 of 8 needs, and they score 6 to 8 of 8 on the answer card against 1 to 6 for the others. The printed guide touches 7 of 8 needs (3 only in part) but gives names and phone numbers only, so for pantries, the clinic and the shelter you must call to learn the hours. Only one of our pages (where to stay tonight) clears the full bar. What holds the rest back:
 
@@ -287,6 +304,7 @@ About 72% of residents live outside Morgantown city limits ([who lives here](pla
 | 2026-11-01 | 194 | 151 (78%) | 31 (16%) | 12 | 107 of 392, 86 of them in Morgantown |
 | 2026-11-02, by Census place | 194 | 121 (62%) | 61 (31%) | 12 | 107 of 394, 64 of them in the city |
 | 2026-11-08, by Census place | 203 | 126 (62%) | 64 (32%) | 13 | 114 of 437, 67 of them in the city |
+| 2026-11-15, by Census place | 208 | 128 (62%) | 66 (32%) | 14 | 117 of 447, 69 of them in the city |
 
 Until 2026-11-01, "Morgantown" meant a Morgantown mailing address, which also covers some close-in places outside city limits, so the share is not directly comparable to the 72%. Most of the rest-of-county listings are community centers and halls (11 of 18). On 2026-11-01 the count more than doubled, mostly in Morgantown, so the rest-of-county share fell from 22% to 16% even though the number of rest-of-county listings grew from 18 to 31 (19 of them community places). Westover has the most outside Morgantown (7).
 

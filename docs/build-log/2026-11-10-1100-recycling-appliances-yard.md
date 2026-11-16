@@ -13,3 +13,5 @@
 - **Not added:** the transfer station's fees. The sheet says "effective October 16, 2023", so the card keeps "call for fees", as before.
 - **Scoreboard:** recycling findability (60). Check at the November 15 findability run. Site search test unchanged at 284 of 289.
 - **Cost:** $0.
+
+Checked 2026-11-15: recycling findability still 60; our /recycling/ page did not show up in search. Site search test 98.8% (327 of 331).
