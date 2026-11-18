@@ -17,7 +17,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { loadCalendar, loadDir, loadSecondhand, isHidden, todayYmd, upcoming, ymd, CONTENT_DIR, recheckDaysFor, recheckDue, isTopTier, oldestChecked } from '../src/lib/content.mjs';
 import { factTopics, loadFacts, isDue } from '../src/lib/facts.mjs';
+import { loadWindows, factLate } from '../src/lib/fact-windows.mjs';
+import { electionRunway, runwayLine, ELECTION_RUNWAY_DAYS } from '../src/lib/elections.mjs';
 import { robotsCheck } from '../src/lib/robots.mjs';
+import { linkStatus } from '../src/lib/link-status.mjs';
 import { servesProblems, SERVES_SINCE } from '../src/lib/serves.mjs';
 import YAML from 'yaml';
 import { ADAPTERS } from '../src/lib/feeds/index.mjs';
@@ -310,6 +313,17 @@ function checkContent() {
       : `All ${listed.length} listings were re-checked on time (high-stakes topics and calendar entries every 90 days).`,
     { details: late.map(({ e, c }) => `${e._file}: oldest check ${c}, re-check every ${recheckDaysFor(e)} days`), owner: 'Duet', fixable: true });
 
+  // Re-check windows by kind of fact (#1093, content/recheck-windows.yaml):
+  // hours go stale faster than an address, and a date just before the day
+  // matters most. A to-do list for re-reads; cards do not use it yet.
+  const windows = loadWindows();
+  const factDue = listed.map((e) => ({ e, l: factLate(e, windows, today) })).filter((x) => x.l)
+    .sort((a, b) => String(a.l.checked).localeCompare(String(b.l.checked)));
+  record('content-recheck-by-fact', 'product', factDue.length ? 'warn' : 'ok',
+    factDue.length ? `${factDue.length} of ${listed.length} listings are past the window for the facts they state (hours every 90 days, costs and who can get help every 180, events starting in 14 days read within 30). Re-read each one's sources, oldest first.`
+      : `All ${listed.length} listings are within the re-check window for the facts they state.`,
+    { details: factDue.map(({ e, l }) => `${e._file}: oldest check ${l.checked}, window ${l.days} days (${l.because})`), owner: 'Duet', fixable: true });
+
   // Hidden items (#519): off the site until someone re-checks them.
   const hidden = [...loadCalendar(all), ...loadDir('orgs', all), ...loadDir('resources', all)].filter(isHidden);
   record('content-hidden', 'product', hidden.length ? 'warn' : 'ok',
@@ -320,6 +334,17 @@ function checkContent() {
   if (ended.length) {
     record('content-ended', 'product', 'warn', `${ended.length} calendar files ended over 30 days ago. Roll them forward or remove them.`,
       { details: ended.map((e) => `${e._file}: ended ${e.ends}`), owner: 'Duet', fixable: true });
+  }
+
+  // Election runway (#1383): warn when no election file runs past today plus
+  // ELECTION_RUNWAY_DAYS, so a missing next election shows up as a flag.
+  let runway;
+  try { runway = electionRunway(today); } catch (err) {
+    record('election-runway', 'product', 'fail', `content/elections could not be read: ${err.message}`, { fixable: true });
+  }
+  if (runway) {
+    record('election-runway', 'product', runway.short ? 'warn' : 'ok', runwayLine(runway),
+      { details: runway.short ? [`Check the WV Secretary of State, Monongalia County Clerk and City of Morgantown election pages for the next election, and add content/elections/<slug>.yaml from official pages only (the monthly elections checklist, content/checklists/elections.yaml). Warns within ${ELECTION_RUNWAY_DAYS} days of the last file's results_until.`] : [], owner: 'Duet', fixable: true });
   }
 
   const soonList = upcoming(entries, today, 62);
@@ -334,7 +359,10 @@ async function checkFeeds() {
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.json'));
   const details = [];
   let worst = 'ok';
-  const bump = (s) => { if (s === 'fail' || (s === 'warn' && worst === 'ok')) worst = s; };
+  // Each call is one problem. Lines pushed without a bump are notes (a feed
+  // turned off on purpose, a feed with no dates) and are not counted.
+  let problems = 0;
+  const bump = (s) => { problems++; if (s === 'fail' || (s === 'warn' && worst === 'ok')) worst = s; };
   // Feeds turned off on purpose (docs/operations/automated-reads.md) are
   // never read, and their saved copy is meant to age.
   const off = new Map(ADAPTERS.filter((a) => a.off).map((a) => [a.id, a.off]));
@@ -343,10 +371,13 @@ async function checkFeeds() {
     try { snap = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')); } catch { details.push(`${f}: snapshot is not valid JSON`); bump('fail'); continue; }
     if (off.has(snap.id)) { details.push(`${snap.id}: turned off on ${off.get(snap.id).since}, not read (${off.get(snap.id).reason})`); continue; }
     const age = snap.fetched ? Math.floor(hoursSince(snap.fetched) / 24) : null;
-    if (age === null || age > T.feedSnapshotMaxDays) { details.push(`${snap.id ?? f}: saved copy is ${age ?? '?'} days old`); bump('warn'); }
+    const stale = age === null || age > T.feedSnapshotMaxDays;
+    // A feed robots.txt blocks can never be refreshed, so its age is part of
+    // the same problem: one line, not two.
+    const rc = snap.feed_url ? await robotsCheck(snap.feed_url, { userAgent: UA }) : { allowed: true };
+    if (!rc.allowed) { details.push(`${snap.id}: not read: ${rc.reason}. The site uses the saved copy${age === null ? '' : `, ${age} days old`}.`); bump('warn'); continue; }
+    if (stale) { details.push(`${snap.id ?? f}: saved copy is ${age ?? '?'} days old (refresh it with npm run update-feeds in site/ and commit the snapshots)`); bump('warn'); }
     if (!snap.feed_url) continue;
-    const rc = await robotsCheck(snap.feed_url, { userAgent: UA });
-    if (!rc.allowed) { details.push(`${snap.id}: not read: ${rc.reason}. The site uses the saved copy.`); bump('warn'); continue; }
     try {
       const r = await get(snap.feed_url, { timeout: T.linkTimeoutMs });
       if (!r.ok) { details.push(`${snap.id}: feed returns ${r.status}`); bump('warn'); }
@@ -367,7 +398,7 @@ async function checkFeeds() {
     }
     if (!built) details.push(`feed-health.json: could not read it from the live site (${r.status})`);
   } catch (err) { details.push(`feed-health.json: could not read it from the live site (${err.cause?.code || err.message})`); }
-  record('feeds', 'product', worst, worst === 'ok' ? `All ${files.length} live feeds respond.` : `Problems with ${details.length} live feed items. The site falls back to saved copies.`,
+  record('feeds', 'product', worst, worst === 'ok' ? `All ${files.length} live feeds respond.` : `Problems with ${problems} live feed ${problems === 1 ? 'item' : 'items'}${details.length > problems ? ` (and ${details.length - problems} notes)` : ''}. The site falls back to saved copies.`,
     { details, owner: 'Claude Code (Builder, #31)', fixable: true });
 }
 
@@ -416,10 +447,11 @@ async function checkLinks() {
   const unsure = [];
   for (const [u, r] of results) {
     const where = [...outbound.get(u)].slice(0, 3).join(', ');
-    // 404 and 410 mean the page is gone. 401, 403, 429, 5xx, and network errors
-    // are often bot blocking or a blip, so they are only a warning.
-    if (r.status === 404 || r.status === 410) broken.push(`${u} (${r.status}) on ${where}`);
-    else if (r.status === 0 || r.status >= 400) unsure.push(`${u} (${r.status || r.error}) on ${where}`);
+    // 404 and 410 mean the page is gone; other errors, and 404 from a few
+    // hosts that answer robots that way, are only a warning (link-status.mjs).
+    const ls = linkStatus(u, r.status);
+    if (ls.kind === 'broken') broken.push(`${u} (${r.status}) on ${where}`);
+    else if (ls.kind === 'unverified') unsure.push(`${u} (${r.status || r.error}${ls.note ? `: ${ls.note}` : ''}) on ${where}`);
   }
   const status = broken.length ? 'fail' : unsure.length ? 'warn' : 'ok';
   record('links', 'product', status,

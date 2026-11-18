@@ -152,3 +152,43 @@ So these areas get measured, the next findability run could add (owner: the find
 ## Sources and method
 
 Pages on `main` come from each page's `export const page` line in `site/src/pages/`. Open PRs come from the GitHub pulls list on October 31, 2026. Group gaps come from the "Gaps" section of each file in `docs/groups/`. Needs and their scoring come from `content/needs/` on the branch of PR #984. Re-check by November 30, 2026.
+
+## Monthly review, November 14, 2026
+
+For #222 and #988, sprint wave 17 (#529). Pages come from `site/src/pages/` on `main` this day; issue states from GitHub this day.
+
+**Map data updated** (`life-areas.yaml`, the tiles on `/topics/`):
+
+- Added pages built since November 2: `/medicaid-waivers/`, `/choosing-a-care-home/`, `/lead/` and `/grief/` (health); `/unemployment/`, `/credit-and-debt/` and `/reentry/` (money and work); `/borrow-or-get-free/` and `/holidays/` (home); `/keep-learning/` (learning); `/disability-and-aging/` (belonging); `/transfer-station-fees/` and `/start-something/` (parks and trash); `/who-serves-me/`, `/towns/` and `/county-budget/` (civic life); `/grants-for-nonprofits/` (community money).
+- Removed two gaps that pages now fill: filing for unemployment (`/unemployment/`, #790 closed) and banking, credit and debt help (`/credit-and-debt/`, #1578). Rank 7 in the missing areas list above is now built.
+- Still open: community garden plots (#1027) and crime numbers (#772), both waiting on a person.
+
+**A need, or a note, for each life area.** #222 asks that each area have a sourced need in `content/needs/` or a note on why not.
+
+| Life area | Needs in the register | Note |
+|---|---|---|
+| Health, body and mind | Paying for health care (2), mental health care (5), drugs and overdose (6), obesity, diabetes and heart health (12) | |
+| Money and work | Utility bills (4), wages that cover the basics (10) | |
+| Home and basic needs | Enough food (1), housing costs (3), people without a place to sleep (9) | Getting online has no need yet: #1908 |
+| Safety | None | County Health Rankings' March 2026 supplement puts Mon County well below the state and US on deaths it tracks for safety: injury deaths 74.8 per 100,000 (West Virginia 151.2, US 86.8; 2019 to 2023), homicides 1.7 (West Virginia 5.7, US 6.7; 2017 to 2023), motor vehicle crash deaths 6.3 (West Virginia 15.9, US 12.5; 2017 to 2023) and firearm deaths 9.0 (West Virginia 17.6, US 13.8; 2019 to 2023). Read 2026-11-14 from the [supplement](https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv) and its [codebook](https://www.countyhealthrankings.org/sites/default/files/media/document/Analytic_Dataset_Codebook_Supplemental_Release_20260325%5B1%5D.pdf). These do not show a county-wide safety need on their own. Crime numbers are not checked yet (#772), so this is a note, not a finding. Suicide deaths are part of mental health care. |
+| Growing up and learning | Child care (7) | Adult skills and school results have no need yet: #1909 |
+| Belonging | Loneliness (8) | |
+| Getting around | Transportation (11) | |
+| Parks, trash and growing | None | No public source we have read names a county-wide hardship here. The pages answer everyday questions (where things go, park rules). |
+| Voice and civic life | None | Not a hardship need. The register describes problems people face; it does not rank civic questions. |
+| Arts and free time | None | Same as civic life. Belonging covers the hardship side (loneliness). |
+| Community money | None | A community-level area (grants for groups), not a need of a household. |
+| Life events and papers | None | Every household meets these, but no public source counts a problem. Covered by pages. |
+| How the county is doing | Not a need | This area is the data behind the register. |
+
+**Top gaps, now issues for the next wave** (all `for:code`):
+
+1. #1906: save copies of the County Health Rankings files we cite before December 31, 2026. CHR&R's FAQ says its website stays up through December 2026. Time-sensitive.
+2. #1907: SNAP and WIC income limits in dollars on the food pages (rank 1 need's listed gap; waits for David at PR time).
+3. #1908: a getting online need, or a note on why not.
+4. #1909: a learning need (adult skills, school results), or a note on why not.
+5. #1910: findability questions for the areas built since October 31, so they are measured.
+
+**Known gaps not opened again** (already tracked or another lane's): housing has no single starting page (#202, PR #1868); a basic household budget for the wages need (budget lane); free blood pressure and diabetes classes (#1312, needs a person); `/find-your-people/` and What help might I get have no door link (doors lane); open treatment beds and counselors taking new patients (no public source).
+
+Next review: first week of December 2026, with the monthly persona and needs checklist (#1037).

@@ -1,0 +1,77 @@
+# The Morgantown Farmers' Market Growers Association's "2026-2027 Market
+# Rules and Guidelines" (part of #393), linked from the market's Vendors
+# page. 37 pages with a text layer; only the parts a new seller needs first
+# (markets, membership, due dates, fees) are copied here, word for word,
+# from sections 4, 5, 7.8 and 10 and Table 2. Read 2026-11-14.
+#
+# The rules disagree with themselves on when the Saturday market ends:
+# section 4.1 says "the second or third weekend in November", section 8.2
+# says "the first weekend of November". Both are quoted; see
+# docs/discoveries/2026-11-14-farmers-market-rules-end-date.md.
+slug: mfmga-market-rules-2026-27
+title: 2026-2027 Market Rules and Guidelines
+publisher: Morgantown Farmers' Market Growers Association
+pdf: https://www.morgantownfarmersmarket.org/uploads/1/4/2/9/142935559/26-27_mfmga_market_rules.pdf
+pdf_date: "\"These rules were approved by the MFMGA membership on December 2, 2025.\" They are for the market year \"May 1, 2026 through the following April 30, 2027\""
+found_on: https://www.morgantownfarmersmarket.org/vendors.html
+intro: The parts of the market's 37-page rules a new seller needs first. Fees, dates and rules are copied exactly. The parts in quotes are its own words. The full rules also cover which products are allowed, permits, insurance and market-day rules.
+recheck_days: 180
+sources:
+  - url: https://www.morgantownfarmersmarket.org/uploads/1/4/2/9/142935559/26-27_mfmga_market_rules.pdf
+    name: Morgantown Farmers' Market Growers Association, 2026-2027 Market Rules and Guidelines (PDF)
+    checked: 2026-11-14
+  - url: https://www.morgantownfarmersmarket.org/vendors.html
+    name: Morgantown Farmers Market, Vendors
+    checked: 2026-11-14
+sections:
+  - heading: Who can sell
+    id: who
+    items:
+      - name: "Producer-only"
+        lines: ["\"All products sold must be grown or produced by the vendor.\""]
+      - name: "Local"
+        lines: ["\"Within a fifty (50) air-mile radius of Morgantown\""]
+      - name: "Every year"
+        lines: ["\"Membership in the MFMGA is by application only.\" \"Current members must reapply each year.\""]
+  - heading: The three markets
+    id: markets
+    items:
+      - name: "Saturday (Summer Market)"
+        lines: ["\"weekly on Saturday mornings from 8:30 am to 12 pm (noon) beginning the first weekend in May through the second or third weekend in November\" at \"the Morgantown Market Place, an outdoor pavilion located at 415 SpruceStreet, Morgantown.\" (section 4.1)", "Section 8.2 says the Summer Market runs \"from the first weekend of May through the first weekend of November.\" Ask the Market Manager which is right this year."]
+      - name: "Wednesday (Mylan Market)"
+        lines: ["\"weekly on Wednesday from 4 pm to 7 pm beginning the first week in June through the second or third week in November\" at \"Mylan park Monongalia County Extension Office 270 Mylan Park Lane, Suite 250 Morgantown, WV\""]
+      - name: "Winter Market"
+        lines: ["\"once or twice monthly from mid-November through April at an indoor location. The market location and specific market dates will be determined in late summer of the market year.\""]
+  - heading: When to apply
+    id: apply
+    items:
+      - "\"Vendor applications are accepted for the forthcoming market year beginning January 1 each year.\""
+      - "\"Vendor applications with all required documentation and fees for all MFMGA markets must be submitted to the MFMGA Market Manager by March 1. Incomplete applications will not be considered.\""
+      - "\"No Vendor applications will be accepted after April 1.\" Applications that come in after March 1 and on or before April 1 are considered \"on a case-by-case basis\"."
+      - "\"Returning vendors may submit a provisional application as described in Section 7.7 on or before October 1 of the current market year.\""
+      - "Where to get one: \"Membership applications are available from the MFMGA website, the Market Manager, and the Mon County Extension Office at 270 Mylan Park Lane, Suite 250, Morgantown.\""
+  - heading: What it costs to sell
+    id: fees
+    note: "From Table 2, \"Vendor Fees\", and section 10. The fees go in with your application."
+    items:
+      - name: "Vendor membership (each year)"
+        lines: ["$100 (new vendors)", "$75 (returning vendors)", "\"Processing and Membership fee are non-refundable\""]
+      - name: "Summer Market space (Saturday)"
+        lines: ["$100 per space for the season. 2 spaces $200, 3 spaces $300.", "\"Typically there are 27 to 28 Saturday markets per summer season\""]
+      - name: "Mylan Market space (Wednesday)"
+        lines: ["$100 per space for the season. 2 spaces $200, 3 spaces $300.", "\"Typically there are 23 to 24 Wednesday Mylan markets per summer season\""]
+      - name: "Winter Market space"
+        lines: ["$10 per space per market attended. 2 spaces $20, 3 spaces $30.", "\"Due with monthly gross sales commission\""]
+      - name: "Sales commission"
+        lines: ["\"3% of gross sales\"", "\"Sales reports are due within 7 days after the market close\""]
+      - name: "Escrow"
+        lines: ["$50, \"New vendors only\"", "\"Each vendor must maintain an escrow account of at least $50 with the MFMGA treasurer.\""]
+      - name: "Space size"
+        lines: ["\"approximately equal to one parking space (e.g., ~10' x 15') for outdoor markets and 10' x 10' for indoor markets.\""]
+  - heading: Paying, and refunds
+    id: paying
+    items:
+      - "\"All fees must be submitted online through our payment system or by check or money order payable to \"Morgantown Farmers' Market Growers Association\" or \"MFMGA.\"\" \"No cash or token payments will be accepted.\""
+      - "\"Checks returned for insufficient funds will be charged a $25 fee.\""
+      - "If your application is turned down: \"All fees paid less a $50 processing fee will be returned to rejected applicants within 60 days of the rejection determination.\""
+      - "Sales tax: \"Vendors are solely responsible for collecting and reporting any applicable city and/or state sales tax to the appropriate regulatory authority.\""

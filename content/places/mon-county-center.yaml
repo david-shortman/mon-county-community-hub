@@ -5,6 +5,7 @@ area: morgantown
 community: Mylan Park, west of Morgantown
 run_by:
   kind: county
+  org: monongalia-county-commission
   text: Monongalia County
 story: A county event building at Mylan Park with an indoor showroom, a covered show ring and a shared kitchen.
 facilities:
@@ -34,4 +35,6 @@ notes:
   - The shared kitchen can be added to a showroom rental. Rates vary by use.
 sources:
   - url: https://www.monongaliacounty.gov/departments/mon_county_center/facility_rentals.php
-    checked: 2026-11-01
+    checked: 2026-11-14
+  - url: https://www.monongaliacounty.gov/departments/mon_county_center/
+    checked: 2026-11-14

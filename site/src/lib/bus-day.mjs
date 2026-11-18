@@ -104,7 +104,9 @@ export function fmt(t) {
 }
 
 // ---------- The drawing ----------
-export const G = { W: 340, LX: 2, PX: 76, PW: 258, TOP: 30, ROW: 10, GROUP: 12, BAR: 6 };
+// W was 340 until #1427. A narrower drawing scales up more on a phone, so the
+// route and time labels draw at about 10 to 12px at 390px wide instead of 8 to 9.
+export const G = { W: 250, LX: 2, PX: 76, PW: 170, TOP: 30, ROW: 10, GROUP: 12, BAR: 6 };
 // Keeps the time label inside the drawing near either edge.
 export function pillShift(x) { return Math.min(Math.max(x, 30), G.W - 30) - x; }
 export function xOf(t) { return G.PX + ((t - T0) / (T1 - T0)) * G.PW; }

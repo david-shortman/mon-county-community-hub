@@ -13,11 +13,24 @@ const ymd = (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : String(v 
 export function checkElection(e, file) {
   const bad = (msg) => { throw new Error(`content/elections/${file}: ${msg}`); };
   for (const k of ['slug', 'name', 'polls', 'results_url']) if (!e[k]) bad(`missing ${k}`);
-  for (const k of ['election_day', 'canvass', 'results_until']) if (!YMD.test(ymd(e[k]))) bad(`${k} must be a YYYY-MM-DD date`);
-  if (e.register_by && !YMD.test(ymd(e.register_by))) bad('register_by must be a YYYY-MM-DD date');
+  for (const k of ['election_day', 'results_until']) if (!YMD.test(ymd(e[k]))) bad(`${k} must be a YYYY-MM-DD date`);
+  // canvass and register_by are optional: leave a date off until an official
+  // page states it (#529 wave 19).
+  for (const k of ['canvass', 'register_by']) if (e[k] != null && !YMD.test(ymd(e[k]))) bad(`${k} must be a YYYY-MM-DD date`);
   if (!/^https:\/\//.test(e.results_url)) bad('results_url must be an https link');
   if (e.polls_close != null && !/^([01]\d|2[0-3]):[0-5]\d$/.test(String(e.polls_close))) bad('polls_close must be a quoted 24-hour "HH:MM" time');
-  if (!(ymd(e.election_day) < ymd(e.canvass) && ymd(e.canvass) <= ymd(e.results_until))) bad('dates must run election_day < canvass <= results_until');
+  if (e.canvass != null) {
+    if (!(ymd(e.election_day) < ymd(e.canvass) && ymd(e.canvass) <= ymd(e.results_until))) bad('dates must run election_day < canvass <= results_until');
+  } else if (!(ymd(e.election_day) < ymd(e.results_until))) bad('dates must run election_day < results_until');
+  // A city or town election: who can vote in it, and the office that runs it
+  // (its election page and phone). Without office, /vote/ names the County Clerk.
+  if (e.who_votes != null && typeof e.who_votes !== 'string') bad('who_votes must be text');
+  if (e.results_note != null && typeof e.results_note !== 'string') bad('results_note must be text');
+  if (e.provisional_lookup != null && typeof e.provisional_lookup !== 'boolean') bad('provisional_lookup must be true or false');
+  if (e.office != null) {
+    const o = e.office;
+    if (!o.name || !/^https:\/\//.test(o.url ?? '') || !/^\d{3}-\d{3}-\d{4}$/.test(String(o.phone ?? ''))) bad('office needs name, an https url and a phone like 304-555-1234');
+  }
   if (e.early_voting) {
     const ev = e.early_voting;
     if (!YMD.test(ymd(ev.from)) || !YMD.test(ymd(ev.to)) || !ev.resource) bad('early_voting needs from, to and resource');
@@ -50,3 +63,28 @@ export function currentElection(today = morgantownToday(), elections = loadElect
 
 // "Tuesday, November 3"
 export const longDate = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+// Runway (#1383): the last day any election file covers (its results_until),
+// and whether that falls within `days` of today. When it does, nobody has
+// added the next election yet, and /vote/ will soon show no election at all.
+// The health check warns and the monthly elections checklist shows it, so the
+// gap is a flag, not silence. Add the next file only from official pages.
+export const ELECTION_RUNWAY_DAYS = 60;
+export function electionRunway(today = morgantownToday(), elections = loadElections(), days = ELECTION_RUNWAY_DAYS) {
+  const until = elections.map((e) => e.results_until).sort().pop() ?? null;
+  const d = new Date(`${today}T12:00:00Z`); d.setUTCDate(d.getUTCDate() + days);
+  const needBy = d.toISOString().slice(0, 10);
+  const next = elections.find((e) => today <= e.election_day) ?? null;
+  return { today, until, needBy, short: !until || until < needBy, next: next && { slug: next.slug, name: next.name, election_day: next.election_day } };
+}
+
+const fullDate = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+// The runway in one plain line, for the health check and the checklist.
+export function runwayLine(r) {
+  if (!r.until) return 'No election file in content/elections/, so /vote/ shows no election.';
+  const lead = r.next ? `Next election on file: ${r.next.name}, ${fullDate(r.next.election_day)}.` : 'No upcoming election is on file.';
+  if (r.until < r.today) return `${lead} The last file stopped showing on ${fullDate(r.until)}, so /vote/ shows no election now. Add the next election's file from official pages.`;
+  return r.short
+    ? `${lead} The last file stops showing on ${fullDate(r.until)}, so after that /vote/ shows no election. Add the next election's file from official pages before then.`
+    : `${lead} Election files cover /vote/ through ${fullDate(r.until)}.`;
+}

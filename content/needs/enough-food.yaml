@@ -3,12 +3,13 @@ slug: enough-food
 summary: About 1 in 7 people in Mon County do not always have enough food. Food is also one of the most common reasons people call West Virginia 211 here.
 evidence:
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
-    checked: 2026-11-01
+    checked: 2026-11-14
     shows: County Health Rankings estimates the share of people who lack steady access to enough food, using Feeding America's Map the Meal Gap numbers.
     figure: "14% of people, about 14,940 people (West Virginia 15.7%, US 14.3%)"
+    data_date: "2023"
     publisher: County Health Rankings (March 2026 supplemental release)
   - url: https://data.cdc.gov/d/swc5-untb
-    checked: 2026-10-31
+    checked: 2026-11-14
     shows: CDC estimates the share of adults who had trouble getting enough food in the past year. It is a model-based estimate, not a count.
     figure: "12.9% of adults (likely between 9.8% and 16.9%)"
     data_date: "2023"
@@ -29,7 +30,7 @@ affected:
   count: 14940
   description: People in Monongalia County who lack steady access to enough food, as estimated by County Health Rankings.
   url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
-  checked: 2026-11-01
+  checked: 2026-11-14
 severity: high
 severity_why: Going without enough food harms health, school and work, and hits children and older adults hardest.
 trend: unknown
@@ -51,7 +52,7 @@ gaps:
   - SNAP and WIC income limits in dollars are not shown on our pages yet.
 topics: [food]
 rank: 1
-rank_why: "Score 12 of 12: severity 3, reach 3 (about 13,370 people), agreement 3 (four sources), room to help 3 (pantries, SNAP and WIC exist but are hard to line up). Tie broken by a county-wide official estimate."
+rank_why: "Score 12 of 12: severity 3, reach 3 (about 14,940 people), agreement 3 (four sources), room to help 3 (pantries, SNAP and WIC exist but are hard to line up). Tie broken by a county-wide official estimate."
 questions: [q02, q04, q45]
 issues: [60, 570, 922, 932]
 get_help:

@@ -22,13 +22,17 @@ const coming = upcomingGuides(mine, today);
 const past = pastGuides(mine, today);
 const decided = recentDecided(loadDecided().filter((r) => r.body === body), today);
 // Residents search with the place name, so every title has one (check-pages).
+// The body's name comes first and the place last. Search results cut titles
+// near 60 to 70 characters, and the old ": agendas in plain language" ending
+// pushed three over 70 (#939).
 const named = /Morgantown|Mon(ongalia)? County/i.test(b.name) ? b.name : `${b.name}, Mon County`;
+const title = named === b.name ? `${b.name} agendas explained` : `${b.name} agendas explained, Mon County`;
 // The newest read date of anything this page shows, so the first screen says
 // how fresh it is (#1288). Each guide and record also shows its own date.
 const lastRead = [...coming, ...past, ...decided].map((x) => ymd(x.read)).filter(Boolean).sort().at(-1);
 const host = b.home && new URL(b.home).hostname.replace(/^www\./, '');
 ---
-<Base title={`${named}: agendas in plain language`} description={`Coming ${b.name} agendas in plain language, and the actions recorded in its recent minutes, each linked to the official record.`}>
+<Base title={title} description={`Coming ${b.name} agendas in plain language, and the actions recorded in its recent minutes, each linked to the official record.`}>
   <p class="meta"><a href={`${base}/meetings/agendas/`}>Coming meetings in plain language</a></p>
   <h1>{b.name}</h1>
   <p class="lede">See what is on the agenda for coming meetings, in plain words. See what recent meetings decided, from the official minutes.</p>

@@ -1,0 +1,141 @@
+# The City of Westover's "Business Licence Application" and "Business and
+# Occupation (Gross Sales) Tax Return" (part of #393), both linked on its New
+# Businesses page (read 2026-11-14). Both PDFs have a text layer; each fee
+# and rate was also checked against the page image. Every business type, fee
+# and rate is copied as printed, including the form's spelling "LICENCE".
+#
+# The license form leaves the amount of the late penalty blank ("a maximum
+# penalty of per day"). The page quotes it as printed and does not guess.
+# See docs/discoveries/2026-11-14-westover-license-penalty-blank.md.
+slug: westover-business-license
+title: Business Licence Application and Business and Occupation (Gross Sales) Tax Return, City of Westover
+publisher: City of Westover
+found_on: https://www.westoverwv.org/new-businesses
+intro: The City of Westover's yearly business license fees and its B&O (business and occupation) tax rates, from its two PDF forms. Labels, fees and rates are copied as printed. The parts in quotes are the city's own words.
+recheck_days: 180
+sources:
+  - url: https://www.westoverwv.org/_files/ugd/d2114f_50052056caff40fc91000a6134690e2d.pdf
+    name: City of Westover, Business Licence Application
+    checked: 2026-11-14
+  - url: https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf
+    name: City of Westover, B&O tax return
+    checked: 2026-11-14
+  - url: https://www.westoverwv.org/new-businesses
+    checked: 2026-11-14
+sections:
+  - heading: The license rules
+    id: rules
+    items:
+      - "The license is yearly. The form asks for the \"Fiscal Year Ending: June, 30\"."
+      - "\"A COPY OF YOUR STATE LICENCE MUST BE ATTACHED\""
+      - "\"Any business not listed please inquire at City Hall.\""
+      - "Deadline: \"Failure to secure a new license before August 1st makes you liable to punishment for operating without a license and subject to a maximum penalty of per day after notification by the City Clerk.\" The form does not print the penalty amount. Ask the city."
+      - "The form asks for the business name, physical address, phone, the owner's name, phone and email, the corporation's name, address and phone if there is one, and the number of employees at this location."
+  - heading: Yearly license fees
+    id: fees
+    note: Each business type and fee as the form prints it.
+    items:
+      - name: "GENERAL STORE"
+        lines: ["$15"]
+      - name: "CLASS A & B: RETAIL INTOXICATION LIQUOR"
+        lines: ["$1000"]
+      - name: "NON INTOXICATION BEER: Class A & B, Retail, Restaurants, Bar, Grocery"
+        lines: ["$150"]
+      - name: "DISTRIBUTOR- PRIVATE LIQUOR CLUBS"
+        lines: ["$1000"]
+      - name: "FRATERNAL /VETERANS ORGANIZATIONS"
+        lines: ["$375"]
+      - name: "CLUB HAVING LESS THAN 1,000 MEMBERS"
+        lines: ["$500"]
+      - name: "WINE RETAILER [GROCER]"
+        lines: ["$150"]
+      - name: "ATTORNEY"
+        lines: ["$5"]
+      - name: "AUCTIONEER"
+        lines: ["$15"]
+      - name: "BARBER, BEAUTICIAN, MANICURIST"
+        lines: ["$25"]
+      - name: "CHIROPRACTOR"
+        lines: ["$100"]
+      - name: "COLLECTION AGENCY"
+        lines: ["$100"]
+      - name: "DENTIST"
+        lines: ["$20"]
+      - name: "DENTAL CORPORATION"
+        lines: ["$50"]
+      - name: "EMPLOYMENT AGENCY"
+        lines: ["$200"]
+      - name: "ENGINEER"
+        lines: ["$30"]
+      - name: "FORTUNE TELLER, PALMIST, MEDIUM"
+        lines: ["$200"]
+      - name: "FUNERAL ESTABLISHMENT"
+        lines: ["$75"]
+      - name: "HEARING AID DEALER"
+        lines: ["$40"]
+      - name: "INSURANCE AGENT/BROKER"
+        lines: ["$25"]
+      - name: "INSURANCE COMPANY"
+        lines: ["$50"]
+      - name: "LANDSCAPERS"
+        lines: ["$50"]
+      - name: "MEDICAL CORPORATION"
+        lines: ["$300"]
+      - name: "PAWNBROKER"
+        lines: ["$100"]
+      - name: "PHYSICAL THERAPIST"
+        lines: ["$35"]
+      - name: "REAL ESTATE AGENT"
+        lines: ["$25"]
+      - name: "REAL ESTATE BROKER"
+        lines: ["$50"]
+      - name: "BILLIARD TABLES"
+        lines: ["The form says \"FIRST $25, ADD$15 EA,ADDITION\" and leaves the fee column blank."]
+      - name: "LAUNDROMAT/CARWASH"
+        lines: ["$15. The form adds: \"1-5 DEVICES 6-9 ADD $3 EA, 10 OR MORE $30\"."]
+      - name: "RENTALS"
+        lines: ["$15"]
+      - name: "NOT LISTED"
+        lines: ["\"SEE CITY HALL FOR RATES\""]
+      - name: "Business Licence Application"
+        lines: ["One page: the fee list and the form."]
+        links:
+          - label: "Business Licence Application (PDF)"
+            url: https://www.westoverwv.org/_files/ugd/d2114f_50052056caff40fc91000a6134690e2d.pdf
+            date: "4/27/2023"
+  - heading: B&O tax rates
+    id: b-and-o
+    note: The B&O (business and occupation) tax is figured on gross sales. The return lists one rate for each kind of business, as a dollar figure and a multiplier.
+    items:
+      - name: "Companies Gas Utility"
+        lines: ["$3.00 { X .0300}"]
+      - name: "Retailers, Restaurants"
+        lines: ["$0.50 { X.0050 }"]
+      - name: "Electric, Power Company"
+        lines: ["$4.00 { X.0400 }"]
+      - name: "Contracting"
+        lines: ["$2.00 { X .0200 }"]
+      - name: "Service and All Other"
+        lines: ["$0.75 {X .0075 }"]
+      - name: "Rents, Royalties or Fees"
+        lines: ["$1.00 { X .0100}"]
+      - name: "Banking and Other Financial"
+        lines: ["$0.50 { X .0050}"]
+      - "How to figure it, from the instructions: \"Determine your taxes due by multiplying the gross sales amount by the rate multiplier. Example: $10,000 in retail gross sales multiplied by the rate multiplier of .0050 equals a B&O tax due of $50.\""
+      - "\"Gross sales is the total revenue received before any deductions or allowances.\""
+  - heading: B&O tax due dates and penalties
+    id: b-and-o-due
+    items:
+      - "\"DUE DATE: All returns are due 30 days after the end of the applicable filing period.\" The quarters end March 31, June 30, September 30 and December 31."
+      - "No sales this quarter? \"To avoid delinquent notices and tax assessments, indicate on the return if no reportable activity ($0.00 gross sales) occurred during the filing period and return by the due date.\""
+      - "\"Add Penalty: 5% or $10.00,whichever is greater for the 1st month late filing.\""
+      - "\"Add penalty: 5% for each additional quarter late on net amount of tax due.\""
+      - "\"If your return is received after the due date, you will be sent a letter for penalties and interest due.\""
+      - "\"Mail payments to: City of Westover, 500 Dupont Road, Westover, WV 26501.\""
+      - "The form says the office is open \"MONDAY THROUGH FRIDAY FROM 8:00 AM TO 4:30 PM, EXCEPT HOLIDAYS\"."
+      - name: "Business and Occupation (Gross Sales) Tax Return"
+        lines: ["Two pages: the return and the instructions."]
+        links:
+          - label: "B&O tax return (PDF)"
+            url: https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf
+            date: "Revised Date 7/01/2024"

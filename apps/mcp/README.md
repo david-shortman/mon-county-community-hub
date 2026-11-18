@@ -25,6 +25,7 @@ Chat apps that support [MCP Apps](https://github.com/modelcontextprotocol/ext-ap
 - The view is one file, [`views/upcoming-dates.html`](views/upcoming-dates.html), served as the resource `ui://everything-morgantown/upcoming-dates.html` (type `text/html;profile=mcp-app`). The tool links to it with `_meta.ui.resourceUri`, only when the chat app says it can show views (`io.modelcontextprotocol/ui` in its capabilities).
 - It loads nothing from the internet. The chat app hands it the tool result, and links open through the chat app (`ui/open-link`). Add to calendar opens the date's `.ics` file on everythingmorgantown.org, which phones open in their calendar app.
 - Read-only: no storage, no tracking, no accounts.
+- Each date says how it was read and when: "Pulled from" a group's own calendar feed, or "Checked" by hand (#1371, ADR 0007). A date that starts in the next 14 days, from a source last read over 30 days ago, gets a **Check before you go** note. That is the upcoming-event rule in [`content/recheck-windows.yaml`](../../content/recheck-windows.yaml); the smoke test fails if the two drift apart. The tool's result has the same facts as `read_how`, `read_from`, `days_since_checked` and `check_first`, and the plain text answer says them too.
 
 To use it in Claude or ChatGPT, the server has to be reachable online first (hosting is David's decision, #1370). The smoke test checks that the view is linked, has the right type and loads no outside files.
 

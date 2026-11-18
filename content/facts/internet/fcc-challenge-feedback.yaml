@@ -1,0 +1,8 @@
+slug: fcc-challenge-feedback
+text: "The form also lets you choose **Just giving feedback** instead. Then the company is not challenged, but the FCC keeps what you sent. You can also add a company that serves you but is missing from the map."
+quote: "If you select option 2, your submission will not be shared with the selected provider as a challenge; it will be considered as a crowdsource data submission"
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10476040597787-How-to-Submit-an-Availability-Challenge
+    name: FCC Broadband Data Collection Help Center, How to Submit an Availability Challenge
+    checked: 2026-11-15
+recheck_days: 180

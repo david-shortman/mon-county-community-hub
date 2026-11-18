@@ -1,0 +1,17 @@
+name: Cheat Lake Volunteer Fire Department
+slug: cheat-lake-volunteer-fire-department
+kind: nonprofit
+website: https://www.cheatlakefire.org/
+summary: A volunteer fire department and 501(c)(3) charity that covers about 56 square miles around Cheat Lake, from its station at 409 Fairchance Road, Morgantown. Its members are not paid and raise the money for trucks, gear and training. It holds public events, rents its hall, and takes new members, with a junior program for ages 14 to 17. Email contact@cheatlakefire.org.
+topics: [community]
+area: monongalia-county
+sources:
+  - url: https://www.cheatlakefire.org/about
+    checked: 2026-11-14
+    quote: "providing fire protection and emergency services to our 56 sq mile community"
+  - url: https://www.cheatlakefire.org/contact
+    checked: 2026-11-14
+    quote: "Physical Address - 409 Fairchance Road, Morgantown, WV 26508"
+  - url: https://www.cheatlakefire.org/join
+    checked: 2026-11-14
+    quote: "you may only participate as a junior volunteer firefighter"

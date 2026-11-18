@@ -1,0 +1,177 @@
+# Source benchmark: first whole-journey baseline and the ninth need (#1050)
+#
+# Two parts:
+#   needs:    q29 (a ride to a medical appointment), scored the same way as the
+#             weekly runs, so the next Sunday run can carry it forward.
+#   journeys: the whole trip to the key fact, from two starting points:
+#             from_home   our home page (everythingmorgantown.org)
+#             from_search a plain web search with the findability `search`
+#                         text for that need (questions.yaml), top result first
+# Method and the minutes formula: "Whole journey" in the Source benchmark
+# section of docs/scoreboard.md. Score with:
+#   python3 content/findability/benchmark/score.py content/findability/benchmark/journeys/2026-11-14.yaml
+#
+# from_home uses the links on the live home page read 2026-11-14 and each
+# page's words_before_answer from the 2026-11-08 run (q29 from today's
+# measure.js). calls is 1 when our page's must_call is true.
+# from_search is not scored this run: for q29 the top result
+# (wrc.wvu.edu/resources/basic-needs/transportation) answered our robots.txt
+# check with a 403, so under docs/operations/automated-reads.md it was not read.
+# The other eight were not run today; the next Sunday run does all nine.
+
+date: '2026-11-14'
+tasks_version: 1
+tester: Claude Code (sprint wave 17, source quality lane, #529)
+network: 390px, slow 4G profile (150 ms, 1.6 Mbps down), cache off
+needs:
+- id: q29
+  need: A ride to a medical appointment
+  sources:
+  - name: ours
+    kind: ours
+    url: https://everythingmorgantown.org/medical-rides/
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 62.6
+      words_on_page: 1750
+      words_before_answer: 36
+      seconds_to_answer: 0.568
+      screens_down: 0
+      reading_grade: 6.1
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: NewFIT costs $10 one way
+      url: https://www.busride.org/newfit
+      confirmed: true
+    - fact: NewFIT sign-up survey by phone at 304-296-3869
+      url: https://www.busride.org/newfit
+      confirmed: true
+    note: The top of the page answers all three ways (Medicaid rides, the bus, NewFIT) with cost and how
+      to book. It does not say what to bring.
+    checked: '2026-11-14'
+  - name: frn-guide
+    kind: guide
+    url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
+    covered: partial
+    must_call: true
+    auto:
+      kb: 323.7
+      words_on_page: 1981
+      words_before_answer: 1778
+      horizontal_scroll: true
+      answer_page: 10
+      pages: 11
+      last_modified: Wed, 19 Feb 2025 20:13:54 GMT
+      sha256: 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: true
+      checked_date: true
+      provider_link: true
+    facts:
+    - fact: 'NewFIT phone: 304-296-3680'
+      url: https://www.busride.org/newfit
+      confirmed: false
+      why: The NewFIT page gives 304-296-3869 for the sign-up survey.
+    note: Page 10, "Transportation services", lists Modivcare, Mountain Line and NewFIT ("Medical
+      Appointments") by phone and website. No cost, days or who can ride. It also says "Four-person
+      minimum/ride", which the NewFIT page does not say.
+    checked: '2026-11-14'
+  - name: city-pathways
+    kind: city
+    start: https://www.morgantownwv.gov/148/Community-Resources
+    url: https://www.morgantownwv.gov/708/PATHWAYS-to-Help
+    blocked: true
+    covered: partial
+    must_call: true
+    card:
+      days_and_hours: false
+      open_today: false
+      who_qualifies: false
+      what_to_bring: false
+      address_or_how: false
+      next_step_not_only_call: false
+      checked_date: false
+      provider_link: true
+    facts: []
+    note: Blocks automated browsers, checked by hand with a robots.txt-checked fetch. It says Mountain
+      Line buses run until 6 p.m. and describes the Access Pass (one ride to a social service agency),
+      with a link to Mountain Line's Community Access Pass page. It names no ride program for medical
+      visits. Nothing to check against the provider for this need.
+    checked: '2026-11-14'
+  - name: official
+    kind: official
+    url: https://www.busride.org/newfit
+    covered: 'yes'
+    taps: 0
+    must_call: false
+    auto:
+      kb: 1152.2
+      words_on_page: 891
+      words_before_answer: 234
+      seconds_to_answer: 3.794
+      screens_down: 0
+      reading_grade: 12.5
+      horizontal_scroll: false
+    card:
+      days_and_hours: true
+      open_today: true
+      who_qualifies: true
+      what_to_bring: false
+      address_or_how: true
+      next_step_not_only_call: true
+      checked_date: false
+      provider_link: true
+    facts:
+    - fact: $10.00 one way, $20.00 round trip, paid in advance
+      url: https://www.busride.org/newfit
+      confirmed: true
+    - fact: Monday through Friday except six named holidays
+      url: https://www.busride.org/newfit
+      confirmed: true
+    note: The provider's own page. Days, who it is for, cost and the four steps to ride. No date on the
+      page, and nothing on what to bring.
+    checked: '2026-11-14'
+
+journeys:
+- id: q01
+  from_home: {path: [Help with heat, water or power bills], taps: 1, sites: 1, calls: 0, words: 88, minutes: 0.7}
+- id: q02
+  from_home: {path: [Short on food, Today or this week, "No (not a WVU student)"], taps: 3, sites: 1, calls: 0, words: 58, minutes: 1.0}
+- id: q03
+  from_home: {path: [Help with heat, water or power bills], taps: 1, sites: 1, calls: 1, words: 267, minutes: 6.6}
+  note: calls is 1 because our page's must_call was true in the 2026-11-08 run.
+- id: q04
+  from_home: {path: [Short on food, Apply for SNAP (food stamps)], taps: 2, sites: 1, calls: 0, words: 49, minutes: 0.7}
+- id: q05
+  from_home: {path: [Can't afford a doctor or medicine], taps: 1, sites: 1, calls: 0, words: 43, minutes: 0.5}
+- id: q08
+  from_home: {path: [Get care, Dentist or prescriptions], taps: 2, sites: 1, calls: 0, words: 36, minutes: 0.7}
+- id: q25
+  from_home: {path: [Behind on rent], taps: 1, sites: 1, calls: 0, words: 1092, minutes: 5.7}
+  note: The home page link opens /money/?pick=rent. Words are from the weekly run's /money/#rent count, so
+    they may be high; the next run measures the page the link opens.
+- id: q26
+  from_home: {path: [A warm place to stay tonight], taps: 1, sites: 1, calls: 0, words: 112, minutes: 0.8}
+- id: q29
+  from_home: {path: [Get care, Ride to a medical visit], taps: 2, sites: 1, calls: 0, words: 36, minutes: 0.7}
+  from_search:
+    query: senior rides to medical appointments Monongalia County WV
+    first_result: https://wrc.wvu.edu/resources/basic-needs/transportation
+    scored: false
+    note: The top result's robots.txt answered 403, so it was not read. Not guessed.

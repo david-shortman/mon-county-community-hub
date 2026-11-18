@@ -77,6 +77,28 @@ function freshness(sources = []) {
   };
 }
 
+// A date that starts soon must have been read recently (#1371): the same
+// rule as upcoming_event in content/recheck-windows.yaml (#1093), which the
+// smoke test checks these numbers against. Starting in the next 14 days with
+// a source last read over 30 days ago means "check the source first".
+const UPCOMING = { within_days: 14, checked_within_days: 30 };
+function dateFreshness(e, today) {
+  const f = freshness(e.sources);
+  const method = e.sources?.[0]?.method;
+  const age = f.oldest_checked ? days(f.oldest_checked, today) : null;
+  const soon = e.starts >= today && days(today, e.starts) <= UPCOMING.within_days;
+  const checkFirst = soon && (age === null || age > UPCOMING.checked_within_days);
+  return {
+    ...f,
+    // How the date was read: from the publisher's own feed, by a program
+    // watching the page, or by a person or agent (ADR 0002).
+    read_how: method === 'feed' || method === 'watched-page' ? method : 'hand',
+    ...(e.feed?.name ? { read_from: e.feed.name } : {}),
+    days_since_checked: age,
+    ...(checkFirst ? { check_first: true, check_first_note: `This date is soon, and its source was last read ${age ?? 'an unknown number of'} days ago. Check the source before you go.` } : {}),
+  };
+}
+
 const words = (s) => String(s ?? '').toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 1);
 function score(text, query) {
   const hay = String(text).toLowerCase();
@@ -150,8 +172,8 @@ const TOOLS = [
     name: 'upcoming_dates',
     view: DATES_VIEW,
     // Plain text for chat apps that do not show views.
-    text: (r) => [`${r.count} upcoming ${r.count === 1 ? 'date' : 'dates'}, soonest first. ${r.note}`, ...r.results.map((e) => `- ${e.starts}${e.ends && e.ends !== e.starts ? ` to ${e.ends}` : ''}${e.start_time ? ` ${e.start_time}` : ''}: ${e.title}${e.org_name ? ` (${e.org_name})` : ''}. Add to calendar: ${e.add_to_calendar}. Source: ${e.sources?.[0]?.url ?? 'none'}, checked ${e.oldest_checked ?? 'unknown'}.`)].join('\n'),
-    description: 'List upcoming deadlines and community dates in Morgantown and Monongalia County, WV (application windows, tax dates, public meetings, mobile pantries, collection days), soonest first, with sources. Dates can change; check the source before acting.',
+    text: (r) => [`${r.count} upcoming ${r.count === 1 ? 'date' : 'dates'}, soonest first. ${r.note}`, ...r.results.map((e) => `- ${e.starts}${e.ends && e.ends !== e.starts ? ` to ${e.ends}` : ''}${e.start_time ? ` ${e.start_time}` : ''}: ${e.title}${e.org_name ? ` (${e.org_name})` : ''}. Add to calendar: ${e.add_to_calendar}. Source: ${e.sources?.[0]?.url ?? 'none'}, ${e.read_how === 'feed' ? `pulled from ${e.read_from ?? 'its feed'} on` : 'checked'} ${e.oldest_checked ?? 'unknown'}.${e.check_first ? ` ${e.check_first_note}` : ''}${e.stale ? ` ${e.stale_note}` : ''}`)].join('\n'),
+    description: 'List upcoming deadlines and community dates in Morgantown and Monongalia County, WV (application windows, tax dates, public meetings, mobile pantries, collection days), soonest first, with sources. Each date says how it was read (read_how: feed or hand) and when. A date marked check_first starts within 14 days and its source was last read over 30 days ago: tell the person to check the source before going. Dates can change; check the source before acting.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -175,7 +197,7 @@ const TOOLS = [
           org_name: e.org_name, who_it_is_for: e.who_it_is_for, what_to_do: e.what_to_do, url: e.url, place: e.place, phone: e.phone,
           topics: e.topics, from_feed: e.feed ? e.feed.name : undefined,
           add_to_calendar: `${SITE}/calendar/${e.slug}.ics`, page: `${SITE}/calendar/#${e.slug}`,
-          ...freshness(e.sources),
+          ...dateFreshness(e, today),
         }));
       return { note: `${NOTE} Times are Eastern. Today in Morgantown is ${today}.`, count: hits.length, results: hits };
     },

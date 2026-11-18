@@ -56,3 +56,12 @@ test('feeds list posts newest first with absolute links and full text', async ()
   assert.equal(absolutize('<a href="//x.org/">a</a> <img src="/i.png">', origin), `<a href="//x.org/">a</a> <img src="${origin}/i.png">`);
   assert.doesNotMatch(rssXml([], origin), /<item>/);
 });
+
+test('post rules catch stale words but allow a dated sentence and a crisis link', async () => {
+  const { bodyProblems } = await import('../src/lib/blog-checks.mjs');
+  const ok = bodyProblems('f.md', good, 'As of November 3, 2026, the site has 1,016 pages. In a crisis, see [988 and other lines](/help/).');
+  assert.deepEqual(ok, []);
+  assert.match(bodyProblems('f.md', good, 'The site now has more pages.')[0], /"now" goes stale/);
+  assert.match(bodyProblems('f.md', good, 'Call 211.')[0], /211, 988 or 911/);
+  assert.deepEqual(bodyProblems('f.md', good, 'Source: [the issue](https://github.com/x/y/issues/12).'), []);
+});

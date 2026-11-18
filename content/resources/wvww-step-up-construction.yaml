@@ -10,7 +10,8 @@ contact:
   url: https://westvirginiawomenwork.org/step-up-construction/
   place: "205 10th Street, Fairmont, WV"
 cost: free
-not_posted: [get_in]   # read the sources 2026-11-02; they do not say
+not_posted: [get_in]   # read the sources 2026-11-14; they do not say
 sources:
   - url: https://westvirginiawomenwork.org/step-up-construction/
-    checked: 2026-11-01
+    checked: 2026-11-14
+    quote: "Classes are held in-person Monday through Thursday: 9 AM – 4 PM."

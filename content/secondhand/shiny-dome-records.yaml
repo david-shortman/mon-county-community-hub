@@ -7,11 +7,15 @@ address: "128 Pleasant St, Morgantown, WV"
 sells: New and used records and CDs of all kinds, plus books, movies and clothing.
 goods: [books]
 buys_from_you: false
-url: https://www.wdtv.com/2025/01/09/shiny-dome-records-looks-enhance-local-music-scene/
-url_label: Source
+url: https://www.shinydomerecords.com/
+url_label: Shop website
 status: unclear
-note: Address and stock are from 2023 stories. A January 2025 story shows the shop open but gives no address or hours.
+note: Address and stock are from 2023 stories. A January 2025 story shows the shop open but gives no address or hours. The shop's own site, checked November 14, 2026, sells records online but gives no address or hours.
 sources:
+  - url: https://www.shinydomerecords.com/
+    checked: 2026-11-14
+    name: Shiny Dome Records, the shop's own site
+    quote: "THE RECORD SHOP YOUR MOTHER WARNED YOU ABOUT"
   - url: https://www.wdtv.com/2025/01/09/shiny-dome-records-looks-enhance-local-music-scene/
     checked: 2026-11-01
   - url: https://www.dominionpost.com/2023/05/06/shiny-dome-records-leading-morgantowns-vinyl-revival/

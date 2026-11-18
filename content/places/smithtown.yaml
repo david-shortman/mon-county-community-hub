@@ -5,6 +5,7 @@ area: south
 community: Smithtown
 run_by:
   kind: volunteer-association
+  org: smithtown-community-association
   text: The Smithtown Community Association, a volunteer group. The county lists the building as county property
 story: The 1939 Smithtown Grade School building, a community and senior center since 1983.
 facilities:
@@ -46,11 +47,11 @@ notes:
   - The playground is open to the public when no private event is going on. The building is tobacco, alcohol and drug free.
 sources:
   - url: http://www.smithtowncommunity.com/
-    checked: 2026-11-01
+    checked: 2026-11-14
   - url: http://www.smithtowncommunity.com/about.html
     checked: 2026-11-01
   - url: http://www.smithtowncommunity.com/facility-use.html
-    checked: 2026-11-01
+    checked: 2026-11-14
   - url: http://www.smithtowncommunity.com/contact.html
     checked: 2026-11-01
   - url: http://www.smithtowncommunity.com/calendar.html

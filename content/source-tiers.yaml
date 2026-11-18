@@ -1,0 +1,46 @@
+# Which source sites are news or directories (#1092). The source order in
+# docs/playbook/source-order.md ranks sources: 1 the owner (the group's own
+# site or the office that runs the program), 2 another government office or a
+# funder, 3 local news, 4 directories, listing sites and copy sites. A site not
+# listed here counts as tier 1 or 2; this list names only the lower tiers.
+#
+# npm run check-content warns when every source of a listing is on this list.
+# node scripts/check-source-tiers.mjs (from site/) lists them all.
+#
+# host matches that host and any subdomain (wboy.com matches
+# digital-release.wboy.com). owner_of lists records that are about that site
+# itself, where it is the owner (the Nextdoor listing). Add a site here when
+# you cite it; keep each group sorted.
+news:
+  - host: dominionpost.com
+    name: The Dominion Post
+  - host: enews.wvu.edu
+    name: WVU Today
+    note: WVU's own news site. Counts as the owner for WVU's own programs; news for anyone else's.
+  - host: morgantownmag.com
+    name: Morgantown Magazine
+  - host: thedaonline.com
+    name: The Daily Athenaeum
+  - host: wajr.com
+    name: WAJR
+  - host: wboy.com
+    name: WBOY 12 News
+  - host: wdtv.com
+    name: WDTV 5 News
+  - host: wvmetronews.com
+    name: MetroNews
+  - host: wvpublic.org
+    name: West Virginia Public Broadcasting
+directory:
+  - host: festivalnet.com
+    name: FestivalNet (event listings)
+  - host: needhelppayingbills.com
+    name: Need Help Paying Bills (a help directory)
+  - host: nextdoor.com
+    name: Nextdoor (neighbor posts)
+    owner_of: [secondhand/nextdoor-morgantown.yaml]
+  - host: projects.propublica.org
+    name: ProPublica Nonprofit Explorer (tax filings)
+    note: Fine for a group's legal name, EIN or filings. Not for hours, phone, cost or who can get help.
+  - host: treasurehunter.show
+    name: Treasure Hunter (show listings)

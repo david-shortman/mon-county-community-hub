@@ -14,8 +14,12 @@ import { checkPlaces } from './check-places.mjs';
 import { agendaProblems, decidedProblems } from '../src/lib/agendas.mjs';
 import { duplicateWarnings, missingOrgErrors, movedErrors, venueTownWarnings } from '../src/lib/content-dupes.mjs';
 import { MOVED } from '../src/lib/moved.mjs';
+import { loadWindows, windowProblems } from '../src/lib/fact-windows.mjs';
 import YAML from 'yaml';
 import { loadHomeRules, ruleProblems, isStale } from '../src/lib/home-year.mjs';
+import { quoteProblems } from '../src/lib/reread.mjs';
+import { loadSourceTiers, lowerTierOnly, tierListProblems } from '../src/lib/source-tiers.mjs';
+import { isTopTier } from '../src/lib/content.mjs';
 
 const errors = [];
 const warnings = [];
@@ -407,7 +411,7 @@ for (const e of [...orgs, ...resources, ...secondhand, ...loadCalendar()]) {
 
 // County indicators (content/indicators, #62): an official number, its own
 // definition, the data year, and sources with checked dates.
-const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'unit', 'digits', 'per', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
+const INDICATOR_FIELDS = ['title', 'slug', 'topic', 'definition', 'plain', 'unit', 'digits', 'per', 'data_year', 'release', 'values', 'sources', 'more', 'chr', 'history'];
 for (const i of loadDir('indicators')) {
   checkRecord(i, ['title', 'slug', 'topic', 'definition', 'unit', 'data_year', 'release', 'values'], INDICATOR_FIELDS);
   if (!['health', 'schools', 'safety'].includes(i.topic)) errors.push(`${i._file}: topic must be health, schools or safety`);
@@ -417,6 +421,19 @@ for (const i of loadDir('indicators')) {
   for (const [k, v] of Object.entries(i.values ?? {})) if (typeof v !== 'number') errors.push(`${i._file}: values.${k} must be a number`);
   if (i.unit === 'percent' && Object.values(i.values ?? {}).some((v) => v < 0 || v > 1)) errors.push(`${i._file}: percent values are written as a share, like 0.129 for 12.9%`);
   if (i.more != null && !isUrl(i.more)) errors.push(`${i._file}: more is not a web link`);
+  // plain (#2002): one or two short sentences saying what the number means and
+  // does not mean, from the measure's own page, with that page and a checked date.
+  if (i.plain != null) {
+    const pl = i.plain;
+    if (typeof pl?.text !== 'string' || !pl.text.trim()) errors.push(`${i._file}: plain needs text`);
+    else {
+      if (pl.text.split(/\s+/).length > 45) errors.push(`${i._file}: plain.text is over 45 words; keep it short`);
+      if (/\u2014/.test(pl.text)) errors.push(`${i._file}: plain.text has an em dash`);
+    }
+    if (!isUrl(pl?.url)) errors.push(`${i._file}: plain needs the url of the page it comes from`);
+    if (!isDate(ymd(pl?.checked))) errors.push(`${i._file}: plain needs a checked date (YYYY-MM-DD)`);
+    for (const k of Object.keys(pl ?? {})) if (!['text', 'url', 'checked'].includes(k)) warnings.push(`${i._file}: unknown plain field ${k}`);
+  }
   if (i.digits != null && (!Number.isInteger(i.digits) || i.digits < 0 || i.digits > 2)) errors.push(`${i._file}: digits must be 0, 1 or 2`);
   if (i.per != null && i.unit !== 'number') errors.push(`${i._file}: per is only for unit: number`);
   if (i.chr && !i.chr.trend_name && !/^\d{4}(-\d{4})?$/.test(String(i.chr.data_year ?? ''))) errors.push(`${i._file}: chr with no trend_name needs chr.data_year from the codebook`);
@@ -463,6 +480,9 @@ for (const topic of factTopics()) {
   }
 }
 
+// Re-check windows by kind of fact (#1093).
+errors.push(...windowProblems(loadWindows()));
+
 // PDF pages (content/pdf-pages/, #393): a PDF's useful part as short lists.
 // Each needs a title, publisher, sections and sources with checked dates, and
 // a PDF link needs the date printed on that PDF.
@@ -486,6 +506,24 @@ errors.push(...missingOrgErrors(everyRecord, orgSlugs));
 errors.push(...movedErrors(MOVED, orgSlugs));
 // A date held at a place whose record names its town gets that town (#395).
 warnings.push(...venueTownWarnings(loadCalendar(), loadDir('places'), TOWNS));
+
+// Proof of a re-read (#1094): a source's quote is words copied from the page.
+for (const e of [...orgs, ...resources, ...secondhand, ...boards, ...loadDir('places'), ...loadCalendar()]) {
+  for (const s of e.sources ?? []) for (const p of quoteProblems(s?.quote)) errors.push(`${e._file}: ${s.url}: ${p}`);
+}
+
+// The source order (#1092, docs/playbook/source-order.md): a listing should
+// rest on the owner's own page or another office, not only on news stories or
+// directories. A warning to look at, not an error: news can be the only
+// source for a one-time event date when no owner page exists.
+errors.push(...tierListProblems());
+{
+  const tiers = loadSourceTiers();
+  for (const e of [...orgs, ...resources, ...secondhand, ...boards, ...loadDir('places'), ...loadCalendar()]) {
+    const only = lowerTierOnly(e, tiers);
+    if (only) warnings.push(`${e._file}: every source is ${only.join(' or ')}${isTopTier(e) ? ' (a top-tier listing)' : ''}; find the owner's own page or an office's page (docs/playbook/source-order.md)`);
+  }
+}
 
 for (const w of warnings) console.warn(`warning: ${w}`);
 for (const e of errors) console.error(`error: ${e}`);

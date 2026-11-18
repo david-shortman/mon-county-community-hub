@@ -9,9 +9,10 @@ evidence:
     data_date: 2023 and 2024
     publisher: West Virginia Office of Drug Control Policy, At-A-Glance 2025
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
-    checked: 2026-11-01
+    checked: 2026-11-14
     shows: Drug overdose deaths for each 100,000 people.
     figure: "43 per 100,000 (West Virginia 79, US 32)"
+    data_date: "2021 to 2023"
     publisher: County Health Rankings (March 2026 supplemental release)
   - url: https://wvumedicine.org/wp-content/uploads/2026/01/J.W.-Ruby-Memorial-Hospital-2025-Community-Health-Needs-Assessment-1162025.pdf
     checked: 2026-10-31

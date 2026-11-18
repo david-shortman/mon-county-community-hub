@@ -5,37 +5,33 @@
 # The tile counts only pages that exist, and the build fails on a page that
 # does not (site/test/life-areas.test.mjs). Recheck gaps when the map is
 # reviewed (monthly), and remove a gap when its issue or PR closes.
-checked: 2026-11-02
+checked: 2026-11-14
 areas:
   - name: Health, body and mind
-    pages: [/care/, /staying-well/, /flu-shots/, /dental-and-prescriptions/, /diabetes-and-weight/, /turning-65/, /no-insurance/, /medicaid-2027/, /mental-health/, /drugs-and-alcohol/, /pregnant-or-new-baby/, /birth-control-and-testing/, /medical-rides/, /advance-directives/, /staying-active/]
+    pages: [/care/, /staying-well/, /flu-shots/, /dental-and-prescriptions/, /diabetes-and-weight/, /turning-65/, /no-insurance/, /medicaid-2027/, /mental-health/, /drugs-and-alcohol/, /pregnant-or-new-baby/, /birth-control-and-testing/, /medical-rides/, /advance-directives/, /staying-active/, /medicaid-waivers/, /choosing-a-care-home/, /lead/, /grief/]
   - name: Money and work
-    pages: [/money/, /utility-bills/, /free-tax-help/, /find-a-job/, /work-and-learning/, /pay-for-training/, /business/, /start-a-business/, /property-tax/, /behind-on-mortgage/]
-    not_yet:
-      - text: Filing for unemployment
-        issue: 790
-      - text: Banking, credit and debt help
+    pages: [/money/, /utility-bills/, /free-tax-help/, /find-a-job/, /work-and-learning/, /pay-for-training/, /business/, /start-a-business/, /property-tax/, /behind-on-mortgage/, /unemployment/, /credit-and-debt/, /reentry/]
   - name: Home and basic needs
-    pages: [/living-here/, /stay-tonight/, /help/food/, /snap/, /renting/, /permits/, /septic-and-wells/, /flood-zone/, /home-safety/, /moving-here/, /internet/, /pets/]
+    pages: [/living-here/, /stay-tonight/, /help/food/, /snap/, /renting/, /permits/, /septic-and-wells/, /flood-zone/, /home-safety/, /moving-here/, /internet/, /pets/, /borrow-or-get-free/, /holidays/]
   - name: Safety
     pages: [/scams/, /identity-theft/, /weather-alerts/, /after-a-storm/, /snow-and-ice/, /burning/, /noise/, /protective-orders/, /legal-help/]
   - name: Growing up and learning
-    pages: [/family/, /families-and-kids/, /school-age/, /teens/, /teen-drivers/, /school-shots/, /kids-with-disabilities/, /car-seat-checks/, /help-in-your-language/]
+    pages: [/family/, /families-and-kids/, /school-age/, /teens/, /teen-drivers/, /school-shots/, /kids-with-disabilities/, /car-seat-checks/, /help-in-your-language/, /keep-learning/]
   - name: Belonging
-    pages: [/find-your-people/, /meet-people/, /community-centers/, /volunteer/, /caregivers/, /help-at-home/, /veterans/, /start-a-group/]
+    pages: [/find-your-people/, /meet-people/, /community-centers/, /volunteer/, /caregivers/, /help-at-home/, /veterans/, /start-a-group/, /disability-and-aging/]
   - name: Getting around
     pages: [/getting-around/, /bus-routes/, /bus-passes/, /drivers-license/, /car-registration/, /parking/, /accessible-parking-placard/]
   - name: Parks, trash and growing
-    pages: [/parks/, /park-refunds/, /recycling/, /sell-or-donate/, /thrift-shops/, /grow/, /soil-test/, /plant-problems/, /sell-what-you-grow/, /markets/]
+    pages: [/parks/, /park-refunds/, /recycling/, /sell-or-donate/, /thrift-shops/, /grow/, /soil-test/, /plant-problems/, /sell-what-you-grow/, /markets/, /transfer-station-fees/, /start-something/]
     not_yet:
       - text: Community garden plots (no official page lists them)
         issue: 1027
   - name: Voice and civic life
-    pages: [/have-your-say/, /vote/, /meetings/, /who-decides/, /public-records/, /make-it-better/]
+    pages: [/have-your-say/, /vote/, /meetings/, /who-decides/, /public-records/, /make-it-better/, /who-serves-me/, /towns/, /county-budget/]
   - name: Arts and free time
     pages: [/arts-and-making/, /calendar/, /pulse/]
   - name: Community money
-    pages: [/make-it-better/grants/, /check-a-charity/]
+    pages: [/make-it-better/grants/, /check-a-charity/, /grants-for-nonprofits/]
   - name: Life events and papers
     pages: [/life-events/, /ids-and-records/, /when-someone-dies/, /probate-steps/, /small-estate-affidavit/, /family-court/]
   - name: How the county is doing

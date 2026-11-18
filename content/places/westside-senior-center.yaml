@@ -6,6 +6,7 @@ area: morgantown
 community: Westover
 run_by:
   kind: volunteer-association
+  org: westside-senior-center
   text: A volunteer board, behind Westover City Hall
 story: A center for people 50 and older. Volunteers have run it since 2001.
 facilities:
@@ -35,7 +36,7 @@ contact:
   url: https://www.westoverwv.org/westside-senior-center
   place: 500 Dupont Road, Westover, WV
 status: active
-last_activity_seen: 2026-10-30
+last_activity_seen: 2026-11-13
 tags: [come-alone]
 sources:
   - url: https://www.westoverwv.org/westside-senior-center
@@ -46,3 +47,5 @@ sources:
     checked: 2026-10-31
   - url: https://www.dominionpost.com/2026/10/30/senior-news-13
     checked: 2026-10-31
+  - url: https://www.dominionpost.com/2026/11/13/senior-news-15
+    checked: 2026-11-14

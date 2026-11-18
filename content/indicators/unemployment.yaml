@@ -2,6 +2,10 @@ title: Unemployment
 slug: unemployment
 topic: health
 definition: "Percentage of population ages 16 and older unemployed but seeking work." # County Health Rankings' own definition (v023)
+plain: # a plain sentence from the measure page, shown under the definition (#2002)
+  text: "Out of people 16 and older who have a job or are looking for one, the share who have no job and looked for work in the past four weeks. People who want a job but stopped looking are not counted."
+  url: https://www.countyhealthrankings.org/health-data/community-conditions/social-and-economic-factors/income-employment-and-wealth/unemployment?year=2025
+  checked: 2026-11-15
 unit: percent
 data_year: "2024"
 release: County Health Rankings, March 2026 supplemental release

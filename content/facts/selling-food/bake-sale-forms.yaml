@@ -1,0 +1,8 @@
+slug: bake-sale-forms
+text: "The same health department page has two forms to download: a Bake Sale Application and an Exemption Application."
+quote: "You can also download the following forms: Bake Sale Application ... Exemption Application"
+sources:
+  - url: https://www.monchd.org/services/bake-sales-and-non-profit-organizations
+    checked: 2026-11-14
+    name: Monongalia County Health Department, Bake Sales and Non-Profit Organizations
+recheck_days: 180

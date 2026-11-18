@@ -1,0 +1,10 @@
+slug: nonprofit-exemption
+text: "The health department says that in certain situations, 501(c)(3) nonprofit groups can sell certain kinds of food to the public without a permit. If you think this may apply to your group, call Environmental Health."
+quote: "There are certain situations in which 501(c)3 non-profit organizations can sell certain types of foods to the public without having to obtain a permit. Contact Environmental Health at 304-598-5131 if you believe that this may apply to you."
+phone: "304-598-5131"
+phone_label: Environmental Health
+sources:
+  - url: https://www.monchd.org/services/bake-sales-and-non-profit-organizations
+    checked: 2026-11-14
+    name: Monongalia County Health Department, Bake Sales and Non-Profit Organizations
+recheck_days: 180

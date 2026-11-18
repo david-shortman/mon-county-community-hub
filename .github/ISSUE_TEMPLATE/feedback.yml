@@ -22,6 +22,16 @@ body:
         - other
     validations:
       required: true
+  - type: dropdown
+    id: found_by
+    attributes:
+      label: How the sender knows (optional)
+      description: Only if they said so. It sets found_by in the corrections file and who is read first (docs/operations/feedback-triage.md, #371). Never a name.
+      options:
+        - works or volunteers there (works-there)
+        - helps people find services (helper)
+        - used it (used-it)
+        - not given or other (other)
   - type: textarea
     id: what
     attributes:

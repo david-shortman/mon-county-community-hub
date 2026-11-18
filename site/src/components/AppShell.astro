@@ -34,6 +34,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     addEventListener('pageswap', skip); addEventListener('pagereveal', skip);
   })();
 </script>
+{/* Back to the same spot (#1369). Going back to a list page, such as Topics,
+    on a phone sometimes landed at the top. The browser normally puts you back
+    where you were; this is a fallback for when it does not. It keeps the spot
+    in this page's own history entry (not in storage, and nothing leaves the
+    phone), and on Back puts it back only if the page opened at the very top. */}
+<script is:inline>
+  (function () {
+    try {
+      var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      var keep = function () {
+        try { history.replaceState(Object.assign({}, history.state, { emY: Math.round(scrollY) }), ''); } catch (e) {}
+      };
+      var wait;
+      addEventListener('scroll', function () { clearTimeout(wait); wait = setTimeout(keep, 300); }, { passive: true });
+      addEventListener('pagehide', keep);
+      var y = history.state && history.state.emY;
+      if (!nav || nav.type !== 'back_forward' || location.hash || !(y > 0)) return;
+      var put = function () { if (scrollY < 10) scrollTo(0, y); };
+      addEventListener('load', function () { put(); requestAnimationFrame(put); setTimeout(put, 150); });
+    } catch (e) {}
+  })();
+</script>
 <script type="speculationrules" is:inline>
 {"prerender": [{"where": {"and": [
   {"href_matches": "/*"},

@@ -17,6 +17,7 @@ const ask = resource('mon-swa-ask-about-trash');
 const center = resource('mon-county-recycling-drop-off');
 const mts = resource('mountaineer-transfer-station');
 const swaPhone = ask.contact.phone;
+const republic = resource('republic-morgantown-trash');
 const swaTel = telHref(swaPhone);
 // Sentences with their own source, quote, checked date and re-check window
 // live in content/facts/recycling/ (#122). Each turns "may be out of date"
@@ -25,31 +26,31 @@ const fact = factsFor('recycling');
 // Item lookup (#199): "What do I do with this?" on the first screen. Each
 // answer repeats a fact sourced further down the page and links to it.
 const lookup = [
-  { item: 'Appliances: fridges, freezers, air conditioners', say: 'The transfer station takes them only after a licensed vendor removes the Freon and tags them.', href: '#fact-appliances' },
+  { item: 'Appliances: fridges, freezers, air conditioners', say: 'Not at the transfer station unless the Freon is removed. The county says Appliance Discounters in Westover takes them free.', href: '#fact-appliances' },
   { item: 'Bagged household trash', say: 'Free at the Mountaineer Transfer Station on the first Thursday of each month.', href: '#mountaineer-transfer-station' },
-  { item: 'Batteries', say: 'Lithium, button and rechargeable batteries never go in the trash or bin. Take them to a recycler or a store that takes them back.', href: '#fact-batteries' },
+  { item: 'Batteries', say: "Lithium, button and rechargeable batteries never go in the trash or bin. MUB's yearly hazardous waste day took all kinds in 2025.", href: '#fact-batteries' },
   { item: 'Building materials', say: 'No reuse store in the county right now.', href: `${base}/sell-or-donate/#building` },
   { item: 'Cardboard', say: 'Flatten boxes for the county drop-off center. No greasy pizza boxes.', href: '#drop-off' },
   { item: 'Clothes and furniture', say: 'Donate, sell or give them away.', href: `${base}/sell-or-donate/` },
   { item: 'Electronics and TVs', say: 'Free county collection events in the spring and fall.', href: '#hard-items' },
   { item: 'Furniture, mattresses and other big items', say: 'Donate them if you can. In Westover, call City Hall for a bulk pickup. Elsewhere, ask whoever picks up your trash.', href: '#fact-bulk-items' },
   { item: 'Glass bottles and jars', say: 'A 2019 hauler guide says curbside takes them. Confirm first.', href: '#curbside' },
-  { item: 'Household chemicals, oil-based paint', say: "The Morgantown Utility Board's yearly household hazardous waste day.", href: '#hard-items' },
+  { item: 'Household chemicals, oil-based paint', say: "The Morgantown Utility Board's yearly household hazardous waste day. The 2026 day was August 1. No 2027 date yet.", href: '#fact-hhw-day' },
   { item: 'Latex paint', say: 'The county plans a collection in 2027. No date yet.', href: '#hard-items' },
   { item: 'Leaves', say: 'No current city page about leaf pickup. Morgantown residents can ask the Streets and ROW Division.', href: '#fact-leaves' },
   { item: 'Medicines, old or unused', say: 'A drug take-back site or mail-back envelope first. The FDA says how to use the trash if neither is near.', href: '#medicines' },
-  { item: 'Motor oil and oil filters', say: 'Never down a drain. Ask auto shops or the Solid Waste Authority where to drop it off.', href: '#fact-motor-oil' },
+  { item: 'Motor oil and oil filters', say: "Never down a drain. MUB's yearly hazardous waste day took them in 2025. Or ask auto shops.", href: '#fact-motor-oil' },
   { item: 'Needles and syringes', say: 'Use a sharps container. Ask the Solid Waste Authority what to do when it is full.', href: '#medicines' },
   { item: 'Paper to shred', say: 'PACE Enterprises at Mylan Park.', href: '#drop-off' },
   { item: 'Plastic bags', say: 'Not at the county drop-off center. Bring recyclables in a box or bin.', href: '#drop-off' },
   { item: 'Scrap metal and other appliances', say: 'We could not find a local official page. Ask the transfer station or the Solid Waste Authority.', href: '#fact-appliances' },
   { item: 'Tires', say: 'A state tire collection runs monthly, except December to February. The transfer station does not take them.', href: '#hard-items' },
-  { item: 'Yard waste and brush', say: 'No local drop-off found. A small county compost demonstration site is in Westover.', href: '#fact-yard-waste' },
+  { item: 'Yard waste and brush', say: 'No local drop-off found. The county suggests leaving clippings and leaves on the lawn.', href: '#fact-yard-waste' },
 ];
 ---
-<Base title="Trash, recycling and drop-off in Morgantown, WV" description="Pickup days, what goes in the curbside bin, and where to take electronics, paint, tires and other hard items in Morgantown and Monongalia County.">
+<Base title="Trash, recycling and drop-off in Morgantown, WV" description="Pickup days, the curbside bin, and where to take electronics, paint, tires, batteries, motor oil and old fridges in Morgantown and Monongalia County.">
   <h1>Trash, recycling and drop-off</h1>
-  <p class="lede">Find common items in the list below to see where they go. To learn your pickup day, call the Monongalia County Solid Waste Authority at <a href={swaTel}>{swaPhone}</a>. In Morgantown, put carts out by 6 a.m. on pickup day. If we could not confirm a fact, we say so.</p>
+  <p class="lede">Find common items in the list below to see where they go. In Morgantown, <a href="#pickup">look up your pickup day</a> by address on Republic Services' site, and put carts out by 6 a.m. on pickup day. Elsewhere, call the Monongalia County Solid Waste Authority at <a href={swaTel}>{swaPhone}</a> and ask. If we could not confirm a fact, we say so.</p>
 
   <section class="lookup" aria-labelledby="lookup-h">
     <h2 id="lookup-h">What do you want to get rid of?</h2>
@@ -61,7 +62,8 @@ const lookup = [
   </section>
 
   <h2 id="pickup">Find your pickup day</h2>
-  <Fact f={fact('pickup-days')} about="pickup days"> Call the Monongalia County Solid Waste Authority at <a href={swaTel}>{swaPhone}</a> and ask who serves your address and which day they come.</Fact>
+  <Fact f={fact('pickup-days')} about="pickup days"> Republic's number for Morgantown is <a href={telHref(republic.contact.phone)}>{republic.contact.phone}</a>. Anywhere else, call the Monongalia County Solid Waste Authority at <a href={swaTel}>{swaPhone}</a> and ask who serves your address and which day they come.</Fact>
+  <Fact f={fact('morgantown-holiday-delay')} about="holiday pickup in Morgantown" />
   <Fact f={fact('cart-checklist')} about="the trash day checklist" />
 
   <h2 id="curbside">What goes in the curbside bin</h2>
@@ -74,7 +76,7 @@ const lookup = [
       <Actions phone={center.contact.phone} phoneLabel={center.title} place={center.contact.place} />
       <SourceLine sources={center.sources} org={center.org} about={center.title} /></li>
     <Fact tag="li" f={fact('western-site')} about="the Western Mon County site" />
-    <li><PlaceCard r={mts} /></li>
+    <li><PlaceCard r={mts} /> Its fees, hours and the items it does not take, from its own sheet: <a href={`${base}/transfer-station-fees/`}>taking a load to the transfer station</a>.</li>
     <Fact tag="li" f={fact('city-recycling-event')} about="the city recycling event" />
     <Fact tag="li" f={fact('paper-shredding')} about="paper shredding" />
   </ul>
@@ -84,6 +86,7 @@ const lookup = [
     <Fact tag="li" f={fact('electronics')} about="electronics" />
     <Fact tag="li" f={fact('tires')} about="tires" />
     <Fact tag="li" f={fact('latex-paint')} about="paint" />
+    <Fact tag="li" f={fact('hhw-day')} about="the household hazardous waste day" />
     <Fact tag="li" f={fact('batteries')} about="batteries"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
     <Fact tag="li" f={fact('motor-oil')} about="motor oil"> The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>
     <Fact tag="li" f={fact('appliances')} about="appliances"> The transfer station's number is <a href={telHref(mts.contact.phone)}>{mts.contact.phone}</a>. The Solid Waste Authority's number is <a href={swaTel}>{swaPhone}</a>.</Fact>

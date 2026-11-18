@@ -4,7 +4,7 @@ org: city-of-morgantown
 section: services
 decides: Its commissioners run the business of the Fairmont-Morgantown Housing Authority. Under state law they adopt its bylaws and rules and hire its staff. The authority runs public housing in Fairmont and Section 8 Housing Choice Vouchers.
 apply_note: The city's form may not be the way to apply for this seat. Ask the Fairmont-Morgantown Housing Authority how to apply.
-meets: The authority's site does not list board meetings. Call the authority to ask.
+meets: "The board posts its agendas in the City of Morgantown's Agenda Center. Its November 18, 2026 meeting is at 4 p.m. at the Morgantown office, Spruce Center, second floor. The agenda says the next meeting is December 16, 2026 at 4 p.m. at the Fairmont office, in person, with a call-in option if requested."
 open_seats: 1
 open_note: 1 seat
 who_can_serve: A resident of public housing or a voucher user in the City of Fairmont. The board has five members with five year terms, two named by Fairmont, two by Morgantown, and one resident of public housing or the voucher program.
@@ -20,4 +20,6 @@ sources:
   - url: https://www.fairmontwv.gov/341/Fairmont-Morgantown-Housing-Authority
     checked: 2026-11-04
   - url: https://www.morgantownwv.gov/210/Volunteer-Opportunities
-    checked: 2026-11-05
+    checked: 2026-11-14
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11182026-3933
+    checked: 2026-11-14

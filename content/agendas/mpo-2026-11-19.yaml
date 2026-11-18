@@ -26,7 +26,7 @@ items:
   - number: "4"
     title: Committee Reports
     kind: report
-    line: Updates from the MPO's committees and its executive director. The agenda lists these parts.
+    line: Updates from the committees of the MPO (Metropolitan Planning Organization, the group that plans roads and transit for the area) and its executive director. The agenda lists these parts.
     parts:
       - Citizens Advisory Committee
       - Finance

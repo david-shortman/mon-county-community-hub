@@ -3,7 +3,7 @@ slug: loneliness
 summary: About 1 in 3 adults in Mon County feel lonely, and about 1 in 5 lack the social and emotional support they need. Loneliness was one of the top three hardships for every adult age group in the health department's 2025 survey.
 evidence:
   - url: https://data.cdc.gov/d/swc5-untb
-    checked: 2026-10-31
+    checked: 2026-11-14
     shows: CDC estimates the share of adults who feel lonely, and the share who lack social and emotional support. These are model-based estimates, not counts.
     figure: "35.2% loneliness; 20.9% lack support"
     data_date: "2023"
@@ -14,15 +14,16 @@ evidence:
     data_date: "2025"
     publisher: Mon Health Medical Center, 2025 Community Health Needs Assessment
   - url: https://www.countyhealthrankings.org/sites/default/files/media/document/analytic_supplement_20260325%5B1%5D.csv
-    checked: 2026-11-01
+    checked: 2026-11-14
     shows: The share of adults who report feeling lonely.
     figure: "33.3% (West Virginia 35.5%, US 34%)"
+    data_date: "2023"
     publisher: County Health Rankings (March 2026 supplemental release)
 affected:
   estimate: "35.2% of adults"
   description: Adults in Monongalia County who feel lonely, as estimated by CDC.
   url: https://data.cdc.gov/d/swc5-untb
-  checked: 2026-10-31
+  checked: 2026-11-14
 severity: medium
 severity_why: Loneliness is linked to poorer physical and mental health, and it often goes with other hardships.
 trend: unknown

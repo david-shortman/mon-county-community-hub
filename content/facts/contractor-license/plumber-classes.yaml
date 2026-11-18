@@ -1,0 +1,8 @@
+slug: plumber-classes
+text: "The classes are Master plumber, Journeyman plumber and Plumber in Training. Master and Journeyman applicants must certify their experience and take a written exam."
+quote: "All Master and Journeyman applicants are required to certify experience and take a written exam."
+sources:
+  - url: https://labor.wv.gov/licensing/plumber-certification
+    name: WV Division of Labor, Plumber Certification
+    checked: 2026-11-14
+recheck_days: 365

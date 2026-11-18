@@ -5,6 +5,7 @@
 // the Magistrate Court filing fee and the clerk's hours (see #1023). Expungement
 // and name change fees, the WVU law clinic and Senior Legal Aid were confirmed
 // in verification sweep 2 (#1023).
+import BigChoices from '../components/BigChoices.astro';
 import Base from '../layouts/Base.astro';
 import OnThisPage from '../components/OnThisPage.astro';
 import ResourceCard from '../components/ResourceCard.astro';
@@ -16,6 +17,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 <Base title="Courts and legal help in Morgantown and Mon County, WV" description="Everyday legal help in Mon County, WV: free civil legal aid, Magistrate Court cases, expungement, name changes, jury duty, court forms and notaries.">
   <h1>Courts and legal help</h1>
   <p class="lede">Free court forms and a free online question service are open to anyone, any time. For a person to talk to, Legal Aid of West Virginia and a Tuesday night lawyer phone line are free. This page says where to go. It is not legal advice.</p>
+
+  {/* Lead block (#199): the four things most people come here for. */}
+  <BigChoices label="Courts and legal help: start here" choices={[
+    { href: '#free-help', label: 'Free legal help', icon: 'people' },
+    { href: '#small-claims', label: 'Ask the court for $20,000 or less', icon: 'receipt' },
+    { href: '#record', label: 'Clear a criminal record', icon: 'list' },
+    { href: '#jury', label: 'I got a jury summons', icon: 'calendar' },
+  ]} />
   <OnThisPage items={[['#free-help', "Free legal help"], ['#small-claims', "Small claims ($20,000 or less)"], ['#record', "Clear a criminal record"], ['#name', "Change your name"], ['#jury', "Jury summons"], ['#forms', "Court forms and case lookup"], ['#notary', "Notary"]]} />
 
   <p>Facing eviction or a rent problem? See <a href={`${base}/money/?pick=rent`}>behind on rent</a>. Divorce, custody or child support? See <a href={`${base}/family-court/`}>family court, custody and child support</a>. Need protection from someone? See <a href={`${base}/protective-orders/`}>protective orders</a>.</p>
