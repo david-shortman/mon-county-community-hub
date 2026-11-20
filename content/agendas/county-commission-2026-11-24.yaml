@@ -90,11 +90,9 @@ items:
     title: Adjournment
     kind: closing
     line: The meeting ends.
-note: This meeting is on a Tuesday. Under New Business, item 8, the agenda lists six items, shown here as 8a to 8f. On this agenda, public comment comes near the end, after reports. A separate work session agenda for the same day lists one meeting at 11:00 a.m. with the Sheriff.
+note: This meeting is on a Tuesday. Under New Business, item 8, the agenda lists six items, shown here as 8a to 8f. On this agenda, public comment comes near the end, after reports.
 sources:
   - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2024,%202026.pdf?t=202611191547320
-    checked: 2026-11-19
-  - url: https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20November%2024,%202026.pdf?t=202611191547520
     checked: 2026-11-19
   - url: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
     checked: 2026-11-19
