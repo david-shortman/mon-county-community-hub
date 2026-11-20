@@ -1,0 +1,89 @@
+---
+// Housing path 2 (#202): eviction papers in hand. The timeline and rights
+// come from Legal Aid of West Virginia's "Court Eviction Process for Renters
+// in West Virginia" (last updated 08/08/2024 on its page), read 2026-11-14,
+// and W. Va. Code §55-3A-3, read 2026-11-14. Legal timelines cite a court or
+// legal aid source (#179). Appeals are left to Legal Aid on purpose: see the
+// #court note on /renting/. Waits for David: topic housing.
+import Base from '../../layouts/Base.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import SourceLine from '../../components/SourceLine.astro';
+import Timeline from '../../components/Timeline.astro';
+import Icon from '../../components/Icon.astro';
+import { resource, telHref } from '../../lib/content.mjs';
+import { fixFormUrl } from '../../lib/group-requests.mjs';
+export const page = { parent: "/housing/", label: "Got eviction papers" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const legalAid = resource('legal-aid-wv-eviction-help');
+const processUrl = 'https://legalaidwv.org/legal-information/court-eviction-process/';
+const formsUrl = 'https://legalaidwv.org/renters-rights-west-virginia/eviction-in-west-virginia/';
+const process = [{ url: processUrl, checked: '2026-11-14', name: 'Legal Aid of West Virginia' }];
+const code = [{ url: 'https://code.wvlegislature.gov/55-3A-3/', checked: '2026-11-14', name: 'West Virginia Code §55-3A-3' }];
+const steps = [
+  { when: 'Day 1', text: 'The landlord files a "Wrongful Occupation" case in magistrate court. The court sets a hearing date.' },
+  { when: 'Before the hearing', text: 'You are served the papers. Legal Aid says it is not unusual for this to happen just a day or two before the hearing. If you are not served, the hearing is supposed to be put off.' },
+  { when: 'No more than 10 business days after filing', text: 'The hearing. Each side can bring evidence and witnesses. At the end, the magistrate or judge says who wins.' },
+  { when: 'If the landlord wins', text: 'The judge sets a date you must be out by. Legal Aid says there is no flat rule for how long. In extreme cases it can be the same day.' },
+  { when: 'After that date', text: 'If you have not moved, the landlord can get a "writ of possession," and the sheriff oversees the eviction.' },
+];
+---
+<Base help title="Got eviction papers in Mon County? What happens and when" description="Got eviction court papers in Monongalia County, WV? Call Legal Aid of WV today. The hearing is usually within 10 business days. What happens, your rights, and paying to end a case.">
+  <h1>Got eviction papers?</h1>
+  <p class="lede">Call Legal Aid of West Virginia today at <a href={telHref(legalAid.contact.phone)}>{legalAid.contact.phone}</a>. Legal Aid says the hearing is usually no more than 10 business days after the landlord files, so you need to act quickly. Go to the hearing.</p>
+
+  <ResourceCard r={legalAid} headingLevel={2} showCost />
+
+  <h2 id="timeline">What happens and when</h2>
+  <p>This is how Legal Aid describes most eviction cases in magistrate court.</p>
+  <Timeline label="Steps in an eviction case in magistrate court" steps={steps} />
+  <p><strong>Do not miss the hearing.</strong> West Virginia law says that if, by the time of the hearing, the tenant has not shown up or filed an answer, "the court shall make and enter an order granting immediate possession of the property to the landlord." That means the landlord gets the home back right away.</p>
+  <SourceLine sources={[...process, ...code]} about="the eviction case timeline" />
+
+  <h2 id="get-ready">Get ready right away</h2>
+  <p>Legal Aid says to collect your records now and have them ready, because the case moves fast. For example:</p>
+  <ul>
+    <li>rent receipts and cancelled checks</li>
+    <li>copies of letters or texts asking the landlord to make repairs</li>
+    <li>your lease and any notice the landlord gave you</li>
+  </ul>
+  <p>Legal Aid has a free form, Answer to an Eviction Case, that tells the court and the landlord you are taking part in the case.</p>
+  <div class="actions">
+    <a class="btn" href={formsUrl}><Icon name="open" /><span>Legal Aid's eviction forms and videos</span></a>
+  </div>
+  <SourceLine sources={[...process, { url: formsUrl, checked: '2026-11-14', name: 'Legal Aid of West Virginia' }]} about="getting ready for the hearing" />
+
+  <h2 id="pay">Can paying end the case?</h2>
+  <p>Legal Aid says West Virginia has a "Pay-&-Dismiss" right in most cases where not paying rent is the only reason for the eviction. Legal Aid lists these rules:</p>
+  <ol>
+    <li>Pay all the back rent, all late fees, and all the court costs the landlord paid.</li>
+    <li>Pay with cash, a certified check or a money order. A personal check or a promise to pay later does not count.</li>
+    <li>Offer the payment to the landlord before the hearing. If the landlord says no, bring the money to the hearing and offer it at the start.</li>
+    <li>Go to the hearing anyway, even if the landlord took the money, to tell the magistrate the case is settled.</li>
+  </ol>
+  <SourceLine sources={process} about="paying to end a case" />
+
+  <h2 id="rights">Your rights in the case</h2>
+  <p>Legal Aid says you have the right to:</p>
+  <ul>
+    <li><strong>Ask for a jury.</strong> File a written request before the hearing date. A jury has court costs.</li>
+    <li><strong>Get copies of the landlord's papers and photos</strong> before the hearing. Give the court a written list, and send a copy to the landlord.</li>
+    <li><strong>Call witnesses.</strong> Get a subpoena form at the court clerk's office. There is a fee.</li>
+    <li><strong>Move the case to circuit court</strong> if it is about more than $2,500. There is a filing fee.</li>
+  </ul>
+  <p>Legal Aid says that if you qualify for a fee waiver, you may not have to pay these costs.</p>
+  <SourceLine sources={process} about="your rights in an eviction case" />
+
+  <h2 id="things">Your things</h2>
+  <p>Legal Aid says that after a court-ordered eviction, the landlord must protect what you leave behind for at least 30 days, and may charge a reasonable fee. The landlord cannot keep your things until you pay back rent. If everything left is worth less than $300, the landlord does not have to keep it. See Legal Aid's article for when the time is 60 days.</p>
+  <SourceLine sources={process} about="your things after an eviction" />
+
+  <p class="note">This is general information from Legal Aid and the law, not legal advice. Appeals and other rules can change what happens in your case. Ask Legal Aid about yours. The law's own words are on <a href={`${base}/renting/#court`}>If your landlord takes you to court</a>.</p>
+
+  <h2 id="also">Also check</h2>
+  <ul>
+    <li><a href={`${base}/housing/behind-on-rent/`}>Help paying rent</a></li>
+    <li><a href={`${base}/stay-tonight/`}>Where to stay tonight</a></li>
+    <li><a href={`${base}/sell-or-donate/`}>Where your things can go</a> if you have to move</li>
+  </ul>
+  <p class="meta">Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
