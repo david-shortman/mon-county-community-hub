@@ -1,0 +1,21 @@
+title: WVU Medicine video visits for urgent care
+slug: wvu-medicine-virtual-urgent-care
+org: wvu-medicine
+topics: [health]
+who_it_is_for: Children 4 and older and adults with a minor illness, like a cough, fever, sore throat, ear pain or a rash. You do not need to be a WVU Medicine patient, but you must be in West Virginia or Maryland during the visit and have a MyWVUChart account. For a child under 4, call the child's regular doctor.
+hours: 8 a.m. to 8 p.m., every day except Thanksgiving and Christmas
+what_to_do: Start a video visit on your phone, tablet or computer from WVU Medicine's page or the MyWVUChart app. Pick the symptom that fits, then wait in line until a provider is ready. The visit is billed to your insurance. Check your plan to see what you will pay.
+steps:
+  - Log in to MyWVUChart, or open the MyWVUChart app.
+  - Choose an On Demand Video Visit, then pick the symptom that best fits.
+  - Enter your details and check in. You will be told when the provider is ready.
+contact:
+  url: https://wvumedicine.org/our-care/virtual-care/virtual-urgent-care/
+  url_label: Start a video visit
+sources:
+  - url: https://wvumedicine.org/our-care/virtual-care/virtual-urgent-care/
+    checked: 2026-11-14
+    quote: "Local WVU Medicine providers are available 8 am to 8 pm, 363 days a year, including evenings, weekends, and most holidays."
+  - url: https://wvumedicine.org/our-care/urgent-care/
+    checked: 2026-11-14
+    quote: "you do need to be located in West Virginia or Maryland and have a MyWVUChart account."

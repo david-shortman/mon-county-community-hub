@@ -10,7 +10,7 @@
 door: care
 # The lede and the hint in doors.yaml name only topics whose pages exist (#487).
 # When a new care page ships, add it to both in the same PR.
-lede: Pick what is going on, and we put the steps in order. Get help with mental health, drugs or alcohol, no insurance, a dentist or paying for medicine. Or get help keeping your Medicaid in 2027, with a new baby, birth control, shots, Medicare or staying healthy in Mon County.
+lede: Pick what is going on, and we put the steps in order. Get help with mental health, drugs or alcohol, no insurance, a dentist or paying for medicine, or where to go when you are sick or hurt. Or get help keeping your Medicaid in 2027, with a new baby, birth control, shots, Medicare or staying healthy in Mon County.
 cant_wait:
   text: Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. In danger right now? Call 911.
   resource: 988-lifeline
@@ -91,6 +91,14 @@ steps:
     when: today
     resource: wv-medicaid-2027-help-line
     text: On Medicaid? Update your address, phone and email in WV PATH or by phone, and answer any letter from DoHS within 30 days.
+  urgentcare:
+    when: today
+    resource: wvu-medicine-urgent-care
+    text: Not an emergency but it can't wait? Walk in to a WVU Medicine urgent care clinic. No appointment needed.
+  er:
+    when: today
+    resource: ruby-memorial-emergency-room
+    text: Think it is an emergency? Go to an emergency room, open 24 hours, or call 911.
   ship:
     when: week
     resource: wv-ship-medicare-counseling
@@ -116,6 +124,10 @@ situations:
     label: I need a dentist, or help paying for medicine
     page: /dental-and-prescriptions/
     steps: [dentist, healthright]
+  - id: sick
+    label: I'm sick or hurt, or need a regular doctor
+    page: /sick-or-hurt/
+    steps: [er, urgentcare]
   - id: baby
     label: I'm pregnant or have a new baby
     page: /pregnant-or-new-baby/

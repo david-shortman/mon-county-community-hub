@@ -1,0 +1,58 @@
+---
+// Sick or hurt: where to go, and finding a regular doctor (rank 7 in #475,
+// #21). Every place fact is in a resource record in content/resources/,
+// read 2026-11-14 from WVU Medicine, Mon Health and the WV Poison Center.
+// The emergency room rule is from CMS. Describe only, never rank providers.
+import Base from '../layouts/Base.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { loadDir } from '../lib/content.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "care", topic: "health", label: "Sick or hurt: where to go", summary: "Emergency rooms, urgent care and walk-in clinics, video visits, the poison center, and finding a regular doctor" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const all = loadDir('resources');
+const r = (slug) => all.find((e) => e.slug === slug);
+const checked = '2026-11-14';
+const emtala = [{ url: 'https://www.cms.gov/medicare/regulations-guidance/legislation/emergency-medical-treatment-labor-act', checked, name: 'Centers for Medicare and Medicaid Services, EMTALA' }];
+---
+<Base title="Sick or hurt? Where to go in Morgantown, and finding a doctor" description="Where to go when you are sick or hurt in Morgantown and Mon County: emergency rooms open 24 hours, urgent care with no appointment, walk-in clinics, video visits and the poison center.">
+  <h1>Sick or hurt? Where to go</h1>
+  <p class="lede">Can it wait a day? WVU Medicine urgent care clinics and two Mon Health offices take walk-ins, and you can start a video visit from home from 8 a.m. to 8 p.m. Think it is an emergency? Go to an emergency room, open 24 hours, or call 911. Looking for a regular doctor? See <a href="#doctor">find a doctor</a>.</p>
+
+  <h2 id="emergency">An emergency</h2>
+  {r('ruby-memorial-emergency-room') && <ResourceCard r={r('ruby-memorial-emergency-room')} />}
+  {r('mon-medical-center-emergency-room') && <ResourceCard r={r('mon-medical-center-emergency-room')} />}
+  <p>Worried about the cost? Under a federal law called EMTALA, a hospital emergency room that takes Medicare must check anyone who asks for care for an emergency, including a person in labor, "regardless of an individual's ability to pay." If it is an emergency, the hospital must treat you until you are stable, or move you to a hospital that can. For help with the bill after, see <a href={`${base}/no-insurance/`}>help paying a hospital bill</a>.</p>
+  <SourceLine sources={emtala} about="the emergency room rule" />
+
+  <h2 id="poison">Someone may have been poisoned</h2>
+  {r('wv-poison-center') && <ResourceCard r={r('wv-poison-center')} />}
+
+  <h2 id="urgent">Not an emergency, but it can't wait</h2>
+  <p>Urgent care is for things like a cough, flu, an infection, a rash, a sprain or a broken bone. You do not need an appointment or a referral.</p>
+  {r('wvu-medicine-urgent-care') && <ResourceCard r={r('wvu-medicine-urgent-care')} />}
+  {r('mon-health-wedgewood-westover') && <ResourceCard r={r('mon-health-wedgewood-westover')} />}
+  {r('mon-health-wedgewood-cheat-lake') && <ResourceCard r={r('mon-health-wedgewood-cheat-lake')} />}
+
+  <h3 id="video">See a provider by video, from home</h3>
+  {r('wvu-medicine-virtual-urgent-care') && <ResourceCard r={r('wvu-medicine-virtual-urgent-care')} headingLevel={4} />}
+
+  <h2 id="doctor">Find a regular doctor</h2>
+  <p>A regular doctor (primary care) knows your health history, does checkups and helps with long-term problems like diabetes or high blood pressure. Neither hospital system's online list says which doctors are taking new patients, so ask when you call.</p>
+  {r('wvu-medicine-appointments') && <ResourceCard r={r('wvu-medicine-appointments')} />}
+  {r('mon-health-find-a-doctor') && <ResourceCard r={r('mon-health-find-a-doctor')} />}
+
+  <h3 id="low-cost">No insurance, or money is tight</h3>
+  {r('health-right-clinic') && <ResourceCard r={r('health-right-clinic')} headingLevel={4} />}
+  {r('clay-battelle-health-center') && <ResourceCard r={r('clay-battelle-health-center')} headingLevel={4} />}
+  <p>More free and sliding fee care, and how to apply for Medicaid, is on <a href={`${base}/no-insurance/`}>No insurance or can't afford a doctor</a>.</p>
+
+  <h2>Also check</h2>
+  <ul>
+    <li>Thinking about suicide, or in a mental health crisis? Call or text 988, any hour. See <a href={`${base}/mental-health/`}>mental health help</a>.</li>
+    <li>Need a ride to a visit? See <a href={`${base}/medical-rides/`}>rides to a medical visit</a>.</li>
+    <li>Tooth pain? See <a href={`${base}/dental-and-prescriptions/`}>a dentist, or help paying for medicine</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked November 14, 2026. Hours change, and urgent care clinics may close on some holidays, so call before you go. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
