@@ -1,9 +1,9 @@
 # The Family and life changes door page, /family/ (#252). Shape and rules:
 # see doors/care.yaml and site/src/components/DoorPage.astro. More
-# situations come as their pages ship: families and kids (#225), disability
-# and aging (#227), and language help (#229).
+# situations come as their pages ship: families and kids (#225) and language
+# help (#229). Disability and aging situations came in sprint wave 17 (#248).
 door: family
-lede: Young kids, work, learning, and life as a veteran in Mon County. Pick what is going on, and we put the steps in order.
+lede: Young kids, work, learning, disability and aging, and life as a veteran in Mon County. Pick what is going on, and we put the steps in order.
 steps:
   birth-to-three:
     when: week
@@ -69,6 +69,26 @@ steps:
     when: week
     resource: mcs-school-buses
     text: Find your child's bus times, and fill out the bus form to get delay alerts.
+  independent-living:
+    when: week
+    resource: liveability-morgantown
+    text: Call LiveAbility, the independent living center in Morgantown, about living more on your own.
+  home-changes:
+    when: week
+    resource: liveability-clsp
+    text: Call LiveAbility and ask about its program for ramps, grab bars, van lifts and other changes.
+  disability-job:
+    when: week
+    resource: drs-morgantown-office
+    text: Call the state's Division of Rehabilitation Services office in Morgantown about job help.
+  care-options:
+    when: week
+    resource: wv-adrc-region-1
+    text: Call the Aging and Disability Resource Center for free help finding long-term care and caregiver services.
+  in-home-care:
+    when: week
+    resource: senior-monongalians-in-home-care
+    text: Call Senior Monongalians' nurse's office to ask which in-home help program fits.
 situations:
   - id: baby-growth
     label: I'm worried about how my baby or toddler is growing
@@ -114,9 +134,26 @@ situations:
     label: I'm a veteran and could lose my housing
     page: /veterans/
     steps: [homeless-line]
+  - id: disability-living
+    label: I have a disability and want help living on my own
+    page: /disability-and-aging/
+    steps: [independent-living]
+  - id: home-changes
+    label: I need a ramp, grab bars or other changes to my home or car
+    page: /disability-and-aging/#home-changes
+    steps: [home-changes]
+  - id: disability-job
+    label: I have a disability and want help finding or keeping a job
+    page: /disability-and-aging/#jobs
+    steps: [disability-job]
+  - id: help-at-home
+    label: An older family member needs help at home
+    page: /help-at-home/
+    steps: [in-home-care, care-options]
   - id: caregiving
     label: I'm caring for a family member who is older or has a disability
     page: /caregivers/
+    steps: [care-options]
   - id: death
     label: Someone in my family died
     page: /when-someone-dies/
