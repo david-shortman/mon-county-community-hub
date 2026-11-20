@@ -89,7 +89,8 @@ async function lagPrs() {
     try {
       sh('git', ['fetch', '-q', 'origin', `pull/${pr.number}/head`], { cwd: ROOT });
       sh('git', ['worktree', 'add', '-q', '--detach', dir, 'FETCH_HEAD'], { cwd: ROOT });
-      fs.symlinkSync(path.resolve('node_modules'), path.join(dir, 'site', 'node_modules'));
+      // Packages install once at the repo root (npm workspaces, #69).
+      fs.symlinkSync(path.join(ROOT, 'node_modules'), path.join(dir, 'node_modules'));
       const out = sh('node', ['scripts/high-stakes.mjs', 'origin/main'], { cwd: path.join(dir, 'site') }).trim();
       if (out) hits.push({ number: pr.number, title: pr.title, days: daysSince(pr.created_at), files: out.split('\n').length });
     } catch { unread += 1; } finally {
