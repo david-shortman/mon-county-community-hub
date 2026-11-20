@@ -192,3 +192,13 @@ For #222 and #988, sprint wave 17 (#529). Pages come from `site/src/pages/` on `
 **Known gaps not opened again** (already tracked or another lane's): housing has no single starting page (#202, PR #1868); a basic household budget for the wages need (budget lane); free blood pressure and diabetes classes (#1312, needs a person); `/find-your-people/` and What help might I get have no door link (doors lane); open treatment beds and counselors taking new patients (no public source).
 
 Next review: first week of December 2026, with the monthly persona and needs checklist (#1037).
+
+## Getting online and learning needs, November 14, 2026
+
+For #1908 and #1909, sprint wave 18 (#529). Scored with the rules on `/needs/` ("How we rank them").
+
+- **Getting online is now a need** (`content/needs/getting-online.yaml`, rank 9, score 10 of 12). About 1 in 10 households has no broadband subscription (County Health Rankings, 2020 to 2024), 1,962 of 38,428 places in the county are not served yet (West Virginia Office of Broadband, FCC data as of December 31, 2025), and 12% of people who answered the Ruby Memorial survey have no or unreliable home internet (2025). Persona `no-internet-at-home`, question q77.
+- **Adult skills is now a need** (`content/needs/adult-skills.yaml`, rank 13, score 9 of 12). 16% of adults read at the lowest level (NCES PIAAC Skills Map, surveys from 2012 to 2017), and about 3,931 adults 25 and older have no high school diploma (County Health Rankings 2025). Persona `finish-school`, question q78.
+- **School results are not a separate need.** In Mon County, 60.6% of tested students were proficient in reading in 2025-2026 (West Virginia 47.6%), up from 53.4% in 2021-2022, and 96.2% graduated in four years in 2024-2025 (West Virginia 92.8%) (ZoomWV, West Virginia Department of Education, in `content/indicators/`, read 2026-10-31 and 2026-11-03). Scored as a need it would get severity 2, reach 3, agreement 2 and room to help 1 (school results are mostly something the school system, not a website, can change), for 8 of 12. Families' part (enrolling, tutoring, school help) is already on `/school-age/` and `/keep-learning/`. The numbers stay on `/how-we-are-doing/`, where residents can watch them over time.
+
+The "Growing up and learning" row in the table above now has child care (7) and adult skills (13). The "Home and basic needs" row now has getting online (9).

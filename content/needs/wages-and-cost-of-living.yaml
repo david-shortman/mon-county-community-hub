@@ -39,8 +39,8 @@ gaps:
   - Working families may not know they qualify for help like SNAP, child care help or tax credits.
   - The newest county budget from United For ALICE that we could read covers 2023 costs, and the two public budgets for the county give very different totals.
 topics: [money, work]
-rank: 10
-rank_why: "Score 9 of 12: severity 2, reach 3, agreement 2, room to help 2. Above transportation because of higher 211 demand."
+rank: 11
+rank_why: "Score 9 of 12: severity 2, reach 3, agreement 2, room to help 2. Above transportation because of higher 211 demand. Moved from 10 to 11 on November 14, 2026, when getting online (score 10) was added above it."
 issues: [403, 987, 1258]
 get_help:
   - path: /how-we-are-doing/#basic-budget
