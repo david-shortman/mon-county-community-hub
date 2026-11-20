@@ -7,4 +7,8 @@ topics: [veterans, health]
 area: statewide
 sources:
   - url: https://www.va.gov/clarksburg-health-care/locations/
-    checked: 2026-10-31
+    checked: 2026-11-14
+    quote: "40 Commerce Drive, Suite 101"
+  - url: https://www.va.gov/morgantown-vet-center/
+    checked: 2026-11-14
+    quote: "The Morgantown Vet Center is located in the lower level of the WesMon V building."

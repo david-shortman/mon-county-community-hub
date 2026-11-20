@@ -7,6 +7,8 @@ topics: [health]
 area: national
 sources:
   - url: https://988lifeline.org/
-    checked: 2026-10-31
+    checked: 2026-11-14
+    quote: "The 988 Lifeline is available 24/7/365. Your conversations are free and confidential."
   - url: https://988lifeline.org/about/
-    checked: 2026-10-31
+    checked: 2026-11-14
+    quote: "The 988 Lifeline is comprised of a national network of over 200 local crisis centers"
