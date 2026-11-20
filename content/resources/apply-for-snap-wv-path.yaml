@@ -20,8 +20,11 @@ sources:
   - url: https://learning-public.wvpath.wv.gov/SubmitanApplication.html
     checked: 2026-10-31
   - url: https://bfa.wv.gov/frequently-asked-questions-faq
-    checked: 2026-11-01
+    checked: 2026-11-14
+    quote: "contact the DoHS Customer Service Reporting Center at 1-877-716-1212, open Monday-Friday: 8:00 AM - 5:00 PM."
   - url: https://bfa.wv.gov/media/40007/download?inline
-    checked: 2026-11-01
+    checked: 2026-11-14
+    quote: "To file an application, you only need to complete your name, address, and signature"
   - url: https://dohs.wv.gov/article/west-virginia-announces-changes-snap-able-bodied-adults-without-dependents-abawd-policy
-    checked: 2026-10-31
+    checked: 2026-11-14
+    quote: "The ABAWD age range will now include individuals ages 18 through 64."
