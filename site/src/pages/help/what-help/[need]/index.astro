@@ -8,7 +8,7 @@ export function getStaticPaths() {
 }
 const { need } = Astro.props;
 ---
-<Base help title={`What help might I get in Mon County? ${need.label}: who lives with you`} description={`Help with ${need.topic} in Mon County, question 2 of 2: who lives with you. Some programs are for families with young children, older adults, people with disabilities or veterans.`}>
+<Base help title={`${need.title} in Mon County: who lives with you?`} description={`Help with ${need.topic} in Mon County, question 2 of 2: who lives with you? Some programs are for young children, older adults, people with disabilities or veterans.`}>
   <h1>Help with {need.topic}: does anyone in your home fit one of these?</h1>
   <p class="lede">Some programs are for these groups. Pick the one that fits best, or skip. You picked: {need.label}.</p>
   <Question step={2} of={2} back="/help/what-help/" choices={WHO.map((w) => ({ label: w.label, href: `/help/what-help/${need.id}/${w.id}/` }))} />

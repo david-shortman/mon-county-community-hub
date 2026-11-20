@@ -17,9 +17,9 @@ const pick = (x) => { const p = x?.href && pages.get(routeOf(x.href)); return p 
 const links = [pick(need), pick(who)].filter(Boolean);
 const r211 = resource('wv-211');
 const forHome = who.home ? `, for a home with ${who.home}` : '';
-const description = `Places in Morgantown and Mon County that may help with ${need.topic}${forHome}. Each page says who each program is for and how to apply.`;
+const description = `Places in Mon County, WV that may help with ${need.topic}${forHome}. Each page says who it is for and how to apply.`;
 ---
-<Base help title={`Help in Mon County: ${need.label}${who.href ? `, with ${who.label.toLowerCase()} at home` : ''}`} description={description}>
+<Base help title={`${need.title} in Mon County${who.title ? `, ${who.title}` : ''}`} description={description}>
   <h1>Places that may help with {need.topic}{forHome}</h1>
   <p class="lede">You picked: {need.label}{who.href && <>, and {who.label.toLowerCase()} at home</>}.</p>
   <p>Start here. Each page says who each program is for, in the program's own words, and how to apply. You may qualify for more than one. Only the program can say for sure, so it is worth asking.</p>
