@@ -7,6 +7,7 @@ what_to_do: Get the Section 8 or public housing application from fmhousing.com o
 notes:
   - The Morgantown office is open Tuesday to Thursday, 8 a.m. to 5 p.m., closed noon to 12:30. It is closed Monday and Friday, and follows the City of Morgantown's holiday schedule. Both offices have drop boxes for applications after hours.
   - On November 2, 2026, the housing authority's home page said the Section 8 voucher waiting list opened May 18, 2026, and gave no closing date. It said the public housing one-bedroom list "is currently closed." People already on another list "must apply separately for the Section 8 Waiting List." Call to check before you apply.
+what_happens: When your name comes up on the waiting list, the housing authority sends you a letter inviting you to a group orientation meeting, and decides if you qualify after that. Then you have 60 days to find a place with your voucher, and you can ask in writing for more time, up to 120 days in all. Help with rent starts only after the unit passes inspection and the papers are signed.
 contact:
   phone: "304-363-0860"
   url: https://fmhousing.com/visitors/faq_-_section_8.php
@@ -14,7 +15,7 @@ contact:
 cost: free to apply
 sources:
   - url: https://fmhousing.com/visitors/faq_-_section_8.php
-    checked: 2026-10-31
+    checked: 2026-11-14
   - url: https://fmhousing.com/project_based_vouchers.php
     checked: 2026-10-31
   - url: https://fmhousing.com/hours_and_directions.php
