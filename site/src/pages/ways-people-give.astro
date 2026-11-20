@@ -1,0 +1,71 @@
+---
+// How people here give together (#1767, approved by David on 2026-11-14).
+// Describe only: what each way is and how it works, from each group's own
+// pages, read 2026-11-14. Never ask anyone to give, never rank or recommend.
+// Money page: the PR waits for David.
+import Base from '../layouts/Base.astro';
+import SourceLine from '../components/SourceLine.astro';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "community", topic: "community", label: "How people here give together", summary: "Community foundation funds, the United Way's workplace campaign, and giving circles, described from each group's own pages" };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const checked = '2026-11-14';
+const ycf = [
+  { url: 'https://ycfwv.org/what-is-a-community-foundation/', checked },
+  { url: 'https://ycfwv.org/frequently-asked-questions/', checked },
+  { url: 'https://ycfwv.org/how-to-give/', checked },
+  { url: 'https://ycfwv.org/funds/', checked },
+];
+const uw = [
+  { url: 'https://www.unitedwaympc.org/campaign', checked },
+  { url: 'https://www.unitedwaympc.org/how-do-we-decide', checked },
+  { url: 'https://www.unitedwaympc.org/womenunited', checked },
+];
+const hundred = [{ url: 'https://100pluspeople.org/', checked }];
+const wgc = [{ url: 'https://ycfwv.org/womens-giving-circle-grants/', checked }];
+---
+<Base title="How people give together in Morgantown and Mon County" description="How local giving works in Morgantown and Mon County, WV: community foundation funds, the United Way's workplace campaign, and giving circles, described from each group's own pages.">
+  <h1>How people here give together</h1>
+  <p class="lede">People in Mon County pool their giving in a few ways: funds at a community foundation, the United Way's workplace campaign, and giving circles. This page describes how each one works, in each group's own words. We do not ask anyone to give, and we do not rate or recommend groups.</p>
+  <ul class="topic-list">
+    <li><a href="#community-foundation">A fund at a community foundation</a></li>
+    <li><a href="#united-way">The United Way's workplace campaign</a></li>
+    <li><a href="#giving-circles">Giving circles</a></li>
+  </ul>
+
+  <h2 id="community-foundation">A fund at a community foundation</h2>
+  <p>Your Community Foundation of North Central West Virginia (YCF) is a community foundation based in Morgantown. It says a community foundation is made up mostly of "permanent, named" funds set up by many donors "for the long-term benefit of the residents" of one area.</p>
+  <ul>
+    <li><strong>Opening a fund.</strong> YCF says most people open a fund with cash or stock. It also lists real estate, an interest in a family business, artwork or other property. A fund can start now, or later through a will.</li>
+    <li><strong>Where the money goes.</strong> A donor can name the fund's purpose by area of interest, or name the groups it supports. They must be tax-exempt 501(c)(3) groups. Donors can also recommend grants.</li>
+    <li><strong>Endowment funds.</strong> YCF says the money in an endowment fund is "invested forever." Each year, up to 5 percent of the interest and growth pays for a small YCF fee and a grant.</li>
+    <li><strong>Existing funds.</strong> YCF's Funds page lists its funds by area, such as animals, the arts and community growth. It says gifts to YCF are tax-deductible.</li>
+  </ul>
+  <SourceLine sources={ycf} org="your-community-foundation" about="how a community foundation fund works" />
+
+  <h2 id="united-way">The United Way's workplace campaign</h2>
+  <p>United Way of Monongalia and Preston Counties runs workplace campaigns each year. Businesses, large employers and nonprofits can take part.</p>
+  <ul>
+    <li><strong>How people give.</strong> Workers can give in regular amounts through payroll deduction, or with a paper pledge.</li>
+    <li><strong>Who decides where it goes.</strong> Money given to the United Way's Community Impact Fund is given out through "Citizens' Review." Community volunteers read applications from programs, hear their presentations, and recommend what to fund. The United Way's board must approve it. The United Way says it funds programs, not agencies.</li>
+    <li><strong>Women United.</strong> A group of more than 300 women within the United Way. Its Power of the Purse event funds Dolly Parton's Imagination Library in Mon County, which mails a free book each month to children from birth to age five.</li>
+  </ul>
+  <SourceLine sources={uw} org="united-way-monongalia-preston" about="the United Way's workplace campaign" />
+
+  <h2 id="giving-circles">Giving circles</h2>
+  <p>In a giving circle, a group of people pool their gifts and decide together where the money goes.</p>
+  <h3>100+ People Who Care</h3>
+  <p>A giving circle for the Greater Morgantown area. Once every quarter, members each give $250 at a meeting. Local charities present, and members vote on which one gets the combined gift. Its goal is 100 or more members, for a gift of up to $25,000. Charities apply online, and an application stays active for the calendar year.</p>
+  <SourceLine sources={hundred} org="hundred-plus-people-who-care-morgantown" about="100+ People Who Care" />
+  <h3>Women's Giving Circle of North Central West Virginia</h3>
+  <p>A fund at YCF. It gives grants to nonprofits in Harrison, Marion, Monongalia, Preston and Taylor counties for the needs of women and girls, such as education, health, and preventing violence. Applications for 2026-27 were due September 21, 2026. YCF says to check back in August 2027.</p>
+  <SourceLine sources={wgc} org="your-community-foundation" about="the Women's Giving Circle" />
+
+  <h2>Also check</h2>
+  <ul>
+    <li>Before you give to a group: <a href={`${base}/check-a-charity/`}>Check a charity before you give</a>.</li>
+    <li>Run a nonprofit and looking for funding? See <a href={`${base}/grants-for-nonprofits/`}>Grants for nonprofits</a>.</li>
+    <li>Giving time instead: <a href={`${base}/volunteer/`}>Volunteer</a>.</li>
+  </ul>
+
+  <p class="meta">Sources checked November 14, 2026. We describe how these work. We do not ask anyone to give, and we do not rate or recommend any group. Something out of date? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>
