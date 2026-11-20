@@ -11,12 +11,25 @@ import Icon from '../components/Icon.astro';
 import Actions from '../components/Actions.astro';
 import { resource, telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
+import SourceLine from '../components/SourceLine.astro';
+import { loadTonight, checkedWhen } from '../lib/tonight.mjs';
 export const page = { door: "help-now", label: "Where to stay tonight", summary: "A bed tonight, a warm place, food tonight, or safe from someone" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const grace = resource('grace-shelter');
+const rainbow = resource('rainbow-house');
 const rdvic = resource('rdvic-hotline');
 const r211 = resource('wv-211');
 const r988 = resource('988-lifeline');
+// The warming shelter box reads the same file as /tonight/ (#219), so one
+// refresh updates both pages. Only "not announced" and "season over" are
+// spelled out here. Open or closed tonight changes daily, so this page sends
+// people to /tonight/, which checks the date again on the phone.
+const ws = loadTonight();
+const wsWhen = checkedWhen(ws).replace(/\.$/, '');
+const wsText = {
+  'not-announced': ws.note,
+  'season-over': 'It is closed for the season.',
+}[ws.status] ?? 'The season has started. Whether it is open changes night to night, so see tonight\'s status below for where, hours and rules.';
 const choices = [
   { href: '#bed', label: 'A bed tonight', icon: 'bed' },
   { href: '#warm', label: 'A warm place right now', icon: 'home' },
@@ -37,14 +50,16 @@ const choices = [
   <section class="need" id="bed" aria-labelledby="bed-h">
     <h2 id="bed-h">A bed tonight</h2>
     <PlaceCard r={grace} />
+    <PlaceCard r={rainbow} />
     <p>Full, or not for you? Call <a href={telHref(r211.contact.phone)}>211</a>. They know who has room.</p>
   </section>
 
   <section class="need" id="warm" aria-labelledby="warm-h">
     <h2 id="warm-h">A warm place right now</h2>
     <p>We have not found a sourced daytime warming place to list yet. <a href="#bed">Grace Shelter</a> is for adults. {grace.hours}. Call to confirm. For other places to get warm, call <a href={telHref(r211.contact.phone)}>211</a>.</p>
-    <div class="note">
-      <p><strong>Winter warming shelter:</strong> no opening date or hours have been announced for this winter yet. In August, local news reported that Catholic Charities West Virginia plans to run it on the first floor of Hazel's House of Hope on Scott Avenue in Morgantown. The report said the money would come from the city and from a funding request to the county. Call 211 for the latest. <span class="meta">Last checked October 31, 2026. <a href="https://wajr.com/2026/08/24/catholic-charities-west-virginia-makes-request-to-mon-county-commission-for-warming-shelter-funding/">Source: wajr.com</a></span></p>
+    <div class="note" id="warming-shelter" data-checked={ws.checkedDay} data-status={ws.status}>
+      <p><strong>Winter warming shelter:</strong> {wsText} Call 211 for the latest. <span class="meta">Last checked {wsWhen}.</span></p>
+      <SourceLine sources={ws.sources} about="the warming shelter status" />
     </div>
     <p>Is the warming shelter open tonight? See <a href={`${base}/tonight/`}>tonight's status</a>. It shows when we last checked.</p>
   </section>

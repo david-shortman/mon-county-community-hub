@@ -396,7 +396,7 @@ sources:
 
 ## `tonight/warming-shelter.yaml`: tonight's warming shelter status
 
-One file, shown on `/tonight/` (#401). Update it each day in winter, after reading a same-day source.
+One file, shown on `/tonight/` (#401) and in the warming shelter box on `/stay-tonight/` (#219), so one update changes both pages and their checked date. Update it each day in winter, after reading a same-day source. Before the season opens, a weekly update with `status: not-announced` is enough.
 
 ```yaml
 status: open              # not-announced | open | closed-tonight | season-over
@@ -418,7 +418,7 @@ sources:
     checked: 2026-12-05
 ```
 
-The page says "open" only when `checked` is today in Morgantown, both when the site builds and again on the phone, so a page saved from an earlier day reads "Not confirmed for today." There is never a bed count. `npm run check-content` checks the status, the `checked` format, and that an open shelter has `where`, `hours` and `confirm_phone`.
+The page says "open" only when `checked` is today in Morgantown, both when the site builds and again on the phone, so a page saved from an earlier day reads "Not confirmed for today." There is never a bed count. `npm run check-content` checks the status, the `checked` format, and that an open shelter has `where`, `hours` and `confirm_phone`. From November 1 to March 31 it also warns when `checked` is more than 7 days old.
 
 ## `doors.yaml`: the five doors
 
