@@ -1,0 +1,28 @@
+---
+// Classes and training for adults at MTEC (part of #393): the adult parts of
+// MTEC's 2026-2027 Course Catalog PDF as short lists. Every rule, date and
+// cost is copied in content/pdf-pages/mtec-catalog-2026-27.yaml.
+import Base from '../layouts/Base.astro';
+import FromPdf from '../components/FromPdf.astro';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { fixFormUrl } from '../lib/group-requests.mjs';
+export const page = { door: "family", topic: "work", label: "Classes and training for adults at MTEC", summary: "MTEC's 2026-2027 catalog for adults: free Adult Learning Center classes, the Practical Nurse program and its tuition, evening job classes, and ways to pay" };
+const d = pdfPage('mtec-catalog-2026-27');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="MTEC classes and training for adults, Morgantown, WV" description="MTEC's 2026-2027 catalog for adults in Mon County: free GED and English classes, the Practical Nurse program, evening job classes, costs and grants.">
+  <h1>Classes and training for adults at MTEC</h1>
+  <p class="lede">MTEC is the county's technical school in Morgantown. Adults can take free classes at its Adult Learning Center, train as a practical nurse in the daytime, or take job and hobby classes at night. Here is what its 2026-2027 catalog says about each, and how to pay.</p>
+
+  <nav aria-label="On this page">
+    <ul>
+      {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
+    </ul>
+  </nav>
+
+  <FromPdf d={d} />
+
+  <p>More free classes, including computer help at the library: <a href={`${base}/free-adult-classes/`}>free classes to read, learn English or use a computer</a>. Steps to a GED: <a href={`${base}/high-school-equivalency/`}>finish high school as an adult</a>. Other ways to learn: <a href={`${base}/keep-learning/`}>keep learning as an adult</a>.</p>
+
+  <p class="meta">This page is a reading aid. MTEC's catalog is the official version, and MTEC decides who gets in. Dates and prices can change, so check with MTEC before you pay. Something wrong? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us what is wrong on this page</a>.</p>
+</Base>

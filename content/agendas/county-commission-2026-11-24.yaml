@@ -1,0 +1,98 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: county-commission-2026-11-24
+body: county-commission
+meeting: Regular meeting
+date: 2026-11-24
+time: "10:00"
+place: Monongalia County Commission Meeting Room, Monongalia County Courthouse, 243 High Street, Morgantown
+watch: We did not find a live stream. The Commission posts video of past meetings under Commission Videos on its website.
+agenda_url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2024,%202026.pdf?t=202611191547320
+read: 2026-11-19
+items:
+  - number: "1"
+    title: Moment of Silent Meditation and Pledge to the Flag
+    kind: opening
+    line: The meeting opens with a moment of silence and the Pledge of Allegiance.
+  - number: "2"
+    title: Call to Order
+    kind: opening
+    line: The meeting is called to order.
+  - number: "3"
+    title: Consent and Approval – County Administrator
+    kind: consent
+    line: Routine business from the County Administrator approved together with one vote. The agenda lists these parts and gives no more detail.
+    parts:
+      - Erroneous Assessments
+      - Minutes
+      - Pay Vouchers
+      - Miscellaneous Bonds, etc.
+      - Budget Revisions
+      - Vacancies for Boards and Authorities
+      - Fiduciary Orders
+  - number: "4"
+    title: Introduction of new employees/personnel changes
+    kind: personnel
+    line: The Commission is introduced to new staff. The agenda lists, by name, one full-time telecommunicator for MECCA 9-1-1 and five people for the Sheriff's office. They are school safety officers (one full-time, one part-time), two full-time process and transport officers, and one part-time utility officer.
+  - number: "5"
+    title: "[name] – Grants"
+    kind: presentation
+    line: An item about grants, led by a person the agenda names. The agenda gives no more detail.
+  - number: "6"
+    title: Correspondence
+    kind: correspondence
+    line: Letters the Commission has received. The agenda lists one, from the WV DHHR Office of Emergency Medical Services, about the county allocation under House Bill 5168.
+  - number: "7"
+    title: Unfinished Business
+    kind: other
+    line: Items held over from earlier meetings. The agenda lists none.
+  - number: "8a"
+    title: Consideration to approve Requisition No. 14 for the Mon General-Maple Drive Series 2016 C Administrative Expense Fund
+    kind: vote
+    line: A vote on a request to pay money from the administrative expense fund for the Mon General-Maple Drive Series 2016 C bonds.
+  - number: "8b"
+    title: Consideration to approve Requisition No. 26 for the Series 2021 B Harmony Grove Phase 1 Administrative Expense Fund
+    kind: vote
+    line: A vote on a request to pay money from the administrative expense fund for the Series 2021 B Harmony Grove Phase 1 bonds.
+  - number: "8c"
+    title: Consideration to approve Requisition No. 45 for the University Town Centre Series 2023 A Property Tax District Administrative Expense Fund
+    kind: vote
+    line: A vote on a request to pay money from the administrative expense fund for the University Town Centre Series 2023 A property tax district.
+  - number: "8d"
+    title: Consideration to approve Requisition No. 128 for the University Town Centre Excise Tax District Administrative Expense Fund
+    kind: vote
+    line: A vote on a request to pay money from the administrative expense fund for the University Town Centre excise tax district.
+  - number: "8e"
+    title: To consider approval of the University Town Centre Economic Opportunity Development District Annual Statutory Report
+    kind: vote
+    line: A vote on the yearly report that state law requires for the University Town Centre Economic Opportunity Development District.
+  - number: "8f"
+    title: "Consideration to approve the request by the Monongalia County Abandoned & Dilapidated Property Enforcement Agency to move the following properties to the complaint stage in accordance with County Ordinance 2004-01:"
+    kind: vote
+    line: A vote on moving properties on Tyrone Road and Sunrise Village Road to the complaint stage under the county's abandoned and dilapidated property ordinance. The agency that enforces that ordinance asked for this.
+    parts:
+      - District 08, Map 11F, Parcels 30, 31, 44, 45, 46 – Tyrone Road
+      - District 08, Map 11, Parcels 36, 36.1 – Sunrise Village Road
+  - number: "9"
+    title: Reports from Elected Officials
+    kind: report
+    line: Updates from elected officials.
+  - number: "10"
+    title: Reports from County Commissioners
+    kind: report
+    line: Updates from the commissioners.
+  - number: "11"
+    title: Comments from the public
+    kind: public-comment
+    line: Time for members of the public to speak to the Commission.
+  - number: "12"
+    title: Adjournment
+    kind: closing
+    line: The meeting ends.
+note: This meeting is on a Tuesday. Under New Business, item 8, the agenda lists six items, shown here as 8a to 8f. On this agenda, public comment comes near the end, after reports.
+sources:
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2024,%202026.pdf?t=202611191547320
+    checked: 2026-11-19
+  - url: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
+    checked: 2026-11-19
