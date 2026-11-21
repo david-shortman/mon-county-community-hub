@@ -63,10 +63,16 @@ situations:
     label: See how Mon County is doing on health, money and jobs
     page: /how-we-are-doing/
     steps: []
+  - id: helper
+    label: Make a list of places to print or text for someone I help
+    page: /make-a-list/
+    steps: []
 also:
   - text: Dates and deadlines
     href: /calendar/
   - text: "Want to help? Where to start"
     href: /for/people-who-want-to-help/
+  - text: Make a list of places for someone you help
+    href: /make-a-list/
   - text: "Pages by who you are"
     href: /for/

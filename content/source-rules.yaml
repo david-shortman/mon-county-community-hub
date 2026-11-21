@@ -49,6 +49,9 @@ rules:
   - host: ecfr.gov
     group: manual
     why: Its robots.txt allows these pages, but it sends automated reads to a block page on unblock.federalregister.gov (seen 2026-11-01 and 2026-11-02, #506), so the Source check listed about 50 false "moved" links. A person re-checks the federal rules on the person sources checklist.
+  - host: broadbandmap.fcc.gov
+    group: manual
+    why: Its robots.txt answers with a 403 Access Denied page (read 2026-11-15), so no robot reads it. A person re-checks the map on the person sources checklist. The FCC help center (help.bdc.fcc.gov) allows reads and is checked.
   - prefix: https://github.com/david-shortman/mon-county-community-hub
     group: reference
     why: Our own repo and report forms.

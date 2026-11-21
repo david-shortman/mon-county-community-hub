@@ -2,6 +2,10 @@ title: Drug overdose deaths
 slug: drug-overdose-deaths
 topic: health
 definition: "Number of drug poisoning deaths per 100,000 population." # County Health Rankings' own definition (v138)
+plain: # a plain sentence from the measure page, shown under the definition (#2002)
+  text: "Deaths from drug poisoning, whether by accident, on purpose or unknown, for every 100,000 people each year, averaged over three years. It counts deaths only, not people who lived through an overdose."
+  url: https://www.countyhealthrankings.org/health-data/community-conditions/health-infrastructure/health-promotion-and-harm-reduction/drug-overdose-deaths?year=2025
+  checked: 2026-11-15
 unit: number
 digits: 0 # County Health Rankings shows this as a whole number
 per: per 100,000 people

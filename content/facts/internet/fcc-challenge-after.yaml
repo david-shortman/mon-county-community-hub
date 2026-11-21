@@ -1,0 +1,8 @@
+slug: fcc-challenge-after
+text: "FCC staff look at the challenge first, which can take a few days. If they accept it, the company has 60 days to agree or answer with proof. If the company disagrees, it should contact you to try to settle it. If that fails after another 60 days, the FCC decides within 90 days. If a company agrees, or does not answer, it has 30 days to fix its data."
+quote: "The provider then has 60 days to review and respond to a challenge by conceding it or providing documentation to rebut it. ... If the parties are unable to resolve the challenge by the end of the second 60-day period ... The FCC will then review the evidence and make a determination within 90 days"
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10476068909467-What-to-Expect-after-Filing-an-Availability-Challenge
+    name: FCC Broadband Data Collection Help Center, What to Expect after Filing an Availability Challenge
+    checked: 2026-11-15
+recheck_days: 180

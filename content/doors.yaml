@@ -31,6 +31,8 @@ doors:
         href: /money/?pick=rent
       - text: Short on food
         href: /help/food/
+      - text: See what help I might get
+        href: /help/what-help/
     topics:
       money: Bills and money
       food: Food

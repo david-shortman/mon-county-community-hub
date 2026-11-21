@@ -66,7 +66,7 @@ const terms = [
   },
 ];
 ---
-<Base title="Mon County budget 2026-2027: where the money goes, Monongalia County, WV" description={`The Monongalia County Commission's 2026-2027 budget in plain lists: ${money(total)} in the General Fund, where it comes from, and where it goes, with a chart.`}>
+<Base title="Mon County budget 2026-2027: where money goes" description={`The Monongalia County Commission's 2026-2027 budget in plain lists: ${money(total)} in the General Fund, where it comes from and where it goes.`}>
   <h1>Mon County's budget for 2026-2027</h1>
   <p class="lede">The Monongalia County Commission plans to spend {money(total)} from its General Fund in the 2026-2027 fiscal year. About {pct(top.share)} is for {top.label.toLowerCase()}, and {pct(second.share)} is for {second.label.toLowerCase()}. The budget is a scanned PDF, so here it is as a chart and short lists.</p>
 
@@ -81,10 +81,12 @@ const terms = [
         </li>
       ))}
     </ul>
-    <figcaption>Total: {money(total)}. Each amount is the PDF's own section total. The share in brackets is our math from those totals, rounded. Tap a name to see every line in it.</figcaption>
+    <figcaption>Total: {money(total)}. Each amount is the PDF's own section total. The percent after each amount is our math from those totals, rounded. Tap a name to see every line in it.</figcaption>
   </figure>
 
   <p>Where the money comes from: the biggest line is "Property Taxes Current year," at {money(propertyTax)}. Every source is listed below.</p>
+  <p>Where your county taxes go: not all of your property tax bill comes to this budget. In West Virginia, property taxes are set by the county school board, the County Commission, cities and towns, and the State. This page shows only the County Commission's General Fund.</p>
+  <SourceLine sources={[{ url: 'https://tax.wv.gov/Business/PropertyTax/Pages/PropertyTaxRates.aspx', checked: '2026-11-15', name: 'WV State Tax Department' }]} about="who sets property taxes" />
 
   <section class="note" aria-labelledby="words">
     <h2 id="words">What some budget words mean</h2>
