@@ -1,0 +1,450 @@
+# Saved copies of the government PDFs this site cites (#2079), kept by the
+# Internet Archive's Wayback Machine. Made by site/scripts/save-pdf-copies.mjs.
+# Same shape as content/sources/chr/saved-copies.yaml (#1906).
+#
+# Each copy was downloaded on its read date and its SHA-256 matched the live
+# file byte for byte. The PDFs are not kept in this repo: the minutes name
+# county employees, which the hub writes as [name].
+#   url: the live address the site cites
+#   file_name, bytes, sha256: of the live file on the read date
+#   last_modified: the date the server gives for the file
+#   archived_url: where the address redirects, if it does. That is the
+#     address the Archive saved.
+#   saved_copy: the Wayback capture, for people. For an overwritten address
+#     it is the list of every saved version, since the newest capture may be a
+#     later file than the one a record read.
+#   saved_copy_raw: the capture as the original bytes, for scripts
+#   captured: the date of that capture
+# overwritten: addresses where each new file replaces the last. The daily
+#   "Save overwritten PDFs" check (.github/workflows/save-pdfs.yml) saves a new
+#   capture whenever the file there changes.
+# not_saved: PDFs we cited but could not save, and why. Each needs a person.
+overwritten:
+  - https://monongaliacountyclerk.com/myfiles/drafts/draft.pdf
+files:
+  - url: https://agriculture.wv.gov/wp-content/uploads/West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf
+    file_name: West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf
+    bytes: 8589975
+    sha256: 9ed6ae2d046e12d0b47aea29fdb57a50097e453cdb5ed0483dafbcd9e4bd7a93
+    last_modified: 2026-10-26
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121224045/https://agriculture.wv.gov/wp-content/uploads/West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf
+    saved_copy_raw: https://web.archive.org/web/20261121224045id_/https://agriculture.wv.gov/wp-content/uploads/West-Virginia-Department-of-Agriculture-Guide-for-Homemade-Food-Products.pdf
+    captured: 2026-11-21
+  - url: https://monongaliacountyclerk.com/myfiles/drafts/draft.pdf
+    file_name: draft.pdf
+    bytes: 114365
+    sha256: e8bfeb8b5301f04750e1a28712a208faa01095ffc3a67b45ef2c88888ee545db
+    last_modified: 2026-11-21
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/*/https://monongaliacountyclerk.com/myfiles/drafts/draft.pdf
+    saved_copy_raw: https://web.archive.org/web/20261121220510id_/https://monongaliacountyclerk.com/myfiles/drafts/draft.pdf
+    captured: 2026-11-21
+    overwritten: true
+  - url: https://webapps.transportation.wv.gov/TWS/WVDOTDocumentStorageMigration/PDF/Transportation/dmv/dmvformsearch/dmv-41-tr-wf.pdf
+    file_name: dmv-41-tr-wf.pdf
+    bytes: 1182816
+    sha256: ddea4ab12bdf478b7891a71e84f55407615ff691501dea98de161c67bb473cae
+    last_modified: 2026-04-15
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20260911073342/https://webapps.transportation.wv.gov/TWS/WVDOTDocumentStorageMigration/PDF/Transportation/dmv/dmvformsearch/dmv-41-tr-wf.pdf
+    saved_copy_raw: https://web.archive.org/web/20260911073342id_/https://webapps.transportation.wv.gov/TWS/WVDOTDocumentStorageMigration/PDF/Transportation/dmv/dmvformsearch/dmv-41-tr-wf.pdf
+    captured: 2026-09-11
+  - url: https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_policy_on_refundscancellationstransfers___1_.pdf
+    file_name: boparc_policy_on_refundscancellationstransfers___1_.pdf
+    bytes: 122935
+    sha256: 696f7647a92f051239e5fcaaf3e471b12f06718e1287a381fba5e86b3fbe2e8a
+    last_modified: 2026-10-05
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223712/https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_policy_on_refundscancellationstransfers___1_.pdf
+    saved_copy_raw: https://web.archive.org/web/20261121223712id_/https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_policy_on_refundscancellationstransfers___1_.pdf
+    captured: 2026-11-21
+  - url: https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_refund_policies.pdf
+    file_name: boparc_refund_policies.pdf
+    bytes: 8880096
+    sha256: 3d60490ef595296063950c8ac288556a60b45617eda4e4fef3b2d138ee850368
+    last_modified: 2025-02-16
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223739/https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_refund_policies.pdf
+    saved_copy_raw: https://web.archive.org/web/20261121223739id_/https://www.boparc.org/uploads/1/1/9/3/11934538/boparc_refund_policies.pdf
+    captured: 2026-11-21
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2018,%202026.pdf?t=202611131601090
+    archived_url: https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2018,%202026.pdf?t=202611131601090
+    file_name: AGENDA November 18, 2026.pdf
+    bytes: 108782
+    sha256: bb72c0662c9162bb9c2815e03d11534fb657e1497c38d6d36778d833fd3f7bcb
+    last_modified: 2026-11-16
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121224220/https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2018,%202026.pdf?t=202611131601090
+    saved_copy_raw: https://web.archive.org/web/20261121224220id_/https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2018,%202026.pdf?t=202611131601090
+    captured: 2026-11-21
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2024,%202026.pdf?t=202611191547320
+    archived_url: https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2024,%202026.pdf?t=202611191547320
+    file_name: AGENDA November 24, 2026.pdf
+    bytes: 109838
+    sha256: 1caa2b0db4ed062d1e2b9544af2b1cbe62caac99b44a245973f45d4fc2f6abad
+    last_modified: 2026-11-19
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121224405/https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2024,%202026.pdf?t=202611191547320
+    saved_copy_raw: https://web.archive.org/web/20261121224405id_/https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%2024,%202026.pdf?t=202611191547320
+    captured: 2026-11-21
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380
+    archived_url: https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380
+    file_name: AGENDA November 4, 2026.pdf
+    bytes: 105566
+    sha256: 5a796c73e0ef4422d451c2e6af67913dbfe97e29f40c2be4b279917a484ccc6f
+    last_modified: 2026-10-29
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121224309/https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380
+    saved_copy_raw: https://web.archive.org/web/20261121224309id_/https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20November%204,%202026.pdf?t=202610291554380
+    captured: 2026-11-21
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20November%2018,%202026.pdf?t=202611131601290
+    archived_url: https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20November%2018,%202026.pdf?t=202611131601290
+    file_name: WORK SESSION AGENDA November 18, 2026.pdf
+    bytes: 158118
+    sha256: eaa3ac2f70a9e6584d3d7477362f9107a88360aba2c14c0cca6b3f0413034b8b
+    last_modified: 2026-11-13
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121224339/https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20November%2018,%202026.pdf?t=202611131601290
+    saved_copy_raw: https://web.archive.org/web/20261121224339id_/https://cms2.revize.com/revize/monongoliacountywv/document_center/Agenda/WORK%20SESSIONS/2026/WORK%20SESSION%20AGENDA%20November%2018,%202026.pdf?t=202611131601290
+    captured: 2026-11-21
+  - url: https://www.monongaliacountyclerk.com/myfiles/documents/budget/FY27_Budget.pdf
+    file_name: FY27_Budget.pdf
+    bytes: 364517
+    sha256: 8e112e9436e531e3a9ed9d8d0df844c7253f7c28a376b1edd012aee4bb132eb2
+    last_modified: 2026-04-01
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20260519094848/https://www.monongaliacountyclerk.com/myfiles/documents/budget/FY27_Budget.pdf
+    saved_copy_raw: https://web.archive.org/web/20260519094848id_/https://www.monongaliacountyclerk.com/myfiles/documents/budget/FY27_Budget.pdf
+    captured: 2026-05-19
+  - url: https://www.monongaliacountyclerk.com/myfiles/probate_office/Full_Probate_Overview_and_Timeline.pdf
+    file_name: Full_Probate_Overview_and_Timeline.pdf
+    bytes: 265436
+    sha256: defb81758d3d842da9a60b4b3da893d43e631683b11d86e40dcf4f9e5fcc8d3c
+    last_modified: 2021-11-17
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20250916103325/https://www.monongaliacountyclerk.com/myfiles/probate_office/Full_Probate_Overview_and_Timeline.pdf
+    saved_copy_raw: https://web.archive.org/web/20250916103325id_/https://www.monongaliacountyclerk.com/myfiles/probate_office/Full_Probate_Overview_and_Timeline.pdf
+    captured: 2025-09-16
+  - url: https://www.monongaliacountyclerk.com/myfiles/probate_office/Opening_Probate_Forms_and_Instructions_Intestate(No_Will).pdf
+    file_name: Opening_Probate_Forms_and_Instructions_Intestate(No_Will).pdf
+    bytes: 551481
+    sha256: 61e4d486f6005e351621b0b5e32d4ba6a116c21a9b7835ab81c7ff90887f27b1
+    last_modified: 2025-11-15
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223835/https://www.monongaliacountyclerk.com/myfiles/probate_office/Opening_Probate_Forms_and_Instructions_Intestate(No_Will).pdf
+    saved_copy_raw: https://web.archive.org/web/20261121223835id_/https://www.monongaliacountyclerk.com/myfiles/probate_office/Opening_Probate_Forms_and_Instructions_Intestate(No_Will).pdf
+    captured: 2026-11-21
+  - url: https://www.monongaliacountyclerk.com/myfiles/probate_office/Small_Estate_Affidavit_Overview_of_Process_(what_happens_next).pdf
+    file_name: Small_Estate_Affidavit_Overview_of_Process_(what_happens_next).pdf
+    bytes: 188858
+    sha256: 1276aae776fc5a1bb6e0966092607bea3ae0f06134741122763b141ce9176ccc
+    last_modified: 2025-04-25
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20250916102933/https://www.monongaliacountyclerk.com/myfiles/probate_office/Small_Estate_Affidavit_Overview_of_Process_(what_happens_next).pdf
+    saved_copy_raw: https://web.archive.org/web/20250916102933id_/https://www.monongaliacountyclerk.com/myfiles/probate_office/Small_Estate_Affidavit_Overview_of_Process_(what_happens_next).pdf
+    captured: 2025-09-16
+  - url: https://www.monongaliacountyswa.com/_files/ugd/8af711_d3ccbfbb96ca48b7a9d24bd324a23dc3.pdf
+    file_name: 8af711_d3ccbfbb96ca48b7a9d24bd324a23dc3.pdf
+    bytes: 45157
+    sha256: 019aa7e8fac393d758e3ae81d735cffc04886acd5314697af2e7a7c90f4c7f2c
+    last_modified: 2024-01-05
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20240518080102/https://www.monongaliacountyswa.com/_files/ugd/8af711_d3ccbfbb96ca48b7a9d24bd324a23dc3.pdf
+    saved_copy_raw: https://web.archive.org/web/20240518080102id_/https://www.monongaliacountyswa.com/_files/ugd/8af711_d3ccbfbb96ca48b7a9d24bd324a23dc3.pdf
+    captured: 2024-05-18
+  - url: https://www.morgantownfarmersmarket.org/uploads/1/4/2/9/142935559/26-27_mfmga_market_rules.pdf
+    file_name: 26-27_mfmga_market_rules.pdf
+    bytes: 782589
+    sha256: ad33e24e7155618f853eed86ad90a20eba07acffc700ae9e75c19b379413bab8
+    last_modified: 2025-12-31
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20260923103453/https://www.morgantownfarmersmarket.org/uploads/1/4/2/9/142935559/26-27_mfmga_market_rules.pdf
+    saved_copy_raw: https://web.archive.org/web/20260923103453id_/https://www.morgantownfarmersmarket.org/uploads/1/4/2/9/142935559/26-27_mfmga_market_rules.pdf
+    captured: 2026-09-23
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11022026-3923
+    file_name: _11022026-3923
+    bytes: 546117
+    sha256: 59854a61bf447544ae603cd7cfa8a3dff7b0dbdef87ad58607259c36bf913388
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223349/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11022026-3923
+    saved_copy_raw: https://web.archive.org/web/20261121223349id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11022026-3923
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11122026-3924
+    file_name: _11122026-3924
+    bytes: 151778
+    sha256: 8e0f8cb3d7ece1af13045e4868aec80420b7b5374a43ba64bdc5ea824e2d0d8e
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223646/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11122026-3924
+    saved_copy_raw: https://web.archive.org/web/20261121223646id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11122026-3924
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11122026-3928
+    file_name: _11122026-3928
+    bytes: 583477
+    sha256: 50c2c7454836dcf14b4a96bf594685d27c321d6ff41c25657c261106ba97968c
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223426/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11122026-3928
+    saved_copy_raw: https://web.archive.org/web/20261121223426id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11122026-3928
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11172026-3937
+    file_name: _11172026-3937
+    bytes: 132055
+    sha256: e786b3625e630d86c5bd7dc3a63be557bd9ade73daa0315d5e50d0420896bc5f
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223610/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11172026-3937
+    saved_copy_raw: https://web.archive.org/web/20261121223610id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11172026-3937
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11182026-3932
+    file_name: _11182026-3932
+    bytes: 197133
+    sha256: b5fe9426e8141983c8e0f7906c8d8cb98eba843778eaa0d98b19041eed34c4f7
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121221001/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11182026-3932
+    saved_copy_raw: https://web.archive.org/web/20261121221001id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11182026-3932
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11192026-3941
+    file_name: _11192026-3941
+    bytes: 568602
+    sha256: cf1a76993609eff467a80c2ff9d4531592bdde29ef6fa58feac9c48ca2eb1399
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223510/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11192026-3941
+    saved_copy_raw: https://web.archive.org/web/20261121223510id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11192026-3941
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11242026-3942
+    file_name: _11242026-3942
+    bytes: 361898
+    sha256: 300424fa9ff593f674f5d4ea3e75b38808714ce163f7629c6f88c0e25f2f7ced
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121221109/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11242026-3942
+    saved_copy_raw: https://web.archive.org/web/20261121221109id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11242026-3942
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_12012026-3939
+    file_name: _12012026-3939
+    bytes: 38497
+    sha256: a768a25802ae790093b230157da3c1b8b7e32735be2012aef4f2f75f7cbf62ea
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121221231/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_12012026-3939
+    saved_copy_raw: https://web.archive.org/web/20261121221231id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_12012026-3939
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10052026-3895
+    file_name: _10052026-3895
+    bytes: 310220
+    sha256: a74133e941b94171300562a1be9cefac16c049b31f9156cb371c70a9f4b630a5
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121220730/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10052026-3895
+    saved_copy_raw: https://web.archive.org/web/20261121220730id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10052026-3895
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10062026-3898
+    file_name: _10062026-3898
+    bytes: 161047
+    sha256: 889b67ceee58dc13721fcfe422bab17a1a0ae7cb496748b171a6c6b717b4fe25
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121220806/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10062026-3898
+    saved_copy_raw: https://web.archive.org/web/20261121220806id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10062026-3898
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10062026-3899
+    file_name: _10062026-3899
+    bytes: 308868
+    sha256: e1cfce4ab4f4a5f0f8753e2bca816dca000939b7eba4ed15b053797e5436d2bb
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121220843/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10062026-3899
+    saved_copy_raw: https://web.archive.org/web/20261121220843id_/https://www.morgantownwv.gov/AgendaCenter/ViewFile/Minutes/_10062026-3899
+    captured: 2026-11-21
+  - url: https://www.morgantownwv.gov/DocumentCenter/View/1372/Code-Enforcement-Complaint-Process
+    file_name: Code-Enforcement-Complaint-Process
+    bytes: 121148
+    sha256: f2ef52719faacb0fcda27bb0f205430b0c9aa4c8328d807b95358814e9131537
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20260215103418/https://www.morgantownwv.gov/DocumentCenter/View/1372/Code-Enforcement-Complaint-Process
+    saved_copy_raw: https://web.archive.org/web/20260215103418id_/https://www.morgantownwv.gov/DocumentCenter/View/1372/Code-Enforcement-Complaint-Process
+    captured: 2026-02-15
+  - url: https://www.plantogether.org/_files/ugd/613794_53dfa2c7bf454c4994b352de5f595966.pdf
+    file_name: 613794_53dfa2c7bf454c4994b352de5f595966.pdf
+    bytes: 629729
+    sha256: 8d25b1b7445693b515df8128d5e3c72304c6a7021c0cb5da2e23995af2886e17
+    last_modified: 2026-11-12
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121223534/https://www.plantogether.org/_files/ugd/613794_53dfa2c7bf454c4994b352de5f595966.pdf
+    saved_copy_raw: https://web.archive.org/web/20261121223534id_/https://www.plantogether.org/_files/ugd/613794_53dfa2c7bf454c4994b352de5f595966.pdf
+    captured: 2026-11-21
+  - url: https://www.starcitywv.com/wp-content/uploads/2026/07/BUSINESS-LICENSE-APPLICATION-v.2025.pdf
+    file_name: BUSINESS-LICENSE-APPLICATION-v.2025.pdf
+    bytes: 94821
+    sha256: 2ef983a3870dfda42b8936596474f3ffcf845b0498ab6839d33d03fe90e64675
+    last_modified: 2026-07-01
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121224009/https://www.starcitywv.com/wp-content/uploads/2026/07/BUSINESS-LICENSE-APPLICATION-v.2025.pdf
+    saved_copy_raw: https://web.archive.org/web/20261121224009id_/https://www.starcitywv.com/wp-content/uploads/2026/07/BUSINESS-LICENSE-APPLICATION-v.2025.pdf
+    captured: 2026-11-21
+  - url: https://www.starcitywv.com/wp-content/uploads/2026/10/DOC102126-10212026065924.pdf
+    file_name: DOC102126-10212026065924.pdf
+    bytes: 563194
+    sha256: ac5d5e7e649621a10990161ddf84e5fcfc62656011bf3ddfb42129a29afa8fc2
+    last_modified: 2026-10-21
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20261121220918/https://www.starcitywv.com/wp-content/uploads/2026/10/DOC102126-10212026065924.pdf
+    saved_copy_raw: https://web.archive.org/web/20261121220918id_/https://www.starcitywv.com/wp-content/uploads/2026/10/DOC102126-10212026065924.pdf
+    captured: 2026-11-21
+  - url: https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf
+    file_name: d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf
+    bytes: 263747
+    sha256: 94a265dfaf24c7bef560cbeefeeacbe7733782e0c132b86dd453f563c4ca72ef
+    last_modified: 2026-03-31
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20260412133415/https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf
+    saved_copy_raw: https://web.archive.org/web/20260412133415id_/https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf
+    captured: 2026-04-12
+  - url: https://www.westoverwv.org/_files/ugd/d2114f_50052056caff40fc91000a6134690e2d.pdf
+    file_name: d2114f_50052056caff40fc91000a6134690e2d.pdf
+    bytes: 106090
+    sha256: b537cdcd30e04973f2eab7b35ea7f1f672c0800fffff3ca160ef72d1dd97226f
+    last_modified: 2026-03-31
+    read: 2026-11-21
+    saved_copy: https://web.archive.org/web/20260412141024/https://www.westoverwv.org/_files/ugd/d2114f_50052056caff40fc91000a6134690e2d.pdf
+    saved_copy_raw: https://web.archive.org/web/20260412141024id_/https://www.westoverwv.org/_files/ugd/d2114f_50052056caff40fc91000a6134690e2d.pdf
+    captured: 2026-04-12
+not_saved:
+  - url: https://cdn.sanity.io/files/95aan9ec/production/314943135511dce2b9e78860326f3f7924614741.pdf
+    reason: "cdn.sanity.io/robots.txt asks robots not to read /files/95aan9ec/production/314943135511dce2b9e78860326f3f7924614741.pdf (Disallow: /*.pdf), so it was not read"
+    checked: 2026-11-21
+  - url: https://cdn.sanity.io/files/95aan9ec/production/76c3da15762d66202a5744101dba30a08392c2aa.pdf
+    reason: "cdn.sanity.io/robots.txt asks robots not to read /files/95aan9ec/production/76c3da15762d66202a5744101dba30a08392c2aa.pdf (Disallow: /*.pdf), so it was not read"
+    checked: 2026-11-21
+  - url: https://cdn.sanity.io/files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf
+    reason: "cdn.sanity.io/robots.txt asks robots not to read /files/95aan9ec/production/9af55503d7848dd4ca2ca580602065966a1d1bcf.pdf (Disallow: /*.pdf), so it was not read"
+    checked: 2026-11-21
+  - url: https://cdn.sanity.io/files/95aan9ec/production/e39c6b23f86e7bfcbcf6625ff51adb35955a4af4.pdf
+    reason: "cdn.sanity.io/robots.txt asks robots not to read /files/95aan9ec/production/e39c6b23f86e7bfcbcf6625ff51adb35955a4af4.pdf (Disallow: /*.pdf), so it was not read"
+    checked: 2026-11-21
+  - url: https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4695/Mtec/4d2a8fe4-4389-475e-be29-b79b10ef1c2b/Catalog-2026-2027.docx.pdf
+    reason: files-backend.assets.thrillshare.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp-cdn.multiscreensite.com/869937e9/files/uploaded/GoldCardApplication2020.pdf
+    reason: irp-cdn.multiscreensite.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp-cdn.multiscreensite.com/869937e9/files/uploaded/Wadestown2020.pdf
+    reason: irp-cdn.multiscreensite.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/1+Campus+PM-a18879c7.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/30+West+Run-f26d433f.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/38+Blue+-+Gold+Express-a248c9a5.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/44+Valley+View.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/50%20Don%20Knotts-3af7387e.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/6+Gold+Line-4fa65455.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/8.%20Brookhaven%202023.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Beechurst_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Blue_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Cassville_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Crown%20Jan%202024.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/DT%20PM%20Mall_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/EasternCirc_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/MedicareDisabledCardApplication2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/NorthernCirc_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Orange_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Pink_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Purple_2021.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Red%20Line%202022.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_1-a7f91b3a.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_11.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_12.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_13.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_16.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_2.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_30.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_38.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_39.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_4.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_44.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_46.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_47.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_50.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_51.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_52.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_6.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_7.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_8.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Rt_9.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/Tax%20Pass%20Form.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21
+  - url: https://irp.cdn-website.com/869937e9/files/uploaded/WRMylan_Rt51_2022.pdf
+    reason: irp.cdn-website.com/robots.txt could not be read (HTTP 403), so nothing on that site was read
+    checked: 2026-11-21

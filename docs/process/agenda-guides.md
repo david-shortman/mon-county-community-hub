@@ -37,6 +37,7 @@ Dates move. For example, the city calendar (checked 2026-10-31) lists no Council
    - `line`: one to three short sentences on what kind of item it is. Use facts from the agenda or packet only (an amount, a street, a date). If the agenda gives no detail, write "The agenda gives no more detail."
 5. Read every line against the rules. Ask: would someone on either side of this item read the line as fair? Would it still be true if the vote went either way? Remove any word that judges, predicts, or says who supports what.
 6. In `site/`, run `npm run check-content` and `npm run build`. The check fails judging words and em dashes, but it cannot catch everything. Step 5 is the real check.
+   - If you can reach web.archive.org, also run `node scripts/save-pdf-copies.mjs run` to save the agenda PDF to the Internet Archive (#2079). If you cannot (cloud sessions), the Save overwritten PDFs check (every six hours) saves it and opens an issue.
 7. Open a PR named "Agenda guide: <body>, <date>", `Closes #<issue>`. Merge with `scripts/safe-merge.sh` once checks pass.
 
 ## Taking guides down
@@ -74,7 +75,7 @@ For meetings in the last 30 days with posted minutes, a file in `content/minutes
    - `vote`: the count as written ("7-0"). If the minutes list only a roll call, count it ("Yes 6, No 1"). Leave it out if the minutes give neither.
 4. Never add what people said, the reasons given, who spoke, or how anyone felt. No adjectives about the result. Replace private people's names with `[name]`.
 5. Set `minutes_status`: `Approved`, `Draft` or `Not marked`. Draft minutes can change, and the page says so.
-6. Run `npm run check-content` and `npm run build` in `site/`, and open a PR named "What was decided: <body>, <date>".
+6. Run `npm run check-content` and `npm run build` in `site/`, and open a PR named "What was decided: <body>, <date>". If you can reach web.archive.org, also run `node scripts/save-pdf-copies.mjs run` to save the minutes PDF to the Internet Archive (#2079); the County Clerk replaces its draft minutes file with each new draft, so this matters most there.
 
 When a board approves minutes that were a draft, re-read them and update the file (actions and `minutes_status`).
 

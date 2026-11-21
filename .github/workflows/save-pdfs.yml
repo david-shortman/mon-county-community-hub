@@ -1,0 +1,68 @@
+name: Save overwritten PDFs
+
+# Every six hours (#2079):
+# 1. Checks the government PDF addresses that get replaced instead of kept,
+#    starting with the County Clerk's draft minutes file,
+#    https://monongaliacountyclerk.com/myfiles/drafts/draft.pdf. If the file
+#    there is not in the Internet Archive yet (its SHA-1 is not in the Wayback
+#    Machine's CDX index), it asks Save Page Now for a capture, downloads the
+#    capture and checks it matches byte for byte. The list of addresses is
+#    `overwritten:` in content/sources/gov-pdfs/saved-copies.yaml. The
+#    Archive's own list of versions is the record, so nothing is written here.
+# 2. Saves any PDF newly cited in content/minutes/, content/agendas/ or
+#    content/pdf-pages/ that is not on that list yet, and opens (or updates)
+#    one for:code issue with the entries to add to the list.
+#
+# Free: Save Page Now and the CDX lookup are free public services, and a run
+# takes a few minutes of a free runner at most. robots.txt is checked before
+# any live file is read (docs/operations/automated-reads.md). Runs here and not
+# in a Claude session because cloud sessions cannot reach web.archive.org with
+# Node's fetch (#1906).
+#
+# Uses only actions/checkout and actions/setup-node, to stay inside the allow list.
+
+on:
+  schedule:
+    - cron: '41 */6 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: save-pdfs
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  save:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+      - name: Save new versions of overwritten files
+        run: node scripts/save-pdf-copies.mjs watch
+      - name: Save newly cited PDFs
+        if: always()
+        run: node scripts/save-pdf-copies.mjs run
+      - name: Open an issue with the entries to record
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if git diff --quiet -- ../content/sources/gov-pdfs/saved-copies.yaml; then echo "Nothing new to record."; exit 0; fi
+          title="Record new saved copies of cited PDFs"
+          body=$(printf 'The Save overwritten PDFs check saved PDFs that records now cite but that are not on `content/sources/gov-pdfs/saved-copies.yaml` yet (#2079). Apply this change to that file in a PR (or run `node scripts/save-pdf-copies.mjs run` in `site/` on a machine that can reach web.archive.org).\n\nRun: %s\n\n```diff\n%s\n```\n' "$RUN_URL" "$(git diff -- ../content/sources/gov-pdfs/saved-copies.yaml | head -c 60000)")
+          n=$(gh api "repos/$REPO/issues?state=open&labels=for:code&per_page=100" --jq ".[] | select(.title == \"$title\") | .number" | head -1)
+          if [ -n "$n" ]; then gh api -X PATCH "repos/$REPO/issues/$n" -f body="$body" > /dev/null; else gh api "repos/$REPO/issues" -f title="$title" -f body="$body" -f "labels[]=for:code" > /dev/null; fi
