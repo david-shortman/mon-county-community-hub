@@ -1,8 +1,11 @@
 slug: yard-waste
-text: "**Yard waste and brush:** we could not find a local drop-off on an official page. The Solid Waste Authority has a small community compost demonstration site in Westover's city park. Spots are limited, Westover residents come first, and you volunteer to share in the compost."
-quote: "\"The Community Compost Demonstration Site, with a garden and pollinator garden, will be located in the City of Westover Park.\" ... \"City of Westover residents have priority\" ... \"Participation is limited\" ... \"Participants interested in the compost and/or flowers will need to volunteer hours with the composting or with the gardening.\""
+text: "**Yard waste and brush:** we could not find a local drop-off on an official page. The Solid Waste Authority suggests leaving grass clippings and leaves on the lawn, where they break down and feed the soil, or adding leaves to compost. It also has a small community compost demonstration site in Westover's city park. Spots are limited, Westover residents come first, and you volunteer to share in the compost."
+quote: "Composting page: \"The Community Compost Demonstration Site, with a garden and pollinator garden, will be located in the City of Westover Park.\" ... \"City of Westover residents have priority\" ... \"Participation is limited\" ... \"Participants interested in the compost and/or flowers will need to volunteer hours with the composting or with the gardening.\" ... SWA 2025 calendar, Reduce Waste Tips: \"Leave Grass Clippings and Yard Waste on the Lawn. Leaves form a natural mulch that helps suppress weeds and at the same time fertilize the soil as they break down.\" ... \"Use the 'browns' for composting!\""
 sources:
   - url: https://www.monongaliacountyswa.com/composting
     checked: 2026-11-10
     name: "Monongalia County SWA, Composting"
+  - url: https://www.monongaliacountyswa.com/_files/ugd/8af711_907fa483f8df40e9b155cd3da48c0b1e.pdf
+    checked: 2026-11-14
+    name: "Monongalia County SWA, 2025 Hard to Recycle or Hard to Dispose of Items calendar (PDF, linked from its Calendars page), Reduce Waste Tips page"
 recheck_days: 180

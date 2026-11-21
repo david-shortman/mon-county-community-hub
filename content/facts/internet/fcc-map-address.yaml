@@ -1,0 +1,8 @@
+slug: fcc-map-address
+text: "On the FCC's National Broadband Map, type your street address in the search box. Pick your address from the list (addresses the FCC has on file show in capital letters). The map then lists the companies that say they can serve that address, the kind of service (like fiber, cable or satellite) and the fastest download and upload speeds each one advertises."
+quote: "Enter an address into the Search by Address window to zoom to that location on the map. You can see a list of ISPs that can serve that location and other information including the types of technologies and speeds offered."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10467446103579-How-to-Use-the-FCC-s-National-Broadband-Map
+    name: FCC Broadband Data Collection Help Center, How to Use the FCC's National Broadband Map
+    checked: 2026-11-15
+recheck_days: 180

@@ -32,3 +32,19 @@ items:
     url: https://www.morgantownwv.gov/157/Election-Information
     how: The City's site often drops the first connection; try again.
     when: month
+  - text: >-
+      One time, then delete this item: re-read the state lawmakers on
+      /state-lawmakers/ after the new Legislature is seated (#1951). The West
+      Virginia Constitution says members' terms begin on December 1 after
+      their election (Article IV, section 7), and the Legislature meets on
+      the second Wednesday of January (Article VI, section 18), which is
+      January 13, 2027.
+    url: https://www.wvlegislature.gov/WVCODE/WV_CON.cfm
+    how: >-
+      Once the House and Senate rosters show the new members, re-read each
+      Mon County member page (House 77 to 82, Senate 2 and 13), update
+      site/src/lib/state-lawmakers.mjs and its checked date, re-test the
+      District Search card, then delete this item and close #1951. If the
+      rosters have not changed yet, leave it for next month.
+    from: 2026-12-01
+    when: month

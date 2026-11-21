@@ -1,0 +1,8 @@
+slug: nursery-forms
+text: "The state Department of Agriculture's nursery page has a Nursery Application for Registration. It also has the state's rules for nurseries in West Virginia and for nurseries from outside the state."
+quote: "Use the links below to download the provided documents. Nursery Application for Registration ... In State Nursery Regulations ... Out of State Nursery Regulation"
+sources:
+  - url: https://agriculture.wv.gov/divisions/plant-industries/nursery-and-nursery-dealer/
+    checked: 2026-11-15
+    name: West Virginia Department of Agriculture, Nursery and Nursery Dealer
+recheck_days: 180

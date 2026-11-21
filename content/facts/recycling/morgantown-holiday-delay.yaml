@@ -1,0 +1,8 @@
+slug: morgantown-holiday-delay
+text: "**Holidays in Morgantown:** Republic Services says that if your pickup day falls on or after New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving or Christmas, pickup is one day late that week. A holiday on a weekend does not change pickup. In bad weather, pickup is usually the next day."
+quote: "We observe the following holidays. If your normal collection falls on or after the holiday, it will be delayed by one day. Holidays falling on the weekend will not delay collection. New Year's Day Memorial Day Independence Day Labor Day Thanksgiving Day Christmas Day ... If services are delayed due to inclement weather, customers will be serviced the next day in most instances, unless weather conditions continue to be adverse and roadways are not passable."
+sources:
+  - url: https://www.republicservices.com/municipality/morgantown-wv
+    name: Republic Services
+    checked: 2026-11-15
+recheck_days: 180   # a holiday list

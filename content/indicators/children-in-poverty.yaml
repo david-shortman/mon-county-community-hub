@@ -2,6 +2,10 @@ title: Children in poverty
 slug: children-in-poverty
 topic: health
 definition: "Percentage of people under age 18 in poverty." # County Health Rankings' own definition (v024)
+plain: # a plain sentence from the measure page, shown under the definition (#2002)
+  text: "The share of children under 18 in families whose income is below the poverty level. It is an estimate built from several data sources, so it may not show the effects of local conditions."
+  url: https://www.countyhealthrankings.org/health-data/community-conditions/social-and-economic-factors/income-employment-and-wealth/children-in-poverty?year=2025
+  checked: 2026-11-15
 unit: percent
 data_year: "2023"
 release: County Health Rankings 2025
