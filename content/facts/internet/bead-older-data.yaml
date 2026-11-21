@@ -1,0 +1,8 @@
+slug: bead-older-data
+text: "The state's map uses newer FCC data than the state used to pick places for BEAD (the federal Broadband Equity, Access and Deployment Program) grants. So the state says some places the map shows as unserved or underserved may not have been eligible for BEAD money."
+quote: "some locations shown as unserved or underserved on this map may not have been eligible for BEAD funding"
+sources:
+  - url: https://broadbandwv.org/arcgis/apps/experiencebuilder/experience/?id=2b030b85a8234e89b33fbac8a27e64ce
+    name: West Virginia Office of Broadband, Broadband Availability and Funding Dashboard
+    checked: 2026-11-14
+recheck_days: 180

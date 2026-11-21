@@ -11,4 +11,6 @@ place: 389 Spruce Street, Morgantown, WV
 town: Morgantown
 sources:
   - url: https://www.morgantownwv.gov/CivicSend/ViewMessage/Message/303829
-    checked: 2026-11-01
+    checked: 2026-11-15
+  - url: https://www.morgantownwv.gov/Facilities/Facility/Details/City-Council-Chambers-4
+    checked: 2026-11-15

@@ -16,3 +16,5 @@
 - **Measured:** the search test went from 282 to 284 of 289 (98.3%).
 - **Scoreboard:** site search test 98.3%. Recycling findability (60) should move once bulk pickup is confirmed for Morgantown. Check at the November 15 findability run.
 - **Cost:** $0.
+
+Checked 2026-11-15: recycling findability still 60 (q19 8, q20 11, q21 8); our pages are not in search yet. Site search test 98.8%.

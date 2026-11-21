@@ -1,0 +1,31 @@
+title: Christian Help Food Pantry
+slug: christian-help-food-pantry
+org: christian-help
+topics: [food]
+who_it_is_for: "Everyone. Christian Help says there are \"no income restrictions, demographic criteria, or affiliation requirements.\" Each household can get one food order every 30 days."
+what_to_do: Pick up your food order in person at 219 Walnut Street during store hours. Call 304-296-0221 with questions.
+hours: Monday, Tuesday and Thursday, 9 a.m. to 4 p.m. Friday, 9 a.m. to 2 p.m. Wednesday is for dropping off donations only. Hours can change around events.
+opening_hours:
+  - days: [mon, tue, thu]
+    opens: "09:00"
+    closes: "16:00"
+  - days: [fri]
+    opens: "09:00"
+    closes: "14:00"
+notes:
+  - "An order is about a 3 to 5 day supply, based on the size of your household. It can include canned and boxed food and baby items such as formula, plus toiletries and pet supplies, depending on donations."
+  - "Before Thanksgiving, Christmas and Easter, Christian Help says to stop by for a holiday meal while supplies last."
+not_posted: [get_in]
+cost: free
+contact:
+  phone: "304-296-0221"
+  url: https://motownchristianhelp.com/programs/
+  place: 219 Walnut Street, Morgantown, WV 26505
+town: Morgantown
+sources:
+  - url: https://motownchristianhelp.com/programs/
+    checked: 2026-11-14
+    quote: "Pick-ups are available in person at 219 Walnut St, Morgantown, WV, during store hours (Monday, Tuesday, Thursday from 9 am-4 pm, and Fridays 9 am-2 pm)."
+  - url: https://motownchristianhelp.com/contact-us/
+    checked: 2026-11-14
+    quote: "Subject to change with operations & events. Services available based upon program coverage."

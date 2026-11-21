@@ -1,0 +1,72 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: land-reuse-2026-11-19
+body: land-reuse
+meeting: Board of Directors
+date: 2026-11-19
+time: "16:00"
+place: City Hall, City Council Chambers, 389 Spruce Street, 2nd floor, Morgantown
+watch: The agenda does not name a live stream or an online link.
+agenda_url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11192026-3941
+read: 2026-11-18
+items:
+  - number: "I"
+    title: Call to Order and Roll Call
+    kind: opening
+    line: The meeting is called to order and the board checks who is there.
+  - number: "II"
+    title: Proof of Notice of Meeting or Waiver of Notice
+    kind: opening
+    line: The board confirms that notice of the meeting was given.
+  - number: "III"
+    title: Correspondence
+    kind: correspondence
+    line: Letters and messages the board has received. The agenda gives no more detail.
+  - number: "IV"
+    title: Public Comment – Subject to rules established in the Board’s Bylaws.
+    kind: public-comment
+    line: Time for members of the public to speak to the board. The agenda says the board's bylaws set the rules.
+  - number: "V"
+    title: Report of Officers and/or Directors
+    kind: report
+    line: An update from the board's officers. The agenda lists this part.
+    parts:
+      - Report of Treasurer
+  - number: "VI"
+    title: "Report of Committees:"
+    kind: report
+    line: Updates from the board's three standing committees.
+    parts:
+      - Property Management Committee (standing) – McDonald, Chair
+      - Resource Development Committee (standing) – Williams, Chair
+      - City and Underutilized Properties Committee (standing) – Satterfield, Chair
+  - number: "VII"
+    title: "Report of City Staff:"
+    kind: report
+    line: Updates from city staff. The agenda lists these parts.
+    parts:
+      - Report of Development Services
+      - Report of City Attorney
+  - number: "VIII"
+    title: "Matters of Business:"
+    kind: minutes
+    line: A vote to approve the written record of the board's October 22 meeting.
+    parts:
+      - Meeting Minutes from October 22, 2026.
+  - number: "IX"
+    title: "New Business:"
+    kind: vote
+    line: The board considers approving a final draft of a prospectus for the Lower Greenmont neighborhood. The agenda does not say what the prospectus contains.
+    parts:
+      - Consideration of approval on a final draft of a prospectus for the Lower Greenmont Neighborhood.
+  - number: "X"
+    title: Adjournment
+    kind: closing
+    line: The meeting ends.
+note: This is a meeting of the full Board of Directors of the Morgantown Land Reuse and Preservation Agency. The agenda prints the address as "389 Spruce High Street"; City Hall is at 389 Spruce Street.
+sources:
+  - url: https://www.morgantownwv.gov/AgendaCenter/ViewFile/Agenda/_11192026-3941
+    checked: 2026-11-18
+  - url: https://www.morgantownwv.gov/AgendaCenter
+    checked: 2026-11-18

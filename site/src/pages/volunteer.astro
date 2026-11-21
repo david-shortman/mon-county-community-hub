@@ -4,9 +4,11 @@
 // we link the shared lists and never copy their listings, and we show
 // standing roles from each group's own page. Sources re-read 2026-10-31.
 // The library roles and the health department's emergency classes were
-// added 2026-11-14 (ways to act, #411).
+// added 2026-11-14 (ways to act, #411). Community service hours (#529, wave 20):
+// school and court hours, from WV Code §62-4-16, read 2026-11-15.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
+import SourceLine from '../components/SourceLine.astro';
 import { resource } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 export const page = { door: "community", topic: "community", label: "Volunteer this weekend", summary: "Where to find a volunteer shift soon: WVU iServe, United Way, the state's search, and groups that always need help" };
@@ -14,7 +16,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <Base title="Where can I volunteer in Morgantown this weekend? Mon County, WV" description="Find a volunteer shift in Morgantown and Mon County, WV: WVU iServe's dated shifts, United Way on GivePulse, Volunteer West Virginia's ZIP code search, and local groups.">
   <h1>Where can I volunteer in Morgantown this weekend?</h1>
-  <p class="lede">Check WVU's iServe list first. Local groups post shifts there with dates, plus roles that are always open. Not with WVU? United Way of Monongalia and Preston Counties points community members to its GivePulse page.</p>
+  <p class="lede">Check WVU's iServe list first. Local groups post shifts there with dates, plus roles that are always open. Not with WVU? United Way of Monongalia and Preston Counties points community members to its GivePulse page. Need community service hours for school or a court? See <a href="#service-hours">community service hours</a>.</p>
 
   <h2 id="lists">Lists of shifts</h2>
   <p>These lists change every week, so we link to them instead of copying them.</p>
@@ -40,6 +42,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <p>The county health department teaches groups what to do until help arrives. Gather at least 5 people, like coworkers or a club, and call to set up a class.</p>
   <ResourceCard r={resource('monchd-stop-the-bleed')} />
   <ResourceCard r={resource('monchd-cpr-class')} />
+
+  <h2 id="service-hours">Community service hours</h2>
+  <ul>
+    <li><strong>For school, a club or a scholarship:</strong> ask the program first what kind of service counts and how to show your hours. Then find a place to serve in the lists above.</li>
+    <li><strong>Ordered by a court:</strong> this is part of your court case. Ask the court that sentenced you, or your probation officer, what counts and how to report your hours. State law says community service ordered by a magistrate or a city judge must be done for a government office, a charity or a nonprofit. The sheriff, or someone the County Commission names, oversees hours a magistrate orders. For a city court, it is the police chief. For help with a court case, see <a href={`${base}/legal-help/`}>courts and legal help</a>.</li>
+  </ul>
+  <SourceLine sources={[{ url: 'https://code.wvlegislature.gov/62-4-16/', checked: '2026-11-15', name: 'WV Code §62-4-16' }]} about="court-ordered community service" />
 
   <h2 id="more">More ways to help</h2>
   <ul>

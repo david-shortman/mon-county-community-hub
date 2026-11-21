@@ -17,3 +17,5 @@
   - "abuse", which should put Stay tonight first and is a crisis-word question for the owner
   - "city council" and "county commission", where the agenda pages rank above Have your say, which may be fine
 - **Scoreboard:** site search test 97.6%, questions 100%. Check at the November 15 findability run.
+
+Checked 2026-11-15: site search test 98.8% in the top 3 (327 of 331), questions 100% (63 of 63).

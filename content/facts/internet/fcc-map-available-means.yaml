@@ -1,0 +1,8 @@
+slug: fcc-map-available-means
+text: "To the FCC, a company \"offers\" service at an address if it has served it before, or can hook it up with a normal install within 10 business days of a request, with no extra building charges."
+quote: "Service is considered to be “available” at a location if the provider has, or previously had, a connection in service to the location, or if the provider could initiate service at the location through a routine installation within 10 business days of a request. The installation would have to be done with no extraordinary monetary charges or delays attributable to the extension of the provider’s network."
+sources:
+  - url: https://help.bdc.fcc.gov/hc/en-us/articles/10476040597787-How-to-Submit-an-Availability-Challenge
+    name: FCC Broadband Data Collection Help Center, How to Submit an Availability Challenge
+    checked: 2026-11-15
+recheck_days: 180

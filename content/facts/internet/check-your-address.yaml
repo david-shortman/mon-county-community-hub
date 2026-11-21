@@ -1,0 +1,8 @@
+slug: check-your-address
+text: "On the state's map, search for your address or place name to see what the state's data shows for it."
+quote: "To view data for a Specific Location, use the search button to enter the address or place name."
+sources:
+  - url: https://broadbandwv.org/arcgis/apps/experiencebuilder/experience/?id=2b030b85a8234e89b33fbac8a27e64ce
+    name: West Virginia Office of Broadband, Broadband Availability and Funding Dashboard
+    checked: 2026-11-14
+recheck_days: 180

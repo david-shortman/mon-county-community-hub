@@ -18,3 +18,5 @@
   - Several other pages (veterans benefit office, Star City business registration, health department permits, OLLI, the aquatic center) do not say what to bring.
 - **Scoreboard:** cards with a "what to have ready" list. The benchmark's most common gap is "what to bring" (week 3 plan). Check at the November 15 findability run.
 - **Cost:** $0.
+
+Checked 2026-11-15: the source benchmark still marks "what to bring" missing on our pages for q02, q04, q26 and q29 (the new ride need), and present on the other five. [Run file](../../content/findability/benchmark/2026-11-15.yaml).

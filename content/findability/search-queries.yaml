@@ -190,6 +190,10 @@ queries:
   - {q: record a deed, expect: [/which-office/], kind: everyday}
   - {q: nonprofit grants, expect: [/grants-for-nonprofits/, /make-it-better/grants/], kind: everyday}
   - {q: foundation grants, expect: [/grants-for-nonprofits/], kind: everyday}
+  - {q: state senator, expect: [/state-lawmakers/, /who-decides/], kind: everyday}
+  - {q: county budget, expect: [/county-budget/], kind: everyday}
+  - {q: freedom of information, expect: [/public-records/], kind: everyday}
+  - {q: probate, expect: [/probate-steps/, /when-someone-dies/, /small-estate-affidavit/], kind: everyday}
 
   # Getting around, IDs and cars
   - {q: DMV, expect: [/drivers-license/, /car-registration/, /ids-and-records/], kind: short}
@@ -205,6 +209,8 @@ queries:
   - {q: Mountain Line, expect: [/getting-around/, /bus-routes/], kind: everyday}
   - {q: bus to hospital, expect: [/getting-around/, /medical-rides/], kind: everyday}
   - {q: parking ticket, expect: [/parking/], kind: everyday}
+  - {q: city ordinances, expect: [/city-rules/], kind: everyday}
+  - {q: morgantown city rules, expect: [/city-rules/], kind: question}
   - {q: parking garage, expect: [/parking/], kind: everyday}
   - {q: car seat, expect: [/car-seat-checks/], kind: everyday}
   - {q: dmv hours, expect: [/drivers-license/, /car-registration/], kind: short}
@@ -246,12 +252,14 @@ queries:
   - {q: lead paint, expect: [/lead/], kind: everyday}
   - {q: lead in water, expect: [/lead/], kind: everyday}
   - {q: accessibility, expect: [/access/], kind: everyday}
+  - {q: the dump, expect: [/transfer-station-fees/, /recycling/], kind: everyday}
+  - {q: quiet hours, expect: [/noise/], kind: everyday}
 
   # Work, school, family and community
   - {q: jobs, expect: [/find-a-job/], kind: everyday}
   - {q: job training, expect: [/pay-for-training/, /find-a-job/, /work-and-learning/], kind: everyday}
   - {q: resume help, expect: [/find-a-job/], kind: everyday}
-  - {q: GED, expect: [/work-and-learning/], kind: short}
+  - {q: GED, expect: [/high-school-equivalency/, /work-and-learning/], kind: short}
   - {q: English classes, expect: [/help-in-your-language/, /work-and-learning/], kind: everyday}
   - {q: daycare, expect: [/families-and-kids/, /school-age/], kind: everyday}
   - {q: pre k, expect: [/families-and-kids/], kind: everyday}
@@ -285,6 +293,11 @@ queries:
   - {q: adult education classes, expect: [/keep-learning/, /work-and-learning/], kind: everyday}
   - {q: classes for seniors, expect: [/keep-learning/, /staying-active/], kind: everyday}
   - {q: free online classes, expect: [/keep-learning/], kind: everyday}
+  - {q: Westover business license, expect: [/westover-business-license/, /business-by-town/], kind: everyday}
+  - {q: farmers market vendor fee, expect: [/farmers-market-vendor-rules/, /sell-what-you-grow/], kind: everyday}
+  - {q: volunteer opportunities, expect: [/volunteer/], kind: everyday}
+  - {q: sell at farmers market, expect: [/farmers-market-vendor-rules/, /sell-what-you-grow/], kind: everyday}
+  - {q: community service hours, expect: [/volunteer/], kind: everyday}
 
   # Full questions (many from questions.yaml)
   - {q: I can't pay my heating bill, expect: [/utility-bills/, /money/], kind: question}
@@ -336,3 +349,24 @@ queries:
   - {q: where do I get a marriage license, expect: [/ids-and-records/], kind: question}
   - {q: how do I settle an estate after someone dies, expect: [/probate-steps/, /small-estate-affidavit/], kind: question}
   - {q: how do I pay a parking ticket, expect: [/parking/], kind: question}
+  - {q: who is my state delegate, expect: [/state-lawmakers/], kind: question}
+  - {q: how does the county spend its money, expect: [/county-budget/], kind: question}
+  - {q: how much does the dump cost, expect: [/transfer-station-fees/], kind: question}
+  - {q: how do I become a vendor at the farmers market, expect: [/farmers-market-vendor-rules/, /sell-what-you-grow/], kind: question}
+  - {q: my neighbor is too loud at night, expect: [/noise/], kind: question}
+  - {q: how long does probate take, expect: [/probate-steps/], kind: question}
+  - {q: where do my county taxes go, expect: [/county-budget/], kind: question}
+  # Pages merged Nov 15 (wave 21 findability, #529)
+  - {q: GED classes near me, expect: [/high-school-equivalency/, /free-adult-classes/], kind: everyday}
+  - {q: how do I get my GED in West Virginia, expect: [/high-school-equivalency/], kind: question}
+  - {q: free English classes for adults, expect: [/free-adult-classes/], kind: everyday}
+  - {q: where can I learn to use a computer, expect: [/free-adult-classes/], kind: question}
+  - {q: broadband map, expect: [/internet-service-map/, /internet/], kind: everyday}
+  - {q: is high speed internet coming to my area, expect: [/internet-service-map/, /internet/], kind: question}
+  - {q: can I run a business out of my house, expect: [/start-a-business/], kind: question}
+  - {q: hiring my first employee, expect: [/start-a-business/], kind: everyday}
+  - {q: city code, expect: [/city-rules/], kind: everyday}
+  - {q: where do I take old batteries, expect: [/recycling/], kind: question}
+  - {q: used motor oil disposal, expect: [/recycling/], kind: everyday}
+  - {q: old refrigerator disposal, expect: [/recycling/], kind: everyday}
+  - {q: premature death rate, expect: [/how-we-are-doing/], kind: everyday}
