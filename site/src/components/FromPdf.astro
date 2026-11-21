@@ -33,7 +33,7 @@ const sid = (s, i) => s.id ?? `${d.slug}-${i + 1}`;
               <ul class="pdf-lines">{it.lines.map((l) => <li>{l}</li>)}</ul>
             )}
             {it.links?.length > 0 && (
-              <ul class="pdf-links">{it.links.map((l) => <li><a href={l.url} lang={l.lang}>{l.label}<span class="sr-only"> for {it.name}</span></a><SavedCopy url={l.url} about={`${l.label} for ${it.name}`} />{l.date ? <> (the PDF says: {l.date})</> : l.saved && <> (no date is printed on it; the file was saved {l.saved})</>}</li>)}</ul>
+              <ul class="pdf-links">{it.links.map((l) => <li><a href={l.url} lang={l.lang}>{l.label}<span class="sr-only"> for {it.name}</span></a>{l.date ? <> (the PDF says: {l.date})</> : l.saved && <> (no date is printed on it; the file was saved {l.saved})</>}<span class="saved-line"><SavedCopy url={l.url} about={`${l.label} for ${it.name}`} /></span></li>)}</ul>
             )}
           </li>
         ))}
@@ -52,4 +52,8 @@ const sid = (s, i) => s.id ?? `${d.slug}-${i + 1}`;
   .pdf-lines, .pdf-links { margin: 4px 0 0; padding-left: 1.2em; }
   .pdf-links li { margin: 6px 0; }
   .pdf-links a { display: inline-block; padding: 6px 0; overflow-wrap: anywhere; }
+  /* The saved copy link goes on its own line, so the two links never crowd each other on a phone (#2079). */
+  .saved-line { display: block; }
+  .saved-line:empty { display: none; }
+  .saved-line :global(a) { display: inline-block; padding: 6px 0; }
 </style>
