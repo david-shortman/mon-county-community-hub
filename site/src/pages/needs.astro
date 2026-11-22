@@ -7,6 +7,7 @@ import Base from '../layouts/Base.astro';
 import { fixFormUrl } from '../lib/group-requests.mjs';
 import { loadDir, prettyDate, ymd } from '../lib/content.mjs';
 import { ruleSetters } from '../lib/rule-setters.mjs';
+import { savedCopy } from '../lib/saved-copies.mjs';
 export const page = { door: 'community', topic: 'data', label: 'What people here need most', summary: 'A ranked list of the hardest problems people in Mon County face, with the numbers, their sources, and who is working on each' };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const repo = 'https://github.com/david-shortman/mon-county-community-hub';
@@ -92,7 +93,7 @@ const changed = needs.filter((n) => n.site_coverage?.before && n.site_coverage.b
           {n.evidence.map((e) => (
             <li>
               {e.figure && <strong>{e.figure}. </strong>}{e.shows}{' '}
-              <span class="meta">{e.publisher ?? host(e.url)}{e.data_date && `, data from ${e.data_date}`}. <a href={e.url}>Source<span class="sr-only"> for {n.title}: {e.publisher ?? host(e.url)}</span></a>, checked {prettyDate(ymd(e.checked))}.</span>
+              <span class="meta">{e.publisher ?? host(e.url)}{e.data_date && `, data from ${e.data_date}`}. <a href={e.url}>Source<span class="sr-only"> for {n.title}: {e.publisher ?? host(e.url)}</span></a>{savedCopy(e.url) && <> (<a href={savedCopy(e.url).saved_copy}>saved copy<span class="sr-only"> of the {e.publisher ?? host(e.url)} source, at the Internet Archive</span></a>)</>}, checked {prettyDate(ymd(e.checked))}.</span>
             </li>
           ))}
         </ul>
