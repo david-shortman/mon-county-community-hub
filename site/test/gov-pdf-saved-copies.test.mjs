@@ -79,3 +79,21 @@ test('each saved copy records the file exactly', () => {
     assert.equal(savedCopy(f.url)?.sha256, f.sha256, `${f.url} reaches the site's saved-copy lookup`);
   }
 });
+
+test('the change report is empty when nothing changed, and names records when something did', async () => {
+  const { checkReport } = await import('../scripts/save-pdf-copies.mjs');
+  assert.equal(checkReport([], cited), '');
+  const url = 'https://example.gov/agenda.pdf';
+  const report = checkReport([
+    { kind: 'changed', url, read: '2026-11-21', saved_copy: `https://web.archive.org/web/20261121000000/${url}`, newCopy: `https://web.archive.org/web/20261122000000/${url}` },
+    { kind: 'gone', url: 'https://example.gov/old.pdf', read: '2026-11-21', saved_copy: 'https://web.archive.org/web/1/x', reason: 'the live address answered HTTP 404' },
+  ], new Map([[url, ['content/agendas/x.yaml']]]), '2026-11-22');
+  assert.match(report, /found 2 that changed or went missing/);
+  assert.match(report, /## Changed at the same address/);
+  assert.match(report, /content\/agendas\/x\.yaml/);
+  assert.match(report, /20261122000000/);
+  assert.match(report, /## Gone or not a PDF any more/);
+  assert.match(report, /HTTP 404/);
+  assert.match(report, /no record cites it now/);
+  assert.doesNotMatch(report, /—/);
+});
