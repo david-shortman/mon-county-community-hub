@@ -11,6 +11,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { CONTENT_DIR, loadCalendarWithFeeds, loadDir, todayYmd, ymd } from './content.mjs';
 import { loadMeetings } from './meetings/index.mjs';
+import { loadAgendas, loadDecided, BODIES, KINDS, MINUTES_STATUS } from './agendas.mjs';
+import { savedCopy } from './saved-copies.mjs';
 
 export const API_VERSION = 'v1';
 export const SITE_URL = 'https://everythingmorgantown.org';
@@ -36,12 +38,13 @@ const SOURCES = {
       fetched: str('When a program read the feed (UTC); only for feed records', { format: 'date-time' }),
       feed: str('Which feed, by id; only for feed records'),
       quote: str('A few words copied from the page at the last re-read, showing it was read again'),
+      saved_copy: str('A copy of this page or file kept by the Internet Archive, checked to match the file we read (#1906, #2079). For an address that is replaced with each new version, the list of saved versions', { format: 'uri' }),
     },
   },
 };
 // Records written by hand carry no method; the API says so (ADR 0002, #70).
 const DEFAULT_METHOD = { meetings: 'watched-page' };
-const withMethod = (type, r) => (Array.isArray(r.sources) ? { ...r, sources: r.sources.map((x) => ({ method: DEFAULT_METHOD[type] ?? 'hand', ...x })) } : r);
+const withMethod = (type, r) => (Array.isArray(r.sources) ? { ...r, sources: r.sources.map((x) => ({ method: DEFAULT_METHOD[type] ?? 'hand', ...x, ...(savedCopy(x.url) ? { saved_copy: savedCopy(x.url).saved_copy } : {}) })) } : r);
 
 // The needs register's shape comes straight from its JSON Schema (#74).
 const NEED = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, 'schemas/need.schema.json'), 'utf8'));
@@ -154,6 +157,77 @@ export const TYPES = {
       minutes_first_seen: date('Date we first saw the posted minutes at this link; left out until they are posted'),
     },
   },
+  agenda_guides: {
+    description: 'Plain-language agenda guides for public meetings of City of Morgantown boards, the County Commission, regional boards and towns (#529, #2084). Each item keeps the agenda title word for word, with its kind and one neutral line on what kind of item it is, never whether it is good or bad. Private people\'s names are written as [name]. Kept after the meeting, so past guides stay here too.',
+    id: 'slug',
+    required: ['slug', 'body', 'body_name', 'meeting', 'date', 'agenda_url', 'items', 'read', 'sources', 'page_url'],
+    properties: {
+      slug: str('Stable id, <body>-<date>, used in the record URL'),
+      body: str('Body id (see body_name)'),
+      body_name: str('The board, commission or council'),
+      meeting: str('The meeting, as the agenda names it'),
+      date: date('Meeting date (YYYY-MM-DD)'),
+      time: str('Start time, 24-hour HH:MM Eastern, as the agenda gives it'),
+      place: str('Where, as the agenda gives it'),
+      watch: str('How to watch, as the agenda or body says, or that no stream is named'),
+      agenda_url: str('The official agenda', { format: 'uri' }),
+      agenda_saved_copy: str('A copy of the agenda kept by the Internet Archive, checked to match the file we read', { format: 'uri' }),
+      packet_url: str('The full packet, when posted', { format: 'uri' }),
+      read: date('Date we read the agenda'),
+      items: {
+        type: 'array',
+        description: 'Every agenda item, in agenda order',
+        items: {
+          type: 'object',
+          required: ['number', 'title', 'kind', 'kind_label', 'line'],
+          properties: {
+            number: str('Item number, as on the agenda'),
+            title: str('The agenda\'s own words, exactly'),
+            kind: str('What kind of item it is', { enum: Object.keys(KINDS) }),
+            kind_label: str('The kind in words'),
+            line: str('One to three plain sentences on what kind of item it is, from facts in the agenda or packet only'),
+            parts: list('Short routine sub-items, as the agenda lists them'),
+          },
+        },
+      },
+      note: str('Anything else a reader should know, from the agenda'),
+      page_url: str('Where the guide shows on the site', { format: 'uri' }),
+      sources: SOURCES,
+    },
+  },
+  meeting_decisions: {
+    description: 'What public meetings decided, from their official minutes (#529, #2084): every motion the minutes record, in order, with the result and vote count as written. No debate, reasons, speakers or public comment. Who moved and seconded is left out, and private people\'s names are written as [name]. Check minutes_status: draft minutes can change.',
+    id: 'slug',
+    required: ['slug', 'body', 'body_name', 'meeting', 'date', 'minutes_url', 'minutes_status', 'read', 'actions', 'sources', 'page_url'],
+    properties: {
+      slug: str('Stable id, <body>-<date>, used in the record URL'),
+      body: str('Body id (see body_name)'),
+      body_name: str('The board, commission or council'),
+      meeting: str('The meeting, as the minutes name it'),
+      date: date('Meeting date (YYYY-MM-DD)'),
+      minutes_url: str('The official minutes, or the page that posts them', { format: 'uri' }),
+      minutes_status: str('How final the minutes are, as they say', { enum: Object.keys(MINUTES_STATUS) }),
+      minutes_status_note: str('What the status means, in words'),
+      read: date('Date we read the minutes'),
+      actions: {
+        type: 'array',
+        description: 'Every motion the minutes record a result for, in the minutes\' order',
+        items: {
+          type: 'object',
+          required: ['motion'],
+          properties: {
+            item: str('The agenda number or title, as the minutes give it'),
+            motion: str('The motion\'s words, as written'),
+            result: str('The result, as written. Left out when the minutes record none'),
+            vote: str('The vote count, as written or counted from a roll call'),
+          },
+        },
+      },
+      note: str('Anything else a reader should know, such as where an approved copy is'),
+      page_url: str('Where the record shows on the site', { format: 'uri' }),
+      sources: SOURCES,
+    },
+  },
   places: {
     description: 'Gathering places: community centers, senior centers, neighborhood houses, rec buildings and fire halls that rent a hall, with what they have and how to use them.',
     id: 'slug',
@@ -206,6 +280,12 @@ export function shape(type, record) {
   return trim(plainValue(record), { type: 'object', properties: TYPES[type].properties });
 }
 
+// A coming meeting's guide shows on its body's page; anything past is on the
+// body's past meetings page, which keeps every record (#2084).
+// Past agenda guides share that page with minutes cards of the same slug, so
+// their ids start with "agenda-".
+export const meetingPageUrl = (body, slug, coming, prefix = '') => `${SITE_URL}/meetings/agendas/${body}/${coming ? '' : 'past/'}#${coming ? '' : prefix}${slug}`;
+
 // All records of one type, shaped, sorted by id.
 export async function records(type) {
   let raw;
@@ -214,6 +294,22 @@ export async function records(type) {
     raw = (await loadCalendarWithFeeds()).filter((e) => e.ends >= today);
   } else if (type === 'meetings') {
     raw = await loadMeetings();
+  } else if (type === 'agenda_guides') {
+    const today = todayYmd();
+    raw = loadAgendas().map((g) => ({
+      ...g,
+      body_name: BODIES[g.body]?.name,
+      agenda_saved_copy: savedCopy(g.agenda_url)?.saved_copy,
+      items: (g.items ?? []).map((it) => ({ ...it, kind_label: KINDS[it.kind] })),
+      page_url: meetingPageUrl(g.body, g.slug, ymd(g.date) >= today, 'agenda-'),
+    }));
+  } else if (type === 'meeting_decisions') {
+    raw = loadDecided().map((r) => ({
+      ...r,
+      body_name: BODIES[r.body]?.name,
+      minutes_status_note: MINUTES_STATUS[r.minutes_status],
+      page_url: meetingPageUrl(r.body, r.slug, false),
+    }));
   } else if (type === 'corrections') {
     raw = loadDir('corrections').map((c) => ({ ...c, id: path.basename(c._file).replace(/\.ya?ml$/, '') }));
   } else {

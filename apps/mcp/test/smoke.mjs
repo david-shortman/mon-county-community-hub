@@ -42,7 +42,7 @@ try {
   server.stdin.write(`${JSON.stringify({ jsonrpc: '2.0', method: 'notifications/initialized' })}\n`);
   const list = await call('tools/list', {});
   const names = list.result?.tools?.map((t) => t.name) ?? [];
-  for (const n of ['search_services', 'get_organization', 'upcoming_dates', 'list_needs', 'how_to_report_a_problem']) expect(names.includes(n), `tools/list: missing ${n}`);
+  for (const n of ['search_services', 'get_organization', 'upcoming_dates', 'list_needs', 'meeting_records', 'how_to_report_a_problem']) expect(names.includes(n), `tools/list: missing ${n}`);
   for (const t of list.result?.tools ?? []) expect(/check|source/i.test(t.description) || t.name === 'how_to_report_a_problem' || t.name === 'list_needs', `${t.name}: description should say to check sources`);
 
   const run = async (name, args) => {
@@ -65,6 +65,15 @@ try {
     const soon = (Date.parse(`${e.starts}T12:00:00Z`) - Date.now()) / 86400000 <= upcoming.within_days + 1;
     if (e.check_first) expect(soon && e.days_since_checked > upcoming.checked_within_days, `upcoming_dates: ${e.id} says check_first but is not soon and old`);
   }
+  // Meeting records (#2084): agendas and decisions, with sources, newest first.
+  const m = await run('meeting_records', {});
+  expect(m.count > 0, 'meeting_records: no meetings');
+  for (const r of m.results ?? []) expect(r.sources?.length && r.oldest_checked && (r.items ?? r.actions)?.length && r.page?.startsWith('https://'), `meeting_records: ${r.id} is missing sources, items or its page`);
+  expect((m.results ?? []).every((r, i, a) => i === 0 || a[i - 1].date >= r.date), 'meeting_records: not newest first');
+  const cc = await run('meeting_records', { body: 'county-commission', what: 'decisions' });
+  expect(cc.count > 0 && cc.results.every((r) => r.body === 'county-commission' && r.type === 'decisions' && r.minutes_status), 'meeting_records: body and what filters');
+  const adj = await run('meeting_records', { query: 'adjourn', what: 'decisions' });
+  expect(adj.count > 0 && adj.results.every((r) => r.actions.length <= r.actions_total && r.actions.every((x) => /adjourn/i.test(`${x.item} ${x.motion}`))), 'meeting_records: query returns only matching actions');
   // MCP Apps view: linked from the tool, readable as a resource, plain text fallback.
   const view = list.result?.tools?.find((t) => t.name === 'upcoming_dates')?._meta?.ui?.resourceUri;
   expect(view?.startsWith('ui://'), 'upcoming_dates: no MCP Apps view linked');

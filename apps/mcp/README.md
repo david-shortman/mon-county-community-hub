@@ -16,6 +16,7 @@ A small, read-only [MCP](https://modelcontextprotocol.io) server so AI tools (Cl
 | `get_organization` | One organization by id (like `west-virginia-211`) or name, with its programs |
 | `upcoming_dates` | Upcoming deadlines and community dates, soonest first, with an optional topic and how many days ahead. Each date has an Add to calendar link (`.ics`). Chat apps that support MCP Apps show it as an interactive list (below) |
 | `list_needs` | The needs register (#74): ranked, sourced problems. Empty until entries are published |
+| `meeting_records` | Public meeting agendas (each item word for word, with a neutral line) and what meetings decided (every motion the minutes record, with result and vote), newest first. Filter by body, words, dates, or agendas or decisions only (#2084) |
 | `how_to_report_a_problem` | Where to report a wrong or missing listing, and where fixes are published |
 
 ## Interactive view (MCP Apps)
