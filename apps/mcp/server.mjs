@@ -213,6 +213,53 @@ const TOOLS = [
     },
   },
   {
+    name: 'meeting_records',
+    description: 'Look up what is on public meeting agendas and what meetings decided in Morgantown and Monongalia County, WV: City Council and city boards, the County Commission, the MPO and towns. Agenda guides keep each item title word for word with one neutral line on what kind of item it is. Decisions are every motion the official minutes record, with the result and vote as written. Draft minutes can change (see minutes_status). Neither says whether anything is good or bad. Every record has its sources, checked dates and a saved copy link when we have one: cite them and send people to the official record.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        body: { type: 'string', description: 'Optional. A body id like "city-council" or "county-commission", or part of a name like "Planning"' },
+        query: { type: 'string', description: 'Optional plain words to find in item titles, lines and motions, like "sidewalk" or "budget revision". Only matching items are returned' },
+        what: { type: 'string', enum: ['agendas', 'decisions', 'both'], description: 'Agenda guides, decisions from minutes, or both (default both)' },
+        from: { type: 'string', description: 'Optional earliest meeting date, YYYY-MM-DD' },
+        to: { type: 'string', description: 'Optional latest meeting date, YYYY-MM-DD' },
+        limit: { type: 'integer', minimum: 1, maximum: 30, description: 'Most meetings to return (default 10), newest first' },
+      },
+    },
+    async run({ body, query = '', what = 'both', from, to, limit = 10 }) {
+      const [guides, decided] = await Promise.all([
+        what === 'decisions' ? [] : getJson('agenda_guides.json'),
+        what === 'agendas' ? [] : getJson('meeting_decisions.json'),
+      ]);
+      const b = String(body ?? '').trim().toLowerCase();
+      const bodyOk = (r) => !b || r.body === b || String(r.body_name).toLowerCase().includes(b);
+      const dateOk = (r) => (!from || r.date >= from) && (!to || r.date <= to);
+      const q = String(query).trim();
+      const pick = (list, text) => (q ? list.filter((x) => score(text(x), q) === words(q).length) : list);
+      const out = [
+        ...(guides ?? []).filter((r) => bodyOk(r) && dateOk(r)).map((r) => ({ type: 'agenda', r, hits: pick(r.items ?? [], (it) => [it.title, it.line, ...(it.parts ?? [])].join(' ')) })),
+        ...(decided ?? []).filter((r) => bodyOk(r) && dateOk(r)).map((r) => ({ type: 'decisions', r, hits: pick(r.actions ?? [], (a) => [a.item, a.motion, a.result].join(' ')) })),
+      ].filter((x) => !q || x.hits.length)
+        .sort((x, y) => y.r.date.localeCompare(x.r.date) || x.r.body.localeCompare(y.r.body))
+        .slice(0, Math.min(Math.max(Number(limit) || 10, 1), 30))
+        .map(({ type, r, hits }) => ({
+          type, id: r.slug, body: r.body, body_name: r.body_name, meeting: r.meeting, date: r.date,
+          ...(type === 'agenda'
+            ? { time: r.time, place: r.place, agenda_url: r.agenda_url, agenda_saved_copy: r.agenda_saved_copy, items: hits, ...(q ? { items_total: r.items.length } : {}) }
+            : { minutes_url: r.minutes_url, minutes_status: r.minutes_status, minutes_status_note: r.minutes_status_note, actions: hits, ...(q ? { actions_total: r.actions.length } : {}) }),
+          note: r.note, read: r.read, page: r.page_url,
+          record: `${SITE}/api/v1/${type === 'agenda' ? 'agenda_guides' : 'meeting_decisions'}/${r.slug}.json`,
+          ...freshness(r.sources),
+        }));
+      return {
+        note: `${NOTE} Meeting records are copied from official agendas and minutes. Describe them as they are written; do not say whether an item or vote was good or bad. "[name]" marks a private person's name we left out.`,
+        count: out.length,
+        results: out,
+        ...(out.length ? {} : { hint: 'Nothing matched. We cover the meetings listed at https://everythingmorgantown.org/meetings/agendas/. The official record is on each body\'s own page.' }),
+      };
+    },
+  },
+  {
     name: 'how_to_report_a_problem',
     description: 'How to tell Everything Morgantown that a listing is wrong, out of date or missing, and where fixes are published. Optionally for one listing id.',
     inputSchema: { type: 'object', properties: { id: { type: 'string', description: 'Optional listing id (slug) the problem is about' } } },

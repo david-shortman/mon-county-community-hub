@@ -18,7 +18,8 @@
       "sources[].method",
       "sources[].fetched",
       "sources[].feed",
-      "sources[].quote"
+      "sources[].quote",
+      "sources[].saved_copy"
     ],
     "resources": [
       "title",
@@ -46,7 +47,8 @@
       "sources[].method",
       "sources[].fetched",
       "sources[].feed",
-      "sources[].quote"
+      "sources[].quote",
+      "sources[].saved_copy"
     ],
     "calendar": [
       "title",
@@ -76,7 +78,8 @@
       "sources[].method",
       "sources[].fetched",
       "sources[].feed",
-      "sources[].quote"
+      "sources[].quote",
+      "sources[].saved_copy"
     ],
     "corrections": [
       "id",
@@ -157,7 +160,8 @@
       "sources[].feed",
       "sources[].quote",
       "agenda_first_seen",
-      "minutes_first_seen"
+      "minutes_first_seen",
+      "sources[].saved_copy"
     ],
     "places": [
       "name",
@@ -217,6 +221,65 @@
       "opening_hours[].opens",
       "opening_hours[].closes",
       "drop_in"
+    ],
+    "agenda_guides": [
+      "slug",
+      "body",
+      "body_name",
+      "meeting",
+      "date",
+      "time",
+      "place",
+      "watch",
+      "agenda_url",
+      "agenda_saved_copy",
+      "packet_url",
+      "read",
+      "items",
+      "items[].number",
+      "items[].title",
+      "items[].kind",
+      "items[].kind_label",
+      "items[].line",
+      "items[].parts",
+      "note",
+      "page_url",
+      "sources",
+      "sources[].url",
+      "sources[].checked",
+      "sources[].name",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed",
+      "sources[].quote",
+      "sources[].saved_copy"
+    ],
+    "meeting_decisions": [
+      "slug",
+      "body",
+      "body_name",
+      "meeting",
+      "date",
+      "minutes_url",
+      "minutes_status",
+      "minutes_status_note",
+      "read",
+      "actions",
+      "actions[].item",
+      "actions[].motion",
+      "actions[].result",
+      "actions[].vote",
+      "note",
+      "page_url",
+      "sources",
+      "sources[].url",
+      "sources[].checked",
+      "sources[].name",
+      "sources[].method",
+      "sources[].fetched",
+      "sources[].feed",
+      "sources[].quote",
+      "sources[].saved_copy"
     ]
   },
   "index": [

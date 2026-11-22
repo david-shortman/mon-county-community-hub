@@ -6,7 +6,10 @@ import SourceLine from './SourceLine.astro';
 import SavedCopy from './SavedCopy.astro';
 import { prettyDate } from '../lib/content.mjs';
 import { BODIES, KINDS, clock } from '../lib/agendas.mjs';
-const { g, level = 2 } = Astro.props;
+// past: the meeting is over, so leave out how to watch and comment (#2084).
+// idPrefix: when a guide shares a page with a minutes card of the same slug.
+const { g, level = 2, past = false, idPrefix = '' } = Astro.props;
+const id = `${idPrefix}${g.slug}`;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const b = BODIES[g.body];
 const H = `h${level}`;
@@ -14,19 +17,19 @@ const H2 = `h${level + 1}`;
 // Kinds the how-to-read page explains link to its section there (#103).
 const TERM = { consent: 'consent', 'public-comment': 'comment', 'public-hearing': 'hearing', 'first-reading': 'readings', 'later-reading': 'readings', 'executive-session': 'executive-session' };
 ---
-<article class="card agenda" id={g.slug} aria-labelledby={`${g.slug}-h`}>
-  <H id={`${g.slug}-h`}>{b.name}: {g.meeting}, {prettyDate(g.date)}</H>
+<article class="card agenda" id={id} aria-labelledby={`${id}-h`}>
+  <H id={`${id}-h`}>{b.name}: {g.meeting}, {prettyDate(g.date)}</H>
   <ul class="facts">
     <li><strong>When:</strong>{' '}{prettyDate(g.date)}, {clock(g.time)}</li>
     <li><strong>Where:</strong>{' '}<span translate="no">{g.place}</span></li>
-    <li><strong>Watch:</strong>{' '}{g.watch}</li>
-    <li><strong>Comment:</strong>{' '}{b.comment
+    {!past && <li><strong>Watch:</strong>{' '}{g.watch}</li>}
+    {!past && <li><strong>Comment:</strong>{' '}{b.comment
       ? <>see <a href={`${base}${b.comment}`}>how to comment at the {b.name}</a>.</>
-      : <>the agenda shows if there is time for public comment. {b.home && <>The board's own page: <a href={b.home}>{new URL(b.home).hostname.replace(/^www\./, '')}</a>.</>}</>}</li>
+      : <>the agenda shows if there is time for public comment. {b.home && <>The board's own page: <a href={b.home}>{new URL(b.home).hostname.replace(/^www\./, '')}</a>.</>}</>}</li>}
   </ul>
   <p><a href={g.agenda_url}>Official agenda<span class="sr-only">, {b.name}, {prettyDate(g.date)}</span></a><SavedCopy url={g.agenda_url} about={`the ${b.name} agenda, ${prettyDate(g.date)}`} />{g.packet_url && <> and <a href={g.packet_url}>full packet<span class="sr-only">, {b.name}, {prettyDate(g.date)}</span></a><SavedCopy url={g.packet_url} about={`the ${b.name} packet, ${prettyDate(g.date)}`} /></>}. We read it on {prettyDate(g.read)}.</p>
-  <H2 id={`${g.slug}-items`}>On the agenda</H2>
-  <ul class="items" aria-labelledby={`${g.slug}-items`}>
+  <H2 id={`${id}-items`}>On the agenda</H2>
+  <ul class="items" aria-labelledby={`${id}-items`}>
     {g.items.map((it) => (
       <li>
         <p class="item-title">{it.number}. {it.title}</p>

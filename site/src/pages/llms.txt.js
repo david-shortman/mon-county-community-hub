@@ -4,8 +4,8 @@ import { loadPlaces } from '../lib/places.mjs';
 import { ROLES } from '../lib/helper-roles.mjs';
 import { HUBS } from '../lib/town-hubs.mjs';
 import { groupPages } from '../lib/group-pages.mjs';
-import { loadCalendarWithFeeds } from '../lib/content.mjs';
-import { BODIES } from '../lib/agendas.mjs';
+import { loadCalendarWithFeeds, todayYmd } from '../lib/content.mjs';
+import { BODIES, bodiesWithPast } from '../lib/agendas.mjs';
 import { loadPosts, TYPES } from '../lib/blog.mjs';
 
 export async function GET({ site }) {
@@ -19,6 +19,8 @@ export async function GET({ site }) {
   // One link per group page (/groups/<slug>/), with the name its page uses.
   const groups = groupPages(await loadCalendarWithFeeds()).map((g) => `[${g.name}](${u(`/groups/${g.org.slug}/`)})`).join(', ');
   const agendaBodies = Object.entries(BODIES).map(([slug, b]) => `- [${b.name}: agendas in plain language](${u(`/meetings/agendas/${slug}/`)}): coming ${b.name} agenda guides, and the motions recorded in its minutes from the last 30 days, with results and vote counts as written`).join('\n');
+  // Past meetings pages (#2084): every minutes record and past guide we have.
+  const pastBodies = bodiesWithPast(todayYmd()).map((slug) => `- [${BODIES[slug].name}: past meetings](${u(`/meetings/agendas/${slug}/past/`)}): every past ${BODIES[slug].name} meeting we have covered, newest first: each motion its minutes record with the result and vote as written, and each agenda in plain words`).join('\n');
   // The blog (#1702): the index, a page per post type that has posts, and each post.
   const posts = await loadPosts();
   const postTypes = Object.keys(TYPES).filter((t) => posts.some((p) => p.type === t));
@@ -174,6 +176,7 @@ ${centers}
 - [Ask for public records](${u('/public-records/')}): West Virginia's Freedom of Information Act quoted (who can ask, asking the office that keeps the record, the five business day answer, copy fees and no search fees, going to circuit court after a denial), the Secretary of State's database of past requests, and City of Morgantown Clerk records
 - [Coming meetings in plain language](${u('/meetings/agendas/')}): guides to posted agendas for coming meetings of Morgantown City Council, the Monongalia County Commission, the Board of Education, city boards, regional boards and town councils: when, where, how to watch and comment, and every item with its exact agenda title and one neutral line on what kind of item it is; plus, from posted minutes, each motion recorded in the last 30 days with its result and vote count as written, on a page for each body
 ${agendaBodies}
+${pastBodies}
 - [About](${u('/about/')}): how the project works and its rules
 - [Corrections](${u('/corrections/')}): every fix to a fact, link or out-of-date detail, newest first
 ${blog}

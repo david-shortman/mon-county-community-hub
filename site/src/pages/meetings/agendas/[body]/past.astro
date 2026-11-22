@@ -1,0 +1,49 @@
+---
+// One public body's past meetings (#2084): every minutes record and every
+// past agenda guide we have written, newest first. The body's main page shows
+// only the last 30 days; this page keeps the rest, so nothing we read drops
+// out of sight. Data: content/agendas/, content/minutes/. The same records are
+// in /api/v1/agenda_guides.json and /api/v1/meeting_decisions.json.
+import Base from '../../../../layouts/Base.astro';
+import AgendaGuide from '../../../../components/AgendaGuide.astro';
+import DecidedCard from '../../../../components/DecidedCard.astro';
+import { fixFormUrl } from '../../../../lib/group-requests.mjs';
+import { prettyDate, todayYmd } from '../../../../lib/content.mjs';
+import { loadAgendas, loadDecided, bodiesWithPast, BODIES } from '../../../../lib/agendas.mjs';
+
+const today = todayYmd();
+const pastOf = (body) => ({
+  guides: loadAgendas().filter((g) => g.body === body && String(g.date) < today).reverse(),
+  decided: loadDecided().filter((r) => r.body === body && String(r.date) <= today),
+});
+// A page only for bodies that have something past.
+export function getStaticPaths() {
+  return bodiesWithPast(todayYmd()).map((body) => ({ params: { body } }));
+}
+const { body } = Astro.params;
+const b = BODIES[body];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { guides, decided } = pastOf(body);
+const named = /Morgantown|Mon(ongalia)? County/i.test(b.name) ? b.name : `${b.name}, Mon County`;
+const title = `${named}: past meetings`;
+---
+<Base title={title} description={`Every past ${b.name} meeting we have covered: what the minutes record was decided, and each agenda in plain words, linked to the official record.`}>
+  <p class="meta"><a href={`${base}/meetings/agendas/${body}/`}>{b.name}: coming meetings</a></p>
+  <h1>{b.name}: past meetings</h1>
+  <p class="lede">Every past meeting we have covered, newest first. What the minutes record was decided, and what was on each agenda. Each one links to the official record.</p>
+  <p>We started covering meetings in October 2026, so older meetings are not here. The {b.name}'s own page is the full record{b.home && <>: <a href={b.home}>{new URL(b.home).hostname.replace(/^www\./, '')}</a></>}.</p>
+  <p class="meta">These records are also free data: <a href={`${base}/data/`}>open data</a>.</p>
+
+  <h2 id="decided">What was decided</h2>
+  <p>Each motion the minutes record, with the result and the vote count as the minutes write them. We do not cover what people said or why.</p>
+  {decided.length ? decided.map((r) => <DecidedCard r={r} level={3} />)
+    : <p>We have not read minutes for a past {b.name} meeting yet.</p>}
+
+  <h2 id="agendas">Past agendas</h2>
+  {guides.length ? <>
+    <ul>{guides.map((g) => <li><a href={`#agenda-${g.slug}`}>{prettyDate(g.date)}: {g.meeting}</a></li>)}</ul>
+    {guides.map((g) => <AgendaGuide g={g} level={3} past idPrefix="agenda-" />)}
+  </> : <p>We have not written a guide for a past {b.name} meeting yet.</p>}
+
+  <p class="meta">We describe; we do not say whether an item or a vote was good or bad. Something wrong or slanted? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+</Base>

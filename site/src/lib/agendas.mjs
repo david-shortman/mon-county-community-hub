@@ -209,6 +209,13 @@ export function pastGuides(guides, today, days = 30) {
   return guides.filter((g) => String(g.date) >= from && String(g.date) < today).reverse();
 }
 
+// Bodies with a past guide or any minutes record: each gets a past meetings
+// page (/meetings/agendas/<body>/past/, #2084).
+export function bodiesWithPast(today, guides = loadAgendas(), decided = loadDecided()) {
+  const has = new Set([...guides.filter((g) => String(g.date) < today), ...decided].map((r) => r.body));
+  return Object.keys(BODIES).filter((b) => has.has(b));
+}
+
 // Guides for meetings on or after `today`, soonest first.
 export const upcomingGuides = (guides, today) => guides.filter((g) => String(g.date) >= today);
 

@@ -30,6 +30,8 @@ const title = named === b.name ? `${b.name} agendas explained` : `${b.name} agen
 // The newest read date of anything this page shows, so the first screen says
 // how fresh it is (#1288). Each guide and record also shows its own date.
 const lastRead = [...coming, ...past, ...decided].map((x) => ymd(x.read)).filter(Boolean).sort().at(-1);
+// Anything past gets kept on the body's past meetings page (#2084).
+const hasPast = mine.some((g) => String(g.date) < today) || loadDecided().some((r) => r.body === body);
 const host = b.home && new URL(b.home).hostname.replace(/^www\./, '');
 ---
 <Base title={title} description={`Coming ${b.name} agendas in plain language, and the actions recorded in its recent minutes, each linked to the official record.`}>
@@ -57,6 +59,8 @@ const host = b.home && new URL(b.home).hostname.replace(/^www\./, '');
       </ul>
     </>
   )}
+
+  {hasPast && <p><a href={`${base}/meetings/agendas/${body}/past/`}>All past {b.name} meetings we have covered</a>, with what each decided and what was on each agenda.</p>}
 
   <p class="meta">We describe; we do not say whether an item or a vote was good or bad. Something wrong or slanted? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
