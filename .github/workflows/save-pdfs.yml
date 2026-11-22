@@ -12,6 +12,11 @@ name: Save overwritten PDFs
 # 2. Saves any PDF newly cited in content/minutes/, content/agendas/ or
 #    content/pdf-pages/ that is not on that list yet, and opens (or updates)
 #    one for:code issue with the entries to add to the list.
+# 3. Once a day (the 13:17 UTC run), checks every other saved PDF: if the file
+#    at its address changed, it saves the new file too, and if it is gone it
+#    says so. Either way it opens (or updates) one for:code issue naming the
+#    records to re-read. The saved copy we recorded stays the one each record
+#    was read from.
 #
 # Free: Save Page Now and the CDX lookup are free public services, and a run
 # takes a few minutes of a free runner at most. robots.txt is checked before
@@ -24,6 +29,7 @@ name: Save overwritten PDFs
 on:
   schedule:
     - cron: '41 */6 * * *'
+    - cron: '17 13 * * *' # daily change check of every saved PDF
   workflow_dispatch:
 
 concurrency:
@@ -64,5 +70,23 @@ jobs:
           if git diff --quiet -- ../content/sources/gov-pdfs/saved-copies.yaml; then echo "Nothing new to record."; exit 0; fi
           title="Record new saved copies of cited PDFs"
           body=$(printf 'The Save overwritten PDFs check saved PDFs that records now cite but that are not on `content/sources/gov-pdfs/saved-copies.yaml` yet (#2079). Apply this change to that file in a PR (or run `node scripts/save-pdf-copies.mjs run` in `site/` on a machine that can reach web.archive.org).\n\nRun: %s\n\n```diff\n%s\n```\n' "$RUN_URL" "$(git diff -- ../content/sources/gov-pdfs/saved-copies.yaml | head -c 60000)")
+          n=$(gh api "repos/$REPO/issues?state=open&labels=for:code&per_page=100" --jq ".[] | select(.title == \"$title\") | .number" | head -1)
+          if [ -n "$n" ]; then gh api -X PATCH "repos/$REPO/issues/$n" -f body="$body" > /dev/null; else gh api "repos/$REPO/issues" -f title="$title" -f body="$body" -f "labels[]=for:code" > /dev/null; fi
+      - name: Check every saved PDF for changes (daily)
+        if: always() && (github.event.schedule == '17 13 * * *' || github.event_name == 'workflow_dispatch')
+        env:
+          CHECK_REPORT: ${{ runner.temp }}/saved-pdf-report.md
+        run: node scripts/save-pdf-copies.mjs check
+      - name: Open an issue for changed or missing PDFs
+        if: always() && (github.event.schedule == '17 13 * * *' || github.event_name == 'workflow_dispatch')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          REPORT: ${{ runner.temp }}/saved-pdf-report.md
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ ! -s "$REPORT" ]; then echo "No saved PDF changed or went missing."; exit 0; fi
+          title="Saved PDFs that changed or went missing"
+          body=$(printf '%s\n\nRun: %s\n' "$(head -c 60000 "$REPORT")" "$RUN_URL")
           n=$(gh api "repos/$REPO/issues?state=open&labels=for:code&per_page=100" --jq ".[] | select(.title == \"$title\") | .number" | head -1)
           if [ -n "$n" ]; then gh api -X PATCH "repos/$REPO/issues/$n" -f body="$body" > /dev/null; else gh api "repos/$REPO/issues" -f title="$title" -f body="$body" -f "labels[]=for:code" > /dev/null; fi

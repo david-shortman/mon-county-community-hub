@@ -20,6 +20,9 @@
 //   node scripts/save-pdf-copies.mjs run --only draft.pdf
 //   node scripts/save-pdf-copies.mjs watch           save a new copy of each
 //                                                    overwritten address if it changed
+//   node scripts/save-pdf-copies.mjs check           has any other saved PDF changed
+//                                                    or gone? Saves the new file and
+//                                                    writes a report (CHECK_REPORT)
 //
 // Free services only: Save Page Now and the CDX lookup. We wait between
 // requests to stay well inside the Internet Archive's limits, and back off on
@@ -244,6 +247,59 @@ async function watch() {
   if (failed) process.exitCode = 1;
 }
 
+// For every saved PDF that is not an overwritten address: is the live file
+// still the one we saved? A file can be replaced at the same address (an
+// amended agenda, a new fee schedule), or taken down. A changed file gets a
+// new capture, so both versions are kept, but the list keeps the copy the
+// record was read from: a person should re-read the record, then run
+// `run --only <url>` to record the new file. Writes nothing to the repo.
+// The report goes to stdout, the Actions summary, and the CHECK_REPORT file
+// (empty when nothing changed), which the workflow turns into an issue.
+export function checkReport(rows, cited, date = today()) {
+  if (!rows.length) return '';
+  const by = (url) => (cited.get(url) ?? []).map((f) => `\`${f}\``).join(', ') || 'no record cites it now';
+  const out = [`The daily check of saved PDFs (${date}, #2079) found ${rows.length} that changed or went missing since we saved them. The saved copy we recorded is still the file each record was read from.`, ''];
+  const changed = rows.filter((r) => r.kind === 'changed');
+  const gone = rows.filter((r) => r.kind === 'gone');
+  if (changed.length) {
+    out.push('## Changed at the same address', '', 'Re-read each record against the new file and fix anything that changed. Then run `node scripts/save-pdf-copies.mjs run --only <url>` in `site/` (or wait for this check) to record the new file.', '');
+    for (const r of changed) out.push(`- ${r.url}\n  - Read ${r.read}, saved copy: ${r.saved_copy}\n  - New file: ${r.newCopy ? r.newCopy : `not saved (${r.newError})`}\n  - Cited by: ${by(r.url)}`);
+    out.push('');
+  }
+  if (gone.length) {
+    out.push('## Gone or not a PDF any more', '', 'Find where the file moved, or say on the page that it is no longer posted. The saved copy still works.', '');
+    for (const r of gone) out.push(`- ${r.url}: ${r.reason}\n  - Saved copy: ${r.saved_copy}\n  - Cited by: ${by(r.url)}`);
+    out.push('');
+  }
+  return out.join('\n');
+}
+
+async function check() {
+  const list = readList();
+  const cited = citedPdfs(CONTENT_DIR);
+  const rows = [];
+  let same = 0, skipped = 0;
+  for (const f of list.files.filter((x) => !x.overwritten)) {
+    await sleep(2000);
+    const live = await getLive(f.url);
+    const base = { url: f.url, read: f.read, saved_copy: f.saved_copy };
+    if (live.robots) { skipped++; console.log(`skip  ${f.url}: ${live.error}`); continue; }
+    // A site that is down for a moment is not a file that is gone: only a
+    // clear answer counts (an HTTP error, or a page that is not a PDF).
+    if (live.error && /could not reach/.test(live.error)) { skipped++; console.log(`skip  ${f.url}: ${live.error}`); continue; }
+    if (live.error || !isPdfBytes(live.buf)) { rows.push({ ...base, kind: 'gone', reason: live.error ?? 'the address no longer sends a PDF' }); console.log(`GONE  ${f.url}`); continue; }
+    if (sha256(live.buf) === f.sha256) { same++; continue; }
+    console.log(`NEW   ${f.url}`);
+    const result = await saveOne(f.url);
+    rows.push({ ...base, kind: 'changed', newCopy: result.entry ? captureUrl(result.ts, result.entry.archived_url ?? f.url) : null, newError: result.not_saved?.reason });
+  }
+  const report = checkReport(rows, cited);
+  const summary = `## Saved PDFs check\n\n${same} unchanged, ${rows.length} changed or gone, ${skipped} not checked this run.\n\n${report}`;
+  console.log(summary);
+  if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + '\n');
+  if (process.env.CHECK_REPORT) fs.writeFileSync(process.env.CHECK_REPORT, report);
+}
+
 function listCmd() {
   const list = readList();
   const saved = new Map(list.files.map((f) => [f.url, f]));
@@ -258,6 +314,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const [cmd = 'list', ...args] = process.argv.slice(2);
   if (cmd === 'run') await run(args);
   else if (cmd === 'watch') await watch();
+  else if (cmd === 'check') await check();
   else if (cmd === 'list') listCmd();
-  else { console.error(`Unknown command: ${cmd}. Use list, run or watch.`); process.exitCode = 2; }
+  else { console.error(`Unknown command: ${cmd}. Use list, run, watch or check.`); process.exitCode = 2; }
 }
