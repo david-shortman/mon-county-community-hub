@@ -73,5 +73,5 @@ test('every County Health Rankings file the indicators read has a saved copy wit
     const text = fs.readFileSync(path.join(CONTENT_DIR, 'needs', f), 'utf8');
     for (const u of text.match(/https:\/\/www\.countyhealthrankings\.org\/(sites\/default\/files\/media\/document\/[^\s"']+|health-data\/west-virginia\/monongalia)(?=[\s"']|$)/gm) ?? []) assert.ok(savedCopy(u), `${f}: no saved copy for ${u}`);
   }
-  for (const c of savedCopies().values()) assert.ok(c.saved_copy.startsWith('https://web.archive.org/web/') && c.saved_copy.endsWith(c.url), c.url);
+  for (const c of savedCopies().values()) assert.ok(c.saved_copy.startsWith('https://web.archive.org/web/') && c.saved_copy.endsWith(c.archived_url ?? c.url), c.url);
 });
