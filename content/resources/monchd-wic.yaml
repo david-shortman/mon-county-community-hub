@@ -23,17 +23,17 @@ what_to_bring:
 what_happens: Call to set up an appointment. State WIC says to plan on about an hour. Staff look over your papers and health history, do a short health check for each person, talk with you about eating habits, and then tell you if you can get WIC.
 sources:
   - url: https://www.monchd.org/departments-programs/wic
-    checked: 2026-11-21
+    checked: 2026-11-22
     quote: "Call WIC at 1-800-675-5181 or in Monongalia County at 304-598-5181."
   - url: https://www.monchd.org/departments-programs/pages/mchd-wic-locations
-    checked: 2026-11-21
+    checked: 2026-11-22
     quote: "Evening: 11 a.m.- 7 p.m. the first Tuesday of the month"
   - url: https://dhhr.wv.gov/WIC/apply/Pages/Do%20I%20Qualify%20For%20WIC.aspx
-    checked: 2026-11-21
+    checked: 2026-11-22
     quote: "To be eligible, applicants must meet the following guidelines:"
   - url: https://dhhr.wv.gov/WIC/Pages/What-Do-I-need-to-bring-to-my-first-appointment.aspx
-    checked: 2026-11-21
+    checked: 2026-11-22
     quote: "Proof of address, such as rent receipt, utility bills, etc."
   - url: https://www.monchd.org/departments-programs/pages/wic-eligibility-guidelines
-    checked: 2026-11-21
+    checked: 2026-11-22
     quote: "Household income no more than 185% of the federal poverty income guidelines."
