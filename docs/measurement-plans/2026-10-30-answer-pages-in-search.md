@@ -57,4 +57,4 @@ None yet.
 
 ## Result
 
-Not yet checked.
+Checked 2026-11-15 ([results](../../content/findability/2026-11-15.yaml)): **no change.** Our page showed up in search for 0 questions (main measure), against a "helped" bar of 3. The site now has an answer page for 31 of the original 32 questions and 74 of all 76, and no official page links to one of them. Search engine accounts (#89) are not set up yet: David said to go ahead on 2026-11-14, and the verification step waits on his own accounts. So, as the plan expected, the most likely reason is that the pages are not indexed yet, not that they are poor answers. The overall score on the original 32 stayed at 76 the whole time. Next look: the first weekly run after the search engine accounts exist.

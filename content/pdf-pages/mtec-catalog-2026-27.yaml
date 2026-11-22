@@ -1,0 +1,95 @@
+# MTEC's 2026-2027 Course Catalog (part of #393): the parts for adults, as
+# short lists. A 61-page text PDF (not a scan) made from a Google Doc, read
+# 2026-11-16 with pdftotext. The high school day programs are on the
+# mtec-high-school-programs card, so they are left out here. Staff names are
+# left out. Two things in the PDF do not match, and both are quoted as
+# printed: the tuition table is headed "TUITION: 2024 – 2025" inside the
+# 2026-2027 catalog, and the testing part names both GED and HiSET. See
+# docs/discoveries/2026-11-16-mtec-catalog-tuition-year.md.
+slug: mtec-catalog-2026-27
+title: Monongalia County Technical Education Center 2026-2027 Course Catalog
+publisher: Monongalia County Technical Education Center (MTEC), Monongalia County Schools
+pdf: https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4695/Mtec/4d2a8fe4-4389-475e-be29-b79b10ef1c2b/Catalog-2026-2027.docx.pdf
+pdf_date: "2026-2027"
+intro: "MTEC, part of Monongalia County Schools, trains adults in the daytime (the Practical Nurse program) and at night (job skills and community classes). Its Adult Learning Center is free. These are the catalog's own words and numbers for adults. The parts in quotes are copied from the catalog."
+recheck_days: 180
+sources:
+  - url: https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4695/Mtec/4d2a8fe4-4389-475e-be29-b79b10ef1c2b/Catalog-2026-2027.docx.pdf
+    name: MTEC 2026-2027 Course Catalog (PDF)
+    checked: 2026-11-16
+sections:
+  - heading: Free classes at the Adult Learning Center
+    id: adult-learning-center
+    items:
+      - "\"All adult services are available free of charge and appointments are required.\" The center is for \"any adult student 18 years of age and older who are no longer in high school.\""
+      - "It teaches GED® (high school equivalency) preparation, \"basic skills instruction, job readiness skills instruction, life-coping skills instruction, computer literacy and preparation for specialized exams.\""
+      - "English as a Second Language (ESL) classes for adults \"whose native language is not English\"."
+      - "\"The Adult Learning Center at MTEC is the only official GED® testing site in Monongalia County and “free” GED® tests are available to qualifying candidates.\" The same part also asks test takers who need accommodations to request them \"with the HiSET® and MTEC’s HiSET® Coordinator.\""
+      - "If you left high school recently, bring \"written documentation indicating the withdrawal dates\" from your last school when you register."
+      - name: Adult Learning Center
+        lines: ["Room 108, Pierpont Center (MTEC Campus), 1000 Mississippi Street, Morgantown", "Call 304-291-9226 for an appointment."]
+  - heading: Daytime training for adults (Practical Nurse)
+    id: practical-nurse
+    note: "The catalog lists Practical Nurse as its adult daytime program. It leads to the Licensed Practical Nurse (LPN) exam."
+    items:
+      - "\"It is recommended that adults register for technical education programs during the spring semester/ prior to the end of June for pre-testing.\""
+      - "\"All application are typically due by May – June. Deadlines are stated on the application each year.\""
+      - "You need \"a high school diploma or equivalent and background check\". Adults take a pre-test first: \"the TABE (Test of Adult Basic Education) is used as well as the TEAS (Test of Essential Academic Skills) for Health Occupations programs.\""
+      - name: "Practical Nurse tuition, full-time (the catalog's table is headed \"TUITION: 2024 – 2025\")"
+        lines: ["$1,500.00 per semester", "$3,000.00 per year", "Registration fee (non-refundable): $100.00"]
+      - "\"Tuition is due on the first day of each semester. Students may pay tuition for the full year as well. Cash or check.\""
+      - "\"Additional outside costs include physical examination, immunizations, uniforms, shoes, watch, CPR, and criminal background check.\" Adults buy their own textbooks. Adults \"may pay a $20.00 user fee\" for a school Chromebook."
+      - "After the program: \"All applicants shall pass a United States national licensure exam prior to licensure.\""
+  - heading: Paying for daytime training
+    id: daytime-aid
+    items:
+      - "Pell Grant: \"If Pell Grant-eligible, tuition (only) will be deducted from the Pell Grant disbursement.\" The catalog says \"Pell-eligible programs at MTEC are 900-clock hours\" and that \"If a student has received a Bachelor's degree, he/she is not eligible for a Pell Grant.\""
+      - "\"WIOA (Workforce Innovation & Opportunity Act) through HRDF is another form of financial aid. WIOA funds can cover tuition, fees and reimburse for the additional outside costs listed on the program budget.\""
+      - "\"TAA (Trade Adjustment Act) through Workforce WV is yet another form of financial aid for displaced workers.\""
+      - "For a Pell Grant, fill out the FAFSA at www.fafsa.gov. The catalog says: \"The FAFSA is FREE!\" and \"Applications made on the “fafsa.com” come at a cost! DO NOT USE THIS WEBSITE TO APPLY!\""
+  - heading: If you leave a daytime program
+    id: daytime-refunds
+    note: "Tuition back if you officially withdraw (\"fees are not returned\"):"
+    items:
+      - "\"During the first and second week\": 90% refund"
+      - "\"During the third and fourth week\": 70% refund"
+      - "\"During the fifth and sixth week\": 50% refund"
+      - "\"Beginning the seventh week\": no refund"
+      - "If MTEC cancels a class, \"100 percent of the fees collected will be refunded within 45 days of the planned start date.\""
+  - heading: Evening classes for adults
+    id: evening
+    note: "\"The Adult Education evening courses have been designed to offer adult students age 18 and older advanced technical training.\" The catalog lists:"
+    items:
+      - "Trades: Evening Welding (\"up to 11 courses equivalent to 519 hours\"), Beginning Electricity (about \"the West Virginia Fire Marshal’s Electrician test\"), Hands-on Wiring/Diagrams, HVAC (prepares for \"their Universal Card, EPA 608, EPA 609, and EPA R410a\"), Woodworking, and Home Improvement (Basic or Intermediate)."
+      - "Health care: CPR, Medical Terminology, Medical Math, Phlebotomy, Sterile Processing Technician, and Emergency Medical Technician (EMT). The EMT class is \"offered through the WVU Extension Service Office\", is \"150-hour\", and \"Classes begin in January and test by late spring.\""
+      - "Computers: Computer Basics, Microsoft Office Word/PowerPoint, and Microsoft Office Excel. The Word and Excel classes need \"Windows and good typing skills\"."
+      - "Other: Intro to Spanish, Intro to Italian, Intro to Sign Language, and Real Estate (\"90 hours of coursework (pre-license prep)\")."
+  - heading: Paying for evening classes
+    id: evening-cost
+    items:
+      - "\"Tuition is due at registration.\" It \"covers the cost of the class only and does not include books, lab fees, or supplies.\""
+      - "\"Evening classes are considered part-time; therefore, Title IV Pell Grants and loans are not available.\""
+      - "The HEAPS grant (Higher Education Adult Part-Time Students Grant): \"Currently HVAC, EMT, Phlebotomy Technician and Sterile Processing programs are eligible\". You fill out the FAFSA first. \"Some students may secure assistance through the Division of Vocational Rehabilitation.\""
+      - "Refunds only if \"Classes are canceled\" (full refund) or \"A refund is requested before the class begins.\" You can withdraw with a \"W\" \"before the end of the 7th class\"; after that it is an \"F\"."
+      - "An official transcript is $2.00."
+  - heading: When evening classes run
+    id: evening-calendar
+    note: "The catalog's general calendar. \"Online registration begins and ends on the dates listed on the website\", so check MTEC's site for each term's dates."
+    items:
+      - "Fall: registration \"First Week in July\", classes start \"First Week in August\", last week of classes \"Second Week in December\"."
+      - "Spring: registration \"First Week in December\", classes start \"Second Week in January\", last week of classes \"Second Week in May\"."
+      - "Summer: registration \"Fourth Week in April\", classes start \"First Week in June\", last week of classes \"Fourth Week in July\"."
+  - heading: Community classes for fun
+    id: community-schools
+    items:
+      - "Community Schools classes are for people \"at least 18 years of age\" unless a class says otherwise. \"Fees vary for each class. Materials and supplies are not included in the tuition unless otherwise indicated.\""
+      - "The catalog lists Aerobics, Digital Photography, Drawing, Fly Tying, Knitting/Crochet, Oil Painting, Picture Framing, Pilates, Sewing, Stained Glass and World Foods."
+  - heading: The catalog
+    id: catalog
+    items:
+      - name: "MTEC 2026-2027 Course Catalog"
+        lines: ["MTEC, 1000 Mississippi Street, Morgantown. Main office 304-291-9240."]
+        links:
+          - label: "2026-2027 Course Catalog (PDF)"
+            url: https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4695/Mtec/4d2a8fe4-4389-475e-be29-b79b10ef1c2b/Catalog-2026-2027.docx.pdf
+            date: "2026-2027"

@@ -2,36 +2,8 @@
   "generated_by": "Made by site/src/lib/feeds/index.mjs. Do not edit by hand: rebuild with `npm run update-feeds` in site/.",
   "id": "monongalia-county",
   "feed_url": "https://www.monongaliacounty.gov/_assets_/plugins/revizeCalendar/calendar_data_handler.php?webspace=monongoliacountywv&relative_revize_url=//cms2.revize.com&protocol=https:",
-  "fetched": "2026-10-30T23:57:12.228Z",
+  "fetched": "2026-11-15T03:30:20.594Z",
   "entries": [
-    {
-      "title": "2026 General Election Day",
-      "slug": "mon-county-2026-general-election-day-2026-11-03",
-      "starts": "2026-11-03",
-      "ends": "2026-11-03",
-      "org_name": "Monongalia County",
-      "who_it_is_for": "Monongalia County Offices will be closed today.",
-      "what_to_do": "The county's event page has the details.",
-      "url": "https://www.monongaliacounty.gov/calendar.php",
-      "topics": [
-        "voting"
-      ]
-    },
-    {
-      "title": "Park After Dark",
-      "slug": "mon-county-park-after-dark-2026-10-30",
-      "starts": "2026-10-30",
-      "ends": "2026-10-30",
-      "org_name": "Monongalia County",
-      "who_it_is_for": "Listed on the county's parks and recreation calendar.",
-      "what_to_do": "At 346 Chestnut Ridge Camp Rd.",
-      "start_time": "17:00",
-      "end_time": "20:00",
-      "url": "https://www.monongaliacounty.gov/business_detail_T51_R19.php",
-      "topics": [
-        "community"
-      ]
-    },
     {
       "title": "11 Annual Evening With Santa at Mason-Dixon Park",
       "slug": "mon-county-11-annual-evening-with-santa-at-mason-dixon-park-2026-12-12",

@@ -9,6 +9,11 @@ steps:
     when: week
     resource: mub-start-service
     text: Ask your landlord or the seller which companies serve the home, then start water, power and gas service a few days before you move.
+  pickup-lookup:
+    when: today
+    resource: republic-morgantown-trash
+    text: Inside Morgantown city limits, look up your pickup day by address on Republic Services' site.
+    action: Look up your day
   swa:
     when: today
     resource: mon-swa-ask-about-trash
@@ -55,7 +60,7 @@ situations:
   - id: pickup
     label: When is my trash pickup day?
     page: /recycling/#pickup
-    steps: [swa]
+    steps: [pickup-lookup, swa]
   - id: recycle
     label: Where can I drop off recycling?
     page: /recycling/#drop-off

@@ -1,0 +1,10 @@
+---
+// " (saved copy)" after a link to a file the Internet Archive keeps for us
+// (#1906, #2079), or nothing. The list is content/sources/*/saved-copies.yaml.
+//   url: the live address the link goes to
+//   about: what the file is, for screen readers
+import { savedCopy } from '../lib/saved-copies.mjs';
+const { url, about } = Astro.props;
+const s = url ? savedCopy(url) : null;
+---
+{s && <> (<a href={s.saved_copy}>{s.overwritten ? 'saved versions' : 'saved copy'}<span class="sr-only">{about ? ` of ${about}` : ''} at the Internet Archive</span></a>)</>}

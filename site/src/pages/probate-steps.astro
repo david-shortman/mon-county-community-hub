@@ -4,6 +4,7 @@
 // and fee is quoted in content/pdf-pages/mon-county-clerk-probate-timeline.yaml.
 import Base from '../layouts/Base.astro';
 import FromPdf from '../components/FromPdf.astro';
+import ProbateJourney from '../components/ProbateJourney.astro';
 import { pdfPage } from '../lib/pdf-pages.mjs';
 import { telHref } from '../lib/content.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
@@ -18,9 +19,12 @@ const phone = '304-291-7230';
 
   <nav aria-label="On this page">
     <ul>
+      <li><a href="#pb-explainer">Follow one estate, day by day</a></li>
       {d.sections.map((s) => <li><a href={`#${s.id}`}>{s.heading}</a></li>)}
     </ul>
   </nav>
+
+  <ProbateJourney />
 
   <FromPdf d={d} />
 

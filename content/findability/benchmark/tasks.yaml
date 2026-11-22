@@ -168,3 +168,20 @@ needs:
         kind: official
         url: https://www.ccwva.org/programs/grace-shelter/
         answer_text: "Grace Shelter is a 24/7 emergency homeless shelter"
+
+  # Added 2026-11-14 (#1050): the ninth need. Asked as "free or cheap ride to
+  # medical appointments for seniors" in questions.yaml.
+  - id: q29
+    need: A ride to a medical appointment
+    sources:
+      - name: ours
+        kind: ours
+        url: https://everythingmorgantown.org/medical-rides/
+        answer_text: On Medicaid or WVCHIP? You may be able to get a ride
+      - <<: *guide
+        answer_text: TRANSPORTATION SERVICES
+      - <<: *city
+      - name: official
+        kind: official
+        url: https://www.busride.org/newfit
+        answer_text: Medical Related Transportation Services Arranged by Appointment
