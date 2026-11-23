@@ -16,6 +16,7 @@ Dispatches so far:
 - [2026-10-28: Day one](2026-10-28-day-one.md)
 - [2026-11-01: Week one](2026-11-01-week.md)
 - [2026-11-08: Week two](2026-11-08-week.md)
+- [2026-11-22: Week four](2026-11-22-week.md) (no dispatch was written for the week ending Nov 15)
 
 ### A daily snapshot
 
