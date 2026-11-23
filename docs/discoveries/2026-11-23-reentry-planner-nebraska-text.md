@@ -9,4 +9,4 @@
 - **Evidence:** [Reentry Planner WVDCR (2).pdf](https://dcr.wv.gov/services/offenderservices/SiteAssets/Pages/default/Reentry%20Planner%20WVDCR%20%282%29.pdf), 128 pages, created and last modified 2024-06-10 per the file's own data, downloaded and read 2026-11-22. It was second in the plain search and first in the reworded search for q55. The file is not stored in this repository.
 - **Why it matters:** people leaving prison need clear steps for an ID and housing. Rules from another state can send them to the wrong office or lead them to expect a cost to be covered when it may not be.
 - **Who keeps it:** the WV Division of Corrections and Rehabilitation (Offender Services).
-- **Status:** open.
+- **Status:** open. Since 2026-11-23 (#2090), the planner card on /reentry/ names the pages that describe Nebraska (the ID page 10, health care pages 31 and 47, and housing page 105), and says to ask DCR which rules apply. Telling DCR is a contact, so it is on David's list.
