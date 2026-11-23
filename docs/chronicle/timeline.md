@@ -70,3 +70,14 @@ One line per notable event, oldest first. Times are UTC. Add new lines at the bo
 - Nov 7: Automations dashboard lists every scheduled job, waits for David ([#1753](https://github.com/david-shortman/mon-county-community-hub/pull/1753))
 - Nov 8: Weekly findability run: 76 on the original 32, 71 on all 65, 63 of 65 have an answer page ([scoreboard](../scoreboard.md))
 - Nov 8: Week two dispatch: 241 PRs merged, 124 items waiting on David ([dispatch](2026-11-08-week.md))
+
+## 2026-11-16 to 2026-11-22
+
+- Nov 16: Week 3 retro and week 4 plan ask builds to stop adding to David's queue ([#2053](https://github.com/david-shortman/mon-county-community-hub/pull/2053))
+- Nov 18: Legal Aid closure note goes up a day before applications reopen ([#1824](https://github.com/david-shortman/mon-county-community-hub/pull/1824))
+- Nov 18: Visibility audit: a search for the site's own name finds only other sites ([build log](../build-log/2026-11-18-1839-visibility-audit.md))
+- Nov 21: Every cited government PDF is saved to the Internet Archive ([#2080](https://github.com/david-shortman/mon-county-community-hub/pull/2080))
+- Nov 21: Daily re-check of shelter, crisis and food-today details starts ([#1953](https://github.com/david-shortman/mon-county-community-hub/pull/1953))
+- Nov 22: Meeting records become open data with past meetings pages ([#2085](https://github.com/david-shortman/mon-county-community-hub/pull/2085))
+- Nov 22: Weekly findability run: 76 on the original 32, 75 on all 76, 74 of 76 have an answer page ([scoreboard](../scoreboard.md))
+- Nov 22: Week four dispatch: 21 PRs merged, 176 items waiting on David ([dispatch](2026-11-22-week.md))
