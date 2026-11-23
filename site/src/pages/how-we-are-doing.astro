@@ -70,7 +70,15 @@ const measures = places.data?.measures ?? [];
   {health.map((i) => (
     <article class="card" id={i.slug}>
       <h3>{i.title} ({i.data_year})</h3>
-      <p>{i.definition}</p>
+      {/* The plain sentence comes first when the record has one (#2002, #2019).
+          It is written from County Health Rankings' page for the measure, and
+          links there. The exact definition follows, in the source's words. */}
+      {i.plain ? (
+        <>
+          <p>{i.plain.text} <a href={i.plain.url}>How County Health Rankings explains it</a>.</p>
+          <p>In the source's words: "{i.definition}"</p>
+        </>
+      ) : <p>{i.definition}</p>}
       <ul>
         {PLACES.filter(([k]) => i.values[k] != null).map(([k, label]) => (
           <li>{k === 'monongalia' ? <strong>{label}: {showValue(i, i.values[k])}</strong> : <>{label}: {showValue(i, i.values[k])}</>}</li>
