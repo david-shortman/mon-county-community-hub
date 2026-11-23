@@ -2,38 +2,43 @@
 #
 # Weekly run (not the first Sunday of the month): only our pages were re-measured
 # and re-scored. Outside sources (frn-guide, city-pathways, official) are carried
-# forward with their old checked dates: q01 to q26 from 2026-11-08 (scored
-# 2026-11-01), and q29 from journeys/2026-11-14.yaml, where the ninth need was
-# first scored (#1050). Automatic numbers (auto:) come from
-# content/findability/benchmark/measure.js --hub-only; everything else was scored
-# by reading each page, as the "Source benchmark" section of docs/scoreboard.md
-# describes. Score with:
-#   python3 content/findability/benchmark/score.py content/findability/benchmark/2026-11-15.yaml
+# forward with their old checked dates: q01 to q26 scored 2026-11-01, and q29
+# scored 2026-11-14 (journeys/2026-11-14.yaml, #1050). Automatic numbers (auto:)
+# come from content/findability/benchmark/measure.js --hub-only, run 2026-11-22;
+# everything else was scored by reading each page, as the "Source benchmark"
+# section of docs/scoreboard.md describes. Score with:
+#   python3 content/findability/benchmark/score.py content/findability/benchmark/2026-11-22.yaml
 #
 # frn-guide: the 2025 resource guide PDF, 11 pages, 331,504 bytes,
 # Last-Modified Wed, 19 Feb 2025 20:13:54 GMT,
 # sha256 3f874fb8dca8e68804e9ec4b3e55d22a9e0a4619f61a56f15fcc1eb53b543d3a.
-# Checked again 2026-11-15 (HEAD request and a hash of a download to a scratch
-# folder): unchanged, so outside sources are not re-scored. The PDF is not stored in the repo.
+# Checked again 2026-11-22 (HEAD request and a hash of a download to a scratch
+# folder, deleted after): unchanged, so outside sources are not re-scored. The
+# PDF is not stored in the repo.
 #
 # facts: confirmed true = matches the provider's page at that URL today;
 # false = does not match (why says how); null = could not check this run.
-# Facts on our pages were checked 2026-11-15 against the provider's own page.
+# Facts on our pages were checked 2026-11-22 against the provider's own page,
+# read with curl (phone User-Agent) after a robots.txt check of each site, or
+# with the WebFetch tool where noted. Never against a second-hand list.
 # scored: false = the source refused our tools, or (journeys) the start gave no
 # way to reach the key fact, so it is left out instead of guessed.
 #
-# 2026-11-15: q25 has a fact found wrong on our page. Legal Aid's Apply for Help
-# page says online applications are closed November 10 to 19, 2026; our page
-# still says you can also apply online. The official q25 source is carried
-# forward from 2026-11-01 and was not re-checked, so its "or online" fact still
-# reads confirmed from that date.
+# 2026-11-22: the q25 fact found wrong on 2026-11-15 is resolved. Our page
+# changed on 2026-11-18 (#1824): it now says Legal Aid's online applications
+# were closed November 10 to 19 and that you can apply online after that. Legal
+# Aid's Apply for Help page today shows the online intake questions again, under
+# the same "closed November 10-19, 2026" notice, so online applying is back. The
+# official q25 source is carried forward from 2026-11-01 and was not re-checked.
 #
 # journeys: the whole trip to the key fact (docs/scoreboard.md, "Whole journey").
-# from_home uses the links on the live home page read 2026-11-15 and today's
+# from_home uses the links on the live home page read 2026-11-22 and today's
 # words_before_answer. from_search uses the findability `search` text
-# (questions.yaml) in one plain web search on 2026-11-15, top result first.
+# (questions.yaml) in one plain web search on 2026-11-22, top result first,
+# read at 390px with a Playwright script in a scratch folder after a robots.txt
+# check of each site. Words count the visible page text up to the key fact.
 
-date: '2026-11-15'
+date: '2026-11-22'
 tasks_version: 1
 tester: Claude Code (weekly source benchmark, our pages only)
 network: 390px, slow 4G profile (150 ms, 1.6 Mbps down), cache off
@@ -51,7 +56,7 @@ needs:
       kb: 51.7
       words_on_page: 1347
       words_before_answer: 88
-      seconds_to_answer: 0.696
+      seconds_to_answer: 0.869
       screens_down: 0
       reading_grade: 8.4
       horizontal_scroll: false
@@ -71,10 +76,8 @@ needs:
     - fact: 'Mon Power: 800-686-0022'
       url: https://www.firstenergycorp.com/help/billingpayments/assistance_serviceprogram/mon_power.html
       confirmed: true
-    note: 'Re-read 2026-11-15, no change to the answer: steps in order, starting with calling the utility, with this season''s LIEAP dates (mailing started November 2, pre-LIEAP deadline November 25, now
-      10 days away) and weekday hours for MUB and Hope Gas. The page is longer (1347 words, was 1052): a new ''Who sets the rules for this'' section near the end, below the answer. The DoHS article still
-      gives the online address as wvpath.org; the page says WV PATH (wvpath.wv.gov), the same state site.'
-    checked: '2026-11-15'
+    note: 'Re-read 2026-11-22, no change to the answer: steps in order, starting with calling the utility, with this season''s LIEAP dates (mailing started November 2, pre-LIEAP deadline Wednesday, November 25, now 3 days away) and weekday hours for MUB and Hope Gas. The DoHS article still gives the online address as wvpath.org; the page says WV PATH (wvpath.wv.gov), the same state site.'
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -153,7 +156,7 @@ needs:
       kb: 47.6
       words_on_page: 1300
       words_before_answer: 58
-      seconds_to_answer: 0.413
+      seconds_to_answer: 0.464
       screens_down: 0
       reading_grade: 5.5
       horizontal_scroll: false
@@ -173,10 +176,8 @@ needs:
     - fact: 'Scott''s Run Free and Fresh Market: produce usually set out between noon and 1 p.m., Monday to Wednesday at 750 Fairchance Road, Thursday and Friday at Osage'
       url: https://www.srsh.org/free-market
       confirmed: true
-    note: 'Re-read 2026-11-15, no change to the answer card. Two taps from the food page. 211, Scott''s Run (pantry by appointment, plus a free produce market with days and times), two walk-in meals with
-      days and times, and dated free food events. New today: a link under Scott''s Run, ''See free meals and food pantries by day, with what is open today first'', to /help/food/by-day/ (#1938). That list
-      is one more tap and was not scored here, since tasks.yaml still points at this page. Still nothing on what to bring.'
-    checked: '2026-11-15'
+    note: 'Re-read 2026-11-22, no change to the answer card. Two taps from the food page. 211, Scott''s Run (pantry by appointment, plus a free produce market with days and times), two walk-in meals with days and times, dated free food events, and the link to /help/food/by-day/ (not scored here, since tasks.yaml still points at this page). Still nothing on what to bring.'
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -275,7 +276,7 @@ needs:
       kb: 51.7
       words_on_page: 1347
       words_before_answer: 267
-      seconds_to_answer: 0.446
+      seconds_to_answer: 0.48
       screens_down: 2
       reading_grade: 5
       horizontal_scroll: false
@@ -295,9 +296,8 @@ needs:
     - fact: MUB's site does not describe payment plans or shutoff rules
       url: https://mub.org/
       confirmed: true
-    note: Re-read 2026-11-15, no change. Water help is in step 1, about two screens down. MUB's home page (read 2026-11-15) gives the phone, weekday hours, 24/7 emergencies and the address, and still says
-      nothing about payment plans or shutoffs, so the key fact still needs a call.
-    checked: '2026-11-15'
+    note: Re-read 2026-11-22, no change. Water help is in step 1, about two screens down. MUB's home page (read 2026-11-22, a 'website improvements in progress' notice at the top) gives the phone, weekday phone hours, 24/7 emergencies and the address, and still says nothing about payment plans or shutoffs, so the key fact still needs a call.
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -370,7 +370,7 @@ needs:
       kb: 62
       words_on_page: 1200
       words_before_answer: 49
-      seconds_to_answer: 0.408
+      seconds_to_answer: 0.474
       screens_down: 0
       reading_grade: 8.1
       horizontal_scroll: false
@@ -390,10 +390,8 @@ needs:
     - fact: 'Monongalia County DoHS office: 114 South High Street, 304-285-3175, Monday to Friday 8:30 a.m. to 5 p.m.'
       url: https://dohs.wv.gov/offices/monongalia-county-dohs-office
       confirmed: true
-    note: 'Re-read 2026-11-15, no change to the answer: the first sentence says apply online at WV PATH, with the steps, the DoHS phone and an in-person office with hours. It still does not list documents
-      to have ready. WV PATH''s robots.txt answered with a web page instead of a robots.txt, so under docs/operations/automated-reads.md nothing on wvpath.wv.gov was read this run; the apply-online fact
-      was checked on the DoHS Bureau for Family Assistance FAQ, which links to wvpath.wv.gov.'
-    checked: '2026-11-15'
+    note: 'Re-read 2026-11-22, no change to the answer: the first sentence says apply online at WV PATH, with the steps, the DoHS phone and an in-person office with hours. It still does not list documents to have ready. Nothing on wvpath.wv.gov was read this run (its robots.txt answered with a web page on 2026-11-15, see docs/operations/automated-reads.md); the apply-online fact was checked on the DoHS Bureau for Family Assistance FAQ, which links to WV PATH.'
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -475,7 +473,7 @@ needs:
       kb: 69.9
       words_on_page: 3206
       words_before_answer: 43
-      seconds_to_answer: 0.457
+      seconds_to_answer: 0.565
       screens_down: 0
       reading_grade: 7.3
       horizontal_scroll: false
@@ -495,9 +493,8 @@ needs:
     - fact: Patients qualify up to 250% of the federal poverty level
       url: https://mphealthright.org/
       confirmed: true
-    note: Re-read 2026-11-15, no change. The free clinic first, with who qualifies (up to 250% of the federal poverty level), address, weekday hours and phone, then a sliding fee doctor, the health department
-      clinic, Medicaid online, and hospital bill help. The tasks.yaml marker matches the page's wording.
-    checked: '2026-11-15'
+    note: 'Re-read 2026-11-22, no change. The free clinic first, with who qualifies (up to 250% of the federal poverty level), address, weekday hours and phone, then a sliding fee doctor, the health department clinic, Medicaid online, and hospital bill help. The clinic''s contact page answered our curl read with a "please wait while your request is being verified" page, so the address and hours were read with the WebFetch tool (10 Scott Ave., M-F 8:00am-4:30pm, 304-292-8234); its home page header also shows 8:00 AM to 4:30 PM.'
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -604,7 +601,7 @@ needs:
       kb: 66
       words_on_page: 2145
       words_before_answer: 36
-      seconds_to_answer: 0.457
+      seconds_to_answer: 0.502
       screens_down: 0
       reading_grade: 6.6
       horizontal_scroll: false
@@ -624,8 +621,8 @@ needs:
     - fact: Without dental insurance, an adult first visit (exam and X-rays) is $125, cleaning extra
       url: https://www.monchd.org/departments-programs/mchd-dentistry
       confirmed: true
-    note: Re-read 2026-11-15, no change. Answers in the first two sentences, with prices for people without dental insurance. Appointments are still by phone, so there is no next step that is not a call.
-    checked: '2026-11-15'
+    note: Re-read 2026-11-22, no change. Answers in the first two sentences, with prices for people without dental insurance. Appointments are still by phone, so there is no next step that is not a call.
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -683,10 +680,10 @@ needs:
     taps: 1
     must_call: false
     auto:
-      kb: 75.1
+      kb: 75.2
       words_on_page: 2451
       words_before_answer: 1092
-      seconds_to_answer: 0.514
+      seconds_to_answer: 0.532
       screens_down: 0
       reading_grade: 7.1
       horizontal_scroll: false
@@ -703,15 +700,11 @@ needs:
     - fact: 'Legal Aid of West Virginia: apply by phone at 866-255-4370, Monday, Wednesday, Thursday and Friday 8:30 a.m. to 3:30 p.m., Tuesday 8:30 a.m. to 12:30 p.m.'
       url: https://legalaidwv.org/get-help/apply-for-help/
       confirmed: true
-    - fact: You can also apply online from the Apply for Help page
+    - fact: Online applications were closed November 10 to 19, 2026; after that you can also apply online from the Apply for Help page
       url: https://legalaidwv.org/get-help/apply-for-help/
-      confirmed: false
-      why: The Apply for Help page says online applications are closed November 10 to 19, 2026 (staff training); the questionnaire returns November 19. Our page does not mention the pause.
-    note: 'Re-read 2026-11-15. Our page did not change, but Legal Aid''s Apply for Help page did: it now says online applications are closed November 10 to 19, 2026, while staff are at a training, and the
-      questionnaire comes back November 19. Our page still says ''You can also apply online from the Apply for Help page'' and does not mention the pause, so that fact is wrong this week. Legal Aid''s page
-      also no longer shows the ''deadline in the next 10 days, call instead'' line that our page repeats (it was in the online section that is now replaced by the notice), so that line was not checked.
-      The phone number and phone hours match. Card unchanged: who qualifies, phone hours, free forms to answer an eviction case, what to have ready.'
-    checked: '2026-11-15'
+      confirmed: true
+    note: 'Re-read 2026-11-22. Fixed since last week: our page changed on 2026-11-18 (#1824). The card now says Legal Aid''s online applications were closed November 10 to 19, 2026, for a staff training, that its page says they reopen November 19, and that after that you can also apply online from the Apply for Help page. Legal Aid''s page today shows the online intake questions again (including "deadline in the next 10 days? call instead", which our page repeats), under the same "closed from November 10-19, 2026" notice. So both checked facts match. The card still reads "Until then, call" about dates now past; that is not wrong, but it could be shortened once the notice comes down. The phone number and phone hours match. Card unchanged: who qualifies, phone hours, free forms to answer an eviction case, what to have ready. The answer marker still matches.'
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -796,7 +789,7 @@ needs:
       kb: 48.9
       words_on_page: 1084
       words_before_answer: 112
-      seconds_to_answer: 0.559
+      seconds_to_answer: 0.46
       screens_down: 0
       reading_grade: 5.3
       horizontal_scroll: false
@@ -816,9 +809,8 @@ needs:
     - fact: 'Grace Shelter phone: 681-867-1002; no pets or service animals'
       url: https://www.ccwva.org/programs/grace-shelter/
       confirmed: true
-    note: 'Re-read 2026-11-15, no change to the answer: the first card gives open 24 hours, who it is for, how to get in, address and phone. The winter warming shelter note still says no opening date or
-      hours have been announced. It does not say what to bring.'
-    checked: '2026-11-15'
+    note: 'Re-read 2026-11-22, no change to the answer: the first card gives open 24 hours, who it is for, how to get in, address and phone. The winter warming shelter note still says no opening date or hours have been announced, and links to a status page. It does not say what to bring.'
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -915,7 +907,7 @@ needs:
       kb: 63.5
       words_on_page: 1749
       words_before_answer: 35
-      seconds_to_answer: 0.682
+      seconds_to_answer: 0.442
       screens_down: 0
       reading_grade: 6.1
       horizontal_scroll: false
@@ -935,8 +927,8 @@ needs:
     - fact: NewFIT sign-up survey by phone at 304-296-3869
       url: https://www.busride.org/newfit
       confirmed: true
-    note: Re-read 2026-11-15, no change since 2026-11-14. The top of the page answers all three ways (Medicaid rides, the bus, NewFIT) with cost and how to book. It does not say what to bring.
-    checked: '2026-11-15'
+    note: Re-read 2026-11-22, no change. The top of the page answers all three ways (Medicaid rides, the bus, NewFIT) with cost and how to book. It does not say what to bring.
+    checked: '2026-11-22'
   - name: frn-guide
     kind: guide
     url: https://wvfrn.org/wp-content/uploads/2025/02/2025-Monongalia-County-Resource-Guide.pdf
@@ -1032,9 +1024,16 @@ journeys:
     minutes: 0.7
   from_search:
     query: help paying heating bill Morgantown WV
-    first_result: https://www.findhelp.org/housing/help-pay-for-housing--fairmont-wv
-    scored: false
-    note: 'The top result refused our robots.txt check (Disallow: / for all robots), so under docs/operations/automated-reads.md it was not read. Not guessed.'
+    first_result: https://wrc.wvu.edu/resources/basic-needs/utility-bill-help
+    path:
+    - Top result (WVU Women's Resource Center, utility bill help)
+    - LIEAP
+    taps: 2
+    sites: 2
+    calls: 0
+    words: 350
+    minutes: 2.2
+  note: 'From search: the top result changed (was findhelp.org). Its robots.txt is empty, so it was read. It lists LIEAP with the county office phone and a link, but not how to apply. The LIEAP link opens the state Bureau for Family Assistance LIEAP page, which says to contact the county DoHS office or apply online at WV PATH (350 words in). That page does not give this season''s pre-LIEAP dates.'
 - id: q02
   from_home:
     path:
@@ -1049,8 +1048,14 @@ journeys:
   from_search:
     query: food pantry open this week Morgantown WV
     first_result: https://graduateeducation.wvu.edu/resources/community-resources
-    scored: false
-    note: The top result refused our robots.txt check (robots.txt answered 403), so under docs/operations/automated-reads.md it was not read. Not guessed.
+    path:
+    - Top result (WVU Graduate Education, community resources)
+    taps: 1
+    sites: 1
+    calls: 0
+    words: 345
+    minutes: 2.0
+  note: 'From search: scored for the first time. Its robots.txt now answers 200 (it answered 403 on 2026-11-15). The first pantry with a day is Canyon Presbyterian Church, open Mondays, 345 words in. The page says it was last updated August 1, 2024, and its Scott''s Run entry did not match the provider on 2026-11-01, so a reader cannot tell which days are current. Days were not re-checked here.'
 - id: q03
   from_home:
     path:
@@ -1068,10 +1073,9 @@ journeys:
     taps: 1
     sites: 1
     calls: 1
-    words: 451
-    minutes: 7.5
-  note: 'From home: calls is 1 because our page''s must_call is true. From search: the top result is an October 2025 news story about MUB''s deferred payment program during the federal government shutdown.
-    It gives MUB''s phone and email (451 words in, measured at 390px) but nothing on payment plans today, so the key fact still needs a call.'
+    words: 274
+    minutes: 6.6
+  note: 'From home: calls is 1 because our page''s must_call is true. From search: the same October 2025 news story as last week, about MUB''s deferred payment program during the federal government shutdown. It gives MUB''s phone and email (274 words in today, measured at 390px; last week''s 451 was the same story with more page text around it) but nothing on payment plans today, so the key fact still needs a call.'
 - id: q04
   from_home:
     path:
@@ -1086,7 +1090,7 @@ journeys:
     query: apply for SNAP food stamps Monongalia County WV
     first_result: https://dhhr.wv.gov/News/2025/Pages/Flood-Relief-Update-DoHS-Extends-Application-Deadline-for-SNAP-Replacement-Benefits.aspx
     scored: false
-    note: The top result answers 404 (page not found), so it gives no answer and no links to follow. Not counted as a journey; not guessed.
+    note: The top result still answers 404 (page not found), so it gives no answer and no links to follow. Not counted as a journey; not guessed.
 - id: q05
   from_home:
     path:
@@ -1098,9 +1102,17 @@ journeys:
     minutes: 0.5
   from_search:
     query: free or low cost clinic no insurance Morgantown WV
-    first_result: https://cavac.at/cavacopedia/Milan%20Puskar%20Health%20Right
-    scored: false
-    note: 'The top result refused our robots.txt check (Disallow: /cavacopedia), so under docs/operations/automated-reads.md it was not read. Not guessed.'
+    first_result: https://en.wikipedia.org/wiki/Milan_Puskar_Health_Right
+    path:
+    - Top result (Wikipedia article on the clinic)
+    - External links
+    - Official website
+    taps: 3
+    sites: 2
+    calls: 0
+    words: 70
+    minutes: 1.1
+  note: 'From search: the top result changed (was a cavac.at copy). Wikipedia''s robots.txt allows /wiki/. On a phone the article shows a short summary with sections folded; it gives no hours, address or how to become a patient. Open External links, then the clinic''s own site: its home page gives who qualifies and hours (8:00 AM to 4:30 PM, no days) and "Can I be a patient?" 70 words in (the official source''s marker).'
 - id: q08
   from_home:
     path:
@@ -1113,10 +1125,15 @@ journeys:
     minutes: 0.7
   from_search:
     query: low cost dentist no insurance Morgantown WV
-    first_result: https://tbiwprogram.wv.gov/media/24268/download
-    scored: false
-    note: The top result is a statewide PDF list of free or sliding fee dental clinics. It names no clinic in Monongalia County or Morgantown and has no link onward, so the key fact is not reached from
-      it. Not counted as a journey; not guessed.
+    first_result: https://www.aspendental.com/dentist/wv/morgantown/3891-university-town-centre-dr
+    path:
+    - Top result (a private dental office's page)
+    taps: 1
+    sites: 1
+    calls: 0
+    words: 236
+    minutes: 1.4
+  note: 'From search: the top result changed (was a statewide PDF list). Its robots.txt allows this page. It is one private office''s page, with an address, office hours by day (236 words in) and online booking. It gives no price for a visit without dental insurance, only a savings plan and a discount offer, so the "without insurance" part of the need is answered only in part.'
 - id: q25
   from_home:
     path:
@@ -1128,11 +1145,10 @@ journeys:
     minutes: 6.9
   from_search:
     query: eviction help free legal aid Morgantown WV
-    first_result: https://www.lawinfo.com/eviction-and-unlawful-detainer/west-virginia/grafton/?fli=fplink
+    first_result: https://www.lawinfo.com/eviction-and-unlawful-detainer/west-virginia/morgantown/?fli=fplink
     scored: false
     note: The top result refused our robots.txt check (robots.txt answered 403 with a bot check page), so under docs/operations/automated-reads.md it was not read. Not guessed.
-  note: 'From home: the link opens /money/?pick=rent. Words (1333) are measured today on that page, at 390px, up to the answer marker under More about each one. That page also shows ''Got an eviction notice
-    or a court date? Call Legal Aid of West Virginia'' with the phone in Your steps, 467 words in.'
+  note: 'From home: the link opens /money/?pick=rent. Words (1333) are measured today on that page, at 390px, up to the answer marker under More about each one. That page also shows ''Got an eviction notice or a court date? Call Legal Aid of West Virginia'' with the phone in Your steps, 452 words in (467 last week).'
 - id: q26
   from_home:
     path:
@@ -1144,10 +1160,16 @@ journeys:
     minutes: 0.8
   from_search:
     query: homeless shelter Morgantown WV tonight
-    first_result: https://wvmetronews.com/2025/09/03/plans-unclear-for-the-morgantown-monongalia-county-warming-shelter-as-fall-closes-in/
-    scored: false
-    note: The top result is a September 2025 news story on last winter's warming shelter plans. It gives no shelter that is open tonight and no link to one, so the key fact is not reached from it. Not counted
-      as a journey; not guessed.
+    first_result: https://morgantownwv.gov/708/PATHWAYS-to-Help
+    path:
+    - Top result (City of Morgantown, PATHWAYS to Help)
+    - Local Shelter & Housing Resources tab
+    taps: 2
+    sites: 1
+    calls: 0
+    words: 720
+    minutes: 4.1
+  note: 'From search: the top result changed (was a September 2025 news story). The city''s robots.txt allows /708/. The page opens with Catholic Charities'' office address and phone, with no hours and no shelter named. In the Local Shelter & Housing Resources tab, Project Rainbow''s Rainbow House is "a 22-bed shelter that operates 24/7" (720 words in), with a PO box and phone but no street address. Grace Shelter is not named.'
 - id: q29
   from_home:
     path:
@@ -1161,5 +1183,12 @@ journeys:
   from_search:
     query: senior rides to medical appointments Monongalia County WV
     first_result: https://wrc.wvu.edu/resources/basic-needs/transportation
-    scored: false
-    note: The top result refused our robots.txt check (robots.txt answered 403), so under docs/operations/automated-reads.md it was not read. Not guessed.
+    path:
+    - Top result (WVU Women's Resource Center, transportation)
+    - NewFIT
+    taps: 2
+    sites: 2
+    calls: 0
+    words: 234
+    minutes: 1.7
+  note: 'From search: scored for the first time. Its robots.txt now answers 200 and is empty (it answered 403 on 2026-11-15). It lists ModivCare and NewFIT with phone, cost and days, but how to sign up only by phone. The NewFIT link opens Mountain Line''s page, which gives the online sign-up survey and how to book (234 words in, the official source''s marker), so no call is needed.'
