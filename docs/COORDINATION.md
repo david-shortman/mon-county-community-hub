@@ -6,7 +6,7 @@ This project has three contributors: David (the human in charge), **Claude Duet*
 
 | | Best at | Typical work |
 |---|---|---|
-| **David** | Judgment, relationships, decisions, local knowledge | Sets direction, talks to real organizations, reviews only the PRs flagged `for:david` |
+| **David** | Judgment, relationships, decisions, local knowledge | Sets direction and rules, approves initiative plans, spot-checks a sample of what shipped, talks to real organizations, answers the short decision list (see "Keeping David's queue small") |
 | **Claude Duet** | Persistence and background work | Look and think in the daily loop, review, the morning brief, routing feedback, ambassador support for David, small content PRs (details below) |
 | **Claude Code** | Speed and direct power on the machine | Build and measure in the daily loop: the site, data pipelines, bulk content work, tooling, CI, the scoreboard, anything that needs a long focused session |
 
@@ -71,11 +71,12 @@ The repo is public. Before anything is committed, ask: would we be comfortable w
 | `up-next` | Ranked and ready to build. Duet adds it after look and think; Claude Code picks from the top |
 | `in-progress` | Someone has claimed it (see the claiming rule) |
 | `blocked` | Waiting on something; say what in a comment |
+| `high-stakes` | Changes what residents see about shelter, housing, food, money, benefits or health care. Merges after a second check (see "When a PR waits for David") |
 
 ## Rules of the road
 
 1. **Claim before you start.** Add `in-progress` and comment who has it (`Duet`, `Claude Code`, or `David`). Do not work on an issue someone else has claimed.
-2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. The author merges its own PR (squash merge) once the PR checklist passes, unless it falls under "When a PR waits for David" below. To merge from the command line, use `scripts/safe-merge.sh <number>`. It waits for the High stakes check on the PR's latest commit, re-reads the labels, refuses a `for:david` PR, and then squash-merges and checks `main`. Do not merge with a raw `gh api -X PUT .../pulls/<number>/merge` call: on 2026-10-31 three `for:david` PRs were merged that way before the label landed (#910). (`gh pr merge` does not work in cloud sessions.) A GitHub branch rule on `main` that requires the High stakes check is the backstop; David sets that in the repo settings.
+2. **Branches and PRs, never straight to `main`.** Duet uses `duet/<short-name>` branches, Claude Code uses `code/<short-name>`. The author merges its own PR (squash merge) once the PR checklist passes, unless it falls under "When a PR waits for David" below. To merge from the command line, use `scripts/safe-merge.sh <number>`. It waits for the High stakes check on the PR's latest commit, re-reads the labels, refuses a `for:david` PR, refuses a `high-stakes` PR until its second check passes, and then squash-merges and checks `main`. Do not merge with a raw `gh api -X PUT .../pulls/<number>/merge` call: on 2026-10-31 three `for:david` PRs were merged that way before the label landed (#910). (`gh pr merge` does not work in cloud sessions.) A GitHub branch rule on `main` that requires the High stakes check is the backstop; David sets that in the repo settings.
 3. **Link everything.** PRs say `Closes #N`. Activity log rows link to the PR or issue.
 4. **Log at the end of every session.** One row in the Notion Activity log: What, Type, Who, Date, Link. Who is `David`, `Duet`, or `Claude Code`.
 5. **Decisions get written down.** Small ones: an Activity log row with Type `Decision`. Ones that shape the repo: also a new file in [`docs/decisions/`](decisions/) (format in [`docs/decisions.md`](decisions.md)).
@@ -99,23 +100,60 @@ When a new file starts collecting edits from many PRs, treat it as a bug: open a
 
 ## When a PR waits for David
 
-We are incubating, so the default is to ship and fix forward. Bad merges get reverted, not prevented. A PR waits for David only if it:
+We are incubating, so the default is to ship and fix forward. Bad merges get reverted, not prevented. David sets the rules and checks a sample of the results. He does not approve each change. There are three kinds of PR.
 
-- Changes these rules, `CLAUDE.md`, or repo settings
+**1. Waits for David.** A PR waits for David only if it:
+
+- Changes these rules, `CLAUDE.md`, the charter, or repo settings
 - Adds or changes anything to do with secrets, money, paid services, or outside accounts
-- Deletes published content or a whole section of the site
-- Speaks for the project to a specific outside person or organization (outreach, press, partnership language)
+- Deletes a whole section of the site
+- Speaks for the project to a specific outside person or organization (outreach, press, partnership language), or in the project's own public voice (blog posts)
 - Touches anything the author is unsure is public-safe
-- Changes what residents see about shelter, crisis help, food or benefits: any page in the Help now or Get through this month door, any page with topic `housing`, `money` or `food` or that names a crisis line (988, 211, 911), the Food help pages, the crisis strip and crisis line parts, and any `resources/`, `orgs/` or `calendar/` entry with topic `housing`, `money` or `food` or that names a crisis line. The High stakes check labels these `for:david` on its own (`site/scripts/high-stakes.mjs`). One exception: taking down or hiding a wrong item does not wait. Merge that, say so in the PR, and David checks it after.
+- Changes a crisis line number (988, 211, 911 and the other numbers in the crisis strip), the crisis strip itself, or tonight's shelter status, hours or address
+- Starts a new initiative or goes beyond the scope of an approved one (see "Initiatives" below)
 
-In those cases, add the `for:david` label to the PR and say what you need in the description. Everything else, merge it.
+Add the `for:david` label and say what you need in the description.
+
+**2. High stakes: second check, then merge.** Other changes to what residents see about shelter, housing, food, money, benefits or health care follow the High stakes check's list (`site/scripts/high-stakes.mjs`): any page in the Help now or Get through this month door, any page with topic `housing`, `money` or `food`, the Food help pages, and any `resources/`, `orgs/` or `calendar/` entry with those topics. These do not wait for David. They merge when all of these pass:
+
+- The High stakes check and Claude review are green on the latest commit
+- A different session posts a confirmed second check on the PR, re-reading each changed fact on its source page ([`docs/playbook/second-check.md`](playbook/second-check.md))
+- The PR is inside an initiative David approved
+
+Label these `high-stakes`, not `for:david`.
+
+**3. Everything else: merge it.** That includes taking down or hiding a wrong item, at any stakes level. Merge it, say so in the PR, and it shows up in David's spot-check.
+
+**Spot-check.** Each Monday the retro picks 5 high-stakes PRs merged the week before, at random, and lists them in the decision list with links to the live pages. David reads them after they are live. When he finds a problem, the fix ships, and the retro proposes a tighter rule so the same kind of mistake gets caught before merge next time. If two weeks in a row turn up a serious error, high-stakes PRs go back to waiting for David until the retro finds the cause.
+
+## Keeping David's queue small
+
+David's attention is the scarcest thing in the project. These rules keep his queue to what he can clear in about an hour a week.
+
+- **A cap.** No more than 10 open `for:david` PRs at once. When 10 are open, sessions do not open new ones. They take work that does not need David, or second-check other PRs.
+- **A short list.** The Monday decision list opens with at most 10 items David can answer in 15 minutes. Everything else is folded below.
+- **A default for every item.** Each `for:david` item says what the agents recommend and what happens if David says nothing.
+- **A deadline.** If David has not answered in 14 days, an agent applies the recommended answer and comments that it did. These never happen by default: contacting anyone outside the project, spending money, outside accounts, secrets, rule changes, and items on `hold: legal`. Those close as "not now" after 30 days, and David can reopen them at any time.
+- **Calls are not David's queue.** A fact that only a phone call can confirm stays off the site, as the verification rule already says. Its issue goes on a call list for whoever makes verification calls (#165), not to David. After 30 days with no call, the issue closes and the gap goes in [`docs/discoveries/`](discoveries/).
+
+## Initiatives
+
+Work is grouped into a small number of initiatives, so David steers the direction instead of reviewing each piece.
+
+- **What one is.** A goal that takes weeks, such as "help pages for getting through the month" or "get found in search". Each has a GitHub milestone (free), an owning lane, a goal, a measure, a status (on track, at risk or blocked), and a plan.
+- **What David approves.** The plan: what pages or tools it covers, which sources it relies on, and what stays out. Once he approves it, PRs inside that scope follow the rules above. They do not wait for him one by one.
+- **Every issue and PR belongs to one initiative.** Work that fits none is either a new initiative (a `for:david` plan) or too small to need one ("Upkeep").
+- **No more than 8 active initiatives at once.** To start one, finish or pause another.
+
+The starting list is in [`docs/decisions/2026-11-24-0328-director-operating-model.md`](decisions/2026-11-24-0328-director-operating-model.md).
 
 ## How David hears from us
 
-- **Duet's morning brief** is the one daily digest: what changed overnight, open `for:david` items, what Duet plans next.
+- **The weekly initiatives review** is the main way David steers. Each Monday the retro writes one page: each active initiative's status, what moved, what is blocked and why, and at most one question for David. Then the short decision list and the spot-check sample. David should be able to read it in about 30 minutes.
+- **Duet's morning brief** is the one daily digest. It names only what cannot wait a week: items with a date in the next 7 days, and failed or blocked runs.
 - **Duet pings during the day** only for things that cannot wait.
-- **Claude Code sessions** end with a short recap in the session and an Activity log row.
-- **`for:david` issues** are the standing inbox. If it needs David, it becomes one of these.
+- **Claude Code sessions** end with a short recap in the session and an Activity log row. A blocker never lives only in a session. It goes in an issue, so David never has to open a session to find out what is stuck.
+- **`for:david` issues** are the standing inbox. If it needs David, it becomes one of these, and it follows "Keeping David's queue small".
 
 ## How Duet and Claude Code hand work to each other
 
