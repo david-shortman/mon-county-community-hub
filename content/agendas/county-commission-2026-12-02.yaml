@@ -1,0 +1,87 @@
+# Plain-language guide to one meeting's agenda (#529). Rules:
+# docs/decisions/2026-10-31-2132-agenda-guide-neutrality.md
+# How to make one: docs/process/agenda-guides.md
+slug: county-commission-2026-12-02
+body: county-commission
+meeting: Regular meeting
+date: 2026-12-02
+time: "10:00"
+place: Monongalia County Courthouse, 243 High Street, Morgantown
+watch: We did not find a live stream. The Commission posts video of past meetings under Commission Videos on its website.
+agenda_url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20December%202,%202026.pdf?t=202611241632360
+read: 2026-11-24
+items:
+  - number: "1"
+    title: Moment of Silent Meditation and Pledge to the Flag
+    kind: opening
+    line: The meeting opens with a moment of silence and the Pledge of Allegiance.
+  - number: "2"
+    title: Call to Order
+    kind: opening
+    line: The meeting is called to order.
+  - number: "3"
+    title: Consent and Approval – County Administrator
+    kind: consent
+    line: Routine business from the County Administrator approved together with one vote. The agenda lists these parts and gives no more detail.
+    parts:
+      - Erroneous Assessments
+      - Minutes
+      - Pay Vouchers
+      - Miscellaneous Bonds, etc.
+      - Budget Revisions
+      - Vacancies for Boards and Authorities
+      - Fiduciary Orders
+  - number: "4"
+    title: Introduction of new employees/personnel changes
+    kind: personnel
+    line: The Commission is introduced to new staff. The agenda lists, by name, one full-time telecommunicator for MECCA 9-1-1.
+  - number: "5"
+    title: Proclamation – River Road Volunteer Fire Department 100th Anniversary
+    kind: proclamation
+    line: A statement by the Commission recognizing the River Road Volunteer Fire Department's 100th anniversary.
+  - number: "6"
+    title: "[name] – Grants"
+    kind: presentation
+    line: An item about grants, led by a person the agenda names. The agenda gives no more detail.
+  - number: "7"
+    title: Correspondence
+    kind: correspondence
+    line: Letters the Commission has received. The agenda lists none.
+  - number: "8"
+    title: Unfinished Business
+    kind: other
+    line: Items held over from earlier meetings. The agenda lists none.
+  - number: "9a"
+    title: Consideration to approve a Maintenance and Support Agreement with Idemia Identity & Security USA, LLC for the period of January 26, 2027 through January 25, 2028 for the LiveScan System at the Monongalia County Justice Center
+    kind: vote
+    line: A vote on a one-year maintenance and support agreement with Idemia Identity & Security USA for the LiveScan System at the Monongalia County Justice Center. It would run from January 26, 2027 to January 25, 2028.
+  - number: "9b"
+    title: To consider for approval Foundant Technologies Subscription Contract Renewal for Grant Lifecycle Manager (GLM) Basic Two-year Licensed Subscription
+    kind: vote
+    line: A vote on renewing a two-year subscription with Foundant Technologies for Grant Lifecycle Manager, a grant software tool.
+  - number: "9c"
+    title: "Consideration and possible action on the Monongalia County Health Department Board of Health’s Order #2026-001, Entitled “SEPERATION FROM THE WEST VIRGINIA DEPARTMENT OF PERSONNEL AND ADOPTION OF LOCAL MERIT SYSTEM FOR THE ELIGIBLE EMPLOYEES OF THE MONONGALIA COUNTY” as approved by the Board of Health on November 19, 2026, pursuant to W. Va. Code § 16-2-11(b)(3)(D)"
+    kind: vote
+    line: Possible action on an order the Board of Health approved on November 19, 2026. The order's title is about leaving the West Virginia Department of Personnel and using a local merit system for eligible health department employees.
+  - number: "10"
+    title: Reports from Elected Officials
+    kind: report
+    line: Updates from elected officials.
+  - number: "11"
+    title: Reports from County Commissioners
+    kind: report
+    line: Updates from the commissioners.
+  - number: "12"
+    title: Comments from the public
+    kind: public-comment
+    line: Time for members of the public to speak to the Commission.
+  - number: "13"
+    title: Adjournment
+    kind: closing
+    line: The meeting ends.
+note: Under New Business, item 9, the agenda lists three items, shown here as 9a to 9c. The agenda gives the time but not the room. The Commission's page says its meetings are held at the Courthouse. On this agenda, public comment comes near the end, after reports.
+sources:
+  - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20December%202,%202026.pdf?t=202611241632360
+    checked: 2026-11-24
+  - url: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
+    checked: 2026-11-24
