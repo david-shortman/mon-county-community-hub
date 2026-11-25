@@ -9,7 +9,7 @@ time: "10:00"
 place: Monongalia County Courthouse, 243 High Street, Morgantown
 watch: We did not find a live stream. The Commission posts video of past meetings under Commission Videos on its website.
 agenda_url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20December%202,%202026.pdf?t=202611241632360
-read: 2026-11-24
+read: 2026-11-25
 items:
   - number: "1"
     title: Moment of Silent Meditation and Pledge to the Flag
@@ -34,11 +34,11 @@ items:
   - number: "4"
     title: Introduction of new employees/personnel changes
     kind: personnel
-    line: The Commission is introduced to new staff. The agenda lists, by name, one full-time telecommunicator for MECCA 9-1-1.
+    line: The Commission is introduced to new staff. The agenda lists, by name, one full-time transfer clerk for the Assessor and one full-time telecommunicator for MECCA 9-1-1.
   - number: "5"
-    title: Proclamation – River Road Volunteer Fire Department 100th Anniversary
+    title: Proclamation – Westover Volunteer Fire Department 100th Anniversary
     kind: proclamation
-    line: A statement by the Commission recognizing the River Road Volunteer Fire Department's 100th anniversary.
+    line: A statement by the Commission recognizing the Westover Volunteer Fire Department's 100th anniversary.
   - number: "6"
     title: "[name] – Grants"
     kind: presentation
@@ -63,6 +63,10 @@ items:
     title: "Consideration and possible action on the Monongalia County Health Department Board of Health’s Order #2026-001, Entitled “SEPERATION FROM THE WEST VIRGINIA DEPARTMENT OF PERSONNEL AND ADOPTION OF LOCAL MERIT SYSTEM FOR THE ELIGIBLE EMPLOYEES OF THE MONONGALIA COUNTY” as approved by the Board of Health on November 19, 2026, pursuant to W. Va. Code § 16-2-11(b)(3)(D)"
     kind: vote
     line: Possible action on an order the Board of Health approved on November 19, 2026. The order's title is about leaving the West Virginia Department of Personnel and using a local merit system for eligible health department employees.
+  - number: "9d"
+    title: To consider request by the Browns Halleck Community Association regarding funding assistance from the Community Center expenditure account in the amount of $12,000
+    kind: request
+    line: A request from the Browns Halleck Community Association for $12,000 in funding from the county's Community Center expenditure account. The Commission hears it and decides.
   - number: "10"
     title: Reports from Elected Officials
     kind: report
@@ -79,9 +83,9 @@ items:
     title: Adjournment
     kind: closing
     line: The meeting ends.
-note: Under New Business, item 9, the agenda lists three items, shown here as 9a to 9c. The agenda gives the time but not the room. The Commission's page says its meetings are held at the Courthouse. On this agenda, public comment comes near the end, after reports.
+note: The County posted an amended agenda on November 25, 2026, and this guide follows it. Under New Business, item 9, the agenda lists four items, shown here as 9a to 9d. The agenda gives the time but not the room. The Commission's page says its meetings are held at the Courthouse. On this agenda, public comment comes near the end, after reports.
 sources:
   - url: https://www.monongaliacounty.gov/document_center/Agenda/REGULAR%20MEETINGS/2026/AGENDA%20December%202,%202026.pdf?t=202611241632360
-    checked: 2026-11-24
+    checked: 2026-11-25
   - url: https://www.monongaliacounty.gov/commission/meeting_schedule/index.php
-    checked: 2026-11-24
+    checked: 2026-11-25
