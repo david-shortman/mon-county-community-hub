@@ -5,10 +5,10 @@ start_time: "10:00"
 end_time: "12:00"
 org_name: Morgantown Farmers Market
 who_it_is_for: Anyone who wants to buy local food in the colder months.
-what_to_do: The winter market runs every other Saturday, 10 a.m. to noon, indoors at the Mon County Center at Mylan Park. Check the market's schedule for the later dates.
+what_to_do: The winter market runs every other Saturday through April 10, 2027, 10 a.m. to noon, indoors at the Mon County Center at Mylan Park. Check the market's schedule for the later dates.
 url: https://www.morgantownfarmersmarket.org/markets.html
 topics: [market]
 place: 270 Mylan Park Ln, Morgantown, WV
 sources:
   - url: https://www.morgantownfarmersmarket.org/markets.html
-    checked: 2026-11-14
+    checked: 2026-11-25
