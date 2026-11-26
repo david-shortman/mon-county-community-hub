@@ -295,6 +295,15 @@ files:
     saved_copy: https://web.archive.org/web/20261121220918/https://www.starcitywv.com/wp-content/uploads/2026/10/DOC102126-10212026065924.pdf
     saved_copy_raw: https://web.archive.org/web/20261121220918id_/https://www.starcitywv.com/wp-content/uploads/2026/10/DOC102126-10212026065924.pdf
     captured: 2026-11-21
+  - url: https://www.starcitywv.com/wp-content/uploads/2026/11/October-20-2026-Council-Meeting-Minutes-signed.pdf
+    file_name: October-20-2026-Council-Meeting-Minutes-signed.pdf
+    bytes: 743725
+    sha256: daba685c356b1cd53aedb11364451e1916d28612a986572622d8af60cc7bdc3d
+    last_modified: 2026-11-19
+    read: 2026-11-26
+    saved_copy: https://web.archive.org/web/20261126085242/https://www.starcitywv.com/wp-content/uploads/2026/11/October-20-2026-Council-Meeting-Minutes-signed.pdf
+    saved_copy_raw: https://web.archive.org/web/20261126085242id_/https://www.starcitywv.com/wp-content/uploads/2026/11/October-20-2026-Council-Meeting-Minutes-signed.pdf
+    captured: 2026-11-26
   - url: https://www.westoverwv.org/_files/ugd/d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf
     file_name: d2114f_2a62a2f3faff47e4b511dff8e8e48a52.pdf
     bytes: 263747
