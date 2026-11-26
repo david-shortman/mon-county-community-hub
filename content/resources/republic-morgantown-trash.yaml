@@ -15,3 +15,6 @@ sources:
   - url: https://www.monongaliacountyswa.com/recycling
     name: Monongalia County Solid Waste Authority
     checked: 2026-11-15
+  - url: https://www.republicservices.com/cms/documents/municipality/Morgantown/Morgantown-Trash-Day-Checklist.pdf
+    name: Republic Services Morgantown trash day checklist
+    checked: 2026-11-26
