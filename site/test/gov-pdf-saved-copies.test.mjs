@@ -97,3 +97,18 @@ test('the change report is empty when nothing changed, and names records when so
   assert.match(report, /no record cites it now/);
   assert.doesNotMatch(report, /—/);
 });
+
+test('checkReport says where the new entry is when the check proposes it (#2121)', async () => {
+  const { checkReport } = await import('../scripts/save-pdf-copies.mjs');
+  const url = 'https://example.gov/agenda.pdf';
+  const rows = [{ kind: 'changed', url, read: '2026-11-25', saved_copy: `https://web.archive.org/web/1/${url}`, newCopy: `https://web.archive.org/web/2/${url}` }];
+  const cited = new Map([[url, ['content/agendas/x.yaml']]]);
+  const proposed = checkReport(rows, cited, '2026-11-27', { proposed: true });
+  assert.match(proposed, /Record new saved copies/);
+  assert.match(proposed, /reports the file again each day/);
+  assert.doesNotMatch(proposed, /wait for this check/);
+  const plain = checkReport(rows, cited, '2026-11-27');
+  assert.match(plain, /run --only <url>/);
+  assert.doesNotMatch(plain, /wait for this check/);
+  assert.doesNotMatch(proposed + plain, /—/);
+});
