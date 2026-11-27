@@ -23,6 +23,9 @@
 //   node scripts/save-pdf-copies.mjs check           has any other saved PDF changed
 //                                                    or gone? Saves the new file and
 //                                                    writes a report (CHECK_REPORT)
+//   node scripts/save-pdf-copies.mjs check --propose also puts each new file's
+//                                                    verified entry in the list, so
+//                                                    the workflow can show it as a diff
 //
 // Free services only: Save Page Now and the CDX lookup. We wait between
 // requests to stay well inside the Internet Archive's limits, and back off on
@@ -251,18 +254,25 @@ async function watch() {
 // still the one we saved? A file can be replaced at the same address (an
 // amended agenda, a new fee schedule), or taken down. A changed file gets a
 // new capture, so both versions are kept, but the list keeps the copy the
-// record was read from: a person should re-read the record, then run
-// `run --only <url>` to record the new file. Writes nothing to the repo.
+// record was read from: a person should re-read the record, then record the
+// new file. With --propose (the workflow uses it), the new file's entry is
+// written to the list when its capture matched the live file byte for byte;
+// the workflow turns that change into the "Record new saved copies" issue, and
+// a session applies it once the record matches the new file (#2121). Without
+// --propose it writes nothing to the repo.
 // The report goes to stdout, the Actions summary, and the CHECK_REPORT file
 // (empty when nothing changed), which the workflow turns into an issue.
-export function checkReport(rows, cited, date = today()) {
+export function checkReport(rows, cited, date = today(), { proposed = false } = {}) {
   if (!rows.length) return '';
   const by = (url) => (cited.get(url) ?? []).map((f) => `\`${f}\``).join(', ') || 'no record cites it now';
   const out = [`The daily check of saved PDFs (${date}, #2079) found ${rows.length} that changed or went missing since we saved them. The saved copy we recorded is still the file each record was read from.`, ''];
   const changed = rows.filter((r) => r.kind === 'changed');
   const gone = rows.filter((r) => r.kind === 'gone');
   if (changed.length) {
-    out.push('## Changed at the same address', '', 'Re-read each record against the new file and fix anything that changed. Then run `node scripts/save-pdf-copies.mjs run --only <url>` in `site/` (or wait for this check) to record the new file.', '');
+    const record = proposed
+      ? 'Then apply the entry for the new file from the "Record new saved copies" issue, in the same PR or after it. That issue has it when the new capture matched the live file.'
+      : 'Then run `node scripts/save-pdf-copies.mjs run --only <url>` in `site/` on a machine that can reach web.archive.org to record the new file.';
+    out.push('## Changed at the same address', '', `Re-read each record against the new file and fix anything that changed. ${record} Until the entry is recorded, this check reports the file again each day.`, '');
     for (const r of changed) out.push(`- ${r.url}\n  - Read ${r.read}, saved copy: ${r.saved_copy}\n  - New file: ${r.newCopy ? r.newCopy : `not saved (${r.newError})`}\n  - Cited by: ${by(r.url)}`);
     out.push('');
   }
@@ -274,7 +284,8 @@ export function checkReport(rows, cited, date = today()) {
   return out.join('\n');
 }
 
-async function check() {
+async function check(args = []) {
+  const propose = args.includes('--propose');
   const list = readList();
   const cited = citedPdfs(CONTENT_DIR);
   const rows = [];
@@ -292,8 +303,11 @@ async function check() {
     console.log(`NEW   ${f.url}`);
     const result = await saveOne(f.url);
     rows.push({ ...base, kind: 'changed', newCopy: result.entry ? captureUrl(result.ts, result.entry.archived_url ?? f.url) : null, newError: result.not_saved?.reason });
+    // Only a verified capture replaces the entry; a failed save keeps the old one.
+    if (propose && result.entry) upsert(list, f.url, result);
   }
-  const report = checkReport(rows, cited);
+  if (propose) writeList(list);
+  const report = checkReport(rows, cited, today(), { proposed: propose });
   const summary = `## Saved PDFs check\n\n${same} unchanged, ${rows.length} changed or gone, ${skipped} not checked this run.\n\n${report}`;
   console.log(summary);
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary + '\n');
@@ -314,7 +328,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const [cmd = 'list', ...args] = process.argv.slice(2);
   if (cmd === 'run') await run(args);
   else if (cmd === 'watch') await watch();
-  else if (cmd === 'check') await check();
+  else if (cmd === 'check') await check(args);
   else if (cmd === 'list') listCmd();
   else { console.error(`Unknown command: ${cmd}. Use list, run, watch or check.`); process.exitCode = 2; }
 }
