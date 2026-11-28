@@ -20,6 +20,12 @@ const gfe = [
   { url: 'https://www.cms.gov/medical-bill-rights/help/guides/good-faith-estimate', checked: '2026-11-02', name: 'CMS, Medical bill rights: good faith estimate' },
   { url: 'https://www.cms.gov/medical-bill-rights/help/dispute-a-bill', checked: '2026-11-02', name: 'CMS, Medical bill rights: dispute a bill' },
 ];
+// Who WVCHIP covers and its income limits (#1534, need 2 gap), read 2026-11-14.
+const chip = [
+  { url: 'https://chip.wv.gov/eligibility', checked: '2026-11-14', name: 'WVCHIP, Eligibility' },
+  { url: 'https://chip.wv.gov/co-payment-information', checked: '2026-11-14', name: 'WVCHIP, Co-Payment Information' },
+  { url: 'https://chip.wv.gov/invoicing-monthly-premiums-resumed-december-2025', checked: '2026-11-14', name: 'WVCHIP, Invoicing for monthly premiums' },
+];
 ---
 <Base help title="No insurance or can't afford a doctor in Morgantown and Mon County" description="Health care with no insurance in Mon County, WV: the free Health Right clinic, sliding fee care, applying for Medicaid, free sign-up help, and help with hospital bills.">
   <h1>No insurance, or can't afford a doctor?</h1>
@@ -36,6 +42,35 @@ const gfe = [
   <h2>Get health coverage</h2>
   {r('apply-for-medicaid-wv') && <ResourceCard r={r('apply-for-medicaid-wv')} />}
   {r('wv-navigator') && <ResourceCard r={r('wv-navigator')} />}
+  <h3 id="wvchip">Health coverage for kids: who WVCHIP covers</h3>
+  <p>WVCHIP is West Virginia's health coverage for children. A child can get it if the child:</p>
+  <ul>
+    <li>lives in West Virginia and is under 19,</li>
+    <li>can't get West Virginia Medicaid,</li>
+    <li>is a U.S. citizen or qualified immigrant (a child who is not a citizen needs proof of status), and</li>
+    <li>is in a family whose income fits the limits below.</li>
+  </ul>
+  <p>Family size is the number of people on your federal tax return. Income is your taxable income before taxes. Apply the same way as for Medicaid, above.</p>
+  <div class="table-scroll" role="region" aria-labelledby="wvchip-income-cap" tabindex="0"><table>
+    <caption id="wvchip-income-cap">WVCHIP: most a family can earn each month before taxes, by plan</caption>
+    <thead><tr><th scope="col">Family size</th><th scope="col">Gold</th><th scope="col">Blue</th><th scope="col">Premium</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">2</th><td>$2,705</td><td>$3,806</td><td>$5,410</td></tr>
+      <tr><th scope="row">3</th><td>$3,415</td><td>$4,804</td><td>$6,830</td></tr>
+      <tr><th scope="row">4</th><td>$4,125</td><td>$5,803</td><td>$8,250</td></tr>
+      <tr><th scope="row">5</th><td>$4,835</td><td>$6,802</td><td>$9,670</td></tr>
+      <tr><th scope="row">6</th><td>$5,545</td><td>$7,800</td><td>$11,090</td></tr>
+      <tr><th scope="row">7</th><td>$6,255</td><td>$8,799</td><td>$12,510</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>Gold</strong> has copays only for some office visits and brand name medicines.</li>
+    <li><strong>Blue</strong> adds copays for hospital care and emergency room visits.</li>
+    <li><strong>Premium</strong> adds copays for some dental care, and a monthly payment: $35 a month for one child, or $71 a month for two or more. WVCHIP says coverage will not be closed for a late or missed payment.</li>
+  </ul>
+  <p class="note">Children in a federally recognized American Indian or Alaska Native tribe pay no copays. A bigger family, or a question about these limits? Call the WVCHIP helpline at <a href="tel:18779822447">1-877-982-2447</a>. Over the limit? WV Navigator, above, helps you find other coverage.</p>
+  <SourceLine sources={chip} about="who WVCHIP covers, its income limits, copays and premiums" />
+
   {open && <p>Marketplace plans for 2027: you can sign up at HealthCare.gov from November 1 to January 15. See <a href={`${base}/calendar/`}>Deadlines and dates</a> for the last day to sign up for coverage that starts January 1.</p>}
   <DateChip slug="marketplace-open-enrollment-2027" label="Marketplace sign-up" />
   <DateChip slug="marketplace-deadline-jan-1-coverage-2027" label="Last day for coverage that starts January 1" />

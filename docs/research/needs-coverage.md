@@ -41,3 +41,7 @@ These groups already had a record in `content/orgs/`, checked against their own 
 ## How to keep this current
 
 Re-check a need's `site_coverage` when a page for it is added or changed, and update its `checked` date. `npm run check-content` fails if a `get_help` link points at a page that does not exist.
+
+## Wave 16 updates (November 14, 2026, #529)
+
+- Paying for health care and medicine (rank 2): who WVCHIP covers, its monthly income limits for family sizes 2 to 7, copays by plan and the premium amounts are now on `/no-insurance/#wvchip`, from `chip.wv.gov` read November 14, 2026. This was the need's last listed gap. Still good.
