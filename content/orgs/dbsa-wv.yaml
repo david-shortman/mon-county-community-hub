@@ -1,0 +1,15 @@
+name: Depression and Bipolar Support Alliance of WV (DBSA WV)
+slug: dbsa-wv
+kind: nonprofit
+website: https://dbsawv.org/
+phone: "304-241-1862"
+summary: A statewide nonprofit with its office in the Mountaineer Mall in Morgantown. It runs free, peer-led support groups for people living with mood disorders, like depression and bipolar disorder, and for their family and friends.
+topics: [health]
+area: statewide
+sources:
+  - url: https://dbsawv.org/about-us/
+    checked: 2026-11-28
+    quote: "5000 Greenbag Road in Morgantown (in Mountaineer Mall by the ramps)"
+  - url: https://dbsawv.org/dbsa-wv-support-group-meetings/
+    checked: 2026-11-28
+    quote: "provides free peer-led support, trusted resources, and wellness tools for individuals living with mood disorders"

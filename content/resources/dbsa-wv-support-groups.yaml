@@ -1,0 +1,34 @@
+title: Peer support groups for depression and bipolar disorder (DBSA WV)
+slug: dbsa-wv-support-groups
+org: dbsa-wv
+topics: [health]
+who_it_is_for: People living with depression, bipolar disorder or another mood disorder, and their family and friends. Peers lead the groups, not counselors.
+what_to_do: Call the office to ask about a group, or for the Zoom link. You do not have to live in Morgantown to join online.
+contact:
+  phone: "304-241-1862"
+  email: dbsawvmountaineer@gmail.com
+  url: https://dbsawv.org/dbsa-wv-support-group-meetings/
+  url_label: Group times
+  place: 5000 Greenbag Road, Suite E-7, Morgantown, WV 26501
+cost: free
+hours: Groups meet on set days, listed below. The office is open Tuesday to Friday, 10 a.m. to 3 p.m., and Saturday, 10 a.m. to 2 p.m.
+access: The office is inside the Mountaineer Mall, by the ramps.
+meetings:
+  - name: DBSA Mountaineer group (in person)
+    when: 2nd and 4th Wednesday of the month, 2 to 3 p.m., at the DBSA WV office in the Mountaineer Mall.
+  - name: Expressive Arts support group (in person)
+    when: Every Saturday, 2 to 3:30 p.m., at the DBSA WV office in the Mountaineer Mall.
+  - name: Morgantown online group (Zoom)
+    when: 1st and 3rd Wednesday of the month, 6:30 to 7:30 p.m.
+options:
+  - "In person at the Mountaineer Mall office: 2nd and 4th Wednesday, 2 to 3 p.m."
+  - "Expressive Arts, same office: every Saturday, 2 to 3:30 p.m."
+  - "Online on Zoom: 1st and 3rd Wednesday, 6:30 to 7:30 p.m."
+not_posted: [get_in]
+sources:
+  - url: https://dbsawv.org/dbsa-wv-support-group-meetings/
+    checked: 2026-11-28
+    quote: "Meeting Day: 2nd and 4th Wednesday of the month Meeting Time: 2:00pm to 3:00pm"
+  - url: https://dbsawv.org/about-us/
+    checked: 2026-11-28
+    quote: "Tuesday through Friday, 10am until 3pm"
