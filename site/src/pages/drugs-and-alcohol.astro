@@ -8,7 +8,7 @@ import { fixFormUrl } from '../lib/group-requests.mjs';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
 import { loadDir } from '../lib/content.mjs';
-export const page = { door: "care", topic: "health", label: "Drugs or alcohol help", summary: "An overdose, free Narcan, detox and treatment, help lines" };
+export const page = { door: "care", topic: "health", label: "Drugs or alcohol help", summary: "An overdose, free Narcan, detox and treatment, AA and support meetings, help lines" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = loadDir('resources');
 const r = (slug) => all.find((e) => e.slug === slug);
@@ -48,6 +48,11 @@ const lawSources = [
   <h2>Help lines, any hour</h2>
   {r('help4wv') && <ResourceCard r={r('help4wv')} sms={r('help4wv').contact.text} smsLabel="Text HELP4WV" />}
   {r('samhsa-national-helpline') && <ResourceCard r={r('samhsa-national-helpline')} />}
+
+  <h2 id="meetings">Support meetings</h2>
+  <p>Support meetings are groups of people who meet to help each other. A.A. says you can find a meeting and just show up.</p>
+  {r('aa-meetings-district-16') && <ResourceCard r={r('aa-meetings-district-16')} />}
+  {r('al-anon-meetings') && <ResourceCard r={r('al-anon-meetings')} />}
 
   <h2>Detox and treatment in Mon County</h2>
   {r('valley-substance-use-treatment') && <ResourceCard r={r('valley-substance-use-treatment')} />}

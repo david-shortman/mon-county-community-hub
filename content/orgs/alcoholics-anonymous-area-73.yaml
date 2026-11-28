@@ -1,0 +1,12 @@
+name: Alcoholics Anonymous, Area 73 (West Virginia)
+slug: alcoholics-anonymous-area-73
+kind: community-group
+website: https://www.aawv.org/
+summary: The West Virginia service area of Alcoholics Anonymous, a fellowship of people who meet to help each other stop drinking. Its District 16 covers Monongalia, Preston, Taylor and Tucker counties.
+topics: [health]
+area: statewide
+sources:
+  - url: https://www.aawv.org/
+    checked: 2026-11-14
+  - url: https://www.aawv.org/meetings
+    checked: 2026-11-14
