@@ -133,6 +133,8 @@ const fullTitle = !title ? SITE_NAME : `${title} | ${SITE_NAME}`.length <= 60 ? 
     <meta name="theme-color" content="#f6f1e6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#171613" media="(prefers-color-scheme: dark)" />
     {crisis && <meta name="referrer" content="no-referrer" />}
+    {/* Search engine ownership checks (#89). Public by design; removing one un-verifies the site. */}
+    <meta name="google-site-verification" content="DaiaatVfGF8oJp4CiAwd_hAqiVcdfEJiZPBo5Qs68d8" />
     {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
     {!noindex && alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     <link rel="alternate" type="application/rss+xml" title="Everything Morgantown blog (RSS)" href={`${base}/blog/feed.xml`} />
