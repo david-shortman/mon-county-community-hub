@@ -1,0 +1,15 @@
+name: PCs for People
+slug: pcs-for-people
+kind: nonprofit
+website: https://www.pcsforpeople.org/
+phone: "877-450-8585"
+summary: A national nonprofit that refurbishes donated computers and sells them at low cost to people and nonprofits with low income. It sells online and ships within the U.S. It has no store in West Virginia.
+topics: [work]
+area: national
+sources:
+  - url: https://www.pcsforpeople.org/faqs/
+    checked: 2026-11-14
+    quote: "PCs for People is a national nonprofit working to get low-cost quality computers and internet into the homes of individuals, families, and nonprofits with low income."
+  - url: https://www.pcsforpeople.org/get-tech/
+    checked: 2026-11-14
+    quote: "We currently have retail locations in six states (and growing!); Colorado, Illinois, Maryland, Minnesota, Missouri, and Ohio."
