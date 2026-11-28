@@ -14,33 +14,36 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const tel = (p) => `tel:${p.replace(/[^0-9]/g, '')}`;
 const fmt = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 // One line per contact: what, who, phone, and the source with its checked date.
-const line = (what, slug, note = '') => {
+// `src` picks the record's source that states this line (for example the
+// town's own page naming its water utility). Without it, the first source.
+const line = (what, slug, note = '', src = '') => {
   const e = r(slug);
   if (!e) return null;
-  const s = e.sources[0];
+  const s = (src && e.sources.find((x) => x.url === src)) || e.sources[0];
+  if (src && s.url !== src) throw new Error(`who-serves-me: ${slug} has no source ${src}`);
   return { what, title: e.title, phone: e.contact.phone, url: e.contact.url, note, src: s.url, checked: fmt(String(s.checked).slice(0, 10)) };
 };
 const places = [
   { id: 'morgantown', name: 'City of Morgantown', lines: [
     line('Police', 'morgantown-police-non-emergency', 'Then press 0.'),
     line('City streets', 'morgantown-streets'),
-    line('Water and sewer', 'mub-start-service'),
-    line('Trash', 'mon-swa-ask-about-trash', 'We could not confirm how to start city trash pickup yet. The Solid Waste Authority can tell you who serves your address.'),
+    line('Water and sewer', 'mub-start-service', '', 'https://mub.org/'),
+    line('Trash', 'republic-morgantown-trash', 'Look up your pickup day by address on Republic Services\' site. We could not confirm how to start city trash pickup yet.'),
   ] },
   { id: 'westover', name: 'City of Westover', lines: [
     line('Police', 'westover-police-non-emergency'),
     line('Trash and recycling', 'westover-trash'),
-    line('Water and sewer', 'mub-start-service'),
+    line('Water and sewer', 'mub-start-service', '', 'https://www.westoverwv.org/utilities'),
   ] },
   { id: 'star-city', name: 'Town of Star City', lines: [
-    line('Police', 'mecca-non-emergency', 'Star City has no dispatch center of its own and sends calls to this line.'),
+    line('Police', 'mecca-non-emergency', 'Star City has no dispatch center of its own and sends calls to this line.', 'https://www.starcitywv.com/'),
     line('Trash', 'star-city-trash'),
-    line('Water and sewer', 'mub-start-service'),
+    line('Water and sewer', 'mub-start-service', '', 'https://www.starcitywv.com/'),
   ] },
   { id: 'granville', name: 'Town of Granville', lines: [
     line('Police', 'granville-police'),
     line('Trash', 'granville-trash'),
-    line('Water and sewer', 'mub-start-service'),
+    line('Water and sewer', 'granville-town-office', 'We could not confirm who provides water and sewer here. Ask the town office.'),
   ] },
   { id: 'blacksville', name: 'Town of Blacksville', lines: [
     line('Town office', 'blacksville-town-office', 'We could not confirm who provides water or police here. Ask the town office.'),
@@ -96,5 +99,5 @@ const limits = r('morgantown-city-limits-check');
 
   <p>Starting service after a move? See <a href={`${base}/moving-here/`}>Moving here: start power, water, gas and trash</a>.</p>
 
-  <p class="meta">Sources checked October 30, 2026. Something out of date or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
+  <p class="meta">Sources checked October 30 to November 15, 2026. Something out of date or missing? <a href={fixFormUrl({ page: Astro.url.pathname })}>Tell us</a>.</p>
 </Base>
