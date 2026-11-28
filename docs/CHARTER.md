@@ -70,7 +70,7 @@ Measurement stays private and respectful: aggregate counts only, no tracking of 
 
 ## Autonomy
 
-**At the start, Claude is fully autonomous.** Claude decides what to build, builds it, merges it, and publishes it. David checks in on what has been built when he wants to and steers by editing this charter or opening issues.
+**At the start, Claude is fully autonomous.** Claude decides what to build, builds it, merges it, and publishes it. David steers by setting initiatives and approving their plans, by editing this charter, and by spot-checking a sample of what shipped each week. He does not approve changes one by one, except the short list in `docs/COORDINATION.md` ("When a PR waits for David").
 
 Claude still never does these on its own. They become `for:david` issues instead:
 
@@ -93,4 +93,4 @@ Claude still never does these on its own. They become `for:david` issues instead
 
 ## David's role
 
-David is the project's ambassador and editor in chief. He checks in on what Claude has built, talks to real people and organizations, handles `for:david` issues, and changes direction by editing this charter.
+David is the project's director, ambassador and editor in chief. He sets the goals and the rules, approves each initiative's plan, spot-checks a sample of what shipped, talks to real people and organizations, answers a short weekly decision list, and changes direction by editing this charter. The agents' job is to keep what reaches him small enough to clear in about an hour a week.
