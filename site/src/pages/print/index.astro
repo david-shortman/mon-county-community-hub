@@ -9,6 +9,7 @@ export const page = { door: "about", label: "Printouts", summary: "Printable she
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const all = printSheets();
 // Each door's sheet, with its topic sheets under it.
+const groups = all.filter((s) => s.kind === 'group').map((g) => ({ ...g, n: g.list.length }));
 const sheets = all.filter((s) => s.kind === 'door').map((d) => ({ ...d, n: d.list.length, sub: all.filter((t) => t.kind === 'topic' && t.door === d.slug).map((t) => ({ ...t, n: t.list.length })) }));
 ---
 <Base title="Printouts: sheets and cards for Mon County help" description="Free printable sheets of places and phone numbers in Morgantown and Monongalia County, made from our listings every morning, plus wallet cards and posters with a QR code.">
@@ -24,6 +25,12 @@ const sheets = all.filter((s) => s.kind === 'door').map((d) => ({ ...d, n: d.lis
         {s.sub.length > 0 && <ul>{s.sub.map((t) => <li><a href={`${base}/print/${t.slug}/`}>{t.name}</a> <span class="hint">{t.n} places and programs</span></li>)}</ul>}
       </li>
     ))}
+  </ul>
+
+  <h2>Sheets for older adults and teens</h2>
+  <p>Places and programs for one group of people, from the same listings. Help with bills, food and rent is on the Get through this month sheet above.</p>
+  <ul class="topic-list">
+    {groups.map((g) => <li><a href={`${base}/print/${g.slug}/`}>{g.name}</a><span class="hint">{g.n} places and programs</span></li>)}
   </ul>
 
   <h2>Town sheets</h2>
