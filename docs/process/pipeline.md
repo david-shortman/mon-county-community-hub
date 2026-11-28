@@ -200,6 +200,8 @@ One thing to verify now that PR #32 is merged: GitHub does not start other workf
 
 ### 6. Ship
 
+**Time-sensitive PRs say their date** (proposed 2026-11-16). A PR whose value ends on a date starts its title with "By Mon DD:" (for example "By Nov 19: Legal Aid online applications are closed"). The weekly decision list puts these first, and Duet's morning brief names them every day until they merge or the date passes. In week 3, the senior meal sign-up merged on the day it closed (#1757), and the Legal Aid closure fix (#1824) helps only before November 19.
+
 The author merges with a squash merge once the review passes and the PR checklist is done. The build log entry already in the PR records the metric and the date to check it.
 
 **The build log is one file per entry (decided by David, 2026-10-28).** Entries live in [`docs/build-log/`](../build-log/) as `YYYY-MM-DD-HHMM-<short-name>.md` (UTC time), so parallel sessions never edit the same file. Each file has one `# YYYY-MM-DD: Title` heading and the same four bullets as before: Considered, Chose, Shipped, Scoreboard. Newest first is reverse file name order. The time keeps several entries on one day in order. [`docs/build-log.md`](../build-log.md) stays as a short pointer so old links still work.
