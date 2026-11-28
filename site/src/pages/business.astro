@@ -6,7 +6,9 @@
 // in their own PRs because they state fees and taxes (David reviews).
 // Not here yet: SCORE and WVU LaunchLab (their pages could not be read, see #638).
 // The state funding list is fact records in content/facts/business/ (#122),
-// re-read 2026-11-07.
+// re-read 2026-11-07. Small loans (SBA microloans, Partner Community Capital,
+// the county development authority) added for #1985, sprint wave 20; research
+// in docs/research/2026-11-15-small-business-money-home-hiring.md.
 import Base from '../layouts/Base.astro';
 import ResourceCard from '../components/ResourceCard.astro';
 import SourceLine from '../components/SourceLine.astro';
@@ -14,7 +16,7 @@ import { resource, org } from '../lib/content.mjs';
 import Fact from '../components/Fact.astro';
 import { factsFor } from '../lib/facts.mjs';
 import { fixFormUrl } from '../lib/group-requests.mjs';
-export const page = { door: "family", topic: "work", label: "Start or grow a business", summary: "Free business coaching and classes, state loan and investment programs, help with a business plan, and local business groups" };
+export const page = { door: "family", topic: "work", label: "Start or grow a business", summary: "Free business coaching and classes, small loans, state loan and investment programs, help with a business plan, and local business groups" };
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const r = (slug) => resource(slug);
 const fact = factsFor('business');
@@ -27,6 +29,7 @@ const partnership = org('morgantown-area-partnership');
 
   <h2>Where to start</h2>
   <p>The City of Morgantown has its own checklist for opening a business inside city limits: <a href="https://www.morgantownwv.gov/247/Steps-to-Starting-Your-Business">Steps to Starting Your Business</a>. If your business is in another town or outside any town, the rules are different, so ask that town or the county.</p>
+  <p>Running it from home? See <a href={`${base}/start-a-business/#from-home`}>Running a business from your home</a>. Hiring? See <a href={`${base}/start-a-business/#hiring`}>Hiring your first worker</a>.</p>
 
   <h2>Free one-on-one coaching</h2>
   {r('wv-sbdc-business-coaching') && <ResourceCard r={r('wv-sbdc-business-coaching')} />}
@@ -36,6 +39,15 @@ const partnership = org('morgantown-area-partnership');
 
   <h2>Federal help: loans, counseling and contracting</h2>
   {r('sba-west-virginia-district-office') && <ResourceCard r={r('sba-west-virginia-district-office')} />}
+
+  <h2 id="loans">Small loans to start or grow</h2>
+  <Fact f={fact('funding-sba-no-grants')} about="SBA and grants" />
+  <ul>
+    <Fact tag="li" f={fact('funding-sba-microloan')} about="SBA microloans" />
+    <Fact tag="li" f={fact('funding-pcap')} about="Partner Community Capital" />
+    <Fact tag="li" f={fact('funding-mcda')} about="the Monongalia County Development Authority" />
+  </ul>
+  <p>The free SBDC coaches above also meet with owners about funding.</p>
 
   <h2 id="money">State loans, investment and grant help</h2>
   <p>The West Virginia Secretary of State keeps a list of programs that offer money or funding help to businesses. Some of them, as that list describes them:</p>
