@@ -496,3 +496,16 @@ questions:
     question: Where can I park in downtown Morgantown, and how do I pay a ticket?
     who: A new resident who got a parking ticket downtown
     search: parking ticket Morgantown WV
+  # New needs in the needs register (#1908, #1909, sprint wave 18, #529)
+  - id: q77
+    topic: moving
+    kind: everyday
+    question: How do I get internet at home if I can't afford it?
+    who: A parent in Westover whose phone data runs out each month
+    search: low cost internet Morgantown WV
+  - id: q78
+    topic: work
+    kind: everyday
+    question: Where can I finish my high school diploma or get help with reading as an adult?
+    who: An adult in Star City who left high school without a diploma
+    search: GED classes Morgantown WV

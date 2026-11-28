@@ -55,3 +55,7 @@ Yes, a "my child is age X" path could tie these together: every step already has
 ## Needs register candidate
 
 Not enough local evidence gathered in this pass to rank a need. The adult literacy figures in `docs/playbook/audience-facts.md` (about 16% of adults at the lowest reading level) support a future "adult skills" need.
+
+## Needs register, November 14, 2026
+
+Added as `content/needs/adult-skills.yaml` (#1909, sprint wave 18, #529), rank 13 of 14, score 9 of 12. School results were scored and not added as a separate need; the reasons are in `docs/research/life-areas-coverage-map.md` ("Getting online and learning needs").

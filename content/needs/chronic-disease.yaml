@@ -38,8 +38,8 @@ gaps:
   - Free classes, screenings and places to be active are spread across many groups.
   - Chronic disease management was on the health department's list of the hardest care to get.
 topics: [health]
-rank: 12
-rank_why: "Score 8 of 12: severity 2, reach 3, agreement 2, room to help 1 (the site can point to programs, but this is mostly ongoing medical care)."
+rank: 14
+rank_why: "Score 8 of 12: severity 2, reach 3, agreement 2, room to help 1 (the site can point to programs, but this is mostly ongoing medical care). Moved from 12 to 14 on November 14, 2026, when getting online (score 10) and adult skills (score 9) were added above it."
 issues: [1256]
 get_help:
   - path: /diabetes-and-weight/
