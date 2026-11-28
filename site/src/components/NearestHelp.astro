@@ -1,0 +1,49 @@
+---
+// "Nearest help" on a town page (#1814): the closest food pantry, clinic and
+// state benefits office on our checked list, how far each is in a straight
+// line, and the bus that gets there. Logic and data: src/lib/nearest-help.mjs
+// and content/towns/nearest-help.yaml. Plain HTML, no script.
+import SourceLine from './SourceLine.astro';
+import { nearestFor, NEAREST, PLACES_CHECKED } from '../lib/nearest-help.mjs';
+import { pdfPage } from '../lib/pdf-pages.mjs';
+import { resource, telHref } from '../lib/content.mjs';
+const { slug, name } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const rows = nearestFor(slug);
+const routeSources = pdfPage('mountain-line-routes').sources ?? [];
+const busSources = (bus) => bus.legs.map((l) => routeSources.find((s) => s.url === l.url)).filter(Boolean);
+const METHOD = [
+  { url: 'https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2024_Gazetteer/2024_gaz_place_54.txt', checked: PLACES_CHECKED, name: `U.S. Census Bureau, the center point of ${name}` },
+  { url: 'https://geocoding.geo.census.gov/geocoder/', checked: NEAREST.checked, name: 'U.S. Census Bureau Geocoder, where each address is' },
+];
+const r211 = resource('wv-211');
+const offAt = (l, to) => (to === 'Downtown' && l.off !== 'Downtown' ? `${l.off}, downtown` : l.off);
+---
+{rows.length > 0 && (
+  <section class="nearest" aria-labelledby="nearest-help">
+    <h2 id="nearest-help">Nearest help</h2>
+    <p>The closest place on our checked list for each kind of help. Miles are in a straight line from the middle of {name}. Driving is longer, often much longer on hill roads.</p>
+    <ul class="serve">
+      {rows.map((r) => (
+        <li>
+          <strong>{r.label}:</strong>{' '}{r.provider.name}, <span translate="no">{r.provider.address}</span>. {r.far.text[0].toUpperCase() + r.far.text.slice(1)} in a straight line.
+          {' '}{r.provider.when}{' '}Phone: <a href={telHref(r.provider.phone)}>{r.provider.phone}</a>.
+          {r.bus && (
+            <span class="nh-bus">
+              {' '}<strong>By bus:</strong>{' '}
+              {r.bus.legs.map((l, i) => (
+                <>{i > 0 && ', then change to '}<a href={l.url}>{l.route}</a>{i === 0 && ` from ${l.on}`} to {i === r.bus.legs.length - 1 ? offAt(l, r.bus.to) : l.off}</>
+              ))}.
+              {r.bus.legs.length > 1 && ' Buses do not wait for each other.'}
+            </span>
+          )}
+          {r.noBus && ' We could not confirm a bus that stops near this address.'}
+          <SourceLine sources={[...r.provider.sources, ...(r.bus ? busSources(r.bus) : [])]} org={r.provider.org} about={`${r.label.toLowerCase()} nearest ${name}`} />
+        </li>
+      ))}
+    </ul>
+    <p>Closer places may be open that we could not confirm on their own pages. To ask what is open near you, call <a href="tel:211">211</a> or text your ZIP code to <a href="sms:898211">898-211</a>, any hour. Bus times and other days: <a href={`${base}/bus-routes/#plan`}>plan a trip by bus</a>.</p>
+    <SourceLine sources={r211.sources} org={r211.org} about={`211, from ${name}`} />
+    <SourceLine sources={METHOD} about={`distances from ${name}`}>{' '}Distances use the Census center point of {name} and the address as the Census Geocoder places it.</SourceLine>
+  </section>
+)}
