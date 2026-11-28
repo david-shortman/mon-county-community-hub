@@ -3,8 +3,8 @@
 #
 # This is a watch list, not a listing. Nothing here shows on the site, and the
 # check never changes the site. A person reads the source and updates
-# content/tonight/warming-shelter.yaml (once #862 merges) or the dated line on
-# /stay-tonight/ in a PR. Shelter PRs wait for David.
+# content/tonight/warming-shelter.yaml in a PR. That one file feeds both
+# /tonight/ and the warming shelter box on /stay-tonight/ (#219). Shelter PRs wait for David.
 #
 # Fields are the same as content/watch/food.yaml, plus:
 #   season  month-day range, Morgantown dates. Outside it the list is skipped.
@@ -30,8 +30,8 @@ todo: >-
   What to do: open each page and read it. If it says the warming shelter is
   open, or gives a date, place, hours or rules, confirm it with a same-day
   source (the operator, 211, or a same-day news report), then update
-  content/tonight/warming-shelter.yaml (once #862 merges) or the dated warming
-  shelter line on /stay-tonight/ in a PR with the source and a new checked date.
+  content/tonight/warming-shelter.yaml in a PR with the source and a new
+  checked date. That file feeds both /tonight/ and /stay-tonight/.
   Shelter PRs wait for David. If nothing about the shelter changed, close this
   issue. Never copy text from this issue onto the site, and never mark the
   shelter open from a news story alone that is not from today.
@@ -73,3 +73,15 @@ entries:
     url: https://www.ccwva.org/programs/grace-shelter/
     checked: 2026-10-31
     note: The planned operator. The site resets automated connections, so a person checks it in a browser.
+
+  - name: Catholic Charities WV, news page
+    kind: page
+    url: https://www.ccwva.org/category/news/
+    checked: 2026-11-15
+    note: The planned operator's own news posts, newest first. robots.txt allows it, and it read fine on 2026-11-15 (its Grace Shelter page is still marked blocked above). In 2024 it posted the winter shelter opening here ("Winter Shelter Opens Early", December 12, 2024).
+
+  - name: Hazel's House of Hope, warming shelter page
+    kind: page
+    url: https://www.hazelshousewv.com/organizations/warming-shelter
+    checked: 2026-11-15
+    note: The building's own page. On 2026-11-15 it still described the 2022 to 2023 season ("open until March 31, 2023"), so it is not a current source. A change here may mean it was updated for this winter.
