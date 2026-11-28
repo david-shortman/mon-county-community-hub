@@ -1,0 +1,79 @@
+# Interest chips on /topics/ (#2026, part of the Topics explorer, #2025).
+# Each chip names an interest in residents' words and lists the pages it
+# lifts, best first. Picking chips on /topics/ ranks these pages by how many
+# picked chips include them, then by their order here. Link text is each
+# page's own label and summary (from its page tag), so this file holds no
+# facts, only names and web paths, like content/also-check.yaml.
+#
+# Rules (checked by site/test/explore-chips.test.mjs, run after every build):
+# - every path is a tagged page on the site
+# - each chip has 4 to 12 pages; ids are unique; names are 3 words or fewer
+# - no Help now page, and no page that names 988, 211 or 911, goes in a chip
+#   or the starter list (crisis help never goes in the explorer, #2025).
+#   That is why /mental-health/, /staying-well/, /utility-bills/ and a few
+#   others from the first draft are left out: their pages name a crisis line.
+#
+# Chips show in this order. `starter` is what Flip through shows when no chip
+# is picked (#2028).
+chips:
+  - id: new
+    name: New in town
+    pages: [/for/new-to-mon-county/, /moving-here/, /drivers-license/, /car-registration/, /recycling/, /towns/, /meet-people/, /internet/, /vote/, /getting-around/]
+  - id: outside
+    name: Get outside
+    pages: [/for/outdoor-and-active/, /parks/, /staying-active/, /make-it-better/adopt/, /grow/, /park-refunds/]
+  - id: grow
+    name: Grow things
+    pages: [/grow/, /soil-test/, /plant-problems/, /sell-what-you-grow/, /markets/, /home-calendar/]
+  - id: make
+    name: Make and create
+    pages: [/for/artists-and-makers/, /arts-and-making/, /cottage-food/, /selling-food/, /markets/, /start-something/]
+  - id: people
+    name: Meet people
+    pages: [/find-your-people/, /meet-people/, /community-centers/, /start-a-group/, /volunteer/, /pulse/]
+  - id: help
+    name: Help a neighbor
+    pages: [/for/people-who-want-to-help/, /volunteer/, /check-a-charity/, /borrow-or-get-free/, /make-it-better/report/, /caregivers/, /help/what-help/]
+  - id: say
+    name: Have a say
+    pages: [/who-decides/, /have-your-say/, /meetings/agendas/, /make-it-better/boards/, /state-lawmakers/, /vote/, /make-it-better/when-it-gets-decided/, /public-records/]
+  - id: nicer
+    name: Improve your town
+    pages: [/make-it-better/, /make-it-better/adopt/, /make-it-better/report/, /make-it-better/grants/, /make-it-better/what-other-towns-did/]
+  - id: save
+    name: Save money
+    pages: [/help/what-help/, /borrow-or-get-free/, /free-tax-help/, /bus-passes/, /thrift-shops/, /property-tax/, /credit-and-debt/]
+  - id: reuse
+    name: Thrift and reuse
+    pages: [/thrift-shops/, /sell-or-donate/, /start-something/, /borrow-or-get-free/, /markets/]
+  - id: little
+    name: Babies and toddlers
+    pages: [/for/parents-young-kids/, /pregnant-or-new-baby/, /car-seat-checks/, /after-you-apply/wic/]
+  - id: school
+    name: School and teens
+    pages: [/for/parents-school-age/, /school-age/, /school-shots/, /teens/, /teen-drivers/, /for/teens/]
+  - id: learn
+    name: Work and learning
+    pages: [/find-a-job/, /pay-for-training/, /free-adult-classes/, /keep-learning/, /high-school-equivalency/, /for/job-seekers/]
+  - id: biz
+    name: Start a business
+    pages: [/for/small-business/, /start-a-business/, /business/, /cottage-food/, /open-a-restaurant/, /contractor-license/, /farmers-market-vendor-rules/]
+  - id: home
+    name: Own a home
+    pages: [/for/homeowners/, /home-calendar/, /permits/, /property-tax/, /flood-zone/, /septic-and-wells/, /lead/]
+  - id: rent
+    name: Rent a place
+    pages: [/for/renters/, /renting/, /noise/, /internet/]
+  - id: around
+    name: Get around
+    pages: [/getting-around/, /bus-routes/, /bus-passes/, /parking/, /medical-rides/, /snow-and-ice/]
+  - id: well
+    name: Stay well
+    pages: [/care/, /flu-shots/, /diabetes-and-weight/, /no-insurance/, /staying-active/]
+  - id: older
+    name: Getting older
+    pages: [/for/older-adults/, /turning-65/, /help-at-home/, /staying-active/, /choosing-a-care-home/, /advance-directives/]
+  - id: doing
+    name: How we're doing
+    pages: [/how-we-are-doing/, /county-budget/, /pulse/, /make-it-better/what-other-towns-did/]
+starter: [/find-your-people/, /parks/, /pulse/, /who-decides/, /grow/, /arts-and-making/, /volunteer/, /how-we-are-doing/, /thrift-shops/, /borrow-or-get-free/, /make-it-better/adopt/, /markets/]
