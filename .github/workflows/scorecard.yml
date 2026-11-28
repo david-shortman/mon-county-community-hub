@@ -45,9 +45,11 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: site/package-lock.json
+          cache-dependency-path: package-lock.json
       - run: python3 -c 'import yaml' 2>/dev/null || pip install --user pyyaml
+      # One lockfile at the repo root (npm workspaces, #69), so install there.
       - run: npm ci
+        working-directory: .
       - run: npm run build
 
       - name: Slow-phone speed (Lighthouse, warn only)

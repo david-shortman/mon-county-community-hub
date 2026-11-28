@@ -10,7 +10,7 @@ Several sessions open PRs at the same time, so a branch often falls behind `main
    git fetch origin main
    git merge origin/main
    ```
-   Resolve each conflicted file, then run the same checks as before (`npm ci && npm run check-content && npm run build` in `site/` if the site changed), commit the merge, and push. Then run `scripts/pr-wait.sh` again. The review runs on the new commit.
+   Resolve each conflicted file, then run the same checks as before (`npm ci && npm run check-content && npm run build` at the repo root if the site changed), commit the merge, and push. Then run `scripts/pr-wait.sh` again. The review runs on the new commit.
 3. **Never force-push or rebase a branch someone else is using.** A merge commit is fine; the PR is squash-merged anyway.
 4. **Merge with `scripts/safe-merge.sh <pr-number>`, not a raw `gh api ... /merge`.** The High stakes check adds the `for:david` label a minute or two after a PR opens or gets a new commit, so a PR can look mergeable before its label arrives. On 2026-10-31 three `for:david` PRs (#712, #787, #906) were merged by mistake that way. The script refuses (exit 4) if the PR is labeled `for:david`, or if the High stakes check for its current head commit has not finished green. For a PR that changes `site/` or `content/`, it also refuses until the "Claude review" check on that commit is green (#1763). It re-reads the labels right before merging, squash-merges only that exact commit, then runs `scripts/pr-wait.sh main` for you. If it refuses because the check is still running, wait with `scripts/pr-wait.sh <pr-number>` and run it again.
 5. **After you merge, check `main`.** Run `scripts/pr-wait.sh main`. If main's Site run was cancelled because a newer merge landed, the script says "superseded" and follows the newest run, since that build includes your merge. Only a real build failure exits 1. Two PRs can each pass on their own and still break `main` when they land minutes apart. This happened on 2026-10-30: a new page (#313) and a rule that every page needs tags (#314) merged together, and the site stopped deploying.
@@ -22,7 +22,7 @@ If the PR's head moves while you wait (a newer push, or a merge from `main` made
 
 - **Two PRs added items to the same list** (menu items in `site/src/layouts/Base.astro`, lines in `site/src/pages/llms.txt.js`, rows in a table): keep both. Take the other side's version of lines it changed (for example a renamed label) and add yours.
 - **Both sides changed the same sentence or rule:** keep the newer intent from `main` and reapply your change on top. If you cannot tell which is right, stop and comment on the PR instead of guessing.
-- **Generated files or lockfiles:** do not hand-edit. Take `main`'s version and regenerate (for example `npm install` for `package-lock.json`).
+- **Generated files or lockfiles:** do not hand-edit. Take `main`'s version and regenerate (for example `npm install` at the repo root for `package-lock.json`, which is the only lockfile).
 
 ## Making conflicts less likely
 
