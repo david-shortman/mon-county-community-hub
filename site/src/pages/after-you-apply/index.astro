@@ -11,7 +11,7 @@ export const page = { door: 'this-month', topic: 'money', label: 'After you appl
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const have = Object.keys(import.meta.glob('./*.astro')).map((k) => k.slice(2, -6));
 const checked = '2026-10-31';
-const IMM = { url: 'https://bfa.wv.gov/media/40005/download?inline', checked, name: 'WV DoHS Income Maintenance Manual, Chapter 9 Appendix C (form DFA-FH-1) and section 21.6.9' };
+const IMM = { url: 'https://bfa.wv.gov/media/40020/download?inline', checked: '2026-11-14', name: 'WV DoHS Income Maintenance Manual, Chapter 9 Appendix C (form DFA-FH-1) and section 21.6.9' };
 const WIC = { url: 'https://dhhr.wv.gov/WIC/policyprocedure/Documents/1.07%20Fair%20Hearing%20Policy%20for%20Applicants%20and%20Participants.pdf', checked, name: 'WV WIC Policy 1.07' };
 const UI = { url: 'https://code.wvlegislature.gov/pdf/21A-7/', checked, name: 'West Virginia Code §21A-7-8' };
 const SSA = { url: 'https://www.ecfr.gov/current/title-20/section-404.909', checked, name: '20 CFR 404.909 and 404.901' };
