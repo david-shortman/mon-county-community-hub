@@ -49,7 +49,6 @@ gaps:
   - Pantry days and hours change often, and sources disagree on several of them (issue 932).
   - There is no one place to see which pantry is open on a given day in the county.
   - We have no public count of how many people local pantries serve each month.
-  - SNAP and WIC income limits in dollars are not shown on our pages yet.
 topics: [food]
 rank: 1
 rank_why: "Score 12 of 12: severity 3, reach 3 (about 14,940 people), agreement 3 (four sources), room to help 3 (pantries, SNAP and WIC exist but are hard to line up). Tie broken by a county-wide official estimate."
@@ -66,5 +65,5 @@ get_help:
     label: WIC, formula, diapers and a baby pantry
 site_coverage:
   level: good
-  why: The food help pages ask when you need food, then list pantries, free meals and SNAP, with the SNAP work rules and what happens after you apply. School-age kids shows free school meals and Summer EBT. Pantry hours change often and some sources disagree, so each card says to call first. SNAP and WIC income limits are not shown yet.
-  checked: 2026-11-02
+  why: The food help pages ask when you need food, then list pantries, free meals and SNAP, with the SNAP work rules and what happens after you apply. School-age kids shows free school meals and Summer EBT. Pantry hours change often and some sources disagree, so each card says to call first. Help buying groceries every month shows the SNAP and WIC income limits in dollars by household size, with the dates they apply (#1907).
+  checked: 2026-11-14
